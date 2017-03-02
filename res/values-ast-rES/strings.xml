@@ -18,10 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
-  <string name="applicationLabel">Teléfonu</string>
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
-  <string name="launcherActivityLabel">Teléfonu</string>
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <!-- The description text for the dialer tab.
 
@@ -29,7 +27,6 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="dialerIconLabel">Teléfonu</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -37,7 +34,6 @@
 
     [CHAR LIMIT=NONE] -->
   <!-- Text for a menu item to report a call as having been incorrectly identified. [CHAR LIMIT=48] -->
-  <string name="action_report_number">Informar de númberu imprecisu</string>
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
   <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
   <!-- Label for action to block a number. [CHAR LIMIT=48] -->
@@ -47,13 +43,10 @@
   <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
   <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
-  <string name="action_edit_number_before_call">Editar númberu enantes de llamar</string>
   <!-- Menu item used to remove all calls from the call log -->
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
-  <string name="call_log_trash_voicemail">Desaniciar mensaxe de voz</string>
   <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to send a voicemail through other applications [CHAR LIMIT=30] -->
-  <string name="call_log_share_voicemail">Compartir mensaxe de voz</string>
   <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
   <!-- Text for snackbar to undo a voicemail archive. [CHAR LIMIT=30] -->
   <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
@@ -63,10 +56,8 @@
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title used for the activity for placing a call. This name appears
          in activity disambig dialogs -->
-  <string name="userCallActivityLabel" product="default">Teléfonu</string>
   <!-- Notification strings -->
   <!-- Missed call notification label, used when there's exactly one missed call -->
-  <string name="notification_missedCallTitle">Llamada perdida</string>
   <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
   <!-- Missed call notification label, used when there are two or more missed calls -->
   <!-- Missed call notification message used when there are multiple missed calls -->
@@ -78,12 +69,7 @@
          [CHAR LIMIT=18] -->
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
-  <plurals name="notification_voicemail_title">
-    <item quantity="one">Mensaxe de voz</item>
-    <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> mensaxes de voz</item>
-  </plurals>
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
-  <string name="notification_action_voicemail_play">Reproducir</string>
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left
          voicemails.
          The first argument may be one or more callers, the most recent ones.
@@ -92,31 +78,18 @@
 
          [CHAR LIMIT=10]
      -->
-  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
-<xliff:g id="older_caller">%2$s</xliff:g>
-    </string>
   <!-- Text used in the ticker to notify the user of the latest voicemail. [CHAR LIMIT=30] -->
-  <string name="notification_new_voicemail_ticker">Mensaxe de voz nuevu de <xliff:g id="caller">%1$s</xliff:g></string>
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be archived. [CHAR LIMIT=40] -->
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
-  <string name="call_log_voicemail_header">Namái llamaes con mensaxes de voz</string>
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
-  <string name="call_log_incoming_header">Namái llamaes entrantes</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
-  <string name="call_log_outgoing_header">Namái llamaes salientes</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
-  <string name="call_log_missed_header">Namái llamaes perdíes</string>
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
-  <string name="visual_voicemail_title">Corréu de voz visual</string>
   <!-- Promo card text for visual voicemail. -->
-  <string name="visual_voicemail_text">
-        Mira y escucha\'l to corréu de voz ensin tener de llamar a un númberu. Quiciabes s\'apliquen cargos de datos.
-    </string>
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
-  <string name="visual_voicemail_settings">Axustes</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -129,159 +102,114 @@
     the audio of this voicemail is not available. [CHAR LIMIT=64] -->
   <!--  User action prompt shown next to a voicemail status message to let the user configure
     visual voicemail. [CHAR LIMIT=20] -->
-  <string name="voicemail_status_action_configure">Configurar</string>
   <!--  User action prompt shown next to a voicemail status message to let the user call voicemail
     server directly to listen to the voicemails. [CHAR LIMIT=20] -->
-  <string name="voicemail_status_action_call_server">Llamar a buzón de voz</string>
   <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
-  <string name="call_log_item_count_and_date">(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g></string>
   <!-- Title for the sms disambiguation dialog -->
-  <string name="sms_disambig_title">Elixe un númberu</string>
   <!-- Title for the call disambiguation dialog -->
-  <string name="call_disambig_title">Elixe un númberu</string>
   <!-- Message next to disamgiguation dialog check box -->
-  <string name="make_primary">Recordar esta opción</string>
   <!-- String describing the Search ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
-  <string name="description_search_button">guetar</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
     -->
-  <string name="description_dial_button">marcar</string>
   <!-- String describing the digits text box containing the number to dial.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_digits_edittext">númberu que va a marcase</string>
   <!-- String describing the button in the voicemail playback to start/stop playback.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_start_stop">Aniciar o parar reproducción</string>
   <!-- String describing the button in the voicemail playback to switch on/off speakerphone.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_speakerphone">Activar o desactivar l\'altavoz</string>
   <!-- String describing the seekbar in the voicemail playback to seek playback position.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_seek">Guetar posición de reproducción</string>
   <!-- String describing the button in the voicemail playback to decrease playback rate.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_rate_decrease">Amenorgar la velocidá de reproducción</string>
   <!-- String describing the button in the voicemail playback to increase playback rate.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_rate_increase">Aumentar la velocidá de reproducción</string>
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
-  <string name="action_menu_call_history_description">Historial de llamaes</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_overflow_description" msgid="2295659037509008453">Más opciones</string>
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_dialpad_button">tecláu</string>
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_outgoing_only">Amosar namái llamaes salientes</string>
   <!-- Menu item used to show only incoming in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_incoming_only">Amosar namái llamaes entrantes</string>
   <!-- Menu item used to show only missed in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_missed_only">Amosar namái llamaes perdíes</string>
   <!-- Menu item used to show only voicemails in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_voicemails_only">Namái mensaxes de voz</string>
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_all_calls">Amosar toles llamaes</string>
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
-  <string name="add_2sec_pause">Amestar posa de 2 segundos</string>
-  <string name="add_wait">Amestar espera</string>
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
-  <string name="dialer_settings_label">Axustes</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
-  <string name="menu_newContact">Contautu nuevu</string>
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
-  <string name="menu_allContacts">Tolos contautos</string>
   <!-- Title bar for call detail screen -->
-  <string name="callDetailTitle">Detalles de la llamada</string>
   <!-- Toast for call detail screen when couldn't read the requested details -->
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_useDtmfDialpad">Usar tecláu táctil</string>
   <!-- Item label: jump to the in-call UI.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_returnToInCallScreen">Volver a la llamada en cursu</string>
   <!-- Item label: use the Dialer's dialpad to add another call.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_addAnotherCall">Amestar llamada</string>
   <!-- Title for incoming call type. [CHAR LIMIT=40] -->
-  <string name="type_incoming">Llamada entrante</string>
   <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
-  <string name="type_outgoing">Llamada saliente</string>
   <!-- Title for missed call type. [CHAR LIMIT=40] -->
-  <string name="type_missed">Llamada perdida</string>
   <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video">Videollamada entrante</string>
   <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video">Videollamada saliente</string>
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video">Videollamada perdida</string>
   <!-- Title for voicemail details screen -->
-  <string name="type_voicemail">Buzón de voz</string>
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
   <!-- Title for blocked call type. [CHAR LIMIT=40] -->
   <!-- Description for incoming calls going to voice mail vs. not -->
-  <string name="actionIncomingCall">Llamaes entrantes</string>
   <!-- String describing the icon in the call log used to play a voicemail.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_call_log_play_button">Reproducir mensaxe de voz</string>
   <!-- String describing the button to view the contact for the current number.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_view_contact">Ver contautu <xliff:g id="NAME">%1$s</xliff:g></string>
   <!-- String describing the button to call a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_call">Llamar a <xliff:g id="NAME">%1$s</xliff:g></string>
   <!-- String describing the button to access the contact details for a name or number.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_contact_details">Detalles de contautu pa <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <!-- String indicating the number of calls to/from a caller in the call log.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> llamaes.</string>
   <!-- String indicating a call log entry had video capabilities.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
           [CHAR LIMIT=NONE]
     -->
-  <string name="description_video_call">Videollamada.</string>
   <!-- String describing the button to SMS a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -295,20 +223,13 @@
               This is especially valuable for views without textual representation like ImageView.
               [CHAR LIMIT=NONE]
     -->
-  <string name="description_call_log_unheard_voicemail">Mensaxe de voz ensin oyer</string>
   <!-- String describing the icon used to start a voice search -->
-  <string name="description_start_voice_search">Aniciar gueta por voz</string>
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
-  <string name="menu_callNumber">Llamar a <xliff:g id="NUMBER">%s</xliff:g></string>
   <!-- String used to display calls from unknown numbers in the call log -->
-  <string name="unknown">Desconocíos</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
-  <string name="voicemail">Buzón de voz</string>
   <!-- String used to display calls from private numbers in the call log -->
-  <string name="private_num">Númberu priváu</string>
   <!-- String used to display calls from pay phone in the call log -->
   <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
-  <string name="callDetailsShortDurationFormat"><xliff:g id="seconds" example="28">%s</xliff:g> segs</string>
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
          explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
@@ -321,26 +242,18 @@
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
-  <string name="dialog_voicemail_not_ready_message">Pa configurar el buzón de voz, toca la tecla de menú y, darréu, toca Axustes.</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
-  <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
-  <string name="contact_list_loading">Cargando\u2026</string>
   <!-- The title of a dialog that displays the IMEI of the phone -->
-  <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
-  <string name="meid">MEID</string>
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
-  <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM…</string>
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
-  <string name="simContacts_title">Contautos de tarxeta SIM</string>
   <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <!-- Message displayed when the Phone application has been disabled and a phone call cannot
          be made. [CHAR LIMIT=NONE] -->
-  <string name="call_not_available">Nun pue facese una llamada porque l\'app Teléfonu ta deshabilitada.</string>
   <!-- Message displayed when there is no application available to handle a particular action.
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
@@ -353,26 +266,18 @@
          Do not translate. -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
-  <string name="call_log_all_empty_action">Facer una llamada</string>
   <!-- Text displayed when the list of missed calls is empty -->
-  <string name="call_log_missed_empty">Nun tienes llamaes perdíes.</string>
   <!-- Text displayed when the list of voicemails is empty -->
-  <string name="call_log_voicemail_empty">La bandexa d\'entrada del to corréu de voz ta balera.</string>
   <!-- Text displayed when the list of voicemail archives is empty -->
   <!--  Menu option to show favorite contacts only -->
-  <string name="show_favorites_only">Amosar namái favoritos</string>
   <!--  Title of activity that displays a list of all calls -->
-  <string name="call_log_activity_title">Historial de llamaes</string>
   <!--  Title of activity that displays a list of all archived voicemails -->
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
-  <string name="call_log_all_title">Too</string>
   <!-- Title for the call log tab containing the list of all missed calls only
          [CHAR LIMIT=30] -->
-  <string name="call_log_missed_title">Perdíes</string>
   <!-- Title for the call log tab containing the list of all voicemail calls only
          [CHAR LIMIT=30] -->
-  <string name="call_log_voicemail_title">Buzón de voz</string>
   <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
@@ -390,59 +295,39 @@
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
-  <string name="tab_history">Historial de llamaes</string>
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
-  <string name="tab_all_contacts">Contautos</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
-  <string name="tab_voicemail">Buzón de voz</string>
   <!--  Text displayed when user swipes out a favorite contact -->
-  <string name="favorite_hidden">Desaniciáu de favoritos</string>
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
-  <string name="favorite_hidden_undo">Desfacer</string>
   <!-- Shortcut item used to call a number directly from search -->
-  <string name="search_shortcut_call_number">Llamar a <xliff:g id="NUMBER">%s</xliff:g></string>
   <!-- Shortcut item used to add a number directly to a new contact from search.
          [CHAR LIMIT=25] -->
-  <string name="search_shortcut_create_new_contact">Crear contautu nuevu</string>
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
-  <string name="search_shortcut_add_to_contact">Amestar a un contautu</string>
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_make_video_call">Facer videollamada</string>
   <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
-  <string name="num_missed_calls"><xliff:g id="NUMBER">%s</xliff:g> llamaes perdíes nueves</string>
   <!-- Shown when there are no speed dial favorites. -->
-  <string name="speed_dial_empty">Entá nun hai naide nel to marcador rápidu</string>
   <!-- Shown as an action when there are no speed dial favorites -->
-  <string name="speed_dial_empty_add_favorite_action">Amestar un favoritu</string>
   <!-- Shown when there are no contacts in the all contacts list. -->
-  <string name="all_contacts_empty">Entá nun tienes contautos</string>
   <!-- Shown as an action when the all contacts list is empty -->
-  <string name="all_contacts_empty_add_contact_action">Amestar un contautu</string>
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
          card can be tapped to bring up a list of all numbers, or long pressed to start reordering
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
-  <string name="remove_contact">Desaniciar</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
-  <string name="call_log_action_video_call">Llamada de videu</string>
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
          messaging app to send a SMS to the number represented by the call log entry.
          [CHAR LIMIT=30] -->
   <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
          the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_log_action_details">Detalles de la llamada</string>
   <!-- Button text for the button displayed underneath an entry in the call log, which when
          tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
-  <string name="call_log_action_call">
-        Llamar a <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
@@ -477,83 +362,48 @@
          [CHAR LIMIT=NONE]-->
   <!-- String describing the phone icon on a call log list item. When tapped, it will place a
          call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
-  <string name="description_call_log_call_action">Llamar</string>
   <!-- String describing the "call" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_call_action">
-        Llamar a <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the "video call" action for an entry in the call log.  The video call
          action triggers a return video call to the named person/number.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_video_call_action">
-        Videollamada a <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the "listen" action for an entry in the call log.  The listen
          action is shown for call log entries representing a voicemail message and this button
          triggers playing back the voicemail.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_voicemail_action">
-        Escuchar buzón de voz de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the "play voicemail" action for an entry in the call log.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_voicemail_play">
-        Reproducir buzón de voz de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the "pause voicemail" action for an entry in the call log.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_voicemail_pause">
-        Posar buzón de voz de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the "delete voicemail" action for an entry in the call log.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="description_voicemail_delete">
-        Desaniciar buzón de voz de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- String describing the number of new voicemails, displayed as a number badge on a tab.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <plurals name="description_voicemail_unread">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> mensaxe de voz nuevu</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> mensaxes de voz nuevos</item>
-  </plurals>
   <!-- Description for the "create new contact" action for an entry in the call log. This action
          opens a screen for creating a new contact for this name or number. [CHAR LIMIT=NONE] -->
-  <string name="description_create_new_contact_action">
-        Crear un contautu pa <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- Description for the "add to existing contact" action for an entry in the call log. This
          action opens a screen for adding this name or number to an existing contact.
          [CHAR LIMIT=NONE] -->
-  <string name="description_add_to_existing_contact_action">
-        Amestar <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g> a un contautu esistente
-    </string>
   <!-- String describing the "details" action for an entry in the call log.  The details action
          displays the call details screen for an entry in the call log.  This shows the calls to
          and from the specified number associated with the call log entry.
          [CHAR LIMIT=NONE] -->
-  <string name="description_details_action">
-        Detalles de llamada de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
   <!-- Toast message which appears when a call log entry is deleted.
          [CHAR LIMIT=NONE] -->
   <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_today">Güei</string>
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_yesterday">Ayeri</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_other">anterior</string>
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
          particular number.
          [CHAR LIMIT=65] -->
@@ -562,58 +412,40 @@
          phone speaker.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_speaker_on">Activar altavoz.</string>
   <!-- String describing the "speaker off" button on the playback control used to listen to a
          voicemail message.  When speaker is off, playback of the voicemail will occur through the
          phone earpiece.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_speaker_off">Desactivar altavoz.</string>
   <!-- String describing the "play faster" button in the playback control used to listen to a
          voicemail message.  Speeds up playback of the voicemail message.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_faster">Reproducir más rápido.</string>
   <!-- String describing the "play slower" button in the playback control used to listen to a
          voicemail message.  Slows down playback of the voicemail message.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_slower">Reproducir más sele.</string>
   <!-- String describing the "play/pause" button in the playback control used to listen to a
          voicemail message.  Starts playback or pauses ongoing playback.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_start_pause">Aniciar o posar reproducción.</string>
   <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
          [CHAR LIMIT=3] -->
-  <string name="list_delimeter">", "</string>
   <!-- Dialer settings related strings-->
   <!-- Title for "Display options" category, which controls how contacts are shown.
          [CHAR LIMIT=40] -->
-  <string name="display_options_title">Opciones d\'amuesa</string>
   <!-- Title for the "Sounds and vibration" settings control settings related to ringtones,
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
-  <string name="sounds_and_vibration_title">Soníos y vibración</string>
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
-  <string name="accessibility_settings_title">Accesibilidá</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
-  <string name="ringtone_title">Tonu del teléfonu</string>
   <!-- Setting option name to enable or disable vibration when ringing the phone.
          [CHAR LIMIT=30] -->
-  <string name="vibrate_on_ring_title">\"Vibrar tamién nes llamaes</string>
   <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
-  <string name="dtmf_tone_enable_title">Tonos del tecláu</string>
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
-  <string name="dtmf_tone_length_title">Llargor de tonu del panel de marcáu</string>
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
-  <string-array name="dtmf_tone_length_entries">
-    <item>Normal</item>
-    <item>Llargu</item>
-  </string-array>
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
-  <string name="respond_via_sms_setting_title">Rempuestes rápides</string>
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
   <!-- Label for a section describing that call blocking is temporarily disabled because an
@@ -656,18 +488,14 @@
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
-  <string name="permission_single_turn_on">Activar</string>
   <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
-  <string name="permission_multiple_turn_on">Afiar permisos</string>
   <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
-  <string name="permission_no_search">Pa guetar los tos contautos, activa\'l permisu de Contautos.</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
-  <string name="toast_cannot_write_system_settings">L\'aplicación Teléfonu nun tien permisu pa escribir nos axustes del sistema.</string>
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <!-- Accessibility announcement to indicate which call is active -->
 </resources>

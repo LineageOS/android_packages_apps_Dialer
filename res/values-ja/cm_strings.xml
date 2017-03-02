@@ -102,10 +102,12 @@
   <string name="clear">消去</string>
   <string name="description_clear_search">検索を消去</string>
   <string name="video_call_welcome_title"><b>新しいビデオ通話アプリへようこそ</b></string>
+  <string name="video_call_welcome_message">電話で聞き慣れた声を聞くのも良いですが、お互いに顔を合わせて会話できたらもっと良いですよね！リアルタイム（またはFaceTime）接続のために必要な条件は次の通りです。\n 4G LTE または Wi-Fi 接続が必要です。\n 電話をかける相手の端末もビデオ通話に対応している必要があります。\n ビデオ通話は高速データ通信を使用します。\n 音声通話をビデオ通話に変更することもできます。\n\n 詳細は <a>https://support.t-mobile.com/docs/DOC-23574</a> を参照してください。</string>
   <string name="video_call_welcome_message_repeat">このメッセージを毎回表示する</string>
   <string name="toast_change_video_call_failed">ビデオ通話に変更できません。番号の形式が間違っています</string>
   <string name="toast_make_video_call_failed">ビデオ通話の発信ができません。番号の形式が間違っています</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">ビデオ通話に自分を表示する</string>
   <string name="overflowRXCallMenuItemText">ビデオ通話に自分を表示しない</string>
   <string name="overflowVOCallMenuItemText">音声通話</string>
   <string name="video_call">ビデオ通話</string>
