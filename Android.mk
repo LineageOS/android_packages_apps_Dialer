@@ -161,6 +161,7 @@ LOCAL_AAPT_FLAGS := \
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
 	android-support-design \
+	android-support-transition \
 	android-support-v13 \
 	android-support-v4 \
 	android-support-v7-appcompat \
@@ -171,6 +172,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-dagger2 \
 	dialer-dagger2-producers \
 	dialer-glide  \
+	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
 	dialer-libshortcutbadger \

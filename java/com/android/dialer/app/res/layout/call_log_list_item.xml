@@ -141,7 +141,6 @@
             android:textColor="@color/call_log_voicemail_transcript_color"
             android:textSize="@dimen/call_log_voicemail_transcription_text_size"
             android:ellipsize="marquee"
-            android:autoLink="all"
             android:visibility="gone"
             android:singleLine="false"
             android:maxLines="10"/>
