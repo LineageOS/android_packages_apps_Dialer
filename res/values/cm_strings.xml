@@ -108,7 +108,7 @@
     <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off airplane mode</string>
 
     <!-- Speed Dial can not be set for the key used for Emergency number-->
-    <string name="speed_dial_can_not_be_set">Speed Dial Can not be set for this Key</string>
+    <string name="speed_dial_can_not_be_set">Speed dial can not be set for this key</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -165,21 +165,21 @@
     <string name="type_missed_video_lte">Missed 4G video call</string>
 
     <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_incoming_vowifi">Incoming WiFi voice call</string>
+    <string name="type_incoming_vowifi">Incoming Wi-Fi voice call</string>
 
     <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_incoming_video_wifi">Incoming WiFi video call</string>
+    <string name="type_incoming_video_wifi">Incoming Wi-Fi video call</string>
 
     <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_outgoing_vowifi">Outgoing WiFi voice call</string>
+    <string name="type_outgoing_vowifi">Outgoing Wi-Fi voice call</string>
 
     <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_outgoing_video_wifi">Outgoing WiFi video call</string>
+    <string name="type_outgoing_video_wifi">Outgoing Wi-Fi video call</string>
 
     <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_missed_vowifi">Missed WiFi voice call</string>
+    <string name="type_missed_vowifi">Missed Wi-Fi voice call</string>
 
     <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_missed_video_wifi">Missed WiFi video call</string>
+    <string name="type_missed_video_wifi">Missed Wi-Fi video call</string>
 
 </resources>
