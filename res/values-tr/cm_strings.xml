@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Cevapsız 4G görüntülü görüşme</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Gelen WiFi sesli arama</string>
+  <string name="type_incoming_vowifi">Gelen Wi-Fi video görüşmesi</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Gelen WiFi video görüşmesi</string>
+  <string name="type_incoming_video_wifi">Gelen Wi-Fi video görüşmesi</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Giden WiFi sesli arama</string>
+  <string name="type_outgoing_vowifi">Giden Wi-Fi sesli araması</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Giden WiFi video görüşmesi</string>
+  <string name="type_outgoing_video_wifi">Giden Wi-Fi video görüşmesi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Cevapsız WiFi sesli arama</string>
+  <string name="type_missed_vowifi">Cevapsız Wi-Fi sesli araması</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Cevapsız WiFi video görüşmesi</string>
+  <string name="type_missed_video_wifi">Cevapsız Wi-Fi video görüşmesi</string>
 </resources>

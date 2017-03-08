@@ -88,7 +88,6 @@
   <string name="speed_dial_unassigned_dialog_message">Der Wähltaste \"<xliff:g id="number">%s</xliff:g>\" ist keine Kurzwahlaktion zugewiesen. Möchten Sie das jetzt tun?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Wenn Sie die Kurzwahl nutzen möchten, müssen Sie zunächst den Flugmodus deaktivieren</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Kurzwahl für diese Taste nicht verfügbar</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <!-- Text displayed when the list of incoming calls is empty -->

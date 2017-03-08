@@ -28,9 +28,9 @@
   <!-- Number lookup -->
   <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
   <string name="enable_forward_lookup_title">Búsqueda de lugares</string>
-  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos cuando se busque en el marcador</string>
+  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos al buscar en el marcador</string>
   <string name="enable_people_lookup_title">Búsqueda de personas</string>
-  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas cuando se busque en el marcador</string>
+  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas al buscar en el marcador</string>
   <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
   <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para números desconocidos en llamadas entrantes</string>
   <string name="forward_lookup_provider_title">Proveedor de búsqueda de lugares</string>
@@ -88,7 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">La tecla \'<xliff:g id="number">%s</xliff:g>\' no tiene una acción de marcación rápida asignada. ¿Quieres asignar una acción ahora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para utilizar la marcación rápida, primero desactiva el modo avión</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">No puedes establecer este número para marcado rápido</string>
+  <string name="speed_dial_can_not_be_set">No puede establecer este número como marcado rápido</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->

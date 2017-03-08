@@ -120,9 +120,9 @@
   <string name="menu_add_to_4g_conference_call">新增至 4G 多方通話</string>
   <string name="menu_4g_conference_call">4G 多方通話</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">來電的 4G 語音通話</string>
+  <string name="type_incoming_volte">撥入的 4G 語音通話</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">來電的 4G 視訊通話</string>
+  <string name="type_incoming_video_lte">撥入的 4G 視訊通話</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_outgoing_volte">撥出的 4G 語音通話</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">未接的 4G 視訊通話</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">來電的 WiFi 語音通話</string>
+  <string name="type_incoming_vowifi">撥入的 Wi-Fi 語音通話</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">來電的 WiFi 視訊通話</string>
+  <string name="type_incoming_video_wifi">撥入的 Wi-Fi 語音通話</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">撥出的 WiFi 語音通話</string>
+  <string name="type_outgoing_vowifi">撥出的 Wi-Fi 語音通話</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">撥出的 WiFi 視訊通話</string>
+  <string name="type_outgoing_video_wifi">撥出的 Wi-Fi 視訊通話</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">未接的 WiFi 語音通話</string>
+  <string name="type_missed_vowifi">未接的 Wi-Fi 語音通話</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">未接的 WiFi 視訊通話</string>
+  <string name="type_missed_video_wifi">未接的 Wi-Fi 視訊通話</string>
 </resources>

@@ -97,6 +97,9 @@
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">Log panggilan kosong</string>
   <string name="no_call_log">Tidak ada log panggilan</string>
+  <string name="clear">Bersihkan</string>
+  <string name="description_clear_search">Bersihkan pencarian</string>
+  <string name="video_call_welcome_title"><b>Selamat datang di Video Calling Dialer baru</b></string>
   <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
   <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>
   <!-- Add for enhance videocall ui -->
@@ -109,6 +112,9 @@
   <string name="alert_call_over_wifi">Panggilan akan dilakukan melalui Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Jaringan seluler tidak tersedia. Sambungkan ke Wi-Fi yang tersedia untuk melakukan panggilan.</string>
   <string name="alert_user_connect_to_wifi_for_call">Sambungkan ke Wi-Fi untuk melakukan panggilan.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Ketuk di sini untuk melihat jaringan yang tersedia</string>
+  <string name="menu_add_to_4g_conference_call">Tambahkan ke panggilan konferensi 4G</string>
+  <string name="menu_4g_conference_call">Panggilan konferensi 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->

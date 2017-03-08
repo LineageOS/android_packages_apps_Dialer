@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Fournisseur de recherche inversée</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn chinois (CN)</string>
+  <string name="speed_dial_edit_title">Modifier la numération rapide <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Veuillez entrer un numéro</string>
   <string name="call_log_show_all_slots">Tous les SIMs</string>
   <string name="call_log_all_calls_header">Tous les appels</string>
   <string name="call_log_blacklist_header">Appels bloqués uniquement</string>
+  <string name="call_log_blocked_empty">Vous n\'avez aucun appel bloqué.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistiques</string>
   <string name="callStatsDetailTitle">Détails des statistiques d\'appels</string>
@@ -83,23 +86,60 @@
   <string name="speed_dial_delete">Supprimer</string>
   <string name="speed_dial_unassigned_dialog_title">Touche non attribuée</string>
   <string name="speed_dial_unassigned_dialog_message">Aucune action de numérotation rapide n\'est assignée au chiffre \'<xliff:g id="number">%s</xliff:g>\'. Voulez-vous assigner une action maintenant ?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pour utiliser la numérotation rapide, désactivez d\'abord le mode avion</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Impossible de définir une touche de numérotation rapide pour cette entrée</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Vous n\'avez aucun appels entrants.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Vous n\'avez aucun appels sortants.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Votre journal d\'appels est vide</string>
+  <string name="calllog_search_hint">Rechercher dans le journal d\'appels</string>
+  <string name="no_call_log">Aucun journal d\'appels</string>
+  <string name="clear">Effacer</string>
+  <string name="description_clear_search">Effacer la recherche</string>
+  <string name="video_call_welcome_title"><b>Bienvenue sur le nouveau composeur avec appels vidéos</b></string>
+  <string name="video_call_welcome_message_repeat">Afficher ce message à chaque fois</string>
+  <string name="toast_change_video_call_failed">Impossible de passer en appel vidéo, format de numéro incorrect</string>
+  <string name="toast_make_video_call_failed">Impossible de procéder à un appel vidéo, format de numéro incorrect</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Appels vidéos, montrez-moi</string>
+  <string name="overflowRXCallMenuItemText">Appels vidéos, cachez-moi</string>
+  <string name="overflowVOCallMenuItemText">Appel vocal</string>
+  <string name="video_call">Appel vidéo</string>
+  <string name="call_data_info_label">Minuteurs d\'appel/utilisation de données</string>
+  <string name="call_data_info_description">Durée d\'utilisation d\'appel vocal et d\'utilisation de données</string>
+  <string name="alert_call_over_wifi">Les appels seront passés via Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Aucun réseau cellulaire disponible. Connectez-vous aux réseaux Wi-Fi disponibles pour passer des appels.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Se connecter au Wi-Fi pour passer des appels.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Appuyez ici pour afficher les réseaux disponibles</string>
+  <string name="menu_add_to_4g_conference_call">Ajouter à la conférence téléphonique 4G</string>
+  <string name="menu_4g_conference_call">Conférence téléphonique 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Appel vocal 4G entrant</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Appel vidéo 4G entrant</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Appel vocal 4G sortant</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Appel vidéo 4G sortant</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Appel vocal 4G raté</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Appel vidéo 4G raté</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Appel vocal WiFi entrant</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Appel vidéo WiFi entrant</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Appel vocal WiFi sortant</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Appel vidéo WiFi sortant</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Appel vocal WiFi manqué</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Appel vidéo WiFi manqué</string>
 </resources>

@@ -88,7 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Nicio acțiune de apel rapid nu este atribuită acestui număr \'<xliff:g id="number">%s</xliff:g>\'. Vreți să atribuiți o acțiune acum?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Pentru a utiliza apelarea rapidă, în primul rând, opriți modul avion</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Apelarea Directă Nu a putut fi setată pentru această Cheie</string>
+  <string name="speed_dial_can_not_be_set">Apelarea directă nu a putut fi setată pentru această cheie</string>
   <string name="yes">Da</string>
   <string name="no">Nu</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Apel video 4G nepreluat</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Apel vocal WiFi de intrare</string>
+  <string name="type_incoming_vowifi">Apel vocal Wi-Fi de intrare</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Apel video WiFi de intrare</string>
+  <string name="type_incoming_video_wifi">Apel video Wi-Fi de intrare</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Apel vocal WiFi efectuat</string>
+  <string name="type_outgoing_vowifi">Apel vocal Wi-Fi efectuat</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Apel video WiFi efectuat</string>
+  <string name="type_outgoing_video_wifi">Apel video Wi-Fi efectuat</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Apel vocal WiFi nepreluat</string>
+  <string name="type_missed_vowifi">Apel vocal Wi-Fi nepreluat</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Apel video WiFi nepreluat</string>
+  <string name="type_missed_video_wifi">Apel video Wi-Fi nepreluat</string>
 </resources>

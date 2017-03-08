@@ -134,13 +134,13 @@
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_vowifi">Вхідний Wi-Fi голосовий виклик</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Вхідний Wi-Fi відео виклик</string>
+  <string name="type_incoming_video_wifi">Вхідний Wi-Fi відеовиклик</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_outgoing_vowifi">Вихідний Wi-Fi голосовий виклик</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Вихідний Wi-Fi відео виклик</string>
+  <string name="type_outgoing_video_wifi">Вихідний Wi-Fi відеовиклик</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_vowifi">Пропущений Wi-Fi голосовий виклик</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Пропущений Wi-Fi відео виклик</string>
+  <string name="type_missed_video_wifi">Пропущений Wi-Fi відеовиклик</string>
 </resources>

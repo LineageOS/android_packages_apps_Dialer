@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Neodgovorjen video klic 4G</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Dohodni glasovni klic Wifi</string>
+  <string name="type_incoming_vowifi">Dohodni glasovni klic Wi-Fi</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Dohodni video klic Wifi</string>
+  <string name="type_incoming_video_wifi">Dohodni video klic Wi-Fi</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Odhodni glasovni klic Wifi</string>
+  <string name="type_outgoing_vowifi">Odhodni glasovni klic Wi-Fi</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Odhodni video klic Wifi</string>
+  <string name="type_outgoing_video_wifi">Odhodni video klic Wi-Fi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Neodgovorjen glasovni klic Wifi</string>
+  <string name="type_missed_vowifi">Neodgovorjen glasovni klic Wi-Fi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Neodgovorjen video klic Wifi</string>
+  <string name="type_missed_video_wifi">Neodgovorjen video klic Wi-Fi</string>
 </resources>

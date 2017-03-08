@@ -88,7 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Non se asignou ningunha función de chamada rápida á tecla <xliff:g id="number">%s</xliff:g>. Quere asignala agora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcación rápida, primeiro desactive o modo avión</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Non se pode asociar este número para marcado rápido</string>
+  <string name="speed_dial_can_not_be_set">Non se pode definir a marcación rápida para esta tecla</string>
   <string name="yes">Si</string>
   <string name="no">Non</string>
   <!-- Text displayed when the list of incoming calls is empty -->

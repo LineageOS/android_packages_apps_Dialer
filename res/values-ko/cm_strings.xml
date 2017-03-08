@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">부재중 4G 영상 통화</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">수신 WiFi 음성 통화</string>
+  <string name="type_incoming_vowifi">수신 Wi-Fi 음성 통화</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">수신 WiFi 영상 통화</string>
+  <string name="type_incoming_video_wifi">수신 Wi-Fi 영상 통화</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">발신 WiFi 음성 통화</string>
+  <string name="type_outgoing_vowifi">발신 Wi-Fi 음성 통화</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">발신 WiFi 영상 통화</string>
+  <string name="type_outgoing_video_wifi">발신 Wi-Fi 영상 통화</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">부재중 WiFi 음성 통화</string>
+  <string name="type_missed_vowifi">부재중 Wi-Fi 음성 통화</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">부재중 WiFi 영상 통화</string>
+  <string name="type_missed_video_wifi">부재중 Wi-Fi 영상 통화</string>
 </resources>

@@ -88,7 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Ninguna acción rápida asignada al número \'<xliff:g id="number">%s</xliff:g>\'. ¿Quieres asignar una acción ahora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para usar la marcación rápida, primero desactiva el modo avión</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">No puede establecer este número como marcado rápido</string>
+  <string name="speed_dial_can_not_be_set">No puede utilizar esta tecla para marcado rápido</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Videollamada 4G perdida</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Llamada WiFi entrante</string>
+  <string name="type_incoming_vowifi">Llamada de voz Wi-Fi entrante</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Videollamada WiFi entrante</string>
+  <string name="type_incoming_video_wifi">Videollamada Wi-Fi entrante</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Landa WiFi saliente</string>
+  <string name="type_outgoing_vowifi">Llamada de voz Wi-Fi saliente</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Videollamada WiFi saliente</string>
+  <string name="type_outgoing_video_wifi">Videollamada Wi-Fi saliente</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Llamada WiFi perdida</string>
+  <string name="type_missed_vowifi">Llamada de voz Wi-Fi perdida</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Videollamada WiFi perdida</string>
+  <string name="type_missed_video_wifi">Videollamada Wi-Fi perdida</string>
 </resources>

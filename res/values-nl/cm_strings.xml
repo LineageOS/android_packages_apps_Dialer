@@ -88,7 +88,6 @@
   <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegtuigmodus uit te schakelen</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Kan geen snelkiesnummer instellen voor deze toets</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -139,7 +138,5 @@
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_outgoing_video_wifi">Uitgaande video-oproep via wifi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Gemiste spraakoproep via wifi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Gemiste video-oproep via wifi</string>
 </resources>

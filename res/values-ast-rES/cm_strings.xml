@@ -16,27 +16,95 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
+  <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
+  <string name="incall_vibrate_45_title">Vibrar cada minutu</string>
   <!-- Forward lookup -->
+  <string name="nearby_places">Llugares averaos</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
+  <string name="enable_forward_lookup_summary">Amuesa llugares averaos cuando guetes nel marcador</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="speed_dial_edit_title">Editar marcáu rápidu <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Introduz un númberu, por favor</string>
+  <string name="call_log_show_all_slots">Toles SIM</string>
+  <string name="call_log_all_calls_header">Toles llamaes</string>
+  <string name="call_log_blocked_empty">Nun tienes llamaes bloquiaes.</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">Estadístiques</string>
+  <string name="call_stats_incoming">Entrante: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Saliente: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Perdíes: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Bloquiaes: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Data d\'aniciu</string>
+  <string name="call_stats_filter_to">Data fin</string>
+  <string name="date_quick_selection">Esbilla rápida</string>
+  <string name="date_qs_currentmonth">Mes actual</string>
+  <string name="date_qs_currentquarter">Trimestre actual</string>
+  <string name="date_qs_currentyear">Añu actual</string>
+  <string name="date_qs_lastweek">Selmana cebera</string>
+  <string name="date_qs_lastmonth">Mes caberu</string>
+  <string name="date_qs_lastquarter">Trimestre caberu</string>
+  <string name="date_qs_lastyear">Añu caberu</string>
+  <string name="call_stats_date_filter">Axustar rangu de tiempu</string>
+  <string name="call_stats_title_of_total">Del total</string>
+  <string name="call_stats_title_durations">Duraciones de llamaes</string>
+  <string name="call_stats_title_count">Cantidá de llamaes</string>
+  <string name="call_stats_title_average_duration">Duración media de llamaes</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="call_recording_category_title">Grabación de llamaes</string>
+  <string name="call_recording_format">Formatu d\'audiu</string>
   <!-- Speed Dial -->
+  <string name="speed_dial_settings">Axustes de marcáu rápidu</string>
+  <string name="speed_dial_not_set">(nun s\'afitó)</string>
+  <string name="speed_dial_replace">Trocar</string>
+  <string name="speed_dial_delete">Desaniciar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla ensin asignar</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pa usar el marcáu rápidu, desactiva\'l mou avión primero</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">El marcáu rápidu nun pue afitase pa esta tecla</string>
+  <string name="yes">Sí</string>
+  <string name="no">Non</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nun tienes llamaes entrantes.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nun tienes llamaes salientes.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">El to rexistru de llamaes ta baleru</string>
+  <string name="no_call_log">Nun hai rexistru de llamaes</string>
+  <string name="clear">Llimpiar</string>
+  <string name="description_clear_search">Llimpiar gueta</string>
+  <string name="video_call_welcome_message_repeat">Amosar esti mensaxe cada vegada</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">Llamada</string>
+  <string name="video_call">Videollamada</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Calca equí pa ver les redes disponibles</string>
+  <string name="menu_4g_conference_call">Conferencia 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Llamada 4G entrante</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Videollamada 4G entrante</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Llamada 4G saliente</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Videollamada 4G saliente</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Llamada 4G perdida</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Videollamada 4G perdida</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Llamada Wi-Fi entrante</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Videollamada Wi-Fi entrante</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Llamada Wi-Fi saliente</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Videollamada Wi-Fi saliente</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Llamada Wi-Fi perdida</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Videollamada Wi-Fi perdida</string>
 </resources>

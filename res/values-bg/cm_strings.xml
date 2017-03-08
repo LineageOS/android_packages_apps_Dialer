@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Пропуснато 4G видео повикване</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Входящо WiFi гласово повикване</string>
+  <string name="type_incoming_vowifi">Входящо Wi-Fi гласово повикване</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Входящо WiFi видео повикване</string>
+  <string name="type_incoming_video_wifi">Входящо Wi-Fi видео повикване</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Изходящо WiFi гласово повикване</string>
+  <string name="type_outgoing_vowifi">Изходящо Wi-Fi гласово повикване</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Изходящо WiFi видео повикване</string>
+  <string name="type_outgoing_video_wifi">Изходящо Wi-Fi видео повикване</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Пропуснато WiFi гласово повикване</string>
+  <string name="type_missed_vowifi">Пропуснато Wi-Fi гласово повикване</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Пропуснато WiFi видео повикване</string>
+  <string name="type_missed_video_wifi">Пропуснато Wi-Fi видео повикване</string>
 </resources>
