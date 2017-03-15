@@ -86,23 +86,61 @@
   <string name="speed_dial_delete">Ezabatu</string>
   <string name="speed_dial_unassigned_dialog_title">Tekla esleitu gabea</string>
   <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g> teklari ez zaio kontakturik esleitu. Kontaktu bat esleitu nahi duzu orain?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Markaketa azkarra erabiltzeko, aurretik hegaldi modua ezgaitu</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Ezin da markaketa azkarra ezarri tekla honentzat</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Ez duzu jasotako deirik.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Ez duzu egindako deirik.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Zure deien erregistroa hutsik dago</string>
+  <string name="calllog_search_hint">Bilatu deien erregistroan</string>
+  <string name="no_call_log">Ez dago deien erregistrorik</string>
+  <string name="clear">Garbitu</string>
+  <string name="description_clear_search">Garbitu bilaketa</string>
+  <string name="video_call_welcome_title"><b>Ongi etorri bideo-deien markatzaile berrira</b></string>
+  <string name="video_call_welcome_message">Nork ez du gustuko telefonoaren bestaldean ahots ezagun hori entzutea? Baina aurpegira hitz-egitea askoz hobea da! Hau da konexioak denbora errealean (zuzenean) egiteko jakin behar duzuna:\n4G LTE edo Wi-Fi konexioa behar duzu\n Gailua bideo deiekin bateragarria izan behar da\n Bideo deiek zure abiadura handiko konexioa erabili dezakete\nAhots-dei bat bideo-dei bihurtu dezakezu\n\nIrakurri <a>https://support.t-mobile.com/docs/DOC-23574</a> informazio gehiagorako.</string>
+  <string name="video_call_welcome_message_repeat">Erakutsi mezu hau beti</string>
+  <string name="toast_change_video_call_failed">Ezin izan da bideo-deira aldatu, zenbaki formatu okerra</string>
+  <string name="toast_make_video_call_failed">Ezin izan da bideo-deia egin, zenbaki formatu okerra</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Bideo-deia, erakutsi nazazu</string>
+  <string name="overflowRXCallMenuItemText">Bideo-deia, ezkutatu nazazu</string>
+  <string name="overflowVOCallMenuItemText">Ahots-deia</string>
+  <string name="video_call">Bideo-deia</string>
+  <string name="call_data_info_label">Dei/datu erabileraren kronometroak</string>
+  <string name="call_data_info_description">Ahots-deien erabilera denbora eta datuen erabilera denbora</string>
+  <string name="alert_call_over_wifi">Deiak Wi-Fi bitartez egingo dira.</string>
+  <string name="alert_call_no_cellular_coverage">Ez dago sare mugikorrik erabilgarri. Konektatu erabilgarri dagoen Wi-Fi batetara deiak egiteko.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Konektatu Wi-Fira deiak egiteko.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Sakatu hemen sare erabilgarriak ikusteko</string>
+  <string name="menu_add_to_4g_conference_call">Gehitu 4G konferentzia deira</string>
+  <string name="menu_4g_conference_call">4G konferentzia deia</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Jasotako 4G ahots-deia</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Jasotako 4G bideo-deia</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Egindako 4G ahots-deia</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Egindako 4G bideo-deia</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Galdutako 4G ahots-deia</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Galdutako 4G bideo-deia</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Wifi ahots deia</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Wifi bideo-deia</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Wifi ahots deia</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Wifi bideo-deia</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Galdutako WiFi ahots-deia</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Galdutako WiFi bideo-deia</string>
 </resources>

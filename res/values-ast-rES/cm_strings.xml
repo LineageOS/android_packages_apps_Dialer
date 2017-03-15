@@ -77,10 +77,16 @@
   <string name="no_call_log">Nun hai rexistru de llamaes</string>
   <string name="clear">Llimpiar</string>
   <string name="description_clear_search">Llimpiar gueta</string>
+  <string name="video_call_welcome_title"><b>Dámoste l\'acoyida al marcador nuevu de videollamaes</b></string>
+  <string name="video_call_welcome_message">¡Préstamos oyer esa voz familiar na fin de la llinia, pero falar cara a cara ye muncho meyor! Equí ta lo que deberíes saber pa consiguir conexones en tiempu real (¿FaceTime?):\n Precisarás tar nuna rede 4G LTE o Wi-Fi\n El preséu al que llames ha ser tamién compatible coles videollamaes\n Les videollamaes usen alta velocidá\n Tamién pues pasar d\'una llamada a una videollamada\n\n Mira <a>https://support.t-mobile.com/docs/DOC-23574</a> pa más información.</string>
   <string name="video_call_welcome_message_repeat">Amosar esti mensaxe cada vegada</string>
+  <string name="toast_make_video_call_failed">Nun pue facese una videollamada, formatu incorreutu de númberu</string>
   <!-- Add for enhance videocall ui -->
   <string name="overflowVOCallMenuItemText">Llamada</string>
   <string name="video_call">Videollamada</string>
+  <string name="call_data_info_label">Temporizadores d\'usu de llamaes/datos</string>
+  <string name="alert_call_over_wifi">Les llamaes fadránse per Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Conéutate a la Wi-Fi pa facer llamaes.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">Calca equí pa ver les redes disponibles</string>
   <string name="menu_4g_conference_call">Conferencia 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->

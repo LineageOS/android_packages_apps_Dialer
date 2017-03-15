@@ -87,15 +87,33 @@
   <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
   <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Закрепить быстрый набор за этой клавишей невозможно</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Входящих вызовов еще не было.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Исходящих вызовов еще не было.</string>
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">Журнал вызовов пуст</string>
+  <string name="calllog_search_hint">Искать в журнале вызовов</string>
+  <string name="no_call_log">Журнал вызовов пуст</string>
+  <string name="clear">Очистить</string>
+  <string name="description_clear_search">Очистить условия поиска</string>
+  <string name="video_call_welcome_message">Все мы любим слышать знакомый голос в телефонной трубке, но говорить лицом к лицу гораздо лучше! Вот, что нужно знать для использования видеозвонков:\n Необходимо использовать LTE или подключение к сети Wi-Fi\n Устройство, на которое вы звоните, также должно поддерживать видеосвязь\n Видеозвонки потребляют достаточно много интернет-трафика\n Можно также переключить голосовой вызов на видеовызов в процессе разговора\n\n Ознакомьтесь со статьёй <a>https://support.t-mobile.com/docs/DOC-23574</a> для получения дополнительной информации.</string>
+  <string name="video_call_welcome_message_repeat">Показывать это сообщение каждый раз</string>
+  <string name="toast_change_video_call_failed">Невозможно совершить видеозвонок — некорректный формат номера</string>
+  <string name="toast_make_video_call_failed">Невозможно осуществить видеовызов — некорректный формат номера</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Видеовызов, показывать меня</string>
+  <string name="overflowRXCallMenuItemText">Видеовызов, скрывать меня</string>
   <string name="overflowVOCallMenuItemText">Голосовой вызов</string>
   <string name="video_call">Видеовызов</string>
+  <string name="call_data_info_label">Статистика вызовов и использования данных</string>
+  <string name="call_data_info_description">Длительность вызовов по мобильной сети и сети передачи данных</string>
+  <string name="alert_call_over_wifi">Вызов будет выполнен через сеть Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Мобильная сеть недоступна. Чтобы позвонить, подключитесь к Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Подключитесь к Wi-Fi, чтобы позвонить.</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->

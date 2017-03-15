@@ -80,7 +80,7 @@
   <string name="call_recording_format">Format d\'àudio</string>
   <string name="call_playback_no_app_found_toast">Es pot trobar cap aplicació per a la reproducció de la gravació seleccionada.</string>
   <!-- Speed Dial -->
-  <string name="speed_dial_settings">Ajustaments de trucada ràpida</string>
+  <string name="speed_dial_settings">Configuració de trucada ràpida</string>
   <string name="speed_dial_not_set">(no configurat)</string>
   <string name="speed_dial_replace">Substitueix</string>
   <string name="speed_dial_delete">Esborra</string>

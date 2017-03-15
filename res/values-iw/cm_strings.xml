@@ -38,7 +38,7 @@
   <string name="reverse_lookup_provider_title">ספק שיחה חכמה מזוהה</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <string name="speed_dial_edit_title">ערוך חיוג מהיר <xliff:g id="index" example="2">%1$d </xliff:g></string>
+  <string name="speed_dial_edit_title">ערוך חיוג מהיר <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">הזן מספר</string>
   <string name="call_log_show_all_slots">כל כרטיסי ה-SIM</string>
   <string name="call_log_all_calls_header">כל השיחות</string>
@@ -112,40 +112,40 @@
   <string name="toast_change_video_call_failed">לא ניתן להחליף לשיחת וידאו, תבנית מספר שגויה</string>
   <string name="toast_make_video_call_failed">לא יכול לבצע שיחת וידאו, תבנית המספר שגויה</string>
   <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">שיחת וידיאו, הצג אותי</string>
-  <string name="overflowRXCallMenuItemText">שיחת וידיאו, הסתר אותי</string>
-  <string name="overflowVOCallMenuItemText">שיחת קולית</string>
+  <string name="overflowBothCallMenuItemText">שיחת וידאו, הצג אותי</string>
+  <string name="overflowRXCallMenuItemText">שיחת וידאו, הסתר אותי</string>
+  <string name="overflowVOCallMenuItemText">שיחה קולית</string>
   <string name="video_call">שיחת וידאו</string>
   <string name="call_data_info_label">זמן שימוש בשיחות או באינטרנט סלולרי</string>
   <string name="call_data_info_description">זמן שימוש בשיחת וידאו וזמן שימוש באינטרנט סלולרי</string>
   <string name="alert_call_over_wifi">שיחות יבוצעו באמצעות ה־Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">אין רשת סלולרית זמינה, כדי לבצע שיחה התחבר לרשת Wi-Fi.</string>
-  <string name="alert_user_connect_to_wifi_for_call">כדי לבצע שיחה התחבר לרשת Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">התחבר ל-Wi-Fi על מנת לבצע שיחות.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">הקש כאן כדי לראות את הרשתות הזמינות</string>
   <string name="menu_add_to_4g_conference_call">הוסף אל שיחת ועידה 4G</string>
   <string name="menu_4g_conference_call">שיחת ועידה 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">שיחת קולית נכנסת 4G</string>
+  <string name="type_incoming_volte">שיחת 4G קולית נכנסת</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">שיחת וידיאו נכנסת 4G</string>
+  <string name="type_incoming_video_lte">שיחת וידאו 4G נכנסת</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">שיחת קולית יוצאת 4G</string>
+  <string name="type_outgoing_volte">שיחת 4G קולית יוצאת</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">שיחת וידיאו יוצאת 4G</string>
+  <string name="type_outgoing_video_lte">שיחת וידאו 4G יוצאת</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">שיחה קולית 4G שלא נענתה</string>
+  <string name="type_missed_volte">שיחה 4G קולית לא נענתה</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">שיחה וידיאו 4G שלא נענתה</string>
+  <string name="type_missed_video_lte">שיחה וידאו 4G לא נענתה</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">שיחת WiFi קולית נכנסת</string>
+  <string name="type_incoming_vowifi">שיחת Wi-Fi קולית נכנסת</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">שיחת WiFi וידיאו נכנסת</string>
+  <string name="type_incoming_video_wifi">שיחת וידאו Wi-Fi נכנסת</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">שיחת WiFi קולית יוצאת</string>
+  <string name="type_outgoing_vowifi">שיחת Wi-Fi קולית יוצאת</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">שיחת WiFi וידיאו יוצאת</string>
+  <string name="type_outgoing_video_wifi">שיחת וידאו Wi-Fi יוצאת</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">שיחה WiFi קולית שלא נענתה</string>
+  <string name="type_missed_vowifi">שיחה Wi-Fi קולית לא נענתה</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">שיחת WiFi וידיאו שלא נענתה</string>
+  <string name="type_missed_video_wifi">שיחת וידאו Wi-Fi לא נענתה</string>
 </resources>

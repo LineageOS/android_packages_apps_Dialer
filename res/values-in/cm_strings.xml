@@ -100,6 +100,7 @@
   <string name="clear">Bersihkan</string>
   <string name="description_clear_search">Bersihkan pencarian</string>
   <string name="video_call_welcome_title"><b>Selamat datang di Video Calling Dialer baru</b></string>
+  <string name="video_call_welcome_message_repeat">Selalu tampilkan pesan ini</string>
   <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
   <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>
   <!-- Add for enhance videocall ui -->

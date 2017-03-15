@@ -33,6 +33,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="callHistoryIconLabel">Historial de llamaes</string>
   <!-- Text for a menu item to report a call as having been incorrectly identified. [CHAR LIMIT=48] -->
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
   <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
@@ -44,6 +45,7 @@
   <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <!-- Menu item used to remove all calls from the call log -->
+  <string name="call_log_delete_all">Llimpiar historial de llamaes</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to send a voicemail through other applications [CHAR LIMIT=30] -->
@@ -52,8 +54,10 @@
   <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
   <!-- Text for going to archive button in snackbar for voicemail archive. [CHAR LIMIT=10] -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
+  <string name="clearCallLogConfirmation_title">¿Llimpiar historial de llamaes?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
+  <string name="clearCallLogProgress_title">Llimpiando historial de llamaes\u2026</string>
   <!-- Title used for the activity for placing a call. This name appears
          in activity disambig dialogs -->
   <!-- Notification strings -->
@@ -147,6 +151,7 @@
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
          [CHAR LIMIT=NONE] -->
+  <string name="action_menu_overflow_description" msgid="2295659037509008453">Más opciones</string>
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
@@ -234,6 +239,7 @@
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
          explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
          current day -->
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
   <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
          The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
   <!-- Format for duration of voicemails which are displayed when viewing voicemail logs. For example "01:22" -->
@@ -262,8 +268,10 @@
          [CHAR LIMIT=45] -->
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
+  <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <!-- String resource for the font-family to use for the full call history footer
          Do not translate. -->
+  <string name="view_full_call_history_font_family">sans-serif</string>
   <!-- Text displayed when the call log is empty. -->
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
   <!-- Text displayed when the list of missed calls is empty -->
@@ -282,6 +290,7 @@
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
   <!-- Do not translate -->
+  <string name="migrate_blocked_numbers_dialog_cancel_button">\@android:string/cancel</string>
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
   <!-- Confirmation dialog message for blocking a number with visual voicemail active.
          [CHAR LIMIT=NONE] -->
@@ -305,6 +314,7 @@
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
+  <string name="search_shortcut_send_sms_message">Unviar SMS</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
@@ -444,6 +454,10 @@
   <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
+  <string-array name="dtmf_tone_length_entries">
+    <item>Normal</item>
+    <item>Long</item>
+  </string-array>
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
