@@ -19,17 +19,18 @@ package com.android.incallui.incall.impl;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.sessiondata.MultimediaFragment;
 
 /** View pager adapter for in call ui. */
-public class InCallPagerAdapter extends FragmentPagerAdapter {
+public class InCallPagerAdapter extends FragmentStatePagerAdapter {
 
-  @Nullable private final MultimediaData attachments;
+  @Nullable private MultimediaData attachments;
 
-  public InCallPagerAdapter(FragmentManager fragmentManager, MultimediaData attachments) {
+  public InCallPagerAdapter(FragmentManager fragmentManager, @Nullable MultimediaData attachments) {
     super(fragmentManager);
     this.attachments = attachments;
   }
@@ -47,13 +48,27 @@ public class InCallPagerAdapter extends FragmentPagerAdapter {
   @Override
   public int getCount() {
     if (attachments != null
-        && (!TextUtils.isEmpty(attachments.getSubject()) || attachments.hasImageData())) {
+        && (!TextUtils.isEmpty(attachments.getText()) || attachments.hasImageData())) {
       return 2;
     }
     return 1;
   }
 
+  public void setAttachments(@Nullable MultimediaData attachments) {
+    if (this.attachments != attachments) {
+      this.attachments = attachments;
+      notifyDataSetChanged();
+    }
+  }
+
   public int getButtonGridPosition() {
     return getCount() - 1;
+  }
+
+  //this is called when notifyDataSetChanged() is called
+  @Override
+  public int getItemPosition(Object object) {
+    // refresh all fragments when data set changed
+    return PagerAdapter.POSITION_NONE;
   }
 }

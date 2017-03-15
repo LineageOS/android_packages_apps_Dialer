@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title for incoming call type. [CHAR LIMIT=40] -->
+  <string name="type_incoming">Incoming call</string>
+
+  <!-- Title for incoming call which was transferred to another device. [CHAR LIMIT=60] -->
+  <string name="type_incoming_pulled">Incoming call transferred to another device</string>
+
+  <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
+  <string name="type_outgoing">Outgoing call</string>
+
+  <!-- Title for outgoing call which was transferred to another device. [CHAR LIMIT=60] -->
+  <string name="type_outgoing_pulled">Outgoing call transferred to another device</string>
+
+  <!-- Title for missed call type. [CHAR LIMIT=40] -->
+  <string name="type_missed">Missed call</string>
+
+  <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video">Incoming video call</string>
+
+  <!-- Title for incoming video call in call details screen which was transferred to another device.
+       [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_pulled">Incoming video call transferred to another device</string>
+
+  <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video">Outgoing video call</string>
+
+  <!-- Title for outgoing video call in call details screen which was transferred to another device.
+       [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_pulled">Outgoing video call transferred to another device</string>
+
+  <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video">Missed video call</string>
+
+  <!-- Title for voicemail details screen -->
+  <string name="type_voicemail">Voicemail</string>
+
+  <!-- Title for rejected call type. [CHAR LIMIT=40] -->
+  <string name="type_rejected">Declined call</string>
+
+  <!-- Title for blocked call type. [CHAR LIMIT=40] -->
+  <string name="type_blocked">Blocked call</string>
+
+  <!-- Title for "answered elsewhere" call type. This will happen if a call was ringing
+       simultaneously on multiple devices, and the user answered it on a device other than the
+       current device. [CHAR LIMIT=60] -->
+  <string name="type_answered_elsewhere">Call answered on another device</string>
+
+  <!-- String describing the phone account the call was made on or to. This string will be used
+         in description_incoming_missed_call, description_incoming_answered_call, and
+         description_outgoing_call.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+  <string name="description_phone_account">on <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g></string>
+
+  <!-- String describing the secondary line number the call was received via.
+       Note: AccessibilityServices use this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE]-->
+  <string name="description_via_number">via <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+
+  <!-- String describing the PhoneAccount and via number that a call was received on, if both are
+       visible.
+       Note: AccessibilityServices use this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE]-->
+  <string name="description_via_number_phone_account">on <xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g>, via <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+
+  <!-- String used for displaying calls to the voicemail number in the call log -->
+  <string name="voicemail_string">Voicemail</string>
+
+  <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
+  <string name="call_details_duration_format"><xliff:g example="42" id="minutes">%s</xliff:g> min <xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
+
+  <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
+  <string name="call_details_short_duration_format"><xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
+</resources>

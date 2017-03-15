@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Google Inc. All Rights Reserved. -->
+<resources>
+  <dimen name="location_map_width">92dp</dimen>
+  <dimen name="location_map_height">92dp</dimen>
+</resources>

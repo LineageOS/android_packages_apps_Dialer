@@ -41,6 +41,7 @@ public class PrimaryInfo {
   // Used for consistent LetterTile coloring.
   @Nullable public final String contactInfoLookupKey;
   @Nullable public final MultimediaData multimediaData;
+  public final int numberPresentation;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryInfo createEmptyPrimaryInfo() {
@@ -59,7 +60,8 @@ public class PrimaryInfo {
         false,
         false,
         null,
-        null);
+        null,
+        -1);
   }
 
   public PrimaryInfo(
@@ -77,7 +79,8 @@ public class PrimaryInfo {
       boolean answeringDisconnectsOngoingCall,
       boolean shouldShowLocation,
       @Nullable String contactInfoLookupKey,
-      @Nullable MultimediaData multimediaData) {
+      @Nullable MultimediaData multimediaData,
+      int numberPresentation) {
     this.number = number;
     this.name = name;
     this.nameIsNumber = nameIsNumber;
@@ -93,6 +96,7 @@ public class PrimaryInfo {
     this.shouldShowLocation = shouldShowLocation;
     this.contactInfoLookupKey = contactInfoLookupKey;
     this.multimediaData = multimediaData;
+    this.numberPresentation = numberPresentation;
   }
 
   @Override

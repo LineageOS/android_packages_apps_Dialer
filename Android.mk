@@ -1,8 +1,5 @@
 # Local modifications:
-# * All location/maps code has been removed from the incallui.
-# * Precompiled AutoValue classes have been included.
-# * Precompiled Dagger classes have been included.
-# * All autovalue imports and annotations have been stripped.
+# * Dagger classes have been manually crafted.
 # * Precompiled proto classes have been included.
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -18,10 +15,33 @@ BASE_DIR := java/com/android
 
 # Primary dialer module sources.
 SRC_DIRS := \
+	apache \
 	$(BASE_DIR)/contacts/common \
 	$(BASE_DIR)/dialer \
 	$(BASE_DIR)/incallui \
-	$(BASE_DIR)/voicemailomtp
+	$(BASE_DIR)/voicemail
+
+# Exclude files incompatible with AOSP.
+EXCLUDE_FILES := \
+	$(BASE_DIR)/dialer/debug/bindings/impl/DebugBindings.java \
+	$(BASE_DIR)/dialer/debug/bindings/stub/DebugBindings.java \
+	$(BASE_DIR)/dialer/debug/impl/DebugConnection.java \
+	$(BASE_DIR)/dialer/debug/impl/DebugConnectionService.java \
+	$(BASE_DIR)/incallui/calllocation/impl/AuthException.java \
+	$(BASE_DIR)/incallui/calllocation/impl/CallLocationImpl.java \
+	$(BASE_DIR)/incallui/calllocation/impl/CallLocationModule.java \
+	$(BASE_DIR)/incallui/calllocation/impl/DownloadMapImageTask.java \
+	$(BASE_DIR)/incallui/calllocation/impl/GoogleLocationSettingHelper.java \
+	$(BASE_DIR)/incallui/calllocation/impl/HttpFetcher.java \
+	$(BASE_DIR)/incallui/calllocation/impl/LocationFragment.java \
+	$(BASE_DIR)/incallui/calllocation/impl/LocationHelper.java \
+	$(BASE_DIR)/incallui/calllocation/impl/LocationPresenter.java \
+	$(BASE_DIR)/incallui/calllocation/impl/LocationUrlBuilder.java \
+	$(BASE_DIR)/incallui/calllocation/impl/ReverseGeocodeTask.java \
+	$(BASE_DIR)/incallui/calllocation/impl/TrafficStatsTags.java \
+	$(BASE_DIR)/incallui/maps/impl/MapsImpl.java \
+	$(BASE_DIR)/incallui/maps/impl/MapsModule.java \
+	$(BASE_DIR)/incallui/maps/impl/StaticMapFragment.java
 
 # All Dialers resources.
 # find . -type d -name "res" | uniq | sort
@@ -35,10 +55,15 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/callcomposer/camera/camerafocus/res \
 	$(BASE_DIR)/dialer/callcomposer/cameraui/res \
 	$(BASE_DIR)/dialer/callcomposer/res \
+	$(BASE_DIR)/dialer/calldetails/res \
+	$(BASE_DIR)/dialer/calllogutils/res \
 	$(BASE_DIR)/dialer/common/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/interactions/res \
+	$(BASE_DIR)/dialer/notification/res \
+	$(BASE_DIR)/dialer/oem/res \
 	$(BASE_DIR)/dialer/phonenumberutil/res \
+	$(BASE_DIR)/dialer/postcall/res \
 	$(BASE_DIR)/dialer/shortcuts/res \
 	$(BASE_DIR)/dialer/theme/res \
 	$(BASE_DIR)/dialer/util/res \
@@ -50,6 +75,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/answer/impl/res \
 	$(BASE_DIR)/incallui/audioroute/res \
 	$(BASE_DIR)/incallui/autoresizetext/res \
+	$(BASE_DIR)/incallui/calllocation/impl/res \
 	$(BASE_DIR)/incallui/commontheme/res \
 	$(BASE_DIR)/incallui/contactgrid/res \
 	$(BASE_DIR)/incallui/hold/res \
@@ -58,7 +84,8 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/sessiondata/res \
 	$(BASE_DIR)/incallui/video/impl/res \
 	$(BASE_DIR)/incallui/wifi/res \
-	$(BASE_DIR)/voicemailomtp/res
+	$(BASE_DIR)/voicemail/impl/res
+
 
 # Dialer manifest files to merge.
 # find . -type f -name "AndroidManifest.xml" | uniq | sort
@@ -68,17 +95,21 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/app/manifests/activities/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/voicemail/error/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/backup/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/binary/aosp/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/blocking/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/camera/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/camera/camerafocus/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/cameraui/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/calldetails/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/calllogutils/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/common/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/debug/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/debug/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/oem/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/phonenumberutil/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/postcall/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/shortcuts/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/simulator/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/theme/AndroidManifest.xml \
@@ -99,12 +130,14 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/sessiondata/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
-	$(BASE_DIR)/voicemailomtp/AndroidManifest.xml
+	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml
+
 
 # Merge all manifest files.
 LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
+LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
 	$(support_library_root_dir)/design/res \
@@ -129,10 +162,15 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.callcomposer.camera \
 	--extra-packages com.android.dialer.callcomposer.camera.camerafocus \
 	--extra-packages com.android.dialer.callcomposer.cameraui \
+	--extra-packages com.android.dialer.calldetails \
+	--extra-packages com.android.dialer.calllogutils \
 	--extra-packages com.android.dialer.common \
 	--extra-packages com.android.dialer.dialpadview \
 	--extra-packages com.android.dialer.interactions \
+	--extra-packages com.android.dialer.notification \
+	--extra-packages com.android.dialer.oem \
 	--extra-packages com.android.dialer.phonenumberutil \
+	--extra-packages com.android.dialer.postcall \
 	--extra-packages com.android.dialer.shortcuts \
 	--extra-packages com.android.dialer.util \
 	--extra-packages com.android.dialer.voicemailstatus \
@@ -145,17 +183,23 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.incallui.answer.impl.hint \
 	--extra-packages com.android.incallui.audioroute \
 	--extra-packages com.android.incallui.autoresizetext \
+	--extra-packages com.android.incallui.calllocation \
+	--extra-packages com.android.incallui.calllocation.impl \
 	--extra-packages com.android.incallui.commontheme \
 	--extra-packages com.android.incallui.contactgrid \
 	--extra-packages com.android.incallui.hold \
 	--extra-packages com.android.incallui.incall.impl \
+	--extra-packages com.android.incallui.maps.impl \
 	--extra-packages com.android.incallui.sessiondata \
 	--extra-packages com.android.incallui.video \
 	--extra-packages com.android.incallui.video.impl \
 	--extra-packages com.android.incallui.wifi \
 	--extra-packages com.android.phone.common \
-	--extra-packages com.android.voicemailomtp \
-	--extra-packages com.android.voicemailomtp.settings \
+	--extra-packages com.android.voicemail \
+	--extra-packages com.android.voicemail.impl \
+	--extra-packages com.android.voicemail.impl.fetch \
+	--extra-packages com.android.voicemail.impl.settings \
+	--extra-packages com.android.voicemail.settings \
 	--extra-packages me.leolin.shortcutbadger
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
@@ -180,7 +224,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	libphonenumber \
 	libprotobuf-java-nano \
 	org.apache.http.legacy.boot \
-	volley
+	volley \
+	dialer-auto-value
 
 LOCAL_JAVA_LIBRARIES := \
 	android-support-annotations \
@@ -194,7 +239,8 @@ LOCAL_JAVA_LIBRARIES := \
 	dialer-javax-inject \
 	dialer-libshortcutbadger \
 	jsr305 \
-	libprotobuf-java-nano
+	libprotobuf-java-nano \
+	dialer-auto-value
 
 # Libraries needed by the compiler (JACK) to generate code.
 PROCESSOR_LIBRARIES_TARGET := \
@@ -203,15 +249,12 @@ PROCESSOR_LIBRARIES_TARGET := \
 	dialer-dagger2-producers \
 	dialer-guava \
 	dialer-javax-annotation-api \
-	dialer-javax-inject
-
-# TODO: Include when JACK properly supports AutoValue b/35360557
-# (builders not generated successfully, javac duplicate issues) in
-# LOCAL_STATIC_JAVA_LIBRARIES, LOCAL_JAVA_LIBRARIES, PROCESSOR_LIBRARIES_TARGET
-# 	dialer-auto-value
+	dialer-javax-inject \
+	dialer-auto-value
 
 # Resolve the jar paths.
 PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
+# Necessary for annotation processors to work correctly.
 LOCAL_ADDITIONAL_DEPENDENCIES += $(PROCESSOR_JARS)
 
 LOCAL_JACK_FLAGS += --processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
@@ -228,6 +271,7 @@ include $(BUILD_PACKAGE)
 # Cleanup local state
 BASE_DIR :=
 SRC_DIRS :=
+EXCLUDE_FILES :=
 RES_DIRS :=
 DIALER_MANIFEST_FILES :=
 PROCESSOR_LIBRARIES_TARGET :=

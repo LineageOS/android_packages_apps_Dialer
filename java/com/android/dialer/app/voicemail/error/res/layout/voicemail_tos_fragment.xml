@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:autoLink="web"
         android:text="@string/verizon_terms_and_conditions_1.1_english"
         android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/call_log_detail_text_size"/>

@@ -18,11 +18,11 @@ package com.android.dialer.callcomposer;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import com.android.dialer.common.Assert;
 
 /** ViewPager adapter for call compose UI. */
-public class CallComposerPagerAdapter extends FragmentStatePagerAdapter {
+public class CallComposerPagerAdapter extends FragmentPagerAdapter {
 
   public static final int INDEX_CAMERA = 0;
   public static final int INDEX_GALLERY = 1;

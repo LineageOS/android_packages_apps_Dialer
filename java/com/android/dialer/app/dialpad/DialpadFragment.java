@@ -78,9 +78,9 @@ import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.SpecialCharSequenceMgr;
 import com.android.dialer.app.calllog.CallLogAsync;
-import com.android.dialer.app.calllog.PhoneAccountUtils;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadView;
@@ -598,6 +598,7 @@ public class DialpadFragment extends Fragment
 
   @Override
   public void onStart() {
+    LogUtil.d("DialpadFragment.onStart", "first launch: %b", mFirstLaunch);
     Trace.beginSection(TAG + " onStart");
     super.onStart();
     // if the mToneGenerator creation fails, just continue without it.  It is
@@ -624,6 +625,7 @@ public class DialpadFragment extends Fragment
 
   @Override
   public void onResume() {
+    LogUtil.d("DialpadFragment.onResume", "");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 

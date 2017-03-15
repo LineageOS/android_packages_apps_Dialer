@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,10 +46,16 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.PermissionsUtil;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Fragment used to compose call with image from the user's gallery. */
 public class GalleryComposerFragment extends CallComposerFragment
     implements LoaderCallbacks<Cursor>, OnClickListener {
+
+  private static final String SELECTED_DATA_KEY = "selected_data";
+  private static final String IS_COPY_KEY = "is_copy";
+  private static final String INSERTED_IMAGES_KEY = "inserted_images";
 
   private static final int RESULT_LOAD_IMAGE = 1;
   private static final int RESULT_OPEN_SETTINGS = 2;
@@ -62,6 +69,7 @@ public class GalleryComposerFragment extends CallComposerFragment
   private CursorLoader cursorLoader;
   private GalleryGridItemData selectedData = null;
   private boolean selectedDataIsCopy;
+  private List<GalleryGridItemData> insertedImages = new ArrayList<>();
 
   public static GalleryComposerFragment newInstance() {
     return new GalleryComposerFragment();
@@ -89,10 +97,13 @@ public class GalleryComposerFragment extends CallComposerFragment
           ContextCompat.getColor(getContext(), R.color.dialer_theme_color));
       permissionView.setVisibility(View.VISIBLE);
     } else {
+      if (bundle != null) {
+        selectedData = bundle.getParcelable(SELECTED_DATA_KEY);
+        selectedDataIsCopy = bundle.getBoolean(IS_COPY_KEY);
+        insertedImages = bundle.getParcelableArrayList(INSERTED_IMAGES_KEY);
+      }
       setupGallery();
     }
-
-    setTopView(galleryGridView);
     return view;
   }
 
@@ -110,6 +121,10 @@ public class GalleryComposerFragment extends CallComposerFragment
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
     adapter.swapCursor(cursor);
+    if (insertedImages != null && !insertedImages.isEmpty()) {
+      adapter.insertEntries(insertedImages);
+    }
+    setSelected(selectedData, selectedDataIsCopy);
   }
 
   @Override
@@ -147,7 +162,7 @@ public class GalleryComposerFragment extends CallComposerFragment
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
       } else if (itemView.getData().equals(selectedData)) {
-        setSelected(null, false);
+        clearComposer();
       } else {
         setSelected(new GalleryGridItemData(itemView.getData()), false);
       }
@@ -179,7 +194,10 @@ public class GalleryComposerFragment extends CallComposerFragment
     selectedData = data;
     selectedDataIsCopy = isCopy;
     adapter.setSelected(selectedData);
-    getListener().composeCall(this);
+    CallComposerListener listener = getListener();
+    if (listener != null) {
+      getListener().composeCall(this);
+    }
   }
 
   @Override
@@ -187,6 +205,20 @@ public class GalleryComposerFragment extends CallComposerFragment
     return selectedData == null
         || selectedData.getFilePath() == null
         || selectedData.getMimeType() == null;
+  }
+
+  @Override
+  public void clearComposer() {
+    setSelected(null, false);
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putParcelable(SELECTED_DATA_KEY, selectedData);
+    outState.putBoolean(IS_COPY_KEY, selectedDataIsCopy);
+    outState.putParcelableArrayList(
+        INSERTED_IMAGES_KEY, (ArrayList<? extends Parcelable>) insertedImages);
   }
 
   @Override
@@ -238,7 +270,9 @@ public class GalleryComposerFragment extends CallComposerFragment
               new Callback() {
                 @Override
                 public void onCopySuccessful(File file, String mimeType) {
-                  setSelected(adapter.insertEntry(file.getAbsolutePath(), mimeType), true);
+                  GalleryGridItemData data = adapter.insertEntry(file.getAbsolutePath(), mimeType);
+                  insertedImages.add(0, data);
+                  setSelected(data, true);
                 }
 
                 @Override

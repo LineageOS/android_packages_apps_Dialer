@@ -31,10 +31,10 @@ import com.android.incallui.incall.protocol.PrimaryInfo;
  * Gets the content of the bottom row. For example:
  *
  * <ul>
- * <li>Mobile +1 (650) 253-0000
- * <li>[HD icon] 00:15
- * <li>Call ended
- * <li>Hanging up
+ *   <li>Mobile +1 (650) 253-0000
+ *   <li>[HD attempting icon]/[HD icon] 00:15
+ *   <li>Call ended
+ *   <li>Hanging up
  * </ul>
  */
 public class BottomRow {
@@ -45,6 +45,7 @@ public class BottomRow {
     @Nullable public final CharSequence label;
     public final boolean isTimerVisible;
     public final boolean isWorkIconVisible;
+    public final boolean isHdAttemptinIconVisible;
     public final boolean isHdIconVisible;
     public final boolean isForwardIconVisible;
     public final boolean isSpamIconVisible;
@@ -54,6 +55,7 @@ public class BottomRow {
         @Nullable CharSequence label,
         boolean isTimerVisible,
         boolean isWorkIconVisible,
+        boolean isHdAttemptinIconVisible,
         boolean isHdIconVisible,
         boolean isForwardIconVisible,
         boolean isSpamIconVisible,
@@ -61,6 +63,7 @@ public class BottomRow {
       this.label = label;
       this.isTimerVisible = isTimerVisible;
       this.isWorkIconVisible = isWorkIconVisible;
+      this.isHdAttemptinIconVisible = isHdAttemptinIconVisible;
       this.isHdIconVisible = isHdIconVisible;
       this.isForwardIconVisible = isForwardIconVisible;
       this.isSpamIconVisible = isSpamIconVisible;
@@ -76,6 +79,7 @@ public class BottomRow {
     boolean isForwardIconVisible = state.isForwardedNumber;
     boolean isWorkIconVisible = state.isWorkCall;
     boolean isHdIconVisible = state.isHdAudioCall && !isForwardIconVisible;
+    boolean isHdAttemptingIconVisible = state.isHdAttempting;
     boolean isSpamIconVisible = false;
     boolean shouldPopulateAccessibilityEvent = true;
 
@@ -110,6 +114,7 @@ public class BottomRow {
         label,
         isTimerVisible,
         isWorkIconVisible,
+        isHdAttemptingIconVisible,
         isHdIconVisible,
         isForwardIconVisible,
         isSpamIconVisible,

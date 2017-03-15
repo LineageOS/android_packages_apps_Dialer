@@ -18,7 +18,9 @@ package com.android.dialer.phonenumbercache;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
 import java.io.InputStream;
 
 public interface CachedNumberLookupService {
@@ -35,6 +37,7 @@ public interface CachedNumberLookupService {
    *     found in the cache, {@link ContactInfo#EMPTY} if the phone number was not found in the
    *     cache, and null if there was an error when querying the cache.
    */
+  @WorkerThread
   CachedContactInfo lookupCachedContactFromNumber(Context context, String number);
 
   void addContact(Context context, CachedContactInfo info);
@@ -64,6 +67,7 @@ public interface CachedNumberLookupService {
     int SOURCE_TYPE_PROFILE = 4;
     int SOURCE_TYPE_CNAP = 5;
 
+    @NonNull
     ContactInfo getContactInfo();
 
     void setSource(int sourceType, String name, long directoryId);

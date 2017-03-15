@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.FallibleAsyncTask.FallibleTaskResult;
-
+import com.google.auto.value.AutoValue;
 
 /**
  * A task that runs work in the background, passing Throwables from {@link
@@ -52,8 +52,8 @@ public abstract class FallibleAsyncTask<ParamsT, ProgressT, ResultT>
    *
    * @param <ResultT> the type of the result of the background computation
    */
-
-  protected abstract static class FallibleTaskResult<ResultT> {
+  @AutoValue
+  public abstract static class FallibleTaskResult<ResultT> {
 
     /** Creates an instance of FallibleTaskResult for the given throwable. */
     private static <ResultT> FallibleTaskResult<ResultT> createFailureResult(@NonNull Throwable t) {

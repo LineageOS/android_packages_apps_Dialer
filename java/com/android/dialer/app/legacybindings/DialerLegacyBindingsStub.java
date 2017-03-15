@@ -17,12 +17,14 @@
 package com.android.dialer.app.legacybindings;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.list.RegularSearchFragment;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
+import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 
 /** Default implementation for dialer legacy bindings. */
 public class DialerLegacyBindingsStub implements DialerLegacyBindings {
@@ -35,6 +37,7 @@ public class DialerLegacyBindingsStub implements DialerLegacyBindings {
       CallLogCache callLogCache,
       ContactInfoCache contactInfoCache,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+      @NonNull FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
       int activityType) {
     return new CallLogAdapter(
         activity,
@@ -43,6 +46,7 @@ public class DialerLegacyBindingsStub implements DialerLegacyBindings {
         callLogCache,
         contactInfoCache,
         voicemailPlaybackPresenter,
+        filteredNumberAsyncQueryHandler,
         activityType);
   }
 

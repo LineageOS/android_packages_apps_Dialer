@@ -28,7 +28,6 @@
   <dimen name="call_log_horizontal_margin">8dp</dimen>
   <dimen name="call_log_call_action_size">32dp</dimen>
   <dimen name="call_log_call_action_width">54dp</dimen>
-  <dimen name="call_log_icon_margin">4dp</dimen>
   <dimen name="call_log_inner_margin">13dp</dimen>
   <dimen name="call_log_outer_margin">8dp</dimen>
   <dimen name="call_log_start_margin">8dp</dimen>
@@ -68,7 +67,7 @@
   <item name="contact_tile_height_to_width_ratio" type="dimen">76%</item>
   <dimen name="contact_tile_text_side_padding">12dp</dimen>
   <dimen name="contact_tile_text_bottom_padding">9dp</dimen>
-  <dimen name="favorites_row_top_padding">2dp</dimen>
+  <dimen name="favorites_row_top_padding">1dp</dimen>
   <dimen name="favorites_row_bottom_padding">0dp</dimen>
   <dimen name="favorites_row_start_padding">1dp</dimen>
 
@@ -143,6 +142,4 @@
   <dimen name="blocked_number_search_text_size">14sp</dimen>
   <dimen name="blocked_number_settings_description_text_size">14sp</dimen>
   <dimen name="blocked_number_header_height">48dp</dimen>
-
-  <dimen name="call_type_icon_size">12dp</dimen>
 </resources>

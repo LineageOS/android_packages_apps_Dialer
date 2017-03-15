@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.TextView;
 import java.util.Locale;
@@ -109,6 +110,18 @@ public class ViewUtil {
                 view.getViewTreeObserver().removeOnPreDrawListener(this);
                 runnable.run(view);
                 return drawNextFrame;
+              }
+            });
+  }
+
+  public static void doOnGlobalLayout(@NonNull final View view, final ViewRunnable runnable) {
+    view.getViewTreeObserver()
+        .addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+              @Override
+              public void onGlobalLayout() {
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                runnable.run(view);
               }
             });
   }

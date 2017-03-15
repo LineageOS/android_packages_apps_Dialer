@@ -31,12 +31,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.multimedia.MultimediaData;
-import com.android.incallui.maps.StaticMapBinding;
-import com.android.incallui.maps.StaticMapFactory;
+import com.android.incallui.maps.MapsComponent;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -58,17 +56,13 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
   private static final String ARG_INTERACTIVE = "interactive";
   private static final String ARG_SHOW_AVATAR = "show_avatar";
   private ImageView avatarImageView;
-  // TODO: add click listeners
-  @SuppressWarnings("unused")
-  private boolean isInteractive;
 
   private boolean showAvatar;
-  private StaticMapFactory mapFactory;
 
   public static MultimediaFragment newInstance(
       @NonNull MultimediaData multimediaData, boolean isInteractive, boolean showAvatar) {
     return newInstance(
-        multimediaData.getSubject(),
+        multimediaData.getText(),
         multimediaData.getImageUri(),
         multimediaData.getLocation(),
         isInteractive,
@@ -96,7 +90,6 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
   @Override
   public void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
-    isInteractive = getArguments().getBoolean(ARG_INTERACTIVE);
     showAvatar = getArguments().getBoolean(ARG_SHOW_AVATAR);
   }
 
@@ -107,10 +100,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
     boolean hasImage = getImageUri() != null;
     boolean hasSubject = !TextUtils.isEmpty(getSubject());
     boolean hasMap = getLocation() != null;
-    if (hasMap) {
-      mapFactory = StaticMapBinding.get(getActivity().getApplication());
-    }
-    if (mapFactory != null) {
+    if (hasMap && MapsComponent.get(getContext()).getMaps().isAvailable()) {
       if (hasImage) {
         if (hasSubject) {
           return layoutInflater.inflate(
@@ -178,7 +168,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
     if (fragmentHolder != null) {
       fragmentHolder.setClipToOutline(true);
       Fragment mapFragment =
-          Assert.isNotNull(mapFactory).getStaticMap(Assert.isNotNull(getLocation()));
+          MapsComponent.get(getContext()).getMaps().createStaticMapFragment(getLocation());
       getChildFragmentManager()
           .beginTransaction()
           .replace(R.id.answer_message_frag, mapFragment)

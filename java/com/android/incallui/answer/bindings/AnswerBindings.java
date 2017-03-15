@@ -23,7 +23,7 @@ import com.android.incallui.answer.protocol.AnswerScreen;
 public class AnswerBindings {
 
   public static AnswerScreen createAnswerScreen(
-      String callId, int videoState, boolean isVideoUpgradeRequest) {
-    return AnswerFragment.newInstance(callId, videoState, isVideoUpgradeRequest);
+      String callId, boolean isVideoCall, boolean isVideoUpgradeRequest) {
+    return AnswerFragment.newInstance(callId, isVideoCall, isVideoUpgradeRequest);
   }
 }

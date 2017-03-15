@@ -30,7 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import com.android.dialer.app.PhoneCallDetails;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
@@ -347,15 +346,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
   }
 
   @Override
-  public void onDeleteCall() {}
-
-  @Override
   public void onDeleteVoicemail() {
     mPresenter.onVoicemailDeletedInDatabase();
   }
-
-  @Override
-  public void onGetCallDetails(PhoneCallDetails[] details) {}
 
   private String getString(int resId) {
     return mContext.getString(resId);

@@ -32,6 +32,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
@@ -91,6 +92,9 @@ public class VideoCallFragment extends Fragment
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
         OnSystemUiVisibilityChangeListener {
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String ARG_CALL_ID = "call_id";
 
   private static final float BLUR_PREVIEW_RADIUS = 16.0f;
   private static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
@@ -155,6 +159,15 @@ public class VideoCallFragment extends Fragment
           }
         }
       };
+
+  public static VideoCallFragment newInstance(String callId) {
+    Bundle bundle = new Bundle();
+    bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
+
+    VideoCallFragment instance = new VideoCallFragment();
+    instance.setArguments(bundle);
+    return instance;
+  }
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -308,19 +321,24 @@ public class VideoCallFragment extends Fragment
   }
 
   @Override
+  public void onStart() {
+    super.onStart();
+    LogUtil.i("VideoCallFragment.onStart", null);
+    onVideoScreenStart();
+  }
+
+  @Override
+  public void onVideoScreenStart() {
+    inCallButtonUiDelegate.refreshMuteState();
+    videoCallScreenDelegate.onVideoCallScreenUiReady();
+    getView().postDelayed(cameraPermissionDialogRunnable, CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS);
+  }
+
+  @Override
   public void onResume() {
     super.onResume();
     LogUtil.i("VideoCallFragment.onResume", null);
     inCallScreenDelegate.onInCallScreenResumed();
-  }
-
-  @Override
-  public void onStart() {
-    super.onStart();
-    LogUtil.i("VideoCallFragment.onStart", null);
-    inCallButtonUiDelegate.refreshMuteState();
-    videoCallScreenDelegate.onVideoCallScreenUiReady();
-    getView().postDelayed(cameraPermissionDialogRunnable, CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS);
   }
 
   @Override
@@ -333,6 +351,11 @@ public class VideoCallFragment extends Fragment
   public void onStop() {
     super.onStop();
     LogUtil.i("VideoCallFragment.onStop", null);
+    onVideoScreenStop();
+  }
+
+  @Override
+  public void onVideoScreenStop() {
     getView().removeCallbacks(cameraPermissionDialogRunnable);
     videoCallScreenDelegate.onVideoCallScreenUiUnready();
   }
@@ -718,6 +741,12 @@ public class VideoCallFragment extends Fragment
   @Override
   public Fragment getVideoCallScreenFragment() {
     return this;
+  }
+
+  @Override
+  @NonNull
+  public String getCallId() {
+    return Assert.isNotNull(getArguments().getString(ARG_CALL_ID));
   }
 
   @Override

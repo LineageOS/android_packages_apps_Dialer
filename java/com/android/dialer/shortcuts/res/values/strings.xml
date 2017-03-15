@@ -30,8 +30,8 @@
        be found or doesn't have any phone numbers. [CHAR LIMIT=70] -->
   <string name="dialer_shortcut_contact_not_found_or_has_no_number">Contact no longer available.</string>
 
-  <!-- Error message to display when a tapping a shortcut fails because contact permissions are
-       missing. [CHAR LIMIT=70] -->
-  <string name="dialer_shortcut_no_permissions">Cannot call without contact permissions.</string>
+  <!-- Error message to display when a tapping a shortcut fails because permissions are missing.
+       [CHAR LIMIT=70] -->
+  <string name="dialer_shortcut_no_permissions">Cannot call without permissions.</string>
 
 </resources>

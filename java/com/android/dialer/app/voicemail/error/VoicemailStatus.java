@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.voicemail.error;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.database.VoicemailStatusQuery;
 
@@ -256,5 +258,10 @@ public class VoicemailStatus {
       return defaultValue;
     }
     return cursor.getString(index);
+  }
+
+  public PhoneAccountHandle getPhoneAccountHandle() {
+    return new PhoneAccountHandle(
+        ComponentName.unflattenFromString(phoneAccountComponentName), phoneAccountId);
   }
 }

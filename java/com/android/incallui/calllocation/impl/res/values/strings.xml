@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+  <!-- Description for location map shown during emergency calls. [CHAR LIMIT=NONE] -->
+  <string name="location_map_description">Emergency Location Map</string>
+
+  <!-- Label for the address and map shown during emergency calls. [CHAR LIMIT=20] -->
+  <string name="location_title">You are here</string>
+
+  <string name="lat_long_format"><xliff:g id="latitude">%f</xliff:g>, <xliff:g id="longitude">%f</xliff:g></string>
+
+  <!-- Progress indicator loading text. [CHAR LIMIT=20] -->
+  <string name="location_loading">Finding your location</string>
+
+</resources>

@@ -21,10 +21,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
+import com.google.auto.value.AutoValue;
 
-
-/** Holds the data associated with an enriched call session. */
-
+/** Holds data associated with a call. */
+@AutoValue
 public abstract class MultimediaData {
 
   public static final MultimediaData EMPTY = builder().build();
@@ -34,32 +34,33 @@ public abstract class MultimediaData {
     return new AutoValue_MultimediaData.Builder().setImportant(false);
   }
 
-  /** Returns the call composer subject if set, or null if this isn't a call composer session. */
+  /**
+   * Returns the text part of this data.
+   *
+   * <p>This field is used for both the call composer session and the post call note.
+   */
   @Nullable
-  public abstract String getSubject();
+  public abstract String getText();
 
-  /** Returns the call composer location if set, or null if this isn't a call composer session. */
+  /** Returns the location part of this data. */
   @Nullable
   public abstract Location getLocation();
 
-  /** Returns {@code true} if this session contains image data. */
+  /** Returns {@code true} if this object contains image data. */
   public boolean hasImageData() {
     // imageUri and content are always either both null or nonnull
     return getImageUri() != null && getImageContentType() != null;
   }
 
-  /** Returns the call composer photo if set, or null if this isn't a call composer session. */
+  /** Returns the image uri part of this object's image. */
   @Nullable
   public abstract Uri getImageUri();
 
-  /**
-   * Returns the content type of the image, either image/png or image/jpeg, if set, or null if this
-   * isn't a call composer session.
-   */
+  /** Returns the content type part of this object's image, either image/png or image/jpeg. */
   @Nullable
   public abstract String getImageContentType();
 
-  /** Returns {@code true} if this is a call composer session that's marked as important. */
+  /** Returns {@code true} if this data is marked as important. */
   public abstract boolean isImportant();
 
   /** Returns the string form of this MultimediaData with no PII. */
@@ -68,7 +69,7 @@ public abstract class MultimediaData {
     return String.format(
         "MultimediaData{subject: %s, location: %s, imageUrl: %s, imageContentType: %s, "
             + "important: %b}",
-        LogUtil.sanitizePii(getSubject()),
+        LogUtil.sanitizePii(getText()),
         LogUtil.sanitizePii(getLocation()),
         LogUtil.sanitizePii(getImageUri()),
         getImageContentType(),
@@ -76,10 +77,10 @@ public abstract class MultimediaData {
   }
 
   /** Creates instances of {@link MultimediaData}. */
-
+  @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setSubject(@NonNull String subject);
+    public abstract Builder setText(@NonNull String subject);
 
     public abstract Builder setLocation(@NonNull Location location);
 

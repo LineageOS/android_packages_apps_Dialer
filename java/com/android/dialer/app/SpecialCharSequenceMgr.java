@@ -28,15 +28,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Looper;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,8 +45,11 @@ import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
-import com.android.dialer.app.calllog.PhoneAccountUtils;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,12 +102,19 @@ public class SpecialCharSequenceMgr {
     //get rid of the separators so that the string gets parsed correctly
     String dialString = PhoneNumberUtils.stripSeparators(input);
 
-    return handleDeviceIdDisplay(context, dialString)
+    if (handleDeviceIdDisplay(context, dialString)
         || handleRegulatoryInfoDisplay(context, dialString)
         || handlePinEntry(context, dialString)
         || handleAdnEntry(context, dialString, textField)
-        || handleSecretCode(context, dialString);
+        || handleSecretCode(context, dialString)) {
+      return true;
+    }
 
+    if (MotorolaUtils.handleSpecialCharSequence(context, input)) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -114,10 +123,7 @@ public class SpecialCharSequenceMgr {
    * <p>This should be called when the screen becomes background.
    */
   public static void cleanup() {
-    if (Looper.myLooper() != Looper.getMainLooper()) {
-      Log.wtf(TAG, "cleanup() is called outside the main thread");
-      return;
-    }
+    Assert.isMainThread();
 
     if (sPreviousAdnQueryHandler != null) {
       sPreviousAdnQueryHandler.cancel();
@@ -126,14 +132,21 @@ public class SpecialCharSequenceMgr {
   }
 
   /**
-   * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*. If a secret
-   * code is encountered an Intent is started with the android_secret_code://<code> URI.
+   * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*.
+   * If a secret code is encountered, an Intent is started with the android_secret_code://<code>
+   * URI.
    *
    * @param context the context to use
    * @param input the text to check for a secret code in
-   * @return true if a secret code was encountered
+   * @return true if a secret code was encountered and intent is sent out
    */
   static boolean handleSecretCode(Context context, String input) {
+    // Must use system service on O+ to avoid using broadcasts, which are not allowed on O+.
+    if (BuildCompat.isAtLeastO()) {
+      return context.getSystemService(TelephonyManager.class).sendDialerCode(input);
+    }
+
+    // System service call is not supported pre-O, so must use a broadcast for N-.
     // Secret codes are in the form *#*#<code>#*#*
     int len = input.length();
     if (len > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
@@ -144,7 +157,6 @@ public class SpecialCharSequenceMgr {
       context.sendBroadcast(intent);
       return true;
     }
-
     return false;
   }
 
@@ -237,7 +249,7 @@ public class SpecialCharSequenceMgr {
 
   private static void handleAdnQuery(QueryHandler handler, SimContactQueryCookie cookie, Uri uri) {
     if (handler == null || cookie == null || uri == null) {
-      Log.w(TAG, "queryAdn parameters incorrect");
+      LogUtil.w("SpecialCharSequenceMgr.handleAdnQuery", "queryAdn parameters incorrect");
       return;
     }
 
@@ -325,12 +337,14 @@ public class SpecialCharSequenceMgr {
 
   private static boolean handleRegulatoryInfoDisplay(Context context, String input) {
     if (input.equals(MMI_REGULATORY_INFO_DISPLAY)) {
-      Log.d(TAG, "handleRegulatoryInfoDisplay() sending intent to settings app");
+      LogUtil.i(
+          "SpecialCharSequenceMgr.handleRegulatoryInfoDisplay", "sending intent to settings app");
       Intent showRegInfoIntent = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);
       try {
         context.startActivity(showRegInfoIntent);
       } catch (ActivityNotFoundException e) {
-        Log.e(TAG, "startActivity() failed: " + e);
+        LogUtil.e(
+            "SpecialCharSequenceMgr.handleRegulatoryInfoDisplay", "startActivity() failed: ", e);
       }
       return true;
     }

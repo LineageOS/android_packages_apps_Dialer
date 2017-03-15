@@ -22,4 +22,5 @@
   <dimen name="answer_avatar_size">0dp</dimen>
   <dimen name="answer_importance_margin_bottom">0dp</dimen>
   <bool name="answer_important_call_allowed">false</bool>
+  <integer name="answer_animate_entry_millis">1000</integer>
 </resources>

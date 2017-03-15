@@ -37,7 +37,6 @@ import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
-import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,10 +78,11 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
-import com.android.incallui.maps.StaticMapBinding;
+import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
 import com.android.incallui.util.AccessibilityUtil;
+import com.android.incallui.video.protocol.VideoCallScreen;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -101,7 +101,7 @@ public class AnswerFragment extends Fragment
   static final String ARG_CALL_ID = "call_id";
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_VIDEO_STATE = "video_state";
+  static final String ARG_IS_VIDEO_CALL = "is_video_call";
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
@@ -143,7 +143,7 @@ public class AnswerFragment extends Fragment
   private CreateCustomSmsDialogFragment createCustomSmsDialogFragment;
   private SecondaryBehavior secondaryBehavior = SecondaryBehavior.REJECT_WITH_SMS;
   private ContactGridManager contactGridManager;
-  private AnswerVideoCallScreen answerVideoCallScreen;
+  private VideoCallScreen answerVideoCallScreen;
   private Handler handler = new Handler(Looper.getMainLooper());
 
   private enum SecondaryBehavior {
@@ -288,10 +288,10 @@ public class AnswerFragment extends Fragment
   }
 
   public static AnswerFragment newInstance(
-      String callId, int videoState, boolean isVideoUpgradeRequest) {
+      String callId, boolean isVideoCall, boolean isVideoUpgradeRequest) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
-    bundle.putInt(ARG_VIDEO_STATE, videoState);
+    bundle.putBoolean(ARG_IS_VIDEO_CALL, isVideoCall);
     bundle.putBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST, isVideoUpgradeRequest);
 
     AnswerFragment instance = new AnswerFragment();
@@ -306,18 +306,13 @@ public class AnswerFragment extends Fragment
   }
 
   @Override
-  public int getVideoState() {
-    return getArguments().getInt(ARG_VIDEO_STATE);
-  }
-
-  @Override
   public boolean isVideoUpgradeRequest() {
     return getArguments().getBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST);
   }
 
   @Override
   public void setTextResponses(List<String> textResponses) {
-    if (isVideoCall()) {
+    if (isVideoCall() || isVideoUpgradeRequest()) {
       LogUtil.i("AnswerFragment.setTextResponses", "no-op for video calls");
     } else if (textResponses == null) {
       LogUtil.i("AnswerFragment.setTextResponses", "no text responses, hiding secondary button");
@@ -336,7 +331,9 @@ public class AnswerFragment extends Fragment
 
   private void initSecondaryButton() {
     secondaryBehavior =
-        isVideoCall() ? SecondaryBehavior.ANSWER_VIDEO_AS_AUDIO : SecondaryBehavior.REJECT_WITH_SMS;
+        isVideoCall() || isVideoUpgradeRequest()
+            ? SecondaryBehavior.ANSWER_VIDEO_AS_AUDIO
+            : SecondaryBehavior.REJECT_WITH_SMS;
     secondaryBehavior.applyToView(secondaryButton);
 
     secondaryButton.setOnClickListener(
@@ -351,12 +348,9 @@ public class AnswerFragment extends Fragment
     secondaryButton.setAccessibilityDelegate(accessibilityDelegate);
 
     if (isVideoCall()) {
-      //noinspection WrongConstant
-      if (!isVideoUpgradeRequest() && VideoProfile.isTransmissionEnabled(getVideoState())) {
-        secondaryButton.setVisibility(View.VISIBLE);
-      } else {
-        secondaryButton.setVisibility(View.INVISIBLE);
-      }
+      secondaryButton.setVisibility(View.VISIBLE);
+    } else {
+      secondaryButton.setVisibility(View.INVISIBLE);
     }
   }
 
@@ -448,11 +442,11 @@ public class AnswerFragment extends Fragment
 
     MultimediaData multimediaData = getSessionData();
     if (multimediaData != null
-        && (!TextUtils.isEmpty(multimediaData.getSubject())
+        && (!TextUtils.isEmpty(multimediaData.getText())
             || (multimediaData.getImageUri() != null)
             || (multimediaData.getLocation() != null && canShowMap()))) {
       // Need message fragment
-      String subject = multimediaData.getSubject();
+      String subject = multimediaData.getText();
       Uri imageUri = multimediaData.getImageUri();
       Location location = multimediaData.getLocation();
       if (!(current instanceof MultimediaFragment)
@@ -487,11 +481,11 @@ public class AnswerFragment extends Fragment
   }
 
   private boolean shouldShowAvatar() {
-    return !isVideoCall();
+    return !isVideoCall() && !isVideoUpgradeRequest();
   }
 
   private boolean canShowMap() {
-    return StaticMapBinding.get(getActivity().getApplication()) != null;
+    return MapsComponent.get(getContext()).getMaps().isAvailable();
   }
 
   @Override
@@ -564,7 +558,7 @@ public class AnswerFragment extends Fragment
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     Bundle arguments = getArguments();
     Assert.checkState(arguments.containsKey(ARG_CALL_ID));
-    Assert.checkState(arguments.containsKey(ARG_VIDEO_STATE));
+    Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_CALL));
     Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_UPGRADE_REQUEST));
 
     buttonAcceptClicked = false;
@@ -596,7 +590,6 @@ public class AnswerFragment extends Fragment
             });
     updateImportanceBadgeVisibility();
 
-    boolean isVideoCall = isVideoCall();
     contactGridManager = new ContactGridManager(view, null, 0, false /* showAnonymousAvatar */);
 
     Fragment answerMethod =
@@ -625,9 +618,9 @@ public class AnswerFragment extends Fragment
       flags |= STATUS_BAR_DISABLE_BACK | STATUS_BAR_DISABLE_HOME | STATUS_BAR_DISABLE_RECENT;
     }
     view.setSystemUiVisibility(flags);
-    if (isVideoCall) {
+    if (isVideoCall() || isVideoUpgradeRequest()) {
       if (VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
-        answerVideoCallScreen = new AnswerVideoCallScreen(this, view);
+        answerVideoCallScreen = new AnswerVideoCallScreen(getCallId(), this, view);
       } else {
         view.findViewById(R.id.videocall_video_off).setVisibility(View.VISIBLE);
       }
@@ -649,7 +642,7 @@ public class AnswerFragment extends Fragment
     updateUI();
 
     if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_HAS_ANIMATED_ENTRY)) {
-      ViewUtil.doOnPreDraw(view, false, this::animateEntry);
+      ViewUtil.doOnGlobalLayout(view, this::animateEntry);
     }
   }
 
@@ -667,7 +660,7 @@ public class AnswerFragment extends Fragment
 
     updateUI();
     if (answerVideoCallScreen != null) {
-      answerVideoCallScreen.onStart();
+      answerVideoCallScreen.onVideoScreenStart();
     }
   }
 
@@ -678,7 +671,7 @@ public class AnswerFragment extends Fragment
 
     handler.removeCallbacks(swipeHintRestoreTimer);
     if (answerVideoCallScreen != null) {
-      answerVideoCallScreen.onStop();
+      answerVideoCallScreen.onVideoScreenStop();
     }
   }
 
@@ -722,7 +715,7 @@ public class AnswerFragment extends Fragment
 
   @Override
   public boolean isVideoCall() {
-    return VideoUtils.isVideoCall(getVideoState());
+    return getArguments().getBoolean(ARG_IS_VIDEO_CALL);
   }
 
   @Override
@@ -775,14 +768,12 @@ public class AnswerFragment extends Fragment
     Animator dataContainer = createTranslation(rootView.findViewById(R.id.incall_data_container));
 
     AnimatorSet animatorSet = new AnimatorSet();
-    animatorSet
-        .play(alpha)
-        .with(topRow)
-        .with(contactName)
-        .with(bottomRow)
-        .with(important)
-        .with(dataContainer);
-    animatorSet.setDuration(getResources().getInteger(android.R.integer.config_longAnimTime));
+    AnimatorSet.Builder builder = animatorSet.play(alpha);
+    builder.with(topRow).with(contactName).with(bottomRow).with(important).with(dataContainer);
+    if (isShowingLocationUi()) {
+      builder.with(createTranslation(rootView.findViewById(R.id.incall_location_holder)));
+    }
+    animatorSet.setDuration(getResources().getInteger(R.integer.answer_animate_entry_millis));
     animatorSet.addListener(
         new AnimatorListenerAdapter() {
           @Override
@@ -803,14 +794,7 @@ public class AnswerFragment extends Fragment
   private void acceptCallByUser(boolean answerVideoAsAudio) {
     LogUtil.i("AnswerFragment.acceptCallByUser", answerVideoAsAudio ? " answerVideoAsAudio" : "");
     if (!buttonAcceptClicked) {
-      int desiredVideoState = getVideoState();
-      if (answerVideoAsAudio) {
-        desiredVideoState = VideoProfile.STATE_AUDIO_ONLY;
-      }
-
-      // Notify the lower layer first to start signaling ASAP.
-      answerScreenDelegate.onAnswer(desiredVideoState);
-
+      answerScreenDelegate.onAnswer(answerVideoAsAudio);
       buttonAcceptClicked = true;
     }
   }

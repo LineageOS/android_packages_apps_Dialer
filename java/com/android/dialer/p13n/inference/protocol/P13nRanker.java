@@ -41,13 +41,15 @@ public interface P13nRanker {
    * input cursor is closed or invalid, or if any other error occurs in the ranking process.
    *
    * @param phoneQueryResults cursor of results of a Dialer search query
-   * @param phoneNumberColumnIndex column index of the phone number in the cursor data
+   * @param queryLength length of the search query that resulted in the cursor data, if below 0,
+   *     assumes no length is specified, thus applies the default behavior which is same as when
+   *     queryLength is greater than zero.
    * @return new cursor of data reordered by ranking (or reference to input cursor if order
    *     unchanged)
    */
   @NonNull
   @MainThread
-  Cursor rankCursor(@NonNull Cursor phoneQueryResults, int phoneNumberColumnIndex);
+  Cursor rankCursor(@NonNull Cursor phoneQueryResults, int queryLength);
 
   /**
    * Refreshes ranking cache (pulls fresh contextual features, pre-caches inference results, etc.).
@@ -60,6 +62,10 @@ public interface P13nRanker {
    */
   @MainThread
   void refresh(@Nullable P13nRefreshCompleteListener listener);
+
+  /** Decides if results should be displayed for no-query search. */
+  @MainThread
+  boolean shouldShowEmptyListForNullQuery();
 
   /**
    * Callback class for when ranking refresh has completed.

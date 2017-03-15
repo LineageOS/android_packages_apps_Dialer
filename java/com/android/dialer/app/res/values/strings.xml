@@ -55,9 +55,6 @@
   <!-- Label for action to unblock a number [CHAR LIMIT=48]-->
   <string name="action_unblock_number">Unblock number</string>
 
-  <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
-  <string name="call_details_delete">Delete</string>
-
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="action_edit_number_before_call">Edit number before call</string>
 
@@ -94,7 +91,7 @@
   <!-- Missed call notification label, used when there are two or more missed calls -->
   <string name="notification_missedCallsTitle">Missed calls</string>
   <!-- Missed call notification message used when there are multiple missed calls -->
-  <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%s</xliff:g> missed calls</string>
+  <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%d</xliff:g> missed calls</string>
   <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
        The user will be able to call back to the person or the phone number.
        [CHAR LIMIT=18] -->
@@ -251,14 +248,12 @@
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
   <string name="dialer_settings_label">Settings</string>
 
+  <!-- Label for the simulator submenu. This is used to show actions that are useful for development
+       and testing. [CHAR LIMIT=30]-->
+  <string name="simulator_submenu_label">Simulator</string>
+
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <string name="menu_allContacts">All contacts</string>
-
-  <!-- Title bar for call detail screen -->
-  <string name="callDetailTitle">Call details</string>
-
-  <!-- Toast for call detail screen when couldn't read the requested details -->
-  <string name="toast_call_detail_error">Details not available</string>
 
   <!-- Item label: jump to the in-call DTMF dialpad.
        (Part of a list of options shown in the dialer when another call
@@ -274,52 +269,6 @@
        (Part of a list of options shown in the dialer when another call
        is already in progress.) -->
   <string name="dialer_addAnotherCall">Add call</string>
-
-  <!-- Title for incoming call type. [CHAR LIMIT=40] -->
-  <string name="type_incoming">Incoming call</string>
-
-  <!-- Title for incoming call which was transferred to another device. [CHAR LIMIT=60] -->
-  <string name="type_incoming_pulled">Incoming call transferred to another device</string>
-
-  <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
-  <string name="type_outgoing">Outgoing call</string>
-
-  <!-- Title for outgoing call which was transferred to another device. [CHAR LIMIT=60] -->
-  <string name="type_outgoing_pulled">Outgoing call transferred to another device</string>
-
-  <!-- Title for missed call type. [CHAR LIMIT=40] -->
-  <string name="type_missed">Missed call</string>
-
-  <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video">Incoming video call</string>
-
-  <!-- Title for incoming video call in call details screen which was transferred to another device.
-       [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_pulled">Incoming video call transferred to another device</string>
-
-  <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video">Outgoing video call</string>
-
-  <!-- Title for outgoing video call in call details screen which was transferred to another device.
-       [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_pulled">Outgoing video call transferred to another device</string>
-
-  <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video">Missed video call</string>
-
-  <!-- Title for voicemail details screen -->
-  <string name="type_voicemail">Voicemail</string>
-
-  <!-- Title for rejected call type. [CHAR LIMIT=40] -->
-  <string name="type_rejected">Declined call</string>
-
-  <!-- Title for blocked call type. [CHAR LIMIT=40] -->
-  <string name="type_blocked">Blocked call</string>
-
-  <!-- Title for "answered elsewhere" call type. This will happen if a call was ringing
-       simultaneously on multiple devices, and the user answered it on a device other than the
-       current device. [CHAR LIMIT=60] -->
-  <string name="type_answered_elsewhere">Call answered on another device</string>
 
   <!-- Description for incoming calls going to voice mail vs. not -->
   <string name="actionIncomingCall">Incoming calls</string>
@@ -623,27 +572,9 @@
        [CHAR LIMIT=NONE] -->
   <string name="description_outgoing_call">Call to <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
 
-  <!-- String describing the phone account the call was made on or to. This string will be used
-       in description_incoming_missed_call, description_incoming_answered_call, and
-       description_outgoing_call.
-       Note: AccessibilityServices uses this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE] -->
-  <string name="description_phone_account">on <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g></string>
-
-  <!-- String describing the secondary line number the call was received via.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE]-->
-  <string name="description_via_number">via <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
-
   <!-- TextView text item showing the secondary line number the call was received via.
        [CHAR LIMIT=NONE]-->
   <string name="call_log_via_number">via <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
-
-  <!-- String describing the PhoneAccount and via number that a call was received on, if both are
-       visible.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE]-->
-  <string name="description_via_number_phone_account">on <xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g>, via <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
 
   <!-- The order of the PhoneAccount and via number that a call was received on,
        if both are visible.
@@ -827,6 +758,9 @@
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
   <string name="manage_blocked_numbers_label">Call blocking</string>
 
+  <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
+  <string name="voicemail_settings_label">Voicemail</string>
+
   <!-- Label for a section describing that call blocking is temporarily disabled because an
        emergency call was made. [CHAR LIMIT=50] -->
     <string name="blocked_numbers_disabled_emergency_header_label">
@@ -955,6 +889,6 @@
   <string name="spam_number_call_log_label">Spam</string>
 
   <!-- Shown as a message that notifies the user enriched calling isn't working -->
-  <string name="call_composer_connection_failed"><xliff:g id="feature">%1$s</xliff:g> unavailable right now</string>
+  <string name="call_composer_connection_failed"><xliff:g id="name">%1$s</xliff:g> is offline and can\'t be reached</string>
 
 </resources>

@@ -27,7 +27,7 @@
     android:paddingLeft="@dimen/gallery_item_padding"
     android:paddingRight="@dimen/gallery_item_padding"
     android:paddingTop="@dimen/gallery_item_padding"
-    android:numColumns="3"/>
+    android:numColumns="@integer/gallery_composer_grid_view_rows"/>
 
   <include
     android:id="@+id/permission_view"

@@ -28,7 +28,6 @@ import com.android.dialer.common.ConfigProvider;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.util.AccessibilityUtil;
-import java.util.Calendar;
 
 /**
  * Selects a AnswerHint to show. If there's no suitable hints {@link EmptyAnswerHint} will be used,
@@ -51,10 +50,10 @@ public class AnswerHintFactory {
   @VisibleForTesting
   static final String ANSWERED_COUNT_PREFERENCE_KEY = "answer_hint_answered_count";
 
-  private final EventPayloadLoader eventPayloadLoader;
+  private final PawImageLoader pawImageLoader;
 
-  public AnswerHintFactory(@NonNull EventPayloadLoader eventPayloadLoader) {
-    this.eventPayloadLoader = Assert.isNotNull(eventPayloadLoader);
+  public AnswerHintFactory(@NonNull PawImageLoader pawImageLoader) {
+    this.pawImageLoader = Assert.isNotNull(pawImageLoader);
   }
 
   @NonNull
@@ -69,11 +68,9 @@ public class AnswerHintFactory {
     }
 
     // Display the event answer hint if the payload is available.
-    Drawable eventPayload =
-        eventPayloadLoader.loadPayload(
-            context, System.currentTimeMillis(), Calendar.getInstance().getTimeZone());
+    Drawable eventPayload = pawImageLoader.loadPayload(context);
     if (eventPayload != null) {
-      return new EventAnswerHint(context, eventPayload, puckUpDuration, puckUpDelay);
+      return new PawAnswerHint(context, eventPayload, puckUpDuration, puckUpDelay);
     }
 
     return new EmptyAnswerHint();

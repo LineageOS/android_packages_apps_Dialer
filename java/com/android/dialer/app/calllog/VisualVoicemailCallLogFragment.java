@@ -40,10 +40,13 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   private VoicemailErrorManager mVoicemailAlertManager;
 
+  public VisualVoicemailCallLogFragment() {
+    super(CallLog.Calls.VOICEMAIL_TYPE);
+  }
+
   @Override
   public void onCreate(Bundle state) {
     super.onCreate(state);
-    mCallTypeFilter = CallLog.Calls.VOICEMAIL_TYPE;
     mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter.getInstance(getActivity(), state);
     getActivity()
         .getContentResolver()

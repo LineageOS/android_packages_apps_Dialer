@@ -32,12 +32,15 @@ import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 
 /** Shows a video preview for an incoming call. */
 public class AnswerVideoCallScreen implements VideoCallScreen {
+  @NonNull private final String callId;
   @NonNull private final Fragment fragment;
   @NonNull private final TextureView textureView;
   @NonNull private final VideoCallScreenDelegate delegate;
 
-  public AnswerVideoCallScreen(@NonNull Fragment fragment, @NonNull View view) {
-    this.fragment = fragment;
+  public AnswerVideoCallScreen(
+      @NonNull String callId, @NonNull Fragment fragment, @NonNull View view) {
+    this.callId = Assert.isNotNull(callId);
+    this.fragment = Assert.isNotNull(fragment);
 
     textureView =
         Assert.isNotNull((TextureView) view.findViewById(R.id.incoming_preview_texture_view));
@@ -53,13 +56,15 @@ public class AnswerVideoCallScreen implements VideoCallScreen {
     overlayView.setVisibility(View.VISIBLE);
   }
 
-  public void onStart() {
+  @Override
+  public void onVideoScreenStart() {
     LogUtil.i("AnswerVideoCallScreen.onStart", null);
     delegate.onVideoCallScreenUiReady();
     delegate.getLocalVideoSurfaceTexture().attachToTextureView(textureView);
   }
 
-  public void onStop() {
+  @Override
+  public void onVideoScreenStop() {
     LogUtil.i("AnswerVideoCallScreen.onStop", null);
     delegate.onVideoCallScreenUiUnready();
   }
@@ -96,6 +101,12 @@ public class AnswerVideoCallScreen implements VideoCallScreen {
   @Override
   public Fragment getVideoCallScreenFragment() {
     return fragment;
+  }
+
+  @NonNull
+  @Override
+  public String getCallId() {
+    return callId;
   }
 
   private void updatePreviewVideoScaling() {

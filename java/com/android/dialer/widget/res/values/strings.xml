@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
+  <string name="custom_message_hint">Write a custom message</string>
+</resources>

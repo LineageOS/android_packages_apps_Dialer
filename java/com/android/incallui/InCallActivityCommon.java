@@ -21,7 +21,6 @@ import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -99,6 +98,7 @@ public class InCallActivityCommon {
   private String showPostCharWaitDialogCallId;
   private String showPostCharWaitDialogChars;
   private Dialog dialog;
+  private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
   private InCallOrientationEventListener inCallOrientationEventListener;
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
@@ -496,10 +496,14 @@ public class InCallActivityCommon {
     }
   }
 
-  public void dismissPendingDialogs() {
+  void dismissPendingDialogs() {
     if (dialog != null) {
       dialog.dismiss();
       dialog = null;
+    }
+    if (selectPhoneAccountDialogFragment != null) {
+      selectPhoneAccountDialogFragment.dismiss();
+      selectPhoneAccountDialogFragment = null;
     }
   }
 
@@ -769,9 +773,7 @@ public class InCallActivityCommon {
       outgoingCall = CallList.getInstance().getPendingOutgoingCall();
     }
 
-    boolean isNewOutgoingCall = false;
     if (intent.getBooleanExtra(INTENT_EXTRA_NEW_OUTGOING_CALL, false)) {
-      isNewOutgoingCall = true;
       intent.removeExtra(INTENT_EXTRA_NEW_OUTGOING_CALL);
 
       // InCallActivity is responsible for disconnecting a new outgoing call if there
@@ -789,16 +791,18 @@ public class InCallActivityCommon {
     }
 
     boolean didShowAccountSelectionDialog = maybeShowAccountSelectionDialog();
-    inCallActivity.onResolveIntent(outgoingCall, isNewOutgoingCall, didShowAccountSelectionDialog);
+    if (didShowAccountSelectionDialog) {
+      inCallActivity.hideMainInCallFragment();
+    }
   }
 
   private boolean maybeShowAccountSelectionDialog() {
-    DialerCall call = CallList.getInstance().getWaitingForAccountCall();
-    if (call == null) {
+    DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
+    if (waitingForAccountCall == null) {
       return false;
     }
 
-    Bundle extras = call.getIntentExtras();
+    Bundle extras = waitingForAccountCall.getIntentExtras();
     List<PhoneAccountHandle> phoneAccountHandles;
     if (extras != null) {
       phoneAccountHandles =
@@ -807,14 +811,15 @@ public class InCallActivityCommon {
       phoneAccountHandles = new ArrayList<>();
     }
 
-    DialogFragment dialogFragment =
+    selectPhoneAccountDialogFragment =
         SelectPhoneAccountDialogFragment.newInstance(
             R.string.select_phone_account_for_calls,
             true,
             phoneAccountHandles,
             selectAccountListener,
-            call.getId());
-    dialogFragment.show(inCallActivity.getFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
+            waitingForAccountCall.getId());
+    selectPhoneAccountDialogFragment.show(
+        inCallActivity.getFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
     return true;
   }
 }

@@ -77,6 +77,7 @@ public class MessageComposerFragment extends CallComposerFragment
       customMessage.addTextChangedListener(
           new TextWatcher() {
             @Override
+
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
@@ -90,8 +91,6 @@ public class MessageComposerFragment extends CallComposerFragment
     }
     view.findViewById(R.id.message_chat).setOnClickListener(this);
     view.findViewById(R.id.message_question).setOnClickListener(this);
-
-    setTopView(urgent);
     return view;
   }
 
@@ -139,5 +138,10 @@ public class MessageComposerFragment extends CallComposerFragment
   @Override
   public boolean shouldHide() {
     return TextUtils.isEmpty(getMessage());
+  }
+
+  @Override
+  public void clearComposer() {
+    customMessage.getText().clear();
   }
 }

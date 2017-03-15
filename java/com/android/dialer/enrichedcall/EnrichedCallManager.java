@@ -16,38 +16,25 @@
 
 package com.android.dialer.enrichedcall;
 
-import android.app.Application;
 import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.common.Assert;
+import android.support.annotation.WorkerThread;
+import com.android.dialer.calldetails.nano.CallDetailsEntries;
+import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
+import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
 import com.android.dialer.multimedia.MultimediaData;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
+import java.util.Map;
 
 /** Performs all enriched calling logic. */
 public interface EnrichedCallManager {
 
-  /** Factory for {@link EnrichedCallManager}. */
-  interface Factory {
-    EnrichedCallManager getEnrichedCallManager();
-  }
-
-  /** Accessor for {@link EnrichedCallManager}. */
-  class Accessor {
-
-    /**
-     * @throws IllegalArgumentException if application does not implement {@link
-     *     EnrichedCallManager.Factory}
-     */
-    @NonNull
-    public static EnrichedCallManager getInstance(@NonNull Application application) {
-      Assert.isNotNull(application);
-
-      return ((EnrichedCallManager.Factory) application).getEnrichedCallManager();
-    }
-  }
+  int POST_CALL_NOTE_MAX_CHAR = 60;
 
   /** Receives updates when enriched call capabilities are ready. */
   interface CapabilitiesListener {
@@ -148,6 +135,15 @@ public interface EnrichedCallManager {
   void endCallComposerSession(long sessionId);
 
   /**
+   * Sends a post call note to the given number.
+   *
+   * @throws IllegalArgumentException if message is longer than {@link #POST_CALL_NOTE_MAX_CHAR}
+   *     characters
+   */
+  @MainThread
+  void sendPostCallNote(@NonNull String number, @NonNull String message);
+
+  /**
    * Called once the capabilities are available for a corresponding call to {@link
    * #requestCapabilities(String)}.
    *
@@ -162,8 +158,8 @@ public interface EnrichedCallManager {
   interface StateChangedListener {
 
     /**
-     * Callback fired when state changes. Listeners should call {@link #getSession(String)} to
-     * retrieve the new state.
+     * Callback fired when state changes. Listeners should call {@link #getSession(long)} or {@link
+     * #getSession(String, String)} to retrieve the new state.
      */
     void onEnrichedCallStateChanged();
   }
@@ -177,15 +173,27 @@ public interface EnrichedCallManager {
   @MainThread
   void registerStateChangedListener(@NonNull StateChangedListener listener);
 
-  /** Returns the {@link Session} for the given number, or {@code null} if no session exists. */
+  /** Returns the {@link Session} for the given unique call id, falling back to the number. */
   @MainThread
   @Nullable
-  Session getSession(@NonNull String number);
+  Session getSession(@NonNull String uniqueCallId, @NonNull String number);
 
   /** Returns the {@link Session} for the given sessionId, or {@code null} if no session exists. */
   @MainThread
   @Nullable
   Session getSession(long sessionId);
+
+  /**
+   * Returns a mapping of enriched call data for all of the given {@link CallDetailsEntries}.
+   *
+   * <p>The mapping is created by finding the HistoryResults whose timestamps occurred during or
+   * close after a CallDetailsEntry. A CallDetailsEntry can have multiple HistoryResults in the
+   * event that both a CallComposer message and PostCall message were sent for the same call.
+   */
+  @WorkerThread
+  @NonNull
+  Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
+      @NonNull String number, @NonNull CallDetailsEntries entries);
 
   /**
    * Unregisters the given {@link StateChangedListener}.
@@ -222,4 +230,77 @@ public interface EnrichedCallManager {
    */
   @MainThread
   void onIncomingCallComposerData(long sessionId, @NonNull MultimediaData multimediaData);
+
+  /**
+   * Called when post call data arrives for the given session.
+   *
+   * @throws IllegalStateException if there's no session for the given id
+   */
+  @MainThread
+  void onIncomingPostCallData(long sessionId, @NonNull MultimediaData multimediaData);
+
+  /**
+   * Registers the given {@link VideoShareListener}.
+   *
+   * <p>As a result of this method, the listener will receive updates when any video share state
+   * changes.
+   */
+  @MainThread
+  void registerVideoShareListener(@NonNull VideoShareListener listener);
+
+  /**
+   * Unregisters the given {@link VideoShareListener}.
+   *
+   * <p>As a result of this method, the listener will not receive updates when any video share state
+   * changes.
+   */
+  @MainThread
+  void unregisterVideoShareListener(@NonNull VideoShareListener listener);
+
+  /** Called when an incoming video share invite is received. */
+  @MainThread
+  void onIncomingVideoShareInvite(long sessionId, @NonNull String number);
+
+  /**
+   * Starts a video share session with the given remote number.
+   *
+   * @param number the remote number in any format
+   * @return the id for the started session, or {@link Session#NO_SESSION_ID} if the session fails
+   */
+  @MainThread
+  long startVideoShareSession(@NonNull String number);
+
+  /**
+   * Accepts a video share session invite.
+   *
+   * @param sessionId the session to accept
+   * @return whether or not accepting the session succeeded
+   */
+  @MainThread
+  boolean acceptVideoShareSession(long sessionId);
+
+  /**
+   * Retrieve the session id for an incoming video share invite.
+   *
+   * @param number the remote number in any format
+   * @return the id for the session invite, or {@link Session#NO_SESSION_ID} if there is no invite
+   */
+  @MainThread
+  long getVideoShareInviteSessionId(@NonNull String number);
+
+  /**
+   * Ends the given video share session.
+   *
+   * @param sessionId the id of the session to end
+   */
+  @MainThread
+  void endVideoShareSession(long sessionId);
+
+  /**
+   * Returns the {@link VideoShareSession} for the given sessionId, or {@code null} if no session
+   * exists.
+   */
+  @MainThread
+  @Nullable
+  VideoShareSession getVideoShareSession(long sessionId);
 }

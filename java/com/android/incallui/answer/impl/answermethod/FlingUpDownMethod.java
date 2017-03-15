@@ -60,7 +60,7 @@ import com.android.incallui.answer.impl.answermethod.FlingUpDownTouchHandler.OnP
 import com.android.incallui.answer.impl.classifier.FalsingManager;
 import com.android.incallui.answer.impl.hint.AnswerHint;
 import com.android.incallui.answer.impl.hint.AnswerHintFactory;
-import com.android.incallui.answer.impl.hint.EventPayloadLoaderImpl;
+import com.android.incallui.answer.impl.hint.PawImageLoaderImpl;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -228,7 +228,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     touchHandler = FlingUpDownTouchHandler.attach(view, this, falsingManager);
 
     answerHint =
-        new AnswerHintFactory(new EventPayloadLoaderImpl())
+        new AnswerHintFactory(new PawImageLoaderImpl())
             .create(getContext(), ANIMATE_DURATION_LONG_MILLIS, BOUNCE_ANIMATION_DELAY);
     answerHint.onCreateView(
         layoutInflater,
@@ -319,7 +319,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     if (contactPuckIcon == null) {
       return;
     }
-    if (getParent().isVideoCall()) {
+    if (getParent().isVideoCall() || getParent().isVideoUpgradeRequest()) {
       contactPuckIcon.setImageResource(R.drawable.quantum_ic_videocam_white_24);
     } else {
       contactPuckIcon.setImageResource(R.drawable.quantum_ic_call_white_24);
@@ -348,7 +348,8 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
   }
 
   private boolean shouldShowPhotoInPuck() {
-    return getParent().isVideoCall() && contactPhoto != null;
+    return (getParent().isVideoCall() || getParent().isVideoUpgradeRequest())
+        && contactPhoto != null;
   }
 
   @Override
@@ -387,6 +388,10 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     // Since the animation progression is controlled by user gesture instead of real timeline, the
     // spec timeline can be divided into 9 slots. Each slot is equivalent to 83ms in the spec.
     // Therefore, we use 9 slots of 83ms to map user gesture into the spec timeline.
+    //
+    // See specs -
+    // Accept: https://direct.googleplex.com/#/spec/8510001
+    // Decline: https://direct.googleplex.com/#/spec/3850001
     final float progressSlots = 9;
 
     // Fade out the "swipe up to answer". It only takes 1 slot to complete the fade.
@@ -414,7 +419,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     contactPuckBackground.setColorFilter(destPuckColor);
 
     // Animate decline icon
-    if (isAcceptingFlow || getParent().isVideoCall()) {
+    if (isAcceptingFlow || getParent().isVideoCall() || getParent().isVideoUpgradeRequest()) {
       rotateToward(contactPuckIcon, 0f);
     } else {
       rotateToward(contactPuckIcon, positiveAdjustedProgress * ICON_END_CALL_ROTATION_DEGREES);

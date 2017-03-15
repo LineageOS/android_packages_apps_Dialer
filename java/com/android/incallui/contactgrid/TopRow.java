@@ -21,10 +21,10 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
-import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.VideoUtils;
 import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.videotech.VideoTech;
 
 /**
  * Gets the content of the top row. For example:
@@ -95,7 +95,7 @@ public class TopRow {
   }
 
   private static CharSequence getLabelForIncoming(Context context, PrimaryCallState state) {
-    if (VideoUtils.isVideoCall(state.videoState)) {
+    if (state.isVideoCall) {
       return getLabelForIncomingVideo(context, state.isWifi);
     } else if (state.isWifi && !TextUtils.isEmpty(state.connectionLabel)) {
       return state.connectionLabel;
@@ -120,7 +120,7 @@ public class TopRow {
     if (!TextUtils.isEmpty(state.connectionLabel) && !state.isWifi) {
       return context.getString(R.string.incall_calling_via_template, state.connectionLabel);
     } else {
-      if (VideoUtils.isVideoCall(state.videoState)) {
+      if (state.isVideoCall) {
         if (state.isWifi) {
           return context.getString(R.string.incall_wifi_video_call_requesting);
         } else {
@@ -144,18 +144,18 @@ public class TopRow {
 
   private static CharSequence getLabelForVideoRequest(Context context, PrimaryCallState state) {
     switch (state.sessionModificationState) {
-      case DialerCall.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE:
+      case VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE:
         return context.getString(R.string.incall_video_call_requesting);
-      case DialerCall.SESSION_MODIFICATION_STATE_REQUEST_FAILED:
-      case DialerCall.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED:
+      case VideoTech.SESSION_MODIFICATION_STATE_REQUEST_FAILED:
+      case VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED:
         return context.getString(R.string.incall_video_call_request_failed);
-      case DialerCall.SESSION_MODIFICATION_STATE_REQUEST_REJECTED:
+      case VideoTech.SESSION_MODIFICATION_STATE_REQUEST_REJECTED:
         return context.getString(R.string.incall_video_call_request_rejected);
-      case DialerCall.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT:
+      case VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT:
         return context.getString(R.string.incall_video_call_request_timed_out);
-      case DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST:
+      case VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST:
         return getLabelForIncomingVideo(context, state.isWifi);
-      case DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST:
+      case VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST:
       default:
         Assert.fail();
         return null;

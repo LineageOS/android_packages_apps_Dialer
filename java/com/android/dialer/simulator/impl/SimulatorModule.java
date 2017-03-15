@@ -16,19 +16,15 @@
 
 package com.android.dialer.simulator.impl;
 
-import android.content.Context;
-import android.view.ActionProvider;
 import com.android.dialer.simulator.Simulator;
+import dagger.Binds;
+import dagger.Module;
+import javax.inject.Singleton;
 
-/** The entry point for the simulator module. */
-public final class SimulatorModule implements Simulator {
-  @Override
-  public boolean shouldShow() {
-    return true;
-  }
-
-  @Override
-  public ActionProvider getActionProvider(Context context) {
-    return new SimulatorActionProvider(context);
-  }
+/** This module provides an instance of the simulator. */
+@Module
+public abstract class SimulatorModule {
+  @Binds
+  @Singleton
+  public abstract Simulator bindsSimulator(SimulatorImpl simulator);
 }

@@ -135,11 +135,6 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
   }
 
   @Override
-  public int getActionBarHideOffset() {
-    return 0;
-  }
-
-  @Override
   public int getActionBarHeight() {
     return 0;
   }

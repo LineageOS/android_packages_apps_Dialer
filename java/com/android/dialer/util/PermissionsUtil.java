@@ -47,6 +47,10 @@ public class PermissionsUtil {
     return hasPermission(context, permission.CAMERA);
   }
 
+  public static boolean hasMicrophonePermissions(Context context) {
+    return hasPermission(context, permission.RECORD_AUDIO);
+  }
+
   public static boolean hasPermission(Context context, String permission) {
     return ContextCompat.checkSelfPermission(context, permission)
         == PackageManager.PERMISSION_GRANTED;

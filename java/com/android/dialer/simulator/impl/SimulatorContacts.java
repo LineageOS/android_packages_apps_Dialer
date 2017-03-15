@@ -31,7 +31,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
-
+import com.google.auto.value.AutoValue;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -190,7 +190,7 @@ final class SimulatorContacts {
     }
   }
 
-
+  @AutoValue
   abstract static class Contact {
     @NonNull
     abstract String getAccountType();
@@ -221,7 +221,7 @@ final class SimulatorContacts {
           .setEmails(new ArrayList<>());
     }
 
-
+    @AutoValue.Builder
     abstract static class Builder {
       @NonNull private final List<PhoneNumber> phoneNumbers = new ArrayList<>();
       @NonNull private final List<Email> emails = new ArrayList<>();

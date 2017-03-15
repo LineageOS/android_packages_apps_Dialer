@@ -23,12 +23,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
-import android.util.Log;
+import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
   private static boolean sWarningLogged = false;
+  private static Boolean isDefaultDialerForTesting;
+  private static Boolean hasPermissionForTesting;
 
   public static void showInCallScreen(Context context, boolean showDialpad) {
     if (hasReadPhoneStatePermission(context)) {
@@ -48,7 +51,7 @@ public class TelecomUtil {
         getTelecomManager(context).showInCallScreen(showDialpad);
       } catch (SecurityException e) {
         // Just in case
-        Log.w(TAG, "TelecomManager.showInCallScreen called without permission.");
+        LogUtil.w(TAG, "TelecomManager.showInCallScreen called without permission.");
       }
     }
   }
@@ -59,7 +62,7 @@ public class TelecomUtil {
         getTelecomManager(context).silenceRinger();
       } catch (SecurityException e) {
         // Just in case
-        Log.w(TAG, "TelecomManager.silenceRinger called without permission.");
+        LogUtil.w(TAG, "TelecomManager.silenceRinger called without permission.");
       }
     }
   }
@@ -69,7 +72,7 @@ public class TelecomUtil {
       try {
         getTelecomManager(context).cancelMissedCallsNotification();
       } catch (SecurityException e) {
-        Log.w(TAG, "TelecomManager.cancelMissedCalls called without permission.");
+        LogUtil.w(TAG, "TelecomManager.cancelMissedCalls called without permission.");
       }
     }
   }
@@ -79,7 +82,7 @@ public class TelecomUtil {
       try {
         return getTelecomManager(context).getAdnUriForPhoneAccount(handle);
       } catch (SecurityException e) {
-        Log.w(TAG, "TelecomManager.getAdnUriForPhoneAccount called without permission.");
+        LogUtil.w(TAG, "TelecomManager.getAdnUriForPhoneAccount called without permission.");
       }
     }
     return null;
@@ -95,7 +98,7 @@ public class TelecomUtil {
           return getTelecomManager(context).handleMmi(dialString, handle);
         }
       } catch (SecurityException e) {
-        Log.w(TAG, "TelecomManager.handleMmi called without permission.");
+        LogUtil.w(TAG, "TelecomManager.handleMmi called without permission.");
       }
     }
     return false;
@@ -186,11 +189,17 @@ public class TelecomUtil {
   }
 
   private static boolean hasPermission(Context context, String permission) {
+    if (hasPermissionForTesting != null) {
+      return hasPermissionForTesting;
+    }
     return ContextCompat.checkSelfPermission(context, permission)
         == PackageManager.PERMISSION_GRANTED;
   }
 
   public static boolean isDefaultDialer(Context context) {
+    if (isDefaultDialerForTesting != null) {
+      return isDefaultDialerForTesting;
+    }
     final boolean result =
         TextUtils.equals(
             context.getPackageName(), getTelecomManager(context).getDefaultDialerPackage());
@@ -199,7 +208,7 @@ public class TelecomUtil {
     } else {
       if (!sWarningLogged) {
         // Log only once to prevent spam.
-        Log.w(TAG, "Dialer is not currently set to be default dialer");
+        LogUtil.w(TAG, "Dialer is not currently set to be default dialer");
         sWarningLogged = true;
       }
     }
@@ -208,5 +217,15 @@ public class TelecomUtil {
 
   private static TelecomManager getTelecomManager(Context context) {
     return (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setIsDefaultDialerForTesting(Boolean defaultDialer) {
+    isDefaultDialerForTesting = defaultDialer;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setHasPermissionForTesting(Boolean hasPermission) {
+    hasPermissionForTesting = hasPermission;
   }
 }

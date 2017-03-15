@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.v4.os.UserManagerCompat;
+import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -71,18 +72,26 @@ public class AnswerScreenPresenter
   }
 
   @Override
-  public void onAnswer(int videoState) {
+  public void onAnswer(boolean answerVideoAsAudio) {
     if (answerScreen.isVideoUpgradeRequest()) {
-      call.acceptUpgradeRequest(videoState);
+      if (answerVideoAsAudio) {
+        call.getVideoTech().acceptVideoRequestAsAudio();
+      } else {
+        call.getVideoTech().acceptVideoRequest();
+      }
     } else {
-      call.answer(videoState);
+      if (answerVideoAsAudio) {
+        call.answer(VideoProfile.STATE_AUDIO_ONLY);
+      } else {
+        call.answer();
+      }
     }
   }
 
   @Override
   public void onReject() {
     if (answerScreen.isVideoUpgradeRequest()) {
-      call.declineUpgradeRequest();
+      call.getVideoTech().declineVideoRequest();
     } else {
       call.reject(false /* rejectWithMessage */, null);
     }

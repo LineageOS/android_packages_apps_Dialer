@@ -20,7 +20,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
-
+import com.google.auto.value.AutoValue;
 
 /**
  * Value type holding references to all data that could be provided for the call composer.
@@ -29,19 +29,19 @@ import com.android.dialer.common.Assert;
  *
  * <pre>
  *   OutgoingCallComposerData.builder.build(); // throws exception, no data set
- *   OutgoingCallComposerData
- *       .setSubject(subject)
+ *   OutgoingCallComposerData.builder
+ *       .setText(subject)
  *       .build(); // Success
- *   OutgoingCallComposerData
+ *   OutgoingCallComposerData.builder
  *       .setImageData(uri, contentType)
  *       .build(); // Success
- *   OutgoingCallComposerData
- *      .setSubject(subject)
+ *   OutgoingCallComposerData.builder
+ *      .setText(subject)
  *      .setImageData(uri, contentType)
  *      .build(); // Success
  * </pre>
  */
-
+@AutoValue
 public abstract class OutgoingCallComposerData {
 
   public static Builder builder() {
@@ -62,7 +62,7 @@ public abstract class OutgoingCallComposerData {
   public abstract String getImageContentType();
 
   /** Builds instances of {@link OutgoingCallComposerData}. */
-
+  @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setSubject(String subject);
 

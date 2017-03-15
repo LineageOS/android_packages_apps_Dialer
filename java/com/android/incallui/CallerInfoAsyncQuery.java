@@ -55,7 +55,7 @@ import java.util.Arrays;
 public class CallerInfoAsyncQuery {
 
   /** Interface for a CallerInfoAsyncQueryHandler result return. */
-  public interface OnQueryCompleteListener {
+  interface OnQueryCompleteListener {
 
     /** Called when the query is complete. */
     @MainThread
@@ -85,7 +85,7 @@ public class CallerInfoAsyncQuery {
   private CallerInfoAsyncQuery() {}
 
   @RequiresPermission(Manifest.permission.READ_CONTACTS)
-  public static void startQuery(
+  static void startQuery(
       final int token,
       final Context context,
       final CallerInfo info,
@@ -99,7 +99,7 @@ public class CallerInfoAsyncQuery {
         new OnQueryCompleteListener() {
           @Override
           public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
-            Log.d(LOG_TAG, "contactsProviderQueryCompleteListener done");
+            Log.d(LOG_TAG, "contactsProviderQueryCompleteListener onQueryComplete");
             // If there are no other directory queries, make sure that the listener is
             // notified of this result.  see b/27621628
             if ((ci != null && ci.contactExists)
@@ -112,6 +112,7 @@ public class CallerInfoAsyncQuery {
 
           @Override
           public void onDataLoaded(int token, Object cookie, CallerInfo ci) {
+            Log.d(LOG_TAG, "contactsProviderQueryCompleteListener onDataLoaded");
             listener.onDataLoaded(token, cookie, ci);
           }
         };
@@ -270,9 +271,9 @@ public class CallerInfoAsyncQuery {
   /* Directory lookup related code - END */
 
   /** Simple exception used to communicate problems with the query pool. */
-  public static class QueryPoolException extends SQLException {
+  private static class QueryPoolException extends SQLException {
 
-    public QueryPoolException(String error) {
+    QueryPoolException(String error) {
       super(error);
     }
   }
@@ -337,7 +338,7 @@ public class CallerInfoAsyncQuery {
       }
     }
 
-    public OnQueryCompleteListener newListener(long directoryId) {
+    OnQueryCompleteListener newListener(long directoryId) {
       return new DirectoryQueryCompleteListener(directoryId);
     }
 
@@ -351,11 +352,13 @@ public class CallerInfoAsyncQuery {
 
       @Override
       public void onDataLoaded(int token, Object cookie, CallerInfo ci) {
+        Log.d(LOG_TAG, "DirectoryQueryCompleteListener.onDataLoaded");
         mListener.onDataLoaded(token, cookie, ci);
       }
 
       @Override
       public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+        Log.d(LOG_TAG, "DirectoryQueryCompleteListener.onQueryComplete");
         onDirectoryQueryComplete(token, cookie, ci, mDirectoryId);
       }
     }
@@ -446,7 +449,7 @@ public class CallerInfoAsyncQuery {
       mCallerInfo = null;
     }
 
-    protected void updateData(int token, Object cookie, Cursor cursor) {
+    void updateData(int token, Object cookie, Cursor cursor) {
       try {
         Log.d(this, "##### updateData() #####  for token: " + token);
 
@@ -549,9 +552,9 @@ public class CallerInfoAsyncQuery {
      * times before the query is complete. All accesses (listeners) must be queued up and informed
      * in order when the query is complete.
      */
-    protected class CallerInfoWorkerHandler extends WorkerHandler {
+    class CallerInfoWorkerHandler extends WorkerHandler {
 
-      public CallerInfoWorkerHandler(Looper looper) {
+      CallerInfoWorkerHandler(Looper looper) {
         super(looper);
       }
 
@@ -624,7 +627,7 @@ public class CallerInfoAsyncQuery {
             case EVENT_ADD_LISTENER:
               updateData(msg.arg1, cw, (Cursor) args.result);
               break;
-            default:
+            default: // fall out
           }
           Message reply = args.handler.obtainMessage(msg.what);
           reply.obj = args;

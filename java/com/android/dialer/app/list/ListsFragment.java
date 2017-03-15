@@ -30,19 +30,16 @@ import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment;
-import com.android.dialer.app.calllog.CallLogNotificationsHelper;
+import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler.Source;
-import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.logging.Logger;
@@ -92,7 +89,6 @@ public class ListsFragment extends Fragment
   public static final int TAB_COUNT_DEFAULT = 3;
   public static final int TAB_COUNT_WITH_VOICEMAIL = 4;
   private static final String TAG = "ListsFragment";
-  private ActionBar mActionBar;
   private ViewPager mViewPager;
   private ViewPagerTabs mViewPagerTabs;
   private ViewPagerAdapter mViewPagerAdapter;
@@ -108,8 +104,7 @@ public class ListsFragment extends Fragment
   private boolean mHasFetchedVoicemailStatus;
   private boolean mShowVoicemailTabAfterVoicemailStatusIsFetched;
   private VoicemailStatusHelper mVoicemailStatusHelper;
-  private ArrayList<OnPageChangeListener> mOnPageChangeListeners =
-      new ArrayList<OnPageChangeListener>();
+  private final ArrayList<OnPageChangeListener> mOnPageChangeListeners = new ArrayList<>();
   private String[] mTabTitles;
   private int[] mTabIcons;
   /** The position of the currently selected tab. */
@@ -149,7 +144,6 @@ public class ListsFragment extends Fragment
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
-    mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
     if (getUserVisibleHint()) {
       sendScreenViewForCurrentPosition();
     }
@@ -329,7 +323,7 @@ public class ListsFragment extends Fragment
           .putBoolean(
               VisualVoicemailEnabledChecker.PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER,
               hasActiveVoicemailProvider)
-          .commit();
+          .apply();
     }
 
     if (hasActiveVoicemailProvider) {
@@ -403,7 +397,7 @@ public class ListsFragment extends Fragment
   public void markMissedCallsAsReadAndRemoveNotifications() {
     if (mCallLogQueryHandler != null) {
       mCallLogQueryHandler.markMissedCallsAsRead();
-      CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
+      CallLogNotificationsService.markNewMissedCallsAsOld(getContext(), null);
     }
   }
 
@@ -411,11 +405,6 @@ public class ListsFragment extends Fragment
     mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
     mRemoveView.setAlpha(show ? 0 : 1);
     mRemoveView.animate().alpha(show ? 1 : 0).start();
-  }
-
-  public boolean shouldShowActionBar() {
-    // TODO: Update this based on scroll state.
-    return mActionBar != null;
   }
 
   public SpeedDialFragment getSpeedDialFragment() {
@@ -486,11 +475,6 @@ public class ListsFragment extends Fragment
     throw new IllegalStateException("No fragment at position " + position);
   }
 
-  public interface HostInterface {
-
-    ActionBarController getActionBarController();
-  }
-
   public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragments = new ArrayList<>();
@@ -518,7 +502,7 @@ public class ListsFragment extends Fragment
           return mSpeedDialFragment;
         case TAB_INDEX_HISTORY:
           if (mHistoryFragment == null) {
-            mHistoryFragment = new CallLogFragment();
+            mHistoryFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
           }
           return mHistoryFragment;
         case TAB_INDEX_ALL_CONTACTS:

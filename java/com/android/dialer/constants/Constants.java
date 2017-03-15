@@ -19,7 +19,6 @@ package com.android.dialer.constants;
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
 import com.android.dialer.proguard.UsedByReflection;
-import com.android.dialer.constants.ConstantsImpl;
 
 /**
  * Utility to access constants that are different across build variants (Google Dialer, AOSP,
@@ -29,11 +28,22 @@ import com.android.dialer.constants.ConstantsImpl;
  */
 @UsedByReflection(value = "Constants.java")
 public abstract class Constants {
-  private static Constants instance = new ConstantsImpl();
+  private static Constants instance;
   private static boolean didInitializeInstance;
 
   @NonNull
   public static synchronized Constants get() {
+    if (!didInitializeInstance) {
+      didInitializeInstance = true;
+      try {
+        Class<?> clazz = Class.forName(Constants.class.getName() + "Impl");
+        instance = (Constants) clazz.getConstructor().newInstance();
+      } catch (ReflectiveOperationException e) {
+        Assert.fail(
+            "Unable to create an instance of ConstantsImpl. To fix this error include one of the "
+                + "constants modules (googledialer, aosp etc...) in your target.");
+      }
+    }
     return instance;
   }
 

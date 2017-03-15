@@ -24,6 +24,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Trace;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
@@ -47,10 +48,15 @@ import com.android.dialer.callintent.nano.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.logging.nano.ContactLookupResult;
-import com.android.dialer.util.CallUtil;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
+import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.VideoTech.VideoTechListener;
+import com.android.incallui.videotech.empty.EmptyVideoTech;
+import com.android.incallui.videotech.ims.ImsVideoTech;
+import com.android.incallui.videotech.rcs.RcsVideoShare;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -62,11 +68,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /** Describes a single call and its state. */
-public class DialerCall {
+public class DialerCall implements VideoTechListener {
 
   public static final int CALL_HISTORY_STATUS_UNKNOWN = 0;
   public static final int CALL_HISTORY_STATUS_PRESENT = 1;
   public static final int CALL_HISTORY_STATUS_NOT_PRESENT = 2;
+
+  // Hard coded property for {@code Call}. Upstreamed change from Motorola.
+  // TODO(b/35359461): Move it to Telecom in framework.
+  public static final int PROPERTY_CODEC_KNOWN = 0x04000000;
+
   private static final String ID_PREFIX = "DialerCall_";
   private static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
       "emergency_callback_window_millis";
@@ -82,13 +93,13 @@ public class DialerCall {
   private final LatencyReport mLatencyReport;
   private final String mId;
   private final List<String> mChildCallIds = new ArrayList<>();
-  private final VideoSettings mVideoSettings = new VideoSettings();
   private final LogState mLogState = new LogState();
   private final Context mContext;
   private final DialerCallDelegate mDialerCallDelegate;
   private final List<DialerCallListener> mListeners = new CopyOnWriteArrayList<>();
   private final List<CannedTextResponsesLoadedListener> mCannedTextResponsesLoadedListeners =
       new CopyOnWriteArrayList<>();
+  private final VideoTechManager mVideoTechManager;
 
   private boolean mIsEmergencyCall;
   private Uri mHandle;
@@ -98,13 +109,6 @@ public class DialerCall {
   private boolean hasShownWiFiToLteHandoverToast;
   private boolean doNotShowDialogForHandoffToWifiFailure;
 
-  @SessionModificationState private int mSessionModificationState;
-  private int mVideoState;
-  /** mRequestedVideoState is used to store requested upgrade / downgrade video state */
-  private int mRequestedVideoState = VideoProfile.STATE_AUDIO_ONLY;
-
-  private InCallVideoCallCallback mVideoCallCallback;
-  private boolean mIsVideoCallCallbackRegistered;
   private String mChildNumber;
   private String mLastForwardedNumber;
   private String mCallSubject;
@@ -118,6 +122,7 @@ public class DialerCall {
   private boolean didShowCameraPermission;
   private String callProviderLabel;
   private String callbackNumber;
+  private int mCameraDirection = CameraDirection.CAMERA_DIRECTION_UNKNOWN;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -125,7 +130,7 @@ public class DialerCall {
 
   /**
    * Whether the call is put on hold by remote party. This is different than the {@link
-   * State.ONHOLD} state which indicates that the call is being held locally on the device.
+   * State#ONHOLD} state which indicates that the call is being held locally on the device.
    */
   private boolean isRemotelyHeld;
 
@@ -189,7 +194,7 @@ public class DialerCall {
         @Override
         public void onCallDestroyed(Call call) {
           LogUtil.v("TelecomCallCallback.onStateChanged", "call=" + call);
-          call.unregisterCallback(this);
+          unregisterCallback();
         }
 
         @Override
@@ -248,7 +253,10 @@ public class DialerCall {
     mLatencyReport = latencyReport;
     mId = ID_PREFIX + Integer.toString(sIdCounter++);
 
-    updateFromTelecomCall(registerCallback);
+    // Must be after assigning mTelecomCall
+    mVideoTechManager = new VideoTechManager(this);
+
+    updateFromTelecomCall();
 
     if (registerCallback) {
       mTelecomCall.registerCallback(mTelecomCallCallback);
@@ -348,19 +356,24 @@ public class DialerCall {
     return mTelecomCall.getDetails().getStatusHints();
   }
 
-  /**
-   * @return video settings of the call, null if the call is not a video call.
-   * @see VideoProfile
-   */
-  public VideoSettings getVideoSettings() {
-    return mVideoSettings;
+  public int getCameraDir() {
+    return mCameraDirection;
+  }
+
+  public void setCameraDir(int cameraDir) {
+    if (cameraDir == CameraDirection.CAMERA_DIRECTION_FRONT_FACING
+        || cameraDir == CameraDirection.CAMERA_DIRECTION_BACK_FACING) {
+      mCameraDirection = cameraDir;
+    } else {
+      mCameraDirection = CameraDirection.CAMERA_DIRECTION_UNKNOWN;
+    }
   }
 
   private void update() {
     Trace.beginSection("Update");
     int oldState = getState();
     // We want to potentially register a video call callback here.
-    updateFromTelecomCall(true /* registerCallback */);
+    updateFromTelecomCall();
     if (oldState != getState() && getState() == DialerCall.State.DISCONNECTED) {
       for (DialerCallListener listener : mListeners) {
         listener.onDialerCallDisconnect();
@@ -373,21 +386,15 @@ public class DialerCall {
     Trace.endSection();
   }
 
-  private void updateFromTelecomCall(boolean registerCallback) {
+  private void updateFromTelecomCall() {
     LogUtil.v("DialerCall.updateFromTelecomCall", mTelecomCall.toString());
+
+    mVideoTechManager.dispatchCallStateChanged(mTelecomCall.getState());
+
     final int translatedState = translateState(mTelecomCall.getState());
     if (mState != State.BLOCKED) {
       setState(translatedState);
       setDisconnectCause(mTelecomCall.getDetails().getDisconnectCause());
-      maybeCancelVideoUpgrade(mTelecomCall.getDetails().getVideoState());
-    }
-
-    if (registerCallback && mTelecomCall.getVideoCall() != null) {
-      if (mVideoCallCallback == null) {
-        mVideoCallCallback = new InCallVideoCallCallback(this);
-      }
-      mTelecomCall.getVideoCall().registerCallback(mVideoCallCallback);
-      mIsVideoCallCallbackRegistered = true;
     }
 
     mChildCallIds.clear();
@@ -427,19 +434,6 @@ public class DialerCall {
               phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_CALL_SUBJECT);
         }
       }
-    }
-
-    if (mSessionModificationState
-            == DialerCall.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE
-        && isVideoCall()) {
-      // We find out in {@link InCallVideoCallCallback.onSessionModifyResponseReceived}
-      // whether the video upgrade request was accepted. We don't clear the session modification
-      // state right away though to avoid having the UI switch from video to voice to video.
-      // Once the underlying telecom call updates to video mode it's safe to clear the state.
-      LogUtil.i(
-          "DialerCall.updateFromTelecomCall",
-          "upgraded to video, clearing session modification state");
-      setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
     }
   }
 
@@ -516,25 +510,6 @@ public class DialerCall {
         mCallSubject = callSubject;
       }
     }
-  }
-
-  /**
-   * Determines if a received upgrade to video request should be cancelled. This can happen if
-   * another InCall UI responds to the upgrade to video request.
-   *
-   * @param newVideoState The new video state.
-   */
-  private void maybeCancelVideoUpgrade(int newVideoState) {
-    boolean isVideoStateChanged = mVideoState != newVideoState;
-
-    if (mSessionModificationState
-            == DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST
-        && isVideoStateChanged) {
-
-      LogUtil.i("DialerCall.maybeCancelVideoUpgrade", "cancelling upgrade notification");
-      setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
-    }
-    mVideoState = newVideoState;
   }
 
   public String getId() {
@@ -710,6 +685,7 @@ public class DialerCall {
     return mTelecomCall.getDetails().hasProperty(property);
   }
 
+  @NonNull
   public String getUniqueCallId() {
     return uniqueCallId;
   }
@@ -733,15 +709,9 @@ public class DialerCall {
     return mTelecomCall == null ? null : mTelecomCall.getDetails().getAccountHandle();
   }
 
-  /**
-   * @return The {@link VideoCall} instance associated with the {@link Call}. Will return {@code
-   *     null} until {@link #updateFromTelecomCall(boolean)} has registered a valid callback on the
-   *     {@link VideoCall}.
-   */
+  /** @return The {@link VideoCall} instance associated with the {@link Call}. */
   public VideoCall getVideoCall() {
-    return mTelecomCall == null || !mIsVideoCallCallbackRegistered
-        ? null
-        : mTelecomCall.getVideoCall();
+    return mTelecomCall == null ? null : mTelecomCall.getVideoCall();
   }
 
   public List<String> getChildCallIds() {
@@ -761,7 +731,15 @@ public class DialerCall {
   }
 
   public boolean isVideoCall() {
-    return CallUtil.isVideoEnabled(mContext) && VideoUtils.isVideoCall(getVideoState());
+    return getVideoTech().isTransmittingOrReceiving();
+  }
+
+  public boolean hasReceivedVideoUpgradeRequest() {
+    return VideoUtils.hasReceivedVideoUpgradeRequest(getVideoTech().getSessionModificationState());
+  }
+
+  public boolean hasSentVideoUpgradeRequest() {
+    return VideoUtils.hasSentVideoUpgradeRequest(getVideoTech().getSessionModificationState());
   }
 
   /**
@@ -770,76 +748,6 @@ public class DialerCall {
    */
   private void updateEmergencyCallState() {
     mIsEmergencyCall = TelecomCallUtil.isEmergencyCall(mTelecomCall);
-  }
-
-  /**
-   * Gets the video state which was requested via a session modification request.
-   *
-   * @return The video state.
-   */
-  public int getRequestedVideoState() {
-    return mRequestedVideoState;
-  }
-
-  /**
-   * Handles incoming session modification requests. Stores the pending video request and sets the
-   * session modification state to {@link
-   * DialerCall#SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST} so that we can keep
-   * track of the fact the request was received. Only upgrade requests require user confirmation and
-   * will be handled by this method. The remote user can turn off their own camera without
-   * confirmation.
-   *
-   * @param videoState The requested video state.
-   */
-  public void setRequestedVideoState(int videoState) {
-    LogUtil.v("DialerCall.setRequestedVideoState", "videoState: " + videoState);
-    if (videoState == getVideoState()) {
-      LogUtil.e("DialerCall.setRequestedVideoState", "clearing session modification state");
-      setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
-      return;
-    }
-
-    mRequestedVideoState = videoState;
-    setSessionModificationState(
-        DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST);
-    for (DialerCallListener listener : mListeners) {
-      listener.onDialerCallUpgradeToVideo();
-    }
-
-    LogUtil.i(
-        "DialerCall.setRequestedVideoState",
-        "mSessionModificationState: %d, videoState: %d",
-        mSessionModificationState,
-        videoState);
-    update();
-  }
-
-  /**
-   * Gets the current video session modification state.
-   *
-   * @return The session modification state.
-   */
-  @SessionModificationState
-  public int getSessionModificationState() {
-    return mSessionModificationState;
-  }
-
-  /**
-   * Set the session modification state. Used to keep track of pending video session modification
-   * operations and to inform listeners of these changes.
-   *
-   * @param state the new session modification state.
-   */
-  public void setSessionModificationState(@SessionModificationState int state) {
-    boolean hasChanged = mSessionModificationState != state;
-    if (hasChanged) {
-      LogUtil.i(
-          "DialerCall.setSessionModificationState", "%d -> %d", mSessionModificationState, state);
-      mSessionModificationState = state;
-      for (DialerCallListener listener : mListeners) {
-        listener.onDialerCallSessionModificationStateChange(state);
-      }
-    }
   }
 
   public LogState getLogState() {
@@ -859,24 +767,6 @@ public class DialerCall {
   public boolean isExternalCall() {
     return VERSION.SDK_INT >= VERSION_CODES.N
         && hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
-  }
-
-  /**
-   * Determines if the external call is pullable.
-   *
-   * <p>An external call is one which does not exist locally for the {@link
-   * android.telecom.ConnectionService} it is associated with. An external call may be "pullable",
-   * which means that the user can request it be transferred to the current device.
-   *
-   * <p>External calls are only supported in N and higher.
-   *
-   * @return {@code true} if the call is an external call, {@code false} otherwise.
-   */
-  public boolean isPullableExternalCall() {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        && (mTelecomCall.getDetails().getCallCapabilities()
-                & CallCompat.Details.CAPABILITY_CAN_PULL_CALL)
-            == CallCompat.Details.CAPABILITY_CAN_PULL_CALL;
   }
 
   /**
@@ -922,7 +812,7 @@ public class DialerCall {
     return String.format(
         Locale.US,
         "[%s, %s, %s, %s, children:%s, parent:%s, "
-            + "conferenceable:%s, videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
+            + "conferenceable:%s, videoState:%s, mSessionModificationState:%d, CameraDir:%s]",
         mId,
         State.toString(getState()),
         Details.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
@@ -931,8 +821,8 @@ public class DialerCall {
         getParentId(),
         this.mTelecomCall.getConferenceableCalls(),
         VideoProfile.videoStateToString(mTelecomCall.getDetails().getVideoState()),
-        mSessionModificationState,
-        getVideoSettings());
+        getVideoTech().getSessionModificationState(),
+        getCameraDir());
   }
 
   public String toSimpleString() {
@@ -1012,20 +902,6 @@ public class DialerCall {
     mTelecomCall.unregisterCallback(mTelecomCallCallback);
   }
 
-  public void acceptUpgradeRequest(int videoState) {
-    LogUtil.i("DialerCall.acceptUpgradeRequest", "videoState: " + videoState);
-    VideoProfile videoProfile = new VideoProfile(videoState);
-    getVideoCall().sendSessionModifyResponse(videoProfile);
-    setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
-  }
-
-  public void declineUpgradeRequest() {
-    LogUtil.i("DialerCall.declineUpgradeRequest", "");
-    VideoProfile videoProfile = new VideoProfile(getVideoState());
-    getVideoCall().sendSessionModifyResponse(videoProfile);
-    setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
-  }
-
   public void phoneAccountSelected(PhoneAccountHandle accountHandle, boolean setDefault) {
     LogUtil.i(
         "DialerCall.phoneAccountSelected",
@@ -1064,6 +940,10 @@ public class DialerCall {
     mTelecomCall.answer(videoState);
   }
 
+  public void answer() {
+    answer(mTelecomCall.getDetails().getVideoState());
+  }
+
   public void reject(boolean rejectWithMessage, String message) {
     LogUtil.i("DialerCall.reject", "");
     mTelecomCall.reject(rejectWithMessage, message);
@@ -1093,6 +973,10 @@ public class DialerCall {
       return null;
     }
     return mContext.getSystemService(TelecomManager.class).getPhoneAccount(accountHandle);
+  }
+
+  public VideoTech getVideoTech() {
+    return mVideoTechManager.getVideoTech();
   }
 
   public String getCallbackNumber() {
@@ -1146,6 +1030,39 @@ public class DialerCall {
     return null;
   }
 
+  @Override
+  public void onVideoTechStateChanged() {
+    update();
+  }
+
+  @Override
+  public void onSessionModificationStateChanged() {
+    for (DialerCallListener listener : mListeners) {
+      listener.onDialerCallSessionModificationStateChange();
+    }
+  }
+
+  @Override
+  public void onCameraDimensionsChanged(int width, int height) {
+    InCallVideoCallCallbackNotifier.getInstance().cameraDimensionsChanged(this, width, height);
+  }
+
+  @Override
+  public void onPeerDimensionsChanged(int width, int height) {
+    InCallVideoCallCallbackNotifier.getInstance().peerDimensionsChanged(this, width, height);
+  }
+
+  @Override
+  public void onVideoUpgradeRequestReceived() {
+    LogUtil.enterBlock("DialerCall.onVideoUpgradeRequestReceived");
+
+    for (DialerCallListener listener : mListeners) {
+      listener.onDialerCallUpgradeToVideo();
+    }
+
+    update();
+  }
+
   /**
    * Specifies whether a number is in the call history or not. {@link #CALL_HISTORY_STATUS_UNKNOWN}
    * means there is no result.
@@ -1191,8 +1108,8 @@ public class DialerCall {
         case CONFERENCED:
           return true;
         default:
+          return false;
       }
-      return false;
     }
 
     public static boolean isDialing(int state) {
@@ -1239,71 +1156,11 @@ public class DialerCall {
     }
   }
 
-  /**
-   * Defines different states of session modify requests, which are used to upgrade to video, or
-   * downgrade to audio.
-   */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-    SESSION_MODIFICATION_STATE_NO_REQUEST,
-    SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE,
-    SESSION_MODIFICATION_STATE_REQUEST_FAILED,
-    SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
-    SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT,
-    SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED,
-    SESSION_MODIFICATION_STATE_REQUEST_REJECTED,
-    SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE
-  })
-  public @interface SessionModificationState {}
-
-  public static final int SESSION_MODIFICATION_STATE_NO_REQUEST = 0;
-  public static final int SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE = 1;
-  public static final int SESSION_MODIFICATION_STATE_REQUEST_FAILED = 2;
-  public static final int SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST = 3;
-  public static final int SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT = 4;
-  public static final int SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED = 5;
-  public static final int SESSION_MODIFICATION_STATE_REQUEST_REJECTED = 6;
-  public static final int SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE = 7;
-
-  public static class VideoSettings {
-
+  /** Camera direction constants */
+  public static class CameraDirection {
     public static final int CAMERA_DIRECTION_UNKNOWN = -1;
     public static final int CAMERA_DIRECTION_FRONT_FACING = CameraCharacteristics.LENS_FACING_FRONT;
     public static final int CAMERA_DIRECTION_BACK_FACING = CameraCharacteristics.LENS_FACING_BACK;
-
-    private int mCameraDirection = CAMERA_DIRECTION_UNKNOWN;
-
-    /**
-     * Gets the camera direction. if camera direction is set to CAMERA_DIRECTION_UNKNOWN, the video
-     * state of the call should be used to infer the camera direction.
-     *
-     * @see {@link CameraCharacteristics#LENS_FACING_FRONT}
-     * @see {@link CameraCharacteristics#LENS_FACING_BACK}
-     */
-    public int getCameraDir() {
-      return mCameraDirection;
-    }
-
-    /**
-     * Sets the camera direction. if camera direction is set to CAMERA_DIRECTION_UNKNOWN, the video
-     * state of the call should be used to infer the camera direction.
-     *
-     * @see {@link CameraCharacteristics#LENS_FACING_FRONT}
-     * @see {@link CameraCharacteristics#LENS_FACING_BACK}
-     */
-    public void setCameraDir(int cameraDirection) {
-      if (cameraDirection == CAMERA_DIRECTION_FRONT_FACING
-          || cameraDirection == CAMERA_DIRECTION_BACK_FACING) {
-        mCameraDirection = cameraDirection;
-      } else {
-        mCameraDirection = CAMERA_DIRECTION_UNKNOWN;
-      }
-    }
-
-    @Override
-    public String toString() {
-      return "(CameraDir:" + getCameraDir() + ")";
-    }
   }
 
   /**
@@ -1391,6 +1248,48 @@ public class DialerCall {
           lookupToString(contactLookupResult),
           initiationToString(callSpecificAppData),
           duration);
+    }
+  }
+
+  private static class VideoTechManager {
+    private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
+    private final VideoTech[] videoTechs;
+    private VideoTech savedTech;
+
+    VideoTechManager(DialerCall call) {
+      String phoneNumber = call.getNumber();
+
+      // Insert order here determines the priority of that video tech option
+      videoTechs =
+          new VideoTech[] {
+            new ImsVideoTech(call, call.mTelecomCall),
+            new RcsVideoShare(
+                EnrichedCallComponent.get(call.mContext).getEnrichedCallManager(),
+                call,
+                phoneNumber != null ? phoneNumber : "")
+          };
+    }
+
+    VideoTech getVideoTech() {
+      if (savedTech != null) {
+        return savedTech;
+      }
+
+      for (VideoTech tech : videoTechs) {
+        if (tech.isAvailable()) {
+          // Remember the first VideoTech that becomes available and always use it
+          savedTech = tech;
+          return savedTech;
+        }
+      }
+
+      return emptyVideoTech;
+    }
+
+    void dispatchCallStateChanged(int newState) {
+      for (VideoTech videoTech : videoTechs) {
+        videoTech.onCallStateChanged(newState);
+      }
     }
   }
 

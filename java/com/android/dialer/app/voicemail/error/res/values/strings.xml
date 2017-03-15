@@ -54,6 +54,11 @@
   <string name="voicemail_error_inbox_full_title">Can\'t receive new voicemails</string>
   <string name="voicemail_error_inbox_full_message">Your inbox is full. Try deleting some messages to receive new voicemail.</string>
 
+  <string name="voicemail_error_inbox_full_turn_archive_on_title">Turn on extra storage and backup</string>
+  <string name="voicemail_error_inbox_full_turn_archive_on_message">Your mailbox is full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages.</string>
+
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_title">Turn on extra storage and backup</string>
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_message">Your mailbox is almost full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages.</string>
 
   <string name="voicemail_error_pin_not_set_title">Set your voicemail PIN</string>
   <string name="voicemail_error_pin_not_set_message">You\'ll need a voicemail PIN anytime you call to access your voicemail.</string>
@@ -63,6 +68,8 @@
   <string name="voicemail_action_turn_off_airplane_mode">Airplane Mode Settings</string>
   <string name="voicemail_action_set_pin">Set PIN</string>
   <string name="voicemail_action_retry">Try Again</string>
+  <string name="voicemail_action_turn_archive_on">Turn on</string>
+  <string name="voicemail_action_dimiss">No Thanks</string>
   <string name="voicemail_action_sync">Sync</string>
   <string name="voicemail_action_call_voicemail">Call Voicemail</string>
   <string name="voicemail_action_call_customer_support">Call Customer Support</string>

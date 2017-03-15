@@ -74,7 +74,9 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
       if (mHeightPercent != 1.0f) {
         writeClippedBitmap(outputStream);
       } else {
-        outputStream.write(mBytes, 0, mBytes.length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
+        bitmap = CopyAndResizeImageTask.resizeForEnrichedCalling(bitmap);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
       }
     }
 

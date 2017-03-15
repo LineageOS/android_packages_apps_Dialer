@@ -22,7 +22,7 @@ import com.android.incallui.video.protocol.VideoCallScreen;
 /** Bindings for video module. */
 public class VideoBindings {
 
-  public static VideoCallScreen createVideoCallScreen() {
-    return new VideoCallFragment();
+  public static VideoCallScreen createVideoCallScreen(String callId) {
+    return VideoCallFragment.newInstance(callId);
   }
 }

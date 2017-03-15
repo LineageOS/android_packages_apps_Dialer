@@ -108,10 +108,9 @@
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher_phone"
     android:label="@string/applicationLabel"
-    android:name="com.android.dialer.app.DialerApplication"
+    android:name="com.android.dialer.binary.aosp.AospDialerApplication"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false">
-
   </application>
 
 </manifest>

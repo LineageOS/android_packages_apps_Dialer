@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:gravity="bottom"
+  android:background="@color/background_dialer_white">
+
+  <LinearLayout
+    android:id="@+id/message_container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/message_divider_height"
+    android:background="#12000000"/>
+
+  <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+      android:id="@+id/custom_message"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/textview_item_padding"
+      android:textSize="@dimen/message_item_text_size"
+      android:hint="@string/custom_message_hint"
+      android:textColor="@color/dialer_primary_text_color"
+      android:textColorHint="@color/dialer_edit_text_hint_color"
+      android:background="@color/background_dialer_white"
+      android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
+      android:layout_toStartOf="@+id/count_and_send_container"/>
+
+    <LinearLayout
+      android:id="@+id/count_and_send_container"
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:layout_marginEnd="@dimen/textview_item_padding"
+      android:gravity="center">
+
+      <ImageView
+        android:id="@+id/send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/quantum_ic_send_white_24"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:tint="@color/dialer_tint_state"/>
+
+      <TextView
+        android:id="@+id/remaining_characters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="@dimen/message_remaining_char_text_size"
+        android:textColor="@color/dialer_edit_text_hint_color"/>
+    </LinearLayout>
+  </RelativeLayout>
+</LinearLayout>

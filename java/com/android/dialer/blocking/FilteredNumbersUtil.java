@@ -36,6 +36,8 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.InteractionEvent;
+import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +45,8 @@ import java.util.concurrent.TimeUnit;
 public class FilteredNumbersUtil {
 
   public static final String CALL_BLOCKING_NOTIFICATION_TAG = "call_blocking";
-  public static final int CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID = 10;
+  public static final int CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID =
+      R.id.notification_call_blocking_disabled_by_emergency_call;
   // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.
   protected static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
   // Pref key for storing whether a notification has been dispatched to notify the user that call
@@ -289,6 +292,7 @@ public class FilteredNumbersUtil {
                         context.getString(R.string.call_blocking_disabled_notification_text))
                     .setAutoCancel(true);
 
+            NotificationChannelManager.applyChannel(builder, context, Channel.MISC, null);
             builder.setContentIntent(
                 PendingIntent.getActivity(
                     context,

@@ -104,7 +104,7 @@ public class ContactPhotoLoader {
       final RoundedBitmapDrawable drawable =
           RoundedBitmapDrawableFactory.create(mContext.getResources(), bitmap);
       drawable.setAntiAlias(true);
-      drawable.setCornerRadius(bitmap.getHeight() / 2);
+      drawable.setCircular(true);
       return drawable;
     } catch (IOException e) {
       LogUtil.e("ContactPhotoLoader.createPhotoIconDrawable", e.toString());

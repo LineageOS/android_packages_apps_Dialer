@@ -18,6 +18,8 @@ package com.android.dialer.callcomposer;
 
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore.Images.Media;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -26,7 +28,7 @@ import java.io.File;
 import java.util.Objects;
 
 /** Provides data for GalleryGridItemView */
-public final class GalleryGridItemData {
+public final class GalleryGridItemData implements Parcelable {
   public static final String[] IMAGE_PROJECTION =
       new String[] {Media._ID, Media.DATA, Media.MIME_TYPE, Media.DATE_MODIFIED};
 
@@ -87,5 +89,36 @@ public final class GalleryGridItemData {
   @Override
   public int hashCode() {
     return Objects.hash(filePath, mimeType, dateModifiedSeconds);
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(filePath);
+    dest.writeString(mimeType);
+    dest.writeLong(dateModifiedSeconds);
+  }
+
+  public static final Creator<GalleryGridItemData> CREATOR =
+      new Creator<GalleryGridItemData>() {
+        @Override
+        public GalleryGridItemData createFromParcel(Parcel in) {
+          return new GalleryGridItemData(in);
+        }
+
+        @Override
+        public GalleryGridItemData[] newArray(int size) {
+          return new GalleryGridItemData[size];
+        }
+      };
+
+  private GalleryGridItemData(Parcel in) {
+    filePath = in.readString();
+    mimeType = in.readString();
+    dateModifiedSeconds = in.readLong();
   }
 }

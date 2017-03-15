@@ -28,7 +28,7 @@ import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.call.CallList;
-import com.android.incallui.call.VideoUtils;
+import com.android.incallui.call.DialerCall;
 
 /**
  * Class manages the proximity sensor for the in-call UI. We enable the proximity sensor while the
@@ -103,7 +103,8 @@ public class ProximitySensor
     boolean hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
     boolean isOffhook = (InCallState.OUTGOING == newState) || hasOngoingCall;
 
-    boolean isVideoCall = VideoUtils.isVideoCall(callList.getActiveCall());
+    DialerCall activeCall = callList.getActiveCall();
+    boolean isVideoCall = activeCall != null && activeCall.isVideoCall();
 
     if (isOffhook != mIsPhoneOffhook || mIsVideoCall != isVideoCall) {
       mIsPhoneOffhook = isOffhook;

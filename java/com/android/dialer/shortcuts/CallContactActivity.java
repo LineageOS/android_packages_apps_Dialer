@@ -56,11 +56,20 @@ public class CallContactActivity extends TransactionSafeActivity
     }
   }
 
+  /**
+   * Attempt to make a call, finishing the activity if the required permissions are already granted.
+   * If the required permissions are not already granted, the activity is not finished so that the
+   * user can choose to grant or deny them.
+   */
   private void makeCall() {
     CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
     callSpecificAppData.callInitiationType = CallInitiationType.Type.LAUNCHER_SHORTCUT;
-    PhoneNumberInteraction.startInteractionForPhoneCall(
-        this, contactUri, false /* isVideoCall */, callSpecificAppData);
+    boolean interactionStarted =
+        PhoneNumberInteraction.startInteractionForPhoneCall(
+            this, contactUri, false /* isVideoCall */, callSpecificAppData);
+    if (interactionStarted) {
+      finish();
+    }
   }
 
   @Override
@@ -115,6 +124,7 @@ public class CallContactActivity extends TransactionSafeActivity
       int requestCode, String[] permissions, int[] grantResults) {
     switch (requestCode) {
       case PhoneNumberInteraction.REQUEST_READ_CONTACTS:
+      case PhoneNumberInteraction.REQUEST_CALL_PHONE:
         {
           // If request is cancelled, the result arrays are empty.
           if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -122,8 +132,8 @@ public class CallContactActivity extends TransactionSafeActivity
           } else {
             Toast.makeText(this, R.string.dialer_shortcut_no_permissions, Toast.LENGTH_SHORT)
                 .show();
+            finish();
           }
-          finish();
           break;
         }
       default:

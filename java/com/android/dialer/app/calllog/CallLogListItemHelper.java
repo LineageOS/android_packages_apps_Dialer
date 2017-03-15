@@ -21,17 +21,15 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.WorkerThread;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.util.Log;
-import com.android.dialer.app.PhoneCallDetails;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
+import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
 
 /** Helper class to fill in the views of a call log entry. */
 /* package */ class CallLogListItemHelper {
-
-  private static final String TAG = "CallLogListItemHelper";
 
   /** Helper for populating the details of a phone call. */
   private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
@@ -105,7 +103,9 @@ import com.android.dialer.compat.AppCompatConstants;
    */
   public void setActionContentDescriptions(CallLogListItemViewHolder views) {
     if (views.nameOrNumber == null) {
-      Log.e(TAG, "setActionContentDescriptions; name or number is null.");
+      LogUtil.e(
+          "CallLogListItemHelper.setActionContentDescriptions",
+          "setActionContentDescriptions; name or number is null.");
     }
 
     // Calling expandTemplate with a null parameter will cause a NullPointerException.
@@ -170,7 +170,6 @@ import com.android.dialer.compat.AppCompatConstants;
    *
    * <p>2 calls. Answered call from John Doe mobile 1 hour ago.
    *
-   * @param context The application context.
    * @param details Details of call.
    * @return Return call action description.
    */

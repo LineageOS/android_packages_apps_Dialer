@@ -1,0 +1,6 @@
+# Keep the annotation, classes, methods, and fields marked as UsedByReflection
+-keep class com.android.dialer.proguard.UsedByReflection
+-keep @com.android.dialer.proguard.UsedByReflection class *
+-keepclassmembers class * {
+    @com.android.dialer.proguard.UsedByReflection *;
+}

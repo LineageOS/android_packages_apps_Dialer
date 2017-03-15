@@ -61,6 +61,14 @@
     android:outlineProvider="background"
     android:scaleType="centerCrop"/>
 
+  <ProgressBar
+    android:id="@+id/loading_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_column="1"
+    android:layout_gravity="center"
+    android:elevation="2dp"/>
+
   <FrameLayout
     android:id="@id/answer_message_frag"
     android:layout_width="0dp"

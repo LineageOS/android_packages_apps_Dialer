@@ -22,12 +22,15 @@ import android.provider.Settings;
 import android.provider.VoicemailContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.CallUtil;
+import com.android.voicemail.VoicemailClient;
 import java.util.Arrays;
 import java.util.List;
 
@@ -172,6 +175,54 @@ public class VoicemailErrorMessage {
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);
+          }
+        });
+  }
+
+  @NonNull
+  public static Action createTurnArchiveOnAction(
+      final Context context,
+      final VoicemailStatus status,
+      VoicemailClient voicemailClient,
+      PhoneAccountHandle phoneAccountHandle,
+      String preference) {
+    return new Action(
+        context.getString(R.string.voicemail_action_turn_archive_on),
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            OmtpVoicemailMessageCreator.logArchiveImpression(
+                context,
+                preference,
+                DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_FULL_PROMO,
+                DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_ALMOST_FULL_PROMO);
+
+            voicemailClient.setVoicemailArchiveEnabled(context, phoneAccountHandle, true);
+            Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+            intent.setPackage(status.sourcePackage);
+            context.sendBroadcast(intent);
+          }
+        });
+  }
+
+  @NonNull
+  public static Action createDismissTurnArchiveOnAction(
+      final Context context,
+      VoicemailStatusReader statusReader,
+      PerAccountSharedPreferences sharedPreferenceForAccount,
+      String preferenceKeyToUpdate) {
+    return new Action(
+        context.getString(R.string.voicemail_action_dimiss),
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            OmtpVoicemailMessageCreator.logArchiveImpression(
+                context,
+                preferenceKeyToUpdate,
+                DialerImpression.Type.VVM_USER_DISMISSED_VM_FULL_PROMO,
+                DialerImpression.Type.VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO);
+            sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true);
+            statusReader.refresh();
           }
         });
   }

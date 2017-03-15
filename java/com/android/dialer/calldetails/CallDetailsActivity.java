@@ -1,0 +1,130 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.dialer.calldetails;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+import android.widget.Toolbar;
+import com.android.dialer.callcomposer.nano.CallComposerContact;
+import com.android.dialer.calldetails.nano.CallDetailsEntries;
+import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.AsyncTaskExecutors;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.protos.ProtoParsers;
+
+/** Displays the details of a specific call log entry. */
+public class CallDetailsActivity extends AppCompatActivity {
+
+  private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
+  private static final String EXTRA_CONTACT = "contact";
+  private static final String TASK_DELETE = "task_delete";
+
+  private CallDetailsEntry[] entries;
+
+  public static Intent newInstance(
+      Context context, @NonNull CallDetailsEntries details, @NonNull CallComposerContact contact) {
+    Assert.isNotNull(details);
+    Assert.isNotNull(contact);
+
+    Intent intent = new Intent(context, CallDetailsActivity.class);
+    ProtoParsers.put(intent, EXTRA_CONTACT, contact);
+    ProtoParsers.put(intent, EXTRA_CALL_DETAILS_ENTRIES, details);
+    return intent;
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.call_details_activity);
+
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setActionBar(toolbar);
+    toolbar.inflateMenu(R.menu.call_details_menu);
+    toolbar.setNavigationOnClickListener(v -> finish());
+    onHandleIntent(getIntent());
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    onHandleIntent(intent);
+  }
+
+  private void onHandleIntent(Intent intent) {
+    Bundle arguments = intent.getExtras();
+    CallComposerContact contact =
+        ProtoParsers.getFromInstanceState(arguments, EXTRA_CONTACT, new CallComposerContact());
+    entries =
+        ProtoParsers.getFromInstanceState(
+                arguments, EXTRA_CALL_DETAILS_ENTRIES, new CallDetailsEntries())
+            .entries;
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries));
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.call_detail_delete_menu_item) {
+      Logger.get(this).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
+      AsyncTaskExecutors.createAsyncTaskExecutor().submit(TASK_DELETE, new DeleteCallsTask());
+      item.setEnabled(false);
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  /** Delete specified calls from the call log. */
+  private class DeleteCallsTask extends AsyncTask<Void, Void, Void> {
+
+    private final String callIds;
+
+    DeleteCallsTask() {
+      StringBuilder callIds = new StringBuilder();
+      for (CallDetailsEntry entry : entries) {
+        if (callIds.length() != 0) {
+          callIds.append(",");
+        }
+        callIds.append(entry.callId);
+      }
+      this.callIds = callIds.toString();
+    }
+
+    @Override
+    protected Void doInBackground(Void... params) {
+      getContentResolver()
+          .delete(Calls.CONTENT_URI, CallLog.Calls._ID + " IN (" + callIds + ")", null);
+      return null;
+    }
+
+    @Override
+    public void onPostExecute(Void result) {
+      finish();
+    }
+  }
+}

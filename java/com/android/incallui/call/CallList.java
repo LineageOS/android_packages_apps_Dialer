@@ -38,10 +38,10 @@ import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamBindings;
-import com.android.incallui.call.DialerCall.SessionModificationState;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
+import com.android.incallui.videotech.VideoTech;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -110,6 +110,8 @@ public class CallList implements DialerCallDelegate {
     Trace.beginSection("onCallAdded");
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
+    logSecondIncomingCall(context, call);
+
     final DialerCallListenerImpl dialerCallListener = new DialerCallListenerImpl(call);
     call.addListener(dialerCallListener);
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
@@ -182,6 +184,30 @@ public class CallList implements DialerCallDelegate {
     }
 
     Trace.endSection();
+  }
+
+  private void logSecondIncomingCall(@NonNull Context context, @NonNull DialerCall incomingCall) {
+    DialerCall firstCall = getFirstCall();
+    if (firstCall != null) {
+      int impression = 0;
+      if (firstCall.isVideoCall()) {
+        if (incomingCall.isVideoCall()) {
+          impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VIDEO_CALL;
+        } else {
+          impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VOICE_CALL;
+        }
+      } else {
+        if (incomingCall.isVideoCall()) {
+          impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VIDEO_CALL;
+        } else {
+          impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VOICE_CALL;
+        }
+      }
+      Assert.checkArgument(impression != 0);
+      Logger.get(context)
+          .logCallImpression(
+              impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());
+    }
   }
 
   private static boolean isPotentialEmergencyCallback(Context context, DialerCall call) {
@@ -440,8 +466,8 @@ public class CallList implements DialerCallDelegate {
    */
   public DialerCall getVideoUpgradeRequestCall() {
     for (DialerCall call : mCallById.values()) {
-      if (call.getSessionModificationState()
-          == DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+      if (call.getVideoTech().getSessionModificationState()
+          == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
         return call;
       }
     }
@@ -637,17 +663,7 @@ public class CallList implements DialerCallDelegate {
    */
   public void notifyCallsOfDeviceRotation(int rotation) {
     for (DialerCall call : mCallById.values()) {
-      // First, ensure that the call videoState has video enabled (there is no need to set
-      // device orientation on a voice call which has not yet been upgraded to video).
-      // Second, ensure a VideoCall is set on the call so that the change can be sent to the
-      // provider (a VideoCall can be present for a call that does not currently have video,
-      // but can be upgraded to video).
-
-      // NOTE: is it necessary to use this order because getVideoCall references the class
-      // VideoProfile which is not available on APIs <23 (M).
-      if (VideoUtils.isVideoCall(call) && call.getVideoCall() != null) {
-        call.getVideoCall().setDeviceOrientation(rotation);
-      }
+      call.getVideoTech().setDeviceOrientation(rotation);
     }
   }
 
@@ -675,7 +691,7 @@ public class CallList implements DialerCallDelegate {
     void onUpgradeToVideo(DialerCall call);
 
     /** Called when the session modification state of a call changes. */
-    void onSessionModificationStateChange(@SessionModificationState int newState);
+    void onSessionModificationStateChange(DialerCall call);
 
     /**
      * Called anytime there are changes to the call list. The change can be switching call states,
@@ -754,9 +770,9 @@ public class CallList implements DialerCallDelegate {
     }
 
     @Override
-    public void onDialerCallSessionModificationStateChange(@SessionModificationState int state) {
+    public void onDialerCallSessionModificationStateChange() {
       for (Listener listener : mListeners) {
-        listener.onSessionModificationStateChange(state);
+        listener.onSessionModificationStateChange(mCall);
       }
     }
   }

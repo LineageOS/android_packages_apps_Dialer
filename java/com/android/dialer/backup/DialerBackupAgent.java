@@ -31,6 +31,7 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
+import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
 import com.android.dialer.backup.nano.VoicemailInfo;
 import com.android.dialer.common.Assert;
@@ -42,6 +43,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -100,9 +102,11 @@ public class DialerBackupAgent extends BackupAgent {
         ConfigProviderBindings.get(this).getBoolean("enable_autobackup", true);
     boolean vmBackupEnabled =
         ConfigProviderBindings.get(this).getBoolean("enable_vm_backup", false);
+    List<PhoneAccountHandle> phoneAccountsToArchive =
+        DialerBackupUtils.getPhoneAccountsToArchive(this);
 
     if (autoBackupEnabled) {
-      if (!maxVoicemailBackupReached && vmBackupEnabled) {
+      if (!maxVoicemailBackupReached && vmBackupEnabled && !phoneAccountsToArchive.isEmpty()) {
         voicemailsBackedupSoFar = 0;
         sizeOfVoicemailsBackedupSoFar = 0;
 
@@ -123,9 +127,12 @@ public class DialerBackupAgent extends BackupAgent {
                 uri,
                 null,
                 String.format(
-                    "(%s = ? AND deleted = 0 AND  %s = ?)", Calls.TYPE, Voicemails.SOURCE_PACKAGE),
+                    "(%s = ? AND deleted = 0 AND  %s = ? AND ?)",
+                    Calls.TYPE, Voicemails.SOURCE_PACKAGE),
                 new String[] {
-                  Integer.toString(CallLog.Calls.VOICEMAIL_TYPE), VOICEMAIL_SOURCE_PACKAGE
+                  Integer.toString(CallLog.Calls.VOICEMAIL_TYPE),
+                  VOICEMAIL_SOURCE_PACKAGE,
+                  DialerBackupUtils.getPhoneAccountClause(phoneAccountsToArchive)
                 },
                 ORDER_BY_DATE,
                 null)) {
@@ -150,11 +157,12 @@ public class DialerBackupAgent extends BackupAgent {
       LogUtil.i(
           "DialerBackupAgent.onFullBackup",
           "vm files backed up: %d, vm size backed up:%d, "
-              + "max vm backup reached:%b, vm backup enabled:%b",
+              + "max vm backup reached:%b, vm backup enabled:%b phone accounts to archive: %d",
           voicemailsBackedupSoFar,
           sizeOfVoicemailsBackedupSoFar,
           maxVoicemailBackupReached,
-          vmBackupEnabled);
+          vmBackupEnabled,
+          phoneAccountsToArchive.size());
       super.onFullBackup(data);
       Logger.get(this).logImpression(DialerImpression.Type.BACKUP_FULL_BACKED_UP);
     } else {

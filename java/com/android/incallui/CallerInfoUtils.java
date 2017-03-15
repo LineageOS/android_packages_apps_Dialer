@@ -22,6 +22,7 @@ import android.content.Loader;
 import android.content.Loader.OnLoadCompleteListener;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
@@ -53,7 +54,7 @@ public class CallerInfoUtils {
    * OnQueryCompleteListener (which contains information about the phone number label, user's name,
    * etc).
    */
-  public static CallerInfo getCallerInfoForCall(
+  static CallerInfo getCallerInfoForCall(
       Context context,
       DialerCall call,
       Object cookie,
@@ -81,7 +82,7 @@ public class CallerInfoUtils {
     return info;
   }
 
-  public static CallerInfo buildCallerInfo(Context context, DialerCall call) {
+  static CallerInfo buildCallerInfo(Context context, DialerCall call) {
     CallerInfo info = new CallerInfo();
 
     // Store CNAP information retrieved from the Connection (we want to do this
@@ -91,6 +92,7 @@ public class CallerInfoUtils {
     info.numberPresentation = call.getNumberPresentation();
     info.namePresentation = call.getCnapNamePresentation();
     info.callSubject = call.getCallSubject();
+    info.contactExists = false;
 
     String number = call.getNumber();
     if (!TextUtils.isEmpty(number)) {
@@ -109,9 +111,7 @@ public class CallerInfoUtils {
     // Because the InCallUI is immediately launched before the call is connected, occasionally
     // a voicemail call will be passed to InCallUI as a "voicemail:" URI without a number.
     // This call should still be handled as a voicemail call.
-    if ((call.getHandle() != null
-            && PhoneAccount.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme()))
-        || isVoiceMailNumber(context, call)) {
+    if (isVoiceMailNumber(context, call)) {
       info.markAsVoiceMail(context);
     }
 
@@ -145,11 +145,17 @@ public class CallerInfoUtils {
     return cacheInfo;
   }
 
-  public static boolean isVoiceMailNumber(Context context, DialerCall call) {
+  public static boolean isVoiceMailNumber(Context context, @NonNull DialerCall call) {
+    if (call.getHandle() != null
+        && PhoneAccount.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
+      return true;
+    }
+
     if (ContextCompat.checkSelfPermission(context, permission.READ_PHONE_STATE)
         != PackageManager.PERMISSION_GRANTED) {
       return false;
     }
+
     return TelecomUtil.isVoicemailNumber(context, call.getAccountHandle(), call.getNumber());
   }
 

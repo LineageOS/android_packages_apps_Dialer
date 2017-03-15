@@ -53,6 +53,7 @@ import com.android.dialer.app.list.ListsFragment.ListsPage;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -70,8 +71,16 @@ public class CallLogFragment extends Fragment
         FragmentCompat.OnRequestPermissionsResultCallback,
         CallLogModalAlertManager.Listener {
   private static final String KEY_FILTER_TYPE = "filter_type";
+  private static final String KEY_LOG_LIMIT = "log_limit";
+  private static final String KEY_DATE_LIMIT = "date_limit";
+  private static final String KEY_IS_CALL_LOG_ACTIVITY = "is_call_log_activity";
   private static final String KEY_HAS_READ_CALL_LOG_PERMISSION = "has_read_call_log_permission";
   private static final String KEY_REFRESH_DATA_REQUIRED = "refresh_data_required";
+
+  // No limit specified for the number of logs to show; use the CallLogQueryHandler's default.
+  private static final int NO_LOG_LIMIT = -1;
+  // No date-based filtering.
+  private static final int NO_DATE_LIMIT = 0;
 
   private static final int READ_CALL_LOG_PERMISSION_REQUEST_CODE = 1;
 
@@ -104,8 +113,17 @@ public class CallLogFragment extends Fragment
   // Exactly same variable is in Fragment as a package private.
   private boolean mMenuVisible = true;
   // Default to all calls.
-  protected int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
-
+  private int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
+  // Log limit - if no limit is specified, then the default in {@link CallLogQueryHandler}
+  // will be used.
+  private int mLogLimit = NO_LOG_LIMIT;
+  // Date limit (in millis since epoch) - when non-zero, only calls which occurred on or after
+  // the date filter are included.  If zero, no date-based filtering occurs.
+  private long mDateLimit = NO_DATE_LIMIT;
+  /*
+   * True if this instance of the CallLogFragment shown in the CallLogActivity.
+   */
+  private boolean mIsCallLogActivity = false;
   private final Handler mDisplayUpdateHandler =
       new Handler() {
         @Override
@@ -121,6 +139,48 @@ public class CallLogFragment extends Fragment
   protected CallLogModalAlertManager mModalAlertManager;
   private ViewGroup mModalAlertView;
 
+  public CallLogFragment() {
+    this(CallLogQueryHandler.CALL_TYPE_ALL, NO_LOG_LIMIT);
+  }
+
+  public CallLogFragment(int filterType) {
+    this(filterType, NO_LOG_LIMIT);
+  }
+
+  public CallLogFragment(int filterType, boolean isCallLogActivity) {
+    this(filterType, NO_LOG_LIMIT);
+    mIsCallLogActivity = isCallLogActivity;
+  }
+
+  public CallLogFragment(int filterType, int logLimit) {
+    this(filterType, logLimit, NO_DATE_LIMIT);
+  }
+
+  /**
+   * Creates a call log fragment, filtering to include only calls of the desired type, occurring
+   * after the specified date.
+   *
+   * @param filterType type of calls to include.
+   * @param dateLimit limits results to calls occurring on or after the specified date.
+   */
+  public CallLogFragment(int filterType, long dateLimit) {
+    this(filterType, NO_LOG_LIMIT, dateLimit);
+  }
+
+  /**
+   * Creates a call log fragment, filtering to include only calls of the desired type, occurring
+   * after the specified date. Also provides a means to limit the number of results returned.
+   *
+   * @param filterType type of calls to include.
+   * @param logLimit limits the number of results to return.
+   * @param dateLimit limits results to calls occurring on or after the specified date.
+   */
+  public CallLogFragment(int filterType, int logLimit, long dateLimit) {
+    mCallTypeFilter = filterType;
+    mLogLimit = logLimit;
+    mDateLimit = dateLimit;
+  }
+
   @Override
   public void onCreate(Bundle state) {
     LogUtil.d("CallLogFragment.onCreate", toString());
@@ -128,13 +188,16 @@ public class CallLogFragment extends Fragment
     mRefreshDataRequired = true;
     if (state != null) {
       mCallTypeFilter = state.getInt(KEY_FILTER_TYPE, mCallTypeFilter);
+      mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
+      mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
+      mIsCallLogActivity = state.getBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
       mHasReadCallLogPermission = state.getBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, false);
       mRefreshDataRequired = state.getBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
     }
 
     final Activity activity = getActivity();
     final ContentResolver resolver = activity.getContentResolver();
-    mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this);
+    mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
     mKeyguardManager = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
     resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
     resolver.registerContentObserver(
@@ -226,7 +289,10 @@ public class CallLogFragment extends Fragment
   }
 
   protected void setupData() {
-    int activityType = CallLogAdapter.ACTIVITY_TYPE_DIALTACTS;
+    int activityType =
+        mIsCallLogActivity
+            ? CallLogAdapter.ACTIVITY_TYPE_CALL_LOG
+            : CallLogAdapter.ACTIVITY_TYPE_DIALTACTS;
     String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
 
     mContactInfoCache =
@@ -244,6 +310,7 @@ public class CallLogFragment extends Fragment
                 CallLogCache.getCallLogCache(getActivity()),
                 mContactInfoCache,
                 getVoicemailPlaybackPresenter(),
+                new FilteredNumberAsyncQueryHandler(getActivity()),
                 activityType);
     mRecyclerView.setAdapter(mAdapter);
     fetchCalls();
@@ -324,6 +391,9 @@ public class CallLogFragment extends Fragment
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt(KEY_FILTER_TYPE, mCallTypeFilter);
+    outState.putInt(KEY_LOG_LIMIT, mLogLimit);
+    outState.putLong(KEY_DATE_LIMIT, mDateLimit);
+    outState.putBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
     outState.putBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, mHasReadCallLogPermission);
     outState.putBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
 
@@ -334,8 +404,10 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void fetchCalls() {
-    mCallLogQueryHandler.fetchCalls(mCallTypeFilter);
-    ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+    mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
+    if (!mIsCallLogActivity) {
+      ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+    }
   }
 
   private void updateEmptyMessage(int filterType) {
@@ -366,7 +438,9 @@ public class CallLogFragment extends Fragment
             "Unexpected filter type in CallLogFragment: " + filterType);
     }
     mEmptyListView.setDescription(messageId);
-    if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
+    if (mIsCallLogActivity) {
+      mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
+    } else if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
       mEmptyListView.setActionLabel(R.string.call_log_all_empty_action);
     }
   }
@@ -420,7 +494,7 @@ public class CallLogFragment extends Fragment
     if (mKeyguardManager != null
         && !mKeyguardManager.inKeyguardRestrictedInputMode()
         && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-      CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
+      CallLogNotificationsQueryHelper.updateVoicemailNotifications(getActivity());
     }
   }
 
@@ -434,7 +508,8 @@ public class CallLogFragment extends Fragment
     if (!PermissionsUtil.hasPermission(activity, READ_CALL_LOG)) {
       FragmentCompat.requestPermissions(
           this, new String[] {READ_CALL_LOG}, READ_CALL_LOG_PERMISSION_REQUEST_CODE);
-    } else {
+    } else if (!mIsCallLogActivity) {
+      // Show dialpad if we are not in the call log activity.
       ((HostInterface) activity).showDialpad();
     }
   }

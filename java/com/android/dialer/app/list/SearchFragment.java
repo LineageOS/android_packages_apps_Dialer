@@ -98,6 +98,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
   @Override
   public void onStart() {
+    LogUtil.d("SearchFragment.onStart", "");
     super.onStart();
     if (isSearchMode()) {
       getAdapter().setHasHeader(0, false);
@@ -301,6 +302,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
    * shown. This can be optionally animated.
    */
   public void updatePosition(boolean animate) {
+    LogUtil.d("SearchFragment.updatePosition", "animate: %b", animate);
     if (mActivity == null) {
       // Activity will be set in onStart, and this method will be called again
       return;
@@ -363,6 +365,13 @@ public class SearchFragment extends PhoneNumberPickerFragment {
       return;
     }
     int spacerHeight = mActivity.isDialpadShown() ? mActivity.getDialpadHeight() : 0;
+    LogUtil.d(
+        "SearchFragment.resizeListView",
+        "spacerHeight: %d -> %d, isDialpadShown: %b, dialpad height: %d",
+        mSpacer.getHeight(),
+        spacerHeight,
+        mActivity.isDialpadShown(),
+        mActivity.getDialpadHeight());
     if (spacerHeight != mSpacer.getHeight()) {
       final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mSpacer.getLayoutParams();
       lp.height = spacerHeight;
@@ -417,8 +426,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     boolean isDialpadShown();
 
     int getDialpadHeight();
-
-    int getActionBarHideOffset();
 
     int getActionBarHeight();
   }

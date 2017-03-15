@@ -81,8 +81,10 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   private static final String TAG = PhoneNumberInteraction.class.getSimpleName();
   /** The identifier for a permissions request if one is generated. */
   public static final int REQUEST_READ_CONTACTS = 1;
+  public static final int REQUEST_CALL_PHONE = 2;
 
-  private static final String[] PHONE_NUMBER_PROJECTION =
+  @VisibleForTesting
+  public static final String[] PHONE_NUMBER_PROJECTION =
       new String[] {
         Phone._ID,
         Phone.NUMBER,
@@ -191,13 +193,14 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    *     numbers have been queried for. The activity must implement {@link InteractionErrorListener}
    *     and {@link DisambigDialogDismissedListener}.
    * @param isVideoCall {@code true} if the call is a video call, {@code false} otherwise.
+   * @return true if the necessary permissions were found to start the interaction, false otherwise
    */
-  public static void startInteractionForPhoneCall(
+  public static boolean startInteractionForPhoneCall(
       TransactionSafeActivity activity,
       Uri uri,
       boolean isVideoCall,
       CallSpecificAppData callSpecificAppData) {
-    new PhoneNumberInteraction(
+    return new PhoneNumberInteraction(
             activity, ContactDisplayUtils.INTERACTION_CALL, isVideoCall, callSpecificAppData)
         .startInteraction(uri);
   }
@@ -211,11 +214,19 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    * Initiates the interaction to result in either a phone call or sms message for a contact.
    *
    * @param uri Contact Uri
+   * @return true if the necessary permissions were found to start the interaction, false otherwise
    */
-  private void startInteraction(Uri uri) {
-    // It's possible for a shortcut to have been created, and then Contacts permissions revoked. To
-    // avoid a crash when the user tries to use such a shortcut, check for this condition and ask
-    // the user for the permission.
+  private boolean startInteraction(Uri uri) {
+    // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
+    // crash when the user tries to use such a shortcut, check for this condition and ask the user
+    // for the permission.
+    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE)
+        != PackageManager.PERMISSION_GRANTED) {
+      LogUtil.i("PhoneNumberInteraction.startInteraction", "No phone permissions");
+      ActivityCompat.requestPermissions(
+          (Activity) mContext, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
+      return false;
+    }
     if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS)
         != PackageManager.PERMISSION_GRANTED) {
       LogUtil.i("PhoneNumberInteraction.startInteraction", "No contact permissions");
@@ -223,7 +234,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
           (Activity) mContext,
           new String[] {Manifest.permission.READ_CONTACTS},
           REQUEST_READ_CONTACTS);
-      return;
+      return false;
     }
 
     if (mLoader != null) {
@@ -249,6 +260,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             mContext, queryUri, PHONE_NUMBER_PROJECTION, PHONE_NUMBER_SELECTION, null, null);
     mLoader.registerListener(0, this);
     mLoader.startLoading();
+    return true;
   }
 
   @Override
@@ -457,8 +469,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    * will be chosen to make a call or initiate an sms message.
    *
    * <p>It is recommended to use {@link #startInteractionForPhoneCall(TransactionSafeActivity, Uri,
-   * boolean, int)} instead of directly using this class, as those methods handle one or multiple
-   * data cases appropriately.
+   * boolean, CallSpecificAppData)} instead of directly using this class, as those methods handle
+   * one or multiple data cases appropriately.
    *
    * <p>This fragment may only be attached to activities which implement {@link
    * DisambigDialogDismissedListener}.

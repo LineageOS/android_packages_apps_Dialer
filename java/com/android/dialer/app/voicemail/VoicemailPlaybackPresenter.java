@@ -39,6 +39,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.webkit.MimeTypeMap;
 import com.android.common.io.MoreCloseables;
@@ -47,8 +48,11 @@ import com.android.dialer.app.calllog.CallLogListItemViewHolder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.AsyncTaskExecutor;
 import com.android.dialer.common.AsyncTaskExecutors;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.Constants;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.google.common.io.ByteStreams;
 import java.io.File;
@@ -71,9 +75,9 @@ import javax.annotation.concurrent.ThreadSafe;
  * assumptions about the behaviors and lifecycle of the call log, in particular in the {@link
  * CallLogFragment} and {@link CallLogAdapter}.
  *
- * <p>This controls a single {@link com.android.dialer.voicemail.VoicemailPlaybackLayout}. A single
- * instance can be reused for different such layouts, using {@link #setPlaybackView}. This is to
- * facilitate reuse across different voicemail call log entries.
+ * <p>This controls a single {@link com.android.dialer.app.voicemail.VoicemailPlaybackLayout}. A
+ * single instance can be reused for different such layouts, using {@link #setPlaybackView}. This is
+ * to facilitate reuse across different voicemail call log entries.
  *
  * <p>This class is not thread safe. The thread policy for this class is thread-confinement, all
  * calls into this class from outside must be done from the main UI thread.
@@ -103,6 +107,8 @@ public class VoicemailPlaybackPresenter
   private static final String IS_SPEAKERPHONE_ON_KEY =
       VoicemailPlaybackPresenter.class.getName() + ".IS_SPEAKER_PHONE_ON";
   private static final String VOICEMAIL_SHARE_FILE_NAME_DATE_FORMAT = "MM-dd-yy_hhmmaa";
+  private static final String CONFIG_SHARE_VOICEMAIL_ALLOWED = "share_voicemail_allowed";
+
   private static VoicemailPlaybackPresenter sInstance;
   private static ScheduledExecutorService mScheduledExecutorService;
   /**
@@ -138,6 +144,7 @@ public class VoicemailPlaybackPresenter
   private PowerManager.WakeLock mProximityWakeLock;
   private VoicemailAudioManager mVoicemailAudioManager;
   private OnVoicemailDeletedListener mOnVoicemailDeletedListener;
+  private View shareVoicemailButtonView;
 
   /** Initialize variables which are activity-independent and state-independent. */
   protected VoicemailPlaybackPresenter(Activity activity) {
@@ -222,11 +229,17 @@ public class VoicemailPlaybackPresenter
 
   /** Specify the view which this presenter controls and the voicemail to prepare to play. */
   public void setPlaybackView(
-      PlaybackView view, long rowId, Uri voicemailUri, final boolean startPlayingImmediately) {
+      PlaybackView view,
+      long rowId,
+      Uri voicemailUri,
+      final boolean startPlayingImmediately,
+      View shareVoicemailButtonView) {
     mRowId = rowId;
     mView = view;
     mView.setPresenter(this, voicemailUri);
     mView.onSpeakerphoneOn(mIsSpeakerphoneOn);
+    this.shareVoicemailButtonView = shareVoicemailButtonView;
+    showShareVoicemailButton(false);
 
     // Handles cases where the same entry is binded again when scrolling in list, or where
     // the MediaPlayer was retained after an orientation change.
@@ -236,6 +249,7 @@ public class VoicemailPlaybackPresenter
       // media player.
       mPosition = mMediaPlayer.getCurrentPosition();
       onPrepared(mMediaPlayer);
+      showShareVoicemailButton(true);
     } else {
       if (!voicemailUri.equals(mVoicemailUri)) {
         mVoicemailUri = voicemailUri;
@@ -247,19 +261,17 @@ public class VoicemailPlaybackPresenter
        * it if the content is not available.
        */
       checkForContent(
-          new OnContentCheckedListener() {
-            @Override
-            public void onContentChecked(boolean hasContent) {
-              if (hasContent) {
-                prepareContent();
-              } else {
-                if (startPlayingImmediately) {
-                  requestContent(PLAYBACK_REQUEST);
-                }
-                if (mView != null) {
-                  mView.resetSeekBar();
-                  mView.setClipPosition(0, mDuration.get());
-                }
+          hasContent -> {
+            if (hasContent) {
+              showShareVoicemailButton(true);
+              prepareContent();
+            } else {
+              if (startPlayingImmediately) {
+                requestContent(PLAYBACK_REQUEST);
+              }
+              if (mView != null) {
+                mView.resetSeekBar();
+                mView.setClipPosition(0, mDuration.get());
               }
             }
           });
@@ -547,6 +559,7 @@ public class VoicemailPlaybackPresenter
 
     mPosition = 0;
     mIsPlaying = false;
+    showShareVoicemailButton(false);
   }
 
   /** After done playing the voicemail clip, reset the clip position to the start. */
@@ -600,18 +613,16 @@ public class VoicemailPlaybackPresenter
        * timeout, but succeeded.
        */
       checkForContent(
-          new OnContentCheckedListener() {
-            @Override
-            public void onContentChecked(boolean hasContent) {
-              if (!hasContent) {
-                // No local content, download from server. Queue playing if the request was
-                // issued,
-                mIsPlaying = requestContent(PLAYBACK_REQUEST);
-              } else {
-                // Queue playing once the media play loaded the content.
-                mIsPlaying = true;
-                prepareContent();
-              }
+          hasContent -> {
+            if (!hasContent) {
+              // No local content, download from server. Queue playing if the request was
+              // issued,
+              mIsPlaying = requestContent(PLAYBACK_REQUEST);
+            } else {
+              showShareVoicemailButton(true);
+              // Queue playing once the media play loaded the content.
+              mIsPlaying = true;
+              prepareContent();
             }
           });
       return;
@@ -811,6 +822,20 @@ public class VoicemailPlaybackPresenter
   @VisibleForTesting
   public void clearInstance() {
     sInstance = null;
+  }
+
+  private void showShareVoicemailButton(boolean show) {
+    if (isShareVoicemailAllowed(mContext) && shareVoicemailButtonView != null) {
+      if (show) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_VISIBLE);
+      }
+      LogUtil.d("VoicemailPlaybackPresenter.showShareVoicemailButton", "show: %b", show);
+      shareVoicemailButtonView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+  }
+
+  private static boolean isShareVoicemailAllowed(Context context) {
+    return ConfigProviderBindings.get(context).getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
   }
 
   /**
@@ -1041,6 +1066,7 @@ public class VoicemailPlaybackPresenter
             public void onPostExecute(Boolean hasContent) {
               if (hasContent && mContext != null && mIsWaitingForResult.getAndSet(false)) {
                 mContext.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
+                showShareVoicemailButton(true);
                 prepareContent();
               }
             }

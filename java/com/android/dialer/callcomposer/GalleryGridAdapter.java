@@ -104,6 +104,18 @@ public class GalleryGridAdapter extends CursorAdapter {
     }
   }
 
+  public void insertEntries(@NonNull List<GalleryGridItemData> entries) {
+    Assert.checkArgument(entries.size() != 0);
+    LogUtil.i("GalleryGridAdapter.insertRows", "inserting %d rows", entries.size());
+    MatrixCursor extraRow = new MatrixCursor(GalleryGridItemData.IMAGE_PROJECTION);
+    for (GalleryGridItemData entry : entries) {
+      extraRow.addRow(new Object[] {0L, entry.getFilePath(), entry.getMimeType(), ""});
+    }
+    extraRow.moveToFirst();
+    Cursor extendedCursor = new MergeCursor(new Cursor[] {extraRow, getCursor()});
+    swapCursor(extendedCursor);
+  }
+
   public GalleryGridItemData insertEntry(String filePath, String mimeType) {
     LogUtil.i("GalleryGridAdapter.insertRow", mimeType + " " + filePath);
 

@@ -27,9 +27,10 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
-import com.android.dialer.app.PhoneCallDetails;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
+import com.android.dialer.calllogutils.PhoneCallDetails;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
 import java.util.ArrayList;
@@ -84,6 +85,8 @@ public class PhoneCallDetailsHelper {
     // Show the video icon if the call had video enabled.
     views.callTypeIcons.setShowVideo(
         (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    views.callTypeIcons.setShowHd(
+        MotorolaUtils.shouldShowHdIconInCallLog(mContext, details.features));
     views.callTypeIcons.requestLayout();
     views.callTypeIcons.setVisibility(View.VISIBLE);
 

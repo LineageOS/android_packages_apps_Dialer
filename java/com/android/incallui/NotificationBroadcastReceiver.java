@@ -27,7 +27,6 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.VideoUtils;
 
 /**
  * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus sent from
@@ -96,7 +95,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     } else {
       DialerCall call = callList.getVideoUpgradeRequestCall();
       if (call != null) {
-        call.acceptUpgradeRequest(call.getRequestedVideoState());
+        call.getVideoTech().acceptVideoRequest();
       }
     }
   }
@@ -109,7 +108,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     } else {
       DialerCall call = callList.getVideoUpgradeRequestCall();
       if (call != null) {
-        call.declineUpgradeRequest();
+        call.getVideoTech().declineVideoRequest();
       }
     }
   }
@@ -142,10 +141,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
       if (call != null) {
         call.answer(videoState);
         InCallPresenter.getInstance()
-            .showInCall(
-                false /* showDialpad */,
-                false /* newOutgoingCall */,
-                VideoUtils.isVideoCall(videoState));
+            .showInCall(false /* showDialpad */, false /* newOutgoingCall */);
       }
     }
   }

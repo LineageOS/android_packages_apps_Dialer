@@ -47,7 +47,6 @@ import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.Bindings;
 import com.android.dialer.app.DialtactsActivity;
-import com.android.dialer.app.PhoneCallDetails;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
@@ -55,13 +54,19 @@ import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter.OnVoicemailDeletedListener;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.calldetails.nano.CallDetailsEntries;
+import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.AsyncTaskExecutor;
 import com.android.dialer.common.AsyncTaskExecutors;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
+import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.phonenumbercache.CallLogQuery;
@@ -70,6 +75,7 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.PermissionsUtil;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -96,7 +102,7 @@ public class CallLogAdapter extends GroupingListAdapter
   protected final CallLogCache mCallLogCache;
 
   private final CallFetcher mCallFetcher;
-  private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+  @NonNull private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
   private final int mActivityType;
 
   /** Instance of helper class for managing views. */
@@ -182,8 +188,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
   private boolean mIsSpamEnabled;
 
-  @NonNull private final EnrichedCallManager mEnrichedCallManager;
-
   public CallLogAdapter(
       Activity activity,
       ViewGroup alertContainer,
@@ -191,6 +195,7 @@ public class CallLogAdapter extends GroupingListAdapter
       CallLogCache callLogCache,
       ContactInfoCache contactInfoCache,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+      @NonNull FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
       int activityType) {
     super();
 
@@ -218,7 +223,7 @@ public class CallLogAdapter extends GroupingListAdapter
     mCallLogListItemHelper =
         new CallLogListItemHelper(phoneCallDetailsHelper, resources, mCallLogCache);
     mCallLogGroupBuilder = new CallLogGroupBuilder(this);
-    mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(mActivity);
+    mFilteredNumberAsyncQueryHandler = Assert.isNotNull(filteredNumberAsyncQueryHandler);
 
     mContactsPreferences = new ContactsPreferences(mActivity);
 
@@ -232,7 +237,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     mCallLogAlertManager =
         new CallLogAlertManager(this, LayoutInflater.from(mActivity), alertContainer);
-    mEnrichedCallManager = EnrichedCallManager.Accessor.getInstance(activity.getApplication());
   }
 
   private void expandViewHolderActions(CallLogListItemViewHolder viewHolder) {
@@ -296,7 +300,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     mIsSpamEnabled = Spam.get(mActivity).isSpamEnabled();
-    mEnrichedCallManager.registerCapabilitiesListener(this);
+    getEnrichedCallManager().registerCapabilitiesListener(this);
     notifyDataSetChanged();
   }
 
@@ -305,11 +309,11 @@ public class CallLogAdapter extends GroupingListAdapter
     for (Uri uri : mHiddenItemUris) {
       CallLogAsyncTaskUtil.deleteVoicemail(mActivity, uri, null);
     }
-    mEnrichedCallManager.unregisterCapabilitiesListener(this);
+    getEnrichedCallManager().unregisterCapabilitiesListener(this);
   }
 
   public void onStop() {
-    mEnrichedCallManager.clearCachedData();
+    getEnrichedCallManager().clearCachedData();
   }
 
   public CallLogAlertManager getAlertManager() {
@@ -420,7 +424,9 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
     views.isLoaded = false;
-    PhoneCallDetails details = createPhoneCallDetails(c, getGroupSize(position), views);
+    int groupSize = getGroupSize(position);
+    CallDetailsEntries callDetailsEntries = createCallDetailsEntries(c, groupSize);
+    PhoneCallDetails details = createPhoneCallDetails(c, groupSize, views);
     if (mHiddenRowIds.contains(c.getLong(CallLogQuery.ID))) {
       views.callLogEntryView.setVisibility(View.GONE);
       views.dayGroupHeader.setVisibility(View.GONE);
@@ -432,11 +438,14 @@ public class CallLogAdapter extends GroupingListAdapter
     if (mCurrentlyExpandedRowId == views.rowId) {
       views.inflateActionViewStub();
     }
-    loadAndRender(views, views.rowId, details);
+    loadAndRender(views, views.rowId, details, callDetailsEntries);
   }
 
   private void loadAndRender(
-      final CallLogListItemViewHolder views, final long rowId, final PhoneCallDetails details) {
+      final CallLogListItemViewHolder views,
+      final long rowId,
+      final PhoneCallDetails details,
+      final CallDetailsEntries callDetailsEntries) {
     // Reset block and spam information since this view could be reused which may contain
     // outdated data.
     views.isSpam = false;
@@ -464,12 +473,33 @@ public class CallLogAdapter extends GroupingListAdapter
                       && Spam.get(mActivity)
                           .checkSpamStatusSynchronous(views.number, views.countryIso);
               details.isSpam = views.isSpam;
-              if (isCancelled()) {
-                return false;
+            }
+            if (isCancelled()) {
+              return false;
+            }
+            setCallDetailsEntriesHistoryResults(
+                PhoneNumberUtils.formatNumberToE164(views.number, views.countryIso),
+                callDetailsEntries);
+            views.setDetailedPhoneDetails(callDetailsEntries);
+            return !isCancelled() && loadData(views, rowId, details);
+          }
+
+          private void setCallDetailsEntriesHistoryResults(
+              @Nullable String number, CallDetailsEntries callDetailsEntries) {
+            if (number == null) {
+              return;
+            }
+            Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
+                getEnrichedCallManager().getAllHistoricalData(number, callDetailsEntries);
+            for (CallDetailsEntry entry : callDetailsEntries.entries) {
+              List<HistoryResult> results = mappedResults.get(entry);
+              if (results != null) {
+                entry.historyResults = mappedResults.get(entry).toArray(new HistoryResult[0]);
+                LogUtil.v(
+                    "CallLogAdapter.setCallDetailsEntriesHistoryResults",
+                    "mapped %d results",
+                    entry.historyResults.length);
               }
-              return loadData(views, rowId, details);
-            } else {
-              return loadData(views, rowId, details);
             }
           }
 
@@ -499,9 +529,9 @@ public class CallLogAdapter extends GroupingListAdapter
       return false;
     }
 
-    EnrichedCallCapabilities capabilities = mEnrichedCallManager.getCapabilities(e164Number);
+    EnrichedCallCapabilities capabilities = getEnrichedCallManager().getCapabilities(e164Number);
     if (capabilities == null) {
-      mEnrichedCallManager.requestCapabilities(e164Number);
+      getEnrichedCallManager().requestCapabilities(e164Number);
       return false;
     }
     return capabilities.supportsCallComposer();
@@ -560,6 +590,27 @@ public class CallLogAdapter extends GroupingListAdapter
     views.voicemailUri = cursor.getString(CallLogQuery.VOICEMAIL_URI);
 
     return details;
+  }
+
+  @MainThread
+  private static CallDetailsEntries createCallDetailsEntries(Cursor cursor, int count) {
+    Assert.isMainThread();
+    int position = cursor.getPosition();
+    CallDetailsEntries entries = new CallDetailsEntries();
+    entries.entries = new CallDetailsEntry[count];
+    for (int i = 0; i < count; i++) {
+      CallDetailsEntry entry = new CallDetailsEntry();
+      entry.callId = cursor.getLong(CallLogQuery.ID);
+      entry.callType = cursor.getInt(CallLogQuery.CALL_TYPE);
+      entry.dataUsage = cursor.getLong(CallLogQuery.DATA_USAGE);
+      entry.date = cursor.getLong(CallLogQuery.DATE);
+      entry.duration = cursor.getLong(CallLogQuery.DURATION);
+      entry.features |= cursor.getInt(CallLogQuery.FEATURES);
+      entries.entries[i] = entry;
+      cursor.moveToNext();
+    }
+    cursor.moveToPosition(position);
+    return entries;
   }
 
   /**
@@ -905,6 +956,11 @@ public class CallLogAdapter extends GroupingListAdapter
   @Override
   public void onCapabilitiesUpdated() {
     notifyDataSetChanged();
+  }
+
+  @NonNull
+  private EnrichedCallManager getEnrichedCallManager() {
+    return EnrichedCallComponent.get(mActivity).getEnrichedCallManager();
   }
 
   /** Interface used to initiate a refresh of the content. */

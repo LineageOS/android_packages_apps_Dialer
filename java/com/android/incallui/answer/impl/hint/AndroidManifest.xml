@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application>
-    <receiver android:name=".EventSecretCodeListener">
+    <receiver android:name=".PawSecretCodeListener">
       <intent-filter>
         <action android:name="android.provider.Telephony.SECRET_CODE" />
         <data android:scheme="android_secret_code" />

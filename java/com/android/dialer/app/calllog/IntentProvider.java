@@ -16,7 +16,6 @@
 
 package com.android.dialer.app.calllog;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -25,10 +24,11 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
-import com.android.dialer.app.CallDetailActivity;
+import com.android.dialer.callcomposer.nano.CallComposerContact;
+import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
-import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -97,29 +97,16 @@ public abstract class IntentProvider {
   /**
    * Retrieves the call details intent provider for an entry in the call log.
    *
-   * @param id The call ID of the first call in the call group.
-   * @param extraIds The call ID of the other calls grouped together with the call.
-   * @param voicemailUri If call log entry is for a voicemail, the voicemail URI.
+   * @param callDetailsEntries The call details of the other calls grouped together with the call.
+   * @param contact The contact with which this call details intent pertains to.
    * @return The call details intent provider.
    */
   public static IntentProvider getCallDetailIntentProvider(
-      final long id, final long[] extraIds, final String voicemailUri) {
+      CallDetailsEntries callDetailsEntries, CallComposerContact contact) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        Intent intent = new Intent(context, CallDetailActivity.class);
-        // Check if the first item is a voicemail.
-        if (voicemailUri != null) {
-          intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI, Uri.parse(voicemailUri));
-        }
-
-        if (extraIds != null && extraIds.length > 0) {
-          intent.putExtra(CallDetailActivity.EXTRA_CALL_LOG_IDS, extraIds);
-        } else {
-          // If there is a single item, use the direct URI for it.
-          intent.setData(ContentUris.withAppendedId(TelecomUtil.getCallLogUri(context), id));
-        }
-        return intent;
+        return CallDetailsActivity.newInstance(context, callDetailsEntries, contact);
       }
     };
   }

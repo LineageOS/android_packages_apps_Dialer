@@ -190,7 +190,7 @@ public class SwipeButtonHelper {
 
       case MotionEvent.ACTION_UP:
         isUp = true;
-        //fallthrough_intended
+        // fall through
       case MotionEvent.ACTION_CANCEL:
         boolean hintOnTheRight = targetedView == rightIcon;
         trackMovement(event);

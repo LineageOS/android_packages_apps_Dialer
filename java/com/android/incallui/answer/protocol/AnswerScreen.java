@@ -24,7 +24,7 @@ public interface AnswerScreen {
 
   String getCallId();
 
-  int getVideoState();
+  boolean isVideoCall();
 
   boolean isVideoUpgradeRequest();
 

@@ -22,9 +22,11 @@
   <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="quick_question">Quick question…</string>
   <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
-  <string name="custom_message_hint">Write a custom message</string>
-  <!-- Text for a button to make a phone call combined with a picture or text message [CHAR LIMIT=26] -->
+  <string name="message_composer_custom_message_hint">Write a custom message</string>
+  <!-- Text for a button to make a phone call combined with a text message [CHAR LIMIT=26] -->
   <string name="send_and_call">Send and call</string>
+  <!-- Text for a button to make a phone call combined with a picture or other media [CHAR LIMIT=26] -->
+  <string name="share_and_call">Share and call</string>
   <!-- Accessibility description for each image in the gallery. For example, "image January 17 2015 1 59 pm". -->
   <string name="gallery_item_description">image <xliff:g id="date">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
   <!-- Accessibility description for each image in the gallery when no date is present. -->

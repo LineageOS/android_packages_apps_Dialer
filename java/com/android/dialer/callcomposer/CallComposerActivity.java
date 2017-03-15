@@ -21,9 +21,9 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +35,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
@@ -60,6 +61,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.constants.Constants;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.EnrichedCallManager.State;
 import com.android.dialer.enrichedcall.Session;
@@ -70,6 +72,7 @@ import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
+import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 import java.io.File;
 
 /**
@@ -88,18 +91,18 @@ public class CallComposerActivity extends AppCompatActivity
         OnPageChangeListener,
         CallComposerListener,
         OnLayoutChangeListener,
-        AnimatorListener,
         EnrichedCallManager.StateChangedListener {
 
-  private static final int VIEW_PAGER_ANIMATION_DURATION_MILLIS = 300;
+  public static final String KEY_CONTACT_NAME = "contact_name";
+
   private static final int ENTRANCE_ANIMATION_DURATION_MILLIS = 500;
+  private static final int EXIT_ANIMATION_DURATION_MILLIS = 500;
 
   private static final String ARG_CALL_COMPOSER_CONTACT = "CALL_COMPOSER_CONTACT";
 
   private static final String ENTRANCE_ANIMATION_KEY = "entrance_animation_key";
   private static final String CURRENT_INDEX_KEY = "current_index_key";
   private static final String VIEW_PAGER_STATE_KEY = "view_pager_state_key";
-  private static final String LOCATIONS_KEY = "locations_key";
   private static final String SESSION_ID_KEY = "session_id_key";
 
   private CallComposerContact contact;
@@ -111,6 +114,7 @@ public class CallComposerActivity extends AppCompatActivity
   private RelativeLayout contactContainer;
   private Toolbar toolbar;
   private View sendAndCall;
+  private TextView sendAndCallText;
 
   private ImageView cameraIcon;
   private ImageView galleryIcon;
@@ -125,13 +129,8 @@ public class CallComposerActivity extends AppCompatActivity
   private boolean shouldAnimateEntrance = true;
   private boolean inFullscreenMode;
   private boolean isSendAndCallHidingOrHidden = true;
-  private boolean isAnimatingContactBar;
   private boolean layoutChanged;
   private int currentIndex;
-  private int[] locations;
-  private int currentLocation;
-
-  @NonNull private EnrichedCallManager enrichedCallManager;
 
   public static Intent newIntent(Context context, CallComposerContact contact) {
     Intent intent = new Intent(context, CallComposerActivity.class);
@@ -156,6 +155,7 @@ public class CallComposerActivity extends AppCompatActivity
     windowContainer = (LinearLayout) findViewById(R.id.call_composer_container);
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     sendAndCall = findViewById(R.id.send_and_call_button);
+    sendAndCallText = (TextView) findViewById(R.id.send_and_call_text);
 
     interpolator = new FastOutSlowInInterpolator();
     adapter =
@@ -166,14 +166,8 @@ public class CallComposerActivity extends AppCompatActivity
     pager.addOnPageChangeListener(this);
 
     setActionBar(toolbar);
-    toolbar.setNavigationIcon(R.drawable.quantum_ic_arrow_back_white_24);
-    toolbar.setNavigationOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            finish();
-          }
-        });
+    toolbar.setNavigationIcon(R.drawable.quantum_ic_close_white_24);
+    toolbar.setNavigationOnClickListener(v -> finish());
 
     background.addOnLayoutChangeListener(this);
     cameraIcon.setOnClickListener(this);
@@ -183,20 +177,12 @@ public class CallComposerActivity extends AppCompatActivity
 
     onHandleIntent(getIntent());
 
-    enrichedCallManager = EnrichedCallManager.Accessor.getInstance(getApplication());
     if (savedInstanceState != null) {
       shouldAnimateEntrance = savedInstanceState.getBoolean(ENTRANCE_ANIMATION_KEY);
-      locations = savedInstanceState.getIntArray(LOCATIONS_KEY);
       pager.onRestoreInstanceState(savedInstanceState.getParcelable(VIEW_PAGER_STATE_KEY));
       currentIndex = savedInstanceState.getInt(CURRENT_INDEX_KEY);
-      sessionId = savedInstanceState.getLong(SESSION_ID_KEY);
+      sessionId = savedInstanceState.getLong(SESSION_ID_KEY, Session.NO_SESSION_ID);
       onPageSelected(currentIndex);
-    } else {
-      locations = new int[adapter.getCount()];
-      for (int i = 0; i < locations.length; i++) {
-        locations[i] = CallComposerFragment.CONTENT_TOP_UNSET;
-      }
-      sessionId = enrichedCallManager.startCallComposerSession(contact.number);
     }
 
     // Since we can't animate the views until they are ready to be drawn, we use this listener to
@@ -204,37 +190,39 @@ public class CallComposerActivity extends AppCompatActivity
     ViewUtil.doOnPreDraw(
         windowContainer,
         false,
-        new Runnable() {
-          @Override
-          public void run() {
-            runEntranceAnimation();
-          }
+        () -> {
+          showFullscreen(inFullscreenMode);
+          runEntranceAnimation();
         });
 
     setMediaIconSelected(0);
-
-    // This activity is started using startActivityForResult. By default, mark this as succeeded
-    // and flip this to RESULT_CANCELED if something goes wrong.
-    setResult(RESULT_OK);
-
-    if (sessionId == Session.NO_SESSION_ID) {
-      LogUtil.w("CallComposerActivity.onCreate", "failed to create call composer session");
-      setResult(RESULT_CANCELED);
-      finish();
-    }
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    enrichedCallManager.registerStateChangedListener(this);
+    getEnrichedCallManager().registerStateChangedListener(this);
+    if (sessionId == Session.NO_SESSION_ID) {
+      LogUtil.i("CallComposerActivity.onResume", "creating new session");
+      sessionId = getEnrichedCallManager().startCallComposerSession(contact.number);
+    } else if (getEnrichedCallManager().getSession(sessionId) == null) {
+      LogUtil.i(
+          "CallComposerActivity.onResume", "session closed while activity paused, creating new");
+      sessionId = getEnrichedCallManager().startCallComposerSession(contact.number);
+    } else {
+      LogUtil.i("CallComposerActivity.onResume", "session still open, using old");
+    }
+    if (sessionId == Session.NO_SESSION_ID) {
+      LogUtil.w("CallComposerActivity.onResume", "failed to create call composer session");
+      setFailedResultAndFinish();
+    }
     refreshUiForCallComposerState();
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-    enrichedCallManager.unregisterStateChangedListener(this);
+    getEnrichedCallManager().unregisterStateChangedListener(this);
   }
 
   @Override
@@ -243,7 +231,7 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void refreshUiForCallComposerState() {
-    Session session = enrichedCallManager.getSession(sessionId);
+    Session session = getEnrichedCallManager().getSession(sessionId);
     if (session == null) {
       return;
     }
@@ -256,8 +244,7 @@ public class CallComposerActivity extends AppCompatActivity
 
     if (state == EnrichedCallManager.STATE_START_FAILED
         || state == EnrichedCallManager.STATE_CLOSED) {
-      setResult(RESULT_CANCELED);
-      finish();
+      setFailedResultAndFinish();
     }
   }
 
@@ -293,7 +280,7 @@ public class CallComposerActivity extends AppCompatActivity
 
       if (fragment instanceof MessageComposerFragment) {
         MessageComposerFragment messageComposerFragment = (MessageComposerFragment) fragment;
-        builder.setSubject(messageComposerFragment.getMessage());
+        builder.setText(messageComposerFragment.getMessage());
         placeRCSCall(builder);
       }
       if (fragment instanceof GalleryComposerFragment) {
@@ -351,7 +338,7 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private boolean sessionReady() {
-    Session session = enrichedCallManager.getSession(sessionId);
+    Session session = getEnrichedCallManager().getSession(sessionId);
     if (session == null) {
       return false;
     }
@@ -362,9 +349,10 @@ public class CallComposerActivity extends AppCompatActivity
   private void placeRCSCall(MultimediaData.Builder builder) {
     LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call");
     Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
-    enrichedCallManager.sendCallComposerData(sessionId, builder.build());
+    getEnrichedCallManager().sendCallComposerData(sessionId, builder.build());
     TelecomUtil.placeCall(
         this, new CallIntentBuilder(contact.number, CallInitiationType.Type.CALL_COMPOSER).build());
+    setResult(RESULT_OK);
     finish();
   }
 
@@ -379,24 +367,26 @@ public class CallComposerActivity extends AppCompatActivity
   /** Animates {@code contactContainer} to align with content inside viewpager. */
   @Override
   public void onPageSelected(int position) {
+    if (position == CallComposerPagerAdapter.INDEX_MESSAGE) {
+      sendAndCallText.setText(R.string.send_and_call);
+    } else {
+      sendAndCallText.setText(R.string.share_and_call);
+    }
     if (currentIndex == CallComposerPagerAdapter.INDEX_MESSAGE) {
       UiUtil.hideKeyboardFrom(this, windowContainer);
-    } else if (position == CallComposerPagerAdapter.INDEX_MESSAGE && inFullscreenMode) {
+    } else if (position == CallComposerPagerAdapter.INDEX_MESSAGE
+        && inFullscreenMode
+        && !isLandscapeLayout()) {
       UiUtil.openKeyboardFrom(this, windowContainer);
     }
     currentIndex = position;
     CallComposerFragment fragment = (CallComposerFragment) adapter.instantiateItem(pager, position);
-    locations[currentIndex] = fragment.getContentTopPx();
-    animateContactContainer(locations[currentIndex]);
     animateSendAndCall(fragment.shouldHide());
     setMediaIconSelected(position);
   }
 
   @Override
-  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    CallComposerFragment fragment = (CallComposerFragment) adapter.instantiateItem(pager, position);
-    animateContactContainer(fragment.getContentTopPx());
-  }
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
   @Override
   public void onPageScrollStateChanged(int state) {}
@@ -407,13 +397,19 @@ public class CallComposerActivity extends AppCompatActivity
     outState.putParcelable(VIEW_PAGER_STATE_KEY, pager.onSaveInstanceState());
     outState.putBoolean(ENTRANCE_ANIMATION_KEY, shouldAnimateEntrance);
     outState.putInt(CURRENT_INDEX_KEY, currentIndex);
-    outState.putIntArray(LOCATIONS_KEY, locations);
     outState.putLong(SESSION_ID_KEY, sessionId);
   }
 
   @Override
   public void onBackPressed() {
-    runExitAnimation();
+    if (!isSendAndCallHidingOrHidden) {
+      ((CallComposerFragment) adapter.instantiateItem(pager, currentIndex)).clearComposer();
+    } else {
+      // Unregister first to avoid receiving a callback when the session closes
+      getEnrichedCallManager().unregisterStateChangedListener(this);
+      getEnrichedCallManager().endCallComposerSession(sessionId);
+      runExitAnimation();
+    }
   }
 
   @Override
@@ -445,28 +441,8 @@ public class CallComposerActivity extends AppCompatActivity
     }
 
     layoutChanged = true;
-    if (pager.getTop() < 0 || inFullscreenMode) {
-      ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
-      layoutParams.height = background.getHeight() - toolbar.getHeight() - messageIcon.getHeight();
-      pager.setLayoutParams(layoutParams);
-    }
+    showFullscreen(contactContainer.getTop() < 0 || inFullscreenMode);
   }
-
-  @Override
-  public void onAnimationStart(Animator animation) {
-    isAnimatingContactBar = true;
-  }
-
-  @Override
-  public void onAnimationEnd(Animator animation) {
-    isAnimatingContactBar = false;
-  }
-
-  @Override
-  public void onAnimationCancel(Animator animation) {}
-
-  @Override
-  public void onAnimationRepeat(Animator animation) {}
 
   /**
    * Reads arguments from the fragment arguments and populates the necessary instance variables.
@@ -477,10 +453,24 @@ public class CallComposerActivity extends AppCompatActivity
     if (arguments == null) {
       throw new RuntimeException("CallComposerActivity.onHandleIntent, Arguments cannot be null.");
     }
-    contact =
-        ProtoParsers.getFromInstanceState(
-            arguments, ARG_CALL_COMPOSER_CONTACT, new CallComposerContact());
+    if (arguments.get(ARG_CALL_COMPOSER_CONTACT) instanceof String) {
+      byte[] bytes = Base64.decode(arguments.getString(ARG_CALL_COMPOSER_CONTACT), Base64.DEFAULT);
+      try {
+        contact = CallComposerContact.parseFrom(bytes);
+      } catch (InvalidProtocolBufferNanoException e) {
+        Assert.fail(e.toString());
+      }
+    } else {
+      contact =
+          ProtoParsers.getFromInstanceState(
+              arguments, ARG_CALL_COMPOSER_CONTACT, new CallComposerContact());
+    }
     updateContactInfo();
+  }
+
+  @Override
+  public boolean isLandscapeLayout() {
+    return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   }
 
   /**
@@ -552,25 +542,6 @@ public class CallComposerActivity extends AppCompatActivity
     }
   }
 
-  private void animateContactContainer(int toY) {
-    if (toY == CallComposerFragment.CONTENT_TOP_UNSET
-        || toY == currentLocation
-        || (toY != locations[currentIndex]
-            && locations[currentIndex] != CallComposerFragment.CONTENT_TOP_UNSET)
-        || isAnimatingContactBar
-        || inFullscreenMode) {
-      return;
-    }
-    currentLocation = toY;
-    contactContainer
-        .animate()
-        .translationY(toY)
-        .setInterpolator(interpolator)
-        .setDuration(VIEW_PAGER_ANIMATION_DURATION_MILLIS)
-        .setListener(this)
-        .start();
-  }
-
   /** Animates compose UI into view */
   private void runEntranceAnimation() {
     if (!shouldAnimateEntrance) {
@@ -578,84 +549,90 @@ public class CallComposerActivity extends AppCompatActivity
     }
     shouldAnimateEntrance = false;
 
-    int colorFrom = ContextCompat.getColor(this, android.R.color.transparent);
-    int colorTo = ContextCompat.getColor(this, R.color.call_composer_background_color);
-    ValueAnimator backgroundAnimation =
-        ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-    backgroundAnimation.setInterpolator(interpolator);
-    backgroundAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS); // milliseconds
-    backgroundAnimation.addUpdateListener(
-        new AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animator) {
-            background.setBackgroundColor((int) animator.getAnimatedValue());
-          }
-        });
-
-    ValueAnimator contentAnimation = ValueAnimator.ofFloat(windowContainer.getHeight(), 0);
+    int value = isLandscapeLayout() ? windowContainer.getWidth() : windowContainer.getHeight();
+    ValueAnimator contentAnimation = ValueAnimator.ofFloat(value, 0);
     contentAnimation.setInterpolator(interpolator);
     contentAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS);
     contentAnimation.addUpdateListener(
-        new AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
+        animation -> {
+          if (isLandscapeLayout()) {
+            windowContainer.setX((Float) animation.getAnimatedValue());
+          } else {
             windowContainer.setY((Float) animation.getAnimatedValue());
           }
         });
 
-    AnimatorSet set = new AnimatorSet();
-    set.play(contentAnimation).with(backgroundAnimation);
-    set.start();
+    if (!isLandscapeLayout()) {
+      int colorFrom = ContextCompat.getColor(this, android.R.color.transparent);
+      int colorTo = ContextCompat.getColor(this, R.color.call_composer_background_color);
+      ValueAnimator backgroundAnimation =
+          ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+      backgroundAnimation.setInterpolator(interpolator);
+      backgroundAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS); // milliseconds
+      backgroundAnimation.addUpdateListener(
+          animator -> background.setBackgroundColor((int) animator.getAnimatedValue()));
+
+      AnimatorSet set = new AnimatorSet();
+      set.play(contentAnimation).with(backgroundAnimation);
+      set.start();
+    } else {
+      contentAnimation.start();
+    }
   }
 
   /** Animates compose UI out of view and ends the activity. */
   private void runExitAnimation() {
-    int colorTo = ContextCompat.getColor(this, android.R.color.transparent);
-    int colorFrom = ContextCompat.getColor(this, R.color.call_composer_background_color);
-    ValueAnimator backgroundAnimation =
-        ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-    backgroundAnimation.setInterpolator(interpolator);
-    backgroundAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS); // milliseconds
-    backgroundAnimation.addUpdateListener(
-        new AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animator) {
-            background.setBackgroundColor((int) animator.getAnimatedValue());
+    int value = isLandscapeLayout() ? windowContainer.getWidth() : windowContainer.getHeight();
+    ValueAnimator contentAnimation = ValueAnimator.ofFloat(0, value);
+    contentAnimation.setInterpolator(interpolator);
+    contentAnimation.setDuration(EXIT_ANIMATION_DURATION_MILLIS);
+    contentAnimation.addUpdateListener(
+        animation -> {
+          if (isLandscapeLayout()) {
+            windowContainer.setX((Float) animation.getAnimatedValue());
+          } else {
+            windowContainer.setY((Float) animation.getAnimatedValue());
+          }
+          if (animation.getAnimatedFraction() > .95) {
+            finish();
           }
         });
 
-    ValueAnimator contentAnimation = ValueAnimator.ofFloat(0, windowContainer.getHeight());
-    contentAnimation.setInterpolator(interpolator);
-    contentAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS);
-    contentAnimation.addUpdateListener(
-        new AnimatorUpdateListener() {
-          @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
-            windowContainer.setY((Float) animation.getAnimatedValue());
-            if (animation.getAnimatedFraction() > .75) {
-              finish();
-            }
-          }
-        });
-    AnimatorSet set = new AnimatorSet();
-    set.play(contentAnimation).with(backgroundAnimation);
-    set.start();
+    if (!isLandscapeLayout()) {
+      int colorTo = ContextCompat.getColor(this, android.R.color.transparent);
+      int colorFrom = ContextCompat.getColor(this, R.color.call_composer_background_color);
+      ValueAnimator backgroundAnimation =
+          ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+      backgroundAnimation.setInterpolator(interpolator);
+      backgroundAnimation.setDuration(EXIT_ANIMATION_DURATION_MILLIS);
+      backgroundAnimation.addUpdateListener(
+          animator -> background.setBackgroundColor((int) animator.getAnimatedValue()));
+
+      AnimatorSet set = new AnimatorSet();
+      set.play(contentAnimation).with(backgroundAnimation);
+      set.start();
+    } else {
+      contentAnimation.start();
+    }
   }
 
   @Override
-  public void showFullscreen(boolean show) {
-    if (inFullscreenMode == show) {
-      return;
-    }
-    inFullscreenMode = show;
-    toolbar.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
-    contactContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+  public void showFullscreen(boolean fullscreen) {
+    inFullscreenMode = fullscreen;
     ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
-    if (show) {
+    if (isLandscapeLayout()) {
+      layoutParams.height = background.getHeight() - messageIcon.getHeight();
+      toolbar.setVisibility(View.INVISIBLE);
+      contactContainer.setVisibility(View.GONE);
+    } else if (fullscreen || getResources().getBoolean(R.bool.show_toolbar)) {
       layoutParams.height = background.getHeight() - toolbar.getHeight() - messageIcon.getHeight();
+      toolbar.setVisibility(View.VISIBLE);
+      contactContainer.setVisibility(View.GONE);
     } else {
       layoutParams.height =
           getResources().getDimensionPixelSize(R.dimen.call_composer_view_pager_height);
+      toolbar.setVisibility(View.INVISIBLE);
+      contactContainer.setVisibility(View.VISIBLE);
     }
     pager.setLayoutParams(layoutParams);
   }
@@ -686,35 +663,32 @@ public class CallComposerActivity extends AppCompatActivity
       ViewUtil.doOnPreDraw(
           sendAndCall,
           true,
-          new Runnable() {
-            @Override
-            public void run() {
-              Animator animator =
-                  ViewAnimationUtils.createCircularReveal(
-                      sendAndCall, centerX, centerY, startRadius, endRadius);
-              animator.addListener(
-                  new AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                      isSendAndCallHidingOrHidden = shouldHide;
-                      sendAndCall.setVisibility(View.VISIBLE);
+          () -> {
+            Animator animator =
+                ViewAnimationUtils.createCircularReveal(
+                    sendAndCall, centerX, centerY, startRadius, endRadius);
+            animator.addListener(
+                new AnimatorListener() {
+                  @Override
+                  public void onAnimationStart(Animator animation) {
+                    isSendAndCallHidingOrHidden = shouldHide;
+                    sendAndCall.setVisibility(View.VISIBLE);
+                  }
+
+                  @Override
+                  public void onAnimationEnd(Animator animation) {
+                    if (isSendAndCallHidingOrHidden) {
+                      sendAndCall.setVisibility(View.INVISIBLE);
                     }
+                  }
 
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                      if (isSendAndCallHidingOrHidden) {
-                        sendAndCall.setVisibility(View.INVISIBLE);
-                      }
-                    }
+                  @Override
+                  public void onAnimationCancel(Animator animation) {}
 
-                    @Override
-                    public void onAnimationCancel(Animator animation) {}
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {}
-                  });
-              animator.start();
-            }
+                  @Override
+                  public void onAnimationRepeat(Animator animation) {}
+                });
+            animator.start();
           });
     }
   }
@@ -724,5 +698,15 @@ public class CallComposerActivity extends AppCompatActivity
     cameraIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_CAMERA ? 1 : alpha);
     galleryIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_GALLERY ? 1 : alpha);
     messageIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_MESSAGE ? 1 : alpha);
+  }
+
+  private void setFailedResultAndFinish() {
+    setResult(RESULT_FIRST_USER, new Intent().putExtra(KEY_CONTACT_NAME, contact.nameOrNumber));
+    finish();
+  }
+
+  @NonNull
+  private EnrichedCallManager getEnrichedCallManager() {
+    return EnrichedCallComponent.get(this).getEnrichedCallManager();
   }
 }

@@ -20,10 +20,10 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Pair;
-import com.android.dialer.app.calllog.PhoneAccountUtils;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -45,9 +45,9 @@ class CallLogCacheLollipopMr1 extends CallLogCache {
   final Map<Pair<PhoneAccountHandle, CharSequence>, Boolean> mVoicemailQueryCache =
       new ConcurrentHashMap<>();
 
-  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new HashMap<>();
-  private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new HashMap<>();
-  private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new HashMap<>();
+  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new ArrayMap<>();
 
   /* package */ CallLogCacheLollipopMr1(Context context) {
     super(context);

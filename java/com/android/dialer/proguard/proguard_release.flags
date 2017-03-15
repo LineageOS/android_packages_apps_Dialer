@@ -1,0 +1,24 @@
+# Copied from http://google3/java/com/google/android/apps/common/proguard/release.flags
+
+# Used for building release binaries. Obfuscates, optimizes, and shrinks.
+
+# By default, proguard leaves all classes in their original package, which
+# needlessly repeats com.google.android.apps.etc.
+-repackageclasses ""
+
+# Allows proguard to make private and protected methods and fields public as
+# part of optimization. This lets proguard inline trivial getter/setter methods.
+-allowaccessmodification
+
+# The source file attribute must be present in order to print stack traces, but
+# we rename it in order to avoid leaking the pre-obfuscation class name.
+-renamesourcefileattribute PG
+
+# This allows proguard to strip isLoggable() blocks containing only debug log
+# code from release builds.
+-assumenosideeffects class android.util.Log {
+  static *** i(...);
+  static *** d(...);
+  static *** v(...);
+  static *** isLoggable(...);
+}

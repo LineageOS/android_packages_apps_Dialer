@@ -15,13 +15,18 @@
  */
 package com.android.dialer.app.calllog;
 
+import android.app.NotificationManager;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import com.android.dialer.app.R;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.notification.GroupedNotificationUtil;
 
 /** Handles asynchronous queries to the call log for voicemail. */
 public class VoicemailQueryHandler extends AsyncQueryHandler {
@@ -39,13 +44,17 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
   }
 
   /** Updates all new voicemails to mark them as old. */
-  public void markNewVoicemailsAsOld() {
+  public void markNewVoicemailsAsOld(@Nullable Uri voicemailUri) {
     // Mark all "new" voicemails as not new anymore.
     StringBuilder where = new StringBuilder();
     where.append(Calls.NEW);
     where.append(" = 1 AND ");
     where.append(Calls.TYPE);
     where.append(" = ?");
+
+    if (voicemailUri != null) {
+      where.append(" AND ").append(Calls.VOICEMAIL_URI).append(" = ?");
+    }
 
     ContentValues values = new ContentValues(1);
     values.put(Calls.NEW, "0");
@@ -56,7 +65,15 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
         Calls.CONTENT_URI_WITH_VOICEMAIL,
         values,
         where.toString(),
-        new String[] {Integer.toString(Calls.VOICEMAIL_TYPE)});
+        voicemailUri == null
+            ? new String[] {Integer.toString(Calls.VOICEMAIL_TYPE)}
+            : new String[] {Integer.toString(Calls.VOICEMAIL_TYPE), voicemailUri.toString()});
+
+    GroupedNotificationUtil.removeNotification(
+        mContext.getSystemService(NotificationManager.class),
+        voicemailUri != null ? voicemailUri.toString() : null,
+        R.id.notification_voicemail,
+        DefaultVoicemailNotifier.NOTIFICATION_TAG);
   }
 
   @Override
@@ -67,7 +84,7 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
         serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS);
         mContext.startService(serviceIntent);
       } else {
-        Log.w(TAG, "Unknown update completed: ignoring: " + token);
+        LogUtil.w(TAG, "Unknown update completed: ignoring: " + token);
       }
     }
   }

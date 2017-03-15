@@ -33,6 +33,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.v4.os.BuildCompat;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
@@ -40,6 +41,7 @@ import com.android.dialer.compat.SdkVersionOverride;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.voicemail.VoicemailComponent;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,13 +128,23 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   public void fetchVoicemailUnreadCount() {
     if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
       // Only count voicemails that have not been read and have not been deleted.
+      StringBuilder where =
+          new StringBuilder(Voicemails.IS_READ + "=0" + " AND " + Voicemails.DELETED + "=0 ");
+      List<String> selectionArgs = new ArrayList<>();
+
+      if (BuildCompat.isAtLeastO()) {
+        VoicemailComponent.get(mContext)
+            .getVoicemailClient()
+            .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
+      }
+
       startQuery(
           QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN,
           null,
           Voicemails.CONTENT_URI,
           new String[] {Voicemails._ID},
-          Voicemails.IS_READ + "=0" + " AND " + Voicemails.DELETED + "=0",
-          null,
+          where.toString(),
+          selectionArgs.toArray(new String[selectionArgs.size()]),
           null);
     }
   }
@@ -166,6 +178,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     if (newerThan > 0) {
       where.append(" AND (").append(Calls.DATE).append(" > ?)");
       selectionArgs.add(Long.toString(newerThan));
+    }
+
+    if (callType == Calls.VOICEMAIL_TYPE) {
+      VoicemailComponent.get(mContext)
+          .getVoicemailClient()
+          .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
     }
 
     final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;

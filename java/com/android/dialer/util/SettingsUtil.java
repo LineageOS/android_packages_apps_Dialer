@@ -69,6 +69,15 @@ public class SettingsUtil {
         }
       }
     }
+    getRingtoneName(context, handler, ringtoneUri, msg, defaultRingtone);
+  }
+
+  public static void getRingtoneName(Context context, Handler handler, Uri ringtoneUri, int msg) {
+    getRingtoneName(context, handler, ringtoneUri, msg, false);
+  }
+
+  public static void getRingtoneName(
+      Context context, Handler handler, Uri ringtoneUri, int msg, boolean defaultRingtone) {
     CharSequence summary = context.getString(R.string.ringtone_unknown);
     // Is it a silent ringtone?
     if (ringtoneUri == null) {

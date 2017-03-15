@@ -1,0 +1,5 @@
+# Used in com.android.dialer.answer.impl.SmsBottomSheetFragment
+-keep class android.support.design.widget.BottomSheetBehavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>();
+}

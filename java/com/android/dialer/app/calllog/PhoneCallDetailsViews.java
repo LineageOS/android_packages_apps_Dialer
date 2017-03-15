@@ -20,6 +20,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import com.android.dialer.app.R;
+import com.android.dialer.calllogutils.CallTypeIconsView;
 
 /** Encapsulates the views that are used to display the details of a phone call in the call log. */
 public final class PhoneCallDetailsViews {

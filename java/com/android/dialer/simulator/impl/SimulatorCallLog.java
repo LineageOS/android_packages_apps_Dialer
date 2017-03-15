@@ -26,7 +26,7 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
-
+import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -96,7 +96,7 @@ final class SimulatorCallLog {
     }
   }
 
-
+  @AutoValue
   abstract static class CallEntry {
     @NonNull
     abstract String getNumber();
@@ -121,7 +121,7 @@ final class SimulatorCallLog {
       return values;
     }
 
-
+    @AutoValue.Builder
     abstract static class Builder {
       abstract Builder setNumber(@NonNull String number);
 

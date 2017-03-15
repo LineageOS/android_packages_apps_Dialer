@@ -29,18 +29,6 @@
       android:theme="@style/SettingsStyle">
     </activity>
 
-    <activity
-      android:label="@string/callDetailTitle"
-      android:name="com.android.dialer.app.CallDetailActivity"
-      android:parentActivityName="com.android.dialer.calllog.CallLogActivity"
-      android:theme="@style/CallDetailActivityTheme">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-        <data android:mimeType="vnd.android.cursor.item/calls"/>
-      </intent-filter>
-    </activity>
-
     <!-- The entrance point for Phone UI.
          stateAlwaysHidden is set to suppress keyboard show up on
          dialpad screen. -->

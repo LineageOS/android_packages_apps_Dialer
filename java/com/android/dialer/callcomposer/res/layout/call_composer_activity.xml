@@ -120,13 +120,14 @@
         android:visibility="invisible"
         android:background="@color/compose_and_call_background">
         <TextView
+          android:id="@+id/send_and_call_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:drawableStart="@drawable/quantum_ic_call_white_18"
           android:drawablePadding="@dimen/send_and_call_drawable_padding"
           android:textAllCaps="true"
-          android:text="@string/send_and_call"
+          android:text="@string/share_and_call"
           android:textSize="@dimen/send_and_call_text_size"
           android:fontFamily="sans-serif-medium"
           android:textColor="@color/background_dialer_white"/>
@@ -140,8 +141,8 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
     android:visibility="invisible"
-    android:titleTextAppearance="@style/call_composer_toolbar_title_text"
-    android:subtitleTextAppearance="@style/call_composer_toolbar_subtitle_text"
+    android:titleTextAppearance="@style/toolbar_title_text"
+    android:subtitleTextAppearance="@style/toolbar_subtitle_text"
     android:navigationIcon="@drawable/quantum_ic_close_white_24"
     android:background="@color/dialer_theme_color"/>
 </FrameLayout>

@@ -33,8 +33,11 @@ import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.voicemail.VoicemailComponent;
 import java.util.List;
 
+/** Activity for dialer settings. */
+@SuppressWarnings("FragmentInjection") // Activity not exported
 @UsedByReflection(value = "AndroidManifest-app.xml")
 public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
@@ -115,6 +118,16 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       target.add(blockedCallsHeader);
       migrationStatusOnBuildHeaders = FilteredNumberCompat.hasMigratedToNewBlocking(this);
     }
+
+    String voicemailSettingsFragment =
+        VoicemailComponent.get(this).getVoicemailClient().getSettingsFragment();
+    if (isPrimaryUser && voicemailSettingsFragment != null) {
+      Header voicemailSettings = new Header();
+      voicemailSettings.titleRes = R.string.voicemail_settings_label;
+      voicemailSettings.fragment = voicemailSettingsFragment;
+      target.add(voicemailSettings);
+    }
+
     if (isPrimaryUser
         && (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
             || TelephonyManagerCompat.isHearingAidCompatibilitySupported(telephonyManager))) {

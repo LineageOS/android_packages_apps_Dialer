@@ -17,10 +17,6 @@
 <resources>
   <dimen name="call_composer_view_pager_height">258dp</dimen>
 
-  <!-- Toolbar -->
-  <dimen name="toolbar_title_text_size">16sp</dimen>
-  <dimen name="toolbar_subtitle_text_size">14sp</dimen>
-
   <!-- Contact bar -->
   <dimen name="call_composer_contact_photo_border_thickness">2dp</dimen>
   <dimen name="call_composer_contact_photo_size">116dp</dimen>

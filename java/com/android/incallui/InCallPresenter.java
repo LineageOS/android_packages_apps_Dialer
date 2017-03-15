@@ -42,23 +42,22 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.InteractionEvent;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.incallui.InCallOrientationEventListener.ScreenOrientation;
 import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.SessionModificationState;
 import com.android.incallui.call.ExternalCallList;
-import com.android.incallui.call.InCallVideoCallCallbackNotifier;
 import com.android.incallui.call.TelecomAdapter;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
+import com.android.incallui.videotech.VideoTech;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -74,8 +73,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * presenters that want to listen in on the in-call state changes. TODO: This class has become more
  * of a state machine at this point. Consider renaming.
  */
-public class InCallPresenter
-    implements CallList.Listener, InCallVideoCallCallbackNotifier.SessionModificationListener {
+public class InCallPresenter implements CallList.Listener {
 
   private static final String EXTRA_FIRST_TIME_SHOWN =
       "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
@@ -173,7 +171,6 @@ public class InCallPresenter
   private ProximitySensor mProximitySensor;
   private final PseudoScreenState mPseudoScreenState = new PseudoScreenState();
   private boolean mServiceConnected;
-  private boolean mAccountSelectionCancelled;
   private InCallCameraManager mInCallCameraManager;
   private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
   private CallList.Listener mSpamCallListListener;
@@ -347,7 +344,6 @@ public class InCallPresenter
     mCallList.addListener(mSpamCallListListener);
 
     VideoPauseController.getInstance().setUp(this);
-    InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
 
     mFilteredQueryHandler = new FilteredNumberAsyncQueryHandler(context);
     mContext
@@ -376,7 +372,6 @@ public class InCallPresenter
 
     attemptCleanup();
     VideoPauseController.getInstance().tearDown();
-    InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
   }
 
   private void attemptFinishActivity() {
@@ -385,12 +380,6 @@ public class InCallPresenter
     if (doFinish) {
       mInCallActivity.setExcludeFromRecents(true);
       mInCallActivity.finish();
-
-      if (mAccountSelectionCancelled) {
-        // This finish is a result of account selection cancellation
-        // do not include activity ending transition
-        mInCallActivity.overridePendingTransition(0, 0);
-      }
     }
   }
 
@@ -664,6 +653,19 @@ public class InCallPresenter
     InCallState newState = getPotentialStateFromCallList(callList);
     InCallState oldState = mInCallState;
     Log.d(this, "onCallListChange oldState= " + oldState + " newState=" + newState);
+
+    // If the user placed a call and was asked to choose the account, but then pressed "Home", the
+    // incall activity for that call will still exist (even if it's not visible). In the case of
+    // an incoming call in that situation, just disconnect that "waiting for account" call and
+    // dismiss the dialog. The same activity will be reused to handle the new incoming call. See
+    // b/33247755 for more details.
+    DialerCall waitingForAccountCall;
+    if (newState == InCallState.INCOMING
+        && (waitingForAccountCall = callList.getWaitingForAccountCall()) != null) {
+      waitingForAccountCall.disconnect();
+      mInCallActivity.dismissPendingDialogs();
+    }
+
     newState = startOrFinishUi(newState);
     Log.d(this, "onCallListChange newState changed to " + newState);
 
@@ -705,13 +707,13 @@ public class InCallPresenter
 
   @Override
   public void onUpgradeToVideo(DialerCall call) {
-    if (call.getSessionModificationState()
-            == DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST
+    if (call.getVideoTech().getSessionModificationState()
+            == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST
         && mInCallState == InCallPresenter.InCallState.INCOMING) {
       LogUtil.i(
           "InCallPresenter.onUpgradeToVideo",
           "rejecting upgrade request due to existing incoming call");
-      call.declineUpgradeRequest();
+      call.getVideoTech().declineVideoRequest();
     }
 
     if (mInCallActivity != null) {
@@ -721,15 +723,15 @@ public class InCallPresenter
   }
 
   @Override
-  public void onSessionModificationStateChange(@SessionModificationState int newState) {
+  public void onSessionModificationStateChange(DialerCall call) {
+    int newState = call.getVideoTech().getSessionModificationState();
     LogUtil.i("InCallPresenter.onSessionModificationStateChange", "state: %d", newState);
     if (mProximitySensor == null) {
       LogUtil.i("InCallPresenter.onSessionModificationStateChange", "proximitySensor is null");
       return;
     }
     mProximitySensor.setIsAttemptingVideoCall(
-        VideoUtils.hasSentVideoUpgradeRequest(newState)
-            || VideoUtils.hasReceivedVideoUpgradeRequest(newState));
+        call.hasSentVideoUpgradeRequest() || call.hasReceivedVideoUpgradeRequest());
     if (mInCallActivity != null) {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();
@@ -754,19 +756,10 @@ public class InCallPresenter
     if (call.isEmergencyCall()) {
       FilteredNumbersUtil.recordLastEmergencyCallTime(mContext);
     }
-  }
 
-  @Override
-  public void onUpgradeToVideoRequest(DialerCall call, int videoState) {
-    LogUtil.d(
-        "InCallPresenter.onUpgradeToVideoRequest",
-        "call = " + call + " video state = " + videoState);
-
-    if (call == null) {
-      return;
+    if (!call.getLogState().isIncoming && !mCallList.hasLiveCall()) {
+      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
     }
-
-    call.setRequestedVideoState(videoState);
   }
 
   /** Given the call list, return the state in which the in-call screen should be. */
@@ -916,6 +909,24 @@ public class InCallPresenter
         && !mInCallActivity.isFinishing());
   }
 
+  private boolean isActivityVisible() {
+    return mInCallActivity != null && mInCallActivity.isVisible();
+  }
+
+  boolean shouldShowFullScreenNotification() {
+    /**
+     * This is to cover the case where the incall activity is started but in the background, e.g.
+     * when the user pressed Home from the account selection dialog or an existing call. In the case
+     * that incall activity is already visible, there's no need to configure the notification with a
+     * full screen intent.
+     */
+    LogUtil.d(
+        "InCallPresenter.shouldShowFullScreenNotification",
+        "isActivityVisible: %b",
+        isActivityVisible());
+    return !isActivityVisible();
+  }
+
   /**
    * Determines if the In-Call app is currently changing configuration.
    *
@@ -1018,7 +1029,7 @@ public class InCallPresenter
     // present (e.g. a call was accepted by a bluetooth or wired headset), we want to
     // bring it up the UI regardless.
     if (!isShowingInCallUi() && mInCallState != InCallState.NO_CALLS) {
-      showInCall(showDialpad, false /* newOutgoingCall */, false /* isVideoCall */);
+      showInCall(showDialpad, false /* newOutgoingCall */);
     }
   }
 
@@ -1281,7 +1292,7 @@ public class InCallPresenter
 
     if (showCallUi || showAccountPicker) {
       Log.i(this, "Start in call UI");
-      showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */, false);
+      showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
     } else if (startIncomingCallSequence) {
       Log.i(this, "Start Full Screen in call UI");
 
@@ -1332,7 +1343,7 @@ public class InCallPresenter
         mCallList.getActiveCall() != null && mCallList.getIncomingCall() != null;
 
     if (isCallWaiting) {
-      showInCall(false, false, false /* isVideoCall */);
+      showInCall(false, false);
     } else {
       mStatusBarNotifier.updateNotification(mCallList);
     }
@@ -1403,11 +1414,11 @@ public class InCallPresenter
     }
   }
 
-  public void showInCall(boolean showDialpad, boolean newOutgoingCall, boolean isVideoCall) {
+  public void showInCall(boolean showDialpad, boolean newOutgoingCall) {
     Log.i(this, "Showing InCallActivity");
     mContext.startActivity(
         InCallActivity.getIntent(
-            mContext, showDialpad, newOutgoingCall, isVideoCall, false /* forFullScreen */));
+            mContext, showDialpad, newOutgoingCall, false /* forFullScreen */));
   }
 
   public void onServiceBind() {
@@ -1441,15 +1452,11 @@ public class InCallPresenter
     final PhoneAccountHandle accountHandle =
         intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
     final Point touchPoint = extras.getParcelable(TouchPointManager.TOUCH_POINT);
-    int videoState =
-        extras.getInt(
-            TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, VideoProfile.STATE_AUDIO_ONLY);
 
     InCallPresenter.getInstance().setBoundAndWaitingForOutgoingCall(true, accountHandle);
 
     final Intent activityIntent =
-        InCallActivity.getIntent(
-            mContext, false, true, VideoUtils.isVideoCall(videoState), false /* forFullScreen */);
+        InCallActivity.getIntent(mContext, false, true, false /* forFullScreen */);
     activityIntent.putExtra(TouchPointManager.TOUCH_POINT, touchPoint);
     mContext.startActivity(activityIntent);
   }

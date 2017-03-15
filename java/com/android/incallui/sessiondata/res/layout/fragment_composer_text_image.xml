@@ -59,4 +59,12 @@
     android:elevation="@dimen/answer_data_elevation"
     android:outlineProvider="background"
     android:scaleType="centerCrop"/>
+
+  <ProgressBar
+    android:id="@+id/loading_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_column="1"
+    android:layout_gravity="center"
+    android:elevation="2dp"/>
 </GridLayout>

@@ -16,8 +16,6 @@
 
 package com.android.incallui.call;
 
-import com.android.incallui.call.DialerCall.SessionModificationState;
-
 /** Used to monitor state changes in a dialer call. */
 public interface DialerCallListener {
 
@@ -31,7 +29,7 @@ public interface DialerCallListener {
 
   void onDialerCallUpgradeToVideo();
 
-  void onDialerCallSessionModificationStateChange(@SessionModificationState int state);
+  void onDialerCallSessionModificationStateChange();
 
   void onWiFiToLteHandover();
 

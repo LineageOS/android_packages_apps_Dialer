@@ -63,15 +63,14 @@ import android.widget.Toast;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
-import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.contacts.common.list.PhoneNumberPickerFragment.CursorReranker;
 import com.android.contacts.common.list.PhoneNumberPickerFragment.OnLoadFinishedListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
+import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
-import com.android.dialer.app.calllog.ClearCallLogDialog;
 import com.android.dialer.app.dialpad.DialpadFragment;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.ListsFragment;
@@ -85,6 +84,7 @@ import com.android.dialer.app.list.SpeedDialFragment;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
+import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallSpecificAppData;
 import com.android.dialer.common.Assert;
@@ -101,7 +101,10 @@ import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRanker.P13nRefreshCompleteListener;
 import com.android.dialer.p13n.logging.P13nLogger;
 import com.android.dialer.p13n.logging.P13nLogging;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.dialer.simulator.Simulator;
+import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.telecom.TelecomUtil;
@@ -124,7 +127,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         DialpadFragment.HostInterface,
-        ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
         OnDragDropListener,
@@ -478,6 +480,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   protected void onResume() {
+    LogUtil.d("DialtactsActivity.onResume", "");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
@@ -490,6 +493,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (mShowDialpadOnResume) {
       showDialpadFragment(false);
       mShowDialpadOnResume = false;
+    } else {
+      PostCall.promptUserForMessageIfNecessary(this, mParentLayout);
     }
 
     // If there was a voice query result returned in the {@link #onActivityResult} callback, it
@@ -539,7 +544,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     if (getIntent().getBooleanExtra(EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
-      CallLogNotificationsService.markNewVoicemailsAsOld(this);
+      CallLogNotificationsService.markNewVoicemailsAsOld(this, null);
     }
 
     setSearchBoxHint();
@@ -588,6 +593,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onAttachFragment(final Fragment fragment) {
+    LogUtil.d("DialtactsActivity.onAttachFragment", "fragment: %s", fragment);
     if (fragment instanceof DialpadFragment) {
       mDialpadFragment = (DialpadFragment) fragment;
       if (!mIsDialpadShown && !mShowDialpadOnResume) {
@@ -616,7 +622,8 @@ public class DialtactsActivity extends TransactionSafeActivity
             @MainThread
             public Cursor rerankCursor(Cursor data) {
               Assert.isMainThread();
-              return mP13nRanker.rankCursor(data, PhoneQuery.PHONE_NUMBER);
+              String queryString = searchFragment.getQueryString();
+              return mP13nRanker.rankCursor(data, queryString == null ? 0 : queryString.length());
             }
           });
       searchFragment.addOnLoadFinishedListener(
@@ -674,9 +681,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     int resId = item.getItemId();
-    if (item.getItemId() == R.id.menu_delete_all) {
-      ClearCallLogDialog.show(getFragmentManager());
-      return true;
+    if (resId == R.id.menu_history) {
+      final Intent intent = new Intent(this, CallLogActivity.class);
+      startActivity(intent);
     } else if (resId == R.id.menu_clear_frequents) {
       ClearFrequentsDialog.show(getFragmentManager());
       Logger.get(this).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, this);
@@ -691,6 +698,11 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    LogUtil.i(
+        "DialtactsActivity.onActivityResult",
+        "requestCode:%d, resultCode:%d",
+        requestCode,
+        resultCode);
     if (requestCode == ACTIVITY_REQUEST_CODE_VOICE_SEARCH) {
       if (resultCode == RESULT_OK) {
         final ArrayList<String> matches =
@@ -701,15 +713,16 @@ public class DialtactsActivity extends TransactionSafeActivity
           LogUtil.i("DialtactsActivity.onActivityResult", "voice search - nothing heard");
         }
       } else {
-        LogUtil.e("DialtactsActivity.onActivityResult", "voice search failed: " + resultCode);
+        LogUtil.e("DialtactsActivity.onActivityResult", "voice search failed");
       }
     } else if (requestCode == ACTIVITY_REQUEST_CODE_CALL_COMPOSE) {
-      if (resultCode != RESULT_OK) {
+      if (resultCode == RESULT_FIRST_USER) {
         LogUtil.i(
-            "DialtactsActivity.onActivityResult",
-            "returned from call composer, error occurred (resultCode=" + resultCode + ")");
+            "DialtactsActivity.onActivityResult", "returned from call composer, error occurred");
         String message =
-            getString(R.string.call_composer_connection_failed, getString(R.string.share_and_call));
+            getString(
+                R.string.call_composer_connection_failed,
+                data.getStringExtra(CallComposerActivity.KEY_CONTACT_NAME));
         Snackbar.make(mParentLayout, message, Snackbar.LENGTH_LONG).show();
       } else {
         LogUtil.i("DialtactsActivity.onActivityResult", "returned from call composer, no error");
@@ -732,6 +745,7 @@ public class DialtactsActivity extends TransactionSafeActivity
    * @see #onDialpadShown
    */
   private void showDialpadFragment(boolean animate) {
+    LogUtil.d("DialtactActivity.showDialpadFragment", "animate: %b", animate);
     if (mIsDialpadShown || mStateSaved) {
       return;
     }
@@ -767,6 +781,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Callback from child DialpadFragment when the dialpad is shown. */
   public void onDialpadShown() {
+    LogUtil.d("DialtactsActivity.onDialpadShown", "");
     Assert.isNotNull(mDialpadFragment);
     if (mDialpadFragment.getAnimate()) {
       Assert.isNotNull(mDialpadFragment.getView()).startAnimation(mSlideIn);
@@ -838,12 +853,21 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private void updateSearchFragmentPosition() {
     SearchFragment fragment = null;
-    if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
+    if (mSmartDialSearchFragment != null) {
       fragment = mSmartDialSearchFragment;
-    } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
+    } else if (mRegularSearchFragment != null) {
       fragment = mRegularSearchFragment;
     }
-    if (fragment != null && fragment.isVisible()) {
+    LogUtil.d(
+        "DialtactsActivity.updateSearchFragmentPosition",
+        "fragment: %s, isVisible: %b",
+        fragment,
+        fragment != null && fragment.isVisible());
+    if (fragment != null) {
+      // We need to force animation here even when fragment is not visible since it might not be
+      // visible immediately after screen orientation change and dialpad height would not be
+      // available immediately which is required to update position. By forcing an animation,
+      // position will be updated after a delay by when the dialpad height would be available.
       fragment.updatePosition(true /* animate */);
     }
   }
@@ -856,11 +880,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public boolean hasSearchQuery() {
     return !TextUtils.isEmpty(mSearchQuery);
-  }
-
-  @Override
-  public boolean shouldShowActionBar() {
-    return mListsFragment.shouldShowActionBar();
   }
 
   private void setNotInSearchUi() {
@@ -1056,7 +1075,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     // DialtactsActivity will provide the options menu
     fragment.setHasOptionsMenu(false);
-    fragment.setShowEmptyListForNullQuery(true);
+    // Will show empty list if P13nRanker is not enabled. Else, re-ranked list by the ranker.
+    fragment.setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
     if (!smartDialSearch) {
       fragment.setQueryString(query);
     }
@@ -1361,11 +1381,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
-  public ActionBarController getActionBarController() {
-    return mActionBarController;
-  }
-
-  @Override
   public boolean isDialpadShown() {
     return mIsDialpadShown;
   }
@@ -1376,11 +1391,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       return mDialpadFragment.getDialpadHeight();
     }
     return 0;
-  }
-
-  @Override
-  public int getActionBarHideOffset() {
-    return getActionBarSafely().getHideOffset();
   }
 
   @Override
@@ -1461,8 +1471,19 @@ public class DialtactsActivity extends TransactionSafeActivity
               && mListsFragment.getSpeedDialFragment().hasFrequents()
               && hasContactsPermission);
 
-      menu.findItem(R.id.menu_delete_all)
+      menu.findItem(R.id.menu_history)
           .setVisible(PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));
+
+      Context context = DialtactsActivity.this.getApplicationContext();
+      MenuItem simulatorMenuItem = menu.findItem(R.id.menu_simulator_submenu);
+      Simulator simulator = SimulatorComponent.get(context).getSimulator();
+      if (simulator.shouldShow()) {
+        simulatorMenuItem.setVisible(true);
+        simulatorMenuItem.setActionProvider(simulator.getActionProvider(context));
+      } else {
+        simulatorMenuItem.setVisible(false);
+      }
+
       super.show();
     }
   }

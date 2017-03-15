@@ -21,7 +21,6 @@
     android:backupAgent="com.android.dialer.backup.DialerBackupAgent"
     android:fullBackupOnly="true"
     android:restoreAnyVersion="true"
-    android:name="com.android.dialer.app.DialerApplication"
     />
 
 </manifest>

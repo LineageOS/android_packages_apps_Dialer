@@ -22,6 +22,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRankerFactory;
 import java.util.List;
@@ -38,7 +39,13 @@ public final class P13nRanking {
   public static P13nRanker get(@NonNull Context context) {
     Assert.isNotNull(context);
     Assert.isMainThread();
+
     if (ranker != null) {
+      return ranker;
+    }
+
+    if (!ConfigProviderBindings.get(context).getBoolean("p13n_ranker_should_enable", false)) {
+      setToIdentityRanker();
       return ranker;
     }
 
@@ -48,25 +55,33 @@ public final class P13nRanking {
     }
 
     if (ranker == null) {
-      ranker =
-          new P13nRanker() {
-            @Override
-            public void refresh(@Nullable P13nRefreshCompleteListener listener) {}
-
-            @Override
-            public List<String> rankList(List<String> phoneNumbers) {
-              return phoneNumbers;
-            }
-
-            @NonNull
-            @Override
-            public Cursor rankCursor(
-                @NonNull Cursor phoneQueryResults, int phoneNumberColumnIndex) {
-              return phoneQueryResults;
-            }
-          };
+      setToIdentityRanker();
     }
     return ranker;
+  }
+
+  private static void setToIdentityRanker() {
+    ranker =
+        new P13nRanker() {
+          @Override
+          public void refresh(@Nullable P13nRefreshCompleteListener listener) {}
+
+          @Override
+          public List<String> rankList(List<String> phoneNumbers) {
+            return phoneNumbers;
+          }
+
+          @NonNull
+          @Override
+          public Cursor rankCursor(@NonNull Cursor phoneQueryResults, int queryLength) {
+            return phoneQueryResults;
+          }
+
+          @Override
+          public boolean shouldShowEmptyListForNullQuery() {
+            return true;
+          }
+        };
   }
 
   public static void setForTesting(@NonNull P13nRanker ranker) {

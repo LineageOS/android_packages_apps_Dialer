@@ -59,8 +59,6 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
   private static final String ARG_LISTENER = "listener";
   private static final String ARG_CALL_ID = "call_id";
 
-  private int mTitleResId;
-  private boolean mCanSetDefault;
   private List<PhoneAccountHandle> mAccountHandles;
   private boolean mIsSelected;
   private boolean mIsDefaultChecked;
@@ -126,8 +124,8 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    mTitleResId = getArguments().getInt(ARG_TITLE_RES_ID);
-    mCanSetDefault = getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
+    int titleResId = getArguments().getInt(ARG_TITLE_RES_ID);
+    boolean canSetDefault = getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
     mAccountHandles = getArguments().getParcelableArrayList(ARG_ACCOUNT_HANDLES);
     mListener = getArguments().getParcelable(ARG_LISTENER);
     if (savedInstanceState != null) {
@@ -167,11 +165,11 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
     AlertDialog dialog =
         builder
-            .setTitle(mTitleResId)
+            .setTitle(titleResId)
             .setAdapter(selectAccountListAdapter, selectionListener)
             .create();
 
-    if (mCanSetDefault) {
+    if (canSetDefault) {
       // Generate custom checkbox view, lint suppressed since no appropriate parent (is dialog)
       @SuppressLint("InflateParams")
       LinearLayout checkboxLayout =
@@ -190,13 +188,13 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
   }
 
   @Override
-  public void onStop() {
+  public void onCancel(DialogInterface dialog) {
     if (!mIsSelected && mListener != null) {
       Bundle result = new Bundle();
       result.putString(SelectPhoneAccountListener.EXTRA_CALL_ID, getCallId());
       mListener.onReceiveResult(SelectPhoneAccountListener.RESULT_DISMISSED, result);
     }
-    super.onStop();
+    super.onCancel(dialog);
   }
 
   @Nullable
@@ -213,7 +211,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     static final String EXTRA_SET_DEFAULT = "extra_set_default";
     static final String EXTRA_CALL_ID = "extra_call_id";
 
-    public SelectPhoneAccountListener() {
+    protected SelectPhoneAccountListener() {
       super(new Handler());
     }
 
@@ -239,7 +237,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
     private int mResId;
 
-    public SelectAccountListAdapter(
+    SelectAccountListAdapter(
         Context context, int resource, List<PhoneAccountHandle> accountHandles) {
       super(context, resource, accountHandles);
       mResId = resource;

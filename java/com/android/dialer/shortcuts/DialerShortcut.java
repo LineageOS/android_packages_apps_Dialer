@@ -22,7 +22,7 @@ import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.Contacts;
 import android.support.annotation.NonNull;
-
+import com.google.auto.value.AutoValue;
 
 /**
  * Convenience data structure.
@@ -31,7 +31,7 @@ import android.support.annotation.NonNull;
  * convenience methods for doing things like constructing labels.
  */
 @TargetApi(VERSION_CODES.N_MR1) // Shortcuts introduced in N MR1
-
+@AutoValue
 abstract class DialerShortcut {
 
   /** Marker value indicates that shortcut has no setRank. Used by pinned shortcuts. */
@@ -160,7 +160,7 @@ abstract class DialerShortcut {
     return new AutoValue_DialerShortcut.Builder().setRank(NO_RANK);
   }
 
-
+  @AutoValue.Builder
   abstract static class Builder {
 
     /**

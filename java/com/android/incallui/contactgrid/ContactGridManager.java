@@ -18,10 +18,14 @@ package com.android.incallui.contactgrid;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,7 +60,7 @@ public class ContactGridManager {
   @Nullable private ImageView avatarImageView;
 
   // Row 2: Mobile +1 (650) 253-0000
-  // Row 2: [HD icon] 00:15
+  // Row 2: [HD attempting icon]/[HD icon] 00:15
   // Row 2: Call ended
   // Row 2: Hanging up
   // Row 2: [Alert sign] Suspected spam caller
@@ -76,7 +80,6 @@ public class ContactGridManager {
   private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
   private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
   private final LetterTileDrawable letterTile;
-
 
   public ContactGridManager(
       View view, @Nullable ImageView avatarImageView, int avatarSize, boolean showAnonymousAvatar) {
@@ -227,6 +230,24 @@ public class ContactGridManager {
   }
 
   /**
+   * Returns the appropriate LetterTileDrawable.TYPE_ based on a given call state.
+   *
+   * <p>If no special state is detected, yields TYPE_DEFAULT.
+   */
+  private static @LetterTileDrawable.ContactType int getContactTypeForPrimaryCallState(
+      @NonNull PrimaryCallState callState, @NonNull PrimaryInfo primaryInfo) {
+    if (callState.isVoiceMailNumber) {
+      return LetterTileDrawable.TYPE_VOICEMAIL;
+    } else if (callState.isBusinessNumber) {
+      return LetterTileDrawable.TYPE_BUSINESS;
+    } else if (primaryInfo.numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
+      return LetterTileDrawable.TYPE_GENERIC_AVATAR;
+    } else {
+      return LetterTileDrawable.TYPE_DEFAULT;
+    }
+  }
+
+  /**
    * Updates row 1. For example:
    *
    * <ul>
@@ -255,7 +276,7 @@ public class ContactGridManager {
     if (avatarImageView != null) {
       if (hideAvatar) {
         avatarImageView.setVisibility(View.GONE);
-      } else if (avatarImageView != null && avatarSize > 0 && updateAvatarVisibility()) {
+      } else if (avatarSize > 0 && updateAvatarVisibility()) {
         boolean hasPhoto =
             primaryInfo.photo != null && primaryInfo.photoType == ContactPhotoType.CONTACT;
         // Contact has a photo, don't render a letter tile.
@@ -265,19 +286,21 @@ public class ContactGridManager {
                   context, primaryInfo.photo, avatarSize, avatarSize));
           // Contact has a name, that isn't a number.
         } else {
-          int contactType =
-              primaryCallState.isVoiceMailNumber
-                  ? LetterTileDrawable.TYPE_VOICEMAIL
-                  : LetterTileDrawable.TYPE_DEFAULT;
           letterTile.setCanonicalDialerLetterTileDetails(
               primaryInfo.name,
               primaryInfo.contactInfoLookupKey,
               LetterTileDrawable.SHAPE_CIRCLE,
-              contactType);
+              getContactTypeForPrimaryCallState(primaryCallState, primaryInfo));
+
+          // By invalidating the avatarImageView we force a redraw of the letter tile.
+          // This is required to properly display the updated letter tile iconography based on the
+          // contact type, because the background drawable reference cached in the view, and the
+          // view is not aware of the mutations made to the background.
+          avatarImageView.invalidate();
           avatarImageView.setBackground(letterTile);
+        }
       }
     }
-  }
   }
 
   /**
@@ -285,7 +308,7 @@ public class ContactGridManager {
    *
    * <ul>
    *   <li>Mobile +1 (650) 253-0000
-   *   <li>[HD icon] 00:15
+   *   <li>[HD attempting icon]/[HD icon] 00:15
    *   <li>Call ended
    *   <li>Hanging up
    * </ul>
@@ -296,7 +319,15 @@ public class ContactGridManager {
     bottomTextView.setText(info.label);
     bottomTextView.setAllCaps(info.isSpamIconVisible);
     workIconImageView.setVisibility(info.isWorkIconVisible ? View.VISIBLE : View.GONE);
-    hdIconImageView.setVisibility(info.isHdIconVisible ? View.VISIBLE : View.GONE);
+    boolean wasHdIconVisible = hdIconImageView.getVisibility() == View.VISIBLE;
+    if (!wasHdIconVisible && info.isHdAttemptinIconVisible) {
+      Animation animation = AnimationUtils.loadAnimation(context, R.anim.blinking);
+      hdIconImageView.startAnimation(animation);
+    } else if (wasHdIconVisible && !info.isHdAttemptinIconVisible) {
+      hdIconImageView.clearAnimation();
+    }
+    hdIconImageView.setVisibility(
+        info.isHdIconVisible || info.isHdAttemptinIconVisible ? View.VISIBLE : View.GONE);
     forwardIconImageView.setVisibility(info.isForwardIconVisible ? View.VISIBLE : View.GONE);
     spamIconImageView.setVisibility(info.isSpamIconVisible ? View.VISIBLE : View.GONE);
 

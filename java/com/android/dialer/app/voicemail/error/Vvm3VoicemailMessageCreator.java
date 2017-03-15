@@ -269,7 +269,7 @@ public class Vvm3VoicemailMessageCreator {
           VoicemailErrorMessage.createSetPinAction(context));
     }
 
-    return OmtpVoicemailMessageCreator.create(context, status);
+    return OmtpVoicemailMessageCreator.create(context, status, statusReader);
   }
 
   @NonNull

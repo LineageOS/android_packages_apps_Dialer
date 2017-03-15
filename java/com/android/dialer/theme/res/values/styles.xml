@@ -53,4 +53,15 @@
     <item name="android:background">@color/actionbar_background_color</item>
     <item name="background">@color/actionbar_background_color</item>
   </style>
+
+  <style name="toolbar_title_text">
+    <item name="android:textSize">@dimen/toolbar_title_text_size</item>
+    <item name="android:textColor">@color/background_dialer_white</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="toolbar_subtitle_text">
+    <item name="android:textSize">@dimen/toolbar_subtitle_text_size</item>
+    <item name="android:textColor">@color/background_dialer_white</item>
+  </style>
 </resources>

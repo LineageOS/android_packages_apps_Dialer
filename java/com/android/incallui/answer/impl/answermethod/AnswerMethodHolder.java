@@ -44,4 +44,6 @@ public interface AnswerMethodHolder {
    * @return true iff the current call is a video call.
    */
   boolean isVideoCall();
+
+  boolean isVideoUpgradeRequest();
 }

@@ -56,6 +56,9 @@ import com.android.dialer.util.PermissionsUtil;
 public class CameraComposerFragment extends CallComposerFragment
     implements CameraManagerListener, OnClickListener, CameraManager.MediaCallback {
 
+  private static final String CAMERA_DIRECTION_KEY = "camera_direction";
+  private static final String CAMERA_URI_KEY = "camera_key";
+
   private View permissionView;
   private ImageButton exitFullscreen;
   private ImageButton fullscreen;
@@ -68,11 +71,13 @@ public class CameraComposerFragment extends CallComposerFragment
   private View allowPermission;
   private CameraPreviewHost preview;
   private ProgressBar loading;
+  private ImageView previewImageView;
 
   private Uri cameraUri;
   private boolean processingUri;
   private String[] permissions = new String[] {Manifest.permission.CAMERA};
   private CameraUriCallback uriCallback;
+  private int cameraDirection = CameraInfo.CAMERA_FACING_BACK;
 
   public static CameraComposerFragment newInstance() {
     return new CameraComposerFragment();
@@ -94,6 +99,7 @@ public class CameraComposerFragment extends CallComposerFragment
     cancel = (ImageButton) cameraView.findViewById(R.id.camera_cancel_button);
     focus = (RenderOverlay) cameraView.findViewById(R.id.focus_visual);
     preview = (CameraPreviewHost) cameraView.findViewById(R.id.camera_preview);
+    previewImageView = (ImageView) root.findViewById(R.id.preview_image_view);
 
     exitFullscreen.setOnClickListener(this);
     fullscreen.setOnClickListener(this);
@@ -115,10 +121,12 @@ public class CameraComposerFragment extends CallComposerFragment
           ContextCompat.getColor(getContext(), R.color.dialer_theme_color));
       permissionView.setVisibility(View.VISIBLE);
     } else {
+      if (bundle != null) {
+        cameraDirection = bundle.getInt(CAMERA_DIRECTION_KEY);
+        cameraUri = bundle.getParcelable(CAMERA_URI_KEY);
+      }
       setupCamera();
     }
-
-    setTopView(cameraView);
     return root;
   }
 
@@ -126,8 +134,8 @@ public class CameraComposerFragment extends CallComposerFragment
     CameraManager.get().setListener(this);
     preview.setShown();
     CameraManager.get().setRenderOverlay(focus);
-    CameraManager.get().selectCamera(CameraInfo.CAMERA_FACING_BACK);
-    setCameraUri(null);
+    CameraManager.get().selectCamera(cameraDirection);
+    setCameraUri(cameraUri);
   }
 
   @Override
@@ -146,10 +154,16 @@ public class CameraComposerFragment extends CallComposerFragment
   }
 
   @Override
+  public void clearComposer() {
+    processingUri = false;
+    setCameraUri(null);
+  }
+
+  @Override
   public void onClick(View view) {
     if (view == capture) {
       float heightPercent = 1;
-      if (!getListener().isFullscreen()) {
+      if (!getListener().isFullscreen() && !getListener().isLandscapeLayout()) {
         heightPercent = Math.min((float) cameraView.getHeight() / preview.getView().getHeight(), 1);
       }
 
@@ -162,8 +176,7 @@ public class CameraComposerFragment extends CallComposerFragment
       ((Animatable) swapCamera.getDrawable()).start();
       CameraManager.get().swapCamera();
     } else if (view == cancel) {
-      processingUri = false;
-      setCameraUri(null);
+      clearComposer();
     } else if (view == exitFullscreen) {
       getListener().showFullscreen(false);
       fullscreen.setVisibility(View.VISIBLE);
@@ -314,6 +327,13 @@ public class CameraComposerFragment extends CallComposerFragment
     boolean isCameraAvailable = CameraManager.get().isCameraAvailable();
     boolean uriReadyOrProcessing = cameraUri != null || processingUri;
 
+    if (cameraUri != null) {
+      previewImageView.setImageURI(cameraUri);
+      previewImageView.setVisibility(View.VISIBLE);
+    } else {
+      previewImageView.setVisibility(View.GONE);
+    }
+
     if (cameraUri == null && isCameraAvailable) {
       CameraManager.get().resetPreview();
       cancel.setVisibility(View.GONE);
@@ -328,7 +348,7 @@ public class CameraComposerFragment extends CallComposerFragment
     capture.setVisibility(uriReadyOrProcessing ? View.GONE : View.VISIBLE);
     cancel.setVisibility(uriReadyOrProcessing ? View.VISIBLE : View.GONE);
 
-    if (uriReadyOrProcessing) {
+    if (uriReadyOrProcessing || getListener().isLandscapeLayout()) {
       fullscreen.setVisibility(View.GONE);
       exitFullscreen.setVisibility(View.GONE);
     } else if (getListener().isFullscreen()) {
@@ -341,6 +361,13 @@ public class CameraComposerFragment extends CallComposerFragment
 
     swapCamera.setEnabled(isCameraAvailable);
     capture.setEnabled(isCameraAvailable);
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt(CAMERA_DIRECTION_KEY, CameraManager.get().getCameraInfo().facing);
+    outState.putParcelable(CAMERA_URI_KEY, cameraUri);
   }
 
   @Override

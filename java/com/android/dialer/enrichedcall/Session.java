@@ -17,6 +17,7 @@
 package com.android.dialer.enrichedcall;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.android.dialer.enrichedcall.EnrichedCallManager.State;
 import com.android.dialer.multimedia.MultimediaData;
 
@@ -37,6 +38,12 @@ public interface Session {
    * session that failed to start.
    */
   long getSessionId();
+
+  /** Returns the id of the dialer call associated with this session, or null if there isn't one. */
+  @Nullable
+  String getUniqueDialerCallId();
+
+  void setUniqueDialerCallId(@NonNull String id);
 
   /** Returns the number associated with the remote end of this session. */
   @NonNull

@@ -23,7 +23,6 @@ import android.view.Display;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.SessionModificationState;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
 
@@ -141,7 +140,7 @@ public class AnswerProximitySensor
   public void onHandoverToWifiFailure() {}
 
   @Override
-  public void onDialerCallSessionModificationStateChange(@SessionModificationState int state) {}
+  public void onDialerCallSessionModificationStateChange() {}
 
   @Override
   public void onScreenOn() {

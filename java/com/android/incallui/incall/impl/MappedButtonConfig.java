@@ -22,7 +22,7 @@ import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonIdsExtension;
-
+import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -151,7 +151,7 @@ final class MappedButtonConfig {
   }
 
   /** Holds information about button mapping. */
-
+  @AutoValue
   abstract static class MappingInfo {
 
     /** The Ui slot into which a given button desires to be placed. */
@@ -179,7 +179,7 @@ final class MappedButtonConfig {
     }
 
     /** Class used to build instances of {@link MappingInfo}. */
-
+    @AutoValue.Builder
     abstract static class Builder {
       public abstract Builder setSlot(int slot);
 

@@ -17,6 +17,7 @@
 package com.android.incallui.spam;
 
 import android.app.Notification;
+import android.app.Notification.Builder;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -33,12 +34,13 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.ContactLookupResult;
 import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.spam.Spam;
 import com.android.incallui.R;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CallHistoryStatus;
-import com.android.incallui.call.DialerCall.SessionModificationState;
 import java.util.Random;
 
 /**
@@ -47,7 +49,7 @@ import java.util.Random;
  */
 public class SpamCallListListener implements CallList.Listener {
 
-  static final int NOTIFICATION_ID = 1;
+  static final int NOTIFICATION_ID = R.id.notification_spam_call;
   private static final String TAG = "SpamCallListListener";
   private final Context context;
   private final Random random;
@@ -87,7 +89,7 @@ public class SpamCallListListener implements CallList.Listener {
   public void onUpgradeToVideo(DialerCall call) {}
 
   @Override
-  public void onSessionModificationStateChange(@SessionModificationState int newState) {}
+  public void onSessionModificationStateChange(DialerCall call) {}
 
   @Override
   public void onCallListChange(CallList callList) {}
@@ -173,13 +175,16 @@ public class SpamCallListListener implements CallList.Listener {
    * Creates a notification builder with properties common among the two after call notifications.
    */
   private Notification.Builder createAfterCallNotificationBuilder(DialerCall call) {
-    return new Notification.Builder(context)
-        .setContentIntent(
-            createActivityPendingIntent(call, SpamNotificationActivity.ACTION_SHOW_DIALOG))
-        .setCategory(Notification.CATEGORY_STATUS)
-        .setPriority(Notification.PRIORITY_DEFAULT)
-        .setColor(context.getColor(R.color.dialer_theme_color))
-        .setSmallIcon(R.drawable.ic_call_end_white_24dp);
+    Builder builder =
+        new Builder(context)
+            .setContentIntent(
+                createActivityPendingIntent(call, SpamNotificationActivity.ACTION_SHOW_DIALOG))
+            .setCategory(Notification.CATEGORY_STATUS)
+            .setPriority(Notification.PRIORITY_DEFAULT)
+            .setColor(context.getColor(R.color.dialer_theme_color))
+            .setSmallIcon(R.drawable.ic_call_end_white_24dp);
+    NotificationChannelManager.applyChannel(builder, context, Channel.MISC, null);
+    return builder;
   }
 
   private CharSequence getDisplayNumber(DialerCall call) {

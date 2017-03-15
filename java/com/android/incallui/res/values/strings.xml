@@ -223,17 +223,6 @@
     <item>ABSENTNUMBER</item>
   </string-array>
 
-  <!-- Preference for Voicemail service provider under "Voicemail" settings.
-       [CHAR LIMIT=40] -->
-  <string name="voicemail_provider">Service</string>
-
-  <!-- Preference for Voicemail setting of each provider.
-       [CHAR LIMIT=40] -->
-  <string name="voicemail_settings">Setup</string>
-
-  <!-- String to display in voicemail number summary when no voicemail num is set -->
-  <string name="voicemail_number_not_set">&lt;Not set&gt;</string>
-
   <!-- Title displayed above settings coming after voicemail in the call features screen -->
   <string name="other_settings">Other call settings</string>
 
@@ -241,26 +230,6 @@
   <string name="goPrivate">go private</string>
   <!--  Use this to describe the select contact button in EditPhoneNumberPreference; currently for screen readers through accessibility. -->
   <string name="selectContact">select contact</string>
-
-  <!-- Dialog title for the vibration settings for voicemail notifications [CHAR LIMIT=40] -->
-  <string msgid="8731372580674292759" name="voicemail_notification_vibrate_when_title">Vibrate</string>
-  <!-- Dialog title for the vibration settings for voice mail notifications [CHAR LIMIT=40]-->
-  <string msgid="8995274609647451109" name="voicemail_notification_vibarte_when_dialog_title">Vibrate</string>
-
-  <!-- Voicemail ringtone title. The user clicks on this preference to select
-       which sound to play when a voicemail notification is received.
-       [CHAR LIMIT=30] -->
-  <string name="voicemail_notification_ringtone_title">Sound</string>
-
-  <!-- The default value value for voicemail notification. -->
-  <string name="voicemail_notification_vibrate_when_default" translatable="false">never</string>
-
-  <!-- Actual values used in our code for voicemail notifications. DO NOT TRANSLATE -->
-  <string-array name="voicemail_notification_vibrate_when_values" translatable="false">
-    <item>always</item>
-    <item>silent</item>
-    <item>never</item>
-  </string-array>
 
   <!-- Title for the category "ringtone", which is shown above ringtone and vibration
        related settings.

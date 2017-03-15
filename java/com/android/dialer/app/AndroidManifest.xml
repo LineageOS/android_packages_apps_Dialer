@@ -57,11 +57,7 @@
     android:minSdkVersion="23"
     android:targetSdkVersion="25"/>
 
-  <application
-    android:backupAgent='com.android.dialer.backup.DialerBackupAgent'
-    android:fullBackupOnly="true"
-    android:restoreAnyVersion="true"
-    android:name="com.android.dialer.app.DialerApplication">
+  <application android:theme="@style/Theme.AppCompat">
 
     <activity
       android:exported="false"
@@ -73,6 +69,12 @@
         <action android:name="com.android.dialer.action.BLOCKED_NUMBERS_SETTINGS"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
+    </activity>
+
+    <activity
+      android:label="@string/call_log_activity_title"
+      android:name="com.android.dialer.app.calllog.CallLogActivity"
+      android:theme="@style/DialtactsThemeWithoutActionBarOverlay">
     </activity>
 
     <receiver android:name="com.android.dialer.app.calllog.CallLogReceiver">

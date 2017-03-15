@@ -19,7 +19,6 @@ package com.android.incallui;
 import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENTERPRISE_CALL;
 
 import android.Manifest;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -46,9 +46,12 @@ import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -58,14 +61,16 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.SessionModificationState;
 import com.android.incallui.call.DialerCallListener;
+import com.android.incallui.calllocation.CallLocation;
+import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
+import com.android.incallui.videotech.VideoTech;
 import java.lang.ref.WeakReference;
 
 /**
@@ -116,7 +121,8 @@ public class CallCardPresenter
   private InCallScreen mInCallScreen;
   private boolean isInCallScreenReady;
   private boolean shouldSendAccessibilityEvent;
-  private final String locationModule = null;
+
+  @NonNull private final CallLocation callLocation;
   private final Runnable sendAccessibilityEventRunnable =
       new Runnable() {
         @Override
@@ -135,6 +141,7 @@ public class CallCardPresenter
   public CallCardPresenter(Context context) {
     LogUtil.i("CallCardController.constructor", null);
     mContext = Assert.isNotNull(context).getApplicationContext();
+    callLocation = CallLocationComponent.get(mContext).getCallLocation();
   }
 
   private static boolean hasCallSubject(DialerCall call) {
@@ -175,8 +182,7 @@ public class CallCardPresenter
       mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     }
 
-    EnrichedCallManager.Accessor.getInstance(((Application) mContext))
-        .registerStateChangedListener(this);
+    EnrichedCallComponent.get(mContext).getEnrichedCallManager().registerStateChangedListener(this);
 
     // Contact search may have completed before ui is ready.
     if (mPrimaryContactInfo != null) {
@@ -189,6 +195,11 @@ public class CallCardPresenter
     InCallPresenter.getInstance().addDetailsListener(this);
     InCallPresenter.getInstance().addInCallEventListener(this);
     isInCallScreenReady = true;
+
+    // Showing the location may have been skipped if the UI wasn't ready during previous layout.
+    if (shouldShowLocation()) {
+      updatePrimaryDisplayInfo();
+    }
   }
 
   @Override
@@ -196,7 +207,8 @@ public class CallCardPresenter
     LogUtil.i("CallCardController.onInCallScreenUnready", null);
     Assert.checkState(isInCallScreenReady);
 
-    EnrichedCallManager.Accessor.getInstance(((Application) mContext))
+    EnrichedCallComponent.get(mContext)
+        .getEnrichedCallManager()
         .unregisterStateChangedListener(this);
     // stop getting call state changes
     InCallPresenter.getInstance().removeListener(this);
@@ -206,6 +218,8 @@ public class CallCardPresenter
     if (mPrimary != null) {
       mPrimary.removeListener(this);
     }
+
+    callLocation.close();
 
     mPrimary = null;
     mPrimaryContactInfo = null;
@@ -282,7 +296,6 @@ public class CallCardPresenter
               mContext, mPrimary, mPrimary.getState() == DialerCall.State.INCOMING);
       updatePrimaryDisplayInfo();
       maybeStartSearch(mPrimary, true);
-      maybeClearSessionModificationState(mPrimary);
     }
 
     if (previousPrimary != null && mPrimary == null) {
@@ -300,7 +313,6 @@ public class CallCardPresenter
               mContext, mSecondary, mSecondary.getState() == DialerCall.State.INCOMING);
       updateSecondaryDisplayInfo();
       maybeStartSearch(mSecondary, false);
-      maybeClearSessionModificationState(mSecondary);
     }
 
     // Set the call state
@@ -373,25 +385,18 @@ public class CallCardPresenter
   @Override
   public void onDialerCallUpgradeToVideo() {}
 
-  /**
-   * Handles a change to the session modification state for a call.
-   *
-   * @param sessionModificationState The new session modification state.
-   */
+  /** Handles a change to the session modification state for a call. */
   @Override
-  public void onDialerCallSessionModificationStateChange(
-      @SessionModificationState int sessionModificationState) {
-    LogUtil.v(
-        "CallCardPresenter.onDialerCallSessionModificationStateChange",
-        "state: " + sessionModificationState);
+  public void onDialerCallSessionModificationStateChange() {
+    LogUtil.enterBlock("CallCardPresenter.onDialerCallSessionModificationStateChange");
 
     if (mPrimary == null) {
       return;
     }
     getUi()
         .setEndCallButtonEnabled(
-            sessionModificationState
-                != DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
+            mPrimary.getVideoTech().getSessionModificationState()
+                != VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
             true /* shouldAnimate */);
     updatePrimaryCallState();
   }
@@ -418,6 +423,13 @@ public class CallCardPresenter
                   && mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
       boolean isHdAudioCall =
           isPrimaryCallActive() && mPrimary.hasProperty(Details.PROPERTY_HIGH_DEF_AUDIO);
+      boolean isAttemptingHdAudioCall =
+          !isHdAudioCall
+              && !mPrimary.hasProperty(DialerCall.PROPERTY_CODEC_KNOWN)
+              && MotorolaUtils.shouldBlinkHdIconWhenConnectingCall(mContext);
+
+      boolean isBusiness = mPrimaryContactInfo != null && mPrimaryContactInfo.isBusiness;
+
       // Check for video state change and update the visibility of the contact photo.  The contact
       // photo is hidden when the incoming video surface is shown.
       // The contact photo visibility can also change in setPrimary().
@@ -427,8 +439,8 @@ public class CallCardPresenter
           .setCallState(
               new PrimaryCallState(
                   mPrimary.getState(),
-                  mPrimary.getVideoState(),
-                  mPrimary.getSessionModificationState(),
+                  mPrimary.isVideoCall(),
+                  mPrimary.getVideoTech().getSessionModificationState(),
                   mPrimary.getDisconnectCause(),
                   getConnectionLabel(),
                   getCallStateIcon(),
@@ -438,12 +450,14 @@ public class CallCardPresenter
                   mPrimary.hasProperty(Details.PROPERTY_WIFI),
                   mPrimary.isConferenceCall(),
                   isWorkCall,
+                  isAttemptingHdAudioCall,
                   isHdAudioCall,
                   !TextUtils.isEmpty(mPrimary.getLastForwardedNumber()),
                   shouldShowContactPhoto,
                   mPrimary.getConnectTimeMillis(),
                   CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
-                  mPrimary.isRemotelyHeld()));
+                  mPrimary.isRemotelyHeld(),
+                  isBusiness));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
@@ -505,15 +519,6 @@ public class CallCardPresenter
     // no need to start search for conference calls which show generic info.
     if (call != null && !call.isConferenceCall()) {
       startContactInfoSearch(call, isPrimary, call.getState() == DialerCall.State.INCOMING);
-    }
-  }
-
-  private void maybeClearSessionModificationState(DialerCall call) {
-    @SessionModificationState int state = call.getSessionModificationState();
-    if (state != DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST
-        && state != DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-      LogUtil.i("CallCardPresenter.maybeClearSessionModificationState", "clearing state");
-      call.setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST);
     }
   }
 
@@ -642,13 +647,17 @@ public class CallCardPresenter
     // DialerCall placed through a work phone account.
     boolean hasWorkCallProperty = mPrimary.hasProperty(PROPERTY_ENTERPRISE_CALL);
 
-    Session enrichedCallSession =
-        mPrimary.getNumber() == null
-            ? null
-            : EnrichedCallManager.Accessor.getInstance(((Application) mContext))
-                .getSession(mPrimary.getNumber());
-    MultimediaData enrichedCallMultimediaData =
-        enrichedCallSession == null ? null : enrichedCallSession.getMultimediaData();
+    MultimediaData multimediaData = null;
+    if (mPrimary.getNumber() != null) {
+      Session enrichedCallSession =
+          EnrichedCallComponent.get(mContext)
+              .getEnrichedCallManager()
+              .getSession(mPrimary.getUniqueCallId(), mPrimary.getNumber());
+      if (enrichedCallSession != null) {
+        enrichedCallSession.setUniqueDialerCallId(mPrimary.getUniqueCallId());
+        multimediaData = enrichedCallSession.getMultimediaData();
+      }
+    }
 
     if (mPrimary.isConferenceCall()) {
       LogUtil.v(
@@ -671,7 +680,8 @@ public class CallCardPresenter
               false /* answeringDisconnectsOngoingCall */,
               shouldShowLocation(),
               null /* contactInfoLookupKey */,
-              null /* enrichedCallMultimediaData */));
+              null /* enrichedCallMultimediaData */,
+              mPrimary.getNumberPresentation()));
     } else if (mPrimaryContactInfo != null) {
       LogUtil.v(
           "CallCardPresenter.updatePrimaryDisplayInfo",
@@ -696,6 +706,7 @@ public class CallCardPresenter
       }
 
       boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
+
       // DialerCall with caller that is a work contact.
       boolean isWorkContact = (mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
       mInCallScreen.setPrimary(
@@ -714,13 +725,52 @@ public class CallCardPresenter
               mPrimary.answeringDisconnectsForegroundVideoCall(),
               shouldShowLocation(),
               mPrimaryContactInfo.lookupKey,
-              enrichedCallMultimediaData));
+              multimediaData,
+              mPrimary.getNumberPresentation()));
     } else {
       // Clear the primary display info.
       mInCallScreen.setPrimary(PrimaryInfo.createEmptyPrimaryInfo());
     }
 
-    mInCallScreen.showLocationUi(null);
+    if (isInCallScreenReady) {
+      mInCallScreen.showLocationUi(getLocationFragment());
+    } else {
+      LogUtil.i("CallCardPresenter.updatePrimaryDisplayInfo", "UI not ready, not showing location");
+    }
+  }
+
+  private Fragment getLocationFragment() {
+    if (!ConfigProviderBindings.get(mContext)
+        .getBoolean(CONFIG_ENABLE_EMERGENCY_LOCATION, CONFIG_ENABLE_EMERGENCY_LOCATION_DEFAULT)) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "disabled by config.");
+      return null;
+    }
+    if (!shouldShowLocation()) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "shouldn't show location");
+      return null;
+    }
+    if (!hasLocationPermission()) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "no location permission.");
+      return null;
+    }
+    if (isBatteryTooLowForEmergencyLocation()) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "low battery.");
+      return null;
+    }
+    if (ActivityCompat.isInMultiWindowMode(mInCallScreen.getInCallScreenFragment().getActivity())) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "in multi-window mode");
+      return null;
+    }
+    if (mPrimary.isVideoCall()) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "emergency video calls not supported");
+      return null;
+    }
+    if (!callLocation.canGetLocation(mContext)) {
+      LogUtil.i("CallCardPresenter.getLocationFragment", "can't get current location");
+      return null;
+    }
+    LogUtil.i("CallCardPresenter.getLocationFragment", "returning location fragment");
+    return callLocation.getLocationFragment(mContext);
   }
 
   private boolean shouldShowLocation() {
@@ -972,8 +1022,8 @@ public class CallCardPresenter
         || callState == DialerCall.State.INCOMING) {
       return false;
     }
-    if (mPrimary.getSessionModificationState()
-        == DialerCall.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+    if (mPrimary.getVideoTech().getSessionModificationState()
+        == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       return false;
     }
     return true;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <dimen name="text_bottom_margin">2dp</dimen>
+  <dimen name="call_details_primary_text_size">16sp</dimen>
+  <dimen name="call_details_secondary_text_size">14sp</dimen>
+
+  <!-- contact container -->
+  <dimen name="contact_container_padding">16dp</dimen>
+  <dimen name="call_details_contact_photo_size">40dp</dimen>
+  <dimen name="photo_text_margin">16dp</dimen>
+  <dimen name="call_back_button_size">24dp</dimen>
+
+  <!-- call entry container -->
+  <dimen name="call_entry_icon_size">24dp</dimen>
+  <dimen name="call_entry_padding">16dp</dimen>
+  <dimen name="call_entry_bottom_padding">14dp</dimen>
+  <dimen name="call_entry_left_margin">32dp</dimen>
+
+  <!-- EC container -->
+  <dimen name="call_details_ec_text_size">12sp</dimen>
+  <dimen name="ec_container_height">48dp</dimen>
+  <dimen name="ec_text_left_margin">72dp</dimen>
+  <dimen name="ec_photo_size">40dp</dimen>
+  <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
+</resources>

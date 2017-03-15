@@ -17,17 +17,13 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
-import android.telecom.InCallService.VideoCall;
-import android.telecom.VideoProfile;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.SdkVersionOverride;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
@@ -39,6 +35,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCall.CameraDirection;
 import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.call.VideoUtils;
 import com.android.incallui.incall.protocol.InCallButtonIds;
@@ -212,6 +209,13 @@ public class CallButtonPresenter
   @Override
   public void muteClicked(boolean checked) {
     LogUtil.v("CallButtonPresenter", "turning on mute: " + checked);
+    Logger.get(mContext)
+        .logCallImpression(
+            checked
+                ? DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_MUTE
+                : DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_MUTE,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     TelecomAdapter.getInstance().mute(checked);
   }
 
@@ -262,18 +266,8 @@ public class CallButtonPresenter
 
   @Override
   public void changeToVideoClicked() {
-    VideoCall videoCall = mCall.getVideoCall();
-    if (videoCall == null) {
-      return;
-    }
-    int currVideoState = mCall.getVideoState();
-    int currUnpausedVideoState = VideoUtils.getUnPausedVideoState(currVideoState);
-    currUnpausedVideoState |= VideoProfile.STATE_BIDIRECTIONAL;
-
-    VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState);
-    videoCall.sendSessionModifyRequest(videoProfile);
-    mCall.setSessionModificationState(
-        DialerCall.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE);
+    LogUtil.enterBlock("CallButtonPresenter.changeToVideoClicked");
+    mCall.getVideoTech().upgradeToVideo();
   }
 
   @Override
@@ -300,26 +294,25 @@ public class CallButtonPresenter
     InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
     cameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
 
-    VideoCall videoCall = mCall.getVideoCall();
-    if (videoCall == null) {
-      return;
-    }
-
     String cameraId = cameraManager.getActiveCameraId();
     if (cameraId != null) {
       final int cameraDir =
           cameraManager.isUsingFrontFacingCamera()
-              ? DialerCall.VideoSettings.CAMERA_DIRECTION_FRONT_FACING
-              : DialerCall.VideoSettings.CAMERA_DIRECTION_BACK_FACING;
-      mCall.getVideoSettings().setCameraDir(cameraDir);
-      videoCall.setCamera(cameraId);
-      videoCall.requestCameraCapabilities();
+              ? CameraDirection.CAMERA_DIRECTION_FRONT_FACING
+              : CameraDirection.CAMERA_DIRECTION_BACK_FACING;
+      mCall.setCameraDir(cameraDir);
+      mCall.getVideoTech().setCamera(cameraId);
     }
   }
 
   @Override
   public void toggleCameraClicked() {
     LogUtil.i("CallButtonPresenter.toggleCameraClicked", "");
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SCREEN_SWAP_CAMERA,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     switchCameraClicked(
         !InCallPresenter.getInstance().getInCallCameraManager().isUsingFrontFacingCamera());
   }
@@ -333,24 +326,19 @@ public class CallButtonPresenter
   @Override
   public void pauseVideoClicked(boolean pause) {
     LogUtil.i("CallButtonPresenter.pauseVideoClicked", "%s", pause ? "pause" : "unpause");
-    VideoCall videoCall = mCall.getVideoCall();
-    if (videoCall == null) {
-      return;
-    }
 
-    int currUnpausedVideoState = VideoUtils.getUnPausedVideoState(mCall.getVideoState());
+    Logger.get(mContext)
+        .logCallImpression(
+            pause
+                ? DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_VIDEO
+                : DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_VIDEO,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
+
     if (pause) {
-      videoCall.setCamera(null);
-      VideoProfile videoProfile =
-          new VideoProfile(currUnpausedVideoState & ~VideoProfile.STATE_TX_ENABLED);
-      videoCall.sendSessionModifyRequest(videoProfile);
+      mCall.getVideoTech().stopTransmission();
     } else {
-      InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
-      videoCall.setCamera(cameraManager.getActiveCameraId());
-      VideoProfile videoProfile =
-          new VideoProfile(currUnpausedVideoState | VideoProfile.STATE_TX_ENABLED);
-      videoCall.sendSessionModifyRequest(videoProfile);
-      mCall.setSessionModificationState(DialerCall.SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE);
+      mCall.getVideoTech().resumeTransmission();
     }
 
     mInCallButtonUi.setVideoPaused(pause);
@@ -386,7 +374,7 @@ public class CallButtonPresenter
    */
   private void updateButtonsState(DialerCall call) {
     LogUtil.v("CallButtonPresenter.updateButtonsState", "");
-    final boolean isVideo = VideoUtils.isVideoCall(call);
+    final boolean isVideo = call.isVideoCall();
 
     // Common functionality (audio, hold, etc).
     // Show either HOLD or SWAP, but not both. If neither HOLD or SWAP is available:
@@ -402,7 +390,7 @@ public class CallButtonPresenter
     final boolean showAddCall =
         TelecomAdapter.getInstance().canAddCall() && UserManagerCompat.isUserUnlocked(mContext);
     final boolean showMerge = call.can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-    final boolean showUpgradeToVideo = !isVideo && hasVideoCallCapabilities(call);
+    final boolean showUpgradeToVideo = !isVideo && (hasVideoCallCapabilities(call));
     final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
     final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
@@ -427,8 +415,7 @@ public class CallButtonPresenter
         InCallButtonIds.BUTTON_SWITCH_CAMERA, isVideo && hasCameraPermission);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_PAUSE_VIDEO, showPauseVideo);
     if (isVideo) {
-      mInCallButtonUi.setVideoPaused(
-          !VideoUtils.isTransmissionEnabled(call) || !hasCameraPermission);
+      mInCallButtonUi.setVideoPaused(!call.getVideoTech().isTransmitting() || !hasCameraPermission);
     }
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_DIALPAD, true);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_MERGE, showMerge);
@@ -437,12 +424,7 @@ public class CallButtonPresenter
   }
 
   private boolean hasVideoCallCapabilities(DialerCall call) {
-    if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-      return call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
-          && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
-    }
-    // In L, this single flag represents both video transmitting and receiving capabilities
-    return call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX);
+    return call.getVideoTech().isAvailable();
   }
 
   /**
@@ -454,6 +436,7 @@ public class CallButtonPresenter
    * @return {@code true} if downgrading to an audio-only call from a video call is supported.
    */
   private boolean isDowngradeToAudioSupported(DialerCall call) {
+    // TODO(b/33676907): If there is an RCS video share session, return true here
     return !call.can(CallCompat.Details.CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO);
   }
 

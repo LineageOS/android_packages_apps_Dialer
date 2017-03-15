@@ -27,10 +27,14 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.util.Pair;
 import com.android.dialer.backup.nano.VoicemailInfo;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.voicemail.VoicemailComponent;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 import com.google.protobuf.nano.MessageNano;
@@ -40,6 +44,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Helper functions for DialerBackupAgent */
 public class DialerBackupUtils {
@@ -316,5 +322,43 @@ public class DialerBackupUtils {
       }
     }
     return false;
+  }
+
+  public static String getPhoneAccountClause(List<PhoneAccountHandle> phoneAccountsToArchive) {
+    Assert.checkArgument(!phoneAccountsToArchive.isEmpty());
+    StringBuilder whereQuery = new StringBuilder();
+
+    whereQuery.append("(");
+
+    for (int i = 0; i < phoneAccountsToArchive.size(); i++) {
+      whereQuery.append(
+          Voicemails.PHONE_ACCOUNT_ID + " = " + phoneAccountsToArchive.get(i).getId());
+
+      if (phoneAccountsToArchive.size() > 1 && i < phoneAccountsToArchive.size() - 1) {
+        whereQuery.append(" OR ");
+      }
+    }
+    whereQuery.append(")");
+    return whereQuery.toString();
+  }
+
+  public static List<PhoneAccountHandle> getPhoneAccountsToArchive(Context context) {
+    List<PhoneAccountHandle> phoneAccountsToBackUp = new ArrayList<>();
+
+    for (PhoneAccountHandle handle :
+        context.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts()) {
+
+      if (VoicemailComponent.get(context)
+          .getVoicemailClient()
+          .isVoicemailArchiveEnabled(context, handle)) {
+        phoneAccountsToBackUp.add(handle);
+        LogUtil.i(
+            "DialerBackupUtils.getPhoneAccountsToArchive", "enabled for: " + handle.toString());
+      } else {
+        LogUtil.i(
+            "DialerBackupUtils.getPhoneAccountsToArchive", "not enabled for: " + handle.toString());
+      }
+    }
+    return phoneAccountsToBackUp;
   }
 }

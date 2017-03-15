@@ -21,6 +21,10 @@ import android.support.v4.app.Fragment;
 /** Interface for call video call module. */
 public interface VideoCallScreen {
 
+  void onVideoScreenStart();
+
+  void onVideoScreenStop();
+
   void showVideoViews(boolean shouldShowPreview, boolean shouldShowRemote, boolean isRemotelyHeld);
 
   void onLocalVideoDimensionsChanged();
@@ -33,4 +37,6 @@ public interface VideoCallScreen {
       boolean shouldShowFullscreen, boolean shouldShowGreenScreen);
 
   Fragment getVideoCallScreenFragment();
+
+  String getCallId();
 }

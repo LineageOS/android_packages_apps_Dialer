@@ -93,8 +93,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <view
-              class="com.android.dialer.app.calllog.CallTypeIconsView"
+            <com.android.dialer.calllogutils.CallTypeIconsView
               android:id="@+id/call_type_icons"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"

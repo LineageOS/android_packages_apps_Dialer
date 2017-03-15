@@ -39,7 +39,7 @@ public class VoicemailErrorMessageCreator {
       case Vvm3VoicemailMessageCreator.VVM_TYPE_VVM3:
         return Vvm3VoicemailMessageCreator.create(context, status, statusReader);
       default:
-        return OmtpVoicemailMessageCreator.create(context, status);
+        return OmtpVoicemailMessageCreator.create(context, status, statusReader);
     }
   }
 }

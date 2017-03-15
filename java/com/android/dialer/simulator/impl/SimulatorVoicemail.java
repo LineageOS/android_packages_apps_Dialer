@@ -26,7 +26,7 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
-
+import com.google.auto.value.AutoValue;
 import java.util.concurrent.TimeUnit;
 
 /** Populates the device database with voicemail entries. */
@@ -105,7 +105,7 @@ final class SimulatorVoicemail {
     context.getContentResolver().insert(Status.buildSourceUri(context.getPackageName()), values);
   }
 
-
+  @AutoValue
   abstract static class Voicemail {
     @NonNull
     abstract String getPhoneNumber();
@@ -134,7 +134,7 @@ final class SimulatorVoicemail {
       return values;
     }
 
-
+    @AutoValue.Builder
     abstract static class Builder {
       abstract Builder setPhoneNumber(@NonNull String phoneNumber);
 

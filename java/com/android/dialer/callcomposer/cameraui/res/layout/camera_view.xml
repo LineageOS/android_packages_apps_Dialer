@@ -46,6 +46,14 @@
       android:background="@android:color/white"
       android:visibility="gone" />
 
+    <ImageView
+      android:id="@+id/preview_image_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:background="#000000"
+      android:visibility="gone"/>
+
     <!-- Need a background on this view in order for the ripple effect to have a place to draw -->
     <FrameLayout
       android:id="@+id/camera_button_container"

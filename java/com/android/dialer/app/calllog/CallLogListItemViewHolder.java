@@ -25,9 +25,11 @@ import android.os.AsyncTask;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -56,7 +58,7 @@ import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callcomposer.nano.CallComposerContact;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.logging.Logger;
@@ -78,8 +80,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     implements View.OnClickListener,
         MenuItem.OnMenuItemClickListener,
         View.OnCreateContextMenuListener {
-  private static final String CONFIG_SHARE_VOICEMAIL_ALLOWED = "share_voicemail_allowed";
-
   /** The root view of the call log list item */
   public final View rootView;
   /** The quick contact badge for the contact. */
@@ -201,6 +201,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public boolean isAttachedToWindow;
 
   public AsyncTask<Void, Void, ?> asyncTask;
+  private CallDetailsEntries callDetailsEntries;
 
   private CallLogListItemViewHolder(
       Context context,
@@ -549,10 +550,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
   }
 
-  private static boolean isShareVoicemailAllowed(Context context) {
-    return ConfigProviderBindings.get(context).getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
-  }
-
   /**
    * Binds text titles, click handlers and intents to the voicemail, details and callback action
    * buttons.
@@ -577,13 +574,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       unblockView.setVisibility(View.GONE);
       reportNotSpamView.setVisibility(View.GONE);
 
-      if (isShareVoicemailAllowed(mContext)) {
-        sendVoicemailButtonView.setVisibility(View.VISIBLE);
-      }
       voicemailPlaybackView.setVisibility(View.VISIBLE);
       Uri uri = Uri.parse(voicemailUri);
       mVoicemailPlaybackPresenter.setPlaybackView(
-          voicemailPlaybackView, rowId, uri, mVoicemailPrimaryActionButtonClicked);
+          voicemailPlaybackView,
+          rowId,
+          uri,
+          mVoicemailPrimaryActionButtonClicked,
+          sendVoicemailButtonView);
       mVoicemailPrimaryActionButtonClicked = false;
       CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
       return;
@@ -621,14 +619,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         && mVoicemailPlaybackPresenter != null
         && !TextUtils.isEmpty(voicemailUri)) {
       voicemailPlaybackView.setVisibility(View.VISIBLE);
-      if (isShareVoicemailAllowed(mContext)) {
-        Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_VISIBLE);
-        sendVoicemailButtonView.setVisibility(View.VISIBLE);
-      }
 
       Uri uri = Uri.parse(voicemailUri);
       mVoicemailPlaybackPresenter.setPlaybackView(
-          voicemailPlaybackView, rowId, uri, mVoicemailPrimaryActionButtonClicked);
+          voicemailPlaybackView,
+          rowId,
+          uri,
+          mVoicemailPrimaryActionButtonClicked,
+          sendVoicemailButtonView);
       mVoicemailPrimaryActionButtonClicked = false;
       CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
     } else {
@@ -640,7 +638,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       detailsButtonView.setVisibility(View.GONE);
     } else {
       detailsButtonView.setVisibility(View.VISIBLE);
-      detailsButtonView.setTag(IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+      detailsButtonView.setTag(
+          IntentProvider.getCallDetailIntentProvider(callDetailsEntries, buildContact()));
     }
 
     boolean isBlockedOrSpam = blockId != null || (isSpamFeatureEnabled && isSpam);
@@ -776,6 +775,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       contactType = ContactPhotoManager.TYPE_VOICEMAIL;
     } else if (isBusiness) {
       contactType = ContactPhotoManager.TYPE_BUSINESS;
+    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
+      contactType = ContactPhotoManager.TYPE_GENERIC_AVATAR;
     }
 
     final String lookupKey =
@@ -854,20 +855,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     } else if (view.getId() == R.id.call_compose_action) {
       LogUtil.i("CallLogListItemViewHolder.onClick", "share and call pressed");
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_SHARE_AND_CALL);
-      CallComposerContact contact = new CallComposerContact();
-      contact.photoId = info.photoId;
-      contact.photoUri = info.photoUri == null ? null : info.photoUri.toString();
-      contact.contactUri = info.lookupUri == null ? null : info.lookupUri.toString();
-      contact.nameOrNumber = (String) nameOrNumber;
-      contact.isBusiness = isBusiness;
-      contact.number = number;
-      /* second line of contact view. */
-      contact.displayNumber = TextUtils.isEmpty(info.name) ? null : displayNumber;
-      /* phone number type (e.g. mobile) in second line of contact view */
-      contact.numberLabel = numberType;
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(
-          CallComposerActivity.newIntent(activity, contact),
+          CallComposerActivity.newIntent(activity, buildContact()),
           DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_COMPOSE);
     } else if (view.getId() == R.id.share_voicemail) {
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_PRESSED);
@@ -883,6 +873,21 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         }
       }
     }
+  }
+
+  private CallComposerContact buildContact() {
+    CallComposerContact contact = new CallComposerContact();
+    contact.photoId = info.photoId;
+    contact.photoUri = info.photoUri == null ? null : info.photoUri.toString();
+    contact.contactUri = info.lookupUri == null ? null : info.lookupUri.toString();
+    contact.nameOrNumber = (String) nameOrNumber;
+    contact.isBusiness = isBusiness;
+    contact.number = number;
+    /* second line of contact view. */
+    contact.displayNumber = TextUtils.isEmpty(info.name) ? null : displayNumber;
+    /* phone number type (e.g. mobile) in second line of contact view */
+    contact.numberLabel = numberType;
+    return contact;
   }
 
   private void logCallLogAction(int id) {
@@ -929,6 +934,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         blockView.setVisibility(View.VISIBLE);
       }
     }
+  }
+
+  public void setDetailedPhoneDetails(CallDetailsEntries callDetailsEntries) {
+    this.callDetailsEntries = callDetailsEntries;
+  }
+
+  @VisibleForTesting
+  public CallDetailsEntries getDetailedPhoneDetails() {
+    return callDetailsEntries;
   }
 
   public interface OnClickListener {

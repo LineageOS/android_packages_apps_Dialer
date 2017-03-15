@@ -40,6 +40,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   public static final int TYPE_BUSINESS = LetterTileDrawable.TYPE_BUSINESS;
   public static final int TYPE_VOICEMAIL = LetterTileDrawable.TYPE_VOICEMAIL;
   public static final int TYPE_DEFAULT = LetterTileDrawable.TYPE_DEFAULT;
+  public static final int TYPE_GENERIC_AVATAR = LetterTileDrawable.TYPE_GENERIC_AVATAR;
   /** Scale and offset default constants used for default letter images */
   public static final float SCALE_DEFAULT = 1.0f;
 

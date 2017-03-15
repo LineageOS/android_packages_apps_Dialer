@@ -16,7 +16,6 @@
 
 <resources>
   <color name="dialer_red_highlight_color">#ff1744</color>
-  <color name="dialer_green_highlight_color">#00c853</color>
 
   <color name="dialer_button_text_color">#fff</color>
   <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
@@ -83,13 +82,6 @@
   <!-- Color of actions in expanded call log entries.  This text color represents actions such
        as call back, play voicemail, etc. -->
   <color name="call_log_action_text">@color/dialer_theme_color</color>
-
-  <!-- Color for missed call icons. -->
-  <color name="missed_call">#ff2e58</color>
-  <!-- Color for answered or outgoing call icons. -->
-  <color name="answered_call">@color/dialer_green_highlight_color</color>
-  <!-- Color for blocked call icons. -->
-  <color name="blocked_call">@color/dialer_secondary_text_color</color>
 
   <color name="dialer_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
 

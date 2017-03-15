@@ -19,6 +19,7 @@ package com.android.contacts.common.lettertiles;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -48,13 +49,18 @@ public class LetterTileDrawable extends Drawable {
    * #TYPE_BUSINESS}, and voicemail contacts should use {@link #TYPE_VOICEMAIL}.
    */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL})
+  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR})
   public @interface ContactType {}
 
   /** Contact type constants */
   public static final int TYPE_PERSON = 1;
   public static final int TYPE_BUSINESS = 2;
   public static final int TYPE_VOICEMAIL = 3;
+  /**
+   * A generic avatar that features the default icon, default color, and no letter. Useful for
+   * situations where a contact is anonymous.
+   */
+  public static final int TYPE_GENERIC_AVATAR = 4;
   @ContactType public static final int TYPE_DEFAULT = TYPE_PERSON;
 
   /**
@@ -87,7 +93,6 @@ public class LetterTileDrawable extends Drawable {
   private static Bitmap sDefaultPersonAvatar;
   private static Bitmap sDefaultBusinessAvatar;
   private static Bitmap sDefaultVoicemailAvatar;
-  private static final String TAG = LetterTileDrawable.class.getSimpleName();
   private final Paint mPaint;
   private int mContactType = TYPE_DEFAULT;
   private float mScale = 1.0f;
@@ -97,7 +102,7 @@ public class LetterTileDrawable extends Drawable {
   private int mColor;
   private Character mLetter = null;
 
-  private boolean mAvatarWasVoicemailOrBusiness = false;
+  @ContactType private int mAvatarType = TYPE_DEFAULT;
   private String mDisplayName;
 
   public LetterTileDrawable(final Resources res) {
@@ -130,6 +135,7 @@ public class LetterTileDrawable extends Drawable {
       case TYPE_VOICEMAIL:
         return sDefaultVoicemailAvatar;
       case TYPE_PERSON:
+      case TYPE_GENERIC_AVATAR:
       default:
         return sDefaultPersonAvatar;
     }
@@ -147,6 +153,14 @@ public class LetterTileDrawable extends Drawable {
     }
     // Draw letter tile.
     drawLetterTile(canvas);
+  }
+
+  public Bitmap getBitmap(int width, int height) {
+    Bitmap bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+    this.setBounds(0, 0, width, height);
+    Canvas canvas = new Canvas(bitmap);
+    this.draw(canvas);
+    return bitmap;
   }
 
   /**
@@ -231,7 +245,9 @@ public class LetterTileDrawable extends Drawable {
 
   /** Returns a deterministic color based on the provided contact identifier string. */
   private int pickColor(final String identifier) {
-    if (TextUtils.isEmpty(identifier) || mContactType == TYPE_VOICEMAIL) {
+    if (mContactType == TYPE_VOICEMAIL
+        || mContactType == TYPE_BUSINESS
+        || TextUtils.isEmpty(identifier)) {
       return sDefaultColor;
     }
     // String.hashCode() implementation is not supposed to change across java versions, so
@@ -329,6 +345,10 @@ public class LetterTileDrawable extends Drawable {
     return this;
   }
 
+  public boolean tileIsCircular() {
+    return this.mIsCircle;
+  }
+
   /**
    * Creates a canonical letter tile for use across dialer fragments.
    *
@@ -344,39 +364,37 @@ public class LetterTileDrawable extends Drawable {
       @Nullable final String identifierForTileColor,
       @Shape final int shape,
       final int contactType) {
-    setContactType(contactType);
-    /**
-     * During hangup, we lose the call state for special types of contacts, like voicemail. To help
-     * callers avoid extraneous LetterTileDrawable allocations, we keep track of the special case
-     * until we encounter a new display name.
-     */
-    if (contactType == TYPE_VOICEMAIL || contactType == TYPE_BUSINESS) {
-      this.mAvatarWasVoicemailOrBusiness = true;
-    } else if (displayName != null && !displayName.equals(mDisplayName)) {
-      this.mAvatarWasVoicemailOrBusiness = false;
-    }
-    this.mDisplayName = displayName;
-    if (shape == SHAPE_CIRCLE) {
-      this.setIsCircular(true);
-    } else {
-      this.setIsCircular(false);
-    }
+
+    this.setIsCircular(shape == SHAPE_CIRCLE);
 
     /**
-     * To preserve style, we don't use contactType to set the tile icon. In the future, when all
-     * callers surface this detail, we can use this to better style the tile icon.
+     * We return quickly under the following conditions: 1. We are asked to draw a default tile, and
+     * no coloring information is provided, meaning no further initialization is necessary OR 2.
+     * We've already invoked this method before, set mDisplayName, and found that it has not
+     * changed. This is useful during events like hangup, when we lose the call state for special
+     * types of contacts, like voicemail. We keep track of the special case until we encounter a new
+     * display name.
      */
-    if (mAvatarWasVoicemailOrBusiness) {
-      this.setLetterAndColorFromContactDetails(null, displayName);
+    if (contactType == TYPE_DEFAULT
+        && ((displayName == null && identifierForTileColor == null)
+            || (displayName != null && displayName.equals(mDisplayName)))) {
       return this;
+    }
+
+    this.mDisplayName = displayName;
+    this.mAvatarType = contactType;
+    setContactType(this.mAvatarType);
+
+    // Special contact types receive default color and no letter tile, but special iconography.
+    if (this.mAvatarType != TYPE_PERSON) {
+      this.setLetterAndColorFromContactDetails(null, null);
     } else {
       if (identifierForTileColor != null) {
         this.setLetterAndColorFromContactDetails(displayName, identifierForTileColor);
-        return this;
       } else {
         this.setLetterAndColorFromContactDetails(displayName, displayName);
-        return this;
       }
     }
+    return this;
   }
 }

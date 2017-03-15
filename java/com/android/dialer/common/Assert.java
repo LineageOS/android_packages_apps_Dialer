@@ -19,6 +19,7 @@ package com.android.dialer.common;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import javax.annotation.CheckReturnValue;
 
 /** Assertions which will result in program termination unless disabled by flags. */
 public class Assert {
@@ -33,7 +34,9 @@ public class Assert {
    * Called when a truly exceptional case occurs.
    *
    * @throws AssertionError
+   * @deprecated Use throw Assert.create*FailException() instead.
    */
+  @Deprecated
   public static void fail() {
     throw new AssertionError("Fail");
   }
@@ -43,9 +46,36 @@ public class Assert {
    *
    * @param reason the optional reason to supply as the exception message
    * @throws AssertionError
+   * @deprecated Use throw Assert.create*FailException() instead.
    */
+  @Deprecated
   public static void fail(String reason) {
     throw new AssertionError(reason);
+  }
+
+  @CheckReturnValue
+  public static AssertionError createAssertionFailException(String msg) {
+    return new AssertionError(msg);
+  }
+
+  @CheckReturnValue
+  public static UnsupportedOperationException createUnsupportedOperationFailException() {
+    return new UnsupportedOperationException();
+  }
+
+  @CheckReturnValue
+  public static UnsupportedOperationException createUnsupportedOperationFailException(String msg) {
+    return new UnsupportedOperationException(msg);
+  }
+
+  @CheckReturnValue
+  public static IllegalStateException createIllegalStateFailException() {
+    return new IllegalStateException();
+  }
+
+  @CheckReturnValue
+  public static IllegalStateException createIllegalStateFailException(String msg) {
+    return new IllegalStateException(msg);
   }
 
   /**

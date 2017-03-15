@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title bar for call detail screen -->
+  <string name="call_details">Call details</string>
+
+  <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
+  <string name="delete">Delete</string>
+
+  <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
+  <string name="call_details_copy_number">Copy number</string>
+
+  <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
+  <string name="call_details_edit_number">Edit number before call</string>
+
+  <!-- String describing the phone icon on a call log list item. When tapped, it will place a
+       call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
+  <string name="description_call_log_call_action">Call</string>
+
+  <!-- String shown when the call details show a image that was sent -->
+  <string name="sent_a_photo">Sent a photo</string>
+
+  <!-- String shown when the call details show a image that was received -->
+  <string name="received_a_photo">Received a photo</string>
+
+  <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
+  <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
+</resources>

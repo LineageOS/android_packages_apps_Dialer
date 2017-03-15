@@ -32,6 +32,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.Logger;
@@ -44,7 +45,6 @@ import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.incall.bindings.InCallBindings;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
@@ -89,11 +89,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public static Intent getIntent(
-      Context context,
-      boolean showDialpad,
-      boolean newOutgoingCall,
-      boolean isVideoCall,
-      boolean isForFullScreen) {
+      Context context, boolean showDialpad, boolean newOutgoingCall, boolean isForFullScreen) {
     Intent intent = new Intent(Intent.ACTION_MAIN, null);
     intent.setFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION | Intent.FLAG_ACTIVITY_NEW_TASK);
     intent.setClass(context, InCallActivity.class);
@@ -192,7 +188,22 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   @Override
   public void finish() {
     if (shouldCloseActivityOnFinish()) {
-      super.finish();
+      // When user select incall ui from recents after the call is disconnected, it tries to launch
+      // a new InCallActivity but InCallPresenter is already teared down at this point, which causes
+      // crash.
+      // By calling finishAndRemoveTask() instead of finish() the task associated with
+      // InCallActivity is cleared completely. So system won't try to create a new InCallActivity in
+      // this case.
+      //
+      // Calling finish won't clear the task and normally when an activity finishes it shouldn't
+      // clear the task since there could be parent activity in the same task that's still alive.
+      // But InCallActivity is special since it's singleInstance which means it's root activity and
+      // only instance of activity in the task. So it should be safe to also remove task when
+      // finishing.
+      // It's also necessary in the sense of it's excluded from recents. So whenever the activity
+      // finishes, the task should also be removed since it doesn't make sense to go back to it in
+      // anyway anymore.
+      super.finishAndRemoveTask();
     }
   }
 
@@ -260,18 +271,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Override
   public boolean onKeyUp(int keyCode, KeyEvent event) {
-    if (common.onKeyUp(keyCode, event)) {
-      return true;
-    }
-    return super.onKeyUp(keyCode, event);
+    return common.onKeyUp(keyCode, event) || super.onKeyUp(keyCode, event);
   }
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (common.onKeyDown(keyCode, event)) {
-      return true;
-    }
-    return super.onKeyDown(keyCode, event);
+    return common.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
   }
 
   public boolean isInCallScreenAnimating() {
@@ -411,13 +416,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     common.setExcludeFromRecents(exclude);
   }
 
-  public void onResolveIntent(
-      DialerCall outgoingCall, boolean isNewOutgoingCall, boolean didShowAccountSelectionDialog) {
-    if (didShowAccountSelectionDialog) {
-      hideMainInCallFragment();
-    }
-  }
-
   @Nullable
   public FragmentManager getDialpadFragmentManager() {
     InCallScreen inCallScreen = getInCallScreen();
@@ -488,7 +486,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     enableInCallOrientationEventListener(allowOrientationChange);
   }
 
-  private void hideMainInCallFragment() {
+  public void hideMainInCallFragment() {
     LogUtil.i("InCallActivity.hideMainInCallFragment", "");
     if (didShowInCallScreen || didShowVideoCallScreen) {
       FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -513,8 +511,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
 
     isInShowMainInCallFragment = true;
-    ShouldShowAnswerUiResult shouldShowAnswerUi = getShouldShowAnswerUi();
-    boolean shouldShowVideoUi = getShouldShowVideoUi();
+    ShouldShowUiResult shouldShowAnswerUi = getShouldShowAnswerUi();
+    ShouldShowUiResult shouldShowVideoUi = getShouldShowVideoUi();
     LogUtil.i(
         "InCallActivity.showMainInCallFragment",
         "shouldShowAnswerUi: %b, shouldShowVideoUi: %b, "
@@ -525,7 +523,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         didShowInCallScreen,
         didShowVideoCallScreen);
     // Only video call ui allows orientation change.
-    setAllowOrientationChange(shouldShowVideoUi);
+    setAllowOrientationChange(shouldShowVideoUi.shouldShow);
 
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     boolean didChangeInCall;
@@ -535,9 +533,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       didChangeInCall = hideInCallScreenFragment(transaction);
       didChangeVideo = hideVideoCallScreenFragment(transaction);
       didChangeAnswer = showAnswerScreenFragment(transaction, shouldShowAnswerUi.call);
-    } else if (shouldShowVideoUi) {
+    } else if (shouldShowVideoUi.shouldShow) {
       didChangeInCall = hideInCallScreenFragment(transaction);
-      didChangeVideo = showVideoCallScreenFragment(transaction);
+      didChangeVideo = showVideoCallScreenFragment(transaction, shouldShowVideoUi.call);
       didChangeAnswer = hideAnswerScreenFragment(transaction);
     } else {
       didChangeInCall = showInCallScreenFragment(transaction);
@@ -552,17 +550,17 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     isInShowMainInCallFragment = false;
   }
 
-  private ShouldShowAnswerUiResult getShouldShowAnswerUi() {
+  private ShouldShowUiResult getShouldShowAnswerUi() {
     DialerCall call = CallList.getInstance().getIncomingCall();
     if (call != null) {
       LogUtil.i("InCallActivity.getShouldShowAnswerUi", "found incoming call");
-      return new ShouldShowAnswerUiResult(true, call);
+      return new ShouldShowUiResult(true, call);
     }
 
     call = CallList.getInstance().getVideoUpgradeRequestCall();
     if (call != null) {
       LogUtil.i("InCallActivity.getShouldShowAnswerUi", "found video upgrade request");
-      return new ShouldShowAnswerUiResult(true, call);
+      return new ShouldShowUiResult(true, call);
     }
 
     // Check if we're showing the answer screen and the call is disconnected. If this condition is
@@ -574,30 +572,30 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     if (didShowAnswerScreen && (call == null || call.getState() == State.DISCONNECTED)) {
       LogUtil.i("InCallActivity.getShouldShowAnswerUi", "found disconnecting incoming call");
-      return new ShouldShowAnswerUiResult(true, call);
+      return new ShouldShowUiResult(true, call);
     }
 
-    return new ShouldShowAnswerUiResult(false, null);
+    return new ShouldShowUiResult(false, null);
   }
 
-  private boolean getShouldShowVideoUi() {
+  private static ShouldShowUiResult getShouldShowVideoUi() {
     DialerCall call = CallList.getInstance().getFirstCall();
     if (call == null) {
       LogUtil.i("InCallActivity.getShouldShowVideoUi", "null call");
-      return false;
+      return new ShouldShowUiResult(false, null);
     }
 
-    if (VideoUtils.isVideoCall(call)) {
+    if (call.isVideoCall()) {
       LogUtil.i("InCallActivity.getShouldShowVideoUi", "found video call");
-      return true;
+      return new ShouldShowUiResult(true, call);
     }
 
-    if (VideoUtils.hasSentVideoUpgradeRequest(call)) {
+    if (call.hasSentVideoUpgradeRequest()) {
       LogUtil.i("InCallActivity.getShouldShowVideoUi", "upgrading to video");
-      return true;
+      return new ShouldShowUiResult(true, call);
     }
 
-    return false;
+    return new ShouldShowUiResult(false, null);
   }
 
   private boolean showAnswerScreenFragment(FragmentTransaction transaction, DialerCall call) {
@@ -607,14 +605,15 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return false;
     }
 
-    boolean isVideoUpgradeRequest = VideoUtils.hasReceivedVideoUpgradeRequest(call);
-    int videoState = isVideoUpgradeRequest ? call.getRequestedVideoState() : call.getVideoState();
+    Assert.checkArgument(call != null, "didShowAnswerScreen was false but call was still null");
+
+    boolean isVideoUpgradeRequest = call.hasReceivedVideoUpgradeRequest();
 
     // Check if we're already showing an answer screen for this call.
     if (didShowAnswerScreen) {
       AnswerScreen answerScreen = getAnswerScreen();
       if (answerScreen.getCallId().equals(call.getId())
-          && answerScreen.getVideoState() == videoState
+          && answerScreen.isVideoCall() == call.isVideoCall()
           && answerScreen.isVideoUpgradeRequest() == isVideoUpgradeRequest) {
         return false;
       }
@@ -626,7 +625,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     // Show a new answer screen.
     AnswerScreen answerScreen =
-        AnswerBindings.createAnswerScreen(call.getId(), videoState, isVideoUpgradeRequest);
+        AnswerBindings.createAnswerScreen(call.getId(), call.isVideoCall(), isVideoUpgradeRequest);
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), TAG_ANSWER_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);
@@ -675,12 +674,21 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return true;
   }
 
-  private boolean showVideoCallScreenFragment(FragmentTransaction transaction) {
+  private boolean showVideoCallScreenFragment(FragmentTransaction transaction, DialerCall call) {
     if (didShowVideoCallScreen) {
-      return false;
+      VideoCallScreen videoCallScreen = getVideoCallScreen();
+      if (videoCallScreen.getCallId().equals(call.getId())) {
+        return false;
+      }
+      LogUtil.i(
+          "InCallActivity.showVideoCallScreenFragment",
+          "video call fragment exists but arguments do not match");
+      hideVideoCallScreenFragment(transaction);
     }
 
-    VideoCallScreen videoCallScreen = VideoBindings.createVideoCallScreen();
+    LogUtil.i("InCallActivity.showVideoCallScreenFragment", "call: %s", call);
+
+    VideoCallScreen videoCallScreen = VideoBindings.createVideoCallScreen(call.getId());
     transaction.add(R.id.main, videoCallScreen.getVideoCallScreenFragment(), TAG_VIDEO_CALL_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
@@ -744,11 +752,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return super.dispatchTouchEvent(event);
   }
 
-  private static class ShouldShowAnswerUiResult {
+  private static class ShouldShowUiResult {
     public final boolean shouldShow;
     public final DialerCall call;
 
-    ShouldShowAnswerUiResult(boolean shouldShow, DialerCall call) {
+    ShouldShowUiResult(boolean shouldShow, DialerCall call) {
       this.shouldShow = shouldShow;
       this.call = call;
     }

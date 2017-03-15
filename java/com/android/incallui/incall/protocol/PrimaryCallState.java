@@ -18,15 +18,15 @@ package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
 import android.telecom.DisconnectCause;
-import android.telecom.VideoProfile;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.SessionModificationState;
+import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.VideoTech.SessionModificationState;
 import java.util.Locale;
 
 /** State of the primary call. */
 public class PrimaryCallState {
   public final int state;
-  public final int videoState;
+  public final boolean isVideoCall;
   @SessionModificationState public final int sessionModificationState;
   public final DisconnectCause disconnectCause;
   public final String connectionLabel;
@@ -37,19 +37,21 @@ public class PrimaryCallState {
   public final boolean isWifi;
   public final boolean isConference;
   public final boolean isWorkCall;
+  public final boolean isHdAttempting;
   public final boolean isHdAudioCall;
   public final boolean isForwardedNumber;
   public final boolean shouldShowContactPhoto;
   public final long connectTimeMillis;
   public final boolean isVoiceMailNumber;
   public final boolean isRemotelyHeld;
+  public final boolean isBusinessNumber;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
     return new PrimaryCallState(
         DialerCall.State.IDLE,
-        VideoProfile.STATE_AUDIO_ONLY,
-        DialerCall.SESSION_MODIFICATION_STATE_NO_REQUEST,
+        false, /* isVideoCall */
+        VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST,
         new DisconnectCause(DisconnectCause.UNKNOWN),
         null, /* connectionLabel */
         null, /* connectionIcon */
@@ -59,17 +61,19 @@ public class PrimaryCallState {
         false /* isWifi */,
         false /* isConference */,
         false /* isWorkCall */,
+        false /* isHdAttempting */,
         false /* isHdAudioCall */,
         false /* isForwardedNumber */,
         false /* shouldShowContactPhoto */,
         0,
         false /* isVoiceMailNumber */,
-        false /* isRemotelyHeld */);
+        false /* isRemotelyHeld */,
+        false /* isBusinessNumber */);
   }
 
   public PrimaryCallState(
       int state,
-      int videoState,
+      boolean isVideoCall,
       @SessionModificationState int sessionModificationState,
       DisconnectCause disconnectCause,
       String connectionLabel,
@@ -80,14 +84,16 @@ public class PrimaryCallState {
       boolean isWifi,
       boolean isConference,
       boolean isWorkCall,
+      boolean isHdAttempting,
       boolean isHdAudioCall,
       boolean isForwardedNumber,
       boolean shouldShowContactPhoto,
       long connectTimeMillis,
       boolean isVoiceMailNumber,
-      boolean isRemotelyHeld) {
+      boolean isRemotelyHeld,
+      boolean isBusinessNumber) {
     this.state = state;
-    this.videoState = videoState;
+    this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
     this.disconnectCause = disconnectCause;
     this.connectionLabel = connectionLabel;
@@ -98,12 +104,14 @@ public class PrimaryCallState {
     this.isWifi = isWifi;
     this.isConference = isConference;
     this.isWorkCall = isWorkCall;
+    this.isHdAttempting = isHdAttempting;
     this.isHdAudioCall = isHdAudioCall;
     this.isForwardedNumber = isForwardedNumber;
     this.shouldShowContactPhoto = shouldShowContactPhoto;
     this.connectTimeMillis = connectTimeMillis;
     this.isVoiceMailNumber = isVoiceMailNumber;
     this.isRemotelyHeld = isRemotelyHeld;
+    this.isBusinessNumber = isBusinessNumber;
   }
 
   @Override
