@@ -82,9 +82,9 @@
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail_string">Voicemail</string>
 
-  <!-- A nicely formatted call duration displayed when viewing call details. For example "42m 28s" -->
-  <string name="call_details_duration_format"><xliff:g example="42" id="minutes">%s</xliff:g>m <xliff:g example="28" id="seconds">%s</xliff:g>s</string>
+  <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
+  <string name="call_details_duration_format"><xliff:g example="42" id="minutes">%s</xliff:g> min <xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
 
-  <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28s" -->
-  <string name="call_details_short_duration_format"><xliff:g example="28" id="seconds">%s</xliff:g>s</string>
+  <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
+  <string name="call_details_short_duration_format"><xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
 </resources>

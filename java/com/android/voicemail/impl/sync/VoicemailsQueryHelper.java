@@ -272,15 +272,14 @@ public class VoicemailsQueryHelper {
     String sortAndLimit = "date ASC limit " + numVoicemails;
 
     try (Cursor cursor =
-        mContentResolver.query(mSourceUri, PROJECTION, ARCHIVED_SELECTION, null, sortAndLimit)) {
+        mContentResolver.query(mSourceUri, null, ARCHIVED_SELECTION, null, sortAndLimit)) {
 
       Assert.isNotNull(cursor);
 
       List<Voicemail> voicemails = new ArrayList<>();
       while (cursor.moveToNext()) {
-        final long id = cursor.getLong(_ID);
         final String sourceData = cursor.getString(SOURCE_DATA);
-        Voicemail voicemail = Voicemail.createForUpdate(id, sourceData).build();
+        Voicemail voicemail = Voicemail.createForUpdate(cursor.getLong(_ID), sourceData).build();
         voicemails.add(voicemail);
       }
 

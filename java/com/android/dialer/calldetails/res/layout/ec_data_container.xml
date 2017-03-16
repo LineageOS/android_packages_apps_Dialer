@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/ec_container_height">
 
@@ -9,7 +8,6 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
-      android:layout_marginStart="1dp"
       android:maxLines="2"
       style="@style/SecondaryText"/>
 
@@ -24,21 +22,21 @@
       android:outlineProvider="background"
       android:visibility="gone">
 
-  <ImageView
-      android:id="@+id/multimedia_image"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"/>
+    <ImageView
+        android:id="@+id/multimedia_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
-  <TextView
-      android:id="@+id/multimedia_attachments_number"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:textColor="@color/background_dialer_white"
-      android:textSize="20sp"
-      android:fontFamily="sans-serif-medium"
-      android:background="#80000000"
-      android:gravity="center"
-      android:visibility="gone"/>
+    <com.android.incallui.autoresizetext.AutoResizeTextView
+        android:id="@+id/multimedia_attachments_number"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:gravity="center"
+        android:textColor="@color/background_dialer_white"
+        android:textSize="100sp"
+        android:background="#80000000"
+        android:visibility="gone"/>
   </FrameLayout>
 </RelativeLayout>

@@ -28,7 +28,8 @@ import android.provider.Settings.SettingNotFoundException;
 import com.android.dialer.common.LogUtil;
 
 /**
- * Helper class to check if Google Location Services is enabled.
+ * Helper class to check if Google Location Services is enabled. This class is based on
+ * https://docs.google.com/a/google.com/document/d/1sGm8pHgGY1QmxbLCwTZuWQASEDN7CFW9EPSZXAuGQfo
  */
 public class GoogleLocationSettingHelper {
 
