@@ -1,6 +1,5 @@
 # Local modifications:
 # * Dagger classes have been manually crafted.
-# * Precompiled proto classes have been included.
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -95,7 +94,6 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/app/manifests/activities/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/voicemail/error/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/backup/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/binary/aosp/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/blocking/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/camera/AndroidManifest.xml \

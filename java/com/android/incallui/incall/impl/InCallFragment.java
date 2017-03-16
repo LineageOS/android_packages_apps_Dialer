@@ -253,13 +253,16 @@ public class InCallFragment extends Fragment
       if (!stateRestored) {
         new Handler()
             .postDelayed(
-                () -> {
-                  // In order to prevent user confusion and educate the user on our UI, we animate
-                  // the view pager to the button grid after a short period to show them where the
-                  // UI that they are more familiar with is located.
-                  new FakeDragAnimation(pager).start();
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    // In order to prevent user confusion and educate the user on our UI, we animate
+                    // the view pager to the button grid after 2 seconds show them when the UI is
+                    // that they are more familiar with.
+                    pager.setCurrentItem(adapter.getButtonGridPosition());
+                  }
                 },
-                333);
+                2000);
       }
     } else {
       tabLayout.setVisibility(View.GONE);

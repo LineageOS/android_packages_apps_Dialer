@@ -12,12 +12,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!-- From java/com/android/dialer/binary/aosp/AndroidManifest.xml -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   coreApp="true"
   package="com.android.dialer"
-  android:versionCode="90000"
-  android:versionName="9.0">
+  android:versionCode="100000"
+  android:versionName="10.0">
 
   <uses-sdk
     android:minSdkVersion="23"
@@ -111,6 +111,8 @@
     android:name="com.android.dialer.binary.aosp.AospDialerApplication"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false">
+
+
   </application>
 
 </manifest>

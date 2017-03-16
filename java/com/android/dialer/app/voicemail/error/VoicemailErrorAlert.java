@@ -56,7 +56,7 @@ public class VoicemailErrorAlert {
     this.modalAlertManager = modalAlertManager;
     this.messageCreator = messageCreator;
 
-    view = alertManager.inflate(R.layout.voicemai_error_message_fragment);
+    view = alertManager.inflate(R.layout.voicemail_error_message_fragment);
     header = (TextView) view.findViewById(R.id.error_card_header);
     details = (TextView) view.findViewById(R.id.error_card_details);
     primaryAction = (TextView) view.findViewById(R.id.primary_action);

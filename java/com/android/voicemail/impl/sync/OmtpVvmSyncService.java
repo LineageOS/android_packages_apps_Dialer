@@ -180,7 +180,7 @@ public class OmtpVvmSyncService {
     // The number of voicemails that exceed our threshold and should be deleted from the server
     int numVoicemails =
         imapHelper.getOccuupiedQuota()
-            - ((int) AUTO_DELETE_ARCHIVE_VM_THRESHOLD * imapHelper.getTotalQuota());
+            - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * imapHelper.getTotalQuota());
     List<Voicemail> oldestVoicemails = mQueryHelper.oldestVoicemailsOnServer(numVoicemails);
     if (!oldestVoicemails.isEmpty()) {
       mQueryHelper.markArchivedInDatabase(oldestVoicemails);

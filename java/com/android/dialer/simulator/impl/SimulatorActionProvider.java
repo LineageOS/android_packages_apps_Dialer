@@ -17,7 +17,9 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.VoicemailContract;
 import android.support.annotation.NonNull;
 import android.view.ActionProvider;
 import android.view.MenuItem;
@@ -70,6 +72,14 @@ final class SimulatorActionProvider extends ActionProvider {
         .setOnMenuItemClickListener(
             (item) -> {
               populateDatabase();
+              return true;
+            });
+    subMenu
+        .add("Sync Voicemail")
+        .setOnMenuItemClickListener(
+            (item) -> {
+              Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+              context.sendBroadcast(intent);
               return true;
             });
   }
