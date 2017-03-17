@@ -43,6 +43,8 @@ import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -246,13 +248,14 @@ public class DefaultVoicemailNotifier {
     if (photoIcon != null) {
       notificationBuilder.setLargeIcon(photoIcon);
     }
-
     if (!TextUtils.isEmpty(voicemail.transcription)) {
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION);
       notificationBuilder.setStyle(
           new Notification.BigTextStyle().bigText(voicemail.transcription));
     }
     notificationBuilder.setContentIntent(newVoicemailIntent(voicemail));
-
+    Logger.get(context).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED);
     return notificationBuilder.build();
   }
 

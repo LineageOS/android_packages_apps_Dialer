@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="toast_text_copied" msgid="8979281391599667362">"Text copiat"</string>
+    <string name="copy_text" msgid="5890820280087874642">"Copiați în clipboard"</string>
+    <string name="call_custom" msgid="3041673234638990874">"Apelați <xliff:g id="CUSTOM">%s</xliff:g>"</string>
+    <string name="call_home" msgid="125893483593803791">"Apelați numărul de domiciliu"</string>
+    <string name="call_mobile" msgid="967589404494150813">"Apelați numărul de mobil"</string>
+    <string name="call_work" msgid="6040550697395300892">"Apelați numărul de serviciu"</string>
+    <string name="call_fax_work" msgid="5260192771364592922">"Apelați numărul de fax de serviciu"</string>
+    <string name="call_fax_home" msgid="5174311195081144124">"Apelați numărul de fax de domiciliu"</string>
+    <string name="call_pager" msgid="6814149227741274161">"Apelați numărul de pager"</string>
+    <string name="call_other" msgid="5536385588712587235">"Apelați"</string>
+    <string name="call_callback" msgid="6314019862718112786">"Apelați un număr cu apelare inversă"</string>
+    <string name="call_car" msgid="3197417098027764954">"Apelați numărul de mașină"</string>
+    <string name="call_company_main" msgid="2557663310028446397">"Apelați numărul principal al companiei"</string>
+    <string name="call_isdn" msgid="4691270442763649522">"Apelați ISDN"</string>
+    <string name="call_main" msgid="3293707608770407814">"Apelați numărul principal"</string>
+    <string name="call_other_fax" msgid="4724521984879021465">"Apelați numărul de fax"</string>
+    <string name="call_radio" msgid="8942441419845057942">"Apelați un număr radio"</string>
+    <string name="call_telex" msgid="2031514461660668351">"Apelați un număr de telex"</string>
+    <string name="call_tty_tdd" msgid="7807210224965727701">"Apelați TTY/TDD"</string>
+    <string name="call_work_mobile" msgid="2716342732938578495">"Apelați numărul de mobil de la serviciu"</string>
+    <string name="call_work_pager" msgid="3791778749827366574">"Apelați numărul de pager de serviciu"</string>
+    <string name="call_assistant" msgid="4177478845473789294">"Apelați <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
+    <string name="call_mms" msgid="4958811711741872901">"Apelați MMS"</string>
+    <string name="call_by_shortcut" msgid="4623082183552111045">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (apelați)"</string>
+    <string name="sms_custom" msgid="8785368968605026317">"Trimiteți un mesaj text către <xliff:g id="CUSTOM">%s</xliff:g>"</string>
+    <string name="sms_home" msgid="3527719551060295243">"Trimiteți un mesaj text către telefonul de domiciliu"</string>
+    <string name="sms_mobile" msgid="8883045857887736518">"Trimiteți un mesaj text către numărul de mobil"</string>
+    <string name="sms_work" msgid="4158595439553450966">"Trimiteți un mesaj text către numărul de serviciu"</string>
+    <string name="sms_fax_work" msgid="5483726627718055248">"Trimiteți un mesaj text către un număr de fax de serviciu"</string>
+    <string name="sms_fax_home" msgid="9219265155770746077">"Trimiteți un mesaj text către un număr de fax de domiciliu"</string>
+    <string name="sms_pager" msgid="4901085068525193933">"Trimiteți un mesaj text către un număr de pager"</string>
+    <string name="sms_other" msgid="1742702947993285933">"Trimiteți un mesaj text"</string>
+    <string name="sms_callback" msgid="5833483630377538308">"Trimiteți un mesaj text către un număr cu apelare inversă"</string>
+    <string name="sms_car" msgid="4314577266154395174">"Trimiteți un mesaj text către un număr de telefon de mașină"</string>
+    <string name="sms_company_main" msgid="2308160928487360705">"Trimiteți un mesaj text către numărul principal al companiei"</string>
+    <string name="sms_isdn" msgid="6394300346179302542">"Trimiteți un mesaj text către un număr ISDN"</string>
+    <string name="sms_main" msgid="8908087742014140774">"Trimiteți un mesaj text către numărul principal"</string>
+    <string name="sms_other_fax" msgid="8768455473295405427">"Trimiteți un mesaj text către un număr de fax"</string>
+    <string name="sms_radio" msgid="855555176531704682">"Trimiteți un mesaj text către un număr radio"</string>
+    <string name="sms_telex" msgid="6269029276223252719">"Trimiteți un mesaj text către un număr de telex"</string>
+    <string name="sms_tty_tdd" msgid="6229057354509192444">"Trimiteți un mesaj text către TTY/TDD"</string>
+    <string name="sms_work_mobile" msgid="2155975469329969840">"Trimiteți un mesaj text către numărul de mobil de serviciu"</string>
+    <string name="sms_work_pager" msgid="8500140274906830742">"Trimiteți un mesaj text către un număr de pager de serviciu"</string>
+    <string name="sms_assistant" msgid="8513548482745330818">"Trimiteți un mesaj text către <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
+    <string name="sms_mms" msgid="5187888900503248542">"Trimiteți un mesaj text către un număr MMS"</string>
+    <string name="sms_by_shortcut" msgid="8005496406639963582">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (trimiteți mesaj)"</string>
+    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Ștergeți pers. frecvent contactate?"</string>
+    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Veți șterge lista persoanelor contactate frecvent din aplicațiile Agendă și Telefon și veți forța aplicațiile de e-mail să vă învețe preferințele pentru adrese de la zero."</string>
+    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Se șterg pers. frecvent contactate…"</string>
+    <string name="status_available" msgid="2648156525685472626">"Disponibil(ă)"</string>
+    <string name="status_away" msgid="2298688367552893953">"Plecat(ă)"</string>
+    <string name="status_busy" msgid="5990832098713248503">"Ocupat(ă)"</string>
+    <string name="contactsList" msgid="8806067891419291513">"Agendă"</string>
+    <string name="local_invisible_directory" msgid="4723238462733650090">"Altul"</string>
+    <string name="directory_search_label" msgid="4621215895484025229">"Director"</string>
+    <string name="directory_search_label_work" msgid="7679326282707414897">"Directorul de serviciu"</string>
+    <string name="local_search_label" msgid="907622822323119235">"Toată agenda"</string>
+    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Eu"</string>
+    <string name="search_results_searching" msgid="3710866752172327451">"Se caută…"</string>
+    <string name="foundTooManyContacts" msgid="3685002426663730799">"S-au găsit peste <xliff:g id="COUNT">%d</xliff:g> persoane de contact."</string>
+    <string name="listFoundAllContactsZero" msgid="1151813986040671916">"Nu există persoane în agendă"</string>
+    <plurals name="searchFoundContacts" formatted="false" msgid="3733009742282085433">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> găsite</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> găsite</item>
+      <item quantity="one">Una găsită</item>
+    </plurals>
+    <string name="description_quick_contact_for" msgid="6327207399167819147">"Contact rapid pentru <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="missing_name" msgid="978606963362745020">"(Fără nume)"</string>
+    <string name="favoritesFrequentCalled" msgid="4646019087163449555">"Apelate frecvent"</string>
+    <string name="favoritesFrequentContacted" msgid="946588736701567509">"Contactate frecvent"</string>
+    <string name="description_view_contact_detail" msgid="2428742401208561136">"Vizualizați persoana din agendă"</string>
+    <string name="list_filter_phones" msgid="8763316061763437182">"Toate persoanele de contact cu numere de telefon"</string>
+    <string name="list_filter_phones_work" msgid="7083575404573422965">"Persoane de contact din profilul de serviciu"</string>
+    <string name="view_updates_from_group" msgid="9011641093168385729">"Afișați actualizări"</string>
+    <string name="account_phone" msgid="7067809073194061035">"Numai pe dispozitiv, nesincronizat"</string>
+    <string name="nameLabelsGroup" msgid="7730465833159557471">"Nume"</string>
+    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Pseudonim"</string>
+    <string name="full_name" msgid="648186563998465740">"Nume"</string>
+    <string name="name_given" msgid="5096576006314820536">"Prenume"</string>
+    <string name="name_family" msgid="6646235805198547467">"Nume"</string>
+    <string name="name_prefix" msgid="9215326539658838">"Prefixul numelui"</string>
+    <string name="name_middle" msgid="703755205331582769">"Al doilea prenume"</string>
+    <string name="name_suffix" msgid="5777083390282548702">"Sufixul numelui"</string>
+    <string name="name_phonetic" msgid="1650870996361663089">"Nume fonetic"</string>
+    <string name="name_phonetic_given" msgid="618812334274603170">"Prenume fonetic"</string>
+    <string name="name_phonetic_middle" msgid="4826820763384625538">"Al doilea prenume fonetic"</string>
+    <string name="name_phonetic_family" msgid="379905191212930771">"Nume fonetic"</string>
+    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
+    <string name="emailLabelsGroup" msgid="2249752810477488833">"Trimiteți un e-mail"</string>
+    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adresă"</string>
+    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
+    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organizație"</string>
+    <string name="relationLabelsGroup" msgid="53866051664600053">"Relație"</string>
+    <string name="eventLabelsGroup" msgid="1236970042646618489">"Dată specială"</string>
+    <string name="sms" msgid="7574344928185328095">"Mesaj text"</string>
+    <string name="postal_address" msgid="1804707930129674200">"Adresă"</string>
+    <string name="ghostData_company" msgid="2554310786296833424">"Companie"</string>
+    <string name="ghostData_title" msgid="4994968731830184837">"Titlu"</string>
+    <string name="label_notes" msgid="2050255313694219786">"Note"</string>
+    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
+    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Site web"</string>
+    <string name="groupsLabel" msgid="2694002798416868728">"Grupuri"</string>
+    <string name="email_home" msgid="889830029388962171">"Trimiteți un e-mail la o adresă de e-mail de domiciliu"</string>
+    <string name="email_mobile" msgid="4487686436743741150">"Trimiteți un e-mail către un telefon mobil"</string>
+    <string name="email_work" msgid="4223487303344613528">"Trimiteți un e-mail la o adresă de e-mail de serviciu"</string>
+    <string name="email_other" msgid="4246411900126012062">"Trimiteți un e-mail"</string>
+    <string name="email_custom" msgid="7246580894327511013">"Trimiteți un e-mail la <xliff:g id="CUSTOM">%s</xliff:g>"</string>
+    <string name="email" msgid="2807318537887091606">"Trimiteți un e-mail"</string>
+    <string name="postal_street" msgid="6918171741240802474">"Stradă"</string>
+    <string name="postal_pobox" msgid="2962203483168878561">"Căsuță poștală"</string>
+    <string name="postal_neighborhood" msgid="5275280978237639716">"Cartier"</string>
+    <string name="postal_city" msgid="8674569121430005628">"Oraș"</string>
+    <string name="postal_region" msgid="1730369286225469192">"Stat"</string>
+    <string name="postal_postcode" msgid="4450700741261990439">"Cod poștal"</string>
+    <string name="postal_country" msgid="232670707458768148">"Țară"</string>
+    <string name="map_home" msgid="4181131107392126938">"Vizualizați adresa de domiciliu"</string>
+    <string name="map_work" msgid="5723471185992684400">"Vizualizați adresa de serviciu"</string>
+    <string name="map_other" msgid="2253764780863500516">"Vizualizați adresa poștală"</string>
+    <string name="map_custom" msgid="5581743097882436157">"Vizualizați adresa <xliff:g id="CUSTOM">%s</xliff:g>"</string>
+    <string name="chat_aim" msgid="2954364435497941659">"Conversați prin AIM"</string>
+    <string name="chat_msn" msgid="3130135239071228678">"Conversați prin Windows Live"</string>
+    <string name="chat_yahoo" msgid="3233552142326865347">"Conversați prin Yahoo"</string>
+    <string name="chat_skype" msgid="6486703981390592425">"Conversați prin Skype"</string>
+    <string name="chat_qq" msgid="786924280665740019">"Conversați prin QQ"</string>
+    <string name="chat_gtalk" msgid="7914674177243078035">"Conversați prin Google Talk"</string>
+    <string name="chat_icq" msgid="3292934726414765801">"Conversați prin ICQ"</string>
+    <string name="chat_jabber" msgid="6701542313597880204">"Conversați prin Jabber"</string>
+    <string name="chat" msgid="1020428260359370236">"Conversați prin chat"</string>
+    <string name="description_minus_button" msgid="2659092981396583806">"ștergeți"</string>
+    <string name="expand_collapse_name_fields_description" msgid="9005732230091761802">"Extindeți sau restrângeți câmpurile pentru nume"</string>
+    <string name="expand_collapse_phonetic_name_fields_description" msgid="3450645489720595412">"Extindeți sau restrângeți câmpurile pentru nume fonetice"</string>
+    <string name="list_filter_all_accounts" msgid="473782314881473992">"Toată agenda"</string>
+    <string name="menu_done" msgid="1817505539263889535">"Terminat"</string>
+    <string name="menu_doNotSave" msgid="4174389775790094548">"Anulați"</string>
+    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Agenda din <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="listCustomView" msgid="5306282632413086731">"Agenda în afișarea personalizată"</string>
+    <string name="listSingleContact" msgid="8620818791932382627">"O singură persoană de contact"</string>
+    <string name="dialog_new_contact_account" msgid="3089718960461539156">"Salvați persoanele de contact importate în:"</string>
+    <string name="import_from_sim" msgid="4025122666048801234">"Importați de pe cardul SIM"</string>
+    <string name="import_from_sim_summary" msgid="7347530878981811858">"Importați de pe cardul SIM <xliff:g id="SIM_NAME">^1</xliff:g> - <xliff:g id="SIM_NUMBER">^2</xliff:g>"</string>
+    <string name="import_from_sim_summary_no_number" msgid="2311025421424473798">"Importați de pe cardul SIM <xliff:g id="SIM_NAME">%1$s</xliff:g>"</string>
+    <string name="import_from_vcf_file" product="default" msgid="2755992524137862594">"Importați din fișier .vcf"</string>
+    <string name="cancel_import_confirmation_message" msgid="1112854508504355394">"Anulați importul fișierului <xliff:g id="FILENAME">%s</xliff:g>?"</string>
+    <string name="cancel_export_confirmation_message" msgid="8507822905973961704">"Anulați exportul fișierului <xliff:g id="FILENAME">%s</xliff:g>?"</string>
+    <string name="cancel_vcard_import_or_export_failed" msgid="3633975947527306665">"Anulare import/export vCard nereușită"</string>
+    <string name="fail_reason_unknown" msgid="4526834573707737085">"Eroare necunoscută."</string>
+    <string name="fail_reason_could_not_open_file" msgid="2564113989228646444">"Nu s-a putut deschide fișierul „<xliff:g id="FILE_NAME">%s</xliff:g>”: <xliff:g id="EXACT_REASON">%s</xliff:g>."</string>
+    <string name="fail_reason_could_not_initialize_exporter" msgid="1391801997398257839">"Nu s-a putut inițializa instrumentul de export: „<xliff:g id="EXACT_REASON">%s</xliff:g>”"</string>
+    <string name="fail_reason_no_exportable_contact" msgid="5905140440417594395">"Nu există persoane de contact care să poată fi exportate."</string>
+    <string name="missing_required_permission" msgid="3977319568919699902">"Ați dezactivat o permisiune necesară."</string>
+    <string name="fail_reason_error_occurred_during_export" msgid="4022425018935814242">"A apărut o eroare în timpul exportului: „<xliff:g id="EXACT_REASON">%s</xliff:g>”."</string>
+    <string name="fail_reason_too_long_filename" msgid="1782388695897859448">"Numele de fișier solicitat este prea lung („<xliff:g id="FILENAME">%s</xliff:g>”)."</string>
+    <string name="fail_reason_io_error" msgid="5610192449460803752">"Eroare I/O"</string>
+    <string name="fail_reason_low_memory_during_import" msgid="5383581106403466715">"Memoria este insuficientă (probabil fișierul este prea mare)."</string>
+    <string name="fail_reason_vcard_parse_error" msgid="7166381747317969497">"Nu s-au putut analiza datele de pe vCard dintr-un motiv neașteptat."</string>
+    <string name="fail_reason_not_supported" msgid="6529299412185608834">"Formatul nu este acceptat."</string>
+    <string name="fail_reason_failed_to_collect_vcard_meta_info" msgid="2071371622333685552">"Nu s-au putut colecta metainformațiile pentru fișierele vCard indicate."</string>
+    <string name="fail_reason_failed_to_read_files" msgid="7364342120566067558">"Unul sau mai multe fișiere nu s-au putut importa (%s)."</string>
+    <string name="exporting_vcard_finished_title" msgid="6969111823207538096">"S-a finalizat exportul fișierului <xliff:g id="FILENAME">%s</xliff:g>."</string>
+    <string name="exporting_vcard_finished_title_fallback" msgid="3456404588243153606">"Persoanele de contact au fost exportate."</string>
+    <string name="exporting_vcard_finished_toast" msgid="864313687240614505">"S-a încheiat exportul persoanelor de contact. Dați clic pe notificare pentru a trimite persoanele de contact."</string>
+    <string name="touch_to_share_contacts" msgid="8684610418619975866">"Atingeți pentru a trimite persoanele de contact."</string>
+    <string name="exporting_vcard_canceled_title" msgid="4160930279977285925">"Exportul fișierului <xliff:g id="FILENAME">%s</xliff:g> a fost anulat."</string>
+    <string name="exporting_contact_list_title" msgid="874590947793345632">"Se exportă datele persoanelor de contact"</string>
+    <string name="exporting_contact_list_message" msgid="3263011604569444133">"Se exportă datele privind persoanele de contact."</string>
+    <string name="composer_failed_to_get_database_infomation" msgid="443743100925218813">"Nu s-au putut obține informații din baza de date."</string>
+    <string name="composer_has_no_exportable_contact" msgid="1492572045460138455">"Nu există persoane de contact care să poată fi exportate. Dacă aveți persoane de contact pe dispozitiv, este posibil ca exportul acestora de pe dispozitiv să nu fie permis de unii furnizori de date."</string>
+    <string name="composer_not_initialized" msgid="7126008930727708362">"Editorul de vCard nu a pornit în mod corespunzător."</string>
+    <string name="exporting_contact_failed_title" msgid="5400878429352404258">"Nu s-a putut exporta"</string>
+    <string name="exporting_contact_failed_message" msgid="1453772164161663415">"Datele persoanelor de contact nu au fost exportate.\nMotivul: „<xliff:g id="FAIL_REASON">%s</xliff:g>”"</string>
+    <string name="importing_vcard_description" msgid="1206078719084863234">"Se importă <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="reading_vcard_failed_title" msgid="4759080957711586257">"Nu s-au putut citi datele de pe vCard"</string>
+    <string name="reading_vcard_canceled_title" msgid="3650078934530953275">"Citirea datelor vCard a fost anulată"</string>
+    <string name="importing_vcard_finished_title" msgid="1543368028741535966">"S-a finalizat importul fișierului vCard <xliff:g id="FILENAME">%s</xliff:g>"</string>
+    <string name="importing_vcard_canceled_title" msgid="2454436016819017436">"Importul <xliff:g id="FILENAME">%s</xliff:g> a fost anulat"</string>
+    <string name="vcard_import_will_start_message" msgid="6013286576133592154">"<xliff:g id="FILENAME">%s</xliff:g> va fi importat în curând."</string>
+    <string name="vcard_import_will_start_message_with_default_name" msgid="3172538521736189687">"Fișierul va fi importat în curând."</string>
+    <string name="vcard_import_request_rejected_message" msgid="7620870852106507620">"Solicitarea de import a fișierului vCard a fost respinsă. Încercați din nou mai târziu."</string>
+    <string name="vcard_export_will_start_message" msgid="4480722586633503615">"<xliff:g id="FILENAME">%s</xliff:g> va fi exportat în curând."</string>
+    <string name="vcard_export_will_start_message_fallback" msgid="8746087280091814150">"Fișierul va fi exportat în curând."</string>
+    <string name="contacts_export_will_start_message" msgid="5950262391638837408">"Persoanele de contact vor fi exportate în curând."</string>
+    <string name="vcard_export_request_rejected_message" msgid="4132430982367686579">"Solicitarea de export a fișierului vCard a fost respinsă. Încercați din nou mai târziu."</string>
+    <string name="vcard_unknown_filename" msgid="7576066884501578965">"persoană de contact"</string>
+    <string name="caching_vcard_message" msgid="7778832851741500256">"Fișierele vCard se stochează în memoria cache într-un spațiu de stocare local temporar. Importul propriu-zis va începe în curând."</string>
+    <string name="vcard_import_failed" msgid="4135012206186446511">"Nu s-a putut importa fișierul vCard."</string>
+    <string name="nfc_vcard_file_name" msgid="7174382505002702431">"Persoană primită prin NFC"</string>
+    <string name="confirm_export_title" msgid="9164673124925342242">"Exportați agenda?"</string>
+    <string name="caching_vcard_title" msgid="8092335276785174935">"Se stochează în cache"</string>
+    <string name="progress_notifier_message" msgid="2778542784808529164">"Se importă <xliff:g id="CURRENT_NUMBER">%s</xliff:g>/<xliff:g id="TOTAL_NUMBER">%s</xliff:g>: <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="export_to_vcf_file" product="default" msgid="6148360234812424446">"Exportați ca fișier .vcf"</string>
+    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sortați după"</string>
+    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Prenume"</string>
+    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Nume"</string>
+    <string name="display_options_view_names_as" msgid="4204204205736735618">"Format pentru nume"</string>
+    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Întâi prenumele"</string>
+    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Întâi numele"</string>
+    <string name="default_editor_account" msgid="1826578934497338822">"Contul prestabilit pentru persoanele de contact noi"</string>
+    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Sincronizați metadatele pentru persoanele de contact [DOGFOOD]"</string>
+    <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Sincronizați metadatele pentru persoanele de contact"</string>
+    <string name="setting_about" msgid="5253319937596745755">"Despre Agendă"</string>
+    <string name="activity_title_settings" msgid="2398428034981372932">"Setări"</string>
+    <string name="share_visible_contacts" msgid="6775120441469077620">"Distribuiți persoanele de contact vizibile"</string>
+    <string name="share_visible_contacts_failure" msgid="1365755167786055470">"Persoanele de contact vizibile nu au putut fi trimise."</string>
+    <string name="share_favorite_contacts" msgid="9138011836074034817">"Trimiteți persoanele de contact preferate"</string>
+    <string name="share_contacts" msgid="6505699963814423437">"Trimiteți toate persoanele de contact"</string>
+    <string name="share_contacts_failure" msgid="6027174424732204424">"Persoanele de contact nu s-au trimis."</string>
+    <string name="dialog_import_export" msgid="3052335055728876529">"Importați/exportați agenda"</string>
+    <string name="dialog_import" msgid="8508508044485808554">"Importați Agenda"</string>
+    <string name="share_error" msgid="5642622973966851784">"Nu se poate permite accesul la această intrare."</string>
+    <string name="no_contact_to_share" msgid="9115223064368461904">"Nu există persoane de contact de trimis."</string>
+    <string name="menu_search" msgid="1241802591112035764">"Căutați"</string>
+    <string name="hint_findContacts" msgid="1913556676649442295">"Găsiți persoane de contact"</string>
+    <string name="contactsFavoritesLabel" msgid="5198982253222486561">"Favorite"</string>
+    <string name="listTotalAllContactsZero" msgid="8436822729781033537">"Nicio persoană de contact."</string>
+    <string name="listTotalAllContactsZeroCustom" msgid="6072173682342248964">"Nicio persoană de contact nu este vizibilă."</string>
+    <string name="listTotalAllContactsZeroStarred" msgid="5008410556001744528">"Nu există preferate"</string>
+    <string name="listTotalAllContactsZeroGroup" msgid="6782377127075025237">"Nicio persoană de contact în <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="menu_clear_frequents" msgid="5358271535047496120">"Ștergeți contacte frecvente"</string>
+    <string name="menu_select_sim" msgid="3960197724339200637">"Selectați cardul SIM"</string>
+    <string name="menu_accounts" msgid="8092083497106343280">"Gestionați conturile"</string>
+    <string name="menu_import_export" msgid="8834601882032781755">"Importați/Exportați"</string>
+    <string name="contact_status_update_attribution" msgid="6042601531361543253">"prin <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
+    <string name="contact_status_update_attribution_with_date" msgid="3448746388181727251">"<xliff:g id="DATE">%1$s</xliff:g> prin <xliff:g id="SOURCE">%2$s</xliff:g>"</string>
+    <string name="action_menu_back_from_search" msgid="3550669942742167644">"nu mai căutați"</string>
+    <string name="description_clear_search" msgid="2347258825265600782">"Ștergeți căutarea"</string>
+    <string name="settings_contact_display_options_title" msgid="5535295687646503547">"Opțiuni de afișare pentru persoanele de contact"</string>
+    <string name="select_account_dialog_title" msgid="2673504582803359239">"Cont"</string>
+    <string name="set_default_account" msgid="7966099951006467572">"Utilizați mereu pentru apeluri"</string>
+    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Apelați cu"</string>
+    <string name="call_with_a_note" msgid="6242261320491851133">"Apelați împreună cu o notă"</string>
+    <string name="call_subject_hint" msgid="7233138753650420800">"Introduceți o notă ca să o trimiteți împreună cu apelul..."</string>
+    <string name="send_and_call_button" msgid="4735168294120154013">"TRIMITEȚI ȘI APELAȚI"</string>
+    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
+    <string name="call_subject_type_and_number" msgid="8726132674272173486">"<xliff:g id="TYPE">%1$s</xliff:g> • <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="tab_title" msgid="3387876802026074288">"Fila <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
+      <item quantity="few"> Fila <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> elemente necitite. </item>
+      <item quantity="other"> Fila <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> de elemente necitite. </item>
+      <item quantity="one"> Fila <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> element necitit. </item>
+    </plurals>
+    <string name="about_build_version" msgid="6809677213570116689">"Versiunea"</string>
+    <string name="about_open_source_licenses" msgid="9071344335180981674">"Licențe open source"</string>
+    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Detalii privind licența pentru software-ul open source"</string>
+    <string name="about_privacy_policy" msgid="120921692215934837">"Confidențialitate"</string>
+    <string name="about_terms_of_service" msgid="9004506174858804172">"Termeni și condiții"</string>
+    <string name="activity_title_licenses" msgid="2416018204229261875">"Licențe open source"</string>
+    <string name="url_open_error_toast" msgid="3814442157861318482">"Adresa URL nu a putut fi deschisă."</string>
+    <string name="description_search_video_call" msgid="7229218423556643079">"Efectuați un apel video"</string>
+</resources>

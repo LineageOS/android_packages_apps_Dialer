@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"New, simplified blocking"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"To protect you better, Phone needs to change how blocking works. Your blocked numbers will now stop both calls and texts and may be shared with other apps."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Allow"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"Block <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Calls from this number will be blocked and voicemails will be automatically deleted."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Calls from this number will be blocked, but the caller may still be able to leave you voicemails."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"You will no longer receive calls or texts from this number."</string>
+    <string name="block_number_ok" msgid="739786082788038932">"BLOCK"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Unblock <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"UNBLOCK"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> is invalid."</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> blocked"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> unblocked"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"UNDO"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Import failed"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"Call blocking disabled for 48 hours"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Disabled because an emergency call was made."</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"Block <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"You will no longer receive calls from this number."</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> This call will be reported as spam."</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"This number will be unblocked and reported as not spam. Future calls won\'t be identified as spam."</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"Unblock <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"Report"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"Would you like to report a mistake?"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"Future calls from <xliff:g id="NUMBER">%1$s</xliff:g> will no longer be identified as spam."</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"Report call as spam"</string>
+</resources>

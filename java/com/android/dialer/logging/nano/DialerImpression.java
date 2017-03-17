@@ -114,7 +114,7 @@ public final class DialerImpression
     public static final int BACKUP_MAX_VM_BACKUP_REACHED = 1095;
     public static final int EVENT_ANSWER_HINT_ACTIVATED = 1096;
     public static final int EVENT_ANSWER_HINT_DEACTIVATED = 1097;
-    public static final int VVM_TAB_VISIBLE = 1098;
+    public static final int VVM_TAB_VIEWED = 1098;
     public static final int VVM_SHARE_VISIBLE = 1099;
     public static final int VVM_SHARE_PRESSED = 1100;
     public static final int OUTGOING_VIDEO_CALL = 1101;
@@ -153,6 +153,32 @@ public final class DialerImpression
     public static final int VVM_USER_TURNED_ARCHIVE_OFF_FROM_SETTINGS = 1133;
     public static final int VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER = 1134;
     public static final int VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF = 1135;
+    public static final int VVM_TAB_VISIBLE = 1136;
+    public static final int VVM_UNBUNDLED_EVENT_RECEIVED = 1137;
+    public static final int VVM_ACTIVATION_STARTED = 1138;
+    public static final int VVM_ACTIVATION_COMPLETED = 1139;
+    public static final int VVM_AUTO_RETRY_ACTIVATION = 1140;
+    public static final int VVM_PROVISIONING_STARTED = 1141;
+    public static final int VVM_PROVISIONING_COMPLETED = 1142;
+    public static final int VVM_SYNC_STARTED = 1143;
+    public static final int VVM_SYNC_COMPLETED = 1144;
+    public static final int VVM_AUTO_RETRY_SYNC = 1145;
+    public static final int VVM_USER_RETRY = 1146;
+    public static final int VVM_USER_SYNC = 1147;
+    public static final int VVM_SETTINGS_VIEWED = 1148;
+    public static final int VVM_CHANGE_PIN_CLICKED = 1149;
+    public static final int VVM_CHANGE_PIN_COMPLETED = 1150;
+    public static final int VVM_CHANGE_RINGTONE_CLICKED = 1151;
+    public static final int VVM_CHANGE_VIBRATION_CLICKED = 1152;
+    public static final int VVM_USER_ENABLED_IN_SETTINGS = 1153;
+    public static final int VVM_USER_DISABLED_IN_SETTINGS = 1154;
+    public static final int VVM_ADVANCED_SETINGS_CLICKED = 1155;
+    public static final int VVM_NOTIFICATION_CLICKED = 1156;
+    public static final int VVM_NOTIFICATION_CREATED = 1157;
+    public static final int VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION = 1158;
+    public static final int VVM_TRANSCRIPTION_DOWNLOADED = 1159;
+    public static final int VVM_CHANGE_AIRPLANE_MODE_CLICKED = 1160;
+    public static final int VVM_CALL_VOICEMAIL_CLICKED = 1161;
   }
 
   private static volatile DialerImpression[] _emptyArray;

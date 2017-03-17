@@ -637,7 +637,7 @@ public class VideoCallFragment extends Fragment
         videoCallScreenDelegate.resetAutoFullscreenTimer();
       }
     } else if (button == muteButton) {
-      inCallButtonUiDelegate.muteClicked(isChecked);
+      inCallButtonUiDelegate.muteClicked(isChecked, true /* clickedByUser */);
       videoCallScreenDelegate.resetAutoFullscreenTimer();
     }
   }

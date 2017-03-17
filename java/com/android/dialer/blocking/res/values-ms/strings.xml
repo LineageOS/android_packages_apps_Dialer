@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"Penyekatan mudah yang baharu"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Untuk melindungi anda dengan lebih berkesan, Telefon perlu menukar cara penyekatan berfungsi. Nombor yang disekat akan menghentikan panggilan dan teks serta boleh dikongsi dengan apl lain."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Benarkan"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Panggilan daripada nombor ini akan disekat, tetapi pemanggil masih boleh meninggalkan mel suara kepada anda."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"Anda tidak akan menerima panggilan atau teks daripada nombor ini lagi."</string>
+    <string name="block_number_ok" msgid="739786082788038932">"SEKAT"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"NYAHSEKAT"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> tidak sah."</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> disekat"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> dinyahsekat"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"BUAT ASAL"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Pengimportan gagal"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"Sekatan panggilan dilumpuhkan selama 48 jam"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Dilumpuhkan kerana panggilan kecemasan telah dibuat."</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"Anda tidak akan menerima panggilan daripada nombor ini lagi."</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> Panggilan ini akan dilaporkan sebagai spam."</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"Nombor akn dinyahsekat &amp; dilaporkan bkn spam. Panggilan akan datang tdk akn dikenal pasti sbg spam."</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"Laporkan"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"Laporkan kesilapan?"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"Panggilan masa hadapan daripada <xliff:g id="NUMBER">%1$s</xliff:g> tidak akan dikenal pasti sebagai spam lagi."</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"Laporkan panggilan sbg spam"</string>
+</resources>

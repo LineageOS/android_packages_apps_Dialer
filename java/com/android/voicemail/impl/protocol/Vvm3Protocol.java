@@ -25,6 +25,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.OmtpEvents;
@@ -114,6 +116,7 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
       StatusMessage message,
       Bundle data) {
     VvmLog.i(TAG, "start vvm3 provisioning");
+    Logger.get(config.getContext()).logImpression(DialerImpression.Type.VVM_PROVISIONING_STARTED);
     if (OmtpConstants.SUBSCRIBER_UNKNOWN.equals(message.getProvisioningStatus())) {
       VvmLog.i(TAG, "Provisioning status: Unknown");
       if (VVM3_UNKNOWN_SUBSCRIBER_CAN_SUBSCRIBE_RESPONSE_CODE.equals(message.getReturnCode())) {
@@ -226,7 +229,8 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
           // Only close new user tutorial if the PIN has been changed.
           helper.closeNewUserTutorial();
           VvmLog.i(TAG, "new user: NUT closed");
-
+          Logger.get(config.getContext())
+              .logImpression(DialerImpression.Type.VVM_PROVISIONING_COMPLETED);
           config.requestStatus(null);
         }
       } catch (InitializingException | MessagingException | IOException e) {

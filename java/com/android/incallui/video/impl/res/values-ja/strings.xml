@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="videocall_remote_video_off" msgid="2959680546745902547">"相手のビデオ: OFF"</string>
+    <string name="videocall_remote_video_on" msgid="6011817851703181639">"相手のビデオ: ON"</string>
+    <string name="videocall_remotely_held" msgid="1295702896355732947">"通話保留中"</string>
+    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"通話が再開されました"</string>
+    <string name="camera_permission_dialog_title" msgid="4901760354830982117">"ビデオを許可しますか？"</string>
+    <string name="camera_permission_dialog_message" msgid="2677490854794162699">"ビデオハングアウトを利用するには、電話アプリにカメラへのアクセスを許可する必要があります。"</string>
+    <string name="camera_permission_dialog_positive_button" msgid="9075818030671161374">"許可"</string>
+    <string name="camera_permission_dialog_negative_button" msgid="7538535842403837541">"拒否"</string>
+</resources>

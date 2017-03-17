@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Konferans görüşmesi"</string>
+    <string name="call_lost" msgid="2082971531689406145">"Çağrı kesildi"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Şu zil sesleri gönderilsin mi?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Sayı tonları gönderiliyor\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Gönder"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Evet"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Hayır"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Joker karakteri şununla değiştir:"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Konferans görüşmesi <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Sesli mesaj numarası"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Numara çevriliyor"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Cevapsız çağrı: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Devam eden çağrılar"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Süren iş çağrısı"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Giden kablosuz çağrı"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Süren kablosuz iş çağrısı"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Beklemede"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Gelen çağrı"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Gelen iş çağrısı"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Gelen kablosuz çağrı"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Gelen kablosuz iş çağrısı"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Spam olabilecek gelen arama"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Gelen video isteği"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"Yeni sesli mesaj"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Yeni sesli mesaj (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Çevir: <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Sesli mesaj numarası bilinmiyor"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Hizmet yok"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"Seçili ağ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) kullanılamıyor"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Yanıtla"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Kapat"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Ses"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Kabul et"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Reddet"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Başka bir cihazda devam eden çağrı"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"Başka bir cihazda devam eden video görüşmesi var"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Çağrıyı Al"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Video Görüşmesini Al"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Bir çağrı yapmak için öncelikle Uçak modunu kapatın."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Ağda kayıtlı değil."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"Hücresel ağ kullanılamıyor."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Telefon etmek için geçerli bir numara girin."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"Arama yapılamıyor."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI dizisi başlatılıyor..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Servis desteklenmiyor."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Çağrı geçişi yapılamıyor."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Çağrı ayrılamıyor."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Aktarılamıyor."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Konferans yapılamıyor."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Çağrı reddedilemiyor."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Çağrılar bırakılamıyor."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Acil durum çağrısı"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Radyo açılıyor..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Servis yok. Tekrar deneniyor…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"Çağrı yapılamıyor. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> bir acil durum numarası değil."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"Aranamıyor. Bir acil durum numarasını arayın."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Çevirmek için klavyeyi kullan"</string>
+    <string name="player_started" msgid="9177182657338033086">"Oynatıcı Başlatıldı"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"Oynatıcı Durduruldu"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"Kamera hazır değil"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"Kamera hazır"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Bilinmeyen çağrı oturumu etkinliği"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Diğer çağrı ayarları"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"özele git"</string>
+    <string name="selectContact" msgid="1703433172800564849">"kişi seçin"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Zil Sesi ve Titreşim"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Konferans çağrısını yönet"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Acil durum numarası"</string>
+    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ile"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Son iletiler"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"İş bilgileri"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> mil uzakta"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> km uzakta"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Yarın açılış saati: <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Bugün açılış saati: <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Kapanış saati: <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Bugün kapanış saati: <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Şu an açık"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Şu an kapalı"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"<xliff:g id="NUMBER">%1$s</xliff:g> tanıdık bir numara mı?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"<xliff:g id="NUMBER">%1$s</xliff:g> spam amaçlı bir numara mı?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"<xliff:g id="NUMBER">%1$s</xliff:g> engellendi ve çağrı spam olarak bildirildi."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"<xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan gelen çağrının spam olmadığı bildirildi."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Kişilere eklemek veya spam numarasını engellemek için dokunun."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"Bu numaradan ilk kez arandınız. Bu çağrı spam amaçlı olarak yapıldıysa numarayı engelleyip bildirebilirsiniz."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"SPAM DEĞİL bildirimi göndermek için dokunun veya numarayı engelleyin."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Bu numaranın spam amaçlı olduğundan şüphelendik. Çağrı spam amaçlı değilse, SPAM DEĞİL\'e dokunarak kararımızın hatalı olduğunu bildirin."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Engelle ve bildir"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Kişi ekle"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Spam değil"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Numarayı engelle"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Kişilere ekle"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Engelle ve spam bildir"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Spam değil"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"SIM kart yok veya SIM hatası"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Çağrı sonlandırılır"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Konferans çağrısı"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"Konferans çağrısında"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Görüşmeye hücresel veri kullanılarak devam ediliyor…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Kablosuz ağa geçilemedi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Video görüşmesi hücresel ağda devam edecek. Standart veri ücretleri alınabilir."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Bunu bir daha gösterme"</string>
+</resources>

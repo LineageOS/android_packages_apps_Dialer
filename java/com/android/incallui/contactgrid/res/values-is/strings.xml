@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"Hringt í gegnum <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"Hringir…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"Flytur…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"Myndsímtal hringir…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Wi-Fi myndsímtal hringir…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"Tenging tókst ekki"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"Símtali hafnað"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"Símtalstími rann út"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"Leggur á"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"Lagt á"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"Í bið"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"Myndsímtal berst frá"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"Wi-Fi myndsímtal berst frá"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Símtal berst frá"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Vinnusímtal berst frá"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Berst í gegnum <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Mögulegt ruslnúmer"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"Svarhringingarnúmer: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

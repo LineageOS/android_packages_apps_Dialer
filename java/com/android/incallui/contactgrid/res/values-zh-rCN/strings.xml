@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"正在通过<xliff:g id="PROVIDER_NAME">%s</xliff:g>进行通话"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"正在呼叫…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"正在转接…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"正在发起视频通话…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"正在发起 WLAN 视频通话…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"无法连接"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"通话被拒绝"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"通话超时"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"正在挂断"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"通话结束"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"保持"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"视频通话来自："</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"WLAN 视频通话来自："</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"通话来自："</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"工作通话来自："</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"有人通过 <xliff:g id="PROVIDER_NAME">%s</xliff:g> 来电"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"疑似骚扰电话号码："</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"回拨号码：<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

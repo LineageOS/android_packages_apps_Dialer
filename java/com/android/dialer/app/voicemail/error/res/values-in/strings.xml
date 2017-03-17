@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Nonaktifkan mode pesawat"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Mengaktifkan pesan suara visual"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Anda mungkin tidak menerima pemberitahuan pesan suara hingga visual pesan suara sepenuhnya diaktifkan. Panggil pesan suara untuk mengambil pesan baru hingga pesan suara sepenuhnya diaktifkan."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Tidak dapat mengaktifkan pesan suara visual"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Pastikan ponsel Anda memiliki koneksi seluler, lalu coba lagi."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Nonaktifkan mode pesawat, lalu coba lagi."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Tidak ada sambungan internet"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Anda tidak akan menerima notifikasi pesan suara baru. Jika menggunakan Wi-Fi, pesan suara dapat diperiksa dengan menyinkronkannya sekarang."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Anda tidak akan menerima notifikasi pesan suara baru. Nonaktifkan mode pesawat untuk menyinkronkan pesan suara."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Ponsel Anda memerlukan koneksi data seluler untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Tidak dapat mengaktifkan pesan suara visual"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Tidak dapat memperbarui pesan suara visual"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Coba lagi ketika koneksi Wi-Fi atau seluler lebih baik. Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Coba lagi ketika koneksi data seluler lebih baik. Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Tidak dapat memperbarui pesan suara visual"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Tidak dapat memperbarui pesan suara visual"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Tidak dapat memperbarui pesan suara visual"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Tidak dapat memperbarui pesan suara visual"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Anda masih dapat menelepon untuk memeriksa pesan suara."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Kotak masuk hampir penuh"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Pesan suara tidak dapat diterima jika kotak masuk Anda penuh."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Tidak dapat menerima pesan suara baru"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Kotak masuk Anda penuh. Coba hapus beberapa pesan untuk menerima pesan suara baru."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Aktifkan penyimpanan dan backup ekstra"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Kotak surat Anda sudah penuh. Untuk mengosongkan ruang, aktifkan penyimpanan ekstra sehingga Google dapat mengelola dan melakukan backup pada pesan suara Anda."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Aktifkan penyimpanan dan backup ekstra"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Kotak surat Anda hampir penuh. Untuk mengosongkan ruang, aktifkan penyimpanan ekstra sehingga Google dapat mengelola dan melakukan backup pada pesan suara Anda."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Setel PIN pesan suara Anda"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Anda akan memerlukan PIN pesan suara setiap kali menelepon untuk mengakses pesan suara."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Kesalahan tidak dikenal"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Setelan Mode Pesawat"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"Setel PIN"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Coba Lagi"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Aktifkan"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Tidak, Terima Kasih"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Sinkron"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Panggil Pesan Suara"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Panggil Dukungan Pelanggan"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Maaf, kami mengalami masalah. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9001."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Maaf, kami mengalami masalah. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9002."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Maaf, kami mengalami masalah. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9003."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Tidak Dapat Menyambungkan ke Kotak Pesan Suara Anda"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Maaf, kami mengalami masalah saat menyambungkan ke kotak pesan suara Anda. Jika Anda berada di area dengan kekuatan sinyal yang buruk, tunggu hingga sinyal membaik, lalu coba lagi. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9004."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Tidak Dapat Menyambungkan ke Kotak Pesan Suara Anda"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Maaf, kami mengalami masalah saat menyambungkan ke kotak pesan suara Anda. Jika Anda berada di area dengan kekuatan sinyal yang buruk, tunggu hingga sinyal membaik, lalu coba lagi. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9005."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Tidak Dapat Menyambungkan ke Kotak Pesan Suara Anda"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Maaf, kami mengalami masalah saat menyambungkan ke kotak pesan suara Anda. Jika Anda berada di area dengan kekuatan sinyal yang buruk, tunggu hingga sinyal membaik, lalu coba lagi. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9006."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Maaf, kami mengalami masalah. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9007."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Maaf, kami mengalami masalah. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9008."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Maaf, kami mengalami masalah saat menyiapkan layanan Anda. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9009."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Tidak Dapat Menyambungkan ke Kotak Pesan Suara Anda"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Maaf, kami tidak dapat menyambungkan ke kotak pesan suara Anda saat ini. Coba lagi nanti. Jika masih ada masalah, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9990."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Siapkan Pesan Suara"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Pesan suara tidak disiapkan pada akun Anda. Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9991."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Pesan Suara"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Pesan Suara Visual tidak dapat digunakan pada perangkat ini. Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9992."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9993."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Pesan Suara Visual"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Untuk menyelesaikan penyiapan Pesan Suara Visual, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Pesan Suara Visual"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Untuk menyelesaikan penyiapan Pesan Suara Visual, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Pesan Suara Visual"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Untuk mengaktifkan Pesan Suara Visual, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9996."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Untuk menyelesaikan penyiapan Pesan Suara Visual, hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Pesan Suara Visual Dinonaktifkan"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> untuk mengaktifkan pesan suara visual."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9997."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9989."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Terjadi Kesalahan"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Hubungi Layanan Pelanggan melalui nomor telepon <xliff:g id="NUMBER">%1$s</xliff:g> dan beri tahukan kode kesalahan 9999."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Persyaratan dan Ketentuan Pesan Suara Visual"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Anda harus menerima persyaratan dan ketentuan Verizon Wireless untuk menggunakan pesan suara visual:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Pesan suara visual akan dinonaktifkan jika persyaratan dan ketentuan ditolak."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Nonaktifkan pesan suara visual"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Pesan suara hanya dapat diakses dengan menghubungi *86. Setel PIN pesan suara baru untuk melanjutkan."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Setel PIN"</string>
+</resources>

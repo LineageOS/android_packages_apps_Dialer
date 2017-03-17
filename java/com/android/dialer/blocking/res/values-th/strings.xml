@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"การบล็อกแบบใหม่ที่ใช้งานง่าย"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"เพื่อปกป้องคุณได้ดียิ่งขึ้น โทรศัพท์ฺจำเป็นต้องเปลี่ยนลักษณะการทำงานของการบล็อก ขณะนี้คุณจะไม่ได้รับสายเรียกเข้าหรือข้อความจากหมายเลขที่ถูกบล็อกอีกและอาจมีการแชร์หมายเลขนั้นกับแอปอื่น"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"อนุญาต"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"บล็อก <xliff:g id="NUMBER">%1$s</xliff:g> ไหม"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"ระบบจะบล็อกสายเรียกเข้าจากหมายเลขนี้และลบข้อความเสียงโดยอัตโนมัติ"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"ระบบจะบล็อกสายเรียกเข้าจากหมายเลขนี้ แต่ผู้โทรอาจยังฝากข้อความเสียงถึงคุณได้อยู่"</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"คุณจะไม่ได้รับสายเรียกเข้าหรือข้อความจากหมายเลขนี้อีก"</string>
+    <string name="block_number_ok" msgid="739786082788038932">"บล็อก"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"เลิกบล็อก"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> ไม่ถูกต้อง"</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"บล็อก <xliff:g id="NUMBER">%1$s</xliff:g> แล้ว"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g> แล้ว"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"เลิกทำ"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"การนำเข้าล้มเหลว"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"ปิดการบล็อกสายเรียกเข้า 48 ชั่วโมง"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"ปิดใช้งานเนื่องจากมีการโทรเข้าหมายเลขฉุกเฉิน"</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"บล็อก <xliff:g id="NUMBER">%1$s</xliff:g> ไหม"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"คุณจะไม่ได้รับสายจากหมายเลขนี้อีกต่อไป"</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> ระบบจะรายงานสายนี้ว่าเป็นสแปม"</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"ระบบจะเลิกบล็อกหมายเลขนี้และรายงานว่าไม่ใช่สแปม การโทรเข้ามาหลังจากนี้จะไม่ถูกระบุว่าเป็นสแปม"</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"รายงาน"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"รายงานข้อผิดพลาดไหม"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"การโทรเข้ามาจาก <xliff:g id="NUMBER">%1$s</xliff:g> หลังจากนี้จะไม่ถูกระบุว่าเป็นสแปม"</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"รายงานสายนี้ว่าเป็นสแปม"</string>
+</resources>

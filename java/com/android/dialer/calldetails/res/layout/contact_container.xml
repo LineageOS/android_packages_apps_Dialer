@@ -18,6 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/call_details_top_margin"
     android:gravity="center_vertical"
     android:padding="@dimen/contact_container_padding">
 
@@ -25,27 +26,31 @@
       android:id="@+id/quick_contact_photo"
       android:layout_width="@dimen/call_details_contact_photo_size"
       android:layout_height="@dimen/call_details_contact_photo_size"
+      android:layout_marginTop="2dp"
       android:focusable="true"/>
 
-  <TextView
-      android:id="@+id/contact_name"
+  <LinearLayout
+      android:orientation="vertical"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/text_bottom_margin"
-      android:layout_marginStart="@dimen/photo_text_margin"
       android:layout_toEndOf="@+id/quick_contact_photo"
       android:layout_toStartOf="@+id/call_back_button"
-      style="@style/PrimaryText"/>
+      android:layout_centerVertical="true">
 
-  <TextView
-      android:id="@+id/phone_number"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/photo_text_margin"
-      android:layout_toEndOf="@+id/quick_contact_photo"
-      android:layout_toStartOf="@+id/call_back_button"
-      android:layout_below="@+id/contact_name"
-      style="@style/SecondaryText"/>
+    <TextView
+        android:id="@+id/contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/photo_text_margin"
+        style="@style/PrimaryText"/>
+
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/photo_text_margin"
+        style="@style/SecondaryText"/>
+  </LinearLayout>
 
   <ImageView
       android:id="@+id/call_back_button"

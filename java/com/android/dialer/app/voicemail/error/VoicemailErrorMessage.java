@@ -117,6 +117,8 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
+            Logger.get(context)
+                .logImpression(DialerImpression.Type.VVM_CHANGE_AIRPLANE_MODE_CLICKED);
             Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
             context.startActivity(intent);
           }
@@ -145,6 +147,7 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
+            Logger.get(context).logImpression(DialerImpression.Type.VVM_CALL_VOICEMAIL_CLICKED);
             Intent intent = new Intent(Intent.ACTION_CALL, CallUtil.getVoicemailUri());
             context.startActivity(intent);
           }
@@ -158,6 +161,7 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
+            Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_SYNC);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);
@@ -172,6 +176,7 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
+            Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_RETRY);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);

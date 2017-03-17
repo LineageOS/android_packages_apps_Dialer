@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"Զանգում է <xliff:g id="PROVIDER_NAME">%s</xliff:g>-ի միջոցով"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"Զանգ…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"Փոխանցում…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"Տեսազանգ…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Տեսազանգ Wi-Fi-ի միջոցով…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"Չհաջողվեց միանալ"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"Զանգը մերժվեց"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"Զանգի սպասման ժամանակը սպառվեց"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"Անջատում"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"Զանգն ավարտվեց"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"Սպասում"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"Տեսազանգ հետևյալ բաժանորդից՝"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"Wi-Fi տեսազանգ հետևյալ բաժանորդից՝"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Զանգ հետևյալ բաժանորդից՝"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Գործնական զանգ հետևյալ բաժանորդից՝"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Մուտքային զանգ <xliff:g id="PROVIDER_NAME">%s</xliff:g> ցանցից"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Հավանաբար լցոն է"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"Հետադարձ զանգի համարը՝ <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

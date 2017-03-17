@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"ہوائی جہاز وضع آف کریں"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"بصری صوتی میل کو فعال کیا جا رہا ہے"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"بصری صوتی میل کے مکمل طور پر فعال ہونے تک ہو سکتا ہے آپ کو صوتی میل کی اطلاعات موصول نہ ہو۔ صوتی میل کے مکمل طور پر فعال ہونے تک نئے پیغامات کی بازیافت کیلئے صوتی میل پر کال کریں۔"</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"بصری صوتی میل کو فعال نہیں کیا جا سکتا"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"یقینی بنائیں کہ آپ کے فون میں ایک سیلولر کنکشن موجود ہے اور دوبارہ کوشش کریں۔"</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ہوائی جہاز وضع آف کریں اور دوبارہ کوشش کریں۔"</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"کوئی کنکشن نہیں ہے"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"‏آپ کو نئی صوتی میلز سے مطلع نہیں کیا جائے گا۔ اگر آپ Wi-Fi پر ہیں تو آپ ابھی مطابقت پذیری کرکے صوتی میل کیلئے چیک کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"آپ کو نئی صوتی میلز سے مطلع نہیں کیا جائے گا۔ اپنی صوتی میل کو مطابقت پذیر بنانے کیلئے ہوائی جہاز وضع آف کریں۔"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"صوتی میل چیک کرنے کیلئے آپ کے فون کو سیلولر ڈیٹا کنکشن کی ضرورت ہے۔"</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"بصری صوتی میل کو فعال نہیں کیا جا سکتا"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"‏جب آپ کا Wi-Fi یا سیلولر کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"جب آپ کا سیلولر ڈیٹا کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"ان باکس تقریباً بھرا ہوا ہے"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"اگر آپ کا ان باکس بھرا ہوا ہوگا تو آپ نئی صوتی میل موصول نہیں کر پائیں گے۔"</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"نئی صوتی میلز موصول نہیں ہو سکتی"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"آپ کا ان باکس بھرا ہوا ہے۔ نئی صوتی میل موصول کرنے کیلئے کچھ پیغامات حذف کرنے کی کوشش کریں۔"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"اضافی اسٹوریج اور بیک اپ آن کریں"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"‏آپ کا میل باکس بھر گیا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج کو آن کریں تا کہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور ان کا نظم کر سکے۔"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"اضافی اسٹوریج اور بیک اپ آن کریں"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"‏آپ کا میل باکس تقریباً بھر گیا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج کو آن کریں تا کہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور ان کا نظم کر سکے۔"</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"‏اپنی صوتی میل PIN سیٹ کریں"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"‏آپ جب بھی صوتی میل تک رسائی کیلئے کال کریں گے تو آپ کو صوتی میل PIN چاہئیے ہوگی۔"</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"نامعلوم خرابی"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ہوائی جہاز وضع کی ترتیبات"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"‏PIN سیٹ کریں"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"دوبارہ کوشش کریں"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"آن کریں"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"نہیں شکریہ"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"مطابقت پذیری کریں"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"صوتی میل پر کال کریں"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"کسٹمر سپورٹ کو کال کریں"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"معذرت، ہمیں کچھ مسئلہ پیش آ گیا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9001 ہے۔"</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"معذرت، ہمیں کچھ مسئلہ پیش آ گیا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9002 ہے۔"</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"معذرت، ہمیں کچھ مسئلہ پیش آ گیا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9003 ہے۔"</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"آپ کے صوتی میل باکس سے منسلک نہیں ہو سکتا"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"معذرت، ہمیں آپ کے صوتی میل باکس سے منسلک ہونے میں پریشانی ہو رہی ہے۔ اگر آپ کسی ایسے علاقے میں ہیں جہاں سگنل کی قوت کم ہے تو مضبوط سگنل آنے تک انتظار کریں اور دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9004 ہے۔"</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"آپ کے صوتی میل باکس سے منسلک نہیں ہو سکتا"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"معذرت، ہمیں آپ کے صوتی میل باکس سے منسلک ہونے میں پریشانی ہو رہی ہے۔ اگر آپ کسی ایسے علاقے میں ہیں جہاں سگنل کی قوت کم ہے تو مضبوط سگنل آنے تک انتظار کریں اور دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9005 ہے۔"</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"آپ کے صوتی میل باکس سے منسلک نہیں ہو سکتا"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"معذرت، ہمیں آپ کے صوتی میل باکس سے منسلک ہونے میں پریشانی ہو رہی ہے۔ اگر آپ کسی ایسے علاقے میں ہیں جہاں سگنل کی قوت کم ہے تو مضبوط سگنل آنے تک انتظار کریں اور دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9006 ہے۔"</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"معذرت، ہمیں ایک مسئلہ پیش آ گیا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9007 ہے۔"</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"معذرت، ہمیں ایک مسئلہ پیش آ گیا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9008 ہے۔"</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"معذرت، ہمیں آپ کی سروس سیٹ اپ کرنے میں پریشانی ہو رہی ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سپورٹ سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9009 ہے۔"</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"آپ کے صوتی میل باکس سے منسلک نہیں ہو سکتا"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"معذرت، ہم اس وقت آپ کے میل باکس سے منسلک کرنے سے قاصر ہیں۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9990 ہے۔"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"صوتی میل ترتیب دیں"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"آپ کے اکاؤنٹ پر صوتی میل ترتیب نہیں دی گئی ہے۔ براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9991 ہے۔"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"صوتی میل"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"اس آلہ پر بصری صوتی میل استعمال نہیں ہو سکتی۔ براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9992 ہے۔"</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9993 ہے۔"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"بصری صوتی میل"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9994 ہے۔"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"بصری صوتی میل"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9995 ہے۔"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"بصری صوتی میل"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"بصری صوتی میل فعال کرنے کیلئے براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9996 ہے۔"</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9998 ہے۔"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"بصری صوتی میل غیر فعال ہے"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"بصری صوتی میل فعال کرنے کیلئے <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں۔"</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9997 ہے۔"</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9989 ہے۔"</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"کچھ غلط ہوگیا"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9999 ہے۔"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"بصری صوتی میل کی شرائط و ضوابط"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"‏بصری صوتی میل استعمال کرنے کیلئے آپ کو Verizon وائرلیس کی شرائط و ضوابط قبول کرنا ہونگی:\n\n‎%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"شرائط و ضوابط مسترد کئے جانے کی صورت میں بصری صوتی میل غیر فعال کر دی جائے گی۔"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"بصری صوتی میل کو غیر فعال کریں"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"‏صوتی میل تک رسائی صرف ‎*86 کو کال کرنے سے ہوگی۔ آگے بڑھنے کیلئے صوتی میل کی نئی PIN سیٹ کریں۔"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"‏PIN سیٹ کریں"</string>
+</resources>

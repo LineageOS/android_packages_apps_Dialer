@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"បិទ​របៀប​ជិះ​​យន្តហោះ"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"អ្នក​ប្រហែលជា​​មិន​ទទួល​បាន​ការ​ជូនដំណឹង​ជា​សារ​សំឡេង​រហូត​​ទាល់តែ​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ពេញលេញ​​។ ហៅ​ជា​សារ​សំឡេង​ដើម្បី​​ទទួល​បាន​សារ​ថ្មី​រហូត​សារ​ជា​សំឡេង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​សកម្ម​ពេញលេញ។"</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"សូម​ប្រាកដ​ថា​ទូរសព្ទ​របស់​អ្នក​​បាន​ភ្ជាប់​​បណ្ដាញ​អ៊ីនធឺណិត និង​​ព្យាយាម​​ម្ដង​ទៀត។"</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"បិទ​របៀប​លើ​យន្តហោះ និង​ព្យាយាម​ម្ដង​ទៀត។"</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"គ្មាន​បណ្ដាញ​អ៊ីនធឺណិត"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​នឹង​មិន​ជូន​ដំណឹង​ទៅ​អ្នក​ឡើយ។ បើ​អ្នក​​បាន​ភ្ជាប់​វ៉ាយហ្វាយ អ្នក​អាច​ឆែក​រក​មើល​សារ​ជា​សំឡេង​ដោយ​ទាញ​យក​ឥឡូវ​នេះ។"</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​នឹង​មិន​ជូន​ដំណឹង​ទៅ​អ្នក​ឡើយ។ សូម​បិទ​របៀប​លើ​យន្តហោះ​ដើម្បី​ទាញយក​សារ​សំឡេង​របស់​អ្នក។"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ទូរសព្ទ​របស់​អ្នក​ត្រូវ​​ភ្ជាប់​អ៊ីនធឺណិតតាម​ទិន្នន័យ​ទូរសព្ទ​​​ចល័ត​ដើម្បី​អាច​ពិនិត្យ​មើល​សារ​​ជា​សំឡេង​បាន​។"</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​ Wi-Fi ឬ​ការតភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ដើម្បី​​ស្ដាប់​សារ​ជា​សំឡេង​។"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​​​ការតភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ដើម្បី​​ស្ដាប់​សារ​ជា​សំឡេង​។"</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​​បាន​ទេ។"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"ប្រអប់​សំបុត្រ​ជិត​ពេញ"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"អ្នក​នឹង​មិន​អាច​ទទួល​សារ​ជា​សំឡេង​ថ្មី​បាន​ទេ បើ​ប្រអប់​សំបុត្រ​របស់​អ្នក​ពេញ។"</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"មិនអាចទទួល​សារជា​សំឡេង​ថ្មី​បាន​ទេ"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"ប្រអប់សំបុត្ររបស់អ្នកពេញ។ សូមព្យាយាមលុបសារមួយចំនួនដើម្បី​អាច​ទទួល​សារជាសំឡេងថ្មី​បាន។"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"បើក​ទំហំ​ផ្ទុក​បន្ថែម រួច​បម្រុងទុក"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"ប្រអប់​​សារ​​របស់​អ្នក​ពេញហើយ។ ដើម្បី​បង្កើន​ទំហំ​ផ្ទុក​ទំនេរ សូម​បើក​ទំហំផ្ទុក​បន្ថែម ដើម្បី​ឲ្យ Google អាច​គ្រប់គ្រង និង​បម្រុងទុក​សារ​សារ​ជា​សំឡេង​របស់​អ្នក​បាន។"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"បើក​ទំហំ​ផ្ទុក​បន្ថែម រួច​បម្រុងទុក"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ប្រអប់​សារ​របស់​អ្នក​ពេញហើយ។ ដើម្បី​បង្កើន​ទំហំ​ផ្ទុក​ទំនេរ សូម​បើក​ទំហំផ្ទុក​បន្ថែម ដើម្បី​ឲ្យ Google អាច​គ្រប់គ្រង និង​បម្រុងទុក​សារ​សារ​ជា​សំឡេង​របស់​អ្នក​បាន។"</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"កំណត់កូដ PIN ​សារ​ជាសំឡេង​របស់​អ្នក"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"អ្នក​នឹង​ត្រូវការកូដ PIN សារ​ជាសំឡេងមួយ ​គ្រប់​ពេល​ដែល​អ្នក​ហៅ ​​ដើម្បី​ចូល​ដំណើរការ​សារ​ជា​សំឡេង​របស់​អ្នក។"</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"បញ្ហាមិនស្គាល់"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ការ​កំណត់​របៀប​​ពេល​ជិះ​យន្តហោះ"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"កំណត់​កូដ PIN"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"ព្យាយាម​ម្តង​ទៀត"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"បើក"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"ទេ​ អរគុណ"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"ធ្វើ​សមកាលកម្ម"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"ហៅ​ជា​សារ​សំឡេង"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"ហៅ​​ជំនួយ​អតិថិជន"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"សូម​ទោស យើង​ជួបប្រទះ​បញ្ហា​ហើយ។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើសេវា​​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9001។"</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"សូម​ទោស យើង​ជួបប្រទះ​បញ្ហា​ហើយ។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9002។"</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"សូម​ទោស យើង​ជួបប្រទះ​បញ្ហា​ហើយ។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9003។"</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"មិន​អាច​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក​បាន​ទេ"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"សូម​ទោស យើង​មាន​បញ្ហា​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក។ បើ​អ្នក​ស្ថិត​នៅ​តំបន់​ដែល​មាន​សញ្ញា​អ៊ីនធឺណិត​មិន​ល្អ សូម​រង់ចាំ​រហូតដល់​អ្នក​មាន​សេវា​អ៊ីនធឺណិត​ខ្លាំង និង​​ព្យាយាម​ម្ដង​ទៀត។ បើ​​នៅ​តែ​មាន​បញ្ហា​ទៀត សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9004។"</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"មិន​អាច​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក​បាន​ទេ"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"សូម​ទោស យើង​មាន​បញ្ហា​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក។ បើ​អ្នក​ស្ថិត​នៅ​តំបន់​ដែល​មាន​សញ្ញា​អ៊ីនធឺណិត​មិន​ល្អ សូម​រង់ចាំ​រហូតដល់​អ្នក​មាន​សេវា​អ៊ីនធឺណិត​ខ្លាំង និង​​ព្យាយាម​ម្ដង​ទៀត។ បើ​​នៅ​តែ​មាន​បញ្ហា​ទៀត សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9005។"</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"មិន​អាច​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក​បាន​ទេ"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"សូម​ទោស យើង​មាន​បញ្ហា​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក។ បើ​អ្នក​ស្ថិត​នៅ​តំបន់​ដែល​មាន​សញ្ញា​អ៊ីនធឺណិត​មិន​ល្អ សូម​រង់ចាំ​រហូតដល់​អ្នក​មាន​សេវា​អ៊ីនធឺណិត​ខ្លាំង និង​​ព្យាយាម​ម្ដង​ទៀត។ បើ​​នៅ​តែ​មាន​បញ្ហា​ទៀត សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9006។"</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"សូម​ទោស យើង​ជួបប្រទះ​បញ្ហា​ហើយ។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9007។"</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"សូម​ទោស យើង​ជួបប្រទះ​បញ្ហា​ហើយ។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9008។"</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"សូម​ទោស យើង​មាន​បញ្ហា​រៀបចំ​សេវាកម្ម​របស់​អ្នក។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9009។"</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"មិន​អាច​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក​បាន​ទេ"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"សូម​ទោស យើង​មាន​បញ្ហា​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9990។"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"រៀបចំ​សារ​ជា​សំឡេង"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"សារ​ជា​សំឡេង​មិន​បាន​រៀបចំ​នៅ​លើ​គណនី​របស់​អ្នក​ទេ។ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9991។"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"សារ​ជា​សំឡេង"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​មិន​អាច​ប្រើ​បាន​នៅ​លើ​ឧបករណ៍​នេះ​ទេ។ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9992។"</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9993។"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"សារជាសំឡេងអាចមើលឃើញ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9994។"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"សារជាសំឡេងអាចមើលឃើញ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9995។"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"សារជាសំឡេងអាចមើលឃើញ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"ដើម្បី​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9996។"</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9998។"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ត្រូវ​បាន​បិទ"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> ដើម្បី​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ។"</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9997។"</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9989។"</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"មានអ្វីមួយមិនប្រក្រតី"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9999។"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"លក្ខខណ្ឌ​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"អ្នក​ត្រូវតែ​យល់ព្រម​នឹង​​លក្ខខណ្ឌ​ប្រើប្រាស់​របស់​ Verizon Wireless ដើម្បី​អាច​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ៖\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"សារ​ជា​សំឡេង​ដែល​​មើល​ឃើញ​នឹង​ត្រូវ​បាន​បិទ បើ​លក្ខខណ្ឌ​ប្រើប្រាស់​ត្រូវ​បាន​បដិសេធ។"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"បិទសារជាសំឡេងដែលមើលឃើញ"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"សារ​ជា​សំឡេង​នឹង​អាច​ចូល​ស្ដាប់​បាន​​ដោយ​ហៅ​ទៅ *86។ កំណត់​កូដ PIN នៃ​សារ​ជា​សំឡេង​ថ្មី ដើម្បី​ចាប់ផ្ដើម​ដំណើរការ។"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"កំណត់​កូដ PIN"</string>
+</resources>

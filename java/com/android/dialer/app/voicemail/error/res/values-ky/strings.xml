@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Учак режимин өчүрүү"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Визуалдык үн почтасын иштетүү"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Визуалдык үн почтасы толук иштетилмейинче үн почтасынын эскертмелерин ала албайсыз. Үн почтасы толугу менен иштетилгенче жаңы билдирүүлөрдү алуу үчүн үн почтасына чалыңыз."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Визуалдык үн почтасы иштебей жатат"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Телефонуңузда мобилдик байланыш бар экенин текшерип, кайра аракет кылыңыз."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Учак режимин өчүрүп, кайра аракет кылыңыз."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Байланыш жок"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Жаңы билдирүүлөр жөнүндө эскертмелер келбейт. Эгер телефонуңуз Wi-Fi тармагына туташып турса, аны үн почтасы менен шайкештириңиз."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Жаңы билдирүүлөр жөнүндө эскертмелер келбейт. Учак режимин өчүрүп, телефонуңузду үн почтаңыз менен шайкештириңиз."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Үн почтаңызды текшерүү үчүн мобилдик интернетти иштетиңиз."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Визуалдык үн почтасы иштебей жатат"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Үн почтасын текшерүү үчүн атайын номерге чалсаңыз болот."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Визуалдык үн почтасы жаңырбай жатат"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Wi-Fi сигналы же мобилдик интернет туруктуу болгончо күтө туруп, анан кайра аракет кылыңыз. Эгер почтаны азыр текшергиңиз келсе, атайын номерге чалыңыз."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Мобилдик интернет туруктуу болгончо күтө туруп, анан кайра аракет кылыңыз. Эгер почтаны азыр текшергиңиз келсе, атайын номерге чалыңыз."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Визуалдык үн почтасы жаңырбай жатат"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Үн почтасын текшерүү үчүн атайын номерге чалсаңыз болот."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Визуалдык үн почтасы жаңырбай жатат"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Үн почтасын текшерүү үчүн атайын номерге чалсаңыз болот."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Визуалдык үн почтасы жаңырбай жатат"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Үн почтасын текшерүү үчүн атайын номерге чалсаңыз болот."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Визуалдык үн почтасы жаңырбай жатат"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Үн почтасын текшерүү үчүн атайын номерге чалсаңыз болот."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"\"Келген каттар\" кутусу дээрлик толуп калды"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Почтаңыз толуп калса, жаңы үн каттарын ала албай каласыз."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Жаңы үн каттары алынбай жатат"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"\"Келген каттар\" кутуңуз толуп калды. Үн каттарын алуу үчүн айрым билдирүүлөрдү өчүрүңүз."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Кошумча мейкиндик талап кылынат"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Үн почтаңызда бош орун жок. Үн каттарыңызды башкаруу жана алардын камдык көчүрмөлөрүн сактоо үчүн кошумча мейкиндикти күйгүзүп коюңуз."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Кошумча мейкиндик талап кылынат"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Үн почтаңыз толуп калды. Үн каттарыңызды башкаруу жана алардын камдык көчүрмөлөрүн сактоо үчүн кошумча мейкиндикти күйгүзүп коюңуз."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Үн почтаңыздын PIN-кодун орнотуңуз"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"PIN-код ар чалган сайын үн почтаңызды угуу үчүн керек."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Белгисиз ката"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Учак режиминин жөндөөлөрү"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN-кодду орнотуу"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Дагы аракет кылыңыз"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Күйгүзүү"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Жок, рахмат"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Шайкештирүү"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Үн почтасына чалуу"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Кардарларды колдоо кызматына чалуу"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Кечиресиз, көйгөйгө учурадык. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине  чалып, ката коду 9001 деп айтыңыз."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Кечиресиз, көйгөйгө учурадык. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине  чалып, ката коду 9001 деп айтыңыз."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Кечиресиз, көйгөйгө учурадык. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине  чалып, ката коду 9001 деп айтыңыз."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Үн почтаңыздын кутусуна туташа албай жатабыз"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Кечиресиз, үн почтаңызга туташуу мүмкүн болбой жатат. Сигнал күчтүү болгон жерди таап, дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9004 деп айтыңыз."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Үн почтаңыздын кутусуна туташа албай жатабыз"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Кечиресиз, үн почтаңызга туташуу мүмкүн болбой жатат. Сигнал күчтүү болгон жерди таап, кайталап көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9005 деп айтыңыз."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Үн почтаңыздын кутусуна туташа албай жатабыз"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Кечиресиз, үн почтаңызга туташуу мүмкүн болбой жатат. Сигнал күчтүү болгон жерди таап, кайталап көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9006 деп айтыңыз."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Кечиресиз, көйгөйгө учурадык. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9007 деп айтыңыз."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Кечиресиз, көйгөйгө учурадык. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9008 деп айтыңыз."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Кечиресиз, кызматыңызды жөндөө мүмкүн болбой жатат. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9009 деп айтыңыз."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Үн почтаңыздын кутусуна туташа албай жатабыз"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Кечиресиз, үн почтаңызга туташуу мүмкүн болбой жатат. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9990 деп айтыңыз."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Үн почтасын жөндөө"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Каттоо эсебиңизде үн  почтасы жөндөлгөн эмес. Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9991 деп айтыңыз."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Үн почтасы"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Визуалдык үн почтасын бул түзмөктө колдонууга болбойт. Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9992 деп айтыңыз."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9993 деп айтыңыз."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9994 деп айтыңыз."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9995 деп айтыңыз."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Визуалдык үн почтасын иштетүү үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9996 деп айтыңыз."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9998 деп айтыңыз."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Визуалдык үн почтасы өчүк"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Визуалдык үн почтасын иштетүү үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине кайрылыңыз."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9997 деп айтыңыз."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9989 деп айтыңыз."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Бир жерден ката кетти"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9999 деп айтыңыз."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Визуалдык үн почтасынын колдонуу жоболору жана шарттары"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Сиз Verizon Wireless\'тин визуалдык үн почтасын колдонуу жоболору менен шарттарына макул болушуңуз керек:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Эгер колдонуу жоболору менен шарттары четке кагылган болсо, визуалдык үн почтасы өчүрүлөт."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Визуалдык үн почтасын өчүрүү"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Үн почтасын угуу үчүн *86 номерине чалыңыз. Улантуу үчүн, үн почтасына жаңы PIN-кодду коюңуз."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN-код коюу"</string>
+</resources>

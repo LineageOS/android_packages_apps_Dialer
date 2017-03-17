@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേന വിളിക്കുന്നു"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"വിളിക്കുന്നു..."</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"കൈമാറുന്നു…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"വീഡിയോ കോൾ ചെയ്യുന്നു…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Wi-Fi വീഡിയോ കോൾ ചെയ്യുന്നു…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"കണക്റ്റുചെയ്യാനായില്ല"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"കോള്‍ നിരസിച്ചു"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"കോളിന്റെ സമയം തീര്‍ന്നു"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"ഹാംഗ് അപ്പ് ചെയ്യുന്നു"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"കോൾ അവസാനിച്ചു"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"ഹോള്‍ഡിലാണ്"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"ഈ വ്യക്തിയിൽ നിന്നുള്ള വീഡിയോ കോൾ"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"ഈ വ്യക്തിയിൽ നിന്നുള്ള Wi-Fi വീഡിയോ കോൾ"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"ഈ വ്യക്തിയിൽ നിന്നുള്ള കോൾ"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"ഈ വ്യക്തിയിൽ നിന്നുള്ള ഔദ്യോഗിക കോൾ"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേനയുള്ള ഇൻകമിംഗ്"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"സംശയാസ്‌പദമായ സ്‌പാം കോളർ"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"തിരിച്ചുവിളിക്കേണ്ട നമ്പർ: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel" msgid="2202739481132958990">"ტელეფონი"</string>
+    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"ტელეფონის კლავიატურა"</string>
+    <string name="dialerIconLabel" msgid="3422916015542176907">"ტელეფონი"</string>
+    <string name="callHistoryIconLabel" msgid="7493268743411968630">"საუბრის ისტორია"</string>
+    <string name="action_report_number" msgid="7231442711369737797">"არაზუსტი ნომრის შეტყობინება"</string>
+    <string name="action_copy_number_text" msgid="832682558551502319">"ნომრის კოპირება"</string>
+    <string name="copy_transcript_text" msgid="937904189017310829">"ტრანსკრიპტის კოპირება"</string>
+    <string name="action_block_number" msgid="3669819840999705278">"ნომრის დაბლოკვა"</string>
+    <string name="action_unblock_number" msgid="6583611581996402004">"ნომრის განბლოკვა"</string>
+    <string name="action_edit_number_before_call" msgid="8017492815878473837">"ნომრის რედაქტირება დარეკვამდე"</string>
+    <string name="call_log_delete_all" msgid="7852970926906523784">"ზარის ისტორიის გასუფთავება"</string>
+    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"ხმოვანი ფოსტის წაშლა"</string>
+    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"ხმოვანი ფოსტა წაიშალა"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"დაბრუნება"</string>
+    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"გასუფთავდეს ზარის ისტორია?"</string>
+    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"ეს წაშლის ყველა ზარს თქვენი ისტორიიდან"</string>
+    <string name="clearCallLogProgress_title" msgid="995004835687361977">"მიმდ. ზარ. ისტ. გასუფთავება…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="9198964841862577505">"დარეკვა"</string>
+    <string name="notification_missedCallTitle" msgid="8283366068539898486">"გამოტოვებული ზარი"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"გამოტოვებული ზარი (სამსახური)"</string>
+    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"გამოტოვებული ზარები"</string>
+    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> გამოტოვებული ზარი"</string>
+    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"გადარეკვა"</string>
+    <string name="notification_missedCall_message" msgid="5086910028988305964">"შეტყობინება"</string>
+    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ხმოვანი ფოსტა </item>
+      <item quantity="one">ხმოვანი ფოსტა</item>
+    </plurals>
+    <string name="notification_action_voicemail_play" msgid="5156500902796354071">"დაკვრა"</string>
+    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"ახალი ხმოვანი ფოსტა <xliff:g id="CALLER">%1$s</xliff:g>-ისგან"</string>
+    <string name="voicemail_playback_error" msgid="4384373852257757295">"ვერ ხორციელდება ხმოვანი ფოსტა ჩართვა"</string>
+    <string name="voicemail_fetching_content" msgid="572320120918636014">"ხმოვანი ფოსტა იტვირთება…"</string>
+    <string name="voicemail_archiving_content" msgid="2415183864104922185">"ხმოვანი ფოსტის დაარქივება…"</string>
+    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"ვერ ხორციელდება ხმოვანი ფოსტის ჩატვირთვა"</string>
+    <string name="call_log_voicemail_header" msgid="5799424860394542726">"მხოლოდ ზარები ხმოვანი ფოსტით"</string>
+    <string name="call_log_incoming_header" msgid="1158753168119845168">"მხოლოდ შემომავალი ზარები"</string>
+    <string name="call_log_outgoing_header" msgid="149333910997122683">"მხოლოდ გამავალი ზარები"</string>
+    <string name="call_log_missed_header" msgid="6491707499211289630">"მხოლოდ გამოტოვებული ზარები"</string>
+    <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>-ში"</string>
+    <string name="description_search_button" msgid="4515570469584782176">"ძიება"</string>
+    <string name="description_dial_button" msgid="699794433224646027">"დარეკვა"</string>
+    <string name="description_digits_edittext" msgid="8908702618098485186">"ასაკრეფი ნომერი"</string>
+    <string name="description_playback_start_stop" msgid="5320452461700750120">"დაკვრის შეჩერება ან გაშვება"</string>
+    <string name="description_playback_speakerphone" msgid="4852027754869750227">"სპიკერები შეგიძლიათ ჩართოთ და გამორთოთ."</string>
+    <string name="description_playback_seek" msgid="1340910573254132520">"დაკვრის პოზიციის მოძებნა"</string>
+    <string name="description_rate_decrease" msgid="5053221110217704199">"დაკვრის კოეფიციენტის შემცირება"</string>
+    <string name="description_rate_increase" msgid="4372206363557406700">"დაკვრის კოეფიციენტის გაზრდა"</string>
+    <string name="action_menu_call_history_description" msgid="8829135306925008546">"ზარების ისტორია"</string>
+    <string name="action_menu_overflow_description" msgid="7648679686746517341">"სხვა პარამეტრები"</string>
+    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"კლავიატურა"</string>
+    <string name="menu_show_outgoing_only" msgid="6941420328999801171">"მხოლოდ გამავალის ჩვენება"</string>
+    <string name="menu_show_incoming_only" msgid="6018600870504685564">"მხოლოდ შემომავალის ჩვენება"</string>
+    <string name="menu_show_missed_only" msgid="2266983597575047192">"მხოლოდ გამოტოვებულის ჩვენება"</string>
+    <string name="menu_show_voicemails_only" msgid="1114917855179284592">"მხოლოდ ხმოვანი ფოსტის ჩვენება"</string>
+    <string name="menu_show_all_calls" msgid="220054502052344488">"ყველა ზარის ჩვენება"</string>
+    <string name="add_2sec_pause" msgid="3417815038173424525">"ორწამიანი პაუზის დამატება"</string>
+    <string name="add_wait" msgid="1177723010768282578">"ლოდინის დამატება"</string>
+    <string name="dialer_settings_label" msgid="4980176284150290175">"პარამეტრები"</string>
+    <string name="simulator_submenu_label" msgid="186156287346615267">"სიმულატორი"</string>
+    <string name="menu_allContacts" msgid="8544950176866640863">"ყველა კონტაქტი"</string>
+    <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"ტონალური კლავიატურის გამოყენება"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"მიმდინარე ზარზე დაბრუნება"</string>
+    <string name="dialer_addAnotherCall" msgid="3132945651710234674">"ზარის დამატება"</string>
+    <string name="actionIncomingCall" msgid="891346596090030558">"შემომავალი ზარები"</string>
+    <string name="description_call_log_play_button" msgid="2349845005022431438">"ხმოვანი ფოსტის ჩართვა"</string>
+    <string name="description_view_contact" msgid="3940984937384372665">"კონტაქტის <xliff:g id="NAME">%1$s</xliff:g> ნახვა"</string>
+    <string name="description_call" msgid="1532402285334775372">"<xliff:g id="NAME">%1$s</xliff:g>-თან დარეკვა"</string>
+    <string name="description_contact_details" msgid="3341280873855253464">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ის კონტაქტის დეტალები"</string>
+    <string name="description_spam_contact_details" msgid="5592578752881528368">"სავარაუდოდ სპამერი აბონენტის <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> საკონტაქტო დეტალები"</string>
+    <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ზარი."</string>
+    <string name="description_video_call" msgid="3738199365585751727">"ვიდეოზარი."</string>
+    <string name="description_send_text_message" msgid="8450269896765568596">"გააგზავნეთ SMS <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"მოსასმენი ხმოვანი ფოსტა"</string>
+    <string name="description_start_voice_search" msgid="8380022725973015261">"ხმოვანი ძიების დაწყება"</string>
+    <string name="menu_callNumber" msgid="1540773545517152514">"დარეკვა <xliff:g id="NUMBER">%s</xliff:g>-ზე"</string>
+    <string name="voicemail" msgid="8899540969000957954">"ხმოვანი ფოსტა"</string>
+    <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> წმ"</string>
+    <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> მინ <xliff:g id="SECONDS">%s</xliff:g> წამ"</string>
+    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
+    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="6317935773274628316">"ვერ ხორციელდება ამ ნომერზე დარეკვა"</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="6437173108290752604">"ხმოვანი ფოსტის დასაყენებლად გადადით: მენიუ &gt; პარამეტრები."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="1044988101597862159">"ხმოვან ფოსტასთან დასაკავშირებლად, პირველ რიგში, გამორთეთ თვითმფრინავის რეჟიმი."</string>
+    <string name="contact_list_loading" msgid="7919825236309749352">"იტვირთება…"</string>
+    <string name="imei" msgid="5214505934662768308">"IMEI"</string>
+    <string name="meid" msgid="3333779521535224028">"MEID"</string>
+    <string name="simContacts_emptyLoading" msgid="6205424276735652071">"იტვირთება SIM ბარათიდან…"</string>
+    <string name="simContacts_title" msgid="7961069730386378887">"SIM ბარათის კონტაქტები"</string>
+    <string name="add_contact_not_available" msgid="7065884447935173347">"კონტაქტების აპლიკაცია არ არის ხელმისაწვდომი"</string>
+    <string name="voice_search_not_available" msgid="6546240433719732905">"ხმოვანი ძიება არ არის ხელმისაწვდომი"</string>
+    <string name="call_not_available" msgid="7850148370757361155">"სატელეფონო ზარის განხორციელება ვერ ხერხდება, ვინაიდან ტელეფონის აპლიკაცია გაუქმებულია."</string>
+    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"კონტაქტებში ძიება"</string>
+    <string name="block_number_search_hint" msgid="5377706079015099416">"დაამატეთ ნომერი ან მოიძიეთ კონტაქტებიდან"</string>
+    <string name="call_log_all_empty" msgid="3955572868518162004">"თქვენი საუბრის ისტორია ცარიელია"</string>
+    <string name="call_log_all_empty_action" msgid="852218280136243014">"დარეკვა"</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"გამოტოვებული ზარები არ გაქვთ."</string>
+    <string name="call_log_voicemail_empty" msgid="273623903423275178">"თქვენი ხმოვანი ელფოსტის შემოსულები ცარიელია."</string>
+    <string name="show_favorites_only" msgid="8089163582448737837">"მხოლოდ რჩეულების ჩვენება"</string>
+    <string name="call_log_activity_title" msgid="1275242727244945527">"საუბრის ისტორია"</string>
+    <string name="call_log_all_title" msgid="6042262422192020327">"ყველა"</string>
+    <string name="call_log_missed_title" msgid="17254005889268015">"გამოტოვებული"</string>
+    <string name="call_log_voicemail_title" msgid="6504826963256437971">"ხმოვანი ფოსტა"</string>
+    <string name="tab_speed_dial" msgid="6616404752227561075">"სწრაფი დარეკვა"</string>
+    <string name="tab_history" msgid="7420269368689503596">"საუბრის ისტორია"</string>
+    <string name="tab_all_contacts" msgid="5531733977693943015">"კონტაქტები"</string>
+    <string name="tab_voicemail" msgid="2458548090088316246">"ხმოვანი ფოსტა"</string>
+    <string name="favorite_hidden" msgid="1077010324849831399">"წაიშალა რჩეულებიდან"</string>
+    <string name="favorite_hidden_undo" msgid="5660280521854875320">"დაბრუნება"</string>
+    <string name="search_shortcut_call_number" msgid="8847918845036880688">"დარეკვა <xliff:g id="NUMBER">%s</xliff:g>-ზე"</string>
+    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"ახალი კონტაქტის შექმნა"</string>
+    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"კონტაქტისადმი დამატება"</string>
+    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"SMS-ის გაგზავნა"</string>
+    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"ვიდეოზარის განხორციელება"</string>
+    <string name="search_shortcut_block_number" msgid="4587283230665805776">"ნომრის დაბლოკვა"</string>
+    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> ახალი გაცდენილი ზარი"</string>
+    <string name="speed_dial_empty" msgid="3346406399966039505">"სწრაფი აკრეფისთვის რჩეულები ჯერ არ გყავთ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"რჩეული კონტაქტის დამატება"</string>
+    <string name="all_contacts_empty" msgid="243071567853617177">"კონტაქტები ჯერ არ გაქვთ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"კონტაქტის დამატება"</string>
+    <string name="contact_tooltip" msgid="8871614660967439999">"ყველა ნომრის სანახავად შეეხეთ სურათს ან შეეხეთ და დააყოვნეთ მიმდევრობის შესაცვლელად"</string>
+    <string name="remove_contact" msgid="2353580570488923668">"ამოშლა"</string>
+    <string name="call_log_action_video_call" msgid="7565549950343850819">"ვიდეო ზარი"</string>
+    <string name="call_log_action_send_message" msgid="6948727362660115554">"შეტყობინების გაგზავნა"</string>
+    <string name="share_and_call" msgid="1208757302713705291">"გაზიარება და დარეკვა"</string>
+    <string name="call_log_action_details" msgid="2091370737371449501">"ზარის მონაცემები"</string>
+    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"გაგზავნა:"</string>
+    <string name="call_log_action_call" msgid="682724094251540583">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-თან დარეკვა"</string>
+    <string name="description_incoming_missed_call" msgid="8292535799379230029">"გამოტოვებული ზარი აბონენტისგან: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="3920182963103160610">"უპასუხო ზარი აბონენტისგან <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_unread_voicemail" msgid="145170985013419170">"წაუკითხავი ხმოვანი ფოსტა აბონენტისგან: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="5585559881573227732">"ხმოვანი ფოსტა აბონენტისგან: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="543952487882919924">"ზარი აბონენტთან <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="call_log_via_number" msgid="1340307109806397650">"<xliff:g id="NUMBER">%1$s</xliff:g>-ის მეშვეობით"</string>
+    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, <xliff:g id="NUMBER">%2$s</xliff:g>-ის მეშვეობით"</string>
+    <string name="description_call_log_call_action" msgid="6958550749492392199">"დარეკვა"</string>
+    <string name="description_call_action" msgid="4042796498169106545">"დარეკვა <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="1237090968588659650">"ვიდეო ზარი <xliff:g id="NAMEORNUMBER">^1</xliff:g>-თან."</string>
+    <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ის ხმოვანი ფოსტის მოსმენა"</string>
+    <string name="description_voicemail_play" msgid="737337291418966183">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-გან ხმოვანი ფოსტის მოსმენა"</string>
+    <string name="description_voicemail_pause" msgid="2400610579956333661">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-გან ხმოვანი ფოსტის დაპაუზება"</string>
+    <string name="description_voicemail_delete" msgid="5305509366448404410">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-გან ხმოვანი ფოსტის წაშლა"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="7562208210097630839">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ახალი ხმოვანი ფოსტა</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ახალი ხმოვანი ფოსტა</item>
+    </plurals>
+    <string name="description_create_new_contact_action" msgid="1928282350281564130">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ისთვის კონტაქტის შექმნა"</string>
+    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ის დამატება არსებულ კონტაქტზე"</string>
+    <string name="description_details_action" msgid="2061866409737706174">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ზარის დეტალები"</string>
+    <string name="toast_entry_removed" msgid="6821678859297454838">"ზარის ისტორიიდან წაშლილი"</string>
+    <string name="call_log_header_today" msgid="1576119097475845293">"დღეს"</string>
+    <string name="call_log_header_yesterday" msgid="5616077776205329563">"გუშინ"</string>
+    <string name="call_log_header_other" msgid="4940676886254217644">"უფრო ძველი"</string>
+    <string name="call_detail_list_header" msgid="1174040565810083473">"ზარების სია"</string>
+    <string name="voicemail_speaker_on" msgid="3151333608926996668">"სპიკერის ჩართვა."</string>
+    <string name="voicemail_speaker_off" msgid="2530064206962034201">"სპიკერის გამორთვა."</string>
+    <string name="voicemail_play_faster" msgid="2742012169751409677">"დაკვრის აჩქარება."</string>
+    <string name="voicemail_play_slower" msgid="868588128301087884">"დაკვრის შენელება."</string>
+    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"დაკვრის დაწყება ან პაუზა."</string>
+    <string name="display_options_title" msgid="3880091801055797975">"ეკრანის პარამეტრები"</string>
+    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"ხმა და ვიბრაცია"</string>
+    <string name="accessibility_settings_title" msgid="3329027650429831820">"მარტივი წვდომა"</string>
+    <string name="ringtone_title" msgid="8377174189894648486">"ტელეფონის ზარი"</string>
+    <string name="vibrate_on_ring_title" msgid="631441314790960485">"ზარებზე ასევე ვიბრირება"</string>
+    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"კლავიატურის ტონები"</string>
+    <string name="dtmf_tone_length_title" msgid="534096029202438539">"კლავიატურის ტონის ხანგრძლივობა"</string>
+  <string-array name="dtmf_tone_length_entries">
+    <item msgid="3136353015227162823">"ჩვეულებრივი"</item>
+    <item msgid="5376841175538523822">"გრძელი"</item>
+  </string-array>
+    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"სწრაფი პასუხი"</string>
+    <string name="call_settings_label" msgid="7824611757200960807">"ზარები"</string>
+    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ზარების დაბლოკვა"</string>
+    <string name="voicemail_settings_label" msgid="4594299554519920570">"ხმოვანი ფოსტა"</string>
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ზარების დაბლოკვა დროებით გამოირთო"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ზარების დაბლოკვა გაითიშა, რადგან ბოლო 48 საათში ამ ტელეფონიდან საგანგებო სამსახურებს დაუკავშირდით. 48 საათის გასვლის შემდეგ ის ავტომატურად ჩაირთვება."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ნომრების იმპორტი"</string>
+    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"სხვა აპების მეშვეობით თქვენ მიერ ადრე ზოგიერთი აბონენტის ხმოვან ფოსტაზე ავტომატური გადამისამართება მოინიშნა."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"ნომრების ნახვა"</string>
+    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"იმპორტი"</string>
+    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"ნომრის განბლოკვა"</string>
+    <string name="addBlockedNumber" msgid="3053473735238295551">"ნომრის დამატება"</string>
+    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"ამ ნომრებიდან შემოსული ზარები დაიბლოკება, ხოლო ხმოვანი ფოსტა ავტომატურად წაიშლება."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"ამ ნომრებიდან შემოსული ზარები დაიბლოკება, თუმცა აბონენტებს მაინც შეეძლებათ თქვენთვის ხმოვანი ფოსტის დატოვება."</string>
+    <string name="block_list" msgid="4701585783411870782">"დაბლოკილი ნომრები"</string>
+    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> უკვე დაბლოკილია."</string>
+    <string name="phone_account_settings_label" msgid="8372485478006965920">"ანგარიშების გამოძახება"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"ჩართვა"</string>
+    <string name="permission_multiple_turn_on" msgid="5679888820253829400">"ნებართვების დაყენება"</string>
+    <string name="permission_no_speeddial" msgid="8487215628510596753">"სწრაფი აკრეფის გასააქტიურებლად, ჩართეთ კონტაქტების ნებართვა."</string>
+    <string name="permission_no_calllog" msgid="4053705651238775784">"ზარების ჟურნალის სანახავად, ჩართეთ ტელეფონის ნებართვა."</string>
+    <string name="permission_no_contacts" msgid="8995025765862026771">"კონტაქტების სანახავად, ჩართეთ კონტაქტების ნებართვა."</string>
+    <string name="permission_no_voicemail" msgid="1908142679289209291">"ხმოვან ფოსტაზე წვდომისთვის, ჩართეთ ტელეფონის ნებართვა."</string>
+    <string name="permission_no_search" msgid="2424710404207193826">"თქვენი კონტაქტების მოსაძებნად ჩართეთ კონტაქტების ნებართვები."</string>
+    <string name="permission_place_call" msgid="8686908130349369423">"ზარის განსახორციელებლად, ჩართეთ ტელეფონის ნებართვა."</string>
+    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"ტელეფონის აპს სისტემის პარამეტრებში ჩაწერის ნებართვა არ აქვს."</string>
+    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"დაბლოკილი"</string>
+    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"დაბლოკვა/სპამის შეტყობინება"</string>
+    <string name="call_log_action_block_number" msgid="5048188386501998865">"ნომრის დაბლოკვა"</string>
+    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"არ არის სპამი"</string>
+    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ნომრის განბლოკვა"</string>
+    <string name="spam_number_call_log_label" msgid="2678431398326811131">"სპამი"</string>
+    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ხაზგარეშეა და ვერ დაუკავშირდებით"</string>
+</resources>

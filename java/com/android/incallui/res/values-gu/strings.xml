@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ફોન"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"કોન્ફરન્સ કૉલ"</string>
+    <string name="call_lost" msgid="2082971531689406145">"કૉલ છૂટ્યો"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"નીચે આપેલ ટોન્સ મોકલીએ?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"ટોન્સ મોકલી રહ્યાં છે\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"મોકલો"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"હા"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"નહીં"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"પહોળા વર્ણને આની સાથે બદલો"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"કોન્ફરન્સ કૉલ <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"વૉઇસમેઇલ નંબર"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"ડાયલ કરી રહ્યાં છે"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> નો કૉલ ચૂકી ગયાં"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"ચાલી રહેલ કૉલ"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ચાલી રહેલ કાર્ય કૉલ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"ચાલુ Wi-Fi કૉલ"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ચાલી રહેલ Wi-Fi કાર્ય કૉલ"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"હોલ્ડ પર"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"ઇનકમિંગ કૉલ"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ઇનકમિંગ કાર્ય કૉલ"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ઇનકમિંગ Wi-Fi કૉલ"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ઇનકમિંગ Wi-Fi કાર્ય કૉલ"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ઇનકમિંગ શંકાસ્પદ સ્પામ કૉલ"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"આવનાર વિડિઓ વિનંતી"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"નવો વૉઇસમેઇલ"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"નવો વૉઇસમેઇલ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> ડાયલ કરો"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"વૉઇસમેઇલ નંબર અજાણ"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"કોઈ સેવા નથી"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"પસંદ કરેલ નેટવર્ક (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) અનુપલબ્ધ"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"જવાબ"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"સમાપ્ત કરો"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"વિડિઓ"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"અવાજ"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"સ્વીકારો"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"નકારો"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"અન્ય ઉપકરણ પર ચાલી રહેલ કૉલ"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"અન્ય ઉપકરણ પર ચાલી રહેલ વિડિઓ કૉલ"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"કૉલ લો"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"વિડિઓ કૉલ લો"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"કૉલ કરવા માટે, પહેલાં એરપ્લેન મોડને બંધ કરો."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"નેટવર્ક પર નોંધણી કરાયેલ નથી."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"સેલ્યુલર નેટવર્ક ઉપલબ્ધ નથી."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"કૉલ કરવા માટે, માન્ય નંબર દાખલ કરો."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"કૉલ કરી શકાતો નથી."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI અનુક્રમ પ્રારંભ કરી રહ્યાં છે…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"સેવા સમર્થિત નથી."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"કૉલ્સ સ્વિચ કરી શકાતા નથી."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"અલગ કૉલ કરી શકાતો નથી."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"સ્થાનાંતર કરી શકાતું નથી."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"કોન્ફરન્સ કરી શકાતી નથી."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"કૉલ નકારી શકાતો નથી."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"કૉલ(લ્સ) રિલીઝ કરી શકતા નથી."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"કટોકટીનો કૉલ"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"રેડિઓ ચાલુ કરી રહ્યાં છે…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"કોઈ સેવા નથી. ફરી પ્રયાસ કરી રહ્યાં છે…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"કૉલ કરી શકાતો નથી. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> એ કટોકટીનો નંબર નથી."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"કૉલ કરી શકાતો નથી. કટોકટીનો નંબર ડાયલ કરો!"</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"ડાયલ કરવા માટે કીબોર્ડનો ઉપયોગ કરો"</string>
+    <string name="player_started" msgid="9177182657338033086">"પ્લેયર પ્રારંભ કર્યું"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"પ્લેયર બંધ કર્યું"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"કૅમેરો તૈયાર નથી"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"કૅમેરો તૈયાર"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"અજાણી કૉલ સત્ર ઇવેન્ટ"</string>
+    <string name="other_settings" msgid="2537377721890761197">"અન્ય કૉલ સેટિંગ્સ"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"ખાનગી જાઓ"</string>
+    <string name="selectContact" msgid="1703433172800564849">"સંપર્ક પસંદ કરો"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"રિંગટોન અને વાઇબ્રેટ"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"કોન્ફરન્સ કૉલ સંચાલિત કરો"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"કટોકટીનો નંબર"</string>
+    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> મારફતે"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"તાજેતરનાં સંદેશા"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"વ્યવસાયની માહિતી"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> માઇલ દૂર"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> કિમી દૂર"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"આવતીકાલે <xliff:g id="OPEN_TIME">%s</xliff:g> વાગ્યે ખુલશે"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"આજે <xliff:g id="OPEN_TIME">%s</xliff:g> વાગ્યે ખુલશે"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"<xliff:g id="CLOSE_TIME">%s</xliff:g> વાગ્યે બંધ થશે"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"આજે <xliff:g id="CLOSE_TIME">%s</xliff:g> વાગ્યે બંધ થયેલું"</string>
+    <string name="open_now" msgid="5897306702060039512">"હમણાં ખોલો"</string>
+    <string name="closed_now" msgid="3962291301467974921">"અત્યારે બંધ કર્યું"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"<xliff:g id="NUMBER">%1$s</xliff:g> ને જાણો છો?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"શું <xliff:g id="NUMBER">%1$s</xliff:g> સ્પામ છે?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"<xliff:g id="NUMBER">%1$s</xliff:g> અવરોધિત કર્યો અને કૉલની સ્પામ તરીકે જાણ કરવામાં આવી."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"<xliff:g id="NUMBER">%1$s</xliff:g> ના કૉલની સ્પામ નથી તરીકે જાણ કરવામાં આવી."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"સંપર્કોમાં ઉમેરવા માટે ટૅપ કરો અથવા સ્પામ નંબરને અવરોધિત કરો."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"આ નંબરથી તમને પહેલી વાર કૉલ કરવામાં આવ્યો છે. જો આ કૉલ સ્પામ હોય, તો તમે આ નંબરને અવરોધિત કરી અને તેની જાણ કરી શકો છો."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"સ્પામ નથી તરીકે જાણ કરવા માટે ટૅપ કરો અથવા તેને અવરોધિત કરો."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"અમને આ સ્પામર હોવાની શંકા છે. જો આ કૉલ સ્પામ ન હોય, તો અમારી ભૂલની જાણ કરવા માટે સ્પામ નથી ટૅપ કરો."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"અવરોધિત કરો અને જાણ કરો"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"સંપર્ક ઉમેરો"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"સ્પામ નથી"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"નંબર અવરોધિત કરો"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"સંપર્કોમાં ઉમેરો"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"અવરોધિત કરો અને સ્પામ તરીકે જાણ કરો"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"સ્પામ નથી"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"કોઈ SIM નથી અથવા SIM ભૂલ"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"કૉલ સમાપ્ત કરો"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"કૉન્ફરન્સ કૉલ"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"કૉલમાં"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"સેલ્યુલર ડેટાની મદદથી કૉલ ચાલુ રાખી રહ્યાં છે…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi નેટવર્ક પર સ્વિચ કરી શક્યાં નથી"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"વિડિઓ કૉલ સેલ્યુલર નેટવર્ક પર રહેશે. માનક ડેટા શુલ્ક લાગુ થઈ શકે છે."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"આ ફરીથી બતાવશો નહીં"</string>
+</resources>

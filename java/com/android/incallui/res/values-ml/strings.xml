@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ഫോണ്‍"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"കോൺഫറൻസ് കോൾ"</string>
+    <string name="call_lost" msgid="2082971531689406145">"കോൾ വിട്ടു"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"ഇനിപ്പറയുന്ന ടോണുകൾ അയയ്‌ക്കണോ?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"ടോണുകൾ അയയ്‌ക്കുന്നു\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"അയയ്‌ക്കുക"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"വേണം"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"വേണ്ട"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"വൈൽഡ് പ്രതീകം ഇതുപയോഗിച്ച് മാറ്റിസ്ഥാപിക്കുക"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"കോൺഫറൻസ് കോൾ <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"വോയ്‌സ്‌മെയിൽ നമ്പർ"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"ഡയൽ ചെയ്യുന്നു"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> എന്നതിൽ നിന്നുള്ള മിസ്‌ഡ് കോൾ"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"കോൾ സജീവമാണ്"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ഓൺഗോയിംഗ് ഔദ്യോഗിക കോൾ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"ഓൺഗോയിംഗ് വൈഫൈ കോൾ"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ഓൺഗോയിംഗ് വൈഫൈ ഔദ്യോഗിക കോൾ"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"ഹോള്‍ഡിലാണ്"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"ഇന്‍കമിംഗ് കോള്‍"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ഇൻകമിംഗ് ഔദ്യോഗിക കോൾ"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ഇൻകമിംഗ് വൈഫൈ കോൾ"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ഇൻകമിംഗ് വൈഫൈ ഔദ്യോഗിക കോൾ"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"സംശയാസ്‌പദമായ ഇൻകമിംഗ് സ്‌പാം കോൾ"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"പുതിയ വോയ്‌സ്‌മെയിൽ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> ഡയൽ ചെയ്യുക"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"വോയ്‌സ്‌മെയിൽ നമ്പർ അജ്ഞാതമാണ്"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"സേവനമില്ല"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ലഭ്യമല്ല"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"മറുപടി"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"വീഡിയോ"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"വോയ്‌സ്"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"അംഗീകരിക്കുക"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"നിരസിക്കുക"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന കോൾ"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"കോൾ എടുക്കുക"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"വീഡിയോ കോൾ അറ്റൻഡ് ചെയ്യുക"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"ഒരു കോൾ വിളിക്കാൻ, ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫുചെയ്യുക."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"നെറ്റ്‌വർക്കിൽ രജിസ്റ്റർ ചെയ്‌തിട്ടില്ല."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"സെല്ലുലാർ നെറ്റ്‌വർക്ക് ലഭ്യമല്ല."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ഒരു കോൾ ചെയ്യുന്നതിന്, സാധുതയുള്ള നമ്പർ നൽകുക."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"കോൾ ചെയ്യാനായില്ല."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI സീക്വൻസ് ആരംഭിക്കുന്നു…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"സേവനം പിന്തുണയ്‌ക്കുന്നില്ല."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"കോളുകൾ മാറാനാവില്ല."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"കോൾ വേർതിരിക്കാനാവില്ല."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"കൈമാറ്റം ചെയ്യാനാവില്ല."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"കോൺഫറൻസ് കോൾ ചെയ്യാനാവില്ല."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"കോൾ നിരസിക്കാനാവില്ല."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"കോൾ (കോളുകൾ) വിളിക്കാനാവില്ല."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"അടിയന്തര കോൾ"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"റേഡിയോ ഓൺ ചെയ്യുന്നു…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"സേവനമൊന്നുമില്ല. വീണ്ടും ശ്രമിക്കുന്നു…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"കോൾ ചെയ്യാനാവില്ല. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> എന്നത് ഒരു അടിയന്തിര നമ്പറല്ല."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"കോൾ ചെയ്യാനാവില്ല. ഒരു അടിയന്തിര കോൾ നമ്പർ ഡയൽചെയ്യുക."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"ഡയൽ ചെയ്യാൻ കീബോർഡ് ഉപയോഗിക്കുക"</string>
+    <string name="player_started" msgid="9177182657338033086">"പ്ലെയർ ആരംഭിച്ചു"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"പ്ലേയർ നിർത്തി"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"ക്യാമറ തയ്യാറായില്ല"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"ക്യാമറ തയ്യാറായി"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"അജ്ഞാത കോൾ സെഷൻ ഇവന്റ്"</string>
+    <string name="other_settings" msgid="2537377721890761197">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"സ്വകാര്യം എന്നതിലേക്ക് പോകുക"</string>
+    <string name="selectContact" msgid="1703433172800564849">"കോൺടാക്റ്റ് തിരഞ്ഞെടുക്കുക"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"റിംഗ്ടോണും വൈബ്രേറ്റും"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"അടിയന്തര നമ്പർ"</string>
+    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> വഴി"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"ഏറ്റവും പുതിയ സന്ദേശങ്ങൾ"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"ബിസിനസ്സ് വിവരം"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> മൈൽ അകലെ"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> കിലോമീറ്റർ അകലെ"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"നാളെ <xliff:g id="OPEN_TIME">%s</xliff:g>-ന് തുറക്കുന്നു"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"ഇന്ന് <xliff:g id="OPEN_TIME">%s</xliff:g>-ന് തുറക്കുന്നു"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"<xliff:g id="CLOSE_TIME">%s</xliff:g>-ന് അടയ്ക്കുന്നു"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"ഇന്ന് <xliff:g id="CLOSE_TIME">%s</xliff:g>-ന് അടച്ചു"</string>
+    <string name="open_now" msgid="5897306702060039512">"ഇപ്പോൾ തുറന്നിരിക്കുന്നു"</string>
+    <string name="closed_now" msgid="3962291301467974921">"ഇപ്പോൾ അടച്ചിരിക്കുന്നു"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"<xliff:g id="NUMBER">%1$s</xliff:g> അറിയാമോ?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"<xliff:g id="NUMBER">%1$s</xliff:g> സ്‌പാം ആണോ?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്‌ത്, കോൾ സ്‌പാം ആയി റിപ്പോർട്ടുചെയ്‌തു."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"<xliff:g id="NUMBER">%1$s</xliff:g> എന്ന നമ്പറിൽ നിന്നുള്ള കോളിനെ സ്‌പാം അല്ലെന്ന് റിപ്പോർട്ടുചെയ്‌തു."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"കോൺടാക്‌റ്റുകളിലേക്ക് ചേർക്കാനോ സ്‌പാം നമ്പർ ബ്ലോക്കുചെയ്യാനോ ടാപ്പുചെയ്യുക."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"ഈ നമ്പറിൽ നിന്ന് ആദ്യമായാണ് നിങ്ങൾക്ക് കോൾ വരുന്നത്. ഈ കോൾ സ്‌പാം ആയിരുന്നെങ്കിൽ, ഈ നമ്പർ ബ്ലോക്കുചെയ്‌ത് റിപ്പോർട്ടുചെയ്യാനാകും."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"സ്‌പാം അല്ല എന്ന് റിപ്പോർട്ടുചെയ്യാൻ ടാപ്പുചെയ്യുക, അല്ലെങ്കിൽ അത് ബ്ലോക്കുചെയ്യുക."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"ഇത് ഒരു സ്‌പാമർ ആണെന്ന് ഞങ്ങൾക്ക് സംശയമുണ്ടായിരുന്നു. ഈ കോൾ ഒരു സ്‌പാം ആയിരുന്നില്ലെങ്കിൽ, ഞങ്ങളുടെ തെറ്റ് റിപ്പോർട്ടുചെയ്യാൻ സ്‌പാം അല്ല എന്നതിൽ ടാപ്പുചെയ്യുക."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"ബ്ലോക്കുചെയ്‌ത്, റിപ്പോർട്ടുചെയ്യുക"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"കോൺടാക്റ്റ് ചേർക്കുക"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"സ്പാം അല്ല"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"നമ്പർ ബ്ലോക്കുചെയ്യുക"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"കോൺടാക്റ്റുകളിൽ ചേർക്കുക"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"ബ്ലോക്കുചെയ്‌ത്, സ്‌പാമെന്ന് റിപ്പോർട്ടുചെയ്യുക"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"സ്പാം അല്ല"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"സിം ഇല്ല അല്ലെങ്കിൽ സിം പിശക്"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"കോള്‍ അവസാനിപ്പിക്കൂ"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"കോൺഫറൻസ് കോൾ"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"കോളിലാണ്"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"സെല്ലുലാർ ഡാറ്റ ഉപയോഗിച്ച് കോൾ തുടരുന്നു…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi നെറ്റ്‌വർക്കിലേക്ക് മാറാനായില്ല"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"സെല്ലുലാർ നെറ്റ്‌വർക്കിൽത്തന്നെ വീഡിയോ കോൾ തുടരും. സാധാരണ ഡാറ്റ നിരക്കുകൾ ബാധകമാകാം."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ഇത് വീണ്ടും കാണിക്കരുത്"</string>
+</resources>

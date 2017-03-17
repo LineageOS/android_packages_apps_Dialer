@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="audioroute_bluetooth" msgid="3426527851663711141">"Bluetooth"</string>
+    <string name="audioroute_speaker" msgid="3269659224838962927">"Звучник"</string>
+    <string name="audioroute_phone" msgid="4006113852056568310">"Телефон"</string>
+    <string name="audioroute_headset" msgid="3911496379650036544">"Жичени слушалки"</string>
+</resources>

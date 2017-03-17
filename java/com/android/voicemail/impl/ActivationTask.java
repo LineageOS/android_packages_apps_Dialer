@@ -29,6 +29,8 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
@@ -111,6 +113,7 @@ public class ActivationTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
+    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_AUTO_RETRY_ACTIVATION);
     Intent intent = super.createRestartIntent();
     // mMessageData is discarded, request a fresh STATUS SMS for retries.
     return intent;
@@ -120,7 +123,7 @@ public class ActivationTask extends BaseTask {
   @WorkerThread
   public void onExecuteInBackgroundThread() {
     Assert.isNotMainThread();
-
+    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_ACTIVATION_STARTED);
     PhoneAccountHandle phoneAccountHandle = getPhoneAccountHandle();
     if (phoneAccountHandle == null) {
       // This should never happen
@@ -207,7 +210,6 @@ public class ActivationTask extends BaseTask {
             + message.getProvisioningStatus()
             + ", rc="
             + message.getReturnCode());
-
     if (message.getProvisioningStatus().equals(OmtpConstants.SUBSCRIBER_READY)) {
       VvmLog.d(TAG, "subscriber ready, no activation required");
       updateSource(getContext(), phoneAccountHandle, status, message);
@@ -226,6 +228,7 @@ public class ActivationTask extends BaseTask {
         helper.handleEvent(status, OmtpEvents.CONFIG_SERVICE_NOT_AVAILABLE);
       }
     }
+    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_ACTIVATION_COMPLETED);
   }
 
   public static void updateSource(

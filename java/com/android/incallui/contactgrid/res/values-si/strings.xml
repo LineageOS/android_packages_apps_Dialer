@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> හරහා අමතමින්"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"අමතමින්…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"මාරු කරමින්…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"වීඩියෝ ඇමතීම කරමින්…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Wi-Fi වීඩියෝ ඇමතුම…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"සම්බන්ධ වීමට නොහැකිය"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"ඇමතුම ප්‍රතික්ෂේප කෙරණි"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"ඇමතුම් කාලය නිමා විය"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"විසන්ධි කරමින්"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"ඇමතුම අවසන් විය"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"රඳවා ගත්"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"වෙතින් වීඩියෝ ඇමතුම"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"වෙතින් Wi-Fi වීඩියෝ ඇමතුම"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"වෙතින් ඇමතුම"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"වෙතින් කාර්යාල ඇමතුම"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> හරහා එන"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"සැකසහිත අයාචිත තැපැල් අමතන්නා"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"පසුඇමතුම් අංකය: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"Chamando a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"Chamando…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"Transferindo…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"Facendo videochamada…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Vídeochamada por wifi…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"Non se pode conectar"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"Rexeitouse a chamada"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"A chamada superou o tempo de espera"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"Desconectando"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"Finalizouse a chamada"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"En espera"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"Videochamada de"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"Videochamada por wifi de"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Chamada de"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Chamada de traballo de"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Chamada entrante a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Chamada sospeitosa de spam"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"Número para devolver a chamada: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

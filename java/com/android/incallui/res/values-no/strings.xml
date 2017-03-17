@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Telefonmøte"</string>
+    <string name="call_lost" msgid="2082971531689406145">"Samtale droppet"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Send disse tonene?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Sendetoner\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Send"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Ja"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Nei"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Erstatt jokertegn med"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Telefonmøte <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Nummer til talepostkasse"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Ringer"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Tapt anrop fra <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Pågående samtale"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Pågående jobbanrop"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Pågående Wi-Fi-anrop"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Pågående jobbanrop via Wi-Fi"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Parkert"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Innkommende samtale"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Innkommende jobbanrop"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Innkommende anrop via Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Innkommende jobbanrop via Wi-Fi"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Innkommende anrop fra en mulig useriøs oppringer"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Innkommende videoforespørsel"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"Ny talemelding"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Nye talemeldinger (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Ring <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Mangler nummer til talepostkasse"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Ingen tjeneste"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"Valgt nettverk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgjengelig"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Svar"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Legg på"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Google Voice"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Godta"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Avslå"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Samtale pågår på en annen enhet"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"En videosamtale pågår på en annen enhet"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Svar på anropet"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Svar på videoanropet"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"For å ringe, slå av flymodus først."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Ikke registrert på nettverket."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"Mobilnettverket er ikke tilgjengelig."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Skriv inn et gyldig nummer for å plassere en samtale."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"Kan ikke ringe."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Begynner MMI-sekvens…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Tjenesten håndteres ikke."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Kan ikke bytte samtaler."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Kan ikke splitte opp samtale."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Kan ikke overføre."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Kan ikke opprette konferanse."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Kan ikke avvise anropet."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Kan ikke frigjøre samtale(r)."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Nødanrop"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Slår på radio…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Ingen tjeneste. Prøver på nytt …"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"Kan ikke ringe. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> er ikke et nødnummer."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"Kan ikke ringe. Ring et nødnummer."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Bruk tastaturet for å ringe"</string>
+    <string name="player_started" msgid="9177182657338033086">"Avspilleren har startet"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"Avspilleren har stoppet"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"Kameraet er ikke klart"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"Kameraet er klart"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Ukjent anrop"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Andre ringeinnstillinger"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"aktiver privat samtale"</string>
+    <string name="selectContact" msgid="1703433172800564849">"velg kontakt"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Ringelyd og vibrering"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Administrer konferansesamtale"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Nødnummer"</string>
+    <string name="child_number" msgid="3398257437107259682">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Nylige meldinger"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"Informasjon om bedriften"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> engelske mil unna"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> km unna"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Åpner i morgen kl. <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Åpner i dag kl. <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Stenger kl. <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Stengte i dag kl. <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Åpent nå"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Stengt nå"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"Kjenner du <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"Tilhører <xliff:g id="NUMBER">%1$s</xliff:g> en useriøs oppringer?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"<xliff:g id="NUMBER">%1$s</xliff:g> ble blokkert, og anropet ble rapportert som useriøst."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"Anropet fra <xliff:g id="NUMBER">%1$s</xliff:g> ble rapportert som ikke useriøst."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Trykk for å legge til kontakter eller blokkere det useriøse nummeret."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"Dette er den første gangen du blir oppringt fra dette nummeret. Hvis dette anropet var useriøst, kan du blokkere nummeret og rapportere det."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"Trykk for å rapportere nummeret som IKKE USERIØST eller blokkere det."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Vi tror at dette var en useriøs oppringer. Hvis anropet ikke var useriøst, trykk på IKKE USERIØST for å melde fra om at vi tar feil."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Blokkér og rapportér"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Legg til kontakt"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Ikke nettsøppel"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Blokkér nummeret"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Legg til i kontakter"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Blokkér og rapportér som useriøst"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Ikke useriøs"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Ikke noe SIM-kort eller SIM-kortfeil"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Avslutt samtalen"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Telefonmøte"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"Samtale pågår"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Fortsetter samtalen via mobildata …"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Kan ikke bytte til Wi-Fi-nettverk"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Videosamtalen blir værende på mobilnettet. Standard datakostnader kan påløpe."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ikke vis dette igjen"</string>
+</resources>

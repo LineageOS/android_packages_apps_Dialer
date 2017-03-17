@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"ປິດໂໝດຢູ່ໃນຍົນ"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ກຳລັງເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບ"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ບໍ່ສາມາດເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ໃຫ້ກວດສອບເບິ່ງວ່າໂທລະສັບຂອງທ່ານເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືແລ້ວ ຈາກນັ້ນລອງໃໝ່ອີກຄັ້ງ."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ປິດໂໝດຢູ່ໃນຍົນແລ້ວລອງໃໝ່ອີກຄັ້ງ."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ບໍ່ມີການເຊື່ອມຕໍ່"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນເມື່ອມີຂໍ້ຄວາມສຽງໃໝ່. ຫາກທ່ານໃຊ້ Wi-Fi, ທ່ານສາມາດກວດສອບຂໍ້ຄວາມສຽງໄດ້ໂດຍການຊິ້ງຂໍ້ມູນຕອນນີ້."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນເມື່ອມີຂໍ້ຄວາມສຽງໃໝ່. ກະລຸນາປິດໂໝດຢູ່ໃນຍົນເພື່ອຊິ້ງຂໍ້ຄວາມສຽງຂອງທ່ານ."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ໂທລະສັບຂອງທ່ານຕ້ອງມີການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືເພື່ອກວດສອບຂໍ້ຄວາມສຽງ."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ບໍ່ສາມາດເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ໃຫ້ລອງອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ Wi-Fi ຫຼື ເຄືອຂ່າຍມືຖືຂອງທ່ານດີຂຶ້ນ. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ໃຫ້ລອງອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືຂອງທ່ານດີຂຶ້ນ. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Inbox almost full"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"ທ່ານຈະບໍ່ສາມາດຮັບຂໍ້ຄວາມສຽງໃໝ່ໄດ້ຫາກອິນບັອກຂອງທ່ານເຕັມ."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"ບໍ່ສາມາດຮັບຂໍ້ຄວາມສຽງໃໝ່"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"ອິນບັອກຂອງທ່ານເຕັມແລ້ວ. ໃຫ້ລອງລຶບບາງຂໍ້ຄວາມອອກເພື່ອຮັບຂໍ້ຄວາມສຽງໃໝ່."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມ ແລະ ການສຳຮອງຂໍ້ມູນ"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"ກ່ອງອີເມວຂອງທ່ານເຕັມແລ້ວ. ເພື່ອເພີ່ມບ່ອນຈັດເກັບຂໍ້ມູນ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່າມເຕີມເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ມູນຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມ ແລະ ການສຳຮອງຂໍ້ມູນ"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ກ່ອງອີເມວຂອງທ່ານໃກ້ເຕັມແລ້ວ. ເພື່ອເພີ່ມບ່ອນຈັດເກັບຂໍ້ມູນ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່າມເຕີມເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ມູນຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"ຕັ້ງລະຫັດ PIN ຂໍ້ຄວາມສຽງຂອງທ່ານ"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ທ່ານຈະຕ້ອງໃຊ້ລະຫັດ PIN ໃນຕອນໃດກໍຕາມທີ່ທ່ານໂທເພື່ອເຂົ້າຟັງຂໍ້ຄວາມສຽງຂອງທ່ານ."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"ຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ການຕ້ງຄ່າໂໝດຢູ່ໃນຍົນ"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"ຕັ້ງລະຫັດ PIN"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"ລອງໃໝ່ອີກເທື່ອໜຶ່ງ"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"ເປີດໃຊ້"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"​ບໍ່, ຂອບ​ໃຈ"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"ຊິ້ງຂໍ້ມູນ"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"ໂທຫາເບີຂໍ້ຄວາມສຽງ"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Call Customer Support"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9001."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9002."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9003."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Can\'t Connect to Your Voice Mailbox"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9004."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Can\'t Connect to Your Voice Mailbox"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9005."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Can\'t Connect to Your Voice Mailbox"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9006."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9007."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9008."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Sorry, we\'re having trouble setting up your service. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9009."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Can\'t Connect to Your Voice Mailbox"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Sorry, we\'re not able to connect to your voice mailbox at this time. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9990."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"ຕັ້ງຄ່າຂໍ້ຄວາມສຽງ"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Voicemail is not set up on your account. Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9991."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"ຂໍ້ຄວາມສຽງ"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Visual Voicemail cannot be used on this device. Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9992."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9993."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"ຂໍ້ຄວາມສຽງເຫັນພາບ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"To complete Visual Voicemail setup, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"ຂໍ້ຄວາມສຽງເຫັນພາບ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"To complete Visual Voicemail setup, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"ຂໍ້ຄວາມສຽງເຫັນພາບ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"To activate Visual Voice Mail, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9996."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"To complete Visual Voicemail setup, please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Visual Voicemail is Disabled"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> to activate visual voicemail."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9997."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9989."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9999."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຂໍ້ຄວາມສຽງສະເໝືອນ"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ທ່ານຕ້ອງຍອມຮັບຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຂອງ Verizon Wireless ເພື່ອໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"ຂໍ້ຄວາມສຽງສະເໝືອນຈະຖືກປິດການນຳໃຊ້ຫາກປະຕິເສດຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂດັ່ງກ່າວ."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ປິດການນຳໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"ຂໍ້ຄວາມສຽງສາມາດເຂົ້າເຖິງໄດ້ສະເພາະການໂທຜ່ານ *86 ເທົ່ານັ້ນ. ຕັ້ງລະຫັດ PIN ຂໍ້ຄວາມສຽງໃໝ່ເພື່ອດຳເນີນການຕໍ່."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ຕັ້ງລະຫັດ PIN"</string>
+</resources>

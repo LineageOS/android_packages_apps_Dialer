@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_content_description_end_call" msgid="8232796487777787200">"ਕਾਲ ਸਮਾਪਤ ਕਰੋ"</string>
+    <string name="incall_content_description_muted" msgid="2130133443150389474">"ਮਿਊਟ ਕੀਤਾ ਗਿਆ"</string>
+    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"ਅਣਮਿਊਟ ਕੀਤਾ ਗਿਆ"</string>
+    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"ਕਾਲਾਂ ਦੀ ਅਦਲਾ ਬਦਲੀ ਕਰੋ"</string>
+    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"ਕਾਲਾਂ ਰਲਗੱਡ ਕਰੋ"</string>
+    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"ਹੈੱਡਸੈੱਟ ਈਅਰਪੀਸ"</string>
+    <string name="incall_content_description_speaker" msgid="7837829930201265549">"ਸਪੀਕਰ"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"ਬਲੂਟੁੱਥ"</string>
+    <string name="incall_content_description_headset" msgid="3170439802944346719">"ਤਾਰਯੁਕਤ ਹੈੱਡਸੈੱਟ"</string>
+    <string name="incall_content_description_hold" msgid="3335508251734906019">"ਕਾਲ ਰੋਕ ਕੇ ਰੱਖੋ"</string>
+    <string name="incall_content_description_unhold" msgid="3862584118869933593">"ਕਾਲ ਮੁੜ-ਸ਼ੁਰੂ ਕਰੋ"</string>
+    <string name="incall_content_description_video_on" msgid="899266487647420613">"ਵੀਡੀਓ ਚਾਲੂ"</string>
+    <string name="incall_content_description_video_off" msgid="762985912616707076">"ਵੀਡੀਓ ਬੰਦ"</string>
+    <string name="incall_content_description_swap_video" msgid="297943299827908998">"ਵੀਡੀਓ ਦੀ ਅਦਲਾ ਬਦਲੀ ਕਰੋ"</string>
+</resources>

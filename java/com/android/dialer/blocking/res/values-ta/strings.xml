@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"புதிய, எளிதாக்கப்பட்ட தடுத்தல்"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"சிறப்பான பாதுகாப்பை வழங்குவதற்காக, ஃபோனில் தடுத்தல் செயல்படும் விதத்தை மாற்ற வேண்டும். இப்போது தடுத்த எண்களிலிருந்து வரும் அழைப்புகளும் உரைச் செய்திகளும் நிறுத்தப்படுவதோடு, பிற பயன்பாடுகளுடன் பகிரப்பட்டு அவற்றிலும் தடுக்கப்படக்கூடும்."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"அனுமதி"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐத் தடுக்கவா?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"இந்த எண்ணின் அழைப்புகள் தடுக்கப்படுவதுடன், அதன் குரலஞ்சல்களும் தானாகவே நீக்கப்படும்."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"இந்த எண்ணின் அழைப்புகள் தடுக்கப்படும், ஆனால் அழைப்பாளரால் இன்னமும் உங்களுக்குக் குரலஞ்சல்களை அனுப்ப முடியும்."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"இந்த எண்ணிலிருந்து இனி அழைப்புகளையோ உரைச் செய்திகளையோ பெறமாட்டீர்கள்."</string>
+    <string name="block_number_ok" msgid="739786082788038932">"தடு"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐ அனுமதிக்கவா?"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"அனுமதி"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> தவறானது."</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> தடுக்கப்பட்டது"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> அனுமதிக்கப்பட்டது"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"செயல்தவிர்"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"இறக்குவதில் தோல்வி"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"அழைப்புத் தடுப்பு 48 மணிநேரத்திற்கு முடக்கப்பட்டுள்ளது"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"அவசர அழைப்பு செய்திருப்பதால், அழைப்புத் தடுப்பு முடக்கப்பட்டது."</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐத் தடுக்கவா?"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"இந்த எண்ணிலிருந்து இனி அழைப்புகளைப் பெறமாட்டீர்கள்."</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> இந்த அழைப்பு ஸ்பேம் எனப் புகாரளிக்கப்படும்."</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"இந்த எண் அனுமதிக்கப்பட்டு, ஸ்பேம் இல்லையென தெரிவிக்கப்படும். இனி அழைப்புகள் ஸ்பேமாக குறிக்கப்படாது."</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐ அனுமதிக்கவா?"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"ஸ்பேம் இல்லையெனத் தெரிவி"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"தவறு எனத் தெரிவிக்கவா?"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"இனி <xliff:g id="NUMBER">%1$s</xliff:g> இன் அழைப்புகள் ஸ்பேமாகக் குறிக்கப்படாது."</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"அழைப்பை ஸ்பேமாகப் புகாரளி"</string>
+</resources>

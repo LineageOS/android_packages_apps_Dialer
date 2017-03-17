@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="toast_text_copied" msgid="8979281391599667362">"পাঠ্য অনুলিপি হয়েছে"</string>
+    <string name="copy_text" msgid="5890820280087874642">"ক্লিপবোর্ডে কপি করুন"</string>
+    <string name="call_custom" msgid="3041673234638990874">"<xliff:g id="CUSTOM">%s</xliff:g> এ কল করুন"</string>
+    <string name="call_home" msgid="125893483593803791">"বাড়ির নম্বরে কল করুন"</string>
+    <string name="call_mobile" msgid="967589404494150813">"মোবাইল নম্বরে কল করুন"</string>
+    <string name="call_work" msgid="6040550697395300892">"কর্মক্ষেত্রের নম্বরে কল করুন"</string>
+    <string name="call_fax_work" msgid="5260192771364592922">"কর্মক্ষেত্রের ফ্যাক্স নম্বরে কল করুন"</string>
+    <string name="call_fax_home" msgid="5174311195081144124">"বাড়ির ফ্যাক্স নম্বরে কল করুন"</string>
+    <string name="call_pager" msgid="6814149227741274161">"পেজার নম্বরে কল করুন"</string>
+    <string name="call_other" msgid="5536385588712587235">"কল করুন"</string>
+    <string name="call_callback" msgid="6314019862718112786">"কলব্যাক করার নম্বরে কল করুন"</string>
+    <string name="call_car" msgid="3197417098027764954">"গাড়ির ফোন নম্বরে কল করুন"</string>
+    <string name="call_company_main" msgid="2557663310028446397">"কোম্পানির প্রধান নম্বরে কল করুন"</string>
+    <string name="call_isdn" msgid="4691270442763649522">"ISDN নম্বরে কল করুন"</string>
+    <string name="call_main" msgid="3293707608770407814">"প্রধান নম্বরে কল করুন"</string>
+    <string name="call_other_fax" msgid="4724521984879021465">"ফ্যাক্স নম্বরে কল করুন"</string>
+    <string name="call_radio" msgid="8942441419845057942">"রেডিওর ফোন নম্বরে কল করুন"</string>
+    <string name="call_telex" msgid="2031514461660668351">"টেলেক্স নম্বরে কল করুন"</string>
+    <string name="call_tty_tdd" msgid="7807210224965727701">"TTY/TDD নম্বরে কল করুন"</string>
+    <string name="call_work_mobile" msgid="2716342732938578495">"অফিসের মোবাইল নম্বরে কল করুন"</string>
+    <string name="call_work_pager" msgid="3791778749827366574">"অফিসের পেজার নম্বরে কল করুন"</string>
+    <string name="call_assistant" msgid="4177478845473789294">"<xliff:g id="ASSISTANT">%s</xliff:g> এ কল করুন"</string>
+    <string name="call_mms" msgid="4958811711741872901">"MMS নম্বরে কল করুন"</string>
+    <string name="call_by_shortcut" msgid="4623082183552111045">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (কল)"</string>
+    <string name="sms_custom" msgid="8785368968605026317">"<xliff:g id="CUSTOM">%s</xliff:g> নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_home" msgid="3527719551060295243">"ঘরের ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_mobile" msgid="8883045857887736518">"মোবাইল নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_work" msgid="4158595439553450966">"কর্মক্ষেত্রের নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_fax_work" msgid="5483726627718055248">"কার্মক্ষেত্রের ফ্যাক্স নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_fax_home" msgid="9219265155770746077">"বাড়ির ফ্যাক্স নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_pager" msgid="4901085068525193933">"পেজারের নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_other" msgid="1742702947993285933">"পাঠ্য বার্তা"</string>
+    <string name="sms_callback" msgid="5833483630377538308">"কলব্যাক করার নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_car" msgid="4314577266154395174">"গাড়ির ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_company_main" msgid="2308160928487360705">"কোম্পানির প্রধান ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_isdn" msgid="6394300346179302542">"ISDN ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_main" msgid="8908087742014140774">"প্রধান নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_other_fax" msgid="8768455473295405427">"ফ্যাক্স নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_radio" msgid="855555176531704682">"রেডিওর ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_telex" msgid="6269029276223252719">"টেলেক্স নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_tty_tdd" msgid="6229057354509192444">"TTY/TDD ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_work_mobile" msgid="2155975469329969840">"কর্মক্ষেত্রের মোবাইলে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_work_pager" msgid="8500140274906830742">"কর্মক্ষেত্রের পেজারে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_assistant" msgid="8513548482745330818">"<xliff:g id="ASSISTANT">%s</xliff:g> নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_mms" msgid="5187888900503248542">"MMS ফোন নম্বরে পাঠ্য বার্তা পাঠান"</string>
+    <string name="sms_by_shortcut" msgid="8005496406639963582">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (বার্তা)"</string>
+    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"ঘন ঘন যোগাযোগ করা হয়েছে এমন পরিচিতিগুলিকে সাফ করবেন?"</string>
+    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"পরিচিতি এবং ফোন অ্যাপ্লিকেশানগুলি থেকে আপনি ঘন ঘন যোগাযোগ করা পরিচিতির তালিকা সাফ করবেন, এবং ইমেল অ্যাপ্লিকেশানগুলিকে আবার শুরু থেকে আপনার ঠিকানা অভিরুচি জানতে বাধ্য করবেন৷"</string>
+    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"ঘন ঘন যোগাযোগ করা পরিচিতিগুলিকে সাফ করা হচ্ছে…"</string>
+    <string name="status_available" msgid="2648156525685472626">"উপলব্ধ"</string>
+    <string name="status_away" msgid="2298688367552893953">"অন্যত্র"</string>
+    <string name="status_busy" msgid="5990832098713248503">"ব্যস্ত"</string>
+    <string name="contactsList" msgid="8806067891419291513">"পরিচিতিগুলি"</string>
+    <string name="local_invisible_directory" msgid="4723238462733650090">"অন্যান্য"</string>
+    <string name="directory_search_label" msgid="4621215895484025229">"ডিরেক্টরি"</string>
+    <string name="directory_search_label_work" msgid="7679326282707414897">"কাজের সংগ্রহ"</string>
+    <string name="local_search_label" msgid="907622822323119235">"সকল পরিচিতি"</string>
+    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"আমি"</string>
+    <string name="search_results_searching" msgid="3710866752172327451">"অনুসন্ধান করছে..."</string>
+    <string name="foundTooManyContacts" msgid="3685002426663730799">"<xliff:g id="COUNT">%d</xliff:g>টির থেকে বেশি খুঁজে পাওয়া গিয়েছে৷"</string>
+    <string name="listFoundAllContactsZero" msgid="1151813986040671916">"কোনো পরিচিতি নেই"</string>
+    <plurals name="searchFoundContacts" formatted="false" msgid="3733009742282085433">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টি খুঁজে পাওয়া গেছে</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>টি খুঁজে পাওয়া গেছে</item>
+    </plurals>
+    <string name="description_quick_contact_for" msgid="6327207399167819147">"<xliff:g id="NAME">%1$s</xliff:g> এর জন্য দ্রুত পরিচিতি"</string>
+    <string name="missing_name" msgid="978606963362745020">"(কোনও নাম নেই)"</string>
+    <string name="favoritesFrequentCalled" msgid="4646019087163449555">"ঘন ঘন কল করা হয়েছে"</string>
+    <string name="favoritesFrequentContacted" msgid="946588736701567509">"ঘন ঘন যোগাযোগ করা হয়েছে"</string>
+    <string name="description_view_contact_detail" msgid="2428742401208561136">"পরিচিতি দেখুন"</string>
+    <string name="list_filter_phones" msgid="8763316061763437182">"ফোন নম্বর সহ সমস্ত পরিচিতি"</string>
+    <string name="list_filter_phones_work" msgid="7083575404573422965">"কর্মস্থলের প্রোফাইলের পরিচিতিগুলি"</string>
+    <string name="view_updates_from_group" msgid="9011641093168385729">"আপডেটগুলি দেখুন"</string>
+    <string name="account_phone" msgid="7067809073194061035">"শুধুমাত্র ডিভাইসে রয়েছে, সিঙ্ক করা হয়নি"</string>
+    <string name="nameLabelsGroup" msgid="7730465833159557471">"নাম"</string>
+    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ডাকনাম"</string>
+    <string name="full_name" msgid="648186563998465740">"নাম"</string>
+    <string name="name_given" msgid="5096576006314820536">"প্রথম নাম"</string>
+    <string name="name_family" msgid="6646235805198547467">"পদবি"</string>
+    <string name="name_prefix" msgid="9215326539658838">"নামের আগের অংশ"</string>
+    <string name="name_middle" msgid="703755205331582769">"মাঝের নাম"</string>
+    <string name="name_suffix" msgid="5777083390282548702">"নামের পরের অংশ"</string>
+    <string name="name_phonetic" msgid="1650870996361663089">"উচ্চারণগত নাম"</string>
+    <string name="name_phonetic_given" msgid="618812334274603170">"উচ্চারণগত প্রথম নাম"</string>
+    <string name="name_phonetic_middle" msgid="4826820763384625538">"উচ্চারণগত মাঝের নাম"</string>
+    <string name="name_phonetic_family" msgid="379905191212930771">"উচ্চারণগত পদবি"</string>
+    <string name="phoneLabelsGroup" msgid="169661929021355548">"ফোন"</string>
+    <string name="emailLabelsGroup" msgid="2249752810477488833">"ইমেল করুন"</string>
+    <string name="postalLabelsGroup" msgid="6772000590189142253">"ঠিকানা"</string>
+    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
+    <string name="organizationLabelsGroup" msgid="1101996309241601435">"সংগঠন"</string>
+    <string name="relationLabelsGroup" msgid="53866051664600053">"সম্পর্ক"</string>
+    <string name="eventLabelsGroup" msgid="1236970042646618489">"বিশেষ তারিখ"</string>
+    <string name="sms" msgid="7574344928185328095">"পাঠ্য বার্তা"</string>
+    <string name="postal_address" msgid="1804707930129674200">"ঠিকানা"</string>
+    <string name="ghostData_company" msgid="2554310786296833424">"কোম্পানি"</string>
+    <string name="ghostData_title" msgid="4994968731830184837">"নাম"</string>
+    <string name="label_notes" msgid="2050255313694219786">"টীকাগুলি"</string>
+    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
+    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ওয়েবসাইট"</string>
+    <string name="groupsLabel" msgid="2694002798416868728">"গোষ্ঠীগুলি"</string>
+    <string name="email_home" msgid="889830029388962171">"বাড়ির ইমেল ঠিকানায় ইমেল করুন"</string>
+    <string name="email_mobile" msgid="4487686436743741150">"মোবাইলের ইমেল ঠিকানায় ইমেল করুন"</string>
+    <string name="email_work" msgid="4223487303344613528">"কর্মক্ষেত্রের ইমেল ঠিকানায় ইমেল করুন"</string>
+    <string name="email_other" msgid="4246411900126012062">"ইমেল করুন"</string>
+    <string name="email_custom" msgid="7246580894327511013">"<xliff:g id="CUSTOM">%s</xliff:g> এ ইমেল করুন"</string>
+    <string name="email" msgid="2807318537887091606">"ইমেল করুন"</string>
+    <string name="postal_street" msgid="6918171741240802474">"রাস্তা"</string>
+    <string name="postal_pobox" msgid="2962203483168878561">"পোস্ট বক্স"</string>
+    <string name="postal_neighborhood" msgid="5275280978237639716">"নিকটবর্তী অঞ্চল"</string>
+    <string name="postal_city" msgid="8674569121430005628">"শহর"</string>
+    <string name="postal_region" msgid="1730369286225469192">"রাজ্য"</string>
+    <string name="postal_postcode" msgid="4450700741261990439">"পিন কোড"</string>
+    <string name="postal_country" msgid="232670707458768148">"দেশ"</string>
+    <string name="map_home" msgid="4181131107392126938">"বাড়ির ঠিকানা দেখুন"</string>
+    <string name="map_work" msgid="5723471185992684400">"কর্মক্ষেত্রের ঠিকানা দেখুন"</string>
+    <string name="map_other" msgid="2253764780863500516">"ঠিকানা দেখুন"</string>
+    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> ঠিকানা দেখুন"</string>
+    <string name="chat_aim" msgid="2954364435497941659">"AIM ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_msn" msgid="3130135239071228678">"Windows Live ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_yahoo" msgid="3233552142326865347">"Yahoo ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_skype" msgid="6486703981390592425">"Skype ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_qq" msgid="786924280665740019">"QQ ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_gtalk" msgid="7914674177243078035">"Google Talk ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_icq" msgid="3292934726414765801">"ICQ ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat_jabber" msgid="6701542313597880204">"Jabber ব্যবহার করে চ্যাট করুন"</string>
+    <string name="chat" msgid="1020428260359370236">"চ্যাট করুন"</string>
+    <string name="description_minus_button" msgid="2659092981396583806">"মুছুন"</string>
+    <string name="expand_collapse_name_fields_description" msgid="9005732230091761802">"নামের ক্ষেত্রটিকে প্রসারিত বা সঙ্কুচিত করুন"</string>
+    <string name="expand_collapse_phonetic_name_fields_description" msgid="3450645489720595412">"ফোনেটিক নামের ক্ষেত্রটিকে প্রসারিত বা সঙ্কুচিত করুন"</string>
+    <string name="list_filter_all_accounts" msgid="473782314881473992">"সকল পরিচিতি"</string>
+    <string name="menu_done" msgid="1817505539263889535">"সম্পন্ন হয়েছে"</string>
+    <string name="menu_doNotSave" msgid="4174389775790094548">"বাতিল করুন"</string>
+    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> এ পরিচিতিগুলি"</string>
+    <string name="listCustomView" msgid="5306282632413086731">"কাস্টম দৃশ্যে পরিচিতিগুলি"</string>
+    <string name="listSingleContact" msgid="8620818791932382627">"একক পরিচিতি"</string>
+    <string name="dialog_new_contact_account" msgid="3089718960461539156">"আমদানি করা পরিচিতিগুলি এতে সংরক্ষণ করুন:"</string>
+    <string name="import_from_sim" msgid="4025122666048801234">"সিম কার্ড থেকে আমদানি করুন"</string>
+    <string name="import_from_sim_summary" msgid="7347530878981811858">"<xliff:g id="SIM_NAME">^1</xliff:g> সিম থেকে আমদানি করুন - <xliff:g id="SIM_NUMBER">^2</xliff:g>"</string>
+    <string name="import_from_sim_summary_no_number" msgid="2311025421424473798">"<xliff:g id="SIM_NAME">%1$s</xliff:g> সিম থেকে আমদানি করুন"</string>
+    <string name="import_from_vcf_file" product="default" msgid="2755992524137862594">".vcf ফাইল থেকে আমদানি করুন"</string>
+    <string name="cancel_import_confirmation_message" msgid="1112854508504355394">"<xliff:g id="FILENAME">%s</xliff:g> এর আমদানি বাতিল করবেন?"</string>
+    <string name="cancel_export_confirmation_message" msgid="8507822905973961704">"<xliff:g id="FILENAME">%s</xliff:g> এর রপ্তানি বাতিল করবেন?"</string>
+    <string name="cancel_vcard_import_or_export_failed" msgid="3633975947527306665">"vCard এর আমদানি/রপ্তানি বাতিল করা যায়নি"</string>
+    <string name="fail_reason_unknown" msgid="4526834573707737085">"অজানা ত্রুটি৷"</string>
+    <string name="fail_reason_could_not_open_file" msgid="2564113989228646444">"\"<xliff:g id="FILE_NAME">%s</xliff:g>\" খোলা গেল না: <xliff:g id="EXACT_REASON">%s</xliff:g>৷"</string>
+    <string name="fail_reason_could_not_initialize_exporter" msgid="1391801997398257839">"রপ্তানিকারক শুরু করা যায়নি: \"<xliff:g id="EXACT_REASON">%s</xliff:g>\"৷"</string>
+    <string name="fail_reason_no_exportable_contact" msgid="5905140440417594395">"রপ্তানিযোগ্য কোনো পরিচিতি নেই৷"</string>
+    <string name="missing_required_permission" msgid="3977319568919699902">"আপনি একটি প্রয়োজনীয় অনুমতি অক্ষম করেছেন৷"</string>
+    <string name="fail_reason_error_occurred_during_export" msgid="4022425018935814242">"রপ্তানির সময় একটি ত্রুটি ঘটেছে: \" <xliff:g id="EXACT_REASON">%s</xliff:g> \"৷"</string>
+    <string name="fail_reason_too_long_filename" msgid="1782388695897859448">"প্রয়োজনীয় ফাইলের নামটি  (\"<xliff:g id="FILENAME">%s</xliff:g>\") অত্যন্ত দীর্ঘ৷"</string>
+    <string name="fail_reason_io_error" msgid="5610192449460803752">"I/O ত্রুটি"</string>
+    <string name="fail_reason_low_memory_during_import" msgid="5383581106403466715">"যথেষ্ট মেমরি নেই৷ ফাইলটি খুব বড় হতে পারে৷"</string>
+    <string name="fail_reason_vcard_parse_error" msgid="7166381747317969497">"একটি অপ্রত্যাশিত কারণে vCard পার্জ করা যায়নি৷"</string>
+    <string name="fail_reason_not_supported" msgid="6529299412185608834">"এই ফর্ম্যাটটি সমর্থিত নয়৷"</string>
+    <string name="fail_reason_failed_to_collect_vcard_meta_info" msgid="2071371622333685552">"প্রদত্ত vCard ফাইলের(গুলির) মেটা তথ্য সংগ্রহ করা যায়নি৷"</string>
+    <string name="fail_reason_failed_to_read_files" msgid="7364342120566067558">"একটি বা একাধিক (%s) ফাইল আমদানি করা যাবে না৷"</string>
+    <string name="exporting_vcard_finished_title" msgid="6969111823207538096">"<xliff:g id="FILENAME">%s</xliff:g> রপ্তানি করা সম্পন্ন হয়েছে৷"</string>
+    <string name="exporting_vcard_finished_title_fallback" msgid="3456404588243153606">"পরিচিতি রপ্তানি করা সম্পন্ন হয়েছে৷"</string>
+    <string name="exporting_vcard_finished_toast" msgid="864313687240614505">"পরিচিতিগুলি রপ্তানি করা হয়েছে, পরিচিতিগুলিকে শেয়ার করতে বিজ্ঞপ্তিটিতে ক্লিক করুন৷"</string>
+    <string name="touch_to_share_contacts" msgid="8684610418619975866">"পরিচিতিগুলিকে শেয়ার করতে আলতো চাপ দিন৷"</string>
+    <string name="exporting_vcard_canceled_title" msgid="4160930279977285925">"<xliff:g id="FILENAME">%s</xliff:g> রপ্তানি করা বাতিল হয়েছে৷"</string>
+    <string name="exporting_contact_list_title" msgid="874590947793345632">"পরিচিতির তথ্য রপ্তানি করা হচ্ছে"</string>
+    <string name="exporting_contact_list_message" msgid="3263011604569444133">"পরিচিতির ডেটা রপ্তানি করা হচ্ছে৷"</string>
+    <string name="composer_failed_to_get_database_infomation" msgid="443743100925218813">"ডেটাবেসের তথ্য পাওয়া যায়নি৷"</string>
+    <string name="composer_has_no_exportable_contact" msgid="1492572045460138455">"এখানে রপ্তানিযোগ্য কোনো পরিচিতি নেই৷ আপনার ডিভাইসে পরিচিতি থাকলে, কিছু ডেটা সরবরাহকারী আপনার ডিভাইস থেকে সেই পরিচিতিগুলিকে রপ্তানি করার অনুমতি নাও করতে পারে৷"</string>
+    <string name="composer_not_initialized" msgid="7126008930727708362">"vCard কম্পোজার সঠিকভাবে শুরু করা হয়নি৷"</string>
+    <string name="exporting_contact_failed_title" msgid="5400878429352404258">"রপ্তানি করা যায়নি"</string>
+    <string name="exporting_contact_failed_message" msgid="1453772164161663415">"পরিচিতির তথ্য রপ্তানি করা যায়নি৷\nকারণ: \"<xliff:g id="FAIL_REASON">%s</xliff:g>\""</string>
+    <string name="importing_vcard_description" msgid="1206078719084863234">"<xliff:g id="NAME">%s</xliff:g> আমদানি করা হচ্ছে"</string>
+    <string name="reading_vcard_failed_title" msgid="4759080957711586257">"vCard ডেটা পড়া যায়নি"</string>
+    <string name="reading_vcard_canceled_title" msgid="3650078934530953275">"vCard ডেটা পড়া বাতিল করা হয়েছে"</string>
+    <string name="importing_vcard_finished_title" msgid="1543368028741535966">"vCard <xliff:g id="FILENAME">%s</xliff:g> আমদানি করা সমাপ্ত হয়েছে"</string>
+    <string name="importing_vcard_canceled_title" msgid="2454436016819017436">"<xliff:g id="FILENAME">%s</xliff:g> আমদানি করা বাতিল করা হয়েছে"</string>
+    <string name="vcard_import_will_start_message" msgid="6013286576133592154">"<xliff:g id="FILENAME">%s</xliff:g> শীঘ্রই আমদানি করা হবে৷"</string>
+    <string name="vcard_import_will_start_message_with_default_name" msgid="3172538521736189687">"ফাইলটি শীঘ্রই আমদানি করা হবে৷"</string>
+    <string name="vcard_import_request_rejected_message" msgid="7620870852106507620">"vCard আমদানি করার অনুরোধ প্রত্যাখ্যাত হয়েছে৷ পরে আবার চেষ্টা করুন৷"</string>
+    <string name="vcard_export_will_start_message" msgid="4480722586633503615">"<xliff:g id="FILENAME">%s</xliff:g> শীঘ্রই রপ্তানি করা হবে৷"</string>
+    <string name="vcard_export_will_start_message_fallback" msgid="8746087280091814150">"ফাইলটি শীঘ্রই রপ্তানি করা হবে৷"</string>
+    <string name="contacts_export_will_start_message" msgid="5950262391638837408">"পরিচিতিগুলি শীঘ্রই রপ্তানি করা হবে৷"</string>
+    <string name="vcard_export_request_rejected_message" msgid="4132430982367686579">"vCard রপ্তানি করার অনুরোধ প্রত্যাখ্যাত হয়েছে৷ পরে আবার চেষ্টা করুন৷"</string>
+    <string name="vcard_unknown_filename" msgid="7576066884501578965">"পরিচিতি"</string>
+    <string name="caching_vcard_message" msgid="7778832851741500256">"স্থানীয় অস্থায়ী সংগ্রহস্থলে vCard(গুলি)কে ক্যাশ করা হচ্ছে৷ প্রকৃত আমদানি শীঘ্রই শুরু হবে৷"</string>
+    <string name="vcard_import_failed" msgid="4135012206186446511">"vCard আমদানি করতে পারা যায় নি৷"</string>
+    <string name="nfc_vcard_file_name" msgid="7174382505002702431">"NFC এর মাধ্যমে পরিচিতি প্রাপ্ত হয়েছে"</string>
+    <string name="confirm_export_title" msgid="9164673124925342242">"পরিচিতিগুলি রপ্তানি করবেন?"</string>
+    <string name="caching_vcard_title" msgid="8092335276785174935">"ক্যাশ করা হচ্ছে"</string>
+    <string name="progress_notifier_message" msgid="2778542784808529164">"আমদানি করা হচ্ছে, <xliff:g id="CURRENT_NUMBER">%s</xliff:g>/<xliff:g id="TOTAL_NUMBER">%s</xliff:g>: <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="export_to_vcf_file" product="default" msgid="6148360234812424446">".vcf ফাইলে রপ্তানি করুন"</string>
+    <string name="display_options_sort_list_by" msgid="3541875948367831228">"এই অনুসারে বাছুন"</string>
+    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"প্রথম নাম"</string>
+    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"পদবি"</string>
+    <string name="display_options_view_names_as" msgid="4204204205736735618">"নামের বিন্যাস"</string>
+    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"প্রথমে প্রথম নামটি"</string>
+    <string name="display_options_view_family_name_first" msgid="987430497292428242">"প্রথমে উপাধি"</string>
+    <string name="default_editor_account" msgid="1826578934497338822">"নতুন পরিচিতিগুলির জন্য ডিফল্ট অ্যাকাউন্ট"</string>
+    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"পরিচিতির মেটাডাটা সিঙ্ক করুন [DOGFOOD]"</string>
+    <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"পরিচিতির মেটাডাটা সিঙ্ক করুন"</string>
+    <string name="setting_about" msgid="5253319937596745755">"পরিচিতি সম্পর্কিত"</string>
+    <string name="activity_title_settings" msgid="2398428034981372932">"সেটিংস"</string>
+    <string name="share_visible_contacts" msgid="6775120441469077620">"দৃশ্যমান পরিচিতিগুলিকে শেয়ার করুন"</string>
+    <string name="share_visible_contacts_failure" msgid="1365755167786055470">"দৃশ্যমান পরিচিতিগুলি শেয়ার করতে ব্যর্থ হয়েছে৷"</string>
+    <string name="share_favorite_contacts" msgid="9138011836074034817">"পছন্দসই পরিচিতিগুলি শেয়ার করুন"</string>
+    <string name="share_contacts" msgid="6505699963814423437">"সকল পরিচিতি শেয়ার করুন"</string>
+    <string name="share_contacts_failure" msgid="6027174424732204424">"পরিচিতিগুলিকে শেয়ার করতে ব্যর্থ হয়েছে৷"</string>
+    <string name="dialog_import_export" msgid="3052335055728876529">"পরিচিতিগুলি আমদানি/রপ্তানি করুন"</string>
+    <string name="dialog_import" msgid="8508508044485808554">"পরিচিতিগুলি আমদানি করুন"</string>
+    <string name="share_error" msgid="5642622973966851784">"এই পরিচিতিটিকে শেয়ার করা যাবে না৷"</string>
+    <string name="no_contact_to_share" msgid="9115223064368461904">"শেয়ার করার জন্য কোনো পরিচিতি নেই৷"</string>
+    <string name="menu_search" msgid="1241802591112035764">"অনুসন্ধান"</string>
+    <string name="hint_findContacts" msgid="1913556676649442295">"পরিচিতিগুলি খুঁজুন"</string>
+    <string name="contactsFavoritesLabel" msgid="5198982253222486561">"পছন্দগুলি"</string>
+    <string name="listTotalAllContactsZero" msgid="8436822729781033537">"কোনো পরিচিতি নেই৷"</string>
+    <string name="listTotalAllContactsZeroCustom" msgid="6072173682342248964">"কোনো দৃশ্যমান পরিচিতি নেই৷"</string>
+    <string name="listTotalAllContactsZeroStarred" msgid="5008410556001744528">"কোনো পছন্দসই নেই"</string>
+    <string name="listTotalAllContactsZeroGroup" msgid="6782377127075025237">"<xliff:g id="NAME">%s</xliff:g> এ কোনো পরিচিতি নেই"</string>
+    <string name="menu_clear_frequents" msgid="5358271535047496120">"পুনরাবৃত্তি সাফ করুন"</string>
+    <string name="menu_select_sim" msgid="3960197724339200637">"সিম কার্ড নির্বাচন করুন"</string>
+    <string name="menu_accounts" msgid="8092083497106343280">"অ্যাকাউন্টগুলি পরিচালনা করুন"</string>
+    <string name="menu_import_export" msgid="8834601882032781755">"আমদানি/রপ্তানি"</string>
+    <string name="contact_status_update_attribution" msgid="6042601531361543253">"<xliff:g id="SOURCE">%1$s</xliff:g> এর মাধ্যমে"</string>
+    <string name="contact_status_update_attribution_with_date" msgid="3448746388181727251">"<xliff:g id="SOURCE">%2$s</xliff:g> এর মাধ্যমে <xliff:g id="DATE">%1$s</xliff:g>"</string>
+    <string name="action_menu_back_from_search" msgid="3550669942742167644">"অনুসন্ধান বন্ধ করুন"</string>
+    <string name="description_clear_search" msgid="2347258825265600782">"অনুসন্ধান সাফ করুন"</string>
+    <string name="settings_contact_display_options_title" msgid="5535295687646503547">"পরিচিতি প্রদর্শনের বিকল্পগুলি"</string>
+    <string name="select_account_dialog_title" msgid="2673504582803359239">"অ্যাকাউন্ট"</string>
+    <string name="set_default_account" msgid="7966099951006467572">"কলের জন্য সবসময় এটি ব্যবহার করুন"</string>
+    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"এর মাধ্যমে কল করুন"</string>
+    <string name="call_with_a_note" msgid="6242261320491851133">"একটি নোট সহ কল করুন"</string>
+    <string name="call_subject_hint" msgid="7233138753650420800">"কলের সাথে পাঠানোর জন্য একটি নোট লিখুন ..."</string>
+    <string name="send_and_call_button" msgid="4735168294120154013">"পাঠান এবং কল করুন"</string>
+    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
+    <string name="call_subject_type_and_number" msgid="8726132674272173486">"<xliff:g id="TYPE">%1$s</xliff:g> • <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ট্যাব৷"</string>
+    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
+      <item quantity="one"> <xliff:g id="TITLE_2">%1$s</xliff:g> ট্যাব৷ <xliff:g id="COUNT_3">%2$d</xliff:g>টি অপঠিত আইটেম৷ </item>
+      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ট্যাব৷ <xliff:g id="COUNT_3">%2$d</xliff:g>টি অপঠিত আইটেম৷ </item>
+    </plurals>
+    <string name="about_build_version" msgid="6809677213570116689">"বিল্ডের সংস্করণ"</string>
+    <string name="about_open_source_licenses" msgid="9071344335180981674">"মুক্ত উৎস লাইসেন্সগুলি"</string>
+    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"ওপেন সোর্স সফ্টওয়্যারের লাইসেন্স বিবরণ"</string>
+    <string name="about_privacy_policy" msgid="120921692215934837">"গোপনীয়তা নীতি"</string>
+    <string name="about_terms_of_service" msgid="9004506174858804172">"পরিষেবার শর্তাবলী"</string>
+    <string name="activity_title_licenses" msgid="2416018204229261875">"মুক্ত উৎস লাইসেন্সগুলি"</string>
+    <string name="url_open_error_toast" msgid="3814442157861318482">"url খুলতে ব্যর্থ হয়েছে৷"</string>
+    <string name="description_search_video_call" msgid="7229218423556643079">"ভিডিও কল করুন"</string>
+</resources>

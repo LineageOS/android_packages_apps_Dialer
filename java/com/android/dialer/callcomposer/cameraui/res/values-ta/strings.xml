@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="camera_switch_full_screen" msgid="8940026902611470063">"முழுத் திரை கேமராவிற்கு மாறும்"</string>
+    <string name="camera_switch_camera_facing" msgid="6965029101223590384">"இப்போது முன்புறக் கேமராவைக் குறிக்கும் பொத்தான்"</string>
+    <string name="camera_switch_camera_rear" msgid="2518207979995455566">"இப்போது பின்புறக் கேமராவைக் குறிக்கும் பொத்தான்"</string>
+    <string name="camera_cancel_recording" msgid="1957458244979306869">"வீடியோ ரெக்கார்டு செய்யப்படுவதை நிறுத்தும்"</string>
+    <string name="using_front_camera" msgid="6734227994972108992">"முன்பக்கக் கேமராவைப் பயன்படுத்துகிறீர்கள்"</string>
+    <string name="using_back_camera" msgid="2143070243242164971">"பின்பக்கக் கேமராவைப் பயன்படுத்துகிறீர்கள்"</string>
+    <string name="camera_take_picture" msgid="2366908858042883376">"படமெடுக்கும்"</string>
+</resources>

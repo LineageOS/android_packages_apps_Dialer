@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"ഫ്ലൈറ്റ് മോഡ് ഓഫുചെയ്യുക"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"വിഷ്വൽ വോയ്‌സ്മെയിൽ സജീവമാക്കുന്നു"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പൂർണ്ണമായും സജീവമാകുന്നത് വരെ നിങ്ങൾക്ക് വോയ്‌സ്‌മെയിൽ അറിയിപ്പുകൾ ലഭിക്കാനിടയില്ല. വോയ്‌സ്‌മെയിൽ പൂർണ്ണമായും സജീവമാകുന്നത് വരെ പുതിയ സന്ദേശങ്ങൾ വീണ്ടെടുക്കാൻ വോയ്‌സ്‌മെയിലിലേക്ക് വിളിക്കുക."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാനാവുന്നില്ല"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"നിങ്ങളുടെ ഫോണിന് സെല്ലുലാർ കണക്ഷനുണ്ടെന്ന് ഉറപ്പാക്കി, വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കി, വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"കണക്ഷൻ ഇല്ല"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ വരുമ്പോൾ നിങ്ങളെ അറിയിക്കില്ല. നിങ്ങൾ Wi-Fi ഉപയോഗിക്കുകയാണെങ്കിൽ, ഇപ്പോൾ സമന്വയിപ്പിക്കുന്നതിലൂടെ വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാനാവും."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ വരുമ്പോൾ നിങ്ങളെ അറിയിക്കില്ല. വോയ്‌സ്‌മെയിൽ സമന്വയിപ്പിക്കാൻ ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ നിങ്ങളുടെ ഫോണിന് ഒരു സെല്ലുലാർ ഡാറ്റ കണക്ഷൻ ആവശ്യമാണ്."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാനാവുന്നില്ല"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട Wi-Fi അല്ലെങ്കിൽ സെല്ലുലാർ കണക്ഷൻ ലഭിക്കുമ്പോൾ, വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട സെല്ലുലാർ ഡാറ്റ കണക്ഷൻ ലഭിക്കുമ്പോൾ വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"ഇൻ‌ബോക്‌സ് ഏകദേശം നിറഞ്ഞു"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"ഇൻബോക്‌സ്‌ നിറഞ്ഞിരിക്കുകയാണെങ്കിൽ നിങ്ങൾക്ക് പുതിയ വോയ്‌സ്‌മെയിൽ സ്വീകരിക്കാനാവില്ല."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ സ്വീകരിക്കാനാകുന്നില്ല"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"നിങ്ങളുടെ ഇൻബോക്‌സ്‌ നിറഞ്ഞിരിക്കുകയാണ്. പുതിയ വോയ്‌സ്‌മെയിൽ സ്വീകരിക്കാൻ ചില സന്ദേശങ്ങൾ ഇല്ലാതാക്കുന്നത് പരീക്ഷിച്ചുനോക്കൂ."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"അധിക സ്‌റ്റോറേജും ബായ്‌ക്കപ്പും ഓണാക്കുക"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"നിങ്ങളുടെ മെയിൽബോക്‌സ് നിറഞ്ഞിരിക്കുന്നു. ഇടം സൃഷ്‌ടിക്കാൻ, അധിക സ്‌റ്റോറേജ് ഓണാക്കുക, തുടർന്ന് Google-ന് നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സന്ദേശങ്ങൾ മാനേജുചെയ്യാനും ബായ്‌ക്കപ്പെടുക്കാനുമാകും."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"അധിക സ്‌റ്റോറേജും ബായ്‌ക്കപ്പും ഓണാക്കുക"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"നിങ്ങളുടെ മെയിൽബോക്‌സ്‌ ഏകദേശം നിറഞ്ഞിരിക്കുന്നു. ഇടം സൃഷ്‌ടിക്കാൻ അധിക സ്‌റ്റോറേജ് ഓണാക്കുക, തുടർന്ന് Google-ന് നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സന്ദേശങ്ങൾ മാനേജുചെയ്യാനും ബായ്‌ക്കപ്പെടുക്കാനുമാകും."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"നിങ്ങളുടെ വോയ്‌സ്മെയിൽ പിൻ സജ്ജമാക്കുക"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"വോയ്‌സ്മെയിൽ ആക്‌സസ് ചെയ്യാൻ ശ്രമിക്കുമ്പോഴെല്ലാം നിങ്ങൾക്കൊരു വോയ്‌സ്‌മെയിൽ പിൻ ആവശ്യമാണ്."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"തിരിച്ചറിയാനാകാത്ത പിശക്"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ഫ്ലൈറ്റ് മോഡ് ക്രമീകരണം"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"പിൻ സജ്ജമാക്കുക"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"വീണ്ടും ശ്രമിക്കുക"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"ഓൺ ചെയ്യുക"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"വേണ്ട, നന്ദി"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"സമന്വയിപ്പിക്കുക"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"വോയ്‌സ്‌മെയിലിലേക്ക് വിളിക്കുക"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"കസ്‌റ്റമർ സപ്പോർട്ടിനെ വിളിക്കുക"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"ക്ഷമിക്കണം, ഒരു പ്രശ്‌നമുണ്ടായി. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g> എന്നതിൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9001 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"ക്ഷമിക്കണം, ഒരു പ്രശ്‌നമുണ്ടായി. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g> എന്നതിൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9002 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"ക്ഷമിക്കണം, ഒരു പ്രശ്‌നമുണ്ടായി. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g> എന്നതിൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9003 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യാനാവുന്നില്ല"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"ക്ഷമിക്കണം, നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യുന്നതിൽ പ്രശ്‌നം നേരിട്ടു. വളരെ മോശം സിഗ്നലുള്ള ഒരിടത്താണ് നിങ്ങളെങ്കിൽ, സിഗ്നൽ ദൃഢത വർദ്ധിക്കുന്നത് വരെ കാത്തിരിക്കുക. തുടർന്ന് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g> എന്നതിൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9004 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യാനാവുന്നില്ല"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"ക്ഷമിക്കണം, നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യുന്നതിൽ പ്രശ്‌നം നേരിട്ടു. വളരെ മോശം സിഗ്നലുള്ള ഒരിടത്താണ് നിങ്ങളെങ്കിൽ, സിഗ്നൽ ദൃഢത വർദ്ധിക്കുന്നത് വരെ കാത്തിരിക്കുക. തുടർന്ന് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9005 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യാനാവുന്നില്ല"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"ക്ഷമിക്കണം, നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യുന്നതിൽ പ്രശ്‌നം നേരിട്ടു. വളരെ മോശം സിഗ്നലുള്ള ഒരിടത്താണ് നിങ്ങളെങ്കിൽ, സിഗ്നൽ ദൃഢത വർദ്ധിക്കുന്നത് വരെ കാത്തിരിക്കുക. തുടർന്ന് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9006 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"ക്ഷമിക്കണം, ഒരു പ്രശ്‌നമുണ്ടായി. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9007 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"ക്ഷമിക്കണം, ഒരു പ്രശ്‌നമുണ്ടായി. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9008 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"ക്ഷമിക്കണം, നിങ്ങൾക്കുള്ള സേവനം സജ്ജമാക്കുന്നതിൽ പ്രശ്‌നം നേരിട്ടു. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9009 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സിൽ കണക്‌റ്റുചെയ്യാനാവുന്നില്ല"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"ക്ഷമിക്കണം, ഇപ്പോൾ നിങ്ങളുടെ വോയ്‌സ് മെയിൽബോക്‌സുമായി കണക്‌റ്റുചെയ്യാനാവുന്നില്ല. പിന്നീട് വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9990 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"വോയ്‌സ്മെയിൽ സജ്ജമാക്കുക"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"നിങ്ങളുടെ അക്കൗണ്ടിൽ വോയ്‌സ്‌മെയിൽ സജ്ജമാക്കിയിട്ടില്ല. <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9991 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"വോയ്‌സ്‌ മെയിൽ"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"ഈ ഉപകരണത്തിൽ വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഉപയോഗിക്കാനാകുന്നില്ല. <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9992 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"<xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9993 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"വിഷ്വൽ വോയ്‌സ്‌ മെയിൽ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജ്ജമാക്കുന്നത് പൂർത്തിയാക്കാൻ, <xliff:g id="NUMBER">%1$s</xliff:g> എന്നതിൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9994 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"വിഷ്വൽ വോയ്‌സ്‌ മെയിൽ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജ്ജമാക്കുന്നത് പൂർത്തിയാക്കാൻ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9995 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"വിഷ്വൽ വോയ്‌സ്‌ മെയിൽ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാൻ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9995 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജ്ജമാക്കുന്നത് പൂർത്തിയാക്കാൻ, <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9998 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പ്രവർത്തനരഹിതമാക്കി"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാൻ <xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെടുക."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"<xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9997 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"<xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9989 ആണെന്ന് പറയുക."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"<xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9999 ആണെന്ന് പറയുക."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"വിഷ്വൽ വോയ്‌സ് മെയിൽ നിബന്ധനകളും വ്യവസ്ഥകളും"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"വിഷ്വൽ വോയ്‌സ് മെയിൽ ഉപയോഗിക്കാൻ, നിങ്ങൾ Verizon Wireless-ന്റെ നിബന്ധനകളും വ്യവസ്ഥകളും അംഗീകരിക്കേണ്ടതുണ്ട്:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"നിബന്ധനകളും വ്യവസ്ഥകളും നിരസിക്കപ്പെട്ടാൽ വിഷ്വൽ വോയ്‌സ്‌ മെയിൽ പ്രവർത്തനരഹിതമാവും."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"വിഷ്വൽ വോയ്‌സ്‌‌മെയിൽ പ്രവർത്തനരഹിതമാക്കുക"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*86-ൽ വിളിച്ച്‌ മാത്രമേ വോയ്‌സ്‌മെയിൽ ആക്‌സസ്‌ ചെയ്യാനാവൂ. തുടരാൻ, പുതിയൊരു വോയ്‌സ്‌മെയിൽ പിൻ‌ നമ്പർ‌ സജ്ജമാക്കുക."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"പിൻ സജ്ജമാക്കുക"</string>
+</resources>

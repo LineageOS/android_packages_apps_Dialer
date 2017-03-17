@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="videocall_remote_video_off" msgid="2959680546745902547">"对方的视频画面已关闭"</string>
+    <string name="videocall_remote_video_on" msgid="6011817851703181639">"对方已开启视频功能"</string>
+    <string name="videocall_remotely_held" msgid="1295702896355732947">"保持的通话"</string>
+    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"通话已恢复"</string>
+    <string name="camera_permission_dialog_title" msgid="4901760354830982117">"允许使用摄像头？"</string>
+    <string name="camera_permission_dialog_message" msgid="2677490854794162699">"“电话”应用需要使用摄像头进行视频通话。"</string>
+    <string name="camera_permission_dialog_positive_button" msgid="9075818030671161374">"允许"</string>
+    <string name="camera_permission_dialog_negative_button" msgid="7538535842403837541">"拒绝"</string>
+</resources>

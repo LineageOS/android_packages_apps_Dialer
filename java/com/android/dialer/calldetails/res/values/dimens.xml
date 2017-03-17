@@ -15,9 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="text_bottom_margin">2dp</dimen>
   <dimen name="call_details_primary_text_size">16sp</dimen>
   <dimen name="call_details_secondary_text_size">14sp</dimen>
+  <dimen name="call_details_top_margin">6dp</dimen>
 
   <!-- contact container -->
   <dimen name="contact_container_padding">16dp</dimen>

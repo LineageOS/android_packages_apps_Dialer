@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Vypnúť režim v lietadle"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktivuje sa vizuálna hlasová schránka"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kým nebude vizuálna hlasová schránka úplne aktivovaná, pravdepodobne nebudete dostávať upozornenia hlasovej schránky. Kým nebude hlasová schránka úplne aktivovaná, nové správy môžete načítať zavolaním do hlasovej schránky."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Vizuálna hlasová schránka sa nedá aktivovať"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Skontrolujte, či má telefón mobilné pripojenie, a skúste to znova."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Vypnite režim v lietadle a skúste to znova."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Žiadne pripojenie"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Nedostanete upozornenia na nové hlasové správy. Ak používate Wi-Fi, synchronizáciou môžete skontrolovať hlasovú schránku."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Nedostanete upozornenia na nové hlasové správy. Vypnite režim v lietadle a synchronizujte hlasovú schránku."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Na kontrolu hlasovej schránky potrebuje telefón mobilné dátové pripojenie."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Vizuálna hlasová schránka sa nedá aktivovať"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Skúste to znova, keď budete mať lepšie pripojenie cez Wi-Fi alebo lepšie mobilné pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Skúste to znova, keď budete mať lepšie mobilné dátové pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Doručená pošta je takmer plná"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"S plnou doručenou poštou nebudete môcť prijímať nové hlasové správy."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Nemôžete prijímať nové hlasové správy"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Máte plnú doručenú poštu. Skúste odstrániť niekoľko správ, aby ste mohli prijať novú hlasovú správu."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Zapnite si ďalšie úložisko a zálohovanie"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Poštovú schránku máte plnú. Ak chcete uvoľniť miesto, zapnite si ďalšie úložisko, aby mohol Google spravovať a zálohovať vaše hlasové správy."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Zapnite si ďalšie úložisko a zálohovanie"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Poštovú schránku máte takmer plnú. Ak chcete uvoľniť miesto, zapnite si ďalšie úložisko, aby mohol Google spravovať a zálohovať vaše hlasové správy."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Nastaviť kód PIN hlasovej schránky"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Kód PIN hlasovej schránky budete potrebovať vždy, keď zavoláte do svojej hlasovej schránky."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Neznáma chyba"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Nastavenia režimu v lietadle"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"Nastaviť kód PIN"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Skúsiť znova"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Zapnúť"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Nie, ďakujem"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Synchronizovať"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Volať do hlasovej schránky"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Volať podporu zákazníka"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Ľutujeme, vyskytol sa problém. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9001."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Ľutujeme, vyskytol sa problém. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9002."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Ľutujeme, vyskytol sa problém. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9003."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Nedá sa pripojiť k vašej hlasovej poštovej schránke"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Ľutujeme, máme problémy s pripojením k vašej hlasovej poštovej schránke. Ak sa nachádzate v oblasti so slabým signálom, počkajte, kým nebudete mať silný signál, a skúste to znova. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9004."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Nedá sa pripojiť k vašej hlasovej poštovej schránke"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Ľutujeme, máme problémy s pripojením k vašej hlasovej poštovej schránke. Ak sa nachádzate v oblasti so slabým signálom, počkajte, kým nebudete mať silný signál, a skúste to znova. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9005."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Nedá sa pripojiť k vašej hlasovej poštovej schránke"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Ľutujeme, máme problémy s pripojením k vašej hlasovej poštovej schránke. Ak sa nachádzate v oblasti so slabým signálom, počkajte, kým nebudete mať silný signál, a skúste to znova. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9006."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Ľutujeme, vyskytol sa problém. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9007."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Ľutujeme, vyskytol sa problém. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9008."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Ľutujeme, máme problémy s nastavením vašej služby. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9009."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Nedá sa pripojiť k vašej hlasovej poštovej schránke"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Ľutujeme, momentálne sa nemôžeme pripojiť k vašej hlasovej poštovej schránke. Skúste to znova neskôr. Ak bude problém pretrvávať, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9990."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Nastavenie hlasovej schránky"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Váš účet nemá nastavenú hlasovú schránku. Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9991."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Hlasová schránka"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"V tomto zariadení nie je možné používať vizuálnu hlasovú schránku. Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9992."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9993."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Vizuálna hlasová schránka"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Ak chcete dokončiť nastavenie vizuálnej hlasovej schránky, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Vizuálna hlasová schránka"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Ak chcete dokončiť nastavenie vizuálnej hlasovej schránky, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Vizuálna hlasová schránka"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Ak chcete aktivovať vizuálnu hlasovú schránku, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9996."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Ak chcete dokončiť nastavenie vizuálnej hlasovej schránky, obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Vizuálna hlasová schránka je vypnutá"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a požiadajte o aktiváciu vizuálnej hlasovej schránky."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9997."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9989."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Vyskytol sa problém"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9999."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Zmluvné podmienky vizuálnej hlasovej schránky"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Ak chcete používať vizuálnu hlasovú schránku, je nutné prijať zmluvné podmienky spoločnosti Verizon Wireless:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"V prípade odmietnutia zmluvných podmienok bude vizuálna hlasová schránka zakázaná."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Zakázať vizuálnu hlasovú schránku"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Hlasová schránka bude k dispozícii len po zavolaní na číslo *86. Ak chcete pokračovať, nastavte nový PIN hlasovej schránky."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Nastavenie kódu PIN"</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_content_description_end_call" msgid="8232796487777787200">"통화 종료"</string>
+    <string name="incall_content_description_muted" msgid="2130133443150389474">"음소거됨"</string>
+    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"음소거 해제됨"</string>
+    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"통화 전환"</string>
+    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"통화 병합"</string>
+    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"핸드셋 수화부"</string>
+    <string name="incall_content_description_speaker" msgid="7837829930201265549">"스피커"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"블루투스"</string>
+    <string name="incall_content_description_headset" msgid="3170439802944346719">"유선 헤드셋"</string>
+    <string name="incall_content_description_hold" msgid="3335508251734906019">"통화 대기"</string>
+    <string name="incall_content_description_unhold" msgid="3862584118869933593">"통화 재개"</string>
+    <string name="incall_content_description_video_on" msgid="899266487647420613">"동영상 켜짐"</string>
+    <string name="incall_content_description_video_off" msgid="762985912616707076">"동영상 꺼짐"</string>
+    <string name="incall_content_description_swap_video" msgid="297943299827908998">"동영상 전환"</string>
+</resources>

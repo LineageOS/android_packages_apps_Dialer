@@ -71,11 +71,12 @@ public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
       ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.number);
     } else {
       CallDetailsEntryViewHolder viewHolder = (CallDetailsEntryViewHolder) holder;
+      CallDetailsEntry entry = callDetailsEntries[position - 1];
       viewHolder.setCallDetails(
           contact.number,
-          callDetailsEntries[position - 1],
+          entry,
           callTypeHelper,
-          position != getItemCount() - 2);
+          entry.historyResults.length > 0 && position != getItemCount() - 2);
     }
   }
 

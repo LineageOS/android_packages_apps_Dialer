@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefonas"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Konferencinis skambutis"</string>
+    <string name="call_lost" msgid="2082971531689406145">"Skambutis atmestas"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Siųsti šiuo tonus?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Siunčiami tonai\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Siųsti"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Taip"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Ne"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Pakaitos simbolį pakeisti"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Konferencinis skambutis <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Balso pašto numeris"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Renkamas numeris"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Praleistas skambutis nuo <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Vykstantis pokalbis"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Vykstantis darbo skambutis"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Vykstantis „Wi-Fi“ skambutis"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Vykstantis „Wi-Fi“ darbo skambutis"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Sulaikyta"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Gaunamasis skambutis"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Gaunamasis darbo skambutis"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Gaunamasis „Wi-Fi“ skambutis"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Gaunamasis „Wi-Fi“ darbo skambutis"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Gaunamasis įtartinas šlamšto skambutis"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Gaunama vaizdo skambučio užklausa"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"Naujas balso pašto pranešimas"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Naujas balso pašto pranešimas (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Rinkti <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Nežinomas balso pašto numeris"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Nėra paslaugos"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"Pasirinktas tinklas (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) negalimas"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Atsakyti"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Padėti ragelį"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Vaizdo skambutis"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Balsas"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Atsiliepti"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Atmesti"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Kitame įrenginyje vykstantis skambutis"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"Kitame įrenginyje vykstantis vaizdo skambutis"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Atlikti skambutį"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Atlikti vaizdo skambutį"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Jei norite skambinti, išjunkite lėktuvo režimą."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Neregistruota tinkle."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"Korinis tinklas nepasiekiamas"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Kad galėtumėte paskambinti, įveskite tinkamą numerį."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"Nepavyko paskambinti."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Paleidžiama MMI seka..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Paslauga nepalaikoma."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Nepavyko perjungti skambučių."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Nepavyko atskirti skambučio."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Nepavyko peradresuoti."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Nepavyko sukurti konferencijos."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Nepavyko atmesti skambučio."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Nepavyko atjungti skamb."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Skambutis pagalbos numeriu"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Įjungiamas radijas…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Nėra ryšio. Bandoma dar kartą…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"Nepavyko paskambinti. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nėra pagalbos numeris."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"Nepavyko paskambinti. Surinkite pagalbos numerį."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Naudokite klaviatūrą ir rinkite numerius"</string>
+    <string name="player_started" msgid="9177182657338033086">"Leistuvė paleista"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"Leistuvė sustabdyta"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"Fotoaparatas neparuoštas"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"Fotoaparatas paruoštas"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Nežinomas skambučio sesijos įvykis"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Kiti skambučio nustatymai"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"naudoti privatų režimą"</string>
+    <string name="selectContact" msgid="1703433172800564849">"pasirinkti kontaktą"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Skambėjimo tonas ir vibravimas"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Tvarkyti konferencinį skambutį"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Pagalbos numeris"</string>
+    <string name="child_number" msgid="3398257437107259682">"naudojant <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Naujausi pranešimai"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"Verslo informacija"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"Už <xliff:g id="DISTANCE">%.1f</xliff:g> myl."</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"Už <xliff:g id="DISTANCE">%.1f</xliff:g> km"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Rytoj atidaroma <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Šiandien atidaroma <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Uždaroma <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Šiandien uždaryta <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Dabar atidaryta"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Dabar uždaryta"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"Pažįstate numerį <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"Ar numeris <xliff:g id="NUMBER">%1$s</xliff:g> yra šlamšto siuntėjas?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"Numeris <xliff:g id="NUMBER">%1$s</xliff:g> užblokuotas ir apie skambutį buvo pranešta kaip apie šlamštą."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"Apie skambutį iš numerio <xliff:g id="NUMBER">%1$s</xliff:g> buvo pranešta kaip ne apie šlamštą."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Palieskite, kad pridėtumėte prie kontaktų arba blokuotumėte numerį kaip šlamšto siuntėją."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"Tai pirmas kartas, kai jums buvo skambinama iš šio numerio. Jei šis skambutis buvo šlamštas, galite užblokuoti šį numerį ir apie jį pranešti."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"Palieskite, kad praneštumėte kaip apie NE ŠLAMŠTĄ arba užblokuotumėte."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Įtarėme, kad tai yra šlamšto siuntėjas. Jei šis skambutis nebuvo šlamštas, palieskite NE ŠLAMŠTAS, kad praneštumėte apie mūsų klaidą."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Blokuoti ir pranešti"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Pridėti kontaktą"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Ne šlamštas"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Blokuoti numerį"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Pridėti prie kontaktų"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Blokuoti ir pranešti apie šlamštą"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Ne šlamštas"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Nėra SIM kortelės arba įvyko SIM kortelės klaida"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Baigti skambutį"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Konferencinis skambutis"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"Skambinant"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Skambutis tęsiamas naudojant mobiliojo ryšio duomenis…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Nepavyko prisijungti prie „Wi-Fi“ tinklo"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Vaizdo skambutis ir toliau bus vykdomas naudojant mobiliojo ryšio tinklą. Gali būti taikomi įprasti duomenų mokesčiai."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Daugiau to nerodyti"</string>
+</resources>

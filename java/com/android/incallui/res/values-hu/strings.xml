@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Konferenciahívás"</string>
+    <string name="call_lost" msgid="2082971531689406145">"A hívás megszakadt"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Elküldi a következő hangjelzéseket?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Hangjelzések küldése\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Küldés"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Igen"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Nem"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Helyettesítő karakter lecserélése a következővel:"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Konferenciahívás: <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Hangposta száma"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Tárcsázás"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Nem fogadott hívás: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Hívás folyamatban"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Folyamatban lévő munkahelyi hívás"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Folyamatban lévő Wi-Fi-hívás"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Folyamatban lévő munkahelyi hívás Wi-Fin keresztül"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Tartásban"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Bejövő hívás"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Bejövő munkahelyi hívás"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Beérkező Wi-Fi-hívás"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Bejövő munkahelyi hívás Wi-Fin keresztül"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Bejövő gyanús spamhívás"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Bejövő videokérés"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"Új hangposta"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Új hangpostaüzenet (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> tárcsázása"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"A hangposta száma ismeretlen"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Nincs szolgáltatás"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"A kiválasztott hálózat (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nem érhető el"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Fogadás"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Hívás befejezése"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Videó"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Hang"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Elfogadás"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Elutasítás"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Folyamatban lévő hívás egy másik eszközön"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"Folyamatban lévő videohívás egy másik eszközön"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Hívás fogadása"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Videohívás fogadása"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Híváskezdeményezéshez kapcsolja ki a Repülőgép üzemmódot."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Nincs regisztrálva a hálózaton."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"A mobilhálózat nem érhető el."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Hívásindításhoz adjon meg egy érvényes számot."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"A hívás sikertelen."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI-sorozat indítása..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"A szolgáltatás nem támogatott."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"A hívások közötti váltás sikertelen."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"A híváselkülönítés sikertelen."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Az átirányítás sikertelen."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"A konferenciahívás sikertelen."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"A híváselutasítás sikertelen."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"A tartásban lévő hívás(ok) folytatása sikertelen."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Segélyhívás"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Rádió bekapcsolása..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Nincs szolgáltatás. Újrapróbálkozás folyamatban…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"A hívás sikertelen. A(z) <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> szám nem segélyhívószám."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"A hívás sikertelen. Tárcsázzon segélyhívószámot."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"A tárcsázáshoz használja a billentyűzetet"</string>
+    <string name="player_started" msgid="9177182657338033086">"A lejátszó elindult"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"A lejátszó leállt"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"A kamera nem áll készen"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"A kamera készen áll"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Ismeretlen hívási esemény"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Egyéb hívásbeállítások"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"magánbeszélgetés"</string>
+    <string name="selectContact" msgid="1703433172800564849">"névjegy kijelölése"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Csengőhang és rezgés"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Konferenciahívás kezelése"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Segélyhívó szám"</string>
+    <string name="child_number" msgid="3398257437107259682">"a következő számon keresztül: <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Legutóbbi üzenetek"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"Cég adatai"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> mérföldre"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> kilométerre"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Holnap ekkor nyit: <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Ma ekkor nyit: <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Ekkor zár: <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Zárva ma ekkor: <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Jelenleg nyitva van"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Jelenleg zárva van"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"Ismeri a következő számot: <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"Spam ez a szám: <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"Letiltotta a(z) <xliff:g id="NUMBER">%1$s</xliff:g> számot, és bejelentette a hívást spamként."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"A(z) <xliff:g id="NUMBER">%1$s</xliff:g> számról érkező hívást bejelentette nem spamként."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Koppintson a névjegyekhez való hozzáadáshoz vagy a spamszám letiltásához."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"Ez az első alkalom, hogy erről a számról hívása érkezett. Ha a hívás spam, letilthatja és bejelentheti a számot."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"Koppintson a nem spamként való bejelentéshez vagy a letiltáshoz."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Azt gyanítottuk, hogy ez egy spamszám. Ha a hívás nem spam volt, koppintson a NEM SPAM elemre a hiba bejelentéséhez."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Tiltás és bejelentés"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Névjegy hozzáadása"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Nem spam"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Szám letiltása"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Hozzáadás a névjegyekhez"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Letiltás és spam bejelentése"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Nem spam"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Hiányzó vagy hibás SIM kártya"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Hívás befejezése"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Konferenciahívás"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"Hívásban"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Hívás folytatása mobil-adatkapcsolaton keresztül…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Nem sikerült Wi-Fi-hálózatra váltani"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"A videohívást továbbra is a mobilhálózaton folytatja. A mobilszolgáltató a normál adatforgalmi díjat számítja fel."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne jelenjen meg többé"</string>
+</resources>

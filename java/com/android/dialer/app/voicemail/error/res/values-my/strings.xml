@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"လေယာဉ်ပျံမုဒ်ပိတ်ရန်"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"မြင်နိုင်သောအသံမေးလ်ကို ဖွင့်နေသည်"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"မြင်ရသောအသံမေးလ်ကို အပြည့်အဝစမဖွင့်သရွေ့ အသံမေးလ်အကြောင်းကြားချက်များကို လက်ခံရရှိနိုင်မည်မဟုတ်ပါ။ အသံမေးလ်ကို အပြည့်အဝစဖွင့်မပြီးမချင်း မက်ဆေ့ဂျ်အသစ်များရယူရန် အသံမေးလ်ခေါ်ဆိုပါ။"</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"မြင်ရသောအသံမေးလ်ကို ဖွင့်၍မရပါ"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"သင့်ဖုန်းတွင် ဆယ်လူလာချိတ်ဆက်မှုရှိကြောင်း စစ်ဆေး၍ ထပ်စမ်းကြည့်ပါ။"</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"လေယာဉ်ပျံမုဒ်ပိတ်၍ ထပ်စမ်းကြည့်ပါ။"</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ချိတ်ဆက်မှုမရှိပါ"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"အသံမေးလ်အသစ်များအတွက် သင့်ကို အကြောင်းကြားလိမ့်မည်မဟုတ်ပါ။ Wi-Fi သုံးနေပါက ယခုပင် ပြိုင်တူညှိခြင်းဖြင့် အသံမေးလ်ကို စစ်ဆေးနိုင်ပါသည်။"</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"အသံမေးလ်အသစ်များအတွက် သင့်ကို အကြောင်းကြားလိမ့်မည်မဟုတ်ပါ။ သင့်အသံမေးလ်ပြိုင်တူညှိရန် လေယာဉ်ပျံမုဒ်ပိတ်ပါ။"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"အသံမေးလ်စစ်ရန်အတွက် သင့်ဖုန်းတွင် ဆယ်လူလာဒေတာချိတ်ဆက်မှုတစ်ခု လိုပါသည်။"</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"မြင်ရသောအသံမေးလ် ဖွင့်၍မရပါ"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"မြင်ရသောအသံမေးလ်ကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"သင်၏ Wi-Fi (သို့) ဆယ်လူလာချိတ်ဆက်မှု လိုင်းပိုကောင်းမှ ထပ်စမ်းကြည့်ပါ။ အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"သင်၏ဆယ်လူလာချိတ်ဆက်မှု လိုင်းပိုကောင်းမှ ထပ်စမ်းကြည့်ပါ။ အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"မြင်ရသောအသံမေးလ်ကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"မြင်ရသောအသံမေးလ်ကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"မြင်ရသောအသံမေးလ်ကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"မြင်ရသောအသံမေးလ်ကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"အသံမေးလ်စစ်ရန်အတွက် ဖုန်းခေါ်နိုင်ပါသေးသည်။"</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"ဝင်စာပြည့်ခါနီးပြီ"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"သင့်ဝင်စာပြည့်နေပါက အသံမေးလ်အသစ်များ လက်ခံရယူနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"အသံမေးလ်အသစ် လက်ခံ၍မရပါ"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"သင့်ဝင်စာပြည့်နေပါသည်။ အသံမေးလ်အသစ်များ လက်ခံရယူနိုင်ရန် မက်ဆေ့ဂျ်အချို့ဖျက်ကြည့်ပါ။"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"အပိုသိုလှောင်မှုနှင့် မိတ္တူ ဖွင့်ရန်"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"သင့်ဝင်စာ ပြည့်နေပါပြီ။ နေရာလွတ်ရရှိရန်အတွက် Google က သင်၏အသံမေးလ်မက်ဆေ့ဂျ်များကို စီမံခန့်ခွဲပြီး မိတ္တူကူးနိုင်ရန် အပိုသိုလှောင်မှုကို ဖွင့်ပါ။"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"အပိုသိုလှောင်မှုနှင့် မိတ္တူ ဖွင့်ရန်"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"သင့်ဝင်စာ ပြည့်လုပါပြီ။ နေရာလွတ်ရရှိရန်အတွက် Google က သင်၏အသံမေးလ်မက်ဆေ့ဂျ်များကို စီမံခန့်ခွဲပြီး မိတ္တူကူးနိုင်ရန် အပိုသိုလှောင်မှုကို ဖွင့်ပါ။"</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"သင်၏အသံမေးလ်ပင်နံပါတ် သတ်မှတ်ပါ"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"သင်၏အသံမေးလ်ကို သုံးစွဲရန်အတွက် သင်ခေါ်ဆိုသည့်အခါတိုင်း အသံမေးလ်ပင်နံပါတ်တစ်ခု လိုအပ်ပါမည်။"</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"အမျိုးအမည်မသိမှားယွင်းမှု"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"လေယာဉ်ပျံမုဒ်ဆက်တင်များ"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"ပင်နံပါတ်သတ်မှတ်ပါ"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"ထပ်စမ်းကြည့်ရန်"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"ဖွင့်ရန်"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"မလိုပါ"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"ပြိုင်တူညှိရန်"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"အသံမေးလ်ခေါ်ဆိုရန်"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"သုံးစွဲသူဝန်ဆောင်ရေးကို ခေါ်ဆိုရန်"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၁ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၂ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၃ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရပါ"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရသောကြောင့် ဝမ်းနည်းပါသည်။ လိုင်းမကောင်းသောနေရာတွင် သင်ရောက်ရှိနေပါက လိုင်းကောင်းသည်အထိစောင့်ပြီးမှ ထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၄ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရပါ"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရသောကြောင့် ဝမ်းနည်းပါသည်။ လိုင်းမကောင်းသောနေရာတွင် သင်ရောက်ရှိနေပါက လိုင်းကောင်းသည်အထိစောင့်ပြီးမှ ထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၅ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရပါ"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရသောကြောင့် ဝမ်းနည်းပါသည်။ လိုင်းမကောင်းသောနေရာတွင် သင်ရောက်ရှိနေပါက လိုင်းကောင်းသည်အထိစောင့်ပြီးမှ ထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၆ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၇ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၈ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"သင့်ဝန်ဆောင်မှုကို ပြင်ဆင်ပေးရာတွင် ပြဿနာတစ်ခုရှိနေသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၀၀၉ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"သင့်အသံဝင်စာနှင့် ချိတ်ဆက်၍မရပါ"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"သင့်အသံဝင်စာနှင့် ယခုချိတ်ဆက်၍မရသဖြင့် တောင်းပန်ပါသည်။ နောက်မှထပ်စမ်းကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၀ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"အသံမေးလ်ပြင်ဆင်ရန်"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"သင့်အကောင့်တွင် အသံမေးလ်ပြင်ဆင်မထားပါ။ သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၁ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"အသံမေးလ်"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"ဤကိရိယာတွင် မြင်ရသောအသံမေးလ် မသုံးနိုင်ပါ။ သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၂ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၃ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"မြင်ရသောအသံမေးလ်"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"မြင်ရသောအသံမေးလ်ပြင်ဆင်မှု အပြီးသတ်ရန် သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၄ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"မြင်ရသောအသံမေးလ်"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"မြင်ရသောအသံမေးလ်ပြင်ဆင်မှု အပြီးသတ်ရန် သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၅ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"မြင်ရသောအသံမေးလ်"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"မြင်ရသောအသံမေးလ်စဖွင့်ရန် သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၆ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"မြင်ရသောအသံမေးလ်ပြင်ဆင်မှု အပြီးသတ်ရန် သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၈ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"မြင်ရသောအသံမေးလ် ပိတ်ထားသည်"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"မြင်ရသောအသံမေးလ်စဖွင့်ရန် သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပါ။"</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၇ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၈၉ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"တစ်စုံတစ်ခု လွဲချော်နေပါသည်"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"သုံးစွဲသူဝန်ဆောင်ရေးကို <xliff:g id="NUMBER">%1$s</xliff:g> တွင် ဆက်သွယ်ပြီး အမှားအယွင်းကုဒ်သည် ၉၉၉၉ ဖြစ်ကြောင်း ပြောပါ။"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"မြင်နိုင်သောအသံမေးလ် ဝန်ဆောင်မှုဆိုင်ရာစည်းမျဉ်းများ"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"သင်သည် မြင်နိုင်သောအသံမေးလ်ကို အသုံးပြုရန် Verizon Wireless ၏ ဝန်ဆောင်မှုဆိုင်ရာစည်းမျဉ်းများကို လက်ခံရပါမည် - \n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"ဝန်ဆောင်မှုဆိုင်ရာစည်းမျဉ်းများကို ငြင်းပယ်ပါက မြင်နိုင်သောအသံမေးလ်ကို ပိတ်ပစ်ပါလိမ့်မည်။"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"မြင်နိုင်သောအသံမေးလ် ပိတ်ပါ"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*၈၆ သို့ ခေါ်ဆိုခြင်းဖြင့်သာ အသံမေးလ်ကို ဝင်သုံးနိုင်ပါမည်။ ဆက်သွားရန် အသံမေးလ်ပင်နံပါတ်အသစ်ကို သတ်မှတ်ပါ။"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ပင်နံပါတ်ကို သတ်မှတ်ပါ"</string>
+</resources>

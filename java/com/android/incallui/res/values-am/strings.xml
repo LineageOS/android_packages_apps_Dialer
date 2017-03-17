@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ስልክ"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"የስብሰባ ጥሪ"</string>
+    <string name="call_lost" msgid="2082971531689406145">"ጥሪው ተቋርጧል።"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"የሚከተሉትንድምፆች ላክ?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"ድምፆች በመላክ ላይ \n"</string>
+    <string name="send_button" msgid="6976782353456252579">"ላክ"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"አዎ"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"አይ"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"የልቅ ምልክት ተካ በ"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"የስብሰባ ጥሪ<xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"የድምፅ መልዕክት ቁጥር"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"በመደወል ላይ"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"ያልተመለሰ ጥሪ ከ<xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"እየተካሄደ ያለ ጥሪ"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"በሂደት ላይ ያለ የሥራ ጥሪ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"በሂደት ላይ ያለ የWi-Fi ጥሪ"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"በሂደት ላይ ያለ የWi-Fi የሥራ ጥሪ"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"ያዝናቆይ"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"ገቢ ጥሪ"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ገቢ የሥራ ጥሪ"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ገቢ የWi-Fi ጥሪ"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ገቢ የWi-Fi የሥራ ጥሪ"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"መጪ የተጠረጠረ የአይፈለጌ መልዕክት ጥሪ"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"ገቢ የቪዲዮ ጥያቄ"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"አዲስ የድምፅ መልዕክት"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"አዲስ የድምፅ መልዕክት<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"ደውል <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"የማይታወቅ የድምፅ መልዕክት ቁጥር"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"ምንም አገልግሎት የለም"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"የተመረጠ አውታረመረብ(<xliff:g id="OPERATOR_NAME">%s</xliff:g>) የለም"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"መልስ"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"ዝጋ"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"ቪድዮ"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"ድምፅ"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"ተቀበል"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"አትቀበል"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"በሌላ መሳሪያ ጥሪ በመካሄድ ላይ ነው"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"በሌላ መሣሪያ ላይ እየተካሄደ ያለ የቪዲዮ ጥሪ"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"ጥሪ ውሰድ"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"የቪዲዮ ጥሪ ውሰድ"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"ለመደወል፣ መጀመሪያየአውሮፕላኑን ሁነታ አጥፋ።"</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"በአውታረ መረቡ ላይ አልተመዘገበም።"</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"የተንቀሳቃሽ ስልክ አውታረ መረብ አይገኝም።"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"አንድ ጥሪ ለማድረግ የሚሰራ ቁጥር ያስገቡ።"</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"መደወል አልተቻለም።"</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"የMMI sequence…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"አገልግሎት አይደገፍም።"</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"ጥሪዎችን መቀያየር አልተቻለም።"</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"ጥሪን መለየት አልተቻለም።"</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"ማስተላለፍ አልተቻለም።"</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"የጉባዔ ጥሪ ማድረግ አልተቻለም።"</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"ጥሪውን መዝጋት አልተቻለም።"</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"ጥሪ(ዎች)ን መልቀቅ አልተቻለም።"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"የአደጋ ጊዜ ጥሪ"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"ሬዲዮ ክፈት"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"ምንም አገልግሎት የለም። ዳግም በመሞከር ላይ…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"መደወል አይቻልም። <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> የአስቸኳይ አደጋ ቁጥር አይደለም።"</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"መደወል አልተቻለም። ወደ የአስቸኳይ አደጋ ቁጥር ይደውሉ።"</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"ለመደወል የሰሌዳ ቁልፍ ተጠቀም"</string>
+    <string name="player_started" msgid="9177182657338033086">"አጫዋች ጀምሯል"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"አጫዋች ቆሟል"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"ካሜራ ዝግጁ አይደለም"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"ካሜራ ዝግጁ ነው"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"ያልታወቀ የጥሪ ክፍለጊዜ ክስተት"</string>
+    <string name="other_settings" msgid="2537377721890761197">"ሌላ ጥሪ ቅንብሮች"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"ወደ ብሕታዊነት ሂድ"</string>
+    <string name="selectContact" msgid="1703433172800564849">"ዕውቂያ ምረጥ"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"የጥሪ ቅላፄ እና ንዝረት"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"የስብሰባ ስልክ ጥሪ አደራጅ"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"የአደጋ ጊዜ ቁጥር"</string>
+    <string name="child_number" msgid="3398257437107259682">"በ<xliff:g id="CHILD_NUMBER">%s</xliff:g> በኩል"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"የቅርብ ጊዜ መልዕክቶች"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"የንግድ መረጃ"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> ማይል ርቀት ላይ"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> ኪሜ ርቀት ላይ"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>፣ <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>፣ <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"ነገ <xliff:g id="OPEN_TIME">%s</xliff:g> ላይ ይከፈታል"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"ዛሬ <xliff:g id="OPEN_TIME">%s</xliff:g> ላይ ይከፈታል"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"<xliff:g id="CLOSE_TIME">%s</xliff:g> ላይ ይዘጋል"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"ዛሬ <xliff:g id="CLOSE_TIME">%s</xliff:g> ላይ ተዘግቷል"</string>
+    <string name="open_now" msgid="5897306702060039512">"አሁን ክፍት ነው"</string>
+    <string name="closed_now" msgid="3962291301467974921">"አሁን ዝግ ነው"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"<xliff:g id="NUMBER">%1$s</xliff:g>ን ያውቃሉ?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"<xliff:g id="NUMBER">%1$s</xliff:g> አይፈለጌ ነው?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"<xliff:g id="NUMBER">%1$s</xliff:g> ታግደዋል ጥሪውም እንደ አይፈለጌ መልዕክት ሪፖርት ተደርጓል።"</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"ከ<xliff:g id="NUMBER">%1$s</xliff:g> የመጣው ጥሪ አይፈለጌ እንዳልሆነ ሪፖርት ተደርጓል።"</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"እውቂያዎችን ለማከል ወይም አይፈለጌ ቁጥር ለማገድ መታ ያድርጉ።"</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"ይህ ቁጥር ሲደውልልዎ ይህ የመጀመሪያ ጊዜ ነው። ይህ ጥሪ አይፈለጌ ነበር፣ ይህን ቁጥር ማገድ እና ሪፖርት ማድረግ ይችላሉ።"</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"አይፈለጌ እንዳልሆነ ሪፖርት ለማድረግ ወይም ለማገድ መታ ያድርጉ።"</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"ይህ አይፈለጌ ለቃቂ እንደሆነ ጠርጥረናል። ይህ ጥሪ አይፈለጌ ያልነበረ ከሆነ፣ «አይፈለጌ አይደለም» ላይ መታ ያድርጉ እና ስህተታችንን ይንገሩን።"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"አግድ እና ሪፖርት አድርግ"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"እውቅያዎች አክል"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"አይፈለጌ መልእክት አይደለም"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"ቁጥርን አግድ"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"ወደ እውቂያዎች ያክሉ"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"አግድ እና አይፈለጌ ሪፖርት አድርግ"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"አይፈለጌ መልዕክት አይደለም"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"ምንም SIM ፣ ወይም የSIM ስህተት የለም"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ጥሪ ጨርስ"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"የስብሰባ ጥሪ"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"በጥሪ ላይ"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"ሴሉላር ውሂብ በመጠቀም ጥሪውን በመቀጠል ላይ…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"ወደ Wi-Fi አውታረ መረብ መቀየር አልተቻለም።"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"የቪዲዮ ጥሪ በሴሉላር አውታረመረቡ ላይ ይቆያል። መደበኛ የውሂብ ክፍያዎች ተፈጻሚ ሊሆኑ ይችላሉ።"</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ይህን በድጋሚ አታሳይ"</string>
+</resources>

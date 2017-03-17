@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="camera_switch_full_screen" msgid="8940026902611470063">"Badilisha utumie kamera ya skrini nzima"</string>
+    <string name="camera_switch_camera_facing" msgid="6965029101223590384">"Kitufe hiki sasa ni kamera ya mbele"</string>
+    <string name="camera_switch_camera_rear" msgid="2518207979995455566">"Kitufe hiki sasa ni kamera ya nyuma"</string>
+    <string name="camera_cancel_recording" msgid="1957458244979306869">"Acha kurekodi video"</string>
+    <string name="using_front_camera" msgid="6734227994972108992">"Inatumia kamera ya mbele"</string>
+    <string name="using_back_camera" msgid="2143070243242164971">"Inatumia kamera ya nyuma"</string>
+    <string name="camera_take_picture" msgid="2366908858042883376">"Piga picha"</string>
+</resources>

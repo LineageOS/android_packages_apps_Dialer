@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"नवीन, सरलीकृत अवरोधित करणे"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"आपले अधिक चांगले संरक्षण करण्यासाठी, अवरोधित करणे ज्या पद्धतीने कार्य करते ते बदलण्याची फोनला गरज आहे. आपले अवरोधित केलेले नंबर कॉल आणि मजकूर थांबवतील आणि कदाचित इतर अॅप्ससह सामायिक केले जाऊ शकतील."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"अनुमती द्या"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> अवरोधित करायचा?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"या नंबर वरून केलेले कॉल अवरोधित केले जातील आणि व्हॉइसमेल स्वयंचलितपणे हटविले जातील."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"या नंबर वरून केलेले कॉल अवरोधित केले जातील परंतु कॉलर आपल्‍यासाठी व्हॉइसमेल सोडण्यात अद्याप सक्षम असू शकेल."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"आपल्याला या नंबर वरून कॉल किंवा मजकूर प्राप्त होणार नाहीत."</string>
+    <string name="block_number_ok" msgid="739786082788038932">"अवरोधित करा"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"<xliff:g id="NUMBER">%1$s</xliff:g> ला अनावरोधित करायचे?"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"अनावरोधित करा"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> अवैध आहे."</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> अवरोधित केला"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> अनावरोधित केला"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"पूर्ववत करा"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"आयात अयशस्वी झाले"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"कॉल अवरोधित करणे 48 तासांसाठी अक्षम केले"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"एक आणीबाणीचा कॉल केल्‍याने अक्षम केले."</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"<xliff:g id="NUMBER">%1$s</xliff:g> अवरोधित करायचा?"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"आपल्याला या नंबर वरून कॉल प्राप्त होणार नाहीत."</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> या कॉलची स्पॅम म्हणून तक्रार नोंदवली जाईल."</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"हा नंबर अनावरोधित केला जाईल आणि त्याचा स्पॅम नाही म्हणून अहवाल दिला जाईल. भविष्यातील कॉल स्पॅम म्हणून ओळखले जाणार नाहीत."</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"<xliff:g id="NUMBER">%1$s</xliff:g> ला अनावरोधित करायचे?"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"अहवाल द्या"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"चूक झाल्याचा अहवाल द्यायचा?"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"<xliff:g id="NUMBER">%1$s</xliff:g> वरील भविष्यातील कॉल यापुढे स्पॅम म्हणून ओळखले जाणार नाहीत."</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"कॉलचा स्पॅम म्हणून अहवाल द्या"</string>
+</resources>

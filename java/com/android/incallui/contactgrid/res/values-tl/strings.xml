@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"Tumatawag sa pamamagitan ng <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"Tinatawagan…"</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"Inililipat…"</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"Nakikipag-video call…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Wi-Fi na pakikipag-video call…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"Hindi nakakonekta"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"Tinanggihan ang tawag"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"Nag-time out ang tawag"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"Binababa"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"Natapos ang tawag"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"Naka-hold"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"Video call mula kay"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"Wi-Fi na video call mula kay"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Tawag mula kay"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Tawag sa trabaho mula kay"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Papasok sa pamamagitan ng <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Pinaghihinalaang spam na tumatawag"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"Numero upang matawagang muli: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

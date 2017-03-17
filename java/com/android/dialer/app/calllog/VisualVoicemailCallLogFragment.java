@@ -32,6 +32,8 @@ import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 
 public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
@@ -120,6 +122,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     LogUtil.d("VisualVoicemailCallLogFragment.onPageResume", null);
     super.onPageResume(activity);
     if (activity != null) {
+      Logger.get(activity).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
       activity.setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
     }
   }

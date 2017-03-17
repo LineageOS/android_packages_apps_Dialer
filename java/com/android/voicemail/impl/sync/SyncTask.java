@@ -19,6 +19,8 @@ package com.android.voicemail.impl.sync;
 import android.content.Context;
 import android.content.Intent;
 import android.telecom.PhoneAccountHandle;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.MinimalIntervalPolicy;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
@@ -67,6 +69,7 @@ public class SyncTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
+    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
     intent.putExtra(EXTRA_SYNC_TYPE, mSyncType);

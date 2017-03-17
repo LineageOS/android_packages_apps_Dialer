@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"关闭飞行模式"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"正在激活可视语音信箱"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"在可视语音信箱未完全激活前，您可能不会收到新语音邮件通知。在完全激活前，请呼叫语音信箱以获取新邮件。"</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"无法激活可视语音信箱"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"请确保您的手机已连接到移动网络，然后重试。"</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"请关闭飞行模式，然后重试。"</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"无网络连接"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"您将不会收到关于新语音邮件的通知。如果您已连接到 WLAN 网络，则可以立即同步以便查看语音邮件。"</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"您将不会收到关于新语音邮件的通知。请关闭飞行模式以便同步语音信箱。"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"要查看语音邮件，您的手机需要连接到移动数据网络。"</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"无法激活可视语音信箱"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"无法更新可视语音信箱"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"请在 WLAN 或移动网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"请在移动数据网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"无法更新可视语音信箱"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"无法更新可视语音信箱"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"无法更新可视语音信箱"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"无法更新可视语音信箱"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"收件箱快满了"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"如果收件箱已满，您将无法接收新的语音邮件。"</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"无法接收新的语音邮件"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"您的收件箱已满。请尝试删除部分邮件，以便接收新的语音邮件。"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"启用额外存储空间和备份功能"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"您的邮箱已满。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"启用额外存储空间和备份功能"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"您的邮箱快满了。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"设置语音信箱 PIN 码"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"您必须使用语音信箱 PIN 码，才能访问您的语音信箱。"</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"未知错误"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"飞行模式设置"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"设置 PIN 码"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"请重试"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"启用"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"不用了"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"同步"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"呼叫语音信箱"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"致电客服中心"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"出了点问题"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"很抱歉，我们遇到了一个问题，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9001。"</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"出了点问题"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"很抱歉，我们遇到了一个问题，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9002。"</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"出了点问题"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"很抱歉，我们遇到了一个问题，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9003。"</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"无法连接到您的语音信箱"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"很抱歉，无法连接到您的语音信箱。如果您所在的位置信号差，请在信号强的时候重新尝试连接。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9004。"</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"无法连接到您的语音信箱"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"很抱歉，无法连接到您的语音信箱。如果您所在的位置信号差，请在信号强的时候重新尝试连接。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9005。"</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"无法连接到您的语音信箱"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"很抱歉，无法连接到您的语音信箱。如果您所在的位置信号差，请在信号强的时候重新尝试连接。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9006。"</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"出了点问题"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"很抱歉，我们遇到了一个问题，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9007。"</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"出了点问题"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"很抱歉，我们遇到了一个问题，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9008。"</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"出了点问题"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"很抱歉，我们无法设置您的服务，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9009。"</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"无法连接到您的语音信箱"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"很抱歉，目前无法连接到您的语音信箱，请稍后再试。如果仍然出现问题，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9990。"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"设置语音信箱"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"您的帐号尚未设置语音信箱。请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9991。"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"语音信箱"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"无法在此设备上使用可视语音信箱。请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9992。"</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"出了点问题"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9993。"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"可视语音信箱"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"要完成可视语音信箱设置，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9994。"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"可视语音信箱"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"要完成可视语音信箱设置，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9995。"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"可视语音信箱"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"要激活可视语音信箱，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9996。"</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"出了点问题"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"要完成可视语音信箱设置，请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9998。"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"可视语音信箱已停用"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，以激活可视语音信箱。"</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"出了点问题"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9997。"</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"出了点问题"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9989。"</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"出了点问题"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9999。"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"可视语音信箱条款及条件"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"您必须接受 Verizon Wireless 的条款及条件，才能使用可视语音信箱：\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"如果您拒绝接受条款及条件，可视语音信箱将被停用。"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"停用可视语音信箱"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"您只能通过拨打 *86 来访问语音信箱。请先设置新的语音信箱 PIN 码再继续操作。"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"设置 PIN 码"</string>
+</resources>

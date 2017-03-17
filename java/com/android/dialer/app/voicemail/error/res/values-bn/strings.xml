@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"বিমান মোড বন্ধ করুন"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ভিজ্যুয়াল ভয়েসমেল সক্রিয়করণ"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ভিজ্যুয়াল ভয়েসমেল সম্পূর্ণরূপে সক্রিয় না করা পর্যন্ত আপনি ভয়েসমেল সংক্রান্ত কোনো বিজ্ঞপ্তি নাও পেতে পারেন৷ ভয়েসমেল সম্পূর্ণরূপে সক্রিয় না হওয়া পর্যন্ত নতুন বার্তাগুলিকে পুনরুদ্ধার করতে ভয়েসমেলে কল করুন৷"</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ভিজ্যুয়াল ভয়েসমেল সক্রিয় করবেন না"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"নিশ্চিত করুন যে আপনার ফোনে সেলুলার সংযোগ আছে এবং আবার চেষ্টা করুন।"</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"বিমান মোড বন্ধ করুন এবং আবার চেষ্টা করুন।"</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"কোনো সংযোগ নেই"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"আপনাকে নতুন ভয়েসমেলগুলির জন্য সূচিত করা হবে না। আপনি Wi-Fi ব্যবহার করলে, আপনি এখনই সিঙ্ক করে ভয়েসমেল চেক করতে পারেন।"</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"আপনাকে নতুন ভয়েসমেলগুলির জন্য সূচিত করা হবে না। আপনার ভয়েসমেলে সিঙ্ক করার জন্য বিমান মোড বন্ধ করুন।"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ভয়েসমেল চেক করার জন্য আপনার ফোনের একটি সেলুলার ডেটার প্রয়োজন।"</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ভিজ্যুয়াল ভয়েসমেল সক্রিয় করবেন না"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ভিজ্যুয়াল ভয়েসমেল আপডেট করা যাচ্ছে না"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"যখন আপনার Wi-Fi অথবা সেলুলার সংযোগ ভালো থাকবে তখন আবার চেষ্টা করুন। আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"যখন আপনার Wi-Fi অথবা সেলুলার সংযোগ ভালো থাকবে তখন আবার চেষ্টা করুন। আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ভিজ্যুয়াল ভয়েসমেল আপডেট করা যাচ্ছে না"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ভিজ্যুয়াল ভয়েসমেল আপডেট করা যাচ্ছে না"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"ভিজ্যুয়াল ভয়েসমেল আপডেট করা যাচ্ছে না"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"ভিজ্যুয়াল ভয়েসমেল আপডেট করা যাচ্ছে না"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"আপনি এখনও ভয়েসমেল চেক করার জন্য কল করতে পারেন।"</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"ইনবক্স প্রায় ভর্তি রয়েছে"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"যদি আপনার ইনবক্সে পূর্ণ থাকে তাহলে আপনি নতুন ভয়েসমেল পেতে সক্ষম হবেন না।"</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"নতুন ভয়েসমেলগুলি গ্রহণ করতে পারবেন না"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"আপনার ইনবক্স পূর্ণ। নতুন ভয়েসমেল পেতে কিছু বার্তা মুছে ফেলার চেষ্টা করুন।"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"অতিরিক্ত সঞ্চয়স্থান এবং ব্যাক আপ চালু করুন"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"আপনার মেলবক্স পূর্ণ। স্থান খালি করতে, অতিরিক্ত সঞ্চয়স্থান চালু করুন যাতে Google আপনার ভয়েসমেল বার্তাগুলি পরিচালনা করতে এবং ব্যাক আপ নিতে পারে।"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"অতিরিক্ত সঞ্চয়স্থান এবং ব্যাক আপ চালু করুন"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"আপনার মেলবক্স প্রায় পূর্ণ। স্থান খালি করতে, অতিরিক্ত সঞ্চয়স্থান চালু করুন যাতে Google আপনার ভয়েসমেল বার্তাগুলি পরিচালনা করতে এবং ব্যাক আপ নিতে পারে।"</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"আপনার ভয়েসমেল পিন সেট করুন"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"যে কোনো সময়ে আপনার ভয়েসমেল অ্যাক্সেস করার জন্য আপনার একটি ভয়েসমেল পিন প্রয়োজন৷"</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"অজানা ত্রুটি"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"বিমান মোড সেটিংস"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"পিন সেট করুন"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"আবার চেষ্টা করুন"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"চালু করুন"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"না থাক"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"সমন্বয় করুন"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"ভয়েসমেলে কল করুন"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"কাস্টমার সমর্থনে কল করুন"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"দুঃখিত, আমরা একটি সমস্যার সম্মুখীন হয়েছি৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০১৷"</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"দুঃখিত, আমরা একটি সমস্যার সম্মুখীন হয়েছি৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০২৷"</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"দুঃখিত, আমরা একটি সমস্যার সম্মুখীন হয়েছি৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৩৷"</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করা যাবে না"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"দুঃখিত, আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করার সময়ে আমাদের সমস্যা হচ্ছে৷ আপনি যদি একটি দুর্বল সিগন্যালযুক্ত এলাকায় থাকেন, তাহলে জোরালো সিগন্যাল না পাওয়া পর্যন্ত অপেক্ষা করুন এবং আবার চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৪৷"</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করা যাবে না"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"দুঃখিত, আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করার সময়ে আমাদের সমস্যা হচ্ছে৷ আপনি যদি একটি দুর্বল সিগন্যালযুক্ত এলাকায় থাকেন, তাহলে জোরালো সিগন্যাল না পাওয়া পর্যন্ত অপেক্ষা করুন এবং আবার চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৫৷"</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করা যাবে না"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"দুঃখিত, আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করার সময়ে আমাদের সমস্যা হচ্ছে৷ আপনি যদি একটি দুর্বল সিগন্যালযুক্ত এলাকায় থাকেন, তাহলে জোরালো সিগন্যাল না পাওয়া পর্যন্ত অপেক্ষা করুন এবং আবার চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৬৷"</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"দুঃখিত, আমরা একটি সমস্যার সম্মুখীন হয়েছি৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৭৷"</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"দুঃখিত, আমরা একটি সমস্যার সম্মুখীন হয়েছি৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৮৷"</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"দুঃখিত, আপনার পরিষেবার সেট আপ করার সময়ে আমাদের সমস্যা হচ্ছে৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯০০৯৷"</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"আপনার ভয়েস মেলবক্সের সাথে সংযুক্ত করা যাবে না"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"দুঃখিত, আমরা আপনার ভয়েস মেলবক্সের সাথে এই সময়ে সংযুক্ত করতে পারছি না৷ অনুগ্রহ করে আবার পরে চেষ্টা করুন৷ যদি তখনো সমস্যাটি থেকে থাকে, তাহলে অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯০৷"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"ভয়েসমেলের সেট আপ করুন"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"আপনার অ্যাকাউন্টে ভয়েসমেলের সেট আপ করা নেই৷ অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯১৷"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"ভয়েসমেল"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"এই ডিভাইসটিতে ভিজ্যুয়াল ভয়েসমেলকে ব্যবহার করা যাবে না৷ অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯২৷"</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৩৷"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"ভিজ্যুয়াল ভয়েসমেল"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"ভিজ্যুয়াল ভয়েসমেলের সেট আপ সম্পূর্ণ করতে, অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৪৷"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"ভিজ্যুয়াল ভয়েসমেল"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"ভিজ্যুয়াল ভয়েসমেলের সেট আপ সম্পূর্ণ করতে, অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৫৷"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"ভিজ্যুয়াল ভয়েসমেল"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"ভিজ্যুয়াল ভয়েসমেলকে সক্রিয় করতে, অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৬৷"</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"ভিজ্যুয়াল ভয়েসমেলের সেট আপ সম্পূর্ণ করতে, অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৮৷"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"ভিজ্যুয়াল ভয়েসমেলটি অক্ষম রয়েছে"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"ভিজ্যুয়াল ভয়েসমেলকে সক্রিয় করতে, অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন৷"</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৭৷"</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৮৯৷"</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"কিছু ভুল হয়েছে"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"অনুগ্রহ করে <xliff:g id="NUMBER">%1$s</xliff:g> এ কল করে গ্রাহক পরিষেবার সাথে যোগাযোগ করুন এবং তাদের জানান যে ত্রুটি কোডটি হলো ৯৯৯৯৷"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ভিজ্যুয়াল ভয়েসমেলের নিবন্ধন এবং শর্তাদি"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ভিজ্যুয়াল ভয়েসমেল ব্যবহার করার জন্য আপনাকে অবশ্যই Verizon Wireless এর নিবন্ধন এবং শর্তাদি স্বীকার করতে হবে:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"নিবন্ধন এবং শর্তাদি অস্বীকার করা হলে ভিজ্যুয়াল ভয়েসমেল অক্ষম করা হবে৷"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ভিজ্যুয়াল ভয়েসমেল অক্ষম করুন"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"শুধুমাত্র *৮৬ নম্বরে কল করেই ভয়েসমেল অ্যাক্সেস করা যাবে৷ এগিয়ে যাওয়ার জন্য একটি নতুন ভয়েসমেলের পিন সেট করুন৷"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"পিন সেট করুন"</string>
+</resources>

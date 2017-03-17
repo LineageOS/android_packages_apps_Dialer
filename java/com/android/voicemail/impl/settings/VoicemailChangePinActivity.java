@@ -45,6 +45,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.OmtpConstants.ChangePinResult;
 import com.android.voicemail.impl.OmtpEvents;
@@ -276,7 +278,7 @@ public class VoicemailChangePinActivity extends Activity
           activity.handleOmtpEvent(OmtpEvents.CONFIG_PIN_SET);
 
           activity.finish();
-
+          Logger.get(activity).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_COMPLETED);
           Toast.makeText(
                   activity, activity.getString(R.string.change_pin_succeeded), Toast.LENGTH_SHORT)
               .show();

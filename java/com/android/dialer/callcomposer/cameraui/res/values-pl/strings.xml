@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="camera_switch_full_screen" msgid="8940026902611470063">"Włącz aparat pełnoekranowy"</string>
+    <string name="camera_switch_camera_facing" msgid="6965029101223590384">"Przycisk włącza teraz przedni aparat"</string>
+    <string name="camera_switch_camera_rear" msgid="2518207979995455566">"Przycisk włącza teraz tylny aparat"</string>
+    <string name="camera_cancel_recording" msgid="1957458244979306869">"Zatrzymaj nagrywanie filmu"</string>
+    <string name="using_front_camera" msgid="6734227994972108992">"Używany jest przedni aparat"</string>
+    <string name="using_back_camera" msgid="2143070243242164971">"Używany jest tylny aparat"</string>
+    <string name="camera_take_picture" msgid="2366908858042883376">"Zrób zdjęcie"</string>
+</resources>

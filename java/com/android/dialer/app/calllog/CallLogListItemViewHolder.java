@@ -749,7 +749,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     updatePrimaryActionButton(show);
   }
 
-  public void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
+  private void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
     if (callType != Calls.VOICEMAIL_TYPE) {
       return;
     }

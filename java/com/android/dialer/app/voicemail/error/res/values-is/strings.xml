@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Slökkva á flugstillingu"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Virkjar myndrænt talhólf"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Þú getur ekki fengið tilkynningar um talhólfsskilaboð fyrr en myndrænt talhólf er virkjað að fullu. Hringdu í talhólfið til að sækja ný skilaboð þar til talhólfið hefur verið virkjað að fullu."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Ekki hægt að virkja myndrænt talhólf"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Gakktu úr skugga um að síminn sé tengdur farsímakerfi og reyndu aftur."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Slökktu á flugstillingu og reyndu aftur."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Engin tenging"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Þú færð ekki tilkynningu um ný talhólfsskilaboð. Ef þú ert með Wi-Fi tengingu geturðu athugað talhólfið með því að samstilla núna."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Þú færð ekki tilkynningu um ný talhólfsskilaboð. Slökktu á flugstillingu til að samstilla talhólfið."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Síminn þarf tengingu við farsímanet til að athuga talhólf."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Ekki hægt að virkja myndrænt talhólf"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Ekki hægt að uppfæra sjónrænt talhólf"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Reyndu aftur þegar Wi-Fi eða farsímanettengingin þín er betri. Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Reyndu aftur þegar farsímanettengingin þín er betri. Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Ekki hægt að uppfæra sjónrænt talhólf"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Ekki hægt að uppfæra sjónrænt talhólf"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Ekki hægt að uppfæra sjónrænt talhólf"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Ekki hægt að uppfæra sjónrænt talhólf"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Þú getur samt hringt til að athuga talhólfið."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Pósthólfið er næstum fullt"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Þú getur ekki tekið á móti nýjum talhólfsskilaboðum ef pósthólfið er fullt."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Ekki hægt að taka á móti nýjum talhólfsskilaboðum"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Pósthólfið er fullt. Prófaðu að eyða skilaboðum til að taka á móti nýjum talhólfsskilaboðum."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Kveikja á viðbótargeymslu og öryggisafritun"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Pósthólfið þitt er fullt. Þú getur losað pláss með því að kveikja á viðbótargeymslu til að Google geti unnið með og tekið öryggisafrit af talhólfsskilaboðunum þínum."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Kveikja á viðbótargeymslu og öryggisafritun"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Pósthólfið þitt er næstum fullt. Þú getur losað pláss með því að kveikja á viðbótargeymslu til að Google geti unnið með og tekið öryggisafrit af talhólfsskilaboðunum þínum."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Stilla PIN-númer talhólfs"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Þú þarft að nota PIN-númer talhólfsins í hvert skipti sem þú hringir til að athuga það."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Óþekkt villa"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Stilling flugstillingar"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"Stilla PIN-númer"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Reyna aftur"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Kveikja"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Nei, takk"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Samstilling"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Hringja í talhólf"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Hringja í þjónustufulltrúa"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Því miður kom upp vandamál. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9001."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Því miður kom upp vandamál. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9002."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Því miður kom upp vandamál. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9003."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Ekki tókst að tengjast talhólfinu"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Því miður kom upp vandamál við að tengjast talhólfinu. Ef þú ert á svæði þar sem er lélegt símasamband skaltu bíða þar til þú kemst í betra samband og reyna aftur. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9004."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Ekki tókst að tengjast talhólfinu"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Því miður kom upp vandamál við að tengjast talhólfinu. Ef þú ert á svæði þar sem er lélegt símasamband skaltu bíða þar til þú kemst í betra samband og reyna aftur. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9005."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Ekki tókst að tengjast talhólfinu"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Því miður kom upp vandamál við að tengjast talhólfinu. Ef þú ert á svæði þar sem er lélegt símasamband skaltu bíða þar til þú kemst í betra samband og reyna aftur. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9006."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Því miður kom upp vandamál. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9007."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Því miður kom upp vandamál. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9008."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Því miður kom upp vandamál við uppsetningu þjónustunnar. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9009."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Ekki tókst að tengjast talhólfinu"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Því miður kom upp vandamál við að tengjast talhólfinu þínu á þessari stundu. Reyndu aftur seinna. Ef vandamálið heldur áfram skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9990."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Setja upp talhólf"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Talhólf er ekki uppsett á reikningnum þínum. Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9991."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Talhólf"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Ekki er hægt að nota myndrænt talhólf í þessu tæki. Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9992."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9993."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Myndrænt talhólf"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Til þess að ljúka uppsetningu myndræns talhólfs skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 999."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Myndrænt talhólf"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Til þess að ljúka uppsetningu myndræns talhólfs skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Myndrænt talhólf"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Til þess að virkja myndrænt talhólf skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9996."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Til þess að ljúka uppsetningu myndræns talhólfs skaltu hafa samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefa upp villukóðann 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Myndrænt talhólf er óvirkt"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> til að virkja myndrænt talhólf."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9997."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9989."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Eitthvað fór úrskeiðis"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Hafðu samband við þjónustudeild í síma <xliff:g id="NUMBER">%1$s</xliff:g> og gefðu upp villukóðann 9999."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Skilmálar myndræns talhólfs"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Þú verður að samþykkja skilmála Verizon Wireless til að geta notað myndrænt talhólf:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Slökkt verður á myndrænu talhólfi ef skilmálum er hafnað."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Slökkva á myndrænu talhólfi"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Talhólf er einungis aðgengilegt með því að hringja í *86. Stilltu nýtt PIN-númer fyrir talhólfið til að halda áfram."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Stilla PIN-númer"</string>
+</resources>

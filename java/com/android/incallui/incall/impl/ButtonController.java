@@ -295,7 +295,7 @@ interface ButtonController {
 
     @Override
     public void doCheckedChanged(boolean isChecked) {
-      delegate.muteClicked(isChecked);
+      delegate.muteClicked(isChecked, true /* clickedByUser */);
     }
   }
 

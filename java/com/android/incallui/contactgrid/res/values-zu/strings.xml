@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"Ishaya ucingo nge-<xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"Iyashaya..."</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"Iyadlulisela..."</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"Ukushaya kwevidiyo…"</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"Ukushaya kwevidiyo ye-Wi-Fi…"</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"Ayikwazanga ukuxhumeka"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"Ucingo lunqatshiwe"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"Ucingo luphelelwe yisikhathi"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"Iyavala"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"Ikholi iqediwe"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"Ibambile"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"Ikholi yevidiyo kusukela ku-"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"Ikholi yevidiyo ye-Wi-Fi kusukela ku-"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Ikholi esuka ku-"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Ikholi yomsebenzi kusukela ku-"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Ingena nge-<xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Ofonayo osolisayo wogaxekile"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"Inombolo yokuphinda ushayele: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="videocall_remote_video_off" msgid="2959680546745902547">"તેમનો વિડિઓ બંધ છે"</string>
+    <string name="videocall_remote_video_on" msgid="6011817851703181639">"તેમની વિડિઓ ચાલુ છે"</string>
+    <string name="videocall_remotely_held" msgid="1295702896355732947">"કૉલ હોલ્ડ પર છે"</string>
+    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"કૉલ ફરી શરૂ કર્યો"</string>
+    <string name="camera_permission_dialog_title" msgid="4901760354830982117">"વિડિઓની મંજૂરી આપીએ?"</string>
+    <string name="camera_permission_dialog_message" msgid="2677490854794162699">"ફોન ઍપ્લિકેશન વિડિઓ કૉલ્સ માટે તમારા કૅમેરાનો ઉપયોગ કરવા માંગે છે."</string>
+    <string name="camera_permission_dialog_positive_button" msgid="9075818030671161374">"મંજૂરી આપો"</string>
+    <string name="camera_permission_dialog_negative_button" msgid="7538535842403837541">"નકારો"</string>
+</resources>

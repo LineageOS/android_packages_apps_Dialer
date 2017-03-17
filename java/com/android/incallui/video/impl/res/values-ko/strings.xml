@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="videocall_remote_video_off" msgid="2959680546745902547">"상대방 동영상 꺼짐"</string>
+    <string name="videocall_remote_video_on" msgid="6011817851703181639">"동영상이 켜져 있음"</string>
+    <string name="videocall_remotely_held" msgid="1295702896355732947">"통화 대기 중"</string>
+    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"통화 재개됨"</string>
+    <string name="camera_permission_dialog_title" msgid="4901760354830982117">"동영상을 허용하시겠습니까?"</string>
+    <string name="camera_permission_dialog_message" msgid="2677490854794162699">"전화 앱에서 화상 통화를 위해 카메라를 사용하고자 합니다."</string>
+    <string name="camera_permission_dialog_positive_button" msgid="9075818030671161374">"허용"</string>
+    <string name="camera_permission_dialog_negative_button" msgid="7538535842403837541">"거부"</string>
+</resources>

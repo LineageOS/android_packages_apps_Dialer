@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_label_videocall" msgid="2208755440134676113">"화상 통화"</string>
+    <string name="incall_label_hold" msgid="4223472584896867896">"대기"</string>
+    <string name="incall_label_add_call" msgid="5641663436373994915">"통화 추가"</string>
+    <string name="incall_label_mute" msgid="2180667027331706737">"음소거"</string>
+    <string name="incall_label_dialpad" msgid="8609779533654156550">"키패드"</string>
+    <string name="incall_label_speaker" msgid="8100402799687856933">"스피커"</string>
+    <string name="incall_talkback_speaker_on" msgid="5819463769258124228">", 켜짐"</string>
+    <string name="incall_talkback_speaker_off" msgid="7486836772563090186">", 꺼짐"</string>
+    <string name="incall_label_merge" msgid="720076442985913175">"병합"</string>
+    <string name="incall_label_manage" msgid="2175471192903568159">"관리"</string>
+    <string name="a11y_description_incall_label_manage_content" msgid="8298638893449287602">"발신자 관리"</string>
+    <string name="incall_label_swap" msgid="10458642864243507">"전환"</string>
+    <string name="incall_label_audio" msgid="8616473242030174797">"소리"</string>
+    <string name="incall_note_sent" msgid="4524130323127388367">"메모가 전송되었습니다."</string>
+</resources>

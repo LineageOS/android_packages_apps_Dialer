@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_content_description_end_call" msgid="8232796487777787200">"结束通话"</string>
+    <string name="incall_content_description_muted" msgid="2130133443150389474">"已静音"</string>
+    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"已取消静音"</string>
+    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"切换通话"</string>
+    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"合并通话"</string>
+    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"手机听筒"</string>
+    <string name="incall_content_description_speaker" msgid="7837829930201265549">"免提"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"蓝牙"</string>
+    <string name="incall_content_description_headset" msgid="3170439802944346719">"有线耳机"</string>
+    <string name="incall_content_description_hold" msgid="3335508251734906019">"保持通话"</string>
+    <string name="incall_content_description_unhold" msgid="3862584118869933593">"恢复通话"</string>
+    <string name="incall_content_description_video_on" msgid="899266487647420613">"视频已开启"</string>
+    <string name="incall_content_description_video_off" msgid="762985912616707076">"视频已关闭"</string>
+    <string name="incall_content_description_swap_video" msgid="297943299827908998">"切换视频"</string>
+</resources>

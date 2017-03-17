@@ -98,6 +98,7 @@ public class OmtpVvmSyncService {
     }
 
     OmtpVvmCarrierConfigHelper config = new OmtpVvmCarrierConfigHelper(mContext, phoneAccount);
+    Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SYNC_STARTED);
     // DATA_IMAP_OPERATION_STARTED posting should not be deferred. This event clears all data
     // channel errors, which should happen when the task starts, not when it ends. It is the
     // "Sync in progress..." status.
@@ -135,6 +136,7 @@ public class OmtpVvmSyncService {
         imapHelper.updateQuota();
         autoDeleteAndArchiveVM(imapHelper, phoneAccount);
         imapHelper.handleEvent(OmtpEvents.DATA_IMAP_OPERATION_COMPLETED);
+        Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SYNC_COMPLETED);
       } else {
         task.fail();
       }
@@ -180,7 +182,7 @@ public class OmtpVvmSyncService {
     // The number of voicemails that exceed our threshold and should be deleted from the server
     int numVoicemails =
         imapHelper.getOccuupiedQuota()
-            - ((int) AUTO_DELETE_ARCHIVE_VM_THRESHOLD * imapHelper.getTotalQuota());
+            - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * imapHelper.getTotalQuota());
     List<Voicemail> oldestVoicemails = mQueryHelper.oldestVoicemailsOnServer(numVoicemails);
     if (!oldestVoicemails.isEmpty()) {
       mQueryHelper.markArchivedInDatabase(oldestVoicemails);
@@ -287,6 +289,7 @@ public class OmtpVvmSyncService {
 
         if (!TextUtils.isEmpty(remoteVoicemail.getTranscription())
             && TextUtils.isEmpty(localVoicemail.getTranscription())) {
+          Logger.get(mContext).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
           mQueryHelper.updateWithTranscription(localVoicemail, remoteVoicemail.getTranscription());
         }
       }
@@ -295,6 +298,9 @@ public class OmtpVvmSyncService {
     // The leftover messages are messages that exist on the server but not locally.
     boolean prefetchEnabled = shouldPerformPrefetch(account, imapHelper);
     for (Voicemail remoteVoicemail : remoteMap.values()) {
+      if (!TextUtils.isEmpty(remoteVoicemail.getTranscription())) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
+      }
       Uri uri = VoicemailDatabaseUtil.insert(mContext, remoteVoicemail);
       if (prefetchEnabled) {
         VoicemailFetchedCallback fetchedCallback =

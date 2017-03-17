@@ -1,6 +1,14 @@
 # Local modifications:
-# * Dagger classes have been manually crafted.
-# * Precompiled proto classes have been included.
+# * b/36287059 Dagger classes have been manually crafted.
+# * b/31757757 Precompiled proto classes have been included.
+# * b/36215428 dialer/oem/res/values-mcc3* have been pruned
+# * b/36383971 StubCallLocationModule modified to return null.
+# * removed com.google.android.backup.api_key. This should be added to
+#      the manifest in the top level directory.
+# * removed com.google.android.geo.API_KEY key. This should be added to
+#      the manifest files in java/com/android/incallui/calllocation/impl/
+#      and /java/com/android/incallui/maps/impl/
+# * b/35391680 apache temporarily included in the top level directory.
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -95,7 +103,6 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/app/manifests/activities/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/voicemail/error/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/backup/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/binary/aosp/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/blocking/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/camera/AndroidManifest.xml \

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"Նոր, պարզեցված արգելափակում"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Ձեզ ավելի լավ պաշտպանելու նպատակով Հեռախոսին անհրաժեշտ է փոխել արգելափակման կարգավորումները: Արգելափակված համարներից զանգերի և տեքստային հաղորդագրությունների ստացումը կկասեցվի, իսկ այդ համարները կարող են տրամադրվել այլ հավելվածներին:"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Թույլատրել"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"Արգելափակե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Այս համարից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Այս համարից զանգերը կարգելափակվեն, սակայն զանգողը կկարողանա ձեզ համար ձայնային փոստի հաղորդագրություններ թողնել:"</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"Այս համարից զանգեր և SMS-ներ այլևս չեք ստանա:"</string>
+    <string name="block_number_ok" msgid="739786082788038932">"ԱՐԳԵԼԱՓԱԿԵԼ"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Արգելաբացե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"ԱՐԳԵԼԱԲԱՑԵԼ"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը սխալ է:"</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"Արգելափակվել է <xliff:g id="NUMBER">%1$s</xliff:g> համար"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"Արգելաբացվել է <xliff:g id="NUMBER">%1$s</xliff:g> համար"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"ՀԵՏԱՐԿԵԼ"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Ներմուծումը չհաջողվեց"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"Զանգերի արգելափակումն անջատվել է 48 ժամով"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Անջատվել է, քանի որ շտապ կանչ է արվել:"</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"Արգելափակե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"Այս համարից այլևս զանգեր չեք ստանա:"</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> Այս զանգը կնշվի որպես լցոն:"</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"Այս համարը կարգելաբացվի և կնշվի որպես ոչ լցոն: Այս համարից եկող զանգերն այլևս չեն նշվի որպես լցոն:"</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"Արգելաբացե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"Հաղորդել"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"Հաղորդե՞լ սխալի մասին:"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"<xliff:g id="NUMBER">%1$s</xliff:g> համարից եկող զանգերն այլևս չեն նշվի որպես լցոն:"</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"Նշել զանգը որպես լցոն"</string>
+</resources>

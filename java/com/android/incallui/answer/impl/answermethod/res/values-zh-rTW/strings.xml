@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_incoming_swipe_to_answer" msgid="2959042172304267183">"向上滑動接聽"</string>
+    <string name="call_incoming_swipe_to_reject" msgid="463322705441386885">"向下滑動拒接"</string>
+    <string name="a11y_incoming_call_swipe_to_answer" msgid="6992663569851713736">"用雙指向上滑動可接聽來電，向下滑動則可拒接來電"</string>
+    <string name="call_incoming_will_disconnect" msgid="7095934149229485541">"接聽這通來電會結束你的視訊通話"</string>
+    <string name="a11y_call_incoming_decline_description" msgid="4441041052558364987">"拒接"</string>
+    <string name="call_incoming_decline" msgid="2982110738106661231">"拒接"</string>
+    <string name="a11y_call_incoming_answer_description" msgid="1623200501347799736">"接聽"</string>
+    <string name="call_incoming_answer" msgid="841798555883717852">"接聽"</string>
+</resources>

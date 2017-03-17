@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="camera_switch_full_screen" msgid="8940026902611470063">"Passer en caméra plein écran"</string>
+    <string name="camera_switch_camera_facing" msgid="6965029101223590384">"Le bouton affiche désormais la caméra frontale."</string>
+    <string name="camera_switch_camera_rear" msgid="2518207979995455566">"Le bouton affiche désormais la caméra arrière."</string>
+    <string name="camera_cancel_recording" msgid="1957458244979306869">"Arrêter l\'enregistrement vidéo"</string>
+    <string name="using_front_camera" msgid="6734227994972108992">"Caméra frontale activée"</string>
+    <string name="using_back_camera" msgid="2143070243242164971">"Caméra arrière activée"</string>
+    <string name="camera_take_picture" msgid="2366908858042883376">"Prendre une photo"</string>
+</resources>

@@ -241,7 +241,6 @@ public class ListsFragment extends Fragment
   public void showTab(int index) {
     if (index == TAB_INDEX_VOICEMAIL) {
       if (mHasActiveVoicemailProvider) {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_TAB_VISIBLE);
         mViewPager.setCurrentItem(getRtlPosition(TAB_INDEX_VOICEMAIL));
       } else if (!mHasFetchedVoicemailStatus) {
         // Try to show the voicemail tab after the voicemail status returns.
@@ -312,6 +311,7 @@ public class ListsFragment extends Fragment
       mViewPagerAdapter.notifyDataSetChanged();
 
       if (hasActiveVoicemailProvider) {
+        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_TAB_VISIBLE);
         mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
       } else {
         mViewPagerTabs.removeTab(TAB_INDEX_VOICEMAIL);

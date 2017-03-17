@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"Ново, поедноставено блокирање"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"За подобра заштита, Телефонот треба да го промени начинот на блокирање. Блокираните броеви сега ќе ги сопрат повиците и текстуалните пораки и ќе може да се споделат со други апликации."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Дозволи"</string>
+    <string name="block_number_confirmation_title" msgid="2699521227461376076">"Блокирај го <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Повиците од овој број ќе се блокираат, а говорната пошта автоматски ќе се брише."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Повиците од овој број ќе се блокираат, но можно е повикувачот сѐ уште да може да ви остава говорна пошта."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"Веќе нема да примате повици или текстуални пораки од овој број."</string>
+    <string name="block_number_ok" msgid="739786082788038932">"БЛОКИРАЈ"</string>
+    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Одблокирај го <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_ok" msgid="5089057152966269355">"ДЕБЛОКИРАЈ"</string>
+    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> не е важечки."</string>
+    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> е блокиран"</string>
+    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> е деблокиран"</string>
+    <string name="block_number_undo" msgid="5158120911892491697">"ВРАТИ"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Увоз не успеа"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"Блокирањето на повикот е оневозможено 48 часа"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Оневозможено е затоа што беше направен итен повик."</string>
+    <string name="block_report_number_alert_title" msgid="2740581989824959611">"Блокирај го <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"Веќе нема да примате повици од овој број."</string>
+    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> Повиков ќе се пријави како спам."</string>
+    <string name="unblock_number_alert_details" msgid="8696070817026870606">"Бројов ќе се деблокира и пријави дека не е спам. Повиците и гов. пошта нема да се гледаат како спам."</string>
+    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"Одблокирај го <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"Пријави"</string>
+    <string name="report_not_spam_alert_title" msgid="395961923213504916">"Пријавете грешка?"</string>
+    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"Повиците од <xliff:g id="NUMBER">%1$s</xliff:g> во иднина нема да се гледаат како спам."</string>
+    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"Пријавете го повикот како спам"</string>
+</resources>

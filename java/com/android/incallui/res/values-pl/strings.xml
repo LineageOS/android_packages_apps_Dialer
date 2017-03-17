@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Poł. konferencyjne"</string>
+    <string name="call_lost" msgid="2082971531689406145">"Połączenie przerwane"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Wysłać następujące dzwonki?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Wysyłanie sygnałów\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Wyślij"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Tak"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Nie"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Zastąp symbol wieloznaczny"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Poł. konferencyjne <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Numer poczty głosowej"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Wybieranie"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Nieodebrane połączenie od: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Trwa połączenie"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Trwa połączenie służbowe"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Trwające połączenie przez Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Trwa połączenie służbowe przez Wi-Fi"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Oczekujące"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Połączenie"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Przychodzące połączenie służbowe"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Przychodzące połączenie przez Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Przychodzące połączenie służbowe przez Wi-Fi"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Przychodzące połączenie podejrzanie o spam"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Przychodzące żądanie wideo"</string>
+    <string name="notification_voicemail_title" msgid="3870308666991926655">"Nowa poczta głosowa"</string>
+    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Nowa poczta głosowa (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Zadzwoń do <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Nieznany numer poczty głosowej"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Brak usługi"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"Wybrana sieć (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) jest niedostępna"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Odbierz"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Rozłącz"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Rozmowa wideo"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Głos"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Zaakceptuj"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Odrzuć"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Trwająca rozmowa na innym urządzeniu"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"Trwająca rozmowa wideo na innym urządzeniu"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Odbierz rozmowę"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Odbierz rozmowę wideo"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Aby rozpocząć połączenie, wyłącz najpierw tryb samolotowy"</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Nie zarejestrowano w sieci"</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"Sieć komórkowa jest niedostępna."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Aby zadzwonić, wybierz prawidłowy numer."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"Nie można dzwonić."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Rozpoczynanie sekwencji MMI..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Usługa nie jest obsługiwana."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Nie można przełączyć połączeń."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Nie można rozdzielić połączenia."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Nie można przekazać."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Nie można nawiązać połączenia konferencyjnego."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Nie można odrzucić połączenia."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Nie można zwolnić połączeń."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Połączenie alarmowe"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Trwa włączanie sieci bezprzewodowych..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Brak sieci. Próbuję ponownie…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"Nie można dzwonić. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nie jest numerem alarmowym."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"Nie można dzwonić. Wybierz numer alarmowy."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Aby zadzwonić, użyj klawiatury."</string>
+    <string name="player_started" msgid="9177182657338033086">"Odtwarzacz włączony"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"Odtwarzacz zatrzymany"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"Aparat niegotowy"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"Aparat gotowy"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Nieznane zdarzenie sesji połączenia"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Inne ustawienia połączeń"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"przejdź do rozmowy prywatnej"</string>
+    <string name="selectContact" msgid="1703433172800564849">"wybierz kontakt"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Dzwonek i wibracje"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Zarządzaj połączeniem konferencyjnym"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Numer alarmowy"</string>
+    <string name="child_number" msgid="3398257437107259682">"z <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Ostatnie wiadomości"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"Informacje o firmie"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"<xliff:g id="DISTANCE">%.1f</xliff:g> mil(e) stąd"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"<xliff:g id="DISTANCE">%.1f</xliff:g> km stąd"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> – <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Otwarte jutro od <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Otwarte dzisiaj od <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Zamknięte od <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Zamknięte dzisiaj od <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Teraz otwarte"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Teraz zamknięte"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"Znasz <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"Czy <xliff:g id="NUMBER">%1$s</xliff:g> to spam?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"Numer <xliff:g id="NUMBER">%1$s</xliff:g> został zablokowany, a połączenie zgłoszone jako spam."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"Połączenie z numeru <xliff:g id="NUMBER">%1$s</xliff:g> zostało zgłoszone jako niebędące spamem."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Kliknij, aby dodać do kontaktów lub zablokować jako spam."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"To pierwsze połączenie z tego numeru. Jeśli to spam, możesz zablokować ten numer i zgłosić go."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"Kliknij, aby zgłosić to połączenie jako NIEBĘDĄCE SPAMEM lub zablokować je."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Podejrzewamy, że to spam. Jeśli to połączenie nie było spamem, kliknij TO NIE SPAM, aby zgłosić naszą pomyłkę."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Zablokuj i zgłoś"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Dodaj kontakt"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"To nie spam"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Zablokuj numer"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Dodaj do kontaktów"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Zablokuj i zgłoś spam"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"To nie spam"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Brak lub błąd karty SIM"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Zakończ połączenie"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Połączenie konferencyjne"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"W trakcie rozmowy"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Kontynuuję rozmowę przy użyciu transmisji danych komórkowych…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Nie udało się przełączyć na sieć Wi-Fi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Rozmowa wideo pozostanie w sieci komórkowej. Za transfer danych może zostać pobrana opłata."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Nie pokazuj ponownie tego komunikatu"</string>
+</resources>

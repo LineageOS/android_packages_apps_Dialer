@@ -529,6 +529,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       final Bundle extras = getIntent().getExtras();
       if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
         mListsFragment.showTab(ListsFragment.TAB_INDEX_VOICEMAIL);
+        Logger.get(this).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
       } else {
         mListsFragment.showTab(ListsFragment.TAB_INDEX_HISTORY);
       }

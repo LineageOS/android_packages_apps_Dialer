@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_status_voicemail_not_available" msgid="5853033558114540057">"ບໍ່​ມີ​ການ​ອັບ​ເດດ​ຂໍ້​ຄວາມ​ສຽງ​ຢູ່"</string>
+    <string name="voicemail_status_messages_waiting" msgid="8900895357460505877">"ຂໍ້​ຄວາມ​ສຽງ​ໃໝ່​ລໍ​ຖ້າ​ຢູ່. ບໍ່​ສາ​ມາດ​ໂຫຼດ​ໄດ້​ໃນ​ເວ​ລາ​ນີ້."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8642831215097798709">"ຕັ້ງ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2341871147130931237">"ບໍ່​ມີ​ສຽງ​ຢູ່"</string>
+    <string name="voicemail_status_action_configure" msgid="4445818528232235329">"ຕັ້ງຄ່າ"</string>
+    <string name="voicemail_status_action_call_server" msgid="3189606267631644507">"ໂທຫາເບີຂໍ້ຄວາມສຽງ"</string>
+</resources>

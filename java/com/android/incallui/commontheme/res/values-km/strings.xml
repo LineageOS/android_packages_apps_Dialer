@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_content_description_end_call" msgid="8232796487777787200">"បញ្ចប់​ការ​ហៅ"</string>
+    <string name="incall_content_description_muted" msgid="2130133443150389474">"បានបិទសំឡេង"</string>
+    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"បានបើកសំឡេង"</string>
+    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"ប្ដូរ​ការ​ហៅ"</string>
+    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"បញ្ចូល​ការ​ហៅ​រួម​​គ្នា"</string>
+    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"កាសស្ដាប់សំឡេង"</string>
+    <string name="incall_content_description_speaker" msgid="7837829930201265549">"ឧបករណ៍​បំពង​សំឡេង"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"ប៊្លូធូស"</string>
+    <string name="incall_content_description_headset" msgid="3170439802944346719">"កាស​មាន​ខ្សែ"</string>
+    <string name="incall_content_description_hold" msgid="3335508251734906019">"ដាក់​ការ​ហៅ​ឲ្យ​រង់ចាំ"</string>
+    <string name="incall_content_description_unhold" msgid="3862584118869933593">"បន្ត​ការហៅ"</string>
+    <string name="incall_content_description_video_on" msgid="899266487647420613">"បើក​វីដេអូ​"</string>
+    <string name="incall_content_description_video_off" msgid="762985912616707076">"បិទ​វីដេអូ"</string>
+    <string name="incall_content_description_swap_video" msgid="297943299827908998">"ប្ដូរ​វីដេអូ"</string>
+</resources>

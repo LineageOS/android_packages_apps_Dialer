@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_content_description_end_call" msgid="8232796487777787200">"Завршете го повикот"</string>
+    <string name="incall_content_description_muted" msgid="2130133443150389474">"Звукот е исклучен"</string>
+    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"Звукот е вклучен"</string>
+    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"Заменете повици"</string>
+    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"Спојте повици"</string>
+    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"Слушалка"</string>
+    <string name="incall_content_description_speaker" msgid="7837829930201265549">"Звучник"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"Bluetooth"</string>
+    <string name="incall_content_description_headset" msgid="3170439802944346719">"Жичени слушалки"</string>
+    <string name="incall_content_description_hold" msgid="3335508251734906019">"Стави на чекање"</string>
+    <string name="incall_content_description_unhold" msgid="3862584118869933593">"Продолжи го повикот"</string>
+    <string name="incall_content_description_video_on" msgid="899266487647420613">"Видеото е вклучено"</string>
+    <string name="incall_content_description_video_off" msgid="762985912616707076">"Видеото е исклучено"</string>
+    <string name="incall_content_description_swap_video" msgid="297943299827908998">"Заменете го видеото"</string>
+</resources>

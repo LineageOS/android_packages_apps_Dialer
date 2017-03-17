@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="incall_connecting" msgid="1708280493198276616">"ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
+    <string name="incall_transferring" msgid="7909128243635579407">"ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ..."</string>
+    <string name="incall_video_call_requesting" msgid="5251915562785911238">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
+    <string name="incall_wifi_video_call_requesting" msgid="8783968191180862607">"ವೈ-ಫೈ ವೀಡಿಯೊ ಕರೆ ಮಾಡುವಿಕೆ..."</string>
+    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"ಕರೆ ನಿರಾಕರಿಸಲಾಗಿದೆ"</string>
+    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"ಕರೆ ಅವಧಿ ಮೀರಿದೆ"</string>
+    <string name="incall_hanging_up" msgid="2166116351937190949">"ಹ್ಯಾಂಗ್ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="incall_call_ended" msgid="6294704948774348480">"ಕರೆ ಅಂತ್ಯಗೊಂಡಿದೆ"</string>
+    <string name="incall_remotely_held" msgid="8561379039177396615">"ಹೋಲ್ಡ್‌ ಮಾಡಲಾಗಿದೆ"</string>
+    <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"ಇವರಿಂದ ವೀಡಿಯೊ ಕರೆ"</string>
+    <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"ಇವರಿಂದ ವೈ-ಫೈ ವೀಡಿಯೊ ಕರೆ"</string>
+    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"ಇವರಿಂದ ಕರೆ"</string>
+    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"ಇವರಿಂದ ಕೆಲಸದ ಕರೆ"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
+    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆದಾರರು"</string>
+    <string name="contact_grid_callback_number" msgid="1284649030313415807">"ಮರಳಿಕರೆ ಮಾಡುವ ಸಂಖ್ಯೆ: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+</resources>

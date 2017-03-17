@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Ұшақ режимін өшіру"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Визуалды дауыстық хабарды іске қосу"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Визуалды дауыстық пошта толығымен белсендірілгенше, дауыстық пошта хабарландыруларын қабылдай алмайсыз. Дауыстық пошта толығымен белсендірілгенше, жаңа хабарлар шығарып алу үшін дауыстық поштаға қоңырау шалыңыз."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Визуалды дауыстық хабарды іске қосу мүмкін болмады"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Телефоныңыздың ұялы байланысын тексеріп, әрекетті қайталаңыз."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Ұшақ режимін өшіріп, әрекетті қайталаңыз."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Байланыс жоқ"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Жаңа дауыстық хабарлар туралы сізге хабарланбайды. Wi-Fi байланысыңыз болса, дауыстық хабарды қазір синхрондау арқылы тексере аласыз."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Жаңа дауыстық хабарлар туралы сізге хабарланбайды. Дауыстық хабарды синхрондау үшін ұшақ режимін өшіріңіз."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Дауыстық хабарды тексеру үшін телефоныңызда ұялы деректер байланысы болуы керек."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Визуалды дауыстық хабарды іске қосу мүмкін болмады"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Визуалды дауыстық хабарды жаңарту мүмкін болмады."</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Wi-Fi немесе ұялы байланыс жақсарғанда, әрекетті қайталаңыз. Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Ұялы деректер байланысы жақсарғанда, әрекетті қайталаңыз. Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Визуалды дауыстық хабарды жаңарту мүмкін болмады"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Визуалды дауыстық хабарды жаңарту мүмкін болмады"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Визуалды дауыстық хабарды жаңарту мүмкін болмады"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Визуалды дауыстық хабарды жаңарту мүмкін болмады"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Дауыстық хабарды тексеру үшін қоңырау шалуыңызға болады."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Кіріс қалтасы толуға жақын"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Кіріс қалтасы толы болса, жаңа дауыстық хабар ала алмайсыз."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Жаңа дауыстық хабарды алу мүмкін емес"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Кіріс қалтасы толы. Жаңа дауыстық хабарды алу үшін кейбір хабарларды жойып көріңіз."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Қосымша жадты қосып, сақтық көшірме жасау"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Кіріс жәшігі толы. Орын босату үшін, қосымша жад функциясын қосып, Google-ға дауыстық хабарларыңызды басқарып, сақтық көшірмесін жасауға рұқсат беріңіз."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Қосымша жадты қосып, сақтық көшірме жасау"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Кіріс жәшігі толы. Орын босату үшін, қосымша жад функциясын қосып, Google-ға дауыстық хабарларыңызды басқарып, сақтық көшірмесін жасауға рұқсат беріңіз."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Дауыстық пошта PIN кодын орнатыңыз"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Дауыстық поштаны тыңдау үшін кез келген уақытта қоңырау шалғанда, дауыстық пошта PIN коды сұралады."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Белгісіз қате"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Ұшақ режимінің параметрлері"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN кодын орнату"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Әрекетті қайталау"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Қосу"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Жоқ, рақмет"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Синхрондау"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Дауыстық поштаға қоңырау шалу"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Тұтынушыларға қолдау көрсету орталығына қоңырау шалу"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Кешіріңіз, ақаулық орын алды. Әрекетті кейінірек қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9001 екенін айтыңыз."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Кешіріңіз, ақаулық орын алды. Әрекетті кейінірек қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9002 екенін айтыңыз."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Кешіріңіз, ақаулық орын алды. Әрекетті кейінірек қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9003 екенін айтыңыз."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Дауыстық пошта жәшігіне қосылмайды"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Кешіріңіз, дауыстық пошта жәшігіңізге қосылу кезінде қиындық туындап жатыр. Егер сигнал күші нашар аймақта болсаңыз, сигнал күшті болғанша күтіңіз және әрекетті қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9004 екенін айтыңыз."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Дауыстық пошта жәшігіне қосылмайды"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Кешіріңіз, дауыстық пошта жәшігіңізге қосылу кезінде қиындық туындап жатыр. Егер сигнал күші нашар аймақта болсаңыз, сигнал күшті болғанша күтіңіз және әрекетті қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9005 екенін айтыңыз."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Дауыстық пошта жәшігіне қосылмайды"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Кешіріңіз, дауыстық пошта жәшігіңізге қосылу кезінде қиындық туындап жатыр. Егер сигнал күші нашар аймақта болсаңыз, сигнал күшті болғанша күтіңіз және әрекетті қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9006 екенін айтыңыз."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Кешіріңіз, ақаулық орын алды. Әрекетті кейінірек қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9007 екенін айтыңыз."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Кешіріңіз, ақаулық орын алды. Әрекетті кейінірек қайталаңыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9008 екенін айтыңыз."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Кешіріңіз, қызметіңізді орнату ақаулығы орын алды. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9009 екенін айтыңыз."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Дауыстық пошта жәшігіне қосылмайды"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Кешіріңіз, бұл уақытта дауыстық поштаңызға қосыла алмаймыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9990 екенін айтыңыз."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Дауыс пошта орнату"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Тіркелгіңізде дауыстық пошта орнатылмаған. Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9991 екенін айтыңыз."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Дауыстық пошта"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Бұл құрылғыда дауыстық пошта қолданылмайды. Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9992 екенін айтыңыз."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9993 екенін айтыңыз."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Визуалды дауыстық пошта"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9994 екенін айтыңыз."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Визуалды дауыстық пошта"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9995 екенін айтыңыз."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Визуалды дауыстық пошта"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Визуалды дауыстық поштаны белсендіру үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9996 екенін айтыңыз."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9998 екенін айтыңыз."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Визуалды дауыстық пошта ажыратылды"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Визуалды дауыстық пошта белсендіру үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9997 екенін айтыңыз."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9989 екенін айтыңыз."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Бірдеңе дұрыс болмады"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9999 екенін айтыңыз."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Визуалды дауыстық хабар функциясының шарттары мен талаптары"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Визуалды дауыстық хабар функциясын қолдану үшін Verizon Wireless шарттарын қабылдауыңыз қажет:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Шарттары мен талаптары қабылданбаса, визуалды дауыстық хабар функциясы өшіріледі."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Визуалды дауыстық хабар функциясын өшіру"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Дауыстық хабарлар поштасына кіру *86 нөміріне қоңырау шалғанда ғана мүмкін болады. Жалғастыру үшін жаңа PIN кодын тағайындаңыз."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN кодын тағайындау"</string>
+</resources>

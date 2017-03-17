@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="camera_switch_full_screen" msgid="8940026902611470063">"পূর্ণ স্ক্রীন ক্যামেরাতে পাল্টান"</string>
+    <string name="camera_switch_camera_facing" msgid="6965029101223590384">"বোতামটিকে এখন সামনের ক্যামেরার জন্য ব্যবহার করা হবে"</string>
+    <string name="camera_switch_camera_rear" msgid="2518207979995455566">"বোতামটিকে এখন পিছনের ক্যামেরার জন্য ব্যবহার করা হবে"</string>
+    <string name="camera_cancel_recording" msgid="1957458244979306869">"ভিডিও রেকর্ডিং বন্ধ করুন"</string>
+    <string name="using_front_camera" msgid="6734227994972108992">"সামনের ক্যামেরা ব্যবহার করা হচ্ছে"</string>
+    <string name="using_back_camera" msgid="2143070243242164971">"পিছনের ক্যামেরা ব্যবহার করা হচ্ছে"</string>
+    <string name="camera_take_picture" msgid="2366908858042883376">"ফটো তুলুন"</string>
+</resources>

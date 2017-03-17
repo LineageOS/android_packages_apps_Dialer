@@ -19,6 +19,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -71,7 +72,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   @Override
   public void onResume() {
     super.onResume();
-
+    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_SETTINGS_VIEWED);
     PreferenceScreen preferenceScreen = getPreferenceScreen();
     if (preferenceScreen != null) {
       preferenceScreen.removeAll();
@@ -86,6 +87,16 @@ public class VoicemailSettingsFragment extends PreferenceFragment
             findPreference(getString(R.string.voicemail_notification_ringtone_key));
     voicemailRingtonePreference.setVoicemailRingtoneNameChangeListener(this);
     voicemailRingtonePreference.init(phoneAccountHandle, oldRingtoneName);
+    voicemailRingtonePreference.setOnPreferenceClickListener(
+        new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.VVM_CHANGE_RINGTONE_CLICKED);
+            // Let the preference handle the click.
+            return false;
+          }
+        });
 
     voicemailVibration =
         (CheckBoxPreference) findPreference(getString(R.string.voicemail_notification_vibrate_key));
@@ -94,6 +105,16 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         getContext()
             .getSystemService(TelephonyManager.class)
             .isVoicemailVibrationEnabled(phoneAccountHandle));
+    voicemailVibration.setOnPreferenceClickListener(
+        new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.VVM_CHANGE_VIBRATION_CLICKED);
+            // Let the preference handle the click.
+            return false;
+          }
+        });
 
     voicemailVisualVoicemail =
         (SwitchPreference) findPreference(getString(R.string.voicemail_visual_voicemail_key));
@@ -116,6 +137,15 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         VoicemailChangePinActivity.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
 
     voicemailChangePinPreference.setIntent(changePinIntent);
+    voicemailChangePinPreference.setOnPreferenceClickListener(
+        new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_CLICKED);
+            // Let the preference handle the click.
+            return false;
+          }
+        });
     if (VoicemailChangePinActivity.isDefaultOldPinSet(getContext(), phoneAccountHandle)) {
       voicemailChangePinPreference.setTitle(R.string.voicemail_set_pin_dialog_title);
     } else {
@@ -139,6 +169,16 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     Intent advancedSettingsIntent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
     advancedSettingsIntent.putExtra(TelephonyManager.EXTRA_HIDE_PUBLIC_SETTINGS, true);
     advancedSettings.setIntent(advancedSettingsIntent);
+    voicemailChangePinPreference.setOnPreferenceClickListener(
+        new OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick(Preference preference) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.VVM_ADVANCED_SETINGS_CLICKED);
+            // Let the preference handle the click.
+            return false;
+          }
+        });
   }
 
   @Override
@@ -158,6 +198,13 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     if (preference.getKey().equals(voicemailVisualVoicemail.getKey())) {
       boolean isEnabled = (boolean) objValue;
       VisualVoicemailSettingsUtil.setEnabled(getContext(), phoneAccountHandle, isEnabled);
+
+      if (isEnabled) {
+        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_ENABLED_IN_SETTINGS);
+      } else {
+        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
+      }
+
       PreferenceScreen prefSet = getPreferenceScreen();
       if (isVisualVoicemailActivated()) {
         prefSet.addPreference(voicemailChangePinPreference);

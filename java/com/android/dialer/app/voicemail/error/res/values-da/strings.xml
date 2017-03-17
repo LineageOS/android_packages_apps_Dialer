@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Slå flytilstand fra"</string>
+    <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktiverer visuel telefonsvarer"</string>
+    <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Du modtager muligvis ikke telefonsvarerunderretninger, før den visuelle telefonsvarer er fuldt aktiveret. Ring til telefonsvareren for hente nye beskeder, indtil telefonsvareren er fuldt aktiveret."</string>
+    <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Visuel telefonsvarer kan ikke aktiveres"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Sørg for, at din telefon har mobilforbindelse, og prøv igen."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Slå flytilstand fra, og prøv igen."</string>
+    <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Ingen forbindelse"</string>
+    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Du vil ikke få besked om nye telefonsvarerbeskeder. Hvis du er på Wi-Fi, kan du tjekke, om der er telefonsvarerbeskeder, ved at synkronisere nu."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Du vil ikke få besked om nye telefonsvarerbeskeder. Slå flytilstand fra for at synkronisere din e-mail."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Din telefon skal have en mobilforbindelse, for at du kan tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Visuel telefonsvarer kan ikke aktiveres"</string>
+    <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Visuel telefonsvarer kan ikke opdateres"</string>
+    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Prøv igen, når din Wi-Fi- eller mobilforbindelse er bedre. Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Prøv igen, når din mobildataforbindelse er bedre. Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Visuel telefonsvarer kan ikke opdateres"</string>
+    <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Visuel telefonsvarer kan ikke opdateres"</string>
+    <string name="voicemail_error_communication_message" msgid="1226746423005179379">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_server_connection_title" msgid="3036980885397552848">"Visuel telefonsvarer kan ikke opdateres"</string>
+    <string name="voicemail_error_server_connection_message" msgid="6008577624710159550">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_server_title" msgid="5355286554022049134">"Visuel telefonsvarer kan ikke opdateres"</string>
+    <string name="voicemail_error_server_message" msgid="3538157415413084592">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_inbox_near_full_title" msgid="7568681773644454672">"Indbakken er næsten fuld"</string>
+    <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Du vil ikke kunne modtage nye telefonsvarerbeskeder, hvis din indbakke er fuld."</string>
+    <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Du kan ikke modtage nye telefonsvarerbeskeder"</string>
+    <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Din indbakke er fuld. Prøv at slette nogle beskeder for at modtage nye telefonsvarerbeskeder."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Slå ekstra lagerplads og sikkerhedskopiering til"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Din telefonsvarer er fuld. Du kan frigøre plads ved at slå ekstra lagerplads til, så Google kan administrere og sikkerhedskopiere dine talebeskeder."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Slå ekstra lagerplads og sikkerhedskopiering til"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Din telefonsvarer er næsten fuld. Du kan frigøre plads ved at slå ekstra lagerplads til, så Google kan administrere og sikkerhedskopiere dine talebeskeder."</string>
+    <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Bestem pinkoden til din telefonsvarer"</string>
+    <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Du skal bruge en pinkode til din telefonsvarer, når du ringer for at få adgang til den."</string>
+    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Ukendt fejl"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Indstillinger for flytilstand"</string>
+    <string name="voicemail_action_set_pin" msgid="958510049866316228">"Vælg pinkode"</string>
+    <string name="voicemail_action_retry" msgid="4450307484541052511">"Prøv igen"</string>
+    <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Slå til"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"Nej tak"</string>
+    <string name="voicemail_action_sync" msgid="5139315923415392787">"Synkroniser"</string>
+    <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Ring til telefonsvarer"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Ring til kundesupport"</string>
+    <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"Der opstod en fejl"</string>
+    <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Der opstod desværre et problem. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9001."</string>
+    <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"Der opstod en fejl"</string>
+    <string name="vvm3_error_vmg_dns_failure_message" msgid="7110154996415009499">"Der opstod desværre et problem. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9002."</string>
+    <string name="vvm3_error_spg_dns_failure_title" msgid="8670172138011171697">"Der opstod en fejl"</string>
+    <string name="vvm3_error_spg_dns_failure_message" msgid="6780011498675342391">"Der opstod desværre et problem. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9003."</string>
+    <string name="vvm3_error_vms_no_cellular_title" msgid="5402891018307856824">"Der kan ikke oprettes forbindelse til din telefonsvarer"</string>
+    <string name="vvm3_error_vms_no_cellular_message" msgid="6671769320769351896">"Vi har desværre problemer med at oprette forbindelse til din telefonsvarer. Hvis du befinder dig i et område med dårlig signalstyrke, skal du vente, til du har et stærkt signal, og prøve igen. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9004."</string>
+    <string name="vvm3_error_vmg_no_cellular_title" msgid="7974884412395827829">"Der kan ikke oprettes forbindelse til din telefonsvarer"</string>
+    <string name="vvm3_error_vmg_no_cellular_message" msgid="4591495395224161921">"Vi har desværre problemer med at oprette forbindelse til din telefonsvarer. Hvis du befinder dig i et område med dårlig signalstyrke, skal du vente, til du har et stærkt signal, og prøve igen. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9005."</string>
+    <string name="vvm3_error_spg_no_cellular_title" msgid="8175349498869951939">"Der kan ikke oprettes forbindelse til din telefonsvarer"</string>
+    <string name="vvm3_error_spg_no_cellular_message" msgid="7902149969965747111">"Vi har desværre problemer med at oprette forbindelse til din telefonsvarer. Hvis du befinder dig i et område med dårlig signalstyrke, skal du vente, til du har et stærkt signal, og prøve igen. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9006."</string>
+    <string name="vvm3_error_vms_timeout_title" msgid="4044531581957597519">"Der opstod en fejl"</string>
+    <string name="vvm3_error_vms_timeout_message" msgid="2997890600174252849">"Der opstod desværre et problem. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9007."</string>
+    <string name="vvm3_error_vmg_timeout_title" msgid="2631426958078372779">"Der opstod en fejl"</string>
+    <string name="vvm3_error_vmg_timeout_message" msgid="8366857300952305567">"Der opstod desværre et problem. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9008."</string>
+    <string name="vvm3_error_status_sms_timeout_title" msgid="6528532085593533049">"Der opstod en fejl"</string>
+    <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Vi har desværre problemer med at konfigurere din tjeneste. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9009."</string>
+    <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Der kan ikke oprettes forbindelse til din telefonsvarer"</string>
+    <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Vi kan desværre ikke oprette forbindelse til din telefonsvarer i øjeblikket. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9990."</string>
+    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Konfigurer telefonsvarer"</string>
+    <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Telefonsvarer er ikke konfigureret på din konto. Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9991."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Telefonsvarer"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Visuel telefonsvarer kan ikke bruges på denne enhed. Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden 9992."</string>
+    <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Der opstod en fejl"</string>
+    <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9993."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"For at aktivere den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9996."</string>
+    <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Der opstod en fejl"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Visuel telefonsvarer er deaktiveret"</string>
+    <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> for at aktivere visuel telefonsvarer."</string>
+    <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Der opstod en fejl"</string>
+    <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9997."</string>
+    <string name="vvm3_error_imap_select_error_title" msgid="688468464562761731">"Der opstod en fejl"</string>
+    <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9989."</string>
+    <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Der opstod en fejl"</string>
+    <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9999."</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vilkår og betingelser for visuel telefonsvarer"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Du skal acceptere vilkår og betingelser for Verizon Wireless for at bruge visuel telefonsvarer:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visuel telefonsvarer bliver deaktiveret, hvis vilkår og betingelser afvises."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Deaktiver visuel telefonsvarer"</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Telefonsvareren er kun tilgængelig, hvis du taster *86 og ringer op. Angiv en ny pinkode til telefonsvarer for at fortsætte."</string>
+    <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Angiv pinkode"</string>
+</resources>

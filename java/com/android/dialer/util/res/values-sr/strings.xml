@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="default_notification_description" msgid="4304424287748323094">"Подразумевани звук (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_silent" msgid="946744257396998305">"Ништа"</string>
+    <string name="ringtone_unknown" msgid="1310974715243581582">"Непознати звук звона"</string>
+    <string name="activity_not_available" msgid="8360067109103762211">"На овом уређају нема апликација за то"</string>
+    <string name="outgoing_wps_warning" msgid="7505673114152005234">"Ако упутите WPS позив, прекинућете постојећи позив."</string>
+    <string name="dialog_continue" msgid="4070630558441163574">"Настави"</string>
+</resources>

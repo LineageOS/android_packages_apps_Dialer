@@ -207,15 +207,18 @@ public class CallButtonPresenter
   }
 
   @Override
-  public void muteClicked(boolean checked) {
-    LogUtil.v("CallButtonPresenter", "turning on mute: " + checked);
-    Logger.get(mContext)
-        .logCallImpression(
-            checked
-                ? DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_MUTE
-                : DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_MUTE,
-            mCall.getUniqueCallId(),
-            mCall.getTimeAddedMs());
+  public void muteClicked(boolean checked, boolean clickedByUser) {
+    LogUtil.i(
+        "CallButtonPresenter", "turning on mute: %s, clicked by user: %s", checked, clickedByUser);
+    if (clickedByUser) {
+      Logger.get(mContext)
+          .logCallImpression(
+              checked
+                  ? DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_MUTE
+                  : DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_MUTE,
+              mCall.getUniqueCallId(),
+              mCall.getTimeAddedMs());
+    }
     TelecomAdapter.getInstance().mute(checked);
   }
 
@@ -254,7 +257,7 @@ public class CallButtonPresenter
     mAutomaticallyMuted = true;
     mPreviousMuteState = AudioModeProvider.getInstance().getAudioState().isMuted();
     // Simulate a click on the mute button
-    muteClicked(true);
+    muteClicked(true /* checked */, false /* clickedByUser */);
     TelecomAdapter.getInstance().addCall();
   }
 
@@ -448,7 +451,7 @@ public class CallButtonPresenter
       if (mInCallButtonUi == null) {
         return;
       }
-      muteClicked(mPreviousMuteState);
+      muteClicked(mPreviousMuteState, false /* clickedByUser */);
     }
     mAutomaticallyMuted = false;
   }

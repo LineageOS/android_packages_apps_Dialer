@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+  -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="type_incoming" msgid="5727636795656199810">"Входящий вызов"</string>
+    <string name="type_incoming_pulled" msgid="8434723359163965796">"Входящий вызов переведен на другое устройство"</string>
+    <string name="type_outgoing" msgid="764896746073942963">"Исходящий вызов"</string>
+    <string name="type_outgoing_pulled" msgid="1648517538371704193">"Исходящий вызов переведен на другое устройство"</string>
+    <string name="type_missed" msgid="2997043831022028176">"Пропущенный вызов"</string>
+    <string name="type_incoming_video" msgid="7507180294202642554">"Входящий видеовызов"</string>
+    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"Входящий видеовызов переведен на другое устройство"</string>
+    <string name="type_outgoing_video" msgid="309370072333983910">"Исходящий видеовызов"</string>
+    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"Исходящий видеовызов переведен на другое устройство"</string>
+    <string name="type_missed_video" msgid="4350107016317603785">"Пропущенный видеовызов"</string>
+    <string name="type_voicemail" msgid="1877524395253846684">"Голосовая почта"</string>
+    <string name="type_rejected" msgid="5632107438472996198">"Отклоненный вызов"</string>
+    <string name="type_blocked" msgid="9177237294052244929">"Заблокированный вызов"</string>
+    <string name="type_answered_elsewhere" msgid="411958582555881640">"Вызов принят на другом устройстве"</string>
+    <string name="description_phone_account" msgid="4382951172691362244">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_via_number" msgid="7682575124846343076">"Номер <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="4345445677508018830">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, номер <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="voicemail_string" msgid="6029775151483803006">"Голосовая почта"</string>
+    <!-- no translation found for call_details_duration_format (296780245582838089) -->
+    <skip />
+    <!-- no translation found for call_details_short_duration_format (8079910850626312453) -->
+    <skip />
+</resources>
