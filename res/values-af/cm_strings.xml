@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Verskaffer van omgekeerde soektog</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Sjinees (CN)</string>
+  <string name="speed_dial_edit_title">Redigeer spoedbel <xliff:g id="index" example="2">%1$d </xliff:g></string>
+  <string name="speed_dial_input_hint">Tik asseblief \'n nommer</string>
   <string name="call_log_show_all_slots">Alle SIMs</string>
   <string name="call_log_all_calls_header">Alle oproepe</string>
   <string name="call_log_blacklist_header">Alleenlik geblokkeerde oproepe</string>
+  <string name="call_log_blocked_empty">Jy het geen geblokkeerde oproepe nie.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistieke</string>
   <string name="callStatsDetailTitle">Oproep stat besonderhede</string>
@@ -83,23 +86,61 @@
   <string name="speed_dial_delete">Verwyder</string>
   <string name="speed_dial_unassigned_dialog_title">Sleutel nie toegeken</string>
   <string name="speed_dial_unassigned_dialog_message">Geen vinnige skakel aksie toegeken aan nommer sleutel \'<xliff:g id="number">%s</xliff:g>\'. Wil jy nou \'n aksie toeken?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Om spoedbel te gebruik, skakel eers vliegtuigmodus af</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Spoedbel kan nie gestel word vir hierdie sleutel nie</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Jy het geen inkomende oproepe nie.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Jy het geen uitgaande oproepe nie.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Jou oproepskiedenis is leeg</string>
+  <string name="calllog_search_hint">Deursoek oproepgeskiedenis</string>
+  <string name="no_call_log">Geen oproep geskiedenis</string>
+  <string name="clear">Maak skoon</string>
+  <string name="description_clear_search">Vee soektog uit</string>
+  <string name="video_call_welcome_title"><b>Welkom by die nuwe Video-oproep-toep</b></string>
+  <string name="video_call_welcome_message">Ons almal is lief om daardie bekende stem aan die einde van die lyn te hoor, maar om gesig tot gesig te praat is soveel beter! Hier is wat jy moet weet om jou intydse (of FaceTime?) verbindings aan die gaan te kry: \n Jy sal moet op 4G LTE of \'n Wi-Fi konneksie wees\n Die toestel wat jy bel moet ook met video-oproepe versoenbaar wees\n Video-oproepe gebruik jou hoë spoed data\n Jy kan ook \'n stem oproep na \'n video-oproep opgradeer\n\n Gaan kyk na<a>https://support.t-mobile.com/docs/DOC-23574</a> vir meer inligting.</string>
+  <string name="video_call_welcome_message_repeat">Wys hierdie boodskap elke keer</string>
+  <string name="toast_change_video_call_failed">Kan nie verander na video-oproep, verkeerde nommerformaat</string>
+  <string name="toast_make_video_call_failed">Kan nie video-oproep maak nie, verkeerde nommerformaat</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video-oproep, wys myself</string>
+  <string name="overflowRXCallMenuItemText">Video-oproep, versteek my</string>
+  <string name="overflowVOCallMenuItemText">Stemoproep</string>
+  <string name="video_call">Videooproep</string>
+  <string name="call_data_info_label">Oproep-/datagebruik tydhouers</string>
+  <string name="call_data_info_description">Stem oproep gebruik tyd en data gebruik tyd</string>
+  <string name="alert_call_over_wifi">Oproepe sal gemaak word oor Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Geen sellulêre netwerk beskikbaar. Koppel aan beskikbare Wi-Fi om oproepe te maak.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Koppel aan Wi-Fi om oproepe te maak.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tik hier om beskikbare netwerke te bekyk</string>
+  <string name="menu_add_to_4g_conference_call">Voeg by tot 4G konferensie-oproep</string>
+  <string name="menu_4g_conference_call">4G konferensie-oproep</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Inkomende 4G stemoproep</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Inkomende 4G video-oproep</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Uitgaande 4G stemoproep</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Uitgaande 4G video-oproep</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Gemisde 4G stemoproep</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Gemisde 4G video-oproep</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Inkomende Wi-Fi stemoproep</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Inkomende Wi-Fi video-oproep</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Uitgaande Wi-Fi stemoproep</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Uitgaande Wi-Fi video-oproep</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Gemisde Wi-Fi stem roep</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Gemisde Wi-Fi video-oproep</string>
 </resources>
