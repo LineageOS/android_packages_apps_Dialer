@@ -27,12 +27,6 @@ public interface VideoTech {
 
   boolean isTransmittingOrReceiving();
 
-  /**
-   * Determines if the answer video UI should open the camera directly instead of letting the video
-   * tech manage the camera.
-   */
-  boolean isSelfManagedCamera();
-
   void onCallStateChanged(int newState);
 
   @SessionModificationState

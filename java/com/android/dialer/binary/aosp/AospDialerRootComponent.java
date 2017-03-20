@@ -27,15 +27,4 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 /** Root component for the AOSP Dialer application. */
-@Singleton
-@Component(
-  modules = {
-    ContextModule.class,
-    SimulatorModule.class,
-    StubCallLocationModule.class,
-    StubEnrichedCallModule.class,
-    StubMapsModule.class,
-    VoicemailModule.class
-  }
-)
 public interface AospDialerRootComponent extends BaseDialerRootComponent {}

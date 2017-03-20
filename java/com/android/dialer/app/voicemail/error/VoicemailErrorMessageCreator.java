@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
-import com.android.voicemail.VisualVoicemailTypeExtensions;
 
 /**
  * Given a VoicemailStatus, {@link VoicemailErrorMessageCreator#create(Context, VoicemailStatus)}
@@ -37,7 +36,7 @@ public class VoicemailErrorMessageCreator {
       return null;
     }
     switch (status.type) {
-      case VisualVoicemailTypeExtensions.VVM_TYPE_VVM3:
+      case Vvm3VoicemailMessageCreator.VVM_TYPE_VVM3:
         return Vvm3VoicemailMessageCreator.create(context, status, statusReader);
       default:
         return OmtpVoicemailMessageCreator.create(context, status, statusReader);

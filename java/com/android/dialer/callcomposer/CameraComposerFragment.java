@@ -366,10 +366,7 @@ public class CameraComposerFragment extends CallComposerFragment
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-
-    CameraInfo cameraInfo = CameraManager.get().getCameraInfo();
-    int facing = cameraInfo == null ? CameraInfo.CAMERA_FACING_BACK : cameraInfo.facing;
-    outState.putInt(CAMERA_DIRECTION_KEY, facing);
+    outState.putInt(CAMERA_DIRECTION_KEY, CameraManager.get().getCameraInfo().facing);
     outState.putParcelable(CAMERA_URI_KEY, cameraUri);
   }
 

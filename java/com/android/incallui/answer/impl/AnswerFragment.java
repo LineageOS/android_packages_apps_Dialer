@@ -106,9 +106,6 @@ public class AnswerFragment extends Fragment
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_IS_SELF_MANAGED_CAMERA = "is_self_managed_camera";
-
   private static final String STATE_HAS_ANIMATED_ENTRY = "hasAnimated";
 
   private static final int HINT_SECONDARY_SHOW_DURATION_MILLIS = 5000;
@@ -291,15 +288,11 @@ public class AnswerFragment extends Fragment
   }
 
   public static AnswerFragment newInstance(
-      String callId,
-      boolean isVideoCall,
-      boolean isVideoUpgradeRequest,
-      boolean isSelfManagedCamera) {
+      String callId, boolean isVideoCall, boolean isVideoUpgradeRequest) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
     bundle.putBoolean(ARG_IS_VIDEO_CALL, isVideoCall);
     bundle.putBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST, isVideoUpgradeRequest);
-    bundle.putBoolean(ARG_IS_SELF_MANAGED_CAMERA, isSelfManagedCamera);
 
     AnswerFragment instance = new AnswerFragment();
     instance.setArguments(bundle);
@@ -627,11 +620,7 @@ public class AnswerFragment extends Fragment
     view.setSystemUiVisibility(flags);
     if (isVideoCall() || isVideoUpgradeRequest()) {
       if (VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
-        if (isSelfManagedCamera()) {
-          answerVideoCallScreen = new SelfManagedAnswerVideoCallScreen(getCallId(), this, view);
-        } else {
-          answerVideoCallScreen = new AnswerVideoCallScreen(getCallId(), this, view);
-        }
+        answerVideoCallScreen = new AnswerVideoCallScreen(getCallId(), this, view);
       } else {
         view.findViewById(R.id.videocall_video_off).setVisibility(View.VISIBLE);
       }
@@ -727,10 +716,6 @@ public class AnswerFragment extends Fragment
   @Override
   public boolean isVideoCall() {
     return getArguments().getBoolean(ARG_IS_VIDEO_CALL);
-  }
-
-  public boolean isSelfManagedCamera() {
-    return getArguments().getBoolean(ARG_IS_SELF_MANAGED_CAMERA);
   }
 
   @Override

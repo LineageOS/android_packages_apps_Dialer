@@ -53,7 +53,7 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
     mContext = context;
     mCallback = callback;
     mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-    mVoicemailStatusHelper = new VoicemailStatusHelper();
+    mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
     mHasActiveVoicemailProvider = mPrefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
   }
 
@@ -80,10 +80,7 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
         mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) > 0;
     if (hasActiveVoicemailProvider != mHasActiveVoicemailProvider) {
       mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
-      mPrefs
-          .edit()
-          .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, mHasActiveVoicemailProvider)
-          .apply();
+      mPrefs.edit().putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, mHasActiveVoicemailProvider);
       if (mCallback != null) {
         mCallback.onVisualVoicemailEnabledStatusChanged(mHasActiveVoicemailProvider);
       }

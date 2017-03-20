@@ -32,9 +32,9 @@ public abstract class StubCallLocationModule {
   @Binds
   public abstract CallLocation bindCallLocation(StubCallLocation callLocation);
 
-  static class StubCallLocation implements CallLocation {
+  static public class StubCallLocation implements CallLocation {
     @Inject
-    StubCallLocation() {}
+    public StubCallLocation() {}
 
     @Override
     public boolean canGetLocation(@NonNull Context context) {
@@ -44,7 +44,7 @@ public abstract class StubCallLocationModule {
     @Override
     @NonNull
     public Fragment getLocationFragment(@NonNull Context context) {
-      throw Assert.createUnsupportedOperationFailException();
+      return null;
     }
 
     @Override

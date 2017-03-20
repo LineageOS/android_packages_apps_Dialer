@@ -79,7 +79,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_person_add_white_24"/>
+      android:src="@drawable/ic_person_add_24dp"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"

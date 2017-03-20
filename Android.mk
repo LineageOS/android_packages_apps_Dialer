@@ -1,4 +1,5 @@
 # Local modifications:
+# * b/36287059 Dagger classes have been manually crafted.
 # * b/31757757 Precompiled proto classes have been included.
 # * b/36215428 dialer/oem/res/values-mcc3* have been pruned
 # * b/36383971 StubCallLocationModule modified to return null.

@@ -18,19 +18,27 @@ package com.android.dialer.enrichedcall;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
+import com.android.dialer.enrichedcall.stub.EnrichedCallManagerStub;
 
 /** Subcomponent that can be used to access the enriched call implementation. */
-@Subcomponent
-public abstract class EnrichedCallComponent {
+public class EnrichedCallComponent {
+  private static EnrichedCallComponent instance;
+  private EnrichedCallManager enrichedCallManager;
 
   @NonNull
-  public abstract EnrichedCallManager getEnrichedCallManager();
+  public EnrichedCallManager getEnrichedCallManager() {
+    if (enrichedCallManager == null) {
+        enrichedCallManager = new EnrichedCallManagerStub();
+    }
+    return enrichedCallManager;
+  }
 
   public static EnrichedCallComponent get(Context context) {
-    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
-        .enrichedCallComponent();
+    if (instance == null) {
+        instance = new EnrichedCallComponent();
+    }
+    return instance;
   }
 
   /** Used to refer to the root application component. */

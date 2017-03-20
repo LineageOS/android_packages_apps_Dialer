@@ -226,7 +226,7 @@ public class VoicemailErrorMessage {
                 preferenceKeyToUpdate,
                 DialerImpression.Type.VVM_USER_DISMISSED_VM_FULL_PROMO,
                 DialerImpression.Type.VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO);
-            sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true).apply();
+            sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true);
             statusReader.refresh();
           }
         });
