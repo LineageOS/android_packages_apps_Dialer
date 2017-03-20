@@ -19,13 +19,13 @@ package com.android.contacts.common.widget;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.ImageButton;
 import com.android.contacts.common.R;
-import com.android.contacts.common.util.FabUtil;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.Assert;
 
 /** Controls the movement and appearance of the FAB (Floating Action Button). */
 public class FloatingActionButtonController {
@@ -41,12 +41,11 @@ public class FloatingActionButtonController {
   private final int mAnimationDuration;
   private final int mFloatingActionButtonWidth;
   private final int mFloatingActionButtonMarginRight;
-  private final View mFloatingActionButtonContainer;
-  private final ImageButton mFloatingActionButton;
+  private final FloatingActionButton mFab;
   private final Interpolator mFabInterpolator;
   private int mScreenWidth;
 
-  public FloatingActionButtonController(Activity activity, View container, ImageButton button) {
+  public FloatingActionButtonController(Activity activity, FloatingActionButton fab) {
     Resources resources = activity.getResources();
     mFabInterpolator =
         AnimationUtils.loadInterpolator(activity, android.R.interpolator.fast_out_slow_in);
@@ -55,9 +54,7 @@ public class FloatingActionButtonController {
     mFloatingActionButtonMarginRight =
         resources.getDimensionPixelOffset(R.dimen.floating_action_button_margin_right);
     mAnimationDuration = resources.getInteger(R.integer.floating_action_button_animation_duration);
-    mFloatingActionButtonContainer = container;
-    mFloatingActionButton = button;
-    FabUtil.setupFloatingActionButton(mFloatingActionButtonContainer, resources);
+    mFab = fab;
   }
 
   /**
@@ -71,7 +68,7 @@ public class FloatingActionButtonController {
   }
 
   public boolean isVisible() {
-    return mFloatingActionButtonContainer.getVisibility() == View.VISIBLE;
+    return mFab.getVisibility() == View.VISIBLE;
   }
 
   /**
@@ -80,14 +77,13 @@ public class FloatingActionButtonController {
    * @param visible Whether or not to make the container visible.
    */
   public void setVisible(boolean visible) {
-    mFloatingActionButtonContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
+    mFab.setVisibility(visible ? View.VISIBLE : View.GONE);
   }
 
   public void changeIcon(Drawable icon, String description) {
-    if (mFloatingActionButton.getDrawable() != icon
-        || !mFloatingActionButton.getContentDescription().equals(description)) {
-      mFloatingActionButton.setImageDrawable(icon);
-      mFloatingActionButton.setContentDescription(description);
+    if (mFab.getDrawable() != icon || !mFab.getContentDescription().equals(description)) {
+      mFab.setImageDrawable(icon);
+      mFab.setContentDescription(description);
     }
   }
 
@@ -99,8 +95,7 @@ public class FloatingActionButtonController {
   public void onPageScrolled(float positionOffset) {
     // As the page is scrolling, if we're on the first tab, update the FAB position so it
     // moves along with it.
-    mFloatingActionButtonContainer.setTranslationX(
-        (int) (positionOffset * getTranslationXForAlignment(ALIGN_END)));
+    mFab.setTranslationX(positionOffset * getTranslationXForAlignment(ALIGN_END));
   }
 
   /**
@@ -121,7 +116,7 @@ public class FloatingActionButtonController {
    * @param offsetY Additional offsetY to translate by.
    * @param animate Whether or not to animate the transition.
    */
-  public void align(int align, int offsetX, int offsetY, boolean animate) {
+  private void align(int align, int offsetX, int offsetY, boolean animate) {
     if (mScreenWidth == 0) {
       return;
     }
@@ -129,33 +124,16 @@ public class FloatingActionButtonController {
     int translationX = getTranslationXForAlignment(align);
 
     // Skip animation if container is not shown; animation causes container to show again.
-    if (animate && mFloatingActionButtonContainer.isShown()) {
-      mFloatingActionButtonContainer
-          .animate()
+    if (animate && mFab.isShown()) {
+      mFab.animate()
           .translationX(translationX + offsetX)
           .translationY(offsetY)
           .setInterpolator(mFabInterpolator)
           .setDuration(mAnimationDuration)
           .start();
     } else {
-      mFloatingActionButtonContainer.setTranslationX(translationX + offsetX);
-      mFloatingActionButtonContainer.setTranslationY(offsetY);
-    }
-  }
-
-  /**
-   * Resizes width and height of the floating action bar container.
-   *
-   * @param dimension The new dimensions for the width and height.
-   * @param animate Whether to animate this change.
-   */
-  public void resize(int dimension, boolean animate) {
-    if (animate) {
-      AnimUtils.changeDimensions(mFloatingActionButtonContainer, dimension, dimension);
-    } else {
-      mFloatingActionButtonContainer.getLayoutParams().width = dimension;
-      mFloatingActionButtonContainer.getLayoutParams().height = dimension;
-      mFloatingActionButtonContainer.requestLayout();
+      mFab.setTranslationX(translationX + offsetX);
+      mFab.setTranslationY(offsetY);
     }
   }
 
@@ -167,17 +145,8 @@ public class FloatingActionButtonController {
    */
   public void scaleIn(int delayMs) {
     setVisible(true);
-    AnimUtils.scaleIn(mFloatingActionButtonContainer, FAB_SCALE_IN_DURATION, delayMs);
-    AnimUtils.fadeIn(
-        mFloatingActionButton, FAB_SCALE_IN_DURATION, delayMs + FAB_SCALE_IN_FADE_IN_DELAY, null);
-  }
-
-  /** Immediately remove the affects of the last call to {@link #scaleOut}. */
-  public void resetIn() {
-    mFloatingActionButton.setAlpha(1f);
-    mFloatingActionButton.setVisibility(View.VISIBLE);
-    mFloatingActionButtonContainer.setScaleX(1);
-    mFloatingActionButtonContainer.setScaleY(1);
+    AnimUtils.scaleIn(mFab, FAB_SCALE_IN_DURATION, delayMs);
+    AnimUtils.fadeIn(mFab, FAB_SCALE_IN_DURATION, delayMs + FAB_SCALE_IN_FADE_IN_DELAY, null);
   }
 
   /**
@@ -185,10 +154,10 @@ public class FloatingActionButtonController {
    * animation for hiding the floating action button.
    */
   public void scaleOut() {
-    AnimUtils.scaleOut(mFloatingActionButtonContainer, mAnimationDuration);
+    AnimUtils.scaleOut(mFab, mAnimationDuration);
     // Fade out the icon faster than the scale out animation, so that the icon scaling is less
     // obvious. We don't want it to scale, but the resizing the container is not as performant.
-    AnimUtils.fadeOut(mFloatingActionButton, FAB_ICON_FADE_OUT_DURATION, null);
+    AnimUtils.fadeOut(mFab, FAB_ICON_FADE_OUT_DURATION, null);
   }
 
   /**
@@ -198,8 +167,8 @@ public class FloatingActionButtonController {
    * @param align One of ALIGN_MIDDLE, ALIGN_QUARTER_RIGHT, or ALIGN_RIGHT.
    * @return The translationX for the given alignment.
    */
-  public int getTranslationXForAlignment(int align) {
-    int result = 0;
+  private int getTranslationXForAlignment(int align) {
+    int result;
     switch (align) {
       case ALIGN_MIDDLE:
         // Moves the FAB to exactly center screen.
@@ -213,6 +182,8 @@ public class FloatingActionButtonController {
         result =
             mScreenWidth / 2 - mFloatingActionButtonWidth / 2 - mFloatingActionButtonMarginRight;
         break;
+      default:
+        throw Assert.createIllegalStateFailException("Invalid alignment value: " + align);
     }
     if (isLayoutRtl()) {
       result *= -1;
@@ -221,6 +192,6 @@ public class FloatingActionButtonController {
   }
 
   private boolean isLayoutRtl() {
-    return mFloatingActionButtonContainer.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+    return mFab.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
   }
 }

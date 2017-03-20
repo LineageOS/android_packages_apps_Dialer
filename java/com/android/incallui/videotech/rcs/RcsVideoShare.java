@@ -65,6 +65,11 @@ public class RcsVideoShare implements VideoTech, CapabilitiesListener, VideoShar
   }
 
   @Override
+  public boolean isSelfManagedCamera() {
+    return true;
+  }
+
+  @Override
   public void onCallStateChanged(int newState) {
     if (newState == Call.STATE_DISCONNECTING) {
       enrichedCallManager.unregisterVideoShareListener(this);

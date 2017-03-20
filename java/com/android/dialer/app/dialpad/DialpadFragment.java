@@ -42,6 +42,7 @@ import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -63,7 +64,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
@@ -405,14 +405,11 @@ public class DialpadFragment extends Fragment
     mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
     mDialpadChooser.setOnItemClickListener(this);
 
-    final View floatingActionButtonContainer =
-        fragmentView.findViewById(R.id.dialpad_floating_action_button_container);
-    final ImageButton floatingActionButton =
-        (ImageButton) fragmentView.findViewById(R.id.dialpad_floating_action_button);
+    FloatingActionButton floatingActionButton =
+        (FloatingActionButton) fragmentView.findViewById(R.id.dialpad_floating_action_button);
     floatingActionButton.setOnClickListener(this);
     mFloatingActionButtonController =
-        new FloatingActionButtonController(
-            getActivity(), floatingActionButtonContainer, floatingActionButton);
+        new FloatingActionButtonController(getActivity(), floatingActionButton);
     Trace.endSection();
     Trace.endSection();
     return fragmentView;

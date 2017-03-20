@@ -16,12 +16,14 @@ package com.android.voicemail.impl;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
+import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
+import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
@@ -41,6 +43,12 @@ public class VoicemailClientImpl implements VoicemailClient {
    * fetch these voicemails again so it should be ignored.
    */
   private static final String[] OMTP_VOICEMAIL_BLACKLIST = {"com.android.phone"};
+
+  private static final String[] OMTP_VOICEMAIL_TYPE = {
+    TelephonyManager.VVM_TYPE_OMTP,
+    TelephonyManager.VVM_TYPE_CVVM,
+    VisualVoicemailTypeExtensions.VVM_TYPE_VVM3
+  };
 
   @Inject
   public VoicemailClientImpl() {
@@ -70,21 +78,73 @@ public class VoicemailClientImpl implements VoicemailClient {
       Context context, StringBuilder where, List<String> selectionArgs) {
     TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
     String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
-    where.append(
-        "AND ("
-            + "("
-            + Voicemails.IS_OMTP_VOICEMAIL
-            + " != 1)"
-            + "OR "
-            + "("
-            + Voicemails.SOURCE_PACKAGE
-            + " = ? )"
-            + ")");
-    selectionArgs.add(omtpSource);
+    if (where.length() != 0) {
+      where.append(" AND ");
+    }
+    where.append("(");
+    {
+      where.append("(");
+      {
+        where.append(Voicemails.IS_OMTP_VOICEMAIL).append(" != 1");
+        where.append(")");
+      }
+      where.append(" OR ");
+      where.append("(");
+      {
+        where.append(Voicemails.SOURCE_PACKAGE).append(" = ?");
+        selectionArgs.add(omtpSource);
+        where.append(")");
+      }
+      where.append(")");
+    }
 
     for (String blacklistedPackage : OMTP_VOICEMAIL_BLACKLIST) {
-      where.append("AND (" + Voicemails.SOURCE_PACKAGE + "!= ?)");
+      where.append("AND (").append(Voicemails.SOURCE_PACKAGE).append("!= ?)");
       selectionArgs.add(blacklistedPackage);
+    }
+  }
+
+  @TargetApi(VERSION_CODES.O)
+  @Override
+  public void appendOmtpVoicemailStatusSelectionClause(
+      Context context, StringBuilder where, List<String> selectionArgs) {
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
+    if (where.length() != 0) {
+      where.append(" AND ");
+    }
+    where.append("(");
+    {
+      where.append("(");
+      {
+        where.append(Status.SOURCE_PACKAGE).append(" = ? ");
+        selectionArgs.add(omtpSource);
+        where.append(")");
+      }
+      where.append(" OR NOT (");
+      {
+        for (int i = 0; i < OMTP_VOICEMAIL_TYPE.length; i++) {
+          if (i != 0) {
+            where.append(" OR ");
+          }
+          where.append(" (");
+          {
+            where.append(Status.SOURCE_TYPE).append(" == ?");
+            selectionArgs.add(OMTP_VOICEMAIL_TYPE[i]);
+            where.append(")");
+          }
+        }
+        where.append(")");
+      }
+      for (String blacklistedPackage : OMTP_VOICEMAIL_BLACKLIST) {
+        where.append("AND (");
+        {
+          where.append(Voicemails.SOURCE_PACKAGE).append("!= ?");
+          selectionArgs.add(blacklistedPackage);
+          where.append(")");
+        }
+      }
+      where.append(")");
     }
   }
 }

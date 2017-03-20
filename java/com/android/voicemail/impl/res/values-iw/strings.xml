@@ -16,8 +16,66 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- no translation found for voicemail_settings_with_label (563926539137546586) -->
+    <skip />
+    <!-- no translation found for voicemail_settings_title (6685263321755930738) -->
+    <skip />
     <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"רטט"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"רטט"</string>
     <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"צליל"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"הגדרות מתקדמות"</string>
+    <!-- no translation found for voicemail_visual_voicemail_switch_title (3158454817165714998) -->
+    <skip />
+    <!-- no translation found for voicemail_visual_voicemail_auto_archive_switch_title (7120443850486401455) -->
+    <skip />
+    <!-- no translation found for voicemail_visual_voicemail_auto_archive_temporary_disclaimer (401509437213449235) -->
+    <skip />
+    <!-- no translation found for voicemail_set_pin_dialog_title (8853126653745637812) -->
+    <skip />
+    <!-- no translation found for voicemail_change_pin_dialog_title (6929300804279262966) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_old_pin (3732582036597386047) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_new_pin (5167496290646066333) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_progress_message (4143209637626661679) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_too_short (2825020644385639921) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_too_long (683260438529171998) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_too_weak (5865254034338293113) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_mismatch (3682667971009913553) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_invalid (4317397281749196545) -->
+    <skip />
+    <!-- no translation found for vm_change_pin_error_system_error (5972056058776852411) -->
+    <skip />
+    <!-- no translation found for vvm_unsupported_message_format (2746490691815392491) -->
+    <skip />
+    <!-- no translation found for change_pin_title (1363830310845461697) -->
+    <skip />
+    <!-- no translation found for change_pin_continue_label (9184635195162827832) -->
+    <skip />
+    <!-- no translation found for change_pin_cancel_label (7258783861113501519) -->
+    <skip />
+    <!-- no translation found for change_pin_ok_label (4527043915415428629) -->
+    <skip />
+    <!-- no translation found for change_pin_enter_old_pin_header (1375728090965833028) -->
+    <skip />
+    <!-- no translation found for change_pin_enter_old_pin_hint (1654231195871094175) -->
+    <skip />
+    <!-- no translation found for change_pin_enter_new_pin_header (7142620840890909719) -->
+    <skip />
+    <!-- no translation found for change_pin_enter_new_pin_hint (1289662932759932217) -->
+    <skip />
+    <!-- no translation found for change_pin_confirm_pin_header (7282604363655862136) -->
+    <skip />
+    <!-- no translation found for change_pin_confirm_pins_dont_match (8626742552205369433) -->
+    <skip />
+    <!-- no translation found for change_pin_succeeded (6869403202124894671) -->
+    <skip />
+    <!-- no translation found for change_pin_system_error (5762853042379833829) -->
+    <skip />
 </resources>

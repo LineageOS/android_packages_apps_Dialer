@@ -35,8 +35,6 @@
     <string name="description_via_number" msgid="7682575124846343076">"numeriu <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="description_via_number_phone_account" msgid="4345445677508018830">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, numeriu <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="voicemail_string" msgid="6029775151483803006">"Balso paštas"</string>
-    <!-- no translation found for call_details_duration_format (296780245582838089) -->
-    <skip />
-    <!-- no translation found for call_details_short_duration_format (8079910850626312453) -->
-    <skip />
+    <string name="call_details_duration_format" msgid="296780245582838089">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
+    <string name="call_details_short_duration_format" msgid="8079910850626312453">"<xliff:g id="SECONDS">%s</xliff:g> sek."</string>
 </resources>

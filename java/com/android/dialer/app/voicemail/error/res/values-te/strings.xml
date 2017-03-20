@@ -44,10 +44,14 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"మీ ఇన్‌బాక్స్ నిండిపోయి ఉంటే, కొత్త వాయిస్ మెయిల్‌ను స్వీకరించలేరు."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"కొత్త వాయిస్ మెయిల్‌లను స్వీకరించలేరు"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"మీ ఇన్‌బాక్స్ నిండింది. కొత్త వాయిస్ మెయిల్‌ను స్వీకరించడానికి కొన్ని సందేశాలను తొలగించడానికి ప్రయత్నించండి."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"అదనపు నిల్వ మరియు బ్యాకప్‌ను ఆన్ చేయండి"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"మీ మెయిల్‌బాక్స్ నిండింది. స్థలాన్ని ఖాళీ చేసేందుకు అదనపు నిల్వను ఆన్ చేయండి, దీని వలన Google మీ వాయిస్ మెయిల్ సందేశాలను నిర్వహించగలదు మరియు బ్యాకప్ చేయగలదు."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"అదనపు నిల్వ మరియు బ్యాకప్‌ను ఆన్ చేయండి"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"మీ మెయిల్‌బాక్స్ దాదాపు నిండిపోయింది. స్థలాన్ని ఖాళీ చేసేందుకు అదనపు నిల్వను ఆన్ చేయండి, దీని వలన Google మీ వాయిస్ మెయిల్ సందేశాలను నిర్వహించగలదు మరియు బ్యాకప్ చేయగలదు."</string>
+    <!-- no translation found for voicemail_error_inbox_full_turn_archive_on_title (3083779676549536189) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_full_turn_archive_on_message (4236256841748725792) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_almost_full_turn_archive_on_title (6118464905488477869) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_almost_full_turn_archive_on_message (7289015622668426730) -->
+    <skip />
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"మీ వాయిస్ మెయిల్ PIN సెట్ చేయండి"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"మీరు మీ వాయిస్ మెయిల్‌ను ప్రాప్యత చేయడానికి కాల్ చేసే ప్రతిసారి మీకు వాయిస్ మెయిల్ PIN అవసరమవుతుంది."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"తెలియని లోపం"</string>

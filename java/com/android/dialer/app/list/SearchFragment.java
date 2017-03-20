@@ -23,7 +23,6 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,6 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
-import com.android.contacts.common.util.FabUtil;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.DialpadFragment.ErrorDialogFragment;
@@ -155,12 +153,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
   }
 
   @Override
-  public void onViewCreated(View view, Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    FabUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
-  }
-
-  @Override
   public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
     Animator animator = null;
     if (nextAnim != 0) {
@@ -242,9 +234,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     LogUtil.i("SearchFragment.onItemClick", "shortcutType: " + shortcutType);
 
     switch (shortcutType) {
-      case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
-        super.onItemClick(position, id);
-        break;
       case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
         number = adapter.getQueryString();
         listener = getOnPhoneNumberPickerListener();
@@ -293,6 +282,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
               getQueryString() == null ? 0 : getQueryString().length();
           listener.onPickPhoneNumber(number, true /* isVideoCall */, callSpecificAppData);
         }
+        break;
+      case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
+      default:
+        super.onItemClick(position, id);
         break;
     }
   }

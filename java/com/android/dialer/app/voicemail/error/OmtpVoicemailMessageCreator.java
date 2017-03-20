@@ -160,7 +160,7 @@ public class OmtpVoicemailMessageCreator {
             voicemailClient,
             isVoicemailArchiveEnabled,
             context.getString(R.string.voicemail_error_inbox_full_turn_archive_on_title),
-            context.getString(R.string.voicemail_error_inbox_full_turn_archive_on_message),
+            context.getText(R.string.voicemail_error_inbox_full_turn_archive_on_message),
             context.getString(R.string.voicemail_error_inbox_full_title),
             context.getString(R.string.voicemail_error_inbox_full_message),
             VOICEMAIL_PROMO_DISMISSED_KEY);
@@ -176,7 +176,7 @@ public class OmtpVoicemailMessageCreator {
             voicemailClient,
             isVoicemailArchiveEnabled,
             context.getString(R.string.voicemail_error_inbox_almost_full_turn_archive_on_title),
-            context.getString(R.string.voicemail_error_inbox_almost_full_turn_archive_on_message),
+            context.getText(R.string.voicemail_error_inbox_almost_full_turn_archive_on_message),
             context.getString(R.string.voicemail_error_inbox_near_full_title),
             context.getString(R.string.voicemail_error_inbox_near_full_message),
             VOICEMAIL_PROMO_ALMOST_FULL_DISMISSED_KEY);
@@ -194,7 +194,7 @@ public class OmtpVoicemailMessageCreator {
       VoicemailClient voicemailClient,
       boolean isVoicemailArchiveEnabled,
       String promoTitle,
-      String promoMessage,
+      CharSequence promoMessage,
       String nonPromoTitle,
       String nonPromoMessage,
       String preferenceKey) {

@@ -758,7 +758,7 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     if (!call.getLogState().isIncoming && !mCallList.hasLiveCall()) {
-      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
+      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getTimeAddedMs());
     }
   }
 

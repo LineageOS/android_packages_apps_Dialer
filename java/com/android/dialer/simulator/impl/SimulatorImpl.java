@@ -24,7 +24,7 @@ import com.android.dialer.simulator.Simulator;
 import javax.inject.Inject;
 
 /** The entry point for the simulator feature. */
-final public class SimulatorImpl implements Simulator {
+final class SimulatorImpl implements Simulator {
   @Inject
   public SimulatorImpl() {}
 

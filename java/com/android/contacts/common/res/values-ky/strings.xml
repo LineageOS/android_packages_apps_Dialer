@@ -122,7 +122,7 @@
     <string name="email_mobile" msgid="4487686436743741150">"Мобилге эмейлдөө"</string>
     <string name="email_work" msgid="4223487303344613528">"Жумушка эмейлдөө"</string>
     <string name="email_other" msgid="4246411900126012062">"Электрондук кат жазуу"</string>
-    <string name="email_custom" msgid="7246580894327511013">"<xliff:g id="CUSTOM">%s</xliff:g> эмейл жөнөтүү"</string>
+    <string name="email_custom" msgid="7246580894327511013">"Кат жазуу (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
     <string name="email" msgid="2807318537887091606">"Электрондук кат жазуу"</string>
     <string name="postal_street" msgid="6918171741240802474">"Көчөсү"</string>
     <string name="postal_pobox" msgid="2962203483168878561">"Абонент кутусу"</string>

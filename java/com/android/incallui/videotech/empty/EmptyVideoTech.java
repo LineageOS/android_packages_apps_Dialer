@@ -32,6 +32,11 @@ public class EmptyVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean isSelfManagedCamera() {
+    return false;
+  }
+
+  @Override
   public void onCallStateChanged(int newState) {}
 
   @Override

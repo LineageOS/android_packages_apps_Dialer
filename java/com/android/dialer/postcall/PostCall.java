@@ -151,7 +151,7 @@ public class PostCall {
     return disconnectTimeMillis != -1
         && connectTimeMillis != -1
         && binding.getLong("postcall_last_call_threshold", 30_000) > timeSinceDisconnect
-        && binding.getLong("postcall_call_duration_threshold", 60_000) > callDurationMillis;
+        && binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis;
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {

@@ -144,7 +144,6 @@
     <string name="remove_contact" msgid="2353580570488923668">"அகற்று"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"வீடியோ அழைப்பு"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"செய்தி அனுப்பவும்"</string>
-    <string name="share_and_call" msgid="1208757302713705291">"பகிர்ந்து அழை"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"அழைப்பு விவரங்கள்"</string>
     <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"இதற்கு அனுப்பு …"</string>
     <string name="call_log_action_call" msgid="682724094251540583">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ அழை"</string>
@@ -155,7 +154,6 @@
     <string name="description_outgoing_call" msgid="543952487882919924">"அழைத்த அழைப்பு: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="call_log_via_number" msgid="1340307109806397650">"<xliff:g id="NUMBER">%1$s</xliff:g> மூலமாக"</string>
     <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="NUMBER">%2$s</xliff:g> மூலமாக <xliff:g id="PHONEACCOUNT">%1$s</xliff:g> இல்"</string>
-    <string name="description_call_log_call_action" msgid="6958550749492392199">"அழை"</string>
     <string name="description_call_action" msgid="4042796498169106545">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ அழை"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ வீடியோவில் அழைக்கும்."</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலைக் கேள்"</string>

@@ -17,6 +17,7 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -122,6 +123,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     LogUtil.d("VisualVoicemailCallLogFragment.onPageResume", null);
     super.onPageResume(activity);
     if (activity != null) {
+      activity.sendBroadcast(new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL));
       Logger.get(activity).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
       activity.setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
     }

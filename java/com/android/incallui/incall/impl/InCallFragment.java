@@ -25,11 +25,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.telecom.CallAudioState;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -74,8 +72,8 @@ public class InCallFragment extends Fragment
 
   private List<ButtonController> buttonControllers = new ArrayList<>();
   private View endCallButton;
-  private TabLayout tabLayout;
-  private ViewPager pager;
+  private InCallPaginator paginator;
+  private LockableViewPager pager;
   private InCallPagerAdapter adapter;
   private ContactGridManager contactGridManager;
   private InCallScreenDelegate inCallScreenDelegate;
@@ -134,8 +132,8 @@ public class InCallFragment extends Fragment
             getResources().getDimensionPixelSize(R.dimen.incall_avatar_size),
             true /* showAnonymousAvatar */);
 
-    tabLayout = (TabLayout) view.findViewById(R.id.incall_tab_dots);
-    pager = (ViewPager) view.findViewById(R.id.incall_pager);
+    paginator = (InCallPaginator) view.findViewById(R.id.incall_paginator);
+    pager = (LockableViewPager) view.findViewById(R.id.incall_pager);
 
     endCallButton = view.findViewById(R.id.incall_end_call);
     endCallButton.setOnClickListener(this);
@@ -248,8 +246,8 @@ public class InCallFragment extends Fragment
     }
 
     if (adapter.getCount() > 1) {
-      tabLayout.setVisibility(pager.getVisibility());
-      tabLayout.setupWithViewPager(pager, true);
+      paginator.setVisibility(View.VISIBLE);
+      paginator.setupWithViewPager(pager);
       if (!stateRestored) {
         new Handler()
             .postDelayed(
@@ -263,9 +261,9 @@ public class InCallFragment extends Fragment
                   }
                 },
                 2000);
+      } else {
+        paginator.setVisibility(View.GONE);
       }
-    } else {
-      tabLayout.setVisibility(View.GONE);
     }
   }
 
@@ -428,8 +426,15 @@ public class InCallFragment extends Fragment
 
     int visibility = numVisibleButtons == 0 ? View.GONE : View.VISIBLE;
     pager.setVisibility(visibility);
-    if (adapter != null && adapter.getCount() > 1) {
-      tabLayout.setVisibility(visibility);
+    if (adapter != null
+        && adapter.getCount() > 1
+        && getResources().getInteger(R.integer.incall_num_rows) > 1) {
+      paginator.setVisibility(View.VISIBLE);
+      pager.setSwipingLocked(false);
+    } else {
+      paginator.setVisibility(View.GONE);
+      pager.setSwipingLocked(true);
+      pager.setCurrentItem(adapter.getButtonGridPosition());
     }
   }
 

@@ -14,7 +14,6 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
 <com.android.incallui.answer.impl.AffordanceHolderLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,11 +26,20 @@
   android:keepScreenOn="true">
 
   <TextureView
-    android:id="@+id/incoming_preview_texture_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:importantForAccessibility="no"
-    android:visibility="gone"/>
+      android:id="@+id/incoming_preview_texture_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:importantForAccessibility="no"
+      android:visibility="gone"/>
+
+  <com.android.incallui.answer.impl.FixedAspectSurfaceView
+      android:id="@+id/incoming_preview_surface_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:importantForAccessibility="no"
+      android:visibility="gone"
+      app:scaleWidth="@bool/scale_width"
+      app:scaleHeight="@bool/scale_height"/>
 
   <View
     android:id="@+id/incoming_preview_texture_view_overlay"

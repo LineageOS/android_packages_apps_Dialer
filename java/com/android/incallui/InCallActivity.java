@@ -625,7 +625,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     // Show a new answer screen.
     AnswerScreen answerScreen =
-        AnswerBindings.createAnswerScreen(call.getId(), call.isVideoCall(), isVideoUpgradeRequest);
+        AnswerBindings.createAnswerScreen(
+            call.getId(),
+            call.isVideoCall(),
+            isVideoUpgradeRequest,
+            call.getVideoTech().isSelfManagedCamera());
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), TAG_ANSWER_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);

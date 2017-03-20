@@ -1,3 +1,1 @@
-<manifest
-  package="com.android.incall.incall.impl">
-</manifest>
+<manifest package="com.android.incallui.incall.impl"/>

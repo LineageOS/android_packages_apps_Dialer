@@ -45,6 +45,18 @@ public interface VoicemailClient {
    */
   void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs);
+
+  /**
+   * Appends the selection to ignore voicemail status from non-active OMTP voicemail package. The
+   * {@link android.provider.VoicemailContract.Status#SOURCE_TYPE} is checked against a list of
+   * known OMTP types. Voicemails from {@link #OMTP_VOICEMAIL_BLACKLIST} will also be ignored as
+   * they are voicemail source only valid pre-OC.
+   *
+   * @see #appendOmtpVoicemailSelectionClause(Context, StringBuilder, List)
+   */
+  void appendOmtpVoicemailStatusSelectionClause(
+      Context context, StringBuilder where, List<String> selectionArgs);
+
   /**
    * @return the class name of the {@link android.preference.PreferenceFragment} for voicemail
    *     settings, or {@code null} if dialer cannot control voicemail settings. Always return {@code

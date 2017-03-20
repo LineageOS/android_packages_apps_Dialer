@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2014 The Android Open Source Project
+     Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,12 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<resources>
+  <declare-styleable name="FixedAspectSurfaceView">
+    <attr name="aspectRatio" format="float" />
+    <attr name="scaleWidth" format="boolean"/>
+    <attr name="scaleHeight" format="boolean"/>
+  </declare-styleable>
 
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="@color/floating_action_button_touch_tint">
-  <item android:id="@android:id/mask">
-    <shape android:shape="oval">
-      <solid android:color="@android:color/white"/>
-    </shape>
-  </item>
-</ripple>
+  <item name="match_parent" type="dimen">-1</item>
+  <item name="wrap_content" type="dimen">-2</item>
+</resources>

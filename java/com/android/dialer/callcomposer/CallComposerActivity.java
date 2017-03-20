@@ -305,7 +305,7 @@ public class CallComposerActivity extends AppCompatActivity
 
                     @Override
                     public void onCopyFailed(Throwable throwable) {
-                      // TODO(b/33753902)
+                      // TODO(b/34279096) - gracefully handle message failure
                       LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
                     }
                   })
