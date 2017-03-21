@@ -19,28 +19,17 @@ package com.android.incallui.maps;
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
-import com.android.incallui.maps.stub.StubMapsModule;
 
 /** Subcomponent that can be used to access the maps implementation. */
-public class MapsComponent {
+@Subcomponent
+public abstract class MapsComponent {
 
-  private static MapsComponent instance;
-  private Maps maps;
-
-  public Maps getMaps() {
-    if (maps == null) {
-        maps = new StubMapsModule.StubMaps();
-    }
-    return maps;
-  }
+  public abstract Maps getMaps();
 
   public static MapsComponent get(Context context) {
-    if (instance == null) {
-        instance = new MapsComponent();
-    }
-    return instance;
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .mapsComponent();
   }
-
 
   /** Used to refer to the root application component. */
   public interface HasComponent {

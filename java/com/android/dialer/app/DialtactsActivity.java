@@ -35,6 +35,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -51,7 +52,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView.OnScrollListener;
@@ -392,12 +392,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     mPreviouslySelectedTabIndex = ListsFragment.TAB_INDEX_SPEED_DIAL;
-    final View floatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
-    ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+    FloatingActionButton floatingActionButton =
+        (FloatingActionButton) findViewById(R.id.floating_action_button);
     floatingActionButton.setOnClickListener(this);
     mFloatingActionButtonController =
-        new FloatingActionButtonController(
-            this, floatingActionButtonContainer, floatingActionButton);
+        new FloatingActionButtonController(this, floatingActionButton);
 
     ImageButton optionsMenuButton =
         (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
@@ -443,23 +442,13 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mParentLayout = (CoordinatorLayout) findViewById(R.id.dialtacts_mainlayout);
     mParentLayout.setOnDragListener(new LayoutOnDragListener());
-    floatingActionButtonContainer
-        .getViewTreeObserver()
-        .addOnGlobalLayoutListener(
-            new ViewTreeObserver.OnGlobalLayoutListener() {
-              @Override
-              public void onGlobalLayout() {
-                final ViewTreeObserver observer =
-                    floatingActionButtonContainer.getViewTreeObserver();
-                if (!observer.isAlive()) {
-                  return;
-                }
-                observer.removeOnGlobalLayoutListener(this);
-                int screenWidth = mParentLayout.getWidth();
-                mFloatingActionButtonController.setScreenWidth(screenWidth);
-                mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
-              }
-            });
+    ViewUtil.doOnGlobalLayout(
+        floatingActionButton,
+        view -> {
+          int screenWidth = mParentLayout.getWidth();
+          mFloatingActionButtonController.setScreenWidth(screenWidth);
+          mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+        });
 
     Trace.endSection();
 
@@ -1179,7 +1168,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private void showFabInSearchUi() {
     mFloatingActionButtonController.changeIcon(
-        getResources().getDrawable(R.drawable.fab_ic_dial, null),
+        getResources().getDrawable(R.drawable.quantum_ic_dialpad_white_24, null),
         getResources().getString(R.string.action_menu_dialpad_button));
     mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
     mFloatingActionButtonController.scaleIn(FAB_SCALE_IN_DELAY_MS);
@@ -1364,11 +1353,11 @@ public class DialtactsActivity extends TransactionSafeActivity
         && !mInRegularSearch
         && !mInDialpadSearch) {
       mFloatingActionButtonController.changeIcon(
-          getResources().getDrawable(R.drawable.ic_person_add_24dp, null),
+          getResources().getDrawable(R.drawable.quantum_ic_person_add_white_24, null),
           getResources().getString(R.string.search_shortcut_create_new_contact));
     } else {
       mFloatingActionButtonController.changeIcon(
-          getResources().getDrawable(R.drawable.fab_ic_dial, null),
+          getResources().getDrawable(R.drawable.quantum_ic_dialpad_white_24, null),
           getResources().getString(R.string.action_menu_dialpad_button));
     }
   }

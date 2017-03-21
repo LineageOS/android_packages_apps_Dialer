@@ -17,6 +17,7 @@
 package com.android.dialer.calllogutils;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,12 +33,18 @@ import java.util.List;
 
 /**
  * View that draws one or more symbols for different types of calls (missed calls, outgoing etc).
- * The symbols are set up horizontally. As this view doesn't create subviews, it is better suited
- * for ListView-recycling that a regular LinearLayout using ImageViews.
+ * The symbols are set up horizontally. If {@code useLargeIcons} is set in the xml attributes,
+ * alternatively this view will only render one icon (Call Type, HD or Video).
+ *
+ * <p>As this view doesn't create subviews, it is better suited for ListView-recycling than a
+ * regular LinearLayout using ImageViews.
  */
 public class CallTypeIconsView extends View {
 
+  private final boolean useLargeIcons;
+
   private static Resources sResources;
+  private static Resources sLargeResouces;
   private List<Integer> mCallTypes = new ArrayList<>(3);
   private boolean mShowVideo = false;
   private boolean mShowHd = false;
@@ -50,8 +57,15 @@ public class CallTypeIconsView extends View {
 
   public CallTypeIconsView(Context context, AttributeSet attrs) {
     super(context, attrs);
+    TypedArray typedArray =
+        context.getTheme().obtainStyledAttributes(attrs, R.styleable.CallTypeIconsView, 0, 0);
+    useLargeIcons = typedArray.getBoolean(R.styleable.CallTypeIconsView_useLargeIcons, false);
+    typedArray.recycle();
     if (sResources == null) {
-      sResources = new Resources(context);
+      sResources = new Resources(context, false);
+    }
+    if (sLargeResouces == null && useLargeIcons) {
+      sLargeResouces = new Resources(context, true);
     }
   }
 
@@ -67,7 +81,7 @@ public class CallTypeIconsView extends View {
 
     final Drawable drawable = getCallTypeDrawable(callType);
     mWidth += drawable.getIntrinsicWidth() + sResources.iconMargin;
-    mHeight = Math.max(mHeight, drawable.getIntrinsicHeight());
+    mHeight = Math.max(mHeight, drawable.getIntrinsicWidth());
     invalidate();
   }
 
@@ -112,24 +126,25 @@ public class CallTypeIconsView extends View {
   }
 
   private Drawable getCallTypeDrawable(int callType) {
+    Resources resources = useLargeIcons ? sLargeResouces : sResources;
     switch (callType) {
       case AppCompatConstants.CALLS_INCOMING_TYPE:
       case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
-        return sResources.incoming;
+        return resources.incoming;
       case AppCompatConstants.CALLS_OUTGOING_TYPE:
-        return sResources.outgoing;
+        return resources.outgoing;
       case AppCompatConstants.CALLS_MISSED_TYPE:
-        return sResources.missed;
+        return resources.missed;
       case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
-        return sResources.voicemail;
+        return resources.voicemail;
       case AppCompatConstants.CALLS_BLOCKED_TYPE:
-        return sResources.blocked;
+        return resources.blocked;
       default:
         // It is possible for users to end up with calls with unknown call types in their
         // call history, possibly due to 3rd party call log implementations (e.g. to
         // distinguish between rejected and missed calls). Instead of crashing, just
         // assume that all unknown call types are missed calls.
-        return sResources.missed;
+        return resources.missed;
     }
   }
 
@@ -140,27 +155,32 @@ public class CallTypeIconsView extends View {
 
   @Override
   protected void onDraw(Canvas canvas) {
+    Resources resources = useLargeIcons ? sLargeResouces : sResources;
     int left = 0;
-    for (Integer callType : mCallTypes) {
-      final Drawable drawable = getCallTypeDrawable(callType);
-      final int right = left + drawable.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, drawable.getIntrinsicHeight());
-      drawable.draw(canvas);
-      left = right + sResources.iconMargin;
+    // If we are using large icons, we should only show one icon (video, hd or call type) with
+    // priority give to HD or Video. So we skip the call type icon if we plan to show them.
+    if (!useLargeIcons || !(mShowHd || mShowVideo)) {
+      for (Integer callType : mCallTypes) {
+        final Drawable drawable = getCallTypeDrawable(callType);
+        final int right = left + drawable.getIntrinsicWidth();
+        drawable.setBounds(left, 0, right, drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        left = right + resources.iconMargin;
+      }
     }
 
     // If showing the video call icon, draw it scaled appropriately.
     if (mShowVideo) {
-      final Drawable drawable = sResources.videoCall;
-      final int right = left + sResources.videoCall.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, sResources.videoCall.getIntrinsicHeight());
+      final Drawable drawable = resources.videoCall;
+      final int right = left + resources.videoCall.getIntrinsicWidth();
+      drawable.setBounds(left, 0, right, resources.videoCall.getIntrinsicHeight());
       drawable.draw(canvas);
     }
     // If showing HD call icon, draw it scaled appropriately.
     if (mShowHd) {
-      final Drawable drawable = sResources.hdCall;
-      final int right = left + sResources.hdCall.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, sResources.hdCall.getIntrinsicHeight());
+      final Drawable drawable = resources.hdCall;
+      final int right = left + resources.hdCall.getIntrinsicWidth();
+      drawable.setBounds(left, 0, right, resources.hdCall.getIntrinsicHeight());
       drawable.draw(canvas);
     }
   }
@@ -197,37 +217,44 @@ public class CallTypeIconsView extends View {
      *
      * @param context The current context.
      */
-    public Resources(Context context) {
+    public Resources(Context context, boolean largeIcons) {
       final android.content.res.Resources r = context.getResources();
 
-      incoming = r.getDrawable(R.drawable.ic_call_arrow);
+      int iconId =
+          largeIcons ? R.drawable.quantum_ic_call_received_white_24 : R.drawable.ic_call_arrow;
+      incoming = r.getDrawable(iconId);
       incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Create a rotated instance of the call arrow for outgoing calls.
-      outgoing = BitmapUtil.getRotatedDrawable(r, R.drawable.ic_call_arrow, 180f);
+      outgoing = BitmapUtil.getRotatedDrawable(r, iconId, 180f);
       outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
-      missed = r.getDrawable(R.drawable.ic_call_arrow).mutate();
+      iconId = largeIcons ? R.drawable.quantum_ic_call_missed_white_24 : R.drawable.ic_call_arrow;
+      missed = r.getDrawable(iconId).mutate();
       missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
 
-      voicemail = r.getDrawable(R.drawable.quantum_ic_voicemail_white_18);
+      iconId = R.drawable.quantum_ic_voicemail_white_24;
+      voicemail = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       voicemail.setColorFilter(
           r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
 
-      blocked = getScaledBitmap(context, R.drawable.ic_block_24dp);
+      iconId = R.drawable.quantum_ic_block_white_24;
+      blocked = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       blocked.setColorFilter(r.getColor(R.color.blocked_call), PorterDuff.Mode.MULTIPLY);
 
-      videoCall = getScaledBitmap(context, R.drawable.quantum_ic_videocam_white_24);
+      iconId = R.drawable.quantum_ic_videocam_white_24;
+      videoCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       videoCall.setColorFilter(
           r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
 
-      hdCall = getScaledBitmap(context, R.drawable.quantum_ic_hd_white_24);
+      iconId = R.drawable.quantum_ic_hd_white_24;
+      hdCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       hdCall.setColorFilter(
           r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
 
-      iconMargin = r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
+      iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }
 
     // Gets the icon, scaled to the height of the call type icons. This helps display all the

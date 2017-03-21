@@ -34,7 +34,7 @@ public abstract class StubMapsModule {
   @Singleton
   public abstract Maps bindMaps(StubMaps maps);
 
-  static public final class StubMaps implements Maps {
+  static final class StubMaps implements Maps {
     @Inject
     public StubMaps() {}
 

@@ -34,6 +34,10 @@ public final class StubVoicemailClient implements VoicemailClient {
       Context context, StringBuilder where, List<String> selectionArgs) {}
 
   @Override
+  public void appendOmtpVoicemailStatusSelectionClause(
+      Context context, StringBuilder where, List<String> selectionArgs) {}
+
+  @Override
   public String getSettingsFragment() {
     return null;
   }

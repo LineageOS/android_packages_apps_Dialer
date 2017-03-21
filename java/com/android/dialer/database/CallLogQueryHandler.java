@@ -33,7 +33,6 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.v4.os.BuildCompat;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
@@ -113,14 +112,21 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   }
 
   public void fetchVoicemailStatus() {
+    StringBuilder where = new StringBuilder();
+    List<String> selectionArgs = new ArrayList<>();
+
+    VoicemailComponent.get(mContext)
+        .getVoicemailClient()
+        .appendOmtpVoicemailStatusSelectionClause(mContext, where, selectionArgs);
+
     if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
       startQuery(
           QUERY_VOICEMAIL_STATUS_TOKEN,
           null,
           Status.CONTENT_URI,
           VoicemailStatusQuery.getProjection(),
-          null,
-          null,
+          where.toString(),
+          selectionArgs.toArray(new String[selectionArgs.size()]),
           null);
     }
   }
@@ -132,11 +138,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           new StringBuilder(Voicemails.IS_READ + "=0" + " AND " + Voicemails.DELETED + "=0 ");
       List<String> selectionArgs = new ArrayList<>();
 
-      if (BuildCompat.isAtLeastO()) {
-        VoicemailComponent.get(mContext)
-            .getVoicemailClient()
-            .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
-      }
+      VoicemailComponent.get(mContext)
+          .getVoicemailClient()
+          .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
 
       startQuery(
           QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN,

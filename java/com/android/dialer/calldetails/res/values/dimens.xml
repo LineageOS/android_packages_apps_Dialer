@@ -29,12 +29,12 @@
   <dimen name="call_entry_icon_size">24dp</dimen>
   <dimen name="call_entry_padding">16dp</dimen>
   <dimen name="call_entry_bottom_padding">14dp</dimen>
-  <dimen name="call_entry_left_margin">32dp</dimen>
+  <dimen name="call_entry_text_left_margin">72dp</dimen>
 
   <!-- EC container -->
   <dimen name="call_details_ec_text_size">12sp</dimen>
   <dimen name="ec_container_height">48dp</dimen>
-  <dimen name="ec_text_left_margin">72dp</dimen>
+  <dimen name="ec_post_call_left_margin">73dp</dimen>
   <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
 </resources>

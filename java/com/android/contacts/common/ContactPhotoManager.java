@@ -27,7 +27,9 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.QuickContactBadge;
 import com.android.contacts.common.lettertiles.LetterTileDrawable;
+import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
 
@@ -231,6 +233,19 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
       boolean isCircular,
       DefaultImageRequest defaultImageRequest) {
     loadThumbnail(view, photoId, darkTheme, isCircular, defaultImageRequest, DEFAULT_AVATAR);
+  }
+
+  public final void loadDialerThumbnail(
+      QuickContactBadge badge, Uri contactUri, long photoId, String displayName, int contactType) {
+    badge.assignContactUri(contactUri);
+    badge.setOverlay(null);
+
+    String lookupKey = contactUri == null ? null : UriUtils.getLookupKeyFromUri(contactUri);
+    ContactPhotoManager.DefaultImageRequest request =
+        new ContactPhotoManager.DefaultImageRequest(
+            displayName, lookupKey, contactType, true /* isCircular */);
+    loadThumbnail(
+        badge, photoId, false /* darkTheme */, true /* isCircular */, request, DEFAULT_AVATAR);
   }
 
   /**

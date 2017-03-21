@@ -527,11 +527,6 @@
        [CHAR LIMIT=30] -->
   <string name="call_log_action_send_message">Send a message</string>
 
-  <!-- Button text for a button displayed underneath an entry in the call log, which opens up the
-       call compose UI for the number represented by the call log entry.
-       [CHAR LIMIT=30] -->
-  <string name="share_and_call">Share and call</string>
-
   <!-- Button text for the button displayed underneath an entry in the call log.
        Tapping navigates the user to the call details screen where the user can view details for
        the call log entry. [CHAR LIMIT=30] -->
@@ -580,10 +575,6 @@
        if both are visible.
        [CHAR LIMIT=NONE]-->
   <string name="call_log_via_number_phone_account"><xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g> via <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
-
-  <!-- String describing the phone icon on a call log list item. When tapped, it will place a
-       call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
-  <string name="description_call_log_call_action">Call</string>
 
   <!-- String describing the "call" action for an entry in the call log.  The call back
        action triggers a return call to the named user.

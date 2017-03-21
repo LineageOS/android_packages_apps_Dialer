@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -305,6 +306,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
     }
   }
 
+  @Nullable
   @VisibleForTesting
   public CameraInfo getCameraInfo() {
     if (mCameraIndex == NO_CAMERA_SELECTED) {
@@ -516,7 +518,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
     final WindowManager windowManager =
         (WindowManager) mCameraPreview.getContext().getSystemService(Context.WINDOW_SERVICE);
 
-    int degrees = 0;
+    int degrees;
     switch (windowManager.getDefaultDisplay().getRotation()) {
       case Surface.ROTATION_0:
         degrees = 0;
@@ -530,6 +532,8 @@ public class CameraManager implements FocusOverlayManager.Listener {
       case Surface.ROTATION_270:
         degrees = 270;
         break;
+      default:
+        throw Assert.createAssertionFailException("");
     }
 
     // The display orientation of the camera (this controls the preview image).

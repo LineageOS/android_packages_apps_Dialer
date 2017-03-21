@@ -48,9 +48,6 @@ public final class CallComposerContact
   // optional string name_or_number = 4;
   public java.lang.String nameOrNumber;
 
-  // optional bool is_business = 5;
-  public boolean isBusiness;
-
   // optional string number = 6;
   public java.lang.String number;
 
@@ -59,6 +56,9 @@ public final class CallComposerContact
 
   // optional string number_label = 8;
   public java.lang.String numberLabel;
+
+  // optional int32 contact_type = 9;
+  public int contactType;
 
   // @@protoc_insertion_point(class_scope:com.android.dialer.callcomposer.CallComposerContact)
 
@@ -71,10 +71,10 @@ public final class CallComposerContact
     photoUri = "";
     contactUri = "";
     nameOrNumber = "";
-    isBusiness = false;
     number = "";
     displayNumber = "";
     numberLabel = "";
+    contactType = 0;
     unknownFieldData = null;
     cachedSize = -1;
     return this;
@@ -95,9 +95,6 @@ public final class CallComposerContact
     if (this.nameOrNumber != null && !this.nameOrNumber.equals("")) {
       output.writeString(4, this.nameOrNumber);
     }
-    if (this.isBusiness != false) {
-      output.writeBool(5, this.isBusiness);
-    }
     if (this.number != null && !this.number.equals("")) {
       output.writeString(6, this.number);
     }
@@ -106,6 +103,9 @@ public final class CallComposerContact
     }
     if (this.numberLabel != null && !this.numberLabel.equals("")) {
       output.writeString(8, this.numberLabel);
+    }
+    if (this.contactType != 0) {
+      output.writeInt32(9, this.contactType);
     }
     super.writeTo(output);
   }
@@ -130,10 +130,6 @@ public final class CallComposerContact
           com.google.protobuf.nano.CodedOutputByteBufferNano.computeStringSize(
               4, this.nameOrNumber);
     }
-    if (this.isBusiness != false) {
-      size +=
-          com.google.protobuf.nano.CodedOutputByteBufferNano.computeBoolSize(5, this.isBusiness);
-    }
     if (this.number != null && !this.number.equals("")) {
       size += com.google.protobuf.nano.CodedOutputByteBufferNano.computeStringSize(6, this.number);
     }
@@ -145,6 +141,10 @@ public final class CallComposerContact
     if (this.numberLabel != null && !this.numberLabel.equals("")) {
       size +=
           com.google.protobuf.nano.CodedOutputByteBufferNano.computeStringSize(8, this.numberLabel);
+    }
+    if (this.contactType != 0) {
+      size +=
+          com.google.protobuf.nano.CodedOutputByteBufferNano.computeInt32Size(9, this.contactType);
     }
     return size;
   }
@@ -184,11 +184,6 @@ public final class CallComposerContact
             this.nameOrNumber = input.readString();
             break;
           }
-        case 40:
-          {
-            this.isBusiness = input.readBool();
-            break;
-          }
         case 50:
           {
             this.number = input.readString();
@@ -202,6 +197,11 @@ public final class CallComposerContact
         case 66:
           {
             this.numberLabel = input.readString();
+            break;
+          }
+        case 72:
+          {
+            this.contactType = input.readInt32();
             break;
           }
       }

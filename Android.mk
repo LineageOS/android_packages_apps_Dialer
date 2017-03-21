@@ -1,8 +1,6 @@
 # Local modifications:
-# * b/36287059 Dagger classes have been manually crafted.
 # * b/31757757 Precompiled proto classes have been included.
 # * b/36215428 dialer/oem/res/values-mcc3* have been pruned
-# * b/36383971 StubCallLocationModule modified to return null.
 # * removed com.google.android.backup.api_key. This should be added to
 #      the manifest in the top level directory.
 # * removed com.google.android.geo.API_KEY key. This should be added to
@@ -31,10 +29,6 @@ SRC_DIRS := \
 
 # Exclude files incompatible with AOSP.
 EXCLUDE_FILES := \
-	$(BASE_DIR)/dialer/debug/bindings/impl/DebugBindings.java \
-	$(BASE_DIR)/dialer/debug/bindings/stub/DebugBindings.java \
-	$(BASE_DIR)/dialer/debug/impl/DebugConnection.java \
-	$(BASE_DIR)/dialer/debug/impl/DebugConnectionService.java \
 	$(BASE_DIR)/incallui/calllocation/impl/AuthException.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationImpl.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationModule.java \

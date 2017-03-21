@@ -85,14 +85,12 @@
       android:name="com.android.voicemail.impl.scheduling.TaskSchedulerService"
       android:exported="false"/>
 
-    <service
-      android:name="com.android.voicemail.impl.OmtpService"
-      android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
+    <receiver android:name="com.android.voicemail.impl.OmtpReceiver"
       android:exported="true">
       <intent-filter>
-        <action android:name="android.telephony.VisualVoicemailService"/>
+        <action android:name="com.android.phone.vvm.ACTION_VISUAL_VOICEMAIL_SERVICE_EVENT" />
       </intent-filter>
-    </service>
+    </receiver>
 
     <activity
       android:name="com.android.voicemail.impl.settings.VoicemailChangePinActivity"

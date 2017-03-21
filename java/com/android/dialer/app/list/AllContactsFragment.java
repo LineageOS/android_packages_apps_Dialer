@@ -38,7 +38,6 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
-import com.android.contacts.common.util.FabUtil;
 import com.android.dialer.app.R;
 import com.android.dialer.app.list.ListsFragment.ListsPage;
 import com.android.dialer.app.widget.EmptyContentView;
@@ -90,8 +89,6 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     mEmptyListView.setActionClickedListener(this);
     getListView().setEmptyView(mEmptyListView);
     mEmptyListView.setVisibility(View.GONE);
-
-    FabUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
   }
 
   @Override

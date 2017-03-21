@@ -35,10 +35,10 @@
     <string name="clearCallLogConfirmation" msgid="6844949465815109166">"Barcha qo‘ng‘iroqlar tarixi o‘chib ketadi."</string>
     <string name="clearCallLogProgress_title" msgid="995004835687361977">"Qo‘ng‘iroqlar tarixi tozalanmoqda…"</string>
     <string name="userCallActivityLabel" product="default" msgid="9198964841862577505">"Chaqiruv"</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Javobsiz qo‘ng‘iroq"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Javobsiz ishchi qo‘ng‘irog‘i"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Javobsiz qo‘ng‘iroqlar"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
+    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Javobsiz chaqiruv"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Javobsiz chaqiruv (ish)"</string>
+    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Javobsiz chaqiruvlar"</string>
+    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> ta javobsiz chaqiruv"</string>
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Telefon"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"SMS yuborish"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
@@ -56,7 +56,7 @@
     <string name="call_log_voicemail_header" msgid="5799424860394542726">"Faqat ovozli xabar qo‘ng‘iroqlari"</string>
     <string name="call_log_incoming_header" msgid="1158753168119845168">"Faqat kiruvchi qo‘ng‘iroqlar"</string>
     <string name="call_log_outgoing_header" msgid="149333910997122683">"Faqat chiquvchi qo‘ng‘iroqlar"</string>
-    <string name="call_log_missed_header" msgid="6491707499211289630">"Faqat javobsiz qo‘ng‘iroqlar"</string>
+    <string name="call_log_missed_header" msgid="6491707499211289630">"Faqat javobsiz chaqiruvlar"</string>
     <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="description_search_button" msgid="4515570469584782176">"qidiruv"</string>
     <string name="description_dial_button" msgid="699794433224646027">"terish"</string>
@@ -116,7 +116,7 @@
     <string name="block_number_search_hint" msgid="5377706079015099416">"Raqam qo‘shish yoki kontaktlardan qidirish"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"Qo‘ng‘iroqlar tarixi bo‘m-bo‘sh"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"Qo‘ng‘iroq qilish"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Sizda hech qanday javobsiz qo‘ng‘iroq yo‘q."</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"Hech qanday javobsiz chaqiruv yo‘q."</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"Sizning ovozli pochta qutingiz bo‘m-bo‘sh."</string>
     <string name="show_favorites_only" msgid="8089163582448737837">"Faqat saralar ko‘rsatilsin"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"Chaqiruvlar tarixi"</string>
@@ -135,7 +135,7 @@
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"SMS yuborish"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Videoqo‘ng‘iroq qilish"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"Raqamni bloklash"</string>
-    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
+    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> ta javobsiz chaqiruv"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"Tezkor raqam terish ro‘yxatida hech kim yo‘q"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Tezkor raqam terishni sozlang"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"Sizda hali hech qanday kontakt yo‘q"</string>
@@ -144,18 +144,16 @@
     <string name="remove_contact" msgid="2353580570488923668">"O‘chirish"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Video qo‘ng‘iroq"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"SMS yuborish"</string>
-    <string name="share_and_call" msgid="1208757302713705291">"Ulashish va qo‘ng‘iroq qilish"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Chaqiruv tafsilotlari"</string>
     <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Yuborish:"</string>
     <string name="call_log_action_call" msgid="682724094251540583">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Qo‘ng‘iroq javobsiz qoldirildi: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Javobsiz chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="3920182963103160610">"Qo‘ng‘iroqqa javob berildi: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_unread_voicemail" msgid="145170985013419170">"O‘qilmagan ovozli xabar (<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)."</string>
     <string name="description_read_voicemail" msgid="5585559881573227732">"Ovozli xabar (<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)."</string>
     <string name="description_outgoing_call" msgid="543952487882919924">"Chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>. <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="call_log_via_number" msgid="1340307109806397650">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami orqali"</string>
     <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, <xliff:g id="NUMBER">%2$s</xliff:g> raqami orqali"</string>
-    <string name="description_call_log_call_action" msgid="6958550749492392199">"Qo‘ng‘iroq qilish"</string>
     <string name="description_call_action" msgid="4042796498169106545">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"Video qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> kontaktidan kelgan ovozli xabarni tinglash"</string>

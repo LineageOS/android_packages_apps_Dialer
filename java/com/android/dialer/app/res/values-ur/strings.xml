@@ -144,7 +144,6 @@
     <string name="remove_contact" msgid="2353580570488923668">"ہٹائیں"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"ویڈیو کال"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"پیغام بھیجیں"</string>
-    <string name="share_and_call" msgid="1208757302713705291">"اشتراک کریں اور کال کریں"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"کال کی تفصیلات"</string>
     <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"بھیجیں بنام …"</string>
     <string name="call_log_action_call" msgid="682724094251540583">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> کو کال کریں"</string>
@@ -155,7 +154,6 @@
     <string name="description_outgoing_call" msgid="543952487882919924">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>، <xliff:g id="TYPEORLOCATION">^2</xliff:g>، <xliff:g id="TIMEOFCALL">^3</xliff:g>، <xliff:g id="PHONEACCOUNT">^4</xliff:g> پر کال کریں۔"</string>
     <string name="call_log_via_number" msgid="1340307109806397650">"بذریعہ <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> بذریعہ <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="description_call_log_call_action" msgid="6958550749492392199">"کال کریں"</string>
     <string name="description_call_action" msgid="4042796498169106545">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> کو کال کریں"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> کو ویڈیو کال کریں۔"</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> سے صوتی میل سنیں"</string>

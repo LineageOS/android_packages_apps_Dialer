@@ -17,10 +17,8 @@
 package com.android.dialer.voicemailstatus;
 
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.VoicemailContract.Status;
-import android.support.annotation.VisibleForTesting;
-import java.util.List;
+import com.android.dialer.database.VoicemailStatusQuery;
 
 /**
  * Interface used by the call log UI to determine what user message, if any, related to voicemail
@@ -31,66 +29,40 @@ import java.util.List;
  * shown. The user of this interface must observe/listen to provider changes and invoke this class
  * to check if any message needs to be shown.
  */
-public interface VoicemailStatusHelper {
-
-  /**
-   * Returns a list of messages, in the order or priority that should be shown to the user. An empty
-   * list is returned if no message needs to be shown.
-   *
-   * @param cursor The cursor pointing to the query on {@link Status#CONTENT_URI}. The projection to
-   *     be used is defined by the implementation class of this interface.
-   */
-  @VisibleForTesting
-  List<StatusMessage> getStatusMessages(Cursor cursor);
+public class VoicemailStatusHelper {
 
   /**
    * Returns the number of active voicemail sources installed.
    *
    * <p>The number of sources is counted by querying the voicemail status table.
+   *
+   * @param cursor The caller is responsible for the life cycle of the cursor and resetting the
+   *     position
    */
-  int getNumberActivityVoicemailSources(Cursor cursor);
-
-  @VisibleForTesting
-  class StatusMessage {
-
-    /** Package of the source on behalf of which this message has to be shown. */
-    public final String sourcePackage;
-    /**
-     * The string resource id of the status message that should be shown in the call log page. Set
-     * to -1, if this message is not to be shown in call log.
-     */
-    public final int callLogMessageId;
-    /**
-     * The string resource id of the status message that should be shown in the call details page.
-     * Set to -1, if this message is not to be shown in call details page.
-     */
-    public final int callDetailsMessageId;
-    /** The string resource id of the action message that should be shown. */
-    public final int actionMessageId;
-    /** URI for the corrective action, where applicable. Null if no action URI is available. */
-    public final Uri actionUri;
-
-    public StatusMessage(
-        String sourcePackage,
-        int callLogMessageId,
-        int callDetailsMessageId,
-        int actionMessageId,
-        Uri actionUri) {
-      this.sourcePackage = sourcePackage;
-      this.callLogMessageId = callLogMessageId;
-      this.callDetailsMessageId = callDetailsMessageId;
-      this.actionMessageId = actionMessageId;
-      this.actionUri = actionUri;
+  public int getNumberActivityVoicemailSources(Cursor cursor) {
+    int count = 0;
+    if (!cursor.moveToFirst()) {
+      return 0;
     }
+    do {
+      if (isVoicemailSourceActive(cursor)) {
+        ++count;
+      }
+    } while (cursor.moveToNext());
+    return count;
+  }
 
-    /** Whether this message should be shown in the call log page. */
-    public boolean showInCallLog() {
-      return callLogMessageId != -1;
-    }
-
-    /** Whether this message should be shown in the call details page. */
-    public boolean showInCallDetails() {
-      return callDetailsMessageId != -1;
-    }
+  /**
+   * Returns whether the source status in the cursor corresponds to an active source. A source is
+   * active if its' configuration state is not NOT_CONFIGURED. For most voicemail sources, only OK
+   * and NOT_CONFIGURED are used. The OMTP visual voicemail client has the same behavior pre-NMR1.
+   * NMR1 visual voicemail will only set it to NOT_CONFIGURED when it is deactivated. As soon as
+   * activation is attempted, it will transition into CONFIGURING then into OK or other error state,
+   * NOT_CONFIGURED is never set through an error.
+   */
+  private boolean isVoicemailSourceActive(Cursor cursor) {
+    return cursor.getString(VoicemailStatusQuery.SOURCE_PACKAGE_INDEX) != null
+        && cursor.getInt(VoicemailStatusQuery.CONFIGURATION_STATE_INDEX)
+            != Status.CONFIGURATION_STATE_NOT_CONFIGURED;
   }
 }

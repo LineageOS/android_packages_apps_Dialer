@@ -17,26 +17,18 @@
 package com.android.incallui.calllocation;
 
 import android.content.Context;
+import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
-import com.android.incallui.calllocation.stub.StubCallLocationModule;
 
 /** Subcomponent that can be used to access the call location implementation. */
-public class CallLocationComponent {
-  private static CallLocationComponent instance;
-  private CallLocation callLocation;
+@Subcomponent
+public abstract class CallLocationComponent {
 
-  public CallLocation getCallLocation(){
-    if (callLocation == null) {
-        callLocation = new StubCallLocationModule.StubCallLocation();
-    }
-    return callLocation;
-  }
+  public abstract CallLocation getCallLocation();
 
   public static CallLocationComponent get(Context context) {
-    if (instance == null) {
-        instance = new CallLocationComponent();
-    }
-    return instance;
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .callLocationComponent();
   }
 
   /** Used to refer to the root application component. */

@@ -48,8 +48,6 @@ import java.util.Locale;
 @RequiresApi(VERSION_CODES.N_MR1)
 public class Vvm3VoicemailMessageCreator {
 
-  public static final String VVM_TYPE_VVM3 = "vvm_type_vvm3";
-
   // Copied from com.android.phone.vvm.omtp.protocol.Vvm3EventHandler
   // TODO(b/28380841): unbundle VVM client so we can access these values directly
   public static final int VMS_DNS_FAILURE = -9001;

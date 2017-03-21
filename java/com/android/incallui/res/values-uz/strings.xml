@@ -30,7 +30,7 @@
     <string name="caller_manage_header" msgid="7358710345135355578">"Konferensiya qo‘ng‘irog‘i <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Ovozli pochta raqami"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Raqam terilmoqda"</string>
-    <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> qo‘ng‘irog‘i javobsiz qoldirildi"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> chaqiruvi javobsiz qoldi"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Joriy qo‘ng‘iroq"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Chiquvchi ishchi qo‘ng‘irog‘i"</string>
     <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Chiquvchi Wi-Fi qo‘ng‘irog‘i"</string>

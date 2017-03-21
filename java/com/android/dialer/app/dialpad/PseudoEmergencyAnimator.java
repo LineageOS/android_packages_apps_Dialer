@@ -65,7 +65,7 @@ public class PseudoEmergencyAnimator {
                 ColorFilter colorFilter = new LightingColorFilter(Color.BLACK, color);
 
                 View floatingActionButtonContainer =
-                    getView().findViewById(R.id.dialpad_floating_action_button_container);
+                    getView().findViewById(R.id.floating_action_button);
                 if (floatingActionButtonContainer != null) {
                   floatingActionButtonContainer.getBackground().setColorFilter(colorFilter);
                 }
@@ -96,7 +96,7 @@ public class PseudoEmergencyAnimator {
             public void onAnimationEnd(Animator animation) {
               try {
                 View floatingActionButtonContainer =
-                    getView().findViewById(R.id.dialpad_floating_action_button_container);
+                    getView().findViewById(R.id.floating_action_button);
                 if (floatingActionButtonContainer != null) {
                   floatingActionButtonContainer.getBackground().clearColorFilter();
                 }

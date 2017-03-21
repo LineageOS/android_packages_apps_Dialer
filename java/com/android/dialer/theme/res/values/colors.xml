@@ -32,7 +32,9 @@
   <color name="dialer_snackbar_action_text_color">#4285F4</color>
   <color name="dialer_theme_color_20pct">#332A56C6</color>
 
-  <color name="dialer_secondary_color">#e91e63</color>
+  <color name="dialpad_fab_green">#00C853</color>
+
+  <color name="dialer_secondary_color">#F50057</color>
 
   <!-- Primary text color in the Phone app -->
   <color name="dialer_primary_text_color">#333333</color>

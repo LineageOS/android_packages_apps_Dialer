@@ -25,7 +25,6 @@ import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.callcomposer.nano.CallComposerContact;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
@@ -56,18 +55,16 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     callBackButton.setOnClickListener(this);
   }
 
-  /**
-   * Populates the contact info fields based on the current contact information. Copied from {@link
-   * com.android.contacts.common.dialog.CallSubjectDialog}.
-   */
+  /** Populates the contact info fields based on the current contact information. */
   public void updateContactInfo(CallComposerContact contact) {
     this.contact = contact;
-    setPhoto(
-        contact.photoId,
-        Uri.parse(contact.photoUri),
-        Uri.parse(contact.contactUri),
-        contact.nameOrNumber,
-        contact.isBusiness);
+    ContactPhotoManager.getInstance(context)
+        .loadDialerThumbnail(
+            contactPhoto,
+            contact.contactUri == null ? null : Uri.parse(contact.contactUri),
+            contact.photoId,
+            contact.nameOrNumber,
+            contact.contactType);
 
     nameView.setText(contact.nameOrNumber);
     if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
@@ -81,33 +78,6 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     } else {
       numberView.setVisibility(View.GONE);
       numberView.setText(null);
-    }
-  }
-
-  /**
-   * Sets the photo on the quick contact galleryIcon. Copied from {@link
-   * com.android.contacts.common.dialog.CallSubjectDialog}.
-   */
-  private void setPhoto(
-      long photoId, Uri photoUri, Uri contactUri, String displayName, boolean isBusiness) {
-    contactPhoto.assignContactUri(contactUri);
-    contactPhoto.setOverlay(null);
-
-    int contactType =
-        isBusiness ? ContactPhotoManager.TYPE_BUSINESS : ContactPhotoManager.TYPE_DEFAULT;
-    String lookupKey = contactUri == null ? null : UriUtils.getLookupKeyFromUri(contactUri);
-
-    ContactPhotoManager.DefaultImageRequest request =
-        new ContactPhotoManager.DefaultImageRequest(
-            displayName, lookupKey, contactType, true /* isCircular */);
-
-    if (photoId == 0 && photoUri != null) {
-      contactPhoto.setImageDrawable(
-          context.getDrawable(R.drawable.product_logo_avatar_anonymous_color_120));
-    } else {
-      ContactPhotoManager.getInstance(context)
-          .loadThumbnail(
-              contactPhoto, photoId, false /* darkTheme */, true /* isCircular */, request);
     }
   }
 

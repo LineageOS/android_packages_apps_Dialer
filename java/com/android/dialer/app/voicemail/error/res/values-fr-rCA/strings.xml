@@ -44,10 +44,14 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Vous ne pourrez pas recevoir de nouveaux messages vocaux si votre boîte de réception est pleine."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Impossible de recevoir de nouveaux messages vocaux"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Votre boîte de réception est pleine. Essayez de supprimer des messages pour pouvoir recevoir de nouveaux messages vocaux."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Activer l\'espace supplémentaire de stockage et de sauvegarde"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Votre boîte aux lettres est pleine. Pour libérer de l\'espace, activez l\'espace de stockage supplémentaire pour que Google puisse gérer et sauvegarder vos messages vocaux."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Activer l\'espace supplémentaire de stockage et de sauvegarde"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Votre boîte aux lettres est presque pleine. Pour libérer de l\'espace, activez l\'espace de stockage supplémentaire pour que Google puisse gérer et sauvegarder vos messages vocaux."</string>
+    <!-- no translation found for voicemail_error_inbox_full_turn_archive_on_title (3083779676549536189) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_full_turn_archive_on_message (4236256841748725792) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_almost_full_turn_archive_on_title (6118464905488477869) -->
+    <skip />
+    <!-- no translation found for voicemail_error_inbox_almost_full_turn_archive_on_message (7289015622668426730) -->
+    <skip />
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Définir votre NIP de messagerie vocale"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Vous devez saisir un NIP de messagerie vocale chaque fois que vous appelez pour accéder à vos messages vocaux."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Erreur inconnue"</string>

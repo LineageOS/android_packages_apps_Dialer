@@ -58,6 +58,13 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean isSelfManagedCamera() {
+    // Return false to indicate that the answer UI shouldn't open the camera itself.
+    // For IMS Video the modem is responsible for opening the camera.
+    return false;
+  }
+
+  @Override
   public void onCallStateChanged(int newState) {
     if (!isAvailable()) {
       return;

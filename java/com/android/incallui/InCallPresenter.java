@@ -757,8 +757,10 @@ public class InCallPresenter implements CallList.Listener {
       FilteredNumbersUtil.recordLastEmergencyCallTime(mContext);
     }
 
-    if (!call.getLogState().isIncoming && !mCallList.hasLiveCall()) {
-      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
+    if (!mCallList.hasLiveCall()
+        && !call.getLogState().isIncoming
+        && !CallerInfoUtils.isVoiceMailNumber(mContext, call)) {
+      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getTimeAddedMs());
     }
   }
 

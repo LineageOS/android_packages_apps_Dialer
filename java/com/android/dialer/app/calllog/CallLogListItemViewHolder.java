@@ -769,21 +769,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       quickContactView.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
       return;
     }
-    final boolean isVoicemail = mCallLogCache.isVoicemailNumber(accountHandle, number);
-    int contactType = ContactPhotoManager.TYPE_DEFAULT;
-    if (isVoicemail) {
-      contactType = ContactPhotoManager.TYPE_VOICEMAIL;
-    } else if (isBusiness) {
-      contactType = ContactPhotoManager.TYPE_BUSINESS;
-    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
-      contactType = ContactPhotoManager.TYPE_GENERIC_AVATAR;
-    }
 
     final String lookupKey =
         info.lookupUri != null ? UriUtils.getLookupKeyFromUri(info.lookupUri) : null;
     final String displayName = TextUtils.isEmpty(info.name) ? displayNumber : info.name;
     final DefaultImageRequest request =
-        new DefaultImageRequest(displayName, lookupKey, contactType, true /* isCircular */);
+        new DefaultImageRequest(displayName, lookupKey, getContactType(), true /* isCircular */);
 
     if (info.photoId == 0 && info.photoUri != null) {
       ContactPhotoManager.getInstance(mContext)
@@ -805,6 +796,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
   }
 
+  private int getContactType() {
+    int contactType = ContactPhotoManager.TYPE_DEFAULT;
+    if (mCallLogCache.isVoicemailNumber(accountHandle, number)) {
+      contactType = ContactPhotoManager.TYPE_VOICEMAIL;
+    } else if (isBusiness) {
+      contactType = ContactPhotoManager.TYPE_BUSINESS;
+    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
+      contactType = ContactPhotoManager.TYPE_GENERIC_AVATAR;
+    }
+    return contactType;
+  }
+
   @Override
   public void onClick(View view) {
     if (view.getId() == R.id.primary_action_button && !TextUtils.isEmpty(voicemailUri)) {
@@ -815,14 +818,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       CallSubjectDialog.start(
           (Activity) mContext,
           info.photoId,
-          info.photoUri,
           info.lookupUri,
           (String) nameOrNumber /* top line of contact view in call subject dialog */,
-          isBusiness,
           number,
           TextUtils.isEmpty(info.name) ? null : displayNumber, /* second line of contact
                                                                            view in dialog. */
           numberType, /* phone number type (e.g. mobile) in second line of contact view */
+          getContactType(),
           accountHandle);
     } else if (view.getId() == R.id.block_report_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_BLOCK_REPORT_SPAM);
@@ -881,7 +883,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     contact.photoUri = info.photoUri == null ? null : info.photoUri.toString();
     contact.contactUri = info.lookupUri == null ? null : info.lookupUri.toString();
     contact.nameOrNumber = (String) nameOrNumber;
-    contact.isBusiness = isBusiness;
+    contact.contactType = getContactType();
     contact.number = number;
     /* second line of contact view. */
     contact.displayNumber = TextUtils.isEmpty(info.name) ? null : displayNumber;

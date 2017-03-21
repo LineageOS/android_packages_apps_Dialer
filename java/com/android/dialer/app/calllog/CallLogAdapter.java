@@ -65,7 +65,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
@@ -81,7 +80,7 @@ import java.util.Set;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
-    implements GroupCreator, OnVoicemailDeletedListener, CapabilitiesListener {
+    implements GroupCreator, OnVoicemailDeletedListener {
 
   // Types of activities the call log adapter is used for
   public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -133,6 +132,14 @@ public class CallLogAdapter extends GroupingListAdapter
             // Always reset the voicemail playback state on expand or collapse.
             mVoicemailPlaybackPresenter.resetAll();
           }
+
+          // If enriched call capabilities were unknown on the initial load,
+          // viewHolder.isCallComposerCapable may be unset. Check here if we have the capabilities
+          // as a last attempt at getting them before showing the expanded view to the user
+          EnrichedCallCapabilities capabilities =
+              getEnrichedCallManager().getCapabilities(viewHolder.number);
+          viewHolder.isCallComposerCapable =
+              capabilities != null && capabilities.supportsCallComposer();
 
           if (viewHolder.rowId == mCurrentlyExpandedRowId) {
             // Hide actions, if the clicked item is the expanded item.
@@ -300,7 +307,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     mIsSpamEnabled = Spam.get(mActivity).isSpamEnabled();
-    getEnrichedCallManager().registerCapabilitiesListener(this);
     notifyDataSetChanged();
   }
 
@@ -309,7 +315,6 @@ public class CallLogAdapter extends GroupingListAdapter
     for (Uri uri : mHiddenItemUris) {
       CallLogAsyncTaskUtil.deleteVoicemail(mActivity, uri, null);
     }
-    getEnrichedCallManager().unregisterCapabilitiesListener(this);
   }
 
   public void onStop() {
@@ -451,8 +456,11 @@ public class CallLogAdapter extends GroupingListAdapter
     views.isSpam = false;
     views.blockId = null;
     views.isSpamFeatureEnabled = false;
-    views.isCallComposerCapable =
-        isCallComposerCapable(PhoneNumberUtils.formatNumberToE164(views.number, views.countryIso));
+
+    // Attempt to set the isCallComposerCapable field. If capabilities are unknown for this number,
+    // the value will be false while capabilities are requested. mExpandCollapseListener will
+    // attempt to set the field properly in that case
+    views.isCallComposerCapable = isCallComposerCapable(views.number);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
           @Override
@@ -524,14 +532,14 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   @MainThread
-  private boolean isCallComposerCapable(@Nullable String e164Number) {
-    if (e164Number == null) {
+  private boolean isCallComposerCapable(@Nullable String number) {
+    if (number == null) {
       return false;
     }
 
-    EnrichedCallCapabilities capabilities = getEnrichedCallManager().getCapabilities(e164Number);
+    EnrichedCallCapabilities capabilities = getEnrichedCallManager().getCapabilities(number);
     if (capabilities == null) {
-      getEnrichedCallManager().requestCapabilities(e164Number);
+      getEnrichedCallManager().requestCapabilities(number);
       return false;
     }
     return capabilities.supportsCallComposer();
@@ -951,11 +959,6 @@ public class CallLogAdapter extends GroupingListAdapter
     } else {
       return mActivity.getResources().getString(R.string.call_log_header_other);
     }
-  }
-
-  @Override
-  public void onCapabilitiesUpdated() {
-    notifyDataSetChanged();
   }
 
   @NonNull

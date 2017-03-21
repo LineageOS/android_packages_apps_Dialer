@@ -17,9 +17,6 @@
 package com.android.dialer.calldetails;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
@@ -33,10 +30,12 @@ import android.widget.TextView;
 import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallEntryFormatter;
 import com.android.dialer.calllogutils.CallTypeHelper;
+import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult.Type;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -44,7 +43,7 @@ import com.android.dialer.util.IntentUtil;
 /** ViewHolder for call entries in {@link CallDetailsActivity}. */
 public class CallDetailsEntryViewHolder extends ViewHolder {
 
-  private final ImageView callTypeIcon;
+  private final CallTypeIconsView callTypeIcon;
   private final TextView callTypeText;
   private final TextView callTime;
   private final TextView callDuration;
@@ -54,6 +53,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
   private final View multimediaDivider;
 
   private final TextView multimediaDetails;
+  private final TextView postCallNote;
 
   private final ImageView multimediaImage;
 
@@ -67,7 +67,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     super(container);
     context = container.getContext();
 
-    callTypeIcon = (ImageView) container.findViewById(R.id.call_direction);
+    callTypeIcon = (CallTypeIconsView) container.findViewById(R.id.call_direction);
     callTypeText = (TextView) container.findViewById(R.id.call_type);
     callTime = (TextView) container.findViewById(R.id.call_time);
     callDuration = (TextView) container.findViewById(R.id.call_duration);
@@ -76,6 +76,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     multimediaDetailsContainer = container.findViewById(R.id.ec_container);
     multimediaDivider = container.findViewById(R.id.divider);
     multimediaDetails = (TextView) container.findViewById(R.id.multimedia_details);
+    postCallNote = (TextView) container.findViewById(R.id.post_call_note);
     multimediaImage = (ImageView) container.findViewById(R.id.multimedia_image);
     multimediaAttachmentsNumber =
         (TextView) container.findViewById(R.id.multimedia_attachments_number);
@@ -93,11 +94,10 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     boolean isPulledCall =
         (entry.features & Calls.FEATURES_PULLED_EXTERNALLY) == Calls.FEATURES_PULLED_EXTERNALLY;
 
-    Drawable callIcon = getIconForCallType(context.getResources(), callType);
-    int color = getColorForCallType(context, callType);
-    callIcon.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-    callTime.setTextColor(color);
-    callTypeIcon.setImageDrawable(callIcon);
+    callTime.setTextColor(getColorForCallType(context, callType));
+    callTypeIcon.add(callType);
+    callTypeIcon.setShowVideo((entry.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.features));
 
     callTypeText.setText(callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
     callTime.setText(CallEntryFormatter.formatDate(context, entry.date));
@@ -118,8 +118,6 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       multimediaDetailsContainer.setVisibility(View.GONE);
     } else {
 
-      // TODO: b/36158891 Add room for 2 pieces of enriched call data. It's possible
-      // to have both call composer data and post call data for a single call.
       HistoryResult historyResult = entry.historyResults[0];
       multimediaDetailsContainer.setVisibility(View.VISIBLE);
       multimediaDetailsContainer.setOnClickListener(
@@ -146,32 +144,21 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       } else {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no text");
       }
+
+      if (entry.historyResults.length > 1 && !TextUtils.isEmpty(entry.historyResults[1].text)) {
+        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "showing post call note");
+        postCallNote.setVisibility(View.VISIBLE);
+        postCallNote.setText(
+            context.getString(R.string.message_in_quotes, entry.historyResults[1].text));
+      } else {
+        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no post call note");
+      }
     }
   }
 
   private static boolean isIncoming(@NonNull HistoryResult historyResult) {
     return historyResult.type == Type.INCOMING_POST_CALL
         || historyResult.type == Type.INCOMING_CALL_COMPOSER;
-  }
-
-  private static Drawable getIconForCallType(Resources resources, int callType) {
-    switch (callType) {
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
-        return resources.getDrawable(R.drawable.quantum_ic_call_made_white_24);
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
-        return resources.getDrawable(R.drawable.quantum_ic_block_white_24);
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
-      case AppCompatConstants.CALLS_REJECTED_TYPE:
-        return resources.getDrawable(R.drawable.quantum_ic_call_received_white_24);
-      case AppCompatConstants.CALLS_MISSED_TYPE:
-      default:
-        // It is possible for users to end up with calls with unknown call types in their
-        // call history, possibly due to 3rd party call log implementations (e.g. to
-        // distinguish between rejected and missed calls). Instead of crashing, just
-        // assume that all unknown call types are missed calls.
-        return resources.getDrawable(R.drawable.quantum_ic_call_missed_white_24);
-    }
   }
 
   private static @ColorInt int getColorForCallType(Context context, int callType) {

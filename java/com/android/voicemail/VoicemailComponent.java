@@ -17,26 +17,18 @@
 package com.android.voicemail;
 
 import android.content.Context;
+import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
-import com.android.voicemail.impl.VoicemailClientImpl;
 
 /** Subcomponent that can be used to access the voicemail implementation. */
-public class VoicemailComponent {
-    private static VoicemailComponent instance;
-    private VoicemailClientImpl voicemailClient;
+@Subcomponent
+public abstract class VoicemailComponent {
 
-  public VoicemailClient getVoicemailClient() {
-    if (voicemailClient == null) {
-        voicemailClient = new VoicemailClientImpl();
-    }
-    return voicemailClient;
-  }
+  public abstract VoicemailClient getVoicemailClient();
 
   public static VoicemailComponent get(Context context) {
-    if (instance == null) {
-        instance = new VoicemailComponent();
-    }
-    return instance;
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .voicemailComponent();
   }
 
   /** Used to refer to the root application component. */

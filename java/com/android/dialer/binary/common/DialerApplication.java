@@ -22,9 +22,10 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.inject.HasRootComponent;
 
 /** A common application subclass for all Dialer build variants. */
-public abstract class DialerApplication extends Application {
+public abstract class DialerApplication extends Application implements HasRootComponent {
 
   private volatile Object rootComponent;
 
@@ -40,4 +41,27 @@ public abstract class DialerApplication extends Application {
     Trace.endSection();
   }
 
+  /**
+   * Returns a new instance of the root component for the application. Sub classes should define a
+   * root component that extends all the sub components "HasComponent" intefaces. The component
+   * should specify all modules that the application supports and provide stubs for the remainder.
+   */
+  @NonNull
+  protected abstract Object buildRootComponent();
+
+  /** Returns a cached instance of application's root component. */
+  @Override
+  @NonNull
+  public final Object component() {
+    Object result = rootComponent;
+    if (result == null) {
+      synchronized (this) {
+        result = rootComponent;
+        if (result == null) {
+          rootComponent = result = buildRootComponent();
+        }
+      }
+    }
+    return result;
+  }
 }

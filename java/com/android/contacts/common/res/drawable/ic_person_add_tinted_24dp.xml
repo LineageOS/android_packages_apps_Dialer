@@ -16,5 +16,5 @@
   -->
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
   android:autoMirrored="true"
-  android:src="@drawable/ic_person_add_24dp"
+  android:src="@drawable/quantum_ic_person_add_white_24"
   android:tint="@color/actionbar_icon_color"/>

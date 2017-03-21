@@ -49,7 +49,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
 import com.android.dialer.callcomposer.nano.CallComposerContact;
 import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
@@ -59,7 +58,6 @@ import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -305,7 +303,7 @@ public class CallComposerActivity extends AppCompatActivity
 
                     @Override
                     public void onCopyFailed(Throwable throwable) {
-                      // TODO(b/33753902)
+                      // TODO(b/34279096) - gracefully handle message failure
                       LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
                     }
                   })
@@ -473,21 +471,16 @@ public class CallComposerActivity extends AppCompatActivity
     return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   }
 
-  /**
-   * Populates the contact info fields based on the current contact information. Copied from {@link
-   * com.android.contacts.common.dialog.CallSubjectDialog}.
-   */
+  /** Populates the contact info fields based on the current contact information. */
   private void updateContactInfo() {
-    if (contact.contactUri != null) {
-      setPhoto(
-          contact.photoId,
-          Uri.parse(contact.photoUri),
-          Uri.parse(contact.contactUri),
-          contact.nameOrNumber,
-          contact.isBusiness);
-    } else {
-      contactPhoto.setVisibility(View.GONE);
-    }
+    ContactPhotoManager.getInstance(this)
+        .loadDialerThumbnail(
+            contactPhoto,
+            contact.contactUri == null ? null : Uri.parse(contact.contactUri),
+            contact.photoId,
+            contact.nameOrNumber,
+            contact.contactType);
+
     nameView.setText(contact.nameOrNumber);
     getActionBar().setTitle(contact.nameOrNumber);
     if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
@@ -502,43 +495,6 @@ public class CallComposerActivity extends AppCompatActivity
     } else {
       numberView.setVisibility(View.GONE);
       numberView.setText(null);
-    }
-  }
-
-  /**
-   * Sets the photo on the quick contact galleryIcon. Copied from {@link
-   * com.android.contacts.common.dialog.CallSubjectDialog}.
-   */
-  private void setPhoto(
-      long photoId, Uri photoUri, Uri contactUri, String displayName, boolean isBusiness) {
-    contactPhoto.assignContactUri(contactUri);
-    if (CompatUtils.isLollipopCompatible()) {
-      contactPhoto.setOverlay(null);
-    }
-
-    int contactType;
-    if (isBusiness) {
-      contactType = ContactPhotoManager.TYPE_BUSINESS;
-    } else {
-      contactType = ContactPhotoManager.TYPE_DEFAULT;
-    }
-
-    String lookupKey = null;
-    if (contactUri != null) {
-      lookupKey = UriUtils.getLookupKeyFromUri(contactUri);
-    }
-
-    ContactPhotoManager.DefaultImageRequest request =
-        new ContactPhotoManager.DefaultImageRequest(
-            displayName, lookupKey, contactType, true /* isCircular */);
-
-    if (photoId == 0 && photoUri != null) {
-      contactPhoto.setImageDrawable(
-          getDrawable(R.drawable.product_logo_avatar_anonymous_color_120));
-    } else {
-      ContactPhotoManager.getInstance(this)
-          .loadThumbnail(
-              contactPhoto, photoId, false /* darkTheme */, true /* isCircular */, request);
     }
   }
 

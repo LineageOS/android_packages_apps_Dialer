@@ -48,7 +48,6 @@ import com.android.dialer.logging.nano.ScreenEvent;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
-import com.android.dialer.voicemailstatus.VoicemailStatusHelperImpl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,7 +126,7 @@ public class ListsFragment extends Fragment
     Trace.beginSection(TAG + " onCreate");
     super.onCreate(savedInstanceState);
 
-    mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
+    mVoicemailStatusHelper = new VoicemailStatusHelper();
     mHasFetchedVoicemailStatus = false;
 
     mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

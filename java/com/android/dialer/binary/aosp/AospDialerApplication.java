@@ -26,5 +26,10 @@ import com.android.dialer.inject.ContextModule;
  */
 public class AospDialerApplication extends DialerApplication {
 
-
+  /** Returns a new instance of the root component for the AOSP Dialer. */
+  @Override
+  @NonNull
+  protected Object buildRootComponent() {
+    return DaggerAospDialerRootComponent.builder().contextModule(new ContextModule(this)).build();
+  }
 }

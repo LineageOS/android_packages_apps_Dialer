@@ -46,12 +46,10 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.util.ViewUtil;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -68,14 +66,13 @@ public class CallSubjectDialog extends Activity {
   /** Activity intent argument bundle keys: */
   public static final String ARG_PHOTO_ID = "PHOTO_ID";
 
-  public static final String ARG_PHOTO_URI = "PHOTO_URI";
   public static final String ARG_CONTACT_URI = "CONTACT_URI";
   public static final String ARG_NAME_OR_NUMBER = "NAME_OR_NUMBER";
-  public static final String ARG_IS_BUSINESS = "IS_BUSINESS";
   public static final String ARG_NUMBER = "NUMBER";
   public static final String ARG_DISPLAY_NUMBER = "DISPLAY_NUMBER";
   public static final String ARG_NUMBER_LABEL = "NUMBER_LABEL";
   public static final String ARG_PHONE_ACCOUNT_HANDLE = "PHONE_ACCOUNT_HANDLE";
+  public static final String ARG_CONTACT_TYPE = "CONTACT_TYPE";
   private static final int CALL_SUBJECT_LIMIT = 16;
   private static final int CALL_SUBJECT_HISTORY_SIZE = 5;
   private int mAnimationDuration;
@@ -111,7 +108,6 @@ public class CallSubjectDialog extends Activity {
         }
       };
 
-  private int mPhotoSize;
   private SharedPreferences mPrefs;
   private List<String> mSubjectHistory;
   /** Handles displaying the list of past call subjects. */
@@ -138,13 +134,12 @@ public class CallSubjectDialog extends Activity {
       };
 
   private long mPhotoID;
-  private Uri mPhotoUri;
   private Uri mContactUri;
   private String mNameOrNumber;
-  private boolean mIsBusiness;
   private String mNumber;
   private String mDisplayNumber;
   private String mNumberLabel;
+  private int mContactType;
   private PhoneAccountHandle mPhoneAccountHandle;
   /** Handles starting a call with a call subject specified. */
   private final View.OnClickListener mSendAndCallOnClickListener =
@@ -200,13 +195,12 @@ public class CallSubjectDialog extends Activity {
     start(
         activity,
         -1 /* photoId */,
-        null /* photoUri */,
         null /* contactUri */,
         number /* nameOrNumber */,
-        false /* isBusiness */,
         number /* number */,
         null /* displayNumber */,
         null /* numberLabel */,
+        ContactPhotoManager.TYPE_DEFAULT,
         null /* phoneAccountHandle */);
   }
 
@@ -215,35 +209,32 @@ public class CallSubjectDialog extends Activity {
    *
    * @param activity The current activity.
    * @param photoId The photo ID (used to populate contact photo).
-   * @param photoUri The photo Uri (used to populate contact photo).
    * @param contactUri The Contact URI (used so quick contact can be invoked from contact photo).
    * @param nameOrNumber The name or number of the callee.
-   * @param isBusiness {@code true} if a business is being called (used for contact photo).
    * @param number The raw number to dial.
    * @param displayNumber The number to dial, formatted for display.
    * @param numberLabel The label for the number (if from a contact).
+   * @param contactType The contact type according to {@link ContactPhotoManager}.
    * @param phoneAccountHandle The phone account handle.
    */
   public static void start(
       Activity activity,
       long photoId,
-      Uri photoUri,
       Uri contactUri,
       String nameOrNumber,
-      boolean isBusiness,
       String number,
       String displayNumber,
       String numberLabel,
+      int contactType,
       PhoneAccountHandle phoneAccountHandle) {
     Bundle arguments = new Bundle();
     arguments.putLong(ARG_PHOTO_ID, photoId);
-    arguments.putParcelable(ARG_PHOTO_URI, photoUri);
     arguments.putParcelable(ARG_CONTACT_URI, contactUri);
     arguments.putString(ARG_NAME_OR_NUMBER, nameOrNumber);
-    arguments.putBoolean(ARG_IS_BUSINESS, isBusiness);
     arguments.putString(ARG_NUMBER, number);
     arguments.putString(ARG_DISPLAY_NUMBER, displayNumber);
     arguments.putString(ARG_NUMBER_LABEL, numberLabel);
+    arguments.putInt(ARG_CONTACT_TYPE, contactType);
     arguments.putParcelable(ARG_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
     start(activity, arguments);
   }
@@ -293,8 +284,6 @@ public class CallSubjectDialog extends Activity {
     super.onCreate(savedInstanceState);
     mAnimationDuration = getResources().getInteger(R.integer.call_subject_animation_duration);
     mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-    mPhotoSize =
-        getResources().getDimensionPixelSize(R.dimen.call_subject_dialog_contact_photo_size);
     readArguments();
     loadConfiguration();
     mSubjectHistory = loadSubjectHistory(mPrefs);
@@ -330,7 +319,8 @@ public class CallSubjectDialog extends Activity {
   /** Populates the contact info fields based on the current contact information. */
   private void updateContactInfo() {
     if (mContactUri != null) {
-      setPhoto(mPhotoID, mPhotoUri, mContactUri, mNameOrNumber, mIsBusiness);
+      ContactPhotoManager.getInstance(this)
+          .loadDialerThumbnail(mContactPhoto, mContactUri, mPhotoID, mNameOrNumber, mContactType);
     } else {
       mContactPhoto.setVisibility(View.GONE);
     }
@@ -353,13 +343,12 @@ public class CallSubjectDialog extends Activity {
       return;
     }
     mPhotoID = arguments.getLong(ARG_PHOTO_ID);
-    mPhotoUri = arguments.getParcelable(ARG_PHOTO_URI);
     mContactUri = arguments.getParcelable(ARG_CONTACT_URI);
     mNameOrNumber = arguments.getString(ARG_NAME_OR_NUMBER);
-    mIsBusiness = arguments.getBoolean(ARG_IS_BUSINESS);
     mNumber = arguments.getString(ARG_NUMBER);
     mDisplayNumber = arguments.getString(ARG_DISPLAY_NUMBER);
     mNumberLabel = arguments.getString(ARG_NUMBER_LABEL);
+    mContactType = arguments.getInt(ARG_CONTACT_TYPE, ContactPhotoManager.TYPE_DEFAULT);
     mPhoneAccountHandle = arguments.getParcelable(ARG_PHONE_ACCOUNT_HANDLE);
   }
 
@@ -386,46 +375,6 @@ public class CallSubjectDialog extends Activity {
     } else {
       mCharacterLimitView.setTextColor(
           getResources().getColor(R.color.dialer_secondary_text_color));
-    }
-  }
-
-  /** Sets the photo on the quick contact photo. */
-  private void setPhoto(
-      long photoId, Uri photoUri, Uri contactUri, String displayName, boolean isBusiness) {
-    mContactPhoto.assignContactUri(contactUri);
-    if (CompatUtils.isLollipopCompatible()) {
-      mContactPhoto.setOverlay(null);
-    }
-
-    int contactType;
-    if (isBusiness) {
-      contactType = ContactPhotoManager.TYPE_BUSINESS;
-    } else {
-      contactType = ContactPhotoManager.TYPE_DEFAULT;
-    }
-
-    String lookupKey = null;
-    if (contactUri != null) {
-      lookupKey = UriUtils.getLookupKeyFromUri(contactUri);
-    }
-
-    ContactPhotoManager.DefaultImageRequest request =
-        new ContactPhotoManager.DefaultImageRequest(
-            displayName, lookupKey, contactType, true /* isCircular */);
-
-    if (photoId == 0 && photoUri != null) {
-      ContactPhotoManager.getInstance(this)
-          .loadPhoto(
-              mContactPhoto,
-              photoUri,
-              mPhotoSize,
-              false /* darkTheme */,
-              true /* isCircular */,
-              request);
-    } else {
-      ContactPhotoManager.getInstance(this)
-          .loadThumbnail(
-              mContactPhoto, photoId, false /* darkTheme */, true /* isCircular */, request);
     }
   }
 

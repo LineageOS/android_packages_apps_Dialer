@@ -122,9 +122,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     autoArchiveSwitchPreference =
         (SwitchPreference)
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
-    autoArchiveSwitchPreference.setOnPreferenceChangeListener(this);
-    autoArchiveSwitchPreference.setChecked(
-        VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
 
     if (!ConfigProviderBindings.get(getContext())
         .getBoolean(VisualVoicemailSettingsUtil.ALLOW_VOICEMAIL_ARCHIVE, true)) {
@@ -156,11 +153,19 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       voicemailVisualVoicemail.setOnPreferenceChangeListener(this);
       voicemailVisualVoicemail.setChecked(
           VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle));
+
+      autoArchiveSwitchPreference.setOnPreferenceChangeListener(this);
+      autoArchiveSwitchPreference.setSummary(
+          getText(R.string.voicemail_visual_voicemail_auto_archive_temporary_disclaimer));
+      autoArchiveSwitchPreference.setChecked(
+          VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
+
       if (!isVisualVoicemailActivated()) {
         prefSet.removePreference(voicemailChangePinPreference);
       }
     } else {
       prefSet.removePreference(voicemailVisualVoicemail);
+      prefSet.removePreference(autoArchiveSwitchPreference);
       prefSet.removePreference(voicemailChangePinPreference);
     }
 
