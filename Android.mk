@@ -142,7 +142,6 @@ LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
 	$(support_library_root_dir)/design/res \
-	$(support_library_root_dir)/transition/res \
 	$(support_library_root_dir)/v7/appcompat/res \
 	$(support_library_root_dir)/v7/cardview/res \
 	$(support_library_root_dir)/v7/recyclerview/res
@@ -214,41 +213,45 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-support-v7-cardview \
 	android-support-v7-recyclerview \
 	com.android.vcard \
+	dailer-dagger2-compiler \
 	dialer-dagger2 \
-	dialer-disklrucache \
-	dialer-gifdecoder \
-	dialer-glide \
+	dialer-dagger2-producers \
+	dialer-glide  \
 	dialer-guava \
 	dialer-javax-annotation-api \
+	dialer-javax-inject \
 	dialer-libshortcutbadger \
 	jsr305 \
 	libphonenumber \
 	libprotobuf-java-nano \
-	volley
+	org.apache.http.legacy.boot \
+	volley \
+	dialer-auto-value
 
 LOCAL_JAVA_LIBRARIES := \
-	org.apache.http.legacy \
-
-# TODO: Jack seems to require these in both LOCAL_JAVA_LIBRARIES and with
-# --processorpath, javac is fine with just --processorpath
-LOCAL_JAVA_LIBRARIES += \
-	dialer-dagger2-compiler \
+	android-support-annotations \
+	android-support-transition \
+	dailer-dagger2-compiler \
 	dialer-dagger2 \
 	dialer-dagger2-producers \
+	dialer-glide  \
 	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
-	dialer-auto-value \
+	dialer-libshortcutbadger \
+	jsr305 \
+	libprotobuf-java-nano \
+	dialer-auto-value
 
 # Libraries needed by the compiler (JACK) to generate code.
 PROCESSOR_LIBRARIES_TARGET := \
-	dialer-dagger2-compiler \
+	dailer-dagger2-compiler \
 	dialer-dagger2 \
 	dialer-dagger2-producers \
 	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
-	dialer-auto-value \
+	dialer-auto-value
 
 # Resolve the jar paths.
 PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
@@ -256,7 +259,6 @@ PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
 LOCAL_ADDITIONAL_DEPENDENCIES += $(PROCESSOR_JARS)
 
 LOCAL_JACK_FLAGS += --processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
-LOCAL_JAVAC_FLAGS += --processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
 
@@ -280,13 +282,11 @@ PROCESSOR_JARS :=
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-	dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.6/dagger-compiler-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+	dailer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.6/dagger-compiler-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-auto-common:../../../prebuilts/tools/common/m2/repository/com/google/auto/auto-common/0.6/auto-common-0.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-auto-value:../../../prebuilts/tools/common/m2/repository/com/google/auto/value/auto-value/1.3/auto-value-1.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.6/dagger-producers-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-disklrucache:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/disklrucache/1.0.0-SNAPSHOT/disklrucache-1.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-gifdecoder:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/gifdecoder/1.0.0-SNAPSHOT/gifdecoder-1.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-glide:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/glide/4.0.0-SNAPSHOT/glide-4.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
 	dialer-javax-annotation-api:../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX) \
