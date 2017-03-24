@@ -27,7 +27,9 @@ import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.answerproximitysensor.AnswerProximitySensor;
 import com.android.incallui.answerproximitysensor.PseudoScreenState;
+import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCallListener;
 
 /** Manages changes for an incoming call screen. */
 public class AnswerScreenPresenter
@@ -98,6 +100,19 @@ public class AnswerScreenPresenter
   }
 
   @Override
+  public void onAnswerAndReleaseCall() {
+    Log.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "enterBlock");
+    DialerCall activeCall = CallList.getInstance().getActiveCall();
+    if (activeCall == null) {
+      Log.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "activeCall == null");
+      onAnswer(false);
+    } else {
+      activeCall.addListener(new AnswerOnDisconnected(activeCall));
+      activeCall.disconnect();
+    }
+  }
+
+  @Override
   public void onCannedTextResponsesLoaded(DialerCall call) {
     if (isSmsResponseAllowed(call)) {
       answerScreen.setTextResponses(call.getCannedSmsResponses());
@@ -110,6 +125,43 @@ public class AnswerScreenPresenter
     if (activity != null) {
       activity.updateWindowBackgroundColor(progress);
     }
+  }
+
+  private class AnswerOnDisconnected implements DialerCallListener {
+
+    private final DialerCall disconnectingCall;
+
+    public AnswerOnDisconnected(DialerCall disconnectingCall) {
+      this.disconnectingCall = disconnectingCall;
+    }
+
+    @Override
+    public void onDialerCallDisconnect() {
+      Log.i("AnswerScreenPresenter.AnswerOnDisconnected", "Call disconnected, answering new call");
+      call.answer();
+      disconnectingCall.removeListener(this);
+    }
+
+    @Override
+    public void onDialerCallUpdate() {}
+
+    @Override
+    public void onDialerCallChildNumberChange() {}
+
+    @Override
+    public void onDialerCallLastForwardedNumberChange() {}
+
+    @Override
+    public void onDialerCallUpgradeToVideo() {}
+
+    @Override
+    public void onDialerCallSessionModificationStateChange() {}
+
+    @Override
+    public void onWiFiToLteHandover() {}
+
+    @Override
+    public void onHandoverToWifiFailure() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

@@ -40,5 +40,8 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
   public void onReject() {}
 
   @Override
+  public void onAnswerAndReleaseCall() {}
+
+  @Override
   public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {}
 }

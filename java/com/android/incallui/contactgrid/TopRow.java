@@ -22,9 +22,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.incallui.call.DialerCall.State;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.incall.protocol.PrimaryCallState;
-import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
+import com.android.incallui.videotech.utils.VideoUtils;
 
 /**
  * Gets the content of the top row. For example:
@@ -144,18 +144,18 @@ public class TopRow {
 
   private static CharSequence getLabelForVideoRequest(Context context, PrimaryCallState state) {
     switch (state.sessionModificationState) {
-      case VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE:
+      case SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE:
         return context.getString(R.string.incall_video_call_requesting);
-      case VideoTech.SESSION_MODIFICATION_STATE_REQUEST_FAILED:
-      case VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED:
+      case SessionModificationState.REQUEST_FAILED:
+      case SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_FAILED:
         return context.getString(R.string.incall_video_call_request_failed);
-      case VideoTech.SESSION_MODIFICATION_STATE_REQUEST_REJECTED:
+      case SessionModificationState.REQUEST_REJECTED:
         return context.getString(R.string.incall_video_call_request_rejected);
-      case VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT:
+      case SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT:
         return context.getString(R.string.incall_video_call_request_timed_out);
-      case VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST:
+      case SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST:
         return getLabelForIncomingVideo(context, state.isWifi);
-      case VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST:
+      case SessionModificationState.NO_REQUEST:
       default:
         Assert.fail();
         return null;

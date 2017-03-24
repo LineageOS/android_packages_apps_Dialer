@@ -157,4 +157,13 @@
     android:visibility="invisible"
     tools:visibility="visible"/>
 
+  <com.android.incallui.answer.impl.affordance.SwipeButtonView
+      android:id="@+id/incoming_secondary_button2"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      android:layout_gravity="bottom|end"
+      android:scaleType="center"
+      android:src="@drawable/ic_end_answer_32"
+      android:visibility="invisible"
+      tools:visibility="visible"/>
 </com.android.incallui.answer.impl.AffordanceHolderLayout>

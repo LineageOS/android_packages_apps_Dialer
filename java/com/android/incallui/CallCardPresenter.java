@@ -70,7 +70,7 @@ import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
-import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
 import java.lang.ref.WeakReference;
 
 /**
@@ -396,7 +396,7 @@ public class CallCardPresenter
     getUi()
         .setEndCallButtonEnabled(
             mPrimary.getVideoTech().getSessionModificationState()
-                != VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
+                != SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
             true /* shouldAnimate */);
     updatePrimaryCallState();
   }
@@ -1023,7 +1023,7 @@ public class CallCardPresenter
       return false;
     }
     if (mPrimary.getVideoTech().getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+        == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       return false;
     }
     return true;

@@ -16,17 +16,15 @@
 
 package com.android.dialer.enrichedcall.stub;
 
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
-import android.util.ArrayMap;
 import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
-import com.android.dialer.enrichedcall.VideoShareSession;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
 import com.android.dialer.multimedia.MultimediaData;
@@ -86,13 +84,20 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
     return null;
   }
 
-  @NonNull
+  @Nullable
   @Override
-  @WorkerThread
+  @MainThread
   public Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @NonNull String number, @NonNull CallDetailsEntries entries) {
-    Assert.isWorkerThread();
-    return new ArrayMap<>();
+    Assert.isMainThread();
+    return null;
+  }
+
+  @MainThread
+  @Override
+  public void requestAllHistoricalData(
+      @NonNull String number, @NonNull CallDetailsEntries entries) {
+    Assert.isMainThread();
   }
 
   @Override
@@ -136,10 +141,4 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
 
   @Override
   public void endVideoShareSession(long sessionId) {}
-
-  @Nullable
-  @Override
-  public VideoShareSession getVideoShareSession(long sessionId) {
-    return null;
-  }
 }

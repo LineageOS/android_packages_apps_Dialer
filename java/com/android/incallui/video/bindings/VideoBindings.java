@@ -16,13 +16,17 @@
 
 package com.android.incallui.video.bindings;
 
+import com.android.incallui.video.impl.SurfaceViewVideoCallFragment;
 import com.android.incallui.video.impl.VideoCallFragment;
 import com.android.incallui.video.protocol.VideoCallScreen;
 
 /** Bindings for video module. */
 public class VideoBindings {
 
-  public static VideoCallScreen createVideoCallScreen(String callId) {
+  public static VideoCallScreen createVideoCallScreen(String callId, boolean usesSurfaceView) {
+    if (usesSurfaceView) {
+      return SurfaceViewVideoCallFragment.newInstance(callId);
+    }
     return VideoCallFragment.newInstance(callId);
   }
 }

@@ -49,7 +49,7 @@ public class AnswerVideoCallScreen implements VideoCallScreen {
     view.setBackgroundColor(0xff000000);
     delegate =
         FragmentUtils.getParentUnsafe(fragment, VideoCallScreenDelegateFactory.class)
-            .newVideoCallScreenDelegate();
+            .newVideoCallScreenDelegate(this);
     delegate.initVideoCallScreenDelegate(fragment.getContext(), this);
 
     textureView.setVisibility(View.VISIBLE);

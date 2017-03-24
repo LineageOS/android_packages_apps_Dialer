@@ -17,6 +17,7 @@
 package com.android.incallui.video.protocol;
 
 import android.content.Context;
+import android.view.SurfaceView;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 
 /** Callbacks from the module out to the container. */
@@ -43,6 +44,8 @@ public interface VideoCallScreenDelegate {
   VideoSurfaceTexture getLocalVideoSurfaceTexture();
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture();
+
+  void setSurfaceViews(SurfaceView preview, SurfaceView remote);
 
   int getDeviceOrientation();
 }

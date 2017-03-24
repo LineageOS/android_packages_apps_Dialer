@@ -98,6 +98,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTypeIcon.add(callType);
     callTypeIcon.setShowVideo((entry.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
     callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.features));
+    callTypeIcon.setShowWifi(MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.features));
 
     callTypeText.setText(callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
     callTime.setText(CallEntryFormatter.formatDate(context, entry.date));

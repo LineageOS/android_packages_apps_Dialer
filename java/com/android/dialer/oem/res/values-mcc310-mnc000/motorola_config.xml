@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <bool name="motorola_sprint_hd_codec">true</bool>
+  <bool name="motorola_feature_hidden_menu">true</bool>
+  <string name="motorola_enabled_spn">Sprint</string>
+</resources>

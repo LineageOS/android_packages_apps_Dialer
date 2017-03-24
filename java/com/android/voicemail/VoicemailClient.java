@@ -27,6 +27,12 @@ import java.util.List;
 public interface VoicemailClient {
 
   /**
+   * Whether the voicemail module is enabled (OS has support and not disabled by flags, etc.). This
+   * does not mean the carrier has support or user has enabled the feature.
+   */
+  boolean isVoicemailModuleEnabled();
+
+  /**
    * Broadcast to tell the client to upload local database changes to the server. Since the dialer
    * UI and the client are in the same package, the {@link
    * android.content.Intent#ACTION_PROVIDER_CHANGED} will always be a self-change even if the UI is

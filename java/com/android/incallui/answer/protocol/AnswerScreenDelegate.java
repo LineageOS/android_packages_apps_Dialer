@@ -31,6 +31,7 @@ public interface AnswerScreenDelegate {
 
   void onReject();
 
+  void onAnswerAndReleaseCall();
   /**
    * Sets the window background color based on foreground call's theme and the given progress. This
    * is called from the answer UI to animate the accept and reject action.

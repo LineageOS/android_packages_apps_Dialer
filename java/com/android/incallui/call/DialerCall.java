@@ -56,7 +56,7 @@ import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
-import com.android.incallui.videotech.rcs.RcsVideoShare;
+import com.android.incallui.videotech.utils.VideoUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -1253,21 +1253,26 @@ public class DialerCall implements VideoTechListener {
 
   private static class VideoTechManager {
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
-    private final VideoTech[] videoTechs;
+    private final List<VideoTech> videoTechs;
     private VideoTech savedTech;
 
     VideoTechManager(DialerCall call) {
       String phoneNumber = call.getNumber();
 
       // Insert order here determines the priority of that video tech option
-      videoTechs =
-          new VideoTech[] {
-            new ImsVideoTech(call, call.mTelecomCall),
-            new RcsVideoShare(
-                EnrichedCallComponent.get(call.mContext).getEnrichedCallManager(),
-                call,
-                phoneNumber != null ? phoneNumber : "")
-          };
+      this.videoTechs = new ArrayList<>();
+      videoTechs.add(new ImsVideoTech(call, call.mTelecomCall));
+
+      VideoTech rcsVideoTech =
+          EnrichedCallComponent.get(call.mContext)
+              .getRcsVideoShareFactory()
+              .newRcsVideoShare(
+                  EnrichedCallComponent.get(call.mContext).getEnrichedCallManager(),
+                  call,
+                  phoneNumber != null ? phoneNumber : "");
+      if (rcsVideoTech != null) {
+        videoTechs.add(rcsVideoTech);
+      }
     }
 
     VideoTech getVideoTech() {

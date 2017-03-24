@@ -215,7 +215,7 @@ public class CallLogNotificationsQueryHelper {
   public static final class NewCall {
 
     public final Uri callsUri;
-    public final Uri voicemailUri;
+    @Nullable public final Uri voicemailUri;
     public final String number;
     public final int numberPresentation;
     public final String accountComponentName;
@@ -226,7 +226,7 @@ public class CallLogNotificationsQueryHelper {
 
     public NewCall(
         Uri callsUri,
-        Uri voicemailUri,
+        @Nullable Uri voicemailUri,
         String number,
         int numberPresentation,
         String accountComponentName,

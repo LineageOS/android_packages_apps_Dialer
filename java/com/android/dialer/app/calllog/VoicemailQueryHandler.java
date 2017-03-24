@@ -23,8 +23,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import com.android.dialer.app.R;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.notification.GroupedNotificationUtil;
 
@@ -38,8 +40,10 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
 
   private Context mContext;
 
+  @MainThread
   public VoicemailQueryHandler(Context context, ContentResolver contentResolver) {
     super(contentResolver);
+    Assert.isMainThread();
     mContext = context;
   }
 

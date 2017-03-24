@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="event_activated">Event Activated</string>
-  <string name="event_deactivated">Event Deactvated</string>
+  <string name="event_activated">&#x1f408;Paw mode enabled&#x1F415;</string>
+  <string name="event_deactivated">Paw mode disabled</string>
 </resources>

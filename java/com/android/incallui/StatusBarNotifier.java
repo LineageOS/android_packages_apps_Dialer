@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import static android.telecom.Call.Details.PROPERTY_HIGH_DEF_AUDIO;
 import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENTERPRISE_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
@@ -67,6 +68,7 @@ import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -78,7 +80,7 @@ import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
-import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -294,7 +296,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
     final boolean isVideoUpgradeRequest =
         call.getVideoTech().getSessionModificationState()
-            == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+            == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
     final int notificationType;
     if (callState == DialerCall.State.INCOMING
         || callState == DialerCall.State.CALL_WAITING
@@ -634,8 +636,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     if (call.getState() == DialerCall.State.ONHOLD) {
       return R.drawable.ic_phone_paused_white_24dp;
     } else if (call.getVideoTech().getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+        == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       return R.drawable.ic_videocam;
+    } else if (call.hasProperty(PROPERTY_HIGH_DEF_AUDIO)
+        && MotorolaUtils.shouldShowHdIconInNotification(mContext)) {
+      // Normally when a call is ongoing the status bar displays an icon of a phone with animated
+      // lines. This is a helpful hint for users so they know how to get back to the call.
+      // For Sprint HD calls, we replace this icon with an icon of a phone with a HD badge.
+      // This is a carrier requirement.
+      return R.drawable.ic_hd_call;
     }
     return R.anim.on_going_call;
   }
@@ -676,7 +685,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     } else if (DialerCall.State.isDialing(call.getState())) {
       resId = R.string.notification_dialing;
     } else if (call.getVideoTech().getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+        == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       resId = R.string.notification_requesting_video_call;
     }
 
@@ -945,7 +954,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     @Override
     public void onDialerCallSessionModificationStateChange() {
       if (mDialerCall.getVideoTech().getSessionModificationState()
-          == VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST) {
+          == SessionModificationState.NO_REQUEST) {
         cleanup();
         updateNotification(CallList.getInstance());
       }

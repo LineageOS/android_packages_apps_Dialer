@@ -20,7 +20,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
@@ -184,14 +183,23 @@ public interface EnrichedCallManager {
   Session getSession(long sessionId);
 
   /**
-   * Returns a mapping of enriched call data for all of the given {@link CallDetailsEntries}.
+   * Starts an asynchronous process to get all historical data for the given number and set of
+   * {@link CallDetailsEntries}.
+   */
+  @MainThread
+  void requestAllHistoricalData(@NonNull String number, @NonNull CallDetailsEntries entries);
+
+  /**
+   * Returns a mapping of enriched call data for all of the given {@link CallDetailsEntries}, which
+   * should not be modified. A {@code null} return indicates that clients should call {@link
+   * #requestAllHistoricalData(String, CallDetailsEntries)}.
    *
    * <p>The mapping is created by finding the HistoryResults whose timestamps occurred during or
    * close after a CallDetailsEntry. A CallDetailsEntry can have multiple HistoryResults in the
    * event that both a CallComposer message and PostCall message were sent for the same call.
    */
-  @WorkerThread
-  @NonNull
+  @Nullable
+  @MainThread
   Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @NonNull String number, @NonNull CallDetailsEntries entries);
 
@@ -295,12 +303,4 @@ public interface EnrichedCallManager {
    */
   @MainThread
   void endVideoShareSession(long sessionId);
-
-  /**
-   * Returns the {@link VideoShareSession} for the given sessionId, or {@code null} if no session
-   * exists.
-   */
-  @MainThread
-  @Nullable
-  VideoShareSession getVideoShareSession(long sessionId);
 }

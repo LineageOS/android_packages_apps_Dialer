@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Etunimi ensin"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Sukunimi ensin"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Uusien yhteystietojen oletustili"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Synkronoi yhteystietojen kuvaustiedot [TESTIVERSIO]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Synkronoi yhteystietojen kuvaustiedot"</string>
     <string name="setting_about" msgid="5253319937596745755">"Tietoja Yhteystiedoista"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Asetukset"</string>

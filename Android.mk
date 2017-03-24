@@ -1,6 +1,5 @@
 # Local modifications:
 # * b/31757757 Precompiled proto classes have been included.
-# * b/36215428 dialer/oem/res/values-mcc3* have been pruned
 # * removed com.google.android.backup.api_key. This should be added to
 #      the manifest in the top level directory.
 # * removed com.google.android.geo.API_KEY key. This should be added to
@@ -139,14 +138,16 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
+# Native protobuf compilation disabled b/36564333
 # Include protocol buffers and use the nano compiler.
-LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
-LOCAL_PROTOC_OPTIMIZE_TYPE := nano
-LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
-LOCAL_PROTO_JAVA_OUTPUT_PARAMS := enum_style=java
+# LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
+# LOCAL_PROTOC_OPTIMIZE_TYPE := nano
+# LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
+# LOCAL_PROTO_JAVA_OUTPUT_PARAMS := enum_style=java,generate_clear=true,store_unknown_fields=true,generate_equals=true
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
 	$(support_library_root_dir)/design/res \
+	$(support_library_root_dir)/transition/res \
 	$(support_library_root_dir)/v7/appcompat/res \
 	$(support_library_root_dir)/v7/cardview/res \
 	$(support_library_root_dir)/v7/recyclerview/res
@@ -218,45 +219,32 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-support-v7-cardview \
 	android-support-v7-recyclerview \
 	com.android.vcard \
-	dailer-dagger2-compiler \
-	dialer-dagger2 \
-	dialer-dagger2-producers \
-	dialer-glide  \
-	dialer-guava \
-	dialer-javax-annotation-api \
-	dialer-javax-inject \
-	dialer-libshortcutbadger \
+	dialer-dagger2-target \
+	dialer-disklrucache-target \
+	dialer-gifdecoder-target \
+	dialer-glide-target \
+	dialer-guava-target \
+	dialer-javax-annotation-api-target \
+	dialer-javax-inject-target \
+	dialer-libshortcutbadger-target \
 	jsr305 \
 	libphonenumber \
 	libprotobuf-java-nano \
-	org.apache.http.legacy.boot \
-	volley \
-	dialer-auto-value
+	volley
 
 LOCAL_JAVA_LIBRARIES := \
-	android-support-annotations \
-	android-support-transition \
-	dailer-dagger2-compiler \
-	dialer-dagger2 \
-	dialer-dagger2-producers \
-	dialer-glide  \
-	dialer-guava \
-	dialer-javax-annotation-api \
-	dialer-javax-inject \
-	dialer-libshortcutbadger \
-	jsr305 \
-	libprotobuf-java-nano \
-	dialer-auto-value
+	org.apache.http.legacy \
+	dialer-auto-value \
 
 # Libraries needed by the compiler (JACK) to generate code.
 PROCESSOR_LIBRARIES_TARGET := \
-	dailer-dagger2-compiler \
+	dialer-dagger2-compiler \
 	dialer-dagger2 \
 	dialer-dagger2-producers \
 	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
-	dialer-auto-value
+	dialer-auto-value \
 
 # Resolve the jar paths.
 PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
@@ -264,8 +252,16 @@ PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
 LOCAL_ADDITIONAL_DEPENDENCIES += $(PROCESSOR_JARS)
 
 LOCAL_JACK_FLAGS += --processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
+LOCAL_JAVACFLAGS += -processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
 
-LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
+# Proguard includes
+LOCAL_PROGUARD_FLAG_FILES := \
+    java/com/android/dialer/common/proguard.flags \
+    java/com/android/dialer/proguard/proguard_base.flags \
+    java/com/android/dialer/proguard/proguard.flags \
+    java/com/android/dialer/proguard/proguard_release.flags \
+    java/com/android/incallui/answer/impl/proguard.flags
+LOCAL_PROGUARD_ENABLED := custom optimization
 
 LOCAL_SDK_VERSION := current
 LOCAL_MODULE_TAGS := optional
@@ -287,17 +283,96 @@ PROCESSOR_JARS :=
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-	dailer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.6/dagger-compiler-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-auto-common:../../../prebuilts/tools/common/m2/repository/com/google/auto/auto-common/0.6/auto-common-0.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-auto-value:../../../prebuilts/tools/common/m2/repository/com/google/auto/value/auto-value/1.3/auto-value-1.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.6/dagger-producers-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-glide:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/glide/4.0.0-SNAPSHOT/glide-4.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-javax-annotation-api:../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-javax-inject:../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX) \
-	dialer-libshortcutbadger:../../../prebuilts/tools/common/m2/repository/me/leolin/ShortcutBadger/1.1.13/ShortcutBadger-1.1.13$(COMMON_JAVA_PACKAGE_SUFFIX)
+    dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.6/dagger-compiler-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-auto-value:../../../prebuilts/tools/common/m2/repository/com/google/auto/value/auto-value/1.3/auto-value-1.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.6/dagger-producers-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-javax-annotation-api:../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-javax-inject:../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX)
 
 include $(BUILD_MULTI_PREBUILT)
+
+# Enumerate target prebuilts to avoid linker warnings like
+# Dialer (java:sdk) should not link to dialer-guava (java:platform)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-guava-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-dagger2-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-disklrucache-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/disklrucache/1.0.0-SNAPSHOT/disklrucache-1.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-gifdecoder-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/gifdecoder/1.0.0-SNAPSHOT/gifdecoder-1.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-glide-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/glide/4.0.0-SNAPSHOT/glide-4.0.0-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-javax-annotation-api-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-libshortcutbadger-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/me/leolin/ShortcutBadger/1.1.13/ShortcutBadger-1.1.13$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-javax-inject-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)

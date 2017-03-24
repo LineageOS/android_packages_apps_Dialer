@@ -19,8 +19,7 @@ package com.android.incallui.incall.protocol;
 import android.graphics.drawable.Drawable;
 import android.telecom.DisconnectCause;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.videotech.VideoTech;
-import com.android.incallui.videotech.VideoTech.SessionModificationState;
+import com.android.incallui.videotech.utils.SessionModificationState;
 import java.util.Locale;
 
 /** State of the primary call. */
@@ -51,7 +50,7 @@ public class PrimaryCallState {
     return new PrimaryCallState(
         DialerCall.State.IDLE,
         false, /* isVideoCall */
-        VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST,
+        SessionModificationState.NO_REQUEST,
         new DisconnectCause(DisconnectCause.UNKNOWN),
         null, /* connectionLabel */
         null, /* connectionIcon */

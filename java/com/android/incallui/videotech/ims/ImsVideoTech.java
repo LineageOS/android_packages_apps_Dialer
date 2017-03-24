@@ -16,13 +16,17 @@
 
 package com.android.incallui.videotech.ims;
 
+import android.content.Context;
 import android.os.Build;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.incallui.video.protocol.VideoCallScreen;
+import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
 
 /** ViLTE implementation */
 public class ImsVideoTech implements VideoTech {
@@ -30,7 +34,7 @@ public class ImsVideoTech implements VideoTech {
   private final VideoTechListener listener;
   private ImsVideoCallCallback callback;
   private @SessionModificationState int sessionModificationState =
-      VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST;
+      SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
   public ImsVideoTech(VideoTechListener listener, Call call) {
@@ -65,6 +69,18 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean shouldUseSurfaceView() {
+    return false;
+  }
+
+  @Override
+  public VideoCallScreenDelegate createVideoCallScreenDelegate(
+      Context context, VideoCallScreen videoCallScreen) {
+    // TODO move creating VideoCallPresenter here
+    throw Assert.createUnsupportedOperationFailException();
+  }
+
+  @Override
   public void onCallStateChanged(int newState) {
     if (!isAvailable()) {
       return;
@@ -76,7 +92,7 @@ public class ImsVideoTech implements VideoTech {
     }
 
     if (getSessionModificationState()
-            == VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE
+            == SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE
         && isTransmittingOrReceiving()) {
       // We don't clear the session modification state right away when we find out the video upgrade
       // request was accepted to avoid having the UI switch from video to voice to video.
@@ -84,17 +100,16 @@ public class ImsVideoTech implements VideoTech {
       LogUtil.i(
           "ImsVideoTech.onCallStateChanged",
           "upgraded to video, clearing session modification state");
-      setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+      setSessionModificationState(SessionModificationState.NO_REQUEST);
     }
 
     // Determines if a received upgrade to video request should be cancelled. This can happen if
     // another InCall UI responds to the upgrade to video request.
     int newVideoState = call.getDetails().getVideoState();
     if (newVideoState != previousVideoState
-        && sessionModificationState
-            == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+        && sessionModificationState == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       LogUtil.i("ImsVideoTech.onCallStateChanged", "cancelling upgrade notification");
-      setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+      setSessionModificationState(SessionModificationState.NO_REQUEST);
     }
     previousVideoState = newVideoState;
   }
@@ -121,8 +136,7 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall()
         .sendSessionModifyRequest(
             new VideoProfile(unpausedVideoState | VideoProfile.STATE_BIDIRECTIONAL));
-    setSessionModificationState(
-        VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE);
+    setSessionModificationState(SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE);
   }
 
   @Override
@@ -131,14 +145,14 @@ public class ImsVideoTech implements VideoTech {
     Assert.checkArgument(requestedVideoState != VideoProfile.STATE_AUDIO_ONLY);
     LogUtil.i("ImsVideoTech.acceptUpgradeRequest", "videoState: " + requestedVideoState);
     call.getVideoCall().sendSessionModifyResponse(new VideoProfile(requestedVideoState));
-    setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+    setSessionModificationState(SessionModificationState.NO_REQUEST);
   }
 
   @Override
   public void acceptVideoRequestAsAudio() {
     LogUtil.enterBlock("ImsVideoTech.acceptVideoRequestAsAudio");
     call.getVideoCall().sendSessionModifyResponse(new VideoProfile(VideoProfile.STATE_AUDIO_ONLY));
-    setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+    setSessionModificationState(SessionModificationState.NO_REQUEST);
   }
 
   @Override
@@ -146,7 +160,7 @@ public class ImsVideoTech implements VideoTech {
     LogUtil.enterBlock("ImsVideoTech.declineUpgradeRequest");
     call.getVideoCall()
         .sendSessionModifyResponse(new VideoProfile(call.getDetails().getVideoState()));
-    setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+    setSessionModificationState(SessionModificationState.NO_REQUEST);
   }
 
   @Override
@@ -172,7 +186,7 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall()
         .sendSessionModifyRequest(
             new VideoProfile(unpausedVideoState | VideoProfile.STATE_TX_ENABLED));
-    setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE);
+    setSessionModificationState(SessionModificationState.WAITING_FOR_RESPONSE);
   }
 
   @Override

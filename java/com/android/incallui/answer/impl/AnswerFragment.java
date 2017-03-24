@@ -69,7 +69,6 @@ import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.answer.protocol.AnswerScreenDelegateFactory;
 import com.android.incallui.call.DialerCall.State;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.contactgrid.ContactGridManager;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
@@ -83,6 +82,7 @@ import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
+import com.android.incallui.videotech.utils.VideoUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -102,6 +102,10 @@ public class AnswerFragment extends Fragment
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_VIDEO_CALL = "is_video_call";
+
+  static final String ARG_ALLOW_ANSWER_AND_RELEASE = "allow_answer_and_release";
+
+  static final String ARG_HAS_CALL_ON_HOLD = "has_call_on_hold";
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
@@ -131,6 +135,7 @@ public class AnswerFragment extends Fragment
 
   private View importanceBadge;
   private SwipeButtonView secondaryButton;
+  private SwipeButtonView answerAndReleaseButton;
   private AffordanceHolderLayout affordanceHolderLayout;
   // Use these flags to prevent user from clicking accept/reject buttons multiple times.
   // We use separate flags because in some rare cases accepting a call may fail to join the room,
@@ -145,6 +150,7 @@ public class AnswerFragment extends Fragment
   private SmsBottomSheetFragment textResponsesFragment;
   private CreateCustomSmsDialogFragment createCustomSmsDialogFragment;
   private SecondaryBehavior secondaryBehavior = SecondaryBehavior.REJECT_WITH_SMS;
+  private SecondaryBehavior answerAndReleaseBehavior;
   private ContactGridManager contactGridManager;
   private VideoCallScreen answerVideoCallScreen;
   private Handler handler = new Handler(Looper.getMainLooper());
@@ -169,6 +175,17 @@ public class AnswerFragment extends Fragment
       @Override
       public void performAction(AnswerFragment fragment) {
         fragment.acceptCallByUser(true /* answerVideoAsAudio */);
+      }
+    },
+
+    ANSWER_AND_RELEASE(
+        R.drawable.ic_end_answer_32,
+        R.string.a11y_description_incoming_call_answer_and_release,
+        R.string.a11y_incoming_call_answer_and_release,
+        R.string.call_incoming_swipe_to_answer_and_release) {
+      @Override
+      public void performAction(AnswerFragment fragment) {
+        fragment.performAnswerAndRelease();
       }
     };
 
@@ -196,13 +213,35 @@ public class AnswerFragment extends Fragment
     }
   }
 
-  private AccessibilityDelegate accessibilityDelegate =
+  private void performAnswerAndRelease() {
+    restoreAnswerAndReleaseButtonAnimation();
+    answerScreenDelegate.onAnswerAndReleaseCall();
+  }
+
+  private void restoreAnswerAndReleaseButtonAnimation() {
+    answerAndReleaseButton
+        .animate()
+        .alpha(0)
+        .withEndAction(
+            new Runnable() {
+              @Override
+              public void run() {
+                affordanceHolderLayout.reset(false);
+                secondaryButton.animate().alpha(1);
+              }
+            });
+  }
+
+  private final AccessibilityDelegate accessibilityDelegate =
       new AccessibilityDelegate() {
         @Override
         public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
           super.onInitializeAccessibilityNodeInfo(host, info);
           if (host == secondaryButton) {
             CharSequence label = getText(secondaryBehavior.accessibilityLabel);
+            info.addAction(new AccessibilityAction(AccessibilityNodeInfo.ACTION_CLICK, label));
+          } else if (host == answerAndReleaseButton) {
+            CharSequence label = getText(answerAndReleaseBehavior.accessibilityLabel);
             info.addAction(new AccessibilityAction(AccessibilityNodeInfo.ACTION_CLICK, label));
           }
         }
@@ -213,20 +252,27 @@ public class AnswerFragment extends Fragment
             if (host == secondaryButton) {
               performSecondaryButtonAction();
               return true;
+            } else if (host == answerAndReleaseButton) {
+              performAnswerAndReleaseButtonAction();
+              return true;
             }
           }
           return super.performAccessibilityAction(host, action, args);
         }
       };
 
-  private Callback affordanceCallback =
+  private final Callback affordanceCallback =
       new Callback() {
         @Override
         public void onAnimationToSideStarted(boolean rightPage, float translation, float vel) {}
 
         @Override
-        public void onAnimationToSideEnded() {
-          performSecondaryButtonAction();
+        public void onAnimationToSideEnded(boolean rightPage) {
+          if (rightPage) {
+            performAnswerAndReleaseButtonAction();
+          } else {
+            performSecondaryButtonAction();
+          }
         }
 
         @Override
@@ -247,7 +293,11 @@ public class AnswerFragment extends Fragment
         @Override
         public void onIconClicked(boolean rightIcon) {
           affordanceHolderLayout.startHintAnimation(rightIcon, null);
-          getAnswerMethod().setHintText(getText(secondaryBehavior.hintText));
+          getAnswerMethod()
+              .setHintText(
+                  rightIcon
+                      ? getText(answerAndReleaseBehavior.hintText)
+                      : getText(secondaryBehavior.hintText));
           handler.removeCallbacks(swipeHintRestoreTimer);
           handler.postDelayed(swipeHintRestoreTimer, HINT_SECONDARY_SHOW_DURATION_MILLIS);
         }
@@ -259,7 +309,7 @@ public class AnswerFragment extends Fragment
 
         @Override
         public SwipeButtonView getRightIcon() {
-          return null;
+          return answerAndReleaseButton;
         }
 
         @Override
@@ -278,28 +328,30 @@ public class AnswerFragment extends Fragment
         }
       };
 
-  private Runnable swipeHintRestoreTimer =
-      new Runnable() {
-        @Override
-        public void run() {
-          restoreSwipeHintTexts();
-        }
-      };
+  private Runnable swipeHintRestoreTimer = this::restoreSwipeHintTexts;
 
   private void performSecondaryButtonAction() {
     secondaryBehavior.performAction(this);
+  }
+
+  private void performAnswerAndReleaseButtonAction() {
+    answerAndReleaseBehavior.performAction(this);
   }
 
   public static AnswerFragment newInstance(
       String callId,
       boolean isVideoCall,
       boolean isVideoUpgradeRequest,
-      boolean isSelfManagedCamera) {
+      boolean isSelfManagedCamera,
+      boolean allowAnswerAndRelease,
+      boolean hasCallOnHold) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
     bundle.putBoolean(ARG_IS_VIDEO_CALL, isVideoCall);
     bundle.putBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST, isVideoUpgradeRequest);
     bundle.putBoolean(ARG_IS_SELF_MANAGED_CAMERA, isSelfManagedCamera);
+    bundle.putBoolean(ARG_ALLOW_ANSWER_AND_RELEASE, allowAnswerAndRelease);
+    bundle.putBoolean(ARG_HAS_CALL_ON_HOLD, hasCallOnHold);
 
     AnswerFragment instance = new AnswerFragment();
     instance.setArguments(bundle);
@@ -331,7 +383,7 @@ public class AnswerFragment extends Fragment
       secondaryButton.setVisibility(View.INVISIBLE);
     } else {
       LogUtil.i("AnswerFragment.setTextResponses", "textResponses.size: " + textResponses.size());
-      this.textResponses = new ArrayList<CharSequence>(textResponses);
+      this.textResponses = new ArrayList<>(textResponses);
       secondaryButton.setVisibility(View.VISIBLE);
     }
   }
@@ -359,6 +411,34 @@ public class AnswerFragment extends Fragment
     } else if (isVideoCall()) {
       secondaryButton.setVisibility(View.VISIBLE);
     }
+
+    answerAndReleaseBehavior = SecondaryBehavior.ANSWER_AND_RELEASE;
+    answerAndReleaseBehavior.applyToView(answerAndReleaseButton);
+    answerAndReleaseButton.setOnClickListener(
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            performAnswerAndReleaseButtonAction();
+          }
+        });
+    answerAndReleaseButton.setClickable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
+    answerAndReleaseButton.setFocusable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
+    answerAndReleaseButton.setAccessibilityDelegate(accessibilityDelegate);
+
+    if (allowAnswerAndRelease()) {
+      answerAndReleaseButton.setVisibility(View.VISIBLE);
+    } else {
+      answerAndReleaseButton.setVisibility(View.INVISIBLE);
+    }
+  }
+
+  @Override
+  public boolean allowAnswerAndRelease() {
+    return getArguments().getBoolean(ARG_ALLOW_ANSWER_AND_RELEASE);
+  }
+
+  private boolean hasCallOnHold() {
+    return getArguments().getBoolean(ARG_HAS_CALL_ON_HOLD);
   }
 
   @Override
@@ -546,8 +626,7 @@ public class AnswerFragment extends Fragment
 
   @Override
   public int getAnswerAndDialpadContainerResourceId() {
-    Assert.fail();
-    return 0;
+    throw Assert.createUnsupportedOperationFailException();
   }
 
   @Override
@@ -573,6 +652,7 @@ public class AnswerFragment extends Fragment
 
     View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
     secondaryButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button);
+    answerAndReleaseButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button2);
 
     affordanceHolderLayout = (AffordanceHolderLayout) view.findViewById(R.id.incoming_container);
     affordanceHolderLayout.setAffordanceCallback(affordanceCallback);
@@ -661,6 +741,7 @@ public class AnswerFragment extends Fragment
   public void onResume() {
     super.onResume();
     LogUtil.i("AnswerFragment.onResume", null);
+    restoreSwipeHintTexts();
     inCallScreenDelegate.onInCallScreenResumed();
   }
 
@@ -837,7 +918,17 @@ public class AnswerFragment extends Fragment
 
   private void restoreSwipeHintTexts() {
     if (getAnswerMethod() != null) {
-      getAnswerMethod().setHintText(null);
+      if (allowAnswerAndRelease()) {
+        if (hasCallOnHold()) {
+          getAnswerMethod()
+              .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_third));
+        } else {
+          getAnswerMethod()
+              .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_second));
+        }
+      } else {
+        getAnswerMethod().setHintText(null);
+      }
     }
   }
 

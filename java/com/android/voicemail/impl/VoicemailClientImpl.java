@@ -55,6 +55,11 @@ public class VoicemailClientImpl implements VoicemailClient {
     Assert.checkArgument(BuildCompat.isAtLeastO());
   }
 
+  @Override
+  public boolean isVoicemailModuleEnabled() {
+    return true;
+  }
+
   @Nullable
   @Override
   public String getSettingsFragment() {

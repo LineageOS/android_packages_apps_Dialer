@@ -51,6 +51,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="18dp"
       android:layout_gravity="center_horizontal"
+      android:textAlignment="center"
       android:focusable="false"
       android:text="@string/call_incoming_swipe_to_answer"
       android:textAppearance="@style/Dialer.Incall.TextAppearance.Hint"/>

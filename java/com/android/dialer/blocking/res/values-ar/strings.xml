@@ -31,7 +31,7 @@
     <string name="snackbar_number_blocked" msgid="5760234822413921845">"تم حظر <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="snackbar_number_unblocked" msgid="7941296274123990585">"تم إلغاء حظر <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="block_number_undo" msgid="5158120911892491697">"تراجع"</string>
-    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"أخفق الاستيراد"</string>
+    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"تعذّر الاستيراد"</string>
     <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"تم تعطيل حظر المكالمات لمدة 48 ساعة."</string>
     <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"تم التعطيل نظرًا لإجراء مكالمة طوارئ."</string>
     <string name="block_report_number_alert_title" msgid="2740581989824959611">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>

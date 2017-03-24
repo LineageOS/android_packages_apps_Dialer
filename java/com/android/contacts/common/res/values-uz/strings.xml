@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Avval ismi"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Avval familiyasi"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Yangi kontaktlar uchun birlamchi hisob"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Kontakt meta-ma’lumotlarini sinxronlash [DOGFOOD]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Kontakt meta-ma’lumotlarini sinxronlash"</string>
     <string name="setting_about" msgid="5253319937596745755">"Kontaktlar ilovasi haqida"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Sozlamalar"</string>

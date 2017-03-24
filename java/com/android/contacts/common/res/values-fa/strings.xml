@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ابتدا نام"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"ابتدا نام خانوادگی"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"حساب پیش‌فرض برای مخاطبین جدید"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"همگام‌سازی فراداده مخاطب [آزمایشی]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"همگام‌سازی فراداده مخاطب"</string>
     <string name="setting_about" msgid="5253319937596745755">"درباره مخاطبین"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"تنظیمات"</string>

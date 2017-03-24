@@ -57,7 +57,7 @@ import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
-import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.VideoUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -707,8 +707,7 @@ public class InCallPresenter implements CallList.Listener {
 
   @Override
   public void onUpgradeToVideo(DialerCall call) {
-    if (call.getVideoTech().getSessionModificationState()
-            == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST
+    if (VideoUtils.hasReceivedVideoUpgradeRequest(call.getVideoTech().getSessionModificationState())
         && mInCallState == InCallPresenter.InCallState.INCOMING) {
       LogUtil.i(
           "InCallPresenter.onUpgradeToVideo",

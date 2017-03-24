@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"මුල් නම මුලින්ම"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"අවසාන නම මුලින්ම"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"නව සම්බන්ධතා සඳහා පෙරනිමි ගිණුම"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"සම්බන්ධතා පාරදත්ත සමමුහුර්ත කරන්න [DOGFOOD]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"සම්බන්ධතා පාරදත්ත සමමුහුර්ත කරන්න"</string>
     <string name="setting_about" msgid="5253319937596745755">"සම්බන්ධතා ගැන"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"සැකසීම්"</string>

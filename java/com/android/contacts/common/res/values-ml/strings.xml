@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ഫസ്റ്റ് നെയിം ആദ്യം"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"ലാസ്റ്റ് നെയിം ആദ്യം"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"പുതിയ കോൺടാക്റ്റുകൾക്കായുള്ള ഡിഫോൾട്ട് അക്കൗണ്ട്"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"കോൺടാക്റ്റ് മെറ്റാഡാറ്റ സമന്വയിപ്പിക്കുക [ഡോഗ്‌ഫുഡ്]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"കോൺടാക്റ്റ് മെറ്റാഡാറ്റ സമന്വയിപ്പിക്കുക"</string>
     <string name="setting_about" msgid="5253319937596745755">"കോണ്‍ടാക്റ്റുകളെ കുറിച്ച്"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"ക്രമീകരണം"</string>

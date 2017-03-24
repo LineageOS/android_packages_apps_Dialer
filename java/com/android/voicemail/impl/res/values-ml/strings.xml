@@ -16,66 +16,37 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for voicemail_settings_with_label (563926539137546586) -->
-    <skip />
-    <!-- no translation found for voicemail_settings_title (6685263321755930738) -->
-    <skip />
+    <string name="voicemail_settings_with_label" msgid="563926539137546586">"വോയ്‌സ്‌മെയിൽ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_settings_title" msgid="6685263321755930738">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"വൈബ്രേറ്റുചെയ്യുക"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"വൈബ്രേറ്റുചെയ്യുക"</string>
     <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ശബ്‌ദം"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"വിപുലമായ ക്രമീകരണം"</string>
-    <!-- no translation found for voicemail_visual_voicemail_switch_title (3158454817165714998) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_switch_title (7120443850486401455) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_temporary_disclaimer (401509437213449235) -->
-    <skip />
-    <!-- no translation found for voicemail_set_pin_dialog_title (8853126653745637812) -->
-    <skip />
-    <!-- no translation found for voicemail_change_pin_dialog_title (6929300804279262966) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_old_pin (3732582036597386047) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_new_pin (5167496290646066333) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_progress_message (4143209637626661679) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_short (2825020644385639921) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_long (683260438529171998) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_weak (5865254034338293113) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_mismatch (3682667971009913553) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_invalid (4317397281749196545) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_system_error (5972056058776852411) -->
-    <skip />
-    <!-- no translation found for vvm_unsupported_message_format (2746490691815392491) -->
-    <skip />
-    <!-- no translation found for change_pin_title (1363830310845461697) -->
-    <skip />
-    <!-- no translation found for change_pin_continue_label (9184635195162827832) -->
-    <skip />
-    <!-- no translation found for change_pin_cancel_label (7258783861113501519) -->
-    <skip />
-    <!-- no translation found for change_pin_ok_label (4527043915415428629) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_header (1375728090965833028) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_hint (1654231195871094175) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_header (7142620840890909719) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_hint (1289662932759932217) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pin_header (7282604363655862136) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pins_dont_match (8626742552205369433) -->
-    <skip />
-    <!-- no translation found for change_pin_succeeded (6869403202124894671) -->
-    <skip />
-    <!-- no translation found for change_pin_system_error (5762853042379833829) -->
-    <skip />
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"അധിക ബായ്‌ക്കപ്പും സ്‌റ്റോറേജും"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" ഇത് നിലവിൽ ഞങ്ങൾ പരീക്ഷിക്കുന്ന "<b><i>"ഒരു പരീക്ഷണാത്മക ഫീച്ചറാണ്"</i></b>". ഇത് നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സെർവറിൽ നിന്ന് വോയ്‌സ്‌മെയിലുകൾ ഇല്ലാതാക്കാൻ സാധ്യതയുണ്ട്. ഈ ഫീച്ചർ ഭാവിയിൽ ഉപയോഗിക്കാനാവുമെന്ന് ഉറപ്പൊന്നുമില്ല. എങ്കിലും ഈ ഫീച്ചറിനെക്കുറിച്ചുള്ള ഫീഡ്‌ബാക്ക് അറിയാൻ ഞങ്ങൾ താൽപ്പര്യപ്പെടുന്നു."</string>
+    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"പിൻ സജ്ജമാക്കുക"</string>
+    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"പിൻ മാറ്റുക"</string>
+    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"പഴയ പിൻ"</string>
+    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"പുതിയ പിൻ"</string>
+    <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"കാത്തിരിക്കുക."</string>
+    <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"പുതിയ പിൻ വളരെ ചെറുതാണ്."</string>
+    <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"പുതിയ പിൻ വളരെ ദൈർഘ്യമേറിയതാണ്."</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"പുതിയ പിൻ വളരെ ദുർബലമാണ്. ഒരു ദൃഢമായ പാസ്‌വേഡിൽ തുടർച്ചയായി വരുന്നതോ ആവർത്തിച്ച് വരുന്നതോ ആയ അക്കങ്ങൾ ഉണ്ടാവരുത്."</string>
+    <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"പഴയ പിന്നുമായി യോജിക്കുന്നില്ല."</string>
+    <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"പുതിയ പിന്നിൽ അസാധുവായ പ്രതീകങ്ങൾ അടങ്ങിയിരിക്കുന്നു."</string>
+    <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"പിൻ മാറ്റാനായില്ല"</string>
+    <string name="vvm_unsupported_message_format" msgid="2746490691815392491">"സന്ദേശ തരം പിന്തുണയ്‌ക്കുന്നില്ല, കേൾക്കാൻ <xliff:g id="NUMBER">%s</xliff:g> നമ്പറിൽ വിളിക്കുക."</string>
+    <string name="change_pin_title" msgid="1363830310845461697">"വോയ്‌സ്മെയിൽ പിൻ മാറ്റുക"</string>
+    <string name="change_pin_continue_label" msgid="9184635195162827832">"തുടരുക"</string>
+    <string name="change_pin_cancel_label" msgid="7258783861113501519">"റദ്ദാക്കുക"</string>
+    <string name="change_pin_ok_label" msgid="4527043915415428629">"ശരി"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="1375728090965833028">"നിങ്ങളുടെ പഴയ പിൻ സ്ഥിരീകരിക്കുക"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="1654231195871094175">"തുടരാൻ നിങ്ങളുടെ വോയ്‌സ്മെയിൽ പിൻ നൽകുക."</string>
+    <string name="change_pin_enter_new_pin_header" msgid="7142620840890909719">"പുതിയ PIN സജ്ജമാക്കുക"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"പിന്നിൽ <xliff:g id="MIN">%1$d</xliff:g>-<xliff:g id="MAX">%2$d</xliff:g> അക്കങ്ങൾ ഉണ്ടായിരിക്കണം."</string>
+    <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"നിങ്ങളുടെ പിൻ സ്ഥിരീകരിക്കുക"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"PIN-കൾ പൊരുത്തപ്പെടുന്നില്ല"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"വോയ്‌സ്‌മെയിൽ പിൻ അപ്‌ഡേറ്റുചെയ്‌തു"</string>
+    <string name="change_pin_system_error" msgid="5762853042379833829">"പിൻ സജ്ജമാക്കാൻ കഴിയുന്നില്ല"</string>
 </resources>

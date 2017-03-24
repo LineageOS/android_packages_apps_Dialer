@@ -37,10 +37,10 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CameraDirection;
 import com.android.incallui.call.TelecomAdapter;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
+import com.android.incallui.videotech.utils.VideoUtils;
 
 /** Logic for call buttons. */
 public class CallButtonPresenter

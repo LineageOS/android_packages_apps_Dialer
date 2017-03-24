@@ -646,6 +646,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else if (!mIsDialpadShown) {
         mInCallDialpadUp = false;
         showDialpadFragment(true);
+        PostCall.closePrompt();
       }
     } else if (resId == R.id.voice_search_button) {
       try {

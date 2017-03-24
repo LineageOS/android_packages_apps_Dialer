@@ -87,6 +87,8 @@ public class PhoneCallDetailsHelper {
         (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
     views.callTypeIcons.setShowHd(
         MotorolaUtils.shouldShowHdIconInCallLog(mContext, details.features));
+    views.callTypeIcons.setShowWifi(
+        MotorolaUtils.shouldShowWifiIconInCallLog(mContext, details.features));
     views.callTypeIcons.requestLayout();
     views.callTypeIcons.setVisibility(View.VISIBLE);
 

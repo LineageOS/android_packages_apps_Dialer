@@ -113,8 +113,10 @@ public class DefaultVoicemailNotifier {
           context, newCall.number, newCall.countryIso, newCall.dateMs)) {
         itr.remove();
 
-        // Delete the voicemail.
-        context.getContentResolver().delete(newCall.voicemailUri, null, null);
+        if (newCall.voicemailUri != null) {
+          // Delete the voicemail.
+          context.getContentResolver().delete(newCall.voicemailUri, null, null);
+        }
         continue;
       }
 
@@ -137,8 +139,7 @@ public class DefaultVoicemailNotifier {
     }
 
     if (newCalls.isEmpty()) {
-      // No voicemails to notify about: clear the notification.
-      CallLogNotificationsService.markNewVoicemailsAsOld(context, null);
+      // No voicemails to notify about
       return;
     }
 
@@ -164,7 +165,7 @@ public class DefaultVoicemailNotifier {
     for (NewCall voicemail : newCalls) {
       getNotificationManager()
           .notify(
-              voicemail.voicemailUri.toString(),
+              voicemail.callsUri.toString(),
               NOTIFICATION_ID,
               createNotificationForVoicemail(voicemail, contactInfos));
     }
@@ -234,8 +235,12 @@ public class DefaultVoicemailNotifier {
                     contactInfo.name))
             .setWhen(voicemail.dateMs)
             .setSound(notificationInfo.first)
-            .setDefaults(notificationInfo.second)
-            .setDeleteIntent(createMarkNewVoicemailsAsOldIntent(voicemail.voicemailUri));
+            .setDefaults(notificationInfo.second);
+
+    if (voicemail.voicemailUri != null) {
+      notificationBuilder.setDeleteIntent(
+          createMarkNewVoicemailsAsOldIntent(voicemail.voicemailUri));
+    }
 
     NotificationChannelManager.applyChannel(
         notificationBuilder,

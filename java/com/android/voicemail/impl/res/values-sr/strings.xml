@@ -16,66 +16,37 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for voicemail_settings_with_label (563926539137546586) -->
-    <skip />
-    <!-- no translation found for voicemail_settings_title (6685263321755930738) -->
-    <skip />
+    <string name="voicemail_settings_with_label" msgid="563926539137546586">"Говорна пошта (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_settings_title" msgid="6685263321755930738">"Говорна пошта"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Вибрација"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Вибрација"</string>
     <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Звук"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Напредна подешавања"</string>
-    <!-- no translation found for voicemail_visual_voicemail_switch_title (3158454817165714998) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_switch_title (7120443850486401455) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_temporary_disclaimer (401509437213449235) -->
-    <skip />
-    <!-- no translation found for voicemail_set_pin_dialog_title (8853126653745637812) -->
-    <skip />
-    <!-- no translation found for voicemail_change_pin_dialog_title (6929300804279262966) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_old_pin (3732582036597386047) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_new_pin (5167496290646066333) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_progress_message (4143209637626661679) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_short (2825020644385639921) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_long (683260438529171998) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_weak (5865254034338293113) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_mismatch (3682667971009913553) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_invalid (4317397281749196545) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_system_error (5972056058776852411) -->
-    <skip />
-    <!-- no translation found for vvm_unsupported_message_format (2746490691815392491) -->
-    <skip />
-    <!-- no translation found for change_pin_title (1363830310845461697) -->
-    <skip />
-    <!-- no translation found for change_pin_continue_label (9184635195162827832) -->
-    <skip />
-    <!-- no translation found for change_pin_cancel_label (7258783861113501519) -->
-    <skip />
-    <!-- no translation found for change_pin_ok_label (4527043915415428629) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_header (1375728090965833028) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_hint (1654231195871094175) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_header (7142620840890909719) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_hint (1289662932759932217) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pin_header (7282604363655862136) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pins_dont_match (8626742552205369433) -->
-    <skip />
-    <!-- no translation found for change_pin_succeeded (6869403202124894671) -->
-    <skip />
-    <!-- no translation found for change_pin_system_error (5762853042379833829) -->
-    <skip />
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Визуелна говорна пошта"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Додатне резервне копије и простор"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Ово је експериментална функција"</i></b>" коју тренутно тестирамо. Тако ће се можда избрисати говорне поруке са сервера говорне поште. Нема гаранција да ће ова функција бити подржана и у будућности. Ипак, желимо да добијамо повратне информације о њој."</string>
+    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Подесите PIN"</string>
+    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Промените PIN"</string>
+    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Стари PIN"</string>
+    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Нови PIN"</string>
+    <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Сачекајте."</string>
+    <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Нови PIN је прекратак."</string>
+    <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Нови PIN је предугачак."</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"Нови PIN је преслаб. Јака лозинка не треба да садржи узастопни низ ни поновљене цифре."</string>
+    <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"Стари PIN се не подудара."</string>
+    <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"Нови PIN садржи неважеће знакове."</string>
+    <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"Промена PIN-а није успела"</string>
+    <string name="vvm_unsupported_message_format" msgid="2746490691815392491">"Неподржани тип поруке. Позовите <xliff:g id="NUMBER">%s</xliff:g> да бисте је преслушали."</string>
+    <string name="change_pin_title" msgid="1363830310845461697">"Промените PIN кôд говорне поште"</string>
+    <string name="change_pin_continue_label" msgid="9184635195162827832">"Настави"</string>
+    <string name="change_pin_cancel_label" msgid="7258783861113501519">"Откажи"</string>
+    <string name="change_pin_ok_label" msgid="4527043915415428629">"Потврди"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="1375728090965833028">"Потврдите стари PIN"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="1654231195871094175">"Унесите PIN кôд говорне поште да бисте наставили."</string>
+    <string name="change_pin_enter_new_pin_header" msgid="7142620840890909719">"Подесите нови PIN"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"Број цифара које PIN мора да садржи: <xliff:g id="MIN">%1$d</xliff:g>–<xliff:g id="MAX">%2$d</xliff:g>."</string>
+    <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"Потврдите PIN"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"PIN-ови се не подударају"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"PIN кôд говорне поште је ажуриран"</string>
+    <string name="change_pin_system_error" msgid="5762853042379833829">"Подешавање PIN-а није успело"</string>
 </resources>

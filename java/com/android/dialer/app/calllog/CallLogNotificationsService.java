@@ -20,6 +20,8 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
@@ -190,10 +192,16 @@ public class CallLogNotificationsService extends IntentService {
     String action = intent.getAction();
     switch (action) {
       case ACTION_MARK_NEW_VOICEMAILS_AS_OLD:
-        if (mVoicemailQueryHandler == null) {
-          mVoicemailQueryHandler = new VoicemailQueryHandler(this, getContentResolver());
-        }
-        mVoicemailQueryHandler.markNewVoicemailsAsOld(intent.getData());
+        // VoicemailQueryHandler cannot be created on the IntentService worker thread. The completed
+        // callback might happen when the thread is dead.
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(
+            () -> {
+              if (mVoicemailQueryHandler == null) {
+                mVoicemailQueryHandler = new VoicemailQueryHandler(this, getContentResolver());
+              }
+              mVoicemailQueryHandler.markNewVoicemailsAsOld(intent.getData());
+            });
         break;
       case ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS:
         DefaultVoicemailNotifier.getInstance(this).updateNotification();

@@ -34,6 +34,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.imap.ImapHelper;
@@ -73,6 +74,9 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(final Context context, Intent intent) {
+    if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
+      return;
+    }
     if (VoicemailContract.ACTION_FETCH_VOICEMAIL.equals(intent.getAction())) {
       VvmLog.i(TAG, "ACTION_FETCH_VOICEMAIL received");
       mContext = context;

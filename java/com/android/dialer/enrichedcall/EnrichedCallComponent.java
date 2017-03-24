@@ -28,6 +28,9 @@ public abstract class EnrichedCallComponent {
   @NonNull
   public abstract EnrichedCallManager getEnrichedCallManager();
 
+  @NonNull
+  public abstract RcsVideoShareFactory getRcsVideoShareFactory();
+
   public static EnrichedCallComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .enrichedCallComponent();

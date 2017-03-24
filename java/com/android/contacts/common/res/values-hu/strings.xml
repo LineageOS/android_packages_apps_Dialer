@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Utónév elöl"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Vezetéknév elöl"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Alapértelmezett fiók az új névjegyek számára"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Névjegyek metaadatainak szinkronizálása [DOGFOOD ALKALMAZÁS]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Névjegyek metaadatainak szinkronizálása"</string>
     <string name="setting_about" msgid="5253319937596745755">"A Névjegyekről"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Beállítások"</string>

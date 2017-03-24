@@ -215,7 +215,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Najprej ime"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Najprej priimek"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Privzeti račun za nove stike"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Sinhronizacija metapodatkov stikov [PRESKUSNA INTERNA UPORABA]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Sinhronizacija metapodatkov stikov"</string>
     <string name="setting_about" msgid="5253319937596745755">"O Stikih"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Nastavitve"</string>

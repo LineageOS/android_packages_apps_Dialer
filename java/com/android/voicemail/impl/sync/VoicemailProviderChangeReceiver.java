@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.VoicemailContract;
 import android.telecom.PhoneAccountHandle;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 
 /** Receives changes to the voicemail provider so they can be sent to the voicemail server. */
@@ -27,6 +28,9 @@ public class VoicemailProviderChangeReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
+      return;
+    }
     boolean isSelfChanged = intent.getBooleanExtra(VoicemailContract.EXTRA_SELF_CHANGE, false);
     if (!isSelfChanged) {
       for (PhoneAccountHandle phoneAccount : VvmAccountManager.getActiveAccounts(context)) {

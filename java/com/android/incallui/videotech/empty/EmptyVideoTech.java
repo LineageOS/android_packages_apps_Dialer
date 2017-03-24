@@ -16,7 +16,12 @@
 
 package com.android.incallui.videotech.empty;
 
+import android.content.Context;
+import com.android.dialer.common.Assert;
+import com.android.incallui.video.protocol.VideoCallScreen;
+import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
 
 /** Default video tech that is always available but doesn't do anything. */
 public class EmptyVideoTech implements VideoTech {
@@ -37,11 +42,22 @@ public class EmptyVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean shouldUseSurfaceView() {
+    return false;
+  }
+
+  @Override
+  public VideoCallScreenDelegate createVideoCallScreenDelegate(
+      Context context, VideoCallScreen videoCallScreen) {
+    throw Assert.createUnsupportedOperationFailException();
+  }
+
+  @Override
   public void onCallStateChanged(int newState) {}
 
   @Override
   public int getSessionModificationState() {
-    return VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST;
+    return SessionModificationState.NO_REQUEST;
   }
 
   @Override

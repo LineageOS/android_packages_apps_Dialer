@@ -68,13 +68,19 @@ public class SwipeButtonHelper {
           targetedView = null;
         }
       };
-  private Runnable animationEndRunnable =
-      new Runnable() {
-        @Override
-        public void run() {
-          callback.onAnimationToSideEnded();
-        }
-      };
+
+  private class AnimationEndRunnable implements Runnable {
+    private final boolean rightPage;
+
+    public AnimationEndRunnable(boolean rightPage) {
+      this.rightPage = rightPage;
+    }
+
+    @Override
+    public void run() {
+      callback.onAnimationToSideEnded(rightPage);
+    }
+  };
 
   public SwipeButtonHelper(Callback callback, Context context) {
     this.context = context;
@@ -386,7 +392,7 @@ public class SwipeButtonHelper {
         });
     animator.addListener(flingEndListener);
     if (!snapBack) {
-      startFinishingCircleAnimation(vel * 0.375f, animationEndRunnable, right);
+      startFinishingCircleAnimation(vel * 0.375f, new AnimationEndRunnable(right), right);
       callback.onAnimationToSideStarted(right, translation, vel);
     } else {
       reset(true);
@@ -599,7 +605,7 @@ public class SwipeButtonHelper {
       updateIcon(otherView, 0.0f, 0.0f, false, false, true, false);
       targetView.instantFinishAnimation();
       flingEndListener.onAnimationEnd(null);
-      animationEndRunnable.run();
+      new AnimationEndRunnable(!left).run();
     }
   }
 
@@ -614,7 +620,7 @@ public class SwipeButtonHelper {
     void onAnimationToSideStarted(boolean rightPage, float translation, float vel);
 
     /** Notifies the callback the animation to a side page has ended. */
-    void onAnimationToSideEnded();
+    void onAnimationToSideEnded(boolean rightPage);
 
     float getMaxTranslationDistance();
 

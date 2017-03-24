@@ -46,8 +46,9 @@ public class CallTypeIconsView extends View {
   private static Resources sResources;
   private static Resources sLargeResouces;
   private List<Integer> mCallTypes = new ArrayList<>(3);
-  private boolean mShowVideo = false;
-  private boolean mShowHd = false;
+  private boolean mShowVideo;
+  private boolean mShowHd;
+  private boolean mShowWifi;
   private int mWidth;
   private int mHeight;
 
@@ -93,7 +94,7 @@ public class CallTypeIconsView extends View {
   public void setShowVideo(boolean showVideo) {
     mShowVideo = showVideo;
     if (showVideo) {
-      mWidth += sResources.videoCall.getIntrinsicWidth();
+      mWidth += sResources.videoCall.getIntrinsicWidth() + sResources.iconMargin;
       mHeight = Math.max(mHeight, sResources.videoCall.getIntrinsicHeight());
       invalidate();
     }
@@ -111,8 +112,17 @@ public class CallTypeIconsView extends View {
   public void setShowHd(boolean showHd) {
     mShowHd = showHd;
     if (showHd) {
-      mWidth += sResources.hdCall.getIntrinsicWidth();
+      mWidth += sResources.hdCall.getIntrinsicWidth() + sResources.iconMargin;
       mHeight = Math.max(mHeight, sResources.hdCall.getIntrinsicHeight());
+      invalidate();
+    }
+  }
+
+  public void setShowWifi(boolean showWifi) {
+    mShowWifi = showWifi;
+    if (showWifi) {
+      mWidth += sResources.wifiCall.getIntrinsicWidth() + sResources.iconMargin;
+      mHeight = Math.max(mHeight, sResources.wifiCall.getIntrinsicHeight());
       invalidate();
     }
   }
@@ -175,12 +185,21 @@ public class CallTypeIconsView extends View {
       final int right = left + resources.videoCall.getIntrinsicWidth();
       drawable.setBounds(left, 0, right, resources.videoCall.getIntrinsicHeight());
       drawable.draw(canvas);
+      left = right + sResources.iconMargin;
     }
     // If showing HD call icon, draw it scaled appropriately.
     if (mShowHd) {
       final Drawable drawable = resources.hdCall;
       final int right = left + resources.hdCall.getIntrinsicWidth();
       drawable.setBounds(left, 0, right, resources.hdCall.getIntrinsicHeight());
+      drawable.draw(canvas);
+      left = right + sResources.iconMargin;
+    }
+    // If showing HD call icon, draw it scaled appropriately.
+    if (mShowWifi) {
+      final Drawable drawable = sResources.wifiCall;
+      final int right = left + sResources.wifiCall.getIntrinsicWidth();
+      drawable.setBounds(left, 0, right, sResources.wifiCall.getIntrinsicHeight());
       drawable.draw(canvas);
     }
   }
@@ -203,13 +222,16 @@ public class CallTypeIconsView extends View {
     public final Drawable blocked;
 
     // Drawable repesenting a video call.
-    public final Drawable videoCall;
+    final Drawable videoCall;
 
     // Drawable represeting a hd call.
-    public final Drawable hdCall;
+    final Drawable hdCall;
+
+    // Drawable representing a WiFi call.
+    final Drawable wifiCall;
 
     /** The margin to use for icons. */
-    public final int iconMargin;
+    final int iconMargin;
 
     /**
      * Configures the call icon drawables. A single white call arrow which points down and left is
@@ -252,6 +274,10 @@ public class CallTypeIconsView extends View {
       iconId = R.drawable.quantum_ic_hd_white_24;
       hdCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       hdCall.setColorFilter(
+          r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+
+      wifiCall = getScaledBitmap(context, R.drawable.quantum_ic_signal_wifi_4_bar_white_24);
+      wifiCall.setColorFilter(
           r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);

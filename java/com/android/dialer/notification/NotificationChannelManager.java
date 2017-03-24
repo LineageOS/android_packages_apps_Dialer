@@ -173,7 +173,7 @@ public class NotificationChannelManager {
         canShowBadge = false;
         lights = false;
         vibration = false;
-        sound = null;
+        sound = silentRingtone;
         break;
       case Channel.VOICEMAIL:
         name = context.getText(R.string.notification_channel_voicemail);

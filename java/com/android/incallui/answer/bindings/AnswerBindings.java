@@ -26,8 +26,15 @@ public class AnswerBindings {
       String callId,
       boolean isVideoCall,
       boolean isVideoUpgradeRequest,
-      boolean isSelfManagedCamera) {
+      boolean isSelfManagedCamera,
+      boolean allowAnswerAndRelease,
+      boolean hasCallOnHold) {
     return AnswerFragment.newInstance(
-        callId, isVideoCall, isVideoUpgradeRequest, isSelfManagedCamera);
+        callId,
+        isVideoCall,
+        isVideoUpgradeRequest,
+        isSelfManagedCamera,
+        allowAnswerAndRelease,
+        hasCallOnHold);
   }
 }

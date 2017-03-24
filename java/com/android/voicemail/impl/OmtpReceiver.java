@@ -26,6 +26,7 @@ import android.telephony.VisualVoicemailSms;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
 /** Listens to com.android.phone.vvm.ACTION_TEMP_VISUAL_VOICEMAIL_SERVICE_EVENT */
@@ -54,6 +55,12 @@ public class OmtpReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    // ACTION_VISUAL_VOICEMAIL_SERVICE_EVENT is not a protected broadcast pre-O.
+    if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
+      VvmLog.e(TAG, "ACTION_VISUAL_VOICEMAIL_SERVICE_EVENT received when module is disabled");
+      return;
+    }
+
     int what = intent.getIntExtra(EXTRA_WHAT, -1);
     PhoneAccountHandle phoneAccountHandle = intent.getParcelableExtra(DATA_PHONE_ACCOUNT_HANDLE);
     switch (what) {

@@ -85,6 +85,17 @@ public class InCallFragment extends Fragment
   private int phoneType;
   private boolean stateRestored;
 
+  // Add animation to educate users. If a call has enriched calling attachments then we'll
+  // initially show the attachment page. After a delay seconds we'll animate to the button grid.
+  private final Handler handler = new Handler();
+  private final Runnable pagerRunnable =
+      new Runnable() {
+        @Override
+        public void run() {
+          pager.setCurrentItem(adapter.getButtonGridPosition());
+        }
+      };
+
   private static boolean isSupportedButton(@InCallButtonIds int id) {
     return id == InCallButtonIds.BUTTON_AUDIO
         || id == InCallButtonIds.BUTTON_MUTE
@@ -134,6 +145,11 @@ public class InCallFragment extends Fragment
 
     paginator = (InCallPaginator) view.findViewById(R.id.incall_paginator);
     pager = (LockableViewPager) view.findViewById(R.id.incall_pager);
+    pager.setOnTouchListener(
+        (v, event) -> {
+          handler.removeCallbacks(pagerRunnable);
+          return false;
+        });
 
     endCallButton = view.findViewById(R.id.incall_end_call);
     endCallButton.setOnClickListener(this);
@@ -249,18 +265,7 @@ public class InCallFragment extends Fragment
       paginator.setVisibility(View.VISIBLE);
       paginator.setupWithViewPager(pager);
       if (!stateRestored) {
-        new Handler()
-            .postDelayed(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    // In order to prevent user confusion and educate the user on our UI, we animate
-                    // the view pager to the button grid after 2 seconds show them when the UI is
-                    // that they are more familiar with.
-                    pager.setCurrentItem(adapter.getButtonGridPosition());
-                  }
-                },
-                2000);
+        handler.postDelayed(pagerRunnable, 4_000);
       } else {
         paginator.setVisibility(View.GONE);
       }

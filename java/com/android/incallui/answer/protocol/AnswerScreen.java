@@ -28,6 +28,8 @@ public interface AnswerScreen {
 
   boolean isVideoUpgradeRequest();
 
+  boolean allowAnswerAndRelease();
+
   void setTextResponses(List<String> textResponses);
 
   boolean hasPendingDialogs();

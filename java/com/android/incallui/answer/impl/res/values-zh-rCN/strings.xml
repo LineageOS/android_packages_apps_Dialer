@@ -3,6 +3,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"滑动图标即可拒接来电并发送信息"</string>
     <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"滑动图标即可以音频通话的形式接听"</string>
+    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"向上滑动即可接听并保持当前通话"</string>
+    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"向上滑动即可接听并结束保持的通话"</string>
+    <string name="call_incoming_swipe_to_answer_and_release" msgid="5695449250270204669">"滑动图标即可接听来电并结束当前通话"</string>
     <string name="call_incoming_message_custom" msgid="5819492800418293238">"自行撰写回复…"</string>
     <string name="call_incoming_audio_handset" msgid="2299009191401671619">"手机听筒"</string>
     <string name="call_incoming_audio_speakerphone" msgid="5632622369522427991">"免提"</string>
@@ -11,8 +14,10 @@
     <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"发送"</string>
     <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"拒接此来电并发送信息"</string>
     <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"以音频通话的形式接听"</string>
+    <string name="a11y_incoming_call_answer_and_release" msgid="6771962954510757804">"接听来电并结束当前通话"</string>
     <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"拒接来电并发送信息"</string>
     <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"以音频通话的形式接听"</string>
+    <string name="a11y_description_incoming_call_answer_and_release" msgid="1162931642679631008">"接听来电并结束当前通话"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"摄像头处于关闭状态"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"双指向上滑动即可接听，向下滑动则可拒接。"</string>
     <string name="call_incoming_important" msgid="6477906345540334049">"重要来电"</string>

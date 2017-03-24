@@ -28,11 +28,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.ColorUtils;
 import android.telecom.DisconnectCause;
+import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.Logger;
@@ -71,6 +73,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static final String DID_SHOW_ANSWER_SCREEN_KEY = "did_show_answer_screen";
   private static final String DID_SHOW_IN_CALL_SCREEN_KEY = "did_show_in_call_screen";
   private static final String DID_SHOW_VIDEO_CALL_SCREEN_KEY = "did_show_video_call_screen";
+
+  private static final String CONFIG_ANSWER_AND_RELEASE_ENABLED = "answer_and_release_enabled";
 
   private final InCallActivityCommon common;
   private boolean didShowAnswerScreen;
@@ -460,7 +464,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   @Override
-  public VideoCallScreenDelegate newVideoCallScreenDelegate() {
+  public VideoCallScreenDelegate newVideoCallScreenDelegate(VideoCallScreen videoCallScreen) {
+    DialerCall dialerCall = CallList.getInstance().getCallById(videoCallScreen.getCallId());
+    if (dialerCall != null && dialerCall.getVideoTech().shouldUseSurfaceView()) {
+      return dialerCall.getVideoTech().createVideoCallScreenDelegate(this, videoCallScreen);
+    }
     return new VideoCallPresenter();
   }
 
@@ -629,11 +637,35 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             call.getId(),
             call.isVideoCall(),
             isVideoUpgradeRequest,
-            call.getVideoTech().isSelfManagedCamera());
+            call.getVideoTech().isSelfManagedCamera(),
+            shouldAllowAnswerAndRelease(call),
+            CallList.getInstance().getBackgroundCall() != null);
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), TAG_ANSWER_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);
     didShowAnswerScreen = true;
+    return true;
+  }
+
+  private boolean shouldAllowAnswerAndRelease(DialerCall call) {
+    if (CallList.getInstance().getActiveCall() == null) {
+      LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "no active call");
+      return false;
+    }
+    if (getSystemService(TelephonyManager.class).getPhoneType()
+        == TelephonyManager.PHONE_TYPE_CDMA) {
+      LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "PHONE_TYPE_CDMA not supported");
+      return false;
+    }
+    if (call.isVideoCall() || call.hasReceivedVideoUpgradeRequest()) {
+      LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "video call");
+      return false;
+    }
+    if (!ConfigProviderBindings.get(this).getBoolean(CONFIG_ANSWER_AND_RELEASE_ENABLED, true)) {
+      LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "disabled by config");
+      return false;
+    }
+
     return true;
   }
 
@@ -692,7 +724,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     LogUtil.i("InCallActivity.showVideoCallScreenFragment", "call: %s", call);
 
-    VideoCallScreen videoCallScreen = VideoBindings.createVideoCallScreen(call.getId());
+    VideoCallScreen videoCallScreen =
+        VideoBindings.createVideoCallScreen(
+            call.getId(), call.getVideoTech().shouldUseSurfaceView());
     transaction.add(R.id.main, videoCallScreen.getVideoCallScreenFragment(), TAG_VIDEO_CALL_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);

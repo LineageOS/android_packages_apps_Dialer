@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Prénom en premier"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Nom de famille en premier"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Compte par défaut pour les nouveaux contacts"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Synchroniser les métadonnées des contacts [DOGFOOD]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Synchroniser les métadonnées des contacts"</string>
     <string name="setting_about" msgid="5253319937596745755">"À propos de Contacts"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Paramètres"</string>

@@ -215,7 +215,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Najpierw imię"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Najpierw nazwisko"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Domyślne konto dla nowych kontaktów"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Synchronizuj metadane kontaktów [DOGFOOD]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Synchronizuj metadane kontaktów"</string>
     <string name="setting_about" msgid="5253319937596745755">"Aplikacja Kontakty"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Ustawienia"</string>

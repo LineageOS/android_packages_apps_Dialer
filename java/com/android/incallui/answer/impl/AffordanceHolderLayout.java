@@ -58,9 +58,9 @@ public class AffordanceHolderLayout extends FrameLayout {
               }
 
               @Override
-              public void onAnimationToSideEnded() {
+              public void onAnimationToSideEnded(boolean rightPage) {
                 if (affordanceCallback != null) {
-                  affordanceCallback.onAnimationToSideEnded();
+                  affordanceCallback.onAnimationToSideEnded(rightPage);
                 }
               }
 

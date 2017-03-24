@@ -24,9 +24,8 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.telecom.VideoProfile.CameraCapabilities;
 import com.android.dialer.common.LogUtil;
-import com.android.incallui.videotech.VideoTech;
-import com.android.incallui.videotech.VideoTech.SessionModificationState;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
+import com.android.incallui.videotech.utils.SessionModificationState;
 
 /** Receives IMS video call state updates. */
 public class ImsVideoCallCallback extends VideoCall.Callback {
@@ -60,7 +59,7 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
     } else if (previousVideoState != newVideoState) {
       requestedVideoState = newVideoState;
       videoTech.setSessionModificationState(
-          VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST);
+          SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST);
       listener.onVideoUpgradeRequestReceived();
     }
   }
@@ -84,7 +83,7 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
         videoTech.getSessionModificationState());
 
     if (videoTech.getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE) {
+        == SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE) {
       handler.removeCallbacksAndMessages(null); // Clear everything
 
       final int newSessionModificationState = getSessionModificationStateFromTelecomStatus(status);
@@ -103,8 +102,7 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
           () -> {
             if (videoTech.getSessionModificationState() == newSessionModificationState) {
               LogUtil.i("ImsVideoCallCallback.onSessionModifyResponseReceived", "clearing state");
-              videoTech.setSessionModificationState(
-                  VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+              videoTech.setSessionModificationState(SessionModificationState.NO_REQUEST);
             } else {
               LogUtil.i(
                   "ImsVideoCallCallback.onSessionModifyResponseReceived",
@@ -113,10 +111,10 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
           },
           CLEAR_FAILED_REQUEST_TIMEOUT_MILLIS);
     } else if (videoTech.getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-      videoTech.setSessionModificationState(VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+        == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+      videoTech.setSessionModificationState(SessionModificationState.NO_REQUEST);
     } else if (videoTech.getSessionModificationState()
-        == VideoTech.SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE) {
+        == SessionModificationState.WAITING_FOR_RESPONSE) {
       videoTech.setSessionModificationState(getSessionModificationStateFromTelecomStatus(status));
     } else {
       LogUtil.i(
@@ -129,25 +127,25 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
   private int getSessionModificationStateFromTelecomStatus(int telecomStatus) {
     switch (telecomStatus) {
       case VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS:
-        return VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST;
+        return SessionModificationState.NO_REQUEST;
       case VideoProvider.SESSION_MODIFY_REQUEST_FAIL:
       case VideoProvider.SESSION_MODIFY_REQUEST_INVALID:
         // Check if it's already video call, which means the request is not video upgrade request.
         if (VideoProfile.isVideo(call.getDetails().getVideoState())) {
-          return VideoTech.SESSION_MODIFICATION_STATE_REQUEST_FAILED;
+          return SessionModificationState.REQUEST_FAILED;
         } else {
-          return VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED;
+          return SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_FAILED;
         }
       case VideoProvider.SESSION_MODIFY_REQUEST_TIMED_OUT:
-        return VideoTech.SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT;
+        return SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT;
       case VideoProvider.SESSION_MODIFY_REQUEST_REJECTED_BY_REMOTE:
-        return VideoTech.SESSION_MODIFICATION_STATE_REQUEST_REJECTED;
+        return SessionModificationState.REQUEST_REJECTED;
       default:
         LogUtil.e(
             "ImsVideoCallCallback.getSessionModificationStateFromTelecomStatus",
             "unknown status: %d",
             telecomStatus);
-        return VideoTech.SESSION_MODIFICATION_STATE_REQUEST_FAILED;
+        return SessionModificationState.REQUEST_FAILED;
     }
   }
 

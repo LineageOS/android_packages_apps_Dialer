@@ -16,66 +16,37 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for voicemail_settings_with_label (563926539137546586) -->
-    <skip />
-    <!-- no translation found for voicemail_settings_title (6685263321755930738) -->
-    <skip />
+    <string name="voicemail_settings_with_label" msgid="563926539137546586">"የድምፅ መልዕክት (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_settings_title" msgid="6685263321755930738">"የድምፅ መልዕክት"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"ንዘር"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"ንዘር"</string>
     <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ድምፅ"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"የላቁ ቅንብሮች"</string>
-    <!-- no translation found for voicemail_visual_voicemail_switch_title (3158454817165714998) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_switch_title (7120443850486401455) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_temporary_disclaimer (401509437213449235) -->
-    <skip />
-    <!-- no translation found for voicemail_set_pin_dialog_title (8853126653745637812) -->
-    <skip />
-    <!-- no translation found for voicemail_change_pin_dialog_title (6929300804279262966) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_old_pin (3732582036597386047) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_new_pin (5167496290646066333) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_progress_message (4143209637626661679) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_short (2825020644385639921) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_long (683260438529171998) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_weak (5865254034338293113) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_mismatch (3682667971009913553) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_invalid (4317397281749196545) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_system_error (5972056058776852411) -->
-    <skip />
-    <!-- no translation found for vvm_unsupported_message_format (2746490691815392491) -->
-    <skip />
-    <!-- no translation found for change_pin_title (1363830310845461697) -->
-    <skip />
-    <!-- no translation found for change_pin_continue_label (9184635195162827832) -->
-    <skip />
-    <!-- no translation found for change_pin_cancel_label (7258783861113501519) -->
-    <skip />
-    <!-- no translation found for change_pin_ok_label (4527043915415428629) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_header (1375728090965833028) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_hint (1654231195871094175) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_header (7142620840890909719) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_hint (1289662932759932217) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pin_header (7282604363655862136) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pins_dont_match (8626742552205369433) -->
-    <skip />
-    <!-- no translation found for change_pin_succeeded (6869403202124894671) -->
-    <skip />
-    <!-- no translation found for change_pin_system_error (5762853042379833829) -->
-    <skip />
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"ምስላዊ የድምፅ መልዕክት"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"ተጨማሪ ምትኬ እና ማከማቻ"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"ይህ የሙከራ ባህሪ ነው"</i></b>" አሁን እየሞከርን ነው። ይህ ምናልባት ከድምፅ መልዕክት አገልጋይዎ ላይ የድምፅ መልዕክቶችን ሊሰርዝ ይችላል። ለወደፊቱ ይህን ባህሪ የመደገፍ ዋስትናዎችም የሉም። ነገር ግን በባህሪው ላይ ግብረመልስ ብናገኝ እንወዳለን።"</string>
+    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"ፒን ያዘጋጁ"</string>
+    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"ፒን ቀይር"</string>
+    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"የቀድሞ ፒን"</string>
+    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"አዲስ ፒን"</string>
+    <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"እባክዎ ይጠብቁ።"</string>
+    <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"አዲሱ ፒን በጣም አጭር ነው።"</string>
+    <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"አዲሱ ፒን በጣም ረጅም ነው።"</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"አዲሱ ፒን በጣም ደካማ ነው። ጠንካራ የይለፍ ቃል ተከታታይ ቅጥልጥል ወይም ተደጋጋሚ አኃዞች ሊኖሩት አይገባም።"</string>
+    <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"የድሮው ፒን አይዛመድም።"</string>
+    <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"አዲሱ ፒን ልክ ያልሆኑ ቁምፊዎችን ይዟል።"</string>
+    <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"ፒን መቀየር አልተቻለም።"</string>
+    <string name="vvm_unsupported_message_format" msgid="2746490691815392491">"የማይደገፍ የመልዕክት አይነት፤ ለማዳመጥ ወደ <xliff:g id="NUMBER">%s</xliff:g> ይደውሉ።"</string>
+    <string name="change_pin_title" msgid="1363830310845461697">"የድምፅ መልዕክት ፒን ለውጥ"</string>
+    <string name="change_pin_continue_label" msgid="9184635195162827832">"ቀጥል"</string>
+    <string name="change_pin_cancel_label" msgid="7258783861113501519">"ይቅር"</string>
+    <string name="change_pin_ok_label" msgid="4527043915415428629">"እሺ"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="1375728090965833028">"የድሮውን ፒንዎን ያረጋግጡ"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="1654231195871094175">"ለመቀጠል የድምፅ መልዕክት ፒንዎን ያስገቡ።"</string>
+    <string name="change_pin_enter_new_pin_header" msgid="7142620840890909719">"አዲስ ፒን ያዘጋጁ"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"ፒን ከ <xliff:g id="MIN">%1$d</xliff:g>-<xliff:g id="MAX">%2$d</xliff:g> አኃዞች መሆን አለበት።"</string>
+    <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"የእርስዎን ፒን ያረጋግጡ"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"ፒኖች አይዛመዱም"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"የድምፅ መልዕክት ፒን ዘምኗል"</string>
+    <string name="change_pin_system_error" msgid="5762853042379833829">"ፒን ማዘጋጀት አልተቻለም"</string>
 </resources>

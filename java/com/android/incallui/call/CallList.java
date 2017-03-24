@@ -41,7 +41,7 @@ import com.android.dialer.spam.SpamBindings;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
-import com.android.incallui.videotech.VideoTech;
+import com.android.incallui.videotech.utils.SessionModificationState;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -467,7 +467,7 @@ public class CallList implements DialerCallDelegate {
   public DialerCall getVideoUpgradeRequestCall() {
     for (DialerCall call : mCallById.values()) {
       if (call.getVideoTech().getSessionModificationState()
-          == VideoTech.SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+          == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
         return call;
       }
     }

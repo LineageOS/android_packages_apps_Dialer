@@ -16,66 +16,37 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for voicemail_settings_with_label (563926539137546586) -->
-    <skip />
-    <!-- no translation found for voicemail_settings_title (6685263321755930738) -->
-    <skip />
+    <string name="voicemail_settings_with_label" msgid="563926539137546586">"Correio de voz (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_settings_title" msgid="6685263321755930738">"Correio de voz"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Vibrar"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Vibrar"</string>
     <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Som"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Definições avançadas"</string>
-    <!-- no translation found for voicemail_visual_voicemail_switch_title (3158454817165714998) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_switch_title (7120443850486401455) -->
-    <skip />
-    <!-- no translation found for voicemail_visual_voicemail_auto_archive_temporary_disclaimer (401509437213449235) -->
-    <skip />
-    <!-- no translation found for voicemail_set_pin_dialog_title (8853126653745637812) -->
-    <skip />
-    <!-- no translation found for voicemail_change_pin_dialog_title (6929300804279262966) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_old_pin (3732582036597386047) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_new_pin (5167496290646066333) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_progress_message (4143209637626661679) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_short (2825020644385639921) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_long (683260438529171998) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_too_weak (5865254034338293113) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_mismatch (3682667971009913553) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_invalid (4317397281749196545) -->
-    <skip />
-    <!-- no translation found for vm_change_pin_error_system_error (5972056058776852411) -->
-    <skip />
-    <!-- no translation found for vvm_unsupported_message_format (2746490691815392491) -->
-    <skip />
-    <!-- no translation found for change_pin_title (1363830310845461697) -->
-    <skip />
-    <!-- no translation found for change_pin_continue_label (9184635195162827832) -->
-    <skip />
-    <!-- no translation found for change_pin_cancel_label (7258783861113501519) -->
-    <skip />
-    <!-- no translation found for change_pin_ok_label (4527043915415428629) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_header (1375728090965833028) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_old_pin_hint (1654231195871094175) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_header (7142620840890909719) -->
-    <skip />
-    <!-- no translation found for change_pin_enter_new_pin_hint (1289662932759932217) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pin_header (7282604363655862136) -->
-    <skip />
-    <!-- no translation found for change_pin_confirm_pins_dont_match (8626742552205369433) -->
-    <skip />
-    <!-- no translation found for change_pin_succeeded (6869403202124894671) -->
-    <skip />
-    <!-- no translation found for change_pin_system_error (5762853042379833829) -->
-    <skip />
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Mensagem de correio de voz visual"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Cópia de segurança e armazenamento extra"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"É uma funcionalidade experimental"</i></b>" que estamos a testar. Poderá eliminar mensagens de correio de voz do servidor de correio de voz. Não há garantias de suporte para esta funcionalidade. Gostaríamos de receber comentários sobre a mesma."</string>
+    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Definir PIN"</string>
+    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Alterar PIN"</string>
+    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"PIN antigo"</string>
+    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Novo PIN"</string>
+    <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Aguarde."</string>
+    <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"O novo PIN é demasiado curto."</string>
+    <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"O novo PIN é demasiado longo."</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"O novo PIN é demasiado fraco. Uma palavra-passe forte não deve ter uma sequência de dígitos contínua ou repetida."</string>
+    <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"O PIN antigo não corresponde."</string>
+    <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"O novo PIN contém carateres inválidos."</string>
+    <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"Não é possível alterar o PIN"</string>
+    <string name="vvm_unsupported_message_format" msgid="2746490691815392491">"Tipo de mensagem não suportada, ligue para o número <xliff:g id="NUMBER">%s</xliff:g> para ouvir."</string>
+    <string name="change_pin_title" msgid="1363830310845461697">"Alterar o PIN do correio de voz"</string>
+    <string name="change_pin_continue_label" msgid="9184635195162827832">"Continuar"</string>
+    <string name="change_pin_cancel_label" msgid="7258783861113501519">"Cancelar"</string>
+    <string name="change_pin_ok_label" msgid="4527043915415428629">"OK"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="1375728090965833028">"Confirmar o PIN antigo"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="1654231195871094175">"Introduza o PIN do seu correio de voz para continuar."</string>
+    <string name="change_pin_enter_new_pin_header" msgid="7142620840890909719">"Definir um PIN novo"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"O PIN tem de ter <xliff:g id="MIN">%1$d</xliff:g>-<xliff:g id="MAX">%2$d</xliff:g> dígitos."</string>
+    <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"Confirmar PIN"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"Os PINs não correspondem"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"O PIN do correio de voz foi atualizado"</string>
+    <string name="change_pin_system_error" msgid="5762853042379833829">"Não é possível definir o PIN"</string>
 </resources>

@@ -215,7 +215,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Pirmiausia vardas"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Pirmiausia pavardė"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Numatytoji naujų kontaktų paskyra"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"Sinchronizuoti kontaktų metaduomenis [NEGALUTINĖ VERSIJA]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Kontaktų metaduomenų sinchronizavimas"</string>
     <string name="setting_about" msgid="5253319937596745755">"Apie Kontaktus"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Nustatymai"</string>

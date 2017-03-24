@@ -16,9 +16,10 @@
 
 package com.android.incallui.videotech;
 
-import android.support.annotation.IntDef;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import android.content.Context;
+import com.android.incallui.video.protocol.VideoCallScreen;
+import com.android.incallui.video.protocol.VideoCallScreenDelegate;
+import com.android.incallui.videotech.utils.SessionModificationState;
 
 /** Video calling interface. */
 public interface VideoTech {
@@ -32,6 +33,11 @@ public interface VideoTech {
    * tech manage the camera.
    */
   boolean isSelfManagedCamera();
+
+  boolean shouldUseSurfaceView();
+
+  VideoCallScreenDelegate createVideoCallScreenDelegate(
+      Context context, VideoCallScreen videoCallScreen);
 
   void onCallStateChanged(int newState);
 
@@ -73,30 +79,4 @@ public interface VideoTech {
 
     void onVideoUpgradeRequestReceived();
   }
-
-  /**
-   * Defines different states of session modify requests, which are used to upgrade to video, or
-   * downgrade to audio.
-   */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-    SESSION_MODIFICATION_STATE_NO_REQUEST,
-    SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE,
-    SESSION_MODIFICATION_STATE_REQUEST_FAILED,
-    SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
-    SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT,
-    SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED,
-    SESSION_MODIFICATION_STATE_REQUEST_REJECTED,
-    SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE
-  })
-  @interface SessionModificationState {}
-
-  int SESSION_MODIFICATION_STATE_NO_REQUEST = 0;
-  int SESSION_MODIFICATION_STATE_WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE = 1;
-  int SESSION_MODIFICATION_STATE_REQUEST_FAILED = 2;
-  int SESSION_MODIFICATION_STATE_RECEIVED_UPGRADE_TO_VIDEO_REQUEST = 3;
-  int SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT = 4;
-  int SESSION_MODIFICATION_STATE_UPGRADE_TO_VIDEO_REQUEST_FAILED = 5;
-  int SESSION_MODIFICATION_STATE_REQUEST_REJECTED = 6;
-  int SESSION_MODIFICATION_STATE_WAITING_FOR_RESPONSE = 7;
 }

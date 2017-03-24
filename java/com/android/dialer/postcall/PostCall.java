@@ -43,6 +43,8 @@ public class PostCall {
   private static final String KEY_POST_CALL_CALL_NUMBER = "post_call_call_number";
   private static final String KEY_POST_CALL_MESSAGE_SENT = "post_call_message_sent";
 
+  private static Snackbar activeSnackbar;
+
   public static void promptUserForMessageIfNecessary(Activity activity, View rootView) {
     if (isEnabled(activity)) {
       if (shouldPromptUserToViewSentMessage(activity)) {
@@ -50,6 +52,13 @@ public class PostCall {
       } else if (shouldPromptUserToSendMessage(activity)) {
         promptUserToSendMessage(activity, rootView);
       }
+    }
+  }
+
+  public static void closePrompt() {
+    if (activeSnackbar != null && activeSnackbar.isShown()) {
+      activeSnackbar.dismiss();
+      activeSnackbar = null;
     }
   }
 
@@ -64,11 +73,14 @@ public class PostCall {
           activity.startActivity(PostCallActivity.newIntent(activity, getPhoneNumber(activity)));
         };
 
-    Snackbar.make(rootView, message, Snackbar.LENGTH_INDEFINITE)
-        .setAction(addMessage, onClickListener)
-        .setActionTextColor(
-            activity.getResources().getColor(R.color.dialer_snackbar_action_text_color))
-        .show();
+    int durationMs =
+        (int) ConfigProviderBindings.get(activity).getLong("post_call_prompt_duration_ms", 8_000);
+    activeSnackbar =
+        Snackbar.make(rootView, message, durationMs)
+            .setAction(addMessage, onClickListener)
+            .setActionTextColor(
+                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color));
+    activeSnackbar.show();
     Logger.get(activity).logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE);
     PreferenceManager.getDefaultSharedPreferences(activity)
         .edit()
@@ -91,19 +103,20 @@ public class PostCall {
           DialerUtils.startActivityWithErrorToast(activity, intent);
         };
 
-    Snackbar.make(rootView, message, Snackbar.LENGTH_INDEFINITE)
-        .setAction(addMessage, onClickListener)
-        .setActionTextColor(
-            activity.getResources().getColor(R.color.dialer_snackbar_action_text_color))
-        .addCallback(
-            new BaseCallback<Snackbar>() {
-              @Override
-              public void onDismissed(Snackbar snackbar, int i) {
-                super.onDismissed(snackbar, i);
-                clear(snackbar.getContext());
-              }
-            })
-        .show();
+    activeSnackbar =
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
+            .setAction(addMessage, onClickListener)
+            .setActionTextColor(
+                activity.getResources().getColor(R.color.dialer_snackbar_action_text_color))
+            .addCallback(
+                new BaseCallback<Snackbar>() {
+                  @Override
+                  public void onDismissed(Snackbar snackbar, int i) {
+                    super.onDismissed(snackbar, i);
+                    clear(snackbar.getContext());
+                  }
+                });
+    activeSnackbar.show();
     Logger.get(activity)
         .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE);
     PreferenceManager.getDefaultSharedPreferences(activity)

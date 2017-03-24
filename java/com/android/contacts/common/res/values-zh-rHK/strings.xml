@@ -213,7 +213,6 @@
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"名字在前"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"姓氏在前"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"新聯絡人的預設帳戶"</string>
-    <string name="sync_contact_metadata_title" msgid="6586379532092486928">"同步處理聯絡人元數據 [DOGFOOD]"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"同步處理聯絡人元數據"</string>
     <string name="setting_about" msgid="5253319937596745755">"有關通訊錄"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"設定"</string>

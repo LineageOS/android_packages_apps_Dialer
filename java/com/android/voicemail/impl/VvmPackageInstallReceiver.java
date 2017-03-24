@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 
 /**
@@ -32,6 +33,10 @@ public class VvmPackageInstallReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
+      return;
+    }
+
     if (intent.getData() == null) {
       return;
     }

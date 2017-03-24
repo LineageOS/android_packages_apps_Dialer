@@ -25,6 +25,7 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.telecom.VideoProfile.CameraCapabilities;
 import android.view.Surface;
+import android.view.SurfaceView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
@@ -39,14 +40,13 @@ import com.android.incallui.call.DialerCall.CameraDirection;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.InCallVideoCallCallbackNotifier;
 import com.android.incallui.call.InCallVideoCallCallbackNotifier.SurfaceChangeListener;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videosurface.protocol.VideoSurfaceDelegate;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
-import com.android.incallui.videotech.VideoTech;
-import com.android.incallui.videotech.VideoTech.SessionModificationState;
+import com.android.incallui.videotech.utils.SessionModificationState;
+import com.android.incallui.videotech.utils.VideoUtils;
 import java.util.Objects;
 
 /**
@@ -400,6 +400,11 @@ public class VideoCallPresenter
   }
 
   @Override
+  public void setSurfaceViews(SurfaceView preview, SurfaceView remote) {
+    throw Assert.createUnsupportedOperationFailException();
+  }
+
+  @Override
   public int getDeviceOrientation() {
     return mDeviceOrientation;
   }
@@ -535,8 +540,7 @@ public class VideoCallPresenter
       updateFullscreenAndGreenScreenMode(
           mPrimaryCall.getState(), mPrimaryCall.getVideoTech().getSessionModificationState());
     } else {
-      updateFullscreenAndGreenScreenMode(
-          State.INVALID, VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST);
+      updateFullscreenAndGreenScreenMode(State.INVALID, SessionModificationState.NO_REQUEST);
     }
   }
 
@@ -853,7 +857,7 @@ public class VideoCallPresenter
     showVideoUi(
         VideoProfile.STATE_AUDIO_ONLY,
         DialerCall.State.ACTIVE,
-        VideoTech.SESSION_MODIFICATION_STATE_NO_REQUEST,
+        SessionModificationState.NO_REQUEST,
         false /* isRemotelyHeld */);
     enableCamera(mVideoCall, false);
     InCallPresenter.getInstance().setFullScreen(false);

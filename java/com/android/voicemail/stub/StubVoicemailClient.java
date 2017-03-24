@@ -30,6 +30,11 @@ public final class StubVoicemailClient implements VoicemailClient {
   public StubVoicemailClient() {}
 
   @Override
+  public boolean isVoicemailModuleEnabled() {
+    return false;
+  }
+
+  @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {}
 

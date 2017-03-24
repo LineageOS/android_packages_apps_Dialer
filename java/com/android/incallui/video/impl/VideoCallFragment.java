@@ -62,7 +62,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
-import com.android.incallui.call.VideoUtils;
 import com.android.incallui.contactgrid.ContactGridManager;
 import com.android.incallui.hold.OnHoldFragment;
 import com.android.incallui.incall.protocol.InCallButtonIds;
@@ -82,6 +81,7 @@ import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.video.protocol.VideoCallScreenDelegateFactory;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
+import com.android.incallui.videotech.utils.VideoUtils;
 
 /** Contains UI elements for a video call. */
 public class VideoCallFragment extends Fragment
@@ -281,7 +281,7 @@ public class VideoCallFragment extends Fragment
             .newInCallScreenDelegate();
     videoCallScreenDelegate =
         FragmentUtils.getParentUnsafe(this, VideoCallScreenDelegateFactory.class)
-            .newVideoCallScreenDelegate();
+            .newVideoCallScreenDelegate(this);
 
     speakerButtonController =
         new SpeakerButtonController(speakerButton, inCallButtonUiDelegate, videoCallScreenDelegate);
