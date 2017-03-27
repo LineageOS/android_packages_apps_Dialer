@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.common;
+package com.android.dialer.common.concurrent;
 
 import android.os.AsyncTask;
 import android.support.annotation.MainThread;

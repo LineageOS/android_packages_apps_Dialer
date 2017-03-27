@@ -28,8 +28,8 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import com.android.dialer.common.AsyncTaskExecutor;
-import com.android.dialer.common.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.AsyncTaskExecutor;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.voicemail.VoicemailClient;
 

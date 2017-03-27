@@ -58,9 +58,9 @@ import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.AsyncTaskExecutor;
-import com.android.dialer.common.AsyncTaskExecutors;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.AsyncTaskExecutor;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -457,6 +457,7 @@ public class CallLogAdapter extends GroupingListAdapter
       final long rowId,
       final PhoneCallDetails details,
       final CallDetailsEntries callDetailsEntries) {
+    LogUtil.d("CallLogAdapter.loadAndRender", "position: %d", views.getAdapterPosition());
     // Reset block and spam information since this view could be reused which may contain
     // outdated data.
     views.isSpam = false;
@@ -667,12 +668,13 @@ public class CallLogAdapter extends GroupingListAdapter
         && !isVoicemailNumber) {
       // Lookup contacts with this number
       // Only do remote lookup in first 5 rows.
+      int position = views.getAdapterPosition();
       info =
           mContactInfoCache.getValue(
               details.number + details.postDialDigits,
               details.countryIso,
               details.cachedContactInfo,
-              rowId
+              position
                   < Bindings.get(mActivity)
                       .getConfigProvider()
                       .getLong("number_of_call_to_do_remote_lookup", 5L));
@@ -698,6 +700,17 @@ public class CallLogAdapter extends GroupingListAdapter
       details.sourceType = info.sourceType;
       details.objectId = info.objectId;
       details.contactUserType = info.userType;
+    }
+    LogUtil.d(
+        "CallLogAdapter.loadData",
+        "position:%d, update geo info: %s, cequint caller id geo: %s, photo uri: %s <- %s",
+        views.getAdapterPosition(),
+        details.geocode,
+        info.geoDescription,
+        details.photoUri,
+        info.photoUri);
+    if (!TextUtils.isEmpty(info.geoDescription)) {
+      details.geocode = info.geoDescription;
     }
 
     views.info = info;

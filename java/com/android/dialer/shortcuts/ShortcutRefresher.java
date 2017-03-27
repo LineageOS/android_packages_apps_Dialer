@@ -23,10 +23,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.AsyncTaskExecutor;
-import com.android.dialer.common.AsyncTaskExecutors;
-import com.android.dialer.common.FallibleAsyncTask;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.AsyncTaskExecutor;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.FallibleAsyncTask;
 import java.util.ArrayList;
 import java.util.List;
 

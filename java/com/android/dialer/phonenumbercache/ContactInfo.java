@@ -38,6 +38,7 @@ public class ContactInfo {
   public String label;
   public String number;
   public String formattedNumber;
+  public String geoDescription;
   /*
    * ContactInfo.normalizedNumber is a column value returned by PhoneLookup query. By definition,
    * it's E164 representation.
@@ -121,7 +122,13 @@ public class ContactInfo {
     if (userType != other.userType) {
       return false;
     }
-    return carrierPresence == other.carrierPresence;
+    if (carrierPresence != other.carrierPresence) {
+      return false;
+    }
+    if (!TextUtils.equals(geoDescription, other.geoDescription)) {
+      return false;
+    }
+    return true;
   }
 
   @Override
@@ -160,6 +167,8 @@ public class ContactInfo {
         + userType
         + ", carrierPresence="
         + carrierPresence
+        + ", geoDescription="
+        + geoDescription
         + '}';
   }
 }

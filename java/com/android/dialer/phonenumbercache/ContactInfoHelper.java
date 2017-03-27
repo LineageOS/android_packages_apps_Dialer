@@ -33,12 +33,14 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.Log;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.oem.CequintCallerIdManager;
+import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
@@ -131,7 +133,7 @@ public class ContactInfoHelper {
       }
     } catch (IllegalArgumentException e) {
       // Avoid dialer crash when lookup key is not valid
-      Log.e(TAG, "IllegalArgumentException in lookUpDisplayNameAlternative", e);
+      LogUtil.e(TAG, "IllegalArgumentException in lookUpDisplayNameAlternative", e);
     } finally {
       if (cursor != null) {
         cursor.close();
@@ -508,6 +510,11 @@ public class ContactInfoHelper {
         values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
         needsUpdate = true;
       }
+
+      if (!TextUtils.equals(updatedInfo.geoDescription, callLogInfo.geoDescription)) {
+        values.put(Calls.GEOCODED_LOCATION, updatedInfo.geoDescription);
+        needsUpdate = true;
+      }
     } else {
       // No previous values, store all of them.
       values.put(Calls.CACHED_NAME, updatedInfo.name);
@@ -521,6 +528,7 @@ public class ContactInfoHelper {
           Calls.CACHED_PHOTO_URI,
           UriUtils.uriToString(UriUtils.nullForNonContactsUri(updatedInfo.photoUri)));
       values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
+      values.put(Calls.GEOCODED_LOCATION, updatedInfo.geoDescription);
       needsUpdate = true;
     }
 
@@ -547,7 +555,7 @@ public class ContactInfoHelper {
                 new String[] {number, countryIso});
       }
     } catch (SQLiteFullException e) {
-      Log.e(TAG, "Unable to update contact info in call log db", e);
+      LogUtil.e(TAG, "Unable to update contact info in call log db", e);
     }
   }
 
@@ -582,5 +590,29 @@ public class ContactInfoHelper {
   public boolean canReportAsInvalid(int sourceType, String objectId) {
     return mCachedNumberLookupService != null
         && mCachedNumberLookupService.canReportAsInvalid(sourceType, objectId);
+  }
+
+  /**
+   * Update ContactInfo by querying to Cequint Caller ID. Only name, geoDescription and photo uri
+   * will be updated if available.
+   */
+  public void updateFromCequintCallerId(ContactInfo info, String number) {
+    if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
+      return;
+    }
+    CequintCallerIdContact cequintCallerIdContact =
+        CequintCallerIdManager.getCequintCallerIdContact(mContext, number);
+    if (cequintCallerIdContact == null) {
+      return;
+    }
+    if (!TextUtils.isEmpty(cequintCallerIdContact.name)) {
+      info.name = cequintCallerIdContact.name;
+    }
+    if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
+      info.geoDescription = cequintCallerIdContact.geoDescription;
+    }
+    if (cequintCallerIdContact.imageUrl != null) {
+      info.photoUri = UriUtils.parseUriOrNull(cequintCallerIdContact.imageUrl);
+    }
   }
 }

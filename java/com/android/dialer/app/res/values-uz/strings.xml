@@ -40,7 +40,7 @@
     <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Javobsiz chaqiruvlar"</string>
     <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> ta javobsiz chaqiruv"</string>
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Telefon"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"SMS yuborish"</string>
+    <string name="notification_missedCall_message" msgid="5086910028988305964">"SMS yozish"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ta ovozli xabar </item>
@@ -143,7 +143,7 @@
     <string name="contact_tooltip" msgid="8871614660967439999">"Barcha raqamlarni ko‘rish uchun rasm ustiga bosing yoki joyini o‘zgartirish uchun rasmni bosib turing."</string>
     <string name="remove_contact" msgid="2353580570488923668">"O‘chirish"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Video qo‘ng‘iroq"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"SMS yuborish"</string>
+    <string name="call_log_action_send_message" msgid="6948727362660115554">"Xabar yuborish"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Chaqiruv tafsilotlari"</string>
     <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Yuborish:"</string>
     <string name="call_log_action_call" msgid="682724094251540583">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

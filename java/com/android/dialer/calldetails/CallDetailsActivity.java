@@ -32,7 +32,7 @@ import com.android.dialer.callcomposer.nano.CallComposerContact;
 import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.protos.ProtoParsers;

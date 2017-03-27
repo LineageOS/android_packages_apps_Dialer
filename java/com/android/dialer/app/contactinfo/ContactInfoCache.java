@@ -18,9 +18,11 @@ package com.android.dialer.app.contactinfo;
 
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.ExpirableCache;
@@ -97,39 +99,29 @@ public class ContactInfoCache {
     NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
     ExpirableCache.CachedValue<ContactInfo> cachedInfo = mCache.getCachedValue(numberCountryIso);
     ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
+    int requestType =
+        remoteLookupIfNotFoundLocally
+            ? ContactInfoRequest.TYPE_LOCAL_AND_REMOTE
+            : ContactInfoRequest.TYPE_LOCAL;
     if (cachedInfo == null) {
       mCache.put(numberCountryIso, ContactInfo.EMPTY);
       // Use the cached contact info from the call log.
       info = callLogContactInfo;
       // The db request should happen on a non-UI thread.
       // Request the contact details immediately since they are currently missing.
-      int requestType =
-          remoteLookupIfNotFoundLocally
-              ? ContactInfoRequest.TYPE_LOCAL_AND_REMOTE
-              : ContactInfoRequest.TYPE_LOCAL;
       enqueueRequest(number, countryIso, callLogContactInfo, /* immediate */ true, requestType);
       // We will format the phone number when we make the background request.
     } else {
       if (cachedInfo.isExpired()) {
         // The contact info is no longer up to date, we should request it. However, we
         // do not need to request them immediately.
-        enqueueRequest(
-            number,
-            countryIso,
-            callLogContactInfo, /* immediate */
-            false,
-            ContactInfoRequest.TYPE_LOCAL);
+        enqueueRequest(number, countryIso, callLogContactInfo, /* immediate */ false, requestType);
       } else if (!callLogInfoMatches(callLogContactInfo, info)) {
         // The call log information does not match the one we have, look it up again.
         // We could simply update the call log directly, but that needs to be done in a
         // background thread, so it is easier to simply request a new lookup, which will, as
         // a side-effect, update the call log.
-        enqueueRequest(
-            number,
-            countryIso,
-            callLogContactInfo, /* immediate */
-            false,
-            ContactInfoRequest.TYPE_LOCAL);
+        enqueueRequest(number, countryIso, callLogContactInfo, /* immediate */ false, requestType);
       }
 
       if (info == ContactInfo.EMPTY) {
@@ -152,9 +144,19 @@ public class ContactInfoCache {
    * to update its content.
    */
   private boolean queryContactInfo(ContactInfoRequest request) {
+    LogUtil.d(
+        "ContactInfoCache.queryContactInfo",
+        "request number: %s, type: %d",
+        LogUtil.sanitizePhoneNumber(request.number),
+        request.type);
     ContactInfo info;
     if (request.isLocalRequest()) {
       info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
+      // TODO: Maybe skip look up if it's already available in cached number lookup service.
+      long start = SystemClock.uptimeMillis();
+      mContactInfoHelper.updateFromCequintCallerId(info, request.number);
+      long time = SystemClock.uptimeMillis() - start;
+      LogUtil.d("ContactInfoCache.queryContactInfo", "Cequint Caller Id look up takes %d ms", time);
       if (request.type == ContactInfoRequest.TYPE_LOCAL_AND_REMOTE) {
         if (!mContactInfoHelper.hasName(info)) {
           enqueueRequest(

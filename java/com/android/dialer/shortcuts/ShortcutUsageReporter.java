@@ -35,9 +35,9 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.AsyncTaskExecutor;
-import com.android.dialer.common.AsyncTaskExecutors;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.AsyncTaskExecutor;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 
 /**
  * Reports outgoing calls as shortcut usage.

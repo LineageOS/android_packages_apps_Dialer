@@ -23,8 +23,6 @@ import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.AsyncTaskExecutor;
-import com.android.dialer.common.AsyncTaskExecutors;
 import com.android.dialer.common.LogUtil;
 
 /**

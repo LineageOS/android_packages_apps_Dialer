@@ -14,12 +14,12 @@
  * limitations under the License
  */
 
-package com.android.dialer.common;
+package com.android.dialer.common.concurrent;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.common.FallibleAsyncTask.FallibleTaskResult;
+import com.android.dialer.common.concurrent.FallibleAsyncTask.FallibleTaskResult;
 import com.google.auto.value.AutoValue;
 
 /**

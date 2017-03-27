@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -42,6 +43,8 @@ import android.util.ArraySet;
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.nano.ContactLookupResult;
+import com.android.dialer.oem.CequintCallerIdManager;
+import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -475,6 +478,25 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     return cacheEntry;
   }
 
+  private void maybeUpdateFromCequintCallerId(CallerInfo callerInfo, boolean isIncoming) {
+    if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
+      return;
+    }
+    CequintCallerIdContact cequintCallerIdContact =
+        CequintCallerIdManager.getCequintCallerIdContactForInCall(
+            mContext, callerInfo.phoneNumber, callerInfo.cnapName, isIncoming);
+
+    if (!TextUtils.isEmpty(cequintCallerIdContact.name)) {
+      callerInfo.name = cequintCallerIdContact.name;
+    }
+    if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
+      callerInfo.geoDescription = cequintCallerIdContact.geoDescription;
+    }
+    if (cequintCallerIdContact.imageUrl != null) {
+      callerInfo.contactDisplayPhotoUri = Uri.parse(cequintCallerIdContact.imageUrl);
+    }
+  }
+
   /**
    * Implemented for ContactsAsyncHelper.OnImageLoadCompleteListener interface. Update contact photo
    * when image is loaded in worker thread.
@@ -669,6 +691,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     int queryId;
     /** The phone number without any changes to display to the user (ex: cnap...) */
     String originalPhoneNumber;
+
     boolean isBusiness;
 
     @Override
@@ -738,6 +761,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       if (!isWaitingForThisQuery(cw.callId, mQueryToken.mQueryId)) {
         return;
       }
+      long start = SystemClock.uptimeMillis();
+      maybeUpdateFromCequintCallerId(ci, mIsIncoming);
+      long time = SystemClock.uptimeMillis() - start;
+      Log.d(TAG, "Cequint Caller Id look up takes " + time + " ms.");
       updateCallerInfoInCacheOnAnyThread(
           cw.callId, cw.numberPresentation, ci, mIsIncoming, true, mQueryToken);
     }

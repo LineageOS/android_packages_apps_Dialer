@@ -29,7 +29,7 @@ import com.android.dialer.callcomposer.camera.exif.ExifInterface;
 import com.android.dialer.callcomposer.camera.exif.ExifTag;
 import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.FallibleAsyncTask;
+import com.android.dialer.common.concurrent.FallibleAsyncTask;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.util.DialerUtils;
 import java.io.File;

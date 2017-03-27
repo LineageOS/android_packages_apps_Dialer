@@ -35,9 +35,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
-import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -1028,6 +1028,9 @@ public class AnswerFragment extends Fragment
   @Nullable
   private MultimediaData getSessionData() {
     if (primaryInfo == null) {
+      return null;
+    }
+    if (isVideoUpgradeRequest()) {
       return null;
     }
     return primaryInfo.multimediaData;

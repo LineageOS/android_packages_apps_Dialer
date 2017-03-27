@@ -46,7 +46,7 @@
     <string name="sms_mobile" msgid="8883045857887736518">"मोबाईलवर मजकूर पाठवा"</string>
     <string name="sms_work" msgid="4158595439553450966">"कार्यस्थानी मजकूर पाठवा"</string>
     <string name="sms_fax_work" msgid="5483726627718055248">"कार्य फॅक्सवर मजकूर पाठवा"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"निवासस्थान फॅक्सवर मजकूर पाठवा"</string>
+    <string name="sms_fax_home" msgid="9219265155770746077">"घर फॅक्सवर मजकूर पाठवा"</string>
     <string name="sms_pager" msgid="4901085068525193933">"पेजरवर मजकूर पाठवा"</string>
     <string name="sms_other" msgid="1742702947993285933">"मजकूर"</string>
     <string name="sms_callback" msgid="5833483630377538308">"कॉलबॅक वर मजकूर पाठवा"</string>

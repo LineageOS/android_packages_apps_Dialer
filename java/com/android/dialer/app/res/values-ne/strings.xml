@@ -193,7 +193,7 @@
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"कल रोक्दै"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"भ्वाइस मेल"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"कल अवरुद्ध अस्थायी रुपमा निष्क्रिय"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"कल अवरुद्ध अस्थायी रुपमा असक्षम गरिएको छ किनभने तपाईँले अन्तिम ४८ घण्टा भित्र यस फोनबाट आपत्कालीन सेवाहरू सम्पर्क गर्नुभयो। एकपटक ४८ घण्टा अवधि समाप्त भएपछि यो स्वचालित रूपले पुनः सक्रिय हुनेछ।"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"कल अवरुद्ध अस्थायी रुपमा असक्षम गरिएको छ किनभने तपाईँले अन्तिम ४८ घन्टा भित्र यस फोनबाट आपत्कालीन सेवाहरू सम्पर्क गर्नुभयो। एकपटक ४८ घन्टा अवधि समाप्त भएपछि यो स्वचालित रूपले पुनः सक्रिय हुनेछ।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"नम्बरहरू आयात गर्नुहोस्"</string>
     <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"तपाईँले पहिल्यै केही कल गर्ने व्यक्तिहरूलाई अन्य अनुप्रयोगहरू मार्फत स्वत: रूपमा भ्वाइस मेल पठाउन नै चिन्ह लगाउनु भएको थियो।"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"नम्बरहरू हेर्नुहोस्"</string>
