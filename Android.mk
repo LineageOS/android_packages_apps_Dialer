@@ -219,6 +219,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-support-v7-cardview \
 	android-support-v7-recyclerview \
 	com.android.vcard \
+	dialer-commons-io-target \
 	dialer-dagger2-target \
 	dialer-disklrucache-target \
 	dialer-gifdecoder-target \
@@ -230,7 +231,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	jsr305 \
 	libphonenumber \
 	libprotobuf-java-nano \
-	volley
+	volley \
 
 LOCAL_JAVA_LIBRARIES := \
 	org.apache.http.legacy \
@@ -371,6 +372,18 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := dialer-javax-inject-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-commons-io-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/commons-io/commons-io/2.4/commons-io-2.4$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
