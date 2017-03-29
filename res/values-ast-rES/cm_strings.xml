@@ -21,10 +21,20 @@
   <string name="incall_vibrate_45_title">Vibrar cada minutu</string>
   <!-- Forward lookup -->
   <string name="nearby_places">Llugares averaos</string>
+  <string name="people">Persones</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
+  <string name="enable_forward_lookup_title">Gueta direuta</string>
   <string name="enable_forward_lookup_summary">Amuesa llugares averaos cuando guetes nel marcador</string>
+  <string name="enable_people_lookup_title">Gueta de persones</string>
+  <string name="enable_people_lookup_summary">Amosar resultaos de persones al guetar nel marcador</string>
+  <string name="enable_reverse_lookup_title">Gueta inversa</string>
+  <string name="enable_reverse_lookup_summary">Guetar información sobre la persona o llugar pa llamaes de númberos desconocíos</string>
+  <string name="forward_lookup_provider_title">Fornidor de gueta direuta</string>
+  <string name="people_lookup_provider_title">Fornidor pa guetar persones</string>
+  <string name="reverse_lookup_provider_title">Fornidor de busca inversa</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinu (CN)</string>
   <string name="speed_dial_edit_title">Editar marcáu rápidu <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">Introduz un númberu, por favor</string>
   <string name="call_log_show_all_slots">Toles SIM</string>
@@ -74,20 +84,27 @@
   <string name="recentOutgoing_empty">Nun tienes llamaes salientes.</string>
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">El to rexistru de llamaes ta baleru</string>
+  <string name="calllog_search_hint">Guetar rexistru de llamaes</string>
   <string name="no_call_log">Nun hai rexistru de llamaes</string>
   <string name="clear">Llimpiar</string>
   <string name="description_clear_search">Llimpiar gueta</string>
   <string name="video_call_welcome_title"><b>Dámoste l\'acoyida al marcador nuevu de videollamaes</b></string>
   <string name="video_call_welcome_message">¡Préstamos oyer esa voz familiar na fin de la llinia, pero falar cara a cara ye muncho meyor! Equí ta lo que deberíes saber pa consiguir conexones en tiempu real (¿FaceTime?):\n Precisarás tar nuna rede 4G LTE o Wi-Fi\n El preséu al que llames ha ser tamién compatible coles videollamaes\n Les videollamaes usen alta velocidá\n Tamién pues pasar d\'una llamada a una videollamada\n\n Mira <a>https://support.t-mobile.com/docs/DOC-23574</a> pa más información.</string>
   <string name="video_call_welcome_message_repeat">Amosar esti mensaxe cada vegada</string>
+  <string name="toast_change_video_call_failed">Nun pue camudase a videollamada, formatu incorreutu de númberu</string>
   <string name="toast_make_video_call_failed">Nun pue facese una videollamada, formatu incorreutu de númberu</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videollamada, amúesame</string>
+  <string name="overflowRXCallMenuItemText">Videollamada, escuéndime</string>
   <string name="overflowVOCallMenuItemText">Llamada</string>
   <string name="video_call">Videollamada</string>
   <string name="call_data_info_label">Temporizadores d\'usu de llamaes/datos</string>
+  <string name="call_data_info_description">Tiempu d\'usu de datos y videollamaes</string>
   <string name="alert_call_over_wifi">Les llamaes fadránse per Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Nun hai rede de móvil disponible. Conéutate a una Wi-Fi disponible pa facer llamaes.</string>
   <string name="alert_user_connect_to_wifi_for_call">Conéutate a la Wi-Fi pa facer llamaes.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">Calca equí pa ver les redes disponibles</string>
+  <string name="menu_add_to_4g_conference_call">Amestar a conferencia 4G</string>
   <string name="menu_4g_conference_call">Conferencia 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_volte">Llamada 4G entrante</string>

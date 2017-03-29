@@ -95,6 +95,8 @@
   <string name="clear">Wyczyść</string>
   <string name="description_clear_search">Wyczyść wyszukiwanie</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">Połączenie głosowe</string>
+  <string name="video_call">Połączenie wideo</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
