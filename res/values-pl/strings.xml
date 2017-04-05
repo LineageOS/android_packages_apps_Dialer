@@ -140,10 +140,10 @@
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Nie można zadzwonić pod ten numer"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Aby skonfigurować pocztę głosową, przejdź do Menu &gt; Ustawienia."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Aby połączyć się z pocztą głosową, najpierw wyłącz tryb samolotowy."</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"Wczytywanie…"</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"Wczytuję…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"Numer MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Wczytywanie z karty SIM…"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Wczytuję z karty SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakty z karty SIM"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"Nie jest dostępna aplikacja do obsługi kontaktów"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Wyszukiwanie głosowe jest niedostępne"</string>

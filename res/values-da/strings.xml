@@ -124,7 +124,7 @@
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Uaflyttet besked på telefonsvareren"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Start talesøgning"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="unknown" msgid="740067747858270469">"Ukendte"</string>
+    <string name="unknown" msgid="740067747858270469">"Ukendt"</string>
     <string name="voicemail" msgid="3851469869202611441">"Telefonsvarer"</string>
     <string name="private_num" msgid="6374339738119166953">"Privat nummer"</string>
     <string name="payphone" msgid="7726415831153618726">"Mønttelefon"</string>

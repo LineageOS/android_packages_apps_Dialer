@@ -29,16 +29,16 @@
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯಲಾಗಿದೆ"</string>
-    <string name="block_number_undo" msgid="591338370336724156">"ರದ್ದುಮಾಡು"</string>
-    <string name="call_details_delete" msgid="1833359621896346955">"ಅಳಿಸು"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"ರದ್ದುಮಾಡಿ"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"ಅಳಿಸಿ"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಎಡಿಟ್ ಮಾಡಿ"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"ಕರೆ ಇತಿಹಾಸ ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಿ"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"ಧ್ವನಿಮೇಲ್‌ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ಧ್ವನಿಮೇಲ್ ಅಳಿಸಲಾಗಿದೆ"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಲಾಗಿದೆ"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ರದ್ದುಮಾಡು"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ರದ್ದುಮಾಡಿ"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ಆರ್ಕೈವ್‌ಗೆ ಹೋಗು"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸುವುದೇ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ಇದು ನಿಮ್ಮ ಇತಿಹಾಸದಿಂದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ಅಳಿಸುತ್ತದೆ"</string>
@@ -72,7 +72,7 @@
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ಹೊಸ ಧ್ವನಿಮೇಲ್ ಕಾಯುತ್ತಿದೆ. ಇದೀಗ ಲೋಡ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಿ"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ಆಡಿಯೋ ಲಭ್ಯವಿಲ್ಲ"</string>
-    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ಹೊಂದಿಸು"</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ಹೊಂದಿಸಿ"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"ಧ್ವನಿಮೇಲ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"ಸಂಖ್ಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"</string>
@@ -124,7 +124,7 @@
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ಆಲಿಸಲಾಗದ ಧ್ವನಿಮೇಲ್‌"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ಧ್ವನಿ ಹುಡುಕಾಟ ಪ್ರಾರಂಭಿಸಿ"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
-    <string name="unknown" msgid="740067747858270469">"ಅಜ್ಞಾತ"</string>
+    <string name="unknown" msgid="740067747858270469">"ಅಪರಿಚಿತ"</string>
     <string name="voicemail" msgid="3851469869202611441">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="private_num" msgid="6374339738119166953">"ಖಾಸಗಿ ಸಂಖ್ಯೆ"</string>
     <string name="payphone" msgid="7726415831153618726">"ಪೇಫೋನ್"</string>
@@ -176,7 +176,7 @@
     <string name="tab_all_contacts" msgid="1410922767166533690">"ಸಂಪರ್ಕಗಳು"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"</string>
-    <string name="favorite_hidden_undo" msgid="2508998611039406474">"ರದ್ದುಮಾಡು"</string>
+    <string name="favorite_hidden_undo" msgid="2508998611039406474">"ರದ್ದುಮಾಡಿ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ಹೊಸ ಸಂಪರ್ಕ ರಚಿಸು"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು"</string>
@@ -262,7 +262,7 @@
     <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"ತುರ್ತು ಕರೆಯನ್ನು ಮಾಡಿರುವ ಕಾರಣದಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ಆನ್ ಮಾಡು"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸಿ"</string>
     <string name="permission_no_speeddial" msgid="6882563445996184051">"ವೇಗ ಡಯಲ್ ಸಕ್ರಿಯಗೊಳಿಸಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_no_calllog" msgid="555711464287041043">"ನಿಮ್ಮ ಕರೆಯ ಲಾಗ್ ಅನ್ನು ವೀಕ್ಷಿಸಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_no_contacts" msgid="6237980143178936279">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ವೀಕ್ಷಿಸಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>

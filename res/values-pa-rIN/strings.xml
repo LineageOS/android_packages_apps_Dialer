@@ -27,7 +27,7 @@
     <string name="copy_transcript_text" msgid="5652787482893879382">"ਲਿਪੀ ਬਦਲਣਾ ਕਾਪੀ ਕਰੋ"</string>
     <string name="action_block_number" msgid="1482657602262262134">"ਨੰਬਰ ਨੂੰ ਬਲੌਕ ਕਰੋ"</string>
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> ਬਲੌਕ ਕੀਤਾ"</string>
-    <string name="action_unblock_number" msgid="3043777622269776127">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"ਨੰਬਰ ਨੂੰ ਅਣਬਲੌਕ ਕਰੋ"</string>
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> ਅਨਬਲੌਕ ਕੀਤਾ"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"ਹਟਾਓ"</string>
@@ -148,7 +148,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"ਇੱਕ ਫੋਨ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿਉਂਕਿ ਫੋਨ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਅਯੋਗ ਬਣਾਇਆ ਗਿਆ ਹੈ।"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ਉਸ ਲਈ ਇਸ ਡੀਵਾਈਸ ਤੇ ਕੋਈ ਐਪ ਨਹੀਂ"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"ਸੰਪਰਕ ਖੋਜੋ"</string>
-    <string name="block_number_search_hint" msgid="5409571607043872758">"ਨੰਬਰ ਜੋੜੋ ਜਾਂ ਸੰਪਰਕ ਖੋਜੋ"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"ਨੰਬਰ ਸ਼ਾਮਲ ਕਰੋ ਜਾਂ ਸੰਪਰਕ ਖੋਜੋ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"ਤੁਹਾਡਾ ਕਾਲ ਇਤਿਹਾਸ ਖਾਲੀ ਹੈ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ਇੱਕ ਕਾਲ ਕਰੋ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਵੀ ਮਿਸਡ ਕਾਲਾਂ ਨਹੀਂ ਹਨ।"</string>
@@ -168,8 +168,8 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ, ਪਰ ਕਾਲਰ ਹਾਲੇ ਵੀ ਤੁਹਾਡੇ ਲਈ ਵੌਇਸਮੇਲਾਂ ਛੱਡ ਸਕਦਾ ਹੈ।"</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"ਤੁਹਾਨੂੰ ਹੁਣ ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਜਾਂ ਲਿਖਤ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਣਗੇ।"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ਬਲੌਕ ਕਰੋ"</string>
-    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਅਨਲੌਕ ਕਰਨਾ ਹੈ?"</string>
-    <string name="unblock_number_ok" msgid="6449899182699684786">"ਅਨਬਲੌਕ ਕਰੋ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਅਣਬਲੌਕ ਕਰਨਾ ਹੈ?"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"ਅਣਬਲੌਕ ਕਰੋ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ਸਪੀਡ ਡਾਇਲ"</string>
     <string name="tab_history" msgid="2563144697322434940">"ਕਾਲ ਇਤਿਹਾਸ"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"ਸੰਪਰਕ"</string>
@@ -250,8 +250,8 @@
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ਆਯਾਤ ਕਰੋ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ਆਯਾਤ ਅਸਫਲ ਹੋਇਆ"</string>
     <string name="voicemail_archive_failed" msgid="6263467962738772223">"ਵੌਇਸਮੇਲ ਨੂੰ ਪੁਰਾਲੇਖਬੱਧ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ।"</string>
-    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
-    <string name="addBlockedNumber" msgid="6064812257482886526">"ਨੰਬਰ ਜੋੜੋ"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ਨੰਬਰ ਨੂੰ ਅਣਬਲੌਕ ਕਰੋ"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"ਨੰਬਰ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ਇਹਨਾਂ ਨੰਬਰਾਂ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ ਅਤੇ ਵੌਇਸਮੇਲਾਂ ਆਪਣੇ ਆਪ ਮਿਟਾ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ।"</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ਇਹਨਾਂ ਨੰਬਰਾਂ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ, ਪਰ ਇਹ ਹਾਲੇ ਵੀ ਤੁਹਾਡੇ ਲਈ ਵੌਇਸਮੇਲਾਂ ਛੱਡ ਸਕਦੇ ਹਨ।"</string>
     <string name="block_list" msgid="7760188925338078011">"ਬਲੌਕ ਕੀਤੇ ਨੰਬਰ"</string>

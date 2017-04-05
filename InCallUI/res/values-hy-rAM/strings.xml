@@ -36,7 +36,7 @@
     <string name="wild_prompt_str" msgid="8178750766679617355">"Փոխարինել կոպիտ գրանշանը"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"Կոնֆերանս զանգ <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Ձայնային փոստի համարը"</string>
-    <string name="card_title_dialing" msgid="5046026076417718916">"Համարարկում"</string>
+    <string name="card_title_dialing" msgid="5046026076417718916">"Համարը հավաքվում է"</string>
     <string name="card_title_redialing" msgid="8072468059192027844">"Վերահամարարկում"</string>
     <string name="card_title_conf_call" msgid="1747835072739982104">"Կոնֆերանս զանգ"</string>
     <string name="card_title_incoming_call" msgid="4138485434087223132">"Մուտքային զանգ"</string>
@@ -53,7 +53,7 @@
     <string name="card_title_video_call_rejected" msgid="2885215432045215465">"Տեսազանգի հարցումը մերժվել է"</string>
     <string name="card_title_callback_number" msgid="7646082782307705748">"Հետադարձ զանգի համարը՝\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Արտակարգ իրավիճակների հետադարձ զանգի համարը՝\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="8080968169444117163">"Համարարկում է"</string>
+    <string name="notification_dialing" msgid="8080968169444117163">"Համարը հավաքվում է"</string>
     <string name="notification_missedCallTitle" msgid="2774630248151712215">"Բաց թողնված զանգ"</string>
     <string name="notification_missedCallsTitle" msgid="263275811089605859">"Բաց թողնված զանգեր"</string>
     <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> բաց թողնված զանգ"</string>

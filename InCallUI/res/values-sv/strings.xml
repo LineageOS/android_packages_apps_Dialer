@@ -179,7 +179,7 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> timmar</item>
       <item quantity="one">1 timme</item>
     </plurals>
-    <string name="profile_photo_description" msgid="7958198110870319358">"Profilfoto"</string>
+    <string name="profile_photo_description" msgid="7958198110870319358">"Profilbild"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Kamera av"</string>
     <string name="child_number" msgid="4469090994612105532">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="7623014827902758398">"Anteckningen har skickats"</string>

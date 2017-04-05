@@ -51,8 +51,8 @@
     <string name="card_title_video_call_requesting" msgid="1611293204379882739">"Bideo-deia eskatzen"</string>
     <string name="card_title_video_call_error" msgid="8488074823425848193">"Ezin da konektatu bideo-deia"</string>
     <string name="card_title_video_call_rejected" msgid="2885215432045215465">"Baztertu egin da bideo-deia egiteko eskaera"</string>
-    <string name="card_title_callback_number" msgid="7646082782307705748">"Deiak itzultzeko zenbakia:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Larrialdi-deiak itzultzeko zenbakia:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number" msgid="7646082782307705748">"Dei-erantzunetarako zenbakia:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Larrialdi-dei bidez erantzuteko zenbakia:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="8080968169444117163">"Deitzen"</string>
     <string name="notification_missedCallTitle" msgid="2774630248151712215">"Dei bat galdu duzu"</string>
     <string name="notification_missedCallsTitle" msgid="263275811089605859">"Dei batzuk galdu dituzu"</string>
@@ -192,7 +192,7 @@
     <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
     <string name="opens_tomorrow_at" msgid="3567511490448488788">"<xliff:g id="OPEN_TIME">%s</xliff:g> da biharko irekitze-ordua"</string>
     <string name="opens_today_at" msgid="6281212768937222891">"<xliff:g id="OPEN_TIME">%s</xliff:g> da gaurko irekitze-ordua"</string>
-    <string name="closes_today_at" msgid="4822369201263491509">"<xliff:g id="CLOSE_TIME">%s</xliff:g> da itxiera-ordua"</string>
+    <string name="closes_today_at" msgid="4822369201263491509">"<xliff:g id="CLOSE_TIME">%s</xliff:g> da ixte-ordua"</string>
     <string name="closed_today_at" msgid="4060072663433467233">"<xliff:g id="CLOSE_TIME">%s</xliff:g> da gaurko itxiera-ordua"</string>
     <string name="open_now" msgid="4615706338669555999">"Irekita dago"</string>
     <string name="closed_now" msgid="2635314668145282080">"Itxita dago"</string>

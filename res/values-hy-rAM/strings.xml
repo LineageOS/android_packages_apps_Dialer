@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար/որոնեք կոնտակտներ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Զանգերի մատյանը դատարկ է"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգել"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողած զանգեր չունեք:"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողնված զանգեր չունեք:"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ձայնային փոստի մուտքի արկղը դատարկ է:"</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ձեր ձայնային փոստի արխիվը դատարկ է:"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Ցույց տալ միայն ընտրյալները"</string>
@@ -166,7 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Արգելափակե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Այս համարից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Այս համարից զանգերը կարգելափակվեն, սակայն զանգողը կկարողանա ձեզ համար ձայնային փոստի հաղորդագրություններ թողնել:"</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Այս համարից զանգեր կամ տեքստային հաղորդագրություններ այլևս չեք ստանա:"</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Այս համարից զանգեր և SMS-ներ այլևս չեք ստանա:"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ԱՐԳԵԼԱՓԱԿԵԼ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Արգելաբացե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ԱՐԳԵԼԱԲԱՑԵԼ"</string>

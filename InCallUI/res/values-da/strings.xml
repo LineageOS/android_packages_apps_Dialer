@@ -75,7 +75,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="5433652017869242375">"Telefonsvarernummeret er ukendt"</string>
     <string name="notification_network_selection_title" msgid="6785177943238085441">"Ingen dækning"</string>
     <string name="notification_network_selection_text" msgid="9097902390701009591">"Det valgte netværk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgængeligt"</string>
-    <string name="notification_action_answer" msgid="8418990052527593953">"Svar"</string>
+    <string name="notification_action_answer" msgid="8418990052527593953">"Besvar"</string>
     <string name="notification_action_end_call" msgid="2152010639043225860">"Læg på"</string>
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Video"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Tale"</string>
@@ -143,11 +143,11 @@
     <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"Skriv dit eget svar…"</string>
     <string name="custom_message_cancel" msgid="5920059627508662163">"Annuller"</string>
     <string name="custom_message_send" msgid="3798076337006735995">"Send"</string>
-    <string name="description_target_answer" msgid="1111945818996518320">"Svar"</string>
+    <string name="description_target_answer" msgid="1111945818996518320">"Besvar"</string>
     <string name="description_target_send_sms" msgid="3652217769615310018">"Send sms"</string>
     <string name="description_target_decline" msgid="7108154434759234035">"Afvis"</string>
     <string name="description_target_answer_video_call" msgid="4655616461181308405">"Besvar som videoopkald"</string>
-    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Besvar som lydopkald"</string>
+    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Besvar som taleopkald"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"Acceptér anmodning om video"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"Afvis videoanmodning"</string>
     <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"Acceptér anmodning om udgående video"</string>

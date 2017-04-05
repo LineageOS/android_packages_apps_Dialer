@@ -82,7 +82,7 @@
     <string name="make_primary" msgid="5829291915305113983">"Zapamatovat tuto volbu"</string>
     <string name="description_search_button" msgid="3660807558587384889">"vyhledat"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"vytáčení"</string>
-    <string name="description_digits_edittext" msgid="8760207516497016437">"číslo, které chcete vytočit"</string>
+    <string name="description_digits_edittext" msgid="8760207516497016437">"vytáčené číslo"</string>
     <string name="description_playback_start_stop" msgid="5060732345522492292">"Spuštění a zastavení přehrávání"</string>
     <string name="description_playback_speakerphone" msgid="6008323900245707504">"Zapnutí a vypnutí reproduktoru"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"Vyhledání pozice přehrávání"</string>
@@ -195,7 +195,7 @@
     <string name="call_log_action_send_message" msgid="5679719296905285131">"Odeslat zprávu"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Podrobnosti hovoru"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Volat kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Nepřijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Zmeškaný hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Přijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_unread_voicemail" msgid="5826351827625665597">"Nepřečtená hlasová zpráva od <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_read_voicemail" msgid="133974208364152610">"Hlasová zpráva od <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
@@ -236,7 +236,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Zvuky a vibrace"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Přístupnost"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Vyzváněcí tón telefonu"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrovat také u volání"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"U hovorů také vibrovat"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tóny číselníku"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Délka tónu číselníku"</string>
   <string-array name="dtmf_tone_length_entries">

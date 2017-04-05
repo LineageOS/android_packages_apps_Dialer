@@ -25,7 +25,7 @@
     <string name="confCall" msgid="3181961445236675173">"Канферэнц-выклік"</string>
     <string name="call_lost" msgid="8208184291640961172">"Выклік абарваўся"</string>
     <string name="audio_mode_speaker" msgid="6160127758732918123">"Дынамік"</string>
-    <string name="audio_mode_earpiece" msgid="3138677187223932893">"Навушнік гарнітуры"</string>
+    <string name="audio_mode_earpiece" msgid="3138677187223932893">"Дынамік тэлефона"</string>
     <string name="audio_mode_wired_headset" msgid="583080366967943196">"Правадная гарнітура"</string>
     <string name="audio_mode_bluetooth" msgid="3188504589946495676">"Bluetooth"</string>
     <string name="wait_prompt_str" msgid="3784275777844586675">"Адправіць гэтыя тоны?\n"</string>

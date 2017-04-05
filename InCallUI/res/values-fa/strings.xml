@@ -46,11 +46,11 @@
     <string name="card_title_hanging_up" msgid="3402022578391538671">"قطع تماس"</string>
     <string name="card_title_in_call" msgid="5029165346952099302">"درحال تماس"</string>
     <string name="card_title_my_phone_number" msgid="3749572971322520177">"شماره من <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> است"</string>
-    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"درحال برقراری تماس ویدیویی"</string>
-    <string name="card_title_video_call" msgid="6519406270853889302">"تماس ویدیویی"</string>
-    <string name="card_title_video_call_requesting" msgid="1611293204379882739">"درحال درخواست تماس ویدیویی"</string>
-    <string name="card_title_video_call_error" msgid="8488074823425848193">"برقراری تماس ویدیویی ممکن نیست"</string>
-    <string name="card_title_video_call_rejected" msgid="2885215432045215465">"درخواست تماس ویدیویی رد شد"</string>
+    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"درحال برقراری تماس ویدئویی"</string>
+    <string name="card_title_video_call" msgid="6519406270853889302">"تماس ویدئویی"</string>
+    <string name="card_title_video_call_requesting" msgid="1611293204379882739">"درحال درخواست تماس ویدئویی"</string>
+    <string name="card_title_video_call_error" msgid="8488074823425848193">"برقراری تماس ویدئویی ممکن نیست"</string>
+    <string name="card_title_video_call_rejected" msgid="2885215432045215465">"درخواست تماس ویدئویی رد شد"</string>
     <string name="card_title_callback_number" msgid="7646082782307705748">"شماره پاسخ تماس شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"شماره پاسخ تماس اضطراری شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="8080968169444117163">"شماره‌گیری"</string>
@@ -67,8 +67,8 @@
     <string name="notification_incoming_work_call" msgid="281305845895342925">"تماس کاری ورودی"</string>
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"‏تماس Wi-Fi ورودی"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"‏تماس کاری Wi-Fi ورودی"</string>
-    <string name="notification_incoming_video_call" msgid="7814873581838165772">"تماس ویدیویی ورودی"</string>
-    <string name="notification_requesting_video_call" msgid="4844596091477863245">"درخواست تماس ویدیویی ورودی"</string>
+    <string name="notification_incoming_video_call" msgid="7814873581838165772">"تماس ویدئویی ورودی"</string>
+    <string name="notification_requesting_video_call" msgid="4844596091477863245">"درخواست تماس ویدئویی ورودی"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"پست صوتی جدید"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"پست صوتی جدید (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="6496440879085042069">"شماره‌گیری <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -77,7 +77,7 @@
     <string name="notification_network_selection_text" msgid="9097902390701009591">"شبکه انتخابی (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) قابل دسترس نیست"</string>
     <string name="notification_action_answer" msgid="8418990052527593953">"پاسخ"</string>
     <string name="notification_action_end_call" msgid="2152010639043225860">"پایان تماس"</string>
-    <string name="notification_action_answer_video" msgid="2400233093494856655">"ویدیو"</string>
+    <string name="notification_action_answer_video" msgid="2400233093494856655">"ویدئو"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"صدا"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"پذیرفتن"</string>
     <string name="notification_action_dismiss" msgid="1998811618480434300">"نپذیرفتن"</string>
@@ -120,7 +120,7 @@
     <string name="onscreenConferenceText" msgid="171855677185793827">"تماس کنفرانسی"</string>
     <string name="onscreenManageText" msgid="7625850560625708322">"مدیریت"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"صوتی"</string>
-    <string name="onscreenVideoCallText" msgid="1578940167445068369">"تماس ویدیویی"</string>
+    <string name="onscreenVideoCallText" msgid="1578940167445068369">"تماس ویدئویی"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"تغییر به تماس صوتی"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"تعویض دوربین"</string>
     <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"روشن کردن دوربین"</string>
@@ -146,14 +146,14 @@
     <string name="description_target_answer" msgid="1111945818996518320">"پاسخ"</string>
     <string name="description_target_send_sms" msgid="3652217769615310018">"ارسال پیامک"</string>
     <string name="description_target_decline" msgid="7108154434759234035">"رد کردن"</string>
-    <string name="description_target_answer_video_call" msgid="4655616461181308405">"پاسخ به‌صورت تماس ویدیویی"</string>
+    <string name="description_target_answer_video_call" msgid="4655616461181308405">"پاسخ به‌صورت تماس ویدئویی"</string>
     <string name="description_target_answer_audio_call" msgid="3234714934649708854">"پاسخ به‌صورت تماس صوتی"</string>
-    <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"پذیرفتن درخواست تماس ویدیویی"</string>
-    <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"نپذیرفتن درخواست تماس ویدیویی"</string>
-    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"پذیرفتن درخواست مخابره ویدیویی"</string>
-    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="1191166008711514234">"نپذیرفتن درخواست مخابره ویدیویی"</string>
-    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"پذیرفتن درخواست دریافت ویدیویی"</string>
-    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"نپذیرفتن درخواست دریافت ویدیویی"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"پذیرفتن درخواست تماس ویدئویی"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"نپذیرفتن درخواست تماس ویدئویی"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"پذیرفتن درخواست مخابره ویدئویی"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="1191166008711514234">"نپذیرفتن درخواست مخابره ویدئویی"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"پذیرفتن درخواست دریافت ویدئویی"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"نپذیرفتن درخواست دریافت ویدئویی"</string>
     <string name="description_direction_up" msgid="1735018141439291766">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به بالا بلغزانید."</string>
     <string name="description_direction_left" msgid="6811598791620851239">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به چپ بلغزانید."</string>
     <string name="description_direction_right" msgid="5461971399586296023">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به راست بلغزانید."</string>

@@ -107,9 +107,9 @@
     <string name="type_incoming" msgid="6502076603836088532">"تماس ورودی"</string>
     <string name="type_outgoing" msgid="343108709599392641">"تماس خروجی"</string>
     <string name="type_missed" msgid="2720502601640509542">"تماس بی پاسخ"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"تماس ویدیویی ورودی"</string>
-    <string name="type_outgoing_video" msgid="2858140021680755266">"تماس ویدیویی خروجی"</string>
-    <string name="type_missed_video" msgid="954396897034220545">"تماس ویدیویی بی‌پاسخ"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"تماس ویدئویی ورودی"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"تماس ویدئویی خروجی"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"تماس ویدئویی بی‌پاسخ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"پست صوتی"</string>
     <string name="type_rejected" msgid="7783201828312472691">"تماس ردشده"</string>
     <string name="type_blocked" msgid="3521686227115330015">"تماس مسدودشده"</string>
@@ -119,7 +119,7 @@
     <string name="description_call" msgid="3443678121983852666">"تماس با <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"جزئیات تماس برای <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> تماس."</string>
-    <string name="description_video_call" msgid="2933838090743214204">"تماس ویدیویی."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"تماس ویدئویی."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"ارسال پیامک به <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"پست صوتی شنیده نشده"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"شروع جستجوی صوتی"</string>
@@ -180,7 +180,7 @@
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ایجاد مخاطب جدید"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"افزودن به مخاطب"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ارسال پیامک"</string>
-    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"برقراری تماس ویدیویی"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"برقراری تماس ویدئویی"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"مسدود کردن شماره"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> تماس‌ بی‌پاسخ جدید"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"هنوز کسی در فهرست شماره‌گیری سریع شما نیست"</string>
@@ -189,7 +189,7 @@
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"افزودن مخاطب"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"برای مشاهده همه شماره‌ها، تصویر را لمس کنید یا برای ترتیب مجدد لمس کنید و نگه دارید"</string>
     <string name="remove_contact" msgid="1080555335283662961">"حذف"</string>
-    <string name="call_log_action_video_call" msgid="7724301709041128296">"تماس ویدیویی"</string>
+    <string name="call_log_action_video_call" msgid="7724301709041128296">"تماس ویدئویی"</string>
     <string name="call_log_action_send_message" msgid="5679719296905285131">"ارسال پیام"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"جزئیات تماس"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"تماس با <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
@@ -205,7 +205,7 @@
     <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> از طریق <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"تماس"</string>
     <string name="description_call_action" msgid="4000549004089776147">"تماس با <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"تماس ویدیویی با <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="7386922428155062213">"تماس ویدئویی با <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"گوش دادن به پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_play" msgid="2689369874037785439">"پخش پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"مکث پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

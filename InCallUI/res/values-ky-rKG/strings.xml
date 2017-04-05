@@ -164,7 +164,7 @@
     <string name="default_notification_description" msgid="4950807644546509965">"Демейки үнү (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="835582004693335905">"Телефондун рингтону"</string>
     <string name="vibrate_on_ring_title" msgid="5019791043398986665">"Дирилдеп шыңгырасын"</string>
-    <string name="preference_category_ringtone" msgid="6246687516643676729">"Рингтон жана дирилдөө"</string>
+    <string name="preference_category_ringtone" msgid="6246687516643676729">"Шыңгыр жана дирилдөө"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Конференц-чалууну башкаруу"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Өзгөчө кырдаал номери"</string>
     <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">

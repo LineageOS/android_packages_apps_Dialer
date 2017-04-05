@@ -24,7 +24,7 @@
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"कॉल इतिहास"</string>
     <string name="action_report_number" msgid="4635403959812186162">"चुकीच्या नंबरचा अहवाल द्या"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"नंबर कॉपी करा"</string>
-    <string name="copy_transcript_text" msgid="5652787482893879382">"लिप्यंतरण कॉपी करा"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"प्रतिलेखन कॉपी करा"</string>
     <string name="action_block_number" msgid="1482657602262262134">"नंबर अवरोधित करा"</string>
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> अवरोधित केला"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"नंबर अनावरोधित करा"</string>

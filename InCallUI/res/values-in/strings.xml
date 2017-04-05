@@ -190,8 +190,8 @@
     <string name="display_address" msgid="444235484565491291">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="open_time_span" msgid="2762952234657271236">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
-    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Buka pukul <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="opens_today_at" msgid="6281212768937222891">"Hari ini buka pukul <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Buka jam <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="6281212768937222891">"Hari ini buka jam <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
     <string name="closes_today_at" msgid="4822369201263491509">"Tutup pukul <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="closed_today_at" msgid="4060072663433467233">"Hari ini tutup pukul <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Buka sekarang"</string>

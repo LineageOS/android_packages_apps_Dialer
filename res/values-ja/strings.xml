@@ -163,7 +163,7 @@
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"新しい、簡素化されたブロック"</string>
     <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"セキュリティを強化するため、スマートフォンはブロック動作を変更する必要があります。ブロックされた電話番号からの通話とテキスト メッセージの両方が停止されます。また、ブロックされた電話番号は他のアプリと共有できます。"</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"許可"</string>
-    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックしますか？"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> をブロックしますか？"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。"</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"今後はこの番号からの通話やテキスト メッセージは受信しなくなります。"</string>

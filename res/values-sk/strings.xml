@@ -155,7 +155,7 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Zavolať"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nemáte žiadne zmeškané hovory."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Hlasová schránka je prázdna."</string>
-    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Váš archív hlasových správ je prázdny."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Archív vašich hlasových správ je prázdny."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Zobraziť iba obľúbené"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"História hovorov"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Archív hlasových správ"</string>
@@ -167,7 +167,7 @@
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Povoliť"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Hovory z tohto čísla budú blokované a hlasové správy budú automaticky odstraňované."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Hovory z tohto čísla budú zablokované, ale volajúci stále môže zanechať hlasové správy."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Hovory z tohto čísla budú zablokované, ale volajúci vám môže zanechať hlasovú správu."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Z tohto čísla už nebudete prijímať hovory ani textové správy."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKOVAŤ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>

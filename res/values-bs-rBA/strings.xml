@@ -27,8 +27,8 @@
     <string name="copy_transcript_text" msgid="5652787482893879382">"Kopiraj transkripciju"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Blokiraj broj"</string>
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> je blokiran"</string>
-    <string name="action_unblock_number" msgid="3043777622269776127">"Odblokiraj broj"</string>
-    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> je odblokiran"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Deblokiraj broj"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> je deblokiran"</string>
     <string name="block_number_undo" msgid="591338370336724156">"PONIŠTI"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Izbriši"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Uredi broj prije poziva"</string>
@@ -169,8 +169,8 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Pozivi s ovog broja će biti blokirani, ali pozivalac će vam moći ostavljati govornu poštu."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Više nećete primati pozive ili tekstualne poruke s ovog broja."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKIRAJ"</string>
-    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokirati broj <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_ok" msgid="6449899182699684786">"ODBLOKIRAJ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Deblokirati broj <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"DEBLOKIRAJ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Brzo biranje"</string>
     <string name="tab_history" msgid="2563144697322434940">"Historija poziva"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakti"</string>
@@ -252,7 +252,7 @@
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Uvezi"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Uvoz nije uspio"</string>
     <string name="voicemail_archive_failed" msgid="6263467962738772223">"Arhiviranje govorne pošte nije uspjelo."</string>
-    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Odblokiraj broj"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Deblokiraj broj"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Dodaj broj"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Pozivi s ovih brojeva će biti blokirani, a govorna pošta će se automatski brisati."</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Pozivi s ovih brojeva će biti blokirani, ali pozivaoci će vam moći ostavljati govornu poštu."</string>

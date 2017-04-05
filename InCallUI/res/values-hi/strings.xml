@@ -130,7 +130,7 @@
     <string name="player_stopped" msgid="1278611664986561535">"प्लेयर रुक गया"</string>
     <string name="camera_not_ready" msgid="6614469280264241251">"कैमरा तैयार नहीं है"</string>
     <string name="camera_ready" msgid="2614541247814590887">"कैमरा तैयार है"</string>
-    <string name="unknown_call_session_event" msgid="2947023743819984299">"अज्ञात कॉल सत्र ईवेंट"</string>
+    <string name="unknown_call_session_event" msgid="2947023743819984299">"अज्ञात कॉल सत्र इवेंट"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"सेवा"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;सेट नहीं है&gt;"</string>
