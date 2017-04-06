@@ -38,7 +38,7 @@
     android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
   <Preference
     android:key="@string/voicemail_change_pin_key"
-    android:title="@string/voicemail_change_pin_dialog_title"/>
+    android:title="@string/voicemail_change_pin_preference_title"/>
 
   <PreferenceScreen
     android:key="@string/voicemail_advanced_settings_key"

@@ -40,7 +40,7 @@ import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
-import com.android.dialer.app.list.ListsFragment;
+import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.LogUtil;
@@ -48,7 +48,6 @@ import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import java.util.HashSet;
@@ -187,11 +186,7 @@ public class MissedCallNotifier {
         .setOnlyAlertOnce(useCallList)
         .setPublicVersion(publicSummaryBuilder.build());
 
-    NotificationChannelManager.applyChannel(
-        groupSummary,
-        context,
-        Channel.MISSED_CALL,
-        PhoneAccountHandles.getAccount(context, useCallList ? newCalls.get(0) : null));
+    NotificationChannelManager.applyChannel(groupSummary, context, Channel.MISSED_CALL, null);
 
     Notification notification = groupSummary.build();
     configureLedOnNotification(notification);
@@ -291,7 +286,7 @@ public class MissedCallNotifier {
         if (!PhoneNumberHelper.isUriNumber(call.number)) {
           builder.addAction(
               new Notification.Action.Builder(
-                      Icon.createWithResource(context, R.drawable.ic_message_24dp),
+                      Icon.createWithResource(context, R.drawable.quantum_ic_message_white_24),
                       context.getString(R.string.notification_missedCall_message),
                       createSendSmsFromNotificationPendingIntent(call.number, call.callsUri))
                   .build());
@@ -322,8 +317,7 @@ public class MissedCallNotifier {
             .setDeleteIntent(createClearMissedCallsPendingIntent(call.callsUri))
             .setContentIntent(createCallLogPendingIntent(call.callsUri));
 
-    NotificationChannelManager.applyChannel(
-        builder, context, Channel.MISSED_CALL, PhoneAccountHandles.getAccount(context, call));
+    NotificationChannelManager.applyChannel(builder, context, Channel.MISSED_CALL, null);
     return builder;
   }
 
@@ -332,7 +326,6 @@ public class MissedCallNotifier {
   public void callBackFromMissedCall(String number, Uri callUri) {
     closeSystemDialogs(context);
     CallLogNotificationsQueryHelper.removeMissedCallNotifications(context, callUri);
-    TelecomUtil.cancelMissedCallsNotification(context);
     DialerUtils.startActivityWithErrorToast(
         context,
         new CallIntentBuilder(number, CallInitiationType.Type.MISSED_CALL_NOTIFICATION)
@@ -341,11 +334,9 @@ public class MissedCallNotifier {
   }
 
   /** Trigger an intent to send an sms from a missed call number. */
-  @WorkerThread
   public void sendSmsFromMissedCall(String number, Uri callUri) {
     closeSystemDialogs(context);
     CallLogNotificationsQueryHelper.removeMissedCallNotifications(context, callUri);
-    TelecomUtil.cancelMissedCallsNotification(context);
     DialerUtils.startActivityWithErrorToast(
         context, IntentUtil.getSendSmsIntent(number).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
   }
@@ -367,7 +358,7 @@ public class MissedCallNotifier {
    */
   private PendingIntent createCallLogPendingIntent(@Nullable Uri callUri) {
     Intent contentIntent =
-        DialtactsActivity.getShowTabIntent(context, ListsFragment.TAB_INDEX_HISTORY);
+        DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_HISTORY);
     // TODO (b/35486204): scroll to call
     contentIntent.setData(callUri);
     return PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -393,13 +384,13 @@ public class MissedCallNotifier {
 
   private PendingIntent createSendSmsFromNotificationPendingIntent(
       String number, @NonNull Uri callUri) {
-    Intent intent = new Intent(context, CallLogNotificationsService.class);
-    intent.setAction(CallLogNotificationsService.ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION);
-    intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
+    Intent intent = new Intent(context, CallLogNotificationsActivity.class);
+    intent.setAction(CallLogNotificationsActivity.ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION);
+    intent.putExtra(CallLogNotificationsActivity.EXTRA_MISSED_CALL_NUMBER, number);
     intent.setData(callUri);
     // Use FLAG_UPDATE_CURRENT to make sure any previous pending intent is updated with the new
     // extra.
-    return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
   /** Configures a notification to emit the blinky notification light. */

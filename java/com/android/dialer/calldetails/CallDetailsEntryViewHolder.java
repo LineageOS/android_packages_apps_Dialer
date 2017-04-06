@@ -95,6 +95,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         (entry.features & Calls.FEATURES_PULLED_EXTERNALLY) == Calls.FEATURES_PULLED_EXTERNALLY;
 
     callTime.setTextColor(getColorForCallType(context, callType));
+    callTypeIcon.clear();
     callTypeIcon.add(callType);
     callTypeIcon.setShowVideo((entry.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
     callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.features));

@@ -320,14 +320,15 @@ public class ContactGridManager {
     bottomTextView.setAllCaps(info.isSpamIconVisible);
     workIconImageView.setVisibility(info.isWorkIconVisible ? View.VISIBLE : View.GONE);
     boolean wasHdIconVisible = hdIconImageView.getVisibility() == View.VISIBLE;
-    if (!wasHdIconVisible && info.isHdAttemptinIconVisible) {
+    hdIconImageView.setVisibility(
+        info.isHdIconVisible || info.isHdAttemptingIconVisible ? View.VISIBLE : View.GONE);
+    if (!wasHdIconVisible && info.isHdAttemptingIconVisible) {
       Animation animation = AnimationUtils.loadAnimation(context, R.anim.blinking);
       hdIconImageView.startAnimation(animation);
-    } else if (wasHdIconVisible && !info.isHdAttemptinIconVisible) {
+    } else if (wasHdIconVisible && !info.isHdAttemptingIconVisible) {
       hdIconImageView.clearAnimation();
+      hdIconImageView.setAlpha(1f);
     }
-    hdIconImageView.setVisibility(
-        info.isHdIconVisible || info.isHdAttemptinIconVisible ? View.VISIBLE : View.GONE);
     forwardIconImageView.setVisibility(info.isForwardIconVisible ? View.VISIBLE : View.GONE);
     spamIconImageView.setVisibility(info.isSpamIconVisible ? View.VISIBLE : View.GONE);
 

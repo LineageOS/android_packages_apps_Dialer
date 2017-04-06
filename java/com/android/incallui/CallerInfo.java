@@ -105,6 +105,7 @@ public class CallerInfo {
   public String normalizedNumber;
   public String forwardingNumber;
   public String geoDescription;
+  boolean shouldShowGeoDescription;
   public String cnapName;
   public int numberPresentation;
   public int namePresentation;

@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Süren kablosuz iş çağrısı"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Beklemede"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Gelen çağrı"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Fotoğraf eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Mesaj eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Konum eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Fotoğraf ve mesaj eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Fotoğraf ve konum eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Mesaj ve konum eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Fotoğraf, mesaj ve konum eklenmiş gelen çağrı"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Ek iliştirilmiş gelen çağrı"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Fotoğraf eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Mesaj eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Konum eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Fotoğraf ve mesaj eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Fotoğraf ve konum eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Mesaj ve konum eklenmiş önemli gelen çağrı"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Fotoğraf, mesaj ve konum eklenmiş önemli çağrı"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Ek iliştirilmiş önemli gelen çağrı"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Gelen iş çağrısı"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Gelen kablosuz çağrı"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Gelen kablosuz iş çağrısı"</string>

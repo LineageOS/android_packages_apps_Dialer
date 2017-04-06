@@ -101,10 +101,10 @@ public class AnswerScreenPresenter
 
   @Override
   public void onAnswerAndReleaseCall() {
-    Log.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "enterBlock");
+    LogUtil.enterBlock("AnswerScreenPresenter.onAnswerAndReleaseCall");
     DialerCall activeCall = CallList.getInstance().getActiveCall();
     if (activeCall == null) {
-      Log.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "activeCall == null");
+      LogUtil.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "activeCall == null");
       onAnswer(false);
     } else {
       activeCall.addListener(new AnswerOnDisconnected(activeCall));
@@ -137,7 +137,8 @@ public class AnswerScreenPresenter
 
     @Override
     public void onDialerCallDisconnect() {
-      Log.i("AnswerScreenPresenter.AnswerOnDisconnected", "Call disconnected, answering new call");
+      LogUtil.i(
+          "AnswerScreenPresenter.AnswerOnDisconnected", "call disconnected, answering new call");
       call.answer();
       disconnectingCall.removeListener(this);
     }

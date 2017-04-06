@@ -23,14 +23,15 @@ import android.provider.VoicemailContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.CallUtil;
 import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 import java.util.Arrays;
 import java.util.List;
 
@@ -126,7 +127,8 @@ public class VoicemailErrorMessage {
   }
 
   @NonNull
-  public static Action createSetPinAction(final Context context) {
+  public static Action createSetPinAction(
+      final Context context, PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_set_pin),
         new OnClickListener() {
@@ -134,8 +136,10 @@ public class VoicemailErrorMessage {
           public void onClick(View v) {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.VOICEMAIL_ALERT_SET_PIN_CLICKED);
-            Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
-            context.startActivity(intent);
+            context.startActivity(
+                VoicemailComponent.get(context)
+                    .getVoicemailClient()
+                    .getSetPinIntent(context, phoneAccountHandle));
           }
         });
   }
@@ -187,21 +191,20 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createTurnArchiveOnAction(
       final Context context,
+      int impressionToLog,
       final VoicemailStatus status,
       VoicemailClient voicemailClient,
-      PhoneAccountHandle phoneAccountHandle,
-      String preference) {
+      PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_turn_archive_on),
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            OmtpVoicemailMessageCreator.logArchiveImpression(
-                context,
-                preference,
-                DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_FULL_PROMO,
-                DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_ALMOST_FULL_PROMO);
-
+            Assert.checkArgument(
+                VoicemailComponent.get(context)
+                    .getVoicemailClient()
+                    .isVoicemailArchiveAvailable(context));
+            Logger.get(context).logImpression(impressionToLog);
             voicemailClient.setVoicemailArchiveEnabled(context, phoneAccountHandle, true);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
@@ -213,6 +216,7 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createDismissTurnArchiveOnAction(
       final Context context,
+      int impressionToLog,
       VoicemailStatusReader statusReader,
       PerAccountSharedPreferences sharedPreferenceForAccount,
       String preferenceKeyToUpdate) {
@@ -221,11 +225,11 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            OmtpVoicemailMessageCreator.logArchiveImpression(
-                context,
-                preferenceKeyToUpdate,
-                DialerImpression.Type.VVM_USER_DISMISSED_VM_FULL_PROMO,
-                DialerImpression.Type.VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO);
+            Assert.checkArgument(
+                VoicemailComponent.get(context)
+                    .getVoicemailClient()
+                    .isVoicemailArchiveAvailable(context));
+            Logger.get(context).logImpression(impressionToLog);
             sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true).apply();
             statusReader.refresh();
           }

@@ -854,6 +854,12 @@ public class AnswerFragment extends Fragment
   }
 
   private void animateEntry(@NonNull View rootView) {
+    if (!isAdded()) {
+      LogUtil.i(
+          "AnswerFragment.animateEntry",
+          "Not currently added to Activity. Will not start entry animation.");
+      return;
+    }
     contactGridManager.getContainerView().setAlpha(0f);
     Animator alpha =
         ObjectAnimator.ofFloat(contactGridManager.getContainerView(), View.ALPHA, 0, 1);
@@ -869,7 +875,8 @@ public class AnswerFragment extends Fragment
     if (isShowingLocationUi()) {
       builder.with(createTranslation(rootView.findViewById(R.id.incall_location_holder)));
     }
-    animatorSet.setDuration(getResources().getInteger(R.integer.answer_animate_entry_millis));
+    animatorSet.setDuration(
+        rootView.getResources().getInteger(R.integer.answer_animate_entry_millis));
     animatorSet.addListener(
         new AnimatorListenerAdapter() {
           @Override

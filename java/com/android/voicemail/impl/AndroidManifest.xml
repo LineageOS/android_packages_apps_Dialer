@@ -15,9 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
-  package="com.android.voicemailomtp"
-  >
+  package="com.android.voicemailomtp">
 
   <application
     android:allowBackup="false"
@@ -33,8 +31,7 @@
 
     <receiver
       android:name="com.android.voicemail.impl.sms.OmtpMessageReceiver"
-      android:exported="false"
-      androidprv:systemUserOnly="true">
+      android:exported="false">
       <intent-filter>
         <action android:name="com.android.vociemailomtp.sms.sms_received"/>
       </intent-filter>
@@ -50,8 +47,7 @@
     <receiver
       android:name="com.android.voicemail.impl.fetch.FetchVoicemailReceiver"
       android:exported="true"
-      android:permission="com.android.voicemail.permission.READ_VOICEMAIL"
-      androidprv:systemUserOnly="true">
+      android:permission="com.android.voicemail.permission.READ_VOICEMAIL">
       <intent-filter>
         <action android:name="android.intent.action.FETCH_VOICEMAIL"/>
         <data
@@ -63,8 +59,7 @@
     <receiver
       android:name="com.android.voicemail.impl.sync.OmtpVvmSyncReceiver"
       android:exported="true"
-      android:permission="com.android.voicemail.permission.READ_VOICEMAIL"
-      androidprv:systemUserOnly="true">
+      android:permission="com.android.voicemail.permission.READ_VOICEMAIL">
       <intent-filter>
         <action android:name="android.provider.action.SYNC_VOICEMAIL"/>
       </intent-filter>

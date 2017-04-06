@@ -40,7 +40,7 @@ import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
-import com.android.dialer.app.list.ListsFragment;
+import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.Logger;
@@ -274,7 +274,8 @@ public class DefaultVoicemailNotifier {
   }
 
   private PendingIntent newVoicemailIntent(@Nullable NewCall voicemail) {
-    Intent intent = DialtactsActivity.getShowTabIntent(context, ListsFragment.TAB_INDEX_VOICEMAIL);
+    Intent intent =
+        DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
     // TODO (b/35486204): scroll to this voicemail
     if (voicemail != null) {
       intent.setData(voicemail.voicemailUri);

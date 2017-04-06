@@ -49,11 +49,11 @@ import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.app.contactinfo.ExpirableCacheHeadlessFragment;
 import com.android.dialer.app.list.ListsFragment;
-import com.android.dialer.app.list.ListsFragment.ListsPage;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -64,8 +64,7 @@ import com.android.dialer.util.PermissionsUtil;
  * voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends Fragment
-    implements ListsPage,
-        CallLogQueryHandler.Listener,
+    implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher,
         OnEmptyViewActionButtonClickedListener,
         FragmentCompat.OnRequestPermissionsResultCallback,
@@ -133,6 +132,8 @@ public class CallLogFragment extends Fragment
               refreshData();
               rescheduleDisplayUpdate();
               break;
+            default:
+              throw Assert.createAssertionFailException("Invalid message: " + msg);
           }
         }
       };
@@ -541,20 +542,18 @@ public class CallLogFragment extends Fragment
     mDisplayUpdateHandler.removeMessages(EVENT_UPDATE_DISPLAY);
   }
 
-  @Override
   @CallSuper
-  public void onPageResume(@Nullable Activity activity) {
-    LogUtil.d("CallLogFragment.onPageResume", "frag: %s", this);
-    if (activity != null) {
-      ((HostInterface) activity)
+  public void onVisible() {
+    LogUtil.enterBlock("CallLogFragment.onPageSelected");
+    if (getActivity() != null) {
+      ((HostInterface) getActivity())
           .enableFloatingButton(mModalAlertManager == null || mModalAlertManager.isEmpty());
     }
   }
 
-  @Override
   @CallSuper
-  public void onPagePause(@Nullable Activity activity) {
-    LogUtil.d("CallLogFragment.onPagePause", "frag: %s", this);
+  public void onNotVisible() {
+    LogUtil.enterBlock("CallLogFragment.onPageUnselected");
   }
 
   @Override

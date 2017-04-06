@@ -71,11 +71,8 @@ public class CallLogNotificationsService extends IntentService {
   public static final String ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION =
       "com.android.dialer.calllog.CALL_BACK_FROM_MISSED_CALL_NOTIFICATION";
 
-  public static final String ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION =
-      "com.android.dialer.calllog.SEND_SMS_FROM_MISSED_CALL_NOTIFICATION";
   /**
-   * Extra to be included with {@link #ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS}, {@link
-   * #ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION} and {@link
+   * Extra to be included with {@link #ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS} and {@link
    * #ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION} to identify the number to display, call or
    * text back.
    *
@@ -224,11 +221,6 @@ public class CallLogNotificationsService extends IntentService {
       case ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION:
         MissedCallNotifier.getInstance(this)
             .callBackFromMissedCall(
-                intent.getStringExtra(EXTRA_MISSED_CALL_NUMBER), intent.getData());
-        break;
-      case ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION:
-        MissedCallNotifier.getInstance(this)
-            .sendSmsFromMissedCall(
                 intent.getStringExtra(EXTRA_MISSED_CALL_NUMBER), intent.getData());
         break;
       default:

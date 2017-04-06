@@ -16,6 +16,7 @@
 package com.android.voicemail.impl;
 
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.voicemail.impl.utils.IndentingPrintWriter;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -32,7 +33,7 @@ public class VvmLog {
   private static final LocalLog sLocalLog = new LocalLog(MAX_OMTP_VVM_LOGS);
 
   public static void log(String tag, String log) {
-    sLocalLog.log(tag + ": " + log);
+    PersistentLogger.logText(tag, log);
   }
 
   public static void dump(FileDescriptor fd, PrintWriter printwriter, String[] args) {

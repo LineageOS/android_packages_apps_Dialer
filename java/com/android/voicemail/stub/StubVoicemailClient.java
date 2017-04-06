@@ -17,7 +17,9 @@
 package com.android.voicemail.stub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
 import com.android.voicemail.VoicemailClient;
 import java.util.List;
 import javax.inject.Inject;
@@ -53,6 +55,16 @@ public final class StubVoicemailClient implements VoicemailClient {
   }
 
   @Override
+  public boolean isVoicemailArchiveAvailable(Context context) {
+    return false;
+  }
+
+  @Override
   public void setVoicemailArchiveEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {}
+
+  @Override
+  public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+  }
 }

@@ -74,7 +74,7 @@ public final class AsyncTaskExecutors {
     AsyncTaskExecutor createAsyncTaskExeuctor();
   }
 
-  private static class SimpleAsyncTaskExecutor implements AsyncTaskExecutor {
+  static class SimpleAsyncTaskExecutor implements AsyncTaskExecutor {
 
     private final Executor mExecutor;
 

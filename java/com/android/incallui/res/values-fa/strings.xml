@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"‏تماس کاری Wi-Fi خروجی"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"در انتظار"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"تماس ورودی"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"تماس ورودی به همراه عکس"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"تماس ورودی به همراه پیام"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"تماس ورودی به همراه مکان"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"تماس ورودی به همراه عکس و پیام"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"تماس ورودی به همراه عکس و مکان"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"تماس ورودی به همراه پیام و مکان"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"تماس ورودی به همراه عکس، پیام و مکان"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"تماس ورودی به همراه پیوست"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"تماس ورودی مهم"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"تماس ورودی مهم به همراه عکس"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"تماس ورودی مهم به همراه پیام"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"تماس ورودی مهم به همراه مکان"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"تماس ورودی مهم به همراه عکس و پیام"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"تماس ورودی مهم به همراه عکس و مکان"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"تماس ورودی مهم به همراه پیام و مکان"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"تماس ورودی مهم به همراه عکس، پیام و مکان"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"تماس ورودی مهم به همراه پیوست"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"تماس کاری ورودی"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"‏تماس Wi-Fi ورودی"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"‏تماس کاری Wi-Fi ورودی"</string>

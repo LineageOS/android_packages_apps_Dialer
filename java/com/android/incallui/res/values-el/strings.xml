@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Κλήση εργασίας μέσω Wi-Fi σε εξέλιξη"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Σε αναμονή"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Εισερχόμενη κλήση"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Εισερχόμενη κλήση με φωτογραφία"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Εισερχόμενη κλήση με μήνυμα"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Εισερχόμενη κλήση με τοποθεσία"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Εισερχόμενη κλήση με φωτογραφία και μήνυμα"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Εισερχόμενη κλήση με φωτογραφία και τοποθεσία"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Εισερχόμενη κλήση με μήνυμα και τοποθεσία"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Εισερχόμενη κλήση με φωτο, μήνυμα και τοποθεσία"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Εισερχόμενη κλήση με συνημμένα"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Σημαντική εισερχόμενη κλήση"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Σημαντική εισερχόμενη κλήση με φωτογραφία"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Σημαντική εισερχόμενη κλήση με μήνυμα"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Σημαντική εισερχόμενη κλήση με τοποθεσία"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Σημαντική εισερχόμενη κλήση με φωτο και μήνυμα"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Σημαντική εισερχόμενη κλήση με φωτο και τοποθεσία"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Σημαντική εισερχόμ. κλήση με μήνυμα και τοποθεσία"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Σημαντική εισερχ. κλήση με φωτο, μήνυμα, τοποθεσία"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Σημαντική εισερχόμενη κλήση με συνημμένα"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Εισερχόμενη κλήση εργασίας"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Εισερχόμενη κλήση μέσω Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Εισερχόμενη κλήση εργασίας μέσω Wi-Fi"</string>

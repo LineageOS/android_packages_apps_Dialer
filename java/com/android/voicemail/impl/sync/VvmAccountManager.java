@@ -16,16 +16,20 @@
 package com.android.voicemail.impl.sync;
 
 import android.content.Context;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.util.ArraySet;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.sms.StatusMessage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Tracks the activation state of a visual voicemail phone account. An account is considered
@@ -39,13 +43,28 @@ import java.util.List;
 public class VvmAccountManager {
   public static final String TAG = "VvmAccountManager";
 
+  /** Listener for activation state changes. Will be called on the main thread. */
+  public interface Listener {
+    @MainThread
+    void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated);
+  }
+
   private static final String IS_ACCOUNT_ACTIVATED = "is_account_activated";
+
+  private static Set<Listener> listeners = new ArraySet<>();
 
   public static void addAccount(
       Context context, PhoneAccountHandle phoneAccountHandle, StatusMessage statusMessage) {
     VisualVoicemailPreferences preferences =
         new VisualVoicemailPreferences(context, phoneAccountHandle);
     statusMessage.putStatus(preferences.edit()).putBoolean(IS_ACCOUNT_ACTIVATED, true).apply();
+
+    ThreadUtil.postOnUiThread(
+        () -> {
+          for (Listener listener : listeners) {
+            listener.onActivationStateChanged(phoneAccountHandle, true);
+          }
+        });
   }
 
   public static void removeAccount(Context context, PhoneAccountHandle phoneAccount) {
@@ -57,6 +76,12 @@ public class VvmAccountManager {
         .putString(OmtpConstants.IMAP_USER_NAME, null)
         .putString(OmtpConstants.IMAP_PASSWORD, null)
         .apply();
+    ThreadUtil.postOnUiThread(
+        () -> {
+          for (Listener listener : listeners) {
+            listener.onActivationStateChanged(phoneAccount, false);
+          }
+        });
   }
 
   public static boolean isAccountActivated(Context context, PhoneAccountHandle phoneAccount) {
@@ -75,5 +100,17 @@ public class VvmAccountManager {
       }
     }
     return results;
+  }
+
+  @MainThread
+  public static void addListener(Listener listener) {
+    Assert.isMainThread();
+    listeners.add(listener);
+  }
+
+  @MainThread
+  public static void removeListener(Listener listener) {
+    Assert.isMainThread();
+    listeners.remove(listener);
   }
 }

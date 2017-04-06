@@ -13,6 +13,9 @@
      limitations under the License.
 -->
 
-<manifest
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.oem">
+  <!-- This is used for querying Cequint caller id. -->
+  <uses-permission android:name="com.cequint.ecid.CALLER_ID_LOOKUP"/>
+
 </manifest>

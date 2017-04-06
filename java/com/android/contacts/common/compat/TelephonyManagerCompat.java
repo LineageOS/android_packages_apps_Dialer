@@ -16,10 +16,13 @@
 
 package com.android.contacts.common.compat;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
+import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
@@ -39,6 +42,8 @@ public class TelephonyManagerCompat {
       "android.telecom.event.CALL_REMOTELY_UNHELD";
 
   public static final String TELEPHONY_MANAGER_CLASS = "android.telephony.TelephonyManager";
+
+  private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
 
   /**
    * @param telephonyManager The telephony manager instance to use for method calls.
@@ -209,5 +214,23 @@ public class TelephonyManagerCompat {
       LogUtil.e("TelephonyManagerCompat.setVisualVoicemailEnabled", "failed", e);
     }
     return false;
+  }
+
+  /**
+   * Handles secret codes to launch arbitrary activities.
+   *
+   * @param context the context to use
+   * @param secretCode the secret code without the "*#*#" prefix and "#*#*" suffix
+   */
+  public static void handleSecretCode(Context context, String secretCode) {
+    // Must use system service on O+ to avoid using broadcasts, which are not allowed on O+.
+    if (BuildCompat.isAtLeastO()) {
+      context.getSystemService(TelephonyManager.class).sendDialerSpecialCode(secretCode);
+    } else {
+      // System service call is not supported pre-O, so must use a broadcast for N-.
+      Intent intent =
+          new Intent(SECRET_CODE_ACTION, Uri.parse("android_secret_code://" + secretCode));
+      context.sendBroadcast(intent);
+    }
   }
 }

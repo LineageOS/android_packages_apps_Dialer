@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"അധിക ബായ്‌ക്കപ്പും സ്‌റ്റോറേജും"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" ഇത് നിലവിൽ ഞങ്ങൾ പരീക്ഷിക്കുന്ന "<b><i>"ഒരു പരീക്ഷണാത്മക ഫീച്ചറാണ്"</i></b>". ഇത് നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സെർവറിൽ നിന്ന് വോയ്‌സ്‌മെയിലുകൾ ഇല്ലാതാക്കാൻ സാധ്യതയുണ്ട്. ഈ ഫീച്ചർ ഭാവിയിൽ ഉപയോഗിക്കാനാവുമെന്ന് ഉറപ്പൊന്നുമില്ല. എങ്കിലും ഈ ഫീച്ചറിനെക്കുറിച്ചുള്ള ഫീഡ്‌ബാക്ക് അറിയാൻ ഞങ്ങൾ താൽപ്പര്യപ്പെടുന്നു."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"പിൻ സജ്ജമാക്കുക"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"പിൻ മാറ്റുക"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"പിൻ സജ്ജമാക്കുക"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"പിൻ മാറ്റുക"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"പിൻ മാറ്റുന്നതിന് വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഇതുവരെ സജീവമാക്കിയിട്ടില്ല, പിന്നീട് വീണ്ടും ശ്രമിച്ചുനോക്കൂ"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"പഴയ പിൻ"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"പുതിയ പിൻ"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"കാത്തിരിക്കുക."</string>

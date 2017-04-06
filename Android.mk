@@ -66,6 +66,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/phonenumberutil/res \
 	$(BASE_DIR)/dialer/postcall/res \
 	$(BASE_DIR)/dialer/shortcuts/res \
+	$(BASE_DIR)/dialer/speeddial/res \
 	$(BASE_DIR)/dialer/theme/res \
 	$(BASE_DIR)/dialer/util/res \
 	$(BASE_DIR)/dialer/voicemailstatus/res \
@@ -84,6 +85,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/res \
 	$(BASE_DIR)/incallui/sessiondata/res \
 	$(BASE_DIR)/incallui/video/impl/res \
+	$(BASE_DIR)/incallui/video/protocol/res \
 	$(BASE_DIR)/incallui/wifi/res \
 	$(BASE_DIR)/voicemail/impl/res
 
@@ -112,6 +114,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/postcall/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/shortcuts/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/simulator/impl/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/speeddial/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/theme/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/util/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/voicemailstatus/AndroidManifest.xml \
@@ -129,6 +132,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/incall/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/sessiondata/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
+	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml
 
@@ -179,6 +183,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.phonenumberutil \
 	--extra-packages com.android.dialer.postcall \
 	--extra-packages com.android.dialer.shortcuts \
+	--extra-packages com.android.dialer.speeddial \
 	--extra-packages com.android.dialer.util \
 	--extra-packages com.android.dialer.voicemailstatus \
 	--extra-packages com.android.dialer.widget \

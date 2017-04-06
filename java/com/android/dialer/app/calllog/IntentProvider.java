@@ -29,6 +29,7 @@ import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.nano.CallInitiationType;
+import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -71,6 +72,15 @@ public abstract class IntentProvider {
             .setPhoneAccountHandle(accountHandle)
             .setIsVideoCall(true)
             .build();
+      }
+    };
+  }
+
+  public static IntentProvider getLightbringerIntentProvider(String number) {
+    return new IntentProvider() {
+      @Override
+      public Intent getIntent(Context context) {
+        return LightbringerComponent.get(context).getLightbringer().getIntent(context, number);
       }
     };
   }

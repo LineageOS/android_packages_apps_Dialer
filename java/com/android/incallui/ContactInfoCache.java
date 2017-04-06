@@ -22,7 +22,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
@@ -33,6 +32,7 @@ import android.provider.ContactsContract.DisplayNameSources;
 import android.support.annotation.AnyThread;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.TelecomManager;
@@ -42,6 +42,9 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.logging.nano.ContactLookupResult;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
@@ -83,6 +86,44 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   private Drawable mDefaultContactPhotoDrawable;
   private Drawable mConferencePhotoDrawable;
   private int mQueryId;
+  private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor =
+      DialerExecutors.createNonUiTaskBuilder(new CachedNumberLookupWorker()).build();
+
+  private static class CachedNumberLookupWorker implements Worker<CnapInformationWrapper, Void> {
+    @Nullable
+    @Override
+    public Void doInBackground(@Nullable CnapInformationWrapper input) {
+      if (input == null) {
+        return null;
+      }
+      ContactInfo contactInfo = new ContactInfo();
+      CachedContactInfo cacheInfo = input.service.buildCachedContactInfo(contactInfo);
+      cacheInfo.setSource(CachedContactInfo.SOURCE_TYPE_CNAP, "CNAP", 0);
+      contactInfo.name = input.cnapName;
+      contactInfo.number = input.number;
+      contactInfo.type = ContactsContract.CommonDataKinds.Phone.TYPE_MAIN;
+      try {
+        final JSONObject contactRows =
+            new JSONObject()
+                .put(
+                    Phone.CONTENT_ITEM_TYPE,
+                    new JSONObject()
+                        .put(Phone.NUMBER, contactInfo.number)
+                        .put(Phone.TYPE, Phone.TYPE_MAIN));
+        final String jsonString =
+            new JSONObject()
+                .put(Contacts.DISPLAY_NAME, contactInfo.name)
+                .put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.STRUCTURED_NAME)
+                .put(Contacts.CONTENT_ITEM_TYPE, contactRows)
+                .toString();
+        cacheInfo.setLookupKey(jsonString);
+      } catch (JSONException e) {
+        Log.w(TAG, "Creation of lookup key failed when caching CNAP information");
+      }
+      input.service.addContact(input.context.getApplicationContext(), cacheInfo);
+      return null;
+    }
+  }
 
   private ContactInfoCache(Context context) {
     mContext = context;
@@ -117,7 +158,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     Objects.requireNonNull(info);
     String displayName = null;
     String displayNumber = null;
-    String displayLocation = null;
     String label = null;
     boolean isSipCall = false;
 
@@ -188,23 +228,11 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // dialpad.
         displayNumber = PhoneNumberHelper.formatNumber(number, context);
 
-        // Display a geographical description string if available
-        // (but only for incoming calls.)
-        if (isIncoming) {
-          // TODO (CallerInfoAsyncQuery cleanup): Fix the CallerInfo
-          // query to only do the geoDescription lookup in the first
-          // place for incoming calls.
-          displayLocation = info.geoDescription; // may be null
-          Log.d(TAG, "Geodescrption: " + info.geoDescription);
-        }
-
         Log.d(
             TAG,
             "  ==>  no name; falling back to number:"
                 + " displayNumber '"
                 + Log.pii(displayNumber)
-                + "', displayLocation '"
-                + displayLocation
                 + "'");
       }
     } else {
@@ -237,11 +265,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     cce.namePrimary = displayName;
     cce.number = displayNumber;
-    cce.location = displayLocation;
+    cce.location = info.geoDescription;
     cce.label = label;
     cce.isSipCall = isSipCall;
     cce.userType = info.userType;
     cce.originalPhoneNumber = info.phoneNumber;
+    cce.shouldShowLocation = info.shouldShowGeoDescription;
 
     if (info.contactExists) {
       cce.contactLookupResult = ContactLookupResult.Type.LOCAL_CONTACT;
@@ -271,6 +300,21 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     return mInfoMap.get(callId);
   }
 
+  private static final class CnapInformationWrapper {
+    final String number;
+    final String cnapName;
+    final Context context;
+    final CachedNumberLookupService service;
+
+    CnapInformationWrapper(
+        String number, String cnapName, Context context, CachedNumberLookupService service) {
+      this.number = number;
+      this.cnapName = cnapName;
+      this.context = context;
+      this.service = service;
+    }
+  }
+
   void maybeInsertCnapInformationIntoCache(
       Context context, final DialerCall call, final CallerInfo info) {
     final CachedNumberLookupService cachedNumberLookupService =
@@ -284,39 +328,11 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         || mInfoMap.get(call.getId()) != null) {
       return;
     }
-    final Context applicationContext = context.getApplicationContext();
     Log.i(TAG, "Found contact with CNAP name - inserting into cache");
-    new AsyncTask<Void, Void, Void>() {
-      @Override
-      protected Void doInBackground(Void... params) {
-        ContactInfo contactInfo = new ContactInfo();
-        CachedContactInfo cacheInfo = cachedNumberLookupService.buildCachedContactInfo(contactInfo);
-        cacheInfo.setSource(CachedContactInfo.SOURCE_TYPE_CNAP, "CNAP", 0);
-        contactInfo.name = info.cnapName;
-        contactInfo.number = call.getNumber();
-        contactInfo.type = ContactsContract.CommonDataKinds.Phone.TYPE_MAIN;
-        try {
-          final JSONObject contactRows =
-              new JSONObject()
-                  .put(
-                      Phone.CONTENT_ITEM_TYPE,
-                      new JSONObject()
-                          .put(Phone.NUMBER, contactInfo.number)
-                          .put(Phone.TYPE, Phone.TYPE_MAIN));
-          final String jsonString =
-              new JSONObject()
-                  .put(Contacts.DISPLAY_NAME, contactInfo.name)
-                  .put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.STRUCTURED_NAME)
-                  .put(Contacts.CONTENT_ITEM_TYPE, contactRows)
-                  .toString();
-          cacheInfo.setLookupKey(jsonString);
-        } catch (JSONException e) {
-          Log.w(TAG, "Creation of lookup key failed when caching CNAP information");
-        }
-        cachedNumberLookupService.addContact(applicationContext, cacheInfo);
-        return null;
-      }
-    }.execute();
+
+    cachedNumberLookupExecutor.executeParallel(
+        new CnapInformationWrapper(
+            call.getNumber(), info.cnapName, context, cachedNumberLookupService));
   }
 
   /**
@@ -383,7 +399,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         CallerInfoUtils.getCallerInfoForCall(
             mContext,
             call,
-            new DialerCallCookieWrapper(callId, call.getNumberPresentation()),
+            new DialerCallCookieWrapper(callId, call.getNumberPresentation(), call.getCnapName()),
             new FindInfoCallback(isIncoming, queryToken));
 
     if (cacheEntry != null) {
@@ -478,22 +494,34 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     return cacheEntry;
   }
 
-  private void maybeUpdateFromCequintCallerId(CallerInfo callerInfo, boolean isIncoming) {
+  private void maybeUpdateFromCequintCallerId(
+      CallerInfo callerInfo, String cnapName, boolean isIncoming) {
     if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
+      return;
+    }
+    if (callerInfo.phoneNumber == null) {
       return;
     }
     CequintCallerIdContact cequintCallerIdContact =
         CequintCallerIdManager.getCequintCallerIdContactForInCall(
-            mContext, callerInfo.phoneNumber, callerInfo.cnapName, isIncoming);
+            mContext, callerInfo.phoneNumber, cnapName, isIncoming);
 
-    if (!TextUtils.isEmpty(cequintCallerIdContact.name)) {
+    if (cequintCallerIdContact == null) {
+      return;
+    }
+
+    if (TextUtils.isEmpty(callerInfo.name) && !TextUtils.isEmpty(cequintCallerIdContact.name)) {
       callerInfo.name = cequintCallerIdContact.name;
+      callerInfo.contactExists = true;
     }
     if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
       callerInfo.geoDescription = cequintCallerIdContact.geoDescription;
+      callerInfo.shouldShowGeoDescription = true;
+      callerInfo.contactExists = true;
     }
-    if (cequintCallerIdContact.imageUrl != null) {
+    if (callerInfo.contactDisplayPhotoUri == null && cequintCallerIdContact.imageUrl != null) {
       callerInfo.contactDisplayPhotoUri = Uri.parse(cequintCallerIdContact.imageUrl);
+      callerInfo.contactExists = true;
     }
   }
 
@@ -691,6 +719,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     int queryId;
     /** The phone number without any changes to display to the user (ex: cnap...) */
     String originalPhoneNumber;
+    boolean shouldShowLocation;
 
     boolean isBusiness;
 
@@ -730,17 +759,21 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
           + queryId
           + ", originalPhoneNumber="
           + originalPhoneNumber
+          + ", shouldShowLocation="
+          + shouldShowLocation
           + '}';
     }
   }
 
   private static final class DialerCallCookieWrapper {
-    public final String callId;
-    public final int numberPresentation;
+    final String callId;
+    final int numberPresentation;
+    final String cnapName;
 
-    public DialerCallCookieWrapper(String callId, int numberPresentation) {
+    DialerCallCookieWrapper(String callId, int numberPresentation, String cnapName) {
       this.callId = callId;
       this.numberPresentation = numberPresentation;
+      this.cnapName = cnapName;
     }
   }
 
@@ -749,7 +782,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     private final boolean mIsIncoming;
     private final CallerInfoQueryToken mQueryToken;
 
-    public FindInfoCallback(boolean isIncoming, CallerInfoQueryToken queryToken) {
+    FindInfoCallback(boolean isIncoming, CallerInfoQueryToken queryToken) {
       mIsIncoming = isIncoming;
       mQueryToken = queryToken;
     }
@@ -762,7 +795,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         return;
       }
       long start = SystemClock.uptimeMillis();
-      maybeUpdateFromCequintCallerId(ci, mIsIncoming);
+      maybeUpdateFromCequintCallerId(ci, cw.cnapName, mIsIncoming);
       long time = SystemClock.uptimeMillis() - start;
       Log.d(TAG, "Cequint Caller Id look up takes " + time + " ms.");
       updateCallerInfoInCacheOnAnyThread(
@@ -844,6 +877,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // field is no longer used; it is persisted here in case
         // the UI is ever changed to use it.
         entry.location = oldEntry.location;
+        entry.shouldShowLocation = oldEntry.shouldShowLocation;
         // Contact specific ringtone is obtained from local lookup.
         entry.contactRingtoneUri = oldEntry.contactRingtoneUri;
       }

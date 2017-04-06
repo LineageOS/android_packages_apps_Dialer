@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.view.MenuItem;
@@ -31,8 +33,10 @@ import android.widget.Toast;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import java.util.List;
 
@@ -119,14 +123,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       migrationStatusOnBuildHeaders = FilteredNumberCompat.hasMigratedToNewBlocking(this);
     }
 
-    String voicemailSettingsFragment =
-        VoicemailComponent.get(this).getVoicemailClient().getSettingsFragment();
-    if (isPrimaryUser && voicemailSettingsFragment != null) {
-      Header voicemailSettings = new Header();
-      voicemailSettings.titleRes = R.string.voicemail_settings_label;
-      voicemailSettings.fragment = voicemailSettingsFragment;
-      target.add(voicemailSettings);
-    }
+    addVoicemailSettings(target, isPrimaryUser);
 
     if (isPrimaryUser
         && (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
@@ -138,6 +135,37 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
       target.add(accessibilitySettingsHeader);
     }
+  }
+
+  private void addVoicemailSettings(List<Header> target, boolean isPrimaryUser) {
+    if (!isPrimaryUser) {
+      LogUtil.i("DialerSettingsActivity.addVoicemailSettings", "user not primary user");
+      return;
+    }
+    String voicemailSettingsFragment =
+        VoicemailComponent.get(this).getVoicemailClient().getSettingsFragment();
+    if (voicemailSettingsFragment == null) {
+      LogUtil.i(
+          "DialerSettingsActivity.addVoicemailSettings",
+          "VoicemailClient does not provide settings");
+      return;
+    }
+
+    PhoneAccountHandle phoneAccountHandle =
+        getSystemService(TelecomManager.class)
+            .getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
+    if (phoneAccountHandle == null) {
+      LogUtil.e("DialerSettingsActivity.addVoicemailSettings", "phoneAccountHandle is null");
+      return;
+    }
+    LogUtil.i("DialerSettingsActivity.addVoicemailSettings", "adding voicemail settings");
+    Header voicemailSettings = new Header();
+    voicemailSettings.titleRes = R.string.voicemail_settings_label;
+    voicemailSettings.fragment = voicemailSettingsFragment;
+    Bundle bundle = new Bundle();
+    bundle.putParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+    voicemailSettings.fragmentArguments = bundle;
+    target.add(voicemailSettings);
   }
 
   /**

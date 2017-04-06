@@ -285,7 +285,7 @@ public class FilteredNumbersUtil {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification.Builder builder =
                 new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.ic_block_24dp)
+                    .setSmallIcon(R.drawable.quantum_ic_block_white_24)
                     .setContentTitle(
                         context.getString(R.string.call_blocking_disabled_notification_title))
                     .setContentText(

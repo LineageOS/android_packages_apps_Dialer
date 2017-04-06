@@ -23,27 +23,32 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
-import android.telecom.PhoneAccount;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.common.Assert;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
+import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
-/** Fragment for voicemail settings. */
+/**
+ * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set
+ * in arguments.
+ */
 @TargetApi(VERSION_CODES.O)
 public class VoicemailSettingsFragment extends PreferenceFragment
     implements Preference.OnPreferenceChangeListener,
-        VoicemailRingtonePreference.VoicemailRingtoneNameChangeListener {
+        VoicemailRingtonePreference.VoicemailRingtoneNameChangeListener,
+        VvmAccountManager.Listener {
 
   private static final String TAG = "VmSettingsActivity";
 
-  private PhoneAccountHandle phoneAccountHandle;
+  @Nullable private PhoneAccountHandle phoneAccountHandle;
   private OmtpVvmCarrierConfigHelper omtpVvmCarrierConfigHelper;
 
   private VoicemailRingtonePreference voicemailRingtonePreference;
@@ -62,9 +67,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     super.onCreate(icicle);
 
     phoneAccountHandle =
-        getContext()
-            .getSystemService(TelecomManager.class)
-            .getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
+        Assert.isNotNull(getArguments().getParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE));
 
     omtpVvmCarrierConfigHelper = new OmtpVvmCarrierConfigHelper(getContext(), phoneAccountHandle);
   }
@@ -73,6 +76,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   public void onResume() {
     super.onResume();
     Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_SETTINGS_VIEWED);
+    VvmAccountManager.addListener(this);
     PreferenceScreen preferenceScreen = getPreferenceScreen();
     if (preferenceScreen != null) {
       preferenceScreen.removeAll();
@@ -123,33 +127,38 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         (SwitchPreference)
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
 
-    if (!ConfigProviderBindings.get(getContext())
-        .getBoolean(VisualVoicemailSettingsUtil.ALLOW_VOICEMAIL_ARCHIVE, true)) {
+    if (!VoicemailComponent.get(getContext())
+        .getVoicemailClient()
+        .isVoicemailArchiveAvailable(getContext())) {
       getPreferenceScreen().removePreference(autoArchiveSwitchPreference);
     }
 
     voicemailChangePinPreference = findPreference(getString(R.string.voicemail_change_pin_key));
-    Intent changePinIntent = new Intent(new Intent(getContext(), VoicemailChangePinActivity.class));
-    changePinIntent.putExtra(
-        VoicemailChangePinActivity.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
-
-    voicemailChangePinPreference.setIntent(changePinIntent);
-    voicemailChangePinPreference.setOnPreferenceClickListener(
-        new OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick(Preference preference) {
-            Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_CLICKED);
-            // Let the preference handle the click.
-            return false;
-          }
-        });
-    if (VoicemailChangePinActivity.isDefaultOldPinSet(getContext(), phoneAccountHandle)) {
-      voicemailChangePinPreference.setTitle(R.string.voicemail_set_pin_dialog_title);
-    } else {
-      voicemailChangePinPreference.setTitle(R.string.voicemail_change_pin_dialog_title);
-    }
 
     if (omtpVvmCarrierConfigHelper.isValid()) {
+      Assert.isNotNull(phoneAccountHandle);
+      Intent changePinIntent =
+          new Intent(new Intent(getContext(), VoicemailChangePinActivity.class));
+      changePinIntent.putExtra(
+          VoicemailChangePinActivity.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+
+      voicemailChangePinPreference.setIntent(changePinIntent);
+      voicemailChangePinPreference.setOnPreferenceClickListener(
+          new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+              Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_CLICKED);
+              // Let the preference handle the click.
+              return false;
+            }
+          });
+      if (VoicemailChangePinActivity.isDefaultOldPinSet(getContext(), phoneAccountHandle)) {
+        voicemailChangePinPreference.setTitle(R.string.voicemail_set_pin_preference_title);
+      } else {
+        voicemailChangePinPreference.setTitle(R.string.voicemail_change_pin_preference_title);
+      }
+      updateChangePin();
+
       voicemailVisualVoicemail.setOnPreferenceChangeListener(this);
       voicemailVisualVoicemail.setChecked(
           VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle));
@@ -159,10 +168,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
           getText(R.string.voicemail_visual_voicemail_auto_archive_temporary_disclaimer));
       autoArchiveSwitchPreference.setChecked(
           VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
-
-      if (!isVisualVoicemailActivated()) {
-        prefSet.removePreference(voicemailChangePinPreference);
-      }
     } else {
       prefSet.removePreference(voicemailVisualVoicemail);
       prefSet.removePreference(autoArchiveSwitchPreference);
@@ -188,6 +193,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
   @Override
   public void onPause() {
+    VvmAccountManager.removeListener(this);
     super.onPause();
   }
 
@@ -210,12 +216,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
       }
 
-      PreferenceScreen prefSet = getPreferenceScreen();
-      if (isVisualVoicemailActivated()) {
-        prefSet.addPreference(voicemailChangePinPreference);
-      } else {
-        prefSet.removePreference(voicemailChangePinPreference);
-      }
+      updateChangePin();
     } else if (preference.getKey().equals(autoArchiveSwitchPreference.getKey())) {
       logArchiveToggle((boolean) objValue);
       VisualVoicemailSettingsUtil.setArchiveEnabled(
@@ -228,6 +229,21 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     // Always let the preference setting proceed.
     return true;
+  }
+
+  private void updateChangePin() {
+    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
+      voicemailChangePinPreference.setSummary(
+          R.string.voicemail_change_pin_preference_summary_disable);
+      voicemailChangePinPreference.setEnabled(false);
+    } else if (!VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle)) {
+      voicemailChangePinPreference.setSummary(
+          R.string.voicemail_change_pin_preference_summary_not_activated);
+      voicemailChangePinPreference.setEnabled(false);
+    } else {
+      voicemailChangePinPreference.setSummary(null);
+      voicemailChangePinPreference.setEnabled(true);
+    }
   }
 
   private void logArchiveToggle(boolean userTurnedOn) {
@@ -245,10 +261,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     oldRingtoneName = name;
   }
 
-  private boolean isVisualVoicemailActivated() {
-    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
-      return false;
+  @Override
+  public void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated) {
+    if (this.phoneAccountHandle.equals(phoneAccountHandle)) {
+      updateChangePin();
     }
-    return VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle);
   }
 }

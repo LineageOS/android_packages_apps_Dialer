@@ -17,6 +17,7 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -38,7 +39,12 @@ import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
@@ -58,6 +64,7 @@ import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
@@ -65,6 +72,9 @@ import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
+import com.android.dialer.lightbringer.Lightbringer;
+import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.lightbringer.LightbringerListener;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.phonenumbercache.CallLogQuery;
@@ -80,7 +90,7 @@ import java.util.Set;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
-    implements GroupCreator, OnVoicemailDeletedListener {
+    implements GroupCreator, OnVoicemailDeletedListener, LightbringerListener {
 
   // Types of activities the call log adapter is used for
   public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -118,6 +128,58 @@ public class CallLogAdapter extends GroupingListAdapter
   private long mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
 
   private final CallLogAlertManager mCallLogAlertManager;
+
+  public static ActionMode mActionMode = null;
+  private final SparseBooleanArray selectedItems = new SparseBooleanArray();
+
+  private final ActionMode.Callback mActionModeCallback =
+      new ActionMode.Callback() {
+
+        // Called when the action mode is created; startActionMode() was called
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+          mActionMode = mode;
+          // Inflate a menu resource providing context menu items
+          MenuInflater inflater = mode.getMenuInflater();
+          inflater.inflate(R.menu.actionbar_delete, menu);
+          return true;
+        }
+
+        // Called each time the action mode is shown. Always called after onCreateActionMode, but
+        // may be called multiple times if the mode is invalidated.
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+          return false; // Return false if nothing is done
+        }
+
+        // Called when the user selects a contextual menu item
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+          return false;
+        }
+
+        // Called when the user exits the action mode
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+          selectedItems.clear();
+          mActionMode = null;
+          notifyDataSetChanged();
+        }
+      };
+
+  private final View.OnLongClickListener mLongPressListener =
+      new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+          if (ConfigProviderBindings.get(v.getContext())
+              .getBoolean("enable_call_log_multiselect", false)) {
+            v.startActionMode(mActionModeCallback);
+            return false;
+          }
+          return true;
+        }
+      };
+
   /** The OnClickListener used to expand or collapse the action buttons of a call log entry. */
   private final View.OnClickListener mExpandCollapseListener =
       new View.OnClickListener() {
@@ -125,6 +187,20 @@ public class CallLogAdapter extends GroupingListAdapter
         public void onClick(View v) {
           CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
           if (viewHolder == null) {
+            return;
+          }
+          if (mActionMode != null && viewHolder.voicemailUri != null) {
+            if (selectedItems.get((int) ContentUris.parseId(Uri.parse(viewHolder.voicemailUri)))) {
+              selectedItems.delete((int) ContentUris.parseId(Uri.parse(viewHolder.voicemailUri)));
+              viewHolder.checkBoxView.setVisibility(View.GONE);
+              viewHolder.quickContactView.setVisibility(View.VISIBLE);
+            } else {
+              viewHolder.quickContactView.setVisibility(View.GONE);
+              viewHolder.checkBoxView.setVisibility(View.VISIBLE);
+              selectedItems.put(
+                  (int) ContentUris.parseId(Uri.parse(viewHolder.voicemailUri)), true);
+            }
+            mActionMode.setTitle(Integer.toString(selectedItems.size()));
             return;
           }
 
@@ -313,10 +389,12 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     mIsSpamEnabled = Spam.get(mActivity).isSpamEnabled();
+    getLightbringer().registerListener(this);
     notifyDataSetChanged();
   }
 
   public void onPause() {
+    getLightbringer().unregisterListener(this);
     pauseCache();
     for (Uri uri : mHiddenItemUris) {
       CallLogAsyncTaskUtil.deleteVoicemail(mActivity, uri, null);
@@ -365,6 +443,7 @@ public class CallLogAdapter extends GroupingListAdapter
             mActivity,
             mBlockReportSpamListener,
             mExpandCollapseListener,
+            mLongPressListener,
             mCallLogCache,
             mCallLogListItemHelper,
             mVoicemailPlaybackPresenter);
@@ -471,6 +550,7 @@ public class CallLogAdapter extends GroupingListAdapter
     setCallDetailsEntriesHistoryResults(
         views.number, callDetailsEntries, getAllHistoricalData(views.number, callDetailsEntries));
     views.setDetailedPhoneDetails(callDetailsEntries);
+    views.lightbringerReady = getLightbringer().isReachable(mActivity, views.number);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
           @Override
@@ -741,6 +821,15 @@ public class CallLogAdapter extends GroupingListAdapter
     views.workIconView.setVisibility(
         details.contactUserType == ContactsUtils.USER_TYPE_WORK ? View.VISIBLE : View.GONE);
 
+    if (views.voicemailUri != null
+        && selectedItems.get((int) ContentUris.parseId(Uri.parse(views.voicemailUri)))) {
+      views.checkBoxView.setVisibility(View.VISIBLE);
+      views.quickContactView.setVisibility(View.GONE);
+    } else if (views.voicemailUri != null) {
+      views.checkBoxView.setVisibility(View.GONE);
+      views.quickContactView.setVisibility(View.VISIBLE);
+    }
+
     mCallLogListItemHelper.setPhoneCallDetails(views, details);
     if (mCurrentlyExpandedRowId == views.rowId) {
       // In case ViewHolders were added/removed, update the expanded position if the rowIds
@@ -995,6 +1084,16 @@ public class CallLogAdapter extends GroupingListAdapter
   @NonNull
   private EnrichedCallManager getEnrichedCallManager() {
     return EnrichedCallComponent.get(mActivity).getEnrichedCallManager();
+  }
+
+  @NonNull
+  private Lightbringer getLightbringer() {
+    return LightbringerComponent.get(mActivity).getLightbringer();
+  }
+
+  @Override
+  public void onLightbringerStateChanged() {
+    notifyDataSetChanged();
   }
 
   /** Interface used to initiate a refresh of the content. */

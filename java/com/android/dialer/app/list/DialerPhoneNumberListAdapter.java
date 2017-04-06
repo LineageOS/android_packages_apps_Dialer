@@ -185,15 +185,15 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         break;
       case SHORTCUT_ADD_TO_EXISTING_CONTACT:
         text = resources.getString(R.string.search_shortcut_add_to_contact);
-        drawableId = R.drawable.ic_person_24dp;
+        drawableId = R.drawable.quantum_ic_person_white_24;
         break;
       case SHORTCUT_SEND_SMS_MESSAGE:
         text = resources.getString(R.string.search_shortcut_send_sms_message);
-        drawableId = R.drawable.ic_message_24dp;
+        drawableId = R.drawable.quantum_ic_message_white_24;
         break;
       case SHORTCUT_MAKE_VIDEO_CALL:
         text = resources.getString(R.string.search_shortcut_make_video_call);
-        drawableId = R.drawable.ic_videocam;
+        drawableId = R.drawable.quantum_ic_videocam_white_24;
         break;
       case SHORTCUT_BLOCK_NUMBER:
         text = resources.getString(R.string.search_shortcut_block_number);

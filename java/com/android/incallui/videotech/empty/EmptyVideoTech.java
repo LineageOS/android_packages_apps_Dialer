@@ -27,7 +27,7 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 public class EmptyVideoTech implements VideoTech {
 
   @Override
-  public boolean isAvailable() {
+  public boolean isAvailable(Context context) {
     return false;
   }
 
@@ -53,7 +53,7 @@ public class EmptyVideoTech implements VideoTech {
   }
 
   @Override
-  public void onCallStateChanged(int newState) {}
+  public void onCallStateChanged(Context context, int newState) {}
 
   @Override
   public int getSessionModificationState() {

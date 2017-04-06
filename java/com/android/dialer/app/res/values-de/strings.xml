@@ -28,7 +28,7 @@
     <string name="action_unblock_number" msgid="6583611581996402004">"Blockierung der Nummer aufheben"</string>
     <string name="action_edit_number_before_call" msgid="8017492815878473837">"Nummer vor Anruf bearbeiten"</string>
     <string name="call_log_delete_all" msgid="7852970926906523784">"Anrufliste löschen"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Mailbox-Nachricht löschen"</string>
+    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Mailboxnachricht löschen"</string>
     <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"Mailbox gelöscht"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"Rückgängig"</string>
     <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"Anrufliste löschen?"</string>
@@ -43,16 +43,16 @@
     <string name="notification_missedCall_message" msgid="5086910028988305964">"Nachricht"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mailbox-Nachrichten </item>
-      <item quantity="one">Mailbox-Nachricht</item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mailboxnachrichten </item>
+      <item quantity="one">Mailboxnachricht</item>
     </plurals>
     <string name="notification_action_voicemail_play" msgid="5156500902796354071">"Anhören"</string>
     <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Neue Mailbox-Nachricht von <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"Mailbox-Nachricht-Wiedergabe nicht möglich"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"Mailbox-Nachricht wird geladen…"</string>
-    <string name="voicemail_archiving_content" msgid="2415183864104922185">"Mailbox-Nachricht wird archiviert…"</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Laden der Mailbox-Nachricht nicht möglich"</string>
+    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Neue Mailboxnachricht von <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="4384373852257757295">"Mailboxnachricht-Wiedergabe nicht möglich"</string>
+    <string name="voicemail_fetching_content" msgid="572320120918636014">"Mailboxnachricht wird geladen…"</string>
+    <string name="voicemail_archiving_content" msgid="2415183864104922185">"Mailboxnachricht wird archiviert…"</string>
+    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Laden der Mailboxnachricht nicht möglich"</string>
     <string name="call_log_voicemail_header" msgid="5799424860394542726">"Nur Mailbox-Anrufe"</string>
     <string name="call_log_incoming_header" msgid="1158753168119845168">"Nur eingehende Anrufe"</string>
     <string name="call_log_outgoing_header" msgid="149333910997122683">"Nur ausgehende Anrufe"</string>
@@ -91,7 +91,7 @@
     <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> Anrufe"</string>
     <string name="description_video_call" msgid="3738199365585751727">"Videoanruf"</string>
     <string name="description_send_text_message" msgid="8450269896765568596">"SMS an <xliff:g id="NAME">%1$s</xliff:g> senden"</string>
-    <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"Nicht abgehörte Mailbox-Nachricht"</string>
+    <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"Nicht abgehörte Mailboxnachricht"</string>
     <string name="description_start_voice_search" msgid="8380022725973015261">"Sprachsuche starten"</string>
     <string name="menu_callNumber" msgid="1540773545517152514">"<xliff:g id="NUMBER">%s</xliff:g> wählen"</string>
     <string name="voicemail" msgid="8899540969000957954">"Mailbox"</string>
@@ -122,7 +122,7 @@
     <string name="call_log_activity_title" msgid="1275242727244945527">"Anrufliste"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"Alle"</string>
     <string name="call_log_missed_title" msgid="17254005889268015">"Entgangen"</string>
-    <string name="call_log_voicemail_title" msgid="6504826963256437971">"Mailbox-Nachrichten"</string>
+    <string name="call_log_voicemail_title" msgid="6504826963256437971">"Mailboxnachrichten"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"Schnellauswahl"</string>
     <string name="tab_history" msgid="7420269368689503596">"Anrufliste"</string>
     <string name="tab_all_contacts" msgid="5531733977693943015">"Kontakte"</string>
@@ -149,17 +149,17 @@
     <string name="call_log_action_call" msgid="682724094251540583">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> anrufen"</string>
     <string name="description_incoming_missed_call" msgid="8292535799379230029">"Anruf von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> verpasst"</string>
     <string name="description_incoming_answered_call" msgid="3920182963103160610">"Anruf von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> angenommen"</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"Ungelesene Mailbox-Nachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"Mailbox-Nachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_unread_voicemail" msgid="145170985013419170">"Ungelesene Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="5585559881573227732">"Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="543952487882919924">"Ausgehender Anruf an <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="call_log_via_number" msgid="1340307109806397650">"über <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> über <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_action" msgid="4042796498169106545">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> anrufen"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> über Videoanruf anrufen"</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> anhören"</string>
-    <string name="description_voicemail_play" msgid="737337291418966183">"Mailbox-Nachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> abhören"</string>
-    <string name="description_voicemail_pause" msgid="2400610579956333661">"Mailbox-Nachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> pausieren"</string>
-    <string name="description_voicemail_delete" msgid="5305509366448404410">"Mailbox-Nachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> löschen"</string>
+    <string name="description_voicemail_play" msgid="737337291418966183">"Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> abhören"</string>
+    <string name="description_voicemail_pause" msgid="2400610579956333661">"Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> pausieren"</string>
+    <string name="description_voicemail_delete" msgid="5305509366448404410">"Mailboxnachricht von <xliff:g id="NAMEORNUMBER">^1</xliff:g> löschen"</string>
     <plurals name="description_voicemail_unread" formatted="false" msgid="7562208210097630839">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> neue Mailboxnachrichten</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> neue Mailboxnachricht</item>
@@ -200,8 +200,8 @@
     <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Importieren"</string>
     <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Blockierung der Nummer aufheben"</string>
     <string name="addBlockedNumber" msgid="3053473735238295551">"Nummer hinzufügen"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Anrufe von diesen Nummern werden blockiert und Mailbox-Nachrichten automatisch gelöscht."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Anrufe von diesen Nummern werden blockiert. Die Anrufer haben aber unter Umständen weiterhin die Möglichkeit, dir Mailbox-Nachrichten zu hinterlassen."</string>
+    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Anrufe von diesen Nummern werden blockiert und Mailboxnachrichten automatisch gelöscht."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Anrufe von diesen Nummern werden blockiert. Die Anrufer haben aber unter Umständen weiterhin die Möglichkeit, dir Mailboxnachrichten zu hinterlassen."</string>
     <string name="block_list" msgid="4701585783411870782">"Blockierte Nummern"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ist bereits blockiert."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"Anrufkonten"</string>

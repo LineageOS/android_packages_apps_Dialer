@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ခေါ်နေဆဲ Wi-Fi အလုပ်မှ ခေါ်ဆိုမှု"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"ခဏ ကိုင်ထားစဉ်"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ဓာတ်ပုံဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"မက်ဆေ့ဂျ်ဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"တည်နေရာဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ဓာတ်ပုံနှင့် မက်ဆေ့ဂျ်တို့ဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ဓာတ်ပုံနှင့် တည်နေရာတို့ဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"မက်ဆေ့ဂျ်နှင့် တည်နေရာတို့ဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ဓာတ်ပုံ၊ မက်ဆေ့ဂျ်၊ တည်နေရာဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"ပူးတွဲပါဖိုင်များဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ဓာတ်ပုံဖြင့် အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"မက်ဆေ့ဂျ်ဖြင့် အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"တည်နေရာဖြင့် အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ဓာတ်ပုံနှင့် မက်ဆေ့ဂျ်ဖြင့် အရေးကြီးသောခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ဓာတ်ပုံနှင့် တည်နေရာဖြင့် အရေးကြီးသောခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"မက်ဆေ့ဂျ်နှင့် တည်နေရာဖြင့် အရေးကြီးသောခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ဓာတ်ပုံ၊မက်ဆေ့ဂျ်၊တည်နေရာဖြင့် အရေးကြီးခေါ်ဆိုမှု"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ပူးတွဲပါဖိုင်များဖြင့် အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"အဝင် ခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ဝင်လာသော ဝိုင်ဖိုင်ခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Wi-Fi အလုပ်မှ အဝင် ခေါ်ဆိုမှု"</string>

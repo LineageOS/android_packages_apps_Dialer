@@ -331,6 +331,7 @@ public class CameraComposerFragment extends CallComposerFragment
     if (cameraUri != null) {
       previewImageView.setImageURI(cameraUri);
       previewImageView.setVisibility(View.VISIBLE);
+      previewImageView.setScaleX(cameraDirection == CameraInfo.CAMERA_FACING_FRONT ? -1 : 1);
     } else {
       previewImageView.setVisibility(View.GONE);
     }

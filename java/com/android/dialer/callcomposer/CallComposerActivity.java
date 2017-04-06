@@ -41,13 +41,13 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
 import com.android.dialer.callcomposer.nano.CallComposerContact;
@@ -70,6 +70,7 @@ import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
+import com.android.dialer.widget.DialerToolbar;
 import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 import java.io.File;
 
@@ -110,7 +111,7 @@ public class CallComposerActivity extends AppCompatActivity
   private TextView numberView;
   private QuickContactBadge contactPhoto;
   private RelativeLayout contactContainer;
-  private Toolbar toolbar;
+  private DialerToolbar toolbar;
   private View sendAndCall;
   private TextView sendAndCallText;
 
@@ -151,7 +152,7 @@ public class CallComposerActivity extends AppCompatActivity
     pager = (ViewPager) findViewById(R.id.call_composer_view_pager);
     background = (FrameLayout) findViewById(R.id.background);
     windowContainer = (LinearLayout) findViewById(R.id.call_composer_container);
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar = (DialerToolbar) findViewById(R.id.toolbar);
     sendAndCall = findViewById(R.id.send_and_call_button);
     sendAndCallText = (TextView) findViewById(R.id.send_and_call_text);
 
@@ -162,10 +163,6 @@ public class CallComposerActivity extends AppCompatActivity
             getResources().getInteger(R.integer.call_composer_message_limit));
     pager.setAdapter(adapter);
     pager.addOnPageChangeListener(this);
-
-    setActionBar(toolbar);
-    toolbar.setNavigationIcon(R.drawable.quantum_ic_close_white_24);
-    toolbar.setNavigationOnClickListener(v -> finish());
 
     background.addOnLayoutChangeListener(this);
     cameraIcon.setOnClickListener(this);
@@ -183,6 +180,11 @@ public class CallComposerActivity extends AppCompatActivity
       onPageSelected(currentIndex);
     }
 
+    int adjustMode =
+        isLandscapeLayout()
+            ? LayoutParams.SOFT_INPUT_ADJUST_PAN
+            : LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
+    getWindow().setSoftInputMode(adjustMode);
     // Since we can't animate the views until they are ready to be drawn, we use this listener to
     // track that and animate the call compose UI as soon as it's ready.
     ViewUtil.doOnPreDraw(
@@ -262,76 +264,80 @@ public class CallComposerActivity extends AppCompatActivity
     } else if (view == messageIcon) {
       pager.setCurrentItem(CallComposerPagerAdapter.INDEX_MESSAGE, true /* animate */);
     } else if (view == sendAndCall) {
-      if (!sessionReady()) {
-        LogUtil.i(
-            "CallComposerActivity.onClick", "sendAndCall pressed, but the session isn't ready");
-        Logger.get(this)
-            .logImpression(
-                DialerImpression.Type
-                    .CALL_COMPOSER_ACTIVITY_SEND_AND_CALL_PRESSED_WHEN_SESSION_NOT_READY);
-        return;
-      }
-      sendAndCall.setEnabled(false);
-      CallComposerFragment fragment =
-          (CallComposerFragment) adapter.instantiateItem(pager, currentIndex);
-      MultimediaData.Builder builder = MultimediaData.builder();
-
-      if (fragment instanceof MessageComposerFragment) {
-        MessageComposerFragment messageComposerFragment = (MessageComposerFragment) fragment;
-        builder.setText(messageComposerFragment.getMessage());
-        placeRCSCall(builder);
-      }
-      if (fragment instanceof GalleryComposerFragment) {
-        GalleryComposerFragment galleryComposerFragment = (GalleryComposerFragment) fragment;
-        // If the current data is not a copy, make one.
-        if (!galleryComposerFragment.selectedDataIsCopy()) {
-          new CopyAndResizeImageTask(
-                  CallComposerActivity.this,
-                  galleryComposerFragment.getGalleryData().getFileUri(),
-                  new Callback() {
-                    @Override
-                    public void onCopySuccessful(File file, String mimeType) {
-                      Uri shareableUri =
-                          FileProvider.getUriForFile(
-                              CallComposerActivity.this,
-                              Constants.get().getFileProviderAuthority(),
-                              file);
-
-                      builder.setImage(grantUriPermission(shareableUri), mimeType);
-                      placeRCSCall(builder);
-                    }
-
-                    @Override
-                    public void onCopyFailed(Throwable throwable) {
-                      // TODO(b/34279096) - gracefully handle message failure
-                      LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
-                    }
-                  })
-              .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } else {
-          Uri shareableUri =
-              FileProvider.getUriForFile(
-                  this,
-                  Constants.get().getFileProviderAuthority(),
-                  new File(galleryComposerFragment.getGalleryData().getFilePath()));
-
-          builder.setImage(
-              grantUriPermission(shareableUri),
-              galleryComposerFragment.getGalleryData().getMimeType());
-
-          placeRCSCall(builder);
-        }
-      }
-      if (fragment instanceof CameraComposerFragment) {
-        CameraComposerFragment cameraComposerFragment = (CameraComposerFragment) fragment;
-        cameraComposerFragment.getCameraUriWhenReady(
-            uri -> {
-              builder.setImage(grantUriPermission(uri), cameraComposerFragment.getMimeType());
-              placeRCSCall(builder);
-            });
-      }
+      sendAndCall();
     } else {
       Assert.fail();
+    }
+  }
+
+  @Override
+  public void sendAndCall() {
+    if (!sessionReady()) {
+      LogUtil.i("CallComposerActivity.onClick", "sendAndCall pressed, but the session isn't ready");
+      Logger.get(this)
+          .logImpression(
+              DialerImpression.Type
+                  .CALL_COMPOSER_ACTIVITY_SEND_AND_CALL_PRESSED_WHEN_SESSION_NOT_READY);
+      return;
+    }
+    sendAndCall.setEnabled(false);
+    CallComposerFragment fragment =
+        (CallComposerFragment) adapter.instantiateItem(pager, currentIndex);
+    MultimediaData.Builder builder = MultimediaData.builder();
+
+    if (fragment instanceof MessageComposerFragment) {
+      MessageComposerFragment messageComposerFragment = (MessageComposerFragment) fragment;
+      builder.setText(messageComposerFragment.getMessage());
+      placeRCSCall(builder);
+    }
+    if (fragment instanceof GalleryComposerFragment) {
+      GalleryComposerFragment galleryComposerFragment = (GalleryComposerFragment) fragment;
+      // If the current data is not a copy, make one.
+      if (!galleryComposerFragment.selectedDataIsCopy()) {
+        new CopyAndResizeImageTask(
+                CallComposerActivity.this,
+                galleryComposerFragment.getGalleryData().getFileUri(),
+                new Callback() {
+                  @Override
+                  public void onCopySuccessful(File file, String mimeType) {
+                    Uri shareableUri =
+                        FileProvider.getUriForFile(
+                            CallComposerActivity.this,
+                            Constants.get().getFileProviderAuthority(),
+                            file);
+
+                    builder.setImage(grantUriPermission(shareableUri), mimeType);
+                    placeRCSCall(builder);
+                  }
+
+                  @Override
+                  public void onCopyFailed(Throwable throwable) {
+                    // TODO(b/34279096) - gracefully handle message failure
+                    LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
+                  }
+                })
+            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+      } else {
+        Uri shareableUri =
+            FileProvider.getUriForFile(
+                this,
+                Constants.get().getFileProviderAuthority(),
+                new File(galleryComposerFragment.getGalleryData().getFilePath()));
+
+        builder.setImage(
+            grantUriPermission(shareableUri),
+            galleryComposerFragment.getGalleryData().getMimeType());
+
+        placeRCSCall(builder);
+      }
+    }
+    if (fragment instanceof CameraComposerFragment) {
+      CameraComposerFragment cameraComposerFragment = (CameraComposerFragment) fragment;
+      cameraComposerFragment.getCameraUriWhenReady(
+          uri -> {
+            builder.setImage(grantUriPermission(uri), cameraComposerFragment.getMimeType());
+            placeRCSCall(builder);
+          });
     }
   }
 
@@ -482,7 +488,7 @@ public class CallComposerActivity extends AppCompatActivity
             contact.contactType);
 
     nameView.setText(contact.nameOrNumber);
-    getActionBar().setTitle(contact.nameOrNumber);
+    toolbar.setTitle(contact.nameOrNumber);
     if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
       numberView.setVisibility(View.VISIBLE);
       String secondaryInfo =
@@ -577,11 +583,11 @@ public class CallComposerActivity extends AppCompatActivity
     inFullscreenMode = fullscreen;
     ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
     if (isLandscapeLayout()) {
-      layoutParams.height = background.getHeight() - messageIcon.getHeight();
+      layoutParams.height = background.getHeight();
       toolbar.setVisibility(View.INVISIBLE);
       contactContainer.setVisibility(View.GONE);
     } else if (fullscreen || getResources().getBoolean(R.bool.show_toolbar)) {
-      layoutParams.height = background.getHeight() - toolbar.getHeight() - messageIcon.getHeight();
+      layoutParams.height = background.getHeight() - toolbar.getHeight();
       toolbar.setVisibility(View.VISIBLE);
       contactContainer.setVisibility(View.GONE);
     } else {

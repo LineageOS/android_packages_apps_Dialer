@@ -427,7 +427,7 @@ public class CallButtonPresenter
   }
 
   private boolean hasVideoCallCapabilities(DialerCall call) {
-    return call.getVideoTech().isAvailable();
+    return call.getVideoTech().isAvailable(mContext);
   }
 
   /**

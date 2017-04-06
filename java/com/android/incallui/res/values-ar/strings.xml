@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"‏مكالمة عمل جارية عبر اتصال Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"معلقة"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"مكالمة واردة"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"مكالمة واردة مع صورة"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"مكالمة واردة مع رسالة"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"مكالمة واردة مع موقع"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"مكالمة واردة مع صورة ورسالة"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"مكالمة واردة مع صورة وموقع"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"مكالمة واردة مع رسالة وموقع"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"مكالمة واردة مع صورة ورسالة وموقع"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"مكالمة واردة مع مرفقات"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"مكالمة واردة مهمة"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"مكالمة واردة مهمة مع صورة"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"مكالمة واردة مهمة مع رسالة"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"مكالمة واردة مهمة مع موقع"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"مكالمة واردة مهمة مع صورة ورسالة"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"مكالمة واردة مهمة مع صورة وموقع"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"مكالمة واردة مهمة مع رسالة وموقع"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"مكالمة واردة مهمة مع صورة ورسالة وموقع"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"مكالمة واردة مهمة مع مرفقات"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"مكالمة عمل واردة"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"‏اتصال وارد عبر Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"‏مكالمة عمل واردة عبر اتصال Wi-Fi"</string>

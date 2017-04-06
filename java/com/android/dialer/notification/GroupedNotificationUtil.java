@@ -41,7 +41,7 @@ public final class GroupedNotificationUtil {
       int id,
       @NonNull String summaryTag) {
     if (tag == null) {
-      // Clear all missed call notifications
+      // Clear all grouped notifications
       for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
         if (notification.getId() == id) {
           notificationManager.cancel(notification.getTag(), id);
@@ -50,7 +50,7 @@ public final class GroupedNotificationUtil {
     } else {
       notificationManager.cancel(tag, id);
 
-      // See if other non-summary missed call notifications exist, and if not then clear the summary
+      // See if other non-summary grouped notifications exist, and if not then clear the summary
       boolean clearSummary = true;
       for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
         if (notification.getId() == id && !Objects.equals(summaryTag, notification.getTag())) {

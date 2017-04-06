@@ -34,6 +34,7 @@ import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
+import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sms.StatusSmsFetcher;
 import com.android.voicemail.impl.sync.OmtpVvmSyncService;
@@ -128,6 +129,11 @@ public class ActivationTask extends BaseTask {
     if (phoneAccountHandle == null) {
       // This should never happen
       VvmLog.e(TAG, "null PhoneAccountHandle");
+      return;
+    }
+
+    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
+      VvmLog.i(TAG, "VVM is disabled");
       return;
     }
 

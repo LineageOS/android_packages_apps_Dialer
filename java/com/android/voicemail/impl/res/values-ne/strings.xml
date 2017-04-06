@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"भिजुअल भ्वाइस मेल"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"अतिरिक्त ब्याकअप र भण्डारण"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"यो एउटा प्रयोगात्मक विशेषता हो"</i></b>" हामी अहिले परीक्षण गर्दैछौं। यसले सम्भवत: तपाईंको भ्वाइस मेल सर्भरका भ्वाइस मेलहरूलाई मेट्ने छ। भविष्यमा यो विशेषतालाई समर्थन गरिने कुराको ग्यारेन्टी छैन। तथापि हामी यो विशेषताका सम्बन्धमा प्रतिक्रिया आऊन् भन्ने चाहन्छौं।"</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"PIN सेट गर्नुहोस्"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"PIN परिवर्तन गर्नुहोस्"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN सेट गर्नुहोस्"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN परिवर्तन गर्नुहोस्"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN परिवर्तन गर्न अनिवार्य रूपले भिजुअल भ्वाइस मेललाई सक्षम पारिनुपर्छ"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"भिजुअल भ्वाइस मेललाई अझै सक्रिय पारिएको छैन, कृपया पुन: प्रयास गर्नुहोस्"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"पुरानो PIN"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"नयाँ PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"कृपया प्रतीक्षा गर्नुहोस्।"</string>
