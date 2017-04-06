@@ -27,13 +27,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
-import android.widget.Toolbar;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.MessageFragment;
 
 /** Activity used to send post call messages after a phone call. */
@@ -56,10 +56,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
     super.onCreate(bundle);
     setContentView(R.layout.post_call_activity);
 
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setTitle(getString(R.string.post_call_message));
-    toolbar.setNavigationOnClickListener(v -> finish());
-
+    ((DialerToolbar) findViewById(R.id.toolbar)).setTitle(R.string.post_call_message);
     useRcs = canUseRcs(getIntent().getStringExtra(KEY_PHONE_NUMBER));
     LogUtil.i("PostCallActivity.onCreate", "useRcs: %b", useRcs);
 

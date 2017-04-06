@@ -24,7 +24,7 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 /** Video calling interface. */
 public interface VideoTech {
 
-  boolean isAvailable();
+  boolean isAvailable(Context context);
 
   boolean isTransmittingOrReceiving();
 
@@ -39,7 +39,7 @@ public interface VideoTech {
   VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen);
 
-  void onCallStateChanged(int newState);
+  void onCallStateChanged(Context context, int newState);
 
   @SessionModificationState
   int getSessionModificationState();

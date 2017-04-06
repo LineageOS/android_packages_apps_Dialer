@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_dialpad_voicemail"
+        android:src="@drawable/quantum_ic_voicemail_white_24"
         android:tint="@color/dialpad_voicemail_tint"/>
     </FrameLayout>
   </LinearLayout>

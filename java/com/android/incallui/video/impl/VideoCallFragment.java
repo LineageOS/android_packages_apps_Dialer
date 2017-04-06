@@ -75,6 +75,7 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
+import com.android.incallui.video.impl.CameraPermissionDialogFragment.CameraPermissionDialogCallback;
 import com.android.incallui.video.impl.CheckableImageButton.OnCheckedChangeListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -84,6 +85,7 @@ import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
 
 /** Contains UI elements for a video call. */
+// LINT.IfChange
 public class VideoCallFragment extends Fragment
     implements InCallScreen,
         InCallButtonUi,
@@ -91,7 +93,8 @@ public class VideoCallFragment extends Fragment
         OnClickListener,
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
-        OnSystemUiVisibilityChangeListener {
+        OnSystemUiVisibilityChangeListener,
+        CameraPermissionDialogCallback {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
@@ -1221,7 +1224,8 @@ public class VideoCallFragment extends Fragment
     videoCallScreenDelegate.onSystemUiVisibilityChange(navBarVisible);
   }
 
-  protected void onCameraPermissionGranted() {
+  @Override
+  public void onCameraPermissionGranted() {
     videoCallScreenDelegate.onCameraPermissionGranted();
   }
 
@@ -1242,3 +1246,4 @@ public class VideoCallFragment extends Fragment
     }
   }
 }
+//LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/incallui/video/impl/SurfaceViewVideoCallFragment.java)

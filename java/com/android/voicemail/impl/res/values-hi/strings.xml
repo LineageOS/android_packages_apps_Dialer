@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"विज़ुअल वॉइसमेल"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"अतिरिक्त बैकअप और जगह"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"यह सुविधा एक तरह का प्रयोग है"</i></b>" जिसका हम अभी परीक्षण कर रहे हैं. हो सकता है कि यह आपके वॉइसमेल सर्वर से वॉइसमेल हटा दे. भविष्य में यह सुविधा दी जाएगी या नहीं इसकी कोई गारंटी नहीं है. फिर भी सुविधा पर आपका फ़ीडबैक हमें अच्छा लगेगा."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"पिन सेट करें"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"पिन बदलें"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"पिन सेट करें"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"पिन बदलें"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"पिन बदलने के लिए विज़ुअल वॉइसमेल ज़रूर सक्षम होना चाहिए"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"विज़ुअल वॉइसमेल को अभी तक सक्रिय नहीं किया गया है, कृपया बाद में फिर से कोशिश करें"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"पुराना पिन"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"नया पिन"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"कृपया प्रतीक्षा करें."</string>

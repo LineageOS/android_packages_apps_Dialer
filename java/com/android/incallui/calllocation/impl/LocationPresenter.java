@@ -21,6 +21,8 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.baseui.Presenter;
 import com.android.incallui.baseui.Ui;
 import com.google.android.gms.location.LocationListener;
@@ -71,14 +73,26 @@ public class LocationPresenter extends Presenter<LocationPresenter.LocationUi>
     LogUtil.i("LocationPresenter.updateLocation", "location: " + location);
     if (forceUpdate || !Objects.equals(mLastLocation, location)) {
       mLastLocation = location;
-      if (LocationHelper.isValidLocation(location)) {
-        LocationUi ui = getUi();
+      int status = LocationHelper.checkLocation(location);
+      LocationUi ui = getUi();
+      if (status == LocationHelper.LOCATION_STATUS_OK) {
         mDownloadMapTask = new DownloadMapImageTask(new WeakReference<>(ui)).execute(location);
         mReverseGeocodeTask = new ReverseGeocodeTask(new WeakReference<>(ui)).execute(location);
         if (ui != null) {
           ui.setLocation(location);
         } else {
           LogUtil.i("LocationPresenter.updateLocation", "no Ui");
+        }
+      } else if (status != LocationHelper.LOCATION_STATUS_NO_LOCATION) {
+        // Log impression indicating why the location is not valid
+        // Note: its possible for this to be called before the UI has been initialized.
+        Context context = (ui != null) ? ui.getContext() : null;
+        if (context != null) {
+          if (status == LocationHelper.LOCATION_STATUS_STALE) {
+            Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_STALE_LOCATION);
+          } else if (status == LocationHelper.LOCATION_STATUS_INACCURATE) {
+            Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_INACCURATE_LOCATION);
+          }
         }
       }
     }

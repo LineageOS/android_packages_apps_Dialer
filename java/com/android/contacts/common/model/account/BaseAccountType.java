@@ -36,12 +36,12 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import com.android.contacts.common.R;
 import com.android.contacts.common.model.dataitem.DataKind;
 import com.android.contacts.common.util.CommonDateUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.common.LogUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +111,6 @@ public abstract class BaseAccountType extends AccountType {
   protected static final int MAX_LINES_FOR_POSTAL_ADDRESS = 10;
   protected static final int MAX_LINES_FOR_GROUP = 10;
   protected static final int MAX_LINES_FOR_NOTE = 100;
-  private static final String TAG = "BaseAccountType";
 
   public BaseAccountType() {
     this.accountType = null;
@@ -308,7 +307,7 @@ public abstract class BaseAccountType extends AccountType {
     DataKind kind =
         addKind(
             new DataKind(Phone.CONTENT_ITEM_TYPE, R.string.phoneLabelsGroup, Weight.PHONE, true));
-    kind.iconAltRes = R.drawable.ic_message_24dp;
+    kind.iconAltRes = R.drawable.quantum_ic_message_white_24;
     kind.iconAltDescriptionRes = R.string.sms;
     kind.actionHeader = new PhoneActionInflater();
     kind.actionAltHeader = new PhoneActionAltInflater();
@@ -546,7 +545,7 @@ public abstract class BaseAccountType extends AccountType {
           addKind(kind);
         }
       } else {
-        Log.w(TAG, "Skipping unknown tag " + tag);
+        LogUtil.i("BaseAccountType.parseEditSchema", "Skipping unknown tag " + tag);
       }
     }
   }
@@ -875,9 +874,7 @@ public abstract class BaseAccountType extends AccountType {
         StringInflater actionBody)
         throws DefinitionException, XmlPullParserException, IOException {
 
-      if (Log.isLoggable(TAG, Log.DEBUG)) {
-        Log.d(TAG, "Adding DataKind: " + mimeType);
-      }
+      LogUtil.d("BaseAccountType.newDataKind", "Adding DataKind: " + mimeType);
 
       final DataKind kind = new DataKind(mimeType, titleRes, weight, true);
       kind.typeColumn = typeColumn;
@@ -896,13 +893,13 @@ public abstract class BaseAccountType extends AccountType {
         if (kind.typeColumn != null) {
           // Parse and add types.
           kind.typeList = new ArrayList<>();
-          parseTypes(context, parser, attrs, kind, true);
+          parseTypes(parser, attrs, kind, true);
           if (kind.typeList.size() == 0) {
             throw new DefinitionException("Kind " + kind.mimeType + " must have at least one type");
           }
         } else {
           // Make sure it has no types.
-          parseTypes(context, parser, attrs, kind, false /* can't have types */);
+          parseTypes(parser, attrs, kind, false /* can't have types */);
         }
       }
 
@@ -915,7 +912,6 @@ public abstract class BaseAccountType extends AccountType {
      * {@link DefinitionException}.
      */
     private void parseTypes(
-        Context context,
         XmlPullParser parser,
         AttributeSet attrs,
         DataKind kind,
@@ -933,7 +929,7 @@ public abstract class BaseAccountType extends AccountType {
         final String tag = parser.getName();
         if (Tag.TYPE.equals(tag)) {
           if (canHaveTypes) {
-            kind.typeList.add(parseTypeTag(parser, attrs, kind));
+            kind.typeList.add(parseTypeTag(attrs, kind));
           } else {
             throw new DefinitionException("Kind " + kind.mimeType + " can't have types");
           }
@@ -947,8 +943,7 @@ public abstract class BaseAccountType extends AccountType {
      * Parses a single Type element and returns an {@link EditType} built from it. Uses {@link
      * #buildEditTypeForTypeTag} defined in subclasses to actually build an {@link EditType}.
      */
-    private EditType parseTypeTag(XmlPullParser parser, AttributeSet attrs, DataKind kind)
-        throws DefinitionException {
+    private EditType parseTypeTag(AttributeSet attrs, DataKind kind) throws DefinitionException {
 
       final String typeName = getAttr(attrs, Attr.TYPE);
 
@@ -1233,7 +1228,7 @@ public abstract class BaseAccountType extends AccountType {
               new PhoneActionInflater(),
               new SimpleInflater(Phone.NUMBER));
 
-      kind.iconAltRes = R.drawable.ic_message_24dp;
+      kind.iconAltRes = R.drawable.quantum_ic_message_white_24;
       kind.iconAltDescriptionRes = R.string.sms;
       kind.actionAltHeader = new PhoneActionAltInflater();
 

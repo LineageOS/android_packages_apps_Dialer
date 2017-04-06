@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Тековен работен повик преку Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"На чекање"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Дојдовен повик"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Дојдовен повик со фотографија"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Дојдовен повик со порака"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Дојдовен повик со локација"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Дојдовен повик со фотографија и порака"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Дојдовен повик со фотографија и локација"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Дојдовен повик со порака и локација"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Дојдовен повик со фотографија, порака и локација"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Дојдовен повик со прилози"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Важен дојдовен повик"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Важен дојдовен повик со фотографија"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Важен дојдовен повик со порака"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Важен дојдовен повик со локација"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Важен дојдовен повик со фотографија и порака"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Важен дојдовен повик со фотографија и локација"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Важен дојдовен повик со порака и локација"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Важен дојдовен повик со фото., порака и локација"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Важен дојдовен повик со прилози"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Дојдовен работен повик"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Дојдовен повик преку Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Дојдовен работен повик преку Wi-Fi"</string>

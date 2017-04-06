@@ -31,6 +31,7 @@ import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.PhoneLookup;
 import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils;
@@ -38,6 +39,7 @@ import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
@@ -596,7 +598,9 @@ public class ContactInfoHelper {
    * Update ContactInfo by querying to Cequint Caller ID. Only name, geoDescription and photo uri
    * will be updated if available.
    */
+  @WorkerThread
   public void updateFromCequintCallerId(ContactInfo info, String number) {
+    Assert.isWorkerThread();
     if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
       return;
     }
@@ -605,13 +609,14 @@ public class ContactInfoHelper {
     if (cequintCallerIdContact == null) {
       return;
     }
-    if (!TextUtils.isEmpty(cequintCallerIdContact.name)) {
+    if (TextUtils.isEmpty(info.name) && !TextUtils.isEmpty(cequintCallerIdContact.name)) {
       info.name = cequintCallerIdContact.name;
     }
     if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
       info.geoDescription = cequintCallerIdContact.geoDescription;
+      info.sourceType = CachedContactInfo.SOURCE_TYPE_CEQUINT_CALLER_ID;
     }
-    if (cequintCallerIdContact.imageUrl != null) {
+    if (info.photoUri == null && cequintCallerIdContact.imageUrl != null) {
       info.photoUri = UriUtils.parseUriOrNull(cequintCallerIdContact.imageUrl);
     }
   }

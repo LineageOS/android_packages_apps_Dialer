@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_status_voicemail_not_available" msgid="5853033558114540057">"Keine Mailbox-Aktualisierungen verfügbar"</string>
-    <string name="voicemail_status_messages_waiting" msgid="8900895357460505877">"Neue Mailbox-Nachricht wartet. Laden momentan nicht möglich."</string>
+    <string name="voicemail_status_messages_waiting" msgid="8900895357460505877">"Neue Mailboxnachricht wartet. Laden momentan nicht möglich."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8642831215097798709">"Richte deine Mailbox ein."</string>
     <string name="voicemail_status_audio_not_available" msgid="2341871147130931237">"Audio nicht verfügbar"</string>
     <string name="voicemail_status_action_configure" msgid="4445818528232235329">"Einrichten"</string>

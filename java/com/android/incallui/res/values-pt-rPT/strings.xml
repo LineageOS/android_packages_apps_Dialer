@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Chamada de trabalho por Wi-Fi em curso"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Em espera"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Chamada recebida"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Chamada recebida com foto"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Chamada recebida com mensagem"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Chamada recebida com localização"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Chamada recebida com foto e mensagem"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Chamada recebida com foto e localização"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Chamada recebida com mensagem e localização"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Chamada recebida com foto, mensagem e localização"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Chamada recebida com anexos"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Chamada recebida importante"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Chamada recebida importante com foto"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Chama recebida importante com mensagem"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Chamada recebida importante com localização"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Chamada recebida importante com foto e mensagem"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Chamada recebida importante com foto e localização"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Chamada recebida importante c/ mensagem e localiz."</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"."</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Chamada recebida importante com anexos"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Chamada de trabalho recebida"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Chamada Wi-Fi recebida"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Chamada de trabalho recebida por Wi-Fi"</string>

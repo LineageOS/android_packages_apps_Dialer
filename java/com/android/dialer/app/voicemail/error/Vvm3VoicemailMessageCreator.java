@@ -264,7 +264,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_pin_not_set_title),
           getCustomerSupportString(context, R.string.voicemail_error_pin_not_set_message),
-          VoicemailErrorMessage.createSetPinAction(context));
+          VoicemailErrorMessage.createSetPinAction(context, status.getPhoneAccountHandle()));
     }
 
     return OmtpVoicemailMessageCreator.create(context, status, statusReader);

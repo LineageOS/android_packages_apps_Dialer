@@ -202,6 +202,12 @@ public class InCallFragment extends Fragment
   }
 
   @Override
+  public void onPause() {
+    super.onPause();
+    inCallScreenDelegate.onInCallScreenPaused();
+  }
+
+  @Override
   public void onDestroy() {
     super.onDestroy();
     inCallScreenDelegate.onInCallScreenUnready();
@@ -438,8 +444,10 @@ public class InCallFragment extends Fragment
       pager.setSwipingLocked(false);
     } else {
       paginator.setVisibility(View.GONE);
-      pager.setSwipingLocked(true);
-      pager.setCurrentItem(adapter.getButtonGridPosition());
+      if (adapter != null) {
+        pager.setSwipingLocked(true);
+        pager.setCurrentItem(adapter.getButtonGridPosition());
+      }
     }
   }
 

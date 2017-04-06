@@ -30,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.baseui.BaseFragment;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -114,6 +116,7 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
     locationMap.setVisibility(View.VISIBLE);
     locationMap.setImageDrawable(mapImage);
     displayWhenReady();
+    Logger.get(getContext()).logImpression(DialerImpression.Type.EMERGENCY_GOT_MAP);
   }
 
   @Override
@@ -139,6 +142,8 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
         updateText(addressLine1, address);
         updateText(addressLine2, null);
       }
+
+      Logger.get(getContext()).logImpression(DialerImpression.Type.EMERGENCY_GOT_ADDRESS);
     }
     displayWhenReady();
   }
@@ -155,6 +160,8 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
           getContext()
               .getString(
                   R.string.lat_long_format, location.getLatitude(), location.getLongitude()));
+
+      Logger.get(getContext()).logImpression(DialerImpression.Type.EMERGENCY_GOT_LOCATION);
     }
     displayWhenReady();
   }
@@ -186,6 +193,8 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
       startActivity(
           LocationUrlBuilder.getShowMapIntent(
               location, addressLine1.getText(), addressLine2.getText()));
+
+      Logger.get(getContext()).logImpression(DialerImpression.Type.EMERGENCY_LAUNCHED_MAP);
     }
   }
 

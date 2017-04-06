@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"시각적 음성사서함"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"추가 백업 및 저장용량"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" 현재 테스트 중인 "<b><i>"실험적 기능입니다"</i></b>". 이 기능으로 인해 음성사서함 서버에서 메시지가 삭제될 수도 있습니다. 또한 Google에서는 추후 이 기능이 지원된다고 보장할 수 없습니다. 하지만 이 기능에 관해 의견을 주시면 감사하겠습니다."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"PIN 설정"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"PIN 변경"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN 설정"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN 변경"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN을 변경하려면 시각적 음성사서함이 사용 설정되어 있어야 합니다."</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"시각적 음성사서함이 아직 활성 상태가 아닙니다. 나중에 다시 시도해 주세요."</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"이전 PIN"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"새 PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"기다려 주세요."</string>

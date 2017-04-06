@@ -153,9 +153,9 @@ public class ContactInfoCache {
     if (request.isLocalRequest()) {
       info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
       // TODO: Maybe skip look up if it's already available in cached number lookup service.
-      long start = SystemClock.uptimeMillis();
+      long start = SystemClock.elapsedRealtime();
       mContactInfoHelper.updateFromCequintCallerId(info, request.number);
-      long time = SystemClock.uptimeMillis() - start;
+      long time = SystemClock.elapsedRealtime() - start;
       LogUtil.d("ContactInfoCache.queryContactInfo", "Cequint Caller Id look up takes %d ms", time);
       if (request.type == ContactInfoRequest.TYPE_LOCAL_AND_REMOTE) {
         if (!mContactInfoHelper.hasName(info)) {

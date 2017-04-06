@@ -39,6 +39,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.webkit.MimeTypeMap;
@@ -50,6 +51,8 @@ import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
@@ -146,6 +149,8 @@ public class VoicemailPlaybackPresenter
   private OnVoicemailDeletedListener mOnVoicemailDeletedListener;
   private View shareVoicemailButtonView;
 
+  private DialerExecutor<Pair<Context, Uri>> shareVoicemailExecutor;
+
   /** Initialize variables which are activity-independent and state-independent. */
   protected VoicemailPlaybackPresenter(Activity activity) {
     Context context = activity.getApplicationContext();
@@ -213,6 +218,23 @@ public class VoicemailPlaybackPresenter
       } else {
         mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
       }
+      shareVoicemailExecutor =
+          DialerExecutors.createUiTaskBuilder(
+                  mActivity.getFragmentManager(), "test", new ShareVoicemailWorker())
+              .onSuccess(
+                  output -> {
+                    if (output == null) {
+                      LogUtil.e("VoicemailAsyncTaskUtil.shareVoicemail", "failed to get voicemail");
+                      return;
+                    }
+                    mContext.startActivity(
+                        Intent.createChooser(
+                            getShareIntent(mContext, output.first, output.second),
+                            mContext
+                                .getResources()
+                                .getText(R.string.call_log_action_share_voicemail)));
+                  })
+              .build();
     }
   }
 
@@ -838,78 +860,65 @@ public class VoicemailPlaybackPresenter
     return ConfigProviderBindings.get(context).getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
   }
 
+  private static class ShareVoicemailWorker
+      implements DialerExecutor.Worker<Pair<Context, Uri>, Pair<Uri, String>> {
+
+    @Nullable
+    @Override
+    public Pair<Uri, String> doInBackground(Pair<Context, Uri> input) {
+      Context context = input.first;
+      Uri voicemailUri = input.second;
+      ContentResolver contentResolver = context.getContentResolver();
+      try (Cursor callLogInfo = getCallLogInfoCursor(contentResolver, voicemailUri);
+          Cursor contentInfo = getContentInfoCursor(contentResolver, voicemailUri)) {
+
+        if (hasContent(callLogInfo) && hasContent(contentInfo)) {
+          String cachedName = callLogInfo.getString(CallLogQuery.CACHED_NAME);
+          String number = contentInfo.getString(contentInfo.getColumnIndex(Voicemails.NUMBER));
+          long date = contentInfo.getLong(contentInfo.getColumnIndex(Voicemails.DATE));
+          String mimeType = contentInfo.getString(contentInfo.getColumnIndex(Voicemails.MIME_TYPE));
+          String transcription =
+              contentInfo.getString(contentInfo.getColumnIndex(Voicemails.TRANSCRIPTION));
+
+          // Copy voicemail content to a new file.
+          // Please see reference in third_party/java_src/android_app/dialer/java/com/android/
+          // dialer/app/res/xml/file_paths.xml for correct cache directory name.
+          File parentDir = new File(context.getCacheDir(), "my_cache");
+          if (!parentDir.exists()) {
+            parentDir.mkdirs();
+          }
+          File temporaryVoicemailFile =
+              new File(parentDir, getFileName(cachedName, number, mimeType, date));
+
+          try (InputStream inputStream = contentResolver.openInputStream(voicemailUri);
+              OutputStream outputStream =
+                  contentResolver.openOutputStream(Uri.fromFile(temporaryVoicemailFile))) {
+            if (inputStream != null && outputStream != null) {
+              ByteStreams.copy(inputStream, outputStream);
+              return new Pair<>(
+                  FileProvider.getUriForFile(
+                      context, Constants.get().getFileProviderAuthority(), temporaryVoicemailFile),
+                  transcription);
+            }
+          } catch (IOException e) {
+            LogUtil.e(
+                "VoicemailAsyncTaskUtil.shareVoicemail",
+                "failed to copy voicemail content to new file: ",
+                e);
+          }
+          return null;
+        }
+      }
+      return null;
+    }
+  }
+
   /**
    * Share voicemail to be opened by user selected apps. This method will collect information, copy
    * voicemail to a temporary file in background and launch a chooser intent to share it.
    */
-  @TargetApi(VERSION_CODES.M)
   public void shareVoicemail() {
-    mAsyncTaskExecutor.submit(
-        Tasks.SHARE_VOICEMAIL,
-        new AsyncTask<Void, Void, Uri>() {
-          @Nullable
-          @Override
-          protected Uri doInBackground(Void... params) {
-            ContentResolver contentResolver = mContext.getContentResolver();
-            try (Cursor callLogInfo = getCallLogInfoCursor(contentResolver, mVoicemailUri);
-                Cursor contentInfo = getContentInfoCursor(contentResolver, mVoicemailUri)) {
-
-              if (hasContent(callLogInfo) && hasContent(contentInfo)) {
-                String cachedName = callLogInfo.getString(CallLogQuery.CACHED_NAME);
-                String number =
-                    contentInfo.getString(
-                        contentInfo.getColumnIndex(VoicemailContract.Voicemails.NUMBER));
-                long date =
-                    contentInfo.getLong(
-                        contentInfo.getColumnIndex(VoicemailContract.Voicemails.DATE));
-                String mimeType =
-                    contentInfo.getString(
-                        contentInfo.getColumnIndex(VoicemailContract.Voicemails.MIME_TYPE));
-
-                // Copy voicemail content to a new file.
-                // Please see reference in third_party/java_src/android_app/dialer/java/com/android/
-                // dialer/app/res/xml/file_paths.xml for correct cache directory name.
-                File parentDir = new File(mContext.getCacheDir(), "my_cache");
-                if (!parentDir.exists()) {
-                  parentDir.mkdirs();
-                }
-                File temporaryVoicemailFile =
-                    new File(parentDir, getFileName(cachedName, number, mimeType, date));
-
-                try (InputStream inputStream = contentResolver.openInputStream(mVoicemailUri);
-                    OutputStream outputStream =
-                        contentResolver.openOutputStream(Uri.fromFile(temporaryVoicemailFile))) {
-                  if (inputStream != null && outputStream != null) {
-                    ByteStreams.copy(inputStream, outputStream);
-                    return FileProvider.getUriForFile(
-                        mContext,
-                        Constants.get().getFileProviderAuthority(),
-                        temporaryVoicemailFile);
-                  }
-                } catch (IOException e) {
-                  LogUtil.e(
-                      "VoicemailAsyncTaskUtil.shareVoicemail",
-                      "failed to copy voicemail content to new file: ",
-                      e);
-                }
-                return null;
-              }
-            }
-            return null;
-          }
-
-          @Override
-          protected void onPostExecute(Uri uri) {
-            if (uri == null) {
-              LogUtil.e("VoicemailAsyncTaskUtil.shareVoicemail", "failed to get voicemail");
-            } else {
-              mContext.startActivity(
-                  Intent.createChooser(
-                      getShareIntent(mContext, uri),
-                      mContext.getResources().getText(R.string.call_log_action_share_voicemail)));
-            }
-          }
-        });
+    shareVoicemailExecutor.executeParallel(new Pair<>(mContext, mVoicemailUri));
   }
 
   private static String getFileName(String cachedName, String number, String mimeType, long date) {
@@ -925,12 +934,22 @@ public class VoicemailPlaybackPresenter
         + (TextUtils.isEmpty(fileExtension) ? "" : "." + fileExtension);
   }
 
-  private static Intent getShareIntent(Context context, Uri voicemailFileUri) {
+  private static Intent getShareIntent(
+      Context context, Uri voicemailFileUri, String transcription) {
     Intent shareIntent = new Intent();
-    shareIntent.setAction(Intent.ACTION_SEND);
-    shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
-    shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-    shareIntent.setType(context.getContentResolver().getType(voicemailFileUri));
+    if (TextUtils.isEmpty(transcription)) {
+      shareIntent.setAction(Intent.ACTION_SEND);
+      shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
+      shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      shareIntent.setType(context.getContentResolver().getType(voicemailFileUri));
+    } else {
+      shareIntent.setAction(Intent.ACTION_SEND);
+      shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
+      shareIntent.putExtra(Intent.EXTRA_TEXT, transcription);
+      shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      shareIntent.setType("*/*");
+    }
+
     return shareIntent;
   }
 
@@ -954,10 +973,11 @@ public class VoicemailPlaybackPresenter
     return contentResolver.query(
         voicemailUri,
         new String[] {
-          VoicemailContract.Voicemails._ID,
-          VoicemailContract.Voicemails.NUMBER,
-          VoicemailContract.Voicemails.DATE,
-          VoicemailContract.Voicemails.MIME_TYPE,
+          Voicemails._ID,
+          Voicemails.NUMBER,
+          Voicemails.DATE,
+          Voicemails.MIME_TYPE,
+          Voicemails.TRANSCRIPTION,
         },
         null,
         null,

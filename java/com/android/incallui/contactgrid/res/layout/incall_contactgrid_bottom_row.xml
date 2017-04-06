@@ -9,41 +9,21 @@
   tools:showIn="@layout/incall_contact_grid">
   <ImageView
     android:id="@id/contactgrid_workIcon"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginEnd="8dp"
-    android:scaleType="fitCenter"
     android:src="@drawable/ic_work_profile"
-    android:tint="#ffffff"
-    tools:visibility="gone"
-    />
+    style="@style/BottomRowIcon"/>
   <ImageView
     android:id="@id/contactgrid_hdIcon"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginEnd="8dp"
-    android:scaleType="fitCenter"
     android:src="@drawable/quantum_ic_hd_white_24"
-    tools:visibility="gone"
-    />
+    style="@style/BottomRowIcon"
+    android:visibility="gone"/>
   <ImageView
     android:id="@id/contactgrid_forwardIcon"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginEnd="8dp"
-    android:scaleType="fitCenter"
     android:src="@drawable/quantum_ic_forward_white_24"
-    tools:visibility="gone"
-    />
+    style="@style/BottomRowIcon"/>
   <ImageView
     android:id="@+id/contactgrid_spamIcon"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:layout_marginEnd="8dp"
-    android:scaleType="fitCenter"
     android:src="@drawable/quantum_ic_report_white_18"
-    tools:visibility="gone"
-    />
+    style="@style/BottomRowIcon"/>
   <ViewAnimator
     android:id="@+id/contactgrid_bottom_text_switcher"
     android:layout_width="wrap_content"

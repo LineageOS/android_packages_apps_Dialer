@@ -36,7 +36,7 @@ import java.io.OutputStream;
 /** Task for copying and resizing images to be shared with RCS process. */
 @TargetApi(VERSION_CODES.M)
 public class CopyAndResizeImageTask extends FallibleAsyncTask<Void, Void, File> {
-  public static final int MAX_OUTPUT_RESOLUTION = 1024;
+  public static final int MAX_OUTPUT_RESOLUTION = 640;
   private static final String MIME_TYPE = "image/jpeg";
 
   private final Context context;
@@ -59,7 +59,7 @@ public class CopyAndResizeImageTask extends FallibleAsyncTask<Void, Void, File> 
     File outputFile = DialerUtils.createShareableFile(context);
     try (OutputStream outputStream = new FileOutputStream(outputFile)) {
       // Encode images to jpeg as it is better for camera pictures which we expect to be sending
-      bitmap.compress(CompressFormat.JPEG, 90, outputStream);
+      bitmap.compress(CompressFormat.JPEG, 80, outputStream);
       return outputFile;
     }
   }

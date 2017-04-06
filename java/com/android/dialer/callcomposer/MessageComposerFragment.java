@@ -22,6 +22,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,10 +32,15 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 /** Fragment used to compose call with message fragment. */
 public class MessageComposerFragment extends CallComposerFragment
-    implements OnClickListener, TextWatcher, OnTouchListener, OnLongClickListener {
+    implements OnClickListener,
+        TextWatcher,
+        OnTouchListener,
+        OnLongClickListener,
+        OnEditorActionListener {
   private static final String CHAR_LIMIT_KEY = "char_limit";
 
   public static final int NO_CHAR_LIMIT = -1;
@@ -70,6 +76,7 @@ public class MessageComposerFragment extends CallComposerFragment
     customMessage.setOnTouchListener(this);
     customMessage.setOnLongClickListener(this);
     customMessage.addTextChangedListener(this);
+    customMessage.setOnEditorActionListener(this);
     if (charLimit != NO_CHAR_LIMIT) {
       TextView remainingChar = (TextView) view.findViewById(R.id.remaining_characters);
       remainingChar.setText("" + charLimit);
@@ -143,5 +150,14 @@ public class MessageComposerFragment extends CallComposerFragment
   @Override
   public void clearComposer() {
     customMessage.getText().clear();
+  }
+
+  @Override
+  public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    if (getMessage() == null) {
+      return false;
+    }
+    getListener().sendAndCall();
+    return true;
   }
 }

@@ -35,7 +35,7 @@ public class OmtpVvmSyncReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(final Context context, Intent intent) {
     if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
-      // ACTION_SYNC_VOICEMAIL is available pre-O
+      // ACTION_SYNC_VOICEMAIL is available pre-O, ignore if received.
       return;
     }
 

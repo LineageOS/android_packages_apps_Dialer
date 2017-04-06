@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"WLAN 工作通话进行中"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"保持"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"来电"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"包含照片的来电"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"包含信息的来电"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"包含位置信息的来电"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"包含照片和信息的来电"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"包含照片和位置信息的来电"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"包含信息和位置信息的来电"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"包含照片、信息和位置信息的来电"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"包含附件的来电"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"重要来电"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"包含照片的重要来电"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"包含信息的重要来电"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"包含位置信息的重要来电"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"包含照片和信息的重要来电"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"包含照片和位置信息的重要来电"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"包含信息和位置信息的重要来电"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"包含照片、信息和位置信息的重要来电"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"包含附件的重要来电"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"工作来电"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"WLAN 来电"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"WLAN 工作来电"</string>

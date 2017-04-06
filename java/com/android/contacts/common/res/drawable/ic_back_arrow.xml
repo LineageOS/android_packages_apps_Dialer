@@ -15,6 +15,6 @@
   ~ limitations under the License
   -->
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-  android:autoMirrored="true"
-  android:src="@drawable/ic_arrow_back_24dp"
-  android:tint="@color/actionbar_icon_color"/>
+    android:autoMirrored="true"
+    android:src="@drawable/quantum_ic_arrow_back_white_24"
+    android:tint="@color/actionbar_icon_color"/>

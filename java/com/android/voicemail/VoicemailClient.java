@@ -17,6 +17,7 @@
 package com.android.voicemail;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
@@ -39,6 +40,9 @@ public interface VoicemailClient {
    * external to the client.
    */
   String ACTION_UPLOAD = "com.android.voicemailomtp.VoicemailClient.ACTION_UPLOAD";
+
+  /** Common key for passing {@link PhoneAccountHandle} in bundles. */
+  String PARAM_PHONE_ACCOUNT_HANDLE = "phone_account_handle";
 
   /**
    * Appends the selection to ignore voicemails from non-active OMTP voicemail package. In OC there
@@ -73,6 +77,19 @@ public interface VoicemailClient {
 
   boolean isVoicemailArchiveEnabled(Context context, PhoneAccountHandle phoneAccountHandle);
 
+  /**
+   * @return if the voicemail archive feature is available on the current device. This depends on
+   *     whether the server side flag is turned on for the feature, and if the OS meets the
+   *     requirement for this feature.
+   */
+  boolean isVoicemailArchiveAvailable(Context context);
+
   void setVoicemailArchiveEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value);
+
+  /**
+   * @return an intent that will launch the activity to change the voicemail PIN. The PIN is used
+   *     when calling into the mailbox.
+   */
+  Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle);
 }

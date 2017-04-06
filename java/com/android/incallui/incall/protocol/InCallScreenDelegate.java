@@ -39,5 +39,7 @@ public interface InCallScreenDelegate {
 
   void onInCallScreenResumed();
 
+  void onInCallScreenPaused();
+
   Drawable getDefaultContactPhotoDrawable();
 }

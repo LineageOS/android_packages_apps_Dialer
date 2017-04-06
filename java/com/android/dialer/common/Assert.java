@@ -30,6 +30,10 @@ public class Assert {
     Assert.areThreadAssertsEnabled = areThreadAssertsEnabled;
   }
 
+  public static boolean areThreadAssertsEnabled() {
+    return areThreadAssertsEnabled;
+  }
+
   /**
    * Called when a truly exceptional case occurs.
    *

@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="call_composer_view_pager_height">258dp</dimen>
+  <dimen name="call_composer_view_pager_height">306dp</dimen>
 
   <!-- Contact bar -->
   <dimen name="call_composer_contact_photo_border_thickness">2dp</dimen>

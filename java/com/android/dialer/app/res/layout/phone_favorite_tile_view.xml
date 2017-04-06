@@ -122,7 +122,7 @@
       android:background="@drawable/item_background_material_dark"
       android:contentDescription="@string/description_view_contact_detail"
       android:scaleType="center"
-      android:src="@drawable/ic_more_vert_24dp"/>
+      android:src="@drawable/quantum_ic_more_vert_white_24"/>
 
   </RelativeLayout>
 </view>

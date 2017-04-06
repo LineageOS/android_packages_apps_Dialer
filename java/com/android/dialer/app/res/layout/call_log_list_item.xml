@@ -60,14 +60,30 @@
         android:nextFocusRight="@+id/call_back_action"
         android:nextFocusLeft="@+id/quick_contact_photo">
 
-        <QuickContactBadge
-          android:id="@+id/quick_contact_photo"
-          android:layout_width="@dimen/contact_photo_size"
-          android:layout_height="@dimen/contact_photo_size"
-          android:paddingTop="2dp"
-          android:nextFocusRight="@id/primary_action_view"
-          android:layout_gravity="top"
-          android:focusable="true"/>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+          <QuickContactBadge
+              android:id="@+id/quick_contact_photo"
+              android:layout_width="@dimen/contact_photo_size"
+              android:layout_height="@dimen/contact_photo_size"
+              android:paddingTop="2dp"
+              android:nextFocusRight="@id/primary_action_view"
+              android:layout_gravity="top"
+              android:focusable="true"/>
+
+          <ImageView
+              android:id="@+id/quick_contact_checkbox"
+              android:scaleType="fitCenter"
+              android:layout_width="@dimen/contact_photo_size"
+              android:layout_height="@dimen/contact_photo_size"
+              android:visibility="gone"
+              android:src="@drawable/quantum_ic_check_circle_googblue_24" />
+
+        </FrameLayout>
+
 
         <LinearLayout
           android:layout_width="0dp"

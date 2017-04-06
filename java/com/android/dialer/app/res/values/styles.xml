@@ -18,10 +18,6 @@
 
   <style name="DialtactsTheme" parent="DialerThemeBase">
 
-    <!-- Style for the overflow button in the actionbar. -->
-    <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
-    <item name="actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
-
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
     <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionBarOverlay">true</item>
@@ -35,7 +31,6 @@
     <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
 
     <item name="android:listViewStyle">@style/ListViewStyle</item>
-    <item name="activated_background">@drawable/list_item_activated_background</item>
     <item name="section_header_background">@drawable/list_title_holo</item>
     <item name="list_section_header_height">32dip</item>
     <item name="list_item_padding_top">7dp</item>
@@ -77,16 +72,10 @@
     <item name="dialpad_style">@style/Dialpad.Light</item>
   </style>
 
-  <!-- Action bar overflow menu icon. -->
-  <style name="DialtactsActionBarOverflow"
-    parent="@android:style/Widget.Material.Light.ActionButton.Overflow">
-    <item name="android:src">@drawable/ic_overflow_menu</item>
-  </style>
-
   <!-- Action bar overflow menu icon.  White with no shadow. -->
   <style name="DialtactsActionBarOverflowWhite"
     parent="@android:style/Widget.Material.Light.ActionButton.Overflow">
-    <item name="android:src">@drawable/overflow_menu</item>
+    <item name="android:src">@drawable/quantum_ic_more_vert_white_24</item>
   </style>
 
   <style name="DialpadTheme" parent="DialtactsTheme">

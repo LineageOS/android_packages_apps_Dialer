@@ -56,8 +56,14 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
   @Override
   protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-    if (cookie != null) {
-      ((Listener) cookie).onQueryComplete(token, cookie, cursor);
+    try {
+      if (cookie != null) {
+        ((Listener) cookie).onQueryComplete(token, cookie, cursor);
+      }
+    } finally {
+      if (cursor != null) {
+        cursor.close();
+      }
     }
   }
 
@@ -82,7 +88,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
   }
 
-  public void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
+  void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
     if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
       listener.onHasBlockedNumbers(false);
       return;
@@ -405,7 +411,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     void onUnblockComplete(int rows, ContentValues values);
   }
 
-  public interface OnHasBlockedNumbersListener {
+  interface OnHasBlockedNumbersListener {
 
     /**
      * @param hasBlockedNumbers {@code true} if any blocked numbers are stored. {@code false}

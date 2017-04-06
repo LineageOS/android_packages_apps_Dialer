@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Vinnusímtal í gangi um Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Í bið"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Móttekið símtal"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Móttekið símtal með mynd"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Móttekið símtal með skilaboðum"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Móttekið símtal með staðsetningu"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Móttekið símtal með mynd og skilaboðum"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Móttekið símtal með mynd og staðsetningu"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Móttekið símtal með skilaboðum og staðsetningu"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Móttekið símtal með mynd, skilaboðum og staðsetningu"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Móttekið símtal með viðhengjum"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Mikilvægt móttekið símtal"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Mikilvægt móttekið símtal með mynd"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Mikilvægt móttekið símtal með skilaboðum"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Mikilvægt móttekið símtal með staðsetningu"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Mikilvægt móttekið símtal með mynd og skilaboðum"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Mikilvægt móttekið símtal með mynd og staðsetningu"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Mikilvægt móttekið símtal með skilaboðum og staðsetningu"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Mikilvægt móttekið símtal með mynd, skilaboðum og staðsetningu"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Mikilvægt móttekið símtal með viðhengjum"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Vinnusímtal berst"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Wi-Fi símtal berst"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Vinnusímtal berst um Wi-Fi"</string>

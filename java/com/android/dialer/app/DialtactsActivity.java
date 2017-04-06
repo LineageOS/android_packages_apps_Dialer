@@ -28,6 +28,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
@@ -72,15 +73,16 @@ import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.dialpad.DialpadFragment;
+import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.ListsFragment;
+import com.android.dialer.app.list.OldSpeedDialFragment;
 import com.android.dialer.app.list.OnDragDropListener;
 import com.android.dialer.app.list.OnListFragmentScrolledListener;
 import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.app.list.RegularSearchFragment;
 import com.android.dialer.app.list.SearchFragment;
 import com.android.dialer.app.list.SmartDialSearchFragment;
-import com.android.dialer.app.list.SpeedDialFragment;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
@@ -118,6 +120,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /** The dialer tab's title is 'phone', a more common name (see strings.xml). */
 @UsedByReflection(value = "AndroidManifest-app.xml")
@@ -127,7 +130,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         DialpadFragment.HostInterface,
-        SpeedDialFragment.HostInterface,
+        OldSpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
@@ -160,6 +163,12 @@ public class DialtactsActivity extends TransactionSafeActivity
   public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
+
+  /**
+   * Minimum time the history tab must have been selected for it to be marked as seen in onStop()
+   */
+  private static final long HISTORY_TAB_SEEN_TIMEOUT = TimeUnit.SECONDS.toMillis(3);
+
   /** Fragment containing the dialpad that slides into view */
   protected DialpadFragment mDialpadFragment;
 
@@ -211,6 +220,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private ActionBarController mActionBarController;
   private FloatingActionButtonController mFloatingActionButtonController;
   private boolean mWasConfigurationChange;
+  private long timeTabSelected;
 
   private P13nLogger mP13nLogger;
   private P13nRanker mP13nRanker;
@@ -391,7 +401,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    mPreviouslySelectedTabIndex = ListsFragment.TAB_INDEX_SPEED_DIAL;
+    mPreviouslySelectedTabIndex = DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL;
     FloatingActionButton floatingActionButton =
         (FloatingActionButton) findViewById(R.id.floating_action_button);
     floatingActionButton.setOnClickListener(this);
@@ -517,13 +527,14 @@ public class DialtactsActivity extends TransactionSafeActivity
       // used internally.
       final Bundle extras = getIntent().getExtras();
       if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
-        mListsFragment.showTab(ListsFragment.TAB_INDEX_VOICEMAIL);
+        mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
         Logger.get(this).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
       } else {
-        mListsFragment.showTab(ListsFragment.TAB_INDEX_HISTORY);
+        mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_HISTORY);
       }
     } else if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
-      int index = getIntent().getIntExtra(EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_SPEED_DIAL);
+      int index =
+          getIntent().getIntExtra(EXTRA_SHOW_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
       if (index < mListsFragment.getTabCount()) {
         // Hide dialpad since this is an explicit intent to show a specific tab, which is coming
         // from missed call or voicemail notification.
@@ -566,6 +577,18 @@ public class DialtactsActivity extends TransactionSafeActivity
       commitDialpadFragmentHide();
     }
     super.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    boolean timeoutElapsed =
+        SystemClock.elapsedRealtime() - timeTabSelected >= HISTORY_TAB_SEEN_TIMEOUT;
+    boolean isOnHistoryTab =
+        mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_HISTORY;
+    if (isOnHistoryTab && timeoutElapsed && !isChangingConfigurations()) {
+      mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
+    }
   }
 
   @Override
@@ -637,7 +660,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onClick(View view) {
     int resId = view.getId();
     if (resId == R.id.floating_action_button) {
-      if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_ALL_CONTACTS
+      if (mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS
           && !mInRegularSearch
           && !mInDialpadSearch) {
         DialerUtils.startActivityWithErrorToast(
@@ -1275,11 +1298,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     mListsFragment.getRemoveView().setDragDropController(dragController);
   }
 
-  /** Implemented to satisfy {@link SpeedDialFragment.HostInterface} */
+  /** Implemented to satisfy {@link OldSpeedDialFragment.HostInterface} */
   @Override
   public void showAllContactsTab() {
     if (mListsFragment != null) {
-      mListsFragment.showTab(ListsFragment.TAB_INDEX_ALL_CONTACTS);
+      mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS);
     }
   }
 
@@ -1335,11 +1358,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     // In RTL, scroll when the current tab is Call History instead, since the order of the tabs
     // is reversed and the ViewPager returns the left tab position during scroll.
     boolean isRtl = ViewUtil.isRtl();
-    if (!isRtl && tabIndex == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
+    if (!isRtl && tabIndex == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
       mFloatingActionButtonController.onPageScrolled(positionOffset);
-    } else if (isRtl && tabIndex == ListsFragment.TAB_INDEX_HISTORY && !mIsLandscape) {
+    } else if (isRtl && tabIndex == DialtactsPagerAdapter.TAB_INDEX_HISTORY && !mIsLandscape) {
       mFloatingActionButtonController.onPageScrolled(1 - positionOffset);
-    } else if (tabIndex != ListsFragment.TAB_INDEX_SPEED_DIAL) {
+    } else if (tabIndex != DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {
       mFloatingActionButtonController.onPageScrolled(1);
     }
   }
@@ -1350,7 +1373,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     int tabIndex = mListsFragment.getCurrentTabIndex();
     mPreviouslySelectedTabIndex = tabIndex;
     mFloatingActionButtonController.setVisible(true);
-    if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS
+    if (tabIndex == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS
         && !mInRegularSearch
         && !mInDialpadSearch) {
       mFloatingActionButtonController.changeIcon(
@@ -1361,6 +1384,8 @@ public class DialtactsActivity extends TransactionSafeActivity
           getResources().getDrawable(R.drawable.quantum_ic_dialpad_white_24, null),
           getResources().getString(R.string.action_menu_dialpad_button));
     }
+
+    timeTabSelected = SystemClock.elapsedRealtime();
   }
 
   @Override
@@ -1397,14 +1422,14 @@ public class DialtactsActivity extends TransactionSafeActivity
   private int getFabAlignment() {
     if (!mIsLandscape
         && !isInSearchUi()
-        && mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+        && mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {
       return FloatingActionButtonController.ALIGN_MIDDLE;
     }
     return FloatingActionButtonController.ALIGN_END;
   }
 
   private void updateMissedCalls() {
-    if (mPreviouslySelectedTabIndex == ListsFragment.TAB_INDEX_HISTORY) {
+    if (mPreviouslySelectedTabIndex == DialtactsPagerAdapter.TAB_INDEX_HISTORY) {
       mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
     }
   }
@@ -1452,15 +1477,12 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     @Override
     public void show() {
-      final boolean hasContactsPermission =
-          PermissionsUtil.hasContactsPermissions(DialtactsActivity.this);
-      final Menu menu = getMenu();
-      final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
+      Menu menu = getMenu();
+      MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
       clearFrequents.setVisible(
-          mListsFragment != null
-              && mListsFragment.getSpeedDialFragment() != null
-              && mListsFragment.getSpeedDialFragment().hasFrequents()
-              && hasContactsPermission);
+          PermissionsUtil.hasContactsPermissions(DialtactsActivity.this)
+              && mListsFragment != null
+              && mListsFragment.hasFrequents());
 
       menu.findItem(R.id.menu_history)
           .setVisible(PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));

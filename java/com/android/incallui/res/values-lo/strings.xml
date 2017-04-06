@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ສາຍໂທອອກ Wi-Fi ຈາກບ່ອນເຮັດວຽກ"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"ພັກສາຍຊົ່ວຄາວ"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"ສາຍໂທເຂົ້າ"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"ສາຍໂທເຂົ້າພ້ອມສະຖານທີ່"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ສະຖານທີ່"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"ສາຍໂທເຂົ້າພ້ອມໄຟລ໌ແນບ"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"ສາຍໂທເຂົ້າສຳຄັນ"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມສະຖານທີ່"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ສະຖານທີ່"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມໄຟລ໌ແນບ"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"ສາຍໂທເຂົ້າຈາກບ່ອນເຮັດວຽກ"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ສາຍໂທເຂົ້າ Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ສາຍໂທເຂົ້າ Wi-Fi ຈາກບ່ອນເຮັດວຽກ"</string>

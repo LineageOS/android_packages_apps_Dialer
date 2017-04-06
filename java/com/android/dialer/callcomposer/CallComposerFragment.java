@@ -62,5 +62,8 @@ public abstract class CallComposerFragment extends Fragment {
 
     /** True if the layout is in landscape mode. */
     boolean isLandscapeLayout();
+
+    /** Tell the listener that call composition is done and we should start the call. */
+    void sendAndCall();
   }
 }

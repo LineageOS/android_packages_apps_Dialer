@@ -26,8 +26,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 import com.android.dialer.callcomposer.nano.CallComposerContact;
 import com.android.dialer.calldetails.nano.CallDetailsEntries;
 import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
@@ -38,7 +39,7 @@ import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.protos.ProtoParsers;
 
 /** Displays the details of a specific call log entry. */
-public class CallDetailsActivity extends AppCompatActivity {
+public class CallDetailsActivity extends AppCompatActivity implements OnMenuItemClickListener {
 
   private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
   private static final String EXTRA_CONTACT = "contact";
@@ -61,11 +62,10 @@ public class CallDetailsActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.call_details_activity);
-
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setActionBar(toolbar);
     toolbar.inflateMenu(R.menu.call_details_menu);
-    toolbar.setNavigationOnClickListener(v -> finish());
+    toolbar.setOnMenuItemClickListener(this);
+    toolbar.setTitle(R.string.call_details);
     onHandleIntent(getIntent());
   }
 
@@ -89,14 +89,14 @@ public class CallDetailsActivity extends AppCompatActivity {
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onMenuItemClick(MenuItem item) {
     if (item.getItemId() == R.id.call_detail_delete_menu_item) {
       Logger.get(this).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
       AsyncTaskExecutors.createAsyncTaskExecutor().submit(TASK_DELETE, new DeleteCallsTask());
       item.setEnabled(false);
       return true;
     }
-    return super.onOptionsItemSelected(item);
+    return false;
   }
 
   /** Delete specified calls from the call log. */

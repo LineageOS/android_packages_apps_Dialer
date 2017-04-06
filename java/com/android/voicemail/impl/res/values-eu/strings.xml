@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Erantzungailu bisuala"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Babeskopiak eta edukia gordetzeko tokia"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" Oraindik probatzen ari garen "<b><i>"eginbide esperimentala da hau"</i></b>". Agian erantzungailuaren zerbitzarian gordetako mezuak ezabatuko dira. Ez dugu bermatzen egibide hau etorkizunean erabiltzeko aukera emango dugunik. Halere, bihotzez eskertuko genizuke eginbideari buruzko iritzia."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Ezarri PIN kodea"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Aldatu PIN kodea"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Ezarri PIN kodea"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Aldatu PIN kodea"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Ikusizko erantzungailuak gaituta egon behar du PIN kodea aldatu ahal izateko"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Oraindik ez dago aktibatuta ikusizko erantzungailua. Saiatu berriro geroago."</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"PIN zaharra"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"PIN berria"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Itxaron, mesedez."</string>

@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"‏שיחת עבודה פעילה ברשת WiFi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"בהמתנה"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"שיחה נכנסת"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"שיחה נכנסת עם תמונה"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"שיחה נכנסת עם הודעה"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"שיחה נכנסת עם מיקום"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"שיחה נכנסת עם תמונה והודעה"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"שיחה נכנסת עם תמונה ומיקום"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"שיחה נכנסת עם הודעה ומיקום"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"שיחה נכנסת עם תמונה, הודעה ומיקום"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"שיחה נכנסת עם קבצים מצורפים"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"שיחה נכנסת חשובה"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"שיחה נכנסת חשובה עם תמונה"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"שיחה נכנסת חשובה עם הודעה"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"שיחה נכנסת חשובה עם מיקום"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"שיחה נכנסת חשובה עם תמונה והודעה"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"שיחה נכנסת חשובה עם תמונה ומיקום"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"שיחה נכנסת חשובה עם הודעה ומיקום"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"שיחה נכנסת חשובה עם תמונה, הודעה ומיקום"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"שיחה נכנסת חשובה עם קבצים מצורפים"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"שיחת עבודה נכנסת"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"‏שיחת Wi-Fi נכנסת"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"‏שיחת עבודה נכנסת ברשת WiFi"</string>

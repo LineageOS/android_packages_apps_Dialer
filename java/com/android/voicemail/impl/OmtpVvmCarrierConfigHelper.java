@@ -90,7 +90,7 @@ public class OmtpVvmCarrierConfigHelper {
 
   private PhoneAccountHandle mPhoneAccountHandle;
 
-  public OmtpVvmCarrierConfigHelper(Context context, PhoneAccountHandle handle) {
+  public OmtpVvmCarrierConfigHelper(Context context, @Nullable PhoneAccountHandle handle) {
     mContext = context;
     mPhoneAccountHandle = handle;
     TelephonyManager telephonyManager =

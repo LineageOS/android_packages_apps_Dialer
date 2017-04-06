@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Llamada de trabajo con Wi-Fi en curso"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"En espera"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Llamada entrante"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Llamada entrante con foto"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Llamada entrante con mensaje"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Llamada entrante con ubicación"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Llamada entrante con foto y mensaje"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Llamada entrante con foto y ubicación"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Llamada entrante con mensaje y ubicación"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Llamada entrante con foto, mensaje y ubicación"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Llamada entrante con archivos adjuntos"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Llamada entrante importante"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Llamada entrante importante con foto"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Llamada entrante importante con mensaje"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Llamada entrante importante con ubicación"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Llamada entrante importante con foto y mensaje"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Llamada entrante importante con foto y ubicación"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Llamada importante con mensaje y ubicación"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Llamada importante con foto, mensaje y ubicación"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Llamada entrante importante con archivos adjuntos"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Llamada de trabajo entrante"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Llamada por Wi-Fi entrante"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Llamada de trabajo con Wi-Fi entrante"</string>

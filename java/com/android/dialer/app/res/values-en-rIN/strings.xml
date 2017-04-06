@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="2202739481132958990">"Phone"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Phone key pad"</string>
+    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Phone keypad"</string>
     <string name="dialerIconLabel" msgid="3422916015542176907">"Phone"</string>
     <string name="callHistoryIconLabel" msgid="7493268743411968630">"Call history"</string>
     <string name="action_report_number" msgid="7231442711369737797">"Report inaccurate number"</string>
@@ -182,8 +182,8 @@
     <string name="accessibility_settings_title" msgid="3329027650429831820">"Accessibility"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"Phone ringtone"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"Also vibrate for calls"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Key pad tones"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Key pad tone length"</string>
+    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Keypad tones"</string>
+    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Keypad tone length"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="3136353015227162823">"Normal"</item>
     <item msgid="5376841175538523822">"Long"</item>

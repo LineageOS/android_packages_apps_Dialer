@@ -19,7 +19,6 @@ package com.android.incallui.video.impl;
 import android.Manifest.permission;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
@@ -44,9 +43,8 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
@@ -67,6 +65,7 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
+import com.android.incallui.video.impl.CameraPermissionDialogFragment.CameraPermissionDialogCallback;
 import com.android.incallui.video.impl.CheckableImageButton.OnCheckedChangeListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -86,7 +85,8 @@ public class SurfaceViewVideoCallFragment extends Fragment
         OnClickListener,
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
-        OnSystemUiVisibilityChangeListener {
+        OnSystemUiVisibilityChangeListener,
+        CameraPermissionDialogCallback {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
@@ -112,13 +112,13 @@ public class SurfaceViewVideoCallFragment extends Fragment
   private TextView remoteVideoOff;
   private View mutePreviewOverlay;
   private View previewOffOverlay;
-  private ImageView previewOffBlurredImageView;
   private View controls;
   private View controlsContainer;
   private SurfaceView previewSurfaceView;
   private SurfaceView remoteSurfaceView;
   private View greenScreenBackgroundView;
   private View fullscreenBackgroundView;
+  private FrameLayout previewRoot;
   private boolean shouldShowRemote;
   private boolean shouldShowPreview;
   private boolean isInFullscreenMode;
@@ -132,7 +132,8 @@ public class SurfaceViewVideoCallFragment extends Fragment
         @Override
         public void run() {
           if (videoCallScreenDelegate.shouldShowCameraPermissionDialog()) {
-            LogUtil.i("VideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
+            LogUtil.i(
+                "SurfaceViewVideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
             checkCameraPermission();
           }
         }
@@ -150,7 +151,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    LogUtil.i("VideoCallFragment.onCreate", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onCreate", null);
 
     inCallButtonUiDelegate =
         FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
@@ -165,10 +166,13 @@ public class SurfaceViewVideoCallFragment extends Fragment
       int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
       if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        LogUtil.i("VideoCallFragment.onRequestPermissionsResult", "Camera permission granted.");
+        LogUtil.i(
+            "SurfaceViewVideoCallFragment.onRequestPermissionsResult",
+            "Camera permission granted.");
         videoCallScreenDelegate.onCameraPermissionGranted();
       } else {
-        LogUtil.i("VideoCallFragment.onRequestPermissionsResult", "Camera permission denied.");
+        LogUtil.i(
+            "SurfaceViewVideoCallFragment.onRequestPermissionsResult", "Camera permission denied.");
       }
     }
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -178,7 +182,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public View onCreateView(
       LayoutInflater layoutInflater, @Nullable ViewGroup viewGroup, @Nullable Bundle bundle) {
-    LogUtil.i("VideoCallFragment.onCreateView", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onCreateView", null);
 
     View view =
         layoutInflater.inflate(
@@ -201,8 +205,6 @@ public class SurfaceViewVideoCallFragment extends Fragment
     cameraOffButton = (CheckableImageButton) view.findViewById(R.id.videocall_mute_video);
     cameraOffButton.setOnCheckedChangeListener(this);
     previewOffOverlay = view.findViewById(R.id.videocall_video_preview_off_overlay);
-    previewOffBlurredImageView =
-        (ImageView) view.findViewById(R.id.videocall_preview_off_blurred_image_view);
     swapCameraButton = (ImageButton) view.findViewById(R.id.videocall_switch_video);
     swapCameraButton.setOnClickListener(this);
     view.findViewById(R.id.videocall_switch_controls)
@@ -215,7 +217,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     endCallButton = view.findViewById(R.id.videocall_end_call);
     endCallButton.setOnClickListener(this);
     previewSurfaceView = (SurfaceView) view.findViewById(R.id.videocall_video_preview);
-    previewSurfaceView.setClipToOutline(true);
+    previewSurfaceView.setZOrderMediaOverlay(true);
     previewOffOverlay.setOnClickListener(
         new OnClickListener() {
           @Override
@@ -224,8 +226,20 @@ public class SurfaceViewVideoCallFragment extends Fragment
           }
         });
     remoteSurfaceView = (SurfaceView) view.findViewById(R.id.videocall_video_remote);
+    remoteSurfaceView.setOnClickListener(
+        surfaceView -> {
+          videoCallScreenDelegate.resetAutoFullscreenTimer();
+          if (isInFullscreenMode) {
+            updateFullscreenAndGreenScreenMode(
+                false /* shouldShowFullscreen */, false /* shouldShowGreenScreen */);
+          } else {
+            updateFullscreenAndGreenScreenMode(
+                true /* shouldShowFullscreen */, false /* shouldShowGreenScreen */);
+          }
+        });
     greenScreenBackgroundView = view.findViewById(R.id.videocall_green_screen_background);
     fullscreenBackgroundView = view.findViewById(R.id.videocall_fullscreen_background);
+    previewRoot = (FrameLayout) view.findViewById(R.id.videocall_preview_root);
 
     // We need the texture view size to be able to scale the remote video. At this point the view
     // layout won't be complete so add a layout listener.
@@ -234,7 +248,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         new ViewTreeObserver.OnGlobalLayoutListener() {
           @Override
           public void onGlobalLayout() {
-            LogUtil.i("VideoCallFragment.onGlobalLayout", null);
+            LogUtil.i("SurfaceViewVideoCallFragment.onGlobalLayout", null);
             updateVideoOffViews();
             // Remove the listener so we don't continually re-layout.
             ViewTreeObserver observer = remoteSurfaceView.getViewTreeObserver();
@@ -250,7 +264,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onViewCreated(View view, @Nullable Bundle bundle) {
     super.onViewCreated(view, bundle);
-    LogUtil.i("VideoCallFragment.onViewCreated", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onViewCreated", null);
 
     inCallScreenDelegate =
         FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
@@ -283,7 +297,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onDestroyView() {
     super.onDestroyView();
-    LogUtil.i("VideoCallFragment.onDestroyView", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onDestroyView", null);
     inCallButtonUiDelegate.onInCallButtonUiUnready();
     inCallScreenDelegate.onInCallScreenUnready();
   }
@@ -299,7 +313,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onStart() {
     super.onStart();
-    LogUtil.i("VideoCallFragment.onStart", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onStart", null);
     onVideoScreenStart();
   }
 
@@ -313,20 +327,20 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onResume() {
     super.onResume();
-    LogUtil.i("VideoCallFragment.onResume", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onResume", null);
     inCallScreenDelegate.onInCallScreenResumed();
   }
 
   @Override
   public void onPause() {
     super.onPause();
-    LogUtil.i("VideoCallFragment.onPause", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onPause", null);
   }
 
   @Override
   public void onStop() {
     super.onStop();
-    LogUtil.i("VideoCallFragment.onStop", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onStop", null);
     onVideoScreenStop();
   }
 
@@ -337,10 +351,10 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private void exitFullscreenMode() {
-    LogUtil.i("VideoCallFragment.exitFullscreenMode", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.exitFullscreenMode", null);
 
     if (!getView().isAttachedToWindow()) {
-      LogUtil.i("VideoCallFragment.exitFullscreenMode", "not attached");
+      LogUtil.i("SurfaceViewVideoCallFragment.exitFullscreenMode", "not attached");
       return;
     }
 
@@ -486,9 +500,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private View[] getAllPreviewRelatedViews() {
-    return new View[] {
-      previewSurfaceView, previewOffOverlay, previewOffBlurredImageView, mutePreviewOverlay,
-    };
+    return new View[] {previewRoot};
   }
 
   private int getOffsetTop(View view) {
@@ -516,7 +528,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private void enterFullscreenMode() {
-    LogUtil.i("VideoCallFragment.enterFullscreenMode", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.enterFullscreenMode", null);
 
     hideSystemUI();
 
@@ -590,7 +602,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onClick(View v) {
     if (v == endCallButton) {
-      LogUtil.i("VideoCallFragment.onClick", "end call button clicked");
+      LogUtil.i("SurfaceViewVideoCallFragment.onClick", "end call button clicked");
       inCallButtonUiDelegate.onEndCallClicked();
       videoCallScreenDelegate.resetAutoFullscreenTimer();
     } else if (v == swapCameraButton) {
@@ -606,7 +618,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   public void onCheckedChanged(CheckableImageButton button, boolean isChecked) {
     if (button == cameraOffButton) {
       if (!isChecked && !VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
-        LogUtil.i("VideoCallFragment.onCheckedChanged", "show camera permission dialog");
+        LogUtil.i("SurfaceViewVideoCallFragment.onCheckedChanged", "show camera permission dialog");
         checkCameraPermission();
       } else {
         inCallButtonUiDelegate.pauseVideoClicked(isChecked);
@@ -622,13 +634,22 @@ public class SurfaceViewVideoCallFragment extends Fragment
   public void showVideoViews(
       boolean shouldShowPreview, boolean shouldShowRemote, boolean isRemotelyHeld) {
     LogUtil.i(
-        "VideoCallFragment.showVideoViews",
+        "SurfaceViewVideoCallFragment.showVideoViews",
         "showPreview: %b, shouldShowRemote: %b",
         shouldShowPreview,
         shouldShowRemote);
+
+    if (this.shouldShowPreview == shouldShowPreview
+        && this.shouldShowRemote == shouldShowRemote
+        && this.isRemotelyHeld == isRemotelyHeld) {
+      return;
+    }
+
     this.shouldShowPreview = shouldShowPreview;
     this.shouldShowRemote = shouldShowRemote;
     this.isRemotelyHeld = isRemotelyHeld;
+
+    previewSurfaceView.setVisibility(shouldShowPreview ? View.VISIBLE : View.INVISIBLE);
 
     videoCallScreenDelegate.setSurfaceViews(previewSurfaceView, remoteSurfaceView);
     updateVideoOffViews();
@@ -642,31 +663,33 @@ public class SurfaceViewVideoCallFragment extends Fragment
    */
   @Override
   public void onLocalVideoDimensionsChanged() {
-    LogUtil.i("VideoCallFragment.onLocalVideoDimensionsChanged", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onLocalVideoDimensionsChanged", null);
   }
 
   @Override
   public void onLocalVideoOrientationChanged() {
-    LogUtil.i("VideoCallFragment.onLocalVideoOrientationChanged", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onLocalVideoOrientationChanged", null);
   }
 
   /** Called when the remote video's dimensions change. */
   @Override
   public void onRemoteVideoDimensionsChanged() {
-    LogUtil.i("VideoCallFragment.onRemoteVideoDimensionsChanged", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onRemoteVideoDimensionsChanged", null);
   }
 
   @Override
   public void updateFullscreenAndGreenScreenMode(
       boolean shouldShowFullscreen, boolean shouldShowGreenScreen) {
     LogUtil.i(
-        "VideoCallFragment.updateFullscreenAndGreenScreenMode",
+        "SurfaceViewVideoCallFragment.updateFullscreenAndGreenScreenMode",
         "shouldShowFullscreen: %b, shouldShowGreenScreen: %b",
         shouldShowFullscreen,
         shouldShowGreenScreen);
 
     if (getActivity() == null) {
-      LogUtil.i("VideoCallFragment.updateFullscreenAndGreenScreenMode", "not attached to activity");
+      LogUtil.i(
+          "SurfaceViewVideoCallFragment.updateFullscreenAndGreenScreenMode",
+          "not attached to activity");
       return;
     }
 
@@ -678,7 +701,8 @@ public class SurfaceViewVideoCallFragment extends Fragment
         && shouldShowGreenScreen == isInGreenScreenMode
         && shouldShowFullscreen == isInFullscreenMode) {
       LogUtil.i(
-          "VideoCallFragment.updateFullscreenAndGreenScreenMode", "no change to screen modes");
+          "SurfaceViewVideoCallFragment.updateFullscreenAndGreenScreenMode",
+          "no change to screen modes");
       return;
     }
     hasInitializedScreenModes = true;
@@ -722,7 +746,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void showButton(@InCallButtonIds int buttonId, boolean show) {
     LogUtil.v(
-        "VideoCallFragment.showButton",
+        "SurfaceViewVideoCallFragment.showButton",
         "buttonId: %s, show: %b",
         InCallButtonIdsExtension.toString(buttonId),
         show);
@@ -742,7 +766,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void enableButton(@InCallButtonIds int buttonId, boolean enable) {
     LogUtil.v(
-        "VideoCallFragment.setEnabled",
+        "SurfaceViewVideoCallFragment.setEnabled",
         "buttonId: %s, enable: %b",
         InCallButtonIdsExtension.toString(buttonId),
         enable);
@@ -759,7 +783,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void setEnabled(boolean enabled) {
-    LogUtil.v("VideoCallFragment.setEnabled", "enabled: " + enabled);
+    LogUtil.v("SurfaceViewVideoCallFragment.setEnabled", "enabled: " + enabled);
     speakerButtonController.setEnabled(enabled);
     muteButton.setEnabled(enabled);
     cameraOffButton.setEnabled(enabled);
@@ -768,23 +792,25 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void setHold(boolean value) {
-    LogUtil.i("VideoCallFragment.setHold", "value: " + value);
+    LogUtil.i("SurfaceViewVideoCallFragment.setHold", "value: " + value);
   }
 
   @Override
   public void setCameraSwitched(boolean isBackFacingCamera) {
-    LogUtil.i("VideoCallFragment.setCameraSwitched", "isBackFacingCamera: " + isBackFacingCamera);
+    LogUtil.i(
+        "SurfaceViewVideoCallFragment.setCameraSwitched",
+        "isBackFacingCamera: " + isBackFacingCamera);
   }
 
   @Override
   public void setVideoPaused(boolean isPaused) {
-    LogUtil.i("VideoCallFragment.setVideoPaused", "isPaused: " + isPaused);
+    LogUtil.i("SurfaceViewVideoCallFragment.setVideoPaused", "isPaused: " + isPaused);
     cameraOffButton.setChecked(isPaused);
   }
 
   @Override
   public void setAudioState(CallAudioState audioState) {
-    LogUtil.i("VideoCallFragment.setAudioState", "audioState: " + audioState);
+    LogUtil.i("SurfaceViewVideoCallFragment.setAudioState", "audioState: " + audioState);
     speakerButtonController.setAudioState(audioState);
     muteButton.setChecked(audioState.isMuted());
     updateMutePreviewOverlayVisibility();
@@ -792,7 +818,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void updateButtonStates() {
-    LogUtil.i("VideoCallFragment.updateButtonState", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.updateButtonState", null);
     speakerButtonController.updateButtonState();
     switchOnHoldCallController.updateButtonState();
   }
@@ -807,26 +833,26 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void showAudioRouteSelector() {
-    LogUtil.i("VideoCallFragment.showAudioRouteSelector", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.showAudioRouteSelector", null);
     AudioRouteSelectorDialogFragment.newInstance(inCallButtonUiDelegate.getCurrentAudioState())
         .show(getChildFragmentManager(), null);
   }
 
   @Override
   public void onAudioRouteSelected(int audioRoute) {
-    LogUtil.i("VideoCallFragment.onAudioRouteSelected", "audioRoute: " + audioRoute);
+    LogUtil.i("SurfaceViewVideoCallFragment.onAudioRouteSelected", "audioRoute: " + audioRoute);
     inCallButtonUiDelegate.setAudioRoute(audioRoute);
   }
 
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
-    LogUtil.i("VideoCallFragment.setPrimary", primaryInfo.toString());
+    LogUtil.i("SurfaceViewVideoCallFragment.setPrimary", primaryInfo.toString());
     contactGridManager.setPrimary(primaryInfo);
   }
 
   @Override
   public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {
-    LogUtil.i("VideoCallFragment.setSecondary", secondaryInfo.toString());
+    LogUtil.i("SurfaceViewVideoCallFragment.setSecondary", secondaryInfo.toString());
     if (!isAdded()) {
       savedSecondaryInfo = secondaryInfo;
       return;
@@ -851,23 +877,23 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
-    LogUtil.i("VideoCallFragment.setCallState", primaryCallState.toString());
+    LogUtil.i("SurfaceViewVideoCallFragment.setCallState", primaryCallState.toString());
     contactGridManager.setCallState(primaryCallState);
   }
 
   @Override
   public void setEndCallButtonEnabled(boolean enabled, boolean animate) {
-    LogUtil.i("VideoCallFragment.setEndCallButtonEnabled", "enabled: " + enabled);
+    LogUtil.i("SurfaceViewVideoCallFragment.setEndCallButtonEnabled", "enabled: " + enabled);
   }
 
   @Override
   public void showManageConferenceCallButton(boolean visible) {
-    LogUtil.i("VideoCallFragment.showManageConferenceCallButton", "visible: " + visible);
+    LogUtil.i("SurfaceViewVideoCallFragment.showManageConferenceCallButton", "visible: " + visible);
   }
 
   @Override
   public boolean isManageConferenceVisible() {
-    LogUtil.i("VideoCallFragment.isManageConferenceVisible", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.isManageConferenceVisible", null);
     return false;
   }
 
@@ -878,17 +904,17 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void showNoteSentToast() {
-    LogUtil.i("VideoCallFragment.showNoteSentToast", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.showNoteSentToast", null);
   }
 
   @Override
   public void updateInCallScreenColors() {
-    LogUtil.i("VideoCallFragment.updateColors", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.updateColors", null);
   }
 
   @Override
   public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {
-    LogUtil.i("VideoCallFragment.onInCallScreenDialpadVisibilityChange", null);
+    LogUtil.i("SurfaceViewVideoCallFragment.onInCallScreenDialpadVisibilityChange", null);
   }
 
   @Override
@@ -908,7 +934,8 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   @Override
   public void showLocationUi(Fragment locationUi) {
-    LogUtil.e("VideoCallFragment.showLocationUi", "Emergency video calling not supported");
+    LogUtil.e(
+        "SurfaceViewVideoCallFragment.showLocationUi", "Emergency video calling not supported");
     // Do nothing
   }
 
@@ -919,47 +946,17 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private void enterGreenScreenMode() {
-    LogUtil.i("VideoCallFragment.enterGreenScreenMode", null);
-    RelativeLayout.LayoutParams params =
-        new RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-    params.addRule(RelativeLayout.ALIGN_PARENT_START);
-    params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-    previewSurfaceView.setLayoutParams(params);
-    previewSurfaceView.setOutlineProvider(null);
+    LogUtil.i("SurfaceViewVideoCallFragment.enterGreenScreenMode", null);
     updateOverlayBackground();
     contactGridManager.setIsMiddleRowVisible(true);
     updateMutePreviewOverlayVisibility();
-
-    previewOffBlurredImageView.setLayoutParams(params);
-    previewOffBlurredImageView.setOutlineProvider(null);
-    previewOffBlurredImageView.setClipToOutline(false);
   }
 
   private void exitGreenScreenMode() {
-    LogUtil.i("VideoCallFragment.exitGreenScreenMode", null);
-    Resources resources = getResources();
-    RelativeLayout.LayoutParams params =
-        new RelativeLayout.LayoutParams(
-            (int) resources.getDimension(R.dimen.videocall_preview_width),
-            (int) resources.getDimension(R.dimen.videocall_preview_height));
-    params.setMargins(
-        0, 0, 0, (int) resources.getDimension(R.dimen.videocall_preview_margin_bottom));
-    if (isLandscape()) {
-      params.addRule(RelativeLayout.ALIGN_PARENT_END);
-      params.setMarginEnd((int) resources.getDimension(R.dimen.videocall_preview_margin_end));
-    } else {
-      params.addRule(RelativeLayout.ALIGN_PARENT_START);
-      params.setMarginStart((int) resources.getDimension(R.dimen.videocall_preview_margin_start));
-    }
-    params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-    previewSurfaceView.setLayoutParams(params);
+    LogUtil.i("SurfaceViewVideoCallFragment.exitGreenScreenMode", null);
     updateOverlayBackground();
     contactGridManager.setIsMiddleRowVisible(false);
     updateMutePreviewOverlayVisibility();
-
-    previewOffBlurredImageView.setLayoutParams(params);
-    previewOffBlurredImageView.setClipToOutline(true);
   }
 
   private void updateVideoOffViews() {
@@ -1056,9 +1053,17 @@ public class SurfaceViewVideoCallFragment extends Fragment
   public void onSystemUiVisibilityChange(int visibility) {
     boolean navBarVisible = (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
     videoCallScreenDelegate.onSystemUiVisibilityChange(navBarVisible);
+    if (navBarVisible) {
+      updateFullscreenAndGreenScreenMode(
+          false /* shouldShowFullscreen */, false /* shouldShowGreenScreen */);
+    } else {
+      updateFullscreenAndGreenScreenMode(
+          true /* shouldShowFullscreen */, false /* shouldShowGreenScreen */);
+    }
   }
 
-  protected void onCameraPermissionGranted() {
+  @Override
+  public void onCameraPermissionGranted() {
     videoCallScreenDelegate.onCameraPermissionGranted();
   }
 

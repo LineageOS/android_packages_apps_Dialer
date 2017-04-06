@@ -28,7 +28,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.QuickContact;
-import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +38,8 @@ import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.dialer.app.R;
-import com.android.dialer.app.list.ListsFragment.ListsPage;
 import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -50,8 +47,7 @@ import com.android.dialer.util.PermissionsUtil;
 
 /** Fragments to show all contacts with phone numbers. */
 public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter>
-    implements ListsPage,
-        OnEmptyViewActionButtonClickedListener,
+    implements OnEmptyViewActionButtonClickedListener,
         FragmentCompat.OnRequestPermissionsResultCallback {
 
   private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
@@ -192,15 +188,5 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         reloadData();
       }
     }
-  }
-
-  @Override
-  public void onPageResume(@Nullable Activity activity) {
-    LogUtil.i("AllContactsFragment.onPageResume", null);
-  }
-
-  @Override
-  public void onPagePause(@Nullable Activity activity) {
-    LogUtil.i("AllContactsFragment.onPagePause", null);
   }
 }

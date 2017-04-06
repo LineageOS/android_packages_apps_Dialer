@@ -66,9 +66,12 @@
 
 
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
-  <string name="voicemail_set_pin_dialog_title">Set PIN</string>
+  <string name="voicemail_set_pin_preference_title">Set PIN</string>
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
-  <string name="voicemail_change_pin_dialog_title">Change PIN</string>
+  <string name="voicemail_change_pin_preference_title">Change PIN</string>
+
+  <string name="voicemail_change_pin_preference_summary_disable">Visual voicemail must be enabled to change PIN</string>
+  <string name="voicemail_change_pin_preference_summary_not_activated">Visual voicemail is not activated yet, please try again later</string>
 
   <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
   <string name="vm_change_pin_old_pin">Old PIN</string>

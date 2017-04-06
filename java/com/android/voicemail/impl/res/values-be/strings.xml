@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Візуальная галасавая пошта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Дадатковае рэзервовае капір. і сховішча"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Гэта эксперыментальная характарыстыка"</i></b>", якую мы тэсціруем. Патэнцыяльна яна будзе выдаляць паведамленні галасавой пошты з вашага сервера галасавой пошты. Падтрымка гэтай характарыстыкі ў будучым не гарантуецца. Але мы будзем вельмі ўдзячны за водгукі на гэту характарыстыку."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Задаць PIN-код"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Змяніць PIN-код"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Задаць PIN-код"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Змяніць PIN-код"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Трэба ўключыць візуальную галасавую пошту, каб змяніць PIN-код"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Візуальная галасавая пошта пакуль не актываваная. Паўтарыце спробу пазней"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Стары PIN-код"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Новы PIN-код"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Пачакайце."</string>

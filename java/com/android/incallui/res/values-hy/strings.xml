@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Ընթացիկ աշխատանքային Wi-Fi զանգ"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Սպասում"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Մուտքային զանգ"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Մուտքային զանգ՝ լուսանկարով"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Մուտքային զանգ՝ հաղորդագրությամբ"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Մուտքային զանգ՝ տեղադրության տվյալներով"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Մուտքային զանգ՝ լուսանկարով և հաղորդագրությամբ"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Զանգ՝ լուսանկարով և տեղադրության տվյալներով"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Զանգ՝ հաղորդագրությամբ և տեղադրության տվյալներով"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Մուտքային զանգ՝ կցորդներով"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Մուտքային զանգ՝ կցորդներով"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Կարևոր մուտքային զանգ"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Կարևոր մուտքային զանգ՝ լուսանկարով"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Կարևոր մուտքային զանգ՝ հողորդագրությամբ"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Կարևոր մուտքային զանգ՝ տեղադրության տվյալներով"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Կարևոր զանգ՝ լուսանկարով և հաղորդագրությամբ"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Կարևոր զանգ՝ լուսանկարով և տեղադրության տվյալներով"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Կարևոր մուտքային զանգ՝ կցորդներով"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Կարևոր մուտքային զանգ՝ կցորդներով"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Կարևոր մուտքային զանգ՝ կցորդներով"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Մուտքային աշխատանքային զանգ"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Մուտքային զանգ Wi-Fi-ի միջոցով"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Մուտքային աշխատանքային Wi-Fi զանգ"</string>

@@ -21,8 +21,8 @@
     <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Um dich besser schützen zu können, müssen die Einstellungen der Blockierung beim Telefon geändert werden. Von blockierten Nummern erhältst du jetzt keine Anrufe und Nachrichten mehr und diese Nummern können auch an andere Apps weitergegeben werden."</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Zulassen"</string>
     <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> blockieren?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Anrufe von dieser Nummer werden blockiert und Mailbox-Nachrichten automatisch gelöscht."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailbox-Nachrichten zu hinterlassen."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Anrufe von dieser Nummer werden blockiert und Mailboxnachrichten automatisch gelöscht."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailboxnachrichten zu hinterlassen."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"Du erhältst von dieser Nummer keine Anrufe oder Nachrichten mehr."</string>
     <string name="block_number_ok" msgid="739786082788038932">"BLOCKIEREN"</string>
     <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Blockierung von <xliff:g id="NUMBER">%1$s</xliff:g> aufheben?"</string>

@@ -31,6 +31,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
 import java.util.ArrayList;
@@ -205,7 +206,7 @@ public class PhoneCallDetailsHelper {
         && !PhoneNumberHelper.isUriNumber(details.number.toString())
         && !mCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
 
-      if (TextUtils.isEmpty(details.namePrimary) && !TextUtils.isEmpty(details.geocode)) {
+      if (shouldShowLocation(details)) {
         numberFormattedLabel = details.geocode;
       } else if (!(details.numberType == Phone.TYPE_CUSTOM
           && TextUtils.isEmpty(details.numberLabel))) {
@@ -221,6 +222,22 @@ public class PhoneCallDetailsHelper {
       numberFormattedLabel = details.displayNumber;
     }
     return numberFormattedLabel;
+  }
+
+  /** Returns true if primary name is empty or the data is from Cequint Caller ID. */
+  private static boolean shouldShowLocation(PhoneCallDetails details) {
+    if (TextUtils.isEmpty(details.geocode)) {
+      return false;
+    }
+    // For caller ID provided by Cequint we want to show the geo location.
+    if (details.sourceType == CachedContactInfo.SOURCE_TYPE_CEQUINT_CALLER_ID) {
+      return true;
+    }
+    // Don't bother showing geo location for contacts.
+    if (!TextUtils.isEmpty(details.namePrimary)) {
+      return false;
+    }
+    return true;
   }
 
   public void setPhoneTypeLabelForTest(CharSequence phoneTypeLabel) {

@@ -100,8 +100,7 @@ public class DialerBackupAgent extends BackupAgent {
     LogUtil.i("DialerBackupAgent.onFullBackup", "performing dialer backup");
     boolean autoBackupEnabled =
         ConfigProviderBindings.get(this).getBoolean("enable_autobackup", true);
-    boolean vmBackupEnabled =
-        ConfigProviderBindings.get(this).getBoolean("enable_vm_backup", false);
+    boolean vmBackupEnabled = ConfigProviderBindings.get(this).getBoolean("enable_vm_backup", true);
     List<PhoneAccountHandle> phoneAccountsToArchive =
         DialerBackupUtils.getPhoneAccountsToArchive(this);
 

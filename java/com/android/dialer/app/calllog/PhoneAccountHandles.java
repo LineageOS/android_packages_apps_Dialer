@@ -24,6 +24,7 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
+import java.util.List;
 
 /** Methods to help extract {@link PhoneAccount} information from database and Telecomm sources. */
 class PhoneAccountHandles {
@@ -37,6 +38,11 @@ class PhoneAccountHandles {
           "accountComponentName == null || callToNotify.accountId == null");
       handle = TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL);
       if (handle == null) {
+        List<PhoneAccountHandle> callCapablePhoneAccounts =
+            TelecomUtil.getCallCapablePhoneAccounts(context);
+        if (!callCapablePhoneAccounts.isEmpty()) {
+          return callCapablePhoneAccounts.get(0);
+        }
         return null;
       }
     } else {

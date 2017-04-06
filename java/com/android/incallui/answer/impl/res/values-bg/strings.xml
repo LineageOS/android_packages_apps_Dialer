@@ -5,7 +5,7 @@
     <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Прекарайте пръст от иконата, за да отговорите като аудиообаждане"</string>
     <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Прекарайте пръст нагоре, за да отговорите и да задържите текущото обаждане"</string>
     <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Прекарайте пръст нагоре, за да отговорите и да завършите задържаното обаждане"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="5695449250270204669">"Прекарайте пръст нагоре, за да отговорите на входящото обаждане и да завършите текущото"</string>
+    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Прекарайте пръст от иконата, за да отговорите и да завършите текущото обаждане"</string>
     <string name="call_incoming_message_custom" msgid="5819492800418293238">"Напишете свое собствено…"</string>
     <string name="call_incoming_audio_handset" msgid="2299009191401671619">"Слушалка"</string>
     <string name="call_incoming_audio_speakerphone" msgid="5632622369522427991">"Високоговорител"</string>
@@ -14,10 +14,10 @@
     <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Изпращане"</string>
     <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Отхвърляне на това обаждане със съобщение"</string>
     <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Отговаряне като аудиообаждане"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="6771962954510757804">"Отговор на входящото обаждане и завършване на текущото"</string>
+    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Отговор и завършване на текущото обаждане"</string>
     <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Отхвърляне със съобщение"</string>
     <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Отговаряне като аудиообаждане"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="1162931642679631008">"Отговор на входящото обаждане и завършване на текущото"</string>
+    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Отговор и завършване на текущото обаждане"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Видеото е изключено"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Прекарайте два пръста нагоре за отговаряне, надолу за отхвърляне."</string>
     <string name="call_incoming_important" msgid="6477906345540334049">"Важно обаждане"</string>

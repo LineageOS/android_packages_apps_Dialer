@@ -16,14 +16,12 @@
 
 package com.android.dialer.app.calllog;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.VoicemailContract;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,22 +117,22 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   }
 
   @Override
-  public void onPageResume(@Nullable Activity activity) {
-    LogUtil.d("VisualVoicemailCallLogFragment.onPageResume", null);
-    super.onPageResume(activity);
-    if (activity != null) {
-      activity.sendBroadcast(new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL));
-      Logger.get(activity).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
-      activity.setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
+  public void onVisible() {
+    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageSelected");
+    super.onVisible();
+    if (getActivity() != null) {
+      getActivity().sendBroadcast(new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL));
+      Logger.get(getActivity()).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
+      getActivity().setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
     }
   }
 
   @Override
-  public void onPagePause(@Nullable Activity activity) {
-    LogUtil.d("VisualVoicemailCallLogFragment.onPagePause", null);
-    super.onPagePause(activity);
-    if (activity != null) {
-      activity.setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
+  public void onNotVisible() {
+    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageUnselected");
+    super.onNotVisible();
+    if (getActivity() != null) {
+      getActivity().setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
   }
 }
