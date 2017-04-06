@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Визуелна говорна пошта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Додатне резервне копије и простор"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Ово је експериментална функција"</i></b>" коју тренутно тестирамо. Тако ће се можда избрисати говорне поруке са сервера говорне поште. Нема гаранција да ће ова функција бити подржана и у будућности. Ипак, желимо да добијамо повратне информације о њој."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Подесите PIN"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Промените PIN"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Подесите PIN"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Промените PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Морате да омогућите визуелну говорну пошту да бисте променили PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Визуелна говорна пошта још увек није активирана, пробајте поново касније"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Стари PIN"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Нови PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Сачекајте."</string>

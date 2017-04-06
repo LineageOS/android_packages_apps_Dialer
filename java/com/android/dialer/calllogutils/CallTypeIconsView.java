@@ -26,7 +26,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import com.android.contacts.common.util.BitmapUtil;
 import com.android.dialer.compat.AppCompatConstants;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +168,7 @@ public class CallTypeIconsView extends View {
     int left = 0;
     // If we are using large icons, we should only show one icon (video, hd or call type) with
     // priority give to HD or Video. So we skip the call type icon if we plan to show them.
-    if (!useLargeIcons || !(mShowHd || mShowVideo)) {
+    if (!useLargeIcons || !(mShowHd || mShowVideo || mShowWifi)) {
       for (Integer callType : mCallTypes) {
         final Drawable drawable = getCallTypeDrawable(callType);
         final int right = left + drawable.getIntrinsicWidth();
@@ -181,27 +180,23 @@ public class CallTypeIconsView extends View {
 
     // If showing the video call icon, draw it scaled appropriately.
     if (mShowVideo) {
-      final Drawable drawable = resources.videoCall;
-      final int right = left + resources.videoCall.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, resources.videoCall.getIntrinsicHeight());
-      drawable.draw(canvas);
-      left = right + sResources.iconMargin;
+      left = addDrawable(canvas, resources.videoCall, left) + resources.iconMargin;
     }
     // If showing HD call icon, draw it scaled appropriately.
     if (mShowHd) {
-      final Drawable drawable = resources.hdCall;
-      final int right = left + resources.hdCall.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, resources.hdCall.getIntrinsicHeight());
-      drawable.draw(canvas);
-      left = right + sResources.iconMargin;
+      left = addDrawable(canvas, resources.hdCall, left) + resources.iconMargin;
     }
     // If showing HD call icon, draw it scaled appropriately.
     if (mShowWifi) {
-      final Drawable drawable = sResources.wifiCall;
-      final int right = left + sResources.wifiCall.getIntrinsicWidth();
-      drawable.setBounds(left, 0, right, sResources.wifiCall.getIntrinsicHeight());
-      drawable.draw(canvas);
+      left = addDrawable(canvas, resources.wifiCall, left) + resources.iconMargin;
     }
+  }
+
+  private int addDrawable(Canvas canvas, Drawable drawable, int left) {
+    int right = left + drawable.getIntrinsicWidth();
+    drawable.setBounds(left, 0, right, drawable.getIntrinsicHeight());
+    drawable.draw(canvas);
+    return right;
   }
 
   private static class Resources {
@@ -242,25 +237,24 @@ public class CallTypeIconsView extends View {
     public Resources(Context context, boolean largeIcons) {
       final android.content.res.Resources r = context.getResources();
 
-      int iconId =
-          largeIcons ? R.drawable.quantum_ic_call_received_white_24 : R.drawable.ic_call_arrow;
-      incoming = r.getDrawable(iconId);
+      int iconId = R.drawable.quantum_ic_call_received_white_24;
+      incoming = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Create a rotated instance of the call arrow for outgoing calls.
-      outgoing = BitmapUtil.getRotatedDrawable(r, iconId, 180f);
+      iconId = R.drawable.quantum_ic_call_made_white_24;
+      outgoing = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
-      iconId = largeIcons ? R.drawable.quantum_ic_call_missed_white_24 : R.drawable.ic_call_arrow;
-      missed = r.getDrawable(iconId).mutate();
+      iconId = R.drawable.quantum_ic_call_missed_white_24;
+      missed = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_voicemail_white_24;
       voicemail = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      voicemail.setColorFilter(
-          r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+      voicemail.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_block_white_24;
       blocked = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
@@ -268,17 +262,15 @@ public class CallTypeIconsView extends View {
 
       iconId = R.drawable.quantum_ic_videocam_white_24;
       videoCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      videoCall.setColorFilter(
-          r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+      videoCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_hd_white_24;
       hdCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
-      hdCall.setColorFilter(
-          r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+      hdCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
-      wifiCall = getScaledBitmap(context, R.drawable.quantum_ic_signal_wifi_4_bar_white_24);
-      wifiCall.setColorFilter(
-          r.getColor(R.color.dialer_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+      iconId = R.drawable.quantum_ic_signal_wifi_4_bar_white_24;
+      wifiCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      wifiCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }

@@ -100,6 +100,11 @@ public class CallList implements DialerCallDelegate {
   @VisibleForTesting
   public CallList() {}
 
+  @VisibleForTesting
+  public static void setCallListInstance(CallList callList) {
+    sInstance = callList;
+  }
+
   /** Static singleton accessor method. */
   public static CallList getInstance() {
     return sInstance;
@@ -124,9 +129,11 @@ public class CallList implements DialerCallDelegate {
               new SpamBindings.Listener() {
                 @Override
                 public void onComplete(boolean isSpam) {
+                  boolean isIncomingCall =
+                      call.getState() == DialerCall.State.INCOMING
+                          || call.getState() == DialerCall.State.CALL_WAITING;
                   if (isSpam) {
-                    if (call.getState() != DialerCall.State.INCOMING
-                        && call.getState() != DialerCall.State.CALL_WAITING) {
+                    if (!isIncomingCall) {
                       LogUtil.i(
                           "CallList.onCallAdded",
                           "marking spam call as not spam because it's not an incoming call");
@@ -140,13 +147,15 @@ public class CallList implements DialerCallDelegate {
                     }
                   }
 
-                  Logger.get(context)
-                      .logCallImpression(
-                          isSpam
-                              ? DialerImpression.Type.INCOMING_SPAM_CALL
-                              : DialerImpression.Type.INCOMING_NON_SPAM_CALL,
-                          call.getUniqueCallId(),
-                          call.getTimeAddedMs());
+                  if (isIncomingCall) {
+                    Logger.get(context)
+                        .logCallImpression(
+                            isSpam
+                                ? DialerImpression.Type.INCOMING_SPAM_CALL
+                                : DialerImpression.Type.INCOMING_NON_SPAM_CALL,
+                            call.getUniqueCallId(),
+                            call.getTimeAddedMs());
+                  }
                   call.setSpam(isSpam);
                   dialerCallListener.onDialerCallUpdate();
                 }

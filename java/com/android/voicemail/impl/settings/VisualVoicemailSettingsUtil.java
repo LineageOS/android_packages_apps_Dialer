@@ -18,6 +18,7 @@ package com.android.voicemail.impl.settings;
 import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
@@ -27,8 +28,6 @@ import com.android.voicemail.impl.sync.VvmAccountManager;
 public class VisualVoicemailSettingsUtil {
 
   private static final String IS_ENABLED_KEY = "is_enabled";
-  // Flag name used for configuration
-  public static final String ALLOW_VOICEMAIL_ARCHIVE = "allow_voicemail_archive";
 
   public static void setEnabled(
       Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
@@ -47,6 +46,8 @@ public class VisualVoicemailSettingsUtil {
 
   public static void setArchiveEnabled(
       Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
+    Assert.checkArgument(
+        VoicemailComponent.get(context).getVoicemailClient().isVoicemailArchiveAvailable(context));
     new VisualVoicemailPreferences(context, phoneAccount)
         .edit()
         .putBoolean(context.getString(R.string.voicemail_visual_voicemail_archive_key), isEnabled)

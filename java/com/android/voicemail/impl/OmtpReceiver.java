@@ -27,6 +27,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.VoicemailComponent;
+import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
 /** Listens to com.android.phone.vvm.ACTION_TEMP_VISUAL_VOICEMAIL_SERVICE_EVENT */
@@ -63,6 +64,16 @@ public class OmtpReceiver extends BroadcastReceiver {
 
     int what = intent.getIntExtra(EXTRA_WHAT, -1);
     PhoneAccountHandle phoneAccountHandle = intent.getParcelableExtra(DATA_PHONE_ACCOUNT_HANDLE);
+    OmtpVvmCarrierConfigHelper config = new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle);
+    if (!config.isValid()) {
+      VvmLog.i(TAG, "VVM not supported on " + phoneAccountHandle);
+      return;
+    }
+    if (!VisualVoicemailSettingsUtil.isEnabled(context, phoneAccountHandle)
+        && !config.isLegacyModeEnabled()) {
+      VvmLog.i(TAG, "VVM is disabled");
+      return;
+    }
     switch (what) {
       case MSG_ON_CELL_SERVICE_CONNECTED:
         VvmLog.i(TAG, "onCellServiceConnected");

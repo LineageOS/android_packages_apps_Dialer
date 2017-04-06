@@ -26,8 +26,5 @@
   <dimen name="actionbar_and_tab_height">107dp</dimen>
   <dimen name="actionbar_contentInsetStart">72dp</dimen>
 
-  <dimen name="toolbar_title_text_size">14sp</dimen>
-  <dimen name="toolbar_subtitle_text_size">12sp</dimen>
-
-  <dimen name="call_log_icon_margin">4dp</dimen>
+  <dimen name="call_log_icon_margin">2dp</dimen>
 </resources>

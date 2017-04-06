@@ -193,14 +193,13 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    *     numbers have been queried for. The activity must implement {@link InteractionErrorListener}
    *     and {@link DisambigDialogDismissedListener}.
    * @param isVideoCall {@code true} if the call is a video call, {@code false} otherwise.
-   * @return true if the necessary permissions were found to start the interaction, false otherwise
    */
-  public static boolean startInteractionForPhoneCall(
+  public static void startInteractionForPhoneCall(
       TransactionSafeActivity activity,
       Uri uri,
       boolean isVideoCall,
       CallSpecificAppData callSpecificAppData) {
-    return new PhoneNumberInteraction(
+    new PhoneNumberInteraction(
             activity, ContactDisplayUtils.INTERACTION_CALL, isVideoCall, callSpecificAppData)
         .startInteraction(uri);
   }
@@ -214,9 +213,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    * Initiates the interaction to result in either a phone call or sms message for a contact.
    *
    * @param uri Contact Uri
-   * @return true if the necessary permissions were found to start the interaction, false otherwise
    */
-  private boolean startInteraction(Uri uri) {
+  private void startInteraction(Uri uri) {
     // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
@@ -225,7 +223,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
       LogUtil.i("PhoneNumberInteraction.startInteraction", "No phone permissions");
       ActivityCompat.requestPermissions(
           (Activity) mContext, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
-      return false;
+      return;
     }
     if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS)
         != PackageManager.PERMISSION_GRANTED) {
@@ -234,7 +232,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
           (Activity) mContext,
           new String[] {Manifest.permission.READ_CONTACTS},
           REQUEST_READ_CONTACTS);
-      return false;
+      return;
     }
 
     if (mLoader != null) {
@@ -260,7 +258,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             mContext, queryUri, PHONE_NUMBER_PROJECTION, PHONE_NUMBER_SELECTION, null, null);
     mLoader.registerListener(0, this);
     mLoader.startLoading();
-    return true;
   }
 
   @Override
@@ -353,6 +350,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     final Activity activity = (Activity) mContext;
     if (activity.isDestroyed()) {
       // Check whether the activity is still running
+      LogUtil.i("PhoneNumberInteraction.showDisambiguationDialog", "activity destroyed");
       return;
     }
     try {
@@ -365,6 +363,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     } catch (IllegalStateException e) {
       // ignore to be safe. Shouldn't happen because we checked the
       // activity wasn't destroyed, but to be safe.
+      LogUtil.e("PhoneNumberInteraction.showDisambiguationDialog", "caught exception", e);
     }
   }
 

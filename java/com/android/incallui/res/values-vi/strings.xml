@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Cuộc gọi đang diễn ra qua Wi-Fi về công việc"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Đang chờ"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Cuộc gọi đến"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Cuộc gọi đến có ảnh"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Cuộc gọi đến có tin nhắn"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Cuộc gọi đến có vị trí"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Cuộc gọi đến có ảnh và tin nhắn"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Cuộc gọi đến có ảnh và vị trí"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Cuộc gọi đến có tin nhắn và vị trí"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Cuộc gọi đến có ảnh, tin nhắn và vị trí"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Cuộc gọi đến có tệp đính kèm"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Cuộc gọi đến quan trọng"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Cuộc gọi đến quan trọng có ảnh"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Cuộc gọi đến quan trọng có tin nhắn"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Cuộc gọi đến quan trọng có vị trí"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Cuộc gọi đến quan trọng có ảnh và tin nhắn"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Cuộc gọi đến quan trọng có ảnh và vị trí"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Cuộc gọi đến quan trọng có tin nhắn và vị trí"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Cuộc gọi đến quan trọng có ảnh, tin nhắn và vị trí"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Cuộc gọi đến quan trọng có tệp đính kèm"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Cuộc gọi đến về công việc"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Cuộc gọi đến qua Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Cuộc gọi đến qua Wi-Fi về công việc"</string>

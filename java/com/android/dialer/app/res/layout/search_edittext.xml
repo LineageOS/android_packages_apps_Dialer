@@ -27,7 +27,7 @@
       android:padding="@dimen/search_box_search_icon_padding"
       android:importantForAccessibility="no"
       android:scaleType="center"
-      android:src="@drawable/ic_ab_search"
+      android:src="@drawable/quantum_ic_search_white_24"
       android:tint="@color/searchbox_icon_tint"/>
 
     <TextView
@@ -61,7 +61,7 @@
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/action_menu_overflow_description"
       android:scaleType="center"
-      android:src="@drawable/ic_overflow_menu"
+      android:src="@drawable/quantum_ic_more_vert_white_24"
       android:tint="@color/searchbox_icon_tint"/>
 
   </LinearLayout>

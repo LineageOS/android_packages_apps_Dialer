@@ -32,7 +32,7 @@
         android:layout_centerInParent="true"
         android:paddingTop="@dimen/dialpad_voicemail_icon_padding_top"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_dialpad_voicemail"
+        android:src="@drawable/quantum_ic_voicemail_white_24"
         android:tint="?attr/dialpad_voicemail_tint"/>
       <!-- Place empty text view so vertical height is same as other dialpad keys. -->
       <TextView style="@style/DialpadKeyLettersStyle"/>

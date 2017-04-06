@@ -43,7 +43,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public boolean isAvailable() {
+  public boolean isAvailable(Context context) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       return false;
     }
@@ -81,8 +81,8 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void onCallStateChanged(int newState) {
-    if (!isAvailable()) {
+  public void onCallStateChanged(Context context, int newState) {
+    if (!isAvailable(context)) {
       return;
     }
 

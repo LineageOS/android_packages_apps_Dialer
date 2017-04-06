@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Folyamatban lévő munkahelyi hívás Wi-Fin keresztül"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Tartásban"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Bejövő hívás"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Bejövő hívás fotóval"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Bejövő hívás üzenettel"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Bejövő hívás hellyel"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Bejövő hívás fotóval és üzenettel"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Bejövő hívás fotóval és hellyel"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Bejövő hívás üzenettel és hellyel"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Bejövő hívás fotóval, üzenettel és hellyel"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Bejövő hívás mellékletekkel"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Fontos bejövő hívás"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Fontos bejövő hívás fotóval"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Fontos bejövő hívás üzenettel"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Fontos bejövő hívás hellyel"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Fontos bejövő hívás fotóval és üzenettel"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Fontos bejövő hívás fotóval és hellyel"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Fontos bejövő hívás üzenettel és hellyel"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Fontos bejövő hívás fotóval, üzenettel és hellyel"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Fontos bejövő hívás mellékletekkel"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Bejövő munkahelyi hívás"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Beérkező Wi-Fi-hívás"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Bejövő munkahelyi hívás Wi-Fin keresztül"</string>

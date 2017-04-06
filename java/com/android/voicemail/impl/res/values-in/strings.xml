@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Pesan Suara Visual"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Penyimpanan dan backup ekstra"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Ini adalah fitur eksperimental"</i></b>" yang sedang kami uji. Fitur ini berpotensi menghapus pesan suara dari server pesan suara Anda. Tidak ada jaminan bahwa fitur ini akan didukung di masa mendatang. Kami akan menerima masukan terkait fitur ini dengan senang hati."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Setel PIN"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Ubah PIN"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Setel PIN"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Ubah PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Pesan suara visual harus diaktifkan untuk mengubah PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Pesan suara visual belum diaktifkan, coba lagi nanti"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"PIN lama"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"PIN Baru"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Mohon tunggu."</string>

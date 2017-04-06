@@ -17,7 +17,8 @@
 <FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_height="match_parent"
-  android:layout_width="match_parent">
+  android:layout_width="match_parent"
+  android:paddingBottom="@dimen/call_composer_media_bar_height">
 
   <include
     android:layout_width="match_parent"

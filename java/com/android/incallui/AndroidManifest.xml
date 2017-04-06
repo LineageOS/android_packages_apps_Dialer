@@ -37,10 +37,6 @@
   <!-- Testing location -->
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-  <!-- This is used for querying Cequint caller id.
-       TODO(b/36600947): Move to oem package. -->
-  <uses-permission android:name="com.cequint.ecid.CALLER_ID_LOOKUP" />
-
   <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
   navigation. Otherwise system could bring up DialtactsActivity instead, e.g. when user unmerge a
   call.

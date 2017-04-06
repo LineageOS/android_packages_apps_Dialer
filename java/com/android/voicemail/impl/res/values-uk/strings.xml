@@ -25,8 +25,10 @@
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Візуальна голосова пошта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Додаткова пам’ять і резервне копіювання"</string>
     <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Це експериментальна функція,"</i></b>" яку ми зараз тестуємо. У результаті її використання голосові повідомлення може бути видалено із сервера голосової пошти. Ми не гарантуємо, що ця функція підтримуватиметься в майбутньому, однак хочемо отримати відгук про неї."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"Установити PIN-код"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"Змінити PIN-код"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Установити PIN-код"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Змінити PIN-код"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Щоб змінити PIN-код, потрібно ввімкнути візуальну голосову пошту"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Візуальну голосову пошту ще не активовано, повторіть спробу пізніше"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Старий PIN-код"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Новий PIN-код"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Зачекайте."</string>

@@ -30,7 +30,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -71,7 +70,6 @@ public class SpecialCharSequenceMgr {
 
   private static final String TAG_SELECT_ACCT_FRAGMENT = "tag_select_acct_fragment";
 
-  private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
   private static final String MMI_IMEI_DISPLAY = "*#06#";
   private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
   /** ***** This code is used to handle SIM Contact queries ***** */
@@ -133,31 +131,21 @@ public class SpecialCharSequenceMgr {
 
   /**
    * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*.
-   * If a secret code is encountered, an Intent is started with the android_secret_code://<code>
-   * URI.
    *
    * @param context the context to use
    * @param input the text to check for a secret code in
-   * @return true if a secret code was encountered and intent is sent out
+   * @return true if a secret code was encountered and handled
    */
   static boolean handleSecretCode(Context context, String input) {
-    // Must use system service on O+ to avoid using broadcasts, which are not allowed on O+.
-    if (BuildCompat.isAtLeastO()) {
-      return context.getSystemService(TelephonyManager.class).sendDialerCode(input);
-    }
+    // Secret codes are accessed by dialing *#*#<code>#*#*
 
-    // System service call is not supported pre-O, so must use a broadcast for N-.
-    // Secret codes are in the form *#*#<code>#*#*
     int len = input.length();
-    if (len > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
-      final Intent intent =
-          new Intent(
-              SECRET_CODE_ACTION,
-              Uri.parse("android_secret_code://" + input.substring(4, len - 4)));
-      context.sendBroadcast(intent);
-      return true;
+    if (len <= 8 || !input.startsWith("*#*#") || !input.endsWith("#*#*")) {
+      return false;
     }
-    return false;
+    String secretCode = input.substring(4, len - 4);
+    TelephonyManagerCompat.handleSecretCode(context, secretCode);
+    return true;
   }
 
   /**

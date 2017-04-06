@@ -24,9 +24,9 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.DialerImpression;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpEvents;
@@ -153,9 +153,7 @@ public class OmtpVvmSyncService {
   private void autoDeleteAndArchiveVM(
       ImapHelper imapHelper, PhoneAccountHandle phoneAccountHandle) {
 
-    if (ConfigProviderBindings.get(mContext)
-            .getBoolean(VisualVoicemailSettingsUtil.ALLOW_VOICEMAIL_ARCHIVE, true)
-        && isArchiveEnabled(mContext, phoneAccountHandle)) {
+    if (isArchiveAllowedAndEnabled(mContext, phoneAccountHandle)) {
       if ((float) imapHelper.getOccuupiedQuota() / (float) imapHelper.getTotalQuota()
           > AUTO_DELETE_ARCHIVE_VM_THRESHOLD) {
         deleteAndArchiveVM(imapHelper);
@@ -166,14 +164,29 @@ public class OmtpVvmSyncService {
         VvmLog.i(TAG, "no need to archive and auto delete VM, quota below threshold");
       }
     } else {
-      VvmLog.i(TAG, "autoDeleteAndArchiveVM is turned off");
+      VvmLog.i(TAG, "isArchiveAllowedAndEnabled is false");
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF);
     }
   }
 
-  private static boolean isArchiveEnabled(Context context, PhoneAccountHandle phoneAccountHandle) {
-    return VisualVoicemailSettingsUtil.isArchiveEnabled(context, phoneAccountHandle)
-        && VisualVoicemailSettingsUtil.isEnabled(context, phoneAccountHandle);
+  private static boolean isArchiveAllowedAndEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle) {
+
+    if (!VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isVoicemailArchiveAvailable(context)) {
+      VvmLog.i("isArchiveAllowedAndEnabled", "voicemail archive is not available");
+      return false;
+    }
+    if (!VisualVoicemailSettingsUtil.isArchiveEnabled(context, phoneAccountHandle)) {
+      VvmLog.i("isArchiveAllowedAndEnabled", "voicemail archive is turned off");
+      return false;
+    }
+    if (!VisualVoicemailSettingsUtil.isEnabled(context, phoneAccountHandle)) {
+      VvmLog.i("isArchiveAllowedAndEnabled", "voicemail is turned off");
+      return false;
+    }
+    return true;
   }
 
   private void deleteAndArchiveVM(ImapHelper imapHelper) {

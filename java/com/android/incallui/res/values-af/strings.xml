@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Voortdurende Wi-Fi-werkoproep"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Hou aan"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Inkomende oproep"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Inkomende oproep met foto"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Inkomende oproep met boodskap"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Inkomende oproep met ligging"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Inkomende oproep met foto en boodskap"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Inkomende oproep met foto en ligging"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Inkomende oproep met boodskap en ligging"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Inkomende oproep met foto, boodskap en ligging"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Inkomende oproep met aanhegsels"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Belangrike inkomende oproep"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Belangrike inkomende oproep met foto"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Belangrike inkomende oproep met boodskap"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Belangrike inkomende oproep met ligging"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Belangrike inkomende oproep met foto en boodskap"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Belangrike inkomende oproep met foto en ligging"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Belangrike inkomende oproep met boodskap en ligging"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Belangrike inkomende oproep met foto, boodskap en ligging"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Belangrike inkomende oproep met aanhegsels"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Inkomende werkoproep"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Inkomende Wi-Fi-oproep"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Inkomende Wi-Fi-werkoproep"</string>

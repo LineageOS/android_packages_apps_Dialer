@@ -24,9 +24,11 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Erweiterte Einstellungen"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Visuelle Mailbox"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Zusätzliche Sicherung und mehr Speicher"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Dies ist eine Funktion im Versuchsstadium"</i></b>", die gerade getestet wird. Hiermit werden möglicherweise Mailbox-Nachrichten von deinem Mailbox-Server gelöscht. Es wird nicht garantiert, dass diese Funktion auch in Zukunft unterstützt wird. Wir würden uns aber sehr über Feedback dazu freuen."</string>
-    <string name="voicemail_set_pin_dialog_title" msgid="8853126653745637812">"PIN festlegen"</string>
-    <string name="voicemail_change_pin_dialog_title" msgid="6929300804279262966">"PIN ändern"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Dies ist eine Funktion im Versuchsstadium"</i></b>", die gerade getestet wird. Hiermit werden möglicherweise Mailboxnachrichten von deinem Mailbox-Server gelöscht. Es wird nicht garantiert, dass diese Funktion auch in Zukunft unterstützt wird. Wir würden uns aber sehr über Feedback dazu freuen."</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN festlegen"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN ändern"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Die visuelle Mailbox muss aktiviert sein, um die PIN zu ändern"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Die visuelle Mailbox wurde noch nicht aktiviert, bitte versuche es später noch einmal"</string>
     <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Alte PIN"</string>
     <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Neue PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Bitte warten."</string>

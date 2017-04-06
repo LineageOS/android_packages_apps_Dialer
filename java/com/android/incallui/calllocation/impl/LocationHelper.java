@@ -22,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -35,6 +36,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +47,23 @@ public class LocationHelper {
   private static final int MIN_UPDATE_INTERVAL_MS = 30 * 1000;
   private static final int LAST_UPDATE_THRESHOLD_MS = 60 * 1000;
   private static final int LOCATION_ACCURACY_THRESHOLD_METERS = 100;
+
+  public static final int LOCATION_STATUS_UNKNOWN = 0;
+  public static final int LOCATION_STATUS_OK = 1;
+  public static final int LOCATION_STATUS_STALE = 2;
+  public static final int LOCATION_STATUS_INACCURATE = 3;
+  public static final int LOCATION_STATUS_NO_LOCATION = 4;
+
+  /** Possible return values for {@code checkLocation()} */
+  @IntDef({
+    LOCATION_STATUS_UNKNOWN,
+    LOCATION_STATUS_OK,
+    LOCATION_STATUS_STALE,
+    LOCATION_STATUS_INACCURATE,
+    LOCATION_STATUS_NO_LOCATION
+  })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface LocationStatus {}
 
   private final LocationHelperInternal locationHelperInternal;
   private final List<LocationListener> listeners = new ArrayList<>();
@@ -71,28 +91,32 @@ public class LocationHelper {
   }
 
   /**
-   * Whether the location is valid. We consider it valid if it was recorded within the specified
-   * time threshold of the present and has an accuracy less than the specified distance threshold.
+   * Check whether the location is valid. We consider it valid if it was recorded within the
+   * specified time threshold of the present and has an accuracy less than the specified distance
+   * threshold.
    *
    * @param location The location to determine the validity of.
-   * @return {@code true} if the location is valid, and {@code false} otherwise.
+   * @return {@code LocationStatus} indicating if the location is valid or the reason its not valid
    */
-  static boolean isValidLocation(Location location) {
-    if (location != null) {
-      long locationTimeMs = location.getTime();
-      long elapsedTimeMs = System.currentTimeMillis() - locationTimeMs;
-      if (elapsedTimeMs > LAST_UPDATE_THRESHOLD_MS) {
-        LogUtil.i("LocationHelper.isValidLocation", "stale location, age: " + elapsedTimeMs);
-        return false;
-      }
-      if (location.getAccuracy() > LOCATION_ACCURACY_THRESHOLD_METERS) {
-        LogUtil.i("LocationHelper.isValidLocation", "poor accuracy: " + location.getAccuracy());
-        return false;
-      }
-      return true;
+  static @LocationStatus int checkLocation(Location location) {
+    if (location == null) {
+      LogUtil.i("LocationHelper.checkLocation", "no location");
+      return LOCATION_STATUS_NO_LOCATION;
     }
-    LogUtil.i("LocationHelper.isValidLocation", "no location");
-    return false;
+
+    long locationTimeMs = location.getTime();
+    long elapsedTimeMs = System.currentTimeMillis() - locationTimeMs;
+    if (elapsedTimeMs > LAST_UPDATE_THRESHOLD_MS) {
+      LogUtil.i("LocationHelper.checkLocation", "stale location, age: " + elapsedTimeMs);
+      return LOCATION_STATUS_STALE;
+    }
+
+    if (location.getAccuracy() > LOCATION_ACCURACY_THRESHOLD_METERS) {
+      LogUtil.i("LocationHelper.checkLocation", "poor accuracy: " + location.getAccuracy());
+      return LOCATION_STATUS_INACCURATE;
+    }
+
+    return LOCATION_STATUS_OK;
   }
 
   @MainThread

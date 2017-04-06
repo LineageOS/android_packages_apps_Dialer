@@ -56,6 +56,12 @@ public class CallContactActivity extends TransactionSafeActivity
     }
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    LogUtil.enterBlock("CallContactActivity.onDestroy");
+  }
+
   /**
    * Attempt to make a call, finishing the activity if the required permissions are already granted.
    * If the required permissions are not already granted, the activity is not finished so that the
@@ -64,12 +70,8 @@ public class CallContactActivity extends TransactionSafeActivity
   private void makeCall() {
     CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
     callSpecificAppData.callInitiationType = CallInitiationType.Type.LAUNCHER_SHORTCUT;
-    boolean interactionStarted =
-        PhoneNumberInteraction.startInteractionForPhoneCall(
-            this, contactUri, false /* isVideoCall */, callSpecificAppData);
-    if (interactionStarted) {
-      finish();
-    }
+    PhoneNumberInteraction.startInteractionForPhoneCall(
+        this, contactUri, false /* isVideoCall */, callSpecificAppData);
   }
 
   @Override

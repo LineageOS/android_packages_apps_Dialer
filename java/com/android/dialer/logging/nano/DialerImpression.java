@@ -179,6 +179,18 @@ public final class DialerImpression
     public static final int VVM_TRANSCRIPTION_DOWNLOADED = 1159;
     public static final int VVM_CHANGE_AIRPLANE_MODE_CLICKED = 1160;
     public static final int VVM_CALL_VOICEMAIL_CLICKED = 1161;
+    public static final int VVM_QUOTA_CHECK_UNAVAILABLE = 1162;
+    public static final int EMERGENCY_NEW_EMERGENCY_CALL = 1163;
+    public static final int EMERGENCY_CALLBACK = 1164;
+    public static final int EMERGENCY_NO_LOCATION_PERMISSION = 1165;
+    public static final int EMERGENCY_BATTERY_TOO_LOW_TO_GET_LOCATION = 1166;
+    public static final int EMERGENCY_CANT_GET_LOCATION = 1167;
+    public static final int EMERGENCY_STALE_LOCATION = 1168;
+    public static final int EMERGENCY_INACCURATE_LOCATION = 1169;
+    public static final int EMERGENCY_GOT_LOCATION = 1170;
+    public static final int EMERGENCY_GOT_ADDRESS = 1171;
+    public static final int EMERGENCY_GOT_MAP = 1172;
+    public static final int EMERGENCY_LAUNCHED_MAP = 1173;
   }
 
   private static volatile DialerImpression[] _emptyArray;

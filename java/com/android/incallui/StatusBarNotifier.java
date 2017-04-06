@@ -66,6 +66,10 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.oem.MotorolaUtils;
@@ -86,7 +90,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
-public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
+public class StatusBarNotifier
+    implements InCallPresenter.InCallStateListener, EnrichedCallManager.StateChangedListener {
 
   // Notification types
   // Indicates that no notification is currently showing.
@@ -116,7 +121,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
   private StatusBarCallListener mStatusBarCallListener;
   private boolean mShowFullScreenIntent;
 
-  StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
+  public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
     Objects.requireNonNull(context);
     mContext = context;
     mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
@@ -181,6 +186,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     updateNotification(callList);
   }
 
+  @Override
+  public void onEnrichedCallStateChanged() {
+    LogUtil.enterBlock("StatusBarNotifier.onEnrichedCallStateChanged");
+    updateNotification(CallList.getInstance());
+  }
+
   /**
    * Updates the phone app's status bar notification *and* launches the incoming call UI in response
    * to a new incoming call.
@@ -199,7 +210,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
    * @see #updateInCallNotification(CallList)
    */
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-  void updateNotification(CallList callList) {
+  public void updateNotification(CallList callList) {
     updateInCallNotification(callList);
   }
 
@@ -637,7 +648,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
       return R.drawable.ic_phone_paused_white_24dp;
     } else if (call.getVideoTech().getSessionModificationState()
         == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-      return R.drawable.ic_videocam;
+      return R.drawable.quantum_ic_videocam_white_24;
     } else if (call.hasProperty(PROPERTY_HIGH_DEF_AUDIO)
         && MotorolaUtils.shouldShowHdIconInNotification(mContext)) {
       // Normally when a call is ongoing the status bar displays an icon of a phone with animated
@@ -671,14 +682,20 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     if (isIncomingOrWaiting) {
-      if (call.hasProperty(Details.PROPERTY_WIFI)) {
+      EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
+      Session session = null;
+      if (call.getNumber() != null) {
+        session = manager.getSession(call.getUniqueCallId(), call.getNumber());
+      }
+
+      if (call.isSpam()) {
+        resId = R.string.notification_incoming_spam_call;
+      } else if (session != null) {
+        resId = getECIncomingCallText(session);
+      } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
         resId = R.string.notification_incoming_call_wifi;
       } else {
-        if (call.isSpam()) {
-          resId = R.string.notification_incoming_spam_call;
-        } else {
-          resId = R.string.notification_incoming_call;
-        }
+        resId = R.string.notification_incoming_call;
       }
     } else if (call.getState() == DialerCall.State.ONHOLD) {
       resId = R.string.notification_on_hold;
@@ -696,6 +713,66 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     return mContext.getString(resId);
+  }
+
+  private int getECIncomingCallText(Session session) {
+    int resId;
+    MultimediaData data = session.getMultimediaData();
+    boolean hasImage = data.hasImageData();
+    boolean hasSubject = !TextUtils.isEmpty(data.getText());
+    boolean hasMap = data.getLocation() != null;
+    if (data.isImportant()) {
+      if (hasMap) {
+        if (hasImage) {
+          if (hasSubject) {
+            resId = R.string.important_notification_incoming_call_with_photo_message_location;
+          } else {
+            resId = R.string.important_notification_incoming_call_with_photo_location;
+          }
+        } else if (hasSubject) {
+          resId = R.string.important_notification_incoming_call_with_message_location;
+        } else {
+          resId = R.string.important_notification_incoming_call_with_location;
+        }
+      } else if (hasImage) {
+        if (hasSubject) {
+          resId = R.string.important_notification_incoming_call_with_photo_message;
+        } else {
+          resId = R.string.important_notification_incoming_call_with_photo;
+        }
+      } else {
+        resId = R.string.important_notification_incoming_call_with_message;
+      }
+      if (mContext.getString(resId).length() > 50) {
+        resId = R.string.important_notification_incoming_call_attachments;
+      }
+    } else {
+      if (hasMap) {
+        if (hasImage) {
+          if (hasSubject) {
+            resId = R.string.notification_incoming_call_with_photo_message_location;
+          } else {
+            resId = R.string.notification_incoming_call_with_photo_location;
+          }
+        } else if (hasSubject) {
+          resId = R.string.notification_incoming_call_with_message_location;
+        } else {
+          resId = R.string.notification_incoming_call_with_location;
+        }
+      } else if (hasImage) {
+        if (hasSubject) {
+          resId = R.string.notification_incoming_call_with_photo_message;
+        } else {
+          resId = R.string.notification_incoming_call_with_photo;
+        }
+      } else {
+        resId = R.string.notification_incoming_call_with_message;
+      }
+    }
+    if (mContext.getString(resId).length() > 50) {
+      resId = R.string.notification_incoming_call_attachments;
+    }
+    return resId;
   }
 
   /** Gets the most relevant call to display in the notification. */
@@ -755,7 +832,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         createNotificationPendingIntent(mContext, ACTION_DECLINE_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_close_dk),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_close_white_24),
                 getActionText(
                     R.string.notification_action_dismiss, R.color.notification_action_dismiss),
                 declinePendingIntent)
@@ -785,7 +862,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         createNotificationPendingIntent(mContext, ACTION_ANSWER_VIDEO_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_videocam),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_videocam_white_24),
                 getActionText(
                     R.string.notification_action_answer_video,
                     R.color.notification_action_answer_video),
@@ -801,7 +878,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         createNotificationPendingIntent(mContext, ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_videocam),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_videocam_white_24),
                 getActionText(
                     R.string.notification_action_accept, R.color.notification_action_accept),
                 acceptVideoPendingIntent)
@@ -816,7 +893,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         createNotificationPendingIntent(mContext, ACTION_DECLINE_VIDEO_UPGRADE_REQUEST);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_videocam),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_videocam_white_24),
                 getActionText(
                     R.string.notification_action_dismiss, R.color.notification_action_dismiss),
                 declineVideoPendingIntent)

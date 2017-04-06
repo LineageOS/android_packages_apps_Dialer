@@ -276,12 +276,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
   @Override
   public void onSpeakerphoneOn(boolean on) {
     if (on) {
-      mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_up_24dp);
+      mPlaybackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_up_white_24);
       // Speaker is now on, tapping button will turn it off.
       mPlaybackSpeakerphone.setContentDescription(
           mContext.getString(R.string.voicemail_speaker_off));
     } else {
-      mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_down_24dp);
+      mPlaybackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_white_24);
       // Speaker is now off, tapping button will turn it on.
       mPlaybackSpeakerphone.setContentDescription(
           mContext.getString(R.string.voicemail_speaker_on));

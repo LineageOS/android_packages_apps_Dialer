@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Käynnissä oleva Wi-Fi-työpuhelu"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Pidossa"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Kuvan sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Viestin sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Sijainnin sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Kuvan ja viestin sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Kuvan ja sijainnin sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Viestin ja sijainnin sisältävä saapuva puhelu"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Kuvan, viestin ja sijainnin sisältävä puhelu"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Liitteitä sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Tärkeä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Tärkeä kuvan sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Tärkeä viestin sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Tärkeä sijainnin sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Tärkeä kuvan ja viestin sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Tärkeä kuvan ja sijainnin sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Tärkeä viestin ja sijainnin sisältävä puhelu"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Tärkeä liitteitä sisältävä saapuva puhelu"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Tärkeä liitteitä sisältävä saapuva puhelu"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Saapuva työpuhelu"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Saapuva Wi-Fi-puhelu"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Saapuva Wi-Fi-työpuhelu"</string>

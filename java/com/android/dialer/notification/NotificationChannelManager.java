@@ -53,30 +53,47 @@ public class NotificationChannelManager {
    * Set the channel of notification appropriately. Will create the channel if it does not already
    * exist. Safe to call pre-O (will no-op).
    *
-   * <p>phoneAccount should only be null if channelName is {@link Channel#MISC}.
+   * <p>phoneAccount should only be null if channelName is {@link Channel#MISC} or {@link
+   * Channel#MISSED_CALL} since these do not have account-specific settings.
    */
   public static void applyChannel(
       @NonNull Notification.Builder notification,
       @NonNull Context context,
       @Channel String channelName,
       @Nullable PhoneAccountHandle phoneAccount) {
-    if (phoneAccount == null) {
-      if (!Channel.MISC.equals(channelName)) {
-        IllegalArgumentException exception =
-            new IllegalArgumentException(
-                "Phone account handle must not be null unless on Channel.MISC");
-        if (BuildType.get() >= BuildType.RELEASE) {
-          LogUtil.e("NotificationChannelManager.applyChannel", null, exception);
-        } else {
-          throw exception;
-        }
-      }
-    }
+    checkNullity(channelName, phoneAccount);
 
     if (BuildCompat.isAtLeastO()) {
       NotificationChannel channel =
           NotificationChannelManager.getInstance().getChannel(context, channelName, phoneAccount);
       notification.setChannel(channel.getId());
+    }
+  }
+
+  private static void checkNullity(
+      @Channel String channelName, @Nullable PhoneAccountHandle phoneAccount) {
+    if (phoneAccount != null || channelAllowsNullPhoneAccountHandle(channelName)) {
+      return;
+    }
+
+    // TODO (b/36568553): don't throw an exception once most cases have been identified
+    IllegalArgumentException exception =
+        new IllegalArgumentException(
+            "Phone account handle must not be null on channel " + channelName);
+    if (BuildType.get() == BuildType.RELEASE) {
+      LogUtil.e("NotificationChannelManager.applyChannel", null, exception);
+    } else {
+      throw exception;
+    }
+  }
+
+  private static boolean channelAllowsNullPhoneAccountHandle(@Channel String channelName) {
+    switch (channelName) {
+      case Channel.MISC:
+      case Channel.MISSED_CALL:
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -136,7 +153,7 @@ public class NotificationChannelManager {
               (account == null) ? phoneAccountHandle.getId() : account.getLabel().toString());
       getNotificationManager(context)
           .createNotificationChannelGroup(group); // No-op if already exists
-    } else if (!Channel.MISC.equals(channelName)) {
+    } else if (!channelAllowsNullPhoneAccountHandle(channelName)) {
       LogUtil.w(
           "NotificationChannelManager.createChannel",
           "Null PhoneAccountHandle with channel " + channelName);

@@ -22,7 +22,6 @@ import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.Logger;
@@ -136,92 +135,122 @@ public class OmtpVoicemailMessageCreator {
       Context context, VoicemailStatus status, VoicemailStatusReader statusReader) {
     if (status.quotaOccupied != Status.QUOTA_UNAVAILABLE
         && status.quotaTotal != Status.QUOTA_UNAVAILABLE) {
-
-      PhoneAccountHandle phoneAccountHandle = status.getPhoneAccountHandle();
-
-      VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
-
-      PerAccountSharedPreferences sharedPreferenceForAccount =
-          new PerAccountSharedPreferences(
-              context, phoneAccountHandle, PreferenceManager.getDefaultSharedPreferences(context));
-
-      boolean isVoicemailArchiveEnabled =
-          VoicemailComponent.get(context)
-              .getVoicemailClient()
-              .isVoicemailArchiveEnabled(context, phoneAccountHandle);
-
-      if ((float) status.quotaOccupied / (float) status.quotaTotal >= QUOTA_FULL_THRESHOLD) {
-        return createInboxErrorMessage(
-            context,
-            status,
-            status.getPhoneAccountHandle(),
-            statusReader,
-            sharedPreferenceForAccount,
-            voicemailClient,
-            isVoicemailArchiveEnabled,
-            context.getString(R.string.voicemail_error_inbox_full_turn_archive_on_title),
-            context.getText(R.string.voicemail_error_inbox_full_turn_archive_on_message),
-            context.getString(R.string.voicemail_error_inbox_full_title),
-            context.getString(R.string.voicemail_error_inbox_full_message),
-            VOICEMAIL_PROMO_DISMISSED_KEY);
-      }
-
-      if ((float) status.quotaOccupied / (float) status.quotaTotal >= QUOTA_NEAR_FULL_THRESHOLD) {
-        return createInboxErrorMessage(
-            context,
-            status,
-            status.getPhoneAccountHandle(),
-            statusReader,
-            sharedPreferenceForAccount,
-            voicemailClient,
-            isVoicemailArchiveEnabled,
-            context.getString(R.string.voicemail_error_inbox_almost_full_turn_archive_on_title),
-            context.getText(R.string.voicemail_error_inbox_almost_full_turn_archive_on_message),
-            context.getString(R.string.voicemail_error_inbox_near_full_title),
-            context.getString(R.string.voicemail_error_inbox_near_full_message),
-            VOICEMAIL_PROMO_ALMOST_FULL_DISMISSED_KEY);
-      }
+      return createInboxErrorMessage(context, status, statusReader);
     }
+    Logger.get(context).logImpression(DialerImpression.Type.VVM_QUOTA_CHECK_UNAVAILABLE);
     return null;
   }
 
+  @Nullable
   private static VoicemailErrorMessage createInboxErrorMessage(
-      Context context,
-      VoicemailStatus status,
-      PhoneAccountHandle phoneAccountHandle,
-      VoicemailStatusReader statusReader,
-      PerAccountSharedPreferences sharedPreferenceForAccount,
-      VoicemailClient voicemailClient,
-      boolean isVoicemailArchiveEnabled,
-      String promoTitle,
-      CharSequence promoMessage,
-      String nonPromoTitle,
-      String nonPromoMessage,
-      String preferenceKey) {
+      Context context, VoicemailStatus status, VoicemailStatusReader statusReader) {
 
-    boolean wasPromoDismissed = sharedPreferenceForAccount.getBoolean(preferenceKey, false);
+    float voicemailOccupiedFraction = (float) status.quotaOccupied / (float) status.quotaTotal;
 
-    if (!wasPromoDismissed && !isVoicemailArchiveEnabled) {
-      logArchiveImpression(
-          context,
-          preferenceKey,
-          DialerImpression.Type.VVM_USER_SHOWN_VM_ALMOST_FULL_PROMO,
-          DialerImpression.Type.VVM_USER_SHOWN_VM_FULL_PROMO);
-      return new VoicemailErrorMessage(
-          promoTitle,
-          promoMessage,
-          VoicemailErrorMessage.createDismissTurnArchiveOnAction(
-              context, statusReader, sharedPreferenceForAccount, preferenceKey),
-          VoicemailErrorMessage.createTurnArchiveOnAction(
-              context, status, voicemailClient, phoneAccountHandle, preferenceKey));
-    } else {
-      logArchiveImpression(
-          context,
-          preferenceKey,
-          DialerImpression.Type.VVM_USER_SHOWN_VM_ALMOST_FULL_ERROR_MESSAGE,
-          DialerImpression.Type.VVM_USER_SHOWN_VM_FULL_ERROR_MESSAGE);
-      return new VoicemailErrorMessage(nonPromoTitle, nonPromoMessage);
+    if (voicemailOccupiedFraction < QUOTA_NEAR_FULL_THRESHOLD) {
+      return null;
     }
+
+    boolean isFull = voicemailOccupiedFraction >= QUOTA_FULL_THRESHOLD;
+
+    PhoneAccountHandle phoneAccountHandle = status.getPhoneAccountHandle();
+
+    PerAccountSharedPreferences sharedPreferenceForAccount =
+        new PerAccountSharedPreferences(
+            context, phoneAccountHandle, PreferenceManager.getDefaultSharedPreferences(context));
+
+    VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
+
+    boolean shouldShowPromoForArchive =
+        !isPromoForArchiveDismissed(sharedPreferenceForAccount, isFull)
+            && !voicemailClient.isVoicemailArchiveEnabled(context, phoneAccountHandle)
+            && voicemailClient.isVoicemailArchiveAvailable(context);
+
+    if (!shouldShowPromoForArchive) {
+      if (isFull) {
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.VVM_USER_SHOWN_VM_FULL_ERROR_MESSAGE);
+        return new VoicemailErrorMessage(
+            context.getString(R.string.voicemail_error_inbox_full_title),
+            context.getString(R.string.voicemail_error_inbox_full_message));
+      } else {
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.VVM_USER_SHOWN_VM_ALMOST_FULL_ERROR_MESSAGE);
+        return new VoicemailErrorMessage(
+            context.getString(R.string.voicemail_error_inbox_near_full_title),
+            context.getString(R.string.voicemail_error_inbox_near_full_message));
+      }
+    }
+
+    String title;
+    CharSequence message;
+    int enabledImpression;
+    int dismissedImpression;
+    String dismissedKey;
+
+    if (isFull) {
+      Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_SHOWN_VM_FULL_PROMO);
+      title = context.getString(R.string.voicemail_error_inbox_full_turn_archive_on_title);
+      message = context.getText(R.string.voicemail_error_inbox_full_turn_archive_on_message);
+      enabledImpression = DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_FULL_PROMO;
+      dismissedImpression = DialerImpression.Type.VVM_USER_DISMISSED_VM_FULL_PROMO;
+      dismissedKey = VOICEMAIL_PROMO_DISMISSED_KEY;
+    } else {
+      Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_SHOWN_VM_ALMOST_FULL_PROMO);
+      title = context.getString(R.string.voicemail_error_inbox_almost_full_turn_archive_on_title);
+      message = context.getText(R.string.voicemail_error_inbox_almost_full_turn_archive_on_message);
+      enabledImpression = DialerImpression.Type.VVM_USER_ENABLED_ARCHIVE_FROM_VM_ALMOST_FULL_PROMO;
+      dismissedImpression = DialerImpression.Type.VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO;
+      dismissedKey = VOICEMAIL_PROMO_ALMOST_FULL_DISMISSED_KEY;
+    }
+
+    return createVMQuotaPromo(
+        context,
+        phoneAccountHandle,
+        status,
+        statusReader,
+        voicemailClient,
+        sharedPreferenceForAccount,
+        title,
+        message,
+        enabledImpression,
+        dismissedImpression,
+        dismissedKey);
+  }
+
+  private static boolean isPromoForArchiveDismissed(
+      PerAccountSharedPreferences sharedPreferenceForAccount, boolean isFull) {
+    if (isFull) {
+      return sharedPreferenceForAccount.getBoolean(VOICEMAIL_PROMO_DISMISSED_KEY, false);
+    } else {
+      return sharedPreferenceForAccount.getBoolean(
+          VOICEMAIL_PROMO_ALMOST_FULL_DISMISSED_KEY, false);
+    }
+  }
+
+  private static VoicemailErrorMessage createVMQuotaPromo(
+      Context context,
+      PhoneAccountHandle phoneAccountHandle,
+      VoicemailStatus status,
+      VoicemailStatusReader statusReader,
+      VoicemailClient voicemailClient,
+      PerAccountSharedPreferences sharedPreferenceForAccount,
+      String title,
+      CharSequence message,
+      int impressionToLogOnEnable,
+      int impressionToLogOnDismiss,
+      String preferenceKeyToUpdate) {
+    return new VoicemailErrorMessage(
+        title,
+        message,
+        VoicemailErrorMessage.createDismissTurnArchiveOnAction(
+            context,
+            impressionToLogOnDismiss,
+            statusReader,
+            sharedPreferenceForAccount,
+            preferenceKeyToUpdate),
+        VoicemailErrorMessage.createTurnArchiveOnAction(
+            context, impressionToLogOnEnable, status, voicemailClient, phoneAccountHandle));
   }
 
   @Nullable
@@ -259,16 +288,5 @@ public class OmtpVoicemailMessageCreator {
       actions.add(VoicemailErrorMessage.createChangeAirplaneModeAction(context));
     }
     return new VoicemailErrorMessage(title, description, actions);
-  }
-
-  protected static void logArchiveImpression(
-      Context context, String preference, int vmAlmostFullImpression, int vmFullImpression) {
-    if (preference.equals(VOICEMAIL_PROMO_DISMISSED_KEY)) {
-      Logger.get(context).logImpression(vmAlmostFullImpression);
-    } else if (preference.equals(VOICEMAIL_PROMO_ALMOST_FULL_DISMISSED_KEY)) {
-      Logger.get(context).logImpression(vmFullImpression);
-    } else {
-      throw Assert.createAssertionFailException("Invalid preference key " + preference);
-    }
   }
 }

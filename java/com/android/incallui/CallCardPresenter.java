@@ -50,6 +50,8 @@ import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -182,8 +184,6 @@ public class CallCardPresenter
       mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     }
 
-    EnrichedCallComponent.get(mContext).getEnrichedCallManager().registerStateChangedListener(this);
-
     // Contact search may have completed before ui is ready.
     if (mPrimaryContactInfo != null) {
       updatePrimaryDisplayInfo();
@@ -196,9 +196,26 @@ public class CallCardPresenter
     InCallPresenter.getInstance().addInCallEventListener(this);
     isInCallScreenReady = true;
 
+    // Log location impressions
+    if (isOutgoingEmergencyCall(mPrimary)) {
+      Logger.get(mContext).logImpression(DialerImpression.Type.EMERGENCY_NEW_EMERGENCY_CALL);
+    } else if (isIncomingEmergencyCall(mPrimary) || isIncomingEmergencyCall(mSecondary)) {
+      Logger.get(mContext).logImpression(DialerImpression.Type.EMERGENCY_CALLBACK);
+    }
+
     // Showing the location may have been skipped if the UI wasn't ready during previous layout.
     if (shouldShowLocation()) {
       updatePrimaryDisplayInfo();
+
+      // Log location impressions
+      if (!hasLocationPermission()) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.EMERGENCY_NO_LOCATION_PERMISSION);
+      } else if (isBatteryTooLowForEmergencyLocation()) {
+        Logger.get(mContext)
+            .logImpression(DialerImpression.Type.EMERGENCY_BATTERY_TOO_LOW_TO_GET_LOCATION);
+      } else if (!callLocation.canGetLocation(mContext)) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.EMERGENCY_CANT_GET_LOCATION);
+      }
     }
   }
 
@@ -207,9 +224,6 @@ public class CallCardPresenter
     LogUtil.i("CallCardController.onInCallScreenUnready", null);
     Assert.checkState(isInCallScreenReady);
 
-    EnrichedCallComponent.get(mContext)
-        .getEnrichedCallManager()
-        .unregisterStateChangedListener(this);
     // stop getting call state changes
     InCallPresenter.getInstance().removeListener(this);
     InCallPresenter.getInstance().removeIncomingCallListener(this);
@@ -714,7 +728,9 @@ public class CallCardPresenter
               number,
               name,
               nameIsNumber,
-              mPrimaryContactInfo.location,
+              shouldShowLocationAsLabel(nameIsNumber, mPrimaryContactInfo.shouldShowLocation)
+                  ? mPrimaryContactInfo.location
+                  : null,
               isChildNumberShown || isCallSubjectShown ? null : mPrimaryContactInfo.label,
               mPrimaryContactInfo.photo,
               mPrimaryContactInfo.photoType,
@@ -737,6 +753,17 @@ public class CallCardPresenter
     } else {
       LogUtil.i("CallCardPresenter.updatePrimaryDisplayInfo", "UI not ready, not showing location");
     }
+  }
+
+  private static boolean shouldShowLocationAsLabel(
+      boolean nameIsNumber, boolean shouldShowLocation) {
+    if (nameIsNumber) {
+      return true;
+    }
+    if (shouldShowLocation) {
+      return true;
+    }
+    return false;
   }
 
   private Fragment getLocationFragment() {
@@ -1031,9 +1058,19 @@ public class CallCardPresenter
 
   @Override
   public void onInCallScreenResumed() {
+    EnrichedCallComponent.get(mContext).getEnrichedCallManager().registerStateChangedListener(this);
+    updatePrimaryDisplayInfo();
+
     if (shouldSendAccessibilityEvent) {
       handler.postDelayed(sendAccessibilityEventRunnable, ACCESSIBILITY_ANNOUNCEMENT_DELAY_MILLIS);
     }
+  }
+
+  @Override
+  public void onInCallScreenPaused() {
+    EnrichedCallComponent.get(mContext)
+        .getEnrichedCallManager()
+        .unregisterStateChangedListener(this);
   }
 
   static boolean sendAccessibilityEvent(Context context, InCallScreen inCallScreen) {

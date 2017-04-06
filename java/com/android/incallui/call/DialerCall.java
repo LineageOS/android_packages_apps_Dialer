@@ -49,6 +49,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.nano.ContactLookupResult;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
@@ -56,6 +57,7 @@ import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
+import com.android.incallui.videotech.lightbringer.LightbringerTech;
 import com.android.incallui.videotech.utils.VideoUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -1252,12 +1254,16 @@ public class DialerCall implements VideoTechListener {
   }
 
   private static class VideoTechManager {
+    private final Context context;
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
     private final List<VideoTech> videoTechs;
     private VideoTech savedTech;
 
     VideoTechManager(DialerCall call) {
+      this.context = call.mContext;
+
       String phoneNumber = call.getNumber();
+      phoneNumber = phoneNumber != null ? phoneNumber : "";
 
       // Insert order here determines the priority of that video tech option
       this.videoTechs = new ArrayList<>();
@@ -1269,10 +1275,14 @@ public class DialerCall implements VideoTechListener {
               .newRcsVideoShare(
                   EnrichedCallComponent.get(call.mContext).getEnrichedCallManager(),
                   call,
-                  phoneNumber != null ? phoneNumber : "");
+                  phoneNumber);
       if (rcsVideoTech != null) {
         videoTechs.add(rcsVideoTech);
       }
+
+      videoTechs.add(
+          new LightbringerTech(
+              LightbringerComponent.get(call.mContext).getLightbringer(), call, phoneNumber));
     }
 
     VideoTech getVideoTech() {
@@ -1281,7 +1291,7 @@ public class DialerCall implements VideoTechListener {
       }
 
       for (VideoTech tech : videoTechs) {
-        if (tech.isAvailable()) {
+        if (tech.isAvailable(context)) {
           // Remember the first VideoTech that becomes available and always use it
           savedTech = tech;
           return savedTech;
@@ -1293,7 +1303,7 @@ public class DialerCall implements VideoTechListener {
 
     void dispatchCallStateChanged(int newState) {
       for (VideoTech videoTech : videoTechs) {
-        videoTech.onCallStateChanged(newState);
+        videoTech.onCallStateChanged(context, newState);
       }
     }
   }

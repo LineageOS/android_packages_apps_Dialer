@@ -18,10 +18,13 @@ package com.android.dialer.phonenumbercache;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import java.io.InputStream;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public interface CachedNumberLookupService {
 
@@ -66,11 +69,23 @@ public interface CachedNumberLookupService {
     int SOURCE_TYPE_PLACES = 3;
     int SOURCE_TYPE_PROFILE = 4;
     int SOURCE_TYPE_CNAP = 5;
+    int SOURCE_TYPE_CEQUINT_CALLER_ID = 6;
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+      SOURCE_TYPE_DIRECTORY,
+      SOURCE_TYPE_EXTENDED,
+      SOURCE_TYPE_PLACES,
+      SOURCE_TYPE_PROFILE,
+      SOURCE_TYPE_CNAP,
+      SOURCE_TYPE_CEQUINT_CALLER_ID
+    })
+    public @interface ContactSourceType {}
 
     @NonNull
     ContactInfo getContactInfo();
 
-    void setSource(int sourceType, String name, long directoryId);
+    void setSource(@ContactSourceType int sourceType, String name, long directoryId);
 
     void setDirectorySource(String name, long directoryId);
 

@@ -92,7 +92,7 @@
     <string name="description_video_call" msgid="3738199365585751727">"تماس ویدئویی."</string>
     <string name="description_send_text_message" msgid="8450269896765568596">"ارسال پیامک به <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"پست صوتی شنیده نشده"</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"شروع جستجوی صوتی"</string>
+    <string name="description_start_voice_search" msgid="8380022725973015261">"شروع جستجوی گفتاری"</string>
     <string name="menu_callNumber" msgid="1540773545517152514">"تماس با <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="voicemail" msgid="8899540969000957954">"پست صوتی"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> ثانیه"</string>
@@ -110,7 +110,7 @@
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"در حال بارگیری سیم کارت..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"مخاطبین سیم کارت"</string>
     <string name="add_contact_not_available" msgid="7065884447935173347">"هیچ برنامه مخاطبی در دسترس نیست"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"جستجوی شفاهی در دسترس نیست"</string>
+    <string name="voice_search_not_available" msgid="6546240433719732905">"جستجوی گفتاری در دسترس نیست"</string>
     <string name="call_not_available" msgid="7850148370757361155">"برقراری تماس تلفنی ممکن نیست، زیرا برنامه تلفن غیرفعال شده است."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"جستجوی مخاطبین"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"افزودن شماره یا جستجوی مخاطب"</string>

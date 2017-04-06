@@ -15,6 +15,7 @@ package com.android.voicemail.impl;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
@@ -23,9 +24,12 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.common.LogUtil;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
+import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
 import java.util.List;
 import javax.inject.Inject;
@@ -43,6 +47,9 @@ public class VoicemailClientImpl implements VoicemailClient {
    * fetch these voicemails again so it should be ignored.
    */
   private static final String[] OMTP_VOICEMAIL_BLACKLIST = {"com.android.phone"};
+
+  // Flag name used for configuration
+  private static final String ALLOW_VOICEMAIL_ARCHIVE = "allow_voicemail_archive";
 
   private static final String[] OMTP_VOICEMAIL_TYPE = {
     TelephonyManager.VVM_TYPE_OMTP,
@@ -72,9 +79,34 @@ public class VoicemailClientImpl implements VoicemailClient {
   }
 
   @Override
+  public boolean isVoicemailArchiveAvailable(Context context) {
+    if (!BuildCompat.isAtLeastO()) {
+      LogUtil.i("VoicemailClientImpl.isVoicemailArchiveAllowed", "not running on O or later");
+      return false;
+    }
+
+    if (!ConfigProviderBindings.get(context).getBoolean(ALLOW_VOICEMAIL_ARCHIVE, true)) {
+      LogUtil.i(
+          "VoicemailClientImpl.isVoicemailArchiveAllowed",
+          "feature disabled by config: %s",
+          ALLOW_VOICEMAIL_ARCHIVE);
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
   public void setVoicemailArchiveEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {
     VisualVoicemailSettingsUtil.setArchiveEnabled(context, phoneAccountHandle, value);
+  }
+
+  @Override
+  public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
+    Intent intent = new Intent(context, VoicemailChangePinActivity.class);
+    intent.putExtra(VoicemailChangePinActivity.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+    return intent;
   }
 
   @TargetApi(VERSION_CODES.O)
@@ -134,7 +166,7 @@ public class VoicemailClientImpl implements VoicemailClient {
           }
           where.append(" (");
           {
-            where.append(Status.SOURCE_TYPE).append(" == ?");
+            where.append(Status.SOURCE_TYPE).append(" IS ?");
             selectionArgs.add(OMTP_VOICEMAIL_TYPE[i]);
             where.append(")");
           }

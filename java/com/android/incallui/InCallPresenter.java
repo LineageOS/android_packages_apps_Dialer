@@ -40,6 +40,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.nano.InteractionEvent;
 import com.android.dialer.postcall.PostCall;
@@ -320,6 +321,9 @@ public class InCallPresenter implements CallList.Listener {
     mStatusBarNotifier = statusBarNotifier;
     mExternalCallNotifier = externalCallNotifier;
     addListener(mStatusBarNotifier);
+    EnrichedCallComponent.get(mContext)
+        .getEnrichedCallManager()
+        .registerStateChangedListener(mStatusBarNotifier);
 
     mProximitySensor = proximitySensor;
     addListener(mProximitySensor);
@@ -1003,7 +1007,10 @@ public class InCallPresenter implements CallList.Listener {
   void onActivityStarted() {
     Log.d(this, "onActivityStarted");
     notifyVideoPauseController(true);
-    mStatusBarNotifier.updateNotification(mCallList);
+    if (mStatusBarNotifier != null) {
+      // TODO - b/36649622: Investigate this redundant call
+      mStatusBarNotifier.updateNotification(mCallList);
+    }
   }
 
   /*package*/
@@ -1297,12 +1304,7 @@ public class InCallPresenter implements CallList.Listener {
     } else if (startIncomingCallSequence) {
       Log.i(this, "Start Full Screen in call UI");
 
-      if (!startUi()) {
-        // startUI refused to start the UI. This indicates that it needed to restart the
-        // activity.  When it finally restarts, it will call us back, so we do not actually
-        // change the state yet (we return mInCallState instead of newState).
-        return mInCallState;
-      }
+      mStatusBarNotifier.updateNotification(mCallList);
     } else if (newState == InCallState.NO_CALLS) {
       // The new state is the no calls state.  Tear everything down.
       attemptFinishActivity();
@@ -1337,18 +1339,6 @@ public class InCallPresenter implements CallList.Listener {
           new DisconnectCause(DisconnectCause.ERROR, null, errorMsg, errorMsg);
       call.setDisconnectCause(disconnectCause);
     }
-  }
-
-  private boolean startUi() {
-    boolean isCallWaiting =
-        mCallList.getActiveCall() != null && mCallList.getIncomingCall() != null;
-
-    if (isCallWaiting) {
-      showInCall(false, false);
-    } else {
-      mStatusBarNotifier.updateNotification(mCallList);
-    }
-    return true;
   }
 
   /**
@@ -1387,7 +1377,11 @@ public class InCallPresenter implements CallList.Listener {
 
       if (mStatusBarNotifier != null) {
         removeListener(mStatusBarNotifier);
+        EnrichedCallComponent.get(mContext)
+            .getEnrichedCallManager()
+            .unregisterStateChangedListener(mStatusBarNotifier);
       }
+
       if (mExternalCallNotifier != null && mExternalCallList != null) {
         mExternalCallList.removeExternalCallListener(mExternalCallNotifier);
       }

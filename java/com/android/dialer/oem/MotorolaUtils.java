@@ -41,10 +41,10 @@ public class MotorolaUtils {
   private static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
 
   // Feature flag indicates it's a HD call, currently this is only used by Motorola system build.
-  // TODO(b/35359461): Upstream and move it to android.provider.CallLog.
-  private static final int FEATURES_HD_CALL = 0x10000000;
+  // TODO(b/35359461): Use reference to android.provider.CallLog once it's in new SDK.
+  private static final int FEATURES_HD_CALL = 0x4;
   // Feature flag indicates it's a WiFi call, currently this is only used by Motorola system build.
-  private static final int FEATURES_WIFI = 0x80000000;
+  private static final int FEATURES_WIFI = 0x8;
 
   private static boolean hasCheckedSprintWifiCall;
   private static boolean supportSprintWifiCall;

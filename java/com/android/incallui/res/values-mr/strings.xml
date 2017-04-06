@@ -37,6 +37,23 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"सुरु असलेला वाय-फाय कार्य कॉल"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"होल्ड वर"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"फोटोसह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"संदेशासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"स्थानासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"फोटो आणि संदेशासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"फोटो आणि स्थानासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"संदेश आणि स्थानासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"फोटो, संदेश आणि स्थानासह येणारा कॉल"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"संलग्नकांसह येणारा कॉल"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"फोटोसह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"संदेशासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"स्थानासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"फोटो आणि संदेशासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"फोटो आणि स्थानासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"संदेश आणि स्थानासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"फोटो, संदेश आणि स्थानासह महत्त्वाचा येणारा कॉल"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"संलग्नकांसह महत्त्वाचा येणारा कॉल"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"येणारा कार्य कॉल"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"येणारा वाय-फाय कॉल"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"येणारा वाय-फाय कार्य कॉल"</string>

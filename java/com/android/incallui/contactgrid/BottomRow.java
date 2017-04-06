@@ -45,7 +45,7 @@ public class BottomRow {
     @Nullable public final CharSequence label;
     public final boolean isTimerVisible;
     public final boolean isWorkIconVisible;
-    public final boolean isHdAttemptinIconVisible;
+    public final boolean isHdAttemptingIconVisible;
     public final boolean isHdIconVisible;
     public final boolean isForwardIconVisible;
     public final boolean isSpamIconVisible;
@@ -55,7 +55,7 @@ public class BottomRow {
         @Nullable CharSequence label,
         boolean isTimerVisible,
         boolean isWorkIconVisible,
-        boolean isHdAttemptinIconVisible,
+        boolean isHdAttemptingIconVisible,
         boolean isHdIconVisible,
         boolean isForwardIconVisible,
         boolean isSpamIconVisible,
@@ -63,7 +63,7 @@ public class BottomRow {
       this.label = label;
       this.isTimerVisible = isTimerVisible;
       this.isWorkIconVisible = isWorkIconVisible;
-      this.isHdAttemptinIconVisible = isHdAttemptinIconVisible;
+      this.isHdAttemptingIconVisible = isHdAttemptingIconVisible;
       this.isHdIconVisible = isHdIconVisible;
       this.isForwardIconVisible = isForwardIconVisible;
       this.isSpamIconVisible = isSpamIconVisible;
@@ -122,7 +122,7 @@ public class BottomRow {
   }
 
   private static CharSequence getLabelForPhoneNumber(PrimaryInfo primaryInfo) {
-    if (primaryInfo.nameIsNumber) {
+    if (primaryInfo.location != null) {
       return primaryInfo.location;
     }
     if (!TextUtils.isEmpty(primaryInfo.number)) {

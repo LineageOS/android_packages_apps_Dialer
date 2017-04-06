@@ -91,6 +91,11 @@
       </intent-filter>
     </receiver>
 
+    <activity
+        android:name="com.android.dialer.app.calllog.CallLogNotificationsActivity"
+        android:theme="@style/Theme.AppCompat.Translucent">
+    </activity>
+
     <service
       android:directBootAware="true"
       android:exported="false"

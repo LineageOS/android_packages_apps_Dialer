@@ -43,9 +43,9 @@ public class CameraPermissionDialogFragment extends DialogFragment {
             new DialogInterface.OnClickListener() {
               @Override
               public void onClick(DialogInterface dialog, int which) {
-                VideoCallFragment fragment =
+                CameraPermissionDialogCallback fragment =
                     FragmentUtils.getParentUnsafe(
-                        CameraPermissionDialogFragment.this, VideoCallFragment.class);
+                        CameraPermissionDialogFragment.this, CameraPermissionDialogCallback.class);
                 fragment.onCameraPermissionGranted();
               }
             })
@@ -58,5 +58,10 @@ public class CameraPermissionDialogFragment extends DialogFragment {
               }
             })
         .create();
+  }
+
+  /** Callback for being granted camera permission. */
+  public interface CameraPermissionDialogCallback {
+    void onCameraPermissionGranted();
   }
 }
