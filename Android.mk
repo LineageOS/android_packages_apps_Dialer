@@ -267,7 +267,12 @@ LOCAL_PROGUARD_FLAG_FILES := \
     java/com/android/dialer/proguard/proguard.flags \
     java/com/android/dialer/proguard/proguard_release.flags \
     java/com/android/incallui/answer/impl/proguard.flags
-LOCAL_PROGUARD_ENABLED := custom optimization
+LOCAL_PROGUARD_ENABLED := custom
+
+ifdef LOCAL_JACK_ENABLED
+# Bug: 37077388
+LOCAL_PROGUARD_ENABLED += optimization
+endif
 
 LOCAL_SDK_VERSION := current
 LOCAL_MODULE_TAGS := optional
