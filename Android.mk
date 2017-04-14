@@ -69,6 +69,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     ims-ext-common \
     phonebook_wrapper \
     telephony-common \
+    org.cyanogenmod.platform.internal \
     org.cyanogenmod.platform.sdk
 
 LOCAL_PACKAGE_NAME := Dialer
