@@ -55,6 +55,8 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     private boolean mIsPhoneOffhook = false;
     private boolean mDialpadVisible;
     private Context mContext;
+    private boolean mProximityWakeSupported;
+    private int mProximityWakeDefault;
 
     // True if the keyboard is currently *not* hidden
     // Gets updated whenever there is a Configuration change
@@ -80,6 +82,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
         mAudioModeProvider = audioModeProvider;
         mAudioModeProvider.addListener(this);
+
+        mProximityWakeSupported = context.getResources().getBoolean(
+                org.cyanogenmod.platform.internal.R.bool.config_proximityCheckOnWake);
+        mProximityWakeDefault = context.getResources().getBoolean(
+                org.cyanogenmod.platform.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault)
+                ? 1 : 0;
     }
 
     public void tearDown() {
@@ -266,8 +274,9 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     .add("aud", CallAudioState.audioRouteToString(audioMode))
                     .toString());
 
-            final boolean proximityOnWake = CMSettings.System.getInt(mContext.getContentResolver(),
-                    CMSettings.System.PROXIMITY_ON_WAKE, 1) == 1;
+            final boolean proximityOnWake = mProximityWakeSupported &&
+                    CMSettings.System.getInt(mContext.getContentResolver(),
+                            CMSettings.System.PROXIMITY_ON_WAKE, mProximityWakeDefault) == 1;
 
             if ((mIsPhoneOffhook || (mHasIncomingCall && proximityOnWake))
                     && !screenOnImmediately) {
