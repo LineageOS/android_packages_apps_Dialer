@@ -16,6 +16,8 @@
 
 package com.android.dialer.smartdial;
 
+import java.util.ArrayList;
+
 public class LatinSmartDialMap implements SmartDialMap {
 
   private static final char[] LATIN_LETTERS_TO_DIGITS = {
@@ -780,5 +782,16 @@ public class LatinSmartDialMap implements SmartDialMap {
       return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
     }
     return ch;
+  }
+  
+  @Override
+  public String transliterateName(String index) {
+    return index;
+  }
+
+  @Override
+  public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
+        String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
+    return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
   }
 }

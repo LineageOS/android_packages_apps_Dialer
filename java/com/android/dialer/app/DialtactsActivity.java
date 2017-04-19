@@ -22,6 +22,7 @@ import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -31,6 +32,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
+import android.provider.CallLog.Calls;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
 import android.support.annotation.MainThread;
@@ -123,6 +128,7 @@ import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.SettingsUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
@@ -159,6 +165,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   public static final String EXTRA_CLEAR_NEW_VOICEMAILS = "EXTRA_CLEAR_NEW_VOICEMAILS";
   private static final String KEY_LAST_TAB = "last_tab";
   private static final String TAG = "DialtactsActivity";
+  private static final String PREF_LAST_T9_LOCALE = "smart_dial_prefix_last_t9_locale";
   private static final String KEY_IN_REGULAR_SEARCH_UI = "in_regular_search_ui";
   private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
   private static final String KEY_SEARCH_QUERY = "search_query";
@@ -495,7 +502,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     Trace.beginSection(TAG + " initialize smart dialing");
     mDialerDatabaseHelper = Database.get(this).getDatabaseHelper(this);
-    SmartDialPrefix.initializeNanpSettings(this);
     Trace.endSection();
 
     mP13nLogger = P13nLogging.get(getApplicationContext());
@@ -506,6 +512,29 @@ public class DialtactsActivity extends TransactionSafeActivity
   @NonNull
   private ActionBar getActionBarSafely() {
     return Assert.isNotNull(getSupportActionBar());
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+
+    // make this call on resume in case user changed t9 locale in settings
+    SmartDialPrefix.initializeNanpSettings(this);
+
+    // if locale has changed since last time, refresh the smart dial db
+    Locale locale = SettingsUtil.getT9SearchInputLocale(this);
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    String prevLocale = prefs.getString(PREF_LAST_T9_LOCALE, null);
+
+    if (!TextUtils.equals(locale.toString(), prevLocale)) {
+      mDialerDatabaseHelper.recreateSmartDialDatabaseInBackground();
+      if (mDialpadFragment != null)
+        mDialpadFragment.refreshKeypad();
+
+      prefs.edit().putString(PREF_LAST_T9_LOCALE, locale.toString()).apply();
+    } else {
+      mDialerDatabaseHelper.startSmartDialUpdateThread();
+    }
   }
 
   @Override
@@ -1309,7 +1338,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mSmartDialSearchFragment.setAddToContactNumber(query);
     }
     final String normalizedQuery =
-        SmartDialNameMatcher.normalizeNumber(query, SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
+        SmartDialNameMatcher.normalizeNumber(query, SmartDialPrefix.getMap());
 
     if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
       if (DEBUG) {

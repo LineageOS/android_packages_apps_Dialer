@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -97,6 +98,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 /** Fragment that displays a twelve-key phone dialpad. */
 public class DialpadFragment extends Fragment
@@ -599,6 +601,12 @@ public class DialpadFragment extends Fragment
     // Long-pressing zero button will enter '+' instead.
     final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
     zero.setOnLongClickListener(this);
+  }
+
+  public void refreshKeypad() {
+    if (mDialpadView != null) {
+      mDialpadView.refreshKeypad();
+    }
   }
 
   @Override

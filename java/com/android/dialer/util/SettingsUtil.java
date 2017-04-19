@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import java.util.Locale;
 
 public class SettingsUtil {
 
@@ -101,4 +102,9 @@ public class SettingsUtil {
     }
     handler.sendMessage(handler.obtainMessage(msg, summary));
   }
+  
+    public static Locale getT9SearchInputLocale(Context context) {
+      // Use system locale by default
+      return context.getResources().getConfiguration().locale;
+    }
 }

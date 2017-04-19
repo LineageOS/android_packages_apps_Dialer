@@ -14,28 +14,31 @@
      limitations under the License.
 -->
 <com.android.dialer.dialpadview.DialpadKeyButton
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/one"
-  style="@style/DialpadKeyButtonStyle">
-  <LinearLayout
-    style="@style/DialpadKeyInternalLayoutStyle">
-    <com.android.dialer.dialpadview.DialpadTextView
-      android:id="@+id/dialpad_key_number"
-      style="@style/DialpadKeyNumberStyle"/>
-    <RelativeLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
-      <ImageView
-        android:id="@+id/dialpad_key_voicemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingTop="@dimen/dialpad_voicemail_icon_padding_top"
-        android:scaleType="fitCenter"
-        android:src="@drawable/quantum_ic_voicemail_white_24"
-        android:tint="?attr/dialpad_voicemail_tint"/>
-      <!-- Place empty text view so vertical height is same as other dialpad keys. -->
-      <TextView style="@style/DialpadKeyLettersStyle"/>
-    </RelativeLayout>
-  </LinearLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/one"
+    style="@style/DialpadKeyButtonStyle">
+    <LinearLayout
+        style="@style/DialpadKeyInternalLayoutStyle">
+        <TextView
+            android:id="@+id/dialpad_key_number"
+            style="@style/DialpadKeyNumberStyle" />
+        <TextView
+            android:id="@+id/dialpad_key_labels"
+            style="@style/DialpadKeyLettersStyle" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dialpad_voicemail_icon_padding_top"
+                android:id="@+id/dialpad_key_voicemail"
+                android:src="@drawable/ic_dialpad_voicemail"
+                android:scaleType="fitCenter"
+                android:layout_centerInParent="true"
+                android:tint="?attr/dialpad_voicemail_tint" />
+            <!-- Place empty text view so vertical height is same as other dialpad keys. -->
+            <TextView style="@style/DialpadKeyLettersStyle" />
+        </RelativeLayout>
+    </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>
