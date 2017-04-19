@@ -63,7 +63,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
             Log.v(TAG, "Configure Loader with query" + getQueryString());
         }
 
-        mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap(), mContext);
+        mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap());
 
         if (getQueryString() == null) {
             loader.configureQuery("");

@@ -74,11 +74,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     private static final AtomicBoolean sInUpdate = new AtomicBoolean(false);
     private final Context mContext;
 
-    private Class mMultiMatchClass;
-    private Object mMultiMatchObject;
-    private Method mMultiMatchMethod;
-    private Method mMultiGetNameNumberMethod;
-
     /**
      * SmartDial DB version ranges:
      * <pre>
@@ -418,39 +413,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
         super(context, databaseName, null, dbVersion);
         mContext = Preconditions.checkNotNull(context, "Context must not be null");
-    }
-
-    private void initMultiLanguageSearch() {
-        try {
-            if (mMultiMatchClass == null) {
-                mMultiMatchClass = Class.forName("com.qualcomm.qti.smartsearch.SmartMatch");
-                Log.d(TAG, "create multi match success");
-            }
-            if (mMultiMatchClass != null) {
-                if (mMultiMatchObject == null) {
-                    mMultiMatchObject = mMultiMatchClass.newInstance();
-                }
-                if (mMultiMatchMethod == null) {
-                    mMultiMatchMethod = mMultiMatchClass.getDeclaredMethod(
-                            "getMatchStringIndex", String.class, String.class,
-                            int.class);
-                }
-                if (mMultiGetNameNumberMethod == null) {
-                    mMultiGetNameNumberMethod = mMultiMatchClass.getDeclaredMethod(
-                            "getNameNumber", String.class, int.class);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Object getMultiMatchObject() {
-        return mMultiMatchObject;
-    }
-
-    public Method getMultiMatchMethod() {
-        return mMultiMatchMethod;
     }
 
     /**
@@ -1046,27 +1008,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
             while (nameCursor.moveToNext()) {
                 /** Computes a list of prefixes of a given contact name. */
-                if (mMultiGetNameNumberMethod != null) {
-                    try {
-                        String nameNumber = (String) mMultiGetNameNumberMethod.invoke(
-                                mMultiMatchObject,nameCursor.getString(columnIndexName), 0);
-                        nameNumber = nameNumber.replaceAll("[\\[\\.\\]]", "");
-                        insert.bindLong(1,nameCursor.getLong(columnIndexContactId));
-                        insert.bindString(2, nameNumber);
-                        insert.executeInsert();
-                        insert.clearBindings();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    final ArrayList<String> namePrefixes = SmartDialPrefix
-                            .generateNamePrefixes(nameCursor.getString(columnIndexName));
-                    for (String namePrefix : namePrefixes) {
-                        insert.bindLong(1, nameCursor.getLong(columnIndexContactId));
-                        insert.bindString(2, namePrefix);
-                        insert.executeInsert();
-                        insert.clearBindings();
-                    }
+                final ArrayList<String> namePrefixes = SmartDialPrefix
+                        .generateNamePrefixes(nameCursor.getString(columnIndexName));
+                for (String namePrefix : namePrefixes) {
+                    insert.bindLong(1, nameCursor.getLong(columnIndexContactId));
+                    insert.bindString(2, namePrefix);
+                    insert.executeInsert();
+                    insert.clearBindings();
                 }
             }
 
@@ -1084,7 +1032,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * update.
      */
     public void updateSmartDialDatabase() {
-        initMultiLanguageSearch();
 
         final SQLiteDatabase db = getWritableDatabase();
 
