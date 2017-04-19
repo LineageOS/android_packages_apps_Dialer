@@ -270,7 +270,7 @@ public class SmartDialNameMatcherTest extends AndroidTestCase {
 
     private void checkMatchesNumber(String number, String query, boolean expectedMatches,
             boolean matchNanp, int matchStart, int matchEnd) {
-        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query, getContext());
+        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
         final SmartDialMatchPosition pos = matcher.matchesNumber(number, query, matchNanp);
         assertEquals(expectedMatches, pos != null);
         if (expectedMatches) {
@@ -281,7 +281,7 @@ public class SmartDialNameMatcherTest extends AndroidTestCase {
 
     private void checkMatches(String displayName, String query, boolean expectedMatches,
             int... expectedMatchPositions) {
-        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query, getContext());
+        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
         final ArrayList<SmartDialMatchPosition> matchPositions =
                 new ArrayList<SmartDialMatchPosition>();
         final boolean matches =
