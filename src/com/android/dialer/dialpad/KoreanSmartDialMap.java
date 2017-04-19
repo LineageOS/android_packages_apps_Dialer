@@ -1,8 +1,43 @@
+/*
+ * Copyright (C) 2014 The CyanogenMod Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.dialer.dialpad;
 
-import java.util.ArrayList;
+import com.android.providers.contacts.NameSplitter;
 
-public class LatinSmartDialMap implements SmartDialMap {
+import android.app.AppGlobals;
+import android.content.Context;
+import android.provider.ContactsContract;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+/**
+ * Ported the logic from 10.1:
+ * https://github.com/CyanogenMod/android_packages_apps_Contacts/blob/cm-10.1/src/com/android/contacts/dialpad/util/NameToNumberKorean.java
+ */
+public class KoreanSmartDialMap implements SmartDialMap {
+
+    private static final String TAG = KoreanSmartDialMap.class.getSimpleName();
+
+    // Hangul Chosung (Initial letters of Hangul).
+    // Note : Don't change order of initial alphabets. index will be used to calculate.
+    private static final String HANGUL_INITIALS = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+    private static final int UNICODE_HANGUL_START = 0xAC00;
+    private static final int UNICODE_HANGUL_END = 0xD7AF;
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -15,9 +50,54 @@ public class LatinSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
+    /**
+     * Since the hangul characters on the dialpad aren't in ascending
+     * order, we can't do the array trick.
+     * Here is how they are mapped
+     * '2', '2', // ㅇㅁ -> 2
+     * '4', '4', '4', // ㄱㅋㄲ -> 4
+     * '5', '5', // ㄴㄹ -> 5
+     * '6', '6', '6', // ㄷㅌㄸ -> 6
+     * '7', '7', '7', // ㅂㅍㅃ -> 7
+     * '8', '8', '8', // ㅅㅎㅆ -> 8
+     * '9', '9', '9'  // ㅈㅊㅉ -> 9
+     */
+    private char koreanLettersToDigits(char ch) {
+        switch (ch) {
+            case 'ㅇ':
+            case 'ㅁ':
+                return '2';
+            case 'ㄱ':
+            case 'ㅋ':
+            case 'ㄲ':
+                return '4';
+            case 'ㄴ':
+            case 'ㄹ':
+                return '5';
+            case 'ㄷ':
+            case 'ㅌ':
+            case 'ㄸ':
+                return '6';
+            case 'ㅂ':
+            case 'ㅍ':
+            case 'ㅃ':
+                return '7';
+            case 'ㅅ':
+            case 'ㅎ':
+            case 'ㅆ':
+                return '8';
+            case 'ㅈ':
+            case 'ㅊ':
+            case 'ㅉ':
+                return '9';
+            default:
+                throw new IllegalArgumentException("Invalid character "+ch);
+        }
+    }
+
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z');
+        return ch >= 'a' && ch <= 'z' || (ch >= 'ㄱ' && ch <= 'ㅎ');
     }
 
     @Override
@@ -31,22 +111,22 @@ public class LatinSmartDialMap implements SmartDialMap {
     }
 
     /*
-     * The switch statement in this function was generated using the python code:
-     * from unidecode import unidecode
-     * for i in range(192, 564):
-     *     char = unichr(i)
-     *     decoded = unidecode(char)
-     *     # Unicode characters that decompose into multiple characters i.e.
-     *     #  into ss are not supported for now
-     *     if (len(decoded) == 1 and decoded.isalpha()):
-     *         print "case '" + char + "': return '" + unidecode(char) +  "';"
-     *
-     * This gives us a way to map characters containing accents/diacritics to their
-     * alphabetic equivalents. The unidecode library can be found at:
-     * http://pypi.python.org/pypi/Unidecode/0.04.1
-     *
-     * Also remaps all upper case latin characters to their lower case equivalents.
-     */
+      * The switch statement in this function was generated using the python code:
+      * from unidecode import unidecode
+      * for i in range(192, 564):
+      *     char = unichr(i)
+      *     decoded = unidecode(char)
+      *     # Unicode characters that decompose into multiple characters i.e.
+      *     #  into ss are not supported for now
+      *     if (len(decoded) == 1 and decoded.isalpha()):
+      *         print "case '" + char + "': return '" + unidecode(char) +  "';"
+      *
+      * This gives us a way to map characters containing accents/diacritics to their
+      * alphabetic equivalents. The unidecode library can be found at:
+      * http://pypi.python.org/pypi/Unidecode/0.04.1
+      *
+      * Also remaps all upper case latin characters to their lower case equivalents.
+      */
     @Override
     public char normalizeCharacter(char ch) {
         switch (ch) {
@@ -389,6 +469,9 @@ public class LatinSmartDialMap implements SmartDialMap {
             case 'Y': return 'y';
             case 'Z': return 'z';
             default:
+                if (ch >= UNICODE_HANGUL_START && ch <= UNICODE_HANGUL_END) {
+                    return convert(ch);
+                }
                 return ch;
         }
     }
@@ -399,6 +482,8 @@ public class LatinSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
+        } else if (ch >= 'ㄱ' && ch <= 'ㅎ') {
+            return (byte) (koreanLettersToDigits(ch) - '0');
         } else {
             return -1;
         }
@@ -408,18 +493,107 @@ public class LatinSmartDialMap implements SmartDialMap {
     public char getDialpadNumericCharacter(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
+        } else if (ch >= 'ㄱ' && ch <= 'ㅎ') {
+            return koreanLettersToDigits(ch);
         }
         return ch;
     }
 
+    private char convert(char ch) {
+        if (ch >= UNICODE_HANGUL_START && ch <= UNICODE_HANGUL_END) {
+            // number of initial character = (codepoint - 0xAC00) / (21 * 28)
+            final int buffer = (ch - UNICODE_HANGUL_START) / 588;
+            return HANGUL_INITIALS.charAt(buffer);
+        } else {
+            return ch;
+        }
+    }
+
+    /**
+     * Splits the displayName into lastname/first names
+     */
+    private NameSplitter.Name splitName(String displayName) {
+        Context context = AppGlobals.getInitialApplication();
+        NameSplitter nameSplitter = new NameSplitter(
+                context.getString(com.android.internal.R.string.common_name_prefixes),
+                context.getString(com.android.internal.R.string.common_last_name_prefixes),
+                context.getString(com.android.internal.R.string.common_name_suffixes),
+                context.getString(com.android.internal.R.string.common_name_conjunctions),
+                Locale.KOREA);
+        NameSplitter.Name name = new NameSplitter.Name();
+        nameSplitter.split(name, displayName, ContactsContract.FullNameStyle.KOREAN);
+        return name;
+    }
+
+    /**
+     * Korean names don't contain spaces between lastname/first names.
+     * Split the name and add a space so better prefixes can be generated.
+     * @return lastname + " " + firstname
+     */
+    private String separateFirstNameLastName(String displayName) {
+        for (int i=0; i<displayName.length(); i++) {
+            char ch = (char)displayName.codePointAt(i);
+            if (ch <= UNICODE_HANGUL_START || ch >= UNICODE_HANGUL_END) {
+                return displayName;
+            }
+        }
+        NameSplitter.Name name = splitName(displayName);
+        if (name.familyName != null && name.givenNames != null) {
+            return  name.familyName + " " + name.givenNames;
+        } else {
+            return displayName;
+        }
+    }
+
     @Override
     public String transliterateName(String index) {
-        return index;
+       return separateFirstNameLastName(index);
     }
 
     @Override
     public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
             String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
-        return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+        matchList.clear();
+        final int nameLength = displayName.length();
+        final int queryLength = query.length();
+
+        if (nameLength < queryLength) {
+            return false;
+        }
+
+        if (queryLength == 0) {
+            return false;
+        }
+        for (int i=0; i<nameLength; i++) {
+            char ch = (char)displayName.codePointAt(i);
+            if (ch <= UNICODE_HANGUL_START || ch >= UNICODE_HANGUL_END) {
+                return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+            }
+        }
+        /*
+         * For the matcher to work, we need to separate first/last names.
+         * Adjust the positions of the matches to account for the added space.
+         */
+        NameSplitter.Name name = splitName(displayName);
+        if (name.familyName != null && name.givenNames != null) {
+            int separatorIndex = name.familyName.length();
+            boolean matches = smartDialNameMatcher.matchesCombination(name.familyName + " " + name.givenNames,
+                    query, matchList);
+            if (matches) {
+                for (SmartDialMatchPosition smartDialMatchPosition : matchList) {
+                    if (smartDialMatchPosition.start > separatorIndex) {
+                        smartDialMatchPosition.start--;
+                    }
+                    if (smartDialMatchPosition.end > separatorIndex) {
+                        smartDialMatchPosition.end--;
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+        }
     }
 }
