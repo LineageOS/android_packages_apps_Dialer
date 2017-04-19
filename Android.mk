@@ -197,6 +197,10 @@ LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES += $(call all-Iaidl-files-under, $(SRC_DIRS))
 
+LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
+                   ../../providers/ContactsProvider/src/com/android/providers/contacts/HanziToPinyin.java \
+                   ../../providers/ContactsProvider/src/com/android/providers/contacts/util/NeededForTesting.java
+
 # Backup Library
 BACKUP_LIB_SRC_DIR := ../../../external/libbackup/src/com/google/android/libraries/backup
 EXCLUDE_BACKUP_LIB_SRCS := $(call all-java-files-under, $(BACKUP_LIB_SRC_DIR)/shadow)

@@ -940,4 +940,7 @@
   <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
         to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
   <string name="multiple_ec_data_deleted">Calls deleted. View and delete attachments shared during calls in Messages.</string>
+  
+  <string name="missing_account_type">(No type)</string>
+  <string name="missing_account_name">(No name)</string>
 </resources>
