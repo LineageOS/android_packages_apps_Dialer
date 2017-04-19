@@ -1,8 +1,24 @@
+/*
+ * Copyright (C) 2015 The CyanogenMod Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.dialer.dialpad;
 
 import java.util.ArrayList;
 
-public class LatinSmartDialMap implements SmartDialMap {
+public class UkrainianSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -15,9 +31,22 @@ public class LatinSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
+    private static final char[] UKRANIAN_LETTERS_TO_DIGITS = {
+        '2', '2', '2', '2', // абвг(ґ) -> 2
+        '3', '3', '3', '3', // де(є)жз -> 3
+        '4', '4', '4', '4', // и(ії)йкл -> 4
+        '5', '5', '5', '5', // мноп -> 5
+        '6', '6', '6', '6', // рсту -> 6
+        '7', '7', '7', '7', // фхцч -> 7
+        '8', '8',           // шщ -> 8
+        '9', '9', '9',      // ьюя -> 9
+
+        '3', '4', '4', '2'  // є,і,ї,ґ are out of the alpha sequence in unicode
+    };
+
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z');
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'а' && ch <= 'ґ');
     }
 
     @Override
@@ -388,6 +417,44 @@ public class LatinSmartDialMap implements SmartDialMap {
             case 'X': return 'x';
             case 'Y': return 'y';
             case 'Z': return 'z';
+            case 'А': return 'а';
+            case 'Б': return 'б';
+            case 'В': return 'в';
+            case 'Г': return 'г';
+            case 'Ґ': return 'ґ';
+            case 'Д': return 'д';
+            case 'Е': return 'е';
+            case 'ё': return 'е';
+            case 'Ё': return 'е';
+            case 'Є': return 'є';
+            case 'Ж': return 'ж';
+            case 'З': return 'з';
+            case 'И': return 'и';
+            case 'І': return 'і';
+            case 'Ї': return 'ї';
+            case 'Й': return 'й';
+            case 'К': return 'к';
+            case 'Л': return 'л';
+            case 'М': return 'м';
+            case 'Н': return 'н';
+            case 'О': return 'о';
+            case 'П': return 'п';
+            case 'Р': return 'р';
+            case 'С': return 'с';
+            case 'Т': return 'т';
+            case 'У': return 'у';
+            case 'Ф': return 'ф';
+            case 'Х': return 'х';
+            case 'Ц': return 'ц';
+            case 'Ч': return 'ч';
+            case 'Ш': return 'ш';
+            case 'Щ': return 'щ';
+            case 'Ъ': return 'ъ';
+            case 'Ы': return 'ы';
+            case 'Ь': return 'ь';
+            case 'Э': return 'э';
+            case 'Ю': return 'ю';
+            case 'Я': return 'я';
             default:
                 return ch;
         }
@@ -399,6 +466,19 @@ public class LatinSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
+        } else if (ch >= 'а' && ch <= 'я') {
+            int skipCodes = 0;
+            if (ch >= 'ь') skipCodes += 2;
+            if (ch >= 'ю') skipCodes += 1;
+            return (byte) (UKRANIAN_LETTERS_TO_DIGITS[ch - 'а' - skipCodes] - '0');
+        } else if (ch >= 'є' && ch <= 'ґ') {
+            switch (ch) {
+                case 'є': return (byte)3;
+                case 'і': return (byte)4;
+                case 'ї': return (byte)4;
+                case 'ґ': return (byte)2;
+                default:  return -1;
+            }
         } else {
             return -1;
         }
@@ -408,6 +488,21 @@ public class LatinSmartDialMap implements SmartDialMap {
     public char getDialpadNumericCharacter(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
+        }
+        if (ch >= 'а' && ch <= 'я') {
+            int skipCodes = 0;
+            if (ch >= 'ь') skipCodes += 2;
+            if (ch >= 'ю') skipCodes += 1;
+            return UKRANIAN_LETTERS_TO_DIGITS[ch - 'а' - skipCodes];
+        }
+        if (ch >= 'є' && ch <= 'ґ') {
+            switch (ch) {
+                case 'є': return '3';
+                case 'і': return '4';
+                case 'ї': return '4';
+                case 'ґ': return '2';
+                default:  return ch;
+            }
         }
         return ch;
     }

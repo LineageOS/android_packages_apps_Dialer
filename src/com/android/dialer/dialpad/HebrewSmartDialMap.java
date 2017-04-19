@@ -2,7 +2,7 @@ package com.android.dialer.dialpad;
 
 import java.util.ArrayList;
 
-public class LatinSmartDialMap implements SmartDialMap {
+public class HebrewSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -15,9 +15,20 @@ public class LatinSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
+    private static final char[] HEBREW_LETTERS_TO_DIGITS = {
+        '3', '3', '3',      // אבג -> 3
+        '2', '2', '2',      // דהו -> 2
+        '6', '6', '6',      // זחט -> 6
+        '5', '5', '5', '5', // יךכל -> 5
+        '4', '4', '4', '4', // םמןנ -> 4
+        '9', '9', '9', '9', // סעףפ -> 9
+        '8', '8', '8',      // ץצק -> 8
+        '7', '7', '7',      // רשת -> 7
+    };
+
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z');
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'א' && ch <= 'ת');
     }
 
     @Override
@@ -30,23 +41,6 @@ public class LatinSmartDialMap implements SmartDialMap {
         return (isValidDialpadAlphabeticChar(ch) || isValidDialpadNumericChar(ch));
     }
 
-    /*
-     * The switch statement in this function was generated using the python code:
-     * from unidecode import unidecode
-     * for i in range(192, 564):
-     *     char = unichr(i)
-     *     decoded = unidecode(char)
-     *     # Unicode characters that decompose into multiple characters i.e.
-     *     #  into ss are not supported for now
-     *     if (len(decoded) == 1 and decoded.isalpha()):
-     *         print "case '" + char + "': return '" + unidecode(char) +  "';"
-     *
-     * This gives us a way to map characters containing accents/diacritics to their
-     * alphabetic equivalents. The unidecode library can be found at:
-     * http://pypi.python.org/pypi/Unidecode/0.04.1
-     *
-     * Also remaps all upper case latin characters to their lower case equivalents.
-     */
     @Override
     public char normalizeCharacter(char ch) {
         switch (ch) {
@@ -388,6 +382,12 @@ public class LatinSmartDialMap implements SmartDialMap {
             case 'X': return 'x';
             case 'Y': return 'y';
             case 'Z': return 'z';
+            // ending letter in Hebrew (מןץףך)
+            case 'ך': return 'כ';
+            case 'ם': return 'מ';
+            case 'ן': return 'נ';
+            case 'ף': return 'פ';
+            case 'ץ': return 'צ';
             default:
                 return ch;
         }
@@ -399,6 +399,8 @@ public class LatinSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
+        } else if (ch >= 'א' && ch <= 'ת') {
+            return (byte) (HEBREW_LETTERS_TO_DIGITS[ch - 'א'] - '0');
         } else {
             return -1;
         }
@@ -408,6 +410,9 @@ public class LatinSmartDialMap implements SmartDialMap {
     public char getDialpadNumericCharacter(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
+        }
+        if (ch >= 'א' && ch <= 'ת') {
+            return HEBREW_LETTERS_TO_DIGITS[ch - 'א'];
         }
         return ch;
     }
