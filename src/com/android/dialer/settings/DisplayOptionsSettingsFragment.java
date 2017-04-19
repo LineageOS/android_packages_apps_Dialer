@@ -40,7 +40,7 @@ public class DisplayOptionsSettingsFragment extends PreferenceFragment
     // t9 search input locales that we have a custom overlay for
     private static final Locale[] T9_SEARCH_INPUT_LOCALES = new Locale[] {
             new Locale("ko"), new Locale("el"), new Locale("ru"),
-            new Locale("he"), new Locale("zh")
+            new Locale("he"), new Locale("uk")
     };
 
     @Override
