@@ -89,7 +89,7 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
     private ArrayList<ContactNumber> getLooseMatchesFromDb(String query) {
         final SmartDialNameMatcher nameMatcher = new SmartDialNameMatcher(query,
-                SmartDialPrefix.getMap());
+                SmartDialPrefix.getMap(), getContext());
         return mTestHelper.getLooseMatches(query, nameMatcher);
     }
 
