@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Untuk menggunakan panggilan cepat, matikan mode pesawat terlebih dahulu</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Panggilan cepat tidak dapat ditetapkan untuk kunci ini</string>
   <string name="yes">Ya</string>
   <string name="no">Tidak</string>
   <!-- Text displayed when the list of incoming calls is empty -->

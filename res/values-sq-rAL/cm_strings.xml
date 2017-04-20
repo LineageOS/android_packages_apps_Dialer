@@ -16,27 +16,118 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_vibration_category_title">Dridhjet gjatë një telefonate</string>
+  <string name="incall_vibrate_outgoing_title">Dridhu në përgjigje</string>
+  <string name="incall_vibrate_call_waiting_title">Dridhu kur thirrja vihet në pritje</string>
+  <string name="incall_vibrate_hangup_title">Dridhu në fund të telefonatës</string>
+  <string name="incall_vibrate_45_title">Dridhu çdo minutë</string>
+  <string name="incall_vibrate_45_summary">Dridhu në sekondën e 45-të të çdo minuti gjatë një telefonate</string>
   <!-- Forward lookup -->
+  <string name="nearby_places">Vendet përreth</string>
+  <string name="people">Persona</string>
   <!-- Number lookup -->
+  <string name="enable_forward_lookup_summary">Shfaq vendet përreth kur kërkon me tastierë</string>
+  <string name="enable_people_lookup_title">Kërko persona</string>
+  <string name="enable_people_lookup_summary">Shfaq rezultate online për persona kur kërkon me tastierë</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinezçe (CN)</string>
+  <string name="speed_dial_edit_title">Redakto kompozimin e shpejtë <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Formo një numër</string>
+  <string name="call_log_show_all_slots">Të gjitha kartat SIM</string>
+  <string name="call_log_all_calls_header">Të gjitha thirrjet</string>
+  <string name="call_log_blacklist_header">Vetëm thirrjet e bllokuara</string>
+  <string name="call_log_blocked_empty">Ju nuk keni thirrje të bllokuara.</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">Statistikat</string>
+  <string name="callStatsDetailTitle">Detaje të statistikave të thirrjes</string>
+  <string name="call_stats_incoming">Hyrëse:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Dalëse: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Të humbura: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Të bllokuara: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Totali: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Totali: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_picker_title">Vargu i filtrimit</string>
+  <string name="date_qs_currentmonth">Muaji aktual</string>
+  <string name="date_qs_currentquarter">Tremujori aktual</string>
+  <string name="date_qs_currentyear">Viti aktual</string>
+  <string name="date_qs_lastweek">Java e shkuar</string>
+  <string name="date_qs_lastmonth">Muaji i shkuar</string>
+  <string name="date_qs_lastquarter">Tremujori i shkuar</string>
+  <string name="date_qs_lastyear">Viti i shkuar</string>
+  <string name="call_stats_date_filter">Rregullo intervalin kohor</string>
+  <string name="call_stats_reset_filter">Rivendos intervalin kohor</string>
+  <string name="call_stats_title_for_number">Ky numër</string>
+  <string name="call_stats_title_of_total">I totalit</string>
+  <string name="call_stats_title_durations">Kohëzgjatjet e telefonatave</string>
+  <string name="call_stats_title_count">Numërimi i thirrjeve</string>
+  <string name="call_stats_title_average_duration">Kohëzgjatja mesatare e telefonatave</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Lista e thirrjeve nuk përmban asnjë thirrje gjatë periudhës kohore të zgjedhur.</string>
+  <string name="call_recording_category_title">Regjistrimi i telefonatës</string>
+  <string name="call_recording_format">Formati i audios</string>
   <!-- Speed Dial -->
+  <string name="speed_dial_settings">Parametrat e kompozimit të shpejtë</string>
+  <string name="speed_dial_not_set">(i pacaktuar)</string>
+  <string name="speed_dial_replace">Zëvendëso</string>
+  <string name="speed_dial_delete">Fshi</string>
+  <string name="speed_dial_unassigned_dialog_title">Tast i pacaktuar</string>
+  <string name="speed_dial_unassigned_dialog_message">Tastit numër \'<xliff:g id="number">%s</xliff:g>\' nuk i është caktuar asnjë veprim për kompozim të shpejtë. Dëshiron t\'i caktosh një veprim tani?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Për të përdorur kompozimin e shpejtë, çaktivizoni më parë profilin Avion</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Kompozimi i shpejtë nuk mund të përdoret në këtë tast</string>
+  <string name="yes">Po</string>
+  <string name="no">Jo</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nuk ka thirrje hyrëse.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nuk ka thirrje dalëse.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Lista e thirrjeve është bosh</string>
+  <string name="calllog_search_hint">Kërko në listën e thirrjeve</string>
+  <string name="no_call_log">Nuk ka listë thirrjesh</string>
+  <string name="clear">Pastro</string>
+  <string name="description_clear_search">Pastro kërkimin</string>
+  <string name="video_call_welcome_title"><b>Mirësevini në tastjerën e telefonatave me video</b></string>
+  <string name="video_call_welcome_message">Të gjithë duam të flasim me një zë të njohur në anën tjetër të linjës, por e folura ballë për ballë është akoma më e bukur! Ja se çfarë duhet të dini për të kryer lidhjet në kohë reale (ose me FaceTime):\nDuhet të jeni në një lidhje 4G LTE ose Wi-Fi\nPajisja që po telefononi duhet gjithashtu të suportojë thirrjet me video\nThirrjet me video përdorin internet me shpejtësi të lartë\nJu mund edhe të ktheni një thirrje zanore në një thirrje me video\n\n Vizitoni <a>https://support.t-mobile.com/docs/DOC-23574</a> për më shumë informacion.</string>
+  <string name="video_call_welcome_message_repeat">Shfaqe këtë mesazh çdo herë</string>
+  <string name="toast_change_video_call_failed">Nuk mund të kthehet në thirrje me video pasi formati i numrit është i pasaktë</string>
+  <string name="toast_make_video_call_failed">Thirrja me video nuk mund të kryhet pasi formati i numrit është i pasaktë</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Thirrje me video, më shfaq</string>
+  <string name="overflowRXCallMenuItemText">Thirrje me video, më fshih</string>
+  <string name="overflowVOCallMenuItemText">Thirrje zanore</string>
+  <string name="video_call">Thirrje me video</string>
+  <string name="call_data_info_label">Kohëmatësit e përdorimit të thirrjeve/internetit</string>
+  <string name="call_data_info_description">Kohëzgjatja e përdorimit të thirrjeve zanore dhe të internetit</string>
+  <string name="alert_call_over_wifi">Thirrjet do të bëhen me Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Nuk ka asnjë rrjet celular të disponueshëm. Lidhu me ndonjë Wi-Fi të disponueshëm për të kryer telefonata.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Lidhu me Wi-Fi për të kryer telefonata.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Shtyp për të parë rrjetet e disponueshme</string>
+  <string name="menu_add_to_4g_conference_call">Shto në konferencën telefonike 4G</string>
+  <string name="menu_4g_conference_call">Konferencë telefonike 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Thirrje zanore 4G në hyrje</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Thirrje me video 4G në hyrje</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Thirrje zanore 4G në dalje</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Thirrje me video 4G në dalje</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Thirrje zanore 4G e humbur</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Thirrje me video 4G e humbur</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Thirrje zanore Wi-Fi në hyrje</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Thirrje me video Wi-Fi në hyrje</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Thirrje zanore Wi-Fi në dalje</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Thirrje me video Wi-Fi në dalje</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Thirrje zanore Wi-Fi e humbur</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Thirrje me video Wi-Fi e humbur</string>
 </resources>

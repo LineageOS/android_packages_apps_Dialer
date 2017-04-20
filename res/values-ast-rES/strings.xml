@@ -27,6 +27,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="dialerIconLabel">Teléfonu</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -105,6 +106,7 @@
     visual voicemail. [CHAR LIMIT=64] -->
   <!--  Voicemail status message shown at the top of call details screen to notify the user that
     the audio of this voicemail is not available. [CHAR LIMIT=64] -->
+  <string name="voicemail_status_audio_not_available">Audiu non disponible</string>
   <!--  User action prompt shown next to a voicemail status message to let the user configure
     visual voicemail. [CHAR LIMIT=20] -->
   <!--  User action prompt shown next to a voicemail status message to let the user call voicemail
@@ -329,6 +331,7 @@
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+  <string name="remove_contact">Desaniciar</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
@@ -450,8 +453,10 @@
          [CHAR LIMIT=40] -->
   <!-- Title for the "Sounds and vibration" settings control settings related to ringtones,
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
+  <string name="sounds_and_vibration_title">Soníos y vibración</string>
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
+  <string name="accessibility_settings_title">Accesibilidá</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
   <string name="ringtone_title">Timbre del teléfonu</string>
   <!-- Setting option name to enable or disable vibration when ringing the phone.
@@ -467,7 +472,9 @@
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
+  <string name="call_settings_label">Llamaes</string>
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
+  <string name="manage_blocked_numbers_label">Bloquéu de llamaes</string>
   <!-- Label for a section describing that call blocking is temporarily disabled because an
          emergency call was made. [CHAR LIMIT=50] -->
   <!-- Description that call blocking is temporarily disabled because the user called an
@@ -493,6 +500,7 @@
   <!-- Footer message of number blocking screen with no visual voicemail.
          [CHAR LIMIT=NONE] -->
   <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
+  <string name="block_list">Númberos bloquiaos</string>
   <!-- Error message shown when user tries to add invalid number to the block list.
         [CHAR LIMIT=64] -->
   <!-- Error message shown when user tries to add a number to the block list that was already

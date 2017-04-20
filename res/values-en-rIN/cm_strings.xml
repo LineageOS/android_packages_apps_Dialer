@@ -38,12 +38,20 @@
   <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <string name="speed_dial_edit_title">Edit speed dial <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Please enter a number</string>
   <string name="call_log_show_all_slots">All SIMs</string>
   <string name="call_log_all_calls_header">All calls</string>
   <string name="call_log_blacklist_header">Blocked calls only</string>
+  <string name="call_log_blocked_empty">You have no blocked calls.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistics</string>
   <string name="callStatsDetailTitle">Call stat details</string>
+  <string name="call_stats_incoming">Incoming: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Outgoing: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Missed: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Blocked: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Start date</string>
@@ -61,7 +69,16 @@
   <string name="call_stats_reset_filter">Reset time range</string>
   <string name="call_stats_sort_by_duration">Sort by call duration</string>
   <string name="call_stats_sort_by_count">Sort by call count</string>
+  <string name="call_stats_title_for_number">This number</string>
+  <string name="call_stats_title_of_total">Of total</string>
+  <string name="call_stats_title_durations">Call durations</string>
+  <string name="call_stats_title_count">Call count</string>
+  <string name="call_stats_title_average_duration">Average call duration</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Your call log does not contain any calls in the selected time range.</string>
+  <string name="call_recording_category_title">Call recording</string>
+  <string name="call_recording_format">Audio format</string>
+  <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
   <!-- Speed Dial -->
   <string name="speed_dial_settings">Speed dial settings</string>
   <string name="speed_dial_not_set">(not set)</string>
@@ -69,23 +86,61 @@
   <string name="speed_dial_delete">Delete</string>
   <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
   <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off aeroplane mode</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Speed dial cannot be set for this key</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">You have no incoming calls.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">You have no outgoing calls.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Your call log is empty</string>
+  <string name="calllog_search_hint">Search call log</string>
+  <string name="no_call_log">No call log</string>
+  <string name="clear">Clear</string>
+  <string name="description_clear_search">Clear search</string>
+  <string name="video_call_welcome_title"><b>Welcome to the new Video Calling Dialler</b></string>
+  <string name="video_call_welcome_message">We all love to hear that familiar voice at the end of the line, but talking face-to-face is so much better! Here\'s what you should know to get your real-time (or FaceTime?) connections going:\n You\'ll need to be on 4G LTE or a Wi-Fi connection\n The device you\'re calling must also be video calling compatible\n Video calls use your high speed data\n You can also upgrade a voice call to a video call\n\n Check out <a>https://support.t-mobile.com/docs/DOC-23574</a> for more information.</string>
+  <string name="video_call_welcome_message_repeat">Show this message every time</string>
+  <string name="toast_change_video_call_failed">Cannot change to video call, incorrect number format</string>
+  <string name="toast_make_video_call_failed">Cannot make video call, incorrect number format</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video call, show me</string>
+  <string name="overflowRXCallMenuItemText">Video call, hide me</string>
+  <string name="overflowVOCallMenuItemText">Voice call</string>
+  <string name="video_call">Video call</string>
+  <string name="call_data_info_label">Call/data usage timers</string>
+  <string name="call_data_info_description">Voice call usage time and data usage time</string>
+  <string name="alert_call_over_wifi">Calls will be made over Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">No cellular network available. Connect to available Wi-Fi to make calls.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Connect to Wi-Fi to make calls.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tap here to view available networks</string>
+  <string name="menu_add_to_4g_conference_call">Add to 4G conference call</string>
+  <string name="menu_4g_conference_call">4G conference call</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Incoming 4G voice call</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Incoming 4G video call</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Outgoing 4G voice call</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Outgoing 4G video call</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Missed 4G voice call</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Missed 4G video call</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Incoming Wi-Fi voice call</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Incoming Wi-Fi video call</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Outgoing Wi-Fi voice call</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Outgoing Wi-Fi video call</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Missed Wi-Fi voice call</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Missed Wi-Fi video call</string>
 </resources>

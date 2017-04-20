@@ -86,6 +86,7 @@
   <string name="speed_dial_delete">Удалить</string>
   <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
   <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Чтобы использовать Быстрый набор, выключите режим полёта</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
   <string name="speed_dial_can_not_be_set">Закрепить быстрый набор за этой клавишей невозможно</string>
   <string name="yes">Да</string>
