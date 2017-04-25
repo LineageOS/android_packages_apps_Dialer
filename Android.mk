@@ -274,7 +274,7 @@ ifdef LOCAL_JACK_ENABLED
 LOCAL_PROGUARD_ENABLED += optimization
 endif
 
-LOCAL_SDK_VERSION := current
+LOCAL_SDK_VERSION := system_current
 LOCAL_MODULE_TAGS := optional
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
