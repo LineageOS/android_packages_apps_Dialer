@@ -156,14 +156,11 @@ LOCAL_RESOURCE_DIR := \
 	$(support_library_root_dir)/v7/cardview/res \
 	$(support_library_root_dir)/v7/recyclerview/res
 
+LOCAL_USE_AAPT2 := true
+
 # We specify each package explicitly to glob resource files.
 LOCAL_AAPT_FLAGS := \
 	--auto-add-overlay \
-	--extra-packages android.support.design \
-	--extra-packages android.support.transition \
-	--extra-packages android.support.v7.appcompat \
-	--extra-packages android.support.v7.cardview \
-	--extra-packages android.support.v7.recyclerview \
 	--extra-packages com.android.contacts.common \
 	--extra-packages com.android.dialer.app \
 	--extra-packages com.android.dialer.app.voicemail.error \
@@ -216,13 +213,6 @@ LOCAL_AAPT_FLAGS := \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
-	android-support-design \
-	android-support-transition \
-	android-support-v13 \
-	android-support-v4 \
-	android-support-v7-appcompat \
-	android-support-v7-cardview \
-	android-support-v7-recyclerview \
 	com.android.vcard \
 	dialer-commons-io-target \
 	dialer-dagger2-target \
@@ -237,6 +227,15 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	libphonenumber \
 	libprotobuf-java-nano \
 	volley \
+
+LOCAL_STATIC_ANDROID_LIBRARIES := \
+	android-support-design \
+	android-support-transition \
+	android-support-v13 \
+	android-support-v4 \
+	android-support-v7-appcompat \
+	android-support-v7-cardview \
+	android-support-v7-recyclerview \
 
 LOCAL_JAVA_LIBRARIES := \
 	org.apache.http.legacy \
