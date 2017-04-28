@@ -22,14 +22,14 @@
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Búsqueda con teclado T9</string>
   <string name="t9_search_input_locale">Entrada de búsqueda T9</string>
-  <string name="t9_search_input_locale_default">Predeterminado</string>
+  <string name="t9_search_input_locale_default">Predefinido</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
-  <string name="lookup_settings_description">Buscar números de teléfono desconocidos</string>
+  <string name="lookup_settings_description">Busca números de teléfono desconocidos</string>
   <string name="enable_forward_lookup_title">Búsqueda de lugares</string>
-  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos cuando se busque en el marcador</string>
+  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos al buscar en el marcador</string>
   <string name="enable_people_lookup_title">Búsqueda de personas</string>
-  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas cuando se busque en el marcador</string>
+  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas al buscar en el marcador</string>
   <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
   <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para números desconocidos en llamadas entrantes</string>
   <string name="forward_lookup_provider_title">Proveedor de búsqueda de lugares</string>
@@ -45,10 +45,10 @@
   <string name="speed_dial_settings">Ajustes de marcación rápida</string>
   <string name="speed_dial_not_set">(no definido)</string>
   <string name="speed_dial_replace">Reemplazar</string>
-  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_delete">Borrar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
   <string name="speed_dial_unassigned_dialog_message">La tecla \'<xliff:g id="number">%s</xliff:g>\' no tiene una acción de marcación rápida asignada. ¿Quieres asignar una acción ahora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar la marcación rápida primero deshabilita el modo avión.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar la marcación rápida primero desactiva el modo avión.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="incall_vibration_category_title">Vibración durante la llamada</string>

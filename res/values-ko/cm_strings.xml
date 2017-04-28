@@ -139,5 +139,9 @@
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">전화를 걸기 위해 전화 권한을 부여하세요.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">노트 보기</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">어디에서나 노트 작성</string>
+  <string name="callerinfo_provider_status_disabling">비활성화 중</string>
+  <string name="show_dialpad_at_start_title">바로 다이얼패드 보기</string>
 </resources>

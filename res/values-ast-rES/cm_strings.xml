@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
-  <string name="nearby_places">Llugares cercanos</string>
+  <string name="nearby_places">Llugares averaos</string>
   <string name="people">Persones</string>
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Guetar Dialpad T9</string>
@@ -27,7 +27,7 @@
   <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
   <string name="lookup_settings_description">Guetar númberos de telefónu desconocíos</string>
   <string name="enable_forward_lookup_title">Gueta direuta</string>
-  <string name="enable_forward_lookup_summary">Amosar resultaos de llugares cercanos al guetar nel marcador</string>
+  <string name="enable_forward_lookup_summary">Amuesa llugares averaos cuando guetes nel marcador</string>
   <string name="enable_people_lookup_title">Gueta de persones</string>
   <string name="enable_people_lookup_summary">Amosar resultaos de persones al guetar nel marcador</string>
   <string name="enable_reverse_lookup_title">Gueta inversa</string>
@@ -38,31 +38,25 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinu (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Llamada na llista prieta</string>
-  <string name="call_log_action_block">Bloquéu de llamaes</string>
-  <string name="call_log_action_unblock">Llamada bloquiada</string>
+  <string name="type_blacklist">Llamada nel llistáu prietu</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Axustes de marcáu rápidu</string>
-  <string name="speed_dial_not_set">(ensin afitar)</string>
+  <string name="speed_dial_not_set">(nun s\'afitó)</string>
   <string name="speed_dial_replace">Trocar</string>
   <string name="speed_dial_delete">Desaniciar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla ensin asignar</string>
-  <string name="speed_dial_unassigned_dialog_message">Nun hai una aición de marcáu rápidu asignada a la tecla númberu \'<xliff:g id="number">%s</xliff:g>\'. Quies asigna-y agora una aición?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Pa usar el marcáu rápidu, primero desactiva\'l mou avión.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pa usar el marcáu rápidu, desactiva\'l mou avión primero.</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
-  <string name="incall_vibration_category_title">Vibración na llamada</string>
+  <string name="incall_vibration_category_title">Vibración en llamaes</string>
   <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrar en llamada n\'espera</string>
+  <string name="incall_vibrate_call_waiting_title">Vibrar en llamaes n\'espera</string>
   <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
   <string name="incall_vibrate_45_title">Vibrar cada minutu</string>
-  <string name="incall_vibrate_45_summary">Vibrar nel segundu 45 de cada minutu nes llamaes salientes</string>
   <string name="call_log_show_all_slots">Toles SIM</string>
   <string name="call_log_all_calls_header">Toles llamaes</string>
-  <string name="call_log_blacklist_header">Namái llamaes bloquiaes</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estadístiques</string>
-  <string name="callStatsDetailTitle">Detalles de llamada</string>
   <string name="call_stats_incoming">Entrante: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_outgoing">Saliente: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">Perdíes: <xliff:g id="value">%s</xliff:g></string>
@@ -70,76 +64,38 @@
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Data aniciu</string>
+  <string name="call_stats_filter_from">Data d\'aniciu</string>
   <string name="call_stats_filter_to">Data fin</string>
-  <string name="call_stats_filter_picker_title">Rangu de dates</string>
-  <string name="date_quick_selection">Seleición rápida</string>
+  <string name="date_quick_selection">Esbilla rápida</string>
   <string name="date_qs_currentmonth">Mes actual</string>
   <string name="date_qs_currentquarter">Trimestre actual</string>
   <string name="date_qs_currentyear">Añu actual</string>
-  <string name="date_qs_lastweek">Cabera selmana</string>
-  <string name="date_qs_lastmonth">Caberu mes</string>
-  <string name="date_qs_lastquarter">Caberu trimestre</string>
-  <string name="date_qs_lastyear">Caberu añu</string>
-  <string name="call_stats_date_filter">Axustar rangu de dates</string>
-  <string name="call_stats_reset_filter">Restablecer rangu de dates</string>
-  <string name="call_stats_sort_by_duration">Ordenar por duración</string>
-  <string name="call_stats_sort_by_count">Ordenar por númb. llamaes</string>
-  <string name="call_stats_title_for_number">Esti númberu</string>
+  <string name="date_qs_lastweek">Selmana cebera</string>
+  <string name="date_qs_lastmonth">Mes caberu</string>
+  <string name="date_qs_lastquarter">Trimestre caberu</string>
+  <string name="date_qs_lastyear">Añu caberu</string>
+  <string name="call_stats_date_filter">Axustar rangu de tiempu</string>
   <string name="call_stats_title_of_total">Del total</string>
   <string name="call_stats_title_durations">Duraciones de llamaes</string>
   <string name="call_stats_title_count">Cantidá de llamaes</string>
-  <string name="call_stats_title_average_duration">Duración promediu de llamaes</string>
+  <string name="call_stats_title_average_duration">Duración media de llamaes</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">El to rexistru de llamaes nun contién llamada dala nel rangu de tiempu esbilláu.</string>
   <string name="call_recording_category_title">Grabación de llamaes</string>
   <string name="call_recording_format">Formatu d\'audiu</string>
-  <string name="call_playback_no_app_found_toast">Nun s\'atopó una app pa la reproducción de la grabación esbillada.</string>
-  <string name="invalid_number_text">"%1$s nun pue facer esta llamada. ¿Ye'l númb. correutu?"</string>
   <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Pues marcar un número de teléfonu o\nguetar un contautu</string>
-  <string name="sign_in_hint_text">Anicia sesión pa facer %1$s llamaes</string>
-  <string name="wifi_hint_text">Fai llamaes de baldre de %1$s a %1$s per duana de Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s ta en roaming. Fai llamaes gratuites de %2$s a %2$s per duana de Wi-Fi.</string>
+  <string name="empty_dialpad_t9_example">Pues marcar un númberu telefónicu o\nguetar un contautu</string>
   <string name="emergency_call_hint_text">Nun hai SIM. Namái llamaes d\'emerxencia.</string>
-  <string name="extra_call_method_call_option">Llamada de <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings">Axustes de <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
   <string name="search_shortcut_call_using">Llamar usando <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Sí</string>
   <string name="callerinfo_provider_auth_no_short">Non</string>
   <string name="callerinfo_provider_auth_no">Non, gracies</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> tendrá accesu a los contautos, perfil y a la cuenta de Cyanogen OS, que podría incluyir la to direición de corréu-e.</string>
-  <string name="callerinfo_provider_auth_learn_more">Lleer más</string>
-  <string name="callerinfo_provider_auth_desc">¡Bienllegáu! ¿Prestaríate usar <xliff:g id="provider_name">%s</xliff:g> pa identificar les llamaes de númberos desconocíos y bloquiar llamaes non deseaes?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">¡Bienllegáu! ¿Prestaríate usar <xliff:g id="provider_name">%s</xliff:g> pa identificar les llamaes de númberos desconocíos?</string>
-  <string name="callerinfo_provider_summary">Identifica les llamaes desconocíes y spam</string>
-  <string name="callerinfo_provider_summary_no_spam">Identifica llamaes desconocíes</string>
-  <string name="silence_spam_title">Silenciar llamaes de spam</string>
-  <string name="silence_spam_summary">Nun dexa que suenen les llamaes spam</string>
-  <string name="block_hidden_title">Bloquiar númberos anubríos</string>
-  <string name="block_hidden_summary">Considera los númberos anubríos como spam</string>
-  <string name="block_dialog_title">¿Bloquiar a esti contautu?</string>
+  <string name="callerinfo_provider_auth_learn_more">Deprendi más</string>
   <string name="block_dialog_positive">Bloquiar</string>
   <string name="block_dialog_negative">Encaboxar</string>
-  <string name="block_dialog_description">Yá nun recibirás más llamaes o mensaxes d\'esta persona.</string>
-  <string name="block_dialog_report_spam">Informar como spam a <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">¿Deshabilitar %1$s?</string>
-  <string name="provider_disable_message">Deshabilitando %1$s, nun tendrás un ID de llamada.</string>
-  <string name="provider_disable_spam_message">Deshabilitando %1$s, nun tendrás proteición escontra spam nin ID de llamada.</string>
-  <string name="powered_by_provider">Cola potencia de <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Fai %1$s llamaes\ncamudando moos equí"</string>
-  <string name="provider_search_help">"Gueta %1$s contautos\ncambiando de moos equí"</string>
-  <string name="provider_button_help">"Atalántolo"</string>
-  <string name="provider_voice_call">"%1$s llamada de voz"</string>
-  <string name="provider_video_call">"%1$s videollamada"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">Pa facer una llamada, activa los permisos de teléfonu.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Ver nota</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Toma notes dende cualquier llugar</string>
-  <string name="callerinfo_provider_status_disabling">Deshabilitando</string>
 </resources>

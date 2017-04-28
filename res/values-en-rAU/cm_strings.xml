@@ -38,6 +38,9 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Blacklisted call</string>
+  <string name="call_log_action_block">Block caller</string>
+  <string name="call_log_action_unblock">Caller blocked</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Speed dial settings</string>
   <string name="speed_dial_not_set">(not set)</string>
@@ -56,9 +59,15 @@
   <string name="incall_vibrate_45_summary">Vibrates at the 45 second mark of every minute during outgoing calls</string>
   <string name="call_log_show_all_slots">All SIMs</string>
   <string name="call_log_all_calls_header">All calls</string>
+  <string name="call_log_blacklist_header">Blocked calls only</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistics</string>
   <string name="callStatsDetailTitle">Call stat details</string>
+  <string name="call_stats_incoming">Incoming: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Outgoing: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Missed: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blocked: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Start date</string>
@@ -76,14 +85,62 @@
   <string name="call_stats_reset_filter">Reset time range</string>
   <string name="call_stats_sort_by_duration">Sort by call duration</string>
   <string name="call_stats_sort_by_count">Sort by call count</string>
+  <string name="call_stats_title_for_number">This number</string>
+  <string name="call_stats_title_of_total">Of total</string>
+  <string name="call_stats_title_durations">Call durations</string>
+  <string name="call_stats_title_count">Call count</string>
+  <string name="call_stats_title_average_duration">Average call duration</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Your call log does not contain any calls in the selected time range.</string>
+  <string name="call_recording_category_title">Call recording</string>
+  <string name="call_recording_format">Audio format</string>
+  <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
+  <string name="invalid_number_text">"%1$s could not make this call. Is the number correct?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">You can dial a phone number or\nsearch for a contact</string>
+  <string name="sign_in_hint_text">Sign in to make %1$s calls</string>
+  <string name="wifi_hint_text">Make free %1$s to %1$s calls over Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s is roaming. Make free %2$s to %2$s calls over Wi-Fi.</string>
+  <string name="emergency_call_hint_text">No SIM. Emergency calls only.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> call</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Call using <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Yes</string>
   <string name="callerinfo_provider_auth_no_short">No</string>
+  <string name="callerinfo_provider_auth_no">No, thanks</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> will have access to your contacts, Me profile, and Cyanogen OS account, which may include your email address.</string>
+  <string name="callerinfo_provider_auth_learn_more">Learn more</string>
+  <string name="callerinfo_provider_auth_desc">Welcome! Would you like <xliff:g id="provider_name">%s</xliff:g> to identify unknown callers and block unwanted calls?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Welcome! Would you like <xliff:g id="provider_name">%s</xliff:g> to identify unknown callers?</string>
+  <string name="callerinfo_provider_summary">Identifies unknown callers and spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifies unknown callers</string>
+  <string name="silence_spam_title">Silence spam calls</string>
+  <string name="silence_spam_summary">Never let spam calls ring through</string>
+  <string name="block_hidden_title">Block hidden phone numbers</string>
+  <string name="block_hidden_summary">Consider hidden numbers as spam</string>
+  <string name="block_dialog_title">Block this caller?</string>
+  <string name="block_dialog_positive">Block</string>
+  <string name="block_dialog_negative">Cancel</string>
+  <string name="block_dialog_description">You will no longer receive calls or messages from this person.</string>
+  <string name="block_dialog_report_spam">Report as spam to <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Disable %1$s?</string>
+  <string name="provider_disable_message">By disabling %1$s, you will not have caller ID.</string>
+  <string name="provider_disable_spam_message">By disabling %1$s, you will not have spam protection or caller ID.</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Make %1$s calls by\nswitching modes here"</string>
+  <string name="provider_search_help">"Search %1$s contacts by\nswitching modes here"</string>
+  <string name="provider_button_help">"Got it"</string>
+  <string name="provider_voice_call">"%1$s voice call"</string>
+  <string name="provider_video_call">"%1$s video call"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">To place a call, turn on Phone permissions.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">View note</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Take notes from anywhere</string>
+  <string name="callerinfo_provider_status_disabling">Disabling</string>
+  <string name="show_dialpad_at_start_title">Show dialpad at start</string>
 </resources>

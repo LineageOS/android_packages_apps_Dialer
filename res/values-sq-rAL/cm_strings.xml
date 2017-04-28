@@ -17,18 +17,108 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Vendet përreth</string>
+  <string name="people">Persona</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Kërkimi me tastierë T9</string>
+  <string name="t9_search_input_locale_default">E paracaktuar</string>
   <!-- Number lookup -->
+  <string name="enable_forward_lookup_summary">Shfaq vendet përreth kur kërkon me tastierë</string>
+  <string name="enable_people_lookup_title">Kërko persona</string>
+  <string name="enable_people_lookup_summary">Shfaq rezultate online për persona kur kërkon me tastierë</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinezçe (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Thirrje e bllokuar</string>
+  <string name="call_log_action_block">Blloko telefonuesin</string>
+  <string name="call_log_action_unblock">Telefonues i bllokuar</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">Parametrat e kompozimit të shpejtë</string>
+  <string name="speed_dial_not_set">(i pacaktuar)</string>
+  <string name="speed_dial_replace">Zëvendëso</string>
+  <string name="speed_dial_delete">Fshi</string>
+  <string name="speed_dial_unassigned_dialog_title">Tast i pacaktuar</string>
+  <string name="speed_dial_unassigned_dialog_message">Tastit numër \'<xliff:g id="number">%s</xliff:g>\' nuk i është caktuar asnjë veprim për kompozim të shpejtë. Dëshiron t\'i caktosh një veprim tani?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Për të përdorur kompozimin e shpejtë, çaktivizoni më parë profilin Avion.</string>
+  <string name="yes">Po</string>
+  <string name="no">Jo</string>
+  <string name="incall_vibration_category_title">Dridhjet gjatë një telefonate</string>
+  <string name="incall_vibrate_outgoing_title">Dridhu në përgjigje</string>
+  <string name="incall_vibrate_call_waiting_title">Dridhu kur thirrja vihet në pritje</string>
+  <string name="incall_vibrate_hangup_title">Dridhu në fund të telefonatës</string>
+  <string name="incall_vibrate_45_title">Dridhu çdo minutë</string>
+  <string name="incall_vibrate_45_summary">Dridhu në sekondën e 45-të të çdo minuti gjatë një telefonate</string>
+  <string name="call_log_show_all_slots">Të gjitha kartat SIM</string>
+  <string name="call_log_all_calls_header">Të gjitha thirrjet</string>
+  <string name="call_log_blacklist_header">Vetëm thirrjet e bllokuara</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">Statistikat</string>
+  <string name="callStatsDetailTitle">Detaje të statistikave të thirrjes</string>
+  <string name="call_stats_incoming">Hyrëse:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Dalëse: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Të humbura: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Të bllokuara: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Totali: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Totali: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_picker_title">Vargu i filtrimit</string>
+  <string name="date_qs_currentmonth">Muaji aktual</string>
+  <string name="date_qs_currentquarter">Tremujori aktual</string>
+  <string name="date_qs_currentyear">Viti aktual</string>
+  <string name="date_qs_lastweek">Java e shkuar</string>
+  <string name="date_qs_lastmonth">Muaji i shkuar</string>
+  <string name="date_qs_lastquarter">Tremujori i shkuar</string>
+  <string name="date_qs_lastyear">Viti i shkuar</string>
+  <string name="call_stats_date_filter">Rregullo intervalin kohor</string>
+  <string name="call_stats_reset_filter">Rivendos intervalin kohor</string>
+  <string name="call_stats_title_for_number">Ky numër</string>
+  <string name="call_stats_title_of_total">I totalit</string>
+  <string name="call_stats_title_durations">Kohëzgjatjet e telefonatave</string>
+  <string name="call_stats_title_count">Numërimi i thirrjeve</string>
+  <string name="call_stats_title_average_duration">Kohëzgjatja mesatare e telefonatave</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Lista e thirrjeve nuk përmban asnjë thirrje gjatë periudhës kohore të zgjedhur.</string>
+  <string name="call_recording_category_title">Regjistrimi i telefonatës</string>
+  <string name="call_recording_format">Formati i audios</string>
   <!-- T9 Search Text -->
+  <string name="wifi_hint_text">Kryej thirrje %1$s falas mbi Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Nuk ka kartë SIM. Vetëm për thirrje emergjente.</string>
+  <string name="extra_call_method_call_option">Thirrja <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Parametrat e <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Telefono duke përdorur <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Po</string>
+  <string name="callerinfo_provider_auth_no_short">Jo</string>
+  <string name="callerinfo_provider_auth_no">Jo faleminderit</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> do të ketë akses te kontaktet e tua, profili yt, si dhe tek llogaria e Cyanogen OS, që mund të përfshijë adresën tënde të email-it.</string>
+  <string name="callerinfo_provider_auth_learn_more">Mëso më shumë</string>
+  <string name="callerinfo_provider_auth_desc">Mirësevini! Dëshironi që <xliff:g id="provider_name">%s</xliff:g> të identifikojë telefonuesit e panjohur dhe të bllokojë thirrjet e padëshiruara?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Mirësevini! Dëshironi që <xliff:g id="provider_name">%s</xliff:g> të identifikojë telefonuesit e panjohur?</string>
+  <string name="callerinfo_provider_summary">Identifikon telefonuesit e panjohur dhe ata spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifikon telefonuesit e panjohur</string>
+  <string name="silence_spam_title">Vendos në heshtje telefonatat spam</string>
+  <string name="silence_spam_summary">Mos lejo asnjëherë rënien e zileve të thirrjeve spam</string>
+  <string name="block_hidden_title">Blloko numrat e fshehur</string>
+  <string name="block_hidden_summary">Konsideroji numrat e fshehur si spam</string>
+  <string name="block_dialog_title">Do që të bllokosh këtë telefonues?</string>
+  <string name="block_dialog_positive">Blloko</string>
+  <string name="block_dialog_negative">Anullo</string>
+  <string name="block_dialog_description">Ju nuk do të merrni më thirrje apo mesazhe nga ky person.</string>
+  <string name="provider_disable_title">Do që të çaktivizosh %1$s?</string>
+  <string name="provider_disable_message">Duke çaktivizuar %1$s, ju nuk do të keni më një ID të telefonuesit.</string>
+  <string name="powered_by_provider">Mundësuar nga <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Bëj thirrje %1$s duke\nndërruar profilet këtu"</string>
+  <string name="provider_button_help">"E kuptova"</string>
+  <string name="provider_voice_call">"%1$s thirrje zanore"</string>
+  <string name="provider_video_call">"%1$s thirrje me video"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Për të bërë një telefonatë, aktivizoni lejet e Telefonit.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Shiko shënimin</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Mbaj shënime nga kudo</string>
+  <string name="callerinfo_provider_status_disabling">Duke çaktivizuar</string>
+  <string name="show_dialpad_at_start_title">Shfaq tastjerën formuese në hapje</string>
 </resources>

@@ -42,7 +42,7 @@
   <string name="call_log_action_block">Bloqueja la trucada</string>
   <string name="call_log_action_unblock">Trucada bloquejada</string>
   <!--  for speed dial -->
-  <string name="speed_dial_settings">Ajustaments de trucada ràpida</string>
+  <string name="speed_dial_settings">Configuració de trucada ràpida</string>
   <string name="speed_dial_not_set">(no configurat)</string>
   <string name="speed_dial_replace">Substitueix</string>
   <string name="speed_dial_delete">Esborra</string>
