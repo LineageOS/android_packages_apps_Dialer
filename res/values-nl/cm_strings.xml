@@ -102,7 +102,7 @@
   <string name="clear">Leegmaken</string>
   <string name="description_clear_search">Zoekopdracht wissen</string>
   <string name="video_call_welcome_title"><b>Welkom bij de nieuwe Video-oproep-app</b></string>
-  <string name="video_call_welcome_message">We houden er allemaal van om een bekende stem te horen aan de andere kant van lijn, maar een persoonlijk gesprek is veel beter! Dit is wat je moet weten om ervan gebruik te kunnen maken:\n Je hebt een 4G- of wifi-verbinding nodig\n Het apparaat dat je gebruikt moet het ondersteunen\n Videogesprekken gebruiken veel mobiele data\n Je kan een telefoongesprek omzetten naar een videogesprek.</string>
+  <string name="video_call_welcome_message">We houden er allemaal van om een bekende stem te horen aan de andere kant van de lijn, maar een persoonlijk gesprek is veel beter! Dit is wat je moet weten over videogesprekken:\n Je hebt een 4G- of wifi-verbinding nodig\n Het apparaat van je gesprekspartner moet het ook ondersteunen\n Videogesprekken gebruiken veel mobiele data\n Je kan een telefoongesprek omzetten naar een videogesprek\n\n Kijk op <a>https://support.t-mobile.com/docs/DOC-23574</a>voor meer informatie.</string>
   <string name="video_call_welcome_message_repeat">Dit bericht elke keer weergeven</string>
   <string name="toast_change_video_call_failed">Kan niet omschakelen naar video-oproep, ongeldig nummerformaat</string>
   <string name="toast_make_video_call_failed">Kan video-oproep niet starten, ongeldig nummerformaat</string>
