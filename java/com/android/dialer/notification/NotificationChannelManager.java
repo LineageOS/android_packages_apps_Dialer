@@ -66,7 +66,7 @@ public class NotificationChannelManager {
     if (BuildCompat.isAtLeastO()) {
       NotificationChannel channel =
           NotificationChannelManager.getInstance().getChannel(context, channelName, phoneAccount);
-      notification.setChannel(channel.getId());
+      notification.setChannelId(channel.getId());
     }
   }
 
