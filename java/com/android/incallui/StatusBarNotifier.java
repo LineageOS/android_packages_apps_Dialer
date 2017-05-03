@@ -119,7 +119,6 @@ public class StatusBarNotifier
   private String mSavedContentTitle;
   private Uri mRingtone;
   private StatusBarCallListener mStatusBarCallListener;
-  private boolean mShowFullScreenIntent;
 
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
     Objects.requireNonNull(context);
@@ -224,7 +223,7 @@ public class StatusBarNotifier
       setStatusBarCallListener(null);
     }
     if (mCurrentNotification != NOTIFICATION_NONE) {
-      LogUtil.d("StatusBarNotifier.cancelNotification", "cancel");
+      LogUtil.i("StatusBarNotifier.cancelNotification", "cancel");
       mNotificationManager.cancel(mCurrentNotification);
     }
     mCurrentNotification = NOTIFICATION_NONE;
@@ -324,8 +323,7 @@ public class StatusBarNotifier
         contentTitle,
         callState,
         notificationType,
-        contactInfo.contactRingtoneUri,
-        InCallPresenter.getInstance().shouldShowFullScreenNotification())) {
+        contactInfo.contactRingtoneUri)) {
       return;
     }
 
@@ -361,10 +359,8 @@ public class StatusBarNotifier
     if (notificationType == NOTIFICATION_INCOMING_CALL) {
       NotificationChannelManager.applyChannel(
           builder, mContext, Channel.INCOMING_CALL, accountHandle);
-      if (InCallPresenter.getInstance().shouldShowFullScreenNotification()) {
-        configureFullScreenIntent(
-            builder, createLaunchPendingIntent(true /* isFullScreen */), callList, call);
-      }
+      configureFullScreenIntent(
+          builder, createLaunchPendingIntent(true /* isFullScreen */), callList, call);
       // Set the notification category and bump the priority for incoming calls
       builder.setCategory(Notification.CATEGORY_CALL);
       builder.setPriority(Notification.PRIORITY_MAX);
@@ -501,8 +497,7 @@ public class StatusBarNotifier
       String contentTitle,
       int state,
       int notificationType,
-      Uri ringtone,
-      boolean showFullScreenIntent) {
+      Uri ringtone) {
 
     // The two are different:
     // if new title is not null, it should be different from saved version OR
@@ -511,15 +506,17 @@ public class StatusBarNotifier
         (contentTitle != null && !contentTitle.equals(mSavedContentTitle))
             || (contentTitle == null && mSavedContentTitle != null);
 
+    boolean largeIconChanged =
+        mSavedLargeIcon == null ? largeIcon != null : !mSavedLargeIcon.sameAs(largeIcon);
+
     // any change means we are definitely updating
     boolean retval =
         (mSavedIcon != icon)
             || !Objects.equals(mSavedContent, content)
             || (mCallState != state)
-            || (mSavedLargeIcon != largeIcon)
+            || largeIconChanged
             || contentTitleChanged
-            || !Objects.equals(mRingtone, ringtone)
-            || mShowFullScreenIntent != showFullScreenIntent;
+            || !Objects.equals(mRingtone, ringtone);
 
     // If we aren't showing a notification right now or the notification type is changing,
     // definitely do an update.
@@ -537,7 +534,6 @@ public class StatusBarNotifier
     mSavedLargeIcon = largeIcon;
     mSavedContentTitle = contentTitle;
     mRingtone = ringtone;
-    mShowFullScreenIntent = showFullScreenIntent;
 
     if (retval) {
       LogUtil.d(

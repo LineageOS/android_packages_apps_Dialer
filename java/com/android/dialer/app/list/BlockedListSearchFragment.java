@@ -23,7 +23,6 @@ import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,13 +36,12 @@ import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.blocking.BlockNumberDialogFragment;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.InteractionEvent;
 
 public class BlockedListSearchFragment extends RegularSearchFragment
     implements BlockNumberDialogFragment.Callback {
-
-  private static final String TAG = BlockedListSearchFragment.class.getSimpleName();
 
   private final TextWatcher mPhoneSearchQueryTextListener =
       new TextWatcher() {
@@ -152,7 +150,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         blockNumber(number);
         break;
       default:
-        Log.w(TAG, "Ignoring unsupported shortcut type: " + shortcutType);
+        LogUtil.w(
+            "BlockedListSearchFragment.onItemClick",
+            "ignoring unsupported shortcut type: " + shortcutType);
         break;
     }
   }
@@ -205,7 +205,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
   @Override
   public void onUnfilterNumberSuccess() {
-    Log.wtf(TAG, "Unblocked a number from the BlockedListSearchFragment");
+    LogUtil.e(
+        "BlockedListSearchFragment.onUnfilterNumberSuccess",
+        "unblocked a number from the BlockedListSearchFragment");
     goBack();
   }
 

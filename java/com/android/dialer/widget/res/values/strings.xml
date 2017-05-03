@@ -2,4 +2,7 @@
 <resources>
   <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
   <string name="custom_message_hint">Write a custom message</string>
+
+  <!-- Accessibility string for close/navigation icon in DialerToolbar -->
+  <string name="toolbar_close">Close</string>
 </resources>

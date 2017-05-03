@@ -54,11 +54,11 @@
   <string name="voicemail_error_inbox_full_title">Can\'t receive new voicemails</string>
   <string name="voicemail_error_inbox_full_message">Your inbox is full. Try deleting some messages to receive new voicemail.</string>
 
-  <string name="voicemail_error_inbox_full_turn_archive_on_title">[Experimental] Turn on extra storage and backup</string>
-  <string name="voicemail_error_inbox_full_turn_archive_on_message">Your mailbox is full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages. <b><i>This feature is currently being tested </i></b>and will potentially delete voicemails from your voicemail server, and we do not promise to support this feature in the future. We would love your feedback though.</string>
+  <string name="voicemail_error_inbox_full_turn_archive_on_title">Turn on extra storage and backup</string>
+  <string name="voicemail_error_inbox_full_turn_archive_on_message">Your mailbox is full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages.</string>
 
-  <string name="voicemail_error_inbox_almost_full_turn_archive_on_title">[Experimental] Turn on extra storage and backup</string>
-  <string name="voicemail_error_inbox_almost_full_turn_archive_on_message">Your mailbox is almost full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages. <b><i>This feature is currently being tested </i></b>and will potentially delete voicemails from your voicemail server, and we do not promise to support this feature in the future. We would love your feedback though.</string>
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_title">Turn on extra storage and backup</string>
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_message">Your mailbox is almost full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages.</string>
 
   <string name="voicemail_error_pin_not_set_title">Set your voicemail PIN</string>
   <string name="voicemail_error_pin_not_set_message">You\'ll need a voicemail PIN anytime you call to access your voicemail.</string>

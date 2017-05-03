@@ -78,5 +78,7 @@ public interface VideoTech {
     void onPeerDimensionsChanged(int width, int height);
 
     void onVideoUpgradeRequestReceived();
+
+    void onUpgradedToVideo(boolean switchToSpeaker);
   }
 }

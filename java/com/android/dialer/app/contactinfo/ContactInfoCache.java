@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.ExpirableCache;
@@ -183,7 +184,7 @@ public class ContactInfoCache {
         new NumberWithCountryIso(request.number, request.countryIso);
     ContactInfo existingInfo = mCache.getPossiblyExpired(numberCountryIso);
 
-    final boolean isRemoteSource = info.sourceType != 0;
+    final boolean isRemoteSource = info.sourceType != Type.UNKNOWN_SOURCE_TYPE;
 
     // Don't force redraw if existing info in the cache is equal to {@link ContactInfo#EMPTY}
     // to avoid updating the data set for every new row that is scrolled into view.
@@ -346,7 +347,7 @@ public class ContactInfoCache {
           shouldRedraw |= queryContactInfo(request);
           if (shouldRedraw
               && (mUpdateRequests.isEmpty()
-                  || request.isLocalRequest() && !mUpdateRequests.peek().isLocalRequest())) {
+                  || (request.isLocalRequest() && !mUpdateRequests.peek().isLocalRequest()))) {
             shouldRedraw = false;
             mHandler.sendEmptyMessage(REDRAW);
           }

@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Incoming Wi-Fi work call"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Incoming suspected spam call"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Incoming video request"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"New voicemail"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"New voicemail (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Dial <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Voicemail number unknown"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"No service"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Selected network (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) unavailable"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Answer"</string>

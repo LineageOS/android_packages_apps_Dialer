@@ -24,8 +24,8 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import java.util.ArrayList;
@@ -184,8 +184,8 @@ public class OmtpVoicemailMessageCreator {
 
     String title;
     CharSequence message;
-    int enabledImpression;
-    int dismissedImpression;
+    DialerImpression.Type enabledImpression;
+    DialerImpression.Type dismissedImpression;
     String dismissedKey;
 
     if (isFull) {
@@ -237,20 +237,25 @@ public class OmtpVoicemailMessageCreator {
       PerAccountSharedPreferences sharedPreferenceForAccount,
       String title,
       CharSequence message,
-      int impressionToLogOnEnable,
-      int impressionToLogOnDismiss,
+      DialerImpression.Type impressionToLogOnEnable,
+      DialerImpression.Type impressionToLogOnDismiss,
       String preferenceKeyToUpdate) {
     return new VoicemailErrorMessage(
         title,
         message,
+        VoicemailErrorMessage.createTurnArchiveOnAction(
+            context,
+            impressionToLogOnEnable,
+            status,
+            statusReader,
+            voicemailClient,
+            phoneAccountHandle),
         VoicemailErrorMessage.createDismissTurnArchiveOnAction(
             context,
             impressionToLogOnDismiss,
             statusReader,
             sharedPreferenceForAccount,
-            preferenceKeyToUpdate),
-        VoicemailErrorMessage.createTurnArchiveOnAction(
-            context, impressionToLogOnEnable, status, voicemailClient, phoneAccountHandle));
+            preferenceKeyToUpdate));
   }
 
   @Nullable

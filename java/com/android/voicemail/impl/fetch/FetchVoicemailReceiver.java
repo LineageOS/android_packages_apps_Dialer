@@ -120,6 +120,16 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
               new PhoneAccountHandle(
                   ComponentName.unflattenFromString(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME)),
                   cursor.getString(PHONE_ACCOUNT_ID));
+          TelephonyManager telephonyManager =
+              context
+                  .getSystemService(TelephonyManager.class)
+                  .createForPhoneAccountHandle(mPhoneAccount);
+          if (telephonyManager == null) {
+            // can happen when trying to fetch voicemails from a SIM that is no longer on the
+            // device
+            VvmLog.e(TAG, "account no longer valid, cannot retrieve message");
+            return;
+          }
           if (!VvmAccountManager.isAccountActivated(context, mPhoneAccount)) {
             mPhoneAccount = getAccountFromMarshmallowAccount(context, mPhoneAccount);
             if (mPhoneAccount == null) {

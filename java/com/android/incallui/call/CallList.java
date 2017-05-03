@@ -33,8 +33,8 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamBindings;
@@ -198,7 +198,7 @@ public class CallList implements DialerCallDelegate {
   private void logSecondIncomingCall(@NonNull Context context, @NonNull DialerCall incomingCall) {
     DialerCall firstCall = getFirstCall();
     if (firstCall != null) {
-      int impression = 0;
+      DialerImpression.Type impression;
       if (firstCall.isVideoCall()) {
         if (incomingCall.isVideoCall()) {
           impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VIDEO_CALL;
@@ -212,7 +212,7 @@ public class CallList implements DialerCallDelegate {
           impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VOICE_CALL;
         }
       }
-      Assert.checkArgument(impression != 0);
+      Assert.checkArgument(impression != null);
       Logger.get(context)
           .logCallImpression(
               impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());

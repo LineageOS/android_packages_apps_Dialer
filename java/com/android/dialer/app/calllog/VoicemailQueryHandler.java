@@ -76,8 +76,8 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
     GroupedNotificationUtil.removeNotification(
         mContext.getSystemService(NotificationManager.class),
         voicemailUri != null ? voicemailUri.toString() : null,
-        R.id.notification_voicemail,
-        DefaultVoicemailNotifier.NOTIFICATION_TAG);
+        R.id.notification_visual_voicemail,
+        DefaultVoicemailNotifier.VISUAL_VOICEMAIL_NOTIFICATION_TAG);
   }
 
   @Override

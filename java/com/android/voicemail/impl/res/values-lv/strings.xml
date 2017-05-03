@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Papildu iestatījumi"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Vizuālais balss pasts"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Papildu dublēšana un krātuve"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Šī ir eksperimentāla funkcija"</i></b>", ko mēs pašlaik testējam. Pastāv iespēja, ka no jūsu balss pasta servera tiks izdzēsti balss pasta ziņojumi. Mēs negarantējam šīs funkcijas turpmāku atbalstu, tomēr priecāsimies saņemt atsauksmes par to."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN iestatīšana"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN mainīšana"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Lai varētu mainīt PIN, ir jābūt iespējotam vizuālajam balss pastam."</string>

@@ -1,0 +1,71 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+message ScreenEvent {
+  enum Type {
+
+    UNKNOWN = 0;
+
+    DIALPAD = 1;
+
+    SPEED_DIAL = 2;
+
+    CALL_LOG = 3;
+
+    // The tab containing the list of voicemails only.
+    VOICEMAIL_LOG = 4;
+
+    // The tab containing the list of all contacts.
+    ALL_CONTACTS = 5;
+
+    // List of search results returned by typing into the search box.
+    REGULAR_SEARCH = 6;
+
+    // List of search results returned by typing into the dialpad.
+    SMART_DIAL_SEARCH = 7;
+
+    CALL_LOG_FILTER = 8;
+
+    SETTINGS = 9;
+
+    // The "Import/export contacts" dialog launched via the overflow menu.
+    IMPORT_EXPORT_CONTACTS = 10;
+
+    // The "Clear frequents" dialog launched via the overflow menu.
+    CLEAR_FREQUENTS = 11;
+
+    // The "Send feedback" dialog launched via the overflow menu.
+    SEND_FEEDBACK = 12;
+
+    // The main in call screen that displays caller details and contact photos
+    INCALL = 13;
+
+    // The screen that displays the glowpad widget (slide right to answer,
+    // slide left to dismiss).
+    INCOMING_CALL = 14;
+
+    // Conference management fragment displayed for conferences that support
+    // management of individual calls within the conference.
+    CONFERENCE_MANAGEMENT = 15;
+
+    // The dialpad displayed in-call that is used to send dtmf tones.
+    INCALL_DIALPAD = 16;
+
+    // Menu options displayed when long pressing on a call log entry
+    CALL_LOG_CONTEXT_MENU = 17;
+
+    // Screen displayed to allow the user to see an overview of all blocked
+    // numbers
+    BLOCKED_NUMBER_MANAGEMENT = 18;
+
+    // Screen displayed to allow the user to add a new blocked number
+    BLOCKED_NUMBER_ADD_NUMBER = 19;
+
+    CALL_DETAILS = 20;
+  }
+}

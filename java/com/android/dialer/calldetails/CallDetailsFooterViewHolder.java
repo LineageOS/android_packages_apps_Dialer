@@ -19,12 +19,13 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 
@@ -32,6 +33,7 @@ import com.android.dialer.util.DialerUtils;
 public class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder
     implements OnClickListener {
 
+  private final View container;
   private final View copy;
   private final View edit;
 
@@ -39,6 +41,7 @@ public class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder
 
   public CallDetailsFooterViewHolder(View view) {
     super(view);
+    container = view.findViewById(R.id.footer_container);
     copy = view.findViewById(R.id.call_detail_action_copy);
     edit = view.findViewById(R.id.call_detail_action_edit_before_call);
 
@@ -48,6 +51,9 @@ public class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder
 
   public void setPhoneNumber(String number) {
     this.number = number;
+    if (TextUtils.isEmpty(number)) {
+      container.setVisibility(View.GONE);
+    }
   }
 
   @Override

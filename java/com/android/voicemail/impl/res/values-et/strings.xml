@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Täpsemad seaded"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Visuaalne kõnepost"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Lisavarundus ja -salvestusruum"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"See on katseline funktsioon"</i></b>", mida praegu testime. See võib teie kõnepostisõnumid kõnepostiserverist kustutada. Me ei garanteeri, et seda funktsiooni tulevikus toetatakse. Soovime selle kohta siiski tagasisidet saada."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN-koodi määramine"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN-koodi muutmine"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN-koodi muutmiseks peab olema lubatud visuaalne kõnepost"</string>

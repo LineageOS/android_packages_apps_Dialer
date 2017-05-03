@@ -20,7 +20,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Outline;
@@ -49,7 +48,7 @@ public class LetterTileDrawable extends Drawable {
    * #TYPE_BUSINESS}, and voicemail contacts should use {@link #TYPE_VOICEMAIL}.
    */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR})
+  @IntDef({TYPE_PERSON, TYPE_BUSINESS, TYPE_VOICEMAIL, TYPE_GENERIC_AVATAR, TYPE_SPAM})
   public @interface ContactType {}
 
   /** Contact type constants */
@@ -61,6 +60,7 @@ public class LetterTileDrawable extends Drawable {
    * situations where a contact is anonymous.
    */
   public static final int TYPE_GENERIC_AVATAR = 4;
+  public static final int TYPE_SPAM = 5;
   @ContactType public static final int TYPE_DEFAULT = TYPE_PERSON;
 
   /**
@@ -78,6 +78,10 @@ public class LetterTileDrawable extends Drawable {
 
   /** 54% opacity */
   private static final int ALPHA = 138;
+  /** 100% opacity */
+  private static final int SPAM_ALPHA = 255;
+  /** Default icon scale for vector drawable. */
+  private static final float VECTOR_ICON_SCALE = 0.7f;
 
   /** Reusable components to avoid new allocations */
   private static final Paint sPaint = new Paint();
@@ -87,14 +91,16 @@ public class LetterTileDrawable extends Drawable {
   /** Letter tile */
   private static TypedArray sColors;
 
+  private static int sSpamColor;
   private static int sDefaultColor;
   private static int sTileFontColor;
   private static float sLetterToTileRatio;
-  private static Bitmap sDefaultPersonAvatar;
-  private static Bitmap sDefaultBusinessAvatar;
-  private static Bitmap sDefaultVoicemailAvatar;
+  private static Drawable sDefaultPersonAvatar;
+  private static Drawable sDefaultBusinessAvatar;
+  private static Drawable sDefaultVoicemailAvatar;
+  private static Drawable sDefaultSpamAvatar;
   private final Paint mPaint;
-  private int mContactType = TYPE_DEFAULT;
+  @ContactType private int mContactType = TYPE_DEFAULT;
   private float mScale = 1.0f;
   private float mOffset = 0.0f;
   private boolean mIsCircle = false;
@@ -102,21 +108,20 @@ public class LetterTileDrawable extends Drawable {
   private int mColor;
   private Character mLetter = null;
 
-  @ContactType private int mAvatarType = TYPE_DEFAULT;
   private String mDisplayName;
 
   public LetterTileDrawable(final Resources res) {
     if (sColors == null) {
       sColors = res.obtainTypedArray(R.array.letter_tile_colors);
+      sSpamColor = res.getColor(R.color.spam_contact_background);
       sDefaultColor = res.getColor(R.color.letter_tile_default_color);
       sTileFontColor = res.getColor(R.color.letter_tile_font_color);
       sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
       sDefaultPersonAvatar =
-          BitmapFactory.decodeResource(
-              res, R.drawable.product_logo_avatar_anonymous_white_color_120);
-      sDefaultBusinessAvatar =
-          BitmapFactory.decodeResource(res, R.drawable.ic_business_white_120dp);
-      sDefaultVoicemailAvatar = BitmapFactory.decodeResource(res, R.drawable.ic_voicemail_avatar);
+          res.getDrawable(R.drawable.product_logo_avatar_anonymous_white_color_120, null);
+      sDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
+      sDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
+      sDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
       sPaint.setTypeface(
           Typeface.create(res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
       sPaint.setTextAlign(Align.CENTER);
@@ -128,12 +133,32 @@ public class LetterTileDrawable extends Drawable {
     mColor = sDefaultColor;
   }
 
-  private static Bitmap getBitmapForContactType(int contactType) {
+  private Rect getScaledBounds(float scale, float offset) {
+    // The drawable should be drawn in the middle of the canvas without changing its width to
+    // height ratio.
+    final Rect destRect = copyBounds();
+    // Crop the destination bounds into a square, scaled and offset as appropriate
+    final int halfLength = (int) (scale * Math.min(destRect.width(), destRect.height()) / 2);
+
+    destRect.set(
+        destRect.centerX() - halfLength,
+        (int) (destRect.centerY() - halfLength + offset * destRect.height()),
+        destRect.centerX() + halfLength,
+        (int) (destRect.centerY() + halfLength + offset * destRect.height()));
+    return destRect;
+  }
+
+  private Drawable getDrawableForContactType(int contactType) {
     switch (contactType) {
       case TYPE_BUSINESS:
+        mScale = VECTOR_ICON_SCALE;
         return sDefaultBusinessAvatar;
       case TYPE_VOICEMAIL:
+        mScale = VECTOR_ICON_SCALE;
         return sDefaultVoicemailAvatar;
+      case TYPE_SPAM:
+        mScale = VECTOR_ICON_SCALE;
+        return sDefaultSpamAvatar;
       case TYPE_PERSON:
       case TYPE_GENERIC_AVATAR:
       default:
@@ -163,39 +188,11 @@ public class LetterTileDrawable extends Drawable {
     return bitmap;
   }
 
-  /**
-   * Draw the bitmap onto the canvas at the current bounds taking into account the current scale.
-   */
-  private void drawBitmap(
-      final Bitmap bitmap, final int width, final int height, final Canvas canvas) {
-    // The bitmap should be drawn in the middle of the canvas without changing its width to
-    // height ratio.
-    final Rect destRect = copyBounds();
-
-    // Crop the destination bounds into a square, scaled and offset as appropriate
-    final int halfLength = (int) (mScale * Math.min(destRect.width(), destRect.height()) / 2);
-
-    destRect.set(
-        destRect.centerX() - halfLength,
-        (int) (destRect.centerY() - halfLength + mOffset * destRect.height()),
-        destRect.centerX() + halfLength,
-        (int) (destRect.centerY() + halfLength + mOffset * destRect.height()));
-
-    // Source rectangle remains the entire bounds of the source bitmap.
-    sRect.set(0, 0, width, height);
-
-    sPaint.setTextAlign(Align.CENTER);
-    sPaint.setAntiAlias(true);
-    sPaint.setAlpha(ALPHA);
-
-    canvas.drawBitmap(bitmap, sRect, destRect, sPaint);
-  }
-
   private void drawLetterTile(final Canvas canvas) {
     // Draw background color.
     sPaint.setColor(mColor);
-
     sPaint.setAlpha(mPaint.getAlpha());
+
     final Rect bounds = getBounds();
     final int minDimension = Math.min(bounds.width(), bounds.height());
 
@@ -206,7 +203,6 @@ public class LetterTileDrawable extends Drawable {
     }
 
     // Draw letter/digit only if the first character is an english letter or there's a override
-
     if (mLetter != null) {
       // Draw letter or digit.
       sFirstChar[0] = mLetter;
@@ -229,8 +225,10 @@ public class LetterTileDrawable extends Drawable {
           sPaint);
     } else {
       // Draw the default image if there is no letter/digit to be drawn
-      final Bitmap bitmap = getBitmapForContactType(mContactType);
-      drawBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), canvas);
+      Drawable drawable = getDrawableForContactType(mContactType);
+      drawable.setBounds(getScaledBounds(mScale, mOffset));
+      drawable.setAlpha(drawable == sDefaultSpamAvatar ? SPAM_ALPHA : ALPHA);
+      drawable.draw(canvas);
     }
   }
 
@@ -245,11 +243,16 @@ public class LetterTileDrawable extends Drawable {
 
   /** Returns a deterministic color based on the provided contact identifier string. */
   private int pickColor(final String identifier) {
+    if (mContactType == TYPE_SPAM) {
+      return sSpamColor;
+    }
+
     if (mContactType == TYPE_VOICEMAIL
         || mContactType == TYPE_BUSINESS
         || TextUtils.isEmpty(identifier)) {
       return sDefaultColor;
     }
+
     // String.hashCode() implementation is not supposed to change across java versions, so
     // this should guarantee the same email address always maps to the same color.
     // The email should already have been normalized by the ContactRequest.
@@ -321,7 +324,7 @@ public class LetterTileDrawable extends Drawable {
 
   private LetterTileDrawable setLetterAndColorFromContactDetails(
       final String displayName, final String identifier) {
-    if (displayName != null && displayName.length() > 0 && isEnglishLetter(displayName.charAt(0))) {
+    if (!TextUtils.isEmpty(displayName) && isEnglishLetter(displayName.charAt(0))) {
       mLetter = Character.toUpperCase(displayName.charAt(0));
     } else {
       mLetter = null;
@@ -382,11 +385,10 @@ public class LetterTileDrawable extends Drawable {
     }
 
     this.mDisplayName = displayName;
-    this.mAvatarType = contactType;
-    setContactType(this.mAvatarType);
+    setContactType(contactType);
 
     // Special contact types receive default color and no letter tile, but special iconography.
-    if (this.mAvatarType != TYPE_PERSON) {
+    if (contactType != TYPE_PERSON) {
       this.setLetterAndColorFromContactDetails(null, null);
     } else {
       if (identifierForTileColor != null) {

@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"यदि आपका इनबॉक्स भरा हुआ है, तो आप नया वॉइसमेल नहीं प्राप्त कर सकेंगे."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"नए वॉइसमेल प्राप्त नहीं किए जा सकते"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"आपका इनबॉक्स पूरा भर गया है. नया वॉइसमेल प्राप्त करने के लिए कुछ संदेश हटाने का प्रयास करें."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[प्रयोगात्मक] अतिरिक्त जगह और बैकअप चालू करें"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"आपका मेलबॉक्स भर चुका है. जगह खाली करने के लिए, अतिरिक्त मेमोरी चालू करें ताकि Google आपके वॉइसमेल संदेशों को प्रबंधित कर सके और उनका बैक अप ले सके. "<b><i>"इस सुविधा का अभी परीक्षण किया जा रहा है "</i></b>"और हो सकता है कि यह आपके वॉइसमेल सर्वर से वॉइसमेल हटा दे और हम भविष्य में इस सुविधा को देने का वादा नहीं करते. फिर भी आपका फ़ीडबैक हमें अच्छा लगेगा."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[प्रयोगात्मक] अतिरिक्त जगह और बैकअप चालू करें"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"आपका मेलबॉक्स लगभग भर चुका है. जगह खाली करने के लिए, अतिरिक्त मेमोरी चालू करें ताकि Google आपके वॉइसमेल संदेशों को प्रबंधित कर सके और उनका बैक अप ले सके. "<b><i>"इस सुविधा का अभी परीक्षण किया जा रहा है "</i></b>"और हो सकता है कि यह आपके वॉइसमेल सर्वर से वॉइसमेल हटा दे और हम भविष्य में इस सुविधा को देने का वादा नहीं करते. फिर भी आपका फ़ीडबैक हमें अच्छा लगेगा."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"अतिरिक्त जगह और बैकअप चालू करें"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"आपका मेलबॉक्स भर गया है. जगह खाली करने के लिए, अतिरिक्त जगह चालू करें ताकि Google आपके वॉइसमेल संदेशों को प्रबंधित कर सके और उनका बैकअप ले सके."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"अतिरिक्त जगह और बैकअप चालू करें"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"आपका मेलबॉक्स लगभग भर गया है. जगह खाली करने के लिए, अतिरिक्त जगह चालू करें ताकि Google आपके वॉइसमेल संदेशों को प्रबंधित कर सके और उनका बैकअप ले सके."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"अपना वॉइसमेल पिन सेट करें"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"आप जब भी अपना वॉइसमेल एक्सेस करने के लिए कॉल करते हैं, आपको वॉइसमेल पिन की आवश्यकता होगी."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"अज्ञात गड़बड़ी"</string>

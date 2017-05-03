@@ -16,8 +16,10 @@
 
 package com.android.voicemail.impl;
 
+import android.content.Context;
 import android.support.v4.os.BuildCompat;
 import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailPermissionHelper;
 import com.android.voicemail.stub.StubVoicemailClient;
 import dagger.Module;
 import dagger.Provides;
@@ -29,12 +31,21 @@ public final class VoicemailModule {
 
   @Provides
   @Singleton
-  static VoicemailClient provideVoicemailClient() {
-    if (BuildCompat.isAtLeastO()) {
-      return new VoicemailClientImpl();
-    } else {
+  static VoicemailClient provideVoicemailClient(Context context) {
+    if (!BuildCompat.isAtLeastO()) {
+      VvmLog.i("VoicemailModule.provideVoicemailClient", "SDK below O");
       return new StubVoicemailClient();
     }
+
+    if (!VoicemailPermissionHelper.hasPermissions(context)) {
+      VvmLog.i(
+          "VoicemailModule.provideVoicemailClient",
+          "missing permissions " + VoicemailPermissionHelper.getMissingPermissions(context));
+      return new StubVoicemailClient();
+    }
+
+    VvmLog.i("VoicemailModule.provideVoicemailClient", "providing VoicemailClientImpl");
+    return new VoicemailClientImpl();
   }
 
   private VoicemailModule() {}

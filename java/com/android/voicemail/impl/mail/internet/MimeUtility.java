@@ -34,9 +34,10 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
+import org.apache.james.mime4j.codec.DecodeMonitor;
+import org.apache.james.mime4j.codec.DecoderUtil;
 import org.apache.james.mime4j.codec.EncoderUtil;
-import org.apache.james.mime4j.decoder.DecoderUtil;
-import org.apache.james.mime4j.decoder.QuotedPrintableInputStream;
+import org.apache.james.mime4j.codec.QuotedPrintableInputStream;
 import org.apache.james.mime4j.util.CharsetUtil;
 
 public class MimeUtility {
@@ -65,7 +66,7 @@ public class MimeUtility {
     if (s == null) {
       return null;
     }
-    return DecoderUtil.decodeEncodedWords(s);
+    return DecoderUtil.decodeEncodedWords(s, DecodeMonitor.STRICT);
   }
 
   public static String unfoldAndDecode(String s) {
@@ -235,7 +236,7 @@ public class MimeUtility {
             /*
              * See if there is conversion from the MIME charset to the Java one.
              */
-            charset = CharsetUtil.toJavaCharset(charset);
+            charset = CharsetUtil.lookup(charset).name();
           }
           /*
            * No encoding, so use us-ascii, which is the standard.

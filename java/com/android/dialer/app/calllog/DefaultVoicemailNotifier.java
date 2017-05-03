@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.calllog;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,11 +27,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.os.BuildCompat;
 import android.support.v4.util.Pair;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -42,9 +49,11 @@ import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.blocking.FilteredNumbersUtil;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -58,9 +67,12 @@ public class DefaultVoicemailNotifier {
   public static final String TAG = "VoicemailNotifier";
 
   /** The tag used to identify notifications from this class. */
-  static final String NOTIFICATION_TAG = "DefaultVoicemailNotifier";
+  static final String VISUAL_VOICEMAIL_NOTIFICATION_TAG = "DefaultVoicemailNotifier";
   /** The identifier of the notification of new voicemails. */
-  private static final int NOTIFICATION_ID = R.id.notification_voicemail;
+  private static final int VISUAL_VOICEMAIL_NOTIFICATION_ID = R.id.notification_visual_voicemail;
+
+  private static final int LEGACY_VOICEMAIL_NOTIFICATION_ID = R.id.notification_legacy_voicemail;
+  private static final String LEGACY_VOICEMAIL_NOTIFICATION_TAG = "legacy_voicemail";
 
   private final Context context;
   private final CallLogNotificationsQueryHelper queryHelper;
@@ -159,16 +171,100 @@ public class DefaultVoicemailNotifier {
         Channel.VOICEMAIL,
         PhoneAccountHandles.getAccount(context, newCalls.get(0)));
 
-    LogUtil.i(TAG, "Creating voicemail notification");
-    getNotificationManager().notify(NOTIFICATION_TAG, NOTIFICATION_ID, groupSummary.build());
+    LogUtil.i(TAG, "Creating visual voicemail notification");
+    getNotificationManager()
+        .notify(
+            VISUAL_VOICEMAIL_NOTIFICATION_TAG,
+            VISUAL_VOICEMAIL_NOTIFICATION_ID,
+            groupSummary.build());
 
     for (NewCall voicemail : newCalls) {
       getNotificationManager()
           .notify(
               voicemail.callsUri.toString(),
-              NOTIFICATION_ID,
+              VISUAL_VOICEMAIL_NOTIFICATION_ID,
               createNotificationForVoicemail(voicemail, contactInfos));
     }
+  }
+
+  /**
+   * Replicates how packages/services/Telephony/NotificationMgr.java handles legacy voicemail
+   * notification. The notification will not be stackable because no information is available for
+   * individual voicemails.
+   */
+  @TargetApi(VERSION_CODES.O)
+  public void notifyLegacyVoicemail(
+      @NonNull PhoneAccountHandle phoneAccountHandle,
+      int count,
+      String voicemailNumber,
+      PendingIntent callVoicemailIntent,
+      PendingIntent voicemailSettingIntent) {
+    Assert.isNotNull(phoneAccountHandle);
+    Assert.checkArgument(BuildCompat.isAtLeastO());
+    TelephonyManager telephonyManager =
+        context
+            .getSystemService(TelephonyManager.class)
+            .createForPhoneAccountHandle(phoneAccountHandle);
+    Assert.isNotNull(telephonyManager);
+    LogUtil.i(TAG, "Creating legacy voicemail notification");
+
+    PersistableBundle carrierConfig = telephonyManager.getCarrierConfig();
+
+    String notificationTitle =
+        context
+            .getResources()
+            .getQuantityString(R.plurals.notification_voicemail_title, count, count);
+
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
+
+    String notificationText;
+    PendingIntent pendingIntent;
+
+    if (voicemailSettingIntent != null) {
+      // If the voicemail number if unknown, instead of calling voicemail, take the user
+      // to the voicemail settings.
+      notificationText = context.getString(R.string.notification_voicemail_no_vm_number);
+      pendingIntent = voicemailSettingIntent;
+    } else {
+      if (PhoneAccountUtils.getSubscriptionPhoneAccounts(context).size() > 1) {
+        notificationText = phoneAccount.getShortDescription().toString();
+      } else {
+        notificationText =
+            String.format(
+                context.getString(R.string.notification_voicemail_text_format),
+                PhoneNumberUtils.formatNumber(voicemailNumber));
+      }
+      pendingIntent = callVoicemailIntent;
+    }
+    Notification.Builder builder = new Notification.Builder(context);
+    builder
+        .setSmallIcon(android.R.drawable.stat_notify_voicemail)
+        .setColor(context.getColor(R.color.dialer_theme_color))
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(notificationTitle)
+        .setContentText(notificationText)
+        .setContentIntent(pendingIntent)
+        .setSound(telephonyManager.getVoicemailRingtoneUri(phoneAccountHandle))
+        .setOngoing(
+            carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_VOICEMAIL_NOTIFICATION_PERSISTENT_BOOL));
+
+    if (telephonyManager.isVoicemailVibrationEnabled(phoneAccountHandle)) {
+      builder.setDefaults(Notification.DEFAULT_VIBRATE);
+    }
+
+    NotificationChannelManager.applyChannel(
+        builder, context, Channel.VOICEMAIL, phoneAccountHandle);
+    Notification notification = builder.build();
+    getNotificationManager()
+        .notify(LEGACY_VOICEMAIL_NOTIFICATION_TAG, LEGACY_VOICEMAIL_NOTIFICATION_ID, notification);
+  }
+
+  public void cancelLegacyNotification() {
+    LogUtil.i(TAG, "Clearing legacy voicemail notification");
+    getNotificationManager()
+        .cancel(LEGACY_VOICEMAIL_NOTIFICATION_TAG, LEGACY_VOICEMAIL_NOTIFICATION_ID);
   }
 
   /**
@@ -268,7 +364,7 @@ public class DefaultVoicemailNotifier {
     return new Notification.Builder(context)
         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
         .setColor(context.getColor(R.color.dialer_theme_color))
-        .setGroup(NOTIFICATION_TAG)
+        .setGroup(VISUAL_VOICEMAIL_NOTIFICATION_TAG)
         .setOnlyAlertOnce(true)
         .setAutoCancel(true);
   }

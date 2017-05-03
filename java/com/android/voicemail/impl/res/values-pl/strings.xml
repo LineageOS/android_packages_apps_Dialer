@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Ustawienia zaawansowane"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Wizualna poczta głosowa"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Dodatkowe miejsce i kopia zapasowa"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"To jest funkcja eksperymentalna"</i></b>", którą obecnie testujemy. Może ona usunąć wiadomości głosowe z Twojego serwera poczty głosowej. Nie gwarantujemy, że ta funkcja będzie w przyszłości obsługiwana. Chętnie jednak dowiemy się, co o niej sądzisz."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Ustaw kod PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Zmień kod PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Aby można było zmienić kod PIN, wizualna poczta głosowa musi być włączona"</string>

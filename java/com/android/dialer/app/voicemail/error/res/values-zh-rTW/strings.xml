@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"收件匣已滿時無法接收新的語音留言。"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"無法接收新的語音留言"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"您的收件匣已滿。請刪除部分訊息，以便接收新的語音留言。"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[實驗性] 啟用額外的儲存空間和備份功能"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"你的信箱容量已滿。如要釋出空間，請啟用額外的儲存空間，方便 Google 管理及備份你的語音留言。"<b>"這項功能目前正在測試階段"<i></i></b>"，可能會從你的語音信箱伺服器中刪除語音留言。我們不保證日後會支援此功能，但還是希望聽聽你的寶貴意見。"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[實驗性] 啟用額外的儲存空間和備份功能"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"你的信箱容量幾乎已滿。如要釋出空間，請啟用額外的儲存空間，方便 Google 管理及備份你的語音留言。"<b>"這項功能目前正在測試階段"<i></i></b>"，可能會從你的語音信箱伺服器中刪除語音留言。我們不保證日後會支援此功能，但還是希望聽聽你的寶貴意見。"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"啟用額外的儲存空間和備份功能"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"你的信箱容量已滿。如要釋出空間，請啟用額外的儲存空間，方便 Google 管理及備份你的語音留言。"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"啟用額外的儲存空間和備份功能"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"你的信箱容量幾乎已滿。如要釋出空間，請啟用額外的儲存空間，方便 Google 管理及備份你的語音留言。"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"設定您的語音信箱 PIN 碼"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"您必須輸入語音信箱 PIN 碼才能存取您的語音信箱。"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"不明錯誤"</string>

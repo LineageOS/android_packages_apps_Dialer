@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Base64DataException;
 import com.android.voicemail.impl.OmtpEvents;
+import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.AuthenticationFailedException;
 import com.android.voicemail.impl.mail.Body;
 import com.android.voicemail.impl.mail.FetchProfile;
@@ -41,7 +42,6 @@ import com.android.voicemail.impl.mail.store.imap.ImapElement;
 import com.android.voicemail.impl.mail.store.imap.ImapList;
 import com.android.voicemail.impl.mail.store.imap.ImapResponse;
 import com.android.voicemail.impl.mail.store.imap.ImapString;
-import com.android.voicemail.impl.mail.utils.LogUtils;
 import com.android.voicemail.impl.mail.utils.Utility;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,7 +66,7 @@ public class ImapFolder {
   private String mMode;
   private boolean mExists;
   /** A set of hashes that can be used to track dirtiness */
-  Object mHash[];
+  Object[] mHash;
 
   public static final String MODE_READ_ONLY = "mode_read_only";
   public static final String MODE_READ_WRITE = "mode_read_write";
@@ -136,7 +136,7 @@ public class ImapFolder {
       try {
         expunge();
       } catch (MessagingException e) {
-        LogUtils.e(TAG, e, "Messaging Exception");
+        VvmLog.e(TAG, "Messaging Exception", e);
       }
     }
     mMessageCount = -1;
@@ -174,13 +174,13 @@ public class ImapFolder {
       try {
         final String command = ImapConstants.UID_SEARCH + " " + searchCriteria;
         final String[] result = getSearchUids(mConnection.executeSimpleCommand(command));
-        LogUtils.d(TAG, "searchForUids '" + searchCriteria + "' results: " + result.length);
+        VvmLog.d(TAG, "searchForUids '" + searchCriteria + "' results: " + result.length);
         return result;
       } catch (ImapException me) {
-        LogUtils.d(TAG, "ImapException in search: " + searchCriteria, me);
+        VvmLog.d(TAG, "ImapException in search: " + searchCriteria, me);
         return Utility.EMPTY_STRINGS; // Not found
       } catch (IOException ioe) {
-        LogUtils.d(TAG, "IOException in search: " + searchCriteria, ioe);
+        VvmLog.d(TAG, "IOException in search: " + searchCriteria, ioe);
         mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
         throw ioExceptionHandler(mConnection, ioe);
       }
@@ -199,7 +199,7 @@ public class ImapFolder {
         return new ImapMessage(uid, this);
       }
     }
-    LogUtils.e(TAG, "UID " + uid + " not found on server");
+    VvmLog.e(TAG, "UID " + uid + " not found on server");
     return null;
   }
 
@@ -235,7 +235,7 @@ public class ImapFolder {
     try {
       fetchInternal(messages, fp, listener);
     } catch (RuntimeException e) { // Probably a parser error.
-      LogUtils.w(TAG, "Exception detected: " + e.getMessage());
+      VvmLog.w(TAG, "Exception detected: " + e.getMessage());
       throw e;
     }
   }
@@ -346,7 +346,11 @@ public class ImapFolder {
 
             message.setInternalDate(internalDate);
             message.setSize(size);
-            message.parse(Utility.streamFromAsciiString(header));
+            try {
+              message.parse(Utility.streamFromAsciiString(header));
+            } catch (Exception e) {
+              VvmLog.e(TAG, "Error parsing header %s", e);
+            }
           }
           if (fp.contains(FetchProfile.Item.STRUCTURE)) {
             ImapList bs = fetchList.getKeyedListOrEmpty(ImapConstants.BODYSTRUCTURE);
@@ -354,7 +358,7 @@ public class ImapFolder {
               try {
                 parseBodyStructure(bs, message, ImapConstants.TEXT);
               } catch (MessagingException e) {
-                LogUtils.v(TAG, e, "Error handling message");
+                VvmLog.v(TAG, "Error handling message", e);
                 message.setBody(null);
               }
             }
@@ -365,11 +369,15 @@ public class ImapFolder {
             // TODO Should we accept "RFC822" as well??
             ImapString body = fetchList.getKeyedStringOrEmpty("BODY[]", true);
             InputStream bodyStream = body.getAsStream();
-            message.parse(bodyStream);
+            try {
+              message.parse(bodyStream);
+            } catch (Exception e) {
+              VvmLog.e(TAG, "Error parsing body %s", e);
+            }
           }
           if (fetchPart != null) {
             InputStream bodyStream = fetchList.getKeyedStringOrEmpty("BODY[", true).getAsStream();
-            String encodings[] = fetchPart.getHeader(MimeHeader.HEADER_CONTENT_TRANSFER_ENCODING);
+            String[] encodings = fetchPart.getHeader(MimeHeader.HEADER_CONTENT_TRANSFER_ENCODING);
 
             String contentTransferEncoding = null;
             if (encodings != null && encodings.length > 0) {
@@ -397,7 +405,7 @@ public class ImapFolder {
               // from here. This blanket catch-all is because we're not sure what to
               // do if we don't have a contentTransferEncoding, and we don't have
               // time to figure out what exceptions might be thrown.
-              LogUtils.e(TAG, "Error fetching body %s", e);
+              VvmLog.e(TAG, "Error fetching body %s", e);
             }
           }
 
@@ -782,7 +790,7 @@ public class ImapFolder {
   }
 
   private MessagingException ioExceptionHandler(ImapConnection connection, IOException ioe) {
-    LogUtils.d(TAG, "IO Exception detected: ", ioe);
+    VvmLog.d(TAG, "IO Exception detected: ", ioe);
     connection.close();
     if (connection == mConnection) {
       mConnection = null; // To prevent close() from returning the connection to the pool.

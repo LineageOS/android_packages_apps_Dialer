@@ -1216,6 +1216,9 @@ public class VideoCallFragment extends Fragment
     blurScript.setInput(allocationIn);
     blurScript.forEach(allocationOut);
     allocationOut.copyTo(image);
+    blurScript.destroy();
+    allocationIn.destroy();
+    allocationOut.destroy();
   }
 
   @Override

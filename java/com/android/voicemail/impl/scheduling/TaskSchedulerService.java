@@ -16,20 +16,18 @@
 
 package com.android.voicemail.impl.scheduling;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
-import android.os.SystemClock;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -37,20 +35,50 @@ import android.support.annotation.WorkerThread;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.NeededForTesting;
 import com.android.voicemail.impl.VvmLog;
-import com.android.voicemail.impl.scheduling.Task.TaskId;
-import java.util.ArrayDeque;
-import java.util.Queue;
+import com.android.voicemail.impl.scheduling.TaskQueue.NextTask;
+import java.util.List;
 
 /**
- * A service to queue and run {@link Task} on a worker thread. Only one task will be ran at a time,
- * and same task cannot exist in the queue at the same time. The service will be started when a
- * intent is received, and stopped when there are no more tasks in the queue.
+ * A service to queue and run {@link Task} with the {@link android.app.job.JobScheduler}. A task is
+ * queued using {@link Context#startService(Intent)}. The intent should contain enough information
+ * in {@link Intent#getExtras()} to construct the task (see {@link Tasks#createIntent(Context,
+ * Class)}).
+ *
+ * <p>All tasks are ran in the background with a wakelock being held by the {@link
+ * android.app.job.JobScheduler}, which is between {@link #onStartJob(Job, List)} and {@link
+ * #finishJob()}. The {@link TaskSchedulerJobService} also has a {@link TaskQueue}, but the data is
+ * stored in the {@link android.app.job.JobScheduler} instead of the process memory, so if the
+ * process is killed the queued tasks will be restored. If a new task is added, a new {@link
+ * TaskSchedulerJobService} will be scheduled to run the task. If the job is already scheduled, the
+ * new task will be pushed into the queue of the scheduled job. If the job is already running, the
+ * job will be queued in process memory.
+ *
+ * <p>Only one task will be ran at a time, and same task cannot exist in the queue at the same time.
+ * Refer to {@link TaskQueue} for queuing and execution order.
+ *
+ * <p>If there are still tasks in the queue but none are executable immediately, the service will
+ * enter a "sleep", pushing all remaining task into a new job and end the current job.
+ *
+ * <p>The service will be started when a intent is received, and stopped when there are no more
+ * tasks in the queue.
+ *
+ * <p>{@link android.app.job.JobScheduler} is not used directly due to:
+ *
+ * <ul>
+ *   <li>The {@link android.telecom.PhoneAccountHandle} used to differentiate task can not be easily
+ *       mapped into an integer for job id
+ *   <li>A job cannot be mutated to store information such as retry count.
+ * </ul>
  */
+@SuppressWarnings("AndroidApiChecker") /* stream() */
+@TargetApi(VERSION_CODES.O)
 public class TaskSchedulerService extends Service {
 
-  private static final String TAG = "VvmTaskScheduler";
+  interface Job {
+    void finish();
+  }
 
-  private static final String ACTION_WAKEUP = "action_wakeup";
+  private static final String TAG = "VvmTaskScheduler";
 
   private static final int READY_TOLERANCE_MILLISECONDS = 100;
 
@@ -58,15 +86,13 @@ public class TaskSchedulerService extends Service {
    * Threshold to determine whether to do a short or long sleep when a task is scheduled in the
    * future.
    *
-   * <p>A short sleep will continue to held the wake lock and use {@link
-   * Handler#postDelayed(Runnable, long)} to wait for the next task.
+   * <p>A short sleep will continue the job and use {@link Handler#postDelayed(Runnable, long)} to
+   * wait for the next task.
    *
-   * <p>A long sleep will release the wake lock and set a {@link AlarmManager} alarm. The alarm is
-   * exact and will wake up the device. Note: as this service is run in the telephony process it
-   * does not seem to be restricted by doze or sleep, it will fire exactly at the moment. The
-   * unbundled version should take doze into account.
+   * <p>A long sleep will finish the job and schedule a new one. The exact execution time is
+   * subjected to {@link android.app.job.JobScheduler} battery optimization, and is not exact.
    */
-  private static final int SHORT_SLEEP_THRESHOLD_MILLISECONDS = 60_000;
+  private static final int SHORT_SLEEP_THRESHOLD_MILLISECONDS = 10_000;
   /**
    * When there are no more tasks to be run the service should be stopped. But when all tasks has
    * finished there might still be more tasks in the message queue waiting to be processed,
@@ -75,14 +101,9 @@ public class TaskSchedulerService extends Service {
    */
   private static final int STOP_DELAY_MILLISECONDS = 5_000;
 
-  private static final String EXTRA_CLASS_NAME = "extra_class_name";
-
-  private static final String WAKE_LOCK_TAG = "TaskSchedulerService_wakelock";
-
   // The thread to run tasks on
   private volatile WorkerThreadHandler mWorkerThreadHandler;
 
-  private Context mContext = this;
   /**
    * Used by tests to turn task handling into a single threaded process by calling {@link
    * Handler#handleMessage(Message)} directly
@@ -91,21 +112,27 @@ public class TaskSchedulerService extends Service {
 
   private MainThreadHandler mMainThreadHandler;
 
-  private WakeLock mWakeLock;
+  // Binder given to clients
+  private final IBinder mBinder = new LocalBinder();
 
   /** Main thread only, access through {@link #getTasks()} */
-  private final Queue<Task> mTasks = new ArrayDeque<>();
+  private final TaskQueue mTasks = new TaskQueue();
 
   private boolean mWorkerThreadIsBusy = false;
 
+  private Job mJob;
+
   private final Runnable mStopServiceWithDelay =
       new Runnable() {
+        @MainThread
         @Override
         public void run() {
-          VvmLog.d(TAG, "Stopping service");
+          VvmLog.i(TAG, "Stopping service");
+          finishJob();
           stopSelf();
         }
       };
+
   /** Should attempt to run the next task when a task has finished or been added. */
   private boolean mTaskAutoRunDisabledForTesting = false;
 
@@ -122,7 +149,7 @@ public class TaskSchedulerService extends Service {
       Assert.isNotMainThread();
       Task task = (Task) msg.obj;
       try {
-        VvmLog.v(TAG, "executing task " + task);
+        VvmLog.i(TAG, "executing task " + task);
         task.onExecuteInBackgroundThread();
       } catch (Throwable throwable) {
         VvmLog.e(TAG, "Exception while executing task " + task + ":", throwable);
@@ -157,10 +184,6 @@ public class TaskSchedulerService extends Service {
   @MainThread
   public void onCreate() {
     super.onCreate();
-    mWakeLock =
-        getSystemService(PowerManager.class)
-            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKE_LOCK_TAG);
-    mWakeLock.setReferenceCounted(false);
     HandlerThread thread = new HandlerThread("VvmTaskSchedulerService");
     thread.start();
 
@@ -171,27 +194,27 @@ public class TaskSchedulerService extends Service {
   @Override
   public void onDestroy() {
     mWorkerThreadHandler.getLooper().quit();
-    mWakeLock.release();
   }
 
   @Override
   @MainThread
   public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
     Assert.isMainThread();
-    // maybeRunNextTask() will release the wakelock either by entering a long sleep or stopping
-    // the service.
-    mWakeLock.acquire();
-    if (ACTION_WAKEUP.equals(intent.getAction())) {
-      VvmLog.d(TAG, "woke up by AlarmManager");
-    } else {
-      Task task = createTask(intent, flags, startId);
-      if (task == null) {
-        VvmLog.e(TAG, "cannot create task form intent");
-      } else {
-        addTask(task);
-      }
+    if (intent == null) {
+      VvmLog.w(TAG, "null intent received");
+      return START_NOT_STICKY;
     }
-    maybeRunNextTask();
+    Task task = Tasks.createTask(this, intent.getExtras());
+    Assert.isTrue(task != null);
+    addTask(task);
+
+    mMainThreadHandler.removeCallbacks(mStopServiceWithDelay);
+    VvmLog.i(TAG, "task added");
+    if (mJob == null) {
+      scheduleJob(0, true);
+    } else {
+      maybeRunNextTask();
+    }
     // STICKY means the service will be automatically restarted will the last intent if it is
     // killed.
     return START_NOT_STICKY;
@@ -201,66 +224,14 @@ public class TaskSchedulerService extends Service {
   @VisibleForTesting
   void addTask(Task task) {
     Assert.isMainThread();
-    if (task.getId().id == Task.TASK_INVALID) {
-      throw new AssertionError("Task id was not set to a valid value before adding.");
-    }
-    if (task.getId().id != Task.TASK_ALLOW_DUPLICATES) {
-      Task oldTask = getTask(task.getId());
-      if (oldTask != null) {
-        oldTask.onDuplicatedTaskAdded(task);
-        return;
-      }
-    }
-    mMainThreadHandler.removeCallbacks(mStopServiceWithDelay);
     getTasks().add(task);
-    maybeRunNextTask();
   }
 
   @MainThread
-  @Nullable
-  private Task getTask(TaskId taskId) {
-    Assert.isMainThread();
-    for (Task task : getTasks()) {
-      if (task.getId().equals(taskId)) {
-        return task;
-      }
-    }
-    return null;
-  }
-
-  @MainThread
-  private Queue<Task> getTasks() {
+  @VisibleForTesting
+  TaskQueue getTasks() {
     Assert.isMainThread();
     return mTasks;
-  }
-
-  /** Create an intent that will queue the <code>task</code> */
-  public static Intent createIntent(Context context, Class<? extends Task> task) {
-    Intent intent = new Intent(context, TaskSchedulerService.class);
-    intent.putExtra(EXTRA_CLASS_NAME, task.getName());
-    return intent;
-  }
-
-  @VisibleForTesting
-  @MainThread
-  @Nullable
-  Task createTask(@Nullable Intent intent, int flags, int startId) {
-    Assert.isMainThread();
-    if (intent == null) {
-      return null;
-    }
-    String className = intent.getStringExtra(EXTRA_CLASS_NAME);
-    VvmLog.d(TAG, "create task:" + className);
-    if (className == null) {
-      throw new IllegalArgumentException("EXTRA_CLASS_NAME expected");
-    }
-    try {
-      Task task = (Task) Class.forName(className).newInstance();
-      task.onCreate(mContext, intent, flags, startId);
-      return task;
-    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-      throw new IllegalArgumentException(e);
-    }
   }
 
   @MainThread
@@ -282,37 +253,31 @@ public class TaskSchedulerService extends Service {
   @MainThread
   void runNextTask() {
     Assert.isMainThread();
-    // The current alarm is no longer valid, a new one will be set up if required.
-    getSystemService(AlarmManager.class).cancel(getWakeupIntent());
     if (getTasks().isEmpty()) {
       prepareStop();
       return;
     }
-    Long minimalWaitTime = null;
-    for (Task task : getTasks()) {
-      long waitTime = task.getReadyInMilliSeconds();
-      if (waitTime < READY_TOLERANCE_MILLISECONDS) {
-        task.onBeforeExecute();
-        Message message = mWorkerThreadHandler.obtainMessage();
-        message.obj = task;
-        mWorkerThreadIsBusy = true;
-        mMessageSender.send(message);
-        return;
-      } else {
-        if (minimalWaitTime == null || waitTime < minimalWaitTime) {
-          minimalWaitTime = waitTime;
-        }
-      }
+    NextTask nextTask = getTasks().getNextTask(READY_TOLERANCE_MILLISECONDS);
+
+    if (nextTask.task != null) {
+      nextTask.task.onBeforeExecute();
+      Message message = mWorkerThreadHandler.obtainMessage();
+      message.obj = nextTask.task;
+      mWorkerThreadIsBusy = true;
+      mMessageSender.send(message);
+      return;
     }
-    VvmLog.d(TAG, "minimal wait time:" + minimalWaitTime);
-    if (!mTaskAutoRunDisabledForTesting && minimalWaitTime != null) {
+    VvmLog.i(TAG, "minimal wait time:" + nextTask.minimalWaitTimeMillis);
+    if (!mTaskAutoRunDisabledForTesting && nextTask.minimalWaitTimeMillis != null) {
       // No tasks are currently ready. Sleep until the next one should be.
       // If a new task is added during the sleep the service will wake immediately.
-      sleep(minimalWaitTime);
+      sleep(nextTask.minimalWaitTimeMillis);
     }
   }
 
+  @MainThread
   private void sleep(long timeMillis) {
+    VvmLog.i(TAG, "sleep for " + timeMillis + " millis");
     if (timeMillis < SHORT_SLEEP_THRESHOLD_MILLISECONDS) {
       mMainThreadHandler.postDelayed(
           new Runnable() {
@@ -324,44 +289,29 @@ public class TaskSchedulerService extends Service {
           timeMillis);
       return;
     }
-
-    // Tasks does not have a strict timing requirement, use AlarmManager.set() so the OS could
-    // optimize the battery usage. As this service currently run in the telephony process the
-    // OS give it privileges to behave the same as setExact(), but set() is the targeted
-    // behavior once this is unbundled.
-    getSystemService(AlarmManager.class)
-        .set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + timeMillis,
-            getWakeupIntent());
-    mWakeLock.release();
-    VvmLog.d(TAG, "Long sleep for " + timeMillis + " millis");
+    finishJob();
+    mMainThreadHandler.post(() -> scheduleJob(timeMillis, false));
   }
 
-  private PendingIntent getWakeupIntent() {
-    Intent intent = new Intent(ACTION_WAKEUP, null, this, getClass());
-    return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+  private List<Bundle> serializePendingTasks() {
+    return getTasks().toBundles();
   }
 
   private void prepareStop() {
-    VvmLog.d(
+    VvmLog.i(
         TAG,
-        "No more tasks, stopping service if no task are added in "
+        "no more tasks, stopping service if no task are added in "
             + STOP_DELAY_MILLISECONDS
             + " millis");
     mMainThreadHandler.postDelayed(mStopServiceWithDelay, STOP_DELAY_MILLISECONDS);
   }
 
+  @NeededForTesting
   static class MessageSender {
 
     public void send(Message message) {
       message.sendToTarget();
     }
-  }
-
-  @NeededForTesting
-  void setContextForTest(Context context) {
-    mContext = context;
   }
 
   @NeededForTesting
@@ -374,15 +324,65 @@ public class TaskSchedulerService extends Service {
     mMessageSender = sender;
   }
 
-  @NeededForTesting
-  void clearTasksForTest() {
+  /**
+   * The {@link TaskSchedulerJobService} has started and all queued task should be executed in the
+   * worker thread.
+   */
+  @MainThread
+  public void onStartJob(Job job, List<Bundle> pendingTasks) {
+    VvmLog.i(TAG, "onStartJob");
+    mJob = job;
+    mTasks.fromBundles(this, pendingTasks);
+    maybeRunNextTask();
+  }
+
+  /**
+   * The {@link TaskSchedulerJobService} is being terminated by the system (timeout or network
+   * lost). A new job will be queued to resume all pending tasks. The current unfinished job may be
+   * ran again.
+   */
+  @MainThread
+  public void onStopJob() {
+    VvmLog.e(TAG, "onStopJob");
+    if (isJobRunning()) {
+      finishJob();
+      mMainThreadHandler.post(() -> scheduleJob(0, true));
+    }
+  }
+
+  /**
+   * Serializes all pending tasks and schedule a new {@link TaskSchedulerJobService}.
+   *
+   * @param delayMillis the delay before stating the job, see {@link
+   *     android.app.job.JobInfo.Builder#setMinimumLatency(long)}. This must be 0 if {@code
+   *     isNewJob} is true.
+   * @param isNewJob a new job will be requested to run immediately, bypassing all requirements.
+   */
+  @MainThread
+  private void scheduleJob(long delayMillis, boolean isNewJob) {
+    Assert.isMainThread();
+    TaskSchedulerJobService.scheduleJob(this, serializePendingTasks(), delayMillis, isNewJob);
     mTasks.clear();
+  }
+
+  /**
+   * Signals {@link TaskSchedulerJobService} the current session of tasks has finished, and the wake
+   * lock can be released. Note: this only takes effect after the main thread has been returned. If
+   * a new job need to be scheduled, it should be posted on the main thread handler instead of
+   * calling directly.
+   */
+  @MainThread
+  private void finishJob() {
+    Assert.isMainThread();
+    VvmLog.i(TAG, "finishing Job");
+    mJob.finish();
+    mJob = null;
   }
 
   @Override
   @Nullable
   public IBinder onBind(Intent intent) {
-    return new LocalBinder();
+    return mBinder;
   }
 
   @NeededForTesting
@@ -392,5 +392,9 @@ public class TaskSchedulerService extends Service {
     public TaskSchedulerService getService() {
       return TaskSchedulerService.this;
     }
+  }
+
+  private boolean isJobRunning() {
+    return mJob != null;
   }
 }
