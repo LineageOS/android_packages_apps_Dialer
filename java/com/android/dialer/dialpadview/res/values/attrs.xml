@@ -35,5 +35,6 @@
     <attr format="color" name="dialpad_icon_tint"/>
     <attr format="color" name="dialpad_voicemail_tint"/>
     <attr format="color" name="dialpad_background"/>
+    <attr format="dimension" name="dialpad_elevation"/>
   </declare-styleable>
 </resources>

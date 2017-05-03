@@ -33,7 +33,7 @@ public interface DialerExecutor<InputT> {
   interface Worker<InputT, OutputT> {
     @WorkerThread
     @Nullable
-    OutputT doInBackground(@Nullable InputT input);
+    OutputT doInBackground(@Nullable InputT input) throws Throwable;
   }
 
   /** Functional interface for handling the result of background work. */

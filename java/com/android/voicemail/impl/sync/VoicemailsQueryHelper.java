@@ -25,7 +25,9 @@ import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.Voicemail;
 import java.util.ArrayList;
@@ -52,6 +54,12 @@ public class VoicemailsQueryHelper {
       Voicemails.DIRTY + "=1 AND " + Voicemails.DELETED + "!=1 AND " + Voicemails.IS_READ + "=1";
   static final String DELETED_SELECTION = Voicemails.DELETED + "=1";
   static final String ARCHIVED_SELECTION = Voicemails.ARCHIVED + "=0";
+  private static final String PHONE_ACCOUNT_HANDLE_SELECTION =
+      "("
+          + Voicemails.PHONE_ACCOUNT_COMPONENT_NAME
+          + "=? AND "
+          + Voicemails.PHONE_ACCOUNT_ID
+          + "=?)";
 
   private Context mContext;
   private ContentResolver mContentResolver;
@@ -68,8 +76,8 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of read voicemails.
    */
-  public List<Voicemail> getReadVoicemails() {
-    return getLocalVoicemails(READ_SELECTION);
+  public List<Voicemail> getReadVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, READ_SELECTION);
   }
 
   /**
@@ -77,8 +85,8 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of deleted voicemails.
    */
-  public List<Voicemail> getDeletedVoicemails() {
-    return getLocalVoicemails(DELETED_SELECTION);
+  public List<Voicemail> getDeletedVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, DELETED_SELECTION);
   }
 
   /**
@@ -86,8 +94,8 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of all locally stored voicemails.
    */
-  public List<Voicemail> getAllVoicemails() {
-    return getLocalVoicemails(null);
+  public List<Voicemail> getAllVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, null);
   }
 
   /**
@@ -96,8 +104,20 @@ public class VoicemailsQueryHelper {
    * @param selection A filter declaring which rows to return. {@code null} returns all rows.
    * @return A list of voicemails according to the selection statement.
    */
-  private List<Voicemail> getLocalVoicemails(String selection) {
-    Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, null, null);
+  private List<Voicemail> getLocalVoicemails(
+      @NonNull PhoneAccountHandle phoneAccountHandle, String selection) {
+
+    String[] selectionArgs =
+        new String[] {
+          phoneAccountHandle.getComponentName().flattenToString(), phoneAccountHandle.getId()
+        };
+    if (TextUtils.isEmpty(selection)) {
+      selection = PHONE_ACCOUNT_HANDLE_SELECTION;
+    } else {
+      selection = PHONE_ACCOUNT_HANDLE_SELECTION + " AND (" + selection + ")";
+    }
+
+    Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, selectionArgs, null);
     if (cursor == null) {
       return null;
     }

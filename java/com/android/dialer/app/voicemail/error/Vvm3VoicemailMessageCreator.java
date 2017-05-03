@@ -37,8 +37,10 @@ import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 import java.util.Locale;
 
 /**
@@ -379,7 +381,12 @@ public class Vvm3VoicemailMessageCreator {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINED);
-            TelephonyManagerCompat.setVisualVoicemailEnabled(telephonyManager, handle, false);
+            VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
+            if (voicemailClient.isVoicemailModuleEnabled()) {
+              voicemailClient.setVoicemailEnabled(context, status.getPhoneAccountHandle(), false);
+            } else {
+              TelephonyManagerCompat.setVisualVoicemailEnabled(telephonyManager, handle, false);
+            }
           }
         });
 

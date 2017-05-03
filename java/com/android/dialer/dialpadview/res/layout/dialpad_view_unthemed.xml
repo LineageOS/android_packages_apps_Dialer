@@ -21,6 +21,7 @@
   android:layout_gravity="bottom"
   android:background="?attr/dialpad_background"
   android:clickable="true"
+  android:elevation="?attr/dialpad_elevation"
   android:layoutDirection="ltr"
   android:orientation="vertical">
 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
+    <string name="inCallLabel" msgid="8627766543550519912">"InCallUI"</string>
+    <string name="confCall" msgid="36560628097626181">"Konferencijski poziv"</string>
+    <string name="call_lost" msgid="2082971531689406145">"Poziv je prekinut"</string>
+    <string name="wait_prompt_str" msgid="3509685348904329594">"Želite li da pošaljete sledeće tonove?\n"</string>
+    <string name="pause_prompt_str" msgid="5712344742516488080">"Tonovi slanja\n"</string>
+    <string name="send_button" msgid="6976782353456252579">"Pošalji"</string>
+    <string name="pause_prompt_yes" msgid="4642047011233552973">"Da"</string>
+    <string name="pause_prompt_no" msgid="4691320111774935838">"Ne"</string>
+    <string name="wild_prompt_str" msgid="1399377741491574104">"Zamenite džoker znak sa"</string>
+    <string name="caller_manage_header" msgid="7358710345135355578">"Konferencijski poziv <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Broj govorne pošte"</string>
+    <string name="notification_dialing" msgid="9072177265772083826">"Poziva se"</string>
+    <string name="notification_missedCallTicker" msgid="238492086972857643">"Propušten poziv od: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Aktuelni poziv"</string>
+    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Tekući poziv za Work"</string>
+    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Tekući Wi-Fi poziv"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Tekući poziv za Work preko Wi-Fi-ja"</string>
+    <string name="notification_on_hold" msgid="7141827443379205682">"Na čekanju"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Dolazni poziv"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Dolazni poziv sa slikom"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Dolazni poziv sa porukom"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Dolazni poziv sa lokacijom"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Dolazni poziv sa slikom i porukom"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Dolazni poziv sa slikom i lokacijom"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Dolazni poziv sa porukom i lokacijom"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Dolazni poziv sa slikom, porukom i lokacijom"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Dolazni poziv sa prilozima"</string>
+    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Važan dolazni poziv"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Važan dolazni poziv sa slikom"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Važan dolazni poziv sa porukom"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Važan dolazni poziv sa lokacijom"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Važan dolazni poziv sa slikom i porukom"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Važan dolazni poziv sa slikom i lokacijom"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Važan dolazni poziv sa porukom i lokacijom"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Važan dolazni poziv sa slikom, porukom i lokacijom"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Važan dolazni poziv sa prilozima"</string>
+    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Dolazni poziv za Work"</string>
+    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Dolazni Wi-Fi poziv"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Dolazni poziv za Work preko Wi-Fi-ja"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Sumnja na nepoželjan dolazni poziv"</string>
+    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Zahtev za dolazni video poziv"</string>
+    <string name="notification_network_selection_title" msgid="8639159088474275747">"Nema usluge"</string>
+    <string name="notification_network_selection_text" msgid="7190860774239009625">"Izabrana mreža (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nije dostupna"</string>
+    <string name="notification_action_answer" msgid="8748275902211192568">"Odgovori"</string>
+    <string name="notification_action_end_call" msgid="7467258454170007765">"Prekini vezu"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
+    <string name="notification_action_answer_voice" msgid="6237890905749760509">"Glasovni"</string>
+    <string name="notification_action_accept" msgid="1272761514200507143">"Prihvati"</string>
+    <string name="notification_action_dismiss" msgid="3128241581632616226">"Odbij"</string>
+    <string name="notification_external_call" msgid="2504334597315343920">"Poziv je u toku na drugom uređaju"</string>
+    <string name="notification_external_video_call" msgid="7709394856028436683">"Video poziv je u toku na drugom uređaju"</string>
+    <string name="notification_take_call" msgid="5631659438864492229">"Preuzmi poziv"</string>
+    <string name="notification_take_video_call" msgid="4473387503712341390">"Preuzmi video poziv"</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Da biste uputili poziv, prvo isključite režim rada u avionu."</string>
+    <string name="incall_error_emergency_only" msgid="8313690034696753566">"Nije registrovano na mreži."</string>
+    <string name="incall_error_out_of_service" msgid="539611768312332950">"Mobilna mreža nije dostupna."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Da biste uputili poziv, unesite važeći broj."</string>
+    <string name="incall_error_call_failed" msgid="5560521345862514733">"Poziv nije uspeo."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Pokretanje MMI sekvence"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Usluga nije podržana."</string>
+    <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Zamena poziva nije uspela."</string>
+    <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Razdvajanje poziva nije uspelo."</string>
+    <string name="incall_error_supp_service_transfer" msgid="556522021433482116">"Prebacivanje nije uspelo."</string>
+    <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Konferencijski poziv nije uspeo."</string>
+    <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Odbijanje poziva nije uspelo."</string>
+    <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Uspostavljanje poziva nije uspelo."</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Hitan poziv"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Uključivanje radija…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Nema mreže. Ponovni pokušaj…"</string>
+    <string name="dial_emergency_error" msgid="6953255422990366011">"Poziv nije uspeo. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nije broj za hitne slučajeve."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"Poziv nije uspeo. Pozovite broj za hitne slučajeve."</string>
+    <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Koristite tastaturu za pozivanje"</string>
+    <string name="player_started" msgid="9177182657338033086">"Plejer je pokrenut"</string>
+    <string name="player_stopped" msgid="5040965200339765956">"Plejer je zaustavljen"</string>
+    <string name="camera_not_ready" msgid="3629017450703828964">"Kamera nije spremna"</string>
+    <string name="camera_ready" msgid="4312684554501216898">"Kamera je spremna"</string>
+    <string name="unknown_call_session_event" msgid="797786212356595358">"Nepoznat događaj sesije poziva"</string>
+    <string name="other_settings" msgid="2537377721890761197">"Druga podešavanja poziva"</string>
+    <string name="goPrivate" msgid="5269514638004595378">"idi na privatno"</string>
+    <string name="selectContact" msgid="1703433172800564849">"izaberite kontakt"</string>
+    <string name="preference_category_ringtone" msgid="8566115267004890115">"Melodija zvona i vibracija"</string>
+    <string name="manageConferenceLabel" msgid="3589379023518128318">"Upravljaj konferencijskim pozivom"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Broj za hitne slučajeve"</string>
+    <string name="child_number" msgid="3398257437107259682">"na <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="person_contact_context_title" msgid="9186980175313563725">"Nedavne poruke"</string>
+    <string name="business_contact_context_title" msgid="4796616668776688978">"Informacije o preduzeću"</string>
+    <string name="distance_imperial_away" msgid="66546464027126106">"Udaljenost je <xliff:g id="DISTANCE">%.1f</xliff:g> mi"</string>
+    <string name="distance_metric_away" msgid="4535553190850854545">"Udaljenost je <xliff:g id="DISTANCE">%.1f</xliff:g> km"</string>
+    <string name="display_address" msgid="2909385132133621873">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="3333746415188434992">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="2908934145495754020">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="2896787795283597856">"Otvara se sutra u <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="4701005560156621184">"Otvara se danas u <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2668928851103904896">"Zatvara se u <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4203311397205549440">"Zatvorilo se danas u <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="5897306702060039512">"Trenutno otvoreno"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Trenutno zatvoreno"</string>
+    <string name="non_spam_notification_title" msgid="3290544768406546372">"Poznat vam je broj <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="2439276063775520534">"Da li je <xliff:g id="NUMBER">%1$s</xliff:g> nepoželjan?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"Blokirali ste <xliff:g id="NUMBER">%1$s</xliff:g>, a poziv ste prijavili kao nepoželjan."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="8321993839027073785">"Prijavili ste da poziv sa <xliff:g id="NUMBER">%1$s</xliff:g> nije nepoželjan."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="6482092382445364016">"Dodirnite da biste dodali kontakte ili blokirali nepoželjan broj."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="3598209932872915536">"Prvi put ste primili poziv sa ovog broja. Ako je nepoželjan, možete da ga blokirate i prijavite."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"Dodirnite da biste prijavili da poziv NIJE NEPOŽELJAN ili blokirajte broj."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Sumnjamo da je ovaj poziv nepoželjan. Ako nije, dodirnite NIJE NEPOŽELJNO da biste prijavili grešku."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Blokiraj i prijavi"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Dodaj kontakt"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Nije nepoželjan"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Blokiraj broj"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Dodaj u kontakte"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Blokiraj i prijavi nepoželjan poziv"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Nije nepoželjan"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Nema SIM kartice ili postoji greška na njoj"</string>
+    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Završite poziv"</string>
+    <string name="conference_call_name" msgid="8189987124611337174">"Konferencijski poziv"</string>
+    <string name="generic_conference_call_name" msgid="1546941472424243894">"U pozivu"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Poziv se nastavlja pomoću mobilnih podataka…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Prebacivanje na Wi-Fi mrežu nije uspelo"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Video poziv će ostati na mobilnoj mreži. Mogu da važe standardne naknade za prenos podataka."</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne prikazuj ovo ponovo"</string>
+</resources>

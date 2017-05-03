@@ -1,0 +1,38 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+message ContactSource {
+  // Applies only to reports made from call history. If we have contact
+  // information for the phone number, this field indicates its source.
+  // Note that it represents the contact's status on the user's device at the
+  // time they made the spam report, which could be different from the
+  // number's status at the time they made or received the call.
+  // Type definitions are from the CachedContactInfo interface in
+  // google3/java/com/android/dialer/phonenumbercache/CachedNumberLookupService.java
+  enum Type {
+    UNKNOWN_SOURCE_TYPE = 0;
+
+    // Personal contact
+    SOURCE_TYPE_DIRECTORY = 1;
+
+    // Contact from a custom extended directory
+    SOURCE_TYPE_EXTENDED = 2;
+
+    // Business number found via the People API
+    SOURCE_TYPE_PLACES = 3;
+
+    // Non-business number found via the People API
+    SOURCE_TYPE_PROFILE = 4;
+
+    // Number has Caller Name Presentation (CNAP) information. Calls in this
+    // category would have had ContactLookupResultType NOT_FOUND originally.
+    SOURCE_TYPE_CNAP = 5;
+
+    SOURCE_TYPE_CEQUINT_CALLER_ID = 6;
+  }
+}

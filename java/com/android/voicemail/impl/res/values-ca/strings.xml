@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Configuració avançada"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Bústia de veu visual"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Còpia de seguretat addicional i emmagatz."</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Aquesta funció està en mode de prova"</i></b>" i és possible que suprimeixi els missatges de veu del servidor de la bústia. No podem garantir-ne la continuïtat en el futur. De tota manera, ens agradaria saber què en penses."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Defineix el PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Canvia el PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"La bústia de veu visual ha d\'estar activada per poder canviar el PIN"</string>

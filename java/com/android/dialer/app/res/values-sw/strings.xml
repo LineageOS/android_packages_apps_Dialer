@@ -42,6 +42,10 @@
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Mpigie"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"Ujumbe"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
+    <!-- no translation found for notification_voicemail_text_format (1895667520930252897) -->
+    <skip />
+    <!-- no translation found for notification_voicemail_no_vm_number (8942821987929495842) -->
+    <skip />
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other">Ujumbe <xliff:g id="COUNT">%1$d</xliff:g> wa sauti </item>
       <item quantity="one">Ujumbe wa sauti</item>
@@ -97,6 +101,12 @@
     <string name="voicemail" msgid="8899540969000957954">"Ujumbe wa sauti"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"Sekunde <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"Dak <xliff:g id="MINUTES">%s</xliff:g> sek <xliff:g id="SECONDS">%s</xliff:g>"</string>
+    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"ujumbe wa sauti"</string>
+    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ujumbe wa sauti"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Ndiyo"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Hapana"</string>
+    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
+    <skip />
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> saa <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

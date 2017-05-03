@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"ਉੱਨਤ ਸੈਟਿੰਗਾਂ"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"ਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"ਵਾਧੂ ਬੈਕਅੱਪ ਅਤੇ ਸਟੋਰੇਜ"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"ਇਹ ਇੱਕ ਪ੍ਰਯੋਗਾਤਮਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੈ"</i></b>" ਜਿਸਦੀ ਅਸੀਂ ਇਸ ਵੇਲੇ ਜਾਂਚ ਕਰ ਰਹੇ ਹਾਂ। ਇਹ ਸੰਭਾਵੀ ਤੌਰ \'ਤੇ ਤੁਹਾਡੇ ਵੌਇਸਮੇਲ ਸਰਵਰ ਤੋਂ ਵੌਇਸਮੇਲਾਂ ਨੂੰ ਮਿਟਾ ਦੇਵੇਗੀ। ਭਵਿੱਖ ਵਿੱਚ ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਦਾ ਸਮਰਥਨ ਕਰਨ ਦੀਆਂ ਕੋਈ ਗਾਰੰਟੀਆਂ ਨਹੀਂ ਹਨ। ਅਸੀਂ ਹਾਲਾਂਕਿ ਵਿਸ਼ੇਸ਼ਤਾ \'ਤੇ ਪ੍ਰਤੀਕਰਮ ਨੂੰ ਪਸੰਦ ਕਰਾਂਗੇ।"</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN ਸੈੱਟ ਕਰੋ"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN ਬਦਲੋ"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"ਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ ਨੂੰ PIN ਬਦਲਣ ਲਈ ਯੋਗ ਬਣਾਇਆ ਜਾਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>

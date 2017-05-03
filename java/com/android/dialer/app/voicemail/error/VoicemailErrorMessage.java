@@ -27,8 +27,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.CallUtil;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -191,8 +191,9 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createTurnArchiveOnAction(
       final Context context,
-      int impressionToLog,
+      DialerImpression.Type impressionToLog,
       final VoicemailStatus status,
+      VoicemailStatusReader statusReader,
       VoicemailClient voicemailClient,
       PhoneAccountHandle phoneAccountHandle) {
     return new Action(
@@ -209,6 +210,7 @@ public class VoicemailErrorMessage {
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);
+            statusReader.refresh();
           }
         });
   }
@@ -216,7 +218,7 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createDismissTurnArchiveOnAction(
       final Context context,
-      int impressionToLog,
+      DialerImpression.Type impressionToLog,
       VoicemailStatusReader statusReader,
       PerAccountSharedPreferences sharedPreferenceForAccount,
       String preferenceKeyToUpdate) {

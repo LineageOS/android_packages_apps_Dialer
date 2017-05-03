@@ -25,6 +25,7 @@ import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.james.mime4j.MimeException;
 
 public class ImapStore {
   /**
@@ -112,7 +113,7 @@ public class ImapStore {
     }
 
     @Override
-    public void parse(InputStream in) throws IOException, MessagingException {
+    public void parse(InputStream in) throws IOException, MessagingException, MimeException {
       super.parse(in);
     }
 

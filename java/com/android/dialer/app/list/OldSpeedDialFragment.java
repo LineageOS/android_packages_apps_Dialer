@@ -51,8 +51,8 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.app.R;
 import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.callintent.nano.CallInitiationType;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
@@ -462,8 +462,10 @@ public class OldSpeedDialFragment extends Fragment
     @Override
     public void onContactSelected(Uri contactUri, Rect targetRect) {
       if (mPhoneNumberPickerActionListener != null) {
-        CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-        callSpecificAppData.callInitiationType = CallInitiationType.Type.SPEED_DIAL;
+        CallSpecificAppData callSpecificAppData =
+            CallSpecificAppData.newBuilder()
+                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
+                .build();
         mPhoneNumberPickerActionListener.onPickDataUri(
             contactUri, false /* isVideoCall */, callSpecificAppData);
       }
@@ -472,8 +474,10 @@ public class OldSpeedDialFragment extends Fragment
     @Override
     public void onCallNumberDirectly(String phoneNumber) {
       if (mPhoneNumberPickerActionListener != null) {
-        CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-        callSpecificAppData.callInitiationType = CallInitiationType.Type.SPEED_DIAL;
+        CallSpecificAppData callSpecificAppData =
+            CallSpecificAppData.newBuilder()
+                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
+                .build();
         mPhoneNumberPickerActionListener.onPickPhoneNumber(
             phoneNumber, false /* isVideoCall */, callSpecificAppData);
       }

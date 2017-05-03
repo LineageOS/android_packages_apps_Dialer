@@ -20,6 +20,7 @@
   <dimen name="textview_item_padding">16dp</dimen>
   <dimen name="message_remaining_char_text_size">12sp</dimen>
   <dimen name="message_divider_height">1dp</dimen>
+  <dimen name="send_container_width">48dp</dimen>
 
   <dimen name="toolbar_title_text_size">20sp</dimen>
   <dimen name="toolbar_title_small_text_size">14sp</dimen>

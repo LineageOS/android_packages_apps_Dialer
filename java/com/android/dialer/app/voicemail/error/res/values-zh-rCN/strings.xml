@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"如果收件箱已满，您将无法接收新的语音邮件。"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"无法接收新的语音邮件"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"您的收件箱已满。请尝试删除部分邮件，以便接收新的语音邮件。"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[试验性功能] 启用额外存储空间和备份功能"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"您的邮箱已满。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"<b><i>"此功能目前正处于测试阶段"</i></b>"并且可能会将语音邮件从您的语音邮件服务器上删除。我们不保证将来会支持此功能，但希望能收到您的反馈。"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[试验性功能] 启用额外存储空间和备份功能"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"您的邮箱已满。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"<b><i>"此功能目前正处于测试阶段"</i></b>"并且可能会将语音邮件从您的语音邮件服务器上删除。我们不保证将来会支持此功能，但希望能收到您的反馈。"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"启用额外存储空间和备份功能"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"您的邮箱已满。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"启用额外存储空间和备份功能"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"您的邮箱快满了。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"设置语音信箱 PIN 码"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"您必须使用语音信箱 PIN 码，才能访问您的语音信箱。"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"未知错误"</string>

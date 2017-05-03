@@ -16,7 +16,7 @@
 
 package com.android.voicemail.impl.scheduling;
 
-import android.content.Intent;
+import android.os.Bundle;
 import com.android.voicemail.impl.VvmLog;
 
 /**
@@ -37,7 +37,7 @@ public class PostponePolicy implements Policy {
   }
 
   @Override
-  public void onCreate(BaseTask task, Intent intent, int flags, int startId) {
+  public void onCreate(BaseTask task, Bundle extras) {
     mTask = task;
     mTask.setExecutionTime(mTask.getTimeMillis() + mPostponeMillis);
   }
@@ -62,7 +62,7 @@ public class PostponePolicy implements Policy {
     if (mTask.hasStarted()) {
       return;
     }
-    VvmLog.d(TAG, "postponing " + mTask);
+    VvmLog.i(TAG, "postponing " + mTask);
     mTask.setExecutionTime(mTask.getTimeMillis() + mPostponeMillis);
   }
 }

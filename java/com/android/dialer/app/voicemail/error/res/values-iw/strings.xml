@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"אם תיבת הדואר הנכנס מלאה, לא תוכל לקבל דואר קולי חדש."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"לא ניתן לקבל הודעות חדשות בדואר הקולי"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"תיבת הדואר הנכנס מלאה. נסה למחוק חלק מההודעות כדי שתוכל לקבל דואר קולי חדש."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[תכונה ניסיונית] הפעל את הגיבוי ופינוי המקום"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"‏תיבת הדואר שלך מלאה. הפעל את התכונה \'גיבוי ופינוי מקום\' כדי ש-Google תוכל לנהל ולגבות את ההודעות הקוליות שלך. "<b><i>"זוהי תכונה ניסיונית"</i></b>" שאנחנו בודקים כרגע. היא עלולה למחוק הודעות קוליות מתא הדואר הקולי שלך בשרת. אנחנו לא מתחייבים שהתכונה תהיה זמינה בעתיד, אך נשמח לקבל עליה משוב."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[תכונה ניסיונית] הפעל את הגיבוי ופינוי המקום"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"‏תיבת הדואר שלך כמעט מלאה. הפעל את התכונה \'גיבוי ופינוי מקום\' כדי ש-Google תוכל לנהל ולגבות את ההודעות הקוליות שלך. "<b><i>"זוהי תכונה ניסיונית"</i></b>" שאנחנו בודקים כרגע. היא עלולה למחוק הודעות קוליות מתא הדואר הקולי שלך בשרת. אנחנו לא מתחייבים שהתכונה תהיה זמינה בעתיד, אך נשמח לקבל עליה משוב."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"הפעל את הגיבוי ופינוי המקום"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"‏תיבת הדואר שלך מלאה. הפעל את הגיבוי ופינוי המקום כדי ש-Google תוכל לנהל ולגבות את ההודעות הקוליות שלך."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"הפעל את הגיבוי ופינוי המקום"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"‏תיבת הדואר שלך כמעט מלאה. הפעל את הגיבוי ופינוי המקום כדי ש-Google תוכל לנהל ולגבות את ההודעות הקוליות שלך."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"הגדר קוד גישה לדואר הקולי"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"בכל פעם שתשתמש בדואר הקולי תצטרך את קוד הגישה."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"שגיאה לא ידועה"</string>

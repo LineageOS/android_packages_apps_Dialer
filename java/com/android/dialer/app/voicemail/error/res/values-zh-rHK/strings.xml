@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"如果您的收件箱已滿，就無法接收新留言。"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"無法接收新留言"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"您的收件箱已滿。建議您刪除部分訊息以接收新留言。"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[實驗性] 啟用額外儲存裝置和備份功能"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"您的信箱已滿。若要騰出空間，請啟用額外儲存空間，以便 Google 管理及備份您的留言訊息。"<b><i>"此功能目前處於測試階段，"</i></b>"有可能會將您的留言從留言伺服器刪除。我們不保證日後會支援此功能，但還是歡迎您提供相關意見。"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[實驗性] 啟用額外儲存裝置和備份功能"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"您的信箱將滿。若要騰出空間，請啟用額外儲存空間，以便 Google 管理及備份您的留言訊息。"<b><i>"此功能目前處於測試階段，"</i></b>"有可能會將您的留言從留言伺服器刪除。我們不保證日後會支援此功能，但還是歡迎您提供相關意見。"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"啟用額外儲存裝置和備份功能"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"您的信箱已滿。若要騰出空間，請啟用額外儲存裝置，以便 Google 管理並備份您的留言訊息。"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"啟用額外儲存裝置和備份功能"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"您的信箱快要滿了。若要騰出空間，請啟用額外儲存裝置，以便 Google 管理並備份您的留言訊息。"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"設定留言信箱 PIN"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"您必須輸入留言信箱 PIN 才可收聽留言。"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"不明錯誤"</string>

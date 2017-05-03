@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"ທ່ານຈະບໍ່ສາມາດຮັບຂໍ້ຄວາມສຽງໃໝ່ໄດ້ຫາກອິນບັອກຂອງທ່ານເຕັມ."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"ບໍ່ສາມາດຮັບຂໍ້ຄວາມສຽງໃໝ່"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"ອິນບັອກຂອງທ່ານເຕັມແລ້ວ. ໃຫ້ລອງລຶບບາງຂໍ້ຄວາມອອກເພື່ອຮັບຂໍ້ຄວາມສຽງໃໝ່."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[ການທົດລອງ] ການສຳຮອງ ແລະ ບ່ອນຈັດເກັບຂໍ້ມູນພິເສດ"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"Your mailbox is full. To free up space, turn on extra storage so Google can manage and backup your voicemail messages. "<b><i>"This feature is currently being tested "</i></b>"and will potentially delete voicemails from your voicemail server, and we do not promise to support this feature in the future. We would love your feedback though."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[ການທົດລອງ] ການສຳຮອງ ແລະ ບ່ອນຈັດເກັບຂໍ້ມູນພິເສດ"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"ກ່ອງອີເມວຂອງທ່ານເຕັມແລ້ວ. ເພື່ອສ້າງພື້ນທີ່ຫວ່າງ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນພິເສດເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້. "<b><i>"ຄຸນສົມບັດນີ້ກຳລັງຢູ່ໃນລະຫວ່າງການທົດສອບ "</i></b>"ແລະ ມັນອາດລຶບຂໍ້ຄວາມສຽງອອກຈາກເຊີບເວີຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້. ຈະບໍ່ມີການຮັບປະກັນການຊ່ວຍເຫຼືອຄຸນສົມບັດນີ້ໃນອະນາຄົດ. ຢ່າງໃດກໍຕາມພວກເຮົາຢາກຟັງຄຳຄິດເຫັນທີ່ມີຕໍ່ຄຸນສົມບັດດັ່ງກ່າວຈາກທ່ານ."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມ ແລະ ການສຳຮອງຂໍ້ມູນ"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"ກ່ອງອີເມວຂອງທ່ານເຕັມແລ້ວ. ເພື່ອເພີ່ມບ່ອນຈັດເກັບຂໍ້ມູນ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່າມເຕີມເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ມູນຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມ ແລະ ການສຳຮອງຂໍ້ມູນ"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ກ່ອງອີເມວຂອງທ່ານໃກ້ເຕັມແລ້ວ. ເພື່ອເພີ່ມບ່ອນຈັດເກັບຂໍ້ມູນ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່າມເຕີມເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ມູນຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"ຕັ້ງລະຫັດ PIN ຂໍ້ຄວາມສຽງຂອງທ່ານ"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ທ່ານຈະຕ້ອງໃຊ້ລະຫັດ PIN ໃນຕອນໃດກໍຕາມທີ່ທ່ານໂທເພື່ອເຂົ້າຟັງຂໍ້ຄວາມສຽງຂອງທ່ານ."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"ຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ"</string>

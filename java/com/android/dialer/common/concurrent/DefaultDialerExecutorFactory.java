@@ -28,9 +28,13 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import javax.inject.Inject;
 
 /** The production {@link DialerExecutorFactory}. */
 public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
+
+  @Inject
+  public DefaultDialerExecutorFactory() {}
 
   @Override
   @NonNull
@@ -116,14 +120,15 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
     @NonNull
     @Override
     public DialerExecutor<InputT> build() {
-      dialerUiTaskFragment = DialerUiTaskFragment.create(
-          fragmentManager,
-          id,
-          super.worker,
-          super.successListener,
-          super.failureListener,
-          serialExecutorService,
-          parallelExecutorService);
+      dialerUiTaskFragment =
+          DialerUiTaskFragment.create(
+              fragmentManager,
+              id,
+              super.worker,
+              super.successListener,
+              super.failureListener,
+              serialExecutorService,
+              parallelExecutorService);
       return new UiDialerExecutor<>(dialerUiTaskFragment);
     }
   }

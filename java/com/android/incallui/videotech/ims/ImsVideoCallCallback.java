@@ -24,6 +24,8 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.telecom.VideoProfile.CameraCapabilities;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.LoggingBindings;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.utils.SessionModificationState;
 
@@ -31,12 +33,18 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 public class ImsVideoCallCallback extends VideoCall.Callback {
   private static final int CLEAR_FAILED_REQUEST_TIMEOUT_MILLIS = 4000;
   private final Handler handler = new Handler();
+  private final LoggingBindings logger;
   private final Call call;
   private final ImsVideoTech videoTech;
   private final VideoTechListener listener;
   private int requestedVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
-  ImsVideoCallCallback(final Call call, ImsVideoTech videoTech, VideoTechListener listener) {
+  ImsVideoCallCallback(
+      final LoggingBindings logger,
+      final Call call,
+      ImsVideoTech videoTech,
+      VideoTechListener listener) {
+    this.logger = logger;
     this.call = call;
     this.videoTech = videoTech;
     this.listener = listener;
@@ -61,6 +69,7 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
       videoTech.setSessionModificationState(
           SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST);
       listener.onVideoUpgradeRequestReceived();
+      logger.logImpression(DialerImpression.Type.IMS_VIDEO_REQUEST_RECEIVED);
     }
   }
 
@@ -87,7 +96,10 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
       handler.removeCallbacksAndMessages(null); // Clear everything
 
       final int newSessionModificationState = getSessionModificationStateFromTelecomStatus(status);
-      if (status != VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
+      if (status == VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
+        // Telecom manages audio route for us
+        listener.onUpgradedToVideo(false /* switchToSpeaker */);
+      } else {
         // This will update the video UI to display the error message.
         videoTech.setSessionModificationState(newSessionModificationState);
       }

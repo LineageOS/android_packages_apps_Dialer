@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"新しいボイスメールを受信できません。受信トレイがいっぱいです。"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"新しいボイスメールを受信できません"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"受信トレイがいっぱいです。新しいボイスメールを受信するには、古いメッセージをいくつか削除してみてください。"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[試験運用機能] 追加の保存容量とバックアップを ON にしてください"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"メールボックスの容量が上限に達しました。空き容量を増やすには、追加の保存容量を ON にして、Google がボイスメールのメッセージの管理とバックアップを行えるようにしてください。"<b><i>"これは現在テスト中の機能"</i></b>"で、ボイスメール サーバーからボイスメールを削除することができます。今後この機能が正式にサポートされる保証はありませんが、フィードバックをお寄せいただければ幸いです。"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[試験運用機能] 追加の保存容量とバックアップを ON にしてください"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"メールボックスの保存容量がもう少しで上限に達します。空き容量を増やすには、追加の保存容量を ON にして、Google がボイスメールのメッセージの管理とバックアップを行えるようにしてください。"<b><i>"これは現在テスト中の機能"</i></b>"で、ボイスメール サーバーからボイスメールを削除することができます。今後この機能が正式にサポートされる保証はありませんが、フィードバックをお寄せいただければ幸いです。"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"追加の保存容量とバックアップを ON にしてください"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"メールボックスの保存容量が上限に達しました。空き容量を増やすには、追加の保存容量を ON にして、Google がボイスメールのメッセージの管理とバックアップを行えるようにしてください。"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"追加の保存容量とバックアップを ON にしてください"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"メールボックスの保存容量がもう少しで上限に達します。空き容量を増やすには、追加の保存容量を ON にして、Google がボイスメールのメッセージの管理とバックアップを行えるようにしてください。"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"ボイスメール PIN を設定"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ボイスメールを呼び出すには、ボイスメール PIN が必要です。"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"不明なエラー"</string>

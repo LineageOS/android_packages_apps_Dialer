@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"การตั้งค่าขั้นสูง"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"ภาพแสดงข้อความเสียง"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"การสำรองข้อมูลและพื้นที่เก็บข้อมูลเพิ่มเติม"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"นี่คือคุณลักษณะทดลอง"</i></b>"ที่เรากำลังทดสอบการใช้งานอยู่ ซึ่งอาจลบข้อความเสียงออกจากเซิร์ฟเวอร์ข้อความเสียงได้ เราไม่รับประกันว่าจะรองรับคุณลักษณะนี้ในอนาคต แต่ยินดีรับฟังความคิดเห็น"</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"ตั้งค่า PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"เปลี่ยน PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"ต้องเปิดใช้ข้อความเสียงพร้อมภาพเพื่อเปลี่ยน PIN"</string>

@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.backup";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+package com.android.dialer.backup;
+
+// Next id: 20
+message VoicemailInfo {
+  optional string date = 1;
+  optional string deleted = 2;
+  optional string dirty = 3;
+  optional string dir_type = 4;
+  optional string duration = 5;
+  optional string has_content = 6;
+  optional string is_read = 7;
+  optional string item_type = 8;
+  optional string last_modified = 9;
+  optional string mime_type = 10;
+  optional string number = 11;
+  optional string phone_account_component_name = 12;
+  optional string phone_account_id = 13;
+  optional string source_data = 14;
+  optional string source_package = 15;
+  optional string transcription = 16;
+  optional string voicemail_uri = 17;
+  optional bytes encoded_voicemail_key = 18;
+  optional string archived = 19;
+}

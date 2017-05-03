@@ -41,7 +41,9 @@
       android:paddingTop="18dp"
       android:fadingEdge="none"
       android:fastScrollEnabled="true"
-      android:nestedScrollingEnabled="true"/>
+      android:nestedScrollingEnabled="true"
+      android:cropToPadding="false"
+      android:clipToPadding="false"/>
 
     <com.android.dialer.app.widget.EmptyContentView
       android:id="@+id/empty_list_view"

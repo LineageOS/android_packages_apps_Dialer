@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"لن تتمكن من تلقي بريد صوتي جديد إذا امتلأ بريدك الوارد."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"يتعذر تلقي رسائل بريد صوتي جديدة"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"بريدك الوارد ممتلئ. حاول حذف بعض الرسائل لتلقي رسائل بريد صوتي جديدة."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[ميزة تجريبية] تشغيل سعة التخزين الإضافية والنسخ الاحتياطي"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"‏صندوق بريدك ممتلئ. للحصول على بعض المساحة، يمكنك تشغيل سعة التخزين الإضافية حتى يمكن لحساب Google إدارة رسائل البريد الصوتي ونسخها احتياطيًا. "<b><i>"هذه الميزة قيد الاختبار حاليًا "</i></b>" وقد تؤدي إلى حذف رسائل البريد الصوتي من خادم البريد الصوتي، ونحن لا نعد بدعم هذه الميزة في المستقبل. إلا أننا نود الحصول على تعليقات منك."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[ميزة تجريبية] تشغيل سعة التخزين الإضافية والنسخ الاحتياطي"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"‏صندوق بريدك ممتلئ تقريبًا. للحصول على بعض المساحة، يمكنك تشغيل سعة التخزين الإضافية حتى يمكن لحساب Google إدارة رسائل البريد الصوتي ونسخها احتياطيًا. "<b><i>"هذه الميزة قيد الاختبار حاليًا "</i></b>"وقد تؤدي إلى حذف رسائل البريد الصوتي من خادم البريد الصوتي، ونحن لا نعد بدعم هذه الميزة في المستقبل. إلا أننا نود الحصول على تعليقات منك."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"تشغيل سعة التخزين الإضافية والنسخ الاحتياطي"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"‏صندوق بريدك ممتلئ. للحصول على بعض المساحة، ينبغي تشغيل سعة التخزين الإضافية حتى يتمكن Google من إدارة رسائل البريد الصوتي ونسخها احتياطيًا."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"تشغيل سعة التخزين الإضافية والنسخ الاحتياطي"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"‏صندوق بريدك ممتلئ. للحصول على بعض المساحة، ينبغي تشغيل سعة التخزين الإضافية حتى يتمكن Google من إدارة رسائل البريد الصوتي ونسخها احتياطيًا."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"إعداد رقم التعريف الشخصي للبريد الصوتي"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ستحتاج رقم تعريف شخصي للبريد الصوتي في كل مرة تتصل فيها للوصول إلى بريدك الصوتي."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"حدث خطأ غير معروف"</string>

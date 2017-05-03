@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Papasok na tawag sa trabaho sa pamamagitan ng Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Papasok na pinaghihinalaang spam na tawag"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Papasok na kahilingan ng video"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"Bagong voicemail"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Bagong voicemail (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"I-dial ang <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Hindi kilala ang numero ng voicemail"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Walang serbisyo"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Hindi available ang mga piniling network (<xliff:g id="OPERATOR_NAME">%s</xliff:g>)"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Sagutin"</string>

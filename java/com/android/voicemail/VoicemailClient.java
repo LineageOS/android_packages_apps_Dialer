@@ -39,10 +39,32 @@ public interface VoicemailClient {
    * android.content.Intent#ACTION_PROVIDER_CHANGED} will always be a self-change even if the UI is
    * external to the client.
    */
-  String ACTION_UPLOAD = "com.android.voicemailomtp.VoicemailClient.ACTION_UPLOAD";
+  String ACTION_UPLOAD = "com.android.voicemail.VoicemailClient.ACTION_UPLOAD";
 
   /** Common key for passing {@link PhoneAccountHandle} in bundles. */
   String PARAM_PHONE_ACCOUNT_HANDLE = "phone_account_handle";
+
+  /**
+   * Broadcast from the client to inform the app to show a legacy voicemail notification. This
+   * broadcast is same as {@link TelephonyManager#ACTION_SHOW_VOICEMAIL_NOTIFICATION}.
+   */
+  String ACTION_SHOW_LEGACY_VOICEMAIL =
+      "com.android.voicemail.VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL";
+
+  /**
+   * Whether the visual voicemail service is enabled for the {@code phoneAccountHandle}. "Enable"
+   * means the user "wants" to have this service on, and does not mean the service is actually
+   * functional(For example, the service is blocked on the carrier side. The service will be
+   * "enabled" but all it will do is show the error).
+   */
+  boolean isVoicemailEnabled(Context context, PhoneAccountHandle phoneAccountHandle);
+
+  /**
+   * Enable or disable visual voicemail service for the {@code phoneAccountHandle}. Setting to
+   * enabled will initiate provisioning and activation. Setting to disabled will initiate
+   * deactivation.
+   */
+  void setVoicemailEnabled(Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
 
   /**
    * Appends the selection to ignore voicemails from non-active OMTP voicemail package. In OC there
@@ -92,4 +114,12 @@ public interface VoicemailClient {
    *     when calling into the mailbox.
    */
   Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle);
+
+  /**
+   * Whether the client is activated and handling visual voicemail for the {@code
+   * phoneAccountHandle}. "Enable" is the intention to use VVM. For example VVM can be enabled but
+   * prevented from working because the carrier blocked it, or a connection problem is blocking the
+   * provisioning. Being "activated" means all setup are completed, and VVM is expected to work.
+   */
+  boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle);
 }

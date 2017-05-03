@@ -63,6 +63,7 @@
     <item name="dialpad_end_key_spacing">
       @dimen/incall_end_call_spacing
     </item>
+    <item name="dialpad_elevation">10dp</item>
   </style>
 
   <style name="AfterCallNotificationTheme" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">

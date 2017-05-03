@@ -24,9 +24,10 @@ import android.support.annotation.NonNull;
 import android.telecom.CallAudioState;
 import android.view.Display;
 import com.android.dialer.common.LogUtil;
-import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.incallui.audiomode.AudioModeProvider;
+import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 

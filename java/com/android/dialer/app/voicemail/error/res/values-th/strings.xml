@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"คุณจะไม่สามารถรับข้อความเสียงใหม่ได้ ถ้ากล่องจดหมายเต็ม"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"ไม่สามารถรับข้อความเสียงใหม่ได้"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"กล่องจดหมายเต็ม ลองลบข้อความบางส่วนออกเพื่อรับข้อความเสียงใหม่"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[ทดสอบ] เปิดพื้นที่เก็บข้อมูลและการสำรองข้อมูลเพิ่มเติม"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"กล่องจดหมายเต็มแล้ว หากต้องการทำให้พื้นที่ว่างมากขึ้น โปรดเปิดพื้นที่เก็บข้อมูลเพิ่มเติมเพื่อให้ Google จัดการและสำรองข้อมูลข้อความเสียงได้ "<b><i>"คุณลักษณะนี้อยู่ในระหว่างการทดสอบ"</i></b>"และอาจลบข้อความเสียงออกจากเซิร์ฟเวอร์ข้อความเสียงได้ เราไม่สัญญาว่าจะรองรับคุณลักษณะนี้ในอนาคต แต่ยินดีรับฟังความคิดเห็น"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[ทดสอบ] เปิดพื้นที่เก็บข้อมูลและการสำรองข้อมูลเพิ่มเติม"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"กล่องจดหมายใกล้จะเต็มแล้ว หากต้องการทำให้พื้นที่ว่างมากขึ้น โปรดเปิดพื้นที่เก็บข้อมูลเพิ่มเติมเพื่อให้ Google จัดการและสำรองข้อมูลข้อความเสียงได้ "<b><i>"คุณลักษณะนี้อยู่ในระหว่างการทดสอบ"</i></b>"และอาจลบข้อความเสียงออกจากเซิร์ฟเวอร์ข้อความเสียงได้ เราไม่สัญญาว่าจะรองรับคุณลักษณะนี้ในอนาคต แต่ยินดีรับฟังความคิดเห็น"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"เปิดพื้นที่เก็บข้อมูลเพิ่มเติมและการสำรองข้อมูล"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"กล่องจดหมายของคุณเต็มแล้ว หากต้องการเพิ่มพื้นที่ว่าง โปรดเปิดพื้นที่เก็บข้อมูลเพิ่มเติมเพื่อให้ Google สามารถจัดการและเก็บสำรองข้อความเสียงได้"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"เปิดพื้นที่เก็บข้อมูลเพิ่มเติมและการสำรองข้อมูล"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"กล่องจดหมายของคุณใกล้เต็มแล้ว หากต้องการเพิ่มพื้นที่ว่าง โปรดเปิดพื้นที่เก็บข้อมูลเพิ่มเติมเพื่อให้ Google สามารถจัดการและเก็บสำรองข้อความเสียงได้"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"ตั้งค่า PIN ข้อความเสียง"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"คุณต้องใช้ PIN ข้อความเสียงทุกครั้งที่โทรหาบริการข้อความเสียง"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"ข้อผิดพลาดที่ไม่ทราบสาเหตุ"</string>

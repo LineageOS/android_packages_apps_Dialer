@@ -28,7 +28,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.R;
 import com.android.contacts.common.util.AccountFilterUtil;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallInitiationType.Type;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.Logger;
@@ -181,11 +183,12 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     final String number = getPhoneNumber(position);
     if (!TextUtils.isEmpty(number)) {
       cacheContactInfo(position);
-      CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-      callSpecificAppData.callInitiationType = getCallInitiationType(true /* isRemoteDirectory */);
-      callSpecificAppData.positionOfSelectedSearchResult = position;
-      callSpecificAppData.charactersInSearchString =
-          getQueryString() == null ? 0 : getQueryString().length();
+      CallSpecificAppData callSpecificAppData =
+          CallSpecificAppData.newBuilder()
+              .setCallInitiationType(getCallInitiationType(true /* isRemoteDirectory */))
+              .setPositionOfSelectedSearchResult(position)
+              .setCharactersInSearchString(getQueryString() == null ? 0 : getQueryString().length())
+              .build();
       mListener.onPickPhoneNumber(number, isVideoCall, callSpecificAppData);
     } else {
       LogUtil.i(
@@ -359,8 +362,8 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
    * @param isRemoteDirectory {@code true} if the call was initiated using a contact/phone number
    *     not in the local contacts database
    */
-  protected int getCallInitiationType(boolean isRemoteDirectory) {
-    return OnPhoneNumberPickerActionListener.CALL_INITIATION_UNKNOWN;
+  protected CallInitiationType.Type getCallInitiationType(boolean isRemoteDirectory) {
+    return Type.UNKNOWN_INITIATION;
   }
 
   /**

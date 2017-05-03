@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Configuración avanzada"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Correo de voz visual"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Copia de seguranza e almacenamento extra"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Esta función está en modo de proba"</i></b>", e é posible que elimine correos de voz do teu servidor de correo de voz. Non podemos garantir a súa continuidade no futuro. De todos modos, encantaríanos que nos deses a túa opinión."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Establecer PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Cambiar PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Para poder cambiar o PIN, o correo de voz visual ten que estar activado"</string>

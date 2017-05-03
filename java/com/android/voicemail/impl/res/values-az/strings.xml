@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Qabaqcıl Ayarlar"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Görünən Səsli e-poçt"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Əlavə yedəkləmə və yaddaş"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" Bu, hazırda yoxladığımız "<b><i>"eksperimantal funksiyadır"</i></b>". Bununla səsli e-poçt serverindən səsli e-məktublar potensial olaraq silinəcək. Gələcəkdə bu funksiyanın dəstəklənəcəyinə zəmanət verilmir. Lakin funksiya haqqında əks əlaqənizi istərdik."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN ayarlayın"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN-i dəyişin"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN-i dəyişmək üçün görünən səsli e-poçt aktiv olmalıdır"</string>

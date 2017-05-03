@@ -27,8 +27,8 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
@@ -164,8 +164,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
           VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle));
 
       autoArchiveSwitchPreference.setOnPreferenceChangeListener(this);
-      autoArchiveSwitchPreference.setSummary(
-          getText(R.string.voicemail_visual_voicemail_auto_archive_temporary_disclaimer));
       autoArchiveSwitchPreference.setChecked(
           VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
     } else {

@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -50,28 +49,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
-import com.android.dialer.callcomposer.nano.CallComposerContact;
-import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
-import com.android.dialer.callcomposer.util.CopyAndResizeImageTask.Callback;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.EnrichedCallManager.State;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.enrichedcall.extensions.StateExtension;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.multimedia.MultimediaData;
-import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
-import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.io.File;
 
 /**
@@ -133,7 +129,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   public static Intent newIntent(Context context, CallComposerContact contact) {
     Intent intent = new Intent(context, CallComposerActivity.class);
-    ProtoParsers.put(intent, ARG_CALL_COMPOSER_CONTACT, contact);
+    intent.putExtra(ARG_CALL_COMPOSER_CONTACT, contact.toByteArray());
     return intent;
   }
 
@@ -195,7 +191,7 @@ public class CallComposerActivity extends AppCompatActivity
           runEntranceAnimation();
         });
 
-    setMediaIconSelected(0);
+    setMediaIconSelected(currentIndex);
   }
 
   @Override
@@ -204,11 +200,11 @@ public class CallComposerActivity extends AppCompatActivity
     getEnrichedCallManager().registerStateChangedListener(this);
     if (sessionId == Session.NO_SESSION_ID) {
       LogUtil.i("CallComposerActivity.onResume", "creating new session");
-      sessionId = getEnrichedCallManager().startCallComposerSession(contact.number);
+      sessionId = getEnrichedCallManager().startCallComposerSession(contact.getNumber());
     } else if (getEnrichedCallManager().getSession(sessionId) == null) {
       LogUtil.i(
           "CallComposerActivity.onResume", "session closed while activity paused, creating new");
-      sessionId = getEnrichedCallManager().startCallComposerSession(contact.number);
+      sessionId = getEnrichedCallManager().startCallComposerSession(contact.getNumber());
     } else {
       LogUtil.i("CallComposerActivity.onResume", "session still open, using old");
     }
@@ -294,29 +290,28 @@ public class CallComposerActivity extends AppCompatActivity
       GalleryComposerFragment galleryComposerFragment = (GalleryComposerFragment) fragment;
       // If the current data is not a copy, make one.
       if (!galleryComposerFragment.selectedDataIsCopy()) {
-        new CopyAndResizeImageTask(
-                CallComposerActivity.this,
-                galleryComposerFragment.getGalleryData().getFileUri(),
-                new Callback() {
-                  @Override
-                  public void onCopySuccessful(File file, String mimeType) {
-                    Uri shareableUri =
-                        FileProvider.getUriForFile(
-                            CallComposerActivity.this,
-                            Constants.get().getFileProviderAuthority(),
-                            file);
+        DialerExecutors.createUiTaskBuilder(
+                getFragmentManager(),
+                "copyAndResizeImageToSend",
+                new CopyAndResizeImageWorker(this.getApplicationContext()))
+            .onSuccess(
+                output -> {
+                  Uri shareableUri =
+                      FileProvider.getUriForFile(
+                          CallComposerActivity.this,
+                          Constants.get().getFileProviderAuthority(),
+                          output.first);
 
-                    builder.setImage(grantUriPermission(shareableUri), mimeType);
-                    placeRCSCall(builder);
-                  }
-
-                  @Override
-                  public void onCopyFailed(Throwable throwable) {
-                    // TODO(b/34279096) - gracefully handle message failure
-                    LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
-                  }
+                  builder.setImage(grantUriPermission(shareableUri), output.second);
+                  placeRCSCall(builder);
                 })
-            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            .onFailure(
+                throwable -> {
+                  // TODO(b/34279096) - gracefully handle message failure
+                  LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
+                })
+            .build()
+            .executeParallel(galleryComposerFragment.getGalleryData().getFileUri());
       } else {
         Uri shareableUri =
             FileProvider.getUriForFile(
@@ -355,7 +350,8 @@ public class CallComposerActivity extends AppCompatActivity
     Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
     getEnrichedCallManager().sendCallComposerData(sessionId, builder.build());
     TelecomUtil.placeCall(
-        this, new CallIntentBuilder(contact.number, CallInitiationType.Type.CALL_COMPOSER).build());
+        this,
+        new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER).build());
     setResult(RESULT_OK);
     finish();
   }
@@ -461,13 +457,15 @@ public class CallComposerActivity extends AppCompatActivity
       byte[] bytes = Base64.decode(arguments.getString(ARG_CALL_COMPOSER_CONTACT), Base64.DEFAULT);
       try {
         contact = CallComposerContact.parseFrom(bytes);
-      } catch (InvalidProtocolBufferNanoException e) {
+      } catch (InvalidProtocolBufferException e) {
         Assert.fail(e.toString());
       }
     } else {
-      contact =
-          ProtoParsers.getFromInstanceState(
-              arguments, ARG_CALL_COMPOSER_CONTACT, new CallComposerContact());
+      try {
+        contact = CallComposerContact.parseFrom(arguments.getByteArray(ARG_CALL_COMPOSER_CONTACT));
+      } catch (InvalidProtocolBufferException e) {
+        throw Assert.createIllegalStateFailException(e.toString());
+      }
     }
     updateContactInfo();
   }
@@ -480,22 +478,24 @@ public class CallComposerActivity extends AppCompatActivity
   /** Populates the contact info fields based on the current contact information. */
   private void updateContactInfo() {
     ContactPhotoManager.getInstance(this)
-        .loadDialerThumbnail(
+        .loadDialerThumbnailOrPhoto(
             contactPhoto,
-            contact.contactUri == null ? null : Uri.parse(contact.contactUri),
-            contact.photoId,
-            contact.nameOrNumber,
-            contact.contactType);
+            contact.hasContactUri() ? Uri.parse(contact.getContactUri()) : null,
+            contact.getPhotoId(),
+            contact.hasPhotoUri() ? Uri.parse(contact.getPhotoUri()) : null,
+            contact.getNameOrNumber(),
+            contact.getContactType());
 
-    nameView.setText(contact.nameOrNumber);
-    toolbar.setTitle(contact.nameOrNumber);
-    if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
+    nameView.setText(contact.getNameOrNumber());
+    toolbar.setTitle(contact.getNameOrNumber());
+    if (!TextUtils.isEmpty(contact.getNumberLabel())
+        && !TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
       String secondaryInfo =
           getString(
               com.android.contacts.common.R.string.call_subject_type_and_number,
-              contact.numberLabel,
-              contact.displayNumber);
+              contact.getNumberLabel(),
+              contact.getDisplayNumber());
       numberView.setText(secondaryInfo);
       toolbar.setSubtitle(secondaryInfo);
     } else {
@@ -663,7 +663,8 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void setFailedResultAndFinish() {
-    setResult(RESULT_FIRST_USER, new Intent().putExtra(KEY_CONTACT_NAME, contact.nameOrNumber));
+    setResult(
+        RESULT_FIRST_USER, new Intent().putExtra(KEY_CONTACT_NAME, contact.getNameOrNumber()));
     finish();
   }
 

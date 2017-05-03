@@ -27,7 +27,7 @@ import android.os.Build.VERSION_CODES;
 import android.support.v4.content.FileProvider;
 import com.android.dialer.callcomposer.camera.exif.ExifInterface;
 import com.android.dialer.callcomposer.camera.exif.ExifTag;
-import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
+import com.android.dialer.callcomposer.util.BitmapResizer;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.FallibleAsyncTask;
 import com.android.dialer.constants.Constants;
@@ -75,7 +75,7 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
         writeClippedBitmap(outputStream);
       } else {
         Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
-        bitmap = CopyAndResizeImageTask.resizeForEnrichedCalling(bitmap);
+        bitmap = BitmapResizer.resizeForEnrichedCalling(bitmap);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
       }
     }
@@ -131,7 +131,7 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
     matrix.postTranslate(-offsetLeft, -offsetTop);
     clippedBitmapCanvas.drawBitmap(bitmap, matrix, null /* paint */);
     clippedBitmapCanvas.save();
-    clippedBitmap = CopyAndResizeImageTask.resizeForEnrichedCalling(clippedBitmap);
+    clippedBitmap = BitmapResizer.resizeForEnrichedCalling(clippedBitmap);
     // EXIF data can take a big chunk of the file size and is often cleared by the
     // carrier, only store orientation since that's critical
     final ExifTag orientationTag = exifInterface.getTag(ExifInterface.TAG_ORIENTATION);

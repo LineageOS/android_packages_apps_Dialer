@@ -45,7 +45,8 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
-import com.android.dialer.logging.nano.ContactLookupResult;
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
@@ -98,7 +99,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       }
       ContactInfo contactInfo = new ContactInfo();
       CachedContactInfo cacheInfo = input.service.buildCachedContactInfo(contactInfo);
-      cacheInfo.setSource(CachedContactInfo.SOURCE_TYPE_CNAP, "CNAP", 0);
+      cacheInfo.setSource(ContactSource.Type.SOURCE_TYPE_CNAP, "CNAP", 0);
       contactInfo.name = input.cnapName;
       contactInfo.number = input.number;
       contactInfo.type = ContactsContract.CommonDataKinds.Phone.TYPE_MAIN;
@@ -143,8 +144,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     // TODO: get rid of caller info.
     final CallerInfo info = CallerInfoUtils.buildCallerInfo(context, call);
-    ContactInfoCache.populateCacheEntry(
-        context, info, entry, call.getNumberPresentation(), isIncoming);
+    ContactInfoCache.populateCacheEntry(context, info, entry, call.getNumberPresentation());
     return entry;
   }
 
@@ -153,8 +153,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       @NonNull Context context,
       @NonNull CallerInfo info,
       @NonNull ContactCacheEntry cce,
-      int presentation,
-      boolean isIncoming) {
+      int presentation) {
     Objects.requireNonNull(info);
     String displayName = null;
     String displayNumber = null;
@@ -442,7 +441,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
 
     // We always replace the entry. The only exception is the same photo case.
-    ContactCacheEntry cacheEntry = buildEntry(mContext, callerInfo, presentationMode, isIncoming);
+    ContactCacheEntry cacheEntry = buildEntry(mContext, callerInfo, presentationMode);
     cacheEntry.queryId = queryToken.mQueryId;
 
     ContactCacheEntry existingCacheEntry = mInfoMap.get(callId);
@@ -509,20 +508,26 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     if (cequintCallerIdContact == null) {
       return;
     }
+    boolean hasUpdate = false;
 
     if (TextUtils.isEmpty(callerInfo.name) && !TextUtils.isEmpty(cequintCallerIdContact.name)) {
       callerInfo.name = cequintCallerIdContact.name;
-      callerInfo.contactExists = true;
+      hasUpdate = true;
     }
     if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
       callerInfo.geoDescription = cequintCallerIdContact.geoDescription;
       callerInfo.shouldShowGeoDescription = true;
-      callerInfo.contactExists = true;
+      hasUpdate = true;
     }
-    if (callerInfo.contactDisplayPhotoUri == null && cequintCallerIdContact.imageUrl != null) {
+    // Don't overwrite photo in local contacts.
+    if (!callerInfo.contactExists
+        && callerInfo.contactDisplayPhotoUri == null
+        && cequintCallerIdContact.imageUrl != null) {
       callerInfo.contactDisplayPhotoUri = Uri.parse(cequintCallerIdContact.imageUrl);
-      callerInfo.contactExists = true;
+      hasUpdate = true;
     }
+    // Set contact to exist to avoid phone number service lookup.
+    callerInfo.contactExists = hasUpdate;
   }
 
   /**
@@ -600,10 +605,9 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     mQueryId = 0;
   }
 
-  private ContactCacheEntry buildEntry(
-      Context context, CallerInfo info, int presentation, boolean isIncoming) {
+  private ContactCacheEntry buildEntry(Context context, CallerInfo info, int presentation) {
     final ContactCacheEntry cce = new ContactCacheEntry();
-    populateCacheEntry(context, info, cce, presentation, isIncoming);
+    populateCacheEntry(context, info, cce, presentation);
 
     // This will only be true for emergency numbers
     if (info.photoResource != 0) {
@@ -712,7 +716,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     public Uri lookupUri; // Sent to NotificationMananger
     public String lookupKey;
-    public int contactLookupResult = ContactLookupResult.Type.NOT_FOUND;
+    public ContactLookupResult.Type contactLookupResult = ContactLookupResult.Type.NOT_FOUND;
     public long userType = ContactsUtils.USER_TYPE_CURRENT;
     Uri contactRingtoneUri;
     /** Query id to identify the query session. */

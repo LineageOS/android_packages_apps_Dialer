@@ -27,8 +27,8 @@ import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression.Type;
 import java.util.Random;
 
 /**

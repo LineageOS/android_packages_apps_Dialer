@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Chamada wifi de traballo entrante"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Chamada entrante sospeitosa de spam"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Solicitude de vídeo entrante"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"Novo correo de voz"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Novo correo de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Marcar o <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Número de correo de voz descoñecido"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Sen servizo"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Rede seleccionada (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) non dispoñible"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Responder"</string>
