@@ -29,8 +29,8 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
@@ -40,6 +40,7 @@ import com.android.voicemail.impl.sms.StatusSmsFetcher;
 import com.android.voicemail.impl.sync.OmtpVvmSyncService;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VvmAccountManager;
+import com.android.voicemail.impl.utils.LoggerUtils;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -55,6 +56,7 @@ import java.util.concurrent.TimeoutException;
  * spontaneously sent a STATUS SMS.
  */
 @TargetApi(VERSION_CODES.O)
+@UsedByReflection(value = "Tasks.java")
 public class ActivationTask extends BaseTask {
 
   private static final String TAG = "VvmActivationTask";
@@ -107,14 +109,15 @@ public class ActivationTask extends BaseTask {
   }
 
   @Override
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
-    super.onCreate(context, intent, flags, startId);
-    mMessageData = intent.getParcelableExtra(EXTRA_MESSAGE_DATA_BUNDLE);
+  public void onCreate(Context context, Bundle extras) {
+    super.onCreate(context, extras);
+    mMessageData = extras.getParcelable(EXTRA_MESSAGE_DATA_BUNDLE);
   }
 
   @Override
   public Intent createRestartIntent() {
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_AUTO_RETRY_ACTIVATION);
+    LoggerUtils.logImpressionOnMainThread(
+        getContext(), DialerImpression.Type.VVM_AUTO_RETRY_ACTIVATION);
     Intent intent = super.createRestartIntent();
     // mMessageData is discarded, request a fresh STATUS SMS for retries.
     return intent;
@@ -124,7 +127,8 @@ public class ActivationTask extends BaseTask {
   @WorkerThread
   public void onExecuteInBackgroundThread() {
     Assert.isNotMainThread();
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_ACTIVATION_STARTED);
+    LoggerUtils.logImpressionOnMainThread(
+        getContext(), DialerImpression.Type.VVM_ACTIVATION_STARTED);
     PhoneAccountHandle phoneAccountHandle = getPhoneAccountHandle();
     if (phoneAccountHandle == null) {
       // This should never happen
@@ -234,7 +238,8 @@ public class ActivationTask extends BaseTask {
         helper.handleEvent(status, OmtpEvents.CONFIG_SERVICE_NOT_AVAILABLE);
       }
     }
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_ACTIVATION_COMPLETED);
+    LoggerUtils.logImpressionOnMainThread(
+        getContext(), DialerImpression.Type.VVM_ACTIVATION_COMPLETED);
   }
 
   public static void updateSource(

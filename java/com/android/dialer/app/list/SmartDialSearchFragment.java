@@ -26,7 +26,7 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.SmartDialCursorLoader;
 import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.callintent.nano.CallInitiationType;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.util.PermissionsUtil;
 
 /** Implements a fragment to load and display SmartDial search results. */
@@ -102,7 +102,7 @@ public class SmartDialSearchFragment extends SearchFragment
   }
 
   @Override
-  protected int getCallInitiationType(boolean isRemoteDirectory) {
+  protected CallInitiationType.Type getCallInitiationType(boolean isRemoteDirectory) {
     return CallInitiationType.Type.SMART_DIAL;
   }
 

@@ -33,12 +33,11 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
-import com.android.dialer.backup.nano.VoicemailInfo;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.telecom.TelecomUtil;
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class DialerBackupAgent extends BackupAgent {
   // Voicemail Uri Column
   public static final String VOICEMAIL_URI = "voicemail_uri";
   // Voicemail packages to backup
-  public static final String VOICEMAIL_SOURCE_PACKAGE = "com.android.phone";
+  public static final String VOICEMAIL_SOURCE_PACKAGE = "com.google.android.dialer";
 
   private long voicemailsBackedupSoFar = 0;
   private long sizeOfVoicemailsBackedupSoFar = 0;

@@ -22,6 +22,7 @@ import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
+import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
 /** Save whether or not a particular account is enabled in shared to be retrieved later. */
@@ -31,6 +32,7 @@ public class VisualVoicemailSettingsUtil {
 
   public static void setEnabled(
       Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
+    VvmLog.i("VisualVoicemailSettingsUtil.setEnable", phoneAccount + " enabled:" + isEnabled);
     new VisualVoicemailPreferences(context, phoneAccount)
         .edit()
         .putBoolean(IS_ENABLED_KEY, isEnabled)

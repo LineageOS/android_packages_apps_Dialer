@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"הגדרות מתקדמות"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"דואר קולי ויזואלי"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"גיבוי ופינוי מקום"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"זוהי תכונה ניסיונית"</i></b>" שאנחנו בודקים כרגע. היא עלולה למחוק הודעות קוליות מתא הדואר הקולי שלך בשרת. אנחנו לא מתחייבים שהתכונה תהיה זמינה בעתיד, אך נשמח לקבל עליה משוב."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"הגדרת קוד גישה"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"שינוי קוד הגישה"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"צריך להפעיל את הדואר הקולי הוויזואלי כדי לשנות את קוד הגישה"</string>

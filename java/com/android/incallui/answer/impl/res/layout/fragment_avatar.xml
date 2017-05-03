@@ -21,6 +21,5 @@
   android:id="@id/contactgrid_avatar"
   android:layout_width="@dimen/answer_avatar_size"
   android:layout_height="@dimen/answer_avatar_size"
-  android:layout_marginTop="20dp"
-  android:layout_gravity="center_horizontal"
+  android:layout_gravity="center"
   android:elevation="@dimen/answer_data_elevation"/>

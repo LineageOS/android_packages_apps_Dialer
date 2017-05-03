@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Mga Advanced na Setting"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Visual na Voicemail"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Karagdagang backup at storage"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Eksperimental na feature ito"</i></b>" na kasalukuyan naming sinusubukan. Posible nitong i-delete ang mga voicemail mula sa iyong server ng voicemail. Walang garantiyang susuportahan ang feature na ito sa hinaharap. Gayunpaman, gusto naming makakuha ng feedback tungkol sa feature."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Magtakda ng PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Palitan ang PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Dapat naka-enable ang visual na voicemail upang palitan ang PIN"</string>

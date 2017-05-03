@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Wi-Fi 工作來電"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"疑似收到垃圾來電"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"收到視像要求"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"新留言"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"新留言 (<xliff:g id="COUNT">%d</xliff:g> 個)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"撥號 <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"沒有可用的留言信箱號碼"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"沒有服務"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"您所選取的網絡 (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) 無法使用"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"接聽"</string>

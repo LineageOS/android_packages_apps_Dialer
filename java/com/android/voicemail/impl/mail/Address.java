@@ -25,8 +25,9 @@ import android.text.util.Rfc822Tokenizer;
 import com.android.voicemail.impl.mail.utils.LogUtils;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+import org.apache.james.mime4j.codec.DecodeMonitor;
+import org.apache.james.mime4j.codec.DecoderUtil;
 import org.apache.james.mime4j.codec.EncoderUtil;
-import org.apache.james.mime4j.decoder.DecoderUtil;
 
 /**
  * This class represent email address.
@@ -121,7 +122,8 @@ public class Address implements Parcelable {
     if (TextUtils.isEmpty(rawAddress)) {
       return null;
     }
-    String name, address;
+    String name;
+    String address;
     final Rfc822Token[] tokens = Rfc822Tokenizer.tokenize(rawAddress);
     if (tokens.length > 0) {
       final String tokenizedName = tokens[0].getName();
@@ -171,7 +173,7 @@ public class Address implements Parcelable {
     if (personal != null) {
       personal = REMOVE_OPTIONAL_DQUOTE.matcher(personal).replaceAll("$1");
       personal = UNQUOTE.matcher(personal).replaceAll("$1");
-      personal = DecoderUtil.decodeEncodedWords(personal);
+      personal = DecoderUtil.decodeEncodedWords(personal, DecodeMonitor.STRICT);
       if (personal.length() == 0) {
         personal = null;
       }

@@ -38,7 +38,7 @@ import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.ScreenEvent;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;

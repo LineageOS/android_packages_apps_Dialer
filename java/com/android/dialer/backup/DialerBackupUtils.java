@@ -30,16 +30,14 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.util.Pair;
-import com.android.dialer.backup.nano.VoicemailInfo;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
-import com.google.protobuf.nano.MessageNano;
+import com.google.protobuf.ByteString;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,15 +64,14 @@ public class DialerBackupUtils {
     ByteStreams.copy(decodedStream, restoreStream);
   }
 
-  public static @Nullable byte[] audioStreamToByteArray(@NonNull InputStream stream)
+  public static @Nullable ByteString audioStreamToByteString(@NonNull InputStream stream)
       throws IOException {
-    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     if (stream.available() > 0) {
-      ByteStreams.copy(stream, buffer);
+      return ByteString.readFrom(stream);
     } else {
       LogUtil.i("DialerBackupUtils.audioStreamToByteArray", "no audio stream to backup");
     }
-    return buffer.toByteArray();
+    return ByteString.EMPTY;
   }
 
   public static void writeProtoToFile(@NonNull File file, @NonNull VoicemailInfo voicemailInfo)
@@ -83,7 +80,7 @@ public class DialerBackupUtils {
         "DialerBackupUtils.writeProtoToFile",
         "backup " + voicemailInfo + " to " + file.getAbsolutePath());
 
-    byte[] bytes = MessageNano.toByteArray(voicemailInfo);
+    byte[] bytes = voicemailInfo.toByteArray();
     Files.write(bytes, file);
   }
 
@@ -111,7 +108,7 @@ public class DialerBackupUtils {
   public static VoicemailInfo convertVoicemailCursorRowToProto(
       @NonNull Cursor cursor, @NonNull ContentResolver contentResolver) throws IOException {
 
-    VoicemailInfo voicemailInfo = new VoicemailInfo();
+    VoicemailInfo.Builder voicemailInfo = VoicemailInfo.newBuilder();
 
     for (int i = 0; i < cursor.getColumnCount(); ++i) {
       String name = cursor.getColumnName(i);
@@ -126,56 +123,56 @@ public class DialerBackupUtils {
 
       switch (name) {
         case Voicemails.DATE:
-          voicemailInfo.date = value;
+          voicemailInfo.setDate(value);
           break;
         case Voicemails.DELETED:
-          voicemailInfo.deleted = value;
+          voicemailInfo.setDeleted(value);
           break;
         case Voicemails.DIRTY:
-          voicemailInfo.dirty = value;
+          voicemailInfo.setDirty(value);
           break;
         case Voicemails.DIR_TYPE:
-          voicemailInfo.dirType = value;
+          voicemailInfo.setDirType(value);
           break;
         case Voicemails.DURATION:
-          voicemailInfo.duration = value;
+          voicemailInfo.setDuration(value);
           break;
         case Voicemails.HAS_CONTENT:
-          voicemailInfo.hasContent = value;
+          voicemailInfo.setHasContent(value);
           break;
         case Voicemails.IS_READ:
-          voicemailInfo.isRead = value;
+          voicemailInfo.setIsRead(value);
           break;
         case Voicemails.ITEM_TYPE:
-          voicemailInfo.itemType = value;
+          voicemailInfo.setItemType(value);
           break;
         case Voicemails.LAST_MODIFIED:
-          voicemailInfo.lastModified = value;
+          voicemailInfo.setLastModified(value);
           break;
         case Voicemails.MIME_TYPE:
-          voicemailInfo.mimeType = value;
+          voicemailInfo.setMimeType(value);
           break;
         case Voicemails.NUMBER:
-          voicemailInfo.number = value;
+          voicemailInfo.setNumber(value);
           break;
         case Voicemails.PHONE_ACCOUNT_COMPONENT_NAME:
-          voicemailInfo.phoneAccountComponentName = value;
+          voicemailInfo.setPhoneAccountComponentName(value);
           break;
         case Voicemails.PHONE_ACCOUNT_ID:
-          voicemailInfo.phoneAccountId = value;
+          voicemailInfo.setPhoneAccountId(value);
           break;
         case Voicemails.SOURCE_DATA:
-          voicemailInfo.sourceData = value;
+          voicemailInfo.setSourceData(value);
           break;
         case Voicemails.SOURCE_PACKAGE:
-          voicemailInfo.sourcePackage = value;
+          voicemailInfo.setSourcePackage(value);
           break;
         case Voicemails.TRANSCRIPTION:
-          voicemailInfo.transcription = value;
+          voicemailInfo.setTranscription(value);
           break;
         case DialerBackupAgent.VOICEMAIL_URI:
           try (InputStream audioStream = contentResolver.openInputStream(Uri.parse(value))) {
-            voicemailInfo.encodedVoicemailKey = audioStreamToByteArray(audioStream);
+            voicemailInfo.setEncodedVoicemailKey(audioStreamToByteString(audioStream));
           }
           break;
         default:
@@ -187,7 +184,7 @@ public class DialerBackupUtils {
           break;
       }
     }
-    return voicemailInfo;
+    return voicemailInfo.build();
   }
 
   public static Pair<ContentValues, byte[]> convertVoicemailProtoFileToContentValueAndAudioBytes(
@@ -209,45 +206,45 @@ public class DialerBackupUtils {
     } else {
       ContentValues contentValues = new ContentValues();
 
-      if (!voicemailInfo.date.isEmpty()) {
-        contentValues.put(Voicemails.DATE, voicemailInfo.date);
+      if (voicemailInfo.hasDate()) {
+        contentValues.put(Voicemails.DATE, voicemailInfo.getDate());
       }
-      if (!voicemailInfo.deleted.isEmpty()) {
-        contentValues.put(Voicemails.DELETED, voicemailInfo.deleted);
+      if (voicemailInfo.hasDeleted()) {
+        contentValues.put(Voicemails.DELETED, voicemailInfo.getDeleted());
       }
-      if (!voicemailInfo.dirty.isEmpty()) {
-        contentValues.put(Voicemails.DIRTY, voicemailInfo.dirty);
+      if (!voicemailInfo.hasDirty()) {
+        contentValues.put(Voicemails.DIRTY, voicemailInfo.getDirty());
       }
-      if (!voicemailInfo.duration.isEmpty()) {
-        contentValues.put(Voicemails.DURATION, voicemailInfo.duration);
+      if (!voicemailInfo.hasDuration()) {
+        contentValues.put(Voicemails.DURATION, voicemailInfo.getDuration());
       }
-      if (!voicemailInfo.isRead.isEmpty()) {
-        contentValues.put(Voicemails.IS_READ, voicemailInfo.isRead);
+      if (!voicemailInfo.hasIsRead()) {
+        contentValues.put(Voicemails.IS_READ, voicemailInfo.getIsRead());
       }
-      if (!voicemailInfo.lastModified.isEmpty()) {
-        contentValues.put(Voicemails.LAST_MODIFIED, voicemailInfo.lastModified);
+      if (!voicemailInfo.hasLastModified()) {
+        contentValues.put(Voicemails.LAST_MODIFIED, voicemailInfo.getLastModified());
       }
-      if (!voicemailInfo.mimeType.isEmpty()) {
-        contentValues.put(Voicemails.MIME_TYPE, voicemailInfo.mimeType);
+      if (!voicemailInfo.hasMimeType()) {
+        contentValues.put(Voicemails.MIME_TYPE, voicemailInfo.getMimeType());
       }
-      if (!voicemailInfo.number.isEmpty()) {
-        contentValues.put(Voicemails.NUMBER, voicemailInfo.number);
+      if (!voicemailInfo.hasNumber()) {
+        contentValues.put(Voicemails.NUMBER, voicemailInfo.getNumber());
       }
-      if (!voicemailInfo.phoneAccountComponentName.isEmpty()) {
+      if (!voicemailInfo.hasPhoneAccountComponentName()) {
         contentValues.put(
-            Voicemails.PHONE_ACCOUNT_COMPONENT_NAME, voicemailInfo.phoneAccountComponentName);
+            Voicemails.PHONE_ACCOUNT_COMPONENT_NAME, voicemailInfo.getPhoneAccountComponentName());
       }
-      if (!voicemailInfo.phoneAccountId.isEmpty()) {
-        contentValues.put(Voicemails.PHONE_ACCOUNT_ID, voicemailInfo.phoneAccountId);
+      if (!voicemailInfo.hasPhoneAccountId()) {
+        contentValues.put(Voicemails.PHONE_ACCOUNT_ID, voicemailInfo.getPhoneAccountId());
       }
-      if (!voicemailInfo.sourceData.isEmpty()) {
-        contentValues.put(Voicemails.SOURCE_DATA, voicemailInfo.sourceData);
+      if (!voicemailInfo.hasSourceData()) {
+        contentValues.put(Voicemails.SOURCE_DATA, voicemailInfo.getSourceData());
       }
-      if (!voicemailInfo.sourcePackage.isEmpty()) {
-        contentValues.put(Voicemails.SOURCE_PACKAGE, voicemailInfo.sourcePackage);
+      if (!voicemailInfo.hasSourcePackage()) {
+        contentValues.put(Voicemails.SOURCE_PACKAGE, voicemailInfo.getSourcePackage());
       }
-      if (!voicemailInfo.transcription.isEmpty()) {
-        contentValues.put(Voicemails.TRANSCRIPTION, voicemailInfo.transcription);
+      if (!voicemailInfo.hasTranscription()) {
+        contentValues.put(Voicemails.TRANSCRIPTION, voicemailInfo.getTranscription());
       }
       contentValues.put(VoicemailContract.Voicemails.HAS_CONTENT, 1);
       contentValues.put(RESTORED_COLUMN, "1");
@@ -257,7 +254,7 @@ public class DialerBackupUtils {
           "DialerBackupUtils.convertVoicemailProtoFileToContentValueAndEncodedAudio",
           "cv: " + contentValues);
 
-      return Pair.create(contentValues, voicemailInfo.encodedVoicemailKey);
+      return Pair.create(contentValues, voicemailInfo.getEncodedVoicemailKey().toByteArray());
     }
   }
 
@@ -276,7 +273,7 @@ public class DialerBackupUtils {
     }
     if (ConfigProviderBindings.get(context)
         .getBoolean("voicemail_restore_check_archive_for_source_package", true)) {
-      if ("1".equals(voicemailInfo.archived)) {
+      if ("1".equals(voicemailInfo.getArchived())) {
         LogUtil.i(
             "DialerBackupUtils.getSourcePackage",
             "voicemail was archived, using app source package");
@@ -312,7 +309,9 @@ public class DialerBackupUtils {
                 String.format(
                     "(%s = ? AND %s = ? AND %s = ?)",
                     Voicemails.NUMBER, Voicemails.DATE, Voicemails.DURATION),
-                new String[] {voicemailInfo.number, voicemailInfo.date, voicemailInfo.duration},
+                new String[] {
+                  voicemailInfo.getNumber(), voicemailInfo.getDate(), voicemailInfo.getDuration()
+                },
                 null,
                 null)) {
       if (cursor.moveToFirst()

@@ -37,32 +37,28 @@
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"चालू रहेको Wi-Fi कार्यको कल"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"होल्डमा"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"आगमन कल"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"तस्बिर सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"सन्देश सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"स्थान सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"तस्बिर र सन्देश सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"तस्बिर र स्थान सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"सन्देश र स्थान सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"तस्बिर, सन्देश र स्थान सहितको आगमन कल"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"समावेश गरिएको वस्तु सहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"तस्बिरसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"सन्देशसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"स्थानसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"तस्बिर र सन्देशसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"तस्बिर र स्थानसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"सन्देश र स्थानसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"तस्बिर, सन्देश र स्थानसहितको आगमन कल"</string>
+    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"समावेश गरिएको वस्तुसहितको आगमन कल"</string>
     <string name="important_notification_incoming_call" msgid="2867013954509930989">"महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"तस्बिर सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"सन्देश सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"स्थान सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"तस्बिर र सन्देश सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"तस्बिर र स्थान सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"सन्देश र स्थान सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"तस्बिर, सन्देश र स्थान सहितको महत्त्वपूर्ण आगमन कल"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"समावेश गरिएको वस्तु सहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"तस्बिरसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"सन्देशसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"स्थानसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"तस्बिर र सन्देशसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"तस्बिर र स्थानसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"सन्देश र स्थानसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"तस्बिर, सन्देश र स्थानसहितको महत्त्वपूर्ण आगमन कल"</string>
+    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"समावेश गरिएको वस्तुसहितको महत्त्वपूर्ण आगमन कल"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"आगमन कार्यको कल"</string>
     <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"आगमन Wi-Fi कल"</string>
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"आगमन Wi-Fi कार्यको कल"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"शंकास्पद आगमन स्प्याम कल"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"आगमन भिडियो अनुरोध"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"नयाँ भ्वाइस मेल"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"नयाँ भ्वाइसमेल ( <xliff:g id="COUNT">%d</xliff:g> )"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>मा डायल गर्नुहोस्"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"अज्ञात भवाइसमेल नम्बर"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"सेवा छैन"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"चयन गरिएको नेटवर्क ( <xliff:g id="OPERATOR_NAME">%s</xliff:g> ) अनुपलब्ध"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"उत्तर"</string>

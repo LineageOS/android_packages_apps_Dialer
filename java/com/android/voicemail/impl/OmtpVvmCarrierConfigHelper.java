@@ -336,9 +336,11 @@ public class OmtpVvmCarrierConfigHelper {
 
   public void startDeactivation() {
     Assert.checkArgument(isValid());
+    VvmLog.i(TAG, "startDeactivation");
     if (!isLegacyModeEnabled()) {
       // SMS should still be filtered in legacy mode
       VisualVoicemailService.setSmsFilterSettings(mContext, getPhoneAccountHandle(), null);
+      VvmLog.i(TAG, "filter disabled");
     }
     if (mProtocol != null) {
       mProtocol.startDeactivation(this);

@@ -17,14 +17,16 @@
 package com.android.dialer.calldetails;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.android.dialer.callcomposer.nano.CallComposerContact;
-import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.common.Assert;
+import java.util.List;
 
 /** Adapter for RecyclerView in {@link CallDetailsActivity}. */
 public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -34,13 +36,15 @@ public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
   private static final int FOOTER_VIEW_TYPE = 3;
 
   private final CallComposerContact contact;
-  private final CallDetailsEntry[] callDetailsEntries;
+  private final List<CallDetailsEntry> callDetailsEntries;
   private final CallTypeHelper callTypeHelper;
 
   public CallDetailsAdapter(
-      Context context, CallComposerContact contact, CallDetailsEntry[] callDetailsEntries) {
+      Context context,
+      @NonNull CallComposerContact contact,
+      @NonNull List<CallDetailsEntry> callDetailsEntries) {
     this.contact = Assert.isNotNull(contact);
-    this.callDetailsEntries = Assert.isNotNull(callDetailsEntries);
+    this.callDetailsEntries = callDetailsEntries;
     callTypeHelper = new CallTypeHelper(context.getResources());
   }
 
@@ -68,15 +72,15 @@ public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     if (position == 0) { // Header
       ((CallDetailsHeaderViewHolder) holder).updateContactInfo(contact);
     } else if (position == getItemCount() - 1) {
-      ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.number);
+      ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.getNumber());
     } else {
       CallDetailsEntryViewHolder viewHolder = (CallDetailsEntryViewHolder) holder;
-      CallDetailsEntry entry = callDetailsEntries[position - 1];
+      CallDetailsEntry entry = callDetailsEntries.get(position - 1);
       viewHolder.setCallDetails(
-          contact.number,
+          contact.getNumber(),
           entry,
           callTypeHelper,
-          entry.historyResults.length > 0 && position != getItemCount() - 2);
+          !entry.getHistoryResultsList().isEmpty() && position != getItemCount() - 2);
     }
   }
 
@@ -93,6 +97,6 @@ public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
   @Override
   public int getItemCount() {
-    return callDetailsEntries.length + 2; // Header + footer
+    return callDetailsEntries.size() + 2; // Header + footer
   }
 }

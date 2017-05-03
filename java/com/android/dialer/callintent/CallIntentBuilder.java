@@ -26,8 +26,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
-import com.android.dialer.callintent.nano.CallInitiationType;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.util.CallUtil;
 
@@ -43,10 +41,10 @@ public class CallIntentBuilder {
     this.uri = Assert.isNotNull(uri);
     this.callSpecificAppData = Assert.isNotNull(callSpecificAppData);
     Assert.checkArgument(
-        callSpecificAppData.callInitiationType != CallInitiationType.Type.UNKNOWN_INITIATION);
+        callSpecificAppData.getCallInitiationType() != CallInitiationType.Type.UNKNOWN_INITIATION);
   }
 
-  public CallIntentBuilder(@NonNull Uri uri, int callInitiationType) {
+  public CallIntentBuilder(@NonNull Uri uri, CallInitiationType.Type callInitiationType) {
     this(uri, createCallSpecificAppData(callInitiationType));
   }
 
@@ -55,7 +53,7 @@ public class CallIntentBuilder {
     this(CallUtil.getCallUri(Assert.isNotNull(number)), callSpecificAppData);
   }
 
-  public CallIntentBuilder(@NonNull String number, int callInitiationType) {
+  public CallIntentBuilder(@NonNull String number, CallInitiationType.Type callInitiationType) {
     this(CallUtil.getCallUri(Assert.isNotNull(number)), callInitiationType);
   }
 
@@ -100,9 +98,10 @@ public class CallIntentBuilder {
     return intent;
   }
 
-  private static @NonNull CallSpecificAppData createCallSpecificAppData(int callInitiationType) {
-    CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-    callSpecificAppData.callInitiationType = callInitiationType;
+  private static @NonNull CallSpecificAppData createCallSpecificAppData(
+      CallInitiationType.Type callInitiationType) {
+    CallSpecificAppData callSpecificAppData =
+        CallSpecificAppData.newBuilder().setCallInitiationType(callInitiationType).build();
     return callSpecificAppData;
   }
 }

@@ -16,7 +16,7 @@
 
 package com.android.voicemail.impl.scheduling;
 
-import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * A set of listeners managed by {@link BaseTask} for common behaviors such as retrying. Call {@link
@@ -24,7 +24,7 @@ import android.content.Intent;
  */
 public interface Policy {
 
-  void onCreate(BaseTask task, Intent intent, int flags, int startId);
+  void onCreate(BaseTask task, Bundle extras);
 
   void onBeforeExecute();
 

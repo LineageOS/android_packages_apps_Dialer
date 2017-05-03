@@ -17,10 +17,12 @@
 package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.VvmLog;
 
 /** Task to block another task of the same ID from being queued for a certain amount of time. */
+@UsedByReflection(value = "Tasks.java")
 public class BlockerTask extends BaseTask {
 
   private static final String TAG = "BlockerTask";
@@ -33,10 +35,10 @@ public class BlockerTask extends BaseTask {
   }
 
   @Override
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
-    super.onCreate(context, intent, flags, startId);
-    setId(intent.getIntExtra(EXTRA_TASK_ID, TASK_INVALID));
-    setExecutionTime(getTimeMillis() + intent.getIntExtra(EXTRA_BLOCK_FOR_MILLIS, 0));
+  public void onCreate(Context context, Bundle extras) {
+    super.onCreate(context, extras);
+    setId(extras.getInt(EXTRA_TASK_ID, TASK_INVALID));
+    setExecutionTime(getTimeMillis() + extras.getInt(EXTRA_BLOCK_FOR_MILLIS, 0));
   }
 
   @Override
@@ -46,6 +48,6 @@ public class BlockerTask extends BaseTask {
 
   @Override
   public void onDuplicatedTaskAdded(Task task) {
-    VvmLog.v(TAG, task.toString() + "blocked, " + getReadyInMilliSeconds() + "millis remaining");
+    VvmLog.i(TAG, task + "blocked, " + getReadyInMilliSeconds() + "millis remaining");
   }
 }

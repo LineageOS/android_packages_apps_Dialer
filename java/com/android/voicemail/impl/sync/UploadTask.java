@@ -18,7 +18,9 @@ package com.android.voicemail.impl.sync;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.BaseTask;
@@ -28,6 +30,7 @@ import com.android.voicemail.impl.scheduling.PostponePolicy;
  * Upload task triggered by database changes. Will wait until the database has been stable for
  * {@link #POSTPONE_MILLIS} to execute.
  */
+@UsedByReflection(value = "Tasks.java")
 public class UploadTask extends BaseTask {
 
   private static final String TAG = "VvmUploadTask";
@@ -45,8 +48,8 @@ public class UploadTask extends BaseTask {
   }
 
   @Override
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
-    super.onCreate(context, intent, flags, startId);
+  public void onCreate(Context context, Bundle extras) {
+    super.onCreate(context, extras);
   }
 
   @Override

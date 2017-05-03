@@ -18,13 +18,11 @@ package com.android.dialer.phonenumbercache;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import com.android.dialer.logging.ContactSource;
 import java.io.InputStream;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 public interface CachedNumberLookupService {
 
@@ -47,9 +45,9 @@ public interface CachedNumberLookupService {
 
   boolean isCacheUri(String uri);
 
-  boolean isBusiness(int sourceType);
+  boolean isBusiness(ContactSource.Type sourceType);
 
-  boolean canReportAsInvalid(int sourceType, String objectId);
+  boolean canReportAsInvalid(ContactSource.Type sourceType, String objectId);
 
   /** @return return {@link Uri} to the photo or return {@code null} when failing to add photo */
   @Nullable
@@ -64,28 +62,10 @@ public interface CachedNumberLookupService {
 
   interface CachedContactInfo {
 
-    int SOURCE_TYPE_DIRECTORY = 1;
-    int SOURCE_TYPE_EXTENDED = 2;
-    int SOURCE_TYPE_PLACES = 3;
-    int SOURCE_TYPE_PROFILE = 4;
-    int SOURCE_TYPE_CNAP = 5;
-    int SOURCE_TYPE_CEQUINT_CALLER_ID = 6;
-
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({
-      SOURCE_TYPE_DIRECTORY,
-      SOURCE_TYPE_EXTENDED,
-      SOURCE_TYPE_PLACES,
-      SOURCE_TYPE_PROFILE,
-      SOURCE_TYPE_CNAP,
-      SOURCE_TYPE_CEQUINT_CALLER_ID
-    })
-    public @interface ContactSourceType {}
-
     @NonNull
     ContactInfo getContactInfo();
 
-    void setSource(@ContactSourceType int sourceType, String name, long directoryId);
+    void setSource(ContactSource.Type sourceType, String name, long directoryId);
 
     void setDirectorySource(String name, long directoryId);
 

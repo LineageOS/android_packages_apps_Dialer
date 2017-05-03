@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Bạn sẽ không thể nhận được thư thoại mới nếu hộp thư đến của bạn đã đầy."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Không nhận được thư thoại mới"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Hộp thư đến của bạn đã đầy. Hãy thử xóa một vài thư để nhận thư thoại mới."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[Thử nghiệm] Bật bộ nhớ và bản sao lưu bổ sung"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"Hộp thư của bạn đã đầy. Để tạo thêm dung lượng, hãy bật bộ nhớ bổ sung để Google có thể quản lý và sao lưu tin nhắn thoại của bạn. "<b><i>"Tính năng này hiện đang được thử nghiệm "</i></b>"và có khả năng sẽ xóa thư thoại của bạn khỏi máy chủ thư thoại. Ngoài ra, chúng tôi không cam kết hỗ trợ tính năng này trong tương lai. Mặc dù vậy, chúng tôi vẫn mong muốn nhận được phản hồi của bạn."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[Thử nghiệm] Bật bộ nhớ và bản sao lưu bổ sung"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"Hộp thư của bạn sắp đầy. Để tạo thêm dung lượng, hãy bật bộ nhớ bổ sung để Google có thể quản lý và sao lưu tin nhắn thoại của bạn. "<b><i>"Tính năng này hiện đang được thử nghiệm "</i></b>"và có khả năng sẽ xóa thư thoại của bạn khỏi máy chủ thư thoại. Ngoài ra, chúng tôi không cam kết hỗ trợ tính năng này trong tương lai. Mặc dù vậy, chúng tôi vẫn mong muốn nhận được phản hồi của bạn."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Bật sao lưu và bộ nhớ bổ sung"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Hộp thư của bạn đã đầy. Để giải phóng dung lượng, hãy bật bộ nhớ bổ sung để Google có thể quản lý và sao lưu thư thoại của bạn."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Bật sao lưu và bộ nhớ bổ sung"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Hộp thư của bạn đã gần đầy. Để giải phóng dung lượng, hãy bật bộ nhớ bổ sung để Google có thể quản lý và sao lưu thư thoại của bạn."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Đặt mã PIN thư thoại của bạn"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Bạn cần có mã PIN thư thoại mỗi khi gọi để truy cập thư thoại của mình."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Lỗi không xác định"</string>

@@ -1,0 +1,60 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.callintent";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+package com.android.dialer.callintent;
+
+
+// Different ways a call can be initiated.
+message CallInitiationType {
+  enum Type {
+    // Initiation type unknown
+    UNKNOWN_INITIATION = 0;
+
+    // Incoming call initiated by Telecom.
+    INCOMING_INITIATION = 1;
+
+    DIALPAD = 2;
+
+    SPEED_DIAL = 3;
+
+    REMOTE_DIRECTORY = 4;
+
+    // Call placed via a search result returned by typing into the dialpad.
+    SMART_DIAL = 5;
+
+    // Call placed via a search result returned by typing into the search box.
+    REGULAR_SEARCH = 6;
+
+    // Call placed via the call log fragment displayed in the main Dialer
+    // activity.
+    CALL_LOG = 7;
+
+    // Call placed via a call log fragment displaying a filtered list of
+    // voicemails.
+    CALL_LOG_FILTER = 8;
+
+    // Call placed via the call log fragment containing voicemails only.
+    VOICEMAIL_LOG = 9;
+
+    // Call placed via the call details screen
+    CALL_DETAILS = 10;
+
+    // Call placed via the quick contacts card
+    QUICK_CONTACTS = 11;
+
+    // Call was placed from outside the Dialer (e.g. CALL intent sent
+    // via third party app)
+    EXTERNAL_INITIATION = 12;
+
+    LAUNCHER_SHORTCUT = 13;
+
+    CALL_COMPOSER = 14;
+
+    MISSED_CALL_NOTIFICATION = 15;
+
+    CALL_SUBJECT_DIALOG = 16;
+  }
+}

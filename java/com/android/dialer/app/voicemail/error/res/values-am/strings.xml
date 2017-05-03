@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"የገቢ መልዕክት ሳጥንዎ ሙሉ ከሆነ አዲስ የድምጽ መልዕክት መቀበል አይችሉም።"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"አዲስ የድምጽ መልዕክት መቀበል አይቻልም"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"የመልዕክት ሳጥንዎ ሙሉ ነው። አዲስ የድምጽ መልዕክት ለመቀበል የተወሰኑ መልዕክቶችን ለመሰረዝ ይሞክሩ።"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[የሙከራ] ተጨማሪ ማከማቻ እና ምትኬን ያብሩ"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"የመልዕክት ሳጥንዎ ሙሉ ነው። ቦታ ነጻ ለማድረግ፣ ተጨማሪ ማከማቻ ያብሩ እና Google የእርስዎን የድምፅ መልዕክት ማስተዳደር እና ምትኬ ማድረግ ይችላል። "<b><i>"ይህ ባህሪይ በአሁኑ ጊዜ እየተሞከሩ ነው "</i></b>"እናም ምናልባት ከድምፅ መልዕክት አገልጋይዎ የድምፅ መልዕክቶችን ሊሰርዝ ይችላል፣ እንዲሁም ለወደፊቱ ይህን ባህሪ ለመደገፍ ቃል አንገባም። ነገር ግን ግብረመልስዎን ብናገኝ እንወዳለን።"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[የሙከራ] ተጨማሪ ማከማቻ እና ምትኬን ያብሩ"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"የመልዕክት ሳጥንዎ ከሞላ ጎደል ሙሉ ነው። ቦታ ነጻ ለማድረግ፣ ተጨማሪ ማከማቻ ያብሩ እና Google የእርስዎን የድምፅ መልዕክት ማስተዳደር እና ምትኬ ማድረግ ይችላል። "<b><i>"ይህ ባህሪይ በአሁኑ ጊዜ እየተሞከሩ ነው "</i></b>"እናም ምናልባት ከድምፅ መልዕክት አገልጋይዎ የድምፅ መልዕክቶችን ሊሰርዝ ይችላል፣ እንዲሁም ለወደፊቱ ይህን ባህሪ ለመደገፍ ቃል አንገባም። ነገር ግን ግብረመልስዎን ብናገኝ እንወዳለን።"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"ትርፍ ማከማቻ እና ምትኬን ያብሩ"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"የእርስዎ የመልእክት ሳጥን ሙሉ ነው። ባዶ ቦታ ነጻ ለማድረግ፣ Google የእርስዎን የድምፅ መልእክቶች ማስተዳደር እና በምትኬ ማስቀመጥ እንዲችል ትርፍ ማከማቻን ያብሩ።"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"ትርፍ ማከማቻ እና ምትኬን ያብሩ"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"የእርስዎ የመልእክት ሳጥን ሙሉ ነው። ባዶ ቦታ ነጻ ለማድረግ፣ Google የእርስዎን የድምፅ መልእክቶች ማስተዳደር እና በምትኬ ማስቀመጥ እንዲችል ትርፍ ማከማቻን ያብሩ።"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"የድምፅ መልዕክት ፒንዎን ያስገቡ"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"በማንኛውም ጊዜ የድምፅ መልዕክትዎ ላይ ለመድረስ ሲደውሉ የድምፅ መልዕክት ፒን ያስፈልግዎታል።"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"ያልታወቀ ስህተት"</string>

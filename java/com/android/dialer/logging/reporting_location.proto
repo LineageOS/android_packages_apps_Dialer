@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+message ReportingLocation {
+  // Spam reporting location
+  enum Type {
+    UNKNOWN_REPORTING_LOCATION = 0;
+    CALL_LOG_HISTORY = 1;
+    FEEDBACK_PROMPT = 2;
+  }
+}

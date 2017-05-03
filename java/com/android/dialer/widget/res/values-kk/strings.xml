@@ -2,4 +2,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="custom_message_hint" msgid="2179012696339457461">"Арнаулы хабар жазу"</string>
+    <string name="toolbar_close" msgid="1081308076149879833">"Жабу"</string>
 </resources>

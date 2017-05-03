@@ -39,6 +39,7 @@ public class DialerToolbar extends Toolbar {
     setElevation(getResources().getDimensionPixelSize(R.dimen.toolbar_elevation));
     setBackgroundColor(getResources().getColor(R.color.dialer_theme_color));
     setNavigationIcon(R.drawable.quantum_ic_close_white_24);
+    setNavigationContentDescription(R.string.toolbar_close);
     setNavigationOnClickListener(v -> ((Activity) context).finish());
   }
 

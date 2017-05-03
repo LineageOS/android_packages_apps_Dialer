@@ -39,4 +39,11 @@
 
   <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
   <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
+
+  <!-- String describing the button to access the contact details for a name or number.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
+  <string name="description_contact_photo_details">Contact details for <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
 </resources>

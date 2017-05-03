@@ -19,10 +19,8 @@ package com.android.dialer.callintent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
 import com.android.dialer.common.Assert;
-import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
-import com.google.protobuf.nano.MessageNano;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 /** Parses data for a call extra to get any dialer specific app data. */
 public class CallIntentParser {
@@ -38,7 +36,7 @@ public class CallIntentParser {
     }
     try {
       return CallSpecificAppData.parseFrom(flatArray);
-    } catch (InvalidProtocolBufferNanoException e) {
+    } catch (InvalidProtocolBufferException e) {
       Assert.fail("unexpected exception: " + e);
       return null;
     }
@@ -46,8 +44,7 @@ public class CallIntentParser {
 
   public static void putCallSpecificAppData(
       @NonNull Bundle extras, @NonNull CallSpecificAppData callSpecificAppData) {
-    extras.putByteArray(
-        Constants.EXTRA_CALL_SPECIFIC_APP_DATA, MessageNano.toByteArray(callSpecificAppData));
+    extras.putByteArray(Constants.EXTRA_CALL_SPECIFIC_APP_DATA, callSpecificAppData.toByteArray());
   }
 
   private CallIntentParser() {}

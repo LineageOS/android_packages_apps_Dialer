@@ -28,6 +28,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
+import android.telecom.CallAudioState;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
@@ -42,15 +43,20 @@ import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
-import com.android.dialer.callintent.nano.CallInitiationType;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lightbringer.LightbringerComponent;
-import com.android.dialer.logging.nano.ContactLookupResult;
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
+import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incallui.videotech.VideoTech;
@@ -125,6 +131,8 @@ public class DialerCall implements VideoTechListener {
   private String callProviderLabel;
   private String callbackNumber;
   private int mCameraDirection = CameraDirection.CAMERA_DIRECTION_UNKNOWN;
+  private EnrichedCallCapabilities mEnrichedCallCapabilities;
+  private Session mEnrichedCallSession;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -793,13 +801,19 @@ public class DialerCall implements VideoTechListener {
 
     mLogState.callSpecificAppData = CallIntentParser.getCallSpecificAppData(getIntentExtras());
     if (mLogState.callSpecificAppData == null) {
-      mLogState.callSpecificAppData = new CallSpecificAppData();
-      mLogState.callSpecificAppData.callInitiationType =
-          CallInitiationType.Type.EXTERNAL_INITIATION;
+
+      mLogState.callSpecificAppData =
+          CallSpecificAppData.newBuilder()
+              .setCallInitiationType(CallInitiationType.Type.EXTERNAL_INITIATION)
+              .build();
     }
     if (getState() == State.INCOMING) {
-      mLogState.callSpecificAppData.callInitiationType =
-          CallInitiationType.Type.INCOMING_INITIATION;
+      mLogState.callSpecificAppData =
+          mLogState
+              .callSpecificAppData
+              .toBuilder()
+              .setCallInitiationType(CallInitiationType.Type.INCOMING_INITIATION)
+              .build();
     }
   }
 
@@ -898,6 +912,25 @@ public class DialerCall implements VideoTechListener {
 
   public LatencyReport getLatencyReport() {
     return mLatencyReport;
+  }
+
+  @Nullable
+  public EnrichedCallCapabilities getEnrichedCallCapabilities() {
+    return mEnrichedCallCapabilities;
+  }
+
+  public void setEnrichedCallCapabilities(
+      @Nullable EnrichedCallCapabilities mEnrichedCallCapabilities) {
+    this.mEnrichedCallCapabilities = mEnrichedCallCapabilities;
+  }
+
+  @Nullable
+  public Session getEnrichedCallSession() {
+    return mEnrichedCallSession;
+  }
+
+  public void setEnrichedCallSession(@Nullable Session mEnrichedCallSession) {
+    this.mEnrichedCallSession = mEnrichedCallSession;
   }
 
   public void unregisterCallback() {
@@ -1063,6 +1096,34 @@ public class DialerCall implements VideoTechListener {
     }
 
     update();
+
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.VIDEO_CALL_REQUEST_RECEIVED, getUniqueCallId(), getTimeAddedMs());
+  }
+
+  @Override
+  public void onUpgradedToVideo(boolean switchToSpeaker) {
+    LogUtil.enterBlock("DialerCall.onUpgradedToVideo");
+
+    if (!switchToSpeaker) {
+      return;
+    }
+
+    CallAudioState audioState = AudioModeProvider.getInstance().getAudioState();
+
+    if (0 != (CallAudioState.ROUTE_BLUETOOTH & audioState.getSupportedRouteMask())) {
+      LogUtil.e(
+          "DialerCall.onUpgradedToVideo",
+          "toggling speakerphone not allowed when bluetooth supported.");
+      return;
+    }
+
+    if (audioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
+      return;
+    }
+
+    TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
   }
 
   /**
@@ -1174,24 +1235,25 @@ public class DialerCall implements VideoTechListener {
 
     public DisconnectCause disconnectCause;
     public boolean isIncoming = false;
-    public int contactLookupResult = ContactLookupResult.Type.UNKNOWN_LOOKUP_RESULT_TYPE;
+    public ContactLookupResult.Type contactLookupResult =
+        ContactLookupResult.Type.UNKNOWN_LOOKUP_RESULT_TYPE;
     public CallSpecificAppData callSpecificAppData;
     // If this was a conference call, the total number of calls involved in the conference.
     public int conferencedCalls = 0;
     public long duration = 0;
     public boolean isLogged = false;
 
-    private static String lookupToString(int lookupType) {
+    private static String lookupToString(ContactLookupResult.Type lookupType) {
       switch (lookupType) {
-        case ContactLookupResult.Type.LOCAL_CONTACT:
+        case LOCAL_CONTACT:
           return "Local";
-        case ContactLookupResult.Type.LOCAL_CACHE:
+        case LOCAL_CACHE:
           return "Cache";
-        case ContactLookupResult.Type.REMOTE:
+        case REMOTE:
           return "Remote";
-        case ContactLookupResult.Type.EMERGENCY:
+        case EMERGENCY:
           return "Emergency";
-        case ContactLookupResult.Type.VOICEMAIL:
+        case VOICEMAIL:
           return "Voicemail";
         default:
           return "Not found";
@@ -1202,35 +1264,35 @@ public class DialerCall implements VideoTechListener {
       if (callSpecificAppData == null) {
         return "null";
       }
-      switch (callSpecificAppData.callInitiationType) {
-        case CallInitiationType.Type.INCOMING_INITIATION:
+      switch (callSpecificAppData.getCallInitiationType()) {
+        case INCOMING_INITIATION:
           return "Incoming";
-        case CallInitiationType.Type.DIALPAD:
+        case DIALPAD:
           return "Dialpad";
-        case CallInitiationType.Type.SPEED_DIAL:
+        case SPEED_DIAL:
           return "Speed Dial";
-        case CallInitiationType.Type.REMOTE_DIRECTORY:
+        case REMOTE_DIRECTORY:
           return "Remote Directory";
-        case CallInitiationType.Type.SMART_DIAL:
+        case SMART_DIAL:
           return "Smart Dial";
-        case CallInitiationType.Type.REGULAR_SEARCH:
+        case REGULAR_SEARCH:
           return "Regular Search";
-        case CallInitiationType.Type.CALL_LOG:
+        case CALL_LOG:
           return "DialerCall Log";
-        case CallInitiationType.Type.CALL_LOG_FILTER:
+        case CALL_LOG_FILTER:
           return "DialerCall Log Filter";
-        case CallInitiationType.Type.VOICEMAIL_LOG:
+        case VOICEMAIL_LOG:
           return "Voicemail Log";
-        case CallInitiationType.Type.CALL_DETAILS:
+        case CALL_DETAILS:
           return "DialerCall Details";
-        case CallInitiationType.Type.QUICK_CONTACTS:
+        case QUICK_CONTACTS:
           return "Quick Contacts";
-        case CallInitiationType.Type.EXTERNAL_INITIATION:
+        case EXTERNAL_INITIATION:
           return "External";
-        case CallInitiationType.Type.LAUNCHER_SHORTCUT:
+        case LAUNCHER_SHORTCUT:
           return "Launcher Shortcut";
         default:
-          return "Unknown: " + callSpecificAppData.callInitiationType;
+          return "Unknown: " + callSpecificAppData.getCallInitiationType();
       }
     }
 
@@ -1264,10 +1326,11 @@ public class DialerCall implements VideoTechListener {
 
       String phoneNumber = call.getNumber();
       phoneNumber = phoneNumber != null ? phoneNumber : "";
+      phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
 
       // Insert order here determines the priority of that video tech option
-      this.videoTechs = new ArrayList<>();
-      videoTechs.add(new ImsVideoTech(call, call.mTelecomCall));
+      videoTechs = new ArrayList<>();
+      videoTechs.add(new ImsVideoTech(Logger.get(call.mContext), call, call.mTelecomCall));
 
       VideoTech rcsVideoTech =
           EnrichedCallComponent.get(call.mContext)

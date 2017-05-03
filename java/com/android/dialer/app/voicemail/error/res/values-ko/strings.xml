@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"받은편지함이 가득 차면 새로운 음성메시지를 받을 수 없습니다."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"새로운 음성메시지를 받을 수 없음"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"받은편지함이 가득 찼습니다. 새로운 음성메시지를 받으려면 일부 메시지를 삭제해 보세요."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[실험] 추가 저장용량 및 백업 사용 설정"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"편지함이 가득 찼습니다. 여유 공간을 확보하려면 Google에서 음성사서함 메시지를 관리하고 백업할 수 있도록 추가 저장용량을 사용 설정해 주세요. "<b><i>"이 기능은 현재 테스트 단계이며 "</i></b>"이 기능으로 인해 음성사서함 서버에서 메시지가 삭제될 수도 있습니다. 또한 Google에서는 추후 이 기능이 지원된다고 보장할 수 없습니다. 하지만 이 기능에 관해 의견을 주시면 감사하겠습니다."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[실험] 추가 저장용량 및 백업 사용 설정"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"사서함이 거의 가득 찼습니다. 여유 공간을 확보하려면 Google에서 음성사서함 메시지를 관리하고 백업할 수 있도록 추가 저장용량을 사용 설정해 주세요. "<b><i>"이 기능은 현재 테스트 단계이며 "</i></b>"이 기능으로 인해 음성사서함 서버에서 메시지가 삭제될 수도 있습니다. 또한 Google에서는 추후 이 기능이 지원된다고 보장할 수 없습니다. 하지만 이 기능에 관해 의견을 주시면 감사하겠습니다."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"추가 저장용량 및 백업 사용"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"음성사서함이 가득 찼습니다. Google에서 음성사서함 메시지를 관리하고 백업할 수 있도록 추가 저장용량을 사용 설정하여 여유 공간을 확보하세요."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"추가 저장용량 및 백업 사용"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"음성사서함이 거의 가득 찼습니다. Google에서 음성사서함 메시지를 관리하고 백업할 수 있도록 추가 저장용량을 사용 설정하여 여유 공간을 확보하세요."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"음성사서함 PIN 설정"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"음성사서함에 액세스하도록 호출할 때마다 음성사서함 PIN이 필요합니다."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"알 수 없는 오류"</string>

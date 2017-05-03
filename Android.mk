@@ -1,11 +1,9 @@
 # Local modifications:
-# * b/31757757 Precompiled proto classes have been included.
 # * removed com.google.android.backup.api_key. This should be added to
 #      the manifest in the top level directory.
 # * removed com.google.android.geo.API_KEY key. This should be added to
 #      the manifest files in java/com/android/incallui/calllocation/impl/
 #      and /java/com/android/incallui/maps/impl/
-# * b/35391680 apache temporarily included in the top level directory.
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -20,7 +18,6 @@ BASE_DIR := java/com/android
 
 # Primary dialer module sources.
 SRC_DIRS := \
-	apache \
 	$(BASE_DIR)/contacts/common \
 	$(BASE_DIR)/dialer \
 	$(BASE_DIR)/incallui \
@@ -57,8 +54,10 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/callcomposer/cameraui/res \
 	$(BASE_DIR)/dialer/callcomposer/res \
 	$(BASE_DIR)/dialer/calldetails/res \
+	$(BASE_DIR)/dialer/calllog/ui/res \
 	$(BASE_DIR)/dialer/calllogutils/res \
 	$(BASE_DIR)/dialer/common/res \
+	$(BASE_DIR)/dialer/contactsfragment/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/interactions/res \
 	$(BASE_DIR)/dialer/notification/res \
@@ -87,7 +86,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/video/impl/res \
 	$(BASE_DIR)/incallui/video/protocol/res \
 	$(BASE_DIR)/incallui/wifi/res \
-	$(BASE_DIR)/voicemail/impl/res
+	$(BASE_DIR)/voicemail/impl/res \
 
 
 # Dialer manifest files to merge.
@@ -104,8 +103,10 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/callcomposer/camera/camerafocus/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/callcomposer/cameraui/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calldetails/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/calllog/ui/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calllogutils/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/common/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
@@ -134,7 +135,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
-	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml
+	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
 
 
 # Merge all manifest files.
@@ -142,12 +143,9 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
-# Native protobuf compilation disabled b/36564333
-# Include protocol buffers and use the nano compiler.
-# LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
-# LOCAL_PROTOC_OPTIMIZE_TYPE := nano
-# LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
-# LOCAL_PROTO_JAVA_OUTPUT_PARAMS := enum_style=java,generate_clear=true,store_unknown_fields=true,generate_equals=true
+LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
+LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
+
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
 	$(support_library_root_dir)/design/res \
@@ -155,8 +153,6 @@ LOCAL_RESOURCE_DIR := \
 	$(support_library_root_dir)/v7/appcompat/res \
 	$(support_library_root_dir)/v7/cardview/res \
 	$(support_library_root_dir)/v7/recyclerview/res
-
-LOCAL_USE_AAPT2 := true
 
 # We specify each package explicitly to glob resource files.
 LOCAL_AAPT_FLAGS := \
@@ -171,8 +167,10 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.callcomposer.camera.camerafocus \
 	--extra-packages com.android.dialer.callcomposer.cameraui \
 	--extra-packages com.android.dialer.calldetails \
+	--extra-packages com.android.dialer.calllog.ui \
 	--extra-packages com.android.dialer.calllogutils \
 	--extra-packages com.android.dialer.common \
+	--extra-packages com.android.dialer.contactsfragment \
 	--extra-packages com.android.dialer.dialpadview \
 	--extra-packages com.android.dialer.interactions \
 	--extra-packages com.android.dialer.notification \
@@ -223,9 +221,10 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-javax-annotation-api-target \
 	dialer-javax-inject-target \
 	dialer-libshortcutbadger-target \
+	dialer-mime4j-core-target \
+	dialer-mime4j-dom-target \
 	jsr305 \
 	libphonenumber \
-	libprotobuf-java-nano \
 	volley \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
@@ -278,6 +277,11 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_USE_AAPT2 := true
+
+# b/37483961 - Jack Not Compiling Dagger Class Properly
+LOCAL_JACK_ENABLED := javac_frontend
+
 include $(BUILD_PACKAGE)
 
 # Cleanup local state
@@ -293,10 +297,10 @@ PROCESSOR_JARS :=
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-    dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.6/dagger-compiler-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.7/dagger-compiler-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-auto-value:../../../prebuilts/tools/common/m2/repository/com/google/auto/value/auto-value/1.3/auto-value-1.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
-    dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
-    dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.6/dagger-producers-2.6$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.7/dagger-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.7/dagger-producers-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-javax-annotation-api:../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-javax-inject:../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX)
@@ -320,7 +324,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := dialer-dagger2-target
 LOCAL_SDK_VERSION := current
-LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.6/dagger-2.6$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.7/dagger-2.7$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
@@ -387,12 +391,30 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 
-include $(CLEAR_VARS)
-
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := dialer-commons-io-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/commons-io/commons-io/2.4/commons-io-2.4$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-mime4j-core-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/org/apache/james/apache-mime4j-core/0.7.2/apache-mime4j-core-0.7.2$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-mime4j-dom-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/org/apache/james/apache-mime4j-dom/0.7.2/apache-mime4j-dom-0.7.2$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)

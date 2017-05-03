@@ -20,16 +20,20 @@ import android.app.Activity;
 public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
+  public void logImpression(DialerImpression.Type dialerImpression) {}
+
+  @Override
   public void logImpression(int dialerImpression) {}
 
   @Override
-  public void logCallImpression(int dialerImpression, String callId, long callStartTimeMillis) {}
+  public void logCallImpression(
+      DialerImpression.Type dialerImpression, String callId, long callStartTimeMillis) {}
 
   @Override
-  public void logInteraction(int interaction) {}
+  public void logInteraction(InteractionEvent.Type interaction) {}
 
   @Override
-  public void logScreenView(int screenEvent, Activity activity) {}
+  public void logScreenView(ScreenEvent.Type screenEvent, Activity activity) {}
 
   @Override
   public void sendHitEventAnalytics(String category, String action, String label, long value) {}

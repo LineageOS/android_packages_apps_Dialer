@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Impostazioni avanzate"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Leggi la segreteria"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Archiviazione supplementare e backup"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Questa è una funzionalità sperimentale"</i></b>" che si trova al momento in fase di test. È possibile che i messaggi vocali vengano eliminati dal server della segreteria. Non ci sono garanzie che la funzionalità continui a essere supportata in futuro, ma ci piacerebbe ricevere il tuo feedback."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Imposta PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Cambia PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"La lettura delle segreteria deve essere attivata per cambiare il PIN"</string>

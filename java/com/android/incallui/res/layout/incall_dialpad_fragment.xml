@@ -19,6 +19,8 @@
   class="com.android.incallui.DialpadFragment$DialpadSlidingLinearLayout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:clipToPadding="false"
+  android:clipChildren="false"
   android:orientation="vertical">
   <include layout="@layout/dialpad_view"/>
 </view>
