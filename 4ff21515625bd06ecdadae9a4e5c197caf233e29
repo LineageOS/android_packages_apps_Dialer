@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_a8cc7836",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2017-05-04T14:11:05Z",
+      "side": 1,
+      "message": "should this not be\n\u003ca href\u003d \n?",
+      "revId": "4ff21515625bd06ecdadae9a4e5c197caf233e29",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
