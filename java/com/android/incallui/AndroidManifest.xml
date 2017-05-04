@@ -19,7 +19,7 @@
 
   <uses-sdk
     android:minSdkVersion="23"
-    android:targetSdkVersion="25"/>
+    android:targetSdkVersion="26"/>
 
   <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
   <!-- We use this to disable the status bar buttons of home, back and recent

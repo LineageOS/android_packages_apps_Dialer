@@ -34,13 +34,13 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.postcall.PostCall;
@@ -249,7 +249,7 @@ public class InCallPresenter implements CallList.Listener {
   private VideoSurfaceTexture mLocalVideoSurfaceTexture;
   private VideoSurfaceTexture mRemoteVideoSurfaceTexture;
 
-  /** Inaccessible constructor. Must use getInstance() to get this singleton. */
+  /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
 
@@ -258,6 +258,11 @@ public class InCallPresenter implements CallList.Listener {
       sInCallPresenter = new InCallPresenter();
     }
     return sInCallPresenter;
+  }
+
+  @VisibleForTesting
+  public static synchronized void setInstanceForTesting(InCallPresenter inCallPresenter) {
+    sInCallPresenter = inCallPresenter;
   }
 
   /**
@@ -762,9 +767,15 @@ public class InCallPresenter implements CallList.Listener {
 
     if (!mCallList.hasLiveCall()
         && !call.getLogState().isIncoming
+        && !isSecretCode(call.getNumber())
         && !CallerInfoUtils.isVoiceMailNumber(mContext, call)) {
-      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getTimeAddedMs());
+      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
     }
+  }
+
+  private boolean isSecretCode(@Nullable String number) {
+    return number != null
+        && (number.length() <= 8 || number.startsWith("*#*#") || number.endsWith("#*#*"));
   }
 
   /** Given the call list, return the state in which the in-call screen should be. */

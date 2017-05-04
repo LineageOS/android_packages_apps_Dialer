@@ -49,6 +49,20 @@ public class ActionBarController {
         }
       };
 
+  private final AnimationCallback mFadeInCallback =
+      new AnimationCallback() {
+        @Override
+        public void onAnimationEnd() {
+          slideActionBar(false /* slideUp */, false /* animate */);
+        }
+
+        @Override
+        public void onAnimationCancel() {
+          slideActionBar(false /* slideUp */, false /* animate */);
+        }
+      };
+  private ValueAnimator mAnimator;
+
   public ActionBarController(ActivityUi activityUi, SearchEditTextLayout searchBox) {
     mActivityUi = activityUi;
     mSearchBox = searchBox;
@@ -107,7 +121,7 @@ public class ActionBarController {
         }
         slideActionBar(false /* slideUp */, true /* animate */);
       } else {
-        mSearchBox.fadeIn();
+        mSearchBox.fadeIn(mFadeInCallback);
       }
     }
   }
@@ -129,14 +143,18 @@ public class ActionBarController {
   public void slideActionBar(boolean slideUp, boolean animate) {
     LogUtil.d("ActionBarController.slidingActionBar", "up: %b, animate: %b", slideUp, animate);
 
+    if (mAnimator != null && mAnimator.isRunning()) {
+      mAnimator.cancel();
+      mAnimator.removeAllUpdateListeners();
+    }
     if (animate) {
-      ValueAnimator animator = slideUp ? ValueAnimator.ofFloat(0, 1) : ValueAnimator.ofFloat(1, 0);
-      animator.addUpdateListener(
+      mAnimator = slideUp ? ValueAnimator.ofFloat(0, 1) : ValueAnimator.ofFloat(1, 0);
+      mAnimator.addUpdateListener(
           animation -> {
             final float value = (float) animation.getAnimatedValue();
             setHideOffset((int) (mActivityUi.getActionBarHeight() * value));
           });
-      animator.start();
+      mAnimator.start();
     } else {
       setHideOffset(slideUp ? mActivityUi.getActionBarHeight() : 0);
     }
@@ -147,8 +165,7 @@ public class ActionBarController {
     mSearchBox.animate().alpha(alphaValue).start();
   }
 
-  public void setHideOffset(int offset) {
-    mIsActionBarSlidUp = offset >= mActivityUi.getActionBarHeight();
+  private void setHideOffset(int offset) {
     mActivityUi.setActionBarHideOffset(offset);
   }
 

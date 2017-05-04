@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Trả lời và kết thúc cuộc gọi đang diễn ra"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video đã tắt"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Vuốt hai ngón tay lên để trả lời. Vuốt hai ngón tay xuống để từ chối."</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"Cuộc gọi quan trọng"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

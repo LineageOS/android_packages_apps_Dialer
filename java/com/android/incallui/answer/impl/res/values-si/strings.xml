@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"යන අැමතුමට පිළිතරු දී අවසන් කරන්න"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"වීඩියෝව ක්‍රියාවිරහිතයි"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"පිළිතුරු දීමට ඇඟිලි දෙකකින් ඉහළට ස්වයිප් කරන්න, ප්‍රතික්ෂේප කිරීමට ඇඟිලි දෙකකින් පහළට ස්වයිප් කරන්න."</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"වැදගත් ඇමතුම"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

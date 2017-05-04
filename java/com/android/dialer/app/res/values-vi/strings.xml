@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Cuộc gọi"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Chặn cuộc gọi"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Thư thoại"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Tạm thời tắt chặn cuộc gọi"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Tính năng chặn cuộc gọi đã bị tắt vì bạn đã liên hệ với dịch vụ khẩn cấp từ điện thoại này trong vòng 48 giờ qua. Tính năng này sẽ được bật lại tự động sau khi khoảng thời gian 48 giờ kết thúc."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Nhập số"</string>

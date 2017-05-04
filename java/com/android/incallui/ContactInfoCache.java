@@ -25,7 +25,6 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
@@ -102,15 +101,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       cacheInfo.setSource(ContactSource.Type.SOURCE_TYPE_CNAP, "CNAP", 0);
       contactInfo.name = input.cnapName;
       contactInfo.number = input.number;
-      contactInfo.type = ContactsContract.CommonDataKinds.Phone.TYPE_MAIN;
       try {
         final JSONObject contactRows =
             new JSONObject()
                 .put(
                     Phone.CONTENT_ITEM_TYPE,
-                    new JSONObject()
-                        .put(Phone.NUMBER, contactInfo.number)
-                        .put(Phone.TYPE, Phone.TYPE_MAIN));
+                    new JSONObject().put(Phone.NUMBER, contactInfo.number));
         final String jsonString =
             new JSONObject()
                 .put(Contacts.DISPLAY_NAME, contactInfo.name)

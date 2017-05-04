@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"시간 나실 때 전화해 주세요."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"급한 용무는 아니니 나중에 다시 연락드릴게요."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"메시지를 추가하시겠습니까?"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"메시지 전송됨"</string>
     <string name="view" msgid="8572192949673703830">"보기"</string>
 </resources>

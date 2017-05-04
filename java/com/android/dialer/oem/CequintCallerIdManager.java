@@ -69,7 +69,7 @@ public class CequintCallerIdManager {
   private static final String NAME = "cid_pName";
   private static final String FIRST_NAME = "cid_pFirstName";
   private static final String LAST_NAME = "cid_pLastName";
-  private static final String IMAGE = "cid_pImage";
+  private static final String IMAGE = "cid_pLogo";
   private static final String DISPLAY_NAME = "cid_pDisplayName";
 
   // TODO: Revisit it and maybe remove it if it's not necessary.

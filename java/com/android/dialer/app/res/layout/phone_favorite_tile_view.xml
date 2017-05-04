@@ -14,115 +14,118 @@
      limitations under the License.
 -->
 <view
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/contact_tile"
-  class="com.android.dialer.app.list.PhoneFavoriteSquareTileView"
-  android:paddingBottom="@dimen/contact_tile_divider_width"
-  android:paddingEnd="@dimen/contact_tile_divider_width">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_tile"
+    class="com.android.dialer.app.list.PhoneFavoriteSquareTileView"
+    android:paddingBottom="@dimen/contact_tile_divider_width"
+    android:paddingEnd="@dimen/contact_tile_divider_width">
 
   <RelativeLayout
-    android:id="@+id/contact_favorite_card"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    android:nextFocusRight="@+id/contact_tile_secondary_button">
+      android:id="@+id/contact_favorite_card"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:focusable="true"
+      android:nextFocusRight="@+id/contact_tile_secondary_button">
 
     <com.android.contacts.common.widget.LayoutSuppressingImageView
-      android:id="@+id/contact_tile_image"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"/>
+        android:id="@+id/contact_tile_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
-      <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
       <View
-        android:id="@+id/shadow_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:background="@drawable/shadow_contact_photo"/>
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="6"/>
+      <View
+          android:id="@+id/shadow_overlay"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="4"
+          android:background="@drawable/shadow_contact_photo"/>
     </LinearLayout>
 
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:paddingBottom="@dimen/contact_tile_text_bottom_padding"
-      android:paddingStart="@dimen/contact_tile_text_side_padding"
-      android:paddingEnd="@dimen/contact_tile_text_side_padding"
-      android:orientation="vertical">
-
-      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <TextView
-          android:id="@+id/contact_tile_name"
-          android:layout_width="0dp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/contact_tile_text_bottom_padding"
+        android:paddingStart="@dimen/contact_tile_text_side_padding"
+        android:paddingEnd="@dimen/contact_tile_text_side_padding"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+        <TextView
+            android:id="@+id/contact_tile_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:fadingEdgeLength="3dip"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textColor="@color/contact_tile_name_color"
+            android:textSize="15sp"/>
+        <ImageView
+            android:id="@+id/contact_star_icon"
+            android:layout_width="@dimen/favorites_star_icon_size"
+            android:layout_height="@dimen/favorites_star_icon_size"
+            android:layout_marginStart="3dp"
+            android:src="@drawable/ic_star"
+            android:visibility="gone"/>
+      </LinearLayout>
+      <TextView
+          android:id="@+id/contact_tile_phone_type"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
           android:ellipsize="marquee"
           android:fadingEdge="horizontal"
           android:fadingEdgeLength="3dip"
-          android:fontFamily="sans-serif-medium"
+          android:fontFamily="sans-serif"
+          android:gravity="center_vertical"
           android:singleLine="true"
           android:textAlignment="viewStart"
           android:textColor="@color/contact_tile_name_color"
-          android:textSize="15sp"/>
-        <ImageView
-          android:id="@+id/contact_star_icon"
-          android:layout_width="@dimen/favorites_star_icon_size"
-          android:layout_height="@dimen/favorites_star_icon_size"
-          android:layout_marginStart="3dp"
-          android:src="@drawable/ic_star"
-          android:visibility="gone"/>
-      </LinearLayout>
-      <TextView
-        android:id="@+id/contact_tile_phone_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:fadingEdgeLength="3dip"
-        android:fontFamily="sans-serif"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:textAlignment="viewStart"
-        android:textColor="@color/contact_tile_name_color"
-        android:textSize="11sp"/>
+          android:textSize="11sp"/>
     </LinearLayout>
 
     <View
-      android:id="@+id/contact_tile_push_state"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@drawable/item_background_material_dark"
-      android:importantForAccessibility="no"/>
+        android:id="@+id/contact_tile_push_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_background_material_dark"
+        android:importantForAccessibility="no"/>
 
-    <ImageButton
-      android:id="@id/contact_tile_secondary_button"
-      android:layout_width="@dimen/contact_tile_info_button_height_and_width"
-      android:layout_height="@dimen/contact_tile_info_button_height_and_width"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentTop="true"
-      android:paddingTop="8dp"
-      android:paddingBottom="4dp"
-      android:paddingStart="4dp"
-      android:paddingEnd="4dp"
-      android:paddingLeft="4dp"
-      android:paddingRight="9dp"
-      android:background="@drawable/item_background_material_dark"
-      android:contentDescription="@string/description_view_contact_detail"
-      android:scaleType="center"
-      android:src="@drawable/quantum_ic_more_vert_white_24"/>
+    <!-- Wrap the ImageButton in a layout with a transparent background so the ripple has something to draw on -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+      <ImageButton
+          android:id="@id/contact_tile_secondary_button"
+          android:layout_width="@dimen/contact_tile_info_button_height_and_width"
+          android:layout_height="@dimen/contact_tile_info_button_height_and_width"
+          android:layout_gravity="top|end"
+          android:paddingTop="8dp"
+          android:paddingBottom="4dp"
+          android:paddingStart="4dp"
+          android:paddingEnd="4dp"
+          android:background="@drawable/item_background_material_borderless_dark"
+          android:contentDescription="@string/description_view_contact_detail"
+          android:scaleType="center"
+          android:src="@drawable/quantum_ic_more_vert_white_24"/>
+
+    </FrameLayout>
 
   </RelativeLayout>
 </view>

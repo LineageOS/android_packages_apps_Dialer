@@ -3,7 +3,7 @@
 
   <uses-sdk
     android:minSdkVersion="23"
-    android:targetSdkVersion="25"/>
+    android:targetSdkVersion="26"/>
 
   <!-- Applications using this module should merge these permissions using android_manifest_merge -->
 

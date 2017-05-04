@@ -36,7 +36,7 @@ public class InCallVideoCallCallbackNotifier {
   private final Set<SurfaceChangeListener> mSurfaceChangeListeners =
       Collections.newSetFromMap(new ConcurrentHashMap<SurfaceChangeListener, Boolean>(8, 0.9f, 1));
 
-  /** Private constructor. Instance should only be acquired through getInstance(). */
+  /** Private constructor. Instance should only be acquired through getRunningInstance(). */
   private InCallVideoCallCallbackNotifier() {}
 
   /** Static singleton accessor method. */

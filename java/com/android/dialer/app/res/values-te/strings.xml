@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"కాల్‌లు"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"కాల్ బ్లాక్ చేయడం"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"వాయిస్ మెయిల్"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"కాల్ బ్లాకింగ్ తాత్కాలికంగా ఆఫ్ అయ్యింది"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"మీరు గత 48 గంటల వ్యవధిలో ఈ ఫోన్ నుండి అత్యవసర సేవలను సంప్రదించినందున కాల్ బ్లాకింగ్ నిలిపివేయబడింది. 48 గంటల వ్యవధి ముగిసిన తర్వాత ఇది స్వయంచాలకంగా పునఃప్రారంభించబడుతుంది."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"నంబర్‌లను దిగుమతి చేయి"</string>

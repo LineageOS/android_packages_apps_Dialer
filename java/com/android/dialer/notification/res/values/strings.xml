@@ -21,5 +21,6 @@
   <string name="notification_channel_missed_call">Missed calls</string>
   <string name="notification_channel_voicemail">Voicemails</string>
   <string name="notification_channel_external_call">External calls</string>
-  <string name="notification_channel_misc">Miscellaneous</string>
+  <!-- [CHAR LIMIT=NONE] Catch-all channel for notifications that don't fit into one of the others -->
+  <string name="notification_channel_misc">Default</string>
 </resources>

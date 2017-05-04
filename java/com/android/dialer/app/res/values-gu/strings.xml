@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"કૉલ્સ"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"કૉલ અવરોધ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"વૉઇસમેઇલ"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"કૉલ અવરોધિત કરવાનું અસ્થાયીરૂપે બંધ છે"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"કૉલ અવરોધિત કરવાનું અક્ષમ કરવામાં આવ્યું છે કારણ કે તમે આ ફોનમાંથી છેલ્લા 48 કલાકમાં કટોકટીની સેવાઓનો સંપર્ક કર્યો હતો. એકવાર 48 કલાકનો સમયગાળો સમાપ્ત થાય, પછી તે આપમેળે ફરીથી સક્ષમ કરવામાં આવશે."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"નંબર્સ આયાત કરો"</string>

@@ -36,6 +36,7 @@ import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.fetch.VoicemailFetchedCallback;
 import com.android.voicemail.impl.imap.ImapHelper;
 import com.android.voicemail.impl.imap.ImapHelper.InitializingException;
+import com.android.voicemail.impl.mail.store.ImapFolder.Quota;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
@@ -152,21 +153,28 @@ public class OmtpVvmSyncService {
    */
   private void autoDeleteAndArchiveVM(
       ImapHelper imapHelper, PhoneAccountHandle phoneAccountHandle) {
-
-    if (isArchiveAllowedAndEnabled(mContext, phoneAccountHandle)) {
-      if ((float) imapHelper.getOccuupiedQuota() / (float) imapHelper.getTotalQuota()
-          > AUTO_DELETE_ARCHIVE_VM_THRESHOLD) {
-        deleteAndArchiveVM(imapHelper);
-        imapHelper.updateQuota();
-        LoggerUtils.logImpressionOnMainThread(
-            mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER);
-      } else {
-        VvmLog.i(TAG, "no need to archive and auto delete VM, quota below threshold");
-      }
-    } else {
+    if (!isArchiveAllowedAndEnabled(mContext, phoneAccountHandle)) {
       VvmLog.i(TAG, "autoDeleteAndArchiveVM is turned off");
       LoggerUtils.logImpressionOnMainThread(
           mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF);
+      return;
+    }
+    Quota quotaOnServer = imapHelper.getQuota();
+    if (quotaOnServer == null) {
+      LoggerUtils.logImpressionOnMainThread(
+          mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_FAILED_DUE_TO_FAILED_QUOTA_CHECK);
+      VvmLog.e(TAG, "autoDeleteAndArchiveVM failed - Can't retrieve Imap quota.");
+      return;
+    }
+
+    if ((float) quotaOnServer.occupied / (float) quotaOnServer.total
+        > AUTO_DELETE_ARCHIVE_VM_THRESHOLD) {
+      deleteAndArchiveVM(imapHelper, quotaOnServer);
+      imapHelper.updateQuota();
+      LoggerUtils.logImpressionOnMainThread(
+          mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER);
+    } else {
+      VvmLog.i(TAG, "no need to archive and auto delete VM, quota below threshold");
     }
   }
 
@@ -190,14 +198,15 @@ public class OmtpVvmSyncService {
     return true;
   }
 
-  private void deleteAndArchiveVM(ImapHelper imapHelper) {
+  private void deleteAndArchiveVM(ImapHelper imapHelper, Quota quotaOnServer) {
     // Archive column should only be used for 0 and above
     Assert.isTrue(BuildCompat.isAtLeastO());
+
     // The number of voicemails that exceed our threshold and should be deleted from the server
     int numVoicemails =
-        imapHelper.getOccuupiedQuota()
-            - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * imapHelper.getTotalQuota());
+        quotaOnServer.occupied - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * quotaOnServer.total);
     List<Voicemail> oldestVoicemails = mQueryHelper.oldestVoicemailsOnServer(numVoicemails);
+    VvmLog.w(TAG, "number of voicemails to delete " + numVoicemails);
     if (!oldestVoicemails.isEmpty()) {
       mQueryHelper.markArchivedInDatabase(oldestVoicemails);
       imapHelper.markMessagesAsDeleted(oldestVoicemails);

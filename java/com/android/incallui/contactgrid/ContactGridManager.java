@@ -17,6 +17,8 @@
 package com.android.incallui.contactgrid;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,8 +26,6 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -319,15 +319,22 @@ public class ContactGridManager {
     bottomTextView.setText(info.label);
     bottomTextView.setAllCaps(info.isSpamIconVisible);
     workIconImageView.setVisibility(info.isWorkIconVisible ? View.VISIBLE : View.GONE);
-    boolean wasHdIconVisible = hdIconImageView.getVisibility() == View.VISIBLE;
-    hdIconImageView.setVisibility(
-        info.isHdIconVisible || info.isHdAttemptingIconVisible ? View.VISIBLE : View.GONE);
-    if (!wasHdIconVisible && info.isHdAttemptingIconVisible) {
-      Animation animation = AnimationUtils.loadAnimation(context, R.anim.blinking);
-      hdIconImageView.startAnimation(animation);
-    } else if (wasHdIconVisible && !info.isHdAttemptingIconVisible) {
-      hdIconImageView.clearAnimation();
-      hdIconImageView.setAlpha(1f);
+    if (hdIconImageView.getVisibility() == View.GONE) {
+      if (info.isHdAttemptingIconVisible) {
+        hdIconImageView.setVisibility(View.VISIBLE);
+        hdIconImageView.setActivated(false);
+        Drawable drawableCurrent = hdIconImageView.getDrawable().getCurrent();
+        if (drawableCurrent instanceof Animatable && !((Animatable) drawableCurrent).isRunning()) {
+          ((Animatable) drawableCurrent).start();
+        }
+      } else if (info.isHdIconVisible) {
+        hdIconImageView.setVisibility(View.VISIBLE);
+        hdIconImageView.setActivated(true);
+      }
+    } else if (info.isHdIconVisible) {
+      hdIconImageView.setActivated(true);
+    } else if (!info.isHdAttemptingIconVisible) {
+      hdIconImageView.setVisibility(View.GONE);
     }
     forwardIconImageView.setVisibility(info.isForwardIconVisible ? View.VISIBLE : View.GONE);
     spamIconImageView.setVisibility(info.isSpamIconVisible ? View.VISIBLE : View.GONE);

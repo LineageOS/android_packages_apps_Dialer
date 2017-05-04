@@ -135,7 +135,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/ic_phone_attach"/>
+      android:src="@drawable/ic_call_and_share"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"

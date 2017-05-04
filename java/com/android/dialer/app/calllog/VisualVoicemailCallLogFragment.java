@@ -46,22 +46,18 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   }
 
   @Override
-  public void onCreate(Bundle state) {
-    super.onCreate(state);
-    mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter.getInstance(getActivity(), state);
-    getActivity()
-        .getContentResolver()
-        .registerContentObserver(
-            VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
-  }
-
-  @Override
   protected VoicemailPlaybackPresenter getVoicemailPlaybackPresenter() {
     return mVoicemailPlaybackPresenter;
   }
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
+    mVoicemailPlaybackPresenter =
+        VoicemailPlaybackPresenter.getInstance(getActivity(), savedInstanceState);
+    getActivity()
+        .getContentResolver()
+        .registerContentObserver(
+            VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
     super.onActivityCreated(savedInstanceState);
     mVoicemailErrorManager =
         new VoicemailErrorManager(getContext(), getAdapter().getAlertManager(), mModalAlertManager);
@@ -132,9 +128,6 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public void onNotVisible() {
     LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageUnselected");
     super.onNotVisible();
-    if (getAdapter() != null && getAdapter().mActionMode != null) {
-      getAdapter().mActionMode.finish();
-    }
     if (getActivity() != null) {
       getActivity().setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }

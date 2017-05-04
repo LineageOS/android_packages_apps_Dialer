@@ -15,7 +15,17 @@
   -->
 
 <manifest
-  package="com.android.dialer.notification"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-  <uses-sdk android:minSdkVersion="23" />
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.dialer.notification">
+
+  <uses-sdk android:minSdkVersion="23"/>
+  <application>
+    <receiver android:name=".PackageUpdatedReceiver"
+              android:directBootAware="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+        <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+      </intent-filter>
+    </receiver>
+  </application>
 </manifest>

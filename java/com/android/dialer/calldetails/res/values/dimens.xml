@@ -36,7 +36,6 @@
   <!-- EC container -->
   <dimen name="call_details_ec_text_size">12sp</dimen>
   <dimen name="ec_container_height">48dp</dimen>
-  <dimen name="ec_post_call_left_margin">73dp</dimen>
   <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
 </resources>

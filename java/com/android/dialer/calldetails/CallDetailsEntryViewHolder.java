@@ -111,10 +111,10 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       callDuration.setVisibility(View.VISIBLE);
       callDuration.setText(
           CallEntryFormatter.formatDurationAndDataUsage(
-              context, entry.getDuration(), entry.getDataUsage(), false /* a11y */));
+              context, entry.getDuration(), entry.getDataUsage()));
       callDuration.setContentDescription(
-          CallEntryFormatter.formatDurationAndDataUsage(
-              context, entry.getDuration(), entry.getDataUsage(), true /* a11y */));
+          CallEntryFormatter.formatDurationAndDataUsageA11y(
+              context, entry.getDuration(), entry.getDataUsage()));
     }
     setMultimediaDetails(number, entry, showMultimediaDivider);
   }
@@ -128,10 +128,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
       HistoryResult historyResult = entry.getHistoryResults(0);
       multimediaDetailsContainer.setVisibility(View.VISIBLE);
-      multimediaDetailsContainer.setOnClickListener(
-          (v) -> {
-            DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
-          });
+      multimediaDetailsContainer.setOnClickListener((v) -> startSmsIntent(context, number));
       multimediaImageContainer.setClipToOutline(true);
 
       if (!TextUtils.isEmpty(historyResult.getImageUri())) {
@@ -159,10 +156,15 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         postCallNote.setVisibility(View.VISIBLE);
         postCallNote.setText(
             context.getString(R.string.message_in_quotes, entry.getHistoryResults(1).getText()));
+        postCallNote.setOnClickListener((v) -> startSmsIntent(context, number));
       } else {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no post call note");
       }
     }
+  }
+
+  private void startSmsIntent(Context context, String number) {
+    DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
   }
 
   private static boolean isIncoming(@NonNull HistoryResult historyResult) {

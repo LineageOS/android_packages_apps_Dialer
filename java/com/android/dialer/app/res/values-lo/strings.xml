@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"​ການ​ໂທ"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ການບ​ລັອກ​ສາຍ​ໂທ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ຂໍ້ຄວາມສຽງ"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ການບ​ລັອກ​ສາຍ​ໂທ​ປິດ​ຊົ່ວ​ຄາວ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ ເພາະ​ວ່າ​ທ່ານ​ໄດ້​ຕິດ​ຕໍ່​ຫາ​ຝ່າຍ​ບໍ​ລິ​ການ​ສຸກ​ເສີນ​ຈາກ​ໂທ​ລະ​ສັບ​ນີ້​ພາຍ​ໃນ 48 ຊົ່ວ​ໂມງ​ສຸດ​ທ້າຍ. ມັນ​ຈະ​ຖືກ​ເປີດ​ໃຊ້​ງານ​ອີກ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ ເມື່ອ​ໝົດ​ໄລ​ຍະ 48 ຊົ່ວ​ໂມງ​ໄປ​ແລ້ວ."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ນຳ​ຕົວ​ເລກ​ເຂົ້າ"</string>

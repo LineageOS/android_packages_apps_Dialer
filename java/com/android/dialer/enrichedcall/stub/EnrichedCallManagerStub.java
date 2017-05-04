@@ -74,7 +74,8 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
 
   @Nullable
   @Override
-  public Session getSession(@NonNull String uniqueCallId, @NonNull String number) {
+  public Session getSession(
+      @NonNull String uniqueCallId, @NonNull String number, @Nullable Filter filter) {
     return null;
   }
 
@@ -82,6 +83,18 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   @Override
   public Session getSession(long sessionId) {
     return null;
+  }
+
+  @NonNull
+  @Override
+  public Filter createIncomingCallComposerFilter() {
+    return session -> false;
+  }
+
+  @NonNull
+  @Override
+  public Filter createOutgoingCallComposerFilter() {
+    return session -> false;
   }
 
   @Nullable
@@ -122,7 +135,9 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   public void unregisterVideoShareListener(@NonNull VideoShareListener listener) {}
 
   @Override
-  public void onIncomingVideoShareInvite(long sessionId, @NonNull String number) {}
+  public boolean onIncomingVideoShareInvite(long sessionId, @NonNull String number) {
+    return false;
+  }
 
   @Override
   public long startVideoShareSession(String number) {

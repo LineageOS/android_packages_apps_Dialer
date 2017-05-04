@@ -16,36 +16,37 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:paddingTop="16dp"
-  android:paddingStart="16dp"
-  android:paddingEnd="24dp">
-
-  <ImageView
-    android:id="@id/answer_message_avatar"
-    android:layout_width="@dimen/answer_message_avatar_size"
-    android:layout_height="@dimen/answer_message_avatar_size"
-    android:elevation="@dimen/answer_data_elevation"/>
-
-  <ImageView
-    android:id="@id/answer_message_image"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
-    android:layout_marginStart="8dp"
-    android:layout_centerInParent="true"
-    android:layout_toEndOf="@+id/answer_message_avatar"
-    android:background="@drawable/answer_data_background"
-    android:elevation="@dimen/answer_data_elevation"
-    android:outlineProvider="background"
-    android:adjustViewBounds="true"
-    android:scaleType="fitCenter"/>
+    android:paddingTop="16dp"
+    android:paddingStart="@dimen/answer_message_margin_start_end"
+    android:paddingEnd="@dimen/answer_message_margin_start_end">
+
+  <ImageView
+      android:id="@id/answer_message_image"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/answer_message_contents_margin_top"
+      android:layout_marginBottom="4dp"
+      android:layout_centerInParent="true"
+      android:layout_alignTop="@+id/answer_message_avatar"
+      android:outlineProvider="background"
+      android:background="@drawable/answer_data_background"
+      android:elevation="@dimen/answer_data_elevation"
+      android:adjustViewBounds="true"
+      android:scaleType="fitCenter"/>
 
   <ProgressBar
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/loading_spinner"
-    android:layout_centerInParent="true"
-    android:elevation="2dp"/>
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/loading_spinner"
+      android:layout_centerInParent="true"
+      android:elevation="@dimen/answer_data_elevation"/>
+
+  <ImageView
+      android:id="@id/answer_message_avatar"
+      android:layout_width="@dimen/answer_message_avatar_size"
+      android:layout_height="@dimen/answer_message_avatar_size"
+      android:layout_centerHorizontal="true"
+      android:elevation="@dimen/answer_avatar_elevation"/>
 </RelativeLayout>

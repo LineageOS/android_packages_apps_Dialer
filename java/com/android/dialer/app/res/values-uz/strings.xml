@@ -202,6 +202,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Chaqiruvlar"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Qo‘ng‘iroqlarni bloklash"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Ovozli pochta"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Qo‘ng‘iroqlarni bloklash o‘chirilgan"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Oxirgi 48 soat ichida ushbu telefon orqali favqulodda xizmatlar bilan bog‘lanilganligi uchun qo‘ng‘iroqlarni bloklash o‘chirib qo‘yildi. 48 soatlik muddat tugagandan so‘ng bu avtomatik qayta yoqiladi."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Raqamlarni import qilish"</string>

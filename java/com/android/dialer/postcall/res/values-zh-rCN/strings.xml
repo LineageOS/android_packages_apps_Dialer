@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"有空时给我回电。"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"不着急，稍后再聊。"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"添加信息"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"信息已发送"</string>
     <string name="view" msgid="8572192949673703830">"查看"</string>
 </resources>

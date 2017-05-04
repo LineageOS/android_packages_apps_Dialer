@@ -664,8 +664,16 @@ public class CallCardPresenter
     MultimediaData multimediaData = null;
     if (mPrimary.getNumber() != null) {
       EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
+
+      EnrichedCallManager.Filter filter;
+      if (mPrimary.isIncoming()) {
+        filter = manager.createIncomingCallComposerFilter();
+      } else {
+        filter = manager.createOutgoingCallComposerFilter();
+      }
+
       Session enrichedCallSession =
-          manager.getSession(mPrimary.getUniqueCallId(), mPrimary.getNumber());
+          manager.getSession(mPrimary.getUniqueCallId(), mPrimary.getNumber(), filter);
 
       mPrimary.setEnrichedCallSession(enrichedCallSession);
       mPrimary.setEnrichedCallCapabilities(manager.getCapabilities(mPrimary.getNumber()));

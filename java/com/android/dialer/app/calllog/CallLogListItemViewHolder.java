@@ -17,6 +17,7 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -26,6 +27,7 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +45,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
@@ -182,7 +185,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
    * The name or number associated with the call. Cached here for use when setting content
    * descriptions on buttons in the actions ViewStub when it is inflated.
    */
-  public CharSequence nameOrNumber;
+  @Nullable public CharSequence nameOrNumber;
   /**
    * The call type or Location associated with the call. Cached here for use when setting text for a
    * voicemail log's call button
@@ -257,6 +260,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     primaryActionView.setOnClickListener(mExpandCollapseListener);
     if (mVoicemailPlaybackPresenter != null) {
       primaryActionView.setOnLongClickListener(longPressListener);
+      quickContactView.setOnLongClickListener(longPressListener);
     } else {
       primaryActionView.setOnCreateContextMenuListener(this);
     }
@@ -788,14 +792,35 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       mVoicemailPlaybackPresenter.shareVoicemail();
     } else {
       logCallLogAction(view.getId());
+
       final IntentProvider intentProvider = (IntentProvider) view.getTag();
-      if (intentProvider != null) {
-        final Intent intent = intentProvider.getIntent(mContext);
-        // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-        if (intent != null) {
-          DialerUtils.startActivityWithErrorToast(mContext, intent);
-        }
+      if (intentProvider == null) {
+        return;
       }
+
+      final Intent intent = intentProvider.getIntent(mContext);
+      // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+      if (intent == null) {
+        return;
+      }
+
+      // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
+      // intents need to be started using startActivityForResult instead of the usual startActivity
+      String packageName = intent.getPackage();
+      if (packageName != null && packageName.equals(getLightbringer().getPackageName(mContext))) {
+        startLightbringerActivity(intent);
+      } else {
+        DialerUtils.startActivityWithErrorToast(mContext, intent);
+      }
+    }
+  }
+
+  private void startLightbringerActivity(Intent intent) {
+    try {
+      Activity activity = (Activity) mContext;
+      activity.startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER);
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -808,7 +833,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (info.lookupUri != null) {
       contact.setContactUri(info.lookupUri.toString());
     }
-    contact.setNameOrNumber((String) nameOrNumber);
+    if (nameOrNumber != null) {
+      contact.setNameOrNumber((String) nameOrNumber);
+    }
     contact.setContactType(getContactType());
     contact.setNumber(number);
     /* second line of contact view. */
