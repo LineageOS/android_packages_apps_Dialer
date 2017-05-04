@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.calldetails";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+import "java/com/android/dialer/enrichedcall/historyquery/proto/history_result.proto";
+
+package com.android.dialer.calldetails;
+
+message CallDetailsEntries {
+  message CallDetailsEntry {
+    optional int64 call_id = 1;
+    optional int32 call_type = 2;
+    optional int32 features = 3;
+    optional int64 date = 4;
+    optional int64 duration = 5;
+    optional int64 data_usage = 6;
+    repeated enrichedcall.historyquery.proto.HistoryResult history_results = 7;
+  }
+
+  repeated CallDetailsEntry entries = 1;
+}

@@ -76,7 +76,7 @@ public class CallEntryFormatter {
         UCharacter.TITLECASE_NO_LOWERCASE);
   }
 
-  private static CharSequence formatDuration(Context context, long elapsedSeconds) {
+  private static CharSequence formatDuration(Context context, long elapsedSeconds, boolean a11y) {
     long minutes = 0;
     long seconds = 0;
 
@@ -84,10 +84,16 @@ public class CallEntryFormatter {
       minutes = elapsedSeconds / 60;
       elapsedSeconds -= minutes * 60;
       seconds = elapsedSeconds;
-      return context.getString(R.string.call_details_duration_format, minutes, seconds);
+      int stringId =
+          a11y ? R.string.call_details_duration_format_a11y : R.string.call_details_duration_format;
+      return context.getString(stringId, minutes, seconds);
     } else {
       seconds = elapsedSeconds;
-      return context.getString(R.string.call_details_short_duration_format, seconds);
+      int stringId =
+          a11y
+              ? R.string.call_details_short_duration_format_a11y
+              : R.string.call_details_short_duration_format;
+      return context.getString(stringId, seconds);
     }
   }
 
@@ -96,13 +102,14 @@ public class CallEntryFormatter {
    *
    * @param elapsedSeconds Total elapsed seconds.
    * @param dataUsage Data usage in bytes, or null if not specified.
+   * @param a11y {@code true} if string should be talk back friendly.
    * @return String containing call duration and data usage.
    */
   public static CharSequence formatDurationAndDataUsage(
-      Context context, long elapsedSeconds, Long dataUsage) {
-    CharSequence duration = formatDuration(context, elapsedSeconds);
+      Context context, long elapsedSeconds, long dataUsage, boolean a11y) {
+    CharSequence duration = formatDuration(context, elapsedSeconds, a11y);
     List<CharSequence> durationItems = new ArrayList<>();
-    if (dataUsage != null) {
+    if (dataUsage > 0) {
       durationItems.add(duration);
       durationItems.add(Formatter.formatShortFileSize(context, dataUsage));
       return DialerUtils.join(durationItems);

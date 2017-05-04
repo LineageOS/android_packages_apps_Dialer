@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"اعلی ترتیبات"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"بصری صوتی میل"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"اضافی بیک اپ اور اسٹوریج"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"یہ ایک تجرباتی خصوصیت ہے"</i></b>" جسے ابھی ہم ٹیسٹ کر رہے ہیں۔ یہ ممکنہ طور پر آپ کے صوتی میل سرور پر سے آپ کی صوتی میلز کو حذف کر دے گی۔ مستقبل میں اس خصوصیت کی معاونت کی کوئی ضمانت نہیں ہے۔ لیکن ہم اس خصوصیت پر تاثرات پسند کریں گے۔"</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"‏PIN سیٹ کریں"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"‏PIN تبدیل کریں"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"‏PIN تبدیل کرنے کیلئے بصری صوتی میل اہل ہونی چاہئیے"</string>

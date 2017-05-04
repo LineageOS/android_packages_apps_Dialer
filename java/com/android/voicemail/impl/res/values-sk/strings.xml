@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Rozšírené nastavenia"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Vizuálna hlasová schránka"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Ďalšie zálohovanie a úložisko"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Toto je experimentálna funkcia"</i></b>", ktorú práve testujeme. Táto funkcia vám môže odstrániť hlasové správy zo servera hlasovej schránky. Nemôžeme zaručiť, že bude podporovaná aj v budúcnosti, no budeme vám vďační za poskytnutie spätnej väzby."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Nastavenie kódu PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Zmena kódu PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN možno zmeniť až po povolení vizuálnej hlasovej schránky"</string>

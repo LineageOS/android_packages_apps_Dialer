@@ -41,8 +41,8 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.InteractionEvent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TouchPointManager;
@@ -912,24 +912,6 @@ public class InCallPresenter implements CallList.Listener {
     return (mInCallActivity != null
         && !mInCallActivity.isDestroyed()
         && !mInCallActivity.isFinishing());
-  }
-
-  private boolean isActivityVisible() {
-    return mInCallActivity != null && mInCallActivity.isVisible();
-  }
-
-  boolean shouldShowFullScreenNotification() {
-    /**
-     * This is to cover the case where the incall activity is started but in the background, e.g.
-     * when the user pressed Home from the account selection dialog or an existing call. In the case
-     * that incall activity is already visible, there's no need to configure the notification with a
-     * full screen intent.
-     */
-    LogUtil.d(
-        "InCallPresenter.shouldShowFullScreenNotification",
-        "isActivityVisible: %b",
-        isActivityVisible());
-    return !isActivityVisible();
   }
 
   /**

@@ -272,9 +272,9 @@ public class InCallFragment extends Fragment
       paginator.setupWithViewPager(pager);
       if (!stateRestored) {
         handler.postDelayed(pagerRunnable, 4_000);
-      } else {
-        paginator.setVisibility(View.GONE);
       }
+    } else {
+      paginator.setVisibility(View.GONE);
     }
   }
 

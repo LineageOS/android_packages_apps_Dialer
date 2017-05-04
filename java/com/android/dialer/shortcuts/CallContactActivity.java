@@ -21,8 +21,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
-import com.android.dialer.callintent.nano.CallInitiationType;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
@@ -68,8 +68,10 @@ public class CallContactActivity extends TransactionSafeActivity
    * user can choose to grant or deny them.
    */
   private void makeCall() {
-    CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-    callSpecificAppData.callInitiationType = CallInitiationType.Type.LAUNCHER_SHORTCUT;
+    CallSpecificAppData callSpecificAppData =
+        CallSpecificAppData.newBuilder()
+            .setCallInitiationType(CallInitiationType.Type.LAUNCHER_SHORTCUT)
+            .build();
     PhoneNumberInteraction.startInteractionForPhoneCall(
         this, contactUri, false /* isVideoCall */, callSpecificAppData);
   }

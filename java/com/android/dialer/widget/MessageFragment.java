@@ -21,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
 
   private EditText customMessage;
   private ImageView sendMessage;
+  private View sendMessageContainer;
   private TextView remainingChar;
   private int charLimit;
 
@@ -68,10 +70,11 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
     View view = inflater.inflate(R.layout.fragment_message, container, false);
 
     sendMessage = (ImageView) view.findViewById(R.id.send_message);
+    sendMessageContainer = view.findViewById(R.id.count_and_send_container);
     if (getArguments().getBoolean(SHOW_SEND_ICON_KEY, false)) {
       sendMessage.setVisibility(View.VISIBLE);
       sendMessage.setEnabled(false);
-      sendMessage.setOnClickListener(this);
+      sendMessageContainer.setOnClickListener(this);
     }
 
     customMessage = (EditText) view.findViewById(R.id.custom_message);
@@ -97,8 +100,10 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
 
   @Override
   public void onClick(View view) {
-    if (view == sendMessage) {
-      getListener().onMessageFragmentSendMessage(customMessage.getText().toString());
+    if (view == sendMessageContainer) {
+      if (!TextUtils.isEmpty(customMessage.getText())) {
+        getListener().onMessageFragmentSendMessage(customMessage.getText().toString());
+      }
     } else if (view.getId() == R.id.selectable_text_view) {
       customMessage.setText(((TextView) view).getText());
       customMessage.setSelection(customMessage.getText().length());

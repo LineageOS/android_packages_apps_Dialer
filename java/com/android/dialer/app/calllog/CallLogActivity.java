@@ -33,7 +33,7 @@ import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.ScreenEvent;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
 

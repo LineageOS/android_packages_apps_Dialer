@@ -16,6 +16,10 @@
 
 package com.android.dialer.spam;
 
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.ContactSource;
+import com.android.dialer.logging.ReportingLocation;
+
 /** Default implementation of SpamBindings. */
 public class SpamBindingsStub implements SpamBindings {
 
@@ -76,17 +80,33 @@ public class SpamBindingsStub implements SpamBindings {
 
   @Override
   public void reportSpamFromAfterCallNotification(
-      String number, String countryIso, int callType, int from, int contactLookupResultType) {}
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactLookupResult.Type contactLookupResultType) {}
 
   @Override
   public void reportSpamFromCallHistory(
-      String number, String countryIso, int callType, int from, int contactSourceType) {}
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactSource.Type contactSourceType) {}
 
   @Override
   public void reportNotSpamFromAfterCallNotification(
-      String number, String countryIso, int callType, int from, int contactLookupResultType) {}
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactLookupResult.Type contactLookupResultType) {}
 
   @Override
   public void reportNotSpamFromCallHistory(
-      String number, String countryIso, int callType, int from, int contactSourceType) {}
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactSource.Type contactSourceType) {}
 }

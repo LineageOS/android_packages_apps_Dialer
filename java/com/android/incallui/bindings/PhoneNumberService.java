@@ -17,6 +17,7 @@
 package com.android.incallui.bindings;
 
 import android.graphics.Bitmap;
+import com.android.dialer.logging.ContactLookupResult;
 
 /** Provides phone number lookup services. */
 public interface PhoneNumberService {
@@ -72,6 +73,6 @@ public interface PhoneNumberService {
 
     boolean isBusiness();
 
-    int getLookupSource();
+    ContactLookupResult.Type getLookupSource();
   }
 }

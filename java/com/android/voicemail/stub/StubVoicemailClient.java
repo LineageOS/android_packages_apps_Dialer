@@ -37,6 +37,15 @@ public final class StubVoicemailClient implements VoicemailClient {
   }
 
   @Override
+  public boolean isVoicemailEnabled(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return false;
+  }
+
+  @Override
+  public void setVoicemailEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {}
+
+  @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {}
 
@@ -66,5 +75,10 @@ public final class StubVoicemailClient implements VoicemailClient {
   @Override
   public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
     return new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+  }
+
+  @Override
+  public boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return false;
   }
 }

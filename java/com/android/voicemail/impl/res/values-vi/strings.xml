@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Cài đặt nâng cao"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Thư thoại kèm theo hình ảnh"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Bộ nhớ và bản sao lưu bổ sung"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Đây là một tính năng thử nghiệm"</i></b>" chúng tôi hiện đang thử nghiệm. Tính năng này có khả năng sẽ xóa thư thoại khỏi máy chủ thư thoại của bạn. Không có đảm bảo về việc hỗ trợ tính năng này trong tương lai. Mặc dù vậy, chúng tôi vẫn mong muốn nhận được phản hồi về tính năng này."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Đặt mã PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Thay đổi mã PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Phải bật thư thoại kèm theo hình ảnh để thay đổi mã PIN"</string>

@@ -24,7 +24,6 @@
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Расширенные настройки"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Визуальная голосовая почта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Дополнительное место для хранения и резервного копирования"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Это экспериментальная функция"</i></b>", которая сейчас проходит тестирование. Возможно, ваши голосовые сообщения будут удалены с вашего сервера. Поддержка этой функции в дальнейшем не гарантируется. Мы бы хотели узнать ваше мнение о ней."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Установка PIN-кода"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Изменение PIN-кода"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Чтобы изменить PIN-код, включите визуальную голосовую почту"</string>

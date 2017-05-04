@@ -26,8 +26,11 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
+import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.VoicemailStatusQuery;
 
 /** Structured data from {@link android.provider.VoicemailContract.Status} */
@@ -60,6 +63,19 @@ public class VoicemailStatus {
     settingsUri = getUri(statusCursor, VoicemailStatusQuery.SETTINGS_URI_INDEX);
     voicemailAccessUri = getUri(statusCursor, VoicemailStatusQuery.VOICEMAIL_ACCESS_URI_INDEX);
 
+    if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
+      type =
+          getString(
+              statusCursor, VoicemailStatusQuery.SOURCE_TYPE_INDEX, TelephonyManager.VVM_TYPE_OMTP);
+      phoneAccountComponentName =
+          getString(statusCursor, VoicemailStatusQuery.PHONE_ACCOUNT_COMPONENT_NAME, "");
+      phoneAccountId = getString(statusCursor, VoicemailStatusQuery.PHONE_ACCOUNT_ID, "");
+    } else {
+      type = TelephonyManager.VVM_TYPE_OMTP;
+      phoneAccountComponentName = "";
+      phoneAccountId = "";
+    }
+
     configurationState =
         getInt(
             statusCursor,
@@ -70,12 +86,23 @@ public class VoicemailStatus {
             statusCursor,
             VoicemailStatusQuery.DATA_CHANNEL_STATE_INDEX,
             Status.DATA_CHANNEL_STATE_NO_CONNECTION);
-    notificationChannelState =
-        getInt(
-            statusCursor,
-            VoicemailStatusQuery.NOTIFICATION_CHANNEL_STATE_INDEX,
-            Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION);
 
+    /* Before O, the NOTIFICATION_CHANNEL_STATE in the voicemail status table for the system
+     * visual voicemail client always correspond to the service state (cellular signal availability)
+     * Tracking the state in the background is redundant because it will not be visible to the
+     * user. It is much simpler to poll the status on the UI side. The result is injected back to
+     * the status query result so the handling will be consistent with other voicemail clients.
+     */
+    if (BuildCompat.isAtLeastO() && sourcePackage.equals(context.getPackageName())) {
+      notificationChannelState =
+          getNotificationChannelStateFormTelephony(context, getPhoneAccountHandle());
+    } else {
+      notificationChannelState =
+          getInt(
+              statusCursor,
+              VoicemailStatusQuery.NOTIFICATION_CHANNEL_STATE_INDEX,
+              Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION);
+    }
     isAirplaneMode =
         Settings.System.getInt(context.getContentResolver(), Global.AIRPLANE_MODE_ON, 0) != 0;
 
@@ -88,18 +115,24 @@ public class VoicemailStatus {
       quotaOccupied = Status.QUOTA_UNAVAILABLE;
       quotaTotal = Status.QUOTA_UNAVAILABLE;
     }
+  }
 
-    if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
-      type =
-          getString(
-              statusCursor, VoicemailStatusQuery.SOURCE_TYPE_INDEX, TelephonyManager.VVM_TYPE_OMTP);
-      phoneAccountComponentName =
-          getString(statusCursor, VoicemailStatusQuery.PHONE_ACCOUNT_COMPONENT_NAME, "");
-      phoneAccountId = getString(statusCursor, VoicemailStatusQuery.PHONE_ACCOUNT_ID, "");
+  private static int getNotificationChannelStateFormTelephony(
+      Context context, PhoneAccountHandle phoneAccountHandle) {
+    TelephonyManager telephonyManager =
+        context
+            .getSystemService(TelephonyManager.class)
+            .createForPhoneAccountHandle(phoneAccountHandle);
+    if (telephonyManager == null) {
+      LogUtil.e("VoicemailStatus.constructor", "invalid PhoneAccountHandle");
+      return Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION;
     } else {
-      type = TelephonyManager.VVM_TYPE_OMTP;
-      phoneAccountComponentName = "";
-      phoneAccountId = "";
+      int state = telephonyManager.getServiceState().getState();
+      if (state == ServiceState.STATE_IN_SERVICE) {
+        return Status.NOTIFICATION_CHANNEL_STATE_OK;
+      } else {
+        return Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION;
+      }
     }
   }
 

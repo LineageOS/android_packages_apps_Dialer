@@ -24,15 +24,16 @@ import android.telecom.CallAudioState;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
 import com.android.incallui.InCallPresenter.CanAddCallListener;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+import com.android.incallui.audiomode.AudioModeProvider;
+import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CameraDirection;
@@ -270,6 +271,11 @@ public class CallButtonPresenter
   @Override
   public void changeToVideoClicked() {
     LogUtil.enterBlock("CallButtonPresenter.changeToVideoClicked");
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.VIDEO_CALL_UPGRADE_REQUESTED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     mCall.getVideoTech().upgradeToVideo();
   }
 

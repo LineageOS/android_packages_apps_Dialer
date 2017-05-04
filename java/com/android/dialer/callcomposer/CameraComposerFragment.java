@@ -48,8 +48,8 @@ import com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay;
 import com.android.dialer.callcomposer.cameraui.CameraMediaChooserView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.PermissionsUtil;
 
 /** Fragment used to compose call with image from the user's camera. */

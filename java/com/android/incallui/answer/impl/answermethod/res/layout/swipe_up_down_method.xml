@@ -16,101 +16,108 @@
   -->
 
 <FrameLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:layout_marginStart="@dimen/answer_swipe_dead_zone_sides"
-  android:clipChildren="false"
-  android:clipToPadding="false"
-  android:layout_marginEnd="@dimen/answer_swipe_dead_zone_sides">
-  <LinearLayout
-    android:id="@+id/incoming_swipe_to_answer_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:accessibilityLiveRegion="polite"
+    android:layout_marginStart="@dimen/answer_swipe_dead_zone_sides"
+    android:layout_marginEnd="@dimen/answer_swipe_dead_zone_sides"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    android:gravity="center_horizontal|bottom"
-    android:orientation="vertical"
-    android:visibility="visible">
-    <TextView
-      android:id="@+id/incoming_will_disconnect_text"
-      android:layout_width="wrap_content"
+    android:clipToPadding="false">
+  <LinearLayout
+      android:id="@+id/incoming_swipe_to_answer_container"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="116dp"
-      android:layout_gravity="center_horizontal"
-      android:alpha="0"
-      android:text="@string/call_incoming_will_disconnect"
-      android:textColor="@color/blue_grey_100"
-      android:textSize="16sp"
-      tools:alpha="1"/>
-    <TextView
-      android:id="@+id/incoming_swipe_to_answer_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="18dp"
-      android:layout_gravity="center_horizontal"
-      android:textAlignment="center"
-      android:focusable="false"
-      android:text="@string/call_incoming_swipe_to_answer"
-      android:textAppearance="@style/Dialer.Incall.TextAppearance.Hint"/>
-
-    <FrameLayout
-      android:id="@+id/incoming_call_puck_container"
-      android:layout_width="@dimen/answer_contact_puck_size_photo"
-      android:layout_height="@dimen/answer_contact_puck_size_photo"
-      android:layout_marginBottom="10dp"
-      android:layout_gravity="center_horizontal"
+      android:layout_gravity="center_horizontal|bottom"
+      android:accessibilityLiveRegion="polite"
       android:clipChildren="false"
       android:clipToPadding="false"
-      android:contentDescription="@string/a11y_incoming_call_swipe_to_answer">
+      android:orientation="vertical"
+      android:visibility="visible">
+    <TextView
+        android:id="@+id/incoming_will_disconnect_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        android:layout_gravity="center_horizontal"
+        android:alpha="0"
+        android:text="@string/call_incoming_will_disconnect"
+        android:textColor="@color/blue_grey_100"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:alpha="1"/>
+    <!-- Space holder for animation. -->
+    <Space
+        android:id="@+id/incoming_bouncer_space_holder"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="visible"/>
+    <TextView
+        android:id="@+id/incoming_swipe_to_answer_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_gravity="center_horizontal"
+        android:focusable="false"
+        android:text="@string/call_incoming_swipe_to_answer"
+        android:textAlignment="center"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.Hint"/>
+
+    <FrameLayout
+        android:id="@+id/incoming_call_puck_container"
+        android:layout_width="@dimen/answer_contact_puck_size_photo"
+        android:layout_height="@dimen/answer_contact_puck_size_photo"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:contentDescription="@string/a11y_incoming_call_swipe_to_answer">
 
       <!-- Puck background and icon are hosted in the separated views to animate separately. -->
       <ImageView
-        android:id="@+id/incoming_call_puck_bg"
-        android:layout_width="@dimen/answer_contact_puck_size_no_photo"
-        android:layout_height="@dimen/answer_contact_puck_size_no_photo"
-        android:layout_gravity="center"
-        android:background="@drawable/circular_background"
-        android:contentDescription="@null"
-        android:duplicateParentState="true"
-        android:elevation="8dp"
-        android:focusable="false"
-        android:stateListAnimator="@animator/activated_button_elevation"/>
+          android:id="@+id/incoming_call_puck_bg"
+          android:layout_width="@dimen/answer_contact_puck_size_no_photo"
+          android:layout_height="@dimen/answer_contact_puck_size_no_photo"
+          android:layout_gravity="center"
+          android:background="@drawable/circular_background"
+          android:contentDescription="@null"
+          android:duplicateParentState="true"
+          android:elevation="8dp"
+          android:focusable="false"
+          android:stateListAnimator="@animator/activated_button_elevation"/>
 
       <ImageView
-        android:id="@+id/incoming_call_puck_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:contentDescription="@null"
-        android:duplicateParentState="true"
-        android:elevation="16dp"
-        android:focusable="false"
-        android:outlineProvider="none"
-        android:src="@drawable/quantum_ic_call_white_24"
-        android:tint="@color/incoming_answer_icon"
-        android:tintMode="src_atop"
-        tools:outlineProvider="background"/>
+          android:id="@+id/incoming_call_puck_icon"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_gravity="center"
+          android:contentDescription="@null"
+          android:duplicateParentState="true"
+          android:elevation="16dp"
+          android:focusable="false"
+          android:outlineProvider="none"
+          android:src="@drawable/quantum_ic_call_white_24"
+          android:tint="@color/incoming_answer_icon"
+          android:tintMode="src_atop"
+          tools:outlineProvider="background"/>
 
     </FrameLayout>
     <TextView
-      android:id="@+id/incoming_swipe_to_reject_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="20dp"
-      android:layout_gravity="center_horizontal"
-      android:alpha="0"
-      android:focusable="false"
-      android:text="@string/call_incoming_swipe_to_reject"
-      android:textAppearance="@style/Dialer.Incall.TextAppearance.Hint"
-      tools:alpha="1"/>
+        android:id="@+id/incoming_swipe_to_reject_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:alpha="0"
+        android:focusable="false"
+        android:text="@string/call_incoming_swipe_to_reject"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.Hint"
+        tools:alpha="1"/>
   </LinearLayout>
   <FrameLayout
-    android:id="@+id/hint_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"/>
+      android:id="@+id/hint_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipChildren="false"
+      android:clipToPadding="false"/>
 </FrameLayout>

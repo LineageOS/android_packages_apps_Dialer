@@ -20,6 +20,8 @@
 
   <color name="focus_color">#44ff0000</color>
 
+  <color name="spam_contact_background">#A52714</color>
+
   <!-- Color of ripples used for views with dark backgrounds -->
   <color name="dialer_ripple_material_dark">#a0ffffff</color>
 

@@ -28,4 +28,7 @@ public final class ScheduledJobIds {
 
   // This job refreshes dynamic launcher shortcuts.
   public static final int SHORTCUT_PERIODIC_JOB = 100;
+
+  public static final int VVM_TASK_SCHEDULER_JOB = 200;
+  public static final int VVM_STATUS_CHECK_JOB = 201;
 }

@@ -44,9 +44,9 @@ import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.dialer.logging.nano.ScreenEvent;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
@@ -76,6 +76,7 @@ public class ListsFragment extends Fragment
   private final ArrayList<OnPageChangeListener> mOnPageChangeListeners = new ArrayList<>();
   /** The position of the currently selected tab. */
   private int mTabIndex = TAB_INDEX_SPEED_DIAL;
+  private boolean mPaused;
 
   private CallLogQueryHandler mCallLogQueryHandler;
 
@@ -104,6 +105,8 @@ public class ListsFragment extends Fragment
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
+    mPaused = false;
+
     if (getUserVisibleHint()) {
       sendScreenViewForCurrentPosition();
     }
@@ -127,6 +130,8 @@ public class ListsFragment extends Fragment
       ((CallLogFragment) mCurrentPage).onNotVisible();
     }
     super.onPause();
+
+    mPaused = true;
   }
 
   @Override
@@ -263,7 +268,7 @@ public class ListsFragment extends Fragment
   public void onVoicemailStatusFetched(Cursor statusCursor) {
     mHasFetchedVoicemailStatus = true;
 
-    if (getActivity() == null || getActivity().isFinishing()) {
+    if (getActivity() == null || mPaused) {
       return;
     }
 
@@ -394,7 +399,7 @@ public class ListsFragment extends Fragment
       return;
     }
 
-    int screenType;
+    ScreenEvent.Type screenType;
     switch (getCurrentTabIndex()) {
       case TAB_INDEX_SPEED_DIAL:
         screenType = ScreenEvent.Type.SPEED_DIAL;

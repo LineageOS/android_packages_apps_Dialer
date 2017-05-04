@@ -25,7 +25,8 @@ import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 
 /**
  * When a new package is installed, check if it matches any of the vvm carrier apps of the currently
- * enabled dialer vvm sources.
+ * enabled dialer VVM sources. The dialer VVM client will be disabled upon carrier VVM app
+ * installation, unless it was explicitly enabled by the user.
  */
 public class VvmPackageInstallReceiver extends BroadcastReceiver {
 
@@ -46,25 +47,34 @@ public class VvmPackageInstallReceiver extends BroadcastReceiver {
       return;
     }
 
+    // This get called every time an app is installed and will be noisy. Don't log until the app
+    // is identified as a carrier VVM app.
     for (PhoneAccountHandle phoneAccount :
         context.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts()) {
-      if (VisualVoicemailSettingsUtil.isEnabledUserSet(context, phoneAccount)) {
-        // Skip the check if this voicemail source's setting is overridden by the user.
-        continue;
-      }
-
       OmtpVvmCarrierConfigHelper carrierConfigHelper =
           new OmtpVvmCarrierConfigHelper(context, phoneAccount);
+      if (!carrierConfigHelper.isValid()) {
+        continue;
+      }
       if (carrierConfigHelper.getCarrierVvmPackageNames() == null) {
         continue;
       }
-      if (carrierConfigHelper.getCarrierVvmPackageNames().contains(packageName)) {
-        // Force deactivate the client. The user can re-enable it in the settings.
-        // There is no need to update the settings for deactivation. At this point, if the
-        // default value is used it should be false because a carrier package is present.
-        VvmLog.i(TAG, "Carrier VVM package installed, disabling system VVM client");
-        VisualVoicemailSettingsUtil.setEnabled(context, phoneAccount, false);
+      if (!carrierConfigHelper.getCarrierVvmPackageNames().contains(packageName)) {
+        continue;
       }
+
+      VvmLog.i(TAG, "Carrier app installed");
+      if (VisualVoicemailSettingsUtil.isEnabledUserSet(context, phoneAccount)) {
+        // Skip the check if this voicemail source's setting is overridden by the user.
+        VvmLog.i(TAG, "VVM enabled by user, not disabling");
+        continue;
+      }
+
+      // Force deactivate the client. The user can re-enable it in the settings.
+      // There is no need to update the settings for deactivation. At this point, if the
+      // default value is used it should be false because a carrier package is present.
+      VvmLog.i(TAG, "Carrier VVM package installed, disabling system VVM client");
+      VisualVoicemailSettingsUtil.setEnabled(context, phoneAccount, false);
     }
   }
 }

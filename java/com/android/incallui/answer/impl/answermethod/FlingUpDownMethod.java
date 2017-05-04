@@ -131,6 +131,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
   private ImageView contactPuckBackground;
   private ImageView contactPuckIcon;
   private View incomingDisconnectText;
+  private View spaceHolder;
   private Animator lockBounceAnim;
   private AnimatorSet lockEntryAnim;
   private AnimatorSet lockHintAnim;
@@ -193,33 +194,39 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     swipeToAnswerText = (TextView) view.findViewById(R.id.incoming_swipe_to_answer_text);
     swipeToRejectText = (TextView) view.findViewById(R.id.incoming_swipe_to_reject_text);
     incomingDisconnectText = view.findViewById(R.id.incoming_will_disconnect_text);
+    incomingDisconnectText.setVisibility(incomingWillDisconnect ? View.VISIBLE : View.GONE);
     incomingDisconnectText.setAlpha(incomingWillDisconnect ? 1 : 0);
+    spaceHolder = view.findViewById(R.id.incoming_bouncer_space_holder);
+    spaceHolder.setVisibility(incomingWillDisconnect ? View.GONE : View.VISIBLE);
 
-    view.setAccessibilityDelegate(
-        new AccessibilityDelegate() {
-          @Override
-          public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
-            super.onInitializeAccessibilityNodeInfo(host, info);
-            info.addAction(
-                new AccessibilityAction(
-                    R.id.accessibility_action_answer, getString(R.string.call_incoming_answer)));
-            info.addAction(
-                new AccessibilityAction(
-                    R.id.accessibility_action_decline, getString(R.string.call_incoming_decline)));
-          }
+    view.findViewById(R.id.incoming_swipe_to_answer_container)
+        .setAccessibilityDelegate(
+            new AccessibilityDelegate() {
+              @Override
+              public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                info.addAction(
+                    new AccessibilityAction(
+                        R.id.accessibility_action_answer,
+                        getString(R.string.call_incoming_answer)));
+                info.addAction(
+                    new AccessibilityAction(
+                        R.id.accessibility_action_decline,
+                        getString(R.string.call_incoming_decline)));
+              }
 
-          @Override
-          public boolean performAccessibilityAction(View host, int action, Bundle args) {
-            if (action == R.id.accessibility_action_answer) {
-              performAccept();
-              return true;
-            } else if (action == R.id.accessibility_action_decline) {
-              performReject();
-              return true;
-            }
-            return super.performAccessibilityAction(host, action, args);
-          }
-        });
+              @Override
+              public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                if (action == R.id.accessibility_action_answer) {
+                  performAccept();
+                  return true;
+                } else if (action == R.id.accessibility_action_decline) {
+                  performReject();
+                  return true;
+                }
+                return super.performAccessibilityAction(host, action, args);
+              }
+            });
 
     swipeProgress = 0;
 
@@ -367,7 +374,24 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
   public void setShowIncomingWillDisconnect(boolean incomingWillDisconnect) {
     this.incomingWillDisconnect = incomingWillDisconnect;
     if (incomingDisconnectText != null) {
-      incomingDisconnectText.animate().alpha(incomingWillDisconnect ? 1 : 0);
+      if (incomingWillDisconnect) {
+        incomingDisconnectText.setVisibility(View.VISIBLE);
+        spaceHolder.setVisibility(View.GONE);
+        incomingDisconnectText.animate().alpha(1);
+      } else {
+        incomingDisconnectText
+            .animate()
+            .alpha(0)
+            .setListener(
+                new AnimatorListenerAdapter() {
+                  @Override
+                  public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    incomingDisconnectText.setVisibility(View.GONE);
+                    spaceHolder.setVisibility(View.VISIBLE);
+                  }
+                });
+      }
     }
   }
 

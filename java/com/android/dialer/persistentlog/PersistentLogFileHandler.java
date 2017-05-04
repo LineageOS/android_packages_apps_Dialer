@@ -155,6 +155,9 @@ final class PersistentLogFileHandler {
   private File[] getLogFiles() {
     logDirectory.mkdirs();
     File[] files = logDirectory.listFiles();
+    if (files == null) {
+      files = new File[0];
+    }
     Arrays.sort(
         files,
         (File lhs, File rhs) ->

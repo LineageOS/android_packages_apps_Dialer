@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"You won\'t be able to receive new voicemail if your inbox is full."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Can\'t receive new voicemail"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Your inbox is full. Try deleting some messages to receive new voicemail."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[Experimental] Turn on extra storage and backup"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"Your mailbox is full. To free up space, turn on extra storage so that Google can manage and back up your voicemail messages. "<b><i>"This feature is currently being tested "</i></b>"and will potentially delete voicemail from your voicemail server. We do not promise to support this feature in the future. We would love your feedback though."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[Experimental] Turn on extra storage and backup"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"Your mailbox is almost full. To free up space, turn on extra storage so that Google can manage and back up your voicemail messages. "<b><i>"This feature is currently being tested "</i></b>"and will potentially delete voicemail from your voicemail server. We do not promise to support this feature in the future. We would love your feedback though."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Turn on extra storage and backup"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"Your mailbox is full. To free up space, turn on extra storage so that Google can manage and back up your voicemail messages."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Turn on extra storage and backup"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Your mailbox is almost full. To free up space, turn on extra storage so that Google can manage and back up your voicemail messages."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Set your voicemail PIN"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"You\'ll need a voicemail PIN whenever you call to access your voicemail."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Unknown error"</string>

@@ -16,6 +16,7 @@
 
 package com.android.dialer.binary.basecomponent;
 
+import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.simulator.SimulatorComponent;
@@ -24,11 +25,12 @@ import com.android.incallui.maps.MapsComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
- * Base class for the core application-wide {@link Component}. All variants of the Dialer app should
- * extend from this component.
+ * Base class for the core application-wide component. All variants of the Dialer app should extend
+ * from this component.
  */
 public interface BaseDialerRootComponent
     extends CallLocationComponent.HasComponent,
+        CallLogComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
         MapsComponent.HasComponent,
         SimulatorComponent.HasComponent,

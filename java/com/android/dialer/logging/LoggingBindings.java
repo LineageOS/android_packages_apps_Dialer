@@ -14,17 +14,25 @@
 
 package com.android.dialer.logging;
 
+
 import android.app.Activity;
 
 /** Allows the container application to gather analytics. */
 public interface LoggingBindings {
 
   /**
+   * Logs an DialerImpression event that's not associated with a specific call.
+   *
+   * @param dialerImpression an integer representing what event occurred.
+   */
+  void logImpression(DialerImpression.Type dialerImpression);
+
+  /**
    * Logs an impression for a general dialer event that's not associated with a specific call.
    *
    * @param dialerImpression an integer representing what event occurred.
-   * @see com.android.dialer.logging.nano.DialerImpression
    */
+  @Deprecated
   void logImpression(int dialerImpression);
 
   /**
@@ -33,26 +41,26 @@ public interface LoggingBindings {
    * @param dialerImpression an integer representing what event occurred.
    * @param callId unique ID of the call.
    * @param callStartTimeMillis the absolute time when the call started.
-   * @see com.android.dialer.logging.nano.DialerImpression
    */
-  void logCallImpression(int dialerImpression, String callId, long callStartTimeMillis);
+  void logCallImpression(
+      DialerImpression.Type dialerImpression, String callId, long callStartTimeMillis);
 
   /**
    * Logs an interaction that occurred.
    *
    * @param interaction an integer representing what interaction occurred.
-   * @see com.android.dialer.logging.nano.InteractionEvent
+   * @see com.android.dialer.logging.InteractionEvent
    */
-  void logInteraction(int interaction);
+  void logInteraction(InteractionEvent.Type interaction);
 
   /**
    * Logs an event indicating that a screen was displayed.
    *
    * @param screenEvent an integer representing the displayed screen.
    * @param activity Parent activity of the displayed screen.
-   * @see com.android.dialer.logging.nano.ScreenEvent
+   * @see com.android.dialer.logging.ScreenEvent
    */
-  void logScreenView(int screenEvent, Activity activity);
+  void logScreenView(com.android.dialer.logging.ScreenEvent.Type screenEvent, Activity activity);
 
   /** Logs a hit event to the analytics server. */
   void sendHitEventAnalytics(String category, String action, String label, long value);

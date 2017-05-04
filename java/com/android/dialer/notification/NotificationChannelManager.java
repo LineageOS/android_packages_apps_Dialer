@@ -159,7 +159,7 @@ public class NotificationChannelManager {
           "Null PhoneAccountHandle with channel " + channelName);
     }
 
-    Uri silentRingtone = Uri.parse("");
+    Uri silentRingtone = Uri.EMPTY;
 
     CharSequence name;
     int importance;
