@@ -17,10 +17,7 @@
 package com.android.dialer.app.dialpad;
 
 import android.content.AsyncTaskLoader;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
@@ -45,8 +42,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
 
   private String mQuery;
   private SmartDialNameMatcher mNameMatcher;
-
-  private BroadcastReceiver mSmartDialUpdatedReceiver;
 
   private boolean mShowEmptyListForNullQuery = true;
 
@@ -124,19 +119,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     Cursor oldCursor = mCursor;
     mCursor = cursor;
 
-    if (mSmartDialUpdatedReceiver == null) {
-      mSmartDialUpdatedReceiver =
-          new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-              onContentChanged();
-            }
-          };
-      mContext.registerReceiver(
-          mSmartDialUpdatedReceiver,
-          new IntentFilter(DialerDatabaseHelper.ACTION_SMART_DIAL_UPDATED));
-    }
-
     if (isStarted()) {
       /** If the Loader is in a started state, deliver the results to the client. */
       super.deliverResult(cursor);
@@ -171,11 +153,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     /** Ensure the loader has been stopped. */
     onStopLoading();
 
-    if (mSmartDialUpdatedReceiver != null) {
-      mContext.unregisterReceiver(mSmartDialUpdatedReceiver);
-      mSmartDialUpdatedReceiver = null;
-    }
-
     /** Release all previously saved query results. */
     if (mCursor != null) {
       releaseResources(mCursor);
@@ -186,11 +163,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   @Override
   public void onCanceled(Cursor cursor) {
     super.onCanceled(cursor);
-
-    if (mSmartDialUpdatedReceiver != null) {
-      mContext.unregisterReceiver(mSmartDialUpdatedReceiver);
-      mSmartDialUpdatedReceiver = null;
-    }
 
     /** The load has been canceled, so we should release the resources associated with 'data'. */
     releaseResources(cursor);
