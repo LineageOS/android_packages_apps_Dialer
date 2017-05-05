@@ -41,6 +41,10 @@ EXCLUDE_FILES := \
 	$(BASE_DIR)/incallui/maps/impl/MapsModule.java \
 	$(BASE_DIR)/incallui/maps/impl/StaticMapFragment.java
 
+# Exclude testing only class, not used anywhere here
+EXCLUDE_FILES += \
+	$(BASE_DIR)/contacts/common/format/testing/SpannedTestUtils.java
+
 # All Dialers resources.
 # find . -type d -name "res" | uniq | sort
 RES_DIRS := \
