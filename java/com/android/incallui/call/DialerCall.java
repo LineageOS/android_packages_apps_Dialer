@@ -1326,7 +1326,7 @@ public class DialerCall implements VideoTechListener {
 
       String phoneNumber = call.getNumber();
       phoneNumber = phoneNumber != null ? phoneNumber : "";
-      phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+      phoneNumber = phoneNumber.replaceAll("[^+0-9]", "");
 
       // Insert order here determines the priority of that video tech option
       videoTechs = new ArrayList<>();

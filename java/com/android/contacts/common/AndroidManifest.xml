@@ -26,14 +26,6 @@
         <action android:name="android.intent.action.VIEW"/>
       </intent-filter>
     </activity>
-
-    <!-- Broadcast receiver that passively listens to location updates -->
-    <receiver android:name="com.android.contacts.common.location.CountryDetector$LocationChangedReceiver"/>
-
-    <!-- IntentService to update the user's current country -->
-    <service
-      android:exported="false"
-      android:name="com.android.contacts.common.location.UpdateCountryService"/>
   </application>
 </manifest>
 

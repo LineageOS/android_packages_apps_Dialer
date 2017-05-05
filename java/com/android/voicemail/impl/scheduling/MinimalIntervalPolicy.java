@@ -51,7 +51,7 @@ public class MinimalIntervalPolicy implements Policy {
           BaseTask.createIntent(mTask.getContext(), BlockerTask.class, mId.phoneAccountHandle);
       intent.putExtra(BlockerTask.EXTRA_TASK_ID, mId.id);
       intent.putExtra(BlockerTask.EXTRA_BLOCK_FOR_MILLIS, mBlockForMillis);
-      mTask.getContext().startService(intent);
+      mTask.getContext().sendBroadcast(intent);
     }
   }
 

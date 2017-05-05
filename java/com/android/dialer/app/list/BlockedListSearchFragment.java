@@ -28,7 +28,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.R;
@@ -37,6 +36,7 @@ import com.android.dialer.blocking.BlockNumberDialogFragment;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 

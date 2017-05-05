@@ -77,6 +77,7 @@ import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
@@ -177,13 +178,14 @@ public class CallLogAdapter extends GroupingListAdapter
         }
       };
 
+  // Todo (uabdullah): Use plurals http://b/37751831
   private void showDeleteSelectedItemsDialog() {
     AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
     Assert.checkArgument(selectedItems.size() > 0);
     String voicemailString =
         selectedItems.size() == 1
             ? mActivity.getResources().getString(R.string.voicemailMultiSelectVoicemail)
-            : mActivity.getResources().getString(R.string.voicemailMultiSelectVoicemail);
+            : mActivity.getResources().getString(R.string.voicemailMultiSelectVoicemails);
     String deleteVoicemailTitle =
         mActivity
             .getResources()
@@ -228,14 +230,15 @@ public class CallLogAdapter extends GroupingListAdapter
           if (ConfigProviderBindings.get(v.getContext())
                   .getBoolean("enable_call_log_multiselect", true)
               && mVoicemailPlaybackPresenter != null) {
-            if (v.getId() == R.id.primary_action_view) {
+            if (v.getId() == R.id.primary_action_view || v.getId() == R.id.quick_contact_photo) {
               if (mActionMode == null) {
                 mActionMode = v.startActionMode(mActionModeCallback);
               }
               CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
               viewHolder.quickContactView.setVisibility(View.GONE);
               viewHolder.checkBoxView.setVisibility(View.VISIBLE);
-              return false;
+              mExpandCollapseListener.onClick(v);
+              return true;
             }
           }
           return true;
@@ -522,6 +525,7 @@ public class CallLogAdapter extends GroupingListAdapter
     viewHolder.callLogEntryView.setTag(viewHolder);
 
     viewHolder.primaryActionView.setTag(viewHolder);
+    viewHolder.quickContactView.setTag(viewHolder);
 
     return viewHolder;
   }
@@ -630,7 +634,7 @@ public class CallLogAdapter extends GroupingListAdapter
           @Override
           protected Boolean doInBackground(Void... params) {
             views.blockId =
-                mFilteredNumberAsyncQueryHandler.getBlockedIdSynchronousForCalllogOnly(
+                mFilteredNumberAsyncQueryHandler.getBlockedIdSynchronous(
                     views.number, views.countryIso);
             details.isBlocked = views.blockId != null;
             if (isCancelled()) {
@@ -872,12 +876,23 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     views.info = info;
-    views.numberType =
-        (String)
-            Phone.getTypeLabel(mActivity.getResources(), details.numberType, details.numberLabel);
+    views.numberType = getNumberType(mActivity.getResources(), details);
 
     mCallLogListItemHelper.updatePhoneCallDetails(details);
     return true;
+  }
+
+  private static String getNumberType(Resources res, PhoneCallDetails details) {
+    // Label doesn't make much sense if the information is coming from CNAP or Cequint Caller ID.
+    if (details.sourceType == ContactSource.Type.SOURCE_TYPE_CNAP
+        || details.sourceType == ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID) {
+      return "";
+    }
+    // Returns empty label instead of "custom" if the custom label is empty.
+    if (details.numberType == Phone.TYPE_CUSTOM && TextUtils.isEmpty(details.numberLabel)) {
+      return "";
+    }
+    return (String) Phone.getTypeLabel(res, details.numberType, details.numberLabel);
   }
 
   /**

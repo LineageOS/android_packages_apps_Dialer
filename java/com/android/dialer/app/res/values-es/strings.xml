@@ -199,6 +199,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Llamadas"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Bloqueo de llamadas"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Buzón de voz"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Bloqueo de llamadas desactivado temporalmente"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Se ha inhabilitado el bloqueo de llamadas porque te has puesto en contacto con los servicios de emergencia desde este teléfono en las últimas 48 horas. Se volverá a habilitar automáticamente cuando finalice este periodo de tiempo."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importar números"</string>

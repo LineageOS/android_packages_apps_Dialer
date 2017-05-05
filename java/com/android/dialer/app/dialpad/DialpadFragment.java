@@ -69,7 +69,6 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.util.StopWatch;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -84,6 +83,7 @@ import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadView;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
@@ -1189,7 +1189,6 @@ public class DialpadFragment extends Fragment
         // Just call 'scaleIn()' method if the mFloatingActionButtonController was not already
         // previously visible.
         mFloatingActionButtonController.scaleIn(0);
-        mFloatingActionButtonController.setVisible(true);
       }
       mDialpadChooser.setVisibility(View.GONE);
     }
@@ -1410,10 +1409,10 @@ public class DialpadFragment extends Fragment
   public void onHiddenChanged(boolean hidden) {
     super.onHiddenChanged(hidden);
     final DialtactsActivity activity = (DialtactsActivity) getActivity();
-    final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
-    if (activity == null) {
+    if (activity == null || getView() == null) {
       return;
     }
+    final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
     if (!hidden && !isDialpadChooserVisible()) {
       if (mAnimate) {
         dialpadView.animateShow();

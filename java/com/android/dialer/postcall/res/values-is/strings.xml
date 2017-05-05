@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Hringdu í mig þegar þú hefur tíma."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Ekkert áríðandi, við getum spjallað síðar."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Senda skilaboð"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"Skilaboð send"</string>
     <string name="view" msgid="8572192949673703830">"Skoða"</string>
 </resources>

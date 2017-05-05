@@ -26,5 +26,5 @@
   <!-- Voice prompt of swipe gesture when accessibility is turned on. -->
   <string description="The message announced to accessibility assistance on incoming call."
     name="a11y_incoming_call_swipe_gesture_prompt">Two finger swipe up to answer. Two finger swipe down to decline.</string>
-  <string name="call_incoming_important">Important call</string>
+  <string name="call_incoming_important">Urgent</string>
 </resources>

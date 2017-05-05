@@ -38,8 +38,7 @@
     <item name="android:layout_width">24dp</item>
     <item name="android:layout_marginEnd">8dp</item>
     <item name="android:scaleType">fitCenter</item>
-    <item name="android:tint">?android:textColorSecondary</item>
-    <item name="android:tintMode">src_in</item>
+    <item name="colorControlNormal">?android:textColorSecondary</item>
   </style>
 
   <style name="Incall.Button.End" parent="android:Widget.Material.Button">

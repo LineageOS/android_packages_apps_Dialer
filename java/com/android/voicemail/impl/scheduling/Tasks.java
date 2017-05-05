@@ -19,6 +19,7 @@ package com.android.voicemail.impl.scheduling;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import com.android.voicemail.impl.VvmLog;
 
 /** Common operations on {@link Task} */
@@ -32,6 +33,7 @@ final class Tasks {
    * Create a task from a bundle. The bundle is created either with {@link #toBundle(Task)} or
    * {@link #createIntent(Context, Class)} from the target {@link Task}
    */
+  @NonNull
   public static Task createTask(Context context, Bundle extras) {
     // The extra contains custom parcelables which cannot be unmarshalled by the framework class
     // loader.
@@ -66,7 +68,8 @@ final class Tasks {
    * necessary information.
    */
   public static Intent createIntent(Context context, Class<? extends Task> task) {
-    Intent intent = new Intent(context, TaskSchedulerService.class);
+    Intent intent = new Intent(context, TaskReceiver.class);
+    intent.setPackage(context.getPackageName());
     intent.putExtra(EXTRA_CLASS_NAME, task.getName());
     return intent;
   }

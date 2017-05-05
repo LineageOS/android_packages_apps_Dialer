@@ -764,6 +764,9 @@
   <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
   <string name="voicemail_settings_label">Voicemail</string>
 
+  <!-- Title for the preference screen to select which SIM to change voicemail settings for [CHAR LIMIT=30] -->
+  <string name="voicemail_settings_select_sim_title">Select SIM for voicemail settings</string>
+
   <!-- Label for a section describing that call blocking is temporarily disabled because an
        emergency call was made. [CHAR LIMIT=50] -->
     <string name="blocked_numbers_disabled_emergency_header_label">

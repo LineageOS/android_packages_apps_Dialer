@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"कॉल"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"कॉल अवरोधित करणे"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"व्हॉइसमेल"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"कॉल अवरोधित करणे तात्पुरते बंद"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"आपण मागील 48 तासात या फोनवरून आणीबाणी सेवांशी संपर्क साधला असल्याने कॉल अवरोधित करणे अक्षम केले गेले आहे. एकदा 48 तासांचा कालावधी कालबाह्य झाला की ते स्वयंचलितपणे पुन्हा सक्षम केले जाईल."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"नंबर अायात करा"</string>

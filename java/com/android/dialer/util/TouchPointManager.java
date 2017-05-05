@@ -31,7 +31,7 @@ public class TouchPointManager {
 
   private Point mPoint = new Point();
 
-  /** Private constructor. Instance should only be acquired through getInstance(). */
+  /** Private constructor. Instance should only be acquired through getRunningInstance(). */
   private TouchPointManager() {}
 
   public static TouchPointManager getInstance() {

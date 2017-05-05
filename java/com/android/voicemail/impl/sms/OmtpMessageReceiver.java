@@ -28,7 +28,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.VisualVoicemailSms;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.OmtpConstants;
-import com.android.voicemail.impl.OmtpReceiver;
+import com.android.voicemail.impl.OmtpService;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.Voicemail;
 import com.android.voicemail.impl.Voicemail.Builder;
@@ -52,7 +52,7 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     mContext = context;
-    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpReceiver.EXTRA_VOICEMAIL_SMS);
+    VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
     PhoneAccountHandle phone = sms.getPhoneAccountHandle();
 
     if (phone == null) {

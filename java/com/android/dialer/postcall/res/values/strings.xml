@@ -25,6 +25,8 @@
   <string name="post_call_message_3">Not urgent, we can chat later.</string>
   <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_add_message">Add message</string>
+  <!-- Asks the user if they want to send a post call message -->
+  <string name="post_call_send_message">Send message</string>
   <!-- Shown to let the user know that their message was sent. -->
   <string name="post_call_message_sent">Message sent</string>
   <string name="view">View</string>

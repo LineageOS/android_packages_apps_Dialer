@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Calls"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Call blocking"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Voicemail"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Call blocking temporarily off"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Call blocking has been disabled because you contacted emergency services from this phone within the last 48 hours. It will be automatically re-enabled once the 48 hour period expires."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Import numbers"</string>

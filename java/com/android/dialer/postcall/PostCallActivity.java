@@ -29,7 +29,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.util.PermissionsUtil;
@@ -41,13 +40,16 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
 
   public static final String KEY_PHONE_NUMBER = "phone_number";
   public static final String KEY_MESSAGE = "message";
+  public static final String KEY_RCS_POST_CALL = "rcs_post_call";
   private static final int REQUEST_CODE_SEND_SMS = 1;
 
   private boolean useRcs;
 
-  public static Intent newIntent(@NonNull Context context, @NonNull String number) {
+  public static Intent newIntent(
+      @NonNull Context context, @NonNull String number, boolean isRcsPostCall) {
     Intent intent = new Intent(Assert.isNotNull(context), PostCallActivity.class);
     intent.putExtra(KEY_PHONE_NUMBER, Assert.isNotNull(number));
+    intent.putExtra(KEY_RCS_POST_CALL, isRcsPostCall);
     return intent;
   }
 
@@ -57,7 +59,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
     setContentView(R.layout.post_call_activity);
 
     ((DialerToolbar) findViewById(R.id.toolbar)).setTitle(R.string.post_call_message);
-    useRcs = canUseRcs(getIntent().getStringExtra(KEY_PHONE_NUMBER));
+    useRcs = getIntent().getBooleanExtra(KEY_RCS_POST_CALL, false);
     LogUtil.i("PostCallActivity.onCreate", "useRcs: %b", useRcs);
 
     int postCallCharLimit =
@@ -80,17 +82,6 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
         .beginTransaction()
         .replace(R.id.message_container, fragment)
         .commit();
-  }
-
-  private boolean canUseRcs(@NonNull String number) {
-    EnrichedCallCapabilities capabilities =
-        getEnrichedCallManager().getCapabilities(Assert.isNotNull(number));
-    LogUtil.i(
-        "PostCallActivity.canUseRcs",
-        "number: %s, capabilities: %s",
-        LogUtil.sanitizePhoneNumber(number),
-        capabilities);
-    return capabilities != null && capabilities.supportsPostCall();
   }
 
   @Override

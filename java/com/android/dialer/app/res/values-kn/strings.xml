@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"ಕರೆಗಳು"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ಧ್ವನಿಮೇಲ್"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆ ತಾತ್ಕಾಲಿಕ ಆಫ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ನೀವು ಕಳೆದ 48 ಗಂಟೆಗಳಲ್ಲಿ ಈ ಫೋನ್‌ನಿಂದ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿರುವ ಕಾರಣದಿಂದ ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ಒಮ್ಮೆ 48 ಗಂಟೆಗಳ ಅವಧಿಯು ಮುಕ್ತಾಯಗೊಂಡ ನಂತರ ಅದನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಸಕ್ರಿಯಗೊಳಿಸಲಾಗುವುದು."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ಸಂಖ್ಯೆಗಳನ್ನು ಆಮದು ಮಾಡಿ"</string>

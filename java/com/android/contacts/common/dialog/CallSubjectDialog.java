@@ -330,10 +330,12 @@ public class CallSubjectDialog extends Activity {
       mContactPhoto.setVisibility(View.GONE);
     }
     mNameView.setText(mNameOrNumber);
-    if (!TextUtils.isEmpty(mNumberLabel) && !TextUtils.isEmpty(mDisplayNumber)) {
+    if (!TextUtils.isEmpty(mDisplayNumber)) {
       mNumberView.setVisibility(View.VISIBLE);
       mNumberView.setText(
-          getString(R.string.call_subject_type_and_number, mNumberLabel, mDisplayNumber));
+          TextUtils.isEmpty(mNumberLabel)
+              ? mDisplayNumber
+              : getString(R.string.call_subject_type_and_number, mNumberLabel, mDisplayNumber));
     } else {
       mNumberView.setVisibility(View.GONE);
       mNumberView.setText(null);

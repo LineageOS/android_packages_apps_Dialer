@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Përgjigju dhe mbyll telefonatën në vazhdim"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Videoja është joaktive"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Rrëshqit dy gishta lart për t\'u përgjigjur. Rrëshqit dy gishta poshtë për të refuzuar."</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"Telefonatë e rëndësishme"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

@@ -19,7 +19,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
-import android.provider.VoicemailContract;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.util.Base64;
 import com.android.voicemail.impl.OmtpConstants;
@@ -44,6 +44,7 @@ import com.android.voicemail.impl.mail.TempDirectory;
 import com.android.voicemail.impl.mail.internet.MimeMessage;
 import com.android.voicemail.impl.mail.store.ImapConnection;
 import com.android.voicemail.impl.mail.store.ImapFolder;
+import com.android.voicemail.impl.mail.store.ImapFolder.Quota;
 import com.android.voicemail.impl.mail.store.ImapStore;
 import com.android.voicemail.impl.mail.store.imap.ImapConstants;
 import com.android.voicemail.impl.mail.store.imap.ImapResponse;
@@ -73,11 +74,6 @@ public class ImapHelper implements Closeable {
   private final Editor mStatus;
 
   VisualVoicemailPreferences mPrefs;
-  private static final String PREF_KEY_QUOTA_OCCUPIED = "quota_occupied_";
-  private static final String PREF_KEY_QUOTA_TOTAL = "quota_total_";
-
-  private int mQuotaOccupied;
-  private int mQuotaTotal;
 
   private final OmtpVvmCarrierConfigHelper mConfig;
 
@@ -90,10 +86,7 @@ public class ImapHelper implements Closeable {
   }
 
   public ImapHelper(
-      Context context,
-      PhoneAccountHandle phoneAccount,
-      Network network,
-      Editor status)
+      Context context, PhoneAccountHandle phoneAccount, Network network, Editor status)
       throws InitializingException {
     this(
         context,
@@ -139,10 +132,6 @@ public class ImapHelper implements Closeable {
       LogUtils.w(TAG, "Could not parse port number");
       throw new InitializingException("cannot initialize ImapHelper:" + e.toString());
     }
-
-    mQuotaOccupied =
-        mPrefs.getInt(PREF_KEY_QUOTA_OCCUPIED, VoicemailContract.Status.QUOTA_UNAVAILABLE);
-    mQuotaTotal = mPrefs.getInt(PREF_KEY_QUOTA_TOTAL, VoicemailContract.Status.QUOTA_UNAVAILABLE);
   }
 
   @Override
@@ -475,12 +464,22 @@ public class ImapHelper implements Closeable {
     }
   }
 
-  public int getOccuupiedQuota() {
-    return mQuotaOccupied;
-  }
-
-  public int getTotalQuota() {
-    return mQuotaTotal;
+  @Nullable
+  public Quota getQuota() {
+    try {
+      mFolder = openImapFolder(ImapFolder.MODE_READ_ONLY);
+      if (mFolder == null) {
+        // This means we were unable to successfully open the folder.
+        LogUtils.e(TAG, "Unable to open folder");
+        return null;
+      }
+      return mFolder.getQuota();
+    } catch (MessagingException e) {
+      LogUtils.e(TAG, e, "Messaging Exception");
+      return null;
+    } finally {
+      closeImapFolder();
+    }
   }
 
   private void updateQuota(ImapFolder folder) throws MessagingException {
@@ -489,21 +488,19 @@ public class ImapHelper implements Closeable {
 
   private void setQuota(ImapFolder.Quota quota) {
     if (quota == null) {
+      LogUtils.i(TAG, "quota was null");
       return;
     }
-    if (quota.occupied == mQuotaOccupied && quota.total == mQuotaTotal) {
-      VvmLog.v(TAG, "Quota hasn't changed");
-      return;
-    }
-    mQuotaOccupied = quota.occupied;
-    mQuotaTotal = quota.total;
-    VoicemailStatus.edit(mContext, mPhoneAccount).setQuota(mQuotaOccupied, mQuotaTotal).apply();
-    mPrefs
-        .edit()
-        .putInt(PREF_KEY_QUOTA_OCCUPIED, mQuotaOccupied)
-        .putInt(PREF_KEY_QUOTA_TOTAL, mQuotaTotal)
-        .apply();
-    VvmLog.v(TAG, "Quota changed to " + mQuotaOccupied + "/" + mQuotaTotal);
+
+    LogUtils.i(
+        TAG,
+        "Updating Voicemail status table with"
+            + " quota occupied: "
+            + quota.occupied
+            + " new quota total:"
+            + quota.total);
+    VoicemailStatus.edit(mContext, mPhoneAccount).setQuota(quota.occupied, quota.total).apply();
+    LogUtils.i(TAG, "Updated quota occupied and total");
   }
 
   /**

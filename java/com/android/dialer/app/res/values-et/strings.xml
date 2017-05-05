@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Kõned"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Kõnede blokeerimine"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Kõnepost"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Kõnede blokeerimine on ajutiselt väljas"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Kõnede blokeerimine on keelatud, kuna võtsite sellelt telefonilt viimase 48 tunni jooksul ühendust hädaabiteenustega. See lubatakse 48 tunni möödumisel automaatselt uuesti."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Impordi numbrid"</string>

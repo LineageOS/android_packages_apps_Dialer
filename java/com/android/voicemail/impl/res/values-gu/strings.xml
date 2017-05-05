@@ -18,9 +18,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"વૉઇસમેઇલ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"વૉઇસમેઇલ"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"વાઇબ્રેટ"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"વાઇબ્રેટ"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ધ્વનિ"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"વિગતવાર સેટિંગ્સ"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"વિઝ્યુઅલ વૉઇસમેઇલ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"અતિરિક્ત બેકઅપ અને સ્ટોરેજ"</string>

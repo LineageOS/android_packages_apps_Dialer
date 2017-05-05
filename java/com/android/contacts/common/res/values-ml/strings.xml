@@ -261,5 +261,8 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"സേവന നിബന്ധനകൾ"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"ഓപ്പൺ സോഴ്‌സ് ലൈസൻസ്"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"url തുറക്കാനായില്ല."</string>
-    <string name="description_search_video_call" msgid="7229218423556643079">"വീഡിയോ കോൾ ചെയ്യുക"</string>
+    <!-- no translation found for description_search_video_call (4337369876888024909) -->
+    <skip />
+    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
+    <skip />
 </resources>

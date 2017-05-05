@@ -16,6 +16,7 @@
   -->
 
 <resources>
+  <item name="answer_message_container" type="id"/>
   <item name="answer_message_avatar" type="id"/>
   <item name="answer_message_text" type="id"/>
   <item name="answer_message_image" type="id"/>

@@ -17,11 +17,14 @@
 package com.android.dialer.app.dialpad;
 
 import android.content.AsyncTaskLoader;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.util.Log;
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
@@ -43,7 +46,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   private String mQuery;
   private SmartDialNameMatcher mNameMatcher;
 
-  private ForceLoadContentObserver mObserver;
+  private BroadcastReceiver mSmartDialUpdatedReceiver;
 
   private boolean mShowEmptyListForNullQuery = true;
 
@@ -59,7 +62,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
    */
   public void configureQuery(String query) {
     if (DEBUG) {
-      Log.v(TAG, "Configure new query to be " + query);
+      LogUtil.v(TAG, "Configure new query to be " + query);
     }
     mQuery = SmartDialNameMatcher.normalizeNumber(query, SmartDialPrefix.getMap());
 
@@ -76,7 +79,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   @Override
   public Cursor loadInBackground() {
     if (DEBUG) {
-      Log.v(TAG, "Load in background " + mQuery);
+      LogUtil.v(TAG, "Load in background " + mQuery);
     }
 
     if (!PermissionsUtil.hasContactsPermissions(mContext)) {
@@ -90,7 +93,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         dialerDatabaseHelper.getLooseMatches(mQuery, mNameMatcher);
 
     if (DEBUG) {
-      Log.v(TAG, "Loaded matches " + String.valueOf(allMatches.size()));
+      LogUtil.v(TAG, "Loaded matches " + allMatches.size());
     }
 
     /** Constructs a cursor for the returned array of results. */
@@ -121,11 +124,17 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     Cursor oldCursor = mCursor;
     mCursor = cursor;
 
-    if (mObserver == null) {
-      mObserver = new ForceLoadContentObserver();
-      mContext
-          .getContentResolver()
-          .registerContentObserver(DialerDatabaseHelper.SMART_DIAL_UPDATED_URI, true, mObserver);
+    if (mSmartDialUpdatedReceiver == null) {
+      mSmartDialUpdatedReceiver =
+          new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+              onContentChanged();
+            }
+          };
+      mContext.registerReceiver(
+          mSmartDialUpdatedReceiver,
+          new IntentFilter(DialerDatabaseHelper.ACTION_SMART_DIAL_UPDATED));
     }
 
     if (isStarted()) {
@@ -162,9 +171,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     /** Ensure the loader has been stopped. */
     onStopLoading();
 
-    if (mObserver != null) {
-      mContext.getContentResolver().unregisterContentObserver(mObserver);
-      mObserver = null;
+    if (mSmartDialUpdatedReceiver != null) {
+      mContext.unregisterReceiver(mSmartDialUpdatedReceiver);
+      mSmartDialUpdatedReceiver = null;
     }
 
     /** Release all previously saved query results. */
@@ -178,9 +187,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   public void onCanceled(Cursor cursor) {
     super.onCanceled(cursor);
 
-    if (mObserver != null) {
-      mContext.getContentResolver().unregisterContentObserver(mObserver);
-      mObserver = null;
+    if (mSmartDialUpdatedReceiver != null) {
+      mContext.unregisterReceiver(mSmartDialUpdatedReceiver);
+      mSmartDialUpdatedReceiver = null;
     }
 
     /** The load has been canceled, so we should release the resources associated with 'data'. */

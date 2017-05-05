@@ -261,5 +261,8 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"Servicevoorwaarden"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Open-sourcelicenties"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Kan de URL niet openen."</string>
-    <string name="description_search_video_call" msgid="7229218423556643079">"Videogesprek starten"</string>
+    <!-- no translation found for description_search_video_call (4337369876888024909) -->
+    <skip />
+    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
+    <skip />
 </resources>

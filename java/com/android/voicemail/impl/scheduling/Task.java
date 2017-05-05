@@ -24,8 +24,8 @@ import android.telecom.PhoneAccountHandle;
 import java.util.Objects;
 
 /**
- * A task for {@link TaskSchedulerService} to execute. Since the task is sent through a bundle to
- * the scheduler, The task must be constructable with the bundle. Specifically, It must have a
+ * A task for {@link TaskExecutor} to execute. Since the task is sent through a bundle to the
+ * scheduler, The task must be constructable with the bundle. Specifically, It must have a
  * constructor with zero arguments, and have all relevant data packed inside the bundle. Use {@link
  * Tasks#createIntent(Context, Class)} to create a intent that will construct the Task.
  *
@@ -112,8 +112,8 @@ public interface Task {
 
   /**
    * @return number of milliSeconds the scheduler should wait before running this task. A value less
-   *     than {@link TaskSchedulerService#READY_TOLERANCE_MILLISECONDS} will be considered ready. If
-   *     no tasks are ready, the scheduler will sleep for this amount of time before doing another
+   *     than {@link TaskExecutor#READY_TOLERANCE_MILLISECONDS} will be considered ready. If no
+   *     tasks are ready, the scheduler will sleep for this amount of time before doing another
    *     check (it will still wake if a new task is added). The first task in the queue that is
    *     ready will be executed.
    */

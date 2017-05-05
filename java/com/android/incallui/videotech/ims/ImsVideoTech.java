@@ -39,6 +39,7 @@ public class ImsVideoTech implements VideoTech {
   private @SessionModificationState int sessionModificationState =
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
+  private boolean paused = false;
 
   public ImsVideoTech(LoggingBindings logger, VideoTechListener listener, Call call) {
     this.logger = logger;
@@ -182,40 +183,52 @@ public class ImsVideoTech implements VideoTech {
   public void stopTransmission() {
     LogUtil.enterBlock("ImsVideoTech.stopTransmission");
 
+    int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
-            new VideoProfile(call.getDetails().getVideoState() & ~VideoProfile.STATE_TX_ENABLED));
+            new VideoProfile(unpausedVideoState & ~VideoProfile.STATE_TX_ENABLED));
   }
 
   @Override
   public void resumeTransmission() {
     LogUtil.enterBlock("ImsVideoTech.resumeTransmission");
 
+    int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
-            new VideoProfile(call.getDetails().getVideoState() | VideoProfile.STATE_TX_ENABLED));
+            new VideoProfile(unpausedVideoState | VideoProfile.STATE_TX_ENABLED));
     setSessionModificationState(SessionModificationState.WAITING_FOR_RESPONSE);
   }
 
   @Override
   public void pause() {
-    if (canPause()) {
+    if (canPause() && !paused) {
       LogUtil.i("ImsVideoTech.pause", "sending pause request");
+      paused = true;
       int pausedVideoState = call.getDetails().getVideoState() | VideoProfile.STATE_PAUSED;
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(pausedVideoState));
     } else {
-      LogUtil.i("ImsVideoTech.pause", "not sending request: canPause: %b", canPause());
+      LogUtil.i(
+          "ImsVideoTech.pause",
+          "not sending request: canPause: %b, paused: %b",
+          canPause(),
+          paused);
     }
   }
 
   @Override
   public void unpause() {
-    if (canPause()) {
+    if (canPause() && paused) {
       LogUtil.i("ImsVideoTech.unpause", "sending unpause request");
+      paused = false;
       int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(unpausedVideoState));
     } else {
-      LogUtil.i("ImsVideoTech.unpause", "not sending request: canPause: %b", canPause());
+      LogUtil.i(
+          "ImsVideoTech.unpause",
+          "not sending request: canPause: %b, paused: %b",
+          canPause(),
+          paused);
     }
   }
 
@@ -232,7 +245,8 @@ public class ImsVideoTech implements VideoTech {
 
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO)
-        && call.getState() == Call.STATE_ACTIVE;
+        && call.getState() == Call.STATE_ACTIVE
+        && isTransmitting();
   }
 
   static int getUnpausedVideoState(int videoState) {

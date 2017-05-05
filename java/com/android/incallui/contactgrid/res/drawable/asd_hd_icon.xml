@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+  <item
+      android:id="@+id/hd_attempting"
+      android:drawable="@drawable/avd_hd_attempting"
+      android:state_activated="false"/>
+  <item
+      android:id="@+id/hd_enabled"
+      android:drawable="@drawable/quantum_ic_hd_vd_theme_24"
+      android:state_activated="true"/>
+
+  <transition
+      android:fromId="@id/hd_attempting"
+      android:toId="@id/hd_enabled">
+    <animated-vector android:drawable="@drawable/vd_hd_attempting">
+      <target android:name="hdMask">
+        <aapt:attr name="android:animation">
+          <objectAnimator
+              android:duration="150"
+              android:propertyName="pathData"
+              android:startOffset="45"
+              android:valueFrom="M12, 12 m 0, -9 a 9,9 0 1,1 0,18 a 9,9 0 1,1 0,-18"
+              android:valueTo="M12, 12 m 0, -18 a 18,18 0 1,1 0,36 a 18,18 0 1,1 0,-36"
+              android:valueType="pathType"/>
+        </aapt:attr>
+      </target>
+
+      <target android:name="hdRoot">
+        <aapt:attr name="android:animation">
+          <set android:ordering="sequentially">
+            <set>
+              <objectAnimator
+                  android:duration="45"
+                  android:interpolator="@anim/hd_scale_interpolator"
+                  android:propertyName="scaleX"
+                  android:valueFrom="1"
+                  android:valueTo="0.9"/>
+              <objectAnimator
+                  android:duration="45"
+                  android:interpolator="@anim/hd_scale_interpolator"
+                  android:propertyName="scaleY"
+                  android:valueFrom="1"
+                  android:valueTo="0.9"/>
+            </set>
+            <set>
+              <objectAnimator
+                  android:duration="120"
+                  android:interpolator="@anim/hd_scale_interpolator2"
+                  android:propertyName="scaleX"
+                  android:valueFrom="0.9"
+                  android:valueTo="1.2"/>
+              <objectAnimator
+                  android:duration="120"
+                  android:interpolator="@anim/hd_scale_interpolator2"
+                  android:propertyName="scaleY"
+                  android:valueFrom="0.9"
+                  android:valueTo="1.2"/>
+            </set>
+            <set>
+              <objectAnimator
+                  android:duration="120"
+                  android:interpolator="@anim/hd_scale_interpolator2"
+                  android:propertyName="scaleX"
+                  android:valueFrom="1.2"
+                  android:valueTo="1"/>
+              <objectAnimator
+                  android:duration="120"
+                  android:interpolator="@anim/hd_scale_interpolator2"
+                  android:propertyName="scaleY"
+                  android:valueFrom="1.2"
+                  android:valueTo="1"/>
+            </set>
+          </set>
+        </aapt:attr>
+      </target>
+
+      <target android:name="root">
+        <aapt:attr name="android:animation">
+          <objectAnimator
+              android:duration="150"
+              android:interpolator="@android:interpolator/fast_out_slow_in"
+              android:propertyName="alpha"
+              android:startOffset="45"
+              android:valueFrom="0.5"
+              android:valueTo="1"/>
+        </aapt:attr>
+      </target>
+    </animated-vector>
+  </transition>
+
+</animated-selector>

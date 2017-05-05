@@ -142,6 +142,8 @@
     <item name="contentInsetEnd">0dp</item>
   </style>
 
+  <style name="DialtactsSearchBarThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
   <!-- Text in the action bar at the top of the screen -->
   <style name="DialtactsActionBarTitleText"
     parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">

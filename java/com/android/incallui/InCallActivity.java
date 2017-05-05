@@ -242,7 +242,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   @Override
   protected void onNewIntent(Intent intent) {
     LogUtil.i("InCallActivity.onNewIntent", "");
-    common.onNewIntent(intent);
 
     // If the screen is off, we need to make sure it gets turned on for incoming calls.
     // This normally works just fine thanks to FLAG_TURN_SCREEN_ON but that only works
@@ -250,8 +249,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     // for the call waiting case, we recreate() the current activity. There should be no jank from
     // this since the screen is already off and will remain so until our new activity is up.
     if (!isVisible()) {
+      common.onNewIntent(intent, true /* isRecreating */);
       LogUtil.i("InCallActivity.onNewIntent", "Restarting InCallActivity to force screen on.");
       recreate();
+    } else {
+      common.onNewIntent(intent, false /* isRecreating */);
     }
   }
 
@@ -526,7 +528,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         "shouldShowAnswerUi: %b, shouldShowVideoUi: %b, "
             + "didShowAnswerScreen: %b, didShowInCallScreen: %b, didShowVideoCallScreen: %b",
         shouldShowAnswerUi.shouldShow,
-        shouldShowVideoUi,
+        shouldShowVideoUi.shouldShow,
         didShowAnswerScreen,
         didShowInCallScreen,
         didShowVideoCallScreen);

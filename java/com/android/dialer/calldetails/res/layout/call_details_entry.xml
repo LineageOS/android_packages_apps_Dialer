@@ -30,9 +30,13 @@
 
   <TextView
       android:id="@+id/call_type"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
+      android:layout_marginEnd="16dp"
+      android:layout_toStartOf="@+id/call_duration"
+      android:gravity="start"
+      android:maxLines="100"
       style="@style/PrimaryText"/>
 
   <TextView
@@ -57,7 +61,6 @@
       android:id="@+id/ec_container"
       android:layout_height="@dimen/ec_container_height"
       android:layout_width="match_parent"
-      android:layout_marginStart="@dimen/call_entry_text_left_margin"
       android:layout_below="@+id/call_time"
       android:visibility="gone"/>
 
@@ -65,11 +68,12 @@
       android:id="@+id/post_call_note"
       android:layout_width="match_parent"
       android:layout_height="@dimen/ec_container_height"
+      android:layout_below="@+id/ec_container"
+      android:paddingStart="@dimen/call_entry_text_left_margin"
       android:gravity="center_vertical"
-      android:layout_marginStart="@dimen/ec_post_call_left_margin"
       android:maxLines="2"
       android:visibility="gone"
-      android:layout_below="@+id/ec_container"
+      android:background="?attr/selectableItemBackground"
       style="@style/SecondaryText"/>
 
   <View
