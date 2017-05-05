@@ -18,6 +18,10 @@ package com.android.dialer.app.list;
 import static android.Manifest.permission.CALL_PHONE;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -27,6 +31,8 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.SmartDialCursorLoader;
 import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.util.PermissionsUtil;
 
 /** Implements a fragment to load and display SmartDial search results. */
@@ -34,9 +40,16 @@ public class SmartDialSearchFragment extends SearchFragment
     implements EmptyContentView.OnEmptyViewActionButtonClickedListener,
         FragmentCompat.OnRequestPermissionsResultCallback {
 
-  private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
-
   private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
+
+  private final BroadcastReceiver mSmartDialUpdatedReceiver =
+      new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+          LogUtil.i("SmartDialSearchFragment.onReceive", "smart dial update broadcast received");
+          reloadData();
+        }
+      };
 
   /** Creates a SmartDialListAdapter to display and operate on search results. */
   @Override
@@ -80,6 +93,27 @@ public class SmartDialSearchFragment extends SearchFragment
         mEmptyView.setDescription(EmptyContentView.NO_LABEL);
       }
     }
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+
+    LogUtil.i("SmartDialSearchFragment.onStart", "registering smart dial update receiver");
+
+    getActivity()
+        .registerReceiver(
+            mSmartDialUpdatedReceiver,
+            new IntentFilter(DialerDatabaseHelper.ACTION_SMART_DIAL_UPDATED));
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+
+    LogUtil.i("SmartDialSearchFragment.onStop", "unregistering smart dial update receiver");
+
+    getActivity().unregisterReceiver(mSmartDialUpdatedReceiver);
   }
 
   @Override

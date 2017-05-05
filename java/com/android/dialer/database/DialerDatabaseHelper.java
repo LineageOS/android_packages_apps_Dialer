@@ -597,6 +597,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * since last update.
    */
   public void updateSmartDialDatabase() {
+    LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
+
     final SQLiteDatabase db = getWritableDatabase();
 
     synchronized (mLock) {
@@ -798,6 +800,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
       editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
       editor.apply();
+
+      LogUtil.i("DialerDatabaseHelper.updateSmartDialDatabase", "broadcasting smart dial update");
 
       // Notify content observers that smart dial database has been updated.
       Intent intent = new Intent(ACTION_SMART_DIAL_UPDATED);
