@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import com.android.dialer.blocking.BlockReportSpamDialogs;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
@@ -55,7 +56,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final ContactSource.Type contactSourceType) {
+      @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
             displayNumber,
             Spam.get(mContext).isDialogReportSpamCheckedByDefault(),
@@ -99,7 +100,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final ContactSource.Type contactSourceType) {
+      @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.BlockDialogFragment.newInstance(
             displayNumber,
             Spam.get(mContext).isSpamEnabled(),

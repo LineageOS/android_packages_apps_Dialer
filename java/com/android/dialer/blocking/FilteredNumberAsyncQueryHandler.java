@@ -201,7 +201,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    */
   @TargetApi(VERSION_CODES.M)
   @Nullable
-  public Integer getBlockedIdSynchronousForCalllogOnly(@Nullable String number, String countryIso) {
+  public Integer getBlockedIdSynchronous(@Nullable String number, String countryIso) {
     Assert.isWorkerThread();
     if (number == null) {
       return null;
@@ -251,7 +251,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
       blockedNumberCache.put(number, blockedId);
       return blockedId;
     } catch (SecurityException e) {
-      LogUtil.e("FilteredNumberAsyncQueryHandler.getBlockedIdSynchronousForCalllogOnly", null, e);
+      LogUtil.e("FilteredNumberAsyncQueryHandler.getBlockedIdSynchronous", null, e);
       return null;
     }
   }

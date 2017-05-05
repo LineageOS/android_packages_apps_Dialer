@@ -133,7 +133,7 @@ public abstract class BaseTask implements Task {
   }
 
   /**
-   * Creates an intent that can be used to start the {@link TaskSchedulerService}. Derived class
+   * Creates an intent that can be used to be broadcast to the {@link TaskReceiver}. Derived class
    * should build their intent upon this.
    */
   public static Intent createIntent(

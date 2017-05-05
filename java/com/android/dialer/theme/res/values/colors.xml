@@ -46,6 +46,8 @@
   <!-- Color of the theme of the Dialer app -->
   <color name="dialtacts_theme_color">@color/dialer_theme_color</color>
 
+  <!-- Background color of new dialer activity -->
+  <color name="background_dialer_light">#fafafa</color>
   <!-- White background for dialer -->
   <color name="background_dialer_white">#ffffff</color>
   <color name="background_dialer_call_log_list_item">@color/background_dialer_white</color>

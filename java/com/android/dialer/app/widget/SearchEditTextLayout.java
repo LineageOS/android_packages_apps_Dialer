@@ -95,11 +95,11 @@ public class SearchEditTextLayout extends FrameLayout {
 
     // Convert a long click into a click to expand the search box, and then long click on the
     // search view. This accelerates the long-press scenario for copy/paste.
-    mCollapsedSearchBox.setOnLongClickListener(
+    mCollapsed.setOnLongClickListener(
         new OnLongClickListener() {
           @Override
           public boolean onLongClick(View view) {
-            mCollapsedSearchBox.performClick();
+            mCollapsed.performClick();
             mSearchView.performLongClick();
             return false;
           }
@@ -185,6 +185,11 @@ public class SearchEditTextLayout extends FrameLayout {
 
   public void fadeIn() {
     AnimUtils.fadeIn(this, ANIMATION_DURATION);
+    mIsFadedOut = false;
+  }
+
+  public void fadeIn(AnimUtils.AnimationCallback callback) {
+    AnimUtils.fadeIn(this, ANIMATION_DURATION, AnimUtils.NO_DELAY, callback);
     mIsFadedOut = false;
   }
 

@@ -202,6 +202,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Panggilan telepon"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Pemblokiran panggilan telepon"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Pesan Suara"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blokir panggilan dinonaktifkan sementara"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Pemblokiran panggilan telepon telah dinonaktifkan karena Anda menghubungi layanan darurat dari telepon ini dalam 48 jam terakhir. Akan diaktifkan kembali secara otomatis setelah masa 48 jam berakhir."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Impor nomor"</string>

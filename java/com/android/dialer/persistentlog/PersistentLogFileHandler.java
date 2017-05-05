@@ -51,7 +51,7 @@ import java.util.List;
  * worker thread.
  */
 @SuppressWarnings("AndroidApiChecker") // lambdas
-@TargetApi(VERSION_CODES.N)
+@TargetApi(VERSION_CODES.M)
 final class PersistentLogFileHandler {
 
   private static final String LOG_DIRECTORY = "persistent_log";
@@ -110,12 +110,19 @@ final class PersistentLogFileHandler {
   private byte[] readBlob() throws IOException {
     File[] files = getLogFiles();
 
-    ByteBuffer byteBuffer =
-        ByteBuffer.allocate(Arrays.stream(files).mapToInt(file -> (int) file.length()).sum());
+    ByteBuffer byteBuffer = ByteBuffer.allocate(getTotalSize(files));
     for (File file : files) {
       byteBuffer.put(readAllBytes(file));
     }
     return byteBuffer.array();
+  }
+
+  private static final int getTotalSize(File[] files) {
+    int sum = 0;
+    for (File file : files) {
+      sum += file.length();
+    }
+    return sum;
   }
 
   /** Parses the content of all files back to individual byte arrays. */

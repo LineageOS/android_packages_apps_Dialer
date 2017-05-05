@@ -17,7 +17,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.callcomposer">
 
-  <application>
+  <application android:theme="@style/Theme.AppCompat">
     <activity
       android:name="com.android.dialer.postcall.PostCallActivity"
       android:exported="false"

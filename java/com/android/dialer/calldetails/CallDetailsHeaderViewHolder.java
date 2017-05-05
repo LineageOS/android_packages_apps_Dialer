@@ -70,14 +70,15 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     contactPhoto.setContentDescription(
         context.getString(R.string.description_contact_photo_details, contact.getNameOrNumber()));
     nameView.setText(contact.getNameOrNumber());
-    if (!TextUtils.isEmpty(contact.getNumberLabel())
-        && !TextUtils.isEmpty(contact.getDisplayNumber())) {
+    if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
       String secondaryInfo =
-          context.getString(
-              com.android.contacts.common.R.string.call_subject_type_and_number,
-              contact.getNumberLabel(),
-              contact.getDisplayNumber());
+          TextUtils.isEmpty(contact.getNumberLabel())
+              ? contact.getDisplayNumber()
+              : context.getString(
+                  com.android.contacts.common.R.string.call_subject_type_and_number,
+                  contact.getNumberLabel(),
+                  contact.getDisplayNumber());
       numberView.setText(secondaryInfo);
     } else {
       numberView.setVisibility(View.GONE);

@@ -199,6 +199,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"來電封鎖"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"留言"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"暫時關閉來電封鎖功能"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"您在過去 48 小時內曾經使用此手機聯絡緊急服務，因此來電封鎖功能已停用。系統會在 48 小時期限結束後自動重新啟用功能。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"匯入號碼"</string>

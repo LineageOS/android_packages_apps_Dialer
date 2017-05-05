@@ -16,7 +16,6 @@
   -->
 
 <resources>
-  <item name="notification_incoming_call" type="id"/>
   <item name="notification_ongoing_call" type="id"/>
   <item name="notification_missed_call" type="id"/>
   <item name="notification_visual_voicemail" type="id"/>

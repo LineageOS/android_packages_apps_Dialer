@@ -130,8 +130,8 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
-    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
+    String omtpSource =
+        context.getSystemService(TelephonyManager.class).getVisualVoicemailPackageName();
     if (where.length() != 0) {
       where.append(" AND ");
     }
@@ -162,8 +162,8 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public void appendOmtpVoicemailStatusSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
-    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
+    String omtpSource =
+        context.getSystemService(TelephonyManager.class).getVisualVoicemailPackageName();
     if (where.length() != 0) {
       where.append(" AND ");
     }

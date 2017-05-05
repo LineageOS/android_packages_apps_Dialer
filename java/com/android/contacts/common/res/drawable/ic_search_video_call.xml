@@ -18,4 +18,5 @@
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
   android:autoMirrored="true"
   android:src="@drawable/quantum_ic_videocam_white_24"
-  android:tint="@color/search_video_call_icon_tint"/>
+  android:tint="@color/search_video_call_icon_tint"
+  android:background="?attr/selectableItemBackgroundBorderless"/>

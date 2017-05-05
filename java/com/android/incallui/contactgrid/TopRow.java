@@ -30,11 +30,11 @@ import com.android.incallui.videotech.utils.VideoUtils;
  * Gets the content of the top row. For example:
  *
  * <ul>
- * <li>Captain Holt ON HOLD
- * <li>Calling...
- * <li>[Wi-Fi icon] Calling via Starbucks Wi-Fi
- * <li>[Wi-Fi icon] Starbucks Wi-Fi
- * <li>Call from
+ *   <li>Captain Holt ON HOLD
+ *   <li>Calling...
+ *   <li>[Wi-Fi icon] Calling via Starbucks Wi-Fi
+ *   <li>[Wi-Fi icon] Starbucks Wi-Fi
+ *   <li>Call from
  * </ul>
  */
 public class TopRow {
@@ -61,7 +61,7 @@ public class TopRow {
     boolean labelIsSingleLine = true;
 
     if (state.isWifi && icon == null) {
-      icon = context.getDrawable(R.drawable.quantum_ic_network_wifi_white_24);
+      icon = context.getDrawable(R.drawable.quantum_ic_network_wifi_vd_theme_24);
     }
 
     if (state.state == State.INCOMING || state.state == State.CALL_WAITING) {

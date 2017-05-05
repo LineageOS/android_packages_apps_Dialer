@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"നിങ്ങൾക്ക് സമയം കിട്ടുമ്പോൾ എന്നെ തിരിച്ച് വിളിക്കൂ."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"അത്യാവശ്യമില്ല, നമുക്ക് പിന്നീട് ചാറ്റുചെയ്യാം."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"സന്ദേശം ചേർക്കുക"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"സന്ദേശം അയച്ചു"</string>
     <string name="view" msgid="8572192949673703830">"കാണുക"</string>
 </resources>

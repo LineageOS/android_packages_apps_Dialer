@@ -35,7 +35,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.google.protobuf.InvalidProtocolBufferException;
+import com.android.dialer.protos.ProtoParsers;
 import java.util.List;
 
 /** Displays the details of a specific call log entry. */
@@ -53,8 +53,8 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
     Assert.isNotNull(contact);
 
     Intent intent = new Intent(context, CallDetailsActivity.class);
-    intent.putExtra(EXTRA_CONTACT, contact.toByteArray());
-    intent.putExtra(EXTRA_CALL_DETAILS_ENTRIES, details.toByteArray());
+    ProtoParsers.put(intent, EXTRA_CONTACT, contact);
+    ProtoParsers.put(intent, EXTRA_CALL_DETAILS_ENTRIES, details);
     return intent;
   }
 
@@ -76,16 +76,13 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   }
 
   private void onHandleIntent(Intent intent) {
-    Bundle arguments = intent.getExtras();
-    CallComposerContact contact = CallComposerContact.getDefaultInstance();
-    try {
-      contact = CallComposerContact.parseFrom(arguments.getByteArray(EXTRA_CONTACT));
-      entries =
-          CallDetailsEntries.parseFrom(arguments.getByteArray(EXTRA_CALL_DETAILS_ENTRIES))
-              .getEntriesList();
-    } catch (InvalidProtocolBufferException e) {
-      throw Assert.createIllegalStateFailException(e.toString());
-    }
+    CallComposerContact contact =
+        ProtoParsers.getTrusted(intent, EXTRA_CONTACT, CallComposerContact.getDefaultInstance());
+    entries =
+        ProtoParsers.getTrusted(
+                intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())
+            .getEntriesList();
+
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries));

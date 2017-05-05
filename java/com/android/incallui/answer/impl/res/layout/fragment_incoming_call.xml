@@ -116,13 +116,15 @@
           android:layout_height="48dp"
           android:layout_marginTop="4dp"
           android:layout_marginBottom="@dimen/answer_importance_margin_bottom"
-          android:elevation="@dimen/answer_data_elevation"
           android:gravity="center"
-          android:singleLine="true"
+          android:elevation="@dimen/answer_data_elevation"
+          android:maxLines="1"
           android:text="@string/call_incoming_important"
           android:textAllCaps="true"
-          android:textAppearance="@style/Dialer.Incall.TextAppearance"
-          android:textColor="@android:color/black"/>
+          android:textSize="14sp"
+          android:textStyle="bold"
+          android:textColor="@color/background_dialer_white"
+          android:background="@drawable/urgent_call_background"/>
 
       <FrameLayout
           android:id="@+id/incall_location_holder"

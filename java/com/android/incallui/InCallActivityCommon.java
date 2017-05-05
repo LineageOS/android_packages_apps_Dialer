@@ -300,7 +300,7 @@ public class InCallActivityCommon {
     InCallPresenter.getInstance().updateIsChangingConfigurations();
   }
 
-  public void onNewIntent(Intent intent) {
+  void onNewIntent(Intent intent, boolean isRecreating) {
     LogUtil.i("InCallActivityCommon.onNewIntent", "");
 
     // We're being re-launched with a new Intent.  Since it's possible for a
@@ -317,7 +317,10 @@ public class InCallActivityCommon {
     // we can count on our onResume() method being called next.
 
     // Just like in onCreate(), handle the intent.
-    internalResolveIntent(intent);
+    // Skip if InCallActivity is going to recreate since this will be called in onCreate().
+    if (!isRecreating) {
+      internalResolveIntent(intent);
+    }
   }
 
   public boolean onBackPressed(boolean isInCallScreenVisible) {
@@ -414,6 +417,7 @@ public class InCallActivityCommon {
         break;
       case KeyEvent.KEYCODE_EQUALS:
         break;
+      default: // fall out
     }
 
     return event.getRepeatCount() == 0 && handleDialerKeyDown(keyCode, event);

@@ -64,6 +64,7 @@ import com.android.dialer.enrichedcall.extensions.StateExtension;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
@@ -94,6 +95,7 @@ public class CallComposerActivity extends AppCompatActivity
   private static final int EXIT_ANIMATION_DURATION_MILLIS = 500;
 
   private static final String ARG_CALL_COMPOSER_CONTACT = "CALL_COMPOSER_CONTACT";
+  private static final String ARG_CALL_COMPOSER_CONTACT_BASE64 = "CALL_COMPOSER_CONTACT_BASE64";
 
   private static final String ENTRANCE_ANIMATION_KEY = "entrance_animation_key";
   private static final String CURRENT_INDEX_KEY = "current_index_key";
@@ -129,7 +131,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   public static Intent newIntent(Context context, CallComposerContact contact) {
     Intent intent = new Intent(context, CallComposerActivity.class);
-    intent.putExtra(ARG_CALL_COMPOSER_CONTACT, contact.toByteArray());
+    ProtoParsers.put(intent, ARG_CALL_COMPOSER_CONTACT, contact);
     return intent;
   }
 
@@ -449,23 +451,19 @@ public class CallComposerActivity extends AppCompatActivity
    * Copied from {@link com.android.contacts.common.dialog.CallSubjectDialog}.
    */
   private void onHandleIntent(Intent intent) {
-    Bundle arguments = intent.getExtras();
-    if (arguments == null) {
-      throw new RuntimeException("CallComposerActivity.onHandleIntent, Arguments cannot be null.");
-    }
-    if (arguments.get(ARG_CALL_COMPOSER_CONTACT) instanceof String) {
-      byte[] bytes = Base64.decode(arguments.getString(ARG_CALL_COMPOSER_CONTACT), Base64.DEFAULT);
+    if (intent.getExtras().containsKey(ARG_CALL_COMPOSER_CONTACT_BASE64)) {
+      // Invoked from launch_call_composer.py. The proto is provided as a base64 encoded string.
+      byte[] bytes =
+          Base64.decode(intent.getStringExtra(ARG_CALL_COMPOSER_CONTACT_BASE64), Base64.DEFAULT);
       try {
         contact = CallComposerContact.parseFrom(bytes);
       } catch (InvalidProtocolBufferException e) {
-        Assert.fail(e.toString());
+        throw Assert.createAssertionFailException(e.toString());
       }
     } else {
-      try {
-        contact = CallComposerContact.parseFrom(arguments.getByteArray(ARG_CALL_COMPOSER_CONTACT));
-      } catch (InvalidProtocolBufferException e) {
-        throw Assert.createIllegalStateFailException(e.toString());
-      }
+      contact =
+          ProtoParsers.getTrusted(
+              intent, ARG_CALL_COMPOSER_CONTACT, CallComposerContact.getDefaultInstance());
     }
     updateContactInfo();
   }
@@ -488,14 +486,15 @@ public class CallComposerActivity extends AppCompatActivity
 
     nameView.setText(contact.getNameOrNumber());
     toolbar.setTitle(contact.getNameOrNumber());
-    if (!TextUtils.isEmpty(contact.getNumberLabel())
-        && !TextUtils.isEmpty(contact.getDisplayNumber())) {
+    if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
       String secondaryInfo =
-          getString(
-              com.android.contacts.common.R.string.call_subject_type_and_number,
-              contact.getNumberLabel(),
-              contact.getDisplayNumber());
+          TextUtils.isEmpty(contact.getNumberLabel())
+              ? contact.getDisplayNumber()
+              : getString(
+                  com.android.contacts.common.R.string.call_subject_type_and_number,
+                  contact.getNumberLabel(),
+                  contact.getDisplayNumber());
       numberView.setText(secondaryInfo);
       toolbar.setSubtitle(secondaryInfo);
     } else {
@@ -656,7 +655,7 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void setMediaIconSelected(int position) {
-    float alpha = 0.54f;
+    float alpha = 0.7f;
     cameraIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_CAMERA ? 1 : alpha);
     galleryIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_GALLERY ? 1 : alpha);
     messageIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_MESSAGE ? 1 : alpha);

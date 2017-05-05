@@ -24,11 +24,11 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.R;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.util.CallUtil;
 
 /**
@@ -47,11 +47,13 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
   public static final int SHORTCUT_MAKE_VIDEO_CALL = 4;
   public static final int SHORTCUT_BLOCK_NUMBER = 5;
   public static final int SHORTCUT_COUNT = 6;
+
   private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
   private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+  private final boolean mVideoCallingEnabled;
+  private final String mCountryIso;
+
   private String mFormattedQueryString;
-  private String mCountryIso;
-  private boolean mVideoCallingEnabled = false;
 
   public DialerPhoneNumberListAdapter(Context context) {
     super(context);
@@ -108,7 +110,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         return convertView;
       } else {
         final ContactListItemView v =
-            new ContactListItemView(getContext(), null, mVideoCallingEnabled);
+            new ContactListItemView(
+                getContext(), null, mVideoCallingEnabled, isCallAndShareEnabled());
         assignShortcutToView(v, shortcutType);
         return v;
       }
@@ -123,6 +126,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     final ContactListItemView view = super.newView(context, partition, cursor, position, parent);
 
     view.setSupportVideoCallIcon(mVideoCallingEnabled);
+    view.setSupportCallAndShareIcon(isCallAndShareEnabled());
     return view;
   }
 

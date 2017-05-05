@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"通话"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"来电屏蔽"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"语音邮件"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"来电拦截功能已暂时关闭"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"来电拦截功能已停用，因为您在过去 48 小时内使用该手机拨打了紧急服务电话。系统会在 48 小时的期限结束后自动重新启用该功能。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"导入号码"</string>

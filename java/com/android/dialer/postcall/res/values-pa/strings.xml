@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"ਜਦੋਂ ਤੁਹਾਡੇ ਕੋਲ ਕੁਝ ਸਮਾਂ ਹੋਵੇ ਤਾਂ ਮੈਨੂੰ ਵਾਪਸ ਕਾਲ ਕਰੋ।"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"ਜ਼ਰੂਰੀ ਨਹੀਂ ਹੈ, ਅਸੀਂ ਬਾਅਦ ਵਿੱਚ ਚੈਟ ਕਰ ਸਕਦੇ ਹਾਂ।"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"ਸੁਨੇਹਾ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"ਸੁਨੇਹਾ ਭੇਜਿਆ ਗਿਆ"</string>
     <string name="view" msgid="8572192949673703830">"ਵੇਖੋ"</string>
 </resources>

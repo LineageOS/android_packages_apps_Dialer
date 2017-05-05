@@ -112,6 +112,11 @@
         android:resource="@layout/keyguard_preview"/>
     </activity>
 
+    <activity-alias
+        android:exported="true"
+        android:name="com.android.dialer.DialtactsActivity"
+        android:targetActivity="com.android.dialer.app.DialtactsActivity"/>
+
   </application>
 
 </manifest>

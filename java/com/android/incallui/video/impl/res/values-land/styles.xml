@@ -16,7 +16,8 @@
   -->
 <resources>
   <style name="VideoPreviewHolder">
-    <item name="android:layout_gravity">bottom|end</item>
+    <item name="android:layout_alignParentBottom">true</item>
+    <item name="android:layout_alignParentEnd">true</item>
     <item name="android:layout_width">@dimen/videocall_preview_long</item>
     <item name="android:layout_height">@dimen/videocall_preview_height</item>
     <item name="android:layout_marginBottom">@dimen/videocall_preview_margin_bottom</item>

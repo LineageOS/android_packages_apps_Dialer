@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"ຖ້າຫວ່າງແລ້ວໂທກັບແດ່."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"ບໍ່ດ່ວນປານໃດ, ໄວ້ຄ່ອຍລົມກໍໄດ້."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"ເພີ່ມຂໍ້ຄວາມ"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"ສົ່ງຂໍ້ຄວາມແລ້ວ"</string>
     <string name="view" msgid="8572192949673703830">"ເບິ່ງ"</string>
 </resources>

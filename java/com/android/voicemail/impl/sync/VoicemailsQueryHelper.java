@@ -27,7 +27,6 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.Voicemail;
 import java.util.ArrayList;
@@ -54,12 +53,6 @@ public class VoicemailsQueryHelper {
       Voicemails.DIRTY + "=1 AND " + Voicemails.DELETED + "!=1 AND " + Voicemails.IS_READ + "=1";
   static final String DELETED_SELECTION = Voicemails.DELETED + "=1";
   static final String ARCHIVED_SELECTION = Voicemails.ARCHIVED + "=0";
-  private static final String PHONE_ACCOUNT_HANDLE_SELECTION =
-      "("
-          + Voicemails.PHONE_ACCOUNT_COMPONENT_NAME
-          + "=? AND "
-          + Voicemails.PHONE_ACCOUNT_ID
-          + "=?)";
 
   private Context mContext;
   private ContentResolver mContentResolver;
@@ -101,23 +94,14 @@ public class VoicemailsQueryHelper {
   /**
    * Utility method to make queries to the voicemail database.
    *
+   * <p>TODO(b/36588206) add PhoneAccountHandle filtering back
+   *
    * @param selection A filter declaring which rows to return. {@code null} returns all rows.
    * @return A list of voicemails according to the selection statement.
    */
   private List<Voicemail> getLocalVoicemails(
-      @NonNull PhoneAccountHandle phoneAccountHandle, String selection) {
-
-    String[] selectionArgs =
-        new String[] {
-          phoneAccountHandle.getComponentName().flattenToString(), phoneAccountHandle.getId()
-        };
-    if (TextUtils.isEmpty(selection)) {
-      selection = PHONE_ACCOUNT_HANDLE_SELECTION;
-    } else {
-      selection = PHONE_ACCOUNT_HANDLE_SELECTION + " AND (" + selection + ")";
-    }
-
-    Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, selectionArgs, null);
+      @NonNull PhoneAccountHandle unusedPhoneAccountHandle, String selection) {
+    Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, null, null);
     if (cursor == null) {
       return null;
     }

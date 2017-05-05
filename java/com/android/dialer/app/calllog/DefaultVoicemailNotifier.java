@@ -31,6 +31,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.util.Pair;
 import android.telecom.PhoneAccount;
@@ -48,6 +49,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
+import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
@@ -76,17 +78,24 @@ public class DefaultVoicemailNotifier {
 
   private final Context context;
   private final CallLogNotificationsQueryHelper queryHelper;
+  private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  DefaultVoicemailNotifier(Context context, CallLogNotificationsQueryHelper queryHelper) {
+  DefaultVoicemailNotifier(
+      Context context,
+      CallLogNotificationsQueryHelper queryHelper,
+      FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
     this.context = context;
     this.queryHelper = queryHelper;
+    this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
   }
 
   /** Returns an instance of {@link DefaultVoicemailNotifier}. */
   public static DefaultVoicemailNotifier getInstance(Context context) {
     return new DefaultVoicemailNotifier(
-        context, CallLogNotificationsQueryHelper.getInstance(context));
+        context,
+        CallLogNotificationsQueryHelper.getInstance(context),
+        new FilteredNumberAsyncQueryHandler(context));
   }
 
   /**
@@ -97,7 +106,9 @@ public class DefaultVoicemailNotifier {
    *
    * <p>It is not safe to call this method from the main thread.
    */
+  @WorkerThread
   public void updateNotification() {
+    Assert.isWorkerThread();
     // Lookup the list of new voicemails to include in the notification.
     final List<NewCall> newCalls = queryHelper.getNewVoicemails();
 
@@ -121,13 +132,15 @@ public class DefaultVoicemailNotifier {
       NewCall newCall = itr.next();
 
       // Skip notifying for numbers which are blocked.
-      if (FilteredNumbersUtil.shouldBlockVoicemail(
-          context, newCall.number, newCall.countryIso, newCall.dateMs)) {
+      if (!FilteredNumbersUtil.hasRecentEmergencyCall(context)
+          && filteredNumberAsyncQueryHandler.getBlockedIdSynchronous(
+                  newCall.number, newCall.countryIso)
+              != null) {
         itr.remove();
 
         if (newCall.voicemailUri != null) {
           // Delete the voicemail.
-          context.getContentResolver().delete(newCall.voicemailUri, null, null);
+          CallLogAsyncTaskUtil.deleteVoicemailSynchronous(context, newCall.voicemailUri);
         }
         continue;
       }
