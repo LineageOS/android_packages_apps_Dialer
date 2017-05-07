@@ -17,6 +17,7 @@
 package com.android.dialer.phonenumbercache;
 
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.UriUtils;
@@ -58,12 +59,12 @@ public class ContactInfo {
   public boolean isBadData;
   public String objectId;
   public @UserType long userType;
-  public ContactSource.Type sourceType;
+  public @Nullable ContactSource.Type sourceType = ContactSource.Type.UNKNOWN_SOURCE_TYPE;
   /**
    * True if local contact exists. This is only used for Cequint Caller ID so it won't overwrite
    * photo if local contact exists.
    */
-  boolean contactExists;
+  public boolean contactExists;
 
   /** @see android.provider.ContactsContract.CommonDataKinds.Phone#CARRIER_PRESENCE */
   public int carrierPresence;

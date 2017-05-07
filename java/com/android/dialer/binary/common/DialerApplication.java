@@ -26,6 +26,7 @@ import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
 
 /** A common application subclass for all Dialer build variants. */
@@ -47,6 +48,8 @@ public abstract class DialerApplication extends Application implements HasRootCo
         .asyncAutoMigrate();
     CallLogComponent.get(this).callLogFramework().registerContentObservers(getApplicationContext());
     PersistentLogger.initialize(this);
+
+    NotificationChannelManager.getInstance().firstInitIfNeeded(this);
     Trace.endSection();
   }
 

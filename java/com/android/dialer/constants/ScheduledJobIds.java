@@ -31,4 +31,6 @@ public final class ScheduledJobIds {
 
   public static final int VVM_TASK_SCHEDULER_JOB = 200;
   public static final int VVM_STATUS_CHECK_JOB = 201;
+
+  public static final int VOIP_REGISTRATION = 300;
 }

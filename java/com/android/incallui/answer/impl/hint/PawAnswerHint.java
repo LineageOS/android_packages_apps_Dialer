@@ -92,9 +92,10 @@ public final class PawAnswerHint implements AnswerHint {
   @Override
   public void onBounceStart() {
     if (answerGestureHintAnim == null) {
-
       answerGestureHintAnim = new AnimatorSet();
-      answerHintContainer.setY(puck.getY() + getDimension(R.dimen.hint_initial_offset));
+      int[] puckLocation = new int[2];
+      puck.getLocationInWindow(puckLocation);
+      answerHintContainer.setY(puckLocation[1] + getDimension(R.dimen.hint_initial_offset));
 
       Animator fadeIn = createFadeIn();
 
@@ -102,7 +103,7 @@ public final class PawAnswerHint implements AnswerHint {
           ObjectAnimator.ofFloat(
               answerHintContainer,
               View.TRANSLATION_Y,
-              puck.getY() - getDimension(R.dimen.hint_offset));
+              puckLocation[1] - getDimension(R.dimen.hint_offset));
       swipeUp.setInterpolator(new FastOutSlowInInterpolator());
       swipeUp.setDuration(SWIPE_UP_DURATION_ALPHA_MILLIS);
 
@@ -124,7 +125,7 @@ public final class PawAnswerHint implements AnswerHint {
               payloadView.setAlpha(0);
               payloadView.setScaleX(1);
               payloadView.setScaleY(1);
-              answerHintContainer.setY(puck.getY() + getDimension(R.dimen.hint_initial_offset));
+              answerHintContainer.setY(puckLocation[1] + getDimension(R.dimen.hint_initial_offset));
               answerHintContainer.setVisibility(View.VISIBLE);
             }
           });

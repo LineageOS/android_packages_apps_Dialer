@@ -28,20 +28,26 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.CallableCompat;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.compat.PhoneCompat;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
+import com.android.contacts.common.list.ContactListItemView.CallToAction;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.Constants;
+import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +68,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
   // A list of extended directories to add to the directories from the database
   private final List<DirectoryPartition> mExtendedDirectories;
   private final CharSequence mUnknownNameText;
+  private final boolean mCallAndShareEnabled;
   // Extended directories will have ID's that are higher than any of the id's from the database,
   // so that we can identify them and set them up properly. If no extended directories
   // exist, this will be Long.MAX_VALUE
@@ -83,6 +90,9 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     int videoCapabilities = CallUtil.getVideoCallingAvailability(context);
     mIsVideoEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_ENABLED) != 0;
     mIsPresenceEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
+
+    // TODO
+    mCallAndShareEnabled = true;
   }
 
   @Override
@@ -207,7 +217,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       case ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY:
         break; // This adapter is always "phone only", so no selection needed either.
       default:
-        Log.w(
+        LogUtil.w(
             TAG,
             "Unsupported filter type came "
                 + "(type: "
@@ -237,6 +247,48 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
   public String getLookupKey(int position) {
     final Cursor item = (Cursor) getItem(position);
     return item != null ? item.getString(PhoneQuery.LOOKUP_KEY) : null;
+  }
+
+  public CallComposerContact getCallComposerContact(int position) {
+    Cursor cursor = (Cursor) getItem(position);
+    if (cursor == null) {
+      LogUtil.e("PhoneNumberListAdapter.getCallComposerContact", "cursor was null.");
+      return null;
+    }
+
+    String displayName = cursor.getString(PhoneQuery.DISPLAY_NAME);
+    String number = cursor.getString(PhoneQuery.PHONE_NUMBER);
+    String photoUri = cursor.getString(PhoneQuery.PHOTO_URI);
+    Uri contactUri =
+        Contacts.getLookupUri(
+            cursor.getLong(PhoneQuery.CONTACT_ID), cursor.getString(PhoneQuery.LOOKUP_KEY));
+
+    CallComposerContact.Builder contact = CallComposerContact.newBuilder();
+    contact
+        .setNumber(number)
+        .setPhotoId(cursor.getLong(PhoneQuery.PHOTO_ID))
+        .setContactType(ContactPhotoManager.TYPE_DEFAULT)
+        .setNameOrNumber(displayName)
+        .setNumberLabel(
+            Phone.getTypeLabel(
+                    mContext.getResources(),
+                    cursor.getInt(PhoneQuery.PHONE_TYPE),
+                    cursor.getString(PhoneQuery.PHONE_LABEL))
+                .toString());
+
+    if (photoUri != null) {
+      contact.setPhotoUri(photoUri);
+    }
+
+    if (contactUri != null) {
+      contact.setContactUri(contactUri.toString());
+    }
+
+    if (!TextUtils.isEmpty(displayName)) {
+      contact.setDisplayNumber(number);
+    }
+
+    return contact.build();
   }
 
   @Override
@@ -323,12 +375,13 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       final String customLabel = cursor.getString(PhoneQuery.PHONE_LABEL);
 
       // TODO cache
-      label = Phone.getTypeLabel(getContext().getResources(), type, customLabel);
+      label = Phone.getTypeLabel(mContext.getResources(), type, customLabel);
     }
     view.setLabel(label);
     final String text;
+    String number = cursor.getString(PhoneQuery.PHONE_NUMBER);
     if (displayNumber) {
-      text = cursor.getString(PhoneQuery.PHONE_NUMBER);
+      text = number;
     } else {
       // Display phone label. If that's null, display geocoded location for the number
       final String phoneLabel = cursor.getString(PhoneQuery.PHONE_LABEL);
@@ -341,14 +394,32 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     }
     view.setPhoneNumber(text);
 
+    @CallToAction int action = ContactListItemView.NONE;
+
     if (CompatUtils.isVideoCompatible()) {
       // Determine if carrier presence indicates the number supports video calling.
       int carrierPresence = cursor.getInt(PhoneQuery.CARRIER_PRESENCE);
       boolean isPresent = (carrierPresence & Phone.CARRIER_PRESENCE_VT_CAPABLE) != 0;
 
       boolean isVideoIconShown = mIsVideoEnabled && (!mIsPresenceEnabled || isPresent);
-      view.setShowVideoCallIcon(isVideoIconShown, mListener, position);
+      if (isVideoIconShown) {
+        action = ContactListItemView.VIDEO;
+      }
     }
+
+    if (isCallAndShareEnabled() && action == ContactListItemView.NONE && number != null) {
+      EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
+      EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
+      if (capabilities != null && capabilities.supportsCallComposer()) {
+        action = ContactListItemView.CALL_AND_SHARE;
+      } else if (capabilities == null
+          && getQueryString() != null
+          && getQueryString().length() >= 3) {
+        manager.requestCapabilities(number);
+      }
+    }
+
+    view.setCallToAction(action, mListener, position);
   }
 
   protected void bindSectionHeaderAndDivider(final ContactListItemView view, int position) {
@@ -499,9 +570,15 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     mListener = listener;
   }
 
+  public boolean isCallAndShareEnabled() {
+    return mCallAndShareEnabled;
+  }
+
   public interface Listener {
 
     void onVideoCallIconClicked(int position);
+
+    void onCallAndShareIconClicked(int position);
   }
 
   public static class PhoneQuery {

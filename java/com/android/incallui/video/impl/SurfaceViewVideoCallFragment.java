@@ -329,6 +329,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   public void onPause() {
     super.onPause();
     LogUtil.i("SurfaceViewVideoCallFragment.onPause", null);
+    inCallScreenDelegate.onInCallScreenPaused();
   }
 
   @Override
@@ -494,7 +495,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private View[] getAllPreviewRelatedViews() {
-    return new View[] {previewRoot};
+    return new View[] {previewRoot, mutePreviewOverlay};
   }
 
   private int getOffsetTop(View view) {

@@ -31,7 +31,8 @@
 
     <receiver
       android:name="com.android.voicemail.impl.sms.OmtpMessageReceiver"
-      android:exported="false">
+      android:exported="false"
+      android:directBootAware="true">
       <intent-filter>
         <action android:name="com.android.vociemailomtp.sms.sms_received"/>
       </intent-filter>
@@ -40,7 +41,7 @@
     <receiver android:name="com.android.voicemail.impl.VoicemailClientReceiver"
       android:exported="false">
       <intent-filter>
-        <action android:name="com.android.voicemailomtp.VoicemailClient.ACTION_UPLOAD"/>
+        <action android:name="com.android.voicemail.VoicemailClient.ACTION_UPLOAD"/>
       </intent-filter>
     </receiver>
 
@@ -76,8 +77,8 @@
       </intent-filter>
     </receiver>
 
-    <service
-      android:name="com.android.voicemail.impl.scheduling.TaskSchedulerService"
+    <receiver
+      android:name="com.android.voicemail.impl.scheduling.TaskReceiver"
       android:exported="false"/>
 
     <service
@@ -90,12 +91,15 @@
         android:permission="android.permission.BIND_JOB_SERVICE"
         android:exported="false"/>
 
-    <receiver android:name="com.android.voicemail.impl.OmtpReceiver"
-      android:exported="true">
+    <service
+        android:name="com.android.voicemail.impl.OmtpService"
+        android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
+        android:exported="true"
+        android:directBootAware="true">
       <intent-filter>
-        <action android:name="com.android.phone.vvm.ACTION_VISUAL_VOICEMAIL_SERVICE_EVENT" />
+        <action android:name="android.telephony.VisualVoicemailService"/>
       </intent-filter>
-    </receiver>
+    </service>
 
     <activity
       android:name="com.android.voicemail.impl.settings.VoicemailChangePinActivity"
@@ -107,15 +111,6 @@
       android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
-      </intent-filter>
-    </receiver>
-
-    <receiver android:name="com.android.voicemail.impl.VvmPackageInstallReceiver">
-      <intent-filter>
-        <!-- New O broadcast, can be received in background. Only applies to installation and not
-           updates -->
-        <action android:name="android.intent.action.PACKAGE_FIRST_ADDED" />
-        <data android:scheme="package"/>
       </intent-filter>
     </receiver>
   </application>

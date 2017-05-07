@@ -23,11 +23,8 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.Parcelable;
 import android.support.annotation.MainThread;
 import com.android.dialer.constants.ScheduledJobIds;
@@ -36,59 +33,42 @@ import com.android.voicemail.impl.VvmLog;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A {@link JobService} that will trigger the background execution of {@link TaskSchedulerService}.
- */
+/** A {@link JobService} that will trigger the background execution of {@link TaskExecutor}. */
 @TargetApi(VERSION_CODES.O)
-public class TaskSchedulerJobService extends JobService implements TaskSchedulerService.Job {
+public class TaskSchedulerJobService extends JobService implements TaskExecutor.Job {
 
   private static final String TAG = "TaskSchedulerJobService";
 
   private static final String EXTRA_TASK_EXTRAS_ARRAY = "extra_task_extras_array";
 
   private JobParameters jobParameters;
-  private TaskSchedulerService scheduler;
-
-  private final ServiceConnection mConnection =
-      new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder binder) {
-          VvmLog.i(TAG, "TaskSchedulerService connected");
-          scheduler = ((TaskSchedulerService.LocalBinder) binder).getService();
-          scheduler.onStartJob(
-              TaskSchedulerJobService.this,
-              getBundleList(
-                  jobParameters.getTransientExtras().getParcelableArray(EXTRA_TASK_EXTRAS_ARRAY)));
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName unused) {
-          // local service, process should always be killed together.
-          Assert.fail();
-        }
-      };
 
   @Override
   @MainThread
   public boolean onStartJob(JobParameters params) {
     jobParameters = params;
-    bindService(
-        new Intent(this, TaskSchedulerService.class), mConnection, Context.BIND_AUTO_CREATE);
+    TaskExecutor.createRunningInstance(this);
+    TaskExecutor.getRunningInstance()
+        .onStartJob(
+            this,
+            getBundleList(
+                jobParameters.getTransientExtras().getParcelableArray(EXTRA_TASK_EXTRAS_ARRAY)));
     return true /* job still running in background */;
   }
 
   @Override
   @MainThread
   public boolean onStopJob(JobParameters params) {
-    scheduler.onStopJob();
+    TaskExecutor.getRunningInstance().onStopJob();
     jobParameters = null;
-    return false /* don't reschedule. TaskScheduler service will post a new job */;
+    return false /* don't reschedule. TaskExecutor service will post a new job */;
   }
 
   /**
    * Schedule a job to run the {@code pendingTasks}. If a job is already scheduled it will be
-   * appended to the back of the queue and the job will be rescheduled.
+   * appended to the back of the queue and the job will be rescheduled. A job may only be scheduled
+   * when the {@link TaskExecutor} is not running ({@link TaskExecutor#getRunningInstance()}
+   * returning {@code null})
    *
    * @param delayMillis delay before running the job. Must be 0 if{@code isNewJob} is true.
    * @param isNewJob a new job will be forced to run immediately.
@@ -141,11 +121,19 @@ public class TaskSchedulerJobService extends JobService implements TaskScheduler
    * the wakelock
    */
   @Override
-  public void finish() {
-    VvmLog.i(TAG, "finishing job and unbinding TaskSchedulerService");
+  public void finishAsync() {
+    VvmLog.i(TAG, "finishing job");
     jobFinished(jobParameters, false);
     jobParameters = null;
-    unbindService(mConnection);
+  }
+
+  @MainThread
+  @Override
+  public boolean isFinished() {
+    Assert.isMainThread();
+    return getSystemService(JobScheduler.class)
+            .getPendingJob(ScheduledJobIds.VVM_TASK_SCHEDULER_JOB)
+        == null;
   }
 
   private static List<Bundle> getBundleList(Parcelable[] parcelables) {

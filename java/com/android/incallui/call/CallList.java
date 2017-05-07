@@ -28,11 +28,11 @@ import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.util.ArrayMap;
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
@@ -95,7 +95,7 @@ public class CallList implements DialerCallDelegate {
 
   /**
    * USED ONLY FOR TESTING Testing-only constructor. Instance should only be acquired through
-   * getInstance().
+   * getRunningInstance().
    */
   @VisibleForTesting
   public CallList() {}

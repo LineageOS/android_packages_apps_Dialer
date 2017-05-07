@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Më telefono kur të kesh kohë."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Nuk është urgjente, mund të bisedojmë më vonë."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Shto një mesazh"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"Mesazhi u dërgua"</string>
     <string name="view" msgid="8572192949673703830">"Shiko"</string>
 </resources>

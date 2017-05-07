@@ -83,12 +83,7 @@ public class CallLogAsyncTaskUtil {
         new AsyncTask<Void, Void, Void>() {
           @Override
           public Void doInBackground(Void... params) {
-            ContentValues values = new ContentValues();
-            values.put(Voicemails.DELETED, "1");
-            context.getContentResolver().update(voicemailUri, values, null, null);
-            // TODO(b/35440541): check which source package is changed. Don't need
-            // to upload changes on foreign voicemails, they will get a PROVIDER_CHANGED
-            uploadVoicemailLocalChangesToServer(context);
+            deleteVoicemailSynchronous(context, voicemailUri);
             return null;
           }
 
@@ -99,6 +94,15 @@ public class CallLogAsyncTaskUtil {
             }
           }
         });
+  }
+
+  public static void deleteVoicemailSynchronous(Context context, Uri voicemailUri) {
+    ContentValues values = new ContentValues();
+    values.put(Voicemails.DELETED, "1");
+    context.getContentResolver().update(voicemailUri, values, null, null);
+    // TODO(b/35440541): check which source package is changed. Don't need
+    // to upload changes on foreign voicemails, they will get a PROVIDER_CHANGED
+    uploadVoicemailLocalChangesToServer(context);
   }
 
   public static void markCallAsRead(@NonNull final Context context, @NonNull final long[] callIds) {

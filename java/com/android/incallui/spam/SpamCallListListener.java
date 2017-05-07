@@ -26,11 +26,11 @@ import android.graphics.drawable.Icon;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -183,7 +183,7 @@ public class SpamCallListListener implements CallList.Listener {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
             .setSmallIcon(R.drawable.ic_call_end_white_24dp);
-    NotificationChannelManager.applyChannel(builder, context, Channel.MISC, null);
+    NotificationChannelManager.applyChannel(builder, context, Channel.DEFAULT, null);
     return builder;
   }
 

@@ -202,6 +202,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Hívások"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Hívásletiltás"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Hangposta"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Hívástiltás átmenetileg felfüggesztve"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Felfüggesztettük a hívások tiltását, mert az elmúlt 48 órában tárcsázta a segélyhívót erről a telefonról. A funkciót automatikusan újból engedélyezzük 48 óra elteltével."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Számok importálása"</string>

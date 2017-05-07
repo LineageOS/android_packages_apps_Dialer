@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="event_activated" msgid="4737012691463830969">"Paw режими иштетилди"</string>
-    <string name="event_deactivated" msgid="4504516573331084650">"Paw режими өчүрүлдү"</string>
+    <!-- no translation found for event_deactivated (689994223349549274) -->
+    <skip />
 </resources>

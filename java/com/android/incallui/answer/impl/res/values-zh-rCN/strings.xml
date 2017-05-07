@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"接听并结束当前通话"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"摄像头处于关闭状态"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"双指向上滑动即可接听，向下滑动则可拒接。"</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"重要来电"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

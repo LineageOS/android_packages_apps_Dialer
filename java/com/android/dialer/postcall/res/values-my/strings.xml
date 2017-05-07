@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"သင်အချိန်ရလျှင် ကျွန်ုပ်ကို ပြန်ခေါ်ပါ။"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"အရေးမကြီးပါ၊ နောက်မှ ကျွန်ုပ်တို့ ချတ်လုပ်နိုင်ပါသည်။"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"မက်ဆေ့ဂျ် ထည့်သွင်းပါ"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"မက်ဆေ့ဂျ် ပို့ပြီးပါပြီ"</string>
     <string name="view" msgid="8572192949673703830">"ကြည့်ရန်"</string>
 </resources>

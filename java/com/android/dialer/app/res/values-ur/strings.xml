@@ -202,6 +202,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"کالز"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"کال مسدود کرنا"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"صوتی میل"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"کال مسدود کرنا عارضی طور پر آف ہے"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"کال مسدود کرنا غیر فعال کر دیا گیا ہے کیونکہ آپ نے پچھلے 48 گھنٹوں میں اس فون سے ہنگامی سروسز کے ساتھ رابطہ کیا تھا۔ جب 48 گھنٹے کا دورانیہ ختم ہوگا تو یہ خودکار طور پر دوبارہ فعال ہو جائے گا۔"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"نمبرز درآمد کریں"</string>

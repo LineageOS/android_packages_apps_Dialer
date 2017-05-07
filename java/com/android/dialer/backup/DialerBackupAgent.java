@@ -81,15 +81,14 @@ public class DialerBackupAgent extends BackupAgent {
 
   /**
    * onRestore is used for Key/Value restore. Since we are using Dolly/Android Auto backup/restore,
-   * we do not need to implement this method as Dolly should not be calling this method. Instead
-   * onFileRestore will be called by Dolly.
+   * we need to implement this method only for backwards compatibility. Dolly should be calling
+   * onFileRestore during its restore.
    */
   @Override
   public void onRestore(
       BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor)
       throws IOException {
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_RESTORE);
-    Assert.fail("Android Backup should not call DialerBackupAgent.onRestore");
   }
 
   @TargetApi(VERSION_CODES.M)

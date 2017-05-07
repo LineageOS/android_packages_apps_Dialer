@@ -51,7 +51,7 @@ public class StatusCheckTask extends BaseTask {
 
   public static void start(Context context, PhoneAccountHandle phoneAccountHandle) {
     Intent intent = BaseTask.createIntent(context, StatusCheckTask.class, phoneAccountHandle);
-    context.startService(intent);
+    context.sendBroadcast(intent);
   }
 
   @Override

@@ -15,28 +15,28 @@
   ~ limitations under the License
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:paddingTop="16dp"
-  android:paddingStart="16dp"
-  android:paddingEnd="24dp"
-  android:orientation="horizontal">
-
-  <ImageView
-    android:id="@id/answer_message_avatar"
-    android:layout_width="@dimen/answer_message_avatar_size"
-    android:layout_height="@dimen/answer_message_avatar_size"
-    android:elevation="@dimen/answer_data_elevation"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:paddingStart="@dimen/answer_message_margin_start_end"
+    android:paddingEnd="@dimen/answer_message_margin_start_end">
 
   <FrameLayout
-    android:id="@id/answer_message_frag"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:layout_marginBottom="4dp"
-    android:layout_marginStart="8dp"
-    android:background="@drawable/answer_data_background"
-    android:elevation="@dimen/answer_data_elevation"
-    android:outlineProvider="background"/>
-</LinearLayout>
+      android:id="@id/answer_message_frag"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/answer_message_contents_margin_top"
+      android:layout_marginBottom="4dp"
+      android:layout_alignTop="@+id/answer_message_avatar"
+      android:background="@drawable/answer_data_background"
+      android:elevation="@dimen/answer_data_elevation"
+      android:outlineProvider="background"/>
+
+  <ImageView
+      android:id="@id/answer_message_avatar"
+      android:layout_width="@dimen/answer_message_avatar_size"
+      android:layout_height="@dimen/answer_message_avatar_size"
+      android:layout_centerHorizontal="true"
+      android:elevation="@dimen/answer_avatar_elevation"/>
+</RelativeLayout>

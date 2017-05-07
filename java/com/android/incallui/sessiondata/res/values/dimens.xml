@@ -16,6 +16,9 @@
   -->
 
 <resources>
-  <dimen name="answer_message_avatar_size">40dp</dimen>
+  <dimen name="answer_message_avatar_size">56dp</dimen>
+  <dimen name="answer_message_contents_margin_top">28dp</dimen>
+  <dimen name="answer_message_margin_start_end">32dp</dimen>
   <dimen name="answer_data_elevation">2dp</dimen>
+  <dimen name="answer_avatar_elevation">4dp</dimen>
 </resources>

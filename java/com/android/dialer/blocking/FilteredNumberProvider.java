@@ -26,12 +26,12 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
-import com.android.contacts.common.GeoUtil;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.location.GeoUtil;
 
 /** Filtered number content provider. */
 public class FilteredNumberProvider extends ContentProvider {
@@ -39,7 +39,6 @@ public class FilteredNumberProvider extends ContentProvider {
   private static final int FILTERED_NUMBERS_TABLE = 1;
   private static final int FILTERED_NUMBERS_TABLE_ID = 2;
   private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-  private static final String TAG = FilteredNumberProvider.class.getSimpleName();
   private DialerDatabaseHelper mDialerDatabaseHelper;
 
   @Override
@@ -80,7 +79,7 @@ public class FilteredNumberProvider extends ContentProvider {
       c.setNotificationUri(
           getContext().getContentResolver(), FilteredNumberContract.FilteredNumber.CONTENT_URI);
     } else {
-      Log.d(TAG, "CURSOR WAS NULL");
+      LogUtil.d("FilteredNumberProvider.query", "CURSOR WAS NULL");
     }
     return c;
   }

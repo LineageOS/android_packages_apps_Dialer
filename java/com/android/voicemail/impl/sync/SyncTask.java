@@ -48,7 +48,7 @@ public class SyncTask extends BaseTask {
     Intent intent = BaseTask.createIntent(context, SyncTask.class, phone);
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
     intent.putExtra(EXTRA_SYNC_TYPE, syncType);
-    context.startService(intent);
+    context.sendBroadcast(intent);
   }
 
   public SyncTask() {

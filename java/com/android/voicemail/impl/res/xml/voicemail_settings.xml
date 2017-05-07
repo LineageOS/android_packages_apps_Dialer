@@ -17,16 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
   android:title="@string/voicemail_settings_title">
 
-  <com.android.voicemail.impl.settings.VoicemailRingtonePreference
-    android:key="@string/voicemail_notification_ringtone_key"
-    android:title="@string/voicemail_notification_ringtone_title"
-    android:persistent="false"
-    android:ringtoneType="notification" />
-
-  <CheckBoxPreference
-    android:key="@string/voicemail_notification_vibrate_key"
-    android:title="@string/voicemail_notification_vibrate_when_title"
-    android:persistent="true" />
+  <Preference
+      android:key="@string/voicemail_notifications_key"
+      android:title="@string/voicemail_notifications_preference_title"/>
 
   <SwitchPreference
     android:key="@string/voicemail_visual_voicemail_key"

@@ -847,6 +847,9 @@ public class VoicemailPlaybackPresenter
   }
 
   private void showShareVoicemailButton(boolean show) {
+    if (mContext == null) {
+      return;
+    }
     if (isShareVoicemailAllowed(mContext) && shareVoicemailButtonView != null) {
       if (show) {
         Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_VISIBLE);

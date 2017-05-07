@@ -99,7 +99,7 @@ public class RetryPolicy implements Policy {
     Intent intent = mTask.createRestartIntent();
     intent.putExtra(EXTRA_RETRY_COUNT, mRetryCount + 1);
 
-    mTask.getContext().startService(intent);
+    mTask.getContext().sendBroadcast(intent);
   }
 
   @Override

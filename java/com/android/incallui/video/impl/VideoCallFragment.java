@@ -348,6 +348,7 @@ public class VideoCallFragment extends Fragment
   public void onPause() {
     super.onPause();
     LogUtil.i("VideoCallFragment.onPause", null);
+    inCallScreenDelegate.onInCallScreenPaused();
   }
 
   @Override

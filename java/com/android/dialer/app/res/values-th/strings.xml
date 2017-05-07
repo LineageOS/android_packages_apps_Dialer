@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"การโทร"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"การบล็อกสายเรียกเข้า"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ข้อความเสียง"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"การบล็อกสายเรียกเข้าปิดชั่วคราว"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ระบบปิดใช้การบล็อกสายเรียกเข้าเนื่องจากคุณติดต่อบริการฉุกเฉินจากโทรศัพท์เครื่องนี้ภายใน 48 ชั่วโมงที่ผ่านมา ระบบจะเปิดใช้คุณลักษณะนี้อีกครั้งโดยอัตโนมัติเมื่อครบ 48 ชั่วโมง"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"นำเข้าหมายเลข"</string>

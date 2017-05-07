@@ -19,10 +19,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.view.View;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.location.GeoUtil;
 
 /** List adapter to display search results for adding a blocked number. */
 public class BlockedListSearchAdapter extends RegularSearchListAdapter {

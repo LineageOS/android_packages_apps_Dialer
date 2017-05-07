@@ -200,6 +200,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Samtal"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Samtalsblockering"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Röstbrevlåda"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blockeringen har inaktiverats tillfälligt"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Samtalsblockering har inaktiverats eftersom du ringde ett larmnummer från den här mobilen under de senaste 48 timmarna. Blockeringen aktiveras igen när 48 timmar har gått."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importera nummer"</string>
