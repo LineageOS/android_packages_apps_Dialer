@@ -7,12 +7,6 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-ifeq ($(TARGET_BUILD_APPS),)
-support_library_root_dir := frameworks/support
-else
-support_library_root_dir := prebuilts/sdk/current/support
-endif
-
 # The base directory for Dialer sources.
 BASE_DIR := java/com/android
 
@@ -148,15 +142,17 @@ LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
 
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
-	$(support_library_root_dir)/design/res \
-	$(support_library_root_dir)/transition/res \
-	$(support_library_root_dir)/v7/appcompat/res \
-	$(support_library_root_dir)/v7/cardview/res \
-	$(support_library_root_dir)/v7/recyclerview/res
+	$(SUPPORT_LIBRARY_ROOT)/core-ui/res \
+	$(SUPPORT_LIBRARY_ROOT)/design/res \
+	$(SUPPORT_LIBRARY_ROOT)/transition/res \
+	$(SUPPORT_LIBRARY_ROOT)/v7/appcompat/res \
+	$(SUPPORT_LIBRARY_ROOT)/v7/cardview/res \
+	$(SUPPORT_LIBRARY_ROOT)/v7/recyclerview/res
 
 # We specify each package explicitly to glob resource files.
 LOCAL_AAPT_FLAGS := \
 	--auto-add-overlay \
+	--extra-packages android.support.coreui \
 	--extra-packages com.android.contacts.common \
 	--extra-packages com.android.dialer.app \
 	--extra-packages com.android.dialer.app.voicemail.error \
