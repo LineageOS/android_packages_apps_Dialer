@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.PermissionsUtil;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -285,6 +286,11 @@ public class CequintCallerIdManager {
   }
 
   private static synchronized void registerContentObserver(Context context) {
+    if (!PermissionsUtil.hasCequintPermissions(context)) {
+      LogUtil.i("CequintCallerIdManager.registerContentObserver", "no cequint permissions");
+      return;
+    }
+
     if (hasRegisteredContentObserver) {
       return;
     }

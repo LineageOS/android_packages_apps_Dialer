@@ -47,6 +47,7 @@ import com.android.contacts.common.util.ContactLoaderUtils;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -688,11 +689,15 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
       mLookupUri = result.getLookupUri();
 
       if (!result.isDirectoryEntry()) {
-        LogUtil.i(TAG, "Registering content observer for " + mLookupUri);
         if (mObserver == null) {
           mObserver = new ForceLoadContentObserver();
         }
-        getContext().getContentResolver().registerContentObserver(mLookupUri, true, mObserver);
+
+        if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+          getContext().getContentResolver().registerContentObserver(mLookupUri, true, mObserver);
+        } else {
+          LogUtil.w("ContactLoader.deliverResult", "contacts permission not available");
+        }
       }
 
       if (mPostViewNotification) {

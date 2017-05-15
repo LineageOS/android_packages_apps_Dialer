@@ -200,9 +200,18 @@ public class CallLogFragment extends Fragment
     final ContentResolver resolver = activity.getContentResolver();
     mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
     mKeyguardManager = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
-    resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
-    resolver.registerContentObserver(
-        ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
+
+    if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
+      resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "call log permission not available");
+    }
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      resolver.registerContentObserver(
+          ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "contacts permission not available.");
+    }
     setHasOptionsMenu(true);
   }
 
@@ -494,7 +503,7 @@ public class CallLogFragment extends Fragment
     if (mKeyguardManager != null
         && !mKeyguardManager.inKeyguardRestrictedInputMode()
         && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-      CallLogNotificationsQueryHelper.updateVoicemailNotifications(getActivity());
+      CallLogNotificationsService.markNewVoicemailsAsOld(getActivity(), null);
     }
   }
 

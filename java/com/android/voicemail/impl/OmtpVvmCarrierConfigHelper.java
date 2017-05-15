@@ -107,8 +107,7 @@ public class OmtpVvmCarrierConfigHelper {
 
     mCarrierConfig = getCarrierConfig(telephonyManager);
     mTelephonyConfig =
-        new TelephonyVvmConfigManager(context.getResources())
-            .getConfig(telephonyManager.getSimOperator());
+        new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
 
     mVvmType = getVvmType();
     mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);

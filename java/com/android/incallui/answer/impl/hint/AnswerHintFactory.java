@@ -20,13 +20,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProvider;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.incallui.util.AccessibilityUtil;
 
 /**
@@ -62,7 +62,7 @@ public class AnswerHintFactory {
     if (shouldShowAnswerHint(
         context,
         ConfigProviderBindings.get(context),
-        getDeviceProtectedPreferences(context),
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context),
         Build.PRODUCT)) {
       return new DotAnswerHint(context, puckUpDuration, puckUpDelay);
     }
@@ -77,7 +77,8 @@ public class AnswerHintFactory {
   }
 
   public static void increaseAnsweredCount(Context context) {
-    SharedPreferences sharedPreferences = getDeviceProtectedPreferences(context);
+    SharedPreferences sharedPreferences =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
     int answeredCount = sharedPreferences.getInt(ANSWERED_COUNT_PREFERENCE_KEY, 0);
     sharedPreferences.edit().putInt(ANSWERED_COUNT_PREFERENCE_KEY, answeredCount + 1).apply();
   }
@@ -118,13 +119,5 @@ public class AnswerHintFactory {
     return configProvider
         .getString(CONFIG_ANSWER_HINT_WHITELISTED_DEVICES_KEY, DEFAULT_WHITELISTED_DEVICES_CSV)
         .contains("/" + device + "/");
-  }
-
-  private static SharedPreferences getDeviceProtectedPreferences(Context context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-      return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-    return PreferenceManager.getDefaultSharedPreferences(
-        context.createDeviceProtectedStorageContext());
   }
 }

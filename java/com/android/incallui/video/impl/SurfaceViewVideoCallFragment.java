@@ -495,7 +495,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private View[] getAllPreviewRelatedViews() {
-    return new View[] {previewRoot, mutePreviewOverlay};
+    return new View[] {previewRoot};
   }
 
   private int getOffsetTop(View view) {

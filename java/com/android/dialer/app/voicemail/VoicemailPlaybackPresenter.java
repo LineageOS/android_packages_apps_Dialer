@@ -57,6 +57,7 @@ import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.io.ByteStreams;
 import java.io.File;
 import java.io.IOException;
@@ -1051,7 +1052,9 @@ public class VoicemailPlaybackPresenter
       mFetchResultHandler = handler;
       mVoicemailUri = uri;
       if (mContext != null) {
-        mContext.getContentResolver().registerContentObserver(mVoicemailUri, false, this);
+        if (PermissionsUtil.hasReadVoicemailPermissions(mContext)) {
+          mContext.getContentResolver().registerContentObserver(mVoicemailUri, false, this);
+        }
         mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
       }
     }

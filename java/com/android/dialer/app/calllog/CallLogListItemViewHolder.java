@@ -17,7 +17,6 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -45,7 +44,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
@@ -62,6 +60,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.lightbringer.Lightbringer;
@@ -258,7 +257,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
     primaryActionButtonView.setOnClickListener(this);
     primaryActionView.setOnClickListener(mExpandCollapseListener);
-    if (mVoicemailPlaybackPresenter != null) {
+    if (mVoicemailPlaybackPresenter != null
+        && ConfigProviderBindings.get(mContext)
+            .getBoolean(
+                CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT,
+                CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT_FLAG)) {
       primaryActionView.setOnLongClickListener(longPressListener);
       quickContactView.setOnLongClickListener(longPressListener);
     } else {
@@ -792,35 +795,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       mVoicemailPlaybackPresenter.shareVoicemail();
     } else {
       logCallLogAction(view.getId());
-
       final IntentProvider intentProvider = (IntentProvider) view.getTag();
-      if (intentProvider == null) {
-        return;
+      if (intentProvider != null) {
+        final Intent intent = intentProvider.getIntent(mContext);
+        // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+        if (intent != null) {
+          DialerUtils.startActivityWithErrorToast(mContext, intent);
+        }
       }
-
-      final Intent intent = intentProvider.getIntent(mContext);
-      // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-      if (intent == null) {
-        return;
-      }
-
-      // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
-      // intents need to be started using startActivityForResult instead of the usual startActivity
-      String packageName = intent.getPackage();
-      if (packageName != null && packageName.equals(getLightbringer().getPackageName(mContext))) {
-        startLightbringerActivity(intent);
-      } else {
-        DialerUtils.startActivityWithErrorToast(mContext, intent);
-      }
-    }
-  }
-
-  private void startLightbringerActivity(Intent intent) {
-    try {
-      Activity activity = (Activity) mContext;
-      activity.startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER);
-    } catch (ActivityNotFoundException e) {
-      Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
   }
 

@@ -54,17 +54,20 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.phonenumbercache.ContactInfo;
+import com.android.dialer.telecom.TelecomUtil;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /** Shows a voicemail notification in the status bar. */
-public class DefaultVoicemailNotifier {
+public class DefaultVoicemailNotifier implements Worker<Void, Void> {
 
   public static final String TAG = "VoicemailNotifier";
 
@@ -90,12 +93,18 @@ public class DefaultVoicemailNotifier {
     this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
   }
 
-  /** Returns an instance of {@link DefaultVoicemailNotifier}. */
-  public static DefaultVoicemailNotifier getInstance(Context context) {
-    return new DefaultVoicemailNotifier(
+  public DefaultVoicemailNotifier(Context context) {
+    this(
         context,
         CallLogNotificationsQueryHelper.getInstance(context),
         new FilteredNumberAsyncQueryHandler(context));
+  }
+
+  @Nullable
+  @Override
+  public Void doInBackground(@Nullable Void input) throws Throwable {
+    updateNotification();
+    return null;
   }
 
   /**
@@ -106,8 +115,9 @@ public class DefaultVoicemailNotifier {
    *
    * <p>It is not safe to call this method from the main thread.
    */
+  @VisibleForTesting
   @WorkerThread
-  public void updateNotification() {
+  void updateNotification() {
     Assert.isWorkerThread();
     // Lookup the list of new voicemails to include in the notification.
     final List<NewCall> newCalls = queryHelper.getNewVoicemails();
@@ -177,6 +187,10 @@ public class DefaultVoicemailNotifier {
             .setDeleteIntent(createMarkNewVoicemailsAsOldIntent(null))
             .setGroupSummary(true)
             .setContentIntent(newVoicemailIntent(null));
+
+    if (BuildCompat.isAtLeastO()) {
+      groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+    }
 
     NotificationChannelManager.applyChannel(
         groupSummary,
@@ -391,5 +405,42 @@ public class DefaultVoicemailNotifier {
     }
     intent.putExtra(DialtactsActivity.EXTRA_CLEAR_NEW_VOICEMAILS, true);
     return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+  }
+
+  /**
+   * Updates the voicemail notifications displayed.
+   *
+   * @param runnable Called when the async update task completes no matter if it succeeds or fails.
+   *     May be null.
+   */
+  static void updateVoicemailNotifications(Context context, Runnable runnable) {
+    if (!TelecomUtil.isDefaultDialer(context)) {
+      LogUtil.i(
+          "DefaultVoicemailNotifier.updateVoicemailNotifications",
+          "not default dialer, not scheduling update to voicemail notifications");
+      return;
+    }
+
+    DialerExecutors.createNonUiTaskBuilder(new DefaultVoicemailNotifier(context))
+        .onSuccess(
+            output -> {
+              LogUtil.i(
+                  "DefaultVoicemailNotifier.updateVoicemailNotifications",
+                  "update voicemail notifications successful");
+              if (runnable != null) {
+                runnable.run();
+              }
+            })
+        .onFailure(
+            throwable -> {
+              LogUtil.i(
+                  "DefaultVoicemailNotifier.updateVoicemailNotifications",
+                  "update voicemail notifications failed");
+              if (runnable != null) {
+                runnable.run();
+              }
+            })
+        .build()
+        .executeParallel(null);
   }
 }
