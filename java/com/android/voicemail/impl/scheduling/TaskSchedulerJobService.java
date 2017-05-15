@@ -23,9 +23,11 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import com.android.dialer.constants.ScheduledJobIds;
 import com.android.voicemail.impl.Assert;
@@ -41,11 +43,28 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
 
   private static final String EXTRA_TASK_EXTRAS_ARRAY = "extra_task_extras_array";
 
+  private static final String EXTRA_JOB_ID = "extra_job_id";
+
+  private static final String EXPECTED_JOB_ID =
+      "com.android.voicemail.impl.scheduling.TaskSchedulerJobService.EXPECTED_JOB_ID";
+
+  private static final String NEXT_JOB_ID =
+      "com.android.voicemail.impl.scheduling.TaskSchedulerJobService.NEXT_JOB_ID";
+
   private JobParameters jobParameters;
 
   @Override
   @MainThread
   public boolean onStartJob(JobParameters params) {
+    int jobId = params.getTransientExtras().getInt(EXTRA_JOB_ID);
+    int expectedJobId =
+        PreferenceManager.getDefaultSharedPreferences(this).getInt(EXPECTED_JOB_ID, 0);
+    if (jobId != expectedJobId) {
+      VvmLog.e(
+          TAG, "Job " + jobId + " is not the last scheduled job " + expectedJobId + ", ignoring");
+      return false; // nothing more to do. Job not running in background.
+    }
+    VvmLog.i(TAG, "starting " + jobId);
     jobParameters = params;
     TaskExecutor.createRunningInstance(this);
     TaskExecutor.getRunningInstance()
@@ -97,6 +116,13 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
       jobScheduler.cancel(ScheduledJobIds.VVM_TASK_SCHEDULER_JOB);
     }
     Bundle extras = new Bundle();
+    int jobId = createJobId(context);
+    extras.putInt(EXTRA_JOB_ID, jobId);
+    PreferenceManager.getDefaultSharedPreferences(context)
+        .edit()
+        .putInt(EXPECTED_JOB_ID, jobId)
+        .apply();
+
     extras.putParcelableArray(
         EXTRA_TASK_EXTRAS_ARRAY, pendingTasks.toArray(new Bundle[pendingTasks.size()]));
     JobInfo.Builder builder =
@@ -112,7 +138,7 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
       VvmLog.i(TAG, "running job instantly.");
     }
     jobScheduler.schedule(builder.build());
-    VvmLog.i(TAG, "job scheduled");
+    VvmLog.i(TAG, "job " + jobId + " scheduled");
   }
 
   /**
@@ -142,5 +168,12 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
       result.add((Bundle) parcelable);
     }
     return result;
+  }
+
+  private static int createJobId(Context context) {
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    int jobId = sharedPreferences.getInt(NEXT_JOB_ID, 0);
+    sharedPreferences.edit().putInt(NEXT_JOB_ID, jobId + 1).apply();
+    return jobId;
   }
 }

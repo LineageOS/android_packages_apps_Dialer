@@ -29,6 +29,7 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.util.PermissionsUtil;
 import javax.inject.Inject;
 
 /**
@@ -45,6 +46,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   public void registerContentObservers(
       Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
     Assert.isMainThread();
+
+    if (!PermissionsUtil.hasCallLogReadPermissions(appContext)) {
+      LogUtil.i("SystemCallLogDataSource.registerContentObservers", "no call log permissions");
+      return;
+    }
 
     appContext
         .getContentResolver()

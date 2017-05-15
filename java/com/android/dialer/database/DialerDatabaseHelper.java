@@ -333,7 +333,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   /** Starts the database upgrade process in the background. */
   public void startSmartDialUpdateThread() {
-    if (PermissionsUtil.hasContactsPermissions(mContext)) {
+    if (PermissionsUtil.hasContactsReadPermissions(mContext)) {
       new SmartDialUpdateAsyncTask().execute();
     }
   }

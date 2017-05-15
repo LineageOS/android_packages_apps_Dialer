@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.dialer.about">
+  <application>
+    <activity
+        android:name="com.android.dialer.about.LicenseMenuActivity"
+        android:label="@string/licenseActivityLabel"
+        android:exported="false"
+        android:theme="@style/Theme.AppCompat.Light">
+    </activity>
+    <activity
+        android:name="com.android.dialer.about.LicenseActivity"
+        android:label="@string/licenseActivityLabel"
+        android:exported="false"
+        android:theme="@style/Theme.AppCompat.Light">
+    </activity>
+  </application>
+</manifest>

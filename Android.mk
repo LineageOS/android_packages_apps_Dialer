@@ -41,6 +41,7 @@ RES_DIRS := \
 	assets/product/res \
 	assets/quantum/res \
 	$(BASE_DIR)/contacts/common/res \
+	$(BASE_DIR)/dialer/about/res \
 	$(BASE_DIR)/dialer/app/res \
 	$(BASE_DIR)/dialer/app/voicemail/error/res \
 	$(BASE_DIR)/dialer/blocking/res \
@@ -77,6 +78,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/incall/impl/res \
 	$(BASE_DIR)/incallui/res \
 	$(BASE_DIR)/incallui/sessiondata/res \
+	$(BASE_DIR)/incallui/telecomeventui/res \
 	$(BASE_DIR)/incallui/video/impl/res \
 	$(BASE_DIR)/incallui/video/protocol/res \
 	$(BASE_DIR)/incallui/wifi/res \
@@ -87,6 +89,7 @@ RES_DIRS := \
 # find . -type f -name "AndroidManifest.xml" | uniq | sort
 DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/contacts/common/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/about/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/manifests/activities/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/app/voicemail/error/AndroidManifest.xml \
@@ -126,6 +129,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/hold/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/incall/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/sessiondata/AndroidManifest.xml \
+	$(BASE_DIR)/incallui/telecomeventui/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
@@ -154,6 +158,7 @@ LOCAL_AAPT_FLAGS := \
 	--auto-add-overlay \
 	--extra-packages android.support.coreui \
 	--extra-packages com.android.contacts.common \
+	--extra-packages com.android.dialer.about \
 	--extra-packages com.android.dialer.app \
 	--extra-packages com.android.dialer.app.voicemail.error \
 	--extra-packages com.android.dialer.blocking \
@@ -175,6 +180,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.postcall \
 	--extra-packages com.android.dialer.shortcuts \
 	--extra-packages com.android.dialer.speeddial \
+	--extra-packages com.android.dialer.theme \
 	--extra-packages com.android.dialer.util \
 	--extra-packages com.android.dialer.voicemailstatus \
 	--extra-packages com.android.dialer.widget \
@@ -194,6 +200,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.incallui.incall.impl \
 	--extra-packages com.android.incallui.maps.impl \
 	--extra-packages com.android.incallui.sessiondata \
+	--extra-packages com.android.incallui.telecomeventui \
 	--extra-packages com.android.incallui.video \
 	--extra-packages com.android.incallui.video.impl \
 	--extra-packages com.android.incallui.wifi \

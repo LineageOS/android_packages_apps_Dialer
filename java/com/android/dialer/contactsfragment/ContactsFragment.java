@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.android.dialer.util.PermissionsUtil;
 
 /** Fragment containing a list of all contacts. */
 public class ContactsFragment extends Fragment
@@ -52,6 +53,11 @@ public class ContactsFragment extends Fragment
     recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(manager);
     getLoaderManager().initLoader(0, null, this);
+
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      getLoaderManager().initLoader(0, null, this);
+    }
+
     return view;
   }
 

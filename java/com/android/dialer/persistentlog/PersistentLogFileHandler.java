@@ -26,6 +26,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.support.v4.os.UserManagerCompat;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -65,6 +66,7 @@ final class PersistentLogFileHandler {
   private SharedPreferences sharedPreferences;
 
   private File outputFile;
+  private Context context;
 
   @MainThread
   PersistentLogFileHandler(String subfolder, int fileSizeLimit, int fileCountLimit) {
@@ -76,8 +78,18 @@ final class PersistentLogFileHandler {
   /** Must be called right after the logger thread is created. */
   @WorkerThread
   void initialize(Context context) {
+    this.context = context;
     logDirectory = new File(new File(context.getCacheDir(), LOG_DIRECTORY), subfolder);
-    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    initializeSharedPreference(context);
+  }
+
+  @WorkerThread
+  private boolean initializeSharedPreference(Context context) {
+    if (sharedPreferences == null && UserManagerCompat.isUserUnlocked(context)) {
+      sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+      return true;
+    }
+    return sharedPreferences != null;
   }
 
   /**
@@ -117,10 +129,10 @@ final class PersistentLogFileHandler {
     return byteBuffer.array();
   }
 
-  private static final int getTotalSize(File[] files) {
+  private static int getTotalSize(File[] files) {
     int sum = 0;
     for (File file : files) {
-      sum += file.length();
+      sum += (int) file.length();
     }
     return sum;
   }
@@ -195,7 +207,11 @@ final class PersistentLogFileHandler {
   }
 
   @WorkerThread
-  private int getAndIncrementNextFileIndex() {
+  private int getAndIncrementNextFileIndex() throws IOException {
+    if (!initializeSharedPreference(context)) {
+      throw new IOException("Shared preference is not available");
+    }
+
     int index = sharedPreferences.getInt(getNextFileKey(), 0);
     sharedPreferences.edit().putInt(getNextFileKey(), index + 1).commit();
     return index;

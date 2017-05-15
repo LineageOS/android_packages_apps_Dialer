@@ -162,7 +162,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
   public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
-  public static final int ACTIVITY_REQUEST_CODE_LIGHTBRINGER = 3;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
@@ -1489,7 +1488,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       Menu menu = getMenu();
       MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
       clearFrequents.setVisible(
-          PermissionsUtil.hasContactsPermissions(DialtactsActivity.this)
+          PermissionsUtil.hasContactsReadPermissions(DialtactsActivity.this)
               && mListsFragment != null
               && mListsFragment.hasFrequents());
 

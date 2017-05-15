@@ -34,4 +34,6 @@ public interface DialerCallListener {
   void onWiFiToLteHandover();
 
   void onHandoverToWifiFailure();
+
+  void onInternationalCallOnWifi();
 }

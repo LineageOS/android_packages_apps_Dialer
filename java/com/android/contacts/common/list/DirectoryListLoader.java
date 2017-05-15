@@ -25,9 +25,10 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
-import android.util.Log;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.DirectoryCompat;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.PermissionsUtil;
 
 /** A specialized loader for the list of directories, see {@link Directory}. */
 public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
@@ -38,7 +39,6 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
   public static final int SEARCH_MODE_DATA_SHORTCUT = 3;
   // This is a virtual column created for a MatrixCursor.
   public static final String DIRECTORY_TYPE = "directoryType";
-  private static final String TAG = "ContactEntryListAdapter";
   private static final String[] RESULT_PROJECTION = {
     Directory._ID, DIRECTORY_TYPE, Directory.DISPLAY_NAME, Directory.PHOTO_SUPPORT,
   };
@@ -71,7 +71,13 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
 
   @Override
   protected void onStartLoading() {
-    getContext().getContentResolver().registerContentObserver(DirectoryQuery.URI, false, mObserver);
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      getContext()
+          .getContentResolver()
+          .registerContentObserver(DirectoryQuery.URI, false, mObserver);
+    } else {
+      LogUtil.w("DirectoryListLoader.onStartLoading", "contacts permission not available.");
+    }
     forceLoad();
   }
 
@@ -141,7 +147,9 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
           try {
             directoryType = pm.getResourcesForApplication(packageName).getString(typeResourceId);
           } catch (Exception e) {
-            Log.e(TAG, "Cannot obtain directory type from package: " + packageName);
+            LogUtil.e(
+                "ContactEntryListAdapter.loadInBackground",
+                "cannot obtain directory type from package: " + packageName);
           }
         }
         String displayName = cursor.getString(DirectoryQuery.DISPLAY_NAME);
@@ -149,7 +157,8 @@ public class DirectoryListLoader extends AsyncTaskLoader<Cursor> {
         result.addRow(new Object[] {directoryId, directoryType, displayName, photoSupport});
       }
     } catch (RuntimeException e) {
-      Log.w(TAG, "Runtime Exception when querying directory");
+      LogUtil.w(
+          "ContactEntryListAdapter.loadInBackground", "runtime exception when querying directory");
     } finally {
       if (cursor != null) {
         cursor.close();

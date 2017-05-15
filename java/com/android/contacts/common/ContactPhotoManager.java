@@ -191,7 +191,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
       Context applicationContext = context.getApplicationContext();
       sInstance = createContactPhotoManager(applicationContext);
       applicationContext.registerComponentCallbacks(sInstance);
-      if (PermissionsUtil.hasContactsPermissions(context)) {
+      if (PermissionsUtil.hasContactsReadPermissions(context)) {
         sInstance.preloadPhotosInBackground();
       }
     }

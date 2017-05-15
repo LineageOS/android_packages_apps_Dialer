@@ -48,6 +48,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.speeddial.SpeedDialFragment;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import java.util.ArrayList;
@@ -183,10 +184,15 @@ public class ListsFragment extends Fragment
     mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
     mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
-    getActivity()
-        .getContentResolver()
-        .registerContentObserver(
-            VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
+    if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
+        && PermissionsUtil.hasAddVoicemailPermissions(getContext())) {
+      getActivity()
+          .getContentResolver()
+          .registerContentObserver(
+              VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
+    } else {
+      LogUtil.w("ListsFragment.onCreateView", "no voicemail read/add permissions");
+    }
 
     Trace.endSection();
     Trace.endSection();
