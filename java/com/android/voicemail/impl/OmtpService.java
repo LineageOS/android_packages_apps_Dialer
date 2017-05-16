@@ -27,6 +27,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
+import com.android.voicemail.impl.sms.LegacyModeSmsHandler;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
 /** Implements {@link VisualVoicemailService} to receive visual voicemail events */
@@ -71,6 +72,11 @@ public class OmtpService extends VisualVoicemailService {
     if (!isModuleEnabled()) {
       VvmLog.e(TAG, "onSmsReceived received when module is disabled");
       task.finish();
+      return;
+    }
+
+    if (!isUserUnlocked()) {
+      LegacyModeSmsHandler.handle(this, sms);
       return;
     }
 

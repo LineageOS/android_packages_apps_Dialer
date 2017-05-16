@@ -1004,6 +1004,9 @@ public class StatusBarNotifier
     @Override
     public void onHandoverToWifiFailure() {}
 
+    @Override
+    public void onInternationalCallOnWifi() {}
+
     /**
      * Responds to changes in the session modification state for the call by dismissing the status
      * bar notification as required.

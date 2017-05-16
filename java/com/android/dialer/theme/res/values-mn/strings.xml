@@ -18,6 +18,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="unknown" msgid="7932659017139013277">"Тодорхойгүй"</string>
+    <!-- no translation found for unknown_counter (7452889151953704159) -->
+    <skip />
     <string name="payphone" msgid="7106361320283710387">"Payphone"</string>
     <string name="launcherActivityLabel" msgid="9034868428899993166">"Утас"</string>
+    <!-- no translation found for call (3699617769606114168) -->
+    <skip />
 </resources>

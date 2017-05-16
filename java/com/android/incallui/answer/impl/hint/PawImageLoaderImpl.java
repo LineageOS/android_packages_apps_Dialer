@@ -21,10 +21,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION_CODES;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
+import com.android.dialer.util.DialerUtils;
 
 /** Decrypt the event payload to be shown if in a specific time range and the key is received. */
 @TargetApi(VERSION_CODES.M)
@@ -35,7 +35,8 @@ public final class PawImageLoaderImpl implements PawImageLoader {
   public Drawable loadPayload(@NonNull Context context) {
     Assert.isNotNull(context);
 
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences preferences =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
     if (!preferences.getBoolean(PawSecretCodeListener.PAW_ENABLED_WITH_SECRET_CODE_KEY, false)) {
       return null;
     }

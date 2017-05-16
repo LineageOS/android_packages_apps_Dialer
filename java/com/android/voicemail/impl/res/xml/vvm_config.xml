@@ -23,6 +23,30 @@
   </pbundle_as_map>
 
   <pbundle_as_map>
+    <!-- Orange Belgium -->
+    <string name="feature_flag_name">vvm_carrier_flag_20610</string>
+    <string-array name="mccmnc">
+      <item value="20610"/>
+    </string-array>
+
+    <int
+        name="vvm_port_number_int"
+        value="0"/>
+    <string name="vvm_destination_number_string">8082</string>
+    <string-array name="carrier_vvm_package_name_string_array">
+      <item value="com.orange.vvm"/>
+    </string-array>
+    <string name="vvm_type_string">vvm_type_omtp</string>
+    <boolean
+        name="vvm_cellular_data_required_bool"
+        value="true"/>
+    <string-array name="vvm_disabled_capabilities_string_array">
+      <!-- b/32365569 -->
+      <item value="STARTTLS"/>
+    </string-array>
+  </pbundle_as_map>
+
+  <pbundle_as_map>
     <!-- Orange France -->
     <string-array name="mccmnc">
       <item value="20801"/>
@@ -40,6 +64,30 @@
     <boolean
       name="vvm_cellular_data_required_bool"
       value="true"/>
+    <string-array name="vvm_disabled_capabilities_string_array">
+      <!-- b/32365569 -->
+      <item value="STARTTLS"/>
+    </string-array>
+  </pbundle_as_map>
+
+  <pbundle_as_map>
+    <!-- Orange Luxembourg -->
+    <string name="feature_flag_name">vvm_carrier_flag_20610</string>
+    <string-array name="mccmnc">
+      <item value="27099"/>
+    </string-array>
+
+    <int
+        name="vvm_port_number_int"
+        value="0"/>
+    <string name="vvm_destination_number_string">64085</string>
+    <string-array name="carrier_vvm_package_name_string_array">
+      <item value="com.orange.vvm"/>
+    </string-array>
+    <string name="vvm_type_string">vvm_type_omtp</string>
+    <boolean
+        name="vvm_cellular_data_required_bool"
+        value="true"/>
     <string-array name="vvm_disabled_capabilities_string_array">
       <!-- b/32365569 -->
       <item value="STARTTLS"/>
@@ -83,6 +131,22 @@
       <!-- b/28717550 -->
       <item value="AUTH=DIGEST-MD5"/>
     </string-array>
+  </pbundle_as_map>
+
+  <pbundle_as_map>
+    <!-- Telus Canada -->
+    <string name="feature_flag_name">vvm_carrier_flag_302220</string>
+    <string-array name="mccmnc">
+      <item value="302220"/>
+    </string-array>
+    <int
+        name="vvm_port_number_int"
+        value="5499"/>
+    <string name="vvm_destination_number_string">7723</string>
+    <string name="vvm_type_string">vvm_type_omtp</string>
+    <boolean
+        name="vvm_cellular_data_required_bool"
+        value="true"/>
   </pbundle_as_map>
 
   <pbundle_as_map>

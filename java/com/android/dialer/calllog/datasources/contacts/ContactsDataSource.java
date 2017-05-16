@@ -54,5 +54,7 @@ public final class ContactsDataSource implements CallLogDataSource {
   @MainThread
   @Override
   public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {}
+      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+    // TODO: Guard against missing permissions during callback registration.
+  }
 }
