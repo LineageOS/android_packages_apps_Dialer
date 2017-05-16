@@ -30,12 +30,13 @@ import com.android.dialer.common.LogUtil;
 public class PermissionsUtil {
 
   private static final String PERMISSION_PREFERENCE = "dialer_permissions";
+  private static final String CEQUINT_PERMISSION = "com.cequint.ecid.CALLER_ID_LOOKUP";
 
   public static boolean hasPhonePermissions(Context context) {
     return hasPermission(context, permission.CALL_PHONE);
   }
 
-  public static boolean hasContactsPermissions(Context context) {
+  public static boolean hasContactsReadPermissions(Context context) {
     return hasPermission(context, permission.READ_CONTACTS);
   }
 
@@ -49,6 +50,30 @@ public class PermissionsUtil {
 
   public static boolean hasMicrophonePermissions(Context context) {
     return hasPermission(context, permission.RECORD_AUDIO);
+  }
+
+  public static boolean hasCallLogReadPermissions(Context context) {
+    return hasPermission(context, permission.READ_CALL_LOG);
+  }
+
+  public static boolean hasCallLogWritePermissions(Context context) {
+    return hasPermission(context, permission.WRITE_CALL_LOG);
+  }
+
+  public static boolean hasCequintPermissions(Context context) {
+    return hasPermission(context, CEQUINT_PERMISSION);
+  }
+
+  public static boolean hasReadVoicemailPermissions(Context context) {
+    return hasPermission(context, permission.READ_VOICEMAIL);
+  }
+
+  public static boolean hasWriteVoicemailPermissions(Context context) {
+    return hasPermission(context, permission.WRITE_VOICEMAIL);
+  }
+
+  public static boolean hasAddVoicemailPermissions(Context context) {
+    return hasPermission(context, permission.ADD_VOICEMAIL);
   }
 
   public static boolean hasPermission(Context context, String permission) {

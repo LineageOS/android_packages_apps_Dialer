@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.dialer.app.calllog;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.util.Pair;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutors;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Receives broadcasts that should trigger a refresh of the missed call notification. This includes
@@ -44,7 +49,36 @@ public class MissedCallNotificationReceiver extends BroadcastReceiver {
     int count =
         intent.getIntExtra(
             EXTRA_NOTIFICATION_COUNT, CallLogNotificationsService.UNKNOWN_MISSED_CALL_COUNT);
-    String number = intent.getStringExtra(EXTRA_NOTIFICATION_PHONE_NUMBER);
-    CallLogNotificationsService.updateMissedCallNotifications(context, count, number);
+    String phoneNumber = intent.getStringExtra(EXTRA_NOTIFICATION_PHONE_NUMBER);
+
+    PendingResult pendingResult = goAsync();
+
+    DialerExecutors.createNonUiTaskBuilder(MissedCallNotifier.getIstance(context))
+        .onSuccess(
+            output -> {
+              LogUtil.i(
+                  "MissedCallNotificationReceiver.onReceive",
+                  "update missed call notifications successful");
+              updateBadgeCount(context, count);
+              pendingResult.finish();
+            })
+        .onFailure(
+            throwable -> {
+              LogUtil.i(
+                  "MissedCallNotificationReceiver.onReceive",
+                  "update missed call notifications failed");
+              pendingResult.finish();
+            })
+        .build()
+        .executeParallel(new Pair<>(count, phoneNumber));
+  }
+
+  private static void updateBadgeCount(Context context, int count) {
+    boolean success = ShortcutBadger.applyCount(context, count);
+    LogUtil.i(
+        "MissedCallNotificationReceiver.updateBadgeCount",
+        "update badge count: %d success: %b",
+        count,
+        success);
   }
 }

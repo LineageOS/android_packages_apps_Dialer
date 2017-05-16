@@ -108,6 +108,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
   public static final String LOAD_DATA_TASK_IDENTIFIER = "load_data";
 
+  public static final String ENABLE_CALL_LOG_MULTI_SELECT = "enable_call_log_multiselect";
+  public static final boolean ENABLE_CALL_LOG_MULTI_SELECT_FLAG = false;
+
   protected final Activity mActivity;
   protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
   /** Cache for repeated requests to Telecom/Telephony. */
@@ -228,7 +231,7 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public boolean onLongClick(View v) {
           if (ConfigProviderBindings.get(v.getContext())
-                  .getBoolean("enable_call_log_multiselect", true)
+                  .getBoolean(ENABLE_CALL_LOG_MULTI_SELECT, ENABLE_CALL_LOG_MULTI_SELECT_FLAG)
               && mVoicemailPlaybackPresenter != null) {
             if (v.getId() == R.id.primary_action_view || v.getId() == R.id.quick_contact_photo) {
               if (mActionMode == null) {
@@ -373,7 +376,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     mContactInfoCache = contactInfoCache;
 
-    if (!PermissionsUtil.hasContactsPermissions(activity)) {
+    if (!PermissionsUtil.hasContactsReadPermissions(activity)) {
       mContactInfoCache.disableRequestProcessing();
     }
 

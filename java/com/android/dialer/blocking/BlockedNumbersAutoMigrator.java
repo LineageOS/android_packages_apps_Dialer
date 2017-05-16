@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -100,6 +101,10 @@ public class BlockedNumbersAutoMigrator {
     @Nullable
     @Override
     public Boolean doInBackground(@Nullable Void input) {
+      if (!UserManagerCompat.isUserUnlocked(appContext)) {
+        LogUtil.i("BlockedNumbersAutoMigrator", "not attempting auto-migrate: device is locked");
+        return false;
+      }
       SharedPreferences sharedPreferences =
           PreferenceManager.getDefaultSharedPreferences(appContext);
 

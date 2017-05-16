@@ -23,6 +23,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
+import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -99,6 +100,9 @@ public class SpamCallListListener implements CallList.Listener {
 
   @Override
   public void onHandoverToWifiFailed(DialerCall call) {}
+
+  @Override
+  public void onInternationalCallOnWifi(@NonNull DialerCall call) {}
 
   @Override
   public void onDisconnect(DialerCall call) {

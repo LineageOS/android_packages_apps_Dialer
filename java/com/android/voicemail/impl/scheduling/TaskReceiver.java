@@ -49,6 +49,7 @@ public class TaskReceiver extends BroadcastReceiver {
     for (Intent intent : deferredBroadcasts) {
       context.sendBroadcast(intent);
     }
+    deferredBroadcasts.clear();
   }
 
   @Override
@@ -68,13 +69,13 @@ public class TaskReceiver extends BroadcastReceiver {
         deferredBroadcasts.add(intent);
         return;
       }
-      Task task = Tasks.createTask(context, intent.getExtras());
+      Task task = Tasks.createTask(context.getApplicationContext(), intent.getExtras());
       taskExecutor.addTask(task);
     } else {
       VvmLog.i(TAG, "scheduling new job");
       List<Bundle> taskList = new ArrayList<>();
       taskList.add(intent.getExtras());
-      TaskSchedulerJobService.scheduleJob(context, taskList, 0, true);
+      TaskSchedulerJobService.scheduleJob(context.getApplicationContext(), taskList, 0, true);
     }
   }
 }

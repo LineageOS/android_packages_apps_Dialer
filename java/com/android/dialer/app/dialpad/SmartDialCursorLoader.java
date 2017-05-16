@@ -77,7 +77,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
       LogUtil.v(TAG, "Load in background " + mQuery);
     }
 
-    if (!PermissionsUtil.hasContactsPermissions(mContext)) {
+    if (!PermissionsUtil.hasContactsReadPermissions(mContext)) {
       return new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
     }
 

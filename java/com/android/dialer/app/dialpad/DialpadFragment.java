@@ -447,7 +447,7 @@ public class DialpadFragment extends Fragment
           setFormattedDigits(converted, null);
           return true;
         } else {
-          if (!PermissionsUtil.hasContactsPermissions(getActivity())) {
+          if (!PermissionsUtil.hasContactsReadPermissions(getActivity())) {
             return false;
           }
           String type = intent.getType();

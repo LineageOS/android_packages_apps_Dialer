@@ -233,4 +233,6 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Deblokiraj broj"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Neželjena pošta"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Osoba <xliff:g id="NAME">%1$s</xliff:g> je van mreže i ne možete je kontaktirati"</string>
+    <!-- no translation found for about_phone_label (582991354677973731) -->
+    <skip />
 </resources>

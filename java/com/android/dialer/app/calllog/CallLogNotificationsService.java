@@ -26,7 +26,6 @@ import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Provides operations for managing call-related notifications.
@@ -47,17 +46,6 @@ public class CallLogNotificationsService extends IntentService {
   /** Action to mark all the new voicemails as old. */
   public static final String ACTION_MARK_NEW_VOICEMAILS_AS_OLD =
       "com.android.dialer.calllog.ACTION_MARK_NEW_VOICEMAILS_AS_OLD";
-  /** Action to update voicemail notifications. */
-  public static final String ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS =
-      "com.android.dialer.calllog.UPDATE_VOICEMAIL_NOTIFICATIONS";
-  /**
-   * Action to update the missed call notifications.
-   *
-   * <p>Includes optional extras {@link #EXTRA_MISSED_CALL_NUMBER} and {@link
-   * #EXTRA_MISSED_CALL_COUNT}.
-   */
-  public static final String ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS =
-      "com.android.dialer.calllog.UPDATE_MISSED_CALL_NOTIFICATIONS";
 
   /** Action to mark all the new missed calls as old. */
   public static final String ACTION_MARK_NEW_MISSED_CALLS_AS_OLD =
@@ -70,22 +58,6 @@ public class CallLogNotificationsService extends IntentService {
   /** Action to call back a missed call. */
   public static final String ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION =
       "com.android.dialer.calllog.CALL_BACK_FROM_MISSED_CALL_NOTIFICATION";
-
-  /**
-   * Extra to be included with {@link #ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS} and {@link
-   * #ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION} to identify the number to display, call or
-   * text back.
-   *
-   * <p>It must be a {@link String}.
-   */
-  public static final String EXTRA_MISSED_CALL_NUMBER = "MISSED_CALL_NUMBER";
-  /**
-   * Extra to be included with {@link #ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS} to represent the
-   * number of missed calls.
-   *
-   * <p>It must be a {@link Integer}
-   */
-  public static final String EXTRA_MISSED_CALL_COUNT = "MISSED_CALL_COUNT";
 
   /**
    * Extra to be included with {@link #ACTION_INCOMING_POST_CALL} to represent a post call note.
@@ -109,40 +81,6 @@ public class CallLogNotificationsService extends IntentService {
     super("CallLogNotificationsService");
   }
 
-  /**
-   * Updates notifications for any new voicemails.
-   *
-   * @param context a valid context.
-   */
-  public static void updateVoicemailNotifications(Context context) {
-    if (!TelecomUtil.isDefaultDialer(context)) {
-      LogUtil.i(
-          "CallLogNotificationsService.updateVoicemailNotifications",
-          "not default dialer, ignoring voicemail notifications");
-      return;
-    }
-    if (TelecomUtil.hasReadWriteVoicemailPermissions(context)) {
-      Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-      serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS);
-      context.startService(serviceIntent);
-    }
-  }
-
-  /**
-   * Updates notifications for any new missed calls.
-   *
-   * @param context A valid context.
-   * @param count The number of new missed calls.
-   * @param number The phone number of the newest missed call.
-   */
-  public static void updateMissedCallNotifications(Context context, int count, String number) {
-    Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-    serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS);
-    serviceIntent.putExtra(EXTRA_MISSED_CALL_COUNT, count);
-    serviceIntent.putExtra(EXTRA_MISSED_CALL_NUMBER, number);
-    context.startService(serviceIntent);
-  }
-
   public static void insertPostCallNote(Context context, String number, String postCallNote) {
     Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
     serviceIntent.setAction(ACTION_INCOMING_POST_CALL);
@@ -163,16 +101,6 @@ public class CallLogNotificationsService extends IntentService {
     serviceIntent.setAction(ACTION_MARK_NEW_MISSED_CALLS_AS_OLD);
     serviceIntent.setData(callUri);
     context.startService(serviceIntent);
-  }
-
-  public static boolean updateBadgeCount(Context context, int count) {
-    boolean success = ShortcutBadger.applyCount(context, count);
-    LogUtil.i(
-        "CallLogNotificationsService.updateBadgeCount",
-        "update badge count: %d success: %b",
-        count,
-        success);
-    return success;
   }
 
   @Override
@@ -200,28 +128,21 @@ public class CallLogNotificationsService extends IntentService {
               mVoicemailQueryHandler.markNewVoicemailsAsOld(intent.getData());
             });
         break;
-      case ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS:
-        DefaultVoicemailNotifier.getInstance(this).updateNotification();
-        break;
-      case ACTION_UPDATE_MISSED_CALL_NOTIFICATIONS:
-        int count = intent.getIntExtra(EXTRA_MISSED_CALL_COUNT, UNKNOWN_MISSED_CALL_COUNT);
-        String number = intent.getStringExtra(EXTRA_MISSED_CALL_NUMBER);
-        MissedCallNotifier.getInstance(this).updateMissedCallNotification(count, number);
-        updateBadgeCount(this, count);
-        break;
       case ACTION_INCOMING_POST_CALL:
         String note = intent.getStringExtra(EXTRA_POST_CALL_NOTE);
         String phoneNumber = intent.getStringExtra(EXTRA_POST_CALL_NUMBER);
-        MissedCallNotifier.getInstance(this).insertPostCallNotification(phoneNumber, note);
+        MissedCallNotifier.getIstance(this).insertPostCallNotification(phoneNumber, note);
         break;
       case ACTION_MARK_NEW_MISSED_CALLS_AS_OLD:
         CallLogNotificationsQueryHelper.removeMissedCallNotifications(this, intent.getData());
         TelecomUtil.cancelMissedCallsNotification(this);
         break;
       case ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION:
-        MissedCallNotifier.getInstance(this)
+        MissedCallNotifier.getIstance(this)
             .callBackFromMissedCall(
-                intent.getStringExtra(EXTRA_MISSED_CALL_NUMBER), intent.getData());
+                intent.getStringExtra(
+                    MissedCallNotificationReceiver.EXTRA_NOTIFICATION_PHONE_NUMBER),
+                intent.getData());
         break;
       default:
         LogUtil.d("CallLogNotificationsService.onHandleIntent", "could not handle: " + intent);
