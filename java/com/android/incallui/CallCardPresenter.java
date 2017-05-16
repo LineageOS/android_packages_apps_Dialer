@@ -373,6 +373,9 @@ public class CallCardPresenter
   @Override
   public void onHandoverToWifiFailure() {}
 
+  @Override
+  public void onInternationalCallOnWifi() {}
+
   /** Handles a change to the child number by refreshing the primary call info. */
   @Override
   public void onDialerCallChildNumberChange() {
@@ -737,7 +740,7 @@ public class CallCardPresenter
       mInCallScreen.setPrimary(
           new PrimaryInfo(
               number,
-              name,
+              mPrimary.updateNameIfRestricted(name),
               nameIsNumber,
               shouldShowLocationAsLabel(nameIsNumber, mPrimaryContactInfo.shouldShowLocation)
                   ? mPrimaryContactInfo.location
@@ -890,7 +893,7 @@ public class CallCardPresenter
       mInCallScreen.setSecondary(
           new SecondaryInfo(
               true /* show */,
-              name,
+              mSecondary.updateNameIfRestricted(name),
               nameIsNumber,
               mSecondaryContactInfo.label,
               mSecondary.getCallProviderLabel(),

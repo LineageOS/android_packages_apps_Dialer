@@ -232,11 +232,14 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     boolean thisRowCanDisconnect =
         call.can(android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
+    String name =
+        ContactDisplayUtils.getPreferredDisplayName(
+            contactCache.namePrimary, contactCache.nameAlternative, mContactsPreferences);
+
     setCallerInfoForRow(
         result,
         contactCache.namePrimary,
-        ContactDisplayUtils.getPreferredDisplayName(
-            contactCache.namePrimary, contactCache.nameAlternative, mContactsPreferences),
+        call.updateNameIfRestricted(name),
         contactCache.number,
         contactCache.label,
         contactCache.lookupKey,

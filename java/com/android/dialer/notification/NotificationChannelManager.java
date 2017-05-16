@@ -340,8 +340,10 @@ public class NotificationChannelManager {
     NotificationChannel channel = new NotificationChannel(channelId, name, importance);
     channel.setShowBadge(canShowBadge);
     if (sound != null) {
+      // silentRingtone acts as a sentinel value to indicate that setSound should still be called,
+      // but with a null value to indicate no sound.
       channel.setSound(
-          sound,
+          sound.equals(silentRingtone) ? null : sound,
           new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
     }
     channel.enableLights(lights);

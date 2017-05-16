@@ -52,39 +52,32 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
     PhoneAccountHandle phoneAccountHandle =
         Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));
 
-    // Carrier might not send voicemail count. Missing extra means there are unknown numbers of
-    // voicemails (One or more). Treat it as 1 so the generic version will be shown. ("Voicemail"
-    // instead of "X voicemails")
-    int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, 1);
+    int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, -1);
 
-    // Need credential encrypted storage to access preferences.
-    if (UserManagerCompat.isUserUnlocked(context)) {
-      PerAccountSharedPreferences preferences =
-          new PerAccountSharedPreferences(
-              context, phoneAccountHandle, PreferenceManager.getDefaultSharedPreferences(context));
-      // Carriers may send multiple notifications for the same voicemail.
-      if (count != 0 && count == preferences.getInt(LEGACY_VOICEMAIL_COUNT, -1)) {
-        LogUtil.i(
-            "LegacyVoicemailNotificationReceiver.onReceive",
-            "voicemail count hasn't changed, ignoring");
-        return;
-      }
-      preferences.edit().putInt(LEGACY_VOICEMAIL_COUNT, count).apply();
-    } else {
+    if (!hasVoicemailCountChanged(context, phoneAccountHandle, count)) {
       LogUtil.i(
           "LegacyVoicemailNotificationReceiver.onReceive",
-          "User locked, bypassing voicemail count check");
+          "voicemail count hasn't changed, ignoring");
+      return;
+    }
+
+    if (count == -1) {
+      // Carrier might not send voicemail count. Missing extra means there are unknown numbers of
+      // voicemails (One or more). Treat it as 1 so the generic version will be shown. ("Voicemail"
+      // instead of "X voicemails")
+      count = 1;
     }
 
     if (count == 0) {
       LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "clearing notification");
-      DefaultVoicemailNotifier.getInstance(context).cancelLegacyNotification();
+      new DefaultVoicemailNotifier(context).cancelLegacyNotification();
       return;
     }
 
-    if (VoicemailComponent.get(context)
-        .getVoicemailClient()
-        .isActivated(context, phoneAccountHandle)) {
+    if (UserManagerCompat.isUserUnlocked(context)
+        && VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isActivated(context, phoneAccountHandle)) {
       LogUtil.i(
           "LegacyVoicemailNotificationReceiver.onReceive",
           "visual voicemail is activated, ignoring notification");
@@ -98,12 +91,38 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
         intent.getParcelableExtra(TelephonyManager.EXTRA_LAUNCH_VOICEMAIL_SETTINGS_INTENT);
 
     LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "sending notification");
-    DefaultVoicemailNotifier.getInstance(context)
+    new DefaultVoicemailNotifier(context)
         .notifyLegacyVoicemail(
             phoneAccountHandle,
             count,
             voicemailNumber,
             callVoicemailIntent,
             voicemailSettingIntent);
+  }
+
+  private static boolean hasVoicemailCountChanged(
+      Context context, PhoneAccountHandle phoneAccountHandle, int newCount) {
+    // Need credential encrypted storage to access preferences.
+    if (!UserManagerCompat.isUserUnlocked(context)) {
+      LogUtil.i(
+          "LegacyVoicemailNotificationReceiver.onReceive",
+          "User locked, bypassing voicemail count check");
+      return true;
+    }
+
+    if (newCount == -1) {
+      // Carrier does not report voicemail count
+      return true;
+    }
+
+    PerAccountSharedPreferences preferences =
+        new PerAccountSharedPreferences(
+            context, phoneAccountHandle, PreferenceManager.getDefaultSharedPreferences(context));
+    // Carriers may send multiple notifications for the same voicemail.
+    if (newCount != 0 && newCount == preferences.getInt(LEGACY_VOICEMAIL_COUNT, -1)) {
+      return false;
+    }
+    preferences.edit().putInt(LEGACY_VOICEMAIL_COUNT, newCount).apply();
+    return true;
   }
 }

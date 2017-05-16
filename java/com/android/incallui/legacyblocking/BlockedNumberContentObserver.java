@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.util.PermissionsUtil;
 import java.util.Objects;
 
 /**
@@ -93,8 +94,13 @@ public class BlockedNumberContentObserver extends ContentObserver
    */
   public void register() {
     LogUtil.i("BlockedNumberContentObserver.register", null);
-    context.getContentResolver().registerContentObserver(CallLog.CONTENT_URI, true, this);
-    handler.postDelayed(timeoutRunnable, TIMEOUT_MS);
+    if (PermissionsUtil.hasCallLogReadPermissions(context)
+        && PermissionsUtil.hasCallLogWritePermissions(context)) {
+      context.getContentResolver().registerContentObserver(CallLog.CONTENT_URI, true, this);
+      handler.postDelayed(timeoutRunnable, TIMEOUT_MS);
+    } else {
+      LogUtil.w("BlockedNumberContentObserver.register", "no call log read/write permissions.");
+    }
   }
 
   private void unregister() {

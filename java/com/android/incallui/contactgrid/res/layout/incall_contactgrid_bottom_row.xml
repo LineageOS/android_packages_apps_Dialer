@@ -20,6 +20,15 @@
       android:id="@id/contactgrid_forwardIcon"
       style="@style/BottomRowIcon"
       android:src="@drawable/quantum_ic_forward_vd_theme_24"/>
+  <TextView
+      android:id="@+id/contactgrid_forwardNumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      android:singleLine="true"
+      android:textAppearance="@style/Dialer.Incall.TextAppearance"
+      tools:gravity="start"
+      tools:text="+1 (650) 253-0000"/>
   <ImageView
       android:id="@+id/contactgrid_spamIcon"
       style="@style/BottomRowIcon"

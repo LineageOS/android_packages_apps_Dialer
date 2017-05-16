@@ -180,6 +180,9 @@ public class AnswerScreenPresenter
 
     @Override
     public void onHandoverToWifiFailure() {}
+
+    @Override
+    public void onInternationalCallOnWifi() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

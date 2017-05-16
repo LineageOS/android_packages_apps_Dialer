@@ -37,6 +37,7 @@ import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 
 /** Utility to help with tasks related to filtered numbers. */
@@ -72,7 +73,7 @@ public class FilteredNumbersUtil {
         new AsyncTask<Object, Void, Boolean>() {
           @Override
           public Boolean doInBackground(Object... params) {
-            if (context == null || !PermissionsUtil.hasContactsPermissions(context)) {
+            if (context == null || !PermissionsUtil.hasContactsReadPermissions(context)) {
               return false;
             }
 
@@ -186,7 +187,7 @@ public class FilteredNumbersUtil {
   }
 
   public static long getLastEmergencyCallTimeMillis(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .getLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, 0);
   }
 

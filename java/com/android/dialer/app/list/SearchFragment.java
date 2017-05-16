@@ -380,7 +380,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
       return;
     }
 
-    if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+    if (PermissionsUtil.hasContactsReadPermissions(getActivity())) {
       super.startLoading();
     } else if (TextUtils.isEmpty(getQueryString())) {
       // Clear out any existing call shortcuts.

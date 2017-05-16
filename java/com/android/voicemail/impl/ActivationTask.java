@@ -19,11 +19,9 @@ package com.android.voicemail.impl;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.provider.Settings.Global;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
@@ -43,8 +41,6 @@ import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.utils.LoggerUtils;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -66,8 +62,6 @@ public class ActivationTask extends BaseTask {
   private static final int RETRY_INTERVAL_MILLIS = 5_000;
 
   private static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
-
-  @Nullable private static DeviceProvisionedObserver sDeviceProvisionedObserver;
 
   private final RetryPolicy mRetryPolicy;
 
@@ -98,7 +92,7 @@ public class ActivationTask extends BaseTask {
       // Activation might need information such as system language to be set, so wait until
       // the setup wizard is finished. The data bundle from the SMS will be re-requested upon
       // activation.
-      queueActivationAfterProvisioned(context, phoneAccountHandle);
+      DeviceProvisionedJobService.activateAfterProvisioned(context, phoneAccountHandle);
       return;
     }
 
@@ -284,46 +278,5 @@ public class ActivationTask extends BaseTask {
             .getSystemService(TelephonyManager.class)
             .createForPhoneAccountHandle(phoneAccountHandle);
     return telephonyManager.getServiceState().getState() == ServiceState.STATE_IN_SERVICE;
-  }
-
-  private static void queueActivationAfterProvisioned(
-      Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (sDeviceProvisionedObserver == null) {
-      sDeviceProvisionedObserver = new DeviceProvisionedObserver(context);
-      context
-          .getContentResolver()
-          .registerContentObserver(
-              Settings.Global.getUriFor(Global.DEVICE_PROVISIONED),
-              false,
-              sDeviceProvisionedObserver);
-    }
-    sDeviceProvisionedObserver.addPhoneAcountHandle(phoneAccountHandle);
-  }
-
-  private static class DeviceProvisionedObserver extends ContentObserver {
-
-    private final Context mContext;
-    private final Set<PhoneAccountHandle> mPhoneAccountHandles = new HashSet<>();
-
-    private DeviceProvisionedObserver(Context context) {
-      super(null);
-      mContext = context;
-    }
-
-    public void addPhoneAcountHandle(PhoneAccountHandle phoneAccountHandle) {
-      mPhoneAccountHandles.add(phoneAccountHandle);
-    }
-
-    @Override
-    public void onChange(boolean selfChange) {
-      if (isDeviceProvisioned(mContext)) {
-        VvmLog.i(TAG, "device provisioned, resuming activation");
-        for (PhoneAccountHandle phoneAccountHandle : mPhoneAccountHandles) {
-          start(mContext, phoneAccountHandle, null);
-        }
-        mContext.getContentResolver().unregisterContentObserver(sDeviceProvisionedObserver);
-        sDeviceProvisionedObserver = null;
-      }
-    }
   }
 }

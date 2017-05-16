@@ -62,6 +62,8 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
 import com.android.incallui.wifi.EnableWifiCallingPrompt;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -80,6 +82,7 @@ public class InCallActivityCommon {
 
   private static final String TAG_SELECT_ACCOUNT_FRAGMENT = "tag_select_account_fragment";
   private static final String TAG_DIALPAD_FRAGMENT = "tag_dialpad_fragment";
+  private static final String TAG_INTERNATIONAL_CALL_ON_WIFI = "tag_international_call_on_wifi";
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
@@ -107,7 +110,7 @@ public class InCallActivityCommon {
   private String dtmfTextToPreopulate;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
 
-  private SelectPhoneAccountListener selectAccountListener =
+  private final SelectPhoneAccountListener selectAccountListener =
       new SelectPhoneAccountListener() {
         @Override
         public void onPhoneAccountSelected(
@@ -130,6 +133,25 @@ public class InCallActivityCommon {
           if (call != null) {
             call.disconnect();
           }
+        }
+      };
+
+  private InternationalCallOnWifiDialogFragment.Callback internationalCallOnWifiCallback =
+      new Callback() {
+        @Override
+        public void continueCall(@NonNull String callId) {
+          LogUtil.i("InCallActivityCommon.continueCall", "continuing call with id: %s", callId);
+        }
+
+        @Override
+        public void cancelCall(@NonNull String callId) {
+          DialerCall call = CallList.getInstance().getCallById(callId);
+          if (call == null) {
+            LogUtil.i("InCallActivityCommon.cancelCall", "call destroyed before dialog closed");
+            return;
+          }
+          LogUtil.i("InCallActivityCommon.cancelCall", "disconnecting international call on wifi");
+          call.disconnect();
         }
       };
 
@@ -208,6 +230,17 @@ public class InCallActivityCommon {
       if (dialogFragment != null) {
         dialogFragment.setListener(selectAccountListener);
       }
+    }
+
+    InternationalCallOnWifiDialogFragment existingInternationalFragment =
+        (InternationalCallOnWifiDialogFragment)
+            inCallActivity
+                .getSupportFragmentManager()
+                .findFragmentByTag(TAG_INTERNATIONAL_CALL_ON_WIFI);
+    if (existingInternationalFragment != null) {
+      LogUtil.i(
+          "InCallActivityCommon.onCreate", "international fragment exists attaching callback");
+      existingInternationalFragment.setCallback(internationalCallOnWifiCallback);
     }
 
     inCallOrientationEventListener = new InCallOrientationEventListener(inCallActivity);
@@ -510,6 +543,18 @@ public class InCallActivityCommon {
       selectPhoneAccountDialogFragment.dismiss();
       selectPhoneAccountDialogFragment = null;
     }
+
+    InternationalCallOnWifiDialogFragment internationalCallOnWifiFragment =
+        (InternationalCallOnWifiDialogFragment)
+            inCallActivity
+                .getSupportFragmentManager()
+                .findFragmentByTag(TAG_INTERNATIONAL_CALL_ON_WIFI);
+    if (internationalCallOnWifiFragment != null) {
+      LogUtil.i(
+          "InCallActivityCommon.dismissPendingDialogs",
+          "dismissing InternationalCallOnWifiDialogFragment");
+      internationalCallOnWifiFragment.dismiss();
+    }
   }
 
   private static boolean shouldShowDisconnectErrorDialog(@NonNull DisconnectCause cause) {
@@ -582,6 +627,21 @@ public class InCallActivityCommon {
             e);
       }
     }
+  }
+
+  void showInternationalCallOnWifiDialog(@NonNull DialerCall call) {
+    LogUtil.enterBlock("InCallActivityCommon.showInternationalCallOnWifiDialog");
+    if (!InternationalCallOnWifiDialogFragment.shouldShow(inCallActivity)) {
+      LogUtil.i(
+          "InCallActivityCommon.showInternationalCallOnWifiDialog",
+          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
+      return;
+    }
+
+    InternationalCallOnWifiDialogFragment fragment =
+        InternationalCallOnWifiDialogFragment.newInstance(
+            call.getId(), internationalCallOnWifiCallback);
+    fragment.show(inCallActivity.getSupportFragmentManager(), TAG_INTERNATIONAL_CALL_ON_WIFI);
   }
 
   public void showWifiToLteHandoverToast(DialerCall call) {

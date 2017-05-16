@@ -137,19 +137,19 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
       return;
     }
 
-    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
-    if (TextUtils.isEmpty(formattedNumber)) {
-      listener.onCheckComplete(INVALID_ID);
-      blockedNumberCache.put(number, INVALID_ID);
-      return;
-    }
-
     if (!UserManagerCompat.isUserUnlocked(context)) {
       LogUtil.i(
           "FilteredNumberAsyncQueryHandler.isBlockedNumber",
           "Device locked in FBE mode, cannot access blocked number database");
       listener.onCheckComplete(INVALID_ID);
+      return;
+    }
+
+    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
+    if (TextUtils.isEmpty(formattedNumber)) {
+      listener.onCheckComplete(INVALID_ID);
+      blockedNumberCache.put(number, INVALID_ID);
       return;
     }
 
