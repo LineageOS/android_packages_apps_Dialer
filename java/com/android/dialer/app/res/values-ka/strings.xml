@@ -233,4 +233,6 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ნომრის განბლოკვა"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"სპამი"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ხაზგარეშეა და ვერ დაუკავშირდებით"</string>
+    <!-- no translation found for about_phone_label (582991354677973731) -->
+    <skip />
 </resources>

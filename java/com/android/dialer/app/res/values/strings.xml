@@ -897,4 +897,7 @@
   <!-- Shown as a message that notifies the user enriched calling isn't working -->
   <string name="call_composer_connection_failed"><xliff:g id="name">%1$s</xliff:g> is offline and can\'t be reached</string>
 
+  <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
+  <string name="about_phone_label">About</string>
+
 </resources>

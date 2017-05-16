@@ -290,6 +290,10 @@ public class CallList implements DialerCallDelegate {
             "CallList.onCallRemoved", "Removing call not previously disconnected " + call.getId());
       }
     }
+
+    if (!hasLiveCall()) {
+      DialerCall.clearRestrictedCount();
+    }
   }
 
   InCallUiLegacyBindings getLegacyBindings(Context context) {
@@ -723,15 +727,17 @@ public class CallList implements DialerCallDelegate {
      * WiFi
      */
     void onHandoverToWifiFailed(DialerCall call);
+
+    /** Called when the user initiates a call to an international number while on WiFi. */
+    void onInternationalCallOnWifi(@NonNull DialerCall call);
   }
 
   private class DialerCallListenerImpl implements DialerCallListener {
 
-    private final DialerCall mCall;
+    @NonNull private final DialerCall mCall;
 
-    DialerCallListenerImpl(DialerCall call) {
-      Assert.isNotNull(call);
-      mCall = call;
+    DialerCallListenerImpl(@NonNull DialerCall call) {
+      mCall = Assert.isNotNull(call);
     }
 
     @Override
@@ -775,6 +781,14 @@ public class CallList implements DialerCallDelegate {
     public void onHandoverToWifiFailure() {
       for (Listener listener : mListeners) {
         listener.onHandoverToWifiFailed(mCall);
+      }
+    }
+
+    @Override
+    public void onInternationalCallOnWifi() {
+      LogUtil.enterBlock("DialerCallListenerImpl.onInternationalCallOnWifi");
+      for (Listener listener : mListeners) {
+        listener.onInternationalCallOnWifi(mCall);
       }
     }
 

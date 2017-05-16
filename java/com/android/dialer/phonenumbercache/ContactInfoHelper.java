@@ -327,7 +327,7 @@ public class ContactInfoHelper {
     if (uri == null) {
       return null;
     }
-    if (!PermissionsUtil.hasContactsPermissions(mContext)) {
+    if (!PermissionsUtil.hasContactsReadPermissions(mContext)) {
       return ContactInfo.EMPTY;
     }
 

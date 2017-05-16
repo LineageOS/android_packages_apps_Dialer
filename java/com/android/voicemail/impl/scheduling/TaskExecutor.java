@@ -193,13 +193,13 @@ final class TaskExecutor {
   /** Should attempt to run the next task when a task has finished or been added. */
   private boolean taskAutoRunDisabledForTesting = false;
 
+  /** Handles execution of the background task in teh worker thread. */
   @VisibleForTesting
   final class WorkerThreadHandler extends Handler {
 
     public WorkerThreadHandler(Looper looper) {
       super(looper);
     }
-
     @Override
     @WorkerThread
     public void handleMessage(Message msg) {
@@ -218,6 +218,7 @@ final class TaskExecutor {
     }
   }
 
+  /** Handles completion of the background task in the main thread. */
   @VisibleForTesting
   final class MainThreadHandler extends Handler {
 
@@ -233,6 +234,11 @@ final class TaskExecutor {
       getTasks().remove(task);
       task.onCompleted();
       isWorkerThreadBusy = false;
+      if (!isJobRunning() || isTerminating()) {
+        // TaskExecutor was terminated when the task is running in background, don't need to run the
+        // next task or terminate again
+        return;
+      }
       maybeRunNextTask();
     }
   }
@@ -290,6 +296,7 @@ final class TaskExecutor {
   @MainThread
   private void maybeRunNextTask() {
     Assert.isMainThread();
+
     if (isWorkerThreadBusy) {
       return;
     }

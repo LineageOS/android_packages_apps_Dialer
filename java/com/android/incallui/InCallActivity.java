@@ -23,6 +23,7 @@ import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -485,6 +486,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   public void onHandoverToWifiFailed(DialerCall call) {
     common.showWifiFailedDialog(call);
+  }
+
+  public void onInternationalCallOnWifi(@NonNull DialerCall call) {
+    LogUtil.enterBlock("InCallActivity.onInternationalCallOnWifi");
+    common.showInternationalCallOnWifiDialog(call);
   }
 
   public void setAllowOrientationChange(boolean allowOrientationChange) {

@@ -230,4 +230,6 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"स्प्याम"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> अफलाइन हुनुहुन्छ र वहाँलाई भेट्न सकिँदैन"</string>
+    <!-- no translation found for about_phone_label (582991354677973731) -->
+    <skip />
 </resources>

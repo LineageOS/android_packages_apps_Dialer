@@ -114,11 +114,6 @@ public class CallLogNotificationsQueryHelper {
         MissedCallNotifier.NOTIFICATION_TAG);
   }
 
-  /** Update the voice mail notifications. */
-  public static void updateVoicemailNotifications(Context context) {
-    CallLogNotificationsService.updateVoicemailNotifications(context);
-  }
-
   /** Create a new instance of {@link NewCallsQuery}. */
   public static NewCallsQuery createNewCallsQuery(
       Context context, ContentResolver contentResolver) {

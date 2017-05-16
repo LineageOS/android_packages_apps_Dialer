@@ -140,6 +140,9 @@ public class AnswerProximitySensor
   public void onHandoverToWifiFailure() {}
 
   @Override
+  public void onInternationalCallOnWifi() {}
+
+  @Override
   public void onDialerCallSessionModificationStateChange() {}
 
   @Override

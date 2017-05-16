@@ -64,7 +64,7 @@ public class CallerInfoUtils {
     // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
     if (info.numberPresentation == TelecomManager.PRESENTATION_ALLOWED) {
-      if (PermissionsUtil.hasContactsPermissions(context)) {
+      if (PermissionsUtil.hasContactsReadPermissions(context)) {
         // Start the query with the number provided from the call.
         LogUtil.d(
             "CallerInfoUtils.getCallerInfoForCall",
