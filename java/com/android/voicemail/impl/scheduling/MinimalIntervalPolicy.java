@@ -17,6 +17,7 @@
 package com.android.voicemail.impl.scheduling;
 
 import android.content.Intent;
+import android.os.Bundle;
 import com.android.voicemail.impl.scheduling.Task.TaskId;
 
 /**
@@ -35,7 +36,7 @@ public class MinimalIntervalPolicy implements Policy {
   }
 
   @Override
-  public void onCreate(BaseTask task, Intent intent, int flags, int startId) {
+  public void onCreate(BaseTask task, Bundle extras) {
     mTask = task;
     mId = mTask.getId();
   }
@@ -47,10 +48,10 @@ public class MinimalIntervalPolicy implements Policy {
   public void onCompleted() {
     if (!mTask.hasFailed()) {
       Intent intent =
-          mTask.createIntent(mTask.getContext(), BlockerTask.class, mId.phoneAccountHandle);
+          BaseTask.createIntent(mTask.getContext(), BlockerTask.class, mId.phoneAccountHandle);
       intent.putExtra(BlockerTask.EXTRA_TASK_ID, mId.id);
       intent.putExtra(BlockerTask.EXTRA_BLOCK_FOR_MILLIS, mBlockForMillis);
-      mTask.getContext().startService(intent);
+      mTask.getContext().sendBroadcast(intent);
     }
   }
 

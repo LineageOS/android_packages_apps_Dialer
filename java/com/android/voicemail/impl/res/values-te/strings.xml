@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"వాయిస్ మెయిల్ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"వాయిస్ మెయిల్"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"వైబ్రేషన్"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"వైబ్రేషన్"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ధ్వని"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"అధునాతన సెట్టింగ్‌లు"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"దృశ్యమాన వాయిస్ మెయిల్"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"అదనపు బ్యాకప్ మరియు నిల్వ"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"ఇది ప్రయోగాత్మక లక్షణం"</i></b>" ప్రస్తుతం మేము దీన్ని పరీక్షిస్తున్నాము. దీని వలన మీ వాయిస్ మెయిల్ సర్వర్ నుండి సంభావ్యంగా వాయిస్ మెయిల్‌లు తొలగించబడతాయి. భవిష్యత్తులో ఈ లక్షణానికి మద్దతు ఉంటుందని ఎలాంటి హామీ అందించబడదు. అయితే, లక్షణంపై అభిప్రాయాన్ని అందిస్తే మేము సంతోషిస్తాము."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PINని సెట్ చేయండి"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PINను మార్చండి"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PINని మార్చడానికి తప్పనిసరిగా దృశ్యమాన వాయిస్ మెయిల్‌ను ప్రారంభించాలి"</string>

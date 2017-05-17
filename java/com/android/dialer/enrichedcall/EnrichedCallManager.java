@@ -20,9 +20,9 @@ import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.calldetails.nano.CallDetailsEntries;
-import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
-import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
+import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
 import com.android.dialer.multimedia.MultimediaData;
 import java.lang.annotation.Retention;
@@ -158,7 +158,7 @@ public interface EnrichedCallManager {
 
     /**
      * Callback fired when state changes. Listeners should call {@link #getSession(long)} or {@link
-     * #getSession(String, String)} to retrieve the new state.
+     * #getSession(String, String, Filter)} to retrieve the new state.
      */
     void onEnrichedCallStateChanged();
   }
@@ -172,15 +172,24 @@ public interface EnrichedCallManager {
   @MainThread
   void registerStateChangedListener(@NonNull StateChangedListener listener);
 
-  /** Returns the {@link Session} for the given unique call id, falling back to the number. */
+  /**
+   * Returns the {@link Session} for the given unique call id, falling back to the number. If a
+   * filter is provided, it will be applied to both the uniqueCalId and number lookups.
+   */
   @MainThread
   @Nullable
-  Session getSession(@NonNull String uniqueCallId, @NonNull String number);
+  Session getSession(@NonNull String uniqueCallId, @NonNull String number, @Nullable Filter filter);
 
   /** Returns the {@link Session} for the given sessionId, or {@code null} if no session exists. */
   @MainThread
   @Nullable
   Session getSession(long sessionId);
+
+  @NonNull
+  Filter createIncomingCallComposerFilter();
+
+  @NonNull
+  Filter createOutgoingCallComposerFilter();
 
   /**
    * Starts an asynchronous process to get all historical data for the given number and set of
@@ -265,9 +274,13 @@ public interface EnrichedCallManager {
   @MainThread
   void unregisterVideoShareListener(@NonNull VideoShareListener listener);
 
-  /** Called when an incoming video share invite is received. */
+  /**
+   * Called when an incoming video share invite is received.
+   *
+   * @return whether or not the invite was accepted by the manager (rejected when disabled)
+   */
   @MainThread
-  void onIncomingVideoShareInvite(long sessionId, @NonNull String number);
+  boolean onIncomingVideoShareInvite(long sessionId, @NonNull String number);
 
   /**
    * Starts a video share session with the given remote number.
@@ -303,4 +316,9 @@ public interface EnrichedCallManager {
    */
   @MainThread
   void endVideoShareSession(long sessionId);
+
+  /** Interface for filtering sessions (compatible with Predicate from Java 8) */
+  interface Filter {
+    boolean test(Session session);
+  }
 }

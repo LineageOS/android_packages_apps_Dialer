@@ -137,19 +137,19 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
       return;
     }
 
-    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
-    if (TextUtils.isEmpty(formattedNumber)) {
-      listener.onCheckComplete(INVALID_ID);
-      blockedNumberCache.put(number, INVALID_ID);
-      return;
-    }
-
     if (!UserManagerCompat.isUserUnlocked(context)) {
       LogUtil.i(
           "FilteredNumberAsyncQueryHandler.isBlockedNumber",
           "Device locked in FBE mode, cannot access blocked number database");
       listener.onCheckComplete(INVALID_ID);
+      return;
+    }
+
+    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
+    if (TextUtils.isEmpty(formattedNumber)) {
+      listener.onCheckComplete(INVALID_ID);
+      blockedNumberCache.put(number, INVALID_ID);
       return;
     }
 
@@ -201,7 +201,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    */
   @TargetApi(VERSION_CODES.M)
   @Nullable
-  public Integer getBlockedIdSynchronousForCalllogOnly(@Nullable String number, String countryIso) {
+  public Integer getBlockedIdSynchronous(@Nullable String number, String countryIso) {
     Assert.isWorkerThread();
     if (number == null) {
       return null;
@@ -251,7 +251,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
       blockedNumberCache.put(number, blockedId);
       return blockedId;
     } catch (SecurityException e) {
-      LogUtil.e("FilteredNumberAsyncQueryHandler.getBlockedIdSynchronousForCalllogOnly", null, e);
+      LogUtil.e("FilteredNumberAsyncQueryHandler.getBlockedIdSynchronous", null, e);
       return null;
     }
   }

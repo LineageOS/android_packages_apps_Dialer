@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:gravity="center_horizontal"
-  android:orientation="horizontal"
-  tools:showIn="@layout/incall_contact_grid">
-  <ImageView
-    android:id="@id/contactgrid_workIcon"
-    android:src="@drawable/ic_work_profile"
-    style="@style/BottomRowIcon"/>
-  <ImageView
-    android:id="@id/contactgrid_hdIcon"
-    android:src="@drawable/quantum_ic_hd_white_24"
-    style="@style/BottomRowIcon"
-    android:visibility="gone"/>
-  <ImageView
-    android:id="@id/contactgrid_forwardIcon"
-    android:src="@drawable/quantum_ic_forward_white_24"
-    style="@style/BottomRowIcon"/>
-  <ImageView
-    android:id="@+id/contactgrid_spamIcon"
-    android:src="@drawable/quantum_ic_report_white_18"
-    style="@style/BottomRowIcon"/>
-  <ViewAnimator
-    android:id="@+id/contactgrid_bottom_text_switcher"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
-    android:measureAllChildren="false">
-    <TextView
-      android:id="@+id/contactgrid_bottom_text"
+    android:animateLayoutChanges="true"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+  <ImageView
+      android:id="@id/contactgrid_workIcon"
+      style="@style/BottomRowIcon"
+      android:src="@drawable/quantum_ic_enterprise_vd_theme_24"/>
+  <ImageView
+      android:id="@+id/contactgrid_hdIcon"
+      style="@style/BottomRowIcon"
+      android:src="@drawable/asd_hd_icon"
+      android:visibility="gone"/>
+  <ImageView
+      android:id="@id/contactgrid_forwardIcon"
+      style="@style/BottomRowIcon"
+      android:src="@drawable/quantum_ic_forward_vd_theme_24"/>
+  <TextView
+      android:id="@+id/contactgrid_forwardNumber"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
+      android:visibility="gone"
       android:singleLine="true"
       android:textAppearance="@style/Dialer.Incall.TextAppearance"
       tools:gravity="start"
-      tools:text="Mobile +1 (650) 253-0000"/>
-    <Chronometer
-      android:id="@+id/contactgrid_bottom_timer"
+      tools:text="+1 (650) 253-0000"/>
+  <ImageView
+      android:id="@+id/contactgrid_spamIcon"
+      style="@style/BottomRowIcon"
+      android:src="@drawable/quantum_ic_report_vd_theme_24"/>
+  <ViewAnimator
+      android:id="@+id/contactgrid_bottom_text_switcher"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:singleLine="true"
-      android:textAppearance="@style/Dialer.Incall.TextAppearance"
-      tools:gravity="center"/>
+      android:layout_marginBottom="2dp"
+      android:measureAllChildren="false">
+    <TextView
+        android:id="@+id/contactgrid_bottom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance"
+        tools:gravity="start"
+        tools:text="Mobile +1 (650) 253-0000"/>
+    <Chronometer
+        android:id="@+id/contactgrid_bottom_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance"
+        tools:gravity="center"/>
   </ViewAnimator>
 </LinearLayout>

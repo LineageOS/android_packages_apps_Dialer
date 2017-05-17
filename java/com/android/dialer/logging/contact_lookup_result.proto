@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+message ContactLookupResult {
+  // The different results of a contact lookup done using a phone number.
+  enum Type {
+    UNKNOWN_LOOKUP_RESULT_TYPE = 0;
+
+    // Contact was not found in any of the sources.
+    NOT_FOUND = 1;
+
+    // Contact was found in the local database.
+    LOCAL_CONTACT = 2;
+
+    // Contact was found in Google Dialer's internal phone number cache
+    LOCAL_CACHE = 3;
+
+    // Contact was found via Google Caller ID
+    REMOTE = 4;
+
+    // Phone number was an emergency phone number
+    EMERGENCY = 5;
+
+    // Phone number was the SIM card's voicemail number
+    VOICEMAIL = 6;
+  }
+}

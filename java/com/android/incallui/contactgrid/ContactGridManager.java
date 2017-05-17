@@ -17,15 +17,16 @@
 package com.android.incallui.contactgrid;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,13 +51,13 @@ public class ContactGridManager {
   // Row 0: [Wi-Fi icon] Calling via Starbucks Wi-Fi
   // Row 0: [Wi-Fi icon] Starbucks Wi-Fi
   // Row 0: Hey Jake, pick up!
-  private ImageView connectionIconImageView;
-  private TextView statusTextView;
+  private final ImageView connectionIconImageView;
+  private final TextView statusTextView;
 
   // Row 1: Jake Peralta        [Contact photo]
   // Row 1: Walgreens
   // Row 1: +1 (650) 253-0000
-  private TextView contactNameTextView;
+  private final TextView contactNameTextView;
   @Nullable private ImageView avatarImageView;
 
   // Row 2: Mobile +1 (650) 253-0000
@@ -65,13 +66,14 @@ public class ContactGridManager {
   // Row 2: Hanging up
   // Row 2: [Alert sign] Suspected spam caller
   // Row 2: Your emergency callback number: +1 (650) 253-0000
-  private ImageView workIconImageView;
-  private ImageView hdIconImageView;
-  private ImageView forwardIconImageView;
-  private ImageView spamIconImageView;
-  private ViewAnimator bottomTextSwitcher;
-  private TextView bottomTextView;
-  private Chronometer bottomTimerView;
+  private final ImageView workIconImageView;
+  private final ImageView hdIconImageView;
+  private final ImageView forwardIconImageView;
+  private final TextView forwardedNumberView;
+  private final ImageView spamIconImageView;
+  private final ViewAnimator bottomTextSwitcher;
+  private final TextView bottomTextView;
+  private final Chronometer bottomTimerView;
   private int avatarSize;
   private boolean hideAvatar;
   private boolean showAnonymousAvatar;
@@ -89,16 +91,17 @@ public class ContactGridManager {
     this.avatarImageView = avatarImageView;
     this.avatarSize = avatarSize;
     this.showAnonymousAvatar = showAnonymousAvatar;
-    connectionIconImageView = (ImageView) view.findViewById(R.id.contactgrid_connection_icon);
-    statusTextView = (TextView) view.findViewById(R.id.contactgrid_status_text);
-    contactNameTextView = (TextView) view.findViewById(R.id.contactgrid_contact_name);
-    workIconImageView = (ImageView) view.findViewById(R.id.contactgrid_workIcon);
-    hdIconImageView = (ImageView) view.findViewById(R.id.contactgrid_hdIcon);
-    forwardIconImageView = (ImageView) view.findViewById(R.id.contactgrid_forwardIcon);
-    spamIconImageView = (ImageView) view.findViewById(R.id.contactgrid_spamIcon);
-    bottomTextSwitcher = (ViewAnimator) view.findViewById(R.id.contactgrid_bottom_text_switcher);
-    bottomTextView = (TextView) view.findViewById(R.id.contactgrid_bottom_text);
-    bottomTimerView = (Chronometer) view.findViewById(R.id.contactgrid_bottom_timer);
+    connectionIconImageView = view.findViewById(R.id.contactgrid_connection_icon);
+    statusTextView = view.findViewById(R.id.contactgrid_status_text);
+    contactNameTextView = view.findViewById(R.id.contactgrid_contact_name);
+    workIconImageView = view.findViewById(R.id.contactgrid_workIcon);
+    hdIconImageView = view.findViewById(R.id.contactgrid_hdIcon);
+    forwardIconImageView = view.findViewById(R.id.contactgrid_forwardIcon);
+    forwardedNumberView = view.findViewById(R.id.contactgrid_forwardNumber);
+    spamIconImageView = view.findViewById(R.id.contactgrid_spamIcon);
+    bottomTextSwitcher = view.findViewById(R.id.contactgrid_bottom_text_switcher);
+    bottomTextView = view.findViewById(R.id.contactgrid_bottom_text);
+    bottomTimerView = view.findViewById(R.id.contactgrid_bottom_timer);
 
     contactGridLayout = (View) contactNameTextView.getParent();
     letterTile = new LetterTileDrawable(context.getResources());
@@ -319,18 +322,43 @@ public class ContactGridManager {
     bottomTextView.setText(info.label);
     bottomTextView.setAllCaps(info.isSpamIconVisible);
     workIconImageView.setVisibility(info.isWorkIconVisible ? View.VISIBLE : View.GONE);
-    boolean wasHdIconVisible = hdIconImageView.getVisibility() == View.VISIBLE;
-    hdIconImageView.setVisibility(
-        info.isHdIconVisible || info.isHdAttemptingIconVisible ? View.VISIBLE : View.GONE);
-    if (!wasHdIconVisible && info.isHdAttemptingIconVisible) {
-      Animation animation = AnimationUtils.loadAnimation(context, R.anim.blinking);
-      hdIconImageView.startAnimation(animation);
-    } else if (wasHdIconVisible && !info.isHdAttemptingIconVisible) {
-      hdIconImageView.clearAnimation();
-      hdIconImageView.setAlpha(1f);
+    if (hdIconImageView.getVisibility() == View.GONE) {
+      if (info.isHdAttemptingIconVisible) {
+        hdIconImageView.setVisibility(View.VISIBLE);
+        hdIconImageView.setActivated(false);
+        Drawable drawableCurrent = hdIconImageView.getDrawable().getCurrent();
+        if (drawableCurrent instanceof Animatable && !((Animatable) drawableCurrent).isRunning()) {
+          ((Animatable) drawableCurrent).start();
+        }
+      } else if (info.isHdIconVisible) {
+        hdIconImageView.setVisibility(View.VISIBLE);
+        hdIconImageView.setActivated(true);
+      }
+    } else if (info.isHdIconVisible) {
+      hdIconImageView.setActivated(true);
+    } else if (!info.isHdAttemptingIconVisible) {
+      hdIconImageView.setVisibility(View.GONE);
     }
-    forwardIconImageView.setVisibility(info.isForwardIconVisible ? View.VISIBLE : View.GONE);
     spamIconImageView.setVisibility(info.isSpamIconVisible ? View.VISIBLE : View.GONE);
+
+    if (info.isForwardIconVisible) {
+      forwardIconImageView.setVisibility(View.VISIBLE);
+      forwardedNumberView.setVisibility(View.VISIBLE);
+      if (info.isTimerVisible) {
+        bottomTextSwitcher.setVisibility(View.VISIBLE);
+        if (ViewCompat.getLayoutDirection(contactGridLayout) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+          forwardedNumberView.setText(TextUtils.concat(info.label, " • "));
+        } else {
+          forwardedNumberView.setText(TextUtils.concat(" • ", info.label));
+        }
+      } else {
+        bottomTextSwitcher.setVisibility(View.GONE);
+        forwardedNumberView.setText(info.label);
+      }
+    } else {
+      forwardIconImageView.setVisibility(View.GONE);
+      forwardedNumberView.setVisibility(View.GONE);
+    }
 
     if (info.isTimerVisible) {
       bottomTextSwitcher.setDisplayedChild(1);

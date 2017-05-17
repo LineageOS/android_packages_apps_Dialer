@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"भ्वाइस मेल (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"भ्वाइस मेल"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"कम्पन"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"कम्पन"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"आवाज"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"उन्नत सेटिङहरू"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"भिजुअल भ्वाइस मेल"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"अतिरिक्त ब्याकअप र भण्डारण"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"यो एउटा प्रयोगात्मक विशेषता हो"</i></b>" हामी अहिले परीक्षण गर्दैछौं। यसले सम्भवत: तपाईंको भ्वाइस मेल सर्भरका भ्वाइस मेलहरूलाई मेट्ने छ। भविष्यमा यो विशेषतालाई समर्थन गरिने कुराको ग्यारेन्टी छैन। तथापि हामी यो विशेषताका सम्बन्धमा प्रतिक्रिया आऊन् भन्ने चाहन्छौं।"</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN सेट गर्नुहोस्"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN परिवर्तन गर्नुहोस्"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN परिवर्तन गर्न अनिवार्य रूपले भिजुअल भ्वाइस मेललाई सक्षम पारिनुपर्छ"</string>

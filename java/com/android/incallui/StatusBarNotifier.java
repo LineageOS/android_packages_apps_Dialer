@@ -97,9 +97,12 @@ public class StatusBarNotifier
   // Indicates that no notification is currently showing.
   private static final int NOTIFICATION_NONE = 0;
   // Notification for an active call. This is non-interruptive, but cannot be dismissed.
-  private static final int NOTIFICATION_IN_CALL = R.id.notification_ongoing_call;
+  private static final int NOTIFICATION_IN_CALL = 1;
   // Notification for incoming calls. This is interruptive and will show up as a HUN.
-  private static final int NOTIFICATION_INCOMING_CALL = R.id.notification_incoming_call;
+  private static final int NOTIFICATION_INCOMING_CALL = 2;
+  // Notification for incoming calls in the case where there is already an active call.
+  // This is non-interruptive, but otherwise behaves the same as NOTIFICATION_INCOMING_CALL
+  private static final int NOTIFICATION_INCOMING_CALL_QUIET = 3;
 
   private static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
   private static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
@@ -119,7 +122,6 @@ public class StatusBarNotifier
   private String mSavedContentTitle;
   private Uri mRingtone;
   private StatusBarCallListener mStatusBarCallListener;
-  private boolean mShowFullScreenIntent;
 
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
     Objects.requireNonNull(context);
@@ -145,8 +147,7 @@ public class StatusBarNotifier
 
     NotificationManager notificationManager =
         backupContext.getSystemService(NotificationManager.class);
-    notificationManager.cancel(NOTIFICATION_IN_CALL);
-    notificationManager.cancel(NOTIFICATION_INCOMING_CALL);
+    notificationManager.cancel(R.id.notification_ongoing_call);
   }
 
   private static int getWorkStringFromPersonalString(int resId) {
@@ -224,8 +225,8 @@ public class StatusBarNotifier
       setStatusBarCallListener(null);
     }
     if (mCurrentNotification != NOTIFICATION_NONE) {
-      LogUtil.d("StatusBarNotifier.cancelNotification", "cancel");
-      mNotificationManager.cancel(mCurrentNotification);
+      LogUtil.i("StatusBarNotifier.cancelNotification", "cancel");
+      mNotificationManager.cancel(R.id.notification_ongoing_call);
     }
     mCurrentNotification = NOTIFICATION_NONE;
   }
@@ -312,7 +313,11 @@ public class StatusBarNotifier
     if (callState == DialerCall.State.INCOMING
         || callState == DialerCall.State.CALL_WAITING
         || isVideoUpgradeRequest) {
-      notificationType = NOTIFICATION_INCOMING_CALL;
+      boolean alreadyActive =
+          callList.getActiveOrBackgroundCall() != null
+              && InCallPresenter.getInstance().isShowingInCallUi();
+      notificationType =
+          alreadyActive ? NOTIFICATION_INCOMING_CALL_QUIET : NOTIFICATION_INCOMING_CALL;
     } else {
       notificationType = NOTIFICATION_IN_CALL;
     }
@@ -324,8 +329,7 @@ public class StatusBarNotifier
         contentTitle,
         callState,
         notificationType,
-        contactInfo.contactRingtoneUri,
-        InCallPresenter.getInstance().shouldShowFullScreenNotification())) {
+        contactInfo.contactRingtoneUri)) {
       return;
     }
 
@@ -342,7 +346,6 @@ public class StatusBarNotifier
         .setColor(mContext.getResources().getColor(R.color.dialer_theme_color, mContext.getTheme()))
         // Hide work call state for the lock screen notification
         .setContentTitle(getContentString(call, ContactsUtils.USER_TYPE_CURRENT));
-    setColorized(publicBuilder);
     setNotificationWhen(call, callState, publicBuilder);
 
     // Builder for the notification shown when the device is unlocked or the user has set their
@@ -358,19 +361,37 @@ public class StatusBarNotifier
     if (accountHandle == null) {
       accountHandle = getAnyPhoneAccount();
     }
-    if (notificationType == NOTIFICATION_INCOMING_CALL) {
-      NotificationChannelManager.applyChannel(
-          builder, mContext, Channel.INCOMING_CALL, accountHandle);
-      if (InCallPresenter.getInstance().shouldShowFullScreenNotification()) {
-        configureFullScreenIntent(
-            builder, createLaunchPendingIntent(true /* isFullScreen */), callList, call);
-      }
-      // Set the notification category and bump the priority for incoming calls
-      builder.setCategory(Notification.CATEGORY_CALL);
-      builder.setPriority(Notification.PRIORITY_MAX);
-    } else {
-      NotificationChannelManager.applyChannel(
-          builder, mContext, Channel.ONGOING_CALL, accountHandle);
+
+    LogUtil.i("StatusBarNotifier.buildAndSendNotification", "notificationType=" + notificationType);
+    switch (notificationType) {
+      case NOTIFICATION_INCOMING_CALL:
+        NotificationChannelManager.applyChannel(
+            builder, mContext, Channel.INCOMING_CALL, accountHandle);
+        configureFullScreenIntent(builder, createLaunchPendingIntent(true /* isFullScreen */));
+        // Set the notification category and bump the priority for incoming calls
+        builder.setCategory(Notification.CATEGORY_CALL);
+        // This will be ignored on O+ and handled by the channel
+        //noinspection deprecation
+        builder.setPriority(Notification.PRIORITY_MAX);
+        if (mCurrentNotification != NOTIFICATION_INCOMING_CALL) {
+          LogUtil.i(
+              "StatusBarNotifier.buildAndSendNotification",
+              "Canceling old notification so this one can be noisy");
+          // Moving from a non-interuptive notification (or none) to a noisy one. Cancel the old
+          // notification (if there is one) so the fullScreenIntent or HUN will show
+          mNotificationManager.cancel(R.id.notification_ongoing_call);
+        }
+        break;
+      case NOTIFICATION_INCOMING_CALL_QUIET:
+        NotificationChannelManager.applyChannel(
+            builder, mContext, Channel.ONGOING_CALL, accountHandle);
+        break;
+      case NOTIFICATION_IN_CALL:
+        setColorized(publicBuilder);
+        setColorized(builder);
+        NotificationChannelManager.applyChannel(
+            builder, mContext, Channel.ONGOING_CALL, accountHandle);
+        break;
     }
 
     // Set the content
@@ -380,7 +401,6 @@ public class StatusBarNotifier
     builder.setLargeIcon(largeIcon);
     builder.setColor(
         mContext.getResources().getColor(R.color.dialer_theme_color, mContext.getTheme()));
-    setColorized(builder);
 
     if (isVideoUpgradeRequest) {
       builder.setUsesChronometer(false);
@@ -410,19 +430,13 @@ public class StatusBarNotifier
       LogUtil.v("StatusBarNotifier.buildAndSendNotification", "playing call waiting tone");
       mDialerRingtoneManager.playCallWaitingTone();
     }
-    if (mCurrentNotification != notificationType && mCurrentNotification != NOTIFICATION_NONE) {
-      LogUtil.i(
-          "StatusBarNotifier.buildAndSendNotification",
-          "previous notification already showing - cancelling " + mCurrentNotification);
-      mNotificationManager.cancel(mCurrentNotification);
-    }
 
     LogUtil.i(
         "StatusBarNotifier.buildAndSendNotification",
         "displaying notification for " + notificationType);
 
     try {
-      mNotificationManager.notify(notificationType, notification);
+      mNotificationManager.notify(R.id.notification_ongoing_call, notification);
     } catch (RuntimeException e) {
       // TODO(b/34744003): Move the memory stats into silent feedback PSD.
       ActivityManager activityManager = mContext.getSystemService(ActivityManager.class);
@@ -501,8 +515,7 @@ public class StatusBarNotifier
       String contentTitle,
       int state,
       int notificationType,
-      Uri ringtone,
-      boolean showFullScreenIntent) {
+      Uri ringtone) {
 
     // The two are different:
     // if new title is not null, it should be different from saved version OR
@@ -511,15 +524,17 @@ public class StatusBarNotifier
         (contentTitle != null && !contentTitle.equals(mSavedContentTitle))
             || (contentTitle == null && mSavedContentTitle != null);
 
+    boolean largeIconChanged =
+        mSavedLargeIcon == null ? largeIcon != null : !mSavedLargeIcon.sameAs(largeIcon);
+
     // any change means we are definitely updating
     boolean retval =
         (mSavedIcon != icon)
             || !Objects.equals(mSavedContent, content)
             || (mCallState != state)
-            || (mSavedLargeIcon != largeIcon)
+            || largeIconChanged
             || contentTitleChanged
-            || !Objects.equals(mRingtone, ringtone)
-            || mShowFullScreenIntent != showFullScreenIntent;
+            || !Objects.equals(mRingtone, ringtone);
 
     // If we aren't showing a notification right now or the notification type is changing,
     // definitely do an update.
@@ -537,7 +552,6 @@ public class StatusBarNotifier
     mSavedLargeIcon = largeIcon;
     mSavedContentTitle = contentTitle;
     mRingtone = ringtone;
-    mShowFullScreenIntent = showFullScreenIntent;
 
     if (retval) {
       LogUtil.d(
@@ -685,7 +699,11 @@ public class StatusBarNotifier
       EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
       Session session = null;
       if (call.getNumber() != null) {
-        session = manager.getSession(call.getUniqueCallId(), call.getNumber());
+        session =
+            manager.getSession(
+                call.getUniqueCallId(),
+                call.getNumber(),
+                manager.createIncomingCallComposerFilter());
       }
 
       if (call.isSpam()) {
@@ -848,8 +866,7 @@ public class StatusBarNotifier
     builder.addAction(
         new Notification.Action.Builder(
                 Icon.createWithResource(mContext, R.drawable.ic_call_end_white_24dp),
-                getActionText(
-                    R.string.notification_action_end_call, R.color.notification_action_end_call),
+                mContext.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());
   }
@@ -901,8 +918,7 @@ public class StatusBarNotifier
   }
 
   /** Adds fullscreen intent to the builder. */
-  private void configureFullScreenIntent(
-      Notification.Builder builder, PendingIntent intent, CallList callList, DialerCall call) {
+  private void configureFullScreenIntent(Notification.Builder builder, PendingIntent intent) {
     // Ok, we actually want to launch the incoming call
     // UI at this point (in addition to simply posting a notification
     // to the status bar).  Setting fullScreenIntent will cause
@@ -910,51 +926,15 @@ public class StatusBarNotifier
     // current foreground activity is marked as "immersive".
     LogUtil.d("StatusBarNotifier.configureFullScreenIntent", "setting fullScreenIntent: " + intent);
     builder.setFullScreenIntent(intent, true);
-
-    // Ugly hack alert:
-    //
-    // The NotificationManager has the (undocumented) behavior
-    // that it will *ignore* the fullScreenIntent field if you
-    // post a new Notification that matches the ID of one that's
-    // already active.  Unfortunately this is exactly what happens
-    // when you get an incoming call-waiting call:  the
-    // "ongoing call" notification is already visible, so the
-    // InCallScreen won't get launched in this case!
-    // (The result: if you bail out of the in-call UI while on a
-    // call and then get a call-waiting call, the incoming call UI
-    // won't come up automatically.)
-    //
-    // The workaround is to just notice this exact case (this is a
-    // call-waiting call *and* the InCallScreen is not in the
-    // foreground) and manually cancel the in-call notification
-    // before (re)posting it.
-    //
-    // TODO: there should be a cleaner way of avoiding this
-    // problem (see discussion in bug 3184149.)
-
-    // If a call is onhold during an incoming call, the call actually comes in as
-    // INCOMING.  For that case *and* traditional call-waiting, we want to
-    // cancel the notification.
-    boolean isCallWaiting =
-        (call.getState() == DialerCall.State.CALL_WAITING
-            || (call.getState() == DialerCall.State.INCOMING
-                && callList.getBackgroundCall() != null));
-
-    if (isCallWaiting) {
-      LogUtil.i(
-          "StatusBarNotifier.configureFullScreenIntent",
-          "updateInCallNotification: call-waiting! force relaunch...");
-      // Cancel the IN_CALL_NOTIFICATION immediately before
-      // (re)posting it; this seems to force the
-      // NotificationManager to launch the fullScreenIntent.
-      mNotificationManager.cancel(NOTIFICATION_IN_CALL);
-    }
   }
 
   private Notification.Builder getNotificationBuilder() {
     final Notification.Builder builder = new Notification.Builder(mContext);
     builder.setOngoing(true);
     builder.setOnlyAlertOnce(true);
+    // This will be ignored on O+ and handled by the channel
+    //noinspection deprecation
+    builder.setPriority(Notification.PRIORITY_HIGH);
 
     return builder;
   }
@@ -1023,6 +1003,9 @@ public class StatusBarNotifier
 
     @Override
     public void onHandoverToWifiFailure() {}
+
+    @Override
+    public void onInternationalCallOnWifi() {}
 
     /**
      * Responds to changes in the session modification state for the call by dismissing the status

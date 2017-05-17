@@ -18,6 +18,7 @@ package com.android.dialer.app;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -88,16 +89,16 @@ import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.dialer.logging.nano.ScreenEvent;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.p13n.inference.P13nRanking;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRanker.P13nRefreshCompleteListener;
@@ -379,12 +380,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
     mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
     searchEditTextLayout
-        .findViewById(R.id.search_magnifying_glass)
+        .findViewById(R.id.search_box_collapsed)
         .setOnClickListener(mSearchViewOnClickListener);
-    searchEditTextLayout
-        .findViewById(R.id.search_box_start_search)
-        .setOnClickListener(mSearchViewOnClickListener);
-    searchEditTextLayout.setOnClickListener(mSearchViewOnClickListener);
     searchEditTextLayout.setCallback(
         new SearchEditTextLayout.Callback() {
           @Override
@@ -505,8 +502,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       mVoiceSearchQuery = null;
     }
 
-    mFirstLaunch = false;
-
     if (mIsRestarting) {
       // This is only called when the activity goes from resumed -> paused -> resumed, so it
       // will not cause an extra view to be sent out on rotation
@@ -522,33 +517,39 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
 
-    if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
-      // Externally specified extras take precedence to EXTRA_SHOW_TAB, which is only
-      // used internally.
-      final Bundle extras = getIntent().getExtras();
-      if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
-        mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
-        Logger.get(this).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
-      } else {
-        mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_HISTORY);
+    if (mFirstLaunch) {
+      // Only process the Intent the first time onResume() is called after receiving it
+      if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
+        // Externally specified extras take precedence to EXTRA_SHOW_TAB, which is only
+        // used internally.
+        final Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
+          mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
+          Logger.get(this).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
+        } else {
+          mListsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_HISTORY);
+        }
+      } else if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
+        int index =
+            getIntent().getIntExtra(EXTRA_SHOW_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
+        if (index < mListsFragment.getTabCount()) {
+          // Hide dialpad since this is an explicit intent to show a specific tab, which is coming
+          // from missed call or voicemail notification.
+          hideDialpadFragment(false, false);
+          exitSearchUi();
+          mListsFragment.showTab(index);
+        }
       }
-    } else if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
-      int index =
-          getIntent().getIntExtra(EXTRA_SHOW_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
-      if (index < mListsFragment.getTabCount()) {
-        // Hide dialpad since this is an explicit intent to show a specific tab, which is coming
-        // from missed call or voicemail notification.
-        hideDialpadFragment(false, false);
-        exitSearchUi();
-        mListsFragment.showTab(index);
+
+      if (getIntent().getBooleanExtra(EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
+        CallLogNotificationsService.markNewVoicemailsAsOld(this, null);
       }
     }
 
-    if (getIntent().getBooleanExtra(EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
-      CallLogNotificationsService.markNewVoicemailsAsOld(this, null);
-    }
+    mFirstLaunch = false;
 
     setSearchBoxHint();
+    timeTabSelected = SystemClock.elapsedRealtime();
 
     mP13nLogger.reset();
     mP13nRanker.refresh(
@@ -586,7 +587,10 @@ public class DialtactsActivity extends TransactionSafeActivity
         SystemClock.elapsedRealtime() - timeTabSelected >= HISTORY_TAB_SEEN_TIMEOUT;
     boolean isOnHistoryTab =
         mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_HISTORY;
-    if (isOnHistoryTab && timeoutElapsed && !isChangingConfigurations()) {
+    if (isOnHistoryTab
+        && timeoutElapsed
+        && !isChangingConfigurations()
+        && !getSystemService(KeyguardManager.class).isKeyguardLocked()) {
       mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
     }
   }
@@ -857,7 +861,10 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Finishes hiding the dialpad fragment after any animations are completed. */
   private void commitDialpadFragmentHide() {
-    if (!mStateSaved && mDialpadFragment != null && !mDialpadFragment.isHidden()) {
+    if (!mStateSaved
+        && mDialpadFragment != null
+        && !mDialpadFragment.isHidden()
+        && !isDestroyed()) {
       final FragmentTransaction ft = getFragmentManager().beginTransaction();
       ft.hide(mDialpadFragment);
       ft.commit();
@@ -1006,6 +1013,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public void onNewIntent(Intent newIntent) {
     setIntent(newIntent);
+    mFirstLaunch = true;
 
     mStateSaved = false;
     displayFragment(newIntent);
@@ -1480,7 +1488,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       Menu menu = getMenu();
       MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
       clearFrequents.setVisible(
-          PermissionsUtil.hasContactsPermissions(DialtactsActivity.this)
+          PermissionsUtil.hasContactsReadPermissions(DialtactsActivity.this)
               && mListsFragment != null
               && mListsFragment.hasFrequents());
 

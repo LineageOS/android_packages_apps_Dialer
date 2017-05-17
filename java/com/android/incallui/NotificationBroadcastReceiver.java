@@ -23,8 +23,8 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 

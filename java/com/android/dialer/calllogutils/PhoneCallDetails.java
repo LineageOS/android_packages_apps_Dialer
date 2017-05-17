@@ -27,7 +27,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
-import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo.ContactSourceType;
+import com.android.dialer.logging.ContactSource;
 import com.android.dialer.phonenumbercache.ContactInfo;
 
 /** The details of a phone call to be shown in the UI. */
@@ -82,7 +82,7 @@ public class PhoneCallDetails {
   public Uri photoUri;
 
   // The source type of the contact associated with this call.
-  public @ContactSourceType int sourceType;
+  public ContactSource.Type sourceType;
 
   // The object id type of the contact associated with this call.
   public String objectId;

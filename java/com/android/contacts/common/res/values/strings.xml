@@ -791,5 +791,12 @@
        This is especially valuable for views without textual representation like ImageView.
 
        [CHAR LIMIT=NONE]-->
-  <string name="description_search_video_call">Place video call</string>
+  <string name="description_search_video_call">Video call</string>
+
+  <!-- Description string for an action button to initiate an enriched call from search results.
+       Note: AccessibilityServices use this attribute to announce what the view represents.
+       This is especially valuable for views without textual representation like ImageView.
+
+       [CHAR LIMIT=NONE]-->
+  <string name="description_search_call_and_share">Share and call</string>
 </resources>

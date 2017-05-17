@@ -17,6 +17,7 @@
 package com.android.voicemail.impl.scheduling;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.VvmLog;
@@ -60,11 +61,11 @@ public class RetryPolicy implements Policy {
   }
 
   @Override
-  public void onCreate(BaseTask task, Intent intent, int flags, int startId) {
+  public void onCreate(BaseTask task, Bundle extras) {
     mTask = task;
-    mRetryCount = intent.getIntExtra(EXTRA_RETRY_COUNT, 0);
+    mRetryCount = extras.getInt(EXTRA_RETRY_COUNT, 0);
     if (mRetryCount > 0) {
-      VvmLog.d(
+      VvmLog.i(
           TAG,
           "retry #" + mRetryCount + " for " + mTask + " queued, executing in " + mRetryDelayMillis);
       mTask.setExecutionTime(mTask.getTimeMillis() + mRetryDelayMillis);
@@ -85,10 +86,10 @@ public class RetryPolicy implements Policy {
   public void onCompleted() {
     if (!mFailed || !hasMoreRetries()) {
       if (!mFailed) {
-        VvmLog.d(TAG, mTask.toString() + " completed successfully");
+        VvmLog.i(TAG, mTask + " completed successfully");
       }
       if (!hasMoreRetries()) {
-        VvmLog.d(TAG, "Retry limit for " + mTask + " reached");
+        VvmLog.i(TAG, "Retry limit for " + mTask + " reached");
       }
       VvmLog.i(TAG, "committing deferred status: " + mVoicemailStatusEditor.getValues());
       mVoicemailStatusEditor.deferredApply();
@@ -98,7 +99,7 @@ public class RetryPolicy implements Policy {
     Intent intent = mTask.createRestartIntent();
     intent.putExtra(EXTRA_RETRY_COUNT, mRetryCount + 1);
 
-    mTask.getContext().startService(intent);
+    mTask.getContext().sendBroadcast(intent);
   }
 
   @Override

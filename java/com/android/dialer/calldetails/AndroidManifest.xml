@@ -20,7 +20,7 @@
     <activity
       android:label="@string/call_details"
       android:name="com.android.dialer.calldetails.CallDetailsActivity"
-      android:theme="@style/Theme.AppCompat.NoActionBar">
+      android:theme="@style/Theme.AppCompat.Light.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>

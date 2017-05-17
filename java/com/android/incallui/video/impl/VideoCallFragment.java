@@ -348,6 +348,7 @@ public class VideoCallFragment extends Fragment
   public void onPause() {
     super.onPause();
     LogUtil.i("VideoCallFragment.onPause", null);
+    inCallScreenDelegate.onInCallScreenPaused();
   }
 
   @Override
@@ -1216,6 +1217,9 @@ public class VideoCallFragment extends Fragment
     blurScript.setInput(allocationIn);
     blurScript.forEach(allocationOut);
     allocationOut.copyTo(image);
+    blurScript.destroy();
+    allocationIn.destroy();
+    allocationOut.destroy();
   }
 
   @Override

@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Hãy gọi lại cho tôi khi bạn có thời gian."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Không khẩn cấp, chúng ta có thể trò chuyện sau."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Thêm tin nhắn"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"Đã gửi tin nhắn"</string>
     <string name="view" msgid="8572192949673703830">"Xem"</string>
 </resources>

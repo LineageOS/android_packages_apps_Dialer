@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"Говорна пошта (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"Говорна пошта"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Вибрација"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Вибрација"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Звук"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Напредна подешавања"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Визуелна говорна пошта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Додатне резервне копије и простор"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Ово је експериментална функција"</i></b>" коју тренутно тестирамо. Тако ће се можда избрисати говорне поруке са сервера говорне поште. Нема гаранција да ће ова функција бити подржана и у будућности. Ипак, желимо да добијамо повратне информације о њој."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Подесите PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Промените PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Морате да омогућите визуелну говорну пошту да бисте променили PIN"</string>

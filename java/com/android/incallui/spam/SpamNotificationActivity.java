@@ -27,16 +27,17 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.BlockReportSpamDialogs;
 import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.dialer.logging.nano.ReportingLocation;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.incallui.R;
 import com.android.incallui.call.DialerCall;
@@ -108,7 +109,8 @@ public class SpamNotificationActivity extends FragmentActivity {
     return PhoneNumberUtilsCompat.createTtsSpannable(number).toString();
   }
 
-  private static void logCallImpression(Context context, Bundle bundle, int impression) {
+  private static void logCallImpression(
+      Context context, Bundle bundle, DialerImpression.Type impression) {
     Logger.get(context)
         .logCallImpression(
             impression,
@@ -122,7 +124,8 @@ public class SpamNotificationActivity extends FragmentActivity {
     bundle.putBoolean(CALL_INFO_KEY_IS_SPAM, call.isSpam());
     bundle.putString(CALL_INFO_KEY_CALL_ID, call.getUniqueCallId());
     bundle.putLong(CALL_INFO_KEY_START_TIME_MILLIS, call.getTimeAddedMs());
-    bundle.putInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult);
+    bundle.putInt(
+        CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult.getNumber());
     return bundle;
   }
 
@@ -142,7 +145,9 @@ public class SpamNotificationActivity extends FragmentActivity {
     Intent intent = getIntent();
     String number = getCallInfo().getString(CALL_INFO_KEY_PHONE_NUMBER);
     boolean isSpam = getCallInfo().getBoolean(CALL_INFO_KEY_IS_SPAM);
-    int contactLookupResultType = getCallInfo().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0);
+    ContactLookupResult.Type contactLookupResultType =
+        ContactLookupResult.Type.forNumber(
+            getCallInfo().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0));
     switch (intent.getAction()) {
       case ACTION_ADD_TO_CONTACTS:
         logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_ADD_TO_CONTACTS);
@@ -164,6 +169,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           showNonSpamDialog();
         }
         break;
+      default: // fall out
     }
   }
 
@@ -179,7 +185,8 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   /** Creates and displays the dialog for whitelisting a number. */
-  private void maybeShowNotSpamDialog(final String number, final int contactLookupResultType) {
+  private void maybeShowNotSpamDialog(
+      final String number, final ContactLookupResult.Type contactLookupResultType) {
     if (Spam.get(this).isDialogEnabledForSpamNotification()) {
       BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
               getFormattedNumber(number),
@@ -198,7 +205,7 @@ public class SpamNotificationActivity extends FragmentActivity {
 
   /** Creates and displays the dialog for blocking/reporting a number as spam. */
   private void maybeShowBlockReportSpamDialog(
-      final String number, final int contactLookupResultType) {
+      final String number, final ContactLookupResult.Type contactLookupResultType) {
     if (Spam.get(this).isDialogEnabledForSpamNotification()) {
       maybeShowBlockNumberMigrationDialog(
           new BlockedNumbersMigrator.Listener() {
@@ -252,7 +259,7 @@ public class SpamNotificationActivity extends FragmentActivity {
 
   /** Block and report the number as spam. */
   private void blockReportNumberAndFinish(
-      String number, boolean reportAsSpam, int contactLookupResultType) {
+      String number, boolean reportAsSpam, ContactLookupResult.Type contactLookupResultType) {
     if (reportAsSpam) {
       logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM);
       Spam.get(this)
@@ -271,7 +278,8 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   /** Report the number as not spam. */
-  private void reportNotSpamAndFinish(String number, int contactLookupResultType) {
+  private void reportNotSpamAndFinish(
+      String number, ContactLookupResult.Type contactLookupResultType) {
     logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM);
     Spam.get(this)
         .reportNotSpamFromAfterCallNotification(
@@ -307,7 +315,7 @@ public class SpamNotificationActivity extends FragmentActivity {
     return getIntent().getBundleExtra(EXTRA_CALL_INFO);
   }
 
-  private void logCallImpression(int impression) {
+  private void logCallImpression(DialerImpression.Type impression) {
     logCallImpression(this, getCallInfo(), impression);
   }
 
@@ -356,8 +364,9 @@ public class SpamNotificationActivity extends FragmentActivity {
       final SpamNotificationActivity spamNotificationActivity =
           (SpamNotificationActivity) getActivity();
       final String number = getArguments().getString(CALL_INFO_KEY_PHONE_NUMBER);
-      final int contactLookupResultType =
-          getArguments().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0);
+      final ContactLookupResult.Type contactLookupResultType =
+          ContactLookupResult.Type.forNumber(
+              getArguments().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0));
 
       return new AlertDialog.Builder(getActivity())
           .setCancelable(false)
@@ -442,8 +451,9 @@ public class SpamNotificationActivity extends FragmentActivity {
       final SpamNotificationActivity spamNotificationActivity =
           (SpamNotificationActivity) getActivity();
       final String number = getArguments().getString(CALL_INFO_KEY_PHONE_NUMBER);
-      final int contactLookupResultType =
-          getArguments().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0);
+      final ContactLookupResult.Type contactLookupResultType =
+          ContactLookupResult.Type.forNumber(
+              getArguments().getInt(CALL_INFO_CONTACT_LOOKUP_RESULT_TYPE, 0));
       return new AlertDialog.Builder(getActivity())
           .setTitle(getString(R.string.non_spam_notification_title, getFormattedNumber(number)))
           .setCancelable(false)

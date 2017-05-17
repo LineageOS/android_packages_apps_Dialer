@@ -28,4 +28,14 @@ public final class ScheduledJobIds {
 
   // This job refreshes dynamic launcher shortcuts.
   public static final int SHORTCUT_PERIODIC_JOB = 100;
+
+  public static final int VVM_TASK_SCHEDULER_JOB = 200;
+  public static final int VVM_STATUS_CHECK_JOB = 201;
+  public static final int VVM_DEVICE_PROVISIONED_JOB = 202;
+
+  public static final int VOIP_REGISTRATION = 300;
+
+  // Job Ids from 10_000 to 10_100 should be reserved for proto upload jobs.
+  public static final int PROTO_UPLOAD_JOB_MIN_ID = 10_000;
+  public static final int PROTO_UPLOAD_JOB_MAX_ID = 10_100;
 }

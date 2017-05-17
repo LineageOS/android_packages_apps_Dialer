@@ -53,8 +53,8 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.impl.CreateCustomSmsDialogFragment.CreateCustomSmsHolder;
@@ -543,7 +543,10 @@ public class AnswerFragment extends Fragment
         // Needs replacement
         newFragment =
             MultimediaFragment.newInstance(
-                multimediaData, false /* isInteractive */, true /* showAvatar */);
+                multimediaData,
+                false /* isInteractive */,
+                !primaryInfo.isSpam /* showAvatar */,
+                primaryInfo.isSpam);
       }
     } else if (shouldShowAvatar()) {
       // Needs Avatar
@@ -658,9 +661,6 @@ public class AnswerFragment extends Fragment
     affordanceHolderLayout.setAffordanceCallback(affordanceCallback);
 
     importanceBadge = view.findViewById(R.id.incall_important_call_badge);
-    PillDrawable importanceBackground = new PillDrawable();
-    importanceBackground.setColor(getContext().getColor(android.R.color.white));
-    importanceBadge.setBackground(importanceBackground);
     importanceBadge
         .getViewTreeObserver()
         .addOnGlobalLayoutListener(
@@ -771,6 +771,7 @@ public class AnswerFragment extends Fragment
   public void onPause() {
     super.onPause();
     LogUtil.i("AnswerFragment.onPause", null);
+    inCallScreenDelegate.onInCallScreenPaused();
   }
 
   @Override
@@ -941,6 +942,9 @@ public class AnswerFragment extends Fragment
 
   private void showMessageMenu() {
     LogUtil.i("AnswerFragment.showMessageMenu", "Show sms menu.");
+    if (getChildFragmentManager().isDestroyed()) {
+      return;
+    }
 
     textResponsesFragment = SmsBottomSheetFragment.newInstance(textResponses);
     textResponsesFragment.show(getChildFragmentManager(), null);
@@ -1019,7 +1023,7 @@ public class AnswerFragment extends Fragment
       return;
     }
 
-    if (!getResources().getBoolean(R.bool.answer_important_call_allowed)) {
+    if (!getResources().getBoolean(R.bool.answer_important_call_allowed) || primaryInfo.isSpam) {
       importanceBadge.setVisibility(View.GONE);
       return;
     }

@@ -29,14 +29,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
-import com.android.dialer.callcomposer.nano.CallComposerContact;
-import com.android.dialer.calldetails.nano.CallDetailsEntries;
-import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.protos.ProtoParsers;
+import java.util.List;
 
 /** Displays the details of a specific call log entry. */
 public class CallDetailsActivity extends AppCompatActivity implements OnMenuItemClickListener {
@@ -45,7 +45,7 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   private static final String EXTRA_CONTACT = "contact";
   private static final String TASK_DELETE = "task_delete";
 
-  private CallDetailsEntry[] entries;
+  private List<CallDetailsEntry> entries;
 
   public static Intent newInstance(
       Context context, @NonNull CallDetailsEntries details, @NonNull CallComposerContact contact) {
@@ -76,13 +76,13 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   }
 
   private void onHandleIntent(Intent intent) {
-    Bundle arguments = intent.getExtras();
     CallComposerContact contact =
-        ProtoParsers.getFromInstanceState(arguments, EXTRA_CONTACT, new CallComposerContact());
+        ProtoParsers.getTrusted(intent, EXTRA_CONTACT, CallComposerContact.getDefaultInstance());
     entries =
-        ProtoParsers.getFromInstanceState(
-                arguments, EXTRA_CALL_DETAILS_ENTRIES, new CallDetailsEntries())
-            .entries;
+        ProtoParsers.getTrusted(
+                intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())
+            .getEntriesList();
+
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries));
@@ -110,7 +110,7 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
         if (callIds.length() != 0) {
           callIds.append(",");
         }
-        callIds.append(entry.callId);
+        callIds.append(entry.getCallId());
       }
       this.callIds = callIds.toString();
     }

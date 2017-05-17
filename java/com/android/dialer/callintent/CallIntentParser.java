@@ -19,35 +19,35 @@ package com.android.dialer.callintent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
-import com.android.dialer.common.Assert;
-import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
-import com.google.protobuf.nano.MessageNano;
+import com.android.dialer.protos.ProtoParsers;
 
 /** Parses data for a call extra to get any dialer specific app data. */
 public class CallIntentParser {
+  static final String EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER =
+      "com.android.dialer.callintent.CALL_SPECIFIC_APP_DATA_WRAPPER";
   @Nullable
   public static CallSpecificAppData getCallSpecificAppData(@Nullable Bundle extras) {
     if (extras == null) {
       return null;
     }
 
-    byte[] flatArray = extras.getByteArray(Constants.EXTRA_CALL_SPECIFIC_APP_DATA);
-    if (flatArray == null) {
+    if (!extras.containsKey(Constants.EXTRA_CALL_SPECIFIC_APP_DATA)) {
       return null;
     }
-    try {
-      return CallSpecificAppData.parseFrom(flatArray);
-    } catch (InvalidProtocolBufferNanoException e) {
-      Assert.fail("unexpected exception: " + e);
-      return null;
-    }
+
+    return ProtoParsers.getTrusted(
+        extras.getBundle(Constants.EXTRA_CALL_SPECIFIC_APP_DATA),
+        EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER,
+        CallSpecificAppData.getDefaultInstance());
   }
 
   public static void putCallSpecificAppData(
       @NonNull Bundle extras, @NonNull CallSpecificAppData callSpecificAppData) {
-    extras.putByteArray(
-        Constants.EXTRA_CALL_SPECIFIC_APP_DATA, MessageNano.toByteArray(callSpecificAppData));
+    // We wrap our bundle for consumers that may not have access to ProtoParsers in their class
+    // loader. This is necessary to prevent ClassNotFoundException's
+    Bundle wrapperBundle = new Bundle();
+    ProtoParsers.put(wrapperBundle, EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER, callSpecificAppData);
+    extras.putBundle(Constants.EXTRA_CALL_SPECIFIC_APP_DATA, wrapperBundle);
   }
 
   private CallIntentParser() {}

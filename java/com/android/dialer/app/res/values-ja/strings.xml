@@ -42,6 +42,8 @@
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"コールバック"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"メッセージ"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g> さん: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> 宛に発信"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"ボイスメールの番号が不明です"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>件のボイスメール</item>
       <item quantity="one">1件のボイスメール</item>
@@ -97,6 +99,11 @@
     <string name="voicemail" msgid="8899540969000957954">"ボイスメール"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g>秒"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g>分<xliff:g id="SECONDS">%s</xliff:g>秒"</string>
+    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"ボイスメール"</string>
+    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ボイスメール"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"はい"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"いいえ"</string>
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"選択した<xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>を削除しますか？"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g>、<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g> 分 <xliff:g id="SECONDS">%2$02d</xliff:g> 秒"</string>
@@ -192,6 +199,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"着信のブロック"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ボイスメール"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"着信のブロックは一時的にOFFです"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、着信のブロックは無効になっています。48時間経過すると、着信のブロックは自動的に有効になります。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"番号をインポート"</string>
@@ -221,4 +230,6 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"番号のブロックを解除"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"スパム"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> さんはオフラインのため、通話を受信できません"</string>
+    <!-- no translation found for about_phone_label (582991354677973731) -->
+    <skip />
 </resources>

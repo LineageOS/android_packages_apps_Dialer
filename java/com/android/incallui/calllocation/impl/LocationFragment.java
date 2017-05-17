@@ -30,8 +30,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.incallui.baseui.BaseFragment;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -88,6 +88,7 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    LogUtil.enterBlock("LocationFragment.onCreateView");
     final View view = inflater.inflate(R.layout.location_fragment, container, false);
     viewAnimator = (ViewAnimator) view.findViewById(R.id.location_view_animator);
     locationMap = (ImageView) view.findViewById(R.id.location_map);
@@ -95,11 +96,6 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
     addressLine2 = (TextView) view.findViewById(R.id.address_line_two);
     latLongLine = (TextView) view.findViewById(R.id.lat_long_line);
     locationLayout = (ViewGroup) view.findViewById(R.id.location_layout);
-    view.setOnClickListener(
-        v -> {
-          LogUtil.enterBlock("LocationFragment.onCreateView");
-          launchMap();
-        });
     return view;
   }
 
@@ -180,6 +176,7 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
     handler.removeCallbacks(dataTimeoutRunnable);
     if (viewAnimator.getDisplayedChild() != LOCATION_VIEW_INDEX) {
       viewAnimator.setDisplayedChild(LOCATION_VIEW_INDEX);
+      viewAnimator.setOnClickListener(v -> launchMap());
     }
   }
 

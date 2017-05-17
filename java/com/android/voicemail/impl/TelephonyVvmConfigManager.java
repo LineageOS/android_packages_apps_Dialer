@@ -16,11 +16,12 @@
 
 package com.android.voicemail.impl;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.voicemail.impl.utils.XmlUtils;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,22 +39,24 @@ public class TelephonyVvmConfigManager {
 
   private static final String TAG_PERSISTABLEMAP = "pbundle_as_map";
 
-  static final String KEY_MCCMNC = "mccmnc";
+  @VisibleForTesting static final String KEY_MCCMNC = "mccmnc";
+
+  private static final String KEY_FEATURE_FLAG_NAME = "feature_flag_name";
 
   private static Map<String, PersistableBundle> sCachedConfigs;
 
   private final Map<String, PersistableBundle> mConfigs;
 
-  public TelephonyVvmConfigManager(Resources resources) {
+  public TelephonyVvmConfigManager(Context context) {
     if (sCachedConfigs == null) {
-      sCachedConfigs = loadConfigs(resources.getXml(R.xml.vvm_config));
+      sCachedConfigs = loadConfigs(context, context.getResources().getXml(R.xml.vvm_config));
     }
     mConfigs = sCachedConfigs;
   }
 
   @VisibleForTesting
-  TelephonyVvmConfigManager(XmlPullParser parser) {
-    mConfigs = loadConfigs(parser);
+  TelephonyVvmConfigManager(Context context, XmlPullParser parser) {
+    mConfigs = loadConfigs(context, parser);
   }
 
   @Nullable
@@ -64,7 +67,7 @@ public class TelephonyVvmConfigManager {
     return mConfigs.get(mccMnc);
   }
 
-  private static Map<String, PersistableBundle> loadConfigs(XmlPullParser parser) {
+  private static Map<String, PersistableBundle> loadConfigs(Context context, XmlPullParser parser) {
     Map<String, PersistableBundle> configs = new ArrayMap<>();
     try {
       ArrayList list = readBundleList(parser);
@@ -73,6 +76,13 @@ public class TelephonyVvmConfigManager {
           throw new IllegalArgumentException("PersistableBundle expected, got " + object);
         }
         PersistableBundle bundle = (PersistableBundle) object;
+
+        if (bundle.containsKey(KEY_FEATURE_FLAG_NAME)
+            && !ConfigProviderBindings.get(context)
+                .getBoolean(bundle.getString(KEY_FEATURE_FLAG_NAME), false)) {
+          continue;
+        }
+
         String[] mccMncs = bundle.getStringArray(KEY_MCCMNC);
         if (mccMncs == null) {
           throw new IllegalArgumentException("MCCMNC is null");

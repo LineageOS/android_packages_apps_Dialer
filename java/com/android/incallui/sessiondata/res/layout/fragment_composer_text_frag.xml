@@ -15,47 +15,47 @@
   ~ limitations under the License
   -->
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:paddingTop="16dp"
-  android:paddingStart="16dp"
-  android:paddingEnd="24dp"
-  android:orientation="horizontal">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:paddingStart="@dimen/answer_message_margin_start_end"
+    android:paddingEnd="@dimen/answer_message_margin_start_end">
+
+  <LinearLayout
+      android:id="@id/answer_message_container"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="@dimen/answer_message_contents_margin_top"
+      android:layout_alignTop="@+id/answer_message_avatar"
+      android:layout_marginBottom="@dimen/answer_data_elevation"
+      android:elevation="@dimen/answer_data_elevation"
+      android:background="@drawable/answer_data_background"
+      android:outlineProvider="background">
+
+    <FrameLayout
+        android:id="@id/answer_message_frag"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+    <TextView
+        android:id="@id/answer_message_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.Message"/>
+  </LinearLayout>
 
   <ImageView
-    android:id="@id/answer_message_avatar"
-    android:layout_width="@dimen/answer_message_avatar_size"
-    android:layout_height="@dimen/answer_message_avatar_size"
-    android:layout_rowSpan="2"
-    android:elevation="@dimen/answer_data_elevation"/>
-
-  <TextView
-    android:id="@id/answer_message_text"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginStart="8dp"
-    android:layout_columnWeight="1"
-    android:layout_rowWeight="1"
-    android:padding="18dp"
-    android:background="@drawable/answer_data_background"
-    android:elevation="@dimen/answer_data_elevation"
-    android:gravity="center_vertical"
-    android:maxLines="2"
-    android:textAppearance="@style/Dialer.Incall.TextAppearance.Message"/>
-
-  <FrameLayout
-    android:id="@id/answer_message_frag"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginStart="8dp"
-    android:layout_column="1"
-    android:layout_columnWeight="1"
-    android:layout_row="1"
-    android:layout_rowWeight="1"
-    android:background="@drawable/answer_data_background"
-    android:elevation="@dimen/answer_data_elevation"
-    android:outlineProvider="background"/>
-</GridLayout>
+      android:id="@id/answer_message_avatar"
+      android:layout_width="@dimen/answer_message_avatar_size"
+      android:layout_height="@dimen/answer_message_avatar_size"
+      android:layout_centerHorizontal="true"
+      android:elevation="@dimen/answer_avatar_elevation"/>
+</RelativeLayout>

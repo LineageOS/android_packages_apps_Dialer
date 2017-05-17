@@ -31,6 +31,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
+import android.support.v4.util.Pair;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -41,9 +42,10 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -55,7 +57,7 @@ import java.util.List;
 import java.util.Set;
 
 /** Creates a notification for calls that the user missed (neither answered nor rejected). */
-public class MissedCallNotifier {
+public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
   /** The tag used to identify notifications from this class. */
   static final String NOTIFICATION_TAG = "MissedCallNotifier";
@@ -72,11 +74,15 @@ public class MissedCallNotifier {
     this.callLogNotificationsQueryHelper = callLogNotificationsQueryHelper;
   }
 
-  /** Returns an instance of {@link MissedCallNotifier}. */
-  public static MissedCallNotifier getInstance(Context context) {
-    CallLogNotificationsQueryHelper callLogNotificationsQueryHelper =
-        CallLogNotificationsQueryHelper.getInstance(context);
-    return new MissedCallNotifier(context, callLogNotificationsQueryHelper);
+  static MissedCallNotifier getIstance(Context context) {
+    return new MissedCallNotifier(context, CallLogNotificationsQueryHelper.getInstance(context));
+  }
+
+  @Nullable
+  @Override
+  public Void doInBackground(@Nullable Pair<Integer, String> input) throws Throwable {
+    updateMissedCallNotification(input.first, input.second);
+    return null;
   }
 
   /**
@@ -88,8 +94,9 @@ public class MissedCallNotifier {
    * @param number the phone number of the most recent call to display if the call log cannot be
    *     accessed. May be null if unknown.
    */
+  @VisibleForTesting
   @WorkerThread
-  public void updateMissedCallNotification(int count, @Nullable String number) {
+  void updateMissedCallNotification(int count, @Nullable String number) {
     final int titleResId;
     CharSequence expandedText; // The text in the notification's line 1 and 2.
 
@@ -375,7 +382,7 @@ public class MissedCallNotifier {
   private PendingIntent createCallBackPendingIntent(String number, @NonNull Uri callUri) {
     Intent intent = new Intent(context, CallLogNotificationsService.class);
     intent.setAction(CallLogNotificationsService.ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION);
-    intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
+    intent.putExtra(MissedCallNotificationReceiver.EXTRA_NOTIFICATION_PHONE_NUMBER, number);
     intent.setData(callUri);
     // Use FLAG_UPDATE_CURRENT to make sure any previous pending intent is updated with the new
     // extra.

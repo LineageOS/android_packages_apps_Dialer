@@ -23,6 +23,7 @@ import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
+import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.io.IOException;
@@ -79,6 +80,9 @@ public final class PersistentLogger {
                 loggerThreadHandler.removeMessages(MESSAGE_FLUSH);
                 List<byte[]> messages = new ArrayList<>();
                 messageQueue.drainTo(messages);
+                if (!UserManagerCompat.isUserUnlocked(context)) {
+                  return true;
+                }
                 try {
                   fileHandler.writeLogs(messages);
                 } catch (IOException e) {

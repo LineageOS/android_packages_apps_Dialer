@@ -19,13 +19,13 @@ package com.android.dialer.enrichedcall.stub;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.calldetails.nano.CallDetailsEntries;
-import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
-import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
+import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
 import com.android.dialer.multimedia.MultimediaData;
 import java.util.List;
@@ -74,7 +74,8 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
 
   @Nullable
   @Override
-  public Session getSession(@NonNull String uniqueCallId, @NonNull String number) {
+  public Session getSession(
+      @NonNull String uniqueCallId, @NonNull String number, @Nullable Filter filter) {
     return null;
   }
 
@@ -82,6 +83,18 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   @Override
   public Session getSession(long sessionId) {
     return null;
+  }
+
+  @NonNull
+  @Override
+  public Filter createIncomingCallComposerFilter() {
+    return session -> false;
+  }
+
+  @NonNull
+  @Override
+  public Filter createOutgoingCallComposerFilter() {
+    return session -> false;
   }
 
   @Nullable
@@ -122,7 +135,9 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   public void unregisterVideoShareListener(@NonNull VideoShareListener listener) {}
 
   @Override
-  public void onIncomingVideoShareInvite(long sessionId, @NonNull String number) {}
+  public boolean onIncomingVideoShareInvite(long sessionId, @NonNull String number) {
+    return false;
+  }
 
   @Override
   public long startVideoShareSession(String number) {

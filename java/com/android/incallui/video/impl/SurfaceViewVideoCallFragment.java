@@ -184,13 +184,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
       LayoutInflater layoutInflater, @Nullable ViewGroup viewGroup, @Nullable Bundle bundle) {
     LogUtil.i("SurfaceViewVideoCallFragment.onCreateView", null);
 
-    View view =
-        layoutInflater.inflate(
-            isLandscape()
-                ? R.layout.frag_videocall_land_surfaceview
-                : R.layout.frag_videocall_surfaceview,
-            viewGroup,
-            false);
+    View view = layoutInflater.inflate(R.layout.frag_videocall_surfaceview, viewGroup, false);
     contactGridManager =
         new ContactGridManager(view, null /* no avatar */, 0, false /* showAnonymousAvatar */);
 
@@ -335,6 +329,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   public void onPause() {
     super.onPause();
     LogUtil.i("SurfaceViewVideoCallFragment.onPause", null);
+    inCallScreenDelegate.onInCallScreenPaused();
   }
 
   @Override
@@ -638,12 +633,6 @@ public class SurfaceViewVideoCallFragment extends Fragment
         "showPreview: %b, shouldShowRemote: %b",
         shouldShowPreview,
         shouldShowRemote);
-
-    if (this.shouldShowPreview == shouldShowPreview
-        && this.shouldShowRemote == shouldShowRemote
-        && this.isRemotelyHeld == isRemotelyHeld) {
-      return;
-    }
 
     this.shouldShowPreview = shouldShowPreview;
     this.shouldShowRemote = shouldShowRemote;

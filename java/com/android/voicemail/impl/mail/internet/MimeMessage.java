@@ -34,12 +34,14 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Stack;
 import java.util.regex.Pattern;
-import org.apache.james.mime4j.BodyDescriptor;
-import org.apache.james.mime4j.ContentHandler;
-import org.apache.james.mime4j.EOLConvertingInputStream;
-import org.apache.james.mime4j.MimeStreamParser;
-import org.apache.james.mime4j.field.DateTimeField;
-import org.apache.james.mime4j.field.Field;
+import org.apache.james.mime4j.MimeException;
+import org.apache.james.mime4j.dom.field.DateTimeField;
+import org.apache.james.mime4j.field.DefaultFieldParser;
+import org.apache.james.mime4j.io.EOLConvertingInputStream;
+import org.apache.james.mime4j.parser.ContentHandler;
+import org.apache.james.mime4j.parser.MimeStreamParser;
+import org.apache.james.mime4j.stream.BodyDescriptor;
+import org.apache.james.mime4j.stream.Field;
 
 /**
  * An implementation of Message that stores all of its metadata in RFC 822 and RFC 2045 style
@@ -64,7 +66,6 @@ public class MimeMessage extends Message {
   private Body mBody;
   protected int mSize;
   private boolean mInhibitLocalMessageId = false;
-  private boolean mComplete = true;
 
   // Shared random source for generating local message-id values
   private static final java.util.Random sRandom = new java.util.Random();
@@ -114,7 +115,7 @@ public class MimeMessage extends Message {
    * @throws IOException
    * @throws MessagingException
    */
-  public MimeMessage(InputStream in) throws IOException, MessagingException {
+  public MimeMessage(InputStream in) throws IOException, MessagingException, MimeException {
     parse(in);
   }
 
@@ -136,17 +137,9 @@ public class MimeMessage extends Message {
     return parser;
   }
 
-  protected void parse(InputStream in) throws IOException, MessagingException {
+  public void parse(InputStream in) throws IOException, MessagingException, MimeException {
     final MimeStreamParser parser = init();
     parser.parse(new EOLConvertingInputStream(in));
-    mComplete = !parser.getPrematureEof();
-  }
-
-  public void parse(InputStream in, EOLConvertingInputStream.Callback callback)
-      throws IOException, MessagingException {
-    final MimeStreamParser parser = init();
-    parser.parse(new EOLConvertingInputStream(in, getSize(), callback));
-    mComplete = !parser.getPrematureEof();
   }
 
   /**
@@ -171,7 +164,8 @@ public class MimeMessage extends Message {
       try {
         DateTimeField field =
             (DateTimeField)
-                Field.parse("Date: " + MimeUtility.unfoldAndDecode(getFirstHeader("Date")));
+                DefaultFieldParser.parse(
+                    "Date: " + MimeUtility.unfoldAndDecode(getFirstHeader("Date")));
         mSentDate = field.getDate();
         // TODO: We should make it more clear what exceptions can be thrown here,
         // and whether they reflect a normal or error condition.
@@ -184,7 +178,7 @@ public class MimeMessage extends Message {
       try {
         DateTimeField field =
             (DateTimeField)
-                Field.parse(
+                DefaultFieldParser.parse(
                     "Date: " + MimeUtility.unfoldAndDecode(getFirstHeader("Delivery-date")));
         mSentDate = field.getDate();
         // TODO: We should make it more clear what exceptions can be thrown here,
@@ -226,10 +220,6 @@ public class MimeMessage extends Message {
       // remove optionally surrounding brackets.
       return REMOVE_OPTIONAL_BRACKETS.matcher(contentId).replaceAll("$1");
     }
-  }
-
-  public boolean isComplete() {
-    return mComplete;
   }
 
   @Override
@@ -577,10 +567,10 @@ public class MimeMessage extends Message {
     }
 
     @Override
-    public void field(String fieldData) {
+    public void field(Field rawField) {
       expect(Part.class);
       try {
-        final String[] tokens = fieldData.split(":", 2);
+        final String[] tokens = rawField.getRaw().toString().split(":", 2);
         ((Part) stack.peek()).addHeader(tokens[0], tokens[1].trim());
       } catch (MessagingException me) {
         throw new Error(me);

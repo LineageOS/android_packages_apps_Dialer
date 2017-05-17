@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.SearchSnippets;
+import android.support.annotation.IntDef;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Spannable;
@@ -51,10 +52,13 @@ import com.android.contacts.common.ContactStatusUtil;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.format.TextHighlighter;
+import com.android.contacts.common.list.PhoneNumberListAdapter.Listener;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.SearchUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.util.ViewUtil;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -74,6 +78,16 @@ import java.util.regex.Pattern;
  * contact's data and a divider between contact view.
  */
 public class ContactListItemView extends ViewGroup implements SelectionBoundsAdjuster {
+
+  /** IntDef for indices of ViewPager tabs. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({NONE, VIDEO, CALL_AND_SHARE})
+  public @interface CallToAction {}
+
+  public static final int NONE = 0;
+  public static final int VIDEO = 1;
+  public static final int CALL_AND_SHARE = 2;
+
   private static final Pattern SPLIT_PATTERN =
       Pattern.compile("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})|[\\w]+");
   static final char SNIPPET_START_MATCH = '[';
@@ -92,8 +106,8 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private int mNameTextViewTextSize;
   private int mHeaderWidth;
   private Drawable mActivatedBackgroundDrawable;
-  private int mVideoCallIconSize = 32;
-  private int mVideoCallIconMargin = 16;
+  private int mCallToActionSize = 32;
+  private int mCallToActionMargin = 16;
   // Set in onLayout. Represent left and right position of the View on the screen.
   private int mLeftOffset;
   private int mRightOffset;
@@ -106,12 +120,10 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private ArrayList<HighlightSequence> mNumberHighlightSequence;
   // Highlighting prefix for names.
   private String mHighlightedPrefix;
-  /** Used to notify listeners when a video call icon is clicked. */
-  private PhoneNumberListAdapter.Listener mPhoneNumberListAdapterListener;
-  /** Indicates whether to show the "video call" icon, used to initiate a video call. */
-  private boolean mShowVideoCallIcon = false;
   /** Indicates whether the view should leave room for the "video call" icon. */
-  private boolean mSupportVideoCallIcon = false;
+  private boolean mSupportVideoCall;
+  /** Indicates whether the view should leave room for the "call and share" icon. */
+  private boolean mSupportCallAndShare;
 
   private PhotoPosition mPhotoPosition = getDefaultPhotoPosition(false /* normal/non opposite */);
   // Header layout data
@@ -127,7 +139,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private TextView mSnippetView;
   private TextView mStatusView;
   private ImageView mPresenceIcon;
-  private ImageView mVideoCallIcon;
+  private ImageView mCallToAction;
   private ImageView mWorkProfileIcon;
   private ColorStateList mSecondaryTextColor;
   private int mDefaultPhotoViewSize = 0;
@@ -168,20 +180,24 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private boolean mAdjustSelectionBoundsEnabled = true;
   private Rect mBoundsWithoutHeader = new Rect();
   private CharSequence mUnknownNameText;
-  private int mPosition;
 
   public ContactListItemView(Context context) {
     super(context);
 
     mTextHighlighter = new TextHighlighter(Typeface.BOLD);
-    mNameHighlightSequence = new ArrayList<HighlightSequence>();
-    mNumberHighlightSequence = new ArrayList<HighlightSequence>();
+    mNameHighlightSequence = new ArrayList<>();
+    mNumberHighlightSequence = new ArrayList<>();
   }
 
-  public ContactListItemView(Context context, AttributeSet attrs, boolean supportVideoCallIcon) {
+  public ContactListItemView(
+      Context context,
+      AttributeSet attrs,
+      boolean supportVideoCallIcon,
+      boolean supportCallAndShare) {
     this(context, attrs);
 
-    mSupportVideoCallIcon = supportVideoCallIcon;
+    mSupportVideoCall = supportVideoCallIcon;
+    mSupportCallAndShare = supportCallAndShare;
   }
 
   public ContactListItemView(Context context, AttributeSet attrs) {
@@ -197,7 +213,6 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
               R.styleable.ContactListItemView_list_item_height, mPreferredHeight);
       mActivatedBackgroundDrawable =
           a.getDrawable(R.styleable.ContactListItemView_activated_background);
-
       mGapBetweenImageAndText =
           a.getDimensionPixelOffset(
               R.styleable.ContactListItemView_list_item_gap_between_image_and_text,
@@ -235,13 +250,13 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
               a.getDimension(
                   R.styleable.ContactListItemView_list_item_name_text_size,
                   (int) getResources().getDimension(R.dimen.contact_browser_list_item_text_size));
-      mVideoCallIconSize =
+      mCallToActionSize =
           a.getDimensionPixelOffset(
-              R.styleable.ContactListItemView_list_item_video_call_icon_size, mVideoCallIconSize);
-      mVideoCallIconMargin =
+              R.styleable.ContactListItemView_list_item_video_call_icon_size, mCallToActionSize);
+      mCallToActionMargin =
           a.getDimensionPixelOffset(
               R.styleable.ContactListItemView_list_item_video_call_icon_margin,
-              mVideoCallIconMargin);
+              mCallToActionMargin);
 
       setPaddingRelative(
           a.getDimensionPixelOffset(R.styleable.ContactListItemView_list_item_padding_left, 0),
@@ -266,13 +281,13 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mActivatedBackgroundDrawable.setCallback(this);
     }
 
-    mNameHighlightSequence = new ArrayList<HighlightSequence>();
-    mNumberHighlightSequence = new ArrayList<HighlightSequence>();
+    mNameHighlightSequence = new ArrayList<>();
+    mNumberHighlightSequence = new ArrayList<>();
 
     setLayoutDirection(View.LAYOUT_DIRECTION_LOCALE);
   }
 
-  public static final PhotoPosition getDefaultPhotoPosition(boolean opposite) {
+  public static PhotoPosition getDefaultPhotoPosition(boolean opposite) {
     final Locale locale = Locale.getDefault();
     final int layoutDirection = TextUtils.getLayoutDirectionFromLocale(locale);
     switch (layoutDirection) {
@@ -310,45 +325,43 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   }
 
   /**
-   * Sets whether the video calling icon is shown. For the video calling icon to be shown, {@link
-   * #mSupportVideoCallIcon} must be {@code true}.
+   * Sets whether the call to action is shown. For the {@link CallToAction} to be shown, it must be
+   * supported as well.
    *
-   * @param showVideoCallIcon {@code true} if the video calling icon is shown, {@code false}
-   *     otherwise.
-   * @param listener Listener to notify when the video calling icon is clicked.
-   * @param position The position in the adapater of the video calling icon.
+   * @param action {@link CallToAction} you want to display (if it's supported).
+   * @param listener Listener to notify when the call to action is clicked.
+   * @param position The position in the adapter of the call to action.
    */
-  public void setShowVideoCallIcon(
-      boolean showVideoCallIcon, PhoneNumberListAdapter.Listener listener, int position) {
-    mShowVideoCallIcon = showVideoCallIcon;
-    mPhoneNumberListAdapterListener = listener;
-    mPosition = position;
-
-    if (mShowVideoCallIcon) {
-      if (mVideoCallIcon == null) {
-        mVideoCallIcon = new ImageView(getContext());
-        addView(mVideoCallIcon);
-      }
-      mVideoCallIcon.setContentDescription(
-          getContext().getString(R.string.description_search_video_call));
-      mVideoCallIcon.setImageResource(R.drawable.ic_search_video_call);
-      mVideoCallIcon.setScaleType(ScaleType.CENTER);
-      mVideoCallIcon.setVisibility(View.VISIBLE);
-      mVideoCallIcon.setOnClickListener(
-          new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              // Inform the adapter that the video calling icon was clicked.
-              if (mPhoneNumberListAdapterListener != null) {
-                mPhoneNumberListAdapterListener.onVideoCallIconClicked(mPosition);
-              }
-            }
-          });
+  public void setCallToAction(@CallToAction int action, Listener listener, int position) {
+    int drawable;
+    int description;
+    OnClickListener onClickListener;
+    if (action == CALL_AND_SHARE && mSupportCallAndShare) {
+      drawable = R.drawable.ic_call_and_share;
+      description = R.string.description_search_video_call;
+      onClickListener = v -> listener.onCallAndShareIconClicked(position);
+    } else if (action == VIDEO && mSupportVideoCall) {
+      drawable = R.drawable.ic_search_video_call;
+      description = R.string.description_search_call_and_share;
+      onClickListener = v -> listener.onVideoCallIconClicked(position);
     } else {
-      if (mVideoCallIcon != null) {
-        mVideoCallIcon.setVisibility(View.GONE);
+      if (mCallToAction != null) {
+        mCallToAction.setVisibility(View.GONE);
+        mCallToAction.setOnClickListener(null);
       }
+      return;
     }
+
+    if (mCallToAction == null) {
+      mCallToAction = new ImageView(getContext());
+      mCallToAction.setLayoutParams(new LayoutParams(mCallToActionSize, mCallToActionSize));
+      mCallToAction.setScaleType(ScaleType.CENTER);
+      addView(mCallToAction);
+    }
+    mCallToAction.setContentDescription(getContext().getString(description));
+    mCallToAction.setOnClickListener(onClickListener);
+    mCallToAction.setImageResource(drawable);
+    mCallToAction.setVisibility(View.VISIBLE);
   }
 
   /**
@@ -356,11 +369,23 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
    * actually showing an icon. Support for the video calling icon ensures that the layout leaves
    * space for the video icon, should it be shown.
    *
-   * @param supportVideoCallIcon {@code true} if the video call icon is supported, {@code false}
+   * @param supportVideoCall {@code true} if the video call icon is supported, {@code false}
    *     otherwise.
    */
-  public void setSupportVideoCallIcon(boolean supportVideoCallIcon) {
-    mSupportVideoCallIcon = supportVideoCallIcon;
+  public void setSupportVideoCallIcon(boolean supportVideoCall) {
+    mSupportVideoCall = supportVideoCall;
+  }
+
+  /**
+   * Sets whether the view supports a call and share icon. This is independent of whether the view
+   * is actually showing an icon. Support for the icon ensures that the layout leaves space for it,
+   * should it be shown.
+   *
+   * @param supportCallAndShare {@code true} if the call and share icon is supported, {@code false}
+   *     otherwise.
+   */
+  public void setSupportCallAndShareIcon(boolean supportCallAndShare) {
+    mSupportCallAndShare = supportCallAndShare;
   }
 
   @Override
@@ -398,8 +423,8 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       effectiveWidth -= mHeaderWidth + mGapBetweenImageAndText;
     }
 
-    if (mSupportVideoCallIcon) {
-      effectiveWidth -= (mVideoCallIconSize + mVideoCallIconMargin);
+    if (mSupportVideoCall || mSupportCallAndShare) {
+      effectiveWidth -= (mCallToActionSize + mCallToActionMargin);
     }
 
     // Go over all visible text views and measure actual width of each of them.
@@ -471,10 +496,10 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mStatusTextViewHeight = mPresenceIcon.getMeasuredHeight();
     }
 
-    if (mSupportVideoCallIcon && isVisible(mVideoCallIcon)) {
-      mVideoCallIcon.measure(
-          MeasureSpec.makeMeasureSpec(mVideoCallIconSize, MeasureSpec.EXACTLY),
-          MeasureSpec.makeMeasureSpec(mVideoCallIconSize, MeasureSpec.EXACTLY));
+    if ((mSupportVideoCall || mSupportCallAndShare) && isVisible(mCallToAction)) {
+      mCallToAction.measure(
+          MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY),
+          MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY));
     }
 
     if (isVisible(mWorkProfileIcon)) {
@@ -529,7 +554,6 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
 
     // Determine the vertical bounds by laying out the header first.
     int topBound = 0;
-    int bottomBound = height;
     int leftBound = getPaddingLeft();
     int rightBound = width - getPaddingRight();
 
@@ -545,7 +569,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       }
       if (mHeaderTextView != null) {
         int headerHeight = mHeaderTextView.getMeasuredHeight();
-        int headerTopBound = (bottomBound + topBound - headerHeight) / 2 + mTextOffsetTop;
+        int headerTopBound = (height + topBound - headerHeight) / 2 + mTextOffsetTop;
 
         mHeaderTextView.layout(
             isLayoutRtl ? rightBound - mHeaderWidth : leftBound,
@@ -560,7 +584,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       }
     }
 
-    mBoundsWithoutHeader.set(left + leftBound, topBound, left + rightBound, bottomBound);
+    mBoundsWithoutHeader.set(left + leftBound, topBound, left + rightBound, height);
     mLeftOffset = left + leftBound;
     mRightOffset = left + rightBound;
     if (mIsSectionHeaderEnabled) {
@@ -580,7 +604,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       // Photo is the left most view. All the other Views should on the right of the photo.
       if (photoView != null) {
         // Center the photo vertically
-        final int photoTop = topBound + (bottomBound - topBound - mPhotoViewHeight) / 2;
+        final int photoTop = topBound + (height - topBound - mPhotoViewHeight) / 2;
         photoView.layout(
             leftBound, photoTop, leftBound + mPhotoViewWidth, photoTop + mPhotoViewHeight);
         leftBound += mPhotoViewWidth + mGapBetweenImageAndText;
@@ -592,7 +616,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       // Photo is the right most view. Right bound should be adjusted that way.
       if (photoView != null) {
         // Center the photo vertically
-        final int photoTop = topBound + (bottomBound - topBound - mPhotoViewHeight) / 2;
+        final int photoTop = topBound + (height - topBound - mPhotoViewHeight) / 2;
         photoView.layout(
             rightBound - mPhotoViewWidth, photoTop, rightBound, photoTop + mPhotoViewHeight);
         rightBound -= (mPhotoViewWidth + mGapBetweenImageAndText);
@@ -605,33 +629,33 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       leftBound += mTextIndent;
     }
 
-    if (mSupportVideoCallIcon) {
-      // Place the video call button at the end of the list (e.g. take into account RTL mode).
-      if (isVisible(mVideoCallIcon)) {
-        // Center the video icon vertically
-        final int videoIconTop = topBound + (bottomBound - topBound - mVideoCallIconSize) / 2;
+    if (mSupportVideoCall || mSupportCallAndShare) {
+      // Place the call to action at the end of the list (e.g. take into account RTL mode).
+      if (isVisible(mCallToAction)) {
+        // Center the icon vertically
+        final int callToActionTop = topBound + (height - topBound - mCallToActionSize) / 2;
 
         if (!isLayoutRtl) {
-          // When photo is on left, video icon is placed on the right edge.
-          mVideoCallIcon.layout(
-              rightBound - mVideoCallIconSize,
-              videoIconTop,
+          // When photo is on left, icon is placed on the right edge.
+          mCallToAction.layout(
+              rightBound - mCallToActionSize,
+              callToActionTop,
               rightBound,
-              videoIconTop + mVideoCallIconSize);
+              callToActionTop + mCallToActionSize);
         } else {
-          // When photo is on right, video icon is placed on the left edge.
-          mVideoCallIcon.layout(
+          // When photo is on right, icon is placed on the left edge.
+          mCallToAction.layout(
               leftBound,
-              videoIconTop,
-              leftBound + mVideoCallIconSize,
-              videoIconTop + mVideoCallIconSize);
+              callToActionTop,
+              leftBound + mCallToActionSize,
+              callToActionTop + mCallToActionSize);
         }
       }
 
       if (mPhotoPosition == PhotoPosition.LEFT) {
-        rightBound -= (mVideoCallIconSize + mVideoCallIconMargin);
+        rightBound -= (mCallToActionSize + mCallToActionMargin);
       } else {
-        leftBound += mVideoCallIconSize + mVideoCallIconMargin;
+        leftBound += mCallToActionSize + mCallToActionMargin;
       }
     }
 
@@ -642,7 +666,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
             + mLabelAndDataViewMaxHeight
             + mSnippetTextViewHeight
             + mStatusTextViewHeight;
-    int textTopBound = (bottomBound + topBound - totalTextHeight) / 2 + mTextOffsetTop;
+    int textTopBound = (height + topBound - totalTextHeight) / 2 + mTextOffsetTop;
 
     // Work Profile icon align top
     int workProfileIconWidth = 0;
@@ -854,7 +878,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     if (!TextUtils.isEmpty(title)) {
       if (mHeaderTextView == null) {
         mHeaderTextView = new TextView(getContext());
-        mHeaderTextView.setTextAppearance(getContext(), R.style.SectionHeaderStyle);
+        mHeaderTextView.setTextAppearance(R.style.SectionHeaderStyle);
         mHeaderTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         addView(mHeaderTextView);
       }
@@ -1014,7 +1038,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
 
       mLabelView.setSingleLine(true);
       mLabelView.setEllipsize(getTextEllipsis());
-      mLabelView.setTextAppearance(getContext(), R.style.TextAppearanceSmall);
+      mLabelView.setTextAppearance(R.style.TextAppearanceSmall);
       if (mPhotoPosition == PhotoPosition.LEFT) {
         mLabelView.setAllCaps(true);
       } else {
@@ -1081,7 +1105,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mDataView = new TextView(getContext());
       mDataView.setSingleLine(true);
       mDataView.setEllipsize(getTextEllipsis());
-      mDataView.setTextAppearance(getContext(), R.style.TextAppearanceSmall);
+      mDataView.setTextAppearance(R.style.TextAppearanceSmall);
       mDataView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
       mDataView.setActivated(isActivated());
       mDataView.setId(R.id.cliv_data_view);
@@ -1117,7 +1141,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mSnippetView = new TextView(getContext());
       mSnippetView.setSingleLine(true);
       mSnippetView.setEllipsize(getTextEllipsis());
-      mSnippetView.setTextAppearance(getContext(), android.R.style.TextAppearance_Small);
+      mSnippetView.setTextAppearance(android.R.style.TextAppearance_Small);
       mSnippetView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
       mSnippetView.setActivated(isActivated());
       addView(mSnippetView);
@@ -1131,7 +1155,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mStatusView = new TextView(getContext());
       mStatusView.setSingleLine(true);
       mStatusView.setEllipsize(getTextEllipsis());
-      mStatusView.setTextAppearance(getContext(), android.R.style.TextAppearance_Small);
+      mStatusView.setTextAppearance(android.R.style.TextAppearance_Small);
       mStatusView.setTextColor(mSecondaryTextColor);
       mStatusView.setActivated(isActivated());
       mStatusView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
@@ -1483,7 +1507,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     }
   }
 
-  private final boolean pointIsInView(float localX, float localY) {
+  private boolean pointIsInView(float localX, float localY) {
     return localX >= mLeftOffset
         && localX < mRightOffset
         && localY >= 0

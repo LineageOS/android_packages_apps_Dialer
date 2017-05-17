@@ -208,8 +208,8 @@ public class InCallFragment extends Fragment
   }
 
   @Override
-  public void onDestroy() {
-    super.onDestroy();
+  public void onDestroyView() {
+    super.onDestroyView();
     inCallScreenDelegate.onInCallScreenUnready();
   }
 
@@ -267,14 +267,17 @@ public class InCallFragment extends Fragment
       adapter.setAttachments(multimediaData);
     }
 
-    if (adapter.getCount() > 1) {
+    if (adapter.getCount() > 1 && getResources().getInteger(R.integer.incall_num_rows) > 1) {
       paginator.setVisibility(View.VISIBLE);
       paginator.setupWithViewPager(pager);
+      pager.setSwipingLocked(false);
       if (!stateRestored) {
         handler.postDelayed(pagerRunnable, 4_000);
       } else {
-        paginator.setVisibility(View.GONE);
+        pager.setCurrentItem(adapter.getButtonGridPosition(), false /* animateScroll */);
       }
+    } else {
+      paginator.setVisibility(View.GONE);
     }
   }
 

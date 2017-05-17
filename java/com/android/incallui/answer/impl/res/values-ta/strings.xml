@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"உள்வரும் அழைப்பிற்குப் பதிலளித்து, செயலில் உள்ள அழைப்பை முடிக்கும்"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"வீடியோ முடக்கப்பட்டுள்ளது"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"பதிலளிக்க, இரு விரல்களால் மேலே ஸ்வைப் செய்யவும். நிராகரிக்க, இரு விரல்களால் கீழே ஸ்வைப் செய்யவும்."</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"முக்கியமான அழைப்பு"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

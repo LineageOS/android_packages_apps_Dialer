@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"Prevucite od ikone da biste odbili porukom"</string>
+    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Prevucite od ikone da biste odgovorili audio pozivom"</string>
+    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Prevucite nagore da biste odgovorili i zadržali poziv koji je u toku"</string>
+    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Prevucite nagore da biste odgovorili i završili poziv koji je na čekanju"</string>
+    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Prevucite od ikone da biste se javili i završili poziv koji je u toku"</string>
+    <string name="call_incoming_message_custom" msgid="5819492800418293238">"Napišite sami…"</string>
+    <string name="call_incoming_audio_handset" msgid="2299009191401671619">"Telefon"</string>
+    <string name="call_incoming_audio_speakerphone" msgid="5632622369522427991">"Spikerfon"</string>
+    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"Napišite sami…"</string>
+    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"Otkaži"</string>
+    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Pošalji"</string>
+    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Odbijte ovaj poziv porukom"</string>
+    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Odgovorite audio pozivom"</string>
+    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Javite se i završite poziv koji je u toku"</string>
+    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Odbijte porukom"</string>
+    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Odgovorite audio pozivom"</string>
+    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Javite se i završite poziv koji je u toku"</string>
+    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Kamera je isključena"</string>
+    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Prevucite nagore pomoću dva prsta da biste odgovorili. Prevucite nadole pomoću dva prsta da biste odbili."</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
+</resources>

@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"음성사서함(<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"음성사서함"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"진동"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"진동"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"소리"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"고급 설정"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"시각적 음성사서함"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"추가 백업 및 저장용량"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" 현재 테스트 중인 "<b><i>"실험적 기능입니다"</i></b>". 이 기능으로 인해 음성사서함 서버에서 메시지가 삭제될 수도 있습니다. 또한 Google에서는 추후 이 기능이 지원된다고 보장할 수 없습니다. 하지만 이 기능에 관해 의견을 주시면 감사하겠습니다."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN 설정"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN 변경"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN을 변경하려면 시각적 음성사서함이 사용 설정되어 있어야 합니다."</string>

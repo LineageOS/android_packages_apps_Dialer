@@ -26,7 +26,6 @@ import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
-import android.telephony.VisualVoicemailService;
 import android.telephony.VisualVoicemailSmsFilterSettings;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -108,8 +107,7 @@ public class OmtpVvmCarrierConfigHelper {
 
     mCarrierConfig = getCarrierConfig(telephonyManager);
     mTelephonyConfig =
-        new TelephonyVvmConfigManager(context.getResources())
-            .getConfig(telephonyManager.getSimOperator());
+        new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
 
     mVvmType = getVvmType();
     mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
@@ -234,9 +232,7 @@ public class OmtpVvmCarrierConfigHelper {
     return (String) getValue(KEY_VVM_DESTINATION_NUMBER_STRING);
   }
 
-  /**
-   * @return Port to start a SSL IMAP connection directly.
-   */
+  /** @return Port to start a SSL IMAP connection directly. */
   public int getSslPort() {
     Assert.checkArgument(isValid());
     return (int) getValue(KEY_VVM_SSL_PORT_NUMBER_INT, 0);
@@ -328,7 +324,7 @@ public class OmtpVvmCarrierConfigHelper {
 
   public void activateSmsFilter() {
     Assert.checkArgument(isValid());
-    VisualVoicemailService.setSmsFilterSettings(
+    TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings(
         mContext,
         getPhoneAccountHandle(),
         new VisualVoicemailSmsFilterSettings.Builder().setClientPrefix(getClientPrefix()).build());
@@ -336,9 +332,12 @@ public class OmtpVvmCarrierConfigHelper {
 
   public void startDeactivation() {
     Assert.checkArgument(isValid());
+    VvmLog.i(TAG, "startDeactivation");
     if (!isLegacyModeEnabled()) {
       // SMS should still be filtered in legacy mode
-      VisualVoicemailService.setSmsFilterSettings(mContext, getPhoneAccountHandle(), null);
+      TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings(
+          mContext, getPhoneAccountHandle(), null);
+      VvmLog.i(TAG, "filter disabled");
     }
     if (mProtocol != null) {
       mProtocol.startDeactivation(this);

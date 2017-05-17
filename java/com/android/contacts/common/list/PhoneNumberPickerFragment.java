@@ -15,6 +15,8 @@
  */
 package com.android.contacts.common.list;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -28,17 +30,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.R;
 import com.android.contacts.common.util.AccountFilterUtil;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallInitiationType.Type;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.protos.ProtoParsers;
 import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /** Fragment containing a phone number list for picking. */
 public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactEntryListAdapter>
-    implements PhoneNumberListAdapter.Listener {
+    implements PhoneNumberListAdapter.Listener, EnrichedCallManager.CapabilitiesListener {
 
   private static final String KEY_FILTER = "filter";
   private OnPhoneNumberPickerActionListener mListener;
@@ -56,8 +64,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   private ContactListItemView.PhotoPosition mPhotoPosition =
       ContactListItemView.getDefaultPhotoPosition(false /* normal/non opposite */);
 
-  private final Set<OnLoadFinishedListener> mLoadFinishedListeners =
-      new ArraySet<OnLoadFinishedListener>();
+  private final Set<OnLoadFinishedListener> mLoadFinishedListeners = new ArraySet<>();
 
   private CursorReranker mCursorReranker;
 
@@ -79,6 +86,18 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   @Override
   public void onVideoCallIconClicked(int position) {
     callNumber(position, true /* isVideoCall */);
+  }
+
+  @Override
+  public void onCallAndShareIconClicked(int position) {
+    // Required because of cyclic dependencies of everything depending on contacts/common.
+    String componentName = "com.android.dialer.callcomposer.CallComposerActivity";
+    Intent intent = new Intent();
+    intent.setComponent(new ComponentName(getContext(), componentName));
+    CallComposerContact contact =
+        ((PhoneNumberListAdapter) getAdapter()).getCallComposerContact(position);
+    ProtoParsers.put(intent, "CALL_COMPOSER_CONTACT", contact);
+    startActivity(intent);
   }
 
   public void setDirectorySearchEnabled(boolean flag) {
@@ -106,6 +125,22 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     updateFilterHeaderView();
 
     setVisibleScrollbarEnabled(getVisibleScrollbarEnabled());
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    EnrichedCallComponent.get(getContext())
+        .getEnrichedCallManager()
+        .unregisterCapabilitiesListener(this);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    EnrichedCallComponent.get(getContext())
+        .getEnrichedCallManager()
+        .registerCapabilitiesListener(this);
   }
 
   protected boolean getVisibleScrollbarEnabled() {
@@ -181,11 +216,12 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     final String number = getPhoneNumber(position);
     if (!TextUtils.isEmpty(number)) {
       cacheContactInfo(position);
-      CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-      callSpecificAppData.callInitiationType = getCallInitiationType(true /* isRemoteDirectory */);
-      callSpecificAppData.positionOfSelectedSearchResult = position;
-      callSpecificAppData.charactersInSearchString =
-          getQueryString() == null ? 0 : getQueryString().length();
+      CallSpecificAppData callSpecificAppData =
+          CallSpecificAppData.newBuilder()
+              .setCallInitiationType(getCallInitiationType(true /* isRemoteDirectory */))
+              .setPositionOfSelectedSearchResult(position)
+              .setCharactersInSearchString(getQueryString() == null ? 0 : getQueryString().length())
+              .build();
       mListener.onPickPhoneNumber(number, isVideoCall, callSpecificAppData);
     } else {
       LogUtil.i(
@@ -281,6 +317,13 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     }
   }
 
+  @Override
+  public void onCapabilitiesUpdated() {
+    if (getAdapter() != null) {
+      getAdapter().notifyDataSetChanged();
+    }
+  }
+
   @MainThread
   @Override
   public void onDetach() {
@@ -359,8 +402,8 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
    * @param isRemoteDirectory {@code true} if the call was initiated using a contact/phone number
    *     not in the local contacts database
    */
-  protected int getCallInitiationType(boolean isRemoteDirectory) {
-    return OnPhoneNumberPickerActionListener.CALL_INITIATION_UNKNOWN;
+  protected CallInitiationType.Type getCallInitiationType(boolean isRemoteDirectory) {
+    return Type.UNKNOWN_INITIATION;
   }
 
   /**

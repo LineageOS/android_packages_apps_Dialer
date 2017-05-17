@@ -72,12 +72,16 @@ public class FloatingActionButtonController {
   }
 
   /**
-   * Sets FAB as View.VISIBLE or View.GONE.
+   * Sets FAB as shown or hidden.
    *
    * @param visible Whether or not to make the container visible.
    */
   public void setVisible(boolean visible) {
-    mFab.setVisibility(visible ? View.VISIBLE : View.GONE);
+    if (visible) {
+      mFab.show();
+    } else {
+      mFab.hide();
+    }
   }
 
   public void changeIcon(Drawable icon, String description) {

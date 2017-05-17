@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="voicemail_settings_with_label" msgid="563926539137546586">"Govorna pošta (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_settings_title" msgid="6685263321755930738">"Govorna pošta"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
+    <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Napredna podešavanja"</string>
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Vizuelna govorna pošta"</string>
+    <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Dodatne rezervne kopije i prostor"</string>
+    <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Podesite PIN"</string>
+    <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Promenite PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Morate da omogućite vizuelnu govornu poštu da biste promenili PIN"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Vizuelna govorna pošta još uvek nije aktivirana, probajte ponovo kasnije"</string>
+    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Stari PIN"</string>
+    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Novi PIN"</string>
+    <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Sačekajte."</string>
+    <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Novi PIN je prekratak."</string>
+    <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Novi PIN je predugačak."</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"Novi PIN je preslab. Jaka lozinka ne treba da sadrži uzastopni niz ni ponovljene cifre."</string>
+    <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"Stari PIN se ne podudara."</string>
+    <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"Novi PIN sadrži nevažeće znakove."</string>
+    <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"Promena PIN-a nije uspela"</string>
+    <string name="vvm_unsupported_message_format" msgid="2746490691815392491">"Nepodržani tip poruke. Pozovite <xliff:g id="NUMBER">%s</xliff:g> da biste je preslušali."</string>
+    <string name="change_pin_title" msgid="1363830310845461697">"Promenite PIN kôd govorne pošte"</string>
+    <string name="change_pin_continue_label" msgid="9184635195162827832">"Nastavi"</string>
+    <string name="change_pin_cancel_label" msgid="7258783861113501519">"Otkaži"</string>
+    <string name="change_pin_ok_label" msgid="4527043915415428629">"Potvrdi"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="1375728090965833028">"Potvrdite stari PIN"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="1654231195871094175">"Unesite PIN kôd govorne pošte da biste nastavili."</string>
+    <string name="change_pin_enter_new_pin_header" msgid="7142620840890909719">"Podesite novi PIN"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"Broj cifara koje PIN mora da sadrži: <xliff:g id="MIN">%1$d</xliff:g>–<xliff:g id="MAX">%2$d</xliff:g>."</string>
+    <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"Potvrdite PIN"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"PIN-ovi se ne podudaraju"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"PIN kôd govorne pošte je ažuriran"</string>
+    <string name="change_pin_system_error" msgid="5762853042379833829">"Podešavanje PIN-a nije uspelo"</string>
+</resources>

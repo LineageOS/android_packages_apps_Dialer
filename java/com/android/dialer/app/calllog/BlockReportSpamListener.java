@@ -20,13 +20,15 @@ import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import com.android.dialer.blocking.BlockReportSpamDialogs;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.ContactSource;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.dialer.logging.nano.ReportingLocation;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 
 /** Listener to show dialogs for block and report spam actions. */
@@ -54,7 +56,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final int contactSourceType) {
+      @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
             displayNumber,
             Spam.get(mContext).isDialogReportSpamCheckedByDefault(),
@@ -98,7 +100,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final int contactSourceType) {
+      @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.BlockDialogFragment.newInstance(
             displayNumber,
             Spam.get(mContext).isSpamEnabled(),
@@ -142,7 +144,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final int contactSourceType,
+      final ContactSource.Type contactSourceType,
       final boolean isSpam,
       final Integer blockId) {
     BlockReportSpamDialogs.UnblockDialogFragment.newInstance(
@@ -185,7 +187,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String number,
       final String countryIso,
       final int callType,
-      final int contactSourceType) {
+      final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
             displayNumber,
             new BlockReportSpamDialogs.OnConfirmListener() {

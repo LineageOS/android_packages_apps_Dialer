@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"വോയ്‌സ്‌മെയിൽ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"വോയ്‌സ്‌മെയിൽ"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"വൈബ്രേറ്റുചെയ്യുക"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"വൈബ്രേറ്റുചെയ്യുക"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ശബ്‌ദം"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"വിപുലമായ ക്രമീകരണം"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"അധിക ബായ്‌ക്കപ്പും സ്‌റ്റോറേജും"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" ഇത് നിലവിൽ ഞങ്ങൾ പരീക്ഷിക്കുന്ന "<b><i>"ഒരു പരീക്ഷണാത്മക ഫീച്ചറാണ്"</i></b>". ഇത് നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സെർവറിൽ നിന്ന് വോയ്‌സ്‌മെയിലുകൾ ഇല്ലാതാക്കാൻ സാധ്യതയുണ്ട്. ഈ ഫീച്ചർ ഭാവിയിൽ ഉപയോഗിക്കാനാവുമെന്ന് ഉറപ്പൊന്നുമില്ല. എങ്കിലും ഈ ഫീച്ചറിനെക്കുറിച്ചുള്ള ഫീഡ്‌ബാക്ക് അറിയാൻ ഞങ്ങൾ താൽപ്പര്യപ്പെടുന്നു."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"പിൻ സജ്ജമാക്കുക"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"പിൻ മാറ്റുക"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"പിൻ മാറ്റുന്നതിന് വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്"</string>

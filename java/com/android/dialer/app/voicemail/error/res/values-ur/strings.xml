@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"اگر آپ کا ان باکس بھرا ہوا ہوگا تو آپ نئی صوتی میل موصول نہیں کر پائیں گے۔"</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"نئی صوتی میلز موصول نہیں ہو سکتی"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"آپ کا ان باکس بھرا ہوا ہے۔ نئی صوتی میل موصول کرنے کیلئے کچھ پیغامات حذف کرنے کی کوشش کریں۔"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[تجرباتی] اضافی اسٹوریج اور بیک اپ آن کریں"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"‏آپ کا میل باکس تقریبا بھرا ہوا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج آن کریں تاکہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور نظم کر سکے۔ "<b><i>"یہ خصوصیت ابھی  ٹیسٹ کی جا رہی ہے "</i></b>"اور ممکنہ طور پر آپ کے صوتی میل سرور پر سے آپ کی صوتی میلز کو حذف کر دے گی اور مستقبل میں اس خصوصیت کی معاونت کا ہم وعدہ نہیں کرتے۔ لیکن ہم آپ کے تاثرات کو پسند کریں گے۔"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[تجرباتی] اضافی اسٹوریج اور بیک اپ آن کریں"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"‏آپ کا میل باکس تقریبا بھرا ہوا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج آن کریں تاکہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور نظم کر سکے۔ "<b><i>"یہ خصوصیت ابھی  ٹیسٹ کی جا رہی ہے "</i></b>"اور ممکنہ طور پر آپ کے صوتی میل سرور پر سے آپ کی صوتی میلز کو حذف کر دے گی اور مستقبل میں اس خصوصیت کی معاونت کا ہم وعدہ نہیں کرتے۔ لیکن ہم آپ کے تاثرات کو پسند کریں گے۔"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"اضافی اسٹوریج اور بیک اپ آن کریں"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"‏آپ کا میل باکس بھر گیا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج کو آن کریں تا کہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور ان کا نظم کر سکے۔"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"اضافی اسٹوریج اور بیک اپ آن کریں"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"‏آپ کا میل باکس تقریباً بھر گیا ہے۔ جگہ خالی کرنے کیلئے، اضافی اسٹوریج کو آن کریں تا کہ Google آپ کے صوتی میل پیغامات کا بیک اپ اور ان کا نظم کر سکے۔"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"‏اپنی صوتی میل PIN سیٹ کریں"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"‏آپ جب بھی صوتی میل تک رسائی کیلئے کال کریں گے تو آپ کو صوتی میل PIN چاہئیے ہوگی۔"</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"نامعلوم خرابی"</string>

@@ -18,12 +18,14 @@ package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.CallSuper;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.NeededForTesting;
 import java.util.ArrayList;
@@ -33,9 +35,14 @@ import java.util.List;
  * Provides common utilities for task implementations, such as execution time and managing {@link
  * Policy}
  */
+@UsedByReflection(value = "Tasks.java")
 public abstract class BaseTask implements Task {
 
   private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
+
+  private static final String EXTRA_EXECUTION_TIME = "extra_execution_time";
+
+  private Bundle mExtras;
 
   private Context mContext;
 
@@ -58,7 +65,7 @@ public abstract class BaseTask implements Task {
 
   /**
    * Modify the task ID to prevent arbitrary task from executing. Can only be called before {@link
-   * #onCreate(Context, Intent, int, int)} returns.
+   * #onCreate(Context, Bundle)} returns.
    */
   @MainThread
   public void setId(int id) {
@@ -86,8 +93,7 @@ public abstract class BaseTask implements Task {
     return mPhoneAccountHandle;
   }
   /**
-   * Should be call in the constructor or {@link Policy#onCreate(BaseTask, Intent, int, int)} will
-   * be missed.
+   * Should be call in the constructor or {@link Policy#onCreate(BaseTask, Bundle)} will be missed.
    */
   @MainThread
   public BaseTask addPolicy(Policy policy) {
@@ -107,6 +113,7 @@ public abstract class BaseTask implements Task {
     mHasFailed = true;
   }
 
+  /** @param timeMillis the time since epoch, in milliseconds. */
   @MainThread
   public void setExecutionTime(long timeMillis) {
     Assert.isMainThread();
@@ -126,12 +133,12 @@ public abstract class BaseTask implements Task {
   }
 
   /**
-   * Creates an intent that can be used to start the {@link TaskSchedulerService}. Derived class
+   * Creates an intent that can be used to be broadcast to the {@link TaskReceiver}. Derived class
    * should build their intent upon this.
    */
   public static Intent createIntent(
       Context context, Class<? extends BaseTask> task, PhoneAccountHandle phoneAccountHandle) {
-    Intent intent = TaskSchedulerService.createIntent(context, task);
+    Intent intent = Tasks.createIntent(context, task);
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
     return intent;
   }
@@ -142,12 +149,27 @@ public abstract class BaseTask implements Task {
   }
 
   @Override
+  public Bundle toBundle() {
+    mExtras.putLong(EXTRA_EXECUTION_TIME, mExecutionTime);
+    return mExtras;
+  }
+
+  @Override
   @CallSuper
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
+  public void onCreate(Context context, Bundle extras) {
     mContext = context;
-    mPhoneAccountHandle = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
+    mExtras = extras;
+    mPhoneAccountHandle = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
     for (Policy policy : mPolicies) {
-      policy.onCreate(this, intent, flags, startId);
+      policy.onCreate(this, extras);
+    }
+  }
+
+  @Override
+  @CallSuper
+  public void onRestore(Bundle extras) {
+    if (mExtras.containsKey(EXTRA_EXECUTION_TIME)) {
+      mExecutionTime = extras.getLong(EXTRA_EXECUTION_TIME);
     }
   }
 

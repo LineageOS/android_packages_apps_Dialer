@@ -23,12 +23,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.provider.CallLog;
 import android.support.annotation.Nullable;
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
-import com.android.dialer.logging.nano.ReportingLocation;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.incallui.call.DialerCall;
 
@@ -81,7 +82,8 @@ public class SpamNotificationService extends Service {
     String number = intent.getStringExtra(EXTRA_PHONE_NUMBER);
     int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, 1);
     String countryIso = GeoUtil.getCurrentCountryIso(this);
-    int contactLookupResultType = intent.getIntExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, 0);
+    ContactLookupResult.Type contactLookupResultType =
+        ContactLookupResult.Type.forNumber(intent.getIntExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, 0));
 
     ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
         .cancel(number, notificationId);
@@ -110,6 +112,7 @@ public class SpamNotificationService extends Service {
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
         break;
+      default: // fall out
     }
     // TODO: call stopSelf() after async tasks complete (b/28441936)
     stopSelf();
@@ -122,7 +125,7 @@ public class SpamNotificationService extends Service {
     LogUtil.d(TAG, "onDestroy");
   }
 
-  private void logCallImpression(Intent intent, int impression) {
+  private void logCallImpression(Intent intent, DialerImpression.Type impression) {
     Logger.get(this)
         .logCallImpression(
             impression,

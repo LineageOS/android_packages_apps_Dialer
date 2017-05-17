@@ -57,7 +57,7 @@ public class CallLogNotificationsActivity extends AppCompatActivity {
     String action = intent.getAction();
     switch (action) {
       case ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION:
-        MissedCallNotifier.getInstance(this)
+        MissedCallNotifier.getIstance(this)
             .sendSmsFromMissedCall(
                 intent.getStringExtra(EXTRA_MISSED_CALL_NUMBER), intent.getData());
         break;

@@ -20,10 +20,12 @@
   <dimen name="call_details_top_margin">6dp</dimen>
 
   <!-- contact container -->
-  <dimen name="contact_container_padding">16dp</dimen>
-  <dimen name="call_details_contact_photo_size">40dp</dimen>
-  <dimen name="photo_text_margin">16dp</dimen>
-  <dimen name="call_back_button_size">24dp</dimen>
+  <dimen name="contact_container_padding_bottom_end">16dp</dimen>
+  <dimen name="contact_container_padding_top_start">12dp</dimen>
+  <dimen name="call_details_contact_photo_size">48dp</dimen>
+  <dimen name="call_details_contact_photo_padding">4dp</dimen>
+  <dimen name="photo_text_margin">12dp</dimen>
+  <dimen name="call_back_button_size">48dp</dimen>
 
   <!-- call entry container -->
   <dimen name="call_entry_icon_size">24dp</dimen>
@@ -34,7 +36,6 @@
   <!-- EC container -->
   <dimen name="call_details_ec_text_size">12sp</dimen>
   <dimen name="ec_container_height">48dp</dimen>
-  <dimen name="ec_post_call_left_margin">73dp</dimen>
   <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
 </resources>

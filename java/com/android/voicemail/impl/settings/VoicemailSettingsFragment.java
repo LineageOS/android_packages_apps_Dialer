@@ -17,7 +17,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
@@ -27,8 +26,10 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.notification.NotificationChannelManager.Channel;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
@@ -43,7 +44,6 @@ import com.android.voicemail.impl.sync.VvmAccountManager;
 @TargetApi(VERSION_CODES.O)
 public class VoicemailSettingsFragment extends PreferenceFragment
     implements Preference.OnPreferenceChangeListener,
-        VoicemailRingtonePreference.VoicemailRingtoneNameChangeListener,
         VvmAccountManager.Listener {
 
   private static final String TAG = "VmSettingsActivity";
@@ -51,16 +51,11 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   @Nullable private PhoneAccountHandle phoneAccountHandle;
   private OmtpVvmCarrierConfigHelper omtpVvmCarrierConfigHelper;
 
-  private VoicemailRingtonePreference voicemailRingtonePreference;
-  private CheckBoxPreference voicemailVibration;
+  private Preference voicemailNotificationPreference;
   private SwitchPreference voicemailVisualVoicemail;
   private SwitchPreference autoArchiveSwitchPreference;
   private Preference voicemailChangePinPreference;
   private PreferenceScreen advancedSettings;
-
-  // The ringtone name is retrieved with an async call. Cache the old name so there will be no jank
-  // during transition.
-  private CharSequence oldRingtoneName = "";
 
   @Override
   public void onCreate(Bundle icicle) {
@@ -86,35 +81,17 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     PreferenceScreen prefSet = getPreferenceScreen();
 
-    voicemailRingtonePreference =
-        (VoicemailRingtonePreference)
-            findPreference(getString(R.string.voicemail_notification_ringtone_key));
-    voicemailRingtonePreference.setVoicemailRingtoneNameChangeListener(this);
-    voicemailRingtonePreference.init(phoneAccountHandle, oldRingtoneName);
-    voicemailRingtonePreference.setOnPreferenceClickListener(
+    voicemailNotificationPreference =
+        findPreference(getString(R.string.voicemail_notifications_key));
+    voicemailNotificationPreference.setIntent(
+        NotificationChannelManager.getInstance()
+            .getSettingsIntentForChannel(getContext(), Channel.VOICEMAIL, phoneAccountHandle));
+    voicemailNotificationPreference.setOnPreferenceClickListener(
         new OnPreferenceClickListener() {
           @Override
           public boolean onPreferenceClick(Preference preference) {
             Logger.get(getContext())
                 .logImpression(DialerImpression.Type.VVM_CHANGE_RINGTONE_CLICKED);
-            // Let the preference handle the click.
-            return false;
-          }
-        });
-
-    voicemailVibration =
-        (CheckBoxPreference) findPreference(getString(R.string.voicemail_notification_vibrate_key));
-    voicemailVibration.setOnPreferenceChangeListener(this);
-    voicemailVibration.setChecked(
-        getContext()
-            .getSystemService(TelephonyManager.class)
-            .isVoicemailVibrationEnabled(phoneAccountHandle));
-    voicemailVibration.setOnPreferenceClickListener(
-        new OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick(Preference preference) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.VVM_CHANGE_VIBRATION_CLICKED);
             // Let the preference handle the click.
             return false;
           }
@@ -164,8 +141,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
           VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle));
 
       autoArchiveSwitchPreference.setOnPreferenceChangeListener(this);
-      autoArchiveSwitchPreference.setSummary(
-          getText(R.string.voicemail_visual_voicemail_auto_archive_temporary_disclaimer));
       autoArchiveSwitchPreference.setChecked(
           VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
     } else {
@@ -221,10 +196,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       logArchiveToggle((boolean) objValue);
       VisualVoicemailSettingsUtil.setArchiveEnabled(
           getContext(), phoneAccountHandle, (boolean) objValue);
-    } else if (preference.getKey().equals(voicemailVibration.getKey())) {
-      getContext()
-          .getSystemService(TelephonyManager.class)
-          .setVoicemailVibrationEnabled(phoneAccountHandle, (boolean) objValue);
     }
 
     // Always let the preference setting proceed.
@@ -254,11 +225,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       Logger.get(getContext())
           .logImpression(DialerImpression.Type.VVM_USER_TURNED_ARCHIVE_OFF_FROM_SETTINGS);
     }
-  }
-
-  @Override
-  public void onVoicemailRingtoneNameChanged(CharSequence name) {
-    oldRingtoneName = name;
   }
 
   @Override

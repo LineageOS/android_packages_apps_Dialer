@@ -27,19 +27,18 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.InteractionEvent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationChannelManager.Channel;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
-import java.util.concurrent.TimeUnit;
 
 /** Utility to help with tasks related to filtered numbers. */
 public class FilteredNumbersUtil {
@@ -47,8 +46,9 @@ public class FilteredNumbersUtil {
   public static final String CALL_BLOCKING_NOTIFICATION_TAG = "call_blocking";
   public static final int CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID =
       R.id.notification_call_blocking_disabled_by_emergency_call;
-  // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.
-  protected static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
+  // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.\
+  @VisibleForTesting
+  public static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
   // Pref key for storing whether a notification has been dispatched to notify the user that call
   // blocking has been disabled because of a recent emergency call.
   protected static final String NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY =
@@ -73,7 +73,7 @@ public class FilteredNumbersUtil {
         new AsyncTask<Object, Void, Boolean>() {
           @Override
           public Boolean doInBackground(Object... params) {
-            if (context == null || !PermissionsUtil.hasContactsPermissions(context)) {
+            if (context == null || !PermissionsUtil.hasContactsReadPermissions(context)) {
               return false;
             }
 
@@ -186,49 +186,8 @@ public class FilteredNumbersUtil {
     task.execute();
   }
 
-  /**
-   * WARNING: This method should NOT be executed on the UI thread. Use {@code
-   * FilteredNumberAsyncQueryHandler} to asynchronously check if a number is blocked.
-   */
-  public static boolean shouldBlockVoicemail(
-      Context context, String number, String countryIso, long voicemailDateMs) {
-    final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    if (TextUtils.isEmpty(normalizedNumber)) {
-      return false;
-    }
-
-    if (hasRecentEmergencyCall(context)) {
-      return false;
-    }
-
-    final Cursor cursor =
-        context
-            .getContentResolver()
-            .query(
-                FilteredNumber.CONTENT_URI,
-                new String[] {FilteredNumberColumns.CREATION_TIME},
-                FilteredNumberColumns.NORMALIZED_NUMBER + "=?",
-                new String[] {normalizedNumber},
-                null);
-    if (cursor == null) {
-      return false;
-    }
-    try {
-      /*
-       * Block if number is found and it was added before this voicemail was received.
-       * The VVM's date is reported with precision to the minute, even though its
-       * magnitude is in milliseconds, so we perform the comparison in minutes.
-       */
-      return cursor.moveToFirst()
-          && TimeUnit.MINUTES.convert(voicemailDateMs, TimeUnit.MILLISECONDS)
-              >= TimeUnit.MINUTES.convert(cursor.getLong(0), TimeUnit.MILLISECONDS);
-    } finally {
-      cursor.close();
-    }
-  }
-
   public static long getLastEmergencyCallTimeMillis(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .getLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, 0);
   }
 
@@ -292,7 +251,7 @@ public class FilteredNumbersUtil {
                         context.getString(R.string.call_blocking_disabled_notification_text))
                     .setAutoCancel(true);
 
-            NotificationChannelManager.applyChannel(builder, context, Channel.MISC, null);
+            NotificationChannelManager.applyChannel(builder, context, Channel.DEFAULT, null);
             builder.setContentIntent(
                 PendingIntent.getActivity(
                     context,

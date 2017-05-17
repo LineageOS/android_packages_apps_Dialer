@@ -34,15 +34,15 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.InteractionEvent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TouchPointManager;
@@ -249,7 +249,7 @@ public class InCallPresenter implements CallList.Listener {
   private VideoSurfaceTexture mLocalVideoSurfaceTexture;
   private VideoSurfaceTexture mRemoteVideoSurfaceTexture;
 
-  /** Inaccessible constructor. Must use getInstance() to get this singleton. */
+  /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
 
@@ -258,6 +258,11 @@ public class InCallPresenter implements CallList.Listener {
       sInCallPresenter = new InCallPresenter();
     }
     return sInCallPresenter;
+  }
+
+  @VisibleForTesting
+  public static synchronized void setInstanceForTesting(InCallPresenter inCallPresenter) {
+    sInCallPresenter = inCallPresenter;
   }
 
   /**
@@ -636,6 +641,14 @@ public class InCallPresenter implements CallList.Listener {
     }
   }
 
+  @Override
+  public void onInternationalCallOnWifi(@NonNull DialerCall call) {
+    LogUtil.enterBlock("InCallPresenter.onInternationalCallOnWifi");
+    if (mInCallActivity != null) {
+      mInCallActivity.onInternationalCallOnWifi(call);
+    }
+  }
+
   /**
    * Called when there is a change to the call list. Sets the In-Call state for the entire in-call
    * app based on the information it gets from CallList. Dispatches the in-call state to all
@@ -762,9 +775,15 @@ public class InCallPresenter implements CallList.Listener {
 
     if (!mCallList.hasLiveCall()
         && !call.getLogState().isIncoming
+        && !isSecretCode(call.getNumber())
         && !CallerInfoUtils.isVoiceMailNumber(mContext, call)) {
-      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getTimeAddedMs());
+      PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
     }
+  }
+
+  private boolean isSecretCode(@Nullable String number) {
+    return number != null
+        && (number.length() <= 8 || number.startsWith("*#*#") || number.endsWith("#*#*"));
   }
 
   /** Given the call list, return the state in which the in-call screen should be. */
@@ -912,24 +931,6 @@ public class InCallPresenter implements CallList.Listener {
     return (mInCallActivity != null
         && !mInCallActivity.isDestroyed()
         && !mInCallActivity.isFinishing());
-  }
-
-  private boolean isActivityVisible() {
-    return mInCallActivity != null && mInCallActivity.isVisible();
-  }
-
-  boolean shouldShowFullScreenNotification() {
-    /**
-     * This is to cover the case where the incall activity is started but in the background, e.g.
-     * when the user pressed Home from the account selection dialog or an existing call. In the case
-     * that incall activity is already visible, there's no need to configure the notification with a
-     * full screen intent.
-     */
-    LogUtil.d(
-        "InCallPresenter.shouldShowFullScreenNotification",
-        "isActivityVisible: %b",
-        isActivityVisible());
-    return !isActivityVisible();
   }
 
   /**

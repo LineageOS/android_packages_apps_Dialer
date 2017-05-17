@@ -15,15 +15,15 @@
   ~ limitations under the License
   -->
 <com.android.incallui.answer.impl.AffordanceHolderLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/incoming_container"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:clipChildren="false"
-  android:clipToPadding="false"
-  android:keepScreenOn="true">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/incoming_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:keepScreenOn="true">
 
   <TextureView
       android:id="@+id/incoming_preview_texture_view"
@@ -38,124 +38,133 @@
       android:layout_height="match_parent"
       android:importantForAccessibility="no"
       android:visibility="gone"
-      app:scaleWidth="@bool/scale_width"
-      app:scaleHeight="@bool/scale_height"/>
+      app:scaleHeight="@bool/scale_height"
+      app:scaleWidth="@bool/scale_width"/>
 
   <View
-    android:id="@+id/incoming_preview_texture_view_overlay"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/videocall_overlay_background_color"
-    android:visibility="gone"/>
-
-  <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-    <TextView
-      android:id="@+id/videocall_video_off"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:padding="64dp"
-      android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
-      android:drawablePadding="8dp"
-      android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
-      android:gravity="center"
-      android:text="@string/call_incoming_video_is_off"
-      android:textAppearance="@style/Dialer.Incall.TextAppearance"
-      android:visibility="gone"/>
-
-    <LinearLayout
-      android:id="@+id/incall_contact_grid"
+      android:id="@+id/incoming_preview_texture_view_overlay"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginTop="24dp"
-      android:clipChildren="false"
-      android:clipToPadding="false"
-      android:gravity="top|center_horizontal"
-      android:orientation="vertical">
+      android:background="@color/videocall_overlay_background_color"
+      android:visibility="gone"/>
 
-      <include
-        android:id="@id/contactgrid_top_row"
-        layout="@layout/incall_contactgrid_top_row"
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/videocall_video_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"/>
+        android:layout_gravity="center"
+        android:padding="64dp"
+        android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
+        android:drawablePadding="8dp"
+        android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
+        android:gravity="center"
+        android:text="@string/call_incoming_video_is_off"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/incall_contact_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical">
+
+      <include
+          android:id="@id/contactgrid_top_row"
+          layout="@layout/incall_contactgrid_top_row"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginEnd="24dp"/>
 
       <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
            b/31396406 -->
       <com.android.incallui.autoresizetext.AutoResizeTextView
-        android:id="@id/contactgrid_contact_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:singleLine="true"
-        android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
-        android:textSize="@dimen/answer_contact_name_text_size"
-        app:autoResizeText_minTextSize="@dimen/answer_contact_name_min_size"
-        tools:ignore="Deprecated"
-        tools:text="Jake Peralta"/>
+          android:id="@id/contactgrid_contact_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginEnd="24dp"
+          android:singleLine="true"
+          android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
+          android:textSize="@dimen/answer_contact_name_text_size"
+          app:autoResizeText_minTextSize="@dimen/answer_contact_name_min_size"
+          tools:ignore="Deprecated"
+          tools:text="Jake Peralta"/>
 
       <include
-        android:id="@id/contactgrid_bottom_row"
-        layout="@layout/incall_contactgrid_bottom_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"/>
+          android:id="@id/contactgrid_bottom_row"
+          layout="@layout/incall_contactgrid_bottom_row"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="24dp"
+          android:layout_marginEnd="24dp"/>
 
       <TextView
-        android:id="@+id/incall_important_call_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="@dimen/answer_importance_margin_bottom"
-        android:elevation="@dimen/answer_data_elevation"
-        android:gravity="center"
-        android:singleLine="true"
-        android:text="@string/call_incoming_important"
-        android:textAllCaps="true"
-        android:textAppearance="@style/Dialer.Incall.TextAppearance"
-        android:textColor="@android:color/black"/>
+          android:id="@+id/incall_important_call_badge"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_marginTop="4dp"
+          android:layout_marginBottom="@dimen/answer_importance_margin_bottom"
+          android:gravity="center"
+          android:elevation="@dimen/answer_data_elevation"
+          android:maxLines="1"
+          android:text="@string/call_incoming_important"
+          android:textAllCaps="true"
+          android:textSize="14sp"
+          android:textStyle="bold"
+          android:textColor="@color/background_dialer_white"
+          android:background="@drawable/urgent_call_background"/>
 
       <FrameLayout
-        android:id="@+id/incall_location_holder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+          android:id="@+id/incall_location_holder"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
 
       <FrameLayout
-        android:id="@+id/incall_data_container"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/answer_data_size"
-        android:clipChildren="false"
-        android:clipToPadding="false"/>
+          android:id="@+id/incall_data_container"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:clipChildren="false"
+          android:clipToPadding="false"/>
+
+      <!-- Space holder for answer method. This is used to get better scaling to make room for
+      incall_data_container on different screen size. -->
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="220dp"/>
 
     </LinearLayout>
 
     <FrameLayout
-      android:id="@+id/answer_method_container"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipChildren="false"
-      android:clipToPadding="false"/>
+        android:id="@+id/answer_method_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"/>
 
   </FrameLayout>
 
   <com.android.incallui.answer.impl.affordance.SwipeButtonView
-    android:id="@+id/incoming_secondary_button"
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:layout_gravity="bottom|start"
-    android:scaleType="center"
-    android:src="@drawable/quantum_ic_message_white_24"
-    android:visibility="invisible"
-    tools:visibility="visible"/>
+      android:id="@+id/incoming_secondary_button"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      android:layout_gravity="bottom|start"
+      android:scaleType="center"
+      android:src="@drawable/quantum_ic_message_white_24"
+      android:visibility="invisible"
+      tools:visibility="visible"/>
 
   <com.android.incallui.answer.impl.affordance.SwipeButtonView
       android:id="@+id/incoming_secondary_button2"

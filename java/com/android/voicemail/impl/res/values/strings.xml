@@ -23,19 +23,12 @@
   <string name="voicemail_settings_title">Voicemail</string>
 
   <!-- DO NOT TRANSLATE. Internal key for a voicemail notification preference. -->
-  <string name="voicemail_notification_ringtone_key" translatable="false">voicemail_notification_ringtone_key</string>
-  <!-- DO NOT TRANSLATE. Internal key for a voicemail notification preference. -->
-  <string name="voicemail_notification_vibrate_key" translatable="false">voicemail_notification_vibrate_key</string>
+  <string name="voicemail_notifications_key" translatable="false">voicemail_notification_key</string>
 
-  <!-- Title for the vibration settings for voicemail notifications [CHAR LIMIT=40] -->
-  <string name="voicemail_notification_vibrate_when_title">Vibrate</string>
-  <!-- Dialog title for the vibration settings for voice mail notifications [CHAR LIMIT=40]-->
-  <string name="voicemail_notification_vibarte_when_dialog_title">Vibrate</string>
-
-  <!-- Voicemail ringtone title. The user clicks on this preference to select
-         which sound to play when a voicemail notification is received.
+  <!-- Voicemail notifications title. The user clicks on this preference to select
+         which sound to play and whether to vibrate when a voicemail notification is received.
          [CHAR LIMIT=30] -->
-  <string name="voicemail_notification_ringtone_title">Sound</string>
+  <string name="voicemail_notifications_preference_title">Notifications</string>
   <string name="voicemail_advanced_settings_key" translatable="false">voicemail_advanced_settings_key</string>
 
   <!-- Title for advanced settings in the voicemail settings -->
@@ -59,11 +52,6 @@
   <string name="voicemail_visual_voicemail_auto_archive_switch_title">
     Extra backup and storage
   </string>
-  <!-- Visual voicemail archive temporary description [CHAR LIMIT=40] -->
-  <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer">
-  <b><i>This is a experimental feature</i></b> we are currently testing. This will potentially delete voicemails from your voicemail server. There are no guarantees of supporting this feature in the future. We would love feedback on the feature though."
-  </string>
-
 
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
   <string name="voicemail_set_pin_preference_title">Set PIN</string>

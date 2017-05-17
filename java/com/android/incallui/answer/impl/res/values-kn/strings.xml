@@ -20,5 +20,6 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಿ ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಿ"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"ವೀಡಿಯೊ ಆಫ್ ಆಗಿದೆ"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"ಉತ್ತರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನಿರಾಕರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಕೆಳಗೆ ಸ್ವೈಪ್ ಮಾಡಿ."</string>
-    <string name="call_incoming_important" msgid="6477906345540334049">"ಪ್ರಮುಖ ಕರೆ"</string>
+    <!-- no translation found for call_incoming_important (4090408168895243702) -->
+    <skip />
 </resources>

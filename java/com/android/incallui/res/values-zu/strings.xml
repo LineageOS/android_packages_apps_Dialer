@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Ikholi engenayo yomsebenzi ye-Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Ikholi engenayo osolisayo kagaxekile"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Isicelo sevidiyo engenayo"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"Umlayezo wezwi omusha"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Umyalezo wezwi omusha (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Dayela <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Inombolo yevoyisimeyili ayaziwa"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Ayikho isevisi"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Inethiwekhi ekhethiwe <xliff:g id="OPERATOR_NAME">%s</xliff:g> ayitholakali"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Phendula"</string>

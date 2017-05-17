@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.callintent";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+package com.android.dialer.callintent;
+
+import "java/com/android/dialer/callintent/call_initiation_type.proto";
+
+// Miscellaneous data that's included in a new outgoing call initiated by
+// Dialer. The system will pass this data to the InCallUi which can use it
+// for logging or for something else.
+message CallSpecificAppData {
+  optional CallInitiationType.Type call_initiation_type = 1;
+
+  optional int32 position_of_selected_search_result = 2;
+
+  optional int32 characters_in_search_string = 3;
+}

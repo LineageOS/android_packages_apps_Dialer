@@ -20,14 +20,19 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/call_details_top_margin"
     android:gravity="center_vertical"
-    android:padding="@dimen/contact_container_padding">
+    android:paddingTop="@dimen/contact_container_padding_top_start"
+    android:paddingStart="@dimen/contact_container_padding_top_start"
+    android:paddingBottom="@dimen/contact_container_padding_bottom_end"
+    android:paddingEnd="@dimen/contact_container_padding_bottom_end">
 
   <QuickContactBadge
       android:id="@+id/quick_contact_photo"
       android:layout_width="@dimen/call_details_contact_photo_size"
       android:layout_height="@dimen/call_details_contact_photo_size"
       android:layout_marginTop="2dp"
-      android:focusable="true"/>
+      android:padding="@dimen/call_details_contact_photo_padding"
+      android:focusable="true"
+      android:contentDescription="@string/description_quick_contact_for"/>
 
   <LinearLayout
       android:orientation="vertical"
@@ -42,6 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"
+        android:ellipsize="end"
+        android:maxLines="1"
         style="@style/PrimaryText"/>
 
     <TextView
@@ -60,6 +67,7 @@
       android:layout_centerVertical="true"
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/description_call_log_call_action"
+      android:scaleType="center"
       android:src="@drawable/quantum_ic_call_white_24"
       android:tint="@color/secondary_text_color"/>
 </RelativeLayout>

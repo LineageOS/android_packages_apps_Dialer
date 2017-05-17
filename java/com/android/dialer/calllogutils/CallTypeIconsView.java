@@ -232,44 +232,56 @@ public class CallTypeIconsView extends View {
      * Configures the call icon drawables. A single white call arrow which points down and left is
      * used as a basis for all of the call arrow icons, applying rotation and colors as needed.
      *
+     * <p>For each drawable we call mutate so that a new instance of the drawable is created. This
+     * is done so that when we apply a color filter to the drawables, they are recolored across
+     * dialer.
+     *
      * @param context The current context.
      */
     public Resources(Context context, boolean largeIcons) {
       final android.content.res.Resources r = context.getResources();
 
       int iconId = R.drawable.quantum_ic_call_received_white_24;
-      incoming = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      Drawable drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      incoming = drawable.mutate();
       incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Create a rotated instance of the call arrow for outgoing calls.
       iconId = R.drawable.quantum_ic_call_made_white_24;
-      outgoing = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      outgoing = drawable.mutate();
       outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
       iconId = R.drawable.quantum_ic_call_missed_white_24;
-      missed = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      missed = drawable.mutate();
       missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_voicemail_white_24;
-      voicemail = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      voicemail = drawable.mutate();
       voicemail.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_block_white_24;
-      blocked = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      blocked = drawable.mutate();
       blocked.setColorFilter(r.getColor(R.color.blocked_call), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_videocam_white_24;
-      videoCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      videoCall = drawable.mutate();
       videoCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_hd_white_24;
-      hdCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      hdCall = drawable.mutate();
       hdCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_signal_wifi_4_bar_white_24;
-      wifiCall = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      wifiCall = drawable.mutate();
       wifiCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);

@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar.BaseCallback;
 import android.support.design.widget.Snackbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.dialer.buildtype.BuildType;
@@ -30,8 +32,11 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProvider;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
@@ -65,19 +70,33 @@ public class PostCall {
   private static void promptUserToSendMessage(Activity activity, View rootView) {
     LogUtil.i("PostCall.promptUserToSendMessage", "returned from call, showing post call SnackBar");
     String message = activity.getString(R.string.post_call_message);
-    String addMessage = activity.getString(R.string.post_call_add_message);
+    EnrichedCallManager manager = EnrichedCallComponent.get(activity).getEnrichedCallManager();
+    EnrichedCallCapabilities capabilities = manager.getCapabilities(getPhoneNumber(activity));
+    LogUtil.i(
+        "PostCall.promptUserToSendMessage",
+        "number: %s, capabilities: %s",
+        LogUtil.sanitizePhoneNumber(getPhoneNumber(activity)),
+        capabilities);
+
+    boolean isRcsPostCall = capabilities != null && capabilities.supportsPostCall();
+    String actionText =
+        isRcsPostCall
+            ? activity.getString(R.string.post_call_add_message)
+            : activity.getString(R.string.post_call_send_message);
+
     OnClickListener onClickListener =
         v -> {
           Logger.get(activity)
               .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE_CLICKED);
-          activity.startActivity(PostCallActivity.newIntent(activity, getPhoneNumber(activity)));
+          activity.startActivity(
+              PostCallActivity.newIntent(activity, getPhoneNumber(activity), isRcsPostCall));
         };
 
     int durationMs =
         (int) ConfigProviderBindings.get(activity).getLong("post_call_prompt_duration_ms", 8_000);
     activeSnackbar =
         Snackbar.make(rootView, message, durationMs)
-            .setAction(addMessage, onClickListener)
+            .setAction(actionText, onClickListener)
             .setActionTextColor(
                 activity.getResources().getColor(R.color.dialer_snackbar_action_text_color));
     activeSnackbar.show();
@@ -143,6 +162,8 @@ public class PostCall {
   }
 
   private static void clear(Context context) {
+    activeSnackbar = null;
+
     PreferenceManager.getDefaultSharedPreferences(context)
         .edit()
         .remove(KEY_POST_CALL_CALL_DISCONNECT_TIME)
@@ -163,8 +184,11 @@ public class PostCall {
     ConfigProvider binding = ConfigProviderBindings.get(context);
     return disconnectTimeMillis != -1
         && connectTimeMillis != -1
+        && isSimReady(context)
         && binding.getLong("postcall_last_call_threshold", 30_000) > timeSinceDisconnect
-        && binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis;
+        && (connectTimeMillis == 0
+            || binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis)
+        && getPhoneNumber(context) != null;
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {
@@ -172,6 +196,7 @@ public class PostCall {
         .getBoolean(KEY_POST_CALL_MESSAGE_SENT, false);
   }
 
+  @Nullable
   private static String getPhoneNumber(Context context) {
     return PreferenceManager.getDefaultSharedPreferences(context)
         .getString(KEY_POST_CALL_CALL_NUMBER, null);
@@ -191,5 +216,10 @@ public class PostCall {
         Assert.fail();
         return false;
     }
+  }
+
+  private static boolean isSimReady(Context context) {
+    return context.getSystemService(TelephonyManager.class).getSimState()
+        == TelephonyManager.SIM_STATE_READY;
   }
 }

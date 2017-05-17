@@ -134,17 +134,6 @@
   <string name="notification_incoming_spam_call">Incoming suspected spam call</string>
   <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
   <string name="notification_requesting_video_call">Incoming video request</string>
-  <!-- Label for the "Voicemail" notification item, when expanded. -->
-  <string name="notification_voicemail_title">New voicemail</string>
-  <!-- Label for the expanded "Voicemail" notification item,
-       including a count of messages. -->
-  <string name="notification_voicemail_title_count">New voicemail (<xliff:g id="count">%d</xliff:g>)</string>
-  <!-- Message displayed in the "Voicemail" notification item, allowing the user
-       to dial the indicated number. -->
-  <string name="notification_voicemail_text_format">Dial <xliff:g id="voicemail_number">%s</xliff:g></string>
-  <!-- Message displayed in the "Voicemail" notification item,
-       indicating that there's no voicemail number available -->
-  <string name="notification_voicemail_no_vm_number">Voicemail number unknown</string>
   <!-- Label for the "No service" notification item, when expanded. -->
   <string name="notification_network_selection_title">No service</string>
   <!-- Label for the expanded "No service" notification item, including the

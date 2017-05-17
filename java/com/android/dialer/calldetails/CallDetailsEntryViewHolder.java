@@ -27,14 +27,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.calldetails.nano.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallEntryFormatter;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
-import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult;
-import com.android.dialer.enrichedcall.historyquery.proto.nano.HistoryResult.Type;
+import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
+import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
@@ -87,51 +87,54 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       CallDetailsEntry entry,
       CallTypeHelper callTypeHelper,
       boolean showMultimediaDivider) {
-    int callType = entry.callType;
+    int callType = entry.getCallType();
     boolean isVideoCall =
-        (entry.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
+        (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
             && CallUtil.isVideoEnabled(context);
     boolean isPulledCall =
-        (entry.features & Calls.FEATURES_PULLED_EXTERNALLY) == Calls.FEATURES_PULLED_EXTERNALLY;
+        (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
+            == Calls.FEATURES_PULLED_EXTERNALLY;
 
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
     callTypeIcon.add(callType);
-    callTypeIcon.setShowVideo((entry.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
-    callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.features));
-    callTypeIcon.setShowWifi(MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.features));
+    callTypeIcon.setShowVideo((entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.getFeatures()));
+    callTypeIcon.setShowWifi(
+        MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
 
     callTypeText.setText(callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
-    callTime.setText(CallEntryFormatter.formatDate(context, entry.date));
+    callTime.setText(CallEntryFormatter.formatDate(context, entry.getDate()));
     if (CallTypeHelper.isMissedCallType(callType)) {
       callDuration.setVisibility(View.GONE);
     } else {
       callDuration.setVisibility(View.VISIBLE);
       callDuration.setText(
-          CallEntryFormatter.formatDurationAndDataUsage(context, entry.duration, entry.dataUsage));
+          CallEntryFormatter.formatDurationAndDataUsage(
+              context, entry.getDuration(), entry.getDataUsage()));
+      callDuration.setContentDescription(
+          CallEntryFormatter.formatDurationAndDataUsageA11y(
+              context, entry.getDuration(), entry.getDataUsage()));
     }
     setMultimediaDetails(number, entry, showMultimediaDivider);
   }
 
   private void setMultimediaDetails(String number, CallDetailsEntry entry, boolean showDivider) {
     multimediaDivider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
-    if (entry.historyResults == null || entry.historyResults.length <= 0) {
+    if (entry.getHistoryResultsList().isEmpty()) {
       LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no data, hiding UI");
       multimediaDetailsContainer.setVisibility(View.GONE);
     } else {
 
-      HistoryResult historyResult = entry.historyResults[0];
+      HistoryResult historyResult = entry.getHistoryResults(0);
       multimediaDetailsContainer.setVisibility(View.VISIBLE);
-      multimediaDetailsContainer.setOnClickListener(
-          (v) -> {
-            DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
-          });
+      multimediaDetailsContainer.setOnClickListener((v) -> startSmsIntent(context, number));
       multimediaImageContainer.setClipToOutline(true);
 
-      if (!TextUtils.isEmpty(historyResult.imageUri)) {
+      if (!TextUtils.isEmpty(historyResult.getImageUri())) {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "setting image");
         multimediaImageContainer.setVisibility(View.VISIBLE);
-        multimediaImage.setImageURI(Uri.parse(historyResult.imageUri));
+        multimediaImage.setImageURI(Uri.parse(historyResult.getImageUri()));
         multimediaDetails.setText(
             isIncoming(historyResult) ? R.string.received_a_photo : R.string.sent_a_photo);
       } else {
@@ -139,28 +142,34 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       }
 
       // Set text after image to overwrite the received/sent a photo text
-      if (!TextUtils.isEmpty(historyResult.text)) {
+      if (!TextUtils.isEmpty(historyResult.getText())) {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "showing text");
         multimediaDetails.setText(
-            context.getString(R.string.message_in_quotes, historyResult.text));
+            context.getString(R.string.message_in_quotes, historyResult.getText()));
       } else {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no text");
       }
 
-      if (entry.historyResults.length > 1 && !TextUtils.isEmpty(entry.historyResults[1].text)) {
+      if (entry.getHistoryResultsList().size() > 1
+          && !TextUtils.isEmpty(entry.getHistoryResults(1).getText())) {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "showing post call note");
         postCallNote.setVisibility(View.VISIBLE);
         postCallNote.setText(
-            context.getString(R.string.message_in_quotes, entry.historyResults[1].text));
+            context.getString(R.string.message_in_quotes, entry.getHistoryResults(1).getText()));
+        postCallNote.setOnClickListener((v) -> startSmsIntent(context, number));
       } else {
         LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no post call note");
       }
     }
   }
 
+  private void startSmsIntent(Context context, String number) {
+    DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
+  }
+
   private static boolean isIncoming(@NonNull HistoryResult historyResult) {
-    return historyResult.type == Type.INCOMING_POST_CALL
-        || historyResult.type == Type.INCOMING_CALL_COMPOSER;
+    return historyResult.getType() == Type.INCOMING_POST_CALL
+        || historyResult.getType() == Type.INCOMING_CALL_COMPOSER;
   }
 
   private static @ColorInt int getColorForCallType(Context context, int callType) {

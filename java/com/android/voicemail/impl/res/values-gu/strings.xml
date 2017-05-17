@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"વૉઇસમેઇલ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"વૉઇસમેઇલ"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"વાઇબ્રેટ"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"વાઇબ્રેટ"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ધ્વનિ"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"વિગતવાર સેટિંગ્સ"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"વિઝ્યુઅલ વૉઇસમેઇલ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"અતિરિક્ત બેકઅપ અને સ્ટોરેજ"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"આ એક પ્રાયોગિક સુવિધા છે"</i></b>" અમે હાલમાં પરીક્ષણ કરી રહ્યાં છીએ. આ તમારા વૉઇસમેઇલ સર્વરમાંથી સંભવિત રૂપે વૉઇસમેઇલ કાઢી નાખશે. ભવિષ્યમાં આ સુવિધાનું સમર્થન કરવાની કોઇ બાંંયધરી નથી. જોકે અમને આ સુવિધા પર પ્રતિસાદ ગમશે."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"PIN સેટ કરો"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN બદલો"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN બદલવા માટે વિઝ્યુઅલ વૉઇસમેઇલ સક્ષમ હોય તે આવશ્યક છે"</string>

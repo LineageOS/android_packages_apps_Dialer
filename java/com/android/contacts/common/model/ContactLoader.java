@@ -36,8 +36,6 @@ import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.Groups;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
-import android.util.Log;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.GroupMetaData;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountTypeWithDataSet;
@@ -47,7 +45,9 @@ import com.android.contacts.common.model.dataitem.PhotoDataItem;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.ContactLoaderUtils;
 import com.android.contacts.common.util.UriUtils;
-import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -218,7 +218,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
   @Override
   public Contact loadInBackground() {
-    Log.e(TAG, "loadInBackground=" + mLookupUri);
+    LogUtil.e(TAG, "loadInBackground=" + mLookupUri);
     try {
       final ContentResolver resolver = getContext().getContentResolver();
       final Uri uriCurrentFormat = ContactLoaderUtils.ensureIsContactUri(resolver, mLookupUri);
@@ -264,7 +264,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
       }
       return result;
     } catch (Exception e) {
-      Log.e(TAG, "Error loading the contact: " + mLookupUri, e);
+      LogUtil.e(TAG, "Error loading the contact: " + mLookupUri, e);
       return Contact.forError(mRequestedUri, e);
     }
   }
@@ -274,7 +274,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     Cursor cursor =
         resolver.query(entityUri, ContactQuery.COLUMNS, null, null, Contacts.Entity.RAW_CONTACT_ID);
     if (cursor == null) {
-      Log.e(TAG, "No cursor returned in loadContactEntity");
+      LogUtil.e(TAG, "No cursor returned in loadContactEntity");
       return Contact.forNotFound(mRequestedUri);
     }
 
@@ -521,10 +521,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     cursorColumnToContentValues(cursor, cv, ContactQuery.CHAT_CAPABILITY);
     cursorColumnToContentValues(cursor, cv, ContactQuery.TIMES_USED);
     cursorColumnToContentValues(cursor, cv, ContactQuery.LAST_TIME_USED);
-    if (CompatUtils.isMarshmallowCompatible()) {
-      cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
-    }
-
+    cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
     return cv;
   }
 
@@ -577,7 +574,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
             Resources resources = pm.getResourcesForApplication(packageName);
             directoryType = resources.getString(typeResourceId);
           } catch (NameNotFoundException e) {
-            Log.w(
+            LogUtil.w(
                 TAG, "Contact directory resource not found: " + packageName + "." + typeResourceId);
           }
         }
@@ -692,11 +689,15 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
       mLookupUri = result.getLookupUri();
 
       if (!result.isDirectoryEntry()) {
-        Log.i(TAG, "Registering content observer for " + mLookupUri);
         if (mObserver == null) {
           mObserver = new ForceLoadContentObserver();
         }
-        getContext().getContentResolver().registerContentObserver(mLookupUri, true, mObserver);
+
+        if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+          getContext().getContentResolver().registerContentObserver(mLookupUri, true, mObserver);
+        } else {
+          LogUtil.w("ContactLoader.deliverResult", "contacts permission not available");
+        }
       }
 
       if (mPostViewNotification) {
@@ -732,7 +733,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         try {
           context.startService(intent);
         } catch (Exception e) {
-          Log.e(TAG, "Error sending message to source-app", e);
+          LogUtil.e(TAG, "Error sending message to source-app", e);
         }
       }
     }
@@ -919,9 +920,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
     static {
       List<String> projectionList = Lists.newArrayList(COLUMNS_INTERNAL);
-      if (CompatUtils.isMarshmallowCompatible()) {
-        projectionList.add(Data.CARRIER_PRESENCE);
-      }
+      projectionList.add(Data.CARRIER_PRESENCE);
       COLUMNS = projectionList.toArray(new String[projectionList.size()]);
     }
   }

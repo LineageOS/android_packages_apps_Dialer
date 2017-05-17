@@ -105,6 +105,12 @@
   <!-- Format for a post call message. (ex. John Doe: Give me a call when you're free.) -->
   <string name="post_call_notification_message"><xliff:g id="name">%1$s</xliff:g>: <xliff:g id="message">%2$s</xliff:g></string>
 
+  <!-- Message displayed in the "Voicemail" notification item, allowing the user
+       to dial the indicated number. -->
+  <string name="notification_voicemail_text_format">Dial <xliff:g id="voicemail_number">%s</xliff:g></string>
+  <!-- Message displayed in the "Voicemail" notification item,
+       indicating that there's no voicemail number available -->
+  <string name="notification_voicemail_no_vm_number">Voicemail number unknown</string>
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <plurals name="notification_voicemail_title">
     <item quantity="one">Voicemail</item>
@@ -355,6 +361,12 @@
 
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
   <string name="callDetailsDurationFormat"><xliff:g example="42" id="minutes">%s</xliff:g> min <xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
+
+  <string name="voicemailMultiSelectVoicemail">voicemail</string>
+  <string name="voicemailMultiSelectVoicemails">voicemails</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Yes</string>
+  <string name="voicemailMultiSelectDeleteCancel">No</string>
+  <string name="voicemailMultiSelectDialogTitle">Delete selected <xliff:g id="voicemailorvoicemails">%1$s</xliff:g>?</string>
 
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
        explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
@@ -752,6 +764,9 @@
   <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
   <string name="voicemail_settings_label">Voicemail</string>
 
+  <!-- Title for the preference screen to select which SIM to change voicemail settings for [CHAR LIMIT=30] -->
+  <string name="voicemail_settings_select_sim_title">Select SIM for voicemail settings</string>
+
   <!-- Label for a section describing that call blocking is temporarily disabled because an
        emergency call was made. [CHAR LIMIT=50] -->
     <string name="blocked_numbers_disabled_emergency_header_label">
@@ -881,5 +896,8 @@
 
   <!-- Shown as a message that notifies the user enriched calling isn't working -->
   <string name="call_composer_connection_failed"><xliff:g id="name">%1$s</xliff:g> is offline and can\'t be reached</string>
+
+  <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
+  <string name="about_phone_label">About</string>
 
 </resources>

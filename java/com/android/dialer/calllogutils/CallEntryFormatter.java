@@ -17,6 +17,7 @@
 package com.android.dialer.calllogutils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.icu.lang.UCharacter;
 import android.icu.text.BreakIterator;
 import android.os.Build.VERSION;
@@ -24,9 +25,12 @@ import android.os.Build.VERSION_CODES;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import com.android.dialer.util.DialerUtils;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /** Utility class for formatting data and data usage in call log entries. */
 public class CallEntryFormatter {
@@ -77,17 +81,40 @@ public class CallEntryFormatter {
   }
 
   private static CharSequence formatDuration(Context context, long elapsedSeconds) {
-    long minutes = 0;
-    long seconds = 0;
-
+    Resources res = context.getResources();
+    String formatPattern;
     if (elapsedSeconds >= 60) {
-      minutes = elapsedSeconds / 60;
-      elapsedSeconds -= minutes * 60;
-      seconds = elapsedSeconds;
-      return context.getString(R.string.call_details_duration_format, minutes, seconds);
+      String minutesString = res.getString(R.string.call_details_minutes_abbreviation);
+      String secondsString = res.getString(R.string.call_details_seconds_abbreviation);
+      // example output: "1m 1s"
+      formatPattern =
+          context.getString(
+              R.string.call_duration_format_pattern, "m", minutesString, "s", secondsString);
     } else {
-      seconds = elapsedSeconds;
-      return context.getString(R.string.call_details_short_duration_format, seconds);
+      String secondsString = res.getString(R.string.call_details_seconds_abbreviation);
+      // example output: "1s"
+      formatPattern =
+          context.getString(R.string.call_duration_short_format_pattern, "s", secondsString);
+    }
+    SimpleDateFormat format = new SimpleDateFormat(formatPattern);
+    return format.format(new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds)));
+  }
+
+  private static CharSequence formatDurationA11y(Context context, long elapsedSeconds) {
+    Resources res = context.getResources();
+    if (elapsedSeconds >= 60) {
+      int minutes = (int) (elapsedSeconds / 60);
+      int seconds = (int) elapsedSeconds - minutes * 60;
+      String minutesString = res.getQuantityString(R.plurals.a11y_minutes, minutes);
+      String secondsString = res.getQuantityString(R.plurals.a11y_seconds, seconds);
+      // example output: "1 minute 1 second", "2 minutes 2 seconds", ect.
+      return context.getString(
+          R.string.a11y_call_duration_format, minutes, minutesString, seconds, secondsString);
+    } else {
+      String secondsString = res.getQuantityString(R.plurals.a11y_seconds, (int) elapsedSeconds);
+      // example output: "1 second", "2 seconds"
+      return context.getString(
+          R.string.a11y_call_duration_short_format, elapsedSeconds, secondsString);
     }
   }
 
@@ -99,10 +126,28 @@ public class CallEntryFormatter {
    * @return String containing call duration and data usage.
    */
   public static CharSequence formatDurationAndDataUsage(
-      Context context, long elapsedSeconds, Long dataUsage) {
-    CharSequence duration = formatDuration(context, elapsedSeconds);
+      Context context, long elapsedSeconds, long dataUsage) {
+    return formatDurationAndDataUsageInternal(
+        context, formatDuration(context, elapsedSeconds), dataUsage);
+  }
+
+  /**
+   * Formats a string containing the call duration and the data usage (if specified) for TalkBack.
+   *
+   * @param elapsedSeconds Total elapsed seconds.
+   * @param dataUsage Data usage in bytes, or null if not specified.
+   * @return String containing call duration and data usage.
+   */
+  public static CharSequence formatDurationAndDataUsageA11y(
+      Context context, long elapsedSeconds, long dataUsage) {
+    return formatDurationAndDataUsageInternal(
+        context, formatDurationA11y(context, elapsedSeconds), dataUsage);
+  }
+
+  private static CharSequence formatDurationAndDataUsageInternal(
+      Context context, CharSequence duration, long dataUsage) {
     List<CharSequence> durationItems = new ArrayList<>();
-    if (dataUsage != null) {
+    if (dataUsage > 0) {
       durationItems.add(duration);
       durationItems.add(Formatter.formatShortFileSize(context, dataUsage));
       return DialerUtils.join(durationItems);

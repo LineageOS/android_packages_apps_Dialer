@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"Talhólf (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"Talhólf"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Titringur"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Titringur"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Hljóð"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Ítarlegar stillingar"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Myndrænt talhólf"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Viðbótaröryggisafritun og samstilling"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Þessi eiginleiki er í tilraunaútgáfu"</i></b>" sem við erum að prófa að svo stöddu. Þetta mun mögulega eyða talhólfsskilaboðum af vefþjóni talhólfsins. Engin trygging er fyrir því að þessi eiginleiki verði studdur í framtíðinni. Við kunnum virkilega að meta allar ábendingar varðandi þennan eiginleika."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Stilla PIN-númer"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Breyta PIN-númeri"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Kveikt þarf að vera á myndrænu talhólfi til að breyta PIN-númeri"</string>

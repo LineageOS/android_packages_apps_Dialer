@@ -27,7 +27,7 @@ import com.android.contacts.common.list.PinnedHeaderListView;
 import com.android.dialer.app.R;
 import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
-import com.android.dialer.callintent.nano.CallInitiationType;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.util.PermissionsUtil;
@@ -133,7 +133,7 @@ public class RegularSearchFragment extends SearchFragment
   }
 
   @Override
-  protected int getCallInitiationType(boolean isRemoteDirectory) {
+  protected CallInitiationType.Type getCallInitiationType(boolean isRemoteDirectory) {
     return isRemoteDirectory
         ? CallInitiationType.Type.REMOTE_DIRECTORY
         : CallInitiationType.Type.REGULAR_SEARCH;

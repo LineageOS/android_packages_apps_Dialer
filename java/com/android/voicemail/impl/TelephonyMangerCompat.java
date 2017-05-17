@@ -16,24 +16,36 @@
 
 package com.android.voicemail.impl;
 
+import android.app.PendingIntent;
+import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+import android.telephony.VisualVoicemailService;
+import android.telephony.VisualVoicemailSmsFilterSettings;
+import com.android.dialer.common.LogUtil;
 import java.lang.reflect.Method;
 
 /** Handles {@link TelephonyManager} API changes in experimental SDK */
 public class TelephonyMangerCompat {
-
-  private static final String GET_VISUAL_VOICEMAIL_PACKGE_NAME = "getVisualVoicemailPackageName";
-
-  /**
-   * Changed from getVisualVoicemailPackageName(PhoneAccountHandle) to
-   * getVisualVoicemailPackageName()
-   */
-  public static String getVisualVoicemailPackageName(TelephonyManager telephonyManager) {
+  /** Moved from VisualVoicemailService to TelephonyManager */
+  public static String sendVisualVoicemailSms(
+      Context context,
+      PhoneAccountHandle phoneAccountHandle,
+      String number,
+      int port,
+      String text,
+      PendingIntent sentIntent) {
     try {
-      Method method = TelephonyManager.class.getMethod(GET_VISUAL_VOICEMAIL_PACKGE_NAME);
+      Method method =
+          TelephonyManager.class.getMethod(
+              "sendVisualVoicemailSms", String.class, int.class, String.class, PendingIntent.class);
       try {
-        return (String) method.invoke(telephonyManager);
+        LogUtil.i("TelephonyMangerCompat.sendVisualVoicemailSms", "using TelephonyManager");
+        TelephonyManager telephonyManager =
+            context
+                .getSystemService(TelephonyManager.class)
+                .createForPhoneAccountHandle(phoneAccountHandle);
+        return (String) method.invoke(telephonyManager, number, port, text, sentIntent);
       } catch (ReflectiveOperationException e) {
         throw new RuntimeException(e);
       }
@@ -42,15 +54,61 @@ public class TelephonyMangerCompat {
     }
 
     try {
+      LogUtil.i("TelephonyMangerCompat.sendVisualVoicemailSms", "using VisualVoicemailService");
+      Method method =
+          VisualVoicemailService.class.getMethod(
+              "sendVisualVoicemailSms",
+              Context.class,
+              PhoneAccountHandle.class,
+              String.class,
+              short.class,
+              String.class,
+              PendingIntent.class);
+      return (String)
+          method.invoke(null, context, phoneAccountHandle, number, (short) port, text, sentIntent);
+
+    } catch (ReflectiveOperationException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  /** Moved from VisualVoicemailService to TelephonyManager */
+  public static String setVisualVoicemailSmsFilterSettings(
+      Context context,
+      PhoneAccountHandle phoneAccountHandle,
+      VisualVoicemailSmsFilterSettings settings) {
+    try {
       Method method =
           TelephonyManager.class.getMethod(
-              GET_VISUAL_VOICEMAIL_PACKGE_NAME, PhoneAccountHandle.class);
+              "setVisualVoicemailSmsFilterSettings", VisualVoicemailSmsFilterSettings.class);
       try {
-        return (String) method.invoke(telephonyManager, (Object) null);
+        LogUtil.i(
+            "TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings", "using TelephonyManager");
+        TelephonyManager telephonyManager =
+            context
+                .getSystemService(TelephonyManager.class)
+                .createForPhoneAccountHandle(phoneAccountHandle);
+        return (String) method.invoke(telephonyManager, settings);
       } catch (ReflectiveOperationException e) {
         throw new RuntimeException(e);
       }
     } catch (NoSuchMethodException e) {
+      // Do nothing, try the next version.
+    }
+
+    try {
+      LogUtil.i(
+          "TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings",
+          "using VisualVoicemailService");
+      Method method =
+          VisualVoicemailService.class.getMethod(
+              "setSmsFilterSettings",
+              Context.class,
+              PhoneAccountHandle.class,
+              VisualVoicemailSmsFilterSettings.class);
+      return (String) method.invoke(null, context, phoneAccountHandle, settings);
+
+    } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }
   }

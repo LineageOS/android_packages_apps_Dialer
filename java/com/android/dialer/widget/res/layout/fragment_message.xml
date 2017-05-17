@@ -53,11 +53,11 @@
     <LinearLayout
       android:id="@+id/count_and_send_container"
       android:orientation="vertical"
-      android:layout_width="wrap_content"
+      android:layout_width="@dimen/send_container_width"
       android:layout_height="wrap_content"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
-      android:layout_marginEnd="@dimen/textview_item_padding"
+      android:paddingEnd="@dimen/textview_item_padding"
       android:gravity="center">
 
       <ImageView

@@ -28,13 +28,13 @@ import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.util.ArrayMap;
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamBindings;
@@ -95,7 +95,7 @@ public class CallList implements DialerCallDelegate {
 
   /**
    * USED ONLY FOR TESTING Testing-only constructor. Instance should only be acquired through
-   * getInstance().
+   * getRunningInstance().
    */
   @VisibleForTesting
   public CallList() {}
@@ -198,7 +198,7 @@ public class CallList implements DialerCallDelegate {
   private void logSecondIncomingCall(@NonNull Context context, @NonNull DialerCall incomingCall) {
     DialerCall firstCall = getFirstCall();
     if (firstCall != null) {
-      int impression = 0;
+      DialerImpression.Type impression;
       if (firstCall.isVideoCall()) {
         if (incomingCall.isVideoCall()) {
           impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VIDEO_CALL;
@@ -212,7 +212,7 @@ public class CallList implements DialerCallDelegate {
           impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VOICE_CALL;
         }
       }
-      Assert.checkArgument(impression != 0);
+      Assert.checkArgument(impression != null);
       Logger.get(context)
           .logCallImpression(
               impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());
@@ -289,6 +289,10 @@ public class CallList implements DialerCallDelegate {
         LogUtil.w(
             "CallList.onCallRemoved", "Removing call not previously disconnected " + call.getId());
       }
+    }
+
+    if (!hasLiveCall()) {
+      DialerCall.clearRestrictedCount();
     }
   }
 
@@ -723,15 +727,17 @@ public class CallList implements DialerCallDelegate {
      * WiFi
      */
     void onHandoverToWifiFailed(DialerCall call);
+
+    /** Called when the user initiates a call to an international number while on WiFi. */
+    void onInternationalCallOnWifi(@NonNull DialerCall call);
   }
 
   private class DialerCallListenerImpl implements DialerCallListener {
 
-    private final DialerCall mCall;
+    @NonNull private final DialerCall mCall;
 
-    DialerCallListenerImpl(DialerCall call) {
-      Assert.isNotNull(call);
-      mCall = call;
+    DialerCallListenerImpl(@NonNull DialerCall call) {
+      mCall = Assert.isNotNull(call);
     }
 
     @Override
@@ -775,6 +781,14 @@ public class CallList implements DialerCallDelegate {
     public void onHandoverToWifiFailure() {
       for (Listener listener : mListeners) {
         listener.onHandoverToWifiFailed(mCall);
+      }
+    }
+
+    @Override
+    public void onInternationalCallOnWifi() {
+      LogUtil.enterBlock("DialerCallListenerImpl.onInternationalCallOnWifi");
+      for (Listener listener : mListeners) {
+        listener.onInternationalCallOnWifi(mCall);
       }
     }
 

@@ -23,6 +23,8 @@ import android.support.v4.os.UserManagerCompat;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.answerproximitysensor.AnswerProximitySensor;
@@ -77,8 +79,18 @@ public class AnswerScreenPresenter
   public void onAnswer(boolean answerVideoAsAudio) {
     if (answerScreen.isVideoUpgradeRequest()) {
       if (answerVideoAsAudio) {
+        Logger.get(context)
+            .logCallImpression(
+                DialerImpression.Type.VIDEO_CALL_REQUEST_ACCEPTED_AS_AUDIO,
+                call.getUniqueCallId(),
+                call.getTimeAddedMs());
         call.getVideoTech().acceptVideoRequestAsAudio();
       } else {
+        Logger.get(context)
+            .logCallImpression(
+                DialerImpression.Type.VIDEO_CALL_REQUEST_ACCEPTED,
+                call.getUniqueCallId(),
+                call.getTimeAddedMs());
         call.getVideoTech().acceptVideoRequest();
       }
     } else {
@@ -93,6 +105,11 @@ public class AnswerScreenPresenter
   @Override
   public void onReject() {
     if (answerScreen.isVideoUpgradeRequest()) {
+      Logger.get(context)
+          .logCallImpression(
+              DialerImpression.Type.VIDEO_CALL_REQUEST_DECLINED,
+              call.getUniqueCallId(),
+              call.getTimeAddedMs());
       call.getVideoTech().declineVideoRequest();
     } else {
       call.reject(false /* rejectWithMessage */, null);
@@ -163,6 +180,9 @@ public class AnswerScreenPresenter
 
     @Override
     public void onHandoverToWifiFailure() {}
+
+    @Override
+    public void onInternationalCallOnWifi() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

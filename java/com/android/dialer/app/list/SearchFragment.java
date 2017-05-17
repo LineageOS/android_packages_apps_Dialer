@@ -42,7 +42,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.app.widget.DialpadSearchEmptyContentView;
 import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.callintent.nano.CallSpecificAppData;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -238,12 +238,13 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         number = adapter.getQueryString();
         listener = getOnPhoneNumberPickerListener();
         if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-          CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-          callSpecificAppData.callInitiationType =
-              getCallInitiationType(false /* isRemoteDirectory */);
-          callSpecificAppData.positionOfSelectedSearchResult = position;
-          callSpecificAppData.charactersInSearchString =
-              getQueryString() == null ? 0 : getQueryString().length();
+          CallSpecificAppData callSpecificAppData =
+              CallSpecificAppData.newBuilder()
+                  .setCallInitiationType(getCallInitiationType(false /* isRemoteDirectory */))
+                  .setPositionOfSelectedSearchResult(position)
+                  .setCharactersInSearchString(
+                      getQueryString() == null ? 0 : getQueryString().length())
+                  .build();
           listener.onPickPhoneNumber(number, false /* isVideoCall */, callSpecificAppData);
         }
         break;
@@ -274,12 +275,13 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             TextUtils.isEmpty(mAddToContactNumber) ? adapter.getQueryString() : mAddToContactNumber;
         listener = getOnPhoneNumberPickerListener();
         if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-          CallSpecificAppData callSpecificAppData = new CallSpecificAppData();
-          callSpecificAppData.callInitiationType =
-              getCallInitiationType(false /* isRemoteDirectory */);
-          callSpecificAppData.positionOfSelectedSearchResult = position;
-          callSpecificAppData.charactersInSearchString =
-              getQueryString() == null ? 0 : getQueryString().length();
+          CallSpecificAppData callSpecificAppData =
+              CallSpecificAppData.newBuilder()
+                  .setCallInitiationType(getCallInitiationType(false /* isRemoteDirectory */))
+                  .setPositionOfSelectedSearchResult(position)
+                  .setCharactersInSearchString(
+                      getQueryString() == null ? 0 : getQueryString().length())
+                  .build();
           listener.onPickPhoneNumber(number, true /* isVideoCall */, callSpecificAppData);
         }
         break;
@@ -378,7 +380,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
       return;
     }
 
-    if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+    if (PermissionsUtil.hasContactsReadPermissions(getActivity())) {
       super.startLoading();
     } else if (TextUtils.isEmpty(getQueryString())) {
       // Clear out any existing call shortcuts.

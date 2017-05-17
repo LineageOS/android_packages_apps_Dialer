@@ -96,8 +96,7 @@ public class VideoSurfaceTextureImpl implements VideoSurfaceTexture {
 
     if (this.textureView != null) {
       this.textureView.setOnClickListener(null);
-      // Don't clear the surface texture listener. This is important because our listener prevents
-      // the surface from being released so that it can be reused later.
+      this.textureView.setSurfaceTextureListener(null);
     }
 
     this.textureView = textureView;
@@ -137,12 +136,12 @@ public class VideoSurfaceTextureImpl implements VideoSurfaceTexture {
     LogUtil.i(
         "VideoSurfaceTextureImpl.createSurface",
         "width: " + width + ", height: " + height + " " + toString());
-    if (savedSurfaceTexture != null) {
-      savedSurfaceTexture.setDefaultBufferSize(width, height);
-      savedSurface = new Surface(savedSurfaceTexture);
-      return true;
+    savedSurfaceTexture.setDefaultBufferSize(width, height);
+    if (savedSurface != null) {
+      savedSurface.release();
     }
-    return false;
+    savedSurface = new Surface(savedSurfaceTexture);
+    return true;
   }
 
   private void onSurfaceCreated() {

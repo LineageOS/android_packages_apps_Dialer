@@ -22,5 +22,6 @@
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"ការ​ហៅ​ដែល​មិន​បាន​ទទួល"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"សារ​ជា​សំឡេង"</string>
     <string name="notification_channel_external_call" msgid="2200143959948071132">"ការ​ហៅខាង​ក្រៅ"</string>
-    <string name="notification_channel_misc" msgid="5181419532951960166">"ផ្សេងៗ"</string>
+    <!-- no translation found for notification_channel_misc (5595452227577858518) -->
+    <skip />
 </resources>

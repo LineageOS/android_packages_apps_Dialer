@@ -33,12 +33,11 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
-import com.android.dialer.backup.nano.VoicemailInfo;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.telecom.TelecomUtil;
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class DialerBackupAgent extends BackupAgent {
   // Voicemail Uri Column
   public static final String VOICEMAIL_URI = "voicemail_uri";
   // Voicemail packages to backup
-  public static final String VOICEMAIL_SOURCE_PACKAGE = "com.android.phone";
+  public static final String VOICEMAIL_SOURCE_PACKAGE = "com.google.android.dialer";
 
   private long voicemailsBackedupSoFar = 0;
   private long sizeOfVoicemailsBackedupSoFar = 0;
@@ -82,15 +81,14 @@ public class DialerBackupAgent extends BackupAgent {
 
   /**
    * onRestore is used for Key/Value restore. Since we are using Dolly/Android Auto backup/restore,
-   * we do not need to implement this method as Dolly should not be calling this method. Instead
-   * onFileRestore will be called by Dolly.
+   * we need to implement this method only for backwards compatibility. Dolly should be calling
+   * onFileRestore during its restore.
    */
   @Override
   public void onRestore(
       BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor)
       throws IOException {
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_RESTORE);
-    Assert.fail("Android Backup should not call DialerBackupAgent.onRestore");
   }
 
   @TargetApi(VERSION_CODES.M)

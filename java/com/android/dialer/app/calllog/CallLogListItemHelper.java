@@ -269,7 +269,7 @@ import com.android.dialer.compat.AppCompatConstants;
     if (!TextUtils.isEmpty(details.getPreferredName())) {
       recipient = details.getPreferredName();
     } else {
-      recipient = details.displayNumber + details.postDialDigits;
+      recipient = details.displayNumber;
     }
     return recipient;
   }

@@ -41,7 +41,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.app.Bindings;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
@@ -56,6 +55,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
 
@@ -200,9 +200,18 @@ public class CallLogFragment extends Fragment
     final ContentResolver resolver = activity.getContentResolver();
     mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
     mKeyguardManager = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
-    resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
-    resolver.registerContentObserver(
-        ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
+
+    if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
+      resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "call log permission not available");
+    }
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      resolver.registerContentObserver(
+          ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "contacts permission not available.");
+    }
     setHasOptionsMenu(true);
   }
 
@@ -376,6 +385,7 @@ public class CallLogFragment extends Fragment
 
     super.onStop();
     mAdapter.onStop();
+    mContactInfoCache.stop();
   }
 
   @Override
@@ -397,8 +407,6 @@ public class CallLogFragment extends Fragment
     outState.putBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
     outState.putBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, mHasReadCallLogPermission);
     outState.putBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
-
-    mContactInfoCache.stop();
 
     mAdapter.onSaveInstanceState(outState);
   }
@@ -495,7 +503,7 @@ public class CallLogFragment extends Fragment
     if (mKeyguardManager != null
         && !mKeyguardManager.inKeyguardRestrictedInputMode()
         && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-      CallLogNotificationsQueryHelper.updateVoicemailNotifications(getActivity());
+      CallLogNotificationsService.markNewVoicemailsAsOld(getActivity(), null);
     }
   }
 

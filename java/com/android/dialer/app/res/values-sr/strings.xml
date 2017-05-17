@@ -42,6 +42,8 @@
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Узврати позив"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"Пошаљи SMS"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Позови <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Непознат број говорне поште"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> говорна порука </item>
       <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> говорне поруке </item>
@@ -98,6 +100,12 @@
     <string name="voicemail" msgid="8899540969000957954">"Говорна пошта"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
+    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"говорну поруку"</string>
+    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"говорне поруке"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Да"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Не"</string>
+    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
+    <skip />
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -194,6 +202,8 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Позиви"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Блокирање позива"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Говорна пошта"</string>
+    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Блокирање позива је привремено искључено"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Блокирање позива је онемогућено зато што сте контактирали службе за помоћ у хитним случајевима са овог телефона у последњих 48 сати. Аутоматски ће бити поново омогућено када истекне период од 48 сати."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Увези бројеве"</string>
@@ -223,4 +233,6 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Деблокирај број"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Непожељан"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> је офлајн и не можете да га/је контактирате"</string>
+    <!-- no translation found for about_phone_label (582991354677973731) -->
+    <skip />
 </resources>

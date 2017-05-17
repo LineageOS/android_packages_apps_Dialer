@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"Posta zanore (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"Posta zanore"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Dridhje"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Dridhje"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Tingulli"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Cilësimet e përparuara"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Posta zanore vizuale"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Rezervimi dhe hapësira ruajtëse shtesë"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Ky është një funksion eksperimental"</i></b>" që po e testojmë aktualisht. Kjo mund të fshijë posta zanore nga serveri i postës zanore. Nuk ka garanci për mbështetjen e këtij funksioni në të ardhmen. Megjithatë do të na pëlqente të merrnim komente për funksionin."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Konfiguro kodin PIN"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Ndrysho kodin PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Duhet të aktivizohet posta zanore vizuale për të ndryshuar kodin PIN"</string>

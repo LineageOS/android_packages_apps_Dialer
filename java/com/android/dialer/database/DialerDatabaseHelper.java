@@ -18,6 +18,7 @@ package com.android.dialer.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -63,8 +64,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   public static final int DATABASE_VERSION = 10;
 
   public static final String DATABASE_NAME = "dialer.db";
-  public static final Uri SMART_DIAL_UPDATED_URI =
-      Uri.parse("content://com.android.dialer/smart_dial_updated");
+
+  public static final String ACTION_SMART_DIAL_UPDATED =
+      "com.android.dialer.database.ACTION_SMART_DIAL_UPDATED";
   private static final String TAG = "DialerDatabaseHelper";
   private static final boolean DEBUG = false;
   /** Saves the last update time of smart dial databases to shared preferences. */
@@ -331,7 +333,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   /** Starts the database upgrade process in the background. */
   public void startSmartDialUpdateThread() {
-    if (PermissionsUtil.hasContactsPermissions(mContext)) {
+    if (PermissionsUtil.hasContactsReadPermissions(mContext)) {
       new SmartDialUpdateAsyncTask().execute();
     }
   }
@@ -595,6 +597,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * since last update.
    */
   public void updateSmartDialDatabase() {
+    LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
+
     final SQLiteDatabase db = getWritableDatabase();
 
     synchronized (mLock) {
@@ -797,8 +801,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
       editor.apply();
 
+      LogUtil.i("DialerDatabaseHelper.updateSmartDialDatabase", "broadcasting smart dial update");
+
       // Notify content observers that smart dial database has been updated.
-      mContext.getContentResolver().notifyChange(SMART_DIAL_UPDATED_URI, null, false);
+      Intent intent = new Intent(ACTION_SMART_DIAL_UPDATED);
+      intent.setPackage(mContext.getPackageName());
+      mContext.sendBroadcast(intent);
     }
   }
 

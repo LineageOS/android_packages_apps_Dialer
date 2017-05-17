@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_channel_incoming_call" msgid="2478740764736158630">"Dolazni pozivi"</string>
+    <string name="notification_channel_ongoing_call" msgid="5593444445363940672">"Pozivi u toku"</string>
+    <string name="notification_channel_missed_call" msgid="5820652855908217695">"Propušteni pozivi"</string>
+    <string name="notification_channel_voicemail" msgid="9206363659849426204">"Govorne poruke"</string>
+    <string name="notification_channel_external_call" msgid="2200143959948071132">"Spoljni pozivi"</string>
+    <!-- no translation found for notification_channel_misc (5595452227577858518) -->
+    <skip />
+</resources>

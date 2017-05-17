@@ -17,26 +17,24 @@
 package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import java.util.Objects;
 
 /**
- * A task for {@link TaskSchedulerService} to execute. Since the task is sent through a intent to
- * the scheduler, The task must be constructable with the intent. Specifically, It must have a
- * constructor with zero arguments, and have all relevant data packed inside the intent. Use {@link
- * TaskSchedulerService#createIntent(Context, Class)} to create a intent that will construct the
- * Task.
+ * A task for {@link TaskExecutor} to execute. Since the task is sent through a bundle to the
+ * scheduler, The task must be constructable with the bundle. Specifically, It must have a
+ * constructor with zero arguments, and have all relevant data packed inside the bundle. Use {@link
+ * Tasks#createIntent(Context, Class)} to create a intent that will construct the Task.
  *
  * <p>Only {@link #onExecuteInBackgroundThread()} is run on the worker thread.
  */
 public interface Task {
-
   /**
    * TaskId to indicate it has not be set. If a task does not provide a default TaskId it should be
-   * set before {@link Task#onCreate(Context, Intent, int, int) returns}
+   * set before {@link Task#onCreate(Context, Bundle)} returns
    */
   int TASK_INVALID = -1;
 
@@ -49,6 +47,7 @@ public interface Task {
   int TASK_UPLOAD = 1;
   int TASK_SYNC = 2;
   int TASK_ACTIVATION = 3;
+  int TASK_STATUS_CHECK = 4;
 
   /**
    * Used to differentiate between types of tasks. If a task with the same TaskId is already in the
@@ -87,13 +86,34 @@ public interface Task {
 
   TaskId getId();
 
+  /**
+   * Serializes the task into a bundle, which will be stored in a {@link android.app.job.JobInfo}
+   * and used to reconstruct the task even if the app is terminated. The task will be initialized
+   * with {@link #onCreate(Context, Bundle)}.
+   */
+  Bundle toBundle();
+
+  /**
+   * A task object is created through reflection, calling the default constructor. The actual
+   * initialization is done in this method. If the task is not a new instance, but being restored
+   * from a bundle, {@link #onRestore(Bundle)} will be called afterwards.
+   */
   @MainThread
-  void onCreate(Context context, Intent intent, int flags, int startId);
+  void onCreate(Context context, Bundle extras);
+
+  /**
+   * Called after {@link #onCreate(Context, Bundle)} if the task is being restored from a Bundle
+   * instead creating a new instance. For example, if the task is stored in {@link
+   * TaskSchedulerJobService} during a long sleep, this will be called when the job is ran again and
+   * the tasks are being restored from the saved state.
+   */
+  @MainThread
+  void onRestore(Bundle extras);
 
   /**
    * @return number of milliSeconds the scheduler should wait before running this task. A value less
-   *     than {@link TaskSchedulerService#READY_TOLERANCE_MILLISECONDS} will be considered ready. If
-   *     no tasks are ready, the scheduler will sleep for this amount of time before doing another
+   *     than {@link TaskExecutor#READY_TOLERANCE_MILLISECONDS} will be considered ready. If no
+   *     tasks are ready, the scheduler will sleep for this amount of time before doing another
    *     check (it will still wake if a new task is added). The first task in the queue that is
    *     ready will be executed.
    */

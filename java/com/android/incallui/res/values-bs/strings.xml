@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Dolazni Wi-Fi poslovni poziv"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Mogući neželjeni dolazni poziv"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Zahtjev za dolazni videopoziv"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"Nova govorna pošta"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"Nova govorna pošta (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"Pozovi <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"Nepoznat broj govorne pošte"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Nema mreže"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Odabrana mreža (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) je nedostupna"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Odgovori"</string>
@@ -140,6 +136,6 @@
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Poziv u toku"</string>
     <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Poziv se nastavlja pomoću mobilnih podataka…"</string>
     <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Prebacivanje na Wi-Fi mrežu nije moguće"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Videopoziv će ostati na mobilnoj mreži. Moguće je naplaćivanje standardnih naknada za prijenos podataka."</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Videopoziv će ostati na mobilnoj mreži. Mogu nastati standardni troškovi prijenosa podataka."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne prikazuj ponovo"</string>
 </resources>

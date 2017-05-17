@@ -17,10 +17,13 @@
 package com.android.voicemail.impl.protocol;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.net.Network;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -28,6 +31,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.ArrayMap;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpEvents;
@@ -49,6 +53,8 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -57,6 +63,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Class to subscribe to basic VVM3 visual voicemail, for example, Verizon. Subscription is required
@@ -111,7 +119,15 @@ public class Vvm3Subscriber {
   private static final String SPG_LANGUAGE_PARAM = "SPG_LANGUAGE_PARAM";
   private static final String SPG_LANGUAGE_EN = "ENGLISH";
 
-  private static final String BASIC_SUBSCRIBE_LINK_TEXT = "Subscribe to Basic Visual Voice Mail";
+  @VisibleForTesting
+  static final String VVM3_SUBSCRIBE_LINK_PATTERNS_JSON_ARRAY =
+      "vvm3_subscribe_link_pattern_json_array";
+
+  private static final String VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS =
+      "["
+          + "\"(?i)Subscribe to Basic Visual Voice Mail\","
+          + "\"(?i)Subscribe to Basic Visual Voicemail\""
+          + "]";
 
   private static final int REQUEST_TIMEOUT_SECONDS = 30;
 
@@ -125,7 +141,8 @@ public class Vvm3Subscriber {
 
   private RequestQueue mRequestQueue;
 
-  private static class ProvisioningException extends Exception {
+  @VisibleForTesting
+  static class ProvisioningException extends Exception {
 
     public ProvisioningException(String message) {
       super(message);
@@ -188,7 +205,8 @@ public class Vvm3Subscriber {
     try {
       String gatewayUrl = getSelfProvisioningGateway();
       String selfProvisionResponse = getSelfProvisionResponse(gatewayUrl);
-      String subscribeLink = findSubscribeLink(selfProvisionResponse);
+      String subscribeLink =
+          findSubscribeLink(getSubscribeLinkPatterns(mHelper.getContext()), selfProvisionResponse);
       clickSubscribeLink(subscribeLink);
     } catch (ProvisioningException e) {
       VvmLog.e(TAG, e.toString());
@@ -291,14 +309,40 @@ public class Vvm3Subscriber {
     }
   }
 
-  private String findSubscribeLink(String response) throws ProvisioningException {
+  @VisibleForTesting
+  static List<Pattern> getSubscribeLinkPatterns(Context context) {
+    String patternsJsonString =
+        ConfigProviderBindings.get(context)
+            .getString(
+                VVM3_SUBSCRIBE_LINK_PATTERNS_JSON_ARRAY, VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS);
+    List<Pattern> patterns = new ArrayList<>();
+    try {
+      JSONArray patternsArray = new JSONArray(patternsJsonString);
+      for (int i = 0; i < patternsArray.length(); i++) {
+        patterns.add(Pattern.compile(patternsArray.getString(i)));
+      }
+    } catch (JSONException e) {
+      throw new IllegalArgumentException("Unable to parse patterns" + e);
+    }
+    return patterns;
+  }
+
+  @VisibleForTesting
+  static String findSubscribeLink(@NonNull List<Pattern> patterns, String response)
+      throws ProvisioningException {
+    if (patterns.isEmpty()) {
+      throw new IllegalArgumentException("empty patterns");
+    }
     Spanned doc = Html.fromHtml(response, Html.FROM_HTML_MODE_LEGACY);
     URLSpan[] spans = doc.getSpans(0, doc.length(), URLSpan.class);
     StringBuilder fulltext = new StringBuilder();
+
     for (URLSpan span : spans) {
       String text = doc.subSequence(doc.getSpanStart(span), doc.getSpanEnd(span)).toString();
-      if (BASIC_SUBSCRIBE_LINK_TEXT.equals(text)) {
-        return span.getURL();
+      for (Pattern pattern : patterns) {
+        if (pattern.matcher(text).matches()) {
+          return span.getURL();
+        }
       }
       fulltext.append(text);
     }

@@ -1,0 +1,390 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+message DialerImpression {
+  // Event enums to be used for Impression Logging in Dialer.
+  // It's perfectly acceptable for this enum to be large
+  // Values should be from 1000 to 100000.
+  // Next Tag:1191
+  enum Type {
+
+    UNKNOWN_AOSP_EVENT_TYPE = 1000;
+
+    // User opened the app
+    APP_LAUNCHED = 1001;
+
+    // User pressed the speaker phone button
+    IN_CALL_SCREEN_TURN_ON_SPEAKERPHONE = 1002;
+
+    // User pressed the speaker phone button again
+    IN_CALL_SCREEN_TURN_ON_WIRED_OR_EARPIECE = 1003;
+
+    // Number not identified as spam and the user tapped the block/report spam button in the
+    // call log
+    CALL_LOG_BLOCK_REPORT_SPAM = 1004;
+
+    // Number identified as spam and the user tapped on the block number call log item
+    CALL_LOG_BLOCK_NUMBER = 1005;
+
+    // User tapped on the unblock number in the call log
+    // This does not deal with whether the user reported this spam or not while initially blocking
+    // For that refer to REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER. If the user had not reported it as
+    // spam they then have the option of directly unblocking the number, a success of which is
+    // logged in USER_ACTION_UNBLOCKED_NUMBER
+    CALL_LOG_UNBLOCK_NUMBER = 1006;
+
+    // Number was identified as spam, and the user tapped that it was not spam
+    CALL_LOG_REPORT_AS_NOT_SPAM = 1007;
+
+    // Confirmation dialog in which the user confirmed that the number was not spam
+    DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM = 1008;
+
+    // User unblocked a number and also acknowledged that the number is not spam
+    // This happens when the user had initially blocked a number and also claimed the number was
+    // spam and had now proceeded to undo that.
+    REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER = 1009
+      ;
+
+    // A number that was identified as spam and the user proceeded to block it. However this
+    // impression was to make sure that while blocking the number the user also acknowledged that
+    // they were going to be reporting this as spam. There is no option for the user in this case
+    // to not report it as spam and block it only. The only flow is:
+    // system identified number as spam -> user wants to block it -> confirmation dialog shows up
+    // asking user to acknowledge they want to block and report as spam -> user acknowledges and
+    // this is when this impression is sent
+    DIALOG_ACTION_CONFIRM_NUMBER_SPAM_INDIRECTLY_VIA_BLOCK_NUMBER = 1010;
+
+    // User reported the number as spam by tick marking on report spam when blocking
+    // the number via call log. This is for case where the user wants to block a number and also
+    // report it as spam
+    REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG = 1011
+      ;
+
+    // User made it to the last step and actually blocked the number
+    USER_ACTION_BLOCKED_NUMBER = 1012
+      ;
+
+    // User made it to the last step and actually unblocked the number
+    USER_ACTION_UNBLOCKED_NUMBER = 1013;
+
+    // User blocked a number, does not guarantee if the number was reported as spam or not
+    // To compute the number of blocked numbers that were reported as not spam and yet blocked
+    // Subtract this value from SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM. It would be
+    // interesting to see how this value compares with
+    // SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM
+    SPAM_AFTER_CALL_NOTIFICATION_BLOCK_NUMBER = 1014;
+
+    // Displays the dialog for first time spam calls with actions "Not spam", "Block", and
+    // "Dismiss".
+    SPAM_AFTER_CALL_NOTIFICATION_SHOW_SPAM_DIALOG = 1015;
+
+    // Displays the dialog for the first time unknown calls with actions "Add contact",
+    // "Block/report spam", and "Dismiss".
+    SPAM_AFTER_CALL_NOTIFICATION_SHOW_NON_SPAM_DIALOG = 1016;
+
+    // User added the number to contacts from the after call notification
+    SPAM_AFTER_CALL_NOTIFICATION_ADD_TO_CONTACTS = 1019
+      ;
+
+    // User marked the number as spam on the after call notification flow
+    SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM = 1020
+      ;
+
+    SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_NOT_SPAM_AND_BLOCKED = 1021;
+
+    // User reported the number as not spam
+    SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM = 1022
+      ;
+
+    // User dismissed the spam notification
+    SPAM_AFTER_CALL_NOTIFICATION_ON_DISMISS_SPAM_DIALOG = 1024;
+
+    // User dismissed the non spam notification
+    SPAM_AFTER_CALL_NOTIFICATION_ON_DISMISS_NON_SPAM_DIALOG = 1025;
+
+    // From the service instead of an activity logs the number of times the number was marked as
+    // Spam by the user (e.g from the feedback prompt)
+    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM = 1026;
+
+    // From the service instead of an activity logs the number of times the number was marked as
+    // Not Spam by the user (e.g from the feedback prompt)
+    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM = 1027;
+
+    // User is in a active call i.e either incoming or outgoing
+    // This is mainly so we can assign an impression event to a call event i.e so that we may be
+    // able to stitch different types of events if they make sense e.g user pressed a speaker button
+    // and we want to associate that to a call event
+    USER_PARTICIPATED_IN_A_CALL = 1028
+      ;
+
+    // Incoming call is a spam call
+    INCOMING_SPAM_CALL = 1029;
+
+    // Incoming call is a non spam call
+    INCOMING_NON_SPAM_CALL = 1030;
+
+    // Spam notifications shown despite throttling
+    SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1041;
+
+    // Spam notifications not shown due to throttling
+    SPAM_NOTIFICATION_NOT_SHOWN_AFTER_THROTTLE = 1042;
+
+    // Non spam notifications shown despite throttling
+    NON_SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1043;
+
+    // Non spam notifications not shown due to throttling
+    NON_SPAM_NOTIFICATION_NOT_SHOWN_AFTER_THROTTLE = 1044;
+
+    // Voicemail status has updated in the voicemail tab and the change PIN
+    // prompt is shown.
+    VOICEMAIL_ALERT_SET_PIN_SHOWN = 1045;
+
+    // User has clicked the change PIN action in the voicemail tab
+    VOICEMAIL_ALERT_SET_PIN_CLICKED = 1046;
+
+    // User was not able to or did not participate in the call e.g missed calls, rejected calls
+    USER_DID_NOT_PARTICIPATE_IN_CALL = 1047;
+
+    // User deleted a call log entry
+    USER_DELETED_CALL_LOG_ITEM = 1048
+      ;
+
+    // User tapped on "Send a message"
+    CALL_LOG_SEND_MESSAGE = 1049
+      ;
+
+    // User tapped on "Add to contact"
+    CALL_LOG_ADD_TO_CONTACT = 1050
+      ;
+
+    // User tapped on "Create new contact"
+    CALL_LOG_CREATE_NEW_CONTACT = 1051
+      ;
+
+    // User deleted an entry from the voicemail tab
+    VOICEMAIL_DELETE_ENTRY = 1052
+      ;
+
+    // Voicemail call log entry was expanded. Could be either if the user tapped the voicemail
+    // call log entry or pressed the play button when the voicemail call log entry was not expanded
+    VOICEMAIL_EXPAND_ENTRY = 1053
+      ;
+
+    // The play button for voicemail call log entry was tapped directly (i.e when the voicemail
+    // call log entry was not expanded and the playbutton was tapped)
+    VOICEMAIL_PLAY_AUDIO_DIRECTLY= 1054
+      ;
+
+    // The play button after expanding the voicemail call log entry was tapped
+    VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY= 1055
+      ;
+
+    // Incoming call was rejected from the notifications
+    REJECT_INCOMING_CALL_FROM_NOTIFICATION= 1056
+      ;
+
+    // Incoming call was rejected from the answer screen including rejecting via sms and talkback
+    REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN= 1057
+      ;
+
+    // User tapped block and spam buttons in context menu, same as buttons in
+    // call log drop down
+    // menu (See 1004-1007).
+    CALL_LOG_CONTEXT_MENU_BLOCK_REPORT_SPAM = 1058;
+    CALL_LOG_CONTEXT_MENU_BLOCK_NUMBER = 1059;
+    CALL_LOG_CONTEXT_MENU_UNBLOCK_NUMBER = 1060;
+    CALL_LOG_CONTEXT_MENU_REPORT_AS_NOT_SPAM = 1061;
+
+    NEW_CONTACT_OVERFLOW = 1062;
+    NEW_CONTACT_FAB = 1063;
+
+    // The ToS is shown the user
+    VOICEMAIL_VVM3_TOS_SHOWN = 1064;
+
+    // The user has accepted the ToS
+    VOICEMAIL_VVM3_TOS_ACCEPTED = 1065;
+
+    // The user has went through the decline ToS dialog and VVM is disabled
+    VOICEMAIL_VVM3_TOS_DECLINED = 1066;
+
+    // The user has clicked the decline ToS button, and a conformation dialog
+    // was shown
+    VOICEMAIL_VVM3_TOS_DECLINE_CLICKED = 1067;
+
+    // The use has clicked the decline ToS button but the PIN has been
+    // randomized. A dialog to instruct the user to set the PIN has been shown
+    VOICEMAIL_VVM3_TOS_DECLINE_CHANGE_PIN_SHOWN = 1068;
+
+    // The user does not have a permission and are presented with a
+    // non-framework UI to request permission.
+    STORAGE_PERMISSION_DISPLAYED = 1069;
+    CAMERA_PERMISSION_DISPLAYED = 1074;
+
+    // The user is being shown the Android framework UI to request a permission.
+    STORAGE_PERMISSION_REQUESTED = 1070;
+    CAMERA_PERMISSION_REQUESTED = 1075;
+
+    // The user has permenantly denied a permission, so the user is being
+    // sent to dialer settings to grant permission.
+    STORAGE_PERMISSION_SETTINGS = 1071;
+    CAMERA_PERMISSION_SETTINGS = 1076;
+
+    // The user granted a permission.
+    STORAGE_PERMISSION_GRANTED = 1072;
+    CAMERA_PERMISSION_GRANTED = 1077;
+
+    // The user denied a permission.
+    STORAGE_PERMISSION_DENIED = 1073;
+    CAMERA_PERMISSION_DENIED = 1078;
+
+    // Voicemail config corruption is detected when in dialtacts activity.
+    VOICEMAIL_CONFIGURATION_STATE_CORRUPTION_DETECTED_FROM_ACTIVITY = 1079;
+    // Voicemail config corruption is detected when a new voicemail notification
+    // has arrived.
+    VOICEMAIL_CONFIGURATION_STATE_CORRUPTION_DETECTED_FROM_NOTIFICATION = 1080;
+
+    // Android Auto Backup and Restore (Dolly)
+    BACKUP_ON_BACKUP = 1081;
+    BACKUP_ON_FULL_BACKUP = 1082;
+    BACKUP_ON_BACKUP_DISABLED = 1083;
+    BACKUP_VOICEMAIL_BACKED_UP = 1084;
+    BACKUP_FULL_BACKED_UP = 1085;
+    BACKUP_ON_BACKUP_JSON_EXCEPTION = 1086;
+
+    BACKUP_ON_QUOTA_EXCEEDED = 1087;
+
+    BACKUP_ON_RESTORE = 1088;
+    BACKUP_RESTORED_FILE = 1089;
+    BACKUP_RESTORED_VOICEMAIL = 1090;
+    BACKUP_ON_RESTORE_FINISHED = 1091;
+    BACKUP_ON_RESTORE_DISABLED = 1092;
+    BACKUP_ON_RESTORE_JSON_EXCEPTION = 1093;
+    BACKUP_ON_RESTORE_IO_EXCEPTION = 1094;
+
+    BACKUP_MAX_VM_BACKUP_REACHED = 1095;
+
+    EVENT_ANSWER_HINT_ACTIVATED = 1096;
+    EVENT_ANSWER_HINT_DEACTIVATED = 1097;
+
+    VVM_TAB_VIEWED = 1098;
+
+    VVM_SHARE_VISIBLE = 1099;
+    VVM_SHARE_PRESSED = 1100;
+
+    OUTGOING_VIDEO_CALL = 1101;
+    INCOMING_VIDEO_CALL = 1102;
+    USER_PARTICIPATED_IN_A_VIDEO_CALL = 1103;
+
+    BACKUP_ON_RESTORE_VM_DUPLICATE_NOT_RESTORING = 1104;
+
+    // User tapped the 'Share and call' button to start the call composer
+    CALL_LOG_SHARE_AND_CALL = 1105;
+    CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL = 1106;
+    CALL_COMPOSER_ACTIVITY_SEND_AND_CALL_PRESSED_WHEN_SESSION_NOT_READY = 1107;
+
+    POST_CALL_PROMPT_USER_TO_SEND_MESSAGE_CLICKED = 1108;
+    POST_CALL_PROMPT_USER_TO_SEND_MESSAGE = 1109;
+    POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE = 1110;
+    POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE_CLICKED = 1111;
+
+    IN_CALL_SCREEN_TURN_ON_MUTE = 1112;
+    IN_CALL_SCREEN_TURN_OFF_MUTE = 1113;
+    IN_CALL_SCREEN_SWAP_CAMERA = 1114;
+    IN_CALL_SCREEN_TURN_ON_VIDEO = 1115;
+    IN_CALL_SCREEN_TURN_OFF_VIDEO = 1116;
+
+    VIDEO_CALL_WITH_INCOMING_VOICE_CALL = 1117;
+    VIDEO_CALL_WITH_INCOMING_VIDEO_CALL = 1118;
+    VOICE_CALL_WITH_INCOMING_VOICE_CALL = 1119;
+    VOICE_CALL_WITH_INCOMING_VIDEO_CALL = 1120;
+
+    CALL_DETAILS_COPY_NUMBER = 1121;
+    CALL_DETAILS_EDIT_BEFORE_CALL = 1122;
+    CALL_DETAILS_CALL_BACK = 1123;
+
+    VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO = 1124;
+    VVM_USER_DISMISSED_VM_FULL_PROMO = 1125;
+    VVM_USER_ENABLED_ARCHIVE_FROM_VM_ALMOST_FULL_PROMO = 1126;
+    VVM_USER_ENABLED_ARCHIVE_FROM_VM_FULL_PROMO = 1127;
+    VVM_USER_SHOWN_VM_ALMOST_FULL_PROMO = 1128;
+    VVM_USER_SHOWN_VM_FULL_PROMO = 1129;
+    VVM_USER_SHOWN_VM_ALMOST_FULL_ERROR_MESSAGE = 1130;
+    VVM_USER_SHOWN_VM_FULL_ERROR_MESSAGE = 1131;
+    VVM_USER_TURNED_ARCHIVE_ON_FROM_SETTINGS = 1132;
+    VVM_USER_TURNED_ARCHIVE_OFF_FROM_SETTINGS = 1133;
+    VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER = 1134;
+    VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF = 1135;
+
+    VVM_TAB_VISIBLE = 1136;
+    VVM_UNBUNDLED_EVENT_RECEIVED = 1137;
+    VVM_ACTIVATION_STARTED = 1138;
+    VVM_ACTIVATION_COMPLETED = 1139;
+    VVM_AUTO_RETRY_ACTIVATION = 1140;
+    VVM_PROVISIONING_STARTED = 1141;
+    VVM_PROVISIONING_COMPLETED = 1142;
+    VVM_SYNC_STARTED = 1143;
+    VVM_SYNC_COMPLETED = 1144;
+    VVM_AUTO_RETRY_SYNC = 1145;
+    VVM_USER_RETRY = 1146;
+    VVM_USER_SYNC = 1147;
+    VVM_SETTINGS_VIEWED = 1148;
+    VVM_CHANGE_PIN_CLICKED = 1149;
+    VVM_CHANGE_PIN_COMPLETED = 1150;
+    VVM_CHANGE_RINGTONE_CLICKED = 1151;
+    VVM_CHANGE_VIBRATION_CLICKED = 1152;
+    VVM_USER_ENABLED_IN_SETTINGS = 1153;
+    VVM_USER_DISABLED_IN_SETTINGS = 1154;
+    VVM_ADVANCED_SETINGS_CLICKED = 1155;
+    VVM_NOTIFICATION_CLICKED = 1156;
+    VVM_NOTIFICATION_CREATED = 1157;
+    VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION = 1158;
+    VVM_TRANSCRIPTION_DOWNLOADED = 1159;
+    VVM_CHANGE_AIRPLANE_MODE_CLICKED = 1160;
+    VVM_CALL_VOICEMAIL_CLICKED = 1161;
+    VVM_QUOTA_CHECK_UNAVAILABLE = 1162;
+
+    // Emergency location impressions
+    EMERGENCY_NEW_EMERGENCY_CALL = 1163;
+    EMERGENCY_CALLBACK = 1164;
+    EMERGENCY_NO_LOCATION_PERMISSION = 1165;
+    EMERGENCY_BATTERY_TOO_LOW_TO_GET_LOCATION = 1166;
+    EMERGENCY_CANT_GET_LOCATION = 1167;
+    EMERGENCY_STALE_LOCATION = 1168;
+    EMERGENCY_INACCURATE_LOCATION = 1169;
+    EMERGENCY_GOT_LOCATION = 1170;
+    EMERGENCY_GOT_ADDRESS = 1171;
+    EMERGENCY_GOT_MAP = 1172;
+    EMERGENCY_LAUNCHED_MAP = 1173;
+
+    VIDEO_CALL_UPGRADE_REQUESTED = 1174
+        ;
+    VIDEO_CALL_REQUEST_ACCEPTED = 1175
+        ;
+    VIDEO_CALL_REQUEST_ACCEPTED_AS_AUDIO = 1176
+        ;
+    VIDEO_CALL_REQUEST_DECLINED = 1177
+        ;
+    VIDEO_CALL_REQUEST_RECEIVED = 1178
+        ;
+
+    RCS_VIDEO_SHARE_UPGRADE_REQUESTED = 1179;
+    RCS_VIDEO_SHARE_REQUEST_ACCEPTED = 1180;
+    RCS_VIDEO_SHARE_REQUEST_DECLINED = 1181;
+    RCS_VIDEO_SHARE_REQUEST_RECEIVED = 1182;
+
+    IMS_VIDEO_UPGRADE_REQUESTED = 1183;
+    IMS_VIDEO_REQUEST_ACCEPTED = 1184;
+    IMS_VIDEO_REQUEST_ACCEPTED_AS_AUDIO = 1185;
+    IMS_VIDEO_REQUEST_DECLINED = 1186;
+    IMS_VIDEO_REQUEST_RECEIVED = 1187;
+
+    VVM_STATUS_CHECK_READY = 1188;
+    VVM_STATUS_CHECK_REACTIVATION = 1189;
+
+    VVM_ARCHIVE_AUTO_DELETE_FAILED_DUE_TO_FAILED_QUOTA_CHECK = 1190;
+  }
+}

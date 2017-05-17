@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.Voicemail;
@@ -68,8 +69,8 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of read voicemails.
    */
-  public List<Voicemail> getReadVoicemails() {
-    return getLocalVoicemails(READ_SELECTION);
+  public List<Voicemail> getReadVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, READ_SELECTION);
   }
 
   /**
@@ -77,8 +78,8 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of deleted voicemails.
    */
-  public List<Voicemail> getDeletedVoicemails() {
-    return getLocalVoicemails(DELETED_SELECTION);
+  public List<Voicemail> getDeletedVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, DELETED_SELECTION);
   }
 
   /**
@@ -86,17 +87,20 @@ public class VoicemailsQueryHelper {
    *
    * @return A list of all locally stored voicemails.
    */
-  public List<Voicemail> getAllVoicemails() {
-    return getLocalVoicemails(null);
+  public List<Voicemail> getAllVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
+    return getLocalVoicemails(phoneAccountHandle, null);
   }
 
   /**
    * Utility method to make queries to the voicemail database.
    *
+   * <p>TODO(b/36588206) add PhoneAccountHandle filtering back
+   *
    * @param selection A filter declaring which rows to return. {@code null} returns all rows.
    * @return A list of voicemails according to the selection statement.
    */
-  private List<Voicemail> getLocalVoicemails(String selection) {
+  private List<Voicemail> getLocalVoicemails(
+      @NonNull PhoneAccountHandle unusedPhoneAccountHandle, String selection) {
     Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, null, null);
     if (cursor == null) {
       return null;

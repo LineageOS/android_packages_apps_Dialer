@@ -21,9 +21,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.android.dialer.common.Assert;
-import com.google.protobuf.nano.CodedOutputByteBufferNano;
-import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
-import com.google.protobuf.nano.MessageNano;
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.MessageLite;
 import java.io.IOException;
 
 /** Useful methods for using Protocol Buffers with Android. */
@@ -31,46 +31,57 @@ public final class ProtoParsers {
 
   private ProtoParsers() {}
 
-  /** Retrieve a proto from a Bundle */
+  /** Retrieve a proto from a Bundle which was not created within the current executable/version. */
   @SuppressWarnings("unchecked") // We want to eventually optimize away parser classes, so cast
-  public static <T extends MessageNano> T get(Bundle bundle, String key, T defaultInstance)
-      throws InvalidProtocolBufferNanoException {
+  public static <T extends MessageLite> T get(Bundle bundle, String key, T defaultInstance)
+      throws InvalidProtocolBufferException {
+    // Class loaders are unique to each Class instance, so we need to specify how to decode
+    // the information again, even though we set the class loaders when serializing the data.
+    bundle.setClassLoader(ProtoParsers.class.getClassLoader());
     InternalDontUse parcelable = bundle.getParcelable(key);
-    return (T) parcelable.getMessageUnsafe(defaultInstance);
+    return (T) parcelable.getMessageUnsafe(defaultInstance.getDefaultInstanceForType());
   }
 
   /**
-   * Retrieve a proto from a trusted bundle
+   * Retrieve a proto from a trusted bundle which was created within the current executable/version.
    *
    * @throws RuntimeException if the proto cannot be parsed
    */
-  public static <T extends MessageNano> T getFromInstanceState(
-      Bundle bundle, String key, T defaultInstance) {
+  public static <T extends MessageLite> T getTrusted(Bundle bundle, String key, T defaultInstance) {
     try {
       return get(bundle, key, defaultInstance);
-    } catch (InvalidProtocolBufferNanoException e) {
+    } catch (InvalidProtocolBufferException e) {
       throw new RuntimeException(e);
     }
   }
 
   /**
-   * Stores a proto in a Bundle, for later retrieval by {@link #get(Bundle, String, MessageNano)} or
-   * {@link #getFromInstanceState(Bundle, String, MessageNano)}.
+   * Retrieve a proto from a trusted bundle which was created within the current executable/version.
+   *
+   * @throws RuntimeException if the proto cannot be parsed
    */
-  public static void put(Bundle bundle, String key, MessageNano message) {
+  public static <T extends MessageLite> T getTrusted(Intent intent, String key, T defaultInstance) {
+    return getTrusted(intent.getExtras(), key, defaultInstance);
+  }
+
+  /**
+   * Stores a proto in a Bundle, for later retrieval by {@link #get(Bundle, String, MessageLite)} or
+   * {@link #getFromInstanceState(Bundle, String, MessageLite)}.
+   */
+  public static void put(Bundle bundle, String key, MessageLite message) {
     bundle.putParcelable(key, new InternalDontUse<>(null, message));
   }
 
   /**
-   * Stores a proto in an Intent, for later retrieval by {@link #get(Bundle, String, MessageNano)}.
+   * Stores a proto in an Intent, for later retrieval by {@link #get(Bundle, String, MessageLite)}.
    * Needs separate method because Intent has similar to but different API than Bundle.
    */
-  public static void put(Intent intent, String key, MessageNano message) {
+  public static void put(Intent intent, String key, MessageLite message) {
     intent.putExtra(key, new InternalDontUse<>(null, message));
   }
 
   /** Returns a {@linkplain Parcelable} representation of this protobuf message. */
-  public static <T extends MessageNano> ParcelableProto<T> asParcelable(T message) {
+  public static <T extends MessageLite> ParcelableProto<T> asParcelable(T message) {
     return new InternalDontUse<>(null, message);
   }
 
@@ -81,7 +92,7 @@ public final class ProtoParsers {
    * it to another app through an <code>Intent</code> will result in an exception due to Proguard
    * obfusation when the target application attempts to load the <code>ParcelableProto</code> class.
    */
-  public interface ParcelableProto<T extends MessageNano> extends Parcelable {
+  public interface ParcelableProto<T extends MessageLite> extends Parcelable {
     /**
      * @throws IllegalStateException if the parceled data does not correspond to the defaultInstance
      *     type.
@@ -90,7 +101,7 @@ public final class ProtoParsers {
   }
 
   /** Public because of Parcelable requirements. Do not use. */
-  public static final class InternalDontUse<T extends MessageNano> implements ParcelableProto<T> {
+  public static final class InternalDontUse<T extends MessageLite> implements ParcelableProto<T> {
     /* One of these two fields is always populated - since the bytes field never escapes this
      * object, there is no risk of concurrent modification by multiple threads, and volatile
      * is sufficient to be thread-safe. */
@@ -119,7 +130,7 @@ public final class ProtoParsers {
         };
 
     private InternalDontUse(byte[] bytes, T message) {
-      Assert.checkArgument(bytes != null || message != null);
+      Assert.checkArgument(bytes != null || message != null, "Must have a message or bytes");
       this.bytes = bytes;
       this.message = message;
     }
@@ -134,7 +145,7 @@ public final class ProtoParsers {
       if (bytes == null) {
         final byte[] flatArray = new byte[message.getSerializedSize()];
         try {
-          message.writeTo(CodedOutputByteBufferNano.newInstance(flatArray));
+          message.writeTo(CodedOutputStream.newInstance(flatArray));
           bytes = flatArray;
         } catch (IOException impossible) {
           throw new AssertionError(impossible);
@@ -149,19 +160,29 @@ public final class ProtoParsers {
       try {
         // The proto should never be invalid if it came from our application, so if it is, throw.
         return getMessageUnsafe(defaultInstance);
-      } catch (InvalidProtocolBufferNanoException e) {
+      } catch (InvalidProtocolBufferException e) {
         throw new IllegalStateException(e);
       }
     }
 
     @SuppressWarnings("unchecked") // We're being deserialized, so there's no real type safety
-    T getMessageUnsafe(T defaultInstance) throws InvalidProtocolBufferNanoException {
+    T getMessageUnsafe(T defaultInstance) throws InvalidProtocolBufferException {
       // There's a risk that we'll double-parse the bytes, but that's OK, because it'll end up
       // as the same immutable object anyway.
       if (message == null) {
-        message = MessageNano.mergeFrom(defaultInstance, bytes);
+        message = (T) defaultInstance.toBuilder().mergeFrom(bytes).build();
       }
       return message;
+    }
+  }
+
+  /** Parses a proto, throwing parser errors as runtime exceptions. */
+  @SuppressWarnings("unchecked") // We want to eventually optimize away parser classes
+  public static <T extends MessageLite> T mergeFrom(byte[] bytes, T defaultInstance) {
+    try {
+      return (T) defaultInstance.toBuilder().mergeFrom(bytes).build();
+    } catch (InvalidProtocolBufferException e) {
+      throw new RuntimeException(e);
     }
   }
 }

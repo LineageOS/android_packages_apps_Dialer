@@ -18,14 +18,17 @@ package com.android.voicemail.impl.sync;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.MinimalIntervalPolicy;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
+import com.android.voicemail.impl.utils.LoggerUtils;
 
 /** System initiated sync request. */
+@UsedByReflection(value = "Tasks.java")
 public class SyncTask extends BaseTask {
 
   // Try sync for a total of 5 times, should take around 5 minutes before finally giving up.
@@ -45,7 +48,7 @@ public class SyncTask extends BaseTask {
     Intent intent = BaseTask.createIntent(context, SyncTask.class, phone);
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
     intent.putExtra(EXTRA_SYNC_TYPE, syncType);
-    context.startService(intent);
+    context.sendBroadcast(intent);
   }
 
   public SyncTask() {
@@ -55,10 +58,11 @@ public class SyncTask extends BaseTask {
     addPolicy(new MinimalIntervalPolicy(MINIMAL_INTERVAL_MILLIS));
   }
 
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
-    super.onCreate(context, intent, flags, startId);
-    mPhone = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mSyncType = intent.getStringExtra(EXTRA_SYNC_TYPE);
+  @Override
+  public void onCreate(Context context, Bundle extras) {
+    super.onCreate(context, extras);
+    mPhone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
+    mSyncType = extras.getString(EXTRA_SYNC_TYPE);
   }
 
   @Override
@@ -69,7 +73,7 @@ public class SyncTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
+    LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
     intent.putExtra(EXTRA_SYNC_TYPE, mSyncType);

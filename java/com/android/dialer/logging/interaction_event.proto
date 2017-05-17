@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+message InteractionEvent {
+  enum Type {
+
+    UNKNOWN = 0;
+
+    // Leaving tags 1-14 for more frequent interactions, e.g. ANSWERED_CALL
+
+    // An incoming call was blocked
+    CALL_BLOCKED = 15;
+
+    // The user blocked a number from the Call Log screen
+    BLOCK_NUMBER_CALL_LOG = 16;
+
+    // The user blocked a number from the Call details screen
+    BLOCK_NUMBER_CALL_DETAIL = 17;
+
+    // The user blocked a number from the Management screen
+    BLOCK_NUMBER_MANAGEMENT_SCREEN = 18;
+
+    // The user unblocked a number from the Call Log screen
+    UNBLOCK_NUMBER_CALL_LOG = 19;
+
+    // The user unblocked a number from the Call details screen
+    UNBLOCK_NUMBER_CALL_DETAIL = 20;
+
+    // The user unblocked a number from the Management screen
+    UNBLOCK_NUMBER_MANAGEMENT_SCREEN = 21;
+
+    // The user blocked numbers from contacts marked as send to voicemail
+    IMPORT_SEND_TO_VOICEMAIL = 22;
+
+    // The user blocked a number then undid the block
+    UNDO_BLOCK_NUMBER = 23;
+
+    // The user unblocked a number then undid the unblock
+    UNDO_UNBLOCK_NUMBER = 24;
+  }
+}

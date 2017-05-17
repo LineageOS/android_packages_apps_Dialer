@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"व्हॉइसमेल (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"व्हॉइसमेल"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"कंपन करा"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"कंपन करा"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"ध्वनी"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"प्रगत सेटिंग्ज"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"दृश्‍यमान व्हॉइसमेल"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"अतिरिक्त बॅक अप आणि संचय"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"हे प्रायोगिक वैशिष्ट्य आहे"</i></b>" आम्ही सध्‍या चाचणी घेत आहोत. हे आपल्या व्हॉइसमेल सर्व्हर मधून संभाव्यपणे व्हॉइसमेल हटवेल. भविष्‍यात या वैशिष्‍ट्यास समर्थन देण्याची हमी नाही. तरीही आम्ही वैशिष्‍ट्यावरील अभिप्राय घेऊ इच्छितो."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"पिन सेट करा"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"पिन बदला"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"पिन बदलण्‍यासाठी व्हिज्युअल व्हॉइसमेल सक्षम करणे आवश्‍यक आहे"</string>

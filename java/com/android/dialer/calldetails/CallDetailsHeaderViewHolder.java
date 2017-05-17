@@ -25,12 +25,12 @@ import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.dialer.callcomposer.nano.CallComposerContact;
+import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.DialerUtils;
 
 /** ViewHolder for Header/Contact in {@link CallDetailsActivity}. */
@@ -56,28 +56,37 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   }
 
   /** Populates the contact info fields based on the current contact information. */
-  public void updateContactInfo(CallComposerContact contact) {
+  void updateContactInfo(CallComposerContact contact) {
     this.contact = contact;
     ContactPhotoManager.getInstance(context)
-        .loadDialerThumbnail(
+        .loadDialerThumbnailOrPhoto(
             contactPhoto,
-            contact.contactUri == null ? null : Uri.parse(contact.contactUri),
-            contact.photoId,
-            contact.nameOrNumber,
-            contact.contactType);
+            contact.hasContactUri() ? Uri.parse(contact.getContactUri()) : null,
+            contact.getPhotoId(),
+            contact.hasPhotoUri() ? Uri.parse(contact.getPhotoUri()) : null,
+            contact.getNameOrNumber(),
+            contact.getContactType());
 
-    nameView.setText(contact.nameOrNumber);
-    if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
+    contactPhoto.setContentDescription(
+        context.getString(R.string.description_contact_photo_details, contact.getNameOrNumber()));
+    nameView.setText(contact.getNameOrNumber());
+    if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
       String secondaryInfo =
-          context.getString(
-              com.android.contacts.common.R.string.call_subject_type_and_number,
-              contact.numberLabel,
-              contact.displayNumber);
+          TextUtils.isEmpty(contact.getNumberLabel())
+              ? contact.getDisplayNumber()
+              : context.getString(
+                  com.android.contacts.common.R.string.call_subject_type_and_number,
+                  contact.getNumberLabel(),
+                  contact.getDisplayNumber());
       numberView.setText(secondaryInfo);
     } else {
       numberView.setVisibility(View.GONE);
       numberView.setText(null);
+    }
+
+    if (TextUtils.isEmpty(contact.getNumber())) {
+      callBackButton.setVisibility(View.GONE);
     }
   }
 
@@ -87,7 +96,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
       Logger.get(view.getContext()).logImpression(DialerImpression.Type.CALL_DETAILS_CALL_BACK);
       DialerUtils.startActivityWithErrorToast(
           view.getContext(),
-          new CallIntentBuilder(contact.number, CallInitiationType.Type.CALL_DETAILS).build());
+          new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_DETAILS).build());
     } else {
       Assert.fail("View OnClickListener not implemented: " + view);
     }

@@ -18,13 +18,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"Галасавая пошта (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"Галасавая пошта"</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="1017489970564669402">"Вібрацыя"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="913495075516305202">"Вібрацыя"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="7516921280035140960">"Гук"</string>
+    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
+    <skip />
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Пашыраныя налады"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Візуальная галасавая пошта"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Дадатковае рэзервовае капір. і сховішча"</string>
-    <string name="voicemail_visual_voicemail_auto_archive_temporary_disclaimer" msgid="401509437213449235">" "<b><i>"Гэта эксперыментальная характарыстыка"</i></b>", якую мы тэсціруем. Патэнцыяльна яна будзе выдаляць паведамленні галасавой пошты з вашага сервера галасавой пошты. Падтрымка гэтай характарыстыкі ў будучым не гарантуецца. Але мы будзем вельмі ўдзячны за водгукі на гэту характарыстыку."</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Задаць PIN-код"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Змяніць PIN-код"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Трэба ўключыць візуальную галасавую пошту, каб змяніць PIN-код"</string>

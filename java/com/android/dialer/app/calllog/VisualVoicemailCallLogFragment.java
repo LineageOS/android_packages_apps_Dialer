@@ -31,28 +31,19 @@ import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.util.PermissionsUtil;
 
 public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   private final ContentObserver mVoicemailStatusObserver = new CustomContentObserver();
   private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
 
-  private VoicemailErrorManager mVoicemailAlertManager;
+  private VoicemailErrorManager mVoicemailErrorManager;
 
   public VisualVoicemailCallLogFragment() {
     super(CallLog.Calls.VOICEMAIL_TYPE);
-  }
-
-  @Override
-  public void onCreate(Bundle state) {
-    super.onCreate(state);
-    mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter.getInstance(getActivity(), state);
-    getActivity()
-        .getContentResolver()
-        .registerContentObserver(
-            VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
   }
 
   @Override
@@ -62,15 +53,37 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
+    mVoicemailPlaybackPresenter =
+        VoicemailPlaybackPresenter.getInstance(getActivity(), savedInstanceState);
+
+    if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
+        && PermissionsUtil.hasAddVoicemailPermissions(getContext())) {
+      getActivity()
+          .getContentResolver()
+          .registerContentObserver(
+              VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
+    } else {
+      LogUtil.w(
+          "VisualVoicemailCallLogFragment.onActivityCreated",
+          "read voicemail permission unavailable.");
+    }
     super.onActivityCreated(savedInstanceState);
-    mVoicemailAlertManager =
+    mVoicemailErrorManager =
         new VoicemailErrorManager(getContext(), getAdapter().getAlertManager(), mModalAlertManager);
-    getActivity()
-        .getContentResolver()
-        .registerContentObserver(
-            VoicemailContract.Status.CONTENT_URI,
-            true,
-            mVoicemailAlertManager.getContentObserver());
+
+    if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
+        && PermissionsUtil.hasAddVoicemailPermissions(getContext())) {
+      getActivity()
+          .getContentResolver()
+          .registerContentObserver(
+              VoicemailContract.Status.CONTENT_URI,
+              true,
+              mVoicemailErrorManager.getContentObserver());
+    } else {
+      LogUtil.w(
+          "VisualVoicemailCallLogFragment.onActivityCreated",
+          "read voicemail permission unavailable.");
+    }
   }
 
   @Override
@@ -84,13 +97,13 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public void onResume() {
     super.onResume();
     mVoicemailPlaybackPresenter.onResume();
-    mVoicemailAlertManager.onResume();
+    mVoicemailErrorManager.onResume();
   }
 
   @Override
   public void onPause() {
     mVoicemailPlaybackPresenter.onPause();
-    mVoicemailAlertManager.onPause();
+    mVoicemailErrorManager.onPause();
     super.onPause();
   }
 
@@ -98,8 +111,9 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public void onDestroy() {
     getActivity()
         .getContentResolver()
-        .unregisterContentObserver(mVoicemailAlertManager.getContentObserver());
+        .unregisterContentObserver(mVoicemailErrorManager.getContentObserver());
     mVoicemailPlaybackPresenter.onDestroy();
+    mVoicemailErrorManager.onDestroy();
     getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
     super.onDestroy();
   }
@@ -121,7 +135,9 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageSelected");
     super.onVisible();
     if (getActivity() != null) {
-      getActivity().sendBroadcast(new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL));
+      Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
+      intent.setPackage(getActivity().getPackageName());
+      getActivity().sendBroadcast(intent);
       Logger.get(getActivity()).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
       getActivity().setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
     }

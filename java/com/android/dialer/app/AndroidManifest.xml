@@ -55,7 +55,7 @@
 
   <uses-sdk
     android:minSdkVersion="23"
-    android:targetSdkVersion="25"/>
+    android:targetSdkVersion="26"/>
 
   <application android:theme="@style/Theme.AppCompat">
 
@@ -107,6 +107,16 @@
       android:name="com.android.dialer.app.calllog.MissedCallNotificationReceiver">
       <intent-filter>
         <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION"/>
+      </intent-filter>
+    </receiver>
+    <!-- Handles voicemail notifications from telephony. Requires O -->
+    <receiver android:name=".voicemail.LegacyVoicemailNotificationReceiver"
+      android:directBootAware="true">
+      <intent-filter>
+        <action android:name="android.telephony.action.SHOW_VOICEMAIL_NOTIFICATION"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="com.android.voicemail.VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL" />
       </intent-filter>
     </receiver>
 

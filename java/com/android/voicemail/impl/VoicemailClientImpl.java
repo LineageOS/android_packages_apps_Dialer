@@ -31,6 +31,7 @@ import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
+import com.android.voicemail.impl.sync.VvmAccountManager;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -67,6 +68,17 @@ public class VoicemailClientImpl implements VoicemailClient {
     return true;
   }
 
+  @Override
+  public boolean isVoicemailEnabled(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return VisualVoicemailSettingsUtil.isEnabled(context, phoneAccountHandle);
+  }
+
+  @Override
+  public void setVoicemailEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {
+    VisualVoicemailSettingsUtil.setEnabled(context, phoneAccountHandle, enabled);
+  }
+
   @Nullable
   @Override
   public String getSettingsFragment() {
@@ -85,7 +97,7 @@ public class VoicemailClientImpl implements VoicemailClient {
       return false;
     }
 
-    if (!ConfigProviderBindings.get(context).getBoolean(ALLOW_VOICEMAIL_ARCHIVE, true)) {
+    if (!ConfigProviderBindings.get(context).getBoolean(ALLOW_VOICEMAIL_ARCHIVE, false)) {
       LogUtil.i(
           "VoicemailClientImpl.isVoicemailArchiveAllowed",
           "feature disabled by config: %s",
@@ -109,12 +121,17 @@ public class VoicemailClientImpl implements VoicemailClient {
     return intent;
   }
 
+  @Override
+  public boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return VvmAccountManager.isAccountActivated(context, phoneAccountHandle);
+  }
+
   @TargetApi(VERSION_CODES.O)
   @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
-    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
+    String omtpSource =
+        context.getSystemService(TelephonyManager.class).getVisualVoicemailPackageName();
     if (where.length() != 0) {
       where.append(" AND ");
     }
@@ -145,8 +162,8 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public void appendOmtpVoicemailStatusSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
-    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    String omtpSource = TelephonyMangerCompat.getVisualVoicemailPackageName(telephonyManager);
+    String omtpSource =
+        context.getSystemService(TelephonyManager.class).getVisualVoicemailPackageName();
     if (where.length() != 0) {
       where.append(" AND ");
     }

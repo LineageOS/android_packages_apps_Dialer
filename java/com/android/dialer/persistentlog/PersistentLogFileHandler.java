@@ -26,6 +26,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.support.v4.os.UserManagerCompat;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -51,7 +52,7 @@ import java.util.List;
  * worker thread.
  */
 @SuppressWarnings("AndroidApiChecker") // lambdas
-@TargetApi(VERSION_CODES.N)
+@TargetApi(VERSION_CODES.M)
 final class PersistentLogFileHandler {
 
   private static final String LOG_DIRECTORY = "persistent_log";
@@ -65,6 +66,7 @@ final class PersistentLogFileHandler {
   private SharedPreferences sharedPreferences;
 
   private File outputFile;
+  private Context context;
 
   @MainThread
   PersistentLogFileHandler(String subfolder, int fileSizeLimit, int fileCountLimit) {
@@ -76,8 +78,18 @@ final class PersistentLogFileHandler {
   /** Must be called right after the logger thread is created. */
   @WorkerThread
   void initialize(Context context) {
+    this.context = context;
     logDirectory = new File(new File(context.getCacheDir(), LOG_DIRECTORY), subfolder);
-    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    initializeSharedPreference(context);
+  }
+
+  @WorkerThread
+  private boolean initializeSharedPreference(Context context) {
+    if (sharedPreferences == null && UserManagerCompat.isUserUnlocked(context)) {
+      sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+      return true;
+    }
+    return sharedPreferences != null;
   }
 
   /**
@@ -110,12 +122,19 @@ final class PersistentLogFileHandler {
   private byte[] readBlob() throws IOException {
     File[] files = getLogFiles();
 
-    ByteBuffer byteBuffer =
-        ByteBuffer.allocate(Arrays.stream(files).mapToInt(file -> (int) file.length()).sum());
+    ByteBuffer byteBuffer = ByteBuffer.allocate(getTotalSize(files));
     for (File file : files) {
       byteBuffer.put(readAllBytes(file));
     }
     return byteBuffer.array();
+  }
+
+  private static int getTotalSize(File[] files) {
+    int sum = 0;
+    for (File file : files) {
+      sum += (int) file.length();
+    }
+    return sum;
   }
 
   /** Parses the content of all files back to individual byte arrays. */
@@ -155,6 +174,9 @@ final class PersistentLogFileHandler {
   private File[] getLogFiles() {
     logDirectory.mkdirs();
     File[] files = logDirectory.listFiles();
+    if (files == null) {
+      files = new File[0];
+    }
     Arrays.sort(
         files,
         (File lhs, File rhs) ->
@@ -185,7 +207,11 @@ final class PersistentLogFileHandler {
   }
 
   @WorkerThread
-  private int getAndIncrementNextFileIndex() {
+  private int getAndIncrementNextFileIndex() throws IOException {
+    if (!initializeSharedPreference(context)) {
+      throw new IOException("Shared preference is not available");
+    }
+
     int index = sharedPreferences.getInt(getNextFileKey(), 0);
     sharedPreferences.edit().putInt(getNextFileKey(), index + 1).commit();
     return index;

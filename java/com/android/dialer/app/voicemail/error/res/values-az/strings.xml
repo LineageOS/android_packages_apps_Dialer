@@ -44,10 +44,10 @@
     <string name="voicemail_error_inbox_near_full_message" msgid="354118612203528244">"Gələnlər qutusu dolu olduqda, yeni səsli mesaj almaq olmayacaq."</string>
     <string name="voicemail_error_inbox_full_title" msgid="249268068442046872">"Yeni səsli mesaj almaq olmur"</string>
     <string name="voicemail_error_inbox_full_message" msgid="5788411018158899123">"Gələnlər qutusu doludur. Yeni səsli mesaj əldə etmək üçün bəzi mesajları silin."</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="3083779676549536189">"[Eksperimental] Əlavə yaddaş və yedəkləməni aktiv edin"</string>
-    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="4236256841748725792">"E-poçt qutusu doludur. Boş yer yaratmaq üçün əlavə yaddaşı aktiv edin, beləliklə Google səsli e-məktub mesajlarını idarə edə və yedəkləyə bilər. "<b><i>"Bu funksiya hazırda yoxlanılır "</i></b>"və səsli e-poçt serverindən səsli e-məktubları potensial olaraq siləcək, gələcəkdə bu funksiyanı dəstəkləməyə söz vermirik. Lakin əks əlaqənizi istərdik."</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="6118464905488477869">"[Eksperimental] Əlavə yaddaş və yedəkləməni aktiv edin"</string>
-    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="7289015622668426730">"E-poçt qutusu demək olar ki, doludur. Boş yer yaratmaq üçün əlavə yaddaşı aktiv edin, beləliklə Google səsli e-məktub mesajlarını idarə edə və yedəkləyə bilər. "<b><i>"Bu funksiya hazırda yoxlanılır "</i></b>"və səsli e-poçt serverindən səsli e-məktubları potensial olaraq siləcək, gələcəkdə bu funksiyanı dəstəkləməyə söz vermirik. Lakin əks əlaqənizi istərdik."</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_title" msgid="6209039728273651055">"Əlavə yaddaş və yedəkləməni aktiv edin"</string>
+    <string name="voicemail_error_inbox_full_turn_archive_on_message" msgid="5203159732288749722">"E-poçt qutusu doludur. Boş yer yaratmaq üçün əlavə yaddaşı aktiv edin, beləliklə Google səsli e-məktub mesajlarını idarə edə və yedəkləyə bilər."</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_title" msgid="20352920357816927">"Əlavə yaddaş və yedəkləməni aktiv edin"</string>
+    <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"E-poçt qutusu artıq doludur. Boş yer yaratmaq üçün əlavə yaddaşı aktiv edin, beləliklə Google səsli e-məktub mesajlarını idarə edə və yedəkləyə bilər."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Səsli mesaj PIN kodunu ayarlayın"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Zəng etdiyiniz zaman səsli mesaja daxil olmaq üçün PIN koda ehtiyacınız olacaq."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Naməlum xəta"</string>

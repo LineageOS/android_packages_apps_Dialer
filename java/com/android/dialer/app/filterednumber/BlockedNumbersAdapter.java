@@ -21,12 +21,12 @@ import android.database.Cursor;
 import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.BlockNumberDialogFragment;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.InteractionEvent;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 
 public class BlockedNumbersAdapter extends NumbersAdapter {
@@ -55,8 +55,6 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
     final String countryIso =
         cursor.getString(cursor.getColumnIndex(FilteredNumberColumns.COUNTRY_ISO));
     final String number = cursor.getString(cursor.getColumnIndex(FilteredNumberColumns.NUMBER));
-    final String normalizedNumber =
-        cursor.getString(cursor.getColumnIndex(FilteredNumberColumns.NORMALIZED_NUMBER));
 
     final View deleteButton = view.findViewById(R.id.delete_button);
     deleteButton.setOnClickListener(

@@ -39,6 +39,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   /** Contact type constants used for default letter images */
   public static final int TYPE_PERSON = LetterTileDrawable.TYPE_PERSON;
 
+  public static final int TYPE_SPAM = LetterTileDrawable.TYPE_SPAM;
   public static final int TYPE_BUSINESS = LetterTileDrawable.TYPE_BUSINESS;
   public static final int TYPE_VOICEMAIL = LetterTileDrawable.TYPE_VOICEMAIL;
   public static final int TYPE_DEFAULT = LetterTileDrawable.TYPE_DEFAULT;
@@ -190,7 +191,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
       Context applicationContext = context.getApplicationContext();
       sInstance = createContactPhotoManager(applicationContext);
       applicationContext.registerComponentCallbacks(sInstance);
-      if (PermissionsUtil.hasContactsPermissions(context)) {
+      if (PermissionsUtil.hasContactsReadPermissions(context)) {
         sInstance.preloadPhotosInBackground();
       }
     }
@@ -235,8 +236,13 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     loadThumbnail(view, photoId, darkTheme, isCircular, defaultImageRequest, DEFAULT_AVATAR);
   }
 
-  public final void loadDialerThumbnail(
-      QuickContactBadge badge, Uri contactUri, long photoId, String displayName, int contactType) {
+  public final void loadDialerThumbnailOrPhoto(
+      QuickContactBadge badge,
+      Uri contactUri,
+      long photoId,
+      Uri photoUri,
+      String displayName,
+      int contactType) {
     badge.assignContactUri(contactUri);
     badge.setOverlay(null);
 
@@ -244,8 +250,11 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     ContactPhotoManager.DefaultImageRequest request =
         new ContactPhotoManager.DefaultImageRequest(
             displayName, lookupKey, contactType, true /* isCircular */);
-    loadThumbnail(
-        badge, photoId, false /* darkTheme */, true /* isCircular */, request, DEFAULT_AVATAR);
+    if (photoId == 0 && photoUri != null) {
+      loadDirectoryPhoto(badge, photoUri, false /* darkTheme */, true /* isCircular */, request);
+    } else {
+      loadThumbnail(badge, photoId, false /* darkTheme */, true /* isCircular */, request);
+    }
   }
 
   /**
@@ -500,4 +509,3 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     }
   }
 }
-

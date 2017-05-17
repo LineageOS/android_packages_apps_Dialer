@@ -41,6 +41,7 @@ import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
@@ -326,7 +327,7 @@ public class ContactInfoHelper {
     if (uri == null) {
       return null;
     }
-    if (!PermissionsUtil.hasContactsPermissions(mContext)) {
+    if (!PermissionsUtil.hasContactsReadPermissions(mContext)) {
       return ContactInfo.EMPTY;
     }
 
@@ -370,6 +371,7 @@ public class ContactInfoHelper {
     info.formattedNumber = null;
     info.userType =
         ContactsUtils.determineUserType(null, phoneLookupCursor.getLong(PhoneQuery.PERSON_ID));
+    info.contactExists = true;
 
     return info;
   }
@@ -577,7 +579,7 @@ public class ContactInfoHelper {
    * @param sourceType sourceType of the contact. This is usually populated by {@link
    *     #mCachedNumberLookupService}.
    */
-  public boolean isBusiness(int sourceType) {
+  public boolean isBusiness(ContactSource.Type sourceType) {
     return mCachedNumberLookupService != null && mCachedNumberLookupService.isBusiness(sourceType);
   }
 
@@ -589,7 +591,7 @@ public class ContactInfoHelper {
    * @param objectId The ID of the Contact object.
    * @return true if contacts from this source can be marked with an invalid caller id
    */
-  public boolean canReportAsInvalid(int sourceType, String objectId) {
+  public boolean canReportAsInvalid(ContactSource.Type sourceType, String objectId) {
     return mCachedNumberLookupService != null
         && mCachedNumberLookupService.canReportAsInvalid(sourceType, objectId);
   }
@@ -614,9 +616,10 @@ public class ContactInfoHelper {
     }
     if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
       info.geoDescription = cequintCallerIdContact.geoDescription;
-      info.sourceType = CachedContactInfo.SOURCE_TYPE_CEQUINT_CALLER_ID;
+      info.sourceType = ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID;
     }
-    if (info.photoUri == null && cequintCallerIdContact.imageUrl != null) {
+    // Only update photo if local lookup has no result.
+    if (!info.contactExists && info.photoUri == null && cequintCallerIdContact.imageUrl != null) {
       info.photoUri = UriUtils.parseUriOrNull(cequintCallerIdContact.imageUrl);
     }
   }

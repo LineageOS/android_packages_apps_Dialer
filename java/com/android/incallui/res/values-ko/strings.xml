@@ -59,10 +59,6 @@
     <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"수신 Wi-Fi 업무 전화"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"의심스러운 스팸 발신자로부터 온 전화"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"수신 동영상 요청"</string>
-    <string name="notification_voicemail_title" msgid="3870308666991926655">"새 음성사서함"</string>
-    <string name="notification_voicemail_title_count" msgid="6918714157574015331">"새 음성사서함(<xliff:g id="COUNT">%d</xliff:g>개)"</string>
-    <string name="notification_voicemail_text_format" msgid="6080732264937745523">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>(으)로 전화걸기"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="260803154697293622">"알 수 없는 음성사서함 번호"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"서비스 불가"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"선택한 네트워크(<xliff:g id="OPERATOR_NAME">%s</xliff:g>)를 사용할 수 없음"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"통화"</string>

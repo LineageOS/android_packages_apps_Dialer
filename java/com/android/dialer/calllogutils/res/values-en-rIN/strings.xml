@@ -30,11 +30,23 @@
     <string name="type_voicemail" msgid="1877524395253846684">"Voicemail"</string>
     <string name="type_rejected" msgid="5632107438472996198">"Declined call"</string>
     <string name="type_blocked" msgid="9177237294052244929">"Blocked call"</string>
+    <!-- no translation found for call_details_minutes_abbreviation (7899774555556720560) -->
+    <skip />
+    <!-- no translation found for call_details_seconds_abbreviation (5893806826648947126) -->
+    <skip />
+    <!-- no translation found for a11y_call_duration_format (2905525933361674470) -->
+    <skip />
+    <!-- no translation found for a11y_call_duration_short_format (5908875871251062453) -->
+    <skip />
+    <!-- no translation found for call_duration_format_pattern (7566375153243313914) -->
+    <skip />
+    <!-- no translation found for call_duration_short_format_pattern (1713177000235994790) -->
+    <skip />
+    <!-- no translation found for a11y_seconds (6695730844760611970) -->
+    <!-- no translation found for a11y_minutes (6377010096698624038) -->
     <string name="type_answered_elsewhere" msgid="411958582555881640">"Call answered on another device"</string>
     <string name="description_phone_account" msgid="4382951172691362244">"on <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_via_number" msgid="7682575124846343076">"via <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="description_via_number_phone_account" msgid="4345445677508018830">"on <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, via <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="voicemail_string" msgid="6029775151483803006">"Voicemail"</string>
-    <string name="call_details_duration_format" msgid="296780245582838089">"<xliff:g id="MINUTES">%s</xliff:g>m <xliff:g id="SECONDS">%s</xliff:g>s"</string>
-    <string name="call_details_short_duration_format" msgid="8079910850626312453">"<xliff:g id="SECONDS">%s</xliff:g>s"</string>
 </resources>

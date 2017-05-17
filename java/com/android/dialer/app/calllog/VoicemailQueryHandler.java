@@ -20,14 +20,12 @@ import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import com.android.dialer.app.R;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.notification.GroupedNotificationUtil;
 
 /** Handles asynchronous queries to the call log for voicemail. */
@@ -76,20 +74,7 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
     GroupedNotificationUtil.removeNotification(
         mContext.getSystemService(NotificationManager.class),
         voicemailUri != null ? voicemailUri.toString() : null,
-        R.id.notification_voicemail,
-        DefaultVoicemailNotifier.NOTIFICATION_TAG);
-  }
-
-  @Override
-  protected void onUpdateComplete(int token, Object cookie, int result) {
-    if (token == UPDATE_MARK_VOICEMAILS_AS_OLD_TOKEN) {
-      if (mContext != null) {
-        Intent serviceIntent = new Intent(mContext, CallLogNotificationsService.class);
-        serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_VOICEMAIL_NOTIFICATIONS);
-        mContext.startService(serviceIntent);
-      } else {
-        LogUtil.w(TAG, "Unknown update completed: ignoring: " + token);
-      }
-    }
+        R.id.notification_visual_voicemail,
+        DefaultVoicemailNotifier.VISUAL_VOICEMAIL_NOTIFICATION_TAG);
   }
 }

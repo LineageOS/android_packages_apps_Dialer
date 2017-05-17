@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,99 +14,98 @@
      limitations under the License.
 -->
 <android.support.v7.widget.CardView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/error_card"
-  style="@style/CallLogCardStyle"
-  android:gravity="center_vertical"
-  android:orientation="vertical">
-
-  <LinearLayout
-    android:id="@+id/error_card_content"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/error_card"
+    style="@style/CallLogCardStyle"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <LinearLayout
+  <LinearLayout
+      android:id="@+id/error_card_content"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/alert_main_padding"
-      android:layout_marginStart="@dimen/alert_main_padding"
-      android:layout_marginEnd="@dimen/alert_main_padding"
-      android:gravity="center_vertical"
       android:orientation="vertical">
 
-      <TextView
-        android:id="@+id/error_card_header"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/alert_title_padding"
-        android:layout_gravity="center_vertical"
-        android:singleLine="false"
-        android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/call_log_primary_text_size"/>
+        android:paddingTop="@dimen/alert_main_padding"
+        android:paddingBottom="@dimen/alert_main_padding"
+        android:paddingStart="@dimen/alert_main_padding"
+        android:paddingEnd="@dimen/alert_main_padding"
+        android:gravity="top"
+        android:orientation="horizontal">
 
-      <TextView
-        android:id="@+id/error_card_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="@dimen/alert_line_spacing"
-        android:singleLine="false"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="@dimen/call_log_detail_text_size"/>
+      <ImageView
+          android:id="@+id/voicemail_promo_card_icon"
+          android:layout_width="@dimen/voicemail_promo_card_icon_size"
+          android:layout_height="@dimen/voicemail_promo_card_icon_size"
+          android:layout_gravity="top"
+          android:src="@drawable/ic_voicemail_error_24px"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/voicemail_promo_card_main_padding"
+          android:gravity="center_vertical"
+          android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/error_card_header"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/voicemail_promo_card_title_padding"
+            android:layout_gravity="center_vertical"
+            android:singleLine="false"
+            android:textSize="@dimen/voicemail_promo_card_title_text_size"/>
+
+        <TextView
+            android:id="@+id/error_card_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/voicemail_promo_card_line_spacing"
+            android:singleLine="false"
+            android:textSize="@dimen/voicemail_promo_card_message_size"/>
+      </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-      android:id="@+id/error_actions"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="20dp"
-      android:paddingTop="@dimen/alert_action_vertical_padding"
-      android:paddingBottom="@dimen/alert_action_vertical_padding"
-      android:paddingStart="@dimen/alert_action_horizontal_padding"
-      android:paddingEnd="@dimen/alert_action_horizontal_padding"
-      android:gravity="start"
-      android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/voicemail_promo_card_action_vertical_padding"
+        android:paddingBottom="@dimen/voicemail_promo_card_action_vertical_padding"
+        android:paddingEnd="@dimen/voicemail_promo_card_action_end_padding"
+        android:gravity="end"
+        android:orientation="horizontal">
 
       <TextView
-        android:id="@+id/primary_action_raised"
-        style="@style/RaisedErrorActionStyle"
-        android:nextFocusLeft="@+id/promo_card"
-        android:nextFocusRight="@+id/primary_action"
-        android:clickable="true"
-        />
+          android:id="@+id/secondary_action_raised"
+          style="@style/RaisedErrorActionStyle"
+          android:paddingEnd="@dimen/alert_action_between_padding"
+          android:layout_marginEnd="8dp"
+          android:nextFocusForward="@+id/secondary_action"
+          android:clickable="true"/>
 
       <TextView
-        android:id="@+id/primary_action"
-        style="@style/ErrorActionStyle"
-        android:background="?android:attr/selectableItemBackground"
-        android:nextFocusLeft="@+id/promo_card"
-        android:nextFocusRight="@+id/secondary_action"
-        android:clickable="true"
-        />
+          android:id="@+id/secondary_action"
+          style="@style/ErrorActionStyle"
+          android:paddingEnd="@dimen/voicemail_promo_card_action_between_padding"
+          android:background="?android:attr/selectableItemBackground"
+          android:nextFocusForward="@+id/primary_action"/>
 
       <TextView
-        android:id="@+id/secondary_action"
-        style="@style/ErrorActionStyle"
-        android:paddingEnd="@dimen/alert_action_between_padding"
-        android:background="?android:attr/selectableItemBackground"
-        android:nextFocusLeft="@+id/primary_action"
-        android:nextFocusRight="@+id/promo_card"
-        android:clickable="true"/>
-
-      <android.support.v4.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+          android:id="@+id/primary_action"
+          style="@style/ErrorActionStyle"
+          android:background="?android:attr/selectableItemBackground"
+          android:nextFocusForward="@+id/primary_action_raised"/>
 
       <TextView
-        android:id="@+id/secondary_action_raised"
-        style="@style/RaisedErrorActionStyle"
-        android:paddingEnd="@dimen/alert_action_between_padding"
-        android:layout_marginEnd="8dp"
-        android:nextFocusLeft="@+id/primary_action"
-        android:nextFocusRight="@+id/promo_card"
-        android:clickable="true"/>
+          android:id="@+id/primary_action_raised"
+          style="@style/RaisedErrorActionStyle"
+          android:nextFocusForward="@+id/promo_card"
+          android:clickable="true"
+          />
 
     </LinearLayout>
   </LinearLayout>

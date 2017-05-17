@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Google Inc. All Rights Reserved.
+ * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.SmsManager;
-import android.telephony.VisualVoicemailService;
 import com.android.voicemail.impl.OmtpConstants;
+import com.android.voicemail.impl.TelephonyMangerCompat;
 
 /**
  * Send client originated OMTP messages to the OMTP server.
@@ -75,7 +75,7 @@ public abstract class OmtpMessageSender {
   public void requestVvmStatus(@Nullable PendingIntent sentIntent) {}
 
   protected void sendSms(String text, PendingIntent sentIntent) {
-    VisualVoicemailService.sendVisualVoicemailSms(
+    TelephonyMangerCompat.sendVisualVoicemailSms(
         mContext, mPhoneAccountHandle, mDestinationNumber, mApplicationPort, text, sentIntent);
   }
 

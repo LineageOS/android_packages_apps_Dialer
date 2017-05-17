@@ -22,6 +22,8 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"আপনার হাতে যখন সময় হবে তখন আমায় ফোন করুন৷"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"জরুরী নয়, আমরা পরে চ্যাট করতে পারি৷"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"বার্তা যোগ করুন"</string>
+    <!-- no translation found for post_call_send_message (8039569617234824873) -->
+    <skip />
     <string name="post_call_message_sent" msgid="832757977985265036">"বার্তা পাঠানো হয়েছে"</string>
     <string name="view" msgid="8572192949673703830">"দেখুন"</string>
 </resources>

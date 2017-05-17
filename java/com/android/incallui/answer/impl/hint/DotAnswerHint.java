@@ -87,7 +87,9 @@ public class DotAnswerHint implements AnswerHint {
   public void onBounceStart() {
     if (answerGestureHintAnim == null) {
       answerGestureHintAnim = new AnimatorSet();
-      answerHintContainer.setY(puck.getY() + getDimension(R.dimen.hint_initial_offset));
+      int[] puckLocation = new int[2];
+      puck.getLocationInWindow(puckLocation);
+      answerHintContainer.setY(puckLocation[1] + getDimension(R.dimen.hint_initial_offset));
 
       Animator fadeIn = createFadeIn();
 
@@ -95,7 +97,7 @@ public class DotAnswerHint implements AnswerHint {
           ObjectAnimator.ofFloat(
               answerHintContainer,
               View.TRANSLATION_Y,
-              puck.getY() - getDimension(R.dimen.hint_offset));
+              puckLocation[1] - getDimension(R.dimen.hint_offset));
       swipeUp.setInterpolator(new FastOutSlowInInterpolator());
       swipeUp.setDuration(SWIPE_UP_DURATION_ALPHA_MILLIS);
 
@@ -123,7 +125,7 @@ public class DotAnswerHint implements AnswerHint {
               answerHintLarge.setAlpha(0);
               answerHintLarge.setScaleX(1);
               answerHintLarge.setScaleY(1);
-              answerHintContainer.setY(puck.getY() + getDimension(R.dimen.hint_initial_offset));
+              answerHintContainer.setY(puckLocation[1] + getDimension(R.dimen.hint_initial_offset));
               answerHintContainer.setVisibility(View.VISIBLE);
             }
           });

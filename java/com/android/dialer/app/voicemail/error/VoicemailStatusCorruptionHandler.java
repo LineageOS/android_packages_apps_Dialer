@@ -28,8 +28,8 @@ import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 
 /**
  * This class will detect the corruption in the voicemail status and log it so we can track how many

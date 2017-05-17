@@ -28,6 +28,7 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
@@ -39,13 +40,14 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
-import com.android.dialer.callcomposer.util.CopyAndResizeImageTask.Callback;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutorFactory;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
 import com.android.dialer.util.PermissionsUtil;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,8 @@ public class GalleryComposerFragment extends CallComposerFragment
   private static final int RESULT_LOAD_IMAGE = 1;
   private static final int RESULT_OPEN_SETTINGS = 2;
 
+  private DialerExecutorFactory executorFactory = new DefaultDialerExecutorFactory();
+
   private GalleryGridAdapter adapter;
   private GridView galleryGridView;
   private View permissionView;
@@ -71,8 +75,15 @@ public class GalleryComposerFragment extends CallComposerFragment
   private boolean selectedDataIsCopy;
   private List<GalleryGridItemData> insertedImages = new ArrayList<>();
 
+  private DialerExecutor<Uri> copyAndResizeImage;
+
   public static GalleryComposerFragment newInstance() {
     return new GalleryComposerFragment();
+  }
+
+  @VisibleForTesting
+  void setExecutorFactory(@NonNull DialerExecutorFactory executorFactory) {
+    this.executorFactory = Assert.isNotNull(executorFactory);
   }
 
   @Nullable
@@ -105,6 +116,32 @@ public class GalleryComposerFragment extends CallComposerFragment
       setupGallery();
     }
     return view;
+  }
+
+  @Override
+  public void onActivityCreated(@Nullable Bundle bundle) {
+    super.onActivityCreated(bundle);
+
+    copyAndResizeImage =
+        executorFactory
+            .createUiTaskBuilder(
+                getActivity().getFragmentManager(),
+                "copyAndResizeImage",
+                new CopyAndResizeImageWorker(getActivity().getApplicationContext()))
+            .onSuccess(
+                output -> {
+                  GalleryGridItemData data1 =
+                      adapter.insertEntry(output.first.getAbsolutePath(), output.second);
+                  insertedImages.add(0, data1);
+                  setSelected(data1, true);
+                })
+            .onFailure(
+                throwable -> {
+                  // TODO(b/34279096) - gracefully handle message failure
+                  LogUtil.e(
+                      "GalleryComposerFragment.onFailure", "data preparation failed", throwable);
+                })
+            .build();
   }
 
   private void setupGallery() {
@@ -264,25 +301,7 @@ public class GalleryComposerFragment extends CallComposerFragment
     // This should never happen, but just in case..
     // Guard against null uri cases for when the activity returns a null/invalid intent.
     if (url != null) {
-      new CopyAndResizeImageTask(
-              getContext(),
-              Uri.parse(url),
-              new Callback() {
-                @Override
-                public void onCopySuccessful(File file, String mimeType) {
-                  GalleryGridItemData data = adapter.insertEntry(file.getAbsolutePath(), mimeType);
-                  insertedImages.add(0, data);
-                  setSelected(data, true);
-                }
-
-                @Override
-                public void onCopyFailed(Throwable throwable) {
-                  // TODO(b/34279096) - gracefully handle message failure
-                  LogUtil.e(
-                      "GalleryComposerFragment.onFailure", "Data preparation failed", throwable);
-                }
-              })
-          .execute();
+      copyAndResizeImage.executeParallel(Uri.parse(url));
     } else {
       // TODO(b/34279096) - gracefully handle message failure
     }

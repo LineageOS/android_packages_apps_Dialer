@@ -47,8 +47,8 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.nano.CallInitiationType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.ViewUtil;
 import java.nio.charset.Charset;
@@ -65,7 +65,7 @@ public class CallSubjectDialog extends Activity {
   public static final String PREF_KEY_SUBJECT_HISTORY_ITEM = "subject_history_item";
   /** Activity intent argument bundle keys: */
   public static final String ARG_PHOTO_ID = "PHOTO_ID";
-
+  public static final String ARG_PHOTO_URI = "PHOTO_URI";
   public static final String ARG_CONTACT_URI = "CONTACT_URI";
   public static final String ARG_NAME_OR_NUMBER = "NAME_OR_NUMBER";
   public static final String ARG_NUMBER = "NUMBER";
@@ -134,6 +134,7 @@ public class CallSubjectDialog extends Activity {
       };
 
   private long mPhotoID;
+  private Uri mPhotoUri;
   private Uri mContactUri;
   private String mNameOrNumber;
   private String mNumber;
@@ -195,6 +196,7 @@ public class CallSubjectDialog extends Activity {
     start(
         activity,
         -1 /* photoId */,
+        null /* photoUri */,
         null /* contactUri */,
         number /* nameOrNumber */,
         number /* number */,
@@ -220,6 +222,7 @@ public class CallSubjectDialog extends Activity {
   public static void start(
       Activity activity,
       long photoId,
+      Uri photoUri,
       Uri contactUri,
       String nameOrNumber,
       String number,
@@ -229,6 +232,7 @@ public class CallSubjectDialog extends Activity {
       PhoneAccountHandle phoneAccountHandle) {
     Bundle arguments = new Bundle();
     arguments.putLong(ARG_PHOTO_ID, photoId);
+    arguments.putParcelable(ARG_PHOTO_URI, photoUri);
     arguments.putParcelable(ARG_CONTACT_URI, contactUri);
     arguments.putString(ARG_NAME_OR_NUMBER, nameOrNumber);
     arguments.putString(ARG_NUMBER, number);
@@ -320,15 +324,18 @@ public class CallSubjectDialog extends Activity {
   private void updateContactInfo() {
     if (mContactUri != null) {
       ContactPhotoManager.getInstance(this)
-          .loadDialerThumbnail(mContactPhoto, mContactUri, mPhotoID, mNameOrNumber, mContactType);
+          .loadDialerThumbnailOrPhoto(
+              mContactPhoto, mContactUri, mPhotoID, mPhotoUri, mNameOrNumber, mContactType);
     } else {
       mContactPhoto.setVisibility(View.GONE);
     }
     mNameView.setText(mNameOrNumber);
-    if (!TextUtils.isEmpty(mNumberLabel) && !TextUtils.isEmpty(mDisplayNumber)) {
+    if (!TextUtils.isEmpty(mDisplayNumber)) {
       mNumberView.setVisibility(View.VISIBLE);
       mNumberView.setText(
-          getString(R.string.call_subject_type_and_number, mNumberLabel, mDisplayNumber));
+          TextUtils.isEmpty(mNumberLabel)
+              ? mDisplayNumber
+              : getString(R.string.call_subject_type_and_number, mNumberLabel, mDisplayNumber));
     } else {
       mNumberView.setVisibility(View.GONE);
       mNumberView.setText(null);
@@ -343,6 +350,7 @@ public class CallSubjectDialog extends Activity {
       return;
     }
     mPhotoID = arguments.getLong(ARG_PHOTO_ID);
+    mPhotoUri = arguments.getParcelable(ARG_PHOTO_URI);
     mContactUri = arguments.getParcelable(ARG_CONTACT_URI);
     mNameOrNumber = arguments.getString(ARG_NAME_OR_NUMBER);
     mNumber = arguments.getString(ARG_NUMBER);

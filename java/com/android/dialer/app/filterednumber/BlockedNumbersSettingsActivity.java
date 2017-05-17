@@ -22,7 +22,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.list.BlockedListSearchFragment;
 import com.android.dialer.app.list.SearchFragment;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.ScreenEvent;
+import com.android.dialer.logging.ScreenEvent;
 
 public class BlockedNumbersSettingsActivity extends AppCompatActivity
     implements SearchFragment.HostInterface {

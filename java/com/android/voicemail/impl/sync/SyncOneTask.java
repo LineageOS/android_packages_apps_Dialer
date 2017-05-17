@@ -18,18 +18,21 @@ package com.android.voicemail.impl.sync;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Voicemail;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
+import com.android.voicemail.impl.utils.LoggerUtils;
 
 /**
  * Task to download a single voicemail from the server. This task is initiated by a SMS notifying
  * the new voicemail arrival, and ignores the duplicated tasks constraint.
  */
+@UsedByReflection(value = "Tasks.java")
 public class SyncOneTask extends BaseTask {
 
   private static final int RETRY_TIMES = 2;
@@ -48,7 +51,7 @@ public class SyncOneTask extends BaseTask {
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
     intent.putExtra(EXTRA_SYNC_TYPE, OmtpVvmSyncService.SYNC_DOWNLOAD_ONE_TRANSCRIPTION);
     intent.putExtra(EXTRA_VOICEMAIL, voicemail);
-    context.startService(intent);
+    context.sendBroadcast(intent);
   }
 
   public SyncOneTask() {
@@ -56,11 +59,12 @@ public class SyncOneTask extends BaseTask {
     addPolicy(new RetryPolicy(RETRY_TIMES, RETRY_INTERVAL_MILLIS));
   }
 
-  public void onCreate(Context context, Intent intent, int flags, int startId) {
-    super.onCreate(context, intent, flags, startId);
-    mPhone = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mSyncType = intent.getStringExtra(EXTRA_SYNC_TYPE);
-    mVoicemail = intent.getParcelableExtra(EXTRA_VOICEMAIL);
+  @Override
+  public void onCreate(Context context, Bundle extras) {
+    super.onCreate(context, extras);
+    mPhone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
+    mSyncType = extras.getString(EXTRA_SYNC_TYPE);
+    mVoicemail = extras.getParcelable(EXTRA_VOICEMAIL);
   }
 
   @Override
@@ -71,7 +75,7 @@ public class SyncOneTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
+    LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
     intent.putExtra(EXTRA_SYNC_TYPE, mSyncType);
