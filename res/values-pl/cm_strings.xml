@@ -43,6 +43,7 @@
   <string name="call_log_show_all_slots">Wszystkie karty SIM</string>
   <string name="call_log_all_calls_header">Wszystkie połączenia</string>
   <string name="call_log_blacklist_header">Tylko zablokowani rozmówcy</string>
+  <string name="call_log_blocked_empty">Nie masz zablokowanych połączeń.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statystyki</string>
   <string name="callStatsDetailTitle">Szczegółowe statystyki połączeń</string>
@@ -85,28 +86,56 @@
   <string name="speed_dial_delete">Usuń</string>
   <string name="speed_dial_unassigned_dialog_title">Klawisz nieprzypisany</string>
   <string name="speed_dial_unassigned_dialog_message">Brak akcji szybkiego wybierania dla przycisku numer \'<xliff:g id="number">%s</xliff:g>\'. Chcesz przypisać akcję teraz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Aby korzystać z szybkiego wybierania, należy najpierw wyłączyć tryb samolotowy</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Szybkie wybieranie nie może być ustawione dla tego przycisku</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <!-- Text displayed when the list of incoming calls is empty -->
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">Twój rejestr połączeń jest pusty</string>
+  <string name="calllog_search_hint">Szukaj w historii połączeń</string>
+  <string name="no_call_log">Brak rejestru połączeń</string>
   <string name="clear">Wyczyść</string>
   <string name="description_clear_search">Wyczyść wyszukiwanie</string>
+  <string name="video_call_welcome_title"><b>Witaj w nowej aplikacji do nawiązywania połączeń wideo</b></string>
+  <string name="video_call_welcome_message_repeat">Pokaż ten komunikat za każdym razem</string>
+  <string name="toast_change_video_call_failed">Nie można zmienić na połączenie wideo, niepoprawny format numeru</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Połączenie video, pokaż mnie</string>
+  <string name="overflowRXCallMenuItemText">Połączenie video, ukryj mnie</string>
   <string name="overflowVOCallMenuItemText">Połączenie głosowe</string>
   <string name="video_call">Połączenie wideo</string>
+  <string name="call_data_info_label">Wskaźniki czasu używania połączeń głosowych i transmisji danych</string>
+  <string name="call_data_info_description">Czas użycia połączeń głosowych i czas użycia transmisji danych</string>
+  <string name="alert_call_over_wifi">Połączenia będą wykonywane przez sieć Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Połącz z Wi-Fi aby nawiązywać połączenia.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Dotknij tutaj, aby wyświetlić dostępne sieci</string>
+  <string name="menu_add_to_4g_conference_call">Dodaj do połączenia konferencyjnego 4G</string>
+  <string name="menu_4g_conference_call">Połączenie konferencyjne 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Przychodzące połączenie głosowe 4G</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Przychodzące połączenie wideo 4G</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Wychodzące połączenie głosowe 4G</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Wychodzące połączenie wideo 4G</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Nieodebrane połączenie głosowe 4G</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Nieodebrane połączenie wideo 4G</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Przychodzące połączenie głosowe Wi-Fi</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Przychodzące połączenie wideo Wi-Fi</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Wychodzące połączenie głosowe Wi-Fi</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Wychodzące połączenie wideo Wi-Fi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Nieodebrane połączenie głosowe Wi-Fi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Nieodebrane połączenie wideo Wi-Fi</string>
 </resources>

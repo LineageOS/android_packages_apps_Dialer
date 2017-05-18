@@ -86,23 +86,61 @@
   <string name="speed_dial_delete">Slet</string>
   <string name="speed_dial_unassigned_dialog_title">Tast ikke tildelt</string>
   <string name="speed_dial_unassigned_dialog_message">Intet hurtigopkald tildelt tasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du tildele et opkald nu?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">For at bruge hurtigopkald, skal du først deaktivere flytilstand</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Hurtigopkald kan ikke angives for denne tast</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Du har ingen indgående opkald.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Du har ingen udgående opkald.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Din opkaldsliste er tom</string>
+  <string name="calllog_search_hint">Søg opkaldsliste</string>
+  <string name="no_call_log">Ingen opkaldsliste</string>
+  <string name="clear">Ryd</string>
+  <string name="description_clear_search">Ryd søgning</string>
+  <string name="video_call_welcome_title"><b>Velkommen til det nye Videoopkaldsprogram</b></string>
+  <string name="video_call_welcome_message">Vi alle elsker at høre en velkendte stemme i den anden ende af linjen, men det er så meget bedre at tale ansigt til ansigt! Her er hvad du bør vide for at få dine realtids- (eller FaceTime?) forbindelser kørende: \n Du skal være på 4G LTE- eller en Wi-Fi-forbindelse\n Den enhed, du ringer med, skal også være kompatibel med videosamtaler\n Videoopkald bruger dit datanetværk\n Du kan også opgradere et stemmopkald til et videoopkald\n\n Tjek <a>https://support.t-mobile.com/docs/DOC-23574</a> for mere information.</string>
+  <string name="video_call_welcome_message_repeat">Vis denne besked hver gang</string>
+  <string name="toast_change_video_call_failed">Kan ikke ændre til videoopkald, forkert nummerformat</string>
+  <string name="toast_make_video_call_failed">Kan ikke foretage videoopkald, forkert nummerformat</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videoopkald, vis mig</string>
+  <string name="overflowRXCallMenuItemText">Videoopkald, skjul mig</string>
+  <string name="overflowVOCallMenuItemText">Stemmeopkald</string>
+  <string name="video_call">Videoopkald</string>
+  <string name="call_data_info_label">Timere til opkald/dataforbrug</string>
+  <string name="call_data_info_description">Brugstid for stemmeopkald og data</string>
+  <string name="alert_call_over_wifi">Opkald foretages via Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Ingen trådløse netværk tilgængelig. Opret forbindelse til tilgængelige Wi-Fi-netværk til at foretage opkald.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Opret forbindelse til Wi-Fi for at foretage opkald.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tryk her for at se tilgængelige netværk</string>
+  <string name="menu_add_to_4g_conference_call">Føj til 4G-telefonmøde</string>
+  <string name="menu_4g_conference_call">4G-telefonmøde</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Indgående 4G-stemmeopkald</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Indgående 4G-videoopkald</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Udgående stemmeopkald</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Udgående 4G-videoopkald</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Ubesvarede 4G-stemmeopkald</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Ubesvarede 4G-videoopkald</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Indgående Wi-Fi-stemmeopkald</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Indgående Wi-Fi-videoopkald</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Udgående Wi-Fi-stemmeopkald</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Udgående Wi-Fi-videoopkald</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Ubesvarede Wi-Fi-stemmeopkald</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Ubesvarede Wi-Fi-videoopkald</string>
 </resources>

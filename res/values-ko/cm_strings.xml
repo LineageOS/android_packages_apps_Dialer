@@ -114,7 +114,7 @@
   <string name="call_data_info_label">전화/데이터 사용 시간 기록</string>
   <string name="call_data_info_description">음성 통화 사용 시간 및 데이터 사용 시간</string>
   <string name="alert_call_over_wifi">Wi-Fi를 통해 전화를 겁니다.</string>
-  <string name="alert_call_no_cellular_coverage">이동 통신망을 사용할 수 없습니다. 전화를 걸기 위해 사용 가능한 Wi-Fi에 연결합니다.</string>
+  <string name="alert_call_no_cellular_coverage">이동통신망을 사용할 수 없습니다. 전화를 걸기 위해 사용 가능한 Wi-Fi에 연결합니다.</string>
   <string name="alert_user_connect_to_wifi_for_call">전화를 걸기 위해 Wi-Fi에 연결합니다.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">이곳을 눌러 사용 가능한 네트워크를 확인하세요</string>
   <string name="menu_add_to_4g_conference_call">4G 다자간 통화에 추가</string>
