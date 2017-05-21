@@ -17,13 +17,13 @@
 package com.android.dialer.about;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 /** Simple Activity that renders locally stored open source legal info in a text view. */
-public final class LicenseActivity extends ActionBarActivity {
+public final class LicenseActivity extends AppCompatActivity {
   private static final String TAG = "LicenseActivity";
   private static final String STATE_SCROLL_POS = "scroll_pos";
 
