@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Јави ми се кога ќе имаш време."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Не е итно. Може да разговараме подоцна."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Додајте порака"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Испратете порака"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Пораката е испратена"</string>
     <string name="view" msgid="8572192949673703830">"Прикажи"</string>
 </resources>

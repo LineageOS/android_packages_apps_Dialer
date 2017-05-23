@@ -18,10 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="unknown" msgid="7932659017139013277">"មិន​ស្គាល់"</string>
-    <!-- no translation found for unknown_counter (7452889151953704159) -->
-    <skip />
+    <string name="unknown_counter" msgid="7452889151953704159">"<xliff:g id="UNKNOWN">%s</xliff:g> <xliff:g id="ID">%d</xliff:g>"</string>
     <string name="payphone" msgid="7106361320283710387">"ទូរស័ព្ទសាធារណៈ"</string>
     <string name="launcherActivityLabel" msgid="9034868428899993166">"ទូរស័ព្ទ"</string>
-    <!-- no translation found for call (3699617769606114168) -->
-    <skip />
+    <string name="call" msgid="3699617769606114168">"ហៅ​ទូរសព្ទ"</string>
 </resources>

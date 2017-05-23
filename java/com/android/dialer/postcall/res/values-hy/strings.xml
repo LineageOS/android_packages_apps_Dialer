@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Հետ զանգիր, երբ ժամանակ ունենաս:"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Շտապ չէ, կարող ենք հետո խոսել:"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Ավելացնել հաղորդագրություն"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Ուղարկել հաղորդագրություն"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Հաղորդագրությունն ուղարկվել է"</string>
     <string name="view" msgid="8572192949673703830">"Դիտել"</string>
 </resources>

@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"वॉयसमेल"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"हां"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"नहीं"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"क्या चुने गए <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> हटाना चाहते हैं?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> को <xliff:g id="TIME">%2$s</xliff:g> बजे"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"कॉल"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"कॉल अवरुद्ध करें"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"वॉइसमेल"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"वॉइसमेल सेटिंग हेतु सिम चुनें"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"कॉल अवरुद्ध करना अस्‍थायी रूप से बंद है"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"कॉल अवरुद्ध किए जाने को अक्षम कर दिया गया है क्योंकि पिछले 48 घंटों में आपने इस फ़ोन से आपातकालीन सेवाओं से संपर्क किया है. 48 घंटे की अवधि बीत जाने पर यह अपने आप फिर से सक्षम हो जाएगी."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"नंबर आयात करें"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"नंबर अनवरोधित करें"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"स्पैम"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ऑफ़लाइन हैं और उन तक नहीं पहुंचा जा सकता"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"संक्षिप्त विवरण"</string>
 </resources>

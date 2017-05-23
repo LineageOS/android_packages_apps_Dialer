@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"उत्तर द्या आणि सुरु असलेला कॉल बंद करा"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"व्हिडिओ बंद आहे"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"उत्तर देण्यासाठी दोन बोटांनी वर स्वाइप करा. नकार देण्यासाठी दोन बोटांनी खाली स्वाइप करा."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"त्वरित"</string>
 </resources>

@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ਵੌਇਸਮੇਲਾਂ"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ਹਾਂ"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"ਨਹੀਂ"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ਕੀ ਚੁਣੀ(ਆਂ) ਹੋਈ(ਆਂ) <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ਨੂੰ <xliff:g id="TIME">%2$s</xliff:g> ਵਜੇ"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -124,7 +123,7 @@
     <string name="block_number_search_hint" msgid="5377706079015099416">"ਨੰਬਰ ਜੋੜੋ ਜਾਂ ਸੰਪਰਕ ਖੋਜੋ"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"ਤੁਹਾਡਾ ਕਾਲ ਇਤਿਹਾਸ ਖਾਲੀ ਹੈ"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"ਇੱਕ ਕਾਲ ਕਰੋ"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਵੀ ਮਿਸਡ ਕਾਲਾਂ ਨਹੀਂ ਹਨ।"</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਵੀ ਖੁੰਝੀਆਂ ਕਾਲਾਂ ਨਹੀਂ ਹਨ।"</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"ਤੁਹਾਡਾ ਵੌਇਸਮੇਲ ਇਨਬਾਕਸ ਖਾਲੀ ਹੈ।"</string>
     <string name="show_favorites_only" msgid="8089163582448737837">"ਕੇਵਲ ਮਨਪਸੰਦ ਦਿਖਾਓ"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"ਕਾਲ ਇਤਿਹਾਸ"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"ਕਾਲਾਂ"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ਕਾਲ ਬਲੌਕ ਕਰਨਾ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ਵੌਇਸਮੇਲ"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"ਵੌਇਸਮੇਲ ਸੈਟਿੰਗਾਂ ਲਈ SIM ਚੁਣੋ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ਕਾਲ ਬਲੌਕਿੰਗ ਆਰਜ਼ੀ ਤੌਰ ਤੇ ਬੰਦ ਹੈ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ਕਾਲ ਬਲੌਕਿੰਗ ਅਸਮਰੱਥ ਕਰ ਦਿੱਤੀ ਗਈ ਹੈ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਫੋਨ ਦੁਆਰਾ ਪਿਛਲੇ 48 ਘੰਟਿਆਂ ਤੋਂ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਹੋਇਆ ਹੈ। ਇਹ 48 ਘੰਟਿਆਂ ਦਾ ਸਮਾਂ ਪੂਰਾ ਹੋਣ ਤੇੋਂ ਬਾਅਦ ਆਟੋਮੈਟਿਕਲੀ ਮੁੜ-ਸਮਰੱਥ ਹੋ ਜਾਵੇਗੀ।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ਆਯਾਤ ਨੰਬਰ"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ਸਪੈਮ"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ਔਫਲਾਈਨ ਹੈ ਅਤੇ ਉਸ \'ਤੇ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"ਇਸ ਬਾਰੇ"</string>
 </resources>

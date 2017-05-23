@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"جب آپ کے پاس کچھ وقت ہو تو مجھے واپس کال کریں۔"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"ارجنٹ نہیں ہے، ہم بعد میں چیٹ کر سکتے ہیں۔"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"پیغام شامل کریں"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"پیغام بھیجیں"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"پیغام بھیج دیا گیا"</string>
     <string name="view" msgid="8572192949673703830">"دیکھیں"</string>
 </resources>

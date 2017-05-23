@@ -114,7 +114,7 @@
     <string name="closes_today_at" msgid="2668928851103904896">"Tanca a les <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="closed_today_at" msgid="4203311397205549440">"Avui ha tancat a les <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="5897306702060039512">"Obert ara"</string>
-    <string name="closed_now" msgid="3962291301467974921">"Ara és tancat"</string>
+    <string name="closed_now" msgid="3962291301467974921">"Ara tancat"</string>
     <string name="non_spam_notification_title" msgid="3290544768406546372">"Coneixes el <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="spam_notification_title" msgid="2439276063775520534">"El <xliff:g id="NUMBER">%1$s</xliff:g> és un número brossa?"</string>
     <string name="spam_notification_block_report_toast_text" msgid="6844067640633690292">"El <xliff:g id="NUMBER">%1$s</xliff:g> s\'ha bloquejat i la trucada es marcarà com a brossa."</string>

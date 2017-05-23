@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"los mensajes de voz"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Sí"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"¿Deseas borrar <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> que seleccionaste?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"El <xliff:g id="DATE">%1$s</xliff:g> a la hora <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -122,7 +121,7 @@
     <string name="call_not_available" msgid="7850148370757361155">"No se pueden realizar llamadas porque se inhabilitó la aplicación Teléfono."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Buscar contactos"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Agregar número o buscar contactos"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Tu historial de llamadas está vacío"</string>
+    <string name="call_log_all_empty" msgid="3955572868518162004">"El historial de llamadas está vacío."</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"Hacer una llamada"</string>
     <string name="call_log_missed_empty" msgid="7094936030845062214">"No tienes llamadas perdidas"</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"La bandeja de entrada del buzón de voz está vacía."</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Llamadas"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Bloqueo de llamadas"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Buzón de voz"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Elige una SIM para configurar el buzón de voz"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Bloqueo de llamadas desactivado temporalmente"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Se inhabilitó el bloqueo de llamadas porque te comunicaste con servicios de emergencia en las últimas 48 horas desde este teléfono. Se volverá a habilitar de forma automática una vez que venza el período de 48 horas."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importar números"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Desbloquear número"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> está sin conexión y no se lo puede contactar"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Acerca de"</string>
 </resources>

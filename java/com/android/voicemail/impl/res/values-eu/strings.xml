@@ -18,10 +18,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"Erantzungailua (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"Erantzungailua"</string>
-    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
-    <skip />
+    <string name="voicemail_notifications_preference_title" msgid="3490553930230492405">"Jakinarazpenak"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"Ezarpen aurreratuak"</string>
-    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Erantzungailu bisuala"</string>
+    <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"Ikusizko erantzungailua"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"Babeskopiak eta edukia gordetzeko tokia"</string>
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"Ezarri PIN kodea"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Aldatu PIN kodea"</string>
@@ -32,7 +31,7 @@
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Itxaron, mesedez."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Laburregia da PIN kode berria."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Luzeegia da PIN kode berria."</string>
-    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"Ahulegia da PIN kode berria. Pasahitza segurua izan dadin, ez du izan behar zenbaki-segidarik edo errepikatutako zenbakirik."</string>
+    <string name="vm_change_pin_error_too_weak" msgid="5865254034338293113">"Ez da batere segurua PIN kode berria. Pasahitza segurua izan dadin, ez du izan behar zenbaki-segidarik edo errepikatutako zenbakirik."</string>
     <string name="vm_change_pin_error_mismatch" msgid="3682667971009913553">"PIN kode zaharra ez dator bat."</string>
     <string name="vm_change_pin_error_invalid" msgid="4317397281749196545">"Balio ez duten karaktereak ditu PIN kode berriak."</string>
     <string name="vm_change_pin_error_system_error" msgid="5972056058776852411">"Ezin da aldatu PIN kodea"</string>

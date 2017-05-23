@@ -16,8 +16,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for always_warn (8332929731464707890) -->
-    <skip />
-    <!-- no translation found for details (8642701148762155677) -->
-    <skip />
+    <string name="always_warn" msgid="8332929731464707890">"Toujours afficher l\'avertissement"</string>
+    <string name="details" msgid="8642701148762155677">"Vous appelez un numéro international, et des frais peuvent s\'appliquer."</string>
 </resources>

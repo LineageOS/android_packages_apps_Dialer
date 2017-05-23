@@ -50,7 +50,7 @@
     </plurals>
     <string name="notification_action_voicemail_play" msgid="5156500902796354071">"Spill av"</string>
     <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Nye talemeldinger fra <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Ny talemelding fra <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="4384373852257757295">"Kunne ikke spille av talepost"</string>
     <string name="voicemail_fetching_content" msgid="572320120918636014">"Laster inn talepost …"</string>
     <string name="voicemail_archiving_content" msgid="2415183864104922185">"Arkiverer taleposten …"</string>
@@ -121,7 +121,7 @@
     <string name="call_not_available" msgid="7850148370757361155">"Kan ikke ringe fordi Telefon-appen er deaktivert."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Søk i kontakter"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Legg til nummer eller søk etter kontakter"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Anropsloggen din er tom"</string>
+    <string name="call_log_all_empty" msgid="3955572868518162004">"Anropsloggen er tom"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"Start en samtale"</string>
     <string name="call_log_missed_empty" msgid="7094936030845062214">"Du har ingen tapte anrop."</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"Talepostkassen din er tom."</string>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Anrop"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Anropsblokkering"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Talepost"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Velg SIM for talepostinnstillinger"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blokkering av anrop er midlertidig slått av"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Blokkering av anrop er slått av fordi du kontaktet nødtjenester fra denne telefonen i løpet av de siste 48 timene. Funksjonen blir automatisk slått på igjen når perioden på 48 timer er utløpt."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importér numre"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Opphev blokkeringen av nummeret"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Nettsøppel"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> er frakoblet og kan ikke nås"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Om"</string>
 </resources>

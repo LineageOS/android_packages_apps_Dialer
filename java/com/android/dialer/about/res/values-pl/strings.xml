@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for build_version_label (3876300343684966840) -->
-    <skip />
-    <!-- no translation found for open_source_license_detail_label (2860076509914623912) -->
-    <skip />
-    <!-- no translation found for licenseActivityLabel (8258726177561826066) -->
-    <skip />
-    <!-- no translation found for privacy_policy_label (6567158248788870442) -->
-    <skip />
-    <!-- no translation found for terms_of_service_label (6788126078040996084) -->
-    <skip />
+    <string name="build_version_label" msgid="3876300343684966840">"Wersja kompilacji"</string>
+    <string name="open_source_license_detail_label" msgid="2860076509914623912">"Szczegóły licencji na oprogramowanie open source"</string>
+    <string name="licenseActivityLabel" msgid="8258726177561826066">"Licencje open source"</string>
+    <string name="privacy_policy_label" msgid="6567158248788870442">"Polityka prywatności"</string>
+    <string name="terms_of_service_label" msgid="6788126078040996084">"Warunki korzystania z usługi"</string>
 </resources>

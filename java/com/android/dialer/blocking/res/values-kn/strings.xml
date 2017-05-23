@@ -19,7 +19,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"ಹೊಸ, ಸರಳೀಕರಿಸಿದ ನಿರ್ಬಂಧ"</string>
     <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"ನಿಮ್ಮನ್ನು ಉತ್ತಮ ರೀತಿಯಲ್ಲಿ ರಕ್ಷಿಸಲು, ನಿರ್ಬಂಧ ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಎಂದು ಫೋನ್ ಬದಲಾಯಿಸಬೇಕಾಗಿದೆ. ನಿಮ್ಮ ನಿರ್ಬಂಧಿಸಿದ ಸಂಖ್ಯೆಗಳು ಈಗ ಕರೆ ಮತ್ತು ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ನಿಲ್ಲಿಸುತ್ತವೆ ಹಾಗೂ ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಜೊತೆಗೆ ಹಂಚಿಕೊಳ್ಳಬಹುದು."</string>
-    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"ಅನುಮತಿಸು"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"ಅನುಮತಿಸಿ"</string>
     <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು, ಆದರೆ ಕರೆಮಾಡುವವರು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಈಗಲೂ ನಿಮಗೆ ಕಳುಹಿಸಬಹುದು."</string>

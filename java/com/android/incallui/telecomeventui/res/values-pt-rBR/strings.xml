@@ -16,8 +16,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for always_warn (8332929731464707890) -->
-    <skip />
-    <!-- no translation found for details (8642701148762155677) -->
-    <skip />
+    <string name="always_warn" msgid="8332929731464707890">"Mostrar o aviso sempre"</string>
+    <string name="details" msgid="8642701148762155677">"Você está ligando para um número internacional sujeito a cobrança."</string>
 </resources>

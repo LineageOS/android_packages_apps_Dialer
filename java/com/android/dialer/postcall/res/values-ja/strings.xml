@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"お時間のあるときにお電話ください。"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"急ぎではないので、また後でかけ直します。"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"メッセージを追加できます"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"メッセージを送信"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"メッセージを送信しました"</string>
     <string name="view" msgid="8572192949673703830">"表示"</string>
 </resources>

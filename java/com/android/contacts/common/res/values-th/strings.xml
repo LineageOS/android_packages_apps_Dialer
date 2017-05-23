@@ -69,7 +69,7 @@
     <string name="status_available" msgid="2648156525685472626">"พร้อมใช้งาน"</string>
     <string name="status_away" msgid="2298688367552893953">"ไม่อยู่"</string>
     <string name="status_busy" msgid="5990832098713248503">"ไม่ว่าง"</string>
-    <string name="contactsList" msgid="8806067891419291513">"รายชื่อในสมุดโทรศัพท์"</string>
+    <string name="contactsList" msgid="8806067891419291513">"รายชื่อติดต่อ"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"อื่นๆ"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ไดเรกทอรี"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"ไดเรกทอรีที่ทำงาน"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"ข้อกำหนดในการให้บริการ"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"ใบอนุญาตโอเพนซอร์ส"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"เปิด URL ไม่สำเร็จ"</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"แฮงเอาท์วิดีโอ"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"แชร์และโทร"</string>
 </resources>

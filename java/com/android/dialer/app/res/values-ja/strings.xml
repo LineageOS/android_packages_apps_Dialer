@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"着信のブロック"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ボイスメール"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"ボイスメール設定の変更を行う SIM の選択"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"着信のブロックは一時的にOFFです"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、着信のブロックは無効になっています。48時間経過すると、着信のブロックは自動的に有効になります。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"番号をインポート"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"番号のブロックを解除"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"スパム"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> さんはオフラインのため、通話を受信できません"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"電話アプリについて"</string>
 </resources>

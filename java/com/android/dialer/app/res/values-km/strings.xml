@@ -122,8 +122,8 @@
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"រក​ទំនាក់ទំនង"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"បន្ថែមលេខទូរស័ព្ទ ឬស្វែងរកទំនាក់ទំនង"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"ប្រវត្តិហៅរបស់អ្នកទទេ"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"ហៅទូរស័ព្ទ"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"អ្នកមិនមានការខកខានទទួលទូរស័ព្ទទេ។"</string>
+    <string name="call_log_all_empty_action" msgid="852218280136243014">"ហៅទូរសព្ទ"</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"អ្នកមិនមានការខកខានទទួលទូរសព្ទទេ។"</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"ប្រអប់ទទួលសារជាសំឡេងរបស់អ្នកទទេ។"</string>
     <string name="show_favorites_only" msgid="8089163582448737837">"បង្ហាញ​តែ​​និយម​ប្រើ​ប៉ុណ្ណោះ"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"ប្រវត្តិ​ហៅ"</string>
@@ -144,7 +144,7 @@
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"រារាំងលេខ"</string>
     <string name="num_missed_calls" msgid="5171791753696317082">"ខកខាន​ទទួល​ថ្មី <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"គ្មាននរណាម្នាក់នៅក្នុងការហៅរហ័សរបស់អ្នកនៅឡើយទេ"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"បន្ថែមសំណព្វ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"បញ្ចូលសំណព្វ"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"អ្នកមិនទាន់មានទំនាក់ទំនងនៅឡើយទេ"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"បន្ថែមទំនាក់ទំនង"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"ប៉ះរូបភាពដើម្បីមើលលេខទាំងអស់ ឬប៉ះ &amp; សង្កត់ឲ្យជាប់ដើម្បីតម្រៀបឡើងវិញ"</string>
@@ -186,8 +186,8 @@
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"ចាប់ផ្ដើម ឬ​ផ្អាក​ការ​ចាក់​ឡើងវិញ។"</string>
     <string name="display_options_title" msgid="3880091801055797975">"ជម្រើសបង្ហាញ"</string>
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"សំឡេង និងរំញ័រ"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"លទ្ធភាពប្រើប្រាស់"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"សំឡេង​រោទ៍​ទូរស័ព្ទ"</string>
+    <string name="accessibility_settings_title" msgid="3329027650429831820">"ភាពងាយស្រួល"</string>
+    <string name="ringtone_title" msgid="8377174189894648486">"សំឡេង​រោទ៍​ទូរសព្ទ"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"ញ័រ​សម្រាប់​ការ​ហៅ​ផងដែរ"</string>
     <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"សំឡេង​ពេល​ចុច​លេខ"</string>
     <string name="dtmf_tone_length_title" msgid="534096029202438539">"រយៈពេល​សំឡេង​ពេលចុច"</string>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"ការហៅ"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ការរារាំងការហៅ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"សារ​ជា​សំឡេង"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"ជ្រើសរើស SIM សម្រាប់​ការកំណត់​សារ​ជា​សំឡេង"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ការរារាំងការហៅត្រូវបានបិទជាបណ្តោះអាសន្ន"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ការរារាំងការហៅត្រូវបានបិទដំណើរការ ដោយសារតែអ្នកបានទាក់ទងទៅសេវាអាសន្នចេញពីទូរស័ព្ទនេះក្នុងចន្លោះពេល 48 ម៉ោងកន្លងមកនេះ។ វានឹងបើកដំណើរការឡើងវិញ បន្ទាប់ពីរយៈពេល 48 ម៉ោងផុតកំណត់។"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"នាំចូលលេខ"</string>
@@ -213,7 +212,7 @@
     <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ប៉ុន្តែពួកគេនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។"</string>
     <string name="block_list" msgid="4701585783411870782">"លេខបានរារាំង"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ត្រូវបានទប់ស្កាត់រួចហើយ"</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"គណនីហៅទូរស័ព្ទ"</string>
+    <string name="phone_account_settings_label" msgid="8372485478006965920">"គណនីហៅទូរសព្ទ"</string>
     <string name="permission_single_turn_on" msgid="8014796118294187894">"បើក"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"កំណត់សិទ្ធិអនុញ្ញាត"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"ដើម្បីបើកដំណើរការហៅរហ័ស សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីទំនាក់ទំនង។"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ឈប់ទប់ស្កាត់លេខ"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"សារ​ឥតបានការ"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> មិន​នៅ​លើ​អ៊ីនធឺណិត និង​មិន​អាច​ទាក់ទង​បាន​ទេ"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"អំពី"</string>
 </resources>

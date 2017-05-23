@@ -18,8 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"សារ​ជា​សំឡេង (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"សារ​ជា​សំឡេង"</string>
-    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
-    <skip />
+    <string name="voicemail_notifications_preference_title" msgid="3490553930230492405">"ការ​ជូនដំណឹង"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"ការ​កំណត់​កម្រិត​ខ្ពស់"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"សារជាសំឡេងអាចមើលឃើញ"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"ទំហំ​ផ្ទុក និង​ការ​បម្រុងទុក​បន្ថែម"</string>

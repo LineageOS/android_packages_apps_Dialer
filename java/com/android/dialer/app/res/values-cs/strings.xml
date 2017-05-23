@@ -94,7 +94,7 @@
     <string name="description_spam_contact_details" msgid="5592578752881528368">"Kontaktní údaje volajícího podezřelého ze spamu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="6483594535796216044">"Počet hovorů: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>"</string>
     <string name="description_video_call" msgid="3738199365585751727">"Videohovor"</string>
-    <string name="description_send_text_message" msgid="8450269896765568596">"Odeslat zprávu SMS kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="8450269896765568596">"Odeslat SMS kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"Nevyslechnutá hlasová zpráva"</string>
     <string name="description_start_voice_search" msgid="8380022725973015261">"Spustit hlasové vyhledávání"</string>
     <string name="menu_callNumber" msgid="1540773545517152514">"Zavolat <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -105,8 +105,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"vybrané hlasové zprávy"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Ano"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Ne"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Smazat <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> v <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -204,8 +203,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Volání"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Blokování hovorů"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Hlasová schránka"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Vyberte SIM kartu k nastavení hlasové schránky"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blokování hovorů je dočasně vypnuto"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Protože jste z tohoto telefonu během posledních 48 hodin volali na tísňovou linku, bylo blokování hovorů vypnuto. Po uplynutí 48 hodin se automaticky znovu zapne."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importovat čísla"</string>
@@ -235,6 +233,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Zrušit blokování čísla"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Uživatel <xliff:g id="NAME">%1$s</xliff:g> je offline a není možné se s ním spojit"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"O aplikaci"</string>
 </resources>
