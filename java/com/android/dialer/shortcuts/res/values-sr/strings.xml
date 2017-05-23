@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="dialer_shortcut_add_contact_short" msgid="7587385197258884650">"Ново"</string>
+    <string name="dialer_shortcut_add_contact_short" msgid="7587385197258884650">"Нови конт."</string>
     <string name="dialer_shortcut_add_contact_long" msgid="7573187314386728329">"Нови контакт"</string>
     <string name="dialer_shortcut_disabled_message" msgid="7713603194332953571">"Пречица не функционише. Превуците да бисте је уклонили."</string>
     <string name="dialer_shortcut_contact_not_found_or_has_no_number" msgid="3538594504123040498">"Контакт више није доступан."</string>

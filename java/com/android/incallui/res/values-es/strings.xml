@@ -88,7 +88,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Activando señal móvil…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Sin servicio. Reintentado…"</string>
     <string name="dial_emergency_error" msgid="6953255422990366011">"No se puede establecer la llamada. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> no es un número de emergencia."</string>
-    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"No se puede establecer la llamada. Marcar un número de emergencia."</string>
+    <string name="dial_emergency_empty_error" msgid="6668006522178181198">"No se puede establecer la llamada. Marca un número de emergencia."</string>
     <string name="dialerKeyboardHintText" msgid="6275105254377292585">"Utilizar teclado para marcar"</string>
     <string name="player_started" msgid="9177182657338033086">"Reproductor iniciado"</string>
     <string name="player_stopped" msgid="5040965200339765956">"Reproductor detenido"</string>

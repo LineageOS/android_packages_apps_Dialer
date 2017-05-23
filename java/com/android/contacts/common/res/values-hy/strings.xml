@@ -116,7 +116,7 @@
     <string name="ghostData_title" msgid="4994968731830184837">"Պաշտոն"</string>
     <string name="label_notes" msgid="2050255313694219786">"Գրառումներ"</string>
     <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Վեբ-կայք"</string>
+    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Վեբ կայք"</string>
     <string name="groupsLabel" msgid="2694002798416868728">"Խմբեր"</string>
     <string name="email_home" msgid="889830029388962171">"Նամակագրել տուն"</string>
     <string name="email_mobile" msgid="4487686436743741150">"Նամակագրել բջջայինին"</string>
@@ -212,7 +212,7 @@
     <string name="display_options_view_names_as" msgid="4204204205736735618">"Անվան ձևաչափ"</string>
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Սկզբում՝ անունը"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Սկզբում՝ ազգանունը"</string>
-    <string name="default_editor_account" msgid="1826578934497338822">"Ստանդարտ հաշիվ նոր կոնտակտների համար"</string>
+    <string name="default_editor_account" msgid="1826578934497338822">"Կանխադրված հաշիվ նոր կոնտակտների համար"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Համաժամացնել կոնտակտի մետատվյալները"</string>
     <string name="setting_about" msgid="5253319937596745755">"Կոնտակտների մասին"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"Կարգավորումներ"</string>
@@ -254,15 +254,13 @@
       <item quantity="one"> <xliff:g id="TITLE_2">%1$s</xliff:g> tab. <xliff:g id="COUNT_3">%2$d</xliff:g> unread items. </item>
       <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ներդիր: <xliff:g id="COUNT_3">%2$d</xliff:g> չընթերցված տարր: </item>
     </plurals>
-    <string name="about_build_version" msgid="6809677213570116689">"Կառուցվածքի տարբերակը"</string>
+    <string name="about_build_version" msgid="6809677213570116689">"Կառուցման տարբերակը"</string>
     <string name="about_open_source_licenses" msgid="9071344335180981674">"Բաց կոդով ծրագրերի արտոնագրեր"</string>
     <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Բաց կոդով ծրագրային ապահովման արտոնագրերի մանրամասներ"</string>
     <string name="about_privacy_policy" msgid="120921692215934837">"Գաղտնիության քաղաքականություն"</string>
     <string name="about_terms_of_service" msgid="9004506174858804172">"Օգտագործման պայմաններ"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Բաց կոդով ծրագրակազմի արտոնագրեր"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Չհաջողվեց բացել url-ը:"</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Տեսազանգ"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Կիսվել և զանգել"</string>
 </resources>

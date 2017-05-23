@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"현재 통화를 종료하고 전화 받기"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"동영상이 꺼져 있습니다."</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"받으려면 두 손가락을 위로 스와이프하고 거부하려면 두 손가락을 아래로 스와이프하세요."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"긴급"</string>
 </resources>

@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Bel me terug als je tijd hebt."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Het is niet dringend, ik spreek je later."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Bericht toevoegen"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Bericht verzenden"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Bericht verzonden"</string>
     <string name="view" msgid="8572192949673703830">"Weergeven"</string>
 </resources>

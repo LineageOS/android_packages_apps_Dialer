@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Јавите се и завршите позив који је у току"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Камера је искључена"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Превуците нагоре помоћу два прста да бисте одговорили. Превуците надоле помоћу два прста да бисте одбили."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Хитно"</string>
 </resources>

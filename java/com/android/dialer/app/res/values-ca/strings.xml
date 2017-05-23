@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"missatges de veu"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Sí"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Vols suprimir l\'element o elements seleccionats (<xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>)?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> a les <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Trucades"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Bloqueig de trucades"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Bústia de veu"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Tria la SIM per a la configuració de la bústia"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Bloqueig de trucades desactivat tempor."</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"El bloqueig de trucades s\'ha desactivat perquè has contactat amb els serveis d\'emergència des d\'aquest telèfon durant les últimes 48 hores. Es tornarà a activar automàticament una vegada transcorregut el període de 48 hores."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importa els números"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Desbloqueja el número"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Contingut brossa"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> no té connexió i no s\'hi pot contactar"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Informació"</string>
 </resources>

@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"correos de voz"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Si"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Non"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Queres eliminar a selección (<xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>)?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ás <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -118,7 +117,7 @@
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Cargando da tarxeta SIM..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Contactos da tarxeta SIM"</string>
     <string name="add_contact_not_available" msgid="7065884447935173347">"Non hai aplicacións de contactos dispoñibles"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Busca de voz non dispoñible"</string>
+    <string name="voice_search_not_available" msgid="6546240433719732905">"Busca por voz non dispoñible"</string>
     <string name="call_not_available" msgid="7850148370757361155">"Non se pode facer unha chamada telefónica porque se desactivou a aplicación de teléfono."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Buscar contactos"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Engade número/busca contactos"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Chamadas"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Bloqueo de chamadas"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Correo de voz"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Elixir SIM e configurar correo"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"O bloqueo de chamadas desactivouse temporalmente"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"O bloqueo de chamadas desactivouse porque contactaches cos servizos de emerxencias desde este teléfono nas últimas 48 horas. Volverase activar automaticamente unha vez que pase o período de 48 horas."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importar números"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Desbloquear número"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Non se pode contactar con <xliff:g id="NAME">%1$s</xliff:g> porque está sen conexión"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Acerca de"</string>
 </resources>

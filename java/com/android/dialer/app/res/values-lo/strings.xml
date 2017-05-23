@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ຂໍ້ຄວາມສຽງ"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ແມ່ນແລ້ວ"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"ບໍ່"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ລຶບ <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ທີ່ເລືອກອອກໄປບໍ?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ເວລາ <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -186,7 +185,7 @@
     <string name="voicemail_play_slower" msgid="868588128301087884">"ຫຼິ້ນຊ້າລົງ."</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"ເລີ່ມຫຼືຢຸດ​ການ​ຫຼິ້ນຊົ່ວຄາວ."</string>
     <string name="display_options_title" msgid="3880091801055797975">"ຕົວເລືອກການສະແດງຜົນ"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"ສຽງ ແລະ​ສັ່ນ"</string>
+    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"ສຽງ ແລະ ການສັ່ນ"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"​ການ​ຊ່ວຍ​ເຂົ້າ​ເຖິງ"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"ຣິງໂທນໂທລະສັບ"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"ສັ່ນ​ເຕືອນ​ເມື່ອ​ມີ​ການ​ໂທ​ເຂົ້າ"</string>
@@ -198,10 +197,9 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"ຕອບກັບດ່ວນ"</string>
     <string name="call_settings_label" msgid="7824611757200960807">"​ການ​ໂທ"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ການບ​ລັອກ​ສາຍ​ໂທ"</string>
+    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ການບລັອກສາຍ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ຂໍ້ຄວາມສຽງ"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"ເລືອກຊິມສຳລັບການຕັ້ງຄ່າຂໍ້ຄວາມສຽງ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ການບ​ລັອກ​ສາຍ​ໂທ​ປິດ​ຊົ່ວ​ຄາວ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ ເພາະ​ວ່າ​ທ່ານ​ໄດ້​ຕິດ​ຕໍ່​ຫາ​ຝ່າຍ​ບໍ​ລິ​ການ​ສຸກ​ເສີນ​ຈາກ​ໂທ​ລະ​ສັບ​ນີ້​ພາຍ​ໃນ 48 ຊົ່ວ​ໂມງ​ສຸດ​ທ້າຍ. ມັນ​ຈະ​ຖືກ​ເປີດ​ໃຊ້​ງານ​ອີກ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ ເມື່ອ​ໝົດ​ໄລ​ຍະ 48 ຊົ່ວ​ໂມງ​ໄປ​ແລ້ວ."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ນຳ​ຕົວ​ເລກ​ເຂົ້າ"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ປົດ​ບ​ລັອກ​ໝາຍ​ເລກ"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ສະແປມ"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ອອບລາຍຢູ່ ແລະ ບໍ່ສາມາດຕິດຕໍ່ຫາໄດ້"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"ກ່ຽວກັບ"</string>
 </resources>

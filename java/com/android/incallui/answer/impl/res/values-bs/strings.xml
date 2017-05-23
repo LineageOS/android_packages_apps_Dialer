@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Odgovorite na poziv i završite ga"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Kamera je isključena"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Prevucite pomoću dva prsta prema gore da odgovorite. Prevucite pomoću dva prsta prema dolje da odbijete."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Hitno"</string>
 </resources>

@@ -124,10 +124,10 @@
     <string name="spam_notification_spam_call_collapsed_text" msgid="3865687645128037638">"SPAM EMAS deb belgilash yoki raqamni bloklash uchun bosing."</string>
     <string name="spam_notification_spam_call_expanded_text" msgid="1062029525759401658">"Bu spam-qo‘ng‘iroqqa o‘xshayapti. Agar u spam bo‘lmasa, bu haqda bizga xabar berish uchun SPAM EMAS deb belgilang."</string>
     <string name="spam_notification_report_spam_action_text" msgid="4829510418690824538">"Bloklash/xabar ber."</string>
-    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Kontakt qo‘shish"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="307315138401483232">"Kontakt saqlash"</string>
     <string name="spam_notification_not_spam_action_text" msgid="2576048366011852090">"Spam emas"</string>
     <string name="spam_notification_block_spam_action_text" msgid="80045727259264724">"Raqamni bloklash"</string>
-    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Kontaktlarga qo‘shish"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Kontaktlarga saqlash"</string>
     <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Bloklash va spam haqida xabar berish"</string>
     <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Spam emas"</string>
     <string name="callFailed_simError" msgid="4587775795711340072">"SIM karta yo‘q yoki SIM kartada xato"</string>

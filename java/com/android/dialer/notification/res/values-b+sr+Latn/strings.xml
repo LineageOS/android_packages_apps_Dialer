@@ -22,6 +22,5 @@
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"Propušteni pozivi"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"Govorne poruke"</string>
     <string name="notification_channel_external_call" msgid="2200143959948071132">"Spoljni pozivi"</string>
-    <!-- no translation found for notification_channel_misc (5595452227577858518) -->
-    <skip />
+    <string name="notification_channel_misc" msgid="5595452227577858518">"Podrazumevano"</string>
 </resources>

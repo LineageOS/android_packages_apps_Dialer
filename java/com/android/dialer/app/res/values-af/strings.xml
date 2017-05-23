@@ -189,8 +189,8 @@
     <string name="accessibility_settings_title" msgid="3329027650429831820">"Toeganklikheid"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"Foonluitoon"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibreer ook vir oproepe"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Sleutelblokklanke"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Sleutelblokklanklengte"</string>
+    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Sleutelbordklanke"</string>
+    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Sleutelbordklanklengte"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="3136353015227162823">"Normaal"</item>
     <item msgid="5376841175538523822">"Lank"</item>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Oproepe"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Oproepblokkering"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Stemboodskap"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Kies SIM vir stemboodskap-instellings"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Oproepblokkering is tydelik af"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Oproepblokkering is gedeaktiveer omdat jy die afgelope 48 uur nooddienste van hierdie foon af gekontak het. Dit sal outomaties heraktiveer word sodra die 48-uurtydperk verstryk."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Voer nommers in"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Deblokkeer nommer"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Strooipos"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> is vanlyn en kan nie bereik word nie"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Meer oor"</string>
 </resources>

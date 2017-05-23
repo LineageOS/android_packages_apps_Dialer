@@ -143,7 +143,7 @@
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"進行視像通話"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"封鎖號碼"</string>
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> 個新的未接來電"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"快速撥號清單中沒有聯絡人"</string>
+    <string name="speed_dial_empty" msgid="3346406399966039505">"快速撥號名單中沒有聯絡人"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"新增常用聯絡人"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"暫時沒有聯絡人"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"新增聯絡人"</string>
@@ -185,7 +185,7 @@
     <string name="voicemail_play_slower" msgid="868588128301087884">"放慢播放速度。"</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"開始或暫停播放。"</string>
     <string name="display_options_title" msgid="3880091801055797975">"顯示選項"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"響鈴和震動"</string>
+    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"聲音和震動"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"無障礙功能"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"手機鈴聲"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"來電時同時震動"</string>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"來電封鎖"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"留言"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"為留言設定選擇 SIM"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"暫時關閉來電封鎖功能"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"您在過去 48 小時內曾經使用此手機聯絡緊急服務，因此來電封鎖功能已停用。系統會在 48 小時期限結束後自動重新啟用功能。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"匯入號碼"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"解除封鎖號碼"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"垃圾號碼"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g>已離線，無法取得聯繫"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"關於"</string>
 </resources>
