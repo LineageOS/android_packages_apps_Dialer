@@ -125,7 +125,7 @@
     <string name="email_custom" msgid="7246580894327511013">"Email <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="email" msgid="2807318537887091606">"Email"</string>
     <string name="postal_street" msgid="6918171741240802474">"Jalan"</string>
-    <string name="postal_pobox" msgid="2962203483168878561">"Kotak pos"</string>
+    <string name="postal_pobox" msgid="2962203483168878561">"Kotak postingan"</string>
     <string name="postal_neighborhood" msgid="5275280978237639716">"Lingkungan"</string>
     <string name="postal_city" msgid="8674569121430005628">"Kota"</string>
     <string name="postal_region" msgid="1730369286225469192">"Negara Bagian"</string>
@@ -256,13 +256,11 @@
     </plurals>
     <string name="about_build_version" msgid="6809677213570116689">"Versi build"</string>
     <string name="about_open_source_licenses" msgid="9071344335180981674">"Lisensi sumber terbuka"</string>
-    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Detail lisensi untuk perangkat lunak sumber terbuka"</string>
+    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Detail lisensi untuk software sumber terbuka"</string>
     <string name="about_privacy_policy" msgid="120921692215934837">"Kebijakan privasi"</string>
     <string name="about_terms_of_service" msgid="9004506174858804172">"Persyaratan layanan"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Lisensi sumber terbuka"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Gagal membuka url."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Video call"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Membagikan dan menelepon"</string>
 </resources>

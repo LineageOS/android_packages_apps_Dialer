@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Antwoord en beëindig die voortgesette oproep"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video is af"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Swiep op met twee vingers om te antwoord. Swiep af met twee vingers om af te wys."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Dringend"</string>
 </resources>

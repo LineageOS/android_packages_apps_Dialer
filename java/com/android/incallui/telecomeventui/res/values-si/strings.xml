@@ -16,8 +16,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for always_warn (8332929731464707890) -->
-    <skip />
-    <!-- no translation found for details (8642701148762155677) -->
-    <skip />
+    <string name="always_warn" msgid="8332929731464707890">"සැමවිට අනතුරු ඇඟවීම් පෙන්වන්න"</string>
+    <string name="details" msgid="8642701148762155677">"ඔබ ජාත්‍යන්තර අංකයට අමතමින් සිටින අතර ගාස්තු අදාළ විය හැකිය."</string>
 </resources>

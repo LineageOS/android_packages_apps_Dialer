@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="description_dialpad_back" msgid="6226488105558971135">"Joan atzera"</string>
+    <string name="description_dialpad_back" msgid="6226488105558971135">"Egin atzera"</string>
     <string name="description_dialpad_overflow" msgid="5984341386518189787">"Aukera gehiago"</string>
     <string name="description_delete_button" msgid="8431313818404527096">"atzera tekla"</string>
     <string name="description_image_button_plus" msgid="8936338119824589388">"gehi"</string>

@@ -143,7 +143,7 @@
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Passer un appel vidéo"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"Bloquer le numéro"</string>
     <string name="num_missed_calls" msgid="5171791753696317082">"Nouveaux appels manqués : <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Vous n\'avez encore défini la numérotation abrégée pour aucun contact."</string>
+    <string name="speed_dial_empty" msgid="3346406399966039505">"Aucun contact pour la numérotation abrégée"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Ajouter un favori"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"Vous n\'avez pas encore de contacts."</string>
     <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Ajouter un contact"</string>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Appels"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Blocage des appels"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Messagerie vocale"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Choisir une carte SIM pour la messagerie vocale"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blocage appels désactivé temporairement"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Le blocage des appels a été désactivé, car vous avez contacté les services d\'urgence à l\'aide de ce téléphone au cours des dernières 48 heures. Le blocage sera réactivé automatiquement après 48 heures."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importer les numéros"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Débloquer le numéro"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> est injoignable, car non connecté"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"À propos"</string>
 </resources>

@@ -130,7 +130,7 @@
     <string name="show_favorites_only" msgid="8089163582448737837">"הצג מועדפים בלבד"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"היסטוריית שיחות"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"הכל"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"שיחה שלא נענתה"</string>
+    <string name="call_log_missed_title" msgid="17254005889268015">"שיחות שלא נענו"</string>
     <string name="call_log_voicemail_title" msgid="6504826963256437971">"דואר קולי"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"חיוג מהיר"</string>
     <string name="tab_history" msgid="7420269368689503596">"היסטוריית שיחות"</string>
@@ -139,7 +139,7 @@
     <string name="favorite_hidden" msgid="1077010324849831399">"הוסר מהמועדפים"</string>
     <string name="favorite_hidden_undo" msgid="5660280521854875320">"בטל"</string>
     <string name="search_shortcut_call_number" msgid="8847918845036880688">"התקשר אל <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"צור איש קשר חדש"</string>
+    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"איש קשר חדש"</string>
     <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"הוסף לאיש קשר"</string>
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"‏שלח SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"בצע שיחת וידאו"</string>
@@ -192,7 +192,7 @@
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"צלילים ורטט"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"נגישות"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"רינגטון של טלפון"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"הפעל רטט גם עבור שיחות"</string>
+    <string name="vibrate_on_ring_title" msgid="631441314790960485">"רטט גם עבור שיחות"</string>
     <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"צלילי לוח החיוג"</string>
     <string name="dtmf_tone_length_title" msgid="534096029202438539">"אורך הצלילים של לוח החיוג"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -203,8 +203,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"שיחות"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"חסימת שיחות"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"דואר קולי"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"‏בחר כרטיס SIM להגדרות הדואר הקולי"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"חסימת השיחות מושבתת באופן זמני"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"חסימת השיחות הושבתה מפני שיצרת קשר מטלפון זה עם שירותי חירום במהלך 48 השעות האחרונות. הפונקציה תופעל מחדש באופן אוטומטי בתום 48 השעות."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"יבא מספרים"</string>
@@ -234,6 +233,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"בטל חסימת מספר"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ספאם"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"לא ניתן להתקשר כי המכשיר של <xliff:g id="NAME">%1$s</xliff:g> לא מחובר כרגע"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"מידע כללי"</string>
 </resources>

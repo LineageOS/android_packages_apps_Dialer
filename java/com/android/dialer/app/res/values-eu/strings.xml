@@ -94,7 +94,7 @@
     <string name="description_video_call" msgid="3738199365585751727">"Bideo-deia."</string>
     <string name="description_send_text_message" msgid="8450269896765568596">"Bidali SMSa <xliff:g id="NAME">%1$s</xliff:g> kontaktuari"</string>
     <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"Entzun ez diren erantzungailuko ahots-mezuak"</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Hasi ahots bidezko bilaketa"</string>
+    <string name="description_start_voice_search" msgid="8380022725973015261">"Hasi ahozko bilaketa"</string>
     <string name="menu_callNumber" msgid="1540773545517152514">"Deitu <xliff:g id="NUMBER">%s</xliff:g> zenbakira"</string>
     <string name="voicemail" msgid="8899540969000957954">"Erantzungailua"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ahots-mezuak"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Bai"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Ez"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Hautatutako <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ezabatu?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> (<xliff:g id="TIME">%2$s</xliff:g>)"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -118,7 +117,7 @@
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"SIM txarteletik kargatzen…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"SIM txarteleko kontaktuak"</string>
     <string name="add_contact_not_available" msgid="7065884447935173347">"Ez dago kontaktuen aplikaziorik erabilgarri"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Ahots bidezko bilaketa ez dago erabilgarri"</string>
+    <string name="voice_search_not_available" msgid="6546240433719732905">"Ahozko bilaketa ez dago erabilgarri"</string>
     <string name="call_not_available" msgid="7850148370757361155">"Ezin da telefono-deirik egin Telefonoa aplikazioa desgaitu egin delako."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Bilatu kontaktuetan"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Gehitu zk. edo bilatu kontaktua"</string>
@@ -189,7 +188,7 @@
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Soinuak eta dardara"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"Erabilerraztasuna"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"Telefonoaren tonua"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Dardara deiak jasotzean ere"</string>
+    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Deiak jasotzean, egin dardara"</string>
     <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Teklatuaren tonuak"</string>
     <string name="dtmf_tone_length_title" msgid="534096029202438539">"Teklatuaren tonuen iraupena"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Deiak"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Deien blokeoa"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Erantzungailua"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Hautatu erantzungailuaren ezarpenak aldatzeko SIM txartela"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Deien blokeoa aldi baterako desgaituta"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Deiak blokeatzeko aukera desgaitu egin da, azken 48 orduetan larrialdi-zerbitzuekin harremanetan jarri zarelako telefono honetatik. Berriro gaituko da 48 orduko epea igaro ondoren."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Inportatu zenbakiak"</string>
@@ -223,7 +221,7 @@
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Erantzungailuan sartzeko, aktibatu Telefonoa erabiltzeko baimena."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Kontaktuak bilatzeko, aktibatu kontaktuak atzitzeko baimenak."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"Deiak egiteko, aktibatu Telefonoa erabiltzeko baimena."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefonoaren aplikazioak ez du baimenik sistemaren ezarpenetan ezer idazteko."</string>
+    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefonoa aplikazioak ez du baimenik sistemaren ezarpenetan ezer idazteko."</string>
     <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Blokeatuta"</string>
     <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Blokeatu eta salatu spama dela"</string>
     <string name="call_log_action_block_number" msgid="5048188386501998865">"Blokeatu zenbakia"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Desblokeatu zenbakia"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spama"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ez dago konektatuta, eta ezin zara jarri harremanetan berarekin"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Honi buruz"</string>
 </resources>

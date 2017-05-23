@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"వాయిస్ మెయిల్‌లు"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"అవును"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"వద్దు"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ఎంచుకున్న <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>ను తొలగించాలా?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g>కి"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -124,7 +123,7 @@
     <string name="block_number_search_hint" msgid="5377706079015099416">"నంబర్ జోడించండి లేదా పరిచయాల్లో శోధించండి"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"మీ కాల్ చరిత్ర ఖాళీగా ఉంది"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"కాల్ చేయి"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"మీకు సమాధానమివ్వని కాల్‌లు ఏవీ లేవు."</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"మీరు సమాధానమివ్వని కాల్‌లు ఏవీ కలిగి లేరు."</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"మీ వాయిస్‌మెయిల్ ఇన్‌బాక్స్ ఖాళీగా ఉంది."</string>
     <string name="show_favorites_only" msgid="8089163582448737837">"ఇష్టమైనవాటిని మాత్రమే చూపు"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"కాల్ చరిత్ర"</string>
@@ -145,7 +144,7 @@
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"నంబర్‌ను బ్లాక్ చేయి"</string>
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> కొత్త సమాధానం ఇవ్వని కాల్‌లు"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"మీ స్పీడ్ డయల్‌లో ఇంకా ఎవరూ లేరు"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"ఇష్టమైనదాన్ని జోడించండి"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"ఇష్టమైన వారిని జోడించండి"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"మీకు ఇప్పటికీ పరిచయాలేవీ లేవు"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"పరిచయాన్ని జోడించండి"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"అన్ని నంబర్‌లను చూడటానికి చిత్రాన్ని తాకండి లేదా క్రమం మార్చడానికి తాకి, కాసేపు అలాగే ఉంచండి"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"కాల్‌లు"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"కాల్ బ్లాక్ చేయడం"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"వాయిస్ మెయిల్"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"వాయిస్ మెయిల్ సెట్టింగ్‌ల కోసం SIM ఎంచుకోండి"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"కాల్ బ్లాకింగ్ తాత్కాలికంగా ఆఫ్ అయ్యింది"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"మీరు గత 48 గంటల వ్యవధిలో ఈ ఫోన్ నుండి అత్యవసర సేవలను సంప్రదించినందున కాల్ బ్లాకింగ్ నిలిపివేయబడింది. 48 గంటల వ్యవధి ముగిసిన తర్వాత ఇది స్వయంచాలకంగా పునఃప్రారంభించబడుతుంది."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"నంబర్‌లను దిగుమతి చేయి"</string>
@@ -209,7 +207,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"నంబర్‌లను వీక్షించండి"</string>
     <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"దిగుమతి చేయి"</string>
     <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"నంబర్‌ను జోడించు"</string>
+    <string name="addBlockedNumber" msgid="3053473735238295551">"నంబర్‌ను జోడించండి"</string>
     <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"ఈ నంబర్‌ల నుండి కాల్‌లు బ్లాక్ చేయబడతాయి మరియు వాయిస్‌మెయిల్‌లు స్వయంచాలకంగా తొలగించబడతాయి."</string>
     <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"ఈ నంబర్‌ల నుండి కాల్‌లు బ్లాక్ చేయబడతాయి, కానీ వాటి నుండి ఇప్పటికీ వాయిస్‌మెయిల్‌లు పంపబడవచ్చు."</string>
     <string name="block_list" msgid="4701585783411870782">"బ్లాక్ చేయబడిన నంబర్‌లు"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"స్పామ్"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ఆఫ్‌లైన్‌లో ఉన్నందున వారిని చేరుకోవడం సాధ్యపడదు"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"పరిచయం"</string>
 </resources>

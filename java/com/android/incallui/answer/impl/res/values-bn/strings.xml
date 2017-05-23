@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"উত্তর দিন এবং  চলছে এমন কল কেটে দিন"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"ভিডিও বন্ধ আছে"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"উত্তর দিতে উপরের দিকে, প্রত্যাখ্যান করতে নিচের দিকে দুই আঙুল দিয়ে সোয়াইপ করুন৷"</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"জরুরি"</string>
 </resources>

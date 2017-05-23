@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Vaxtın olanda mənə geri zəng edin."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Vacib deyil, daha sonra söhbət edə bilərik."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Mesaj əlavə edin"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Mesaj göndərin"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Mesaj göndərildi"</string>
     <string name="view" msgid="8572192949673703830">"Baxın"</string>
 </resources>

@@ -18,8 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="voicemail_settings_with_label" msgid="563926539137546586">"အသံမေးလ် (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
     <string name="voicemail_settings_title" msgid="6685263321755930738">"အသံမေးလ်"</string>
-    <!-- no translation found for voicemail_notifications_preference_title (3490553930230492405) -->
-    <skip />
+    <string name="voicemail_notifications_preference_title" msgid="3490553930230492405">"အကြောင်းကြားချက်များ"</string>
     <string name="voicemail_advanced_settings_title" msgid="6390900339808156711">"အဆင့်မြင့် ဆက်တင်များ"</string>
     <string name="voicemail_visual_voicemail_switch_title" msgid="3158454817165714998">"စာသားမှတ်တမ်းပါ အသံမေးလ်"</string>
     <string name="voicemail_visual_voicemail_auto_archive_switch_title" msgid="7120443850486401455">"အပိုဆောင်း မိတ္တူနှင့် သိုလှောင်မှု"</string>

@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Ring tilbake når du har tid."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Haster ikke. Prates senere?"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Legg til melding"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Send melding"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Meldingen er sendt"</string>
     <string name="view" msgid="8572192949673703830">"Se"</string>
 </resources>

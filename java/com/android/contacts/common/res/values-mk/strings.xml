@@ -154,9 +154,9 @@
     <string name="listCustomView" msgid="5306282632413086731">"Контакти во прилагоден приказ"</string>
     <string name="listSingleContact" msgid="8620818791932382627">"Еден контакт"</string>
     <string name="dialog_new_contact_account" msgid="3089718960461539156">"Зачувајте ги увезените контакти до:"</string>
-    <string name="import_from_sim" msgid="4025122666048801234">"Увези од СИМ картичка"</string>
-    <string name="import_from_sim_summary" msgid="7347530878981811858">"Увези од СИМ <xliff:g id="SIM_NAME">^1</xliff:g> – <xliff:g id="SIM_NUMBER">^2</xliff:g>"</string>
-    <string name="import_from_sim_summary_no_number" msgid="2311025421424473798">"Увези од СИМ <xliff:g id="SIM_NAME">%1$s</xliff:g>"</string>
+    <string name="import_from_sim" msgid="4025122666048801234">"Увези од SIM картичка"</string>
+    <string name="import_from_sim_summary" msgid="7347530878981811858">"Увези од SIM <xliff:g id="SIM_NAME">^1</xliff:g> – <xliff:g id="SIM_NUMBER">^2</xliff:g>"</string>
+    <string name="import_from_sim_summary_no_number" msgid="2311025421424473798">"Увези од SIM <xliff:g id="SIM_NAME">%1$s</xliff:g>"</string>
     <string name="import_from_vcf_file" product="default" msgid="2755992524137862594">"Увези од датотеката .vcf"</string>
     <string name="cancel_import_confirmation_message" msgid="1112854508504355394">"Откажи увоз на <xliff:g id="FILENAME">%s</xliff:g>?"</string>
     <string name="cancel_export_confirmation_message" msgid="8507822905973961704">"Откажи извоз на <xliff:g id="FILENAME">%s</xliff:g>?"</string>
@@ -233,7 +233,7 @@
     <string name="listTotalAllContactsZeroStarred" msgid="5008410556001744528">"Нема омилени"</string>
     <string name="listTotalAllContactsZeroGroup" msgid="6782377127075025237">"Нема контакти во <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="menu_clear_frequents" msgid="5358271535047496120">"Исчисти чести"</string>
-    <string name="menu_select_sim" msgid="3960197724339200637">"Изберете СИМ-картичка"</string>
+    <string name="menu_select_sim" msgid="3960197724339200637">"Изберете SIM-картичка"</string>
     <string name="menu_accounts" msgid="8092083497106343280">"Управувај со сметки"</string>
     <string name="menu_import_export" msgid="8834601882032781755">"Увези/извези"</string>
     <string name="contact_status_update_attribution" msgid="6042601531361543253">"од <xliff:g id="SOURCE">%1$s</xliff:g>"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"Услови на користење"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Лиценци за софтвер со отворен код"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Врската не успеа да се отвори."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Видеоповик"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Сподели и повикај"</string>
 </resources>

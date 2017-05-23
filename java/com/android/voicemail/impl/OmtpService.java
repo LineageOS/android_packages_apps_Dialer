@@ -80,8 +80,6 @@ public class OmtpService extends VisualVoicemailService {
       return;
     }
 
-    VvmPackageInstallHandler.scanNewPackages(this);
-
     if (!isServiceEnabled(sms.getPhoneAccountHandle())) {
       task.finish();
       return;
