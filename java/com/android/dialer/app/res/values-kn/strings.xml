@@ -37,8 +37,8 @@
     <string name="userCallActivityLabel" product="default" msgid="9198964841862577505">"ಫೋನ್"</string>
     <string name="notification_missedCallTitle" msgid="8283366068539898486">"ಮಿಸ್ಡ್‌ ಕಾಲ್‌"</string>
     <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"ಮಿಸ್ಡ್‌ ಕೆಲಸದ ಕರೆ"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> ತಪ್ಪಿದ ಕರೆಗಳು"</string>
+    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"ಮಿಸ್ಡ್‌ ಕರೆಗಳು"</string>
+    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> ಮಿಸ್ಡ್‌ ಕರೆಗಳು"</string>
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"ಮರಳಿ ಕರೆ ಮಾಡಿ"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"ಸಂದೇಶ"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
@@ -58,7 +58,7 @@
     <string name="call_log_voicemail_header" msgid="5799424860394542726">"ಧ್ವನಿಮೇಲ್‌ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_incoming_header" msgid="1158753168119845168">"ಒಳಬರುವ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_outgoing_header" msgid="149333910997122683">"ಹೊರಹೋಗುವ ಕರೆಗಳು ಮಾತ್ರ"</string>
-    <string name="call_log_missed_header" msgid="6491707499211289630">"ತಪ್ಪಿದ ಕರೆಗಳು ಮಾತ್ರ"</string>
+    <string name="call_log_missed_header" msgid="6491707499211289630">"ಮಿಸ್ಡ್‌ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="description_search_button" msgid="4515570469584782176">"ಹುಡುಕಾಟ"</string>
     <string name="description_dial_button" msgid="699794433224646027">"ಡಯಲ್"</string>
@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ಧ್ವನಿಮೇಲ್‌ಗಳು"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ಹೌದು"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"ಇಲ್ಲ"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ಆಯ್ಕೆ ಮಾಡಲಾದ <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ಅನ್ನು ಅಳಿಸುವುದೇ?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ರಂದು <xliff:g id="TIME">%2$s</xliff:g> ಗಂಟೆಗೆ"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -129,7 +128,7 @@
     <string name="show_favorites_only" msgid="8089163582448737837">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"ತಪ್ಪಿದ ಕರೆಗಳು"</string>
+    <string name="call_log_missed_title" msgid="17254005889268015">"ಮಿಸ್ಡ್‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="6504826963256437971">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_history" msgid="7420269368689503596">"ಕರೆ ಇತಿಹಾಸ"</string>
@@ -143,7 +142,7 @@
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"SMS ಕಳುಹಿಸು"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"ಸಂಖ್ಯೆಯನ್ನು ನಿರ್ಬಂಧಿಸು"</string>
-    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
+    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ಮಿಸ್ಡ್‌ ಕರೆಗಳು"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"ನಿಮ್ಮ ತ್ವರಿತ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"ಮೆಚ್ಚಿನದನ್ನು ಸೇರಿಸಿ"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳನ್ನು ಹೊಂದಿಲ್ಲ"</string>
@@ -185,7 +184,7 @@
     <string name="voicemail_play_faster" msgid="2742012169751409677">"ವೇಗವಾಗಿ ಪ್ಲೇ ಮಾಡಿ."</string>
     <string name="voicemail_play_slower" msgid="868588128301087884">"ನಿಧಾನವಾಗಿ ಪ್ಲೇ ಮಾಡಿ."</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"ಪ್ಲೇಬ್ಯಾಕ್‌ ಪ್ರಾರಂಭಿಸಿ ಅಥವಾ ವಿರಾಮಗೊಳಿಸಿ."</string>
-    <string name="display_options_title" msgid="3880091801055797975">"ಪ್ರದರ್ಶನ ಆಯ್ಕೆಗಳು"</string>
+    <string name="display_options_title" msgid="3880091801055797975">"ಡಿಸ್‌ಪ್ಲೇ ಆಯ್ಕೆಗಳು"</string>
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"ಧ್ವನಿ ಮತ್ತು ವೈಬ್ರೇಷನ್‌"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"ಪ್ರವೇಶಿಸುವಿಕೆ"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"ಕರೆಗಳು"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆ"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"ಧ್ವನಿಮೇಲ್"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"ಧ್ವನಿಮೇಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಸಿಮ್ ಆಯ್ಕೆ ಮಾಡಿ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆ ತಾತ್ಕಾಲಿಕ ಆಫ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ನೀವು ಕಳೆದ 48 ಗಂಟೆಗಳಲ್ಲಿ ಈ ಫೋನ್‌ನಿಂದ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿರುವ ಕಾರಣದಿಂದ ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ಒಮ್ಮೆ 48 ಗಂಟೆಗಳ ಅವಧಿಯು ಮುಕ್ತಾಯಗೊಂಡ ನಂತರ ಅದನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಸಕ್ರಿಯಗೊಳಿಸಲಾಗುವುದು."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ಸಂಖ್ಯೆಗಳನ್ನು ಆಮದು ಮಾಡಿ"</string>
@@ -215,7 +213,7 @@
     <string name="block_list" msgid="4701585783411870782">"ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳು"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ಈಗಾಗಲೇ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"ಆನ್ ಮಾಡು"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"ಆನ್‌ ಮಾಡಿ"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"ವೇಗ ಡಯಲ್ ಸಕ್ರಿಯಗೊಳಿಸಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"ನಿಮ್ಮ ಕರೆಯ ಲಾಗ್ ಅನ್ನು ವೀಕ್ಷಿಸಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ಸ್ಪ್ಯಾಮ್"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ಆಫ್‌ಲೈನ್ ಆಗಿದ್ದಾರೆ ಮತ್ತು ಅವರನ್ನು ತಲುಪಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"ಕುರಿತು"</string>
 </resources>

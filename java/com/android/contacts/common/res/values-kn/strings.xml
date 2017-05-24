@@ -115,7 +115,7 @@
     <string name="ghostData_company" msgid="2554310786296833424">"ಕಂಪನಿ"</string>
     <string name="ghostData_title" msgid="4994968731830184837">"ಶೀರ್ಷಿಕೆ"</string>
     <string name="label_notes" msgid="2050255313694219786">"ಟಿಪ್ಪಣಿಗಳು"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
+    <string name="label_sip_address" msgid="8883266182575965926">"ಎಸ್‌ಐಪಿ"</string>
     <string name="websiteLabelsGroup" msgid="1630734286462186790">"ವೆಬ್‌ಸೈಟ್"</string>
     <string name="groupsLabel" msgid="2694002798416868728">"ಗುಂಪುಗಳು"</string>
     <string name="email_home" msgid="889830029388962171">"ಮನೆಗೆ ಇಮೇಲ್‌ ಮಾಡಿ"</string>
@@ -240,7 +240,7 @@
     <string name="contact_status_update_attribution_with_date" msgid="3448746388181727251">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="SOURCE">%2$s</xliff:g> ಮೂಲಕ"</string>
     <string name="action_menu_back_from_search" msgid="3550669942742167644">"ಹುಡುಕಾಟವನ್ನು ನಿಲ್ಲಿಸಿ"</string>
     <string name="description_clear_search" msgid="2347258825265600782">"ಹುಡುಕಾಟವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
-    <string name="settings_contact_display_options_title" msgid="5535295687646503547">"ಸಂಪರ್ಕ ಪ್ರದರ್ಶನ ಆಯ್ಕೆಗಳು"</string>
+    <string name="settings_contact_display_options_title" msgid="5535295687646503547">"ಸಂಪರ್ಕ ಡಿಸ್‌ಪ್ಲೇ ಆಯ್ಕೆಗಳು"</string>
     <string name="select_account_dialog_title" msgid="2673504582803359239">"ಖಾತೆ"</string>
     <string name="set_default_account" msgid="7966099951006467572">"ಕರೆಗಳನ್ನು ಮಾಡಲು ಯಾವಾಗಲೂ ಇದನ್ನು ಬಳಸಿ"</string>
     <string name="select_phone_account_for_calls" msgid="1784460686103423274">"ಇದರೊಂದಿಗೆ ಕರೆ ಮಾಡಿ"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"ಸೇವಾ ನಿಯಮಗಳು"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"ಮುಕ್ತ ಮೂಲ ಪರವಾನಗಿಗಳು"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"url ತೆರೆಯಲು ವಿಫಲವಾಗಿದೆ."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"ವೀಡಿಯೊ ಕರೆ"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"ಹಂಚಿಕೊಳ್ಳಿ ಮತ್ತು ಕರೆ ಮಾಡಿ"</string>
 </resources>

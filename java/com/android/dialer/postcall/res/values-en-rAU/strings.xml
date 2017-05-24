@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Call me back when you have time."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Not urgent – we can chat later."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Add message"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Send message"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Message sent"</string>
     <string name="view" msgid="8572192949673703830">"View"</string>
 </resources>

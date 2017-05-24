@@ -8,7 +8,7 @@
     <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"কলগুলি মার্জ করুন"</string>
     <string name="incall_content_description_earpiece" msgid="2786221842272370555">"হ্যান্ডসেট ইয়ারপিস"</string>
     <string name="incall_content_description_speaker" msgid="7837829930201265549">"স্পিকার"</string>
-    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"Bluetooth"</string>
+    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"ব্লুটুথ"</string>
     <string name="incall_content_description_headset" msgid="3170439802944346719">"তারযুক্ত হেডসেট"</string>
     <string name="incall_content_description_hold" msgid="3335508251734906019">"কল হোল্ডে রাখুন"</string>
     <string name="incall_content_description_unhold" msgid="3862584118869933593">"কল আবার শুরু করুন"</string>

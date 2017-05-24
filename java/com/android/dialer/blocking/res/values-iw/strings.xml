@@ -23,7 +23,7 @@
     <string name="block_number_confirmation_title" msgid="2699521227461376076">"האם לחסום את המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"שיחות ממספר זה ייחסמו והודעות דואר קולי יימחקו באופן אוטומטי."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"שיחות ממספר זה ייחסמו, אבל המתקשר עדיין יוכל להשאיר לך הודעות דואר קולי."</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"לא תקבל יותר שיחות או הודעות טקסט מהמספר הזה."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"לא יגיעו אליך יותר שיחות או הודעות טקסט מהמספר הזה."</string>
     <string name="block_number_ok" msgid="739786082788038932">"חסום"</string>
     <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"האם לבטל את חסימת המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="5089057152966269355">"ביטול חסימה"</string>
@@ -35,7 +35,7 @@
     <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"חסימת השיחות הושבתה ל-48 שעות"</string>
     <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"מושבתת מפני שבוצעה שיחת חירום."</string>
     <string name="block_report_number_alert_title" msgid="2740581989824959611">"האם לחסום את המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_report_number_alert_details" msgid="2652479394593143562">"לא תקבל יותר שיחות מהמספר הזה."</string>
+    <string name="block_report_number_alert_details" msgid="2652479394593143562">"לא יגיעו אליך יותר שיחות מהמספר הזה."</string>
     <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> השיחה הזו תדווח כספאם."</string>
     <string name="unblock_number_alert_details" msgid="8696070817026870606">"החסימה של המספר הזה תבוטל וידווח שהוא אינו ספאם. שיחות שיתקבלו ממנו לא יזוהו כספאם."</string>
     <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"האם לבטל את חסימת המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>

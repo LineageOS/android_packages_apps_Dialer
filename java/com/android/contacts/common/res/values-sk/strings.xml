@@ -212,7 +212,7 @@
     <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Krstné meno"</string>
     <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Priezvisko"</string>
     <string name="display_options_view_names_as" msgid="4204204205736735618">"Formát mena"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Najprv meno"</string>
+    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Najprv krstné meno"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Najprv priezvisko"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Predvolený účet pre nové kontakty"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Synchronizácia metadát kontaktov"</string>
@@ -260,13 +260,11 @@
     </plurals>
     <string name="about_build_version" msgid="6809677213570116689">"Verzia zostavy"</string>
     <string name="about_open_source_licenses" msgid="9071344335180981674">"Licencie open source"</string>
-    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Podrobnosti o licencii pre softvér open source"</string>
+    <string name="about_open_source_licenses_summary" msgid="4662018242345608420">"Podrobnosti o licenciách pre softvér open source"</string>
     <string name="about_privacy_policy" msgid="120921692215934837">"Pravidlá ochrany súkromia"</string>
     <string name="about_terms_of_service" msgid="9004506174858804172">"Zmluvné podmienky"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Licencie open source"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Webovú adresu nebolo možné otvoriť"</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Videohovor"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Zdieľať a volať"</string>
 </resources>

@@ -94,8 +94,8 @@
     <string name="nameLabelsGroup" msgid="7730465833159557471">"Ism"</string>
     <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Taxallusi"</string>
     <string name="full_name" msgid="648186563998465740">"Nomi"</string>
-    <string name="name_given" msgid="5096576006314820536">"Ismi bo‘yicha"</string>
-    <string name="name_family" msgid="6646235805198547467">"Familiyasi bo‘yicha"</string>
+    <string name="name_given" msgid="5096576006314820536">"Ismi asosida"</string>
+    <string name="name_family" msgid="6646235805198547467">"Familiyasi asosida"</string>
     <string name="name_prefix" msgid="9215326539658838">"Ism prefiksi"</string>
     <string name="name_middle" msgid="703755205331582769">"Otasining ismi"</string>
     <string name="name_suffix" msgid="5777083390282548702">"Ism suffiksi"</string>
@@ -207,8 +207,8 @@
     <string name="progress_notifier_message" msgid="2778542784808529164">"Import qilinmoqda: <xliff:g id="CURRENT_NUMBER">%s</xliff:g>/<xliff:g id="TOTAL_NUMBER">%s</xliff:g> – <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="export_to_vcf_file" product="default" msgid="6148360234812424446">"VCF faylga eksport qilish"</string>
     <string name="display_options_sort_list_by" msgid="3541875948367831228">"Saralash tartibi"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Ismi bo‘yicha"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Familiyasi bo‘yicha"</string>
+    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Ismi asosida"</string>
+    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Familiyasi asosida"</string>
     <string name="display_options_view_names_as" msgid="4204204205736735618">"Ism formati"</string>
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Avval ismi"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"Avval familiyasi"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"Foydalanish shartlari"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Ochiq kodli dasturiy ta’minot litsenziyalari"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"URLni ochishda xatolik yuz berdi."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Video suhbat"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Ulashish va chaqirish"</string>
 </resources>

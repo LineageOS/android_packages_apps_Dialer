@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"Передзвоніть мені, коли матимете час."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"Нічого термінового, поспілкуємося пізніше."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"Додати повідомлення"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"Надіслати повідомлення"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"Повідомлення надіслано"</string>
     <string name="view" msgid="8572192949673703830">"Переглянути"</string>
 </resources>

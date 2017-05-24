@@ -212,7 +212,7 @@
     <string name="display_options_view_names_as" msgid="4204204205736735618">"പേരിന്റെ ഫോർമാറ്റ്"</string>
     <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ഫസ്റ്റ് നെയിം ആദ്യം"</string>
     <string name="display_options_view_family_name_first" msgid="987430497292428242">"ലാസ്റ്റ് നെയിം ആദ്യം"</string>
-    <string name="default_editor_account" msgid="1826578934497338822">"പുതിയ കോൺടാക്റ്റുകൾക്കായുള്ള ഡിഫോൾട്ട് അക്കൗണ്ട്"</string>
+    <string name="default_editor_account" msgid="1826578934497338822">"പുതുകോൺടാക്റ്റുകൾക്കുള്ള ഡിഫോൾട്ട് അക്കൗണ്ട്"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"കോൺടാക്റ്റ് മെറ്റാഡാറ്റ സമന്വയിപ്പിക്കുക"</string>
     <string name="setting_about" msgid="5253319937596745755">"കോണ്‍ടാക്റ്റുകളെ കുറിച്ച്"</string>
     <string name="activity_title_settings" msgid="2398428034981372932">"ക്രമീകരണം"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"സേവന നിബന്ധനകൾ"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"ഓപ്പൺ സോഴ്‌സ് ലൈസൻസ്"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"url തുറക്കാനായില്ല."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"വീഡിയോ കോള്‍"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"പങ്കിടുക, കോൾ ചെയ്യുക"</string>
 </resources>

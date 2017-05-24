@@ -96,9 +96,9 @@
     <string name="full_name" msgid="648186563998465740">"名稱"</string>
     <string name="name_given" msgid="5096576006314820536">"名字"</string>
     <string name="name_family" msgid="6646235805198547467">"姓氏"</string>
-    <string name="name_prefix" msgid="9215326539658838">"姓名前稱銜"</string>
+    <string name="name_prefix" msgid="9215326539658838">"姓名前稱謂"</string>
     <string name="name_middle" msgid="703755205331582769">"中間名"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"姓名後稱銜"</string>
+    <string name="name_suffix" msgid="5777083390282548702">"姓名後稱謂"</string>
     <string name="name_phonetic" msgid="1650870996361663089">"姓名拼音"</string>
     <string name="name_phonetic_given" msgid="618812334274603170">"名字拼音"</string>
     <string name="name_phonetic_middle" msgid="4826820763384625538">"中間名拼音"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"服務條款"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"開放原始碼授權"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"無法開啟網址。"</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"視訊通話"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"分享及撥號"</string>
 </resources>
