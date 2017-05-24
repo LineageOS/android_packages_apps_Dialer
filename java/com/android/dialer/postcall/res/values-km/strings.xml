@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"សូមហៅទូរស័ព្ទមកខ្ញុំវិញនៅពេលអ្នកឆ្លៀតពេលបានខ្លះ។"</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"មិនបន្ទាន់ទេ យើងអាចជជែកគ្នានៅពេលក្រោយ។"</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"បន្ថែមសារ"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"ផ្ញើ​សារ"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"បានផ្ញើសាររួចហើយ"</string>
     <string name="view" msgid="8572192949673703830">"មើល"</string>
 </resources>

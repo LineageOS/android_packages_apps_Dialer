@@ -30,20 +30,20 @@
     <string name="type_voicemail" msgid="1877524395253846684">"Kõnepost"</string>
     <string name="type_rejected" msgid="5632107438472996198">"Keeldutud kõne"</string>
     <string name="type_blocked" msgid="9177237294052244929">"Blokeeritud kõne"</string>
-    <!-- no translation found for call_details_minutes_abbreviation (7899774555556720560) -->
-    <skip />
-    <!-- no translation found for call_details_seconds_abbreviation (5893806826648947126) -->
-    <skip />
-    <!-- no translation found for a11y_call_duration_format (2905525933361674470) -->
-    <skip />
-    <!-- no translation found for a11y_call_duration_short_format (5908875871251062453) -->
-    <skip />
-    <!-- no translation found for call_duration_format_pattern (7566375153243313914) -->
-    <skip />
-    <!-- no translation found for call_duration_short_format_pattern (1713177000235994790) -->
-    <skip />
-    <!-- no translation found for a11y_seconds (6695730844760611970) -->
-    <!-- no translation found for a11y_minutes (6377010096698624038) -->
+    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"min"</string>
+    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"s"</string>
+    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
+    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
+    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
+    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
+    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
+      <item quantity="other"> sekundit</item>
+      <item quantity="one"> sekund</item>
+    </plurals>
+    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
+      <item quantity="other"> minutit</item>
+      <item quantity="one"> minut</item>
+    </plurals>
     <string name="type_answered_elsewhere" msgid="411958582555881640">"Kõnele vastati teises seadmes"</string>
     <string name="description_phone_account" msgid="4382951172691362244">"kontol <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_via_number" msgid="7682575124846343076">"numbri <xliff:g id="NUMBER">%1$s</xliff:g> kaudu"</string>

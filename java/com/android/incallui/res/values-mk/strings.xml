@@ -130,7 +130,7 @@
     <string name="spam_notification_dialog_add_contact_action_text" msgid="5619696845681999506">"Додајте во контакти"</string>
     <string name="spam_notification_dialog_block_report_spam_action_text" msgid="1821506089128547428">"Блокирајте и пријавете спам"</string>
     <string name="spam_notification_dialog_was_not_spam_action_text" msgid="4953789750391355251">"Не е спам"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Нема СИМ или грешка на СИМ"</string>
+    <string name="callFailed_simError" msgid="4587775795711340072">"Нема SIM или грешка на SIM"</string>
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Завршете го повикот"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Конференциски повик"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Повик во тек"</string>

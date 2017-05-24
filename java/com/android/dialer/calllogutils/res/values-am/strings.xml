@@ -27,26 +27,26 @@
     <string name="type_outgoing_video" msgid="309370072333983910">"ወጪ የቪዲዮ ጥሪ"</string>
     <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"ወጪ የቪዲዮ ጥሪ ወደ ሌላ መሣሪያ ተዘዋውሯል"</string>
     <string name="type_missed_video" msgid="4350107016317603785">"ያመለጠ የቪዲዮ ጥሪ"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"የድምፅ መልእክት"</string>
+    <string name="type_voicemail" msgid="1877524395253846684">"የድምፅ መልዕክት"</string>
     <string name="type_rejected" msgid="5632107438472996198">"ያልተነሳ ጥሪ"</string>
     <string name="type_blocked" msgid="9177237294052244929">"የታገደ ጥሪ"</string>
-    <!-- no translation found for call_details_minutes_abbreviation (7899774555556720560) -->
-    <skip />
-    <!-- no translation found for call_details_seconds_abbreviation (5893806826648947126) -->
-    <skip />
-    <!-- no translation found for a11y_call_duration_format (2905525933361674470) -->
-    <skip />
-    <!-- no translation found for a11y_call_duration_short_format (5908875871251062453) -->
-    <skip />
-    <!-- no translation found for call_duration_format_pattern (7566375153243313914) -->
-    <skip />
-    <!-- no translation found for call_duration_short_format_pattern (1713177000235994790) -->
-    <skip />
-    <!-- no translation found for a11y_seconds (6695730844760611970) -->
-    <!-- no translation found for a11y_minutes (6377010096698624038) -->
+    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"ደ"</string>
+    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"ሰ"</string>
+    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
+    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
+    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
+    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
+    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
+      <item quantity="one">ሰከንዶች</item>
+      <item quantity="other">ሰከንዶች</item>
+    </plurals>
+    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
+      <item quantity="one">ደቂቃዎች</item>
+      <item quantity="other">ደቂቃዎች</item>
+    </plurals>
     <string name="type_answered_elsewhere" msgid="411958582555881640">"ጥሪው በሌላ መሣሪያ ላይ ተመልሷል"</string>
     <string name="description_phone_account" msgid="4382951172691362244">"በ<xliff:g id="PHONEACCOUNT">^1</xliff:g> ላይ"</string>
     <string name="description_via_number" msgid="7682575124846343076">"በ <xliff:g id="NUMBER">%1$s</xliff:g> በኩል"</string>
     <string name="description_via_number_phone_account" msgid="4345445677508018830">"በ <xliff:g id="PHONEACCOUNT">%1$s</xliff:g> ላይ፣ በ <xliff:g id="NUMBER">%2$s</xliff:g> በኩል"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"የድምፅ መልእክት"</string>
+    <string name="voicemail_string" msgid="6029775151483803006">"የድምፅ መልዕክት"</string>
 </resources>

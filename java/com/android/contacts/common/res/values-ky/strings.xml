@@ -99,7 +99,7 @@
     <string name="name_prefix" msgid="9215326539658838">"Атынын префикси"</string>
     <string name="name_middle" msgid="703755205331582769">"Атасынын аты"</string>
     <string name="name_suffix" msgid="5777083390282548702">"Атынын суффикси"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Фонетикалык аты"</string>
+    <string name="name_phonetic" msgid="1650870996361663089">"Аттын транскрипциясы"</string>
     <string name="name_phonetic_given" msgid="618812334274603170">"Ысымы (транскрипция)"</string>
     <string name="name_phonetic_middle" msgid="4826820763384625538">"Атасынын аты (транскрипция)"</string>
     <string name="name_phonetic_family" msgid="379905191212930771">"Фамилия (транскрипция)"</string>
@@ -108,7 +108,7 @@
     <string name="postalLabelsGroup" msgid="6772000590189142253">"Дареги"</string>
     <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
     <string name="organizationLabelsGroup" msgid="1101996309241601435">"Ишкана"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Мамиле"</string>
+    <string name="relationLabelsGroup" msgid="53866051664600053">"Мага ким болот?"</string>
     <string name="eventLabelsGroup" msgid="1236970042646618489">"Өзгөчө күн"</string>
     <string name="sms" msgid="7574344928185328095">"SMS билдирүүсү"</string>
     <string name="postal_address" msgid="1804707930129674200">"Дареги"</string>
@@ -221,8 +221,8 @@
     <string name="share_favorite_contacts" msgid="9138011836074034817">"Сүйүктүү байланыштарды бөлүшүү"</string>
     <string name="share_contacts" msgid="6505699963814423437">"Бардык байланыштарды бөлүшүү"</string>
     <string name="share_contacts_failure" msgid="6027174424732204424">"Байланыштар бөлүшүлбөй калды."</string>
-    <string name="dialog_import_export" msgid="3052335055728876529">"Байланыштарды импорттоо/эскорттоо"</string>
-    <string name="dialog_import" msgid="8508508044485808554">"Байланыштарды импорттоо"</string>
+    <string name="dialog_import_export" msgid="3052335055728876529">"Байланыштарды өткөрүп алуу/берүү"</string>
+    <string name="dialog_import" msgid="8508508044485808554">"Байланыштарды өткөрүп алуу"</string>
     <string name="share_error" msgid="5642622973966851784">"Бул байланышты бөлүшүү мүмкүн эмес."</string>
     <string name="no_contact_to_share" msgid="9115223064368461904">"Бөлүшө турган байланыштар жок."</string>
     <string name="menu_search" msgid="1241802591112035764">"Издөө"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"Тейлөө шарттары"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Ачык программа уруксаттамалары"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"url ачылбай калды."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Видео чалуу"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Бөлүшүү жана чалуу"</string>
 </resources>

@@ -16,8 +16,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for always_warn (8332929731464707890) -->
-    <skip />
-    <!-- no translation found for details (8642701148762155677) -->
-    <skip />
+    <string name="always_warn" msgid="8332929731464707890">"ஒவ்வொரு முறையும் எச்சரிக்கையைக் காட்டு"</string>
+    <string name="details" msgid="8642701148762155677">"சர்வதேச எண்ணை அழைக்கிறீர்கள், கட்டணங்கள் விதிக்கப்படலாம்."</string>
 </resources>

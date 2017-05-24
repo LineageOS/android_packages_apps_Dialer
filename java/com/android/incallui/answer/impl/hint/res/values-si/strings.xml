@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for event_deactivated (689994223349549274) -->
-    <skip />
+    <string name="event_deactivated" msgid="689994223349549274">"සුරතලුන් ප්‍රකාරය ක්‍රියාවිරහිතයි"</string>
 </resources>

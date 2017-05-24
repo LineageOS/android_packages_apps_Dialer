@@ -17,8 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for spam_photo_text (5250301844057954813) -->
-    <skip />
-    <!-- no translation found for spam_message_text (6522893079398269847) -->
-    <skip />
+    <string name="spam_photo_text" msgid="5250301844057954813">"Одговорете за да се открие фотографијата"</string>
+    <string name="spam_message_text" msgid="6522893079398269847">"Одговорете за да се открие пораката"</string>
 </resources>

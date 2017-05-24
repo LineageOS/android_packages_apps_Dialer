@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Répondre et mettre fin à l\'appel en cours"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"La vidéo est désactivée"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Balayez vers le haut avec deux doigts pour répondre. Balayez vers le bas avec deux doigts pour refuser."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Urgent"</string>
 </resources>

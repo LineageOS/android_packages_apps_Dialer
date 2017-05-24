@@ -21,5 +21,5 @@
     <string name="dialer_shortcut_add_contact_long" msgid="7573187314386728329">"Novi kontakt"</string>
     <string name="dialer_shortcut_disabled_message" msgid="7713603194332953571">"Prečica ne radi. Povucite da je uklonite."</string>
     <string name="dialer_shortcut_contact_not_found_or_has_no_number" msgid="3538594504123040498">"Kontakt više nije dostupan."</string>
-    <string name="dialer_shortcut_no_permissions" msgid="4422956724546867357">"Ne može se zvati bez dozvola."</string>
+    <string name="dialer_shortcut_no_permissions" msgid="4422956724546867357">"Ne može se zvati bez odobrenja."</string>
 </resources>
