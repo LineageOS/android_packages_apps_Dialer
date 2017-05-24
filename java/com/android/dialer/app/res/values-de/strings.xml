@@ -42,10 +42,8 @@
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Zurückrufen"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"Nachricht"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <!-- no translation found for notification_voicemail_text_format (1895667520930252897) -->
-    <skip />
-    <!-- no translation found for notification_voicemail_no_vm_number (8942821987929495842) -->
-    <skip />
+    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> wählen"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Mailboxnummer unbekannt"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mailboxnachrichten </item>
       <item quantity="one">Mailboxnachricht</item>
@@ -105,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"Mailboxnachrichten"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Ja"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Nein"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Ausgewählte <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> löschen?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> um <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -124,14 +121,14 @@
     <string name="call_not_available" msgid="7850148370757361155">"Es kann kein Anruf getätigt werden, da die App \"Telefon\" deaktiviert wurde."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"In Kontakten suchen"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Nummer hinzufügen oder in Kontakten suchen"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Deine Anrufliste ist leer."</string>
+    <string name="call_log_all_empty" msgid="3955572868518162004">"Deine Anrufliste ist leer"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"Anrufen"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Keine entgangenen Anrufe"</string>
+    <string name="call_log_missed_empty" msgid="7094936030845062214">"Keine verpassten Anrufe"</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"Dein Mailbox-Posteingang ist leer."</string>
     <string name="show_favorites_only" msgid="8089163582448737837">"Nur Favoriten anzeigen"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"Anrufliste"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"Alle"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"Entgangen"</string>
+    <string name="call_log_missed_title" msgid="17254005889268015">"Verpasst"</string>
     <string name="call_log_voicemail_title" msgid="6504826963256437971">"Mailboxnachrichten"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"Schnellauswahl"</string>
     <string name="tab_history" msgid="7420269368689503596">"Anrufliste"</string>
@@ -146,7 +143,7 @@
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Videoanruf starten"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"Nummer blockieren"</string>
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> neue entgangene Anrufe"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Du hast noch für niemanden eine Kurzwahl festgelegt."</string>
+    <string name="speed_dial_empty" msgid="3346406399966039505">"Du hast für noch niemanden eine Kurzwahl festgelegt"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Favoriten hinzufügen"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"Du hast noch keine Kontakte."</string>
     <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Kontakt hinzufügen"</string>
@@ -202,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Anrufe"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Anrufblockierung"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Mailbox"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"SIM für Mailboxeinstellungen auswählen"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Anrufblockierung vorübergehend aus"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Die Anrufblockierung wurde deaktiviert, weil du innerhalb der letzten 48 Stunden mit diesem Telefon den Notruf gewählt hast. Nach Ablauf dieser 48-Stunden-Frist wird die Blockierung automatisch wieder aktiviert."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Nummern importieren"</string>
@@ -233,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Blockierung der Nummer aufheben"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ist offline und nicht erreichbar"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Info"</string>
 </resources>

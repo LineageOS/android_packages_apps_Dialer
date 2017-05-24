@@ -29,5 +29,5 @@
     <string name="camera_media_failure" msgid="8979549551450965882">"Slika se ne može učitati"</string>
     <string name="allow" msgid="8637148297403066623">"Omogući"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Da biste snimili fotografiju, dopustite pristup Fotoaparatu"</string>
-    <string name="gallery_permission_text" msgid="4102566850658919346">"Da biste podijelili sliku, dopustite pristup Medijima"</string>
+    <string name="gallery_permission_text" msgid="4102566850658919346">"Za dijeljenje slike dopustite pristup Medijima"</string>
 </resources>

@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="default_notification_description" msgid="4304424287748323094">"Sauti chaguo-msingi (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
-    <string name="ringtone_silent" msgid="946744257396998305">"Kisitumike"</string>
+    <string name="ringtone_silent" msgid="946744257396998305">"Isilie"</string>
     <string name="ringtone_unknown" msgid="1310974715243581582">"Mlio usiojulikana"</string>
     <string name="activity_not_available" msgid="8360067109103762211">"Hakuna programu kwa ajili ya hiyo kwenye kifaa hiki"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"Ukipiga simu ya WPS, simu inayoendelea sasa itakatwa."</string>

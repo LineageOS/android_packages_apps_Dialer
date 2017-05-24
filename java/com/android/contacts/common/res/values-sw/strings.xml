@@ -210,8 +210,8 @@
     <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Jina la kwanza"</string>
     <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Jina la mwisho"</string>
     <string name="display_options_view_names_as" msgid="4204204205736735618">"Mpangilio wa majina"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Anza na jina la kwanza"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Anza na jina la mwisho"</string>
+    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Anza kwa jina la kwanza"</string>
+    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Anza kwa jina la mwisho"</string>
     <string name="default_editor_account" msgid="1826578934497338822">"Akaunti ya msingi ya anwani mpya"</string>
     <string name="sync_contact_metadata_dialog_title" msgid="7839882899954930421">"Sawazisha metadata ya anwani"</string>
     <string name="setting_about" msgid="5253319937596745755">"Kuhusu Anwani"</string>
@@ -261,8 +261,6 @@
     <string name="about_terms_of_service" msgid="9004506174858804172">"Sheria na masharti"</string>
     <string name="activity_title_licenses" msgid="2416018204229261875">"Leseni za programu huria"</string>
     <string name="url_open_error_toast" msgid="3814442157861318482">"Imeshindwa kufungua url."</string>
-    <!-- no translation found for description_search_video_call (4337369876888024909) -->
-    <skip />
-    <!-- no translation found for description_search_call_and_share (4912772842755050467) -->
-    <skip />
+    <string name="description_search_video_call" msgid="4337369876888024909">"Simu ya video"</string>
+    <string name="description_search_call_and_share" msgid="4912772842755050467">"Shiriki na upige simu"</string>
 </resources>

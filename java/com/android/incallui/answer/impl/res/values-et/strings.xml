@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Vastake ja lõpetage käimasolev kõne"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video on välja lülitatud"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Vastamiseks pühkige kahe sõrmega üles. Keeldumiseks pühkige kahe sõrmega alla."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Kiireloomuline"</string>
 </resources>

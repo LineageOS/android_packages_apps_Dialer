@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Jawab dan tamatkan panggilan yang sedang berlangsung"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video dimatikan"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Leret dua jari ke atas untuk menjawab. Leret dua jari ke bawah untuk menolak."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"Segera"</string>
 </resources>

@@ -84,7 +84,7 @@
     <string name="incall_error_supp_service_conference" msgid="9211560861266632111">"Konferencijski poziv nije moguć."</string>
     <string name="incall_error_supp_service_reject" msgid="2724981515194352120">"Odbijanje poziva nije moguće."</string>
     <string name="incall_error_supp_service_hangup" msgid="4659922482839313098">"Prekidanje poziva nije moguće."</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Hitan poziv"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="5964415982020440543">"Hitni poziv"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="6927454354381787268">"Uključivanje radija…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="8760220613410560290">"Nema usluge. Pokušavamo ponovo…"</string>
     <string name="dial_emergency_error" msgid="6953255422990366011">"Pozivanje nije moguće. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nije broj hitne službe."</string>

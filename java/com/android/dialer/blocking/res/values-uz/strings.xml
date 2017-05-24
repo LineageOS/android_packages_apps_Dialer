@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"Raqamlarni bloklashning sodda usuli"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Sizni yanada yaxshiroq himoya qilish uchun “Telefon” ilovasi bloklash tartibini o‘zgartirishi lozim. Bloklangan raqamlardan keladigan qo‘ng‘iroqlar ham, SMS xabarIar ham qabul qilinmaydi. Boshqa ilovalarga ham bunday raqamlardan foydalanishga ruxsat bering."</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Sizni yanada yaxshiroq himoya qilish uchun Telefon ilovasi bloklash tartibini sozlashi lozim. Bloklangan raqamlardan keladigan chaqiruvlar ham, SMS xabarlar ham qabul qilinmaydi. Boshqa ilovalarga ham bunday raqamlardan foydalanishga ruxsat bering."</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Ruxsat berish"</string>
     <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami bloklanilsinmi?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Bu raqamdan kelgan qo‘ng‘iroqlar bloklanadi va ovozli xabari avtomatik o‘chiriladi."</string>

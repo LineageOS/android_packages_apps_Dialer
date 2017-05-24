@@ -22,6 +22,5 @@
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"Zmeškané hovory"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"Hlasové zprávy"</string>
     <string name="notification_channel_external_call" msgid="2200143959948071132">"Externí hovory"</string>
-    <!-- no translation found for notification_channel_misc (5595452227577858518) -->
-    <skip />
+    <string name="notification_channel_misc" msgid="5595452227577858518">"Výchozí"</string>
 </resources>
