@@ -43,7 +43,7 @@
     <string name="notification_missedCall_message" msgid="5086910028988305964">"सन्देश"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
     <string name="notification_voicemail_text_format" msgid="1895667520930252897">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>मा डायल गर्नुहोस्"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"भ्वाइस मेल नम्बर अज्ञात"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"अज्ञात भ्वाइस मेल नम्बर"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> भ्वाइसमेलहरू </item>
       <item quantity="one">भ्वाइसमेल</item>
@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"कलहरू"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"कल रोक्दै"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"भ्वाइस मेल"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"भ्वाइस मेल सेटिङ गर्न SIM छान्ने"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"कल अवरुद्ध अस्थायी रुपमा निष्क्रिय"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"कल अवरुद्ध अस्थायी रुपमा असक्षम गरिएको छ किनभने तपाईँले अन्तिम ४८ घन्टा भित्र यस फोनबाट आपत्कालीन सेवाहरू सम्पर्क गर्नुभयो। एकपटक ४८ घन्टा अवधि समाप्त भएपछि यो स्वचालित रूपले पुनः सक्रिय हुनेछ।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"नम्बरहरू आयात गर्नुहोस्"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"स्प्याम"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> अफलाइन हुनुहुन्छ र वहाँलाई भेट्न सकिँदैन"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"बारेमा"</string>
 </resources>

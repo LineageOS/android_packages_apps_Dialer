@@ -118,5 +118,15 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
+
+    <receiver android:name="com.android.voicemail.impl.CarrierVvmPackageInstalledReceiver"
+        android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
+        android:exported="true">
+      <intent-filter>
+        <!-- system dialer only broadcast -->
+        <action
+            android:name="com.android.internal.telephony.CARRIER_VVM_PACKAGE_INSTALLED" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

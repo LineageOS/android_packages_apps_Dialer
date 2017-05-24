@@ -207,8 +207,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"المكالمات"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"حظر المكالمات"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"البريد الصوتي"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"‏حدد SIM لإعدادات البريد الصوتي"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"حظر المكالمات معطّل مؤقتًا"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"تم تعطيل حظر المكالمات لأنك اتصلت بخدمات الطوارئ خلال 48 ساعة ماضية. وستتم إعادة تمكينه تلقائيًا بعد انتهاء هذه الفترة التي تبلغ 48 ساعة."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"استيراد الأرقام"</string>
@@ -238,6 +237,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"إلغاء حظر الرقم"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"تعليق غير مرغوب فيه"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> غير متصل ولا يمكن الوصول إليه"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"حول"</string>
 </resources>

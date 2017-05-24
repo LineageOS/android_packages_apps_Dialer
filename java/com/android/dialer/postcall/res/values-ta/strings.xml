@@ -22,8 +22,7 @@
     <string name="post_call_message_2" msgid="5310301526176003385">"உங்களுக்கு நேரமிருக்கும் போது என்னைத் திரும்ப அழைக்கவும்."</string>
     <string name="post_call_message_3" msgid="3932759658420368056">"அவசரமில்லை, நாம் பின்னர் அரட்டையடிக்கலாம்."</string>
     <string name="post_call_add_message" msgid="8298853527467080463">"செய்தியைச் சேர்க்கவும்"</string>
-    <!-- no translation found for post_call_send_message (8039569617234824873) -->
-    <skip />
+    <string name="post_call_send_message" msgid="8039569617234824873">"செய்தி அனுப்பவும்"</string>
     <string name="post_call_message_sent" msgid="832757977985265036">"செய்தி அனுப்பப்பட்டது"</string>
     <string name="view" msgid="8572192949673703830">"காட்டு"</string>
 </resources>

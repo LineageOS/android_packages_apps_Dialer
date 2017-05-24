@@ -199,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Appels"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Blocage des appels"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Messagerie vocale"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Choisir SIM pour mess. vocale"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blocage appels désactivé temporairement"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Le blocage des appels a été désactivé, car vous avez communiqué avec les services d\'urgence à partir de ce téléphone au cours des dernières 48 heures. Le blocage sera réactivé automatiquement après 48 heures."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importer les numéros"</string>
@@ -230,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Débloquer le numéro"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Pourriel"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> est hors connexion et injoignable"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"À propos"</string>
 </resources>

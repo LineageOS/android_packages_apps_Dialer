@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"নতুন, সরলীকৃত অবরুদ্ধ করার ব্যবস্থা"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"আপনাকে আরো ভালো সুরক্ষা দিতে, \'ফোন\' এর অবরুদ্ধ করার আচরণ পরিবর্তন করতে হবে৷ আপনার অবরুদ্ধ করা নম্বরগুলি থেকে আসা কলগুলি এবং পাঠ্যবার্তা উভয়ই থামানো হবে এবং অন্যান্য অ্যাপ্লিকেশানের সাথে শেয়ার করা হতে পারে৷"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"আপনাকে আরো ভালো সুরক্ষা দিতে, \'ফোন\' এর ব্লক করার পদ্ধতি পরিবর্তন করতে হবে৷ আপনার ব্লক করা নম্বরগুলি থেকে আসা কলগুলি এবং পাঠ্যবার্তা উভয়ই থামানো হবে এবং অন্যান্য অ্যাপ্লিকেশানের সাথে শেয়ার করা হতে পারে৷"</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"অনুমতি দিন"</string>
     <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>

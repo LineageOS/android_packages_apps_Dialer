@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"जवाफ फर्काउनुहोस् र जारी कललाई अन्त्य गर्नुहोस्"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"भिडियो निष्क्रिय छ"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"जवाफ दिन दुई औंलाले माथितिर स्वाइप गर्नुहोस्। अस्वीकार गर्न दुई औंलाले तलतिर स्वाइप गर्नुहोस्।"</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"जरुरी"</string>
 </resources>

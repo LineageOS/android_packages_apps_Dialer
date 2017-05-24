@@ -17,15 +17,15 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Lennukireżiimi väljalülitamine"</string>
+    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Lennureżiimi väljalülitamine"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Visuaalse kõneposti aktiveerimine"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Te ei pruugi kõneposti märguandeid saada enne, kui visuaalne kõnepost on täielikult aktiveeritud. Kuni kõnepost on täielikult aktiveeritud, helistage uute sõnumite toomiseks kõneposti."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Visuaalset kõneposti ei saa aktiveerida"</string>
     <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Veenduge, et teie telefonis oleks mobiilne andmeside saadaval, ja proovige uuesti."</string>
-    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Lülitage lennukirežiim välja ja proovige uuesti."</string>
+    <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Lülitage lennurežiim välja ja proovige uuesti."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Ühendus puudub"</string>
     <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Teid ei teavitata uutest kõnepostisõnumitest. Kui kasutate WiFi-t, saate kõneposti kontrollida, kui kohe sünkroonite."</string>
-    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Teid ei teavitata uutest kõnepostisõnumitest. Kõneposti sünkroonimiseks lülitage lennukirežiim välja."</string>
+    <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Teid ei teavitata uutest kõnepostisõnumitest. Kõneposti sünkroonimiseks lülitage lennurežiim välja."</string>
     <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Teie telefonis peab kõneposti kontrollimiseks olema lubatud mobiilne andmeside."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Visuaalset kõneposti ei saa aktiveerida"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Kõneposti saate siiski kontrollida, kui sinna helistate."</string>
@@ -51,7 +51,7 @@
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Määrake kõneposti PIN-kood"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Vajate PIN-koodi juhul, kui helistate kõnepostile juurdepääsemiseks."</string>
     <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Tundmatu viga"</string>
-    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Lennukirežiimi seaded"</string>
+    <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Lennurežiimi seaded"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"Määra PIN-kood"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Proovi uuesti"</string>
     <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"Lülita sisse"</string>

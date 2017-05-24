@@ -38,7 +38,7 @@
     <string name="notification_missedCallTitle" msgid="8283366068539898486">"Apel nepreluat"</string>
     <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Apel de serviciu nepreluat"</string>
     <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Apeluri nepreluate"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> (de) apeluri nepreluate"</string>
+    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> apeluri nepreluate"</string>
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Sunați"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"Trimiteți mesaj"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
@@ -104,8 +104,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"mesaje vocale"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Da"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Nu"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Ștergeți cele <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> selectate?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> la <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -144,7 +143,7 @@
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"Trimiteți SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Inițiați un apel video"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"Blocați numărul"</string>
-    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> (de) apeluri nepreluate noi"</string>
+    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> apeluri nepreluate noi"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"Nicio persoană de contact setată pentru apelarea rapidă"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Adăugați o persoană de contact preferată"</string>
     <string name="all_contacts_empty" msgid="243071567853617177">"Nu aveți încă persoane de contact"</string>
@@ -190,7 +189,7 @@
     <string name="display_options_title" msgid="3880091801055797975">"Opțiuni de afișare"</string>
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Sunete și vibrații"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"Accesibilitate"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"Ton de apel al telefonului"</string>
+    <string name="ringtone_title" msgid="8377174189894648486">"Ton de sonerie al telefonului"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibrează și pentru apeluri"</string>
     <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Tonuri ale tastaturii"</string>
     <string name="dtmf_tone_length_title" msgid="534096029202438539">"Durată a tonului tastaturii"</string>
@@ -202,8 +201,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Apeluri"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Blocarea apelurilor"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Mesagerie vocală"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Selectați SIM pt. mesageria vocală"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blocarea apelurilor e dezactivată temporar"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Blocarea apelurilor a fost dezactivată, deoarece ați contactat serviciile de urgență de pe acest telefon în ultimele 48 de ore. Funcția va fi reactivată automat după ce perioada de 48 de ore va expira."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importați numere"</string>
@@ -233,6 +231,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Deblocați numărul"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> este offline și nu poate fi contactat(ă)"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Despre"</string>
 </resources>

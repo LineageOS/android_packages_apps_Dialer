@@ -28,6 +28,6 @@
     <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Fotit"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Obrázek z fotoaparátu se nepodařilo načíst"</string>
     <string name="allow" msgid="8637148297403066623">"Povolit"</string>
-    <string name="camera_permission_text" msgid="7863231776480341614">"Pokud chcete pořídit fotku, povolte přístup k fotoaparátu"</string>
+    <string name="camera_permission_text" msgid="7863231776480341614">"Chcete-li pořídit fotku, povolte přístup k fotoaparátu"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Pokud chcete sdílet fotku, povolte přístup k mediálním souborům"</string>
 </resources>

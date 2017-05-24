@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"മറുപടി നൽകുകയും നിലവിലുള്ള കോൾ അവസാനിപ്പിക്കുകയും ചെയ്യൂ"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"വീഡിയോ ഓഫാണ്"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"മറുപടി നൽകാൻ രണ്ടുവിരലുകൾ ഉപയോഗിച്ച് മുകളിലേക്ക് സ്വൈപ്പുചെയ്യുക. നിരസിക്കാൻ രണ്ടുവിരലുകൾ ഉപയോഗിച്ച് താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"അടിയന്തിര പ്രാധാന്യം"</string>
 </resources>

@@ -103,8 +103,7 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"အသံမေးလ်များ"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Yes"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ရွေးထားသော <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ကို ဖျက်လိုပါသလား။"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g> ၌"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -129,7 +128,7 @@
     <string name="show_favorites_only" msgid="8089163582448737837">"အနှစ်သက်ဆုံးများသာ ပြပါ"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"ယခင်ခေါ်ဆိုမှုများ"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"အားလုံး"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"မကိုင်မိလိုက်သော"</string>
+    <string name="call_log_missed_title" msgid="17254005889268015">"လွတ်သွားသော"</string>
     <string name="call_log_voicemail_title" msgid="6504826963256437971">"အသံစာ"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"အမြန် နံပါတ်လှည့်မှု"</string>
     <string name="tab_history" msgid="7420269368689503596">"ခေါ်ဆိုမှု မှတ်တမ်း"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"ခေါ်ဆိုမှုများ"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"ခေါ်ဆိုမှု ပိတ်ဆို့ခြင်း"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"အသံမေးလ်"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"အသံမေးလ်ဆက်တင်အတွက် SIM ရွေးပါ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"ခေါ်ဆိုမှုပိတ်ဆို့ခြင်း ယာယီပိတ်ထားသည်"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"သင်သည် လွန်ခဲ့သည့် ၄၈ နာရီအတွင်း ဤဖုန်းဖြင့် အရေးပေါ်ဌာနကိုဖုန်း ခေါ်ဆိုခဲ့သောကြောင့် ခေါ်ဆိုမှုပိတ်ဆို့ခြင်းကို ဖြုတ်ထားသည်။ ၄၈ နာရီကျော်လွန်သည်နှင့် ၎င်းကိုအလိုအလျောက် ပြန်ဖွင့်ပေးပါမည်။"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"နံပါတ်များ သွင်းရန်"</string>
@@ -212,7 +210,7 @@
     <string name="addBlockedNumber" msgid="3053473735238295551">"နံပါတ် ထည့်သွင်းပါ"</string>
     <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"ဤနံပါတ်များမှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်မည်ဖြစ်ပြီး အသံမေးလ်များကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
     <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"ဤနံပါတ်များမှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်ပါမည်၊ သို့သော် ၎င်းတို့သည် သင့်ကို အသံမေးလ်ချန်ခဲ့နိုင်ပါသည်။"</string>
-    <string name="block_list" msgid="4701585783411870782">"ပိတ်ဆို့ထားသည့် နံပါတ်များ"</string>
+    <string name="block_list" msgid="4701585783411870782">"ပိတ်ထားသည့် နံပါတ်များ"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> အားပိတ်ဆို့ထားပြီးပါပြီ။"</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"ခေါ်ဆိုသော အကောင့်များ"</string>
     <string name="permission_single_turn_on" msgid="8014796118294187894">"ဖွင့်ထားရန်"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"နံပါတ်ကို ဖွင့်မည်"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"စပမ်း"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> သည် အော့ဖ်လိုင်းဖြစ်နေသောကြောင့် ဆက်သွယ်၍ မရနိုင်ပါ"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"အကြောင်း"</string>
 </resources>

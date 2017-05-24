@@ -103,15 +103,14 @@
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"kõnepostisõnumid"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Jah"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Ei"</string>
-    <!-- no translation found for voicemailMultiSelectDialogTitle (150612124416146690) -->
-    <skip />
+    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Kas kustutada valitud kõnepostisõnumid <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> kell <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
     <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6317935773274628316">"Sellele numbrile ei saa helistada"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="6437173108290752604">"Kõnepostisõnumite seadistamiseks tehke valikud Menüü &gt; Seaded."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1044988101597862159">"Kõnepostisõnumite kuulamiseks lülitage esmalt välja lennukirežiim."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="1044988101597862159">"Kõnepostisõnumite kuulamiseks lülitage esmalt välja lennurežiim."</string>
     <string name="contact_list_loading" msgid="7919825236309749352">"Laadimine ..."</string>
     <string name="imei" msgid="5214505934662768308">"IMEI"</string>
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
@@ -186,7 +185,7 @@
     <string name="voicemail_play_slower" msgid="868588128301087884">"Aeglasem esitus."</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"Esituse alustamine või peatamine."</string>
     <string name="display_options_title" msgid="3880091801055797975">"Kuvamisvalikud"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Helid ja vibratsioon"</string>
+    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Helid ja vibreerimine"</string>
     <string name="accessibility_settings_title" msgid="3329027650429831820">"Juurdepääsetavus"</string>
     <string name="ringtone_title" msgid="8377174189894648486">"Telefoni helin"</string>
     <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibreeri ka kõnede puhul"</string>
@@ -200,8 +199,7 @@
     <string name="call_settings_label" msgid="7824611757200960807">"Kõned"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Kõnede blokeerimine"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"Kõnepost"</string>
-    <!-- no translation found for voicemail_settings_select_sim_title (129296966967476845) -->
-    <skip />
+    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"Kõnepostis. seadete SIM-kaart"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Kõnede blokeerimine on ajutiselt väljas"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Kõnede blokeerimine on keelatud, kuna võtsite sellelt telefonilt viimase 48 tunni jooksul ühendust hädaabiteenustega. See lubatakse 48 tunni möödumisel automaatselt uuesti."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Impordi numbrid"</string>
@@ -231,6 +229,5 @@
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Numbri deblokeerimine"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Rämpspost"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ei ole võrgus ja temaga ei saa ühendust"</string>
-    <!-- no translation found for about_phone_label (582991354677973731) -->
-    <skip />
+    <string name="about_phone_label" msgid="582991354677973731">"Teave"</string>
 </resources>

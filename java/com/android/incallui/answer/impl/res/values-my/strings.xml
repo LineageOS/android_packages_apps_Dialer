@@ -20,6 +20,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"ဖြေကြားပြီး လက်ရှိခေါ်ဆိုမှုကို အပြီးသတ်ပါ"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"ဗီဒီယို ပိတ်ထားပါသည်"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"ဖြေကြားရန် လက်နှစ်ချောင်းဖြင့် အပေါ်သို့ ပွတ်ဆွဲပါ။ ငြင်းပယ်ရန် လက်နှစ်ချောင်းဖြင့် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
-    <!-- no translation found for call_incoming_important (4090408168895243702) -->
-    <skip />
+    <string name="call_incoming_important" msgid="4090408168895243702">"အရေးတကြီး"</string>
 </resources>
