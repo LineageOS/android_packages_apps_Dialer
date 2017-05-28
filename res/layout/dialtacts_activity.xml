@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:id="@+id/floating_action_button_container"
-        android:background="@drawable/fab_blue"
+        android:background="@drawable/fab_blue_cm"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/floating_action_button_height"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
