@@ -140,6 +140,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
+	$(BASE_DIR)/voicemail/permissions.xml \
 
 
 # Merge all manifest files.
