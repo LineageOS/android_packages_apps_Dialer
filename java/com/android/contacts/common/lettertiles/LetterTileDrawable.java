@@ -61,6 +61,7 @@ public class LetterTileDrawable extends Drawable {
    */
   public static final int TYPE_GENERIC_AVATAR = 4;
   public static final int TYPE_SPAM = 5;
+  public static final int TYPE_CONFERENCE = 6;
   @ContactType public static final int TYPE_DEFAULT = TYPE_PERSON;
 
   /**
@@ -99,6 +100,8 @@ public class LetterTileDrawable extends Drawable {
   private static Drawable sDefaultBusinessAvatar;
   private static Drawable sDefaultVoicemailAvatar;
   private static Drawable sDefaultSpamAvatar;
+  private static Drawable sDefaultConferenceAvatar;
+
   private final Paint mPaint;
   @ContactType private int mContactType = TYPE_DEFAULT;
   private float mScale = 1.0f;
@@ -122,6 +125,7 @@ public class LetterTileDrawable extends Drawable {
       sDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
       sDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
       sDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
+      sDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
       sPaint.setTypeface(
           Typeface.create(res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
       sPaint.setTextAlign(Align.CENTER);
@@ -159,6 +163,9 @@ public class LetterTileDrawable extends Drawable {
       case TYPE_SPAM:
         mScale = VECTOR_ICON_SCALE;
         return sDefaultSpamAvatar;
+      case TYPE_CONFERENCE:
+        mScale = VECTOR_ICON_SCALE;
+        return sDefaultConferenceAvatar;
       case TYPE_PERSON:
       case TYPE_GENERIC_AVATAR:
       default:

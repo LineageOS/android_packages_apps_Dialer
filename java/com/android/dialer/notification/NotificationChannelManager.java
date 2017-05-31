@@ -312,7 +312,9 @@ public class NotificationChannelManager {
         importance = NotificationManager.IMPORTANCE_DEFAULT;
         canShowBadge = true;
         lights = true;
-        vibration = true;
+        vibration =
+            TelephonyManagerCompat.isVoicemailVibrationEnabled(
+                getTelephonyManager(context), phoneAccountHandle);
         sound =
             TelephonyManagerCompat.getVoicemailRingtoneUri(
                 getTelephonyManager(context), phoneAccountHandle);
