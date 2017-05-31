@@ -84,7 +84,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   private final ConcurrentHashMap<String, ContactCacheEntry> mInfoMap = new ConcurrentHashMap<>();
   private final Map<String, Set<ContactInfoCacheCallback>> mCallBacks = new ArrayMap<>();
   private Drawable mDefaultContactPhotoDrawable;
-  private Drawable mConferencePhotoDrawable;
   private int mQueryId;
   private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor =
       DialerExecutors.createNonUiTaskBuilder(new CachedNumberLookupWorker()).build();
@@ -675,14 +674,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     return mDefaultContactPhotoDrawable;
   }
 
-  public Drawable getConferenceDrawable() {
-    if (mConferencePhotoDrawable == null) {
-      mConferencePhotoDrawable =
-          mContext.getResources().getDrawable(R.drawable.img_conference_automirrored);
-    }
-    return mConferencePhotoDrawable;
-  }
-
   /** Callback interface for the contact query. */
   public interface ContactInfoCacheCallback {
 
@@ -798,8 +789,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       maybeUpdateFromCequintCallerId(ci, cw.cnapName, mIsIncoming);
       long time = SystemClock.uptimeMillis() - start;
       Log.d(TAG, "Cequint Caller Id look up takes " + time + " ms.");
-      updateCallerInfoInCacheOnAnyThread(
-          cw.callId, cw.numberPresentation, ci, mIsIncoming, true, mQueryToken);
+      updateCallerInfoInCacheOnAnyThread(cw.callId, cw.numberPresentation, ci, mIsIncoming, true, mQueryToken);
     }
 
     @Override

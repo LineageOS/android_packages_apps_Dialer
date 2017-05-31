@@ -22,6 +22,7 @@ import android.os.IBinder;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
+import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
@@ -66,14 +67,15 @@ public class InCallServiceImpl extends InCallService {
     final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
     InCallPresenter.getInstance()
         .setUp(
-            getApplicationContext(),
+            context,
             CallList.getInstance(),
             new ExternalCallList(),
             new StatusBarNotifier(context, contactInfoCache),
             new ExternalCallNotifier(context, contactInfoCache),
             contactInfoCache,
             new ProximitySensor(
-                context, AudioModeProvider.getInstance(), new AccelerometerListener(context)));
+                context, AudioModeProvider.getInstance(), new AccelerometerListener(context)),
+            new FilteredNumberAsyncQueryHandler(context));
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
