@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar.BaseCallback;
 import android.support.design.widget.Snackbar;
@@ -101,7 +100,7 @@ public class PostCall {
                 activity.getResources().getColor(R.color.dialer_snackbar_action_text_color));
     activeSnackbar.show();
     Logger.get(activity).logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE);
-    PreferenceManager.getDefaultSharedPreferences(activity)
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(activity)
         .edit()
         .remove(KEY_POST_CALL_CALL_DISCONNECT_TIME)
         .apply();
@@ -138,14 +137,14 @@ public class PostCall {
     activeSnackbar.show();
     Logger.get(activity)
         .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE);
-    PreferenceManager.getDefaultSharedPreferences(activity)
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(activity)
         .edit()
         .remove(KEY_POST_CALL_MESSAGE_SENT)
         .apply();
   }
 
   public static void onCallDisconnected(Context context, String number, long callConnectedMillis) {
-    PreferenceManager.getDefaultSharedPreferences(context)
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .edit()
         .putLong(KEY_POST_CALL_CALL_CONNECT_TIME, callConnectedMillis)
         .putLong(KEY_POST_CALL_CALL_DISCONNECT_TIME, System.currentTimeMillis())
@@ -154,7 +153,7 @@ public class PostCall {
   }
 
   public static void onMessageSent(Context context, String number) {
-    PreferenceManager.getDefaultSharedPreferences(context)
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .edit()
         .putString(KEY_POST_CALL_CALL_NUMBER, number)
         .putBoolean(KEY_POST_CALL_MESSAGE_SENT, true)
@@ -164,7 +163,7 @@ public class PostCall {
   private static void clear(Context context) {
     activeSnackbar = null;
 
-    PreferenceManager.getDefaultSharedPreferences(context)
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .edit()
         .remove(KEY_POST_CALL_CALL_DISCONNECT_TIME)
         .remove(KEY_POST_CALL_CALL_NUMBER)
@@ -174,7 +173,8 @@ public class PostCall {
   }
 
   private static boolean shouldPromptUserToSendMessage(Context context) {
-    SharedPreferences manager = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences manager =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
     long disconnectTimeMillis = manager.getLong(KEY_POST_CALL_CALL_DISCONNECT_TIME, -1);
     long connectTimeMillis = manager.getLong(KEY_POST_CALL_CALL_CONNECT_TIME, -1);
 
@@ -192,13 +192,13 @@ public class PostCall {
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .getBoolean(KEY_POST_CALL_MESSAGE_SENT, false);
   }
 
   @Nullable
   private static String getPhoneNumber(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .getString(KEY_POST_CALL_CALL_NUMBER, null);
   }
 
