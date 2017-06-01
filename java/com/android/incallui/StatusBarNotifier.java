@@ -33,8 +33,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
@@ -302,7 +302,7 @@ public class StatusBarNotifier
 
     // Check if data has changed; if nothing is different, don't issue another notification.
     final int iconResId = getIconToDisplay(call);
-    Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
+    Bitmap largeIcon = getLargeIconToDisplay(mContext, contactInfo, call);
     final String content = getContentString(call, contactInfo.userType);
     final String contentTitle = getContentTitle(contactInfo, call);
 
@@ -594,30 +594,29 @@ public class StatusBarNotifier
   }
 
   /** Gets a large icon from the contact info object to display in the notification. */
-  private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, DialerCall call) {
+  private static Bitmap getLargeIconToDisplay(
+      Context context, ContactCacheEntry contactInfo, DialerCall call) {
+    Resources resources = context.getResources();
     Bitmap largeIcon = null;
-    if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
-      largeIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.img_conference);
-    }
     if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
       largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
     }
     if (contactInfo.photo == null) {
-      int width =
-          (int) mContext.getResources().getDimension(android.R.dimen.notification_large_icon_width);
-      int height =
-          (int)
-              mContext.getResources().getDimension(android.R.dimen.notification_large_icon_height);
+      int width = (int) resources.getDimension(android.R.dimen.notification_large_icon_width);
+      int height = (int) resources.getDimension(android.R.dimen.notification_large_icon_height);
       int contactType = LetterTileDrawable.TYPE_DEFAULT;
-      LetterTileDrawable lettertile = new LetterTileDrawable(mContext.getResources());
+      LetterTileDrawable lettertile = new LetterTileDrawable(resources);
 
       // TODO: Deduplicate across Dialer. b/36195917
-      if (CallerInfoUtils.isVoiceMailNumber(mContext, call)) {
+      if (CallerInfoUtils.isVoiceMailNumber(context, call)) {
         contactType = LetterTileDrawable.TYPE_VOICEMAIL;
       } else if (contactInfo.isBusiness) {
         contactType = LetterTileDrawable.TYPE_BUSINESS;
       } else if (call.getNumberPresentation() == TelecomManager.PRESENTATION_RESTRICTED) {
         contactType = LetterTileDrawable.TYPE_GENERIC_AVATAR;
+      } else if (call.isConferenceCall()
+          && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
+        contactType = LetterTileDrawable.TYPE_CONFERENCE;
       }
       lettertile.setCanonicalDialerLetterTileDetails(
           contactInfo.namePrimary == null ? contactInfo.number : contactInfo.namePrimary,
@@ -628,8 +627,7 @@ public class StatusBarNotifier
     }
 
     if (call.isSpam()) {
-      Drawable drawable =
-          mContext.getResources().getDrawable(R.drawable.blocked_contact, mContext.getTheme());
+      Drawable drawable = resources.getDrawable(R.drawable.blocked_contact, context.getTheme());
       largeIcon = DrawableConverter.drawableToBitmap(drawable);
     }
     return largeIcon;

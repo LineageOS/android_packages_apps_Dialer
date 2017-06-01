@@ -245,6 +245,8 @@ public class ContactGridManager {
       return LetterTileDrawable.TYPE_BUSINESS;
     } else if (primaryInfo.numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
       return LetterTileDrawable.TYPE_GENERIC_AVATAR;
+    } else if (callState.isConference) {
+      return LetterTileDrawable.TYPE_CONFERENCE;
     } else {
       return LetterTileDrawable.TYPE_DEFAULT;
     }
