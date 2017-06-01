@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.os.UserManagerCompat;
 import android.telecom.Call.Details;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
@@ -37,6 +38,7 @@ import android.view.WindowManager;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -309,7 +311,8 @@ public class InCallPresenter implements CallList.Listener {
       StatusBarNotifier statusBarNotifier,
       ExternalCallNotifier externalCallNotifier,
       ContactInfoCache contactInfoCache,
-      ProximitySensor proximitySensor) {
+      ProximitySensor proximitySensor,
+      FilteredNumberAsyncQueryHandler filteredNumberQueryHandler) {
     if (mServiceConnected) {
       Log.i(this, "New service connection replacing existing one.");
       if (context != mContext || callList != mCallList) {
@@ -354,7 +357,7 @@ public class InCallPresenter implements CallList.Listener {
 
     VideoPauseController.getInstance().setUp(this);
 
-    mFilteredQueryHandler = new FilteredNumberAsyncQueryHandler(context);
+    mFilteredQueryHandler = filteredNumberQueryHandler;
     mContext
         .getSystemService(TelephonyManager.class)
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
@@ -519,6 +522,12 @@ public class InCallPresenter implements CallList.Listener {
     if (call.getState() != android.telecom.Call.STATE_RINGING) {
       return false;
     }
+    if (!UserManagerCompat.isUserUnlocked(mContext)) {
+      LogUtil.i(
+          "InCallPresenter.shouldAttemptBlocking",
+          "not attempting to block incoming call because user is locked");
+      return false;
+    }
     if (TelecomCallUtil.isEmergencyCall(call)) {
       Log.i(this, "Not attempting to block incoming emergency call");
       return false;
@@ -528,6 +537,12 @@ public class InCallPresenter implements CallList.Listener {
       return false;
     }
     if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
+      return false;
+    }
+    if (FilteredNumberCompat.useNewFiltering(mContext)) {
+      LogUtil.i(
+          "InCallPresenter.shouldAttemptBlocking",
+          "not attempting to block incoming call because framework blocking is in use");
       return false;
     }
     return true;

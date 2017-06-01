@@ -269,7 +269,9 @@ public class OmtpVvmSyncService {
     }
 
     if (readVoicemails.size() > 0) {
+      VvmLog.i(TAG, "Marking voicemails as read");
       if (imapHelper.markMessagesAsRead(readVoicemails)) {
+        VvmLog.i(TAG, "Marking voicemails as clean");
         mQueryHelper.markCleanInDatabase(readVoicemails);
       } else {
         success = false;
@@ -306,7 +308,7 @@ public class OmtpVvmSyncService {
       if (remoteVoicemail == null) {
         mQueryHelper.deleteNonArchivedFromDatabase(localVoicemail);
       } else {
-        if (remoteVoicemail.isRead() != localVoicemail.isRead()) {
+        if (remoteVoicemail.isRead() && !localVoicemail.isRead()) {
           mQueryHelper.markReadInDatabase(localVoicemail);
         }
 
