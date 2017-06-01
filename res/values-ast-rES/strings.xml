@@ -73,6 +73,7 @@
          The user will be able to send text messages using the phone number.
          [CHAR LIMIT=18] -->
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
+  <string name="handle_restricted">RESTRICTED</string>
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left
@@ -255,8 +256,10 @@
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
+  <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
   <!-- The title of a dialog that displays the IMEI of the phone -->
+  <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->

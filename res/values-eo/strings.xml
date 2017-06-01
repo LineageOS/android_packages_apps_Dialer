@@ -72,6 +72,7 @@
          The user will be able to send text messages using the phone number.
          [CHAR LIMIT=18] -->
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
+  <string name="handle_restricted">RESTRICTED</string>
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left

@@ -102,6 +102,7 @@
   <string name="clear">Effacer</string>
   <string name="description_clear_search">Effacer la recherche</string>
   <string name="video_call_welcome_title"><b>Bienvenue sur le nouveau composeur avec appels vidéos</b></string>
+  <string name="video_call_welcome_message">Nous aimons tous entendre cette voix familière à l\'autre bout du fil, mais parler en face-à-face est tellement mieux ! Voici ce que vous devriez savoir pour que vos connexions en temps réel fonctionnent (ou FaceTime?):\n Vous devrez être connecté à un réseau 4G LTE ou Wi-Fi\n L\'appareil que vous appelez doit également être compatible avec les appels vidéo\n Les appels vidéo consomment vos données\n Vous pouvez basculer d\'un appel vocal en appel vidéo\n\n Visitez <a>https://support.t-mobile.com/docs/DOC-23574</a> pour plus d\'informations.</string>
   <string name="video_call_welcome_message_repeat">Afficher ce message à chaque fois</string>
   <string name="toast_change_video_call_failed">Impossible de passer en appel vidéo, format de numéro incorrect</string>
   <string name="toast_make_video_call_failed">Impossible de procéder à un appel vidéo, format de numéro incorrect</string>
