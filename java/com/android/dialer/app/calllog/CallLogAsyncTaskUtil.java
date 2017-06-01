@@ -56,11 +56,15 @@ public class CallLogAsyncTaskUtil {
           public Void doInBackground(Void... params) {
             ContentValues values = new ContentValues();
             values.put(Voicemails.IS_READ, true);
-            context
-                .getContentResolver()
-                .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null);
-
-            uploadVoicemailLocalChangesToServer(context);
+            // "External" changes to the database will be automatically marked as dirty, but this
+            // voicemail might be from dialer so it need to be marked manually.
+            values.put(Voicemails.DIRTY, 1);
+            if (context
+                    .getContentResolver()
+                    .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null)
+                > 0) {
+              uploadVoicemailLocalChangesToServer(context);
+            }
 
             Intent intent = new Intent(context, CallLogNotificationsService.class);
             intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);

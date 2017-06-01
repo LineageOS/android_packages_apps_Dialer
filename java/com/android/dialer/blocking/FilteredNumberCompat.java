@@ -275,7 +275,8 @@ public class FilteredNumberCompat {
         && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
   }
 
-  static void setCanAttemptBlockOperationsForTest(boolean canAttempt) {
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setCanAttemptBlockOperationsForTest(boolean canAttempt) {
     canAttemptBlockOperationsForTest = canAttempt;
   }
 

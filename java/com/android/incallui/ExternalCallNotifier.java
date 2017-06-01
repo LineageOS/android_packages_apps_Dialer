@@ -338,7 +338,9 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
         && !call.getDetails()
             .hasProperty(android.telecom.Call.Details.PROPERTY_GENERIC_CONFERENCE)) {
 
-      largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.img_conference);
+      largeIcon =
+          BitmapFactory.decodeResource(
+              context.getResources(), R.drawable.quantum_ic_group_vd_theme_24);
     }
     if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
       largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
