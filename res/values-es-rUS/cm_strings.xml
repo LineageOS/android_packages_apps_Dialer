@@ -101,7 +101,7 @@
   <string name="sign_in_hint_text">Inicia sesión para hacer %1$s llamadas</string>
   <string name="wifi_hint_text">Haz llamadas gratuitas de %1$s a %1$s a través de Wi-Fi.</string>
   <string name="roaming_hint_text">%1$s está en roaming. Haz llamadas gratuitas de %2$s a %2$s a través de Wi-Fi.</string>
-  <string name="emergency_call_hint_text">No hay SIM. Llamadas de emergencia solamente.</string>
+  <string name="emergency_call_hint_text">Sin tarjeta SIM. Llamadas de emergencia solamente.</string>
   <string name="extra_call_method_call_option">Llamadas de <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
   <string name="incall_plugin_settings">Ajustes de <xliff:g id="name">%1$s</xliff:g></string>
