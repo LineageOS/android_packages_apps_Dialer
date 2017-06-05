@@ -70,7 +70,7 @@
       android:background="@color/background_dialer_white"
       android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
       android:layout_toStartOf="@+id/remaining_characters"
-      android:inputType="textShortMessage"
+      android:inputType="textShortMessage|textCapSentences"
       android:imeOptions="flagNoExtractUi|actionSend"/>
 
     <TextView

@@ -15,11 +15,11 @@
   ~ limitations under the License
   -->
 <FrameLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/background"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/call_composer_background_color">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/call_composer_background_color">
 
   <LinearLayout
     android:id="@+id/call_composer_container"
@@ -87,7 +87,7 @@
         android:layout_height="@dimen/call_composer_media_bar_height"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="@color/dialer_secondary_color"
+        android:background="@color/dialer_theme_color_dark"
         android:clickable="true">
 
       <ImageView

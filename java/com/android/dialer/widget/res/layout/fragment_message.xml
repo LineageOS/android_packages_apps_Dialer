@@ -48,7 +48,9 @@
       android:textColorHint="@color/dialer_edit_text_hint_color"
       android:background="@color/background_dialer_white"
       android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
-      android:layout_toStartOf="@+id/count_and_send_container"/>
+      android:layout_toStartOf="@+id/count_and_send_container"
+      android:inputType="textShortMessage|textCapSentences"
+      android:imeOptions="actionSend"/>
 
     <LinearLayout
       android:id="@+id/count_and_send_container"

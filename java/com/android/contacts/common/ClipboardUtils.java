@@ -24,8 +24,6 @@ import android.widget.Toast;
 
 public class ClipboardUtils {
 
-  private static final String TAG = "ClipboardUtils";
-
   private ClipboardUtils() {}
 
   /**

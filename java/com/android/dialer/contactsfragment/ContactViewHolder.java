@@ -16,6 +16,7 @@
 
 package com.android.dialer.contactsfragment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract.QuickContact;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 
 /** View holder for a contact. */
 final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -32,12 +35,14 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
   private final TextView header;
   private final TextView name;
   private final QuickContactBadge photo;
+  private final Context context;
 
   private String headerText;
   private Uri contactUri;
 
   public ContactViewHolder(View itemView) {
     super(itemView);
+    context = itemView.getContext();
     itemView.findViewById(R.id.click_target).setOnClickListener(this);
     header = (TextView) itemView.findViewById(R.id.header);
     name = (TextView) itemView.findViewById(R.id.contact_name);
@@ -60,6 +65,10 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
     name.setText(displayName);
     header.setText(headerText);
     header.setVisibility(showHeader ? View.VISIBLE : View.INVISIBLE);
+
+    Logger.get(context)
+        .logQuickContactOnTouch(
+            photo, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_BADGE, true);
   }
 
   public QuickContactBadge getPhoto() {
@@ -76,6 +85,8 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
 
   @Override
   public void onClick(View v) {
+    Logger.get(context)
+        .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM);
     QuickContact.showQuickContact(
         photo.getContext(), photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
   }

@@ -23,6 +23,7 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
@@ -35,6 +36,8 @@ import com.android.incallui.call.TelecomAdapter;
  * service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends InCallService {
+
+  private ReturnToCallController returnToCallController;
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -79,6 +82,9 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
+    if (ConfigProviderBindings.get(this).getBoolean("enable_return_to_call_bubble", false)) {
+      returnToCallController = new ReturnToCallController(this);
+    }
 
     return super.onBind(intent);
   }
@@ -98,5 +104,9 @@ public class InCallServiceImpl extends InCallService {
     // Tear down the InCall system
     TelecomAdapter.getInstance().clearInCallService();
     InCallPresenter.getInstance().tearDown();
+    if (returnToCallController != null) {
+      returnToCallController.tearDown();
+      returnToCallController = null;
+    }
   }
 }

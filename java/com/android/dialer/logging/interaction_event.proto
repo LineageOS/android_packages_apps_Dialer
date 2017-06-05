@@ -5,7 +5,9 @@ option java_package = "com.android.dialer.logging";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 message InteractionEvent {
+  // Next Tag: 38
   enum Type {
 
     UNKNOWN = 0;
@@ -41,5 +43,23 @@ message InteractionEvent {
 
     // The user unblocked a number then undid the unblock
     UNDO_UNBLOCK_NUMBER = 24;
+
+    // Actions in speed dial
+    SPEED_DIAL_PIN_CONTACT = 25;
+    SPEED_DIAL_REMOVE_CONTACT = 26;
+    SPEED_DIAL_OPEN_CONTACT_CARD = 27;
+    SPEED_DIAL_CLICK_CONTACT_WITH_AMBIGUOUS_NUMBER = 28;
+
+    SPEED_DIAL_SET_DEFAULT_NUMBER_FOR_AMBIGUOUS_CONTACT = 29;
+
+    // Open quick contact from where
+    OPEN_QUICK_CONTACT_FROM_CALL_LOG = 30;
+    OPEN_QUICK_CONTACT_FROM_CALL_DETAILS = 31;
+    OPEN_QUICK_CONTACT_FROM_ALL_CONTACTS_GENERAL = 32;
+    OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_BADGE = 33;
+    OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM = 34;
+    OPEN_QUICK_CONTACT_FROM_SEARCH = 35;
+    OPEN_QUICK_CONTACT_FROM_VOICEMAIL = 36;
+    OPEN_QUICK_CONTACT_FROM_CALL_HISTORY = 37;
   }
 }

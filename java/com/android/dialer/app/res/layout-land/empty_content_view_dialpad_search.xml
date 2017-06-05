@@ -26,14 +26,14 @@
       android:layout_height="0dp"
       android:layout_weight="1"/>
     <ImageView
-      android:id="@+id/emptyListViewImage"
+      android:id="@+id/empty_list_view_image"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
       android:importantForAccessibility="no"/>
 
     <TextView
-      android:id="@+id/emptyListViewMessage"
+      android:id="@+id/empty_list_view_message"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:paddingTop="8dp"
@@ -45,7 +45,7 @@
       android:textSize="@dimen/empty_list_message_text_size"/>
 
     <TextView
-      android:id="@+id/emptyListViewAction"
+      android:id="@+id/empty_list_view_action"
       style="@style/TextActionStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

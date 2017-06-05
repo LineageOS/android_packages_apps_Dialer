@@ -23,6 +23,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,11 +32,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 
 /** Fragment used to compose call with message fragment. */
-public class MessageFragment extends Fragment implements OnClickListener, TextWatcher {
+public class MessageFragment extends Fragment
+    implements OnClickListener, TextWatcher, OnEditorActionListener {
   private static final String CHAR_LIMIT_KEY = "char_limit";
   private static final String SHOW_SEND_ICON_KEY = "show_send_icon";
   private static final String MESSAGE_LIST_KEY = "message_list";
@@ -69,7 +72,7 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_message, container, false);
 
-    sendMessage = (ImageView) view.findViewById(R.id.send_message);
+    sendMessage = view.findViewById(R.id.send_message);
     sendMessageContainer = view.findViewById(R.id.count_and_send_container);
     if (getArguments().getBoolean(SHOW_SEND_ICON_KEY, false)) {
       sendMessage.setVisibility(View.VISIBLE);
@@ -77,18 +80,19 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
       sendMessageContainer.setOnClickListener(this);
     }
 
-    customMessage = (EditText) view.findViewById(R.id.custom_message);
+    customMessage = view.findViewById(R.id.custom_message);
     customMessage.addTextChangedListener(this);
+    customMessage.setOnEditorActionListener(this);
     charLimit = getArguments().getInt(CHAR_LIMIT_KEY, NO_CHAR_LIMIT);
     if (charLimit != NO_CHAR_LIMIT) {
-      remainingChar = (TextView) view.findViewById(R.id.remaining_characters);
+      remainingChar = view.findViewById(R.id.remaining_characters);
       remainingChar.setVisibility(View.VISIBLE);
-      remainingChar = (TextView) view.findViewById(R.id.remaining_characters);
-      remainingChar.setText("" + charLimit);
+      remainingChar = view.findViewById(R.id.remaining_characters);
+      remainingChar.setText(Integer.toString(charLimit));
       customMessage.setFilters(new InputFilter[] {new InputFilter.LengthFilter(charLimit)});
     }
 
-    LinearLayout messageContainer = (LinearLayout) view.findViewById(R.id.message_container);
+    LinearLayout messageContainer = view.findViewById(R.id.message_container);
     for (String message : getArguments().getStringArray(MESSAGE_LIST_KEY)) {
       TextView textView = (TextView) inflater.inflate(R.layout.selectable_text_view, null);
       textView.setOnClickListener(this);
@@ -123,9 +127,18 @@ public class MessageFragment extends Fragment implements OnClickListener, TextWa
   @Override
   public void afterTextChanged(Editable s) {
     if (charLimit != NO_CHAR_LIMIT) {
-      remainingChar.setText("" + (charLimit - s.length()));
+      remainingChar.setText(Integer.toString(charLimit - s.length()));
     }
     getListener().onMessageFragmentAfterTextChange(s.toString());
+  }
+
+  @Override
+  public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    if (getMessage() == null) {
+      return false;
+    }
+    getListener().onMessageFragmentSendMessage(getMessage());
+    return true;
   }
 
   private Listener getListener() {

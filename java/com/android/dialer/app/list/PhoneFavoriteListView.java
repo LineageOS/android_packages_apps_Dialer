@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2012 Google Inc.
- * Licensed to The Android Open Source Project.
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +23,6 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,6 +31,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import com.android.dialer.app.R;
 import com.android.dialer.app.list.DragDropController.DragItemContainer;
+import com.android.dialer.common.LogUtil;
 
 /** Viewgroup that presents the user's speed dial contacts in a grid. */
 public class PhoneFavoriteListView extends GridView
@@ -40,14 +39,14 @@ public class PhoneFavoriteListView extends GridView
 
   public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
   final int[] mLocationOnScreen = new int[2];
-  private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
-  private final int DRAG_SCROLL_PX_UNIT = 25;
-  private final float DRAG_SHADOW_ALPHA = 0.7f;
+  private static final long SCROLL_HANDLER_DELAY_MILLIS = 5;
+  private static final int DRAG_SCROLL_PX_UNIT = 25;
+  private static final float DRAG_SHADOW_ALPHA = 0.7f;
   /**
    * {@link #mTopScrollBound} and {@link mBottomScrollBound} will be offseted to the top / bottom by
    * {@link #getHeight} * {@link #BOUND_GAP_RATIO} pixels.
    */
-  private final float BOUND_GAP_RATIO = 0.2f;
+  private static final float BOUND_GAP_RATIO = 0.2f;
 
   private float mTouchSlop;
   private int mTopScrollBound;
@@ -67,7 +66,6 @@ public class PhoneFavoriteListView extends GridView
         }
       };
   private boolean mIsDragScrollerRunning = false;
-  private int mTouchDownForDragStartX;
   private int mTouchDownForDragStartY;
   private Bitmap mDragShadowBitmap;
   private ImageView mDragShadowOverlay;
@@ -98,7 +96,7 @@ public class PhoneFavoriteListView extends GridView
   }
 
   public PhoneFavoriteListView(Context context, AttributeSet attrs) {
-    this(context, attrs, -1);
+    this(context, attrs, 0);
   }
 
   public PhoneFavoriteListView(Context context, AttributeSet attrs, int defStyle) {
@@ -121,7 +119,6 @@ public class PhoneFavoriteListView extends GridView
   @Override
   public boolean onInterceptTouchEvent(MotionEvent ev) {
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-      mTouchDownForDragStartX = (int) ev.getX();
       mTouchDownForDragStartY = (int) ev.getY();
     }
 
@@ -287,7 +284,7 @@ public class PhoneFavoriteListView extends GridView
       try {
         bitmap = cache.copy(Bitmap.Config.ARGB_8888, false);
       } catch (final OutOfMemoryError e) {
-        Log.w(LOG_TAG, "Failed to copy bitmap from Drawing cache", e);
+        LogUtil.w(LOG_TAG, "Failed to copy bitmap from Drawing cache", e);
         bitmap = null;
       }
     }

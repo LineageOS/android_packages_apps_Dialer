@@ -53,9 +53,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.android.contacts.common.util.BitmapUtil;
-import com.android.contacts.common.util.TrafficStatsTags;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.constants.TrafficStatsTags;
 import com.android.dialer.util.PermissionsUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -634,8 +634,9 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
           }
           return true;
         }
+      default:
+        return false;
     }
-    return false;
   }
 
   public void ensureLoaderThread() {

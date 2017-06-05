@@ -36,7 +36,7 @@
     <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Chiquvchi Wi-Fi qo‘ng‘irog‘i"</string>
     <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Chiquvchi Wi-Fi ishchi qo‘ng‘irog‘i"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Kutmoqda"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Kiruvchi qo‘ng‘iroq"</string>
+    <string name="notification_incoming_call" msgid="7520580807513849283">"Kiruvchi chaqiruv"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Suratga ega kiruvchi chaqiruv"</string>
     <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Xabarga ega kiruvchi chaqiruv"</string>
     <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Joylashuv axborotiga ega kiruvchi chaqiruv"</string>

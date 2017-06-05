@@ -19,7 +19,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.app">
 
-  <application>
+  <application android:theme="@style/Theme.AppCompat">
 
     <activity
       android:exported="false"
