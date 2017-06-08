@@ -33,8 +33,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.List;
 import java.util.Locale;
@@ -216,7 +216,9 @@ public class CountryDetector {
 
   private static void processLocationUpdate(
       Context appContext, Geocoder geocoder, Location location) {
-    DialerExecutors.createNonUiTaskBuilder(new GeocodeCountryWorker(geocoder))
+    DialerExecutorComponent.get(appContext)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new GeocodeCountryWorker(geocoder))
         .onSuccess(
             country -> {
               if (country == null) {

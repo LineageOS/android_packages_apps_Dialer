@@ -27,7 +27,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import java.lang.reflect.InvocationTargetException;
 
 public class TelephonyManagerCompat {
@@ -49,31 +48,6 @@ public class TelephonyManagerCompat {
   private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
 
   /**
-   * @param telephonyManager The telephony manager instance to use for method calls.
-   * @return true if the current device is "voice capable".
-   *     <p>"Voice capable" means that this device supports circuit-switched (i.e. voice) phone
-   *     calls over the telephony network, and is allowed to display the in-call UI while a cellular
-   *     voice call is active. This will be false on "data only" devices which can't make voice
-   *     calls and don't support any in-call UI.
-   *     <p>Note: the meaning of this flag is subtly different from the
-   *     PackageManager.FEATURE_TELEPHONY system feature, which is available on any device with a
-   *     telephony radio, even if the device is data-only.
-   */
-  public static boolean isVoiceCapable(@Nullable TelephonyManager telephonyManager) {
-    if (telephonyManager == null) {
-      return false;
-    }
-    if (CompatUtils.isLollipopMr1Compatible()
-        || CompatUtils.isMethodAvailable(TELEPHONY_MANAGER_CLASS, "isVoiceCapable")) {
-      // isVoiceCapable was unhidden in L-MR1
-      return telephonyManager.isVoiceCapable();
-    }
-    final int phoneType = telephonyManager.getPhoneType();
-    return phoneType == TelephonyManager.PHONE_TYPE_CDMA
-        || phoneType == TelephonyManager.PHONE_TYPE_GSM;
-  }
-
-  /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)
    *
@@ -85,31 +59,7 @@ public class TelephonyManagerCompat {
     if (telephonyManager == null) {
       return 1;
     }
-    if (CompatUtils.isMarshmallowCompatible()
-        || CompatUtils.isMethodAvailable(TELEPHONY_MANAGER_CLASS, "getPhoneCount")) {
-      return telephonyManager.getPhoneCount();
-    }
-    return 1;
-  }
-
-  /**
-   * Returns the unique device ID of a subscription, for example, the IMEI for GSM and the MEID for
-   * CDMA phones. Return null if device ID is not available.
-   *
-   * <p>Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE READ_PHONE_STATE}
-   *
-   * @param telephonyManager The telephony manager instance to use for method calls.
-   * @param slotId of which deviceID is returned
-   */
-  public static String getDeviceId(@Nullable TelephonyManager telephonyManager, int slotId) {
-    if (telephonyManager == null) {
-      return null;
-    }
-    if (CompatUtils.isMarshmallowCompatible()
-        || CompatUtils.isMethodAvailable(TELEPHONY_MANAGER_CLASS, "getDeviceId", Integer.class)) {
-      return telephonyManager.getDeviceId(slotId);
-    }
-    return null;
+    return telephonyManager.getPhoneCount();
   }
 
   /**
@@ -119,14 +69,7 @@ public class TelephonyManagerCompat {
    * @return {@code true} if the device supports TTY mode, and {@code false} otherwise.
    */
   public static boolean isTtyModeSupported(@Nullable TelephonyManager telephonyManager) {
-    if (telephonyManager == null) {
-      return false;
-    }
-    if (CompatUtils.isMarshmallowCompatible()
-        || CompatUtils.isMethodAvailable(TELEPHONY_MANAGER_CLASS, "isTtyModeSupported")) {
-      return telephonyManager.isTtyModeSupported();
-    }
-    return false;
+    return telephonyManager != null && telephonyManager.isTtyModeSupported();
   }
 
   /**
@@ -138,15 +81,7 @@ public class TelephonyManagerCompat {
    */
   public static boolean isHearingAidCompatibilitySupported(
       @Nullable TelephonyManager telephonyManager) {
-    if (telephonyManager == null) {
-      return false;
-    }
-    if (CompatUtils.isMarshmallowCompatible()
-        || CompatUtils.isMethodAvailable(
-            TELEPHONY_MANAGER_CLASS, "isHearingAidCompatibilitySupported")) {
-      return telephonyManager.isHearingAidCompatibilitySupported();
-    }
-    return false;
+    return telephonyManager != null && telephonyManager.isHearingAidCompatibilitySupported();
   }
 
   /**

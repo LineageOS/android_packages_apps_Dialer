@@ -41,7 +41,7 @@ public class RemoveView extends FrameLayout {
   }
 
   public RemoveView(Context context, AttributeSet attrs) {
-    this(context, attrs, -1);
+    this(context, attrs, 0);
   }
 
   public RemoveView(Context context, AttributeSet attrs, int defStyle) {

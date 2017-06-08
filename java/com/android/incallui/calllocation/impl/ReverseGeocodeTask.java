@@ -20,6 +20,7 @@ import android.location.Location;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.constants.TrafficStatsTags;
 import com.android.incallui.calllocation.impl.LocationPresenter.LocationUi;
 import java.lang.ref.WeakReference;
 import org.json.JSONArray;

@@ -36,7 +36,6 @@ import com.android.dialer.about.AboutPhoneFragment;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -83,14 +82,12 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
     soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
     target.add(soundSettingsHeader);
 
-    if (CompatUtils.isMarshmallowCompatible()) {
-      Header quickResponseSettingsHeader = new Header();
-      Intent quickResponseSettingsIntent =
-          new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
-      quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
-      quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
-      target.add(quickResponseSettingsHeader);
-    }
+    Header quickResponseSettingsHeader = new Header();
+    Intent quickResponseSettingsIntent =
+        new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
+    quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
+    quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
+    target.add(quickResponseSettingsHeader);
 
     TelephonyManager telephonyManager =
         (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

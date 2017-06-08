@@ -29,6 +29,8 @@ import com.android.incallui.incall.impl.CheckableLabeledButton.OnCheckedChangeLi
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
+import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
+import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 
 /** Manages a single button. */
 interface ButtonController {
@@ -376,36 +378,13 @@ interface ButtonController {
     }
 
     public void setAudioState(CallAudioState audioState) {
-      @StringRes int contentDescriptionResId;
-      if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
-          == CallAudioState.ROUTE_BLUETOOTH) {
-        checkable = false;
-        isChecked = false;
-        label = R.string.incall_label_audio;
+      SpeakerButtonInfo info = new SpeakerButtonInfo(audioState, IconSize.SIZE_36_DP);
 
-        if ((audioState.getRoute() & CallAudioState.ROUTE_BLUETOOTH)
-            == CallAudioState.ROUTE_BLUETOOTH) {
-          icon = R.drawable.quantum_ic_bluetooth_audio_white_36;
-          contentDescriptionResId = R.string.incall_content_description_bluetooth;
-        } else if ((audioState.getRoute() & CallAudioState.ROUTE_SPEAKER)
-            == CallAudioState.ROUTE_SPEAKER) {
-          icon = R.drawable.quantum_ic_volume_up_white_36;
-          contentDescriptionResId = R.string.incall_content_description_speaker;
-        } else if ((audioState.getRoute() & CallAudioState.ROUTE_WIRED_HEADSET)
-            == CallAudioState.ROUTE_WIRED_HEADSET) {
-          icon = R.drawable.quantum_ic_headset_white_36;
-          contentDescriptionResId = R.string.incall_content_description_headset;
-        } else {
-          icon = R.drawable.ic_phone_audio_white_36dp;
-          contentDescriptionResId = R.string.incall_content_description_earpiece;
-        }
-      } else {
-        checkable = true;
-        isChecked = audioState.getRoute() == CallAudioState.ROUTE_SPEAKER;
-        label = R.string.incall_label_speaker;
-        icon = R.drawable.quantum_ic_volume_up_white_36;
-        contentDescriptionResId = R.string.incall_content_description_speaker;
-      }
+      checkable = info.checkable;
+      isChecked = info.isChecked;
+      label = info.label;
+      icon = info.icon;
+      @StringRes int contentDescriptionResId = info.contentDescription;
 
       contentDescription = delegate.getContext().getText(contentDescriptionResId);
       checkedContentDescription =

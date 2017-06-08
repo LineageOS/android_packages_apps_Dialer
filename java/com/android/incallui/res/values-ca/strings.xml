@@ -136,6 +136,6 @@
     <string name="generic_conference_call_name" msgid="1546941472424243894">"En una trucada"</string>
     <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"S\'està continuant la trucada mitjançant dades mòbils…"</string>
     <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"No s\'ha pogut canviar a la xarxa Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"La videotrucada es mantindrà a la xarxa mòbil. És possible que s\'apliquin càrrecs de dades estàndard."</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"La videotrucada es mantindrà a la xarxa mòbil. És possible que s\'hi apliquin càrrecs de dades estàndard."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"No ho tornis a mostrar"</string>
 </resources>

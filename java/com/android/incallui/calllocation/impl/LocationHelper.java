@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
+import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -87,6 +88,12 @@ public class LocationHelper {
       LogUtil.i("LocationHelper.canGetLocation", "location service is disabled.");
       return false;
     }
+
+    if (!UserManagerCompat.isUserUnlocked(context)) {
+      LogUtil.i("LocationHelper.canGetLocation", "location unavailable in FBE mode.");
+      return false;
+    }
+
     return true;
   }
 

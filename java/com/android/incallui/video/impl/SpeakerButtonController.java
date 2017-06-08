@@ -88,7 +88,7 @@ public class SpeakerButtonController implements OnCheckedChangeListener, OnClick
         icon = R.drawable.quantum_ic_headset_white_36;
         contentDescriptionResId = R.string.incall_content_description_headset;
       } else {
-        icon = R.drawable.ic_phone_audio_white_36dp;
+        icon = R.drawable.quantum_ic_phone_in_talk_white_36;
         contentDescriptionResId = R.string.incall_content_description_earpiece;
       }
     } else {

@@ -29,12 +29,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.protos.ProtoParsers;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   private List<CallDetailsEntry> entries;
 
   public static Intent newInstance(
-      Context context, @NonNull CallDetailsEntries details, @NonNull CallComposerContact contact) {
+      Context context, @NonNull CallDetailsEntries details, @NonNull DialerContact contact) {
     Assert.isNotNull(details);
     Assert.isNotNull(contact);
 
@@ -70,14 +71,20 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    PostCall.promptUserForMessageIfNecessary(this, findViewById(R.id.recycler_view));
+  }
+
+  @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     onHandleIntent(intent);
   }
 
   private void onHandleIntent(Intent intent) {
-    CallComposerContact contact =
-        ProtoParsers.getTrusted(intent, EXTRA_CONTACT, CallComposerContact.getDefaultInstance());
+    DialerContact contact =
+        ProtoParsers.getTrusted(intent, EXTRA_CONTACT, DialerContact.getDefaultInstance());
     entries =
         ProtoParsers.getTrusted(
                 intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())

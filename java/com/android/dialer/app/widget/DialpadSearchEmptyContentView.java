@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import com.android.dialer.app.R;
 import com.android.dialer.util.OrientationUtil;
+import com.android.dialer.widget.EmptyContentView;
 
 /** Empty content view to be shown when dialpad is visible. */
 public class DialpadSearchEmptyContentView extends EmptyContentView {

@@ -16,7 +16,6 @@
 
 package com.android.contacts.common;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -24,7 +23,6 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 import com.android.contacts.common.model.account.AccountType;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -191,40 +189,6 @@ public class MoreContactUtils {
     rect.right = pos[0] + view.getWidth();
     rect.bottom = pos[1] + view.getHeight();
     return rect;
-  }
-
-  /**
-   * Returns a header view based on the R.layout.list_separator, where the containing {@link
-   * android.widget.TextView} is set using the given textResourceId.
-   */
-  public static TextView createHeaderView(Context context, int textResourceId) {
-    final TextView textView = (TextView) View.inflate(context, R.layout.list_separator, null);
-    textView.setText(context.getString(textResourceId));
-    return textView;
-  }
-
-  /**
-   * Set the top padding on the header view dynamically, based on whether the header is in the first
-   * row or not.
-   */
-  public static void setHeaderViewBottomPadding(
-      Context context, TextView textView, boolean isFirstRow) {
-    final int topPadding;
-    if (isFirstRow) {
-      topPadding =
-          (int)
-              context
-                  .getResources()
-                  .getDimension(R.dimen.frequently_contacted_title_top_margin_when_first_row);
-    } else {
-      topPadding =
-          (int) context.getResources().getDimension(R.dimen.frequently_contacted_title_top_margin);
-    }
-    textView.setPaddingRelative(
-        textView.getPaddingStart(),
-        topPadding,
-        textView.getPaddingEnd(),
-        textView.getPaddingBottom());
   }
 
   /**

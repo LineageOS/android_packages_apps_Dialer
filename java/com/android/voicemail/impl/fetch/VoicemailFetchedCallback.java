@@ -23,9 +23,12 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.imap.VoicemailPayload;
+import com.android.voicemail.impl.transcribe.TranscriptionService;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
@@ -56,6 +59,7 @@ public class VoicemailFetchedCallback {
    * @param voicemailPayload The object containing the content data for the voicemail
    */
   public void setVoicemailContent(@Nullable VoicemailPayload voicemailPayload) {
+    Assert.isWorkerThread();
     if (voicemailPayload == null) {
       VvmLog.i(TAG, "Payload not found, message has unsupported format");
       ContentValues values = new ContentValues();
@@ -90,13 +94,23 @@ public class VoicemailFetchedCallback {
     ContentValues values = new ContentValues();
     values.put(Voicemails.MIME_TYPE, voicemailPayload.getMimeType());
     values.put(Voicemails.HAS_CONTENT, true);
-    updateVoicemail(values);
+    if (updateVoicemail(values)) {
+      ThreadUtil.postOnUiThread(
+          () -> {
+            if (!TranscriptionService.transcribeVoicemail(mContext, mUri)) {
+              VvmLog.w(TAG, String.format("Failed to schedule transcription for %s", mUri));
+            }
+          });
+    }
   }
 
-  private void updateVoicemail(ContentValues values) {
+  private boolean updateVoicemail(ContentValues values) {
     int updatedCount = mContentResolver.update(mUri, values, null, null);
     if (updatedCount != 1) {
       VvmLog.e(TAG, "Updating voicemail should have updated 1 row, was: " + updatedCount);
+      return false;
+    } else {
+      return true;
     }
   }
 }

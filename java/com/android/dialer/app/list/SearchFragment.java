@@ -34,19 +34,18 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Space;
 import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.app.widget.DialpadSearchEmptyContentView;
-import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
@@ -80,7 +79,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     setQuickContactEnabled(true);
     setAdjustSelectionBoundsEnabled(false);
     setDarkTheme(false);
-    setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(false /* opposite */));
     setUseCallableUri(true);
 
     try {

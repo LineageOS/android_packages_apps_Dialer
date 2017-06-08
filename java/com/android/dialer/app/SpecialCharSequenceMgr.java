@@ -47,7 +47,6 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
@@ -299,9 +298,7 @@ public class SpecialCharSequenceMgr {
               : R.string.meid;
 
       List<String> deviceIds = new ArrayList<String>();
-      if (TelephonyManagerCompat.getPhoneCount(telephonyManager) > 1
-          && CompatUtils.isMethodAvailable(
-              TelephonyManagerCompat.TELEPHONY_MANAGER_CLASS, "getDeviceId", Integer.TYPE)) {
+      if (TelephonyManagerCompat.getPhoneCount(telephonyManager) > 1) {
         for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
           String deviceId = telephonyManager.getDeviceId(slot);
           if (!TextUtils.isEmpty(deviceId)) {

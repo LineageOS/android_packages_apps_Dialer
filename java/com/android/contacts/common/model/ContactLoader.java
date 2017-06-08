@@ -522,6 +522,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     cursorColumnToContentValues(cursor, cv, ContactQuery.TIMES_USED);
     cursorColumnToContentValues(cursor, cv, ContactQuery.LAST_TIME_USED);
     cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
+
     return cv;
   }
 

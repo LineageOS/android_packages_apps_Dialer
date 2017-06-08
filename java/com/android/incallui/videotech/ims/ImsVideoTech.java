@@ -183,8 +183,6 @@ public class ImsVideoTech implements VideoTech {
   public void stopTransmission() {
     LogUtil.enterBlock("ImsVideoTech.stopTransmission");
 
-    setCamera(null);
-
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
@@ -248,7 +246,7 @@ public class ImsVideoTech implements VideoTech {
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO)
         && call.getState() == Call.STATE_ACTIVE
-        && isTransmitting();
+        && isTransmittingOrReceiving();
   }
 
   static int getUnpausedVideoState(int videoState) {
