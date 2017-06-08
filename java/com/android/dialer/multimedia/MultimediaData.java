@@ -20,6 +20,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.google.auto.value.AutoValue;
 
@@ -62,6 +63,11 @@ public abstract class MultimediaData {
 
   /** Returns {@code true} if this data is marked as important. */
   public abstract boolean isImportant();
+
+  /** Returns true if this has image, text or location data. */
+  public boolean hasData() {
+    return hasImageData() || !TextUtils.isEmpty(getText()) || getLocation() != null;
+  }
 
   /** Returns the string form of this MultimediaData with no PII. */
   @Override

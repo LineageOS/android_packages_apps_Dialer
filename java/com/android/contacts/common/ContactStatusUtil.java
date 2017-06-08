@@ -23,8 +23,6 @@ import android.provider.ContactsContract.StatusUpdates;
 /** Provides static function to get default contact status message. */
 public class ContactStatusUtil {
 
-  private static final String TAG = "ContactStatusUtil";
-
   public static String getStatusString(Context context, int presence) {
     Resources resources = context.getResources();
     switch (presence) {

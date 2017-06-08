@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -46,7 +47,10 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    return callState == Call.STATE_ACTIVE && lightbringer.isReachable(context, callingNumber);
+    return ConfigProviderBindings.get(context)
+            .getBoolean("enable_lightbringer_video_upgrade", false)
+        && callState == Call.STATE_ACTIVE
+        && lightbringer.isReachable(context, callingNumber);
   }
 
   @Override

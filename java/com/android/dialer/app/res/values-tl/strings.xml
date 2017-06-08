@@ -85,6 +85,10 @@
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Bumalik sa kasalukuyang tawag"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"Mag-add: tawag"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"Mga paparating na tawag"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Pumapasok sa bulk action mode"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Umalis sa bulk action mode"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Napili <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Inalis sa pagkakapili <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"I-play ang voicemail"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"Tingnan ang contact na si <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="1532402285334775372">"Tawagan si <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -99,11 +103,13 @@
     <string name="voicemail" msgid="8899540969000957954">"Voicemail"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> sec"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Kanselahin ang batch actions mode"</string>
     <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"voicemail"</string>
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"mga voicemail"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Oo"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Hindi"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"I-delete ang napiling <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> ang napili"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ng <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -116,7 +122,6 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Naglo-load mula sa SIM card…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Mga contact sa SIM card"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"Walang available na app ng mga contact"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"Hindi available ang paghahanap gamit ang boses"</string>
     <string name="call_not_available" msgid="7850148370757361155">"Hindi makagawa ng tawag sa telepono dahil naka-disable ang application na Telepono."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Maghanap ng mga contact"</string>
@@ -145,10 +150,9 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> (na) bagong hindi nasagot na tawag"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"Wala pang tao sa iyong speed dial"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Magdagdag ng paborito"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"Wala ka pang sinumang mga contact"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Magdagdag ng contact"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"Pindutin ang larawan upang makita ang lahat ng numero o pindutin nang matagal upang ayusing muli"</string>
     <string name="remove_contact" msgid="2353580570488923668">"Alisin"</string>
+    <string name="select_all" msgid="408601760696146245">"Piliin lahat"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Mag-video call"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Magpadala ng mensahe"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Mga detalye ng tawag"</string>
@@ -213,11 +217,9 @@
     <string name="block_list" msgid="4701585783411870782">"Mga naka-block na numero"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"Naka-block na ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"Account sa pagtawag"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"I-on"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"Magtakda ng mga pahintulot"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"Upang i-enable ang speed dial, i-on ang pahintulot ng Mga Contact."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"Upang makita ang iyong log ng tawag, i-on ang pahintulot ng Telepono."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"Upang makita ang iyong mga contact, i-on ang pahintulot ng Mga Contact."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Upang ma-access ang iyong voicemail, i-on ang pahintulot ng Telepono."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Upang hanapin ang iyong mga contact, i-on ang mga pahintulot sa Mga Contact."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"Upang tumawag, i-on ang pahintulot ng Telepono."</string>

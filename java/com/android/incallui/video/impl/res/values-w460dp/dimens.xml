@@ -19,5 +19,5 @@
   <dimen name="videocall_button_size">72dp</dimen>
   <dimen name="videocall_preview_width">88dp</dimen>
   <dimen name="videocall_preview_height">88dp</dimen>
-  <dimen name="videocall_preview_long">104dp</dimen>
+  <dimen name="videocall_preview_long">116dp</dimen>
 </resources>

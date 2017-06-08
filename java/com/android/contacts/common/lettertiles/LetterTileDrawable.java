@@ -30,8 +30,10 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
+import com.android.contacts.common.lettertiles.LetterTileDrawable.ContactType;
 import com.android.dialer.common.Assert;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -405,5 +407,31 @@ public class LetterTileDrawable extends Drawable {
       }
     }
     return this;
+  }
+
+  /**
+   * Returns the appropriate LetterTileDrawable.TYPE_ based on the given primitive conditions.
+   *
+   * <p>If no special state is detected, yields TYPE_DEFAULT
+   */
+  public static @ContactType int getContactTypeFromPrimitives(
+      boolean isVoicemailNumber,
+      boolean isSpam,
+      boolean isBusiness,
+      int numberPresentation,
+      boolean isConference) {
+    if (isVoicemailNumber) {
+      return LetterTileDrawable.TYPE_VOICEMAIL;
+    } else if (isSpam) {
+      return LetterTileDrawable.TYPE_SPAM;
+    } else if (isBusiness) {
+      return LetterTileDrawable.TYPE_BUSINESS;
+    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
+      return LetterTileDrawable.TYPE_GENERIC_AVATAR;
+    } else if (isConference) {
+      return LetterTileDrawable.TYPE_CONFERENCE;
+    } else {
+      return LetterTileDrawable.TYPE_DEFAULT;
+    }
   }
 }

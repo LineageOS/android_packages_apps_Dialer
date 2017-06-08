@@ -28,6 +28,6 @@
     <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Fes una foto"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"No s\'ha pogut carregar la imatge de la càmera"</string>
     <string name="allow" msgid="8637148297403066623">"Permet"</string>
-    <string name="camera_permission_text" msgid="7863231776480341614">"Per fer una foto, dóna accés a la càmera"</string>
-    <string name="gallery_permission_text" msgid="4102566850658919346">"Per compartir una imatge, dóna accés al contingut multimèdia"</string>
+    <string name="camera_permission_text" msgid="7863231776480341614">"Per fer una foto, dona accés a la càmera"</string>
+    <string name="gallery_permission_text" msgid="4102566850658919346">"Per compartir una imatge, dona accés al contingut multimèdia"</string>
 </resources>

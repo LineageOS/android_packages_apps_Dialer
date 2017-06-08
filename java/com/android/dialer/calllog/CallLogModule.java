@@ -17,11 +17,9 @@
 package com.android.dialer.calllog;
 
 import com.android.dialer.calllog.datasources.CallLogDataSource;
+import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllog.datasources.contacts.ContactsDataSource;
 import com.android.dialer.calllog.datasources.systemcalllog.SystemCallLogDataSource;
-import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
-import com.android.dialer.common.concurrent.DialerExecutorFactory;
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import java.util.Arrays;
@@ -31,10 +29,6 @@ import java.util.List;
 /** Dagger module which satisfies call log dependencies. */
 @Module
 public abstract class CallLogModule {
-
-  @Binds
-  abstract DialerExecutorFactory bindDialerExecutorFactory(
-      DefaultDialerExecutorFactory defaultDialerExecutorFactory);
 
   @Provides
   static DataSources provideCallLogDataSources(

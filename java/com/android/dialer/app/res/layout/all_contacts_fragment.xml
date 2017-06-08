@@ -45,7 +45,7 @@
       android:cropToPadding="false"
       android:clipToPadding="false"/>
 
-    <com.android.dialer.app.widget.EmptyContentView
+    <com.android.dialer.widget.EmptyContentView
       android:id="@+id/empty_list_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

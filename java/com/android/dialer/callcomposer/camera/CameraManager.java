@@ -522,6 +522,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
     switch (windowManager.getDefaultDisplay().getRotation()) {
       case Surface.ROTATION_0:
         degrees = 0;
+        mCamera.setDisplayOrientation(90);
         break;
       case Surface.ROTATION_90:
         degrees = 90;
@@ -531,31 +532,22 @@ public class CameraManager implements FocusOverlayManager.Listener {
         break;
       case Surface.ROTATION_270:
         degrees = 270;
+        mCamera.setDisplayOrientation(180);
         break;
       default:
         throw Assert.createAssertionFailException("");
     }
 
-    // The display orientation of the camera (this controls the preview image).
-    int orientation;
-
     // The clockwise rotation angle relative to the orientation of the camera. This affects
     // pictures returned by the camera in Camera.PictureCallback.
-    int rotation;
     if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-      orientation = (mCameraInfo.orientation + degrees) % 360;
-      rotation = orientation;
-      // compensate the mirror but only for orientation
-      orientation = (360 - orientation) % 360;
+      mRotation = (mCameraInfo.orientation + degrees) % 360;
     } else { // back-facing
-      orientation = (mCameraInfo.orientation - degrees + 360) % 360;
-      rotation = orientation;
+      mRotation = (mCameraInfo.orientation - degrees + 360) % 360;
     }
-    mRotation = rotation;
     try {
-      mCamera.setDisplayOrientation(orientation);
       final Camera.Parameters params = mCamera.getParameters();
-      params.setRotation(rotation);
+      params.setRotation(mRotation);
       mCamera.setParameters(params);
     } catch (final RuntimeException e) {
       LogUtil.e(
@@ -589,7 +581,6 @@ public class CameraManager implements FocusOverlayManager.Listener {
         mOrientationHandler.disable();
         mOrientationHandler = null;
       }
-      //      releaseMediaRecorder(true /* cleanupFile */);
       mFocusOverlayManager.onPreviewStopped();
       return;
     }

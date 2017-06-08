@@ -26,8 +26,6 @@ import android.support.design.widget.Snackbar;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.dialer.buildtype.BuildType;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.ConfigProvider;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
@@ -203,19 +201,7 @@ public class PostCall {
   }
 
   private static boolean isEnabled(Context context) {
-    @BuildType.Type int type = BuildType.get();
-    switch (type) {
-      case BuildType.BUGFOOD:
-      case BuildType.DOGFOOD:
-      case BuildType.FISHFOOD:
-      case BuildType.TEST:
-        return ConfigProviderBindings.get(context).getBoolean("enable_post_call", true);
-      case BuildType.RELEASE:
-        return ConfigProviderBindings.get(context).getBoolean("enable_post_call_prod", true);
-      default:
-        Assert.fail();
-        return false;
-    }
+    return ConfigProviderBindings.get(context).getBoolean("enable_post_call_prod", true);
   }
 
   private static boolean isSimReady(Context context) {

@@ -52,8 +52,6 @@
   <!-- Colour of voicemail progress bar to the left of position indicator. -->
   <color name="voicemail_playback_seek_bar_already_played">@color/dialer_theme_color</color>
 
-  <!-- Background color of new dialer activity -->
-  <color name="background_dialer_light">#fafafa</color>
   <!-- Background color for search results and call details -->
   <color name="background_dialer_results">#f9f9f9</color>
   <color name="background_dialer_call_log">@color/background_dialer_light</color>
@@ -68,8 +66,6 @@
 
   <!-- Undo dialogue color -->
   <color name="undo_dialogue_text_color">#4d4d4d</color>
-
-  <color name="empty_list_text_color">#b2b2b2</color>
 
   <color name="remove_text_color">#ffffff</color>
 

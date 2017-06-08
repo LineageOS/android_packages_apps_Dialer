@@ -30,6 +30,12 @@
        used in the Launcher icon. -->
   <string name="launcherActivityLabel">Phone</string>
 
+  <!-- Text presented to the user explaining that we have enabled the camera permission automatically -->
+  <string name="camera_privacy_text">Camera permission enabled</string>
+
+  <!-- text on a button, Video call, as in to place a video call. -->
+  <string name="video_call">Video call</string>
+
   <!-- Label shown on the 'positive' button for the dialog. Indicates that the call will proceed -->
   <string name="call">Call</string>
 </resources>
