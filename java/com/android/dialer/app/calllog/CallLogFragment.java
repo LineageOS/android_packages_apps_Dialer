@@ -49,15 +49,16 @@ import com.android.dialer.app.contactinfo.ContactInfoCache.OnContactInfoChangedL
 import com.android.dialer.app.contactinfo.ExpirableCacheHeadlessFragment;
 import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
-import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call (all, missed or
@@ -66,6 +67,7 @@ import com.android.dialer.util.PermissionsUtil;
 public class CallLogFragment extends Fragment
     implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher,
+        CallLogAdapter.MultiSelectRemoveView,
         OnEmptyViewActionButtonClickedListener,
         FragmentCompat.OnRequestPermissionsResultCallback,
         CallLogModalAlertManager.Listener {
@@ -317,6 +319,7 @@ public class CallLogFragment extends Fragment
                 getActivity(),
                 mRecyclerView,
                 this,
+                this,
                 CallLogCache.getCallLogCache(getActivity()),
                 mContactInfoCache,
                 getVoicemailPlaybackPresenter(),
@@ -377,6 +380,16 @@ public class CallLogFragment extends Fragment
     cancelDisplayUpdate();
     mAdapter.onPause();
     super.onPause();
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    CequintCallerIdManager cequintCallerIdManager = null;
+    if (CequintCallerIdManager.isCequintCallerIdEnabled(getContext())) {
+      cequintCallerIdManager = CequintCallerIdManager.createInstanceForCallLog();
+    }
+    mContactInfoCache.setCequintCallerIdManager(cequintCallerIdManager);
   }
 
   @Override
@@ -451,6 +464,8 @@ public class CallLogFragment extends Fragment
       mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
     } else if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
       mEmptyListView.setActionLabel(R.string.call_log_all_empty_action);
+    } else {
+      mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
     }
   }
 
@@ -587,6 +602,16 @@ public class CallLogFragment extends Fragment
         hostInterface.enableFloatingButton(true);
       }
     }
+  }
+
+  @Override
+  public void showMultiSelectRemoveView(boolean show) {
+    ((ListsFragment) getParentFragment()).showMultiSelectRemoveView(show);
+  }
+
+  @Override
+  public void setSelectAllModeToFalse() {
+    ((ListsFragment) getParentFragment()).setSelectAllModeToFalse();
   }
 
   public interface HostInterface {

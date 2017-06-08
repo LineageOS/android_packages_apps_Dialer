@@ -225,14 +225,18 @@ public class DefaultVoicemailNotifier implements Worker<Void, Void> {
       int count,
       String voicemailNumber,
       PendingIntent callVoicemailIntent,
-      PendingIntent voicemailSettingIntent) {
+      PendingIntent voicemailSettingIntent,
+      boolean isRefresh) {
     Assert.isNotNull(phoneAccountHandle);
     Assert.checkArgument(BuildCompat.isAtLeastO());
     TelephonyManager telephonyManager =
         context
             .getSystemService(TelephonyManager.class)
             .createForPhoneAccountHandle(phoneAccountHandle);
-    Assert.isNotNull(telephonyManager);
+    if (telephonyManager == null) {
+      LogUtil.e(TAG, "invalid PhoneAccountHandle, ignoring");
+      return;
+    }
     LogUtil.i(TAG, "Creating legacy voicemail notification");
 
     PersistableBundle carrierConfig = telephonyManager.getCarrierConfig();
@@ -275,7 +279,8 @@ public class DefaultVoicemailNotifier implements Worker<Void, Void> {
         .setSound(telephonyManager.getVoicemailRingtoneUri(phoneAccountHandle))
         .setOngoing(
             carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_VOICEMAIL_NOTIFICATION_PERSISTENT_BOOL));
+                CarrierConfigManager.KEY_VOICEMAIL_NOTIFICATION_PERSISTENT_BOOL))
+        .setOnlyAlertOnce(isRefresh);
 
     if (telephonyManager.isVoicemailVibrationEnabled(phoneAccountHandle)) {
       builder.setDefaults(Notification.DEFAULT_VIBRATE);

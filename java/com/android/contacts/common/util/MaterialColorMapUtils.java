@@ -21,7 +21,6 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
-import com.android.contacts.common.R;
 
 public class MaterialColorMapUtils {
 
@@ -33,13 +32,6 @@ public class MaterialColorMapUtils {
         resources.obtainTypedArray(com.android.contacts.common.R.array.letter_tile_colors);
     sSecondaryColors =
         resources.obtainTypedArray(com.android.contacts.common.R.array.letter_tile_colors_dark);
-  }
-
-  public static MaterialPalette getDefaultPrimaryAndSecondaryColors(Resources resources) {
-    final int primaryColor = resources.getColor(R.color.quickcontact_default_photo_tint_color);
-    final int secondaryColor =
-        resources.getColor(R.color.quickcontact_default_photo_tint_color_dark);
-    return new MaterialPalette(primaryColor, secondaryColor);
   }
 
   /**

@@ -279,6 +279,34 @@
   <!-- Description for incoming calls going to voice mail vs. not -->
   <string name="actionIncomingCall">Incoming calls</string>
 
+  <!-- String describing the user entering bulk action mode.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+-->
+  <string name="description_entering_bulk_action_mode">Entering bulk action mode</string>
+
+  <!-- String describing the user leaving bulk action mode.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+-->
+  <string name="description_leaving_bulk_action_mode">Left bulk action mode</string>
+
+  <!-- String describing the button to select an entry for bulk action.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
+  <string name="description_selecting_bulk_action_mode">Selected <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+
+  <!-- String describing the button to unselect an entry for bulk action.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
+  <string name="description_unselecting_bulk_action_mode">Unselected <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+
   <!-- String describing the icon in the call log used to play a voicemail.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -362,11 +390,18 @@
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
   <string name="callDetailsDurationFormat"><xliff:g example="42" id="minutes">%s</xliff:g> min <xliff:g example="28" id="seconds">%s</xliff:g> sec</string>
 
+  <!-- String describing the cancel button in multi select.
+       Note: AccessibilityServices uses this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE] -->
+  <string name="description_cancel_multi_select">Cancel batch actions mode</string>
+
   <string name="voicemailMultiSelectVoicemail">voicemail</string>
   <string name="voicemailMultiSelectVoicemails">voicemails</string>
   <string name="voicemailMultiSelectDeleteConfirm">Yes</string>
   <string name="voicemailMultiSelectDeleteCancel">No</string>
   <string name="voicemailMultiSelectDialogTitle">Delete selected <xliff:g id="voicemailorvoicemails">%1$s</xliff:g>?</string>
+
+  <string name="voicemailMultiSelectActionBarTitle"><xliff:g id="number">%1$s</xliff:g> selected</string>
 
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
        explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
@@ -410,9 +445,6 @@
 
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
   <string name="simContacts_title">SIM card contacts</string>
-
-  <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
-  <string name="add_contact_not_available">No contacts app available</string>
 
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <string name="voice_search_not_available">Voice search not available</string>
@@ -514,12 +546,6 @@
   <!-- Shown as an action when there are no speed dial favorites -->
   <string name="speed_dial_empty_add_favorite_action">Add a favorite</string>
 
-  <!-- Shown when there are no contacts in the all contacts list. -->
-  <string name="all_contacts_empty">You don\'t have any contacts yet</string>
-
-  <!-- Shown as an action when the all contacts list is empty -->
-  <string name="all_contacts_empty_add_contact_action">Add a contact</string>
-
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
        card can be tapped to bring up a list of all numbers, or long pressed to start reordering
        [CHAR LIMIT=NONE]
@@ -528,6 +554,9 @@
 
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
   <string name="remove_contact">Remove</string>
+
+  <!-- Select all text that shows up when in multi select mode. [CHAR LIMIT=NONE] -->
+  <string name="select_all">Select all</string>
 
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
        Tapping causes a video call to be placed to the caller represented by the call log entry.
@@ -554,7 +583,7 @@
         Call <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
 
-  <!-- String describing an incoming missed call entry in the call log.
+    <!-- String describing an incoming missed call entry in the call log.
        Note: AccessibilityServices uses this attribute to announce what the view represents.
        [CHAR LIMIT=NONE] -->
   <string name="description_incoming_missed_call">Missed call from <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
@@ -841,9 +870,6 @@
   <!-- Internal key for DTMF tone length preference. -->
   <string name="dtmf_tone_length_preference_key" translatable="false">button_dtmf_settings</string>
 
-  <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
-  <string name="permission_single_turn_on">Turn on</string>
-
   <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
   <string name="permission_multiple_turn_on">Set permissions</string>
 
@@ -852,9 +878,6 @@
 
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <string name="permission_no_calllog">To see your call log, turn on the Phone permission.</string>
-
-  <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
-  <string name="permission_no_contacts">To see your contacts, turn on the Contacts permission.</string>
 
   <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
   <string name="permission_no_voicemail">To access your voicemail, turn on the Phone permission.</string>

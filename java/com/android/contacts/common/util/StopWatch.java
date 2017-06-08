@@ -16,7 +16,7 @@
 
 package com.android.contacts.common.util;
 
-import android.util.Log;
+import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 
 /** A {@link StopWatch} records start, laps and stop, and print them to logcat. */
@@ -35,11 +35,6 @@ public class StopWatch {
   /** Create a new instance and start it. */
   public static StopWatch start(String label) {
     return new StopWatch(label);
-  }
-
-  /** Return a dummy instance that does no operations. */
-  public static StopWatch getNullStopWatch() {
-    return NullStopWatch.INSTANCE;
   }
 
   /** Record a lap. */
@@ -76,25 +71,6 @@ public class StopWatch {
       sb.append(" ");
       last = current;
     }
-    Log.v(TAG, sb.toString());
-  }
-
-  private static class NullStopWatch extends StopWatch {
-
-    public static final NullStopWatch INSTANCE = new NullStopWatch();
-
-    public NullStopWatch() {
-      super(null);
-    }
-
-    @Override
-    public void lap(String lapLabel) {
-      // noop
-    }
-
-    @Override
-    public void stopAndLog(String TAG, int timeThresholdToLog) {
-      // noop
-    }
+    LogUtil.v(TAG, sb.toString());
   }
 }

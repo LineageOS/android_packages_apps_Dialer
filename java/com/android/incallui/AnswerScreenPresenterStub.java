@@ -43,5 +43,11 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
   public void onAnswerAndReleaseCall() {}
 
   @Override
+  public void onAnswerAndReleaseButtonEnabled() {}
+
+  @Override
+  public void onAnswerAndReleaseButtonDisabled() {}
+
+  @Override
   public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {}
 }

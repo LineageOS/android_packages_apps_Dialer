@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -84,6 +85,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadView;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
@@ -625,6 +627,14 @@ public class DialpadFragment extends Fragment
     LogUtil.d("DialpadFragment.onResume", "");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
+
+    Resources res = getResources();
+    int iconId = R.drawable.quantum_ic_call_vd_theme_24;
+    if (MotorolaUtils.isWifiCallingAvailable(getContext())) {
+      iconId = R.drawable.ic_wifi_calling;
+    }
+    mFloatingActionButtonController.changeIcon(
+        res.getDrawable(iconId, null), res.getString(R.string.description_dial_button));
 
     final DialtactsActivity activity = (DialtactsActivity) getActivity();
     mDialpadQueryListener = activity;
