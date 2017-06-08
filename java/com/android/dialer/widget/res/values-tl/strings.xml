@@ -3,4 +3,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="custom_message_hint" msgid="2179012696339457461">"Sumulat ng custom na mensahe"</string>
     <string name="toolbar_close" msgid="1081308076149879833">"Isara"</string>
+    <string name="all_contacts_empty" msgid="4260556610403994011">"Wala ka pang sinumang contact"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="69234925354938480">"Magdagdag ng contact"</string>
+    <string name="permission_single_turn_on" msgid="1306416016676232584">"I-on"</string>
+    <string name="permission_no_contacts" msgid="2388204904477299207">"Upang makita ang iyong mga contact, i-on ang pahintulot ng Mga Contact."</string>
+    <string name="add_contact_not_available" msgid="3083256438899321502">"Walang available na app ng mga contact"</string>
 </resources>

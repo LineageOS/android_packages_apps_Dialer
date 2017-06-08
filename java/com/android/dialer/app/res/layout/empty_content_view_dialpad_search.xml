@@ -16,7 +16,7 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
   <ImageView
-    android:id="@+id/emptyListViewImage"
+    android:id="@+id/empty_list_view_image"
     android:layout_height="0dp"
     android:layout_weight="1"
     android:layout_width="match_parent"
@@ -24,7 +24,7 @@
     android:gravity="center_horizontal" />
 
   <TextView
-    android:id="@+id/emptyListViewMessage"
+    android:id="@+id/empty_list_view_message"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal|top"
@@ -36,7 +36,7 @@
     android:paddingBottom="8dp"/>
 
   <TextView
-    android:id="@+id/emptyListViewAction"
+    android:id="@+id/empty_list_view_action"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"

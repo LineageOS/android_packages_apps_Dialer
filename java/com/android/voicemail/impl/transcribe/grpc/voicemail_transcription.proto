@@ -1,0 +1,44 @@
+// LINT.IfChange
+
+syntax = "proto2";
+
+package google.internal.communications.voicemailtranscription.v1;
+
+option java_multiple_files = true;
+option java_package = "com.google.internal.communications.voicemailtranscription.v1";
+option optimize_for = LITE_RUNTIME;
+
+// Enum that specifies supported audio formats.
+enum AudioFormat {
+  // Default but invalid value.
+  AUDIO_FORMAT_UNSPECIFIED = 0;
+
+  // Adaptive Multi-Rate Narrowband, 8kHz sampling frequency.
+  // https://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec
+  AMR_NB_8KHZ = 1;
+}
+
+// Request for synchronous voicemail transcription.
+message TranscribeVoicemailRequest {
+  // Voicemail audio file containing the raw bytes we receive from the carrier.
+  optional bytes voicemail_data = 1;
+
+  // Audio format of the voicemail file.
+  optional AudioFormat audio_format = 2;
+}
+
+// Response for synchronous voicemail transcription.
+message TranscribeVoicemailResponse {
+  // The transcribed text of the voicemail.
+  optional string transcript = 1;
+}
+
+// RPC service for transcribing voicemails.
+service VoicemailTranscriptionService {
+  // Returns a transcript of the given voicemail.
+  rpc TranscribeVoicemail(TranscribeVoicemailRequest)
+      returns (TranscribeVoicemailResponse) {}
+}
+
+// LINT.ThenChange(//depot/google3/google/internal/communications/voicemailtranscription/v1/\
+//         voicemail_transcription.proto)

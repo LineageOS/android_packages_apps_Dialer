@@ -28,7 +28,7 @@ import android.support.v4.content.CursorLoader;
 public class GalleryCursorLoader extends CursorLoader {
   public static final String MEDIA_SCANNER_VOLUME_EXTERNAL = "external";
   public static final String[] ACCEPTABLE_IMAGE_TYPES =
-      new String[] {"image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp"};
+      new String[] {"image/jpeg", "image/jpg", "image/png", "image/webp"};
 
   private static final Uri STORAGE_URI = Files.getContentUri(MEDIA_SCANNER_VOLUME_EXTERNAL);
   private static final String SORT_ORDER = Media.DATE_MODIFIED + " DESC";
@@ -47,7 +47,7 @@ public class GalleryCursorLoader extends CursorLoader {
   @SuppressLint("DefaultLocale")
   private static String createSelection() {
     return String.format(
-        "mime_type IN ('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp')"
+        "mime_type IN ('image/jpeg', 'image/jpg', 'image/png', 'image/webp')"
             + " AND media_type in (%d)",
         FileColumns.MEDIA_TYPE_IMAGE);
   }

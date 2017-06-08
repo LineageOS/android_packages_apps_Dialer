@@ -55,7 +55,7 @@
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"पिन सेट करें"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"पुन: प्रयास करें"</string>
     <string name="voicemail_action_turn_archive_on" msgid="6008444955560830591">"चालू करें"</string>
-    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"नहीं धन्यवाद"</string>
+    <string name="voicemail_action_dimiss" msgid="6018415798136796966">"रहने दें"</string>
     <string name="voicemail_action_sync" msgid="5139315923415392787">"समन्वयित करें"</string>
     <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"वॉइसमेल को कॉल करें"</string>
     <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"ग्राहक सहायता को कॉल करें"</string>

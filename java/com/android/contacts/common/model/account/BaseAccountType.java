@@ -307,7 +307,7 @@ public abstract class BaseAccountType extends AccountType {
     DataKind kind =
         addKind(
             new DataKind(Phone.CONTENT_ITEM_TYPE, R.string.phoneLabelsGroup, Weight.PHONE, true));
-    kind.iconAltRes = R.drawable.quantum_ic_message_white_24;
+    kind.iconAltRes = R.drawable.quantum_ic_message_vd_theme_24;
     kind.iconAltDescriptionRes = R.string.sms;
     kind.actionHeader = new PhoneActionInflater();
     kind.actionAltHeader = new PhoneActionAltInflater();
@@ -1228,7 +1228,7 @@ public abstract class BaseAccountType extends AccountType {
               new PhoneActionInflater(),
               new SimpleInflater(Phone.NUMBER));
 
-      kind.iconAltRes = R.drawable.quantum_ic_message_white_24;
+      kind.iconAltRes = R.drawable.quantum_ic_message_vd_theme_24;
       kind.iconAltDescriptionRes = R.string.sms;
       kind.actionAltHeader = new PhoneActionAltInflater();
 

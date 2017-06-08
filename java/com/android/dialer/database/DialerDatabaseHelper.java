@@ -34,6 +34,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.util.StopWatch;
@@ -46,7 +47,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Database helper for smart dial. Designed as a singleton to make sure there is only one access
@@ -77,8 +77,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private static final int MAX_ENTRIES = 20;
 
   private final Context mContext;
-  private final Object mLock = new Object();
-  private final AtomicBoolean mInUpdate = new AtomicBoolean(false);
   private boolean mIsTestInstance = false;
 
   protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
@@ -596,218 +594,212 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * accordingly. It also queries the deleted contact database to remove newly deleted contacts
    * since last update.
    */
-  public void updateSmartDialDatabase() {
+  @WorkerThread
+  public synchronized void updateSmartDialDatabase() {
     LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
 
     final SQLiteDatabase db = getWritableDatabase();
 
-    synchronized (mLock) {
-      LogUtil.v("DialerDatabaseHelper.updateSmartDialDatabase", "starting to update database");
-      final StopWatch stopWatch = DEBUG ? StopWatch.start("Updating databases") : null;
+    LogUtil.v("DialerDatabaseHelper.updateSmartDialDatabase", "starting to update database");
+    final StopWatch stopWatch = DEBUG ? StopWatch.start("Updating databases") : null;
 
-      /** Gets the last update time on the database. */
-      final SharedPreferences databaseLastUpdateSharedPref =
-          mContext.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
-      final String lastUpdateMillis =
-          String.valueOf(databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
+    /** Gets the last update time on the database. */
+    final SharedPreferences databaseLastUpdateSharedPref =
+        mContext.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
+    final String lastUpdateMillis =
+        String.valueOf(databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
 
-      LogUtil.v(
-          "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at " + lastUpdateMillis);
+    LogUtil.v(
+        "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at " + lastUpdateMillis);
 
-      /** Sets the time after querying the database as the current update time. */
-      final Long currentMillis = System.currentTimeMillis();
+    /** Sets the time after querying the database as the current update time. */
+    final Long currentMillis = System.currentTimeMillis();
 
-      if (DEBUG) {
-        stopWatch.lap("Queried the Contacts database");
-      }
+    if (DEBUG) {
+      stopWatch.lap("Queried the Contacts database");
+    }
 
-      /** Prevents the app from reading the dialer database when updating. */
-      mInUpdate.getAndSet(true);
+    /** Removes contacts that have been deleted. */
+    removeDeletedContacts(db, getDeletedContactCursor(lastUpdateMillis));
+    removePotentiallyCorruptedContacts(db, lastUpdateMillis);
 
-      /** Removes contacts that have been deleted. */
-      removeDeletedContacts(db, getDeletedContactCursor(lastUpdateMillis));
-      removePotentiallyCorruptedContacts(db, lastUpdateMillis);
+    if (DEBUG) {
+      stopWatch.lap("Finished deleting deleted entries");
+    }
 
-      if (DEBUG) {
-        stopWatch.lap("Finished deleting deleted entries");
-      }
-
+    /**
+     * If the database did not exist before, jump through deletion as there is nothing to delete.
+     */
+    if (!lastUpdateMillis.equals("0")) {
       /**
-       * If the database did not exist before, jump through deletion as there is nothing to delete.
+       * Removes contacts that have been updated. Updated contact information will be inserted
+       * later. Note that this has to use a separate result set from updatePhoneCursor, since it is
+       * possible for a contact to be updated (e.g. phone number deleted), but have no results show
+       * up in updatedPhoneCursor (since all of its phone numbers have been deleted).
        */
-      if (!lastUpdateMillis.equals("0")) {
-        /**
-         * Removes contacts that have been updated. Updated contact information will be inserted
-         * later. Note that this has to use a separate result set from updatePhoneCursor, since it
-         * is possible for a contact to be updated (e.g. phone number deleted), but have no results
-         * show up in updatedPhoneCursor (since all of its phone numbers have been deleted).
-         */
-        final Cursor updatedContactCursor =
-            mContext
-                .getContentResolver()
-                .query(
-                    UpdatedContactQuery.URI,
-                    UpdatedContactQuery.PROJECTION,
-                    UpdatedContactQuery.SELECT_UPDATED_CLAUSE,
-                    new String[] {lastUpdateMillis},
-                    null);
-        if (updatedContactCursor == null) {
-          LogUtil.e(
-              "DialerDatabaseHelper.updateSmartDialDatabase",
-              "smartDial query received null for cursor");
-          return;
-        }
-        try {
-          removeUpdatedContacts(db, updatedContactCursor);
-        } finally {
-          updatedContactCursor.close();
-        }
-        if (DEBUG) {
-          stopWatch.lap("Finished deleting entries belonging to updated contacts");
-        }
-      }
-
-      /**
-       * Queries the contact database to get all phone numbers that have been updated since the last
-       * update time.
-       */
-      final Cursor updatedPhoneCursor =
+      final Cursor updatedContactCursor =
           mContext
               .getContentResolver()
               .query(
-                  PhoneQuery.URI,
-                  PhoneQuery.PROJECTION,
-                  PhoneQuery.SELECTION,
+                  UpdatedContactQuery.URI,
+                  UpdatedContactQuery.PROJECTION,
+                  UpdatedContactQuery.SELECT_UPDATED_CLAUSE,
                   new String[] {lastUpdateMillis},
                   null);
-      if (updatedPhoneCursor == null) {
+      if (updatedContactCursor == null) {
         LogUtil.e(
             "DialerDatabaseHelper.updateSmartDialDatabase",
             "smartDial query received null for cursor");
         return;
       }
-
       try {
-        /** Inserts recently updated phone numbers to the smartdial database. */
-        insertUpdatedContactsAndNumberPrefix(db, updatedPhoneCursor, currentMillis);
+        removeUpdatedContacts(db, updatedContactCursor);
+      } finally {
+        updatedContactCursor.close();
+      }
+      if (DEBUG) {
+        stopWatch.lap("Finished deleting entries belonging to updated contacts");
+      }
+    }
+
+    /**
+     * Queries the contact database to get all phone numbers that have been updated since the last
+     * update time.
+     */
+    final Cursor updatedPhoneCursor =
+        mContext
+            .getContentResolver()
+            .query(
+                PhoneQuery.URI,
+                PhoneQuery.PROJECTION,
+                PhoneQuery.SELECTION,
+                new String[] {lastUpdateMillis},
+                null);
+    if (updatedPhoneCursor == null) {
+      LogUtil.e(
+          "DialerDatabaseHelper.updateSmartDialDatabase",
+          "smartDial query received null for cursor");
+      return;
+    }
+
+    try {
+      /** Inserts recently updated phone numbers to the smartdial database. */
+      insertUpdatedContactsAndNumberPrefix(db, updatedPhoneCursor, currentMillis);
+      if (DEBUG) {
+        stopWatch.lap("Finished building the smart dial table");
+      }
+    } finally {
+      updatedPhoneCursor.close();
+    }
+
+    /**
+     * Gets a list of distinct contacts which have been updated, and adds the name prefixes of these
+     * contacts to the prefix table.
+     */
+    final Cursor nameCursor =
+        db.rawQuery(
+            "SELECT DISTINCT "
+                + SmartDialDbColumns.DISPLAY_NAME_PRIMARY
+                + ", "
+                + SmartDialDbColumns.CONTACT_ID
+                + " FROM "
+                + Tables.SMARTDIAL_TABLE
+                + " WHERE "
+                + SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME
+                + " = "
+                + currentMillis,
+            new String[] {});
+    if (nameCursor != null) {
+      try {
         if (DEBUG) {
-          stopWatch.lap("Finished building the smart dial table");
+          stopWatch.lap("Queried the smart dial table for contact names");
+        }
+
+        /** Inserts prefixes of names into the prefix table. */
+        insertNamePrefixes(db, nameCursor);
+        if (DEBUG) {
+          stopWatch.lap("Finished building the name prefix table");
         }
       } finally {
-        updatedPhoneCursor.close();
+        nameCursor.close();
       }
-
-      /**
-       * Gets a list of distinct contacts which have been updated, and adds the name prefixes of
-       * these contacts to the prefix table.
-       */
-      final Cursor nameCursor =
-          db.rawQuery(
-              "SELECT DISTINCT "
-                  + SmartDialDbColumns.DISPLAY_NAME_PRIMARY
-                  + ", "
-                  + SmartDialDbColumns.CONTACT_ID
-                  + " FROM "
-                  + Tables.SMARTDIAL_TABLE
-                  + " WHERE "
-                  + SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME
-                  + " = "
-                  + Long.toString(currentMillis),
-              new String[] {});
-      if (nameCursor != null) {
-        try {
-          if (DEBUG) {
-            stopWatch.lap("Queried the smart dial table for contact names");
-          }
-
-          /** Inserts prefixes of names into the prefix table. */
-          insertNamePrefixes(db, nameCursor);
-          if (DEBUG) {
-            stopWatch.lap("Finished building the name prefix table");
-          }
-        } finally {
-          nameCursor.close();
-        }
-      }
-
-      /** Creates index on contact_id for fast JOIN operation. */
-      db.execSQL(
-          "CREATE INDEX IF NOT EXISTS smartdial_contact_id_index ON "
-              + Tables.SMARTDIAL_TABLE
-              + " ("
-              + SmartDialDbColumns.CONTACT_ID
-              + ");");
-      /** Creates index on last_smartdial_update_time for fast SELECT operation. */
-      db.execSQL(
-          "CREATE INDEX IF NOT EXISTS smartdial_last_update_index ON "
-              + Tables.SMARTDIAL_TABLE
-              + " ("
-              + SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME
-              + ");");
-      /** Creates index on sorting fields for fast sort operation. */
-      db.execSQL(
-          "CREATE INDEX IF NOT EXISTS smartdial_sort_index ON "
-              + Tables.SMARTDIAL_TABLE
-              + " ("
-              + SmartDialDbColumns.STARRED
-              + ", "
-              + SmartDialDbColumns.IS_SUPER_PRIMARY
-              + ", "
-              + SmartDialDbColumns.LAST_TIME_USED
-              + ", "
-              + SmartDialDbColumns.TIMES_USED
-              + ", "
-              + SmartDialDbColumns.IN_VISIBLE_GROUP
-              + ", "
-              + SmartDialDbColumns.DISPLAY_NAME_PRIMARY
-              + ", "
-              + SmartDialDbColumns.CONTACT_ID
-              + ", "
-              + SmartDialDbColumns.IS_PRIMARY
-              + ");");
-      /** Creates index on prefix for fast SELECT operation. */
-      db.execSQL(
-          "CREATE INDEX IF NOT EXISTS nameprefix_index ON "
-              + Tables.PREFIX_TABLE
-              + " ("
-              + PrefixColumns.PREFIX
-              + ");");
-      /** Creates index on contact_id for fast JOIN operation. */
-      db.execSQL(
-          "CREATE INDEX IF NOT EXISTS nameprefix_contact_id_index ON "
-              + Tables.PREFIX_TABLE
-              + " ("
-              + PrefixColumns.CONTACT_ID
-              + ");");
-
-      if (DEBUG) {
-        stopWatch.lap(TAG + "Finished recreating index");
-      }
-
-      /** Updates the database index statistics. */
-      db.execSQL("ANALYZE " + Tables.SMARTDIAL_TABLE);
-      db.execSQL("ANALYZE " + Tables.PREFIX_TABLE);
-      db.execSQL("ANALYZE smartdial_contact_id_index");
-      db.execSQL("ANALYZE smartdial_last_update_index");
-      db.execSQL("ANALYZE nameprefix_index");
-      db.execSQL("ANALYZE nameprefix_contact_id_index");
-      if (DEBUG) {
-        stopWatch.stopAndLog(TAG + "Finished updating index stats", 0);
-      }
-
-      mInUpdate.getAndSet(false);
-
-      final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
-      editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
-      editor.apply();
-
-      LogUtil.i("DialerDatabaseHelper.updateSmartDialDatabase", "broadcasting smart dial update");
-
-      // Notify content observers that smart dial database has been updated.
-      Intent intent = new Intent(ACTION_SMART_DIAL_UPDATED);
-      intent.setPackage(mContext.getPackageName());
-      mContext.sendBroadcast(intent);
     }
+
+    /** Creates index on contact_id for fast JOIN operation. */
+    db.execSQL(
+        "CREATE INDEX IF NOT EXISTS smartdial_contact_id_index ON "
+            + Tables.SMARTDIAL_TABLE
+            + " ("
+            + SmartDialDbColumns.CONTACT_ID
+            + ");");
+    /** Creates index on last_smartdial_update_time for fast SELECT operation. */
+    db.execSQL(
+        "CREATE INDEX IF NOT EXISTS smartdial_last_update_index ON "
+            + Tables.SMARTDIAL_TABLE
+            + " ("
+            + SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME
+            + ");");
+    /** Creates index on sorting fields for fast sort operation. */
+    db.execSQL(
+        "CREATE INDEX IF NOT EXISTS smartdial_sort_index ON "
+            + Tables.SMARTDIAL_TABLE
+            + " ("
+            + SmartDialDbColumns.STARRED
+            + ", "
+            + SmartDialDbColumns.IS_SUPER_PRIMARY
+            + ", "
+            + SmartDialDbColumns.LAST_TIME_USED
+            + ", "
+            + SmartDialDbColumns.TIMES_USED
+            + ", "
+            + SmartDialDbColumns.IN_VISIBLE_GROUP
+            + ", "
+            + SmartDialDbColumns.DISPLAY_NAME_PRIMARY
+            + ", "
+            + SmartDialDbColumns.CONTACT_ID
+            + ", "
+            + SmartDialDbColumns.IS_PRIMARY
+            + ");");
+    /** Creates index on prefix for fast SELECT operation. */
+    db.execSQL(
+        "CREATE INDEX IF NOT EXISTS nameprefix_index ON "
+            + Tables.PREFIX_TABLE
+            + " ("
+            + PrefixColumns.PREFIX
+            + ");");
+    /** Creates index on contact_id for fast JOIN operation. */
+    db.execSQL(
+        "CREATE INDEX IF NOT EXISTS nameprefix_contact_id_index ON "
+            + Tables.PREFIX_TABLE
+            + " ("
+            + PrefixColumns.CONTACT_ID
+            + ");");
+
+    if (DEBUG) {
+      stopWatch.lap(TAG + "Finished recreating index");
+    }
+
+    /** Updates the database index statistics. */
+    db.execSQL("ANALYZE " + Tables.SMARTDIAL_TABLE);
+    db.execSQL("ANALYZE " + Tables.PREFIX_TABLE);
+    db.execSQL("ANALYZE smartdial_contact_id_index");
+    db.execSQL("ANALYZE smartdial_last_update_index");
+    db.execSQL("ANALYZE nameprefix_index");
+    db.execSQL("ANALYZE nameprefix_contact_id_index");
+    if (DEBUG) {
+      stopWatch.stopAndLog(TAG + "Finished updating index stats", 0);
+    }
+
+    final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
+    editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
+    editor.apply();
+
+    LogUtil.i("DialerDatabaseHelper.updateSmartDialDatabase", "broadcasting smart dial update");
+
+    // Notify content observers that smart dial database has been updated.
+    Intent intent = new Intent(ACTION_SMART_DIAL_UPDATED);
+    intent.setPackage(mContext.getPackageName());
+    mContext.sendBroadcast(intent);
   }
 
   /**
@@ -817,12 +809,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * @param query The prefix of a contact's dialpad index.
    * @return A list of top candidate contacts that will be suggested to user to match their input.
    */
-  public ArrayList<ContactNumber> getLooseMatches(String query, SmartDialNameMatcher nameMatcher) {
-    final boolean inUpdate = mInUpdate.get();
-    if (inUpdate) {
-      return new ArrayList<>();
-    }
-
+  @WorkerThread
+  public synchronized ArrayList<ContactNumber> getLooseMatches(
+      String query, SmartDialNameMatcher nameMatcher) {
     final SQLiteDatabase db = getReadableDatabase();
 
     /** Uses SQL query wildcard '%' to represent prefix matching. */

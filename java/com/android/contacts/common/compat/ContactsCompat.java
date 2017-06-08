@@ -21,7 +21,6 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import com.android.dialer.compat.CompatUtils;
 
 /** Compatibility class for {@link ContactsContract.Contacts} */
 public class ContactsCompat {
@@ -29,8 +28,6 @@ public class ContactsCompat {
   // TODO: Use N APIs
   private static final Uri ENTERPRISE_CONTENT_FILTER_URI =
       Uri.withAppendedPath(Contacts.CONTENT_URI, "filter_enterprise");
-  // Copied from ContactsContract.Contacts#ENTERPRISE_CONTACT_ID_BASE, which is hidden.
-  private static final long ENTERPRISE_CONTACT_ID_BASE = 1000000000;
 
   /** Not instantiable. */
   private ContactsCompat() {}
@@ -40,18 +37,5 @@ public class ContactsCompat {
       return ENTERPRISE_CONTENT_FILTER_URI;
     }
     return Contacts.CONTENT_FILTER_URI;
-  }
-
-  /**
-   * Return {@code true} if a contact ID is from the contacts provider on the enterprise profile.
-   */
-  public static boolean isEnterpriseContactId(long contactId) {
-    if (CompatUtils.isLollipopCompatible()) {
-      return Contacts.isEnterpriseContactId(contactId);
-    } else {
-      // copied from ContactsContract.Contacts.isEnterpriseContactId
-      return (contactId >= ENTERPRISE_CONTACT_ID_BASE)
-          && (contactId < ContactsContract.Profile.MIN_ID);
-    }
   }
 }

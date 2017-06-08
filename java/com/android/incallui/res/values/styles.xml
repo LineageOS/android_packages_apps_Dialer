@@ -78,4 +78,13 @@
     <item name="android:colorAccent">@color/dialer_theme_color</item>
   </style>
 
+  <style name="Theme.Incall.DialogHolder" parent="Theme.AppCompat.Translucent">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowActivityTransitions">false</item>
+
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
 </resources>

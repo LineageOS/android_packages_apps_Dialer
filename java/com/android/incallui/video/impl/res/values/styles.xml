@@ -23,7 +23,8 @@
     <item name="android:stateListAnimator">@animator/disabled_alpha</item>
   </style>
   <style name="VideoPreviewHolder">
-    <item name="android:layout_gravity">bottom|start</item>
+    <item name="android:layout_alignParentBottom">true</item>
+    <item name="android:layout_alignParentStart">true</item>
     <item name="android:layout_width">@dimen/videocall_preview_width</item>
     <item name="android:layout_height">@dimen/videocall_preview_long</item>
     <item name="android:layout_marginBottom">@dimen/videocall_preview_margin_bottom</item>

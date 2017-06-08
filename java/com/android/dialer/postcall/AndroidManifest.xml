@@ -21,7 +21,7 @@
     <activity
       android:name="com.android.dialer.postcall.PostCallActivity"
       android:exported="false"
-      android:theme="@style/Theme.AppCompat.NoActionBar"
+      android:theme="@style/DialerThemeBase.NoActionBar"
       android:windowSoftInputMode="adjustResize"
       android:screenOrientation="portrait"/>
   </application>

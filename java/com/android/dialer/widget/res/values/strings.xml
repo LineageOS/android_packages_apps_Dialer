@@ -5,4 +5,19 @@
 
   <!-- Accessibility string for close/navigation icon in DialerToolbar -->
   <string name="toolbar_close">Close</string>
+
+  <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
+  <string name="all_contacts_empty">You don\'t have any contacts yet</string>
+
+  <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
+  <string name="all_contacts_empty_add_contact_action">Add a contact</string>
+
+  <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
+  <string name="permission_single_turn_on">Turn on</string>
+
+  <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
+  <string name="permission_no_contacts">To see your contacts, turn on the Contacts permission.</string>
+
+  <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
+  <string name="add_contact_not_available">No contacts app available</string>
 </resources>

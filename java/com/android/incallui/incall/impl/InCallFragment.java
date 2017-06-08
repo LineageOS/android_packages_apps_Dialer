@@ -473,6 +473,9 @@ public class InCallFragment extends Fragment
     inCallButtonUiDelegate.setAudioRoute(audioRoute);
   }
 
+  @Override
+  public void onAudioRouteSelectorDismiss() {}
+
   @NonNull
   @Override
   public ButtonController getButtonController(@InCallButtonIds int id) {
