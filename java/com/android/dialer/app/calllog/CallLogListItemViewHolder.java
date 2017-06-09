@@ -17,7 +17,6 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -32,6 +31,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -44,13 +44,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
-import com.android.contacts.common.lettertiles.LetterTileDrawable.ContactType;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
@@ -61,16 +58,15 @@ import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
+import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
-import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
@@ -254,20 +250,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     // Set text height to false on the TextViews so they don't have extra padding.
     phoneCallDetailsViews.nameView.setElegantTextHeight(false);
     phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
-
-    if (mContext instanceof CallLogActivity) {
-      Logger.get(mContext)
-          .logQuickContactOnTouch(
-              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_HISTORY, true);
-    } else if (mVoicemailPlaybackPresenter == null) {
-      Logger.get(mContext)
-          .logQuickContactOnTouch(
-              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_LOG, true);
-    } else {
-      Logger.get(mContext)
-          .logQuickContactOnTouch(
-              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_VOICEMAIL, false);
-    }
 
     quickContactView.setOverlay(null);
     if (CompatUtils.hasPrioritizedMimeType()) {
@@ -485,7 +467,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setContentDescription(
             TextUtils.expandTemplate(
                 mContext.getString(R.string.description_call_action), validNameOrNumber));
-        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
+        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_call_white_24);
         primaryActionButtonView.setVisibility(View.VISIBLE);
       } else {
         primaryActionButtonView.setTag(null);
@@ -735,14 +717,19 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             getContactType());
   }
 
-  private @ContactType int getContactType() {
-    return LetterTileDrawable.getContactTypeFromPrimitives(
-        mCallLogCache.isVoicemailNumber(accountHandle, number),
-        isSpam,
-        mCachedNumberLookupService != null
-            && mCachedNumberLookupService.isBusiness(info.sourceType),
-        numberPresentation,
-        false);
+  private int getContactType() {
+    int contactType = ContactPhotoManager.TYPE_DEFAULT;
+    if (mCallLogCache.isVoicemailNumber(accountHandle, number)) {
+      contactType = ContactPhotoManager.TYPE_VOICEMAIL;
+    } else if (isSpam) {
+      contactType = ContactPhotoManager.TYPE_SPAM;
+    } else if (mCachedNumberLookupService != null
+        && mCachedNumberLookupService.isBusiness(info.sourceType)) {
+      contactType = ContactPhotoManager.TYPE_BUSINESS;
+    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
+      contactType = ContactPhotoManager.TYPE_GENERIC_AVATAR;
+    }
+    return contactType;
   }
 
   @Override
@@ -808,40 +795,19 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       mVoicemailPlaybackPresenter.shareVoicemail();
     } else {
       logCallLogAction(view.getId());
-
       final IntentProvider intentProvider = (IntentProvider) view.getTag();
-      if (intentProvider == null) {
-        return;
-      }
-
-      final Intent intent = intentProvider.getIntent(mContext);
-      // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-      if (intent == null) {
-        return;
-      }
-
-      // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
-      // intents need to be started using startActivityForResult instead of the usual startActivity
-      String packageName = intent.getPackage();
-      if (packageName != null && packageName.equals(getLightbringer().getPackageName(mContext))) {
-        startLightbringerActivity(intent);
-      } else {
-        DialerUtils.startActivityWithErrorToast(mContext, intent);
+      if (intentProvider != null) {
+        final Intent intent = intentProvider.getIntent(mContext);
+        // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+        if (intent != null) {
+          DialerUtils.startActivityWithErrorToast(mContext, intent);
+        }
       }
     }
   }
 
-  private void startLightbringerActivity(Intent intent) {
-    try {
-      Activity activity = (Activity) mContext;
-      activity.startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER);
-    } catch (ActivityNotFoundException e) {
-      Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
-    }
-  }
-
-  private DialerContact buildContact() {
-    DialerContact.Builder contact = DialerContact.newBuilder();
+  private CallComposerContact buildContact() {
+    CallComposerContact.Builder contact = CallComposerContact.newBuilder();
     contact.setPhotoId(info.photoId);
     if (info.photoUri != null) {
       contact.setPhotoUri(info.photoUri.toString());

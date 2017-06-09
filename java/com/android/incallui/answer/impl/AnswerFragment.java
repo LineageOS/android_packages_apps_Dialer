@@ -427,10 +427,8 @@ public class AnswerFragment extends Fragment
 
     if (allowAnswerAndRelease()) {
       answerAndReleaseButton.setVisibility(View.VISIBLE);
-      answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
     } else {
       answerAndReleaseButton.setVisibility(View.INVISIBLE);
-      answerScreenDelegate.onAnswerAndReleaseButtonDisabled();
     }
   }
 
@@ -932,7 +930,7 @@ public class AnswerFragment extends Fragment
         if (hasCallOnHold()) {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_third));
-        } else if (primaryCallState.supportsCallOnHold) {
+        } else {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_second));
         }

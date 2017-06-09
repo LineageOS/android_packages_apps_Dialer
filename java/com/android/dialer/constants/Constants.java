@@ -53,8 +53,5 @@ public abstract class Constants {
   @NonNull
   public abstract String getFileProviderAuthority();
 
-  @NonNull
-  public abstract String getAnnotatedCallLogProviderAuthority();
-
   protected Constants() {}
 }

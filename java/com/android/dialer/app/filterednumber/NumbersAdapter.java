@@ -28,7 +28,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.compat.CompatUtils;
@@ -99,8 +98,8 @@ public class NumbersAdapter extends SimpleCursorAdapter {
         info.lookupUri == null ? null : UriUtils.getLookupKeyFromUri(info.lookupUri);
     final int contactType =
         mContactInfoHelper.isBusiness(info.sourceType)
-            ? LetterTileDrawable.TYPE_BUSINESS
-            : LetterTileDrawable.TYPE_DEFAULT;
+            ? ContactPhotoManager.TYPE_BUSINESS
+            : ContactPhotoManager.TYPE_DEFAULT;
     final DefaultImageRequest request =
         new DefaultImageRequest(displayName, lookupKey, contactType, true /* isCircular */);
     badge.assignContactUri(info.lookupUri);

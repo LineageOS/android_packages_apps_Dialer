@@ -27,6 +27,10 @@
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="call_details_edit_number">Edit number before call</string>
 
+  <!-- String describing the phone icon on a call log list item. When tapped, it will place a
+       call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
+  <string name="description_call_log_call_action">Call</string>
+
   <!-- String shown when the call details show a image that was sent -->
   <string name="sent_a_photo">Sent a photo</string>
 

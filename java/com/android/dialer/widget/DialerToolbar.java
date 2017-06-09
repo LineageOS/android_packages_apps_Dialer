@@ -41,11 +41,6 @@ public class DialerToolbar extends Toolbar {
     setNavigationIcon(R.drawable.quantum_ic_close_white_24);
     setNavigationContentDescription(R.string.toolbar_close);
     setNavigationOnClickListener(v -> ((Activity) context).finish());
-    setPaddingRelative(
-        getPaddingStart(),
-        getPaddingTop(),
-        getResources().getDimensionPixelSize(R.dimen.toolbar_end_padding),
-        getPaddingBottom());
   }
 
   @Override

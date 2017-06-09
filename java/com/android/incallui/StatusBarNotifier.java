@@ -62,11 +62,11 @@ import android.text.style.ForegroundColorSpan;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.lettertiles.LetterTileDrawable;
-import com.android.contacts.common.lettertiles.LetterTileDrawable.ContactType;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.multimedia.MultimediaData;
@@ -565,9 +565,8 @@ public class StatusBarNotifier
   @VisibleForTesting
   @Nullable
   String getContentTitle(ContactCacheEntry contactInfo, DialerCall call) {
-    if (call.isConferenceCall()) {
-      return CallerInfoUtils.getConferenceString(
-          mContext, call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE));
+    if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
+      return mContext.getResources().getString(R.string.conference_call_name);
     }
 
     String preferredName =
@@ -605,16 +604,20 @@ public class StatusBarNotifier
     if (contactInfo.photo == null) {
       int width = (int) resources.getDimension(android.R.dimen.notification_large_icon_width);
       int height = (int) resources.getDimension(android.R.dimen.notification_large_icon_height);
-      @ContactType
-      int contactType =
-          LetterTileDrawable.getContactTypeFromPrimitives(
-              CallerInfoUtils.isVoiceMailNumber(context, call),
-              call.isSpam(),
-              contactInfo.isBusiness,
-              call.getNumberPresentation(),
-              call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE));
+      int contactType = LetterTileDrawable.TYPE_DEFAULT;
       LetterTileDrawable lettertile = new LetterTileDrawable(resources);
 
+      // TODO: Deduplicate across Dialer. b/36195917
+      if (CallerInfoUtils.isVoiceMailNumber(context, call)) {
+        contactType = LetterTileDrawable.TYPE_VOICEMAIL;
+      } else if (contactInfo.isBusiness) {
+        contactType = LetterTileDrawable.TYPE_BUSINESS;
+      } else if (call.getNumberPresentation() == TelecomManager.PRESENTATION_RESTRICTED) {
+        contactType = LetterTileDrawable.TYPE_GENERIC_AVATAR;
+      } else if (call.isConferenceCall()
+          && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
+        contactType = LetterTileDrawable.TYPE_CONFERENCE;
+      }
       lettertile.setCanonicalDialerLetterTileDetails(
           contactInfo.namePrimary == null ? contactInfo.number : contactInfo.namePrimary,
           contactInfo.lookupKey,
@@ -691,10 +694,20 @@ public class StatusBarNotifier
     }
 
     if (isIncomingOrWaiting) {
+      EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
+      Session session = null;
+      if (call.getNumber() != null) {
+        session =
+            manager.getSession(
+                call.getUniqueCallId(),
+                call.getNumber(),
+                manager.createIncomingCallComposerFilter());
+      }
+
       if (call.isSpam()) {
         resId = R.string.notification_incoming_spam_call;
-      } else if (shouldShowEnrichedCallNotification(call.getEnrichedCallSession())) {
-        resId = getECIncomingCallText(call.getEnrichedCallSession());
+      } else if (session != null) {
+        resId = getECIncomingCallText(session);
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
         resId = R.string.notification_incoming_call_wifi;
       } else {
@@ -716,13 +729,6 @@ public class StatusBarNotifier
     }
 
     return mContext.getString(resId);
-  }
-
-  private boolean shouldShowEnrichedCallNotification(Session session) {
-    if (session == null) {
-      return false;
-    }
-    return session.getMultimediaData().hasData() || session.getMultimediaData().isImportant();
   }
 
   private int getECIncomingCallText(Session session) {
@@ -750,10 +756,8 @@ public class StatusBarNotifier
         } else {
           resId = R.string.important_notification_incoming_call_with_photo;
         }
-      } else if (hasSubject) {
-        resId = R.string.important_notification_incoming_call_with_message;
       } else {
-        resId = R.string.important_notification_incoming_call;
+        resId = R.string.important_notification_incoming_call_with_message;
       }
       if (mContext.getString(resId).length() > 50) {
         resId = R.string.important_notification_incoming_call_attachments;
@@ -1000,9 +1004,6 @@ public class StatusBarNotifier
 
     @Override
     public void onInternationalCallOnWifi() {}
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
 
     /**
      * Responds to changes in the session modification state for the call by dismissing the status

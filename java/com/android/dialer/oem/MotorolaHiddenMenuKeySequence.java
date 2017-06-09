@@ -67,7 +67,9 @@ public class MotorolaHiddenMenuKeySequence {
   }
 
   private MotorolaHiddenMenuKeySequence(Context context) {
-    featureHiddenMenuEnabled = MotorolaUtils.isSupportingHiddenMenu(context);
+    featureHiddenMenuEnabled =
+        MotorolaUtils.isSpnMatched(context)
+            && context.getResources().getBoolean(R.bool.motorola_feature_hidden_menu);
     // In case we do have a SPN from resource we need to match from service; otherwise we are
     // free to go
     if (featureHiddenMenuEnabled) {

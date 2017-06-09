@@ -5,12 +5,11 @@ option java_package = "com.android.dialer.logging";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
-
 message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag:1196
+  // Next Tag:1191
   enum Type {
 
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
@@ -387,21 +386,5 @@ message DialerImpression {
     VVM_STATUS_CHECK_REACTIVATION = 1189;
 
     VVM_ARCHIVE_AUTO_DELETE_FAILED_DUE_TO_FAILED_QUOTA_CHECK = 1190;
-
-    // User pressed the speaker phone button on the return-to-call bubble
-    BUBBLE_TURN_ON_SPEAKERPHONE = 1191;
-    // User pressed the speaker phone button again on the return-to-call bubble
-    BUBBLE_TURN_ON_WIRED_OR_EARPIECE = 1192;
-    // User muted the call from the return-to-call bubble
-    BUBBLE_MUTE_CALL = 1193;
-    // User unmuted the call from the return-to-call bubble
-    BUBBLE_UNMUTE_CALL = 1194;
-    // User ended the call from the return-to-call bubble
-    BUBBLE_END_CALL = 1195;
-
-    LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH = 1196;
-    LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG = 1197;
-    IMS_VIDEO_REQUESTED_FROM_SEARCH = 1198;
-    IMS_VIDEO_REQUESTED_FROM_CALL_LOG = 1199;
   }
 }

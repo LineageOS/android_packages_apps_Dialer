@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.sessiondata.MultimediaFragment;
 
@@ -46,7 +47,8 @@ public class InCallPagerAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public int getCount() {
-    if (attachments != null && attachments.hasData()) {
+    if (attachments != null
+        && (!TextUtils.isEmpty(attachments.getText()) || attachments.hasImageData())) {
       return 2;
     }
     return 1;

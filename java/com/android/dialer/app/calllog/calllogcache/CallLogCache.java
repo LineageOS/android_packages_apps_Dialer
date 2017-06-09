@@ -19,6 +19,7 @@ package com.android.dialer.app.calllog.calllogcache;
 import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.calllog.CallLogAdapter;
+import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.util.CallUtil;
 
 /**
@@ -45,7 +46,10 @@ public abstract class CallLogCache {
 
   /** Return the most compatible version of the TelecomCallLogCache. */
   public static CallLogCache getCallLogCache(Context context) {
-    return new CallLogCacheLollipopMr1(context);
+    if (CompatUtils.isClassAvailable("android.telecom.PhoneAccountHandle")) {
+      return new CallLogCacheLollipopMr1(context);
+    }
+    return new CallLogCacheLollipop(context);
   }
 
   public void reset() {

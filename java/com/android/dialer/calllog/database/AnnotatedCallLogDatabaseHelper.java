@@ -16,25 +16,28 @@
 
 package com.android.dialer.calllog.database;
 
+import static com.android.dialer.calllog.database.AnnotatedCallLog.Columns.CONTACT_NAME;
+import static com.android.dialer.calllog.database.AnnotatedCallLog.Columns.ID;
+import static com.android.dialer.calllog.database.AnnotatedCallLog.Columns.TIMESTAMP;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
 
 /** {@link SQLiteOpenHelper} for the AnnotatedCallLog database. */
 class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
-  AnnotatedCallLogDatabaseHelper(Context appContext) {
-    super(appContext, "annotated_call_log.db", null, 1);
+  AnnotatedCallLogDatabaseHelper(Context appContext, String databaseName) {
+    super(appContext, databaseName, null, 1);
   }
 
   private static final String CREATE_SQL =
       new StringBuilder()
-          .append("create table if not exists " + AnnotatedCallLog.TABLE + " (")
-          .append(AnnotatedCallLog._ID + " integer primary key, ")
-          .append(AnnotatedCallLog.TIMESTAMP + " integer, ")
-          .append(AnnotatedCallLog.CONTACT_NAME + " string")
+          .append("create table if not exists " + AnnotatedCallLog.TABLE_NAME + " (")
+          .append(ID + " integer primary key, ")
+          .append(TIMESTAMP + " integer, ")
+          .append(CONTACT_NAME + " string")
           .append(");")
           .toString();
 

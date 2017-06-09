@@ -124,25 +124,8 @@ public class AnswerScreenPresenter
       LogUtil.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "activeCall == null");
       onAnswer(false);
     } else {
-      activeCall.setReleasedByAnsweringSecondCall(true);
       activeCall.addListener(new AnswerOnDisconnected(activeCall));
       activeCall.disconnect();
-    }
-  }
-
-  @Override
-  public void onAnswerAndReleaseButtonDisabled() {
-    DialerCall activeCall = CallList.getInstance().getActiveCall();
-    if (activeCall != null) {
-      activeCall.increaseSecondCallWithoutAnswerAndReleasedButtonTimes();
-    }
-  }
-
-  @Override
-  public void onAnswerAndReleaseButtonEnabled() {
-    DialerCall activeCall = CallList.getInstance().getActiveCall();
-    if (activeCall != null) {
-      activeCall.increaseAnswerAndReleaseButtonDisplayedTimes();
     }
   }
 
@@ -200,9 +183,6 @@ public class AnswerScreenPresenter
 
     @Override
     public void onInternationalCallOnWifi() {}
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

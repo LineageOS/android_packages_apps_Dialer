@@ -87,10 +87,6 @@
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Návrat k probíhajícímu hovoru"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"Přidat hovor"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"Příchozí volání"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Vstupování do režimu hromadných akcí"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Opustili jste režim hromadných akcí"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Položka <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> je vybrána"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Položka <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> není vybrána"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"Přehrát hlasovou schránku"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"Zobrazit kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="1532402285334775372">"Volat kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -105,13 +101,11 @@
     <string name="voicemail" msgid="8899540969000957954">"Hlasová schránka"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Zrušit režim hromadných akcí"</string>
     <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"vybranou hlasovou zprávu"</string>
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"vybrané hlasové zprávy"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Ano"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Ne"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Smazat <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"Vybráno: <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> v <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -124,6 +118,7 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Načítání ze SIM karty..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Kontakty na SIM kartě"</string>
+    <string name="add_contact_not_available" msgid="7065884447935173347">"Není k dispozici žádná aplikace pro práci s kontakty."</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"Hlasové vyhledávání není k dispozici."</string>
     <string name="call_not_available" msgid="7850148370757361155">"Telefonický hovor nelze uskutečnit, protože aplikace Telefon byla zakázána."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Vyhledat kontakty"</string>
@@ -152,9 +147,10 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"Nové zmeškané hovory: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"V rychlém vytáčení zatím nemáte žádný kontakt."</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Přidat oblíbený kontakt"</string>
+    <string name="all_contacts_empty" msgid="243071567853617177">"Zatím nemáte žádné kontakty"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Přidat kontakt"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"Klepnutím na obrázek zobrazíte všechna čísla. Podržením můžete změnit pořadí."</string>
     <string name="remove_contact" msgid="2353580570488923668">"Odstranit"</string>
-    <string name="select_all" msgid="408601760696146245">"Vybrat všechny"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Videohovor"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Odeslat zprávu"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Podrobnosti hovoru"</string>
@@ -221,9 +217,11 @@
     <string name="block_list" msgid="4701585783411870782">"Blokovaná čísla"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> je již blokováno."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"Účty pro volání"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"Zapnout"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"Nastavit oprávnění"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"Chcete-li povolit rychlé vytáčení, aktivujte oprávnění Kontakty."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"Chcete-li zobrazit seznam hovorů, aktivujte oprávnění Telefon."</string>
+    <string name="permission_no_contacts" msgid="8995025765862026771">"Chcete-li zobrazit kontakty, aktivujte oprávnění Kontakty."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Chcete-li přejít do hlasové schránky, aktivujte oprávnění Telefon."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"Chcete-li uskutečnit hovor, aktivujte oprávnění Telefon."</string>

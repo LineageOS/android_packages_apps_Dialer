@@ -18,22 +18,16 @@ package com.android.dialer.app.list;
 
 import android.content.ClipData;
 import android.content.Context;
-import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.MoreContactUtils;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.app.R;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallSpecificAppData;
-import com.android.dialer.callintent.SpeedDialContactType;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 
 /**
  * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in
@@ -48,6 +42,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
   // tile is long pressed.
   static final String DRAG_PHONE_FAVORITE_TILE = "PHONE_FAVORITE_TILE";
   private static final String TAG = PhoneFavoriteTileView.class.getSimpleName();
+  private static final boolean DEBUG = false;
   // These parameters instruct the photo manager to display the default image/letter at 70% of
   // its normal size, and vertically offset upwards 12% towards the top of the letter tile, to
   // make room for the contact name and number label at the bottom of the image.
@@ -60,8 +55,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
   private View mShadowOverlay;
   /** Users' most frequent phone number. */
   private String mPhoneNumberString;
-  private boolean isPinned;
-  private boolean isStarred;
 
   public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -90,8 +83,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     super.loadFromContact(entry);
     // Set phone number to null in case we're reusing the view.
     mPhoneNumberString = null;
-    isPinned = (entry.pinned != PinnedPositions.UNPINNED);
-    isStarred = entry.isFavorite;
     if (entry != null) {
       // Grab the phone-number to call directly. See {@link onClick()}.
       mPhoneNumberString = entry.phoneNumber;
@@ -122,35 +113,16 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         if (mListener == null) {
           return;
         }
-
-        CallSpecificAppData.Builder callSpecificAppData =
-            CallSpecificAppData.newBuilder()
-                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
-                .setSpeedDialContactPosition(
-                    ((PhoneFavoriteListView) v.getParent()).getPositionForView(v));
-        if (isStarred) {
-          callSpecificAppData.addSpeedDialContactType(SpeedDialContactType.Type.STARRED_CONTACT);
-        } else {
-          callSpecificAppData.addSpeedDialContactType(SpeedDialContactType.Type.FREQUENT_CONTACT);
-        }
-        if (isPinned) {
-          callSpecificAppData.addSpeedDialContactType(SpeedDialContactType.Type.PINNED_CONTACT);
-        }
-
         if (TextUtils.isEmpty(mPhoneNumberString)) {
           // Copy "superclass" implementation
-          Logger.get(getContext())
-              .logInteraction(InteractionEvent.Type.SPEED_DIAL_CLICK_CONTACT_WITH_AMBIGUOUS_NUMBER);
           mListener.onContactSelected(
-              getLookupUri(),
-              MoreContactUtils.getTargetRectFromView(PhoneFavoriteTileView.this),
-              callSpecificAppData.build());
+              getLookupUri(), MoreContactUtils.getTargetRectFromView(PhoneFavoriteTileView.this));
         } else {
           // When you tap a frequently-called contact, you want to
           // call them at the number that you usually talk to them
           // at (i.e. the one displayed in the UI), regardless of
           // whether that's their default number.
-          mListener.onCallNumberDirectly(mPhoneNumberString, callSpecificAppData.build());
+          mListener.onCallNumberDirectly(mPhoneNumberString);
         }
       }
     };
@@ -161,7 +133,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     return new DefaultImageRequest(
         displayName,
         lookupKey,
-        LetterTileDrawable.TYPE_DEFAULT,
+        ContactPhotoManager.TYPE_DEFAULT,
         DEFAULT_IMAGE_LETTER_SCALE,
         DEFAULT_IMAGE_LETTER_OFFSET,
         false);

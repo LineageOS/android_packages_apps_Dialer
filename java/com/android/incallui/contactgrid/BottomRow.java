@@ -22,6 +22,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -136,7 +137,7 @@ public class BottomRow {
   }
 
   private static CharSequence spanDisplayNumber(String displayNumber) {
-    return PhoneNumberUtils.createTtsSpannable(
+    return PhoneNumberUtilsCompat.createTtsSpannable(
         BidiFormatter.getInstance().unicodeWrap(displayNumber, TextDirectionHeuristics.LTR));
   }
 

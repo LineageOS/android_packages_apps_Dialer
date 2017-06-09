@@ -384,10 +384,11 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
       ContactInfoCache.ContactCacheEntry contactInfo,
       android.telecom.Call call) {
 
-    if (call.getDetails().hasProperty(android.telecom.Call.Details.PROPERTY_CONFERENCE)) {
-      return CallerInfoUtils.getConferenceString(
-          context,
-          call.getDetails().hasProperty(android.telecom.Call.Details.PROPERTY_GENERIC_CONFERENCE));
+    if (call.getDetails().hasProperty(android.telecom.Call.Details.PROPERTY_CONFERENCE)
+        && !call.getDetails()
+            .hasProperty(android.telecom.Call.Details.PROPERTY_GENERIC_CONFERENCE)) {
+
+      return context.getResources().getString(R.string.conference_call_name);
     }
 
     String preferredName =

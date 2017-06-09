@@ -85,10 +85,6 @@
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"පවතින ඇමතුමට නැවත යන්න"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"ඇමතුමක් එක් කරන්න"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"එන ඇමතුම්"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"තොග ක්‍රියා ප්‍රකාරය ඇතුළු කරමින්"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"තොග ක්‍රියා ප්‍රකාරය හැර යන ලදී"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> තෝරා ගන්නා ලදී"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> තෝරා ගැනීම ඉවත් කරන ලදී"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"හඬ තැපෑල ධාවනය කිරීම"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"<xliff:g id="NAME">%1$s</xliff:g> සම්බන්ධතාවය බලන්න"</string>
     <string name="description_call" msgid="1532402285334775372">"<xliff:g id="NAME">%1$s</xliff:g> අමතන්න"</string>
@@ -103,13 +99,11 @@
     <string name="voicemail" msgid="8899540969000957954">"හඬ තැපෑල"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"තත් <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"මිනි <xliff:g id="MINUTES">%s</xliff:g> තත් <xliff:g id="SECONDS">%s</xliff:g>"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"කාණ්ඩ ක්‍රියා ප්‍රකාරය අවලංගු කරන්න"</string>
     <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"හඬ තැපෑල"</string>
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"හඬ තැපැල්"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ඔව්"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"නැත"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"තෝරා ගත් <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> මකන්නද?"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> තෝරා ගන්නා ලදි"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> දින <xliff:g id="TIME">%2$s</xliff:g>ට"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -122,6 +116,7 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"SIM පතෙන් පූරණය කරමින්…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"SIM පත් සම්බන්ධතා"</string>
+    <string name="add_contact_not_available" msgid="7065884447935173347">"සබඳතා යෙදුමක් ලබාගත නොහැකිය"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"හඬ සෙවුම ලබාගත නොහැකිය"</string>
     <string name="call_not_available" msgid="7850148370757361155">"දුරකථන යෙදුම අබල කර ඇති නිසා දුරකථන ඇමතුම ලබාගැනීම කළ නොහැක."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"සම්බන්ධතා සෙවීම"</string>
@@ -150,9 +145,10 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"නව මඟ හැරුණු ඇමතුම් <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"ඔබගේ වේග ඩයල් එකේ තවමත් කවුරුවත් නැහැ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"ප්‍රියතම ලෙස එක් කරන්න"</string>
+    <string name="all_contacts_empty" msgid="243071567853617177">"ඔබ තවමත් සම්බන්ධතා නැහැ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"සම්බන්ධතාවයක් එක් කරන්න"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"සියලු අංක බැලීමට රූපය ස්පර්ශ කරන්න නැතහොත් නැවත අනුපිළිවෙළට සැකසීමට ස්පර්ශ කර අල්ලාගෙන සිටින්න"</string>
     <string name="remove_contact" msgid="2353580570488923668">"ඉවත් කරන්න"</string>
-    <string name="select_all" msgid="408601760696146245">"සියල්ල තෝරන්න"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"වීඩියෝ ඇමතුම"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"පණිවිඩයක් යවන්න"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"ඇමතුම් විස්තර"</string>
@@ -217,9 +213,11 @@
     <string name="block_list" msgid="4701585783411870782">"අවහිර කළ අංක"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> දැනටමත් අවහිර කර ඇත."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"ගිණුම් ඇමතීම"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"ක්‍රියාත්මක කරන්න"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"අවසර සකසන්න"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"වේග ඩයල් කිරීම සබල කිරීමට, සම්බන්ධතා අවසරය ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"ඔබේ ඇමතුම් ලොගය බැලීමට, දුරකථන අවසරය ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_contacts" msgid="8995025765862026771">"ඔබේ සම්බන්ධතා බැලීමට, සම්බන්ධතා අවසරය ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"ඔබේ හඬ තැපෑල වෙත ප්‍රවේශ වීමට, දුරකථන අවසරය ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"ඔබේ සම්බන්ධතා සෙවීමට, සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"ඇමතුමක් ලබා ගැනීමට, දුරකථන අවසරය ක්‍රියාත්මක කරන්න."</string>

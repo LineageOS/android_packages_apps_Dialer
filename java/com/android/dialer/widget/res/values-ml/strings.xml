@@ -3,9 +3,4 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="custom_message_hint" msgid="2179012696339457461">"ഒരു ഇ‌ഷ്‌ടാനുസൃത സന്ദേശം രചിക്കൂ"</string>
     <string name="toolbar_close" msgid="1081308076149879833">"അടയ്‌ക്കുക"</string>
-    <string name="all_contacts_empty" msgid="4260556610403994011">"നിങ്ങൾക്ക് ഇതുവരെയും കോൺടാക്റ്റുകൾ ഒന്നുമില്ല."</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="69234925354938480">"ഒരു കോണ്‍ടാക്റ്റ് ചേര്‍ക്കുക"</string>
-    <string name="permission_single_turn_on" msgid="1306416016676232584">"ഓൺ ചെയ്യുക"</string>
-    <string name="permission_no_contacts" msgid="2388204904477299207">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ കാണുന്നതിന്, \'കോൺടാക്റ്റുകൾ\' അനുമതി ഓണാക്കുക."</string>
-    <string name="add_contact_not_available" msgid="3083256438899321502">"കോൺടാക്റ്റ് അപ്ലിക്കേഷനൊന്നും ലഭ്യമല്ല"</string>
 </resources>

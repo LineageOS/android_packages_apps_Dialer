@@ -26,6 +26,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,7 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.SearchUtil;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import java.util.HashSet;
 
 /**
@@ -356,7 +354,7 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
     if (cursor.getCount() == 0) {
       // Directory table must have at least local directory, without which this adapter will
       // enter very weird state.
-      LogUtil.e(
+      Log.e(
           TAG,
           "Directory search loader returned an empty cursor, which implies we have "
               + "no directory entries.",
@@ -680,9 +678,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
       // mimetype here is reasonable.
       quickContact.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
     }
-    Logger.get(mContext)
-        .logQuickContactOnTouch(
-            quickContact, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_SEARCH, true);
 
     if (photoId != 0 || photoUriColumn == -1) {
       getPhotoLoader().loadThumbnail(quickContact, photoId, mDarkTheme, mCircularPhotos, null);

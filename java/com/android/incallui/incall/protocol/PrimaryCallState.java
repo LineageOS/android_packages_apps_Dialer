@@ -44,7 +44,6 @@ public class PrimaryCallState {
   public final boolean isVoiceMailNumber;
   public final boolean isRemotelyHeld;
   public final boolean isBusinessNumber;
-  public final boolean supportsCallOnHold;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
@@ -68,8 +67,7 @@ public class PrimaryCallState {
         0,
         false /* isVoiceMailNumber */,
         false /* isRemotelyHeld */,
-        false /* isBusinessNumber */,
-        true /* supportsCallOnHold */);
+        false /* isBusinessNumber */);
   }
 
   public PrimaryCallState(
@@ -92,8 +90,7 @@ public class PrimaryCallState {
       long connectTimeMillis,
       boolean isVoiceMailNumber,
       boolean isRemotelyHeld,
-      boolean isBusinessNumber,
-      boolean supportsCallOnHold) {
+      boolean isBusinessNumber) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -114,7 +111,6 @@ public class PrimaryCallState {
     this.isVoiceMailNumber = isVoiceMailNumber;
     this.isRemotelyHeld = isRemotelyHeld;
     this.isBusinessNumber = isBusinessNumber;
-    this.supportsCallOnHold = supportsCallOnHold;
   }
 
   @Override

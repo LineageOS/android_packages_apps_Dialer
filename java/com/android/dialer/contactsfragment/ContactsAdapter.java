@@ -23,10 +23,10 @@ import android.provider.ContactsContract.Contacts;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
+import com.android.dialer.common.Assert;
 
 /** List adapter for the union of all contacts associated with every account on the device. */
 final class ContactsAdapter extends RecyclerView.Adapter<ContactViewHolder> {
@@ -70,7 +70,7 @@ final class ContactsAdapter extends RecyclerView.Adapter<ContactViewHolder> {
             getPhotoId(cursor),
             getPhotoUri(cursor),
             name,
-            LetterTileDrawable.TYPE_DEFAULT);
+            0);
 
     String photoDescription =
         context.getString(com.android.contacts.common.R.string.description_quick_contact_for, name);
@@ -79,29 +79,44 @@ final class ContactsAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     // Always show the view holder's header if it's the first item in the list. Otherwise, compare
     // it to the previous element and only show the anchored header if the row elements fall into
     // the same sublists.
-    boolean showHeader = position == 0 || !header.equals(getHeaderString(position - 1));
-    contactViewHolder.bind(header, name, contactUri, showHeader);
-  }
-
-  @Override
-  public void onViewRecycled(ContactViewHolder contactViewHolder) {
-    super.onViewRecycled(contactViewHolder);
-    holderMap.remove(contactViewHolder);
+    if (position == 0) {
+      contactViewHolder.bind(header, name, contactUri, true);
+    } else {
+      boolean showHeader = !header.equals(getHeaderString(position - 1));
+      contactViewHolder.bind(header, name, contactUri, showHeader);
+    }
   }
 
   public void refreshHeaders() {
     for (ContactViewHolder holder : holderMap.keySet()) {
-      int position = holderMap.get(holder);
-      boolean showHeader =
-          position == 0 || !getHeaderString(position).equals(getHeaderString(position - 1));
-      int visibility = showHeader ? View.VISIBLE : View.INVISIBLE;
-      holder.getHeaderView().setVisibility(visibility);
+      onBindViewHolder(holder, holderMap.get(holder));
     }
   }
 
   @Override
   public int getItemCount() {
     return cursor == null ? 0 : cursor.getCount();
+  }
+
+  public String getHeader(int position) {
+    return getHolderAt(position).getHeader();
+  }
+
+  public TextView getHeaderView(int position) {
+    return getHolderAt(position).getHeaderView();
+  }
+
+  public void setHeaderVisibility(int position, int visibility) {
+    getHolderAt(position).getHeaderView().setVisibility(visibility);
+  }
+
+  private ContactViewHolder getHolderAt(int position) {
+    for (ContactViewHolder holder : holderMap.keySet()) {
+      if (holderMap.get(holder) == position) {
+        return holder;
+      }
+    }
+    throw Assert.createIllegalStateFailException("No holder for position: " + position);
   }
 
   private static String getDisplayName(Cursor cursor) {
@@ -123,7 +138,7 @@ final class ContactsAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     return Contacts.getLookupUri(contactId, lookupKey);
   }
 
-  public String getHeaderString(int position) {
+  private String getHeaderString(int position) {
     int index = -1;
     int sum = 0;
     while (sum <= position) {

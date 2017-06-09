@@ -20,11 +20,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.support.v4.content.FileProvider;
 import com.android.dialer.callcomposer.camera.exif.ExifInterface;
+import com.android.dialer.callcomposer.camera.exif.ExifTag;
 import com.android.dialer.callcomposer.util.BitmapResizer;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.FallibleAsyncTask;
@@ -69,7 +71,13 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
     File outputFile = DialerUtils.createShareableFile(mContext);
 
     try (OutputStream outputStream = new FileOutputStream(outputFile)) {
-      writeClippedBitmap(outputStream);
+      if (mHeightPercent != 1.0f) {
+        writeClippedBitmap(outputStream);
+      } else {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
+        bitmap = BitmapResizer.resizeForEnrichedCalling(bitmap);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+      }
     }
 
     return FileProvider.getUriForFile(
@@ -97,12 +105,10 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
     } catch (final IOException e) {
       // Couldn't get exif tags, not the end of the world
     }
-
     Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
     final int clippedWidth;
     final int clippedHeight;
-    boolean invert = ExifInterface.getOrientationParams(orientation).invertDimensions;
-    if (invert) {
+    if (ExifInterface.getOrientationParams(orientation).invertDimensions) {
       Assert.checkState(mWidth == bitmap.getHeight());
       Assert.checkState(mHeight == bitmap.getWidth());
       clippedWidth = (int) (mHeight * mHeightPercent);
@@ -113,22 +119,24 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
       clippedWidth = mWidth;
       clippedHeight = (int) (mHeight * mHeightPercent);
     }
-
-    int offsetTop = (bitmap.getHeight() - clippedHeight) / 2;
-    int offsetLeft = (bitmap.getWidth() - clippedWidth) / 2;
+    final int offsetTop = (bitmap.getHeight() - clippedHeight) / 2;
+    final int offsetLeft = (bitmap.getWidth() - clippedWidth) / 2;
     mWidth = clippedWidth;
     mHeight = clippedHeight;
-
-    Matrix matrix = new Matrix();
-    matrix.postRotate(invert ? 90 : 0);
-
     Bitmap clippedBitmap =
-        Bitmap.createBitmap(
-            bitmap, offsetLeft, offsetTop, clippedWidth, clippedHeight, matrix, true);
+        Bitmap.createBitmap(clippedWidth, clippedHeight, Bitmap.Config.ARGB_8888);
+    clippedBitmap.setDensity(bitmap.getDensity());
+    final Canvas clippedBitmapCanvas = new Canvas(clippedBitmap);
+    final Matrix matrix = new Matrix();
+    matrix.postTranslate(-offsetLeft, -offsetTop);
+    clippedBitmapCanvas.drawBitmap(bitmap, matrix, null /* paint */);
+    clippedBitmapCanvas.save();
     clippedBitmap = BitmapResizer.resizeForEnrichedCalling(clippedBitmap);
-    // EXIF data can take a big chunk of the file size and we've already manually rotated our image,
-    // so remove all of the exif data.
+    // EXIF data can take a big chunk of the file size and is often cleared by the
+    // carrier, only store orientation since that's critical
+    final ExifTag orientationTag = exifInterface.getTag(ExifInterface.TAG_ORIENTATION);
     exifInterface.clearExif();
+    exifInterface.setTag(orientationTag);
     exifInterface.writeExif(clippedBitmap, outputStream);
 
     clippedBitmap.recycle();

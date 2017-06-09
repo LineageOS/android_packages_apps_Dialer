@@ -91,7 +91,6 @@ import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -107,7 +106,6 @@ import com.android.dialer.p13n.logging.P13nLogger;
 import com.android.dialer.p13n.logging.P13nLogging;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.proguard.UsedByReflection;
-import com.android.dialer.searchfragment.NewSearchFragment;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
@@ -156,7 +154,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String KEY_FIRST_LAUNCH = "first_launch";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
   private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
-  private static final String TAG_NEW_SEARCH_FRAGMENT = "new_search";
   private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
   private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
   private static final String TAG_FAVORITES_FRAGMENT = "favorites";
@@ -165,7 +162,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
   public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
-  public static final int ACTIVITY_REQUEST_CODE_LIGHTBRINGER = 3;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
@@ -183,9 +179,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Fragment for searching phone numbers using the dialpad. */
   private SmartDialSearchFragment mSmartDialSearchFragment;
-
-  /** new Fragment for search phone numbers using the keyboard and the dialpad. */
-  private NewSearchFragment mNewSearchFragment;
 
   /** Animation that slides in. */
   private Animation mSlideIn;
@@ -269,7 +262,6 @@ public class DialtactsActivity extends TransactionSafeActivity
           }
           mSearchQuery = newText;
 
-          // TODO: show p13n when newText is empty.
           // Show search fragment only when the query string is changed to non-empty text.
           if (!TextUtils.isEmpty(newText)) {
             // Call enterSearchUi only if we are switching search modes, or showing a search
@@ -285,8 +277,6 @@ public class DialtactsActivity extends TransactionSafeActivity
             mSmartDialSearchFragment.setQueryString(mSearchQuery);
           } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
             mRegularSearchFragment.setQueryString(mSearchQuery);
-          } else if (mNewSearchFragment != null) {
-            mNewSearchFragment.setQuery(mSearchQuery);
           }
         }
 
@@ -640,8 +630,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (fragment instanceof ListsFragment) {
       mListsFragment = (ListsFragment) fragment;
       mListsFragment.addOnPageChangeListener(this);
-    } else if (fragment instanceof NewSearchFragment) {
-      mNewSearchFragment = (NewSearchFragment) fragment;
     }
     if (fragment instanceof SearchFragment) {
       final SearchFragment searchFragment = (SearchFragment) fragment;
@@ -797,7 +785,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     if (animate) {
       mFloatingActionButtonController.scaleOut();
-      maybeEnterSearchUi();
     } else {
       mFloatingActionButtonController.setVisible(false);
       maybeEnterSearchUi();
@@ -1070,11 +1057,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     final String tag;
-    boolean useNewSearch =
-        ConfigProviderBindings.get(this).getBoolean("enable_new_search_fragment", false);
-    if (useNewSearch) {
-      tag = TAG_NEW_SEARCH_FRAGMENT;
-    } else if (smartDialSearch) {
+    if (smartDialSearch) {
       tag = TAG_SMARTDIAL_SEARCH_FRAGMENT;
     } else {
       tag = TAG_REGULAR_SEARCH_FRAGMENT;
@@ -1084,52 +1067,40 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mFloatingActionButtonController.scaleOut();
 
+    SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
     if (animate) {
       transaction.setCustomAnimations(android.R.animator.fade_in, 0);
     } else {
       transaction.setTransition(FragmentTransaction.TRANSIT_NONE);
     }
-
-    Fragment fragment = getFragmentManager().findFragmentByTag(tag);
     if (fragment == null) {
-      if (useNewSearch) {
-        fragment = new NewSearchFragment();
-      } else if (smartDialSearch) {
+      if (smartDialSearch) {
         fragment = new SmartDialSearchFragment();
       } else {
         fragment = Bindings.getLegacy(this).newRegularSearchFragment();
-        ((SearchFragment) fragment)
-            .setOnTouchListener(
-                (v, event) -> {
-                  // Show the FAB when the user touches the lists fragment and the soft
-                  // keyboard is hidden.
-                  hideDialpadFragment(true, false);
-                  v.performClick();
-                  return false;
-                });
+        fragment.setOnTouchListener(
+            new View.OnTouchListener() {
+              @Override
+              public boolean onTouch(View v, MotionEvent event) {
+                // Show the FAB when the user touches the lists fragment and the soft
+                // keyboard is hidden.
+                hideDialpadFragment(true, false);
+                showFabInSearchUi();
+                v.performClick();
+                return false;
+              }
+            });
       }
       transaction.add(R.id.dialtacts_frame, fragment, tag);
     } else {
-      // TODO: if this is a transition from dialpad to searchbar, animate fragment
-      // down, and vice versa. Perhaps just add a coordinator behavior with the search bar.
       transaction.show(fragment);
     }
-
     // DialtactsActivity will provide the options menu
     fragment.setHasOptionsMenu(false);
-
     // Will show empty list if P13nRanker is not enabled. Else, re-ranked list by the ranker.
-    if (!useNewSearch) {
-      ((SearchFragment) fragment)
-          .setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
-    } else {
-      // TODO: add p13n ranker to new search.
-    }
-
-    if (!smartDialSearch && !useNewSearch) {
-      ((SearchFragment) fragment).setQueryString(query);
-    } else if (useNewSearch) {
-      ((NewSearchFragment) fragment).setQuery(query);
+    fragment.setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
+    if (!smartDialSearch) {
+      fragment.setQueryString(query);
     }
     transaction.commit();
 
@@ -1174,9 +1145,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     if (mRegularSearchFragment != null) {
       transaction.remove(mRegularSearchFragment);
-    }
-    if (mNewSearchFragment != null) {
-      transaction.remove(mNewSearchFragment);
     }
     transaction.commit();
 
@@ -1509,7 +1477,6 @@ public class DialtactsActivity extends TransactionSafeActivity
             Arrays.toString(grantResults)));
   }
 
-  /** Popup menu accessible from the search bar */
   protected class OptionsPopupMenu extends PopupMenu {
 
     public OptionsPopupMenu(Context context, View anchor) {

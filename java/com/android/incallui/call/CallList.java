@@ -32,8 +32,6 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -118,10 +116,6 @@ public class CallList implements DialerCallDelegate {
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
     logSecondIncomingCall(context, call);
-
-    EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-    manager.registerCapabilitiesListener(call);
-    manager.registerStateChangedListener(call);
 
     final DialerCallListenerImpl dialerCallListener = new DialerCallListenerImpl(call);
     call.addListener(dialerCallListener);
@@ -283,10 +277,6 @@ public class CallList implements DialerCallDelegate {
     if (mCallByTelecomCall.containsKey(telecomCall)) {
       DialerCall call = mCallByTelecomCall.get(telecomCall);
       Assert.checkArgument(!call.isExternalCall());
-
-      EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-      manager.unregisterCapabilitiesListener(call);
-      manager.unregisterStateChangedListener(call);
 
       // Don't log an already logged call. logCall() might be called multiple times
       // for the same call due to b/24109437.
@@ -801,9 +791,6 @@ public class CallList implements DialerCallDelegate {
         listener.onInternationalCallOnWifi(mCall);
       }
     }
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
 
     @Override
     public void onDialerCallSessionModificationStateChange() {

@@ -7,7 +7,6 @@ option optimize_for = LITE_RUNTIME;
 package com.android.dialer.callintent;
 
 import "java/com/android/dialer/callintent/call_initiation_type.proto";
-import "java/com/android/dialer/callintent/speed_dial_contact_type.proto";
 
 // Miscellaneous data that's included in a new outgoing call initiated by
 // Dialer. The system will pass this data to the InCallUi which can use it
@@ -18,7 +17,4 @@ message CallSpecificAppData {
   optional int32 position_of_selected_search_result = 2;
 
   optional int32 characters_in_search_string = 3;
-
-  repeated SpeedDialContactType.Type speed_dial_contact_type = 4;
-  optional int32 speed_dial_contact_position = 5;
 }

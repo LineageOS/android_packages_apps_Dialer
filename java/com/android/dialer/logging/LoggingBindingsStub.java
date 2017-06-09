@@ -15,7 +15,6 @@
 package com.android.dialer.logging;
 
 import android.app.Activity;
-import android.widget.QuickContactBadge;
 
 /** Default implementation for logging bindings. */
 public class LoggingBindingsStub implements LoggingBindings {
@@ -37,21 +36,5 @@ public class LoggingBindingsStub implements LoggingBindings {
   public void logScreenView(ScreenEvent.Type screenEvent, Activity activity) {}
 
   @Override
-  public void logSpeedDialContactComposition(
-      int counter,
-      int starredContactsCount,
-      int pinnedContactsCount,
-      int multipleNumbersContactsCount,
-      int contactsWithPhotoCount,
-      int contactsWithNameCount,
-      int duoReachableContactsCount) {}
-
-  @Override
   public void sendHitEventAnalytics(String category, String action, String label, long value) {}
-
-  @Override
-  public void logQuickContactOnTouch(
-      QuickContactBadge quickContact,
-      InteractionEvent.Type interactionEvent,
-      boolean shouldPerformClick) {}
 }

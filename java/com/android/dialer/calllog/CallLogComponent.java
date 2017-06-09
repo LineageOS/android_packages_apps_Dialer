@@ -25,8 +25,6 @@ public abstract class CallLogComponent {
 
   public abstract CallLogFramework callLogFramework();
 
-  public abstract RefreshAnnotatedCallLogWorker getRefreshAnnotatedCallLogWorker();
-
   public static CallLogComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .callLogComponent();
