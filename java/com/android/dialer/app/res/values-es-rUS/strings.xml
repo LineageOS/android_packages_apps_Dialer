@@ -85,10 +85,6 @@
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Regresar a la llamada en curso"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"Agregar llamada"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"Llamadas entrantes"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Entrando al modo de acción masiva"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Saliendo del modo de acción masiva"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Se seleccionó <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Se anuló la selección de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"Reproducir mensaje de voz"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"Ver contacto <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="1532402285334775372">"Llamar a <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -103,13 +99,11 @@
     <string name="voicemail" msgid="8899540969000957954">"Correo de voz"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Cancelar el modo de acción masiva"</string>
     <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"el mensaje de voz"</string>
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"los mensajes de voz"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Sí"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"¿Deseas borrar <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> que seleccionaste?"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> seleccionada(s)"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"El <xliff:g id="DATE">%1$s</xliff:g> a la hora <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -122,6 +116,7 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Cargando desde tarjeta SIM..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Contactos de tarjeta SIM"</string>
+    <string name="add_contact_not_available" msgid="7065884447935173347">"No hay aplicaciones de contactos disponibles."</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"Búsqueda por voz no disponible"</string>
     <string name="call_not_available" msgid="7850148370757361155">"No se pueden realizar llamadas porque se inhabilitó la aplicación Teléfono."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Buscar contactos"</string>
@@ -150,9 +145,10 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> llamadas perdidas nuevas"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"Aún no tienes contactos en la opción de marcado rápido"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Agregar un favorito"</string>
+    <string name="all_contacts_empty" msgid="243071567853617177">"Aún no tienes contactos"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Agregar un contacto"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"Toca la imagen para ver todos los números o mantenla presionada para reorganizar"</string>
     <string name="remove_contact" msgid="2353580570488923668">"Eliminar"</string>
-    <string name="select_all" msgid="408601760696146245">"Seleccionar todo"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Videollamada"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Enviar un mensaje"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Detalles de la llamada"</string>
@@ -217,9 +213,11 @@
     <string name="block_list" msgid="4701585783411870782">"Números bloqueados"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ya está bloqueado."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"Cuentas telefónicas"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"Activar"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"Configurar permisos"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"Para habilitar el marcado rápido, activa el permiso Contactos."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"Para ver el registro de llamadas, activa el permiso Teléfono."</string>
+    <string name="permission_no_contacts" msgid="8995025765862026771">"Para ver los contactos, activa el permiso Contactos."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Para acceder al buzón de voz, activa el permiso Teléfono."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Para buscar contactos, activa el permiso Contactos."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"Para realizar una llamada, activa el permiso Teléfono."</string>

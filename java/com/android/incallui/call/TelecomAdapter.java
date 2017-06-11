@@ -20,13 +20,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.annotation.MainThread;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.InCallService;
 import com.android.dialer.common.LogUtil;
 import java.util.List;
 
 /** Wrapper around Telecom APIs. */
-public class TelecomAdapter implements InCallServiceListener {
+public final class TelecomAdapter implements InCallServiceListener {
 
   private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -44,11 +43,6 @@ public class TelecomAdapter implements InCallServiceListener {
       sInstance = new TelecomAdapter();
     }
     return sInstance;
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setInstanceForTesting(TelecomAdapter telecomAdapter) {
-    sInstance = telecomAdapter;
   }
 
   @Override

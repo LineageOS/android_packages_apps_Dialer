@@ -72,13 +72,13 @@ public class PermissionsUtil {
     return hasPermission(context, permission.WRITE_VOICEMAIL);
   }
 
+  public static boolean hasAddVoicemailPermissions(Context context) {
+    return hasPermission(context, permission.ADD_VOICEMAIL);
+  }
+
   public static boolean hasPermission(Context context, String permission) {
     return ContextCompat.checkSelfPermission(context, permission)
         == PackageManager.PERMISSION_GRANTED;
-  }
-
-  public static boolean hasAddVoicemailPermissions(Context context) {
-    return hasPermission(context, permission.ADD_VOICEMAIL);
   }
 
   /**

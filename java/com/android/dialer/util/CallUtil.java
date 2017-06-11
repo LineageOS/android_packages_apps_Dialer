@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import java.util.List;
@@ -40,9 +39,6 @@ public class CallUtil {
    * determined by the presence status associated with contacts.
    */
   public static final int VIDEO_CALLING_PRESENCE = 2;
-
-  private static boolean hasInitializedIsVideoEnabledState;
-  private static boolean cachedIsVideoEnabledState;
 
   /** Return Uri with an appropriate scheme, accepting both SIP and usual phone call numbers. */
   public static Uri getCallUri(String number) {
@@ -106,23 +102,7 @@ public class CallUtil {
    *     false} otherwise.
    */
   public static boolean isVideoEnabled(Context context) {
-    boolean isVideoEnabled = (getVideoCallingAvailability(context) & VIDEO_CALLING_ENABLED) != 0;
-
-    // Log everytime the video enabled state changes.
-    if (!hasInitializedIsVideoEnabledState) {
-      LogUtil.i("CallUtil.isVideoEnabled", "isVideoEnabled: " + isVideoEnabled);
-      hasInitializedIsVideoEnabledState = true;
-      cachedIsVideoEnabledState = isVideoEnabled;
-    } else if (cachedIsVideoEnabledState != isVideoEnabled) {
-      LogUtil.i(
-          "CallUtil.isVideoEnabled",
-          "isVideoEnabled changed from %b to %b",
-          cachedIsVideoEnabledState,
-          isVideoEnabled);
-      cachedIsVideoEnabledState = isVideoEnabled;
-    }
-
-    return true;
+    return (getVideoCallingAvailability(context) & VIDEO_CALLING_ENABLED) != 0;
   }
 
   /**

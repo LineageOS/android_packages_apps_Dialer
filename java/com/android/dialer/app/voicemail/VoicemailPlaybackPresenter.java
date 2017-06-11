@@ -548,9 +548,7 @@ public class VoicemailPlaybackPresenter
     mView.setClipPosition(mPosition, mDuration.get());
     mView.enableUiElements();
     mView.setSuccess();
-    if (!mp.isPlaying()) {
-      mMediaPlayer.seekTo(mPosition);
-    }
+    mMediaPlayer.seekTo(mPosition);
 
     if (mIsPlaying) {
       resumePlayback();

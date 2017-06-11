@@ -19,7 +19,6 @@ package com.android.dialer.app.list;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -30,6 +29,7 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.util.CallUtil;
 
 /**
  * {@link PhoneNumberListAdapter} with the following added shortcuts, that are displayed as list
@@ -50,6 +50,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
   private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
   private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+  private final boolean mVideoCallingEnabled;
   private final String mCountryIso;
 
   private String mFormattedQueryString;
@@ -58,6 +59,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     super(context);
 
     mCountryIso = GeoUtil.getCurrentCountryIso(context);
+    mVideoCallingEnabled = CallUtil.isVideoEnabled(context);
   }
 
   @Override
@@ -108,7 +110,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         return convertView;
       } else {
         final ContactListItemView v =
-            new ContactListItemView(getContext(), null, mIsImsVideoEnabled);
+            new ContactListItemView(
+                getContext(), null, mVideoCallingEnabled, isCallAndShareEnabled());
         assignShortcutToView(v, shortcutType);
         return v;
       }
@@ -122,7 +125,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
       Context context, int partition, Cursor cursor, int position, ViewGroup parent) {
     final ContactListItemView view = super.newView(context, partition, cursor, position, parent);
 
-    view.setSupportVideoCallIcon(mIsImsVideoEnabled);
+    view.setSupportVideoCallIcon(mVideoCallingEnabled);
+    view.setSupportCallAndShareIcon(isCallAndShareEnabled());
     return view;
   }
 
@@ -167,7 +171,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
   private void assignShortcutToView(ContactListItemView v, int shortcutType) {
     final CharSequence text;
-    final Drawable drawable;
+    final int drawableId;
     final Resources resources = getContext().getResources();
     final String number = getFormattedQueryString();
     switch (shortcutType) {
@@ -177,39 +181,34 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 resources,
                 R.string.search_shortcut_call_number,
                 mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
-        drawable = getContext().getResources().getDrawable(R.drawable.quantum_ic_call_vd_theme_24);
+        drawableId = R.drawable.ic_search_phone;
         break;
       case SHORTCUT_CREATE_NEW_CONTACT:
         text = resources.getString(R.string.search_shortcut_create_new_contact);
-        drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_person_add_vd_theme_24);
-        drawable.setAutoMirrored(true);
+        drawableId = R.drawable.ic_search_add_contact;
         break;
       case SHORTCUT_ADD_TO_EXISTING_CONTACT:
         text = resources.getString(R.string.search_shortcut_add_to_contact);
-        drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_person_add_vd_theme_24);
+        drawableId = R.drawable.quantum_ic_person_white_24;
         break;
       case SHORTCUT_SEND_SMS_MESSAGE:
         text = resources.getString(R.string.search_shortcut_send_sms_message);
-        drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_message_vd_theme_24);
+        drawableId = R.drawable.quantum_ic_message_white_24;
         break;
       case SHORTCUT_MAKE_VIDEO_CALL:
         text = resources.getString(R.string.search_shortcut_make_video_call);
-        drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24);
+        drawableId = R.drawable.quantum_ic_videocam_white_24;
         break;
       case SHORTCUT_BLOCK_NUMBER:
         text = resources.getString(R.string.search_shortcut_block_number);
-        drawable =
-            getContext().getResources().getDrawable(R.drawable.ic_not_interested_googblue_24dp);
+        drawableId = R.drawable.ic_not_interested_googblue_24dp;
         break;
       default:
         throw new IllegalArgumentException("Invalid shortcut type");
     }
-    v.setDrawable(drawable);
+    v.setDrawableResource(drawableId);
     v.setDisplayName(text);
+    v.setPhotoPosition(super.getPhotoPosition());
     v.setAdjustSelectionBoundsEnabled(false);
   }
 

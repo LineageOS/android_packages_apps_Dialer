@@ -15,9 +15,8 @@
   ~ limitations under the License
   -->
 
-<android.support.v7.widget.RecyclerView
+<ListView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/new_call_log_recycler_view"
+    android:id="@+id/list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_dialer_light"/>
+    android:layout_height="match_parent"/>

@@ -29,7 +29,7 @@ final class ContactsCursorLoader extends CursorLoader {
   public static final int CONTACT_PHOTO_URI = 3;
   public static final int CONTACT_LOOKUP_KEY = 4;
 
-  public static final String[] CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY =
+  public static final String[] CONTACTS_PROJECTION =
       new String[] {
         Contacts._ID, // 0
         Contacts.DISPLAY_NAME_PRIMARY, // 1
@@ -38,35 +38,16 @@ final class ContactsCursorLoader extends CursorLoader {
         Contacts.LOOKUP_KEY, // 4
       };
 
-  public static final String[] CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE =
-      new String[] {
-        Contacts._ID, // 0
-        Contacts.DISPLAY_NAME_ALTERNATIVE, // 1
-        Contacts.PHOTO_ID, // 2
-        Contacts.PHOTO_THUMBNAIL_URI, // 3
-        Contacts.LOOKUP_KEY, // 4
-      };
-
-  private ContactsCursorLoader(Context context, String[] contactProjection, String sortKey) {
+  public ContactsCursorLoader(Context context) {
     super(
         context,
         Contacts.CONTENT_URI
             .buildUpon()
             .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true")
             .build(),
-        contactProjection,
+        CONTACTS_PROJECTION,
         null,
         null,
-        sortKey + " ASC");
-  }
-
-  public static ContactsCursorLoader createInstanceDisplayNamePrimary(
-      Context context, String sortKey) {
-    return new ContactsCursorLoader(context, CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY, sortKey);
-  }
-
-  public static ContactsCursorLoader createInstanceDisplayNameAlternative(
-      Context context, String sortKey) {
-    return new ContactsCursorLoader(context, CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE, sortKey);
+        Contacts.SORT_KEY_PRIMARY + " ASC");
   }
 }

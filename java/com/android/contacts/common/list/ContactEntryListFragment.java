@@ -555,6 +555,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
   protected void setSearchMode(boolean flag) {
     if (mSearchMode != flag) {
       mSearchMode = flag;
+      setSectionHeaderDisplayEnabled(!mSearchMode);
 
       if (!flag) {
         mDirectoryListStatus = STATUS_NOT_LOADED;

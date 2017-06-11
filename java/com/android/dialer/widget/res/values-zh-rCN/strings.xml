@@ -3,9 +3,4 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="custom_message_hint" msgid="2179012696339457461">"自行撰写信息"</string>
     <string name="toolbar_close" msgid="1081308076149879833">"关闭"</string>
-    <string name="all_contacts_empty" msgid="4260556610403994011">"您还没有任何联系人"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="69234925354938480">"添加联系人"</string>
-    <string name="permission_single_turn_on" msgid="1306416016676232584">"开启"</string>
-    <string name="permission_no_contacts" msgid="2388204904477299207">"要查看您的联系人，请开启“通讯录”权限。"</string>
-    <string name="add_contact_not_available" msgid="3083256438899321502">"没有可用的通讯录应用"</string>
 </resources>

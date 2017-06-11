@@ -300,7 +300,18 @@ public class CallButtonPresenter
    */
   @Override
   public void switchCameraClicked(boolean useFrontFacingCamera) {
-    updateCamera(useFrontFacingCamera);
+    InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
+    cameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
+
+    String cameraId = cameraManager.getActiveCameraId();
+    if (cameraId != null) {
+      final int cameraDir =
+          cameraManager.isUsingFrontFacingCamera()
+              ? CameraDirection.CAMERA_DIRECTION_FRONT_FACING
+              : CameraDirection.CAMERA_DIRECTION_BACK_FACING;
+      mCall.setCameraDir(cameraDir);
+      mCall.getVideoTech().setCamera(cameraId);
+    }
   }
 
   @Override
@@ -334,31 +345,13 @@ public class CallButtonPresenter
             mCall.getTimeAddedMs());
 
     if (pause) {
-      mCall.getVideoTech().setCamera(null);
       mCall.getVideoTech().stopTransmission();
     } else {
-      updateCamera(
-          InCallPresenter.getInstance().getInCallCameraManager().isUsingFrontFacingCamera());
       mCall.getVideoTech().resumeTransmission();
     }
 
     mInCallButtonUi.setVideoPaused(pause);
     mInCallButtonUi.enableButton(InCallButtonIds.BUTTON_PAUSE_VIDEO, false);
-  }
-
-  private void updateCamera(boolean useFrontFacingCamera) {
-    InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
-    cameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
-
-    String cameraId = cameraManager.getActiveCameraId();
-    if (cameraId != null) {
-      final int cameraDir =
-          cameraManager.isUsingFrontFacingCamera()
-              ? CameraDirection.CAMERA_DIRECTION_FRONT_FACING
-              : CameraDirection.CAMERA_DIRECTION_BACK_FACING;
-      mCall.setCameraDir(cameraDir);
-      mCall.getVideoTech().setCamera(cameraId);
-    }
   }
 
   private void updateUi(InCallState state, DialerCall call) {

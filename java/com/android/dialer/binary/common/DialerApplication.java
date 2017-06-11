@@ -55,9 +55,8 @@ public abstract class DialerApplication extends Application implements HasRootCo
 
   private void enableStrictMode() {
     StrictMode.setThreadPolicy(
-        new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
-    StrictMode.setVmPolicy(
-        new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+        new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDeath().build());
+    StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyDeath().build());
   }
 
   /**

@@ -31,23 +31,19 @@ import android.os.Handler;
 import android.os.Trace;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
-import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
-import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
@@ -65,28 +61,24 @@ import java.util.ArrayList;
  * containing the lists up above the search bar and pin it against the top of the screen.
  */
 public class ListsFragment extends Fragment
-    implements OnPageChangeListener, Listener, OnClickListener {
+    implements ViewPager.OnPageChangeListener, CallLogQueryHandler.Listener {
 
   private static final String TAG = "ListsFragment";
-  private DialerViewPager mViewPager;
+  private ViewPager mViewPager;
   private ViewPagerTabs mViewPagerTabs;
   private DialtactsPagerAdapter mAdapter;
   private RemoveView mRemoveView;
   private View mRemoveViewContent;
-  private View mMultiSelectSelectAllViewContent;
-  private TextView mSelectUnselectAllViewText;
-  private ImageView mSelectUnselectAllIcon;
   private Fragment mCurrentPage;
   private SharedPreferences mPrefs;
   private boolean mHasFetchedVoicemailStatus;
-  private boolean selectAllMode;
   private boolean mShowVoicemailTabAfterVoicemailStatusIsFetched;
   private VoicemailStatusHelper mVoicemailStatusHelper;
   private final ArrayList<OnPageChangeListener> mOnPageChangeListeners = new ArrayList<>();
   /** The position of the currently selected tab. */
   private int mTabIndex = TAB_INDEX_SPEED_DIAL;
-
   private boolean mPaused;
+
   private CallLogQueryHandler mCallLogQueryHandler;
 
   private final ContentObserver mVoicemailStatusObserver =
@@ -171,7 +163,7 @@ public class ListsFragment extends Fragment
     tabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.quantum_ic_people_white_24;
     tabIcons[TAB_INDEX_VOICEMAIL] = R.drawable.quantum_ic_voicemail_white_24;
 
-    mViewPager = (DialerViewPager) parentView.findViewById(R.id.lists_pager);
+    mViewPager = (ViewPager) parentView.findViewById(R.id.lists_pager);
     mAdapter =
         new DialtactsPagerAdapter(
             getContext(),
@@ -188,15 +180,9 @@ public class ListsFragment extends Fragment
     mViewPagerTabs.configureTabIcons(tabIcons);
     mViewPagerTabs.setViewPager(mViewPager);
     addOnPageChangeListener(mViewPagerTabs);
+
     mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
     mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
-    mMultiSelectSelectAllViewContent =
-        parentView.findViewById(R.id.multi_select_select_all_view_content);
-    mSelectUnselectAllViewText = (TextView) parentView.findViewById(R.id.select_all_view_text);
-    mSelectUnselectAllIcon = (ImageView) parentView.findViewById(R.id.select_all_view_icon);
-    mMultiSelectSelectAllViewContent.setOnClickListener(null);
-    mSelectUnselectAllIcon.setOnClickListener(this);
-    mSelectUnselectAllViewText.setOnClickListener(this);
 
     if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
         && PermissionsUtil.hasAddVoicemailPermissions(getContext())) {
@@ -205,7 +191,7 @@ public class ListsFragment extends Fragment
           .registerContentObserver(
               VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
     } else {
-      LogUtil.w("ListsFragment.onCreateView", "no voicemail read permissions");
+      LogUtil.w("ListsFragment.onCreateView", "no voicemail read/add permissions");
     }
 
     Trace.endSection();
@@ -399,13 +385,6 @@ public class ListsFragment extends Fragment
     mRemoveView.animate().alpha(show ? 1 : 0).start();
   }
 
-  public void showMultiSelectRemoveView(boolean show) {
-    mMultiSelectSelectAllViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
-    mMultiSelectSelectAllViewContent.setAlpha(show ? 0 : 1);
-    mMultiSelectSelectAllViewContent.animate().alpha(show ? 1 : 0).start();
-    mViewPager.setEnableSwipingPages(!show);
-  }
-
   public boolean hasFrequents() {
     Fragment page = mAdapter.getItem(mAdapter.getRtlPosition(TAB_INDEX_SPEED_DIAL));
     return page instanceof OldSpeedDialFragment
@@ -444,29 +423,5 @@ public class ListsFragment extends Fragment
         return;
     }
     Logger.get(getActivity()).logScreenView(screenType, getActivity());
-  }
-
-  @Override
-  public void onClick(View v) {
-    updateSelectAllIcon();
-    selectAllMode = !selectAllMode;
-  }
-
-  public void setSelectAllModeToFalse() {
-    selectAllMode = false;
-    mSelectUnselectAllIcon.setImageDrawable(
-        getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
-  }
-
-  private void updateSelectAllIcon() {
-    if (selectAllMode) {
-      mSelectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
-      ((VisualVoicemailCallLogFragment) mCurrentPage).getAdapter().onAllDeselected();
-    } else {
-      mSelectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_check_mark_blue_24dp));
-      ((VisualVoicemailCallLogFragment) mCurrentPage).getAdapter().onAllSelected();
-    }
   }
 }

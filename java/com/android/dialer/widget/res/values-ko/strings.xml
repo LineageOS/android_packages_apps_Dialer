@@ -3,9 +3,4 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="custom_message_hint" msgid="2179012696339457461">"맞춤 메시지를 작성하세요."</string>
     <string name="toolbar_close" msgid="1081308076149879833">"닫기"</string>
-    <string name="all_contacts_empty" msgid="4260556610403994011">"아직 연락처가 없습니다."</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="69234925354938480">"연락처 추가"</string>
-    <string name="permission_single_turn_on" msgid="1306416016676232584">"사용"</string>
-    <string name="permission_no_contacts" msgid="2388204904477299207">"연락처를 보려면 연락처에 액세스할 권한을 부여하세요."</string>
-    <string name="add_contact_not_available" msgid="3083256438899321502">"사용할 수 있는 연락처 앱이 없습니다."</string>
 </resources>

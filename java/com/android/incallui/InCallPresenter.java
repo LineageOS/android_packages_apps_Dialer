@@ -695,10 +695,7 @@ public class InCallPresenter implements CallList.Listener {
     if (newState == InCallState.INCOMING
         && (waitingForAccountCall = callList.getWaitingForAccountCall()) != null) {
       waitingForAccountCall.disconnect();
-      // The InCallActivity might be destroyed or not started yet at this point.
-      if (isActivityStarted()) {
-        mInCallActivity.dismissPendingDialogs();
-      }
+      mInCallActivity.dismissPendingDialogs();
     }
 
     newState = startOrFinishUi(newState);

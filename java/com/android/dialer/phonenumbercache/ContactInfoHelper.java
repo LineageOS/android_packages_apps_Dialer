@@ -601,17 +601,13 @@ public class ContactInfoHelper {
    * will be updated if available.
    */
   @WorkerThread
-  public void updateFromCequintCallerId(
-      @Nullable CequintCallerIdManager cequintCallerIdManager, ContactInfo info, String number) {
+  public void updateFromCequintCallerId(ContactInfo info, String number) {
     Assert.isWorkerThread();
     if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
       return;
     }
-    if (cequintCallerIdManager == null) {
-      return;
-    }
     CequintCallerIdContact cequintCallerIdContact =
-        cequintCallerIdManager.getCequintCallerIdContact(mContext, number);
+        CequintCallerIdManager.getCequintCallerIdContact(mContext, number);
     if (cequintCallerIdContact == null) {
       return;
     }

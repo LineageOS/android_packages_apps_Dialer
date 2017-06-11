@@ -86,7 +86,6 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.PermissionsUtil;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -106,12 +105,11 @@ public class CallLogAdapter extends GroupingListAdapter
 
   private static final String KEY_EXPANDED_POSITION = "expanded_position";
   private static final String KEY_EXPANDED_ROW_ID = "expanded_row_id";
-  private static final String KEY_ACTION_MODE = "action_mode_selected_items";
 
   public static final String LOAD_DATA_TASK_IDENTIFIER = "load_data";
 
   public static final String ENABLE_CALL_LOG_MULTI_SELECT = "enable_call_log_multiselect";
-  public static final boolean ENABLE_CALL_LOG_MULTI_SELECT_FLAG = true;
+  public static final boolean ENABLE_CALL_LOG_MULTI_SELECT_FLAG = false;
 
   protected final Activity mActivity;
   protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
@@ -119,7 +117,6 @@ public class CallLogAdapter extends GroupingListAdapter
   protected final CallLogCache mCallLogCache;
 
   private final CallFetcher mCallFetcher;
-  private final MultiSelectRemoveView mMultiSelectRemoveView;
   @NonNull private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
   private final int mActivityType;
 
@@ -139,8 +136,6 @@ public class CallLogAdapter extends GroupingListAdapter
   private final CallLogAlertManager mCallLogAlertManager;
 
   public ActionMode mActionMode = null;
-  public boolean selectAllMode = false;
-  public boolean deselectAllMode = false;
   private final SparseArray<String> selectedItems = new SparseArray<>();
 
   private final ActionMode.Callback mActionModeCallback =
@@ -149,16 +144,10 @@ public class CallLogAdapter extends GroupingListAdapter
         // Called when the action mode is created; startActionMode() was called
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-          if (mActivity != null) {
-            announceforAccessibility(
-                mActivity.getCurrentFocus(),
-                mActivity.getString(R.string.description_entering_bulk_action_mode));
-          }
           mActionMode = mode;
           // Inflate a menu resource providing context menu items
           MenuInflater inflater = mode.getMenuInflater();
           inflater.inflate(R.menu.actionbar_delete, menu);
-          mMultiSelectRemoveView.showMultiSelectRemoveView(true);
           return true;
         }
 
@@ -176,6 +165,7 @@ public class CallLogAdapter extends GroupingListAdapter
             if (selectedItems.size() > 0) {
               showDeleteSelectedItemsDialog();
             }
+            mode.finish();
             return true;
           } else {
             return false;
@@ -185,16 +175,8 @@ public class CallLogAdapter extends GroupingListAdapter
         // Called when the user exits the action mode
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-          if (mActivity != null) {
-            announceforAccessibility(
-                mActivity.getCurrentFocus(),
-                mActivity.getString(R.string.description_leaving_bulk_action_mode));
-          }
           selectedItems.clear();
           mActionMode = null;
-          selectAllMode = false;
-          deselectAllMode = false;
-          mMultiSelectRemoveView.showMultiSelectRemoveView(false);
           notifyDataSetChanged();
         }
       };
@@ -220,7 +202,6 @@ public class CallLogAdapter extends GroupingListAdapter
           @Override
           public void onClick(DialogInterface dialog, int id) {
             deleteSelectedItems(voicemailsToDeleteOnConfirmation);
-            mActionMode.finish();
             dialog.cancel();
           }
         });
@@ -277,15 +258,22 @@ public class CallLogAdapter extends GroupingListAdapter
             return;
           }
           if (mActionMode != null && viewHolder.voicemailUri != null) {
-            selectAllMode = false;
-            deselectAllMode = false;
-            mMultiSelectRemoveView.setSelectAllModeToFalse();
             int id = getVoicemailId(viewHolder.voicemailUri);
             if (selectedItems.get(id) != null) {
-              uncheckMarkCallLogEntry(viewHolder, id);
+              selectedItems.delete(id);
+              viewHolder.checkBoxView.setVisibility(View.GONE);
+              viewHolder.quickContactView.setVisibility(View.VISIBLE);
             } else {
-              checkMarkCallLogEntry(viewHolder);
+              viewHolder.quickContactView.setVisibility(View.GONE);
+              viewHolder.checkBoxView.setVisibility(View.VISIBLE);
+              selectedItems.put(getVoicemailId(viewHolder.voicemailUri), viewHolder.voicemailUri);
             }
+
+            if (selectedItems.size() == 0) {
+              mActionMode.finish();
+              return;
+            }
+            mActionMode.setTitle(Integer.toString(selectedItems.size()));
             return;
           }
 
@@ -323,48 +311,6 @@ public class CallLogAdapter extends GroupingListAdapter
           }
         }
       };
-
-  private void checkMarkCallLogEntry(CallLogListItemViewHolder viewHolder) {
-    announceforAccessibility(
-        mActivity.getCurrentFocus(),
-        mActivity.getString(
-            R.string.description_selecting_bulk_action_mode, viewHolder.nameOrNumber));
-    viewHolder.quickContactView.setVisibility(View.GONE);
-    viewHolder.checkBoxView.setVisibility(View.VISIBLE);
-    selectedItems.put(getVoicemailId(viewHolder.voicemailUri), viewHolder.voicemailUri);
-    updateActionBar();
-  }
-
-  private void announceforAccessibility(View view, String announcement) {
-    if (view != null) {
-      view.announceForAccessibility(announcement);
-    }
-  }
-
-  private void updateActionBar() {
-    if (mActionMode == null && selectedItems.size() > 0) {
-      mActivity.startActionMode(mActionModeCallback);
-    }
-    if (mActionMode != null) {
-      mActionMode.setTitle(
-          mActivity
-              .getResources()
-              .getString(
-                  R.string.voicemailMultiSelectActionBarTitle,
-                  Integer.toString(selectedItems.size())));
-    }
-  }
-
-  private void uncheckMarkCallLogEntry(CallLogListItemViewHolder viewHolder, int id) {
-    announceforAccessibility(
-        mActivity.getCurrentFocus(),
-        mActivity.getString(
-            R.string.description_unselecting_bulk_action_mode, viewHolder.nameOrNumber));
-    selectedItems.delete(id);
-    viewHolder.checkBoxView.setVisibility(View.GONE);
-    viewHolder.quickContactView.setVisibility(View.VISIBLE);
-    updateActionBar();
-  }
 
   private static int getVoicemailId(String voicemailUri) {
     Assert.checkArgument(voicemailUri != null);
@@ -412,7 +358,6 @@ public class CallLogAdapter extends GroupingListAdapter
       Activity activity,
       ViewGroup alertContainer,
       CallFetcher callFetcher,
-      MultiSelectRemoveView multiSelectRemoveView,
       CallLogCache callLogCache,
       ContactInfoCache contactInfoCache,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,
@@ -422,7 +367,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     mActivity = activity;
     mCallFetcher = callFetcher;
-    mMultiSelectRemoveView = multiSelectRemoveView;
     mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
     if (mVoicemailPlaybackPresenter != null) {
       mVoicemailPlaybackPresenter.setOnVoicemailDeletedListener(this);
@@ -482,14 +426,6 @@ public class CallLogAdapter extends GroupingListAdapter
   public void onSaveInstanceState(Bundle outState) {
     outState.putInt(KEY_EXPANDED_POSITION, mCurrentlyExpandedPosition);
     outState.putLong(KEY_EXPANDED_ROW_ID, mCurrentlyExpandedRowId);
-
-    ArrayList<String> listOfSelectedItems = new ArrayList<>();
-    if (selectedItems.size() > 0) {
-      for (int i = 0; i < selectedItems.size(); i++) {
-        listOfSelectedItems.add(Integer.toString(selectedItems.keyAt(i)));
-      }
-    }
-    outState.putStringArrayList(KEY_ACTION_MODE, listOfSelectedItems);
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -498,18 +434,6 @@ public class CallLogAdapter extends GroupingListAdapter
           savedInstanceState.getInt(KEY_EXPANDED_POSITION, RecyclerView.NO_POSITION);
       mCurrentlyExpandedRowId =
           savedInstanceState.getLong(KEY_EXPANDED_ROW_ID, NO_EXPANDED_LIST_ITEM);
-
-      // Restoring multi selected entries
-      ArrayList<String> listOfSelectedItems =
-          savedInstanceState.getStringArrayList(KEY_ACTION_MODE);
-      if (!listOfSelectedItems.isEmpty()) {
-        for (int i = 0; i < listOfSelectedItems.size(); i++) {
-          String voicemailId = listOfSelectedItems.get(i);
-          int id = Integer.parseInt(voicemailId);
-          selectedItems.put(id, voicemailId);
-        }
-        updateActionBar();
-      }
     }
   }
 
@@ -635,8 +559,6 @@ public class CallLogAdapter extends GroupingListAdapter
   public void onViewRecycled(ViewHolder viewHolder) {
     if (viewHolder.getItemViewType() == VIEW_TYPE_CALLLOG) {
       CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
-      updateCheckMarkedStatusOfEntry(views);
-
       if (views.asyncTask != null) {
         views.asyncTask.cancel(true);
       }
@@ -669,8 +591,6 @@ public class CallLogAdapter extends GroupingListAdapter
       return;
     }
     CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
-    updateCheckMarkedStatusOfEntry(views);
-
     views.isLoaded = false;
     int groupSize = getGroupSize(position);
     CallDetailsEntries callDetailsEntries = createCallDetailsEntries(c, groupSize);
@@ -687,17 +607,6 @@ public class CallLogAdapter extends GroupingListAdapter
       views.inflateActionViewStub();
     }
     loadAndRender(views, views.rowId, details, callDetailsEntries);
-  }
-
-  private void updateCheckMarkedStatusOfEntry(CallLogListItemViewHolder views) {
-    if (selectedItems.size() > 0 && views.voicemailUri != null) {
-      int id = getVoicemailId(views.voicemailUri);
-      if (selectedItems.get(id) != null) {
-        checkMarkCallLogEntry(views);
-      } else {
-        uncheckMarkCallLogEntry(views, id);
-      }
-    }
   }
 
   private void loadAndRender(
@@ -1008,12 +917,6 @@ public class CallLogAdapter extends GroupingListAdapter
     views.workIconView.setVisibility(
         details.contactUserType == ContactsUtils.USER_TYPE_WORK ? View.VISIBLE : View.GONE);
 
-    if (selectAllMode && views.voicemailUri != null) {
-      selectedItems.put(getVoicemailId(views.voicemailUri), views.voicemailUri);
-    }
-    if (deselectAllMode && views.voicemailUri != null) {
-      selectedItems.delete(getVoicemailId(views.voicemailUri));
-    }
     if (views.voicemailUri != null
         && selectedItems.get(getVoicemailId(views.voicemailUri)) != null) {
       views.checkBoxView.setVisibility(View.VISIBLE);
@@ -1022,6 +925,7 @@ public class CallLogAdapter extends GroupingListAdapter
       views.checkBoxView.setVisibility(View.GONE);
       views.quickContactView.setVisibility(View.VISIBLE);
     }
+
     mCallLogListItemHelper.setPhoneCallDetails(views, details);
     if (mCurrentlyExpandedRowId == views.rowId) {
       // In case ViewHolders were added/removed, update the expanded position if the rowIds
@@ -1288,41 +1192,9 @@ public class CallLogAdapter extends GroupingListAdapter
     notifyDataSetChanged();
   }
 
-  public void onAllSelected() {
-    selectAllMode = true;
-    deselectAllMode = false;
-    selectedItems.clear();
-    for (int i = 0; i < getItemCount(); i++) {
-      Cursor c = (Cursor) getItem(i);
-      if (c != null) {
-        Assert.checkArgument(CallLogQuery.VOICEMAIL_URI == c.getColumnIndex("voicemail_uri"));
-        String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
-        selectedItems.put(getVoicemailId(voicemailUri), voicemailUri);
-      }
-    }
-    updateActionBar();
-    notifyDataSetChanged();
-  }
-
-  public void onAllDeselected() {
-    selectAllMode = false;
-    deselectAllMode = true;
-    selectedItems.clear();
-    updateActionBar();
-    notifyDataSetChanged();
-  }
-
   /** Interface used to initiate a refresh of the content. */
   public interface CallFetcher {
 
     void fetchCalls();
-  }
-
-  /** Interface used to hide the fragments. */
-  public interface MultiSelectRemoveView {
-
-    void showMultiSelectRemoveView(boolean show);
-
-    void setSelectAllModeToFalse();
   }
 }

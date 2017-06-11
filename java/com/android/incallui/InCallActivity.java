@@ -694,8 +694,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     if (didShowInCallScreen) {
       return false;
     }
-    InCallScreen inCallScreen = InCallBindings.createInCallScreen();
-    transaction.add(R.id.main, inCallScreen.getInCallScreenFragment(), TAG_IN_CALL_SCREEN);
+    InCallScreen inCallScreen = getInCallScreen();
+    if (inCallScreen == null) {
+      inCallScreen = InCallBindings.createInCallScreen();
+      transaction.add(R.id.main, inCallScreen.getInCallScreenFragment(), TAG_IN_CALL_SCREEN);
+    } else {
+      transaction.show(inCallScreen.getInCallScreenFragment());
+    }
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowInCallScreen = true;
     return true;
@@ -707,7 +712,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     InCallScreen inCallScreen = getInCallScreen();
     if (inCallScreen != null) {
-      transaction.remove(inCallScreen.getInCallScreenFragment());
+      transaction.hide(inCallScreen.getInCallScreenFragment());
     }
     didShowInCallScreen = false;
     return true;

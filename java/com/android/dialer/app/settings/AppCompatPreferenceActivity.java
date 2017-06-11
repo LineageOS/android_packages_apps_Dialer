@@ -18,6 +18,7 @@ package com.android.dialer.app.settings;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
@@ -46,6 +47,10 @@ public class AppCompatPreferenceActivity extends PreferenceActivity {
   protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     getDelegate().onPostCreate(savedInstanceState);
+  }
+
+  public ActionBar getSupportActionBar() {
+    return getDelegate().getSupportActionBar();
   }
 
   public void setSupportActionBar(Toolbar toolbar) {

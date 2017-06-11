@@ -29,11 +29,11 @@ import android.support.v13.app.FragmentCompat;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.SmartDialCursorLoader;
+import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.util.PermissionsUtil;
-import com.android.dialer.widget.EmptyContentView;
 
 /** Implements a fragment to load and display SmartDial search results. */
 public class SmartDialSearchFragment extends SearchFragment

@@ -85,10 +85,6 @@
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"ဖုန်းပြန်ခေါ်မှု ပြုလုပ်နေစဉ်"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"ဖုန်းခေါ်မှု ထပ်ထည့်ပါ"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"အဝင်ခေါ်ဆိုမှုများ"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"တပြိုင်နက်တည်း စုပြုံလုပ်ဆောင်ချက်မုဒ်ကို ထည့်သွင်းခြင်း"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"တပြိုင်နက်တည်း စုပြုံလုပ်ဆောင်ချက်မုဒ်မှ ထွက်လိုက်သည်"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"ရွေးချယ်ထားသော <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"မရွေးချယ်ထားသော <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"အသံပို့စာ နားထောင်ရန်"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"<xliff:g id="NAME">%1$s</xliff:g> လိပ်စာကြည့်ရန်"</string>
     <string name="description_call" msgid="1532402285334775372">"<xliff:g id="NAME">%1$s</xliff:g> ကိုခေါ်ပါ"</string>
@@ -103,13 +99,11 @@
     <string name="voicemail" msgid="8899540969000957954">"အသံစာပို့စနစ်"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> စက္ကန့်"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> မိနစ် <xliff:g id="SECONDS">%s</xliff:g> စက္ကန့်"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"တပြိုင်နက်တည်း စုပြုံလုပ်ဆောင်ချက်များမုဒ်ကိ ပယ်ဖျက်ရန်"</string>
     <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"အသံမေးလ်"</string>
     <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"အသံမေးလ်များ"</string>
     <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Yes"</string>
     <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ရွေးထားသော <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> ကို ဖျက်လိုပါသလား။"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> ကို ရွေးချယ်ထားသည်"</string>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g> ၌"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -122,6 +116,7 @@
     <string name="meid" msgid="3333779521535224028">"MEIDနံပါတ်"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"ဆင်းမ်ကဒ်မှ ဖွင့်နေပါသည်..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"ဆင်းမ်ကဒ်မှ အဆက်အသွယ်များ"</string>
+    <string name="add_contact_not_available" msgid="7065884447935173347">"အဆက်အသွယ်များ app မရှိ"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"အသံဖြင့် ရှာဖွေမှု မရှိ"</string>
     <string name="call_not_available" msgid="7850148370757361155">"ဖုန်း အပလီကေးရှင်းကို ပိတ်ထား၍ ဖုန်း ခေါ်ဆိုမှု မပြုလုပ်နိုင်ခဲ့ပါ။"</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"အဆက်အသွယ်များရှာပါ"</string>
@@ -150,9 +145,10 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"လွတ်သွားသောဖုန်း <xliff:g id="NUMBER">%s</xliff:g> ခါ"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"သင်၏အမြန်ခေါ်စာရင်းတွင် မည်သူမျှ မရှိသေးပါ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"အနှစ်သက်ဆုံးတစ်ခု ထည့်ရန်"</string>
+    <string name="all_contacts_empty" msgid="243071567853617177">"သင့်တွင် မည်သည့်အဆက်အသွယ်မျှ မရှိသေးပါ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"အဆက်အသွယ်တစ်ယောက် ထည့်မည်"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"နံပါတ်အားလုံးကိုကြည့်ရန် ပုံကိုထိပါ (သို့) ပြန်စီရန် ထိပြီးဖိထားပါ"</string>
     <string name="remove_contact" msgid="2353580570488923668">"ဖယ်ရှာခြင်း"</string>
-    <string name="select_all" msgid="408601760696146245">"အားလုံးကို ရွေးချယ်ပါ"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"စာ တစ်စောင် ပို့ပါ"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"ဖုန်းခေါ်မှု အသေးစိတ်အချက်အလက်"</string>
@@ -217,9 +213,11 @@
     <string name="block_list" msgid="4701585783411870782">"ပိတ်ထားသည့် နံပါတ်များ"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> အားပိတ်ဆို့ထားပြီးပါပြီ။"</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"ခေါ်ဆိုသော အကောင့်များ"</string>
+    <string name="permission_single_turn_on" msgid="8014796118294187894">"ဖွင့်ထားရန်"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"ခွင့်ပြုချက်များ သတ်မှတ်မည်"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"မြန်နှုန်းမြင့်ဖုန်းခေါ်ဆိုမှုကို ဖွင့်ရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"ခေါ်ဆိုမှုမှတ်တမ်းကို ကြည့်ရန်၊ ဖုန်းခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_contacts" msgid="8995025765862026771">"အဆက်အသွယ်များကိုကြည့်ရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"အသံမေးလ်ကိုအသုံးပြုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="permission_no_search" msgid="2424710404207193826">"သင့်အဆက်အသွယ်များကို ရှာဖွေရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်များကို ဖွင့်ပါ။"</string>
     <string name="permission_place_call" msgid="8686908130349369423">"ဖုန်းခေါ်ဆိုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>

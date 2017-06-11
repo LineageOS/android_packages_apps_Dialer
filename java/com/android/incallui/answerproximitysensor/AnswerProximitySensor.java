@@ -143,9 +143,6 @@ public class AnswerProximitySensor
   public void onInternationalCallOnWifi() {}
 
   @Override
-  public void onEnrichedCallSessionUpdate() {}
-
-  @Override
   public void onDialerCallSessionModificationStateChange() {}
 
   @Override
