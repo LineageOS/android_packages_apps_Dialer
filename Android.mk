@@ -58,7 +58,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \
     guava \
     libphonenumber \
-    legacy-android-test \
     junit
 
 LOCAL_PACKAGE_NAME := Dialer

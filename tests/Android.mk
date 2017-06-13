@@ -19,6 +19,8 @@ LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_STATIC_JAVA_LIBRARIES += \
         mockito-target
 
+LOCAL_JAVA_LIBRARIES := android.test.mock.sdk legacy-android-test
+
 LOCAL_PACKAGE_NAME := DialerTests
 
 LOCAL_INSTRUMENTATION_FOR := Dialer
