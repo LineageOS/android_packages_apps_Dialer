@@ -44,12 +44,9 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -85,8 +82,7 @@ public class CallCardPresenter
         InCallDetailsListener,
         InCallEventListener,
         InCallScreenDelegate,
-        DialerCallListener,
-        EnrichedCallManager.StateChangedListener {
+        DialerCallListener {
 
   /**
    * Amount of time to wait before sending an announcement via the accessibility manager. When the
@@ -249,7 +245,7 @@ public class CallCardPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
-    LogUtil.v("CallCardPresenter.onStateChange", "" + newState);
+    LogUtil.v("CallCardPresenter.onStateChange", "oldState: %s, newState: %s", oldState, newState);
     if (mInCallScreen == null) {
       return;
     }
@@ -376,6 +372,12 @@ public class CallCardPresenter
   @Override
   public void onInternationalCallOnWifi() {}
 
+  @Override
+  public void onEnrichedCallSessionUpdate() {
+    LogUtil.enterBlock("CallCardPresenter.onEnrichedCallSessionUpdate");
+    updatePrimaryDisplayInfo();
+  }
+
   /** Handles a change to the child number by refreshing the primary call info. */
   @Override
   public void onDialerCallChildNumberChange() {
@@ -416,12 +418,6 @@ public class CallCardPresenter
                 != SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
             true /* shouldAnimate */);
     updatePrimaryCallState();
-  }
-
-  @Override
-  public void onEnrichedCallStateChanged() {
-    LogUtil.enterBlock("CallCardPresenter.onEnrichedCallStateChanged");
-    updatePrimaryDisplayInfo();
   }
 
   private boolean shouldRefreshPrimaryInfo(boolean primaryChanged) {
@@ -475,7 +471,8 @@ public class CallCardPresenter
                   mPrimary.getConnectTimeMillis(),
                   CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
                   mPrimary.isRemotelyHeld(),
-                  isBusiness));
+                  isBusiness,
+                  supports2ndCallOnHold()));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
@@ -503,6 +500,15 @@ public class CallCardPresenter
 
     return mPrimary.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)
         && !mIsFullscreen;
+  }
+
+  private boolean supports2ndCallOnHold() {
+    DialerCall firstCall = CallList.getInstance().getActiveOrBackgroundCall();
+    DialerCall incomingCall = CallList.getInstance().getIncomingCall();
+    if (firstCall != null && incomingCall != null && firstCall != incomingCall) {
+      return incomingCall.can(Details.CAPABILITY_HOLD);
+    }
+    return true;
   }
 
   @Override
@@ -666,26 +672,8 @@ public class CallCardPresenter
     boolean hasWorkCallProperty = mPrimary.hasProperty(PROPERTY_ENTERPRISE_CALL);
 
     MultimediaData multimediaData = null;
-    if (mPrimary.getNumber() != null) {
-      EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
-
-      EnrichedCallManager.Filter filter;
-      if (mPrimary.isIncoming()) {
-        filter = manager.createIncomingCallComposerFilter();
-      } else {
-        filter = manager.createOutgoingCallComposerFilter();
-      }
-
-      Session enrichedCallSession =
-          manager.getSession(mPrimary.getUniqueCallId(), mPrimary.getNumber(), filter);
-
-      mPrimary.setEnrichedCallSession(enrichedCallSession);
-      mPrimary.setEnrichedCallCapabilities(manager.getCapabilities(mPrimary.getNumber()));
-
-      if (enrichedCallSession != null) {
-        enrichedCallSession.setUniqueDialerCallId(mPrimary.getUniqueCallId());
-        multimediaData = enrichedCallSession.getMultimediaData();
-      }
+    if (mPrimary.getEnrichedCallSession() != null) {
+      multimediaData = mPrimary.getEnrichedCallSession().getMultimediaData();
     }
 
     if (mPrimary.isConferenceCall()) {
@@ -696,7 +684,8 @@ public class CallCardPresenter
       mInCallScreen.setPrimary(
           new PrimaryInfo(
               null /* number */,
-              getConferenceString(mPrimary),
+              CallerInfoUtils.getConferenceString(
+                  mContext, mPrimary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)),
               false /* nameIsNumber */,
               null /* location */,
               null /* label */,
@@ -876,11 +865,20 @@ public class CallCardPresenter
       return;
     }
 
+    if (mSecondary.isMergeInProcess()) {
+      LogUtil.i(
+          "CallCardPresenter.updateSecondaryDisplayInfo",
+          "secondary call is merge in process, clearing info");
+      mInCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(mIsFullscreen));
+      return;
+    }
+
     if (mSecondary.isConferenceCall()) {
       mInCallScreen.setSecondary(
           new SecondaryInfo(
               true /* show */,
-              getConferenceString(mSecondary),
+              CallerInfoUtils.getConferenceString(
+                  mContext, mSecondary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)),
               false /* nameIsNumber */,
               null /* label */,
               mSecondary.getCallProviderLabel(),
@@ -972,7 +970,7 @@ public class CallCardPresenter
   }
 
   /** Gets the name to display for the call. */
-  String getNameForCall(ContactCacheEntry contactInfo) {
+  private String getNameForCall(ContactCacheEntry contactInfo) {
     String preferredName =
         ContactDisplayUtils.getPreferredDisplayName(
             contactInfo.namePrimary, contactInfo.nameAlternative, mContactsPreferences);
@@ -980,19 +978,6 @@ public class CallCardPresenter
       return contactInfo.number;
     }
     return preferredName;
-  }
-
-  /** Gets the number to display for a call. */
-  String getNumberForCall(ContactCacheEntry contactInfo) {
-    // If the name is empty, we use the number for the name...so don't show a second
-    // number in the number field
-    String preferredName =
-        ContactDisplayUtils.getPreferredDisplayName(
-            contactInfo.namePrimary, contactInfo.nameAlternative, mContactsPreferences);
-    if (TextUtils.isEmpty(preferredName)) {
-      return contactInfo.location;
-    }
-    return contactInfo.number;
   }
 
   @Override
@@ -1035,15 +1020,6 @@ public class CallCardPresenter
     return mPrimary != null && mPrimary.getState() == DialerCall.State.ACTIVE;
   }
 
-  private String getConferenceString(DialerCall call) {
-    boolean isGenericConference = call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE);
-    LogUtil.v("CallCardPresenter.getConferenceString", "" + isGenericConference);
-
-    final int resId =
-        isGenericConference ? R.string.generic_conference_call_name : R.string.conference_call_name;
-    return mContext.getResources().getString(resId);
-  }
-
   private boolean shouldShowEndCallButton(DialerCall primary, int callState) {
     if (primary == null) {
       return false;
@@ -1063,7 +1039,6 @@ public class CallCardPresenter
 
   @Override
   public void onInCallScreenResumed() {
-    EnrichedCallComponent.get(mContext).getEnrichedCallManager().registerStateChangedListener(this);
     updatePrimaryDisplayInfo();
 
     if (shouldSendAccessibilityEvent) {
@@ -1072,11 +1047,7 @@ public class CallCardPresenter
   }
 
   @Override
-  public void onInCallScreenPaused() {
-    EnrichedCallComponent.get(mContext)
-        .getEnrichedCallManager()
-        .unregisterStateChangedListener(this);
-  }
+  public void onInCallScreenPaused() {}
 
   static boolean sendAccessibilityEvent(Context context, InCallScreen inCallScreen) {
     AccessibilityManager am =

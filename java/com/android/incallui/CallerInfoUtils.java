@@ -282,4 +282,11 @@ public class CallerInfoUtils {
         });
     loader.startLoading();
   }
+
+  /** @return conference name for conference call. */
+  public static String getConferenceString(Context context, boolean isGenericConference) {
+    final int resId =
+        isGenericConference ? R.string.generic_conference_call_name : R.string.conference_call_name;
+    return context.getResources().getString(resId);
+  }
 }

@@ -28,5 +28,8 @@
   <item
     android:id="@+id/menu_simulator_submenu"
     android:title="@string/simulator_submenu_label"/>
+  <item
+      android:id="@+id/menu_new_ui_launcher_shortcut"
+      android:title="@string/new_ui_launcher_shortcut_label"/>
 
 </menu>

@@ -47,12 +47,12 @@ import com.android.common.io.MoreCloseables;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -87,7 +87,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * calls into this class from outside must be done from the main UI thread.
  */
 @NotThreadSafe
-@VisibleForTesting
 @TargetApi(VERSION_CODES.M)
 public class VoicemailPlaybackPresenter
     implements MediaPlayer.OnPreparedListener,
@@ -502,7 +501,7 @@ public class VoicemailPlaybackPresenter
    * will call {@link #onError()} otherwise.
    */
   protected void prepareContent() {
-    if (mView == null) {
+    if (mView == null || mContext == null) {
       return;
     }
     LogUtil.d("VoicemailPlaybackPresenter.prepareContent", null);
@@ -548,7 +547,9 @@ public class VoicemailPlaybackPresenter
     mView.setClipPosition(mPosition, mDuration.get());
     mView.enableUiElements();
     mView.setSuccess();
-    mMediaPlayer.seekTo(mPosition);
+    if (!mp.isPlaying()) {
+      mMediaPlayer.seekTo(mPosition);
+    }
 
     if (mIsPlaying) {
       resumePlayback();

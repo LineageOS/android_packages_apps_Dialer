@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> बाट आएको छुटेको कल"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"चलिरहेको कल"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"चालू रहेको कार्यको कल"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"चालु रहेको WI-Fi कल"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"चालू रहेको Wi-Fi कार्यको कल"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"जारी रहेको WI-Fi कल"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Wi-Fi मार्फत जारी रहेको कार्यालयको कल"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"होल्डमा"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"आगमन कल"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"तस्बिरसहितको आगमन कल"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"तस्बिर, सन्देश र स्थानसहितको महत्त्वपूर्ण आगमन कल"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"समावेश गरिएको वस्तुसहितको महत्त्वपूर्ण आगमन कल"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"आगमन कार्यको कल"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"आगमन Wi-Fi कल"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"आगमन Wi-Fi कार्यको कल"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Wi-Fi मार्फत आगमन कल"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Wi-Fi मार्फत कार्यालयबाट आएको कल"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"शंकास्पद आगमन स्प्याम कल"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"आगमन भिडियो अनुरोध"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"सेवा छैन"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"भिडियो कल लिनुहोस्"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"कल राख्नका लागि, पहिले हवाइजहाज मोड बन्द गर्नुहोस्।"</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"नेटवर्कमा दर्ता भएको छैन।"</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"सेलुलर सञ्जाल उपलब्ध छैन।"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"मोबाइल नेटवर्क उपलब्ध छैन।"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"एक कल गर्नको लागि, एक वैध नम्बर प्रविष्ट गर्नुहोस्।"</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"कल गर्न सक्दैन।"</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI अनुक्रम सुरु गर्दै..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"कल अन्त्य गर्नुहोस्"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"सम्मेलन कल"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"कलमा"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"सेलुलर डेटा प्रयोग गरी कललाई निरन्तरता दिइँदै…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi नेटवर्कमा स्विच गर्न सकिएन"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"भिडियो कल सेलुलर नेटवर्कमा रहने छ। मानक डेटा शुल्क लाग्न सक्छ।"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"मोबाइल डेटा प्रयोग गरी कललाई निरन्तरता दिइँदै…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi नेटवर्कमा स्विच गर्न सकिएन"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"भिडियो कल मोबाइल नेटवर्कमा रहने छ। मानक डेटा शुल्क लाग्न सक्छ।"</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"यसलाई फेरि नदेखाउनुहोस्"</string>
 </resources>

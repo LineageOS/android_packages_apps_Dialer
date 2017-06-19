@@ -24,12 +24,14 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -68,6 +70,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
+        Logger.get(context).logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
         return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(accountHandle)
             .setIsVideoCall(true)
@@ -80,6 +83,8 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
         return LightbringerComponent.get(context).getLightbringer().getIntent(context, number);
       }
     };
@@ -112,11 +117,12 @@ public abstract class IntentProvider {
    * @return The call details intent provider.
    */
   public static IntentProvider getCallDetailIntentProvider(
-      CallDetailsEntries callDetailsEntries, CallComposerContact contact) {
+      CallDetailsEntries callDetailsEntries, DialerContact contact, boolean canReportCallerId) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return CallDetailsActivity.newInstance(context, callDetailsEntries, contact);
+        return CallDetailsActivity.newInstance(
+            context, callDetailsEntries, contact, canReportCallerId);
       }
     };
   }

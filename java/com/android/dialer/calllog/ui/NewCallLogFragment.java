@@ -17,30 +17,38 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.CallLogFramework.CallLogUi;
-import com.android.dialer.calllog.database.AnnotatedCallLog.Columns;
+import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.DialerExecutorFactory;
 
 /** The "new" call log fragment implementation, which is built on top of the annotated call log. */
 public final class NewCallLogFragment extends Fragment
     implements CallLogUi, LoaderCallbacks<Cursor> {
 
-  private CursorAdapter cursorAdapter;
+  /*
+   * This is a reasonable time that it might take between related call log writes, that also
+   * shouldn't slow down single-writes too much. For example, when populating the database using
+   * the simulator, using this value results in ~6 refresh cycles (on a release build) to write 120
+   * call log entries.
+   */
+  private static final long WAIT_MILLIS = 100L;
+
+  private DialerExecutor<Boolean> refreshAnnotatedCallLogTask;
+  private RecyclerView recyclerView;
 
   public NewCallLogFragment() {
     LogUtil.enterBlock("NewCallLogFragment.NewCallLogFragment");
@@ -52,8 +60,27 @@ public final class NewCallLogFragment extends Fragment
 
     LogUtil.enterBlock("NewCallLogFragment.onCreate");
 
-    CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
+    CallLogComponent component = CallLogComponent.get(getContext());
+    CallLogFramework callLogFramework = component.callLogFramework();
     callLogFramework.attachUi(this);
+
+    DialerExecutorFactory dialerExecutorFactory =
+        DialerExecutorComponent.get(getContext()).dialerExecutorFactory();
+
+    refreshAnnotatedCallLogTask =
+        dialerExecutorFactory
+            .createUiTaskBuilder(
+                getFragmentManager(),
+                "NewCallLogFragment.refreshAnnotatedCallLog",
+                component.getRefreshAnnotatedCallLogWorker())
+            .build();
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+
+    LogUtil.enterBlock("NewCallLogFragment.onStart");
   }
 
   @Override
@@ -64,6 +91,9 @@ public final class NewCallLogFragment extends Fragment
 
     CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
     callLogFramework.attachUi(this);
+
+    // TODO: Consider doing this when fragment becomes visible.
+    checkAnnotatedCallLogDirtyAndRefreshIfNecessary();
   }
 
   @Override
@@ -82,57 +112,44 @@ public final class NewCallLogFragment extends Fragment
     LogUtil.enterBlock("NewCallLogFragment.onCreateView");
 
     View view = inflater.inflate(R.layout.new_call_log_fragment, container, false);
-    ListView listView = (ListView) view.findViewById(R.id.list);
+    recyclerView = view.findViewById(R.id.new_call_log_recycler_view);
 
-    this.cursorAdapter =
-        new MyCursorAdapter(
-            getContext(),
-            R.layout.new_call_log_entry,
-            null /* cursor */,
-            new String[] {Columns.TIMESTAMP, Columns.CONTACT_NAME},
-            new int[] {R.id.timestamp, R.id.contact_name},
-            0);
-    listView.setAdapter(cursorAdapter);
-
-    getLoaderManager().initLoader(0, null, this);
+    getLoaderManager().restartLoader(0, null, this);
 
     return view;
+  }
+
+  private void checkAnnotatedCallLogDirtyAndRefreshIfNecessary() {
+    LogUtil.enterBlock("NewCallLogFragment.checkAnnotatedCallLogDirtyAndRefreshIfNecessary");
+    refreshAnnotatedCallLogTask.executeSerialWithWait(false /* skipDirtyCheck */, WAIT_MILLIS);
   }
 
   @Override
   public void invalidateUi() {
     LogUtil.enterBlock("NewCallLogFragment.invalidateUi");
-    // TODO: Implementation.
+    refreshAnnotatedCallLogTask.executeSerialWithWait(true /* skipDirtyCheck */, WAIT_MILLIS);
   }
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    // TODO: This is sort of weird, do we need to implement a content provider?
-    return new AnnotatedCallLogCursorLoader(getContext());
+    LogUtil.enterBlock("NewCallLogFragment.onCreateLoader");
+    // CoalescedAnnotatedCallLog requires that all params be null.
+    return new CursorLoader(
+        getContext(), CoalescedAnnotatedCallLog.CONTENT_URI, null, null, null, null);
   }
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
-    cursorAdapter.swapCursor(newCursor);
+    LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");
+
+    // TODO: Handle empty cursor by showing empty view.
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(new NewCallLogAdapter(newCursor));
   }
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader) {
-    cursorAdapter.swapCursor(null);
-  }
-
-  private static class MyCursorAdapter extends SimpleCursorAdapter {
-
-    MyCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
-      super(context, layout, c, from, to, flags);
-    }
-
-    @Override
-    public void setViewText(TextView view, String text) {
-      if (view.getId() == R.id.timestamp) {
-        text = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US).format(Long.valueOf(text));
-      }
-      view.setText(text);
-    }
+    LogUtil.enterBlock("NewCallLogFragment.onLoaderReset");
+    recyclerView.setAdapter(null);
   }
 }

@@ -30,7 +30,6 @@ import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.R;
@@ -38,15 +37,17 @@ import com.android.contacts.common.compat.CallableCompat;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.compat.PhoneCompat;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
+import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.list.ContactListItemView.CallToAction;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.Constants;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
@@ -68,16 +69,14 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
   // A list of extended directories to add to the directories from the database
   private final List<DirectoryPartition> mExtendedDirectories;
   private final CharSequence mUnknownNameText;
-  private final boolean mCallAndShareEnabled;
+  protected final boolean mIsImsVideoEnabled;
+
   // Extended directories will have ID's that are higher than any of the id's from the database,
   // so that we can identify them and set them up properly. If no extended directories
   // exist, this will be Long.MAX_VALUE
   private long mFirstExtendedDirectoryId = Long.MAX_VALUE;
-  private ContactListItemView.PhotoPosition mPhotoPosition;
   private boolean mUseCallableUri;
   private Listener mListener;
-  private boolean mIsVideoEnabled;
-  private boolean mIsPresenceEnabled;
 
   public PhoneNumberListAdapter(Context context) {
     super(context);
@@ -88,11 +87,9 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         PhoneDirectoryExtenderAccessor.get(mContext).getExtendedDirectories(mContext);
 
     int videoCapabilities = CallUtil.getVideoCallingAvailability(context);
-    mIsVideoEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_ENABLED) != 0;
-    mIsPresenceEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
-
-    // TODO
-    mCallAndShareEnabled = true;
+    mIsImsVideoEnabled =
+        CallUtil.isVideoEnabled(context)
+            && (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
   }
 
   @Override
@@ -249,10 +246,10 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     return item != null ? item.getString(PhoneQuery.LOOKUP_KEY) : null;
   }
 
-  public CallComposerContact getCallComposerContact(int position) {
+  public DialerContact getDialerContact(int position) {
     Cursor cursor = (Cursor) getItem(position);
     if (cursor == null) {
-      LogUtil.e("PhoneNumberListAdapter.getCallComposerContact", "cursor was null.");
+      LogUtil.e("PhoneNumberListAdapter.getDialerContact", "cursor was null.");
       return null;
     }
 
@@ -263,11 +260,11 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         Contacts.getLookupUri(
             cursor.getLong(PhoneQuery.CONTACT_ID), cursor.getString(PhoneQuery.LOOKUP_KEY));
 
-    CallComposerContact.Builder contact = CallComposerContact.newBuilder();
+    DialerContact.Builder contact = DialerContact.newBuilder();
     contact
         .setNumber(number)
         .setPhotoId(cursor.getLong(PhoneQuery.PHOTO_ID))
-        .setContactType(ContactPhotoManager.TYPE_DEFAULT)
+        .setContactType(LetterTileDrawable.TYPE_DEFAULT)
         .setNameOrNumber(displayName)
         .setNumberLabel(
             Phone.getTypeLabel(
@@ -297,7 +294,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     ContactListItemView view = super.newView(context, partition, cursor, position, parent);
     view.setUnknownNameText(mUnknownNameText);
     view.setQuickContactEnabled(isQuickContactEnabled());
-    view.setPhotoPosition(mPhotoPosition);
     return view;
   }
 
@@ -355,14 +351,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     }
 
     final DirectoryPartition directory = (DirectoryPartition) getPartition(partition);
-
-    // If the first partition does not have a header, then all subsequent partitions'
-    // getPositionForPartition returns an index off by 1.
-    int partitionOffset = 0;
-    if (partition > 0 && !getPartition(0).getHasHeader()) {
-      partitionOffset = 1;
-    }
-    position += getPositionForPartition(partition) + partitionOffset;
+    // All sections have headers, so scroll position is off by 1.
+    position += getPositionForPartition(partition) + 1;
 
     bindPhoneNumber(view, cursor, directory.isDisplayNumber(), position);
   }
@@ -401,13 +391,17 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       int carrierPresence = cursor.getInt(PhoneQuery.CARRIER_PRESENCE);
       boolean isPresent = (carrierPresence & Phone.CARRIER_PRESENCE_VT_CAPABLE) != 0;
 
-      boolean isVideoIconShown = mIsVideoEnabled && (!mIsPresenceEnabled || isPresent);
-      if (isVideoIconShown) {
+      boolean showViewIcon = mIsImsVideoEnabled && isPresent;
+      if (showViewIcon) {
         action = ContactListItemView.VIDEO;
       }
     }
 
-    if (isCallAndShareEnabled() && action == ContactListItemView.NONE && number != null) {
+    if (LightbringerComponent.get(mContext).getLightbringer().isReachable(mContext, number)) {
+      action = ContactListItemView.LIGHTBRINGER;
+    }
+
+    if (action == ContactListItemView.NONE) {
       EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
       EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
       if (capabilities != null && capabilities.supportsCallComposer()) {
@@ -479,14 +473,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       getPhotoLoader()
           .loadDirectoryPhoto(view.getPhotoView(), photoUri, false, getCircularPhotos(), request);
     }
-  }
-
-  public ContactListItemView.PhotoPosition getPhotoPosition() {
-    return mPhotoPosition;
-  }
-
-  public void setPhotoPosition(ContactListItemView.PhotoPosition photoPosition) {
-    mPhotoPosition = photoPosition;
   }
 
   public void setUseCallableUri(boolean useCallableUri) {
@@ -570,13 +556,11 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     mListener = listener;
   }
 
-  public boolean isCallAndShareEnabled() {
-    return mCallAndShareEnabled;
-  }
-
   public interface Listener {
 
     void onVideoCallIconClicked(int position);
+
+    void onLightbringerIconClicked(int position);
 
     void onCallAndShareIconClicked(int position);
   }
@@ -642,18 +626,14 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     static {
       final List<String> projectionList =
           new ArrayList<>(Arrays.asList(PROJECTION_PRIMARY_INTERNAL));
-      if (CompatUtils.isMarshmallowCompatible()) {
-        projectionList.add(Phone.CARRIER_PRESENCE); // 9
-      }
+      projectionList.add(Phone.CARRIER_PRESENCE); // 9
       PROJECTION_PRIMARY = projectionList.toArray(new String[projectionList.size()]);
     }
 
     static {
       final List<String> projectionList =
           new ArrayList<>(Arrays.asList(PROJECTION_ALTERNATIVE_INTERNAL));
-      if (CompatUtils.isMarshmallowCompatible()) {
-        projectionList.add(Phone.CARRIER_PRESENCE); // 9
-      }
+      projectionList.add(Phone.CARRIER_PRESENCE); // 9
       PROJECTION_ALTERNATIVE = projectionList.toArray(new String[projectionList.size()]);
     }
   }

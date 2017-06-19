@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"ສາຍບໍ່ໄດ້ຮັບຈາກ <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"ສາຍທີ່ກຳລັງໂທອອກ"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ສາຍໂທອອກຈາກບ່ອນເຮັດວຽກ"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"ການ​ໂທ Wi​-Fi ທີ່ດໍາເນີນຢູ່"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ສາຍໂທອອກ Wi-Fi ຈາກບ່ອນເຮັດວຽກ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"ການໂທ Wi-Fi ທີ່ດໍາເນີນຢູ່"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"ການໂທ Wi-Fi ບ່ອນເຮັດວຽກທີ່ດໍາເນີນຢູ່"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"ພັກສາຍຊົ່ວຄາວ"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"ສາຍໂທເຂົ້າ"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມໄຟລ໌ແນບ"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"ສາຍໂທເຂົ້າຈາກບ່ອນເຮັດວຽກ"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ສາຍໂທເຂົ້າ Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ສາຍໂທເຂົ້າ Wi-Fi ຈາກບ່ອນເຮັດວຽກ"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"ສາຍໂທເຂົ້າ Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"ສາຍໂທເຂົ້າ Wi-Fi ບ່ອນເຮັດວຽກ"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ມີການໂທທີ່ຄາດວ່າເປັນສະແປມໂທເຂົ້າມາ"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"​ຄຳ​ຮ້ອງ​ຂໍ​ວິ​ດີ​ໂອ​ເຂົ້າ​ມາ"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"ບໍ່ມີບໍລິການ"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"ຮັບສາຍວິດີໂອ"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"ເພື່ອໂທລະສັບ, ໃຫ້ປິດໂໝດຢູ່ເທິງຍົນກ່ອນ."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"ບໍ່ໄດ້ລົງທະບຽນໃນເຄືອຂ່າຍ."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"ບໍ່​ມີ​ເຄືອ​ຂ່າຍ​ມື​ຖື​ທີ່​ສາ​ມາດ​ໃຊ້​ໄດ້."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"ເຄືອຂ່າຍມືຖືບໍ່ສາມາດໃຊ້ໄດ້."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ເພື່ອ​ທີ່​ຈະ​ໂທ, ປ້ອນ​ເບີ​ໂທ​ທີ່​ໃຊ້​ໄດ້​ເຂົ້າ​ໄປ."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"ບໍ່​ສາ​ມາດ​ໂທ​ໄດ້."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"ກຳລັງເລີ່ມຕົ້ນລຳດັບ MMI..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ວາງສາຍ"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"ການປະຊຸມທາງໂທລະສັບ"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"ຢູ່ໃນສາຍ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"ສືບຕໍ່ການໂທໂດຍໃຊ້ອິນເຕີເນັດມືຖື…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"ບໍ່ສາມາດສະຫຼັບໄປໃຊ້ເຄືອຂ່າຍ Wi-Fi ໄດ້"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ການໂທດ້ວຍວິດີໂອຈະຍັງໃຊ້ຜ່ານເຄືອຂ່າຍມືຖືຢູ່ ໂດຍອາດມີການຮຽກເກັບຄ່າບໍລິການຕາມປົກກະຕິ."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ກຳລັງສືບຕໍ່ສາຍໂດຍໃຊ້ອິນເຕີເນັດມືຖື…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ບໍ່ສາມາດສະຫຼັບໄປໃຊ້ເຄືອຂ່າຍ Wi-Fi ໄດ້"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ການໂທວິດີໂອຈະຍັງຄົງຢູ່ໃນເຄືອຂ່າຍມືຖືຕໍ່ໄປ. ອາດມີການຮຽກເກັບຄ່າບໍລິການມາດຕະຖານ."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ບໍ່ຕ້ອງສະແດງຂໍ້ຄວາມນີ້ອີກ"</string>
 </resources>

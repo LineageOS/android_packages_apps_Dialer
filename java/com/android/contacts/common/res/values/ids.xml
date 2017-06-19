@@ -27,4 +27,5 @@
 
   <item name="contact_tile_image" type="id"/>
   <item name="contact_tile_name" type="id"/>
+  <item name="call_to_action" type="id"/>
 </resources>

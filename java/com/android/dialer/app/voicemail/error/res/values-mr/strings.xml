@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"दृश्‍यमान व्हॉइसमेल सक्रिय करीत आहे"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"व्हिज्युअल व्हॉइसमेल पूर्णपणे सक्रिय होईपर्यंत आपल्याला व्हॉइसमेल सूचना प्राप्त होऊ शकत नाहीत. व्हॉइसमेल पूर्णपणे सक्रिय होईपर्यंत नवीन संदेश पुनर्प्राप्त करण्यासाठी व्हॉइसमेल बोलवा."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"दृश्‍यमान व्हॉइसमेल सक्रिय करू शकत नाही"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"आपल्‍या फोनवर सेल्युलर कनेक्‍शन असल्याची खात्री करा आणि पुन्हा प्रयत्न करा."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"आपल्या फोनमध्‍ये मोबाइल नेटवर्क कनेक्शन आहे याची खात्री करा आणि पुन्हा प्रयत्न करा."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"विमान मोड बंद करा आणि पुन्हा प्रयत्न करा."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"कोणतेही कनेक्शन नाही"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"आपल्याला नवीन व्हॉइसमेलसाठी सूचित केले जाणार नाही. आपण वाय-फाय वर असल्यास आपण आता संकालित करून व्हॉइसमेलसाठी तपासू शकता."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"आपल्याला नवीन व्हॉइसमेलसाठी सूचित केले जाणार नाही. आपण वाय-फाय वर असल्यास, आपण आता संकालित करून व्हॉइसमेल तपासू शकता."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"आपल्याला नवीन व्हॉइसमेलसाठी सूचित केले जाणार नाही. आपला व्हॉइसमेल संकालित करण्यासाठी विमान मोड बंद करा."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"व्हॉइसमेल तपासण्यासाठी आपल्या फोनला सेल्युलर डेटा कनेक्शनची आवश्यकता आहे."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"व्हॉइसमेल तपासण्यासाठी आपल्या फोनसाठी मोबाइल डेटा कनेक्शनची आवश्यकता आहे."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"दृश्‍यमान व्हॉइसमेल सक्रिय करू शकत नाही"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"आपण व्हॉइसमेल तपासण्यासाठी अद्याप कॉल करू शकता."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"दृश्यमान व्हॉइसमेल अद्यतनित करू शकत नाही"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"आपले वाय-फाय किंवा सेल्युलर कनेक्शन चांगले असताना पुन्हा प्रयत्न करा. आपण अद्याप व्हॉइसमेल तपासण्यासाठी कॉल करू शकता."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"आपले सेल्युलर डेटा कनेक्शन चांगले असताना पुन्हा प्रयत्न करा. आपण अद्याप व्हॉइसमेल तपासण्यासाठी कॉल करू शकता."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"आपले वाय‑फाय किंवा मोबाइल डेटा कनेक्शन चांगले असताना पुन्हा प्रयत्न करा. आपण व्हॉइसमेल तपासण्‍यासाठी अद्याप कॉल करू शकता."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"आपले मोबाइल डेटा कनेक्शन चांगले असताना पुन्हा प्रयत्न करा. आपण  व्हॉइसमेल तपासण्यासाठी अद्याप कॉल करू शकता."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"दृश्यमान व्हॉइसमेल अद्यतनित करू शकत नाही"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"आपण व्हॉइसमेल तपासण्यासाठी अद्याप कॉल करू शकता."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"दृश्यमान व्हॉइसमेल अद्यतनित करू शकत नाही"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"काहीतरी चूक झाली."</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"ग्राहक सेवा संपर्काशी <xliff:g id="NUMBER">%1$s</xliff:g> येथे संपर्क साधाा आणि त्यांना त्रुटी कोड 9999 सांगा."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"व्हिज्युअल व्हॉइसमेल अटी आणि नियम"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"आपण व्हिज्युअल व्हॉइसमेल वापरण्यासाठी Verizon वायरलेसच्या अटी आणि नियम स्वीकारणे आवश्यक आहे: \n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nव्हिज्युअल व्हॉइसेमल वापरण्‍यासाठी आपण Verizon Wireless च्या अटी आणि नियम स्वीकारणे  आवश्‍यक आहे:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"व्हिज्युअल व्हॉइसमेल चालू करा"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"अटी आणि नियम नाकारल्या गेल्यास व्हिज्युअल व्हॉइसमेल अक्षम केले जाईल."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"व्हिज्युअल व्हॉइसमेल अक्षम करा"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"अटी आणि नियम नाकारल्यास व्हॉइसमेल प्रतिलेखन अक्षम केले जाईल."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"व्हॉइसमेल प्रतिलेखन अक्षम करा"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"व्हॉइसमेल केवळ *86 वर कॉल करून प्रवेश करण्यायोग्य असेल. सुरू ठेवण्यासाठी नवीन व्हॉइसमेल पिन सेट करा."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"पिन सेट करा"</string>
 </resources>

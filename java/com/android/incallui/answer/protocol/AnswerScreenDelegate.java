@@ -32,6 +32,10 @@ public interface AnswerScreenDelegate {
   void onReject();
 
   void onAnswerAndReleaseCall();
+
+  void onAnswerAndReleaseButtonEnabled();
+
+  void onAnswerAndReleaseButtonDisabled();
   /**
    * Sets the window background color based on foreground call's theme and the given progress. This
    * is called from the answer UI to animate the accept and reject action.
@@ -42,4 +46,7 @@ public interface AnswerScreenDelegate {
    * @param progress float from -1 to 1. -1 is fully rejected, 1 is fully accepted, and 0 is neutral
    */
   void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress);
+
+  /** Returns true if any answer/reject action timed out. */
+  boolean isActionTimeout();
 }

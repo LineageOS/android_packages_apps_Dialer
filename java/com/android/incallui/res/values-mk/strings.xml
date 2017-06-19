@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Пропуштен повик од <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Тековен повик"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Тековен работен повик"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Појдовен повик преку Wi-Fi"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Тековен работен повик преку Wi-Fi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Тековен повик преку Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Тековен работен повик преку Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"На чекање"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Дојдовен повик"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Дојдовен повик со фотографија"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Важен дојдовен повик со фото., порака и локација"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Важен дојдовен повик со прилози"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Дојдовен работен повик"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Дојдовен повик преку Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Дојдовен работен повик преку Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Дојдовен повик преку Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Дојдовен работен повик преку Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Дојдовниот повик може да е спам"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Дојдовно побарување за видео"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Нема услуга"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Прифатете видеоповик"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"За да воспоставите повик, прво исклучете режим на работа во авион."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Не е регистриран на мрежа."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Не е достапна мобилна мрежа."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Нема достапна мобилна мрежа."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"За да повикате, внесете важечки број."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Не може да повика."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Започнува MMI низа..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Завршете го повикот"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Конференциски повик"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Повик во тек"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Повикот ќе продолжи преку мобилен интернет…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Не можеше да се префрли на Wi-Fi-мрежа"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Видеоповикот ќе остане на мобилната мрежа. Може да се наплати за интернет-сообраќај."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Повикот ќе продолжи преку мобилен интернет…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Не можеше да се префрли на Wi-Fi-мрежа"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Видеоповикот ќе остане на мобилната мрежа. Може да се наплати за мобилен интернет."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Не го прикажувај ова повторно"</string>
 </resources>

@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Vizual Səsli Mesaj aktiv edilir"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Vizual səsli mesaj tam aktiv edilənə klim səsli mesaj bildirişi ala bilməzsiniz. Səsli mesaj tam aktiv edilənə kimi yeni mesajları əldə etmək üçün səsli poçta zəng edin."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Vizual Səsli Mesaj aktiv edilə bilmir"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Telefonunuzda mobil bağlantı olduğuna əmin olun və yenidən cəhd edin."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Əmin olun ki, telefonun şəbəkə bağlantısı var və yenidən cəhd edin."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Təyyarə rejimini deaktiv edin və yenidən cəhd edin."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Bağlantı yoxdur"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Yeni gələn səsli mesajlara görə bildiriş almayacaqsınız. Wi-Fi qoşuludursa, sinxronizasiya etməklə səsli mesajları yoxlaya bilərsiniz."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Yeni gələn səsli e-məktublara görə bildiriş almayacaqsınız. Wi-Fi qoşuludursa, sinxronizasiya etməklə səsli e-məktubları yoxlaya bilərsiniz."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Yeni gələn səsli mesajlara görə bildiriş almayacaqsınız. Səsli mesajları sinxronizasiya etmək üçün təyyarə rejimini deaktiv edin."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Səsli mesajları yoxlamaq üçün telefonda mobil data bağlantısı olmalıdır."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Səsli e-məktubları yoxlamaq üçün telefonda mobil data bağlantısı olmalıdır."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Vizual Səsli Mesaj aktiv edilə bilmir"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Səsli mesajları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Vizual səsli mesajları yeniləmək olmur"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Wi-Fivə ya mobil data bağlantısı yaxşı olduqda bir daha yoxlayın. Səsli mesajları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Mobil data bağlantısı yaxşı olduqda bir daha yoxlayın. Səsli mesajları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Wi‑Fi və ya mobil data bağlantısı daha yaxşı olduqda yenidən cəhd edin. Səsli e-məktubları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Mobil data bağlantısı yaxşı olduqda bir daha yoxlayın. Səsli e-məktubları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Vizual səsli mesajları yeniləmək olmur"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Səsli mesajları yoxlamaq üçün yenə də zəng edə bilərsiniz."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Vizual səsli mesajları yeniləmək olmur"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Nəsə Xəta Oldu"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Lütfən, <xliff:g id="NUMBER">%1$s</xliff:g> nömrəsi ilə Müştəri Xidmətinə zəng edin. Xəta kodu 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vizual Səsli Poçt Şərtləri və Qaydaları"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Vizual səsli poçtu istifadə etmək üçün Verizon Wireless şərtlər və qaydalarını qəbul etməlisiniz:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nGörünən səsli e-poçtdan istifadə etmək üçün Verizon Wireless\'in şərt və qaydalarını qəbul etməlisiniz:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Görünən Səsli e-poçtu aktiv edin"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Şərtlər və qaydalar rədd edilsə, vizual səsli poçt deaktiv ediləcək."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Vizual səsli poçtu deaktiv edin"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Şərt və qaydalar rədd edilərsə, səsli e-poçt transkripsiyası deaktiv ediləcək."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Səsli e-poçt transkripsiyasını deaktiv edin"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Səsli məktub yalnız *86 nömrəsinə zəng etməklə mümkündür. Davam etmək üçün yeni səsli məktub PIN kodu təyin edin."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN kodu ayarlayın"</string>
 </resources>

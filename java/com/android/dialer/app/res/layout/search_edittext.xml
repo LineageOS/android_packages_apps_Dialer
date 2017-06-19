@@ -29,7 +29,7 @@
       android:padding="@dimen/search_box_search_icon_padding"
       android:importantForAccessibility="no"
       android:scaleType="center"
-      android:src="@drawable/quantum_ic_search_white_24"
+      android:src="@drawable/quantum_ic_search_vd_theme_24"
       android:tint="@color/searchbox_icon_tint"/>
 
     <TextView

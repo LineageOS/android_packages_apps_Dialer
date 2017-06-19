@@ -47,6 +47,7 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactListViewUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.performancereport.PerformanceReport;
 import java.lang.ref.WeakReference;
 import java.util.Locale;
 
@@ -440,6 +441,11 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
       return;
     }
 
+    // Return for non-"Suggestions" if on the zero-suggest screen.
+    if (TextUtils.isEmpty(mQueryString) && partitionIndex > 0) {
+      return;
+    }
+
     mAdapter.changeCursor(partitionIndex, data);
     setProfileHeader();
 
@@ -555,7 +561,6 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
   protected void setSearchMode(boolean flag) {
     if (mSearchMode != flag) {
       mSearchMode = flag;
-      setSectionHeaderDisplayEnabled(!mSearchMode);
 
       if (!flag) {
         mDirectoryListStatus = STATUS_NOT_LOADED;
@@ -572,7 +577,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
           // should be cleaned up on exiting the search mode.
           mAdapter.removeDirectoriesAfterDefault();
         }
-        mAdapter.configureDefaultPartition(false, flag);
+        mAdapter.configurePartitionsVisibility(flag);
       }
 
       if (mListView != null) {
@@ -676,22 +681,16 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
 
     boolean searchMode = isSearchMode();
     mAdapter.setSearchMode(searchMode);
-    mAdapter.configureDefaultPartition(false, searchMode);
+    mAdapter.configurePartitionsVisibility(searchMode);
     mAdapter.setPhotoLoader(mPhotoManager);
     mListView.setAdapter(mAdapter);
-
-    if (!isSearchMode()) {
-      mListView.setFocusableInTouchMode(true);
-      mListView.requestFocus();
-    }
-
     return mView;
   }
 
   protected void onCreateView(LayoutInflater inflater, ViewGroup container) {
     mView = inflateView(inflater, container);
 
-    mListView = (ListView) mView.findViewById(android.R.id.list);
+    mListView = mView.findViewById(android.R.id.list);
     if (mListView == null) {
       throw new RuntimeException(
           "Your content must have a ListView whose id attribute is " + "'android.R.id.list'");
@@ -770,6 +769,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
 
   @Override
   public void onScrollStateChanged(AbsListView view, int scrollState) {
+    PerformanceReport.recordScrollStateChange(scrollState);
     if (scrollState == OnScrollListener.SCROLL_STATE_FLING) {
       mPhotoManager.pause();
     } else if (isPhotoLoaderEnabled()) {

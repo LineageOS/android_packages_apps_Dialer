@@ -20,7 +20,7 @@
     android:minSdkVersion="23"
     android:targetSdkVersion="26"/>
 
-  <application>
+  <application android:theme="@style/Theme.AppCompat">
 
     <service
       android:exported="false"

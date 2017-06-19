@@ -18,6 +18,7 @@ package com.android.incallui.videotech.ims;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -120,6 +121,9 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
+  public void onRemovedFromCallList() {}
+
+  @Override
   public int getSessionModificationState() {
     return sessionModificationState;
   }
@@ -183,8 +187,6 @@ public class ImsVideoTech implements VideoTech {
   public void stopTransmission() {
     LogUtil.enterBlock("ImsVideoTech.stopTransmission");
 
-    setCamera(null);
-
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
@@ -235,7 +237,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void setCamera(String cameraId) {
+  public void setCamera(@Nullable String cameraId) {
     call.getVideoCall().setCamera(cameraId);
     call.getVideoCall().requestCameraCapabilities();
   }
@@ -248,7 +250,7 @@ public class ImsVideoTech implements VideoTech {
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO)
         && call.getState() == Call.STATE_ACTIVE
-        && isTransmitting();
+        && isTransmittingOrReceiving();
   }
 
   static int getUnpausedVideoState(int videoState) {

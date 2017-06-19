@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktiveer tans visuele stemboodskapdiens"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Jy sal dalk nie stemboodskapkennisgewings ontvang totdat visuele stemboodskapdiens heeltemal geaktiveer is nie. Bel stemboodskapdiens om nuwe boodskappe te kry totdat stemboodskapdiens volledig geaktiveer is."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Kan nie visuele stemboodskapdiens aktiveer nie"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Maak seker jou foon het sellulêre verbinding en probeer weer."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Maak seker jou foon het ’n mobiele netwerkverbinding en probeer weer."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Skakel vliegtuigmodus af en probeer weer."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Geen verbinding nie"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Jy sal nie van nuwe stemboodskappe in kennis gestel word nie. As jy op Wi-Fi is, kan jy jou stemboodskapdiens nagaan deur nou te sinkroniseer."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Jy sal nie van nuwe stemboodskappe in kennis gestel word nie. As jy op Wi-Fi is, kan jy jou stemboodskapdiens nagaan deur nou te sinkroniseer."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Jy sal nie van nuwe stemboodskappe in kennis gestel word nie. Skakel vliegtuigmodus af om jou stemboodskapdiens te sinkroniseer."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Jou foon benodig \'n sellulêre dataverbinding om stemboodskapdiens na te gaan."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Jou foon benodig \'n mobiele dataverbinding om stemboodskapdiens na te gaan"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Kan nie visuele stemboodskapdiens aktiveer nie"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Kan nie visuele stemboodskapdiens opdateer nie"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Probeer weer wanneer jou Wi-Fi- of sellulêre verbinding beter is. Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Probeer weer wanneer jou sellulêredataverbinding beter is. Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Probeer weer wanneer jou Wi-Fi- of mobiele dataverbinding beter is. Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Probeer weer wanneer jou mobiele dataverbinding beter is. Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Kan nie visuele stemboodskapdiens opdateer nie"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Jy kan steeds bel om stemboodskapdiens na te gaan."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Kan nie visuele stemboodskapdiens opdateer nie"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Iets het verkeerd geloop"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Kontak asseblief Kliëntediens by <xliff:g id="NUMBER">%1$s</xliff:g> en gee vir hulle die foutkode 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Visuele stemboodskapdiens se bepalings en voorwaardes"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Jy moet Verizon Wireless se bepalings en voorwaardes aanvaar om visuele stemboodskapdiens te gebruik:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nJy moet Verizon Wireless se bepalings en voorwaardes aanvaar om visuele stemboodskappe te gebruik:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Skakel visuele stemboodskappe aan"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visuele stemboodskapdiens sal gedeaktiveer word as die bepalings en voorwaardes afgekeur word."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Deaktiveer visuele stemboodskapdiens"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Stemboodskaptranskripsie sal gedeaktiveer word as die bepalings en voorwaardes afgekeur word."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Deaktiveer stemboodskaptranskripsie"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Stempos sal slegs toeganklik wees as jy *86 bel. Stel \'n nuwe stempos-PIN om voort te gaan."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Stel PIN"</string>
 </resources>

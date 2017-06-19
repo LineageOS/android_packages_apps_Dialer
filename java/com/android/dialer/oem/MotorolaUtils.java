@@ -18,8 +18,11 @@ package com.android.dialer.oem;
 import android.content.Context;
 import android.content.res.Resources;
 import android.telephony.TelephonyManager;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PackageUtils;
+import com.android.dialer.configprovider.ConfigProviderBindings;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /** Util class for Motorola OEM devices. */
 public class MotorolaUtils {
@@ -39,6 +42,8 @@ public class MotorolaUtils {
   // This is used to check if a Motorola device supports WiFi call feature, by checking if a certain
   // package is enabled.
   private static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
+  // Thi is used to check if a Motorola device supports hidden menu feature.
+  private static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
 
   // Feature flag indicates it's a HD call, currently this is only used by Motorola system build.
   // TODO(b/35359461): Use reference to android.provider.CallLog once it's in new SDK.
@@ -62,6 +67,10 @@ public class MotorolaUtils {
       // If SPN is not specified we consider as not necessary to enable/disable the feature.
       return true;
     }
+  }
+
+  static boolean isSupportingHiddenMenu(Context context) {
+    return context.getPackageManager().hasSystemFeature(HIDDEN_MENU_FEATURE);
   }
 
   public static boolean shouldBlinkHdIconWhenConnectingCall(Context context) {
@@ -100,6 +109,22 @@ public class MotorolaUtils {
   public static boolean handleSpecialCharSequence(Context context, String input) {
     // TODO(b/35395377): Add check for Motorola devices.
     return MotorolaHiddenMenuKeySequence.handleCharSequence(context, input);
+  }
+
+  public static boolean isWifiCallingAvailable(Context context) {
+    if (!isSupportingSprintWifiCall(context)) {
+      return false;
+    }
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    try {
+      Method method = TelephonyManager.class.getMethod("isWifiCallingAvailable");
+      boolean isWifiCallingAvailable = (boolean) method.invoke(telephonyManager);
+      LogUtil.d("MotorolaUtils.isWifiCallingAvailable", "%b", isWifiCallingAvailable);
+      return isWifiCallingAvailable;
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+      LogUtil.e("MotorolaUtils.isWifiCallingAvailable", "", e);
+    }
+    return false;
   }
 
   private static boolean isSupportingSprintHdCodec(Context context) {

@@ -34,4 +34,10 @@ public class ConstantsImpl extends Constants {
   public String getFileProviderAuthority() {
     return "com.android.dialer.files";
   }
+
+  @NonNull
+  @Override
+  public String getAnnotatedCallLogProviderAuthority() {
+    return "com.android.dialer.annotatedcalllog";
+  }
 }

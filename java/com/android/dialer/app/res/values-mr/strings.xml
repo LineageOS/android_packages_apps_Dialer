@@ -80,11 +80,16 @@
     <string name="add_wait" msgid="1177723010768282578">"प्रतीक्षा करा जोडा"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"सेटिंग्ज"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"सिम्युलेटर"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"नवीन UI शॉर्टकट तयार करा"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"सर्व संपर्क"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"स्‍पर्श टोन कीपॅडचा वापर करा"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"चालू असलेल्या कॉलवर परत जा"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"कॉल जोडा"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"येणारे कॉल"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"मोठ्या प्रमाणात क्रिया मोडमध्ये प्रवेश करीत आहे"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"मोठ्या प्रमाणात क्रिया मोड सोडत आहे"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> निवडले"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ची निवड रद्द केली"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"व्हॉइसमेल प्ले करा"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क पहा"</string>
     <string name="description_call" msgid="1532402285334775372">"<xliff:g id="NAME">%1$s</xliff:g> ला कॉल  करा"</string>
@@ -99,11 +104,15 @@
     <string name="voicemail" msgid="8899540969000957954">"व्हॉइसमेल"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> सेकंद"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> मिनिट <xliff:g id="SECONDS">%s</xliff:g> सेकंद"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"व्हॉइसमेल"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"व्हॉइसमेल"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"होय"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"नाही"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"बॅच क्रिया मोड रद्द करा"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"हटवा"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"रद्द करा"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"निवडलेले <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> हटवायचेे?"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> निवडले"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"हा व्हॉइसमेल हटवायचा? "</b>"</item>
+      <item quantity="other">"<b>"हे व्हॉइसमेल हटवायचे? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> रोजी <xliff:g id="TIME">%2$s</xliff:g> वाजता"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -116,7 +125,6 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"सिम कार्ड मधून लोड करीत आहे..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"सिम कार्ड संपर्क"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"कोणताही संपर्क अॅप उपलब्ध नाही"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"व्हॉइस शोध उपलब्ध नाही"</string>
     <string name="call_not_available" msgid="7850148370757361155">"फोन अनुप्रयोग अक्षम केला गेला असल्याने फोन कॉल करणे शक्य नाही."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"संपर्क शोधा"</string>
@@ -145,10 +153,9 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> नवीन सुटलेले कॉल"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"अद्याप आपल्‍या स्पीड डायलवर कोणीही नाही"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"एक आवडते जोडा"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"आपल्‍याकडे अद्याप कोणतेही संपर्क नाहीत"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"एक संपर्क जोडा"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"सर्व नंबर पाहण्यासाठी प्रतिमेस स्पर्श करा किंवा पुन्हा क्रम लावण्यासाठी स्पर्श करा आणि धरून ठेवा"</string>
     <string name="remove_contact" msgid="2353580570488923668">"काढा"</string>
+    <string name="select_all" msgid="408601760696146245">"सर्व निवडा"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"व्हिडिओ कॉल"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"एक संदेश पाठवा"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"कॉल तपशील"</string>
@@ -213,11 +220,9 @@
     <string name="block_list" msgid="4701585783411870782">"अवरोधित केलेले नंबर"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> आधीच अवरोधित केलेला आहे."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"कॉल करण्याची खाती"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"चालू करा"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"परवानग्या सेट करा"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"स्पीड डायल सक्षम करण्‍यासाठी, संपर्क परवानगी चालू करा."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"आपला कॉल लॉग पाहण्‍यासाठी, फोन परवानगी चालू करा."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"आपले संपर्क पाहण्‍यासाठी, संपर्क परवानगी चालू करा."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"आपल्‍या व्हॉइसमेलमध्‍ये प्रवेश करण्‍यासाठी, फोन परवानगी चालू करा."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"कॉल करण्यासाठी, फोन परवानगी चालू करा."</string>

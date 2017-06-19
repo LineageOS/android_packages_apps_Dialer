@@ -17,15 +17,11 @@
 package com.android.dialer.app.calllog.calllogcache;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.Pair;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
-import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.telecom.TelecomUtil;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This is the CallLogCache for versions of dialer Lollipop Mr1 and above with support for multi-SIM
@@ -35,15 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * CallLogCache#getCallLogCache}.
  */
 class CallLogCacheLollipopMr1 extends CallLogCache {
-
-  /*
-   * Maps from a phone-account/number pair to a boolean because multiple numbers could return true
-   * for the voicemail number if those numbers are not pre-normalized. Access must be synchronzied
-   * as it's used in the background thread in CallLogAdapter. {@see CallLogAdapter#loadData}
-   */
-  @VisibleForTesting
-  final Map<Pair<PhoneAccountHandle, CharSequence>, Boolean> mVoicemailQueryCache =
-      new ConcurrentHashMap<>();
 
   private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new ArrayMap<>();
   private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new ArrayMap<>();
@@ -55,7 +42,6 @@ class CallLogCacheLollipopMr1 extends CallLogCache {
 
   @Override
   public void reset() {
-    mVoicemailQueryCache.clear();
     mPhoneAccountLabelCache.clear();
     mPhoneAccountColorCache.clear();
     mPhoneAccountCallWithNoteCache.clear();
@@ -65,19 +51,7 @@ class CallLogCacheLollipopMr1 extends CallLogCache {
 
   @Override
   public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
-    if (TextUtils.isEmpty(number)) {
-      return false;
-    }
-
-    Pair<PhoneAccountHandle, CharSequence> key = new Pair<>(accountHandle, number);
-    Boolean value = mVoicemailQueryCache.get(key);
-    if (value != null) {
-      return value;
-    }
-    boolean isVoicemail =
-        PhoneNumberHelper.isVoicemailNumber(mContext, accountHandle, number.toString());
-    mVoicemailQueryCache.put(key, isVoicemail);
-    return isVoicemail;
+    return TelecomUtil.isVoicemailNumber(mContext, accountHandle, number.toString());
   }
 
   @Override

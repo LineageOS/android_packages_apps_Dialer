@@ -26,8 +26,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 

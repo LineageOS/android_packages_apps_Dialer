@@ -22,29 +22,32 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.common.Assert;
+import com.android.dialer.dialercontact.DialerContact;
 import java.util.List;
 
 /** Adapter for RecyclerView in {@link CallDetailsActivity}. */
-public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final int HEADER_VIEW_TYPE = 1;
   private static final int CALL_ENTRY_VIEW_TYPE = 2;
   private static final int FOOTER_VIEW_TYPE = 3;
 
-  private final CallComposerContact contact;
+  private final DialerContact contact;
   private final List<CallDetailsEntry> callDetailsEntries;
+  private final CallDetailsFooterViewHolder.ReportCallIdListener listener;
   private final CallTypeHelper callTypeHelper;
 
-  public CallDetailsAdapter(
+  CallDetailsAdapter(
       Context context,
-      @NonNull CallComposerContact contact,
-      @NonNull List<CallDetailsEntry> callDetailsEntries) {
+      @NonNull DialerContact contact,
+      @NonNull List<CallDetailsEntry> callDetailsEntries,
+      CallDetailsFooterViewHolder.ReportCallIdListener listener) {
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
+    this.listener = listener;
     callTypeHelper = new CallTypeHelper(context.getResources());
   }
 
@@ -60,10 +63,10 @@ public class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             inflater.inflate(R.layout.call_details_entry, parent, false));
       case FOOTER_VIEW_TYPE:
         return new CallDetailsFooterViewHolder(
-            inflater.inflate(R.layout.call_details_footer, parent, false));
+            inflater.inflate(R.layout.call_details_footer, parent, false), listener);
       default:
-        Assert.fail("No ViewHolder available for viewType: " + viewType);
-        return null;
+        throw Assert.createIllegalStateFailException(
+            "No ViewHolder available for viewType: " + viewType);
     }
   }
 

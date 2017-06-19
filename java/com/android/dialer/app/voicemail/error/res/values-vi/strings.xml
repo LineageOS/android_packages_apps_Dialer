@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Đang kích hoạt thư thoại kèm theo hình ảnh"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Bạn có thể không nhận được thông báo thư thoại cho đến khi thư thoại kèm theo hình ảnh được kích hoạt hoàn toàn. Gọi thư thoại để truy xuất tin nhắn mới cho đến khi thư thoại được kích hoạt hoàn toàn."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Không kích hoạt được thư thoại kèm theo hình ảnh"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Đảm bảo điện thoại của bạn có kết nối di động và thử lại."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Đảm bảo điện thoại của bạn có kết nối mạng di động và thử lại."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Hãy tắt chế độ trên máy bay và thử lại."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Không có kết nối"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Bạn sẽ không được thông báo về thư thoại mới. Nếu đang dùng Wi-Fi, bạn có thể kiểm tra thư thoại bằng cách đồng bộ hóa ngay bây giờ."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Bạn sẽ không được thông báo về thư thoại mới. Nếu đang dùng Wi-Fi, bạn có thể kiểm tra thư thoại bằng cách đồng bộ hóa ngay bây giờ."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Bạn sẽ không được thông báo về thư thoại mới. Hãy tắt chế độ trên máy bay để đồng bộ hóa thư thoại của bạn."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Điện thoại của bạn cần kết nối dữ liệu di động để kiểm tra thư thoại."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Điện thoại của bạn cần kết nối dữ liệu di động để kiểm tra thư thoại."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Không kích hoạt được thư thoại kèm theo hình ảnh"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Không cập nhật được thư thoại kèm theo hình ảnh"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Hãy thử lại khi Wi-Fi hoặc kết nối di động của bạn tốt hơn. Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Hãy thử lại khi kết nối dữ liệu di động của bạn tốt hơn. Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Hãy thử lại khi Wi-Fi hoặc kết nối dữ liệu di động của bạn tốt hơn. Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Hãy thử lại khi kết nối dữ liệu di động của bạn tốt hơn. Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Không cập nhật được thư thoại kèm theo hình ảnh"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Bạn vẫn có thể gọi để kiểm tra thư thoại."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Không cập nhật được thư thoại kèm theo hình ảnh"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Đã xảy ra lỗi"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Điều khoản và điều kiện của thư thoại kèm theo hình ảnh"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Bạn phải chấp nhận điều khoản và điều kiện của Verizon Wireless để sử dụng thư thoại kèm theo hình ảnh:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nBạn phải chấp nhận điều khoản và điều kiện của Verizon Wireless để sử dụng thư thoại kèm theo hình ảnh:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Bật Thư thoại kèm theo hình ảnh"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Thư thoại kèm theo hình ảnh sẽ bị tắt nếu điều khoản và điều kiện bị từ chối."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Tắt thư thoại kèm theo hình ảnh"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ghi âm thư thoại sẽ bị vô hiệu hóa nếu bạn từ chối điều khoản và điều kiện."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Vô hiệu hóa ghi âm thư thoại"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Bạn chỉ có thể truy cập thư thoại bằng cách gọi *86. Hãy đặt mã PIN thư thoại mới để tiếp tục."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Đặt mã PIN"</string>
 </resources>

@@ -29,11 +29,12 @@ import android.support.v13.app.FragmentCompat;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.SmartDialCursorLoader;
-import com.android.dialer.app.widget.EmptyContentView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import java.util.Arrays;
 
 /** Implements a fragment to load and display SmartDial search results. */
 public class SmartDialSearchFragment extends SearchFragment
@@ -80,6 +81,11 @@ public class SmartDialSearchFragment extends SearchFragment
   }
 
   @Override
+  public boolean getShowEmptyListForNullQuery() {
+    return true;
+  }
+
+  @Override
   protected void setupEmptyView() {
     if (mEmptyView != null && getActivity() != null) {
       if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
@@ -123,8 +129,16 @@ public class SmartDialSearchFragment extends SearchFragment
       return;
     }
 
-    FragmentCompat.requestPermissions(
-        this, new String[] {CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
+    if (deniedPermissions.length > 0) {
+      LogUtil.i(
+          "SmartDialSearchFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
+      FragmentCompat.requestPermissions(
+          this, deniedPermissions, CALL_PHONE_PERMISSION_REQUEST_CODE);
+    }
   }
 
   @Override

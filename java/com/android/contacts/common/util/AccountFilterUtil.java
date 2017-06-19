@@ -16,34 +16,14 @@
 
 package com.android.contacts.common.util;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactListFilter;
-import com.android.contacts.common.list.ContactListFilterController;
 
 /** Utility class for account filter manipulation. */
 public class AccountFilterUtil {
-
-  public static final String EXTRA_CONTACT_LIST_FILTER = "contactListFilter";
-  private static final String TAG = AccountFilterUtil.class.getSimpleName();
-
-  /**
-   * Find TextView with the id "account_filter_header" and set correct text for the account filter
-   * header.
-   *
-   * @param filterContainer View containing TextView with id "account_filter_header"
-   * @return true when header text is set in the call. You may use this for conditionally showing or
-   *     hiding this entire view.
-   */
-  public static boolean updateAccountFilterTitleForPeople(
-      View filterContainer, ContactListFilter filter, boolean showTitleForAllAccounts) {
-    return updateAccountFilterTitle(filterContainer, filter, showTitleForAllAccounts, false);
-  }
 
   /**
    * Similar to {@link #updateAccountFilterTitleForPeople(View, ContactListFilter, boolean,
@@ -78,8 +58,6 @@ public class AccountFilterUtil {
         } else if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
           headerTextView.setText(R.string.listCustomView);
           textWasSet = true;
-        } else {
-          Log.w(TAG, "Filter type \"" + filter.filterType + "\" isn't expected.");
         }
       } else {
         if (filter.filterType == ContactListFilter.FILTER_TYPE_ALL_ACCOUNTS) {
@@ -97,29 +75,9 @@ public class AccountFilterUtil {
         } else if (filter.filterType == ContactListFilter.FILTER_TYPE_SINGLE_CONTACT) {
           headerTextView.setText(R.string.listSingleContact);
           textWasSet = true;
-        } else {
-          Log.w(TAG, "Filter type \"" + filter.filterType + "\" isn't expected.");
         }
       }
-    } else {
-      Log.w(TAG, "Filter is null.");
     }
     return textWasSet;
-  }
-
-  /** This will update filter via a given ContactListFilterController. */
-  public static void handleAccountFilterResult(
-      ContactListFilterController filterController, int resultCode, Intent data) {
-    if (resultCode == Activity.RESULT_OK) {
-      final ContactListFilter filter = data.getParcelableExtra(EXTRA_CONTACT_LIST_FILTER);
-      if (filter == null) {
-        return;
-      }
-      if (filter.filterType == ContactListFilter.FILTER_TYPE_CUSTOM) {
-        filterController.selectCustomFilter();
-      } else {
-        filterController.setContactListFilter(filter, true);
-      }
-    }
   }
 }

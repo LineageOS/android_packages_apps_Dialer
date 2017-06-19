@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"允許"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"如要拍照，請授予「相機」存取權"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"如要分享圖片，請授予「媒體」存取權"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"拍照"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"選擇相片"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"傳送訊息"</string>
 </resources>

@@ -18,7 +18,6 @@ package com.android.dialer.app.calllog;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -27,6 +26,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.provider.CallLog.Calls;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
@@ -36,7 +36,6 @@ import com.android.dialer.app.R;
 import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
-import com.android.dialer.notification.GroupedNotificationUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
@@ -46,7 +45,6 @@ import java.util.List;
 /** Helper class operating on call log notifications. */
 public class CallLogNotificationsQueryHelper {
 
-  private static final String TAG = "CallLogNotifHelper";
   private final Context mContext;
   private final NewCallsQuery mNewCallsQuery;
   private final ContactInfoHelper mContactInfoHelper;
@@ -74,44 +72,58 @@ public class CallLogNotificationsQueryHelper {
         countryIso);
   }
 
+  public static void markAllMissedCallsInCallLogAsRead(@NonNull Context context) {
+    markMissedCallsInCallLogAsRead(context, null);
+  }
+
+  public static void markSingleMissedCallInCallLogAsRead(
+      @NonNull Context context, @Nullable Uri callUri) {
+    if (callUri == null) {
+      LogUtil.e(
+          "CallLogNotificationsQueryHelper.markSingleMissedCallInCallLogAsRead",
+          "call URI is null, unable to mark call as read");
+    } else {
+      markMissedCallsInCallLogAsRead(context, callUri);
+    }
+  }
+
   /**
-   * Removes the missed call notifications and marks calls as read. If a callUri is provided, only
-   * that call is marked as read.
+   * If callUri is null then calls with a matching callUri are marked as read, otherwise all calls
+   * are marked as read.
    */
   @WorkerThread
-  public static void removeMissedCallNotifications(Context context, @Nullable Uri callUri) {
-    // Call log is only accessible when unlocked. If that's the case, clear the list of
-    // new missed calls from the call log.
-    if (UserManagerCompat.isUserUnlocked(context) && PermissionsUtil.hasPhonePermissions(context)) {
-      ContentValues values = new ContentValues();
-      values.put(Calls.NEW, 0);
-      values.put(Calls.IS_READ, 1);
-      StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW);
-      where.append(" = 1 AND ");
-      where.append(Calls.TYPE);
-      where.append(" = ?");
-      try {
-        context
-            .getContentResolver()
-            .update(
-                callUri == null ? Calls.CONTENT_URI : callUri,
-                values,
-                where.toString(),
-                new String[] {Integer.toString(Calls.MISSED_TYPE)});
-      } catch (IllegalArgumentException e) {
-        LogUtil.e(
-            "CallLogNotificationsQueryHelper.removeMissedCallNotifications",
-            "contacts provider update command failed",
-            e);
-      }
+  private static void markMissedCallsInCallLogAsRead(Context context, @Nullable Uri callUri) {
+    if (!UserManagerCompat.isUserUnlocked(context)) {
+      LogUtil.e("CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead", "locked");
+      return;
+    }
+    if (!PermissionsUtil.hasPhonePermissions(context)) {
+      LogUtil.e("CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead", "no permission");
+      return;
     }
 
-    GroupedNotificationUtil.removeNotification(
-        context.getSystemService(NotificationManager.class),
-        callUri != null ? callUri.toString() : null,
-        R.id.notification_missed_call,
-        MissedCallNotifier.NOTIFICATION_TAG);
+    ContentValues values = new ContentValues();
+    values.put(Calls.NEW, 0);
+    values.put(Calls.IS_READ, 1);
+    StringBuilder where = new StringBuilder();
+    where.append(Calls.NEW);
+    where.append(" = 1 AND ");
+    where.append(Calls.TYPE);
+    where.append(" = ?");
+    try {
+      context
+          .getContentResolver()
+          .update(
+              callUri == null ? Calls.CONTENT_URI : callUri,
+              values,
+              where.toString(),
+              new String[] {Integer.toString(Calls.MISSED_TYPE)});
+    } catch (IllegalArgumentException e) {
+      LogUtil.e(
+          "CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead",
+          "contacts provider update command failed",
+          e);
+    }
   }
 
   /** Create a new instance of {@link NewCallsQuery}. */
@@ -281,7 +293,9 @@ public class CallLogNotificationsQueryHelper {
     @TargetApi(VERSION_CODES.M)
     public List<NewCall> query(int type) {
       if (!PermissionsUtil.hasPermission(mContext, Manifest.permission.READ_CALL_LOG)) {
-        LogUtil.w(TAG, "No READ_CALL_LOG permission, returning null for calls lookup.");
+        LogUtil.w(
+            "CallLogNotificationsQueryHelper.DefaultNewCallsQuery.query",
+            "no READ_CALL_LOG permission, returning null for calls lookup.");
         return null;
       }
       final String selection = String.format("%s = 1 AND %s = ?", Calls.NEW, Calls.TYPE);
@@ -302,7 +316,9 @@ public class CallLogNotificationsQueryHelper {
         }
         return newCalls;
       } catch (RuntimeException e) {
-        LogUtil.w(TAG, "Exception when querying Contacts Provider for calls lookup");
+        LogUtil.w(
+            "CallLogNotificationsQueryHelper.DefaultNewCallsQuery.query",
+            "exception when querying Contacts Provider for calls lookup");
         return null;
       }
     }

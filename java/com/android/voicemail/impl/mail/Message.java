@@ -15,6 +15,7 @@
  */
 package com.android.voicemail.impl.mail;
 
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import java.util.Date;
 import java.util.HashSet;
@@ -63,6 +64,9 @@ public abstract class Message implements Part, Body {
   public abstract Date getSentDate() throws MessagingException;
 
   public abstract void setSentDate(Date sentDate) throws MessagingException;
+
+  @Nullable
+  public abstract Long getDuration() throws MessagingException;
 
   public abstract Address[] getRecipients(String type) throws MessagingException;
 

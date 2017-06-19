@@ -18,7 +18,6 @@ package com.android.dialer.oem;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
@@ -29,9 +28,8 @@ import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -73,16 +71,11 @@ public class CequintCallerIdManager {
   private static final String IMAGE = "cid_pLogo";
   private static final String DISPLAY_NAME = "cid_pDisplayName";
 
-  // TODO: Revisit it and maybe remove it if it's not necessary.
-  private static final ConcurrentHashMap<String, CequintCallerIdContact> callLogCache =
-      new ConcurrentHashMap<>();
-  private static final ConcurrentHashMap<String, CequintCallerIdContact> incallIncomingCallCache =
-      new ConcurrentHashMap<>();
-  private static final ConcurrentHashMap<String, CequintCallerIdContact> incallOutgoingCallCache =
-      new ConcurrentHashMap<>();
-  private static boolean hasRegisteredContentObserver;
   private static boolean hasAlreadyCheckedCequintCallerIdPackage;
   private static boolean isCequintCallerIdEnabled;
+
+  // TODO: Revisit it and maybe remove it if it's not necessary.
+  private final ConcurrentHashMap<String, CequintCallerIdContact> callLogCache;
 
   /** Cequint caller id contact information. */
   public static class CequintCallerIdContact {
@@ -117,9 +110,35 @@ public class CequintCallerIdManager {
     return isCequintCallerIdEnabled;
   }
 
+  public static CequintCallerIdManager createInstanceForCallLog() {
+    return new CequintCallerIdManager();
+  }
+
   @WorkerThread
   @Nullable
-  public static CequintCallerIdContact getCequintCallerIdContact(Context context, String number) {
+  public static CequintCallerIdContact getCequintCallerIdContactForInCall(
+      Context context, String number, String cnapName, boolean isIncoming) {
+    Assert.isWorkerThread();
+    LogUtil.d(
+        "CequintCallerIdManager.getCequintCallerIdContactForInCall",
+        "number: %s, cnapName: %s, isIncoming: %b",
+        LogUtil.sanitizePhoneNumber(number),
+        LogUtil.sanitizePii(cnapName),
+        isIncoming);
+    int flag = 0;
+    if (isIncoming) {
+      flag |= CALLER_ID_LOOKUP_INCOMING_CALL;
+      flag |= CALLER_ID_LOOKUP_SYSTEM_PROVIDED_CID;
+    } else {
+      flag |= CALLER_ID_LOOKUP_USER_PROVIDED_CID;
+    }
+    String[] flags = {cnapName, String.valueOf(flag)};
+    return lookup(context, CONTENT_URI_FOR_INCALL, number, flags);
+  }
+
+  @WorkerThread
+  @Nullable
+  public CequintCallerIdContact getCequintCallerIdContact(Context context, String number) {
     Assert.isWorkerThread();
     LogUtil.d(
         "CequintCallerIdManager.getCequintCallerIdContact",
@@ -136,43 +155,6 @@ public class CequintCallerIdManager {
             new String[] {"system"});
     if (cequintCallerIdContact != null) {
       callLogCache.put(number, cequintCallerIdContact);
-    }
-    return cequintCallerIdContact;
-  }
-
-  @WorkerThread
-  @Nullable
-  public static CequintCallerIdContact getCequintCallerIdContactForInCall(
-      Context context, String number, String cnapName, boolean isIncoming) {
-    Assert.isWorkerThread();
-    LogUtil.d(
-        "CequintCallerIdManager.getCequintCallerIdContactForInCall",
-        "number: %s, cnapName: %s, isIncoming: %b",
-        LogUtil.sanitizePhoneNumber(number),
-        LogUtil.sanitizePii(cnapName),
-        isIncoming);
-    registerContentObserver(context);
-    if (isIncoming && incallIncomingCallCache.containsKey(number)) {
-      return incallIncomingCallCache.get(number);
-    } else if (!isIncoming && incallOutgoingCallCache.containsKey(number)) {
-      return incallOutgoingCallCache.get(number);
-    }
-    int flag = 0;
-    if (isIncoming) {
-      flag |= CALLER_ID_LOOKUP_INCOMING_CALL;
-      flag |= CALLER_ID_LOOKUP_SYSTEM_PROVIDED_CID;
-    } else {
-      flag |= CALLER_ID_LOOKUP_USER_PROVIDED_CID;
-    }
-    String[] flags = {cnapName, String.valueOf(flag)};
-    CequintCallerIdContact cequintCallerIdContact =
-        lookup(context, CONTENT_URI_FOR_INCALL, number, flags);
-    if (cequintCallerIdContact != null) {
-      if (isIncoming) {
-        incallIncomingCallCache.put(number, cequintCallerIdContact);
-      } else {
-        incallOutgoingCallCache.put(number, cequintCallerIdContact);
-      }
     }
     return cequintCallerIdContact;
   }
@@ -285,33 +267,7 @@ public class CequintCallerIdManager {
     return geoDescription;
   }
 
-  private static synchronized void registerContentObserver(Context context) {
-    if (!PermissionsUtil.hasCequintPermissions(context)) {
-      LogUtil.i("CequintCallerIdManager.registerContentObserver", "no cequint permissions");
-      return;
-    }
-
-    if (hasRegisteredContentObserver) {
-      return;
-    }
-    ContentObserver contentObserver =
-        new ContentObserver(null) {
-          @Override
-          public void onChange(boolean selfChange) {
-            invalidateCache();
-          }
-        };
-
-    context
-        .getContentResolver()
-        .registerContentObserver(CONTENT_URI_FOR_INCALL, true, contentObserver);
-    hasRegisteredContentObserver = true;
+  private CequintCallerIdManager() {
+    callLogCache = new ConcurrentHashMap<>();
   }
-
-  private static void invalidateCache() {
-    incallIncomingCallCache.clear();
-    incallOutgoingCallCache.clear();
-  }
-
-  private CequintCallerIdManager() {}
 }

@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> இடமிருந்து தவறிய அழைப்பு"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"செயலில் இருக்கும் அழைப்பு"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"வெளிச்செல்லும் அழைப்பு (பணி)"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"வெளிச்செல்லும் வைஃபை அழைப்பு"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"வெளிச்செல்லும் வைஃபை அழைப்பு (பணி)"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"செயலில் இருக்கும் வைஃபை அழைப்பு"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"செயலில் இருக்கும் வைஃபை அழைப்பு (பணி)"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"காத்திருப்பில்"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"உள்வரும் அழைப்பு"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"படத்துடன் உள்வரும் அழைப்பு"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"படம், செய்தி, இருப்பிடத்துடன் உள்வரும் முக்கியமான அழைப்பு"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"இணைப்புகளுடன் உள்வரும் முக்கியமான அழைப்பு"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"உள்வரும் அழைப்பு (பணி)"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"உள்வரும் வைஃபை அழைப்பு"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"உள்வரும் வைஃபை அழைப்பு (பணி)"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"உள்வரும் வைஃபை அழைப்பு"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"உள்வரும் வைஃபை அழைப்பு (பணி)"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"உள்வரும் சந்தேகத்திற்குரிய ஸ்பேம் அழைப்பு"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"உள்வரும் வீடியோ கோரிக்கை"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"சேவை இல்லை"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"வீடியோ அழைப்பை எடு"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"நெட்வொர்க்கில் பதிவுசெய்யப்படவில்லை."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"செல்லுலார் நெட்வொர்க் கிடைக்கவில்லை."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"மொபைல் நெட்வொர்க் கிடைக்கவில்லை."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"அழைக்க, சரியான எண்ணை உள்ளிடவும்."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"அழைக்க முடியாது."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI வரிசையைத் தொடங்குகிறது..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"அழைப்பைத் துண்டிக்கும்"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"குழு அழைப்பு"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"அழைப்பில்"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"செல்லுலார் தரவைப் பயன்படுத்தி அழைப்பைத் தொடர்கிறது…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"வைஃபை நெட்வொர்க்கிற்கு மாற முடியவில்லை"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"செல்லுலார் நெட்வொர்க்கைப் பயன்படுத்தி தொடர்ந்து வீடியோ அழைப்பைச் செய்யலாம். வழக்கமான தரவுக் கட்டணங்கள் விதிக்கப்படக்கூடும்."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"மொபைல் தரவைப் பயன்படுத்தி அழைப்பைத் தொடர்கிறது…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"வைஃபை நெட்வொர்க்கிற்கு மாற முடியவில்லை"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"மொபைல் நெட்வொர்க்கைப் பயன்படுத்தி தொடர்ந்து வீடியோ அழைப்பைச் செய்யலாம். வழக்கமான தரவுக் கட்டணங்கள் விதிக்கப்படக்கூடும்."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"இதை மீண்டும் காட்டாதே"</string>
 </resources>

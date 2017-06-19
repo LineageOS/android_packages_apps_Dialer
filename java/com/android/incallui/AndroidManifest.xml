@@ -15,11 +15,11 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.incallui">
+    package="com.android.incallui">
 
   <uses-sdk
-    android:minSdkVersion="23"
-    android:targetSdkVersion="26"/>
+      android:minSdkVersion="23"
+      android:targetSdkVersion="26"/>
 
   <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
   <!-- We use this to disable the status bar buttons of home, back and recent
@@ -31,8 +31,8 @@
   <!-- Warning: setting the required boolean to true would prevent installation of Dialer on
        devices which do not support a camera. -->
   <uses-feature
-    android:name="android.hardware.camera.any"
-    android:required="false"/>
+      android:name="android.hardware.camera.any"
+      android:required="false"/>
 
   <!-- Testing location -->
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -43,47 +43,49 @@
        Set taskAffinity for application is not working because it will be merged and the result is
   that all activities here still have same taskAffinity as activities under dialer. -->
   <application>
-    <meta-data android:name="android.telephony.hide_voicemail_settings_menu"
-      android:value="true"/>
+    <meta-data
+        android:name="android.telephony.hide_voicemail_settings_menu"
+        android:value="true"/>
+
     <activity
-      android:directBootAware="true"
-      android:excludeFromRecents="true"
-      android:exported="false"
-      android:label="@string/phoneAppLabel"
-      android:taskAffinity="com.android.incallui"
-      android:launchMode="singleInstance"
-      android:name="com.android.incallui.InCallActivity"
-      android:resizeableActivity="true"
-      android:screenOrientation="nosensor"
-      android:theme="@style/Theme.InCallScreen">
+        android:directBootAware="true"
+        android:excludeFromRecents="true"
+        android:exported="false"
+        android:label="@string/phoneAppLabel"
+        android:launchMode="singleInstance"
+        android:name="com.android.incallui.InCallActivity"
+        android:resizeableActivity="true"
+        android:screenOrientation="nosensor"
+        android:taskAffinity="com.android.incallui"
+        android:theme="@style/Theme.InCallScreen">
     </activity>
 
     <activity
-      android:directBootAware="true"
-      android:excludeFromRecents="true"
-      android:noHistory="true"
-      android:exported="false"
-      android:label="@string/manageConferenceLabel"
-      android:taskAffinity="com.android.incallui"
-      android:launchMode="singleTask"
-      android:name="com.android.incallui.ManageConferenceActivity"
-      android:resizeableActivity="true"
-      android:theme="@style/Theme.InCallScreen.ManageConference"/>
+        android:directBootAware="true"
+        android:excludeFromRecents="true"
+        android:exported="false"
+        android:label="@string/manageConferenceLabel"
+        android:launchMode="singleTask"
+        android:name="com.android.incallui.ManageConferenceActivity"
+        android:noHistory="true"
+        android:resizeableActivity="true"
+        android:taskAffinity="com.android.incallui"
+        android:theme="@style/Theme.InCallScreen.ManageConference"/>
 
     <service
-      android:directBootAware="true"
-      android:exported="true"
-      android:name="com.android.incallui.InCallServiceImpl"
-      android:permission="android.permission.BIND_INCALL_SERVICE">
+        android:directBootAware="true"
+        android:exported="true"
+        android:name="com.android.incallui.InCallServiceImpl"
+        android:permission="android.permission.BIND_INCALL_SERVICE">
       <meta-data
-        android:name="android.telecom.IN_CALL_SERVICE_UI"
-        android:value="true"/>
+          android:name="android.telecom.IN_CALL_SERVICE_UI"
+          android:value="true"/>
       <meta-data
-        android:name="android.telecom.IN_CALL_SERVICE_RINGING"
-        android:value="false"/>
+          android:name="android.telecom.IN_CALL_SERVICE_RINGING"
+          android:value="false"/>
       <meta-data
-        android:name="android.telecom.INCLUDE_EXTERNAL_CALLS"
-        android:value="true"/>
+          android:name="android.telecom.INCLUDE_EXTERNAL_CALLS"
+          android:value="true"/>
 
       <intent-filter>
         <action android:name="android.telecom.InCallService"/>
@@ -97,23 +99,35 @@
        excludeFromRecents="true"   -> Don't show in "recent apps" screen
        -->
     <activity
-      android:excludeFromRecents="true"
-      android:exported="false"
-      android:name="com.android.incallui.spam.SpamNotificationActivity"
-      android:noHistory="true"
-      android:taskAffinity=""
-      android:theme="@style/AfterCallNotificationTheme">
+        android:excludeFromRecents="true"
+        android:exported="false"
+        android:name="com.android.incallui.spam.SpamNotificationActivity"
+        android:noHistory="true"
+        android:taskAffinity=""
+        android:theme="@style/AfterCallNotificationTheme">
     </activity>
 
+    <activity
+        android:excludeFromRecents="true"
+        android:exported="false"
+        android:name=".AudioRouteSelectorActivity"
+        android:noHistory="true"
+        android:theme="@style/Theme.Incall.DialogHolder"
+        />
+
     <service
-      android:exported="false"
-      android:name="com.android.incallui.spam.SpamNotificationService"/>
+        android:exported="false"
+        android:name="com.android.incallui.spam.SpamNotificationService"/>
 
     <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
     <receiver
-      android:directBootAware="true"
-      android:exported="false"
-      android:name="com.android.incallui.NotificationBroadcastReceiver"/>
+        android:directBootAware="true"
+        android:exported="false"
+        android:name="com.android.incallui.NotificationBroadcastReceiver"/>
+
+    <receiver
+        android:exported="false"
+        android:name=".ReturnToCallActionReceiver"/>
 
   </application>
 

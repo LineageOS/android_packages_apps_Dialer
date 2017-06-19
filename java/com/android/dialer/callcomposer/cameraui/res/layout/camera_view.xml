@@ -24,7 +24,7 @@
   <FrameLayout
     android:id="@+id/mediapicker_enabled"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <!-- Default to using the hardware rendered camera preview, we will fall back to
     SoftwareCameraPreview in CameraMediaChooserView if needed -->
@@ -37,14 +37,14 @@
     <com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay
       android:id="@+id/focus_visual"
       android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+      android:layout_height="match_parent"/>
 
     <View
       android:id="@+id/camera_shutter_visual"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@android:color/white"
-      android:visibility="gone" />
+      android:visibility="gone"/>
 
     <ImageView
       android:id="@+id/preview_image_view"
@@ -71,7 +71,8 @@
         android:layout_marginEnd="@dimen/camera_view_button_margin"
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:src="@drawable/quantum_ic_fullscreen_white_48"
-        android:background="?android:selectableItemBackgroundBorderless"/>
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:contentDescription="@string/description_camera_switch_full_screen"/>
 
       <ImageButton
         android:id="@+id/camera_exit_fullscreen"
@@ -82,7 +83,8 @@
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:src="@drawable/quantum_ic_fullscreen_exit_white_48"
         android:visibility="gone"
-        android:background="?android:selectableItemBackgroundBorderless"/>
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:contentDescription="@string/description_camera_switch_preview_screen"/>
 
       <ImageButton
         android:id="@+id/camera_capture_button"
@@ -93,7 +95,7 @@
         android:background="?android:selectableItemBackgroundBorderless"
         android:src="@drawable/ic_capture"
         android:scaleType="fitXY"
-        android:contentDescription="@string/camera_take_picture"/>
+        android:contentDescription="@string/description_camera_take_picture"/>
 
       <ImageButton
         android:id="@+id/swap_camera_button"
@@ -103,8 +105,7 @@
         android:layout_marginStart="@dimen/camera_view_button_margin"
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:src="@drawable/front_back_switch_button_animation"
-        android:background="@drawable/transparent_button_background"
-        android:contentDescription="@string/camera_switch_camera_rear"/>
+        android:background="@drawable/transparent_button_background"/>
 
       <ImageButton
         android:id="@+id/camera_cancel_button"
@@ -116,7 +117,7 @@
         android:visibility="gone"
         android:background="@drawable/transparent_button_background"
         android:src="@drawable/quantum_ic_undo_white_48"
-        android:contentDescription="@string/camera_cancel_recording" />
+        android:contentDescription="@string/description_camera_cancel_photo" />
     </FrameLayout>
   </FrameLayout>
 

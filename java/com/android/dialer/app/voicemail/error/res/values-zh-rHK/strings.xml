@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"正在啟用視像留言"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"視像留言完全啟用前，您可能無法接收留言通知。請致電留言信箱以取得新訊息，直至視像留言完全啟用。"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"無法啟用視像留言"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"請確定您的手機有數據連線，然後再試一次。"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"請確定您的手機有數據連線，然後再試一次。"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"關閉飛行模式，然後再試一次。"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"沒有連線"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"您不會收到新留言通知。如果您使用的是 Wi-Fi，可以立即透過同步處理的方式查看是否有留言。"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"您不會收到新留言通知。如果您使用的是 Wi-Fi，可以立即透過同步處理的方式查看是否有留言。"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"您不會收到新留言通知。請關閉飛行模式，以便同步處理留言信箱。"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"您的手機需要有流動數據連線，才能查看留言信箱。"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"您的手機需要有流動數據連線，才能查看留言。"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"無法啟用視像留言"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"您仍可撥號以查看留言信箱。"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"無法更新視像留言信箱"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"請在您的 Wi-Fi 或數據連線品質較佳時再試一次。您仍可撥號以查看留言信箱。"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"請在您的數據連線品質較佳時再試一次。您仍可撥號以查看留言信箱。"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"請在您的 Wi-Fi 或數據連線品質較佳時再試一次。您仍可撥號以查看留言。"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"請在您的數據連線品質較佳時再試一次。您仍可撥號以查看留言。"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"無法更新視像留言信箱"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"您仍可撥號以查看留言信箱。"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"無法更新視像留言信箱"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"發生問題"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"請致電 <xliff:g id="NUMBER">%1$s</xliff:g> 聯絡客戶服務，並提供錯誤代碼 9999。"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"視像留言條款及細則"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"您必須接受 Verizon Wireless 的條款及細則，才能使用視像留言：\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\n您必須接受 Verizon Wireless 條款及細則，才能使用視像留言：\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"啟用視像留言"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"如果拒絕條款及細則，視像留言將會停用。"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"停用視像留言"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"如果拒絕條款及細則，留言轉錄功能將會停用。"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"停用留言轉錄功能"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"您只可以撥打 *86 使用留言信箱。請先設定新留言信箱 PIN 碼，然後繼續。"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"設定 PIN 碼"</string>
 </resources>

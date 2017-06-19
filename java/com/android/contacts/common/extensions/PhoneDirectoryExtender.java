@@ -15,14 +15,24 @@
 package com.android.contacts.common.extensions;
 
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.Nullable;
 import com.android.contacts.common.list.DirectoryPartition;
 import java.util.List;
 
 /** An interface for adding extended phone directories. */
 public interface PhoneDirectoryExtender {
+
   /**
    * Return a list of extended directories to add. May return null if no directories are to be
    * added.
    */
   List<DirectoryPartition> getExtendedDirectories(Context context);
+
+  /** returns true if the nearby places directory is enabled. */
+  boolean isEnabled(Context context);
+
+  /** Returns the content uri for nearby places. */
+  @Nullable
+  Uri getContentUri();
 }

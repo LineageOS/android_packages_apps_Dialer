@@ -251,13 +251,18 @@ public class ImapHelper implements Closeable {
     long time = messageDetails.getSentDate().getTime();
     String number = getNumber(messageDetails.getFrom());
     boolean isRead = Arrays.asList(messageDetails.getFlags()).contains(Flag.SEEN);
-    return Voicemail.createForInsertion(time, number)
-        .setPhoneAccount(mPhoneAccount)
-        .setSourcePackage(mContext.getPackageName())
-        .setSourceData(messageDetails.getUid())
-        .setIsRead(isRead)
-        .setTranscription(listener.getVoicemailTranscription())
-        .build();
+    Long duration = messageDetails.getDuration();
+    Voicemail.Builder builder =
+        Voicemail.createForInsertion(time, number)
+            .setPhoneAccount(mPhoneAccount)
+            .setSourcePackage(mContext.getPackageName())
+            .setSourceData(messageDetails.getUid())
+            .setIsRead(isRead)
+            .setTranscription(listener.getVoicemailTranscription());
+    if (duration != null) {
+      builder.setDuration(duration);
+    }
+    return builder.build();
   }
 
   /**

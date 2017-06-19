@@ -18,17 +18,21 @@ package com.android.dialer.common.concurrent;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.AsyncTaskExecutors.SimpleAsyncTaskExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Do not use this class directly. Instead use {@link DialerExecutors}.
@@ -38,13 +42,13 @@ import java.util.concurrent.ExecutorService;
  */
 public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
 
-  private String taskId;
   private Worker<InputT, OutputT> worker;
   private SuccessListener<OutputT> successListener;
   private FailureListener failureListener;
 
-  private AsyncTaskExecutor serialExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
-  private AsyncTaskExecutor parallelExecutor = AsyncTaskExecutors.createThreadPoolExecutor();
+  private ScheduledExecutorService serialExecutor;
+  private Executor parallelExecutor;
+  private ScheduledFuture<?> scheduledFuture;
 
   /**
    * Creates a new {@link DialerUiTaskFragment} or gets an existing one in the event that a
@@ -76,8 +80,8 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
       Worker<InputT, OutputT> worker,
       SuccessListener<OutputT> successListener,
       FailureListener failureListener,
-      @Nullable ExecutorService serialExecutorService,
-      @Nullable ExecutorService parallelExecutorService) {
+      @NonNull ScheduledExecutorService serialExecutorService,
+      @NonNull Executor parallelExecutor) {
     Assert.isMainThread();
 
     DialerUiTaskFragment<InputT, OutputT> fragment =
@@ -88,16 +92,11 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
       fragment = new DialerUiTaskFragment<>();
       fragmentManager.beginTransaction().add(fragment, taskId).commit();
     }
-    fragment.taskId = taskId;
     fragment.worker = worker;
     fragment.successListener = successListener;
     fragment.failureListener = failureListener;
-    if (serialExecutorService != null) {
-      fragment.serialExecutor = new SimpleAsyncTaskExecutor(serialExecutorService);
-    }
-    if (parallelExecutorService != null) {
-      fragment.parallelExecutor = new SimpleAsyncTaskExecutor(parallelExecutorService);
-    }
+    fragment.serialExecutor = Assert.isNotNull(serialExecutorService);
+    fragment.parallelExecutor = Assert.isNotNull(parallelExecutor);
     return fragment;
   }
 
@@ -111,60 +110,51 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
   public void onDetach() {
     super.onDetach();
     LogUtil.enterBlock("DialerUiTaskFragment.onDetach");
-    taskId = null;
     successListener = null;
     failureListener = null;
+    if (scheduledFuture != null) {
+      scheduledFuture.cancel(false /* mayInterrupt */);
+      scheduledFuture = null;
+    }
   }
 
   void executeSerial(InputT input) {
-    serialExecutor.submit(taskId, new InternalTask(), input);
+    serialExecutor.execute(() -> runTask(input));
+  }
+
+  void executeSerialWithWait(InputT input, long waitMillis) {
+    if (scheduledFuture != null) {
+      LogUtil.i("DialerUiTaskFragment.executeSerialWithWait", "cancelling waiting task");
+      scheduledFuture.cancel(false /* mayInterrupt */);
+    }
+    scheduledFuture =
+        serialExecutor.schedule(() -> runTask(input), waitMillis, TimeUnit.MILLISECONDS);
   }
 
   void executeParallel(InputT input) {
-    parallelExecutor.submit(taskId, new InternalTask(), input);
+    parallelExecutor.execute(() -> runTask(input));
   }
 
   void executeOnCustomExecutor(ExecutorService executor, InputT input) {
-    new SimpleAsyncTaskExecutor(executor).submit(taskId, new InternalTask(), input);
+    executor.execute(() -> runTask(input));
   }
 
-  private final class InternalTask extends AsyncTask<InputT, Void, InternalTaskResult<OutputT>> {
-
-    @SafeVarargs
-    @Override
-    protected final InternalTaskResult<OutputT> doInBackground(InputT... params) {
-      try {
-        return new InternalTaskResult<>(null, worker.doInBackground(params[0]));
-      } catch (Throwable throwable) {
-        LogUtil.e("InternalTask.doInBackground", "task failed", throwable);
-        return new InternalTaskResult<>(throwable, null);
-      }
-    }
-
-    @Override
-    protected void onPostExecute(InternalTaskResult<OutputT> result) {
-      if (result.throwable != null) {
-        if (failureListener == null) {
-          LogUtil.i("InternalTask.onPostExecute", "task failed but UI is dead");
-        } else {
-          failureListener.onFailure(result.throwable);
-        }
-      } else if (successListener == null) {
-        LogUtil.i("InternalTask.onPostExecute", "task succeeded but UI is dead");
+  @WorkerThread
+  private void runTask(@Nullable InputT input) {
+    try {
+      OutputT output = worker.doInBackground(input);
+      if (successListener == null) {
+        LogUtil.i("DialerUiTaskFragment.runTask", "task succeeded but UI is dead");
       } else {
-        successListener.onSuccess(result.result);
+        ThreadUtil.postOnUiThread(() -> successListener.onSuccess(output));
       }
-    }
-  }
-
-  private static class InternalTaskResult<OutputT> {
-
-    private final Throwable throwable;
-    private final OutputT result;
-
-    InternalTaskResult(Throwable throwable, OutputT result) {
-      this.throwable = throwable;
-      this.result = result;
+    } catch (Throwable throwable) {
+      LogUtil.e("DialerUiTaskFragment.runTask", "task failed", throwable);
+      if (failureListener == null) {
+        LogUtil.i("DialerUiTaskFragment.runTask", "task failed but UI is dead");
+      } else {
+        ThreadUtil.postOnUiThread(() -> failureListener.onFailure(throwable));
+      }
     }
   }
 }

@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Telefonatë e humbur nga <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Telefonatë në vazhdim"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Telefonatë pune dalëse"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Telefonatë në vazhdim me Wi-Fi"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Telefonatë pune dalëse përmes Wi-Fi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Telefonatë në vazhdim me Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Telefonatë pune dalëse me Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Në pritje"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Telefonatë hyrëse"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Telefonatë hyrëse me fotografi"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Tel. e rëndësishme me foto, mesazh e vendndodhje"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Telefonatë hyrëse e rëndësishme me bashkëngjitje"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Telefonatë pune hyrëse"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Telefonatë hyrëse Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Telefonatë pune hyrëse përmes Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Telefonatë hyrëse me Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Telefonatë pune hyrëse me Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Telefonatë e dyshuar si e padëshiruar"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Kërkesë për video hyrëse"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Nuk ka shërbim"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Prano telefonatën me video"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Për të kryer telefonatë, së pari çaktivizo modalitetin e aeroplanit."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"I paregjistruar në rrjet."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Rrjeti celular nuk mundësohet."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Rrjeti celular nuk mundësohet."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Për të kryer një telefonatë, fut një numër të vlefshëm."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Nuk mund të telefonojë."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Po fillon sekuencën MMI…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Mbylle telefonatën"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Telefonatë konferencë"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Në telefonatë"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Po vazhdon telefonatën duke përdorur të dhënat celulare…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Nuk mund të kalonte në rrjetin Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Telefonata me video do të mbetet në rrjetin celular. Mund të zbatohen tarifat standarde."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Po vazhdon telefonatën duke përdorur të dhënat celulare…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nuk mund të kalonte në rrjetin Wi-Fi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Telefonata me video do të mbetet në rrjetin celular. Mund të zbatohen tarifat standarde të të dhënave."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Mos e shfaq më këtë"</string>
 </resources>

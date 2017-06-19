@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -32,7 +32,7 @@
     android:id="@+id/videocall_remote_video_off"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:layout_centerInParent="true"
     android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
     android:drawablePadding="8dp"
     android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
@@ -71,19 +71,22 @@
       android:visibility="gone"
       android:importantForAccessibility="no"
       tools:visibility="visible"/>
-
-    <ImageView
-      android:id="@+id/videocall_video_preview_mute_overlay"
-      android:layout_width="32dp"
-      android:layout_height="32dp"
-      android:layout_gravity="center"
-      android:background="@drawable/videocall_background_circle_white"
-      android:contentDescription="@string/incall_content_description_muted"
-      android:scaleType="center"
-      android:src="@drawable/quantum_ic_mic_off_black_24"
-      android:visibility="gone"
-      tools:visibility="visible"/>
   </FrameLayout>
+
+  <ImageView
+    android:id="@+id/videocall_video_preview_mute_overlay"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_alignBottom="@id/videocall_preview_root"
+    android:layout_alignEnd="@id/videocall_preview_root"
+    android:layout_marginBottom="-8dp"
+    android:layout_marginEnd="-8dp"
+    android:background="@drawable/videocall_background_circle_white"
+    android:contentDescription="@string/incall_content_description_muted"
+    android:scaleType="center"
+    android:src="@drawable/quantum_ic_mic_off_black_24"
+    android:visibility="gone"
+    tools:visibility="visible"/>
 
   <View
     android:id="@+id/videocall_green_screen_background"
@@ -102,4 +105,4 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top"/>
 
-</FrameLayout>
+</RelativeLayout>

@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"啟用視覺化語音信箱"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"您必須完整啟用視覺化語音信箱，才會收到語音留言通知。在未完整啟用這項功能之前，如要擷取新訊息，請撥打語音信箱號碼。"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"無法啟用視覺化語音信箱"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"請確定您的手機能收到訊號，然後再試一次。"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"請確認你的手機已連上行動網路，然後再試一次。"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"請關閉飛航模式，然後再試一次。"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"沒有訊號"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"您不會收到新的語音留言通知。如果您已連上 Wi-Fi，立即執行同步處理，就能檢查是否有語音留言。"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"你不會收到新的語音留言通知。如果你已連上 Wi-Fi 網路，立即執行同步處理就能檢查是否有語音留言。"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"您不會收到新的語音留言通知。請關閉飛航模式，以便同步處理語音留言。"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"手機必須要有數據連線才能檢查語音留言。"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"手機必須要有行動數據連線才能檢查語音留言。"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"無法啟用視覺化語音信箱"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"您也可以撥打電話來檢查語音留言。"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"無法更新視覺化語音信箱"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"請在 Wi-Fi 連線品質較佳或手機訊號較強時再試一次。您也可以撥打電話來檢查語音留言。"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"請在數據連線品質較佳時再試一次。您也可以撥打電話來檢查語音留言。"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"請在 Wi‑Fi 或行動網路連線品質較佳時再試一次。你還是可以撥打電話來檢查語音留言。"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"請在行動網路連線品質較佳時再試一次。你還是可以撥打電話來檢查語音留言。"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"無法更新視覺化語音信箱"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"您也可以撥打電話來檢查語音留言。"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"無法更新視覺化語音信箱"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"發生錯誤"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"請撥打 <xliff:g id="NUMBER">%1$s</xliff:g> 與客服人員聯絡，並告訴對方錯誤代碼為 9999。"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"視覺化語音信箱條款及細則"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"你必須接受 Verizon Wireless 的條款及細則，才能使用視覺化語音信箱：\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\n你必須接受 Verizon Wireless 的條款及細則才能使用視覺化語音信箱：\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"啟用視覺化語音信箱"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"如果你拒絕接受相關條款及細則，系統將停用視覺化語音信箱功能。"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"停用視覺化語音信箱"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"如果拒絕接受條款及細則，系統將停用語音信箱留言轉錄功能。"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"停用語音信箱留言轉錄"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"必須撥打 *86 才能聽取語音信箱。如要繼續進行，請先設定新的語音信箱密碼。"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"設定語音信箱密碼"</string>
 </resources>

@@ -19,7 +19,6 @@ package com.android.incallui.bindings;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import com.android.dialer.common.ConfigProvider;
 
 /** This interface allows the container application to customize the in call UI. */
 public interface InCallUiBindings {
@@ -37,12 +36,4 @@ public interface InCallUiBindings {
    */
   @Nullable
   Intent getCallStateButtonBroadcastIntent(Context context);
-
-  @Nullable
-  DistanceHelper newDistanceHelper(Context context, DistanceHelper.Listener listener);
-
-  @Nullable
-  ContactUtils getContactUtilsInstance(Context context);
-
-  ConfigProvider getConfigProvider();
 }

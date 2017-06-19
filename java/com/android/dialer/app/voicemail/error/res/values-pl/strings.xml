@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktywuję wizualną pocztę głosową"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Powiadomienia poczty głosowej mogą być dostępne dopiero po pełnej aktywacji wizualnej poczty głosowej. Do tego momentu nowe wiadomości możesz pobierać, dzwoniąc na pocztę głosową."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Nie udało się aktywować wizualnej poczty głosowej"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Upewnij się, że telefon ma połączenie z internetem, i spróbuj jeszcze raz."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Upewnij się, że telefon ma połączenie z siecią komórkową, i spróbuj jeszcze raz."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Wyłącz tryb samolotowy i spróbuj jeszcze raz."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Brak połączenia"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Nie otrzymasz powiadomień o nowych wiadomościach głosowych. Jeśli masz połączenie Wi-Fi, możesz teraz sprawdzić dostępność nowych wiadomości przez zsynchronizowanie urządzenia."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Nie otrzymasz powiadomień o nowych wiadomościach głosowych. Jeśli masz połączenie Wi-Fi, możesz teraz sprawdzić dostępność nowych wiadomości przez zsynchronizowanie urządzenia."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Nie otrzymasz powiadomień o nowych wiadomościach głosowych. Wyłącz tryb samolotowy, aby zsynchronizować pocztę głosową."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Aby sprawdzić pocztę głosową, telefon musi mieć połączenie z internetem."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Aby sprawdzić pocztę głosową, telefon musi mieć połączenie z internetem."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Nie udało się aktywować wizualnej poczty głosowej"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Nie udało się zaktualizować wizualnej poczty głosowej"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Spróbuj jeszcze raz, gdy znajdziesz lepszy zasięg sieci komórkowej lub Wi-Fi. Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Spróbuj jeszcze raz, gdy znajdziesz lepszy zasięg sieci komórkowej. Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Spróbuj jeszcze raz, gdy znajdziesz lepszy zasięg sieci komórkowej lub Wi-Fi. Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Spróbuj jeszcze raz, gdy znajdziesz lepszy zasięg sieci komórkowej. Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Nie udało się zaktualizować wizualnej poczty głosowej"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Możesz też zadzwonić do poczty głosowej, aby odsłuchać wiadomości."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Nie udało się zaktualizować wizualnej poczty głosowej"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Coś poszło nie tak"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Warunki korzystania z wizualnej poczty głosowej"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Aby korzystać z wizualnej poczty głosowej, musisz zaakceptować warunki operatora Verizon Wireless:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nAby korzystać z wizualnej poczty głosowej, musisz zaakceptować warunki operatora Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Włącz wizualną pocztę głosową"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Jeśli odrzucisz warunki korzystania z usługi, wizualna poczta głosowa zostanie wyłączona."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Wyłącz wizualną pocztę głosową"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Jeśli odrzucisz warunki korzystania z usługi, transkrypcja wiadomości w poczcie głosowej zostanie wyłączona."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Wyłącz transkrypcję wiadomości w poczcie głosowej"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Poczta głosowa będzie dostępna tylko przez połączenie telefoniczne z numerem *86. Ustaw nowy kod PIN poczty głosowej, aby przejść dalej."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Ustaw kod PIN"</string>
 </resources>

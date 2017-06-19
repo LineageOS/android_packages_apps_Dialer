@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"ອະນຸຍາດ"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"ເພື່ອຖ່າຍຮູບ, ໃຫ້ອະນຸຍາດການເຂົ້າຫາກ້ອງຖ່າຍຮູບກ່ອນ"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"ເພື່ອແບ່ງປັນຮູບພາບໃດໜຶ່ງ, ໃຫ້ອະນຸຍາດການເຂົ້າຫາມີເດຍກ່ອນ"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"ຖ່າຍຮູບ"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"ເລືອກຮູບພາບ..."</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"ສົ່ງຂໍ້ຄວາມ"</string>
 </resources>

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /** An classifier trying to determine whether it is a human interacting with the phone or not. */
 class HumanInteractionClassifier extends Classifier {

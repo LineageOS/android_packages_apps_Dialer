@@ -22,9 +22,10 @@ import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
+import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -38,7 +39,6 @@ import javax.inject.Singleton;
 public final class CallLogFramework implements CallLogDataSource.ContentObserverCallbacks {
 
   static final String PREF_FORCE_REBUILD = "callLogFrameworkForceRebuild";
-  static final String PREF_LAST_REBUILD_TIMESTAMP_MILLIS = "callLogFrameworkLastRebuild";
 
   private final DataSources dataSources;
 
@@ -58,6 +58,7 @@ public final class CallLogFramework implements CallLogDataSource.ContentObserver
     LogUtil.enterBlock("CallLogFramework.registerContentObservers");
 
     if (!isNewCallLogEnabled(appContext)) {
+      LogUtil.i("CallLogFramework.registerContentObservers", "new call log not enabled");
       return;
     }
 

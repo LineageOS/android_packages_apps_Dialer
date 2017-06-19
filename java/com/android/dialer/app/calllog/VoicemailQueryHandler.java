@@ -15,7 +15,6 @@
  */
 package com.android.dialer.app.calllog;
 
-import android.app.NotificationManager;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -23,30 +22,49 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.app.R;
+import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
-import com.android.dialer.notification.GroupedNotificationUtil;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
 
 /** Handles asynchronous queries to the call log for voicemail. */
 public class VoicemailQueryHandler extends AsyncQueryHandler {
 
-  private static final String TAG = "VoicemailQueryHandler";
-
   /** The token for the query to mark all new voicemails as old. */
   private static final int UPDATE_MARK_VOICEMAILS_AS_OLD_TOKEN = 50;
 
-  private Context mContext;
-
   @MainThread
-  public VoicemailQueryHandler(Context context, ContentResolver contentResolver) {
+  private VoicemailQueryHandler(ContentResolver contentResolver) {
     super(contentResolver);
     Assert.isMainThread();
-    mContext = context;
+  }
+
+  @WorkerThread
+  public static void markAllNewVoicemailsAsRead(final @NonNull Context context) {
+    ThreadUtil.postOnUiThread(
+        () -> {
+          new VoicemailQueryHandler(context.getContentResolver()).markNewVoicemailsAsOld(null);
+        });
+  }
+
+  @WorkerThread
+  public static void markSingleNewVoicemailAsRead(
+      final @NonNull Context context, final Uri voicemailUri) {
+    if (voicemailUri == null) {
+      LogUtil.e("VoicemailQueryHandler.markSingleNewVoicemailAsRead", "voicemail URI is null");
+      return;
+    }
+    ThreadUtil.postOnUiThread(
+        () -> {
+          new VoicemailQueryHandler(context.getContentResolver())
+              .markNewVoicemailsAsOld(voicemailUri);
+        });
   }
 
   /** Updates all new voicemails to mark them as old. */
-  public void markNewVoicemailsAsOld(@Nullable Uri voicemailUri) {
+  private void markNewVoicemailsAsOld(@Nullable Uri voicemailUri) {
     // Mark all "new" voicemails as not new anymore.
     StringBuilder where = new StringBuilder();
     where.append(Calls.NEW);
@@ -70,11 +88,5 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
         voicemailUri == null
             ? new String[] {Integer.toString(Calls.VOICEMAIL_TYPE)}
             : new String[] {Integer.toString(Calls.VOICEMAIL_TYPE), voicemailUri.toString()});
-
-    GroupedNotificationUtil.removeNotification(
-        mContext.getSystemService(NotificationManager.class),
-        voicemailUri != null ? voicemailUri.toString() : null,
-        R.id.notification_visual_voicemail,
-        DefaultVoicemailNotifier.VISUAL_VOICEMAIL_NOTIFICATION_TAG);
   }
 }

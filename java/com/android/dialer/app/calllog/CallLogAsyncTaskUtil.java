@@ -28,6 +28,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.util.PermissionsUtil;
@@ -45,6 +46,7 @@ public class CallLogAsyncTaskUtil {
 
   public static void markVoicemailAsRead(
       @NonNull final Context context, @NonNull final Uri voicemailUri) {
+    LogUtil.enterBlock("CallLogAsyncTaskUtil.markVoicemailAsRead, voicemailUri: " + voicemailUri);
     if (sAsyncTaskExecutor == null) {
       initTaskExecutor();
     }
@@ -66,9 +68,7 @@ public class CallLogAsyncTaskUtil {
               uploadVoicemailLocalChangesToServer(context);
             }
 
-            Intent intent = new Intent(context, CallLogNotificationsService.class);
-            intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
-            context.startService(intent);
+            CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
             return null;
           }
         });

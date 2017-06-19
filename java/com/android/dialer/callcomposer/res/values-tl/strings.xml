@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Payagan"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Upang kumuha ng larawan, magbigay ng access sa Camera"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Upang magbahagi ng imahe, magbigay ng access sa Media"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Kumuha ng larawan"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Pumili ng larawan"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Magpadala ng mensahe"</string>
 </resources>

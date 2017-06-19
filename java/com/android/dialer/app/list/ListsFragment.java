@@ -31,7 +31,6 @@ import android.os.Handler;
 import android.os.Trace;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +43,12 @@ import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
@@ -60,11 +62,11 @@ import java.util.ArrayList;
  * Contacts list. This will also eventually contain the logic that allows sliding the ViewPager
  * containing the lists up above the search bar and pin it against the top of the screen.
  */
-public class ListsFragment extends Fragment
-    implements ViewPager.OnPageChangeListener, CallLogQueryHandler.Listener {
+public class ListsFragment extends Fragment implements OnPageChangeListener, Listener {
 
   private static final String TAG = "ListsFragment";
-  private ViewPager mViewPager;
+
+  private DialerViewPager mViewPager;
   private ViewPagerTabs mViewPagerTabs;
   private DialtactsPagerAdapter mAdapter;
   private RemoveView mRemoveView;
@@ -77,9 +79,11 @@ public class ListsFragment extends Fragment
   private final ArrayList<OnPageChangeListener> mOnPageChangeListeners = new ArrayList<>();
   /** The position of the currently selected tab. */
   private int mTabIndex = TAB_INDEX_SPEED_DIAL;
-  private boolean mPaused;
 
+  private boolean mPaused;
   private CallLogQueryHandler mCallLogQueryHandler;
+
+  private UiAction.Type[] actionTypeList;
 
   private final ContentObserver mVoicemailStatusObserver =
       new ContentObserver(new Handler()) {
@@ -151,6 +155,12 @@ public class ListsFragment extends Fragment
     Trace.endSection();
     Trace.beginSection(TAG + " setup views");
 
+    actionTypeList = new UiAction.Type[TAB_COUNT_WITH_VOICEMAIL];
+    actionTypeList[TAB_INDEX_SPEED_DIAL] = UiAction.Type.CHANGE_TAB_TO_FAVORITE;
+    actionTypeList[TAB_INDEX_HISTORY] = UiAction.Type.CHANGE_TAB_TO_CALL_LOG;
+    actionTypeList[TAB_INDEX_ALL_CONTACTS] = UiAction.Type.CHANGE_TAB_TO_CONTACTS;
+    actionTypeList[TAB_INDEX_VOICEMAIL] = UiAction.Type.CHANGE_TAB_TO_VOICEMAIL;
+
     String[] tabTitles = new String[TAB_COUNT_WITH_VOICEMAIL];
     tabTitles[TAB_INDEX_SPEED_DIAL] = getResources().getString(R.string.tab_speed_dial);
     tabTitles[TAB_INDEX_HISTORY] = getResources().getString(R.string.tab_history);
@@ -163,7 +173,7 @@ public class ListsFragment extends Fragment
     tabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.quantum_ic_people_white_24;
     tabIcons[TAB_INDEX_VOICEMAIL] = R.drawable.quantum_ic_voicemail_white_24;
 
-    mViewPager = (ViewPager) parentView.findViewById(R.id.lists_pager);
+    mViewPager = (DialerViewPager) parentView.findViewById(R.id.lists_pager);
     mAdapter =
         new DialtactsPagerAdapter(
             getContext(),
@@ -180,7 +190,6 @@ public class ListsFragment extends Fragment
     mViewPagerTabs.configureTabIcons(tabIcons);
     mViewPagerTabs.setViewPager(mViewPager);
     addOnPageChangeListener(mViewPagerTabs);
-
     mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
     mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
@@ -191,7 +200,7 @@ public class ListsFragment extends Fragment
           .registerContentObserver(
               VoicemailContract.Status.CONTENT_URI, true, mVoicemailStatusObserver);
     } else {
-      LogUtil.w("ListsFragment.onCreateView", "no voicemail read/add permissions");
+      LogUtil.w("ListsFragment.onCreateView", "no voicemail read permissions");
     }
 
     Trace.endSection();
@@ -213,8 +222,8 @@ public class ListsFragment extends Fragment
 
   /**
    * Shows the tab with the specified index. If the voicemail tab index is specified, but the
-   * voicemail status hasn't been fetched, it will try to show the tab after the voicemail status
-   * has been fetched.
+   * voicemail status hasn't been fetched, it will show the speed dial tab and try to show the
+   * voicemail tab after the voicemail status has been fetched.
    */
   public void showTab(int index) {
     if (index == TAB_INDEX_VOICEMAIL) {
@@ -241,6 +250,8 @@ public class ListsFragment extends Fragment
 
   @Override
   public void onPageSelected(int position) {
+    PerformanceReport.recordClick(actionTypeList[position]);
+
     LogUtil.i("ListsFragment.onPageSelected", "position: %d", position);
     mTabIndex = mAdapter.getRtlPosition(position);
 
@@ -375,7 +386,7 @@ public class ListsFragment extends Fragment
   public void markMissedCallsAsReadAndRemoveNotifications() {
     if (mCallLogQueryHandler != null) {
       mCallLogQueryHandler.markMissedCallsAsRead();
-      CallLogNotificationsService.markNewMissedCallsAsOld(getContext(), null);
+      CallLogNotificationsService.cancelAllMissedCalls(getContext());
     }
   }
 
@@ -383,6 +394,11 @@ public class ListsFragment extends Fragment
     mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
     mRemoveView.setAlpha(show ? 0 : 1);
     mRemoveView.animate().alpha(show ? 1 : 0).start();
+  }
+
+  public void showMultiSelectRemoveView(boolean show) {
+    mViewPagerTabs.setVisibility(show ? View.GONE : View.VISIBLE);
+    mViewPager.setEnableSwipingPages(!show);
   }
 
   public boolean hasFrequents() {

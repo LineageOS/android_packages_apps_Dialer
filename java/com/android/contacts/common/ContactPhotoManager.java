@@ -36,14 +36,6 @@ import com.android.dialer.util.PermissionsUtil;
 /** Asynchronously loads contact photos and maintains a cache of photos. */
 public abstract class ContactPhotoManager implements ComponentCallbacks2 {
 
-  /** Contact type constants used for default letter images */
-  public static final int TYPE_PERSON = LetterTileDrawable.TYPE_PERSON;
-
-  public static final int TYPE_SPAM = LetterTileDrawable.TYPE_SPAM;
-  public static final int TYPE_BUSINESS = LetterTileDrawable.TYPE_BUSINESS;
-  public static final int TYPE_VOICEMAIL = LetterTileDrawable.TYPE_VOICEMAIL;
-  public static final int TYPE_DEFAULT = LetterTileDrawable.TYPE_DEFAULT;
-  public static final int TYPE_GENERIC_AVATAR = LetterTileDrawable.TYPE_GENERIC_AVATAR;
   /** Scale and offset default constants used for default letter images */
   public static final float SCALE_DEFAULT = 1.0f;
 
@@ -88,7 +80,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
       if (!TextUtils.isEmpty(request.identifier)) {
         builder.appendQueryParameter(IDENTIFIER_PARAM_KEY, request.identifier);
       }
-      if (request.contactType != TYPE_DEFAULT) {
+      if (request.contactType != LetterTileDrawable.TYPE_DEFAULT) {
         builder.appendQueryParameter(CONTACT_TYPE_PARAM_KEY, String.valueOf(request.contactType));
       }
       if (request.scale != SCALE_DEFAULT) {
@@ -114,7 +106,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   public static String appendBusinessContactType(String photoUrl) {
     Uri uri = Uri.parse(photoUrl);
     Builder builder = uri.buildUpon();
-    builder.encodedFragment(String.valueOf(TYPE_BUSINESS));
+    builder.encodedFragment(String.valueOf(LetterTileDrawable.TYPE_BUSINESS));
     return builder.build().toString();
   }
 
@@ -147,7 +139,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
 
     String encodedFragment = photoUri.getEncodedFragment();
     return !TextUtils.isEmpty(encodedFragment)
-        && encodedFragment.equals(String.valueOf(TYPE_BUSINESS));
+        && encodedFragment.equals(String.valueOf(LetterTileDrawable.TYPE_BUSINESS));
   }
 
   protected static DefaultImageRequest getDefaultImageRequestFromUri(Uri uri) {
@@ -245,6 +237,9 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
       int contactType) {
     badge.assignContactUri(contactUri);
     badge.setOverlay(null);
+
+    badge.setContentDescription(
+        badge.getContext().getString(R.string.description_quick_contact_for, displayName));
 
     String lookupKey = contactUri == null ? null : UriUtils.getLookupKeyFromUri(contactUri);
     ContactPhotoManager.DefaultImageRequest request =
@@ -378,7 +373,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
      * be returned.
      */
     public static final DefaultImageRequest EMPTY_DEFAULT_BUSINESS_IMAGE_REQUEST =
-        new DefaultImageRequest(null, null, TYPE_BUSINESS, false);
+        new DefaultImageRequest(null, null, LetterTileDrawable.TYPE_BUSINESS, false);
     /**
      * Used to indicate that a circular drawable that represents a contact without any contact
      * details should be returned.
@@ -390,7 +385,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
      * should be returned.
      */
     public static final DefaultImageRequest EMPTY_CIRCULAR_BUSINESS_IMAGE_REQUEST =
-        new DefaultImageRequest(null, null, TYPE_BUSINESS, true);
+        new DefaultImageRequest(null, null, LetterTileDrawable.TYPE_BUSINESS, true);
     /** The contact's display name. The display name is used to */
     public String displayName;
     /**
@@ -403,10 +398,9 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     /**
      * The type of this contact. This contact type may be used to decide the kind of image to use in
      * the case where a unique letter cannot be generated from the contact's display name and
-     * identifier. See: {@link #TYPE_PERSON} {@link #TYPE_BUSINESS} {@link #TYPE_PERSON} {@link
-     * #TYPE_DEFAULT}
+     * identifier.
      */
-    public int contactType = TYPE_DEFAULT;
+    public @LetterTileDrawable.ContactType int contactType = LetterTileDrawable.TYPE_DEFAULT;
     /**
      * The amount to scale the letter or bitmap to, as a ratio of its default size (from a range of
      * 0.0f to 2.0f). The default value is 1.0f.
@@ -429,7 +423,13 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     public DefaultImageRequest() {}
 
     public DefaultImageRequest(String displayName, String identifier, boolean isCircular) {
-      this(displayName, identifier, TYPE_DEFAULT, SCALE_DEFAULT, OFFSET_DEFAULT, isCircular);
+      this(
+          displayName,
+          identifier,
+          LetterTileDrawable.TYPE_DEFAULT,
+          SCALE_DEFAULT,
+          OFFSET_DEFAULT,
+          isCircular);
     }
 
     public DefaultImageRequest(

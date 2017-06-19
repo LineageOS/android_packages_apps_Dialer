@@ -21,6 +21,5 @@
     <string name="notification_channel_ongoing_call" msgid="5593444445363940672">"通話中"</string>
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"不在着信"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"ボイスメール"</string>
-    <string name="notification_channel_external_call" msgid="2200143959948071132">"外部通話"</string>
     <string name="notification_channel_misc" msgid="5595452227577858518">"デフォルト"</string>
 </resources>

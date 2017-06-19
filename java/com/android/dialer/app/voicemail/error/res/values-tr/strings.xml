@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Görsel sesli mesaj etkinleştiriliyor"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Görsel sesli mesaj tam olarak etkinleştirilene dek sesli mesaj bildirimlerini almayabilirsiniz. Sesli mesaj tam olarak etkinleştirilene kadar, yeni mesajları almak için sesli mesaj hizmetini arayın."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Görsel sesli mesaj etkinleştirilemiyor"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Telefonunuzda hücresel bağlantı bulunduğundan emin olun ve tekrar deneyin."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Telefonunuzda mobil ağ bağlantısı olduğundan emin olup tekrar deneyin."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Uçak modunu kapatıp tekrar deneyin."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Bağlantı yok"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Yeni sesli mesajlarla ilgili olarak bilgilendirilmeyeceksiniz. Kablosuz bağlantınız varsa şimdi senkronizasyon gerçekleştirerek sesli mesajlarınızı kontrol edebilirsiniz."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Yeni sesli mesajlarla ilgili olarak bilgilendirilmeyeceksiniz. Kablosuz bağlantınız varsa şimdi senkronizasyon gerçekleştirerek sesli mesajlarınızı kontrol edebilirsiniz."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Yeni sesli mesajlarla ilgili olarak bilgilendirilmeyeceksiniz. Sesli mesajlarınızı senkronize etmek için uçak modunu kapatın."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Sesli mesaj kontrolü için telefonunuzda hücresel veri bağlantısı bulunmalıdır."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Sesli mesaj kontrolü için telefonunuzda mobil veri bağlantısı olmalıdır."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Görsel sesli mesaj etkinleştirilemiyor"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Görsel sesli mesaj güncellenemiyor"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Kablosuz veya hücresel bağlantı kalitesi daha iyi olduğunda tekrar deneyin. Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Hücresel veri bağlantısı kalitesi daha iyi olduğunda tekrar deneyin. Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Kablosuz veya mobil veri bağlantısı kalitesi daha iyi olduğunda tekrar deneyin. Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Mobil veri bağlantısı kalitesi daha iyi olduğunda tekrar deneyin. Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Görsel sesli mesaj güncellenemiyor"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Hâlâ arayarak sesli mesajlarınızı kontrol edebilirsiniz."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Görsel sesli mesaj güncellenemiyor"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Bir Sorun Oluştu"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9999 olduğunu bildirin."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Görsel Sesli Mesaj Şartlar ve Koşulları"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Görsel sesli mesajı kullanmak için Verizon Wireless\'ın şartlar ve koşullarını kabul etmelisiniz:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nGörsel sesli mesajı kullanabilmek için Verizon Wireless\'ın şartlar ve koşullarını kabul etmelisiniz:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Görsel Sesli Mesaj\'ı etkinleştirme"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Şartlar ve koşullar reddedilirse görsel sesli mesaj devre dışı bırakılır."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Görsel sesli mesajı devre dışı bırak"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Şartlar ve koşullar reddedilirse sesli mesaj çeviri yazısı devre dışı bırakılır."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Sesli mesaj çeviri yazısını devre dışı bırakın"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Sesli mesajlara yalnızca *86 aranarak erişilebilir. Devam etmek için yeni bir sesli mesaj PIN\'i belirleyin."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN belirleyin"</string>
 </resources>

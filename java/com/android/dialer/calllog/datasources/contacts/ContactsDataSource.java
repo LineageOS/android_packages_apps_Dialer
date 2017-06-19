@@ -16,13 +16,16 @@
 
 package com.android.dialer.calllog.datasources.contacts;
 
+import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
-import com.android.dialer.calllog.database.CallLogMutations;
+import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
+import com.android.dialer.calllog.datasources.CallLogMutations;
+import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.Assert;
+import java.util.List;
 import javax.inject.Inject;
 
 /** Responsible for maintaining the contacts related columns in the annotated call log. */
@@ -44,11 +47,25 @@ public final class ContactsDataSource implements CallLogDataSource {
   @Override
   public void fill(
       Context appContext,
-      SQLiteDatabase readableDatabase,
-      long lastRebuildTimeMillis,
       CallLogMutations mutations) {
     Assert.isWorkerThread();
     // TODO: Implementation.
+    for (ContentValues contentValues : mutations.getInserts().values()) {
+      contentValues.put(AnnotatedCallLog.CONTACT_NAME, "Placeholder name");
+    }
+  }
+
+  @Override
+  public void onSuccessfulFill(Context appContext) {
+    // TODO: Implementation.
+  }
+
+  @Override
+  public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
+    // TODO: Implementation.
+    return new RowCombiner(individualRowsSortedByTimestampDesc)
+        .useSingleValueString(AnnotatedCallLog.CONTACT_NAME)
+        .combine();
   }
 
   @MainThread
