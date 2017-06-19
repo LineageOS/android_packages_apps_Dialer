@@ -17,6 +17,7 @@
 package com.android.dialer.callcomposer.util;
 
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -28,40 +29,44 @@ public final class BitmapResizer {
   /**
    * Returns a bitmap that is a resized version of the parameter image. The image will only be
    * resized down and sized to be appropriate for an enriched call.
+   *
+   * @param image to be resized
+   * @param rotation degrees to rotate the image clockwise
+   * @return resized image
    */
-  public static Bitmap resizeForEnrichedCalling(Bitmap image) {
+  public static Bitmap resizeForEnrichedCalling(Bitmap image, int rotation) {
     Assert.isWorkerThread();
 
     int width = image.getWidth();
     int height = image.getHeight();
+
+    Matrix matrix = new Matrix();
+    matrix.postRotate(rotation);
 
     LogUtil.i(
         "BitmapResizer.resizeForEnrichedCalling", "starting height: %d, width: %d", height, width);
 
     if (width <= MAX_OUTPUT_RESOLUTION && height <= MAX_OUTPUT_RESOLUTION) {
       LogUtil.i("BitmapResizer.resizeForEnrichedCalling", "no resizing needed");
-      return image;
+      return Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
     }
 
+    float ratio = 1;
     if (width > height) {
       // landscape
-      float ratio = width / (float) MAX_OUTPUT_RESOLUTION;
-      width = MAX_OUTPUT_RESOLUTION;
-      height = (int) (height / ratio);
-    } else if (height > width) {
-      // portrait
-      float ratio = height / (float) MAX_OUTPUT_RESOLUTION;
-      height = MAX_OUTPUT_RESOLUTION;
-      width = (int) (width / ratio);
+      ratio = MAX_OUTPUT_RESOLUTION / (float) width;
     } else {
-      // square
-      height = MAX_OUTPUT_RESOLUTION;
-      width = MAX_OUTPUT_RESOLUTION;
+      // portrait & square
+      ratio = MAX_OUTPUT_RESOLUTION / (float) height;
     }
 
     LogUtil.i(
-        "BitmapResizer.resizeForEnrichedCalling", "ending height: %d, width: %d", height, width);
+        "BitmapResizer.resizeForEnrichedCalling",
+        "ending height: %f, width: %f",
+        height * ratio,
+        width * ratio);
 
-    return Bitmap.createScaledBitmap(image, width, height, true);
+    matrix.postScale(ratio, ratio);
+    return Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
   }
 }
