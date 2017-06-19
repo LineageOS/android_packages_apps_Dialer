@@ -50,4 +50,9 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
 
   @Override
   public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {}
+
+  @Override
+  public boolean isActionTimeout() {
+    return false;
+  }
 }

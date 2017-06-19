@@ -16,32 +16,19 @@
 
 package com.android.dialer.app.voicemail.error;
 
-import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.annotation.VisibleForTesting;
-import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.voicemail.VoicemailClient;
-import com.android.voicemail.VoicemailComponent;
-import java.util.Locale;
 
 /**
  * Create error message from {@link VoicemailStatus} for VVM3 visual voicemail. VVM3 is used only by
@@ -84,15 +71,13 @@ public class Vvm3VoicemailMessageCreator {
   public static final int PIN_NOT_SET = -100;
   public static final int SUBSCRIBER_UNKNOWN = -99;
 
-  private static final String ISO639_SPANISH = "es";
-  @VisibleForTesting static final String VVM3_TOS_ACCEPTANCE_FLAG_KEY = "vvm3_tos_acceptance_flag";
-
   @Nullable
   public static VoicemailErrorMessage create(
       final Context context,
       final VoicemailStatus status,
       final VoicemailStatusReader statusReader) {
-    VoicemailErrorMessage tosMessage = maybeShowTosMessage(context, status, statusReader);
+    VoicemailErrorMessage tosMessage =
+        new VoicemailTosMessageCreator(context, status, statusReader).maybeCreateTosMessage();
     if (tosMessage != null) {
       return tosMessage;
     }
@@ -298,136 +283,5 @@ public class Vvm3VoicemailMessageCreator {
             context.startActivity(intent);
           }
         });
-  }
-
-  @Nullable
-  private static VoicemailErrorMessage maybeShowTosMessage(
-      final Context context,
-      final VoicemailStatus status,
-      final VoicemailStatusReader statusReader) {
-    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-    if (preferences.getBoolean(VVM3_TOS_ACCEPTANCE_FLAG_KEY, false)) {
-      return null;
-    }
-    Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_SHOWN);
-
-    CharSequence termsAndConditions;
-    CharSequence acceptText;
-    CharSequence declineText;
-    // TODO(b/29082671): use LocaleList
-    if (Locale.getDefault().getLanguage().equals(new Locale(ISO639_SPANISH).getLanguage())) {
-      // Spanish
-      termsAndConditions = context.getString(R.string.verizon_terms_and_conditions_1_1_spanish);
-      acceptText = context.getString(R.string.verizon_terms_and_conditions_accept_spanish);
-      declineText = context.getString(R.string.verizon_terms_and_conditions_decline_spanish);
-    } else {
-      termsAndConditions = context.getString(R.string.verizon_terms_and_conditions_1_1_english);
-      acceptText = context.getString(R.string.verizon_terms_and_conditions_accept_english);
-      declineText = context.getString(R.string.verizon_terms_and_conditions_decline_english);
-    }
-
-    return new VoicemailTosMessage(
-            context.getString(R.string.verizon_terms_and_conditions_title),
-            context.getString(R.string.verizon_terms_and_conditions_message, termsAndConditions),
-            new Action(
-                declineText,
-                new OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-                    LogUtil.i("Vvm3VoicemailMessageCreator.maybeShowTosMessage", "decline clicked");
-                    PhoneAccountHandle handle =
-                        new PhoneAccountHandle(
-                            ComponentName.unflattenFromString(status.phoneAccountComponentName),
-                            status.phoneAccountId);
-                    Logger.get(context)
-                        .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINE_CLICKED);
-                    showDeclineTosDialog(context, handle, status);
-                  }
-                }),
-            new Action(
-                acceptText,
-                new OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-                    LogUtil.i("Vvm3VoicemailMessageCreator.maybeShowTosMessage", "accept clicked");
-                    preferences.edit().putBoolean(VVM3_TOS_ACCEPTANCE_FLAG_KEY, true).apply();
-                    Logger.get(context)
-                        .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_ACCEPTED);
-                    statusReader.refresh();
-                  }
-                },
-                true /* raised */))
-        .setModal(true);
-  }
-
-  private static void showDeclineTosDialog(
-      final Context context, final PhoneAccountHandle handle, VoicemailStatus status) {
-    if (PIN_NOT_SET == status.configurationState) {
-      LogUtil.i(
-          "Vvm3VoicemailMessageCreator.showDeclineTosDialog",
-          "PIN_NOT_SET, showing set PIN dialog");
-      showSetPinBeforeDeclineDialog(context);
-      return;
-    }
-    LogUtil.i(
-        "Vvm3VoicemailMessageCreator.showDeclineTosDialog",
-        "showing decline ToS dialog, status=" + status);
-    final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-    builder.setMessage(R.string.verizon_terms_and_conditions_decline_dialog_message);
-    builder.setPositiveButton(
-        R.string.verizon_terms_and_conditions_decline_dialog_downgrade,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINED);
-            VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
-            if (voicemailClient.isVoicemailModuleEnabled()) {
-              voicemailClient.setVoicemailEnabled(context, status.getPhoneAccountHandle(), false);
-            } else {
-              TelephonyManagerCompat.setVisualVoicemailEnabled(telephonyManager, handle, false);
-            }
-          }
-        });
-
-    builder.setNegativeButton(
-        android.R.string.cancel,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-          }
-        });
-
-    builder.setCancelable(true);
-    builder.show();
-  }
-
-  private static void showSetPinBeforeDeclineDialog(final Context context) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-    builder.setMessage(R.string.verizon_terms_and_conditions_decline_set_pin_dialog_message);
-    builder.setPositiveButton(
-        R.string.verizon_terms_and_conditions_decline_set_pin_dialog_set_pin,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINE_CHANGE_PIN_SHOWN);
-            Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
-            context.startActivity(intent);
-          }
-        });
-
-    builder.setNegativeButton(
-        android.R.string.cancel,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-          }
-        });
-
-    builder.setCancelable(true);
-    builder.show();
   }
 }

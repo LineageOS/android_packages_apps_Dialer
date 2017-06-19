@@ -306,6 +306,9 @@ public class CallButtonPresenter
   @Override
   public void toggleCameraClicked() {
     LogUtil.i("CallButtonPresenter.toggleCameraClicked", "");
+    if (mCall == null) {
+      return;
+    }
     Logger.get(mContext)
         .logCallImpression(
             DialerImpression.Type.IN_CALL_SCREEN_SWAP_CAMERA,

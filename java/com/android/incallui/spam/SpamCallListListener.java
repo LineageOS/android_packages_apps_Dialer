@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.support.annotation.NonNull;
+import android.support.v4.os.BuildCompat;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -35,8 +36,7 @@ import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.notification.NotificationChannelManager;
-import com.android.dialer.notification.NotificationChannelManager.Channel;
+import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.Spam;
 import com.android.incallui.R;
 import com.android.incallui.call.CallList;
@@ -49,9 +49,8 @@ import java.util.Random;
  * etc).
  */
 public class SpamCallListListener implements CallList.Listener {
+  static final int NOTIFICATION_ID = 1;
 
-  static final int NOTIFICATION_ID = R.id.notification_spam_call;
-  private static final String TAG = "SpamCallListListener";
   private final Context context;
   private final Random random;
 
@@ -63,10 +62,6 @@ public class SpamCallListListener implements CallList.Listener {
   public SpamCallListListener(Context context, Random rand) {
     this.context = context;
     this.random = rand;
-  }
-
-  private static String pii(String pii) {
-    return com.android.incallui.Log.pii(pii);
   }
 
   @Override
@@ -127,7 +122,6 @@ public class SpamCallListListener implements CallList.Listener {
     if (call.isSpam()) {
       maybeShowSpamCallNotification(call);
     } else {
-      LogUtil.d(TAG, "Showing not spam notification for number=" + pii(call.getNumber()));
       maybeShowNonSpamCallNotification(call);
     }
   }
@@ -161,7 +155,7 @@ public class SpamCallListListener implements CallList.Listener {
     if (callHistoryStatus == DialerCall.CALL_HISTORY_STATUS_PRESENT) {
       return false;
     } else if (callHistoryStatus == DialerCall.CALL_HISTORY_STATUS_UNKNOWN) {
-      LogUtil.i(TAG, "DialerCall history status is unknown, returning false");
+      LogUtil.i("SpamCallListListener.shouldShowAfterCallNotification", "history status unknown");
       return false;
     }
 
@@ -171,7 +165,7 @@ public class SpamCallListListener implements CallList.Listener {
       return false;
     }
 
-    LogUtil.i(TAG, "shouldShowAfterCallNotification, returning true");
+    LogUtil.i("SpamCallListListener.shouldShowAfterCallNotification", "returning true");
     return true;
   }
 
@@ -179,7 +173,7 @@ public class SpamCallListListener implements CallList.Listener {
    * Creates a notification builder with properties common among the two after call notifications.
    */
   private Notification.Builder createAfterCallNotificationBuilder(DialerCall call) {
-    Builder builder =
+    Notification.Builder builder =
         new Builder(context)
             .setContentIntent(
                 createActivityPendingIntent(call, SpamNotificationActivity.ACTION_SHOW_DIALOG))
@@ -187,7 +181,9 @@ public class SpamCallListListener implements CallList.Listener {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
             .setSmallIcon(R.drawable.ic_call_end_white_24dp);
-    NotificationChannelManager.applyChannel(builder, context, Channel.DEFAULT, null);
+    if (BuildCompat.isAtLeastO()) {
+      builder.setChannelId(NotificationChannelId.DEFAULT);
+    }
     return builder;
   }
 
@@ -234,21 +230,20 @@ public class SpamCallListListener implements CallList.Listener {
     int thresholdForShowing = Spam.get(context).percentOfSpamNotificationsToShow();
     if (thresholdForShowing == 0) {
       LogUtil.d(
-          TAG,
-          "shouldThrottleSpamNotification, not showing - percentOfSpamNotificationsToShow is 0");
+          "SpamCallListListener.shouldThrottleSpamNotification",
+          "not showing - percentOfSpamNotificationsToShow is 0");
       return true;
     } else if (randomNumber < thresholdForShowing) {
       LogUtil.d(
-          TAG,
-          "shouldThrottleSpamNotification, showing " + randomNumber + " < " + thresholdForShowing);
+          "SpamCallListListener.shouldThrottleSpamNotification",
+          "showing " + randomNumber + " < " + thresholdForShowing);
       return false;
     } else {
       LogUtil.d(
-          TAG,
-          "shouldThrottleSpamNotification, not showing "
-              + randomNumber
-              + " >= "
-              + thresholdForShowing);
+          "SpamCallListListener.shouldThrottleSpamNotification",
+          "not showing %d >= %d",
+          randomNumber,
+          thresholdForShowing);
       return true;
     }
   }
@@ -257,15 +252,23 @@ public class SpamCallListListener implements CallList.Listener {
     int randomNumber = random.nextInt(100);
     int thresholdForShowing = Spam.get(context).percentOfNonSpamNotificationsToShow();
     if (thresholdForShowing == 0) {
-      LogUtil.d(TAG, "Not showing non spam notification: percentOfNonSpamNotificationsToShow is 0");
+      LogUtil.d(
+          "SpamCallListListener.shouldThrottleNonSpamNotification",
+          "not showing non spam notification: percentOfNonSpamNotificationsToShow is 0");
       return true;
     } else if (randomNumber < thresholdForShowing) {
       LogUtil.d(
-          TAG, "Showing non spam notification: " + randomNumber + " < " + thresholdForShowing);
+          "SpamCallListListener.shouldThrottleNonSpamNotification",
+          "showing non spam notification: %d < %d",
+          randomNumber,
+          thresholdForShowing);
       return false;
     } else {
       LogUtil.d(
-          TAG, "Not showing non spam notification:" + randomNumber + " >= " + thresholdForShowing);
+          "SpamCallListListener.shouldThrottleNonSpamNotification",
+          "not showing non spam notification: %d >= %d",
+          randomNumber,
+          thresholdForShowing);
       return true;
     }
   }

@@ -42,6 +42,8 @@ import com.android.dialer.app.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.app.widget.DialpadSearchEmptyContentView;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -96,9 +98,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
   public void onStart() {
     LogUtil.d("SearchFragment.onStart", "");
     super.onStart();
-    if (isSearchMode()) {
-      getAdapter().setHasHeader(0, false);
-    }
 
     mActivity = (HostInterface) getActivity();
 
@@ -170,16 +169,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     return animator;
   }
 
-  @Override
-  protected void setSearchMode(boolean flag) {
-    super.setSearchMode(flag);
-    // This hides the "All contacts with phone numbers" header in the search fragment
-    final ContactEntryListAdapter adapter = getAdapter();
-    if (adapter != null) {
-      adapter.setHasHeader(0, false);
-    }
-  }
-
   public void setAddToContactNumber(String addToContactNumber) {
     mAddToContactNumber = addToContactNumber;
   }
@@ -247,6 +236,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         }
         break;
       case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
+        if (this instanceof SmartDialSearchFragment) {
+          Logger.get(getContext())
+              .logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_DIALPAD);
+        }
         number =
             TextUtils.isEmpty(mAddToContactNumber)
                 ? adapter.getFormattedQueryString()
@@ -255,6 +248,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
         break;
       case DialerPhoneNumberListAdapter.SHORTCUT_ADD_TO_EXISTING_CONTACT:
+        if (this instanceof SmartDialSearchFragment) {
+          Logger.get(getContext())
+              .logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_DIALPAD);
+        }
         number =
             TextUtils.isEmpty(mAddToContactNumber)
                 ? adapter.getFormattedQueryString()

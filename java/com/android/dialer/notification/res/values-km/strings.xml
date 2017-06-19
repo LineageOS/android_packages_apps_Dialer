@@ -21,6 +21,5 @@
     <string name="notification_channel_ongoing_call" msgid="5593444445363940672">"ការ​ហៅ​បន្ត"</string>
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"ការ​ហៅ​ដែល​មិន​បាន​ទទួល"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"សារ​ជា​សំឡេង"</string>
-    <string name="notification_channel_external_call" msgid="2200143959948071132">"ការ​ហៅខាង​ក្រៅ"</string>
     <string name="notification_channel_misc" msgid="5595452227577858518">"លំ​នាំ​ដើម"</string>
 </resources>

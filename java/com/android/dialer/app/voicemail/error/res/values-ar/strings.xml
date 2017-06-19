@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"تنشيط البريد الصوتي المرئي"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"قد لا تتلقّى إشعارات البريد الصوتي حتى يتم تنشيط البريد الصوتي المرئي تمامًا. يمكنك الاتصال بالبريد الصوتي لاسترداد الرسائل الجديدة إلى أن يتم تنشيط البريد الصوتي تمامًا."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"يتعذر تنشيط البريد الصوتي المرئي"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"تأكد من وجود اتصال جوال على هاتفك وحاول مرة أخرى."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"تأكد من أن هاتفك توجد به اتصال شبكة جوال وحاول مرة أخرى."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"أوقف تشغيل وضع الطائرة وحاول مرة أخرى."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"لا يتوفر اتصال"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"‏لن يتم إعلامك برسائل البريد الصوتي الجديدة. إذا كنت تستخدم شبكة Wi-Fi، فيمكنك التحقق من البريد الصوتي عن طريق إجراء المزامنة الآن."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"‏لن يتم إعلامك برسائل البريد الصوتي الجديدة. إذا كنت تستخدم شبكة Wi-Fi، فيمكنك التحقق من البريد الصوتي عن طريق إجراء المزامنة الآن."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"لن يتم إعلامك برسائل البريد الصوتي الجديدة. أوقف تشغيل وضع الطائرة لمزامنة بريدك الصوتي."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"يحتاج هاتفك إلى اتصال جوال للتحقق من البريد الصوتي."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"يحتاج هاتفك إلى اتصال بيانات جوال للتحقق من البريد الصوتي."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"يتعذر تنشيط البريد الصوتي المرئي"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"لا يزال بإمكانك إجراء الاتصال للتحقق من البريد الصوتي."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"يتعذر تحديث البريد الصوتي المرئي"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"‏حاول مرة أخرى عندما يكون لديك اتصال Wi-Fi أو جوال أفضل. لا يزال بإمكانك الاتصال والتحقق من البريد الصوتي."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"حاول مرة أخرى عندما يكون لديك اتصال جوال أفضل. لا يزال بإمكانك الاتصال والتحقق من البريد الصوتي."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"‏حاول مرة أخرى عندما يكون لديك اتصال Wi-Fi أو جوال أفضل. لا يزال بإمكانك الاتصال والتحقق من البريد الصوتي."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"حاول مرة أخرى عندما يكون لديك اتصال جوال أفضل. لا يزال بإمكانك الاتصال والتحقق من البريد الصوتي."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"يتعذر تحديث البريد الصوتي المرئي"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"لا يزال بإمكانك إجراء الاتصال للتحقق من البريد الصوتي."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"يتعذر تحديث البريد الصوتي المرئي"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"حدث خطأٌ ما"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"يُرجى الاتصال بخدمة العملاء على الرقم <xliff:g id="NUMBER">%1$s</xliff:g> وإبلاغهم أن رمز الخطأ هو 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"البنود والشروط للبريد الصوتي المرئي"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"‏يجب قبول البنود والشروط لاتصال Verizon اللاسلكي من أجل استخدام البريد الصوتي المرئي:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nينبغي لك قبول البنود والشروط التي تخص Verizon Wireless لاستخدام البريد الصوتي المرئي:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"تشغيل البريد الصوتي المرئي"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"سيتم تعطيل البريد الصوتي المرئي في حالة رفض البنود والشروط."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"تعطيل البريد الصوتي المرئي"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"سيتم تعطيل نسخ البريد الصوتي في حالة رفض البنود والشروط."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"تعطيل نسخ البريد الصوتي"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"يمكن الوصول إلى البريد الصوتي فقط عن طريق طلب *86. ينبغي تعيين رقم تعريف شخصي جديد للبريد الصوتي للمتابعة."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"تعيين رقم التعريف الشخصي"</string>
 </resources>

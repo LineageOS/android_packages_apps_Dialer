@@ -41,6 +41,13 @@ import java.util.ArrayList;
 /** {@link ContentProvider} for the annotated call log. */
 public class AnnotatedCallLogContentProvider extends ContentProvider {
 
+  /**
+   * We sometimes run queries where we potentially pass every ID into a where clause using the
+   * (?,?,?,...) syntax. The maximum number of host parameters is 999, so that's the maximum size
+   * this table can be. See https://www.sqlite.org/limits.html for more details.
+   */
+  private static final int MAX_ROWS = 999;
+
   private static final int ANNOTATED_CALL_LOG_TABLE_CODE = 1;
   private static final int ANNOTATED_CALL_LOG_TABLE_ID_CODE = 2;
   private static final int COALESCED_ANNOTATED_CALL_LOG_TABLE_CODE = 3;
@@ -72,7 +79,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
 
   @Override
   public boolean onCreate() {
-    databaseHelper = new AnnotatedCallLogDatabaseHelper(getContext());
+    databaseHelper = new AnnotatedCallLogDatabaseHelper(getContext(), MAX_ROWS);
     coalescer = CallLogDatabaseComponent.get(getContext()).coalescer();
     return true;
   }
@@ -283,7 +290,21 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
             throw new OperationApplicationException("error inserting row");
           }
         } else if (result.count == 0) {
-          throw new OperationApplicationException("error updating or deleting rows");
+          /*
+           * The batches built by MutationApplier happen to contain operations in order of:
+           *
+           * 1. Inserts
+           * 2. Updates
+           * 3. Deletes
+           *
+           * Let's say the last row in the table is row Z, and MutationApplier wishes to update it,
+           * as well as insert row A. When row A gets inserted, row Z will be deleted via the
+           * trigger if the table is full. Then later, when we try to process the update for row Z,
+           * it won't exist.
+           */
+          LogUtil.w(
+              "AnnotatedCallLogContentProvider.applyBatch",
+              "update or delete failed, possibly because row got cleaned up");
         }
         results[i] = result;
       }

@@ -80,6 +80,7 @@
     <string name="add_wait" msgid="1177723010768282578">"රැඳී සිටීම එක් කරන්න"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"සැකසීම්"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"සමාකෘතිය"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"නව UI කෙටිමග තනන්න"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"සියලුම සම්බන්ධතා"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"ස්පර්ශ නාද යතුරුපෑඩය භාවිතා කරන්න"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"පවතින ඇමතුමට නැවත යන්න"</string>
@@ -104,12 +105,14 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"තත් <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"මිනි <xliff:g id="MINUTES">%s</xliff:g> තත් <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"කාණ්ඩ ක්‍රියා ප්‍රකාරය අවලංගු කරන්න"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"හඬ තැපෑල"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"හඬ තැපැල්"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ඔව්"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"නැත"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"මකන්න"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"අවලංගු කරන්න"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"තෝරා ගත් <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> මකන්නද?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> තෝරා ගන්නා ලදි"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"මෙම හඬ තැපැල් මකන්නද? "</b>"</item>
+      <item quantity="other">"<b>"මෙම හඬ තැපැල් මකන්නද? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> දින <xliff:g id="TIME">%2$s</xliff:g>ට"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

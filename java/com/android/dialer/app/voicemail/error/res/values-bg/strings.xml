@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Визуалната гласова поща се активира"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Възможно е да не получавате известия за гласова поща, докато визуалната гласова поща не бъде напълно активирана. Обаждайте се на номера за гласова поща, за да получавате нови съобщения, докато гласовата поща не е активирана."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Визуалната гласова поща не може да се активира"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Проверете дали телефонът ви има мобилна връзка и опитайте отново."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Проверете дали телефонът ви има връзка с мобилната мрежа и опитайте отново."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Изключете самолетния режим и опитайте отново."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Няма връзка"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Няма да бъдете известявани за нови гласови съобщения. Ако използвате Wi-Fi, можете да проверите за гласова поща, като синхронизирате сега."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Няма да бъдете известявани за нови гласови съобщения. Ако използвате Wi-Fi, можете да проверите за гласова поща, като синхронизирате сега."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Няма да бъдете известявани за нови гласови съобщения. Изключете самолетния режим, за да синхронизирате гласовата си поща."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"За да проверите гласовата поща, телефонът ви трябва да използва връзка за мобилни данни."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"За да проверите гласовата поща, телефонът ви трябва да използва мобилна връзка за данни."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Визуалната гласова поща не може да се активира"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Все пак можете да проверите гласовата поща с обаждане."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Визуалната гласова поща не може да се актуализира."</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Опитайте отново, когато имате по-добра Wi-Fi или мобилна връзка. Все пак можете да проверите гласовата поща с обаждане."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Опитайте отново, когато имате по-добра връзка за мобилни данни. Все пак можете да проверите гласовата поща с обаждане."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Опитайте отново, когато имате по-добра Wi-Fi връзка или мобилна връзка за данни. Пак можете да проверите гласовата си поща чрез обаждане."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Опитайте отново, когато имате по-добра мобилна връзка за данни. Пак можете да проверите гласовата си поща чрез обаждане."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Визуалната гласова поща не може да се актуализира."</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Все пак можете да проверите гласовата поща с обаждане."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Визуалната гласова поща не може да се актуализира."</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Нещо се обърка"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Моля, свържете се с екипа за поддръжка на клиенти на телефон <xliff:g id="NUMBER">%1$s</xliff:g> и кажете, че кодът на грешката е 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Общи условия за визуалната гласова поща"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"За да използвате визуалната гласова поща, трябва да приемете Общите условия на Verizon:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nЗа да използвате визуалната гласова поща, трябва да приемете Общите условия на Verizon:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Включване на визуалната гласова поща"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ако отхвърлите Общите условия, визуалната гласова поща ще бъде деактивирана."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Деактивиране на визуалната гласова поща"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ако отхвърлите Общите условия, създаването на преписи на гласовите съобщения ще бъде деактивирано."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Деактивиране на преписите на гласовите съобщения"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Ще имате достъп до гласовата поща само когато наберете *86. За да продължите, задайте нов ПИН за гласовата поща."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Задаване на ПИН"</string>
 </resources>

@@ -55,7 +55,7 @@ final class ContactsCursorLoader extends CursorLoader {
             .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true")
             .build(),
         contactProjection,
-        null,
+        contactProjection[CONTACT_DISPLAY_NAME] + " IS NOT NULL",
         null,
         sortKey + " ASC");
   }

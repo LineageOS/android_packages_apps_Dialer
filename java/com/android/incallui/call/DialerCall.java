@@ -47,8 +47,8 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -163,6 +163,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    */
   private boolean isRemotelyHeld;
 
+  /** Indicates whether this call is currently in the process of being merged into a conference. */
+  private boolean isMergeInProcess;
+
   /**
    * Indicates whether the phone account associated with this call supports specifying a call
    * subject.
@@ -264,6 +267,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
               break;
             case TelephonyManagerCompat.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC:
               notifyInternationalCallOnWifi();
+              break;
+            case TelephonyManagerCompat.EVENT_MERGE_START:
+              LogUtil.i("DialerCall.onConnectionEvent", "merge start");
+              isMergeInProcess = true;
+              break;
+            case TelephonyManagerCompat.EVENT_MERGE_COMPLETE:
+              LogUtil.i("DialerCall.onConnectionEvent", "merge complete");
+              isMergeInProcess = false;
               break;
             default:
               break;
@@ -970,6 +981,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return isRemotelyHeld;
   }
 
+  public boolean isMergeInProcess() {
+    return isMergeInProcess;
+  }
+
   public boolean isIncoming() {
     return mLogState.isIncoming;
   }
@@ -1274,6 +1289,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     }
   }
 
+  void onRemovedFromCallList() {
+    // Ensure we clean up when this call is removed.
+    mVideoTechManager.dispatchRemovedFromCallList();
+  }
+
   /**
    * Specifies whether a number is in the call history or not. {@link #CALL_HISTORY_STATUS_UNKNOWN}
    * means there is no result.
@@ -1493,7 +1513,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
       videoTechs.add(
           new LightbringerTech(
-              LightbringerComponent.get(call.mContext).getLightbringer(), call, phoneNumber));
+              LightbringerComponent.get(call.mContext).getLightbringer(),
+              call,
+              call.mTelecomCall,
+              phoneNumber));
     }
 
     VideoTech getVideoTech() {
@@ -1515,6 +1538,12 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     void dispatchCallStateChanged(int newState) {
       for (VideoTech videoTech : videoTechs) {
         videoTech.onCallStateChanged(context, newState);
+      }
+    }
+
+    void dispatchRemovedFromCallList() {
+      for (VideoTech videoTech : videoTechs) {
+        videoTech.onRemovedFromCallList();
       }
     }
   }

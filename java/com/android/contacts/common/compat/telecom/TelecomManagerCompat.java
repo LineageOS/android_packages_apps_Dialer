@@ -18,6 +18,7 @@ package com.android.contacts.common.compat.telecom;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import java.lang.reflect.Field;
 
 /** Compatibility class for {@link android.telecom.TelecomManager}. */
 public class TelecomManagerCompat {
@@ -26,6 +27,13 @@ public class TelecomManagerCompat {
   // b/33779976
   public static final String EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS =
       "android.telecom.extra.LAST_EMERGENCY_CALLBACK_TIME_MILLIS";
+
+  // Constants from http://cs/android/frameworks/base/telecomm/java/android/telecom/Call.java.
+  public static final String EVENT_REQUEST_HANDOVER = "android.telecom.event.REQUEST_HANDOVER";
+  public static final String EXTRA_HANDOVER_PHONE_ACCOUNT_HANDLE =
+      "android.telecom.extra.HANDOVER_PHONE_ACCOUNT_HANDLE";
+  public static final String EXTRA_HANDOVER_VIDEO_STATE =
+      "android.telecom.extra.HANDOVER_VIDEO_STATE";
 
   /**
    * Returns the current SIM call manager. Apps must be prepared for this method to return null,
@@ -40,5 +48,21 @@ public class TelecomManagerCompat {
       return telecomManager.getSimCallManager();
     }
     return null;
+  }
+
+  /**
+   * Handovers are supported from Android O-DR onward. Since there is no API bump from O to O-DR, we
+   * need to use reflection to check the existence of TelecomManager.EXTRA_IS_HANDOVER in
+   * http://cs/android/frameworks/base/telecomm/java/android/telecom/TelecomManager.java.
+   */
+  public static boolean supportsHandover() {
+    //
+    try {
+      Field field = TelecomManager.class.getDeclaredField("EXTRA_IS_HANDOVER");
+      return "android.telecom.extra.IS_HANDOVER".equals(field.get(null /* obj (static field) */));
+    } catch (Exception e) {
+      // Do nothing
+    }
+    return false;
   }
 }

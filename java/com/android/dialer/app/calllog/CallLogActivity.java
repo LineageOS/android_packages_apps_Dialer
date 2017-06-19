@@ -34,6 +34,9 @@ import com.android.dialer.app.R;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
 
@@ -48,7 +51,6 @@ public class CallLogActivity extends TransactionSafeActivity
   private ViewPagerTabs mViewPagerTabs;
   private ViewPagerAdapter mViewPagerAdapter;
   private CallLogFragment mAllCallsFragment;
-  private CallLogFragment mMissedCallsFragment;
   private String[] mTabTitles;
   private boolean mIsResumed;
 
@@ -93,9 +95,16 @@ public class CallLogActivity extends TransactionSafeActivity
 
   @Override
   protected void onResume() {
+    // Some calls may not be recorded (eg. from quick contact),
+    // so we should restart recording after these calls. (Recorded call is stopped)
+    PostCall.restartPerformanceRecordingIfARecentCallExist(this);
+    if (!PerformanceReport.isRecording()) {
+      PerformanceReport.startRecording();
+    }
+
     mIsResumed = true;
     super.onResume();
-    sendScreenViewForChildFragment(mViewPager.getCurrentItem());
+    sendScreenViewForChildFragment();
   }
 
   @Override
@@ -129,6 +138,7 @@ public class CallLogActivity extends TransactionSafeActivity
     }
 
     if (item.getItemId() == android.R.id.home) {
+      PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_HISTORY_WITH_CANCEL_BUTTON);
       final Intent intent = new Intent(this, DialtactsActivity.class);
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(intent);
@@ -148,7 +158,7 @@ public class CallLogActivity extends TransactionSafeActivity
   @Override
   public void onPageSelected(int position) {
     if (mIsResumed) {
-      sendScreenViewForChildFragment(position);
+      sendScreenViewForChildFragment();
     }
     mViewPagerTabs.onPageSelected(position);
   }
@@ -158,7 +168,7 @@ public class CallLogActivity extends TransactionSafeActivity
     mViewPagerTabs.onPageScrollStateChanged(state);
   }
 
-  private void sendScreenViewForChildFragment(int position) {
+  private void sendScreenViewForChildFragment() {
     Logger.get(this).logScreenView(ScreenEvent.Type.CALL_LOG_FILTER, this);
   }
 
@@ -167,6 +177,12 @@ public class CallLogActivity extends TransactionSafeActivity
       return mViewPagerAdapter.getCount() - 1 - position;
     }
     return position;
+  }
+
+  @Override
+  public void onBackPressed() {
+    PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
+    super.onBackPressed();
   }
 
   /** Adapter for the view pager. */
@@ -189,20 +205,16 @@ public class CallLogActivity extends TransactionSafeActivity
               CallLogQueryHandler.CALL_TYPE_ALL, true /* isCallLogActivity */);
         case TAB_INDEX_MISSED:
           return new CallLogFragment(Calls.MISSED_TYPE, true /* isCallLogActivity */);
+        default:
+          throw new IllegalStateException("No fragment at position " + position);
       }
-      throw new IllegalStateException("No fragment at position " + position);
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
       final CallLogFragment fragment = (CallLogFragment) super.instantiateItem(container, position);
-      switch (position) {
-        case TAB_INDEX_ALL:
+      if (position == TAB_INDEX_ALL) {
           mAllCallsFragment = fragment;
-          break;
-        case TAB_INDEX_MISSED:
-          mMissedCallsFragment = fragment;
-          break;
       }
       return fragment;
     }

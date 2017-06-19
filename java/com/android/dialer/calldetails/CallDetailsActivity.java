@@ -35,27 +35,35 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.protos.ProtoParsers;
 import java.util.List;
 
 /** Displays the details of a specific call log entry. */
-public class CallDetailsActivity extends AppCompatActivity implements OnMenuItemClickListener {
+public class CallDetailsActivity extends AppCompatActivity
+    implements OnMenuItemClickListener, CallDetailsFooterViewHolder.ReportCallIdListener {
 
   private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
   private static final String EXTRA_CONTACT = "contact";
+  private static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String TASK_DELETE = "task_delete";
 
   private List<CallDetailsEntry> entries;
 
   public static Intent newInstance(
-      Context context, @NonNull CallDetailsEntries details, @NonNull DialerContact contact) {
+      Context context,
+      @NonNull CallDetailsEntries details,
+      @NonNull DialerContact contact,
+      boolean canReportCallerId) {
     Assert.isNotNull(details);
     Assert.isNotNull(contact);
 
     Intent intent = new Intent(context, CallDetailsActivity.class);
     ProtoParsers.put(intent, EXTRA_CONTACT, contact);
     ProtoParsers.put(intent, EXTRA_CALL_DETAILS_ENTRIES, details);
+    intent.putExtra(EXTRA_CAN_REPORT_CALLER_ID, canReportCallerId);
     return intent;
   }
 
@@ -63,16 +71,29 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.call_details_activity);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = findViewById(R.id.toolbar);
     toolbar.inflateMenu(R.menu.call_details_menu);
     toolbar.setOnMenuItemClickListener(this);
     toolbar.setTitle(R.string.call_details);
+    toolbar.setNavigationOnClickListener(
+        v -> {
+          PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_DETAIL_WITH_CANCEL_BUTTON);
+          finish();
+        });
     onHandleIntent(getIntent());
   }
 
   @Override
   protected void onResume() {
     super.onResume();
+
+    // Some calls may not be recorded (eg. from quick contact),
+    // so we should restart recording after these calls. (Recorded call is stopped)
+    PostCall.restartPerformanceRecordingIfARecentCallExist(this);
+    if (!PerformanceReport.isRecording()) {
+      PerformanceReport.startRecording();
+    }
+
     PostCall.promptUserForMessageIfNecessary(this, findViewById(R.id.recycler_view));
   }
 
@@ -90,9 +111,10 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
                 intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())
             .getEntriesList();
 
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries));
+    recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries, this));
+    PerformanceReport.logOnScrollStateChange(recyclerView);
   }
 
   @Override
@@ -104,6 +126,22 @@ public class CallDetailsActivity extends AppCompatActivity implements OnMenuItem
       return true;
     }
     return false;
+  }
+
+  @Override
+  public void onBackPressed() {
+    PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
+    super.onBackPressed();
+  }
+
+  @Override
+  public void reportCallId(String number) {
+    ReportDialogFragment.newInstance(number).show(getFragmentManager(), null);
+  }
+
+  @Override
+  public boolean canReportCallerId(String number) {
+    return getIntent().getExtras().getBoolean(EXTRA_CAN_REPORT_CALLER_ID, false);
   }
 
   /** Delete specified calls from the call log. */

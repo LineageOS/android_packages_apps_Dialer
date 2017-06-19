@@ -69,7 +69,6 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
   // A list of extended directories to add to the directories from the database
   private final List<DirectoryPartition> mExtendedDirectories;
   private final CharSequence mUnknownNameText;
-  private final boolean mIsPresenceEnabled;
   protected final boolean mIsImsVideoEnabled;
 
   // Extended directories will have ID's that are higher than any of the id's from the database,
@@ -88,8 +87,9 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         PhoneDirectoryExtenderAccessor.get(mContext).getExtendedDirectories(mContext);
 
     int videoCapabilities = CallUtil.getVideoCallingAvailability(context);
-    mIsImsVideoEnabled = CallUtil.isVideoEnabled(context);
-    mIsPresenceEnabled = (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
+    mIsImsVideoEnabled =
+        CallUtil.isVideoEnabled(context)
+            && (videoCapabilities & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
   }
 
   @Override
@@ -351,14 +351,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     }
 
     final DirectoryPartition directory = (DirectoryPartition) getPartition(partition);
-
-    // If the first partition does not have a header, then all subsequent partitions'
-    // getPositionForPartition returns an index off by 1.
-    int partitionOffset = 0;
-    if (partition > 0 && !getPartition(0).getHasHeader()) {
-      partitionOffset = 1;
-    }
-    position += getPositionForPartition(partition) + partitionOffset;
+    // All sections have headers, so scroll position is off by 1.
+    position += getPositionForPartition(partition) + 1;
 
     bindPhoneNumber(view, cursor, directory.isDisplayNumber(), position);
   }
@@ -397,8 +391,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       int carrierPresence = cursor.getInt(PhoneQuery.CARRIER_PRESENCE);
       boolean isPresent = (carrierPresence & Phone.CARRIER_PRESENCE_VT_CAPABLE) != 0;
 
-      boolean isVideoIconShown = mIsImsVideoEnabled && (!mIsPresenceEnabled || isPresent);
-      if (isVideoIconShown) {
+      boolean showViewIcon = mIsImsVideoEnabled && isPresent;
+      if (showViewIcon) {
         action = ContactListItemView.VIDEO;
       }
     }

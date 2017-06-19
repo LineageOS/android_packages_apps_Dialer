@@ -37,14 +37,17 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
   private final DialerContact contact;
   private final List<CallDetailsEntry> callDetailsEntries;
+  private final CallDetailsFooterViewHolder.ReportCallIdListener listener;
   private final CallTypeHelper callTypeHelper;
 
   CallDetailsAdapter(
       Context context,
       @NonNull DialerContact contact,
-      @NonNull List<CallDetailsEntry> callDetailsEntries) {
+      @NonNull List<CallDetailsEntry> callDetailsEntries,
+      CallDetailsFooterViewHolder.ReportCallIdListener listener) {
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
+    this.listener = listener;
     callTypeHelper = new CallTypeHelper(context.getResources());
   }
 
@@ -60,7 +63,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             inflater.inflate(R.layout.call_details_entry, parent, false));
       case FOOTER_VIEW_TYPE:
         return new CallDetailsFooterViewHolder(
-            inflater.inflate(R.layout.call_details_footer, parent, false));
+            inflater.inflate(R.layout.call_details_footer, parent, false), listener);
       default:
         throw Assert.createIllegalStateFailException(
             "No ViewHolder available for viewType: " + viewType);

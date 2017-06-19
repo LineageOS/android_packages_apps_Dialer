@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ກຳລັງເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ບໍ່ສາມາດເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ໃຫ້ກວດສອບເບິ່ງວ່າໂທລະສັບຂອງທ່ານເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືແລ້ວ ຈາກນັ້ນລອງໃໝ່ອີກຄັ້ງ."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ໃຫ້ກວດສອບວ່າໂທລະສັບຂອງທ່ານມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ ແລ້ວລອງໃໝ່ອີກຄັ້ງ"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ປິດໂໝດຢູ່ໃນຍົນແລ້ວລອງໃໝ່ອີກຄັ້ງ."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ບໍ່ມີການເຊື່ອມຕໍ່"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນເມື່ອມີຂໍ້ຄວາມສຽງໃໝ່. ຫາກທ່ານໃຊ້ Wi-Fi, ທ່ານສາມາດກວດສອບຂໍ້ຄວາມສຽງໄດ້ໂດຍການຊິ້ງຂໍ້ມູນຕອນນີ້."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນເມື່ອມີຂໍ້ຄວາມສຽງໃໝ່. ຫາກທ່ານໃຊ້ Wi-Fi, ທ່ານສາມາດກວດສອບຂໍ້ຄວາມສຽງໄດ້ໂດຍການຊິ້ງຂໍ້ມູນຕອນນີ້."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນເມື່ອມີຂໍ້ຄວາມສຽງໃໝ່. ກະລຸນາປິດໂໝດຢູ່ໃນຍົນເພື່ອຊິ້ງຂໍ້ຄວາມສຽງຂອງທ່ານ."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ໂທລະສັບຂອງທ່ານຕ້ອງມີການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືເພື່ອກວດສອບຂໍ້ຄວາມສຽງ."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"ໂທລະສັບຂອງທ່ານຕ້ອງມີການເຊື່ອມຕໍ່ອິນເຕີເນັດມືຖືເພື່ອກວດສອບຂໍ້ຄວາມສຽງ."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ບໍ່ສາມາດເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ໃຫ້ລອງອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ Wi-Fi ຫຼື ເຄືອຂ່າຍມືຖືຂອງທ່ານດີຂຶ້ນ. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ໃຫ້ລອງອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ເຄືອຂ່າຍມືຖືຂອງທ່ານດີຂຶ້ນ. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ໃຫ້ລອງໃໝ່ອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ Wi‑Fi ຫຼື ອິນເຕີເນັດມືຖືຂອງທ່ານໄວຂຶ້ນກວ່ານີ້. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ໃຫ້ລອງອີກຄັ້ງເມື່ອການເຊື່ອມຕໍ່ອິນຕີເນັດມືຖືຂອງທ່ານໄວຂຶ້ນກວ່ານີ້. ທ່ານຍັງຄົງສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້ຢູ່."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ທ່ານສາມາດໂທເພື່ອກວດສອບຂໍ້ຄວາມສຽງໄດ້ຢູ່."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ບໍ່ສາມາດອັບເດດຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ມີບາງສິ່ງຜິດປົກກະຕິເກີດຂຶ້ນ"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Please contact Customer Service at <xliff:g id="NUMBER">%1$s</xliff:g> and tell them the error code is 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຂໍ້ຄວາມສຽງສະເໝືອນ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ທ່ານຕ້ອງຍອມຮັບຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຂອງ Verizon Wireless ເພື່ອໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nທ່ານຈະຕ້ອງຍອມຮັບຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຂອງ Verizon Wireless ກ່ອນເພື່ອໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"ເປີດໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"ຂໍ້ຄວາມສຽງສະເໝືອນຈະຖືກປິດການນຳໃຊ້ຫາກປະຕິເສດຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂດັ່ງກ່າວ."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ປິດການນຳໃຊ້ຂໍ້ຄວາມສຽງສະເໝືອນ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"ການຖອດຂໍ້ຄວາມສຽງຈະຖືກປິດການນຳໃຊ້ຫາກປະຕິເສດຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂ."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"ປິດການນຳໃຊ້ການຖອດຂໍ້ຄວາມສຽງ"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"ຂໍ້ຄວາມສຽງສາມາດເຂົ້າເຖິງໄດ້ສະເພາະການໂທຜ່ານ *86 ເທົ່ານັ້ນ. ຕັ້ງລະຫັດ PIN ຂໍ້ຄວາມສຽງໃໝ່ເພື່ອດຳເນີນການຕໍ່."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ຕັ້ງລະຫັດ PIN"</string>
 </resources>

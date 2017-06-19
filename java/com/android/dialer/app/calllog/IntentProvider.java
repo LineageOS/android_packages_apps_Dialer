@@ -117,11 +117,12 @@ public abstract class IntentProvider {
    * @return The call details intent provider.
    */
   public static IntentProvider getCallDetailIntentProvider(
-      CallDetailsEntries callDetailsEntries, DialerContact contact) {
+      CallDetailsEntries callDetailsEntries, DialerContact contact, boolean canReportCallerId) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return CallDetailsActivity.newInstance(context, callDetailsEntries, contact);
+        return CallDetailsActivity.newInstance(
+            context, callDetailsEntries, contact, canReportCallerId);
       }
     };
   }

@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"ದೂರ"</string>
     <string name="status_busy" msgid="5990832098713248503">"ಕಾರ್ಯನಿರತ"</string>
     <string name="contactsList" msgid="8806067891419291513">"ಸಂಪರ್ಕಗಳು"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"ಉನ್ನತ ಸಲಹೆ"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"ಇತರೆ"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ಡೈರೆಕ್ಟರಿ"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"ಕೆಲಸದ ಡೈರೆಕ್ಟರಿ"</string>
     <string name="local_search_label" msgid="907622822323119235">"ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"ಸಲಹೆಗಳು"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ನಾನು"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"ಹುಡುಕಲಾಗುತ್ತಿದೆ…"</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"<xliff:g id="COUNT">%d</xliff:g> ಗಿಂತ ಹೆಚ್ಚಾಗಿ ಕಂಡುಬಂದಿದೆ."</string>

@@ -5,11 +5,12 @@
 #      the manifest files in java/com/android/incallui/calllocation/impl/
 #      and /java/com/android/incallui/maps/impl/
 # * b/62417801 removed translation string variant:
-#      java/com/android/incallui/res/values-af-mcc262-mnc01/strings.xml
+#      $ find java/com/android/incallui/res/*mcc262*/strings.xml | xargs rm
 # * b/62343966 include manually generated GRPC service class:
 #      $ protoc --plugin=protoc-gen-grpc-java=prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
 #               --grpc-java_out=lite:"packages/apps/Dialer/java/com/android/voicemail/impl/" \
-#               --proto_path="packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/" "packages/apps/Dialer/java/com/android/voicemail/impl/transcribe
+#               --proto_path="packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/" "packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto"
+# * b/62787062 / b/37077388 temporarily disable proguard with javac
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -32,6 +33,7 @@ SRC_DIRS := \
 
 # Exclude files incompatible with AOSP.
 EXCLUDE_FILES := \
+	$(BASE_DIR)/dialer/calllog/testing/FakeCallLogApplication.java \
 	$(BASE_DIR)/incallui/calllocation/impl/AuthException.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationImpl.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationModule.java \
@@ -73,11 +75,14 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/contactsfragment/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/interactions/res \
+	$(BASE_DIR)/dialer/main/impl/res \
 	$(BASE_DIR)/dialer/notification/res \
 	$(BASE_DIR)/dialer/oem/res \
 	$(BASE_DIR)/dialer/phonenumberutil/res \
 	$(BASE_DIR)/dialer/postcall/res \
-	$(BASE_DIR)/dialer/searchfragment/res \
+	$(BASE_DIR)/dialer/searchfragment/list/res \
+	$(BASE_DIR)/dialer/searchfragment/nearbyplaces/res \
+	$(BASE_DIR)/dialer/searchfragment/common/res \
 	$(BASE_DIR)/dialer/shortcuts/res \
 	$(BASE_DIR)/dialer/speeddial/res \
 	$(BASE_DIR)/dialer/theme/res \
@@ -128,11 +133,14 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/main/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/oem/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/phonenumberutil/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/postcall/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/searchfragment/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/searchfragment/list/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/searchfragment/nearbyplaces/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/searchfragment/common/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/shortcuts/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/simulator/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/speeddial/AndroidManifest.xml \
@@ -199,11 +207,14 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.contactsfragment \
 	--extra-packages com.android.dialer.dialpadview \
 	--extra-packages com.android.dialer.interactions \
+	--extra-packages com.android.dialer.main.impl \
 	--extra-packages com.android.dialer.notification \
 	--extra-packages com.android.dialer.oem \
 	--extra-packages com.android.dialer.phonenumberutil \
 	--extra-packages com.android.dialer.postcall \
-	--extra-packages com.android.dialer.searchfragment \
+	--extra-packages com.android.dialer.searchfragment.list \
+	--extra-packages com.android.dialer.searchfragment.nearbyplaces \
+	--extra-packages com.android.dialer.searchfragment.common \
 	--extra-packages com.android.dialer.shortcuts \
 	--extra-packages com.android.dialer.speeddial \
 	--extra-packages com.android.dialer.theme \
@@ -276,11 +287,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 LOCAL_JAVA_LIBRARIES := \
 	org.apache.http.legacy \
 	dialer-auto-value \
-	dialer-grpc-all \
-	dialer-grpc-core \
-	dialer-grpc-okhttp \
-	dialer-grpc-protobuf-lite \
-	dialer-grpc-stub \
 
 # Libraries needed by the compiler (JACK) to generate code.
 PROCESSOR_LIBRARIES_TARGET := \
@@ -300,6 +306,13 @@ LOCAL_ADDITIONAL_DEPENDENCIES += $(PROCESSOR_JARS)
 LOCAL_JACK_FLAGS += --processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
 LOCAL_JAVACFLAGS += -processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
 
+
+# Begin Bug: 37077388
+LOCAL_DX_FLAGS := --core-library --multi-dex
+LOCAL_JACK_FLAGS := --multi-dex native
+
+LOCAL_PROGUARD_ENABLED := disabled
+ifdef LOCAL_JACK_ENABLED
 # Proguard includes
 LOCAL_PROGUARD_FLAG_FILES := \
     java/com/android/dialer/common/proguard.flags \
@@ -309,10 +322,10 @@ LOCAL_PROGUARD_FLAG_FILES := \
     java/com/android/incallui/answer/impl/proguard.flags
 LOCAL_PROGUARD_ENABLED := custom
 
-ifdef LOCAL_JACK_ENABLED
-# Bug: 37077388
 LOCAL_PROGUARD_ENABLED += optimization
 endif
+
+# End Bug: 37077388
 
 LOCAL_SDK_VERSION := system_current
 LOCAL_MODULE_TAGS := optional
@@ -517,3 +530,4 @@ LOCAL_UNINSTALLABLE_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+

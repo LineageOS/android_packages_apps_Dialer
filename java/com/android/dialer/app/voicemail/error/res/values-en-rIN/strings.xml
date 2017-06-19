@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Activating visual voicemail"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Can\'t activate visual voicemail"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Make sure that your phone has a mobile connection and try again."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Make sure your phone has a mobile network connection and try again."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Turn off aeroplane mode and try again."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"No connection"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"You won\'t be notified about new voicemail. If you\'re on Wi-Fi, you can check for voicemail by syncing now."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"You won\'t be notified for new voicemails. If you\'re on Wi‑Fi, you can check for voicemail by syncing now."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"You won\'t be notified about new voicemail. Turn off aeroplane mode to sync your voicemail."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Your phone needs a mobile data connection to check voicemail."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Your phone needs a mobile data connection to check voicemail."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Can\'t activate visual voicemail"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"You can still call to check voicemail."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Can\'t update visual voicemail"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Try again when your Wi-Fi or mobile connection is better. You can still call to check voicemail."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Try again when your mobile data connection is better. You can still call to check voicemail."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Try again when your Wi‑Fi or mobile data connection is better. You can still call to check voicemail."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Try again when your mobile data connection is better. You can still call to check voicemail."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Can\'t update visual voicemail"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"You can still call to check voicemail."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Can\'t update visual voicemail"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Something went wrong"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Please contact Customer Service on <xliff:g id="NUMBER">%1$s</xliff:g> and tell them that the error code is 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Visual voicemail Terms and Conditions"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"You must accept Verizon Wireless\'s Terms and Conditions to use visual voicemail:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nYou must accept Verizon Wireless\'s terms and conditions to use visual voicemail:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Turn on Visual Voicemail"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visual voicemail will be disabled if the Terms and Conditions are declined."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Disable visual voicemail"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Voicemail transcription will be disabled if the terms and conditions are declined."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Disable voicemail transcription"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Voicemail will only be accessible by calling *86. Set a new voicemail PIN to proceed."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Set PIN"</string>
 </resources>

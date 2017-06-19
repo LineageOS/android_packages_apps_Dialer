@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Уруксат берүү"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Сүрөткө тартуу үчүн, колдонмого камераны пайдаланууга уруксат бериңиз"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Сүрөттү бөлүшүү үчүн мультимедиага кирүүгө уруксат бериңиз"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Сүрөткө тартуу"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Сүрөттү тандоо"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Билдирүү жөнөтүү"</string>
 </resources>

@@ -19,24 +19,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:clipToPadding="false"
     tools:theme="@style/Theme.AppCompat">
+  <View
+      android:id="@+id/bubble_drawer_shadow_provider"
+      android:layout_width="@dimen/bubble_size"
+      android:layout_height="@dimen/bubble_size"
+      android:layout_marginTop="@dimen/bubble_shadow_padding_size"
+      android:layout_marginBottom="@dimen/bubble_shadow_padding_size"
+      android:layout_marginStart="@dimen/bubble_shadow_padding_size"
+      android:background="@drawable/bubble_ripple_circle"
+      android:backgroundTint="@android:color/transparent"
+      android:elevation="10dp"
+      android:visibility="invisible"
+      />
   <FrameLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="48dp"
+      android:elevation="10dp"
       android:paddingTop="@dimen/bubble_shadow_padding_size"
       android:paddingBottom="@dimen/bubble_shadow_padding_size"
-      android:paddingEnd="@dimen/bubble_shadow_padding_size"
-      android:background="@android:color/transparent">
+      android:paddingEnd="@dimen/bubble_shadow_padding_size">
 
     <LinearLayout
         android:id="@+id/bubble_expanded_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="32dp"
-        android:paddingEnd="12dp"
+        android:paddingEnd="8dp"
         android:background="@drawable/bubble_background_pill_ltr"
-        android:elevation="2dp"
         android:layoutDirection="inherit"
         android:orientation="horizontal"
         android:visibility="gone"
@@ -80,16 +92,15 @@
       android:layout_height="wrap_content"
       android:layout_gravity="start"
       android:animateLayoutChanges="true"
-      android:background="@android:color/transparent"
       android:clipChildren="false"
-      android:clipToPadding="false">
+      android:clipToPadding="false"
+      android:elevation="12dp">
     <ViewAnimator
         android:id="@+id/bubble_button_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bubble_shadow_padding_size"
         android:background="@drawable/bubble_ripple_circle"
-        android:elevation="6dp"
         android:measureAllChildren="false"
         tools:backgroundTint="#FF0000AA">
       <ImageView

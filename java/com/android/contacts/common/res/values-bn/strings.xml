@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"অন্যত্র"</string>
     <string name="status_busy" msgid="5990832098713248503">"ব্যস্ত"</string>
     <string name="contactsList" msgid="8806067891419291513">"পরিচিতিগুলি"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"শীর্ষস্থানীয় প্রস্তাবনা"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"অন্যান্য"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ডিরেক্টরি"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"কাজের সংগ্রহ"</string>
     <string name="local_search_label" msgid="907622822323119235">"সকল পরিচিতি"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"প্রস্তাবনাগুলি"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"আমি"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"অনুসন্ধান করছে..."</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"<xliff:g id="COUNT">%d</xliff:g>টির থেকে বেশি খুঁজে পাওয়া গিয়েছে৷"</string>

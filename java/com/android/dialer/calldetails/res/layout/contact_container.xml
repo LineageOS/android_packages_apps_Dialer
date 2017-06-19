@@ -29,7 +29,7 @@
       android:id="@+id/quick_contact_photo"
       android:layout_width="@dimen/call_details_contact_photo_size"
       android:layout_height="@dimen/call_details_contact_photo_size"
-      android:layout_marginTop="2dp"
+      android:layout_centerVertical="true"
       android:padding="@dimen/call_details_contact_photo_padding"
       android:focusable="true"
       android:contentDescription="@string/description_quick_contact_for"/>
@@ -47,8 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"
-        android:ellipsize="end"
-        android:maxLines="1"
         style="@style/PrimaryText"/>
 
     <TextView
@@ -56,8 +54,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"
-        android:ellipsize="end"
-        android:maxLines="1"
+        style="@style/SecondaryText"/>
+
+    <TextView
+        android:id="@+id/network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/photo_text_margin"
+        android:visibility="gone"
         style="@style/SecondaryText"/>
   </LinearLayout>
 

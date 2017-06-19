@@ -84,6 +84,16 @@ public interface DialerExecutor<InputT> {
   void executeSerial(@Nullable InputT input);
 
   /**
+   * Executes the task after waiting {@code waitMillis}. If called while the previous invocation is
+   * still waiting to be started, the original invocation is cancelled.
+   *
+   * <p>This is useful for tasks which might get scheduled many times in very quick succession, but
+   * it is only the last one that actually needs to be executed.
+   */
+  @MainThread
+  void executeSerialWithWait(@Nullable InputT input, long waitMillis);
+
+  /**
    * Executes the task on a thread pool shared across the application. Multiple calls using this
    * method may result in tasks being executed in parallel.
    */

@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> এর থেকে মিসড কল"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"চালু থাকা কল"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"চলমান কাজের কল"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"চলমান ওয়াই-ফাই কল"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"চলমান ওয়াই-ফাই কাজের কল"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"চালু থাকা ওয়াই-ফাই কল"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"চালু থাকা ওয়াই-ফাই কাজের কল"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"সাময়িকভাবে স্থগিত রাখা হয়েছে"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"ইনকামিং কল"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ফটো সহ ইনকামিং কল"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ফটো, বার্তা এবং অবস্থান সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"সংযুক্তিগুলি সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"আগত কাজের কল"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"আগত ওয়াই-ফাই কল"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"আগত ওয়াই-ফাই কাজের কল"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"আগত ওয়াই-ফাই কল"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"আগত ওয়াই-ফাই কাজের কল"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"আগত সন্দেহভাজন স্প্যাম কল"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"আগত ভিডিও অনুরোধ"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"কোনো পরিষেবা নেই"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"ভিডিও কলটি নিন"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"একটি কল করতে, প্রথমে বিমান মোড বন্ধ করুন৷"</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"নেটওয়ার্কে নিবন্ধিত নয়৷"</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"সেলুলার নেটওয়ার্ক উপলব্ধ নয়।"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"মোবাইল নেটওয়ার্ক উপলব্ধ নয়৷"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"কোনো কল স্থাপন করতে, একটি বৈধ নম্বর লিখুন৷"</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"কল করা যাবে না৷"</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI ক্রম চালু হচ্ছে…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"কল কেটে দিন"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"কনফারেন্স কল"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"কলে থাকাকালীন"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"সেলুলার ডেটা ব্যবহার করে কল করা চালিয়ে যান…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi নেটওয়ার্কে পাল্টানো গেল না"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ভিডিও কল সেলুলার নেটওয়ার্কেই থাকবে৷ স্ট্যান্ডার্ড চার্জ প্রযোজ্য হতে পারে৷"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"মোবাইল ডেটা ব্যবহার করে কল করা চালিয়ে যান…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ওয়াই-ফাই নেটওয়ার্কে পাল্টানো গেল না"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ভিডিও কল মোবাইল নেটওয়ার্কেই থাকবে৷ স্ট্যান্ডার্ড ডেটা চার্জ প্রযোজ্য হতে পারে৷"</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"এটি আমাকে আর দেখাবেন না"</string>
 </resources>

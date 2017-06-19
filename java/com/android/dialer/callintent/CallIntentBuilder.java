@@ -27,6 +27,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
 
 /** Creates an intent to start a new outgoing call. */
@@ -39,9 +40,22 @@ public class CallIntentBuilder {
 
   public CallIntentBuilder(@NonNull Uri uri, @NonNull CallSpecificAppData callSpecificAppData) {
     this.uri = Assert.isNotNull(uri);
-    this.callSpecificAppData = Assert.isNotNull(callSpecificAppData);
+    Assert.isNotNull(callSpecificAppData);
     Assert.checkArgument(
         callSpecificAppData.getCallInitiationType() != CallInitiationType.Type.UNKNOWN_INITIATION);
+
+    if (PerformanceReport.isRecording()) {
+      this.callSpecificAppData =
+          CallSpecificAppData.newBuilder(callSpecificAppData)
+              .setTimeSinceAppLaunch(PerformanceReport.getTimeSinceAppLaunch())
+              .setTimeSinceFirstClick(PerformanceReport.getTimeSinceFirstClick())
+              .addAllUiActionsSinceAppLaunch(PerformanceReport.getActions())
+              .addAllUiActionTimestampsSinceAppLaunch(PerformanceReport.getActionTimestamps())
+              .build();
+      PerformanceReport.stopRecording();
+    } else {
+      this.callSpecificAppData = callSpecificAppData;
+    }
   }
 
   public CallIntentBuilder(@NonNull Uri uri, CallInitiationType.Type callInitiationType) {

@@ -70,7 +70,7 @@ public interface LoggingBindings {
       int multipleNumbersContactsCount,
       int contactsWithPhotoCount,
       int contactsWithNameCount,
-      int duoReachableContactCount);
+      int lightbringerReachableContactsCount);
 
   /** Logs a hit event to the analytics server. */
   void sendHitEventAnalytics(String category, String action, String label, long value);

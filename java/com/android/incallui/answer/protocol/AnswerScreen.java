@@ -30,6 +30,8 @@ public interface AnswerScreen {
 
   boolean allowAnswerAndRelease();
 
+  boolean isActionTimeout();
+
   void setTextResponses(List<String> textResponses);
 
   boolean hasPendingDialogs();

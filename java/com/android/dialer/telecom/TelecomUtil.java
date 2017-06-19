@@ -29,9 +29,12 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+import android.util.Pair;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Performs permission checks before calling into TelecomManager. Each method is self-explanatory -
@@ -44,6 +47,14 @@ public abstract class TelecomUtil {
   private static boolean sWarningLogged = false;
 
   private static TelecomUtilImpl instance = new TelecomUtilImpl();
+
+  /**
+   * Cache for {@link #isVoicemailNumber(Context, PhoneAccountHandle, String)}. Both
+   * PhoneAccountHandle and number are cached because multiple numbers might be mapped to true, and
+   * comparing with {@link #getVoicemailNumber(Context, PhoneAccountHandle)} will not suffice.
+   */
+  private static final Map<Pair<PhoneAccountHandle, String>, Boolean> isVoicemailNumberCache =
+      new ConcurrentHashMap<>();
 
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
   public static void setInstanceForTesting(TelecomUtilImpl instanceForTesting) {
@@ -133,12 +144,27 @@ public abstract class TelecomUtil {
     return instance.isInCall(context);
   }
 
+  /**
+   * {@link TelecomManager#isVoiceMailNumber(PhoneAccountHandle, String)} takes about 10ms, which is
+   * way too slow for regular purposes. This method will cache the result for the life time of the
+   * process. The cache will not be invalidated, for example, if the voicemail number is changed by
+   * setting up apps like Google Voicemail, the result will be wrong. These events are rare.
+   */
   public static boolean isVoicemailNumber(
       Context context, PhoneAccountHandle accountHandle, String number) {
-    if (hasReadPhoneStatePermission(context)) {
-      return getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+    if (TextUtils.isEmpty(number)) {
+      return false;
     }
-    return false;
+    Pair<PhoneAccountHandle, String> cacheKey = new Pair<>(accountHandle, number);
+    if (isVoicemailNumberCache.containsKey(cacheKey)) {
+      return isVoicemailNumberCache.get(cacheKey);
+    }
+    boolean result = false;
+    if (hasReadPhoneStatePermission(context)) {
+      result = getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+    }
+    isVoicemailNumberCache.put(cacheKey, result);
+    return result;
   }
 
   @Nullable

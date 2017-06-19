@@ -22,7 +22,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRankerFactory;
 import java.util.List;

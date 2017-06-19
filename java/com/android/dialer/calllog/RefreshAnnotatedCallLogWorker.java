@@ -31,6 +31,7 @@ import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.inject.ApplicationContext;
 import javax.inject.Inject;
 
 /**
@@ -44,7 +45,7 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
   private final DataSources dataSources;
 
   @Inject
-  RefreshAnnotatedCallLogWorker(Context appContext, DataSources dataSources) {
+  RefreshAnnotatedCallLogWorker(@ApplicationContext Context appContext, DataSources dataSources) {
     this.appContext = appContext;
     this.dataSources = dataSources;
   }
@@ -159,11 +160,20 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
         "applyToDatabase took: %dms",
         System.currentTimeMillis() - startTime);
 
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+      dataSourceName = getName(dataSource);
+      LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "onSuccessfulFill'ing %s", dataSourceName);
+      startTime = System.currentTimeMillis();
+      dataSource.onSuccessfulFill(appContext);
+      LogUtil.i(
+          "CallLogFramework.rebuild",
+          "%s.onSuccessfulFill took: %dms",
+          dataSourceName,
+          System.currentTimeMillis() - startTime);
+    }
+
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-    sharedPreferences
-        .edit()
-        .putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false)
-        .commit();
+    sharedPreferences.edit().putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false).apply();
   }
 
   private static String getName(CallLogDataSource dataSource) {

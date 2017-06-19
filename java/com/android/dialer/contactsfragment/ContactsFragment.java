@@ -16,7 +16,6 @@
 
 package com.android.dialer.contactsfragment;
 
-import android.Manifest.permission;
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
@@ -36,18 +35,23 @@ import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.preference.ContactsPreferences.ChangeListener;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.util.Arrays;
 
 /** Fragment containing a list of all contacts. */
 public class ContactsFragment extends Fragment
     implements LoaderCallbacks<Cursor>,
         OnScrollChangeListener,
-        OnEmptyViewActionButtonClickedListener {
+        OnEmptyViewActionButtonClickedListener,
+        ChangeListener {
 
   public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
@@ -60,14 +64,11 @@ public class ContactsFragment extends Fragment
 
   private ContactsPreferences contactsPrefs;
 
-  private final ContactsPreferences.ChangeListener preferencesChangeListener =
-      () -> getLoaderManager().restartLoader(0, null, this);
-
   @Override
-  public void onCreate(Bundle savedState) {
-    super.onCreate(savedState);
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
     contactsPrefs = new ContactsPreferences(getContext());
-    contactsPrefs.registerChangeListener(preferencesChangeListener);
+    contactsPrefs.registerChangeListener(this);
   }
 
   @Nullable
@@ -75,11 +76,11 @@ public class ContactsFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-    fastScroller = (FastScroller) view.findViewById(R.id.fast_scroller);
-    anchoredHeader = (TextView) view.findViewById(R.id.header);
-    recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+    fastScroller = view.findViewById(R.id.fast_scroller);
+    anchoredHeader = view.findViewById(R.id.header);
+    recyclerView = view.findViewById(R.id.recycler_view);
 
-    emptyContentView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
+    emptyContentView = view.findViewById(R.id.empty_list_view);
     emptyContentView.setImage(R.drawable.empty_contacts);
     emptyContentView.setActionClickedListener(this);
 
@@ -92,6 +93,13 @@ public class ContactsFragment extends Fragment
     }
 
     return view;
+  }
+
+  @Override
+  public void onChange() {
+    if (getActivity() != null && isAdded()) {
+      getLoaderManager().restartLoader(0, null, this);
+    }
   }
 
   /** @return a loader according to sort order and display order. */
@@ -134,6 +142,7 @@ public class ContactsFragment extends Fragment
 
       recyclerView.setLayoutManager(manager);
       recyclerView.setAdapter(adapter);
+      PerformanceReport.logOnScrollStateChange(recyclerView);
       fastScroller.setup(adapter, manager);
     }
   }
@@ -169,15 +178,17 @@ public class ContactsFragment extends Fragment
     if (firstVisibleItem == firstCompletelyVisible && firstVisibleItem == 0) {
       adapter.refreshHeaders();
       anchoredHeader.setVisibility(View.INVISIBLE);
-    } else if (adapter.getHeaderString(firstVisibleItem).equals(anchoredHeaderString)) {
-      anchoredHeader.setText(anchoredHeaderString);
-      anchoredHeader.setVisibility(View.VISIBLE);
-      getContactHolder(firstVisibleItem).getHeaderView().setVisibility(View.INVISIBLE);
-      getContactHolder(firstCompletelyVisible).getHeaderView().setVisibility(View.INVISIBLE);
-    } else {
-      anchoredHeader.setVisibility(View.INVISIBLE);
-      getContactHolder(firstVisibleItem).getHeaderView().setVisibility(View.VISIBLE);
-      getContactHolder(firstCompletelyVisible).getHeaderView().setVisibility(View.VISIBLE);
+    } else if (firstVisibleItem != 0) { // skip the add contact row
+      if (adapter.getHeaderString(firstVisibleItem).equals(anchoredHeaderString)) {
+        anchoredHeader.setText(anchoredHeaderString);
+        anchoredHeader.setVisibility(View.VISIBLE);
+        getContactHolder(firstVisibleItem).getHeaderView().setVisibility(View.INVISIBLE);
+        getContactHolder(firstCompletelyVisible).getHeaderView().setVisibility(View.INVISIBLE);
+      } else {
+        anchoredHeader.setVisibility(View.INVISIBLE);
+        getContactHolder(firstVisibleItem).getHeaderView().setVisibility(View.VISIBLE);
+        getContactHolder(firstCompletelyVisible).getHeaderView().setVisibility(View.VISIBLE);
+      }
     }
   }
 
@@ -188,8 +199,17 @@ public class ContactsFragment extends Fragment
   @Override
   public void onEmptyViewActionButtonClicked() {
     if (emptyContentView.getActionLabel() == R.string.permission_single_turn_on) {
-      FragmentCompat.requestPermissions(
-          this, new String[] {permission.READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+      String[] deniedPermissions =
+          PermissionsUtil.getPermissionsCurrentlyDenied(
+              getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+      if (deniedPermissions.length > 0) {
+        LogUtil.i(
+            "ContactsFragment.onEmptyViewActionButtonClicked",
+            "Requesting permissions: " + Arrays.toString(deniedPermissions));
+        FragmentCompat.requestPermissions(
+            this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+      }
+
     } else if (emptyContentView.getActionLabel()
         == R.string.all_contacts_empty_add_contact_action) {
       // Add new contact

@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"ਇਜਾਜ਼ਤ ਦਿਓ"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"ਫ਼ੋਟੋ ਖਿੱਚਣ ਲਈ, ਕੈਮਰੇ ਤੱਕ ਪਹੁੰਚ ਦਿਓ"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"ਚਿੱਤਰ ਸਾਂਝਾ ਕਰਨ ਲਈ, ਮੀਡੀਆ ਤੱਕ ਪਹੁੰਚ ਦਿਓ"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"ਇੱਕ ਤਸਵੀਰ ਖਿੱਚੋ"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"ਇੱਕ ਫ਼ੋਟੋ ਚੁਣੋ"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"ਇੱਕ ਸੁਨੇਹਾ ਭੇਜੋ"</string>
 </resources>

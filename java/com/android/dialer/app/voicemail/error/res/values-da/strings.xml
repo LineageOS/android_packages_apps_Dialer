@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktiverer visuel telefonsvarer"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Du modtager muligvis ikke telefonsvarerunderretninger, før den visuelle telefonsvarer er fuldt aktiveret. Ring til telefonsvareren for hente nye beskeder, indtil telefonsvareren er fuldt aktiveret."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Visuel telefonsvarer kan ikke aktiveres"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Sørg for, at din telefon har mobilforbindelse, og prøv igen."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Sørg for, at din telefon har forbindelse til mobilnetværket, og prøv igen."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Slå flytilstand fra, og prøv igen."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Ingen forbindelse"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Du vil ikke få besked om nye telefonsvarerbeskeder. Hvis du er på Wi-Fi, kan du tjekke, om der er telefonsvarerbeskeder, ved at synkronisere nu."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Du får ikke besked om nye talebeskeder. Hvis du er på Wi-Fi, kan du tjekke, om der er talebeskeder, ved at synkronisere nu."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Du vil ikke få besked om nye telefonsvarerbeskeder. Slå flytilstand fra for at synkronisere din e-mail."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Din telefon skal have en mobilforbindelse, for at du kan tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Din telefon skal have en mobildataforbindelse, for at du kan tjekke, om der er talebeskeder."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Visuel telefonsvarer kan ikke aktiveres"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Visuel telefonsvarer kan ikke opdateres"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Prøv igen, når din Wi-Fi- eller mobilforbindelse er bedre. Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Prøv igen, når din mobildataforbindelse er bedre. Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Prøv igen, når din Wi-Fi- eller mobildataforbindelse er bedre. Du kan stadig ringe for at tjekke, om der er talebeskeder."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Prøv igen, når din mobildataforbindelse er bedre. Du kan stadig ringe for at tjekke, om der er talebeskeder."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Visuel telefonsvarer kan ikke opdateres"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Du kan stadig ringe op for at tjekke din telefonsvarer."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Visuel telefonsvarer kan ikke opdateres"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Der opstod en fejl"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vilkår og betingelser for visuel telefonsvarer"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Du skal acceptere vilkår og betingelser for Verizon Wireless for at bruge visuel telefonsvarer:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nDu skal acceptere vilkår og betingelser for Verizon Wireless for at bruge visuel telefonsvarer:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Slå Visuel telefonsvarer til"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visuel telefonsvarer bliver deaktiveret, hvis vilkår og betingelser afvises."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Deaktiver visuel telefonsvarer"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Transskription af talebeskeder deaktiveres, hvis du ikke accepterer vilkår og betingelser."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Deaktiver transskription af talebeskeder"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Telefonsvareren er kun tilgængelig, hvis du taster *86 og ringer op. Angiv en ny pinkode til telefonsvarer for at fortsætte."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Angiv pinkode"</string>
 </resources>

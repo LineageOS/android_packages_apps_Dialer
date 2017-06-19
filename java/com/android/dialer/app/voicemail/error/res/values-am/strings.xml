@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"እይታዊ የድምጽ መልዕክት በማግበር ላይ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"እይታዊ የድምጽ መልዕክት ሙሉ ለሙሉ እስከሚነቃ ድረስ የድምፅ መልዕክት ማሳወቂያዎችን ላይቀበሉ ይችላሉ። የድምጽ መልዕክት ሙሉ ለሙሉ እስኪያገብር ድረስ አዲስ መልዕክቶችን ለማምጣት ወደ ድምፅ መልዕክት ይደውሉ።"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"እይታዊ የድምጽ መልዕክትን ማግበር አይቻልም"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ስልክዎ የሴሉላር ግንኙነት እንዳለው ያረጋግጡና እንደገና ይሞክሩ።"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ስልክዎ የተንቀሳቃሽ ስልክ አውታረ መረብ ግንኙነት እንዳለው ያረጋግጡና እንደገና ይሞክሩ።"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"የአውሮፕላን ሁነታን ያጥፉ እና እንደገና ይሞክሩ።"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ምንም ግንኙነት የለም"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ለአዲስ የድምጽ መልዕክቶች ማሳወቂያ አይደርስዎትም። Wi-Fi ላይ ከሆኑ አሁን በማስመር የድምጽ መልዕክትን መፈተሽ ይችላሉ።"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"ለአዲስ የድምጽ መልዕክቶች ማሳወቂያ አይደርስዎትም። Wi-Fi ላይ ከሆኑ አሁን በማስመር የድምጽ መልዕክትን መፈተሽ ይችላሉ።"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ለአዲስ የድምጽ መልዕክቶች ማሳወቂያ አይደርስዎትም። የድምጽ መልዕክትዎን ለማስመር የአውሮፕላን ሁነታን ያጥፉ።"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"የድምጽ መልዕክት ለመፈተሽ ስልክዎ የሴሉላር ውሂብ ያስፈልገዋል።"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"የድምጽ መልዕክትን ለመፈተሽ ስልክዎ የተንቀሳቃሽ ስልክ ውሂብ ግንኙነት ያስፈልገዋል።"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"እይታዊ የድምጽ መልዕክትን ማግበር አይቻልም"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"አሁንም ቢሆን የድምጽ መልዕክትን ለመፈተሽ መደወል ይችላሉ።"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"እይታዊ የድምጽ መልዕክትን ማዘመን አይቻልም"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"የWi-Fi ወይም ሴሉላር ግንኙነትዎ ሲሻሻል እንደገና ይሞክሩ። አሁንም ቢሆን የድምጽ መልዕክት ለመፈተሽ መደወል ይችላሉ።"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"የሴሉላር ውሂብዎ ሲሻሻል እንደገና ይሞክሩ። አሁንም ቢሆን የድምጽ መልዕክትዎን ለመፈተሽ መደወል ይችላሉ።"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"የWi‑Fi ወይም የተንቀሳቃሽ ስልክ ውሂብ ግንኙነትዎ ሲሻሻል እንደገና ይሞክሩ። አሁንም ቢሆን የድምጽ መልዕክትዎን ለመፈተሽ መደወል ይችላሉ።"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"የተንቀሳቃሽ ስልክ ውሂብ ግንኙነትዎ ሲሻሻል እንደገና ይሞክሩ። አሁንም ቢሆን የድምጽ መልዕክትዎን ለመፈተሽ መደወል ይችላሉ።"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"እይታዊ የድምጽ መልዕክትን ማዘመን አይቻልም"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"አሁንም ቢሆን የድምጽ መልዕክትን ለመፈተሽ መደወል ይችላሉ።"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"እይታዊ የድምጽ መልዕክትን ማዘመን አይቻልም"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"የሆነ ችግር ተፈጥሯል"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"እባክዎ የደንበኛ አገልግሎትን በ<xliff:g id="NUMBER">%1$s</xliff:g> ላይ ያግኙ እና የስህተት ቁጥሩ 9999 እንደሆነ ይንገሯቸው።"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Visual Voicemail የአገልግሎት ውል"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"እይታዊ የድምጽ መልዕክትን ለመጠቀም የVerizon Wirelessን የአገልግሎት ውል መቀበል አለብዎ፦ \n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nእይታዊ የድምጽ መልዕክትን ለመጠቀም የVerizon Wirelessን የአገልግሎት ውል መቀበል አለብዎ፦\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"እይታዊ የድምጽ መልዕክን አብራ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"የአገልግሎት ውሉ ተቀባይነት ካላገኘ እይታዊ የድምጽ መልዕክት ይወገዳል።"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"እይታዊ የድምጽ መልዕክትን አስወግድ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"የአገልግሎት ውል ተቀባይነት ካላገኙ፣ የድምጽ መልዕክት ወደ ጽሁፍ መለወጥ ይሰናከላል።"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"የድምጽ መልዕክትን ወደ ጽሁፍ መለወጥን አሰናክል"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"የድምጽ መልዕክት ላይ መድረስ የሚቻለው *86 በመደወል ብቻ ነው። ለመቀጠል አዲስ የድምጽ መልዕክት ፒን ያዘጋጁ።"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ፒን ያዘጋጁ"</string>
 </resources>
