@@ -299,6 +299,8 @@ public class CallList implements DialerCallDelegate {
         LogUtil.w(
             "CallList.onCallRemoved", "Removing call not previously disconnected " + call.getId());
       }
+
+      call.onRemovedFromCallList();
     }
 
     if (!hasLiveCall()) {
@@ -566,7 +568,8 @@ public class CallList implements DialerCallDelegate {
    *
    * @param call The call to update.
    */
-  private void onUpdateCall(DialerCall call) {
+  @VisibleForTesting
+  void onUpdateCall(DialerCall call) {
     LogUtil.d("CallList.onUpdateCall", String.valueOf(call));
     if (!mCallById.containsKey(call.getId()) && call.isExternalCall()) {
       // When a regular call becomes external, it is removed from the call list, and there may be

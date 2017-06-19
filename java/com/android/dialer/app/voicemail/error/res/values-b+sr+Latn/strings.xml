@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktivira se vizuelna govorna pošta"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Možda nećete dobijati obaveštenja o govornoj pošti dok potpuno ne aktivirate vizuelnu govornu poštu. Pozovite govornu poštu da biste preuzeli nove poruke dok govorna pošta ne bude potpuno aktivirana."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Aktiviranje vizuelne govorne pošte nije uspelo"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Proverite da li telefon ima mobilnu vezu i pokušajte ponovo."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Proverite da li telefon ima vezu preko mobilne mreže i probajte ponovo."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Isključite režim rada u avionu i pokušajte ponovo."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Veza nije uspostavljena"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Nećete dobijati obaveštenja o novim govornim porukama. Ako ste na Wi-Fi mreži, sinhronizujte da biste proverili govornu poštu."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Nećete dobijati obaveštenja o novim govornim porukama. Ako ste na Wi‑Fi mreži, možete da sinhronizujete da biste proverili govornu poštu."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Nećete dobijati obaveštenja o novim govornim porukama. Isključite režim rada u avionu da biste sinhronizovali govornu poštu."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Telefonu treba mobilna veza za prenos podataka da biste proverili govornu poštu."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Telefonu je za proveru govorne pošte potrebna mobilna veza za prenos podataka."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Aktiviranje vizuelne govorne pošte nije uspelo"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"I dalje možete da pozovete govornu poštu da biste je proverili."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Ažuriranje vizuelne govorne pošte nije uspelo"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Probajte ponovo kad budete imali bolju Wi-Fi ili mobilnu vezu. I dalje možete da pozovete govornu poštu da biste je proverili."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Probajte ponovo kad budete imali bolju mobilnu vezu za prenos podataka. I dalje možete da pozovete govornu poštu da biste je proverili."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Probajte ponovo kad budete imali bolju Wi‑Fi ili mobilnu vezu za prenos podataka. I dalje možete da pozovete govornu poštu da biste je proverili."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Probajte ponovo kad budete imali bolju mobilnu vezu za prenos podataka. I dalje možete da pozovete govornu poštu da biste je proverili."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Ažuriranje vizuelne govorne pošte nije uspelo"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"I dalje možete da pozovete govornu poštu da biste je proverili."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Ažuriranje vizuelne govorne pošte nije uspelo"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Nešto nije u redu"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Kontaktirajte korisničku podršku na <xliff:g id="NUMBER">%1$s</xliff:g> i recite im da je kôd greške 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Uslovi i odredbe za vizuelnu govornu poštu"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Morate da prihvatite Verizon Wireless uslove i odredbe da biste koristili vizuelnu govornu poštu:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nMorate da prihvatite Verizon Wireless uslove i odredbe da biste koristili vizuelnu govornu poštu:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Uključite vizuelnu govornu poštu"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ako odbijete uslove i odredbe, onemogućićete vizuelnu govornu poštu."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Onemogućite vizuelnu govornu poštu"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Transkripcija govorne pošte će biti onemogućena ako se uslovi i odredbe odbiju."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Onemogućite transkripciju govorne pošte"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Govornoj pošti ćete moći da pristupite samo ako pozovete *86. Podesite novi PIN kôd govorne pošte da biste nastavili."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Podesite PIN"</string>
 </resources>

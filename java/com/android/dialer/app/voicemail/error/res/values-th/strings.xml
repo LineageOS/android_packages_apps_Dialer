@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"กำลังเปิดใช้ข้อความเสียงพร้อมภาพ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"คุณอาจไม่ได้รับการแจ้งเตือนข้อความเสียงจนกว่าจะเปิดใช้ข้อความเสียงพร้อมภาพแบบเต็มรูปแบบ โทรฟังข้อความเสียงเพื่อเรียกข้อความใหม่จนกว่าจะเปิดใช้ข้อความเสียงพร้อมภาพแบบเต็มรูปแบบ"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"เปิดใช้ข้อความเสียงพร้อมภาพไม่ได้"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"โปรดตรวจสอบว่าโทรศัพท์เชื่อมต่อเครือข่ายมือถืออยู่ แล้วลองใหม่"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"โปรดตรวจสอบว่าโทรศัพท์เชื่อมต่อเครือข่ายมือถืออยู่ แล้วลองใหม่"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ปิดโหมดบนเครื่องบินและลองใหม่"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ไม่มีการเชื่อมต่อ"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"คุณจะไม่ได้รับข้อความเสียงใหม่ ถ้าเปิด Wi-Fi อยู่ คุณจะตรวจสอบข้อความเสียงได้โดยซิงค์เลย"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"คุณจะไม่ได้รับข้อความเสียงใหม่ ถ้าคุณใช้เครือข่าย Wi-Fi อยู่ สามารถตรวจสอบข้อความเสียงได้โดยซิงค์เดี๋ยวนี้"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"คุณจะไม่ได้รับข้อความเสียงใหม่ ปิดโหมดบนเครื่องบินเพื่อซิงค์ข้อความเสียง"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"โทรศัพท์ต้องเชื่อมต่ออินเทอร์เน็ตมือถือ จึงจะตรวจสอบข้อความเสียงได้"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"โทรศัพท์ต้องเชื่อมต่ออินเทอร์เน็ตมือถือจึงจะตรวจสอบข้อความเสียงได้"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"เปิดใช้ข้อความเสียงพร้อมภาพไม่ได้"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ไม่สามารถอัปเดตข้อความเสียงพร้อมภาพได้"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ลองใหม่เมื่อ Wi-Fi หรือสัญญาณเชื่อมต่อเครือข่ายมือถือดีขึ้น คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ลองใหม่เมื่อสัญญาณเชื่อมต่อเครือข่ายมือถือดีขึ้น คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ลองใหม่เมื่อ Wi-Fi หรือการเชื่อมต่ออินเทอร์เน็ตมือถือถือดีขึ้น คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ลองใหม่เมื่อการเชื่อมต่ออินเทอร์เน็ตมือถือดีขึ้น คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ไม่สามารถอัปเดตข้อความเสียงพร้อมภาพได้"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"คุณยังโทรเพื่อตรวจสอบข้อความเสียงได้"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ไม่สามารถอัปเดตข้อความเสียงพร้อมภาพได้"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"เกิดข้อผิดพลาด"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9999"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ข้อกำหนดในการให้บริการข้อความเสียงพร้อมภาพ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"คุณต้องยอมรับข้อกำหนดในการให้บริการของ Verizon Wireless จึงจะใช้ข้อความเสียงพร้อมภาพได้:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nคุณต้องยอมรับข้อกำหนดในการให้บริการของ Verizon Wireless เพื่อใช้ข้อความเสียงพร้อมภาพ:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"เปิดใช้ข้อความเสียงพร้อมภาพ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"หากคุณไม่ยอมรับข้อกำหนดในการใช้บริการ ข้อความเสียงพร้อมภาพจะถูกปิดใช้งาน"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ปิดใช้ข้อความเสียงพร้อมภาพ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"หากคุณไม่ยอมรับข้อกำหนดในการใช้บริการ การถอดข้อความเสียงจะปิดใช้งาน"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"ปิดใช้การถอดข้อความเสียง"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"คุณสามารถรับฟังข้อความเสียงด้วยการโทรไป *86 เท่านั้น และตั้งค่า PIN ข้อความเสียงใหม่เพื่อดำเนินการต่อ"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ตั้งค่า PIN"</string>
 </resources>

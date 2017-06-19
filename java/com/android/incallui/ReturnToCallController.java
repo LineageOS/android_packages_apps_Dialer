@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.CallAudioState;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialershared.bubble.Bubble;
 import com.android.dialershared.bubble.BubbleInfo;
@@ -56,6 +57,10 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private final PendingIntent showSpeakerSelect;
   private final PendingIntent toggleMute;
   private final PendingIntent endCall;
+
+  public static boolean isEnabled(Context context) {
+    return !ConfigProviderBindings.get(context).getBoolean("disable_return_to_call_bubble", false);
+  }
 
   public ReturnToCallController(Context context) {
     this.context = context;
@@ -108,6 +113,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private Bubble startNewBubble() {
     if (!Bubble.canShowBubbles(context)) {
       LogUtil.i("ReturnToCallController.startNewBubble", "can't show bubble, no permission");
+      context.startActivity(Bubble.getRequestPermissionIntent(context));
       return null;
     }
     Bubble returnToCallBubble = Bubble.createBubble(context, generateBubbleInfo());
@@ -156,12 +162,14 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   }
 
   private BubbleInfo generateBubbleInfo() {
+    Intent activityIntent = InCallActivity.getIntent(context, false, false, false);
+    activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     return BubbleInfo.builder()
         .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
-        .setPrimaryIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24))
-        .setPrimaryAction(
-            PendingIntent.getActivity(
-                context, 0, InCallActivity.getIntent(context, false, false, false), 0))
+        .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
+        .setStartingYPosition(
+            context.getResources().getDimensionPixelOffset(R.dimen.return_to_call_initial_offset_y))
+        .setPrimaryIntent(PendingIntent.getActivity(context, 0, activityIntent, 0))
         .setActions(generateActions())
         .build();
   }
@@ -176,7 +184,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
             .setIcon(Icon.createWithResource(context, speakerButtonInfo.icon))
             .setName(context.getText(speakerButtonInfo.label))
             .setChecked(speakerButtonInfo.isChecked)
-            .setAction(speakerButtonInfo.checkable ? toggleSpeaker : showSpeakerSelect)
+            .setIntent(speakerButtonInfo.checkable ? toggleSpeaker : showSpeakerSelect)
             .build());
 
     actions.add(
@@ -184,21 +192,21 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
             .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_mic_off_white_24))
             .setName(context.getText(R.string.incall_label_mute))
             .setChecked(audioState.isMuted())
-            .setAction(toggleMute)
+            .setIntent(toggleMute)
             .build());
     actions.add(
         Action.builder()
             .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_end_white_24))
             .setName(context.getText(R.string.incall_label_end_call))
-            .setAction(endCall)
+            .setIntent(endCall)
             .build());
     return actions;
   }
 
   @NonNull
-  private PendingIntent createActionIntent(String actionToggleSpeaker) {
+  private PendingIntent createActionIntent(String action) {
     Intent toggleSpeaker = new Intent(context, ReturnToCallActionReceiver.class);
-    toggleSpeaker.setAction(actionToggleSpeaker);
+    toggleSpeaker.setAction(action);
     return PendingIntent.getBroadcast(context, 0, toggleSpeaker, 0);
   }
 }

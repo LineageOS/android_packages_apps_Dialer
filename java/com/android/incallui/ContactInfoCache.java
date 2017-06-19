@@ -33,6 +33,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
@@ -596,7 +597,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     // This will only be true for emergency numbers
     if (info.photoResource != 0) {
-      cce.photo = context.getResources().getDrawable(info.photoResource);
+      cce.photo = ContextCompat.getDrawable(context, info.photoResource);
     } else if (info.isCachedPhotoCurrent) {
       if (info.cachedPhoto != null) {
         cce.photo = info.cachedPhoto;

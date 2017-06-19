@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"விஷூவல் குரலஞ்சலைச் செயல்படுத்துகிறது"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"விஷுவல் குரலஞ்சலை முழுவதுமாக இயக்கும் வரை, உங்களால் குரலஞ்சல் அறிவிப்புகளைப் பெற முடியாமல் போகலாம். குரலஞ்சலை முழுவதுமாக இயக்கும் வரை புதிய செய்திகளைப் பெற, குரலஞ்சலை அழைக்கவும்."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"விஷூவல் குரலஞ்சலைச் செயல்படுத்த முடியவில்லை"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"உங்கள் மொபைலில் செல்லுலார் இணைப்பு உள்ளதை உறுதிசெய்து, மீண்டும் முயலவும்."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"உங்கள் ஃபோனில் மொபைல் நெட்வொர்க் இணைப்பு உள்ளதை உறுதிசெய்து, மீண்டும் முயலவும்."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"விமானப் பயன்முறையை முடக்கி, மீண்டும் முயலவும்."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"இணைப்பு இல்லை"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"புதிய குரலஞ்சல்கள் குறித்த அறிவிப்புகளைப் பெறமாட்டீர்கள். வைஃபை இணைப்பைப் பயன்படுத்திக்கொண்டிருந்தால், இப்போதே ஒத்திசைத்து குரலஞ்சல் உள்ளதா எனப் பார்க்கலாம்."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"புதிய குரலஞ்சல்கள் குறித்த அறிவிப்புகளைப் பெறமாட்டீர்கள். வைஃபை இணைப்பைப் பயன்படுத்திக்கொண்டிருந்தால், இப்போதே ஒத்திசைத்து குரலஞ்சல் உள்ளதா எனப் பார்க்கலாம்."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"புதிய குரலஞ்சல்கள் குறித்த அறிவிப்புகளைப் பெறமாட்டீர்கள். குரலஞ்சலை ஒத்திசைக்க, விமானப் பயன்முறையை முடக்கவும்."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"குரலஞ்சலைப் பார்க்க, உங்கள் மொபைலில் செல்லுலார் தரவு இணைப்பு இருக்க வேண்டும்."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"குரலஞ்சலைக் கேட்க, உங்கள் ஃபோனில் மொபைல் தரவு இணைப்பு இருக்க வேண்டும்."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"விஷூவல் குரலஞ்சலைச் செயல்படுத்த முடியவில்லை"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"விஷூவல் குரலஞ்சலைப் புதுப்பிக்க முடியவில்லை"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"வைஃபை அல்லது செல்லுலார் இணைப்பின் வேகம் முன்பை விட அதிகமாகும் போது, மீண்டும் முயலவும். குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"செல்லுலார் தரவு இணைப்பின் வேகம் முன்பை விட அதிகமாகும் போது, மீண்டும் முயலவும். குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"வைஃபை அல்லது மொபைல் தரவு இணைப்பின் வேகம் முன்பை விட அதிகமாகும் போது, மீண்டும் முயலவும். குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"மொபைல் தரவு இணைப்பின் வேகம் முன்பை விட அதிகமாகும் போது, மீண்டும் முயலவும். குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"விஷூவல் குரலஞ்சலைப் புதுப்பிக்க முடியவில்லை"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"குரலஞ்சலைப் பெற, இப்போதும் நீங்கள் குரலஞ்சல் எண்ணிற்கு அழைக்கலாம்."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"விஷூவல் குரலஞ்சலைப் புதுப்பிக்க முடியவில்லை"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ஏதோ தவறாகிவிட்டது"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"<xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9999 எனக் கூறவும்."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"விஷுவல் குரலஞ்சலின் விதிமுறைகள் மற்றும் நிபந்தனைகள்"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"விஷுவல் குரலஞ்சலைப் பயன்படுத்த Verizon Wireless இன் விதிமுறைகள் மற்றும் நிபந்தனைகளை ஏற்க வேண்டும்:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nவிஷுவல் குரலஞ்சலைப் பயன்படுத்த, Verizon Wireless இன் விதிமுறைகளையும் நிபந்தனைகளையும் ஏற்க வேண்டும்:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"விஷுவல் குரலஞ்சலை இயக்கவும்"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"விதிமுறைகள் மற்றும் நிபந்தனைகள் நிராகரிக்கப்பட்டால், விஷுவல் குரலஞ்சல் முடக்கப்படும்."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"விஷுவல் குரலஞ்சலை முடக்கு"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"விதிமுறைகளையும் நிபந்தனைகளையும் நிராகரித்தீர்கள் எனில், குரலஞ்சல் டிரான்ஸ்கிரிப்ஷன் முடக்கப்படும்."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"குரலஞ்சல் டிரான்ஸ்கிரிப்ஷனை முடக்கு"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*86ஐ அழைத்தால் மட்டுமே, குரலஞ்சலை அணுக முடியும். தொடர, புதிய குரலஞ்சல் பின்னை அமைக்கவும்."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"பின்னை அமை"</string>
 </resources>

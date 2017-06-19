@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"시각적 음성사서함 활성화 중"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"시각적 음성사서함이 완전히 활성화될 때까지 음성사서함 알림을 받지 못할 수 있습니다. 음성사서함이 완전히 활성화될 때까지 음성사서함으로 전화하여 새 메시지를 가져오세요."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"시각적 음성사서함을 활성화할 수 없음"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"휴대전화가 모바일 데이터에 연결되었는지 확인한 다음 다시 시도해 주세요."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"휴대전화가 모바일 네트워크에 연결되었는지 확인한 다음 다시 시도해 주세요."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"비행기 모드를 사용 중지한 다음 다시 시도해 주세요."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"네트워크 연결 없음"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"새로운 음성사서함에 대한 알림이 전송되지 않습니다. Wi-Fi에 연결되어 있는 경우 지금 동기화하여 음성사서함을 확인할 수 있습니다."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"새로운 음성 메시지에 관한 알림이 전송되지 않습니다. Wi-Fi에 연결되어 있는 경우 지금 동기화하여 음성사서함을 확인할 수 있습니다."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"새로운 음성사서함에 대한 알림이 전송되지 않습니다. 음성사서함을 동기화하려면 비행기 모드를 사용 중지하세요."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"음성사서함을 확인하려면 모바일 데이터에 연결되어야 합니다."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"음성사서함을 확인하려면 휴대전화가 모바일 데이터에 연결되어야 합니다."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"시각적 음성사서함을 활성화할 수 없음"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"여전히 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"시각적 음성사서함을 업데이트할 수 없음"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Wi-Fi 또는 모바일 데이터 연결이 개선되면 다시 시도해 주세요. 여전히 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"모바일 데이터 연결이 개선되면 다시 시도해 주세요. 여전히 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Wi-Fi 또는 모바일 데이터 연결이 개선되면 다시 시도해 주세요. 지금도 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"모바일 데이터 연결이 개선되면 다시 시도해 주세요. 지금도 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"시각적 음성사서함을 업데이트할 수 없음"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"여전히 전화를 걸어 음성사서함을 확인할 수 있습니다."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"시각적 음성사서함을 업데이트할 수 없음"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"문제 발생"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9999임을 알려주시기 바랍니다."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"시각적 음성사서함 이용약관"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"시각적 음성사서함을 사용하려면 Verizon Wireless의 이용약관을 수락해야 합니다.\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nVerizon Wireless의 이용약관에 동의한 후 시각적 음성사서함을 사용할 수 있습니다:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"시각적 음성사서함 사용"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"이용약관을 거부하는 경우 시각적 음성사서함이 사용 중지됩니다."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"시각적 음성사서함 사용 중지"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"이용약관을 거부하면 음성사서함 텍스트 변환은 사용 중지됩니다."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"음성사서함 텍스트 변환 사용 중지"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"음성사서함은 *86번으로 통화해야만 액세스가 가능합니다. 계속하려면 새 음성사서함 PIN을 설정하세요."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN 설정"</string>
 </resources>

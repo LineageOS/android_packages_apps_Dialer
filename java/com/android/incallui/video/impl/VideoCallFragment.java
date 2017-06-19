@@ -122,6 +122,10 @@ public class VideoCallFragment extends Fragment
           outline.setOval(x - radius, y - radius, x + radius, y + radius);
         }
       };
+
+  // Must use a named method reference as otherwise they do not match.
+  // https://stackoverflow.com/questions/28190304/two-exact-method-references-are-not-equal
+  private final Runnable updatePreviewVideoIfSafe = this::updatePreviewVideoScaling;
   private InCallScreenDelegate inCallScreenDelegate;
   private VideoCallScreenDelegate videoCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
@@ -350,6 +354,9 @@ public class VideoCallFragment extends Fragment
     super.onPause();
     LogUtil.i("VideoCallFragment.onPause", null);
     inCallScreenDelegate.onInCallScreenPaused();
+
+    // If this is scheduled we should remove it
+    ThreadUtil.getUiThreadHandler().removeCallbacks(updatePreviewVideoIfSafe);
   }
 
   @Override
@@ -1050,7 +1057,7 @@ public class VideoCallFragment extends Fragment
     previewOffBlurredImageView.setClipToOutline(true);
 
     // Wait until the layout pass has finished before updating the scaling
-    ThreadUtil.postOnUiThread(this::updatePreviewVideoScaling);
+    ThreadUtil.postOnUiThread(updatePreviewVideoIfSafe);
   }
 
   private void updateVideoOffViews() {

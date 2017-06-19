@@ -91,7 +91,7 @@ public class SearchEditTextLayout extends FrameLayout {
     mBackButtonView = findViewById(R.id.search_back_button);
     mBackButtonView
         .getResources()
-        .getDrawable(R.drawable.quantum_ic_arrow_back_vd_theme_24)
+        .getDrawable(R.drawable.quantum_ic_arrow_back_vd_theme_24, null)
         .setAutoMirrored(true);
     mClearButtonView = findViewById(R.id.search_close_button);
 

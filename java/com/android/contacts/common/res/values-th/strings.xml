@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"ไม่อยู่"</string>
     <string name="status_busy" msgid="5990832098713248503">"ไม่ว่าง"</string>
     <string name="contactsList" msgid="8806067891419291513">"รายชื่อติดต่อ"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"รายการแนะนำยอดนิยม"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"อื่นๆ"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ไดเรกทอรี"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"ไดเรกทอรีที่ทำงาน"</string>
     <string name="local_search_label" msgid="907622822323119235">"รายชื่อติดต่อทั้งหมด"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"รายการแนะนำ"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ฉัน"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"กำลังค้นหา…"</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"พบมากกว่า <xliff:g id="COUNT">%d</xliff:g> รายการ"</string>

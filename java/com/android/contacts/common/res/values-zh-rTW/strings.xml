@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"離開"</string>
     <string name="status_busy" msgid="5990832098713248503">"忙碌"</string>
     <string name="contactsList" msgid="8806067891419291513">"聯絡人"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"常用聯絡人建議"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"其他"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"目錄"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"Work 聯絡人目錄"</string>
     <string name="local_search_label" msgid="907622822323119235">"所有聯絡人"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"建議"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"我"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"搜尋中…"</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"找到 <xliff:g id="COUNT">%d</xliff:g> 位以上的聯絡人。"</string>

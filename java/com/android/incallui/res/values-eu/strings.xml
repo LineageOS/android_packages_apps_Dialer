@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Deitzaile honen dei bat galdu duzu: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Abian den deia"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Laneko dei bat abian da"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Wi-Fi deia abian"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Wi-Fi bidezko laneko dei bat abian da"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Wi-Fi bidezko deia"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Wi-Fi bidezko laneko deia"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Zain"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Sarrerako deia"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Jasotako deia, argazkia duena"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Jasotako dei garrant., arg., mez. eta kok. dituena"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Jasotako dei garrantzitsua, eranskinak dituena"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Laneko dei bat jaso da"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Sarrerako Wi-Fi deia"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Wi-Fi bidezko laneko dei bat jaso da"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Jasotako Wi-Fi bidezko deia"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Jasotako Wi-Fi bidezko laneko deia"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Ustezko spam-deia jaso duzu"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Sarrerako bideo-eskaera"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Ez dago zerbitzurik"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Erantzun bideo-deiari"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Dei bat egiteko, Hegaldi modua desaktibatu behar duzu."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Ez dago sarean erregistratuta."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Sare mugikorra ez dago erabilgarri."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Sare mugikorra ez dago erabilgarri."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Deitzeko, idatzi balio duen zenbaki bat."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Ezin da deitu."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI sekuentzia hasten…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Amaitu deia"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Konferentzia-deia"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Deia abian da"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Datu-konexioren bidez jarraitzen ari da deia egiten…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Ezin izan da aldatu Wi-Fi sarera"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Datu mugikorren bidez egiten jarraituko da bideo-deia. Baliteke datuak erabiltzearen ondorioz ohiko kostuak kobratzea."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Datu-konexioaren bidez egiten jarraituko da deia…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Ezin izan da aldatu Wi-Fi sarera"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Datu-konexioaren bidez egiten jarraituko da bideo-deia. Baliteke datuak erabiltzearen ondorioz ohiko kostuak kobratzea."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ez erakutsi berriro"</string>
 </resources>

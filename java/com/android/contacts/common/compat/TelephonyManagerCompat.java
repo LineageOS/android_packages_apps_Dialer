@@ -27,6 +27,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.telecom.TelecomUtil;
 import java.lang.reflect.InvocationTargetException;
 
 public class TelephonyManagerCompat {
@@ -39,6 +40,8 @@ public class TelephonyManagerCompat {
   public static final String EVENT_CALL_REMOTELY_HELD = "android.telecom.event.CALL_REMOTELY_HELD";
   public static final String EVENT_CALL_REMOTELY_UNHELD =
       "android.telecom.event.CALL_REMOTELY_UNHELD";
+  public static final String EVENT_MERGE_START = "android.telecom.event.MERGE_START";
+  public static final String EVENT_MERGE_COMPLETE = "android.telecom.event.MERGE_COMPLETE";
 
   public static final String EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC =
       "android.telephony.event.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC";
@@ -163,6 +166,12 @@ public class TelephonyManagerCompat {
   public static void handleSecretCode(Context context, String secretCode) {
     // Must use system service on O+ to avoid using broadcasts, which are not allowed on O+.
     if (BuildCompat.isAtLeastO()) {
+      if (!TelecomUtil.isDefaultDialer(context)) {
+        LogUtil.e(
+            "TelephonyManagerCompat.handleSecretCode",
+            "not default dialer, cannot send special code");
+        return;
+      }
       context.getSystemService(TelephonyManager.class).sendDialerSpecialCode(secretCode);
     } else {
       // System service call is not supported pre-O, so must use a broadcast for N-.

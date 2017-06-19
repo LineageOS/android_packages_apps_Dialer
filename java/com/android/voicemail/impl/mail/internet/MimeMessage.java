@@ -15,7 +15,9 @@
  */
 package com.android.voicemail.impl.mail.internet;
 
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.Address;
 import com.android.voicemail.impl.mail.Body;
 import com.android.voicemail.impl.mail.BodyPart;
@@ -194,6 +196,28 @@ public class MimeMessage extends Message {
   public void setSentDate(Date sentDate) throws MessagingException {
     setHeader("Date", DATE_FORMAT.format(sentDate));
     this.mSentDate = sentDate;
+  }
+
+  @Override
+  @Nullable
+  public Long getDuration() {
+    String durationHeader = null;
+    try {
+      durationHeader = getFirstHeader(MimeHeader.HEADER_CONTENT_DURATION);
+    } catch (MessagingException e) {
+      VvmLog.e("MimeMessage.getDuration", "cannot retrieve header: ", e);
+      return null;
+    }
+    if (durationHeader == null) {
+      VvmLog.w("MimeMessage.getDuration", "message missing Content-Duration header");
+      return null;
+    }
+    try {
+      return Long.valueOf(durationHeader);
+    } catch (NumberFormatException e) {
+      VvmLog.w("MimeMessage.getDuration", "cannot parse duration " + durationHeader);
+      return null;
+    }
   }
 
   @Override

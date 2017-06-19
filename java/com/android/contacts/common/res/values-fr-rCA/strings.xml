@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"Absent"</string>
     <string name="status_busy" msgid="5990832098713248503">"Occupé(e)"</string>
     <string name="contactsList" msgid="8806067891419291513">"Contacts"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"Meilleures suggestions"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"Autre"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"Répertoire"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"Annuaire professionnel"</string>
     <string name="local_search_label" msgid="907622822323119235">"Tous les contacts"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Suggestions"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Moi"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"Recherche en cours…"</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"Plus de <xliff:g id="COUNT">%d</xliff:g> contacts ont été trouvés."</string>

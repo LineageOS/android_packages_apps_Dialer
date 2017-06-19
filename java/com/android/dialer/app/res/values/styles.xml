@@ -16,6 +16,11 @@
   -->
 <resources>
 
+  <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
+    <item name="android:colorAccent">@color/dialtacts_theme_color</item>
+  </style>
+
   <style name="DialtactsTheme" parent="DialerThemeBase">
 
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
@@ -28,10 +33,8 @@
     <item name="actionModeStyle">@style/ActionModeStyle</item>
     <item name="android:actionModeStyle">@style/ActionModeStyle</item>
 
-
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:overlapAnchor">true</item>
-    <item name="android:homeAsUpIndicator">@drawable/quantum_ic_arrow_back_vd_theme_24</item>
 
     <item name="android:listViewStyle">@style/ListViewStyle</item>
     <item name="list_section_header_height">32dip</item>

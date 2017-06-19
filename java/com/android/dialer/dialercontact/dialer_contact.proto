@@ -15,4 +15,12 @@ message DialerContact {
   optional string display_number = 7;
   optional string number_label = 8;
   optional int32 contact_type = 9;
+  optional SimDetails sim_details = 10;
+}
+
+message SimDetails {
+  // Human readable netwrork name displayed to user where relevant
+  optional string network = 1;
+  // This value represents a hex representation of a color (i.e. #ffffff)
+  optional int32 color = 2;
 }

@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Vumela"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Ukuze uthathe isithombe, nika ukufinyelela kukhamera"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Ukuze wabelane ngesithombe, nika ukufinyelela kumidiya"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Thatha isithombe"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Khetha isithombe"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Thumela umlayezo"</string>
 </resources>

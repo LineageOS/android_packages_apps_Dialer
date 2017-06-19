@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Suaktyvinamas vaizdinis balso paštas"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kol vaizdinis balso paštas nebus visiškai suaktyvintas, galite negauti balso pašto pranešimų. Jei norite gauti naujus pranešimus, kol jis nėra visiškai suaktyvintas, paskambinkite į balso paštą."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Nepavyksta suaktyvinti vaizdinio balso pašto"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Įsitikinkite, kad telefone veikia korinis ryšys, ir bandykite dar kartą."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Įsitikinkite, kad telefone veikia mobilusis ryšys, ir bandykite dar kartą."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Išjunkite lėktuvo režimą ir bandykite dar kartą."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Nėra ryšio"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Jums nebus pranešta apie naujus balso pašto pranešimus. Jei esate prisijungę prie „Wi-Fi“, dabar įjungę sinchronizavimą galite patikrinti, ar yra naujų balso pašto pranešimų."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Jums nebus pranešta apie naujus balso pašto pranešimus. Jei esate prisijungę prie „Wi-Fi“, dabar įjungę sinchronizavimą galite patikrinti, ar yra balso pašto pranešimų."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Jums nebus pranešta apie naujus balso pašto pranešimus. Išjunkite lėktuvo režimą, kad galėtumėte sinchronizuoti balso pašto pranešimus."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"kad galėtumėte patikrinti balso pašto pranešimus, telefone turi būti įjungti mobiliojo ryšio duomenys."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Kad galėtumėte patikrinti balso pašto pranešimus, telefone turi būti įjungti mobiliojo ryšio duomenys."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Nepavyksta suaktyvinti vaizdinio balso pašto"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Vis tiek galite skambinti ir tikrinti balso pašto pranešimus."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Nepavyksta atnaujinti vaizdinio balso pašto"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Bandykite dar kartą, kai „Wi-Fi“ arba mobiliųjų duomenų ryšys bus geresnis. Vis tiek galite skambinti ir tikrinti balso pašto pranešimus."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Bandykite dar kartą, kai mobiliųjų duomenų ryšys bus geresnis. Vis tiek galite skambinti ir tikrinti balso pašto pranešimus."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Bandykite dar kartą, kai „Wi-Fi“ arba mobiliųjų duomenų ryšys bus geresnis. Vis tiek galite paskambinti ir patikrinti balso pašto pranešimus."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Bandykite dar kartą, kai mobiliųjų duomenų ryšys bus geresnis. Vis tiek galite paskambinti ir patikrinti balso pašto pranešimus."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Nepavyksta atnaujinti vaizdinio balso pašto"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Vis tiek galite skambinti ir tikrinti balso pašto pranešimus."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Nepavyksta atnaujinti vaizdinio balso pašto"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Kažkas ne taip"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Susisiekite su klientų aptarnavimo tarnyba numeriu <xliff:g id="NUMBER">%1$s</xliff:g> ir pasakykite klaidos kodą 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vaizdinio balso pašto taisyklės ir nuostatos"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Norėdami naudoti vaizdinį balso paštą, turite sutikti su „Verizon Wireless“ taisyklėmis ir nuostatomis:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nTurite sutikti su „Verizon Wireless“ taisyklėmis ir nuostatomis, kad galėtumėte naudoti vaizdinį balso paštą:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Vaizdinio balso pašto įjungimas"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Atmetus taisykles ir nuostatas, vaizdinis balso paštas bus išjungtas."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Išjungti vaizdinį balso paštą"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Atmetus taisykles ir nuostatas, balso pašto transkribavimas bus išjungtas."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Išjungti balso pašto transkribavimą"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Balso paštas bus pasiekiamas tik paskambinus numeriu *86. Nustatykite naują balso pašto PIN kodą, kad galėtumėte tęsti."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN kodo nustatymas"</string>
 </resources>

@@ -59,6 +59,11 @@ public class Assert {
   }
 
   @CheckReturnValue
+  public static AssertionError createAssertionFailException(String msg, Throwable reason) {
+    return new AssertionError(msg, reason);
+  }
+
+  @CheckReturnValue
   public static UnsupportedOperationException createUnsupportedOperationFailException() {
     return new UnsupportedOperationException();
   }

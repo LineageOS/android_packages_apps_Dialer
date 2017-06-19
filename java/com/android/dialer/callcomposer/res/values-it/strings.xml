@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Consenti"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Per poter scattare una foto devi concedere l\'accesso alla fotocamera"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Per condividere un\'immagine, devi concedere l\'accesso ai contenuti multimediali"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Scatta una foto"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Scegli una foto"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Invia un messaggio"</string>
 </resources>

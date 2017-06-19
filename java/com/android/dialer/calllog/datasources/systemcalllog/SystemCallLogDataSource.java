@@ -34,14 +34,19 @@ import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
+import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -132,16 +137,39 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       PreferenceManager.getDefaultSharedPreferences(appContext)
           .edit()
           .putLong(PREF_LAST_TIMESTAMP_PROCESSED, lastTimestampProcessed)
-          .commit();
+          .apply();
     }
   }
 
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     // TODO: Complete implementation.
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
-        .combine();
+    ContentValues coalescedValues =
+        new RowCombiner(individualRowsSortedByTimestampDesc)
+            .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
+            .combine();
+
+    // All phone numbers in the provided group should be equivalent (but could be formatted
+    // differently). Arbitrarily show the raw phone number of the most recent call.
+    DialerPhoneNumber mostRecentPhoneNumber =
+        getMostRecentPhoneNumber(individualRowsSortedByTimestampDesc);
+    coalescedValues.put(
+        CoalescedAnnotatedCallLog.FORMATTED_NUMBER,
+        mostRecentPhoneNumber.getRawInput().getNumber());
+    return coalescedValues;
+  }
+
+  private static DialerPhoneNumber getMostRecentPhoneNumber(
+      List<ContentValues> individualRowsSortedByTimestampDesc) {
+    DialerPhoneNumber dialerPhoneNumber;
+    byte[] protoBytes =
+        individualRowsSortedByTimestampDesc.get(0).getAsByteArray(AnnotatedCallLog.NUMBER);
+    try {
+      dialerPhoneNumber = DialerPhoneNumber.parseFrom(protoBytes);
+    } catch (InvalidProtocolBufferException e) {
+      throw Assert.createAssertionFailException("couldn't parse DialerPhoneNumber", e);
+    }
+    return dialerPhoneNumber;
   }
 
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
@@ -151,12 +179,18 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         PreferenceManager.getDefaultSharedPreferences(appContext)
             .getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
 
+    DialerPhoneNumberUtil dialerPhoneNumberUtil =
+        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+
+    // TODO: Really should be getting last 1000 by timestamp, not by last modified.
     try (Cursor cursor =
         appContext
             .getContentResolver()
             .query(
                 Calls.CONTENT_URI, // Excludes voicemail
-                new String[] {Calls._ID, Calls.DATE, Calls.LAST_MODIFIED},
+                new String[] {
+                  Calls._ID, Calls.DATE, Calls.LAST_MODIFIED, Calls.NUMBER, Calls.COUNTRY_ISO
+                },
                 Calls.LAST_MODIFIED + " > ?",
                 new String[] {String.valueOf(previousTimestampProcessed)},
                 Calls.LAST_MODIFIED + " DESC LIMIT 1000")) {
@@ -175,6 +209,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int idColumn = cursor.getColumnIndexOrThrow(Calls._ID);
         int dateColumn = cursor.getColumnIndexOrThrow(Calls.DATE);
         int lastModifiedColumn = cursor.getColumnIndexOrThrow(Calls.LAST_MODIFIED);
+        int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
+        int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
 
         // The cursor orders by LAST_MODIFIED DESC, so the first result is the most recent timestamp
         // processed.
@@ -182,9 +218,15 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         do {
           long id = cursor.getLong(idColumn);
           long date = cursor.getLong(dateColumn);
+          String numberAsStr = cursor.getString(numberColumn);
+          String countryIso = cursor.getString(countryIsoColumn);
+
+          byte[] numberAsProtoBytes =
+              dialerPhoneNumberUtil.parse(numberAsStr, countryIso).toByteArray();
 
           ContentValues contentValues = new ContentValues();
           contentValues.put(AnnotatedCallLog.TIMESTAMP, date);
+          contentValues.put(AnnotatedCallLog.NUMBER, numberAsProtoBytes);
 
           if (existingAnnotatedCallLogIds.contains(id)) {
             mutations.update(id, contentValues);
@@ -202,7 +244,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         getIdsFromSystemCallLogThatMatch(appContext, existingAnnotatedCallLogIds);
     LogUtil.i(
         "SystemCallLogDataSource.handleDeletes",
-        "found %d entries in system call log",
+        "found %d matching entries in system call log",
         systemCallLogIds.size());
     Set<Long> idsInAnnotatedCallLogNoLongerInSystemCallLog = new ArraySet<>();
     idsInAnnotatedCallLogNoLongerInSystemCallLog.addAll(existingAnnotatedCallLogIds);

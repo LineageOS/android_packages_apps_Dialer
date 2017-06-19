@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"അനുവദിക്കുക"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"ഫോട്ടോ എടുക്കുന്നതിന്, ക്യാമറയ്ക്ക് ആക്സസ് നൽകുക"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"ഫോട്ടോ പങ്കിടുന്നതിന്, മീഡിയയ്ക്ക് ആക്സസ് നൽകുക"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"ഒരു ചിത്രമെടുക്കുക"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"ഒരു ഫോട്ടോ തിരഞ്ഞെടുക്കുക"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"ഒരു സന്ദേശം അയയ്‌ക്കുക"</string>
 </resources>

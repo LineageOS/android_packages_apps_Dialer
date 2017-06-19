@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Nem fogadott hívás: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Hívás folyamatban"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Folyamatban lévő munkahelyi hívás"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Folyamatban lévő Wi-Fi-hívás"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Folyamatban lévő munkahelyi hívás Wi-Fin keresztül"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Folyamatban lévő Wi-Fi-hívás"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Folyamatban lévő munkahelyi hívás Wi-Fin keresztül"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Tartásban"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Bejövő hívás"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Bejövő hívás fotóval"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Fontos bejövő hívás fotóval, üzenettel és hellyel"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Fontos bejövő hívás mellékletekkel"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Bejövő munkahelyi hívás"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Beérkező Wi-Fi-hívás"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Bejövő munkahelyi hívás Wi-Fin keresztül"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Beérkező Wi-Fi-hívás"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Bejövő munkahelyi hívás Wi-Fin keresztül"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Bejövő gyanús spamhívás"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Bejövő videokérés"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Nincs szolgáltatás"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Videohívás fogadása"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Híváskezdeményezéshez kapcsolja ki a Repülőgép üzemmódot."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Nincs regisztrálva a hálózaton."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"A mobilhálózat nem érhető el."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"A mobilhálózat nem érhető el."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Hívásindításhoz adjon meg egy érvényes számot."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"A hívás sikertelen."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI-sorozat indítása..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Hívás befejezése"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Konferenciahívás"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Hívásban"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Hívás folytatása mobil-adatkapcsolaton keresztül…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Nem sikerült Wi-Fi-hálózatra váltani"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"A videohívást továbbra is a mobilhálózaton folytatja. A mobilszolgáltató a normál adatforgalmi díjat számítja fel."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Hívás folytatása mobil-adatkapcsolaton keresztül…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nem sikerült Wi-Fi-hálózatra váltani"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"A videohívást továbbra is a mobilhálózaton folytatja. A mobilszolgáltató a normál adatforgalmi díjat számítja fel."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne jelenjen meg többé"</string>
 </resources>

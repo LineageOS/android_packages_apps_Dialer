@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktivuje sa vizuálna hlasová schránka"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kým nebude vizuálna hlasová schránka úplne aktivovaná, pravdepodobne nebudete dostávať upozornenia hlasovej schránky. Kým nebude hlasová schránka úplne aktivovaná, nové správy môžete načítať zavolaním do hlasovej schránky."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Vizuálna hlasová schránka sa nedá aktivovať"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Skontrolujte, či má telefón mobilné pripojenie, a skúste to znova."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Skontrolujte, či má telefón pripojenie k mobilnej sieti, a skúste to znova."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Vypnite režim v lietadle a skúste to znova."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Žiadne pripojenie"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Nedostanete upozornenia na nové hlasové správy. Ak používate Wi-Fi, synchronizáciou môžete skontrolovať hlasovú schránku."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Nedostanete upozornenia na nové hlasové správy. Ak používate Wi‑Fi, hlasovú schránku môžete skontrolovať synchronizáciou."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Nedostanete upozornenia na nové hlasové správy. Vypnite režim v lietadle a synchronizujte hlasovú schránku."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Na kontrolu hlasovej schránky potrebuje telefón mobilné dátové pripojenie."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Na kontrolu hlasovej schránky potrebuje telefón mobilné dátové pripojenie."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Vizuálna hlasová schránka sa nedá aktivovať"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Skúste to znova, keď budete mať lepšie pripojenie cez Wi-Fi alebo lepšie mobilné pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Skúste to znova, keď budete mať lepšie mobilné dátové pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Skúste to znova, keď budete mať lepšie pripojenie cez Wi‑Fi alebo lepšie mobilné dátové pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Skúste to znova, keď budete mať lepšie mobilné dátové pripojenie. Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Hlasovú schránku si stále môžete skontrolovať zavolaním."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Vizuálna hlasová schránka sa nedá aktualizovať"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Vyskytol sa problém"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Obráťte sa na služby zákazníkom na čísle <xliff:g id="NUMBER">%1$s</xliff:g> a oznámte kód chyby 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Zmluvné podmienky vizuálnej hlasovej schránky"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Ak chcete používať vizuálnu hlasovú schránku, je nutné prijať zmluvné podmienky spoločnosti Verizon Wireless:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nAk chcete používať vizuálnu hlasovú schránku, prijmite zmluvné podmienky spoločnosti Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Zapnutie vizuálnej hlasovej schránky"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"V prípade odmietnutia zmluvných podmienok bude vizuálna hlasová schránka zakázaná."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Zakázať vizuálnu hlasovú schránku"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"V prípade odmietnutia zmluvných podmienok bude prepis hlasových správ zakázaný."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Zakázať prepis hlasových správ"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Hlasová schránka bude k dispozícii len po zavolaní na číslo *86. Ak chcete pokračovať, nastavte nový PIN hlasovej schránky."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Nastavenie kódu PIN"</string>
 </resources>

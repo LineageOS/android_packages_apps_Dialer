@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> မှလွတ်သွားသော ခေါ်ဆိုမှု"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"ဆက်သွားနေသော ဖုန်းခေါ်မှု"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ခေါ်နေဆဲ အလုပ်မှ ခေါ်ဆိုမှု"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"ခေါ်နေဆဲ ဝိုင်ဖိုင်ခေါ်ဆိုမှု"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ခေါ်နေဆဲ Wi-Fi အလုပ်မှ ခေါ်ဆိုမှု"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"လက်ရှိ Wi-Fi ဖုန်းခေါ်ဆိုမှု"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"လက်ရှိ Wi-Fi အလုပ်ဖုန်းခေါ်ဆိုမှု"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"ခဏ ကိုင်ထားစဉ်"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"အဝင်ခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ဓာတ်ပုံဖြင့် အဝင်ခေါ်ဆိုမှု"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ဓာတ်ပုံ၊မက်ဆေ့ဂျ်၊တည်နေရာဖြင့် အရေးကြီးခေါ်ဆိုမှု"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ပူးတွဲပါဖိုင်များဖြင့် အရေးကြီးသော အဝင်ခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"အဝင် ခေါ်ဆိုမှု"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"ဝင်လာသော ဝိုင်ဖိုင်ခေါ်ဆိုမှု"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Wi-Fi အလုပ်မှ အဝင် ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"အဝင် Wi‑Fi ဖုန်းခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"အဝင် Wi‑Fi အလုပ်ဖုန်းခေါ်ဆိုမှု"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ခေါ်နေသော မသင်္ကာဖွယ်ရာ စပမ်းခေါ်ဆိုမှု"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"အသံ ခေါ်ဆိုမှုအဖြစ် တောင်းဆိုမှု"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"ဝန်ဆောင်မှု မရှိပါ"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"ဗီဒီယိုခေါ်ဆိုမှုလွှဲယူပါ"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"ဖုန်းခေါ်ဆိုမှုပြုရန်, လေယာဥ်ပျံပေါ်အသုံးပြုသောစနစ်ကို ပိတ်ပါ"</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"ကွန်ယက်ပေါ်မှာ မှတ်ပုံတင်မှု မပြုလုပ်ထားပါ"</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"ဆဲလ်လူလာ ကွန်ရက် မရှိပါ။"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"မိုဘိုင်းကွန်ရက် မရနိုင်ပါ"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ဖုန်းခေါ်ရန်အတွက်၊ သင့်လျော်သည့်နံပါတ် ရိုက်ထည့်ပါ။"</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"မခေါ်ဆိုနိုင်ပါ။"</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI အမှတ်စဉ်ကို စတင်နေပါသည်…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ခေါ်ဆိုမှုအပြီးသတ်ရန်"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"အစည်းအဝေးခေါ်ဆိုမှု"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"ဖုန်းပြောနေသည်"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"ဆယ်လူလာဒေတာသုံးပြီး ဆက်လက်ခေါ်ဆိုနေသည်…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi ကွန်ရက်သို့ မပြောင်းနိုင်ပါ"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ဗီဒီယိုခေါ်ဆိုမှုသည် ဆယ်လူလာကွန်ရက်တွင် ဆက်ရှိနေပါမည်။ ပုံမှန်ဒေတာသုံးစွဲခများ ကျသင့်နိုင်ပါသည်။"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"မိုဘိုင်းဒေတာသုံးပြီး ဆက်လက်ခေါ်ဆိုနေသည်…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi‑Fi ကွန်ရက်သို့ မပြောင်းနိုင်ပါ"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ဗီဒီယိုခေါ်ဆိုမှုသည် မိုဘိုင်းကွန်ရက်တွင် ဆက်ရှိနေပါမည်။ ပုံမှန်ဒေတာသုံးစွဲခများ ကျသင့်နိုင်ပါသည်။"</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ဤသည်ကို ထပ်မပြပါနှင့်"</string>
 </resources>

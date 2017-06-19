@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Cuộc gọi nhỡ từ <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Cuộc gọi đang thực hiện"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Cuộc gọi đang diễn ra về công việc"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Cuộc gọi đang diễn ra qua Wi-Fi"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Cuộc gọi đang diễn ra qua Wi-Fi về công việc"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Cuộc gọi đang diễn ra qua Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Cuộc gọi về công việc đang diễn ra qua Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Đang chờ"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Cuộc gọi đến"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Cuộc gọi đến có ảnh"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Cuộc gọi đến quan trọng có ảnh, tin nhắn và vị trí"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Cuộc gọi đến quan trọng có tệp đính kèm"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Cuộc gọi đến về công việc"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Cuộc gọi đến qua Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Cuộc gọi đến qua Wi-Fi về công việc"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Cuộc gọi đến qua Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Cuộc gọi đến về công việc qua Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Cuộc gọi spam đến bị nghi ngờ"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Yêu cầu video đến"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Không có dịch vụ nào"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Nhận cuộc gọi điện video"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Để thực hiện cuộc gọi, trước tiên, hãy tắt chế độ trên Máy bay."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Chưa được đăng ký trên mạng."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Không có mạng di động."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Mạng di động không khả dụng."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Để thực hiện cuộc gọi, hãy nhập một số hợp lệ."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Không thực hiện được cuộc gọi."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Khởi động chuỗi MMI…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Kết thúc cuộc gọi"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Cuộc gọi nhiều bên"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Đang trong cuộc gọi"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Đang tiếp tục cuộc gọi bằng cách sử dụng dữ liệu di động…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Không thể chuyển sang mạng Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Cuộc gọi điện video sẽ duy trì trên mạng di động. Có thể áp dụng phí dữ liệu chuẩn."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Đang tiếp tục cuộc gọi bằng cách sử dụng dữ liệu di động…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Không thể chuyển sang mạng Wi-Fi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Cuộc gọi điện video sẽ tiếp tục trên mạng di động. Bạn có thể phải trả phí dữ liệu chuẩn."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Không hiển thị lại"</string>
 </resources>

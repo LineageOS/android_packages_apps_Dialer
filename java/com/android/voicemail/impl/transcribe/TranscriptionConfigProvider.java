@@ -16,7 +16,7 @@
 package com.android.voicemail.impl.transcribe;
 
 import android.content.Context;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /** Provides configuration values needed to connect to the transcription server. */
 public class TranscriptionConfigProvider {

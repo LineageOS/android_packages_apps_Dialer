@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"ខកខាន​ទទួល​ពី <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"កំពុង​បន្ត​ការ​ហៅ"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ការហៅពីកន្លែងការងារកំពុងដំណើរការ"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"ការហៅតាម Wi-Fi កំពុងបន្ត"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"ការហៅតាម Wi-Fi ពីកន្លែងការងារកំពុងដំណើរការ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"ការហៅតាម Wi-Fi កំពុង​ដំណើរការ"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"ការហៅតាម Wi-Fi ពីកន្លែងការងារ​កំពុង​ដំណើរការ"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"រង់ចាំ"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"ការ​ហៅ​ចូល"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ការហៅ​ចូល​​ដែល​មាន​រូបថត"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​រូបថត សារ និង​ទីតាំង"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ការហៅ​​ចូល​ដែល​សំខាន់​មាន​ឯកសារ​ភ្ជាប់"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"កំពុងហៅចូលពីកន្លែងការងារ"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"មានការហៅចូលមកតាម Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"កំពុងហៅចូលពីកន្លែងការងារតាម Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"មានការហៅចូលមកតាម Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"មាន​ការ​ហៅ​ចូល​ពី​កន្លែង​ការងារ​តាម Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ការ​ហៅ​បន្លំ​​ចូល​​​ដែល​សង្ស័យ"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"សំណើ​ការ​ហៅ​ជា​វីដេអូ​ចូល"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"គ្មាន​សេវា"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"ទទួល​យក​ការ​ហៅ​វីដេអូ"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"ដើម្បី​កំណត់​ការ​ហៅ ដំបូង​ត្រូវ​បិទ​របៀប​នៅ​ពេល​ជិះ​យន្តហោះ។"</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"មិន​បាន​ចុះ​ឈ្មោះ​នៅ​លើ​បណ្ដាញ។"</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"បណ្ដាញ​ចល័ត​មិន​អាច​ប្រើ​បាន។"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"សេវា​ទូរសព្ទ​ចល័ត​មិន​អាច​ប្រើប្រាស់​បាន។"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ដើម្បីធ្វើការហៅ បញ្ចូលលេខដែលមានសុពលភាព។"</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"មិនអាចហៅបានទេ។"</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"កំពុង​ចាប់ផ្ដើម​លំដាប់ MMI ..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"បញ្ចប់ការហៅ"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"ហៅជា​សន្និសីទ"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"ស្ថិត​​ក្នុង​ការ​ហៅ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"កំពុង​បន្ត​ហៅ​ទូរស័ព្ទ​ដោយ​ប្រើ​ទិន្នន័យ​ទូរស័ព្ទ​ចល័ត..."</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"មិន​អាច​ប្ដូរ​ទៅ​បណ្ដាញ Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ការហៅ​ជា​វីដេអូ​នឹង​នៅ​តែ​​ស្ថិត​លើ​បណ្ដាញ​ទូរសព្ទ​ចល័ត។ អាច​​នឹង​​គិតថ្លៃ​ទិន្នន័យ​តាម​តម្លៃ​​ស្តង់ដារ។"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"កំពុង​បន្ត​ការហៅ​ទូរសព្ទ​ ដោយ​ប្រើប្រាស់​ទិន្នន័យ​ចល័ត…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"មិន​អាច​ប្ដូរ​ទៅ​បណ្ដាញ Wi-Fi បាន​ទេ"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ការហៅ​តាម​វីដេអូ​នឹង​នៅតែ​មាន​នៅ​លើ​បណ្ដាញ​ទូរសព្ទ។ អាច​នឹង​គិតថ្លៃ​ទិន្នន័យ​តាម​តម្លៃ​ស្តង់ដារ។"</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"កុំ​បង្ហាញ​វា​ម្ដង​ទៀត"</string>
 </resources>

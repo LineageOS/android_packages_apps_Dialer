@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Activation de la messagerie vocale visuelle..."</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Tant que la messagerie vocale visuelle n\'est pas totalement activée, vous risquez de ne pas être averti de la réception de nouveaux messages. Appelez votre boîte vocale pour consulter ces derniers."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Impossible d\'activer la messagerie vocale visuelle"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Vérifiez que votre téléphone est bien connecté au réseau mobile, puis réessayez."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Vérifiez que votre téléphone est bien connecté au réseau mobile, puis réessayez."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Désactivez le mode Avion, puis réessayez."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Aucune connexion"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Vous ne recevrez aucune notification en cas de nouveau message vocal. Si vous êtes connecté en Wi-Fi, vous pouvez consulter votre messagerie vocale maintenant en effectuant une synchronisation."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Vous ne recevrez aucune notification en cas de nouveau message vocal. Si vous êtes connecté en Wi-Fi, vous pouvez consulter votre messagerie vocale dès à présent en effectuant une synchronisation."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Vous ne recevrez aucune notification en cas de nouveau message. Désactivez le mode Avion pour synchroniser votre messagerie vocale."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Vous devez disposer d\'une connexion de données mobiles pour consulter votre messagerie vocale."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Vous devez disposer d\'une connexion de données mobiles pour consulter votre messagerie vocale."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Impossible d\'activer la messagerie vocale visuelle"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"La consultation de votre messagerie vocale par téléphone est toujours possible."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Impossible de mettre à jour la messagerie vocale visuelle"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Réessayez lorsque vous bénéficierez d\'une meilleure connexion au réseau mobile ou Wi-Fi. La consultation de votre messagerie vocale par téléphone est toujours possible."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Réessayez lorsque vous bénéficierez d\'une meilleure connexion de données mobiles. La consultation de votre messagerie vocale par téléphone est toujours possible."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Réessayez lorsque vous bénéficierez d\'une meilleure connexion au réseau mobile ou Wi-Fi. Vous pouvez tout de même consulter votre messagerie vocale par téléphone."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Réessayez lorsque vous bénéficierez d\'une meilleure connexion de données mobiles. Vous pouvez tout de même consulter votre messagerie vocale par téléphone."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Impossible de mettre à jour la messagerie vocale visuelle"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"La consultation de votre messagerie vocale par téléphone est toujours possible."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Impossible de mettre à jour la messagerie vocale visuelle"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Problème"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Veuillez contacter le service client au <xliff:g id="NUMBER">%1$s</xliff:g>. Le code d\'erreur à transmettre au conseiller est le 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Conditions d\'utilisation de la messagerie vocale visuelle"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Vous devez accepter les conditions d\'utilisation de Verizon Wireless pour pouvoir utiliser la messagerie vocale visuelle :\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nVous devez accepter les conditions d\'utilisation de Verizon Wireless pour pouvoir utiliser la messagerie vocale virtuelle :\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Activer la messagerie vocale visuelle"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Si vous refusez les conditions d\'utilisation, la messagerie vocale visuelle sera désactivée."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Désactiver la messagerie vocale visuelle"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"La transcription des messages vocaux sera désactivée en cas de refus des conditions d\'utilisation."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Désactiver la transcription des messages vocaux"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Vous ne pouvez accéder à la messagerie vocale qu\'en composant le *86. Définissez un nouveau code PIN de messagerie vocale pour continuer."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Définir un code"</string>
 </resources>

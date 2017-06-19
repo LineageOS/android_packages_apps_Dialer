@@ -286,7 +286,7 @@ public class ExifInterface {
 
   /** Wrapper class to define some orientation parameters. */
   public static class OrientationParams {
-    int rotation = 0;
+    public int rotation = 0;
     int scaleX = 1;
     int scaleY = 1;
     public boolean invertDimensions = false;

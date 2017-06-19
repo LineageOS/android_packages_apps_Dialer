@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Gemiste oproep van <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Actieve oproep"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Actieve zakelijke oproep"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Actieve wifi-oproep"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Actieve zakelijke oproep via wifi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Actieve wifi-oproep"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Actieve zakelijke oproep via wifi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"In de wacht"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Inkomende oproep"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Inkomende oproep met foto"</string>
@@ -55,15 +55,15 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Belangrijke oproep met foto, bericht en locatie"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Belangrijke inkomende oproep met bijlagen"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Inkomende zakelijke oproep"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Inkomende wifi-oproep"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Inkomende zakelijke oproep via wifi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Inkomende wifi-oproep"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Inkomende zakelijke oproep via wifi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Inkomende vermoedelijke spamoproep"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Binnenkomend videoverzoek"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Geen service"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Geselecteerd netwerk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) niet beschikbaar"</string>
     <string name="notification_action_answer" msgid="8748275902211192568">"Antwoord"</string>
     <string name="notification_action_end_call" msgid="7467258454170007765">"Ophangen"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"InStream-video"</string>
+    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
     <string name="notification_action_answer_voice" msgid="6237890905749760509">"Spraak"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"Accepteren"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"Weigeren"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Videogesprek beantwoorden"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Als je wilt bellen, moet je eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Niet geregistreerd op netwerk."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Mobiel netwerk niet beschikbaar."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Mobiel netwerk niet beschikbaar."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Als je wilt bellen, moet je een geldig nummer invoeren."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Kan niet bellen."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI-reeks starten..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Oproep beëindigen"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Telefonische vergadering"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"In gesprek"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Gesprek voortzetten via mobiele data…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Overschakelen naar wifi-netwerk mislukt"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Videogesprek loopt via mobiel netwerk. Er kunnen standaard datakosten in rekening worden gebracht."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Gesprek voortzetten via mobiele data…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Overschakelen naar wifi-netwerk mislukt"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videogesprek loopt via mobiel netwerk. Er kunnen standaard datakosten in rekening worden gebracht."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Dit niet meer weergeven"</string>
 </resources>

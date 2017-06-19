@@ -330,19 +330,19 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     int description;
     OnClickListener onClickListener;
     if (action == CALL_AND_SHARE) {
-      drawable = getContext().getResources().getDrawable(R.drawable.ic_phone_attach);
+      drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_phone_attach);
       drawable.setAutoMirrored(true);
       description = R.string.description_search_call_and_share;
       onClickListener = v -> listener.onCallAndShareIconClicked(position);
     } else if (action == VIDEO && mSupportVideoCall) {
       drawable =
-          getContext().getResources().getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24);
+          ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
       drawable.setAutoMirrored(true);
       description = R.string.description_search_video_call;
       onClickListener = v -> listener.onVideoCallIconClicked(position);
     } else if (action == LIGHTBRINGER) {
       drawable =
-          getContext().getResources().getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24);
+          ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
       drawable.setAutoMirrored(true);
       description = R.string.description_search_video_call;
       onClickListener = v -> listener.onLightbringerIconClicked(position);

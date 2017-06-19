@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"สายที่ไม่ได้รับจาก <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"โทรต่อเนื่อง"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"กำลังอยู่ในสายจากที่ทำงาน"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"กำลังโทรผ่าน Wi-Fi"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"กำลังอยู่ในสายจากที่ทำงานผ่าน Wi-Fi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"กำลังโทรผ่าน Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"กำลังอยู่ในสายจากที่ทำงานผ่าน Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"พักสาย"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"สายเรียกเข้า"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"สายเรียกเข้าพร้อมรูปภาพ"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"สายเรียกเข้าที่สำคัญพร้อมรูปภาพ ข้อความ และตำแหน่ง"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"สายเรียกเข้าที่สำคัญพร้อมไฟล์แนบ"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"มีสายเรียกเข้าจากที่ทำงาน"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"สายโทรเข้าผ่าน Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"มีสายเรียกเข้าจากที่ทำงานผ่าน Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"สายโทรเข้าผ่าน Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"มีสายเรียกเข้าจากที่ทำงานผ่าน Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"สายเรียกเข้าที่สงสัยว่าเป็นสแปม"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"คำขอโทรเข้าเป็นวิดีโอ"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"ไม่มีบริการ"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"รับสายแฮงเอาท์วิดีโอ"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"หากต้องการโทรออก ให้ปิดโหมดใช้งานบนเครื่องบินก่อน"</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"ยังไม่ได้ลงทะเบียนบนเครือข่าย"</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"เครือข่ายมือถือใช้งานไม่ได้"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"เครือข่ายมือถือใช้งานไม่ได้"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"หากต้องการโทรออก โปรดป้อนหมายเลขที่ถูกต้อง"</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"ไม่สามารถโทรได้"</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"กำลังเริ่มต้นลำดับ MMI..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"วางสาย"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"การประชุมสาย"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"อยู่ในสาย"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"กำลังทำการโทรต่อโดยใช้ข้อมูลเครือข่ายมือถือ…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"ไม่สามารถเปลี่ยนไปใช้เครือข่าย Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"แฮงเอาท์วิดีโอจะยังคงอยู่ในเครือข่ายมือถือ อาจมีการเรียกเก็บค่าบริการข้อมูลมาตรฐาน"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"โทรต่อโดยใช้อินเทอร์เน็ตมือถือ..."</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ไม่สามารถเปลี่ยนไปใช้เครือข่าย Wi-Fi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"แฮงเอาท์วิดีโอจะยังคงอยู่ในเครือข่ายมือถือ อาจมีการเรียกเก็บค่าบริการข้อมูลมาตรฐาน"</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"อย่าแสดงสิ่งนี้อีก"</string>
 </resources>

@@ -107,6 +107,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
   public View onCreateView(
       LayoutInflater layoutInflater, @Nullable ViewGroup viewGroup, @Nullable Bundle bundle) {
     if (isSpam) {
+      LogUtil.i("MultimediaFragment.onCreateView", "show spam layout");
       return layoutInflater.inflate(R.layout.fragment_spam, viewGroup, false);
     }
 
@@ -116,23 +117,30 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
     if (hasMap && MapsComponent.get(getContext()).getMaps().isAvailable()) {
       if (hasImage) {
         if (hasSubject) {
+          LogUtil.i("MultimediaFragment.onCreateView", "show text, image, location layout");
           return layoutInflater.inflate(
               R.layout.fragment_composer_text_image_frag, viewGroup, false);
         } else {
+          LogUtil.i("MultimediaFragment.onCreateView", "show image, location layout");
           return layoutInflater.inflate(R.layout.fragment_composer_image_frag, viewGroup, false);
         }
       } else if (hasSubject) {
+        LogUtil.i("MultimediaFragment.onCreateView", "show text, location layout");
         return layoutInflater.inflate(R.layout.fragment_composer_text_frag, viewGroup, false);
       } else {
+        LogUtil.i("MultimediaFragment.onCreateView", "show location layout");
         return layoutInflater.inflate(R.layout.fragment_composer_frag, viewGroup, false);
       }
     } else if (hasImage) {
       if (hasSubject) {
+        LogUtil.i("MultimediaFragment.onCreateView", "show text, image layout");
         return layoutInflater.inflate(R.layout.fragment_composer_text_image, viewGroup, false);
       } else {
+        LogUtil.i("MultimediaFragment.onCreateView", "show image layout");
         return layoutInflater.inflate(R.layout.fragment_composer_image, viewGroup, false);
       }
     } else {
+      LogUtil.i("MultimediaFragment.onCreateView", "show text layout");
       return layoutInflater.inflate(R.layout.fragment_composer_text, viewGroup, false);
     }
   }
@@ -155,11 +163,11 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
       ((TextView) view.findViewById(R.id.spam_text)).setText(R.string.spam_message_text);
     }
 
-    TextView messageText = (TextView) view.findViewById(R.id.answer_message_text);
+    TextView messageText = view.findViewById(R.id.answer_message_text);
     if (messageText != null) {
       messageText.setText(getSubject());
     }
-    ImageView mainImage = (ImageView) view.findViewById(R.id.answer_message_image);
+    ImageView mainImage = view.findViewById(R.id.answer_message_image);
     if (mainImage != null) {
       Glide.with(this)
           .load(getImageUri())
@@ -185,6 +193,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
                     Target<Drawable> target,
                     DataSource dataSource,
                     boolean isFirstResource) {
+                  LogUtil.enterBlock("MultimediaFragment.onResourceReady");
                   view.findViewById(R.id.loading_spinner).setVisibility(View.GONE);
                   return false;
                 }
@@ -192,7 +201,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
           .into(mainImage);
       mainImage.setClipToOutline(true);
     }
-    FrameLayout fragmentHolder = (FrameLayout) view.findViewById(R.id.answer_message_frag);
+    FrameLayout fragmentHolder = view.findViewById(R.id.answer_message_frag);
     if (fragmentHolder != null) {
       fragmentHolder.setClipToOutline(true);
       Fragment mapFragment =
@@ -202,7 +211,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
           .replace(R.id.answer_message_frag, mapFragment)
           .commitNow();
     }
-    avatarImageView = ((ImageView) view.findViewById(R.id.answer_message_avatar));
+    avatarImageView = view.findViewById(R.id.answer_message_avatar);
     if (avatarImageView != null) {
       avatarImageView.setVisibility(showAvatar ? View.VISIBLE : View.GONE);
     }

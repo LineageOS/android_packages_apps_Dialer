@@ -44,9 +44,9 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -245,7 +245,7 @@ public class CallCardPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
-    LogUtil.v("CallCardPresenter.onStateChange", "" + newState);
+    LogUtil.v("CallCardPresenter.onStateChange", "oldState: %s, newState: %s", oldState, newState);
     if (mInCallScreen == null) {
       return;
     }
@@ -374,6 +374,7 @@ public class CallCardPresenter
 
   @Override
   public void onEnrichedCallSessionUpdate() {
+    LogUtil.enterBlock("CallCardPresenter.onEnrichedCallSessionUpdate");
     updatePrimaryDisplayInfo();
   }
 
@@ -860,6 +861,14 @@ public class CallCardPresenter
 
     if (mSecondary == null) {
       // Clear the secondary display info.
+      mInCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(mIsFullscreen));
+      return;
+    }
+
+    if (mSecondary.isMergeInProcess()) {
+      LogUtil.i(
+          "CallCardPresenter.updateSecondaryDisplayInfo",
+          "secondary call is merge in process, clearing info");
       mInCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(mIsFullscreen));
       return;
     }

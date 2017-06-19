@@ -25,6 +25,7 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.ContextCompat;
 import android.util.ArrayMap;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -113,7 +114,7 @@ public abstract class AccountType {
       final PackageManager pm = context.getPackageManager();
       return pm.getDrawable(syncAdapterPackageName, iconRes, null);
     } else if (titleRes != -1) {
-      return context.getResources().getDrawable(iconRes);
+      return ContextCompat.getDrawable(context, iconRes);
     } else {
       return null;
     }

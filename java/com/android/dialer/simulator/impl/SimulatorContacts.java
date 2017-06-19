@@ -134,7 +134,7 @@ final class SimulatorContacts {
         ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
             .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, contact.getAccountType())
             .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, contact.getAccountName())
-            .withValue(ContactsContract.RawContacts.STARRED, contact.getIsStarred())
+            .withValue(ContactsContract.RawContacts.STARRED, contact.getIsStarred() ? 1 : 0)
             .withYieldAllowed(true)
             .build());
 

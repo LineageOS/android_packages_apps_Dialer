@@ -16,8 +16,12 @@
 package com.android.dialer.calllog.testing;
 
 import android.app.Application;
+import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.testing.TestDialerExecutorModule;
+import com.android.dialer.inject.ContextModule;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -27,13 +31,23 @@ import javax.inject.Singleton;
  * tests to depend on and use all of DialerApplication.
  */
 public final class FakeCallLogApplication extends Application implements HasRootComponent {
+  private Object rootComponent;
 
   @Override
-  public Object component() {
-    return DaggerFakeCallLogApplication_FakeComponent.create();
+  public final synchronized Object component() {
+    if (rootComponent == null) {
+      rootComponent =
+          DaggerFakeCallLogApplication_FakeComponent.builder()
+              .contextModule(new ContextModule(this))
+              .build();
+    }
+    return rootComponent;
   }
 
   @Singleton
-  @Component(modules = CallLogModule.class)
-  interface FakeComponent extends CallLogDatabaseComponent.HasComponent {}
+  @Component(modules = {CallLogModule.class, ContextModule.class, TestDialerExecutorModule.class})
+  interface FakeComponent
+      extends CallLogDatabaseComponent.HasComponent,
+          CallLogComponent.HasComponent,
+          DialerExecutorComponent.HasComponent {}
 }

@@ -49,6 +49,8 @@ public interface CachedNumberLookupService {
 
   boolean canReportAsInvalid(ContactSource.Type sourceType, String objectId);
 
+  boolean reportAsInvalid(Context context, CachedContactInfo cachedContactInfo);
+
   /** @return return {@link Uri} to the photo or return {@code null} when failing to add photo */
   @Nullable
   Uri addPhoto(Context context, String number, InputStream in);

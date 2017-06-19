@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Vizuālā balss pasta aktivizēšana"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kamēr vizuālais balss pasts nebūs pilnībā aktivizēts, iespējams, nesaņemsiet balss pasta paziņojumus. Lai izgūtu jaunus ziņojumus, kamēr balss pasts nav pilnībā aktivizēts, zvaniet balss pastam."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Nevar aktivizēt vizuālo balss pastu."</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Pārbaudiet, vai tālrunim ir mobilo datu savienojums, un mēģiniet vēlreiz."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Pārbaudiet, vai tālrunim ir mobilo datu savienojums, un mēģiniet vēlreiz."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Izslēdziet lidojuma režīmu un mēģiniet vēlreiz."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Nav savienojuma."</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Jums netiks paziņots par jauniem balss pasta ziņojumiem. Ja ir izveidots Wi-Fi savienojums, varat pārbaudīt balss pastu, veicot sinhronizāciju tūlīt."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Jums netiks paziņots par jauniem balss pasta ziņojumiem. Ja ir izveidots Wi-Fi savienojums, varat pārbaudīt balss pastu, tagad veicot sinhronizāciju."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Jums netiks paziņots par jauniem balss pasta ziņojumiem. Lai sinhronizētu balss pastu, izslēdziet lidojuma režīmu."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Lai pārbaudītu balss pastu, tālrunim ir nepieciešams mobilo datu savienojums."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Lai pārbaudītu balss pastu, tālrunim ir nepieciešams mobilo datu savienojums."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Nevar aktivizēt vizuālo balss pastu."</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Nevar atjaunināt vizuālo balss pastu."</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Mēģiniet vēlreiz, kad būs stiprāks Wi-Fi vai mobilo datu savienojuma signāls. Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Mēģiniet vēlreiz, kad būs stiprāks mobilo datu savienojuma signāls. Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Mēģiniet vēlreiz, kad būs spēcīgāks Wi-Fi vai mobilo datu savienojuma signāls. Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Mēģiniet vēlreiz, kad būs spēcīgāks mobilo datu savienojuma signāls. Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Nevar atjaunināt vizuālo balss pastu."</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Joprojām varat piezvanīt, lai pārbaudītu balss pastu."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Nevar atjaunināt vizuālo balss pastu."</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Radās problēma"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Lūdzu, sazinieties ar klientu apkalpošanas dienestu, izmantojot tālāk norādīto tālruņa numuru, un nosauciet kļūdas kodu “9999”: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vizuālā balss pasta pakalpojumu sniegšanas noteikumi"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Lai izmantotu vizuālo balss pastu, jums ir jāpiekrīt Verizon Wireless pakalpojumu sniegšanas noteikumiem:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nJums ir jāpiekrīt Verizon Wireless pakalpojumu sniegšanas noteikumiem, lai izmantotu vizuālo balss pastu:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Ieslēgt vizuālo balss pastu"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ja tiks noraidīti pakalpojumu sniegšanas noteikumi, vizuālais balss pasts tiks atspējots."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Atspējot vizuālo balss pastu"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ja tiks noraidīti pakalpojumu sniegšanas noteikumi, balss pasta transkripcija tiks atspējota."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Atspējot balss pasta transkripciju"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Balss pasts būs pieejams, tikai zvanot uz numuru *86. Lai turpinātu, iestatiet jaunu balss pasta PIN."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN iestatīšana"</string>
 </resources>

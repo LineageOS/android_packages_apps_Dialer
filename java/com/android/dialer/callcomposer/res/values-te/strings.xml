@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"అనుమతించు"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"ఫోటోను తీయడానికి, కెమెరాకు ప్రాప్యతను అందించండి"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"చిత్రాన్ని భాగస్వామ్యం చేయడానికి, మీడియాకు ప్రాప్యతను అందించండి"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"చిత్రాన్ని తీస్తుంది"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"ఫోటోను ఎంచుకోండి"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"సందేశాన్ని పంపుతుంది"</string>
 </resources>

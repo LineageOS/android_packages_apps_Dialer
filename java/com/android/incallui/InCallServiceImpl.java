@@ -23,7 +23,6 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
@@ -82,7 +81,7 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
-    if (ConfigProviderBindings.get(this).getBoolean("enable_return_to_call_bubble", false)) {
+    if (ReturnToCallController.isEnabled(this)) {
       returnToCallController = new ReturnToCallController(this);
     }
 

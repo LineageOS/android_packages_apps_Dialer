@@ -80,6 +80,7 @@
     <string name="add_wait" msgid="1177723010768282578">"காத்திருப்பைச் சேர்"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"அமைப்பு"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"சிமுலேட்டர்"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"புதிய UI குறுக்குவழியை உருவாக்கு"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"எல்லா தொடர்புகளும்"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"டச் டோன் விசைப்பலகையைப் பயன்படுத்தவும்"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"செயலிலுள்ள அழைப்பிற்குத் திரும்பு"</string>
@@ -104,12 +105,14 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> வி"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> நிமிடம் <xliff:g id="SECONDS">%s</xliff:g> வினாடி"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"தொகுப்புச் செயல்கள் பயன்முறையை ரத்துசெய்யும்"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"குரலஞ்சல்"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"குரலஞ்சல்கள்"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"ஆம்"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"வேண்டாம்"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"நீக்கு"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"ரத்துசெய்"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"தேர்ந்தெடுத்த <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>ஐ நீக்கவா?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> தேர்ந்தெடுக்கப்பட்டன"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="other">"<b>"இந்தக் குரலஞ்சல்களை நீக்கவா? "</b>"</item>
+      <item quantity="one">"<b>"இந்தக் குரலஞ்சலை நீக்கவா? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> அன்று <xliff:g id="TIME">%2$s</xliff:g> மணிக்கு"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

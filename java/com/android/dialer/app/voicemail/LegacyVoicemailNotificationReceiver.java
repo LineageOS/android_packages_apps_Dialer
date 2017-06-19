@@ -27,7 +27,7 @@ import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import com.android.dialer.app.calllog.DefaultVoicemailNotifier;
+import com.android.dialer.app.calllog.LegacyVoicemailNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
@@ -35,7 +35,7 @@ import com.android.voicemail.VoicemailComponent;
 
 /**
  * Receives {@link TelephonyManager#ACTION_SHOW_VOICEMAIL_NOTIFICATION}, and forwards to {@link
- * DefaultVoicemailNotifier}. Will ignore the notification if the account has visual voicemail.
+ * LegacyVoicemailNotifier}. Will ignore the notification if the account has visual voicemail.
  * Legacy voicemail is the traditional, non-visual, dial-in voicemail.
  */
 @TargetApi(VERSION_CODES.O)
@@ -78,7 +78,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     if (count == 0) {
       LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "clearing notification");
-      new DefaultVoicemailNotifier(context).cancelLegacyNotification();
+      LegacyVoicemailNotifier.cancelNotification(context);
       return;
     }
 
@@ -99,14 +99,14 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
         intent.getParcelableExtra(TelephonyManager.EXTRA_LAUNCH_VOICEMAIL_SETTINGS_INTENT);
 
     LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "sending notification");
-    new DefaultVoicemailNotifier(context)
-        .notifyLegacyVoicemail(
-            phoneAccountHandle,
-            count,
-            voicemailNumber,
-            callVoicemailIntent,
-            voicemailSettingIntent,
-            intent.getBooleanExtra(EXTRA_IS_REFRESH, false));
+    LegacyVoicemailNotifier.showNotification(
+        context,
+        phoneAccountHandle,
+        count,
+        voicemailNumber,
+        callVoicemailIntent,
+        voicemailSettingIntent,
+        intent.getBooleanExtra(EXTRA_IS_REFRESH, false));
   }
 
   private static boolean hasVoicemailCountChanged(

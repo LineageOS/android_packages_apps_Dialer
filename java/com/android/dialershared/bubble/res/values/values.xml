@@ -16,12 +16,10 @@
   -->
 
 <resources>
-  <dimen name="bubble_safe_margin_x">0dp</dimen>
-  <dimen name="bubble_safe_margin_y">0dp</dimen>
-  <dimen name="bubble_initial_offset_x">0dp</dimen>
-  <dimen name="bubble_initial_offset_y">120dp</dimen>
-  <dimen name="bubble_size">64dp</dimen>
-  <dimen name="bubble_icon_padding">20dp</dimen>
+  <dimen name="bubble_safe_margin_x">16dp</dimen>
+  <dimen name="bubble_safe_margin_y">64dp</dimen>
+  <dimen name="bubble_size">56dp</dimen>
+  <dimen name="bubble_icon_padding">16dp</dimen>
   <dimen name="bubble_move_elevation_change">4dp</dimen>
   <dimen name="bubble_shadow_padding_size">16dp</dimen>
 </resources>

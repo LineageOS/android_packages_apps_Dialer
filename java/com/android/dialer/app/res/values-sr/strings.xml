@@ -81,6 +81,7 @@
     <string name="add_wait" msgid="1177723010768282578">"Додај чекање"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"Подешавања"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"Симулатор"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Направите пречицу за нови UI"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"Сви контакти"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"Употребите бројчаник за тонско бирање"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Врати се на позив који је у току"</string>
@@ -105,12 +106,15 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"Откажите режим групних радњи"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"говорну поруку"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"говорне поруке"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Да"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Не"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Избриши"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Откажи"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Желите ли да избришете изабрану(е) <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"Изабраних: <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+      <item quantity="few">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+      <item quantity="other">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

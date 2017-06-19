@@ -31,7 +31,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.ArrayMap;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpEvents;

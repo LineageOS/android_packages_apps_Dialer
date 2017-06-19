@@ -19,7 +19,11 @@ package com.android.dialer.lightbringer.stub;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.telecom.Call;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
@@ -30,30 +34,67 @@ public class LightbringerStub implements Lightbringer {
   @Inject
   public LightbringerStub() {}
 
+  @MainThread
   @Override
-  public boolean isReachable(Context context, String number) {
+  public boolean isReachable(@NonNull Context context, @Nullable String number) {
+    Assert.isMainThread();
+    Assert.isNotNull(context);
     return false;
   }
 
+  @MainThread
   @Override
-  public Intent getIntent(Context context, String number) {
+  public boolean supportsUpgrade(@NonNull Context context, @Nullable String number) {
+    Assert.isMainThread();
+    Assert.isNotNull(context);
+    return false;
+  }
+
+  @MainThread
+  @Override
+  public Intent getIntent(@NonNull Context context, @NonNull String number) {
+    Assert.isMainThread();
+    Assert.isNotNull(context);
+    Assert.isNotNull(number);
     return null;
   }
 
+  @MainThread
   @Override
-  public void registerListener(LightbringerListener listener) {}
+  public void requestUpgrade(Call call) {
+    Assert.isMainThread();
+    Assert.isNotNull(call);
+  }
 
+  @MainThread
   @Override
-  public void unregisterListener(LightbringerListener listener) {}
+  public void registerListener(LightbringerListener listener) {
+    Assert.isMainThread();
+    Assert.isNotNull(listener);
+  }
 
+  @MainThread
   @Override
-  public ComponentName getPhoneAccountComponentName(Context context) {
+  public void unregisterListener(LightbringerListener listener) {
+    Assert.isMainThread();
+    Assert.isNotNull(listener);
+  }
+
+  @Nullable
+  @Override
+  public ComponentName getPhoneAccountComponentName() {
+    return null;
+  }
+
+  @Nullable
+  @Override
+  public PhoneAccountHandle getPhoneAccountHandle() {
     return null;
   }
 
   @NonNull
   @Override
-  public String getPackageName(@NonNull Context context) {
-    throw Assert.createUnsupportedOperationFailException();
+  public String getPackageName() {
+    return "";
   }
 }

@@ -17,15 +17,18 @@ package com.android.dialer.calllog.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +67,9 @@ public class Coalescer {
     // Note: This method relies on rowsShouldBeCombined to determine which rows should be combined,
     // but delegates to data sources to actually aggregate column values.
 
+    DialerPhoneNumberUtil dialerPhoneNumberUtil =
+        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+
     MatrixCursor allCoalescedRowsMatrixCursor =
         new MatrixCursor(
             CoalescedAnnotatedCallLog.ALL_COLUMNS,
@@ -75,9 +81,8 @@ public class Coalescer {
       List<ContentValues> currentRowGroup = new ArrayList<>();
 
       do {
-        ContentValues currentRow = new ContentValues();
-        DatabaseUtils.cursorRowToContentValues(
-            allAnnotatedCallLogRowsSortedByTimestampDesc, currentRow);
+        ContentValues currentRow =
+            cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
 
         if (currentRowGroup.isEmpty()) {
           currentRowGroup.add(currentRow);
@@ -86,7 +91,7 @@ public class Coalescer {
 
         ContentValues previousRow = currentRowGroup.get(currentRowGroup.size() - 1);
 
-        if (!rowsShouldBeCombined(previousRow, currentRow)) {
+        if (!rowsShouldBeCombined(dialerPhoneNumberUtil, previousRow, currentRow)) {
           ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
           coalescedRow.put(CoalescedAnnotatedCallLog.NUMBER_CALLS, currentRowGroup.size());
           addContentValuesToMatrixCursor(
@@ -104,13 +109,46 @@ public class Coalescer {
     return allCoalescedRowsMatrixCursor;
   }
 
+  private static ContentValues cursorRowToContentValues(Cursor cursor) {
+    ContentValues values = new ContentValues();
+    String[] columns = cursor.getColumnNames();
+    int length = columns.length;
+    for (int i = 0; i < length; i++) {
+      if (cursor.getType(i) == Cursor.FIELD_TYPE_BLOB) {
+        values.put(columns[i], cursor.getBlob(i));
+      } else {
+        values.put(columns[i], cursor.getString(i));
+      }
+    }
+    return values;
+  }
+
   /**
    * @param row1 a row from {@link AnnotatedCallLog}
    * @param row2 a row from {@link AnnotatedCallLog}
    */
-  private static boolean rowsShouldBeCombined(ContentValues row1, ContentValues row2) {
+  private static boolean rowsShouldBeCombined(
+      DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
     // TODO: Real implementation.
-    return row1.get(AnnotatedCallLog.TIMESTAMP).equals(row2.get(AnnotatedCallLog.TIMESTAMP));
+    DialerPhoneNumber number1;
+    DialerPhoneNumber number2;
+    try {
+      number1 = DialerPhoneNumber.parseFrom(row1.getAsByteArray(AnnotatedCallLog.NUMBER));
+      number2 = DialerPhoneNumber.parseFrom(row2.getAsByteArray(AnnotatedCallLog.NUMBER));
+    } catch (InvalidProtocolBufferException e) {
+      throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
+    }
+
+    if (!number1.hasDialerInternalPhoneNumber() && !number2.hasDialerInternalPhoneNumber()) {
+      // Empty numbers should not be combined.
+      return false;
+    }
+
+    if (!number1.hasDialerInternalPhoneNumber() || !number2.hasDialerInternalPhoneNumber()) {
+      // An empty number should not be combined with a non-empty number.
+      return false;
+    }
+    return dialerPhoneNumberUtil.isExactMatch(number1, number2);
   }
 
   /**

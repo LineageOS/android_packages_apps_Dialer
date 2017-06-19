@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> වෙතින් මඟ හැරුණු ඇමතුම"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"කරගෙනය යන ඇමතුම"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"කරගෙන යන කාර්යාල ඇමතුම"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"දැනට ක්‍රියාත්මක Wi-Fi ඇමතුම"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"කරගෙන යන Wi-Fi කාර්යාල ඇමතුම"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"කරගෙන යන Wi-Fi ඇමතුම"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"කරගෙන යන Wi-Fi කාර්යාල ඇමතුම"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"රඳවා ගනිමින්"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"එන ඇමතුම"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ඡායාරූපය සමග එන ඇමතුම"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ඡායාරූපය, පණිවිඩය සහ ස්ථානය සමග වැදගත් එන ඇමතුම"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ඇමුණුම් සමග වැදගත් එන ඇමතුම"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"පැමිණෙන කාර්යාල ඇමතුම"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"පැමිණෙන Wi-Fi ඇමතුම"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"පැමිණෙන Wi-Fi කාර්යාල ඇමතුම"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"එන Wi-Fi ඇමතුම"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"එන Wi-Fi කාර්යාල ඇමතුම"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"එන සැකසහිත අයාචිත තැපැල් ඇමතුම"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"පැමිණෙන වීඩියෝ ඉල්ලීම"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"සේවාව නැත"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"වීඩියෝ ඇමතුම ගන්න"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"ඇමතුමක් ගැනීමට, මුලින්ම ගුවන්යානා ආකාරය අක්‍රිය කරන්න."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"ජාලය මත ලියාපදිංචි වී නැත."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"සෙලියුලර් ජාලය නොමැත"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"ජංගම ජාලය නොමැත."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ඇමතුමක් ලබාගැනීමට, වලංගු අංකයක් ලබාගන්න."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"ඇමතුම් ගැනීමට නොහැක."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI අනුපිළිවෙල ආරම්භ කරමින්…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ඇමතුම අවසන් කරන්න"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"සම්මන්ත්‍රණ ඇමතුම"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"ඇමතුමක"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"සෙලියුලර් දත්ත භාවිතයෙන් ඇමතුම දිගටම කරගෙන යමින්…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi ජාලය වෙත මාරු කිරීමට නොහැකි විය"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"වීඩියෝ ඇමතුම සෙලියුලර් ජාලයේ පවතිනු ඇත. සම්මත දත්ත ගාස්තු අදාළ විය හැකිය."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ජංගම දත්ත භාවිතයෙන් ඇමතුම දිගටම කරගෙන යමින්…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi ජාලය වෙත මාරු කිරීමට නොහැකි විය"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"වීඩියෝ ඇමතුම ජංගම ජාලයේ පවතිනු ඇත. සම්මත දත්ත ගාස්තු අදාළ විය හැකිය."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"නැවත මෙය නොපෙන්වන්න"</string>
 </resources>

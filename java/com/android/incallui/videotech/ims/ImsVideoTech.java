@@ -18,6 +18,7 @@ package com.android.incallui.videotech.ims;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -118,6 +119,9 @@ public class ImsVideoTech implements VideoTech {
     }
     previousVideoState = newVideoState;
   }
+
+  @Override
+  public void onRemovedFromCallList() {}
 
   @Override
   public int getSessionModificationState() {
@@ -233,7 +237,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void setCamera(String cameraId) {
+  public void setCamera(@Nullable String cameraId) {
     call.getVideoCall().setCamera(cameraId);
     call.getVideoCall().requestCameraCapabilities();
   }

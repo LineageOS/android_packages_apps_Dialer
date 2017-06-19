@@ -98,11 +98,11 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
       // Couldn't get exif tags, not the end of the world
     }
 
+    ExifInterface.OrientationParams params = ExifInterface.getOrientationParams(orientation);
     Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
     final int clippedWidth;
     final int clippedHeight;
-    boolean invert = ExifInterface.getOrientationParams(orientation).invertDimensions;
-    if (invert) {
+    if (params.invertDimensions) {
       Assert.checkState(mWidth == bitmap.getHeight());
       Assert.checkState(mHeight == bitmap.getWidth());
       clippedWidth = (int) (mHeight * mHeightPercent);
@@ -120,7 +120,7 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
     mHeight = clippedHeight;
 
     Matrix matrix = new Matrix();
-    matrix.postRotate(invert ? 90 : 0);
+    matrix.postRotate(params.rotation);
 
     Bitmap clippedBitmap =
         Bitmap.createBitmap(

@@ -19,6 +19,7 @@ package com.android.dialer.app.calllog;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -52,7 +53,6 @@ import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.dialer.app.Bindings;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
@@ -66,10 +66,10 @@ import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -80,6 +80,8 @@ import com.android.dialer.lightbringer.LightbringerListener;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -119,6 +121,7 @@ public class CallLogAdapter extends GroupingListAdapter
   protected final CallLogCache mCallLogCache;
 
   private final CallFetcher mCallFetcher;
+  private final OnActionModeStateChangedListener mActionModeStateChangedListener;
   private final MultiSelectRemoveView mMultiSelectRemoveView;
   @NonNull private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
   private final int mActivityType;
@@ -159,6 +162,7 @@ public class CallLogAdapter extends GroupingListAdapter
           MenuInflater inflater = mode.getMenuInflater();
           inflater.inflate(R.menu.actionbar_delete, menu);
           mMultiSelectRemoveView.showMultiSelectRemoveView(true);
+          mActionModeStateChangedListener.onActionModeStateChanged(true);
           return true;
         }
 
@@ -173,6 +177,7 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
           if (item.getItemId() == R.id.action_bar_delete_menu_item) {
+            Logger.get(mActivity).logImpression(DialerImpression.Type.MULTISELECT_TAP_DELETE_ICON);
             if (selectedItems.size() > 0) {
               showDeleteSelectedItemsDialog();
             }
@@ -195,52 +200,68 @@ public class CallLogAdapter extends GroupingListAdapter
           selectAllMode = false;
           deselectAllMode = false;
           mMultiSelectRemoveView.showMultiSelectRemoveView(false);
+          mActionModeStateChangedListener.onActionModeStateChanged(false);
           notifyDataSetChanged();
         }
       };
 
-  // Todo (uabdullah): Use plurals http://b/37751831
   private void showDeleteSelectedItemsDialog() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-    Assert.checkArgument(selectedItems.size() > 0);
-    String voicemailString =
-        selectedItems.size() == 1
-            ? mActivity.getResources().getString(R.string.voicemailMultiSelectVoicemail)
-            : mActivity.getResources().getString(R.string.voicemailMultiSelectVoicemails);
-    String deleteVoicemailTitle =
-        mActivity
-            .getResources()
-            .getString(R.string.voicemailMultiSelectDialogTitle, voicemailString);
     SparseArray<String> voicemailsToDeleteOnConfirmation = selectedItems.clone();
-    builder.setTitle(deleteVoicemailTitle);
-
-    builder.setPositiveButton(
-        mActivity.getResources().getString(R.string.voicemailMultiSelectDeleteConfirm),
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int id) {
-            deleteSelectedItems(voicemailsToDeleteOnConfirmation);
-            mActionMode.finish();
-            dialog.cancel();
-          }
-        });
-
-    builder.setNegativeButton(
-        mActivity.getResources().getString(R.string.voicemailMultiSelectDeleteCancel),
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int id) {
-            dialog.cancel();
-          }
-        });
-
-    AlertDialog dialog = builder.create();
-    dialog.show();
+    new AlertDialog.Builder(mActivity, R.style.AlertDialogCustom)
+        .setCancelable(true)
+        .setTitle(
+            mActivity
+                .getResources()
+                .getQuantityString(
+                    R.plurals.delete_voicemails_confirmation_dialog_title, selectedItems.size()))
+        .setPositiveButton(
+            R.string.voicemailMultiSelectDeleteConfirm,
+            new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(final DialogInterface dialog, final int button) {
+                LogUtil.i(
+                    "CallLogAdapter.showDeleteSelectedItemsDialog",
+                    "onClick, these items to delete " + voicemailsToDeleteOnConfirmation);
+                deleteSelectedItems(voicemailsToDeleteOnConfirmation);
+                mActionMode.finish();
+                dialog.cancel();
+                Logger.get(mActivity)
+                    .logImpression(
+                        DialerImpression.Type.MULTISELECT_DELETE_ENTRY_VIA_CONFIRMATION_DIALOG);
+              }
+            })
+        .setOnCancelListener(
+            new OnCancelListener() {
+              @Override
+              public void onCancel(DialogInterface dialogInterface) {
+                Logger.get(mActivity)
+                    .logImpression(
+                        DialerImpression.Type
+                            .MULTISELECT_CANCEL_CONFIRMATION_DIALOG_VIA_CANCEL_TOUCH);
+                dialogInterface.cancel();
+              }
+            })
+        .setNegativeButton(
+            R.string.voicemailMultiSelectDeleteCancel,
+            new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(final DialogInterface dialog, final int button) {
+                Logger.get(mActivity)
+                    .logImpression(
+                        DialerImpression.Type
+                            .MULTISELECT_CANCEL_CONFIRMATION_DIALOG_VIA_CANCEL_BUTTON);
+                dialog.cancel();
+              }
+            })
+        .show();
+    Logger.get(mActivity)
+        .logImpression(DialerImpression.Type.MULTISELECT_DISPLAY_DELETE_CONFIRMATION_DIALOG);
   }
 
   private void deleteSelectedItems(SparseArray<String> voicemailsToDelete) {
     for (int i = 0; i < voicemailsToDelete.size(); i++) {
       String voicemailUri = voicemailsToDelete.get(voicemailsToDelete.keyAt(i));
+      LogUtil.i("CallLogAdapter.deleteSelectedItems", "deleting uri:" + voicemailUri);
       CallLogAsyncTaskUtil.deleteVoicemail(mActivity, Uri.parse(voicemailUri), null);
     }
   }
@@ -254,8 +275,13 @@ public class CallLogAdapter extends GroupingListAdapter
               && mVoicemailPlaybackPresenter != null) {
             if (v.getId() == R.id.primary_action_view || v.getId() == R.id.quick_contact_photo) {
               if (mActionMode == null) {
+                Logger.get(mActivity)
+                    .logImpression(
+                        DialerImpression.Type.MULTISELECT_LONG_PRESS_ENTER_MULTI_SELECT_MODE);
                 mActionMode = v.startActionMode(mActionModeCallback);
               }
+              Logger.get(mActivity)
+                  .logImpression(DialerImpression.Type.MULTISELECT_LONG_PRESS_TAP_ENTRY);
               CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
               viewHolder.quickContactView.setVisibility(View.GONE);
               viewHolder.checkBoxView.setVisibility(View.VISIBLE);
@@ -272,6 +298,8 @@ public class CallLogAdapter extends GroupingListAdapter
       new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+          PerformanceReport.recordClick(UiAction.Type.CLICK_CALL_LOG_ITEM);
+
           CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
           if (viewHolder == null) {
             return;
@@ -282,8 +310,12 @@ public class CallLogAdapter extends GroupingListAdapter
             mMultiSelectRemoveView.setSelectAllModeToFalse();
             int id = getVoicemailId(viewHolder.voicemailUri);
             if (selectedItems.get(id) != null) {
+              Logger.get(mActivity)
+                  .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_UNSELECT_ENTRY);
               uncheckMarkCallLogEntry(viewHolder, id);
             } else {
+              Logger.get(mActivity)
+                  .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_SELECT_ENTRY);
               checkMarkCallLogEntry(viewHolder);
             }
             return;
@@ -343,6 +375,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
   private void updateActionBar() {
     if (mActionMode == null && selectedItems.size() > 0) {
+      Logger.get(mActivity)
+          .logImpression(DialerImpression.Type.MULTISELECT_ROTATE_AND_SHOW_ACTION_MODE);
       mActivity.startActionMode(mActionModeCallback);
     }
     if (mActionMode != null) {
@@ -413,6 +447,7 @@ public class CallLogAdapter extends GroupingListAdapter
       ViewGroup alertContainer,
       CallFetcher callFetcher,
       MultiSelectRemoveView multiSelectRemoveView,
+      OnActionModeStateChangedListener actionModeStateChangedListener,
       CallLogCache callLogCache,
       ContactInfoCache contactInfoCache,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,
@@ -422,6 +457,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     mActivity = activity;
     mCallFetcher = callFetcher;
+    mActionModeStateChangedListener = actionModeStateChangedListener;
     mMultiSelectRemoveView = multiSelectRemoveView;
     mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
     if (mVoicemailPlaybackPresenter != null) {
@@ -484,12 +520,23 @@ public class CallLogAdapter extends GroupingListAdapter
     outState.putLong(KEY_EXPANDED_ROW_ID, mCurrentlyExpandedRowId);
 
     ArrayList<String> listOfSelectedItems = new ArrayList<>();
+
     if (selectedItems.size() > 0) {
       for (int i = 0; i < selectedItems.size(); i++) {
-        listOfSelectedItems.add(Integer.toString(selectedItems.keyAt(i)));
+        int id = selectedItems.keyAt(i);
+        String voicemailUri = selectedItems.valueAt(i);
+        LogUtil.i(
+            "CallLogAdapter.onSaveInstanceState", "index %d, id=%d, uri=%s ", i, id, voicemailUri);
+        listOfSelectedItems.add(voicemailUri);
       }
     }
     outState.putStringArrayList(KEY_ACTION_MODE, listOfSelectedItems);
+
+    LogUtil.i(
+        "CallLogAdapter.onSaveInstanceState",
+        "saved: %d, selectedItemsSize:%d",
+        listOfSelectedItems.size(),
+        selectedItems.size());
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -498,16 +545,31 @@ public class CallLogAdapter extends GroupingListAdapter
           savedInstanceState.getInt(KEY_EXPANDED_POSITION, RecyclerView.NO_POSITION);
       mCurrentlyExpandedRowId =
           savedInstanceState.getLong(KEY_EXPANDED_ROW_ID, NO_EXPANDED_LIST_ITEM);
-
       // Restoring multi selected entries
       ArrayList<String> listOfSelectedItems =
           savedInstanceState.getStringArrayList(KEY_ACTION_MODE);
+      LogUtil.i(
+          "CallLogAdapter.onRestoreInstanceState",
+          "restored selectedItemsList:%d",
+          listOfSelectedItems.size());
+
       if (!listOfSelectedItems.isEmpty()) {
         for (int i = 0; i < listOfSelectedItems.size(); i++) {
-          String voicemailId = listOfSelectedItems.get(i);
-          int id = Integer.parseInt(voicemailId);
-          selectedItems.put(id, voicemailId);
+          String voicemailUri = listOfSelectedItems.get(i);
+          int id = getVoicemailId(voicemailUri);
+          LogUtil.i(
+              "CallLogAdapter.onRestoreInstanceState",
+              "restoring selected index %d, id=%d, uri=%s ",
+              i,
+              id,
+              voicemailUri);
+          selectedItems.put(id, voicemailUri);
         }
+
+        LogUtil.i(
+            "CallLogAdapter.onRestoreInstance",
+            "restored selectedItems %s",
+            selectedItems.toString());
         updateActionBar();
       }
     }
@@ -597,6 +659,7 @@ public class CallLogAdapter extends GroupingListAdapter
             mBlockReportSpamListener,
             mExpandCollapseListener,
             mLongPressListener,
+            mActionModeStateChangedListener,
             mCallLogCache,
             mCallLogListItemHelper,
             mVoicemailPlaybackPresenter);
@@ -622,7 +685,7 @@ public class CallLogAdapter extends GroupingListAdapter
     Trace.beginSection("onBindViewHolder: " + position);
     switch (getItemViewType(position)) {
       case VIEW_TYPE_ALERT:
-        //Do nothing
+        // Do nothing
         break;
       default:
         bindCallLogListViewHolder(viewHolder, position);
@@ -931,8 +994,7 @@ public class CallLogAdapter extends GroupingListAdapter
               details.countryIso,
               details.cachedContactInfo,
               position
-                  < Bindings.get(mActivity)
-                      .getConfigProvider()
+                  < ConfigProviderBindings.get(mActivity)
                       .getLong("number_of_call_to_do_remote_lookup", 5L));
     }
     CharSequence formattedNumber =
@@ -1316,6 +1378,14 @@ public class CallLogAdapter extends GroupingListAdapter
   public interface CallFetcher {
 
     void fetchCalls();
+  }
+
+  /** Interface used to allow single tap multi select for contact photos. */
+  public interface OnActionModeStateChangedListener {
+
+    void onActionModeStateChanged(boolean isEnabled);
+
+    boolean isActionModeStateEnabled();
   }
 
   /** Interface used to hide the fragments. */

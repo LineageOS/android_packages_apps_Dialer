@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਕਿਰਿਆਸ਼ੀਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ਜਦੋਂ ਤੱਕ ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਪੂਰੀ ਤਰ੍ਹਾਂ ਕਿਰਿਆਸ਼ੀਲ ਨਹੀਂ ਹੋ ਜਾਂਦੀ, ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਵੌਇਸਮੇਲ ਸੂਚਨਾਵਾਂ ਪ੍ਰਾਪਤ ਨਾ ਹੋਣ। ਵੌਇਸਮੇਲ ਦੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਕਿਰਿਆਸ਼ੀਲ ਹੋਣ ਤੱਕ ਨਵੇਂ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਵੌਇਸਮੇਲ ਨੂੰ ਕਾਲ ਕਰੋ।"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਫ਼ੋਨ ਵਿੱਚ ਸੈਲਿਊਲਰ ਕਨੈਕਸ਼ਨ ਹੈ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਫ਼ੋਨ \'ਤੇ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ ਹੈ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ਹਵਾਈ ਜਹਾਜ਼ ਮੋਡ ਬੰਦ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ਕੋਈ ਕਨੈਕਸ਼ਨ ਨਹੀਂ"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ਤੁਹਾਨੂੰ ਨਵੀਆਂ ਵੌਇਸਮੇਲਾਂ ਲਈ ਸੂਚਿਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ। ਜੇਕਰ ਤੁਸੀਂ Wi-Fi \'ਤੇ ਹੋ, ਤਾਂ ਹੁਣੇ ਸਮਕਾਲੀਕਰਨ ਕਰਨ ਦੁਆਰਾ ਵੌਇਸਮੇਲਾਂ ਦੀ ਜਾਂਚ ਕਰ ਸਕਦੇ ਹੋ।"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"ਤੁਹਾਨੂੰ ਨਵੀਆਂ ਵੌਇਸਮੇਲਾਂ ਲਈ ਸੂਚਿਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ। ਜੇਕਰ ਤੁਸੀਂ Wi-Fi \'ਤੇ ਹੋ, ਤਾਂ ਹੁਣੇ ਸਮਕਾਲੀਕਰਨ ਕਰਕੇ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ਤੁਹਾਨੂੰ ਨਵੀਆਂ ਵੌਇਸਮੇਲਾਂ ਲਈ ਸੂਚਿਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ। ਆਪਣੀਆਂ ਵੌਇਸਮੇਲਾਂ ਸਮਕਾਲੀਕਿਰਤ ਕਰਨ ਲਈ ਹਵਾਈ ਜਹਾਜ਼ ਮੋਡ ਬੰਦ ਕਰੋ।"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ਵੌਇਸਮੇਲਾਂ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਇੱਕ ਸੈਲਿਊਲਰ ਕਨੈਕਸ਼ਨ ਦੀ ਲੋੜ ਹੈ।"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਇੱਕ ਸੈਲਿਊਲਰ ਕਨੈਕਸ਼ਨ ਦੀ ਲੋੜ ਹੈ।"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ਤੁਹਾਡੇ Wi-Fi ਜਾਂ ਸੈਲਿਊਲਰ ਕਨੈਕਸ਼ਨ ਦੇ ਬਿਹਤਰ ਹੋਣ \'ਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ਤੁਹਾਡੇ ਸੈਲਿਊਲਰ ਡੈਟਾ ਕਨੈਕਸ਼ਨ ਦੇ ਬਿਹਤਰ ਹੋਣ \'ਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ਤੁਹਾਡੇ Wi-Fi ਜਾਂ ਮੋਬਾਈਲ ਡੈਟਾ ਕਨੈਕਸ਼ਨ ਦੇ ਬਿਹਤਰ ਹੋਣ \'ਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ਤੁਹਾਡੇ ਮੋਬਾਈਲ ਡੈਟਾ ਕਨੈਕਸ਼ਨ ਦੇ ਬਿਹਤਰ ਹੋਣ \'ਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ਤੁਸੀਂ ਹਾਲੇ ਵੀ ਵੌਇਸਮੇਲ ਦੀ ਜਾਂਚ ਕਰਨ ਲਈ ਕਾਲ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"ਕਿਰਪਾ ਕਰਕੇ <xliff:g id="NUMBER">%1$s</xliff:g> \'ਤੇ ਗਾਹਕ ਸੇਵਾ ਨੂੰ ਸੰਪਰਕ ਕਰੋ ਅਤੇ ਉਹਨਾਂ ਨੂੰ ਦੱਸੋ ਕਿ ਗੜਬੜ ਕੋਡ 9999 ਹੈ।"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ਵਿਜੁਅਲ ਵੌਇਸਮੇਲ ਮਦਾਂ ਅਤੇ ਸ਼ਰਤਾਂ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਨੂੰ ਵਰਤਣ ਲਈ ਤੁਸੀਂ ਲਾਜ਼ਮੀ ਤੌਰ \'ਤੇ Verizon ਵਾਇਰਲੈੱਸ ਦੀਆਂ ਮਦਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ ਨੂੰ ਵਰਤਣ ਲਈ ਤੁਸੀਂ ਲਾਜ਼ਮੀ ਤੌਰ \'ਤੇ Verizon ਵਾਇਰਲੈੱਸ ਦੀਆਂ ਮਦਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"ਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ ਨੂੰ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਅਯੋਗ ਹੋ ਜਾਵੇਗੀ ਜੇਕਰ ਮਦਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨੂੰ ਅਸਵੀਕਾਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ਵਿਜ਼ੁਅਲ ਵੌਇਸਮੇਲ ਅਯੋਗ ਬਣਾਓ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"ਵੌਇਸਮੇਲ ਪ੍ਰਤਿਲਿਪੀ ਅਯੋਗ ਹੋ ਜਾਵੇਗੀ ਜੇਕਰ ਮਦਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਨੂੰ ਅਸਵੀਕਾਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"ਵੌਇਸਮੇਲ ਪ੍ਰਤਿਲਿਪੀ ਨੂੰ ਅਯੋਗ ਬਣਾਓ"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"ਵੌਇਸਮੇਲ ਸਿਰਫ਼ *86 \'ਤੇ ਕਾਲ ਕਰਨ ਦੁਆਰਾ ਪਹੁੰਚਯੋਗ ਹੋਵੇਗੀ। ਜਾਰੀ ਰੱਖਣ ਲਈ ਇੱਕ ਨਵਾਂ ਵੌਇਸਮੇਲ PIN ਸੈੱਟ ਕਰੋ।"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN ਸੈੱਟ ਕਰੋ"</string>
 </resources>

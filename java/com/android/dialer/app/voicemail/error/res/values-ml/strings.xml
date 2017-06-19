@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"വിഷ്വൽ വോയ്‌സ്മെയിൽ സജീവമാക്കുന്നു"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ പൂർണ്ണമായും സജീവമാകുന്നത് വരെ നിങ്ങൾക്ക് വോയ്‌സ്‌മെയിൽ അറിയിപ്പുകൾ ലഭിക്കാനിടയില്ല. വോയ്‌സ്‌മെയിൽ പൂർണ്ണമായും സജീവമാകുന്നത് വരെ പുതിയ സന്ദേശങ്ങൾ വീണ്ടെടുക്കാൻ വോയ്‌സ്‌മെയിലിലേക്ക് വിളിക്കുക."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാനാവുന്നില്ല"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"നിങ്ങളുടെ ഫോണിന് സെല്ലുലാർ കണക്ഷനുണ്ടെന്ന് ഉറപ്പാക്കി, വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"നിങ്ങളുടെ ഫോണിന് മൊബൈൽ നെറ്റ്‌വർക്ക് കണക്ഷനുണ്ടെന്ന് ഉറപ്പാക്കിയശേഷം വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കി, വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"കണക്ഷൻ ഇല്ല"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ വരുമ്പോൾ നിങ്ങളെ അറിയിക്കില്ല. നിങ്ങൾ Wi-Fi ഉപയോഗിക്കുകയാണെങ്കിൽ, ഇപ്പോൾ സമന്വയിപ്പിക്കുന്നതിലൂടെ വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാനാവും."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ വരുമ്പോൾ നിങ്ങളെ അറിയിക്കില്ല. നിങ്ങൾ വൈഫൈ ഉപയോഗിക്കുകയാണെങ്കിൽ, ഇപ്പോൾ സമന്വയിപ്പിക്കുന്നതിലൂടെ വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാനാവും."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"പുതിയ വോയ്‌സ്‌മെയിലുകൾ വരുമ്പോൾ നിങ്ങളെ അറിയിക്കില്ല. വോയ്‌സ്‌മെയിൽ സമന്വയിപ്പിക്കാൻ ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ നിങ്ങളുടെ ഫോണിന് ഒരു സെല്ലുലാർ ഡാറ്റ കണക്ഷൻ ആവശ്യമാണ്."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ നിങ്ങളുടെ ഫോണിന് ഒരു മൊബൈൽ ഡാറ്റ കണക്ഷൻ ആവശ്യമാണ്."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ സജീവമാക്കാനാവുന്നില്ല"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട Wi-Fi അല്ലെങ്കിൽ സെല്ലുലാർ കണക്ഷൻ ലഭിക്കുമ്പോൾ, വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട സെല്ലുലാർ ഡാറ്റ കണക്ഷൻ ലഭിക്കുമ്പോൾ വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട വൈഫൈ അല്ലെങ്കിൽ മൊബൈൽ ഡാറ്റ കണക്ഷൻ ലഭിക്കുമ്പോൾ, വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"നിങ്ങൾക്ക് മെച്ചപ്പെട്ട മൊബൈൽ ഡാറ്റ കണക്ഷൻ ലഭിക്കുമ്പോൾ വീണ്ടും ശ്രമിക്കുക. വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"വോയ്‌സ്‌മെയിൽ പരിശോധിക്കാൻ തുടർന്നും നിങ്ങൾക്ക് കോൾ ചെയ്യാനാവും."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുചെയ്യാനാകുന്നില്ല"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"എന്തോ കുഴപ്പം സംഭവിച്ചു"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"<xliff:g id="NUMBER">%1$s</xliff:g>-ൽ ഉപയോക്തൃ സേവനവുമായി ബന്ധപ്പെട്ട്, പിശക് കോഡ് 9999 ആണെന്ന് പറയുക."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"വിഷ്വൽ വോയ്‌സ് മെയിൽ നിബന്ധനകളും വ്യവസ്ഥകളും"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"വിഷ്വൽ വോയ്‌സ് മെയിൽ ഉപയോഗിക്കാൻ, നിങ്ങൾ Verizon Wireless-ന്റെ നിബന്ധനകളും വ്യവസ്ഥകളും അംഗീകരിക്കേണ്ടതുണ്ട്:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nവിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഉപയോഗിക്കുന്നതിന് നിങ്ങൾ Verizon Wireless-ന്റെ നിബന്ധനകളും വ്യവസ്ഥകളും അംഗീകരിക്കേണ്ടതുണ്ട്:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ഓണാക്കുക"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"നിബന്ധനകളും വ്യവസ്ഥകളും നിരസിക്കപ്പെട്ടാൽ വിഷ്വൽ വോയ്‌സ്‌ മെയിൽ പ്രവർത്തനരഹിതമാവും."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"വിഷ്വൽ വോയ്‌സ്‌‌മെയിൽ പ്രവർത്തനരഹിതമാക്കുക"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"നിബന്ധനകളും വ്യവസ്ഥകളും നിരസിക്കപ്പെടുകയാണെങ്കിൽ വിഷ്വൽ വോയ്‌സ്‌മെയിൽ ട്രാൻസ്‌ക്രിപ്‌ഷൻ പ്രവർത്തനരഹിതമാക്കും."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"വോയ്‌സ്‌മെയിൽ ട്രാൻസ്‌ക്രിപ്‌ഷൻ പ്രവർത്തനരഹിതമാക്കുക"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*86-ൽ വിളിച്ച്‌ മാത്രമേ വോയ്‌സ്‌മെയിൽ ആക്‌സസ്‌ ചെയ്യാനാവൂ. തുടരാൻ, പുതിയൊരു വോയ്‌സ്‌മെയിൽ പിൻ‌ നമ്പർ‌ സജ്ജമാക്കുക."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"പിൻ സജ്ജമാക്കുക"</string>
 </resources>

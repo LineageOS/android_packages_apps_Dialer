@@ -2,9 +2,10 @@ syntax = "proto2";
 
 option java_package = "com.android.dialer.callintent";
 option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
 
 package com.android.dialer.callintent;
-option optimize_for = LITE_RUNTIME;
+
 
 // The type of speed call contact (favorites). Applies to initiation type
 // SPEED_DIAL only.
@@ -16,3 +17,4 @@ message SpeedDialContactType {
     FREQUENT_CONTACT = 3;
   }
 }
+

@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"දෘශ්‍ය හඬ තැපෑල ක්‍රියාත්මක කිරීම"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"දෘශ්‍ය හඬ තැපෑල සම්පූර්ණයෙන් සක්‍රිය කරන තෙක් ඔබට හඩ තැපැල් දැනුම් දීම් නොලැබීමට හැකිය. දෘශ්‍ය හඬ තැපෑල සම්පූර්ණයෙන් සක්‍රිය කරන තෙක් නව පණිවිඩ යළි ලබා ගැනීමට හඬ තැපෑල අමතන්න."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"දෘශ්‍ය හඬ තැපෑල ක්‍රියාත්මක කළ නොහැකිය"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ඔබේ දුරකථනයට සෙලියුලර් සම්බන්ධතාවක් ඇති බව පරීක්ෂා කර නැවත උත්සාහ කරන්න."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ඔබේ දුරකථනයට ජංගම ජාල සම්බන්ධතාවක් ඇති බව සහතික කරගෙන නැවත උත්සාහ කරන්න."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ගුවන් යානා ප්‍රකාරය ක්‍රියාවිරහිත කර නැවත උත්සාහ කරන්න."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"සම්බන්ධතාවය නැත"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ඔබට නව හඬ තැපැල් සඳහා දැනුම් දීම් නොලැබෙනු ඇත. ඔබ Wi-Fi මත සිටින්නේ නම්, ඔබට දැන් සමමුහුර්ත කිරීමෙන් හඬ තැපැල් සඳහා පරීක්ෂා කළ හැකිය."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"ඔබට නව හඬ තැපැල් සඳහා දැනුම් දීම් නොලැබෙනු ඇත. ඔබ Wi-Fi වල සිටින්නේ නම්, ඔබට දැන් සමමුහුර්ත කිරීමෙන් හඬ තැපෑල සඳහා පරීක්ෂා කළ හැකිය."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ඔබට නව හඬ තැපැල් සඳහා දැනුම් දීම් නොලැබෙනු ඇත. ඔබේ හඬ තැපැල් සමමුහුර්ත කිරීමට ගුවන් යානා ප්‍රකාරය ක්‍රියාවිරහිත කරන්න."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"හඬ තැපැල් පරීක්ෂා කිරීමට ඔබේ දුරකථනයට සෙලියුලර් දත්ත සබැඳුමක් අවශ්‍යය."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"හඬ තැපෑල පරීක්ෂා කිරීමට ඔබේ දුරකථනයට ජංගම දත්ත සම්බන්ධතාවක් අවශ්‍යයි."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"දෘශ්‍ය හඬ තැපෑල ක්‍රියාත්මක කළ නොහැකිය"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"දෘශ්‍ය හඬ තැපෑල යාවත්කාලීන කළ නොහැකිය"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ඔබේ Wi-Fi හෝ සෙලියුලර් සබැඳුම වඩා යහපත් විට නැවත උත්සාහ කරන්න. ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ඔබේ සෙලියුලර් දත්ත සබැඳුම වඩා යහපත් විට නැවත උත්සාහ කරන්න. ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ඔබේ Wi-Fi හෝ ජංගම දත්ත සම්බන්ධතාව වඩා යහපත් විට නැවත උත්සාහ කරන්න. ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ඔබේ ජංගම දත්ත සම්බන්ධතාව වඩා යහපත් විට නැවත උත්සාහ කරන්න. ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"දෘශ්‍ය හඬ තැපෑල යාවත්කාලීන කළ නොහැකිය"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ඔබට තවම හඬ තැපෑල පරීක්ෂා කිරීමට ඇමතිය හැකිය."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"දෘශ්‍ය හඬ තැපෑල යාවත්කාලීන කළ නොහැකිය"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"යම් දෙයක් වැරදිණි"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"කරුණාකර <xliff:g id="NUMBER">%1$s</xliff:g> අංකයට පාරිභෝගික සේවාව අමතා දෝෂ කේතය 9999 බව ඔවුන්ට පවසන්න."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"දෘශ්‍ය හඬ තැපෑල් නියම සහ කොන්දේසි"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ඔබ දෘශ්‍ය හඬ තැපෑල භාවිත කිරීමට Verizon Wireless හි නියම සහ කොන්දේසි පිළිගත යුතුය:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nඔබ දෘශ්‍ය හඬ තැපෑල භාවිත කිරීමට Verizon Wireless හි නියම සහ කොන්දේසි පිළිගත යුතුය:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"දෘශ්‍ය හඬ තැපෑල ක්‍රියාත්මක කරන්න"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"නියම සහ කොන්දේසි ප්‍රතික්ෂේප කර ඇති නම් දෘශ්‍ය හඬ තැපෑල අබල කරනු ඇත."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"දෘශ්‍ය හඬ තැපෑල අබල කරන්න"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"නියම සහ කොන්දේසි ප්‍රතික්ෂේප කර ඇති නම් හඬ තැපැල් පිටපත් කිරීම අබල කරනු ඇත."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"හඬ තැපැල් පිටපත් කිරීම අබල කරන්න"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"හඩ තැපෑල *86 වෙත ඇමතීමෙන් පමණක් ලබා ගත හැකිය. ඉදිරියට යාමට නව හඩ තැපැල් PIN එකක් පිහිටුවන්න."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN අංකය සකසන්න"</string>
 </resources>
