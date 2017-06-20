@@ -33,7 +33,6 @@ SRC_DIRS := \
 
 # Exclude files incompatible with AOSP.
 EXCLUDE_FILES := \
-	$(BASE_DIR)/dialer/calllog/testing/FakeCallLogApplication.java \
 	$(BASE_DIR)/incallui/calllocation/impl/AuthException.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationImpl.java \
 	$(BASE_DIR)/incallui/calllocation/impl/CallLocationModule.java \
@@ -53,6 +52,16 @@ EXCLUDE_FILES := \
 # Exclude testing only class, not used anywhere here
 EXCLUDE_FILES += \
 	$(BASE_DIR)/contacts/common/format/testing/SpannedTestUtils.java
+
+# Exclude build variants for now
+EXCLUDE_FILES += \
+	$(BASE_DIR)/dialer/buildtype/bugfood/BuildTypeAccessorImpl.java \
+	$(BASE_DIR)/dialer/buildtype/dogfood/BuildTypeAccessorImpl.java \
+	$(BASE_DIR)/dialer/buildtype/fishfood/BuildTypeAccessorImpl.java \
+	$(BASE_DIR)/dialer/buildtype/test/BuildTypeAccessorImpl.java \
+	$(BASE_DIR)/dialer/constants/googledialer/ConstantsImpl.java \
+	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerRootComponent.java \
+	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerApplication.java
 
 # All Dialers resources.
 # find . -type d -name "res" | uniq | sort
@@ -74,22 +83,23 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/contactactions/res \
 	$(BASE_DIR)/dialer/contactsfragment/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
+	$(BASE_DIR)/dialer/enrichedcall/simulator/res \
 	$(BASE_DIR)/dialer/interactions/res \
 	$(BASE_DIR)/dialer/main/impl/res \
 	$(BASE_DIR)/dialer/notification/res \
 	$(BASE_DIR)/dialer/oem/res \
 	$(BASE_DIR)/dialer/phonenumberutil/res \
 	$(BASE_DIR)/dialer/postcall/res \
+	$(BASE_DIR)/dialer/searchfragment/common/res \
 	$(BASE_DIR)/dialer/searchfragment/list/res \
 	$(BASE_DIR)/dialer/searchfragment/nearbyplaces/res \
-	$(BASE_DIR)/dialer/searchfragment/common/res \
+	$(BASE_DIR)/dialershared/bubble/res \
 	$(BASE_DIR)/dialer/shortcuts/res \
 	$(BASE_DIR)/dialer/speeddial/res \
 	$(BASE_DIR)/dialer/theme/res \
 	$(BASE_DIR)/dialer/util/res \
 	$(BASE_DIR)/dialer/voicemailstatus/res \
 	$(BASE_DIR)/dialer/widget/res \
-	$(BASE_DIR)/dialershared/bubble/res \
 	$(BASE_DIR)/incallui/answer/impl/affordance/res \
 	$(BASE_DIR)/incallui/answer/impl/answermethod/res \
 	$(BASE_DIR)/incallui/answer/impl/hint/res \
@@ -132,15 +142,17 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/contactactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/enrichedcall/simulator/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/main/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/oem/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/phonenumberutil/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/postcall/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/searchfragment/common/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/searchfragment/list/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/searchfragment/nearbyplaces/AndroidManifest.xml \
-	$(BASE_DIR)/dialer/searchfragment/common/AndroidManifest.xml \
+	$(BASE_DIR)/dialershared/bubble/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/shortcuts/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/simulator/impl/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/speeddial/AndroidManifest.xml \
@@ -148,7 +160,6 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/util/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/voicemailstatus/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/widget/AndroidManifest.xml \
-	$(BASE_DIR)/dialershared/bubble/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/answer/impl/affordance/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/answer/impl/AndroidManifest.xml \
@@ -166,8 +177,8 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
-	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/AndroidManifest.xml \
+	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
 
 
 # Merge all manifest files.
@@ -206,22 +217,23 @@ LOCAL_AAPT_FLAGS := \
         --extra-packages com.android.dialer.contactactions \
 	--extra-packages com.android.dialer.contactsfragment \
 	--extra-packages com.android.dialer.dialpadview \
+	--extra-packages com.android.dialer.enrichedcall.simulator \
 	--extra-packages com.android.dialer.interactions \
 	--extra-packages com.android.dialer.main.impl \
 	--extra-packages com.android.dialer.notification \
 	--extra-packages com.android.dialer.oem \
 	--extra-packages com.android.dialer.phonenumberutil \
 	--extra-packages com.android.dialer.postcall \
+	--extra-packages com.android.dialer.searchfragment.common \
 	--extra-packages com.android.dialer.searchfragment.list \
 	--extra-packages com.android.dialer.searchfragment.nearbyplaces \
-	--extra-packages com.android.dialer.searchfragment.common \
+	--extra-packages com.android.dialershared.bubble \
 	--extra-packages com.android.dialer.shortcuts \
 	--extra-packages com.android.dialer.speeddial \
 	--extra-packages com.android.dialer.theme \
 	--extra-packages com.android.dialer.util \
 	--extra-packages com.android.dialer.voicemailstatus \
 	--extra-packages com.android.dialer.widget \
-	--extra-packages com.android.dialershared.bubble \
 	--extra-packages com.android.incallui \
 	--extra-packages com.android.incallui.answer.impl \
 	--extra-packages com.android.incallui.answer.impl.affordance \
@@ -249,7 +261,8 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.voicemail.impl.fetch \
 	--extra-packages com.android.voicemail.impl.settings \
 	--extra-packages com.android.voicemail.settings \
-	--extra-packages me.leolin.shortcutbadger
+	--extra-packages me.leolin.shortcutbadger \
+
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
@@ -260,12 +273,12 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-disklrucache-target \
 	dialer-gifdecoder-target \
 	dialer-glide-target \
-	dialer-guava-target \
         dialer-grpc-all-target \
         dialer-grpc-core-target \
 	dialer-grpc-okhttp-target \
 	dialer-grpc-protobuf-lite-target \
         dialer-grpc-stub-target \
+	dialer-guava-target \
 	dialer-javax-annotation-api-target \
 	dialer-javax-inject-target \
 	dialer-libshortcutbadger-target \
@@ -285,18 +298,18 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-v7-recyclerview \
 
 LOCAL_JAVA_LIBRARIES := \
-	org.apache.http.legacy \
 	dialer-auto-value \
+	org.apache.http.legacy \
 
 # Libraries needed by the compiler (JACK) to generate code.
 PROCESSOR_LIBRARIES_TARGET := \
-	dialer-dagger2-compiler \
+	dialer-auto-value \
 	dialer-dagger2 \
+	dialer-dagger2-compiler \
 	dialer-dagger2-producers \
 	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
-	dialer-auto-value \
 
 # Resolve the jar paths.
 PROCESSOR_JARS := $(call java-lib-deps, $(PROCESSOR_LIBRARIES_TARGET))
@@ -352,16 +365,16 @@ PROCESSOR_JARS :=
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-    dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.7/dagger-compiler-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-auto-value:../../../prebuilts/tools/common/m2/repository/com/google/auto/value/auto-value/1.3/auto-value-1.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.7/dagger-compiler-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.7/dagger-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.7/dagger-producers-2.7$(COMMON_JAVA_PACKAGE_SUFFIX) \
-    dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-grpc-all:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-all/1.0.3/grpc-all-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-grpc-core:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-core/1.0.3/grpc-core-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-grpc-okhttp:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-okhttp/1.0.3/grpc-okhttp-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-grpc-protobuf-lite:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-protobuf-lite/1.0.3/grpc-protobuf-lite-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-grpc-stub:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-stub/1.0.3/grpc-stub-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX) \
+    dialer-guava:../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-javax-annotation-api:../../../prebuilts/tools/common/m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2$(COMMON_JAVA_PACKAGE_SUFFIX) \
     dialer-javax-inject:../../../prebuilts/tools/common/m2/repository/javax/inject/javax.inject/1/javax.inject-1$(COMMON_JAVA_PACKAGE_SUFFIX)
 

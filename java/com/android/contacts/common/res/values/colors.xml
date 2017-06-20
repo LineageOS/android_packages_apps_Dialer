@@ -60,6 +60,7 @@
   <color name="textColorIconOverlayShadow">#000</color>
 
 
+
   <array name="letter_tile_colors">
     <item>#DB4437</item>
     <item>#E91E63</item>
