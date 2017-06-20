@@ -85,7 +85,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
           // When the undo button is pressed, the viewHolder we have is no longer valid because when
           // we hide the view it is binded to something else, and the layout is not updated for
           // hidden items. copy the adapter position so we can update the view upon undo.
-          // TODO: refactor this so the view holder will always be valid.
+          // TODO(twyen): refactor this so the view holder will always be valid.
           final int adapterPosition = mViewHolder.getAdapterPosition();
 
           mPresenter.pausePlayback();

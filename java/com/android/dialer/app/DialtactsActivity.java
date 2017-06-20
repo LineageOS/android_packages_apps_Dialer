@@ -284,7 +284,7 @@ public class DialtactsActivity extends TransactionSafeActivity
           }
           mSearchQuery = newText;
 
-          // TODO: show p13n when newText is empty.
+          // TODO(calderwoodra): show p13n when newText is empty.
           // Show search fragment only when the query string is changed to non-empty text.
           if (!TextUtils.isEmpty(newText)) {
             // Call enterSearchUi only if we are switching search modes, or showing a search
@@ -595,7 +595,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         new P13nRefreshCompleteListener() {
           @Override
           public void onP13nRefreshComplete() {
-            // TODO: make zero-query search results visible
+            // TODO(strongarm): make zero-query search results visible
           }
         });
     Trace.endSection();
@@ -1152,7 +1152,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
       transaction.add(R.id.dialtacts_frame, fragment, tag);
     } else {
-      // TODO: if this is a transition from dialpad to searchbar, animate fragment
+      // TODO(calderwoodra): if this is a transition from dialpad to searchbar, animate fragment
       // down, and vice versa. Perhaps just add a coordinator behavior with the search bar.
       transaction.show(fragment);
     }
@@ -1165,7 +1165,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       ((SearchFragment) fragment)
           .setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
     } else {
-      // TODO: add p13n ranker to new search.
+      // TODO(calderwoodra): add p13n ranker to new search.
     }
 
     if (!smartDialSearch && !useNewSearch) {

@@ -125,7 +125,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     return this;
   }
 
-  // TODO Adds hardware keyboard listener
+  // TODO(klp) Adds hardware keyboard listener
 
   @Override
   public View onCreateView(

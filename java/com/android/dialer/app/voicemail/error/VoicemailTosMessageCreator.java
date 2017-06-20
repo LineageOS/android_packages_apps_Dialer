@@ -72,11 +72,11 @@ public class VoicemailTosMessageCreator {
 
   @Nullable
   VoicemailErrorMessage maybeCreateTosMessage() {
-    // TODO: add filtering based on carrier
+    // TODO(mdooley): add filtering based on carrier
     if (hasAcceptedTos()) {
       return null;
     }
-    // TODO: temporarily skip the terms of service for dogfood builds
+    // TODO(mdooley): temporarily skip the terms of service for dogfood builds
     if (BuildType.get() == BuildType.DOGFOOD) {
       LogUtil.i(
           "VoicemailTosMessageCreator.maybeCreateTosMessage",

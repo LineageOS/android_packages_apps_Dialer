@@ -396,7 +396,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   /** Give permission to Messenger to view our image for RCS purposes. */
   private Uri grantUriPermission(Uri uri) {
-    // TODO: Move this to the enriched call manager.
+    // TODO(sail): Move this to the enriched call manager.
     grantUriPermission(
         "com.google.android.apps.messaging", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
     return uri;
