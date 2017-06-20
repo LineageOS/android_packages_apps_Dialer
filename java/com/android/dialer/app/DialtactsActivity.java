@@ -74,6 +74,7 @@ import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
+import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.dialpad.DialpadFragment;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.app.list.DialtactsPagerAdapter.TabIndex;
@@ -90,6 +91,7 @@ import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.callcomposer.CallComposerActivity;
+import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
@@ -173,6 +175,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
   public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
   public static final int ACTIVITY_REQUEST_CODE_LIGHTBRINGER = 3;
+  public static final int ACTIVITY_REQUEST_CODE_CALL_DETAILS = 4;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
@@ -788,6 +791,19 @@ public class DialtactsActivity extends TransactionSafeActivity
         Snackbar.make(mParentLayout, message, Snackbar.LENGTH_LONG).show();
       } else {
         LogUtil.i("DialtactsActivity.onActivityResult", "returned from call composer, no error");
+      }
+    } else if (requestCode == ACTIVITY_REQUEST_CODE_CALL_DETAILS) {
+      if (resultCode == RESULT_OK
+          && data != null
+          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+        int snackbarDurationMillis = 5_000;
+        Snackbar.make(mParentLayout, getString(R.string.ec_data_deleted), snackbarDurationMillis)
+            .setAction(
+                R.string.view_conversation,
+                v -> startActivity(IntentProvider.getSendSmsIntentProvider(number).getIntent(this)))
+            .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
+            .show();
       }
     }
     super.onActivityResult(requestCode, resultCode, data);

@@ -221,6 +221,10 @@ public interface EnrichedCallManager {
   Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @NonNull String number, @NonNull CallDetailsEntries entries);
 
+  /** Returns true if any enriched calls have been made or received. */
+  @MainThread
+  boolean hasStoredData();
+
   /**
    * Unregisters the given {@link StateChangedListener}.
    *

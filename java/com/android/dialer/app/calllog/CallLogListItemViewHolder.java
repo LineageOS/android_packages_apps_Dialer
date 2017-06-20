@@ -879,12 +879,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       String packageName = intent.getPackage();
       if (getLightbringer().getPackageName().equals(packageName)) {
         startLightbringerActivity(intent);
+      } else if (CallDetailsActivity.isLaunchIntent(intent)) {
+        PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
+        ((Activity) mContext)
+            .startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS);
       } else {
-        if (intent.getComponent() != null
-            && CallDetailsActivity.class.getName().equals(intent.getComponent().getClassName())) {
-          // We are going to open call detail
-          PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
-        }
         DialerUtils.startActivityWithErrorToast(mContext, intent);
       }
     }
