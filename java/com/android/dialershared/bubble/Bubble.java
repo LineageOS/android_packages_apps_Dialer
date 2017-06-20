@@ -647,7 +647,7 @@ public class Bubble {
     public static final int CHILD_INDEX_ICON = 0;
     public static final int CHILD_INDEX_TEXT = 1;
 
-    private final MoveHandler moveHandler;
+    private MoveHandler moveHandler;
     private final WindowRoot root;
     private final ViewAnimator primaryButton;
     private final ImageView primaryIcon;
@@ -681,6 +681,13 @@ public class Bubble {
               return true;
             }
             return false;
+          });
+      root.setOnConfigurationChangedListener(
+          (configuration) -> {
+            // The values in the current MoveHandler may be stale, so replace it. Then ensure the
+            // Window is in bounds
+            moveHandler = new MoveHandler(primaryButton, Bubble.this);
+            moveHandler.snapToBounds();
           });
       root.setOnTouchListener(
           (v, event) -> {
