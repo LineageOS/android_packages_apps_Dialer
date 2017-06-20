@@ -25,12 +25,14 @@ import android.view.ViewGroup;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.PinnedHeaderListView;
 import com.android.dialer.app.R;
-import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.util.Arrays;
 
 public class RegularSearchFragment extends SearchFragment
     implements OnEmptyViewActionButtonClickedListener,
@@ -114,8 +116,15 @@ public class RegularSearchFragment extends SearchFragment
     }
 
     if (READ_CONTACTS.equals(mPermissionToRequest)) {
-      FragmentCompat.requestPermissions(
-          this, new String[] {mPermissionToRequest}, PERMISSION_REQUEST_CODE);
+      String[] deniedPermissions =
+          PermissionsUtil.getPermissionsCurrentlyDenied(
+              getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+      if (deniedPermissions.length > 0) {
+        LogUtil.i(
+            "RegularSearchFragment.onEmptyViewActionButtonClicked",
+            "Requesting permissions: " + Arrays.toString(deniedPermissions));
+        FragmentCompat.requestPermissions(this, deniedPermissions, PERMISSION_REQUEST_CODE);
+      }
     }
   }
 

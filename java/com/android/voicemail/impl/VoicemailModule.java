@@ -18,6 +18,7 @@ package com.android.voicemail.impl;
 
 import android.content.Context;
 import android.support.v4.os.BuildCompat;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailPermissionHelper;
 import com.android.voicemail.stub.StubVoicemailClient;
@@ -31,7 +32,7 @@ public final class VoicemailModule {
 
   @Provides
   @Singleton
-  static VoicemailClient provideVoicemailClient(Context context) {
+  static VoicemailClient provideVoicemailClient(@ApplicationContext Context context) {
     if (!BuildCompat.isAtLeastO()) {
       VvmLog.i("VoicemailModule.provideVoicemailClient", "SDK below O");
       return new StubVoicemailClient();

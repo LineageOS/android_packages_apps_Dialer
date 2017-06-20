@@ -18,6 +18,8 @@ package com.android.dialer.binary.aosp;
 
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
+import com.android.dialer.common.concurrent.DialerExecutorModule;
+import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.lightbringer.stub.StubLightbringerModule;
@@ -34,6 +36,8 @@ import javax.inject.Singleton;
   modules = {
     CallLogModule.class,
     ContextModule.class,
+    DialerExecutorModule.class,
+    SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StubCallLocationModule.class,
     StubEnrichedCallModule.class,

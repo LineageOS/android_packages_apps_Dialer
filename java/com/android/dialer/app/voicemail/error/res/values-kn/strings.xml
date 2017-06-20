@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಪೂರ್ಣವಾಗಿ ಸಕ್ರಿಯಗೊಳಿಸುವವರೆಗೂ ನಿಮಗೆ ಧ್ವನಿಮೇಲ್‌ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ಸಾಧ್ಯವಾಗದೇ ಇರಬಹುದು. ಧ್ವನಿಮೇಲ್‌ಗಳು ಪೂರ್ಣವಾಗಿ ಸಕ್ರಿಯವಾಗುವವರೆಗೆ ಹೊಸ ಸಂದೇಶಗಳನ್ನು ಹಿಂಪಡೆಯಲು ಧ್ವನಿಮೇಲ್‌ನಲ್ಲಿ ಕರೆಮಾಡಿ."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ನಿಮ್ಮ ಫೋನ್‌ ಸೆಲ್ಯುಲಾರ್ ಸಂಪರ್ಕವನ್ನು ಹೊಂದಿದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ ಹಾಗೂ ನಂತರ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ನಿಮ್ಮ ಫೋನ್‌ ಮೊಬೈಲ್ ಸಂಪರ್ಕವನ್ನು ಹೊಂದಿದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ ಹಾಗೂ ನಂತರ ಪ್ರಯತ್ನಿಸಿ."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ಏರ್‌ಪ್ಲೇನ್ ಮೋಡ್ ಆಫ್ ಮಾಡಿ ಹಾಗೂ ನಂತರ ಪ್ರಯತ್ನಿಸಿ."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"ಯಾವುದೇ ಸಂಪರ್ಕವಿಲ್ಲ"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌ಗಳ ಕುರಿತು ನಿಮಗೆ ಸೂಚಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ವೈ-ಫೈನಲ್ಲಿದ್ದರೆ, ನೀವು ಈಗಲೇ ಸಿಂಕ್ ಮಾಡುವ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ಗೆ ಪರಿಶೀಲಿಸಬಹುದು."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌ಗಳ ಕುರಿತು ನಿಮಗೆ ಸೂಚಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ವೈ-ಫೈ ನಲ್ಲಿದ್ದರೆ, ನೀವು ಈಗಲೇ ಸಿಂಕ್ ಮಾಡುವ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಬಹುದು."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌ಗಳ ಕುರಿತು ನಿಮಗೆ ಸೂಚಿಸಲಾಗುವುದಿಲ್ಲ. ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್‌ ಸಿಂಕ್ ಮಾಡಲು ಏರ್‌ಪ್ಲೇನ್ ಮೋಡ್ ಅನ್ನು ಆಫ್ ಮಾಡಿ."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ಧ್ವನಿಮೇಲ್‌ ಅನ್ನು ಪರಿಶೀಲಿಸಲು ನಿಮ್ಮ ಫೋನ್‌‌ಗೆ ಸೆಲ್ಯುಲಾರ್ ಡೇಟಾ ಸಂಪರ್ಕ ಅಗತ್ಯವಿದೆ."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"ಧ್ವನಿಮೇಲ್‌ ಅನ್ನು ಪರಿಶೀಲಿಸಲು ನಿಮ್ಮ ಫೋನ್‌‌ಗೆ ಮೊಬೈಲ್ ಡೇಟಾ ಸಂಪರ್ಕದ ಅಗತ್ಯವಿದೆ."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ನಿಮ್ಮ ವೈ-ಫೈ ಅಥವಾ ಸೆಲ್ಯುಲಾರ್ ಸಂಪರ್ಕವು ಉತ್ತಮವಾದಾಗ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ನಿಮ್ಮ ಸೆಲ್ಯುಲಾರ್ ಡೇಟಾ ಸಂಪರ್ಕವು ಉತ್ತಮವಾದಾಗ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ನಿಮ್ಮ ವೈ-ಫೈ ಅಥವಾ ಮೊಬೈಲ್ ಸಂಪರ್ಕವು ಉತ್ತಮವಾದಾಗ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ನಿಮ್ಮ ಮೊಬೈಲ್ ಡೇಟಾ ಸಂಪರ್ಕವು ಉತ್ತಮವಾದಾಗ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ನೀವು ಧ್ವನಿಮೇಲ್‌ ಪರಿಶೀಲಿಸಲು ಈಗಲೂ ಕರೆ ಮಾಡಬಹುದು."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ಯಾವುದೋ ತಪ್ಪು ಸಂಭವಿಸಿದೆ"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"ಗ್ರಾಹಕ ಸೇವೆ ಸಂಖ್ಯೆ <xliff:g id="NUMBER">%1$s</xliff:g> ಗೆ ಸಂಪರ್ಕಿಸಿ ಮತ್ತು 9999 ದೋಷದ ಕೋಡ್‌ ಅನ್ನು ಅವರಿಗೆ ತಿಳಿಸಿ."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್‌ನ ನಿಯಮಗಳು ಮತ್ತು ನಿಬಂಧನೆಗಳು"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಬಳಸಲು ವೆರಿಜೋನ್ ವೈರ್‌ಲೆಸ್‌ನ ನಿಯಮಗಳು ಮತ್ತು ನಿಬಂಧನೆಗಳನ್ನು ನೀವು ಒಪ್ಪಿಕೊಳ್ಳಬೇಕು:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಬಳಸಲು Verizon Wireless ನಿಯಮಗಳು ಮತ್ತು ನಿಬಂಧನೆಗಳನ್ನು ನೀವು ಒಪ್ಪಿಕೊಳ್ಳಬೇಕು:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಆನ್ ಮಾಡಿ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"ನಿಯಮಗಳು ಮತ್ತು ನಿಬಂಧನೆಗಳುಗಳನ್ನು ನಿರಾಕರಿಸಿದಲ್ಲಿ ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ದೃಶ್ಯ ಧ್ವನಿಮೇಲ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"ನಿಯಮಗಳು ಮತ್ತು ನಿಬಂಧನೆಗಳನ್ನು ನಿರಾಕರಿಸಿದಲ್ಲಿ ಧ್ವನಿಮೇಲ್ ಟ್ರಾನ್ಸ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"ಧ್ವನಿಮೇಲ್ ಟ್ರಾನ್ಸ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*86 ಗ ಕರೆ ಮಾಡುವ ಮೂಲಕ ಮಾತ್ರ ಧ್ವನಿಮೇಲ್‌ಗೆ ಪ್ರವೇಶಿಸಲು ಸಾಧ್ಯ. ಮುಂದುವರೆಯಲು ಒಂದು ಹೊಸ ಧ್ವನಿಮೇಲ್ ಪಿನ್ ಹೊಂದಿಸಿ."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"ಪಿನ್ ಹೊಂದಿಸಿ"</string>
 </resources>

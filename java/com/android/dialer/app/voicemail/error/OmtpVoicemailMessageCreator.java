@@ -47,6 +47,12 @@ public class OmtpVoicemailMessageCreator {
   @Nullable
   public static VoicemailErrorMessage create(
       Context context, VoicemailStatus status, final VoicemailStatusReader statusReader) {
+    VoicemailErrorMessage tosMessage =
+        new VoicemailTosMessageCreator(context, status, statusReader).maybeCreateTosMessage();
+    if (tosMessage != null) {
+      return tosMessage;
+    }
+
     if (Status.CONFIGURATION_STATE_OK == status.configurationState
         && Status.DATA_CHANNEL_STATE_OK == status.dataChannelState
         && Status.NOTIFICATION_CHANNEL_STATE_OK == status.notificationChannelState) {

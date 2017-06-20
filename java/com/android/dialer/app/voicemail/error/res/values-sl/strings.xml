@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktiviranje vizualnih sporočil v odzivniku"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Dokler niso vizualna sporočila v odzivniku v celoti aktivirana, morda ne boste prejemali obvestil o sporočilih v odzivniku. Pokličite odzivnik, da prenesete nova sporočila, dokler niso sporočila v odzivniku v celoti aktivirana."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Vizualnih sporočil v odzivniku ni mogoče aktivirati"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Preverite, ali je v telefonu vzpostavljena mobilna internetna povezava, in poskusite znova."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Preverite, ali je v telefonu vzpostavljena povezava z mobilnim omrežjem, in poskusite znova."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Izklopite način za letalo in poskusite znova."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Ni povezave"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Obvestil o novih sporočilih v odzivniku ne boste prejemali. Če ste v omrežju Wi-Fi, lahko zdaj zaženete sinhronizacijo in preverite, ali ste prejeli sporočila v odzivniku."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Obvestil o novih sporočilih v odzivniku ne boste prejemali. Če ste v omrežju Wi-Fi, lahko zdaj zaženete sinhronizacijo in preverite, ali ste prejeli sporočila v odzivniku."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Obvestil o novih sporočilih v odzivniku ne boste prejemali. Če želite sinhronizirati sporočila v odzivniku, izklopite način za letalo."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Če želite preveriti sporočila v odzivniku, je treba v telefonu vzpostaviti povezavo za prenos podatkov v mobilnih omrežjih."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Če želite preveriti sporočila v odzivniku, je treba v telefonu vzpostaviti povezavo za prenos podatkov v mobilnem omrežju."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Vizualnih sporočil v odzivniku ni mogoče aktivirati"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Vizualnih sporočil v odzivniku ni mogoče posodobiti"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Poskusite znova, ko bo povezava Wi-FI ali mobilna internetna povezava boljša. Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Poskusite znova, ko bo mobilna internetna povezava boljša. Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Poskusite znova, ko bo povezava z omrežjem Wi-Fi ali povezava za prenos podatkov v mobilnem omrežju boljša. Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Poskusite znova, ko bo povezava za prenos podatkov v mobilnem omrežju boljša. Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Vizualnih sporočil v odzivniku ni mogoče posodobiti"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Sporočila v odzivniku lahko še vedno preverite tako, da pokličete."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Vizualnih sporočil v odzivniku ni mogoče posodobiti"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Prišlo je do napake"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Obrnite se na podporo za stranke na številki <xliff:g id="NUMBER">%1$s</xliff:g> in jim sporočite to kodo napake: 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Določila in pogoji za vizualna sporočila v odzivniku"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Če želite uporabljati vizualna sporočila v odzivniku, morate sprejeti določila in pogoje podjetja Verizon Wireless:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nČe želite uporabljati vizualna sporočila v odzivniku, morate sprejeti določila in pogoje podjetja Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Vklop vizualnih sporočil v odzivniku"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Če zavrnete določila in pogoje, bodo vizualna sporočila v odzivniku onemogočena."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Onemogočanje vizualnih sporočil v odzivniku"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Če zavrnete določila in pogoje, bo prepis sporočil v odzivniku onemogočen."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Onemogočanje prepisa sporočil v odzivniku"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Sporočila v odzivniku so na voljo samo tako, da pokličete *86. Če želite nadaljevati, nastavite novo kodo PIN za sporočila v odzivniku."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Nastavitev kode PIN"</string>
 </resources>

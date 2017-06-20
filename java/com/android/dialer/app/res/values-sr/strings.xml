@@ -81,11 +81,16 @@
     <string name="add_wait" msgid="1177723010768282578">"Додај чекање"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"Подешавања"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"Симулатор"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Направите пречицу за нови UI"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"Сви контакти"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"Употребите бројчаник за тонско бирање"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Врати се на позив који је у току"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"Додај позив"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"Долазни позиви"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Улазите у режим групних радњи"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Изашли сте из режима групних радњи"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Изабрано је <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Опозван је избор <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"Пуштање говорне поште"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"Прикажи контакт <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="1532402285334775372">"Позови <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -100,11 +105,16 @@
     <string name="voicemail" msgid="8899540969000957954">"Говорна пошта"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"говорну поруку"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"говорне поруке"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Да"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Не"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Откажите режим групних радњи"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Избриши"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Откажи"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Желите ли да избришете изабрану(е) <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>?"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"Изабраних: <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+      <item quantity="few">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+      <item quantity="other">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -117,7 +127,6 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Учитава се са SIM картице…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Контакти на SIM картици"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"Нема доступне апликације за контакте"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"Гласовна претрага није доступна"</string>
     <string name="call_not_available" msgid="7850148370757361155">"Није могуће упутити телефонски позив јер је апликација Телефон онемогућена."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Претражи контакте"</string>
@@ -146,10 +155,9 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"Нових пропуштених позива: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"Немате ниједан контакт на брзом бирању"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Додај омиљен контакт"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"Још увек немате ниједан контакт"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"Додај контакт"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"Додирните слику да бисте видели све бројеве или додирните и задржите да бисте им променили распоред"</string>
     <string name="remove_contact" msgid="2353580570488923668">"Уклони"</string>
+    <string name="select_all" msgid="408601760696146245">"Изабери све"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Видео позив"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Пошаљи поруку"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Детаљи позива"</string>
@@ -215,11 +223,9 @@
     <string name="block_list" msgid="4701585783411870782">"Блокирани бројеви"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> је већ блокиран."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"Налози за позивање"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"Укључи"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"Подеси дозволе"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"Да бисте омогућили брзо бирање, укључите дозволу за Контакте."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"Да бисте видели евиденцију позива, укључите дозволу за Телефон."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"Да бисте видели контакте, укључите дозволу за Контакте."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Да бисте приступили говорној пошти, укључите дозволу за Телефон."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Да бисте претражили контакте, укључите дозволе за Контакте."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"Да бисте упутили позив, укључите дозволу за Телефон."</string>

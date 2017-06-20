@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> मार्फत कल गर्दै"</string>
@@ -14,6 +30,8 @@
     <string name="incall_remotely_held" msgid="8561379039177396615">"होल्डमा छ"</string>
     <string name="contact_grid_incoming_video_call" msgid="4935122585117803710">"निम्नबाट भिडियो कल आएको छ"</string>
     <string name="contact_grid_incoming_wifi_video_call" msgid="5938822096623593533">"निम्नबाट Wi-Fi मार्फत गरिएको भिडियो कल आएको छ"</string>
+    <string name="contact_grid_incoming_video_request" msgid="7488892854791471116">"निम्नबाट आएको भिडियो अपग्रेडसम्बन्धी अनुरोध"</string>
+    <string name="contact_grid_incoming_wifi_video_request" msgid="4516902096577976768">"निम्नबाट आएको Wi-Fi मार्फत भिडियो अपग्रेडसम्बन्धी अनुरोध"</string>
     <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"निम्नबाट कल आएको छ"</string>
     <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"निम्नबाट कार्य सम्बन्धी कल आएको छ"</string>
     <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> मार्फत गरिएको आगमन कल"</string>

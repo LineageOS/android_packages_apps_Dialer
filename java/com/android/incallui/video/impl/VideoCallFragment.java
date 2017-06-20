@@ -59,6 +59,7 @@ import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
@@ -121,6 +122,10 @@ public class VideoCallFragment extends Fragment
           outline.setOval(x - radius, y - radius, x + radius, y + radius);
         }
       };
+
+  // Must use a named method reference as otherwise they do not match.
+  // https://stackoverflow.com/questions/28190304/two-exact-method-references-are-not-equal
+  private final Runnable updatePreviewVideoIfSafe = this::updatePreviewVideoScaling;
   private InCallScreenDelegate inCallScreenDelegate;
   private VideoCallScreenDelegate videoCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
@@ -349,6 +354,9 @@ public class VideoCallFragment extends Fragment
     super.onPause();
     LogUtil.i("VideoCallFragment.onPause", null);
     inCallScreenDelegate.onInCallScreenPaused();
+
+    // If this is scheduled we should remove it
+    ThreadUtil.getUiThreadHandler().removeCallbacks(updatePreviewVideoIfSafe);
   }
 
   @Override
@@ -665,22 +673,14 @@ public class VideoCallFragment extends Fragment
     updateRemoteVideoScaling();
   }
 
-  /**
-   * This method scales the video feed inside the texture view, it doesn't change the texture view's
-   * size. In the old UI we would change the view size to match the aspect ratio of the video. In
-   * the new UI the view is always square (with the circular clip) so we have to do additional work
-   * to make sure the non-square video doesn't look squished.
-   */
   @Override
   public void onLocalVideoDimensionsChanged() {
     LogUtil.i("VideoCallFragment.onLocalVideoDimensionsChanged", null);
-    updatePreviewVideoScaling();
   }
 
   @Override
   public void onLocalVideoOrientationChanged() {
     LogUtil.i("VideoCallFragment.onLocalVideoOrientationChanged", null);
-    updatePreviewVideoScaling();
   }
 
   /** Called when the remote video's dimensions change. */
@@ -851,6 +851,9 @@ public class VideoCallFragment extends Fragment
     LogUtil.i("VideoCallFragment.onAudioRouteSelected", "audioRoute: " + audioRoute);
     inCallButtonUiDelegate.setAudioRoute(audioRoute);
   }
+
+  @Override
+  public void onAudioRouteSelectorDismiss() {}
 
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
@@ -1045,7 +1048,6 @@ public class VideoCallFragment extends Fragment
     params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
     previewTextureView.setLayoutParams(params);
     previewTextureView.setOutlineProvider(circleOutlineProvider);
-    updatePreviewVideoScaling();
     updateOverlayBackground();
     contactGridManager.setIsMiddleRowVisible(false);
     updateMutePreviewOverlayVisibility();
@@ -1053,6 +1055,9 @@ public class VideoCallFragment extends Fragment
     previewOffBlurredImageView.setLayoutParams(params);
     previewOffBlurredImageView.setOutlineProvider(circleOutlineProvider);
     previewOffBlurredImageView.setClipToOutline(true);
+
+    // Wait until the layout pass has finished before updating the scaling
+    ThreadUtil.postOnUiThread(updatePreviewVideoIfSafe);
   }
 
   private void updateVideoOffViews() {

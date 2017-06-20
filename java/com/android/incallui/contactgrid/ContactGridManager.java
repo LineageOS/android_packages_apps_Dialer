@@ -20,10 +20,8 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
-import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -78,6 +76,7 @@ public class ContactGridManager {
   private boolean hideAvatar;
   private boolean showAnonymousAvatar;
   private boolean middleRowVisible = true;
+  private boolean isTimerStarted;
 
   private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
   private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
@@ -105,6 +104,7 @@ public class ContactGridManager {
 
     contactGridLayout = (View) contactNameTextView.getParent();
     letterTile = new LetterTileDrawable(context.getResources());
+    isTimerStarted = false;
   }
 
   public void show() {
@@ -213,7 +213,7 @@ public class ContactGridManager {
    * </ul>
    */
   private void updateTopRow() {
-    TopRow.Info info = TopRow.getInfo(context, primaryCallState);
+    TopRow.Info info = TopRow.getInfo(context, primaryCallState, primaryInfo);
     if (TextUtils.isEmpty(info.label)) {
       // Use INVISIBLE here to prevent the rows below this one from moving up and down.
       statusTextView.setVisibility(View.INVISIBLE);
@@ -229,26 +229,6 @@ public class ContactGridManager {
     } else {
       connectionIconImageView.setVisibility(View.VISIBLE);
       connectionIconImageView.setImageDrawable(info.icon);
-    }
-  }
-
-  /**
-   * Returns the appropriate LetterTileDrawable.TYPE_ based on a given call state.
-   *
-   * <p>If no special state is detected, yields TYPE_DEFAULT.
-   */
-  private static @LetterTileDrawable.ContactType int getContactTypeForPrimaryCallState(
-      @NonNull PrimaryCallState callState, @NonNull PrimaryInfo primaryInfo) {
-    if (callState.isVoiceMailNumber) {
-      return LetterTileDrawable.TYPE_VOICEMAIL;
-    } else if (callState.isBusinessNumber) {
-      return LetterTileDrawable.TYPE_BUSINESS;
-    } else if (primaryInfo.numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
-      return LetterTileDrawable.TYPE_GENERIC_AVATAR;
-    } else if (callState.isConference) {
-      return LetterTileDrawable.TYPE_CONFERENCE;
-    } else {
-      return LetterTileDrawable.TYPE_DEFAULT;
     }
   }
 
@@ -295,8 +275,12 @@ public class ContactGridManager {
               primaryInfo.name,
               primaryInfo.contactInfoLookupKey,
               LetterTileDrawable.SHAPE_CIRCLE,
-              getContactTypeForPrimaryCallState(primaryCallState, primaryInfo));
-
+              LetterTileDrawable.getContactTypeFromPrimitives(
+                  primaryCallState.isVoiceMailNumber,
+                  primaryInfo.isSpam,
+                  primaryCallState.isBusinessNumber,
+                  primaryInfo.numberPresentation,
+                  primaryCallState.isConference));
           // By invalidating the avatarImageView we force a redraw of the letter tile.
           // This is required to properly display the updated letter tile iconography based on the
           // contact type, because the background drawable reference cached in the view, and the
@@ -363,15 +347,19 @@ public class ContactGridManager {
     }
 
     if (info.isTimerVisible) {
-      bottomTextSwitcher.setDisplayedChild(1);
-      bottomTimerView.setBase(
-          primaryCallState.connectTimeMillis
-              - System.currentTimeMillis()
-              + SystemClock.elapsedRealtime());
-      bottomTimerView.start();
+      if (!isTimerStarted) {
+        bottomTextSwitcher.setDisplayedChild(1);
+        bottomTimerView.setBase(
+            primaryCallState.connectTimeMillis
+                - System.currentTimeMillis()
+                + SystemClock.elapsedRealtime());
+        bottomTimerView.start();
+        isTimerStarted = true;
+      }
     } else {
       bottomTextSwitcher.setDisplayedChild(0);
       bottomTimerView.stop();
+      isTimerStarted = false;
     }
   }
 }

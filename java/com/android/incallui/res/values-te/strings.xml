@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> నుండి సమాధానం ఇవ్వని కాల్"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"కాల్ కొనసాగుతోంది"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"కార్యాలయ కాల్ కొనసాగుతోంది"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Wi-Fi కాల్ కొనసాగుతోంది"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Wi-Fi కార్యాలయ కాల్ కొనసాగుతోంది"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"మాట్లాడుతున్న Wi‑Fi కాల్"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"మాట్లాడుతున్న Wi‑Fi కార్యాలయ కాల్"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"హోల్డ్‌లో ఉంది"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"ఇన్‌కమింగ్ కాల్"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ఫోటోతో ఇన్‌కమింగ్ కాల్"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ఫోటో, సందేశం, స్థానంతో ముఖ్యమైన ఇన్‌కమింగ్ కాల్"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"జోడింపులతో ముఖ్యమైన ఇన్‌కమింగ్ కాల్"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"ఇన్‌కమింగ్ కార్యాలయ కాల్"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Wi-Fi కాల్ వస్తోంది"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"ఇన్‌కమింగ్ Wi-Fi కార్యాలయ కాల్"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"ఇన్‌కమింగ్ Wi-Fi కాల్"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"ఇన్‌కమింగ్ Wi-Fi కార్యాలయ కాల్"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"అనుమానాస్పద స్పామ్ కాల్ వస్తోంది"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"ఇన్‌కమింగ్ వీడియో అభ్యర్థన"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"సేవ లేదు"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"వీడియో కాల్‌ను తీయి"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"కాల్ చేయడానికి, మొదట ఎయిర్‌ప్లైన్ మోడ్‌ను ఆపివేయండి."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"నెట్‌వర్క్‌లో నమోదు కాలేదు."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"సెల్యులార్ నెట్‌వర్క్ అందుబాటులో లేదు."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"మొబైల్ నెట్‌వర్క్ అందుబాటులో లేదు."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"కాల్ చేయడానికి, చెల్లుబాటు అయ్యే నంబర్‌ను నమోదు చేయండి."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"కాల్ చేయలేరు."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI శ్రేణిని ప్రారంభిస్తోంది…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"కాల్‌ను ముగిస్తుంది"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"కాన్ఫరెన్స్ కాల్"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"కాల్‌లో ఉన్నారు"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"సెల్యులార్ డేటాను ఉపయోగించి కాల్‌ను కొనసాగిస్తోంది…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi నెట్‌వర్క్‌కి మార్చలేకపోయింది"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"వీడియో కాల్ సెల్యులార్ నెట్‌వర్క్‌లో కొనసాగుతుంది. ప్రామాణిక డేటా ఛార్జీలు వర్తించవచ్చు."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"మొబైల్ డేటాను ఉపయోగించి కాల్‌ను కొనసాగిస్తోంది…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi నెట్‌వర్క్‌కి మార్చడం సాధ్యపడలేదు"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"వీడియో కాల్ మొబైల్ నెట్‌వర్క్‌లో కొనసాగుతుంది. ప్రామాణిక డేటా ఛార్జీలు వర్తించవచ్చు."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"దీన్ని మళ్లీ చూపవద్దు"</string>
 </resources>

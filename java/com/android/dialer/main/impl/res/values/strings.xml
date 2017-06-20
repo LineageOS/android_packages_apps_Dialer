@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <!-- Name of the main activity. -->
+  <string name="main_activity_label">Phone</string>
+
+  <!-- Name of launcher shortcut for the new UI main activity.
+       TODO(38502365): Remove this once we're ready to launch the new UI. -->
+  <string name="nui_shortcut_name">Phone NUI</string>
+
+  <!-- The description text for the call log tab. -->
+  <string name="main_call_history_tab_description">Call history</string>
+
+  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
+  <string name="search">@android:string/search_go</string>
+  <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->
+  <string name="description_search">Search contacts and places</string>
+
+  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
+  <string name="contacts">Contacts</string>
+  <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
+  <string name="description_contacts">View Contacts</string>
+
+  <!-- Tab text to show users their call log/call history [CHAR LIMIT=10] -->
+  <string name="tab_title_call_history">Call History</string>
+  <!-- Tab text to show users their favorite contacts that they can call in 1 click [CHAR LIMIT=10] -->
+  <string name="tab_title_speed_dial">Speed Dial</string>
+  <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
+  <string name="tab_title_voicemail">Voicemail</string>
+
+  <!-- Show users their settings [CHAR LIMIT=20] -->
+  <string name="settings">Settings</string>
+  <!-- Send feedback about the app [CHAR LIMIT=20] -->
+  <string name="main_send_feedback">Send feedback</string>
+</resources>

@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Включение просмотра голосовой почты"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Вы не будете получать оповещения, пока не активируете визуальную голосовую почту. Позвоните, чтобы прослушать новые сообщения."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Не удалось включить просмотр голосовой почты"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Проверьте подключение к мобильной сети и повторите попытку."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Убедитесь, что телефон подключен к мобильной сети, и повторите попытку."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Отключите режим полета и повторите попытку."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Нет соединения"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Вы не будете получать оповещения о новых голосовых сообщениях. Если телефон подключен к Wi-Fi, выполните синхронизацию."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Вы не будете получать оповещения о новых голосовых сообщениях. Если телефон подключен к Wi-Fi, то вы можете выполнить синхронизацию и проверить голосовую почту сейчас."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Вы не будете получать оповещения о новых сообщениях. Чтобы выполнить синхронизацию, отключите режим полета."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Чтобы проверить голосовую почту, подключите мобильные данные."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Чтобы проверить голосовую почту, подключитесь к мобильному Интернету."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Не удалось включить просмотр голосовой почты"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Чтобы проверить голосовую почту, вы можете позвонить на специальный номер."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Не удалось обновить страницу просмотра голосовой почты"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Дождитесь стабильного сигнала Wi-Fi или мобильной сети и повторите попытку. Если вы хотите проверить почту сейчас, позвоните на специальный номер."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Дождитесь стабильного сигнала мобильной сети и повторите попытку. Если вы хотите проверить почту сейчас, позвоните на специальный номер."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Дождитесь стабильного сигнала Wi-Fi или мобильного Интернета и повторите попытку. Если вы хотите проверить голосовую почту сейчас, позвоните на специальный номер."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Дождитесь стабильного сигнала мобильного Интернета и повторите попытку. Если вы хотите проверить голосовую почту сейчас, позвоните на специальный номер."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Не удалось обновить страницу просмотра голосовой почты"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Чтобы проверить голосовую почту, вы можете позвонить на специальный номер."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Не удалось обновить страницу просмотра голосовой почты"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Ошибка"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Свяжитесь со службой поддержки по номеру <xliff:g id="NUMBER">%1$s</xliff:g> и сообщите им код ошибки 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Условия использования визуальной голосовой почты"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Чтобы работать с визуальной голосовой почтой, примите Условия использования Verizon Wireless:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nЧтобы работать с визуальной голосовой почтой, примите Условия использования Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Включить визуальную голосовую почту"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Если вы не примете Условия использования, визуальная голосовая почта будет отключена."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Отключение визуальной голосовой почты"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Если вы не примете Условия использования, транскрипция голосовых сообщений будет отключена."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Отключение транскрипции голосовых сообщений"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Для прослушивания голосовой почты необходимо будет отправить вызов по номеру *86. Чтобы продолжить, установите новый PIN-код голосовой почты."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Установка PIN-кода"</string>
 </resources>

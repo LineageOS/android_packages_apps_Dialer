@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ビジュアル ボイスメールを有効化中"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ビジュアル ボイスメールの有効化が完了するまでボイスメール通知を受信できません。ボイスメールの有効化が完了するまでは、ボイスメールを呼び出して新しいメッセージを取得してください。"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ビジュアル ボイスメールを有効化できません"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"スマートフォンがモバイル ネットワークに接続済みであることを確認してから、もう一度お試しください。"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"スマートフォンがモバイル ネットワークに接続済みであることを確認してから、もう一度お試しください。"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"機内モードをオフにしてから、もう一度お試しください。"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"接続なし"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"新しいボイスメールの通知を受信できません。Wi-Fi をご利用の場合、同期してボイスメールを確認できます。"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"新しいボイスメールの通知を受信できません。Wi-Fi をご利用の場合は同期してボイスメールを確認できます。"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"新しいボイスメールの通知を受信できません。ボイスメールを同期するには機内モードをオフにしてください。"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ボイスメールを確認するには、スマートフォンでモバイルデータ接続を使用する必要があります。"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"ボイスメールを確認するには、スマートフォンでモバイルデータ接続を使用する必要があります。"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"ビジュアル ボイスメールを有効化できません"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"ビジュアル ボイスメールを更新できません"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Wi-Fi かモバイルデータの接続状態が良好なときにもう一度お試しください。ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"モバイルデータの接続状態が良好なときにもう一度お試しください。ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Wi-Fi かモバイルデータの接続状態が良好なときにもう一度お試しください。ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"モバイルデータの接続状態が良好なときにもう一度お試しください。ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"ビジュアル ボイスメールを更新できません"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"ボイスメール サービスを呼び出してボイスメールを確認することは可能です。"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"ビジュアル ボイスメールを更新できません"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"エラー"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"カスタマー サービス（<xliff:g id="NUMBER">%1$s</xliff:g>）にご連絡いただき、エラーコード 9999 をお伝えください。"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ビジュアル ボイスメールの利用規約"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"ビジュアル ボイスメールを利用するには Verizon Wireless の利用規約に同意していただく必要があります。\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nビジュアル ボイスメールを利用するには Verizon Wireless の利用規約に同意していただく必要があります。\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"ビジュアル ボイスメールの有効化"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"利用規約に同意いただけない場合は、ビジュアル ボイスメールが無効となります。"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ビジュアル ボイスメールを無効にする"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"利用規約に同意いただけない場合は、ボイスメールの音声文字変換が無効になります。"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"ボイスメールの音声文字変換を無効にする"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"*86 への発信によってのみ、ボイスメールにアクセスできます。続行するには、新しいボイスメール PIN を設定してください。"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN の設定"</string>
 </resources>

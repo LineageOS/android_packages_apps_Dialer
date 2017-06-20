@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"허용"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"사진을 찍으려면 카메라에 액세스할 수 있도록 허용하세요."</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"이미지를 공유하려면 미디어에 액세스할 수 있도록 허용하세요."</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"사진 촬영"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"사진 선택"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"메시지 보내기"</string>
 </resources>

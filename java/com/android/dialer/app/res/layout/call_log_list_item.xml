@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             >
 
-          <QuickContactBadge
+          <com.android.dialer.app.calllog.DialerQuickContactBadge
               android:id="@+id/quick_contact_photo"
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
@@ -80,7 +80,7 @@
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
               android:visibility="gone"
-              android:src="@drawable/quantum_ic_check_circle_googblue_24" />
+              android:src="@drawable/ic_check_mark_48dp" />
 
         </FrameLayout>
 

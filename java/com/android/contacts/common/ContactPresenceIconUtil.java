@@ -19,6 +19,7 @@ package com.android.contacts.common;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract.StatusUpdates;
+import android.support.v4.content.ContextCompat;
 
 /** Define the contact present show policy in Contacts */
 public class ContactPresenceIconUtil {
@@ -36,7 +37,7 @@ public class ContactPresenceIconUtil {
       case StatusUpdates.AWAY:
       case StatusUpdates.DO_NOT_DISTURB:
       case StatusUpdates.INVISIBLE:
-        return context.getResources().getDrawable(StatusUpdates.getPresenceIconResourceId(status));
+        return ContextCompat.getDrawable(context, StatusUpdates.getPresenceIconResourceId(status));
       case StatusUpdates.OFFLINE:
         // The undefined status is treated as OFFLINE in getPresenceIconResourceId();
       default:

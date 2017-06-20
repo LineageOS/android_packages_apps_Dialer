@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"გამოტოვებული ზარი <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>-ისგან"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"მიმდინარე ზარი"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"მიმდინარე ზარი (სამსახური)"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"მიმდინარე Wi-Fi ზარი"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"მიმდინარე Wi-Fi ზარი (სამსახური)"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"მიმდინარე Wi-Fi ზარი"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"მიმდინარე Wi-Fi ზარი (სამსახური)"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"შეყოვნების რეჟიმში"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"შემომავალი ზარი"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"შემომავალი ზარი ფოტოთი"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ზარი ფოტოთი, შეტყობინებით და მდებარეობით"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"მნიშვნელოვანი შემომავალი ზარი დანართებით"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"შემომავალი ზარი (სამსახური)"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"შემომავალი Wi-Fi ზარი"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"შემომავალი Wi-Fi ზარი (სამსახური)"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"შემომავალი Wi-Fi ზარი"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"შემომავალი Wi-Fi ზარი (სამსახური)"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"შემომავალი ზარი - სავარაუდოდ სპამი"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"შემომავალი ვიდეოს მოთხოვნა"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"სერვისი არ არის"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Take ვიდეო ზარი"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"ზარის განსახორციელებლად, ჯერ თვითმფრინავის რეჟიმი უნდა გამორთოთ."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"ქსელში რეგისტრირებული არ არის."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"ფიჭური ქსელი მიუწვდომელია"</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"მობილური ქსელი მიუწვდომელია."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"ზარის განხორციელებისათვის, შეიყვანეთ მოქმედი ნომერი."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"არ ირეკება."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI თანმიმდევრობის დაწყება…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ზარის დასრულება"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"საკონფერენციო ზარი"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"მონაწილეობს ზარში"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"ზარი გრძელდება მობილური ინტერნეტის გამოყენებით…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Wi-Fi ქსელზე გადართვა ვერ მოხერხდა"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ვიდეოზარი ფიჭურ ქსელში დარჩება. შესაძლოა მოგიწიოთ მობილური ინტერნეტის სტანდარტული ფასის გადახდა."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ზარი გრძელდება მობილური ინტერნეტის გამოყენებით…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi ქსელზე გადართვა ვერ მოხერხდა"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ვიდეოზარი მობილური ინტერნეტის ქსელში დარჩება. შესაძლოა მოგიწიოთ მობილური ინტერნეტის სტანდარტული საფასურის გადახდა."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"აღარ მაჩვენო"</string>
 </resources>

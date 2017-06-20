@@ -24,8 +24,6 @@ import android.widget.TextView;
 /** Highlights the text in a text field. */
 public class TextHighlighter {
 
-  private static final boolean DEBUG = false;
-  private final String TAG = TextHighlighter.class.getSimpleName();
   private int mTextStyle;
 
   private CharacterStyle mTextStyleSpan;
@@ -81,7 +79,7 @@ public class TextHighlighter {
     }
     final String trimmedPrefix = prefix.substring(prefixStart);
 
-    int index = FormatUtils.indexOfWordPrefix(text, trimmedPrefix);
+    int index = indexOfWordPrefix(text, trimmedPrefix);
     if (index != -1) {
       final SpannableString result = new SpannableString(text);
       result.setSpan(mTextStyleSpan, index, index + trimmedPrefix.length(), 0 /* flags */);
@@ -89,5 +87,56 @@ public class TextHighlighter {
     } else {
       return text;
     }
+  }
+
+  /**
+   * Finds the index of the first word that starts with the given prefix.
+   *
+   * <p>If not found, returns -1.
+   *
+   * @param text the text in which to search for the prefix
+   * @param prefix the text to find, in upper case letters
+   */
+  public static int indexOfWordPrefix(CharSequence text, String prefix) {
+    if (prefix == null || text == null) {
+      return -1;
+    }
+
+    int textLength = text.length();
+    int prefixLength = prefix.length();
+
+    if (prefixLength == 0 || textLength < prefixLength) {
+      return -1;
+    }
+
+    int i = 0;
+    while (i < textLength) {
+      // Skip non-word characters
+      while (i < textLength && !Character.isLetterOrDigit(text.charAt(i))) {
+        i++;
+      }
+
+      if (i + prefixLength > textLength) {
+        return -1;
+      }
+
+      // Compare the prefixes
+      int j;
+      for (j = 0; j < prefixLength; j++) {
+        if (Character.toUpperCase(text.charAt(i + j)) != prefix.charAt(j)) {
+          break;
+        }
+      }
+      if (j == prefixLength) {
+        return i;
+      }
+
+      // Skip this word
+      while (i < textLength && Character.isLetterOrDigit(text.charAt(i))) {
+        i++;
+      }
+    }
+
+    return -1;
   }
 }

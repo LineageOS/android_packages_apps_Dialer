@@ -80,11 +80,16 @@
     <string name="add_wait" msgid="1177723010768282578">"నిరీక్షణ సమయాన్ని జోడించు"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"సెట్టింగ్‌లు"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"సిములేటర్"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"కొత్త UI సత్వరమార్గం సృష్టించు"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"అన్ని పరిచయాలు"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"టచ్ టోన్ కీప్యాడ్‌ను ఉపయోగించండి"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"ప్రోగ్రెస్‌లో ఉన్న కాల్‌కు వెళ్లు"</string>
     <string name="dialer_addAnotherCall" msgid="3132945651710234674">"కాల్‌ను జోడించు"</string>
     <string name="actionIncomingCall" msgid="891346596090030558">"ఇన్‌కమింగ్ కాల్‌లు"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"బల్క్ చర్య మోడ్‌లోకి ప్రవేశిస్తున్నారు"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"బల్క్ చర్య మోడ్ నుండి నిష్క్రమించారు"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ఎంచుకోబడింది"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ఎంపిక తీసివేయబడింది"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"వాయిస్ మెయిల్ ప్లే చేయండి"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"<xliff:g id="NAME">%1$s</xliff:g> పరిచయాన్ని వీక్షించండి"</string>
     <string name="description_call" msgid="1532402285334775372">"<xliff:g id="NAME">%1$s</xliff:g>కు కాల్ చేయి"</string>
@@ -99,11 +104,15 @@
     <string name="voicemail" msgid="8899540969000957954">"వాయిస్ మెయిల్"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> సెక"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> నిమి <xliff:g id="SECONDS">%s</xliff:g> సెక"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"వాయిస్ మెయిల్"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"వాయిస్ మెయిల్‌లు"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"అవును"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"వద్దు"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"సమూహ చర్యల మోడ్‌ను రద్దు చేస్తుంది"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"తొలగించు"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"రద్దు చేయి"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"ఎంచుకున్న <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>ను తొలగించాలా?"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> ఎంచుకోబడ్డాయి"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="other">"<b>"ఈ వాయిస్ మెయిల్‌లను తొలగించాలా? "</b>"</item>
+      <item quantity="one">"<b>"ఈ వాయిస్ మెయిల్‌ను తొలగించాలా? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g>కి"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
@@ -116,7 +125,6 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"సిమ్ కార్డు నుండి లోడ్ చేస్తోంది…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"సిమ్ కార్డు పరిచయాలు"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"పరిచయాల అనువర్తనం ఏదీ అందుబాటులో లేదు"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"వాయిస్ శోధన అందుబాటులో లేదు"</string>
     <string name="call_not_available" msgid="7850148370757361155">"ఫోన్ అనువర్తనం నిలిపివేయబడినందున ఫోన్ కాల్ చేయలేరు."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"పరిచయాలను శోధించు"</string>
@@ -145,10 +153,9 @@
     <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> కొత్త సమాధానం ఇవ్వని కాల్‌లు"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"మీ స్పీడ్ డయల్‌లో ఇంకా ఎవరూ లేరు"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"ఇష్టమైన వారిని జోడించండి"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"మీకు ఇప్పటికీ పరిచయాలేవీ లేవు"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"పరిచయాన్ని జోడించండి"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"అన్ని నంబర్‌లను చూడటానికి చిత్రాన్ని తాకండి లేదా క్రమం మార్చడానికి తాకి, కాసేపు అలాగే ఉంచండి"</string>
     <string name="remove_contact" msgid="2353580570488923668">"తీసివేయి"</string>
+    <string name="select_all" msgid="408601760696146245">"అన్నీ ఎంచుకోండి"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"వీడియో కాల్"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"సందేశాన్ని పంపు"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"కాల్ వివరాలు"</string>
@@ -213,11 +220,9 @@
     <string name="block_list" msgid="4701585783411870782">"బ్లాక్ చేయబడిన నంబర్‌లు"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ఇప్పటికే బ్లాక్ చేయబడింది."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"కాల్ చేసే ఖాతాలు"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"ఆన్ చేయి"</string>
     <string name="permission_multiple_turn_on" msgid="5679888820253829400">"అనుమతులను సెట్ చేయి"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"స్పీడ్ డయల్‌ను ప్రారంభించడానికి, పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"మీ కాల్ లాగ్‌ను చూడటానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"మీ పరిచయాలను చూడటానికి, పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"మీ వాయిస్ మెయిల్‌ను ప్రాప్యత చేయడానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"మీ పరిచయాలను శోధించడానికి, పరిచయాల అనుమతులను ఆన్ చేయండి."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"కాల్ చేయడానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>

@@ -50,7 +50,7 @@
       <TextView
         android:id="@+id/call_action_text"
         style="@style/CallLogActionTextStyle"
-        android:text="@string/description_call_log_call_action"/>
+        android:text="@string/call"/>
 
       <TextView
         android:id="@+id/call_type_or_location_text"
@@ -135,7 +135,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/ic_call_and_share"/>
+      android:src="@drawable/ic_phone_attach"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"

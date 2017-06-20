@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"ലഭ്യമല്ല"</string>
     <string name="status_busy" msgid="5990832098713248503">"തിരക്കിലാണ്"</string>
     <string name="contactsList" msgid="8806067891419291513">"കോണ്ടാക്റ്റ്"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"കൂടുതൽ നിർദ്ദേശിച്ചിരിക്കുന്നവ"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"മറ്റുള്ളവ"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ഡയറക്‌ടറി"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"ഔദ്യോഗിക ഡയറക്‌ടറി"</string>
     <string name="local_search_label" msgid="907622822323119235">"എല്ലാ കോൺടാക്റ്റുകളും"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"നിര്‍ദ്ദേശങ്ങള്‍"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ഞാന്‍"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"തിരയുന്നു…"</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"<xliff:g id="COUNT">%d</xliff:g>-ൽ കൂടുതൽ കണ്ടെത്തി."</string>
@@ -248,7 +250,7 @@
     <string name="call_subject_hint" msgid="7233138753650420800">"കോളിനൊപ്പം അയയ്ക്കുന്നതിന് ഒരു കുറിപ്പ് ടൈപ്പുചെയ്യുക ..."</string>
     <string name="send_and_call_button" msgid="4735168294120154013">"അയയ്‌ക്കുകയും വിളിക്കുകയും ചെയ്യുക"</string>
     <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="8726132674272173486">"<xliff:g id="TYPE">%1$s</xliff:g> • <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ടാബ്."</string>
     <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
       <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ടാബ്. <xliff:g id="COUNT_3">%2$d</xliff:g> വായിക്കാത്ത ഇനങ്ങൾ. </item>

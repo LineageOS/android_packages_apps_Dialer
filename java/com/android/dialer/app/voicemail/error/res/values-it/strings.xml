@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Attivazione della lettura della segreteria"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Potresti non ricevere le notifiche dei messaggi vocali fino a che non avrai attivato completamente la funzione di lettura della segreteria. Fino ad allora, chiama la segreteria per recuperare i nuovi messaggi."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Impossibile attivare la lettura della segreteria"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Assicurati che il telefono abbia una connessione alla rete dati e riprova."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Assicurati che il telefono abbia una connessione alla rete mobile e riprova."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Disattiva la modalità aereo e riprova."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Nessuna connessione"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Non riceverai notifiche per i nuovi messaggi vocali. Se sei connesso a una rete Wi-Fi, puoi consultare la segreteria effettuando subito la sincronizzazione."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Non riceverai notifiche per i nuovi messaggi vocali. Se sei connesso a una rete Wi-Fi, puoi consultare la segreteria effettuando subito la sincronizzazione."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Non riceverai notifiche per i nuovi messaggi vocali. Disattiva la modalità aereo per sincronizzare la segreteria."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Per poter consultare la segreteria, il telefono deve essere connesso a una rete dati."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Per poter consultare la segreteria, il telefono deve essere connesso a una rete mobile."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Impossibile attivare la lettura della segreteria"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Puoi ancora consultare la segreteria tramite chiamata."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Impossibile aggiornare la lettura della segreteria"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Riprova quando la connessione alla rete Wi-Fi o dati sarà migliore. Puoi ancora consultare la segreteria tramite chiamata."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Riprova quando la connessione alla rete dati sarà migliore. Puoi ancora consultare la segreteria tramite chiamata."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Riprova quando la connessione alla rete Wi-Fi o mobile sarà migliore. Puoi ancora consultare la segreteria tramite chiamata."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Riprova quando la connessione dati mobile sarà migliore. Puoi ancora consultare la segreteria tramite chiamata."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Impossibile aggiornare la lettura della segreteria"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Puoi ancora consultare la segreteria tramite chiamata."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Impossibile aggiornare la lettura della segreteria"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Si è verificato un problema"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Contatta l\'assistenza clienti al numero <xliff:g id="NUMBER">%1$s</xliff:g> indicando il seguente codice di errore: 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Termini e condizioni della lettura della segreteria"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Devi accettare i termini e condizioni di Verizon Wireless per utilizzare la lettura della segreteria:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nDevi accettare termini e condizioni di Verizon Wireless per utilizzare la lettura della segretaria:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Attiva la lettura della segreteria"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"La lettura della segreteria verrà disattivata se non accetti i termini e condizioni."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Disattiva la lettura della segreteria"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"La trascrizione della segreteria verrà disattivata se non accetti termini e condizioni."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Disattiva la trascrizione della segreteria"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"La segreteria sarà accessibile unicamente chiamando il numero *86. Imposta un nuovo PIN per la segreteria per procedere."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Imposta PIN"</string>
 </resources>

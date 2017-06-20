@@ -17,8 +17,12 @@
 package com.android.dialer.binary.basecomponent;
 
 import com.android.dialer.calllog.CallLogComponent;
+import com.android.dialer.calllog.database.CallLogDatabaseComponent;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.main.MainComponent;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
@@ -31,6 +35,10 @@ import com.android.voicemail.VoicemailComponent;
 public interface BaseDialerRootComponent
     extends CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
+        CallLogDatabaseComponent.HasComponent,
+        ConfigProviderComponent.HasComponent,
+        DialerExecutorComponent.HasComponent,
+        MainComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
         MapsComponent.HasComponent,
         SimulatorComponent.HasComponent,

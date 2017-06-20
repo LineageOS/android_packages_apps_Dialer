@@ -143,6 +143,9 @@
   <!-- Directory partition name (also exists in contacts) -->
   <string name="contactsList">Contacts</string>
 
+  <!-- Directory partition name for p13n suggestions -->
+  <string name="contact_suggestions">Top Suggested</string>
+
   <!-- The name of the invisible local contact directory -->
   <string name="local_invisible_directory">Other</string>
 
@@ -154,6 +157,9 @@
 
   <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
   <string name="local_search_label">All contacts</string>
+
+  <!-- The label in section header in the contact list for a local suggested contacts [CHAR LIMIT=128] -->
+  <string name="local_suggestions_search_label">Suggestions</string>
 
   <!-- String describing the text on the header of the profile contact in the contacts list
        This may be programatically capitalized. [CHAR LIMIT=20] -->
@@ -744,9 +750,9 @@
        compared to the character limit.  Example: 2 / 64 -->
   <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
 
-  <!-- String used to build a phone number bype and phone number string.
-       Example: Mobile • 650-555-1212  -->
-  <string name="call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> • <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
+  <!-- String used to build a phone number type and phone number string.
+       Example: Mobile 650-555-1212  -->
+  <string name="call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
 
   <!-- String format to describe a tab e.g.call history tab. -->
   <string name="tab_title"><xliff:g id="title">%1$s</xliff:g> tab.</string>

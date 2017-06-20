@@ -24,8 +24,8 @@
 
   <ImageView
       android:id="@id/answer_message_image"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
       android:layout_marginTop="@dimen/answer_message_contents_margin_top"
       android:layout_marginBottom="4dp"
       android:layout_centerInParent="true"
@@ -34,7 +34,7 @@
       android:background="@drawable/answer_data_background"
       android:elevation="@dimen/answer_data_elevation"
       android:adjustViewBounds="true"
-      android:scaleType="fitCenter"/>
+      android:scaleType="centerCrop"/>
 
   <ProgressBar
       android:layout_width="wrap_content"

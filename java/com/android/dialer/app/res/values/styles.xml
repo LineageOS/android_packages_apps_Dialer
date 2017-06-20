@@ -16,6 +16,11 @@
   -->
 <resources>
 
+  <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
+    <item name="android:colorAccent">@color/dialtacts_theme_color</item>
+  </style>
+
   <style name="DialtactsTheme" parent="DialerThemeBase">
 
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
@@ -25,13 +30,13 @@
     <item name="windowActionModeOverlay">true</item>
     <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
     <item name="actionBarStyle">@style/DialtactsActionBarStyle</item>
+    <item name="actionModeStyle">@style/ActionModeStyle</item>
+    <item name="android:actionModeStyle">@style/ActionModeStyle</item>
 
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:overlapAnchor">true</item>
-    <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
 
     <item name="android:listViewStyle">@style/ListViewStyle</item>
-    <item name="section_header_background">@drawable/list_title_holo</item>
     <item name="list_section_header_height">32dip</item>
     <item name="list_item_padding_top">7dp</item>
     <item name="list_item_padding_right">24dp</item>
@@ -66,7 +71,7 @@
     <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
 
     <!-- Video call icon -->
-    <item name="list_item_video_call_icon_size">32dip</item>
+    <item name="list_item_video_call_icon_size">48dip</item>
     <item name="list_item_video_call_icon_margin">8dip</item>
 
     <item name="dialpad_style">@style/Dialpad.Light</item>
@@ -127,6 +132,12 @@
     <!-- Shift the title text to the right -->
     <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     <item name="contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+  </style>
+
+  <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
+    <item name="android:background">@color/actionbar_background_color</item>
+    <item name="background">@color/actionbar_background_color</item>
+    <item name="closeItemLayout">@layout/action_mode_close_button</item>
   </style>
 
   <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">

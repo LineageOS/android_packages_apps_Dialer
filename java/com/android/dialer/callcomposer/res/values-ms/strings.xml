@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Benarkan"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Untuk mengambil foto, berikan akses kepada Kamera"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Untuk berkongsi imej, berikan akses kepada Media"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Ambil gambar"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Pilih foto"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Hantar mesej"</string>
 </resources>

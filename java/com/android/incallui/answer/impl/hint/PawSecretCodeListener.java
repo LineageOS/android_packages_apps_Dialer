@@ -20,15 +20,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.util.DialerUtils;
 import java.util.Random;
 
 /**
@@ -40,7 +41,20 @@ public class PawSecretCodeListener extends BroadcastReceiver {
   static final String CONFIG_PAW_SECRET_CODE = "paw_secret_code";
 
   public static final String PAW_ENABLED_WITH_SECRET_CODE_KEY = "paw_enabled_with_secret_code";
-  public static final String PAW_DRAWABLE_ID_KEY = "paw_drawable_id";
+
+  /** Which paw to show, must be {@link PawType} */
+  public static final String PAW_TYPE = "paw_type";
+
+  /** Resource id is not stable across app versions. Use {@link #PAW_TYPE} instead. */
+  @Deprecated public static final String PAW_DRAWABLE_ID_KEY = "paw_drawable_id";
+
+  /** Enum for all paws. */
+  @IntDef({PAW_TYPE_INVALID, PAW_TYPE_CAT, PAW_TYPE_DOG})
+  @interface PawType {}
+
+  public static final int PAW_TYPE_INVALID = 0;
+  public static final int PAW_TYPE_CAT = 1;
+  public static final int PAW_TYPE_DOG = 2;
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -54,7 +68,8 @@ public class PawSecretCodeListener extends BroadcastReceiver {
     if (!TextUtils.equals(secretCode, host)) {
       return;
     }
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences preferences =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
     boolean wasEnabled = preferences.getBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, false);
     if (wasEnabled) {
       preferences.edit().putBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, false).apply();
@@ -62,20 +77,24 @@ public class PawSecretCodeListener extends BroadcastReceiver {
       Logger.get(context).logImpression(Type.EVENT_ANSWER_HINT_DEACTIVATED);
       LogUtil.i("PawSecretCodeListener.onReceive", "PawAnswerHint disabled");
     } else {
-      int drawableId;
-      if (new Random().nextBoolean()) {
-        drawableId = R.drawable.cat_paw;
-      } else {
-        drawableId = R.drawable.dog_paw;
-      }
-      preferences
-          .edit()
-          .putBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, true)
-          .putInt(PAW_DRAWABLE_ID_KEY, drawableId)
-          .apply();
+      selectPawType(preferences);
       Toast.makeText(context, R.string.event_activated, Toast.LENGTH_SHORT).show();
       Logger.get(context).logImpression(Type.EVENT_ANSWER_HINT_ACTIVATED);
       LogUtil.i("PawSecretCodeListener.onReceive", "PawAnswerHint enabled");
     }
+  }
+
+  public static void selectPawType(SharedPreferences preferences) {
+    @PawType int pawType;
+    if (new Random().nextBoolean()) {
+      pawType = PAW_TYPE_CAT;
+    } else {
+      pawType = PAW_TYPE_DOG;
+    }
+    preferences
+        .edit()
+        .putBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, true)
+        .putInt(PAW_TYPE, pawType)
+        .apply();
   }
 }

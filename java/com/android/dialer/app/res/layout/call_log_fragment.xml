@@ -21,6 +21,36 @@
   android:background="@color/background_dialer_call_log"
   android:orientation="vertical">
 
+  <LinearLayout
+      android:id="@+id/multi_select_select_all_view_content"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/tab_height"
+      android:layout_gravity="start"
+      android:background="@color/actionbar_background_color"
+      android:orientation="horizontal"
+      android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/select_all_view_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/select_all_icon_padding"
+        android:paddingRight="@dimen/select_all_icon_padding"
+        android:gravity="center_vertical"
+        android:src="@drawable/ic_empty_check_mark_white_24dp"/>
+    <TextView
+        android:id="@+id/select_all_view_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/select_all_text_left_padding"
+        android:gravity="center_vertical"
+        android:text="@string/select_all"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="@color/remove_text_color"
+        android:textSize="@dimen/select_all_text_size"/>
+  </LinearLayout>
+
   <FrameLayout
     android:id="@+id/modal_message_container"
     android:layout_width="match_parent"
@@ -37,7 +67,7 @@
     android:background="@color/background_dialer_call_log"
     android:clipToPadding="false"/>
 
-  <com.android.dialer.app.widget.EmptyContentView
+  <com.android.dialer.widget.EmptyContentView
     android:id="@+id/empty_list_view"
     android:layout_width="match_parent"
     android:layout_height="0dp"

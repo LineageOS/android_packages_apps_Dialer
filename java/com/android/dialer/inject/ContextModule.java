@@ -22,17 +22,18 @@ import com.android.dialer.common.Assert;
 import dagger.Module;
 import dagger.Provides;
 
-/** Provides the singleton context object. */
+/** Provides the singleton application context object. */
 @Module
 public final class ContextModule {
 
   @NonNull private final Context context;
 
-  public ContextModule(@NonNull Context context) {
-    this.context = Assert.isNotNull(context);
+  public ContextModule(@NonNull Context appContext) {
+    this.context = Assert.isNotNull(appContext);
   }
 
   @Provides
+  @ApplicationContext
   Context provideContext() {
     return context;
   }

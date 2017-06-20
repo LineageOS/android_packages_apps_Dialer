@@ -24,6 +24,7 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource.Type;
+import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.ExpirableCache;
@@ -55,6 +56,7 @@ public class ContactInfoCache {
   private final OnContactInfoChangedListener mOnContactInfoChangedListener;
   private final BlockingQueue<ContactInfoRequest> mUpdateRequests;
   private final Handler mHandler;
+  private CequintCallerIdManager mCequintCallerIdManager;
   private QueryThread mContactInfoQueryThread;
   private volatile boolean mRequestProcessingDisabled = false;
 
@@ -93,6 +95,10 @@ public class ContactInfoCache {
     mOnContactInfoChangedListener = listener;
     mUpdateRequests = new PriorityBlockingQueue<>();
     mHandler = new InnerHandler(new WeakReference<>(this));
+  }
+
+  public void setCequintCallerIdManager(CequintCallerIdManager cequintCallerIdManager) {
+    mCequintCallerIdManager = cequintCallerIdManager;
   }
 
   public ContactInfo getValue(
@@ -156,11 +162,11 @@ public class ContactInfoCache {
     ContactInfo info;
     if (request.isLocalRequest()) {
       info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
-      if (!info.contactExists) {
+      if (info != null && !info.contactExists) {
         // TODO: Maybe skip look up if it's already available in cached number lookup
         // service.
         long start = SystemClock.elapsedRealtime();
-        mContactInfoHelper.updateFromCequintCallerId(info, request.number);
+        mContactInfoHelper.updateFromCequintCallerId(mCequintCallerIdManager, info, request.number);
         long time = SystemClock.elapsedRealtime() - start;
         LogUtil.d(
             "ContactInfoCache.queryContactInfo", "Cequint Caller Id look up takes %d ms", time);

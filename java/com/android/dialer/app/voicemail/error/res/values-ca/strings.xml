@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"S\'està activant la bústia de veu visual"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"És possible que no rebis notificacions de missatges de veu fins que la bústia de veu visual estigui completament activada. Fins aleshores, truca a la bústia de veu per recuperar els missatges nous."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"No es pot activar la bústia de veu visual"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Comprova la connexió mòbil del telèfon i torna-ho a provar."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Assegura\'t que el telèfon tingui connexió a una xarxa mòbil i torna-ho a provar."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Desactiva el mode d\'avió i torna-ho a provar."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Sense connexió"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"No rebràs notificacions de missatges de veu nous. Si estàs connectat a una xarxa Wi-Fi, pots sincronitzar ara per consultar la bústia de veu."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"No rebràs notificacions de missatges de veu nous. Si estàs connectat a una xarxa Wi-Fi, pots sincronitzar ara per consultar la bústia de veu."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"No rebràs notificacions de missatges de veu nous. Desactiva el mode d\'avió per sincronitzar la bústia de veu."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"El telèfon necessita una connexió de dades mòbils per consultar la bústia de veu."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Cal que el telèfon tingui una connexió de dades mòbils per poder consultar la bústia de veu."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"No es pot activar la bústia de veu visual"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Pots trucar igualment per consultar la bústia de veu."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"No es pot actualitzar la bústia de veu visual"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Torna-ho a provar quan la connexió Wi-Fi o mòbil sigui millor. Pots trucar igualment per consultar la bústia de veu."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Torna-ho a provar quan la connexió de dades mòbils sigui millor. Pots trucar igualment per consultar la bústia de veu."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Torna-ho a provar quan la connexió Wi-Fi o de dades mòbils sigui millor. Pots trucar igualment per consultar la bústia de veu."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Torna-ho a provar quan la connexió de dades mòbils sigui millor. Pots trucar igualment per consultar la bústia de veu."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"No es pot actualitzar la bústia de veu visual"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Pots trucar igualment per consultar la bústia de veu."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"No es pot actualitzar la bústia de veu visual"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"S\'ha produït un error"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Contacta amb el servei d\'atenció al client al <xliff:g id="NUMBER">%1$s</xliff:g> i informa\'ls que el codi d\'error és 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Termes i condicions de la bústia de veu visual"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Has d\'acceptar els termes i condicions de Verizon Wireless per utilitzar la bústia de veu visual:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nHas d\'acceptar els termes i condicions de Verizon Wireless per poder utilitzar la bústia de veu visual:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Activa la bústia de veu visual"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"La bústia de veu visual es desactivarà si es rebutgen els termes i condicions."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Desactiva la bústia de veu visual"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"La transcripció dels missatges de veu es desactivarà si es rebutgen els termes i condicions."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Desactiva la transcripció dels missatges de veu"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Només podràs accedir a la bústia de veu trucant al *86. Defineix un nou PIN de la bústia de veu per continuar."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Defineix el PIN"</string>
 </resources>

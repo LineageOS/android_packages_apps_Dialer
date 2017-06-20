@@ -21,9 +21,11 @@
     <string name="delete" msgid="2141020674108406737">"Slett"</string>
     <string name="call_details_copy_number" msgid="4265479408878990796">"Kopiér nummeret"</string>
     <string name="call_details_edit_number" msgid="8718476514903513624">"Rediger nummeret før du ringer"</string>
-    <string name="description_call_log_call_action" msgid="1421313064764221900">"Ring"</string>
+    <string name="call_details_report_call_id" msgid="8857541295264421217">"Rapportér feil nummer"</string>
     <string name="sent_a_photo" msgid="3978670717462979502">"Et bilde ble sendt"</string>
     <string name="received_a_photo" msgid="3528953225576480505">"Et bilde ble mottatt"</string>
     <string name="message_in_quotes" msgid="3270574830115828365">"«<xliff:g id="MESSAGE">%1$s</xliff:g>»"</string>
-    <string name="description_contact_photo_details" msgid="3035869307063629315">"Kontaktinformasjon for <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"Rapportér feil nummer"</string>
+    <string name="report_caller_id_failed" msgid="1471904930106125702">"Kunne ikke rapportere nummeret"</string>
+    <string name="report_caller_id_toast" msgid="5494870403429969932">"Nummeret er rapportert"</string>
 </resources>

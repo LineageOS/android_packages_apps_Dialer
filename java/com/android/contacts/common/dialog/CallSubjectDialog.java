@@ -45,7 +45,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.R;
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -154,11 +154,7 @@ public class CallSubjectDialog extends Activity {
                   .setCallSubject(subject)
                   .build();
 
-          TelecomManagerCompat.placeCall(
-              CallSubjectDialog.this,
-              (TelecomManager) getSystemService(Context.TELECOM_SERVICE),
-              intent);
-
+          getSystemService(TelecomManager.class).placeCall(intent.getData(), intent.getExtras());
           mSubjectHistory.add(subject);
           saveSubjectHistory(mSubjectHistory);
           finish();
@@ -202,7 +198,7 @@ public class CallSubjectDialog extends Activity {
         number /* number */,
         null /* displayNumber */,
         null /* numberLabel */,
-        ContactPhotoManager.TYPE_DEFAULT,
+        LetterTileDrawable.TYPE_DEFAULT,
         null /* phoneAccountHandle */);
   }
 
@@ -356,7 +352,7 @@ public class CallSubjectDialog extends Activity {
     mNumber = arguments.getString(ARG_NUMBER);
     mDisplayNumber = arguments.getString(ARG_DISPLAY_NUMBER);
     mNumberLabel = arguments.getString(ARG_NUMBER_LABEL);
-    mContactType = arguments.getInt(ARG_CONTACT_TYPE, ContactPhotoManager.TYPE_DEFAULT);
+    mContactType = arguments.getInt(ARG_CONTACT_TYPE, LetterTileDrawable.TYPE_DEFAULT);
     mPhoneAccountHandle = arguments.getParcelable(ARG_PHONE_ACCOUNT_HANDLE);
   }
 

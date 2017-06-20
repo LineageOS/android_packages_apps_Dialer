@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Dozvoli"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Odobrite pristup Kameri da biste snimili sliku"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Odobrite pristup Medijima da biste delili sliku"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Slikajte"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Izaberite sliku"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Pošaljite poruku"</string>
 </resources>

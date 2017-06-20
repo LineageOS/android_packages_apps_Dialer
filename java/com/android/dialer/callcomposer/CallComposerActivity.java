@@ -26,10 +26,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -37,13 +38,12 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLayoutChangeListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,7 +55,10 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.EnrichedCallManager.State;
@@ -68,6 +71,7 @@ import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
+import com.android.dialer.widget.LockableViewPager;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.io.File;
 
@@ -86,7 +90,6 @@ public class CallComposerActivity extends AppCompatActivity
     implements OnClickListener,
         OnPageChangeListener,
         CallComposerListener,
-        OnLayoutChangeListener,
         EnrichedCallManager.StateChangedListener {
 
   public static final String KEY_CONTACT_NAME = "contact_name";
@@ -98,11 +101,19 @@ public class CallComposerActivity extends AppCompatActivity
   private static final String ARG_CALL_COMPOSER_CONTACT_BASE64 = "CALL_COMPOSER_CONTACT_BASE64";
 
   private static final String ENTRANCE_ANIMATION_KEY = "entrance_animation_key";
+  private static final String SEND_AND_CALL_READY_KEY = "send_and_call_ready_key";
   private static final String CURRENT_INDEX_KEY = "current_index_key";
   private static final String VIEW_PAGER_STATE_KEY = "view_pager_state_key";
   private static final String SESSION_ID_KEY = "session_id_key";
 
-  private CallComposerContact contact;
+  private final Handler timeoutHandler = ThreadUtil.getUiThreadHandler();
+  private final Runnable sessionStartedTimedOut =
+      () -> {
+        LogUtil.i("CallComposerActivity.sessionStartedTimedOutRunnable", "session never started");
+        setFailedResultAndFinish();
+      };
+
+  private DialerContact contact;
   private Long sessionId = Session.NO_SESSION_ID;
 
   private TextView nameView;
@@ -113,10 +124,11 @@ public class CallComposerActivity extends AppCompatActivity
   private View sendAndCall;
   private TextView sendAndCallText;
 
+  private ProgressBar loading;
   private ImageView cameraIcon;
   private ImageView galleryIcon;
   private ImageView messageIcon;
-  private ViewPager pager;
+  private LockableViewPager pager;
   private CallComposerPagerAdapter adapter;
 
   private FrameLayout background;
@@ -126,10 +138,10 @@ public class CallComposerActivity extends AppCompatActivity
   private boolean shouldAnimateEntrance = true;
   private boolean inFullscreenMode;
   private boolean isSendAndCallHidingOrHidden = true;
-  private boolean layoutChanged;
+  private boolean sendAndCallReady;
   private int currentIndex;
 
-  public static Intent newIntent(Context context, CallComposerContact contact) {
+  public static Intent newIntent(Context context, DialerContact contact) {
     Intent intent = new Intent(context, CallComposerActivity.class);
     ProtoParsers.put(intent, ARG_CALL_COMPOSER_CONTACT, contact);
     return intent;
@@ -140,19 +152,20 @@ public class CallComposerActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.call_composer_activity);
 
-    nameView = (TextView) findViewById(R.id.contact_name);
-    numberView = (TextView) findViewById(R.id.phone_number);
-    contactPhoto = (QuickContactBadge) findViewById(R.id.contact_photo);
-    cameraIcon = (ImageView) findViewById(R.id.call_composer_camera);
-    galleryIcon = (ImageView) findViewById(R.id.call_composer_photo);
-    messageIcon = (ImageView) findViewById(R.id.call_composer_message);
-    contactContainer = (RelativeLayout) findViewById(R.id.contact_bar);
-    pager = (ViewPager) findViewById(R.id.call_composer_view_pager);
-    background = (FrameLayout) findViewById(R.id.background);
-    windowContainer = (LinearLayout) findViewById(R.id.call_composer_container);
-    toolbar = (DialerToolbar) findViewById(R.id.toolbar);
+    nameView = findViewById(R.id.contact_name);
+    numberView = findViewById(R.id.phone_number);
+    contactPhoto = findViewById(R.id.contact_photo);
+    cameraIcon = findViewById(R.id.call_composer_camera);
+    galleryIcon = findViewById(R.id.call_composer_photo);
+    messageIcon = findViewById(R.id.call_composer_message);
+    contactContainer = findViewById(R.id.contact_bar);
+    pager = findViewById(R.id.call_composer_view_pager);
+    background = findViewById(R.id.background);
+    windowContainer = findViewById(R.id.call_composer_container);
+    toolbar = findViewById(R.id.toolbar);
     sendAndCall = findViewById(R.id.send_and_call_button);
-    sendAndCallText = (TextView) findViewById(R.id.send_and_call_text);
+    sendAndCallText = findViewById(R.id.send_and_call_text);
+    loading = findViewById(R.id.call_composer_loading);
 
     interpolator = new FastOutSlowInInterpolator();
     adapter =
@@ -162,7 +175,6 @@ public class CallComposerActivity extends AppCompatActivity
     pager.setAdapter(adapter);
     pager.addOnPageChangeListener(this);
 
-    background.addOnLayoutChangeListener(this);
     cameraIcon.setOnClickListener(this);
     galleryIcon.setOnClickListener(this);
     messageIcon.setOnClickListener(this);
@@ -172,17 +184,13 @@ public class CallComposerActivity extends AppCompatActivity
 
     if (savedInstanceState != null) {
       shouldAnimateEntrance = savedInstanceState.getBoolean(ENTRANCE_ANIMATION_KEY);
+      sendAndCallReady = savedInstanceState.getBoolean(SEND_AND_CALL_READY_KEY);
       pager.onRestoreInstanceState(savedInstanceState.getParcelable(VIEW_PAGER_STATE_KEY));
       currentIndex = savedInstanceState.getInt(CURRENT_INDEX_KEY);
       sessionId = savedInstanceState.getLong(SESSION_ID_KEY, Session.NO_SESSION_ID);
       onPageSelected(currentIndex);
     }
 
-    int adjustMode =
-        isLandscapeLayout()
-            ? LayoutParams.SOFT_INPUT_ADJUST_PAN
-            : LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
-    getWindow().setSoftInputMode(adjustMode);
     // Since we can't animate the views until they are ready to be drawn, we use this listener to
     // track that and animate the call compose UI as soon as it's ready.
     ViewUtil.doOnPreDraw(
@@ -221,6 +229,7 @@ public class CallComposerActivity extends AppCompatActivity
   protected void onPause() {
     super.onPause();
     getEnrichedCallManager().unregisterStateChangedListener(this);
+    timeoutHandler.removeCallbacks(sessionStartedTimedOut);
   }
 
   @Override
@@ -240,10 +249,34 @@ public class CallComposerActivity extends AppCompatActivity
         "state: %s",
         StateExtension.toString(state));
 
-    if (state == EnrichedCallManager.STATE_START_FAILED
-        || state == EnrichedCallManager.STATE_CLOSED) {
-      setFailedResultAndFinish();
+    switch (state) {
+      case EnrichedCallManager.STATE_STARTING:
+        timeoutHandler.postDelayed(sessionStartedTimedOut, getSessionStartedTimeoutMillis());
+        if (sendAndCallReady) {
+          showLoadingUi();
+        }
+        break;
+      case EnrichedCallManager.STATE_STARTED:
+        timeoutHandler.removeCallbacks(sessionStartedTimedOut);
+        if (sendAndCallReady) {
+          sendAndCall();
+        }
+        break;
+      case EnrichedCallManager.STATE_START_FAILED:
+      case EnrichedCallManager.STATE_CLOSED:
+        setFailedResultAndFinish();
+        break;
+      case EnrichedCallManager.STATE_MESSAGE_FAILED:
+      case EnrichedCallManager.STATE_MESSAGE_SENT:
+      case EnrichedCallManager.STATE_NONE:
+      default:
+        break;
     }
+  }
+
+  @VisibleForTesting
+  public long getSessionStartedTimeoutMillis() {
+    return ConfigProviderBindings.get(this).getLong("ec_session_started_timeout", 10_000);
   }
 
   @Override
@@ -264,13 +297,15 @@ public class CallComposerActivity extends AppCompatActivity
     } else if (view == sendAndCall) {
       sendAndCall();
     } else {
-      Assert.fail();
+      throw Assert.createIllegalStateFailException("View on click not implemented: " + view);
     }
   }
 
   @Override
   public void sendAndCall() {
     if (!sessionReady()) {
+      sendAndCallReady = true;
+      showLoadingUi();
       LogUtil.i("CallComposerActivity.onClick", "sendAndCall pressed, but the session isn't ready");
       Logger.get(this)
           .logImpression(
@@ -338,13 +373,14 @@ public class CallComposerActivity extends AppCompatActivity
     }
   }
 
+  private void showLoadingUi() {
+    loading.setVisibility(View.VISIBLE);
+    pager.setSwipingLocked(true);
+  }
+
   private boolean sessionReady() {
     Session session = getEnrichedCallManager().getSession(sessionId);
-    if (session == null) {
-      return false;
-    }
-
-    return session.getState() == EnrichedCallManager.STATE_STARTED;
+    return session != null && session.getState() == EnrichedCallManager.STATE_STARTED;
   }
 
   private void placeRCSCall(MultimediaData.Builder builder) {
@@ -376,10 +412,6 @@ public class CallComposerActivity extends AppCompatActivity
     }
     if (currentIndex == CallComposerPagerAdapter.INDEX_MESSAGE) {
       UiUtil.hideKeyboardFrom(this, windowContainer);
-    } else if (position == CallComposerPagerAdapter.INDEX_MESSAGE
-        && inFullscreenMode
-        && !isLandscapeLayout()) {
-      UiUtil.openKeyboardFrom(this, windowContainer);
     }
     currentIndex = position;
     CallComposerFragment fragment = (CallComposerFragment) adapter.instantiateItem(pager, position);
@@ -398,6 +430,7 @@ public class CallComposerActivity extends AppCompatActivity
     super.onSaveInstanceState(outState);
     outState.putParcelable(VIEW_PAGER_STATE_KEY, pager.onSaveInstanceState());
     outState.putBoolean(ENTRANCE_ANIMATION_KEY, shouldAnimateEntrance);
+    outState.putBoolean(SEND_AND_CALL_READY_KEY, sendAndCallReady);
     outState.putInt(CURRENT_INDEX_KEY, currentIndex);
     outState.putLong(SESSION_ID_KEY, sessionId);
   }
@@ -424,28 +457,6 @@ public class CallComposerActivity extends AppCompatActivity
     animateSendAndCall(fragment.shouldHide());
   }
 
-  // To detect when the keyboard changes.
-  @Override
-  public void onLayoutChange(
-      View view,
-      int left,
-      int top,
-      int right,
-      int bottom,
-      int oldLeft,
-      int oldTop,
-      int oldRight,
-      int oldBottom) {
-    // To prevent infinite layout change loops
-    if (layoutChanged) {
-      layoutChanged = false;
-      return;
-    }
-
-    layoutChanged = true;
-    showFullscreen(contactContainer.getTop() < 0 || inFullscreenMode);
-  }
-
   /**
    * Reads arguments from the fragment arguments and populates the necessary instance variables.
    * Copied from {@link com.android.contacts.common.dialog.CallSubjectDialog}.
@@ -456,14 +467,14 @@ public class CallComposerActivity extends AppCompatActivity
       byte[] bytes =
           Base64.decode(intent.getStringExtra(ARG_CALL_COMPOSER_CONTACT_BASE64), Base64.DEFAULT);
       try {
-        contact = CallComposerContact.parseFrom(bytes);
+        contact = DialerContact.parseFrom(bytes);
       } catch (InvalidProtocolBufferException e) {
         throw Assert.createAssertionFailException(e.toString());
       }
     } else {
       contact =
           ProtoParsers.getTrusted(
-              intent, ARG_CALL_COMPOSER_CONTACT, CallComposerContact.getDefaultInstance());
+              intent, ARG_CALL_COMPOSER_CONTACT, DialerContact.getDefaultInstance());
     }
     updateContactInfo();
   }

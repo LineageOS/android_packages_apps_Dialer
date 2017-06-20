@@ -695,7 +695,10 @@ public class InCallPresenter implements CallList.Listener {
     if (newState == InCallState.INCOMING
         && (waitingForAccountCall = callList.getWaitingForAccountCall()) != null) {
       waitingForAccountCall.disconnect();
-      mInCallActivity.dismissPendingDialogs();
+      // The InCallActivity might be destroyed or not started yet at this point.
+      if (isActivityStarted()) {
+        mInCallActivity.dismissPendingDialogs();
+      }
     }
 
     newState = startOrFinishUi(newState);
@@ -1005,6 +1008,13 @@ public class InCallPresenter implements CallList.Listener {
       listener.onUiShowing(showing);
     }
 
+    if (mInCallActivity != null) {
+      // Re-evaluate which fragment is being shown.
+      mInCallActivity.onPrimaryCallStateChanged();
+    }
+  }
+
+  public void refreshUi() {
     if (mInCallActivity != null) {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();

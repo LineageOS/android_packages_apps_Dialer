@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"सन्देश सहित अस्वीकार गर्न आइकनबाट स्वाइप गर्नुहोस्"</string>
@@ -20,5 +36,5 @@
     <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"जवाफ फर्काउनुहोस् र जारी कललाई अन्त्य गर्नुहोस्"</string>
     <string name="call_incoming_video_is_off" msgid="3216603035158629403">"भिडियो निष्क्रिय छ"</string>
     <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"जवाफ दिन दुई औंलाले माथितिर स्वाइप गर्नुहोस्। अस्वीकार गर्न दुई औंलाले तलतिर स्वाइप गर्नुहोस्।"</string>
-    <string name="call_incoming_important" msgid="4090408168895243702">"जरुरी"</string>
+    <string name="call_incoming_important" msgid="3762352743365137090">"महत्त्वपूर्ण"</string>
 </resources>

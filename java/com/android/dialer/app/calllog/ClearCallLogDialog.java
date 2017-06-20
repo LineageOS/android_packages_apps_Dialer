@@ -54,7 +54,7 @@ public class ClearCallLogDialog extends DialogFragment {
                 ProgressDialog.show(
                     getActivity(), getString(R.string.clearCallLogProgress_title), "", true, false);
             progressDialog.setOwnerActivity(getActivity());
-            CallLogNotificationsService.markNewMissedCallsAsOld(getContext(), null);
+            CallLogNotificationsService.cancelAllMissedCalls(getContext());
             final AsyncTask<Void, Void, Void> task =
                 new AsyncTask<Void, Void, Void>() {
                   @Override

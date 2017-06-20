@@ -27,7 +27,7 @@ import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import com.android.dialer.app.calllog.DefaultVoicemailNotifier;
+import com.android.dialer.app.calllog.LegacyVoicemailNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
@@ -35,13 +35,22 @@ import com.android.voicemail.VoicemailComponent;
 
 /**
  * Receives {@link TelephonyManager#ACTION_SHOW_VOICEMAIL_NOTIFICATION}, and forwards to {@link
- * DefaultVoicemailNotifier}. Will ignore the notification if the account has visual voicemail.
+ * LegacyVoicemailNotifier}. Will ignore the notification if the account has visual voicemail.
  * Legacy voicemail is the traditional, non-visual, dial-in voicemail.
  */
 @TargetApi(VERSION_CODES.O)
 public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
   private static final String LEGACY_VOICEMAIL_COUNT = "legacy_voicemail_count";
+
+  /**
+   * Hidden extra for {@link TelephonyManager#ACTION_SHOW_VOICEMAIL_NOTIFICATION} for whether the
+   * notification is just a refresh or for a new voicemail. The phone should not play a ringtone or
+   * vibrate during a refresh if the notification is already showing.
+   *
+   * <p>TODO(b/62202833): make public
+   */
+  private static final String EXTRA_IS_REFRESH = "is_refresh";
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -51,7 +60,6 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     PhoneAccountHandle phoneAccountHandle =
         Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));
-
     int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, -1);
 
     if (!hasVoicemailCountChanged(context, phoneAccountHandle, count)) {
@@ -70,7 +78,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     if (count == 0) {
       LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "clearing notification");
-      new DefaultVoicemailNotifier(context).cancelLegacyNotification();
+      LegacyVoicemailNotifier.cancelNotification(context);
       return;
     }
 
@@ -91,13 +99,14 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
         intent.getParcelableExtra(TelephonyManager.EXTRA_LAUNCH_VOICEMAIL_SETTINGS_INTENT);
 
     LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "sending notification");
-    new DefaultVoicemailNotifier(context)
-        .notifyLegacyVoicemail(
-            phoneAccountHandle,
-            count,
-            voicemailNumber,
-            callVoicemailIntent,
-            voicemailSettingIntent);
+    LegacyVoicemailNotifier.showNotification(
+        context,
+        phoneAccountHandle,
+        count,
+        voicemailNumber,
+        callVoicemailIntent,
+        voicemailSettingIntent,
+        intent.getBooleanExtra(EXTRA_IS_REFRESH, false));
   }
 
   private static boolean hasVoicemailCountChanged(

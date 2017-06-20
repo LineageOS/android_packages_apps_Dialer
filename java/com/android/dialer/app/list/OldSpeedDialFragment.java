@@ -50,13 +50,13 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.app.R;
-import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
+import com.android.dialer.widget.EmptyContentView;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** This fragment displays the user's favorite/frequent contacts in a grid. */
 public class OldSpeedDialFragment extends Fragment
@@ -404,9 +404,15 @@ public class OldSpeedDialFragment extends Fragment
       return;
     }
 
-    if (!PermissionsUtil.hasPermission(activity, READ_CONTACTS)) {
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+    if (deniedPermissions.length > 0) {
+      LogUtil.i(
+          "OldSpeedDialFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
       FragmentCompat.requestPermissions(
-          this, new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+          this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     } else {
       // Switch tabs
       ((HostInterface) activity).showAllContactsTab();
@@ -430,7 +436,7 @@ public class OldSpeedDialFragment extends Fragment
     void showAllContactsTab();
   }
 
-  private class ContactTileLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
+  class ContactTileLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public CursorLoader onCreateLoader(int id, Bundle args) {
@@ -460,24 +466,17 @@ public class OldSpeedDialFragment extends Fragment
   private class ContactTileAdapterListener implements ContactTileView.Listener {
 
     @Override
-    public void onContactSelected(Uri contactUri, Rect targetRect) {
+    public void onContactSelected(
+        Uri contactUri, Rect targetRect, CallSpecificAppData callSpecificAppData) {
       if (mPhoneNumberPickerActionListener != null) {
-        CallSpecificAppData callSpecificAppData =
-            CallSpecificAppData.newBuilder()
-                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
-                .build();
         mPhoneNumberPickerActionListener.onPickDataUri(
             contactUri, false /* isVideoCall */, callSpecificAppData);
       }
     }
 
     @Override
-    public void onCallNumberDirectly(String phoneNumber) {
+    public void onCallNumberDirectly(String phoneNumber, CallSpecificAppData callSpecificAppData) {
       if (mPhoneNumberPickerActionListener != null) {
-        CallSpecificAppData callSpecificAppData =
-            CallSpecificAppData.newBuilder()
-                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
-                .build();
         mPhoneNumberPickerActionListener.onPickPhoneNumber(
             phoneNumber, false /* isVideoCall */, callSpecificAppData);
       }

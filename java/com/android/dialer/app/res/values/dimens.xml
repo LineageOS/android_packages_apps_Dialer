@@ -24,6 +24,11 @@
   -->
   <dimen name="remove_text_size">16dp</dimen>
 
+  <!-- Select All/Multi Select -->
+  <dimen name="select_all_text_size">14sp</dimen>
+  <dimen name="select_all_icon_padding">16dp</dimen>
+  <dimen name="select_all_text_left_padding">18dp</dimen>
+
   <!-- Call Log -->
   <dimen name="call_log_horizontal_margin">8dp</dimen>
   <dimen name="call_log_call_action_size">32dp</dimen>
@@ -104,9 +109,6 @@
 
   <!-- Length of dialpad's shadows in dialer. -->
   <dimen name="shadow_length">10dp</dimen>
-
-  <dimen name="empty_list_message_top_padding">20dp</dimen>
-  <dimen name="empty_list_message_text_size">16sp</dimen>
 
   <!-- Dimensions for individual preference cards -->
   <dimen name="preference_padding_top">16dp</dimen>

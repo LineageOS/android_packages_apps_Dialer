@@ -32,6 +32,8 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -116,6 +118,10 @@ public class CallList implements DialerCallDelegate {
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
     logSecondIncomingCall(context, call);
+
+    EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
+    manager.registerCapabilitiesListener(call);
+    manager.registerStateChangedListener(call);
 
     final DialerCallListenerImpl dialerCallListener = new DialerCallListenerImpl(call);
     call.addListener(dialerCallListener);
@@ -278,6 +284,10 @@ public class CallList implements DialerCallDelegate {
       DialerCall call = mCallByTelecomCall.get(telecomCall);
       Assert.checkArgument(!call.isExternalCall());
 
+      EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
+      manager.unregisterCapabilitiesListener(call);
+      manager.unregisterStateChangedListener(call);
+
       // Don't log an already logged call. logCall() might be called multiple times
       // for the same call due to b/24109437.
       if (call.getLogState() != null && !call.getLogState().isLogged) {
@@ -289,6 +299,8 @@ public class CallList implements DialerCallDelegate {
         LogUtil.w(
             "CallList.onCallRemoved", "Removing call not previously disconnected " + call.getId());
       }
+
+      call.onRemovedFromCallList();
     }
 
     if (!hasLiveCall()) {
@@ -556,7 +568,8 @@ public class CallList implements DialerCallDelegate {
    *
    * @param call The call to update.
    */
-  private void onUpdateCall(DialerCall call) {
+  @VisibleForTesting
+  void onUpdateCall(DialerCall call) {
     LogUtil.d("CallList.onUpdateCall", String.valueOf(call));
     if (!mCallById.containsKey(call.getId()) && call.isExternalCall()) {
       // When a regular call becomes external, it is removed from the call list, and there may be
@@ -791,6 +804,9 @@ public class CallList implements DialerCallDelegate {
         listener.onInternationalCallOnWifi(mCall);
       }
     }
+
+    @Override
+    public void onEnrichedCallSessionUpdate() {}
 
     @Override
     public void onDialerCallSessionModificationStateChange() {

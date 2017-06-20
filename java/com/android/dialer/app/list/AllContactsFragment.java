@@ -38,12 +38,16 @@ import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.dialer.app.R;
-import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.util.Arrays;
 
 /** Fragments to show all contacts with phone numbers. */
 public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter>
@@ -149,6 +153,8 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     final Uri uri = (Uri) view.getTag();
     if (uri != null) {
+      Logger.get(getContext())
+          .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_ALL_CONTACTS_GENERAL);
       if (CompatUtils.hasPrioritizedMimeType()) {
         QuickContact.showQuickContact(getContext(), view, uri, null, Phone.CONTENT_ITEM_TYPE);
       } else {
@@ -169,9 +175,15 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
       return;
     }
 
-    if (!PermissionsUtil.hasPermission(activity, READ_CONTACTS)) {
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+    if (deniedPermissions.length > 0) {
+      LogUtil.i(
+          "AllContactsFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
       FragmentCompat.requestPermissions(
-          this, new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+          this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     } else {
       // Add new contact
       DialerUtils.startActivityWithErrorToast(

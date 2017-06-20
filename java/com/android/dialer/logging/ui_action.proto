@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+message UiAction {
+  enum Type {
+    UNKNOWN = 0;
+
+    // General action starting from 1
+    CHANGE_TAB_TO_FAVORITE = 1;
+    CHANGE_TAB_TO_CALL_LOG = 2;
+    CHANGE_TAB_TO_CONTACTS = 3;
+    CHANGE_TAB_TO_VOICEMAIL = 4;
+    PRESS_ANDROID_BACK_BUTTON = 5;
+    TEXT_CHANGE_WITH_INPUT = 6;
+    SCROLL = 7;
+
+    // In call log, starting from 100
+    CLICK_CALL_LOG_ITEM = 100;
+    OPEN_CALL_DETAIL = 101;
+    CLOSE_CALL_DETAIL_WITH_CANCEL_BUTTON = 102;
+    COPY_NUMBER_IN_CALL_DETAIL = 103;
+    EDIT_NUMBER_BEFORE_CALL_IN_CALL_DETAIL = 104;
+
+    // In dialpad, starting from 200
+    OPEN_DIALPAD = 200;
+    CLOSE_DIALPAD = 201;
+    PRESS_CALL_BUTTON_WITHOUT_CALLING = 202;
+
+    // In search, starting from 300
+    OPEN_SEARCH = 300;
+    HIDE_KEYBOARD_IN_SEARCH = 301;
+    CLOSE_SEARCH_WITH_HIDE_BUTTON = 302;
+
+    // In call history, starting from 400
+    OPEN_CALL_HISTORY = 400;
+    CLOSE_CALL_HISTORY_WITH_CANCEL_BUTTON = 401;
+  }
+}

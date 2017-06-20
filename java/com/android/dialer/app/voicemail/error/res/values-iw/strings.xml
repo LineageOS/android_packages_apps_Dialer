@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"מפעיל את הדואר הקולי הוויזואלי"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ייתכן שלא תקבל עדכונים על הודעות חדשות בדואר הקולי עד שהדואר הקולי הוויזואלי יופעל במלואו. עד אז, תצטרך להתקשר לדואר הקולי כדי להאזין להודעות החדשות."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"לא ניתן להפעיל את הדואר הקולי הוויזואלי"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"ודא שלטלפון יש חיבור לרשת סלולרית ונסה שוב."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ודא שהטלפון מחובר לרשת סלולרית ונסה שוב."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"השבת את מצב טיסה ונסה שוב."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"אין חיבור"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"‏לא תקבל עדכונים על הודעות חדשות בדואר הקולי. אם אתה משתמש בחיבור Wi-Fi, סנכרן עכשיו כדי לבדוק את הדואר הקולי."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"‏לא תקבל עדכונים על הודעות קוליות חדשות. אם אתה משתמש בחיבור Wi-Fi, סנכרן עכשיו כדי לבדוק אם יש לך הודעות קוליות."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"לא תקבל עדכונים על הודעות חדשות בדואר הקולי. השבת את מצב הטיסה כדי לסנכרן את הדואר הקולי שלך."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"כדי שתוכל לבדוק את הדואר הקולי, נדרש חיבור לנתונים סלולריים בטלפון."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"כדי לבדוק הודעות קוליות נדרש חיבור לרשת סלולרית בטלפון."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"לא ניתן להפעיל את הדואר הקולי הוויזואלי"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"עדיין תוכל להתקשר כדי לבדוק את הדואר הקולי."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"לא ניתן לעדכן את הדואר הקולי הוויזואלי"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"‏נסה שוב כשיהיה חיבור טוב יותר ל-Wi-Fi או לרשת הסלולרית. עדיין תוכל להתקשר כדי לבדוק את הדואר הקולי."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"נסה שוב כשיהיה חיבור טוב יותר לרשת הסלולרית. עדיין תוכל להתקשר כדי לבדוק את הדואר הקולי."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"‏נסה שוב כשיהיה חיבור טוב יותר ל-Wi-Fi או לרשת הסלולרית. אפשר גם להתקשר כדי לבדוק הודעות קוליות."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"נסה שוב כשיהיה חיבור טוב יותר לרשת הסלולרית. אפשר גם להתקשר כדי לבדוק הודעות קוליות."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"לא ניתן לעדכן את הדואר הקולי הוויזואלי"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"עדיין תוכל להתקשר כדי לבדוק את הדואר הקולי."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"לא ניתן לעדכן את הדואר הקולי הוויזואלי"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"משהו השתבש"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"התקשר לשירות הלקוחות בטלפון <xliff:g id="NUMBER">%1$s</xliff:g> ואמור לנציג שקוד השגיאה הוא 9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"התנאים וההגבלות של הדואר הקולי הוויזואלי"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"‏עליך לקבל את התנאים וההגבלות של Verizon Wireless כדי להשתמש בדואר הקולי הוויזואלי:\n\n‎%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nעליך לאשר את התנאים וההגבלות של Verizon Wireless כדי להשתמש בדואר הקולי הוויזואלי:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"הפעלה של דואר קולי ויזואלי"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"‎%s‎"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"אם תדחה את התנאים וההגבלות הדואר הקולי הוויזואלי יושבת."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"השבת את הדואר הקולי הוויזואלי"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"אם התנאים וההגבלות לא יאושרו, התמלולים של ההודעות הקוליות יושבתו."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"השבתת התמלולים של ההודעות הקוליות"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"תוכל לבדוק את הדואר הקולי רק על ידי חיוג 86*. כדי להמשיך, הגדר קוד גישה חדש לדואר הקולי."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"הגדרת קוד גישה"</string>
 </resources>

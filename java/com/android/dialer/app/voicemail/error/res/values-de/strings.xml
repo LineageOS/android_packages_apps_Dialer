@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Visuelle Mailbox wird aktiviert"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Möglicherweise erhältst du keine Mailbox-Benachrichtigungen, solange die visuelle Mailbox nicht vollständig aktiviert ist. Bis es soweit ist, kannst du deine Mailbox anrufen, um neue Nachrichten abzuhören."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Visuelle Mailbox kann nicht aktiviert werden"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Vergewissere dich, dass dein Smartphone eine Mobilfunkverbindung hat und versuche es noch einmal."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Vergewissere dich, dass auf deinem Smartphone eine Mobilfunkverbindung besteht, und versuche es noch einmal."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Schalte den Flugmodus aus und versuche es noch einmal."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Keine Verbindung"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Du wirst nicht über neue Mailboxnachrichten informiert. Wenn du eine WLAN-Verbindung hast, kannst du deine Mailbox abrufen, indem du dein Smartphone jetzt synchronisierst."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Du wirst nicht über neue Mailboxnachrichten informiert. Wenn du eine WLAN-Verbindung verwendest, kannst du deine Mailbox abrufen, indem du dein Smartphone jetzt synchronisierst."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Du wirst nicht über neue Mailboxnachrichten informiert. Schalte den Flugmodus aus, um deine Mailbox zu synchronisieren."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Dein Smartphone benötigt eine mobile Datenverbindung, um die Mailbox abzurufen."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Dein Smartphone benötigt eine mobile Datenverbindung, um die Mailbox abzurufen."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Visuelle Mailbox kann nicht aktiviert werden"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Du kannst deine Mailbox immer noch per Anruf abhören."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Visuelle Mailbox kann nicht aktualisiert werden"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Versuch es noch einmal, sobald die WLAN- bzw. Mobilfunkverbindung besser ist. Du kannst deine Mailbox immer noch per Anruf abhören."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Versuch es noch einmal, sobald die Mobilfunkverbindung besser ist. Du kannst deine Mailbox immer noch per Anruf abhören."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Versuche es noch einmal, sobald die WLAN- bzw. Mobilfunkverbindung besser ist. Du kannst deine Mailbox weiterhin per Anruf abhören."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Versuche es noch einmal, sobald die Mobilfunkverbindung besser ist. Du kannst deine Mailbox weiterhin per Anruf abhören."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Visuelle Mailbox kann nicht aktualisiert werden"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Du kannst deine Mailbox immer noch per Anruf abhören."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Visuelle Mailbox kann nicht aktualisiert werden"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Ein Problem ist aufgetreten"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Bitte wende dich an den Kundensupport unter der Nummer <xliff:g id="NUMBER">%1$s</xliff:g> und gib den Fehlercode 9999 an."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Nutzungsbedingungen für visuelle Mailbox"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Du muss den Nutzungsbedingungen von Verizon Wireless zustimmen, um die visuelle Mailbox zu verwenden:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nDu musst den Nutzungsbedingungen von Verizon Wireless zustimmen, um die visuelle Mailbox zu verwenden:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Visuelle Mailbox aktivieren"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Die visuelle Mailbox wird deaktiviert, wenn du die Nutzungsbedingungen ablehnst."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Visuelle Mailbox deaktivieren"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Die Sprache-zu-Text-Umwandlung von Mailbox-Nachrichten wird deaktiviert, wenn die Nutzungsbedingungen abgelehnt werden."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Sprache-zu-Text-Umwandlung von Mailbox-Nachrichten deaktivieren"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Du kannst nur auf Mailboxnachrichten zugreifen, indem du *86 anrufst. Lege eine neue Mailbox-PIN fest, um fortzufahren."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN festlegen"</string>
 </resources>

@@ -20,8 +20,8 @@ import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.os.PowerManager;
 import android.view.Display;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
@@ -141,6 +141,9 @@ public class AnswerProximitySensor
 
   @Override
   public void onInternationalCallOnWifi() {}
+
+  @Override
+  public void onEnrichedCallSessionUpdate() {}
 
   @Override
   public void onDialerCallSessionModificationStateChange() {}

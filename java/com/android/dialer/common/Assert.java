@@ -30,10 +30,6 @@ public class Assert {
     Assert.areThreadAssertsEnabled = areThreadAssertsEnabled;
   }
 
-  public static boolean areThreadAssertsEnabled() {
-    return areThreadAssertsEnabled;
-  }
-
   /**
    * Called when a truly exceptional case occurs.
    *
@@ -60,6 +56,11 @@ public class Assert {
   @CheckReturnValue
   public static AssertionError createAssertionFailException(String msg) {
     return new AssertionError(msg);
+  }
+
+  @CheckReturnValue
+  public static AssertionError createAssertionFailException(String msg, Throwable reason) {
+    return new AssertionError(msg, reason);
   }
 
   @CheckReturnValue

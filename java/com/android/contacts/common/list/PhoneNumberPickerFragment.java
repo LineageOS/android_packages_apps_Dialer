@@ -29,16 +29,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.R;
+import com.android.contacts.common.list.PhoneNumberListAdapter.Listener;
 import com.android.contacts.common.util.AccountFilterUtil;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.protos.ProtoParsers;
 import java.util.Set;
 import org.json.JSONException;
@@ -61,9 +65,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
 
   private boolean mUseCallableUri;
 
-  private ContactListItemView.PhotoPosition mPhotoPosition =
-      ContactListItemView.getDefaultPhotoPosition(false /* normal/non opposite */);
-
   private final Set<OnLoadFinishedListener> mLoadFinishedListeners = new ArraySet<>();
 
   private CursorReranker mCursorReranker;
@@ -71,7 +72,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   public PhoneNumberPickerFragment() {
     setQuickContactEnabled(false);
     setPhotoLoaderEnabled(true);
-    setSectionHeaderDisplayEnabled(true);
+    setSectionHeaderDisplayEnabled(false);
     setDirectorySearchMode(DirectoryListLoader.SEARCH_MODE_NONE);
 
     // Show nothing instead of letting caller Activity show something.
@@ -85,7 +86,24 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
    */
   @Override
   public void onVideoCallIconClicked(int position) {
+    Logger.get(getContext()).logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_SEARCH);
     callNumber(position, true /* isVideoCall */);
+  }
+
+  @Override
+  public void onLightbringerIconClicked(int position) {
+    PerformanceReport.stopRecording();
+    String phoneNumber = getPhoneNumber(position);
+    Intent intent =
+        LightbringerComponent.get(getContext())
+            .getLightbringer()
+            .getIntent(getContext(), phoneNumber);
+    // DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER
+    // Cannot reference because of cyclic dependencies
+    Logger.get(getContext())
+        .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
+    int dialactsActivityRequestCode = 3;
+    getActivity().startActivityForResult(intent, dialactsActivityRequestCode);
   }
 
   @Override
@@ -94,8 +112,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     String componentName = "com.android.dialer.callcomposer.CallComposerActivity";
     Intent intent = new Intent();
     intent.setComponent(new ComponentName(getContext(), componentName));
-    CallComposerContact contact =
-        ((PhoneNumberListAdapter) getAdapter()).getCallComposerContact(position);
+    DialerContact contact = ((PhoneNumberListAdapter) getAdapter()).getDialerContact(position);
     ProtoParsers.put(intent, "CALL_COMPOSER_CONTACT", contact);
     startActivity(intent);
   }
@@ -267,7 +284,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         && data != null
         && !data.isClosed()
         && data.getCount() > 0
-        && loader.getId() != -1) { // skip invalid directory ID of -1
+        && loader.getId() == 0) { // only re-rank if a suggestions loader with id of 0.
       data = mCursorReranker.rerankCursor(data);
     }
     super.onLoadFinished(loader, data);
@@ -320,7 +337,27 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   @Override
   public void onCapabilitiesUpdated() {
     if (getAdapter() != null) {
-      getAdapter().notifyDataSetChanged();
+      EnrichedCallManager manager =
+          EnrichedCallComponent.get(getContext()).getEnrichedCallManager();
+      Listener listener = ((PhoneNumberListAdapter) getAdapter()).getListener();
+
+      for (int i = 0; i < getListView().getChildCount(); i++) {
+        if (!(getListView().getChildAt(i) instanceof ContactListItemView)) {
+          continue;
+        }
+
+        // Since call and share is the lowest priority call to action, if any others are set,
+        // do not reset the call to action. Also do not set the call and share call to action if
+        // the number doesn't support call composer.
+        ContactListItemView view = (ContactListItemView) getListView().getChildAt(i);
+        if (view.getCallToAction() != ContactListItemView.NONE
+            || view.getPhoneNumber() == null
+            || manager.getCapabilities(view.getPhoneNumber()) == null
+            || !manager.getCapabilities(view.getPhoneNumber()).supportsCallComposer()) {
+          continue;
+        }
+        view.setCallToAction(ContactListItemView.CALL_AND_SHARE, listener, view.getPosition());
+      }
     }
   }
 
@@ -360,12 +397,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
     if (!isSearchMode() && mFilter != null) {
       adapter.setFilter(mFilter);
     }
-
-    setPhotoPosition(adapter);
-  }
-
-  protected void setPhotoPosition(ContactEntryListAdapter adapter) {
-    ((PhoneNumberListAdapter) adapter).setPhotoPosition(mPhotoPosition);
   }
 
   @Override
@@ -387,15 +418,6 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
       reloadData();
     }
     updateFilterHeaderView();
-  }
-
-  public void setPhotoPosition(ContactListItemView.PhotoPosition photoPosition) {
-    mPhotoPosition = photoPosition;
-
-    final PhoneNumberListAdapter adapter = (PhoneNumberListAdapter) getAdapter();
-    if (adapter != null) {
-      adapter.setPhotoPosition(photoPosition);
-    }
   }
 
   /**

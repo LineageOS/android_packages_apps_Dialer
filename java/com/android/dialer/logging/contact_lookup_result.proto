@@ -5,6 +5,7 @@ option java_package = "com.android.dialer.logging";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 message ContactLookupResult {
   // The different results of a contact lookup done using a phone number.
   enum Type {
@@ -16,10 +17,10 @@ message ContactLookupResult {
     // Contact was found in the local database.
     LOCAL_CONTACT = 2;
 
-    // Contact was found in Google Dialer's internal phone number cache
+    // DEPRECATED: see subcategories below
     LOCAL_CACHE = 3;
 
-    // Contact was found via Google Caller ID
+    // DEPRECATED: see subcategories below
     REMOTE = 4;
 
     // Phone number was an emergency phone number
@@ -27,5 +28,40 @@ message ContactLookupResult {
 
     // Phone number was the SIM card's voicemail number
     VOICEMAIL = 6;
+
+    // Phone number was identified via the places part of the People API.
+    REMOTE_PLACES = 7;
+
+    // Phone number was identified via the profile part of the People API.
+    REMOTE_PROFILE = 8;
+
+    // Number was found in Dialer's local cache but we don't know how it was
+    // originally identified.
+    LOCAL_CACHE_UNKNOWN = 9;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as a personal contact.
+    LOCAL_CACHE_DIRECTORY = 10;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // via a custom extended directory.
+    LOCAL_CACHE_EXTENDED = 11;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // via the places part of the People API.
+    LOCAL_CACHE_PLACES = 12;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // via the profile part of the People API.
+    LOCAL_CACHE_PROFILE = 13;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // via Caller Name Presentation (CNAP) information. Calls in this
+    // category would have had ContactLookupResultType NOT_FOUND originally.
+    LOCAL_CACHE_CNAP = 14;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // via Cequint caller ID.
+    LOCAL_CACHE_CEQUINT = 15;
   }
 }

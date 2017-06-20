@@ -24,11 +24,8 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,17 +33,12 @@ import android.widget.TextView.OnEditorActionListener;
 
 /** Fragment used to compose call with message fragment. */
 public class MessageComposerFragment extends CallComposerFragment
-    implements OnClickListener,
-        TextWatcher,
-        OnTouchListener,
-        OnLongClickListener,
-        OnEditorActionListener {
+    implements OnClickListener, TextWatcher, OnEditorActionListener {
   private static final String CHAR_LIMIT_KEY = "char_limit";
 
   public static final int NO_CHAR_LIMIT = -1;
 
   private EditText customMessage;
-  private boolean isLongClick = false;
   private int charLimit;
 
   public static MessageComposerFragment newInstance(int charLimit) {
@@ -73,8 +65,6 @@ public class MessageComposerFragment extends CallComposerFragment
     customMessage = (EditText) view.findViewById(R.id.custom_message);
 
     urgent.setOnClickListener(this);
-    customMessage.setOnTouchListener(this);
-    customMessage.setOnLongClickListener(this);
     customMessage.addTextChangedListener(this);
     customMessage.setOnEditorActionListener(this);
     if (charLimit != NO_CHAR_LIMIT) {
@@ -116,30 +106,6 @@ public class MessageComposerFragment extends CallComposerFragment
   @Override
   public void afterTextChanged(Editable s) {
     getListener().composeCall(this);
-  }
-
-  /**
-   * EditTexts take two clicks to dispatch an onClick() event, so instead we add an onTouchListener
-   * to listen for them. The caveat to this is that it also requires listening for onLongClicks to
-   * distinguish whether a MotionEvent came from a click or a long click.
-   */
-  @Override
-  public boolean onTouch(View view, MotionEvent event) {
-    if (event.getAction() == MotionEvent.ACTION_UP) {
-      if (isLongClick) {
-        isLongClick = false;
-      } else {
-        getListener().showFullscreen(true);
-      }
-    }
-    view.performClick();
-    return false;
-  }
-
-  @Override
-  public boolean onLongClick(View v) {
-    isLongClick = true;
-    return false;
   }
 
   @Override

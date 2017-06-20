@@ -203,6 +203,7 @@ public class ContactInfoHelper {
     return info;
   }
 
+  @Nullable
   public ContactInfo lookupNumber(String number, String countryIso) {
     return lookupNumber(number, countryIso, -1);
   }
@@ -223,12 +224,14 @@ public class ContactInfoHelper {
   @SuppressWarnings("ReferenceEquality")
   public ContactInfo lookupNumber(String number, String countryIso, long directoryId) {
     if (TextUtils.isEmpty(number)) {
+      LogUtil.d("ContactInfoHelper.lookupNumber", "number is empty");
       return null;
     }
 
     ContactInfo info;
 
     if (PhoneNumberHelper.isUriNumber(number)) {
+      LogUtil.d("ContactInfoHelper.lookupNumber", "number is sip");
       // The number is a SIP address..
       info = lookupContactFromUri(getContactInfoLookupUri(number, directoryId));
       if (info == null || info == ContactInfo.EMPTY) {
@@ -246,6 +249,7 @@ public class ContactInfoHelper {
     final ContactInfo updatedInfo;
     if (info == null) {
       // The lookup failed.
+      LogUtil.d("ContactInfoHelper.lookupNumber", "lookup failed");
       updatedInfo = null;
     } else {
       // If we did not find a matching contact, generate an empty contact info for the number.
@@ -325,9 +329,11 @@ public class ContactInfoHelper {
    */
   ContactInfo lookupContactFromUri(Uri uri) {
     if (uri == null) {
+      LogUtil.d("ContactInfoHelper.lookupContactFromUri", "uri is null");
       return null;
     }
     if (!PermissionsUtil.hasContactsReadPermissions(mContext)) {
+      LogUtil.d("ContactInfoHelper.lookupContactFromUri", "no contact permission, return empty");
       return ContactInfo.EMPTY;
     }
 
@@ -336,10 +342,12 @@ public class ContactInfoHelper {
       String[] projection = PhoneQuery.getPhoneLookupProjection(uri);
       phoneLookupCursor = mContext.getContentResolver().query(uri, projection, null, null, null);
     } catch (NullPointerException e) {
+      LogUtil.e("ContactInfoHelper.lookupContactFromUri", "phone lookup", e);
       // Trap NPE from pre-N CP2
       return null;
     }
     if (phoneLookupCursor == null) {
+      LogUtil.d("ContactInfoHelper.lookupContactFromUri", "phoneLookupCursor is null");
       return null;
     }
 
@@ -408,19 +416,32 @@ public class ContactInfoHelper {
   private ContactInfo queryContactInfoForPhoneNumber(
       String number, String countryIso, long directoryId) {
     if (TextUtils.isEmpty(number)) {
+      LogUtil.d("ContactInfoHelper.queryContactInfoForPhoneNumber", "number is empty");
       return null;
     }
 
     ContactInfo info = lookupContactFromUri(getContactInfoLookupUri(number, directoryId));
+    if (info == null) {
+      LogUtil.d("ContactInfoHelper.queryContactInfoForPhoneNumber", "info looked up is null");
+    }
     if (info != null && info != ContactInfo.EMPTY) {
       info.formattedNumber = formatPhoneNumber(number, null, countryIso);
+      if (directoryId == -1) {
+        // Contact found in the default directory
+        info.sourceType = ContactSource.Type.SOURCE_TYPE_DIRECTORY;
+      } else {
+        // Contact found in the extended directory specified by directoryId
+        info.sourceType = ContactSource.Type.SOURCE_TYPE_EXTENDED;
+      }
     } else if (mCachedNumberLookupService != null) {
       CachedContactInfo cacheInfo =
           mCachedNumberLookupService.lookupCachedContactFromNumber(mContext, number);
       if (cacheInfo != null) {
-        info = cacheInfo.getContactInfo().isBadData ? null : cacheInfo.getContactInfo();
-      } else {
-        info = null;
+        if (!cacheInfo.getContactInfo().isBadData) {
+          info = cacheInfo.getContactInfo();
+        } else {
+          LogUtil.i("ContactInfoHelper.queryContactInfoForPhoneNumber", "info is bad data");
+        }
       }
     }
     return info;
@@ -601,13 +622,17 @@ public class ContactInfoHelper {
    * will be updated if available.
    */
   @WorkerThread
-  public void updateFromCequintCallerId(ContactInfo info, String number) {
+  public void updateFromCequintCallerId(
+      @Nullable CequintCallerIdManager cequintCallerIdManager, ContactInfo info, String number) {
     Assert.isWorkerThread();
     if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
       return;
     }
+    if (cequintCallerIdManager == null) {
+      return;
+    }
     CequintCallerIdContact cequintCallerIdContact =
-        CequintCallerIdManager.getCequintCallerIdContact(mContext, number);
+        cequintCallerIdManager.getCequintCallerIdContact(mContext, number);
     if (cequintCallerIdContact == null) {
       return;
     }

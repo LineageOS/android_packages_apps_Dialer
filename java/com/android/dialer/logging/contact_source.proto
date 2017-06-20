@@ -5,6 +5,7 @@ option java_package = "com.android.dialer.logging";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 message ContactSource {
   // Applies only to reports made from call history. If we have contact
   // information for the phone number, this field indicates its source.

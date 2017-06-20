@@ -19,7 +19,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.app">
 
-  <application>
+  <application android:theme="@style/Theme.AppCompat">
 
     <activity
       android:exported="false"
@@ -41,6 +41,7 @@
       android:resizeableActivity="true"
       android:theme="@style/DialtactsActivityTheme"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+      <!-- LINT.IfChange -->
       <intent-filter>
         <action android:name="android.intent.action.DIAL"/>
 
@@ -106,6 +107,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
+      <!-- LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/dialer/dialtacts/impl/AndroidManifest.xml) -->
 
       <meta-data
         android:name="com.android.keyguard.layout"

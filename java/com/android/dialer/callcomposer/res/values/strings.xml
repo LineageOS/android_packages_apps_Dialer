@@ -41,4 +41,10 @@
   <string name="camera_permission_text">To take a photo, give access to Camera</string>
   <!-- Text presented to the user explaining that we need device storage permission to view photos -->
   <string name="gallery_permission_text">To share an image, give access to Media</string>
+  <!-- Content description of button to show ui for taking a photo -->
+  <string name="description_call_composer_camera">Take a picture</string>
+  <!-- Content description of button to show ui for selecting a photo from the user's gallery -->
+  <string name="description_call_composer_photo">Choose a photo</string>
+  <!-- Content description of button to show ui for sending a message -->
+  <string name="description_call_composer_message">Send a message</string>
 </resources>

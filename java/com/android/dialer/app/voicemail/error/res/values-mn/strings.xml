@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Уншиж болох дуут шууданг идэвхжүүлж байна"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Уншиж болох дуут шууданг бүрэн идэвхжүүлэхээс өмнө танд дуут шуудангийн мэдэгдэл ирэхгүй байж магадгүй. Дуут шууданг бүрэн идэвхжих хүртэл шинэ зурвас авахын тулд дуут шуудан руу залгана уу."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Уншиж болох дуут шууданг идэвхжүүлэх боломжгүй"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Утасны үүрэн холболт байгаа эсэхийг шалгаад дахин оролдоно уу."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Утасны мобайл холболт байгаа эсэхийг шалгаад дахин оролдоно уу."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Нислэгийн горимыг идэвхгүй болгоод дахин оролдоно уу."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Холболт байхгүй"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Шинэ дуут шуудангийн талаар танд мэдэгдэхгүй. Хэрэв та Wi-Fi дээр байвал одоо синк хийж дуут шуудангаа шалгана уу."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Шинэ дуут шуудангийн талаар танд мэдэгдэхгүй. Хэрэв та Wi-Fi-тай холбогдсон бол одоо синк хийж дуут шуудангаа шалгана уу."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Шинэ дуут шуудангийн талаар танд мэдэгдэхгүй. Дуут шуудангаа синк хийхийн тулд нислэгийн горимыг идэвхгүй болгоно уу."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Дуут шууданг шалгахын тулд таны утсанд үүрэн датаны холболт шаардлагатай."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Дуут шууданг шалгахын тулд таны утсанд мобайл датаны холболт шаардлагатай."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Уншиж болох дуут шууданг идэвхжүүлэх боломжгүй"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Та дуут шууданг дуудлага хийж сонсох боломжтой хэвээр байна."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Уншиж болох дуут шууданг шинэчлэх боломжгүй"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Та Wi-Fi дээр байх буюу үүрэн холболт илүү сайн үед дахин оролдоно уу. Та дуудлага хийж дуут шуудангаа сонсох боломжтой хэвээр байна."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Таны үүрэн датаны холболт илүү сайн үед дахин оролдоно уу. Та дуудлага хийж дуут шуудангаа сонсох боломжтой хэвээр байна."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Та Wi-Fi эсвэл мобайл холболт илүү сайн үед дахин оролдоно уу. Та дуудлага хийж дуут шуудангаа сонсох боломжтой хэвээр байна."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Таны мобайл датаны холболт илүү сайн үед дахин оролдоно уу. Та дуудлага хийж дуут шуудангаа сонсох боломжтой хэвээр байна."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Уншиж болох дуут шууданг шинэчлэх боломжгүй"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Та дуудлага хийж дуут шуудангаа сонсох боломжтой хэвээр байна."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Уншиж болох дуут шууданг шинэчлэх боломжгүй"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Ямар нэг алдаа гарлаа"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Хэрэглэгчийн үйлчилгээ <xliff:g id="NUMBER">%1$s</xliff:g> руу залгаж алдааны код 9999 гэж хэлнэ үү."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Уншиж болохуйц дуут шуудангийн нөхцөл"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Та уншиж болох дуут шууданг ашиглахын тулд Verizon Wireless-н нөхцөлийг зөвшөөрөх шаардлагатай:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nТа уншиж болох дуут шууданг ашиглахын тулд Verizon Wireless-н нөхцөлийг зөвшөөрөх шаардлагатай:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Уншиж болох дуут шууданг идэвхжүүлэх"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Нөхцөлийг зөвшөөрөхгүй бол уншиж болохуйц дуут шууданг идэвхгүй болгоно."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Уншиж болохуйц дуут шууданг идэвхгүй болгох"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Нөхцөлийг зөвшөөрөхгүй бол дуут шуудан сийрүүлэхийг идэвхгүй болгоно."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Дуут шуудан сийрүүлэхийг идэвхгүй болгох"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Дуут шууданд зөвхөн *86 руу залгаж хандах боломжтой. Үргэлжлүүлэхийн тулд шинэ дуут шуудангийн PIN тохируулна уу."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PIN тохируулах"</string>
 </resources>
