@@ -28,8 +28,8 @@ import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.speeddial.SpeedDialFragment;
@@ -78,7 +78,7 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
     CallLogFramework callLogFramework = CallLogComponent.get(context).callLogFramework();
     useNewCallLogTab = callLogFramework.isNewCallLogEnabled(context);
     useNewContactsTab =
-        ConfigProviderBindings.get(context).getBoolean("enable_new_contacts_tab", false);
+        ConfigProviderBindings.get(context).getBoolean("enable_new_contacts_tab", true);
     this.tabTitles = tabTitles;
     hasActiveVoicemailProvider = hasVoicemailProvider;
     fragments.addAll(Collections.nCopies(TAB_COUNT_WITH_VOICEMAIL, null));

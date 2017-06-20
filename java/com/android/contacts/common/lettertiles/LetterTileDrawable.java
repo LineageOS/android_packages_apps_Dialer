@@ -29,6 +29,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
@@ -124,10 +125,16 @@ public class LetterTileDrawable extends Drawable {
       sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
       sDefaultPersonAvatar =
           res.getDrawable(R.drawable.product_logo_avatar_anonymous_white_color_120, null);
+      Assert.isNotNull(sDefaultPersonAvatar, "sDefaultPersonAvatar is null");
       sDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
+      Assert.isNotNull(sDefaultBusinessAvatar, "sDefaultBusinessAvatar is null");
       sDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
+      Assert.isNotNull(sDefaultVoicemailAvatar, "sDefaultVoicemailAvatar is null");
       sDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
+      Assert.isNotNull(sDefaultSpamAvatar, "sDefaultSpamAvatar is null");
       sDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
+      Assert.isNotNull(sDefaultConferenceAvatar, "sDefaultConferenceAvatar is null");
+
       sPaint.setTypeface(
           Typeface.create(res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
       sPaint.setTextAlign(Align.CENTER);
@@ -180,7 +187,7 @@ public class LetterTileDrawable extends Drawable {
   }
 
   @Override
-  public void draw(final Canvas canvas) {
+  public void draw(@NonNull final Canvas canvas) {
     final Rect bounds = getBounds();
     if (!isVisible() || bounds.isEmpty()) {
       return;
@@ -235,6 +242,11 @@ public class LetterTileDrawable extends Drawable {
     } else {
       // Draw the default image if there is no letter/digit to be drawn
       Drawable drawable = getDrawableForContactType(mContactType);
+      if (drawable == null) {
+        throw Assert.createIllegalStateFailException(
+            "Unable to find drawable for contact type " + mContactType);
+      }
+
       drawable.setBounds(getScaledBounds(mScale, mOffset));
       drawable.setAlpha(drawable == sDefaultSpamAvatar ? SPAM_ALPHA : ALPHA);
       drawable.draw(canvas);

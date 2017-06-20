@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"بصری صوتی میل کو فعال کیا جا رہا ہے"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"بصری صوتی میل کے مکمل طور پر فعال ہونے تک ہو سکتا ہے آپ کو صوتی میل کی اطلاعات موصول نہ ہو۔ صوتی میل کے مکمل طور پر فعال ہونے تک نئے پیغامات کی بازیافت کیلئے صوتی میل پر کال کریں۔"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"بصری صوتی میل کو فعال نہیں کیا جا سکتا"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"یقینی بنائیں کہ آپ کے فون میں ایک سیلولر کنکشن موجود ہے اور دوبارہ کوشش کریں۔"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"یقینی بنائیں کہ آپ کے فون میں ایک موبائل کنکشن موجود ہے اور دوبارہ کوشش کریں۔"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ہوائی جہاز وضع آف کریں اور دوبارہ کوشش کریں۔"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"کوئی کنکشن نہیں ہے"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"‏آپ کو نئی صوتی میلز سے مطلع نہیں کیا جائے گا۔ اگر آپ Wi-Fi پر ہیں تو آپ ابھی مطابقت پذیری کرکے صوتی میل کیلئے چیک کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"‏آپ کو نئی صوتی میلز سے مطلع نہیں کیا جائے گا۔ اگر آپ Wi-Fi پر ہیں تو آپ ابھی مطابقت پذیری کرکے صوتی میل کیلئے چیک کر سکتے ہیں۔"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"آپ کو نئی صوتی میلز سے مطلع نہیں کیا جائے گا۔ اپنی صوتی میل کو مطابقت پذیر بنانے کیلئے ہوائی جہاز وضع آف کریں۔"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"صوتی میل چیک کرنے کیلئے آپ کے فون کو سیلولر ڈیٹا کنکشن کی ضرورت ہے۔"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"صوتی میل چیک کرنے کیلئے آپ کے فون کو موبائل ڈیٹا کنکشن کی ضرورت ہے۔"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"بصری صوتی میل کو فعال نہیں کیا جا سکتا"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"‏جب آپ کا Wi-Fi یا سیلولر کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"جب آپ کا سیلولر ڈیٹا کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"‏جب آپ کا Wi-Fi یا موبائل کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"جب آپ کا موبائل ڈیٹا کنکشن بہتر تو دوبارہ کوشش کریں۔ صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"صوتی میل چیک کرنے کیلئے آپ ابھی بھی کال کر سکتے ہیں۔"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"بصری صوتی میل اپ ڈیٹ نہیں ہو سکتی"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"کچھ غلط ہوگیا"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9999 ہے۔"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"بصری صوتی میل کی شرائط و ضوابط"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"‏بصری صوتی میل استعمال کرنے کیلئے آپ کو Verizon وائرلیس کی شرائط و ضوابط قبول کرنا ہونگی:\n\n‎%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nصوتی میل استعمال کرنے کیلئے آپ کو Verizon وائرلیس کی شرائط و ضوابط قبول کرنی چاہئیں::\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"بصری صوتی میل آن کریں"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"‎%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"شرائط و ضوابط مسترد کئے جانے کی صورت میں بصری صوتی میل غیر فعال کر دی جائے گی۔"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"بصری صوتی میل کو غیر فعال کریں"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"شرائط و ضوابط مسترد کئے جانے کی صورت میں صوتی میل ٹرانسکرپشن غیر فعال کر دی جائے گی۔"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"صوتی میل ٹرانسکرپشن غیر فعال کریں"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"‏صوتی میل تک رسائی صرف ‎*86 کو کال کرنے سے ہوگی۔ آگے بڑھنے کیلئے صوتی میل کی نئی PIN سیٹ کریں۔"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"‏PIN سیٹ کریں"</string>
 </resources>

@@ -39,6 +39,14 @@ import com.android.dialer.common.concurrent.DialerExecutorFactory;
 public final class NewCallLogFragment extends Fragment
     implements CallLogUi, LoaderCallbacks<Cursor> {
 
+  /*
+   * This is a reasonable time that it might take between related call log writes, that also
+   * shouldn't slow down single-writes too much. For example, when populating the database using
+   * the simulator, using this value results in ~6 refresh cycles (on a release build) to write 120
+   * call log entries.
+   */
+  private static final long WAIT_MILLIS = 100L;
+
   private DialerExecutor<Boolean> refreshAnnotatedCallLogTask;
   private RecyclerView recyclerView;
 
@@ -113,13 +121,13 @@ public final class NewCallLogFragment extends Fragment
 
   private void checkAnnotatedCallLogDirtyAndRefreshIfNecessary() {
     LogUtil.enterBlock("NewCallLogFragment.checkAnnotatedCallLogDirtyAndRefreshIfNecessary");
-    refreshAnnotatedCallLogTask.executeSerial(false /* skipDirtyCheck */);
+    refreshAnnotatedCallLogTask.executeSerialWithWait(false /* skipDirtyCheck */, WAIT_MILLIS);
   }
 
   @Override
   public void invalidateUi() {
     LogUtil.enterBlock("NewCallLogFragment.invalidateUi");
-    refreshAnnotatedCallLogTask.executeSerial(true /* skipDirtyCheck */);
+    refreshAnnotatedCallLogTask.executeSerialWithWait(true /* skipDirtyCheck */, WAIT_MILLIS);
   }
 
   @Override

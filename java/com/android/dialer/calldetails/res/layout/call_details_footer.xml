@@ -41,4 +41,13 @@
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_edit_grey600_24"
       android:text="@string/call_details_edit_number"/>
+
+  <TextView
+      android:id="@+id/call_detail_action_report_caller_id"
+      style="@style/CallDetailsActionItemStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/quantum_ic_report_grey600_24"
+      android:text="@string/call_details_report_call_id"
+      android:visibility="gone"/>
 </LinearLayout>

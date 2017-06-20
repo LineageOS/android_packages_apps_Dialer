@@ -16,7 +16,7 @@
   -->
 <resources>
   <dimen name="camera_view_button_margin">22dp</dimen>
-  <dimen name="camera_view_button_size">46dp</dimen>
+  <dimen name="camera_view_button_size">48dp</dimen>
   <dimen name="capture_button_size">84dp</dimen>
   <dimen name="capture_button_bottom_margin">4dp</dimen>
 </resources>

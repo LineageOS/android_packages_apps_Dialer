@@ -200,7 +200,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     int multipleNumbersContactsCount = 0;
     int contactsWithPhotoCount = 0;
     int contactsWithNameCount = 0;
-    int duoReachableContactsCount = 0;
+    int lightbringerReachableContactsCount = 0;
 
     // The cursor should not be closed since this is invoked from a CursorLoader.
     if (cursor.moveToFirst()) {
@@ -308,7 +308,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       if (contact.phoneNumber == null) {
         multipleNumbersContactsCount++;
       } else if (lightbringer.isReachable(mContext, contact.phoneNumber)) {
-        duoReachableContactsCount++;
+        lightbringerReachableContactsCount++;
       }
     }
 
@@ -320,7 +320,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
             multipleNumbersContactsCount,
             contactsWithPhotoCount,
             contactsWithNameCount,
-            duoReachableContactsCount);
+            lightbringerReachableContactsCount);
     // Logs for manual testing
     LogUtil.v("PhoneFavoritesTileAdapter.saveCursorToCache", "counter: %d", counter);
     LogUtil.v(

@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"अनुमति दें"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"फ़ोटो लेने के लिए, कैमरे की ऐक्सेस दें"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"चित्र साझा करने के लिए, मीडिया की ऐक्सेस दें"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"चित्र लें"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"एक फ़ोटो चुनें"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"संदेश भेजें"</string>
 </resources>

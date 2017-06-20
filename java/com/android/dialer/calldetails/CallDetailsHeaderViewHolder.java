@@ -41,6 +41,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   private final View callBackButton;
   private final TextView nameView;
   private final TextView numberView;
+  private final TextView networkView;
   private final QuickContactBadge contactPhoto;
   private final Context context;
 
@@ -52,6 +53,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     callBackButton = container.findViewById(R.id.call_back_button);
     nameView = container.findViewById(R.id.contact_name);
     numberView = container.findViewById(R.id.phone_number);
+    networkView = container.findViewById(R.id.network);
     contactPhoto = container.findViewById(R.id.quick_contact_photo);
 
     callBackButton.setOnClickListener(this);
@@ -72,8 +74,6 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
             contact.getNameOrNumber(),
             contact.getContactType());
 
-    contactPhoto.setContentDescription(
-        context.getString(R.string.description_contact_photo_details, contact.getNameOrNumber()));
     nameView.setText(contact.getNameOrNumber());
     if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
@@ -88,6 +88,12 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     } else {
       numberView.setVisibility(View.GONE);
       numberView.setText(null);
+    }
+
+    if (!TextUtils.isEmpty(contact.getSimDetails().getNetwork())) {
+      networkView.setVisibility(View.VISIBLE);
+      networkView.setText(contact.getSimDetails().getNetwork());
+      networkView.setTextColor(context.getResources().getColor(contact.getSimDetails().getColor()));
     }
 
     if (TextUtils.isEmpty(contact.getNumber())) {

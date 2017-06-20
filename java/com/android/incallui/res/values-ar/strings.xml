@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"مكالمة فائتة من <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"مكالمة حالية"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"مكالمة عمل جارية"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"‏اتصال جارٍ عبر Wi-Fi"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"‏مكالمة عمل جارية عبر اتصال Wi-Fi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"‏اتصال جارٍ عبر Wi-Fi"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"‏مكالمة عمل جارية عبر اتصال Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"معلقة"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"مكالمة واردة"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"مكالمة واردة مع صورة"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"مكالمة واردة مهمة مع صورة ورسالة وموقع"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"مكالمة واردة مهمة مع مرفقات"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"مكالمة عمل واردة"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"‏اتصال وارد عبر Wi-Fi"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"‏مكالمة عمل واردة عبر اتصال Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"‏اتصال وارد عبر Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"‏مكالمة عمل واردة عبر اتصال Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"مكالمة واردة يشتبه في كونها غير مرغوب فيها"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"طلب فيديو وارد"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"لا خدمة"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"الرد على مكالمة فيديو"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"لإجراء مكالمة، أوقف تشغيل وضع الطائرة أولاً."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"غير مسجل على الشبكة."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"شبكة الجوّال غير متاحة."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"شبكة الجوال غير متاحة."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"لإجراء مكالمة، أدخل رقمًا صالحًا."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"يتعذر الاتصال."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"‏جارٍ بدء تسلسل MMI..."</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"إنهاء الاتصال"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"مكالمة جماعية"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"قيد الاتصال"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"جارٍ استكمال المكالمة باستخدام بيانات الجوّال…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"‏تعذر التبديل إلى شبكة Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"ستظل مكالمة الفيديو على شبكة الجوّال. قد يتم فرض رسوم على البيانات القياسية للشبكة."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"جارٍ استكمال المكالمة باستخدام بيانات الجوّال…"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"‏تعذر التبديل إلى شبكة Wi-Fi"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ستظل مكالمة الفيديو جارية على شبكة الجوال. قد يتم تطبيق رسوم قياسية على استخدام البيانات."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"عدم إظهار هذا مرة أخرى"</string>
 </resources>

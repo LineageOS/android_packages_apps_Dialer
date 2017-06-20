@@ -66,6 +66,18 @@ public class AnnotatedCallLogContract {
 
     /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
+
+    /**
+     * The phone number called or number the call came from, encoded as a {@link
+     * com.android.dialer.DialerPhoneNumber} proto. The number may be empty if it was an incoming
+     * call and the number was unknown.
+     *
+     * <p>This column is only present in the annotated call log, and not the coalesced annotated
+     * call log. The coalesced version uses a formatted number string rather than proto bytes.
+     *
+     * <p>Type: BLOB
+     */
+    public static final String NUMBER = "number";
   }
 
   /**
@@ -96,10 +108,19 @@ public class AnnotatedCallLogContract {
     public static final String NUMBER_CALLS = "number_calls";
 
     /**
+     * The phone number formatted in a way suitable for display to the user. This value is generated
+     * on the fly when the {@link CoalescedAnnotatedCallLog} is generated.
+     *
+     * <p>Type: TEXT
+     */
+    public static final String FORMATTED_NUMBER = "formatted_number";
+
+    /**
      * Columns that are only in the {@link CoalescedAnnotatedCallLog} but not the {@link
      * AnnotatedCallLog}.
      */
-    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG = new String[] {NUMBER_CALLS};
+    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG =
+        new String[] {NUMBER_CALLS, FORMATTED_NUMBER};
 
     /** All columns in the {@link CoalescedAnnotatedCallLog}. */
     public static final String[] ALL_COLUMNS =

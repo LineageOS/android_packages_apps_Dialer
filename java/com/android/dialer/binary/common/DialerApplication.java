@@ -20,6 +20,7 @@ import android.app.Application;
 import android.os.StrictMode;
 import android.os.Trace;
 import android.support.annotation.NonNull;
+import android.support.v4.os.BuildCompat;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.buildtype.BuildType;
@@ -49,7 +50,9 @@ public abstract class DialerApplication extends Application implements HasRootCo
     CallLogComponent.get(this).callLogFramework().registerContentObservers(getApplicationContext());
     PersistentLogger.initialize(this);
 
-    NotificationChannelManager.getInstance().firstInitIfNeeded(this);
+    if (BuildCompat.isAtLeastO()) {
+      NotificationChannelManager.initChannels(this);
+    }
     Trace.endSection();
   }
 

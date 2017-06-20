@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.annotation.Px;
 import com.google.auto.value.AutoValue;
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +35,10 @@ public abstract class BubbleInfo {
   public abstract Icon getPrimaryIcon();
 
   @NonNull
-  public abstract PendingIntent getPrimaryAction();
+  public abstract PendingIntent getPrimaryIntent();
+
+  @Px
+  public abstract int getStartingYPosition();
 
   @NonNull
   public abstract List<Action> getActions();
@@ -45,9 +49,10 @@ public abstract class BubbleInfo {
 
   public static Builder from(@NonNull BubbleInfo bubbleInfo) {
     return builder()
-        .setPrimaryAction(bubbleInfo.getPrimaryAction())
+        .setPrimaryIntent(bubbleInfo.getPrimaryIntent())
         .setPrimaryColor(bubbleInfo.getPrimaryColor())
         .setPrimaryIcon(bubbleInfo.getPrimaryIcon())
+        .setStartingYPosition(bubbleInfo.getStartingYPosition())
         .setActions(bubbleInfo.getActions());
   }
 
@@ -59,7 +64,9 @@ public abstract class BubbleInfo {
 
     public abstract Builder setPrimaryIcon(@NonNull Icon primaryIcon);
 
-    public abstract Builder setPrimaryAction(@NonNull PendingIntent primaryAction);
+    public abstract Builder setPrimaryIntent(@NonNull PendingIntent primaryIntent);
+
+    public abstract Builder setStartingYPosition(@Px int startingYPosition);
 
     public abstract Builder setActions(List<Action> actions);
 
@@ -77,7 +84,7 @@ public abstract class BubbleInfo {
     public abstract CharSequence getName();
 
     @NonNull
-    public abstract PendingIntent getAction();
+    public abstract PendingIntent getIntent();
 
     public abstract boolean isEnabled();
 
@@ -89,7 +96,7 @@ public abstract class BubbleInfo {
 
     public static Builder from(@NonNull Action action) {
       return builder()
-          .setAction(action.getAction())
+          .setIntent(action.getIntent())
           .setChecked(action.isChecked())
           .setEnabled(action.isEnabled())
           .setName(action.getName())
@@ -104,7 +111,7 @@ public abstract class BubbleInfo {
 
       public abstract Builder setName(@NonNull CharSequence name);
 
-      public abstract Builder setAction(@NonNull PendingIntent action);
+      public abstract Builder setIntent(@NonNull PendingIntent intent);
 
       public abstract Builder setEnabled(boolean enabled);
 

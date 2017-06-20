@@ -122,7 +122,7 @@ public class CallUtil {
       cachedIsVideoEnabledState = isVideoEnabled;
     }
 
-    return true;
+    return isVideoEnabled;
   }
 
   /**

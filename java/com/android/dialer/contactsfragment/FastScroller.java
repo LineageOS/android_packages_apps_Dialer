@@ -48,13 +48,14 @@ public class FastScroller extends RelativeLayout {
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
-    container = (TextView) findViewById(R.id.fast_scroller_container);
+    container = findViewById(R.id.fast_scroller_container);
     scrollBar = findViewById(R.id.fast_scroller_scroll_bar);
   }
 
   void setup(ContactsAdapter adapter, LinearLayoutManager layoutManager) {
     this.adapter = adapter;
     this.layoutManager = layoutManager;
+    setVisibility(VISIBLE);
   }
 
   @Override

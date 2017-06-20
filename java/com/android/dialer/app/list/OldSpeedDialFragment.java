@@ -56,6 +56,7 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.EmptyContentView;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** This fragment displays the user's favorite/frequent contacts in a grid. */
 public class OldSpeedDialFragment extends Fragment
@@ -403,9 +404,15 @@ public class OldSpeedDialFragment extends Fragment
       return;
     }
 
-    if (!PermissionsUtil.hasPermission(activity, READ_CONTACTS)) {
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+    if (deniedPermissions.length > 0) {
+      LogUtil.i(
+          "OldSpeedDialFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
       FragmentCompat.requestPermissions(
-          this, new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+          this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     } else {
       // Switch tabs
       ((HostInterface) activity).showAllContactsTab();

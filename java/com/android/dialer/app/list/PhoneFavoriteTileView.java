@@ -138,6 +138,8 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         }
 
         if (TextUtils.isEmpty(mPhoneNumberString)) {
+          // Don't set performance report now, since user may spend some time on picking a number
+
           // Copy "superclass" implementation
           Logger.get(getContext())
               .logInteraction(InteractionEvent.Type.SPEED_DIAL_CLICK_CONTACT_WITH_AMBIGUOUS_NUMBER);

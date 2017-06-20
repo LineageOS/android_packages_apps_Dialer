@@ -78,10 +78,10 @@
   <string name="notification_ongoing_work_call">Ongoing work call</string>
   <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
        Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_call_wifi">Ongoing Wi-Fi call</string>
+  <string name="notification_ongoing_call_wifi">Ongoing Wi\u2011Fi call</string>
   <!-- The "label" of the in-call Notification for an ongoing work call, which is being made
        over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_work_call_wifi">Ongoing Wi-Fi work call</string>
+  <string name="notification_ongoing_work_call_wifi">Ongoing Wi\u2011Fi work call</string>
   <!-- The "label" of the in-call Notification for a call that's on hold -->
   <string name="notification_on_hold">On hold</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
@@ -126,10 +126,10 @@
   <string name="notification_incoming_work_call">Incoming work call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call,
        which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_call_wifi">Incoming Wi-Fi call</string>
+  <string name="notification_incoming_call_wifi">Incoming Wi\u2011Fi call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing work call,
        which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_work_call_wifi">Incoming Wi-Fi work call</string>
+  <string name="notification_incoming_work_call_wifi">Incoming Wi\u2011Fi work call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing spam call. -->
   <string name="notification_incoming_spam_call">Incoming suspected spam call</string>
   <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
@@ -190,7 +190,7 @@
        This string is currently unused (see comments in InCallActivity.java.) -->
   <string name="incall_error_emergency_only">Not registered on network.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
-  <string name="incall_error_out_of_service">Cellular network not available.</string>
+  <string name="incall_error_out_of_service">Mobile network not available.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
   <string name="incall_error_no_phone_number_supplied">To place a call, enter a valid number.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
@@ -349,11 +349,11 @@
   <string name="generic_conference_call_name">In call</string>
 
   <!-- Displayed when handover from WiFi to Lte occurs during a video call -->
-  <string name="video_call_wifi_to_lte_handover_toast">Continuing call using cellular data…</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Continuing call using mobile data\u2026</string>
 
   <!-- Displayed when WiFi handover from LTE fails during a video call. -->
-  <string name="video_call_lte_to_wifi_failed_title">Couldn\'t switch to Wi-Fi network</string>
-  <string name="video_call_lte_to_wifi_failed_message">Video call will remain on cellular network. Standard
+  <string name="video_call_lte_to_wifi_failed_title">Couldn\'t switch to Wi\u2011Fi network</string>
+  <string name="video_call_lte_to_wifi_failed_message">Video call will remain on the mobile network. Standard
     data charges may apply.
   </string>
   <string name="video_call_lte_to_wifi_failed_do_not_show">Do not show this again</string>

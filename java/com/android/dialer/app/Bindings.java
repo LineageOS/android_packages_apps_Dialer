@@ -17,9 +17,6 @@
 package com.android.dialer.app;
 
 import android.content.Context;
-import com.android.dialer.app.bindings.DialerBindings;
-import com.android.dialer.app.bindings.DialerBindingsFactory;
-import com.android.dialer.app.bindings.DialerBindingsStub;
 import com.android.dialer.app.legacybindings.DialerLegacyBindings;
 import com.android.dialer.app.legacybindings.DialerLegacyBindingsFactory;
 import com.android.dialer.app.legacybindings.DialerLegacyBindingsStub;
@@ -28,27 +25,9 @@ import java.util.Objects;
 /** Accessor for the in call UI bindings. */
 public class Bindings {
 
-  private static DialerBindings instance;
   private static DialerLegacyBindings legacyInstance;
 
   private Bindings() {}
-
-  public static DialerBindings get(Context context) {
-    Objects.requireNonNull(context);
-    if (instance != null) {
-      return instance;
-    }
-
-    Context application = context.getApplicationContext();
-    if (application instanceof DialerBindingsFactory) {
-      instance = ((DialerBindingsFactory) application).newDialerBindings();
-    }
-
-    if (instance == null) {
-      instance = new DialerBindingsStub();
-    }
-    return instance;
-  }
 
   public static DialerLegacyBindings getLegacy(Context context) {
     Objects.requireNonNull(context);
@@ -67,11 +46,4 @@ public class Bindings {
     return legacyInstance;
   }
 
-  public static void setForTesting(DialerBindings testInstance) {
-    instance = testInstance;
-  }
-
-  public static void setLegacyBindingForTesting(DialerLegacyBindings testLegacyInstance) {
-    legacyInstance = testLegacyInstance;
-  }
 }

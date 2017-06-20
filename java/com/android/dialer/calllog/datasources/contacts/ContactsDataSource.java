@@ -50,6 +50,9 @@ public final class ContactsDataSource implements CallLogDataSource {
       CallLogMutations mutations) {
     Assert.isWorkerThread();
     // TODO: Implementation.
+    for (ContentValues contentValues : mutations.getInserts().values()) {
+      contentValues.put(AnnotatedCallLog.CONTACT_NAME, "Placeholder name");
+    }
   }
 
   @Override

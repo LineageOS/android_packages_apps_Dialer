@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Рұқсат беру"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Суретке түсіру үшін камераға кіруге рұқсат беріңіз"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Суретті жіберу үшін медиафайлға кіруге рұқсат беріңіз"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Суретке түсіру"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Суретті таңдау"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Хабар жіберу"</string>
 </resources>

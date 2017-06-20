@@ -216,6 +216,7 @@ public class AnswerFragment extends Fragment
   private void performAnswerAndRelease() {
     restoreAnswerAndReleaseButtonAnimation();
     answerScreenDelegate.onAnswerAndReleaseCall();
+    buttonAcceptClicked = true;
   }
 
   private void restoreAnswerAndReleaseButtonAnimation() {
@@ -356,6 +357,11 @@ public class AnswerFragment extends Fragment
     AnswerFragment instance = new AnswerFragment();
     instance.setArguments(bundle);
     return instance;
+  }
+
+  @Override
+  public boolean isActionTimeout() {
+    return (buttonAcceptClicked || buttonRejectClicked) && answerScreenDelegate.isActionTimeout();
   }
 
   @Override
@@ -526,6 +532,7 @@ public class AnswerFragment extends Fragment
     if (!isAdded()) {
       return;
     }
+    LogUtil.enterBlock("AnswerFragment.updateDataFragment");
     Fragment current = getChildFragmentManager().findFragmentById(R.id.incall_data_container);
     Fragment newFragment = null;
 
@@ -542,6 +549,7 @@ public class AnswerFragment extends Fragment
           || !Objects.equals(((MultimediaFragment) current).getSubject(), subject)
           || !Objects.equals(((MultimediaFragment) current).getImageUri(), imageUri)
           || !Objects.equals(((MultimediaFragment) current).getLocation(), location)) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Replacing multimedia fragment");
         // Needs replacement
         newFragment =
             MultimediaFragment.newInstance(
@@ -553,12 +561,14 @@ public class AnswerFragment extends Fragment
     } else if (shouldShowAvatar()) {
       // Needs Avatar
       if (!(current instanceof AvatarFragment)) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Replacing avatar fragment");
         // Needs replacement
         newFragment = new AvatarFragment();
       }
     } else {
       // Needs empty
       if (current != null) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Removing current fragment");
         getChildFragmentManager().beginTransaction().remove(current).commitNow();
       }
       contactGridManager.setAvatarImageView(null, 0, false);
@@ -1021,7 +1031,7 @@ public class AnswerFragment extends Fragment
   }
 
   private void updateImportanceBadgeVisibility() {
-    if (!isAdded()) {
+    if (!isAdded() || getView() == null) {
       return;
     }
 

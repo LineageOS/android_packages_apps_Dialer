@@ -104,13 +104,14 @@ public class PrimaryInfo {
     return String.format(
         Locale.US,
         "PrimaryInfo, number: %s, name: %s, location: %s, label: %s, "
-            + "photo: %s, photoType: %d, isPhotoVisible: %b",
+            + "photo: %s, photoType: %d, isPhotoVisible: %b, MultimediaData: %s",
         LogUtil.sanitizePhoneNumber(number),
         LogUtil.sanitizePii(name),
         LogUtil.sanitizePii(location),
         label,
         photo,
         photoType,
-        isContactPhotoShown);
+        isContactPhotoShown,
+        multimediaData);
   }
 }

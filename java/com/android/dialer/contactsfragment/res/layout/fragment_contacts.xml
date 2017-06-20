@@ -33,7 +33,8 @@
       android:layout_height="match_parent"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
-      android:clipChildren="false">
+      android:clipChildren="false"
+      android:visibility="gone">
 
     <TextView
         android:id="@+id/fast_scroller_container"

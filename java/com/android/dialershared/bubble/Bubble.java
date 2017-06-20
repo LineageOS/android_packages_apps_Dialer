@@ -26,8 +26,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.ColorInt;
@@ -47,6 +51,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
@@ -69,6 +74,8 @@ import java.util.List;
  * convenience)
  */
 public class Bubble {
+  // This class has some odd behavior that is not immediately obvious in order to avoid jank when
+  // resizing. See http://go/bubble-resize for details.
 
   // How long text should show after showText(CharSequence) is called
   private static final int SHOW_TEXT_DURATION_MILLIS = 3000;
@@ -96,6 +103,8 @@ public class Bubble {
   private final Handler handler = new Handler();
 
   private ViewHolder viewHolder;
+  private ViewPropertyAnimator collapseAnimation;
+  private Integer overrideGravity;
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
@@ -114,7 +123,7 @@ public class Bubble {
   public static boolean canShowBubbles(@NonNull Context context) {
     return canShowBubblesForTesting != null
         ? canShowBubblesForTesting
-        : Settings.canDrawOverlays(context);
+        : VERSION.SDK_INT < VERSION_CODES.M || Settings.canDrawOverlays(context);
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
@@ -127,7 +136,7 @@ public class Bubble {
   public static Intent getRequestPermissionIntent(@NonNull Context context) {
     return new Intent(
         Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-        new Uri.Builder().scheme("package").fragment(context.getPackageName()).build());
+        Uri.fromParts("package", context.getPackageName(), null));
   }
 
   /** Creates instances of Bubble. The default implementation just calls the constructor. */
@@ -183,13 +192,12 @@ public class Bubble {
               type,
               LayoutParams.FLAG_NOT_TOUCH_MODAL
                   | LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                  | LayoutParams.FLAG_NOT_FOCUSABLE,
+                  | LayoutParams.FLAG_NOT_FOCUSABLE
+                  | LayoutParams.FLAG_LAYOUT_NO_LIMITS,
               PixelFormat.TRANSLUCENT);
       windowParams.gravity = Gravity.TOP | Gravity.LEFT;
-      windowParams.x =
-          context.getResources().getDimensionPixelOffset(R.dimen.bubble_initial_offset_x);
-      windowParams.y =
-          context.getResources().getDimensionPixelOffset(R.dimen.bubble_initial_offset_y);
+      windowParams.x = context.getResources().getDimensionPixelOffset(R.dimen.bubble_safe_margin_x);
+      windowParams.y = currentInfo.getStartingYPosition();
       windowParams.height = LayoutParams.WRAP_CONTENT;
       windowParams.width = LayoutParams.WRAP_CONTENT;
     }
@@ -203,6 +211,7 @@ public class Bubble {
     showAnimator.setInterpolator(new OvershootInterpolator());
     showAnimator.start();
     isShowing = true;
+    updatePrimaryIconAnimation();
   }
 
   /**
@@ -235,6 +244,7 @@ public class Bubble {
             () -> {
               windowManager.removeView(viewHolder.getRoot());
               isShowing = false;
+              updatePrimaryIconAnimation();
             })
         .start();
   }
@@ -342,6 +352,11 @@ public class Bubble {
         SHOW_TEXT_DURATION_MILLIS);
   }
 
+  @Nullable
+  Integer getGravityOverride() {
+    return overrideGravity;
+  }
+
   void onMoveStart() {
     startCollapse(CollapseEnd.NOTHING);
     viewHolder
@@ -353,23 +368,27 @@ public class Bubble {
 
   void onMoveFinish() {
     viewHolder.getPrimaryButton().animate().translationZ(0);
+    // If it's GONE, no resize is necessary. If it's VISIBLE, it will get cleaned up when the
+    // collapse animation finishes
+    if (viewHolder.getExpandedView().getVisibility() == View.INVISIBLE) {
+      doResize(null);
+    }
   }
 
   void primaryButtonClick() {
     if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
       try {
-        currentInfo.getPrimaryAction().send();
+        currentInfo.getPrimaryIntent().send();
       } catch (CanceledException e) {
         throw new RuntimeException(e);
       }
       return;
     }
 
-    boolean onRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
     doResize(
         () -> {
-          onLeftRightSwitch(onRight);
-          viewHolder.getExpandedView().setVisibility(View.VISIBLE);
+          onLeftRightSwitch(isDrawingFromRight());
+          viewHolder.setDrawerVisibility(View.VISIBLE);
         });
     View expandedView = viewHolder.getExpandedView();
     expandedView
@@ -380,7 +399,7 @@ public class Bubble {
               public boolean onPreDraw() {
                 expandedView.getViewTreeObserver().removeOnPreDrawListener(this);
                 expandedView.setTranslationX(
-                    onRight ? expandedView.getWidth() : -expandedView.getWidth());
+                    isDrawingFromRight() ? expandedView.getWidth() : -expandedView.getWidth());
                 expandedView
                     .animate()
                     .setInterpolator(new LinearOutSlowInInterpolator())
@@ -393,6 +412,14 @@ public class Bubble {
   }
 
   void onLeftRightSwitch(boolean onRight) {
+    if (viewHolder.isMoving()) {
+      if (viewHolder.getExpandedView().getVisibility() == View.GONE) {
+        // If the drawer is not part of the layout we don't need to do anything. Layout flips will
+        // happen if necessary when opening the drawer.
+        return;
+      }
+    }
+
     viewHolder
         .getRoot()
         .setLayoutDirection(onRight ? View.LAYOUT_DIRECTION_RTL : View.LAYOUT_DIRECTION_LTR);
@@ -437,12 +464,24 @@ public class Bubble {
     viewHolder.getSecondButton().setVisibility(numButtons < 2 ? View.GONE : View.VISIBLE);
 
     viewHolder.getPrimaryIcon().setImageIcon(currentInfo.getPrimaryIcon());
+    updatePrimaryIconAnimation();
 
     viewHolder
         .getExpandedView()
         .setBackgroundTintList(ColorStateList.valueOf(currentInfo.getPrimaryColor()));
 
     updateButtonStates();
+  }
+
+  private void updatePrimaryIconAnimation() {
+    Drawable drawable = viewHolder.getPrimaryIcon().getDrawable();
+    if (drawable instanceof Animatable) {
+      if (isShowing) {
+        ((Animatable) drawable).start();
+      } else {
+        ((Animatable) drawable).stop();
+      }
+    }
   }
 
   private void setBackgroundDrawable(CheckableImageButton view, @ColorInt int color) {
@@ -492,7 +531,7 @@ public class Bubble {
 
   private void doAction(Action action) {
     try {
-      action.getAction().send();
+      action.getIntent().send();
     } catch (CanceledException e) {
       throw new RuntimeException(e);
     }
@@ -504,9 +543,8 @@ public class Bubble {
     // would occur. To fix this, instead of resizing the window, we create a new one and destroy
     // the old one. There is a short delay before destroying the old view to ensure the new one has
     // had time to draw.
-    boolean onRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
     ViewHolder oldViewHolder = viewHolder;
-    if (onRight) {
+    if (isDrawingFromRight()) {
       viewHolder = new ViewHolder(oldViewHolder.getRoot().getContext());
       update();
       viewHolder
@@ -519,12 +557,13 @@ public class Bubble {
       operation.run();
     }
 
-    if (onRight) {
+    if (isDrawingFromRight()) {
       swapViewHolders(oldViewHolder);
     }
   }
 
   private void swapViewHolders(ViewHolder oldViewHolder) {
+    oldViewHolder.getShadowProvider().setVisibility(View.GONE);
     ViewGroup root = viewHolder.getRoot();
     windowManager.addView(root, windowParams);
     root.getViewTreeObserver()
@@ -542,32 +581,56 @@ public class Bubble {
             });
   }
 
-  private ViewPropertyAnimator startCollapse(@CollapseEnd int collapseEndAction) {
-    setFocused(false);
-    boolean onRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
+  private void startCollapse(@CollapseEnd int collapseEndAction) {
     View expandedView = viewHolder.getExpandedView();
-    return expandedView
-        .animate()
-        .translationX(onRight ? expandedView.getWidth() : -expandedView.getWidth())
-        .setInterpolator(new FastOutLinearInInterpolator())
-        .withEndAction(
-            () -> {
-              expanded = false;
-              if (collapseEndAction == CollapseEnd.HIDE) {
-                hide();
-              } else if (!textShowing) {
-                // Don't swap the window while the user is moving it, even if we're on the right.
-                // The movement will help hide the jank of the resize.
-                boolean swapWindow = onRight && !viewHolder.isMoving();
-                if (swapWindow) {
-                  // We don't actually need to set the drawer to GONE since in the new window it
-                  // will already be GONE. Just do the resize operation.
-                  doResize(null);
-                } else {
-                  expandedView.setVisibility(View.GONE);
-                }
-              }
-            });
+    if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
+      // Drawer is already collapsed or animation is running.
+      return;
+    }
+
+    overrideGravity = isDrawingFromRight() ? Gravity.RIGHT : Gravity.LEFT;
+    setFocused(false);
+    collapseAnimation =
+        expandedView
+            .animate()
+            .translationX(isDrawingFromRight() ? expandedView.getWidth() : -expandedView.getWidth())
+            .setInterpolator(new FastOutLinearInInterpolator())
+            .withEndAction(
+                () -> {
+                  collapseAnimation = null;
+                  expanded = false;
+
+                  if (textShowing) {
+                    // Will do resize once the text is done.
+                    return;
+                  }
+
+                  // Hide the drawer and resize if possible.
+                  viewHolder.setDrawerVisibility(View.INVISIBLE);
+                  if (!viewHolder.isMoving() || !isDrawingFromRight()) {
+                    doResize(() -> viewHolder.setDrawerVisibility(View.GONE));
+                  }
+
+                  // If this collapse was to come before a hide, do it now.
+                  if (collapseEndAction == CollapseEnd.HIDE) {
+                    hide();
+                  }
+
+                  // Resume normal gravity after any resizing is done.
+                  handler.postDelayed(
+                      () -> {
+                        overrideGravity = null;
+                        if (!viewHolder.isMoving()) {
+                          viewHolder.undoGravityOverride();
+                        }
+                      },
+                      // Need to wait twice as long for resize and layout
+                      WINDOW_REDRAW_DELAY_MILLIS * 2);
+                });
+  }
+
+  private boolean isDrawingFromRight() {
+    return (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
   }
 
   private void setFocused(boolean focused) {
@@ -594,6 +657,7 @@ public class Bubble {
     private final CheckableImageButton secondButton;
     private final CheckableImageButton thirdButton;
     private final View expandedView;
+    private final View shadowProvider;
 
     public ViewHolder(Context context) {
       // Window root is not in the layout file so that the inflater has a view to inflate into
@@ -604,6 +668,7 @@ public class Bubble {
       primaryButton = contentView.findViewById(R.id.bubble_button_primary);
       primaryIcon = contentView.findViewById(R.id.bubble_icon_primary);
       primaryText = contentView.findViewById(R.id.bubble_text);
+      shadowProvider = contentView.findViewById(R.id.bubble_drawer_shadow_provider);
 
       firstButton = contentView.findViewById(R.id.bubble_icon_first);
       secondButton = contentView.findViewById(R.id.bubble_icon_second);
@@ -625,6 +690,28 @@ public class Bubble {
             }
             return false;
           });
+      expandedView
+          .getViewTreeObserver()
+          .addOnDrawListener(
+              () -> {
+                int translationX = (int) expandedView.getTranslationX();
+                int parentOffset =
+                    ((MarginLayoutParams) ((ViewGroup) expandedView.getParent()).getLayoutParams())
+                        .leftMargin;
+                if (isDrawingFromRight()) {
+                  int maxLeft =
+                      shadowProvider.getRight()
+                          - context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+                  shadowProvider.setLeft(
+                      Math.min(maxLeft, expandedView.getLeft() + translationX + parentOffset));
+                } else {
+                  int minRight =
+                      shadowProvider.getLeft()
+                          + context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+                  shadowProvider.setRight(
+                      Math.max(minRight, expandedView.getRight() + translationX + parentOffset));
+                }
+              });
       moveHandler = new MoveHandler(primaryButton, Bubble.this);
     }
 
@@ -660,8 +747,21 @@ public class Bubble {
       return expandedView;
     }
 
+    public View getShadowProvider() {
+      return shadowProvider;
+    }
+
+    public void setDrawerVisibility(int visibility) {
+      expandedView.setVisibility(visibility);
+      shadowProvider.setVisibility(visibility);
+    }
+
     public boolean isMoving() {
       return moveHandler.isMoving();
+    }
+
+    public void undoGravityOverride() {
+      moveHandler.undoGravityOverride();
     }
   }
 }

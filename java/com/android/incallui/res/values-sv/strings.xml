@@ -33,8 +33,8 @@
     <string name="notification_missedCallTicker" msgid="238492086972857643">"Missat samtal från <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Pågående samtal"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Pågående jobbsamtal"</string>
-    <string name="notification_ongoing_call_wifi" msgid="297183051021070949">"Pågående Wi-Fi-samtal"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="6769311641293583197">"Pågående jobbsamtal via Wi-Fi"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Pågående Wi-Fi-samtal"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Pågående jobbsamtal på Wi-Fi"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"Parkerat"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"Inkommande samtal"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Inkommande samtal med foto"</string>
@@ -55,8 +55,8 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Viktigt inkommande samtal med foto, meddelande och plats"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Viktigt inkommande samtal med bilagor"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Inkommande jobbsamtal"</string>
-    <string name="notification_incoming_call_wifi" msgid="1039173395425774684">"Inkommande Wi-Fi-samtal"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="322580182203435905">"Inkommande jobbsamtal via Wi-Fi"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Inkommande Wi-Fi-samtal"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Inkommande jobbsamtal på Wi-Fi"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Inkommande misstänkt spamsamtal"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Inkommande begäran om videosamtal"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Ingen tjänst"</string>
@@ -73,7 +73,7 @@
     <string name="notification_take_video_call" msgid="4473387503712341390">"Svara på videosamtal"</string>
     <string name="incall_error_power_off" msgid="3244691852792529453">"Om du vill ringa ett samtal måste du först inaktivera flygplansläge."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Inte registrerat på nätverk."</string>
-    <string name="incall_error_out_of_service" msgid="539611768312332950">"Det finns inget mobilnät tillgängligt."</string>
+    <string name="incall_error_out_of_service" msgid="5027539470868484145">"Inga tillgängliga mobilnätverk."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Ange ett giltigt nummer om du vill ringa ett samtal."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Det gick inte att ringa."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Startar sekvens för MMI-kod…"</string>
@@ -134,8 +134,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Avsluta samtal"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Konferenssamtal"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"I samtal"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2495974172657183700">"Samtalet fortsätter med mobildata …"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="2793524281399509056">"Det gick inte att växla till Wi-Fi-nätverk"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="5950700221126447109">"Videosamtalet förblir i mobilnätverket. Vanliga dataavgifter kan tillkomma."</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Samtalet fortsätter med mobildata …"</string>
+    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Det gick inte att växla till Wi-Fi-nätverk"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videosamtalet förblir i mobilnätverket. Vanliga dataavgifter kan tillkomma."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Visa inte detta igen"</string>
 </resources>

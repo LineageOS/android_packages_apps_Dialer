@@ -44,7 +44,7 @@ public class LoggingBindingsStub implements LoggingBindings {
       int multipleNumbersContactsCount,
       int contactsWithPhotoCount,
       int contactsWithNameCount,
-      int duoReachableContactsCount) {}
+      int lightbringerReachableContactsCount) {}
 
   @Override
   public void sendHitEventAnalytics(String category, String action, String label, long value) {}

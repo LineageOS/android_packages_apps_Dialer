@@ -42,6 +42,7 @@ import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.protos.ProtoParsers;
 import java.util.Set;
 import org.json.JSONException;
@@ -91,6 +92,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
 
   @Override
   public void onLightbringerIconClicked(int position) {
+    PerformanceReport.stopRecording();
     String phoneNumber = getPhoneNumber(position);
     Intent intent =
         LightbringerComponent.get(getContext())
@@ -282,7 +284,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         && data != null
         && !data.isClosed()
         && data.getCount() > 0
-        && loader.getId() != -1) { // skip invalid directory ID of -1
+        && loader.getId() == 0) { // only re-rank if a suggestions loader with id of 0.
       data = mCursorReranker.rerankCursor(data);
     }
     super.onLoadFinished(loader, data);

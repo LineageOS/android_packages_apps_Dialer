@@ -40,6 +40,7 @@ import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.SearchUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import java.util.HashSet;
@@ -55,7 +56,6 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
    */
   public static final boolean LOCAL_INVISIBLE_DIRECTORY_ENABLED = false;
 
-  private static final String TAG = "ContactEntryListAdapter";
   private int mDisplayOrder;
   private int mSortOrder;
 
@@ -81,6 +81,8 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
 
   private ContactListFilter mFilter;
   private boolean mDarkTheme = false;
+
+  public static final int SUGGESTIONS_LOADER_ID = 0;
 
   /** Resource used to provide header-text for default filter. */
   private CharSequence mDefaultFilterHeaderText;
@@ -130,7 +132,20 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
   }
 
   protected void addPartitions() {
+    if (ConfigProviderBindings.get(getContext()).getBoolean("p13n_ranker_should_enable", false)) {
+      addPartition(createSuggestionsDirectoryPartition());
+    }
     addPartition(createDefaultDirectoryPartition());
+  }
+
+  protected DirectoryPartition createSuggestionsDirectoryPartition() {
+    DirectoryPartition partition = new DirectoryPartition(true, true);
+    partition.setDirectoryId(SUGGESTIONS_LOADER_ID);
+    partition.setDirectoryType(getContext().getString(R.string.contact_suggestions));
+    partition.setPriorityDirectory(true);
+    partition.setPhotoSupported(true);
+    partition.setLabel(getContext().getString(R.string.local_suggestions_search_label));
+    return partition;
   }
 
   protected DirectoryPartition createDefaultDirectoryPartition() {
@@ -245,6 +260,11 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
     } else {
       mUpperCaseQueryString = SearchUtil.cleanStartAndEndOfSearchQuery(queryString.toUpperCase());
     }
+
+    // Enable default partition header if in search mode (including zero-suggest).
+    if (mQueryString != null) {
+      setDefaultPartitionHeader(true);
+    }
   }
 
   public String getUpperCaseQueryString() {
@@ -356,9 +376,9 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
     if (cursor.getCount() == 0) {
       // Directory table must have at least local directory, without which this adapter will
       // enter very weird state.
-      LogUtil.e(
-          TAG,
-          "Directory search loader returned an empty cursor, which implies we have "
+      LogUtil.i(
+          "ContactEntryListAdapter.changeDirectories",
+          "directory search loader returned an empty cursor, which implies we have "
               + "no directory entries.",
           new RuntimeException());
       return;
@@ -531,22 +551,27 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
     return false;
   }
 
-  /** Changes visibility parameters for the default directory partition. */
-  public void configureDefaultPartition(boolean showIfEmpty, boolean hasHeader) {
+  /** Configures visibility parameters for the directory partitions. */
+  public void configurePartitionsVisibility(boolean isInSearchMode) {
+    for (int i = 0; i < getPartitionCount(); i++) {
+      setShowIfEmpty(i, false);
+      setHasHeader(i, isInSearchMode);
+    }
+  }
+
+  // Sets header for the default partition.
+  private void setDefaultPartitionHeader(boolean setHeader) {
+    // Iterate in reverse here to ensure the first DEFAULT directory has header.
+    // Both "Suggestions" and "All Contacts" directories have DEFAULT id.
     int defaultPartitionIndex = -1;
-    int count = getPartitionCount();
-    for (int i = 0; i < count; i++) {
+    for (int i = getPartitionCount() - 1; i >= 0; i--) {
       Partition partition = getPartition(i);
       if (partition instanceof DirectoryPartition
           && ((DirectoryPartition) partition).getDirectoryId() == Directory.DEFAULT) {
         defaultPartitionIndex = i;
-        break;
       }
     }
-    if (defaultPartitionIndex != -1) {
-      setShowIfEmpty(defaultPartitionIndex, showIfEmpty);
-      setHasHeader(defaultPartitionIndex, hasHeader);
-    }
+    setHasHeader(defaultPartitionIndex, setHeader);
   }
 
   @Override

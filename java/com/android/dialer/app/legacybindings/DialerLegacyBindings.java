@@ -41,6 +41,7 @@ public interface DialerLegacyBindings {
       ViewGroup alertContainer,
       CallLogAdapter.CallFetcher callFetcher,
       CallLogAdapter.MultiSelectRemoveView multiSelectRemoveView,
+      CallLogAdapter.OnActionModeStateChangedListener actionModeStateChangedListener,
       CallLogCache callLogCache,
       ContactInfoCache contactInfoCache,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,

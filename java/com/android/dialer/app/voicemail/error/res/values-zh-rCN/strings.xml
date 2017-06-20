@@ -21,17 +21,17 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"正在激活可视语音信箱"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"在可视语音信箱未完全激活前，您可能不会收到新语音邮件通知。在完全激活前，请呼叫语音信箱以获取新邮件。"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"无法激活可视语音信箱"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"请确保您的手机已连接到移动网络，然后重试。"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"请确保您的手机已连接到移动网络，然后重试。"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"请关闭飞行模式，然后重试。"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"无网络连接"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"您将不会收到关于新语音邮件的通知。如果您已连接到 WLAN 网络，则可以立即同步以便查看语音邮件。"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"您将不会收到关于新语音邮件的通知。如果您已连接到 WLAN 网络，则可以立即同步以便查看语音邮件。"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"您将不会收到关于新语音邮件的通知。请关闭飞行模式以便同步语音信箱。"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"要查看语音邮件，您的手机需要连接到移动数据网络。"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"要查看语音邮件，您的手机需要连接到移动数据网络。"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"无法激活可视语音信箱"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"您仍然可以通过拨打电话来查看语音邮件。"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"无法更新可视语音信箱"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"请在 WLAN 或移动网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"请在移动数据网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"请在 WLAN 或移动网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"请在移动数据网络连接信号较强时重试。您仍然可以通过拨打电话来查看语音邮件。"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"无法更新可视语音信箱"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"您仍然可以通过拨打电话来查看语音邮件。"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"无法更新可视语音信箱"</string>
@@ -102,9 +102,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"出了点问题"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"请拨打 <xliff:g id="NUMBER">%1$s</xliff:g> 联系客户服务人员，并告诉他们错误代码是 9999。"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"可视语音信箱条款及条件"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"您必须接受 Verizon Wireless 的条款及条件，才能使用可视语音信箱：\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\n您必须接受 Verizon Wireless 的条款及条件才能使用可视语音信箱：\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"启用可视语音信箱"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"如果您拒绝接受条款及条件，可视语音信箱将被停用。"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"停用可视语音信箱"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"如果您拒绝接受条款及条件，语音邮件转录功能将被停用。"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"停用语音邮件转录功能"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"您只能通过拨打 *86 来访问语音信箱。请先设置新的语音信箱 PIN 码再继续操作。"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"设置 PIN 码"</string>
 </resources>

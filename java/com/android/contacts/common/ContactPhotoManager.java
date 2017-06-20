@@ -238,6 +238,9 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     badge.assignContactUri(contactUri);
     badge.setOverlay(null);
 
+    badge.setContentDescription(
+        badge.getContext().getString(R.string.description_quick_contact_for, displayName));
+
     String lookupKey = contactUri == null ? null : UriUtils.getLookupKeyFromUri(contactUri);
     ContactPhotoManager.DefaultImageRequest request =
         new ContactPhotoManager.DefaultImageRequest(

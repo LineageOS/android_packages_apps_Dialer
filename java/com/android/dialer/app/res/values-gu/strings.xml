@@ -80,6 +80,7 @@
     <string name="add_wait" msgid="1177723010768282578">"પ્રતીક્ષા ઉમેરો"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"સેટિંગ્સ"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"સિમ્યુલેટર"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"નવું UI શૉર્ટકટ્સ બનાવો"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"તમામ સંપર્કો"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"ટચ ટોન કીપેડનો ઉપયોગ કરો"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"કૉલ પર પાછા આવવું પ્રગતિ પર છે"</string>
@@ -104,12 +105,14 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> સેકંડ"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> મિ <xliff:g id="SECONDS">%s</xliff:g> સે"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"બૅચ ક્રિયા મોડ રદ કરો"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"વૉઇસમેઇલ"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"વૉઇસમેઇલ"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"હા"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"નહીં"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"કાઢી નાખો"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"રદ કરો"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"પસંદ કરેલ <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g>ને કાઢી નાખીએ?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> પસંદ કરી"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"આ વૉઇસમેઇલ કાઢી નાખીએ? "</b>"</item>
+      <item quantity="other">"<b>"આ વૉઇસમેઇલ કાઢી નાખીએ? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> નાં રોજ <xliff:g id="TIME">%2$s</xliff:g> વાગ્યે"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

@@ -80,6 +80,7 @@
     <string name="add_wait" msgid="1177723010768282578">"Thêm chờ"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"Cài đặt"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"Trình mô phỏng"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Tạo phím tắt giao diện người dùng mới"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"Tất cả liên hệ"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"Sử dụng bàn phím số cảm ứng có âm"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Quay lại cuộc gọi đang thực hiện"</string>
@@ -104,12 +105,14 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> phút <xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"Hủy chế độ tác vụ hàng loạt"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"thư thoại"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"thư thoại"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Có"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"Không"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Xóa"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Hủy"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"Xóa <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> đã chọn?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"Đã chọn <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="other">"<b>"Xóa các thư thoại này? "</b>"</item>
+      <item quantity="one">"<b>"Xóa thư thoại này? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> lúc <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

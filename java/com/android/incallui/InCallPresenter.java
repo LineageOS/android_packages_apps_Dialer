@@ -1014,6 +1014,13 @@ public class InCallPresenter implements CallList.Listener {
     }
   }
 
+  public void refreshUi() {
+    if (mInCallActivity != null) {
+      // Re-evaluate which fragment is being shown.
+      mInCallActivity.onPrimaryCallStateChanged();
+    }
+  }
+
   public void addInCallUiListener(InCallUiListener listener) {
     mInCallUiListeners.add(listener);
   }

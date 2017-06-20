@@ -39,7 +39,7 @@ class MoveHandler implements OnTouchListener {
   // Amount the ViewConfiguration's minFlingVelocity will be scaled by for our own minVelocity
   private static final int MIN_FLING_VELOCITY_FACTOR = 8;
   // The friction multiplier to control how slippery the bubble is when flung
-  private static final float SCROLL_FRICTION_MULTIPLIER = 8f;
+  private static final float SCROLL_FRICTION_MULTIPLIER = 4f;
 
   private final Context context;
   private final WindowManager windowManager;
@@ -78,12 +78,22 @@ class MoveHandler implements OnTouchListener {
 
         @Override
         public void setValue(LayoutParams windowParams, float value) {
+          boolean wasOnRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
           int displayWidth = context.getResources().getDisplayMetrics().widthPixels;
-          boolean onRight = value > displayWidth / 2;
+          boolean onRight;
+          Integer gravityOverride = bubble.getGravityOverride();
+          if (gravityOverride == null) {
+            onRight = value > displayWidth / 2;
+          } else {
+            onRight = (gravityOverride & Gravity.RIGHT) == Gravity.RIGHT;
+          }
           int centeringOffset = bubbleSize / 2 + shadowPaddingSize;
           windowParams.x =
               (int) (onRight ? (displayWidth - value - centeringOffset) : value - centeringOffset);
           windowParams.gravity = Gravity.TOP | (onRight ? Gravity.RIGHT : Gravity.LEFT);
+          if (wasOnRight != onRight) {
+            bubble.onLeftRightSwitch(onRight);
+          }
           if (bubble.isShowing()) {
             windowManager.updateViewLayout(bubble.getRootView(), windowParams);
           }
@@ -132,6 +142,11 @@ class MoveHandler implements OnTouchListener {
 
   public boolean isMoving() {
     return isMoving;
+  }
+
+  public void undoGravityOverride() {
+    LayoutParams windowParams = bubble.getWindowParams();
+    xProperty.setValue(windowParams, xProperty.getValue(windowParams));
   }
 
   @Override
@@ -190,13 +205,12 @@ class MoveHandler implements OnTouchListener {
           } else {
             snapX();
           }
-
+          isMoving = false;
           bubble.onMoveFinish();
         } else {
           v.performClick();
           bubble.primaryButtonClick();
         }
-        isMoving = false;
         break;
     }
     return true;

@@ -18,9 +18,9 @@ package com.android.dialer.oem;
 import android.content.Context;
 import android.content.res.Resources;
 import android.telephony.TelephonyManager;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PackageUtils;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

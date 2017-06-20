@@ -80,6 +80,7 @@
     <string name="add_wait" msgid="1177723010768282578">"Agregar espera"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"Configuración"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"Simulador"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Crear acceso a la nueva IU"</string>
     <string name="menu_allContacts" msgid="8544950176866640863">"Todos los contactos"</string>
     <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"Usar teclado numérico"</string>
     <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"Regresar a la llamada en curso"</string>
@@ -104,12 +105,14 @@
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="description_cancel_multi_select" msgid="3930475950253360461">"Cancelar el modo de acción masiva"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"el mensaje de voz"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"los mensajes de voz"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"Sí"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"No"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Borrar"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Cancelar"</string>
     <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"¿Deseas borrar <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> que seleccionaste?"</string>
     <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> seleccionada(s)"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="other">"<b>"¿Deseas borrar estos mensajes de voz? "</b>"</item>
+      <item quantity="one">"<b>"¿Deseas borrar este mensaje de voz? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"El <xliff:g id="DATE">%1$s</xliff:g> a la hora <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>

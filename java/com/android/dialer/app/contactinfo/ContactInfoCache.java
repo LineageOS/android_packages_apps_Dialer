@@ -162,7 +162,7 @@ public class ContactInfoCache {
     ContactInfo info;
     if (request.isLocalRequest()) {
       info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
-      if (!info.contactExists) {
+      if (info != null && !info.contactExists) {
         // TODO: Maybe skip look up if it's already available in cached number lookup
         // service.
         long start = SystemClock.elapsedRealtime();

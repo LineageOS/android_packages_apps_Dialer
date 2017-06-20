@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -177,33 +178,33 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 resources,
                 R.string.search_shortcut_call_number,
                 mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
-        drawable = getContext().getResources().getDrawable(R.drawable.quantum_ic_call_vd_theme_24);
+        drawable = ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_call_vd_theme_24);
         break;
       case SHORTCUT_CREATE_NEW_CONTACT:
         text = resources.getString(R.string.search_shortcut_create_new_contact);
         drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_person_add_vd_theme_24);
+            ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_person_add_vd_theme_24);
         drawable.setAutoMirrored(true);
         break;
       case SHORTCUT_ADD_TO_EXISTING_CONTACT:
         text = resources.getString(R.string.search_shortcut_add_to_contact);
         drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_person_add_vd_theme_24);
+            ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_person_add_vd_theme_24);
         break;
       case SHORTCUT_SEND_SMS_MESSAGE:
         text = resources.getString(R.string.search_shortcut_send_sms_message);
         drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_message_vd_theme_24);
+            ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_message_vd_theme_24);
         break;
       case SHORTCUT_MAKE_VIDEO_CALL:
         text = resources.getString(R.string.search_shortcut_make_video_call);
         drawable =
-            getContext().getResources().getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24);
+            ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
         break;
       case SHORTCUT_BLOCK_NUMBER:
         text = resources.getString(R.string.search_shortcut_block_number);
         drawable =
-            getContext().getResources().getDrawable(R.drawable.ic_not_interested_googblue_24dp);
+            ContextCompat.getDrawable(getContext(), R.drawable.ic_not_interested_googblue_24dp);
         break;
       default:
         throw new IllegalArgumentException("Invalid shortcut type");

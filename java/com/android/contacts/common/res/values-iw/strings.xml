@@ -70,10 +70,12 @@
     <string name="status_away" msgid="2298688367552893953">"לא נמצא"</string>
     <string name="status_busy" msgid="5990832098713248503">"לא פנוי"</string>
     <string name="contactsList" msgid="8806067891419291513">"אנשי קשר"</string>
+    <string name="contact_suggestions" msgid="3324166754807120006">"הצעות מובילות"</string>
     <string name="local_invisible_directory" msgid="4723238462733650090">"אחר"</string>
     <string name="directory_search_label" msgid="4621215895484025229">"ספריה"</string>
     <string name="directory_search_label_work" msgid="7679326282707414897">"ספריית עבודה"</string>
     <string name="local_search_label" msgid="907622822323119235">"כל אנשי הקשר"</string>
+    <string name="local_suggestions_search_label" msgid="1178575146224386118">"הצעות"</string>
     <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"אני"</string>
     <string name="search_results_searching" msgid="3710866752172327451">"מחפש..."</string>
     <string name="foundTooManyContacts" msgid="3685002426663730799">"נמצאו יותר מ-<xliff:g id="COUNT">%d</xliff:g>."</string>

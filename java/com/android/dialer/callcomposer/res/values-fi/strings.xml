@@ -30,4 +30,7 @@
     <string name="allow" msgid="8637148297403066623">"Salli"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Jos haluat ottaa valokuvan, salli kameran käyttö."</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Jos haluat jakaa kuvan, salli kuvien käyttö."</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Ota kuva"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Valitse kuva"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Lähetä viesti"</string>
 </resources>
