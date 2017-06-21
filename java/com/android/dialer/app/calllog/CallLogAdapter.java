@@ -317,6 +317,15 @@ public class CallLogAdapter extends GroupingListAdapter
               Logger.get(mActivity)
                   .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_SELECT_ENTRY);
               checkMarkCallLogEntry(viewHolder);
+              // select all check box logic
+              if (getItemCount() == selectedItems.size()) {
+                LogUtil.i(
+                    "mExpandCollapseListener.onClick",
+                    "getitem count %d is equal to items select count %d, check select all box",
+                    getItemCount(),
+                    selectedItems.size());
+                mMultiSelectRemoveView.tapSelectAll();
+              }
             }
             return;
           }
@@ -1394,5 +1403,7 @@ public class CallLogAdapter extends GroupingListAdapter
     void showMultiSelectRemoveView(boolean show);
 
     void setSelectAllModeToFalse();
+
+    void tapSelectAll();
   }
 }
