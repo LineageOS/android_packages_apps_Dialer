@@ -185,6 +185,15 @@ public interface EnrichedCallManager {
   @Nullable
   Session getSession(long sessionId);
 
+  /**
+   * Returns a list containing viewable string representations of all existing sessions.
+   *
+   * <p>Intended for debug display purposes only.
+   */
+  @MainThread
+  @NonNull
+  List<String> getAllSessionsForDisplay();
+
   @NonNull
   Filter createIncomingCallComposerFilter();
 

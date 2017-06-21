@@ -13,11 +13,11 @@ cp2 containing all of the relevant info needed to rendering.
 
 ### Business Search
 
-// TODO(calderwoodra)
+// TODO
 
 ### Google Directory Search
 
-// TODO(calderwoodra)
+// TODO
 
 ## Rendering
 
