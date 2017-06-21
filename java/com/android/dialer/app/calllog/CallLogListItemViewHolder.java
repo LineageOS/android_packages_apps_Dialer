@@ -877,7 +877,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
-      if (getLightbringer().getPackageName().equals(packageName)) {
+      if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
         startLightbringerActivity(intent);
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
