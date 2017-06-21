@@ -47,4 +47,10 @@
   <string name="description_call_composer_photo">Choose a photo</string>
   <!-- Content description of button to show ui for sending a message -->
   <string name="description_call_composer_message">Send a message</string>
+  <!-- When a user makes a call with a photo attached, we send the photo through the app "Messages".
+    This string is shown in a toast for privacy reasons. -->
+  <string name="image_sent_messages">Photo sent via Messages</string>
+  <!-- When a user makes a call with text attached, we send the text through the app "Messages".
+    This string is shown in a toast for privacy reasons. -->
+  <string name="message_sent_messages">Message sent via Messages</string>
 </resources>
