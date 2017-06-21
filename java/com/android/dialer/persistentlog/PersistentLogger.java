@@ -43,7 +43,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * com.google.android.apps.dialer.crashreporter.SilentCrashReporter} is expected to handle such
  * cases.
  *
- * <p>{@link #logText(String, String)} should be used to log ad-hoc text logs. TODO: switch
+ * <p>{@link #logText(String, String)} should be used to log ad-hoc text logs. TODO(twyen): switch
  * to structured logging
  */
 public final class PersistentLogger {

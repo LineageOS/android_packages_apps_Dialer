@@ -1034,7 +1034,7 @@ public class InCallPresenter implements CallList.Listener {
     Log.d(this, "onActivityStarted");
     notifyVideoPauseController(true);
     if (mStatusBarNotifier != null) {
-      // TODO - b/36649622: Investigate this redundant call
+      // TODO(maxwelb) - b/36649622: Investigate this redundant call
       mStatusBarNotifier.updateNotification(mCallList);
     }
   }

@@ -127,8 +127,8 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     return Contacts.getLookupUri(contactId, lookupKey);
   }
 
-  // TODO: handle CNAP and cequint types.
-  // TODO: unify this into a utility method with CallLogAdapter#getNumberType
+  // TODO(calderwoodra): handle CNAP and cequint types.
+  // TODO(calderwoodra): unify this into a utility method with CallLogAdapter#getNumberType
   private static String getLabel(Resources resources, Cursor cursor) {
     int numberType = cursor.getInt(Projections.PHONE_TYPE);
     String numberLabel = cursor.getString(Projections.PHONE_LABEL);
@@ -171,7 +171,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
       return CallToAction.VIDEO_CALL;
     }
 
-    // TODO: enriched calling
+    // TODO(calderwoodra): enriched calling
     return CallToAction.NONE;
   }
 
@@ -183,13 +183,13 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
           callToActionView.setVisibility(View.VISIBLE);
           callToActionView.setImageDrawable(
               context.getDrawable(com.android.contacts.common.R.drawable.ic_phone_attach));
-          // TODO: open call composer.
+          // TODO(calderwoodra): open call composer.
           break;
         case CallToAction.VIDEO_CALL:
           callToActionView.setVisibility(View.VISIBLE);
           callToActionView.setImageDrawable(
               context.getDrawable(R.drawable.quantum_ic_videocam_white_24));
-          // TODO: place a video call
+          // TODO(calderwoodra): place a video call
           break;
         case CallToAction.NONE:
         default:
@@ -197,7 +197,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
               "Invalid Call to action type: " + currentAction);
       }
     } else {
-      // TODO: set the correct call initiation type.
+      // TODO(calderwoodra): set the correct call initiation type.
       TelecomUtil.placeCall(context, new CallIntentBuilder(number, Type.REGULAR_SEARCH).build());
     }
   }

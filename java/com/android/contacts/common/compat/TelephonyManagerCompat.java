@@ -32,7 +32,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class TelephonyManagerCompat {
 
-  // TODO: Use public API for these constants when available
+  // TODO(maxwelb): Use public API for these constants when available
   public static final String EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE =
       "android.telephony.event.EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE";
   public static final String EVENT_HANDOVER_TO_WIFI_FAILED =
@@ -120,7 +120,7 @@ public class TelephonyManagerCompat {
   }
 
   /**
-   * This method uses a new system API to enable or disable visual voicemail. TODO: restrict
+   * This method uses a new system API to enable or disable visual voicemail. TODO(twyen): restrict
    * to N MR1, not needed in future SDK.
    */
   public static void setVisualVoicemailEnabled(
@@ -138,7 +138,7 @@ public class TelephonyManagerCompat {
   }
 
   /**
-   * This method uses a new system API to check if visual voicemail is enabled TODO: restrict
+   * This method uses a new system API to check if visual voicemail is enabled TODO(twyen): restrict
    * to N MR1, not needed in future SDK.
    */
   public static boolean isVisualVoicemailEnabled(

@@ -49,13 +49,13 @@ final class MainPagerAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public int getCount() {
-    // TODO: add logic to hide/show voicemail tab
+    // TODO(calderwoodra): add logic to hide/show voicemail tab
     return 3;
   }
 
   @Override
   public Fragment getItem(int position) {
-    // TODO: implement tabs
+    // TODO(calderwoodra): implement tabs
     return new StubFragment();
   }
 

@@ -27,7 +27,7 @@ public interface AnswerHint {
   /**
    * Inflates the hint's layout into the container.
    *
-   * <p>TODO: if the hint becomes more dependent on other UI elements of the AnswerFragment,
+   * <p>TODO(twyen): if the hint becomes more dependent on other UI elements of the AnswerFragment,
    * should put put and hintText into another data structure.
    */
   void onCreateView(LayoutInflater inflater, ViewGroup container, View puck, TextView hintText);

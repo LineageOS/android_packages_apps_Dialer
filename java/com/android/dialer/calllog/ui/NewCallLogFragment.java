@@ -92,7 +92,7 @@ public final class NewCallLogFragment extends Fragment
     CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
     callLogFramework.attachUi(this);
 
-    // TODO: Consider doing this when fragment becomes visible.
+    // TODO(zachh): Consider doing this when fragment becomes visible.
     checkAnnotatedCallLogDirtyAndRefreshIfNecessary();
   }
 
@@ -142,7 +142,7 @@ public final class NewCallLogFragment extends Fragment
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
     LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");
 
-    // TODO: Handle empty cursor by showing empty view.
+    // TODO(zachh): Handle empty cursor by showing empty view.
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(new NewCallLogAdapter(newCursor));
   }

@@ -39,7 +39,7 @@ public final class ContactsDataSource implements CallLogDataSource {
   public boolean isDirty(Context appContext) {
     Assert.isWorkerThread();
 
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
     return false;
   }
 
@@ -49,7 +49,7 @@ public final class ContactsDataSource implements CallLogDataSource {
       Context appContext,
       CallLogMutations mutations) {
     Assert.isWorkerThread();
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
     for (ContentValues contentValues : mutations.getInserts().values()) {
       contentValues.put(AnnotatedCallLog.CONTACT_NAME, "Placeholder name");
     }
@@ -57,12 +57,12 @@ public final class ContactsDataSource implements CallLogDataSource {
 
   @Override
   public void onSuccessfulFill(Context appContext) {
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
   }
 
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
     return new RowCombiner(individualRowsSortedByTimestampDesc)
         .useSingleValueString(AnnotatedCallLog.CONTACT_NAME)
         .combine();
@@ -72,6 +72,6 @@ public final class ContactsDataSource implements CallLogDataSource {
   @Override
   public void registerContentObservers(
       Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
-    // TODO: Guard against missing permissions during callback registration.
+    // TODO(zachh): Guard against missing permissions during callback registration.
   }
 }
