@@ -1077,6 +1077,9 @@ public class DialtactsActivity extends TransactionSafeActivity
       // but it is quickly removed and shown the contacts tab.
       if (mListsFragment != null) {
         mListsFragment.showTab(tabIndex);
+        PerformanceReport.setStartingTabIndex(tabIndex);
+      } else {
+        PerformanceReport.setStartingTabIndex(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
       }
     }
   }
