@@ -930,4 +930,14 @@
   <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
   <string name="about_phone_label">About</string>
 
+  <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
+  <string name="view_conversation">View</string>
+
+  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
+        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
+  <string name="ec_data_deleted">Call deleted. View and delete attachments shared during this call in Messages.</string>
+
+  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
+        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
+  <string name="multiple_ec_data_deleted">Calls deleted. View and delete attachments shared during calls in Messages.</string>
 </resources>

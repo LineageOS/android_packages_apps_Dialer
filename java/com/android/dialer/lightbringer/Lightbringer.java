@@ -53,7 +53,7 @@ public interface Lightbringer {
   @MainThread
   PhoneAccountHandle getPhoneAccountHandle();
 
-  @NonNull
+  @Nullable
   @MainThread
   String getPackageName();
 }

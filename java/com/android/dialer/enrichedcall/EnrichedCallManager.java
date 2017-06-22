@@ -185,6 +185,15 @@ public interface EnrichedCallManager {
   @Nullable
   Session getSession(long sessionId);
 
+  /**
+   * Returns a list containing viewable string representations of all existing sessions.
+   *
+   * <p>Intended for debug display purposes only.
+   */
+  @MainThread
+  @NonNull
+  List<String> getAllSessionsForDisplay();
+
   @NonNull
   Filter createIncomingCallComposerFilter();
 
@@ -211,6 +220,10 @@ public interface EnrichedCallManager {
   @MainThread
   Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @NonNull String number, @NonNull CallDetailsEntries entries);
+
+  /** Returns true if any enriched calls have been made or received. */
+  @MainThread
+  boolean hasStoredData();
 
   /**
    * Unregisters the given {@link StateChangedListener}.

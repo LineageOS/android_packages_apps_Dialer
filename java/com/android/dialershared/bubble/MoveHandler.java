@@ -94,7 +94,7 @@ class MoveHandler implements OnTouchListener {
           if (wasOnRight != onRight) {
             bubble.onLeftRightSwitch(onRight);
           }
-          if (bubble.isShowing()) {
+          if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), windowParams);
           }
         }
@@ -110,7 +110,7 @@ class MoveHandler implements OnTouchListener {
         @Override
         public void setValue(LayoutParams object, float value) {
           object.y = (int) value - bubbleSize - shadowPaddingSize;
-          if (bubble.isShowing()) {
+          if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), object);
           }
         }
@@ -149,6 +149,13 @@ class MoveHandler implements OnTouchListener {
     xProperty.setValue(windowParams, xProperty.getValue(windowParams));
   }
 
+  public void snapToBounds() {
+    ensureSprings();
+
+    moveXAnimation.animateToFinalPosition(relativeToRight(bubble.getWindowParams()) ? maxX : minX);
+    moveYAnimation.animateToFinalPosition(yProperty.getValue(bubble.getWindowParams()));
+  }
+
   @Override
   public boolean onTouch(View v, MotionEvent event) {
     float eventX = event.getRawX();
@@ -166,16 +173,7 @@ class MoveHandler implements OnTouchListener {
             bubble.onMoveStart();
           }
 
-          if (moveXAnimation == null) {
-            moveXAnimation = new SpringAnimation(bubble.getWindowParams(), xProperty);
-            moveXAnimation.setSpring(new SpringForce());
-            moveXAnimation.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_NO_BOUNCY);
-          }
-          if (moveYAnimation == null) {
-            moveYAnimation = new SpringAnimation(bubble.getWindowParams(), yProperty);
-            moveYAnimation.setSpring(new SpringForce());
-            moveYAnimation.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_NO_BOUNCY);
-          }
+          ensureSprings();
 
           moveXAnimation.animateToFinalPosition(MathUtils.clamp(eventX, minX, maxX));
           moveYAnimation.animateToFinalPosition(MathUtils.clamp(eventY, minY, maxY));
@@ -214,6 +212,20 @@ class MoveHandler implements OnTouchListener {
         break;
     }
     return true;
+  }
+
+  private void ensureSprings() {
+    if (moveXAnimation == null) {
+      moveXAnimation = new SpringAnimation(bubble.getWindowParams(), xProperty);
+      moveXAnimation.setSpring(new SpringForce());
+      moveXAnimation.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_NO_BOUNCY);
+    }
+
+    if (moveYAnimation == null) {
+      moveYAnimation = new SpringAnimation(bubble.getWindowParams(), yProperty);
+      moveYAnimation.setSpring(new SpringForce());
+      moveYAnimation.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_NO_BOUNCY);
+    }
   }
 
   private Point findTarget(float xVelocity, float yVelocity, int startX, int startY) {

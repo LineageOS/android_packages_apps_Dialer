@@ -21,6 +21,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
@@ -47,17 +48,26 @@ class CopyAndResizeImageWorker implements Worker<Uri, Pair<File, String>> {
   }
 
   /**
-   * @param input The input Uri is expected to be a image openable by {@link
-   *     android.content.ContentResolver#openInputStream(Uri)}.
+   * @param input The filepath where the image is located.
    * @return a Pair where the File contains the resized image, and the String is the result File's
    *     MIME type.
    */
   @Nullable
   @Override
   public Pair<File, String> doInBackground(@Nullable Uri input) throws Throwable {
+    // BitmapFactory.decodeStream strips exif data, so we need to save it here and apply it later.
+    int rotation = 0;
+    try {
+      rotation =
+          new ExifInterface(input.getPath())
+              .getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+    } catch (Exception ignored) {
+      // Couldn't get exif tags, not the end of the world
+    }
+
     try (InputStream inputStream = context.getContentResolver().openInputStream(input)) {
       Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-      bitmap = BitmapResizer.resizeForEnrichedCalling(bitmap);
+      bitmap = BitmapResizer.resizeForEnrichedCalling(bitmap, exifToDegrees(rotation));
 
       File outputFile = DialerUtils.createShareableFile(context);
       try (OutputStream outputStream = new FileOutputStream(outputFile)) {
@@ -65,6 +75,19 @@ class CopyAndResizeImageWorker implements Worker<Uri, Pair<File, String>> {
         bitmap.compress(CompressFormat.JPEG, 80, outputStream);
         return new Pair<>(outputFile, MIME_TYPE);
       }
+    }
+  }
+
+  private static int exifToDegrees(int exifOrientation) {
+    switch (exifOrientation) {
+      case ExifInterface.ORIENTATION_ROTATE_90:
+        return 90;
+      case ExifInterface.ORIENTATION_ROTATE_180:
+        return 180;
+      case ExifInterface.ORIENTATION_ROTATE_270:
+        return 270;
+      default:
+        return 0;
     }
   }
 }

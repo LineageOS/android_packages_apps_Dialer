@@ -4,6 +4,7 @@ option java_package = "com.android.dialer.callintent";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 package com.android.dialer.callintent;
 
 import "java/com/android/dialer/callintent/call_initiation_type.proto";
@@ -13,7 +14,7 @@ import "java/com/android/dialer/logging/ui_action.proto";
 // Miscellaneous data that's included in a new outgoing call initiated by
 // Dialer. The system will pass this data to the InCallUi which can use it
 // for logging or for something else.
-// Next tag: 10
+// Next tag: 11
 message CallSpecificAppData {
   optional CallInitiationType.Type call_initiation_type = 1;
 
@@ -31,4 +32,6 @@ message CallSpecificAppData {
   repeated com.android.dialer.logging.UiAction.Type
       ui_actions_since_app_launch = 8;
   repeated int64 ui_action_timestamps_since_app_launch = 9;
+
+  optional int32 starting_tab_index = 10;
 }

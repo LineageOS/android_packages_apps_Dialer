@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> çevrimdışı olduğundan ulaşılamıyor"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Hakkında"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Göster"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Çağrı silindi. Bu çağrı sırasında paylaşılan ekleri Mesajlar\'da görebilir ve silebilirsiniz."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Çağrılar silindi. Çağrılar sırasında paylaşılan ekleri Mesajlar\'da görebilir ve silebilirsiniz."</string>
 </resources>

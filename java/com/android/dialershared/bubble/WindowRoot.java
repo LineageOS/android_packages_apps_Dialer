@@ -17,22 +17,29 @@
 package com.android.dialershared.bubble;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
 /**
- * ViewGroup that handles some overlay window concerns. Allows back button events to be listened for
- * via an interface.
+ * ViewGroup that handles some overlay window concerns. Allows back button and configuration change
+ * events to be listened for via interfaces.
  */
 public class WindowRoot extends FrameLayout {
-
-  private OnBackPressedListener backPressedListener;
 
   /** Callback for when the back button is pressed while this window is in focus */
   public interface OnBackPressedListener {
     boolean onBackPressed();
   }
+
+  /** Callback for when the Configuration changes for this window */
+  public interface OnConfigurationChangedListener {
+    void onConfigurationChanged(Configuration newConfiguration);
+  }
+
+  private OnBackPressedListener backPressedListener;
+  private OnConfigurationChangedListener configurationChangedListener;
 
   public WindowRoot(@NonNull Context context) {
     super(context);
@@ -40,6 +47,10 @@ public class WindowRoot extends FrameLayout {
 
   public void setOnBackPressedListener(OnBackPressedListener listener) {
     backPressedListener = listener;
+  }
+
+  public void setOnConfigurationChangedListener(OnConfigurationChangedListener listener) {
+    configurationChangedListener = listener;
   }
 
   @Override
@@ -51,5 +62,13 @@ public class WindowRoot extends FrameLayout {
       return true;
     }
     return super.dispatchKeyEvent(event);
+  }
+
+  @Override
+  public void dispatchConfigurationChanged(Configuration newConfig) {
+    super.dispatchConfigurationChanged(newConfig);
+    if (configurationChangedListener != null) {
+      configurationChangedListener.onConfigurationChanged(newConfig);
+    }
   }
 }

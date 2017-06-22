@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"स्पॅम"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ऑफलाइन आहे आणि त्यांच्याशी संपर्क साधू शकत नाही"</string>
     <string name="about_phone_label" msgid="582991354677973731">"बद्दल"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"पहा"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"कॉल हटविला. या कॉल दरम्यान Messages मध्ये सामायिक केलेली संलग्नके पहा आणि हटवा."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"कॉल हटविला. कॉल दरम्यान Messages मध्ये सामायिक केलेली संलग्नके पहा आणि हटवा."</string>
 </resources>
