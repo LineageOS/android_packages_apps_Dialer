@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Populates the device database with contacts. */
-final class SimulatorContacts {
+public final class SimulatorContacts {
   // Phone numbers from https://www.google.com/about/company/facts/locations/
   private static final Contact[] SIMPLE_CONTACTS = {
     // US, contact with e164 number.
@@ -114,7 +114,7 @@ final class SimulatorContacts {
   };
 
   @WorkerThread
-  static void populateContacts(@NonNull Context context) {
+  public static void populateContacts(@NonNull Context context) {
     Assert.isWorkerThread();
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     for (Contact contact : SIMPLE_CONTACTS) {
