@@ -317,6 +317,15 @@ public class CallLogAdapter extends GroupingListAdapter
               Logger.get(mActivity)
                   .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_SELECT_ENTRY);
               checkMarkCallLogEntry(viewHolder);
+              // select all check box logic
+              if (getItemCount() == selectedItems.size()) {
+                LogUtil.i(
+                    "mExpandCollapseListener.onClick",
+                    "getitem count %d is equal to items select count %d, check select all box",
+                    getItemCount(),
+                    selectedItems.size());
+                mMultiSelectRemoveView.tapSelectAll();
+              }
             }
             return;
           }
@@ -416,7 +425,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * Holds a list of URIs that are pending deletion or undo. If the activity ends before the undo
    * timeout, all of the pending URIs will be deleted.
    *
-   * <p>TODO: move this and OnVoicemailDeletedListener to somewhere like {@link
+   * <p>TODO(twyen): move this and OnVoicemailDeletedListener to somewhere like {@link
    * VisualVoicemailCallLogFragment}. The CallLogAdapter does not need to know about what to do with
    * hidden item or what to hide.
    */
@@ -1394,5 +1403,7 @@ public class CallLogAdapter extends GroupingListAdapter
     void showMultiSelectRemoveView(boolean show);
 
     void setSelectAllModeToFalse();
+
+    void tapSelectAll();
   }
 }

@@ -82,10 +82,9 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
       return;
     }
 
-    if (UserManagerCompat.isUserUnlocked(context)
-        && VoicemailComponent.get(context)
-            .getVoicemailClient()
-            .isActivated(context, phoneAccountHandle)) {
+    if (VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isActivated(context, phoneAccountHandle)) {
       LogUtil.i(
           "LegacyVoicemailNotificationReceiver.onReceive",
           "visual voicemail is activated, ignoring notification");

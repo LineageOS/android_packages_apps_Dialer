@@ -7,6 +7,7 @@ option optimize_for = LITE_RUNTIME;
 
 
 
+
 message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large

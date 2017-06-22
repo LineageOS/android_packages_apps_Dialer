@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.support.design.widget.Snackbar;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -31,7 +32,10 @@ import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
+import com.android.dialer.app.calllog.ClearCallLogDialog.Listener;
+import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
@@ -42,7 +46,7 @@ import com.android.dialer.util.ViewUtil;
 
 /** Activity for viewing call history. */
 public class CallLogActivity extends TransactionSafeActivity
-    implements ViewPager.OnPageChangeListener {
+    implements ViewPager.OnPageChangeListener, Listener {
 
   private static final int TAB_INDEX_ALL = 0;
   private static final int TAB_INDEX_MISSED = 1;
@@ -144,7 +148,7 @@ public class CallLogActivity extends TransactionSafeActivity
       startActivity(intent);
       return true;
     } else if (item.getItemId() == R.id.delete_all) {
-      ClearCallLogDialog.show(getFragmentManager());
+      ClearCallLogDialog.show(getFragmentManager(), this);
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -177,6 +181,15 @@ public class CallLogActivity extends TransactionSafeActivity
       return mViewPagerAdapter.getCount() - 1 - position;
     }
     return position;
+  }
+
+  @Override
+  public void callHistoryDeleted() {
+    if (EnrichedCallComponent.get(this).getEnrichedCallManager().hasStoredData()) {
+      Snackbar.make(
+              findViewById(R.id.calllog_frame), getString(R.string.multiple_ec_data_deleted), 5_000)
+          .show();
+    }
   }
 
   @Override
@@ -228,5 +241,23 @@ public class CallLogActivity extends TransactionSafeActivity
     public int getCount() {
       return TAB_INDEX_COUNT;
     }
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS) {
+      if (resultCode == RESULT_OK
+          && data != null
+          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+        Snackbar.make(findViewById(R.id.calllog_frame), getString(R.string.ec_data_deleted), 5_000)
+            .setAction(
+                R.string.view_conversation,
+                v -> startActivity(IntentProvider.getSendSmsIntentProvider(number).getIntent(this)))
+            .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
+            .show();
+      }
+    }
+    super.onActivityResult(requestCode, resultCode, data);
   }
 }

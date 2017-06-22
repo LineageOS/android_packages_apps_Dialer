@@ -110,7 +110,8 @@ public class CallLogAsyncTaskUtil {
   }
 
   public static void markCallAsRead(@NonNull final Context context, @NonNull final long[] callIds) {
-    if (!PermissionsUtil.hasPhonePermissions(context)) {
+    if (!PermissionsUtil.hasPhonePermissions(context)
+        || !PermissionsUtil.hasCallLogWritePermissions(context)) {
       return;
     }
     if (sAsyncTaskExecutor == null) {

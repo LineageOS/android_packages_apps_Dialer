@@ -45,12 +45,20 @@ import java.util.List;
 public class CallDetailsActivity extends AppCompatActivity
     implements OnMenuItemClickListener, CallDetailsFooterViewHolder.ReportCallIdListener {
 
+  public static final String EXTRA_PHONE_NUMBER = "phone_number";
+  public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
   private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
   private static final String EXTRA_CONTACT = "contact";
   private static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String TASK_DELETE = "task_delete";
 
   private List<CallDetailsEntry> entries;
+  private DialerContact contact;
+
+  public static boolean isLaunchIntent(Intent intent) {
+    return intent.getComponent() != null
+        && CallDetailsActivity.class.getName().equals(intent.getComponent().getClassName());
+  }
 
   public static Intent newInstance(
       Context context,
@@ -104,8 +112,7 @@ public class CallDetailsActivity extends AppCompatActivity
   }
 
   private void onHandleIntent(Intent intent) {
-    DialerContact contact =
-        ProtoParsers.getTrusted(intent, EXTRA_CONTACT, DialerContact.getDefaultInstance());
+    contact = ProtoParsers.getTrusted(intent, EXTRA_CONTACT, DialerContact.getDefaultInstance());
     entries =
         ProtoParsers.getTrusted(
                 intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())
@@ -169,6 +176,15 @@ public class CallDetailsActivity extends AppCompatActivity
 
     @Override
     public void onPostExecute(Void result) {
+      Intent data = new Intent();
+      data.putExtra(EXTRA_PHONE_NUMBER, contact.getNumber());
+      for (CallDetailsEntry entry : entries) {
+        if (entry.getHistoryResultsCount() > 0) {
+          data.putExtra(EXTRA_HAS_ENRICHED_CALL_DATA, true);
+          break;
+        }
+      }
+      setResult(RESULT_OK, data);
       finish();
     }
   }

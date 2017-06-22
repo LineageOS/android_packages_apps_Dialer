@@ -115,6 +115,12 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
     return null;
   }
 
+  @Override
+  public boolean hasStoredData() {
+    Assert.isMainThread();
+    return false;
+  }
+
   @MainThread
   @Override
   public void requestAllHistoricalData(

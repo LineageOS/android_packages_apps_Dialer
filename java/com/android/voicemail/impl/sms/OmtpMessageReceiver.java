@@ -71,6 +71,10 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
     }
 
     OmtpVvmCarrierConfigHelper helper = new OmtpVvmCarrierConfigHelper(mContext, phone);
+    if (!helper.isValid()) {
+      VvmLog.e(TAG, "vvm config no longer valid");
+      return;
+    }
     if (!VisualVoicemailSettingsUtil.isEnabled(mContext, phone)) {
       if (helper.isLegacyModeEnabled()) {
         LegacyModeSmsHandler.handle(context, sms);

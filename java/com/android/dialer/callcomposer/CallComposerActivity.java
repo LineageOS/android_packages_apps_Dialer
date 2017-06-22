@@ -23,6 +23,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
@@ -47,6 +49,7 @@ import android.widget.ProgressBar;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
 import com.android.dialer.callintent.CallInitiationType;
@@ -69,6 +72,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.LockableViewPager;
@@ -93,6 +97,7 @@ public class CallComposerActivity extends AppCompatActivity
         EnrichedCallManager.StateChangedListener {
 
   public static final String KEY_CONTACT_NAME = "contact_name";
+  private static final String KEY_IS_FIRST_CALL_COMPOSE = "is_first_call_compose";
 
   private static final int ENTRANCE_ANIMATION_DURATION_MILLIS = 500;
   private static final int EXIT_ANIMATION_DURATION_MILLIS = 500;
@@ -384,19 +389,33 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void placeRCSCall(MultimediaData.Builder builder) {
-    LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call");
+    MultimediaData data = builder.build();
+    LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call, data: " + data);
     Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
-    getEnrichedCallManager().sendCallComposerData(sessionId, builder.build());
+    getEnrichedCallManager().sendCallComposerData(sessionId, data);
     TelecomUtil.placeCall(
         this,
         new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER).build());
     setResult(RESULT_OK);
+    SharedPreferences preferences =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this);
+
+    // Show a toast for privacy purposes if this is the first time a user uses call composer.
+    if (preferences.getBoolean(KEY_IS_FIRST_CALL_COMPOSE, true)) {
+      int privacyMessage =
+          data.hasImageData() ? R.string.image_sent_messages : R.string.message_sent_messages;
+      Toast toast = Toast.makeText(this, privacyMessage, Toast.LENGTH_LONG);
+      int yOffset = getResources().getDimensionPixelOffset(R.dimen.privacy_toast_y_offset);
+      toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, yOffset);
+      toast.show();
+      preferences.edit().putBoolean(KEY_IS_FIRST_CALL_COMPOSE, false).apply();
+    }
     finish();
   }
 
   /** Give permission to Messenger to view our image for RCS purposes. */
   private Uri grantUriPermission(Uri uri) {
-    // TODO: Move this to the enriched call manager.
+    // TODO(sail): Move this to the enriched call manager.
     grantUriPermission(
         "com.google.android.apps.messaging", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
     return uri;

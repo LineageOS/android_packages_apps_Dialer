@@ -51,6 +51,7 @@ public class CallIntentBuilder {
               .setTimeSinceFirstClick(PerformanceReport.getTimeSinceFirstClick())
               .addAllUiActionsSinceAppLaunch(PerformanceReport.getActions())
               .addAllUiActionTimestampsSinceAppLaunch(PerformanceReport.getActionTimestamps())
+              .setStartingTabIndex(PerformanceReport.getStartingTabIndex())
               .build();
       PerformanceReport.stopRecording();
     } else {

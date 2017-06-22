@@ -56,4 +56,6 @@
   <dimen name="permission_item_margin">8dp</dimen>
   <dimen name="permission_allow_padding">16dp</dimen>
   <dimen name="min_touch_target_size">48dp</dimen>
+
+  <dimen name="privacy_toast_y_offset">108dp</dimen>
 </resources>

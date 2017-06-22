@@ -92,9 +92,9 @@ public class LightbringerStub implements Lightbringer {
     return null;
   }
 
-  @NonNull
+  @Nullable
   @Override
   public String getPackageName() {
-    return "";
+    return null;
   }
 }
