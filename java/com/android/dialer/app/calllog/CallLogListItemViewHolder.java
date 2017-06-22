@@ -85,6 +85,7 @@ import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import java.lang.annotation.Retention;
@@ -117,6 +118,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public final ImageView primaryActionButtonView;
 
   private final Context mContext;
+  @Nullable private final PhoneAccountHandle mDefaultPhoneAccountHandle;
   private final CallLogCache mCallLogCache;
   private final CallLogListItemHelper mCallLogListItemHelper;
   private final CachedNumberLookupService mCachedNumberLookupService;
@@ -254,6 +256,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
     mBlockReportListener = blockReportListener;
     mCachedNumberLookupService = PhoneNumberCache.get(mContext).getCachedNumberLookupService();
+
+    // Cache this to avoid having to look it up each time we bind to a call log entry
+    mDefaultPhoneAccountHandle =
+        TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL);
 
     this.rootView = rootView;
     this.quickContactView = dialerQuickContactView;
@@ -594,7 +600,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callButtonView.setVisibility(View.VISIBLE);
     }
 
-    if (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall()) {
+    if (CallUtil.isVideoEnabled(mContext)
+        && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
       videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
     } else if (showLightbringerPrimaryButton()) {
@@ -709,10 +716,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (accountHandle == null) {
       return false;
     }
-    if (accountHandle.getComponentName().equals(getLightbringer().getPhoneAccountComponentName())) {
+    if (mDefaultPhoneAccountHandle == null) {
       return false;
     }
-    return true;
+    return accountHandle.getComponentName().equals(mDefaultPhoneAccountHandle.getComponentName());
   }
 
   private boolean canSupportCarrierVideoCall() {
