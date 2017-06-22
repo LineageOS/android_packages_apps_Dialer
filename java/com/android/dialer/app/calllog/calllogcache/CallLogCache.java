@@ -60,19 +60,6 @@ public abstract class CallLogCache {
   public abstract boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number);
 
   /**
-   * Returns {@code true} when the current sim supports video calls, regardless of the value in a
-   * contact's {@link android.provider.ContactsContract.CommonDataKinds.Phone#CARRIER_PRESENCE}
-   * column.
-   */
-  public boolean isVideoEnabled() {
-    if (!mHasCheckedForVideoAvailability) {
-      mVideoAvailability = CallUtil.getVideoCallingAvailability(mContext);
-      mHasCheckedForVideoAvailability = true;
-    }
-    return (mVideoAvailability & CallUtil.VIDEO_CALLING_ENABLED) != 0;
-  }
-
-  /**
    * Returns {@code true} when the current sim supports checking video calling capabilities via the
    * {@link android.provider.ContactsContract.CommonDataKinds.Phone#CARRIER_PRESENCE} column.
    */
