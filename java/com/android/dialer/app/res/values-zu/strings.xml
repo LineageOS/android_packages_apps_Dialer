@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Ugaxekile"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"U-<xliff:g id="NAME">%1$s</xliff:g> akaxhunyiwe kwi-inthanethi futhi akakwazi ukufinyelelwa"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Mayelana"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Buka"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Ikholi isusiwe. Buka uphinde ususe okunamathiselwe ku-imeyili okwabiwe ngesikhathi sale kholi kumilayezo."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Amakholi asusiwe. Buka uphinde ususe okunamathiselwe kwi-imeyili okwabiwe ngesikhathi samakholi kumilayezo."</string>
 </resources>

@@ -228,11 +228,14 @@
     <string name="permission_place_call" msgid="8686908130349369423">"Para hacer una llamada, activa el permiso de la aplicación Teléfono."</string>
     <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"La aplicación Teléfono no tiene permiso para editar los ajustes del sistema."</string>
     <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Bloqueado"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Bloquear / Marcar como spam"</string>
+    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Bloquear/Marcar como spam"</string>
     <string name="call_log_action_block_number" msgid="5048188386501998865">"Bloquear número"</string>
     <string name="call_log_action_remove_spam" msgid="2045319806318398403">"No es spam"</string>
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Desbloquear número"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> no tiene conexión y no se puede contactar"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Información"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Ver"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Se ha eliminado la llamada. Si quieres ver y eliminar los archivos adjuntos compartidos durante esta llamada, ve a Mensajes."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Se han eliminado las llamadas. Si quieres ver y eliminar los archivos adjuntos compartidos durante las llamadas, ve a Mensajes."</string>
 </resources>

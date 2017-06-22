@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ສະແປມ"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ອອບລາຍຢູ່ ແລະ ບໍ່ສາມາດຕິດຕໍ່ຫາໄດ້"</string>
     <string name="about_phone_label" msgid="582991354677973731">"ກ່ຽວກັບ"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"ເບິ່ງ"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"ລຶບການໂທແລ້ວ. ເບິ່ງ ແລະ ລຶບໄຟລ໌ແນບທີ່ແບ່ງປັນໃນລະຫວ່າງການໂທນີ້ຢູ່ Messages ໄດ້."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"ລຶບການໂທແລ້ວ. ເບິ່ງ ແລະ ລຶບໄຟລ໌ແນບທີ່ແບ່ງປັນໃນລະຫວ່າງການໂທຕ່າງໆຢູ່ Messages ໄດ້."</string>
 </resources>

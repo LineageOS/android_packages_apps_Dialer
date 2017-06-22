@@ -21,7 +21,7 @@
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"អ្នក​ប្រហែលជា​​មិន​ទទួល​បាន​ការ​ជូនដំណឹង​ជា​សារ​សំឡេង​រហូត​​ទាល់តែ​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ពេញលេញ​​។ ហៅ​ជា​សារ​សំឡេង​ដើម្បី​​ទទួល​បាន​សារ​ថ្មី​រហូត​សារ​ជា​សំឡេង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​សកម្ម​ពេញលេញ។"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"ប្រាកដ​ថា ទូរសព្ទ​របស់​អ្នក​មាន​ភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត រួច​ព្យាយាម​ម្ដង​ទៀត។"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"សូមប្រាកដ​ថា ទូរសព្ទ​របស់​អ្នក​មាន​ភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត រួច​ព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"បិទ​របៀប​លើ​យន្តហោះ និង​ព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"គ្មាន​បណ្ដាញ​អ៊ីនធឺណិត"</string>
     <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"អ្នក​នឹង​មិន​ទទួល​បាន​ការជូនដំណឹង នៅពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​ទេ។ បើ​អ្នក​​ភ្ជាប់​ទៅ Wi-Fi អ្នក​អាច​ពិនិត្យមើល​​សារ​ជា​សំឡេង​ដោយ​ធ្វើ​សមកាលកម្ម​ឥឡូវ​នេះ។"</string>
@@ -30,8 +30,8 @@
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
-    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​មាន Wi-Fi ឬ​អ៊ីនធឺណិត​​តាម​​ទិន្នន័យ​​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ពិនិត្យមើល​សារ​ជា​សំឡេង​​បាន។"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​​​​មាន​អ៊ីនធឺណិត​តាម​ទិន្នន័យ​​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ស្ដាប់​សារ​ជា​សំឡេង​។"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"សូមព្យាយាម​ម្ដង​ទៀត នៅពេលការតភ្ជាប់ Wi-Fi ឬ​​​ទិន្នន័យ​​ទូរសព្ទ​ចល័តរបស់អ្នក​បានប្រសើរឡើង។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ពិនិត្យមើល​សារ​ជា​សំឡេង​​បាន។"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"សូមព្យាយាម​ម្ដង​ទៀត នៅពេល​​​​ការតភ្ជាប់​ទិន្នន័យ​​ទូរសព្ទ​ចល័តរបស់អ្នកបាន​ប្រសើរឡើង។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ពិនិត្យមើលសារ​ជា​សំឡេង​បាន។"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​​បាន​ទេ។"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>

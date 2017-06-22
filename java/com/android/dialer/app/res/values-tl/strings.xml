@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Offline si <xliff:g id="NAME">%1$s</xliff:g> at hindi makontak"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Tungkol dito"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Tingnan"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Dinelete ang tawag. Tingnan at i-delete ang mga attachment na ibinahagi sa tawag na ito sa Messages."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Dinelete ang mga tawag. Tingnan at i-delete ang mga attachment na ibinahagi sa mga tawag sa Messages."</string>
 </resources>
