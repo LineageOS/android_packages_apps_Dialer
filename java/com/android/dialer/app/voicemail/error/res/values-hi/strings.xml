@@ -24,7 +24,7 @@
     <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"सुनिश्चित करें कि आपके फ़ोन में मोबाइल नेटवर्क कनेक्शन है और दोबारा कोशिश करें."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"हवाई जहाज़ मोड बंद करें और फिर से प्रयास करें."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"कोई कनेक्शन नहीं"</string>
-    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"आपको नए वॉइसमेल की सूचना नहीं दी जाएगी. अगर आप Wi‑Fi का उपयोग कर रहे हैं, तो अभी सिंक करके वॉइसमेल देख सकते हैं."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"आपको नए वॉइसमेल की सूचना नहीं दी जाएगी. अगर आप Wi‑Fi का उपयोग कर रहे हैं, तो आप अभी सिंक करके वॉइसमेल देख सकते हैं."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"आपको नए वॉइसमेल के लिए सूचित नहीं किया जाएगा. अपना वॉइसमेल समन्वयित करने के लिए हवाई जहाज़ मोड बंद करें."</string>
     <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"वॉइसमेल देखने के लिए आपके फ़ोन में मोबाइल डेटा कनेक्शन होना चाहिए."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"विज़ुअल वॉइसमेल सक्रिय नहीं किया जा सकता"</string>

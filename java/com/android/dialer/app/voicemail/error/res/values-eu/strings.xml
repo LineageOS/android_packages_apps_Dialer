@@ -30,8 +30,8 @@
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Ezin da aktibatu ikusizko erantzungailua"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Deitu egin dezakezu erantzungailua egiaztatzeko."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Ezin da eguneratu ikusizko erantzungailua."</string>
-    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Saiatu berriro Wi-Fi edo datu-konexioa hobeak direnean. Deitu egin dezakezu erantzungailua egiaztatzeko."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Saiatu berriro datu-konexioa hobea denean. Deitu egin dezakezu erantzungailua egiaztatzeko."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Saiatu berriro Wi-Fi edo datu-konexioa hobeak direnean. Bestela ere, deitu egin dezakezu erantzungailua egiaztatzeko."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Saiatu berriro datu-konexioa hobea denean. Bestela ere, deitu egin dezakezu erantzungailua egiaztatzeko."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Ezin da eguneratu ikusizko erantzungailua."</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Deitu egin dezakezu erantzungailua egiaztatzeko."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Ezin da eguneratu ikusizko erantzungailua."</string>

@@ -126,7 +126,7 @@
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"S\'està carregant des de la targeta SIM..."</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Contactes de la targeta SIM"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"La cerca per veu no està disponible."</string>
-    <string name="call_not_available" msgid="7850148370757361155">"No es pot fer una trucada telefònica perquè s\'ha desactivat l\'aplicació de telèfon."</string>
+    <string name="call_not_available" msgid="7850148370757361155">"No es pot fer una trucada perquè s\'ha desactivat l\'aplicació de telèfon."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Cerca als contactes"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Afegeix núm. o cerca contactes"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"El teu historial de trucades és buit"</string>
@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Trucada brossa"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> no té connexió i no s\'hi pot contactar"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Informació"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Mostra"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"S\'ha suprimit la trucada. Consulta i suprimeix els fitxers adjunts compartits durant aquesta trucada a Missatges."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"S\'han suprimit les trucades. Consulta i suprimeix els fitxers adjunts compartits durant les trucades a Missatges."</string>
 </resources>

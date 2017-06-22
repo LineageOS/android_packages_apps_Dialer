@@ -238,4 +238,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Nevēlami zvani"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Lietotājs <xliff:g id="NAME">%1$s</xliff:g> ir bezsaistē un nav sasniedzams"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Par"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Skatīt"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Zvans izdzēsts. Skatiet un dzēsiet pielikumus, kas kopīgoti šī zvana laikā, izmantojot lietotni Ziņojumi."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Zvani izdzēsti. Skatiet un dzēsiet pielikumus, kas kopīgoti šo zvanu laikā, izmantojot lietotni Ziņojumi."</string>
 </resources>

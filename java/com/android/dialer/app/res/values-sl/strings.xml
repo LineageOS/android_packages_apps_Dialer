@@ -241,4 +241,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Vsiljena pošta"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Oseba <xliff:g id="NAME">%1$s</xliff:g> nima vzpostavljene povezave in ni dosegljiva"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Vizitka"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Prikaži"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Klic je izbrisan. Priloge, ki so bile dane v skupno rabo v tem klicu, si lahko ogledate in izbrišete v aplikaciji Messages."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Klici so izbrisani. Priloge, ki so bile dane v skupno rabo v teh klicih, si lahko ogledate in izbrišete v aplikaciji Messages."</string>
 </resources>

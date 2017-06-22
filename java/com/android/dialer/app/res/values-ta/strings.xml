@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ஸ்பேம்"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ஆஃப்லைனில் உள்ளதால், தொடர்புகொள்ள முடியாது"</string>
     <string name="about_phone_label" msgid="582991354677973731">"அறிமுகம்"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"காட்டு"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"அழைப்பு நீக்கப்பட்டது. இந்த அழைப்பின் போது பகிர்ந்த இணைப்புகளை மெசேஜஸ் பயன்பாட்டில் பார்க்கலாம், நீக்கலாம்."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"அழைப்புகள் நீக்கப்பட்டன. அழைப்புகளின் போது பகிர்ந்த இணைப்புகளை மெசேஜஸ் பயன்பாட்டில் பார்க்கலாம், நீக்கலாம்."</string>
 </resources>

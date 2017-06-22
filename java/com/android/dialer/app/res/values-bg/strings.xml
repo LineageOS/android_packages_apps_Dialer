@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Спам"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"С <xliff:g id="NAME">%1$s</xliff:g> не може да се установи връзка, тъй като е офлайн"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Информация"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Преглед"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Обаждането е изтрито. Прегледайте и изтрийте прикачените файлове, споделени по време на това обаждане в Messages."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Обажданията са изтрити. Прегледайте и изтрийте прикачените файлове, споделени по време на обажданията в Messages."</string>
 </resources>

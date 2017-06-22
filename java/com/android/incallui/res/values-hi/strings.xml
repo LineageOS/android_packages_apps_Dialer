@@ -34,7 +34,7 @@
     <string name="notification_ongoing_call" msgid="8712641937577776125">"चल रही कॉल"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"कार्यस्थल की जारी कॉल"</string>
     <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"जारी Wi‑Fi कॉल"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"जारी Wi‑Fi कार्य कॉल"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"जारी Wi‑Fi कार्य संबंधी कॉल"</string>
     <string name="notification_on_hold" msgid="7141827443379205682">"होल्ड पर"</string>
     <string name="notification_incoming_call" msgid="7520580807513849283">"इनकमिंग कॉल"</string>
     <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"फ़ोटो के साथ इनकमिंग कॉल"</string>
@@ -56,7 +56,7 @@
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"अटैचमेंट के साथ महत्वपूर्ण इनकमिंग कॉल"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"कार्यस्थल की आवक कॉल"</string>
     <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"इनकमिंग Wi‑Fi कॉल"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"इनकमिंग Wi‑Fi कार्य कॉल"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"इनकमिंग Wi‑Fi कार्य संबंधी कॉल"</string>
     <string name="notification_incoming_spam_call" msgid="7591506944666791937">"संदिग्ध आवक स्पैम कॉल"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"इनकमिंग वीडियो अनुरोध"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"कोई सेवा नहीं"</string>

@@ -30,7 +30,7 @@
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"దృశ్య వాయిస్ మెయిల్‌ను సక్రియం చేయడం సాధ్యపడదు"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"దృశ్య వాయిస్ మెయిల్‌ను నవీకరించడం సాధ్యపడదు"</string>
-    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"మీ Wi-Fi లేదా మొబైల్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి ఇప్పటికీ కాల్ చేయవచ్చు."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"మీ Wi-Fi లేదా మొబైల్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"మీ మొబైల్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"దృశ్య వాయిస్ మెయిల్‌ను నవీకరించడం సాధ్యపడదు"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
