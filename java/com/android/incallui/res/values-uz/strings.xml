@@ -71,10 +71,10 @@
     <string name="notification_external_video_call" msgid="7709394856028436683">"Boshqa qurilmada hozir video qo‘ng‘iroq amalga oshirilmoqda."</string>
     <string name="notification_take_call" msgid="5631659438864492229">"Qo‘ng‘iroqni qabul qilish"</string>
     <string name="notification_take_video_call" msgid="4473387503712341390">"Video qo‘ng‘iroq. qabul qilish"</string>
-    <string name="incall_error_power_off" msgid="3244691852792529453">"Qo‘ng‘iroq qilish uchun, avval \"Parvoz rejimi\" o‘chirilishi kerak."</string>
+    <string name="incall_error_power_off" msgid="3244691852792529453">"Chaqiruv uchun, avval \"Parvoz rejimi\" o‘chirilishi kerak."</string>
     <string name="incall_error_emergency_only" msgid="8313690034696753566">"Tarmoqda ro‘yxatdan o‘tmagan."</string>
     <string name="incall_error_out_of_service" msgid="5027539470868484145">"Uyali aloqa tarmog‘i mavjud emas."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Qo‘ng‘iroq qilish uchun raqamni to‘g‘ri kiriting."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Chaqiruv uchun raqamni to‘g‘ri kiriting."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Qo‘ng‘iroq qilib bo‘lmadi."</string>
     <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"MMI tartibi ishga tushmoqda..."</string>
     <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Xizmat qo‘llab-quvvatlanmaydi."</string>

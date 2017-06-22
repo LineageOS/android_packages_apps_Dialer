@@ -19,6 +19,7 @@ package com.android.incallui.videotech.ims;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -40,7 +41,8 @@ public class ImsVideoTech implements VideoTech {
   private @SessionModificationState int sessionModificationState =
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
-  private boolean paused = false;
+
+  @VisibleForTesting boolean paused = false;
 
   public ImsVideoTech(LoggingBindings logger, VideoTechListener listener, Call call) {
     this.logger = logger;
@@ -245,6 +247,24 @@ public class ImsVideoTech implements VideoTech {
   @Override
   public void setDeviceOrientation(int rotation) {
     call.getVideoCall().setDeviceOrientation(rotation);
+  }
+
+  /**
+   * Called when we receive an rx_pause from the IMS stack. Update our state so we know we are
+   * currently paused. This is important in the cases where we swap calls since pause() and
+   * unpause() are not called.
+   */
+  void onPausedEvent() {
+    paused = true;
+  }
+
+  /**
+   * Called when we receive an rx_resume from the IMS stack. Update our state so we know we are
+   * currently not paused. This is important in the cases where we swap calls since pause() and
+   * unpause() are not called.
+   */
+  void onResumedEvent() {
+    paused = false;
   }
 
   private boolean canPause() {

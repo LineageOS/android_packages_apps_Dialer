@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ਸਪੈਮ"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ਔਫਲਾਈਨ ਹੈ ਅਤੇ ਉਸ \'ਤੇ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
     <string name="about_phone_label" msgid="582991354677973731">"ਇਸ ਬਾਰੇ"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"ਦੇਖੋ"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"ਕਾਲ ਮਿਟਾਈ ਗਈ। ਇਸ ਕਾਲ ਦੌਰਾਨ &amp;quot;ਸੁਨੇਹੇ&amp;quot; ਐਪ ਵਿੱਚ ਸਾਂਝੀਆਂ ਕੀਤੀਆਂ ਅਟੈਚਮੈਂਟਾਂ ਨੂੰ ਦੇਖੋ ਅਤੇ ਮਿਟਾਓ।"</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"ਕਾਲ ਮਿਟਾਈ ਗਈ। ਕਾਲਾਂ ਦੌਰਾਨ &amp;quot;ਸੁਨੇਹੇ&amp;quot; ਐਪ ਵਿੱਚ ਸਾਂਝੀਆਂ ਕੀਤੀਆਂ ਅਟੈਚਮੈਂਟਾਂ ਨੂੰ ਦੇਖੋ ਅਤੇ ਮਿਟਾਓ।"</string>
 </resources>

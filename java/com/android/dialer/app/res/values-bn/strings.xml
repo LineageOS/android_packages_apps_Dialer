@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"স্প্যাম"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> এখন অফলাইনে থাকায় যোগাযোগ করা যাবে না"</string>
     <string name="about_phone_label" msgid="582991354677973731">"সম্পর্কে"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"দেখুন"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"কল মোছা হয়েছে। বার্তার মধ্যে কলের সময় শেয়ার করা সংযুক্তি দেখুন ও মুছুন।"</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"কলগুলি মোছা হয়েছে। বার্তার মধ্যে কলের সময় শেয়ার করা সংযুক্তিগুলি দেখুন ও মুছুন।"</string>
 </resources>

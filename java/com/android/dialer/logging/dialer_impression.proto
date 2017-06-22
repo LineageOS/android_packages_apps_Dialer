@@ -10,7 +10,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag:1227
+  // Next Tag:1229
   enum Type {
 
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
@@ -438,5 +438,9 @@ message DialerImpression {
     ADD_TO_A_CONTACT_FROM_DIALPAD = 1224;
     ADD_TO_A_CONTACT_FROM_VOICEMAIL = 1225;
     ADD_TO_A_CONTACT_FROM_CALL_HISTORY = 1226;
+
+    // Impressions for dialer reporting caller id as inaccurate
+    CALLER_ID_REPORTED = 1227;
+    CALLER_ID_REPORT_FAILED = 1228;
   }
 }

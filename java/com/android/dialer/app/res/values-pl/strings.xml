@@ -241,4 +241,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Użytkownik <xliff:g id="NAME">%1$s</xliff:g> jest offline i nie można się z nim skontaktować"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Informacje"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Wyświetl"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Połączenie zostało usunięte. Załączniki udostępnione podczas tego połączenia możesz wyświetlić i usunąć w Wiadomościach."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Połączenia zostały usunięte. Załączniki udostępnione podczas połączeń możesz wyświetlić i usunąć w Wiadomościach."</string>
 </resources>

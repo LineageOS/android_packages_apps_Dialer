@@ -30,6 +30,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 
 /** Implements the simulator submenu. */
@@ -112,6 +113,13 @@ final class SimulatorActionProvider extends ActionProvider {
                       })
                   .build()
                   .executeSerial(null);
+              return true;
+            });
+    subMenu
+        .add("Enriched call simulator")
+        .setOnMenuItemClickListener(
+            (item) -> {
+              context.startActivity(EnrichedCallSimulatorActivity.newIntent(context));
               return true;
             });
   }

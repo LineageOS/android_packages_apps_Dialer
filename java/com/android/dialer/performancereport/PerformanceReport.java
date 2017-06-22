@@ -53,6 +53,8 @@ public final class PerformanceReport {
 
   @Nullable private static UiAction.Type ignoreActionOnce = null;
 
+  private static int startingTabIndex = -1; // UNKNOWN
+
   private PerformanceReport() {}
 
   public static void startRecording() {
@@ -140,9 +142,12 @@ public final class PerformanceReport {
     return actionTimestamps;
   }
 
-  @Nullable
-  public static UiAction.Type getIgnoreActionOnce() {
-    return ignoreActionOnce;
+  public static int getStartingTabIndex() {
+    return startingTabIndex;
+  }
+
+  public static void setStartingTabIndex(int startingTabIndex) {
+    PerformanceReport.startingTabIndex = startingTabIndex;
   }
 
   public static void setIgnoreActionOnce(@Nullable UiAction.Type ignoreActionOnce) {

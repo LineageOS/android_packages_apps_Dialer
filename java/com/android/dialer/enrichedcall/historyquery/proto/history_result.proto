@@ -4,6 +4,7 @@ option java_package = "com.android.dialer.enrichedcall.historyquery.proto";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 package com.android.dialer.enrichedcall.historyquery.proto;
 
 // Holds data that was used in an enrichedcall in the past

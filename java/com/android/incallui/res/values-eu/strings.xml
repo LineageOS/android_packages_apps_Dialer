@@ -134,7 +134,7 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Amaitu deia"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"Konferentzia-deia"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"Deia abian da"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Datu-konexioaren bidez egiten jarraituko da deia…"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Datu-konexiora aldatzen…"</string>
     <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Ezin izan da aldatu Wi-Fi sarera"</string>
     <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Datu-konexioaren bidez egiten jarraituko da bideo-deia. Baliteke datuak erabiltzearen ondorioz ohiko kostuak kobratzea."</string>
     <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ez erakutsi berriro"</string>

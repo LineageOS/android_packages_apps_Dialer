@@ -664,6 +664,13 @@ public class CallLogFragment extends Fragment
   }
 
   @Override
+  public void tapSelectAll() {
+    LogUtil.i("CallLogFragment.tapSelectAll", "imitating select all");
+    selectAllMode = true;
+    updateSelectAllIcon();
+  }
+
+  @Override
   public void onClick(View v) {
     selectAllMode = !selectAllMode;
     if (selectAllMode) {

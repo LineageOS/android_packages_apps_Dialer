@@ -24,7 +24,7 @@
     <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Asegúrate de que tu teléfono tenga conexión a una red móvil y vuelve a intentarlo."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Desactiva el modo avión e inténtalo otra vez."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Sin conexión"</string>
-    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"No recibirás notificaciones de los mensajes de voz nuevos. Si estás usando una Wi-Fi, puedes sincronizar ahora el teléfono para comprobar si hay mensajes de voz."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"No recibirás notificaciones de los mensajes de voz nuevos. Si estás usando una conexión Wi-Fi, puedes sincronizar ahora el teléfono para comprobar si hay mensajes de voz."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"No recibirás notificaciones de los mensajes de voz nuevos. Si quieres sincronizar tu buzón de voz, desactiva el modo avión."</string>
     <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Para comprobar el buzón de voz, necesitas una conexión de datos móviles en el teléfono."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"No se puede activar el correo de voz visual"</string>
