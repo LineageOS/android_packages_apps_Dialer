@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2016 The Android Open Source Project
+  ~ Copyright (C) 2017 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,7 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <dimen name="launcher_shortcut_icon_size">48dp</dimen>
-  <dimen name="launcher_shortcut_adaptive_icon_size">108dp</dimen>
-</resources>
+
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:src="@drawable/quantum_ic_person_add_white_24"
+    android:tint="@color/shortcut_add_contact_foreground_color">
+
+</bitmap>
