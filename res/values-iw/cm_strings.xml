@@ -101,13 +101,13 @@
   <string name="no_call_log">אין יומן שיחות</string>
   <string name="clear">נקה</string>
   <string name="description_clear_search">נקה חיפוש</string>
-  <string name="video_call_welcome_title"><b>ברוכים הבאים לחייגן הוידאו החדש</b></string>
+  <string name="video_call_welcome_title"><b>ברוכים הבאים לחייגן הווידאו החדש</b></string>
   <string name="video_call_welcome_message">כולנו אוהבים לשמוע קול מוכר בסוף של דבר, אבל לדבר פנים אל פנים זה הרבה יותר כיף! הנה מה שאת/ה צריך לדעת כדי להפעיל בזמן אמת את שיחות הוידאו:
 \n צריך להיות בדור רביעי או בחיבור Wi-Fi 
 \n המכשיר אליו אתה מתקשר חייב לתמוך בשיחות וידאו
 \n שיחות וידאו משתמשות באינטרנט מהיר
 \n אתה יכול להחליף לשיחת וידאו תוך כדי שיחה קולית
-\n לקבלת מידע נוסף: <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+\n לקבלת מידע נוסף: <a>https://support.t-mobile.com/docs/DOC-23574</a></string>
   <string name="video_call_welcome_message_repeat">תמיד הצג הודעה זו</string>
   <string name="toast_change_video_call_failed">לא ניתן להחליף לשיחת וידאו, תבנית מספר שגויה</string>
   <string name="toast_make_video_call_failed">לא יכול לבצע שיחת וידאו, תבנית המספר שגויה</string>
