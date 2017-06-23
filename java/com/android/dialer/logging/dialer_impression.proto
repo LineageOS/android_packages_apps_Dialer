@@ -12,7 +12,6 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag:1229
   enum Type {
 
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
@@ -466,5 +465,14 @@ message DialerImpression {
     // Impressions for dialer reporting caller id as inaccurate
     CALLER_ID_REPORTED = 1227;
     CALLER_ID_REPORT_FAILED = 1228;
+
+    // Impressions for interactions with the voicemail transcription server
+    VVM_TRANSCRIPTION_REQUEST_SENT = 1229;
+    VVM_TRANSCRIPTION_REQUEST_RETRY = 1230;
+    VVM_TRANSCRIPTION_RESPONSE_SUCCESS = 1231;
+    VVM_TRANSCRIPTION_RESPONSE_EMPTY = 1232;
+    VVM_TRANSCRIPTION_RESPONSE_INVALID = 1233;
+    VVM_TRANSCRIPTION_RESPONSE_RECOVERABLE_ERROR = 1234;
+    VVM_TRANSCRIPTION_RESPONSE_FATAL_ERROR = 1235;
   }
 }
