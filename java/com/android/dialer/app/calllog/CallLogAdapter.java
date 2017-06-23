@@ -907,6 +907,10 @@ public class CallLogAdapter extends GroupingListAdapter
         (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
+    final int transcriptionState =
+        (VERSION.SDK_INT >= VERSION_CODES.O)
+            ? cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE)
+            : PhoneCallDetailsHelper.TRANSCRIPTION_NOT_STARTED;
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;
@@ -916,6 +920,7 @@ public class CallLogAdapter extends GroupingListAdapter
     details.features = getCallFeatures(cursor, count);
     details.geocode = cursor.getString(CallLogQuery.GEOCODED_LOCATION);
     details.transcription = cursor.getString(CallLogQuery.TRANSCRIPTION);
+    details.transcriptionState = transcriptionState;
     details.callTypes = getCallTypes(cursor, count);
 
     details.accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);

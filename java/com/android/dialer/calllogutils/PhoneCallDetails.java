@@ -99,6 +99,9 @@ public class PhoneCallDetails {
   // Voicemail transcription
   public String transcription;
 
+  // Voicemail transcription state, ie. in-progress, failed, etc.
+  public int transcriptionState;
+
   // The display string for the number.
   public String displayNumber;
 
