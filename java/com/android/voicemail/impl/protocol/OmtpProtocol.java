@@ -35,7 +35,7 @@ public class OmtpProtocol extends VisualVoicemailProtocol {
         phoneAccountHandle,
         applicationPort,
         destinationNumber,
-        OmtpConstants.CLIENT_TYPE_GOOGLE_10,
+        OmtpConstants.getClientType(),
         OmtpConstants.PROTOCOL_VERSION1_1,
         null /*clientPrefix*/);
   }
