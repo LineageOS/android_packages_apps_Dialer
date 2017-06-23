@@ -245,6 +245,7 @@
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
+  <string name="dialer_hint_find_contact">Introduz un nome o númberu</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <string name="call_log_activity_title_font_family">sans-serif-light</string>
