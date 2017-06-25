@@ -59,7 +59,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private final PendingIntent endCall;
 
   public static boolean isEnabled(Context context) {
-    return !ConfigProviderBindings.get(context).getBoolean("disable_return_to_call_bubble", false);
+    return ConfigProviderBindings.get(context).getBoolean("enable_return_to_call_bubble", false);
   }
 
   public ReturnToCallController(Context context) {
@@ -135,7 +135,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onDisconnect(DialerCall call) {
-    if (bubble != null && bubble.isShowing()) {
+    if (bubble != null && bubble.isVisible()) {
       bubble.showText(context.getText(R.string.incall_call_ended));
     }
 

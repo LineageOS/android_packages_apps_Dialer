@@ -4,6 +4,7 @@ option java_package = "com.android.dialer.callintent";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 package com.android.dialer.callintent;
 
 
@@ -17,4 +18,3 @@ message SpeedDialContactType {
     FREQUENT_CONTACT = 3;
   }
 }
-

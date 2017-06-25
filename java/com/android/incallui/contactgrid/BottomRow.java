@@ -124,7 +124,7 @@ public class BottomRow {
     if (primaryInfo.location != null) {
       return primaryInfo.location;
     }
-    if (!TextUtils.isEmpty(primaryInfo.number)) {
+    if (!primaryInfo.nameIsNumber && !TextUtils.isEmpty(primaryInfo.number)) {
       CharSequence spannedNumber = spanDisplayNumber(primaryInfo.number);
       if (primaryInfo.label == null) {
         return spannedNumber;

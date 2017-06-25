@@ -100,8 +100,8 @@ public class VideoCallFragment extends Fragment
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
-  private static final float BLUR_PREVIEW_RADIUS = 16.0f;
-  private static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
+  @VisibleForTesting static final float BLUR_PREVIEW_RADIUS = 16.0f;
+  @VisibleForTesting static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
   private static final float BLUR_REMOTE_RADIUS = 25.0f;
   private static final float BLUR_REMOTE_SCALE_FACTOR = 0.25f;
   private static final float ASPECT_RATIO_MATCH_THRESHOLD = 0.2f;
@@ -1106,52 +1106,58 @@ public class VideoCallFragment extends Fragment
         BLUR_REMOTE_SCALE_FACTOR);
   }
 
-  private void updateBlurredImageView(
+  @VisibleForTesting
+  void updateBlurredImageView(
       TextureView textureView,
       ImageView blurredImageView,
       boolean isVideoEnabled,
       float blurRadius,
       float scaleFactor) {
-    boolean didBlur = false;
-    long startTimeMillis = SystemClock.elapsedRealtime();
-    if (!isVideoEnabled) {
-      int width = Math.round(textureView.getWidth() * scaleFactor);
-      int height = Math.round(textureView.getHeight() * scaleFactor);
-      // This call takes less than 10 milliseconds.
-      Bitmap bitmap = textureView.getBitmap(width, height);
-      if (bitmap != null) {
-        // TODO: When the view is first displayed after a rotation the bitmap is empty
-        // and thus this blur has no effect.
-        // This call can take 100 milliseconds.
-        blur(getContext(), bitmap, blurRadius);
+    Context context = getContext();
 
-        // TODO: Figure out why only have to apply the transform in landscape mode
-        if (width > height) {
-          bitmap =
-              Bitmap.createBitmap(
-                  bitmap,
-                  0,
-                  0,
-                  bitmap.getWidth(),
-                  bitmap.getHeight(),
-                  textureView.getTransform(null),
-                  true);
-        }
-
-        blurredImageView.setImageBitmap(bitmap);
-        blurredImageView.setVisibility(View.VISIBLE);
-        didBlur = true;
-      }
-    }
-    if (!didBlur) {
+    if (isVideoEnabled || context == null) {
       blurredImageView.setImageBitmap(null);
       blurredImageView.setVisibility(View.GONE);
+      return;
     }
+
+    long startTimeMillis = SystemClock.elapsedRealtime();
+    int width = Math.round(textureView.getWidth() * scaleFactor);
+    int height = Math.round(textureView.getHeight() * scaleFactor);
+
+    // This call takes less than 10 milliseconds.
+    Bitmap bitmap = textureView.getBitmap(width, height);
+
+    if (bitmap == null) {
+      blurredImageView.setImageBitmap(null);
+      blurredImageView.setVisibility(View.GONE);
+      return;
+    }
+
+    // TODO: When the view is first displayed after a rotation the bitmap is empty
+    // and thus this blur has no effect.
+    // This call can take 100 milliseconds.
+    blur(getContext(), bitmap, blurRadius);
+
+    // TODO: Figure out why only have to apply the transform in landscape mode
+    if (width > height) {
+      bitmap =
+          Bitmap.createBitmap(
+              bitmap,
+              0,
+              0,
+              bitmap.getWidth(),
+              bitmap.getHeight(),
+              textureView.getTransform(null),
+              true);
+    }
+
+    blurredImageView.setImageBitmap(bitmap);
+    blurredImageView.setVisibility(View.VISIBLE);
 
     LogUtil.i(
         "VideoCallFragment.updateBlurredImageView",
-        "didBlur: %b, took %d millis",
-        didBlur,
+        "took %d millis",
         (SystemClock.elapsedRealtime() - startTimeMillis));
   }
 

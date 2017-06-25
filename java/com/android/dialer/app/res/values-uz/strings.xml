@@ -160,7 +160,7 @@
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Xabar yuborish"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Chaqiruv tafsilotlari"</string>
     <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Yuborish:"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="call_log_action_call" msgid="682724094251540583">"Chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="8292535799379230029">"Javobsiz chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="3920182963103160610">"Qo‘ng‘iroqqa javob berildi: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_unread_voicemail" msgid="145170985013419170">"O‘qilmagan ovozli xabar (<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)."</string>
@@ -168,7 +168,7 @@
     <string name="description_outgoing_call" msgid="543952487882919924">"Chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>. <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="call_log_via_number" msgid="1340307109806397650">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami orqali"</string>
     <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, <xliff:g id="NUMBER">%2$s</xliff:g> raqami orqali"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_call_action" msgid="4042796498169106545">"Chaqiruv: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"Video qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> kontaktidan kelgan ovozli xabarni tinglash"</string>
     <string name="description_voicemail_play" msgid="737337291418966183">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> tomonidan yuborilgan ovozli xabarni eshitish"</string>
@@ -225,7 +225,7 @@
     <string name="permission_no_calllog" msgid="4053705651238775784">"Qo‘ng‘iroqlaringiz ro‘yxatini ko‘rish uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="permission_no_voicemail" msgid="1908142679289209291">"Ovozli pochtaga kirish uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"Kontaktlarni qidirish uchun “Kontaktlar” ruxsatnomasini yoqing."</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"Qo‘ng‘iroq qilish uchun “Telefon” ruxsatnomasini yoqing."</string>
+    <string name="permission_place_call" msgid="8686908130349369423">"Chaqiruv uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefon ilovasida tizim sozlamalarini o‘zgartirish uchun ruxsat yo‘q."</string>
     <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Bloklandi"</string>
     <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Bloklash/spam deb belgilash"</string>
@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> hozir oflayn va u bilan bog‘lanishning imkoni yo‘q"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Ilova haqida"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"Ko‘rish"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Chaqiruv o‘chirildi. Android Xabarlar ilovasi orqali bu qo‘ng‘iroq davomida ulashilgan biriktirmalarni ko‘rish va o‘chirsh mumkin."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Chaqiruvlar o‘chirildi. Android Xabarlar ilovasi orqali bu qo‘ng‘iroqlar davomida ulashilgan biriktirmalarni ko‘rish va o‘chirsh mumkin."</string>
 </resources>

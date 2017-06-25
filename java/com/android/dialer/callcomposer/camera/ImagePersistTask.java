@@ -20,7 +20,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.support.v4.content.FileProvider;
@@ -119,13 +118,9 @@ public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
     mWidth = clippedWidth;
     mHeight = clippedHeight;
 
-    Matrix matrix = new Matrix();
-    matrix.postRotate(params.rotation);
-
     Bitmap clippedBitmap =
-        Bitmap.createBitmap(
-            bitmap, offsetLeft, offsetTop, clippedWidth, clippedHeight, matrix, true);
-    clippedBitmap = BitmapResizer.resizeForEnrichedCalling(clippedBitmap);
+        Bitmap.createBitmap(bitmap, offsetLeft, offsetTop, clippedWidth, clippedHeight);
+    clippedBitmap = BitmapResizer.resizeForEnrichedCalling(clippedBitmap, params.rotation);
     // EXIF data can take a big chunk of the file size and we've already manually rotated our image,
     // so remove all of the exif data.
     exifInterface.clearExif();
