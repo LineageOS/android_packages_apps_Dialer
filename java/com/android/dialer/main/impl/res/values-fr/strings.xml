@@ -28,5 +28,5 @@
     <string name="tab_title_speed_dial" msgid="1968484500112572774">"Num. abrégée"</string>
     <string name="tab_title_voicemail" msgid="4777655983569268504">"Messagerie"</string>
     <string name="settings" msgid="7614336599112169779">"Paramètres"</string>
-    <string name="main_send_feedback" msgid="2446919533981327373">"Laisser un avis"</string>
+    <string name="main_send_feedback" msgid="2446919533981327373">"Envoyer commentaires"</string>
 </resources>

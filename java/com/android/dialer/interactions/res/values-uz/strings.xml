@@ -19,5 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="sms_disambig_title" msgid="369677069797534410">"Raqamni tanlang"</string>
     <string name="call_disambig_title" msgid="2395382326030227603">"Raqamni tanlang"</string>
-    <string name="make_primary" msgid="9069345357862475091">"Ushbu tanlov eslab qolinsin"</string>
+    <string name="make_primary" msgid="9069345357862475091">"Bu tanlov eslab qolinsin"</string>
 </resources>

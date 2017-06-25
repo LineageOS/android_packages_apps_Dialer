@@ -26,7 +26,7 @@
     <string name="call_fax_work" msgid="5260192771364592922">"Ish faks raqamiga qo‘ng‘iroq qilish"</string>
     <string name="call_fax_home" msgid="5174311195081144124">"Uy faks raqamiga qo‘ng‘iroq qilish"</string>
     <string name="call_pager" msgid="6814149227741274161">"Peyjerga qo‘ng‘iroq qilish"</string>
-    <string name="call_other" msgid="5536385588712587235">"Qo‘ng‘iroq qilish"</string>
+    <string name="call_other" msgid="5536385588712587235">"Chaqiruv"</string>
     <string name="call_callback" msgid="6314019862718112786">"Qayta qo‘ng‘iroq raqamiga qo‘ng‘iroq qilish"</string>
     <string name="call_car" msgid="3197417098027764954">"Mashina telefon raqamiga qo‘ng‘iroq qilish"</string>
     <string name="call_company_main" msgid="2557663310028446397">"Kompaniya asosiy raqamiga qo‘ng‘iroq qilish"</string>
@@ -40,7 +40,7 @@
     <string name="call_work_pager" msgid="3791778749827366574">"Ish peyjeriga qo‘ng‘iroq qilish"</string>
     <string name="call_assistant" msgid="4177478845473789294">"Qo‘ng‘iroq: <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
     <string name="call_mms" msgid="4958811711741872901">"MMS raqamga qo‘ng‘iroq qilish"</string>
-    <string name="call_by_shortcut" msgid="4623082183552111045">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Qo‘ng‘iroq qilish)"</string>
+    <string name="call_by_shortcut" msgid="4623082183552111045">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (Chaqiruv)"</string>
     <string name="sms_custom" msgid="8785368968605026317">"<xliff:g id="CUSTOM">%s</xliff:g>ga sms jo‘natish"</string>
     <string name="sms_home" msgid="3527719551060295243">"Uy telefoniga sms jo‘natish"</string>
     <string name="sms_mobile" msgid="8883045857887736518">"SMS: mobil"</string>

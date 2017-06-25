@@ -113,7 +113,6 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private Bubble startNewBubble() {
     if (!Bubble.canShowBubbles(context)) {
       LogUtil.i("ReturnToCallController.startNewBubble", "can't show bubble, no permission");
-      context.startActivity(Bubble.getRequestPermissionIntent(context));
       return null;
     }
     Bubble returnToCallBubble = Bubble.createBubble(context, generateBubbleInfo());
@@ -135,7 +134,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onDisconnect(DialerCall call) {
-    if (bubble != null && bubble.isShowing()) {
+    if (bubble != null && bubble.isVisible()) {
       bubble.showText(context.getText(R.string.incall_call_ended));
     }
 

@@ -4,13 +4,13 @@
 # * removed com.google.android.geo.API_KEY key. This should be added to
 #      the manifest files in java/com/android/incallui/calllocation/impl/
 #      and /java/com/android/incallui/maps/impl/
-# * b/62417801 removed translation string variant:
-#      $ find java/com/android/incallui/res/*mcc262*/strings.xml | xargs rm
+# * b/62417801 modify translation string naming convention:
+#      $ find . -type d | grep 262 | rename 's/(values)\-([a-zA-Z\+\-]+)\-(mcc262-mnc01)/$1-$3-$2/'
 # * b/62343966 include manually generated GRPC service class:
 #      $ protoc --plugin=protoc-gen-grpc-java=prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
 #               --grpc-java_out=lite:"packages/apps/Dialer/java/com/android/voicemail/impl/" \
 #               --proto_path="packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/" "packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto"
-# * b/62787062 / b/37077388 temporarily disable proguard with javac
+# * b/37077388 temporarily disable proguard with javac
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -274,6 +274,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-gifdecoder-target \
 	dialer-glide-target \
         dialer-grpc-all-target \
+        dialer-grpc-context-target \
         dialer-grpc-core-target \
 	dialer-grpc-okhttp-target \
 	dialer-grpc-protobuf-lite-target \
@@ -286,6 +287,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-mime4j-dom-target \
 	jsr305 \
 	libphonenumber \
+	okhttp \
 	volley \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
@@ -321,7 +323,7 @@ LOCAL_JAVACFLAGS += -processorpath $(call normalize-path-list,$(PROCESSOR_JARS))
 
 
 # Begin Bug: 37077388
-LOCAL_DX_FLAGS := --core-library --multi-dex
+LOCAL_DX_FLAGS := --multi-dex
 LOCAL_JACK_FLAGS := --multi-dex native
 
 LOCAL_PROGUARD_ENABLED := disabled
@@ -538,6 +540,16 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := dialer-grpc-all-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-all/1.0.3/grpc-all-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-grpc-context-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-context/1.0.3/grpc-context-1.0.3$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)

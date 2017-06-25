@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"స్పామ్"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ఆఫ్‌లైన్‌లో ఉన్నందున వారిని చేరుకోవడం సాధ్యపడదు"</string>
     <string name="about_phone_label" msgid="582991354677973731">"పరిచయం"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"వీక్షించండి"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"కాల్ తొలగించబడింది. ఈ కాల్‌లో భాగస్వామ్యం చేయబడిన జోడింపులను సందేశాల అనువర్తనంలో వీక్షించండి మరియు తొలగించండి."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"కాల్ తొలగించబడింది. కాల్‌ల్లో భాగస్వామ్యం చేయబడిన జోడింపులను సందేశాల అనువర్తనంలో వీక్షించండి మరియు తొలగించండి."</string>
 </resources>

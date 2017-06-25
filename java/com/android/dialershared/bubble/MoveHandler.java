@@ -94,7 +94,7 @@ class MoveHandler implements OnTouchListener {
           if (wasOnRight != onRight) {
             bubble.onLeftRightSwitch(onRight);
           }
-          if (bubble.isShowing()) {
+          if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), windowParams);
           }
         }
@@ -110,7 +110,7 @@ class MoveHandler implements OnTouchListener {
         @Override
         public void setValue(LayoutParams object, float value) {
           object.y = (int) value - bubbleSize - shadowPaddingSize;
-          if (bubble.isShowing()) {
+          if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), object);
           }
         }

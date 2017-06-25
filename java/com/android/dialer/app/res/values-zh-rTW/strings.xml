@@ -235,4 +235,7 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"騷擾/廣告電話"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g>已離線，無法接聽來電"</string>
     <string name="about_phone_label" msgid="582991354677973731">"關於"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"查看"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"已刪除這筆通話紀錄。你可以在「訊息」應用程式中查看及刪除通話期間分享的附件。"</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"已刪除這些通話紀錄。你可以在「訊息」應用程式中查看及刪除通話期間分享的附件。"</string>
 </resources>

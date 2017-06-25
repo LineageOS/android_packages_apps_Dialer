@@ -27,6 +27,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.util.CallUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -56,12 +57,31 @@ public class ImsVideoTech implements VideoTech {
       return false;
     }
 
-    boolean hasCapabilities =
-        call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
-            && call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
+    if (call.getVideoCall() == null) {
+      return false;
+    }
 
-    return call.getVideoCall() != null
-        && (hasCapabilities || VideoProfile.isVideo(call.getDetails().getVideoState()));
+    // We are already in an IMS video call
+    if (VideoProfile.isVideo(call.getDetails().getVideoState())) {
+      return true;
+    }
+
+    // The user has disabled IMS video calling in system settings
+    if (!CallUtil.isVideoEnabled(context)) {
+      return false;
+    }
+
+    // The current call doesn't support transmitting video
+    if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)) {
+      return false;
+    }
+
+    // The current call remote device doesn't support receiving video
+    if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX)) {
+      return false;
+    }
+
+    return true;
   }
 
   @Override
