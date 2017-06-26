@@ -22,10 +22,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v13.app.FragmentCompat;
+import android.support.v4.content.Loader;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.dialer.app.R;
 import com.android.dialer.app.dialpad.SmartDialCursorLoader;
@@ -38,8 +37,7 @@ import java.util.Arrays;
 
 /** Implements a fragment to load and display SmartDial search results. */
 public class SmartDialSearchFragment extends SearchFragment
-    implements EmptyContentView.OnEmptyViewActionButtonClickedListener,
-        FragmentCompat.OnRequestPermissionsResultCallback {
+    implements EmptyContentView.OnEmptyViewActionButtonClickedListener {
 
   private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
@@ -136,8 +134,7 @@ public class SmartDialSearchFragment extends SearchFragment
       LogUtil.i(
           "SmartDialSearchFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      FragmentCompat.requestPermissions(
-          this, deniedPermissions, CALL_PHONE_PERMISSION_REQUEST_CODE);
+      requestPermissions(deniedPermissions, CALL_PHONE_PERMISSION_REQUEST_CODE);
     }
   }
 

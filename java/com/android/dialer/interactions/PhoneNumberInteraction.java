@@ -20,14 +20,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.Loader.OnLoadCompleteListener;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -42,7 +37,13 @@ import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.content.Loader.OnLoadCompleteListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -350,7 +351,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   }
 
   private void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
-    final Activity activity = (Activity) mContext;
+    final FragmentActivity activity = (FragmentActivity) mContext;
     if (activity.isDestroyed()) {
       // Check whether the activity is still running
       LogUtil.i("PhoneNumberInteraction.showDisambiguationDialog", "activity destroyed");
@@ -358,7 +359,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     }
     try {
       PhoneDisambiguationDialogFragment.show(
-          activity.getFragmentManager(),
+          activity.getSupportFragmentManager(),
           phoneList,
           mInteractionType,
           mIsVideoCall,

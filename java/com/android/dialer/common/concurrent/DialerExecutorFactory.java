@@ -16,8 +16,8 @@
 
 package com.android.dialer.common.concurrent;
 
-import android.app.FragmentManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 
 /**
@@ -31,8 +31,10 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 public interface DialerExecutorFactory {
 
   /**
-   * Must be called from onCreate of your activity or fragment.
+   * Must be called from onCreate of your Activity or Fragment.
    *
+   * @param fragmentManager the FragmentManager owned by your Activity or Fragment (i.e. not the
+   *     FragmentManager that contains your Fragment)
    * @param taskId used for the headless fragment ID and task ID
    * @param worker a function executed on a worker thread which accepts an {@link InputT} and
    *     returns an {@link OutputT}. It should ideally not be an inner class of your (meaning it

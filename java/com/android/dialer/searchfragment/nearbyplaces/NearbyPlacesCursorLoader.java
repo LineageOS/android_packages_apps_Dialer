@@ -17,9 +17,9 @@
 package com.android.dialer.searchfragment.nearbyplaces;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.v4.content.CursorLoader;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.searchfragment.common.Projections;
 

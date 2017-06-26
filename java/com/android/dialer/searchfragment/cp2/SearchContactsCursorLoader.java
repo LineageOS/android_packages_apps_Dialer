@@ -17,9 +17,9 @@
 package com.android.dialer.searchfragment.cp2;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.v4.content.CursorLoader;
 import com.android.dialer.searchfragment.common.Projections;
 
 /** Cursor Loader for CP2 contacts. */

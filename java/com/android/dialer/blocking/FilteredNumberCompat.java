@@ -17,7 +17,6 @@
 package com.android.dialer.blocking;
 
 import android.annotation.TargetApi;
-import android.app.FragmentManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,6 +30,7 @@ import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.FragmentManager;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import com.android.dialer.common.LogUtil;

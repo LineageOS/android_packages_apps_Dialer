@@ -16,15 +16,14 @@
 
 package com.android.dialer.contactsfragment;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
 import android.support.annotation.Nullable;
-import android.support.v13.app.FragmentCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Recycler;
@@ -206,8 +205,7 @@ public class ContactsFragment extends Fragment
         LogUtil.i(
             "ContactsFragment.onEmptyViewActionButtonClicked",
             "Requesting permissions: " + Arrays.toString(deniedPermissions));
-        FragmentCompat.requestPermissions(
-            this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+        requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
       }
 
     } else if (emptyContentView.getActionLabel()

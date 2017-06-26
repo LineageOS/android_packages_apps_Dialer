@@ -143,7 +143,7 @@ public class CallDetailsActivity extends AppCompatActivity
 
   @Override
   public void reportCallId(String number) {
-    ReportDialogFragment.newInstance(number).show(getFragmentManager(), null);
+    ReportDialogFragment.newInstance(number).show(getSupportFragmentManager(), null);
   }
 
   @Override

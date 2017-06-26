@@ -19,11 +19,11 @@ package com.android.dialer.blocking;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -99,7 +99,7 @@ public class BlockReportSpamDialogs {
   }
 
   /** Contains the common attributes between all block/unblock/report dialog fragments. */
-  private static class CommonDialogsFragment extends DialogFragment {
+  public static class CommonDialogsFragment extends DialogFragment {
 
     /** The number to display in the dialog title. */
     protected String mDisplayNumber;

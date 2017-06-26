@@ -22,7 +22,6 @@ import static com.android.dialer.app.list.DialtactsPagerAdapter.TAB_INDEX_HISTOR
 import static com.android.dialer.app.list.DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL;
 import static com.android.dialer.app.list.DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL;
 
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -31,6 +30,7 @@ import android.os.Handler;
 import android.os.Trace;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;

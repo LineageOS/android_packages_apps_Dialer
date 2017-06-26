@@ -226,7 +226,9 @@ public class InCallActivityCommon {
 
       SelectPhoneAccountDialogFragment dialogFragment =
           (SelectPhoneAccountDialogFragment)
-              inCallActivity.getFragmentManager().findFragmentByTag(TAG_SELECT_ACCOUNT_FRAGMENT);
+              inCallActivity
+                  .getSupportFragmentManager()
+                  .findFragmentByTag(TAG_SELECT_ACCOUNT_FRAGMENT);
       if (dialogFragment != null) {
         dialogFragment.setListener(selectAccountListener);
       }
@@ -884,7 +886,7 @@ public class InCallActivityCommon {
             selectAccountListener,
             waitingForAccountCall.getId());
     selectPhoneAccountDialogFragment.show(
-        inCallActivity.getFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
+        inCallActivity.getSupportFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
     return true;
   }
 }

@@ -197,7 +197,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               },
               dismissListener)
-          .show(getFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
+          .show(getSupportFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
     } else {
       reportNotSpamAndFinish(number, contactLookupResultType);
     }
@@ -222,7 +222,9 @@ public class SpamNotificationActivity extends FragmentActivity {
                         }
                       },
                       dismissListener)
-                  .show(getFragmentManager(), BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
+                  .show(
+                      getSupportFragmentManager(),
+                      BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
             }
           });
     } else {
@@ -252,7 +254,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Checks if the user has migrated to the new blocking and display a dialog if necessary. */
   private void maybeShowBlockNumberMigrationDialog(BlockedNumbersMigrator.Listener listener) {
     if (!FilteredNumberCompat.maybeShowBlockNumberMigrationDialog(
-        this, getFragmentManager(), listener)) {
+        this, getSupportFragmentManager(), listener)) {
       listener.onComplete();
     }
   }

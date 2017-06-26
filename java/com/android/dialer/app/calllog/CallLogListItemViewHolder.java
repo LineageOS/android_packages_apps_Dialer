@@ -30,6 +30,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
@@ -991,7 +992,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
   private void maybeShowBlockNumberMigrationDialog(BlockedNumbersMigrator.Listener listener) {
     if (!FilteredNumberCompat.maybeShowBlockNumberMigrationDialog(
-        mContext, ((Activity) mContext).getFragmentManager(), listener)) {
+        mContext, ((FragmentActivity) mContext).getSupportFragmentManager(), listener)) {
       listener.onComplete();
     }
   }

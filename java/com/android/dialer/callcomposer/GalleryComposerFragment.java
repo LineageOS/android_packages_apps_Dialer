@@ -125,7 +125,7 @@ public class GalleryComposerFragment extends CallComposerFragment
     copyAndResizeImage =
         executorFactory
             .createUiTaskBuilder(
-                getActivity().getFragmentManager(),
+                getChildFragmentManager(),
                 "copyAndResizeImage",
                 new CopyAndResizeImageWorker(getActivity().getApplicationContext()))
             .onSuccess(

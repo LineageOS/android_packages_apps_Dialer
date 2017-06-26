@@ -19,7 +19,6 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.support.v13.app.FragmentCompat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.contacts.common.list.ContactEntryListAdapter;
@@ -35,8 +34,7 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
 import java.util.Arrays;
 
 public class RegularSearchFragment extends SearchFragment
-    implements OnEmptyViewActionButtonClickedListener,
-        FragmentCompat.OnRequestPermissionsResultCallback {
+    implements OnEmptyViewActionButtonClickedListener {
 
   public static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -123,7 +121,7 @@ public class RegularSearchFragment extends SearchFragment
         LogUtil.i(
             "RegularSearchFragment.onEmptyViewActionButtonClicked",
             "Requesting permissions: " + Arrays.toString(deniedPermissions));
-        FragmentCompat.requestPermissions(this, deniedPermissions, PERMISSION_REQUEST_CODE);
+        requestPermissions(deniedPermissions, PERMISSION_REQUEST_CODE);
       }
     }
   }

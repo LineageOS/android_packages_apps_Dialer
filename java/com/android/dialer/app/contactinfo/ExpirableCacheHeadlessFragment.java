@@ -42,6 +42,11 @@ public class ExpirableCacheHeadlessFragment extends Fragment {
   }
 
   @NonNull
+  public static ExpirableCacheHeadlessFragment attach(@NonNull Fragment fragment) {
+    return attach(fragment.getChildFragmentManager());
+  }
+
+  @NonNull
   private static ExpirableCacheHeadlessFragment attach(FragmentManager fragmentManager) {
     ExpirableCacheHeadlessFragment fragment =
         (ExpirableCacheHeadlessFragment) fragmentManager.findFragmentByTag(FRAGMENT_TAG);

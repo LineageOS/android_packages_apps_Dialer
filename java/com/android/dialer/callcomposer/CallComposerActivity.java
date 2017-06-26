@@ -333,7 +333,7 @@ public class CallComposerActivity extends AppCompatActivity
       // If the current data is not a copy, make one.
       if (!galleryComposerFragment.selectedDataIsCopy()) {
         DialerExecutors.createUiTaskBuilder(
-                getFragmentManager(),
+                getSupportFragmentManager(),
                 "copyAndResizeImageToSend",
                 new CopyAndResizeImageWorker(this.getApplicationContext()))
             .onSuccess(
