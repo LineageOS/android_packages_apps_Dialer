@@ -19,7 +19,6 @@ package com.android.incallui.videotech.ims;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -42,8 +41,13 @@ public class ImsVideoTech implements VideoTech {
   private @SessionModificationState int sessionModificationState =
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
+  private boolean paused = false;
 
-  @VisibleForTesting boolean paused = false;
+  // Hold onto a flag of whether or not stopTransmission was called but resumeTransmission has not
+  // been. This is needed because there is time between calling stopTransmission and
+  // call.getDetails().getVideoState() reflecting the change. During that time, pause() and
+  // unpause() will send the incorrect VideoProfile.
+  private boolean transmissionStopped = false;
 
   public ImsVideoTech(LoggingBindings logger, VideoTechListener listener, Call call) {
     this.logger = logger;
@@ -209,6 +213,8 @@ public class ImsVideoTech implements VideoTech {
   public void stopTransmission() {
     LogUtil.enterBlock("ImsVideoTech.stopTransmission");
 
+    transmissionStopped = true;
+
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
@@ -218,6 +224,8 @@ public class ImsVideoTech implements VideoTech {
   @Override
   public void resumeTransmission() {
     LogUtil.enterBlock("ImsVideoTech.resumeTransmission");
+
+    transmissionStopped = false;
 
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
@@ -232,6 +240,10 @@ public class ImsVideoTech implements VideoTech {
       LogUtil.i("ImsVideoTech.pause", "sending pause request");
       paused = true;
       int pausedVideoState = call.getDetails().getVideoState() | VideoProfile.STATE_PAUSED;
+      if (transmissionStopped && VideoProfile.isTransmissionEnabled(pausedVideoState)) {
+        LogUtil.i("ImsVideoTech.pause", "overriding TX to false due to user request");
+        pausedVideoState &= ~VideoProfile.STATE_TX_ENABLED;
+      }
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(pausedVideoState));
     } else {
       LogUtil.i(
@@ -248,6 +260,10 @@ public class ImsVideoTech implements VideoTech {
       LogUtil.i("ImsVideoTech.unpause", "sending unpause request");
       paused = false;
       int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
+      if (transmissionStopped && VideoProfile.isTransmissionEnabled(unpausedVideoState)) {
+        LogUtil.i("ImsVideoTech.unpause", "overriding TX to false due to user request");
+        unpausedVideoState &= ~VideoProfile.STATE_TX_ENABLED;
+      }
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(unpausedVideoState));
     } else {
       LogUtil.i(
