@@ -772,20 +772,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
-    TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
-    if (!isExpanded || TextUtils.isEmpty(transcriptView.getText())) {
-      Assert.checkArgument(TextUtils.isEmpty(transcriptBrandingView.getText()));
-      transcriptView.setVisibility(View.GONE);
-      transcriptBrandingView.setVisibility(View.GONE);
+    final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
+    if (!isExpanded || TextUtils.isEmpty(view.getText())) {
+      view.setVisibility(View.GONE);
       return;
     }
-    transcriptView.setVisibility(View.VISIBLE);
-    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
-    } else {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
-    }
+    view.setVisibility(View.VISIBLE);
   }
 
   public void updatePhoto() {
