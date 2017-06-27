@@ -174,16 +174,16 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string translatable="false" name="dialer_terms_and_conditions_1.0_english">
-  See and listen to your messages, without having to call voicemail.\n\nGet transcripts of your voicemail using Google’s transcription service.
+  See and listen to your messages, without having to call voicemail.\nGet transcripts of your voicemail using Google’s transcription service.
   </string>
 
   <string translatable="false" name="dialer_terms_and_conditions_1.0_spanish">
-  ***TRANSLATE TO SPANISH***\nSee and listen to your messages, without having to call voicemail.\n\nGet transcripts of your voicemail using Google’s transcription service.
+  ***TRANSLATE TO SPANISH***\nSee and listen to your messages, without having to call voicemail.\nGet transcripts of your voicemail using Google’s transcription service.
   </string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Accept</string>
+  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
   <string translatable="false" name="verizon_terms_and_conditions_accept_spanish">Aceptar</string>
-  <string translatable="false" name="verizon_terms_and_conditions_decline_english">Decline</string>
+  <string translatable="false" name="verizon_terms_and_conditions_decline_english">No Thanks</string>
   <string translatable="false" name="verizon_terms_and_conditions_decline_spanish">Rechazar</string>
 
   <string translatable="false" name="dialer_terms_and_conditions_accept_english">Turn On</string>

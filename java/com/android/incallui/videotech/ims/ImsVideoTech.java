@@ -269,24 +269,6 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall().setDeviceOrientation(rotation);
   }
 
-  /**
-   * Called when we receive an rx_pause from the IMS stack. Update our state so we know we are
-   * currently paused. This is important in the cases where we swap calls since pause() and
-   * unpause() are not called.
-   */
-  void onPausedEvent() {
-    paused = true;
-  }
-
-  /**
-   * Called when we receive an rx_resume from the IMS stack. Update our state so we know we are
-   * currently not paused. This is important in the cases where we swap calls since pause() and
-   * unpause() are not called.
-   */
-  void onResumedEvent() {
-    paused = false;
-  }
-
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO)
         && call.getState() == Call.STATE_ACTIVE
