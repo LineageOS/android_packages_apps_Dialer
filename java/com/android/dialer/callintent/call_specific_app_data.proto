@@ -14,7 +14,7 @@ import "java/com/android/dialer/logging/ui_action.proto";
 // Miscellaneous data that's included in a new outgoing call initiated by
 // Dialer. The system will pass this data to the InCallUi which can use it
 // for logging or for something else.
-// Next tag: 11
+// Next tag: 14
 message CallSpecificAppData {
   optional CallInitiationType.Type call_initiation_type = 1;
 
@@ -34,4 +34,11 @@ message CallSpecificAppData {
   repeated int64 ui_action_timestamps_since_app_launch = 9;
 
   optional int32 starting_tab_index = 10;
+
+  // For recording the appearance of video call button
+  optional int32 lightbringer_button_appear_in_expanded_call_log_item_count =
+      11;
+  optional int32 lightbringer_button_appear_in_collapsed_call_log_item_count =
+      12;
+  optional int32 lightbringer_button_appear_in_search_count = 13;
 }

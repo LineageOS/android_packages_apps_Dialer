@@ -69,6 +69,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -345,11 +346,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   public static CallLogListItemViewHolder createForTest(Context context) {
-    return createForTest(context, null);
+    return createForTest(context, null, null);
   }
 
-  static CallLogListItemViewHolder createForTest(
-      Context context, VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+  public static CallLogListItemViewHolder createForTest(
+      Context context,
+      View.OnClickListener expandCollapseListener,
+      VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     Resources resources = context.getResources();
     CallLogCache callLogCache = CallLogCache.getCallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
@@ -359,7 +362,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         new CallLogListItemViewHolder(
             context,
             null,
-            null /* expandCollapseListener */,
+            expandCollapseListener /* expandCollapseListener */,
             null,
             null,
             callLogCache,
@@ -512,6 +515,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
 
         if (!isVoicemailNumber && showLightbringerPrimaryButton()) {
+          CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
           primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
           primaryActionButtonView.setContentDescription(
               TextUtils.expandTemplate(
