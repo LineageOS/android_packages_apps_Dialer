@@ -31,6 +31,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.ColorInt;
@@ -49,12 +50,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
@@ -106,6 +110,38 @@ public class Bubble {
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
+
+  private final AccessibilityDelegate accessibilityDelegate =
+      new AccessibilityDelegate() {
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+          super.onInitializeAccessibilityNodeInfo(host, info);
+          if (textShowing) {
+            info.setContentDescription(viewHolder.getPrimaryText().getText());
+            return;
+          }
+          if (expanded) {
+            info.setContentDescription(currentInfo.getPrimaryContentDescription());
+            info.addAction(AccessibilityAction.ACTION_CLICK);
+          } else {
+            info.setContentDescription(currentInfo.getBubbleContentDescription());
+            info.addAction(
+                new AccessibilityAction(
+                    AccessibilityNodeInfo.ACTION_CLICK,
+                    host.getContext().getString(R.string.content_description_action_bubble_click)));
+          }
+          info.addAction(AccessibilityAction.ACTION_MOVE_WINDOW);
+        }
+
+        @Override
+        public boolean performAccessibilityAction(View host, int action, Bundle args) {
+          if (action == AccessibilityNodeInfo.ACTION_CLICK) {
+            primaryButtonClick();
+            return true;
+          }
+          return super.performAccessibilityAction(host, action, args);
+        }
+      };
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
@@ -712,6 +748,8 @@ public class Bubble {
       firstButton = contentView.findViewById(R.id.bubble_icon_first);
       secondButton = contentView.findViewById(R.id.bubble_icon_second);
       thirdButton = contentView.findViewById(R.id.bubble_icon_third);
+
+      primaryButton.setAccessibilityDelegate(accessibilityDelegate);
 
       root.setOnBackPressedListener(
           () -> {
