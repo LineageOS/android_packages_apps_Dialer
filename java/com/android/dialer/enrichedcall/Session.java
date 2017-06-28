@@ -16,13 +16,36 @@
 
 package com.android.dialer.enrichedcall;
 
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.android.dialer.enrichedcall.EnrichedCallManager.State;
 import com.android.dialer.multimedia.MultimediaData;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Holds state information and data about enriched calling sessions. */
 public interface Session {
+
+  /** Possible states for call composer sessions. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    STATE_NONE,
+    STATE_STARTING,
+    STATE_STARTED,
+    STATE_START_FAILED,
+    STATE_MESSAGE_SENT,
+    STATE_MESSAGE_FAILED,
+    STATE_CLOSED,
+  })
+  @interface State {}
+
+  int STATE_NONE = 0;
+  int STATE_STARTING = STATE_NONE + 1;
+  int STATE_STARTED = STATE_STARTING + 1;
+  int STATE_START_FAILED = STATE_STARTED + 1;
+  int STATE_MESSAGE_SENT = STATE_START_FAILED + 1;
+  int STATE_MESSAGE_FAILED = STATE_MESSAGE_SENT + 1;
+  int STATE_CLOSED = STATE_MESSAGE_FAILED + 1;
 
   /** Id used for sessions that fail to start. */
   long NO_SESSION_ID = -1;
