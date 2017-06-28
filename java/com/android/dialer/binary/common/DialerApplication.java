@@ -39,7 +39,7 @@ public abstract class DialerApplication extends Application implements HasRootCo
   public void onCreate() {
     Trace.beginSection("DialerApplication.onCreate");
     if (BuildType.get() == BuildType.BUGFOOD) {
-      enableStrictMode();
+      // enableStrictMode();
     }
     super.onCreate();
     new BlockedNumbersAutoMigrator(
