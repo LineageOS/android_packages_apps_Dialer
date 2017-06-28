@@ -22,6 +22,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.support.annotation.VisibleForTesting;
 import android.transition.Transition;
 import android.transition.TransitionValues;
 import android.util.Property;
@@ -31,9 +32,14 @@ import android.view.ViewGroup;
 /** Similar to {@link android.transition.ChangeBounds ChangeBounds} but works across windows */
 public class ChangeOnScreenBounds extends Transition {
 
-  private static final String PROPNAME_BOUNDS = "bubble:changeScreenBounds:bounds";
-  private static final String PROPNAME_SCREEN_X = "bubble:changeScreenBounds:screenX";
-  private static final String PROPNAME_SCREEN_Y = "bubble:changeScreenBounds:screenY";
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String PROPNAME_BOUNDS = "bubble:changeScreenBounds:bounds";
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String PROPNAME_SCREEN_X = "bubble:changeScreenBounds:screenX";
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String PROPNAME_SCREEN_Y = "bubble:changeScreenBounds:screenY";
 
   private static final Property<ViewBounds, PointF> TOP_LEFT_PROPERTY =
       new Property<ViewBounds, PointF>(PointF.class, "topLeft") {
@@ -89,6 +95,12 @@ public class ChangeOnScreenBounds extends Transition {
   public Animator createAnimator(
       ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
     Rect startBounds = (Rect) startValues.values.get(PROPNAME_BOUNDS);
+    Rect endBounds = (Rect) endValues.values.get(PROPNAME_BOUNDS);
+
+    if (startBounds == null || endBounds == null) {
+      // start or end values were not captured, so don't animate.
+      return null;
+    }
 
     // Offset the startBounds by the difference in screen position
     int startScreenX = (Integer) startValues.values.get(PROPNAME_SCREEN_X);
@@ -97,7 +109,6 @@ public class ChangeOnScreenBounds extends Transition {
     int endScreenY = (Integer) endValues.values.get(PROPNAME_SCREEN_Y);
     startBounds.offset(startScreenX - endScreenX, startScreenY - endScreenY);
 
-    Rect endBounds = (Rect) endValues.values.get(PROPNAME_BOUNDS);
     final int startLeft = startBounds.left;
     final int endLeft = endBounds.left;
     final int startTop = startBounds.top;
