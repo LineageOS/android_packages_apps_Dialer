@@ -16,12 +16,12 @@
 package com.android.contacts.common;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.CursorLoader;
 
 /**
  * Used to create {@link CursorLoader} which finds contacts information from the strequents table.

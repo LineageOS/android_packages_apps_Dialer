@@ -15,6 +15,7 @@
  */
 package com.android.contacts.common.list;
 
+import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
@@ -23,7 +24,6 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.ContactsContract.Directory;
-import android.support.v4.content.AsyncTaskLoader;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.DirectoryCompat;

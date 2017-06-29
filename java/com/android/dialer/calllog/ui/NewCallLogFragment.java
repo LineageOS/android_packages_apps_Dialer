@@ -15,12 +15,12 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.app.Fragment;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -70,7 +70,7 @@ public final class NewCallLogFragment extends Fragment
     refreshAnnotatedCallLogTask =
         dialerExecutorFactory
             .createUiTaskBuilder(
-                getChildFragmentManager(),
+                getFragmentManager(),
                 "NewCallLogFragment.refreshAnnotatedCallLog",
                 component.getRefreshAnnotatedCallLogWorker())
             .build();

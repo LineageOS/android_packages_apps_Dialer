@@ -15,15 +15,15 @@
  */
 package com.android.dialer.app.filterednumber;
 
+import android.app.ListFragment;
+import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -71,8 +71,8 @@ public class BlockedNumbersFragment extends ListFragment
         (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
     getListView().addFooterView(inflater.inflate(R.layout.blocked_number_footer, null));
-    // replace the icon for add number with LetterTileDrawable(), so it will have identical style
-    ImageView addNumberIcon = getActivity().findViewById(R.id.add_number_icon);
+    //replace the icon for add number with LetterTileDrawable(), so it will have identical style
+    ImageView addNumberIcon = (ImageView) getActivity().findViewById(R.id.add_number_icon);
     LetterTileDrawable drawable = new LetterTileDrawable(getResources());
     drawable.setLetter(ADD_BLOCKED_NUMBER_ICON_LETTER);
     drawable.setColor(
@@ -83,11 +83,11 @@ public class BlockedNumbersFragment extends ListFragment
     if (mAdapter == null) {
       mAdapter =
           BlockedNumbersAdapter.newBlockedNumbersAdapter(
-              getContext(), getActivity().getSupportFragmentManager());
+              getContext(), getActivity().getFragmentManager());
     }
     setListAdapter(mAdapter);
 
-    blockedNumbersText = getListView().findViewById(R.id.blocked_number_text_view);
+    blockedNumbersText = (TextView) getListView().findViewById(R.id.blocked_number_text_view);
     migratePromoView = getListView().findViewById(R.id.migrate_promo);
     getListView().findViewById(R.id.migrate_promo_allow_button).setOnClickListener(this);
     mImportSettings = getListView().findViewById(R.id.import_settings);
@@ -98,7 +98,7 @@ public class BlockedNumbersFragment extends ListFragment
     getListView().findViewById(R.id.view_numbers_button).setOnClickListener(this);
     getListView().findViewById(R.id.add_number_linear_layout).setOnClickListener(this);
 
-    footerText = getActivity().findViewById(R.id.blocked_number_footer_textview);
+    footerText = (TextView) getActivity().findViewById(R.id.blocked_number_footer_textview);
     mVoicemailEnabledChecker = new VisualVoicemailEnabledChecker(getContext(), this);
     mVoicemailEnabledChecker.asyncUpdate();
     updateActiveVoicemailProvider();

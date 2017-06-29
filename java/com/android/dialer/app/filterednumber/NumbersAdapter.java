@@ -15,10 +15,10 @@
  */
 package com.android.dialer.app.filterednumber;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v4.app.FragmentManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -57,9 +57,10 @@ public class NumbersAdapter extends SimpleCursorAdapter {
   }
 
   public void updateView(View view, String number, String countryIso) {
-    final TextView callerName = view.findViewById(R.id.caller_name);
-    final TextView callerNumber = view.findViewById(R.id.caller_number);
-    final QuickContactBadge quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    final TextView callerName = (TextView) view.findViewById(R.id.caller_name);
+    final TextView callerNumber = (TextView) view.findViewById(R.id.caller_number);
+    final QuickContactBadge quickContactBadge =
+        (QuickContactBadge) view.findViewById(R.id.quick_contact_photo);
     quickContactBadge.setOverlay(null);
     if (CompatUtils.hasPrioritizedMimeType()) {
       quickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);

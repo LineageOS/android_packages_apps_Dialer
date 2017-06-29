@@ -17,6 +17,7 @@
 package com.android.contacts.common.list;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.net.Uri.Builder;
@@ -26,7 +27,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
-import android.support.v4.content.CursorLoader;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;

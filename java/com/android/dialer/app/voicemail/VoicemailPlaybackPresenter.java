@@ -37,7 +37,6 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -128,7 +127,7 @@ public class VoicemailPlaybackPresenter
   protected MediaPlayer mMediaPlayer;
   // Used to run async tasks that need to interact with the UI.
   protected AsyncTaskExecutor mAsyncTaskExecutor;
-  private FragmentActivity mActivity;
+  private Activity mActivity;
   private PlaybackView mView;
   private int mPosition;
   private boolean mIsPlaying;
@@ -176,7 +175,7 @@ public class VoicemailPlaybackPresenter
    */
   @MainThread
   public static VoicemailPlaybackPresenter getInstance(
-      FragmentActivity activity, Bundle savedInstanceState) {
+      Activity activity, Bundle savedInstanceState) {
     if (sInstance == null) {
       sInstance = new VoicemailPlaybackPresenter(activity);
     }
@@ -194,7 +193,7 @@ public class VoicemailPlaybackPresenter
 
   /** Update variables which are activity-dependent or state-dependent. */
   @MainThread
-  protected void init(FragmentActivity activity, Bundle savedInstanceState) {
+  protected void init(Activity activity, Bundle savedInstanceState) {
     Assert.isMainThread();
     mActivity = activity;
     mContext = activity;
@@ -221,7 +220,7 @@ public class VoicemailPlaybackPresenter
       }
       shareVoicemailExecutor =
           DialerExecutors.createUiTaskBuilder(
-                  mActivity.getSupportFragmentManager(), "test", new ShareVoicemailWorker())
+                  mActivity.getFragmentManager(), "test", new ShareVoicemailWorker())
               .onSuccess(
                   output -> {
                     if (output == null) {

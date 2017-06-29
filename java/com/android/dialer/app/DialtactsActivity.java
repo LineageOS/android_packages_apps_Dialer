@@ -16,6 +16,8 @@
 
 package com.android.dialer.app;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -38,8 +40,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
@@ -204,6 +204,11 @@ public class DialtactsActivity extends TransactionSafeActivity
   private Animation mSlideOut;
   /** Fragment containing the speed dial list, call history list, and all contacts list. */
   private ListsFragment mListsFragment;
+  /**
+   * Tracks whether onSaveInstanceState has been called. If true, no fragment transactions can be
+   * commited.
+   */
+  private boolean mStateSaved;
 
   private boolean mIsRestarting;
   private boolean mInDialpadSearch;
@@ -400,12 +405,12 @@ public class DialtactsActivity extends TransactionSafeActivity
     actionBar.setBackgroundDrawable(null);
 
     SearchEditTextLayout searchEditTextLayout =
-        actionBar.getCustomView().findViewById(R.id.search_view_container);
+        (SearchEditTextLayout) actionBar.getCustomView().findViewById(R.id.search_view_container);
     searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
     mActionBarController = new ActionBarController(this, searchEditTextLayout);
 
-    mSearchView = searchEditTextLayout.findViewById(R.id.search_view);
+    mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
     mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
     searchEditTextLayout
@@ -428,13 +433,14 @@ public class DialtactsActivity extends TransactionSafeActivity
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     mPreviouslySelectedTabIndex = DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL;
-    FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
+    FloatingActionButton floatingActionButton =
+        (FloatingActionButton) findViewById(R.id.floating_action_button);
     floatingActionButton.setOnClickListener(this);
     mFloatingActionButtonController =
         new FloatingActionButtonController(this, floatingActionButton);
 
     ImageButton optionsMenuButton =
-        searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
+        (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
     optionsMenuButton.setOnClickListener(this);
     mOverflowMenu = buildOptionsMenu(optionsMenuButton);
     optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
@@ -442,7 +448,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     // Add the favorites fragment but only if savedInstanceState is null. Otherwise the
     // fragment manager is responsible for recreating it.
     if (savedInstanceState == null) {
-      getSupportFragmentManager()
+      getFragmentManager()
           .beginTransaction()
           .add(R.id.dialtacts_frame, new ListsFragment(), TAG_FAVORITES_FRAGMENT)
           .commit();
@@ -475,7 +481,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     mSlideIn.setAnimationListener(mSlideInListener);
     mSlideOut.setAnimationListener(mSlideOutListener);
 
-    mParentLayout = findViewById(R.id.dialtacts_mainlayout);
+    mParentLayout = (CoordinatorLayout) findViewById(R.id.dialtacts_mainlayout);
     mParentLayout.setOnDragListener(new LayoutOnDragListener());
     ViewUtil.doOnGlobalLayout(
         floatingActionButton,
@@ -515,6 +521,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       PerformanceReport.startRecording();
     }
 
+    mStateSaved = false;
     if (mFirstLaunch) {
       displayFragment(getIntent());
     } else if (!phoneIsInUse() && mInCallDialpadUp) {
@@ -644,6 +651,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
     outState.putBoolean(KEY_WAS_CONFIGURATION_CHANGE, isChangingConfigurations());
     mActionBarController.saveInstanceState(outState);
+    mStateSaved = true;
   }
 
   @Override
@@ -652,7 +660,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (fragment instanceof DialpadFragment) {
       mDialpadFragment = (DialpadFragment) fragment;
       if (!mIsDialpadShown && !mShowDialpadOnResume) {
-        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.hide(mDialpadFragment);
         transaction.commit();
       }
@@ -739,7 +747,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       final Intent intent = new Intent(this, CallLogActivity.class);
       startActivity(intent);
     } else if (resId == R.id.menu_clear_frequents) {
-      ClearFrequentsDialog.show(getSupportFragmentManager());
+      ClearFrequentsDialog.show(getFragmentManager());
       Logger.get(this).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, this);
       return true;
     } else if (resId == R.id.menu_call_settings) {
@@ -816,14 +824,14 @@ public class DialtactsActivity extends TransactionSafeActivity
    */
   private void showDialpadFragment(boolean animate) {
     LogUtil.d("DialtactActivity.showDialpadFragment", "animate: %b", animate);
-    if (mIsDialpadShown || getSupportFragmentManager().isStateSaved()) {
+    if (mIsDialpadShown || mStateSaved) {
       return;
     }
     mIsDialpadShown = true;
 
     mListsFragment.setUserVisibleHint(false);
 
-    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    final FragmentTransaction ft = getFragmentManager().beginTransaction();
     if (mDialpadFragment == null) {
       mDialpadFragment = new DialpadFragment();
       ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
@@ -846,7 +854,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     Assert.isNotNull(mListsFragment.getView()).animate().alpha(0).withLayer();
 
-    // adjust the title, so the user will know where we're at when the activity start/resumes.
+    //adjust the title, so the user will know where we're at when the activity start/resumes.
     setTitle(R.string.launcherDialpadActivityLabel);
   }
 
@@ -908,17 +916,17 @@ public class DialtactsActivity extends TransactionSafeActivity
         exitSearchUi();
       }
     }
-    // reset the title to normal.
+    //reset the title to normal.
     setTitle(R.string.launcherActivityLabel);
   }
 
   /** Finishes hiding the dialpad fragment after any animations are completed. */
   private void commitDialpadFragmentHide() {
-    if (!getSupportFragmentManager().isStateSaved()
+    if (!mStateSaved
         && mDialpadFragment != null
         && !mDialpadFragment.isHidden()
         && !isDestroyed()) {
-      final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+      final FragmentTransaction ft = getFragmentManager().beginTransaction();
       ft.hide(mDialpadFragment);
       ft.commit();
     }
@@ -990,7 +998,8 @@ public class DialtactsActivity extends TransactionSafeActivity
   /** Sets the hint text for the contacts search box */
   private void setSearchBoxHint() {
     SearchEditTextLayout searchEditTextLayout =
-        getActionBarSafely().getCustomView().findViewById(R.id.search_view_container);
+        (SearchEditTextLayout)
+            getActionBarSafely().getCustomView().findViewById(R.id.search_view_container);
     ((TextView) searchEditTextLayout.findViewById(R.id.search_box_start_search))
         .setHint(getSearchBoxHint());
   }
@@ -1080,6 +1089,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     setIntent(newIntent);
     mFirstLaunch = true;
 
+    mStateSaved = false;
     displayFragment(newIntent);
 
     invalidateOptionsMenu();
@@ -1102,7 +1112,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Shows the search fragment */
   private void enterSearchUi(boolean smartDialSearch, String query, boolean animate) {
-    if (getSupportFragmentManager().isStateSaved() || getSupportFragmentManager().isDestroyed()) {
+    if (mStateSaved || getFragmentManager().isDestroyed()) {
       // Weird race condition where fragment is doing work after the activity is destroyed
       // due to talkback being on (b/10209937). Just return since we can't do any
       // constructive here.
@@ -1113,7 +1123,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       LogUtil.v("DialtactsActivity.enterSearchUi", "smart dial " + smartDialSearch);
     }
 
-    final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    final FragmentTransaction transaction = getFragmentManager().beginTransaction();
     if (mInDialpadSearch && mSmartDialSearchFragment != null) {
       transaction.remove(mSmartDialSearchFragment);
     } else if (mInRegularSearch && mRegularSearchFragment != null) {
@@ -1141,7 +1151,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       transaction.setTransition(FragmentTransaction.TRANSIT_NONE);
     }
 
-    Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+    Fragment fragment = getFragmentManager().findFragmentByTag(tag);
     if (fragment == null) {
       if (useNewSearch) {
         fragment = new NewSearchFragment();
@@ -1199,7 +1209,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   /** Hides the search fragment */
   private void exitSearchUi() {
     // See related bug in enterSearchUI();
-    if (getSupportFragmentManager().isStateSaved() || getSupportFragmentManager().isDestroyed()) {
+    if (getFragmentManager().isDestroyed() || mStateSaved) {
       return;
     }
 
@@ -1219,7 +1229,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     onPageScrolled(mListsFragment.getCurrentTabIndex(), 0 /* offset */, 0 /* pixelOffset */);
     onPageSelected(mListsFragment.getCurrentTabIndex());
 
-    final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    final FragmentTransaction transaction = getFragmentManager().beginTransaction();
     if (mSmartDialSearchFragment != null) {
       transaction.remove(mSmartDialSearchFragment);
     }
@@ -1248,7 +1258,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onBackPressed() {
     PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
 
-    if (getSupportFragmentManager().isStateSaved()) {
+    if (mStateSaved) {
       return;
     }
     if (mIsDialpadShown) {

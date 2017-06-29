@@ -46,12 +46,12 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
   public void showManagementUi() {
     BlockedNumbersFragment fragment =
         (BlockedNumbersFragment)
-            getSupportFragmentManager().findFragmentByTag(TAG_BLOCKED_MANAGEMENT_FRAGMENT);
+            getFragmentManager().findFragmentByTag(TAG_BLOCKED_MANAGEMENT_FRAGMENT);
     if (fragment == null) {
       fragment = new BlockedNumbersFragment();
     }
 
-    getSupportFragmentManager()
+    getFragmentManager()
         .beginTransaction()
         .replace(R.id.blocked_numbers_activity_container, fragment, TAG_BLOCKED_MANAGEMENT_FRAGMENT)
         .commit();
@@ -63,7 +63,7 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
   public void showSearchUi() {
     BlockedListSearchFragment fragment =
         (BlockedListSearchFragment)
-            getSupportFragmentManager().findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
+            getFragmentManager().findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
     if (fragment == null) {
       fragment = new BlockedListSearchFragment();
       fragment.setHasOptionsMenu(false);
@@ -71,7 +71,7 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
       fragment.setDirectorySearchEnabled(false);
     }
 
-    getSupportFragmentManager()
+    getFragmentManager()
         .beginTransaction()
         .replace(R.id.blocked_numbers_activity_container, fragment, TAG_BLOCKED_SEARCH_FRAGMENT)
         .addToBackStack(null)
@@ -87,12 +87,12 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
   public void showNumbersToImportPreviewUi() {
     ViewNumbersToImportFragment fragment =
         (ViewNumbersToImportFragment)
-            getSupportFragmentManager().findFragmentByTag(TAG_VIEW_NUMBERS_TO_IMPORT_FRAGMENT);
+            getFragmentManager().findFragmentByTag(TAG_VIEW_NUMBERS_TO_IMPORT_FRAGMENT);
     if (fragment == null) {
       fragment = new ViewNumbersToImportFragment();
     }
 
-    getSupportFragmentManager()
+    getFragmentManager()
         .beginTransaction()
         .replace(
             R.id.blocked_numbers_activity_container, fragment, TAG_VIEW_NUMBERS_TO_IMPORT_FRAGMENT)
@@ -112,8 +112,8 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
   @Override
   public void onBackPressed() {
     // TODO: Achieve back navigation without overriding onBackPressed.
-    if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-      getSupportFragmentManager().popBackStack();
+    if (getFragmentManager().getBackStackEntryCount() > 0) {
+      getFragmentManager().popBackStack();
     } else {
       super.onBackPressed();
     }

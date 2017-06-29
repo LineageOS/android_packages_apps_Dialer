@@ -15,14 +15,14 @@
  */
 package com.android.dialer.app.calllog;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
@@ -84,14 +84,14 @@ public class CallLogActivity extends TransactionSafeActivity
     mTabTitles[0] = getString(R.string.call_log_all_title);
     mTabTitles[1] = getString(R.string.call_log_missed_title);
 
-    mViewPager = findViewById(R.id.call_log_pager);
+    mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
-    mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+    mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
     mViewPager.setAdapter(mViewPagerAdapter);
     mViewPager.setOffscreenPageLimit(1);
     mViewPager.setOnPageChangeListener(this);
 
-    mViewPagerTabs = findViewById(R.id.viewpager_header);
+    mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
 
     mViewPagerTabs.setViewPager(mViewPager);
     mViewPager.setCurrentItem(startingTab);
@@ -148,7 +148,7 @@ public class CallLogActivity extends TransactionSafeActivity
       startActivity(intent);
       return true;
     } else if (item.getItemId() == R.id.delete_all) {
-      ClearCallLogDialog.show(getSupportFragmentManager(), this);
+      ClearCallLogDialog.show(getFragmentManager(), this);
       return true;
     }
     return super.onOptionsItemSelected(item);

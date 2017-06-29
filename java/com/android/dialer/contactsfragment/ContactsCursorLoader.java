@@ -17,8 +17,8 @@
 package com.android.dialer.contactsfragment;
 
 import android.content.Context;
+import android.content.CursorLoader;
 import android.provider.ContactsContract.Contacts;
-import android.support.v4.content.CursorLoader;
 
 /** Cursor Loader for {@link ContactsFragment}. */
 final class ContactsCursorLoader extends CursorLoader {

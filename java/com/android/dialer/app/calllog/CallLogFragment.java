@@ -19,6 +19,7 @@ package com.android.dialer.app.calllog;
 import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -33,7 +34,9 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v13.app.FragmentCompat;
+import android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -77,6 +80,7 @@ public class CallLogFragment extends Fragment
         CallFetcher,
         MultiSelectRemoveView,
         OnEmptyViewActionButtonClickedListener,
+        OnRequestPermissionsResultCallback,
         CallLogModalAlertManager.Listener,
         OnClickListener {
   private static final String KEY_FILTER_TYPE = "filter_type";
@@ -302,21 +306,21 @@ public class CallLogFragment extends Fragment
   }
 
   protected void setupView(View view) {
-    mRecyclerView = view.findViewById(R.id.recycler_view);
+    mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
     mRecyclerView.setHasFixedSize(true);
     mLayoutManager = new LinearLayoutManager(getActivity());
     mRecyclerView.setLayoutManager(mLayoutManager);
     PerformanceReport.logOnScrollStateChange(mRecyclerView);
-    mEmptyListView = view.findViewById(R.id.empty_list_view);
+    mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
     mEmptyListView.setImage(R.drawable.empty_call_log);
     mEmptyListView.setActionClickedListener(this);
-    mModalAlertView = view.findViewById(R.id.modal_message_container);
+    mModalAlertView = (ViewGroup) view.findViewById(R.id.modal_message_container);
     mModalAlertManager =
         new CallLogModalAlertManager(LayoutInflater.from(getContext()), mModalAlertView, this);
     mMultiSelectUnSelectAllViewContent =
         view.findViewById(R.id.multi_select_select_all_view_content);
-    mSelectUnselectAllViewText = view.findViewById(R.id.select_all_view_text);
-    mSelectUnselectAllIcon = view.findViewById(R.id.select_all_view_icon);
+    mSelectUnselectAllViewText = (TextView) view.findViewById(R.id.select_all_view_text);
+    mSelectUnselectAllIcon = (ImageView) view.findViewById(R.id.select_all_view_icon);
     mMultiSelectUnSelectAllViewContent.setOnClickListener(null);
     mSelectUnselectAllIcon.setOnClickListener(this);
     mSelectUnselectAllViewText.setOnClickListener(this);
@@ -331,7 +335,8 @@ public class CallLogFragment extends Fragment
 
     mContactInfoCache =
         new ContactInfoCache(
-            ExpirableCacheHeadlessFragment.attach(this).getRetainedCache(),
+            ExpirableCacheHeadlessFragment.attach((AppCompatActivity) getActivity())
+                .getRetainedCache(),
             new ContactInfoHelper(getActivity(), currentCountryIso),
             mOnContactInfoChangedListener);
     mAdapter =
@@ -570,7 +575,7 @@ public class CallLogFragment extends Fragment
       LogUtil.i(
           "CallLogFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      requestPermissions(deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
+      FragmentCompat.requestPermissions(this, deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
     } else if (!mIsCallLogActivity) {
       // Show dialpad if we are not in the call log activity.
       ((HostInterface) activity).showDialpad();

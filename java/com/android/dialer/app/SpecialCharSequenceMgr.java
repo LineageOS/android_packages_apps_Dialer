@@ -16,7 +16,9 @@
 
 package com.android.dialer.app;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -28,8 +30,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -96,7 +96,7 @@ public class SpecialCharSequenceMgr {
   private SpecialCharSequenceMgr() {}
 
   public static boolean handleChars(Context context, String input, EditText textField) {
-    // get rid of the separators so that the string gets parsed correctly
+    //get rid of the separators so that the string gets parsed correctly
     String dialString = PhoneNumberUtils.stripSeparators(input);
 
     if (handleDeviceIdDisplay(context, dialString)
@@ -223,8 +223,7 @@ public class SpecialCharSequenceMgr {
           DialogFragment dialogFragment =
               SelectPhoneAccountDialogFragment.newInstance(
                   subscriptionAccountHandles, callback, null);
-          dialogFragment.show(
-              ((FragmentActivity) context).getSupportFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
+          dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
         }
 
         return true;
@@ -279,8 +278,7 @@ public class SpecialCharSequenceMgr {
         DialogFragment dialogFragment =
             SelectPhoneAccountDialogFragment.newInstance(
                 subscriptionAccountHandles, listener, null);
-        dialogFragment.show(
-            ((FragmentActivity) context).getSupportFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
+        dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
       }
       return true;
     }
