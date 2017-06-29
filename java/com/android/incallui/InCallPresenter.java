@@ -54,6 +54,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
@@ -1249,7 +1250,8 @@ public class InCallPresenter implements CallList.Listener {
       if (call.getAccountHandle() == null && !call.isConferenceCall()) {
         setDisconnectCauseForMissingAccounts(call);
       }
-      mInCallActivity.maybeShowErrorDialogOnDisconnect(call.getDisconnectCause());
+      mInCallActivity.maybeShowErrorDialogOnDisconnect(
+          new DisconnectMessage(mInCallActivity, call));
     }
   }
 

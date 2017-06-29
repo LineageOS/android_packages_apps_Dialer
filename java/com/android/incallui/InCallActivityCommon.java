@@ -21,7 +21,6 @@ import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -36,10 +35,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
-import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
-import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -62,9 +58,9 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
-import com.android.incallui.wifi.EnableWifiCallingPrompt;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -497,18 +493,15 @@ public class InCallActivityCommon {
     }
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectCause cause) {
+  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
     LogUtil.i(
-        "InCallActivityCommon.maybeShowErrorDialogOnDisconnect", "disconnect cause: %s", cause);
+        "InCallActivityCommon.maybeShowErrorDialogOnDisconnect",
+        "disconnect cause: %s",
+        disconnectMessage);
 
     if (!inCallActivity.isFinishing()) {
-      if (EnableWifiCallingPrompt.shouldShowPrompt(cause)) {
-        Pair<Dialog, CharSequence> pair =
-            EnableWifiCallingPrompt.createDialog(inCallActivity, cause);
-        showErrorDialog(pair.first, pair.second);
-      } else if (shouldShowDisconnectErrorDialog(cause)) {
-        Pair<Dialog, CharSequence> pair = getDisconnectErrorDialog(inCallActivity, cause);
-        showErrorDialog(pair.first, pair.second);
+      if (disconnectMessage.dialog != null) {
+        showErrorDialog(disconnectMessage.dialog, disconnectMessage.toastMessage);
       }
     }
   }
@@ -555,23 +548,6 @@ public class InCallActivityCommon {
           "dismissing InternationalCallOnWifiDialogFragment");
       internationalCallOnWifiFragment.dismiss();
     }
-  }
-
-  private static boolean shouldShowDisconnectErrorDialog(@NonNull DisconnectCause cause) {
-    return !TextUtils.isEmpty(cause.getDescription())
-        && (cause.getCode() == DisconnectCause.ERROR
-            || cause.getCode() == DisconnectCause.RESTRICTED);
-  }
-
-  private static Pair<Dialog, CharSequence> getDisconnectErrorDialog(
-      @NonNull Context context, @NonNull DisconnectCause cause) {
-    CharSequence message = cause.getDescription();
-    Dialog dialog =
-        new AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, null)
-            .create();
-    return new Pair<>(dialog, message);
   }
 
   private void showErrorDialog(Dialog dialog, CharSequence message) {
