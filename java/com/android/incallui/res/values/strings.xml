@@ -357,7 +357,5 @@
     data charges may apply.
   </string>
   <string name="video_call_lte_to_wifi_failed_do_not_show">Do not show this again</string>
-  <string name="content_description_return_to_call_bubble">Ongoing call</string>
-  <string name="content_description_return_to_call_primary">Return to call</string>
 
 </resources>

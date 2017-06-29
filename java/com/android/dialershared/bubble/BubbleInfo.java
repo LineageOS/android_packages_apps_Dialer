@@ -28,17 +28,11 @@ import java.util.List;
 /** Info for displaying a {@link Bubble} */
 @AutoValue
 public abstract class BubbleInfo {
-  @NonNull
-  public abstract CharSequence getBubbleContentDescription();
-
   @ColorInt
   public abstract int getPrimaryColor();
 
   @NonNull
   public abstract Icon getPrimaryIcon();
-
-  @NonNull
-  public abstract CharSequence getPrimaryContentDescription();
 
   @NonNull
   public abstract PendingIntent getPrimaryIntent();
@@ -66,15 +60,11 @@ public abstract class BubbleInfo {
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setBubbleContentDescription(@NonNull CharSequence description);
-
     public abstract Builder setPrimaryColor(@ColorInt int primaryColor);
 
     public abstract Builder setPrimaryIcon(@NonNull Icon primaryIcon);
 
     public abstract Builder setPrimaryIntent(@NonNull PendingIntent primaryIntent);
-
-    public abstract Builder setPrimaryContentDescription(@NonNull CharSequence description);
 
     public abstract Builder setStartingYPosition(@Px int startingYPosition);
 

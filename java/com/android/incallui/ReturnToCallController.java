@@ -169,10 +169,6 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
         .setStartingYPosition(
             context.getResources().getDimensionPixelOffset(R.dimen.return_to_call_initial_offset_y))
         .setPrimaryIntent(PendingIntent.getActivity(context, 0, activityIntent, 0))
-        .setBubbleContentDescription(
-            context.getText(R.string.content_description_return_to_call_bubble))
-        .setPrimaryContentDescription(
-            context.getText(R.string.content_description_return_to_call_primary))
         .setActions(generateActions())
         .build();
   }
