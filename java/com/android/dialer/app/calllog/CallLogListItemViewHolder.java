@@ -34,6 +34,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -66,6 +68,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -85,6 +88,7 @@ import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import java.lang.annotation.Retention;
@@ -117,6 +121,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public final ImageView primaryActionButtonView;
 
   private final Context mContext;
+  @Nullable private final PhoneAccountHandle mDefaultPhoneAccountHandle;
   private final CallLogCache mCallLogCache;
   private final CallLogListItemHelper mCallLogListItemHelper;
   private final CachedNumberLookupService mCachedNumberLookupService;
@@ -255,6 +260,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     mBlockReportListener = blockReportListener;
     mCachedNumberLookupService = PhoneNumberCache.get(mContext).getCachedNumberLookupService();
 
+    // Cache this to avoid having to look it up each time we bind to a call log entry
+    mDefaultPhoneAccountHandle =
+        TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL);
+
     this.rootView = rootView;
     this.quickContactView = dialerQuickContactView;
     this.primaryActionView = primaryActionView;
@@ -336,11 +345,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   public static CallLogListItemViewHolder createForTest(Context context) {
-    return createForTest(context, null);
+    return createForTest(context, null, null);
   }
 
-  static CallLogListItemViewHolder createForTest(
-      Context context, VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+  public static CallLogListItemViewHolder createForTest(
+      Context context,
+      View.OnClickListener expandCollapseListener,
+      VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     Resources resources = context.getResources();
     CallLogCache callLogCache = CallLogCache.getCallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
@@ -350,7 +361,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         new CallLogListItemViewHolder(
             context,
             null,
-            null /* expandCollapseListener */,
+            expandCollapseListener /* expandCollapseListener */,
             null,
             null,
             callLogCache,
@@ -503,6 +514,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
 
         if (!isVoicemailNumber && showLightbringerPrimaryButton()) {
+          CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
           primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
           primaryActionButtonView.setContentDescription(
               TextUtils.expandTemplate(
@@ -594,7 +606,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callButtonView.setVisibility(View.VISIBLE);
     }
 
-    if (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall()) {
+    if (CallUtil.isVideoEnabled(mContext)
+        && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
       videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
     } else if (showLightbringerPrimaryButton()) {
@@ -709,10 +722,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (accountHandle == null) {
       return false;
     }
-    if (accountHandle.getComponentName().equals(getLightbringer().getPhoneAccountComponentName())) {
+    if (mDefaultPhoneAccountHandle == null) {
       return false;
     }
-    return true;
+    return accountHandle.getComponentName().equals(mDefaultPhoneAccountHandle.getComponentName());
   }
 
   private boolean canSupportCarrierVideoCall() {
@@ -878,12 +891,20 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
       if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
+        Logger.get(mContext)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
         startLightbringerActivity(intent);
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
         ((Activity) mContext)
             .startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS);
       } else {
+        if (Intent.ACTION_CALL.equals(intent.getAction())
+            && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
+                == VideoProfile.STATE_BIDIRECTIONAL) {
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
+        }
         DialerUtils.startActivityWithErrorToast(mContext, intent);
       }
     }

@@ -64,8 +64,8 @@ import com.android.dialer.constants.Constants;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.EnrichedCallManager.State;
 import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.enrichedcall.Session.State;
 import com.android.dialer.enrichedcall.extensions.StateExtension;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -255,25 +255,25 @@ public class CallComposerActivity extends AppCompatActivity
         StateExtension.toString(state));
 
     switch (state) {
-      case EnrichedCallManager.STATE_STARTING:
+      case Session.STATE_STARTING:
         timeoutHandler.postDelayed(sessionStartedTimedOut, getSessionStartedTimeoutMillis());
         if (sendAndCallReady) {
           showLoadingUi();
         }
         break;
-      case EnrichedCallManager.STATE_STARTED:
+      case Session.STATE_STARTED:
         timeoutHandler.removeCallbacks(sessionStartedTimedOut);
         if (sendAndCallReady) {
           sendAndCall();
         }
         break;
-      case EnrichedCallManager.STATE_START_FAILED:
-      case EnrichedCallManager.STATE_CLOSED:
+      case Session.STATE_START_FAILED:
+      case Session.STATE_CLOSED:
         setFailedResultAndFinish();
         break;
-      case EnrichedCallManager.STATE_MESSAGE_FAILED:
-      case EnrichedCallManager.STATE_MESSAGE_SENT:
-      case EnrichedCallManager.STATE_NONE:
+      case Session.STATE_MESSAGE_FAILED:
+      case Session.STATE_MESSAGE_SENT:
+      case Session.STATE_NONE:
       default:
         break;
     }
@@ -385,7 +385,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   private boolean sessionReady() {
     Session session = getEnrichedCallManager().getSession(sessionId);
-    return session != null && session.getState() == EnrichedCallManager.STATE_STARTED;
+    return session != null && session.getState() == Session.STATE_STARTED;
   }
 
   private void placeRCSCall(MultimediaData.Builder builder) {

@@ -64,7 +64,7 @@
     <string name="sms_mms" msgid="5187888900503248542">"傳送短訊至 MMS 電話號碼"</string>
     <string name="sms_by_shortcut" msgid="8005496406639963582">"<xliff:g id="CONTACT_NAME">%s</xliff:g> (訊息)"</string>
     <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"清除常用聯絡人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"您將清除「通訊錄」應用程式和「電話」應用程式中的常用聯絡人名單，並強制電子郵件應用程式重新取得您的寄件喜好設定。"</string>
+    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"您將清除「通訊錄」應用程式和「電話」應用程式中的常用聯絡人名單，並強制電子郵件應用程式重新取得您的寄件偏好設定。"</string>
     <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"正在清除常用聯絡人…"</string>
     <string name="status_available" msgid="2648156525685472626">"在線"</string>
     <string name="status_away" msgid="2298688367552893953">"離開"</string>

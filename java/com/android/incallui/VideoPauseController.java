@@ -66,11 +66,6 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
     return sVideoPauseController;
   }
 
-  private boolean wasIncomingCall() {
-    return (mPrevCallState == DialerCall.State.CALL_WAITING
-        || mPrevCallState == DialerCall.State.INCOMING);
-  }
-
   /**
    * Determines if a call is in incoming/waiting state.
    *
@@ -198,7 +193,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
     }
     final boolean canVideoPause = videoCanPause(call);
 
-    if ((wasIncomingCall() || wasDialing()) && canVideoPause && !mIsInBackground) {
+    if (canVideoPause && !mIsInBackground) {
       // Send resume request for the active call, if user rejects incoming call, ends dialing
       // call, or the call was previously in a paused state and UI is in the foreground.
       sendRequest(call, true);

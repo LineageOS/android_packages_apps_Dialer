@@ -234,6 +234,39 @@ public class OmtpConstants {
   public static final int CHANGE_PIN_INVALID_CHARACTER = 5;
   public static final int CHANGE_PIN_SYSTEM_ERROR = 6;
 
-  /** Indicates the client is Google visual voicemail version 1.0. */
-  public static final String CLIENT_TYPE_GOOGLE_10 = "google.vvm.10";
+  public static String getClientType() {
+    String manufacturer =
+        truncate(
+            android.os.Build.MANUFACTURER
+                .replace('=', '_')
+                .replace(';', '_')
+                .replace('.', '_')
+                .replace(' ', '_'),
+            12);
+
+    String version =
+        truncate(
+            android.os.Build.VERSION
+                .RELEASE
+                .replace('=', '_')
+                .replace(';', '_')
+                .replace('.', '_')
+                .replace(' ', '_'),
+            8);
+
+    String model =
+        truncate(
+            android.os.Build.MODEL
+                .replace('=', '_')
+                .replace(';', '_')
+                .replace('.', '_')
+                .replace(' ', '_'),
+            28 - manufacturer.length() - version.length());
+
+    return String.format("%s.%s.%s", manufacturer, model, version);
+  }
+
+  private static final String truncate(String string, int length) {
+    return string.substring(0, Math.min(length, string.length()));
+  }
 }

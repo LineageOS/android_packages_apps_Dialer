@@ -109,6 +109,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/calllocation/impl/res \
 	$(BASE_DIR)/incallui/commontheme/res \
 	$(BASE_DIR)/incallui/contactgrid/res \
+	$(BASE_DIR)/incallui/disconnectdialog/res \
 	$(BASE_DIR)/incallui/hold/res \
 	$(BASE_DIR)/incallui/incall/impl/res \
 	$(BASE_DIR)/incallui/res \
@@ -117,7 +118,6 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/telecomeventui/res \
 	$(BASE_DIR)/incallui/video/impl/res \
 	$(BASE_DIR)/incallui/video/protocol/res \
-	$(BASE_DIR)/incallui/wifi/res \
 	$(BASE_DIR)/voicemail/impl/res \
 
 
@@ -169,6 +169,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/autoresizetext/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/commontheme/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/contactgrid/AndroidManifest.xml \
+	$(BASE_DIR)/incallui/disconnectdialog/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/hold/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/incall/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/sessiondata/AndroidManifest.xml \
@@ -176,7 +177,6 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/telecomeventui/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
-	$(BASE_DIR)/incallui/wifi/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
 
@@ -246,6 +246,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.incallui.calllocation.impl \
 	--extra-packages com.android.incallui.commontheme \
 	--extra-packages com.android.incallui.contactgrid \
+	--extra-packages com.android.incallui.disconnectdialog \
 	--extra-packages com.android.incallui.hold \
 	--extra-packages com.android.incallui.incall.impl \
 	--extra-packages com.android.incallui.maps.impl \
@@ -254,7 +255,6 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.incallui.telecomeventui \
 	--extra-packages com.android.incallui.video \
 	--extra-packages com.android.incallui.video.impl \
-	--extra-packages com.android.incallui.wifi \
 	--extra-packages com.android.phone.common \
 	--extra-packages com.android.voicemail \
 	--extra-packages com.android.voicemail.impl \

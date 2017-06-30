@@ -34,7 +34,7 @@
     <string name="contact_grid_incoming_wifi_video_request" msgid="4516902096577976768">"Bu foydalanuvchi Wi-Fi orqali video suhbatga o‘tishni so‘ramoqda:"</string>
     <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"Kimdan qo‘ng‘iroq:"</string>
     <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"Ish telefoniga kimdan qo‘ng‘iroq:"</string>
-    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Kiruvchi qo‘ng‘iroq (operator: <xliff:g id="PROVIDER_NAME">%s</xliff:g>)"</string>
+    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"Kiruvchi chaqiruv (operator: <xliff:g id="PROVIDER_NAME">%s</xliff:g>)"</string>
     <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"Shubhali abonent"</string>
     <string name="contact_grid_callback_number" msgid="1284649030313415807">"Teskari qo‘ng‘iroq uchun raqam: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
 </resources>

@@ -25,4 +25,5 @@ public class TrafficStatsTags {
   public static final int DOWNLOAD_LOCATION_MAP_TAG = 0xd000;
   public static final int REVERSE_GEOCODE_TAG = 0xd001;
   public static final int VISUAL_VOICEMAIL_TAG = 0xd002;
+  public static final int DIALER_VOIP_TAG = 0xd003;
 }

@@ -6,11 +6,11 @@ option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
 
+
 message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag:1229
   enum Type {
 
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
@@ -400,9 +400,10 @@ message DialerImpression {
     BUBBLE_END_CALL = 1195;
 
     LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH = 1196;
-    LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG = 1197;
+    LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG =
+        1197;  // Including call history
     IMS_VIDEO_REQUESTED_FROM_SEARCH = 1198;
-    IMS_VIDEO_REQUESTED_FROM_CALL_LOG = 1199;
+    IMS_VIDEO_REQUESTED_FROM_CALL_LOG = 1199;  // Including call history
 
     // Multi select impressions
     MULTISELECT_LONG_PRESS_ENTER_MULTI_SELECT_MODE = 1200;
@@ -442,5 +443,17 @@ message DialerImpression {
     // Impressions for dialer reporting caller id as inaccurate
     CALLER_ID_REPORTED = 1227;
     CALLER_ID_REPORT_FAILED = 1228;
+
+    // Impressions for interactions with the voicemail transcription server
+    VVM_TRANSCRIPTION_REQUEST_SENT = 1229;
+    VVM_TRANSCRIPTION_REQUEST_RETRY = 1230;
+    VVM_TRANSCRIPTION_RESPONSE_SUCCESS = 1231;
+    VVM_TRANSCRIPTION_RESPONSE_EMPTY = 1232;
+    VVM_TRANSCRIPTION_RESPONSE_INVALID = 1233;
+    VVM_TRANSCRIPTION_RESPONSE_RECOVERABLE_ERROR = 1234;
+    VVM_TRANSCRIPTION_RESPONSE_FATAL_ERROR = 1235;
+
+    // In in call UI
+    UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN = 1236;
   }
 }

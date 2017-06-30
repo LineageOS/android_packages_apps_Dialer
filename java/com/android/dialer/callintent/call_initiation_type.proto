@@ -57,5 +57,7 @@ message CallInitiationType {
     MISSED_CALL_NOTIFICATION = 15;
 
     CALL_SUBJECT_DIALOG = 16;
+
+    IMS_VIDEO_BLOCKED_FALLBACK_TO_VOICE = 17;
   }
 }

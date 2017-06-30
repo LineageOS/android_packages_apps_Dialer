@@ -36,7 +36,6 @@ import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.oem.MotorolaUtils;
-import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
@@ -88,9 +87,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       CallTypeHelper callTypeHelper,
       boolean showMultimediaDivider) {
     int callType = entry.getCallType();
-    boolean isVideoCall =
-        (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-            && CallUtil.isVideoEnabled(context);
+    boolean isVideoCall = (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
     boolean isPulledCall =
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
@@ -98,7 +95,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
     callTypeIcon.add(callType);
-    callTypeIcon.setShowVideo((entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    callTypeIcon.setShowVideo(isVideoCall);
     callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.getFeatures()));
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
