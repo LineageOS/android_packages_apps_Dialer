@@ -87,23 +87,23 @@ public class LetterTileDrawable extends Drawable {
   /** Default icon scale for vector drawable. */
   private static final float VECTOR_ICON_SCALE = 0.7f;
 
-  /** Reusable components to avoid new allocations */
-  private static final Paint sPaint = new Paint();
+  private static Paint sPaint;
 
   private static final Rect sRect = new Rect();
   private static final char[] sFirstChar = new char[1];
-  /** Letter tile */
-  private static TypedArray sColors;
 
-  private static int sSpamColor;
-  private static int sDefaultColor;
-  private static int sTileFontColor;
-  private static float sLetterToTileRatio;
-  private static Drawable sDefaultPersonAvatar;
-  private static Drawable sDefaultBusinessAvatar;
-  private static Drawable sDefaultVoicemailAvatar;
-  private static Drawable sDefaultSpamAvatar;
-  private static Drawable sDefaultConferenceAvatar;
+  private static volatile Integer sSpamColor;
+  private static volatile Integer sDefaultColor;
+  private static volatile Integer sTileFontColor;
+  private static volatile Float sLetterToTileRatio;
+
+  private static volatile TypedArray sColors;
+
+  private static volatile Drawable sDefaultPersonAvatar;
+  private static volatile Drawable sDefaultBusinessAvatar;
+  private static volatile Drawable sDefaultVoicemailAvatar;
+  private static volatile Drawable sDefaultSpamAvatar;
+  private static volatile Drawable sDefaultConferenceAvatar;
 
   private final Paint mPaint;
   @ContactType private int mContactType = TYPE_DEFAULT;
@@ -117,33 +117,64 @@ public class LetterTileDrawable extends Drawable {
   private String mDisplayName;
 
   public LetterTileDrawable(final Resources res) {
+    // Guard static members with null checks to insulate against concurrent calls to the
+    // constructor.
+    if (sSpamColor == null) {
+      sSpamColor = res.getColor(R.color.spam_contact_background);
+    }
+    if (sDefaultColor == null) {
+      sDefaultColor = res.getColor(R.color.letter_tile_default_color);
+    }
+    if (sTileFontColor == null) {
+      sTileFontColor = res.getColor(R.color.letter_tile_font_color);
+    }
+    if (sTileFontColor == null) {
+      sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
+    }
+
     if (sColors == null) {
       sColors = res.obtainTypedArray(R.array.letter_tile_colors);
-      sSpamColor = res.getColor(R.color.spam_contact_background);
-      sDefaultColor = res.getColor(R.color.letter_tile_default_color);
-      sTileFontColor = res.getColor(R.color.letter_tile_font_color);
-      sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
+    }
+    if (sDefaultPersonAvatar == null) {
       sDefaultPersonAvatar =
           res.getDrawable(R.drawable.product_logo_avatar_anonymous_white_color_120, null);
-      Assert.isNotNull(sDefaultPersonAvatar, "sDefaultPersonAvatar is null");
-      sDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
-      Assert.isNotNull(sDefaultBusinessAvatar, "sDefaultBusinessAvatar is null");
-      sDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
-      Assert.isNotNull(sDefaultVoicemailAvatar, "sDefaultVoicemailAvatar is null");
-      sDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
-      Assert.isNotNull(sDefaultSpamAvatar, "sDefaultSpamAvatar is null");
-      sDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
-      Assert.isNotNull(sDefaultConferenceAvatar, "sDefaultConferenceAvatar is null");
-
-      sPaint.setTypeface(
-          Typeface.create(res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
-      sPaint.setTextAlign(Align.CENTER);
-      sPaint.setAntiAlias(true);
     }
+    if (sDefaultBusinessAvatar == null) {
+      sDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
+    }
+    if (sDefaultVoicemailAvatar == null) {
+      sDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
+    }
+    if (sDefaultSpamAvatar == null) {
+      sDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
+    }
+    if (sDefaultConferenceAvatar == null) {
+      sDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
+    }
+
+    // Calls in this method are potentially not idempotent, and need to be set after
+    // the member is initilaized.
+    this.initializeDefaultPaintOptions(res);
+
+    // These values should be reset on every call to the constructor.
     mPaint = new Paint();
     mPaint.setFilterBitmap(true);
     mPaint.setDither(true);
+
     mColor = sDefaultColor;
+  }
+
+  private static void initializeDefaultPaintOptions(final Resources res) {
+    if (sPaint == null) {
+      synchronized (LetterTileDrawable.class) {
+        sPaint = new Paint();
+        sPaint.setTypeface(
+            Typeface.create(
+                res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
+        sPaint.setTextAlign(Align.CENTER);
+        sPaint.setAntiAlias(true);
+      }
+    }
   }
 
   private Rect getScaledBounds(float scale, float offset) {
