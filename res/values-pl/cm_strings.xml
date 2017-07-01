@@ -92,7 +92,9 @@
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nie masz połączeń przychodzących.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nie masz połączeń wychodzących.</string>
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">Twój rejestr połączeń jest pusty</string>
   <string name="calllog_search_hint">Szukaj w historii połączeń</string>
@@ -100,8 +102,10 @@
   <string name="clear">Wyczyść</string>
   <string name="description_clear_search">Wyczyść wyszukiwanie</string>
   <string name="video_call_welcome_title"><b>Witaj w nowej aplikacji do nawiązywania połączeń wideo</b></string>
+  <string name="video_call_welcome_message">Wszyscy kochamy słyszeć znajomy głos na końcu linii, ale rozmowa twarzą w twarz jest o niebo lepsza! Oto co powinieneś wiedzieć, aby móc korzystać z rozmów wideo:\n Twoje urządzenie musi mieć łączność 4G LTE lub Wi-Fi\n Urządzenie osoby do której zadzwonisz musi mieć możliwość odbierania rozmów wideo\n Wideo rozmowy używają łącza o wysokiej prędkości\n Możesz również przejść z połączenia głosowego na połączenie wideo w dowolnym momencie\n\n Więcej informacji na stronie <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
   <string name="video_call_welcome_message_repeat">Pokaż ten komunikat za każdym razem</string>
   <string name="toast_change_video_call_failed">Nie można zmienić na połączenie wideo, niepoprawny format numeru</string>
+  <string name="toast_make_video_call_failed">Nie można wykonać połączenia wideo, niepoprawny format numeru</string>
   <!-- Add for enhance videocall ui -->
   <string name="overflowBothCallMenuItemText">Połączenie video, pokaż mnie</string>
   <string name="overflowRXCallMenuItemText">Połączenie video, ukryj mnie</string>
@@ -110,6 +114,7 @@
   <string name="call_data_info_label">Wskaźniki czasu używania połączeń głosowych i transmisji danych</string>
   <string name="call_data_info_description">Czas użycia połączeń głosowych i czas użycia transmisji danych</string>
   <string name="alert_call_over_wifi">Połączenia będą wykonywane przez sieć Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Brak sieci komórkowej. Połącz z dostępną siecią Wi-Fi, aby wykonywać połączenia.</string>
   <string name="alert_user_connect_to_wifi_for_call">Połącz z Wi-Fi aby nawiązywać połączenia.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">Dotknij tutaj, aby wyświetlić dostępne sieci</string>
   <string name="menu_add_to_4g_conference_call">Dodaj do połączenia konferencyjnego 4G</string>

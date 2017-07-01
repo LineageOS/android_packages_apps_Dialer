@@ -16,48 +16,48 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Вибрација у току позива</string>
-  <string name="incall_vibrate_outgoing_title">Вибрација при успостављању везе</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрација при позиву на чекању</string>
-  <string name="incall_vibrate_hangup_title">Вибрација при прекиду позива</string>
-  <string name="incall_vibrate_45_title">Вибрација сваког минута</string>
-  <string name="incall_vibrate_45_summary">Вибрације сваке 45 секунде у минути током одлазних позива</string>
+  <string name="incall_vibration_category_title">Вибрација током позива</string>
+  <string name="incall_vibrate_outgoing_title">Вибрација при јављању</string>
+  <string name="incall_vibrate_call_waiting_title">Вибрација при чекању</string>
+  <string name="incall_vibrate_hangup_title">Вибрација при прекиду</string>
+  <string name="incall_vibrate_45_title">Вибрација сваки минут</string>
+  <string name="incall_vibrate_45_summary">Вибрира на 45. секунди сваког минута током одлазних позива.</string>
   <!-- Forward lookup -->
-  <string name="nearby_places">Оближња места</string>
+  <string name="nearby_places">Места у околини</string>
   <string name="people">Особе</string>
   <!-- Number lookup -->
-  <string name="lookup_settings_label">Проналажење телефонског броја</string>
-  <string name="enable_forward_lookup_title">Напредно проналажење</string>
-  <string name="enable_forward_lookup_summary">Прикажи околна места када се тражи у бројчанику</string>
-  <string name="enable_people_lookup_title">Проналажење људи</string>
-  <string name="enable_people_lookup_summary">Прикажи резултате на мрежи за људе када се тражи у бројчанику</string>
-  <string name="enable_reverse_lookup_title">Обрнуто проналажење</string>
-  <string name="enable_reverse_lookup_summary">Потражи информације о особи или месту за непознате бројеве на долазним позивима</string>
-  <string name="forward_lookup_provider_title">Провајдер напредног проналажења</string>
-  <string name="people_lookup_provider_title">Провајдер проналажења људи</string>
-  <string name="reverse_lookup_provider_title">Провајдер обрнутог проналажења</string>
+  <string name="lookup_settings_label">Претрага бројева телефона</string>
+  <string name="enable_forward_lookup_title">Директна претрага</string>
+  <string name="enable_forward_lookup_summary">Приказује места у околини при претрази у бројчанику.</string>
+  <string name="enable_people_lookup_title">Претрага особа</string>
+  <string name="enable_people_lookup_summary">Приказује резултате са интернета при претрази особа у бројчанику.</string>
+  <string name="enable_reverse_lookup_title">Обрнута претрага</string>
+  <string name="enable_reverse_lookup_summary">Претражите информације о особи или месту за долазне позиве са непознатим бројевима.</string>
+  <string name="forward_lookup_provider_title">Добављач директне претраге</string>
+  <string name="people_lookup_provider_title">Добављач претраге особа</string>
+  <string name="reverse_lookup_provider_title">Добављач обрнуте претраге</string>
   <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Кинески (CN)</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="speed_dial_edit_title">Уреди брзо бирање <xliff:g id="index" example="2">%1$d</xliff:g></string>
-  <string name="speed_dial_input_hint">Молим упишите број</string>
+  <string name="speed_dial_input_hint">Унесите број</string>
   <string name="call_log_show_all_slots">Све SIM картице</string>
   <string name="call_log_all_calls_header">Сви позиви</string>
   <string name="call_log_blacklist_header">Само блокирани позиви</string>
   <string name="call_log_blocked_empty">Нема блокираних позива.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Детаљи статистике</string>
+  <string name="callStatsDetailTitle">Статистика позива</string>
   <string name="call_stats_incoming">Долазни: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Одлазећи: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Пропуштен: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Блокиран: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Одлазни: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Пропуштени: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Блокирани: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Укупно: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Укупно: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Датум почетка</string>
   <string name="call_stats_filter_to">Датум завршетка</string>
-  <string name="call_stats_filter_picker_title">Распон филтера</string>
-  <string name="date_quick_selection">Брзи избор</string>
+  <string name="call_stats_filter_picker_title">Опсег филтера</string>
+  <string name="date_quick_selection">Избор периода</string>
   <string name="date_qs_currentmonth">Тренутни месец</string>
   <string name="date_qs_currentquarter">Тренутни квартал</string>
   <string name="date_qs_currentyear">Тренутна година</string>
@@ -65,76 +65,82 @@
   <string name="date_qs_lastmonth">Прошли месец</string>
   <string name="date_qs_lastquarter">Прошли квартал</string>
   <string name="date_qs_lastyear">Прошла година</string>
-  <string name="call_stats_date_filter">Подеси временски опсег</string>
-  <string name="call_stats_reset_filter">Ресетуј временски опсег</string>
+  <string name="call_stats_date_filter">Подеси филтер</string>
+  <string name="call_stats_reset_filter">Поништи филтер</string>
   <string name="call_stats_sort_by_duration">Сортирај по трајању позива</string>
   <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
   <string name="call_stats_title_for_number">Овај број</string>
-  <string name="call_stats_title_of_total">Од укупног збира</string>
+  <string name="call_stats_title_of_total">Од укупно</string>
   <string name="call_stats_title_durations">Трајање позива</string>
   <string name="call_stats_title_count">Број позива</string>
   <string name="call_stats_title_average_duration">Просечно трајање позива</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Твој запис позива не садржи ниједан позив у изабраном периоду.</string>
+  <string name="recent_calls_no_items_in_range">Евиденција позива нема записа у изабраном раздобљу.</string>
   <string name="call_recording_category_title">Снимање позива</string>
-  <string name="call_recording_format">Аудио формат</string>
-  <string name="call_playback_no_app_found_toast">Нема пронађене апликације да пусти изабрани снимак.</string>
+  <string name="call_recording_format">Аудио-формат</string>
+  <string name="call_playback_no_app_found_toast">Нема апликација које могу да репродукују изабрани снимак.</string>
   <!-- Speed Dial -->
   <string name="speed_dial_settings">Подешавања брзог бирања</string>
   <string name="speed_dial_not_set">(није постављено)</string>
   <string name="speed_dial_replace">Замени</string>
   <string name="speed_dial_delete">Избриши</string>
-  <string name="speed_dial_unassigned_dialog_title">Тастер недодељен</string>
-  <string name="speed_dial_unassigned_dialog_message">Нема додељене акције брзог бирања нумеричком тастеру \'<xliff:g id="number">%s</xliff:g>\'. Да ли желиш сада да доделиш акцију?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Да би користио брзо бирање, прво искључи режим рада у авиону</string>
+  <string name="speed_dial_unassigned_dialog_title">Тастер није додељен</string>
+  <string name="speed_dial_unassigned_dialog_message">Тастер „<xliff:g id="number">%s</xliff:g>“ није додељен за брзо бирање. Желите ли да га доделите?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Да бисте користили брзо бирање, искључите режим рада у авиону.</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Брзо бирање није могуће доделити том броју</string>
+  <string name="speed_dial_can_not_be_set">Постављање брзог бирања за овај тастер није могуће</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Немате долазећих позива.</string>
+  <string name="recentIncoming_empty">Нема долазних позива.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Немате одлазећих позива.</string>
+  <string name="recentOutgoing_empty">Нема одлазних позива.</string>
   <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Евиденција позива је празна</string>
+  <string name="recentCalls_empty">Евиденција позива је празна.</string>
   <string name="calllog_search_hint">Претражи евиденцију позива</string>
-  <string name="no_call_log">Нема евиденције позива</string>
-  <string name="clear">Чисто</string>
+  <string name="no_call_log">Нема евиденције позива.</string>
+  <string name="clear">Очисти</string>
   <string name="description_clear_search">Очисти претрагу</string>
-  <string name="video_call_welcome_title"><b>Добродошли на нови бирач видео позива</b></string>
-  <string name="video_call_welcome_message">Сви волимо чути познати глас на другом крају линије, али разговор лицем у лице је много бољи! Овде је оно што требаш знати да би у реалном времену имао конекцију:\n Требаш бити на 4G LTE или имати Wi-Fi конекцију\n Уређај који позиваш мора бити спреман за видео позив\n Видео позиви користе висок проток података\n такође можеш унапредити говорни позив у видео позив\n\n Провери <a>https://support.t-mobile.com/docs/DOC-23574</a> за више информација.</string>
-  <string name="video_call_welcome_message_repeat">Прикажи ову поруку сваки пут</string>
-  <string name="toast_change_video_call_failed">Неможеш променити на видео позив, неисправан формат броја</string>
-  <string name="toast_make_video_call_failed">Неможеш направити видео позив, неисправан формат броја</string>
+  <string name="video_call_welcome_title"><b>Добро дошли у нови мени за видео-позиве</b></string>
+  <string name="video_call_welcome_message">Сви ми волимо да чујемо познати глас с друге стране жице, али разговор лицем у лице је много боље! Ево шта треба да знате за коришћење видео-позива:\n Потребно је да се повежете на 4G мрежу или Wi-Fi\n Уређај који позивате такође мора да подржава видео-позиве\n Видео-позиви захтевају брз проток\n Такође можете да пређете са гласовног на видео позив\n\n Детаљније на <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">Приказуј ову поруку сваки пут</string>
+  <string name="toast_change_video_call_failed">Не могу да пребацим на видео-позив због неисправног формата броја.</string>
+  <string name="toast_make_video_call_failed">Не могу да обавим видео-позив због неисправног формата броја.</string>
   <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Видео позив, прикажи ме</string>
-  <string name="overflowRXCallMenuItemText">Видео позив, сакриј ме</string>
-  <string name="overflowVOCallMenuItemText">Говорни позив</string>
-  <string name="video_call">Видео позив</string>
-  <string name="call_data_info_label">Времена коришћења Позива/Података</string>
-  <string name="call_data_info_description">Време коришћења гласовног позива и коришћења података</string>
-  <string name="alert_call_over_wifi">Позив ће бити направљен преко Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Нема доступне мобилне мреже. Повежи се на доступан Wi-Fi да направиш позив.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Повежи се на Wi-Fi да направиш позиве.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Додирни овде да видиш доступне мреже</string>
-  <string name="menu_add_to_4g_conference_call">Додати 4G конференцијски позив</string>
-  <string name="menu_4g_conference_call">4G Конференцијски позив</string>
+  <string name="overflowBothCallMenuItemText">Видео-позив, прикажи ме</string>
+  <string name="overflowRXCallMenuItemText">Видео-позив, сакриј ме</string>
+  <string name="overflowVOCallMenuItemText">Гласовни позив</string>
+  <string name="video_call">Видео-позив</string>
+  <string name="call_data_info_label">Статистика позива и коришћења података</string>
+  <string name="call_data_info_description">Трајање позива преко мобилне мреже и мреже за пренос података.</string>
+  <string name="alert_call_over_wifi">Позиви ће бити обављани преко Wi-Fi-а.</string>
+  <string name="alert_call_no_cellular_coverage">Мобилна мрежа је недоступна. Да бисте обављали позиве, повежите се на Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Повежите се на Wi-Fi да бисте обављали позиве.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Додирните овде да бисте видели доступне мреже.</string>
+  <string name="menu_add_to_4g_conference_call">Додај 4G конференцији</string>
+  <string name="menu_4g_conference_call">4G конференција</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Долазни 4G гласовни позив</string>
+  <string name="type_incoming_volte">Долазни 4G позив</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Долазни 4G видео позив</string>
+  <string name="type_incoming_video_lte">Долазни 4G видео-позив</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Долазни 4G гласовни позив</string>
+  <string name="type_outgoing_volte">Одлазни 4G позив</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Одлазни 4G видео позив</string>
+  <string name="type_outgoing_video_lte">Одлазни 4G видео-позив</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Пропуштен 4G гласовни позив</string>
+  <string name="type_missed_volte">Пропуштени 4G позив</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Пропуштен 4G видео позив</string>
+  <string name="type_missed_video_lte">Пропуштени 4G видео-позив</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Долазни позив преко Wi-Fi-а</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Долазни видео-позив преко Wi-Fi-а</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Одлазни позив преко Wi-Fi-а</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Одлазни видео-позив преко Wi-Fi-а</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Пропуштени позив преко Wi-Fi-а</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Пропуштени видео-позив преко Wi-Fi-а</string>
 </resources>
