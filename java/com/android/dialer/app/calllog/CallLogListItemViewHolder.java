@@ -34,6 +34,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -66,6 +68,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -342,11 +345,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   public static CallLogListItemViewHolder createForTest(Context context) {
-    return createForTest(context, null);
+    return createForTest(context, null, null);
   }
 
-  static CallLogListItemViewHolder createForTest(
-      Context context, VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+  public static CallLogListItemViewHolder createForTest(
+      Context context,
+      View.OnClickListener expandCollapseListener,
+      VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     Resources resources = context.getResources();
     CallLogCache callLogCache = CallLogCache.getCallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
@@ -356,7 +361,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         new CallLogListItemViewHolder(
             context,
             null,
-            null /* expandCollapseListener */,
+            expandCollapseListener /* expandCollapseListener */,
             null,
             null,
             callLogCache,
@@ -509,6 +514,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
 
         if (!isVoicemailNumber && showLightbringerPrimaryButton()) {
+          CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
           primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
           primaryActionButtonView.setContentDescription(
               TextUtils.expandTemplate(
@@ -769,20 +775,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
-    TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
-    if (!isExpanded || TextUtils.isEmpty(transcriptView.getText())) {
-      Assert.checkArgument(TextUtils.isEmpty(transcriptBrandingView.getText()));
-      transcriptView.setVisibility(View.GONE);
-      transcriptBrandingView.setVisibility(View.GONE);
+    final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
+    if (!isExpanded || TextUtils.isEmpty(view.getText())) {
+      view.setVisibility(View.GONE);
       return;
     }
-    transcriptView.setVisibility(View.VISIBLE);
-    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
-    } else {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
-    }
+    view.setVisibility(View.VISIBLE);
   }
 
   public void updatePhoto() {
@@ -893,12 +891,20 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
       if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
+        Logger.get(mContext)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
         startLightbringerActivity(intent);
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
         ((Activity) mContext)
             .startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS);
       } else {
+        if (Intent.ACTION_CALL.equals(intent.getAction())
+            && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
+                == VideoProfile.STATE_BIDIRECTIONAL) {
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
+        }
         DialerUtils.startActivityWithErrorToast(mContext, intent);
       }
     }

@@ -63,6 +63,7 @@ import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter.OnVoicemailDe
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
@@ -293,6 +294,11 @@ public class CallLogAdapter extends GroupingListAdapter
         }
       };
 
+  @VisibleForTesting
+  public View.OnClickListener getExpandCollapseListener() {
+    return mExpandCollapseListener;
+  }
+
   /** The OnClickListener used to expand or collapse the action buttons of a call log entry. */
   private final View.OnClickListener mExpandCollapseListener =
       new View.OnClickListener() {
@@ -361,6 +367,17 @@ public class CallLogAdapter extends GroupingListAdapter
               }
             }
             expandViewHolderActions(viewHolder);
+
+            if (viewHolder.videoCallButtonView.getVisibility() == View.VISIBLE
+                && LightbringerComponent.get(mActivity)
+                    .getLightbringer()
+                    .getPackageName()
+                    .equals(
+                        ((IntentProvider) viewHolder.videoCallButtonView.getTag())
+                            .getIntent(mActivity)
+                            .getPackage())) {
+              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
+            }
           }
         }
       };
@@ -907,10 +924,6 @@ public class CallLogAdapter extends GroupingListAdapter
         (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
-    final int transcriptionState =
-        (VERSION.SDK_INT >= VERSION_CODES.O)
-            ? cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE)
-            : PhoneCallDetailsHelper.TRANSCRIPTION_NOT_STARTED;
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;
@@ -920,7 +933,6 @@ public class CallLogAdapter extends GroupingListAdapter
     details.features = getCallFeatures(cursor, count);
     details.geocode = cursor.getString(CallLogQuery.GEOCODED_LOCATION);
     details.transcription = cursor.getString(CallLogQuery.TRANSCRIPTION);
-    details.transcriptionState = transcriptionState;
     details.callTypes = getCallTypes(cursor, count);
 
     details.accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);

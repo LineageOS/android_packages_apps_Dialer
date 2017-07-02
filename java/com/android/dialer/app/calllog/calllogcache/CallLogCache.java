@@ -17,6 +17,7 @@
 package com.android.dialer.app.calllog.calllogcache;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.util.CallUtil;
@@ -57,7 +58,8 @@ public abstract class CallLogCache {
    * Returns true if the given number is the number of the configured voicemail. To be able to
    * mock-out this, it is not a static method.
    */
-  public abstract boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number);
+  public abstract boolean isVoicemailNumber(
+      PhoneAccountHandle accountHandle, @Nullable CharSequence number);
 
   /**
    * Returns {@code true} when the current sim supports checking video calling capabilities via the

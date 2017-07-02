@@ -30,7 +30,6 @@ public final class PhoneCallDetailsViews {
   public final CallTypeIconsView callTypeIcons;
   public final TextView callLocationAndDate;
   public final TextView voicemailTranscriptionView;
-  public final TextView voicemailTranscriptionBrandingView;
   public final TextView callAccountLabel;
 
   private PhoneCallDetailsViews(
@@ -39,14 +38,12 @@ public final class PhoneCallDetailsViews {
       CallTypeIconsView callTypeIcons,
       TextView callLocationAndDate,
       TextView voicemailTranscriptionView,
-      TextView voicemailTranscriptionBrandingView,
       TextView callAccountLabel) {
     this.nameView = nameView;
     this.callTypeView = callTypeView;
     this.callTypeIcons = callTypeIcons;
     this.callLocationAndDate = callLocationAndDate;
     this.voicemailTranscriptionView = voicemailTranscriptionView;
-    this.voicemailTranscriptionBrandingView = voicemailTranscriptionBrandingView;
     this.callAccountLabel = callAccountLabel;
   }
 
@@ -64,7 +61,6 @@ public final class PhoneCallDetailsViews {
         (CallTypeIconsView) view.findViewById(R.id.call_type_icons),
         (TextView) view.findViewById(R.id.call_location_and_date),
         (TextView) view.findViewById(R.id.voicemail_transcription),
-        (TextView) view.findViewById(R.id.voicemail_transcription_branding),
         (TextView) view.findViewById(R.id.call_account_label));
   }
 
@@ -73,7 +69,6 @@ public final class PhoneCallDetailsViews {
         new TextView(context),
         new View(context),
         new CallTypeIconsView(context),
-        new TextView(context),
         new TextView(context),
         new TextView(context),
         new TextView(context));
