@@ -33,9 +33,9 @@
   <string name="enable_people_lookup_summary">在撥號程式搜尋時顯示線上的聯絡人搜尋結果</string>
   <string name="enable_reverse_lookup_title">反向搜尋</string>
   <string name="enable_reverse_lookup_summary">為未知的來電號碼搜尋聯絡人或地點資料</string>
-  <string name="forward_lookup_provider_title">正向搜尋提供者</string>
-  <string name="people_lookup_provider_title">聯絡人搜尋提供者</string>
-  <string name="reverse_lookup_provider_title">反向搜尋提供者</string>
+  <string name="forward_lookup_provider_title">正向搜尋供應商</string>
+  <string name="people_lookup_provider_title">聯絡人搜尋供應商</string>
+  <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
   <string name="speed_dial_edit_title">編輯快速撥號 <xliff:g id="index" example="2">%1$d</xliff:g></string>
