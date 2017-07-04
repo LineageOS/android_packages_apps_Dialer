@@ -55,8 +55,8 @@
   <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
   <string name="incall_vibrate_call_waiting_title">Bibratu deia zai dagoenean</string>
   <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
-  <string name="incall_vibrate_45_title">Bibratu minuturo</string>
-  <string name="incall_vibrate_45_summary">Irteera deietan minuturo bibratzen du 45. segundoan</string>
+  <string name="incall_vibrate_45_title">Bibratu minutuero</string>
+  <string name="incall_vibrate_45_summary">Irteera deietan minutuero bibratzen du 45. segundoan</string>
   <string name="call_log_show_all_slots">SIM guztiak</string>
   <string name="call_log_all_calls_header">Dei guztiak</string>
   <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
