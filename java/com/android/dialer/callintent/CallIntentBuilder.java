@@ -160,4 +160,11 @@ public class CallIntentBuilder {
   public static int getLightbringerButtonAppearInSearchCount() {
     return lightbringerButtonAppearInSearchCount;
   }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void clearLightbringerCounts() {
+    lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
+    lightbringerButtonAppearInExpandedCallLogItemCount = 0;
+    lightbringerButtonAppearInSearchCount = 0;
+  }
 }
