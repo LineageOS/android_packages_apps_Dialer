@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
@@ -33,12 +34,10 @@ import com.android.incallui.call.DialerCall;
 /** Prompt user to make voice call if video call is not currently available. */
 public class VideoCallNotAvailablePrompt implements DisconnectDialog {
 
-  private static final String REASON_IMS_ACCESS_BLOCKED = "IMS_ACCESS_BLOCKED";
-
   @Override
   public boolean shouldShow(DisconnectCause disconnectCause) {
     if (disconnectCause.getCode() == DisconnectCause.ERROR
-        && REASON_IMS_ACCESS_BLOCKED.equals(disconnectCause.getReason())) {
+        && TelecomManagerCompat.REASON_IMS_ACCESS_BLOCKED.equals(disconnectCause.getReason())) {
       LogUtil.i(
           "VideoCallNotAvailablePrompt.shouldShowPrompt",
           "showing prompt for disconnect cause: %s",
