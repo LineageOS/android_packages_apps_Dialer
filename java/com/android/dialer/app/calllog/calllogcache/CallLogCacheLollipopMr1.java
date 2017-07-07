@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.telecom.TelecomUtil;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
 /**
@@ -34,7 +35,8 @@ import java.util.Map;
  */
 class CallLogCacheLollipopMr1 extends CallLogCache {
 
-  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache =
+      new ConcurrentHashMap<>();
   private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new ArrayMap<>();
   private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new ArrayMap<>();
 
