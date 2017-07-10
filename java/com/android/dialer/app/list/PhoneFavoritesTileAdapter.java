@@ -440,6 +440,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     tileView.setPhotoManager(mPhotoManager);
     tileView.setListener(mListener);
     tileView.loadFromContact(getItem(position));
+    tileView.setPosition(position);
     return tileView;
   }
 
