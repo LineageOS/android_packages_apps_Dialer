@@ -368,7 +368,9 @@ public class CallLogAdapter extends GroupingListAdapter
             }
             expandViewHolderActions(viewHolder);
 
-            if (viewHolder.videoCallButtonView.getVisibility() == View.VISIBLE
+            if (viewHolder.videoCallButtonView != null
+                && viewHolder.videoCallButtonView.getVisibility() == View.VISIBLE
+                && LightbringerComponent.get(mActivity).getLightbringer().getPackageName() != null
                 && LightbringerComponent.get(mActivity)
                     .getLightbringer()
                     .getPackageName()

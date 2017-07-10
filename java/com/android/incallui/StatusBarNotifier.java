@@ -66,6 +66,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.multimedia.MultimediaData;
@@ -308,11 +309,19 @@ public class StatusBarNotifier
     if (callState == DialerCall.State.INCOMING
         || callState == DialerCall.State.CALL_WAITING
         || isVideoUpgradeRequest) {
-      boolean alreadyActive =
-          callList.getActiveOrBackgroundCall() != null
-              && InCallPresenter.getInstance().isShowingInCallUi();
-      notificationType =
-          alreadyActive ? NOTIFICATION_INCOMING_CALL_QUIET : NOTIFICATION_INCOMING_CALL;
+      if (ConfigProviderBindings.get(mContext)
+          .getBoolean("quiet_incoming_call_if_ui_showing", true)) {
+        notificationType =
+            InCallPresenter.getInstance().isShowingInCallUi()
+                ? NOTIFICATION_INCOMING_CALL_QUIET
+                : NOTIFICATION_INCOMING_CALL;
+      } else {
+        boolean alreadyActive =
+            callList.getActiveOrBackgroundCall() != null
+                && InCallPresenter.getInstance().isShowingInCallUi();
+        notificationType =
+            alreadyActive ? NOTIFICATION_INCOMING_CALL_QUIET : NOTIFICATION_INCOMING_CALL;
+      }
     } else {
       notificationType = NOTIFICATION_IN_CALL;
     }

@@ -35,6 +35,11 @@ public class TelecomManagerCompat {
   public static final String EXTRA_HANDOVER_VIDEO_STATE =
       "android.telecom.extra.HANDOVER_VIDEO_STATE";
 
+  // This is a hidden constant in android.telecom.DisconnectCause. Telecom sets this as a disconnect
+  // reason if it wants us to prompt the user that the video call is not available.
+  // TODO(wangqi): Reference it to constant in android.telecom.DisconnectCause.
+  public static final String REASON_IMS_ACCESS_BLOCKED = "REASON_IMS_ACCESS_BLOCKED";
+
   /**
    * Returns the current SIM call manager. Apps must be prepared for this method to return null,
    * indicating that there currently exists no registered SIM call manager.
