@@ -35,7 +35,6 @@ import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
@@ -96,76 +95,68 @@ public class DialerBackupAgent extends BackupAgent {
   public void onFullBackup(FullBackupDataOutput data) throws IOException {
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_FULL_BACKUP);
     LogUtil.i("DialerBackupAgent.onFullBackup", "performing dialer backup");
-    boolean autoBackupEnabled =
-        ConfigProviderBindings.get(this).getBoolean("enable_autobackup", true);
-    boolean vmBackupEnabled = ConfigProviderBindings.get(this).getBoolean("enable_vm_backup", true);
+
     List<PhoneAccountHandle> phoneAccountsToArchive =
         DialerBackupUtils.getPhoneAccountsToArchive(this);
 
-    if (autoBackupEnabled) {
-      if (!maxVoicemailBackupReached && vmBackupEnabled && !phoneAccountsToArchive.isEmpty()) {
-        voicemailsBackedupSoFar = 0;
-        sizeOfVoicemailsBackedupSoFar = 0;
+    if (!maxVoicemailBackupReached && !phoneAccountsToArchive.isEmpty()) {
+      voicemailsBackedupSoFar = 0;
+      sizeOfVoicemailsBackedupSoFar = 0;
 
-        LogUtil.i("DialerBackupAgent.onFullBackup", "autoBackup is enabled");
-        ContentResolver contentResolver = getContentResolver();
-        int limit = 1000;
+      LogUtil.i("DialerBackupAgent.onFullBackup", "autoBackup is enabled");
+      ContentResolver contentResolver = getContentResolver();
+      int limit = 1000;
 
-        Uri uri =
-            TelecomUtil.getCallLogUri(this)
-                .buildUpon()
-                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
-                .build();
+      Uri uri =
+          TelecomUtil.getCallLogUri(this)
+              .buildUpon()
+              .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
+              .build();
 
-        LogUtil.i("DialerBackupAgent.onFullBackup", "backing up from: " + uri);
+      LogUtil.i("DialerBackupAgent.onFullBackup", "backing up from: " + uri);
 
-        try (Cursor cursor =
-            contentResolver.query(
-                uri,
-                null,
-                String.format(
-                    "(%s = ? AND deleted = 0 AND  %s = ? AND ?)",
-                    Calls.TYPE, Voicemails.SOURCE_PACKAGE),
-                new String[] {
-                  Integer.toString(CallLog.Calls.VOICEMAIL_TYPE),
-                  VOICEMAIL_SOURCE_PACKAGE,
-                  DialerBackupUtils.getPhoneAccountClause(phoneAccountsToArchive)
-                },
-                ORDER_BY_DATE,
-                null)) {
+      try (Cursor cursor =
+          contentResolver.query(
+              uri,
+              null,
+              String.format(
+                  "(%s = ? AND deleted = 0 AND  %s = ? AND ?)",
+                  Calls.TYPE, Voicemails.SOURCE_PACKAGE),
+              new String[] {
+                Integer.toString(CallLog.Calls.VOICEMAIL_TYPE),
+                VOICEMAIL_SOURCE_PACKAGE,
+                DialerBackupUtils.getPhoneAccountClause(phoneAccountsToArchive)
+              },
+              ORDER_BY_DATE,
+              null)) {
 
-          if (cursor == null) {
-            LogUtil.i("DialerBackupAgent.onFullBackup", "cursor was null");
-            return;
-          }
+        if (cursor == null) {
+          LogUtil.i("DialerBackupAgent.onFullBackup", "cursor was null");
+          return;
+        }
 
-          LogUtil.i("DialerBackupAgent.onFullBackup", "cursor count: " + cursor.getCount());
-          if (cursor.moveToFirst()) {
-            int fileNum = 0;
-            do {
-              backupRow(
-                  data, cursor, String.format(Locale.US, VOICEMAIL_BACKUP_FILE_FORMAT, fileNum++));
-            } while (cursor.moveToNext() && !maxVoicemailBackupReached);
-          } else {
-            LogUtil.i("DialerBackupAgent.onFullBackup", "cursor.moveToFirst failed");
-          }
+        LogUtil.i("DialerBackupAgent.onFullBackup", "cursor count: " + cursor.getCount());
+        if (cursor.moveToFirst()) {
+          int fileNum = 0;
+          do {
+            backupRow(
+                data, cursor, String.format(Locale.US, VOICEMAIL_BACKUP_FILE_FORMAT, fileNum++));
+          } while (cursor.moveToNext() && !maxVoicemailBackupReached);
+        } else {
+          LogUtil.i("DialerBackupAgent.onFullBackup", "cursor.moveToFirst failed");
         }
       }
-      LogUtil.i(
-          "DialerBackupAgent.onFullBackup",
-          "vm files backed up: %d, vm size backed up:%d, "
-              + "max vm backup reached:%b, vm backup enabled:%b phone accounts to archive: %d",
-          voicemailsBackedupSoFar,
-          sizeOfVoicemailsBackedupSoFar,
-          maxVoicemailBackupReached,
-          vmBackupEnabled,
-          phoneAccountsToArchive.size());
-      super.onFullBackup(data);
-      Logger.get(this).logImpression(DialerImpression.Type.BACKUP_FULL_BACKED_UP);
-    } else {
-      Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_BACKUP_DISABLED);
-      LogUtil.i("DialerBackupAgent.onFullBackup", "autoBackup is disabled");
     }
+    LogUtil.i(
+        "DialerBackupAgent.onFullBackup",
+        "vm files backed up: %d, vm size backed up:%d, "
+            + "max vm backup reached:%b, phone accounts to archive: %d",
+        voicemailsBackedupSoFar,
+        sizeOfVoicemailsBackedupSoFar,
+        maxVoicemailBackupReached,
+        phoneAccountsToArchive.size());
+    super.onFullBackup(data);
+    Logger.get(this).logImpression(DialerImpression.Type.BACKUP_FULL_BACKED_UP);
   }
 
   private void backupRow(FullBackupDataOutput data, Cursor cursor, String fileName)
@@ -218,34 +209,25 @@ public class DialerBackupAgent extends BackupAgent {
     String fileName = destination.getName();
     LogUtil.i("DialerBackupAgent.onRestoreFile", "file name: " + fileName);
 
-    if (ConfigProviderBindings.get(this).getBoolean("enable_autobackup", true)) {
-      if (fileName.endsWith(VOICEMAIL_BACKUP_FILE_SUFFIX)
-          && ConfigProviderBindings.get(this).getBoolean("enable_vm_restore", true)) {
-        if (DialerBackupUtils.canRestoreVoicemails(getContentResolver(), this)) {
-          try {
-            super.onRestoreFile(data, size, destination, type, mode, mtime);
-            restoreVoicemail(destination);
-            destination.delete();
-          } catch (IOException e) {
-            Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_RESTORE_IO_EXCEPTION);
-            LogUtil.e(
-                "DialerBackupAgent.onRestoreFile",
-                "could not restore voicemail - IOException: ",
-                e);
-          }
-        } else {
-          LogUtil.i(
-              "DialerBackupAgent.onRestoreFile", "build does not support restoring voicemails");
+    if (fileName.endsWith(VOICEMAIL_BACKUP_FILE_SUFFIX)) {
+      if (DialerBackupUtils.canRestoreVoicemails(getContentResolver(), this)) {
+        try {
+          super.onRestoreFile(data, size, destination, type, mode, mtime);
+          restoreVoicemail(destination);
+          destination.delete();
+        } catch (IOException e) {
+          Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_RESTORE_IO_EXCEPTION);
+          LogUtil.e(
+              "DialerBackupAgent.onRestoreFile", "could not restore voicemail - IOException: ", e);
         }
-
       } else {
-        super.onRestoreFile(data, size, destination, type, mode, mtime);
-        LogUtil.i("DialerBackupAgent.onRestoreFile", "restored: " + fileName);
-        Logger.get(this).logImpression(DialerImpression.Type.BACKUP_RESTORED_FILE);
+        LogUtil.i("DialerBackupAgent.onRestoreFile", "build does not support restoring voicemails");
       }
+
     } else {
-      Logger.get(this).logImpression(DialerImpression.Type.BACKUP_ON_RESTORE_DISABLED);
-      LogUtil.i("DialerBackupAgent.onRestoreFile", "autoBackup is disabled");
+      super.onRestoreFile(data, size, destination, type, mode, mtime);
+      LogUtil.i("DialerBackupAgent.onRestoreFile", "restored: " + fileName);
+      Logger.get(this).logImpression(DialerImpression.Type.BACKUP_RESTORED_FILE);
     }
   }
 
