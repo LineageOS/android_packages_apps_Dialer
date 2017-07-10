@@ -18,8 +18,8 @@ package com.android.dialer.enrichedcall.extensions;
 
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.EnrichedCallManager.State;
+import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.enrichedcall.Session.State;
 
 /** Extends the {@link State} to include a toString method. */
 public class StateExtension {
@@ -27,25 +27,25 @@ public class StateExtension {
   /** Returns the string representation for the given {@link State}. */
   @NonNull
   public static String toString(@State int callComposerState) {
-    if (callComposerState == EnrichedCallManager.STATE_NONE) {
+    if (callComposerState == Session.STATE_NONE) {
       return "STATE_NONE";
     }
-    if (callComposerState == EnrichedCallManager.STATE_STARTING) {
+    if (callComposerState == Session.STATE_STARTING) {
       return "STATE_STARTING";
     }
-    if (callComposerState == EnrichedCallManager.STATE_STARTED) {
+    if (callComposerState == Session.STATE_STARTED) {
       return "STATE_STARTED";
     }
-    if (callComposerState == EnrichedCallManager.STATE_START_FAILED) {
+    if (callComposerState == Session.STATE_START_FAILED) {
       return "STATE_START_FAILED";
     }
-    if (callComposerState == EnrichedCallManager.STATE_MESSAGE_SENT) {
+    if (callComposerState == Session.STATE_MESSAGE_SENT) {
       return "STATE_MESSAGE_SENT";
     }
-    if (callComposerState == EnrichedCallManager.STATE_MESSAGE_FAILED) {
+    if (callComposerState == Session.STATE_MESSAGE_FAILED) {
       return "STATE_MESSAGE_FAILED";
     }
-    if (callComposerState == EnrichedCallManager.STATE_CLOSED) {
+    if (callComposerState == Session.STATE_CLOSED) {
       return "STATE_CLOSED";
     }
     Assert.checkArgument(false, "Unexpected callComposerState: %d", callComposerState);

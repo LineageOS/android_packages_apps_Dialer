@@ -22,10 +22,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
@@ -114,7 +117,8 @@ public class VoicemailTosMessageCreator {
                   }
                 },
                 true /* raised */))
-        .setModal(true);
+        .setModal(true)
+        .setImageResourceId(getTosImageId());
   }
 
   private void showDeclineTosDialog(final PhoneAccountHandle handle) {
@@ -274,17 +278,32 @@ public class VoicemailTosMessageCreator {
     }
   }
 
-  private String getTosTitle() {
+  private CharSequence getTosTitle() {
     return isVvm3()
         ? context.getString(R.string.verizon_terms_and_conditions_title)
         : context.getString(R.string.dialer_terms_and_conditions_title);
   }
 
-  private String getTosMessage() {
-    return isVvm3()
-        ? context.getString(
-            R.string.verizon_terms_and_conditions_message, getDialerTos(), getVvm3Tos())
-        : context.getString(R.string.dialer_terms_and_conditions_message, getDialerTos());
+  private CharSequence getTosMessage() {
+    if (isVvm3()) {
+      // For verizon the TOS consist of three pieces: google dialer TOS, Verizon TOS message and
+      // Verizon TOS details.
+      CharSequence vvm3Details = getVvm3Tos();
+      CharSequence tos =
+          context.getString(
+              R.string.verizon_terms_and_conditions_message, getDialerTos(), vvm3Details);
+      // Make all text bold except the details.
+      SpannableString spannableTos = new SpannableString(tos);
+      spannableTos.setSpan(new StyleSpan(Typeface.BOLD), 0, tos.length() - vvm3Details.length(), 0);
+      return spannableTos;
+    } else {
+      // The TOS for everyone else there are no details, so just make everything bold.
+      CharSequence tos =
+          context.getString(R.string.dialer_terms_and_conditions_message, getDialerTos());
+      SpannableString spannableTos = new SpannableString(tos);
+      spannableTos.setSpan(new StyleSpan(Typeface.BOLD), 0, tos.length(), 0);
+      return spannableTos;
+    }
   }
 
   private int getTosDeclinedDialogMessageId() {
@@ -297,5 +316,9 @@ public class VoicemailTosMessageCreator {
     return isVvm3()
         ? R.string.verizon_terms_and_conditions_decline_dialog_downgrade
         : R.string.dialer_terms_and_conditions_decline_dialog_downgrade;
+  }
+
+  private Integer getTosImageId() {
+    return isVvm3() ? null : R.drawable.voicemail_tos_image;
   }
 }

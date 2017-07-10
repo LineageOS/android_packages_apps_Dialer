@@ -21,6 +21,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.transcribe.TranscriptionService.JobCallback;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClient;
@@ -98,24 +100,37 @@ public class TranscriptionTask implements Runnable {
     String transcript = null;
     for (int i = 0; transcript == null && i < MAX_RETRIES; i++) {
       VvmLog.i(TAG, "transcribeVoicemail, try: " + (i + 1));
+      if (i == 0) {
+        Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_REQUEST_SENT);
+      } else {
+        Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_REQUEST_RETRY);
+      }
       TranscriptionClient.TranscriptionResponseWrapper responseWrapper =
           client.transcribeVoicemail(request);
       if (responseWrapper.status != null) {
         VvmLog.i(TAG, "transcribeVoicemail, status: " + responseWrapper.status.getCode());
         if (shouldRetryRequest(responseWrapper.status)) {
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_RECOVERABLE_ERROR);
           backoff(i);
         } else {
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_FATAL_ERROR);
           break;
         }
       } else if (responseWrapper.response != null) {
         if (!TextUtils.isEmpty(responseWrapper.response.getTranscript())) {
           VvmLog.i(TAG, "transcribeVoicemail, got response");
           transcript = responseWrapper.response.getTranscript();
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_SUCCESS);
         } else {
           VvmLog.i(TAG, "transcribeVoicemail, empty transcription");
+          Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EMPTY);
         }
       } else {
         VvmLog.w(TAG, "transcribeVoicemail, no response");
+        Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_INVALID);
       }
     }
 

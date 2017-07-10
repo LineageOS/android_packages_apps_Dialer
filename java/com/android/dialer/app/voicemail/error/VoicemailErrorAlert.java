@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.util.Linkify;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.app.alert.AlertManager;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
@@ -132,6 +133,13 @@ public class VoicemailErrorAlert {
     TextView secondaryButton = (TextView) view.findViewById(R.id.voicemail_tos_button_accept);
     secondaryButton.setText(secondaryAction.getText());
     secondaryButton.setOnClickListener(secondaryAction.getListener());
+
+    if (message.getImageResourceId() != null) {
+      ImageView voicemailTosImage = (ImageView) view.findViewById(R.id.voicemail_image);
+      voicemailTosImage.setImageResource(message.getImageResourceId());
+      voicemailTosImage.setVisibility(View.VISIBLE);
+    }
+
     return view;
   }
 
