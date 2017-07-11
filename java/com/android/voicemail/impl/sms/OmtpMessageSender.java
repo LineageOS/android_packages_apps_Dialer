@@ -22,6 +22,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.SmsManager;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.TelephonyMangerCompat;
+import com.android.voicemail.impl.VvmLog;
 
 /**
  * Send client originated OMTP messages to the OMTP server.
@@ -75,6 +76,11 @@ public abstract class OmtpMessageSender {
   public void requestVvmStatus(@Nullable PendingIntent sentIntent) {}
 
   protected void sendSms(String text, PendingIntent sentIntent) {
+
+    VvmLog.v(
+        TAG,
+        String.format("Sending sms '%s' to %s:%d", text, mDestinationNumber, mApplicationPort));
+
     TelephonyMangerCompat.sendVisualVoicemailSms(
         mContext, mPhoneAccountHandle, mDestinationNumber, mApplicationPort, text, sentIntent);
   }
