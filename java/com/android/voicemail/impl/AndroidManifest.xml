@@ -18,11 +18,7 @@
   package="com.android.voicemailomtp">
 
   <application
-    android:allowBackup="false"
-    android:supportsRtl="true"
-    android:usesCleartextTraffic="true"
-    android:defaultToDeviceProtectedStorage="true"
-    android:directBootAware="true">
+    android:supportsRtl="true">
 
     <!-- Causes the "Voicemail" item under "Calls" setting to be hidden. The voicemail module will
       be handling the settings. Has no effect before OC where dialer cannot provide voicemail

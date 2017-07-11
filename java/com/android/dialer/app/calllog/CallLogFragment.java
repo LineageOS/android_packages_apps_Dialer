@@ -20,7 +20,6 @@ import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -114,7 +113,6 @@ public class CallLogFragment extends Fragment
   private CallLogQueryHandler mCallLogQueryHandler;
   private boolean mScrollToTop;
   private EmptyContentView mEmptyListView;
-  private KeyguardManager mKeyguardManager;
   private ContactInfoCache mContactInfoCache;
   private final OnContactInfoChangedListener mOnContactInfoChangedListener =
       new OnContactInfoChangedListener() {
@@ -219,7 +217,6 @@ public class CallLogFragment extends Fragment
     final Activity activity = getActivity();
     final ContentResolver resolver = activity.getContentResolver();
     mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
-    mKeyguardManager = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
 
     if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
       resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
@@ -432,8 +429,6 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onStop() {
-    updateOnTransition();
-
     super.onStop();
     mAdapter.onStop();
     mContactInfoCache.stop();
@@ -516,9 +511,7 @@ public class CallLogFragment extends Fragment
     super.setMenuVisibility(menuVisible);
     if (mMenuVisible != menuVisible) {
       mMenuVisible = menuVisible;
-      if (!menuVisible) {
-        updateOnTransition();
-      } else if (isResumed()) {
+      if (menuVisible && isResumed()) {
         refreshData();
       }
     }
@@ -536,28 +529,10 @@ public class CallLogFragment extends Fragment
       fetchCalls();
       mCallLogQueryHandler.fetchVoicemailStatus();
       mCallLogQueryHandler.fetchMissedCallsUnreadCount();
-      updateOnTransition();
       mRefreshDataRequired = false;
     } else {
       // Refresh the display of the existing data to update the timestamp text descriptions.
       mAdapter.notifyDataSetChanged();
-    }
-  }
-
-  /**
-   * Updates the voicemail notification state.
-   *
-   * <p>TODO: Move to CallLogActivity
-   */
-  private void updateOnTransition() {
-    // We don't want to update any call data when keyguard is on because the user has likely not
-    // seen the new calls yet.
-    // This might be called before onCreate() and thus we need to check null explicitly.
-    if (mKeyguardManager != null
-        && !mKeyguardManager.inKeyguardRestrictedInputMode()
-        && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-      LogUtil.i("CallLogFragment.updateOnTransition", "clearing all new voicemails");
-      CallLogNotificationsService.markAllNewVoicemailsAsOld(getActivity());
     }
   }
 
