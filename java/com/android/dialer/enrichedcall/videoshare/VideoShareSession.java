@@ -11,20 +11,29 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
 package com.android.dialer.enrichedcall.videoshare;
 
-import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
+import android.view.SurfaceView;
 
-/** Receives updates when video share status has changed. */
-public interface VideoShareListener {
+/** Holds state information and data about video share sessions. */
+public interface VideoShareSession {
+  void setSessionId(long sessionId);
 
-  /**
-   * Callback fired when video share has changed (service connected / disconnected, video share
-   * invite received or canceled, or when a session changes).
-   */
-  @MainThread
-  void onVideoShareChanged();
+  long getSessionId();
+
+  int getState();
+
+  void pause();
+
+  void unpause();
+
+  void dispose();
+
+  void setSurfaceView(@NonNull SurfaceView surfaceView);
+
+  void setCamera(String cameraId);
 }
