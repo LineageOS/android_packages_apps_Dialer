@@ -120,6 +120,13 @@
       </intent-filter>
     </receiver>
 
+    <receiver android:name="com.android.voicemail.impl.PackageReplacedReceiver"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+      </intent-filter>
+    </receiver>
+
     <receiver android:name="com.android.voicemail.impl.CarrierVvmPackageInstalledReceiver"
         android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
         android:exported="true">
