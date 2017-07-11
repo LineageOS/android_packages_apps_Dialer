@@ -28,7 +28,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.ColorUtils;
-import android.telecom.DisconnectCause;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -48,6 +47,7 @@ import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incall.bindings.InCallBindings;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
@@ -393,8 +393,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     common.showPostCharWaitDialog(callId, chars);
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectCause disconnectCause) {
-    common.maybeShowErrorDialogOnDisconnect(disconnectCause);
+  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
+    common.maybeShowErrorDialogOnDisconnect(disconnectMessage);
   }
 
   public void dismissPendingDialogs() {

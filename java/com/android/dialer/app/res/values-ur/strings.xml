@@ -236,6 +236,6 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> آف لائن ہے اور اس تک پہنچا نہیں جا سکتا"</string>
     <string name="about_phone_label" msgid="582991354677973731">"تفصیل"</string>
     <string name="view_conversation" msgid="7895904782094119702">"دیکھیں"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"کال حذف ہو گئی۔ اس کال کے دوران پیغامات کے اندر اشتراک کردہ منسلکہ جات ملاحظہ کریں اور حذف کریں۔"</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"کالیں حذف ہو گئیں۔ کالوں کے دوران پیغامات کے اندر اشتراک کردہ منسلکہ جات ملاحظہ کریں اور حذف کریں۔"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"کال حذف ہو گئی۔ اس کال کے دوران اشتراک کردہ منسلکہ جات کو \'پیغامات \' میں ملاحظہ کریں اور حذف کریں۔"</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"کالیں حذف ہو گئیں۔ کالوں کے دوران اشتراک کردہ منسلکہ جات کو \'پیغامات \' میں ملاحظہ کریں اور حذف کریں۔"</string>
 </resources>

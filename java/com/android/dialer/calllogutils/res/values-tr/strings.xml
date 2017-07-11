@@ -34,8 +34,8 @@
     <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"sn."</string>
     <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
     <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g> \"<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\" <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \"<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\""</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \"<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\""</string>
+    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
+    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
     <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
       <item quantity="other">saniye</item>
       <item quantity="one">saniye</item>

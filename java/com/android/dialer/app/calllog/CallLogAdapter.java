@@ -63,6 +63,7 @@ import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter.OnVoicemailDe
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
@@ -293,6 +294,11 @@ public class CallLogAdapter extends GroupingListAdapter
         }
       };
 
+  @VisibleForTesting
+  public View.OnClickListener getExpandCollapseListener() {
+    return mExpandCollapseListener;
+  }
+
   /** The OnClickListener used to expand or collapse the action buttons of a call log entry. */
   private final View.OnClickListener mExpandCollapseListener =
       new View.OnClickListener() {
@@ -361,6 +367,17 @@ public class CallLogAdapter extends GroupingListAdapter
               }
             }
             expandViewHolderActions(viewHolder);
+
+            if (viewHolder.videoCallButtonView.getVisibility() == View.VISIBLE
+                && LightbringerComponent.get(mActivity)
+                    .getLightbringer()
+                    .getPackageName()
+                    .equals(
+                        ((IntentProvider) viewHolder.videoCallButtonView.getTag())
+                            .getIntent(mActivity)
+                            .getPackage())) {
+              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
+            }
           }
         }
       };

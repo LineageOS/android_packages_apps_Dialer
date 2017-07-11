@@ -17,7 +17,9 @@
 package com.android.dialer.app.calllog.calllogcache;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.telecom.TelecomUtil;
@@ -50,7 +52,11 @@ class CallLogCacheLollipopMr1 extends CallLogCache {
   }
 
   @Override
-  public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
+  public boolean isVoicemailNumber(
+      PhoneAccountHandle accountHandle, @Nullable CharSequence number) {
+    if (TextUtils.isEmpty(number)) {
+      return false;
+    }
     return TelecomUtil.isVoicemailNumber(mContext, accountHandle, number.toString());
   }
 

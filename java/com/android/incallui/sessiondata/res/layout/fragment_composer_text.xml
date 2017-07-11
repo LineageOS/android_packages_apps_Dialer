@@ -16,29 +16,34 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="16dp"
     android:paddingStart="@dimen/answer_message_margin_start_end"
     android:paddingEnd="@dimen/answer_message_margin_start_end">
 
-  <TextView
+  <android.support.v7.widget.AppCompatTextView
       android:id="@id/answer_message_text"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/answer_message_contents_margin_top"
       android:layout_marginBottom="4dp"
       android:layout_centerHorizontal="true"
       android:layout_alignTop="@+id/answer_message_avatar"
-      android:paddingTop="44dp"
-      android:paddingBottom="44dp"
-      android:paddingStart="18dp"
-      android:paddingEnd="18dp"
-      android:background="@drawable/answer_text_only_background"
       android:elevation="@dimen/answer_data_elevation"
-      android:gravity="center_horizontal"
+      android:gravity="center"
+      android:paddingTop="22dp"
+      android:paddingBottom="22dp"
+      android:paddingStart="32dp"
+      android:paddingEnd="32dp"
+      android:minHeight="108dp"
+      android:lineSpacingMultiplier="1.2"
       android:textColor="@color/background_dialer_white"
-      android:textAppearance="@style/Dialer.Incall.TextAppearance.Message"/>
+      android:textAppearance="@style/Dialer.Incall.TextAppearance.Message"
+      android:background="@drawable/answer_text_only_background"
+      app:autoSizeTextType="uniform"
+      app:autoSizeMaxTextSize="44sp"/>
 
   <ImageView
       android:id="@id/answer_message_avatar"

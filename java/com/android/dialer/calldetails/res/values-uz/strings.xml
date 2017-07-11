@@ -20,7 +20,7 @@
     <string name="call_details" msgid="5063658079729839605">"Chaqiruv tafsilotlari"</string>
     <string name="delete" msgid="2141020674108406737">"O‘chirib tashlash"</string>
     <string name="call_details_copy_number" msgid="4265479408878990796">"Raqamni nusxalash"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"Qo‘ng‘iroq qilishdan oldin raqamni tahrirlash"</string>
+    <string name="call_details_edit_number" msgid="8718476514903513624">"Chaqiruvdan oldin raqamni tahrirlash"</string>
     <string name="call_details_report_call_id" msgid="8857541295264421217">"Raqamdagi xatolik haqida xabar berish"</string>
     <string name="sent_a_photo" msgid="3978670717462979502">"Rasm yuborildi"</string>
     <string name="received_a_photo" msgid="3528953225576480505">"Rasm qabul qilindi"</string>

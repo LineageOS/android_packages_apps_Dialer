@@ -55,6 +55,7 @@ import com.android.contacts.common.format.TextHighlighter;
 import com.android.contacts.common.list.PhoneNumberListAdapter.Listener;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.SearchUtil;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.util.ViewUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -341,6 +342,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       description = R.string.description_search_video_call;
       onClickListener = v -> listener.onVideoCallIconClicked(position);
     } else if (action == LIGHTBRINGER) {
+      CallIntentBuilder.increaseLightbringerCallButtonAppearInSearchCount();
       drawable =
           ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
       drawable.setAutoMirrored(true);

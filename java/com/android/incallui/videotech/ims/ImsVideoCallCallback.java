@@ -173,11 +173,9 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
     switch (event) {
       case Connection.VideoProvider.SESSION_EVENT_RX_PAUSE:
         LogUtil.i("ImsVideoCallCallback.onCallSessionEvent", "rx_pause");
-        videoTech.onPausedEvent();
         break;
       case Connection.VideoProvider.SESSION_EVENT_RX_RESUME:
         LogUtil.i("ImsVideoCallCallback.onCallSessionEvent", "rx_resume");
-        videoTech.onResumedEvent();
         break;
       case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
         LogUtil.i("ImsVideoCallCallback.onCallSessionEvent", "camera_failure");
