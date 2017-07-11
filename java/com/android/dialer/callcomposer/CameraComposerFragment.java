@@ -332,7 +332,11 @@ public class CameraComposerFragment extends CallComposerFragment
   /** Updates the state of the buttons and overlays based on the current state of the view */
   private void updateViewState() {
     Assert.isNotNull(cameraView);
-    Assert.isNotNull(getContext());
+    if (isDetached() || getContext() == null) {
+      LogUtil.i(
+          "CameraComposerFragment.updateViewState", "Fragment detached, cannot update view state");
+      return;
+    }
 
     boolean isCameraAvailable = CameraManager.get().isCameraAvailable();
     boolean uriReadyOrProcessing = cameraUri != null || processingUri;
