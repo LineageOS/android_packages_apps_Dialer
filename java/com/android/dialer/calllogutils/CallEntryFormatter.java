@@ -95,9 +95,20 @@ public class CallEntryFormatter {
       // example output: "1s"
       formatPattern =
           context.getString(R.string.call_duration_short_format_pattern, "s", secondsString);
+
+      // Temporary work around for a broken Hebrew(iw) translation.
+      if (formatPattern.endsWith("\'\'")) {
+        formatPattern = formatPattern.substring(0, formatPattern.length() - 1);
+      }
     }
-    SimpleDateFormat format = new SimpleDateFormat(formatPattern);
-    return format.format(new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds)));
+
+    // If new translation issues arise, we should catch them here to prevent crashes.
+    try {
+      return new SimpleDateFormat(formatPattern)
+          .format(new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds)));
+    } catch (Exception e) {
+      return "";
+    }
   }
 
   private static CharSequence formatDurationA11y(Context context, long elapsedSeconds) {
