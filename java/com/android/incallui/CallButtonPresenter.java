@@ -365,7 +365,7 @@ public class CallButtonPresenter
   }
 
   private void updateUi(InCallState state, DialerCall call) {
-    LogUtil.v("CallButtonPresenter", "updating call UI for call: ", call);
+    LogUtil.v("CallButtonPresenter", "updating call UI for call: %s", call);
 
     if (mInCallButtonUi == null) {
       return;
