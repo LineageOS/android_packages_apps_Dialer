@@ -346,7 +346,7 @@ public class CallLogFragment extends Fragment
                 activityType == CallLogAdapter.ACTIVITY_TYPE_DIALTACTS
                     ? (CallLogAdapter.OnActionModeStateChangedListener) getActivity()
                     : null,
-                CallLogCache.getCallLogCache(getActivity()),
+                new CallLogCache(getActivity()),
                 mContactInfoCache,
                 getVoicemailPlaybackPresenter(),
                 new FilteredNumberAsyncQueryHandler(getActivity()),
