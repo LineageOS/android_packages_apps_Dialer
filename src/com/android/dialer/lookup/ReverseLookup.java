@@ -20,9 +20,7 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.auskunft.AuskunftReverseLookup;
 import com.android.dialer.lookup.cyngn.CyngnChineseReverseLookup;
 import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
-import com.android.dialer.lookup.gebeld.GebeldReverseLookup;
 import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
-import com.android.dialer.lookup.whitepages.WhitePagesReverseLookup;
 import com.android.dialer.lookup.yellowpages.YellowPagesReverseLookup;
 import com.android.dialer.lookup.zabasearch.ZabaSearchReverseLookup;
 
@@ -46,9 +44,6 @@ public abstract class ReverseLookup {
 
             if (provider.equals(LookupSettings.RLP_OPENCNAM)) {
                 INSTANCE = new OpenCnamReverseLookup(context);
-            } else if (provider.equals(LookupSettings.RLP_WHITEPAGES)
-                    || provider.equals(LookupSettings.RLP_WHITEPAGES_CA)) {
-                INSTANCE = new WhitePagesReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_YELLOWPAGES)
                     || provider.equals(LookupSettings.RLP_YELLOWPAGES_CA)) {
                 INSTANCE = new YellowPagesReverseLookup(context);
@@ -58,8 +53,6 @@ public abstract class ReverseLookup {
                 INSTANCE = new CyngnChineseReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)) {
                 INSTANCE = new TelefonbuchReverseLookup(context);
-            } else if (provider.equals(LookupSettings.RLP_GEBELD)) {
-                INSTANCE = new GebeldReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_AUSKUNFT)) {
                 INSTANCE = new AuskunftReverseLookup(context);
             }
@@ -71,10 +64,6 @@ public abstract class ReverseLookup {
     private static boolean isInstance(String provider) {
         if (provider.equals(LookupSettings.RLP_OPENCNAM)
                 && INSTANCE instanceof OpenCnamReverseLookup) {
-            return true;
-        } else if ((provider.equals(LookupSettings.RLP_WHITEPAGES)
-                || provider.equals(LookupSettings.RLP_WHITEPAGES_CA))
-                && INSTANCE instanceof WhitePagesReverseLookup) {
             return true;
         } else if ((provider.equals(LookupSettings.RLP_YELLOWPAGES)
                 || provider.equals(LookupSettings.RLP_YELLOWPAGES_CA))
@@ -88,9 +77,6 @@ public abstract class ReverseLookup {
             return true;
         } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)
                 && INSTANCE instanceof TelefonbuchReverseLookup) {
-            return true;
-        } else if (provider.equals(LookupSettings.RLP_GEBELD)
-                && INSTANCE instanceof GebeldReverseLookup) {
             return true;
         } else if (provider.equals(LookupSettings.RLP_AUSKUNFT)
                 && INSTANCE instanceof AuskunftReverseLookup) {
