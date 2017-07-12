@@ -581,12 +581,16 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
+    TextView callTypeOrLocationView =
+        ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
     if (canPlaceCallToNumber) {
       // Set up the call button but hide it by default (the primary action is to call so it is
       // redundant). We then set it to be visible when appropriate below. This saves us having to
       // remember to set it to GONE in multiple places.
       callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
       callButtonView.setVisibility(View.GONE);
+      callTypeOrLocationView.setVisibility(View.GONE);
     }
 
     if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -595,13 +599,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               TextUtils.expandTemplate(
                   mContext.getString(R.string.call_log_action_call),
                   nameOrNumber == null ? "" : nameOrNumber));
-      TextView callTypeOrLocationView =
-          ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
       if (callType == Calls.VOICEMAIL_TYPE && !TextUtils.isEmpty(callTypeOrLocation)) {
         callTypeOrLocationView.setText(callTypeOrLocation);
         callTypeOrLocationView.setVisibility(View.VISIBLE);
-      } else {
-        callTypeOrLocationView.setVisibility(View.GONE);
       }
       callButtonView.setVisibility(View.VISIBLE);
     }
