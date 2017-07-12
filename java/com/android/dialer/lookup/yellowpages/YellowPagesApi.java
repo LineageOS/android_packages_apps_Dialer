@@ -30,9 +30,9 @@ public class YellowPagesApi {
     private static final String TAG = YellowPagesApi.class.getSimpleName();
 
     private static final String LOOKUP_URL_UNITED_STATES =
-            "http://www.yellowpages.com/phone?phone_search_terms=";
+            "https://www.yellowpages.com/phone?phone_search_terms=";
     private static final String LOOKUP_URL_CANADA =
-            "http://www.yellowpages.ca/search/si/1/";
+            "https://www.yellowpages.ca/search/si/1/";
 
     private String mProvider = null;
     private String mNumber = null;
@@ -65,7 +65,7 @@ public class YellowPagesApi {
 
         // Get first image
         return LookupUtils.firstRegexResult(
-                LookupUtils.httpGet("http://www.yellowpages.com" + galleryRef, null),
+                LookupUtils.httpGet("https://www.yellowpages.com" + galleryRef, null),
                 "\"type\":\"image\",\"src\":\"([^\"]+)\"", true);
     }
 
@@ -100,7 +100,7 @@ public class YellowPagesApi {
         }
 
         if (website != null) {
-            website = "http://www.yellowpages.ca" + website;
+            website = "https://www.yellowpages.ca" + website;
         }
 
         return new String[] { name, website };

@@ -47,7 +47,7 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
 
     /** Query URL */
     private static final String LOOKUP_URL =
-            "http://overpass-api.de/api/interpreter";
+            "https://overpass-api.de/api/interpreter";
 
     private static final String LOOKUP_QUERY =
             "[out:json];node[name~\"%s\"][phone](around:%d,%f,%f);out body;";
