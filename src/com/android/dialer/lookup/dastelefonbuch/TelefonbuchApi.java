@@ -27,7 +27,7 @@ public class TelefonbuchApi {
     private static final String TAG = TelefonbuchApi.class.getSimpleName();
 
     private static final String REVERSE_LOOKUP_URL =
-            "http://www.dastelefonbuch.de/?s=a20000" +
+            "https://www.dastelefonbuch.de/?s=a20000" +
             "&cmd=search&sort_ok=0&sp=55&vert_ok=0&aktion=23";
 
     private static String NAME_REGEX ="<a id=\"name0.*?>\\s*\n?(.*?)\n?\\s*</a>";

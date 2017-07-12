@@ -25,7 +25,7 @@ import java.io.IOException;
 public class ZabaSearchApi {
     private static final String TAG = ZabaSearchApi.class.getSimpleName();
 
-    private static final String LOOKUP_URL = "http://www.zabasearch.com/phone/";
+    private static final String LOOKUP_URL = "https://www.zabasearch.com/phone/";
 
     private String mNumber = null;
     public String mOutput = null;
