@@ -26,6 +26,7 @@ import android.support.design.widget.Snackbar;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -84,12 +85,12 @@ public class PostCall {
             ? activity.getString(R.string.post_call_add_message)
             : activity.getString(R.string.post_call_send_message);
 
+    String number = Assert.isNotNull(getPhoneNumber(activity));
     OnClickListener onClickListener =
         v -> {
           Logger.get(activity)
               .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE_CLICKED);
-          activity.startActivity(
-              PostCallActivity.newIntent(activity, getPhoneNumber(activity), isRcsPostCall));
+          activity.startActivity(PostCallActivity.newIntent(activity, number, isRcsPostCall));
         };
 
     int durationMs =
@@ -113,12 +114,13 @@ public class PostCall {
         "returned from sending a post call message, message sent.");
     String message = activity.getString(R.string.post_call_message_sent);
     String addMessage = activity.getString(R.string.view);
+    String number = Assert.isNotNull(getPhoneNumber(activity));
     OnClickListener onClickListener =
         v -> {
           Logger.get(activity)
               .logImpression(
                   DialerImpression.Type.POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE_CLICKED);
-          Intent intent = IntentUtil.getSendSmsIntent(getPhoneNumber(activity));
+          Intent intent = IntentUtil.getSendSmsIntent(number);
           DialerUtils.startActivityWithErrorToast(activity, intent);
         };
 
