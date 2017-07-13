@@ -852,7 +852,7 @@ public class InCallPresenter implements CallList.Listener {
 
     if (newState == InCallState.NO_CALLS) {
       if (mBoundAndWaitingForOutgoingCall) {
-        return InCallState.OUTGOING;
+        return InCallState.PENDING_OUTGOING;
       }
     }
 
@@ -870,7 +870,7 @@ public class InCallPresenter implements CallList.Listener {
     mBoundAndWaitingForOutgoingCall = isBound;
     mThemeColorManager.setPendingPhoneAccountHandle(handle);
     if (isBound && mInCallState == InCallState.NO_CALLS) {
-      mInCallState = InCallState.OUTGOING;
+      mInCallState = InCallState.PENDING_OUTGOING;
     }
   }
 

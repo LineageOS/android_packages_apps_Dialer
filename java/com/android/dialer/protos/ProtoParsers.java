@@ -30,8 +30,14 @@ public final class ProtoParsers {
 
   /** Retrieve a proto from a Bundle which was not created within the current executable/version. */
   @SuppressWarnings("unchecked") // We want to eventually optimize away parser classes, so cast
-  public static <T extends MessageLite> T get(Bundle bundle, String key, T defaultInstance)
+  public static <T extends MessageLite> T get(
+      @NonNull Bundle bundle, @NonNull String key, @NonNull T defaultInstance)
       throws InvalidProtocolBufferException {
+
+    Assert.isNotNull(bundle);
+    Assert.isNotNull(key);
+    Assert.isNotNull(defaultInstance);
+
     byte[] bytes = bundle.getByteArray(key);
     return (T) mergeFrom(bytes, defaultInstance.getDefaultInstanceForType());
   }
@@ -41,7 +47,8 @@ public final class ProtoParsers {
    *
    * @throws RuntimeException if the proto cannot be parsed
    */
-  public static <T extends MessageLite> T getTrusted(Bundle bundle, String key, T defaultInstance) {
+  public static <T extends MessageLite> T getTrusted(
+      @NonNull Bundle bundle, @NonNull String key, @NonNull T defaultInstance) {
     try {
       return get(bundle, key, defaultInstance);
     } catch (InvalidProtocolBufferException e) {
@@ -54,7 +61,9 @@ public final class ProtoParsers {
    *
    * @throws RuntimeException if the proto cannot be parsed
    */
-  public static <T extends MessageLite> T getTrusted(Intent intent, String key, T defaultInstance) {
+  public static <T extends MessageLite> T getTrusted(
+      @NonNull Intent intent, @NonNull String key, @NonNull T defaultInstance) {
+    Assert.isNotNull(intent);
     return getTrusted(intent.getExtras(), key, defaultInstance);
   }
 
@@ -64,7 +73,9 @@ public final class ProtoParsers {
    */
   public static void put(
       @NonNull Bundle bundle, @NonNull String key, @NonNull MessageLite message) {
-    Assert.checkState(message != null);
+    Assert.isNotNull(message);
+    Assert.isNotNull(bundle);
+    Assert.isNotNull(key);
     bundle.putByteArray(key, message.toByteArray());
   }
 
@@ -72,8 +83,11 @@ public final class ProtoParsers {
    * Stores a proto in an Intent, for later retrieval by {@link #get(Bundle, String, MessageLite)}.
    * Needs separate method because Intent has similar to but different API than Bundle.
    */
-  public static void put(@NonNull Intent intent, @NonNull String key, MessageLite message) {
-    Assert.checkState(message != null);
+  public static void put(
+      @NonNull Intent intent, @NonNull String key, @NonNull MessageLite message) {
+    Assert.isNotNull(message);
+    Assert.isNotNull(intent);
+    Assert.isNotNull(key);
     intent.putExtra(key, message.toByteArray());
   }
 

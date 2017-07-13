@@ -23,6 +23,7 @@ import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
+import com.android.dialer.enrichedcall.videoshare.VideoShareSession;
 import com.android.dialer.multimedia.MultimediaData;
 import java.util.List;
 import java.util.Map;
@@ -297,6 +298,14 @@ public interface EnrichedCallManager {
    */
   @MainThread
   long getVideoShareInviteSessionId(@NonNull String number);
+
+  /**
+   * Returns the {@link VideoShareSession} for the given sessionId, or {@code null} if no session
+   * exists.
+   */
+  @MainThread
+  @Nullable
+  VideoShareSession getVideoShareSession(long sessionId);
 
   /**
    * Ends the given video share session.
