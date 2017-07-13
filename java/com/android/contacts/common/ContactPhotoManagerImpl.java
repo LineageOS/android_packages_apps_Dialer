@@ -1220,20 +1220,23 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
           InputStream is = null;
           if (scheme.equals("http") || scheme.equals("https")) {
             TrafficStats.setThreadStatsTag(TrafficStatsTags.CONTACT_PHOTO_DOWNLOAD_TAG);
-            final HttpURLConnection connection =
-                (HttpURLConnection) new URL(uri.toString()).openConnection();
-
-            // Include the user agent if it is specified.
-            if (!TextUtils.isEmpty(mUserAgent)) {
-              connection.setRequestProperty("User-Agent", mUserAgent);
-            }
             try {
-              is = connection.getInputStream();
-            } catch (IOException e) {
-              connection.disconnect();
-              is = null;
+              final HttpURLConnection connection =
+                  (HttpURLConnection) new URL(uri.toString()).openConnection();
+
+              // Include the user agent if it is specified.
+              if (!TextUtils.isEmpty(mUserAgent)) {
+                connection.setRequestProperty("User-Agent", mUserAgent);
+              }
+              try {
+                is = connection.getInputStream();
+              } catch (IOException e) {
+                connection.disconnect();
+                is = null;
+              }
+            } finally {
+              TrafficStats.clearThreadStatsTag();
             }
-            TrafficStats.clearThreadStatsTag();
           } else {
             is = mResolver.openInputStream(uri);
           }
