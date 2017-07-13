@@ -134,13 +134,11 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onDisconnect(DialerCall call) {
-    if (bubble != null && bubble.isVisible()) {
+    if (bubble != null && bubble.isVisible() && !TelecomUtil.isInCall(context)) {
       bubble.showText(context.getText(R.string.incall_call_ended));
     }
 
-    if (!TelecomUtil.isInCall(context)) {
-      hide();
-    }
+    hide();
   }
 
   @Override
