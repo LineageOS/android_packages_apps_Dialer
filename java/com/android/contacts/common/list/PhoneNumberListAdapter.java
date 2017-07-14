@@ -404,7 +404,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     if (action == ContactListItemView.NONE) {
       EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
       EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
-      if (capabilities != null && capabilities.supportsCallComposer()) {
+      if (capabilities != null && capabilities.isCallComposerCapable()) {
         action = ContactListItemView.CALL_AND_SHARE;
       } else if (capabilities == null
           && getQueryString() != null

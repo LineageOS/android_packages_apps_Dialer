@@ -347,7 +347,7 @@ public class CallLogAdapter extends GroupingListAdapter
           EnrichedCallCapabilities capabilities =
               getEnrichedCallManager().getCapabilities(viewHolder.number);
           viewHolder.isCallComposerCapable =
-              capabilities != null && capabilities.supportsCallComposer();
+              capabilities != null && capabilities.isCallComposerCapable();
           generateAndMapNewCallDetailsEntriesHistoryResults(
               viewHolder.number,
               viewHolder.getDetailedPhoneDetails(),
@@ -869,7 +869,7 @@ public class CallLogAdapter extends GroupingListAdapter
       getEnrichedCallManager().requestCapabilities(number);
       return false;
     }
-    return capabilities.supportsCallComposer();
+    return capabilities.isCallComposerCapable();
   }
 
   @NonNull

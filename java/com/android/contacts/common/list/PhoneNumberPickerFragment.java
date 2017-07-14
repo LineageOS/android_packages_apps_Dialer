@@ -353,7 +353,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         if (view.getCallToAction() != ContactListItemView.NONE
             || view.getPhoneNumber() == null
             || manager.getCapabilities(view.getPhoneNumber()) == null
-            || !manager.getCapabilities(view.getPhoneNumber()).supportsCallComposer()) {
+            || !manager.getCapabilities(view.getPhoneNumber()).isCallComposerCapable()) {
           continue;
         }
         view.setCallToAction(ContactListItemView.CALL_AND_SHARE, listener, view.getPosition());

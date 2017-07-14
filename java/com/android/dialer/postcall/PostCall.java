@@ -79,7 +79,7 @@ public class PostCall {
         LogUtil.sanitizePhoneNumber(getPhoneNumber(activity)),
         capabilities);
 
-    boolean isRcsPostCall = capabilities != null && capabilities.supportsPostCall();
+    boolean isRcsPostCall = capabilities != null && capabilities.isPostCallCapable();
     String actionText =
         isRcsPostCall
             ? activity.getString(R.string.post_call_add_message)
