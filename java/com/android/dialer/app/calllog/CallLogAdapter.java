@@ -967,7 +967,7 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   @MainThread
-  private static CallDetailsEntries createCallDetailsEntries(Cursor cursor, int count) {
+  private CallDetailsEntries createCallDetailsEntries(Cursor cursor, int count) {
     Assert.isMainThread();
     int position = cursor.getPosition();
     CallDetailsEntries.Builder entries = CallDetailsEntries.newBuilder();
@@ -980,6 +980,16 @@ public class CallLogAdapter extends GroupingListAdapter
               .setDate(cursor.getLong(CallLogQuery.DATE))
               .setDuration(cursor.getLong(CallLogQuery.DURATION))
               .setFeatures(cursor.getInt(CallLogQuery.FEATURES));
+
+      String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+      if (getLightbringer().getPhoneAccountComponentName() != null
+          && getLightbringer()
+              .getPhoneAccountComponentName()
+              .flattenToString()
+              .equals(phoneAccountComponentName)) {
+        entry.setIsLightbringerCall(true);
+      }
+
       entries.addEntries(entry.build());
       cursor.moveToNext();
     }

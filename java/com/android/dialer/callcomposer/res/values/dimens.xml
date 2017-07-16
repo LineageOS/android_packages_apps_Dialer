@@ -15,15 +15,15 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="call_composer_view_pager_height">306dp</dimen>
+  <dimen name="call_composer_view_pager_height">292dp</dimen>
 
   <!-- Contact bar -->
   <dimen name="call_composer_contact_photo_border_thickness">2dp</dimen>
-  <dimen name="call_composer_contact_photo_size">116dp</dimen>
-  <dimen name="call_composer_contact_container_margin_top">58dp</dimen>
-  <dimen name="call_composer_contact_container_padding_top">58dp</dimen>
-  <dimen name="call_composer_contact_container_padding_bottom">18dp</dimen>
-  <dimen name="call_composer_name_text_size">32sp</dimen>
+  <dimen name="call_composer_contact_photo_size">112dp</dimen>
+  <dimen name="call_composer_contact_container_margin_top">56dp</dimen>
+  <dimen name="call_composer_contact_container_padding_top">56dp</dimen>
+  <dimen name="call_composer_contact_container_padding_bottom">16dp</dimen>
+  <dimen name="call_composer_name_text_size">28sp</dimen>
   <dimen name="call_composer_number_text_size">16sp</dimen>
   <dimen name="call_composer_contact_container_elevation">2dp</dimen>
 

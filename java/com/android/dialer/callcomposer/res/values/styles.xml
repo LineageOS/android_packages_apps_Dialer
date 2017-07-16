@@ -34,7 +34,8 @@
   <style name="message_composer_textview">
     <item name="android:textSize">@dimen/message_compose_item_text_size</item>
     <item name="android:textColor">@color/dialer_primary_text_color</item>
-    <item name="android:padding">@dimen/message_composer_item_padding</item>
+    <item name="android:paddingStart">@dimen/message_composer_item_padding</item>
+    <item name="android:paddingEnd">@dimen/message_composer_item_padding</item>
     <item name="android:background">@drawable/item_background_material_light</item>
     <item name="android:gravity">center_vertical</item>
   </style>

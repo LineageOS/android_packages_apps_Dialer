@@ -152,6 +152,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   // Times when a second call is received but AnswerAndRelease button is not shown
   // since it's not supported.
   private int secondCallWithoutAnswerAndReleasedButtonTimes = 0;
+  private VideoTech videoTech;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -194,14 +195,15 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
         @Override
         public void onDetailsChanged(Call call, Call.Details details) {
-          LogUtil.v("TelecomCallCallback.onStateChanged", " call=" + call + " details=" + details);
+          LogUtil.v(
+              "TelecomCallCallback.onDetailsChanged", " call=" + call + " details=" + details);
           update();
         }
 
         @Override
         public void onCannedTextResponsesLoaded(Call call, List<String> cannedTextResponses) {
           LogUtil.v(
-              "TelecomCallCallback.onStateChanged",
+              "TelecomCallCallback.onCannedTextResponsesLoaded",
               "call=" + call + " cannedTextResponses=" + cannedTextResponses);
           for (CannedTextResponsesLoadedListener listener : mCannedTextResponsesLoadedListeners) {
             listener.onCannedTextResponsesLoaded(DialerCall.this);
@@ -211,7 +213,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onPostDialWait(Call call, String remainingPostDialSequence) {
           LogUtil.v(
-              "TelecomCallCallback.onStateChanged",
+              "TelecomCallCallback.onPostDialWait",
               "call=" + call + " remainingPostDialSequence=" + remainingPostDialSequence);
           update();
         }
@@ -219,20 +221,20 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onVideoCallChanged(Call call, VideoCall videoCall) {
           LogUtil.v(
-              "TelecomCallCallback.onStateChanged", "call=" + call + " videoCall=" + videoCall);
+              "TelecomCallCallback.onVideoCallChanged", "call=" + call + " videoCall=" + videoCall);
           update();
         }
 
         @Override
         public void onCallDestroyed(Call call) {
-          LogUtil.v("TelecomCallCallback.onStateChanged", "call=" + call);
+          LogUtil.v("TelecomCallCallback.onCallDestroyed", "call=" + call);
           unregisterCallback();
         }
 
         @Override
         public void onConferenceableCallsChanged(Call call, List<Call> conferenceableCalls) {
           LogUtil.v(
-              "DialerCall.onConferenceableCallsChanged",
+              "TelecomCallCallback.onConferenceableCallsChanged",
               "call %s, conferenceable calls: %d",
               call,
               conferenceableCalls.size());
@@ -242,7 +244,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onConnectionEvent(android.telecom.Call call, String event, Bundle extras) {
           LogUtil.v(
-              "DialerCall.onConnectionEvent",
+              "TelecomCallCallback.onConnectionEvent",
               "Call: " + call + ", Event: " + event + ", Extras: " + extras);
           switch (event) {
               // The Previous attempt to Merge two calls together has failed in Telecom. We must
@@ -430,6 +432,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private void update() {
     Trace.beginSection("Update");
     int oldState = getState();
+    // Clear any cache here that could potentially change on update.
+    videoTech = null;
     // We want to potentially register a video call callback here.
     updateFromTelecomCall();
     if (oldState != getState() && getState() == DialerCall.State.DISCONNECTED) {
@@ -441,7 +445,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
           .unregisterCapabilitiesListener(this);
       EnrichedCallComponent.get(mContext)
           .getEnrichedCallManager()
-          .unregisterCapabilitiesListener(this);
+          .unregisterStateChangedListener(this);
     } else {
       for (DialerCallListener listener : mListeners) {
         listener.onDialerCallUpdate();
@@ -1114,7 +1118,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public VideoTech getVideoTech() {
-    return mVideoTechManager.getVideoTech();
+    if (videoTech == null) {
+      videoTech = mVideoTechManager.getVideoTech();
+    }
+    return videoTech;
   }
 
   public String getCallbackNumber() {
