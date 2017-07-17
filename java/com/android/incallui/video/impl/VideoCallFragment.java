@@ -61,6 +61,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.contactgrid.ContactGridManager;
@@ -76,7 +77,6 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
-import com.android.incallui.video.impl.CameraPermissionDialogFragment.CameraPermissionDialogCallback;
 import com.android.incallui.video.impl.CheckableImageButton.OnCheckedChangeListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -94,8 +94,7 @@ public class VideoCallFragment extends Fragment
         OnClickListener,
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
-        OnSystemUiVisibilityChangeListener,
-        CameraPermissionDialogCallback {
+        OnSystemUiVisibilityChangeListener {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
@@ -107,8 +106,6 @@ public class VideoCallFragment extends Fragment
   private static final float ASPECT_RATIO_MATCH_THRESHOLD = 0.2f;
 
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
-  private static final String CAMERA_PERMISSION_DIALOG_FRAMENT_TAG =
-      "CameraPermissionDialogFragment";
   private static final long CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS = 2000L;
   private static final long VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS = 2000L;
 
@@ -158,7 +155,7 @@ public class VideoCallFragment extends Fragment
       new Runnable() {
         @Override
         public void run() {
-          if (videoCallScreenDelegate.shouldShowCameraPermissionDialog()) {
+          if (videoCallScreenDelegate.shouldShowCameraPermissionToast()) {
             LogUtil.i("VideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
             checkCameraPermission();
           }
@@ -653,7 +650,7 @@ public class VideoCallFragment extends Fragment
   @Override
   public void onCheckedChanged(CheckableImageButton button, boolean isChecked) {
     if (button == cameraOffButton) {
-      if (!isChecked && !VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+      if (!isChecked && !VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
         LogUtil.i("VideoCallFragment.onCheckedChanged", "show camera permission dialog");
         checkCameraPermission();
       } else {
@@ -1256,24 +1253,19 @@ public class VideoCallFragment extends Fragment
     videoCallScreenDelegate.onSystemUiVisibilityChange(navBarVisible);
   }
 
-  @Override
-  public void onCameraPermissionGranted() {
-    videoCallScreenDelegate.onCameraPermissionGranted();
-  }
-
   private void checkCameraPermission() {
     // Checks if user has consent of camera permission and the permission is granted.
     // If camera permission is revoked, shows system permission dialog.
     // If camera permission is granted but user doesn't have consent of camera permission
     // (which means it's first time making video call), shows custom dialog instead. This
     // will only be shown to user once.
-    if (!VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+    if (!VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
       videoCallScreenDelegate.onCameraPermissionDialogShown();
       if (!VideoUtils.hasCameraPermission(getContext())) {
         requestPermissions(new String[] {permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
       } else {
-        CameraPermissionDialogFragment.newInstance()
-            .show(getChildFragmentManager(), CAMERA_PERMISSION_DIALOG_FRAMENT_TAG);
+        PermissionsUtil.showCameraPermissionToast(getContext());
+        videoCallScreenDelegate.onCameraPermissionGranted();
       }
     }
   }
