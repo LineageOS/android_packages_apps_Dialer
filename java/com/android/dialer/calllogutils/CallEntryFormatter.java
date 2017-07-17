@@ -104,8 +104,17 @@ public class CallEntryFormatter {
 
     // If new translation issues arise, we should catch them here to prevent crashes.
     try {
-      return new SimpleDateFormat(formatPattern)
-          .format(new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds)));
+      Date date = new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds));
+      SimpleDateFormat format = new SimpleDateFormat(formatPattern);
+      String duration = format.format(date);
+
+      // SimpleDateFormat cannot display more than 59 minutes, instead it displays MINUTES % 60.
+      // Here we check for that value and replace it with the correct value.
+      if (elapsedSeconds >= TimeUnit.MINUTES.toSeconds(60)) {
+        int minutes = (int) (elapsedSeconds / 60);
+        duration = duration.replaceFirst(Integer.toString(minutes % 60), Integer.toString(minutes));
+      }
+      return duration;
     } catch (Exception e) {
       return "";
     }
