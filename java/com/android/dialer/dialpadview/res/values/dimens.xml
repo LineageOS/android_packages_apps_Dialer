@@ -35,7 +35,7 @@
   <dimen name="dialpad_digits_menu_right_padding">10dp</dimen>
   <dimen name="dialpad_center_margin">3dp</dimen>
   <dimen name="dialpad_button_margin">2dp</dimen>
-  <dimen name="dialpad_voicemail_icon_padding_top">2dp</dimen>
+  <dimen name="dialpad_voicemail_icon_size">18dp</dimen>
   <dimen name="dialpad_key_button_translate_y">100dp</dimen>
   <dimen name="dialpad_overflow_margin">8dp</dimen>
   <dimen name="dialpad_space_above_keys">14dp</dimen>
