@@ -197,7 +197,6 @@ public class SpamCallListListener implements CallList.Listener {
   private void showNonSpamCallNotification(DialerCall call) {
     Notification.Builder notificationBuilder =
         createAfterCallNotificationBuilder(call)
-            .setLargeIcon(Icon.createWithResource(context, R.drawable.unknown_notification_icon))
             .setContentText(
                 context.getString(R.string.spam_notification_non_spam_call_collapsed_text))
             .setStyle(
