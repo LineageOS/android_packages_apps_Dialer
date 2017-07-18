@@ -93,4 +93,10 @@ public final class StubVoicemailClient implements VoicemailClient {
       @NonNull Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
     return new PersistableBundle();
   }
+
+  @Override
+  public void onBoot(@NonNull Context context) {}
+
+  @Override
+  public void onShutdown(@NonNull Context context) {}
 }

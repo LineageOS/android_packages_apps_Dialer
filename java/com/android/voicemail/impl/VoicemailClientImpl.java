@@ -20,6 +20,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.PersistableBundle;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
@@ -139,6 +140,19 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public PersistableBundle getConfig(Context context, PhoneAccountHandle phoneAccountHandle) {
     return new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle).getConfig();
+  }
+
+  @Override
+  @MainThread
+  public void onBoot(@NonNull Context context) {
+    OmtpService.onBoot(context);
+    StatusCheckJobService.schedule(context);
+  }
+
+  @Override
+  @MainThread
+  public void onShutdown(@NonNull Context context) {
+    OmtpService.onShutdown(context);
   }
 
   @TargetApi(VERSION_CODES.O)

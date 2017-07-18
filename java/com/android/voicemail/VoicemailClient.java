@@ -142,4 +142,10 @@ public interface VoicemailClient {
   @NonNull
   PersistableBundle getConfig(
       @NonNull Context context, @Nullable PhoneAccountHandle phoneAccountHandle);
+
+  @MainThread
+  void onBoot(@NonNull Context context);
+
+  @MainThread
+  void onShutdown(@NonNull Context context);
 }

@@ -41,5 +41,13 @@
         <data android:scheme="android_secret_code" />
       </intent-filter>
     </receiver>
+
+    <receiver android:name="com.android.voicemail.VoicemailPowerCycleReceiver"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

@@ -113,13 +113,6 @@
       android:windowSoftInputMode="stateVisible|adjustResize">
     </activity>
 
-    <receiver android:name="com.android.voicemail.impl.VoicemailBootReceiver"
-      android:exported="false">
-      <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
-      </intent-filter>
-    </receiver>
-
     <receiver android:name="com.android.voicemail.impl.PackageReplacedReceiver"
         android:exported="false">
       <intent-filter>
