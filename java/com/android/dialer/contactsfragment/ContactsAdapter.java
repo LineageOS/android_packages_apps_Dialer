@@ -137,7 +137,7 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public int getItemCount() {
-    return (cursor == null ? 0 : cursor.getCount()) + 1; // add contact
+    return (cursor == null || cursor.isClosed() ? 0 : cursor.getCount()) + 1; // add contact
   }
 
   private static String getDisplayName(Cursor cursor) {
