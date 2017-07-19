@@ -182,13 +182,6 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> found</item>
   </plurals>
 
-  <!-- String describing the text for photo of a contact in a contacts list.
-
-      Note: AccessibilityServices use this attribute to announce what the view represents.
-            This is especially valuable for views without textual representation like ImageView.
-  -->
-  <string name="description_quick_contact_for">Quick contact for <xliff:g id="name">%1$s</xliff:g></string>
-
   <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
   <string name="missing_name">(No name)</string>
 

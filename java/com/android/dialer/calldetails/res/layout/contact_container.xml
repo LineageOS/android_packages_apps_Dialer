@@ -31,8 +31,7 @@
       android:layout_height="@dimen/call_details_contact_photo_size"
       android:layout_centerVertical="true"
       android:padding="@dimen/call_details_contact_photo_padding"
-      android:focusable="true"
-      android:contentDescription="@string/description_quick_contact_for"/>
+      android:focusable="true"/>
 
   <LinearLayout
       android:orientation="vertical"
