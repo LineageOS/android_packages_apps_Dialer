@@ -32,6 +32,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +57,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
+import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -139,6 +141,7 @@ public class CallComposerActivity extends AppCompatActivity
   private FrameLayout background;
   private LinearLayout windowContainer;
 
+  private DialerExecutor<Uri> copyAndResizeExecutor;
   private FastOutSlowInInterpolator interpolator;
   private boolean shouldAnimateEntrance = true;
   private boolean inFullscreenMode;
@@ -207,6 +210,29 @@ public class CallComposerActivity extends AppCompatActivity
         });
 
     setMediaIconSelected(currentIndex);
+
+    copyAndResizeExecutor =
+        DialerExecutors.createUiTaskBuilder(
+                getFragmentManager(),
+                "copyAndResizeImageToSend",
+                new CopyAndResizeImageWorker(this.getApplicationContext()))
+            .onSuccess(this::onCopyAndResizeImageSuccess)
+            .onFailure(this::onCopyAndResizeImageFailure)
+            .build();
+  }
+
+  private void onCopyAndResizeImageSuccess(Pair<File, String> output) {
+    Uri shareableUri =
+        FileProvider.getUriForFile(
+            CallComposerActivity.this, Constants.get().getFileProviderAuthority(), output.first);
+
+    placeRCSCall(
+        MultimediaData.builder().setImage(grantUriPermission(shareableUri), output.second));
+  }
+
+  private void onCopyAndResizeImageFailure(Throwable throwable) {
+    // TODO(b/34279096) - gracefully handle message failure
+    LogUtil.e("CallComposerActivity.onCopyAndResizeImageFailure", "copy Failed", throwable);
   }
 
   @Override
@@ -332,28 +358,8 @@ public class CallComposerActivity extends AppCompatActivity
       GalleryComposerFragment galleryComposerFragment = (GalleryComposerFragment) fragment;
       // If the current data is not a copy, make one.
       if (!galleryComposerFragment.selectedDataIsCopy()) {
-        DialerExecutors.createUiTaskBuilder(
-                getFragmentManager(),
-                "copyAndResizeImageToSend",
-                new CopyAndResizeImageWorker(this.getApplicationContext()))
-            .onSuccess(
-                output -> {
-                  Uri shareableUri =
-                      FileProvider.getUriForFile(
-                          CallComposerActivity.this,
-                          Constants.get().getFileProviderAuthority(),
-                          output.first);
-
-                  builder.setImage(grantUriPermission(shareableUri), output.second);
-                  placeRCSCall(builder);
-                })
-            .onFailure(
-                throwable -> {
-                  // TODO(b/34279096) - gracefully handle message failure
-                  LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
-                })
-            .build()
-            .executeParallel(galleryComposerFragment.getGalleryData().getFileUri());
+        copyAndResizeExecutor.executeParallel(
+            galleryComposerFragment.getGalleryData().getFileUri());
       } else {
         Uri shareableUri =
             FileProvider.getUriForFile(
