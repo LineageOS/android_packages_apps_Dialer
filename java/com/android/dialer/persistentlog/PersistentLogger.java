@@ -110,6 +110,16 @@ public final class PersistentLogger {
     loggerThreadHandler.sendEmptyMessageDelayed(MESSAGE_FLUSH, FLUSH_DELAY_MILLIS);
   }
 
+  @VisibleForTesting
+  /** write raw bytes directly to the log file, likely corrupting it. */
+  static void rawLogForTest(byte[] data) {
+    try {
+      fileHandler.writeRawLogsForTest(data);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   /** Dump the log as human readable string. Blocks until the dump is finished. */
   @NonNull
   @WorkerThread
