@@ -29,25 +29,34 @@ public class FuzzyPhoneNumberMatcher {
    * too slow, so character by character matching is used instead.
    */
   public static boolean matches(@NonNull String lhs, @NonNull String rhs) {
-    int aIndex = lhs.length() - 1;
-    int bIndex = rhs.length() - 1;
+    return lastSevenDigitsCharacterByCharacterMatches(lhs, rhs);
+  }
+
+  /**
+   * This strategy examines the numbers character by character starting from the end. If the last
+   * {@link #REQUIRED_MATCHED_DIGITS} match, it returns {@code true}.
+   */
+  private static boolean lastSevenDigitsCharacterByCharacterMatches(
+      @NonNull String lhs, @NonNull String rhs) {
+    int lhsIndex = lhs.length() - 1;
+    int rhsIndex = rhs.length() - 1;
 
     int matchedDigits = 0;
 
-    while (aIndex >= 0 && bIndex >= 0) {
-      if (!Character.isDigit(lhs.charAt(aIndex))) {
-        --aIndex;
+    while (lhsIndex >= 0 && rhsIndex >= 0) {
+      if (!Character.isDigit(lhs.charAt(lhsIndex))) {
+        --lhsIndex;
         continue;
       }
-      if (!Character.isDigit(rhs.charAt(bIndex))) {
-        --bIndex;
+      if (!Character.isDigit(rhs.charAt(rhsIndex))) {
+        --rhsIndex;
         continue;
       }
-      if (lhs.charAt(aIndex) != rhs.charAt(bIndex)) {
-        return false;
+      if (lhs.charAt(lhsIndex) != rhs.charAt(rhsIndex)) {
+        break;
       }
-      --aIndex;
-      --bIndex;
+      --lhsIndex;
+      --rhsIndex;
       ++matchedDigits;
     }
 
