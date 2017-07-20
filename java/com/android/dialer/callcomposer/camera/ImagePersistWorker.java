@@ -22,13 +22,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import com.android.dialer.callcomposer.camera.ImagePersistWorker.Result;
 import com.android.dialer.callcomposer.camera.exif.ExifInterface;
 import com.android.dialer.callcomposer.util.BitmapResizer;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.concurrent.FallibleAsyncTask;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.util.DialerUtils;
+import com.google.auto.value.AutoValue;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,52 +39,70 @@ import java.io.OutputStream;
 
 /** Persisting image routine. */
 @TargetApi(VERSION_CODES.M)
-public class ImagePersistTask extends FallibleAsyncTask<Void, Void, Uri> {
+public class ImagePersistWorker implements Worker<Void, Result> {
   private int mWidth;
   private int mHeight;
   private final float mHeightPercent;
   private final byte[] mBytes;
   private final Context mContext;
-  private final CameraManager.MediaCallback mCallback;
 
-  ImagePersistTask(
+  @AutoValue
+  abstract static class Result {
+
+    public static Builder builder() {
+      return new AutoValue_ImagePersistWorker_Result.Builder();
+    }
+
+    @NonNull
+    abstract Uri getUri();
+
+    abstract int getWidth();
+
+    abstract int getHeight();
+
+    @AutoValue.Builder
+    abstract static class Builder {
+      abstract Builder setUri(@NonNull Uri uri);
+
+      abstract Builder setWidth(int width);
+
+      abstract Builder setHeight(int height);
+
+      abstract Result build();
+    }
+  }
+
+  ImagePersistWorker(
       final int width,
       final int height,
       final float heightPercent,
       final byte[] bytes,
-      final Context context,
-      final CameraManager.MediaCallback callback) {
+      final Context context) {
     Assert.checkArgument(heightPercent >= 0 && heightPercent <= 1);
     Assert.isNotNull(bytes);
     Assert.isNotNull(context);
-    Assert.isNotNull(callback);
     mWidth = width;
     mHeight = height;
     mHeightPercent = heightPercent;
     mBytes = bytes;
     mContext = context;
-    mCallback = callback;
   }
 
   @Override
-  protected Uri doInBackgroundFallible(final Void... params) throws Exception {
+  public Result doInBackground(Void unused) throws Exception {
     File outputFile = DialerUtils.createShareableFile(mContext);
 
     try (OutputStream outputStream = new FileOutputStream(outputFile)) {
       writeClippedBitmap(outputStream);
     }
 
-    return FileProvider.getUriForFile(
-        mContext, Constants.get().getFileProviderAuthority(), outputFile);
-  }
-
-  @Override
-  protected void onPostExecute(FallibleTaskResult<Uri> result) {
-    if (result.isFailure()) {
-      mCallback.onMediaFailed(new Exception("Persisting image failed", result.getThrowable()));
-    } else {
-      mCallback.onMediaReady(result.getResult(), "image/jpeg", mWidth, mHeight);
-    }
+    return Result.builder()
+        .setUri(
+            FileProvider.getUriForFile(
+                mContext, Constants.get().getFileProviderAuthority(), outputFile))
+        .setWidth(mWidth)
+        .setHeight(mHeight)
+        .build();
   }
 
   private void writeClippedBitmap(OutputStream outputStream) throws IOException {

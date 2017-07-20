@@ -35,6 +35,7 @@ import com.android.dialer.callcomposer.camera.camerafocus.FocusOverlayManager;
 import com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -457,9 +458,9 @@ public class CameraManager implements FocusOverlayManager.Listener {
             int height;
             if (mRotation == 90 || mRotation == 270) {
               // Is rotated, so swapping dimensions is desired
-              //noinspection SuspiciousNameCombination
+              // noinspection SuspiciousNameCombination
               width = size.height;
-              //noinspection SuspiciousNameCombination
+              // noinspection SuspiciousNameCombination
               height = size.width;
             } else {
               width = size.width;
@@ -467,9 +468,20 @@ public class CameraManager implements FocusOverlayManager.Listener {
             }
             LogUtil.i(
                 "CameraManager.onPictureTaken", "taken picture size: " + bytes.length + " bytes");
-            new ImagePersistTask(
-                    width, height, heightPercent, bytes, mCameraPreview.getContext(), callback)
-                .execute();
+            DialerExecutors.createNonUiTaskBuilder(
+                    new ImagePersistWorker(
+                        width, height, heightPercent, bytes, mCameraPreview.getContext()))
+                .onSuccess(
+                    (result) -> {
+                      callback.onMediaReady(
+                          result.getUri(), "image/jpeg", result.getWidth(), result.getHeight());
+                    })
+                .onFailure(
+                    (throwable) -> {
+                      callback.onMediaFailed(new Exception("Persisting image failed", throwable));
+                    })
+                .build()
+                .executeSerial(null);
           }
         };
 
