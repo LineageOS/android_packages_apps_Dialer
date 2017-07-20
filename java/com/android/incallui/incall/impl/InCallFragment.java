@@ -60,6 +60,7 @@ import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryCallState.ButtonState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import java.util.ArrayList;
@@ -287,10 +288,6 @@ public class InCallFragment extends Fragment
   @Override
   public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {
     LogUtil.i("InCallFragment.setSecondary", secondaryInfo.toString());
-    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
-        .setEnabled(secondaryInfo.shouldShow);
-    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
-        .setAllowed(secondaryInfo.shouldShow);
     updateButtonStates();
 
     if (!isAdded()) {
@@ -315,6 +312,10 @@ public class InCallFragment extends Fragment
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
     LogUtil.i("InCallFragment.setCallState", primaryCallState.toString());
     contactGridManager.setCallState(primaryCallState);
+    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
+        .setAllowed(primaryCallState.swapToSecondaryButtonState != ButtonState.NOT_SUPPORT);
+    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
+        .setEnabled(primaryCallState.swapToSecondaryButtonState == ButtonState.ENABLED);
     buttonChooser =
         ButtonChooserFactory.newButtonChooser(voiceNetworkType, primaryCallState.isWifi, phoneType);
     updateButtonStates();

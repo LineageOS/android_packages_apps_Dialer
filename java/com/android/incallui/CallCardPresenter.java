@@ -60,6 +60,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.calllocation.CallLocation;
 import com.android.incallui.calllocation.CallLocationComponent;
@@ -67,6 +68,7 @@ import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryCallState.ButtonState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.videotech.utils.SessionModificationState;
@@ -472,7 +474,8 @@ public class CallCardPresenter
                   CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
                   mPrimary.isRemotelyHeld(),
                   isBusiness,
-                  supports2ndCallOnHold()));
+                  supports2ndCallOnHold(),
+                  getSwapToSecondaryButtonState()));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
@@ -480,6 +483,16 @@ public class CallCardPresenter
         activity.onPrimaryCallStateChanged();
       }
     }
+  }
+
+  private @ButtonState int getSwapToSecondaryButtonState() {
+    if (mSecondary == null) {
+      return ButtonState.NOT_SUPPORT;
+    }
+    if (mPrimary.getState() == State.ACTIVE) {
+      return ButtonState.ENABLED;
+    }
+    return ButtonState.DISABLED;
   }
 
   /** Only show the conference call button if we can manage the conference. */

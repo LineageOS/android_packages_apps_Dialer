@@ -17,13 +17,29 @@
 package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
 import android.telecom.DisconnectCause;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 
 /** State of the primary call. */
 public class PrimaryCallState {
+
+  /**
+   * Button state that will be invisible if not supported, visible but invalid if disabled, or
+   * visible if enabled.
+   */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({ButtonState.NOT_SUPPORT, ButtonState.DISABLED, ButtonState.ENABLED})
+  public @interface ButtonState {
+    int NOT_SUPPORT = 0;
+    int DISABLED = 1;
+    int ENABLED = 2;
+  }
+
   public final int state;
   public final boolean isVideoCall;
   @SessionModificationState public final int sessionModificationState;
@@ -45,6 +61,7 @@ public class PrimaryCallState {
   public final boolean isRemotelyHeld;
   public final boolean isBusinessNumber;
   public final boolean supportsCallOnHold;
+  public final @ButtonState int swapToSecondaryButtonState;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
@@ -69,7 +86,8 @@ public class PrimaryCallState {
         false /* isVoiceMailNumber */,
         false /* isRemotelyHeld */,
         false /* isBusinessNumber */,
-        true /* supportsCallOnHold */);
+        true /* supportsCallOnHold */,
+        ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */);
   }
 
   public PrimaryCallState(
@@ -93,7 +111,8 @@ public class PrimaryCallState {
       boolean isVoiceMailNumber,
       boolean isRemotelyHeld,
       boolean isBusinessNumber,
-      boolean supportsCallOnHold) {
+      boolean supportsCallOnHold,
+      @ButtonState int swapToSecondaryButtonState) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -115,6 +134,7 @@ public class PrimaryCallState {
     this.isRemotelyHeld = isRemotelyHeld;
     this.isBusinessNumber = isBusinessNumber;
     this.supportsCallOnHold = supportsCallOnHold;
+    this.swapToSecondaryButtonState = swapToSecondaryButtonState;
   }
 
   @Override
