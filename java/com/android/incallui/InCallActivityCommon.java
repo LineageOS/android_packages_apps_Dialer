@@ -21,6 +21,7 @@ import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -319,6 +320,17 @@ public class InCallActivityCommon {
   }
 
   public void onStop() {
+    // Disconnects call waiting for account when activity is hidden e.g. user press home button.
+    // This is necessary otherwise the pending call will stuck on account choose and no new call
+    // will be able to create. See b/63600434 for more details.
+    // Skip this on locked screen since the activity may go over life cycle and start again.
+    if (!inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+      DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
+      if (waitingForAccountCall != null) {
+        waitingForAccountCall.disconnect();
+      }
+    }
+
     enableInCallOrientationEventListener(false);
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
