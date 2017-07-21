@@ -91,7 +91,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     numberView.setText(QueryBoldingUtil.getNumberWithQueryBolded(query, secondaryInfo));
     setCallToAction(cursor);
 
-    if (shouldShowPhoto(cursor, name)) {
+    if (shouldShowPhoto(cursor)) {
       nameOrNumberView.setVisibility(View.VISIBLE);
       photo.setVisibility(View.VISIBLE);
       String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
@@ -109,15 +109,16 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     }
   }
 
-  private boolean shouldShowPhoto(Cursor cursor, String currentName) {
+  private boolean shouldShowPhoto(Cursor cursor) {
     int currentPosition = cursor.getPosition();
     if (currentPosition == 0) {
       return true;
     } else {
+      String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
       cursor.moveToPosition(currentPosition - 1);
-      String previousName = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+      String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
       cursor.moveToPosition(currentPosition);
-      return !currentName.equals(previousName);
+      return !currentLookupKey.equals(previousLookupKey);
     }
   }
 
