@@ -15,26 +15,27 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/calllog_frame"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
+    android:id="@+id/calllog_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dialer_light"
+    android:orientation="vertical">
   <com.android.contacts.common.list.ViewPagerTabs
-    android:id="@+id/viewpager_header"
-    style="@style/DialtactsActionBarTabTextStyle"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/tab_height"
-    android:layout_gravity="top"
-    android:elevation="@dimen/tab_elevation"
-    android:orientation="horizontal"
-    android:textAllCaps="true"/>
+      android:id="@+id/viewpager_header"
+      style="@style/DialtactsActionBarTabTextStyle"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/tab_height"
+      android:layout_gravity="top"
+      android:elevation="@dimen/tab_elevation"
+      android:orientation="horizontal"
+      android:textAllCaps="true"/>
   <android.support.v4.view.ViewPager
-    android:id="@+id/call_log_pager"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"/>
+      android:id="@+id/call_log_pager"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"/>
   <RelativeLayout
-    android:id="@+id/floating_action_button_container"
-    android:layout_width="0dp"
-    android:layout_height="0dp"/>
+      android:id="@+id/floating_action_button_container"
+      android:layout_width="0dp"
+      android:layout_height="0dp"/>
 </LinearLayout>
