@@ -18,7 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="incall_vibration_category_title">Gelen-arama titreşimi</string>
   <string name="incall_vibrate_outgoing_title">Cevapladığımda titre</string>
-  <string name="incall_vibrate_call_waiting_title">Çağrı bekletildiğinde titre</string>
+  <string name="incall_vibrate_call_waiting_title">Arama bekletildiğinde titre</string>
   <string name="incall_vibrate_hangup_title">Kapatıldığında titre</string>
   <string name="incall_vibrate_45_title">Her dakika titre</string>
   <string name="incall_vibrate_45_summary">Giden aramaların her dakikasının 45. saniyesinde titreşir</string>
@@ -73,7 +73,7 @@
   <string name="call_stats_title_of_total">Toplam</string>
   <string name="call_stats_title_durations">Arama süreleri</string>
   <string name="call_stats_title_count">Arama sayısı</string>
-  <string name="call_stats_title_average_duration">Ortalama çağrı süresi</string>
+  <string name="call_stats_title_average_duration">Ortalama arama süresi</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Arama kaydı seçilen zaman aralığında herhangi bir arama içermiyor.</string>
   <string name="call_recording_category_title">Arama kaydı</string>
@@ -96,7 +96,7 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <string name="recentOutgoing_empty">Giden aramanız yok.</string>
   <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Çağrı kaydınız boş</string>
+  <string name="recentCalls_empty">Arama kaydınız boş</string>
   <string name="calllog_search_hint">Arama kaydını araştır</string>
   <string name="no_call_log">Arama kaydı yok</string>
   <string name="clear">Temizle</string>
@@ -117,7 +117,7 @@
   <string name="alert_call_no_cellular_coverage">Hücresel ağ kullanılabilir değil. Arama yapmak için kablosuz ağa bağlanın.</string>
   <string name="alert_user_connect_to_wifi_for_call">Arama yapmak için Wi-Fi ağına bağlanın.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">Mevcut şebekeleri görüntülemek için buraya dokunun</string>
-  <string name="menu_add_to_4g_conference_call">4G konferans çağrısına ekle</string>
+  <string name="menu_add_to_4g_conference_call">4G konferans görüşmesine ekle</string>
   <string name="menu_4g_conference_call">4G konferans görüşmesi</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_volte">Gelen 4G sesli arama</string>
@@ -132,15 +132,15 @@
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_lte">Cevapsız 4G görüntülü görüşme</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Gelen Wi-Fi video görüşmesi</string>
+  <string name="type_incoming_vowifi">Gelen Wi-Fi sesli arama</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Gelen Wi-Fi video görüşmesi</string>
+  <string name="type_incoming_video_wifi">Gelen Wi-Fi görüntülü arama</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Giden Wi-Fi sesli araması</string>
+  <string name="type_outgoing_vowifi">Giden Wi-Fi sesli arama</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Giden Wi-Fi video görüşmesi</string>
+  <string name="type_outgoing_video_wifi">Giden Wi-Fi görüntülü arama</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Cevapsız Wi-Fi sesli araması</string>
+  <string name="type_missed_vowifi">Cevapsız Wi-Fi sesli arama</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Cevapsız Wi-Fi video görüşmesi</string>
+  <string name="type_missed_video_wifi">Cevapsız Wi-Fi görüntülü arama</string>
 </resources>

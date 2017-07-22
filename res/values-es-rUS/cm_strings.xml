@@ -42,7 +42,7 @@
   <string name="speed_dial_input_hint">Ingresa un número</string>
   <string name="call_log_show_all_slots">Todas las tarjetas SIM</string>
   <string name="call_log_all_calls_header">Todas las llamadas</string>
-  <string name="call_log_blacklist_header">Solo llamadas bloqueadas</string>
+  <string name="call_log_blacklist_header">Sólo llamadas bloqueadas</string>
   <string name="call_log_blocked_empty">Sin llamadas bloqueadas.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estadísticas</string>
