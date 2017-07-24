@@ -4,18 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingStart="@dimen/call_log_outer_margin"
-    android:paddingEnd="@dimen/call_log_outer_margin"
-    android:paddingBottom="@dimen/call_log_inner_margin">
+    android:paddingEnd="@dimen/call_log_outer_margin">
     <Spinner
         android:id="@+id/filter_sub_spinner"
         android:layout_width="0dip"
         android:layout_height="@dimen/list_section_divider_min_height"
         android:layout_weight="1.2"
-        android:layout_marginTop="5dip" />
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip" />
     <Spinner
         android:id="@+id/filter_status_spinner"
         android:layout_width="0dip"
         android:layout_height="@dimen/list_section_divider_min_height"
         android:layout_weight="2"
-        android:layout_marginTop="5dip" />
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip" />
 </LinearLayout>
