@@ -25,13 +25,13 @@ import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.MoreContactUtils;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.app.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.callintent.SpeedDialContactType;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 

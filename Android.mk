@@ -85,6 +85,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/enrichedcall/simulator/res \
 	$(BASE_DIR)/dialer/interactions/res \
+	$(BASE_DIR)/dialer/lettertile/res \
 	$(BASE_DIR)/dialer/main/impl/res \
 	$(BASE_DIR)/dialer/notification/res \
 	$(BASE_DIR)/dialer/oem/res \
@@ -145,6 +146,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/enrichedcall/simulator/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/main/impl/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/lettertile/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/oem/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/phonenumberutil/AndroidManifest.xml \
@@ -220,6 +222,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.enrichedcall.simulator \
 	--extra-packages com.android.dialer.interactions \
 	--extra-packages com.android.dialer.main.impl \
+	--extra-packages com.android.dialer.lettertile \
 	--extra-packages com.android.dialer.notification \
 	--extra-packages com.android.dialer.oem \
 	--extra-packages com.android.dialer.phonenumberutil \

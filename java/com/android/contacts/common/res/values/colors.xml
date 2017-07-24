@@ -20,8 +20,6 @@
 
   <color name="focus_color">#44ff0000</color>
 
-  <color name="spam_contact_background">#A52714</color>
-
   <!-- Color of ripples used for views with dark backgrounds -->
   <color name="dialer_ripple_material_dark">#a0ffffff</color>
 
@@ -59,25 +57,6 @@
   <color name="textColorIconOverlay">#fff</color>
   <color name="textColorIconOverlayShadow">#000</color>
 
-
-
-  <array name="letter_tile_colors">
-    <item>#DB4437</item>
-    <item>#E91E63</item>
-    <item>#9C27B0</item>
-    <item>#673AB7</item>
-    <item>#3F51B5</item>
-    <item>#4285F4</item>
-    <item>#039BE5</item>
-    <item>#0097A7</item>
-    <item>#009688</item>
-    <item>#0F9D58</item>
-    <item>#689F38</item>
-    <item>#EF6C00</item>
-    <item>#FF5722</item>
-    <item>#757575</item>
-  </array>
-
   <!-- Darker versions of letter_tile_colors, two shades darker. These colors are used
       for settings secondary activity colors. -->
   <array name="letter_tile_colors_dark">
@@ -103,11 +82,6 @@
   <!-- The default secondary color when no color can be extracted via Palette,
           this is Blue Grey 700 -->
   <color name="quickcontact_default_photo_tint_color_dark">#455A64</color>
-
-
-  <color name="letter_tile_default_color">#cccccc</color>
-
-  <color name="letter_tile_font_color">#ffffff</color>
 
   <color name="contactscommon_actionbar_background_color">@color/dialer_theme_color</color>
   <!-- Color for icons in the actionbar -->

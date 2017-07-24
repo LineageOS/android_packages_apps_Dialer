@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.lettertiles;
+package com.android.dialer.lettertile;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -33,7 +33,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
-import com.android.contacts.common.R;
 import com.android.dialer.common.Assert;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -55,6 +54,7 @@ public class LetterTileDrawable extends Drawable {
 
   /** Contact type constants */
   public static final int TYPE_PERSON = 1;
+
   public static final int TYPE_BUSINESS = 2;
   public static final int TYPE_VOICEMAIL = 3;
   /**
@@ -62,6 +62,7 @@ public class LetterTileDrawable extends Drawable {
    * situations where a contact is anonymous.
    */
   public static final int TYPE_GENERIC_AVATAR = 4;
+
   public static final int TYPE_SPAM = 5;
   public static final int TYPE_CONFERENCE = 6;
   @ContactType public static final int TYPE_DEFAULT = TYPE_PERSON;
@@ -128,8 +129,7 @@ public class LetterTileDrawable extends Drawable {
     mDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
     mDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
 
-    mPaint.setTypeface(
-        Typeface.create(res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
+    mPaint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
     mPaint.setTextAlign(Align.CENTER);
     mPaint.setAntiAlias(true);
     mPaint.setFilterBitmap(true);

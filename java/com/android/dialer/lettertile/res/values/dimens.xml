@@ -15,6 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">Mobile</string>
+  <!-- Dimensions for contact letter tiles -->
+  <item name="letter_to_tile_ratio" type="dimen">67%</item>
 </resources>
