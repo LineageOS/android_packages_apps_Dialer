@@ -32,10 +32,8 @@ import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
-import com.android.dialer.app.calllog.ClearCallLogDialog.Listener;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.database.CallLogQueryHandler;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
@@ -46,7 +44,7 @@ import com.android.dialer.util.ViewUtil;
 
 /** Activity for viewing call history. */
 public class CallLogActivity extends TransactionSafeActivity
-    implements ViewPager.OnPageChangeListener, Listener {
+    implements ViewPager.OnPageChangeListener {
 
   private static final int TAB_INDEX_ALL = 0;
   private static final int TAB_INDEX_MISSED = 1;
@@ -148,7 +146,7 @@ public class CallLogActivity extends TransactionSafeActivity
       startActivity(intent);
       return true;
     } else if (item.getItemId() == R.id.delete_all) {
-      ClearCallLogDialog.show(getFragmentManager(), this);
+      ClearCallLogDialog.show(getFragmentManager());
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -181,15 +179,6 @@ public class CallLogActivity extends TransactionSafeActivity
       return mViewPagerAdapter.getCount() - 1 - position;
     }
     return position;
-  }
-
-  @Override
-  public void callHistoryDeleted() {
-    if (EnrichedCallComponent.get(this).getEnrichedCallManager().hasStoredData()) {
-      Snackbar.make(
-              findViewById(R.id.calllog_frame), getString(R.string.multiple_ec_data_deleted), 5_000)
-          .show();
-    }
   }
 
   @Override
