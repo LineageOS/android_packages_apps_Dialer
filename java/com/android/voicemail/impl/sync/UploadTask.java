@@ -63,10 +63,6 @@ public class UploadTask extends BaseTask {
       return;
     }
     service.sync(
-        this,
-        OmtpVvmSyncService.SYNC_UPLOAD_ONLY,
-        phoneAccountHandle,
-        null,
-        VoicemailStatus.edit(getContext(), phoneAccountHandle));
+        this, phoneAccountHandle, null, VoicemailStatus.edit(getContext(), phoneAccountHandle));
   }
 }

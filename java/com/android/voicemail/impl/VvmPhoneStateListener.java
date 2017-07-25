@@ -19,7 +19,6 @@ import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
-import com.android.voicemail.impl.sync.OmtpVvmSyncService;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VoicemailStatusQueryHelper;
 import com.android.voicemail.impl.sync.VvmAccountManager;
@@ -82,7 +81,7 @@ public class VvmPhoneStateListener extends PhoneStateListener {
         VvmLog.v(TAG, "Signal returned: requesting resync for " + mPhoneAccount);
         // If the source is already registered, run a full sync in case something was missed
         // while signal was down.
-        SyncTask.start(mContext, mPhoneAccount, OmtpVvmSyncService.SYNC_FULL_SYNC);
+        SyncTask.start(mContext, mPhoneAccount);
       } else {
         VvmLog.v(TAG, "Signal returned: reattempting activation for " + mPhoneAccount);
         // Otherwise initiate an activation because this means that an OMTP source was

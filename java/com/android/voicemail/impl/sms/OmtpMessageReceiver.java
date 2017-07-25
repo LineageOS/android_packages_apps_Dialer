@@ -35,7 +35,6 @@ import com.android.voicemail.impl.Voicemail.Builder;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
-import com.android.voicemail.impl.sync.OmtpVvmSyncService;
 import com.android.voicemail.impl.sync.SyncOneTask;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VoicemailsQueryHelper;
@@ -152,7 +151,7 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
         }
         break;
       case OmtpConstants.MAILBOX_UPDATE:
-        SyncTask.start(mContext, phone, OmtpVvmSyncService.SYNC_DOWNLOAD_ONLY);
+        SyncTask.start(mContext, phone);
         break;
       case OmtpConstants.GREETINGS_UPDATE:
         // Not implemented in V1

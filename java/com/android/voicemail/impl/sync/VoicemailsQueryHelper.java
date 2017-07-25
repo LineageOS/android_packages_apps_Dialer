@@ -49,8 +49,6 @@ public class VoicemailsQueryHelper {
   public static final int DELETED = 3;
   public static final int TRANSCRIPTION = 4;
 
-  static final String READ_SELECTION =
-      Voicemails.DIRTY + "=1 AND " + Voicemails.DELETED + "!=1 AND " + Voicemails.IS_READ + "=1";
   static final String DELETED_SELECTION = Voicemails.DELETED + "=1";
   static final String ARCHIVED_SELECTION = Voicemails.ARCHIVED + "=0";
 
@@ -62,15 +60,6 @@ public class VoicemailsQueryHelper {
     mContext = context;
     mContentResolver = context.getContentResolver();
     mSourceUri = VoicemailContract.Voicemails.buildSourceUri(mContext.getPackageName());
-  }
-
-  /**
-   * Get all the local read voicemails that have not been synced to the server.
-   *
-   * @return A list of read voicemails.
-   */
-  public List<Voicemail> getReadVoicemails(@NonNull PhoneAccountHandle phoneAccountHandle) {
-    return getLocalVoicemails(phoneAccountHandle, READ_SELECTION);
   }
 
   /**
