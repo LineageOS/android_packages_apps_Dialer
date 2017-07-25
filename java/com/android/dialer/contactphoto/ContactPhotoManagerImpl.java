@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common;
+package com.android.dialer.contactphoto;
 
 import android.app.ActivityManager;
 import android.content.ComponentCallbacks2;
@@ -52,11 +52,11 @@ import android.util.LruCache;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.android.contacts.common.util.BitmapUtil;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.constants.Constants;
 import com.android.dialer.constants.TrafficStatsTags;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.UriUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -197,7 +197,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
         context.getResources().getDimensionPixelSize(R.dimen.contact_browser_list_item_photo_size);
 
     // Get a user agent string to use for URI photo requests.
-    mUserAgent = Bindings.get(context).getUserAgent();
+    mUserAgent = Constants.get().getUserAgent(context);
     if (mUserAgent == null) {
       mUserAgent = "";
     }

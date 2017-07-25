@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.util;
+package com.android.dialer.util;
 
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -22,6 +22,8 @@ import java.util.List;
 
 /** Utility methods for dealing with URIs. */
 public class UriUtils {
+
+  private static final String LOOKUP_URI_ENCODED = "encoded";
 
   /** Static helper, not instantiable. */
   private UriUtils() {}
@@ -58,7 +60,7 @@ public class UriUtils {
     if (lastPathSegment == null) {
       return false;
     }
-    return lastPathSegment.equals(Constants.LOOKUP_URI_ENCODED);
+    return lastPathSegment.equals(LOOKUP_URI_ENCODED);
   }
 
   /**

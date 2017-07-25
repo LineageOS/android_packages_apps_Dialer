@@ -16,6 +16,7 @@
 
 package com.android.dialer.constants;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import com.android.dialer.proguard.UsedByReflection;
 
@@ -39,5 +40,10 @@ public class ConstantsImpl extends Constants {
   @Override
   public String getAnnotatedCallLogProviderAuthority() {
     return "com.android.dialer.annotatedcalllog";
+  }
+
+  @Override
+  public String getUserAgent(Context context) {
+    return null;
   }
 }

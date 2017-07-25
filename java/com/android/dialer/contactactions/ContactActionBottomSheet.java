@@ -28,8 +28,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import java.util.List;
 

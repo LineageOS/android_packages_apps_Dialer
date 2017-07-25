@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common;
+package com.android.dialer.contactphoto;
 
 import android.content.ComponentCallbacks2;
 import android.content.Context;
@@ -28,10 +28,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.UriUtils;
 
 /** Asynchronously loads contact photos and maintains a cache of photos. */
 public abstract class ContactPhotoManager implements ComponentCallbacks2 {

@@ -16,6 +16,9 @@
 
 package com.android.dialer.constants;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import com.android.dialer.proguard.UsedByReflection;
 
@@ -39,5 +42,20 @@ public class ConstantsImpl extends Constants {
   @Override
   public String getAnnotatedCallLogProviderAuthority() {
     return "com.google.android.dialer.annotatedcalllog";
+  }
+
+  @Override
+  public String getUserAgent(Context context) {
+    StringBuilder userAgent = new StringBuilder("GoogleDialer ");
+    try {
+      String versionName =
+          context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+      userAgent.append(versionName).append(" ");
+    } catch (PackageManager.NameNotFoundException e) {
+      // ignore
+    }
+    userAgent.append(Build.FINGERPRINT);
+
+    return userAgent.toString();
   }
 }

@@ -81,6 +81,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/calllogutils/res \
 	$(BASE_DIR)/dialer/common/res \
 	$(BASE_DIR)/dialer/contactactions/res \
+	$(BASE_DIR)/dialer/contactphoto/res \
 	$(BASE_DIR)/dialer/contactsfragment/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/enrichedcall/simulator/res \
@@ -123,6 +124,7 @@ RES_DIRS := \
 	$(BASE_DIR)/voicemail/impl/res \
 
 
+
 # Dialer manifest files to merge.
 # find . -type f -name "AndroidManifest.xml" | uniq | sort
 DIALER_MANIFEST_FILES += \
@@ -142,6 +144,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/calllogutils/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/common/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactactions/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/contactphoto/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/enrichedcall/simulator/AndroidManifest.xml \
@@ -219,6 +222,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.dialer.calllogutils \
 	--extra-packages com.android.dialer.common \
         --extra-packages com.android.dialer.contactactions \
+        --extra-packages com.android.dialer.contactphoto \
 	--extra-packages com.android.dialer.contactsfragment \
 	--extra-packages com.android.dialer.dialpadview \
 	--extra-packages com.android.dialer.enrichedcall.simulator \

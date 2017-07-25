@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.util;
+package com.android.dialer.contactphoto;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
