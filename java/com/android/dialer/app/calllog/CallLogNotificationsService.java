@@ -24,7 +24,11 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 
@@ -108,6 +112,15 @@ public class CallLogNotificationsService extends IntentService {
     context.startService(serviceIntent);
   }
 
+  public static void cancelAllMissedCalls(Context context) {
+    LogUtil.enterBlock("CallLogNotificationsService.cancelAllMissedCalls");
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new CancelAllMissedCallsWorker())
+        .build()
+        .executeSerial(context);
+  }
+
   public static PendingIntent createMarkAllNewVoicemailsAsOldIntent(@NonNull Context context) {
     Intent intent = new Intent(context, CallLogNotificationsService.class);
     intent.setAction(CallLogNotificationsService.ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD);
@@ -120,13 +133,6 @@ public class CallLogNotificationsService extends IntentService {
     intent.setAction(CallLogNotificationsService.ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD);
     intent.setData(voicemailUri);
     return PendingIntent.getService(context, 0, intent, 0);
-  }
-
-  public static void cancelAllMissedCalls(@NonNull Context context) {
-    LogUtil.enterBlock("CallLogNotificationsService.cancelAllMissedCalls");
-    Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-    serviceIntent.setAction(ACTION_CANCEL_ALL_MISSED_CALLS);
-    context.startService(serviceIntent);
   }
 
   public static PendingIntent createCancelAllMissedCallsPendingIntent(@NonNull Context context) {
@@ -174,9 +180,7 @@ public class CallLogNotificationsService extends IntentService {
         MissedCallNotifier.getIstance(this).insertPostCallNotification(phoneNumber, note);
         break;
       case ACTION_CANCEL_ALL_MISSED_CALLS:
-        CallLogNotificationsQueryHelper.markAllMissedCallsInCallLogAsRead(this);
-        MissedCallNotifier.cancelAllMissedCallNotifications(this);
-        TelecomUtil.cancelMissedCallsNotification(this);
+        cancelAllMissedCalls(this);
         break;
       case ACTION_CANCEL_SINGLE_MISSED_CALL:
         Uri callUri = intent.getData();
@@ -194,6 +198,28 @@ public class CallLogNotificationsService extends IntentService {
       default:
         LogUtil.e("CallLogNotificationsService.onHandleIntent", "no handler for action: " + action);
         break;
+    }
+  }
+
+  @WorkerThread
+  private static void cancelAllMissedCallsBackground(Context context) {
+    LogUtil.enterBlock("CallLogNotificationsService.cancelAllMissedCallsBackground");
+    Assert.isWorkerThread();
+    CallLogNotificationsQueryHelper.markAllMissedCallsInCallLogAsRead(context);
+    MissedCallNotifier.cancelAllMissedCallNotifications(context);
+    TelecomUtil.cancelMissedCallsNotification(context);
+  }
+
+  /** Worker that cancels all missed call notifications and updates call log entries. */
+  private static class CancelAllMissedCallsWorker implements Worker<Context, Void> {
+
+    @Nullable
+    @Override
+    public Void doInBackground(@Nullable Context context) throws Throwable {
+      if (context != null) {
+        cancelAllMissedCallsBackground(context);
+      }
+      return null;
     }
   }
 }
