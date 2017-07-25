@@ -346,8 +346,25 @@ public class CallLogAdapter extends GroupingListAdapter
           // as a last attempt at getting them before showing the expanded view to the user
           EnrichedCallCapabilities capabilities =
               getEnrichedCallManager().getCapabilities(viewHolder.number);
-          viewHolder.isCallComposerCapable =
-              capabilities != null && capabilities.isCallComposerCapable();
+
+          if (capabilities == null) {
+            capabilities = EnrichedCallCapabilities.NO_CAPABILITIES;
+          }
+
+          viewHolder.isCallComposerCapable = capabilities.isCallComposerCapable();
+
+          if (capabilities.isTemporarilyUnavailable()) {
+            LogUtil.i(
+                "mExpandCollapseListener.onClick",
+                "%s is temporarily unavailable, requesting capabilities",
+                LogUtil.sanitizePhoneNumber(viewHolder.number));
+            // Refresh the capabilities when temporarily unavailable, see go/ec-temp-unavailable.
+            // Similarly to when we request capabilities the first time, the 'Share and call' button
+            // won't pop in with the new capabilities. Instead the row needs to be collapsed and
+            // expanded again.
+            getEnrichedCallManager().requestCapabilities(viewHolder.number);
+          }
+
           generateAndMapNewCallDetailsEntriesHistoryResults(
               viewHolder.number,
               viewHolder.getDetailedPhoneDetails(),
