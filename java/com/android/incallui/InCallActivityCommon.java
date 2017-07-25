@@ -106,6 +106,8 @@ public class InCallActivityCommon {
   private boolean animateDialpadOnShow;
   private String dtmfTextToPreopulate;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
+  // If activity is going to be recreated. This is usually happening in {@link onNewIntent}.
+  private boolean isRecreating;
 
   private final SelectPhoneAccountListener selectAccountListener =
       new SelectPhoneAccountListener() {
@@ -324,7 +326,8 @@ public class InCallActivityCommon {
     // This is necessary otherwise the pending call will stuck on account choose and no new call
     // will be able to create. See b/63600434 for more details.
     // Skip this on locked screen since the activity may go over life cycle and start again.
-    if (!inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+    if (!isRecreating
+        && !inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
       DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
       if (waitingForAccountCall != null) {
         waitingForAccountCall.disconnect();
@@ -343,6 +346,7 @@ public class InCallActivityCommon {
 
   void onNewIntent(Intent intent, boolean isRecreating) {
     LogUtil.i("InCallActivityCommon.onNewIntent", "");
+    this.isRecreating = isRecreating;
 
     // We're being re-launched with a new Intent.  Since it's possible for a
     // single InCallActivity instance to persist indefinitely (even if we
