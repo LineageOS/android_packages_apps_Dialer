@@ -344,8 +344,11 @@ public class CallLogAdapter extends GroupingListAdapter
           // If enriched call capabilities were unknown on the initial load,
           // viewHolder.isCallComposerCapable may be unset. Check here if we have the capabilities
           // as a last attempt at getting them before showing the expanded view to the user
-          EnrichedCallCapabilities capabilities =
-              getEnrichedCallManager().getCapabilities(viewHolder.number);
+          EnrichedCallCapabilities capabilities = null;
+
+          if (viewHolder.number != null) {
+            capabilities = getEnrichedCallManager().getCapabilities(viewHolder.number);
+          }
 
           if (capabilities == null) {
             capabilities = EnrichedCallCapabilities.NO_CAPABILITIES;

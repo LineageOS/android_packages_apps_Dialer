@@ -164,7 +164,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
    * The callable phone number for the current call log entry. Cached here as the call back intent
    * is set only when the actions ViewStub is inflated.
    */
-  public String number;
+  @Nullable public String number;
   /** The post-dial numbers that are dialed following the phone number. */
   public String postDialDigits;
   /** The formatted phone number to display. */
@@ -933,7 +933,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       contact.setNameOrNumber((String) nameOrNumber);
     }
     contact.setContactType(getContactType());
-    contact.setNumber(number);
+    if (number != null) {
+      contact.setNumber(number);
+    }
     /* second line of contact view. */
     if (!TextUtils.isEmpty(info.name)) {
       contact.setDisplayNumber(displayNumber);
