@@ -51,8 +51,8 @@
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Ligar de volta"</string>
     <string name="notification_missedCall_message" msgid="3042123733754151052">"Mensagem"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> mensagem de correio de voz</item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> mensagens de correio de voz </item>
-      <item quantity="one">Mensagem de correio de voz</item>
     </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reproduzir"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g> , <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
@@ -116,7 +116,7 @@
     <string name="actionIncomingCall" msgid="6028930669817038600">"Chamadas recebidas"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Reproduzir mensagem de correio de voz"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Ver o contacto <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call" msgid="3443678121983852666">"Ligar a <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_call" msgid="3443678121983852666">"Telefonar a <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detalhes de contacto para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> chamadas."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videochamada."</string>
@@ -211,8 +211,8 @@
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Colocar a mensagem de correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g> em pausa"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"Eliminar mensagem de correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> novas mensagens de correio de voz</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nova mensagem de correio de voz</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> novas mensagens de correio de voz</item>
     </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Criar contacto para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Adicionar <xliff:g id="NAMEORNUMBER">^1</xliff:g> ao contacto existente"</string>

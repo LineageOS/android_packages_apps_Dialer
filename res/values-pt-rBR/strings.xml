@@ -66,7 +66,7 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Somente chamadas de saída"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Somente chamadas perdidas"</string>
     <string name="visual_voicemail_title" msgid="4574199312906348905">"Correio de voz visual"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Veja e ouça seu correio de voz, sem precisar ligar para um número. Podem ser aplicadas cobranças de dados."</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Veja e ouça seu correio de voz, sem precisar ligar para um número. Sujeito a cobranças por uso de dados."</string>
     <string name="visual_voicemail_settings" msgid="8090338793118794741">"Configurações"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"As atualizações do correio de voz não estão disponíveis"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Novo correio de voz na espera. Não é possível carregá-lo agora."</string>
