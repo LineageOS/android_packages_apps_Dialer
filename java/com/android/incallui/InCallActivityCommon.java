@@ -212,7 +212,8 @@ public class InCallActivityCommon {
           }
         });
 
-    if (icicle != null) {
+    // Don't override the value if show dialpad request is true in intent extras.
+    if (icicle != null && showDialpadRequest == DIALPAD_REQUEST_NONE) {
       // If the dialpad was shown before, set variables indicating it should be shown and
       // populated with the previous DTMF text.  The dialpad is actually shown and populated
       // in onResume() to ensure the hosting fragment has been inflated and is ready to receive it.
