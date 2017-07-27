@@ -19,8 +19,14 @@ package com.android.dialer.app.calllog.calllogcache;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
+import android.util.ArrayMap;
 import com.android.dialer.app.calllog.CallLogAdapter;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
+import java.util.Map;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * This is the base class for the CallLogCaches.
@@ -31,7 +37,8 @@ import com.android.dialer.util.CallUtil;
  *
  * <p>This is designed with the specific use case of the {@link CallLogAdapter} in mind.
  */
-public abstract class CallLogCache {
+@ThreadSafe
+public class CallLogCache {
   // TODO: Dialer should be fixed so as not to check isVoicemail() so often but at the time of
   // this writing, that was a much larger undertaking than creating this cache.
 
@@ -39,17 +46,18 @@ public abstract class CallLogCache {
 
   private boolean mHasCheckedForVideoAvailability;
   private int mVideoAvailability;
+  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new ArrayMap<>();
 
   public CallLogCache(Context context) {
     mContext = context;
   }
 
-  /** Return the most compatible version of the TelecomCallLogCache. */
-  public static CallLogCache getCallLogCache(Context context) {
-    return new CallLogCacheLollipopMr1(context);
-  }
-
-  public void reset() {
+  public synchronized void reset() {
+    mPhoneAccountLabelCache.clear();
+    mPhoneAccountColorCache.clear();
+    mPhoneAccountCallWithNoteCache.clear();
     mHasCheckedForVideoAvailability = false;
     mVideoAvailability = 0;
   }
@@ -58,8 +66,13 @@ public abstract class CallLogCache {
    * Returns true if the given number is the number of the configured voicemail. To be able to
    * mock-out this, it is not a static method.
    */
-  public abstract boolean isVoicemailNumber(
-      PhoneAccountHandle accountHandle, @Nullable CharSequence number);
+  public synchronized boolean isVoicemailNumber(
+      PhoneAccountHandle accountHandle, @Nullable CharSequence number) {
+    if (TextUtils.isEmpty(number)) {
+      return false;
+    }
+    return TelecomUtil.isVoicemailNumber(mContext, accountHandle, number.toString());
+  }
 
   /**
    * Returns {@code true} when the current sim supports checking video calling capabilities via the
@@ -74,10 +87,26 @@ public abstract class CallLogCache {
   }
 
   /** Extract account label from PhoneAccount object. */
-  public abstract String getAccountLabel(PhoneAccountHandle accountHandle);
+  public synchronized String getAccountLabel(PhoneAccountHandle accountHandle) {
+    if (mPhoneAccountLabelCache.containsKey(accountHandle)) {
+      return mPhoneAccountLabelCache.get(accountHandle);
+    } else {
+      String label = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
+      mPhoneAccountLabelCache.put(accountHandle, label);
+      return label;
+    }
+  }
 
   /** Extract account color from PhoneAccount object. */
-  public abstract int getAccountColor(PhoneAccountHandle accountHandle);
+  public synchronized int getAccountColor(PhoneAccountHandle accountHandle) {
+    if (mPhoneAccountColorCache.containsKey(accountHandle)) {
+      return mPhoneAccountColorCache.get(accountHandle);
+    } else {
+      Integer color = PhoneAccountUtils.getAccountColor(mContext, accountHandle);
+      mPhoneAccountColorCache.put(accountHandle, color);
+      return color;
+    }
+  }
 
   /**
    * Determines if the PhoneAccount supports specifying a call subject (i.e. calling with a note)
@@ -86,5 +115,14 @@ public abstract class CallLogCache {
    * @param accountHandle The PhoneAccount handle.
    * @return {@code true} if calling with a note is supported, {@code false} otherwise.
    */
-  public abstract boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle);
+  public synchronized boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle) {
+    if (mPhoneAccountCallWithNoteCache.containsKey(accountHandle)) {
+      return mPhoneAccountCallWithNoteCache.get(accountHandle);
+    } else {
+      Boolean supportsCallWithNote =
+          PhoneAccountUtils.getAccountSupportsCallSubject(mContext, accountHandle);
+      mPhoneAccountCallWithNoteCache.put(accountHandle, supportsCallWithNote);
+      return supportsCallWithNote;
+    }
+  }
 }

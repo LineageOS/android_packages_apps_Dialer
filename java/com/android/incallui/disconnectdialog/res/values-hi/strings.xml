@@ -17,12 +17,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for incall_enable_wifi_calling_button (3295230556186542328) -->
-    <skip />
-    <!-- no translation found for video_call_not_available_title (987490011944013201) -->
-    <skip />
-    <!-- no translation found for video_call_not_available_message (2284146863894603221) -->
-    <skip />
-    <!-- no translation found for voice_call (6748636104112578475) -->
-    <skip />
+    <string name="incall_enable_wifi_calling_button" msgid="3295230556186542328">"सक्षम करें"</string>
+    <string name="video_call_not_available_title" msgid="987490011944013201">"इस समय वीडियो कॉलिंग की सुविधा उपलब्ध नहीं है"</string>
+    <string name="video_call_not_available_message" msgid="2284146863894603221">"बाद में दोबारा कॉल करने की कोशिश करें या कॉल को वॉइस कॉल के रूप में जारी रखें."</string>
+    <string name="voice_call" msgid="6748636104112578475">"वॉइस कॉल"</string>
 </resources>

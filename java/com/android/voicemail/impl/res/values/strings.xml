@@ -107,4 +107,8 @@
   <string name="change_pin_succeeded">Voicemail PIN updated</string>
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
   <string name="change_pin_system_error">Unable to set PIN</string>
+
+  <string name="vvm_config_override_load_current_key" translatable="false">vvm_config_override_load_current</string>
+  <string name="vvm_config_override_enabled_key" translatable="false">vvm_config_override_enabled</string>
+
 </resources>

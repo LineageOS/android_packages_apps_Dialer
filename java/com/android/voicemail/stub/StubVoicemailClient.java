@@ -18,6 +18,9 @@ package com.android.voicemail.stub;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.voicemail.VoicemailClient;
@@ -81,4 +84,19 @@ public final class StubVoicemailClient implements VoicemailClient {
   public boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle) {
     return false;
   }
+
+  @Override
+  public void showConfigUi(@NonNull Context context) {}
+
+  @Override
+  public PersistableBundle getConfig(
+      @NonNull Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
+    return new PersistableBundle();
+  }
+
+  @Override
+  public void onBoot(@NonNull Context context) {}
+
+  @Override
+  public void onShutdown(@NonNull Context context) {}
 }

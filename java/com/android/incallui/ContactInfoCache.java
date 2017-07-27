@@ -266,6 +266,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     cce.userType = info.userType;
     cce.originalPhoneNumber = info.phoneNumber;
     cce.shouldShowLocation = info.shouldShowGeoDescription;
+    cce.isEmergencyNumber = info.isEmergencyNumber();
+    cce.isVoicemailNumber = info.isVoiceMailNumber();
 
     if (info.contactExists) {
       cce.contactLookupResult = ContactLookupResult.Type.LOCAL_CONTACT;
@@ -428,6 +430,19 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
             + "; didLocalLookup = "
             + didLocalLookup);
 
+    ContactCacheEntry existingCacheEntry = mInfoMap.get(callId);
+    Log.d(TAG, "Existing cacheEntry in hashMap " + existingCacheEntry);
+
+    // Mark it as emergency/voicemail if the cache exists and was emergency/voicemail before the
+    // number changed.
+    if (existingCacheEntry != null) {
+      if (existingCacheEntry.isEmergencyNumber) {
+        callerInfo.markAsEmergency(mContext);
+      } else if (existingCacheEntry.isVoicemailNumber) {
+        callerInfo.markAsVoiceMail(mContext);
+      }
+    }
+
     int presentationMode = numberPresentation;
     if (callerInfo.contactExists
         || callerInfo.isEmergencyNumber()
@@ -438,9 +453,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     // We always replace the entry. The only exception is the same photo case.
     ContactCacheEntry cacheEntry = buildEntry(mContext, callerInfo, presentationMode);
     cacheEntry.queryId = queryToken.mQueryId;
-
-    ContactCacheEntry existingCacheEntry = mInfoMap.get(callId);
-    Log.d(TAG, "Existing cacheEntry in hashMap " + existingCacheEntry);
 
     if (didLocalLookup) {
       if (cacheEntry.displayPhotoUri != null) {
@@ -704,6 +716,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     boolean shouldShowLocation;
 
     boolean isBusiness;
+    boolean isEmergencyNumber;
+    boolean isVoicemailNumber;
 
     @Override
     public String toString() {
@@ -743,6 +757,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
           + originalPhoneNumber
           + ", shouldShowLocation="
           + shouldShowLocation
+          + ", isEmergencyNumber="
+          + isEmergencyNumber
+          + ", isVoicemailNumber="
+          + isVoicemailNumber
           + '}';
     }
   }

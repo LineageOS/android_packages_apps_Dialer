@@ -100,7 +100,7 @@
     <string name="description_video_call" msgid="3738199365585751727">"Videopoziv."</string>
     <string name="description_send_text_message" msgid="8450269896765568596">"Pošalji SMS kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"Nepreslušana govorna pošta"</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Pokreni glasovnu pretragu"</string>
+    <string name="description_start_voice_search" msgid="8380022725973015261">"Pokreni glasovno pretraživanje"</string>
     <string name="menu_callNumber" msgid="1540773545517152514">"Pozovi <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="voicemail" msgid="8899540969000957954">"Govorna pošta"</string>
     <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> sek."</string>
@@ -127,7 +127,7 @@
     <string name="meid" msgid="3333779521535224028">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6205424276735652071">"Učitavanje sa SIM kartice…"</string>
     <string name="simContacts_title" msgid="7961069730386378887">"Kontakti sa SIM kartice"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Glasovna pretraga nije dostupna"</string>
+    <string name="voice_search_not_available" msgid="6546240433719732905">"Glasovno pretraživanje nije dostupno"</string>
     <string name="call_not_available" msgid="7850148370757361155">"Nije moguće uputiti poziv jer je aplikacija Telefon onemogućena."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Traži kontakte"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"Dodajte broj ili tražite kontakte"</string>
@@ -157,7 +157,7 @@
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Dodaj u favorite"</string>
     <string name="contact_tooltip" msgid="8871614660967439999">"Dodirnite sliku da vidite sve brojeve ili dodirnite i držite da promijenite raspored."</string>
     <string name="remove_contact" msgid="2353580570488923668">"Ukloni"</string>
-    <string name="select_all" msgid="408601760696146245">"Izaberi sve"</string>
+    <string name="select_all" msgid="408601760696146245">"Odaberi sve"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"Videopoziv"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"Pošalji poruku"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"Detalji o pozivu"</string>

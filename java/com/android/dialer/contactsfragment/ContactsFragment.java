@@ -170,6 +170,10 @@ public class ContactsFragment extends Fragment
     fastScroller.updateContainerAndScrollBarPosition(recyclerView);
     int firstVisibleItem = manager.findFirstVisibleItemPosition();
     int firstCompletelyVisible = manager.findFirstCompletelyVisibleItemPosition();
+    if (firstCompletelyVisible == RecyclerView.NO_POSITION) {
+      // No items are visible, so there are no headers to update.
+      return;
+    }
     String anchoredHeaderString = adapter.getHeaderString(firstCompletelyVisible);
 
     // If the user swipes to the top of the list very quickly, there is some strange behavior

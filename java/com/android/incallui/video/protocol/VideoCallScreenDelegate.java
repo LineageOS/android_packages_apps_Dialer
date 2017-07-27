@@ -37,7 +37,7 @@ public interface VideoCallScreenDelegate {
 
   void onCameraPermissionGranted();
 
-  boolean shouldShowCameraPermissionDialog();
+  boolean shouldShowCameraPermissionToast();
 
   void onCameraPermissionDialogShown();
 
