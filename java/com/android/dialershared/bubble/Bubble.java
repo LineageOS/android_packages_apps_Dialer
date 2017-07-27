@@ -102,7 +102,7 @@ public class Bubble {
 
   private final Handler handler = new Handler();
 
-  private ViewHolder viewHolder;
+  @VisibleForTesting ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
@@ -350,8 +350,15 @@ public class Bubble {
                       public boolean onPreDraw() {
                         primaryButton.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                        // Prepare and capture end values
+                        // Prepare and capture end values, always use the size of primaryText since
+                        // its invisibility makes primaryButton smaller than expected
                         TransitionValues endValues = new TransitionValues();
+                        endValues.values.put(
+                            ChangeOnScreenBounds.PROPNAME_WIDTH,
+                            viewHolder.getPrimaryText().getWidth());
+                        endValues.values.put(
+                            ChangeOnScreenBounds.PROPNAME_HEIGHT,
+                            viewHolder.getPrimaryText().getHeight());
                         endValues.view = primaryButton;
                         transition.addTarget(endValues.view);
                         transition.captureEndValues(endValues);
@@ -681,7 +688,8 @@ public class Bubble {
     windowManager.updateViewLayout(getRootView(), windowParams);
   }
 
-  private class ViewHolder {
+  @VisibleForTesting
+  class ViewHolder {
 
     public static final int CHILD_INDEX_ICON = 0;
     public static final int CHILD_INDEX_TEXT = 1;
