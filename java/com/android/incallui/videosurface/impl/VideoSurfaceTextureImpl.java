@@ -67,9 +67,6 @@ public class VideoSurfaceTextureImpl implements VideoSurfaceTexture {
         "VideoSurfaceTextureImpl.setSurfaceDimensions",
         "surfaceDimensions: " + surfaceDimensions + " " + toString());
     this.surfaceDimensions = surfaceDimensions;
-    if (surfaceDimensions != null && savedSurfaceTexture != null) {
-      savedSurfaceTexture.setDefaultBufferSize(surfaceDimensions.x, surfaceDimensions.y);
-    }
   }
 
   @Override

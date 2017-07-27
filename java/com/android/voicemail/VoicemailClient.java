@@ -18,7 +18,10 @@ package com.android.voicemail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -50,6 +53,12 @@ public interface VoicemailClient {
    */
   String ACTION_SHOW_LEGACY_VOICEMAIL =
       "com.android.voicemail.VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL";
+
+  /**
+   * Secret code to launch the voicemail config activity intended for OEMs and Carriers. {@code
+   * *#*#VVMCONFIG#*#*}
+   */
+  String VOICEMAIL_SECRET_CODE = "886266344";
 
   /**
    * Whether the visual voicemail service is enabled for the {@code phoneAccountHandle}. "Enable"
@@ -122,4 +131,21 @@ public interface VoicemailClient {
    * provisioning. Being "activated" means all setup are completed, and VVM is expected to work.
    */
   boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle);
+
+  /**
+   * Called when {@link #VOICEMAIL_SECRET_CODE} is dialed. {@code context} will be a broadcast
+   * receiver context.
+   */
+  @MainThread
+  void showConfigUi(@NonNull Context context);
+
+  @NonNull
+  PersistableBundle getConfig(
+      @NonNull Context context, @Nullable PhoneAccountHandle phoneAccountHandle);
+
+  @MainThread
+  void onBoot(@NonNull Context context);
+
+  @MainThread
+  void onShutdown(@NonNull Context context);
 }

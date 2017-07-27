@@ -30,6 +30,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -186,7 +187,7 @@ public class VideoCallPresenter
    */
   public static boolean showOutgoingVideo(
       Context context, int videoState, int sessionModificationState) {
-    if (!VideoUtils.hasCameraPermissionAndAllowedByUser(context)) {
+    if (!VideoUtils.hasCameraPermissionAndShownPrivacyToast(context)) {
       LogUtil.i("VideoCallPresenter.showOutgoingVideo", "Camera permission is disabled by user.");
       return false;
     }
@@ -421,7 +422,7 @@ public class VideoCallPresenter
   @Override
   public void onCameraPermissionGranted() {
     LogUtil.i("VideoCallPresenter.onCameraPermissionGranted", "");
-    VideoUtils.setCameraAllowedByUser(mContext);
+    PermissionsUtil.setCameraPrivacyToastShown(mContext);
     enableCamera(mPrimaryCall.getVideoCall(), isCameraRequired());
     showVideoUi(
         mPrimaryCall.getVideoState(),
@@ -839,7 +840,7 @@ public class VideoCallPresenter
       return;
     }
 
-    boolean hasCameraPermission = VideoUtils.hasCameraPermissionAndAllowedByUser(mContext);
+    boolean hasCameraPermission = VideoUtils.hasCameraPermissionAndShownPrivacyToast(mContext);
     if (!hasCameraPermission) {
       videoCall.setCamera(null);
       mPreviewSurfaceState = PreviewSurfaceState.NONE;
@@ -1081,22 +1082,23 @@ public class VideoCallPresenter
   }
 
   @Override
-  public boolean shouldShowCameraPermissionDialog() {
+  public boolean shouldShowCameraPermissionToast() {
     if (mPrimaryCall == null) {
-      LogUtil.i("VideoCallPresenter.shouldShowCameraPermissionDialog", "null call");
+      LogUtil.i("VideoCallPresenter.shouldShowCameraPermissionToast", "null call");
       return false;
     }
     if (mPrimaryCall.didShowCameraPermission()) {
       LogUtil.i(
-          "VideoCallPresenter.shouldShowCameraPermissionDialog", "already shown for this call");
+          "VideoCallPresenter.shouldShowCameraPermissionToast", "already shown for this call");
       return false;
     }
     if (!ConfigProviderBindings.get(mContext)
         .getBoolean("camera_permission_dialog_allowed", true)) {
-      LogUtil.i("VideoCallPresenter.shouldShowCameraPermissionDialog", "disabled by config");
+      LogUtil.i("VideoCallPresenter.shouldShowCameraPermissionToast", "disabled by config");
       return false;
     }
-    return !VideoUtils.hasCameraPermission(mContext) || !VideoUtils.isCameraAllowedByUser(mContext);
+    return !VideoUtils.hasCameraPermission(mContext)
+        || !PermissionsUtil.hasCameraPrivacyToastShown(mContext);
   }
 
   @Override

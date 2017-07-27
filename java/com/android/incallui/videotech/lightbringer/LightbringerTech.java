@@ -91,7 +91,9 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
-  public void onRemovedFromCallList() {}
+  public void onRemovedFromCallList() {
+    lightbringer.unregisterListener(this);
+  }
 
   @Override
   public int getSessionModificationState() {

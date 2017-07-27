@@ -368,17 +368,29 @@ public class CallLogAdapter extends GroupingListAdapter
             }
             expandViewHolderActions(viewHolder);
 
-            if (viewHolder.videoCallButtonView.getVisibility() == View.VISIBLE
-                && LightbringerComponent.get(mActivity)
-                    .getLightbringer()
-                    .getPackageName()
-                    .equals(
-                        ((IntentProvider) viewHolder.videoCallButtonView.getTag())
-                            .getIntent(mActivity)
-                            .getPackage())) {
+            if (isLightbringerCallButtonVisible(viewHolder.videoCallButtonView)) {
               CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
             }
           }
+        }
+
+        private boolean isLightbringerCallButtonVisible(View videoCallButtonView) {
+          if (videoCallButtonView == null) {
+            return false;
+          }
+          if (videoCallButtonView.getVisibility() != View.VISIBLE) {
+            return false;
+          }
+          IntentProvider intentProvider = (IntentProvider) videoCallButtonView.getTag();
+          if (intentProvider == null) {
+            return false;
+          }
+          String packageName =
+              LightbringerComponent.get(mActivity).getLightbringer().getPackageName();
+          if (packageName == null) {
+            return false;
+          }
+          return packageName.equals(intentProvider.getIntent(mActivity).getPackage());
         }
       };
 

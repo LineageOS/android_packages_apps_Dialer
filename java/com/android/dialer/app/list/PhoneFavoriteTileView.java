@@ -62,6 +62,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
   private String mPhoneNumberString;
   private boolean isPinned;
   private boolean isStarred;
+  private int position = -1;
 
   public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -126,8 +127,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         CallSpecificAppData.Builder callSpecificAppData =
             CallSpecificAppData.newBuilder()
                 .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
-                .setSpeedDialContactPosition(
-                    ((PhoneFavoriteListView) v.getParent()).getPositionForView(v));
+                .setSpeedDialContactPosition(position);
         if (isStarred) {
           callSpecificAppData.addSpeedDialContactType(SpeedDialContactType.Type.STARRED_CONTACT);
         } else {
@@ -181,5 +181,9 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
   protected boolean isContactPhotoCircular() {
     // Unlike Contacts' tiles, the Dialer's favorites tiles are square.
     return false;
+  }
+
+  public void setPosition(int position) {
+    this.position = position;
   }
 }

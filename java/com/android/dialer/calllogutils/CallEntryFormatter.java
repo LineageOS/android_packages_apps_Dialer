@@ -95,9 +95,29 @@ public class CallEntryFormatter {
       // example output: "1s"
       formatPattern =
           context.getString(R.string.call_duration_short_format_pattern, "s", secondsString);
+
+      // Temporary work around for a broken Hebrew(iw) translation.
+      if (formatPattern.endsWith("\'\'")) {
+        formatPattern = formatPattern.substring(0, formatPattern.length() - 1);
+      }
     }
-    SimpleDateFormat format = new SimpleDateFormat(formatPattern);
-    return format.format(new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds)));
+
+    // If new translation issues arise, we should catch them here to prevent crashes.
+    try {
+      Date date = new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds));
+      SimpleDateFormat format = new SimpleDateFormat(formatPattern);
+      String duration = format.format(date);
+
+      // SimpleDateFormat cannot display more than 59 minutes, instead it displays MINUTES % 60.
+      // Here we check for that value and replace it with the correct value.
+      if (elapsedSeconds >= TimeUnit.MINUTES.toSeconds(60)) {
+        int minutes = (int) (elapsedSeconds / 60);
+        duration = duration.replaceFirst(Integer.toString(minutes % 60), Integer.toString(minutes));
+      }
+      return duration;
+    } catch (Exception e) {
+      return "";
+    }
   }
 
   private static CharSequence formatDurationA11y(Context context, long elapsedSeconds) {

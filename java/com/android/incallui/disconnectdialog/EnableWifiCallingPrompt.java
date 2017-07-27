@@ -41,7 +41,7 @@ public class EnableWifiCallingPrompt implements DisconnectDialog {
   @Override
   public boolean shouldShow(DisconnectCause disconnectCause) {
     String reason = disconnectCause.getReason();
-    if (reason.startsWith(REASON_WIFI_ON_BUT_WFC_OFF)) {
+    if (reason != null && reason.startsWith(REASON_WIFI_ON_BUT_WFC_OFF)) {
       LogUtil.i(
           "EnableWifiCallingPrompt.shouldShowPrompt",
           "showing prompt for disconnect cause: %s",

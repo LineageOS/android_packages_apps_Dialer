@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_enable_wifi_calling_button" msgid="3295230556186542328">"Ativar"</string>
-    <string name="video_call_not_available_title" msgid="987490011944013201">"Neste momento, as videochamadas não estão disponíveis"</string>
+    <string name="video_call_not_available_title" msgid="987490011944013201">"Neste momento, não é possível efetuar videochamadas"</string>
     <string name="video_call_not_available_message" msgid="2284146863894603221">"Experimente efetuar a videochamada mais tarde ou continue a chamada como uma chamada de voz."</string>
     <string name="voice_call" msgid="6748636104112578475">"Chamada de voz"</string>
 </resources>
