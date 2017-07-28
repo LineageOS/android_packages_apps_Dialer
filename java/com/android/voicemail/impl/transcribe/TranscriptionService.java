@@ -24,7 +24,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.StrictMode;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
@@ -32,6 +31,7 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
+import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,7 +48,6 @@ public class TranscriptionService extends JobService {
   private JobParameters jobParameters;
   private TranscriptionClientFactory clientFactory;
   private TranscriptionConfigProvider configProvider;
-  private StrictMode.VmPolicy originalPolicy;
 
   /** Callback used by a task to indicate it has finished processing its work item */
   interface JobCallback {
@@ -111,8 +110,7 @@ public class TranscriptionService extends JobService {
       LogUtil.i(
           "TranscriptionService.onStartJob",
           "transcription server address: " + configProvider.getServerAddress());
-      originalPolicy = StrictMode.getVmPolicy();
-      StrictMode.enableDefaults();
+      DialerStrictMode.disableDeathPenalty(); // Re-enabled in cleanup.
       jobParameters = params;
       return checkForWork();
     }
@@ -142,10 +140,7 @@ public class TranscriptionService extends JobService {
       executorService.shutdownNow();
       executorService = null;
     }
-    if (originalPolicy != null) {
-      StrictMode.setVmPolicy(originalPolicy);
-      originalPolicy = null;
-    }
+    DialerStrictMode.enableDeathPenalty();
   }
 
   @MainThread

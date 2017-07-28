@@ -1,0 +1,1 @@
+-assumenosideeffects class com.android.dialer.strictmode.DialerStrictMode { public * ; }
