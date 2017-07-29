@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.v4.app.Fragment;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
@@ -101,6 +102,7 @@ public class CallButtonPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
+    Trace.beginSection("CallButtonPresenter.onStateChange");
     if (newState == InCallState.OUTGOING) {
       mCall = callList.getOutgoingCall();
     } else if (newState == InCallState.INCALL) {
@@ -124,6 +126,7 @@ public class CallButtonPresenter
       mCall = null;
     }
     updateUi(newState, mCall);
+    Trace.endSection();
   }
 
   /**

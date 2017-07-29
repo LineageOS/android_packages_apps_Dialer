@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
@@ -112,6 +113,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Override
   protected void onCreate(Bundle icicle) {
+    Trace.beginSection("InCallActivity.onCreate");
     LogUtil.i("InCallActivity.onCreate", "");
     super.onCreate(icicle);
 
@@ -129,6 +131,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
+    Trace.endSection();
   }
 
   @Override
@@ -144,6 +147,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Override
   protected void onStart() {
+    Trace.beginSection("InCallActivity.onStart");
     LogUtil.i("InCallActivity.onStart", "");
     super.onStart();
     isVisible = true;
@@ -154,40 +158,49 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       // Hide the dialpad because there may not be enough room
       showDialpadFragment(false, false);
     }
+    Trace.endSection();
   }
 
   @Override
   protected void onResume() {
+    Trace.beginSection("InCallActivity.onResume");
     LogUtil.i("InCallActivity.onResume", "");
     super.onResume();
     common.onResume();
     PseudoScreenState pseudoScreenState = InCallPresenter.getInstance().getPseudoScreenState();
     pseudoScreenState.addListener(this);
     onPseudoScreenStateChanged(pseudoScreenState.isOn());
+    Trace.endSection();
   }
 
   /** onPause is guaranteed to be called when the InCallActivity goes in the background. */
   @Override
   protected void onPause() {
+    Trace.beginSection("InCallActivity.onPause");
     LogUtil.i("InCallActivity.onPause", "");
     super.onPause();
     common.onPause();
     InCallPresenter.getInstance().getPseudoScreenState().removeListener(this);
+    Trace.endSection();
   }
 
   @Override
   protected void onStop() {
+    Trace.beginSection("InCallActivity.onStop");
     LogUtil.i("InCallActivity.onStop", "");
     super.onStop();
     common.onStop();
     isVisible = false;
+    Trace.endSection();
   }
 
   @Override
   protected void onDestroy() {
+    Trace.beginSection("InCallActivity.onDestroy");
     LogUtil.i("InCallActivity.onDestroy", "");
     super.onDestroy();
     common.onDestroy();
+    Trace.endSection();
   }
 
   @Override
@@ -476,8 +489,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void onPrimaryCallStateChanged() {
+    Trace.beginSection("InCallActivity.onPrimaryCallStateChanged");
     LogUtil.i("InCallActivity.onPrimaryCallStateChanged", "");
     showMainInCallFragment();
+    Trace.endSection();
   }
 
   public void onWiFiToLteHandover(DialerCall call) {
@@ -514,15 +529,18 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   private void showMainInCallFragment() {
+    Trace.beginSection("InCallActivity.showMainInCallFragment");
     // If the activity's onStart method hasn't been called yet then defer doing any work.
     if (!isVisible) {
       LogUtil.i("InCallActivity.showMainInCallFragment", "not visible yet/anymore");
+      Trace.endSection();
       return;
     }
 
     // Don't let this be reentrant.
     if (isInShowMainInCallFragment) {
       LogUtil.i("InCallActivity.showMainInCallFragment", "already in method, bailing");
+      Trace.endSection();
       return;
     }
 
@@ -560,10 +578,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
 
     if (didChangeInCall || didChangeVideo || didChangeAnswer) {
+      Trace.beginSection("InCallActivity.commitTransaction");
       transaction.commitNow();
+      Trace.endSection();
       Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     }
     isInShowMainInCallFragment = false;
+    Trace.endSection();
   }
 
   private ShouldShowUiResult getShouldShowAnswerUi() {

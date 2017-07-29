@@ -430,7 +430,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   private void update() {
-    Trace.beginSection("Update");
+    Trace.beginSection("DialerCall.update");
     int oldState = getState();
     // Clear any cache here that could potentially change on update.
     videoTech = null;
@@ -455,6 +455,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   private void updateFromTelecomCall() {
+    Trace.beginSection("DialerCall.updateFromTelecomCall");
     LogUtil.v("DialerCall.updateFromTelecomCall", mTelecomCall.toString());
 
     mVideoTechManager.dispatchCallStateChanged(mTelecomCall.getState());
@@ -503,6 +504,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         }
       }
     }
+    Trace.endSection();
   }
 
   /**

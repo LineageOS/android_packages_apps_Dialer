@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -247,8 +248,10 @@ public class CallCardPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
+    Trace.beginSection("CallCardPresenter.onStateChange");
     LogUtil.v("CallCardPresenter.onStateChange", "oldState: %s, newState: %s", oldState, newState);
     if (mInCallScreen == null) {
+      Trace.endSection();
       return;
     }
 
@@ -345,6 +348,7 @@ public class CallCardPresenter
             callState != DialerCall.State.INCOMING /* animate */);
 
     maybeSendAccessibilityEvent(oldState, newState, primaryChanged);
+    Trace.endSection();
   }
 
   @Override

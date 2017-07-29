@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -321,11 +322,13 @@ public class InCallPresenter implements CallList.Listener {
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
       FilteredNumberAsyncQueryHandler filteredNumberQueryHandler) {
+    Trace.beginSection("InCallPresenter.setUp");
     if (mServiceConnected) {
       LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
       if (context != mContext || callList != mCallList) {
         throw new IllegalStateException();
       }
+      Trace.endSection();
       return;
     }
 
@@ -371,6 +374,7 @@ public class InCallPresenter implements CallList.Listener {
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
+    Trace.endSection();
   }
 
   /**
@@ -510,6 +514,7 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   public void onCallAdded(final android.telecom.Call call) {
+    Trace.beginSection("InCallPresenter.onCallAdded");
     LatencyReport latencyReport = new LatencyReport(call);
     if (shouldAttemptBlocking(call)) {
       maybeBlockCall(call, latencyReport);
@@ -525,6 +530,7 @@ public class InCallPresenter implements CallList.Listener {
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
     setBoundAndWaitingForOutgoingCall(false, null);
     call.registerCallback(mCallCallback);
+    Trace.endSection();
   }
 
   private boolean shouldAttemptBlocking(android.telecom.Call call) {
@@ -687,11 +693,14 @@ public class InCallPresenter implements CallList.Listener {
    */
   @Override
   public void onCallListChange(CallList callList) {
+    Trace.beginSection("InCallPresenter.onCallListChange");
     if (mInCallActivity != null && mInCallActivity.isInCallScreenAnimating()) {
       mAwaitingCallListUpdate = true;
+      Trace.endSection();
       return;
     }
     if (callList == null) {
+      Trace.endSection();
       return;
     }
 
@@ -741,11 +750,13 @@ public class InCallPresenter implements CallList.Listener {
           callList.getActiveOrBackgroundCall() != null || callList.getOutgoingCall() != null;
       mInCallActivity.dismissKeyguard(hasCall);
     }
+    Trace.endSection();
   }
 
   /** Called when there is a new incoming call. */
   @Override
   public void onIncomingCall(DialerCall call) {
+    Trace.beginSection("InCallPresenter.onIncomingCall");
     InCallState newState = startOrFinishUi(InCallState.INCOMING);
     InCallState oldState = mInCallState;
 
@@ -761,6 +772,7 @@ public class InCallPresenter implements CallList.Listener {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();
     }
+    Trace.endSection();
   }
 
   @Override
