@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.calllog;
 
+import android.app.KeyguardManager;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.media.AudioManager;
@@ -132,7 +133,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   @Override
   public void onVisible() {
-    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageSelected");
+    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onVisible");
     super.onVisible();
     if (getActivity() != null) {
       Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
@@ -145,10 +146,15 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   @Override
   public void onNotVisible() {
-    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onPageUnselected");
+    LogUtil.enterBlock("VisualVoicemailCallLogFragment.onNotVisible");
     super.onNotVisible();
     if (getActivity() != null) {
       getActivity().setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
+      // onNotVisible will be called in the lock screen when the call ends
+      if (!getActivity().getSystemService(KeyguardManager.class).inKeyguardRestrictedInputMode()) {
+        LogUtil.i("VisualVoicemailCallLogFragment.onNotVisible", "clearing all new voicemails");
+        CallLogNotificationsService.markAllNewVoicemailsAsOld(getActivity());
+      }
     }
   }
 }

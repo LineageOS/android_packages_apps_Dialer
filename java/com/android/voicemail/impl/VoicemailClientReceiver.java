@@ -23,6 +23,7 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.sync.UploadTask;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
@@ -31,6 +32,11 @@ public class VoicemailClientReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    if (!VoicemailComponent.get(context).getVoicemailClient().isVoicemailModuleEnabled()) {
+      LogUtil.i(
+          "VoicemailClientReceiver.onReceive", "module disabled, ignoring " + intent.getAction());
+      return;
+    }
     switch (intent.getAction()) {
       case VoicemailClient.ACTION_UPLOAD:
         doUpload(context);

@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"Det finnes ingen apper for det på denne enheten"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"Den pågående samtalen brytes hvis du foretar et WPS-anrop (Wireless Priority Service)."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"Fortsett"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

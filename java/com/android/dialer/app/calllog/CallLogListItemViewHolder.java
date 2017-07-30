@@ -353,7 +353,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       View.OnClickListener expandCollapseListener,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     Resources resources = context.getResources();
-    CallLogCache callLogCache = CallLogCache.getCallLogCache(context);
+    CallLogCache callLogCache = new CallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
         new PhoneCallDetailsHelper(context, resources, callLogCache);
 

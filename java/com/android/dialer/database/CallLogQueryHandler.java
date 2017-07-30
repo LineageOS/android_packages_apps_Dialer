@@ -188,6 +188,20 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
       VoicemailComponent.get(mContext)
           .getVoicemailClient()
           .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
+    } else {
+      // Filter out all Duo entries other than video calls
+      where
+          .append(" AND (")
+          .append(Calls.PHONE_ACCOUNT_COMPONENT_NAME)
+          .append(" IS NULL OR ")
+          .append(Calls.PHONE_ACCOUNT_COMPONENT_NAME)
+          .append(" NOT LIKE 'com.google.android.apps.tachyon%' OR ")
+          .append(Calls.FEATURES)
+          .append(" & ")
+          .append(Calls.FEATURES_VIDEO)
+          .append(" == ")
+          .append(Calls.FEATURES_VIDEO)
+          .append(")");
     }
 
     final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;

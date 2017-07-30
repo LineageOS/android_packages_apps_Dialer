@@ -88,7 +88,7 @@
     <string name="actionIncomingCall" msgid="891346596090030558">"Indgående opkald"</string>
     <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Massehandlingstilstanden startes"</string>
     <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Massehandlingstilstanden blev afsluttet"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Vælg <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Valgt <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Fravalgt <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_log_play_button" msgid="2349845005022431438">"Afspil telefonsvarerbesked"</string>
     <string name="description_view_contact" msgid="3940984937384372665">"Vis kontaktpersonen <xliff:g id="NAME">%1$s</xliff:g>"</string>

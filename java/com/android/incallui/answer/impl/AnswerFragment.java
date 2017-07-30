@@ -718,7 +718,7 @@ public class AnswerFragment extends Fragment
     }
     view.setSystemUiVisibility(flags);
     if (isVideoCall() || isVideoUpgradeRequest()) {
-      if (VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+      if (VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
         if (isSelfManagedCamera()) {
           answerVideoCallScreen = new SelfManagedAnswerVideoCallScreen(getCallId(), this, view);
         } else {

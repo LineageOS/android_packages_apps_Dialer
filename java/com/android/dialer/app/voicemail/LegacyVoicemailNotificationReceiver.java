@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.v4.os.BuildCompat;
@@ -56,7 +57,17 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent intent) {
     LogUtil.i(
         "LegacyVoicemailNotificationReceiver.onReceive", "received legacy voicemail notification");
-    Assert.checkArgument(BuildCompat.isAtLeastO());
+    if (!BuildCompat.isAtLeastO()) {
+      LogUtil.e(
+          "LegacyVoicemailNotificationReceiver.onReceive",
+          "SDK not finalized: SDK_INT="
+              + Build.VERSION.SDK_INT
+              + ", PREVIEW_SDK_INT="
+              + Build.VERSION.PREVIEW_SDK_INT
+              + ", RELEASE="
+              + Build.VERSION.RELEASE);
+      return;
+    }
 
     PhoneAccountHandle phoneAccountHandle =
         Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));

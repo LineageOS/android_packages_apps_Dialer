@@ -18,13 +18,11 @@ package com.android.dialer.callcomposer;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.hardware.Camera.CameraInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +55,6 @@ import com.android.dialer.util.PermissionsUtil;
 public class CameraComposerFragment extends CallComposerFragment
     implements CameraManagerListener, OnClickListener, CameraManager.MediaCallback {
 
-  private static final String CAMERA_PRIVACY_PREF = "camera_privacy_permission";
   private static final String CAMERA_DIRECTION_KEY = "camera_direction";
   private static final String CAMERA_URI_KEY = "camera_key";
 
@@ -134,11 +131,8 @@ public class CameraComposerFragment extends CallComposerFragment
   }
 
   private void setupCamera() {
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-    if (!preferences.getBoolean(CAMERA_PRIVACY_PREF, false)) {
-      Toast.makeText(getContext(), getString(R.string.camera_privacy_text), Toast.LENGTH_LONG)
-          .show();
-      preferences.edit().putBoolean(CAMERA_PRIVACY_PREF, true).apply();
+    if (!PermissionsUtil.hasCameraPrivacyToastShown(getContext())) {
+      PermissionsUtil.showCameraPermissionToast(getContext());
     }
     CameraManager.get().setListener(this);
     preview.setShown();
@@ -399,6 +393,7 @@ public class CameraComposerFragment extends CallComposerFragment
       Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_GRANTED);
       LogUtil.i("CameraComposerFragment.onRequestPermissionsResult", "Permission granted.");
       permissionView.setVisibility(View.GONE);
+      PermissionsUtil.setCameraPrivacyToastShown(getContext());
       setupCamera();
     } else if (requestCode == CAMERA_PERMISSION) {
       Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_DENIED);

@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"उसके लिए इस डिवाइस पर कोई एेप नहीं है"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"WPS कॉल करने से आपका मौजूदा कॉल डिसकनेक्ट हो जाएगा."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"जारी रखें"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

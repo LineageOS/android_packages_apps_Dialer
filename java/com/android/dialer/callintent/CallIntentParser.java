@@ -19,12 +19,13 @@ package com.android.dialer.callintent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.protos.ProtoParsers;
 
 /** Parses data for a call extra to get any dialer specific app data. */
 public class CallIntentParser {
-  static final String EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER =
-      "com.android.dialer.callintent.CALL_SPECIFIC_APP_DATA_WRAPPER";
+
+
   @Nullable
   public static CallSpecificAppData getCallSpecificAppData(@Nullable Bundle extras) {
     if (extras == null) {
@@ -35,19 +36,20 @@ public class CallIntentParser {
       return null;
     }
 
+    if (extras.getByteArray(Constants.EXTRA_CALL_SPECIFIC_APP_DATA) == null) {
+      LogUtil.i(
+          "CallIntentParser.getCallSpecificAppData",
+          "unexpected null byte array for call specific app data proto");
+      return null;
+    }
+
     return ProtoParsers.getTrusted(
-        extras.getBundle(Constants.EXTRA_CALL_SPECIFIC_APP_DATA),
-        EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER,
-        CallSpecificAppData.getDefaultInstance());
+        extras, Constants.EXTRA_CALL_SPECIFIC_APP_DATA, CallSpecificAppData.getDefaultInstance());
   }
 
   public static void putCallSpecificAppData(
       @NonNull Bundle extras, @NonNull CallSpecificAppData callSpecificAppData) {
-    // We wrap our bundle for consumers that may not have access to ProtoParsers in their class
-    // loader. This is necessary to prevent ClassNotFoundException's
-    Bundle wrapperBundle = new Bundle();
-    ProtoParsers.put(wrapperBundle, EXTRA_CALL_SPECIFIC_APP_DATA_WRAPPER, callSpecificAppData);
-    extras.putBundle(Constants.EXTRA_CALL_SPECIFIC_APP_DATA, wrapperBundle);
+    ProtoParsers.put(extras, Constants.EXTRA_CALL_SPECIFIC_APP_DATA, callSpecificAppData);
   }
 
   private CallIntentParser() {}

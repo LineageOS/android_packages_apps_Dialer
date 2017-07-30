@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.voicemailomtp">
+  package="com.android.voicemail.impl">
 
   <application
     android:allowBackup="false"
@@ -116,13 +116,6 @@
       android:exported="false"
       android:windowSoftInputMode="stateVisible|adjustResize">
     </activity>
-
-    <receiver android:name="com.android.voicemail.impl.VoicemailBootReceiver"
-      android:exported="false">
-      <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
-      </intent-filter>
-    </receiver>
 
     <receiver android:name="com.android.voicemail.impl.CarrierVvmPackageInstalledReceiver"
         android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
