@@ -25,6 +25,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
+import android.telecom.PhoneAccountHandle;
+import com.android.dialer.app.voicemail.LegacyVoicemailNotificationReceiver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -68,6 +70,10 @@ public class CallLogNotificationsService extends IntentService {
   public static final String ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION =
       "com.android.dialer.calllog.CALL_BACK_FROM_MISSED_CALL_NOTIFICATION";
 
+  /** Action mark legacy voicemail as dismissed. */
+  public static final String ACTION_LEGACY_VOICEMAIL_DISMISSED =
+      "com.android.dialer.calllog.ACTION_LEGACY_VOICEMAIL_DISMISSED";
+
   /**
    * Extra to be included with {@link #ACTION_INCOMING_POST_CALL} to represent a post call note.
    *
@@ -82,6 +88,8 @@ public class CallLogNotificationsService extends IntentService {
    * <p>It must be a {@link String}
    */
   private static final String EXTRA_POST_CALL_NUMBER = "POST_CALL_NUMBER";
+
+  private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "PHONE_ACCOUNT_HANDLE";
 
   public static final int UNKNOWN_MISSED_CALL_COUNT = -1;
 
@@ -149,6 +157,14 @@ public class CallLogNotificationsService extends IntentService {
     return PendingIntent.getService(context, 0, intent, 0);
   }
 
+  public static PendingIntent createLegacyVoicemailDismissedPendingIntent(
+      @NonNull Context context, PhoneAccountHandle phoneAccountHandle) {
+    Intent intent = new Intent(context, CallLogNotificationsService.class);
+    intent.setAction(ACTION_LEGACY_VOICEMAIL_DISMISSED);
+    intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+    return PendingIntent.getService(context, 0, intent, 0);
+  }
+
   @Override
   protected void onHandleIntent(Intent intent) {
     if (intent == null) {
@@ -173,6 +189,10 @@ public class CallLogNotificationsService extends IntentService {
         Uri voicemailUri = intent.getData();
         VoicemailQueryHandler.markSingleNewVoicemailAsRead(this, voicemailUri);
         VisualVoicemailNotifier.cancelSingleVoicemailNotification(this, voicemailUri);
+        break;
+      case ACTION_LEGACY_VOICEMAIL_DISMISSED:
+        LegacyVoicemailNotificationReceiver.setDismissed(
+            this, intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE), true);
         break;
       case ACTION_INCOMING_POST_CALL:
         String note = intent.getStringExtra(EXTRA_POST_CALL_NOTE);
