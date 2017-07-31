@@ -134,10 +134,9 @@ public class MessageFragment extends Fragment
 
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-    if (getMessage() == null) {
-      return false;
+    if (!TextUtils.isEmpty(getMessage())) {
+      getListener().onMessageFragmentSendMessage(getMessage());
     }
-    getListener().onMessageFragmentSendMessage(getMessage());
     return true;
   }
 
