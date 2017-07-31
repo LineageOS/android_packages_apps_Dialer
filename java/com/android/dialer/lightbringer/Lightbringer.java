@@ -28,6 +28,8 @@ import android.telecom.PhoneAccountHandle;
 
 public interface Lightbringer {
 
+  boolean isEnabled();
+
   @MainThread
   boolean isReachable(@NonNull Context context, @Nullable String number);
 
