@@ -16,14 +16,21 @@
 
 package com.android.incallui.spam;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Icon;
+import android.os.Build.VERSION_CODES;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
@@ -31,17 +38,23 @@ import android.text.TextUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorFactory;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.Spam;
+import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.R;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CallHistoryStatus;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -53,15 +66,67 @@ public class SpamCallListListener implements CallList.Listener {
 
   private final Context context;
   private final Random random;
+  private final DialerExecutorFactory dialerExecutorFactory;
 
-  public SpamCallListListener(Context context) {
-    this.context = context;
-    this.random = new Random();
+  public SpamCallListListener(Context context, @NonNull DialerExecutorFactory factory) {
+    this(context, new Random(), factory);
   }
 
-  public SpamCallListListener(Context context, Random rand) {
+  public SpamCallListListener(
+      Context context, Random rand, @NonNull DialerExecutorFactory factory) {
     this.context = context;
     this.random = rand;
+    Assert.isNotNull(factory);
+    this.dialerExecutorFactory = factory;
+  }
+
+  /** Checks if the number is in the call history. */
+  @TargetApi(VERSION_CODES.M)
+  static final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
+
+    private final Context appContext;
+    private final String number;
+    private final String countryIso;
+
+    public NumberInCallHistoryWorker(
+        @NonNull Context appContext, String number, String countryIso) {
+      this.appContext = Assert.isNotNull(appContext);
+      this.number = number;
+      this.countryIso = countryIso;
+    }
+
+    @Override
+    @NonNull
+    @CallHistoryStatus
+    public Integer doInBackground(@Nullable Void input) throws Throwable {
+      String numberToQuery = number;
+      String fieldToQuery = Calls.NUMBER;
+      String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+
+      // If we can normalize the number successfully, look in "normalized_number"
+      // field instead. Otherwise, look for number in "number" field.
+      if (!TextUtils.isEmpty(normalizedNumber)) {
+        numberToQuery = normalizedNumber;
+        fieldToQuery = Calls.CACHED_NORMALIZED_NUMBER;
+      }
+
+      try (Cursor cursor =
+          appContext
+              .getContentResolver()
+              .query(
+                  TelecomUtil.getCallLogUri(appContext),
+                  new String[] {CallLog.Calls._ID},
+                  fieldToQuery + " = ?",
+                  new String[] {numberToQuery},
+                  null)) {
+        return cursor != null && cursor.getCount() > 0
+            ? DialerCall.CALL_HISTORY_STATUS_PRESENT
+            : DialerCall.CALL_HISTORY_STATUS_NOT_PRESENT;
+      } catch (SQLiteException e) {
+        LogUtil.e("NumberInCallHistoryWorker.doInBackground", "query call log error", e);
+        return DialerCall.CALL_HISTORY_STATUS_UNKNOWN;
+      }
+    }
   }
 
   @Override
@@ -70,15 +135,24 @@ public class SpamCallListListener implements CallList.Listener {
     if (TextUtils.isEmpty(number)) {
       return;
     }
-    NumberInCallHistoryTask.Listener listener =
-        new NumberInCallHistoryTask.Listener() {
-          @Override
-          public void onComplete(@CallHistoryStatus int callHistoryStatus) {
-            call.setCallHistoryStatus(callHistoryStatus);
-          }
-        };
-    new NumberInCallHistoryTask(context, listener, number, GeoUtil.getCurrentCountryIso(context))
-        .submitTask();
+
+    String[] deniedPhonePermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            context, PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
+    if (deniedPhonePermissions.length > 0) {
+      LogUtil.i(
+          "NumberInCallHistoryWorker.submitTask",
+          "Need phone permissions: " + Arrays.toString(deniedPhonePermissions));
+      return;
+    }
+
+    NumberInCallHistoryWorker historyTask =
+        new NumberInCallHistoryWorker(context, number, GeoUtil.getCurrentCountryIso(context));
+    dialerExecutorFactory
+        .createNonUiTaskBuilder(historyTask)
+        .onSuccess((result) -> call.setCallHistoryStatus(result))
+        .build()
+        .executeParallel(null);
   }
 
   @Override
