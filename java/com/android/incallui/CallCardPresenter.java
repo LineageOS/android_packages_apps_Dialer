@@ -587,8 +587,8 @@ public class CallCardPresenter
     if (call != null) {
       call.getLogState().contactLookupResult = entry.contactLookupResult;
     }
-    if (entry.contactUri != null) {
-      CallerInfoUtils.sendViewNotification(mContext, entry.contactUri);
+    if (entry.lookupUri != null) {
+      CallerInfoUtils.sendViewNotification(mContext, entry.lookupUri);
     }
   }
 

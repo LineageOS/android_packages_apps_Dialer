@@ -699,8 +699,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     // Note in cache entry whether this is a pending async loading action to know whether to
     // wait for its callback or not.
     boolean hasPendingQuery;
-    /** This will be used for the "view" notification. */
-    public Uri contactUri;
     /** Either a display photo or a thumbnail URI. */
     Uri displayPhotoUri;
 
@@ -741,8 +739,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
           + photo
           + ", isSipCall="
           + isSipCall
-          + ", contactUri="
-          + contactUri
           + ", displayPhotoUri="
           + displayPhotoUri
           + ", contactLookupResult="
