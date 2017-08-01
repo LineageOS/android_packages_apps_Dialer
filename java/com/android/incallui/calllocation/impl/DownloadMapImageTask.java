@@ -50,9 +50,9 @@ class DownloadMapImageTask extends AsyncTask<Location, Void, Drawable> {
 
     try {
       URL mapUrl = new URL(LocationUrlBuilder.getStaticMapUrl(ui.getContext(), locations[0]));
+      TrafficStats.setThreadStatsTag(TrafficStatsTags.DOWNLOAD_LOCATION_MAP_TAG);
       InputStream content = (InputStream) mapUrl.getContent();
 
-      TrafficStats.setThreadStatsTag(TrafficStatsTags.DOWNLOAD_LOCATION_MAP_TAG);
       return Drawable.createFromStream(content, STATIC_MAP_SRC_NAME);
     } catch (Exception ex) {
       LogUtil.e("DownloadMapImageTask.doInBackground", "Exception!!!", ex);
