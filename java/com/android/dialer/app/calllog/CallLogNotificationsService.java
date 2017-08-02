@@ -50,7 +50,8 @@ import com.android.dialer.util.PermissionsUtil;
  */
 public class CallLogNotificationsService extends IntentService {
 
-  private static final String ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD =
+  @VisibleForTesting
+  static final String ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD =
       "com.android.dialer.calllog.ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD";
 
   private static final String ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD =
