@@ -944,12 +944,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     String accountLabel = mCallLogCache.getAccountLabel(accountHandle);
     if (!TextUtils.isEmpty(accountLabel)) {
       SimDetails.Builder simDetails = SimDetails.newBuilder().setNetwork(accountLabel);
-      int color = mCallLogCache.getAccountColor(accountHandle);
-      if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-        simDetails.setColor(R.color.secondary_text_color);
-      } else {
-        simDetails.setColor(color);
-      }
+      simDetails.setColor(mCallLogCache.getAccountColor(accountHandle));
       contact.setSimDetails(simDetails.build());
     }
     return contact.build();
