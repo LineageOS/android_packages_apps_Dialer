@@ -191,6 +191,8 @@ public class InCallPresenter implements CallList.Listener {
   /** Determines if the InCall UI is in fullscreen mode or not. */
   private boolean mIsFullScreen = false;
 
+  private boolean mScreenTimeoutEnabled = true;
+
   private PhoneStateListener mPhoneStateListener =
       new PhoneStateListener() {
         @Override
@@ -400,6 +402,7 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   private void attemptFinishActivity() {
+    mScreenTimeoutEnabled = true;
     final boolean doFinish = (mInCallActivity != null && isActivityStarted());
     LogUtil.i("InCallPresenter.attemptFinishActivity", "Hide in call UI: " + doFinish);
     if (doFinish) {
@@ -1077,6 +1080,7 @@ public class InCallPresenter implements CallList.Listener {
       // TODO(maxwelb) - b/36649622: Investigate this redundant call
       mStatusBarNotifier.updateNotification(mCallList);
     }
+    applyScreenTimeout();
   }
 
   /*package*/
@@ -1590,13 +1594,18 @@ public class InCallPresenter implements CallList.Listener {
 
   public void enableScreenTimeout(boolean enable) {
     LogUtil.v("InCallPresenter.enableScreenTimeout", "enableScreenTimeout: value=" + enable);
+    mScreenTimeoutEnabled = enable;
+    applyScreenTimeout();
+  }
+
+  private void applyScreenTimeout() {
     if (mInCallActivity == null) {
-      LogUtil.e("InCallPresenter.enableScreenTimeout", "InCallActivity is null.");
+      LogUtil.e("InCallPresenter.applyScreenTimeout", "InCallActivity is null.");
       return;
     }
 
     final Window window = mInCallActivity.getWindow();
-    if (enable) {
+    if (mScreenTimeoutEnabled) {
       window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     } else {
       window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

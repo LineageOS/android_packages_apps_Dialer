@@ -867,7 +867,7 @@ public class VideoCallPresenter
         false /* isRemotelyHeld */);
     enableCamera(mVideoCall, false);
     InCallPresenter.getInstance().setFullScreen(false);
-
+    InCallPresenter.getInstance().enableScreenTimeout(false);
     mIsVideoMode = false;
   }
 
