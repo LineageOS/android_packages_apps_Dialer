@@ -82,7 +82,7 @@ public class SpamCallListListener implements CallList.Listener {
 
   /** Checks if the number is in the call history. */
   @TargetApi(VERSION_CODES.M)
-  static final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
+  private final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
 
     private final Context appContext;
     private final String number;
