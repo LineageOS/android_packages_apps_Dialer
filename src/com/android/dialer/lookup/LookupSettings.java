@@ -77,6 +77,12 @@ public final class LookupSettings {
         String provider = getLookupProvider(context,
                 CMSettings.System.PEOPLE_LOOKUP_PROVIDER, PLP_DEFAULT);
 
+        if ("WhitePages".equals(provider)) {
+            CMSettings.System.putString(context.getContentResolver(),
+                    CMSettings.System.PEOPLE_LOOKUP_PROVIDER, PLP_DEFAULT);
+            provider = PLP_DEFAULT;
+        }
+
         return provider;
     }
 
@@ -84,7 +90,8 @@ public final class LookupSettings {
         String provider = getLookupProvider(context,
                 CMSettings.System.REVERSE_LOOKUP_PROVIDER, RLP_DEFAULT);
 
-        if ("Google".equals(provider)) {
+        if ("Google".equals(provider) || "Gebeld".equals(provider) ||
+                "WhitePages".equals(provider) || "WhitePages_CA".equals(provider)) {
             CMSettings.System.putString(context.getContentResolver(),
                     CMSettings.System.REVERSE_LOOKUP_PROVIDER, RLP_DEFAULT);
             provider = RLP_DEFAULT;
