@@ -34,6 +34,11 @@ public class LightbringerStub implements Lightbringer {
   @Inject
   public LightbringerStub() {}
 
+  @Override
+  public boolean isEnabled() {
+    return false;
+  }
+
   @MainThread
   @Override
   public boolean isReachable(@NonNull Context context, @Nullable String number) {
