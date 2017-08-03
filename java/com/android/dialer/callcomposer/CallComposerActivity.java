@@ -670,12 +670,20 @@ public class CallComposerActivity extends AppCompatActivity
                   public void onAnimationStart(Animator animation) {
                     isSendAndCallHidingOrHidden = shouldHide;
                     sendAndCall.setVisibility(View.VISIBLE);
+                    cameraIcon.setVisibility(View.VISIBLE);
+                    galleryIcon.setVisibility(View.VISIBLE);
+                    messageIcon.setVisibility(View.VISIBLE);
                   }
 
                   @Override
                   public void onAnimationEnd(Animator animation) {
                     if (isSendAndCallHidingOrHidden) {
                       sendAndCall.setVisibility(View.INVISIBLE);
+                    } else {
+                      // hide buttons to prevent overdrawing and talkback discoverability
+                      cameraIcon.setVisibility(View.GONE);
+                      galleryIcon.setVisibility(View.GONE);
+                      messageIcon.setVisibility(View.GONE);
                     }
                   }
 
