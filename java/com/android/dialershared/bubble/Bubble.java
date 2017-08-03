@@ -61,6 +61,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialershared.bubble.BubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -418,6 +420,7 @@ public class Bubble {
 
   void primaryButtonClick() {
     if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
+      Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL);
       try {
         currentInfo.getPrimaryIntent().send();
       } catch (CanceledException e) {
@@ -426,6 +429,7 @@ public class Bubble {
       return;
     }
 
+    Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
     doResize(
         () -> {
           onLeftRightSwitch(isDrawingFromRight());

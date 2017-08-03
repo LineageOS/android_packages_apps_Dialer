@@ -122,7 +122,10 @@ public final class LegacyVoicemailNotifier {
             .setSound(pinnedTelephonyManager.getVoicemailRingtoneUri(handle))
             .setOngoing(isOngoing)
             .setOnlyAlertOnce(isRefresh)
-            .setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
+            .setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle))
+            .setDeleteIntent(
+                CallLogNotificationsService.createLegacyVoicemailDismissedPendingIntent(
+                    context, handle));
 
     if (pinnedTelephonyManager.isVoicemailVibrationEnabled(handle)) {
       builder.setDefaults(Notification.DEFAULT_VIBRATE);

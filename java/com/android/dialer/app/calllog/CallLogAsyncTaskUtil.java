@@ -66,9 +66,8 @@ public class CallLogAsyncTaskUtil {
                     .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null)
                 > 0) {
               uploadVoicemailLocalChangesToServer(context);
+              CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
             }
-
-            CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
             return null;
           }
         });

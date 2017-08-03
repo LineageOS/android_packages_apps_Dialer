@@ -114,7 +114,7 @@ public class CallList implements DialerCallDelegate {
 
   public void onCallAdded(
       final Context context, final android.telecom.Call telecomCall, LatencyReport latencyReport) {
-    Trace.beginSection("onCallAdded");
+    Trace.beginSection("CallList.onCallAdded");
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
     logSecondIncomingCall(context, call);
@@ -123,6 +123,7 @@ public class CallList implements DialerCallDelegate {
     manager.registerCapabilitiesListener(call);
     manager.registerStateChangedListener(call);
 
+    Trace.beginSection("checkSpam");
     final DialerCallListenerImpl dialerCallListener = new DialerCallListenerImpl(call);
     call.addListener(dialerCallListener);
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
@@ -169,7 +170,9 @@ public class CallList implements DialerCallDelegate {
 
       updateUserMarkedSpamStatus(call, context, number, dialerCallListener);
     }
+    Trace.endSection();
 
+    Trace.beginSection("checkBlock");
     FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
         new FilteredNumberAsyncQueryHandler(context);
 
@@ -185,6 +188,7 @@ public class CallList implements DialerCallDelegate {
         },
         call.getNumber(),
         GeoUtil.getCurrentCountryIso(context));
+    Trace.endSection();
 
     if (call.getState() == DialerCall.State.INCOMING
         || call.getState() == DialerCall.State.CALL_WAITING) {
@@ -353,6 +357,7 @@ public class CallList implements DialerCallDelegate {
 
   /** Called when a single call has changed. */
   private void onIncoming(DialerCall call) {
+    Trace.beginSection("CallList.onIncoming");
     if (updateCallInMap(call)) {
       LogUtil.i("CallList.onIncoming", String.valueOf(call));
     }
@@ -360,6 +365,7 @@ public class CallList implements DialerCallDelegate {
     for (Listener listener : mListeners) {
       listener.onIncomingCall(call);
     }
+    Trace.endSection();
   }
 
   public void addListener(@NonNull Listener listener) {
@@ -570,6 +576,7 @@ public class CallList implements DialerCallDelegate {
    */
   @VisibleForTesting
   void onUpdateCall(DialerCall call) {
+    Trace.beginSection("CallList.onUpdateCall");
     LogUtil.d("CallList.onUpdateCall", String.valueOf(call));
     if (!mCallById.containsKey(call.getId()) && call.isExternalCall()) {
       // When a regular call becomes external, it is removed from the call list, and there may be
@@ -582,6 +589,7 @@ public class CallList implements DialerCallDelegate {
     if (updateCallInMap(call)) {
       LogUtil.i("CallList.onUpdateCall", String.valueOf(call));
     }
+    Trace.endSection();
   }
 
   /**
@@ -606,6 +614,7 @@ public class CallList implements DialerCallDelegate {
    * @return false if no call previously existed and no call was added, otherwise true.
    */
   private boolean updateCallInMap(DialerCall call) {
+    Trace.beginSection("CallList.updateCallInMap");
     Objects.requireNonNull(call);
 
     boolean updated = false;
@@ -635,6 +644,7 @@ public class CallList implements DialerCallDelegate {
       updated = true;
     }
 
+    Trace.endSection();
     return updated;
   }
 
@@ -764,7 +774,7 @@ public class CallList implements DialerCallDelegate {
 
     @Override
     public void onDialerCallUpdate() {
-      Trace.beginSection("onUpdate");
+      Trace.beginSection("CallList.onDialerCallUpdate");
       onUpdateCall(mCall);
       notifyGenericListeners();
       Trace.endSection();
