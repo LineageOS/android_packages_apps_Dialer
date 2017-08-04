@@ -41,7 +41,7 @@ final class RemoteContactsCursorLoader extends CursorLoader {
   RemoteContactsCursorLoader(Context context, String query, Directory directory) {
     super(
         context,
-        getContentFilterUri(query, directory.id),
+        getContentFilterUri(query, directory.getId()),
         Projections.PHONE_PROJECTION,
         IGNORE_NUMBER_TOO_LONG_CLAUSE,
         null,
