@@ -60,6 +60,23 @@ public class QueryFilteringUtil {
     return queryIndex == query.length();
   }
 
+  /**
+   * Returns true if the subparts of the name (split by white space) begin with the query.
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>#nameContainsQuery("b", "Brandon") returns true
+   *   <li>#nameContainsQuery("o", "Bob") returns false
+   *   <li>#nameContainsQuery("o", "Bob Olive") returns true
+   * </ul>
+   */
+  public static boolean nameContainsQuery(String query, String name) {
+    return Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()))
+        .matcher(name.toLowerCase())
+        .find();
+  }
+
   /** @return true if the number belongs to the query. */
   public static boolean numberMatchesNumberQuery(String query, String number) {
     return PhoneNumberUtils.isGlobalPhoneNumber(query)

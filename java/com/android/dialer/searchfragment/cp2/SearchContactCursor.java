@@ -142,7 +142,7 @@ public final class SearchContactCursor implements Cursor {
       if (TextUtils.isEmpty(query)
           || QueryFilteringUtil.nameMatchesT9Query(query, previousName)
           || QueryFilteringUtil.numberMatchesNumberQuery(query, previousMostQualifiedNumber)
-          || previousName.contains(query)) {
+          || QueryFilteringUtil.nameContainsQuery(query, previousName)) {
         queryFilteredPositions.add(previousMostQualifiedPosition);
       }
     }
