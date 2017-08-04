@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"Không có ứng dụng nào cho thao tác đó trên thiết bị này"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"Việc thực hiện cuộc gọi WPS sẽ ngắt kết nối cuộc gọi hiện có của bạn."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"Tiếp tục"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

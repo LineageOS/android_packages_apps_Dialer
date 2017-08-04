@@ -7,7 +7,6 @@ option optimize_for = LITE_RUNTIME;
 
 
 
-
 message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
@@ -49,7 +48,6 @@ message DialerImpression {
     // This happens when the user had initially blocked a number and also claimed the number was
     // spam and had now proceeded to undo that.
     REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER = 1009
-
       ;
 
     // A number that was identified as spam and the user proceeded to block it. However this
@@ -65,12 +63,10 @@ message DialerImpression {
     // the number via call log. This is for case where the user wants to block a number and also
     // report it as spam
     REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG = 1011
-
       ;
 
     // User made it to the last step and actually blocked the number
     USER_ACTION_BLOCKED_NUMBER = 1012
-
       ;
 
     // User made it to the last step and actually unblocked the number
@@ -93,19 +89,16 @@ message DialerImpression {
 
     // User added the number to contacts from the after call notification
     SPAM_AFTER_CALL_NOTIFICATION_ADD_TO_CONTACTS = 1019
-
       ;
 
     // User marked the number as spam on the after call notification flow
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM = 1020
-
       ;
 
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_NOT_SPAM_AND_BLOCKED = 1021;
 
     // User reported the number as not spam
     SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM = 1022
-
       ;
 
     // User dismissed the spam notification
@@ -127,7 +120,6 @@ message DialerImpression {
     // able to stitch different types of events if they make sense e.g user pressed a speaker button
     // and we want to associate that to a call event
     USER_PARTICIPATED_IN_A_CALL = 1028
-
       ;
 
     // Incoming call is a spam call
@@ -160,54 +152,44 @@ message DialerImpression {
 
     // User deleted a call log entry
     USER_DELETED_CALL_LOG_ITEM = 1048
-
       ;
 
     // User tapped on "Send a message"
     CALL_LOG_SEND_MESSAGE = 1049
-
       ;
 
     // User tapped on "Add to contact"
     CALL_LOG_ADD_TO_CONTACT = 1050
-
       ;
 
     // User tapped on "Create new contact"
     CALL_LOG_CREATE_NEW_CONTACT = 1051
-
       ;
 
     // User deleted an entry from the voicemail tab
     VOICEMAIL_DELETE_ENTRY = 1052
-
       ;
 
     // Voicemail call log entry was expanded. Could be either if the user tapped the voicemail
     // call log entry or pressed the play button when the voicemail call log entry was not expanded
     VOICEMAIL_EXPAND_ENTRY = 1053
-
       ;
 
     // The play button for voicemail call log entry was tapped directly (i.e when the voicemail
     // call log entry was not expanded and the playbutton was tapped)
     VOICEMAIL_PLAY_AUDIO_DIRECTLY= 1054
-
       ;
 
     // The play button after expanding the voicemail call log entry was tapped
     VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY= 1055
-
       ;
 
     // Incoming call was rejected from the notifications
     REJECT_INCOMING_CALL_FROM_NOTIFICATION= 1056
-
       ;
 
     // Incoming call was rejected from the answer screen including rejecting via sms and talkback
     REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN= 1057
-
       ;
 
     // User tapped block and spam buttons in context menu, same as buttons in
@@ -380,19 +362,14 @@ message DialerImpression {
     EMERGENCY_LAUNCHED_MAP = 1173;
 
     VIDEO_CALL_UPGRADE_REQUESTED = 1174
-
         ;
     VIDEO_CALL_REQUEST_ACCEPTED = 1175
-
         ;
     VIDEO_CALL_REQUEST_ACCEPTED_AS_AUDIO = 1176
-
         ;
     VIDEO_CALL_REQUEST_DECLINED = 1177
-
         ;
     VIDEO_CALL_REQUEST_RECEIVED = 1178
-
         ;
 
     RCS_VIDEO_SHARE_UPGRADE_REQUESTED = 1179;

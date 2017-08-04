@@ -21,15 +21,17 @@ import android.provider.VoicemailContract.Status;
 import com.android.dialer.database.VoicemailStatusQuery;
 
 /**
- * Interface used by the call log UI to determine what user message, if any, related to voicemail
+ * Utility used by the call log UI to determine what user message, if any, related to voicemail
  * source status needs to be shown. The messages are returned in the order of importance.
  *
- * <p>The implementation of this interface interacts with the voicemail content provider to fetch
- * statuses of all the registered voicemail sources and determines if any status message needs to be
- * shown. The user of this interface must observe/listen to provider changes and invoke this class
- * to check if any message needs to be shown.
+ * <p>This class interacts with the voicemail content provider to fetch statuses of all the
+ * registered voicemail sources and determines if any status message needs to be shown. The user of
+ * this class must observe/listen to provider changes and invoke this class to check if any message
+ * needs to be shown.
  */
-public class VoicemailStatusHelper {
+public final class VoicemailStatusHelper {
+
+  private VoicemailStatusHelper() {}
 
   /**
    * Returns the number of active voicemail sources installed.
@@ -39,7 +41,7 @@ public class VoicemailStatusHelper {
    * @param cursor The caller is responsible for the life cycle of the cursor and resetting the
    *     position
    */
-  public int getNumberActivityVoicemailSources(Cursor cursor) {
+  public static int getNumberActivityVoicemailSources(Cursor cursor) {
     int count = 0;
     if (!cursor.moveToFirst()) {
       return 0;
@@ -60,8 +62,10 @@ public class VoicemailStatusHelper {
    * activation is attempted, it will transition into CONFIGURING then into OK or other error state,
    * NOT_CONFIGURED is never set through an error.
    */
-  private boolean isVoicemailSourceActive(Cursor cursor) {
+  private static boolean isVoicemailSourceActive(Cursor cursor) {
     return cursor.getString(VoicemailStatusQuery.SOURCE_PACKAGE_INDEX) != null
+        // getInt() returns 0 when null
+        && !cursor.isNull(VoicemailStatusQuery.CONFIGURATION_STATE_INDEX)
         && cursor.getInt(VoicemailStatusQuery.CONFIGURATION_STATE_INDEX)
             != Status.CONFIGURATION_STATE_NOT_CONFIGURED;
   }

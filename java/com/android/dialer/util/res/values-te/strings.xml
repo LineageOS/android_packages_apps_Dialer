@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"ఈ పరికరంలో దాని కోసం అనువర్తనం ఏదీ లేదు"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"WPS కాల్ చేయడం వలన మీరు ప్రస్తుతం మాట్లాడుతున్న కాల్ డిస్‌కనెక్ట్ అవుతుంది."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"కొనసాగించు"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

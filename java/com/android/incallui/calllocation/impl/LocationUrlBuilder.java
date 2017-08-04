@@ -134,7 +134,7 @@ class LocationUrlBuilder {
         url += String.format(Locale.US, "(%s)", addressLine1.toString());
       }
     } else {
-      // TODO(mdooley): i18n
+      // TODO: i18n
       url +=
           String.format(
               Locale.US,

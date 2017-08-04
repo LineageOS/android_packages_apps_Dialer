@@ -67,7 +67,7 @@ public final class SearchContactCursor implements Cursor {
    * @param query to filter cursor results.
    */
   public SearchContactCursor(Cursor cursor, @Nullable String query) {
-    // TODO(calderwoodra) investigate copying this into a MatrixCursor and holding in memory
+    // TODO investigate copying this into a MatrixCursor and holding in memory
     this.cursor = cursor;
     filter(query);
   }

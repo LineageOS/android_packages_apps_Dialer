@@ -143,7 +143,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    // TODO(zachh): Complete implementation.
+    // TODO: Complete implementation.
     ContentValues coalescedValues =
         new RowCombiner(individualRowsSortedByTimestampDesc)
             .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
@@ -182,7 +182,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
         new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
 
-    // TODO(zachh): Really should be getting last 1000 by timestamp, not by last modified.
+    // TODO: Really should be getting last 1000 by timestamp, not by last modified.
     try (Cursor cursor =
         appContext
             .getContentResolver()

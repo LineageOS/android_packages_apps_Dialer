@@ -33,8 +33,6 @@
     <string name="description_call_composer_camera" msgid="388088245837924914">"એક ચિત્ર લો"</string>
     <string name="description_call_composer_photo" msgid="6449208314952246454">"ફોટો પસંદ કરો"</string>
     <string name="description_call_composer_message" msgid="9132362446000908550">"એક સંદેશ મોકલો"</string>
-    <!-- no translation found for image_sent_messages (6520870555040566229) -->
-    <skip />
-    <!-- no translation found for message_sent_messages (6286576951151541098) -->
-    <skip />
+    <string name="image_sent_messages" msgid="6520870555040566229">"Messages મારફતે ફોટો મોકલ્યો"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Messages મારફતે સંદેશ મોકલ્યો"</string>
 </resources>

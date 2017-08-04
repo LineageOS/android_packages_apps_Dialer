@@ -68,7 +68,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     long startTime = System.currentTimeMillis();
     db.execSQL(CREATE_TABLE_SQL);
     db.execSQL(String.format(Locale.US, CREATE_TRIGGER_SQL, maxRows, maxRows));
-    // TODO(zachh): Consider logging impression.
+    // TODO: Consider logging impression.
     LogUtil.i(
         "AnnotatedCallLogDatabaseHelper.onCreate",
         "took: %dms",

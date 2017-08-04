@@ -76,7 +76,7 @@
     <string name="incall_error_out_of_service" msgid="5027539470868484145">"Sieć komórkowa jest niedostępna."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="293343960362630925">"Aby zadzwonić, wybierz prawidłowy numer."</string>
     <string name="incall_error_call_failed" msgid="5560521345862514733">"Nie można dzwonić."</string>
-    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Rozpoczynanie sekwencji MMI..."</string>
+    <string name="incall_status_dialed_mmi" msgid="3341365334358686873">"Uruchamiam sekwencję MMI..."</string>
     <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Usługa nie jest obsługiwana."</string>
     <string name="incall_error_supp_service_switch" msgid="759346040980722884">"Nie można przełączyć połączeń."</string>
     <string name="incall_error_supp_service_separate" msgid="5250304200901095519">"Nie można rozdzielić połączenia."</string>

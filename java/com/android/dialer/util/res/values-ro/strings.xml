@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"Pe dispozitiv nu există nicio aplicație pentru această acțiune"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"Dacă inițiați un apel WPS, apelul existent va fi deconectat."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"Continuați"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

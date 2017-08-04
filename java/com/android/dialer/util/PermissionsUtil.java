@@ -38,6 +38,7 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.widget.Toast;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,7 @@ import java.util.List;
 /** Utility class to help with runtime permissions. */
 public class PermissionsUtil {
 
+  private static final String PREFERENCE_CAMERA_ALLOWED_BY_USER = "camera_allowed_by_user";
   private static final String PERMISSION_PREFERENCE = "dialer_permissions";
   private static final String CEQUINT_PERMISSION = "com.cequint.ecid.CALLER_ID_LOOKUP";
 
@@ -206,5 +208,29 @@ public class PermissionsUtil {
       }
     }
     return permissionsCurrentlyDenied.toArray(new String[permissionsCurrentlyDenied.size()]);
+  }
+
+  /**
+   * Since we are granted the camera permission automatically as a first-party app, we need to show
+   * a toast to let users know the permission was granted for privacy reasons.
+   *
+   * @return true if we've already shown the camera privacy toast.
+   */
+  public static boolean hasCameraPrivacyToastShown(@NonNull Context context) {
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+        .getBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, false);
+  }
+
+  public static void showCameraPermissionToast(@NonNull Context context) {
+    Toast.makeText(context, context.getString(R.string.camera_privacy_text), Toast.LENGTH_LONG)
+        .show();
+    setCameraPrivacyToastShown(context);
+  }
+
+  public static void setCameraPrivacyToastShown(@NonNull Context context) {
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+        .edit()
+        .putBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, true)
+        .apply();
   }
 }

@@ -20,11 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.PermissionsUtil;
 
 public class VideoUtils {
-
-  private static final String PREFERENCE_CAMERA_ALLOWED_BY_USER = "camera_allowed_by_user";
 
   public static boolean hasSentVideoUpgradeRequest(@SessionModificationState int state) {
     return state == SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE
@@ -37,24 +35,12 @@ public class VideoUtils {
     return state == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
   }
 
-  public static boolean hasCameraPermissionAndAllowedByUser(@NonNull Context context) {
-    return isCameraAllowedByUser(context) && hasCameraPermission(context);
+  public static boolean hasCameraPermissionAndShownPrivacyToast(@NonNull Context context) {
+    return PermissionsUtil.hasCameraPrivacyToastShown(context) && hasCameraPermission(context);
   }
 
   public static boolean hasCameraPermission(@NonNull Context context) {
     return ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
         == PackageManager.PERMISSION_GRANTED;
-  }
-
-  public static boolean isCameraAllowedByUser(@NonNull Context context) {
-    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
-        .getBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, false);
-  }
-
-  public static void setCameraAllowedByUser(@NonNull Context context) {
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
-        .edit()
-        .putBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, true)
-        .apply();
   }
 }

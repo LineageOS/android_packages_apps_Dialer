@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"ບໍ່​ມີ​ແອັ​ບຯ​ສຳ​ລັບ​ສິ່ງນັ້ນ​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ນີ້"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"ການໂທ WPS ຈະຕັດສາຍທີ່ມີຢູ່ແລ້ວຂອງທ່ານ."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"ດຳເນີນການຕໍ່"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

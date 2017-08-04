@@ -259,7 +259,7 @@ public class Vvm3VoicemailMessageCreator {
 
   @NonNull
   private static CharSequence getCustomerSupportString(Context context, int id) {
-    // TODO(twyen): get number based on the country the user is currently in.
+    // TODO: get number based on the country the user is currently in.
     return ContactDisplayUtils.getTtsSpannedPhoneNumber(
         context.getResources(),
         id,

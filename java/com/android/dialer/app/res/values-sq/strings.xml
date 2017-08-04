@@ -236,6 +236,6 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> është jashtë linje dhe nuk mund të kontaktohet"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Rreth"</string>
     <string name="view_conversation" msgid="7895904782094119702">"Shiko"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"Telefonata u fshi. Shiko dhe fshi bashkëngjitjet e ndara gjatë kësaj telefonate te \"Mesazhet\"."</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Telefonatat u fshinë. Shiko dhe fshi bashkëngjitjet e ndara gjatë telefonatave te \"Mesazhet\"."</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"Telefonata u fshi. Shiko dhe fshi bashkëngjitjet e ndara gjatë kësaj telefonate te Messages."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Telefonatat u fshinë. Shiko dhe fshi bashkëngjitjet e ndara gjatë telefonatave te Messages."</string>
 </resources>

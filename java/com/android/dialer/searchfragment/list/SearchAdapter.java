@@ -53,7 +53,7 @@ class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       case RowType.NEARBY_PLACES_HEADER:
         return new HeaderViewHolder(
             LayoutInflater.from(context).inflate(R.layout.header_layout, root, false));
-      case RowType.DIRECTORY_ROW: // TODO(calderwoodra): add directory rows to search
+      case RowType.DIRECTORY_ROW: // TODO: add directory rows to search
       case RowType.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid RowType: " + rowType);

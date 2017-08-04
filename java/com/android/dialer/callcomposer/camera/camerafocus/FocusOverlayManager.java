@@ -389,7 +389,7 @@ public class FocusOverlayManager {
       focusIndicator.showStart();
     } else {
       if (Parameters.FOCUS_MODE_CONTINUOUS_PICTURE.equals(mFocusMode)) {
-        // TODO(blemmon): check HAL behavior and decide if this can be removed.
+        // TODO: check HAL behavior and decide if this can be removed.
         focusIndicator.showSuccess(false);
       } else if (mState == STATE_SUCCESS) {
         focusIndicator.showSuccess(false);

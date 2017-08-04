@@ -499,7 +499,7 @@ public class ExifParser {
       mTiffStream.skip(4);
       return null;
     }
-    // TODO(blemmon): handle numOfComp overflow
+    // TODO: handle numOfComp overflow
     ExifTag tag =
         new ExifTag(
             tagId,

@@ -102,10 +102,7 @@ public class ProximitySensor
     // sensor during incoming call screen. We check hasLiveCall() because a disconnected call
     // can also put the in-call screen in the INCALL state.
     boolean hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
-    boolean isOffhook =
-        InCallState.PENDING_OUTGOING == newState
-            || InCallState.OUTGOING == newState
-            || hasOngoingCall;
+    boolean isOffhook = (InCallState.OUTGOING == newState) || hasOngoingCall;
 
     DialerCall activeCall = callList.getActiveCall();
     boolean isVideoCall = activeCall != null && activeCall.isVideoCall();

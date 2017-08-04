@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/** Favorites fragment. Contents TBD. TODO(calderwoodra) */
+/** Favorites fragment. Contents TBD. TODO */
 public class SpeedDialFragment extends Fragment {
 
   public static SpeedDialFragment newInstance() {
@@ -38,7 +38,7 @@ public class SpeedDialFragment extends Fragment {
   }
 
   public boolean hasFrequents() {
-    // TODO(calderwoodra)
+    // TODO
     return false;
   }
 }

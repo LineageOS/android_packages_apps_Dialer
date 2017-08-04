@@ -77,7 +77,7 @@ public final class MainActivity extends AppCompatActivity implements View.OnClic
       // open contacts
       return true;
     } else {
-      // TODO(calderwoodra) handle other menu items
+      // TODO handle other menu items
       return super.onOptionsItemSelected(item);
     }
   }

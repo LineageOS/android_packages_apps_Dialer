@@ -551,12 +551,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private void bindActionButtons() {
     boolean canPlaceCallToNumber = PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation);
 
+    // Hide the call buttons by default. We then set it to be visible when appropriate below.
+    // This saves us having to remember to set it to GONE in multiple places.
+    callButtonView.setVisibility(View.GONE);
+    videoCallButtonView.setVisibility(View.GONE);
+
     if (isFullyUndialableVoicemail()) {
       // Sometimes the voicemail server will report the message is from some non phone number
       // source. If the number does not contains any dialable digit treat it as it is from a unknown
       // number, remove all action buttons but still show the voicemail playback layout.
-      callButtonView.setVisibility(View.GONE);
-      videoCallButtonView.setVisibility(View.GONE);
       detailsButtonView.setVisibility(View.GONE);
       createNewContactButtonView.setVisibility(View.GONE);
       addToExistingContactButtonView.setVisibility(View.GONE);
@@ -581,16 +584,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    TextView callTypeOrLocationView =
-        ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
-
     if (canPlaceCallToNumber) {
-      // Set up the call button but hide it by default (the primary action is to call so it is
-      // redundant). We then set it to be visible when appropriate below. This saves us having to
-      // remember to set it to GONE in multiple places.
       callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-      callButtonView.setVisibility(View.GONE);
-      callTypeOrLocationView.setVisibility(View.GONE);
     }
 
     if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -599,10 +594,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               TextUtils.expandTemplate(
                   mContext.getString(R.string.call_log_action_call),
                   nameOrNumber == null ? "" : nameOrNumber));
-
+      TextView callTypeOrLocationView =
+          ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
       if (callType == Calls.VOICEMAIL_TYPE && !TextUtils.isEmpty(callTypeOrLocation)) {
         callTypeOrLocationView.setText(callTypeOrLocation);
         callTypeOrLocationView.setVisibility(View.VISIBLE);
+      } else {
+        callTypeOrLocationView.setVisibility(View.GONE);
       }
       callButtonView.setVisibility(View.VISIBLE);
     }
@@ -617,8 +615,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     } else if (lightbringerReady) {
       videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
-    } else {
-      videoCallButtonView.setVisibility(View.GONE);
     }
 
     // For voicemail calls, show the voicemail playback layout; hide otherwise.
@@ -945,12 +941,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     String accountLabel = mCallLogCache.getAccountLabel(accountHandle);
     if (!TextUtils.isEmpty(accountLabel)) {
       SimDetails.Builder simDetails = SimDetails.newBuilder().setNetwork(accountLabel);
-      int color = mCallLogCache.getAccountColor(accountHandle);
-      if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-        simDetails.setColor(R.color.secondary_text_color);
-      } else {
-        simDetails.setColor(color);
-      }
+      simDetails.setColor(mCallLogCache.getAccountColor(accountHandle));
       contact.setSimDetails(simDetails.build());
     }
     return contact.build();

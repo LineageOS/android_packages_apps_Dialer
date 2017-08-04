@@ -75,7 +75,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     }
   }
 
-  // TODO(calderwoodra): add on click action to contact.
+  // TODO: add on click action to contact.
   private View getContactView(ViewGroup container) {
     LayoutInflater inflater = LayoutInflater.from(getContext());
     View contactView = inflater.inflate(R.layout.contact_layout, container, false);

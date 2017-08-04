@@ -193,7 +193,7 @@ import java.util.Set;
   private static NotificationChannel newChannel(
       @NonNull Context context, @NonNull String channelId, @Nullable CharSequence nameSuffix) {
     CharSequence name = context.getText(R.string.notification_channel_voicemail);
-    // TODO(sail): Use a string resource template after v10.
+    // TODO: Use a string resource template after v10.
     if (!TextUtils.isEmpty(nameSuffix)) {
       name = TextUtils.concat(name, ": ", nameSuffix);
     }
