@@ -731,6 +731,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         intent.setClassName(servicePackageName, serviceName);
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, RawContacts.CONTENT_ITEM_TYPE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         try {
           context.startService(intent);
         } catch (Exception e) {
