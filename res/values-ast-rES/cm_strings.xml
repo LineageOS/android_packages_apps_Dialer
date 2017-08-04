@@ -62,11 +62,13 @@
   <string name="date_qs_lastquarter">Trimestre caberu</string>
   <string name="date_qs_lastyear">Añu caberu</string>
   <string name="call_stats_date_filter">Axustar rangu de tiempu</string>
+  <string name="call_stats_title_for_number">Esti númberu</string>
   <string name="call_stats_title_of_total">Del total</string>
   <string name="call_stats_title_durations">Duraciones de llamaes</string>
   <string name="call_stats_title_count">Cantidá de llamaes</string>
   <string name="call_stats_title_average_duration">Duración media de llamaes</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">El to rexistru de llamaes nun contién llamada dala nel rangu de tiempu esbilláu.</string>
   <string name="call_recording_category_title">Grabación de llamaes</string>
   <string name="call_recording_format">Formatu d\'audiu</string>
   <!-- Speed Dial -->

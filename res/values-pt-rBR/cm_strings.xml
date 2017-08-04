@@ -86,7 +86,7 @@
   <string name="speed_dial_delete">Apagar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla não atribuída</string>
   <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de discagem rápida atribuída à tecla \'<xliff:g id="number">%s</xliff:g>\'. Deseja atribuir uma ação agora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a discagem rápida, desligue o modo avião</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Deslige o modo avião para usar a discagem rápida</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
   <string name="speed_dial_can_not_be_set">Não é possivel associar uma discagem rápida para essa tecla</string>
   <string name="yes">Sim</string>

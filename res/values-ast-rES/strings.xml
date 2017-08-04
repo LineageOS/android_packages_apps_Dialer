@@ -259,10 +259,12 @@
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
   <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
+  <string name="contact_list_loading">Cargando\u2026</string>
   <!-- The title of a dialog that displays the IMEI of the phone -->
   <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
+  <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM\u2026</string>
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
   <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
@@ -296,6 +298,7 @@
          [CHAR LIMIT=30] -->
   <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+  <string name="migrate_blocked_numbers_dialog_message">Pa protexete meyor, Teléfonu precisa camudar cómo funciona\'l bloquéu. Los tos númberos bloquiaos agora pararán llamaes y SMS, y quiciabes se compartan con otres aplicaciones.</string>
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
   <!-- Do not translate -->
   <string name="migrate_blocked_numbers_dialog_cancel_button">\@android:string/cancel</string>
@@ -452,6 +455,7 @@
          [CHAR LIMIT=NONE] -->
   <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
          [CHAR LIMIT=3] -->
+  <string name="list_delimeter">", "</string>
   <!-- Dialer settings related strings-->
   <!-- Title for "Display options" category, which controls how contacts are shown.
          [CHAR LIMIT=40] -->
@@ -515,11 +519,13 @@
          disabled. Namely, we disable call blocking after an emergency call in case of return
          phone calls made by emergency services. [CHAR LIMIT=64] -->
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
+  <string name="phone_account_settings_label">Cuentes de llamaes</string>
   <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
+  <string name="permission_single_turn_on">Activar</string>
   <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
   <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
