@@ -27,10 +27,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
+import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
+import com.android.dialer.util.ViewUtil;
 
 /** Fragment used for searching contacts. */
 public final class NewSearchFragment extends Fragment implements LoaderCallbacks<Cursor> {
@@ -49,6 +52,8 @@ public final class NewSearchFragment extends Fragment implements LoaderCallbacks
   private final Runnable loadNearbyPlacesRunnable =
       () -> getLoaderManager().restartLoader(NEARBY_PLACES_ID, null, this);
 
+  private Runnable updatePositionRunnable;
+
   @Nullable
   @Override
   public View onCreateView(
@@ -62,6 +67,10 @@ public final class NewSearchFragment extends Fragment implements LoaderCallbacks
 
     getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
     loadNearbyPlacesCursor();
+
+    if (updatePositionRunnable != null) {
+      ViewUtil.doOnPreDraw(view, false, updatePositionRunnable);
+    }
     return view;
   }
 
@@ -100,6 +109,19 @@ public final class NewSearchFragment extends Fragment implements LoaderCallbacks
       adapter.setQuery(query);
       loadNearbyPlacesCursor();
     }
+  }
+
+  public void animatePosition(int start, int end, int duration) {
+    // Called before the view is ready, prepare a runnable to run in onCreateView
+    if (getView() == null) {
+      updatePositionRunnable = () -> animatePosition(start, end, 0);
+      return;
+    }
+    boolean slideUp = start > end;
+    Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT;
+    getView().setTranslationY(start);
+    getView().animate().translationY(end).setInterpolator(interpolator).setDuration(duration);
+    updatePositionRunnable = null;
   }
 
   @Override

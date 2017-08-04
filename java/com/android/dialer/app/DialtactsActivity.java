@@ -678,6 +678,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mListsFragment.addOnPageChangeListener(this);
     } else if (fragment instanceof NewSearchFragment) {
       mNewSearchFragment = (NewSearchFragment) fragment;
+      updateSearchFragmentPosition();
     }
     if (fragment instanceof SearchFragment) {
       final SearchFragment searchFragment = (SearchFragment) fragment;
@@ -951,6 +952,12 @@ public class DialtactsActivity extends TransactionSafeActivity
       // available immediately which is required to update position. By forcing an animation,
       // position will be updated after a delay by when the dialpad height would be available.
       fragment.updatePosition(true /* animate */);
+    } else if (mNewSearchFragment != null) {
+      int animationDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
+      int shadowHeight = getResources().getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
+      int start = isDialpadShown() ? mActionBarHeight - shadowHeight : 0;
+      int end = isDialpadShown() ? 0 : mActionBarHeight - shadowHeight;
+      mNewSearchFragment.animatePosition(start, end, animationDuration);
     }
   }
 
