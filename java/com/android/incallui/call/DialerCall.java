@@ -682,13 +682,23 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public void setState(int state) {
-    mState = state;
-    if (mState == State.INCOMING) {
+    if (state == State.INCOMING) {
       mLogState.isIncoming = true;
-    } else if (mState == State.DISCONNECTED) {
-      mLogState.duration =
+    } else if (state == State.DISCONNECTED) {
+      long newDuration =
           getConnectTimeMillis() == 0 ? 0 : System.currentTimeMillis() - getConnectTimeMillis();
+      if (mState != state) {
+        mLogState.duration = newDuration;
+      } else {
+        LogUtil.i(
+            "DialerCall.setState",
+            "ignoring state transition from DISCONNECTED to DISCONNECTED."
+                + " Duration would have changed from %s to %s",
+            mLogState.duration,
+            newDuration);
+      }
     }
+    mState = state;
   }
 
   public int getNumberPresentation() {

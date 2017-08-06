@@ -89,6 +89,8 @@ public class Bubble {
   private final Context context;
   private final WindowManager windowManager;
 
+  private final Handler handler = new Handler();
+
   private LayoutParams windowParams;
 
   // Initialized in factory method
@@ -101,8 +103,6 @@ public class Bubble {
   private boolean textShowing;
   private boolean hideAfterText;
   private int collapseEndAction;
-
-  private final Handler handler = new Handler();
 
   @VisibleForTesting ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
@@ -240,47 +240,22 @@ public class Bubble {
     updatePrimaryIconAnimation();
   }
 
-  /**
-   * Hide the button if visible. Will run a short exit animation before hiding. If the bubble is
-   * currently showing text, will hide after the text is done displaying. If the bubble is not
-   * visible this method does nothing.
-   */
+  /** Hide the bubble. */
   public void hide() {
-    if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
+    if (hideAfterText) {
+      // hideAndReset() will be called after showing text, do nothing here.
       return;
     }
+    hideHelper(this::defaultAfterHidingAnimation);
+  }
 
-    if (textShowing) {
-      hideAfterText = true;
-      return;
-    }
-
-    if (collapseAnimation != null) {
-      collapseEndAction = CollapseEnd.HIDE;
-      return;
-    }
-
-    if (expanded) {
-      startCollapse(CollapseEnd.HIDE);
-      return;
-    }
-
-    visibility = Visibility.EXITING;
-    exitAnimator =
-        viewHolder
-            .getPrimaryButton()
-            .animate()
-            .setInterpolator(new AnticipateInterpolator())
-            .scaleX(0)
-            .scaleY(0)
-            .withEndAction(
-                () -> {
-                  exitAnimator = null;
-                  windowManager.removeView(viewHolder.getRoot());
-                  visibility = Visibility.HIDDEN;
-                  updatePrimaryIconAnimation();
-                });
-    exitAnimator.start();
+  /** Hide the bubble and reset {@viewHolder} to initial state */
+  public void hideAndReset() {
+    hideHelper(
+        () -> {
+          defaultAfterHidingAnimation();
+          reset();
+        });
   }
 
   /** Returns whether the bubble is currently visible */
@@ -386,7 +361,8 @@ public class Bubble {
         () -> {
           textShowing = false;
           if (hideAfterText) {
-            hide();
+            // Always reset here since text shouldn't keep showing.
+            hideAndReset();
           } else {
             doResize(
                 () -> viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_ICON));
@@ -487,6 +463,48 @@ public class Bubble {
 
   View getRootView() {
     return viewHolder.getRoot();
+  }
+
+  /**
+   * Hide the bubble if visible. Will run a short exit animation and before hiding, and {@code
+   * afterHiding} after hiding. If the bubble is currently showing text, will hide after the text is
+   * done displaying. If the bubble is not visible this method does nothing.
+   */
+  private void hideHelper(Runnable afterHiding) {
+    if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
+      return;
+    }
+
+    if (textShowing) {
+      hideAfterText = true;
+      return;
+    }
+
+    if (collapseAnimation != null) {
+      collapseEndAction = CollapseEnd.HIDE;
+      return;
+    }
+
+    if (expanded) {
+      startCollapse(CollapseEnd.HIDE);
+      return;
+    }
+
+    visibility = Visibility.EXITING;
+    exitAnimator =
+        viewHolder
+            .getPrimaryButton()
+            .animate()
+            .setInterpolator(new AnticipateInterpolator())
+            .scaleX(0)
+            .scaleY(0)
+            .withEndAction(afterHiding);
+    exitAnimator.start();
+  }
+
+  private void reset() {
+    viewHolder = new ViewHolder(viewHolder.getRoot().getContext());
+    update();
   }
 
   private void update() {
@@ -690,6 +708,14 @@ public class Bubble {
       windowParams.flags |= LayoutParams.FLAG_NOT_FOCUSABLE;
     }
     windowManager.updateViewLayout(getRootView(), windowParams);
+  }
+
+  private void defaultAfterHidingAnimation() {
+    exitAnimator = null;
+    windowManager.removeView(viewHolder.getRoot());
+    visibility = Visibility.HIDDEN;
+
+    updatePrimaryIconAnimation();
   }
 
   @VisibleForTesting

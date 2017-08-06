@@ -102,6 +102,14 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     }
   }
 
+  private void hideAndReset() {
+    if (bubble != null) {
+      bubble.hideAndReset();
+    } else {
+      LogUtil.i("ReturnToCallController.reset", "reset() called without calling show()");
+    }
+  }
+
   private void show() {
     if (bubble == null) {
       bubble = startNewBubble();
@@ -141,7 +149,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
       bubble.showText(context.getText(R.string.incall_call_ended));
     }
     if (!hasAnotherCall) {
-      hide();
+      hideAndReset();
     }
   }
 
