@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.compat;
+package com.android.dialer.compat.telephony;
 
 import android.content.Context;
 import android.content.Intent;
