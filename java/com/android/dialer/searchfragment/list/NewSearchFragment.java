@@ -152,9 +152,6 @@ public final class NewSearchFragment extends Fragment
   @Override
   public void onDestroy() {
     super.onDestroy();
-    // close adapters
-    adapter.setNearbyPlacesCursor(null);
-    adapter.setContactsCursor(null);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
   }
 
