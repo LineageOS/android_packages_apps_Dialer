@@ -38,6 +38,7 @@ import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.telecom.TelecomUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -77,7 +78,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
    * Binds the ViewHolder with a cursor from {@link SearchContactsCursorLoader} with the data found
    * at the cursors set position.
    */
-  public void bind(Cursor cursor, String query) {
+  public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
     String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);
@@ -109,17 +110,18 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     }
   }
 
-  private boolean shouldShowPhoto(Cursor cursor) {
+  private boolean shouldShowPhoto(SearchCursor cursor) {
     int currentPosition = cursor.getPosition();
-    if (currentPosition == 0) {
-      return true;
-    } else {
-      String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
-      cursor.moveToPosition(currentPosition - 1);
+    String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    cursor.moveToPosition(currentPosition - 1);
+
+    if (!cursor.isHeader() && !cursor.isBeforeFirst()) {
       String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
       cursor.moveToPosition(currentPosition);
       return !currentLookupKey.equals(previousLookupKey);
     }
+    cursor.moveToPosition(currentPosition);
+    return true;
   }
 
   private static Uri getContactUri(Cursor cursor) {

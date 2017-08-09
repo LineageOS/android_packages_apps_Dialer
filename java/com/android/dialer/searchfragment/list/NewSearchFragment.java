@@ -34,8 +34,10 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
 import com.android.dialer.util.PermissionsUtil;
@@ -72,7 +74,7 @@ public final class NewSearchFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle bundle) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
-    adapter = new SearchAdapter(getContext());
+    adapter = new SearchAdapter(getContext(), new SearchCursorManager());
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -113,10 +115,14 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    if (!(cursor instanceof SearchCursor)) {
+      throw Assert.createIllegalStateFailException("Cursors must implement SearchCursor");
+    }
+
     if (loader instanceof SearchContactsCursorLoader) {
-      adapter.setContactsCursor(cursor);
+      adapter.setContactsCursor((SearchCursor) cursor);
     } else if (loader instanceof NearbyPlacesCursorLoader) {
-      adapter.setNearbyPlacesCursor(cursor);
+      adapter.setNearbyPlacesCursor((SearchCursor) cursor);
     } else {
       throw new IllegalStateException("Invalid loader: " + loader);
     }

@@ -34,12 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Wrapper for a cursor returned by {@link SearchContactsCursorLoader}.
+ * Wrapper for a cursor containing all on device contacts.
  *
  * <p>This cursor removes duplicate phone numbers associated with the same contact and can filter
  * contacts based on a query by calling {@link #filter(String)}.
  */
-public final class SearchContactCursor implements Cursor {
+final class ContactFilterCursor implements Cursor {
 
   private final Cursor cursor;
   // List of cursor ids that are valid for displaying after filtering.
@@ -66,7 +66,7 @@ public final class SearchContactCursor implements Cursor {
    * @param cursor with projection {@link Projections#PHONE_PROJECTION}.
    * @param query to filter cursor results.
    */
-  public SearchContactCursor(Cursor cursor, @Nullable String query) {
+  ContactFilterCursor(Cursor cursor, @Nullable String query) {
     // TODO(calderwoodra) investigate copying this into a MatrixCursor and holding in memory
     this.cursor = cursor;
     filter(query);
