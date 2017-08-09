@@ -52,6 +52,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.postcall.PostCall;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -1017,6 +1018,7 @@ public class CallCardPresenter
     if (mPrimary != null) {
       mPrimary.disconnect();
     }
+    PostCall.onDisconnectPressed(mContext);
   }
 
   /**
