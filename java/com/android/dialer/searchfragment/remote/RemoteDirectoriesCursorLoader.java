@@ -44,12 +44,12 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
     ContactsContract.Directory.PHOTO_SUPPORT,
   };
 
-  RemoteDirectoriesCursorLoader(Context context) {
+  public RemoteDirectoriesCursorLoader(Context context) {
     super(context, getContentUri(), PROJECTION, null, null, ContactsContract.Directory._ID);
   }
 
   /** @return current cursor row represented as a {@link Directory}. */
-  static Directory readDirectory(Cursor cursor) {
+  public static Directory readDirectory(Cursor cursor) {
     return Directory.create(
         cursor.getInt(ID), cursor.getString(DISPLAY_NAME), cursor.getInt(PHOTO_SUPPORT) != 0);
   }
@@ -63,7 +63,7 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
   /** POJO representing the results returned from {@link RemoteDirectoriesCursorLoader}. */
   @AutoValue
   public abstract static class Directory {
-    static Directory create(int id, @Nullable String displayName, boolean supportsPhotos) {
+    public static Directory create(int id, @Nullable String displayName, boolean supportsPhotos) {
       return new AutoValue_RemoteDirectoriesCursorLoader_Directory(id, displayName, supportsPhotos);
     }
 

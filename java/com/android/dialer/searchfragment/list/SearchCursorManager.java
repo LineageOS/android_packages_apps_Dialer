@@ -57,6 +57,7 @@ final class SearchCursorManager {
   })
   @interface RowType {
     int INVALID = 0;
+    // TODO(calderwoodra) add suggestions header and list
     /** Header to mark the start of contact rows. */
     int CONTACT_HEADER = 1;
     /** A row containing contact information for contacts stored locally on device. */
@@ -75,9 +76,10 @@ final class SearchCursorManager {
   private SearchCursor nearbyPlacesCursor = null;
   private SearchCursor corpDirectoryCursor = null;
 
-  void setContactsCursor(SearchCursor cursor) {
+  /** Returns true if the cursor changed. */
+  boolean setContactsCursor(SearchCursor cursor) {
     if (cursor == contactsCursor) {
-      return;
+      return false;
     }
 
     if (contactsCursor != null && !contactsCursor.isClosed()) {
@@ -89,11 +91,13 @@ final class SearchCursorManager {
     } else {
       contactsCursor = null;
     }
+    return true;
   }
 
-  void setNearbyPlacesCursor(SearchCursor cursor) {
+  /** Returns true if the cursor changed. */
+  boolean setNearbyPlacesCursor(SearchCursor cursor) {
     if (cursor == nearbyPlacesCursor) {
-      return;
+      return false;
     }
 
     if (nearbyPlacesCursor != null && !nearbyPlacesCursor.isClosed()) {
@@ -105,11 +109,13 @@ final class SearchCursorManager {
     } else {
       nearbyPlacesCursor = null;
     }
+    return true;
   }
 
-  void setCorpDirectoryCursor(SearchCursor cursor) {
+  /** Returns true if a cursor changed. */
+  boolean setCorpDirectoryCursor(SearchCursor cursor) {
     if (cursor == corpDirectoryCursor) {
-      return;
+      return false;
     }
 
     if (corpDirectoryCursor != null && !corpDirectoryCursor.isClosed()) {
@@ -121,6 +127,7 @@ final class SearchCursorManager {
     } else {
       corpDirectoryCursor = null;
     }
+    return true;
   }
 
   boolean setQuery(String query) {
@@ -214,10 +221,6 @@ final class SearchCursorManager {
     }
 
     throw Assert.createIllegalStateFailException("No valid cursor.");
-  }
-
-  String getHeaderText(int position) {
-    return getCursor(position).getString(SearchCursor.HEADER_TEXT_POSITION);
   }
 
   /** removes all cursors. */

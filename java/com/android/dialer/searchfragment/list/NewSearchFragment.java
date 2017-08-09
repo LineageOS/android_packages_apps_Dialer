@@ -40,11 +40,16 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
+import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
+import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
+import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /** Fragment used for searching contacts. */
 public final class NewSearchFragment extends Fragment
@@ -57,15 +62,21 @@ public final class NewSearchFragment extends Fragment
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
   private static final int CONTACTS_LOADER_ID = 0;
-  private static final int NEARBY_PLACES_ID = 1;
+  private static final int NEARBY_PLACES_LOADER_ID = 1;
+  private static final int REMOTE_DIRECTORIES_LOADER_ID = 2;
+  private static final int REMOTE_CONTACTS_LOADER_ID = 3;
 
   private EmptyContentView emptyContentView;
   private RecyclerView recyclerView;
   private SearchAdapter adapter;
   private String query;
+  private boolean remoteDirectoriesDisabledForTesting;
 
+  private final List<Directory> directories = new ArrayList<>();
   private final Runnable loadNearbyPlacesRunnable =
-      () -> getLoaderManager().restartLoader(NEARBY_PLACES_ID, null, this);
+      () -> getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
+  private final Runnable loadRemoteContactsRunnable =
+      () -> getLoaderManager().restartLoader(REMOTE_CONTACTS_LOADER_ID, null, this);
 
   private Runnable updatePositionRunnable;
 
@@ -99,6 +110,7 @@ public final class NewSearchFragment extends Fragment
   private void initLoaders() {
     getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
     loadNearbyPlacesCursor();
+    loadRemoteDirectoriesCursor();
   }
 
   @Override
@@ -106,8 +118,12 @@ public final class NewSearchFragment extends Fragment
     // TODO(calderwoodra) add enterprise loader
     if (id == CONTACTS_LOADER_ID) {
       return new SearchContactsCursorLoader(getContext());
-    } else if (id == NEARBY_PLACES_ID) {
+    } else if (id == NEARBY_PLACES_LOADER_ID) {
       return new NearbyPlacesCursorLoader(getContext(), query);
+    } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
+      return new RemoteDirectoriesCursorLoader(getContext());
+    } else if (id == REMOTE_CONTACTS_LOADER_ID) {
+      return new RemoteContactsCursorLoader(getContext(), query, directories);
     } else {
       throw new IllegalStateException("Invalid loader id: " + id);
     }
@@ -115,14 +131,29 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    if (!(cursor instanceof SearchCursor)) {
+    if (cursor != null
+        && !(loader instanceof RemoteDirectoriesCursorLoader)
+        && !(cursor instanceof SearchCursor)) {
       throw Assert.createIllegalStateFailException("Cursors must implement SearchCursor");
     }
 
     if (loader instanceof SearchContactsCursorLoader) {
       adapter.setContactsCursor((SearchCursor) cursor);
+
     } else if (loader instanceof NearbyPlacesCursorLoader) {
       adapter.setNearbyPlacesCursor((SearchCursor) cursor);
+
+    } else if (loader instanceof RemoteContactsCursorLoader) {
+      adapter.setRemoteContactsCursor((SearchCursor) cursor);
+
+    } else if (loader instanceof RemoteDirectoriesCursorLoader) {
+      directories.clear();
+      cursor.moveToPosition(-1);
+      while (cursor.moveToNext()) {
+        directories.add(RemoteDirectoriesCursorLoader.readDirectory(cursor));
+      }
+      loadRemoteContactsCursors();
+
     } else {
       throw new IllegalStateException("Invalid loader: " + loader);
     }
@@ -139,6 +170,7 @@ public final class NewSearchFragment extends Fragment
     if (adapter != null) {
       adapter.setQuery(query);
       loadNearbyPlacesCursor();
+      loadRemoteContactsCursors();
     }
   }
 
@@ -159,6 +191,7 @@ public final class NewSearchFragment extends Fragment
   public void onDestroy() {
     super.onDestroy();
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
   }
 
   private void loadNearbyPlacesCursor() {
@@ -197,5 +230,30 @@ public final class NewSearchFragment extends Fragment
       FragmentCompat.requestPermissions(
           this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     }
+  }
+
+  private void loadRemoteDirectoriesCursor() {
+    if (!remoteDirectoriesDisabledForTesting) {
+      getLoaderManager().initLoader(REMOTE_DIRECTORIES_LOADER_ID, null, this);
+    }
+  }
+
+  private void loadRemoteContactsCursors() {
+    if (remoteDirectoriesDisabledForTesting) {
+      return;
+    }
+
+    // Cancel existing load if one exists.
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  // Currently, setting up multiple FakeContentProviders doesn't work and results in this fragment
+  // being untestable while it can query multiple datasources. This is a temporary fix.
+  // TODO(b/64099602): Remove this method and test this fragment with multiple data sources
+  @VisibleForTesting
+  public void setRemoteDirectoriesDisabled(boolean disabled) {
+    remoteDirectoriesDisabledForTesting = disabled;
   }
 }

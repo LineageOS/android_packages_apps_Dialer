@@ -110,6 +110,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     }
   }
 
+  // Show the contact photo next to only the first number if a contact has multiple numbers
   private boolean shouldShowPhoto(SearchCursor cursor) {
     int currentPosition = cursor.getPosition();
     String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
