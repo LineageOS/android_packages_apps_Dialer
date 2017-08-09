@@ -76,12 +76,21 @@
   <string name="notification_ongoing_call">Ongoing call</string>
   <!-- The "label" of the in-call Notification for an ongoing work call. [CHAR LIMIT=60] -->
   <string name="notification_ongoing_work_call">Ongoing work call</string>
-  <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
-       Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_call_wifi">Ongoing Wi\u2011Fi call</string>
-  <!-- The "label" of the in-call Notification for an ongoing work call, which is being made
-       over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_work_call_wifi">Ongoing Wi\u2011Fi work call</string>
+
+  <!-- Template for the label on the in-call Notification for an ongoing call, which is being made
+      over Wi-Fi. The format argument is @string/notification_call_wifi_brand [CHAR LIMIT=20]-->
+  <string name="notification_ongoing_call_wifi_template">Ongoing <xliff:g id="brand_name">%1$s</xliff:g></string>
+
+  <!-- Template for the label of the in-call Notification for an incoming call, which is being made
+      over Wi-Fi. The format argument is @string/notification_call_wifi_brand [CHAR LIMIT=20] -->
+  <string name="notification_incoming_call_wifi_template">Incoming <xliff:g id="brand_name">%1$s</xliff:g></string>
+
+  <!-- "Brand name" for WiFi calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40]-->
+  <string name="notification_call_wifi_brand">Wi\u2011Fi call</string>
+
+  <!-- "Brand name" for WiFi work calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40] -->
+  <string name="notification_call_wifi_work_brand">Wi\u2011Fi work call</string>
+
   <!-- The "label" of the in-call Notification for a call that's on hold -->
   <string name="notification_on_hold">On hold</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
@@ -124,12 +133,6 @@
 
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
   <string name="notification_incoming_work_call">Incoming work call</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_call_wifi">Incoming Wi\u2011Fi call</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing work call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_work_call_wifi">Incoming Wi\u2011Fi work call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing spam call. -->
   <string name="notification_incoming_spam_call">Incoming suspected spam call</string>
   <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->

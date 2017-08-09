@@ -155,10 +155,6 @@ public class StatusBarNotifier
   private static int getWorkStringFromPersonalString(int resId) {
     if (resId == R.string.notification_ongoing_call) {
       return R.string.notification_ongoing_work_call;
-    } else if (resId == R.string.notification_ongoing_call_wifi) {
-      return R.string.notification_ongoing_work_call_wifi;
-    } else if (resId == R.string.notification_incoming_call_wifi) {
-      return R.string.notification_incoming_work_call_wifi;
     } else if (resId == R.string.notification_incoming_call) {
       return R.string.notification_incoming_work_call;
     } else {
@@ -696,8 +692,9 @@ public class StatusBarNotifier
     }
 
     int resId = R.string.notification_ongoing_call;
+    String wifiBrand = mContext.getString(R.string.notification_call_wifi_brand);
     if (call.hasProperty(Details.PROPERTY_WIFI)) {
-      resId = R.string.notification_ongoing_call_wifi;
+      resId = R.string.notification_ongoing_call_wifi_template;
     }
 
     if (isIncomingOrWaiting) {
@@ -706,7 +703,8 @@ public class StatusBarNotifier
       } else if (shouldShowEnrichedCallNotification(call.getEnrichedCallSession())) {
         resId = getECIncomingCallText(call.getEnrichedCallSession());
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
-        resId = R.string.notification_incoming_call_wifi;
+        resId = R.string.notification_incoming_call_wifi_template;
+
       } else {
         resId = R.string.notification_incoming_call;
       }
@@ -723,6 +721,13 @@ public class StatusBarNotifier
     boolean isWorkCall = call.hasProperty(PROPERTY_ENTERPRISE_CALL);
     if (userType == ContactsUtils.USER_TYPE_WORK || isWorkCall) {
       resId = getWorkStringFromPersonalString(resId);
+      wifiBrand = mContext.getString(R.string.notification_call_wifi_work_brand);
+    }
+
+    if (resId == R.string.notification_incoming_call_wifi_template
+        || resId == R.string.notification_ongoing_call_wifi_template) {
+      // TODO(b/64525903): Potentially apply this template logic everywhere.
+      return mContext.getString(resId, wifiBrand);
     }
 
     return mContext.getString(resId);
