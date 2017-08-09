@@ -480,7 +480,8 @@ public class CallCardPresenter
                   mPrimary.isRemotelyHeld(),
                   isBusiness,
                   supports2ndCallOnHold(),
-                  getSwapToSecondaryButtonState()));
+                  getSwapToSecondaryButtonState(),
+                  mPrimary.isAssistedDialed()));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());

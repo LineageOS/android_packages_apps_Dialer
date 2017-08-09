@@ -1005,6 +1005,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return mLogState.isIncoming;
   }
 
+  public boolean isAssistedDialed() {
+    if (getIntentExtras() != null) {
+      return getIntentExtras().getBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, false);
+    }
+    return false;
+  }
+
   public LatencyReport getLatencyReport() {
     return mLatencyReport;
   }

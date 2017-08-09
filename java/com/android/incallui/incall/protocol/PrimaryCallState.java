@@ -62,6 +62,7 @@ public class PrimaryCallState {
   public final boolean isBusinessNumber;
   public final boolean supportsCallOnHold;
   public final @ButtonState int swapToSecondaryButtonState;
+  public final boolean isAssistedDialed;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
@@ -87,7 +88,8 @@ public class PrimaryCallState {
         false /* isRemotelyHeld */,
         false /* isBusinessNumber */,
         true /* supportsCallOnHold */,
-        ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */);
+        ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */,
+        false /* isAssistedDialed */);
   }
 
   public PrimaryCallState(
@@ -112,7 +114,8 @@ public class PrimaryCallState {
       boolean isRemotelyHeld,
       boolean isBusinessNumber,
       boolean supportsCallOnHold,
-      @ButtonState int swapToSecondaryButtonState) {
+      @ButtonState int swapToSecondaryButtonState,
+      boolean isAssistedDialed) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -135,6 +138,7 @@ public class PrimaryCallState {
     this.isBusinessNumber = isBusinessNumber;
     this.supportsCallOnHold = supportsCallOnHold;
     this.swapToSecondaryButtonState = swapToSecondaryButtonState;
+    this.isAssistedDialed = isAssistedDialed;
   }
 
   @Override
