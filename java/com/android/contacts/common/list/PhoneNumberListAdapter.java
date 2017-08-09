@@ -49,7 +49,7 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lightbringer.LightbringerComponent;
-import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,7 +381,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         text = phoneLabel;
       } else {
         final String phoneNumber = cursor.getString(PhoneQuery.PHONE_NUMBER);
-        text = GeoUtil.getGeocodedLocationFor(mContext, phoneNumber);
+        text = PhoneNumberHelper.getGeoDescription(mContext, phoneNumber);
       }
     }
     view.setPhoneNumber(text);
