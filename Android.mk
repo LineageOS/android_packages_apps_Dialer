@@ -198,6 +198,7 @@ LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
 
 LOCAL_RESOURCE_DIR := \
 	$(addprefix $(LOCAL_PATH)/, $(RES_DIRS)) \
+	$(support_library_root_dir)/core-ui/res \
 	$(support_library_root_dir)/design/res \
 	$(support_library_root_dir)/transition/res \
 	$(support_library_root_dir)/v7/appcompat/res \
