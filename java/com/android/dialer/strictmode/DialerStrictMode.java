@@ -16,16 +16,13 @@
 
 package com.android.dialer.strictmode;
 
+import android.os.Looper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.os.StrictMode.VmPolicy;
 import com.android.dialer.buildtype.BuildType;
 
-/**
- * Enables strict mode for the application, and provides means of temporarily disabling it.
- *
- * <p>NOTE: All methods in this class are stripped by proguard in release builds.
- */
+/** Enables strict mode for the application, and provides means of temporarily disabling it. */
 public final class DialerStrictMode {
 
   /** Initializes strict mode on application start. */
@@ -39,10 +36,14 @@ public final class DialerStrictMode {
    *
    * <p>You should typically do this only temporarily and restore the death penalty in a finally
    * block using {@link #enableDeathPenalty()}.
+   *
+   * <p>The thread policy is only mutated if this is called from the main thread.
    */
   public static void disableDeathPenalty() {
     if (isStrictModeAllowed()) {
-      StrictMode.setThreadPolicy(threadPolicyTemplate().build());
+      if (onMainThread()) {
+        StrictMode.setThreadPolicy(threadPolicyTemplate().build());
+      }
       StrictMode.setVmPolicy(vmPolicyTemplate().build());
     }
   }
@@ -50,10 +51,14 @@ public final class DialerStrictMode {
   /**
    * Restore the death penalty. This should typically be called in a finally block after calling
    * {@link #disableDeathPenalty()}.
+   *
+   * <p>The thread policy is only mutated if this is called from the main thread.
    */
   public static void enableDeathPenalty() {
     if (isStrictModeAllowed()) {
-      StrictMode.setThreadPolicy(threadPolicyTemplate().penaltyDeath().build());
+      if (onMainThread()) {
+        StrictMode.setThreadPolicy(threadPolicyTemplate().penaltyDeath().build());
+      }
       StrictMode.setVmPolicy(vmPolicyTemplate().penaltyDeath().build());
     }
   }
@@ -70,6 +75,10 @@ public final class DialerStrictMode {
     return BuildType.get() == BuildType.BUGFOOD;
   }
 
+  private static boolean onMainThread() {
+    return Looper.getMainLooper().equals(Looper.myLooper());
+  }
+
   /** Functional interface intended to be used with {@link #bypass(Provider)}. */
   public interface Provider<T> {
     T get();
@@ -81,8 +90,10 @@ public final class DialerStrictMode {
    * <p>For example:
    *
    * <p><code>
-   *   DialerStrictMode.bypass(() -> doDiskAccessOnMainThread());
+   *   Value foo = DialerStrictMode.bypass(() -> doDiskAccessOnMainThreadReturningValue());
    * </code>
+   *
+   * <p>The thread policy is only mutated if this is called from the main thread.
    */
   public static <T> T bypass(Provider<T> provider) {
     disableDeathPenalty();
