@@ -34,6 +34,7 @@ import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.telecom.TelecomUtil;
 
 /** ViewHolder for a nearby place row. */
@@ -60,7 +61,7 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
    * Binds the ViewHolder with a cursor from {@link RemoteContactsCursorLoader} with the data found
    * at the cursors current position.
    */
-  public void bind(Cursor cursor, String query) {
+  public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
     String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);
@@ -91,17 +92,19 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
     }
   }
 
-  private boolean shouldShowPhoto(Cursor cursor) {
+  // Show the contact photo next to only the first number if a contact has multiple numbers
+  private boolean shouldShowPhoto(SearchCursor cursor) {
     int currentPosition = cursor.getPosition();
-    if (currentPosition == 0) {
-      return true;
-    }
-
     String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
     cursor.moveToPosition(currentPosition - 1);
-    String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+
+    if (!cursor.isHeader() && !cursor.isBeforeFirst()) {
+      String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+      cursor.moveToPosition(currentPosition);
+      return !currentLookupKey.equals(previousLookupKey);
+    }
     cursor.moveToPosition(currentPosition);
-    return !currentLookupKey.equals(previousLookupKey);
+    return true;
   }
 
   // TODO(calderwoodra): unify this into a utility method with CallLogAdapter#getNumberType

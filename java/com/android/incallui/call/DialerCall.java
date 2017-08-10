@@ -41,13 +41,13 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -1003,6 +1003,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public boolean isIncoming() {
     return mLogState.isIncoming;
+  }
+
+  public boolean isAssistedDialed() {
+    if (getIntentExtras() != null) {
+      return getIntentExtras().getBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, false);
+    }
+    return false;
   }
 
   public LatencyReport getLatencyReport() {

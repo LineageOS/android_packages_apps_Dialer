@@ -16,11 +16,9 @@
 
 package com.android.dialer.searchfragment.list;
 
-import android.database.Cursor;
 import android.support.annotation.IntDef;
-import android.support.annotation.StringRes;
 import com.android.dialer.common.Assert;
-import com.android.dialer.searchfragment.cp2.SearchContactCursor;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -30,9 +28,9 @@ import java.lang.annotation.RetentionPolicy;
  * <p>This class accepts three cursors:
  *
  * <ul>
- *   <li>A contacts cursor {@link #setContactsCursor(Cursor)}
- *   <li>A google search results cursor {@link #setNearbyPlacesCursor(Cursor)}
- *   <li>A work directory cursor {@link #setCorpDirectoryCursor(Cursor)}
+ *   <li>A contacts cursor {@link #setContactsCursor(SearchCursor)}
+ *   <li>A google search results cursor {@link #setNearbyPlacesCursor(SearchCursor)}
+ *   <li>A work directory cursor {@link #setCorpDirectoryCursor(SearchCursor)}
  * </ul>
  *
  * <p>The key purpose of this class is to compose three aforementioned cursors together to function
@@ -50,6 +48,7 @@ final class SearchCursorManager {
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     SearchCursorManager.RowType.INVALID,
+    SearchCursorManager.RowType.CONTACT_HEADER,
     SearchCursorManager.RowType.CONTACT_ROW,
     SearchCursorManager.RowType.NEARBY_PLACES_HEADER,
     SearchCursorManager.RowType.NEARBY_PLACES_ROW,
@@ -58,25 +57,29 @@ final class SearchCursorManager {
   })
   @interface RowType {
     int INVALID = 0;
+    // TODO(calderwoodra) add suggestions header and list
+    /** Header to mark the start of contact rows. */
+    int CONTACT_HEADER = 1;
     /** A row containing contact information for contacts stored locally on device. */
-    int CONTACT_ROW = 1;
+    int CONTACT_ROW = 2;
     /** Header to mark the end of contact rows and start of nearby places rows. */
-    int NEARBY_PLACES_HEADER = 2;
+    int NEARBY_PLACES_HEADER = 3;
     /** A row containing nearby places information/search results. */
-    int NEARBY_PLACES_ROW = 3;
+    int NEARBY_PLACES_ROW = 4;
     /** Header to mark the end of the previous row set and start of directory rows. */
-    int DIRECTORY_HEADER = 4;
+    int DIRECTORY_HEADER = 5;
     /** A row containing contact information for contacts stored externally in corp directories. */
-    int DIRECTORY_ROW = 5;
+    int DIRECTORY_ROW = 6;
   }
 
-  private Cursor contactsCursor = null;
-  private Cursor nearbyPlacesCursor = null;
-  private Cursor corpDirectoryCursor = null;
+  private SearchCursor contactsCursor = null;
+  private SearchCursor nearbyPlacesCursor = null;
+  private SearchCursor corpDirectoryCursor = null;
 
-  void setContactsCursor(Cursor cursor) {
+  /** Returns true if the cursor changed. */
+  boolean setContactsCursor(SearchCursor cursor) {
     if (cursor == contactsCursor) {
-      return;
+      return false;
     }
 
     if (contactsCursor != null && !contactsCursor.isClosed()) {
@@ -88,11 +91,13 @@ final class SearchCursorManager {
     } else {
       contactsCursor = null;
     }
+    return true;
   }
 
-  void setNearbyPlacesCursor(Cursor cursor) {
+  /** Returns true if the cursor changed. */
+  boolean setNearbyPlacesCursor(SearchCursor cursor) {
     if (cursor == nearbyPlacesCursor) {
-      return;
+      return false;
     }
 
     if (nearbyPlacesCursor != null && !nearbyPlacesCursor.isClosed()) {
@@ -104,11 +109,13 @@ final class SearchCursorManager {
     } else {
       nearbyPlacesCursor = null;
     }
+    return true;
   }
 
-  void setCorpDirectoryCursor(Cursor cursor) {
+  /** Returns true if a cursor changed. */
+  boolean setCorpDirectoryCursor(SearchCursor cursor) {
     if (cursor == corpDirectoryCursor) {
-      return;
+      return false;
     }
 
     if (corpDirectoryCursor != null && !corpDirectoryCursor.isClosed()) {
@@ -120,16 +127,26 @@ final class SearchCursorManager {
     } else {
       corpDirectoryCursor = null;
     }
+    return true;
   }
 
-  void setQuery(String query) {
+  boolean setQuery(String query) {
+    boolean updated = false;
     if (contactsCursor != null) {
-      // TODO(calderwoodra): abstract this
-      ((SearchContactCursor) contactsCursor).filter(query);
+      updated = contactsCursor.updateQuery(query);
     }
+
+    if (nearbyPlacesCursor != null) {
+      updated |= nearbyPlacesCursor.updateQuery(query);
+    }
+
+    if (corpDirectoryCursor != null) {
+      updated |= corpDirectoryCursor.updateQuery(query);
+    }
+    return updated;
   }
 
-  /** @return the sum of counts of all cursors, including headers. */
+  /** Returns the sum of counts of all cursors, including headers. */
   int getCount() {
     int count = 0;
     if (contactsCursor != null) {
@@ -137,12 +154,10 @@ final class SearchCursorManager {
     }
 
     if (nearbyPlacesCursor != null) {
-      count++; // header
       count += nearbyPlacesCursor.getCount();
     }
 
     if (corpDirectoryCursor != null) {
-      count++; // header
       count += corpDirectoryCursor.getCount();
     }
 
@@ -151,54 +166,30 @@ final class SearchCursorManager {
 
   @RowType
   int getRowType(int position) {
-    if (contactsCursor != null) {
-      position -= contactsCursor.getCount();
-
-      if (position < 0) {
-        return SearchCursorManager.RowType.CONTACT_ROW;
-      }
+    SearchCursor cursor = getCursor(position);
+    if (cursor == contactsCursor) {
+      return cursor.isHeader() ? RowType.CONTACT_HEADER : RowType.CONTACT_ROW;
     }
 
-    if (nearbyPlacesCursor != null) {
-      if (position == 0) {
-        return SearchCursorManager.RowType.NEARBY_PLACES_HEADER;
-      } else {
-        position--; // header
-      }
-
-      position -= nearbyPlacesCursor.getCount();
-
-      if (position < 0) {
-        return SearchCursorManager.RowType.NEARBY_PLACES_ROW;
-      }
+    if (cursor == nearbyPlacesCursor) {
+      return cursor.isHeader() ? RowType.NEARBY_PLACES_HEADER : RowType.NEARBY_PLACES_ROW;
     }
 
-    if (corpDirectoryCursor != null) {
-      if (position == 0) {
-        return SearchCursorManager.RowType.DIRECTORY_HEADER;
-      } else {
-        position--; // header
-      }
-
-      position -= corpDirectoryCursor.getCount();
-
-      if (position < 0) {
-        return SearchCursorManager.RowType.DIRECTORY_ROW;
-      }
+    if (cursor == corpDirectoryCursor) {
+      return cursor.isHeader() ? RowType.DIRECTORY_HEADER : RowType.DIRECTORY_ROW;
     }
-
     throw Assert.createIllegalStateFailException("No valid row type.");
   }
 
   /**
-   * Gets cursor corresponding to position in coelesced list of search cursors. Callers should
+   * Gets cursor corresponding to position in coalesced list of search cursors. Callers should
    * ensure that {@link #getRowType(int)} doesn't correspond to header position, otherwise an
    * exception will be thrown.
    *
-   * @param position in coalecsed list of search cursors
+   * @param position in coalesced list of search cursors
    * @return Cursor moved to position specific to passed in position.
    */
-  Cursor getCursor(int position) {
+  SearchCursor getCursor(int position) {
     if (contactsCursor != null) {
       int count = contactsCursor.getCount();
 
@@ -210,8 +201,6 @@ final class SearchCursorManager {
     }
 
     if (nearbyPlacesCursor != null) {
-      Assert.checkArgument(position != 0, "No valid cursor, position is nearby places header.");
-      position--; // header
       int count = nearbyPlacesCursor.getCount();
 
       if (position - count < 0) {
@@ -222,8 +211,6 @@ final class SearchCursorManager {
     }
 
     if (corpDirectoryCursor != null) {
-      Assert.checkArgument(position != 0, "No valid cursor, position is directory search header.");
-      position--; // header
       int count = corpDirectoryCursor.getCount();
 
       if (position - count < 0) {
@@ -234,23 +221,6 @@ final class SearchCursorManager {
     }
 
     throw Assert.createIllegalStateFailException("No valid cursor.");
-  }
-
-  @StringRes
-  int getHeaderText(int position) {
-    @RowType int rowType = getRowType(position);
-    switch (rowType) {
-      case RowType.NEARBY_PLACES_HEADER:
-        return R.string.nearby_places;
-      case RowType.DIRECTORY_HEADER: // TODO(calderwoodra)
-      case RowType.DIRECTORY_ROW:
-      case RowType.CONTACT_ROW:
-      case RowType.NEARBY_PLACES_ROW:
-      case RowType.INVALID:
-      default:
-        throw Assert.createIllegalStateFailException(
-            "Invalid row type, position " + position + " is rowtype " + rowType);
-    }
   }
 
   /** removes all cursors. */

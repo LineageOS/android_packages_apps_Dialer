@@ -101,18 +101,12 @@
   <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
 
   <application
-    android:backupAgent='com.android.dialer.backup.DialerBackupAgent'
-    android:fullBackupOnly="true"
-    android:restoreAnyVersion="true"
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher_phone"
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.google.GoogleStubDialerApplication"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false">
-
-
-
   </application>
 
 </manifest>

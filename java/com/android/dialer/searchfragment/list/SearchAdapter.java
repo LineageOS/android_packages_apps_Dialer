@@ -17,15 +17,16 @@
 package com.android.dialer.searchfragment.list;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.common.Assert;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactViewHolder;
 import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
+import com.android.dialer.searchfragment.remote.RemoteContactViewHolder;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
 class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -35,9 +36,9 @@ class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private String query;
 
-  SearchAdapter(Context context) {
-    searchCursorManager = new SearchCursorManager();
+  SearchAdapter(Context context, SearchCursorManager searchCursorManager) {
     this.context = context;
+    this.searchCursorManager = searchCursorManager;
   }
 
   @Override
@@ -49,11 +50,14 @@ class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       case RowType.NEARBY_PLACES_ROW:
         return new NearbyPlaceViewHolder(
             LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
+      case RowType.CONTACT_HEADER:
       case RowType.DIRECTORY_HEADER:
       case RowType.NEARBY_PLACES_HEADER:
         return new HeaderViewHolder(
             LayoutInflater.from(context).inflate(R.layout.header_layout, root, false));
-      case RowType.DIRECTORY_ROW: // TODO(calderwoodra): add directory rows to search
+      case RowType.DIRECTORY_ROW:
+        return new RemoteContactViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
       case RowType.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid RowType: " + rowType);
@@ -68,20 +72,21 @@ class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     if (holder instanceof SearchContactViewHolder) {
-      Cursor cursor = searchCursorManager.getCursor(position);
-      ((SearchContactViewHolder) holder).bind(cursor, query);
+      ((SearchContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof NearbyPlaceViewHolder) {
-      Cursor cursor = searchCursorManager.getCursor(position);
-      ((NearbyPlaceViewHolder) holder).bind(cursor, query);
+      ((NearbyPlaceViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
+    } else if (holder instanceof RemoteContactViewHolder) {
+      ((RemoteContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof HeaderViewHolder) {
-      String header = context.getString(searchCursorManager.getHeaderText(position));
+      String header =
+          searchCursorManager.getCursor(position).getString(SearchCursor.HEADER_TEXT_POSITION);
       ((HeaderViewHolder) holder).setHeader(header);
     } else {
       throw Assert.createIllegalStateFailException("Invalid ViewHolder: " + holder);
     }
   }
 
-  void setContactsCursor(Cursor cursor) {
+  void setContactsCursor(SearchCursor cursor) {
     searchCursorManager.setContactsCursor(cursor);
     notifyDataSetChanged();
   }
@@ -97,12 +102,20 @@ class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   public void setQuery(String query) {
     this.query = query;
-    searchCursorManager.setQuery(query);
-    notifyDataSetChanged();
+    if (searchCursorManager.setQuery(query)) {
+      notifyDataSetChanged();
+    }
   }
 
-  public void setNearbyPlacesCursor(Cursor nearbyPlacesCursor) {
-    searchCursorManager.setNearbyPlacesCursor(nearbyPlacesCursor);
-    notifyDataSetChanged();
+  public void setNearbyPlacesCursor(SearchCursor nearbyPlacesCursor) {
+    if (searchCursorManager.setNearbyPlacesCursor(nearbyPlacesCursor)) {
+      notifyDataSetChanged();
+    }
+  }
+
+  public void setRemoteContactsCursor(SearchCursor remoteContactsCursor) {
+    if (searchCursorManager.setCorpDirectoryCursor(remoteContactsCursor)) {
+      notifyDataSetChanged();
+    }
   }
 }

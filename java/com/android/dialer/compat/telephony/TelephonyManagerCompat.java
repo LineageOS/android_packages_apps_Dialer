@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.compat;
+package com.android.dialer.compat.telephony;
 
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +49,23 @@ public class TelephonyManagerCompat {
   public static final String TELEPHONY_MANAGER_CLASS = "android.telephony.TelephonyManager";
 
   private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
+
+  // TODO(erfanian): b/63995261 Replace with the platform/telecom constant when available.
+  /**
+   * Indicates that the call being placed originated from a known contact.
+   *
+   * <p>This signals to the telephony platform that an outgoing call qualifies for assisted dialing.
+   */
+  public static final String ALLOW_ASSISTED_DIAL = "android.telecom.extra.ALLOW_ASSISTED_DIAL";
+
+  // TODO(erfanian): b/63995261 Replace with the platform/telecom constant when available.
+  /**
+   * Indicates that an outgoing call has undergone assisted dialing.
+   *
+   * <p>Unlike {@link ALLOW_ASSISTED_DIAL}, the presence of this key further indicates that a call
+   * has undergone Assisted Dialing -- not just that it qualified for Assisted Dialing.
+   */
+  public static final String IS_ASSISTED_DIALED = "android.telecom.extra.IS_ASSISTED_DIALED";
 
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM

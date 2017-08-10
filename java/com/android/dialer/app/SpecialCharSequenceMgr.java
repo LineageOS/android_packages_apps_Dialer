@@ -39,7 +39,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.android.common.io.MoreCloseables;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
@@ -47,6 +46,7 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;

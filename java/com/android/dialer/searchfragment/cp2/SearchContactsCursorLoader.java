@@ -37,6 +37,11 @@ public final class SearchContactsCursorLoader extends CursorLoader {
 
   @Override
   public Cursor loadInBackground() {
-    return new SearchContactCursor(super.loadInBackground(), null);
+    // All contacts
+    Cursor cursor = super.loadInBackground();
+    // Filtering logic
+    ContactFilterCursor contactFilterCursor = new ContactFilterCursor(cursor, null);
+    // Header logic
+    return SearchContactsCursor.newInstnace(getContext(), contactFilterCursor);
   }
 }

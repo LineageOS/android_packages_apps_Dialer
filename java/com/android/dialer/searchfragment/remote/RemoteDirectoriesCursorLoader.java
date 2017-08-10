@@ -19,7 +19,6 @@ package com.android.dialer.searchfragment.remote;
 
 import android.content.Context;
 import android.content.CursorLoader;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION;
@@ -27,8 +26,7 @@ import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
-import com.android.dialer.common.LogUtil;
+import com.google.auto.value.AutoValue;
 
 /** CursorLoader to load the list of remote directories on the device. */
 public final class RemoteDirectoriesCursorLoader extends CursorLoader {
@@ -36,57 +34,24 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
   /** Positions of columns in {@code PROJECTIONS}. */
   private static final int ID = 0;
 
-  private static final int PACKAGE_NAME = 1;
-  private static final int TYPE_RESOURCE_ID = 2;
-  private static final int DISPLAY_NAME = 3;
-  private static final int PHOTO_SUPPORT = 4;
+  private static final int DISPLAY_NAME = 1;
+  private static final int PHOTO_SUPPORT = 2;
 
   @VisibleForTesting
   static final String[] PROJECTION = {
     ContactsContract.Directory._ID,
-    ContactsContract.Directory.PACKAGE_NAME,
-    ContactsContract.Directory.TYPE_RESOURCE_ID,
     ContactsContract.Directory.DISPLAY_NAME,
     ContactsContract.Directory.PHOTO_SUPPORT,
   };
 
-  RemoteDirectoriesCursorLoader(Context context) {
+  public RemoteDirectoriesCursorLoader(Context context) {
     super(context, getContentUri(), PROJECTION, null, null, ContactsContract.Directory._ID);
   }
 
-  /**
-   * Returns the type of directory as a String (e.g. "Corporate Directory"). Null if the directory
-   * type cannot be found.
-   */
-  @Nullable
-  private static String getDirectoryType(Context context, Cursor cursor) {
-    String packageName = cursor.getString(PACKAGE_NAME);
-    int typeResourceId = cursor.getInt(TYPE_RESOURCE_ID);
-    if (TextUtils.isEmpty(packageName) || typeResourceId == 0) {
-      return null;
-    }
-
-    try {
-      return context
-          .getPackageManager()
-          .getResourcesForApplication(packageName)
-          .getString(typeResourceId);
-    } catch (NameNotFoundException e) {
-      LogUtil.e(
-          "ContactEntryListAdapter.loadInBackground",
-          "cannot obtain directory type from package: %s",
-          packageName);
-      return null;
-    }
-  }
-
   /** @return current cursor row represented as a {@link Directory}. */
-  public static Directory readDirectory(Context context, Cursor cursor) {
-    return new Directory(
-        cursor.getInt(ID),
-        cursor.getString(DISPLAY_NAME),
-        getDirectoryType(context, cursor),
-        cursor.getInt(PHOTO_SUPPORT) != 0);
+  public static Directory readDirectory(Cursor cursor) {
+    return Directory.create(
+        cursor.getInt(ID), cursor.getString(DISPLAY_NAME), cursor.getInt(PHOTO_SUPPORT) != 0);
   }
 
   private static Uri getContentUri() {
@@ -96,22 +61,17 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
   }
 
   /** POJO representing the results returned from {@link RemoteDirectoriesCursorLoader}. */
-  public static class Directory {
-
-    public final int id;
-    // TODO(calderwoodra): investigate which of these fields will be used as the display name and
-    // update the fields and javadoc accordingly.
-    /** An optional name that can be used in the UI to represent the directory. */
-    @Nullable public final String name;
-
-    @Nullable public final String type;
-    public final boolean supportsPhotos;
-
-    public Directory(int id, String name, @Nullable String type, boolean supportsPhotos) {
-      this.id = id;
-      this.name = name;
-      this.type = type;
-      this.supportsPhotos = supportsPhotos;
+  @AutoValue
+  public abstract static class Directory {
+    public static Directory create(int id, @Nullable String displayName, boolean supportsPhotos) {
+      return new AutoValue_RemoteDirectoriesCursorLoader_Directory(id, displayName, supportsPhotos);
     }
+
+    abstract int getId();
+
+    /** Returns a user facing display name of the directory. Null if none exists. */
+    abstract @Nullable String getDisplayName();
+
+    abstract boolean supportsPhotos();
   }
 }

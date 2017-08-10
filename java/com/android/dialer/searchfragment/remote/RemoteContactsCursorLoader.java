@@ -18,17 +18,26 @@ package com.android.dialer.searchfragment.remote;
 
 import android.content.Context;
 import android.content.CursorLoader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import java.util.List;
 
-/** Cursor loader to load extended contacts on device. */
-final class RemoteContactsCursorLoader extends CursorLoader {
+/**
+ * Cursor loader to load extended contacts on device.
+ *
+ * <p>This loader performs several database queries in serial and merges the resulting cursors
+ * together into {@link RemoteContactsCursor}. If there are no results, the loader will return a
+ * null cursor.
+ */
+public final class RemoteContactsCursorLoader extends CursorLoader {
 
   private static final Uri ENTERPRISE_CONTENT_FILTER_URI =
       Uri.withAppendedPath(Phone.CONTENT_URI, "filter_enterprise");
@@ -36,25 +45,55 @@ final class RemoteContactsCursorLoader extends CursorLoader {
   private static final String IGNORE_NUMBER_TOO_LONG_CLAUSE = "length(" + Phone.NUMBER + ") < 1000";
   private static final String MAX_RESULTS = "20";
 
-  private final Directory directory;
+  private final String query;
+  private final List<Directory> directories;
+  private final Cursor[] cursors;
 
-  RemoteContactsCursorLoader(Context context, String query, Directory directory) {
+  public RemoteContactsCursorLoader(Context context, String query, List<Directory> directories) {
     super(
         context,
-        getContentFilterUri(query, directory.id),
+        null,
         Projections.PHONE_PROJECTION,
         IGNORE_NUMBER_TOO_LONG_CLAUSE,
         null,
         Phone.SORT_KEY_PRIMARY);
-    this.directory = directory;
+    this.query = query;
+    this.directories = directories;
+    cursors = new Cursor[directories.size()];
+  }
+
+  @Override
+  public Cursor loadInBackground() {
+    for (int i = 0; i < directories.size(); i++) {
+      Directory directory = directories.get(i);
+      // Since the on device contacts could be queried as remote directories and we already query
+      // them in SearchContactsCursorLoader, avoid querying them again.
+      // TODO(calderwoodra): It's a happy coincidence that on device contacts don't have directory
+      // names set, leaving this todo to investigate a better way to isolate them from other remote
+      // directories.
+      if (TextUtils.isEmpty(directory.getDisplayName())) {
+        cursors[i] = null;
+        continue;
+      }
+      cursors[i] =
+          getContext()
+              .getContentResolver()
+              .query(
+                  getContentFilterUri(query, directory.getId()),
+                  getProjection(),
+                  getSelection(),
+                  getSelectionArgs(),
+                  getSortOrder());
+    }
+    return RemoteContactsCursor.newInstance(getContext(), cursors, directories);
   }
 
   @VisibleForTesting
   static Uri getContentFilterUri(String query, int directoryId) {
-    Uri baseUri = Phone.CONTENT_FILTER_URI;
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      baseUri = ENTERPRISE_CONTENT_FILTER_URI;
-    }
+    Uri baseUri =
+        VERSION.SDK_INT >= VERSION_CODES.N
+            ? ENTERPRISE_CONTENT_FILTER_URI
+            : Phone.CONTENT_FILTER_URI;
 
     return baseUri
         .buildUpon()
@@ -63,9 +102,5 @@ final class RemoteContactsCursorLoader extends CursorLoader {
         .appendQueryParameter(ContactsContract.REMOVE_DUPLICATE_ENTRIES, "true")
         .appendQueryParameter(ContactsContract.LIMIT_PARAM_KEY, MAX_RESULTS)
         .build();
-  }
-
-  public Directory getDirectory() {
-    return directory;
   }
 }
