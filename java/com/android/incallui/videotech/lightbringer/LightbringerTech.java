@@ -26,6 +26,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -102,6 +103,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public void upgradeToVideo() {
+    listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
     lightbringer.requestUpgrade(call);
   }
 
@@ -144,6 +146,12 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   @Override
   public void setCamera(@Nullable String cameraId) {
     throw Assert.createUnsupportedOperationFailException();
+  }
+
+  @Override
+  public void becomePrimary() {
+    listener.onImpressionLoggingNeeded(
+        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_LIGHTBRINGER);
   }
 
   @Override

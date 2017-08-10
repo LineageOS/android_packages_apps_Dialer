@@ -1273,6 +1273,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     updateEnrichedCallSession();
   }
 
+  @Override
+  public void onImpressionLoggingNeeded(DialerImpression.Type impressionType) {
+    Logger.get(mContext).logCallImpression(impressionType, getUniqueCallId(), getTimeAddedMs());
+  }
+
   private void updateEnrichedCallSession() {
     if (getNumber() == null) {
       return;
@@ -1554,6 +1559,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         if (tech.isAvailable(context)) {
           // Remember the first VideoTech that becomes available and always use it
           savedTech = tech;
+          savedTech.becomePrimary();
           return savedTech;
         }
       }
