@@ -1,15 +1,9 @@
 # Local modifications:
-# * removed com.google.android.backup.api_key. This should be added to
-#      the manifest in the top level directory.
 # * removed com.google.android.geo.API_KEY key. This should be added to
 #      the manifest files in java/com/android/incallui/calllocation/impl/
 #      and /java/com/android/incallui/maps/impl/
 # * b/62417801 modify translation string naming convention:
 #      $ find . -type d | grep 262 | rename 's/(values)\-([a-zA-Z\+\-]+)\-(mcc262-mnc01)/$1-$3-$2/'
-# * b/62343966 include manually generated GRPC service class:
-#      $ protoc --plugin=protoc-gen-grpc-java=prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
-#               --grpc-java_out=lite:"packages/apps/Dialer/java/com/android/voicemail/impl/" \
-#               --proto_path="packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/" "packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto"
 # * b/37077388 temporarily disable proguard with javac
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -77,8 +71,21 @@ DIALER_MANIFEST_FILES := $(filter-out $(EXCLUDE_MANIFESTS),$(DIALER_MANIFEST_FIL
 # Merge all manifest files.
 LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
+
+# * b/62875795 include manually generated GRPC service class:
+define gen-dialer-grpc
+  $(shell cd $(LOCAL_PATH) ; \
+	../../../prebuilts/tools/linux-x86_64/protoc/bin/protoc --plugin=protoc-gen-grpc-java=../../../prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
+	--grpc-java_out=lite:"java/com/android/voicemail/impl/" \
+	--proto_path="java/com/android/voicemail/impl/transcribe/grpc/" "java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto")
+endef
+
+$(call gen-dialer-grpc)
+
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
+# * b/62875795 include manually generated GRPC service class:
+LOCAL_SRC_FILES += java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
 
 # Backup Library
@@ -119,12 +126,12 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-disklrucache-target \
 	dialer-gifdecoder-target \
 	dialer-glide-target \
-        dialer-grpc-all-target \
-        dialer-grpc-context-target \
-        dialer-grpc-core-target \
+	dialer-grpc-all-target \
+	dialer-grpc-context-target \
+	dialer-grpc-core-target \
 	dialer-grpc-okhttp-target \
 	dialer-grpc-protobuf-lite-target \
-        dialer-grpc-stub-target \
+	dialer-grpc-stub-target \
 	dialer-guava-target \
 	dialer-javax-annotation-api-target \
 	dialer-javax-inject-target \
