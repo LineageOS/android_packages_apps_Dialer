@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.impl;
+package com.android.dialer.databasepopulator;
 
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
@@ -28,10 +28,11 @@ import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /** Populates the device database with call log entries. */
-final class SimulatorCallLog {
+public final class CallLogPopulator {
   // Phone numbers from https://www.google.com/about/company/facts/locations/
   private static final CallEntry.Builder[] SIMPLE_CALL_LOG = {
     CallEntry.builder().setType(Calls.MISSED_TYPE).setNumber("+1-302-6365454"),
@@ -96,6 +97,21 @@ final class SimulatorCallLog {
     }
   }
 
+  @WorkerThread
+  public static void deleteAllCallLog(@NonNull Context context) {
+    Assert.isWorkerThread();
+    try {
+      context
+          .getContentResolver()
+          .applyBatch(
+              CallLog.AUTHORITY,
+              new ArrayList<>(
+                  Arrays.asList(ContentProviderOperation.newDelete(Calls.CONTENT_URI).build())));
+    } catch (RemoteException | OperationApplicationException e) {
+      Assert.fail("failed to delete call log: " + e);
+    }
+  }
+
   @AutoValue
   abstract static class CallEntry {
     @NonNull
@@ -108,7 +124,7 @@ final class SimulatorCallLog {
     abstract long getTimeMillis();
 
     static Builder builder() {
-      return new AutoValue_SimulatorCallLog_CallEntry.Builder()
+      return new AutoValue_CallLogPopulator_CallEntry.Builder()
           .setPresentation(Calls.PRESENTATION_ALLOWED);
     }
 
@@ -135,5 +151,5 @@ final class SimulatorCallLog {
     }
   }
 
-  private SimulatorCallLog() {}
+  private CallLogPopulator() {}
 }

@@ -30,6 +30,9 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.databasepopulator.CallLogPopulator;
+import com.android.dialer.databasepopulator.ContactsPopulator;
+import com.android.dialer.databasepopulator.VoicemailPopulator;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 
@@ -89,6 +92,13 @@ final class SimulatorActionProvider extends ActionProvider {
               return true;
             });
     subMenu
+        .add("Clean database")
+        .setOnMenuItemClickListener(
+            (itme) -> {
+              cleanDatabase();
+              return true;
+            });
+    subMenu
         .add("Sync Voicemail")
         .setOnMenuItemClickListener(
             (item) -> {
@@ -128,9 +138,21 @@ final class SimulatorActionProvider extends ActionProvider {
     new AsyncTask<Void, Void, Void>() {
       @Override
       public Void doInBackground(Void... params) {
-        SimulatorContacts.populateContacts(context);
-        SimulatorCallLog.populateCallLog(context);
-        SimulatorVoicemail.populateVoicemail(context);
+        ContactsPopulator.populateContacts(context);
+        CallLogPopulator.populateCallLog(context);
+        VoicemailPopulator.populateVoicemail(context);
+        return null;
+      }
+    }.execute();
+  }
+
+  private void cleanDatabase() {
+    new AsyncTask<Void, Void, Void>() {
+      @Override
+      public Void doInBackground(Void... params) {
+        ContactsPopulator.deleteAllContacts(context);
+        CallLogPopulator.deleteAllCallLog(context);
+        VoicemailPopulator.deleteAllVoicemail(context);
         return null;
       }
     }.execute();
