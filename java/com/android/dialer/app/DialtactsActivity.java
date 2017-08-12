@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
-import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
 import android.support.annotation.MainThread;
@@ -121,7 +120,6 @@ import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
-import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -389,8 +387,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     Trace.beginSection(TAG + " onCreate");
     super.onCreate(savedInstanceState);
 
-    warmupSharedPrefs();
-
     mFirstLaunch = true;
     isLastTabEnabled = ConfigProviderBindings.get(this).getBoolean("last_tab_enabled", false);
 
@@ -505,32 +501,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     mP13nLogger = P13nLogging.get(getApplicationContext());
     mP13nRanker = P13nRanking.get(getApplicationContext());
     Trace.endSection();
-  }
-
-  /**
-   * We frequently access shared preferences on the main thread, which causes strict mode
-   * violations. Warm up the shared preferences here so that later uses of shared preferences access
-   * the in-memory versions and we don't have to bypass strict mode at every point in the
-   * application where shared preferences are accessed.
-   */
-  private void warmupSharedPrefs() {
-    DialerStrictMode.bypass(
-        () -> {
-          // From credential-encrypted (CE) storage, i.e.:
-          //    /data/data/com.google.android.dialer/shared_prefs
-
-          // com.google.android.dialer_preferences.xml
-          PreferenceManager.getDefaultSharedPreferences(this);
-
-          // com.google.android.dialer.xml
-          getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-
-          // From device-encrypted (DE) storage, i.e.:
-          //   /data/user_de/0/com.android.dialer/shared_prefs/
-
-          // com.google.android.dialer_preferences.xml
-          DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this);
-        });
   }
 
   @NonNull
