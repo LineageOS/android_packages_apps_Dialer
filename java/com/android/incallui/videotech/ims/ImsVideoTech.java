@@ -315,6 +315,12 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall().setDeviceOrientation(rotation);
   }
 
+  @Override
+  public void becomePrimary() {
+    listener.onImpressionLoggingNeeded(
+        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_IMS);
+  }
+
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO);
   }

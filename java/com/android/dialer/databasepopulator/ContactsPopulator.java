@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.impl;
+package com.android.dialer.databasepopulator;
 
 import android.content.ContentProviderOperation;
 import android.content.Context;
@@ -26,6 +26,7 @@ import android.graphics.Paint;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
@@ -34,10 +35,11 @@ import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** Populates the device database with contacts. */
-public final class SimulatorContacts {
+public final class ContactsPopulator {
   // Phone numbers from https://www.google.com/about/company/facts/locations/
   private static final Contact[] SIMPLE_CONTACTS = {
     // US, contact with e164 number.
@@ -46,6 +48,7 @@ public final class SimulatorContacts {
         .addPhoneNumber(new PhoneNumber("+1-302-6365454", Phone.TYPE_MOBILE))
         .addEmail(new Email("m@example.com"))
         .setIsStarred(true)
+        .setPinned(1)
         .setOrangePhoto()
         .build(),
     // US, contact with a non-e164 number.
@@ -54,6 +57,7 @@ public final class SimulatorContacts {
         .addPhoneNumber(new PhoneNumber("(425) 739-5600", Phone.TYPE_MOBILE))
         .addEmail(new Email("l@example.com"))
         .setIsStarred(true)
+        .setPinned(2)
         .setBluePhoto()
         .build(),
     // UK, number where the (0) should be dropped.
@@ -62,6 +66,7 @@ public final class SimulatorContacts {
         .addPhoneNumber(new PhoneNumber("+44 (0) 20 7031 3000", Phone.TYPE_MOBILE))
         .addEmail(new Email("r@example.com"))
         .setIsStarred(true)
+        .setPinned(3)
         .setRedPhoto()
         .build(),
     // US and Australia, contact with a long name and multiple phone numbers.
@@ -71,6 +76,7 @@ public final class SimulatorContacts {
         .addPhoneNumber(new PhoneNumber("+1 404-487-9000", Phone.TYPE_WORK))
         .addPhoneNumber(new PhoneNumber("+61 2 9374 4001", Phone.TYPE_FAX_HOME))
         .setIsStarred(true)
+        .setPinned(4)
         .setPurplePhoto()
         .build(),
     // US, phone number shared with another contact and 2nd phone number with wait and pause.
@@ -78,25 +84,30 @@ public final class SimulatorContacts {
         .setName("Splinter")
         .addPhoneNumber(new PhoneNumber("+1-650-2530000", Phone.TYPE_HOME))
         .addPhoneNumber(new PhoneNumber("+1 303-245-0086;123,456", Phone.TYPE_WORK))
+        .setBluePhoto()
         .build(),
     // France, number with Japanese name.
     Contact.builder()
         .setName("スパイク・スピーゲル")
         .addPhoneNumber(new PhoneNumber("+33 (0)1 42 68 53 00", Phone.TYPE_MOBILE))
+        .setBluePhoto()
         .build(),
     // Israel, RTL name and non-e164 number.
     Contact.builder()
         .setName("עקב אריה טברסק")
         .addPhoneNumber(new PhoneNumber("+33 (0)1 42 68 53 00", Phone.TYPE_MOBILE))
+        .setBluePhoto()
         .build(),
     // UAE, RTL name.
     Contact.builder()
         .setName("سلام دنیا")
         .addPhoneNumber(new PhoneNumber("+971 4 4509500", Phone.TYPE_MOBILE))
+        .setBluePhoto()
         .build(),
     // Brazil, contact with no name.
     Contact.builder()
         .addPhoneNumber(new PhoneNumber("+55-31-2128-6800", Phone.TYPE_MOBILE))
+        .setBluePhoto()
         .build(),
     // Short number, contact with no name.
     Contact.builder().addPhoneNumber(new PhoneNumber("611", Phone.TYPE_MOBILE)).build(),
@@ -104,12 +115,14 @@ public final class SimulatorContacts {
     Contact.builder()
         .setName("Anonymous")
         .addPhoneNumber(new PhoneNumber("*86 512-343-5283", Phone.TYPE_MOBILE))
+        .setBluePhoto()
         .build(),
     // None, contact with no phone number.
     Contact.builder()
         .setName("No Phone Number")
         .addEmail(new Email("no@example.com"))
         .setIsStarred(true)
+        .setBluePhoto()
         .build(),
   };
 
@@ -127,6 +140,22 @@ public final class SimulatorContacts {
     }
   }
 
+  @WorkerThread
+  public static void deleteAllContacts(@NonNull Context context) {
+    Assert.isWorkerThread();
+    try {
+      context
+          .getContentResolver()
+          .applyBatch(
+              ContactsContract.AUTHORITY,
+              new ArrayList<>(
+                  Arrays.asList(
+                      ContentProviderOperation.newDelete(RawContacts.CONTENT_URI).build())));
+    } catch (RemoteException | OperationApplicationException e) {
+      Assert.fail("failed to delete contacts: " + e);
+    }
+  }
+
   private static void addContact(Contact contact, List<ContentProviderOperation> operations) {
     int index = operations.size();
 
@@ -135,6 +164,9 @@ public final class SimulatorContacts {
             .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, contact.getAccountType())
             .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, contact.getAccountName())
             .withValue(ContactsContract.RawContacts.STARRED, contact.getIsStarred() ? 1 : 0)
+            .withValue(
+                ContactsContract.RawContacts.PINNED,
+                contact.getIsStarred() ? contact.getPinned() : 0)
             .withYieldAllowed(true)
             .build());
 
@@ -203,6 +235,8 @@ public final class SimulatorContacts {
 
     abstract boolean getIsStarred();
 
+    abstract int getPinned();
+
     @Nullable
     abstract ByteArrayOutputStream getPhotoStream();
 
@@ -213,9 +247,10 @@ public final class SimulatorContacts {
     abstract List<Email> getEmails();
 
     static Builder builder() {
-      return new AutoValue_SimulatorContacts_Contact.Builder()
+      return new AutoValue_ContactsPopulator_Contact.Builder()
           .setAccountType("com.google")
           .setAccountName("foo@example")
+          .setPinned(0)
           .setIsStarred(false)
           .setPhoneNumbers(new ArrayList<>())
           .setEmails(new ArrayList<>());
@@ -233,6 +268,8 @@ public final class SimulatorContacts {
       abstract Builder setName(@NonNull String name);
 
       abstract Builder setIsStarred(boolean isStarred);
+
+      abstract Builder setPinned(int position);
 
       abstract Builder setPhotoStream(ByteArrayOutputStream photoStream);
 
@@ -315,5 +352,5 @@ public final class SimulatorContacts {
     }
   }
 
-  private SimulatorContacts() {}
+  private ContactsPopulator() {}
 }

@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.impl;
+package com.android.dialer.databasepopulator;
 
 import android.content.ComponentName;
 import android.content.ContentValues;
@@ -30,7 +30,7 @@ import com.google.auto.value.AutoValue;
 import java.util.concurrent.TimeUnit;
 
 /** Populates the device database with voicemail entries. */
-final class SimulatorVoicemail {
+public final class VoicemailPopulator {
   private static final String ACCOUNT_ID = "ACCOUNT_ID";
 
   private static final Voicemail.Builder[] SIMPLE_VOICEMAILS = {
@@ -90,9 +90,17 @@ final class SimulatorVoicemail {
     }
   }
 
+  @WorkerThread
+  public static void deleteAllVoicemail(@NonNull Context context) {
+    Assert.isWorkerThread();
+    context
+        .getContentResolver()
+        .delete(Voicemails.buildSourceUri(context.getPackageName()), "", new String[] {});
+  }
+
   private static void enableVoicemail(@NonNull Context context) {
     PhoneAccountHandle handle =
-        new PhoneAccountHandle(new ComponentName(context, SimulatorVoicemail.class), ACCOUNT_ID);
+        new PhoneAccountHandle(new ComponentName(context, VoicemailPopulator.class), ACCOUNT_ID);
 
     ContentValues values = new ContentValues();
     values.put(Status.SOURCE_PACKAGE, handle.getComponentName().getPackageName());
@@ -120,7 +128,7 @@ final class SimulatorVoicemail {
     abstract boolean getIsRead();
 
     static Builder builder() {
-      return new AutoValue_SimulatorVoicemail_Voicemail.Builder();
+      return new AutoValue_VoicemailPopulator_Voicemail.Builder();
     }
 
     ContentValues getAsContentValues(Context context) {
@@ -150,5 +158,5 @@ final class SimulatorVoicemail {
     }
   }
 
-  private SimulatorVoicemail() {}
+  private VoicemailPopulator() {}
 }
