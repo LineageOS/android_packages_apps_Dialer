@@ -97,6 +97,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
@@ -171,11 +172,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String TAG_FAVORITES_FRAGMENT = "favorites";
   /** Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}. */
   private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
-
-  private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
-  public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
-  public static final int ACTIVITY_REQUEST_CODE_LIGHTBRINGER = 3;
-  public static final int ACTIVITY_REQUEST_CODE_CALL_DETAILS = 4;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
@@ -723,7 +719,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       try {
         startActivityForResult(
             new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
-            ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+            ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);
       } catch (ActivityNotFoundException e) {
         Toast.makeText(
                 DialtactsActivity.this, R.string.voice_search_not_available, Toast.LENGTH_SHORT)
@@ -769,7 +765,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         "requestCode:%d, resultCode:%d",
         requestCode,
         resultCode);
-    if (requestCode == ACTIVITY_REQUEST_CODE_VOICE_SEARCH) {
+    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       if (resultCode == RESULT_OK) {
         final ArrayList<String> matches =
             data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -781,7 +777,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else {
         LogUtil.e("DialtactsActivity.onActivityResult", "voice search failed");
       }
-    } else if (requestCode == ACTIVITY_REQUEST_CODE_CALL_COMPOSE) {
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_COMPOSER) {
       if (resultCode == RESULT_FIRST_USER) {
         LogUtil.i(
             "DialtactsActivity.onActivityResult", "returned from call composer, error occurred");
@@ -793,7 +789,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else {
         LogUtil.i("DialtactsActivity.onActivityResult", "returned from call composer, no error");
       }
-    } else if (requestCode == ACTIVITY_REQUEST_CODE_CALL_DETAILS) {
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
       if (resultCode == RESULT_OK
           && data != null
           && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {

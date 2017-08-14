@@ -69,6 +69,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
@@ -867,7 +868,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(
           CallComposerActivity.newIntent(activity, buildContact()),
-          DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_COMPOSE);
+          ActivityRequestCodes.DIALTACTS_CALL_COMPOSER);
     } else if (view.getId() == R.id.share_voicemail) {
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_PRESSED);
       mVoicemailPlaybackPresenter.shareVoicemail();
@@ -895,7 +896,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
         ((Activity) mContext)
-            .startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS);
+            .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
       } else {
         if (Intent.ACTION_CALL.equals(intent.getAction())
             && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
@@ -911,7 +912,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private void startLightbringerActivity(Intent intent) {
     try {
       Activity activity = (Activity) mContext;
-      activity.startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER);
+      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
     } catch (ActivityNotFoundException e) {
       Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
