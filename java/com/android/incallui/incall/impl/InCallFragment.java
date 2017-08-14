@@ -44,6 +44,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.dialer.widget.LockableViewPager;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
@@ -139,7 +140,10 @@ public class InCallFragment extends Fragment
       @Nullable ViewGroup viewGroup,
       @Nullable Bundle bundle) {
     LogUtil.i("InCallFragment.onCreateView", null);
-    final View view = layoutInflater.inflate(R.layout.frag_incall_voice, viewGroup, false);
+    // Bypass to avoid StrictModeResourceMismatchViolation
+    final View view =
+        DialerStrictMode.bypass(
+            () -> layoutInflater.inflate(R.layout.frag_incall_voice, viewGroup, false));
     contactGridManager =
         new ContactGridManager(
             view,

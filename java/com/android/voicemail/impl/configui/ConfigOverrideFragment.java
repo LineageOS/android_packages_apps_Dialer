@@ -35,6 +35,7 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -126,8 +127,10 @@ public class ConfigOverrideFragment extends PreferenceFragment
   }
 
   public static boolean isOverridden(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
-        .getBoolean(context.getString(R.string.vvm_config_override_enabled_key), false);
+    return DialerStrictMode.bypass(
+        () ->
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(context.getString(R.string.vvm_config_override_enabled_key), false));
   }
 
   public static PersistableBundle getConfig(Context context) {

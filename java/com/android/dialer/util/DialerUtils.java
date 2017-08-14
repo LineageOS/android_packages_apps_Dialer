@@ -38,6 +38,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.io.File;
 import java.util.Iterator;
@@ -233,14 +234,9 @@ public class DialerUtils {
   public static SharedPreferences getDefaultSharedPreferenceForDeviceProtectedStorageContext(
       @NonNull Context context) {
     Assert.isNotNull(context);
-    Context deviceProtectedContext =
-        ContextCompat.isDeviceProtectedStorage(context)
-            ? context
-            : ContextCompat.createDeviceProtectedStorageContext(context);
-    // ContextCompat.createDeviceProtectedStorageContext(context) returns null on pre-N, thus fall
-    // back to regular default shared preference for pre-N devices since devices protected context
-    // is not available.
-    return PreferenceManager.getDefaultSharedPreferences(
-        deviceProtectedContext != null ? deviceProtectedContext : context);
+    if (ContextCompat.isDeviceProtectedStorage(context)) {
+      return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+    return StorageComponent.get(context.getApplicationContext()).deviceProtectedSharedPreferences();
   }
 }

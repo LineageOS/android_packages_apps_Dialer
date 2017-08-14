@@ -103,4 +103,22 @@ public final class DialerStrictMode {
       enableDeathPenalty();
     }
   }
+
+  /**
+   * Convenience method for disabling and enabling the death penalty using lambdas.
+   *
+   * <p>For example:
+   *
+   * <p><code>
+   *   DialerStrictMode.bypass(() -> doDiskAccessOnMainThread());
+   * </code>
+   */
+  public static void bypass(Runnable runnable) {
+    disableDeathPenalty();
+    try {
+      runnable.run();
+    } finally {
+      enableDeathPenalty();
+    }
+  }
 }
