@@ -28,6 +28,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
 
@@ -38,6 +39,7 @@ public class CallIntentBuilder {
   @Nullable private PhoneAccountHandle phoneAccountHandle;
   private boolean isVideoCall;
   private String callSubject;
+  private boolean allowAssistedDial;
 
   private static int lightbringerButtonAppearInExpandedCallLogItemCount = 0;
   private static int lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
@@ -100,6 +102,11 @@ public class CallIntentBuilder {
     return this;
   }
 
+  public CallIntentBuilder setAllowAssistedDial(boolean allowAssistedDial) {
+    this.allowAssistedDial = allowAssistedDial;
+    return this;
+  }
+
   public CallIntentBuilder setCallSubject(String callSubject) {
     this.callSubject = callSubject;
     return this;
@@ -114,6 +121,11 @@ public class CallIntentBuilder {
     Bundle extras = new Bundle();
     extras.putLong(Constants.EXTRA_CALL_CREATED_TIME_MILLIS, SystemClock.elapsedRealtime());
     CallIntentParser.putCallSpecificAppData(extras, callSpecificAppData);
+
+    if (allowAssistedDial) {
+      extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+    }
+
     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
 
     if (phoneAccountHandle != null) {

@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -68,6 +69,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -884,6 +886,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
       if (intent == null) {
         return;
+      }
+
+      if (info != null && info.lookupKey != null) {
+        Bundle extras = new Bundle();
+        if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+          extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+        }
+        extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+        intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
       }
 
       // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer

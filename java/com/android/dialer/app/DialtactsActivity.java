@@ -43,6 +43,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -96,6 +97,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.Database;
@@ -1448,6 +1450,12 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     Intent intent =
         new CallIntentBuilder(phoneNumber, callSpecificAppData).setIsVideoCall(isVideoCall).build();
+
+    if (callSpecificAppData.getAllowAssistedDialing()) {
+      Bundle extras = new Bundle();
+      extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+      intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+    }
 
     DialerUtils.startActivityWithErrorToast(this, intent);
     mClearSearchOnPause = true;

@@ -129,6 +129,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
         CallSpecificAppData.Builder callSpecificAppData =
             CallSpecificAppData.newBuilder()
+                .setAllowAssistedDialing(true)
                 .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
                 .setSpeedDialContactPosition(position);
         if (isStarred) {

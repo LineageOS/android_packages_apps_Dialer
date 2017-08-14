@@ -65,6 +65,7 @@ public abstract class ContactTileView extends FrameLayout {
         CallSpecificAppData callSpecificAppData =
             CallSpecificAppData.newBuilder()
                 .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
+                .setAllowAssistedDialing(true)
                 .build();
         mListener.onContactSelected(
             getLookupUri(),
