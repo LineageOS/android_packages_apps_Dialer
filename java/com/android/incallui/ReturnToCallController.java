@@ -142,13 +142,22 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onDisconnect(DialerCall call) {
-    boolean hasAnotherCall = CallList.getInstance().getActiveOrBackgroundCall() != null;
+    if (call.wasParentCall()) {
+      // It's disconnected after the last child call is disconnected, and we already did everything
+      // for the last child.
+      LogUtil.i(
+          "ReturnToCallController.onDisconnect", "being called for a parent call and do nothing");
+      return;
+    }
     if (bubble != null
         && bubble.isVisible()
-        && (!TelecomUtil.isInCall(context) || hasAnotherCall)) {
+        && (!TelecomUtil.isInCall(context)
+            || CallList.getInstance().getActiveOrBackgroundCall() != null)) {
       bubble.showText(context.getText(R.string.incall_call_ended));
     }
-    if (!hasAnotherCall) {
+    // For conference call, we should hideAndReset for the last disconnected child call while the
+    // parent call is still there.
+    if (!CallList.getInstance().hasNonParentActiveOrBackgroundCall()) {
       hideAndReset();
     }
   }
