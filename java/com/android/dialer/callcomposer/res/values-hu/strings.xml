@@ -33,8 +33,6 @@
     <string name="description_call_composer_camera" msgid="388088245837924914">"Kép készítése"</string>
     <string name="description_call_composer_photo" msgid="6449208314952246454">"Fotó kiválasztása"</string>
     <string name="description_call_composer_message" msgid="9132362446000908550">"Üzenet küldése"</string>
-    <!-- no translation found for image_sent_messages (6520870555040566229) -->
-    <skip />
-    <!-- no translation found for message_sent_messages (6286576951151541098) -->
-    <skip />
+    <string name="image_sent_messages" msgid="6520870555040566229">"Fotó elküldve a Messages alkalmazásban"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Üzenet elküldve a Messages alkalmazásban"</string>
 </resources>

@@ -74,7 +74,7 @@ public class CequintCallerIdManager {
   private static boolean hasAlreadyCheckedCequintCallerIdPackage;
   private static boolean isCequintCallerIdEnabled;
 
-  // TODO(wangqi): Revisit it and maybe remove it if it's not necessary.
+  // TODO: Revisit it and maybe remove it if it's not necessary.
   private final ConcurrentHashMap<String, CequintCallerIdContact> callLogCache;
 
   /** Cequint caller id contact information. */

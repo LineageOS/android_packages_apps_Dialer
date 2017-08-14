@@ -31,7 +31,7 @@
     <string name="voicemail_settings_number_label" msgid="8935904934161608885">"Ovozli pochta raqami"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Raqam terilmoqda"</string>
     <string name="notification_missedCallTicker" msgid="238492086972857643">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> chaqiruvi javobsiz qoldi"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Joriy qo‘ng‘iroq"</string>
+    <string name="notification_ongoing_call" msgid="8712641937577776125">"Joriy chaqiruv"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Chiquvchi ishchi qo‘ng‘irog‘i"</string>
     <string name="notification_ongoing_call_wifi" msgid="4393238962909277019">"Joriy Wi-Fi qo‘ng‘iroq"</string>
     <string name="notification_ongoing_work_call_wifi" msgid="3169378605818323964">"Joriy Wi-Fi qo‘ng‘iroq (ish)"</string>
@@ -55,9 +55,9 @@
     <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Surat, xabar va joy. ax. ega muhim kiruv. chaqiruv"</string>
     <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Biriktirmalarga ega muhim kiruvchi chaqiruv"</string>
     <string name="notification_incoming_work_call" msgid="5291275092734261918">"Kiruvchi ishchi qo‘ng‘irog‘i"</string>
-    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Kiruvchi Wi-Fi qo‘ng‘iroq"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Kiruvchi Wi-Fi qo‘ng‘iroq (ish)"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Shubhali kiruvchi qo‘ng‘iroq"</string>
+    <string name="notification_incoming_call_wifi" msgid="1020138378061234203">"Kiruvchi Wi-Fi chaqiruv"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3549264481033044684">"Kiruvchi Wi-Fi chaqiruv (ish)"</string>
+    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Kiruvchi chaqiruv: shubhali spam"</string>
     <string name="notification_requesting_video_call" msgid="1807679328811515758">"Kiruvchi video so\'rovi"</string>
     <string name="notification_network_selection_title" msgid="8639159088474275747">"Xizmat mavjud emas"</string>
     <string name="notification_network_selection_text" msgid="7190860774239009625">"Tanlangan tarmoq (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) mavjud emas"</string>

@@ -56,7 +56,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private final ImageView multimediaImage;
 
-  // TODO(maxwelb): Display this when location is stored - b/36160042
+  // TODO: Display this when location is stored - b/36160042
   @SuppressWarnings("unused")
   private final TextView multimediaAttachmentsNumber;
 
@@ -91,7 +91,6 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     boolean isPulledCall =
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
-    boolean isLightbringerCall = entry.getIsLightbringerCall();
 
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
@@ -101,8 +100,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
 
-    callTypeText.setText(
-        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isLightbringerCall));
+    callTypeText.setText(callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
     callTime.setText(CallEntryFormatter.formatDate(context, entry.getDate()));
     if (CallTypeHelper.isMissedCallType(callType)) {
       callDuration.setVisibility(View.GONE);

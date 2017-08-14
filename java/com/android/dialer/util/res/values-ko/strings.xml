@@ -23,4 +23,6 @@
     <string name="activity_not_available" msgid="8360067109103762211">"이 기기에 작업을 처리할 수 있는 앱이 없습니다."</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"WPS 전화를 걸면 기존 전화 연결이 해제됩니다."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"계속"</string>
+    <!-- no translation found for camera_privacy_text (4268584469444688293) -->
+    <skip />
 </resources>

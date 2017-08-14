@@ -214,7 +214,7 @@ public class PhoneNumberHelper {
 
   private static boolean isVerizon(Context context) {
     // Verizon MCC/MNC codes copied from com/android/voicemailomtp/res/xml/vvm_config.xml.
-    // TODO(sail): Need a better way to do per carrier and per OEM configurations.
+    // TODO: Need a better way to do per carrier and per OEM configurations.
     switch (context.getSystemService(TelephonyManager.class).getSimOperator()) {
       case "310004":
       case "310010":

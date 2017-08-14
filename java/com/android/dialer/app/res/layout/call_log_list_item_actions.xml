@@ -35,7 +35,8 @@
 
   <LinearLayout
     android:id="@+id/call_action"
-    style="@style/CallLogActionStyle">
+    style="@style/CallLogActionStyle"
+    android:paddingTop="@dimen/call_log_actions_top_padding">
 
     <ImageView
       style="@style/CallLogActionIconStyle"

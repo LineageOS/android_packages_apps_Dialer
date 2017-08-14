@@ -67,7 +67,7 @@ public final class NewSearchFragment extends Fragment implements LoaderCallbacks
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
-    // TODO(calderwoodra) add enterprise loader
+    // TODO add enterprise loader
     if (id == CONTACTS_LOADER_ID) {
       return new SearchContactsCursorLoader(getContext());
     } else if (id == NEARBY_PLACES_ID) {

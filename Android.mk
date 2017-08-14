@@ -118,6 +118,7 @@ RES_DIRS := \
 	$(BASE_DIR)/incallui/telecomeventui/res \
 	$(BASE_DIR)/incallui/video/impl/res \
 	$(BASE_DIR)/incallui/video/protocol/res \
+	$(BASE_DIR)/voicemail/impl/configui/res \
 	$(BASE_DIR)/voicemail/impl/res \
 
 
@@ -178,6 +179,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/incallui/video/impl/AndroidManifest.xml \
 	$(BASE_DIR)/incallui/video/protocol/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/AndroidManifest.xml \
+	$(BASE_DIR)/voicemail/impl/configui/AndroidManifest.xml \
 	$(BASE_DIR)/voicemail/impl/AndroidManifest.xml \
 
 
@@ -257,6 +259,7 @@ LOCAL_AAPT_FLAGS := \
 	--extra-packages com.android.incallui.video.impl \
 	--extra-packages com.android.phone.common \
 	--extra-packages com.android.voicemail \
+	--extra-packages com.android.voicemail.impl.configui \
 	--extra-packages com.android.voicemail.impl \
 	--extra-packages com.android.voicemail.impl.fetch \
 	--extra-packages com.android.voicemail.impl.settings \

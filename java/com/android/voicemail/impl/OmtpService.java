@@ -17,9 +17,13 @@
 package com.android.voicemail.impl;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.os.UserManager;
+import android.preference.PreferenceManager;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.VisualVoicemailService;
 import android.telephony.VisualVoicemailSms;
@@ -40,6 +44,8 @@ public class OmtpService extends VisualVoicemailService {
 
   public static final String EXTRA_VOICEMAIL_SMS = "extra_voicemail_sms";
 
+  private static final String IS_SHUTTING_DOWN = "com.android.voicemail.impl.is_shutting_down";
+
   @Override
   public void onCellServiceConnected(
       VisualVoicemailTask task, final PhoneAccountHandle phoneAccountHandle) {
@@ -50,7 +56,7 @@ public class OmtpService extends VisualVoicemailService {
       return;
     }
 
-    if (!isUserUnlocked()) {
+    if (!isUserUnlocked(this)) {
       VvmLog.i(TAG, "onCellServiceConnected: user locked");
       task.finish();
       return;
@@ -75,7 +81,7 @@ public class OmtpService extends VisualVoicemailService {
       return;
     }
 
-    if (!isUserUnlocked()) {
+    if (!isUserUnlocked(this)) {
       LegacyModeSmsHandler.handle(this, sms);
       return;
     }
@@ -105,8 +111,14 @@ public class OmtpService extends VisualVoicemailService {
       return;
     }
 
-    if (!isUserUnlocked()) {
+    if (!isUserUnlocked(this)) {
       VvmLog.i(TAG, "onSimRemoved: user locked");
+      task.finish();
+      return;
+    }
+
+    if (isShuttingDown(this)) {
+      VvmLog.i(TAG, "onSimRemoved: system shutting down, ignoring");
       task.finish();
       return;
     }
@@ -124,12 +136,28 @@ public class OmtpService extends VisualVoicemailService {
       task.finish();
       return;
     }
-    if (!isUserUnlocked()) {
+    if (!isUserUnlocked(this)) {
       VvmLog.i(TAG, "onStopped: user locked");
       task.finish();
       return;
     }
     Logger.get(this).logImpression(DialerImpression.Type.VVM_UNBUNDLED_EVENT_RECEIVED);
+  }
+
+  @MainThread
+  static void onBoot(@NonNull Context context) {
+    VvmLog.i(TAG, "onBoot");
+    Assert.isTrue(isUserUnlocked(context));
+    Assert.isMainThread();
+    setShuttingDown(context, false);
+  }
+
+  @MainThread
+  static void onShutdown(@NonNull Context context) {
+    VvmLog.i(TAG, "onShutdown");
+    Assert.isTrue(isUserUnlocked(context));
+    Assert.isMainThread();
+    setShuttingDown(context, true);
   }
 
   private boolean isModuleEnabled() {
@@ -150,8 +178,20 @@ public class OmtpService extends VisualVoicemailService {
     return true;
   }
 
-  private boolean isUserUnlocked() {
-    UserManager userManager = getSystemService(UserManager.class);
+  private static boolean isUserUnlocked(@NonNull Context context) {
+    UserManager userManager = context.getSystemService(UserManager.class);
     return userManager.isUserUnlocked();
+  }
+
+  private static void setShuttingDown(Context context, boolean value) {
+    PreferenceManager.getDefaultSharedPreferences(context)
+        .edit()
+        .putBoolean(IS_SHUTTING_DOWN, value)
+        .apply();
+  }
+
+  private static boolean isShuttingDown(Context context) {
+    return PreferenceManager.getDefaultSharedPreferences(context)
+        .getBoolean(IS_SHUTTING_DOWN, false);
   }
 }

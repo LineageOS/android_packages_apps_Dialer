@@ -24,7 +24,7 @@ import java.util.Locale;
 /** {@link RecyclerView.ViewHolder} for the new call log. */
 final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
-  // TODO(zachh): Format correctly using current locale.
+  // TODO: Format correctly using current locale.
   private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 
   private final TextView contactNameView;

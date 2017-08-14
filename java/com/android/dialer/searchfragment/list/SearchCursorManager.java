@@ -124,7 +124,7 @@ final class SearchCursorManager {
 
   void setQuery(String query) {
     if (contactsCursor != null) {
-      // TODO(calderwoodra): abstract this
+      // TODO: abstract this
       ((SearchContactCursor) contactsCursor).filter(query);
     }
   }
@@ -242,7 +242,7 @@ final class SearchCursorManager {
     switch (rowType) {
       case RowType.NEARBY_PLACES_HEADER:
         return R.string.nearby_places;
-      case RowType.DIRECTORY_HEADER: // TODO(calderwoodra)
+      case RowType.DIRECTORY_HEADER: // TODO
       case RowType.DIRECTORY_ROW:
       case RowType.CONTACT_ROW:
       case RowType.NEARBY_PLACES_ROW:

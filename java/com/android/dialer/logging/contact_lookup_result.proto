@@ -6,8 +6,6 @@ option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
 
-
-
 message ContactLookupResult {
   // The different results of a contact lookup done using a phone number.
   enum Type {

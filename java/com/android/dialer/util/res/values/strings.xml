@@ -39,4 +39,6 @@
   <!-- Text for button which indicates that the user wants to proceed with an action. -->
   <string name="dialog_continue">Continue</string>
 
+  <!-- Text presented to the user explaining that we have enabled the camera permission automatically [CHAR LIMIT=NONE] -->
+  <string name="camera_privacy_text">Camera permission enabled</string>
 </resources>
