@@ -24,6 +24,8 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,6 +37,9 @@ import java.util.List;
  */
 /* package */ class NotificationThrottler {
   private static final int MAX_NOTIFICATIONS_PER_TAG = 10;
+  private static final int HIGH_GLOBAL_NOTIFICATION_COUNT = 45;
+
+  private static boolean didLogHighGlobalNotificationCountReached;
 
   /* package */ static void throttle(@NonNull Context context, @NonNull Notification notification) {
     Assert.isNotNull(context);
@@ -46,9 +51,22 @@ import java.util.List;
       return;
     }
 
-    int count = 0;
     NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    for (StatusBarNotification currentNotification : notificationManager.getActiveNotifications()) {
+    StatusBarNotification[] activeNotifications = notificationManager.getActiveNotifications();
+    if (activeNotifications.length > HIGH_GLOBAL_NOTIFICATION_COUNT
+        && !didLogHighGlobalNotificationCountReached) {
+      LogUtil.i(
+          "NotificationThrottler.throttle",
+          "app has %d notifications, system may suppress future notifications",
+          activeNotifications.length);
+      didLogHighGlobalNotificationCountReached = true;
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.HIGH_GLOBAL_NOTIFICATION_COUNT_REACHED);
+    }
+
+    // Count the number of notificatons for this group (excluding the summary).
+    int count = 0;
+    for (StatusBarNotification currentNotification : activeNotifications) {
       if (isNotificationInGroup(currentNotification, groupKey)) {
         count++;
       }
