@@ -107,9 +107,6 @@ public class StatusBarNotifier
   // This is non-interruptive, but otherwise behaves the same as NOTIFICATION_INCOMING_CALL
   private static final int NOTIFICATION_INCOMING_CALL_QUIET = 3;
 
-  private static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
-  private static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
-
   private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
 
   private final Context mContext;
@@ -390,6 +387,7 @@ public class StatusBarNotifier
           builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         }
         break;
+      default: // fall out
     }
 
     // Set the content
@@ -945,11 +943,11 @@ public class StatusBarNotifier
         InCallActivity.getIntent(
             mContext, false /* showDialpad */, false /* newOutgoingCall */, isFullScreen);
 
-    int requestCode = PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
+    int requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
     if (isFullScreen) {
       // Use a unique request code so that the pending intent isn't clobbered by the
       // non-full screen pending intent.
-      requestCode = PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
+      requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
     }
 
     // PendingIntent that can be used to launch the InCallActivity.  The
