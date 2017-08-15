@@ -23,6 +23,7 @@ import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.os.StrictMode.VmPolicy;
 import android.preference.PreferenceManager;
+import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.util.DialerUtils;
 
@@ -44,18 +45,20 @@ public final class DialerStrictMode {
   private static void warmupSharedPrefs(Application application) {
     if (isStrictModeAllowed()) {
       // From credential-encrypted (CE) storage, i.e.:
-      //    /data/data/com.google.android.dialer/shared_prefs
+      //    /data/data/com.android.dialer/shared_prefs
 
-      // com.google.android.dialer_preferences.xml
-      PreferenceManager.getDefaultSharedPreferences(application);
+      if (UserManagerCompat.isUserUnlocked(application)) {
+        // <package_name>_preferences.xml
+        PreferenceManager.getDefaultSharedPreferences(application);
 
-      // com.google.android.dialer.xml
-      application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
+        // <package_name>.xml
+        application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
+      }
 
       // From device-encrypted (DE) storage, i.e.:
       //   /data/user_de/0/com.android.dialer/shared_prefs/
 
-      // com.google.android.dialer_preferences.xml
+      // <package_name>_preferences.xml
       DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
     }
   }
