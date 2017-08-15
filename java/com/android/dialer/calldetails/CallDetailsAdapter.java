@@ -26,7 +26,6 @@ import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.common.Assert;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import java.util.List;
 
 /** Adapter for RecyclerView in {@link CallDetailsActivity}. */
@@ -49,9 +48,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
     this.listener = listener;
-    callTypeHelper =
-        new CallTypeHelper(
-            context.getResources(), LightbringerComponent.get(context).getLightbringer());
+    callTypeHelper = new CallTypeHelper(context.getResources());
   }
 
   @Override

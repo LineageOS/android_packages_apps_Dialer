@@ -365,7 +365,7 @@ public class CallButtonPresenter
   }
 
   private void updateUi(InCallState state, DialerCall call) {
-    LogUtil.v("CallButtonPresenter", "updating call UI for call: %s", call);
+    LogUtil.v("CallButtonPresenter", "updating call UI for call: ", call);
 
     if (mInCallButtonUi == null) {
       return;
@@ -414,7 +414,7 @@ public class CallButtonPresenter
     final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
     final boolean hasCameraPermission =
-        isVideo && VideoUtils.hasCameraPermissionAndAllowedByUser(mContext);
+        isVideo && VideoUtils.hasCameraPermissionAndShownPrivacyToast(mContext);
     // Disabling local video doesn't seem to work when dialing. See b/30256571.
     final boolean showPauseVideo =
         isVideo

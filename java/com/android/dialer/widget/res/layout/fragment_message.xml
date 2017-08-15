@@ -14,36 +14,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<RelativeLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:gravity="bottom"
   android:background="@color/background_dialer_white">
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_above="@+id/divider">
-
-    <LinearLayout
-      android:id="@+id/message_container"
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  </ScrollView>
+  <LinearLayout
+    android:id="@+id/message_container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 
   <View
-    android:id="@+id/divider"
     android:layout_width="match_parent"
     android:layout_height="@dimen/message_divider_height"
-    android:background="#12000000"
-    android:layout_above="@+id/edittext_container"/>
+    android:background="#12000000"/>
 
   <RelativeLayout
-    android:id="@+id/edittext_container"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true">
+    android:layout_height="wrap_content">
 
     <EditText
       android:id="@+id/custom_message"
@@ -58,7 +50,7 @@
       android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
       android:layout_toStartOf="@+id/count_and_send_container"
       android:inputType="textShortMessage|textCapSentences"
-      android:imeOptions="flagNoExtractUi|actionSend"/>
+      android:imeOptions="actionSend"/>
 
     <LinearLayout
       android:id="@+id/count_and_send_container"
@@ -88,4 +80,4 @@
         android:textColor="@color/dialer_edit_text_hint_color"/>
     </LinearLayout>
   </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

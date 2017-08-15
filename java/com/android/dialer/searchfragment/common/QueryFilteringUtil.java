@@ -42,7 +42,7 @@ public class QueryFilteringUtil {
     }
 
     // Check matches initials
-    // TODO(calderwoodra) investigate faster implementation
+    // TODO investigate faster implementation
     query = digitsOnly(query);
     int queryIndex = 0;
 

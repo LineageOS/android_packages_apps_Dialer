@@ -26,9 +26,4 @@ public class TrafficStatsTags {
   public static final int REVERSE_GEOCODE_TAG = 0xd001;
   public static final int VISUAL_VOICEMAIL_TAG = 0xd002;
   public static final int DIALER_VOIP_TAG = 0xd003;
-
-  // 0xFFFFFE00 to 0xFFFFFF00 reserved for proprietary extensions to the dialer app.
-
-  // 0xFFFFFF00 to 0xFFFFFFFF reserved by the system (see TrafficStats#getAndSetThreadStatsTag)
-
 }

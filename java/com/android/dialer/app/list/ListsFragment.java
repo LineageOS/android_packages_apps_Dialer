@@ -75,7 +75,6 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
   private SharedPreferences mPrefs;
   private boolean mHasFetchedVoicemailStatus;
   private boolean mShowVoicemailTabAfterVoicemailStatusIsFetched;
-  private VoicemailStatusHelper mVoicemailStatusHelper;
   private final ArrayList<OnPageChangeListener> mOnPageChangeListeners = new ArrayList<>();
   /** The position of the currently selected tab. */
   private int mTabIndex = TAB_INDEX_SPEED_DIAL;
@@ -99,7 +98,6 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
     LogUtil.d("ListsFragment.onCreate", null);
     Trace.beginSection(TAG + " onCreate");
     super.onCreate(savedInstanceState);
-    mVoicemailStatusHelper = new VoicemailStatusHelper();
     mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
     Trace.endSection();
   }
@@ -294,7 +292,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
     // Update hasActiveVoicemailProvider, which controls the number of tabs displayed.
     boolean hasActiveVoicemailProvider =
-        mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) > 0;
+        VoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) > 0;
     if (hasActiveVoicemailProvider != mAdapter.hasActiveVoicemailProvider()) {
       mAdapter.setHasActiveVoicemailProvider(hasActiveVoicemailProvider);
       mAdapter.notifyDataSetChanged();

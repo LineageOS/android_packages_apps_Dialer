@@ -27,7 +27,6 @@ import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
-import com.android.dialer.enrichedcall.videoshare.VideoShareSession;
 import com.android.dialer.multimedia.MultimediaData;
 import java.util.Collections;
 import java.util.List;
@@ -168,14 +167,6 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   @Override
   public long getVideoShareInviteSessionId(@NonNull String number) {
     return Session.NO_SESSION_ID;
-  }
-
-  @MainThread
-  @Nullable
-  @Override
-  public VideoShareSession getVideoShareSession(long sessionId) {
-    Assert.isMainThread();
-    return null;
   }
 
   @Override

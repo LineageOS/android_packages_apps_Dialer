@@ -31,10 +31,8 @@
     <string name="camera_permission_text" msgid="7863231776480341614">"Da snimite fotografiju, dajte pristup Kameri"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Da podijelite sliku, dozvolite pristup Medijima"</string>
     <string name="description_call_composer_camera" msgid="388088245837924914">"Uslikaj"</string>
-    <string name="description_call_composer_photo" msgid="6449208314952246454">"Izaberi fotografiju"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Odaberi fotografiju"</string>
     <string name="description_call_composer_message" msgid="9132362446000908550">"Pošalji poruku"</string>
-    <!-- no translation found for image_sent_messages (6520870555040566229) -->
-    <skip />
-    <!-- no translation found for message_sent_messages (6286576951151541098) -->
-    <skip />
+    <string name="image_sent_messages" msgid="6520870555040566229">"Fotografija je poslana putem aplikacije Messages"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Poruka je poslana putem aplikacije Messages"</string>
 </resources>

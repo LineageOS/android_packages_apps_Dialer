@@ -118,7 +118,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
   /**
    * The task for opening the camera, so it doesn't block the UI thread Using AsyncTask rather than
    * SafeAsyncTask because the tasks need to be serialized, but don't need to be on the UI thread
-   * TODO(blemmon): If we have other AyncTasks (not SafeAsyncTasks) this may contend and we may need
+   * TODO: If we have other AyncTasks (not SafeAsyncTasks) this may contend and we may need
    * to create a dedicated thread, or synchronize the threads in the thread pool
    */
   private AsyncTask<Integer, Void, Camera> mOpenCameraTask;

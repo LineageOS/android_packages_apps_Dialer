@@ -163,7 +163,7 @@ public class ContactInfoCache {
     if (request.isLocalRequest()) {
       info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
       if (info != null && !info.contactExists) {
-        // TODO(wangqi): Maybe skip look up if it's already available in cached number lookup
+        // TODO: Maybe skip look up if it's already available in cached number lookup
         // service.
         long start = SystemClock.elapsedRealtime();
         mContactInfoHelper.updateFromCequintCallerId(mCequintCallerIdManager, info, request.number);

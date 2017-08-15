@@ -32,6 +32,7 @@ import android.widget.ViewAnimator;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
@@ -347,12 +348,16 @@ public class ContactGridManager {
     }
 
     if (info.isTimerVisible) {
+      bottomTextSwitcher.setDisplayedChild(1);
+      bottomTimerView.setBase(
+          primaryCallState.connectTimeMillis
+              - System.currentTimeMillis()
+              + SystemClock.elapsedRealtime());
       if (!isTimerStarted) {
-        bottomTextSwitcher.setDisplayedChild(1);
-        bottomTimerView.setBase(
-            primaryCallState.connectTimeMillis
-                - System.currentTimeMillis()
-                + SystemClock.elapsedRealtime());
+        LogUtil.i(
+            "ContactGridManager.updateBottomRow",
+            "starting timer with base: %d",
+            bottomTimerView.getBase());
         bottomTimerView.start();
         isTimerStarted = true;
       }

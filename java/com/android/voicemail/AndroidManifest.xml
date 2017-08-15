@@ -14,7 +14,7 @@
   ~ limitations under the License
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.voicemailomtp">
+  package="com.android.voicemail">
 
   <uses-sdk
     android:minSdkVersion="23"
@@ -32,5 +32,22 @@
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-  <application/>
+  <application>
+    <receiver
+        android:name=".VoicemailSecretCodeReceiver"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.provider.Telephony.SECRET_CODE" />
+        <data android:scheme="android_secret_code" />
+      </intent-filter>
+    </receiver>
+
+    <receiver android:name="com.android.voicemail.VoicemailPowerCycleReceiver"
+        android:exported="false">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+      </intent-filter>
+    </receiver>
+  </application>
 </manifest>

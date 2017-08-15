@@ -129,7 +129,7 @@ public class Coalescer {
    */
   private static boolean rowsShouldBeCombined(
       DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
-    // TODO(zachh): Real implementation.
+    // TODO: Real implementation.
     DialerPhoneNumber number1;
     DialerPhoneNumber number2;
     try {

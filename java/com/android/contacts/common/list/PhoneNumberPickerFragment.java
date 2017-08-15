@@ -278,7 +278,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   @MainThread
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     Assert.isMainThread();
-    // TODO(strongarm): define and verify behavior for "Nearby places", corp directories,
+    // TODO: define and verify behavior for "Nearby places", corp directories,
     // and dividers listed in UI between these categories
     if (mCursorReranker != null
         && data != null

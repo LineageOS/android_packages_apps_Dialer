@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
@@ -34,6 +33,11 @@ public class LightbringerStub implements Lightbringer {
 
   @Inject
   public LightbringerStub() {}
+
+  @Override
+  public boolean isEnabled() {
+    return false;
+  }
 
   @MainThread
   @Override
@@ -97,17 +101,5 @@ public class LightbringerStub implements Lightbringer {
   @Override
   public String getPackageName() {
     return null;
-  }
-
-  @StringRes
-  @Override
-  public int getOutgoingCallTypeText() {
-    return -1;
-  }
-
-  @StringRes
-  @Override
-  public int getIncomingCallTypeText() {
-    return -1;
   }
 }

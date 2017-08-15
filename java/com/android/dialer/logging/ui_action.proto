@@ -6,8 +6,6 @@ option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
 
-
-
 message UiAction {
   enum Type {
     UNKNOWN = 0;

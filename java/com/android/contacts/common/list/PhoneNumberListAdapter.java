@@ -27,6 +27,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -357,7 +358,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     bindPhoneNumber(view, cursor, directory.isDisplayNumber(), position);
   }
 
-  protected void bindPhoneNumber(
+  @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+  public void bindPhoneNumber(
       ContactListItemView view, Cursor cursor, boolean displayNumber, int position) {
     CharSequence label = null;
     if (displayNumber && !cursor.isNull(PhoneQuery.PHONE_TYPE)) {
@@ -397,7 +399,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       }
     }
 
-    if (LightbringerComponent.get(mContext).getLightbringer().isReachable(mContext, number)) {
+    if (action == ContactListItemView.NONE
+        && LightbringerComponent.get(mContext).getLightbringer().isReachable(mContext, number)) {
       action = ContactListItemView.LIGHTBRINGER;
     }
 

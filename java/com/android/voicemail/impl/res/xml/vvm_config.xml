@@ -21,7 +21,6 @@
       <item value="TEST"/>
     </string-array>
   </pbundle_as_map>
-
   <pbundle_as_map>
     <!-- T-Mobile USA-->
     <string-array name="mccmnc">
