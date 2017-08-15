@@ -19,6 +19,7 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -93,7 +94,9 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     if (!TextUtils.isEmpty(contact.getSimDetails().getNetwork())) {
       networkView.setVisibility(View.VISIBLE);
       networkView.setText(contact.getSimDetails().getNetwork());
-      networkView.setTextColor(context.getResources().getColor(contact.getSimDetails().getColor()));
+      if (contact.getSimDetails().getColor() != PhoneAccount.NO_HIGHLIGHT_COLOR) {
+        networkView.setTextColor(contact.getSimDetails().getColor());
+      }
     }
 
     if (TextUtils.isEmpty(contact.getNumber())) {
