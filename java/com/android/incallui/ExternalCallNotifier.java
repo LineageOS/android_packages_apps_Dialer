@@ -18,7 +18,6 @@ package com.android.incallui;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +40,9 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.BitmapUtil;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallDelegate;
@@ -58,17 +59,25 @@ import java.util.Map;
  */
 public class ExternalCallNotifier implements ExternalCallList.ExternalCallListener {
 
-  /** Tag used with the notification manager to uniquely identify external call notifications. */
+  /**
+   * Common tag for all external call notifications. Unlike other grouped notifications in Dialer,
+   * external call notifications are uniquely identified by ID.
+   */
   private static final String NOTIFICATION_TAG = "EXTERNAL_CALL";
 
-  private static final int NOTIFICATION_SUMMARY_ID = -1;
+  private static final int GROUP_SUMMARY_NOTIFICATION_ID = -1;
+  private static final String GROUP_SUMMARY_NOTIFICATION_TAG = "GroupSummary_ExternalCall";
+  /**
+   * Key used to associate all external call notifications and the summary as belonging to a single
+   * group.
+   */
+  private static final String GROUP_KEY = "ExternalCallGroup";
 
   private final Context mContext;
   private final ContactInfoCache mContactInfoCache;
   private Map<Call, NotificationInfo> mNotifications = new ArrayMap<>();
   private int mNextUniqueNotificationId;
   private ContactsPreferences mContactsPreferences;
-  private boolean mShowingSummary;
 
   /** Initializes a new instance of the external call notifier. */
   public ExternalCallNotifier(
@@ -85,9 +94,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
   @Override
   public void onExternalCallAdded(android.telecom.Call call) {
     Log.i(this, "onExternalCallAdded " + call);
-    if (mNotifications.containsKey(call)) {
-      throw new IllegalArgumentException();
-    }
+    Assert.checkArgument(!mNotifications.containsKey(call));
     NotificationInfo info = new NotificationInfo(call, mNextUniqueNotificationId++);
     mNotifications.put(call, info);
 
@@ -108,9 +115,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
   /** Handles updates to an external call. */
   @Override
   public void onExternalCallUpdated(Call call) {
-    if (!mNotifications.containsKey(call)) {
-      throw new IllegalArgumentException();
-    }
+    Assert.checkArgument(mNotifications.containsKey(call));
     postNotification(mNotifications.get(call));
   }
 
@@ -183,28 +188,13 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
   /** Dismisses a notification for an external call. */
   private void dismissNotification(Call call) {
-    if (!mNotifications.containsKey(call)) {
-      throw new IllegalArgumentException();
-    }
+    Assert.checkArgument(mNotifications.containsKey(call));
 
-    NotificationManager notificationManager =
-        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.cancel(NOTIFICATION_TAG, mNotifications.get(call).getNotificationId());
+    // This will also dismiss the group summary if there are no more external call notifications.
+    DialerNotificationManager.cancel(
+        mContext, NOTIFICATION_TAG, mNotifications.get(call).getNotificationId());
 
     mNotifications.remove(call);
-
-    if (mShowingSummary && mNotifications.size() <= 1) {
-      // Where a summary notification is showing and there is now not enough notifications to
-      // necessitate a summary, cancel the summary.
-      notificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_SUMMARY_ID);
-      mShowingSummary = false;
-
-      // If there is still a single call requiring a notification, re-post the notification as a
-      // standalone notification without a summary notification.
-      if (mNotifications.size() == 1) {
-        postNotification(mNotifications.values().iterator().next());
-      }
-    }
   }
 
   /**
@@ -237,7 +227,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setOngoing(true);
     // Make the notification prioritized over the other normal notifications.
     builder.setPriority(Notification.PRIORITY_HIGH);
-    builder.setGroup(NOTIFICATION_TAG);
+    builder.setGroup(GROUP_KEY);
 
     boolean isVideoCall = VideoProfile.isVideo(info.getCall().getDetails().getVideoState());
     // Set the content ("Ongoing call on another device")
@@ -293,28 +283,10 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setPublicVersion(publicBuilder.build());
     Notification notification = builder.build();
 
-    NotificationManager notificationManager =
-        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.notify(NOTIFICATION_TAG, info.getNotificationId(), notification);
+    DialerNotificationManager.notify(
+        mContext, NOTIFICATION_TAG, info.getNotificationId(), notification);
 
-    if (!mShowingSummary && mNotifications.size() > 1) {
-      // If the number of notifications shown is > 1, and we're not already showing a group summary,
-      // build one now.  This will ensure the like notifications are grouped together.
-
-      Notification.Builder summary = new Notification.Builder(mContext);
-      // Set notification as ongoing since calls are long-running versus a point-in-time notice.
-      summary.setOngoing(true);
-      // Make the notification prioritized over the other normal notifications.
-      summary.setPriority(Notification.PRIORITY_HIGH);
-      summary.setGroup(NOTIFICATION_TAG);
-      summary.setGroupSummary(true);
-      summary.setSmallIcon(R.drawable.quantum_ic_call_white_24);
-      if (BuildCompat.isAtLeastO()) {
-        summary.setChannelId(NotificationChannelId.DEFAULT);
-      }
-      notificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_SUMMARY_ID, summary.build());
-      mShowingSummary = true;
-    }
+    showGroupSummaryNotification(mContext);
   }
 
   /**
@@ -474,5 +446,21 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     public void setPersonReference(@Nullable String personReference) {
       mPersonReference = personReference;
     }
+  }
+
+  private static void showGroupSummaryNotification(@NonNull Context context) {
+    Notification.Builder summary = new Notification.Builder(context);
+    // Set notification as ongoing since calls are long-running versus a point-in-time notice.
+    summary.setOngoing(true);
+    // Make the notification prioritized over the other normal notifications.
+    summary.setPriority(Notification.PRIORITY_HIGH);
+    summary.setGroup(GROUP_KEY);
+    summary.setGroupSummary(true);
+    summary.setSmallIcon(R.drawable.quantum_ic_call_white_24);
+    if (BuildCompat.isAtLeastO()) {
+      summary.setChannelId(NotificationChannelId.DEFAULT);
+    }
+    DialerNotificationManager.notify(
+        context, GROUP_SUMMARY_NOTIFICATION_TAG, GROUP_SUMMARY_NOTIFICATION_ID, summary.build());
   }
 }
