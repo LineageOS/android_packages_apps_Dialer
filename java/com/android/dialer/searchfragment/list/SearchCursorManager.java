@@ -17,6 +17,8 @@
 package com.android.dialer.searchfragment.list;
 
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import java.lang.annotation.Retention;
@@ -42,7 +44,8 @@ import java.lang.annotation.RetentionPolicy;
  *   <li>{@link #getRowType(int)}
  * </ul>
  */
-final class SearchCursorManager {
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+public final class SearchCursorManager {
 
   /** IntDef for the different types of rows that can be shown when searching. */
   @Retention(RetentionPolicy.SOURCE)
@@ -77,7 +80,7 @@ final class SearchCursorManager {
   private SearchCursor corpDirectoryCursor = null;
 
   /** Returns true if the cursor changed. */
-  boolean setContactsCursor(SearchCursor cursor) {
+  boolean setContactsCursor(@Nullable SearchCursor cursor) {
     if (cursor == contactsCursor) {
       return false;
     }
@@ -95,7 +98,7 @@ final class SearchCursorManager {
   }
 
   /** Returns true if the cursor changed. */
-  boolean setNearbyPlacesCursor(SearchCursor cursor) {
+  boolean setNearbyPlacesCursor(@Nullable SearchCursor cursor) {
     if (cursor == nearbyPlacesCursor) {
       return false;
     }
@@ -113,7 +116,7 @@ final class SearchCursorManager {
   }
 
   /** Returns true if a cursor changed. */
-  boolean setCorpDirectoryCursor(SearchCursor cursor) {
+  boolean setCorpDirectoryCursor(@Nullable SearchCursor cursor) {
     if (cursor == corpDirectoryCursor) {
       return false;
     }

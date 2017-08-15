@@ -30,9 +30,10 @@ public class Projections {
   public static final int PHONE_PHOTO_URI = 6;
   public static final int PHONE_LOOKUP_KEY = 7;
   public static final int PHONE_CARRIER_PRESENCE = 8;
+  public static final int PHONE_CONTACT_ID = 9;
 
   @SuppressWarnings("unused")
-  public static final int PHONE_SORT_KEY = 9;
+  public static final int PHONE_SORT_KEY = 10;
 
   public static final String[] PHONE_PROJECTION =
       new String[] {
@@ -45,6 +46,7 @@ public class Projections {
         Phone.PHOTO_THUMBNAIL_URI, // 6
         Phone.LOOKUP_KEY, // 7
         Phone.CARRIER_PRESENCE, // 8
-        Phone.SORT_KEY_PRIMARY // 9
+        Phone.CONTACT_ID, // 9
+        Phone.SORT_KEY_PRIMARY // 10
       };
 }

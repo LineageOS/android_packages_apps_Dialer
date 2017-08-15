@@ -429,6 +429,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     }
   }
 
+  public boolean wasParentCall() {
+    return mLogState.conferencedCalls != 0;
+  }
+
   private void update() {
     Trace.beginSection("DialerCall.update");
     int oldState = getState();

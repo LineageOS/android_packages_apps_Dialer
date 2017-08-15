@@ -536,6 +536,22 @@ public class CallList implements DialerCallDelegate {
   }
 
   /**
+   * Return if there is any active or background call which was not a parent call (never had a child
+   * call)
+   */
+  public boolean hasNonParentActiveOrBackgroundCall() {
+    for (DialerCall call : mCallById.values()) {
+      if ((call.getState() == State.ACTIVE
+              || call.getState() == State.ONHOLD
+              || call.getState() == State.CONFERENCED)
+          && !call.wasParentCall()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * This is called when the service disconnects, either expectedly or unexpectedly. For the
    * expected case, it's because we have no calls left. For the unexpected case, it is likely a
    * crash of phone and we need to clean up our calls manually. Without phone, there can be no

@@ -37,6 +37,8 @@ import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
@@ -53,11 +55,16 @@ import java.util.List;
 
 /** Fragment used for searching contacts. */
 public final class NewSearchFragment extends Fragment
-    implements LoaderCallbacks<Cursor>, OnEmptyViewActionButtonClickedListener {
+    implements LoaderCallbacks<Cursor>,
+        OnEmptyViewActionButtonClickedListener,
+        CapabilitiesListener {
 
   // Since some of our queries can generate network requests, we should delay them until the user
   // stops typing to prevent generating too much network traffic.
   private static final int NETWORK_SEARCH_DELAY_MILLIS = 300;
+  // To prevent constant capabilities updates refreshing the adapter, we want to add a delay between
+  // updates so they are bundled together
+  private static final int ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY = 400;
 
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
@@ -77,6 +84,7 @@ public final class NewSearchFragment extends Fragment
       () -> getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
   private final Runnable loadRemoteContactsRunnable =
       () -> getLoaderManager().restartLoader(REMOTE_CONTACTS_LOADER_ID, null, this);
+  private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
 
   private Runnable updatePositionRunnable;
 
@@ -85,7 +93,7 @@ public final class NewSearchFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle bundle) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
-    adapter = new SearchAdapter(getContext(), new SearchCursorManager());
+    adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -192,6 +200,7 @@ public final class NewSearchFragment extends Fragment
     super.onDestroy();
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
   }
 
   private void loadNearbyPlacesCursor() {
@@ -247,6 +256,29 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    EnrichedCallComponent.get(getContext())
+        .getEnrichedCallManager()
+        .registerCapabilitiesListener(this);
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    EnrichedCallComponent.get(getContext())
+        .getEnrichedCallManager()
+        .unregisterCapabilitiesListener(this);
+  }
+
+  @Override
+  public void onCapabilitiesUpdated() {
+    ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(capabilitiesUpdatedRunnable, ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY);
   }
 
   // Currently, setting up multiple FakeContentProviders doesn't work and results in this fragment
