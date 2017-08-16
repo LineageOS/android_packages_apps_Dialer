@@ -74,6 +74,12 @@ class ButtonChooserFactory {
     mapping.put(
         InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, MappingInfo.builder(4).setSlotOrder(10).build());
     mapping.put(InCallButtonIds.BUTTON_SWAP, MappingInfo.builder(5).setSlotOrder(0).build());
+    mapping.put(
+        InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY,
+        MappingInfo.builder(5)
+            .setSlotOrder(Integer.MAX_VALUE)
+            .setMutuallyExclusiveButton(InCallButtonIds.BUTTON_SWAP)
+            .build());
 
     return new ButtonChooser(new MappedButtonConfig(mapping));
   }
