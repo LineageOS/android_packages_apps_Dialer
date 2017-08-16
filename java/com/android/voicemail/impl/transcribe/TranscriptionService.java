@@ -58,22 +58,30 @@ public class TranscriptionService extends JobService {
 
   // Schedule a task to transcribe the indicated voicemail, return true if transcription task was
   // scheduled.
-  public static boolean transcribeVoicemail(Context context, Uri voicemailUri) {
+  public static boolean scheduleNewVoicemailTranscriptionJob(
+      Context context, Uri voicemailUri, boolean highPriority) {
     Assert.isMainThread();
     if (BuildCompat.isAtLeastO()) {
-      LogUtil.i("TranscriptionService.transcribeVoicemail", "scheduling transcription");
+      LogUtil.i(
+          "TranscriptionService.scheduleNewVoicemailTranscriptionJob", "scheduling transcription");
       Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED);
 
       ComponentName componentName = new ComponentName(context, TranscriptionService.class);
       JobInfo.Builder builder =
-          new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName)
-              .setMinimumLatency(0)
-              .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+          new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName);
+      if (highPriority) {
+        builder
+            .setMinimumLatency(0)
+            .setOverrideDeadline(0)
+            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+      } else {
+        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+      }
       JobScheduler scheduler = context.getSystemService(JobScheduler.class);
       JobWorkItem workItem = makeWorkItem(voicemailUri);
       return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
     } else {
-      LogUtil.i("TranscriptionService.transcribeVoicemail", "not supported");
+      LogUtil.i("TranscriptionService.scheduleNewVoicemailTranscriptionJob", "not supported");
       return false;
     }
   }
@@ -163,6 +171,10 @@ public class TranscriptionService extends JobService {
     } else {
       return false;
     }
+  }
+
+  static Uri getVoicemailUri(JobWorkItem workItem) {
+    return workItem.getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
   }
 
   private ExecutorService getExecutorService() {

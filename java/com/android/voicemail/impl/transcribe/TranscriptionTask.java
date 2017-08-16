@@ -81,7 +81,7 @@ public abstract class TranscriptionTask implements Runnable {
     this.callback = callback;
     this.workItem = workItem;
     this.clientFactory = clientFactory;
-    this.voicemailUri = getVoicemailUri(workItem);
+    this.voicemailUri = TranscriptionService.getVoicemailUri(workItem);
     this.configProvider = configProvider;
     databaseHelper = new TranscriptionDbHelper(context, voicemailUri);
   }
@@ -221,9 +221,5 @@ public abstract class TranscriptionTask implements Runnable {
     }
 
     return true;
-  }
-
-  private static Uri getVoicemailUri(JobWorkItem workItem) {
-    return workItem.getIntent().getParcelableExtra(TranscriptionService.EXTRA_VOICEMAIL_URI);
   }
 }

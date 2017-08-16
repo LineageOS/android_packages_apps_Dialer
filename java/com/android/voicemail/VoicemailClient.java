@@ -148,4 +148,6 @@ public interface VoicemailClient {
 
   @MainThread
   void onShutdown(@NonNull Context context);
+
+  void onTosAccepted(Context context);
 }

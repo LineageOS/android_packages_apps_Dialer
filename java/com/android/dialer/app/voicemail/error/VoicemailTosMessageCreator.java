@@ -232,6 +232,7 @@ public class VoicemailTosMessageCreator {
           .putInt(DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
+    VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context);
   }
 
   private void logTosCreatedImpression() {
