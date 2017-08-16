@@ -235,6 +235,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
       cacheContactInfo(position);
       CallSpecificAppData callSpecificAppData =
           CallSpecificAppData.newBuilder()
+              .setAllowAssistedDialing(true)
               .setCallInitiationType(getCallInitiationType(true /* isRemoteDirectory */))
               .setPositionOfSelectedSearchResult(position)
               .setCharactersInSearchString(getQueryString() == null ? 0 : getQueryString().length())

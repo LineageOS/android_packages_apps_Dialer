@@ -499,5 +499,10 @@ message DialerImpression {
 
     // Found Lightbringer reachable contact when launching Dialer
     HAS_LIGHTBRINGER_REACHABLE_CONTACTS = 1248;
+
+    // This impression is logged once per process when the number of
+    // notifications is very high and the system may suppress future
+    // notifications.
+    HIGH_GLOBAL_NOTIFICATION_COUNT_REACHED = 1249;
   }
 }

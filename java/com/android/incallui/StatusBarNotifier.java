@@ -28,7 +28,6 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_HANG_UP_
 import android.Manifest;
 import android.app.ActivityManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +61,7 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactphoto.BitmapUtil;
@@ -70,6 +70,7 @@ import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DrawableConverter;
@@ -113,7 +114,6 @@ public class StatusBarNotifier
 
   private final Context mContext;
   private final ContactInfoCache mContactInfoCache;
-  private final NotificationManager mNotificationManager;
   private final DialerRingtoneManager mDialerRingtoneManager;
   @Nullable private ContactsPreferences mContactsPreferences;
   private int mCurrentNotification = NOTIFICATION_NONE;
@@ -126,11 +126,9 @@ public class StatusBarNotifier
   private StatusBarCallListener mStatusBarCallListener;
 
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
-    Objects.requireNonNull(context);
-    mContext = context;
+    mContext = Assert.isNotNull(context);
     mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
     mContactInfoCache = contactInfoCache;
-    mNotificationManager = context.getSystemService(NotificationManager.class);
     mDialerRingtoneManager =
         new DialerRingtoneManager(
             new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
@@ -142,14 +140,12 @@ public class StatusBarNotifier
    * Should only be called from a irrecoverable state where it is necessary to dismiss all
    * notifications.
    */
-  static void clearAllCallNotifications(Context backupContext) {
-    LogUtil.i(
+  static void clearAllCallNotifications(Context context) {
+    LogUtil.e(
         "StatusBarNotifier.clearAllCallNotifications",
         "something terrible happened, clear all InCall notifications");
 
-    NotificationManager notificationManager =
-        backupContext.getSystemService(NotificationManager.class);
-    notificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+    DialerNotificationManager.cancel(context, NOTIFICATION_TAG, NOTIFICATION_ID);
   }
 
   private static int getWorkStringFromPersonalString(int resId) {
@@ -218,7 +214,7 @@ public class StatusBarNotifier
     }
     if (mCurrentNotification != NOTIFICATION_NONE) {
       LogUtil.i("StatusBarNotifier.cancelNotification", "cancel");
-      mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+      DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
     }
     mCurrentNotification = NOTIFICATION_NONE;
   }
@@ -379,7 +375,7 @@ public class StatusBarNotifier
               "Canceling old notification so this one can be noisy");
           // Moving from a non-interuptive notification (or none) to a noisy one. Cancel the old
           // notification (if there is one) so the fullScreenIntent or HUN will show
-          mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+          DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
         }
         break;
       case NOTIFICATION_INCOMING_CALL_QUIET:
@@ -438,7 +434,7 @@ public class StatusBarNotifier
         "displaying notification for " + notificationType);
 
     try {
-      mNotificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notification);
+      DialerNotificationManager.notify(mContext, NOTIFICATION_TAG, NOTIFICATION_ID, notification);
     } catch (RuntimeException e) {
       // TODO(b/34744003): Move the memory stats into silent feedback PSD.
       ActivityManager activityManager = mContext.getSystemService(ActivityManager.class);

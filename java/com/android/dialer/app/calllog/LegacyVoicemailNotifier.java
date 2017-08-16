@@ -18,7 +18,6 @@ package com.android.dialer.app.calllog;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
@@ -35,6 +34,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
 
 /** Shows a notification in the status bar for legacy vociemail. */
@@ -77,9 +77,7 @@ public final class LegacyVoicemailNotifier {
             callVoicemailIntent,
             voicemailSettingsIntent,
             isRefresh);
-    context
-        .getSystemService(NotificationManager.class)
-        .notify(NOTIFICATION_TAG, NOTIFICATION_ID, notification);
+    DialerNotificationManager.notify(context, NOTIFICATION_TAG, NOTIFICATION_ID, notification);
   }
 
   @NonNull
@@ -151,8 +149,7 @@ public final class LegacyVoicemailNotifier {
   public static void cancelNotification(@NonNull Context context) {
     LogUtil.enterBlock("LegacyVoicemailNotifier.cancelNotification");
     Assert.checkArgument(BuildCompat.isAtLeastO());
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    notificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+    DialerNotificationManager.cancel(context, NOTIFICATION_TAG, NOTIFICATION_ID);
   }
 
   private LegacyVoicemailNotifier() {}

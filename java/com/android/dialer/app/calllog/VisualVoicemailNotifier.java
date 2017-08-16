@@ -17,7 +17,6 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
@@ -43,7 +41,9 @@ import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.notification.NotificationManagerUtils;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.List;
@@ -51,9 +51,17 @@ import java.util.Map;
 
 /** Shows a notification in the status bar for visual voicemail. */
 final class VisualVoicemailNotifier {
+  /** Prefix used to generate a unique tag for each voicemail notification. */
   private static final String NOTIFICATION_TAG_PREFIX = "VisualVoicemail_";
-  private static final String NOTIFICATION_GROUP = "VisualVoicemail";
+  /** Common ID for all voicemail notifications. */
   private static final int NOTIFICATION_ID = 1;
+  /** Tag for the group summary notification. */
+  private static final String GROUP_SUMMARY_NOTIFICATION_TAG = "GroupSummary_VisualVoicemail";
+  /**
+   * Key used to associate all voicemail notifications and the summary as belonging to a single
+   * group.
+   */
+  private static final String GROUP_KEY = "VisualVoicemailGroup";
 
   public static void showNotifications(
       @NonNull Context context,
@@ -82,12 +90,12 @@ final class VisualVoicemailNotifier {
       groupSummary.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
     }
 
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    notificationManager.notify(
-        getNotificationTagForGroupSummary(), NOTIFICATION_ID, groupSummary.build());
+    DialerNotificationManager.notify(
+        context, GROUP_SUMMARY_NOTIFICATION_TAG, NOTIFICATION_ID, groupSummary.build());
 
     for (NewCall voicemail : newCalls) {
-      notificationManager.notify(
+      DialerNotificationManager.notify(
+          context,
           getNotificationTagForVoicemail(voicemail),
           NOTIFICATION_ID,
           createNotificationForVoicemail(context, voicemail, contactInfos));
@@ -96,13 +104,7 @@ final class VisualVoicemailNotifier {
 
   public static void cancelAllVoicemailNotifications(@NonNull Context context) {
     LogUtil.enterBlock("VisualVoicemailNotifier.cancelAllVoicemailNotifications");
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
-      String tag = notification.getTag();
-      if (tag != null && tag.startsWith(NOTIFICATION_TAG_PREFIX)) {
-        notificationManager.cancel(tag, notification.getId());
-      }
-    }
+    NotificationManagerUtils.cancelAllInGroup(context, GROUP_KEY);
   }
 
   public static void cancelSingleVoicemailNotification(
@@ -112,27 +114,9 @@ final class VisualVoicemailNotifier {
       LogUtil.e("VisualVoicemailNotifier.cancelSingleVoicemailNotification", "uri is null");
       return;
     }
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    String voicemailTag = getNotificationTagForUri(voicemailUri);
-    String summaryTag = getNotificationTagForGroupSummary();
-    int notificationCount = 0;
-
-    for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
-      String currentTag = notification.getTag();
-      if (currentTag == null) {
-        continue;
-      }
-      if (currentTag.equals(voicemailTag)) {
-        notificationManager.cancel(notification.getTag(), notification.getId());
-      } else if (currentTag.startsWith(NOTIFICATION_TAG_PREFIX) && !currentTag.equals(summaryTag)) {
-        notificationCount++;
-      }
-    }
-
-    if (notificationCount == 0) {
-      // There are no more visual voicemail notifications. Remove the summary notification too.
-      notificationManager.cancel(summaryTag, NOTIFICATION_ID);
-    }
+    // This will also dismiss the group summary if there are no more voicemail notifications.
+    DialerNotificationManager.cancel(
+        context, getNotificationTagForUri(voicemailUri), NOTIFICATION_ID);
   }
 
   private static String getNotificationTagForVoicemail(@NonNull NewCall voicemail) {
@@ -143,15 +127,11 @@ final class VisualVoicemailNotifier {
     return NOTIFICATION_TAG_PREFIX + voicemailUri;
   }
 
-  private static String getNotificationTagForGroupSummary() {
-    return NOTIFICATION_TAG_PREFIX + "GroupSummary";
-  }
-
   private static Notification.Builder createNotificationBuilder(@NonNull Context context) {
     return new Notification.Builder(context)
         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
         .setColor(context.getColor(R.color.dialer_theme_color))
-        .setGroup(NOTIFICATION_GROUP)
+        .setGroup(GROUP_KEY)
         .setOnlyAlertOnce(true)
         .setAutoCancel(true);
   }

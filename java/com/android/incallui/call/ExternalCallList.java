@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.telecom.Call;
 import android.util.ArraySet;
 import com.android.contacts.common.compat.CallCompat;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.Collections;
 import java.util.Set;
@@ -48,9 +49,8 @@ public class ExternalCallList {
 
   /** Begins tracking an external call and notifies listeners of the new call. */
   public void onCallAdded(Call telecomCall) {
-    if (!telecomCall.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
-      throw new IllegalArgumentException();
-    }
+    Assert.checkArgument(
+        telecomCall.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL));
     mExternalCalls.add(telecomCall);
     telecomCall.registerCallback(mTelecomCallCallback, new Handler(Looper.getMainLooper()));
     notifyExternalCallAdded(telecomCall);
