@@ -42,6 +42,7 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -82,6 +83,9 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadView;
 import com.android.dialer.location.GeoUtil;
@@ -177,6 +181,8 @@ public class DialpadFragment extends Fragment
   private boolean mStartedFromNewIntent = false;
   private boolean mFirstLaunch = false;
   private boolean mAnimate = false;
+
+  private DialerExecutor<String> initPhoneNumberFormattingTextWatcherExecutor;
 
   /**
    * Determines whether an add call operation is requested.
@@ -346,6 +352,14 @@ public class DialpadFragment extends Fragment
       mCallStateReceiver = new CallStateReceiver();
       getActivity().registerReceiver(mCallStateReceiver, callStateIntentFilter);
     }
+
+    initPhoneNumberFormattingTextWatcherExecutor =
+        DialerExecutors.createUiTaskBuilder(
+                getFragmentManager(),
+                "DialpadFragment.initPhoneNumberFormattingTextWatcher",
+                new InitPhoneNumberFormattingTextWatcherWorker())
+            .onSuccess(watcher -> mDialpadView.getDigits().addTextChangedListener(watcher))
+            .build();
     Trace.endSection();
   }
 
@@ -371,9 +385,8 @@ public class DialpadFragment extends Fragment
     mDigits.addTextChangedListener(this);
     mDigits.setElegantTextHeight(false);
 
-    PhoneNumberFormattingTextWatcher watcher =
-        new PhoneNumberFormattingTextWatcher(GeoUtil.getCurrentCountryIso(getActivity()));
-    mDigits.addTextChangedListener(watcher);
+    initPhoneNumberFormattingTextWatcherExecutor.executeSerial(
+        GeoUtil.getCurrentCountryIso(getActivity()));
 
     // Check for the presence of the keypad
     View oneButton = fragmentView.findViewById(R.id.one);
@@ -1705,6 +1718,23 @@ public class DialpadFragment extends Fragment
         // onscreen, but useless...)
         showDialpadChooser(false);
       }
+    }
+  }
+
+  /**
+   * Input: the ISO 3166-1 two letters country code of the country the user is in
+   *
+   * <p>Output: PhoneNumberFormattingTextWatcher. Note: It is unusual to return a non-data value
+   * from a worker, but it is a limitation in libphonenumber API that the watcher cannot be
+   * initialized on the main thread.
+   */
+  private static class InitPhoneNumberFormattingTextWatcherWorker
+      implements Worker<String, PhoneNumberFormattingTextWatcher> {
+
+    @Nullable
+    @Override
+    public PhoneNumberFormattingTextWatcher doInBackground(@Nullable String countryCode) {
+      return new PhoneNumberFormattingTextWatcher(countryCode);
     }
   }
 }
