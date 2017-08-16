@@ -23,13 +23,13 @@
     android:orientation="vertical">
 
   <TextView
-      android:id="@+id/contact_name"
+      android:id="@+id/primary_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       style="@style/PrimaryText"/>
 
   <TextView
-      android:id="@+id/timestamp"
+      android:id="@+id/secondary_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       style="@style/SecondaryText"/>

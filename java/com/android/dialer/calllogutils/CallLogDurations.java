@@ -18,67 +18,16 @@ package com.android.dialer.calllogutils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.icu.lang.UCharacter;
-import android.icu.text.BreakIterator;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import com.android.dialer.util.DialerUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/** Utility class for formatting data and data usage in call log entries. */
-public class CallEntryFormatter {
-
-  /**
-   * Formats the provided date into a value suitable for display in the current locale.
-   *
-   * <p>For example, returns a string like "Wednesday, May 25, 2016, 8:02PM" or "Chorshanba, 2016
-   * may 25,20:02".
-   *
-   * <p>For pre-N devices, the returned value may not start with a capital if the local convention
-   * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
-   */
-  public static CharSequence formatDate(Context context, long callDateMillis) {
-    CharSequence dateValue =
-        DateUtils.formatDateRange(
-            context,
-            callDateMillis /* startDate */,
-            callDateMillis /* endDate */,
-            DateUtils.FORMAT_SHOW_TIME
-                | DateUtils.FORMAT_SHOW_DATE
-                | DateUtils.FORMAT_SHOW_WEEKDAY
-                | DateUtils.FORMAT_SHOW_YEAR);
-
-    // We want the beginning of the date string to be capitalized, even if the word at the beginning
-    // of the string is not usually capitalized. For example, "Wednesdsay" in Uzbek is "chorshanba”
-    // (not capitalized). To handle this issue we apply title casing to the start of the sentence so
-    // that "chorshanba, 2016 may 25,20:02" becomes "Chorshanba, 2016 may 25,20:02".
-    //
-    // The ICU library was not available in Android until N, so we can only do this in N+ devices.
-    // Pre-N devices will still see incorrect capitalization in some languages.
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return dateValue;
-    }
-
-    // Using the ICU library is safer than just applying toUpperCase() on the first letter of the
-    // word because in some languages, there can be multiple starting characters which should be
-    // upper-cased together. For example in Dutch "ij" is a digraph in which both letters should be
-    // capitalized together.
-
-    // TITLECASE_NO_LOWERCASE is necessary so that things that are already capitalized like the
-    // month ("May") are not lower-cased as part of the conversion.
-    return UCharacter.toTitleCase(
-        Locale.getDefault(),
-        dateValue.toString(),
-        BreakIterator.getSentenceInstance(),
-        UCharacter.TITLECASE_NO_LOWERCASE);
-  }
+/** Utility class for formatting duration and data usage in call log entries. */
+public class CallLogDurations {
 
   private static CharSequence formatDuration(Context context, long elapsedSeconds) {
     Resources res = context.getResources();

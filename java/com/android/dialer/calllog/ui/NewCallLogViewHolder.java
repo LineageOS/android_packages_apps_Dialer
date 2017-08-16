@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -27,17 +28,20 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   // TODO(zachh): Format correctly using current locale.
   private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 
-  private final TextView contactNameView;
-  private final TextView timestampView;
+  private final TextView primaryTextView;
+  private final TextView secondaryTextView;
 
   NewCallLogViewHolder(View view) {
     super(view);
-    contactNameView = view.findViewById(R.id.contact_name);
-    timestampView = view.findViewById(R.id.timestamp);
+    primaryTextView = view.findViewById(R.id.primary_text);
+    secondaryTextView = view.findViewById(R.id.secondary_text);
   }
 
-  void bind(long timestamp) {
-    contactNameView.setText("Contact Name Placeholder");
-    timestampView.setText(dateFormat.format(timestamp));
+  /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
+  void bind(Cursor cursor) {
+    CoalescedAnnotatedCallLogCursorLoader.Row row =
+        new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
+    primaryTextView.setText(row.primaryText());
+    secondaryTextView.setText(dateFormat.format(row.timestamp()));
   }
 }

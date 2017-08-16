@@ -28,7 +28,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
-import com.android.dialer.calllogutils.CallEntryFormatter;
+import com.android.dialer.calllogutils.CallLogDates;
+import com.android.dialer.calllogutils.CallLogDurations;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.LogUtil;
@@ -103,16 +104,17 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
     callTypeText.setText(
         callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isLightbringerCall));
-    callTime.setText(CallEntryFormatter.formatDate(context, entry.getDate()));
+    callTime.setText(CallLogDates.formatDate(context, entry.getDate()));
+
     if (CallTypeHelper.isMissedCallType(callType)) {
       callDuration.setVisibility(View.GONE);
     } else {
       callDuration.setVisibility(View.VISIBLE);
       callDuration.setText(
-          CallEntryFormatter.formatDurationAndDataUsage(
+          CallLogDurations.formatDurationAndDataUsage(
               context, entry.getDuration(), entry.getDataUsage()));
       callDuration.setContentDescription(
-          CallEntryFormatter.formatDurationAndDataUsageA11y(
+          CallLogDurations.formatDurationAndDataUsageA11y(
               context, entry.getDuration(), entry.getDataUsage()));
     }
     setMultimediaDetails(number, entry, showMultimediaDivider);

@@ -19,17 +19,14 @@ import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 
 /** {@link RecyclerView.Adapter} for the new call log fragment. */
 final class NewCallLogAdapter extends RecyclerView.Adapter<NewCallLogViewHolder> {
 
   private final Cursor cursor;
-  private final int timestampIndex;
 
   NewCallLogAdapter(Cursor cursor) {
     this.cursor = cursor;
-    timestampIndex = cursor.getColumnIndexOrThrow(CoalescedAnnotatedCallLog.TIMESTAMP);
   }
 
   @Override
@@ -42,8 +39,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<NewCallLogViewHolder>
   @Override
   public void onBindViewHolder(NewCallLogViewHolder viewHolder, int position) {
     cursor.moveToPosition(position);
-    long timestamp = cursor.getLong(timestampIndex);
-    viewHolder.bind(timestamp);
+    viewHolder.bind(cursor);
   }
 
   @Override

@@ -42,13 +42,103 @@ public class AnnotatedCallLogContract {
     String TIMESTAMP = "timestamp";
 
     /**
-     * Name to display for the entry.
+     * Primary text to display for the entry. This could be a name from a local contact or caller ID
+     * data source, or it could just be a phone number, for example.
+     *
+     * <p>This is exactly how it should appear to the user. If the user's locale or name display
+     * preferences change, this column should be rewritten.
      *
      * <p>Type: TEXT
      */
-    String CONTACT_NAME = "contact_name";
+    String PRIMARY_TEXT = "primary_text";
 
-    String[] ALL_COMMON_COLUMNS = new String[] {_ID, TIMESTAMP, CONTACT_NAME};
+    /**
+     * Local photo URI for the contact associated with the phone number, if it exists.
+     *
+     * <p>Photos currently only come from local contacts database and not caller ID sources. If
+     * there is no photo for a contact then an appropriate letter tile should be drawn.
+     *
+     * <p>TYPE: TEXT
+     */
+    String CONTACT_PHOTO_URI = "contact_photo_uri";
+
+    // TODO(zachh): If we need to support photos other than local contacts', add a (blob?) column.
+
+    /**
+     * The number type as a string to be displayed to the user, for example "Home" or "Mobile".
+     *
+     * <p>This column should be updated for the appropriate language when the locale changes.
+     *
+     * <p>TYPE: TEXT
+     */
+    String NUMBER_TYPE_LABEL = "number_type_label";
+
+    /**
+     * See CallLog.Calls.IS_READ.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     */
+    String IS_READ = "is_read";
+
+    /**
+     * See CallLog.Calls.GEOCODED_LOCATION.
+     *
+     * <p>TYPE: TEXT
+     */
+    String GEOCODED_LOCATION = "geocoded_location";
+
+    /**
+     * String suitable for display which indicates the phone account used to make the call.
+     *
+     * <p>TYPE: TEXT
+     */
+    String PHONE_ACCOUNT_LABEL = "phone_account_label";
+
+    /**
+     * The color int for the phone account.
+     *
+     * <p>TYPE: INTEGER (int)
+     */
+    String PHONE_ACCOUNT_COLOR = "phone_account_color";
+
+    /**
+     * See CallLog.Calls.FEATURES.
+     *
+     * <p>TYPE: INTEGER (int)
+     */
+    String FEATURES = "features";
+
+    /**
+     * True if a caller ID data source informed us that this is a business number. This is used to
+     * determine if a generic business avatar should be shown vs. a generic person avatar.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     */
+    String IS_BUSINESS = "is_business";
+
+    /**
+     * True if this was a call to voicemail. This is used to determine if the voicemail avatar
+     * should be displayed.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     */
+    String IS_VOICEMAIL = "is_voicemail";
+
+    String[] ALL_COMMON_COLUMNS =
+        new String[] {
+          _ID,
+          TIMESTAMP,
+          PRIMARY_TEXT,
+          CONTACT_PHOTO_URI,
+          NUMBER_TYPE_LABEL,
+          IS_READ,
+          GEOCODED_LOCATION,
+          PHONE_ACCOUNT_LABEL,
+          PHONE_ACCOUNT_COLOR,
+          FEATURES,
+          IS_BUSINESS,
+          IS_VOICEMAIL
+        };
   }
 
   /**
@@ -116,11 +206,18 @@ public class AnnotatedCallLogContract {
     public static final String FORMATTED_NUMBER = "formatted_number";
 
     /**
+     * The call types of the most recent 3 calls, encoded as a CallTypes proto.
+     *
+     * <p>TYPE: BLOB
+     */
+    public static final String CALL_TYPES = "call_types";
+
+    /**
      * Columns that are only in the {@link CoalescedAnnotatedCallLog} but not the {@link
      * AnnotatedCallLog}.
      */
     private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG =
-        new String[] {NUMBER_CALLS, FORMATTED_NUMBER};
+        new String[] {NUMBER_CALLS, FORMATTED_NUMBER, CALL_TYPES};
 
     /** All columns in the {@link CoalescedAnnotatedCallLog}. */
     public static final String[] ALL_COLUMNS =

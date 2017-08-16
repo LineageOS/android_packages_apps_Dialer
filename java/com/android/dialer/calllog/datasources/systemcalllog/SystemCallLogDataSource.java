@@ -28,10 +28,13 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
@@ -40,10 +43,12 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Coa
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -189,7 +194,18 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .query(
                 Calls.CONTENT_URI, // Excludes voicemail
                 new String[] {
-                  Calls._ID, Calls.DATE, Calls.LAST_MODIFIED, Calls.NUMBER, Calls.COUNTRY_ISO
+                  Calls._ID,
+                  Calls.DATE,
+                  Calls.LAST_MODIFIED,
+                  Calls.NUMBER,
+                  Calls.COUNTRY_ISO,
+                  Calls.CACHED_NUMBER_TYPE,
+                  Calls.CACHED_NUMBER_LABEL,
+                  Calls.IS_READ,
+                  Calls.GEOCODED_LOCATION,
+                  Calls.PHONE_ACCOUNT_COMPONENT_NAME,
+                  Calls.PHONE_ACCOUNT_ID,
+                  Calls.FEATURES
                 },
                 Calls.LAST_MODIFIED + " > ?",
                 new String[] {String.valueOf(previousTimestampProcessed)},
@@ -211,6 +227,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int lastModifiedColumn = cursor.getColumnIndexOrThrow(Calls.LAST_MODIFIED);
         int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
         int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
+        int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
+        int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
+        int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
+        int geocodedLocationColumn = cursor.getColumnIndexOrThrow(Calls.GEOCODED_LOCATION);
+        int phoneAccountComponentColumn =
+            cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_COMPONENT_NAME);
+        int phoneAccountIdColumn = cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_ID);
+        int featuresColumn = cursor.getColumnIndexOrThrow(Calls.FEATURES);
 
         // The cursor orders by LAST_MODIFIED DESC, so the first result is the most recent timestamp
         // processed.
@@ -220,13 +244,33 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           long date = cursor.getLong(dateColumn);
           String numberAsStr = cursor.getString(numberColumn);
           String countryIso = cursor.getString(countryIsoColumn);
+          // TODO(zachh): Decide if should use "cached" columns from call log or recompute.
+          int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
+          String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
+          int isRead = cursor.getInt(isReadColumn);
+          String geocodedLocation = cursor.getString(geocodedLocationColumn);
+          String phoneAccountComponentName = cursor.getString(phoneAccountComponentColumn);
+          String phoneAccountId = cursor.getString(phoneAccountIdColumn);
+          int features = cursor.getInt(featuresColumn);
 
           byte[] numberAsProtoBytes =
               dialerPhoneNumberUtil.parse(numberAsStr, countryIso).toByteArray();
 
           ContentValues contentValues = new ContentValues();
           contentValues.put(AnnotatedCallLog.TIMESTAMP, date);
+          // TODO(zachh): Need to handle post-dial digits; different on N and M.
           contentValues.put(AnnotatedCallLog.NUMBER, numberAsProtoBytes);
+
+          // TODO(zachh): Test this for locales.
+          contentValues.put(
+              AnnotatedCallLog.NUMBER_TYPE_LABEL,
+              Phone.getTypeLabel(appContext.getResources(), cachedNumberType, cachedNumberLabel)
+                  .toString());
+          contentValues.put(AnnotatedCallLog.IS_READ, isRead);
+          contentValues.put(AnnotatedCallLog.GEOCODED_LOCATION, geocodedLocation);
+          populatePhoneAccountLabelAndColor(
+              appContext, contentValues, phoneAccountComponentName, phoneAccountId);
+          contentValues.put(AnnotatedCallLog.FEATURES, features);
 
           if (existingAnnotatedCallLogIds.contains(id)) {
             mutations.update(id, contentValues);
@@ -236,6 +280,29 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         } while (cursor.moveToNext());
       } // else no new results, do nothing.
     }
+  }
+
+  private void populatePhoneAccountLabelAndColor(
+      Context appContext,
+      ContentValues contentValues,
+      String phoneAccountComponentName,
+      String phoneAccountId) {
+    PhoneAccountHandle phoneAccountHandle =
+        PhoneAccountUtils.getAccount(phoneAccountComponentName, phoneAccountId);
+    if (phoneAccountHandle == null) {
+      return;
+    }
+    String label = PhoneAccountUtils.getAccountLabel(appContext, phoneAccountHandle);
+    if (TextUtils.isEmpty(label)) {
+      return;
+    }
+    contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_LABEL, label);
+
+    int color = PhoneAccountUtils.getAccountColor(appContext, phoneAccountHandle);
+    if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
+      color = R.color.dialer_secondary_text_color;
+    }
+    contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_COLOR, color);
   }
 
   private static void handleDeletes(

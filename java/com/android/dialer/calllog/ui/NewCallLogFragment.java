@@ -17,7 +17,6 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.CallLogFramework.CallLogUi;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -133,9 +131,7 @@ public final class NewCallLogFragment extends Fragment
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     LogUtil.enterBlock("NewCallLogFragment.onCreateLoader");
-    // CoalescedAnnotatedCallLog requires that all params be null.
-    return new CursorLoader(
-        getContext(), CoalescedAnnotatedCallLog.CONTENT_URI, null, null, null, null);
+    return new CoalescedAnnotatedCallLogCursorLoader(getContext());
   }
 
   @Override
