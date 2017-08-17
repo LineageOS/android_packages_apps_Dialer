@@ -125,8 +125,9 @@ final class ContactFilterCursor implements Cursor {
             continue;
           case Qualification.NEW_NUMBER_IS_MORE_QUALIFIED:
             // If number wasn't filtered out before, remove it and add it's more qualified version.
-            if (queryFilteredPositions.contains(previousMostQualifiedPosition)) {
-              queryFilteredPositions.remove(previousMostQualifiedPosition);
+            int index = queryFilteredPositions.indexOf(previousMostQualifiedPosition);
+            if (index != -1) {
+              queryFilteredPositions.remove(index);
               queryFilteredPositions.add(position);
             }
             previousMostQualifiedNumber = currentNumber;
