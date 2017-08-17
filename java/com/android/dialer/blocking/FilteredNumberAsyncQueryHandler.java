@@ -297,7 +297,9 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
   public void blockNumber(final OnBlockNumberListener listener, ContentValues values) {
     blockedNumberCache.clear();
     if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
-      listener.onBlockComplete(null);
+      if (listener != null) {
+        listener.onBlockComplete(null);
+      }
       return;
     }
     startInsert(
