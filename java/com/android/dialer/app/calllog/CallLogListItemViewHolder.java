@@ -605,13 +605,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callButtonView.setVisibility(View.VISIBLE);
     }
 
-    if (CallUtil.isVideoEnabled(mContext)
+    // We need to check if we are showing the Lightbringer primary button. If we are, then we should
+    // show the "Call" button here regardless of IMS availability.
+    if (showLightbringerPrimaryButton()) {
+      callButtonView.setVisibility(View.VISIBLE);
+      videoCallButtonView.setVisibility(View.GONE);
+    } else if (CallUtil.isVideoEnabled(mContext)
         && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
       videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
-    } else if (showLightbringerPrimaryButton()) {
-      callButtonView.setVisibility(View.VISIBLE);
-      videoCallButtonView.setVisibility(View.GONE);
     } else if (lightbringerReady) {
       videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
