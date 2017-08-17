@@ -18,7 +18,6 @@
   package="com.android.voicemail.impl">
 
   <application
-    android:allowBackup="false"
     android:supportsRtl="true"
     android:usesCleartextTraffic="true"
     android:defaultToDeviceProtectedStorage="true"

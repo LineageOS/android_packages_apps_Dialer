@@ -122,8 +122,10 @@ public class ContactsFragment extends Fragment
       emptyContentView.setDescription(R.string.all_contacts_empty);
       emptyContentView.setActionLabel(R.string.all_contacts_empty_add_contact_action);
       emptyContentView.setVisibility(View.VISIBLE);
+      recyclerView.setVisibility(View.GONE);
     } else {
       emptyContentView.setVisibility(View.GONE);
+      recyclerView.setVisibility(View.VISIBLE);
       adapter = new ContactsAdapter(getContext(), cursor);
       manager =
           new LinearLayoutManager(getContext()) {
