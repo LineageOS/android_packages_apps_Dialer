@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
+import android.provider.VoicemailContract.Status;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -255,6 +256,26 @@ public class Vvm3VoicemailMessageCreator {
     }
 
     return OmtpVoicemailMessageCreator.create(context, status, statusReader);
+  }
+
+  public static boolean isSyncBlockingError(VoicemailStatus status) {
+    if (status.notificationChannelState != Status.NOTIFICATION_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    if (status.dataChannelState != Status.DATA_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    switch (status.configurationState) {
+      case PIN_NOT_SET:
+      case Status.CONFIGURATION_STATE_OK:
+        // allow activation to be queued again in case it is interrupted
+      case Status.CONFIGURATION_STATE_CONFIGURING:
+        return false;
+      default:
+        return true;
+    }
   }
 
   @NonNull
