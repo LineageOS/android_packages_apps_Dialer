@@ -36,7 +36,13 @@ import java.util.List;
  * notification type. Once the limit is reached, older notifications are cancelled.
  */
 /* package */ class NotificationThrottler {
+  /**
+   * For gropued bundled notifications, the system UI will only display the last 8. For grouped
+   * unbundled notifications, the system displays all notifications until a global maximum of 50 is
+   * reached.
+   */
   private static final int MAX_NOTIFICATIONS_PER_TAG = 10;
+
   private static final int HIGH_GLOBAL_NOTIFICATION_COUNT = 45;
 
   private static boolean didLogHighGlobalNotificationCountReached;

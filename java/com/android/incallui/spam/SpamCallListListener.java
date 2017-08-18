@@ -53,7 +53,6 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CallHistoryStatus;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -143,13 +142,10 @@ public class SpamCallListListener implements CallList.Listener {
       return;
     }
 
-    String[] deniedPhonePermissions =
-        PermissionsUtil.getPermissionsCurrentlyDenied(
-            context, PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
-    if (deniedPhonePermissions.length > 0) {
+    if (!PermissionsUtil.hasCallLogReadPermissions(context)) {
       LogUtil.i(
-          "NumberInCallHistoryWorker.submitTask",
-          "Need phone permissions: " + Arrays.toString(deniedPhonePermissions));
+          "SpamCallListListener.onIncomingCall",
+          "call log permission missing, not checking if number is in call history");
       return;
     }
 

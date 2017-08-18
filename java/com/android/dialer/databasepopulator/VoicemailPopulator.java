@@ -113,25 +113,26 @@ public final class VoicemailPopulator {
     context.getContentResolver().insert(Status.buildSourceUri(context.getPackageName()), values);
   }
 
+  /** Data for a single voicemail entry. */
   @AutoValue
-  abstract static class Voicemail {
+  public abstract static class Voicemail {
     @NonNull
-    abstract String getPhoneNumber();
+    public abstract String getPhoneNumber();
 
     @NonNull
-    abstract String getTranscription();
+    public abstract String getTranscription();
 
-    abstract long getDurationSeconds();
+    public abstract long getDurationSeconds();
 
-    abstract long getTimeMillis();
+    public abstract long getTimeMillis();
 
-    abstract boolean getIsRead();
+    public abstract boolean getIsRead();
 
-    static Builder builder() {
+    public static Builder builder() {
       return new AutoValue_VoicemailPopulator_Voicemail.Builder();
     }
 
-    ContentValues getAsContentValues(Context context) {
+    public ContentValues getAsContentValues(Context context) {
       ContentValues values = new ContentValues();
       values.put(Voicemails.DATE, getTimeMillis());
       values.put(Voicemails.NUMBER, getPhoneNumber());
@@ -142,19 +143,20 @@ public final class VoicemailPopulator {
       return values;
     }
 
+    /** Builder for a single voicemail entry. */
     @AutoValue.Builder
-    abstract static class Builder {
-      abstract Builder setPhoneNumber(@NonNull String phoneNumber);
+    public abstract static class Builder {
+      public abstract Builder setPhoneNumber(@NonNull String phoneNumber);
 
-      abstract Builder setTranscription(@NonNull String transcription);
+      public abstract Builder setTranscription(@NonNull String transcription);
 
-      abstract Builder setDurationSeconds(long durationSeconds);
+      public abstract Builder setDurationSeconds(long durationSeconds);
 
-      abstract Builder setTimeMillis(long timeMillis);
+      public abstract Builder setTimeMillis(long timeMillis);
 
-      abstract Builder setIsRead(boolean isRead);
+      public abstract Builder setIsRead(boolean isRead);
 
-      abstract Voicemail build();
+      public abstract Voicemail build();
     }
   }
 
