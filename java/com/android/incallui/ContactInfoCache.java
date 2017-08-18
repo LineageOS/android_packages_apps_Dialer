@@ -615,7 +615,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         cce.photo = info.cachedPhoto;
         cce.photoType = ContactPhotoType.CONTACT;
       } else {
-        cce.photo = getDefaultContactPhotoDrawable();
         cce.photoType = ContactPhotoType.DEFAULT_PLACEHOLDER;
       }
     } else {
@@ -667,14 +666,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
   private void clearCallbacks(String callId) {
     mCallBacks.remove(callId);
-  }
-
-  public Drawable getDefaultContactPhotoDrawable() {
-    if (mDefaultContactPhotoDrawable == null) {
-      mDefaultContactPhotoDrawable =
-          mContext.getResources().getDrawable(R.drawable.img_no_image_automirrored);
-    }
-    return mDefaultContactPhotoDrawable;
   }
 
   /** Callback interface for the contact query. */
@@ -891,7 +882,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // If no image and it's a business, switch to using the default business avatar.
       if (info.getImageUrl() == null && info.isBusiness()) {
         Log.d(TAG, "Business has no image. Using default.");
-        entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
         entry.photoType = ContactPhotoType.BUSINESS;
       }
 

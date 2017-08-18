@@ -553,11 +553,6 @@ public class CallCardPresenter
     InCallPresenter.getInstance().onShrinkAnimationComplete();
   }
 
-  @Override
-  public Drawable getDefaultContactPhotoDrawable() {
-    return ContactInfoCache.getInstance(mContext).getDefaultContactPhotoDrawable();
-  }
-
   private void maybeStartSearch(DialerCall call, boolean isPrimary) {
     // no need to start search for conference calls which show generic info.
     if (call != null && !call.isConferenceCall()) {
