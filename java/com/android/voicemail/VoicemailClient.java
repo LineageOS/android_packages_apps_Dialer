@@ -55,6 +55,12 @@ public interface VoicemailClient {
       "com.android.voicemail.VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL";
 
   /**
+   * Boolean extra send with {@link #ACTION_SHOW_LEGACY_VOICEMAIL}, indicating that the notification
+   * is sent by legacy mode and should not be suppressed even when VVM is activated
+   */
+  String EXTRA_IS_LEGACY_MODE = "is_legacy_mode";
+
+  /**
    * Secret code to launch the voicemail config activity intended for OEMs and Carriers. {@code
    * *#*#VVMCONFIG#*#*}
    */

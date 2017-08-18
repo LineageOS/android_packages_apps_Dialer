@@ -32,6 +32,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.util.DialerUtils;
+import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -105,9 +106,10 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
       return;
     }
 
-    if (VoicemailComponent.get(context)
-        .getVoicemailClient()
-        .isActivated(context, phoneAccountHandle)) {
+    if (!intent.getBooleanExtra(VoicemailClient.EXTRA_IS_LEGACY_MODE, false)
+        && VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isActivated(context, phoneAccountHandle)) {
       LogUtil.i(
           "LegacyVoicemailNotificationReceiver.onReceive",
           "visual voicemail is activated, ignoring notification");
