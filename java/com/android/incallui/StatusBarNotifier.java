@@ -1024,4 +1024,3 @@ public class StatusBarNotifier
     }
   }
 }
-
