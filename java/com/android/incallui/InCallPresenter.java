@@ -80,7 +80,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * of a state machine at this point. Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener {
-
+  private static final String PIXEL2017_SYSTEM_FEATURE =
+      "com.google.android.feature.PIXEL_2017_EXPERIENCE";
   private static final String EXTRA_FIRST_TIME_SHOWN =
       "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
@@ -1673,14 +1674,18 @@ public class InCallPresenter implements CallList.Listener {
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (mLocalVideoSurfaceTexture == null) {
-      mLocalVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture();
+      mLocalVideoSurfaceTexture =
+          VideoSurfaceBindings.createLocalVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mLocalVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (mRemoteVideoSurfaceTexture == null) {
-      mRemoteVideoSurfaceTexture = VideoSurfaceBindings.createRemoteVideoSurfaceTexture();
+      mRemoteVideoSurfaceTexture =
+          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mRemoteVideoSurfaceTexture;
   }
