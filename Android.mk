@@ -98,12 +98,6 @@ LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 LOCAL_SRC_FILES += java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
 
-# Backup Library
-BACKUP_LIB_SRC_DIR := ../../../external/libbackup/src/com/google/android/libraries/backup
-EXCLUDE_BACKUP_LIB_SRCS := $(call all-java-files-under, $(BACKUP_LIB_SRC_DIR)/shadow)
-LOCAL_SRC_FILES += $(call all-java-files-under, $(BACKUP_LIB_SRC_DIR))
-LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_BACKUP_LIB_SRCS),$(LOCAL_SRC_FILES))
-
 LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
 
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(RES_DIRS))
@@ -151,6 +145,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	jsr305 \
 	libphonenumber \
 	volley \
+	libbackup \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
@@ -228,8 +223,6 @@ PROCESSOR_LIBRARIES_TARGET :=
 PROCESSOR_JARS :=
 EXCLUDE_MANIFESTS :=
 EXCLUDE_EXTRA_PACKAGES :=
-BACKUP_LIB_SRC_DIR :=
-EXCLUDE_BACKUP_LIB_SRCS :=
 
 # Create references to prebuilt libraries.
 include $(CLEAR_VARS)
