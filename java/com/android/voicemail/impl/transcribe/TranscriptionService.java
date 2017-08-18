@@ -33,7 +33,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -122,7 +121,6 @@ public class TranscriptionService extends JobService {
       LogUtil.i(
           "TranscriptionService.onStartJob",
           "transcription server address: " + configProvider.getServerAddress());
-      DialerStrictMode.disableDeathPenalty(); // Re-enabled in cleanup.
       jobParameters = params;
       return checkForWork();
     }
@@ -152,7 +150,6 @@ public class TranscriptionService extends JobService {
       executorService.shutdownNow();
       executorService = null;
     }
-    DialerStrictMode.enableDeathPenalty();
   }
 
   @MainThread

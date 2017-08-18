@@ -70,7 +70,10 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
   public ContactsPreferences(Context context) {
     mContext = context;
     mHandler = new Handler();
-    mPreferences = mContext.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+    mPreferences =
+        mContext
+            .getApplicationContext()
+            .getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     mDefaultAccountKey =
         mContext.getResources().getString(R.string.contact_editor_default_account_key);
     mDefaultAccountSavedKey =
@@ -253,7 +256,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
 
     if (!mPreferences.contains(mDefaultAccountKey)) {
       final SharedPreferences previousPrefs =
-          PreferenceManager.getDefaultSharedPreferences(mContext);
+          PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
       final String defaultAccount = previousPrefs.getString(mDefaultAccountKey, null);
       if (!TextUtils.isEmpty(defaultAccount)) {
         final AccountWithDataSet accountWithDataSet =

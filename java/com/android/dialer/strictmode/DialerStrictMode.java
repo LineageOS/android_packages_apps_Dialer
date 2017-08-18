@@ -18,11 +18,14 @@ package com.android.dialer.strictmode;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.os.StrictMode.VmPolicy;
 import android.preference.PreferenceManager;
+import android.support.annotation.AnyThread;
+import android.support.annotation.MainThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.util.DialerUtils;
@@ -30,10 +33,32 @@ import com.android.dialer.util.DialerUtils;
 /** Enables strict mode for the application, and provides means of temporarily disabling it. */
 public final class DialerStrictMode {
 
+  private static final VmPolicy VM_DEATH_PENALTY =
+      new StrictMode.VmPolicy.Builder().penaltyLog().penaltyDeath().build();
+
+  private static final ThreadPolicy THREAD_LOG_PENALTY =
+      new StrictMode.ThreadPolicy.Builder().penaltyLog().build();
+  private static final ThreadPolicy THREAD_DEATH_PENALTY =
+      new StrictMode.ThreadPolicy.Builder().penaltyLog().penaltyDeath().build();
+
+  private DialerStrictMode() {}
+
   /** Initializes strict mode on application start. */
+  @MainThread
   public static void onApplicationCreate(Application application) {
-    warmupSharedPrefs(application);
-    enableDeathPenalty();
+    if (isStrictModeAllowed()) {
+      warmupSharedPrefs(application);
+      StrictModeUtils.setRecommendedMainThreadPolicy(THREAD_DEATH_PENALTY);
+      StrictModeUtils.setRecommendedVMPolicy(VM_DEATH_PENALTY);
+
+      // Because Android resets StrictMode policies after Application.onCreate is done, we set it
+      // again right after.
+      // See cl/105932355 for the discussion.
+      // See b/36951662 for the public bug.
+      Handler handler = new Handler(Looper.myLooper());
+      handler.postAtFrontOfQueue(
+          () -> StrictModeUtils.setRecommendedMainThreadPolicy(THREAD_DEATH_PENALTY));
+    }
   }
 
   /**
@@ -43,65 +68,22 @@ public final class DialerStrictMode {
    * every point in the application where shared preferences are accessed.
    */
   private static void warmupSharedPrefs(Application application) {
-    if (isStrictModeAllowed()) {
-      // From credential-encrypted (CE) storage, i.e.:
-      //    /data/data/com.android.dialer/shared_prefs
+    // From credential-encrypted (CE) storage, i.e.:
+    //    /data/data/com.android.dialer/shared_prefs
 
-      if (UserManagerCompat.isUserUnlocked(application)) {
-        // <package_name>_preferences.xml
-        PreferenceManager.getDefaultSharedPreferences(application);
-
-        // <package_name>.xml
-        application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
-      }
-
-      // From device-encrypted (DE) storage, i.e.:
-      //   /data/user_de/0/com.android.dialer/shared_prefs/
-
+    if (UserManagerCompat.isUserUnlocked(application)) {
       // <package_name>_preferences.xml
-      DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
+      PreferenceManager.getDefaultSharedPreferences(application);
+
+      // <package_name>.xml
+      application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
     }
-  }
 
-  /**
-   * Disables the strict mode death penalty. If strict mode is enabled for the build, warnings are
-   * printed instead of the application crashing.
-   *
-   * <p>You should typically do this only temporarily and restore the death penalty in a finally
-   * block using {@link #enableDeathPenalty()}.
-   *
-   * <p>The thread policy is only mutated if this is called from the main thread.
-   */
-  public static void disableDeathPenalty() {
-    if (isStrictModeAllowed()) {
-      if (onMainThread()) {
-        StrictMode.setThreadPolicy(threadPolicyTemplate().build());
-      }
-      StrictMode.setVmPolicy(vmPolicyTemplate().build());
-    }
-  }
+    // From device-encrypted (DE) storage, i.e.:
+    //   /data/user_de/0/com.android.dialer/shared_prefs/
 
-  /**
-   * Restore the death penalty. This should typically be called in a finally block after calling
-   * {@link #disableDeathPenalty()}.
-   *
-   * <p>The thread policy is only mutated if this is called from the main thread.
-   */
-  public static void enableDeathPenalty() {
-    if (isStrictModeAllowed()) {
-      if (onMainThread()) {
-        StrictMode.setThreadPolicy(threadPolicyTemplate().penaltyDeath().build());
-      }
-      StrictMode.setVmPolicy(vmPolicyTemplate().penaltyDeath().build());
-    }
-  }
-
-  private static ThreadPolicy.Builder threadPolicyTemplate() {
-    return new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog();
-  }
-
-  private static VmPolicy.Builder vmPolicyTemplate() {
-    return new StrictMode.VmPolicy.Builder().detectAll().penaltyLog();
+    // <package_name>_preferences.xml
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
   }
 
   private static boolean isStrictModeAllowed() {
@@ -118,7 +100,7 @@ public final class DialerStrictMode {
   }
 
   /**
-   * Convenience method for disabling and enabling the death penalty using lambdas.
+   * Convenience method for disabling and enabling the thread policy death penalty using lambdas.
    *
    * <p>For example:
    *
@@ -128,30 +110,42 @@ public final class DialerStrictMode {
    *
    * <p>The thread policy is only mutated if this is called from the main thread.
    */
+  @AnyThread
   public static <T> T bypass(Provider<T> provider) {
-    disableDeathPenalty();
-    try {
-      return provider.get();
-    } finally {
-      enableDeathPenalty();
+    if (isStrictModeAllowed() && onMainThread()) {
+      ThreadPolicy originalPolicy = StrictMode.getThreadPolicy();
+      StrictModeUtils.setRecommendedMainThreadPolicy(THREAD_LOG_PENALTY);
+      try {
+        return provider.get();
+      } finally {
+        StrictMode.setThreadPolicy(originalPolicy);
+      }
     }
+    return provider.get();
   }
 
   /**
-   * Convenience method for disabling and enabling the death penalty using lambdas.
+   * Convenience method for disabling and enabling the thread policy death penalty using lambdas.
    *
    * <p>For example:
    *
    * <p><code>
    *   DialerStrictMode.bypass(() -> doDiskAccessOnMainThread());
    * </code>
+   *
+   * <p>The thread policy is only mutated if this is called from the main thread.
    */
+  @AnyThread
   public static void bypass(Runnable runnable) {
-    disableDeathPenalty();
-    try {
-      runnable.run();
-    } finally {
-      enableDeathPenalty();
+    if (isStrictModeAllowed() && onMainThread()) {
+      ThreadPolicy originalPolicy = StrictMode.getThreadPolicy();
+      StrictModeUtils.setRecommendedMainThreadPolicy(THREAD_LOG_PENALTY);
+      try {
+        runnable.run();
+      } finally {
+        StrictMode.setThreadPolicy(originalPolicy);
+      }
     }
+    runnable.run();
   }
 }
