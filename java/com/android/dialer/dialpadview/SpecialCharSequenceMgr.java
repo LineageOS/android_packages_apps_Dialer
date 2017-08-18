@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.app;
+package com.android.dialer.dialpadview;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -96,7 +96,7 @@ public class SpecialCharSequenceMgr {
   private SpecialCharSequenceMgr() {}
 
   public static boolean handleChars(Context context, String input, EditText textField) {
-    //get rid of the separators so that the string gets parsed correctly
+    // get rid of the separators so that the string gets parsed correctly
     String dialString = PhoneNumberUtils.stripSeparators(input);
 
     if (handleDeviceIdDisplay(context, dialString)

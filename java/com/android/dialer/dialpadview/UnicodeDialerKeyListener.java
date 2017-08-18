@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.app.dialpad;
+package com.android.dialer.dialpadview;
 
 import android.telephony.PhoneNumberUtils;
 import android.text.Spanned;

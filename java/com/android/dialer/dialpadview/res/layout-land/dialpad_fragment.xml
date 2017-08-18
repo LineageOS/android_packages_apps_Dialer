@@ -15,7 +15,7 @@
 -->
 <view xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    class="com.android.dialer.app.dialpad.DialpadFragment$DialpadSlidingRelativeLayout"
+    class="com.android.dialer.dialpadview.DialpadFragment$DialpadSlidingRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

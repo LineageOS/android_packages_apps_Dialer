@@ -107,9 +107,6 @@
        so this extra padding makes the entire touch target 40dp -->
   <dimen name="icon_padding">8dp</dimen>
 
-  <!-- Length of dialpad's shadows in dialer. -->
-  <dimen name="shadow_length">10dp</dimen>
-
   <!-- Dimensions for individual preference cards -->
   <dimen name="preference_padding_top">16dp</dimen>
   <dimen name="preference_padding_bottom">16dp</dimen>

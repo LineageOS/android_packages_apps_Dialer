@@ -45,4 +45,7 @@
 
   <!-- Top/Bottom padding around the ILD rate display box. -->
   <dimen name="ild_margin_height">10dp</dimen>
+
+  <!-- Length of dialpad's shadows in dialer. -->
+  <dimen name="shadow_length">10dp</dimen>
 </resources>

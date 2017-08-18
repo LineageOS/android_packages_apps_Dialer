@@ -16,6 +16,7 @@
 
 package com.android.dialer.common;
 
+import android.app.Activity;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,10 +63,47 @@ public class FragmentUtils {
     return null;
   }
 
+  /** Version of {@link #getParent(Fragment, Class)} which supports {@link android.app.Fragment}. */
+  @CheckResult(suggest = "#checkParent(Fragment, Class)}")
+  @Nullable
+  public static <T> T getParent(
+      @NonNull android.app.Fragment fragment, @NonNull Class<T> callbackInterface) {
+    if (callbackInterface.isInstance(parentForTesting)) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = (T) parentForTesting;
+      return parent;
+    }
+
+    android.app.Fragment parentFragment = fragment.getParentFragment();
+    if (callbackInterface.isInstance(parentFragment)) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = (T) parentFragment;
+      return parent;
+    } else {
+      Activity activity = fragment.getActivity();
+      if (callbackInterface.isInstance(activity)) {
+        @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+        T parent = (T) activity;
+        return parent;
+      }
+    }
+    return null;
+  }
+
   /** Returns the parent or throws. Should perform check elsewhere(e.g. onAttach, newInstance). */
   @NonNull
   public static <T> T getParentUnsafe(
       @NonNull Fragment fragment, @NonNull Class<T> callbackInterface) {
+    return Assert.isNotNull(getParent(fragment, callbackInterface));
+  }
+
+  /**
+   * Version of {@link #getParentUnsafe(Fragment, Class)} which supports {@link
+   * android.app.Fragment}.
+   */
+  @NonNull
+  public static <T> T getParentUnsafe(
+      @NonNull android.app.Fragment fragment, @NonNull Class<T> callbackInterface) {
     return Assert.isNotNull(getParent(fragment, callbackInterface));
   }
 

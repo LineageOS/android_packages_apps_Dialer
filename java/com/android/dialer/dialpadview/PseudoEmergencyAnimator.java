@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.dialer.app.dialpad;
+package com.android.dialer.dialpadview;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -28,12 +27,11 @@ import android.graphics.LightingColorFilter;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.View;
-import com.android.dialer.app.R;
 
 /** Animates the dial button on "emergency" phone numbers. */
 public class PseudoEmergencyAnimator {
 
-  public static final String PSEUDO_EMERGENCY_NUMBER = "01189998819991197253";
+  static final String PSEUDO_EMERGENCY_NUMBER = "01189998819991197253";
   private static final int VIBRATE_LENGTH_MILLIS = 200;
   private static final int ITERATION_LENGTH_MILLIS = 1000;
   private static final int ANIMATION_ITERATION_COUNT = 6;
@@ -57,21 +55,16 @@ public class PseudoEmergencyAnimator {
           ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
 
       mPseudoEmergencyColorAnimator.addUpdateListener(
-          new AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-              try {
-                int color = (int) animator.getAnimatedValue();
-                ColorFilter colorFilter = new LightingColorFilter(Color.BLACK, color);
+          animator -> {
+            try {
+              int color = (int) animator.getAnimatedValue();
+              ColorFilter colorFilter = new LightingColorFilter(Color.BLACK, color);
 
-                View floatingActionButtonContainer =
-                    getView().findViewById(R.id.floating_action_button);
-                if (floatingActionButtonContainer != null) {
-                  floatingActionButtonContainer.getBackground().setColorFilter(colorFilter);
-                }
-              } catch (Exception e) {
-                animator.cancel();
+              if (mViewProvider.getFab() != null) {
+                mViewProvider.getFab().getBackground().setColorFilter(colorFilter);
               }
+            } catch (Exception e) {
+              animator.cancel();
             }
           });
 
@@ -95,22 +88,17 @@ public class PseudoEmergencyAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
               try {
-                View floatingActionButtonContainer =
-                    getView().findViewById(R.id.floating_action_button);
-                if (floatingActionButtonContainer != null) {
-                  floatingActionButtonContainer.getBackground().clearColorFilter();
+                if (mViewProvider.getFab() != null) {
+                  mViewProvider.getFab().getBackground().clearColorFilter();
                 }
 
                 new Handler()
                     .postDelayed(
-                        new Runnable() {
-                          @Override
-                          public void run() {
-                            try {
-                              vibrate(VIBRATE_LENGTH_MILLIS);
-                            } catch (Exception e) {
-                              // ignored
-                            }
+                        () -> {
+                          try {
+                            vibrate(VIBRATE_LENGTH_MILLIS);
+                          } catch (Exception e) {
+                            // ignored
                           }
                         },
                         ITERATION_LENGTH_MILLIS);
@@ -135,17 +123,8 @@ public class PseudoEmergencyAnimator {
     }
   }
 
-  private View getView() {
-    return mViewProvider == null ? null : mViewProvider.getView();
-  }
-
-  private Context getContext() {
-    View view = getView();
-    return view != null ? view.getContext() : null;
-  }
-
   private void vibrate(long milliseconds) {
-    Context context = getContext();
+    Context context = mViewProvider.getContext();
     if (context != null) {
       Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
       if (vibrator != null) {
@@ -154,8 +133,10 @@ public class PseudoEmergencyAnimator {
     }
   }
 
-  public interface ViewProvider {
+  interface ViewProvider {
 
-    View getView();
+    View getFab();
+
+    Context getContext();
   }
 }

@@ -29,9 +29,4 @@
        keys, but for maximum flexibility it's controlled by a flag here
        (which can be overridden on a per-product basis.) -->
   <bool name="config_show_onscreen_dial_button">true</bool>
-
-  <!-- Regular expression for prohibiting certain phone numbers in dialpad.
-       Ignored if empty. -->
-  <string name="config_prohibited_phone_number_regexp"></string>
-
 </resources>
