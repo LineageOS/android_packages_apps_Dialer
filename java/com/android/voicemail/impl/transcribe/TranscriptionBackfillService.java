@@ -22,9 +22,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.WorkerThread;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.os.BuildCompat;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.constants.ScheduledJobIds;
 import java.util.List;
 
@@ -57,6 +59,7 @@ public class TranscriptionBackfillService extends JobIntentService {
   }
 
   @Override
+  @WorkerThread
   protected void onHandleWork(Intent intent) {
     LogUtil.enterBlock("TranscriptionBackfillService.onHandleWork");
 
@@ -67,7 +70,10 @@ public class TranscriptionBackfillService extends JobIntentService {
         "found " + untranscribed.size() + " untranscribed voicemails");
     // TODO(mdooley): Consider doing the actual transcriptions here instead of scheduling jobs.
     for (Uri uri : untranscribed) {
-      TranscriptionService.scheduleNewVoicemailTranscriptionJob(this, uri, false);
+      ThreadUtil.postOnUiThread(
+          () -> {
+            TranscriptionService.scheduleNewVoicemailTranscriptionJob(this, uri, false);
+          });
     }
   }
 

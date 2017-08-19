@@ -57,6 +57,7 @@ public class TranscriptionService extends JobService {
 
   // Schedule a task to transcribe the indicated voicemail, return true if transcription task was
   // scheduled.
+  @MainThread
   public static boolean scheduleNewVoicemailTranscriptionJob(
       Context context, Uri voicemailUri, boolean highPriority) {
     Assert.isMainThread();
@@ -86,6 +87,7 @@ public class TranscriptionService extends JobService {
   }
 
   // Cancel all transcription tasks
+  @MainThread
   public static void cancelTranscriptions(Context context) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.cancelTranscriptions");
@@ -93,6 +95,7 @@ public class TranscriptionService extends JobService {
     scheduler.cancel(ScheduledJobIds.VVM_TRANSCRIPTION_JOB);
   }
 
+  @MainThread
   public TranscriptionService() {
     Assert.isMainThread();
   }
@@ -108,6 +111,7 @@ public class TranscriptionService extends JobService {
   }
 
   @Override
+  @MainThread
   public boolean onStartJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStartJob");
@@ -127,6 +131,7 @@ public class TranscriptionService extends JobService {
   }
 
   @Override
+  @MainThread
   public boolean onStopJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStopJob");
@@ -135,6 +140,7 @@ public class TranscriptionService extends JobService {
   }
 
   @Override
+  @MainThread
   public void onDestroy() {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onDestroy");
@@ -186,6 +192,7 @@ public class TranscriptionService extends JobService {
 
   private class Callback implements JobCallback {
     @Override
+    @MainThread
     public void onWorkCompleted(JobWorkItem completedWorkItem) {
       Assert.isMainThread();
       LogUtil.i("TranscriptionService.Callback.onWorkCompleted", completedWorkItem.toString());
