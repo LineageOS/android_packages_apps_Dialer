@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,19 +32,27 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.MenuItem;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager.HistoricalDataChangedListener;
+import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.protos.ProtoParsers;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /** Displays the details of a specific call log entry. */
 public class CallDetailsActivity extends AppCompatActivity
-    implements OnMenuItemClickListener, CallDetailsFooterViewHolder.ReportCallIdListener {
+    implements OnMenuItemClickListener,
+        CallDetailsFooterViewHolder.ReportCallIdListener,
+        HistoricalDataChangedListener {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
   public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
@@ -52,8 +61,9 @@ public class CallDetailsActivity extends AppCompatActivity
   private static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String TASK_DELETE = "task_delete";
 
-  private List<CallDetailsEntry> entries;
+  private CallDetailsEntries entries;
   private DialerContact contact;
+  private CallDetailsAdapter adapter;
 
   public static boolean isLaunchIntent(Intent intent) {
     return intent.getComponent() != null
@@ -103,6 +113,22 @@ public class CallDetailsActivity extends AppCompatActivity
     }
 
     PostCall.promptUserForMessageIfNecessary(this, findViewById(R.id.recycler_view));
+
+    EnrichedCallComponent.get(this)
+        .getEnrichedCallManager()
+        .registerHistoricalDataChangedListener(this);
+    EnrichedCallComponent.get(this)
+        .getEnrichedCallManager()
+        .requestAllHistoricalData(contact.getNumber(), entries);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    EnrichedCallComponent.get(this)
+        .getEnrichedCallManager()
+        .unregisterHistoricalDataChangedListener(this);
   }
 
   @Override
@@ -115,12 +141,12 @@ public class CallDetailsActivity extends AppCompatActivity
     contact = ProtoParsers.getTrusted(intent, EXTRA_CONTACT, DialerContact.getDefaultInstance());
     entries =
         ProtoParsers.getTrusted(
-                intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance())
-            .getEntriesList();
+            intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance());
+    adapter = new CallDetailsAdapter(this, contact, entries.getEntriesList(), this);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.setAdapter(new CallDetailsAdapter(this, contact, entries, this));
+    recyclerView.setAdapter(adapter);
     PerformanceReport.logOnScrollStateChange(recyclerView);
   }
 
@@ -151,6 +177,58 @@ public class CallDetailsActivity extends AppCompatActivity
     return getIntent().getExtras().getBoolean(EXTRA_CAN_REPORT_CALLER_ID, false);
   }
 
+  @Override
+  public void onHistoricalDataChanged() {
+    Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
+        getAllHistoricalData(contact.getNumber(), entries);
+
+    entries =
+        generateAndMapNewCallDetailsEntriesHistoryResults(
+            contact.getNumber(), entries, mappedResults);
+
+    adapter.updateCallDetailsEntries(entries.getEntriesList());
+  }
+
+  @NonNull
+  private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
+      @Nullable String number, @NonNull CallDetailsEntries entries) {
+    if (number == null) {
+      return Collections.emptyMap();
+    }
+
+    Map<CallDetailsEntry, List<HistoryResult>> historicalData =
+        EnrichedCallComponent.get(this)
+            .getEnrichedCallManager()
+            .getAllHistoricalData(number, entries);
+    if (historicalData == null) {
+      return Collections.emptyMap();
+    }
+    return historicalData;
+  }
+
+  private static CallDetailsEntries generateAndMapNewCallDetailsEntriesHistoryResults(
+      @Nullable String number,
+      @NonNull CallDetailsEntries callDetailsEntries,
+      @NonNull Map<CallDetailsEntry, List<HistoryResult>> mappedResults) {
+    if (number == null) {
+      return callDetailsEntries;
+    }
+    CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
+    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
+      CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
+      List<HistoryResult> results = mappedResults.get(entry);
+      if (results != null) {
+        newEntry.addAllHistoryResults(mappedResults.get(entry));
+        LogUtil.v(
+            "CallLogAdapter.generateAndMapNewCallDetailsEntriesHistoryResults",
+            "mapped %d results",
+            newEntry.getHistoryResultsList().size());
+      }
+      mutableCallDetailsEntries.addEntries(newEntry.build());
+    }
+    return mutableCallDetailsEntries.build();
+  }
+
   /** Delete specified calls from the call log. */
   private class DeleteCallsTask extends AsyncTask<Void, Void, Void> {
 
@@ -158,7 +236,7 @@ public class CallDetailsActivity extends AppCompatActivity
 
     DeleteCallsTask() {
       StringBuilder callIds = new StringBuilder();
-      for (CallDetailsEntry entry : entries) {
+      for (CallDetailsEntry entry : entries.getEntriesList()) {
         if (callIds.length() != 0) {
           callIds.append(",");
         }
@@ -178,7 +256,7 @@ public class CallDetailsActivity extends AppCompatActivity
     public void onPostExecute(Void result) {
       Intent data = new Intent();
       data.putExtra(EXTRA_PHONE_NUMBER, contact.getNumber());
-      for (CallDetailsEntry entry : entries) {
+      for (CallDetailsEntry entry : entries.getEntriesList()) {
         if (entry.getHistoryResultsCount() > 0) {
           data.putExtra(EXTRA_HAS_ENRICHED_CALL_DATA, true);
           break;

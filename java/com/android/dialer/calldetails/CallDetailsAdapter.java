@@ -37,9 +37,9 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   private static final int FOOTER_VIEW_TYPE = 3;
 
   private final DialerContact contact;
-  private final List<CallDetailsEntry> callDetailsEntries;
   private final CallDetailsFooterViewHolder.ReportCallIdListener listener;
   private final CallTypeHelper callTypeHelper;
+  private List<CallDetailsEntry> callDetailsEntries;
 
   CallDetailsAdapter(
       Context context,
@@ -104,5 +104,10 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   @Override
   public int getItemCount() {
     return callDetailsEntries.size() + 2; // Header + footer
+  }
+
+  void updateCallDetailsEntries(List<CallDetailsEntry> entries) {
+    callDetailsEntries = entries;
+    notifyDataSetChanged();
   }
 }

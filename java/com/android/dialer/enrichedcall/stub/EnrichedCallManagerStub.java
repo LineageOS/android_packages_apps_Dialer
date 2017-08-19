@@ -107,6 +107,14 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
     return session -> false;
   }
 
+  @Override
+  public void registerHistoricalDataChangedListener(
+      @NonNull HistoricalDataChangedListener listener) {}
+
+  @Override
+  public void unregisterHistoricalDataChangedListener(
+      @NonNull HistoricalDataChangedListener listener) {}
+
   @Nullable
   @Override
   @MainThread
