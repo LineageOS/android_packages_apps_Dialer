@@ -88,7 +88,7 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
         (DialerUiTaskFragment<InputT, OutputT>) fragmentManager.findFragmentByTag(taskId);
 
     if (fragment == null) {
-      LogUtil.i("DialerUiTaskFragment.create", "creating new DialerUiTaskFragment");
+      LogUtil.i("DialerUiTaskFragment.create", "creating new DialerUiTaskFragment for " + taskId);
       fragment = new DialerUiTaskFragment<>();
       fragmentManager.beginTransaction().add(fragment, taskId).commit();
     }
