@@ -77,6 +77,7 @@ public class InCallServiceImpl extends InCallService {
     Trace.beginSection("InCallServiceImpl.onBind");
     final Context context = getApplicationContext();
     final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
+    AudioModeProvider.getInstance().initializeAudioState(this);
     InCallPresenter.getInstance()
         .setUp(
             context,
