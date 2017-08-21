@@ -29,7 +29,6 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.CompatUtils;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -153,7 +154,7 @@ public class DialpadView extends LinearLayout {
     // We translate dialpad numbers only for "fa" and not any other locale
     // ("ar" anybody ?).
     if ("fa".equals(currentLocale.getLanguage())) {
-      nf = DecimalFormat.getInstance(resources.getConfiguration().locale);
+      nf = DecimalFormat.getInstance(CompatUtils.getLocale(getContext()));
     } else {
       nf = DecimalFormat.getInstance(Locale.ENGLISH);
     }
@@ -395,7 +396,7 @@ public class DialpadView extends LinearLayout {
       }
     }
 
-    Log.wtf(TAG, "Attempted to get animation delay for invalid key button id.");
+    LogUtil.e(TAG, "Attempted to get animation delay for invalid key button id.");
     return 0;
   }
 
@@ -458,7 +459,7 @@ public class DialpadView extends LinearLayout {
       }
     }
 
-    Log.wtf(TAG, "Attempted to get animation duration for invalid key button id.");
+    LogUtil.e(TAG, "Attempted to get animation duration for invalid key button id.");
     return 0;
   }
 }

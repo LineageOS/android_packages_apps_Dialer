@@ -19,6 +19,7 @@ package com.android.dialer.phonenumbergeoutil.impl;
 import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -45,7 +46,7 @@ public class PhoneNumberGeoUtilImpl implements PhoneNumberGeoUtil {
     PhoneNumberUtil util = PhoneNumberUtil.getInstance();
     PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
 
-    Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+    Locale locale = CompatUtils.getLocale(context);
     String countryIso = PhoneNumberHelper.getCurrentCountryIso(context, locale);
     Phonenumber.PhoneNumber pn = null;
     try {
