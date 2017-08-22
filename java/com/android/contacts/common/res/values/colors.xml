@@ -15,11 +15,6 @@
   -->
 
 <resources>
-  <!-- Background color corresponding to the holo list 9-patch. -->
-  <color name="holo_list_background_color">#eeeeee</color>
-
-  <color name="focus_color">#44ff0000</color>
-
   <!-- Color of ripples used for views with dark backgrounds -->
   <color name="dialer_ripple_material_dark">#a0ffffff</color>
 
@@ -34,28 +29,8 @@
   <!-- Text color for section header. -->
   <color name="section_header_text_color">#2A56C6</color>
 
-  <!-- Divider color for header separator -->
-  <color name="main_header_separator_color">#AAAAAA</color>
-
-  <!-- Divider color for header separator -->
-  <color name="secondary_header_separator_color">#D0D0D0</color>
-
   <!-- Color of the theme of the People app -->
   <color name="people_app_theme_color">#363636</color>
-
-  <!-- Color of image view placeholder. -->
-  <color name="image_placeholder">#DDDDDD</color>
-
-  <!--  Color of the semi-transparent shadow box on contact tiles -->
-  <color name="contact_tile_shadow_box_color">#7F000000</color>
-
-  <!--  Color of the status message for starred contacts in the People app -->
-  <color name="people_contact_tile_status_color">#CCCCCC</color>
-
-  <color name="shortcut_overlay_text_background">#7f000000</color>
-
-  <color name="textColorIconOverlay">#fff</color>
-  <color name="textColorIconOverlayShadow">#000</color>
 
   <!-- Darker versions of letter_tile_colors, two shades darker. These colors are used
       for settings secondary activity colors. -->
@@ -76,18 +51,7 @@
     <item>#424242</item>
   </array>
 
-  <!-- The default color used for tinting photos when no color can be extracted via Palette,
-          this is Blue Grey 500 -->
-  <color name="quickcontact_default_photo_tint_color">#607D8B</color>
-  <!-- The default secondary color when no color can be extracted via Palette,
-          this is Blue Grey 700 -->
-  <color name="quickcontact_default_photo_tint_color_dark">#455A64</color>
-
   <color name="contactscommon_actionbar_background_color">@color/dialer_theme_color</color>
-  <!-- Color for icons in the actionbar -->
-  <color name="actionbar_icon_color">#ffffff</color>
-  <!-- Darker version of the actionbar color. Used for the status bar and navigation bar colors. -->
-  <color name="actionbar_background_color_dark">#008aa1</color>
 
   <color name="tab_ripple_color">#ffffff</color>
   <color name="tab_accent_color">@color/tab_ripple_color</color>

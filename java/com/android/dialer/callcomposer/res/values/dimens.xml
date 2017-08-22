@@ -32,9 +32,7 @@
   <dimen name="call_composer_media_bar_height">48dp</dimen>
 
   <!-- Send and Call button -->
-  <dimen name="send_and_call_icon_size">18dp</dimen>
   <dimen name="send_and_call_text_size">16sp</dimen>
-  <dimen name="send_and_call_padding">8dp</dimen>
   <dimen name="send_and_call_drawable_padding">4dp</dimen>
 
   <!-- Message Composer -->
