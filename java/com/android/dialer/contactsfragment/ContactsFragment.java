@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,8 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
 /** Fragment containing a list of all contacts. */
@@ -53,7 +56,30 @@ public class ContactsFragment extends Fragment
         OnEmptyViewActionButtonClickedListener,
         ChangeListener {
 
+  /** IntDef to define the OnClick action for contact rows. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({ClickAction.INVALID, ClickAction.OPEN_CONTACT_CARD})
+  public @interface ClickAction {
+    int INVALID = 0;
+    /** Open contact card on click. */
+    int OPEN_CONTACT_CARD = 1;
+  }
+
+  /** An enum for the different types of headers that be inserted at position 0 in the list. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+  ContactsFragment.Header.NONE,
+  ContactsFragment.Header.ADD_CONTACT})
+  public @interface Header {
+    int NONE = 0;
+    /** Header that allows the user to add a new contact. */
+    int ADD_CONTACT = 1;
+  }
+
   public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+
+  private static final String EXTRA_HEADER = "extra_header";
+  private static final String EXTRA_CLICK_ACTION = "extra_click_action";
 
   private FastScroller fastScroller;
   private TextView anchoredHeader;
@@ -63,12 +89,49 @@ public class ContactsFragment extends Fragment
   private EmptyContentView emptyContentView;
 
   private ContactsPreferences contactsPrefs;
+  private @Header int header;
+  private @ClickAction int clickAction;
 
+  /**
+   * Used to get a configured instance of ContactsFragment.
+   *
+   * <p>Current example of this fragment are the contacts tab and in creating a new favorite
+   * contact. For example, the contacts tab we use:
+   *
+   * <ul>
+   *   <li>{@link Header#ADD_CONTACT} to insert a header that allows users to add a contact
+   *   <li>{@link ClickAction#OPEN_CONTACT_CARD} to open contact cards on click
+   * </ul>
+   *
+   * And for the add favorite contact screen we might use:
+   *
+   * <ul>
+   *   <li>{@link Header#NONE} so that all rows are contacts (i.e. no header inserted)
+   *   <li>{@link ClickAction#SET_RESULT_AND_FINISH} to send a selected contact to the previous
+   *       activity.
+   * </ul>
+   *
+   * @param header determines the type of header inserted at position 0 in the contacts list
+   * @param clickAction defines the on click actions on rows that represent contacts
+   */
+  public static ContactsFragment newInstance(@Header int header, @ClickAction int clickAction) {
+    Assert.checkArgument(clickAction != ClickAction.INVALID, "Invalid click action");
+    ContactsFragment fragment = new ContactsFragment();
+    Bundle args = new Bundle();
+    args.putInt(EXTRA_HEADER, header);
+    args.putInt(EXTRA_CLICK_ACTION, clickAction);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
+  @SuppressWarnings("WrongConstant")
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     contactsPrefs = new ContactsPreferences(getContext());
     contactsPrefs.registerChangeListener(this);
+    header = getArguments().getInt(EXTRA_HEADER);
+    clickAction = getArguments().getInt(EXTRA_CLICK_ACTION);
   }
 
   @Nullable
@@ -126,7 +189,7 @@ public class ContactsFragment extends Fragment
     } else {
       emptyContentView.setVisibility(View.GONE);
       recyclerView.setVisibility(View.VISIBLE);
-      adapter = new ContactsAdapter(getContext(), cursor);
+      adapter = new ContactsAdapter(getContext(), cursor, header, clickAction);
       manager =
           new LinearLayoutManager(getContext()) {
             @Override
