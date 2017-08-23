@@ -31,8 +31,6 @@
   <string name="gallery_item_description">image <xliff:g id="date">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
   <!-- Accessibility description for each image in the gallery when no date is present. -->
   <string name="gallery_item_description_no_date">image</string>
-  <!-- Content description of button to switch camera to picture more -->
-  <string name="camera_switch_to_still_mode">Take a photo</string>
   <!-- Error toast message shown when a camera image failed to attach to the message -->
   <string name="camera_media_failure">Couldn\'t load camera image</string>
   <!-- Text for a button to ask for device permissions -->
