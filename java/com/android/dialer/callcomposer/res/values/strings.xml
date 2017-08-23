@@ -51,4 +51,7 @@
   <!-- When a user makes a call with text attached, we send the text through the app "Messages".
     This string is shown in a toast for privacy reasons. -->
   <string name="message_sent_messages">Message sent via Messages</string>
+  <!-- When a user places a call with an image attached, we show them the in call screen and
+      display this string "Image uploading..." to let them know why the call hasn't started. -->
+  <string name="call_composer_image_uploading">Sending image\u2026</string>
 </resources>

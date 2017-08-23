@@ -18,8 +18,12 @@ package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.telecom.DisconnectCause;
+import android.text.TextUtils;
+import com.android.dialer.common.Assert;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -63,13 +67,15 @@ public class PrimaryCallState {
   public final boolean supportsCallOnHold;
   public final @ButtonState int swapToSecondaryButtonState;
   public final boolean isAssistedDialed;
+  @Nullable public final String customLabel;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
-    return createEmptyPrimaryCallStateWithState(DialerCall.State.IDLE);
+    return createEmptyPrimaryCallStateWithState(DialerCall.State.IDLE, null);
   }
 
-  public static PrimaryCallState createEmptyPrimaryCallStateWithState(int state) {
+  public static PrimaryCallState createEmptyPrimaryCallStateWithState(
+      int state, String customLabel) {
     return new PrimaryCallState(
         state,
         false, /* isVideoCall */
@@ -93,7 +99,8 @@ public class PrimaryCallState {
         false /* isBusinessNumber */,
         true /* supportsCallOnHold */,
         ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */,
-        false /* isAssistedDialed */);
+        false /* isAssistedDialed */,
+        customLabel);
   }
 
   public PrimaryCallState(
@@ -119,7 +126,8 @@ public class PrimaryCallState {
       boolean isBusinessNumber,
       boolean supportsCallOnHold,
       @ButtonState int swapToSecondaryButtonState,
-      boolean isAssistedDialed) {
+      boolean isAssistedDialed,
+      @Nullable String customLabel) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -143,6 +151,10 @@ public class PrimaryCallState {
     this.supportsCallOnHold = supportsCallOnHold;
     this.swapToSecondaryButtonState = swapToSecondaryButtonState;
     this.isAssistedDialed = isAssistedDialed;
+    if (!TextUtils.isEmpty(customLabel)) {
+      Assert.checkArgument(state == State.CALL_PENDING);
+    }
+    this.customLabel = customLabel;
   }
 
   @Override

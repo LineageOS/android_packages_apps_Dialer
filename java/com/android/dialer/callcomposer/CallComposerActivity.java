@@ -440,9 +440,10 @@ public class CallComposerActivity extends AppCompatActivity
           CallPendingActivity.getIntent(
               this,
               contact.getNameOrNumber(),
-              contact.getNumber(),
+              contact.getDisplayNumber(),
               contact.getNumberLabel(),
               UriUtils.getLookupKeyFromUri(Uri.parse(contact.getContactUri())),
+              getString(R.string.call_composer_image_uploading),
               Uri.parse(contact.getPhotoUri()),
               sessionId));
       pendingCallStarted = true;

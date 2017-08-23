@@ -68,8 +68,9 @@ public class CallPendingActivity extends FragmentActivity
   private static final String EXTRA_SESSION_ID = "extra_session_id";
   private static final String EXTRA_NUMBER = "extra_number";
   private static final String EXTRA_NAME = "extra_name";
-  private static final String EXTRA_LABEL = "extra_LABEL";
-  private static final String EXTRA_LOOKUP_KEY = "extra_LOOKUP_KEY";
+  private static final String EXTRA_LABEL = "extra_label";
+  private static final String EXTRA_LOOKUP_KEY = "extra_lookup_key";
+  private static final String EXTRA_CALL_PENDING_LABEL = "extra_call_pending_label";
   private static final String EXTRA_PHOTO_URI = "extra_photo_uri";
 
   private final BroadcastReceiver finishReceiver =
@@ -93,6 +94,7 @@ public class CallPendingActivity extends FragmentActivity
       String number,
       String label,
       String lookupKey,
+      String callPendingLabel,
       Uri photoUri,
       long sessionId) {
     Intent intent = new Intent(context, CallPendingActivity.class);
@@ -100,6 +102,7 @@ public class CallPendingActivity extends FragmentActivity
     intent.putExtra(EXTRA_NUMBER, number);
     intent.putExtra(EXTRA_LABEL, label);
     intent.putExtra(EXTRA_LOOKUP_KEY, lookupKey);
+    intent.putExtra(EXTRA_CALL_PENDING_LABEL, callPendingLabel);
     intent.putExtra(EXTRA_PHOTO_URI, photoUri);
     intent.putExtra(EXTRA_SESSION_ID, sessionId);
     return intent;
@@ -142,7 +145,9 @@ public class CallPendingActivity extends FragmentActivity
     InCallScreen inCallScreen =
         (InCallScreen) getSupportFragmentManager().findFragmentByTag(TAG_IN_CALL_SCREEN);
     inCallScreen.setPrimary(createPrimaryInfo());
-    inCallScreen.setCallState(PrimaryCallState.createEmptyPrimaryCallStateWithState(State.DIALING));
+    inCallScreen.setCallState(
+        PrimaryCallState.createEmptyPrimaryCallStateWithState(
+            State.CALL_PENDING, getCallPendingLabel()));
     inCallScreen.setEndCallButtonEnabled(true, true);
   }
 
@@ -334,6 +339,10 @@ public class CallPendingActivity extends FragmentActivity
 
   private String getLookupKey() {
     return getIntent().getStringExtra(EXTRA_LOOKUP_KEY);
+  }
+
+  private String getCallPendingLabel() {
+    return getIntent().getStringExtra(EXTRA_CALL_PENDING_LABEL);
   }
 
   private Uri getPhotoUri() {
