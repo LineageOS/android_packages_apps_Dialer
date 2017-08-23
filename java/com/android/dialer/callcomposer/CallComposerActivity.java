@@ -75,9 +75,11 @@ import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.UriUtils;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.LockableViewPager;
+import com.android.incallui.callpending.CallPendingActivity;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.io.File;
 
@@ -119,6 +121,14 @@ public class CallComposerActivity extends AppCompatActivity
         LogUtil.i("CallComposerActivity.sessionStartedTimedOutRunnable", "session never started");
         setFailedResultAndFinish();
       };
+  private final Runnable placeTelecomCallRunnable =
+      () -> {
+        LogUtil.i("CallComposerActivity.placeTelecomCallRunnable", "upload timed out.");
+        placeTelecomCall();
+      };
+  // Counter for the number of message sent updates received from EnrichedCallManager
+  private int messageSentCounter;
+  private boolean pendingCallStarted;
 
   private DialerContact contact;
   private Long sessionId = Session.NO_SESSION_ID;
@@ -239,7 +249,13 @@ public class CallComposerActivity extends AppCompatActivity
   protected void onResume() {
     super.onResume();
     getEnrichedCallManager().registerStateChangedListener(this);
-    if (sessionId == Session.NO_SESSION_ID) {
+    if (pendingCallStarted) {
+      // User went into incall ui and pressed disconnect before the image was done uploading.
+      // Kill the activity and cancel the telecom call.
+      timeoutHandler.removeCallbacks(placeTelecomCallRunnable);
+      setResult(RESULT_OK);
+      finish();
+    } else if (sessionId == Session.NO_SESSION_ID) {
       LogUtil.i("CallComposerActivity.onResume", "creating new session");
       sessionId = getEnrichedCallManager().startCallComposerSession(contact.getNumber());
     } else if (getEnrichedCallManager().getSession(sessionId) == null) {
@@ -257,12 +273,16 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   @Override
-  protected void onPause() {
-    super.onPause();
+  protected void onDestroy() {
+    super.onDestroy();
     getEnrichedCallManager().unregisterStateChangedListener(this);
-    timeoutHandler.removeCallbacks(sessionStartedTimedOut);
+    timeoutHandler.removeCallbacksAndMessages(null);
   }
 
+  /**
+   * This listener is registered in onResume and removed in onDestroy, meaning that calls to this
+   * method can come after onStop and updates to UI could cause crashes.
+   */
   @Override
   public void onEnrichedCallStateChanged() {
     refreshUiForCallComposerState();
@@ -297,8 +317,18 @@ public class CallComposerActivity extends AppCompatActivity
       case Session.STATE_CLOSED:
         setFailedResultAndFinish();
         break;
-      case Session.STATE_MESSAGE_FAILED:
       case Session.STATE_MESSAGE_SENT:
+        if (++messageSentCounter == 3) {
+          // When we compose EC with images, there are 3 steps:
+          //  1. Message sent with no data
+          //  2. Image uploaded
+          //  3. url sent
+          // Once we receive 3 message sent updates, we know that we can proceed with the call.
+          timeoutHandler.removeCallbacks(placeTelecomCallRunnable);
+          placeTelecomCall();
+        }
+        break;
+      case Session.STATE_MESSAGE_FAILED:
       case Session.STATE_NONE:
       default:
         break;
@@ -394,18 +424,36 @@ public class CallComposerActivity extends AppCompatActivity
     return session != null && session.getState() == Session.STATE_STARTED;
   }
 
-  private void placeRCSCall(MultimediaData.Builder builder) {
+  @VisibleForTesting
+  public void placeRCSCall(MultimediaData.Builder builder) {
     MultimediaData data = builder.build();
     LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call, data: " + data);
     Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
+
     getEnrichedCallManager().sendCallComposerData(sessionId, data);
-    TelecomUtil.placeCall(
-        this,
-        new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER).build());
-    setResult(RESULT_OK);
+    maybeShowPrivacyToast(data);
+    if (data.hasImageData()
+        && ConfigProviderBindings.get(this).getBoolean("enable_delayed_ec_images", true)
+        && !TelecomUtil.isInCall(this)) {
+      timeoutHandler.postDelayed(placeTelecomCallRunnable, getRCSTimeoutMillis());
+      startActivity(
+          CallPendingActivity.getIntent(
+              this,
+              contact.getNameOrNumber(),
+              contact.getNumber(),
+              contact.getNumberLabel(),
+              UriUtils.getLookupKeyFromUri(Uri.parse(contact.getContactUri())),
+              Uri.parse(contact.getPhotoUri()),
+              sessionId));
+      pendingCallStarted = true;
+    } else {
+      placeTelecomCall();
+    }
+  }
+
+  private void maybeShowPrivacyToast(MultimediaData data) {
     SharedPreferences preferences =
         DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this);
-
     // Show a toast for privacy purposes if this is the first time a user uses call composer.
     if (preferences.getBoolean(KEY_IS_FIRST_CALL_COMPOSE, true)) {
       int privacyMessage =
@@ -416,6 +464,18 @@ public class CallComposerActivity extends AppCompatActivity
       toast.show();
       preferences.edit().putBoolean(KEY_IS_FIRST_CALL_COMPOSE, false).apply();
     }
+  }
+
+  @VisibleForTesting
+  public long getRCSTimeoutMillis() {
+    return ConfigProviderBindings.get(this).getLong("ec_image_upload_timeout", 15_000);
+  }
+
+  private void placeTelecomCall() {
+    TelecomUtil.placeCall(
+        this,
+        new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER).build());
+    setResult(RESULT_OK);
     finish();
   }
 

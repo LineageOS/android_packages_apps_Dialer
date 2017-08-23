@@ -66,8 +66,12 @@ public class PrimaryCallState {
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
+    return createEmptyPrimaryCallStateWithState(DialerCall.State.IDLE);
+  }
+
+  public static PrimaryCallState createEmptyPrimaryCallStateWithState(int state) {
     return new PrimaryCallState(
-        DialerCall.State.IDLE,
+        state,
         false, /* isVideoCall */
         SessionModificationState.NO_REQUEST,
         new DisconnectCause(DisconnectCause.UNKNOWN),

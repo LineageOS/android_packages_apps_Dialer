@@ -241,7 +241,7 @@ public class InCallFragment extends Fragment
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("InCallFragment.setPrimary", primaryInfo.toString());
-    setAdapterMedia(primaryInfo.multimediaData);
+    setAdapterMedia(primaryInfo.multimediaData, primaryInfo.showInCallButtonGrid);
     contactGridManager.setPrimary(primaryInfo);
 
     if (primaryInfo.shouldShowLocation) {
@@ -267,9 +267,10 @@ public class InCallFragment extends Fragment
     }
   }
 
-  private void setAdapterMedia(MultimediaData multimediaData) {
+  private void setAdapterMedia(MultimediaData multimediaData, boolean showInCallButtonGrid) {
     if (adapter == null) {
-      adapter = new InCallPagerAdapter(getChildFragmentManager(), multimediaData);
+      adapter =
+          new InCallPagerAdapter(getChildFragmentManager(), multimediaData, showInCallButtonGrid);
       pager.setAdapter(adapter);
     } else {
       adapter.setAttachments(multimediaData);

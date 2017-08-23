@@ -713,6 +713,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               null /* contactInfoLookupKey */,
               null /* enrichedCallMultimediaData */,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else if (mPrimaryContactInfo != null) {
       LogUtil.v(
@@ -760,6 +761,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               mPrimaryContactInfo.lookupKey,
               multimediaData,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else {
       // Clear the primary display info.
