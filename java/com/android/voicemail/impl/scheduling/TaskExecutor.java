@@ -129,7 +129,7 @@ final class TaskExecutor {
 
   private final MainThreadHandler mainThreadHandler;
 
-  private final Context context;
+  private final Context appContext;
 
   /** Main thread only, access through {@link #getTasks()} */
   private final TaskQueue tasks = new TaskQueue();
@@ -179,7 +179,7 @@ final class TaskExecutor {
         VvmLog.i("JobFinishedPoller.run", "Job finished");
         if (!getTasks().isEmpty()) {
           TaskSchedulerJobService.scheduleJob(
-              context, serializePendingTasks(), delayMillis, isNewJob);
+              appContext, serializePendingTasks(), delayMillis, isNewJob);
           tasks.clear();
         }
         terminate();
@@ -259,7 +259,7 @@ final class TaskExecutor {
   }
 
   private TaskExecutor(Context context) {
-    this.context = context;
+    this.appContext = context.getApplicationContext();
     HandlerThread thread = new HandlerThread("VvmTaskExecutor");
     thread.start();
 
@@ -274,7 +274,7 @@ final class TaskExecutor {
     job = null;
     workerThreadHandler.getLooper().quit();
     instance = null;
-    TaskReceiver.resendDeferredBroadcasts(context);
+    TaskReceiver.resendDeferredBroadcasts(appContext);
   }
 
   @MainThread
@@ -391,7 +391,7 @@ final class TaskExecutor {
   public void onStartJob(Job job, List<Bundle> pendingTasks) {
     VvmLog.i(TAG, "onStartJob");
     this.job = job;
-    tasks.fromBundles(context, pendingTasks);
+    tasks.fromBundles(appContext, pendingTasks);
     maybeRunNextTask();
   }
 
