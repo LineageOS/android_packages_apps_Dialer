@@ -226,13 +226,10 @@ public class AutoResizeTextView extends TextView {
     } else {
       // If multiline, lay the text out, then check the number of lines, the layout's height,
       // and each line's width.
-      StaticLayout layout = new StaticLayout(text,
-          textPaint,
-          maxWidth,
-          Alignment.ALIGN_NORMAL,
-          getLineSpacingMultiplier(),
-          getLineSpacingExtra(),
-          true);
+      StaticLayout layout = StaticLayout.Builder.obtain(text, 0, text.length(), textPaint, maxWidth)
+          .setLineSpacing(getLineSpacingExtra(), getLineSpacingMultiplier())
+          .setUseLineSpacingFromFallbacks(true)
+          .build();
 
       // Return false if we need more than maxLines. The text is obviously too big in this case.
       if (maxLines != NO_LINE_LIMIT && layout.getLineCount() > maxLines) {
