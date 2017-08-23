@@ -16,6 +16,7 @@
 
 package com.android.dialer.dialpadview;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
@@ -49,6 +50,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,6 +290,9 @@ public class SpecialCharSequenceMgr {
   // TODO: Use TelephonyCapabilities.getDeviceIdLabel() to get the device id label instead of a
   // hard-coded string.
   static boolean handleDeviceIdDisplay(Context context, String input) {
+    if (!PermissionsUtil.hasPermission(context, Manifest.permission.READ_PHONE_STATE)) {
+      return false;
+    }
     TelephonyManager telephonyManager =
         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
