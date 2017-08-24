@@ -70,7 +70,8 @@ public class VoicemailTosMessageCreator {
     this.context = context;
     this.status = status;
     this.statusReader = statusReader;
-    this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    this.preferences =
+        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
   }
 
   @Nullable
