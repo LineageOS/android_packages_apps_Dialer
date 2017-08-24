@@ -706,6 +706,7 @@ public class DialpadFragment extends Fragment
     mLastNumberDialed = EMPTY_NUMBER; // Since we are going to query again, free stale number.
 
     SpecialCharSequenceMgr.cleanup();
+    mOverflowPopupMenu.dismiss();
   }
 
   @Override
