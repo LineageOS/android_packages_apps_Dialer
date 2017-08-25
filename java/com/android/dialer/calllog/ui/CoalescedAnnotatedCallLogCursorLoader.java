@@ -17,8 +17,8 @@
 package com.android.dialer.calllog.ui;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
+import android.support.v4.content.CursorLoader;
 import com.android.dialer.CallTypes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.google.protobuf.InvalidProtocolBufferException;

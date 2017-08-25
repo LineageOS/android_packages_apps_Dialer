@@ -15,11 +15,11 @@
  */
 package com.android.dialer.calllog.ui;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -65,6 +65,7 @@ public final class NewCallLogFragment extends Fragment
     DialerExecutorFactory dialerExecutorFactory =
         DialerExecutorComponent.get(getContext()).dialerExecutorFactory();
 
+    // TODO(zachh): Use support fragment manager and add support for them in executors library.
     refreshAnnotatedCallLogTask =
         dialerExecutorFactory
             .createUiTaskBuilder(
@@ -138,6 +139,12 @@ public final class NewCallLogFragment extends Fragment
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
     LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");
 
+    if (newCursor == null) {
+      // This might be possible when the annotated call log hasn't been created but we're trying
+      // to show the call log.
+      LogUtil.w("NewCallLogFragment.onLoadFinished", "null cursor");
+      return;
+    }
     // TODO(zachh): Handle empty cursor by showing empty view.
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(new NewCallLogAdapter(newCursor, System::currentTimeMillis));
