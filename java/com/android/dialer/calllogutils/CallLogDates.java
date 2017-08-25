@@ -151,7 +151,8 @@ public final class CallLogDates {
     return then.equals(threeDaysAgoStartOfDay) || then.after(threeDaysAgoStartOfDay);
   }
 
-  private static boolean isSameDay(long firstMillis, long secondMillis) {
+  /** Returns true if the provided timestamps are from the same day in the default time zone. */
+  public static boolean isSameDay(long firstMillis, long secondMillis) {
     Calendar first = Calendar.getInstance();
     first.setTimeInMillis(firstMillis);
 

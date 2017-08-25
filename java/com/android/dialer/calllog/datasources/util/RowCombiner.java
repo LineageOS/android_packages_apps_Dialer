@@ -36,12 +36,23 @@ public class RowCombiner {
     return this;
   }
 
+  /** Use the most recent value for the specified column. */
+  public RowCombiner useMostRecentString(String columnName) {
+    combinedRow.put(columnName, individualRowsSortedByTimestampDesc.get(0).getAsString(columnName));
+    return this;
+  }
+
   /** Asserts that all column values for the given column name are the same, and uses it. */
   public RowCombiner useSingleValueString(String columnName) {
     Iterator<ContentValues> iterator = individualRowsSortedByTimestampDesc.iterator();
     String singleValue = iterator.next().getAsString(columnName);
     while (iterator.hasNext()) {
-      Assert.checkState(iterator.next().getAsString(columnName).equals(singleValue));
+      String current = iterator.next().getAsString(columnName);
+      if (current == null) {
+        Assert.checkState(singleValue == null);
+      } else {
+        Assert.checkState(current.equals(singleValue));
+      }
     }
     combinedRow.put(columnName, singleValue);
     return this;

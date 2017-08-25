@@ -8,7 +8,8 @@ option optimize_for = LITE_RUNTIME;
 
 package com.android.dialer;
 
-// A list of android.provider.CallLog.Calls.TYPE values.
+// A list of android.provider.CallLog.Calls.TYPE values ordered from newest to
+// oldest.
 message CallTypes {
   repeated int32 type = 1;
 }

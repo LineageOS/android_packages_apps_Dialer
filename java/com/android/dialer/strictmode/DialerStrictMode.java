@@ -28,6 +28,7 @@ import android.support.annotation.AnyThread;
 import android.support.annotation.MainThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.buildtype.BuildType;
+import com.android.dialer.function.Supplier;
 import com.android.dialer.util.DialerUtils;
 
 /** Enables strict mode for the application, and provides means of temporarily disabling it. */
@@ -94,11 +95,6 @@ public final class DialerStrictMode {
     return Looper.getMainLooper().equals(Looper.myLooper());
   }
 
-  /** Functional interface intended to be used with {@link #bypass(Provider)}. */
-  public interface Provider<T> {
-    T get();
-  }
-
   /**
    * Convenience method for disabling and enabling the thread policy death penalty using lambdas.
    *
@@ -111,17 +107,17 @@ public final class DialerStrictMode {
    * <p>The thread policy is only mutated if this is called from the main thread.
    */
   @AnyThread
-  public static <T> T bypass(Provider<T> provider) {
+  public static <T> T bypass(Supplier<T> supplier) {
     if (isStrictModeAllowed() && onMainThread()) {
       ThreadPolicy originalPolicy = StrictMode.getThreadPolicy();
       StrictModeUtils.setRecommendedMainThreadPolicy(THREAD_LOG_PENALTY);
       try {
-        return provider.get();
+        return supplier.get();
       } finally {
         StrictMode.setThreadPolicy(originalPolicy);
       }
     }
-    return provider.get();
+    return supplier.get();
   }
 
   /**
@@ -149,3 +145,5 @@ public final class DialerStrictMode {
     runnable.run();
   }
 }
+
+

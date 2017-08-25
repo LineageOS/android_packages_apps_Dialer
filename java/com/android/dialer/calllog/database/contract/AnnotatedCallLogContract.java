@@ -42,15 +42,15 @@ public class AnnotatedCallLogContract {
     String TIMESTAMP = "timestamp";
 
     /**
-     * Primary text to display for the entry. This could be a name from a local contact or caller ID
-     * data source, or it could just be a phone number, for example.
+     * Name of the caller if available. This could be a name from a local contact or caller ID data
+     * source, for example.
      *
      * <p>This is exactly how it should appear to the user. If the user's locale or name display
      * preferences change, this column should be rewritten.
      *
      * <p>Type: TEXT
      */
-    String PRIMARY_TEXT = "primary_text";
+    String NAME = "name";
 
     /**
      * Local photo URI for the contact associated with the phone number, if it exists.
@@ -74,14 +74,21 @@ public class AnnotatedCallLogContract {
     String NUMBER_TYPE_LABEL = "number_type_label";
 
     /**
-     * See CallLog.Calls.IS_READ.
+     * See {@link android.provider.CallLog.Calls#IS_READ}.
      *
      * <p>TYPE: INTEGER (boolean)
      */
     String IS_READ = "is_read";
 
     /**
-     * See CallLog.Calls.GEOCODED_LOCATION.
+     * See {@link android.provider.CallLog.Calls#NEW}.
+     *
+     * <p>Type: INTEGER (boolean)
+     */
+    String NEW = "new";
+
+    /**
+     * See {@link android.provider.CallLog.Calls#GEOCODED_LOCATION}.
      *
      * <p>TYPE: TEXT
      */
@@ -102,7 +109,7 @@ public class AnnotatedCallLogContract {
     String PHONE_ACCOUNT_COLOR = "phone_account_color";
 
     /**
-     * See CallLog.Calls.FEATURES.
+     * See {@link android.provider.CallLog.Calls#FEATURES}.
      *
      * <p>TYPE: INTEGER (int)
      */
@@ -128,10 +135,11 @@ public class AnnotatedCallLogContract {
         new String[] {
           _ID,
           TIMESTAMP,
-          PRIMARY_TEXT,
+          NAME,
           CONTACT_PHOTO_URI,
           NUMBER_TYPE_LABEL,
           IS_READ,
+          NEW,
           GEOCODED_LOCATION,
           PHONE_ACCOUNT_LABEL,
           PHONE_ACCOUNT_COLOR,
@@ -168,6 +176,13 @@ public class AnnotatedCallLogContract {
      * <p>Type: BLOB
      */
     public static final String NUMBER = "number";
+
+    /**
+     * Copied from {@link android.provider.CallLog.Calls#TYPE}.
+     *
+     * <p>Type: INTEGER (int)
+     */
+    public static final String TYPE = "type";
   }
 
   /**

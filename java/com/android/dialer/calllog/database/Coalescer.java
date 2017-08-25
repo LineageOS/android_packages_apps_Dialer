@@ -133,8 +133,16 @@ public class Coalescer {
     DialerPhoneNumber number1;
     DialerPhoneNumber number2;
     try {
-      number1 = DialerPhoneNumber.parseFrom(row1.getAsByteArray(AnnotatedCallLog.NUMBER));
-      number2 = DialerPhoneNumber.parseFrom(row2.getAsByteArray(AnnotatedCallLog.NUMBER));
+      byte[] number1Bytes = row1.getAsByteArray(AnnotatedCallLog.NUMBER);
+      byte[] number2Bytes = row2.getAsByteArray(AnnotatedCallLog.NUMBER);
+
+      if (number1Bytes == null || number2Bytes == null) {
+        // Empty numbers should not be combined.
+        return false;
+      }
+
+      number1 = DialerPhoneNumber.parseFrom(number1Bytes);
+      number2 = DialerPhoneNumber.parseFrom(number2Bytes);
     } catch (InvalidProtocolBufferException e) {
       throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
     }

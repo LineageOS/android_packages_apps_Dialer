@@ -68,7 +68,7 @@ public final class NewCallLogFragment extends Fragment
     refreshAnnotatedCallLogTask =
         dialerExecutorFactory
             .createUiTaskBuilder(
-                getFragmentManager(),
+                getActivity().getFragmentManager(),
                 "NewCallLogFragment.refreshAnnotatedCallLog",
                 component.getRefreshAnnotatedCallLogWorker())
             .build();
@@ -140,7 +140,7 @@ public final class NewCallLogFragment extends Fragment
 
     // TODO(zachh): Handle empty cursor by showing empty view.
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(new NewCallLogAdapter(newCursor));
+    recyclerView.setAdapter(new NewCallLogAdapter(newCursor, System::currentTimeMillis));
   }
 
   @Override

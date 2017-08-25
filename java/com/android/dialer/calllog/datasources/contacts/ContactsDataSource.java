@@ -51,7 +51,7 @@ public final class ContactsDataSource implements CallLogDataSource {
     Assert.isWorkerThread();
     // TODO(zachh): Implementation.
     for (ContentValues contentValues : mutations.getInserts().values()) {
-      contentValues.put(AnnotatedCallLog.PRIMARY_TEXT, "Placeholder name");
+      contentValues.put(AnnotatedCallLog.NAME, "Placeholder name");
     }
   }
 
@@ -64,7 +64,7 @@ public final class ContactsDataSource implements CallLogDataSource {
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     // TODO(zachh): Implementation.
     return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useSingleValueString(AnnotatedCallLog.PRIMARY_TEXT)
+        .useSingleValueString(AnnotatedCallLog.NAME)
         .combine();
   }
 

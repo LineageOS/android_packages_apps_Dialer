@@ -15,33 +15,119 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.provider.CallLog.Calls;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
+import com.android.dialer.calllogutils.CallLogDates;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.time.Clock;
 import java.util.Locale;
 
 /** {@link RecyclerView.ViewHolder} for the new call log. */
 final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
-  // TODO(zachh): Format correctly using current locale.
-  private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-
+  private final Context context;
   private final TextView primaryTextView;
   private final TextView secondaryTextView;
+  private final QuickContactBadge quickContactBadge;
+  private final Clock clock;
 
-  NewCallLogViewHolder(View view) {
+  NewCallLogViewHolder(View view, Clock clock) {
     super(view);
+    this.context = view.getContext();
     primaryTextView = view.findViewById(R.id.primary_text);
     secondaryTextView = view.findViewById(R.id.secondary_text);
+    quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    this.clock = clock;
   }
 
   /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
   void bind(Cursor cursor) {
     CoalescedAnnotatedCallLogCursorLoader.Row row =
         new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
-    primaryTextView.setText(row.primaryText());
-    secondaryTextView.setText(dateFormat.format(row.timestamp()));
+
+    // TODO(zachh): Add HD icon and Wifi icon after primary text.
+    // TODO(zachh): Call type icons for last 3 calls.
+    // TODO(zachh): Use name for primary text if available.
+    // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
+    // TODO(zachh): Handle RTL properly.
+    primaryTextView.setText(buildPrimaryText(row));
+    secondaryTextView.setText(buildSecondaryText(row));
+
+    if (row.isNew()) {
+      // TODO(zachh): Figure out correct styling for new/missed/unread calls.
+      primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
+      // TODO(zachh): Styling for call type icons when the call is new.
+      secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
+    }
+
+    setPhoto();
+  }
+
+  private String buildPrimaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
+    StringBuilder primaryText =
+        new StringBuilder(
+            TextUtils.isEmpty(row.formattedNumber())
+                ? context.getText(R.string.new_call_log_unknown)
+                : row.formattedNumber());
+    if (row.numberCalls() > 1) {
+      primaryText.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
+    }
+    return primaryText.toString();
+  }
+
+  private String buildSecondaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
+    /*
+     * Rules: (Duo video, )?$Label|$Location • Date
+     *
+     * Examples:
+     *   Duo Video, Mobile • Now
+     *   Duo Video • 11:45pm
+     *   Mobile • 11:45pm
+     *   Mobile • Sunday
+     *   Brooklyn, NJ • Jan 15
+     *
+     * Date rules:
+     *   if < 1 minute ago: "Now"; else if today: HH:MM(am|pm); else if < 3 days: day; else: MON D
+     */
+    StringBuilder secondaryText = new StringBuilder();
+    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
+      // TODO(zachh): Add "Duo" prefix?
+      secondaryText.append(context.getText(R.string.new_call_log_video));
+    }
+    String numberTypeLabel = row.numberTypeLabel();
+    if (!TextUtils.isEmpty(numberTypeLabel)) {
+      if (secondaryText.length() > 0) {
+        secondaryText.append(", ");
+      }
+      secondaryText.append(numberTypeLabel);
+    } else { // If there's a number type label, don't show the location.
+      String location = row.geocodedLocation();
+      if (!TextUtils.isEmpty(location)) {
+        if (secondaryText.length() > 0) {
+          secondaryText.append(", ");
+        }
+        secondaryText.append(location);
+      }
+    }
+    if (secondaryText.length() > 0) {
+      secondaryText.append(" • ");
+    }
+    secondaryText.append(
+        CallLogDates.newCallLogTimestampLabel(context, clock.currentTimeMillis(), row.timestamp()));
+    return secondaryText.toString();
+  }
+
+  private void setPhoto() {
+    // TODO(zachh): Set photo/icon appropriately. (This just uses the anonymous avatar.)
+    ContactPhotoManager.getInstance(context)
+        .loadDialerThumbnailOrPhoto(
+            quickContactBadge, null, 0, null, null, LetterTileDrawable.TYPE_DEFAULT);
   }
 }

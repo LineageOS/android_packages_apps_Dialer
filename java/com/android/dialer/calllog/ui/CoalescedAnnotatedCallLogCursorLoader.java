@@ -30,19 +30,20 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int ID = 0;
 
   private static final int TIMESTAMP = 1;
-  private static final int PRIMARY_TEXT = 2;
+  private static final int NAME = 2;
   private static final int CONTACT_PHOTO_URI = 3;
   private static final int NUMBER_TYPE_LABEL = 4;
   private static final int IS_READ = 5;
-  private static final int GEOCODED_LOCATION = 6;
-  private static final int PHONE_ACCOUNT_LABEL = 7;
-  private static final int PHONE_ACCOUNT_COLOR = 8;
-  private static final int FEATURES = 9;
-  private static final int IS_BUSINESS = 10;
-  private static final int IS_VOICEMAIL = 11;
-  private static final int NUMBER_CALLS = 12;
-  private static final int FORMATTED_NUMBER = 13;
-  private static final int CALL_TYPES = 14;
+  private static final int NEW = 6;
+  private static final int GEOCODED_LOCATION = 7;
+  private static final int PHONE_ACCOUNT_LABEL = 8;
+  private static final int PHONE_ACCOUNT_COLOR = 9;
+  private static final int FEATURES = 10;
+  private static final int IS_BUSINESS = 11;
+  private static final int IS_VOICEMAIL = 12;
+  private static final int NUMBER_CALLS = 13;
+  private static final int FORMATTED_NUMBER = 14;
+  private static final int CALL_TYPES = 15;
 
   /** Convenience class for accessing values using an abbreviated syntax. */
   static final class Row {
@@ -60,8 +61,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       return cursor.getLong(TIMESTAMP);
     }
 
-    String primaryText() {
-      return cursor.getString(PRIMARY_TEXT);
+    String name() {
+      return cursor.getString(NAME);
     }
 
     String contactPhotoUri() {
@@ -74,6 +75,10 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
 
     boolean isRead() {
       return cursor.getInt(IS_READ) == 1;
+    }
+
+    boolean isNew() {
+      return cursor.getInt(NEW) == 1;
     }
 
     String geocodedLocation() {
