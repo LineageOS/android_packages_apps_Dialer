@@ -38,7 +38,6 @@ import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.CallTypes;
-import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
@@ -52,7 +51,6 @@ import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -160,17 +158,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .useMostRecentLong(AnnotatedCallLog.NEW)
             .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
             .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
+            .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
             .combine();
-
-    // All phone numbers in the provided group should be equivalent (but could be formatted
-    // differently). Arbitrarily show the raw phone number of the most recent call.
-    DialerPhoneNumber mostRecentPhoneNumber =
-        getMostRecentPhoneNumber(individualRowsSortedByTimestampDesc);
-    if (mostRecentPhoneNumber != null) {
-      coalescedValues.put(
-          CoalescedAnnotatedCallLog.FORMATTED_NUMBER,
-          mostRecentPhoneNumber.getRawInput().getNumber());
-    }
 
     CallTypes.Builder callTypes = CallTypes.newBuilder();
     // Store a maximum of 3 call types since that's all we show to users via icons.
@@ -181,23 +170,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     coalescedValues.put(CoalescedAnnotatedCallLog.CALL_TYPES, callTypes.build().toByteArray());
 
     return coalescedValues;
-  }
-
-  @Nullable
-  private static DialerPhoneNumber getMostRecentPhoneNumber(
-      List<ContentValues> individualRowsSortedByTimestampDesc) {
-    byte[] protoBytes =
-        individualRowsSortedByTimestampDesc.get(0).getAsByteArray(AnnotatedCallLog.NUMBER);
-    if (protoBytes == null) {
-      return null;
-    }
-    DialerPhoneNumber dialerPhoneNumber;
-    try {
-      dialerPhoneNumber = DialerPhoneNumber.parseFrom(protoBytes);
-    } catch (InvalidProtocolBufferException e) {
-      throw Assert.createAssertionFailException("couldn't parse DialerPhoneNumber", e);
-    }
-    return dialerPhoneNumber;
   }
 
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
@@ -223,6 +195,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.NUMBER,
                   Calls.TYPE,
                   Calls.COUNTRY_ISO,
+                  Calls.CACHED_FORMATTED_NUMBER,
                   Calls.CACHED_NUMBER_TYPE,
                   Calls.CACHED_NUMBER_LABEL,
                   Calls.IS_READ,
@@ -253,6 +226,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
         int typeColumn = cursor.getColumnIndexOrThrow(Calls.TYPE);
         int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
+        int cachedFormattedNumberColumn =
+            cursor.getColumnIndexOrThrow(Calls.CACHED_FORMATTED_NUMBER);
         int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
@@ -272,7 +247,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           String numberAsStr = cursor.getString(numberColumn);
           long type = cursor.getType(typeColumn);
           String countryIso = cursor.getString(countryIsoColumn);
-          // TODO(zachh): Decide if should use "cached" columns from call log or recompute.
+          String formattedNumber = cursor.getString(cachedFormattedNumberColumn);
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
           int isRead = cursor.getInt(isReadColumn);
@@ -293,6 +268,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           }
 
           contentValues.put(AnnotatedCallLog.TYPE, type);
+          contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
 
           // Phone.getTypeLabel returns "Custom" if given (0, null) which is not of any use. Just
           // omit setting the label if there's no information for it.

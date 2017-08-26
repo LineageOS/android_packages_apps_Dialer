@@ -53,6 +53,13 @@ public class AnnotatedCallLogContract {
     String NAME = "name";
 
     /**
+     * Copied from {@link android.provider.CallLog.Calls#CACHED_FORMATTED_NUMBER}.
+     *
+     * <p>Type: TEXT
+     */
+    String FORMATTED_NUMBER = "formatted_number";
+
+    /**
      * Local photo URI for the contact associated with the phone number, if it exists.
      *
      * <p>Photos currently only come from local contacts database and not caller ID sources. If
@@ -136,6 +143,7 @@ public class AnnotatedCallLogContract {
           _ID,
           TIMESTAMP,
           NAME,
+          FORMATTED_NUMBER,
           CONTACT_PHOTO_URI,
           NUMBER_TYPE_LABEL,
           IS_READ,
@@ -213,14 +221,6 @@ public class AnnotatedCallLogContract {
     public static final String NUMBER_CALLS = "number_calls";
 
     /**
-     * The phone number formatted in a way suitable for display to the user. This value is generated
-     * on the fly when the {@link CoalescedAnnotatedCallLog} is generated.
-     *
-     * <p>Type: TEXT
-     */
-    public static final String FORMATTED_NUMBER = "formatted_number";
-
-    /**
      * The call types of the most recent 3 calls, encoded as a CallTypes proto.
      *
      * <p>TYPE: BLOB
@@ -232,7 +232,7 @@ public class AnnotatedCallLogContract {
      * AnnotatedCallLog}.
      */
     private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG =
-        new String[] {NUMBER_CALLS, FORMATTED_NUMBER, CALL_TYPES};
+        new String[] {NUMBER_CALLS, CALL_TYPES};
 
     /** All columns in the {@link CoalescedAnnotatedCallLog}. */
     public static final String[] ALL_COLUMNS =

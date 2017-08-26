@@ -39,6 +39,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .append(AnnotatedCallLog._ID + " integer primary key, ")
           .append(AnnotatedCallLog.TIMESTAMP + " integer, ")
           .append(AnnotatedCallLog.NAME + " string, ")
+          .append(AnnotatedCallLog.FORMATTED_NUMBER + " string, ")
           .append(AnnotatedCallLog.NEW + " integer, ")
           .append(AnnotatedCallLog.TYPE + " integer, ")
           .append(AnnotatedCallLog.CONTACT_PHOTO_URI + " string, ")

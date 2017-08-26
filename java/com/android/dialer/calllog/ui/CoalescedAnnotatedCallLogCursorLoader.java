@@ -31,18 +31,18 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
 
   private static final int TIMESTAMP = 1;
   private static final int NAME = 2;
-  private static final int CONTACT_PHOTO_URI = 3;
-  private static final int NUMBER_TYPE_LABEL = 4;
-  private static final int IS_READ = 5;
-  private static final int NEW = 6;
-  private static final int GEOCODED_LOCATION = 7;
-  private static final int PHONE_ACCOUNT_LABEL = 8;
-  private static final int PHONE_ACCOUNT_COLOR = 9;
-  private static final int FEATURES = 10;
-  private static final int IS_BUSINESS = 11;
-  private static final int IS_VOICEMAIL = 12;
-  private static final int NUMBER_CALLS = 13;
-  private static final int FORMATTED_NUMBER = 14;
+  private static final int FORMATTED_NUMBER = 3;
+  private static final int CONTACT_PHOTO_URI = 4;
+  private static final int NUMBER_TYPE_LABEL = 5;
+  private static final int IS_READ = 6;
+  private static final int NEW = 7;
+  private static final int GEOCODED_LOCATION = 8;
+  private static final int PHONE_ACCOUNT_LABEL = 9;
+  private static final int PHONE_ACCOUNT_COLOR = 10;
+  private static final int FEATURES = 11;
+  private static final int IS_BUSINESS = 12;
+  private static final int IS_VOICEMAIL = 13;
+  private static final int NUMBER_CALLS = 14;
   private static final int CALL_TYPES = 15;
 
   /** Convenience class for accessing values using an abbreviated syntax. */
