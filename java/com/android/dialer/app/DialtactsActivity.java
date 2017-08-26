@@ -93,6 +93,7 @@ import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
@@ -305,8 +306,11 @@ public class DialtactsActivity extends TransactionSafeActivity
             mSmartDialSearchFragment.setQueryString(mSearchQuery);
           } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
             mRegularSearchFragment.setQueryString(mSearchQuery);
-          } else if (mNewSearchFragment != null) {
+          } else if (mNewSearchFragment != null && mNewSearchFragment.isVisible()) {
             mNewSearchFragment.setQuery(mSearchQuery);
+            // When the user switches between dialpad and the serachbar, we need to reset the
+            // call initiation type.
+            mNewSearchFragment.setCallInitiationType(getCallInitiationType());
           }
         }
 
@@ -965,9 +969,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       fragment.updatePosition(true /* animate */);
     } else if (mNewSearchFragment != null) {
       int animationDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
+      int actionbarHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_height_large);
       int shadowHeight = getResources().getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
-      int start = isDialpadShown() ? mActionBarHeight - shadowHeight : 0;
-      int end = isDialpadShown() ? 0 : mActionBarHeight - shadowHeight;
+      int start = isDialpadShown() ? actionbarHeight - shadowHeight : 0;
+      int end = isDialpadShown() ? 0 : actionbarHeight - shadowHeight;
       mNewSearchFragment.animatePosition(start, end, animationDuration);
     }
   }
@@ -1209,6 +1214,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       ((SearchFragment) fragment).setQueryString(query);
     } else if (useNewSearch) {
       ((NewSearchFragment) fragment).setQuery(query);
+      ((NewSearchFragment) fragment).setCallInitiationType(getCallInitiationType());
     }
     transaction.commit();
 
@@ -1594,6 +1600,12 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public boolean isActionModeStateEnabled() {
     return isMultiSelectModeEnabled;
+  }
+
+  private CallInitiationType.Type getCallInitiationType() {
+    return mIsDialpadShown
+        ? CallInitiationType.Type.DIALPAD
+        : CallInitiationType.Type.REGULAR_SEARCH;
   }
 
   /** Popup menu accessible from the search bar */
