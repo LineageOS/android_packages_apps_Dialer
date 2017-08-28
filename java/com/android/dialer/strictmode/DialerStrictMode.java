@@ -145,5 +145,3 @@ public final class DialerStrictMode {
     runnable.run();
   }
 }
-
-

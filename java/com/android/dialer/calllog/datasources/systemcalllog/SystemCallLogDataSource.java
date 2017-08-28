@@ -29,6 +29,7 @@ import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.ColorInt;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -159,6 +160,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
             .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
             .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
+            .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
+            .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
             .combine();
 
     CallTypes.Builder callTypes = CallTypes.newBuilder();
@@ -245,7 +248,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           long id = cursor.getLong(idColumn);
           long date = cursor.getLong(dateColumn);
           String numberAsStr = cursor.getString(numberColumn);
-          long type = cursor.getType(typeColumn);
+          long type = cursor.getInt(typeColumn);
           String countryIso = cursor.getString(countryIsoColumn);
           String formattedNumber = cursor.getString(cachedFormattedNumberColumn);
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
@@ -311,9 +314,12 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
     contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_LABEL, label);
 
-    int color = PhoneAccountUtils.getAccountColor(appContext, phoneAccountHandle);
+    @ColorInt int color = PhoneAccountUtils.getAccountColor(appContext, phoneAccountHandle);
     if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-      color = R.color.dialer_secondary_text_color;
+      color =
+          appContext
+              .getResources()
+              .getColor(R.color.dialer_secondary_text_color, appContext.getTheme());
     }
     contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_COLOR, color);
   }

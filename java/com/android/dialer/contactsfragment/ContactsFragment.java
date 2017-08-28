@@ -16,6 +16,9 @@
 
 package com.android.dialer.contactsfragment;
 
+import static com.android.dialer.contactsfragment.ContactsFragment.Header.ADD_CONTACT;
+import static com.android.dialer.contactsfragment.ContactsFragment.Header.NONE;
+
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
@@ -67,9 +70,7 @@ public class ContactsFragment extends Fragment
 
   /** An enum for the different types of headers that be inserted at position 0 in the list. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-  ContactsFragment.Header.NONE,
-  ContactsFragment.Header.ADD_CONTACT})
+  @IntDef({NONE, ADD_CONTACT})
   public @interface Header {
     int NONE = 0;
     /** Header that allows the user to add a new contact. */

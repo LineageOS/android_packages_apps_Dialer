@@ -23,9 +23,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import com.android.dialer.calllog.ui.CoalescedAnnotatedCallLogCursorLoader.Row;
 import com.android.dialer.calllogutils.CallLogDates;
+import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
 import java.util.Locale;
 
@@ -36,6 +39,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final TextView primaryTextView;
   private final TextView secondaryTextView;
   private final QuickContactBadge quickContactBadge;
+  private final CallTypeIconsView primaryCallTypeIconsView; // Used for Wifi, HD icons
+  private final CallTypeIconsView secondaryCallTypeIconsView; // Used for call types
+  private final TextView phoneAccountView;
   private final Clock clock;
 
   NewCallLogViewHolder(View view, Clock clock) {
@@ -44,6 +50,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryTextView = view.findViewById(R.id.primary_text);
     secondaryTextView = view.findViewById(R.id.secondary_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    primaryCallTypeIconsView = view.findViewById(R.id.primary_call_type_icons);
+    secondaryCallTypeIconsView = view.findViewById(R.id.secondary_call_type_icons);
+    phoneAccountView = view.findViewById(R.id.phone_account);
     this.clock = clock;
   }
 
@@ -52,8 +61,6 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     CoalescedAnnotatedCallLogCursorLoader.Row row =
         new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
 
-    // TODO(zachh): Add HD icon and Wifi icon after primary text.
-    // TODO(zachh): Call type icons for last 3 calls.
     // TODO(zachh): Use name for primary text if available.
     // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
     // TODO(zachh): Handle RTL properly.
@@ -68,6 +75,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
 
     setPhoto();
+    setPrimaryCallTypes(row);
+    setSecondaryCallTypes(row);
+    setPhoneAccounts(row);
   }
 
   private String buildPrimaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
@@ -129,5 +139,29 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             quickContactBadge, null, 0, null, null, LetterTileDrawable.TYPE_DEFAULT);
+  }
+
+  private void setPrimaryCallTypes(Row row) {
+    // Only HD and Wifi icons are shown following the primary text.
+    primaryCallTypeIconsView.setShowHd(
+        MotorolaUtils.shouldShowHdIconInCallLog(context, row.features()));
+    primaryCallTypeIconsView.setShowWifi(
+        MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features()));
+  }
+
+  private void setSecondaryCallTypes(Row row) {
+    // Only call type icons are shown before the secondary text.
+    for (int callType : row.callTypes().getTypeList()) {
+      secondaryCallTypeIconsView.add(callType);
+    }
+    // TODO(zachh): Per new mocks, may need to add method to CallTypeIconsView to disable coloring.
+  }
+
+  private void setPhoneAccounts(Row row) {
+    if (row.phoneAccountLabel() != null) {
+      phoneAccountView.setText(row.phoneAccountLabel());
+      phoneAccountView.setTextColor(row.phoneAccountColor());
+      phoneAccountView.setVisibility(View.VISIBLE);
+    }
   }
 }
