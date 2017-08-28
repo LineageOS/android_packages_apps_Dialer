@@ -42,8 +42,7 @@ public class AnnotatedCallLogContract {
     String TIMESTAMP = "timestamp";
 
     /**
-     * Name of the caller if available. This could be a name from a local contact or caller ID data
-     * source, for example.
+     * Copied from {@link android.provider.CallLog.Calls#CACHED_NAME}.
      *
      * <p>This is exactly how it should appear to the user. If the user's locale or name display
      * preferences change, this column should be rewritten.
@@ -60,14 +59,25 @@ public class AnnotatedCallLogContract {
     String FORMATTED_NUMBER = "formatted_number";
 
     /**
-     * Local photo URI for the contact associated with the phone number, if it exists.
-     *
-     * <p>Photos currently only come from local contacts database and not caller ID sources. If
-     * there is no photo for a contact then an appropriate letter tile should be drawn.
+     * Copied from {@link android.provider.CallLog.Calls#CACHED_PHOTO_URI}.
      *
      * <p>TYPE: TEXT
      */
-    String CONTACT_PHOTO_URI = "contact_photo_uri";
+    String PHOTO_URI = "photo_uri";
+
+    /**
+     * Copied from {@link android.provider.CallLog.Calls#CACHED_PHOTO_ID}.
+     *
+     * <p>Type: INTEGER (long)
+     */
+    String PHOTO_ID = "photo_id";
+
+    /**
+     * Copied from {@link android.provider.CallLog.Calls#CACHED_LOOKUP_URI}.
+     *
+     * <p>TYPE: TEXT
+     */
+    String LOOKUP_URI = "lookup_uri";
 
     // TODO(zachh): If we need to support photos other than local contacts', add a (blob?) column.
 
@@ -144,7 +154,9 @@ public class AnnotatedCallLogContract {
           TIMESTAMP,
           NAME,
           FORMATTED_NUMBER,
-          CONTACT_PHOTO_URI,
+          PHOTO_URI,
+          PHOTO_ID,
+          LOOKUP_URI,
           NUMBER_TYPE_LABEL,
           IS_READ,
           NEW,

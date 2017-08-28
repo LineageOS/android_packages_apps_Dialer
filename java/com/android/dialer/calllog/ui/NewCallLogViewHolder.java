@@ -17,6 +17,7 @@ package com.android.dialer.calllog.ui;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -61,8 +62,6 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     CoalescedAnnotatedCallLogCursorLoader.Row row =
         new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
 
-    // TODO(zachh): Use name for primary text if available.
-    // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
     // TODO(zachh): Handle RTL properly.
     primaryTextView.setText(buildPrimaryText(row));
     secondaryTextView.setText(buildSecondaryText(row));
@@ -74,18 +73,22 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
     }
 
-    setPhoto();
+    setPhoto(row);
     setPrimaryCallTypes(row);
     setSecondaryCallTypes(row);
     setPhoneAccounts(row);
   }
 
   private String buildPrimaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
-    StringBuilder primaryText =
-        new StringBuilder(
-            TextUtils.isEmpty(row.formattedNumber())
-                ? context.getText(R.string.new_call_log_unknown)
-                : row.formattedNumber());
+    StringBuilder primaryText = new StringBuilder();
+    if (!TextUtils.isEmpty(row.name())) {
+      primaryText.append(row.name());
+    } else if (!TextUtils.isEmpty(row.formattedNumber())) {
+      primaryText.append(row.formattedNumber());
+    } else {
+      // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
+      primaryText.append(context.getText(R.string.new_call_log_unknown));
+    }
     if (row.numberCalls() > 1) {
       primaryText.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
     }
@@ -134,11 +137,16 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     return secondaryText.toString();
   }
 
-  private void setPhoto() {
-    // TODO(zachh): Set photo/icon appropriately. (This just uses the anonymous avatar.)
+  private void setPhoto(Row row) {
+    // TODO(zachh): Set the contact type.
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
-            quickContactBadge, null, 0, null, null, LetterTileDrawable.TYPE_DEFAULT);
+            quickContactBadge,
+            row.lookupUri() == null ? null : Uri.parse(row.lookupUri()),
+            row.photoId(),
+            row.photoUri() == null ? null : Uri.parse(row.photoUri()),
+            row.name(),
+            LetterTileDrawable.TYPE_DEFAULT);
   }
 
   private void setPrimaryCallTypes(Row row) {

@@ -158,8 +158,12 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
             .useMostRecentLong(AnnotatedCallLog.NEW)
             .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
-            .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
+            .useMostRecentString(AnnotatedCallLog.NAME)
             .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
+            .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
+            .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
+            .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
+            .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
             .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
             .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
             .combine();
@@ -198,7 +202,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.NUMBER,
                   Calls.TYPE,
                   Calls.COUNTRY_ISO,
+                  Calls.CACHED_NAME,
                   Calls.CACHED_FORMATTED_NUMBER,
+                  Calls.CACHED_PHOTO_URI,
+                  Calls.CACHED_PHOTO_ID,
+                  Calls.CACHED_LOOKUP_URI,
                   Calls.CACHED_NUMBER_TYPE,
                   Calls.CACHED_NUMBER_LABEL,
                   Calls.IS_READ,
@@ -229,8 +237,12 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
         int typeColumn = cursor.getColumnIndexOrThrow(Calls.TYPE);
         int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
+        int cachedNameColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NAME);
         int cachedFormattedNumberColumn =
             cursor.getColumnIndexOrThrow(Calls.CACHED_FORMATTED_NUMBER);
+        int cachedPhotoUriColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_PHOTO_URI);
+        int cachedPhotoIdColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_PHOTO_ID);
+        int cachedLookupUriColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_LOOKUP_URI);
         int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
@@ -250,7 +262,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           String numberAsStr = cursor.getString(numberColumn);
           long type = cursor.getInt(typeColumn);
           String countryIso = cursor.getString(countryIsoColumn);
+          String cachedName = cursor.getString(cachedNameColumn);
           String formattedNumber = cursor.getString(cachedFormattedNumberColumn);
+          String cachedPhotoUri = cursor.getString(cachedPhotoUriColumn);
+          long cachedPhotoId = cursor.getLong(cachedPhotoIdColumn);
+          String cachedLookupUri = cursor.getString(cachedLookupUriColumn);
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
           int isRead = cursor.getInt(isReadColumn);
@@ -271,7 +287,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           }
 
           contentValues.put(AnnotatedCallLog.TYPE, type);
+          contentValues.put(AnnotatedCallLog.NAME, cachedName);
           contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
+          contentValues.put(AnnotatedCallLog.PHOTO_URI, cachedPhotoUri);
+          contentValues.put(AnnotatedCallLog.PHOTO_ID, cachedPhotoId);
+          contentValues.put(AnnotatedCallLog.LOOKUP_URI, cachedLookupUri);
 
           // Phone.getTypeLabel returns "Custom" if given (0, null) which is not of any use. Just
           // omit setting the label if there's no information for it.

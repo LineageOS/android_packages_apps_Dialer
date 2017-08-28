@@ -35,18 +35,20 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int TIMESTAMP = 1;
   private static final int NAME = 2;
   private static final int FORMATTED_NUMBER = 3;
-  private static final int CONTACT_PHOTO_URI = 4;
-  private static final int NUMBER_TYPE_LABEL = 5;
-  private static final int IS_READ = 6;
-  private static final int NEW = 7;
-  private static final int GEOCODED_LOCATION = 8;
-  private static final int PHONE_ACCOUNT_LABEL = 9;
-  private static final int PHONE_ACCOUNT_COLOR = 10;
-  private static final int FEATURES = 11;
-  private static final int IS_BUSINESS = 12;
-  private static final int IS_VOICEMAIL = 13;
-  private static final int NUMBER_CALLS = 14;
-  private static final int CALL_TYPES = 15;
+  private static final int PHOTO_URI = 4;
+  private static final int PHOTO_ID = 5;
+  private static final int LOOKUP_URI = 6;
+  private static final int NUMBER_TYPE_LABEL = 7;
+  private static final int IS_READ = 8;
+  private static final int NEW = 9;
+  private static final int GEOCODED_LOCATION = 10;
+  private static final int PHONE_ACCOUNT_LABEL = 11;
+  private static final int PHONE_ACCOUNT_COLOR = 12;
+  private static final int FEATURES = 13;
+  private static final int IS_BUSINESS = 14;
+  private static final int IS_VOICEMAIL = 15;
+  private static final int NUMBER_CALLS = 16;
+  private static final int CALL_TYPES = 17;
 
   /** Convenience class for accessing values using an abbreviated syntax. */
   static final class Row {
@@ -68,8 +70,20 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       return cursor.getString(NAME);
     }
 
-    String contactPhotoUri() {
-      return cursor.getString(CONTACT_PHOTO_URI);
+    String formattedNumber() {
+      return cursor.getString(FORMATTED_NUMBER);
+    }
+
+    String photoUri() {
+      return cursor.getString(PHOTO_URI);
+    }
+
+    long photoId() {
+      return cursor.getLong(PHOTO_ID);
+    }
+
+    String lookupUri() {
+      return cursor.getString(LOOKUP_URI);
     }
 
     String numberTypeLabel() {
@@ -111,10 +125,6 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
 
     int numberCalls() {
       return cursor.getInt(NUMBER_CALLS);
-    }
-
-    String formattedNumber() {
-      return cursor.getString(FORMATTED_NUMBER);
     }
 
     @NonNull

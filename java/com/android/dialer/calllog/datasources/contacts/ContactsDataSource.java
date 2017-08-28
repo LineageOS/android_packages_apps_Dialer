@@ -20,10 +20,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
-import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.Assert;
 import java.util.List;
 import javax.inject.Inject;
@@ -50,9 +48,6 @@ public final class ContactsDataSource implements CallLogDataSource {
       CallLogMutations mutations) {
     Assert.isWorkerThread();
     // TODO(zachh): Implementation.
-    for (ContentValues contentValues : mutations.getInserts().values()) {
-      contentValues.put(AnnotatedCallLog.NAME, "Placeholder name");
-    }
   }
 
   @Override
@@ -63,9 +58,7 @@ public final class ContactsDataSource implements CallLogDataSource {
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     // TODO(zachh): Implementation.
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useSingleValueString(AnnotatedCallLog.NAME)
-        .combine();
+    return new ContentValues();
   }
 
   @MainThread
