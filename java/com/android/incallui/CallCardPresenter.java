@@ -1006,6 +1006,11 @@ public class CallCardPresenter
       return;
     }
 
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SWAP_SECONDARY_BUTTON_PRESSED,
+            mPrimary.getUniqueCallId(),
+            mPrimary.getTimeAddedMs());
     LogUtil.i(
         "CallCardPresenter.onSecondaryInfoClicked", "swapping call to foreground: " + mSecondary);
     mSecondary.unhold();

@@ -252,11 +252,21 @@ public class CallButtonPresenter
 
   @Override
   public void mergeClicked() {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_MERGE_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     TelecomAdapter.getInstance().merge(mCall.getId());
   }
 
   @Override
   public void addCallClicked() {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_ADD_CALL_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     // Automatically mute the current call
     mAutomaticallyMuted = true;
     mPreviousMuteState = AudioModeProvider.getInstance().getAudioState().isMuted();
@@ -267,6 +277,11 @@ public class CallButtonPresenter
 
   @Override
   public void showDialpadClicked(boolean checked) {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SHOW_DIALPAD_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     LogUtil.v("CallButtonPresenter", "show dialpad " + String.valueOf(checked));
     getActivity().showDialpadFragment(checked /* show */, true /* animate */);
   }
