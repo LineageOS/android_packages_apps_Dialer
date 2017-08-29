@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.telecom.Call;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
@@ -54,11 +55,33 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context).getBoolean("enable_lightbringer_video_upgrade", true)
-        && callState == Call.STATE_ACTIVE
-        && lightbringer.supportsUpgrade(context, callingNumber)
-        && TelecomManagerCompat.supportsHandover();
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on O+");
+      return false;
+    }
+
+    if (!ConfigProviderBindings.get(context)
+        .getBoolean("enable_lightbringer_video_upgrade", true)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade disabled by flag");
+      return false;
+    }
+
+    if (callState != Call.STATE_ACTIVE) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
+      return false;
+    }
+
+    if (!TelecomManagerCompat.supportsHandover()) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, telephony support missing");
+      return false;
+    }
+
+    if (!lightbringer.supportsUpgrade(context, callingNumber)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, number does not support it");
+      return false;
+    }
+
+    return true;
   }
 
   @Override
