@@ -5,6 +5,10 @@
 # * b/62417801 modify translation string naming convention:
 #      $ find . -type d | grep 262 | rename 's/(values)\-([a-zA-Z\+\-]+)\-(mcc262-mnc01)/$1-$3-$2/'
 # * b/37077388 temporarily disable proguard with javac
+# * b/62875795 include manually generated GRPC service class:
+#      $ protoc --plugin=protoc-gen-grpc-java=prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
+#               --grpc-java_out=lite:"packages/apps/Dialer/java/com/android/voicemail/impl/" \
+#               --proto_path="packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/" "packages/apps/Dialer/java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto"
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -49,7 +53,12 @@ EXCLUDE_FILES += \
 	$(BASE_DIR)/dialer/buildtype/test/BuildTypeAccessorImpl.java \
 	$(BASE_DIR)/dialer/constants/googledialer/ConstantsImpl.java \
 	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerRootComponent.java \
-	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerApplication.java
+	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerApplication.java \
+
+# * b/62875795
+ifneq ($(wildcard packages/apps/Dialer/java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java),)
+$(error Please remove file packages/apps/Dialer/java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java )
+endif
 
 EXCLUDE_RESOURCE_DIRECTORIES := \
 	java/com/android/incallui/maps/impl/res \
@@ -72,31 +81,9 @@ DIALER_MANIFEST_FILES := $(filter-out $(EXCLUDE_MANIFESTS),$(DIALER_MANIFEST_FIL
 LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 
-# * b/62875795 include manually generated GRPC service class:
-ifeq ($(HOST_OS),linux)
-	define gen-dialer-grpc
-	$(shell cd $(LOCAL_PATH) ; \
-		../../../prebuilts/tools/linux-x86_64/protoc/bin/protoc --plugin=protoc-gen-grpc-java=../../../prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-linux-x86_64.exe \
-		--grpc-java_out=lite:"java/com/android/voicemail/impl/" \
-		--proto_path="java/com/android/voicemail/impl/transcribe/grpc/" "java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto")
-	endef
-endif
-ifeq ($(HOST_OS),darwin)
-	define gen-dialer-grpc
-	$(shell cd $(LOCAL_PATH) ; \
-		../../../prebuilts/tools/darwin-x86_64/protoc/bin/protoc --plugin=protoc-gen-grpc-java=../../../prebuilts/tools/common/m2/repository/io/grpc/protoc-gen-grpc-java/1.0.3/protoc-gen-grpc-java-1.0.3-osx-x86_64.exe \
-		--grpc-java_out=lite:"java/com/android/voicemail/impl/" \
-		--proto_path="java/com/android/voicemail/impl/transcribe/grpc/" "java/com/android/voicemail/impl/transcribe/grpc/voicemail_transcription.proto")
-	endef
-endif
-
-$(call gen-dialer-grpc)
-
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
-LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
-# * b/62875795 include manually generated GRPC service class:
-LOCAL_SRC_FILES += java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
+LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 
 LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
 
