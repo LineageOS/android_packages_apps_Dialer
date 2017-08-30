@@ -31,6 +31,8 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import java.util.concurrent.ExecutorService;
@@ -60,6 +62,8 @@ public class TranscriptionService extends JobService {
     Assert.isMainThread();
     if (BuildCompat.isAtLeastO()) {
       LogUtil.i("TranscriptionService.transcribeVoicemail", "scheduling transcription");
+      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED);
+
       ComponentName componentName = new ComponentName(context, TranscriptionService.class);
       JobInfo.Builder builder =
           new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName)
@@ -148,8 +152,13 @@ public class TranscriptionService extends JobService {
     Assert.isMainThread();
     JobWorkItem workItem = jobParameters.dequeueWork();
     if (workItem != null) {
-      getExecutorService()
-          .execute(new TranscriptionTask(this, new Callback(), workItem, getClientFactory()));
+      TranscriptionTask task =
+          configProvider.shouldUseSyncApi()
+              ? new TranscriptionTaskSync(
+                  this, new Callback(), workItem, getClientFactory(), configProvider)
+              : new TranscriptionTaskAsync(
+                  this, new Callback(), workItem, getClientFactory(), configProvider);
+      getExecutorService().execute(task);
       return true;
     } else {
       return false;

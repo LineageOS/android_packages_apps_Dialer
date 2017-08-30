@@ -55,6 +55,24 @@ public class VoicemailTranscriptionServiceGrpc {
               "google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionService", "TranscribeVoicemail"),
           io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest.getDefaultInstance()),
           io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest,
+      com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse> METHOD_TRANSCRIBE_VOICEMAIL_ASYNC =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionService", "TranscribeVoicemailAsync"),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest.getDefaultInstance()),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest,
+      com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse> METHOD_GET_TRANSCRIPT =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionService", "GetTranscript"),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest.getDefaultInstance()),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -96,6 +114,28 @@ public class VoicemailTranscriptionServiceGrpc {
       asyncUnimplementedUnaryCall(METHOD_TRANSCRIBE_VOICEMAIL, responseObserver);
     }
 
+    /**
+     * <pre>
+     * Schedules a transcription of the given voicemail. The transcript can be
+     * retrieved using the returned ID.
+     * </pre>
+     */
+    public void transcribeVoicemailAsync(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_TRANSCRIBE_VOICEMAIL_ASYNC, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Returns the transcript corresponding to the given ID, which was returned
+     * by TranscribeVoicemailAsync.
+     * </pre>
+     */
+    public void getTranscript(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_GET_TRANSCRIPT, responseObserver);
+    }
+
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -105,6 +145,20 @@ public class VoicemailTranscriptionServiceGrpc {
                 com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest,
                 com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse>(
                   this, METHODID_TRANSCRIBE_VOICEMAIL)))
+          .addMethod(
+            METHOD_TRANSCRIBE_VOICEMAIL_ASYNC,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest,
+                com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse>(
+                  this, METHODID_TRANSCRIBE_VOICEMAIL_ASYNC)))
+          .addMethod(
+            METHOD_GET_TRANSCRIPT,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest,
+                com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse>(
+                  this, METHODID_GET_TRANSCRIPT)))
           .build();
     }
   }
@@ -140,6 +194,30 @@ public class VoicemailTranscriptionServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_TRANSCRIBE_VOICEMAIL, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Schedules a transcription of the given voicemail. The transcript can be
+     * retrieved using the returned ID.
+     * </pre>
+     */
+    public void transcribeVoicemailAsync(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_TRANSCRIBE_VOICEMAIL_ASYNC, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Returns the transcript corresponding to the given ID, which was returned
+     * by TranscribeVoicemailAsync.
+     * </pre>
+     */
+    public void getTranscript(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_GET_TRANSCRIPT, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -171,6 +249,28 @@ public class VoicemailTranscriptionServiceGrpc {
     public com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse transcribeVoicemail(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_TRANSCRIBE_VOICEMAIL, getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Schedules a transcription of the given voicemail. The transcript can be
+     * retrieved using the returned ID.
+     * </pre>
+     */
+    public com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse transcribeVoicemailAsync(com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_TRANSCRIBE_VOICEMAIL_ASYNC, getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Returns the transcript corresponding to the given ID, which was returned
+     * by TranscribeVoicemailAsync.
+     * </pre>
+     */
+    public com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse getTranscript(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_GET_TRANSCRIPT, getCallOptions(), request);
     }
   }
 
@@ -205,9 +305,35 @@ public class VoicemailTranscriptionServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_TRANSCRIBE_VOICEMAIL, getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Schedules a transcription of the given voicemail. The transcript can be
+     * retrieved using the returned ID.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse> transcribeVoicemailAsync(
+        com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_TRANSCRIBE_VOICEMAIL_ASYNC, getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Returns the transcript corresponding to the given ID, which was returned
+     * by TranscribeVoicemailAsync.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse> getTranscript(
+        com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_GET_TRANSCRIPT, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_TRANSCRIBE_VOICEMAIL = 0;
+  private static final int METHODID_TRANSCRIBE_VOICEMAIL_ASYNC = 1;
+  private static final int METHODID_GET_TRANSCRIPT = 2;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -230,6 +356,14 @@ public class VoicemailTranscriptionServiceGrpc {
           serviceImpl.transcribeVoicemail((com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest) request,
               (io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse>) responseObserver);
           break;
+        case METHODID_TRANSCRIBE_VOICEMAIL_ASYNC:
+          serviceImpl.transcribeVoicemailAsync((com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncResponse>) responseObserver);
+          break;
+        case METHODID_GET_TRANSCRIPT:
+          serviceImpl.getTranscript((com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -248,7 +382,9 @@ public class VoicemailTranscriptionServiceGrpc {
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     return new io.grpc.ServiceDescriptor(SERVICE_NAME,
-        METHOD_TRANSCRIBE_VOICEMAIL);
+        METHOD_TRANSCRIBE_VOICEMAIL,
+        METHOD_TRANSCRIBE_VOICEMAIL_ASYNC,
+        METHOD_GET_TRANSCRIPT);
   }
 
 }
