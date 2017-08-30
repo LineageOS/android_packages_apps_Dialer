@@ -15,13 +15,11 @@
  */
 package com.android.voicemail.impl.transcribe.grpc;
 
-import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
-import com.android.dialer.common.Assert;
+import com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest;
+import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest;
-import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse;
 import com.google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionServiceGrpc;
-import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 
 /** Wrapper around Grpc transcription server stub */
@@ -29,33 +27,35 @@ public class TranscriptionClient {
 
   private final VoicemailTranscriptionServiceGrpc.VoicemailTranscriptionServiceBlockingStub stub;
 
-  /** Wraps the server response and status objects, either of which may be null. */
-  public static class TranscriptionResponseWrapper {
-    public final TranscribeVoicemailResponse response;
-    public final Status status;
-
-    public TranscriptionResponseWrapper(
-        @Nullable TranscribeVoicemailResponse response, @Nullable Status status) {
-      Assert.checkArgument(!(response == null && status == null));
-      this.response = response;
-      this.status = status;
-    }
-  }
-
   TranscriptionClient(
       VoicemailTranscriptionServiceGrpc.VoicemailTranscriptionServiceBlockingStub stub) {
     this.stub = stub;
   }
 
   @WorkerThread
-  public TranscriptionResponseWrapper transcribeVoicemail(TranscribeVoicemailRequest request) {
-    TranscribeVoicemailResponse response = null;
-    Status status = null;
+  public TranscriptionResponseSync sendSyncRequest(TranscribeVoicemailRequest request) {
     try {
-      response = stub.transcribeVoicemail(request);
+      return new TranscriptionResponseSync(stub.transcribeVoicemail(request));
     } catch (StatusRuntimeException e) {
-      status = e.getStatus();
+      return new TranscriptionResponseSync(e.getStatus());
     }
-    return new TranscriptionClient.TranscriptionResponseWrapper(response, status);
+  }
+
+  @WorkerThread
+  public TranscriptionResponseAsync sendUploadRequest(TranscribeVoicemailAsyncRequest request) {
+    try {
+      return new TranscriptionResponseAsync(stub.transcribeVoicemailAsync(request));
+    } catch (StatusRuntimeException e) {
+      return new TranscriptionResponseAsync(e.getStatus());
+    }
+  }
+
+  @WorkerThread
+  public GetTranscriptResponseAsync sendGetTranscriptRequest(GetTranscriptRequest request) {
+    try {
+      return new GetTranscriptResponseAsync(stub.getTranscript(request));
+    } catch (StatusRuntimeException e) {
+      return new GetTranscriptResponseAsync(e.getStatus());
+    }
   }
 }
