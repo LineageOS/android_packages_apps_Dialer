@@ -182,11 +182,10 @@ public class CallDetailsActivity extends AppCompatActivity
     Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
         getAllHistoricalData(contact.getNumber(), entries);
 
-    entries =
+    adapter.updateCallDetailsEntries(
         generateAndMapNewCallDetailsEntriesHistoryResults(
-            contact.getNumber(), entries, mappedResults);
-
-    adapter.updateCallDetailsEntries(entries.getEntriesList());
+                contact.getNumber(), entries, mappedResults)
+            .getEntriesList());
   }
 
   @NonNull
