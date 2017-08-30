@@ -315,7 +315,11 @@ public class CallComposerActivity extends AppCompatActivity
         break;
       case Session.STATE_START_FAILED:
       case Session.STATE_CLOSED:
-        setFailedResultAndFinish();
+        if (pendingCallStarted) {
+          placeTelecomCall();
+        } else {
+          setFailedResultAndFinish();
+        }
         break;
       case Session.STATE_MESSAGE_SENT:
         if (++messageSentCounter == 3) {

@@ -28,6 +28,7 @@ import android.telecom.CallAudioState;
 import android.telecom.TelecomManager;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.DialerCall.State;
@@ -152,11 +153,15 @@ public class CallPendingActivity extends FragmentActivity
   }
 
   private PrimaryInfo createPrimaryInfo() {
-    MultimediaData multimediaData =
-        EnrichedCallComponent.get(this)
-            .getEnrichedCallManager()
-            .getSession(getSessionId())
-            .getMultimediaData();
+    Session session =
+        EnrichedCallComponent.get(this).getEnrichedCallManager().getSession(getSessionId());
+    MultimediaData multimediaData;
+    if (session == null) {
+      LogUtil.i("CallPendingActivity.createPrimaryInfo", "Null session.");
+      multimediaData = null;
+    } else {
+      multimediaData = session.getMultimediaData();
+    }
 
     Drawable photo = null;
     try {
