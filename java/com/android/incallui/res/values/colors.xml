@@ -69,9 +69,6 @@
     <item>#841F10</item>
   </array>
 
-  <!-- Background color for spam. This color must match one of background_colors above. -->
-  <color name="incall_call_spam_background_color">@color/blocked_contact_background</color>
-
   <!-- Ripple color used over light backgrounds. -->
   <color name="ripple_light">#40000000</color>
 

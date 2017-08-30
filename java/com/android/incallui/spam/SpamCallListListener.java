@@ -50,7 +50,6 @@ import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
-import com.android.incallui.R;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CallHistoryStatus;
@@ -90,7 +89,7 @@ public class SpamCallListListener implements CallList.Listener {
 
   /** Checks if the number is in the call history. */
   @TargetApi(VERSION_CODES.M)
-  private final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
+  private static final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
 
     private final Context appContext;
     private final String number;
@@ -262,7 +261,7 @@ public class SpamCallListListener implements CallList.Listener {
             .setCategory(Notification.CATEGORY_STATUS)
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
-            .setSmallIcon(R.drawable.ic_call_end_white_24dp)
+            .setSmallIcon(R.drawable.quantum_ic_call_end_vd_theme_24)
             .setGroup(GROUP_KEY);
     if (BuildCompat.isAtLeastO()) {
       builder.setChannelId(NotificationChannelId.DEFAULT);
@@ -289,7 +288,7 @@ public class SpamCallListListener implements CallList.Listener {
             // Add contact
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_person_add_grey600_24dp,
+                        R.drawable.quantum_ic_person_add_vd_theme_24,
                         context.getString(R.string.spam_notification_add_contact_action_text),
                         createActivityPendingIntent(
                             call, SpamNotificationActivity.ACTION_ADD_TO_CONTACTS))
@@ -297,7 +296,7 @@ public class SpamCallListListener implements CallList.Listener {
             // Block/report spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_block_grey600_24dp,
+                        R.drawable.quantum_ic_block_vd_theme_24,
                         context.getString(R.string.spam_notification_report_spam_action_text),
                         createBlockReportSpamPendingIntent(call))
                     .build())
@@ -401,14 +400,14 @@ public class SpamCallListListener implements CallList.Listener {
             // Not spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_close_grey600_24dp,
+                        R.drawable.quantum_ic_close_vd_theme_24,
                         context.getString(R.string.spam_notification_not_spam_action_text),
                         createNotSpamPendingIntent(call))
                     .build())
             // Block/report spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_block_grey600_24dp,
+                        R.drawable.quantum_ic_block_vd_theme_24,
                         context.getString(R.string.spam_notification_block_spam_action_text),
                         createBlockReportSpamPendingIntent(call))
                     .build())

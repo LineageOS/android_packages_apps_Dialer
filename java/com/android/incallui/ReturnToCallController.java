@@ -241,7 +241,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
             .build());
     actions.add(
         Action.builder()
-            .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_end_white_24))
+            .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24))
             .setName(context.getText(R.string.incall_label_end_call))
             .setIntent(endCall)
             .build());

@@ -387,7 +387,8 @@ public class StatusBarNotifier
           builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         }
         break;
-      default: // fall out
+      default:
+        break;
     }
 
     // Set the content
@@ -663,7 +664,7 @@ public class StatusBarNotifier
     }
     // If ReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
     if (ReturnToCallController.isEnabled(mContext)) {
-      return R.drawable.quantum_ic_call_white_24;
+      return R.drawable.quantum_ic_call_vd_theme_24;
     } else {
       return R.drawable.on_going_call;
     }
@@ -864,7 +865,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(mContext, ACTION_HANG_UP_ONGOING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_call_end_white_24dp),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_call_end_white_24),
                 mContext.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());
@@ -1023,3 +1024,4 @@ public class StatusBarNotifier
     }
   }
 }
+

@@ -39,7 +39,6 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.spam.Spam;
-import com.android.incallui.R;
 import com.android.incallui.call.DialerCall;
 
 /** Creates the after call notification dialogs. */
@@ -374,7 +373,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setTitle(getString(R.string.spam_notification_title, getFormattedNumber(number)))
           .setMessage(getString(R.string.spam_notification_spam_call_expanded_text))
           .setNeutralButton(
-              getString(R.string.notification_action_dismiss),
+              getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -460,7 +459,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setCancelable(false)
           .setMessage(getString(R.string.spam_notification_non_spam_call_expanded_text))
           .setNeutralButton(
-              getString(R.string.notification_action_dismiss),
+              getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
