@@ -36,13 +36,13 @@
       android:layout_height="wrap_content"
       android:layout_toEndOf="@+id/photo"
       android:layout_toStartOf="@+id/call_to_action"
-      android:layout_centerVertical="true">
+      android:layout_centerVertical="true"
+      android:layout_marginStart="8dp">
 
     <TextView
         android:id="@+id/primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/search_text_padding_start"
         android:gravity="center_vertical|start"
         android:fontFamily="sans-serif"
         style="@style/PrimaryText"/>
@@ -51,7 +51,6 @@
         android:id="@+id/secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/search_text_padding_start"
         android:gravity="center_vertical|start"
         android:fontFamily="sans-serif"
         style="@style/SecondaryText"/>
