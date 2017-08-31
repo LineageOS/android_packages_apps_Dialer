@@ -21,11 +21,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.v4.content.pm.ShortcutInfoCompat;
 import android.support.v4.content.pm.ShortcutManagerCompat;
 import android.support.v4.graphics.drawable.IconCompat;
-import android.support.v4.os.BuildCompat;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.main.Main;
@@ -36,7 +36,7 @@ final class MainImpl implements Main {
   private static final String SHORTCUT_KEY = "nui_launcher_shortcut";
 
   @Inject
-  public MainImpl() {}
+  MainImpl() {}
 
   @Override
   public boolean isNewUiEnabled(Context context) {
@@ -46,7 +46,7 @@ final class MainImpl implements Main {
   @Override
   public void createNewUiLauncherShortcut(Context context) {
     enableComponent(context);
-    if (BuildCompat.isAtLeastO()) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       createLauncherShortcutO(context);
     } else {
       createLauncherShortcutPreO(context);

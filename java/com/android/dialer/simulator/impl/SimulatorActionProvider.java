@@ -99,7 +99,7 @@ final class SimulatorActionProvider extends ActionProvider {
     subMenu
         .add("Clean database")
         .setOnMenuItemClickListener(
-            (itme) -> {
+            (item) -> {
               cleanDatabase();
               return true;
             });
