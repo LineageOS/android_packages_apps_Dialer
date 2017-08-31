@@ -16,14 +16,13 @@
 
 package com.android.incallui.calllocation.impl;
 
-import static com.android.dialer.util.DialerUtils.closeQuietly;
-
 import android.content.Context;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.SystemClock;
 import android.util.Pair;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.MoreStrings;
 import com.google.android.common.http.UrlRules;
 import java.io.ByteArrayOutputStream;
@@ -103,7 +102,7 @@ public class HttpFetcher {
       LogUtil.i("HttpFetcher.sendRequestAsByteArray", "fetch took " + (end - start) + " ms");
       return response;
     } finally {
-      closeQuietly(is);
+      DialerUtils.closeQuietly(is);
       if (conn != null) {
         conn.disconnect();
       }
