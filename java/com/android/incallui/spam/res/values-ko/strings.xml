@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"<xliff:g id="NUMBER">%1$s</xliff:g>번은 알고 있는 전화번호인가요?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"<xliff:g id="NUMBER">%1$s</xliff:g>번이 스팸인가요?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단하고 스팸으로 신고했습니다."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"<xliff:g id="NUMBER">%1$s</xliff:g>번으로 걸려온 전화는 스팸이 아닌 것으로 신고했습니다."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"탭하여 연락처에 추가하거나 스팸 전화번호를 차단합니다."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"이 번호에서 처음으로 걸려온 전화입니다. 이 전화가 스팸이라면 이 전화번호를 차단하고 신고할 수 있습니다."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"탭하여 스팸이 아닌 것으로 신고하거나 차단합니다."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"스팸 발송자로 의심됩니다. 이 전화가 스팸이 아니었다면 \'스팸 아님\'을 탭하여 실수였음을 신고합니다."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"차단 및 신고"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"연락처 추가"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"스팸 아님"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"번호 차단"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"연락처에 추가"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"스팸 차단 및 신고"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"스팸 아님"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"거부"</string>
+</resources>

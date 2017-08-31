@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Izslēgt lidojuma režīmu"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Vizuālā balss pasta aktivizēšana"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kamēr vizuālais balss pasts nebūs pilnībā aktivizēts, iespējams, nesaņemsiet balss pasta paziņojumus. Lai izgūtu jaunus ziņojumus, kamēr balss pasts nav pilnībā aktivizēts, zvaniet balss pastam."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Nevar aktivizēt vizuālo balss pastu."</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Jūsu pastkaste ir gandrīz pilna. Lai atbrīvotu vietu un Google varētu pārvaldīt un dublēt jūsu balss pasta ziņojumus, aktivizējiet papildu krātuvi."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Balss pasta PIN iestatīšana"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Lai piekļūtu balss pastam zvanot, būs vajadzīgs balss pasta PIN."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Nezināma kļūda"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Lidojuma režīma iestatījumi"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN iestatīšana"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Mēģināt vēlreiz"</string>

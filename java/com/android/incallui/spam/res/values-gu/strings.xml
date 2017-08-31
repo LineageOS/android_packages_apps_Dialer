@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"<xliff:g id="NUMBER">%1$s</xliff:g> ને જાણો છો?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"શું <xliff:g id="NUMBER">%1$s</xliff:g> સ્પામ છે?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધિત કર્યો અને કૉલની સ્પામ તરીકે જાણ કરવામાં આવી."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"<xliff:g id="NUMBER">%1$s</xliff:g> ના કૉલની સ્પામ નથી તરીકે જાણ કરવામાં આવી."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"સંપર્કોમાં ઉમેરવા માટે ટૅપ કરો અથવા સ્પામ નંબરને અવરોધિત કરો."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"આ નંબરથી તમને પહેલી વાર કૉલ કરવામાં આવ્યો છે. જો આ કૉલ સ્પામ હોય, તો તમે આ નંબરને અવરોધિત કરી અને તેની જાણ કરી શકો છો."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"સ્પામ નથી તરીકે જાણ કરવા માટે ટૅપ કરો અથવા તેને અવરોધિત કરો."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"અમને આ સ્પામર હોવાની શંકા છે. જો આ કૉલ સ્પામ ન હોય, તો અમારી ભૂલની જાણ કરવા માટે સ્પામ નથી ટૅપ કરો."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"અવરોધિત અને જાણ કરો"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"સંપર્ક ઉમેરો"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"સ્પામ નથી"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"નંબર અવરોધિત કરો"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"સંપર્કોમાં ઉમેરો"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"અવરોધિત કરો અને સ્પામ તરીકે જાણ કરો"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"સ્પામ નથી"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"નકારો"</string>
+</resources>

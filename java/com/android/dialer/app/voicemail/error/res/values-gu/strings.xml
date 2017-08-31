@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"એરપ્લેન મોડ બંધ કરો"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"વિઝ્યુઅલ વૉઇસમેઇલ સક્રિય કરી રહ્યાં છે"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"જ્યાં સુધી વિઝ્યુઅલ વૉઇસમેઇલ સંપૂર્ણપણે સક્રિય ન થાય ત્યાં સુધી તમે વૉઇસમેઇલની સૂચનાઓ પ્રાપ્ત કરી શકશો નહીં. વૉઇસમેઇલ સંપૂર્ણપણે સક્રિય ન થાય ત્યાં સુધી નવા સંદેશા પુનઃપ્રાપ્ત કરવા માટે વૉઇસમેઇલને કૉલ કરો."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"વિઝ્યુઅલ વૉઇસમેઇલ સક્રિય કરી શકતાં નથી"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"તમારું મેઇલબોક્સ મોટાંભાગે ભરાઇ ગયું છે. સ્થાન ખાલી કરવા માટે, અતિરિક્ત સ્ટોરેજ ખાલી કરો જેથી Google તમારા વૉઇસમેઇલ સંદેશા સંચાલિત કરી અને તેનું બેકઅપ લઈ શકે."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"તમારો વૉઇસમેઇલ PIN સેટ કરો"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"તમારી વૉઇસમેઇલને ઍક્સેસ કરવા માટે તમે કોઈપણ સમયે કૉલ કરો છો, ત્યારે તમને વૉઇસમેઇલ PIN ની જરૂર પડશે."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"અજાણી ભૂલ"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"એરપ્લેન મોડ સેટિંગ્સ"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN સેટ કરો"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"ફરી પ્રયાસ કરો"</string>
