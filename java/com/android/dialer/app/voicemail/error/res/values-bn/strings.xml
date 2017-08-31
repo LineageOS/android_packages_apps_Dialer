@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"বিমান মোড বন্ধ করুন"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ভিজ্যুয়াল ভয়েসমেল সক্রিয়করণ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"ভিজ্যুয়াল ভয়েসমেল সম্পূর্ণরূপে সক্রিয় না করা পর্যন্ত আপনি ভয়েসমেল সংক্রান্ত কোনো বিজ্ঞপ্তি নাও পেতে পারেন৷ ভয়েসমেল সম্পূর্ণরূপে সক্রিয় না হওয়া পর্যন্ত নতুন বার্তাগুলিকে পুনরুদ্ধার করতে ভয়েসমেলে কল করুন৷"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ভিজ্যুয়াল ভয়েসমেল সক্রিয় করবেন না"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"আপনার মেলবক্স প্রায় পূর্ণ। স্থান খালি করতে, অতিরিক্ত সঞ্চয়স্থান চালু করুন যাতে Google আপনার ভয়েসমেল বার্তাগুলি পরিচালনা করতে এবং ব্যাক আপ নিতে পারে।"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"আপনার ভয়েসমেল পিন সেট করুন"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"যে কোনো সময়ে আপনার ভয়েসমেল অ্যাক্সেস করার জন্য আপনার একটি ভয়েসমেল পিন প্রয়োজন৷"</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"অজানা ত্রুটি"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"বিমান মোড সেটিংস"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"পিন সেট করুন"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"আবার চেষ্টা করুন"</string>

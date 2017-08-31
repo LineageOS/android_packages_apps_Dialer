@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN の変更"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN を変更するには、ビジュアル ボイスメールを有効にする必要があります"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"ビジュアル ボイスメールがまだ有効になっていません。しばらくしてからもう一度お試しください"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"古い PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"新しい PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"お待ちください。"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"新しい PIN が短すぎます。"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"新しい PIN が長すぎます。"</string>

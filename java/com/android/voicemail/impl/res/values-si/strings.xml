@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN අංකය වෙනස් කරන්න"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"PIN අංකය වෙනස් කිරීමට දෘශ්‍ය හඬ තැපෑල සබල කළ යුතුය"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"දෘශ්‍ය හඬ තැපෑල තවම සක්‍රිය කර නැත, කරුණාකර පසුව නැවත උත්සාහ කරන්න"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"පැරණි PIN අංකය"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"නව PIN අංකය"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"කරුණාකර රැඳී සිටින්න."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"නව PIN අංකය කෙටි වැඩිය."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"නව PIN අංකය දිග වැඩිය."</string>

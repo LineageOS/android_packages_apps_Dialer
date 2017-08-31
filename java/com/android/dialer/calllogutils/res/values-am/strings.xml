@@ -49,4 +49,5 @@
     <string name="description_via_number" msgid="7682575124846343076">"በ <xliff:g id="NUMBER">%1$s</xliff:g> በኩል"</string>
     <string name="description_via_number_phone_account" msgid="4345445677508018830">"በ <xliff:g id="PHONEACCOUNT">%1$s</xliff:g> ላይ፣ በ <xliff:g id="NUMBER">%2$s</xliff:g> በኩል"</string>
     <string name="voicemail_string" msgid="6029775151483803006">"የድምፅ መልዕክት"</string>
+    <string name="now" msgid="2599778506439006806">"አሁን"</string>
 </resources>

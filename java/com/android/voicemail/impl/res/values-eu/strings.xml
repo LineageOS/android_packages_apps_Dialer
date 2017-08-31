@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Aldatu PIN kodea"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Ikusizko erantzungailuak gaituta egon behar du PIN kodea aldatu ahal izateko"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Oraindik ez dago aktibatuta ikusizko erantzungailua. Saiatu berriro geroago."</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"PIN zaharra"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"PIN berria"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Itxaron, mesedez."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Laburregia da PIN kode berria."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Luzeegia da PIN kode berria."</string>

@@ -23,4 +23,5 @@
     <string name="activity_not_available" msgid="8360067109103762211">"Nuk ka aplikacion për atë në këtë pajisje"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"Kryerja e një telefonate WPS do të shkëputë telefonatën tënde ekzistuese."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"Vazhdo"</string>
+    <string name="camera_privacy_text" msgid="4268584469444688293">"Leja e kamerës është aktivizuar"</string>
 </resources>

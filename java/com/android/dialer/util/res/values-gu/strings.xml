@@ -23,4 +23,5 @@
     <string name="activity_not_available" msgid="8360067109103762211">"આ ઉપકરણ પર તે માટે કોઈ ઍપ્લિકેશન નથી"</string>
     <string name="outgoing_wps_warning" msgid="7505673114152005234">"WPS કૉલ કરવાનું તમારા અસ્તિત્વમાંના કૉલને ડિસ્કનેક્ટ કરશે."</string>
     <string name="dialog_continue" msgid="4070630558441163574">"ચાલુ રાખો"</string>
+    <string name="camera_privacy_text" msgid="4268584469444688293">"કૅમેરાની પરવાનગી સક્ષમ કરી"</string>
 </resources>

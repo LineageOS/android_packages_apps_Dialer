@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"¿Conoces el número <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"¿El número <xliff:g id="NUMBER">%1$s</xliff:g> es spam?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"Se ha bloqueado el número <xliff:g id="NUMBER">%1$s</xliff:g> y se ha marcado la llamada como Spam."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"Se ha marcado la llamada del <xliff:g id="NUMBER">%1$s</xliff:g> como No es spam."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"Toca el número para añadirlo a los contactos o bloquearlo como spam."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"Es la primera vez que recibes una llamada de este número. Si se trata de spam, puedes bloquear el número y denunciarlo."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"Toca el número para marcarlo como NO ES SPAM o bloquearlo."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"Sospechamos que es un spammer. Si la llamada no es spam, toca NO ES SPAM para informarnos de nuestro error."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"Bloquear y denunciar"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"Añadir contacto"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"No es spam"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"Bloquear número"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"Añadir a contactos"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"Bloquear y marcar como spam"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"No es spam"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"Rechazar"</string>
+</resources>
