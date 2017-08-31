@@ -29,7 +29,6 @@
   <ImageView
       android:id="@+id/contactgrid_hdIcon"
       style="@style/BottomRowIcon"
-      android:src="@drawable/asd_hd_icon"
       android:visibility="gone"/>
   <ImageView
       android:id="@+id/contactgrid_assistedDialingIcon"
