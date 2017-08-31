@@ -18,7 +18,8 @@
   android:id="@+id/one"
   style="@style/DialpadKeyButtonStyle">
   <LinearLayout
-    style="@style/DialpadKeyInternalLayoutStyle">
+      android:layout_marginTop="1dp"
+      style="@style/DialpadKeyInternalLayoutStyle">
     <com.android.dialer.dialpadview.DialpadTextView
       android:id="@+id/dialpad_key_number"
       style="@style/DialpadKeyNumberStyle"/>
@@ -28,9 +29,8 @@
       <ImageView
         android:id="@+id/dialpad_key_voicemail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dialpad_voicemail_icon_size"
         android:layout_centerInParent="true"
-        android:paddingTop="@dimen/dialpad_voicemail_icon_padding_top"
         android:scaleType="fitCenter"
         android:src="@drawable/quantum_ic_voicemail_white_24"
         android:tint="?attr/dialpad_voicemail_tint"/>

@@ -22,4 +22,18 @@
     <string name="description_delete_button" msgid="8431313818404527096">"删除"</string>
     <string name="description_image_button_plus" msgid="8936338119824589388">"加号"</string>
     <string name="description_voicemail_button" msgid="4187006295368768215">"语音邮件"</string>
+    <string name="description_dial_button" msgid="6826108965053146374">"拨号"</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="1728176091017802282">"要呼叫语音信箱，请先关闭飞行模式。"</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4287602816589585704">"要设置语音信箱，请转到“菜单”&gt;“设置”。"</string>
+    <string name="add_2sec_pause" msgid="395591627218789322">"加入 2 秒暂停时间"</string>
+    <string name="add_wait" msgid="2278146476349811062">"加入等待时间"</string>
+    <string name="dialer_useDtmfDialpad" msgid="6919241568926709507">"使用按键式键盘"</string>
+    <string name="dialer_returnToInCallScreen" msgid="4111111633248125741">"返回正在进行的通话"</string>
+    <string name="dialer_addAnotherCall" msgid="6842534741272651900">"添加通话"</string>
+    <string name="imei" msgid="7961343816043247280">"IMEI"</string>
+    <string name="meid" msgid="5274167198744847659">"MEID"</string>
+    <string name="simContacts_emptyLoading" msgid="4158651660353159679">"正从 SIM 卡中加载…"</string>
+    <string name="simContacts_title" msgid="8972942600800349990">"SIM 卡联系人"</string>
+    <string name="menu_callNumber" msgid="1898333075466418368">"拨打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="4806479823793649894">"无法拨打此号码"</string>
 </resources>

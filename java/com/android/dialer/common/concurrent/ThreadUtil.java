@@ -28,6 +28,11 @@ public class ThreadUtil {
     getUiThreadHandler().post(runnable);
   }
 
+  /** Posts a runnable to the UI thread, to be run after the specified amount of time elapses. */
+  public static void postDelayedOnUiThread(Runnable runnable, long delayMillis) {
+    getUiThreadHandler().postDelayed(runnable, delayMillis);
+  }
+
   /** Gets a handler which uses the main looper. */
   public static Handler getUiThreadHandler() {
     if (mainThreadHandler == null) {

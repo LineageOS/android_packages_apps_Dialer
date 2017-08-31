@@ -17,21 +17,20 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"ఎయిర్‌ప్లైన్ మోడ్‌ను ఆఫ్ చేయండి"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"దృశ్య వాయిస్ మెయిల్‌ను సక్రియం చేస్తోంది"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"దృశ్య వాయిస్ మెయిల్ పూర్తిగా సక్రియం అయ్యే వరకు మీరు వాయిస్ మెయిల్ నోటిఫికేషన్‌లను స్వీకరించలేకపోవచ్చు. వాయిస్ మెయిల్ పూర్తిగా సక్రియం అయ్యే వరకు కొత్త సందేశాలను తిరిగి పొందడానికి వాయిస్ మెయిల్‌కి కాల్ చేయండి."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"దృశ్య వాయిస్ మెయిల్‌ను సక్రియం చేయడం సాధ్యపడదు"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"మీ ఫోన్‌కు సెల్యులార్ కనెక్షన్ ఉన్నట్లు నిర్ధారించుకొని, ఆపై మళ్లీ ప్రయత్నించండి."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"మీ ఫోన్‌కు మొబైల్ నెట్‌వర్క్ కనెక్షన్ ఉన్నట్లు నిర్ధారించుకొని, ఆపై మళ్లీ ప్రయత్నించండి."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"ఎయిర్‌ప్లైన్ మోడ్‌ను ఆఫ్ చేసి, ఆపై మళ్లీ ప్రయత్నించండి."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"కనెక్షన్ లేదు"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"మీకు కొత్త వాయిస్ మెయిల్‌ల గురించి తెలియజేయబడదు. మీరు Wi-Fiలో ఉంటే, ఇప్పుడే సమకాలీకరించడం ద్వారా వాయిస్ మెయిల్‌‍ను తనిఖీ చేయవచ్చు."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"మీకు కొత్త వాయిస్ మెయిల్‌ల గురించి తెలియజేయబడదు. మీరు Wi-Fiలో ఉంటే, ఇప్పుడే సమకాలీకరించడం ద్వారా వాయిస్ మెయిల్‌‍ను తనిఖీ చేయవచ్చు."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"మీకు కొత్త వాయిస్ మెయిల్‌ల గురించి తెలియజేయబడదు. మీ వాయిస్ మెయిల్‌‍ను సమకాలీకరించడానికి ఎయిర్‌ప్లైన్ మోడ్‌ను ఆఫ్ చేయండి."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి మీ ఫోన్‌కు సెల్యులార్ డేటా కనెక్షన్ అవసరం."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి మీ ఫోన్‌కు మొబైల్ డేటా కనెక్షన్ అవసరం."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"దృశ్య వాయిస్ మెయిల్‌ను సక్రియం చేయడం సాధ్యపడదు"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"దృశ్య వాయిస్ మెయిల్‌ను నవీకరించడం సాధ్యపడదు"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"మీ Wi-Fi లేదా సెల్యులార్ కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి ఇప్పటికీ కాల్ చేయవచ్చు."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"మీ సెల్యులార్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"మీ Wi-Fi లేదా మొబైల్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"మీ మొబైల్ డేటా కనెక్షన్ మెరుగైనప్పుడు మళ్లీ ప్రయత్నించండి. మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"దృశ్య వాయిస్ మెయిల్‌ను నవీకరించడం సాధ్యపడదు"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"మీరు ఇప్పటికీ వాయిస్ మెయిల్‌ను తనిఖీ చేయడానికి కాల్ చేయవచ్చు."</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"దృశ్య వాయిస్ మెయిల్‌ను నవీకరించడం సాధ్యపడదు"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"మీ మెయిల్‌బాక్స్ దాదాపు నిండిపోయింది. స్థలాన్ని ఖాళీ చేసేందుకు అదనపు నిల్వను ఆన్ చేయండి, దీని వలన Google మీ వాయిస్ మెయిల్ సందేశాలను నిర్వహించగలదు మరియు బ్యాకప్ చేయగలదు."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"మీ వాయిస్ మెయిల్ PIN సెట్ చేయండి"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"మీరు మీ వాయిస్ మెయిల్‌ను ప్రాప్యత చేయడానికి కాల్ చేసే ప్రతిసారి మీకు వాయిస్ మెయిల్ PIN అవసరమవుతుంది."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"తెలియని లోపం"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ఎయిర్‌ప్లైన్ మోడ్ సెట్టింగ్‌లు"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN సెట్ చేయి"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"మళ్లీ ప్రయత్నించండి"</string>
@@ -102,9 +100,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ఏదో తప్పు జరిగింది"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"దయచేసి <xliff:g id="NUMBER">%1$s</xliff:g> నంబర్‌లో వినియోగదారు సేవా కేంద్రానికి కాల్ చేసి, వారికి లోపం కోడ్ 9999గా తెలపండి."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"దృశ్య వాయిస్ మెయిల్ నిబంధనలు మరియు షరతులు"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"మీరు దృశ్య వాయిస్ మెయిల్‌ను ఉపయోగించడానికి తప్పనిసరిగా Verizon వైర్‌లెస్ నిబంధనలు మరియు షరతులను ఆమోదించాలి:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nమీరు దృశ్య వాయిస్ మెయిల్‌ను ఉపయోగించాలంటే Verizon Wireless నిబంధనలు మరియు షరతులను తప్పనిసరిగా ఆమోదించాలి:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"దృశ్య వాయిస్ మెయిల్‌ను ఆన్ చేయండి"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"నిబంధనలు మరియు షరతులను తిరస్కరిస్తే దృశ్య వాయిస్ మెయిల్ నిలిపివేయబడుతుంది."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"దృశ్య వాయిస్ మెయిల్‌ను నిలిపివేయండి"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"నిబంధనలు మరియు షరతులను నిరాకరిస్తే వాయిస్ మెయిల్ లిప్యంతరీకరణ నిలిపివేయబడుతుంది."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"వాయిస్ మెయిల్ లిప్యంతరీకరణను నిలిపివేయండి"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"వాయిస్ మెయిల్‌ను కేవలం *86కి కాల్ చేయడం ద్వారా మాత్రమే ప్రాప్యత చేయగలరు. కొనసాగించడానికి కొత్త వాయిస్ మెయిల్ PINని సెట్ చేయండి."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"PINని సెట్ చేయండి"</string>
 </resources>

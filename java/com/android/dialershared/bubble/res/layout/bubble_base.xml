@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    tools:theme="@style/Theme.AppCompat">
+  <View
+      android:id="@+id/bubble_drawer_shadow_provider"
+      android:layout_width="@dimen/bubble_size"
+      android:layout_height="@dimen/bubble_size"
+      android:layout_marginTop="@dimen/bubble_shadow_padding_size"
+      android:layout_marginBottom="@dimen/bubble_shadow_padding_size"
+      android:layout_marginStart="@dimen/bubble_shadow_padding_size"
+      android:background="@drawable/bubble_ripple_circle"
+      android:backgroundTint="@android:color/transparent"
+      android:elevation="10dp"
+      android:visibility="invisible"
+      />
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="48dp"
+      android:elevation="10dp"
+      android:paddingTop="@dimen/bubble_shadow_padding_size"
+      android:paddingBottom="@dimen/bubble_shadow_padding_size"
+      android:paddingEnd="@dimen/bubble_shadow_padding_size">
+
+    <LinearLayout
+        android:id="@+id/bubble_expanded_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="32dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/bubble_background_pill_ltr"
+        android:layoutDirection="inherit"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:backgroundTint="#FF0000FF"
+        tools:visibility="visible">
+      <com.android.dialershared.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_first"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginStart="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_lock_idle_lock"/>
+      <com.android.dialershared.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_second"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginStart="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_input_add"/>
+      <com.android.dialershared.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_third"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginStart="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_menu_call"/>
+    </LinearLayout>
+  </FrameLayout>
+  <FrameLayout
+      android:id="@+id/bubble_primary_container"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:animateLayoutChanges="true"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:elevation="12dp">
+    <ViewAnimator
+        android:id="@+id/bubble_button_primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bubble_shadow_padding_size"
+        android:background="@drawable/bubble_ripple_circle"
+        android:measureAllChildren="false"
+        tools:backgroundTint="#FF0000AA">
+      <ImageView
+          android:id="@+id/bubble_icon_primary"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@android:color/white"
+          android:tintMode="src_in"
+          tools:src="@android:drawable/ic_btn_speak_now"/>
+      <TextView
+          android:id="@+id/bubble_text"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/bubble_size"
+          android:paddingStart="@dimen/bubble_icon_padding"
+          android:paddingEnd="@dimen/bubble_icon_padding"
+          android:gravity="center"
+          android:minWidth="@dimen/bubble_size"
+          android:textAppearance="@style/TextAppearance.AppCompat"
+          tools:text="Call ended"/>
+    </ViewAnimator>
+  </FrameLayout>
+
+</FrameLayout>

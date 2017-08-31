@@ -39,17 +39,14 @@ public class SyncOneTask extends BaseTask {
   private static final int RETRY_INTERVAL_MILLIS = 5_000;
 
   private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
-  private static final String EXTRA_SYNC_TYPE = "extra_sync_type";
   private static final String EXTRA_VOICEMAIL = "extra_voicemail";
 
   private PhoneAccountHandle mPhone;
-  private String mSyncType;
   private Voicemail mVoicemail;
 
   public static void start(Context context, PhoneAccountHandle phone, Voicemail voicemail) {
     Intent intent = BaseTask.createIntent(context, SyncOneTask.class, phone);
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
-    intent.putExtra(EXTRA_SYNC_TYPE, OmtpVvmSyncService.SYNC_DOWNLOAD_ONE_TRANSCRIPTION);
     intent.putExtra(EXTRA_VOICEMAIL, voicemail);
     context.sendBroadcast(intent);
   }
@@ -63,14 +60,13 @@ public class SyncOneTask extends BaseTask {
   public void onCreate(Context context, Bundle extras) {
     super.onCreate(context, extras);
     mPhone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mSyncType = extras.getString(EXTRA_SYNC_TYPE);
     mVoicemail = extras.getParcelable(EXTRA_VOICEMAIL);
   }
 
   @Override
   public void onExecuteInBackgroundThread() {
     OmtpVvmSyncService service = new OmtpVvmSyncService(getContext());
-    service.sync(this, mSyncType, mPhone, mVoicemail, VoicemailStatus.edit(getContext(), mPhone));
+    service.sync(this, mPhone, mVoicemail, VoicemailStatus.edit(getContext(), mPhone));
   }
 
   @Override
@@ -78,7 +74,6 @@ public class SyncOneTask extends BaseTask {
     LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
-    intent.putExtra(EXTRA_SYNC_TYPE, mSyncType);
     intent.putExtra(EXTRA_VOICEMAIL, mVoicemail);
     return intent;
   }

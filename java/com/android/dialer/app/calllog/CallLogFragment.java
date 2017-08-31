@@ -20,7 +20,6 @@ import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -35,53 +34,68 @@ import android.provider.ContactsContract;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
+import android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.android.dialer.app.Bindings;
 import com.android.dialer.app.R;
+import com.android.dialer.app.calllog.CallLogAdapter.CallFetcher;
+import com.android.dialer.app.calllog.CallLogAdapter.MultiSelectRemoveView;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.app.contactinfo.ExpirableCacheHeadlessFragment;
 import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
-import com.android.dialer.app.widget.EmptyContentView;
-import com.android.dialer.app.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.oem.CequintCallerIdManager;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import java.util.Arrays;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call (all, missed or
  * voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends Fragment
-    implements CallLogQueryHandler.Listener,
-        CallLogAdapter.CallFetcher,
+    implements Listener,
+        CallFetcher,
+        MultiSelectRemoveView,
         OnEmptyViewActionButtonClickedListener,
-        FragmentCompat.OnRequestPermissionsResultCallback,
-        CallLogModalAlertManager.Listener {
+        OnRequestPermissionsResultCallback,
+        CallLogModalAlertManager.Listener,
+        OnClickListener {
   private static final String KEY_FILTER_TYPE = "filter_type";
   private static final String KEY_LOG_LIMIT = "log_limit";
   private static final String KEY_DATE_LIMIT = "date_limit";
   private static final String KEY_IS_CALL_LOG_ACTIVITY = "is_call_log_activity";
   private static final String KEY_HAS_READ_CALL_LOG_PERMISSION = "has_read_call_log_permission";
   private static final String KEY_REFRESH_DATA_REQUIRED = "refresh_data_required";
+  private static final String KEY_SELECT_ALL_MODE = "select_all_mode_checked";
 
   // No limit specified for the number of logs to show; use the CallLogQueryHandler's default.
   private static final int NO_LOG_LIMIT = -1;
   // No date-based filtering.
   private static final int NO_DATE_LIMIT = 0;
 
-  private static final int READ_CALL_LOG_PERMISSION_REQUEST_CODE = 1;
+  private static final int PHONE_PERMISSIONS_REQUEST_CODE = 1;
 
   private static final int EVENT_UPDATE_DISPLAY = 1;
 
@@ -90,13 +104,15 @@ public class CallLogFragment extends Fragment
   // See issue 6363009
   private final ContentObserver mCallLogObserver = new CustomContentObserver();
   private final ContentObserver mContactsObserver = new CustomContentObserver();
+  private View mMultiSelectUnSelectAllViewContent;
+  private TextView mSelectUnselectAllViewText;
+  private ImageView mSelectUnselectAllIcon;
   private RecyclerView mRecyclerView;
   private LinearLayoutManager mLayoutManager;
   private CallLogAdapter mAdapter;
   private CallLogQueryHandler mCallLogQueryHandler;
   private boolean mScrollToTop;
   private EmptyContentView mEmptyListView;
-  private KeyguardManager mKeyguardManager;
   private ContactInfoCache mContactInfoCache;
   private final OnContactInfoChangedListener mOnContactInfoChangedListener =
       new OnContactInfoChangedListener() {
@@ -123,6 +139,7 @@ public class CallLogFragment extends Fragment
    * True if this instance of the CallLogFragment shown in the CallLogActivity.
    */
   private boolean mIsCallLogActivity = false;
+  private boolean selectAllMode;
   private final Handler mDisplayUpdateHandler =
       new Handler() {
         @Override
@@ -194,12 +211,12 @@ public class CallLogFragment extends Fragment
       mIsCallLogActivity = state.getBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
       mHasReadCallLogPermission = state.getBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, false);
       mRefreshDataRequired = state.getBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
+      selectAllMode = state.getBoolean(KEY_SELECT_ALL_MODE, false);
     }
 
     final Activity activity = getActivity();
     final ContentResolver resolver = activity.getContentResolver();
     mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
-    mKeyguardManager = (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
 
     if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
       resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
@@ -290,12 +307,20 @@ public class CallLogFragment extends Fragment
     mRecyclerView.setHasFixedSize(true);
     mLayoutManager = new LinearLayoutManager(getActivity());
     mRecyclerView.setLayoutManager(mLayoutManager);
+    PerformanceReport.logOnScrollStateChange(mRecyclerView);
     mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
     mEmptyListView.setImage(R.drawable.empty_call_log);
     mEmptyListView.setActionClickedListener(this);
     mModalAlertView = (ViewGroup) view.findViewById(R.id.modal_message_container);
     mModalAlertManager =
         new CallLogModalAlertManager(LayoutInflater.from(getContext()), mModalAlertView, this);
+    mMultiSelectUnSelectAllViewContent =
+        view.findViewById(R.id.multi_select_select_all_view_content);
+    mSelectUnselectAllViewText = (TextView) view.findViewById(R.id.select_all_view_text);
+    mSelectUnselectAllIcon = (ImageView) view.findViewById(R.id.select_all_view_icon);
+    mMultiSelectUnSelectAllViewContent.setOnClickListener(null);
+    mSelectUnselectAllIcon.setOnClickListener(this);
+    mSelectUnselectAllViewText.setOnClickListener(this);
   }
 
   protected void setupData() {
@@ -317,7 +342,11 @@ public class CallLogFragment extends Fragment
                 getActivity(),
                 mRecyclerView,
                 this,
-                CallLogCache.getCallLogCache(getActivity()),
+                this,
+                activityType == CallLogAdapter.ACTIVITY_TYPE_DIALTACTS
+                    ? (CallLogAdapter.OnActionModeStateChangedListener) getActivity()
+                    : null,
+                new CallLogCache(getActivity()),
                 mContactInfoCache,
                 getVoicemailPlaybackPresenter(),
                 new FilteredNumberAsyncQueryHandler(getActivity()),
@@ -335,7 +364,16 @@ public class CallLogFragment extends Fragment
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     setupData();
+    updateSelectAllState(savedInstanceState);
     mAdapter.onRestoreInstanceState(savedInstanceState);
+  }
+
+  private void updateSelectAllState(Bundle savedInstanceState) {
+    if (savedInstanceState != null) {
+      if (savedInstanceState.getBoolean(KEY_SELECT_ALL_MODE, false)) {
+        updateSelectAllIcon();
+      }
+    }
   }
 
   @Override
@@ -380,9 +418,17 @@ public class CallLogFragment extends Fragment
   }
 
   @Override
-  public void onStop() {
-    updateOnTransition();
+  public void onStart() {
+    super.onStart();
+    CequintCallerIdManager cequintCallerIdManager = null;
+    if (CequintCallerIdManager.isCequintCallerIdEnabled(getContext())) {
+      cequintCallerIdManager = CequintCallerIdManager.createInstanceForCallLog();
+    }
+    mContactInfoCache.setCequintCallerIdManager(cequintCallerIdManager);
+  }
 
+  @Override
+  public void onStop() {
     super.onStop();
     mAdapter.onStop();
     mContactInfoCache.stop();
@@ -407,7 +453,7 @@ public class CallLogFragment extends Fragment
     outState.putBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
     outState.putBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, mHasReadCallLogPermission);
     outState.putBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
-
+    outState.putBoolean(KEY_SELECT_ALL_MODE, selectAllMode);
     mAdapter.onSaveInstanceState(outState);
   }
 
@@ -451,6 +497,8 @@ public class CallLogFragment extends Fragment
       mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
     } else if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
       mEmptyListView.setActionLabel(R.string.call_log_all_empty_action);
+    } else {
+      mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
     }
   }
 
@@ -463,9 +511,7 @@ public class CallLogFragment extends Fragment
     super.setMenuVisibility(menuVisible);
     if (mMenuVisible != menuVisible) {
       mMenuVisible = menuVisible;
-      if (!menuVisible) {
-        updateOnTransition();
-      } else if (isResumed()) {
+      if (menuVisible && isResumed()) {
         refreshData();
       }
     }
@@ -483,27 +529,10 @@ public class CallLogFragment extends Fragment
       fetchCalls();
       mCallLogQueryHandler.fetchVoicemailStatus();
       mCallLogQueryHandler.fetchMissedCallsUnreadCount();
-      updateOnTransition();
       mRefreshDataRequired = false;
     } else {
       // Refresh the display of the existing data to update the timestamp text descriptions.
       mAdapter.notifyDataSetChanged();
-    }
-  }
-
-  /**
-   * Updates the voicemail notification state.
-   *
-   * <p>TODO: Move to CallLogActivity
-   */
-  private void updateOnTransition() {
-    // We don't want to update any call data when keyguard is on because the user has likely not
-    // seen the new calls yet.
-    // This might be called before onCreate() and thus we need to check null explicitly.
-    if (mKeyguardManager != null
-        && !mKeyguardManager.inKeyguardRestrictedInputMode()
-        && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-      CallLogNotificationsService.markNewVoicemailsAsOld(getActivity(), null);
     }
   }
 
@@ -514,9 +543,14 @@ public class CallLogFragment extends Fragment
       return;
     }
 
-    if (!PermissionsUtil.hasPermission(activity, READ_CALL_LOG)) {
-      FragmentCompat.requestPermissions(
-          this, new String[] {READ_CALL_LOG}, READ_CALL_LOG_PERMISSION_REQUEST_CODE);
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
+    if (deniedPermissions.length > 0) {
+      LogUtil.i(
+          "CallLogFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
+      FragmentCompat.requestPermissions(this, deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
     } else if (!mIsCallLogActivity) {
       // Show dialpad if we are not in the call log activity.
       ((HostInterface) activity).showDialpad();
@@ -526,7 +560,7 @@ public class CallLogFragment extends Fragment
   @Override
   public void onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
-    if (requestCode == READ_CALL_LOG_PERMISSION_REQUEST_CODE) {
+    if (requestCode == PHONE_PERMISSIONS_REQUEST_CODE) {
       if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
         // Force a refresh of the data since we were missing the permission before this.
         mRefreshDataRequired = true;
@@ -586,6 +620,51 @@ public class CallLogFragment extends Fragment
       if (hostInterface != null && getUserVisibleHint()) {
         hostInterface.enableFloatingButton(true);
       }
+    }
+  }
+
+  @Override
+  public void showMultiSelectRemoveView(boolean show) {
+    mMultiSelectUnSelectAllViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
+    mMultiSelectUnSelectAllViewContent.setAlpha(show ? 0 : 1);
+    mMultiSelectUnSelectAllViewContent.animate().alpha(show ? 1 : 0).start();
+    ((ListsFragment) getParentFragment()).showMultiSelectRemoveView(show);
+  }
+
+  @Override
+  public void setSelectAllModeToFalse() {
+    selectAllMode = false;
+    mSelectUnselectAllIcon.setImageDrawable(
+        getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+  }
+
+  @Override
+  public void tapSelectAll() {
+    LogUtil.i("CallLogFragment.tapSelectAll", "imitating select all");
+    selectAllMode = true;
+    updateSelectAllIcon();
+  }
+
+  @Override
+  public void onClick(View v) {
+    selectAllMode = !selectAllMode;
+    if (selectAllMode) {
+      Logger.get(v.getContext()).logImpression(DialerImpression.Type.MULTISELECT_SELECT_ALL);
+    } else {
+      Logger.get(v.getContext()).logImpression(DialerImpression.Type.MULTISELECT_UNSELECT_ALL);
+    }
+    updateSelectAllIcon();
+  }
+
+  private void updateSelectAllIcon() {
+    if (selectAllMode) {
+      mSelectUnselectAllIcon.setImageDrawable(
+          getContext().getDrawable(R.drawable.ic_check_mark_blue_24dp));
+      getAdapter().onAllSelected();
+    } else {
+      mSelectUnselectAllIcon.setImageDrawable(
+          getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+      getAdapter().onAllDeselected();
     }
   }
 

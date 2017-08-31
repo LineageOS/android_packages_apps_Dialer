@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"Del og ring"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"bilde <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"bilde"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Ta et bilde"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Kunne ikke laste inn kamerabilde"</string>
     <string name="allow" msgid="8637148297403066623">"Tillat"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Gi tilgang til kameraet for å ta bilder"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Gi Media tilgang for å dele bilder"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Ta et bilde"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Velg et bilde"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Send en melding"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Bildet er sendt via Messages"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Meldingen er sendt via Messages"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"Sender bildet …"</string>
 </resources>

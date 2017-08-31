@@ -16,21 +16,62 @@
 
 package com.android.dialer.util;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ADD_VOICEMAIL;
+import static android.Manifest.permission.CALL_PHONE;
+import static android.Manifest.permission.MODIFY_PHONE_STATE;
+import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.READ_VOICEMAIL;
+import static android.Manifest.permission.WRITE_CALL_LOG;
+import static android.Manifest.permission.WRITE_CONTACTS;
+import static android.Manifest.permission.WRITE_VOICEMAIL;
+
 import android.Manifest.permission;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.widget.Toast;
 import com.android.dialer.common.LogUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /** Utility class to help with runtime permissions. */
 public class PermissionsUtil {
 
+  private static final String PREFERENCE_CAMERA_ALLOWED_BY_USER = "camera_allowed_by_user";
   private static final String PERMISSION_PREFERENCE = "dialer_permissions";
   private static final String CEQUINT_PERMISSION = "com.cequint.ecid.CALLER_ID_LOOKUP";
+
+  // Permissions list retrieved from application manifest.
+  // Starting in Android O Permissions must be explicitly enumerated:
+  // https://developer.android.com/preview/behavior-changes.html#rmp
+  public static final List<String> allPhoneGroupPermissionsUsedInDialer =
+      Collections.unmodifiableList(
+          Arrays.asList(
+              READ_CALL_LOG,
+              WRITE_CALL_LOG,
+              READ_PHONE_STATE,
+              MODIFY_PHONE_STATE,
+              CALL_PHONE,
+              ADD_VOICEMAIL,
+              WRITE_VOICEMAIL,
+              READ_VOICEMAIL));
+
+  public static final List<String> allContactsGroupPermissionsUsedInDialer =
+      Collections.unmodifiableList(Arrays.asList(READ_CONTACTS, WRITE_CONTACTS));
+
+  public static final List<String> allLocationGroupPermissionsUsedInDialer =
+      Collections.unmodifiableList(Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION));
 
   public static boolean hasPhonePermissions(Context context) {
     return hasPermission(context, permission.CALL_PHONE);
@@ -146,5 +187,50 @@ public class PermissionsUtil {
     LogUtil.i("PermissionsUtil.notifyPermissionGranted", permission);
     final Intent intent = new Intent(permission);
     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+  }
+
+  /**
+   * Returns a list of permissions currently not granted to the application from the supplied list.
+   *
+   * @param context - The Application context.
+   * @param permissionsList - A list of permissions to check if the current application has been
+   *     granted.
+   * @return An array of permissions that are currently DENIED to the application; a subset of
+   *     permissionsList.
+   */
+  @NonNull
+  public static String[] getPermissionsCurrentlyDenied(
+      @NonNull Context context, @NonNull List<String> permissionsList) {
+    List<String> permissionsCurrentlyDenied = new ArrayList<>();
+    for (String permission : permissionsList) {
+      if (!hasPermission(context, permission)) {
+        permissionsCurrentlyDenied.add(permission);
+      }
+    }
+    return permissionsCurrentlyDenied.toArray(new String[permissionsCurrentlyDenied.size()]);
+  }
+
+  /**
+   * Since we are granted the camera permission automatically as a first-party app, we need to show
+   * a toast to let users know the permission was granted for privacy reasons.
+   *
+   * @return true if we've already shown the camera privacy toast.
+   */
+  public static boolean hasCameraPrivacyToastShown(@NonNull Context context) {
+    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+        .getBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, false);
+  }
+
+  public static void showCameraPermissionToast(@NonNull Context context) {
+    Toast.makeText(context, context.getString(R.string.camera_privacy_text), Toast.LENGTH_LONG)
+        .show();
+    setCameraPrivacyToastShown(context);
+  }
+
+  public static void setCameraPrivacyToastShown(@NonNull Context context) {
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+        .edit()
+        .putBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, true)
+        .apply();
   }
 }

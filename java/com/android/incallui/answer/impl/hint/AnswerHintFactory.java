@@ -23,9 +23,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProvider;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.util.DialerUtils;
 import com.android.incallui.util.AccessibilityUtil;
 
@@ -35,8 +34,9 @@ import com.android.incallui.util.AccessibilityUtil;
  */
 public class AnswerHintFactory {
 
-  private static final String CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY =
-      "answer_hint_answered_threshold";
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY = "answer_hint_answered_threshold";
+
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String CONFIG_ANSWER_HINT_WHITELISTED_DEVICES_KEY =
       "answer_hint_whitelisted_devices";
@@ -58,12 +58,7 @@ public class AnswerHintFactory {
 
   @NonNull
   public AnswerHint create(Context context, long puckUpDuration, long puckUpDelay) {
-
-    if (shouldShowAnswerHint(
-        context,
-        ConfigProviderBindings.get(context),
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context),
-        Build.PRODUCT)) {
+    if (shouldShowAnswerHint(context, Build.PRODUCT)) {
       return new DotAnswerHint(context, puckUpDuration, puckUpDelay);
     }
 
@@ -84,24 +79,23 @@ public class AnswerHintFactory {
   }
 
   @VisibleForTesting
-  static boolean shouldShowAnswerHint(
-      Context context,
-      ConfigProvider configProvider,
-      SharedPreferences sharedPreferences,
-      String device) {
+  static boolean shouldShowAnswerHint(Context context, String device) {
     if (AccessibilityUtil.isTouchExplorationEnabled(context)) {
       return false;
     }
     // Devices that has the legacy dialer installed are whitelisted as they are likely to go through
     // a UX change during updates.
-    if (!isDeviceWhitelisted(device, configProvider)) {
+    if (!isDeviceWhitelisted(context, device)) {
       return false;
     }
 
     // If the user has gone through the process a few times we can assume they have learnt the
     // method.
-    int answeredCount = sharedPreferences.getInt(ANSWERED_COUNT_PREFERENCE_KEY, 0);
-    long threshold = configProvider.getLong(CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY, 3);
+    int answeredCount =
+        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+            .getInt(ANSWERED_COUNT_PREFERENCE_KEY, 0);
+    long threshold =
+        ConfigProviderBindings.get(context).getLong(CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY, 3);
     LogUtil.i(
         "AnswerHintFactory.shouldShowAnswerHint",
         "answerCount: %d, threshold: %d",
@@ -115,8 +109,8 @@ public class AnswerHintFactory {
    * @param configProvider should provide a list of devices quoted with '/' concatenated to a
    *     string.
    */
-  private static boolean isDeviceWhitelisted(String device, ConfigProvider configProvider) {
-    return configProvider
+  private static boolean isDeviceWhitelisted(Context context, String device) {
+    return ConfigProviderBindings.get(context)
         .getString(CONFIG_ANSWER_HINT_WHITELISTED_DEVICES_KEY, DEFAULT_WHITELISTED_DEVICES_CSV)
         .contains("/" + device + "/");
   }

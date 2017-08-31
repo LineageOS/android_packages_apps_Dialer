@@ -16,6 +16,11 @@
   -->
 <resources>
 
+  <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
+    <item name="android:colorAccent">@color/dialtacts_theme_color</item>
+  </style>
+
   <style name="DialtactsTheme" parent="DialerThemeBase">
 
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
@@ -25,13 +30,13 @@
     <item name="windowActionModeOverlay">true</item>
     <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
     <item name="actionBarStyle">@style/DialtactsActionBarStyle</item>
+    <item name="actionModeStyle">@style/ActionModeStyle</item>
+    <item name="android:actionModeStyle">@style/ActionModeStyle</item>
 
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:overlapAnchor">true</item>
-    <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
 
     <item name="android:listViewStyle">@style/ListViewStyle</item>
-    <item name="section_header_background">@drawable/list_title_holo</item>
     <item name="list_section_header_height">32dip</item>
     <item name="list_item_padding_top">7dp</item>
     <item name="list_item_padding_right">24dp</item>
@@ -66,7 +71,7 @@
     <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
 
     <!-- Video call icon -->
-    <item name="list_item_video_call_icon_size">32dip</item>
+    <item name="list_item_video_call_icon_size">48dip</item>
     <item name="list_item_video_call_icon_margin">8dip</item>
 
     <item name="dialpad_style">@style/Dialpad.Light</item>
@@ -100,19 +105,6 @@
     <item name="android:fastScrollTrackDrawable">@null</item>
   </style>
 
-  <style name="CallDetailActionItemStyle">
-    <item name="android:foreground">?android:attr/selectableItemBackground</item>
-    <item name="android:clickable">true</item>
-    <item name="android:drawablePadding">@dimen/call_detail_action_item_drawable_padding</item>
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:paddingStart">@dimen/call_detail_action_item_padding_horizontal</item>
-    <item name="android:paddingEnd">@dimen/call_detail_action_item_padding_horizontal</item>
-    <item name="android:paddingTop">@dimen/call_detail_action_item_padding_vertical</item>
-    <item name="android:paddingBottom">@dimen/call_detail_action_item_padding_vertical</item>
-    <item name="android:textColor">@color/call_detail_footer_text_color</item>
-    <item name="android:textSize">@dimen/call_detail_action_item_text_size</item>
-  </style>
-
   <style name="DialtactsActionBarStyle" parent="DialerActionBarBaseStyle">
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
     <item name="android:background">@color/actionbar_background_color</item>
@@ -127,6 +119,12 @@
     <!-- Shift the title text to the right -->
     <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     <item name="contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+  </style>
+
+  <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
+    <item name="android:background">@color/actionbar_background_color</item>
+    <item name="background">@color/actionbar_background_color</item>
+    <item name="closeItemLayout">@layout/action_mode_close_button</item>
   </style>
 
   <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
@@ -192,11 +190,6 @@
     <item name="android:importantForAccessibility">no</item>
   </style>
 
-  <style name="DismissButtonStyle">
-    <item name="android:paddingLeft">@dimen/dismiss_button_padding_start</item>
-    <item name="android:paddingRight">@dimen/dismiss_button_padding_end</item>
-  </style>
-
   <!-- Style applied to the "Settings" screen.  Keep in sync with SettingsLight in Telephony. -->
   <style name="SettingsStyle" parent="DialtactsThemeWithoutActionBarOverlay">
     <!-- Setting text. -->
@@ -221,10 +214,6 @@
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
     <item name="android:height">@dimen/action_bar_height</item>
     <item name="height">@dimen/action_bar_height</item>
-  </style>
-
-  <style name="VoicemailPlaybackLayoutTextStyle">
-    <item name="android:textSize">14sp</item>
   </style>
 
   <style name="VoicemailPlaybackLayoutButtonStyle">

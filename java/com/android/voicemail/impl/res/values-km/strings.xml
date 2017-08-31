@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"ផ្លាស់ប្ដូរ​កូដ PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​ត្រូវតែ​បើកដំណើរការ ដើម្បី​ផ្លាស់ប្ដូរ PIN"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"សារ​ជាសំឡេង​ដែល​មើល​ឃើញ​មិនទាន់​​ត្រូវ​បាន​ធ្វើ​ឲ្យ​សកម្ម​នៅ​ឡើយ​ទេ សូម​ព្យាយាម​ម្ដង​ទៀត​នៅ​ពេល​ក្រោយ"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"កូដ PIN ចាស់"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"កូដ PIN ថ្មី"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"សូមរង់ចាំ។"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"កូដ PIN ថ្មី​ ខ្លី​ពេក។"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"កូដ PIN ថ្មី​ វែង​ពេក។"</string>

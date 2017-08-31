@@ -15,9 +15,11 @@
  */
 package com.android.voicemail.impl;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -30,6 +32,7 @@ import android.telephony.VisualVoicemailSmsFilterSettings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.common.Assert;
+import com.android.voicemail.impl.configui.ConfigOverrideFragment;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocolFactory;
 import com.android.voicemail.impl.sms.StatusMessage;
@@ -48,27 +51,28 @@ import java.util.Set;
  *
  * <p>The current hidden configs are: {@link #getSslPort()} {@link #getDisabledCapabilities()}
  */
+@TargetApi(VERSION_CODES.O)
 public class OmtpVvmCarrierConfigHelper {
 
   private static final String TAG = "OmtpVvmCarrierCfgHlpr";
 
-  static final String KEY_VVM_TYPE_STRING = CarrierConfigManager.KEY_VVM_TYPE_STRING;
-  static final String KEY_VVM_DESTINATION_NUMBER_STRING =
+  public static final String KEY_VVM_TYPE_STRING = CarrierConfigManager.KEY_VVM_TYPE_STRING;
+  public static final String KEY_VVM_DESTINATION_NUMBER_STRING =
       CarrierConfigManager.KEY_VVM_DESTINATION_NUMBER_STRING;
-  static final String KEY_VVM_PORT_NUMBER_INT = CarrierConfigManager.KEY_VVM_PORT_NUMBER_INT;
-  static final String KEY_CARRIER_VVM_PACKAGE_NAME_STRING =
+  public static final String KEY_VVM_PORT_NUMBER_INT = CarrierConfigManager.KEY_VVM_PORT_NUMBER_INT;
+  public static final String KEY_CARRIER_VVM_PACKAGE_NAME_STRING =
       CarrierConfigManager.KEY_CARRIER_VVM_PACKAGE_NAME_STRING;
-  static final String KEY_CARRIER_VVM_PACKAGE_NAME_STRING_ARRAY =
+  public static final String KEY_CARRIER_VVM_PACKAGE_NAME_STRING_ARRAY =
       "carrier_vvm_package_name_string_array";
-  static final String KEY_VVM_PREFETCH_BOOL = CarrierConfigManager.KEY_VVM_PREFETCH_BOOL;
-  static final String KEY_VVM_CELLULAR_DATA_REQUIRED_BOOL =
+  public static final String KEY_VVM_PREFETCH_BOOL = CarrierConfigManager.KEY_VVM_PREFETCH_BOOL;
+  public static final String KEY_VVM_CELLULAR_DATA_REQUIRED_BOOL =
       CarrierConfigManager.KEY_VVM_CELLULAR_DATA_REQUIRED_BOOL;
 
   /** @see #getSslPort() */
-  static final String KEY_VVM_SSL_PORT_NUMBER_INT = "vvm_ssl_port_number_int";
+  public static final String KEY_VVM_SSL_PORT_NUMBER_INT = "vvm_ssl_port_number_int";
 
   /** @see #isLegacyModeEnabled() */
-  static final String KEY_VVM_LEGACY_MODE_ENABLED_BOOL = "vvm_legacy_mode_enabled_bool";
+  public static final String KEY_VVM_LEGACY_MODE_ENABLED_BOOL = "vvm_legacy_mode_enabled_bool";
 
   /**
    * Ban a capability reported by the server from being used. The array of string should be a subset
@@ -76,16 +80,18 @@ public class OmtpVvmCarrierConfigHelper {
    *
    * @see #getDisabledCapabilities()
    */
-  static final String KEY_VVM_DISABLED_CAPABILITIES_STRING_ARRAY =
+  public static final String KEY_VVM_DISABLED_CAPABILITIES_STRING_ARRAY =
       "vvm_disabled_capabilities_string_array";
 
-  static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
+  public static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
 
   private final Context mContext;
   private final PersistableBundle mCarrierConfig;
   private final String mVvmType;
   private final VisualVoicemailProtocol mProtocol;
   private final PersistableBundle mTelephonyConfig;
+
+  @Nullable private final PersistableBundle mOverrideConfig;
 
   private PhoneAccountHandle mPhoneAccountHandle;
 
@@ -100,6 +106,7 @@ public class OmtpVvmCarrierConfigHelper {
       VvmLog.e(TAG, "PhoneAccountHandle is invalid");
       mCarrierConfig = null;
       mTelephonyConfig = null;
+      mOverrideConfig = null;
       mVvmType = null;
       mProtocol = null;
       return;
@@ -111,6 +118,13 @@ public class OmtpVvmCarrierConfigHelper {
 
     mVvmType = getVvmType();
     mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
+
+    if (ConfigOverrideFragment.isOverridden(context)) {
+      mOverrideConfig = ConfigOverrideFragment.getConfig(context);
+      VvmLog.w(TAG, "Config override is activated: " + mOverrideConfig);
+    } else {
+      mOverrideConfig = null;
+    }
   }
 
   @VisibleForTesting
@@ -119,8 +133,21 @@ public class OmtpVvmCarrierConfigHelper {
     mContext = context;
     mCarrierConfig = carrierConfig;
     mTelephonyConfig = telephonyConfig;
+    mOverrideConfig = null;
     mVvmType = getVvmType();
     mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
+  }
+
+  public PersistableBundle getConfig() {
+    PersistableBundle result = new PersistableBundle();
+    if (mTelephonyConfig != null) {
+      result.putAll(mTelephonyConfig);
+    }
+    if (mCarrierConfig != null) {
+      result.putAll(mCarrierConfig);
+    }
+
+    return result;
   }
 
   public Context getContext() {
@@ -426,6 +453,13 @@ public class OmtpVvmCarrierConfigHelper {
   @Nullable
   private Object getValue(String key, Object defaultValue) {
     Object result;
+    if (mOverrideConfig != null) {
+      result = mOverrideConfig.get(key);
+      if (result != null) {
+        return result;
+      }
+    }
+
     if (mCarrierConfig != null) {
       result = mCarrierConfig.get(key);
       if (result != null) {

@@ -22,14 +22,25 @@ import android.content.Intent;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.telecom.Call;
+import android.telecom.PhoneAccountHandle;
 
 public interface Lightbringer {
 
+  boolean isEnabled();
+
   @MainThread
-  boolean isReachable(@NonNull Context context, @NonNull String number);
+  boolean isReachable(@NonNull Context context, @Nullable String number);
+
+  @MainThread
+  boolean supportsUpgrade(@NonNull Context context, @Nullable String number);
 
   @MainThread
   Intent getIntent(@NonNull Context context, @NonNull String number);
+
+  @MainThread
+  void requestUpgrade(Call call);
 
   @MainThread
   void registerListener(@NonNull LightbringerListener listener);
@@ -39,9 +50,21 @@ public interface Lightbringer {
 
   @Nullable
   @MainThread
-  ComponentName getPhoneAccountComponentName(@NonNull Context context);
+  ComponentName getPhoneAccountComponentName();
 
-  @NonNull
+  @Nullable
   @MainThread
-  String getPackageName(@NonNull Context context);
+  PhoneAccountHandle getPhoneAccountHandle();
+
+  @Nullable
+  @MainThread
+  String getPackageName();
+
+  @StringRes
+  @MainThread
+  int getOutgoingCallTypeText();
+
+  @StringRes
+  @MainThread
+  int getIncomingCallTypeText();
 }

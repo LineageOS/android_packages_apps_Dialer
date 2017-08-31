@@ -20,9 +20,9 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.Log;
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.dialer.app.dialpad.SmartDialCursorLoader;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.dialpadview.SmartDialCursorLoader;
 import com.android.dialer.smartdial.SmartDialMatchPosition;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
@@ -43,14 +43,14 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
 
     if (DEBUG) {
-      Log.v(TAG, "Constructing List Adapter");
+      LogUtil.v(TAG, "Constructing List Adapter");
     }
   }
 
   /** Sets query for the SmartDialCursorLoader. */
   public void configureLoader(SmartDialCursorLoader loader) {
     if (DEBUG) {
-      Log.v(TAG, "Configure Loader with query" + getQueryString());
+      LogUtil.v(TAG, "Configure Loader with query" + getQueryString());
     }
 
     if (getQueryString() == null) {
@@ -77,7 +77,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
       for (SmartDialMatchPosition match : nameMatches) {
         view.addNameHighlightSequence(match.start, match.end);
         if (DEBUG) {
-          Log.v(
+          LogUtil.v(
               TAG,
               cursor.getString(PhoneQuery.DISPLAY_NAME)
                   + " "

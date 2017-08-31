@@ -21,7 +21,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.voicemail.impl.utils.XmlUtils;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -216,6 +216,7 @@ public class AnswerFragment extends Fragment
   private void performAnswerAndRelease() {
     restoreAnswerAndReleaseButtonAnimation();
     answerScreenDelegate.onAnswerAndReleaseCall();
+    buttonAcceptClicked = true;
   }
 
   private void restoreAnswerAndReleaseButtonAnimation() {
@@ -359,6 +360,11 @@ public class AnswerFragment extends Fragment
   }
 
   @Override
+  public boolean isActionTimeout() {
+    return (buttonAcceptClicked || buttonRejectClicked) && answerScreenDelegate.isActionTimeout();
+  }
+
+  @Override
   @NonNull
   public String getCallId() {
     return Assert.isNotNull(getArguments().getString(ARG_CALL_ID));
@@ -427,8 +433,10 @@ public class AnswerFragment extends Fragment
 
     if (allowAnswerAndRelease()) {
       answerAndReleaseButton.setVisibility(View.VISIBLE);
+      answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
     } else {
       answerAndReleaseButton.setVisibility(View.INVISIBLE);
+      answerScreenDelegate.onAnswerAndReleaseButtonDisabled();
     }
   }
 
@@ -524,6 +532,7 @@ public class AnswerFragment extends Fragment
     if (!isAdded()) {
       return;
     }
+    LogUtil.enterBlock("AnswerFragment.updateDataFragment");
     Fragment current = getChildFragmentManager().findFragmentById(R.id.incall_data_container);
     Fragment newFragment = null;
 
@@ -540,6 +549,7 @@ public class AnswerFragment extends Fragment
           || !Objects.equals(((MultimediaFragment) current).getSubject(), subject)
           || !Objects.equals(((MultimediaFragment) current).getImageUri(), imageUri)
           || !Objects.equals(((MultimediaFragment) current).getLocation(), location)) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Replacing multimedia fragment");
         // Needs replacement
         newFragment =
             MultimediaFragment.newInstance(
@@ -551,12 +561,14 @@ public class AnswerFragment extends Fragment
     } else if (shouldShowAvatar()) {
       // Needs Avatar
       if (!(current instanceof AvatarFragment)) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Replacing avatar fragment");
         // Needs replacement
         newFragment = new AvatarFragment();
       }
     } else {
       // Needs empty
       if (current != null) {
+        LogUtil.i("AnswerFragment.updateDataFragment", "Removing current fragment");
         getChildFragmentManager().beginTransaction().remove(current).commitNow();
       }
       contactGridManager.setAvatarImageView(null, 0, false);
@@ -706,7 +718,7 @@ public class AnswerFragment extends Fragment
     }
     view.setSystemUiVisibility(flags);
     if (isVideoCall() || isVideoUpgradeRequest()) {
-      if (VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+      if (VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
         if (isSelfManagedCamera()) {
           answerVideoCallScreen = new SelfManagedAnswerVideoCallScreen(getCallId(), this, view);
         } else {
@@ -930,7 +942,7 @@ public class AnswerFragment extends Fragment
         if (hasCallOnHold()) {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_third));
-        } else {
+        } else if (primaryCallState.supportsCallOnHold) {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_second));
         }
@@ -942,7 +954,7 @@ public class AnswerFragment extends Fragment
 
   private void showMessageMenu() {
     LogUtil.i("AnswerFragment.showMessageMenu", "Show sms menu.");
-    if (getChildFragmentManager().isDestroyed()) {
+    if (getContext() == null || isDetached() || getChildFragmentManager().isDestroyed()) {
       return;
     }
 
@@ -1019,7 +1031,7 @@ public class AnswerFragment extends Fragment
   }
 
   private void updateImportanceBadgeVisibility() {
-    if (!isAdded()) {
+    if (!isAdded() || getView() == null) {
       return;
     }
 

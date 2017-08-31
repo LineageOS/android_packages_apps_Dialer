@@ -26,33 +26,41 @@ import com.android.contacts.common.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 
 /** ViewHolder container for {@link CallDetailsActivity} footer. */
-public class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener {
+final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
+  private final ReportCallIdListener listener;
   private final View container;
   private final View copy;
   private final View edit;
+  private final View reportCallerId;
 
   private String number;
 
-  public CallDetailsFooterViewHolder(View view) {
+  CallDetailsFooterViewHolder(View view, ReportCallIdListener listener) {
     super(view);
+    this.listener = listener;
     container = view.findViewById(R.id.footer_container);
     copy = view.findViewById(R.id.call_detail_action_copy);
     edit = view.findViewById(R.id.call_detail_action_edit_before_call);
+    reportCallerId = view.findViewById(R.id.call_detail_action_report_caller_id);
 
     copy.setOnClickListener(this);
     edit.setOnClickListener(this);
+    reportCallerId.setOnClickListener(this);
   }
 
   public void setPhoneNumber(String number) {
     this.number = number;
     if (TextUtils.isEmpty(number)) {
       container.setVisibility(View.GONE);
+    } else if (listener.canReportCallerId(number)) {
+      reportCallerId.setVisibility(View.VISIBLE);
     }
   }
 
@@ -60,14 +68,32 @@ public class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder
   public void onClick(View view) {
     Context context = view.getContext();
     if (view == copy) {
+      PerformanceReport.recordClick(UiAction.Type.COPY_NUMBER_IN_CALL_DETAIL);
+
       Logger.get(context).logImpression(DialerImpression.Type.CALL_DETAILS_COPY_NUMBER);
       ClipboardUtils.copyText(context, null, number, true);
     } else if (view == edit) {
+      PerformanceReport.recordClick(UiAction.Type.EDIT_NUMBER_BEFORE_CALL_IN_CALL_DETAIL);
+      // Dialpad will be filled with this number, but we don't want to record it as user action
+      PerformanceReport.setIgnoreActionOnce(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
+
       Logger.get(context).logImpression(DialerImpression.Type.CALL_DETAILS_EDIT_BEFORE_CALL);
       Intent dialIntent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(number));
       DialerUtils.startActivityWithErrorToast(context, dialIntent);
+    } else if (view == reportCallerId) {
+      listener.reportCallId(number);
     } else {
       Assert.fail("View on click not implemented: " + view);
     }
+  }
+
+  /** Listener for reporting caller id */
+  interface ReportCallIdListener {
+
+    /** Tell listener that the user requested to report caller id info as inaccurate. */
+    void reportCallId(String number);
+
+    /** returns true if the number can be reported as inaccurate. */
+    boolean canReportCallerId(String number);
   }
 }

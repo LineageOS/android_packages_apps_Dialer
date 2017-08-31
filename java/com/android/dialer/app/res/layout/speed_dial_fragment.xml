@@ -41,7 +41,7 @@
       android:numColumns="@integer/contact_tile_column_count_in_favorites"/>
   </FrameLayout>
 
-  <com.android.dialer.app.widget.EmptyContentView
+  <com.android.dialer.widget.EmptyContentView
     android:id="@+id/empty_list_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

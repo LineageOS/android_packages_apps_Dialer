@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_enable_wifi_calling_button" msgid="3295230556186542328">"បើក"</string>
+    <string name="video_call_not_available_title" msgid="987490011944013201">"ការហៅ​វីដេអូ​មិន​អាច​ធ្វើ​បាន​ទេ​នៅពេល​នេះ"</string>
+    <string name="video_call_not_available_message" msgid="2284146863894603221">"សាកល្បងហៅ​ម្ដងទៀត​នៅពេលក្រោយ ឬ​បន្ត​ការហៅ​ជា​សំឡេង។"</string>
+    <string name="voice_call" msgid="6748636104112578475">"ការ​ហៅ​ជា​សំឡេង"</string>
+</resources>

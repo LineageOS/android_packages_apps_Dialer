@@ -18,6 +18,7 @@ package com.android.incallui.videotech.ims;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -25,6 +26,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.util.CallUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -40,6 +42,13 @@ public class ImsVideoTech implements VideoTech {
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
   private boolean paused = false;
+  private String savedCameraId;
+
+  // Hold onto a flag of whether or not stopTransmission was called but resumeTransmission has not
+  // been. This is needed because there is time between calling stopTransmission and
+  // call.getDetails().getVideoState() reflecting the change. During that time, pause() and
+  // unpause() will send the incorrect VideoProfile.
+  private boolean transmissionStopped = false;
 
   public ImsVideoTech(LoggingBindings logger, VideoTechListener listener, Call call) {
     this.logger = logger;
@@ -53,12 +62,31 @@ public class ImsVideoTech implements VideoTech {
       return false;
     }
 
-    boolean hasCapabilities =
-        call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
-            && call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
+    if (call.getVideoCall() == null) {
+      return false;
+    }
 
-    return call.getVideoCall() != null
-        && (hasCapabilities || VideoProfile.isVideo(call.getDetails().getVideoState()));
+    // We are already in an IMS video call
+    if (VideoProfile.isVideo(call.getDetails().getVideoState())) {
+      return true;
+    }
+
+    // The user has disabled IMS video calling in system settings
+    if (!CallUtil.isVideoEnabled(context)) {
+      return false;
+    }
+
+    // The current call doesn't support transmitting video
+    if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)) {
+      return false;
+    }
+
+    // The current call remote device doesn't support receiving video
+    if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX)) {
+      return false;
+    }
+
+    return true;
   }
 
   @Override
@@ -118,6 +146,9 @@ public class ImsVideoTech implements VideoTech {
     }
     previousVideoState = newVideoState;
   }
+
+  @Override
+  public void onRemovedFromCallList() {}
 
   @Override
   public int getSessionModificationState() {
@@ -183,7 +214,7 @@ public class ImsVideoTech implements VideoTech {
   public void stopTransmission() {
     LogUtil.enterBlock("ImsVideoTech.stopTransmission");
 
-    setCamera(null);
+    transmissionStopped = true;
 
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
@@ -195,6 +226,8 @@ public class ImsVideoTech implements VideoTech {
   public void resumeTransmission() {
     LogUtil.enterBlock("ImsVideoTech.resumeTransmission");
 
+    transmissionStopped = false;
+
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
     call.getVideoCall()
         .sendSessionModifyRequest(
@@ -204,38 +237,75 @@ public class ImsVideoTech implements VideoTech {
 
   @Override
   public void pause() {
-    if (canPause() && !paused) {
+    if (call.getState() != Call.STATE_ACTIVE) {
+      LogUtil.i("ImsVideoTech.pause", "not pausing because call is not active");
+      return;
+    }
+
+    if (!isTransmittingOrReceiving()) {
+      LogUtil.i("ImsVideoTech.pause", "not pausing because this is not a video call");
+      return;
+    }
+
+    if (paused) {
+      LogUtil.i("ImsVideoTech.pause", "already paused");
+      return;
+    }
+
+    paused = true;
+
+    if (canPause()) {
       LogUtil.i("ImsVideoTech.pause", "sending pause request");
-      paused = true;
       int pausedVideoState = call.getDetails().getVideoState() | VideoProfile.STATE_PAUSED;
+      if (transmissionStopped && VideoProfile.isTransmissionEnabled(pausedVideoState)) {
+        LogUtil.i("ImsVideoTech.pause", "overriding TX to false due to user request");
+        pausedVideoState &= ~VideoProfile.STATE_TX_ENABLED;
+      }
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(pausedVideoState));
     } else {
-      LogUtil.i(
-          "ImsVideoTech.pause",
-          "not sending request: canPause: %b, paused: %b",
-          canPause(),
-          paused);
+      // This video call does not support pause so we fall back to disabling the camera
+      LogUtil.i("ImsVideoTech.pause", "disabling camera");
+      call.getVideoCall().setCamera(null);
     }
   }
 
   @Override
   public void unpause() {
-    if (canPause() && paused) {
+    if (call.getState() != Call.STATE_ACTIVE) {
+      LogUtil.i("ImsVideoTech.unpause", "not unpausing because call is not active");
+      return;
+    }
+
+    if (!isTransmittingOrReceiving()) {
+      LogUtil.i("ImsVideoTech.unpause", "not unpausing because this is not a video call");
+      return;
+    }
+
+    if (!paused) {
+      LogUtil.i("ImsVideoTech.unpause", "already unpaused");
+      return;
+    }
+
+    paused = false;
+
+    if (canPause()) {
       LogUtil.i("ImsVideoTech.unpause", "sending unpause request");
-      paused = false;
       int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
+      if (transmissionStopped && VideoProfile.isTransmissionEnabled(unpausedVideoState)) {
+        LogUtil.i("ImsVideoTech.unpause", "overriding TX to false due to user request");
+        unpausedVideoState &= ~VideoProfile.STATE_TX_ENABLED;
+      }
       call.getVideoCall().sendSessionModifyRequest(new VideoProfile(unpausedVideoState));
     } else {
-      LogUtil.i(
-          "ImsVideoTech.unpause",
-          "not sending request: canPause: %b, paused: %b",
-          canPause(),
-          paused);
+      // This video call does not support pause so we fall back to re-enabling the camera
+      LogUtil.i("ImsVideoTech.pause", "re-enabling camera");
+      setCamera(savedCameraId);
     }
   }
 
   @Override
-  public void setCamera(String cameraId) {
+  public void setCamera(@Nullable String cameraId) {
+    savedCameraId = cameraId;
     call.getVideoCall().setCamera(cameraId);
     call.getVideoCall().requestCameraCapabilities();
   }
@@ -245,10 +315,14 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall().setDeviceOrientation(rotation);
   }
 
+  @Override
+  public void becomePrimary() {
+    listener.onImpressionLoggingNeeded(
+        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_IMS);
+  }
+
   private boolean canPause() {
-    return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO)
-        && call.getState() == Call.STATE_ACTIVE
-        && isTransmitting();
+    return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO);
   }
 
   static int getUnpausedVideoState(int videoState) {

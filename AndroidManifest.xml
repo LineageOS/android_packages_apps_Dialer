@@ -16,8 +16,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   coreApp="true"
   package="com.android.dialer"
-  android:versionCode="130000"
-  android:versionName="10.0">
+  android:versionCode="170000"
+  android:versionName="13.0">
 
   <uses-sdk
     android:minSdkVersion="23"
@@ -55,6 +55,7 @@
   <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
   <uses-permission android:name="android.permission.SEND_SMS"/>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
   <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
   <!-- We use this to disable the status bar buttons of home, back and recent
@@ -102,17 +103,12 @@
   <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
 
   <application
-    android:backupAgent='com.android.dialer.backup.DialerBackupAgent'
-    android:fullBackupOnly="true"
-    android:restoreAnyVersion="true"
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher_phone"
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.aosp.AospDialerApplication"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false">
-
-
   </application>
 
 </manifest>

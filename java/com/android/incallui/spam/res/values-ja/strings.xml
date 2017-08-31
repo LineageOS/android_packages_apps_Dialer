@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"発信者（<xliff:g id="NUMBER">%1$s</xliff:g>）をご存知ですか？"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"「<xliff:g id="NUMBER">%1$s</xliff:g>」は迷惑電話ですか？"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"「<xliff:g id="NUMBER">%1$s</xliff:g>」をブロックして、迷惑電話として報告しました。"</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"「<xliff:g id="NUMBER">%1$s</xliff:g>」からの通話は迷惑電話ではないと報告しました。"</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"タップして連絡先に追加するか、迷惑電話としてこの番号をブロックできます。"</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"この番号からの通話を着信したのはこれが初めてです。迷惑電話だった場合は、この番号をブロックして報告してください。"</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"タップして「迷惑電話ではない」と報告するか、この番号をブロックできます。"</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"この通話は迷惑電話として検知されました。迷惑電話ではなかった場合は、[迷惑電話ではない] をタップして、誤検知であることを報告してください。"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"ブロックして報告"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"連絡先に追加"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"迷惑電話ではない"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"番号をブロック"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"連絡先に追加"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"ブロックして迷惑電話として報告"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"迷惑電話ではない"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"拒否"</string>
+</resources>

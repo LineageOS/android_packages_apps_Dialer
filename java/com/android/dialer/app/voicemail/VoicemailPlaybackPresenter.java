@@ -47,16 +47,17 @@ import com.android.common.io.MoreCloseables;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.io.ByteStreams;
 import java.io.File;
@@ -87,7 +88,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * calls into this class from outside must be done from the main UI thread.
  */
 @NotThreadSafe
-@VisibleForTesting
 @TargetApi(VERSION_CODES.M)
 public class VoicemailPlaybackPresenter
     implements MediaPlayer.OnPreparedListener,
@@ -221,7 +221,7 @@ public class VoicemailPlaybackPresenter
       }
       shareVoicemailExecutor =
           DialerExecutors.createUiTaskBuilder(
-                  mActivity.getFragmentManager(), "test", new ShareVoicemailWorker())
+                  mActivity.getFragmentManager(), "shareVoicemail", new ShareVoicemailWorker())
               .onSuccess(
                   output -> {
                     if (output == null) {
@@ -502,7 +502,7 @@ public class VoicemailPlaybackPresenter
    * will call {@link #onError()} otherwise.
    */
   protected void prepareContent() {
-    if (mView == null) {
+    if (mView == null || mContext == null) {
       return;
     }
     LogUtil.d("VoicemailPlaybackPresenter.prepareContent", null);
@@ -515,6 +515,11 @@ public class VoicemailPlaybackPresenter
 
     mView.disableUiElements();
     mIsPrepared = false;
+
+    if (mContext != null && TelecomUtil.isInCall(mContext)) {
+      handleError(new IllegalStateException("Cannot play voicemail when call is in progress"));
+      return;
+    }
 
     try {
       mMediaPlayer = new MediaPlayer();
@@ -548,7 +553,9 @@ public class VoicemailPlaybackPresenter
     mView.setClipPosition(mPosition, mDuration.get());
     mView.enableUiElements();
     mView.setSuccess();
-    mMediaPlayer.seekTo(mPosition);
+    if (!mp.isPlaying()) {
+      mMediaPlayer.seekTo(mPosition);
+    }
 
     if (mIsPlaying) {
       resumePlayback();

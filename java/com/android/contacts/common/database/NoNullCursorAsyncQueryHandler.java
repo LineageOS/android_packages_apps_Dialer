@@ -20,6 +20,9 @@ import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * An {@AsyncQueryHandler} that will never return a null cursor.
@@ -27,6 +30,8 @@ import android.net.Uri;
  * <p>Instead, will return a {@link Cursor} with 0 records.
  */
 public abstract class NoNullCursorAsyncQueryHandler extends AsyncQueryHandler {
+  private static final AtomicInteger pendingQueryCount = new AtomicInteger();
+  @Nullable private static PendingQueryCountChangedListener pendingQueryCountChangedListener;
 
   public NoNullCursorAsyncQueryHandler(ContentResolver cr) {
     super(cr);
@@ -41,6 +46,11 @@ public abstract class NoNullCursorAsyncQueryHandler extends AsyncQueryHandler {
       String selection,
       String[] selectionArgs,
       String orderBy) {
+    pendingQueryCount.getAndIncrement();
+    if (pendingQueryCountChangedListener != null) {
+      pendingQueryCountChangedListener.onPendingQueryCountChanged();
+    }
+
     final CookieWithProjection projectionCookie = new CookieWithProjection(cookie, projection);
     super.startQuery(token, projectionCookie, uri, projection, selection, selectionArgs, orderBy);
   }
@@ -55,9 +65,30 @@ public abstract class NoNullCursorAsyncQueryHandler extends AsyncQueryHandler {
       cursor = new EmptyCursor(projectionCookie.projection);
     }
     onNotNullableQueryComplete(token, projectionCookie.originalCookie, cursor);
+
+    pendingQueryCount.getAndDecrement();
+    if (pendingQueryCountChangedListener != null) {
+      pendingQueryCountChangedListener.onPendingQueryCountChanged();
+    }
   }
 
   protected abstract void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor);
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setPendingQueryCountChangedListener(
+      @Nullable PendingQueryCountChangedListener listener) {
+    pendingQueryCountChangedListener = listener;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static int getPendingQueryCount() {
+    return pendingQueryCount.get();
+  }
+
+  /** Callback to listen for changes in the number of queries that have not completed. */
+  public interface PendingQueryCountChangedListener {
+    void onPendingQueryCountChanged();
+  }
 
   /** Class to add projection to an existing cookie. */
   private static class CookieWithProjection {

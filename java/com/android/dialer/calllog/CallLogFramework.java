@@ -21,9 +21,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
+import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
+import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,7 +39,6 @@ import javax.inject.Singleton;
 public final class CallLogFramework implements CallLogDataSource.ContentObserverCallbacks {
 
   static final String PREF_FORCE_REBUILD = "callLogFrameworkForceRebuild";
-  static final String PREF_LAST_REBUILD_TIMESTAMP_MILLIS = "callLogFrameworkLastRebuild";
 
   private final DataSources dataSources;
 
@@ -49,20 +49,20 @@ public final class CallLogFramework implements CallLogDataSource.ContentObserver
     this.dataSources = dataSources;
   }
 
-  public boolean isNewCallLogEnabled(Context context) {
-    return ConfigProviderBindings.get(context).getBoolean("enable_new_call_log_tab", false);
-  }
-
   /** Registers the content observers for all data sources. */
   public void registerContentObservers(Context appContext) {
     LogUtil.enterBlock("CallLogFramework.registerContentObservers");
 
-    if (!isNewCallLogEnabled(appContext)) {
-      return;
-    }
-
-    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-      dataSource.registerContentObservers(appContext, this);
+    // This is the same condition used in MainImpl#isNewUiEnabled. It means that bugfood/debug
+    // users will have "new call log" content observers firing. These observers usually do simple
+    // things like writing shared preferences.
+    // TODO(zachh): Find a way to access Main#isNewUiEnabled without creating a circular dependency.
+    if (BuildType.get() == BuildType.BUGFOOD || LogUtil.isDebugEnabled()) {
+      for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+        dataSource.registerContentObservers(appContext, this);
+      }
+    } else {
+      LogUtil.i("CallLogFramework.registerContentObservers", "not registering content observers");
     }
   }
 

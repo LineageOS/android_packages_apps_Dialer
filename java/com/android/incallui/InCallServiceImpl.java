@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.Trace;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
@@ -36,6 +37,8 @@ import com.android.incallui.call.TelecomAdapter;
  */
 public class InCallServiceImpl extends InCallService {
 
+  private ReturnToCallController returnToCallController;
+
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
     AudioModeProvider.getInstance().onAudioStateChanged(audioState);
@@ -43,28 +46,38 @@ public class InCallServiceImpl extends InCallService {
 
   @Override
   public void onBringToForeground(boolean showDialpad) {
+    Trace.beginSection("InCallServiceImpl.onBringToForeground");
     InCallPresenter.getInstance().onBringToForeground(showDialpad);
+    Trace.endSection();
   }
 
   @Override
   public void onCallAdded(Call call) {
+    Trace.beginSection("InCallServiceImpl.onCallAdded");
     InCallPresenter.getInstance().onCallAdded(call);
+    Trace.endSection();
   }
 
   @Override
   public void onCallRemoved(Call call) {
+    Trace.beginSection("InCallServiceImpl.onCallRemoved");
     InCallPresenter.getInstance().onCallRemoved(call);
+    Trace.endSection();
   }
 
   @Override
   public void onCanAddCallChanged(boolean canAddCall) {
+    Trace.beginSection("InCallServiceImpl.onCanAddCallChanged");
     InCallPresenter.getInstance().onCanAddCallChanged(canAddCall);
+    Trace.endSection();
   }
 
   @Override
   public IBinder onBind(Intent intent) {
+    Trace.beginSection("InCallServiceImpl.onBind");
     final Context context = getApplicationContext();
     final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
+    AudioModeProvider.getInstance().initializeAudioState(this);
     InCallPresenter.getInstance()
         .setUp(
             context,
@@ -79,24 +92,37 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
+    if (ReturnToCallController.isEnabled(this)) {
+      returnToCallController = new ReturnToCallController(this);
+    }
 
-    return super.onBind(intent);
+    IBinder iBinder = super.onBind(intent);
+    Trace.endSection();
+    return iBinder;
   }
 
   @Override
   public boolean onUnbind(Intent intent) {
+    Trace.beginSection("InCallServiceImpl.onUnbind");
     super.onUnbind(intent);
 
     InCallPresenter.getInstance().onServiceUnbind();
     tearDown();
 
+    Trace.endSection();
     return false;
   }
 
   private void tearDown() {
+    Trace.beginSection("InCallServiceImpl.tearDown");
     Log.v(this, "tearDown");
     // Tear down the InCall system
     TelecomAdapter.getInstance().clearInCallService();
     InCallPresenter.getInstance().tearDown();
+    if (returnToCallController != null) {
+      returnToCallController.tearDown();
+      returnToCallController = null;
+    }
+    Trace.endSection();
   }
 }

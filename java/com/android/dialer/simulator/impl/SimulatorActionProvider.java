@@ -30,6 +30,10 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.databasepopulator.CallLogPopulator;
+import com.android.dialer.databasepopulator.ContactsPopulator;
+import com.android.dialer.databasepopulator.VoicemailPopulator;
+import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 
 /** Implements the simulator submenu. */
@@ -73,6 +77,7 @@ final class SimulatorActionProvider extends ActionProvider {
     super.onPrepareSubMenu(subMenu);
     LogUtil.enterBlock("SimulatorActionProvider.onPrepareSubMenu");
     subMenu.clear();
+
     subMenu
         .add("Add call")
         .setOnMenuItemClickListener(
@@ -80,11 +85,22 @@ final class SimulatorActionProvider extends ActionProvider {
               SimulatorVoiceCall.addNewIncomingCall(context);
               return true;
             });
+
+    subMenu
+        .add("Notifiations")
+        .setActionProvider(SimulatorNotifications.getActionProvider(context));
     subMenu
         .add("Populate database")
         .setOnMenuItemClickListener(
             (item) -> {
               populateDatabase();
+              return true;
+            });
+    subMenu
+        .add("Clean database")
+        .setOnMenuItemClickListener(
+            (item) -> {
+              cleanDatabase();
               return true;
             });
     subMenu
@@ -114,15 +130,34 @@ final class SimulatorActionProvider extends ActionProvider {
                   .executeSerial(null);
               return true;
             });
+    subMenu
+        .add("Enriched call simulator")
+        .setOnMenuItemClickListener(
+            (item) -> {
+              context.startActivity(EnrichedCallSimulatorActivity.newIntent(context));
+              return true;
+            });
   }
 
   private void populateDatabase() {
     new AsyncTask<Void, Void, Void>() {
       @Override
       public Void doInBackground(Void... params) {
-        SimulatorContacts.populateContacts(context);
-        SimulatorCallLog.populateCallLog(context);
-        SimulatorVoicemail.populateVoicemail(context);
+        ContactsPopulator.populateContacts(context);
+        CallLogPopulator.populateCallLog(context);
+        VoicemailPopulator.populateVoicemail(context);
+        return null;
+      }
+    }.execute();
+  }
+
+  private void cleanDatabase() {
+    new AsyncTask<Void, Void, Void>() {
+      @Override
+      public Void doInBackground(Void... params) {
+        ContactsPopulator.deleteAllContacts(context);
+        CallLogPopulator.deleteAllCallLog(context);
+        VoicemailPopulator.deleteAllVoicemail(context);
         return null;
       }
     }.execute();

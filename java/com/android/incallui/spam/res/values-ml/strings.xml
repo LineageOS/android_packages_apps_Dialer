@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"<xliff:g id="NUMBER">%1$s</xliff:g> അറിയാമോ?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"<xliff:g id="NUMBER">%1$s</xliff:g> സ്‌പാം ആണോ?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്‌ത്, കോൾ സ്‌പാം ആയി റിപ്പോർട്ടുചെയ്‌തു."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"<xliff:g id="NUMBER">%1$s</xliff:g> എന്ന നമ്പറിൽ നിന്നുള്ള കോളിനെ സ്‌പാം അല്ലെന്ന് റിപ്പോർട്ടുചെയ്‌തു."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"കോൺടാക്‌റ്റുകളിലേക്ക് ചേർക്കാനോ സ്‌പാം നമ്പർ ബ്ലോക്കുചെയ്യാനോ ടാപ്പുചെയ്യുക."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"ഈ നമ്പറിൽ നിന്ന് ആദ്യമായാണ് നിങ്ങൾക്ക് കോൾ വരുന്നത്. ഈ കോൾ സ്‌പാം ആയിരുന്നെങ്കിൽ, ഈ നമ്പർ ബ്ലോക്കുചെയ്‌ത് റിപ്പോർട്ടുചെയ്യാനാകും."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"സ്‌പാം അല്ല എന്ന് റിപ്പോർട്ടുചെയ്യാൻ ടാപ്പുചെയ്യുക, അല്ലെങ്കിൽ അത് ബ്ലോക്കുചെയ്യുക."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"ഇത് ഒരു സ്‌പാമർ ആണെന്ന് ഞങ്ങൾക്ക് സംശയമുണ്ടായിരുന്നു. ഈ കോൾ ഒരു സ്‌പാം ആയിരുന്നില്ലെങ്കിൽ, ഞങ്ങളുടെ തെറ്റ് റിപ്പോർട്ടുചെയ്യാൻ സ്‌പാം അല്ല എന്നതിൽ ടാപ്പുചെയ്യുക."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"ബ്ലോക്കുചെയ്‌ത്, റിപ്പോർട്ടുചെയ്യുക"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"കോൺടാക്റ്റ് ചേർക്കുക"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"സ്പാം അല്ല"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"നമ്പർ ബ്ലോക്കുചെയ്യുക"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"കോൺടാക്‌റ്റുകളിൽ ചേർക്കുക"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"ബ്ലോക്കുചെയ്‌ത്, സ്‌പാമെന്ന് റിപ്പോർട്ടുചെയ്യുക"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"സ്പാം അല്ല"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"നിരസിക്കുക"</string>
+</resources>

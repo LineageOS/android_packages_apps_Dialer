@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
@@ -28,16 +29,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.ColorUtils;
-import android.telecom.DisconnectCause;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.answer.bindings.AnswerBindings;
@@ -48,6 +49,8 @@ import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.callpending.CallPendingActivity;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incall.bindings.InCallBindings;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
@@ -66,6 +69,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         InCallButtonUiDelegateFactory,
         VideoCallScreenDelegateFactory,
         PseudoScreenState.StateChangedListener {
+
+  public static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
+  public static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
+  public static final int PENDING_INTENT_REQUEST_CODE_BUBBLE = 2;
 
   private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_ANSWER_SCREEN = "tag_answer_screen";
@@ -112,8 +119,14 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Override
   protected void onCreate(Bundle icicle) {
+    Trace.beginSection("InCallActivity.onCreate");
     LogUtil.i("InCallActivity.onCreate", "");
     super.onCreate(icicle);
+
+    if (getIntent().getBooleanExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY, false)) {
+      Logger.get(this).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL);
+      getIntent().removeExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY);
+    }
 
     if (icicle != null) {
       didShowAnswerScreen = icicle.getBoolean(DID_SHOW_ANSWER_SCREEN_KEY);
@@ -129,6 +142,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
+    sendBroadcast(CallPendingActivity.getFinishBroadcast());
+    Trace.endSection();
   }
 
   @Override
@@ -144,6 +159,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Override
   protected void onStart() {
+    Trace.beginSection("InCallActivity.onStart");
     LogUtil.i("InCallActivity.onStart", "");
     super.onStart();
     isVisible = true;
@@ -154,40 +170,49 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       // Hide the dialpad because there may not be enough room
       showDialpadFragment(false, false);
     }
+    Trace.endSection();
   }
 
   @Override
   protected void onResume() {
+    Trace.beginSection("InCallActivity.onResume");
     LogUtil.i("InCallActivity.onResume", "");
     super.onResume();
     common.onResume();
     PseudoScreenState pseudoScreenState = InCallPresenter.getInstance().getPseudoScreenState();
     pseudoScreenState.addListener(this);
     onPseudoScreenStateChanged(pseudoScreenState.isOn());
+    Trace.endSection();
   }
 
   /** onPause is guaranteed to be called when the InCallActivity goes in the background. */
   @Override
   protected void onPause() {
+    Trace.beginSection("InCallActivity.onPause");
     LogUtil.i("InCallActivity.onPause", "");
     super.onPause();
     common.onPause();
     InCallPresenter.getInstance().getPseudoScreenState().removeListener(this);
+    Trace.endSection();
   }
 
   @Override
   protected void onStop() {
+    Trace.beginSection("InCallActivity.onStop");
     LogUtil.i("InCallActivity.onStop", "");
     super.onStop();
     common.onStop();
     isVisible = false;
+    Trace.endSection();
   }
 
   @Override
   protected void onDestroy() {
+    Trace.beginSection("InCallActivity.onDestroy");
     LogUtil.i("InCallActivity.onDestroy", "");
     super.onDestroy();
     common.onDestroy();
+    Trace.endSection();
   }
 
   @Override
@@ -393,8 +418,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     common.showPostCharWaitDialog(callId, chars);
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectCause disconnectCause) {
-    common.maybeShowErrorDialogOnDisconnect(disconnectCause);
+  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
+    common.maybeShowErrorDialogOnDisconnect(disconnectMessage);
   }
 
   public void dismissPendingDialogs() {
@@ -476,8 +501,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void onPrimaryCallStateChanged() {
+    Trace.beginSection("InCallActivity.onPrimaryCallStateChanged");
     LogUtil.i("InCallActivity.onPrimaryCallStateChanged", "");
     showMainInCallFragment();
+    Trace.endSection();
   }
 
   public void onWiFiToLteHandover(DialerCall call) {
@@ -514,15 +541,18 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   private void showMainInCallFragment() {
+    Trace.beginSection("InCallActivity.showMainInCallFragment");
     // If the activity's onStart method hasn't been called yet then defer doing any work.
     if (!isVisible) {
       LogUtil.i("InCallActivity.showMainInCallFragment", "not visible yet/anymore");
+      Trace.endSection();
       return;
     }
 
     // Don't let this be reentrant.
     if (isInShowMainInCallFragment) {
       LogUtil.i("InCallActivity.showMainInCallFragment", "already in method, bailing");
+      Trace.endSection();
       return;
     }
 
@@ -560,10 +590,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
 
     if (didChangeInCall || didChangeVideo || didChangeAnswer) {
+      Trace.beginSection("InCallActivity.commitTransaction");
       transaction.commitNow();
+      Trace.endSection();
       Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     }
     isInShowMainInCallFragment = false;
+    Trace.endSection();
   }
 
   private ShouldShowUiResult getShouldShowAnswerUi() {
@@ -630,12 +663,22 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       AnswerScreen answerScreen = getAnswerScreen();
       if (answerScreen.getCallId().equals(call.getId())
           && answerScreen.isVideoCall() == call.isVideoCall()
-          && answerScreen.isVideoUpgradeRequest() == isVideoUpgradeRequest) {
+          && answerScreen.isVideoUpgradeRequest() == isVideoUpgradeRequest
+          && !answerScreen.isActionTimeout()) {
+        LogUtil.d(
+            "InCallActivity.showAnswerScreenFragment",
+            "answer fragment exists for same call and has NOT been accepted/rejected/timed out");
         return false;
       }
-      LogUtil.i(
-          "InCallActivity.showAnswerScreenFragment",
-          "answer fragment exists but arguments do not match");
+      if (answerScreen.isActionTimeout()) {
+        LogUtil.i(
+            "InCallActivity.showAnswerScreenFragment",
+            "answer fragment exists but has been accepted/rejected and timed out");
+      } else {
+        LogUtil.i(
+            "InCallActivity.showAnswerScreenFragment",
+            "answer fragment exists but arguments do not match");
+      }
       hideAnswerScreenFragment(transaction);
     }
 
@@ -694,13 +737,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     if (didShowInCallScreen) {
       return false;
     }
-    InCallScreen inCallScreen = getInCallScreen();
-    if (inCallScreen == null) {
-      inCallScreen = InCallBindings.createInCallScreen();
-      transaction.add(R.id.main, inCallScreen.getInCallScreenFragment(), TAG_IN_CALL_SCREEN);
-    } else {
-      transaction.show(inCallScreen.getInCallScreenFragment());
-    }
+    InCallScreen inCallScreen = InCallBindings.createInCallScreen();
+    transaction.add(R.id.main, inCallScreen.getInCallScreenFragment(), TAG_IN_CALL_SCREEN);
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowInCallScreen = true;
     return true;
@@ -712,7 +750,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     InCallScreen inCallScreen = getInCallScreen();
     if (inCallScreen != null) {
-      transaction.hide(inCallScreen.getInCallScreenFragment());
+      transaction.remove(inCallScreen.getInCallScreenFragment());
     }
     didShowInCallScreen = false;
     return true;

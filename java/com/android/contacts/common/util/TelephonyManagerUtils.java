@@ -33,13 +33,4 @@ public class TelephonyManagerUtils {
     final String voiceMailLabel = telephonyManager.getVoiceMailAlphaTag();
     return voiceMailLabel;
   }
-
-  /**
-   * @param context Current application context.
-   * @return True if there is a subscription which supports video calls. False otherwise.
-   */
-  public static boolean hasVideoCallSubscription(Context context) {
-    // TODO: Check the telephony manager's subscriptions to see if any support video calls.
-    return true;
-  }
 }

@@ -18,10 +18,14 @@ package com.android.dialer.binary.aosp;
 
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
+import com.android.dialer.common.concurrent.DialerExecutorModule;
+import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.lightbringer.stub.StubLightbringerModule;
+import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
+import com.android.dialer.storage.StorageModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
 import com.android.incallui.maps.stub.StubMapsModule;
 import com.android.voicemail.impl.VoicemailModule;
@@ -34,7 +38,11 @@ import javax.inject.Singleton;
   modules = {
     CallLogModule.class,
     ContextModule.class,
+    DialerExecutorModule.class,
+    PhoneNumberGeoUtilModule.class,
+    SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
+    StorageModule.class,
     StubCallLocationModule.class,
     StubEnrichedCallModule.class,
     StubMapsModule.class,

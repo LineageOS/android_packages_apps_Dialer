@@ -19,28 +19,15 @@ package com.android.dialer.simulator.impl;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.telecom.TelecomManager;
-import android.telephony.TelephonyManager;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 
 /** Utilities to simulate phone calls. */
 final class SimulatorVoiceCall {
   public static void addNewIncomingCall(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorVoiceCall.addNewIncomingCall");
-    SimulatorConnectionService.register(context);
-
-    Bundle bundle = new Bundle();
     // Set the caller ID to the Google London office.
-    bundle.putString(TelephonyManager.EXTRA_INCOMING_NUMBER, "+44 (0) 20 7031 3000");
-    try {
-      context
-          .getSystemService(TelecomManager.class)
-          .addNewIncomingCall(
-              SimulatorConnectionService.getConnectionServiceHandle(context), bundle);
-    } catch (SecurityException e) {
-      Assert.fail("unable to add call: " + e);
-    }
+    String callerId = "+44 (0) 20 7031 3000";
+    SimulatorConnectionService.addNewIncomingCall(context, new Bundle(), callerId);
   }
 
   private SimulatorVoiceCall() {}

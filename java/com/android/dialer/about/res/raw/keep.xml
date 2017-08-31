@@ -16,4 +16,3 @@
   -->
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:keep="@raw/*"/>
-

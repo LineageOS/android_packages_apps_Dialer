@@ -15,5 +15,5 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="videocall_preview_long">92dp</dimen>
+  <dimen name="videocall_preview_long">96dp</dimen>
 </resources>

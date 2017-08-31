@@ -27,7 +27,7 @@ import java.util.List;
 /** The query for the call voicemail status table. */
 public class VoicemailStatusQuery {
 
-  // TODO: Column indices should be removed in favor of Cursor#getColumnIndex
+  // TODO(maxwelb): Column indices should be removed in favor of Cursor#getColumnIndex
   public static final int SOURCE_PACKAGE_INDEX = 0;
   public static final int SETTINGS_URI_INDEX = 1;
   public static final int VOICEMAIL_ACCESS_URI_INDEX = 2;

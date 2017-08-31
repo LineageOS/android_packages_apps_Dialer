@@ -44,10 +44,10 @@ import com.android.contacts.common.model.dataitem.PhoneDataItem;
 import com.android.contacts.common.model.dataitem.PhotoDataItem;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.ContactLoaderUtils;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.UriUtils;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -522,6 +522,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
     cursorColumnToContentValues(cursor, cv, ContactQuery.TIMES_USED);
     cursorColumnToContentValues(cursor, cv, ContactQuery.LAST_TIME_USED);
     cursorColumnToContentValues(cursor, cv, ContactQuery.CARRIER_PRESENCE);
+
     return cv;
   }
 
@@ -730,6 +731,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         intent.setClassName(servicePackageName, serviceName);
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, RawContacts.CONTENT_ITEM_TYPE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         try {
           context.startService(intent);
         } catch (Exception e) {

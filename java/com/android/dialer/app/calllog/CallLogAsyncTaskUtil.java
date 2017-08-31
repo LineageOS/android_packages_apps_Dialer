@@ -28,6 +28,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.util.PermissionsUtil;
@@ -45,6 +46,7 @@ public class CallLogAsyncTaskUtil {
 
   public static void markVoicemailAsRead(
       @NonNull final Context context, @NonNull final Uri voicemailUri) {
+    LogUtil.enterBlock("CallLogAsyncTaskUtil.markVoicemailAsRead, voicemailUri: " + voicemailUri);
     if (sAsyncTaskExecutor == null) {
       initTaskExecutor();
     }
@@ -64,11 +66,8 @@ public class CallLogAsyncTaskUtil {
                     .update(voicemailUri, values, Voicemails.IS_READ + " = 0", null)
                 > 0) {
               uploadVoicemailLocalChangesToServer(context);
+              CallLogNotificationsService.markAllNewVoicemailsAsOld(context);
             }
-
-            Intent intent = new Intent(context, CallLogNotificationsService.class);
-            intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
-            context.startService(intent);
             return null;
           }
         });
@@ -110,7 +109,8 @@ public class CallLogAsyncTaskUtil {
   }
 
   public static void markCallAsRead(@NonNull final Context context, @NonNull final long[] callIds) {
-    if (!PermissionsUtil.hasPhonePermissions(context)) {
+    if (!PermissionsUtil.hasPhonePermissions(context)
+        || !PermissionsUtil.hasCallLogWritePermissions(context)) {
       return;
     }
     if (sAsyncTaskExecutor == null) {

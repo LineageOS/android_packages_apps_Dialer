@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"分享并拨打电话"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"图片（<xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>）"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"图片"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"拍摄照片"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"无法加载相机图片"</string>
     <string name="allow" msgid="8637148297403066623">"允许"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"要拍摄照片，请授予相机使用权限"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"要分享图片，请授予媒体访问权限"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"拍照"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"选择一张照片"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"发送信息"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"已通过“信息”应用发送照片"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"已通过“信息”应用发送短信"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"正在发送图片…"</string>
 </resources>

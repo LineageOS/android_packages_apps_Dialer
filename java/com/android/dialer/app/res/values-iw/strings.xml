@@ -19,13 +19,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="2202739481132958990">"טלפון"</string>
     <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"לוח החיוג של הטלפון"</string>
-    <string name="dialerIconLabel" msgid="3422916015542176907">"טלפון"</string>
     <string name="callHistoryIconLabel" msgid="7493268743411968630">"היסטוריית שיחות"</string>
-    <string name="action_report_number" msgid="7231442711369737797">"דווח על מספר לא מדויק"</string>
     <string name="action_copy_number_text" msgid="832682558551502319">"העתק מספר"</string>
     <string name="copy_transcript_text" msgid="937904189017310829">"העתק תמלול"</string>
-    <string name="action_block_number" msgid="3669819840999705278">"חסום מספר"</string>
-    <string name="action_unblock_number" msgid="6583611581996402004">"בטל חסימת מספר"</string>
     <string name="action_edit_number_before_call" msgid="8017492815878473837">"ערוך את המספר לפני השיחה"</string>
     <string name="call_log_delete_all" msgid="7852970926906523784">"נקה את היסטוריית השיחות"</string>
     <string name="call_log_trash_voicemail" msgid="6118493534178533972">"מחק דואר קולי"</string>
@@ -34,7 +30,6 @@
     <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"האם לנקות את היסטוריית השיחות?"</string>
     <string name="clearCallLogConfirmation" msgid="6844949465815109166">"פעולה זו תמחק את כל השיחות מההיסטוריה שלך"</string>
     <string name="clearCallLogProgress_title" msgid="995004835687361977">"מנקה היסטוריית שיחות…"</string>
-    <string name="userCallActivityLabel" product="default" msgid="9198964841862577505">"טלפון"</string>
     <string name="notification_missedCallTitle" msgid="8283366068539898486">"שיחה שלא נענתה"</string>
     <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"שיחה עסקית שלא נענתה"</string>
     <string name="notification_missedCallsTitle" msgid="3697442015345089802">"שיחות שלא נענו"</string>
@@ -50,107 +45,68 @@
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>
       <item quantity="one">הודעת דואר קולי</item>
     </plurals>
-    <string name="notification_action_voicemail_play" msgid="5156500902796354071">"הפעל"</string>
     <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"דואר קולי חדש מאת <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="4384373852257757295">"לא ניתן היה להשמיע דואר קולי"</string>
     <string name="voicemail_fetching_content" msgid="572320120918636014">"טוען דואר קולי…"</string>
-    <string name="voicemail_archiving_content" msgid="2415183864104922185">"מעביר את הדואר הקולי לארכיון..."</string>
     <string name="voicemail_fetching_timout" msgid="2128873915839949783">"לא ניתן היה לטעון דואר קולי"</string>
-    <string name="call_log_voicemail_header" msgid="5799424860394542726">"שיחות עם דואר קולי בלבד"</string>
-    <string name="call_log_incoming_header" msgid="1158753168119845168">"שיחות נכנסות בלבד"</string>
-    <string name="call_log_outgoing_header" msgid="149333910997122683">"שיחות יוצאות בלבד"</string>
-    <string name="call_log_missed_header" msgid="6491707499211289630">"שיחות שלא נענו בלבד"</string>
     <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_search_button" msgid="4515570469584782176">"חפש"</string>
-    <string name="description_dial_button" msgid="699794433224646027">"חייג"</string>
-    <string name="description_digits_edittext" msgid="8908702618098485186">"מספר לחיוג"</string>
-    <string name="description_playback_start_stop" msgid="5320452461700750120">"הפעל או הפסק הפעלה"</string>
     <string name="description_playback_speakerphone" msgid="4852027754869750227">"הפעל או כבה את רמקול הטלפון"</string>
     <string name="description_playback_seek" msgid="1340910573254132520">"חפש מיקום בהפעלה"</string>
-    <string name="description_rate_decrease" msgid="5053221110217704199">"האט את מהירות ההפעלה"</string>
-    <string name="description_rate_increase" msgid="4372206363557406700">"הגבר את מהירות ההפעלה"</string>
     <string name="action_menu_call_history_description" msgid="8829135306925008546">"היסטוריית שיחות"</string>
     <string name="action_menu_overflow_description" msgid="7648679686746517341">"אפשרויות נוספות"</string>
     <string name="action_menu_dialpad_button" msgid="1970631633457493180">"לוח חיוג"</string>
-    <string name="menu_show_outgoing_only" msgid="6941420328999801171">"הצג רק שיחות יוצאות"</string>
-    <string name="menu_show_incoming_only" msgid="6018600870504685564">"הצג רק שיחות נכנסות"</string>
-    <string name="menu_show_missed_only" msgid="2266983597575047192">"הצג רק שיחות שלא נענו"</string>
-    <string name="menu_show_voicemails_only" msgid="1114917855179284592">"הצג הודעות דואר קולי בלבד"</string>
-    <string name="menu_show_all_calls" msgid="220054502052344488">"הצג את כל השיחות"</string>
-    <string name="add_2sec_pause" msgid="3417815038173424525">"הוסף השהיה של 2 שניות"</string>
-    <string name="add_wait" msgid="1177723010768282578">"הוסף המתנה"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"הגדרות"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"סימולטור"</string>
-    <string name="menu_allContacts" msgid="8544950176866640863">"כל אנשי הקשר"</string>
-    <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"השתמש במקלדת עם חיוג צלילים"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"חזור לשיחה פעילה"</string>
-    <string name="dialer_addAnotherCall" msgid="3132945651710234674">"הוסף שיחה"</string>
-    <string name="actionIncomingCall" msgid="891346596090030558">"שיחות נכנסות"</string>
-    <string name="description_call_log_play_button" msgid="2349845005022431438">"הפעל דואר קולי"</string>
-    <string name="description_view_contact" msgid="3940984937384372665">"הצג את איש הקשר <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call" msgid="1532402285334775372">"התקשר אל <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"יצירת קיצור דרך לממשק החדש"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"עברת למצב של ביצוע פעולות בכמות גדולה"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"עזבת את המצב של ביצוע פעולות בכמות גדולה"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"בחרת את <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"ביטלת את הבחירה של <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="3341280873855253464">"פרטי יצירת קשר עבור <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_spam_contact_details" msgid="5592578752881528368">"פרטי התקשרות לשיחה שחשודה כספאם <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> שיחות."</string>
     <string name="description_video_call" msgid="3738199365585751727">"שיחת וידאו."</string>
-    <string name="description_send_text_message" msgid="8450269896765568596">"‏שלח SMS אל <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"דואר קולי שעדיין לא נשמע"</string>
     <string name="description_start_voice_search" msgid="8380022725973015261">"התחל חיפוש קולי"</string>
-    <string name="menu_callNumber" msgid="1540773545517152514">"התקשר אל <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="voicemail" msgid="8899540969000957954">"דואר קולי"</string>
-    <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> שניות"</string>
-    <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> דק\' <xliff:g id="SECONDS">%s</xliff:g> שנ\'"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"ההודעה הקולית"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"ההודעות הקוליות"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"כן"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"לא"</string>
-    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"האם למחוק את <xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> שבחרת?"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"ביטול המצב של ביצוע פעולות בכמות גדולה"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"מחיקה"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"ביטול"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> נבחרו"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="two">"<b>"האם למחוק את ההודעות הקוליות האלה? "</b>"</item>
+      <item quantity="many">"<b>"האם למחוק את ההודעות הקוליות האלה? "</b>"</item>
+      <item quantity="other">"<b>"האם למחוק את ההודעות הקוליות האלה? "</b>"</item>
+      <item quantity="one">"<b>"האם למחוק את ההודעה הקולית הזו? "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ב-<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
     <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6317935773274628316">"לא ניתן להתקשר אל המספר הזה"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="6437173108290752604">"כדי להגדיר את הדואר הקולי, עבור אל \'תפריט &gt; הגדרות\'."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1044988101597862159">"כדי להתקשר לדואר קולי, קודם עליך להשבית את מצב הטיסה."</string>
-    <string name="contact_list_loading" msgid="7919825236309749352">"טוען..."</string>
-    <string name="imei" msgid="5214505934662768308">"IMEI"</string>
-    <string name="meid" msgid="3333779521535224028">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6205424276735652071">"‏טוען מכרטיס SIM…"</string>
-    <string name="simContacts_title" msgid="7961069730386378887">"‏אנשי קשר בכרטיס SIM"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"אין אפליקציה זמינה עבור אנשי קשר"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"חיפוש קולי אינו זמין"</string>
-    <string name="call_not_available" msgid="7850148370757361155">"לא ניתן לבצע שיחת טלפון מפני שאפליקציית הטלפון הושבתה."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"חפש אנשי קשר"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"הוסף מספר או חפש אנשי קשר"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"היסטוריית השיחות שלך ריקה"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"התקשר"</string>
     <string name="call_log_missed_empty" msgid="7094936030845062214">"אין שיחות שלא נענו."</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"תיבת הדואר הקולי ריקה."</string>
-    <string name="show_favorites_only" msgid="8089163582448737837">"הצג מועדפים בלבד"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"היסטוריית שיחות"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"הכל"</string>
     <string name="call_log_missed_title" msgid="17254005889268015">"שיחות שלא נענו"</string>
-    <string name="call_log_voicemail_title" msgid="6504826963256437971">"דואר קולי"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"חיוג מהיר"</string>
     <string name="tab_history" msgid="7420269368689503596">"היסטוריית שיחות"</string>
     <string name="tab_all_contacts" msgid="5531733977693943015">"אנשי קשר"</string>
     <string name="tab_voicemail" msgid="2458548090088316246">"דואר קולי"</string>
-    <string name="favorite_hidden" msgid="1077010324849831399">"הוסר מהמועדפים"</string>
-    <string name="favorite_hidden_undo" msgid="5660280521854875320">"בטל"</string>
     <string name="search_shortcut_call_number" msgid="8847918845036880688">"התקשר אל <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"איש קשר חדש"</string>
     <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"הוסף לאיש קשר"</string>
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"‏שלח SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"בצע שיחת וידאו"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"חסום מספר"</string>
-    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> שיחות חדשות שלא נענו"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"עדיין לא הוגדר חיוג מהיר לאף איש קשר"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"הוסף פריט מועדף"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"עדיין אין לך אנשי קשר"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"הוסף איש קשר"</string>
-    <string name="contact_tooltip" msgid="8871614660967439999">"גע בתמונה כדי להציג את כל המספרים או גע והחזק כדי לשנות את הסדר"</string>
     <string name="remove_contact" msgid="2353580570488923668">"הסר"</string>
+    <string name="select_all" msgid="408601760696146245">"בחירת הכל"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"שיחת וידאו"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"שלח הודעה"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"פרטי שיחה"</string>
@@ -166,27 +122,14 @@
     <string name="description_call_action" msgid="4042796498169106545">"התקשר אל <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"שיחת וידאו עם <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"האזן לדואר קולי מאת <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="737337291418966183">"השמע דואר קולי מאת <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="2400610579956333661">"השהה דואר קולי מאת <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="5305509366448404410">"מחק דואר קולי מאת <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="7562208210097630839">
-      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> הודעות דואר קולי חדשות</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> הודעות דואר קולי חדשות</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> הודעות דואר קולי חדשות</item>
-      <item quantity="one">הודעת דואר קולי חדשה <xliff:g id="COUNT_0">%d</xliff:g></item>
-    </plurals>
     <string name="description_create_new_contact_action" msgid="1928282350281564130">"צור איש קשר בשביל <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"הוסף את <xliff:g id="NAMEORNUMBER">^1</xliff:g> לאיש קשר קיים"</string>
     <string name="description_details_action" msgid="2061866409737706174">"פרטי שיחה עבור <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="toast_entry_removed" msgid="6821678859297454838">"נמחקה מהיסטוריית השיחות"</string>
     <string name="call_log_header_today" msgid="1576119097475845293">"היום"</string>
     <string name="call_log_header_yesterday" msgid="5616077776205329563">"אתמול"</string>
     <string name="call_log_header_other" msgid="4940676886254217644">"ישנות יותר"</string>
-    <string name="call_detail_list_header" msgid="1174040565810083473">"רשימת שיחות"</string>
     <string name="voicemail_speaker_on" msgid="3151333608926996668">"הפעל את הרמקול."</string>
     <string name="voicemail_speaker_off" msgid="2530064206962034201">"כבה את הרמקול."</string>
-    <string name="voicemail_play_faster" msgid="2742012169751409677">"הפעל מהר יותר."</string>
-    <string name="voicemail_play_slower" msgid="868588128301087884">"הפעל לאט יותר."</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"התחל או השהה הפעלה."</string>
     <string name="display_options_title" msgid="3880091801055797975">"אפשרויות תצוגה"</string>
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"צלילים ורטט"</string>
@@ -203,7 +146,6 @@
     <string name="call_settings_label" msgid="7824611757200960807">"שיחות"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"חסימת שיחות"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"דואר קולי"</string>
-    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"‏בחר כרטיס SIM להגדרות הדואר הקולי"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"חסימת השיחות מושבתת באופן זמני"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"חסימת השיחות הושבתה מפני שיצרת קשר מטלפון זה עם שירותי חירום במהלך 48 השעות האחרונות. הפונקציה תופעל מחדש באופן אוטומטי בתום 48 השעות."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"יבא מספרים"</string>
@@ -217,12 +159,8 @@
     <string name="block_list" msgid="4701585783411870782">"מספרים חסומים"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> כבר חסום."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"חשבונות לביצוע שיחות"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"הפעל"</string>
-    <string name="permission_multiple_turn_on" msgid="5679888820253829400">"הגדר הרשאות"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"כדי להפעיל חיוג מהיר, הפעל את ההרשאה \'אנשי קשר\'."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"כדי לראות את יומן השיחות, הפעל את ההרשאה \'טלפון\'."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"כדי להציג את אנשי הקשר, הפעל את ההרשאה \'אנשי קשר\'."</string>
-    <string name="permission_no_voicemail" msgid="1908142679289209291">"כדי לגשת לדואר הקולי, הפעל את ההרשאה \'טלפון\'."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"כדי לחפש באנשי הקשר, הפעל את ההרשאה \'אנשי קשר\'."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"כדי להתקשר, הפעל את ההרשאה \'טלפון\'."</string>
     <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"לאפליקציית הטלפון אין הרשאה לכתוב בהגדרות המערכת."</string>
@@ -234,4 +172,10 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ספאם"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"לא ניתן להתקשר כי המכשיר של <xliff:g id="NAME">%1$s</xliff:g> לא מחובר כרגע"</string>
     <string name="about_phone_label" msgid="582991354677973731">"מידע כללי"</string>
+    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"‏התעתוק בוצע על ידי Google"</string>
+    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"‏ההודעה מתומללת על ידי Google…"</string>
+    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"התעתיק אינו זמין"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"הצג"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"השיחה נמחקה. כדי להציג ולמחוק קבצים מצורפים ששותפו בזמן השיחה, עבור ל\'הודעות\'."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"השיחות נמחקו. כדי להציג ולמחוק קבצים מצורפים ששותפו בזמן השיחות, עבור ל\'הודעות\'."</string>
 </resources>

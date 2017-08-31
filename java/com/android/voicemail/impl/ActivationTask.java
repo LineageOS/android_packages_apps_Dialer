@@ -36,7 +36,6 @@ import com.android.voicemail.impl.scheduling.RetryPolicy;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sms.StatusSmsFetcher;
-import com.android.voicemail.impl.sync.OmtpVvmSyncService;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.utils.LoggerUtils;
@@ -258,7 +257,7 @@ public class ActivationTask extends BaseTask {
         VoicemailStatus.edit(context, phoneAccountHandle),
         OmtpEvents.CONFIG_REQUEST_STATUS_SUCCESS);
     clearLegacyVoicemailNotification(context, phoneAccountHandle);
-    SyncTask.start(context, phoneAccountHandle, OmtpVvmSyncService.SYNC_FULL_SYNC);
+    SyncTask.start(context, phoneAccountHandle);
   }
 
   /** Sends a broadcast to the dialer UI to clear legacy voicemail notifications if any. */

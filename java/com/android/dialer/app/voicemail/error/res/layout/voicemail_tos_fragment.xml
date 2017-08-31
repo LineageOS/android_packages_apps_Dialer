@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -9,13 +23,21 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     android:orientation="vertical">
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp"
       android:orientation="vertical">
+      <ImageView
+        android:id="@+id/voicemail_image"
+        android:layout_width="@dimen/voicemail_tos_image_size"
+        android:layout_height="@dimen/voicemail_tos_image_size"
+        android:layout_gravity="center"
+        android:paddingTop="24dp"
+        android:visibility="gone"
+        android:importantForAccessibility="no"/>
       <TextView
         android:id="@+id/tos_message_title"
         android:textStyle="bold"
@@ -39,8 +61,9 @@
 
   <View
     android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="#D2D2D2"/>
+    android:layout_height="0.5dp"
+    android:elevation="1dp"
+    android:background="@drawable/shadow"/>
 
   <LinearLayout
     android:id="@+id/voicemail_tos_button"
@@ -48,10 +71,12 @@
     android:layout_height="wrap_content"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     android:orientation="horizontal">
     <TextView
       android:id="@+id/voicemail_tos_button_decline"
-      style="@style/ErrorActionStyle"
+      style="@style/ErrorActionDeclineStyle"
       android:background="?android:attr/selectableItemBackground"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -62,7 +87,7 @@
       android:layout_weight="1"/>
     <TextView
       android:id="@+id/voicemail_tos_button_accept"
-      style="@style/RaisedErrorActionStyle"
+      style="@style/ErrorActionStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/verizon_terms_and_conditions_accept_english"/>

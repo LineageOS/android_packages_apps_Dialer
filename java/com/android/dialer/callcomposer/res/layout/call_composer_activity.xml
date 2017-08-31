@@ -15,11 +15,11 @@
   ~ limitations under the License
   -->
 <FrameLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/background"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/call_composer_background_color">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/call_composer_background_color">
 
   <LinearLayout
     android:id="@+id/call_composer_container"
@@ -43,6 +43,8 @@
         android:layout_marginTop="@dimen/call_composer_contact_container_margin_top"
         android:paddingTop="@dimen/call_composer_contact_container_padding_top"
         android:paddingBottom="@dimen/call_composer_contact_container_padding_bottom"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:background="@color/dialer_theme_color">
 
         <TextView
@@ -50,6 +52,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
+          android:maxLines="1"
+          android:ellipsize="end"
           android:textColor="@color/background_dialer_white"
           android:textSize="@dimen/call_composer_name_text_size"/>
 
@@ -58,6 +62,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
+          android:maxLines="1"
+          android:ellipsize="end"
           android:textColor="@color/background_dialer_white"
           android:textSize="@dimen/call_composer_number_text_size"/>
       </LinearLayout>
@@ -70,10 +76,22 @@
         android:background="@drawable/call_composer_contact_border"/>
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-      android:id="@+id/call_composer_view_pager"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/call_composer_view_pager_height"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <com.android.dialer.widget.LockableViewPager
+          android:id="@+id/call_composer_view_pager"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/call_composer_view_pager_height"/>
+
+      <ProgressBar
+          android:id="@+id/call_composer_loading"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:visibility="gone"/>
+    </FrameLayout>
   </LinearLayout>
 
   <FrameLayout
@@ -87,7 +105,7 @@
         android:layout_height="@dimen/call_composer_media_bar_height"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="@color/dialer_secondary_color"
+        android:background="@color/dialer_theme_color_dark"
         android:clickable="true">
 
       <ImageView
@@ -96,7 +114,8 @@
           android:layout_height="match_parent"
           android:scaleType="center"
           android:src="@drawable/quantum_ic_camera_alt_white_24"
-          android:background="?android:attr/selectableItemBackgroundBorderless"/>
+          android:background="?android:attr/selectableItemBackgroundBorderless"
+          android:contentDescription="@string/description_call_composer_camera"/>
 
       <ImageView
           android:id="@+id/call_composer_photo"
@@ -104,7 +123,8 @@
           android:layout_height="match_parent"
           android:scaleType="center"
           android:src="@drawable/quantum_ic_photo_white_24"
-          android:background="?android:attr/selectableItemBackgroundBorderless"/>
+          android:background="?android:attr/selectableItemBackgroundBorderless"
+          android:contentDescription="@string/description_call_composer_photo"/>
 
       <ImageView
           android:id="@+id/call_composer_message"
@@ -112,7 +132,8 @@
           android:layout_height="match_parent"
           android:scaleType="center"
           android:src="@drawable/quantum_ic_message_white_24"
-          android:background="?android:attr/selectableItemBackgroundBorderless"/>
+          android:background="?android:attr/selectableItemBackgroundBorderless"
+          android:contentDescription="@string/description_call_composer_message"/>
     </LinearLayout>
 
     <FrameLayout

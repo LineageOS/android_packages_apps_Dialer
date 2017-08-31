@@ -47,6 +47,7 @@ public class VoicemailErrorMessage {
   private final List<Action> actions;
 
   private boolean modal;
+  private Integer imageResourceId;
 
   /** Something the user can click on to resolve an error, such as retrying or calling voicemail */
   public static class Action {
@@ -97,6 +98,16 @@ public class VoicemailErrorMessage {
 
   public VoicemailErrorMessage setModal(boolean value) {
     modal = value;
+    return this;
+  }
+
+  @Nullable
+  public Integer getImageResourceId() {
+    return imageResourceId;
+  }
+
+  public VoicemailErrorMessage setImageResourceId(Integer imageResourceId) {
+    this.imageResourceId = imageResourceId;
     return this;
   }
 

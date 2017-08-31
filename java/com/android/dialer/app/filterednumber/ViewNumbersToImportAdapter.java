@@ -19,9 +19,9 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumbersUtil;
+import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 

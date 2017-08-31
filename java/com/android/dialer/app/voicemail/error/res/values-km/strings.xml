@@ -17,21 +17,20 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"បិទ​របៀប​ជិះ​​យន្តហោះ"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"អ្នក​ប្រហែលជា​​មិន​ទទួល​បាន​ការ​ជូនដំណឹង​ជា​សារ​សំឡេង​រហូត​​ទាល់តែ​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ពេញលេញ​​។ ហៅ​ជា​សារ​សំឡេង​ដើម្បី​​ទទួល​បាន​សារ​ថ្មី​រហូត​សារ​ជា​សំឡេង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​សកម្ម​ពេញលេញ។"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"សូម​ប្រាកដ​ថា​ទូរសព្ទ​របស់​អ្នក​​បាន​ភ្ជាប់​​បណ្ដាញ​អ៊ីនធឺណិត និង​​ព្យាយាម​​ម្ដង​ទៀត។"</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"សូមប្រាកដ​ថា ទូរសព្ទ​របស់​អ្នក​មាន​ភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត រួច​ព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"បិទ​របៀប​លើ​យន្តហោះ និង​ព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"គ្មាន​បណ្ដាញ​អ៊ីនធឺណិត"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"ពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​នឹង​មិន​ជូន​ដំណឹង​ទៅ​អ្នក​ឡើយ។ បើ​អ្នក​​បាន​ភ្ជាប់​វ៉ាយហ្វាយ អ្នក​អាច​ឆែក​រក​មើល​សារ​ជា​សំឡេង​ដោយ​ទាញ​យក​ឥឡូវ​នេះ។"</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"អ្នក​នឹង​មិន​ទទួល​បាន​ការជូនដំណឹង នៅពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​ទេ។ បើ​អ្នក​​ភ្ជាប់​ទៅ Wi-Fi អ្នក​អាច​ពិនិត្យមើល​​សារ​ជា​សំឡេង​ដោយ​ធ្វើ​សមកាលកម្ម​ឥឡូវ​នេះ។"</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"ពេល​មាន​សារ​ជា​សំឡេង​ថ្មី​នឹង​មិន​ជូន​ដំណឹង​ទៅ​អ្នក​ឡើយ។ សូម​បិទ​របៀប​លើ​យន្តហោះ​ដើម្បី​ទាញយក​សារ​សំឡេង​របស់​អ្នក។"</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"ទូរសព្ទ​របស់​អ្នក​ត្រូវ​​ភ្ជាប់​អ៊ីនធឺណិតតាម​ទិន្នន័យ​ទូរសព្ទ​​​ចល័ត​ដើម្បី​អាច​ពិនិត្យ​មើល​សារ​​ជា​សំឡេង​បាន​។"</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"ទូរសព្ទ​របស់​អ្នក​ត្រូវ​​ភ្ជាប់​អ៊ីនធឺណិតតាម​ទិន្នន័យ​ទូរសព្ទ​​​ចល័ត​ ដើម្បី​អាច​ពិនិត្យ​មើល​សារ​​ជា​សំឡេង​បាន​។"</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​ Wi-Fi ឬ​ការតភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ដើម្បី​​ស្ដាប់​សារ​ជា​សំឡេង​។"</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"ព្យាយាម​ម្ដង​ទៀត នៅពេល​​​ការតភ្ជាប់​បណ្ដាញ​ទូរសព្ទ​ចល័ត​ប្រសើរ។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ដើម្បី​​ស្ដាប់​សារ​ជា​សំឡេង​។"</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"សូមព្យាយាម​ម្ដង​ទៀត នៅពេលការតភ្ជាប់ Wi-Fi ឬ​​​ទិន្នន័យ​​ទូរសព្ទ​ចល័តរបស់អ្នក​បានប្រសើរឡើង។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ពិនិត្យមើល​សារ​ជា​សំឡេង​​បាន។"</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"សូមព្យាយាម​ម្ដង​ទៀត នៅពេល​​​​ការតភ្ជាប់​ទិន្នន័យ​​ទូរសព្ទ​ចល័តរបស់អ្នកបាន​ប្រសើរឡើង។ អ្នក​នៅ​តែ​អាច​ហៅ​ទូរសព្ទ​ ដើម្បី​​ពិនិត្យមើលសារ​ជា​សំឡេង​បាន។"</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​​បាន​ទេ។"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"អ្នក​នៅ​តែ​អាច​ហៅ​​ទូរសព្ទ​ដើម្បី​ស្ដាប់​សារ​ជា​សំឡេង។"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​សារ​​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​​​ទេ។"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ប្រអប់​សារ​របស់​អ្នក​ពេញហើយ។ ដើម្បី​បង្កើន​ទំហំ​ផ្ទុក​ទំនេរ សូម​បើក​ទំហំផ្ទុក​បន្ថែម ដើម្បី​ឲ្យ Google អាច​គ្រប់គ្រង និង​បម្រុងទុក​សារ​សារ​ជា​សំឡេង​របស់​អ្នក​បាន។"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"កំណត់កូដ PIN ​សារ​ជាសំឡេង​របស់​អ្នក"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"អ្នក​នឹង​ត្រូវការកូដ PIN សារ​ជាសំឡេងមួយ ​គ្រប់​ពេល​ដែល​អ្នក​ហៅ ​​ដើម្បី​ចូល​ដំណើរការ​សារ​ជា​សំឡេង​របស់​អ្នក។"</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"បញ្ហាមិនស្គាល់"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ការ​កំណត់​របៀប​​ពេល​ជិះ​យន្តហោះ"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"កំណត់​កូដ PIN"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"ព្យាយាម​ម្តង​ទៀត"</string>
@@ -102,9 +100,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"មានអ្វីមួយមិនប្រក្រតី"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9999។"</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"លក្ខខណ្ឌ​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"អ្នក​ត្រូវតែ​យល់ព្រម​នឹង​​លក្ខខណ្ឌ​ប្រើប្រាស់​របស់​ Verizon Wireless ដើម្បី​អាច​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ៖\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nអ្នក​ត្រូវតែ​យល់ព្រម​នឹង​​គោលការណ៍ និង​លក្ខខណ្ឌ​របស់ Verizon Wireless ដើម្បី​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ៖\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"បើក​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"សារ​ជា​សំឡេង​ដែល​​មើល​ឃើញ​នឹង​ត្រូវ​បាន​បិទ បើ​លក្ខខណ្ឌ​ប្រើប្រាស់​ត្រូវ​បាន​បដិសេធ។"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"បិទសារជាសំឡេងដែលមើលឃើញ"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"ការធ្វើ​ប្រតិចារឹក​សារ​ជាសំឡេង​នឹង​ត្រូវ​បិទ ប្រសិនបើ​គោលការណ៍ និង​លក្ខខណ្ឌ​ត្រូវបាន​បដិសេធ។"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"បិទ​ការធ្វើ​ប្រតិចារឹក​សារ​ជា​សំឡេង"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"សារ​ជា​សំឡេង​នឹង​អាច​ចូល​ស្ដាប់​បាន​​ដោយ​ហៅ​ទៅ *86។ កំណត់​កូដ PIN នៃ​សារ​ជា​សំឡេង​ថ្មី ដើម្បី​ចាប់ផ្ដើម​ដំណើរការ។"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"កំណត់​កូដ PIN"</string>
 </resources>

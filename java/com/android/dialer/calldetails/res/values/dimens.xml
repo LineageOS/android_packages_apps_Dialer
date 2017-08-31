@@ -15,8 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="call_details_primary_text_size">16sp</dimen>
-  <dimen name="call_details_secondary_text_size">14sp</dimen>
   <dimen name="call_details_top_margin">6dp</dimen>
 
   <!-- contact container -->
@@ -28,13 +26,11 @@
   <dimen name="call_back_button_size">48dp</dimen>
 
   <!-- call entry container -->
-  <dimen name="call_entry_icon_size">24dp</dimen>
   <dimen name="call_entry_padding">16dp</dimen>
   <dimen name="call_entry_bottom_padding">14dp</dimen>
   <dimen name="call_entry_text_left_margin">72dp</dimen>
 
   <!-- EC container -->
-  <dimen name="call_details_ec_text_size">12sp</dimen>
   <dimen name="ec_container_height">48dp</dimen>
   <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>

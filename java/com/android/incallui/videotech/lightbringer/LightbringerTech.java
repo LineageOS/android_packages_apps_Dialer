@@ -17,11 +17,17 @@
 package com.android.incallui.videotech.lightbringer;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.telecom.Call;
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -30,15 +36,18 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 public class LightbringerTech implements VideoTech, LightbringerListener {
   private final Lightbringer lightbringer;
   private final VideoTechListener listener;
+  private final Call call;
   private final String callingNumber;
   private int callState = Call.STATE_NEW;
 
   public LightbringerTech(
       @NonNull Lightbringer lightbringer,
       @NonNull VideoTechListener listener,
+      @NonNull Call call,
       @NonNull String callingNumber) {
     this.lightbringer = Assert.isNotNull(lightbringer);
     this.listener = Assert.isNotNull(listener);
+    this.call = Assert.isNotNull(call);
     this.callingNumber = Assert.isNotNull(callingNumber);
 
     lightbringer.registerListener(this);
@@ -46,7 +55,33 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    return callState == Call.STATE_ACTIVE && lightbringer.isReachable(context, callingNumber);
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on O+");
+      return false;
+    }
+
+    if (!ConfigProviderBindings.get(context)
+        .getBoolean("enable_lightbringer_video_upgrade", true)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade disabled by flag");
+      return false;
+    }
+
+    if (callState != Call.STATE_ACTIVE) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
+      return false;
+    }
+
+    if (!TelecomManagerCompat.supportsHandover()) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, telephony support missing");
+      return false;
+    }
+
+    if (!lightbringer.supportsUpgrade(context, callingNumber)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, number does not support it");
+      return false;
+    }
+
+    return true;
   }
 
   @Override
@@ -80,13 +115,19 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
+  public void onRemovedFromCallList() {
+    lightbringer.unregisterListener(this);
+  }
+
+  @Override
   public int getSessionModificationState() {
     return SessionModificationState.NO_REQUEST;
   }
 
   @Override
   public void upgradeToVideo() {
-    // TODO: upgrade to a video call
+    listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
+    lightbringer.requestUpgrade(call);
   }
 
   @Override
@@ -120,18 +161,20 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
-  public void pause() {
+  public void pause() {}
+
+  @Override
+  public void unpause() {}
+
+  @Override
+  public void setCamera(@Nullable String cameraId) {
     throw Assert.createUnsupportedOperationFailException();
   }
 
   @Override
-  public void unpause() {
-    throw Assert.createUnsupportedOperationFailException();
-  }
-
-  @Override
-  public void setCamera(String cameraId) {
-    throw Assert.createUnsupportedOperationFailException();
+  public void becomePrimary() {
+    listener.onImpressionLoggingNeeded(
+        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_LIGHTBRINGER);
   }
 
   @Override

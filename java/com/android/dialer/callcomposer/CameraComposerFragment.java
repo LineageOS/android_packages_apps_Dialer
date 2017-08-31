@@ -17,7 +17,6 @@
 package com.android.dialer.callcomposer;
 
 import android.Manifest;
-import android.Manifest.permission;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
@@ -89,17 +88,17 @@ public class CameraComposerFragment extends CallComposerFragment
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle bundle) {
     View root = inflater.inflate(R.layout.fragment_camera_composer, container, false);
     permissionView = root.findViewById(R.id.permission_view);
-    loading = (ProgressBar) root.findViewById(R.id.loading);
-    cameraView = (CameraMediaChooserView) root.findViewById(R.id.camera_view);
+    loading = root.findViewById(R.id.loading);
+    cameraView = root.findViewById(R.id.camera_view);
     shutter = cameraView.findViewById(R.id.camera_shutter_visual);
-    exitFullscreen = (ImageButton) cameraView.findViewById(R.id.camera_exit_fullscreen);
-    fullscreen = (ImageButton) cameraView.findViewById(R.id.camera_fullscreen);
-    swapCamera = (ImageButton) cameraView.findViewById(R.id.swap_camera_button);
-    capture = (ImageButton) cameraView.findViewById(R.id.camera_capture_button);
-    cancel = (ImageButton) cameraView.findViewById(R.id.camera_cancel_button);
-    focus = (RenderOverlay) cameraView.findViewById(R.id.focus_visual);
-    preview = (CameraPreviewHost) cameraView.findViewById(R.id.camera_preview);
-    previewImageView = (ImageView) root.findViewById(R.id.preview_image_view);
+    exitFullscreen = cameraView.findViewById(R.id.camera_exit_fullscreen);
+    fullscreen = cameraView.findViewById(R.id.camera_fullscreen);
+    swapCamera = cameraView.findViewById(R.id.swap_camera_button);
+    capture = cameraView.findViewById(R.id.camera_capture_button);
+    cancel = cameraView.findViewById(R.id.camera_cancel_button);
+    focus = cameraView.findViewById(R.id.focus_visual);
+    preview = cameraView.findViewById(R.id.camera_preview);
+    previewImageView = root.findViewById(R.id.preview_image_view);
 
     exitFullscreen.setOnClickListener(this);
     fullscreen.setOnClickListener(this);
@@ -107,11 +106,12 @@ public class CameraComposerFragment extends CallComposerFragment
     capture.setOnClickListener(this);
     cancel.setOnClickListener(this);
 
-    if (!PermissionsUtil.hasPermission(getContext(), permission.CAMERA)) {
+
+    if (!PermissionsUtil.hasCameraPermissions(getContext())) {
       LogUtil.i("CameraComposerFragment.onCreateView", "Permission view shown.");
       Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_DISPLAYED);
-      ImageView permissionImage = (ImageView) permissionView.findViewById(R.id.permission_icon);
-      TextView permissionText = (TextView) permissionView.findViewById(R.id.permission_text);
+      ImageView permissionImage = permissionView.findViewById(R.id.permission_icon);
+      TextView permissionText = permissionView.findViewById(R.id.permission_text);
       allowPermission = permissionView.findViewById(R.id.allow);
 
       allowPermission.setOnClickListener(this);
@@ -131,6 +131,9 @@ public class CameraComposerFragment extends CallComposerFragment
   }
 
   private void setupCamera() {
+    if (!PermissionsUtil.hasCameraPrivacyToastShown(getContext())) {
+      PermissionsUtil.showCameraPermissionToast(getContext());
+    }
     CameraManager.get().setListener(this);
     preview.setShown();
     CameraManager.get().setRenderOverlay(focus);
@@ -323,7 +326,11 @@ public class CameraComposerFragment extends CallComposerFragment
   /** Updates the state of the buttons and overlays based on the current state of the view */
   private void updateViewState() {
     Assert.isNotNull(cameraView);
-    Assert.isNotNull(getContext());
+    if (isDetached() || getContext() == null) {
+      LogUtil.i(
+          "CameraComposerFragment.updateViewState", "Fragment detached, cannot update view state");
+      return;
+    }
 
     boolean isCameraAvailable = CameraManager.get().isCameraAvailable();
     boolean uriReadyOrProcessing = cameraUri != null || processingUri;
@@ -334,6 +341,12 @@ public class CameraComposerFragment extends CallComposerFragment
       previewImageView.setScaleX(cameraDirection == CameraInfo.CAMERA_FACING_FRONT ? -1 : 1);
     } else {
       previewImageView.setVisibility(View.GONE);
+    }
+
+    if (cameraDirection == CameraInfo.CAMERA_FACING_FRONT) {
+      swapCamera.setContentDescription(getString(R.string.description_camera_switch_camera_rear));
+    } else {
+      swapCamera.setContentDescription(getString(R.string.description_camera_switch_camera_facing));
     }
 
     if (cameraUri == null && isCameraAvailable) {
@@ -384,6 +397,7 @@ public class CameraComposerFragment extends CallComposerFragment
       Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_GRANTED);
       LogUtil.i("CameraComposerFragment.onRequestPermissionsResult", "Permission granted.");
       permissionView.setVisibility(View.GONE);
+      PermissionsUtil.setCameraPrivacyToastShown(getContext());
       setupCamera();
     } else if (requestCode == CAMERA_PERMISSION) {
       Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_DENIED);

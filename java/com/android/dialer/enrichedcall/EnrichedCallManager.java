@@ -16,7 +16,6 @@
 
 package com.android.dialer.enrichedcall;
 
-import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,9 +23,8 @@ import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.videoshare.VideoShareListener;
+import com.android.dialer.enrichedcall.videoshare.VideoShareSession;
 import com.android.dialer.multimedia.MultimediaData;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Map;
 
@@ -81,27 +79,6 @@ public interface EnrichedCallManager {
   @MainThread
   void clearCachedData();
 
-  /** Possible states for call composer sessions. */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-    STATE_NONE,
-    STATE_STARTING,
-    STATE_STARTED,
-    STATE_START_FAILED,
-    STATE_MESSAGE_SENT,
-    STATE_MESSAGE_FAILED,
-    STATE_CLOSED,
-  })
-  @interface State {}
-
-  int STATE_NONE = 0;
-  int STATE_STARTING = STATE_NONE + 1;
-  int STATE_STARTED = STATE_STARTING + 1;
-  int STATE_START_FAILED = STATE_STARTED + 1;
-  int STATE_MESSAGE_SENT = STATE_START_FAILED + 1;
-  int STATE_MESSAGE_FAILED = STATE_MESSAGE_SENT + 1;
-  int STATE_CLOSED = STATE_MESSAGE_FAILED + 1;
-
   /**
    * Starts a call composer session with the given remote number.
    *
@@ -119,7 +96,7 @@ public interface EnrichedCallManager {
    * @param sessionId the id for the session. See {@link #startCallComposerSession(String)}
    * @param data the {@link MultimediaData}
    * @throws IllegalArgumentException if there's no open session with the given number
-   * @throws IllegalStateException if the session isn't in the {@link #STATE_STARTED} state
+   * @throws IllegalStateException if the session isn't in the {@link Session#STATE_STARTED} state
    */
   @MainThread
   void sendCallComposerData(long sessionId, @NonNull MultimediaData data);
@@ -185,11 +162,48 @@ public interface EnrichedCallManager {
   @Nullable
   Session getSession(long sessionId);
 
+  /**
+   * Returns a list containing viewable string representations of all existing sessions.
+   *
+   * <p>Intended for debug display purposes only.
+   */
+  @MainThread
+  @NonNull
+  List<String> getAllSessionsForDisplay();
+
   @NonNull
   Filter createIncomingCallComposerFilter();
 
   @NonNull
   Filter createOutgoingCallComposerFilter();
+
+  /** Receives updates when the state of an historical data changes. */
+  interface HistoricalDataChangedListener {
+
+    /**
+     * Callback fired when historical data changes. Listeners should call {@link
+     * #getAllHistoricalData(String, CallDetailsEntries)} to retrieve the new data.
+     */
+    void onHistoricalDataChanged();
+  }
+
+  /**
+   * Registers the given {@link HistoricalDataChangedListener}.
+   *
+   * <p>As a result of this method, the listener will receive updates when the state of any enriched
+   * call historical data changes.
+   */
+  @MainThread
+  void registerHistoricalDataChangedListener(@NonNull HistoricalDataChangedListener listener);
+
+  /**
+   * Unregisters the given {@link HistoricalDataChangedListener}.
+   *
+   * <p>As a result of this method, the listener will not receive updates when the state of enriched
+   * call historical data changes.
+   */
+  @MainThread
+  void unregisterHistoricalDataChangedListener(@NonNull HistoricalDataChangedListener listener);
 
   /**
    * Starts an asynchronous process to get all historical data for the given number and set of
@@ -211,6 +225,10 @@ public interface EnrichedCallManager {
   @MainThread
   Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @NonNull String number, @NonNull CallDetailsEntries entries);
+
+  /** Returns true if any enriched calls have been made or received. */
+  @MainThread
+  boolean hasStoredData();
 
   /**
    * Unregisters the given {@link StateChangedListener}.
@@ -308,6 +326,14 @@ public interface EnrichedCallManager {
    */
   @MainThread
   long getVideoShareInviteSessionId(@NonNull String number);
+
+  /**
+   * Returns the {@link VideoShareSession} for the given sessionId, or {@code null} if no session
+   * exists.
+   */
+  @MainThread
+  @Nullable
+  VideoShareSession getVideoShareSession(long sessionId);
 
   /**
    * Ends the given video share session.

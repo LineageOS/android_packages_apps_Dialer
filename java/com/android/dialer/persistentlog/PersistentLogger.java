@@ -26,6 +26,7 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.strictmode.DialerStrictMode;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * com.google.android.apps.dialer.crashreporter.SilentCrashReporter} is expected to handle such
  * cases.
  *
- * <p>{@link #logText(String, String)} should be used to log ad-hoc text logs. TODO: switch
+ * <p>{@link #logText(String, String)} should be used to log ad-hoc text logs. TODO(twyen): switch
  * to structured logging
  */
 public final class PersistentLogger {
@@ -110,6 +111,16 @@ public final class PersistentLogger {
     loggerThreadHandler.sendEmptyMessageDelayed(MESSAGE_FLUSH, FLUSH_DELAY_MILLIS);
   }
 
+  @VisibleForTesting
+  /** write raw bytes directly to the log file, likely corrupting it. */
+  static void rawLogForTest(byte[] data) {
+    try {
+      fileHandler.writeRawLogsForTest(data);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   /** Dump the log as human readable string. Blocks until the dump is finished. */
   @NonNull
   @WorkerThread
@@ -167,7 +178,7 @@ public final class PersistentLogger {
   }
 
   private static byte[] buildTextLog(String tag, String string) {
-    Calendar c = Calendar.getInstance();
+    Calendar c = DialerStrictMode.bypass(() -> Calendar.getInstance());
     return String.format("%tm-%td %tH:%tM:%tS.%tL - %s - %s", c, c, c, c, c, c, tag, string)
         .getBytes(StandardCharsets.UTF_8);
   }

@@ -33,8 +33,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.List;
 import java.util.Locale;
@@ -72,7 +72,7 @@ public class CountryDetector {
   // exceedingly rare event that the device does not have a default locale set for some reason.
   private static final String DEFAULT_COUNTRY_ISO = "US";
 
-  @VisibleForTesting static CountryDetector sInstance;
+  @VisibleForTesting public static CountryDetector sInstance;
 
   private final TelephonyManager telephonyManager;
   private final LocaleProvider localeProvider;
@@ -80,7 +80,7 @@ public class CountryDetector {
   private final Context appContext;
 
   @VisibleForTesting
-  CountryDetector(
+  public CountryDetector(
       Context appContext,
       TelephonyManager telephonyManager,
       LocationManager locationManager,
@@ -192,7 +192,7 @@ public class CountryDetector {
   }
 
   /** Interface for accessing the current locale. */
-  interface LocaleProvider {
+  public interface LocaleProvider {
     Locale getLocale();
   }
 
@@ -216,7 +216,9 @@ public class CountryDetector {
 
   private static void processLocationUpdate(
       Context appContext, Geocoder geocoder, Location location) {
-    DialerExecutors.createNonUiTaskBuilder(new GeocodeCountryWorker(geocoder))
+    DialerExecutorComponent.get(appContext)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new GeocodeCountryWorker(geocoder))
         .onSuccess(
             country -> {
               if (country == null) {

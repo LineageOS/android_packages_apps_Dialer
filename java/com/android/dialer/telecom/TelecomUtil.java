@@ -29,21 +29,37 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+import android.util.Pair;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Performs permission checks before calling into TelecomManager. Each method is self-explanatory -
  * perform the required check and return the fallback default if the permission is missing,
  * otherwise return the value from TelecomManager.
  */
-public class TelecomUtil {
+public abstract class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
   private static boolean sWarningLogged = false;
-  private static Boolean isDefaultDialerForTesting;
-  private static Boolean hasPermissionForTesting;
+
+  private static TelecomUtilImpl instance = new TelecomUtilImpl();
+
+  /**
+   * Cache for {@link #isVoicemailNumber(Context, PhoneAccountHandle, String)}. Both
+   * PhoneAccountHandle and number are cached because multiple numbers might be mapped to true, and
+   * comparing with {@link #getVoicemailNumber(Context, PhoneAccountHandle)} will not suffice.
+   */
+  private static final Map<Pair<PhoneAccountHandle, String>, Boolean> isVoicemailNumberCache =
+      new ConcurrentHashMap<>();
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setInstanceForTesting(TelecomUtilImpl instanceForTesting) {
+    instance = instanceForTesting;
+  }
 
   public static void showInCallScreen(Context context, boolean showDialpad) {
     if (hasReadPhoneStatePermission(context)) {
@@ -125,18 +141,30 @@ public class TelecomUtil {
   }
 
   public static boolean isInCall(Context context) {
-    if (hasReadPhoneStatePermission(context)) {
-      return getTelecomManager(context).isInCall();
-    }
-    return false;
+    return instance.isInCall(context);
   }
 
+  /**
+   * {@link TelecomManager#isVoiceMailNumber(PhoneAccountHandle, String)} takes about 10ms, which is
+   * way too slow for regular purposes. This method will cache the result for the life time of the
+   * process. The cache will not be invalidated, for example, if the voicemail number is changed by
+   * setting up apps like Google Voicemail, the result will be wrong. These events are rare.
+   */
   public static boolean isVoicemailNumber(
       Context context, PhoneAccountHandle accountHandle, String number) {
-    if (hasReadPhoneStatePermission(context)) {
-      return getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+    if (TextUtils.isEmpty(number)) {
+      return false;
     }
-    return false;
+    Pair<PhoneAccountHandle, String> cacheKey = new Pair<>(accountHandle, number);
+    if (isVoicemailNumberCache.containsKey(cacheKey)) {
+      return isVoicemailNumberCache.get(cacheKey);
+    }
+    boolean result = false;
+    if (hasReadPhoneStatePermission(context)) {
+      result = getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+    }
+    isVoicemailNumberCache.put(cacheKey, result);
+    return result;
   }
 
   @Nullable
@@ -189,43 +217,47 @@ public class TelecomUtil {
   }
 
   private static boolean hasPermission(Context context, String permission) {
-    if (hasPermissionForTesting != null) {
-      return hasPermissionForTesting;
-    }
-    return ContextCompat.checkSelfPermission(context, permission)
-        == PackageManager.PERMISSION_GRANTED;
-  }
-
-  public static boolean isDefaultDialer(Context context) {
-    if (isDefaultDialerForTesting != null) {
-      return isDefaultDialerForTesting;
-    }
-    final boolean result =
-        TextUtils.equals(
-            context.getPackageName(), getTelecomManager(context).getDefaultDialerPackage());
-    if (result) {
-      sWarningLogged = false;
-    } else {
-      if (!sWarningLogged) {
-        // Log only once to prevent spam.
-        LogUtil.w(TAG, "Dialer is not currently set to be default dialer");
-        sWarningLogged = true;
-      }
-    }
-    return result;
+    return instance.hasPermission(context, permission);
   }
 
   private static TelecomManager getTelecomManager(Context context) {
     return (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
   }
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setIsDefaultDialerForTesting(Boolean defaultDialer) {
-    isDefaultDialerForTesting = defaultDialer;
+  public static boolean isDefaultDialer(Context context) {
+    return instance.isDefaultDialer(context);
   }
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setHasPermissionForTesting(Boolean hasPermission) {
-    hasPermissionForTesting = hasPermission;
+  /** Contains an implementation for {@link TelecomUtil} methods */
+  @VisibleForTesting()
+  public static class TelecomUtilImpl {
+
+    public boolean isInCall(Context context) {
+      if (hasReadPhoneStatePermission(context)) {
+        return getTelecomManager(context).isInCall();
+      }
+      return false;
+    }
+
+    public boolean hasPermission(Context context, String permission) {
+      return ContextCompat.checkSelfPermission(context, permission)
+          == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public boolean isDefaultDialer(Context context) {
+      final boolean result =
+          TextUtils.equals(
+              context.getPackageName(), getTelecomManager(context).getDefaultDialerPackage());
+      if (result) {
+        sWarningLogged = false;
+      } else {
+        if (!sWarningLogged) {
+          // Log only once to prevent spam.
+          LogUtil.w(TAG, "Dialer is not currently set to be default dialer");
+          sWarningLogged = true;
+        }
+      }
+      return result;
+    }
   }
 }

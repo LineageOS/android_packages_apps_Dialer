@@ -22,18 +22,53 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class EnrichedCallCapabilities {
 
-  public static final EnrichedCallCapabilities NO_CAPABILITIES =
-      EnrichedCallCapabilities.create(false, false, false);
+  public static final EnrichedCallCapabilities NO_CAPABILITIES = builder().build();
 
-  public static EnrichedCallCapabilities create(
-      boolean supportsCallComposer, boolean supportsPostCall, boolean supportsVideoCall) {
-    return new AutoValue_EnrichedCallCapabilities(
-        supportsCallComposer, supportsPostCall, supportsVideoCall);
+  public static final EnrichedCallCapabilities ALL_CAPABILITIES =
+      builder()
+          .setCallComposerCapable(true)
+          .setPostCallCapable(true)
+          .setVideoShareCapable(true)
+          .build();
+
+  public abstract boolean isCallComposerCapable();
+
+  public abstract boolean isPostCallCapable();
+
+  public abstract boolean isVideoShareCapable();
+
+  public abstract Builder toBuilder();
+
+  /**
+   * Returns {@code true} if these capabilities represent those of a user that is temporarily
+   * unavailable. This is an indication that capabilities should be refreshed.
+   */
+  public abstract boolean isTemporarilyUnavailable();
+
+  /**
+   * Creates an instance of {@link Builder}.
+   *
+   * <p>Unless otherwise set, all fields will default to false.
+   */
+  public static Builder builder() {
+    return new AutoValue_EnrichedCallCapabilities.Builder()
+        .setCallComposerCapable(false)
+        .setPostCallCapable(false)
+        .setVideoShareCapable(false)
+        .setTemporarilyUnavailable(false);
   }
 
-  public abstract boolean supportsCallComposer();
+  /** Creates instances of {@link EnrichedCallCapabilities}. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setCallComposerCapable(boolean isCapable);
 
-  public abstract boolean supportsPostCall();
+    public abstract Builder setPostCallCapable(boolean isCapable);
 
-  public abstract boolean supportsVideoShare();
+    public abstract Builder setVideoShareCapable(boolean isCapable);
+
+    public abstract Builder setTemporarilyUnavailable(boolean temporarilyUnavailable);
+
+    public abstract EnrichedCallCapabilities build();
+  }
 }

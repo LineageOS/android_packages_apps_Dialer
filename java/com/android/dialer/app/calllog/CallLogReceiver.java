@@ -39,10 +39,10 @@ public class CallLogReceiver extends BroadcastReceiver {
     if (VoicemailContract.ACTION_NEW_VOICEMAIL.equals(intent.getAction())) {
       checkVoicemailStatus(context);
       PendingResult pendingResult = goAsync();
-      DefaultVoicemailNotifier.updateVoicemailNotifications(context, pendingResult::finish);
+      VisualVoicemailUpdateTask.scheduleTask(context, pendingResult::finish);
     } else if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
       PendingResult pendingResult = goAsync();
-      DefaultVoicemailNotifier.updateVoicemailNotifications(context, pendingResult::finish);
+      VisualVoicemailUpdateTask.scheduleTask(context, pendingResult::finish);
     } else {
       LogUtil.w("CallLogReceiver.onReceive", "could not handle: " + intent);
     }
