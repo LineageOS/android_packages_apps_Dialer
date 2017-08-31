@@ -17,21 +17,20 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Vala imodi yendiza"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Yenza kusebenze ivoyisimeyili ebonakalayo"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Kungenzeka ungatholi izaziso zevoyisimeyili kuze kwenziwe kusebenze ngokugcwele ivoyisimeyili ebonakalayo. Shayela ivoyisimeyili ukuze uthole imilayezo emisha kuze kwenziwe kusebenze ngokugcwele ivoyisimeyili."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Ayikwazi ukwenza kusebenze ivoyisimeyili ebonakalayo"</string>
-    <string name="voicemail_error_not_activate_no_signal_message" msgid="4511975927252363280">"Qiniseka ukuthi ifoni yakho inokuxhumeka kweselula uphinde uzame futhi."</string>
+    <string name="voicemail_error_not_activate_no_signal_message" msgid="2929059808327964011">"Qiniseka ukuthi ifoni yakho inoxhumo lenethiwekhi leselula bese uyazama futhi."</string>
     <string name="voicemail_error_not_activate_no_signal_airplane_mode_message" msgid="2005255281543281215">"Vala imodi yendiza uphinde uzame futhi."</string>
     <string name="voicemail_error_no_signal_title" msgid="341954685733680219">"Akukho ukuxhumana"</string>
-    <string name="voicemail_error_no_signal_message" msgid="8557509373166292640">"Ngeke uze waziswe ngamavoyisimeyili amasha. Uma uku-Wi-Fi, ungahlolela ivoyisimeyili ngokuvumelanisa manje."</string>
+    <string name="voicemail_error_no_signal_message" msgid="2626509025723748371">"Ngeke uze waziswe ngamavoyisimeyili amasha. Uma uku-Wi-Fi, ungahlolela ivoyisimeyili ngokuvumelanisa manje."</string>
     <string name="voicemail_error_no_signal_airplane_mode_message" msgid="8553646558282754276">"Ngeke waziswe ngamavoyisimeyili amasha. Vala imodi yendiza ukuze uvumelanise ivoyisimeyili yakho."</string>
-    <string name="voicemail_error_no_signal_cellular_required_message" msgid="8461294934887808098">"Ifoni yakho idinga ukuxhumeka kwedatha yeselula ukuze ihlole ivoyisimeyili."</string>
+    <string name="voicemail_error_no_signal_cellular_required_message" msgid="6452586752169746399">"Ifoni yakho idinga ukuxhumeka kwedatha yeselula ukuze ihlole ivoyisimeyili."</string>
     <string name="voicemail_error_activation_failed_title" msgid="3823477898681399391">"Ayikwazi ukwenza kusebenze ivoyisimeyili ebonakalayo"</string>
     <string name="voicemail_error_activation_failed_message" msgid="2188301459207765442">"Usengashaya ukuze uhlole ivoyisimeyili"</string>
     <string name="voicemail_error_no_data_title" msgid="8127858252892092732">"Ayikwazi ukubuyekeza ivoyisimeyili ebonakalayo"</string>
-    <string name="voicemail_error_no_data_message" msgid="3723828868450752165">"Zama futhi uma i-Wi-Fi yakho noma ukuxhumeka kwakho kweselula kungcono. Usengashaya ukuze uhlole ivoyisimeyili."</string>
-    <string name="voicemail_error_no_data_cellular_required_message" msgid="2952045163270555699">"Zama futhi uma ukuxhumeka kwakho kweselula sekungcono. Usengashaya ukuze uhlole ivoyisimeyili."</string>
+    <string name="voicemail_error_no_data_message" msgid="6634124460113498265">"Zama futhi uma i-Wi-Fi yakho noma ukuxhumeka kwakho kwedatha kungcono. Usengashaya ukuze uhlole ivoyisimeyili."</string>
+    <string name="voicemail_error_no_data_cellular_required_message" msgid="2521491029817662357">"Zama futhi uma ukuxhumeka kwakho kwedaha sekungcono. Usengashaya ukuze uhlole ivoyisimeyili."</string>
     <string name="voicemail_error_bad_config_title" msgid="527594487104462966">"Ayikwazi ukubuyekeza ivoyisimeyili ebonakalayo"</string>
     <string name="voicemail_error_bad_config_message" msgid="2692955418930476771">"Usengashaya ukuze uhlole ivoyisimeyili"</string>
     <string name="voicemail_error_communication_title" msgid="9183339646110368169">"Ayikwazi ukubuyekeza ivoyisimeyili ebonakalayo"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Ibhokisi lakho lemeyili cishe ligcwele. Ukuze ukhulule isikhala, vula isitoreji esingeziwe ukuze i-Google ikwazi ukuphatha nokwenza isipele imilayezo yakho yevoyisimeyili."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Setha iphini yakho yevoyisimeyili"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Udinga iphini yevoyisimeyili noma kunini uma wenza ikholi ukufinyelela ivoyisimeyili yakho."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Iphutha elingaziwa"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Izilungiselelo zemodi yendiza"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"Setha iphini"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Zama Futhi"</string>
@@ -102,9 +100,13 @@
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Kukhona okungahambanga kahle"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Sicela uxhumane Nesevisi Yekhasimende ku-<xliff:g id="NUMBER">%1$s</xliff:g> uphinde ubatshele ukuthi ikhodi yephutha ngu-9999."</string>
     <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Imigomo nemibandela ye-Visual Voicemail"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="271780225159084419">"Kufanele wamukele imigomo nemibandela ye-Verizon Wireless ukuze usebenzise i-visual voicemail:\n\n%s"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nKufanele wamukele imogomo nemibandela ye-Verizon Wireless ukuze usebenzise ivoyisimeyili yokubuka:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Vula ivoyisimeyili yokubuka"</string>
+    <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"I-Visual voicemail izokhutshazwa uma imigomo nemibandela inqatshawa."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Khubaza i-visual voicemail"</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ukubhalwa kweviyisimeyili kuizokhutshazwa uma imigomo nemibandela inqatshawa."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"Khuyaza ukubhalwa kwevoyisimeyili"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"Ivoyisimeyili izofinyeleleka kuphela ngokushayela ku-*86. Setha iphinikhodi entsha yevoyisimeyili ukuze uqhubeke."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"Setha iphinikhodi"</string>
 </resources>

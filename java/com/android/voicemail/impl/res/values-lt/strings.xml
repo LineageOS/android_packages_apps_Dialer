@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN kodo keitimas"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Vaizdinis balso paštas turi būti įgalintas, kad būtų galima pakeisti PIN kodą"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Vaizdinis balso paštas dar nesuaktyvintas, vėliau bandykite dar kartą"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Senas PIN kodas"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Naujas PIN kodas"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Palaukite."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Naujas PIN kodas per trumpas."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Naujas PIN kodas per ilgas."</string>

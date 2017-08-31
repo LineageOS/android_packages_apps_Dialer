@@ -16,8 +16,6 @@
   -->
 
 <resources>
-  <drawable name="grayBg">#FF333333</drawable>
-
   <!-- Theme for the InCallActivity activity. Should have a transparent background for the
        circular reveal animation for a new outgoing call to work correctly. We don't just use
        Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
@@ -76,6 +74,15 @@
   <style name="AfterCallDialogStyle" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">
     <!-- This colorAccent is to style text in the dialogs -->
     <item name="android:colorAccent">@color/dialer_theme_color</item>
+  </style>
+
+  <style name="Theme.Incall.DialogHolder" parent="Theme.AppCompat.Translucent">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowActivityTransitions">false</item>
+
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
   </style>
 
 </resources>

@@ -43,6 +43,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -71,10 +72,13 @@ import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.app.calllog.CallLogActivity;
+import com.android.dialer.app.calllog.CallLogAdapter;
+import com.android.dialer.app.calllog.CallLogAsync;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
-import com.android.dialer.app.dialpad.DialpadFragment;
+import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
+import com.android.dialer.app.list.DialtactsPagerAdapter.TabIndex;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.list.OldSpeedDialFragment;
@@ -88,31 +92,43 @@ import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.callcomposer.CallComposerActivity;
+import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
+import com.android.dialer.dialpadview.DialpadFragment;
+import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
+import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.main.Main;
+import com.android.dialer.main.MainComponent;
 import com.android.dialer.p13n.inference.P13nRanking;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRanker.P13nRefreshCompleteListener;
 import com.android.dialer.p13n.logging.P13nLogger;
 import com.android.dialer.p13n.logging.P13nLogging;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.dialer.util.TransactionSafeActivity;
@@ -130,6 +146,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
+        CallLogAdapter.OnActionModeStateChangedListener,
         DialpadFragment.HostInterface,
         OldSpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -140,13 +157,15 @@ public class DialtactsActivity extends TransactionSafeActivity
         ActionBarController.ActivityUi,
         PhoneNumberInteraction.InteractionErrorListener,
         PhoneNumberInteraction.DisambigDialogDismissedListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        DialpadListener {
 
   public static final boolean DEBUG = false;
   @VisibleForTesting public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
   private static final String ACTION_SHOW_TAB = "ACTION_SHOW_TAB";
   @VisibleForTesting public static final String EXTRA_SHOW_TAB = "EXTRA_SHOW_TAB";
   public static final String EXTRA_CLEAR_NEW_VOICEMAILS = "EXTRA_CLEAR_NEW_VOICEMAILS";
+  private static final String KEY_LAST_TAB = "last_tab";
   private static final String TAG = "DialtactsActivity";
   private static final String KEY_IN_REGULAR_SEARCH_UI = "in_regular_search_ui";
   private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
@@ -154,14 +173,12 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String KEY_FIRST_LAUNCH = "first_launch";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
   private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
+  private static final String TAG_NEW_SEARCH_FRAGMENT = "new_search";
   private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
   private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
   private static final String TAG_FAVORITES_FRAGMENT = "favorites";
   /** Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}. */
   private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
-
-  private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
-  public static final int ACTIVITY_REQUEST_CODE_CALL_COMPOSE = 2;
 
   private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
@@ -179,6 +196,9 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Fragment for searching phone numbers using the dialpad. */
   private SmartDialSearchFragment mSmartDialSearchFragment;
+
+  /** new Fragment for search phone numbers using the keyboard and the dialpad. */
+  private NewSearchFragment mNewSearchFragment;
 
   /** Animation that slides in. */
   private Animation mSlideIn;
@@ -225,6 +245,9 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private P13nLogger mP13nLogger;
   private P13nRanker mP13nRanker;
+  public boolean isMultiSelectModeEnabled;
+
+  private boolean isLastTabEnabled;
 
   AnimationListenerAdapter mSlideInListener =
       new AnimationListenerAdapter() {
@@ -256,12 +279,18 @@ public class DialtactsActivity extends TransactionSafeActivity
             // no need to do anything here.
             return;
           }
+
+          if (count != 0) {
+            PerformanceReport.recordClick(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
+          }
+
           if (DEBUG) {
             LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
             LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + mSearchQuery);
           }
           mSearchQuery = newText;
 
+          // TODO(calderwoodra): show p13n when newText is empty.
           // Show search fragment only when the query string is changed to non-empty text.
           if (!TextUtils.isEmpty(newText)) {
             // Call enterSearchUi only if we are switching search modes, or showing a search
@@ -277,6 +306,11 @@ public class DialtactsActivity extends TransactionSafeActivity
             mSmartDialSearchFragment.setQueryString(mSearchQuery);
           } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
             mRegularSearchFragment.setQueryString(mSearchQuery);
+          } else if (mNewSearchFragment != null && mNewSearchFragment.isVisible()) {
+            mNewSearchFragment.setQuery(mSearchQuery);
+            // When the user switches between dialpad and the serachbar, we need to reset the
+            // call initiation type.
+            mNewSearchFragment.setCallInitiationType(getCallInitiationType());
           }
         }
 
@@ -289,6 +323,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         @Override
         public void onClick(View v) {
           if (!isInSearchUi()) {
+            PerformanceReport.recordClick(UiAction.Type.OPEN_SEARCH);
             mActionBarController.onSearchBoxTapped();
             enterSearchUi(
                 false /* smartDialSearch */, mSearchView.getText().toString(), true /* animate */);
@@ -306,15 +341,20 @@ public class DialtactsActivity extends TransactionSafeActivity
           if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (TextUtils.isEmpty(mSearchView.getText().toString())) {
               // If the search term is empty, close the search UI.
+              PerformanceReport.recordClick(UiAction.Type.CLOSE_SEARCH_WITH_HIDE_BUTTON);
               maybeExitSearchUi();
             } else {
               // If the search term is not empty, show the dialpad fab.
+              if (!mFloatingActionButtonController.isVisible()) {
+                PerformanceReport.recordClick(UiAction.Type.HIDE_KEYBOARD_IN_SEARCH);
+              }
               showFabInSearchUi();
             }
           }
           return false;
         }
       };
+
   /**
    * The text returned from a voice search query. Set in {@link #onActivityResult} and used in
    * {@link #onResume()} to populate the search box.
@@ -355,6 +395,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     super.onCreate(savedInstanceState);
 
     mFirstLaunch = true;
+    isLastTabEnabled = ConfigProviderBindings.get(this).getBoolean("last_tab_enabled", false);
 
     final Resources resources = getResources();
     mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
@@ -371,12 +412,12 @@ public class DialtactsActivity extends TransactionSafeActivity
     actionBar.setBackgroundDrawable(null);
 
     SearchEditTextLayout searchEditTextLayout =
-        (SearchEditTextLayout) actionBar.getCustomView().findViewById(R.id.search_view_container);
+        actionBar.getCustomView().findViewById(R.id.search_view_container);
     searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
     mActionBarController = new ActionBarController(this, searchEditTextLayout);
 
-    mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
+    mSearchView = searchEditTextLayout.findViewById(R.id.search_view);
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
     mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
     searchEditTextLayout
@@ -399,14 +440,13 @@ public class DialtactsActivity extends TransactionSafeActivity
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     mPreviouslySelectedTabIndex = DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL;
-    FloatingActionButton floatingActionButton =
-        (FloatingActionButton) findViewById(R.id.floating_action_button);
+    FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
     floatingActionButton.setOnClickListener(this);
     mFloatingActionButtonController =
         new FloatingActionButtonController(this, floatingActionButton);
 
     ImageButton optionsMenuButton =
-        (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
+        searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
     optionsMenuButton.setOnClickListener(this);
     mOverflowMenu = buildOptionsMenu(optionsMenuButton);
     optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
@@ -480,6 +520,13 @@ public class DialtactsActivity extends TransactionSafeActivity
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
+    // Some calls may not be recorded (eg. from quick contact),
+    // so we should restart recording after these calls. (Recorded call is stopped)
+    PostCall.restartPerformanceRecordingIfARecentCallExist(this);
+    if (!PerformanceReport.isRecording()) {
+      PerformanceReport.startRecording();
+    }
+
     mStateSaved = false;
     if (mFirstLaunch) {
       displayFragment(getIntent());
@@ -542,7 +589,8 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
 
       if (getIntent().getBooleanExtra(EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
-        CallLogNotificationsService.markNewVoicemailsAsOld(this, null);
+        LogUtil.i("DialtactsActivity.onResume", "clearing all new voicemails");
+        CallLogNotificationsService.markAllNewVoicemailsAsOld(this);
       }
     }
 
@@ -556,7 +604,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         new P13nRefreshCompleteListener() {
           @Override
           public void onP13nRefreshComplete() {
-            // TODO: make zero-query search results visible
+            // TODO(strongarm): make zero-query search results visible
           }
         });
     Trace.endSection();
@@ -593,6 +641,10 @@ public class DialtactsActivity extends TransactionSafeActivity
         && !getSystemService(KeyguardManager.class).isKeyguardLocked()) {
       mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
     }
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+        .edit()
+        .putInt(KEY_LAST_TAB, mListsFragment.getCurrentTabIndex())
+        .apply();
   }
 
   @Override
@@ -630,6 +682,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (fragment instanceof ListsFragment) {
       mListsFragment = (ListsFragment) fragment;
       mListsFragment.addOnPageChangeListener(this);
+    } else if (fragment instanceof NewSearchFragment) {
+      mNewSearchFragment = (NewSearchFragment) fragment;
+      updateSearchFragmentPosition();
     }
     if (fragment instanceof SearchFragment) {
       final SearchFragment searchFragment = (SearchFragment) fragment;
@@ -664,13 +719,8 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onClick(View view) {
     int resId = view.getId();
     if (resId == R.id.floating_action_button) {
-      if (mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS
-          && !mInRegularSearch
-          && !mInDialpadSearch) {
-        DialerUtils.startActivityWithErrorToast(
-            this, IntentUtil.getNewContactIntent(), R.string.add_contact_not_available);
-        Logger.get(this).logImpression(DialerImpression.Type.NEW_CONTACT_FAB);
-      } else if (!mIsDialpadShown) {
+      if (!mIsDialpadShown) {
+        PerformanceReport.recordClick(UiAction.Type.OPEN_DIALPAD);
         mInCallDialpadUp = false;
         showDialpadFragment(true);
         PostCall.closePrompt();
@@ -679,7 +729,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       try {
         startActivityForResult(
             new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
-            ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+            ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);
       } catch (ActivityNotFoundException e) {
         Toast.makeText(
                 DialtactsActivity.this, R.string.voice_search_not_available, Toast.LENGTH_SHORT)
@@ -700,6 +750,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     int resId = item.getItemId();
     if (resId == R.id.menu_history) {
+      PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_HISTORY);
       final Intent intent = new Intent(this, CallLogActivity.class);
       startActivity(intent);
     } else if (resId == R.id.menu_clear_frequents) {
@@ -709,6 +760,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (resId == R.id.menu_call_settings) {
       handleMenuSettings();
       Logger.get(this).logScreenView(ScreenEvent.Type.SETTINGS, this);
+      return true;
+    } else if (resId == R.id.menu_new_ui_launcher_shortcut) {
+      MainComponent.get(this).getMain().createNewUiLauncherShortcut(this);
       return true;
     }
     return false;
@@ -721,7 +775,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         "requestCode:%d, resultCode:%d",
         requestCode,
         resultCode);
-    if (requestCode == ACTIVITY_REQUEST_CODE_VOICE_SEARCH) {
+    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       if (resultCode == RESULT_OK) {
         final ArrayList<String> matches =
             data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -733,7 +787,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else {
         LogUtil.e("DialtactsActivity.onActivityResult", "voice search failed");
       }
-    } else if (requestCode == ACTIVITY_REQUEST_CODE_CALL_COMPOSE) {
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_COMPOSER) {
       if (resultCode == RESULT_FIRST_USER) {
         LogUtil.i(
             "DialtactsActivity.onActivityResult", "returned from call composer, error occurred");
@@ -744,6 +798,19 @@ public class DialtactsActivity extends TransactionSafeActivity
         Snackbar.make(mParentLayout, message, Snackbar.LENGTH_LONG).show();
       } else {
         LogUtil.i("DialtactsActivity.onActivityResult", "returned from call composer, no error");
+      }
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
+      if (resultCode == RESULT_OK
+          && data != null
+          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+        int snackbarDurationMillis = 5_000;
+        Snackbar.make(mParentLayout, getString(R.string.ec_data_deleted), snackbarDurationMillis)
+            .setAction(
+                R.string.view_conversation,
+                v -> startActivity(IntentProvider.getSendSmsIntentProvider(number).getIntent(this)))
+            .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
+            .show();
       }
     }
     super.onActivityResult(requestCode, resultCode, data);
@@ -785,6 +852,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     if (animate) {
       mFloatingActionButtonController.scaleOut();
+      maybeEnterSearchUi();
     } else {
       mFloatingActionButtonController.setVisible(false);
       maybeEnterSearchUi();
@@ -793,11 +861,19 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     Assert.isNotNull(mListsFragment.getView()).animate().alpha(0).withLayer();
 
-    //adjust the title, so the user will know where we're at when the activity start/resumes.
+    // adjust the title, so the user will know where we're at when the activity start/resumes.
     setTitle(R.string.launcherDialpadActivityLabel);
   }
 
+  @Override
+  public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
+    new CallLogAsync()
+        .getLastOutgoingCall(
+            new CallLogAsync.GetLastOutgoingCallArgs(this, callback::lastOutgoingCall));
+  }
+
   /** Callback from child DialpadFragment when the dialpad is shown. */
+  @Override
   public void onDialpadShown() {
     LogUtil.d("DialtactsActivity.onDialpadShown", "");
     Assert.isNotNull(mDialpadFragment);
@@ -816,6 +892,7 @@ public class DialtactsActivity extends TransactionSafeActivity
    *
    * @see #commitDialpadFragmentHide
    */
+  @Override
   public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
     if (mDialpadFragment == null || mDialpadFragment.getView() == null) {
       return;
@@ -855,7 +932,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         exitSearchUi();
       }
     }
-    //reset the title to normal.
+    // reset the title to normal.
     setTitle(R.string.launcherActivityLabel);
   }
 
@@ -890,6 +967,13 @@ public class DialtactsActivity extends TransactionSafeActivity
       // available immediately which is required to update position. By forcing an animation,
       // position will be updated after a delay by when the dialpad height would be available.
       fragment.updatePosition(true /* animate */);
+    } else if (mNewSearchFragment != null) {
+      int animationDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
+      int actionbarHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_height_large);
+      int shadowHeight = getResources().getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
+      int start = isDialpadShown() ? actionbarHeight - shadowHeight : 0;
+      int end = isDialpadShown() ? 0 : actionbarHeight - shadowHeight;
+      mNewSearchFragment.animatePosition(start, end, animationDuration);
     }
   }
 
@@ -1007,6 +1091,19 @@ public class DialtactsActivity extends TransactionSafeActivity
       if (showDialpadChooser && !mDialpadFragment.isVisible()) {
         mInCallDialpadUp = true;
       }
+    } else if (isLastTabEnabled) {
+      @TabIndex
+      int tabIndex =
+          DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+              .getInt(KEY_LAST_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
+      // If voicemail tab is saved and its availability changes, we still move to the voicemail tab
+      // but it is quickly removed and shown the contacts tab.
+      if (mListsFragment != null) {
+        mListsFragment.showTab(tabIndex);
+        PerformanceReport.setStartingTabIndex(tabIndex);
+      } else {
+        PerformanceReport.setStartingTabIndex(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
+      }
     }
   }
 
@@ -1057,7 +1154,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     final String tag;
-    if (smartDialSearch) {
+    boolean useNewSearch =
+        ConfigProviderBindings.get(this).getBoolean("enable_new_search_fragment", false);
+    if (useNewSearch) {
+      tag = TAG_NEW_SEARCH_FRAGMENT;
+    } else if (smartDialSearch) {
       tag = TAG_SMARTDIAL_SEARCH_FRAGMENT;
     } else {
       tag = TAG_REGULAR_SEARCH_FRAGMENT;
@@ -1067,40 +1168,53 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mFloatingActionButtonController.scaleOut();
 
-    SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
     if (animate) {
       transaction.setCustomAnimations(android.R.animator.fade_in, 0);
     } else {
       transaction.setTransition(FragmentTransaction.TRANSIT_NONE);
     }
+
+    Fragment fragment = getFragmentManager().findFragmentByTag(tag);
     if (fragment == null) {
-      if (smartDialSearch) {
+      if (useNewSearch) {
+        fragment = new NewSearchFragment();
+      } else if (smartDialSearch) {
         fragment = new SmartDialSearchFragment();
       } else {
         fragment = Bindings.getLegacy(this).newRegularSearchFragment();
-        fragment.setOnTouchListener(
-            new View.OnTouchListener() {
-              @Override
-              public boolean onTouch(View v, MotionEvent event) {
-                // Show the FAB when the user touches the lists fragment and the soft
-                // keyboard is hidden.
-                hideDialpadFragment(true, false);
-                showFabInSearchUi();
-                v.performClick();
-                return false;
-              }
-            });
+        ((SearchFragment) fragment)
+            .setOnTouchListener(
+                (v, event) -> {
+                  // Show the FAB when the user touches the lists fragment and the soft
+                  // keyboard is hidden.
+                  hideDialpadFragment(true, false);
+                  v.performClick();
+                  return false;
+                });
       }
       transaction.add(R.id.dialtacts_frame, fragment, tag);
     } else {
+      // TODO(calderwoodra): if this is a transition from dialpad to searchbar, animate fragment
+      // down, and vice versa. Perhaps just add a coordinator behavior with the search bar.
       transaction.show(fragment);
     }
+
     // DialtactsActivity will provide the options menu
     fragment.setHasOptionsMenu(false);
+
     // Will show empty list if P13nRanker is not enabled. Else, re-ranked list by the ranker.
-    fragment.setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
-    if (!smartDialSearch) {
-      fragment.setQueryString(query);
+    if (!useNewSearch) {
+      ((SearchFragment) fragment)
+          .setShowEmptyListForNullQuery(mP13nRanker.shouldShowEmptyListForNullQuery());
+    } else {
+      // TODO(calderwoodra): add p13n ranker to new search.
+    }
+
+    if (!smartDialSearch && !useNewSearch) {
+      ((SearchFragment) fragment).setQueryString(query);
+    } else if (useNewSearch) {
+      ((NewSearchFragment) fragment).setQuery(query);
+      ((NewSearchFragment) fragment).setCallInitiationType(getCallInitiationType());
     }
     transaction.commit();
 
@@ -1146,6 +1260,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (mRegularSearchFragment != null) {
       transaction.remove(mRegularSearchFragment);
     }
+    if (mNewSearchFragment != null) {
+      transaction.remove(mNewSearchFragment);
+    }
     transaction.commit();
 
     Assert.isNotNull(mListsFragment.getView()).animate().alpha(1).withLayer();
@@ -1163,6 +1280,8 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onBackPressed() {
+    PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
+
     if (mStateSaved) {
       return;
     }
@@ -1247,6 +1366,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (mInDialpadSearch
         && mSmartDialSearchFragment != null
         && !mSmartDialSearchFragment.isShowingPermissionRequest()) {
+      PerformanceReport.recordClick(UiAction.Type.CLOSE_DIALPAD);
       hideDialpadFragment(true /* animate */, true /* clearDialpad */);
       return true;
     }
@@ -1255,6 +1375,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onListFragmentScrollStateChange(int scrollState) {
+    PerformanceReport.recordScrollStateChange(scrollState);
     if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
       hideDialpadFragment(true, false);
       DialerUtils.hideInputMethod(mParentLayout);
@@ -1349,6 +1470,12 @@ public class DialtactsActivity extends TransactionSafeActivity
     Intent intent =
         new CallIntentBuilder(phoneNumber, callSpecificAppData).setIsVideoCall(isVideoCall).build();
 
+    if (callSpecificAppData.getAllowAssistedDialing()) {
+      Bundle extras = new Bundle();
+      extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+      intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+    }
+
     DialerUtils.startActivityWithErrorToast(this, intent);
     mClearSearchOnPause = true;
   }
@@ -1381,18 +1508,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     int tabIndex = mListsFragment.getCurrentTabIndex();
     mPreviouslySelectedTabIndex = tabIndex;
     mFloatingActionButtonController.setVisible(true);
-    if (tabIndex == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS
-        && !mInRegularSearch
-        && !mInDialpadSearch) {
-      mFloatingActionButtonController.changeIcon(
-          getResources().getDrawable(R.drawable.quantum_ic_person_add_white_24, null),
-          getResources().getString(R.string.search_shortcut_create_new_contact));
-    } else {
-      mFloatingActionButtonController.changeIcon(
-          getResources().getDrawable(R.drawable.quantum_ic_dialpad_white_24, null),
-          getResources().getString(R.string.action_menu_dialpad_button));
-    }
-
     timeTabSelected = SystemClock.elapsedRealtime();
   }
 
@@ -1477,6 +1592,23 @@ public class DialtactsActivity extends TransactionSafeActivity
             Arrays.toString(grantResults)));
   }
 
+  @Override
+  public void onActionModeStateChanged(boolean isEnabled) {
+    isMultiSelectModeEnabled = isEnabled;
+  }
+
+  @Override
+  public boolean isActionModeStateEnabled() {
+    return isMultiSelectModeEnabled;
+  }
+
+  private CallInitiationType.Type getCallInitiationType() {
+    return mIsDialpadShown
+        ? CallInitiationType.Type.DIALPAD
+        : CallInitiationType.Type.REGULAR_SEARCH;
+  }
+
+  /** Popup menu accessible from the search bar */
   protected class OptionsPopupMenu extends PopupMenu {
 
     public OptionsPopupMenu(Context context, View anchor) {
@@ -1504,6 +1636,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else {
         simulatorMenuItem.setVisible(false);
       }
+
+      Main dialtacts = MainComponent.get(context).getMain();
+      menu.findItem(R.id.menu_new_ui_launcher_shortcut)
+          .setVisible(dialtacts.isNewUiEnabled(context));
 
       super.show();
     }

@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.contacts.common.R;
-import com.android.dialer.compat.CompatUtils;
 
 /**
  * Lightweight implementation of ViewPager tabs. This looks similar to traditional actionBar tabs,
@@ -43,7 +42,13 @@ import com.android.dialer.compat.CompatUtils;
  */
 public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnPageChangeListener {
 
-  private static final ViewOutlineProvider VIEW_BOUNDS_OUTLINE_PROVIDER;
+  private static final ViewOutlineProvider VIEW_BOUNDS_OUTLINE_PROVIDER =
+      new ViewOutlineProvider() {
+        @Override
+        public void getOutline(View view, Outline outline) {
+          outline.setRect(0, 0, view.getWidth(), view.getHeight());
+        }
+      };
   private static final int TAB_SIDE_PADDING_IN_DPS = 10;
   // TODO: This should use <declare-styleable> in the future
   private static final int[] ATTRS =
@@ -53,20 +58,6 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         android.R.attr.textColor,
         android.R.attr.textAllCaps
       };
-
-  static {
-    if (CompatUtils.isLollipopCompatible()) {
-      VIEW_BOUNDS_OUTLINE_PROVIDER =
-          new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-              outline.setRect(0, 0, view.getWidth(), view.getHeight());
-            }
-          };
-    } else {
-      VIEW_BOUNDS_OUTLINE_PROVIDER = null;
-    }
-  }
 
   /**
    * Linearlayout that will contain the TextViews serving as tabs. This is the only child of the
@@ -111,10 +102,8 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
     a.recycle();
 
-    if (CompatUtils.isLollipopCompatible()) {
-      // enable shadow casting from view bounds
-      setOutlineProvider(VIEW_BOUNDS_OUTLINE_PROVIDER);
-    }
+    // enable shadow casting from view bounds
+    setOutlineProvider(VIEW_BOUNDS_OUTLINE_PROVIDER);
   }
 
   public void setViewPager(ViewPager viewPager) {

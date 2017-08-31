@@ -41,6 +41,7 @@ public class PrimaryInfo {
   // Used for consistent LetterTile coloring.
   @Nullable public final String contactInfoLookupKey;
   @Nullable public final MultimediaData multimediaData;
+  public final boolean showInCallButtonGrid;
   public final int numberPresentation;
 
   // TODO: Convert to autovalue. b/34502119
@@ -61,6 +62,7 @@ public class PrimaryInfo {
         false,
         null,
         null,
+        true,
         -1);
   }
 
@@ -80,6 +82,7 @@ public class PrimaryInfo {
       boolean shouldShowLocation,
       @Nullable String contactInfoLookupKey,
       @Nullable MultimediaData multimediaData,
+      boolean showInCallButtonGrid,
       int numberPresentation) {
     this.number = number;
     this.name = name;
@@ -96,6 +99,7 @@ public class PrimaryInfo {
     this.shouldShowLocation = shouldShowLocation;
     this.contactInfoLookupKey = contactInfoLookupKey;
     this.multimediaData = multimediaData;
+    this.showInCallButtonGrid = showInCallButtonGrid;
     this.numberPresentation = numberPresentation;
   }
 
@@ -104,13 +108,14 @@ public class PrimaryInfo {
     return String.format(
         Locale.US,
         "PrimaryInfo, number: %s, name: %s, location: %s, label: %s, "
-            + "photo: %s, photoType: %d, isPhotoVisible: %b",
+            + "photo: %s, photoType: %d, isPhotoVisible: %b, MultimediaData: %s",
         LogUtil.sanitizePhoneNumber(number),
         LogUtil.sanitizePii(name),
         LogUtil.sanitizePii(location),
         label,
         photo,
         photoType,
-        isContactPhotoShown);
+        isContactPhotoShown,
+        multimediaData);
   }
 }

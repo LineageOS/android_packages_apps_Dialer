@@ -51,7 +51,6 @@
       android:background="@color/call_composer_divider"/>
 
   <RelativeLayout
-      android:orientation="horizontal"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content">
 
@@ -70,7 +69,7 @@
       android:background="@color/background_dialer_white"
       android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
       android:layout_toStartOf="@+id/remaining_characters"
-      android:inputType="textShortMessage"
+      android:inputType="textShortMessage|textCapSentences"
       android:imeOptions="flagNoExtractUi|actionSend"/>
 
     <TextView

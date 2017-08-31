@@ -20,8 +20,8 @@ import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.os.PowerManager;
 import android.view.Display;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
@@ -80,7 +80,7 @@ public class AnswerProximitySensor
         .getBoolean(CONFIG_ANSWER_PSEUDO_PROXIMITY_WAKE_LOCK_ENABLED, true)) {
       answerProximityWakeLock = new PseudoProximityWakeLock(context, pseudoScreenState);
     } else {
-      // TODO: choose a wake lock implementation base on framework/device.
+      // TODO(twyen): choose a wake lock implementation base on framework/device.
       // These bugs requires the PseudoProximityWakeLock workaround:
       // b/30439151 Proximity sensor not working on M
       // b/31499931 fautly touch input when screen is off on marlin/sailfish
@@ -141,6 +141,9 @@ public class AnswerProximitySensor
 
   @Override
   public void onInternationalCallOnWifi() {}
+
+  @Override
+  public void onEnrichedCallSessionUpdate() {}
 
   @Override
   public void onDialerCallSessionModificationStateChange() {}

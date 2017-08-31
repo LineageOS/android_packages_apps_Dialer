@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"Delen en bellen"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"afbeelding van <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"afbeelding"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Een foto maken"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Kan camera-afbeelding niet laden"</string>
     <string name="allow" msgid="8637148297403066623">"Toestaan"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Verleen toegang tot Camera om een foto te maken"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Verleen toegang tot Media om een afbeelding te delen"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Een foto nemen"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Een foto kiezen"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Een bericht verzenden"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Foto verzonden via Berichten"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Bericht verzonden via Berichten"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"Afbeelding verzenden…"</string>
 </resources>

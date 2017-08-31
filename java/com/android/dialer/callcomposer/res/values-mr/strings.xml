@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"सामायिक करा आणि कॉल करा"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"प्रतिमा <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"प्रतिमा"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"एक फोटो घ्या"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"कॅमेरा प्रतिमा लोड करणे शक्य झाले नाही"</string>
     <string name="allow" msgid="8637148297403066623">"अनुमती द्या"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"एक फोटो घेण्यासाठी, कॅमेर्‍यामध्ये प्रवेश द्या"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"एखादी प्रतिमा सामायिक करण्यासाठी मीडियामध्ये प्रवेश द्या"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"एक फोटो घ्या"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"फोटो निवडा"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"एक संदेश पाठवा"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Messages द्वारे फोटो पाठविला"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Messages द्वारे संदेश पाठविला"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"इमेज पाठवत आहे…"</string>
 </resources>

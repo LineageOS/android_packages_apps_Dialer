@@ -20,12 +20,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.annotation.MainThread;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.InCallService;
 import com.android.dialer.common.LogUtil;
 import java.util.List;
 
 /** Wrapper around Telecom APIs. */
-public final class TelecomAdapter implements InCallServiceListener {
+public class TelecomAdapter implements InCallServiceListener {
 
   private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -43,6 +44,11 @@ public final class TelecomAdapter implements InCallServiceListener {
       sInstance = new TelecomAdapter();
     }
     return sInstance;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setInstanceForTesting(TelecomAdapter telecomAdapter) {
+    sInstance = telecomAdapter;
   }
 
   @Override
@@ -82,9 +88,13 @@ public final class TelecomAdapter implements InCallServiceListener {
       List<android.telecom.Call> conferenceable = call.getConferenceableCalls();
       if (!conferenceable.isEmpty()) {
         call.conference(conferenceable.get(0));
+        // It's safe to clear restrict count for merge action.
+        DialerCall.clearRestrictedCount();
       } else {
         if (call.getDetails().can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE)) {
           call.mergeConference();
+          // It's safe to clear restrict count for merge action.
+          DialerCall.clearRestrictedCount();
         }
       }
     } else {

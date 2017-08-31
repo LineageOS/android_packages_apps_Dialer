@@ -18,6 +18,7 @@ package com.android.incallui.incall.impl;
 
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
+import com.android.incallui.incall.impl.MappedButtonConfig.MappingInfo;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,12 +104,29 @@ final class ButtonChooser {
       if (placedButtons.size() >= numUiButtons) {
         return;
       }
+
       // If the conflict button is allowed but disabled, don't place it since it probably will
       // move when it's enabled.
       if (!allowedButtons.contains(conflict) || disabledButtons.contains(conflict)) {
         continue;
       }
+
+      if (isMutuallyExclusiveButtonAvailable(
+          config.lookupMappingInfo(conflict).getMutuallyExclusiveButton(), allowedButtons)) {
+        continue;
+      }
       placedButtons.add(conflict);
     }
+  }
+
+  private boolean isMutuallyExclusiveButtonAvailable(
+      int mutuallyExclusiveButton, @NonNull Set<Integer> allowedButtons) {
+    if (mutuallyExclusiveButton == MappingInfo.NO_MUTUALLY_EXCLUSIVE_BUTTON_SET) {
+      return false;
+    }
+    if (allowedButtons.contains(mutuallyExclusiveButton)) {
+      return true;
+    }
+    return false;
   }
 }

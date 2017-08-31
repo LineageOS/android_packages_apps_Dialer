@@ -475,7 +475,6 @@ public class CallerInfo {
     name = context.getString(R.string.emergency_call_dialog_number_for_display);
     phoneNumber = null;
 
-    photoResource = R.drawable.img_phone;
     mIsEmergency = true;
     return this;
   }

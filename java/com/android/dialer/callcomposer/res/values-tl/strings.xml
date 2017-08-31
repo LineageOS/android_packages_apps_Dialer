@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"Ibahagi at tumawag"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"larawan <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"larawan"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Kumuha ng isang larawan"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Hindi mai-load ang larawan ng camera"</string>
     <string name="allow" msgid="8637148297403066623">"Payagan"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Upang kumuha ng larawan, magbigay ng access sa Camera"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Upang magbahagi ng imahe, magbigay ng access sa Media"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Kumuha ng larawan"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Pumili ng larawan"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Magpadala ng mensahe"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Larawang ipinadala sa pamamagitan ng Messages"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Mensaheng ipinadala sa pamamagitan ng Messages"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"Ipinapadala ang larawan…"</string>
 </resources>

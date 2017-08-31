@@ -52,7 +52,6 @@ public class SearchEditTextLayout extends FrameLayout {
   private View mVoiceSearchButtonView;
   private View mOverflowButtonView;
   private View mBackButtonView;
-  private View mExpandedSearchBox;
   private View mClearButtonView;
 
   private ValueAnimator mAnimator;
@@ -90,19 +89,26 @@ public class SearchEditTextLayout extends FrameLayout {
     mVoiceSearchButtonView = findViewById(R.id.voice_search_button);
     mOverflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
     mBackButtonView = findViewById(R.id.search_back_button);
-    mExpandedSearchBox = findViewById(R.id.search_box_expanded);
+    mBackButtonView
+        .getResources()
+        .getDrawable(R.drawable.quantum_ic_arrow_back_vd_theme_24, null)
+        .setAutoMirrored(true);
     mClearButtonView = findViewById(R.id.search_close_button);
 
-    // Convert a long click into a click to expand the search box, and then long click on the
-    // search view. This accelerates the long-press scenario for copy/paste.
+    // Convert a long click into a click to expand the search box. Touch events are also
+    // forwarded to the searchView. This accelerates the long-press scenario for copy/paste.
     mCollapsed.setOnLongClickListener(
         new OnLongClickListener() {
           @Override
           public boolean onLongClick(View view) {
             mCollapsed.performClick();
-            mSearchView.performLongClick();
             return false;
           }
+        });
+    mCollapsed.setOnTouchListener(
+        (v, event) -> {
+          mSearchView.onTouchEvent(event);
+          return false;
         });
 
     mSearchView.setOnFocusChangeListener(
@@ -212,7 +218,7 @@ public class SearchEditTextLayout extends FrameLayout {
       AnimUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
       mAnimator = ValueAnimator.ofFloat(EXPAND_MARGIN_FRACTION_START, 0f);
       setMargins(EXPAND_MARGIN_FRACTION_START);
-      prepareAnimator(true);
+      prepareAnimator();
     } else {
       mExpanded.setVisibility(View.VISIBLE);
       mExpanded.setAlpha(1);
@@ -241,7 +247,7 @@ public class SearchEditTextLayout extends FrameLayout {
     if (animate) {
       AnimUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
       mAnimator = ValueAnimator.ofFloat(0f, 1f);
-      prepareAnimator(false);
+      prepareAnimator();
     } else {
       mCollapsed.setVisibility(View.VISIBLE);
       mCollapsed.setAlpha(1);
@@ -279,7 +285,7 @@ public class SearchEditTextLayout extends FrameLayout {
     }
   }
 
-  private void prepareAnimator(final boolean expand) {
+  private void prepareAnimator() {
     if (mAnimator != null) {
       mAnimator.cancel();
     }

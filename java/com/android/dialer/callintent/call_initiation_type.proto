@@ -4,7 +4,9 @@ option java_package = "com.android.dialer.callintent";
 option java_multiple_files = true;
 option optimize_for = LITE_RUNTIME;
 
+
 package com.android.dialer.callintent;
+
 
 
 // Different ways a call can be initiated.
@@ -56,5 +58,7 @@ message CallInitiationType {
     MISSED_CALL_NOTIFICATION = 15;
 
     CALL_SUBJECT_DIALOG = 16;
+
+    IMS_VIDEO_BLOCKED_FALLBACK_TO_VOICE = 17;
   }
 }

@@ -16,16 +16,12 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.calldetails">
-  <application>
+  <application android:theme="@style/Theme.AppCompat">
     <activity
       android:label="@string/call_details"
+      android:exported="false"
       android:name="com.android.dialer.calldetails.CallDetailsActivity"
-      android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-        <data android:mimeType="vnd.android.cursor.item/calls"/>
-      </intent-filter>
+      android:theme="@style/DialerThemeBase.NoActionBar">
     </activity>
   </application>
 </manifest>

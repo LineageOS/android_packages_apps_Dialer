@@ -16,6 +16,7 @@
 
 package com.android.dialer.contactsfragment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract.QuickContact;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,9 @@ import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 
 /** View holder for a contact. */
 final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -32,16 +36,21 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
   private final TextView header;
   private final TextView name;
   private final QuickContactBadge photo;
+  private final Context context;
+  private final @ClickAction int clickAction;
 
   private String headerText;
   private Uri contactUri;
 
-  public ContactViewHolder(View itemView) {
+  ContactViewHolder(View itemView, @ClickAction int clickAction) {
     super(itemView);
+    Assert.checkArgument(clickAction != ClickAction.INVALID, "Invalid click action.");
+    context = itemView.getContext();
     itemView.findViewById(R.id.click_target).setOnClickListener(this);
-    header = (TextView) itemView.findViewById(R.id.header);
-    name = (TextView) itemView.findViewById(R.id.contact_name);
-    photo = (QuickContactBadge) itemView.findViewById(R.id.photo);
+    header = itemView.findViewById(R.id.header);
+    name = itemView.findViewById(R.id.contact_name);
+    photo = itemView.findViewById(R.id.photo);
+    this.clickAction = clickAction;
   }
 
   /**
@@ -60,6 +69,10 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
     name.setText(displayName);
     header.setText(headerText);
     header.setVisibility(showHeader ? View.VISIBLE : View.INVISIBLE);
+
+    Logger.get(context)
+        .logQuickContactOnTouch(
+            photo, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_BADGE, true);
   }
 
   public QuickContactBadge getPhoto() {
@@ -76,7 +89,20 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
 
   @Override
   public void onClick(View v) {
-    QuickContact.showQuickContact(
-        photo.getContext(), photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
+    switch (clickAction) {
+      case ClickAction.OPEN_CONTACT_CARD:
+        Logger.get(context)
+            .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM);
+        QuickContact.showQuickContact(
+            photo.getContext(),
+            photo,
+            contactUri,
+            QuickContact.MODE_LARGE,
+            null /* excludeMimes */);
+        break;
+      case ClickAction.INVALID:
+      default:
+        throw Assert.createIllegalStateFailException("Invalid click action.");
+    }
   }
 }

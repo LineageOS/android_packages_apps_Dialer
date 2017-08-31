@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -41,6 +42,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
@@ -54,6 +56,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
@@ -77,7 +80,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * of a state machine at this point. Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener {
-
+  private static final String PIXEL2017_SYSTEM_FEATURE =
+      "com.google.android.feature.PIXEL_2017_EXPERIENCE";
   private static final String EXTRA_FIRST_TIME_SHOWN =
       "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
@@ -133,7 +137,9 @@ public class InCallPresenter implements CallList.Listener {
             android.telecom.Call telecomCall, String remainingPostDialSequence) {
           final DialerCall call = mCallList.getDialerCallFromTelecomCall(telecomCall);
           if (call == null) {
-            Log.w(this, "DialerCall not found in call list: " + telecomCall);
+            LogUtil.w(
+                "InCallPresenter.onPostDialWait",
+                "DialerCall not found in call list: " + telecomCall);
             return;
           }
           onPostDialCharWait(call.getId(), remainingPostDialSequence);
@@ -144,7 +150,9 @@ public class InCallPresenter implements CallList.Listener {
             android.telecom.Call telecomCall, android.telecom.Call.Details details) {
           final DialerCall call = mCallList.getDialerCallFromTelecomCall(telecomCall);
           if (call == null) {
-            Log.w(this, "DialerCall not found in call list: " + telecomCall);
+            LogUtil.w(
+                "InCallPresenter.onDetailsChanged",
+                "DialerCall not found in call list: " + telecomCall);
             return;
           }
 
@@ -152,7 +160,7 @@ public class InCallPresenter implements CallList.Listener {
               && !mExternalCallList.isCallTracked(telecomCall)) {
 
             // A regular call became an external call so swap call lists.
-            Log.i(this, "Call became external: " + telecomCall);
+            LogUtil.i("InCallPresenter.onDetailsChanged", "Call became external: " + telecomCall);
             mCallList.onInternalCallMadeExternal(mContext, telecomCall);
             mExternalCallList.onCallAdded(telecomCall);
             return;
@@ -166,7 +174,9 @@ public class InCallPresenter implements CallList.Listener {
         @Override
         public void onConferenceableCallsChanged(
             android.telecom.Call telecomCall, List<android.telecom.Call> conferenceableCalls) {
-          Log.i(this, "onConferenceableCallsChanged: " + telecomCall);
+          LogUtil.i(
+              "InCallPresenter.onConferenceableCallsChanged",
+              "onConferenceableCallsChanged: " + telecomCall);
           onDetailsChanged(telecomCall, telecomCall.getDetails());
         }
       };
@@ -181,6 +191,8 @@ public class InCallPresenter implements CallList.Listener {
   private boolean mBoundAndWaitingForOutgoingCall;
   /** Determines if the InCall UI is in fullscreen mode or not. */
   private boolean mIsFullScreen = false;
+
+  private boolean mScreenTimeoutEnabled = true;
 
   private PhoneStateListener mPhoneStateListener =
       new PhoneStateListener() {
@@ -289,7 +301,8 @@ public class InCallPresenter implements CallList.Listener {
 
       if ((call.getAccountHandle() == null
           && (phoneAccountHandles == null || phoneAccountHandles.isEmpty()))) {
-        Log.i(InCallPresenter.getInstance(), "No valid accounts for call " + call);
+        LogUtil.i(
+            "InCallPresenter.isCallWithNoValidAccounts", "No valid accounts for call " + call);
         return true;
       }
     }
@@ -313,11 +326,13 @@ public class InCallPresenter implements CallList.Listener {
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
       FilteredNumberAsyncQueryHandler filteredNumberQueryHandler) {
+    Trace.beginSection("InCallPresenter.setUp");
     if (mServiceConnected) {
-      Log.i(this, "New service connection replacing existing one.");
+      LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
       if (context != mContext || callList != mCallList) {
         throw new IllegalStateException();
       }
+      Trace.endSection();
       return;
     }
 
@@ -352,7 +367,7 @@ public class InCallPresenter implements CallList.Listener {
     mCallList.addListener(this);
 
     // Create spam call list listener and add it to the list of listeners
-    mSpamCallListListener = new SpamCallListListener(context);
+    mSpamCallListListener = new SpamCallListListener(context, new DefaultDialerExecutorFactory());
     mCallList.addListener(mSpamCallListListener);
 
     VideoPauseController.getInstance().setUp(this);
@@ -362,7 +377,8 @@ public class InCallPresenter implements CallList.Listener {
         .getSystemService(TelephonyManager.class)
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
-    Log.d(this, "Finished InCallPresenter.setUp");
+    LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
+    Trace.endSection();
   }
 
   /**
@@ -373,7 +389,7 @@ public class InCallPresenter implements CallList.Listener {
    * secondary method that performs the aforementioned logic.
    */
   public void tearDown() {
-    Log.d(this, "tearDown");
+    LogUtil.d("InCallPresenter.tearDown", "tearDown");
     mCallList.clearOnDisconnect();
 
     mServiceConnected = false;
@@ -387,8 +403,9 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   private void attemptFinishActivity() {
+    mScreenTimeoutEnabled = true;
     final boolean doFinish = (mInCallActivity != null && isActivityStarted());
-    Log.i(this, "Hide in call UI: " + doFinish);
+    LogUtil.i("InCallPresenter.attemptFinishActivity", "Hide in call UI: " + doFinish);
     if (doFinish) {
       mInCallActivity.setExcludeFromRecents(true);
       mInCallActivity.finish();
@@ -404,12 +421,13 @@ public class InCallPresenter implements CallList.Listener {
       throw new IllegalArgumentException("unregisterActivity cannot be called with null");
     }
     if (mInCallActivity == null) {
-      Log.i(this, "No InCallActivity currently set, no need to unset.");
+      LogUtil.i(
+          "InCallPresenter.unsetActivity", "No InCallActivity currently set, no need to unset.");
       return;
     }
     if (mInCallActivity != inCallActivity) {
-      Log.w(
-          this,
+      LogUtil.w(
+          "InCallPresenter.unsetActivity",
           "Second instance of InCallActivity is trying to unregister when another"
               + " instance is active. Ignoring.");
       return;
@@ -428,7 +446,7 @@ public class InCallPresenter implements CallList.Listener {
     if (inCallActivity != null) {
       if (mInCallActivity == null) {
         updateListeners = true;
-        Log.i(this, "UI Initialized");
+        LogUtil.i("InCallPresenter.updateActivity", "UI Initialized");
       } else {
         // since setActivity is called onStart(), it can be called multiple times.
         // This is fine and ignorable, but we do not want to update the world every time
@@ -451,12 +469,12 @@ public class InCallPresenter implements CallList.Listener {
       // NOTE: This code relies on {@link #mInCallActivity} being set so we run it after
       // it has been set.
       if (mInCallState == InCallState.NO_CALLS) {
-        Log.i(this, "UI Initialized, but no calls left.  shut down.");
+        LogUtil.i("InCallPresenter.updateActivity", "UI Initialized, but no calls left. Shut down");
         attemptFinishActivity();
         return;
       }
     } else {
-      Log.i(this, "UI Destroyed");
+      LogUtil.i("InCallPresenter.updateActivity", "UI Destroyed");
       updateListeners = true;
       mInCallActivity = null;
 
@@ -496,11 +514,12 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   public void onBringToForeground(boolean showDialpad) {
-    Log.i(this, "Bringing UI to foreground.");
+    LogUtil.i("InCallPresenter.onBringToForeground", "Bringing UI to foreground.");
     bringToForeground(showDialpad);
   }
 
   public void onCallAdded(final android.telecom.Call call) {
+    Trace.beginSection("InCallPresenter.onCallAdded");
     LatencyReport latencyReport = new LatencyReport(call);
     if (shouldAttemptBlocking(call)) {
       maybeBlockCall(call, latencyReport);
@@ -516,6 +535,7 @@ public class InCallPresenter implements CallList.Listener {
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
     setBoundAndWaitingForOutgoingCall(false, null);
     call.registerCallback(mCallCallback);
+    Trace.endSection();
   }
 
   private boolean shouldAttemptBlocking(android.telecom.Call call) {
@@ -529,11 +549,15 @@ public class InCallPresenter implements CallList.Listener {
       return false;
     }
     if (TelecomCallUtil.isEmergencyCall(call)) {
-      Log.i(this, "Not attempting to block incoming emergency call");
+      LogUtil.i(
+          "InCallPresenter.shouldAttemptBlocking",
+          "Not attempting to block incoming emergency call");
       return false;
     }
     if (FilteredNumbersUtil.hasRecentEmergencyCall(mContext)) {
-      Log.i(this, "Not attempting to block incoming call due to recent emergency call");
+      LogUtil.i(
+          "InCallPresenter.shouldAttemptBlocking",
+          "Not attempting to block incoming call due to recent emergency call");
       return false;
     }
     if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
@@ -583,7 +607,7 @@ public class InCallPresenter implements CallList.Listener {
           @Override
           public void onCheckComplete(final Integer id) {
             if (isReadyForTearDown()) {
-              Log.i(this, "InCallPresenter is torn down, not adding call");
+              LogUtil.i("InCallPresenter.onCheckComplete", "torn down, not adding call");
               return;
             }
             if (!hasTimedOut.get()) {
@@ -595,7 +619,8 @@ public class InCallPresenter implements CallList.Listener {
                 mCallList.onCallAdded(mContext, call, latencyReport);
               }
             } else if (id == FilteredNumberAsyncQueryHandler.INVALID_ID) {
-              Log.d(this, "checkForBlockedCall: invalid number, skipping block checking");
+              LogUtil.d(
+                  "InCallPresenter.onCheckComplete", "invalid number, skipping block checking");
               if (!hasTimedOut.get()) {
                 handler.removeCallbacks(runnable);
 
@@ -603,7 +628,8 @@ public class InCallPresenter implements CallList.Listener {
                 mCallList.onCallAdded(mContext, call, latencyReport);
               }
             } else {
-              Log.i(this, "Rejecting incoming call from blocked number");
+              LogUtil.i(
+                  "InCallPresenter.onCheckComplete", "Rejecting incoming call from blocked number");
               call.reject(false, null);
               Logger.get(mContext).logInteraction(InteractionEvent.Type.CALL_BLOCKED);
 
@@ -672,11 +698,14 @@ public class InCallPresenter implements CallList.Listener {
    */
   @Override
   public void onCallListChange(CallList callList) {
+    Trace.beginSection("InCallPresenter.onCallListChange");
     if (mInCallActivity != null && mInCallActivity.isInCallScreenAnimating()) {
       mAwaitingCallListUpdate = true;
+      Trace.endSection();
       return;
     }
     if (callList == null) {
+      Trace.endSection();
       return;
     }
 
@@ -684,7 +713,9 @@ public class InCallPresenter implements CallList.Listener {
 
     InCallState newState = getPotentialStateFromCallList(callList);
     InCallState oldState = mInCallState;
-    Log.d(this, "onCallListChange oldState= " + oldState + " newState=" + newState);
+    LogUtil.d(
+        "InCallPresenter.onCallListChange",
+        "onCallListChange oldState= " + oldState + " newState=" + newState);
 
     // If the user placed a call and was asked to choose the account, but then pressed "Home", the
     // incall activity for that call will still exist (even if it's not visible). In the case of
@@ -695,19 +726,27 @@ public class InCallPresenter implements CallList.Listener {
     if (newState == InCallState.INCOMING
         && (waitingForAccountCall = callList.getWaitingForAccountCall()) != null) {
       waitingForAccountCall.disconnect();
-      mInCallActivity.dismissPendingDialogs();
+      // The InCallActivity might be destroyed or not started yet at this point.
+      if (isActivityStarted()) {
+        mInCallActivity.dismissPendingDialogs();
+      }
     }
 
     newState = startOrFinishUi(newState);
-    Log.d(this, "onCallListChange newState changed to " + newState);
+    LogUtil.d(
+        "InCallPresenter.onCallListChange", "onCallListChange newState changed to " + newState);
 
     // Set the new state before announcing it to the world
-    Log.i(this, "Phone switching state: " + oldState + " -> " + newState);
+    LogUtil.i(
+        "InCallPresenter.onCallListChange",
+        "Phone switching state: " + oldState + " -> " + newState);
     mInCallState = newState;
 
     // notify listeners of new state
     for (InCallStateListener listener : mListeners) {
-      Log.d(this, "Notify " + listener + " of state " + mInCallState.toString());
+      LogUtil.d(
+          "InCallPresenter.onCallListChange",
+          "Notify " + listener + " of state " + mInCallState.toString());
       listener.onStateChange(oldState, mInCallState, callList);
     }
 
@@ -716,15 +755,18 @@ public class InCallPresenter implements CallList.Listener {
           callList.getActiveOrBackgroundCall() != null || callList.getOutgoingCall() != null;
       mInCallActivity.dismissKeyguard(hasCall);
     }
+    Trace.endSection();
   }
 
   /** Called when there is a new incoming call. */
   @Override
   public void onIncomingCall(DialerCall call) {
+    Trace.beginSection("InCallPresenter.onIncomingCall");
     InCallState newState = startOrFinishUi(InCallState.INCOMING);
     InCallState oldState = mInCallState;
 
-    Log.i(this, "Phone switching state: " + oldState + " -> " + newState);
+    LogUtil.i(
+        "InCallPresenter.onIncomingCall", "Phone switching state: " + oldState + " -> " + newState);
     mInCallState = newState;
 
     for (IncomingCallListener listener : mIncomingCallListeners) {
@@ -735,6 +777,7 @@ public class InCallPresenter implements CallList.Listener {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();
     }
+    Trace.endSection();
   }
 
   @Override
@@ -826,7 +869,7 @@ public class InCallPresenter implements CallList.Listener {
 
     if (newState == InCallState.NO_CALLS) {
       if (mBoundAndWaitingForOutgoingCall) {
-        return InCallState.OUTGOING;
+        return InCallState.PENDING_OUTGOING;
       }
     }
 
@@ -838,11 +881,13 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   public void setBoundAndWaitingForOutgoingCall(boolean isBound, PhoneAccountHandle handle) {
-    Log.i(this, "setBoundAndWaitingForOutgoingCall: " + isBound);
+    LogUtil.i(
+        "InCallPresenter.setBoundAndWaitingForOutgoingCall",
+        "setBoundAndWaitingForOutgoingCall: " + isBound);
     mBoundAndWaitingForOutgoingCall = isBound;
     mThemeColorManager.setPendingPhoneAccountHandle(handle);
     if (isBound && mInCallState == InCallState.NO_CALLS) {
-      mInCallState = InCallState.OUTGOING;
+      mInCallState = InCallState.PENDING_OUTGOING;
     }
   }
 
@@ -967,7 +1012,9 @@ public class InCallPresenter implements CallList.Listener {
     if (mInCallActivity != null) {
       mIsChangingConfigurations = mInCallActivity.isChangingConfigurations();
     }
-    Log.v(this, "updateIsChangingConfigurations = " + mIsChangingConfigurations);
+    LogUtil.v(
+        "InCallPresenter.updateIsChangingConfigurations",
+        "updateIsChangingConfigurations = " + mIsChangingConfigurations);
   }
 
   /** Called when the activity goes in/out of the foreground. */
@@ -987,10 +1034,10 @@ public class InCallPresenter implements CallList.Listener {
       broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
 
       if (showing) {
-        Log.d(this, "Sending sticky broadcast: ", broadcastIntent);
+        LogUtil.d("InCallPresenter.onUiShowing", "Sending sticky broadcast: ", broadcastIntent);
         mContext.sendStickyBroadcast(broadcastIntent);
       } else {
-        Log.d(this, "Removing sticky broadcast: ", broadcastIntent);
+        LogUtil.d("InCallPresenter.onUiShowing", "Removing sticky broadcast: ", broadcastIntent);
         mContext.removeStickyBroadcast(broadcastIntent);
       }
     }
@@ -1011,6 +1058,13 @@ public class InCallPresenter implements CallList.Listener {
     }
   }
 
+  public void refreshUi() {
+    if (mInCallActivity != null) {
+      // Re-evaluate which fragment is being shown.
+      mInCallActivity.onPrimaryCallStateChanged();
+    }
+  }
+
   public void addInCallUiListener(InCallUiListener listener) {
     mInCallUiListeners.add(listener);
   }
@@ -1021,23 +1075,25 @@ public class InCallPresenter implements CallList.Listener {
 
   /*package*/
   void onActivityStarted() {
-    Log.d(this, "onActivityStarted");
+    LogUtil.d("InCallPresenter.onActivityStarted", "onActivityStarted");
     notifyVideoPauseController(true);
     if (mStatusBarNotifier != null) {
-      // TODO - b/36649622: Investigate this redundant call
+      // TODO(maxwelb) - b/36649622: Investigate this redundant call
       mStatusBarNotifier.updateNotification(mCallList);
     }
+    applyScreenTimeout();
   }
 
   /*package*/
   void onActivityStopped() {
-    Log.d(this, "onActivityStopped");
+    LogUtil.d("InCallPresenter.onActivityStopped", "onActivityStopped");
     notifyVideoPauseController(false);
   }
 
   private void notifyVideoPauseController(boolean showing) {
-    Log.d(
-        this, "notifyVideoPauseController: mIsChangingConfigurations=" + mIsChangingConfigurations);
+    LogUtil.d(
+        "InCallPresenter.notifyVideoPauseController",
+        "mIsChangingConfigurations=" + mIsChangingConfigurations);
     if (!mIsChangingConfigurations) {
       VideoPauseController.getInstance().onUiShowing(showing);
     }
@@ -1096,8 +1152,9 @@ public class InCallPresenter implements CallList.Listener {
       final boolean canSwap =
           activeCall.can(android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE);
 
-      Log.v(
-          this, "activeCall: " + activeCall + ", canMerge: " + canMerge + ", canSwap: " + canSwap);
+      LogUtil.v(
+          "InCallPresenter.handleCallKey",
+          "activeCall: " + activeCall + ", canMerge: " + canMerge + ", canSwap: " + canSwap);
 
       // (2) Attempt actions on conference calls
       if (canMerge) {
@@ -1116,7 +1173,7 @@ public class InCallPresenter implements CallList.Listener {
       // there is no harm in double checking.
       final boolean canHold = heldCall.can(android.telecom.Call.Details.CAPABILITY_HOLD);
 
-      Log.v(this, "heldCall: " + heldCall + ", canHold: " + canHold);
+      LogUtil.v("InCallPresenter.handleCallKey", "heldCall: " + heldCall + ", canHold: " + canHold);
 
       // (4) unhold call
       if (heldCall.getState() == DialerCall.State.ONHOLD && canHold) {
@@ -1134,7 +1191,7 @@ public class InCallPresenter implements CallList.Listener {
    * checks to see if there should be any UI left and if not attempts to tear down the UI.
    */
   public void onDismissDialog() {
-    Log.i(this, "Dialog dismissed");
+    LogUtil.i("InCallPresenter.onDismissDialog", "Dialog dismissed");
     if (mInCallState == InCallState.NO_CALLS) {
       attemptFinishActivity();
       attemptCleanup();
@@ -1164,16 +1221,18 @@ public class InCallPresenter implements CallList.Listener {
    * @param force {@code true} if fullscreen mode should be set regardless of its current state.
    */
   public void setFullScreen(boolean isFullScreen, boolean force) {
-    Log.i(this, "setFullScreen = " + isFullScreen);
+    LogUtil.i("InCallPresenter.setFullScreen", "setFullScreen = " + isFullScreen);
 
     // As a safeguard, ensure we cannot enter fullscreen if the dialpad is shown.
     if (isDialpadVisible()) {
       isFullScreen = false;
-      Log.v(this, "setFullScreen overridden as dialpad is shown = " + isFullScreen);
+      LogUtil.v(
+          "InCallPresenter.setFullScreen",
+          "setFullScreen overridden as dialpad is shown = " + isFullScreen);
     }
 
     if (mIsFullScreen == isFullScreen && !force) {
-      Log.v(this, "setFullScreen ignored as already in that state.");
+      LogUtil.v("InCallPresenter.setFullScreen", "setFullScreen ignored as already in that state.");
       return;
     }
     mIsFullScreen = isFullScreen;
@@ -1209,7 +1268,8 @@ public class InCallPresenter implements CallList.Listener {
       if (call.getAccountHandle() == null && !call.isConferenceCall()) {
         setDisconnectCauseForMissingAccounts(call);
       }
-      mInCallActivity.maybeShowErrorDialogOnDisconnect(call.getDisconnectCause());
+      mInCallActivity.maybeShowErrorDialogOnDisconnect(
+          new DisconnectMessage(mInCallActivity, call));
     }
   }
 
@@ -1218,7 +1278,8 @@ public class InCallPresenter implements CallList.Listener {
    * UI needs to be started or finished depending on the new state and does it.
    */
   private InCallState startOrFinishUi(InCallState newState) {
-    Log.d(this, "startOrFinishUi: " + mInCallState + " -> " + newState);
+    LogUtil.d(
+        "InCallPresenter.startOrFinishUi", "startOrFinishUi: " + mInCallState + " -> " + newState);
 
     // TODO: Consider a proper state machine implementation
 
@@ -1300,7 +1361,9 @@ public class InCallPresenter implements CallList.Listener {
     // up so we aren't going to lose anything by avoiding a second startup here.
     boolean activityIsFinishing = mInCallActivity != null && !isActivityStarted();
     if (activityIsFinishing) {
-      Log.i(this, "Undo the state change: " + newState + " -> " + mInCallState);
+      LogUtil.i(
+          "InCallPresenter.startOrFinishUi",
+          "Undo the state change: " + newState + " -> " + mInCallState);
       return mInCallState;
     }
 
@@ -1315,10 +1378,10 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     if (showCallUi || showAccountPicker) {
-      Log.i(this, "Start in call UI");
+      LogUtil.i("InCallPresenter.startOrFinishUi", "Start in call UI");
       showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
     } else if (startIncomingCallSequence) {
-      Log.i(this, "Start Full Screen in call UI");
+      LogUtil.i("InCallPresenter.startOrFinishUi", "Start Full Screen in call UI");
 
       mStatusBarNotifier.updateNotification(mCallList);
     } else if (newState == InCallState.NO_CALLS) {
@@ -1371,7 +1434,7 @@ public class InCallPresenter implements CallList.Listener {
    */
   private void attemptCleanup() {
     if (isReadyForTearDown()) {
-      Log.i(this, "Cleaning up");
+      LogUtil.i("InCallPresenter.attemptCleanup", "Cleaning up");
 
       cleanupSurfaces();
 
@@ -1421,12 +1484,12 @@ public class InCallPresenter implements CallList.Listener {
       mInCallEventListeners.clear();
       mInCallUiListeners.clear();
 
-      Log.d(this, "Finished InCallPresenter.CleanUp");
+      LogUtil.d("InCallPresenter.attemptCleanup", "finished");
     }
   }
 
   public void showInCall(boolean showDialpad, boolean newOutgoingCall) {
-    Log.i(this, "Showing InCallActivity");
+    LogUtil.i("InCallPresenter.showInCall", "Showing InCallActivity");
     mContext.startActivity(
         InCallActivity.getIntent(
             mContext, showDialpad, newOutgoingCall, false /* forFullScreen */));
@@ -1497,12 +1560,14 @@ public class InCallPresenter implements CallList.Listener {
    *     InCallOrientationEventListener#SCREEN_ORIENTATION_270}).
    */
   public void onDeviceOrientationChange(@ScreenOrientation int orientation) {
-    Log.d(this, "onDeviceOrientationChange: orientation= " + orientation);
+    LogUtil.d(
+        "InCallPresenter.onDeviceOrientationChange",
+        "onDeviceOrientationChange: orientation= " + orientation);
 
     if (mCallList != null) {
       mCallList.notifyCallsOfDeviceRotation(orientation);
     } else {
-      Log.w(this, "onDeviceOrientationChange: CallList is null.");
+      LogUtil.w("InCallPresenter.onDeviceOrientationChange", "CallList is null.");
     }
 
     // Notify listeners of device orientation changed.
@@ -1520,21 +1585,28 @@ public class InCallPresenter implements CallList.Listener {
    */
   public void setInCallAllowsOrientationChange(boolean allowOrientationChange) {
     if (mInCallActivity == null) {
-      Log.e(this, "InCallActivity is null. Can't set requested orientation.");
+      LogUtil.e(
+          "InCallPresenter.setInCallAllowsOrientationChange",
+          "InCallActivity is null. Can't set requested orientation.");
       return;
     }
     mInCallActivity.setAllowOrientationChange(allowOrientationChange);
   }
 
   public void enableScreenTimeout(boolean enable) {
-    Log.v(this, "enableScreenTimeout: value=" + enable);
+    LogUtil.v("InCallPresenter.enableScreenTimeout", "enableScreenTimeout: value=" + enable);
+    mScreenTimeoutEnabled = enable;
+    applyScreenTimeout();
+  }
+
+  private void applyScreenTimeout() {
     if (mInCallActivity == null) {
-      Log.e(this, "enableScreenTimeout: InCallActivity is null.");
+      LogUtil.e("InCallPresenter.applyScreenTimeout", "InCallActivity is null.");
       return;
     }
 
     final Window window = mInCallActivity.getWindow();
-    if (enable) {
+    if (mScreenTimeoutEnabled) {
       window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     } else {
       window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -1590,7 +1662,8 @@ public class InCallPresenter implements CallList.Listener {
       throw new IllegalArgumentException("registerActivity cannot be called with null");
     }
     if (mInCallActivity != null && mInCallActivity != inCallActivity) {
-      Log.w(this, "Setting a second activity before destroying the first.");
+      LogUtil.w(
+          "InCallPresenter.setActivity", "Setting a second activity before destroying the first.");
     }
     updateActivity(inCallActivity);
   }
@@ -1601,14 +1674,18 @@ public class InCallPresenter implements CallList.Listener {
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (mLocalVideoSurfaceTexture == null) {
-      mLocalVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture();
+      mLocalVideoSurfaceTexture =
+          VideoSurfaceBindings.createLocalVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mLocalVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (mRemoteVideoSurfaceTexture == null) {
-      mRemoteVideoSurfaceTexture = VideoSurfaceBindings.createRemoteVideoSurfaceTexture();
+      mRemoteVideoSurfaceTexture =
+          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mRemoteVideoSurfaceTexture;
   }

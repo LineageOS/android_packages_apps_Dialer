@@ -17,17 +17,17 @@
 package com.android.dialer.binary.common;
 
 import android.app.Application;
-import android.os.StrictMode;
 import android.os.Trace;
 import android.support.annotation.NonNull;
+import android.support.v4.os.BuildCompat;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
+import com.android.dialer.strictmode.DialerStrictMode;
 
 /** A common application subclass for all Dialer build variants. */
 public abstract class DialerApplication extends Application implements HasRootComponent {
@@ -37,9 +37,8 @@ public abstract class DialerApplication extends Application implements HasRootCo
   @Override
   public void onCreate() {
     Trace.beginSection("DialerApplication.onCreate");
-    if (BuildType.get() == BuildType.BUGFOOD) {
-      enableStrictMode();
-    }
+    DialerStrictMode.onApplicationCreate(this);
+
     super.onCreate();
     new BlockedNumbersAutoMigrator(
             this.getApplicationContext(),
@@ -49,14 +48,10 @@ public abstract class DialerApplication extends Application implements HasRootCo
     CallLogComponent.get(this).callLogFramework().registerContentObservers(getApplicationContext());
     PersistentLogger.initialize(this);
 
-    NotificationChannelManager.getInstance().firstInitIfNeeded(this);
+    if (BuildCompat.isAtLeastO()) {
+      NotificationChannelManager.initChannels(this);
+    }
     Trace.endSection();
-  }
-
-  private void enableStrictMode() {
-    StrictMode.setThreadPolicy(
-        new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDeath().build());
-    StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyDeath().build());
   }
 
   /**

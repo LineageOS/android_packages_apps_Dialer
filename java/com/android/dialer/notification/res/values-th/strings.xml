@@ -21,6 +21,5 @@
     <string name="notification_channel_ongoing_call" msgid="5593444445363940672">"สายที่สนทนาอยู่"</string>
     <string name="notification_channel_missed_call" msgid="5820652855908217695">"สายที่ไม่ได้รับ"</string>
     <string name="notification_channel_voicemail" msgid="9206363659849426204">"ข้อความเสียง"</string>
-    <string name="notification_channel_external_call" msgid="2200143959948071132">"สายนอก"</string>
     <string name="notification_channel_misc" msgid="5595452227577858518">"ค่าเริ่มต้น"</string>
 </resources>

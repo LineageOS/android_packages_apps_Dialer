@@ -141,7 +141,7 @@ final class MappedButtonConfig {
   }
 
   @NonNull
-  private MappingInfo lookupMappingInfo(@InCallButtonIds int button) {
+  public MappingInfo lookupMappingInfo(@InCallButtonIds int button) {
     MappingInfo info = mapping.get(button);
     if (info == null) {
       throw new IllegalArgumentException(
@@ -153,6 +153,8 @@ final class MappedButtonConfig {
   /** Holds information about button mapping. */
   @AutoValue
   abstract static class MappingInfo {
+
+    public static final int NO_MUTUALLY_EXCLUSIVE_BUTTON_SET = -1;
 
     /** The Ui slot into which a given button desires to be placed. */
     public abstract int getSlot();
@@ -171,11 +173,20 @@ final class MappedButtonConfig {
      */
     public abstract int getConflictOrder();
 
+    /**
+     * Returns an integer representing a button for which the given button conflicts. Defaults to
+     * {@link NO_MUTUALLY_EXCLUSIVE_BUTTON_SET}.
+     *
+     * <p>If the mutually exclusive button is chosen, the associated button should never be chosen.
+     */
+    public abstract @InCallButtonIds int getMutuallyExclusiveButton();
+
     static Builder builder(int slot) {
       return new AutoValue_MappedButtonConfig_MappingInfo.Builder()
           .setSlot(slot)
           .setSlotOrder(Integer.MAX_VALUE)
-          .setConflictOrder(Integer.MAX_VALUE);
+          .setConflictOrder(Integer.MAX_VALUE)
+          .setMutuallyExclusiveButton(NO_MUTUALLY_EXCLUSIVE_BUTTON_SET);
     }
 
     /** Class used to build instances of {@link MappingInfo}. */
@@ -186,6 +197,8 @@ final class MappedButtonConfig {
       public abstract Builder setSlotOrder(int slotOrder);
 
       public abstract Builder setConflictOrder(int conflictOrder);
+
+      public abstract Builder setMutuallyExclusiveButton(@InCallButtonIds int button);
 
       public abstract MappingInfo build();
     }

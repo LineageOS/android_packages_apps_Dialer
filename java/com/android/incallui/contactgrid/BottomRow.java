@@ -22,7 +22,6 @@ import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -50,6 +49,7 @@ public class BottomRow {
     public final boolean isForwardIconVisible;
     public final boolean isSpamIconVisible;
     public final boolean shouldPopulateAccessibilityEvent;
+    public final boolean isAssistedDialedVisisble;
 
     public Info(
         @Nullable CharSequence label,
@@ -59,7 +59,8 @@ public class BottomRow {
         boolean isHdIconVisible,
         boolean isForwardIconVisible,
         boolean isSpamIconVisible,
-        boolean shouldPopulateAccessibilityEvent) {
+        boolean shouldPopulateAccessibilityEvent,
+        boolean isAssistedDialedVisisble) {
       this.label = label;
       this.isTimerVisible = isTimerVisible;
       this.isWorkIconVisible = isWorkIconVisible;
@@ -68,6 +69,7 @@ public class BottomRow {
       this.isForwardIconVisible = isForwardIconVisible;
       this.isSpamIconVisible = isSpamIconVisible;
       this.shouldPopulateAccessibilityEvent = shouldPopulateAccessibilityEvent;
+      this.isAssistedDialedVisisble = isAssistedDialedVisisble;
     }
   }
 
@@ -82,6 +84,7 @@ public class BottomRow {
     boolean isHdAttemptingIconVisible = state.isHdAttempting;
     boolean isSpamIconVisible = false;
     boolean shouldPopulateAccessibilityEvent = true;
+    boolean isAssistedDialedVisisble = state.isAssistedDialed;
 
     if (isIncoming(state) && primaryInfo.isSpam) {
       label = context.getString(R.string.contact_grid_incoming_suspected_spam);
@@ -118,14 +121,15 @@ public class BottomRow {
         isHdIconVisible,
         isForwardIconVisible,
         isSpamIconVisible,
-        shouldPopulateAccessibilityEvent);
+        shouldPopulateAccessibilityEvent,
+        isAssistedDialedVisisble);
   }
 
   private static CharSequence getLabelForPhoneNumber(PrimaryInfo primaryInfo) {
     if (primaryInfo.location != null) {
       return primaryInfo.location;
     }
-    if (!TextUtils.isEmpty(primaryInfo.number)) {
+    if (!primaryInfo.nameIsNumber && !TextUtils.isEmpty(primaryInfo.number)) {
       CharSequence spannedNumber = spanDisplayNumber(primaryInfo.number);
       if (primaryInfo.label == null) {
         return spannedNumber;
@@ -137,7 +141,7 @@ public class BottomRow {
   }
 
   private static CharSequence spanDisplayNumber(String displayNumber) {
-    return PhoneNumberUtilsCompat.createTtsSpannable(
+    return PhoneNumberUtils.createTtsSpannable(
         BidiFormatter.getInstance().unicodeWrap(displayNumber, TextDirectionHeuristics.LTR));
   }
 

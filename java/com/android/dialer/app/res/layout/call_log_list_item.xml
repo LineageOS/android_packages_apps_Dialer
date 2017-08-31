@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             >
 
-          <QuickContactBadge
+          <com.android.dialer.app.calllog.DialerQuickContactBadge
               android:id="@+id/quick_contact_photo"
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
@@ -80,7 +80,7 @@
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
               android:visibility="gone"
-              android:src="@drawable/quantum_ic_check_circle_googblue_24" />
+              android:src="@drawable/ic_check_mark_48dp" />
 
         </FrameLayout>
 
@@ -148,17 +148,34 @@
             android:visibility="gone"
             android:singleLine="true"/>
 
-          <TextView
-            android:id="@+id/voicemail_transcription"
+          <LinearLayout
+            android:id="@+id/transcription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/call_log_icon_margin"
-            android:textColor="@color/call_log_voicemail_transcript_color"
-            android:textSize="@dimen/call_log_voicemail_transcription_text_size"
-            android:ellipsize="marquee"
             android:visibility="gone"
-            android:singleLine="false"
-            android:maxLines="10"/>
+            android:orientation="vertical">
+
+            <TextView
+              android:id="@+id/voicemail_transcription_branding"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/call_log_voicemail_transcript_branding_color"
+              android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:paddingBottom="2dp"
+              android:singleLine="true"/>
+
+            <TextView
+              android:id="@+id/voicemail_transcription"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/call_log_voicemail_transcript_color"
+              android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:ellipsize="marquee"
+              android:singleLine="false"
+              android:maxLines="10"/>
+
+          </LinearLayout>
 
         </LinearLayout>
 

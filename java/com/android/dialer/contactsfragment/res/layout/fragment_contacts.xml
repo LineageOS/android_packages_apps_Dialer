@@ -23,8 +23,47 @@
       android:id="@+id/recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/background_dialer_white"/>
+      android:background="@color/background_dialer_light"/>
+
+  <!-- Scrollbars are always on the right side of the screen. Layouts should use Rights/Left instead
+       of Start/End -->
+  <com.android.dialer.contactsfragment.FastScroller
+      android:id="@+id/fast_scroller"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:clipChildren="false"
+      android:visibility="gone">
+
+    <TextView
+        android:id="@+id/fast_scroller_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/fast_scroller_scroll_bar"
+        android:gravity="center"
+        android:textSize="48sp"
+        android:textColor="@color/background_dialer_white"
+        android:visibility="gone"
+        android:background="@drawable/fast_scroller_container_background"/>
+
+    <ImageView
+        android:id="@+id/fast_scroller_scroll_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="16dp"
+        android:src="@drawable/fast_scroller_scroll_bar" />
+  </com.android.dialer.contactsfragment.FastScroller>
 
   <!-- Anchored header view -->
   <include layout="@layout/header"/>
+
+  <com.android.dialer.widget.EmptyContentView
+      android:id="@+id/empty_list_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="gone"/>
 </FrameLayout>

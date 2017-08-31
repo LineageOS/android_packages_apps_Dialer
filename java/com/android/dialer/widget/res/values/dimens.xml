@@ -23,7 +23,10 @@
   <dimen name="send_container_width">48dp</dimen>
 
   <dimen name="toolbar_title_text_size">20sp</dimen>
-  <dimen name="toolbar_title_small_text_size">14sp</dimen>
   <dimen name="toolbar_subtitle_text_size">12sp</dimen>
   <dimen name="toolbar_elevation">4dp</dimen>
+  <dimen name="toolbar_end_padding">4dp</dimen>
+
+  <!-- Empty List -->
+  <dimen name="empty_list_message_text_size">16sp</dimen>
 </resources>

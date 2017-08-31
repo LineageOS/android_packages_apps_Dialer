@@ -15,7 +15,6 @@
  */
 package com.android.dialer.interactions;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,7 +27,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.Loader.OnLoadCompleteListener;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +40,6 @@ import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,16 +51,21 @@ import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -181,6 +183,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         intent =
             new CallIntentBuilder(phoneNumber, callSpecificAppData)
                 .setIsVideoCall(isVideoCall)
+                .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing())
                 .build();
         break;
     }
@@ -218,20 +221,27 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
-    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE)
-        != PackageManager.PERMISSION_GRANTED) {
-      LogUtil.i("PhoneNumberInteraction.startInteraction", "No phone permissions");
+    String[] deniedPhonePermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            mContext, PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
+    if (deniedPhonePermissions.length > 0) {
+      LogUtil.i(
+          "PhoneNumberInteraction.startInteraction",
+          "Need phone permissions: " + Arrays.toString(deniedPhonePermissions));
       ActivityCompat.requestPermissions(
-          (Activity) mContext, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
+          (Activity) mContext, deniedPhonePermissions, REQUEST_CALL_PHONE);
       return;
     }
-    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS)
-        != PackageManager.PERMISSION_GRANTED) {
-      LogUtil.i("PhoneNumberInteraction.startInteraction", "No contact permissions");
+
+    String[] deniedContactsPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            mContext, PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+    if (deniedContactsPermissions.length > 0) {
+      LogUtil.i(
+          "PhoneNumberInteraction.startInteraction",
+          "Need contact permissions: " + Arrays.toString(deniedContactsPermissions));
       ActivityCompat.requestPermissions(
-          (Activity) mContext,
-          new String[] {Manifest.permission.READ_CONTACTS},
-          REQUEST_READ_CONTACTS);
+          (Activity) mContext, deniedContactsPermissions, REQUEST_READ_CONTACTS);
       return;
     }
 
@@ -543,6 +553,12 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         final PhoneItem phoneItem = mPhoneList.get(which);
         final CheckBox checkBox = (CheckBox) alertDialog.findViewById(R.id.setPrimary);
         if (checkBox.isChecked()) {
+          if (mCallSpecificAppData.getCallInitiationType() == CallInitiationType.Type.SPEED_DIAL) {
+            Logger.get(getContext())
+                .logInteraction(
+                    InteractionEvent.Type.SPEED_DIAL_SET_DEFAULT_NUMBER_FOR_AMBIGUOUS_CONTACT);
+          }
+
           // Request to mark the data as primary in the background.
           final Intent serviceIntent =
               ContactUpdateService.createSetSuperPrimaryIntent(activity, phoneItem.id);

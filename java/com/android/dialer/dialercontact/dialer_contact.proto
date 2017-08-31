@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.dialercontact";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.callcomposer;
+
+message DialerContact {
+  optional fixed64 photo_id = 1;
+  optional string photo_uri = 2;
+  optional string contact_uri = 3;
+  optional string name_or_number = 4;
+  optional string number = 6;
+  optional string display_number = 7;
+  optional string number_label = 8;
+  optional int32 contact_type = 9;
+  optional SimDetails sim_details = 10;
+}
+
+message SimDetails {
+  // Human readable netwrork name displayed to user where relevant
+  optional string network = 1;
+  // This value represents a hex representation of a color (i.e. #ffffff)
+  optional int32 color = 2;
+}

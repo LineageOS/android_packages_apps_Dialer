@@ -21,7 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import com.android.contacts.common.ContactPhotoManager;
+import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.ConferenceManagerPresenter.ConferenceManagerUi;

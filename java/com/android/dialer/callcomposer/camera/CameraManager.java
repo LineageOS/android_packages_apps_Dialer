@@ -35,6 +35,7 @@ import com.android.dialer.callcomposer.camera.camerafocus.FocusOverlayManager;
 import com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -118,7 +119,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
   /**
    * The task for opening the camera, so it doesn't block the UI thread Using AsyncTask rather than
    * SafeAsyncTask because the tasks need to be serialized, but don't need to be on the UI thread
-   * TODO: If we have other AyncTasks (not SafeAsyncTasks) this may contend and we may need
+   * TODO(blemmon): If we have other AyncTasks (not SafeAsyncTasks) this may contend and we may need
    * to create a dedicated thread, or synchronize the threads in the thread pool
    */
   private AsyncTask<Integer, Void, Camera> mOpenCameraTask;
@@ -457,9 +458,9 @@ public class CameraManager implements FocusOverlayManager.Listener {
             int height;
             if (mRotation == 90 || mRotation == 270) {
               // Is rotated, so swapping dimensions is desired
-              //noinspection SuspiciousNameCombination
+              // noinspection SuspiciousNameCombination
               width = size.height;
-              //noinspection SuspiciousNameCombination
+              // noinspection SuspiciousNameCombination
               height = size.width;
             } else {
               width = size.width;
@@ -467,9 +468,20 @@ public class CameraManager implements FocusOverlayManager.Listener {
             }
             LogUtil.i(
                 "CameraManager.onPictureTaken", "taken picture size: " + bytes.length + " bytes");
-            new ImagePersistTask(
-                    width, height, heightPercent, bytes, mCameraPreview.getContext(), callback)
-                .execute();
+            DialerExecutors.createNonUiTaskBuilder(
+                    new ImagePersistWorker(
+                        width, height, heightPercent, bytes, mCameraPreview.getContext()))
+                .onSuccess(
+                    (result) -> {
+                      callback.onMediaReady(
+                          result.getUri(), "image/jpeg", result.getWidth(), result.getHeight());
+                    })
+                .onFailure(
+                    (throwable) -> {
+                      callback.onMediaFailed(new Exception("Persisting image failed", throwable));
+                    })
+                .build()
+                .executeSerial(null);
           }
         };
 
@@ -509,62 +521,61 @@ public class CameraManager implements FocusOverlayManager.Listener {
     }.execute();
   }
 
-  /** Updates the orientation of the camera to match the orientation of the device */
-  private void updateCameraOrientation() {
-    if (mCamera == null || mCameraPreview == null || mTakingPicture) {
-      return;
+  /**
+   * Updates the orientation of the {@link Camera} w.r.t. the orientation of the device and the
+   * orientation that the physical camera is mounted on the device.
+   *
+   * @param camera that needs to be reorientated
+   * @param screenRotation rotation of the physical device
+   * @param cameraOrientation {@link CameraInfo#orientation}
+   * @param cameraIsFrontFacing {@link CameraInfo#CAMERA_FACING_FRONT}
+   * @return rotation that images returned from {@link
+   *     android.hardware.Camera.PictureCallback#onPictureTaken(byte[], Camera)} will be rotated.
+   */
+  @VisibleForTesting
+  static int updateCameraRotation(
+      @NonNull Camera camera,
+      int screenRotation,
+      int cameraOrientation,
+      boolean cameraIsFrontFacing) {
+    Assert.isNotNull(camera);
+    Assert.checkArgument(cameraOrientation % 90 == 0);
+
+    int rotation = screenRotationToDegress(screenRotation);
+    boolean portrait = rotation == 0 || rotation == 180;
+
+    if (!portrait && !cameraIsFrontFacing) {
+      rotation += 180;
+    }
+    rotation += cameraOrientation;
+    rotation %= 360;
+
+    // Rotate the camera
+    if (portrait && cameraIsFrontFacing) {
+      camera.setDisplayOrientation((rotation + 180) % 360);
+    } else {
+      camera.setDisplayOrientation(rotation);
     }
 
-    final WindowManager windowManager =
-        (WindowManager) mCameraPreview.getContext().getSystemService(Context.WINDOW_SERVICE);
+    // Rotate the images returned when a picture is taken
+    Camera.Parameters params = camera.getParameters();
+    params.setRotation(rotation);
+    camera.setParameters(params);
+    return rotation;
+  }
 
-    int degrees;
-    switch (windowManager.getDefaultDisplay().getRotation()) {
+  private static int screenRotationToDegress(int screenRotation) {
+    switch (screenRotation) {
       case Surface.ROTATION_0:
-        degrees = 0;
-        break;
+        return 0;
       case Surface.ROTATION_90:
-        degrees = 90;
-        break;
+        return 90;
       case Surface.ROTATION_180:
-        degrees = 180;
-        break;
+        return 180;
       case Surface.ROTATION_270:
-        degrees = 270;
-        break;
+        return 270;
       default:
-        throw Assert.createAssertionFailException("");
-    }
-
-    // The display orientation of the camera (this controls the preview image).
-    int orientation;
-
-    // The clockwise rotation angle relative to the orientation of the camera. This affects
-    // pictures returned by the camera in Camera.PictureCallback.
-    int rotation;
-    if (mCameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-      orientation = (mCameraInfo.orientation + degrees) % 360;
-      rotation = orientation;
-      // compensate the mirror but only for orientation
-      orientation = (360 - orientation) % 360;
-    } else { // back-facing
-      orientation = (mCameraInfo.orientation - degrees + 360) % 360;
-      rotation = orientation;
-    }
-    mRotation = rotation;
-    try {
-      mCamera.setDisplayOrientation(orientation);
-      final Camera.Parameters params = mCamera.getParameters();
-      params.setRotation(rotation);
-      mCamera.setParameters(params);
-    } catch (final RuntimeException e) {
-      LogUtil.e(
-          "CameraManager.updateCameraOrientation",
-          "RuntimeException in CameraManager.updateCameraOrientation",
-          e);
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_OPENING_CAMERA, e);
-      }
+        throw Assert.createIllegalStateFailException("Invalid surface rotation.");
     }
   }
 
@@ -589,13 +600,19 @@ public class CameraManager implements FocusOverlayManager.Listener {
         mOrientationHandler.disable();
         mOrientationHandler = null;
       }
-      //      releaseMediaRecorder(true /* cleanupFile */);
       mFocusOverlayManager.onPreviewStopped();
       return;
     }
     try {
       mCamera.stopPreview();
-      updateCameraOrientation();
+      if (!mTakingPicture) {
+        mRotation =
+            updateCameraRotation(
+                mCamera,
+                getScreenRotation(),
+                mCameraInfo.orientation,
+                mCameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
+      }
 
       final Camera.Parameters params = mCamera.getParameters();
       final Camera.Size pictureSize = chooseBestPictureSize();
@@ -644,6 +661,14 @@ public class CameraManager implements FocusOverlayManager.Listener {
     }
   }
 
+  private int getScreenRotation() {
+    return mCameraPreview
+        .getContext()
+        .getSystemService(WindowManager.class)
+        .getDefaultDisplay()
+        .getRotation();
+  }
+
   public boolean isCameraAvailable() {
     return mCamera != null && !mTakingPicture && mIsHardwareAccelerationSupported;
   }
@@ -681,7 +706,14 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
     @Override
     public void onOrientationChanged(final int orientation) {
-      updateCameraOrientation();
+      if (!mTakingPicture) {
+        mRotation =
+            updateCameraRotation(
+                mCamera,
+                getScreenRotation(),
+                mCameraInfo.orientation,
+                mCameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
+      }
     }
   }
 

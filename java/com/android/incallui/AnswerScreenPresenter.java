@@ -17,12 +17,14 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -36,11 +38,14 @@ import com.android.incallui.call.DialerCallListener;
 /** Manages changes for an incoming call screen. */
 public class AnswerScreenPresenter
     implements AnswerScreenDelegate, DialerCall.CannedTextResponsesLoadedListener {
+  private static final int ACCEPT_REJECT_CALL_TIME_OUT_IN_MILLIS = 5000;
+
   @NonNull private final Context context;
   @NonNull private final AnswerScreen answerScreen;
   @NonNull private final DialerCall call;
+  private long actionPerformedTimeMillis;
 
-  public AnswerScreenPresenter(
+  AnswerScreenPresenter(
       @NonNull Context context, @NonNull AnswerScreen answerScreen, @NonNull DialerCall call) {
     LogUtil.i("AnswerScreenPresenter.constructor", null);
     this.context = Assert.isNotNull(context);
@@ -60,6 +65,13 @@ public class AnswerScreenPresenter
   }
 
   @Override
+  public boolean isActionTimeout() {
+    return actionPerformedTimeMillis != 0
+        && SystemClock.elapsedRealtime() - actionPerformedTimeMillis
+            >= ACCEPT_REJECT_CALL_TIME_OUT_IN_MILLIS;
+  }
+
+  @Override
   public void onAnswerScreenUnready() {
     call.removeCannedTextResponsesLoadedListener(this);
   }
@@ -73,6 +85,7 @@ public class AnswerScreenPresenter
   public void onRejectCallWithMessage(String message) {
     call.reject(true /* rejectWithMessage */, message);
     onDismissDialog();
+    addTimeoutCheck();
   }
 
   @Override
@@ -100,6 +113,7 @@ public class AnswerScreenPresenter
         call.answer();
       }
     }
+    addTimeoutCheck();
   }
 
   @Override
@@ -114,6 +128,7 @@ public class AnswerScreenPresenter
     } else {
       call.reject(false /* rejectWithMessage */, null);
     }
+    addTimeoutCheck();
   }
 
   @Override
@@ -124,8 +139,26 @@ public class AnswerScreenPresenter
       LogUtil.i("AnswerScreenPresenter.onAnswerAndReleaseCall", "activeCall == null");
       onAnswer(false);
     } else {
+      activeCall.setReleasedByAnsweringSecondCall(true);
       activeCall.addListener(new AnswerOnDisconnected(activeCall));
       activeCall.disconnect();
+    }
+    addTimeoutCheck();
+  }
+
+  @Override
+  public void onAnswerAndReleaseButtonDisabled() {
+    DialerCall activeCall = CallList.getInstance().getActiveCall();
+    if (activeCall != null) {
+      activeCall.increaseSecondCallWithoutAnswerAndReleasedButtonTimes();
+    }
+  }
+
+  @Override
+  public void onAnswerAndReleaseButtonEnabled() {
+    DialerCall activeCall = CallList.getInstance().getActiveCall();
+    if (activeCall != null) {
+      activeCall.increaseAnswerAndReleaseButtonDisplayedTimes();
     }
   }
 
@@ -148,7 +181,7 @@ public class AnswerScreenPresenter
 
     private final DialerCall disconnectingCall;
 
-    public AnswerOnDisconnected(DialerCall disconnectingCall) {
+    AnswerOnDisconnected(DialerCall disconnectingCall) {
       this.disconnectingCall = disconnectingCall;
     }
 
@@ -183,10 +216,32 @@ public class AnswerScreenPresenter
 
     @Override
     public void onInternationalCallOnWifi() {}
+
+    @Override
+    public void onEnrichedCallSessionUpdate() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {
     return UserManagerCompat.isUserUnlocked(context)
         && call.can(android.telecom.Call.Details.CAPABILITY_RESPOND_VIA_TEXT);
+  }
+
+  private void addTimeoutCheck() {
+    actionPerformedTimeMillis = SystemClock.elapsedRealtime();
+    if (answerScreen.getAnswerScreenFragment().isVisible()) {
+      ThreadUtil.postDelayedOnUiThread(
+          () -> {
+            if (!answerScreen.getAnswerScreenFragment().isVisible()) {
+              LogUtil.d(
+                  "AnswerScreenPresenter.addTimeoutCheck",
+                  "accept/reject call timed out, do nothing");
+              return;
+            }
+            LogUtil.i("AnswerScreenPresenter.addTimeoutCheck", "accept/reject call timed out");
+            // Force re-evaluate which fragment to show.
+            InCallPresenter.getInstance().refreshUi();
+          },
+          ACCEPT_REJECT_CALL_TIME_OUT_IN_MILLIS);
+    }
   }
 }

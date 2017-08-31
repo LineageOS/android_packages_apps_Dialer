@@ -15,9 +15,6 @@
 -->
 
 <resources>
-  <color name="dialer_red_highlight_color">#ff1744</color>
-
-  <color name="dialer_button_text_color">#fff</color>
   <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
 
   <!-- Color for the setting text. -->
@@ -26,7 +23,6 @@
   <color name="setting_secondary_color">@color/dialer_secondary_text_color</color>
   <color name="setting_disabled_color">#aaaaaa</color>
   <color name="setting_background_color">#ffffff</color>
-  <color name="setting_button_color">#eee</color>
 
   <!-- 54% black -->
   <color name="call_log_icon_tint">#8a000000</color>
@@ -36,6 +32,8 @@
   <color name="call_log_detail_color">#8a000000</color>
   <!-- 87% black -->
   <color name="call_log_voicemail_transcript_color">#de000000</color>
+  <!-- 54% black -->
+  <color name="call_log_voicemail_transcript_branding_color">#8a000000</color>
   <!-- 70% black -->
   <color name="call_log_action_color">#b3000000</color>
   <!-- 54% black -->
@@ -52,40 +50,20 @@
   <!-- Colour of voicemail progress bar to the left of position indicator. -->
   <color name="voicemail_playback_seek_bar_already_played">@color/dialer_theme_color</color>
 
-  <!-- Background color of new dialer activity -->
-  <color name="background_dialer_light">#fafafa</color>
   <!-- Background color for search results and call details -->
   <color name="background_dialer_results">#f9f9f9</color>
-  <color name="background_dialer_call_log">@color/background_dialer_light</color>
-
-  <!-- Color of the 1dp divider that separates favorites -->
-  <color name="favorite_contacts_separator_color">#d0d0d0</color>
 
   <!-- Color of the contact name in favorite tiles -->
   <color name="contact_tile_name_color">#ffffff</color>
 
   <color name="contact_list_name_text_color">@color/dialer_primary_text_color</color>
 
-  <!-- Undo dialogue color -->
-  <color name="undo_dialogue_text_color">#4d4d4d</color>
-
-  <color name="empty_list_text_color">#b2b2b2</color>
-
   <color name="remove_text_color">#ffffff</color>
 
   <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
   <color name="remove_highlighted_text_color">#FF3F3B</color>
 
-  <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
-  <color name="contacts_grid_bottom_border_color">#16000000</color>
-
-  <!-- Color of actions in expanded call log entries.  This text color represents actions such
-       as call back, play voicemail, etc. -->
-  <color name="call_log_action_text">@color/dialer_theme_color</color>
-
   <color name="dialer_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
-
-  <color name="floating_action_button_touch_tint">#80ffffff</color>
 
   <color name="call_log_action_divider">#eeeeee</color>
   <color name="divider_line_color">#D8D8D8</color>
@@ -97,11 +75,7 @@
   <color name="blocked_number_background">#FFFFFF</color>
   <color name="blocked_number_block_color">#F44336</color>
   <color name="blocked_number_header_color">@color/dialer_theme_color</color>
-  <color name="blocked_number_disabled_emergency_header_color">#616161</color>
   <color name="blocked_number_disabled_emergency_background_color">#E0E0E0</color>
   <color name="add_blocked_number_icon_color">#bdbdbd</color>
-  <!-- Grey 700 -->
-  <color name="call_detail_footer_text_color">#616161</color>
-  <color name="call_detail_footer_icon_tint">@color/call_detail_footer_text_color</color>
 
 </resources>

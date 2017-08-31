@@ -28,7 +28,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
-import com.android.dialer.calllogutils.CallEntryFormatter;
+import com.android.dialer.calllogutils.CallLogDates;
+import com.android.dialer.calllogutils.CallLogDurations;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.LogUtil;
@@ -36,7 +37,6 @@ import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.oem.MotorolaUtils;
-import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
@@ -57,7 +57,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private final ImageView multimediaImage;
 
-  // TODO: Display this when location is stored - b/36160042
+  // TODO(maxwelb): Display this when location is stored - b/36160042
   @SuppressWarnings("unused")
   private final TextView multimediaAttachmentsNumber;
 
@@ -88,32 +88,33 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       CallTypeHelper callTypeHelper,
       boolean showMultimediaDivider) {
     int callType = entry.getCallType();
-    boolean isVideoCall =
-        (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-            && CallUtil.isVideoEnabled(context);
+    boolean isVideoCall = (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
     boolean isPulledCall =
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
+    boolean isLightbringerCall = entry.getIsLightbringerCall();
 
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
     callTypeIcon.add(callType);
-    callTypeIcon.setShowVideo((entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    callTypeIcon.setShowVideo(isVideoCall);
     callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.getFeatures()));
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
 
-    callTypeText.setText(callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
-    callTime.setText(CallEntryFormatter.formatDate(context, entry.getDate()));
+    callTypeText.setText(
+        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isLightbringerCall));
+    callTime.setText(CallLogDates.formatDate(context, entry.getDate()));
+
     if (CallTypeHelper.isMissedCallType(callType)) {
       callDuration.setVisibility(View.GONE);
     } else {
       callDuration.setVisibility(View.VISIBLE);
       callDuration.setText(
-          CallEntryFormatter.formatDurationAndDataUsage(
+          CallLogDurations.formatDurationAndDataUsage(
               context, entry.getDuration(), entry.getDataUsage()));
       callDuration.setContentDescription(
-          CallEntryFormatter.formatDurationAndDataUsageA11y(
+          CallLogDurations.formatDurationAndDataUsageA11y(
               context, entry.getDuration(), entry.getDataUsage()));
     }
     setMultimediaDetails(number, entry, showMultimediaDivider);

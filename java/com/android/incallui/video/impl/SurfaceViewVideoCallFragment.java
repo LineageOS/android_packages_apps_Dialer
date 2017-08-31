@@ -50,6 +50,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.contactgrid.ContactGridManager;
@@ -65,7 +66,6 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
-import com.android.incallui.video.impl.CameraPermissionDialogFragment.CameraPermissionDialogCallback;
 import com.android.incallui.video.impl.CheckableImageButton.OnCheckedChangeListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -85,15 +85,12 @@ public class SurfaceViewVideoCallFragment extends Fragment
         OnClickListener,
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
-        OnSystemUiVisibilityChangeListener,
-        CameraPermissionDialogCallback {
+        OnSystemUiVisibilityChangeListener {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
-  private static final String CAMERA_PERMISSION_DIALOG_FRAMENT_TAG =
-      "CameraPermissionDialogFragment";
   private static final long CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS = 2000L;
   private static final long VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS = 2000L;
 
@@ -131,7 +128,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
       new Runnable() {
         @Override
         public void run() {
-          if (videoCallScreenDelegate.shouldShowCameraPermissionDialog()) {
+          if (videoCallScreenDelegate.shouldShowCameraPermissionToast()) {
             LogUtil.i(
                 "SurfaceViewVideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
             checkCameraPermission();
@@ -495,7 +492,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   private View[] getAllPreviewRelatedViews() {
-    return new View[] {previewRoot};
+    return new View[] {previewRoot, mutePreviewOverlay};
   }
 
   private int getOffsetTop(View view) {
@@ -612,7 +609,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
   @Override
   public void onCheckedChanged(CheckableImageButton button, boolean isChecked) {
     if (button == cameraOffButton) {
-      if (!isChecked && !VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+      if (!isChecked && !VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
         LogUtil.i("SurfaceViewVideoCallFragment.onCheckedChanged", "show camera permission dialog");
         checkCameraPermission();
       } else {
@@ -644,12 +641,6 @@ public class SurfaceViewVideoCallFragment extends Fragment
     updateVideoOffViews();
   }
 
-  /**
-   * This method scales the video feed inside the texture view, it doesn't change the texture view's
-   * size. In the old UI we would change the view size to match the aspect ratio of the video. In
-   * the new UI the view is always square (with the circular clip) so we have to do additional work
-   * to make sure the non-square video doesn't look squished.
-   */
   @Override
   public void onLocalVideoDimensionsChanged() {
     LogUtil.i("SurfaceViewVideoCallFragment.onLocalVideoDimensionsChanged", null);
@@ -832,6 +823,9 @@ public class SurfaceViewVideoCallFragment extends Fragment
     LogUtil.i("SurfaceViewVideoCallFragment.onAudioRouteSelected", "audioRoute: " + audioRoute);
     inCallButtonUiDelegate.setAudioRoute(audioRoute);
   }
+
+  @Override
+  public void onAudioRouteSelectorDismiss() {}
 
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
@@ -1051,24 +1045,19 @@ public class SurfaceViewVideoCallFragment extends Fragment
     }
   }
 
-  @Override
-  public void onCameraPermissionGranted() {
-    videoCallScreenDelegate.onCameraPermissionGranted();
-  }
-
   private void checkCameraPermission() {
     // Checks if user has consent of camera permission and the permission is granted.
     // If camera permission is revoked, shows system permission dialog.
     // If camera permission is granted but user doesn't have consent of camera permission
     // (which means it's first time making video call), shows custom dialog instead. This
     // will only be shown to user once.
-    if (!VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+    if (!VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
       videoCallScreenDelegate.onCameraPermissionDialogShown();
       if (!VideoUtils.hasCameraPermission(getContext())) {
         requestPermissions(new String[] {permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
       } else {
-        CameraPermissionDialogFragment.newInstance()
-            .show(getChildFragmentManager(), CAMERA_PERMISSION_DIALOG_FRAMENT_TAG);
+        PermissionsUtil.showCameraPermissionToast(getContext());
+        videoCallScreenDelegate.onCameraPermissionGranted();
       }
     }
   }

@@ -17,40 +17,45 @@
 package com.android.dialer.app.calllog;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.contacts.common.ClipboardUtils;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
+import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
@@ -58,23 +63,39 @@ import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
-import com.android.dialer.callcomposer.CallComposerContact;
+import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
-import com.android.dialer.common.ConfigProviderBindings;
+import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.dialercontact.SimDetails;
+import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.logging.UiAction;
+import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.UriUtils;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -90,7 +111,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   /** The root view of the call log list item */
   public final View rootView;
   /** The quick contact badge for the contact. */
-  public final QuickContactBadge quickContactView;
+  public final DialerQuickContactBadge quickContactView;
   /** The primary action view of the entry. */
   public final View primaryActionView;
   /** The details of the phone call. */
@@ -103,11 +124,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public final ImageView primaryActionButtonView;
 
   private final Context mContext;
+  @Nullable private final PhoneAccountHandle mDefaultPhoneAccountHandle;
   private final CallLogCache mCallLogCache;
   private final CallLogListItemHelper mCallLogListItemHelper;
   private final CachedNumberLookupService mCachedNumberLookupService;
   private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
   private final OnClickListener mBlockReportListener;
+  @HostUi private final int hostUi;
   /** Whether the data fields are populated by the worker thread, ready to be shown. */
   public boolean isLoaded;
   /** The view containing call log item actions. Null until the ViewStub is inflated. */
@@ -144,7 +167,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
    * The callable phone number for the current call log entry. Cached here as the call back intent
    * is set only when the actions ViewStub is inflated.
    */
-  public String number;
+  @Nullable public String number;
   /** The post-dial numbers that are dialed following the phone number. */
   public String postDialDigits;
   /** The formatted phone number to display. */
@@ -201,6 +224,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public boolean lightbringerReady;
 
   private View.OnClickListener mExpandCollapseListener;
+  private final OnActionModeStateChangedListener onActionModeStateChangedListener;
   private final View.OnLongClickListener longPressListener;
   private boolean mVoicemailPrimaryActionButtonClicked;
 
@@ -216,11 +240,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       OnClickListener blockReportListener,
       View.OnClickListener expandCollapseListener,
       View.OnLongClickListener longClickListener,
+      CallLogAdapter.OnActionModeStateChangedListener actionModeStateChangedListener,
       CallLogCache callLogCache,
       CallLogListItemHelper callLogListItemHelper,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter,
       View rootView,
-      QuickContactBadge quickContactView,
+      DialerQuickContactBadge dialerQuickContactView,
       View primaryActionView,
       PhoneCallDetailsViews phoneCallDetailsViews,
       CardView callLogEntryView,
@@ -230,6 +255,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     mContext = context;
     mExpandCollapseListener = expandCollapseListener;
+    onActionModeStateChangedListener = actionModeStateChangedListener;
     longPressListener = longClickListener;
     mCallLogCache = callLogCache;
     mCallLogListItemHelper = callLogListItemHelper;
@@ -237,8 +263,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     mBlockReportListener = blockReportListener;
     mCachedNumberLookupService = PhoneNumberCache.get(mContext).getCachedNumberLookupService();
 
+    // Cache this to avoid having to look it up each time we bind to a call log entry
+    mDefaultPhoneAccountHandle =
+        TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL);
+
     this.rootView = rootView;
-    this.quickContactView = quickContactView;
+    this.quickContactView = dialerQuickContactView;
     this.primaryActionView = primaryActionView;
     this.phoneCallDetailsViews = phoneCallDetailsViews;
     this.callLogEntryView = callLogEntryView;
@@ -250,6 +280,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     // Set text height to false on the TextViews so they don't have extra padding.
     phoneCallDetailsViews.nameView.setElegantTextHeight(false);
     phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
+
+    if (mContext instanceof CallLogActivity) {
+      hostUi = HostUi.CALL_HISTORY;
+      Logger.get(mContext)
+          .logQuickContactOnTouch(
+              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_HISTORY, true);
+    } else if (mVoicemailPlaybackPresenter == null) {
+      hostUi = HostUi.CALL_LOG;
+      Logger.get(mContext)
+          .logQuickContactOnTouch(
+              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_LOG, true);
+    } else {
+      hostUi = HostUi.VOICEMAIL;
+      Logger.get(mContext)
+          .logQuickContactOnTouch(
+              quickContactView, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_VOICEMAIL, false);
+    }
 
     quickContactView.setOverlay(null);
     if (CompatUtils.hasPrioritizedMimeType()) {
@@ -264,6 +311,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT_FLAG)) {
       primaryActionView.setOnLongClickListener(longPressListener);
       quickContactView.setOnLongClickListener(longPressListener);
+      quickContactView.setMulitSelectListeners(
+          mExpandCollapseListener, onActionModeStateChangedListener);
     } else {
       primaryActionView.setOnCreateContextMenuListener(this);
     }
@@ -275,6 +324,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       OnClickListener blockReportListener,
       View.OnClickListener expandCollapseListener,
       View.OnLongClickListener longClickListener,
+      CallLogAdapter.OnActionModeStateChangedListener actionModeStateChangeListener,
       CallLogCache callLogCache,
       CallLogListItemHelper callLogListItemHelper,
       VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
@@ -284,11 +334,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         blockReportListener,
         expandCollapseListener,
         longClickListener,
+        actionModeStateChangeListener,
         callLogCache,
         callLogListItemHelper,
         voicemailPlaybackPresenter,
         view,
-        (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
+        (DialerQuickContactBadge) view.findViewById(R.id.quick_contact_photo),
         view.findViewById(R.id.primary_action_view),
         PhoneCallDetailsViews.fromView(view),
         (CardView) view.findViewById(R.id.call_log_row),
@@ -297,8 +348,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   public static CallLogListItemViewHolder createForTest(Context context) {
+    return createForTest(context, null, null);
+  }
+
+  public static CallLogListItemViewHolder createForTest(
+      Context context,
+      View.OnClickListener expandCollapseListener,
+      VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
     Resources resources = context.getResources();
-    CallLogCache callLogCache = CallLogCache.getCallLogCache(context);
+    CallLogCache callLogCache = new CallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
         new PhoneCallDetailsHelper(context, resources, callLogCache);
 
@@ -306,13 +364,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         new CallLogListItemViewHolder(
             context,
             null,
-            null /* expandCollapseListener */,
+            expandCollapseListener /* expandCollapseListener */,
+            null,
             null,
             callLogCache,
             new CallLogListItemHelper(phoneCallDetailsHelper, resources, callLogCache),
-            null /* voicemailPlaybackPresenter */,
-            new View(context),
-            new QuickContactBadge(context),
+            voicemailPlaybackPresenter,
+            LayoutInflater.from(context).inflate(R.layout.call_log_list_item, null),
+            new DialerQuickContactBadge(context),
             new View(context),
             PhoneCallDetailsViews.createForTest(context),
             new CardView(context),
@@ -456,6 +515,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // Treat as normal list item; show call button, if possible.
       if (PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)) {
         boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
+
+        if (!isVoicemailNumber && showLightbringerPrimaryButton()) {
+          CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
+          primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
+          primaryActionButtonView.setContentDescription(
+              TextUtils.expandTemplate(
+                  mContext.getString(R.string.description_video_call_action), validNameOrNumber));
+          primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+          primaryActionButtonView.setVisibility(View.VISIBLE);
+          return;
+        }
+
         if (isVoicemailNumber) {
           // Call to generic voicemail number, in case there are multiple accounts.
           primaryActionButtonView.setTag(IntentProvider.getReturnVoicemailCallIntentProvider());
@@ -467,7 +538,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setContentDescription(
             TextUtils.expandTemplate(
                 mContext.getString(R.string.description_call_action), validNameOrNumber));
-        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_call_white_24);
+        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
         primaryActionButtonView.setVisibility(View.VISIBLE);
       } else {
         primaryActionButtonView.setTag(null);
@@ -483,12 +554,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private void bindActionButtons() {
     boolean canPlaceCallToNumber = PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation);
 
+    // Hide the call buttons by default. We then set it to be visible when appropriate below.
+    // This saves us having to remember to set it to GONE in multiple places.
+    callButtonView.setVisibility(View.GONE);
+    videoCallButtonView.setVisibility(View.GONE);
+
     if (isFullyUndialableVoicemail()) {
       // Sometimes the voicemail server will report the message is from some non phone number
       // source. If the number does not contains any dialable digit treat it as it is from a unknown
       // number, remove all action buttons but still show the voicemail playback layout.
-      callButtonView.setVisibility(View.GONE);
-      videoCallButtonView.setVisibility(View.GONE);
       detailsButtonView.setVisibility(View.GONE);
       createNewContactButtonView.setVisibility(View.GONE);
       addToExistingContactButtonView.setVisibility(View.GONE);
@@ -513,34 +587,40 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
+    TextView callTypeOrLocationView =
+        ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
+    if (canPlaceCallToNumber) {
       callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+      callTypeOrLocationView.setVisibility(View.GONE);
+    }
+
+    if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
       ((TextView) callButtonView.findViewById(R.id.call_action_text))
           .setText(
               TextUtils.expandTemplate(
                   mContext.getString(R.string.call_log_action_call),
                   nameOrNumber == null ? "" : nameOrNumber));
-      TextView callTypeOrLocationView =
-          ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
       if (callType == Calls.VOICEMAIL_TYPE && !TextUtils.isEmpty(callTypeOrLocation)) {
         callTypeOrLocationView.setText(callTypeOrLocation);
         callTypeOrLocationView.setVisibility(View.VISIBLE);
-      } else {
-        callTypeOrLocationView.setVisibility(View.GONE);
       }
       callButtonView.setVisibility(View.VISIBLE);
-    } else {
-      callButtonView.setVisibility(View.GONE);
     }
 
-    if (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall()) {
+    // We need to check if we are showing the Lightbringer primary button. If we are, then we should
+    // show the "Call" button here regardless of IMS availability.
+    if (showLightbringerPrimaryButton()) {
+      callButtonView.setVisibility(View.VISIBLE);
+      videoCallButtonView.setVisibility(View.GONE);
+    } else if (CallUtil.isVideoEnabled(mContext)
+        && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
       videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
     } else if (lightbringerReady) {
       videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
       videoCallButtonView.setVisibility(View.VISIBLE);
-    } else {
-      videoCallButtonView.setVisibility(View.GONE);
     }
 
     // For voicemail calls, show the voicemail playback layout; hide otherwise.
@@ -567,8 +647,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       detailsButtonView.setVisibility(View.GONE);
     } else {
       detailsButtonView.setVisibility(View.VISIBLE);
+      boolean canReportCallerId =
+          mCachedNumberLookupService != null
+              && mCachedNumberLookupService.canReportAsInvalid(info.sourceType, info.objectId);
       detailsButtonView.setTag(
-          IntentProvider.getCallDetailIntentProvider(callDetailsEntries, buildContact()));
+          IntentProvider.getCallDetailIntentProvider(
+              callDetailsEntries, buildContact(), canReportCallerId));
     }
 
     boolean isBlockedOrSpam = blockId != null || (isSpamFeatureEnabled && isSpam);
@@ -616,6 +700,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     return false;
   }
 
+  private boolean showLightbringerPrimaryButton() {
+    return accountHandle != null
+        && accountHandle.getComponentName().equals(getLightbringer().getPhoneAccountComponentName())
+        && lightbringerReady;
+  }
+
   private static boolean hasDialableChar(CharSequence number) {
     if (TextUtils.isEmpty(number)) {
       return false;
@@ -635,12 +725,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (accountHandle == null) {
       return false;
     }
-    if (accountHandle
-        .getComponentName()
-        .equals(getLightbringer().getPhoneAccountComponentName(mContext))) {
+    if (mDefaultPhoneAccountHandle == null) {
       return false;
     }
-    return true;
+    return accountHandle.getComponentName().equals(mDefaultPhoneAccountHandle.getComponentName());
   }
 
   private boolean canSupportCarrierVideoCall() {
@@ -690,12 +778,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
-    if (!isExpanded || TextUtils.isEmpty(view.getText())) {
-      view.setVisibility(View.GONE);
+    View transcriptContainerView = phoneCallDetailsViews.transcriptionView;
+    TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
+    TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
+    if (TextUtils.isEmpty(transcriptView.getText())) {
+      Assert.checkArgument(TextUtils.isEmpty(transcriptBrandingView.getText()));
+    }
+    if (!isExpanded || TextUtils.isEmpty(transcriptView.getText())) {
+      transcriptContainerView.setVisibility(View.GONE);
       return;
     }
-    view.setVisibility(View.VISIBLE);
+    transcriptContainerView.setVisibility(View.VISIBLE);
+    transcriptView.setVisibility(View.VISIBLE);
+    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
+      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+    } else {
+      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
+    }
   }
 
   public void updatePhoto() {
@@ -717,19 +816,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             getContactType());
   }
 
-  private int getContactType() {
-    int contactType = ContactPhotoManager.TYPE_DEFAULT;
-    if (mCallLogCache.isVoicemailNumber(accountHandle, number)) {
-      contactType = ContactPhotoManager.TYPE_VOICEMAIL;
-    } else if (isSpam) {
-      contactType = ContactPhotoManager.TYPE_SPAM;
-    } else if (mCachedNumberLookupService != null
-        && mCachedNumberLookupService.isBusiness(info.sourceType)) {
-      contactType = ContactPhotoManager.TYPE_BUSINESS;
-    } else if (numberPresentation == TelecomManager.PRESENTATION_RESTRICTED) {
-      contactType = ContactPhotoManager.TYPE_GENERIC_AVATAR;
-    }
-    return contactType;
+  private @ContactType int getContactType() {
+    return LetterTileDrawable.getContactTypeFromPrimitives(
+        mCallLogCache.isVoicemailNumber(accountHandle, number),
+        isSpam,
+        mCachedNumberLookupService != null
+            && mCachedNumberLookupService.isBusiness(info.sourceType),
+        numberPresentation,
+        false);
   }
 
   @Override
@@ -789,25 +883,67 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(
           CallComposerActivity.newIntent(activity, buildContact()),
-          DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_COMPOSE);
+          ActivityRequestCodes.DIALTACTS_CALL_COMPOSER);
     } else if (view.getId() == R.id.share_voicemail) {
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_PRESSED);
       mVoicemailPlaybackPresenter.shareVoicemail();
     } else {
       logCallLogAction(view.getId());
+
       final IntentProvider intentProvider = (IntentProvider) view.getTag();
-      if (intentProvider != null) {
-        final Intent intent = intentProvider.getIntent(mContext);
-        // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-        if (intent != null) {
-          DialerUtils.startActivityWithErrorToast(mContext, intent);
+      if (intentProvider == null) {
+        return;
+      }
+
+      final Intent intent = intentProvider.getIntent(mContext);
+      // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+      if (intent == null) {
+        return;
+      }
+
+      if (info != null && info.lookupKey != null) {
+        Bundle extras = new Bundle();
+        if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+          extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
         }
+        extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+        intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+      }
+
+      // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
+      // intents need to be started using startActivityForResult instead of the usual startActivity
+      String packageName = intent.getPackage();
+      if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
+        Logger.get(mContext)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
+        startLightbringerActivity(intent);
+      } else if (CallDetailsActivity.isLaunchIntent(intent)) {
+        PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
+        ((Activity) mContext)
+            .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
+      } else {
+        if (Intent.ACTION_CALL.equals(intent.getAction())
+            && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
+                == VideoProfile.STATE_BIDIRECTIONAL) {
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
+        }
+        DialerUtils.startActivityWithErrorToast(mContext, intent);
       }
     }
   }
 
-  private CallComposerContact buildContact() {
-    CallComposerContact.Builder contact = CallComposerContact.newBuilder();
+  private void startLightbringerActivity(Intent intent) {
+    try {
+      Activity activity = (Activity) mContext;
+      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  private DialerContact buildContact() {
+    DialerContact.Builder contact = DialerContact.newBuilder();
     contact.setPhotoId(info.photoId);
     if (info.photoUri != null) {
       contact.setPhotoUri(info.photoUri.toString());
@@ -819,13 +955,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       contact.setNameOrNumber((String) nameOrNumber);
     }
     contact.setContactType(getContactType());
-    contact.setNumber(number);
+    if (number != null) {
+      contact.setNumber(number);
+    }
     /* second line of contact view. */
     if (!TextUtils.isEmpty(info.name)) {
       contact.setDisplayNumber(displayNumber);
     }
     /* phone number type (e.g. mobile) in second line of contact view */
     contact.setNumberLabel(numberType);
+
+    /* third line of contact view. */
+    String accountLabel = mCallLogCache.getAccountLabel(accountHandle);
+    if (!TextUtils.isEmpty(accountLabel)) {
+      SimDetails.Builder simDetails = SimDetails.newBuilder().setNetwork(accountLabel);
+      simDetails.setColor(mCallLogCache.getAccountColor(accountHandle));
+      contact.setSimDetails(simDetails.build());
+    }
     return contact.build();
   }
 
@@ -834,8 +980,38 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_SEND_MESSAGE);
     } else if (id == R.id.add_to_existing_contact_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_ADD_TO_CONTACT);
+      switch (hostUi) {
+        case HostUi.CALL_HISTORY:
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_CALL_HISTORY);
+          break;
+        case HostUi.CALL_LOG:
+          Logger.get(mContext).logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_CALL_LOG);
+          break;
+        case HostUi.VOICEMAIL:
+          Logger.get(mContext).logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_VOICEMAIL);
+          break;
+        default:
+          throw Assert.createIllegalStateFailException();
+      }
     } else if (id == R.id.create_new_contact_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_CREATE_NEW_CONTACT);
+      switch (hostUi) {
+        case HostUi.CALL_HISTORY:
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_CALL_HISTORY);
+          break;
+        case HostUi.CALL_LOG:
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_CALL_LOG);
+          break;
+        case HostUi.VOICEMAIL:
+          Logger.get(mContext)
+              .logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_VOICEMAIL);
+          break;
+        default:
+          throw Assert.createIllegalStateFailException();
+      }
     }
   }
 
@@ -985,6 +1161,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     Logger.get(mContext).logScreenView(ScreenEvent.Type.CALL_LOG_CONTEXT_MENU, (Activity) mContext);
+  }
+
+  /** Specifies where the view holder belongs. */
+  @IntDef({HostUi.CALL_LOG, HostUi.CALL_HISTORY, HostUi.VOICEMAIL})
+  @Retention(RetentionPolicy.SOURCE)
+  private @interface HostUi {
+    int CALL_LOG = 0;
+    int CALL_HISTORY = 1;
+    int VOICEMAIL = 2;
   }
 
   public interface OnClickListener {

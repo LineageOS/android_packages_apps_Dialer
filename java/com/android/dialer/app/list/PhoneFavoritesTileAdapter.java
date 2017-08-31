@@ -30,17 +30,21 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PinnedPositions;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.LongSparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.R;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.lightbringer.Lightbringer;
+import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutRefresher;
 import com.google.common.collect.ComparisonChain;
 import java.util.ArrayList;
@@ -190,6 +194,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     // Track the length of {@link #mContactEntries} and compare to {@link #TILES_SOFT_LIMIT}.
     int counter = 0;
 
+    // Data for logging
+    int starredContactsCount = 0;
+    int pinnedContactsCount = 0;
+    int multipleNumbersContactsCount = 0;
+    int contactsWithPhotoCount = 0;
+    int contactsWithNameCount = 0;
+    int lightbringerReachableContactsCount = 0;
+
     // The cursor should not be closed since this is invoked from a CursorLoader.
     if (cursor.moveToFirst()) {
       int starredColumn = cursor.getColumnIndexOrThrow(Contacts.STARRED);
@@ -262,6 +274,22 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         contact.pinned = pinned;
         mContactEntries.add(contact);
 
+        // Set counts for logging
+        if (isStarred) {
+          // mNumStarred might be larger than the number of visible starred contact,
+          // since it includes invisible ones (starred contact with no phone number).
+          starredContactsCount++;
+        }
+        if (pinned != PinnedPositions.UNPINNED) {
+          pinnedContactsCount++;
+        }
+        if (!TextUtils.isEmpty(name)) {
+          contactsWithNameCount++;
+        }
+        if (photoUri != null) {
+          contactsWithPhotoCount++;
+        }
+
         duplicates.put(id, contact);
 
         counter++;
@@ -274,6 +302,47 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
 
     ShortcutRefresher.refresh(mContext, mContactEntries);
     notifyDataSetChanged();
+
+    Lightbringer lightbringer = LightbringerComponent.get(mContext).getLightbringer();
+    for (ContactEntry contact : mContactEntries) {
+      if (contact.phoneNumber == null) {
+        multipleNumbersContactsCount++;
+      } else if (lightbringer.isReachable(mContext, contact.phoneNumber)) {
+        lightbringerReachableContactsCount++;
+      }
+    }
+
+    Logger.get(mContext)
+        .logSpeedDialContactComposition(
+            counter,
+            starredContactsCount,
+            pinnedContactsCount,
+            multipleNumbersContactsCount,
+            contactsWithPhotoCount,
+            contactsWithNameCount,
+            lightbringerReachableContactsCount);
+    // Logs for manual testing
+    LogUtil.v("PhoneFavoritesTileAdapter.saveCursorToCache", "counter: %d", counter);
+    LogUtil.v(
+        "PhoneFavoritesTileAdapter.saveCursorToCache",
+        "starredContactsCount: %d",
+        starredContactsCount);
+    LogUtil.v(
+        "PhoneFavoritesTileAdapter.saveCursorToCache",
+        "pinnedContactsCount: %d",
+        pinnedContactsCount);
+    LogUtil.v(
+        "PhoneFavoritesTileAdapter.saveCursorToCache",
+        "multipleNumbersContactsCount: %d",
+        multipleNumbersContactsCount);
+    LogUtil.v(
+        "PhoneFavoritesTileAdapter.saveCursorToCache",
+        "contactsWithPhotoCount: %d",
+        contactsWithPhotoCount);
+    LogUtil.v(
+        "PhoneFavoritesTileAdapter.saveCursorToCache",
+        "contactsWithNameCount: %d",
+        contactsWithNameCount);
   }
 
   /** Iterates over the {@link Cursor} Returns position of the first NON Starred Contact */
@@ -347,7 +416,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   @Override
   public void notifyDataSetChanged() {
     if (DEBUG) {
-      Log.v(TAG, "notifyDataSetChanged");
+      LogUtil.v(TAG, "notifyDataSetChanged");
     }
     super.notifyDataSetChanged();
   }
@@ -355,7 +424,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     if (DEBUG) {
-      Log.v(TAG, "get view for " + String.valueOf(position));
+      LogUtil.v(TAG, "get view for " + position);
     }
 
     PhoneFavoriteTileView tileView = null;
@@ -371,6 +440,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     tileView.setPhotoManager(mPhotoManager);
     tileView.setListener(mListener);
     tileView.loadFromContact(getItem(position));
+    tileView.setPosition(position);
     return tileView;
   }
 
@@ -455,8 +525,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
           // update the database here with the new pinned positions
           try {
             mContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+            Logger.get(mContext).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
           } catch (RemoteException | OperationApplicationException e) {
-            Log.e(TAG, "Exception thrown when pinning contacts", e);
+            LogUtil.e(TAG, "Exception thrown when pinning contacts", e);
           }
         }
       }
@@ -609,6 +680,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     if (mDraggedEntry != null) {
       unstarAndUnpinContact(mDraggedEntry.lookupUri);
       mAwaitingRemove = true;
+      Logger.get(mContext).logInteraction(InteractionEvent.Type.SPEED_DIAL_REMOVE_CONTACT);
     }
   }
 

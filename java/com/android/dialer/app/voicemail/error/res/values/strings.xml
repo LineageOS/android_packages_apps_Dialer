@@ -15,26 +15,24 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_error_turn_off_airplane_mode_title">Turn off airplane mode</string>
-
   <string name="voicemail_error_activating_title">Activating visual voicemail</string>
   <string name="voicemail_error_activating_message">You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated.</string>
 
   <string name="voicemail_error_not_activate_no_signal_title">Can\'t activate visual voicemail</string>
-  <string name="voicemail_error_not_activate_no_signal_message">Make sure your phone has cellular connection and try again.</string>
+  <string name="voicemail_error_not_activate_no_signal_message">Make sure your phone has a mobile network connection and try again.</string>
   <string name="voicemail_error_not_activate_no_signal_airplane_mode_message">Turn off airplane mode and try again.</string>
 
   <string name="voicemail_error_no_signal_title">No connection</string>
-  <string name="voicemail_error_no_signal_message">You won\'t be notified for new voicemails. If you\'re on Wi-Fi, you can check for voicemail by syncing now.</string>
+  <string name="voicemail_error_no_signal_message">You won\'t be notified for new voicemails. If you\'re on Wi\u2011Fi, you can check for voicemail by syncing now.</string>
   <string name="voicemail_error_no_signal_airplane_mode_message">You won\'t be notified for new voicemails. Turn off airplane mode to sync your voicemail.</string>
-  <string name="voicemail_error_no_signal_cellular_required_message">Your phone needs a cellular data connection to check voicemail.</string>
+  <string name="voicemail_error_no_signal_cellular_required_message">Your phone needs a mobile data connection to check voicemail.</string>
 
   <string name="voicemail_error_activation_failed_title">Can\'t activate visual voicemail</string>
   <string name="voicemail_error_activation_failed_message">You can still call to check voicemail.</string>
 
   <string name="voicemail_error_no_data_title">Can\'t update visual voicemail</string>
-  <string name="voicemail_error_no_data_message">Try again when your Wi-Fi or cellular connection is better. You can still call to check voicemail.</string>
-  <string name="voicemail_error_no_data_cellular_required_message">Try again when your cellular data connection is better. You can still call to check voicemail.</string>
+  <string name="voicemail_error_no_data_message">Try again when your Wi\u2011Fi or mobile data connection is better. You can still call to check voicemail.</string>
+  <string name="voicemail_error_no_data_cellular_required_message">Try again when your mobile data connection is better. You can still call to check voicemail.</string>
 
   <string name="voicemail_error_bad_config_title">Can\'t update visual voicemail</string>
   <string name="voicemail_error_bad_config_message">You can still call to check voicemail.</string>
@@ -62,8 +60,6 @@
 
   <string name="voicemail_error_pin_not_set_title">Set your voicemail PIN</string>
   <string name="voicemail_error_pin_not_set_message">You\'ll need a voicemail PIN anytime you call to access your voicemail.</string>
-
-  <string name="voicemail_error_unknown_title">Unknown error</string>
 
   <string name="voicemail_action_turn_off_airplane_mode">Airplane Mode Settings</string>
   <string name="voicemail_action_set_pin">Set PIN</string>
@@ -141,7 +137,10 @@
   <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
 
   <string name="verizon_terms_and_conditions_title">Visual Voicemail Terms and Conditions</string>
-  <string name="verizon_terms_and_conditions_message">You must accept Verizon Wireless\'s terms and conditions to use visual voicemail:\n\n%s</string>
+  <string name="verizon_terms_and_conditions_message">%1$s\n\nYou must accept Verizon Wireless\'s terms and conditions to use visual voicemail:\n\n%2$s</string>
+
+  <string name="dialer_terms_and_conditions_title">Turn on Visual Voicemail</string>
+  <string name="dialer_terms_and_conditions_message">%s</string>
 
   <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
 Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
@@ -152,7 +151,7 @@ For the Premium Visual Voice Mail service, some voice messages may not be comple
 \n
 Speech recordings may be collected and stored for a period of 30 days, solely for the purpose of testing and improving transcription technology and performance, subject to the Verizon Wireless Privacy Policy, which can be found at http://www.verizon.com/about/privacy/policy/\n
 \n
-You understand that by selecting ACCEPT, your messages will be stored and anyone in possession of this device will have access to your voice mail. You further understand that your voice mail messages may be stored in electronic format on this device. To limit unauthorized access to your voice mail, you should consider locking your phone when not in use. Not available in all areas or over Wi-Fi.\n
+You understand that by selecting ACCEPT, your messages will be stored and anyone in possession of this device will have access to your voice mail. You further understand that your voice mail messages may be stored in electronic format on this device. To limit unauthorized access to your voice mail, you should consider locking your phone when not in use. Not available in all areas or over Wi\u2011Fi.\n
 \n
 If you do not accept all of these terms and conditions, do not use Visual Voice Mail.  </string>
 
@@ -165,18 +164,34 @@ En el caso del servicio de buzón de voz visual premium, es posible que algunos 
 \n
 Es posible que reunamos y almacenemos grabaciones de voz durante 30 días, con el único fin de probar y mejorar el rendimiento y la tecnología de la transcripción, sujeto a la Política de privacidad de Verizon Wireless, disponible en http://www.verizon.com/about/privacy/policy/.\n
 \n
-Entiende que, al seleccionar ACEPTAR, sus mensajes se almacenarán, y cualquier persona que disponga de este dispositivo tendrá acceso al buzón de voz. Entiende, además, que los mensajes de voz pueden almacenarse en formato electrónico en este dispositivo. Para limitar el acceso no autorizado al buzón de voz, debe considerar el bloqueo del teléfono cuando no está en uso. No está disponible en todas las áreas ni mediante Wi-Fi.\n
+Entiende que, al seleccionar ACEPTAR, sus mensajes se almacenarán, y cualquier persona que disponga de este dispositivo tendrá acceso al buzón de voz. Entiende, además, que los mensajes de voz pueden almacenarse en formato electrónico en este dispositivo. Para limitar el acceso no autorizado al buzón de voz, debe considerar el bloqueo del teléfono cuando no está en uso. No está disponible en todas las áreas ni mediante Wi\u2011Fi.\n
 \n
 Si no acepta todos estos términos y condiciones, no use el buzón de voz visual.
   </string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Accept</string>
+  <string translatable="false" name="dialer_terms_and_conditions_1.0_english">
+  See and listen to your messages, without having to call voicemail.\nGet transcripts of your voicemail using Google’s transcription service.
+  </string>
+
+  <string translatable="false" name="dialer_terms_and_conditions_1.0_spanish">
+  ***TRANSLATE TO SPANISH***\nSee and listen to your messages, without having to call voicemail.\nGet transcripts of your voicemail using Google’s transcription service.
+  </string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
   <string translatable="false" name="verizon_terms_and_conditions_accept_spanish">Aceptar</string>
-  <string translatable="false" name="verizon_terms_and_conditions_decline_english">Decline</string>
+  <string translatable="false" name="verizon_terms_and_conditions_decline_english">No Thanks</string>
   <string translatable="false" name="verizon_terms_and_conditions_decline_spanish">Rechazar</string>
+
+  <string translatable="false" name="dialer_terms_and_conditions_accept_english">Turn On</string>
+  <string translatable="false" name="dialer_terms_and_conditions_accept_spanish">Aceptar</string>
+  <string translatable="false" name="dialer_terms_and_conditions_decline_english">No Thanks</string>
+  <string translatable="false" name="dialer_terms_and_conditions_decline_spanish">Rechazar</string>
 
   <string name="verizon_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
   <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
+
+  <string name="dialer_terms_and_conditions_decline_dialog_message">Voicemail transcription will be disabled if the terms and conditions are declined.</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Disable voicemail transcription</string>
 
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Voicemail will only be accessible by calling *86. Set a new voicemail PIN to proceed.</string>
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Set PIN</string>

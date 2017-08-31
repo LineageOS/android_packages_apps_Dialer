@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"Teilen und anrufen"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"Bild: <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"Bild"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Foto aufnehmen"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Kamerabild konnte nicht geladen werden"</string>
     <string name="allow" msgid="8637148297403066623">"Zulassen"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Um ein Foto aufzunehmen, musst du den Zugriff auf die Kamera erlauben."</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Um ein Bild zu teilen, musst du den Zugriff auf deine Medien erlauben."</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Bild aufnehmen"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Foto auswählen"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Nachricht senden"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Foto über Messages gesendet"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Nachricht über Messages gesendet."</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"Bild wird gesendet…"</string>
 </resources>

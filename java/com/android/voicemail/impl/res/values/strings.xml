@@ -61,11 +61,6 @@
   <string name="voicemail_change_pin_preference_summary_disable">Visual voicemail must be enabled to change PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visual voicemail is not activated yet, please try again later</string>
 
-  <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
-  <string name="vm_change_pin_old_pin">Old PIN</string>
-  <!-- Hint for the new PIN field in the change vociemail PIN dialog -->
-  <string name="vm_change_pin_new_pin">New PIN</string>
-
   <!-- Message on the dialog when PIN changing is in progress -->
   <string name="vm_change_pin_progress_message">Please wait.</string>
   <!-- Error message for the voicemail PIN change if the PIN is too short -->
@@ -107,4 +102,8 @@
   <string name="change_pin_succeeded">Voicemail PIN updated</string>
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
   <string name="change_pin_system_error">Unable to set PIN</string>
+
+  <string name="vvm_config_override_load_current_key" translatable="false">vvm_config_override_load_current</string>
+  <string name="vvm_config_override_enabled_key" translatable="false">vvm_config_override_enabled</string>
+
 </resources>

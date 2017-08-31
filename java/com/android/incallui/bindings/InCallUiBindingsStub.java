@@ -19,11 +19,9 @@ package com.android.incallui.bindings;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import com.android.dialer.common.ConfigProvider;
 
 /** Default implementation for InCallUi bindings. */
 public class InCallUiBindingsStub implements InCallUiBindings {
-  private ConfigProvider configProvider;
 
   @Override
   @Nullable
@@ -41,41 +39,5 @@ public class InCallUiBindingsStub implements InCallUiBindings {
   @Nullable
   public Intent getCallStateButtonBroadcastIntent(Context context) {
     return null;
-  }
-
-  @Override
-  @Nullable
-  public DistanceHelper newDistanceHelper(Context context, DistanceHelper.Listener listener) {
-    return null;
-  }
-
-  @Override
-  @Nullable
-  public ContactUtils getContactUtilsInstance(Context context) {
-    return null;
-  }
-
-  @Override
-  public ConfigProvider getConfigProvider() {
-    if (configProvider == null) {
-      configProvider =
-          new ConfigProvider() {
-            @Override
-            public String getString(String key, String defaultValue) {
-              return defaultValue;
-            }
-
-            @Override
-            public long getLong(String key, long defaultValue) {
-              return defaultValue;
-            }
-
-            @Override
-            public boolean getBoolean(String key, boolean defaultValue) {
-              return defaultValue;
-            }
-          };
-    }
-    return configProvider;
   }
 }

@@ -24,10 +24,10 @@ import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Status;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 
@@ -75,7 +75,7 @@ public class VoicemailStatusCorruptionHandler {
         "VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus",
         "Source="
             + source
-            + ", CONFIGURATION_STAIE="
+            + ", CONFIGURATION_STATE="
             + status.configurationState
             + ", visualVoicemailEnabled="
             + visualVoicemailEnabled);

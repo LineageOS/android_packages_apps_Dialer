@@ -30,7 +30,9 @@ import com.google.auto.value.AutoValue;
  * @param <ParamsT> the type of the parameters sent to the task upon execution
  * @param <ProgressT> the type of the progress units published during the background computation
  * @param <ResultT> the type of the result of the background computation
+ * @deprecated Please use {@link DialerExecutors}.
  */
+@Deprecated
 public abstract class FallibleAsyncTask<ParamsT, ProgressT, ResultT>
     extends AsyncTask<ParamsT, ProgressT, FallibleTaskResult<ResultT>> {
 

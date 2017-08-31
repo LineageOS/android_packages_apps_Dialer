@@ -25,9 +25,14 @@
     <string name="share_and_call" msgid="8934144481838868674">"Կիսվել և զանգել"</string>
     <string name="gallery_item_description" msgid="7600601724204579471">"պատկեր <xliff:g id="DATE">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g>"</string>
     <string name="gallery_item_description_no_date" msgid="2059198895441426838">"պատկեր"</string>
-    <string name="camera_switch_to_still_mode" msgid="1881982437979592567">"Լուսանկարել"</string>
     <string name="camera_media_failure" msgid="8979549551450965882">"Չհաջողվեց բեռնել տեսախցիկի պատկերը"</string>
     <string name="allow" msgid="8637148297403066623">"Թույլատրել"</string>
     <string name="camera_permission_text" msgid="7863231776480341614">"Լուսանկարելու համար տրամադրեք Խցիկն օգտագործելու հնարավորություն"</string>
     <string name="gallery_permission_text" msgid="4102566850658919346">"Որևէ պատկերով կիսվելու համար տրամադրեք մեդիանյութերն օգտագործելու հնարավորություն"</string>
+    <string name="description_call_composer_camera" msgid="388088245837924914">"Լուսանկարել"</string>
+    <string name="description_call_composer_photo" msgid="6449208314952246454">"Ընտրել լուսանկար"</string>
+    <string name="description_call_composer_message" msgid="9132362446000908550">"Ուղարկել հաղորդագրություն"</string>
+    <string name="image_sent_messages" msgid="6520870555040566229">"Լուսանկարն ուղարկվել է Messages-ի միջոցով"</string>
+    <string name="message_sent_messages" msgid="6286576951151541098">"Հաղորդագրությունն ուղարկվել է Messages-ի միջոցով"</string>
+    <string name="call_composer_image_uploading" msgid="8812901858144330630">"Պատկերի ուղարկում…"</string>
 </resources>

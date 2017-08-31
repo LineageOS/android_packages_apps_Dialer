@@ -47,6 +47,12 @@ public class OmtpVoicemailMessageCreator {
   @Nullable
   public static VoicemailErrorMessage create(
       Context context, VoicemailStatus status, final VoicemailStatusReader statusReader) {
+    VoicemailErrorMessage tosMessage =
+        new VoicemailTosMessageCreator(context, status, statusReader).maybeCreateTosMessage();
+    if (tosMessage != null) {
+      return tosMessage;
+    }
+
     if (Status.CONFIGURATION_STATE_OK == status.configurationState
         && Status.DATA_CHANNEL_STATE_OK == status.dataChannelState
         && Status.NOTIFICATION_CHANNEL_STATE_OK == status.notificationChannelState) {
@@ -128,6 +134,25 @@ public class OmtpVoicemailMessageCreator {
     // from it, so just suppress the message.
     LogUtil.e("OmtpVoicemailMessageCreator.create", "Unhandled status: " + status);
     return null;
+  }
+
+  public static boolean isSyncBlockingError(VoicemailStatus status) {
+    if (status.notificationChannelState != Status.NOTIFICATION_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    if (status.dataChannelState != Status.DATA_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    switch (status.configurationState) {
+      case Status.CONFIGURATION_STATE_OK:
+        // allow activation to be queued again in case it is interrupted
+      case Status.CONFIGURATION_STATE_CONFIGURING:
+        return false;
+      default:
+        return true;
+    }
   }
 
   @Nullable

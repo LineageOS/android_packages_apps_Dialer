@@ -44,11 +44,11 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLayoutChangeListener;
 import android.view.View.OnSystemUiVisibilityChangeListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewOutlineProvider;
-import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -60,6 +60,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.contactgrid.ContactGridManager;
@@ -75,7 +76,6 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
-import com.android.incallui.video.impl.CameraPermissionDialogFragment.CameraPermissionDialogCallback;
 import com.android.incallui.video.impl.CheckableImageButton.OnCheckedChangeListener;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -93,21 +93,18 @@ public class VideoCallFragment extends Fragment
         OnClickListener,
         OnCheckedChangeListener,
         AudioRouteSelectorPresenter,
-        OnSystemUiVisibilityChangeListener,
-        CameraPermissionDialogCallback {
+        OnSystemUiVisibilityChangeListener {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
-  private static final float BLUR_PREVIEW_RADIUS = 16.0f;
-  private static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
+  @VisibleForTesting static final float BLUR_PREVIEW_RADIUS = 16.0f;
+  @VisibleForTesting static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
   private static final float BLUR_REMOTE_RADIUS = 25.0f;
   private static final float BLUR_REMOTE_SCALE_FACTOR = 0.25f;
   private static final float ASPECT_RATIO_MATCH_THRESHOLD = 0.2f;
 
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
-  private static final String CAMERA_PERMISSION_DIALOG_FRAMENT_TAG =
-      "CameraPermissionDialogFragment";
   private static final long CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS = 2000L;
   private static final long VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS = 2000L;
 
@@ -121,6 +118,7 @@ public class VideoCallFragment extends Fragment
           outline.setOval(x - radius, y - radius, x + radius, y + radius);
         }
       };
+
   private InCallScreenDelegate inCallScreenDelegate;
   private VideoCallScreenDelegate videoCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
@@ -156,7 +154,7 @@ public class VideoCallFragment extends Fragment
       new Runnable() {
         @Override
         public void run() {
-          if (videoCallScreenDelegate.shouldShowCameraPermissionDialog()) {
+          if (videoCallScreenDelegate.shouldShowCameraPermissionToast()) {
             LogUtil.i("VideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
             checkCameraPermission();
           }
@@ -252,25 +250,43 @@ public class VideoCallFragment extends Fragment
     greenScreenBackgroundView = view.findViewById(R.id.videocall_green_screen_background);
     fullscreenBackgroundView = view.findViewById(R.id.videocall_fullscreen_background);
 
-    // We need the texture view size to be able to scale the remote video. At this point the view
-    // layout won't be complete so add a layout listener.
-    ViewTreeObserver observer = remoteTextureView.getViewTreeObserver();
-    observer.addOnGlobalLayoutListener(
-        new ViewTreeObserver.OnGlobalLayoutListener() {
+    remoteTextureView.addOnLayoutChangeListener(
+        new OnLayoutChangeListener() {
           @Override
-          public void onGlobalLayout() {
-            LogUtil.i("VideoCallFragment.onGlobalLayout", null);
+          public void onLayoutChange(
+              View v,
+              int left,
+              int top,
+              int right,
+              int bottom,
+              int oldLeft,
+              int oldTop,
+              int oldRight,
+              int oldBottom) {
+            LogUtil.i("VideoCallFragment.onLayoutChange", "remoteTextureView layout changed");
             updateRemoteVideoScaling();
-            updatePreviewVideoScaling();
-            updateVideoOffViews();
-            // Remove the listener so we don't continually re-layout.
-            ViewTreeObserver observer = remoteTextureView.getViewTreeObserver();
-            if (observer.isAlive()) {
-              observer.removeOnGlobalLayoutListener(this);
-            }
+            updateRemoteOffView();
           }
         });
 
+    previewTextureView.addOnLayoutChangeListener(
+        new OnLayoutChangeListener() {
+          @Override
+          public void onLayoutChange(
+              View v,
+              int left,
+              int top,
+              int right,
+              int bottom,
+              int oldLeft,
+              int oldTop,
+              int oldRight,
+              int oldBottom) {
+            LogUtil.i("VideoCallFragment.onLayoutChange", "previewTextureView layout changed");
+            updatePreviewVideoScaling();
+            updatePreviewOffView();
+          }
+        });
     return view;
   }
 
@@ -453,7 +469,7 @@ public class VideoCallFragment extends Fragment
     View view = getView();
     if (view != null) {
       // Code is more expressive with all flags present, even though some may be combined
-      //noinspection PointlessBitwiseExpression
+      // noinspection PointlessBitwiseExpression
       view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
   }
@@ -633,7 +649,7 @@ public class VideoCallFragment extends Fragment
   @Override
   public void onCheckedChanged(CheckableImageButton button, boolean isChecked) {
     if (button == cameraOffButton) {
-      if (!isChecked && !VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+      if (!isChecked && !VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
         LogUtil.i("VideoCallFragment.onCheckedChanged", "show camera permission dialog");
         checkCameraPermission();
       } else {
@@ -654,23 +670,21 @@ public class VideoCallFragment extends Fragment
         "showPreview: %b, shouldShowRemote: %b",
         shouldShowPreview,
         shouldShowRemote);
-    this.shouldShowPreview = shouldShowPreview;
-    this.shouldShowRemote = shouldShowRemote;
-    this.isRemotelyHeld = isRemotelyHeld;
 
     videoCallScreenDelegate.getLocalVideoSurfaceTexture().attachToTextureView(previewTextureView);
     videoCallScreenDelegate.getRemoteVideoSurfaceTexture().attachToTextureView(remoteTextureView);
 
-    updateVideoOffViews();
-    updateRemoteVideoScaling();
+    this.isRemotelyHeld = isRemotelyHeld;
+    if (this.shouldShowRemote != shouldShowRemote) {
+      this.shouldShowRemote = shouldShowRemote;
+      updateRemoteOffView();
+    }
+    if (this.shouldShowPreview != shouldShowPreview) {
+      this.shouldShowPreview = shouldShowPreview;
+      updatePreviewOffView();
+    }
   }
 
-  /**
-   * This method scales the video feed inside the texture view, it doesn't change the texture view's
-   * size. In the old UI we would change the view size to match the aspect ratio of the video. In
-   * the new UI the view is always square (with the circular clip) so we have to do additional work
-   * to make sure the non-square video doesn't look squished.
-   */
   @Override
   public void onLocalVideoDimensionsChanged() {
     LogUtil.i("VideoCallFragment.onLocalVideoDimensionsChanged", null);
@@ -732,7 +746,6 @@ public class VideoCallFragment extends Fragment
     } else {
       exitFullscreenMode();
     }
-    updateVideoOffViews();
 
     OnHoldFragment onHoldFragment =
         ((OnHoldFragment)
@@ -851,6 +864,9 @@ public class VideoCallFragment extends Fragment
     LogUtil.i("VideoCallFragment.onAudioRouteSelected", "audioRoute: " + audioRoute);
     inCallButtonUiDelegate.setAudioRoute(audioRoute);
   }
+
+  @Override
+  public void onAudioRouteSelectorDismiss() {}
 
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
@@ -1016,7 +1032,6 @@ public class VideoCallFragment extends Fragment
     params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
     previewTextureView.setLayoutParams(params);
     previewTextureView.setOutlineProvider(null);
-    updatePreviewVideoScaling();
     updateOverlayBackground();
     contactGridManager.setIsMiddleRowVisible(true);
     updateMutePreviewOverlayVisibility();
@@ -1045,7 +1060,6 @@ public class VideoCallFragment extends Fragment
     params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
     previewTextureView.setLayoutParams(params);
     previewTextureView.setOutlineProvider(circleOutlineProvider);
-    updatePreviewVideoScaling();
     updateOverlayBackground();
     contactGridManager.setIsMiddleRowVisible(false);
     updateMutePreviewOverlayVisibility();
@@ -1055,7 +1069,9 @@ public class VideoCallFragment extends Fragment
     previewOffBlurredImageView.setClipToOutline(true);
   }
 
-  private void updateVideoOffViews() {
+  private void updatePreviewOffView() {
+    LogUtil.enterBlock("VideoCallFragment.updatePreviewOffView");
+
     // Always hide the preview off and remote off views in green screen mode.
     boolean previewEnabled = isInGreenScreenMode || shouldShowPreview;
     previewOffOverlay.setVisibility(previewEnabled ? View.GONE : View.VISIBLE);
@@ -1065,7 +1081,10 @@ public class VideoCallFragment extends Fragment
         shouldShowPreview,
         BLUR_PREVIEW_RADIUS,
         BLUR_PREVIEW_SCALE_FACTOR);
+  }
 
+  private void updateRemoteOffView() {
+    LogUtil.enterBlock("VideoCallFragment.updateRemoteOffView");
     boolean remoteEnabled = isInGreenScreenMode || shouldShowRemote;
     boolean isResumed = remoteEnabled && !isRemotelyHeld;
     if (isResumed) {
@@ -1092,7 +1111,6 @@ public class VideoCallFragment extends Fragment
           isRemotelyHeld ? R.string.videocall_remotely_held : R.string.videocall_remote_video_off);
       remoteVideoOff.setVisibility(View.VISIBLE);
     }
-    LogUtil.i("VideoCallFragment.updateVideoOffViews", "calling updateBlurredImageView");
     updateBlurredImageView(
         remoteTextureView,
         remoteOffBlurredImageView,
@@ -1101,52 +1119,60 @@ public class VideoCallFragment extends Fragment
         BLUR_REMOTE_SCALE_FACTOR);
   }
 
-  private void updateBlurredImageView(
+  @VisibleForTesting
+  void updateBlurredImageView(
       TextureView textureView,
       ImageView blurredImageView,
       boolean isVideoEnabled,
       float blurRadius,
       float scaleFactor) {
-    boolean didBlur = false;
-    long startTimeMillis = SystemClock.elapsedRealtime();
-    if (!isVideoEnabled) {
-      int width = Math.round(textureView.getWidth() * scaleFactor);
-      int height = Math.round(textureView.getHeight() * scaleFactor);
-      // This call takes less than 10 milliseconds.
-      Bitmap bitmap = textureView.getBitmap(width, height);
-      if (bitmap != null) {
-        // TODO: When the view is first displayed after a rotation the bitmap is empty
-        // and thus this blur has no effect.
-        // This call can take 100 milliseconds.
-        blur(getContext(), bitmap, blurRadius);
+    Context context = getContext();
 
-        // TODO: Figure out why only have to apply the transform in landscape mode
-        if (width > height) {
-          bitmap =
-              Bitmap.createBitmap(
-                  bitmap,
-                  0,
-                  0,
-                  bitmap.getWidth(),
-                  bitmap.getHeight(),
-                  textureView.getTransform(null),
-                  true);
-        }
-
-        blurredImageView.setImageBitmap(bitmap);
-        blurredImageView.setVisibility(View.VISIBLE);
-        didBlur = true;
-      }
-    }
-    if (!didBlur) {
+    if (isVideoEnabled || context == null) {
       blurredImageView.setImageBitmap(null);
       blurredImageView.setVisibility(View.GONE);
+      return;
     }
+
+    long startTimeMillis = SystemClock.elapsedRealtime();
+    int width = Math.round(textureView.getWidth() * scaleFactor);
+    int height = Math.round(textureView.getHeight() * scaleFactor);
+
+    LogUtil.i("VideoCallFragment.updateBlurredImageView", "width: %d, height: %d", width, height);
+
+    // This call takes less than 10 milliseconds.
+    Bitmap bitmap = textureView.getBitmap(width, height);
+
+    if (bitmap == null) {
+      blurredImageView.setImageBitmap(null);
+      blurredImageView.setVisibility(View.GONE);
+      return;
+    }
+
+    // TODO(mdooley): When the view is first displayed after a rotation the bitmap is empty
+    // and thus this blur has no effect.
+    // This call can take 100 milliseconds.
+    blur(getContext(), bitmap, blurRadius);
+
+    // TODO(mdooley): Figure out why only have to apply the transform in landscape mode
+    if (width > height) {
+      bitmap =
+          Bitmap.createBitmap(
+              bitmap,
+              0,
+              0,
+              bitmap.getWidth(),
+              bitmap.getHeight(),
+              textureView.getTransform(null),
+              true);
+    }
+
+    blurredImageView.setImageBitmap(bitmap);
+    blurredImageView.setVisibility(View.VISIBLE);
 
     LogUtil.i(
         "VideoCallFragment.updateBlurredImageView",
-        "didBlur: %b, took %d millis",
-        didBlur,
+        "took %d millis",
         (SystemClock.elapsedRealtime() - startTimeMillis));
   }
 
@@ -1228,26 +1254,21 @@ public class VideoCallFragment extends Fragment
     videoCallScreenDelegate.onSystemUiVisibilityChange(navBarVisible);
   }
 
-  @Override
-  public void onCameraPermissionGranted() {
-    videoCallScreenDelegate.onCameraPermissionGranted();
-  }
-
   private void checkCameraPermission() {
     // Checks if user has consent of camera permission and the permission is granted.
     // If camera permission is revoked, shows system permission dialog.
     // If camera permission is granted but user doesn't have consent of camera permission
     // (which means it's first time making video call), shows custom dialog instead. This
     // will only be shown to user once.
-    if (!VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+    if (!VideoUtils.hasCameraPermissionAndShownPrivacyToast(getContext())) {
       videoCallScreenDelegate.onCameraPermissionDialogShown();
       if (!VideoUtils.hasCameraPermission(getContext())) {
         requestPermissions(new String[] {permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
       } else {
-        CameraPermissionDialogFragment.newInstance()
-            .show(getChildFragmentManager(), CAMERA_PERMISSION_DIALOG_FRAMENT_TAG);
+        PermissionsUtil.showCameraPermissionToast(getContext());
+        videoCallScreenDelegate.onCameraPermissionGranted();
       }
     }
   }
 }
-//LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/incallui/video/impl/SurfaceViewVideoCallFragment.java)
+// LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/incallui/video/impl/SurfaceViewVideoCallFragment.java)

@@ -19,15 +19,17 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.R;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallSpecificAppData;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 
 /** A ContactTile displays a contact's picture and name */
 public abstract class ContactTileView extends FrameLayout {
@@ -60,8 +62,15 @@ public abstract class ContactTileView extends FrameLayout {
         if (mListener == null) {
           return;
         }
+        CallSpecificAppData callSpecificAppData =
+            CallSpecificAppData.newBuilder()
+                .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
+                .setAllowAssistedDialing(true)
+                .build();
         mListener.onContactSelected(
-            getLookupUri(), MoreContactUtils.getTargetRectFromView(ContactTileView.this));
+            getLookupUri(),
+            MoreContactUtils.getTargetRectFromView(ContactTileView.this),
+            callSpecificAppData);
       }
     };
   }
@@ -97,7 +106,7 @@ public abstract class ContactTileView extends FrameLayout {
 
         }
       } else {
-        Log.w(TAG, "contactPhotoManager not set");
+        LogUtil.w(TAG, "contactPhotoManager not set");
       }
     } else {
       setVisibility(View.INVISIBLE);
@@ -163,9 +172,10 @@ public abstract class ContactTileView extends FrameLayout {
   public interface Listener {
 
     /** Notification that the contact was selected; no specific action is dictated. */
-    void onContactSelected(Uri contactLookupUri, Rect viewRect);
+    void onContactSelected(
+        Uri contactLookupUri, Rect viewRect, CallSpecificAppData callSpecificAppData);
 
     /** Notification that the specified number is to be called. */
-    void onCallNumberDirectly(String phoneNumber);
+    void onCallNumberDirectly(String phoneNumber, CallSpecificAppData callSpecificAppData);
   }
 }

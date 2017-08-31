@@ -30,8 +30,8 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.SearchSnippets;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -55,7 +55,7 @@ import com.android.contacts.common.format.TextHighlighter;
 import com.android.contacts.common.list.PhoneNumberListAdapter.Listener;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.SearchUtil;
-import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.util.ViewUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -81,13 +81,15 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
 
   /** IntDef for indices of ViewPager tabs. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({NONE, VIDEO, CALL_AND_SHARE})
+  @IntDef({NONE, VIDEO, LIGHTBRINGER, CALL_AND_SHARE})
   public @interface CallToAction {}
 
   public static final int NONE = 0;
   public static final int VIDEO = 1;
-  public static final int CALL_AND_SHARE = 2;
+  public static final int LIGHTBRINGER = 2;
+  public static final int CALL_AND_SHARE = 3;
 
+  private final PhotoPosition mPhotoPosition = getDefaultPhotoPosition();
   private static final Pattern SPLIT_PATTERN =
       Pattern.compile("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})|[\\w]+");
   static final char SNIPPET_START_MATCH = '[';
@@ -106,7 +108,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private int mNameTextViewTextSize;
   private int mHeaderWidth;
   private Drawable mActivatedBackgroundDrawable;
-  private int mCallToActionSize = 32;
+  private int mCallToActionSize = 48;
   private int mCallToActionMargin = 16;
   // Set in onLayout. Represent left and right position of the View on the screen.
   private int mLeftOffset;
@@ -122,10 +124,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private String mHighlightedPrefix;
   /** Indicates whether the view should leave room for the "video call" icon. */
   private boolean mSupportVideoCall;
-  /** Indicates whether the view should leave room for the "call and share" icon. */
-  private boolean mSupportCallAndShare;
 
-  private PhotoPosition mPhotoPosition = getDefaultPhotoPosition(false /* normal/non opposite */);
   // Header layout data
   private TextView mHeaderTextView;
   private boolean mIsSectionHeaderEnabled;
@@ -139,7 +138,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private TextView mSnippetView;
   private TextView mStatusView;
   private ImageView mPresenceIcon;
-  private ImageView mCallToAction;
+  @NonNull private final ImageView mCallToActionView;
   private ImageView mWorkProfileIcon;
   private ColorStateList mSecondaryTextColor;
   private int mDefaultPhotoViewSize = 0;
@@ -181,23 +180,14 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
   private Rect mBoundsWithoutHeader = new Rect();
   private CharSequence mUnknownNameText;
 
-  public ContactListItemView(Context context) {
-    super(context);
+  private String mPhoneNumber;
+  private int mPosition = -1;
+  private @CallToAction int mCallToAction = NONE;
 
-    mTextHighlighter = new TextHighlighter(Typeface.BOLD);
-    mNameHighlightSequence = new ArrayList<>();
-    mNumberHighlightSequence = new ArrayList<>();
-  }
-
-  public ContactListItemView(
-      Context context,
-      AttributeSet attrs,
-      boolean supportVideoCallIcon,
-      boolean supportCallAndShare) {
+  public ContactListItemView(Context context, AttributeSet attrs, boolean supportVideoCallIcon) {
     this(context, attrs);
 
     mSupportVideoCall = supportVideoCallIcon;
-    mSupportCallAndShare = supportCallAndShare;
   }
 
   public ContactListItemView(Context context, AttributeSet attrs) {
@@ -284,19 +274,20 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     mNameHighlightSequence = new ArrayList<>();
     mNumberHighlightSequence = new ArrayList<>();
 
+    mCallToActionView = new ImageView(getContext());
+    mCallToActionView.setId(R.id.call_to_action);
+    mCallToActionView.setLayoutParams(new LayoutParams(mCallToActionSize, mCallToActionSize));
+    mCallToActionView.setScaleType(ScaleType.CENTER);
+    mCallToActionView.setImageTintList(
+        ContextCompat.getColorStateList(getContext(), R.color.search_video_call_icon_tint));
+    addView(mCallToActionView);
+
     setLayoutDirection(View.LAYOUT_DIRECTION_LOCALE);
   }
 
-  public static PhotoPosition getDefaultPhotoPosition(boolean opposite) {
-    final Locale locale = Locale.getDefault();
-    final int layoutDirection = TextUtils.getLayoutDirectionFromLocale(locale);
-    switch (layoutDirection) {
-      case View.LAYOUT_DIRECTION_RTL:
-        return (opposite ? PhotoPosition.LEFT : PhotoPosition.RIGHT);
-      case View.LAYOUT_DIRECTION_LTR:
-      default:
-        return (opposite ? PhotoPosition.RIGHT : PhotoPosition.LEFT);
-    }
+  public static PhotoPosition getDefaultPhotoPosition() {
+    int layoutDirection = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault());
+    return layoutDirection == View.LAYOUT_DIRECTION_RTL ? PhotoPosition.RIGHT : PhotoPosition.LEFT;
   }
 
   /**
@@ -333,35 +324,48 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
    * @param position The position in the adapter of the call to action.
    */
   public void setCallToAction(@CallToAction int action, Listener listener, int position) {
-    int drawable;
+    mCallToAction = action;
+    mPosition = position;
+
+    Drawable drawable;
     int description;
     OnClickListener onClickListener;
-    if (action == CALL_AND_SHARE && mSupportCallAndShare) {
-      drawable = R.drawable.ic_call_and_share;
-      description = R.string.description_search_video_call;
+    if (action == CALL_AND_SHARE) {
+      drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_phone_attach);
+      drawable.setAutoMirrored(true);
+      description = R.string.description_search_call_and_share;
       onClickListener = v -> listener.onCallAndShareIconClicked(position);
     } else if (action == VIDEO && mSupportVideoCall) {
-      drawable = R.drawable.ic_search_video_call;
-      description = R.string.description_search_call_and_share;
+      drawable =
+          ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
+      drawable.setAutoMirrored(true);
+      description = R.string.description_search_video_call;
       onClickListener = v -> listener.onVideoCallIconClicked(position);
+    } else if (action == LIGHTBRINGER) {
+      CallIntentBuilder.increaseLightbringerCallButtonAppearInSearchCount();
+      drawable =
+          ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
+      drawable.setAutoMirrored(true);
+      description = R.string.description_search_video_call;
+      onClickListener = v -> listener.onLightbringerIconClicked(position);
     } else {
-      if (mCallToAction != null) {
-        mCallToAction.setVisibility(View.GONE);
-        mCallToAction.setOnClickListener(null);
-      }
+      mCallToActionView.setVisibility(View.GONE);
+      mCallToActionView.setOnClickListener(null);
       return;
     }
 
-    if (mCallToAction == null) {
-      mCallToAction = new ImageView(getContext());
-      mCallToAction.setLayoutParams(new LayoutParams(mCallToActionSize, mCallToActionSize));
-      mCallToAction.setScaleType(ScaleType.CENTER);
-      addView(mCallToAction);
-    }
-    mCallToAction.setContentDescription(getContext().getString(description));
-    mCallToAction.setOnClickListener(onClickListener);
-    mCallToAction.setImageResource(drawable);
-    mCallToAction.setVisibility(View.VISIBLE);
+    mCallToActionView.setContentDescription(getContext().getString(description));
+    mCallToActionView.setOnClickListener(onClickListener);
+    mCallToActionView.setImageDrawable(drawable);
+    mCallToActionView.setVisibility(View.VISIBLE);
+  }
+
+  public @CallToAction int getCallToAction() {
+    return mCallToAction;
+  }
+
+  public int getPosition() {
+    return mPosition;
   }
 
   /**
@@ -374,18 +378,6 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
    */
   public void setSupportVideoCallIcon(boolean supportVideoCall) {
     mSupportVideoCall = supportVideoCall;
-  }
-
-  /**
-   * Sets whether the view supports a call and share icon. This is independent of whether the view
-   * is actually showing an icon. Support for the icon ensures that the layout leaves space for it,
-   * should it be shown.
-   *
-   * @param supportCallAndShare {@code true} if the call and share icon is supported, {@code false}
-   *     otherwise.
-   */
-  public void setSupportCallAndShareIcon(boolean supportCallAndShare) {
-    mSupportCallAndShare = supportCallAndShare;
   }
 
   @Override
@@ -423,9 +415,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       effectiveWidth -= mHeaderWidth + mGapBetweenImageAndText;
     }
 
-    if (mSupportVideoCall || mSupportCallAndShare) {
-      effectiveWidth -= (mCallToActionSize + mCallToActionMargin);
-    }
+    effectiveWidth -= (mCallToActionSize + mCallToActionMargin);
 
     // Go over all visible text views and measure actual width of each of them.
     // Also calculate their heights to get the total height for this entire view.
@@ -496,11 +486,9 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mStatusTextViewHeight = mPresenceIcon.getMeasuredHeight();
     }
 
-    if ((mSupportVideoCall || mSupportCallAndShare) && isVisible(mCallToAction)) {
-      mCallToAction.measure(
-          MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY),
-          MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY));
-    }
+    mCallToActionView.measure(
+        MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY),
+        MeasureSpec.makeMeasureSpec(mCallToActionSize, MeasureSpec.EXACTLY));
 
     if (isVisible(mWorkProfileIcon)) {
       mWorkProfileIcon.measure(
@@ -629,34 +617,30 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       leftBound += mTextIndent;
     }
 
-    if (mSupportVideoCall || mSupportCallAndShare) {
-      // Place the call to action at the end of the list (e.g. take into account RTL mode).
-      if (isVisible(mCallToAction)) {
-        // Center the icon vertically
-        final int callToActionTop = topBound + (height - topBound - mCallToActionSize) / 2;
+    // Place the call to action at the end of the list (e.g. take into account RTL mode).
+    // Center the icon vertically
+    final int callToActionTop = topBound + (height - topBound - mCallToActionSize) / 2;
 
-        if (!isLayoutRtl) {
-          // When photo is on left, icon is placed on the right edge.
-          mCallToAction.layout(
-              rightBound - mCallToActionSize,
-              callToActionTop,
-              rightBound,
-              callToActionTop + mCallToActionSize);
-        } else {
-          // When photo is on right, icon is placed on the left edge.
-          mCallToAction.layout(
-              leftBound,
-              callToActionTop,
-              leftBound + mCallToActionSize,
-              callToActionTop + mCallToActionSize);
-        }
-      }
+    if (!isLayoutRtl) {
+      // When photo is on left, icon is placed on the right edge.
+      mCallToActionView.layout(
+          rightBound - mCallToActionSize,
+          callToActionTop,
+          rightBound,
+          callToActionTop + mCallToActionSize);
+    } else {
+      // When photo is on right, icon is placed on the left edge.
+      mCallToActionView.layout(
+          leftBound,
+          callToActionTop,
+          leftBound + mCallToActionSize,
+          callToActionTop + mCallToActionSize);
+    }
 
-      if (mPhotoPosition == PhotoPosition.LEFT) {
-        rightBound -= (mCallToActionSize + mCallToActionMargin);
-      } else {
-        leftBound += mCallToActionSize + mCallToActionMargin;
-      }
+    if (mPhotoPosition == PhotoPosition.LEFT) {
+      rightBound -= (mCallToActionSize + mCallToActionMargin);
+    } else {
+      leftBound += mCallToActionSize + mCallToActionMargin;
     }
 
     // Center text vertically, then apply the top offset.
@@ -901,9 +885,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     }
     if (mQuickContact == null) {
       mQuickContact = new QuickContactBadge(getContext());
-      if (CompatUtils.isLollipopCompatible()) {
-        mQuickContact.setOverlay(null);
-      }
+      mQuickContact.setOverlay(null);
       mQuickContact.setLayoutParams(getDefaultPhotoLayoutParams());
       if (mNameTextView != null) {
         mQuickContact.setContentDescription(
@@ -1008,9 +990,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mNameTextView.setGravity(Gravity.CENTER_VERTICAL);
       mNameTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
       mNameTextView.setId(R.id.cliv_name_textview);
-      if (CompatUtils.isLollipopCompatible()) {
-        mNameTextView.setElegantTextHeight(false);
-      }
+      mNameTextView.setElegantTextHeight(false);
       addView(mNameTextView);
     }
     return mNameTextView;
@@ -1056,6 +1036,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
    * exists.
    */
   public void setPhoneNumber(String text) {
+    mPhoneNumber = text;
     if (text == null) {
       if (mDataView != null) {
         mDataView.setVisibility(View.GONE);
@@ -1086,6 +1067,10 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     }
   }
 
+  public String getPhoneNumber() {
+    return mPhoneNumber;
+  }
+
   private void setMarqueeText(TextView textView, CharSequence text) {
     if (getTextEllipsis() == TruncateAt.MARQUEE) {
       // To show MARQUEE correctly (with END effect during non-active state), we need
@@ -1109,9 +1094,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mDataView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
       mDataView.setActivated(isActivated());
       mDataView.setId(R.id.cliv_data_view);
-      if (CompatUtils.isLollipopCompatible()) {
-        mDataView.setElegantTextHeight(false);
-      }
+      mDataView.setElegantTextHeight(false);
       addView(mDataView);
     }
     return mDataView;
@@ -1469,28 +1452,17 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     forceLayout();
   }
 
-  public void setPhotoPosition(PhotoPosition photoPosition) {
-    mPhotoPosition = photoPosition;
-  }
-
   /**
    * Set drawable resources directly for the drawable resource of the photo view.
    *
-   * @param drawableId Id of drawable resource.
+   * @param drawable A drawable resource.
    */
-  public void setDrawableResource(int drawableId) {
+  public void setDrawable(Drawable drawable) {
     ImageView photo = getPhotoView();
     photo.setScaleType(ImageView.ScaleType.CENTER);
-    final Drawable drawable = ContextCompat.getDrawable(getContext(), drawableId);
-    final int iconColor = ContextCompat.getColor(getContext(), R.color.search_shortcut_icon_color);
-    if (CompatUtils.isLollipopCompatible()) {
-      photo.setImageDrawable(drawable);
-      photo.setImageTintList(ColorStateList.valueOf(iconColor));
-    } else {
-      final Drawable drawableWrapper = DrawableCompat.wrap(drawable).mutate();
-      DrawableCompat.setTint(drawableWrapper, iconColor);
-      photo.setImageDrawable(drawableWrapper);
-    }
+    int iconColor = ContextCompat.getColor(getContext(), R.color.search_shortcut_icon_color);
+    photo.setImageDrawable(drawable);
+    photo.setImageTintList(ColorStateList.valueOf(iconColor));
   }
 
   @Override

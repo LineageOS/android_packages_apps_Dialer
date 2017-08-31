@@ -27,9 +27,8 @@
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="call_details_edit_number">Edit number before call</string>
 
-  <!-- String describing the phone icon on a call log list item. When tapped, it will place a
-       call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
-  <string name="description_call_log_call_action">Call</string>
+  <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
+  <string name="call_details_report_call_id">Report inaccurate number</string>
 
   <!-- String shown when the call details show a image that was sent -->
   <string name="sent_a_photo">Sent a photo</string>
@@ -40,10 +39,14 @@
   <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
   <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
 
-  <!-- String describing the button to access the contact details for a name or number.
+  <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
+       [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_dialog_title">Report incorrect number</string>
 
-      Note: AccessibilityServices use this attribute to announce what the view represents.
-            This is especially valuable for views without textual representation like ImageView.
-  -->
-  <string name="description_contact_photo_details">Contact details for <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <!-- Toast that appears when a caller id report fails to send. Could be due to network error or
+       authentication error. [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_failed">Couldn\'t report number</string>
+
+  <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_toast">Number reported</string>
 </resources>

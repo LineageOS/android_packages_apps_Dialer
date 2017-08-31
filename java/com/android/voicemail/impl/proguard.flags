@@ -1,0 +1,4 @@
+-assumenosideeffects class com.android.voicemail.impl.VvmLog {
+    public static void v(...);
+    public static void d(...);
+}

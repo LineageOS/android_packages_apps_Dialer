@@ -21,7 +21,7 @@ import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
+import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -36,10 +36,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
-import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
-import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -62,9 +59,9 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
-import com.android.incallui.wifi.EnableWifiCallingPrompt;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -109,6 +106,8 @@ public class InCallActivityCommon {
   private boolean animateDialpadOnShow;
   private String dtmfTextToPreopulate;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
+  // If activity is going to be recreated. This is usually happening in {@link onNewIntent}.
+  private boolean isRecreating;
 
   private final SelectPhoneAccountListener selectAccountListener =
       new SelectPhoneAccountListener() {
@@ -213,7 +212,8 @@ public class InCallActivityCommon {
           }
         });
 
-    if (icicle != null) {
+    // Don't override the value if show dialpad request is true in intent extras.
+    if (icicle != null && showDialpadRequest == DIALPAD_REQUEST_NONE) {
       // If the dialpad was shown before, set variables indicating it should be shown and
       // populated with the previous DTMF text.  The dialpad is actually shown and populated
       // in onResume() to ensure the hosting fragment has been inflated and is ready to receive it.
@@ -323,6 +323,18 @@ public class InCallActivityCommon {
   }
 
   public void onStop() {
+    // Disconnects call waiting for account when activity is hidden e.g. user press home button.
+    // This is necessary otherwise the pending call will stuck on account choose and no new call
+    // will be able to create. See b/63600434 for more details.
+    // Skip this on locked screen since the activity may go over life cycle and start again.
+    if (!isRecreating
+        && !inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+      DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
+      if (waitingForAccountCall != null) {
+        waitingForAccountCall.disconnect();
+      }
+    }
+
     enableInCallOrientationEventListener(false);
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
@@ -335,6 +347,7 @@ public class InCallActivityCommon {
 
   void onNewIntent(Intent intent, boolean isRecreating) {
     LogUtil.i("InCallActivityCommon.onNewIntent", "");
+    this.isRecreating = isRecreating;
 
     // We're being re-launched with a new Intent.  Since it's possible for a
     // single InCallActivity instance to persist indefinitely (even if we
@@ -497,18 +510,15 @@ public class InCallActivityCommon {
     }
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectCause cause) {
+  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
     LogUtil.i(
-        "InCallActivityCommon.maybeShowErrorDialogOnDisconnect", "disconnect cause: %s", cause);
+        "InCallActivityCommon.maybeShowErrorDialogOnDisconnect",
+        "disconnect cause: %s",
+        disconnectMessage);
 
     if (!inCallActivity.isFinishing()) {
-      if (EnableWifiCallingPrompt.shouldShowPrompt(cause)) {
-        Pair<Dialog, CharSequence> pair =
-            EnableWifiCallingPrompt.createDialog(inCallActivity, cause);
-        showErrorDialog(pair.first, pair.second);
-      } else if (shouldShowDisconnectErrorDialog(cause)) {
-        Pair<Dialog, CharSequence> pair = getDisconnectErrorDialog(inCallActivity, cause);
-        showErrorDialog(pair.first, pair.second);
+      if (disconnectMessage.dialog != null) {
+        showErrorDialog(disconnectMessage.dialog, disconnectMessage.toastMessage);
       }
     }
   }
@@ -555,23 +565,6 @@ public class InCallActivityCommon {
           "dismissing InternationalCallOnWifiDialogFragment");
       internationalCallOnWifiFragment.dismiss();
     }
-  }
-
-  private static boolean shouldShowDisconnectErrorDialog(@NonNull DisconnectCause cause) {
-    return !TextUtils.isEmpty(cause.getDescription())
-        && (cause.getCode() == DisconnectCause.ERROR
-            || cause.getCode() == DisconnectCause.RESTRICTED);
-  }
-
-  private static Pair<Dialog, CharSequence> getDisconnectErrorDialog(
-      @NonNull Context context, @NonNull DisconnectCause cause) {
-    CharSequence message = cause.getDescription();
-    Dialog dialog =
-        new AlertDialog.Builder(context)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, null)
-            .create();
-    return new Pair<>(dialog, message);
   }
 
   private void showErrorDialog(Dialog dialog, CharSequence message) {

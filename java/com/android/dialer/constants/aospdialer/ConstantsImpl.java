@@ -16,6 +16,7 @@
 
 package com.android.dialer.constants;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import com.android.dialer.proguard.UsedByReflection;
 
@@ -33,5 +34,16 @@ public class ConstantsImpl extends Constants {
   @NonNull
   public String getFileProviderAuthority() {
     return "com.android.dialer.files";
+  }
+
+  @NonNull
+  @Override
+  public String getAnnotatedCallLogProviderAuthority() {
+    return "com.android.dialer.annotatedcalllog";
+  }
+
+  @Override
+  public String getUserAgent(Context context) {
+    return null;
   }
 }

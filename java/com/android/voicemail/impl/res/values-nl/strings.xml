@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Pincode wijzigen"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Visuele voicemail moet zijn ingeschakeld om de pincode te wijzigen"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Visuele voicemail is nog niet geactiveerd. Probeer het later opnieuw."</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Oude pincode"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Nieuwe pincode"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Even geduld."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"De nieuwe pincode is te kort."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"De nieuwe pincode is te lang."</string>

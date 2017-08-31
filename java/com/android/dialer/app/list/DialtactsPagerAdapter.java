@@ -24,13 +24,12 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
-import com.android.dialer.calllog.CallLogComponent;
-import com.android.dialer.calllog.CallLogFramework;
-import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.ConfigProviderBindings;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactsfragment.ContactsFragment;
+import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
+import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.util.ViewUtil;
@@ -58,12 +57,10 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
   private final List<Fragment> fragments = new ArrayList<>();
   private final String[] tabTitles;
   private final boolean useNewSpeedDialTab;
-  private final boolean useNewCallLogTab;
   private final boolean useNewContactsTab;
   private OldSpeedDialFragment oldSpeedDialFragment;
   private SpeedDialFragment speedDialFragment;
   private CallLogFragment callLogFragment;
-  private NewCallLogFragment newCallLogFragment;
   private AllContactsFragment oldContactsFragment;
   private ContactsFragment contactsFragment;
   private CallLogFragment voicemailFragment;
@@ -75,10 +72,8 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
     super(fm);
     useNewSpeedDialTab =
         ConfigProviderBindings.get(context).getBoolean("enable_new_favorites_tab", false);
-    CallLogFramework callLogFramework = CallLogComponent.get(context).callLogFramework();
-    useNewCallLogTab = callLogFramework.isNewCallLogEnabled(context);
     useNewContactsTab =
-        ConfigProviderBindings.get(context).getBoolean("enable_new_contacts_tab", false);
+        ConfigProviderBindings.get(context).getBoolean("enable_new_contacts_tab", true);
     this.tabTitles = tabTitles;
     hasActiveVoicemailProvider = hasVoicemailProvider;
     fragments.addAll(Collections.nCopies(TAB_COUNT_WITH_VOICEMAIL, null));
@@ -106,21 +101,15 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
           return oldSpeedDialFragment;
         }
       case TAB_INDEX_HISTORY:
-        if (useNewCallLogTab) {
-          if (newCallLogFragment == null) {
-            newCallLogFragment = new NewCallLogFragment();
-          }
-          return newCallLogFragment;
-        } else {
-          if (callLogFragment == null) {
-            callLogFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
-          }
-          return callLogFragment;
+        if (callLogFragment == null) {
+          callLogFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
         }
+        return callLogFragment;
       case TAB_INDEX_ALL_CONTACTS:
         if (useNewContactsTab) {
           if (contactsFragment == null) {
-            contactsFragment = new ContactsFragment();
+            contactsFragment =
+                ContactsFragment.newInstance(Header.ADD_CONTACT, ClickAction.OPEN_CONTACT_CARD);
           }
           return contactsFragment;
         } else {
@@ -156,8 +145,6 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
       speedDialFragment = (SpeedDialFragment) fragment;
     } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_HISTORY) {
       callLogFragment = (CallLogFragment) fragment;
-    } else if (fragment instanceof NewCallLogFragment) {
-      newCallLogFragment = (NewCallLogFragment) fragment;
     } else if (fragment instanceof ContactsFragment) {
       contactsFragment = (ContactsFragment) fragment;
     } else if (fragment instanceof AllContactsFragment) {

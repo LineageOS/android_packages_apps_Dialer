@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<paths>
+<paths xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedResources">
   <!-- Offer access to files under Context.getCacheDir() -->
   <cache-path name="my_cache"/>
   <!-- Offer access to voicemail folder under Context.getFilesDir() -->

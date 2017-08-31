@@ -16,21 +16,20 @@
 
 package com.android.contacts.common.util;
 
-import static android.provider.ContactsContract.CommonDataKinds.Phone;
-
 import android.content.Context;
 import android.content.res.Resources;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
-import android.util.Log;
 import android.util.Patterns;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.dialer.common.LogUtil;
 import java.util.Objects;
 
 /** Methods for handling various contact data labels. */
@@ -38,7 +37,6 @@ public class ContactDisplayUtils {
 
   public static final int INTERACTION_CALL = 1;
   public static final int INTERACTION_SMS = 2;
-  private static final String TAG = ContactDisplayUtils.class.getSimpleName();
 
   /**
    * Checks if the given data type is a custom type.
@@ -74,9 +72,9 @@ public class ContactDisplayUtils {
       } else {
         resId = getPhoneLabelResourceId(type);
         if (interactionType != INTERACTION_CALL) {
-          Log.e(
-              TAG,
-              "Un-recognized interaction type: "
+          LogUtil.e(
+              "ContactDisplayUtils.getLabelForCallOrSms",
+              "un-recognized interaction type: "
                   + interactionType
                   + ". Defaulting to ContactDisplayUtils.INTERACTION_CALL.");
         }

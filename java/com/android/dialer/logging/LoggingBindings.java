@@ -14,8 +14,8 @@
 
 package com.android.dialer.logging;
 
-
 import android.app.Activity;
+import android.widget.QuickContactBadge;
 
 /** Allows the container application to gather analytics. */
 public interface LoggingBindings {
@@ -62,6 +62,29 @@ public interface LoggingBindings {
    */
   void logScreenView(com.android.dialer.logging.ScreenEvent.Type screenEvent, Activity activity);
 
+  /** Logs the composition of contact tiles in the speed dial tab. */
+  void logSpeedDialContactComposition(
+      int counter,
+      int starredContactsCount,
+      int pinnedContactsCount,
+      int multipleNumbersContactsCount,
+      int contactsWithPhotoCount,
+      int contactsWithNameCount,
+      int lightbringerReachableContactsCount);
+
   /** Logs a hit event to the analytics server. */
   void sendHitEventAnalytics(String category, String action, String label, long value);
+
+  /** Logs where a quick contact badge is clicked */
+  void logQuickContactOnTouch(
+      QuickContactBadge quickContact,
+      InteractionEvent.Type interactionEvent,
+      boolean shouldPerformClick);
+
+  /** Logs People Api lookup result with error */
+  void logPeopleApiLookupReportWithError(
+      long latency, int httpResponseCode, PeopleApiLookupError.Type errorType);
+
+  /** Logs successful People Api lookup result */
+  void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode);
 }

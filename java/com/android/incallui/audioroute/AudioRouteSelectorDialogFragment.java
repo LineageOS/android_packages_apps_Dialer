@@ -18,6 +18,7 @@ package com.android.incallui.audioroute;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   /** Called when an audio route is picked */
   public interface AudioRouteSelectorPresenter {
     void onAudioRouteSelected(int audioRoute);
+
+    void onAudioRouteSelectorDismiss();
   }
 
   public static AudioRouteSelectorDialogFragment newInstance(CallAudioState audioState) {
@@ -89,6 +92,14 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         CallAudioState.ROUTE_EARPIECE,
         audioState);
     return view;
+  }
+
+  @Override
+  public void onDismiss(DialogInterface dialogInterface) {
+    super.onDismiss(dialogInterface);
+    FragmentUtils.getParentUnsafe(
+            AudioRouteSelectorDialogFragment.this, AudioRouteSelectorPresenter.class)
+        .onAudioRouteSelectorDismiss();
   }
 
   private void initItem(TextView item, final int itemRoute, CallAudioState audioState) {

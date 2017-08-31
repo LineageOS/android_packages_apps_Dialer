@@ -19,13 +19,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="2202739481132958990">"تلفن"</string>
     <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"صفحه کلید تلفن"</string>
-    <string name="dialerIconLabel" msgid="3422916015542176907">"تلفن"</string>
     <string name="callHistoryIconLabel" msgid="7493268743411968630">"سابقه تماس"</string>
-    <string name="action_report_number" msgid="7231442711369737797">"گزارش شماره نادرست"</string>
     <string name="action_copy_number_text" msgid="832682558551502319">"کپی کردن شماره"</string>
     <string name="copy_transcript_text" msgid="937904189017310829">"کپی کردن آوانویسی"</string>
-    <string name="action_block_number" msgid="3669819840999705278">"مسدود کردن شماره"</string>
-    <string name="action_unblock_number" msgid="6583611581996402004">"رفع انسداد شماره"</string>
     <string name="action_edit_number_before_call" msgid="8017492815878473837">"ویرایش شماره قبل از تماس"</string>
     <string name="call_log_delete_all" msgid="7852970926906523784">"پاک کردن سابقه تماس"</string>
     <string name="call_log_trash_voicemail" msgid="6118493534178533972">"حذف پست صوتی"</string>
@@ -34,7 +30,6 @@
     <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"سابقه تماس پاک شود؟"</string>
     <string name="clearCallLogConfirmation" msgid="6844949465815109166">"این کار همه تماس‌ها را از سابقه شما حذف می‌کند"</string>
     <string name="clearCallLogProgress_title" msgid="995004835687361977">"در حال پاک کردن سابقه تماس..."</string>
-    <string name="userCallActivityLabel" product="default" msgid="9198964841862577505">"تلفن"</string>
     <string name="notification_missedCallTitle" msgid="8283366068539898486">"تماس بی پاسخ"</string>
     <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"تماس کاری ازدست‌رفته"</string>
     <string name="notification_missedCallsTitle" msgid="3697442015345089802">"تماس‌های بی‌پاسخ"</string>
@@ -48,107 +43,66 @@
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> پست صوتی </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> پست صوتی </item>
     </plurals>
-    <string name="notification_action_voicemail_play" msgid="5156500902796354071">"پخش"</string>
     <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>، <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"پست صوتی جدید از <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="4384373852257757295">"پست صوتی پخش نشد"</string>
     <string name="voicemail_fetching_content" msgid="572320120918636014">"در حال بارگیری پست صوتی..."</string>
-    <string name="voicemail_archiving_content" msgid="2415183864104922185">"در حال بایگانی کردن پست صوتی..."</string>
     <string name="voicemail_fetching_timout" msgid="2128873915839949783">"پست صوتی بارگیری نشد"</string>
-    <string name="call_log_voicemail_header" msgid="5799424860394542726">"فقط تماس‌های دارای پست صوتی"</string>
-    <string name="call_log_incoming_header" msgid="1158753168119845168">"فقط تماس‌های دریافتی"</string>
-    <string name="call_log_outgoing_header" msgid="149333910997122683">"فقط تماس‌های خروجی"</string>
-    <string name="call_log_missed_header" msgid="6491707499211289630">"فقط تماس‌های بی‌پاسخ"</string>
     <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_search_button" msgid="4515570469584782176">"جستجو"</string>
-    <string name="description_dial_button" msgid="699794433224646027">"شماره گیری"</string>
-    <string name="description_digits_edittext" msgid="8908702618098485186">"شماره برای شماره گیری"</string>
-    <string name="description_playback_start_stop" msgid="5320452461700750120">"پخش یا توقف بازپخش"</string>
     <string name="description_playback_speakerphone" msgid="4852027754869750227">"روشن یا خاموش کردن بلندگوی تلفن"</string>
     <string name="description_playback_seek" msgid="1340910573254132520">"جستجوی موقعیت بازپخش"</string>
-    <string name="description_rate_decrease" msgid="5053221110217704199">"کاهش سرعت بازپخش"</string>
-    <string name="description_rate_increase" msgid="4372206363557406700">"افزایش سرعت بازپخش"</string>
     <string name="action_menu_call_history_description" msgid="8829135306925008546">"سابقه تماس"</string>
     <string name="action_menu_overflow_description" msgid="7648679686746517341">"گزینه‌های بیشتر"</string>
     <string name="action_menu_dialpad_button" msgid="1970631633457493180">"صفحه کلید"</string>
-    <string name="menu_show_outgoing_only" msgid="6941420328999801171">"فقط نمایش خروجی"</string>
-    <string name="menu_show_incoming_only" msgid="6018600870504685564">"فقط نمایش ورودی"</string>
-    <string name="menu_show_missed_only" msgid="2266983597575047192">"فقط نمایش بی‌پاسخ"</string>
-    <string name="menu_show_voicemails_only" msgid="1114917855179284592">"فقط نمایش پست‌های صوتی"</string>
-    <string name="menu_show_all_calls" msgid="220054502052344488">"نمایش همه مکالمات"</string>
-    <string name="add_2sec_pause" msgid="3417815038173424525">"افزودن یک مکث ۲ ثانیه‌ای"</string>
-    <string name="add_wait" msgid="1177723010768282578">"افزودن انتظار"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"تنظیمات"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"شبیه‌ساز"</string>
-    <string name="menu_allContacts" msgid="8544950176866640863">"همه مخاطبین"</string>
-    <string name="dialer_useDtmfDialpad" msgid="3919115408138798484">"استفاده از صفحه‌کلید لمسی"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3487191628252824117">"برگشت به تماس درحال انجام"</string>
-    <string name="dialer_addAnotherCall" msgid="3132945651710234674">"افزودن تماس"</string>
-    <string name="actionIncomingCall" msgid="891346596090030558">"تماس‌های ورودی"</string>
-    <string name="description_call_log_play_button" msgid="2349845005022431438">"پخش پست صوتی"</string>
-    <string name="description_view_contact" msgid="3940984937384372665">"مشاهده مخاطب <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call" msgid="1532402285334775372">"تماس با <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"ایجاد میان‌بر رابط کاربری جدید"</string>
+    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"درحال ورود به حالت اقدام انبوه"</string>
+    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"خروج از حالت اقدام انبوه"</string>
+    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> انتخاب شد"</string>
+    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> از حالت انتخاب خارج شد"</string>
     <string name="description_contact_details" msgid="3341280873855253464">"جزئیات تماس برای <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_spam_contact_details" msgid="5592578752881528368">"جزئیات تماس برای تماس‌گیرندگان هرزنامه پشتیبانی شده <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> تماس."</string>
     <string name="description_video_call" msgid="3738199365585751727">"تماس ویدئویی."</string>
-    <string name="description_send_text_message" msgid="8450269896765568596">"ارسال پیامک به <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call_log_unheard_voicemail" msgid="2258821530650350303">"پست صوتی شنیده نشده"</string>
     <string name="description_start_voice_search" msgid="8380022725973015261">"شروع جستجوی گفتاری"</string>
-    <string name="menu_callNumber" msgid="1540773545517152514">"تماس با <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="voicemail" msgid="8899540969000957954">"پست صوتی"</string>
-    <string name="callDetailsShortDurationFormat" msgid="8517030531054801588">"<xliff:g id="SECONDS">%s</xliff:g> ثانیه"</string>
-    <string name="callDetailsDurationFormat" msgid="6826204822350034578">"<xliff:g id="MINUTES">%s</xliff:g> دقیقه <xliff:g id="SECONDS">%s</xliff:g> ثانیه"</string>
-    <string name="voicemailMultiSelectVoicemail" msgid="7792569522692927527">"پست صوتی"</string>
-    <string name="voicemailMultiSelectVoicemails" msgid="3901723179158415509">"پست‌های صوتی"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5904880853422397390">"بله"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="7340110543555172665">"نه"</string>
-    <string name="voicemailMultiSelectDialogTitle" msgid="150612124416146690">"<xliff:g id="VOICEMAILORVOICEMAILS">%1$s</xliff:g> انتخاب‌شده حذف شود؟"</string>
+    <string name="description_cancel_multi_select" msgid="3930475950253360461">"لغو حالت اقدام‌ دسته‌ای"</string>
+    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"حذف"</string>
+    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"لغو"</string>
+    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> مورد انتخاب شد"</string>
+    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
+      <item quantity="one">"<b>"این پست‌های صوتی حذف شوند؟ "</b>"</item>
+      <item quantity="other">"<b>"این پست‌های صوتی حذف شوند؟ "</b>"</item>
+    </plurals>
     <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
     <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> ساعت <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
     <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6317935773274628316">"تماس با این شماره ممکن نیست"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="6437173108290752604">"برای راه‌اندازی پست صوتی به منو &gt; تنظیمات بروید."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1044988101597862159">"برای تماس با پست صوتی، ابتدا حالت هواپیما را غیرفعال کنید."</string>
-    <string name="contact_list_loading" msgid="7919825236309749352">"در حال بارکردن…"</string>
-    <string name="imei" msgid="5214505934662768308">"IMEI"</string>
-    <string name="meid" msgid="3333779521535224028">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6205424276735652071">"در حال بارگیری سیم کارت..."</string>
-    <string name="simContacts_title" msgid="7961069730386378887">"مخاطبین سیم کارت"</string>
-    <string name="add_contact_not_available" msgid="7065884447935173347">"هیچ برنامه مخاطبی در دسترس نیست"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"جستجوی گفتاری در دسترس نیست"</string>
-    <string name="call_not_available" msgid="7850148370757361155">"برقراری تماس تلفنی ممکن نیست، زیرا برنامه تلفن غیرفعال شده است."</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"جستجوی مخاطبین"</string>
     <string name="block_number_search_hint" msgid="5377706079015099416">"افزودن شماره یا جستجوی مخاطب"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"سابقه تماستان خالی است"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"برقراری تماس تلفنی"</string>
     <string name="call_log_missed_empty" msgid="7094936030845062214">"تماس بی‌پاسخی ندارید."</string>
     <string name="call_log_voicemail_empty" msgid="273623903423275178">"صندوق پست صوتی‌تان خالی است."</string>
-    <string name="show_favorites_only" msgid="8089163582448737837">"فقط نمایش موارد دلخواه"</string>
     <string name="call_log_activity_title" msgid="1275242727244945527">"سابقه تماس"</string>
     <string name="call_log_all_title" msgid="6042262422192020327">"همه موارد"</string>
     <string name="call_log_missed_title" msgid="17254005889268015">"بی‌پاسخ"</string>
-    <string name="call_log_voicemail_title" msgid="6504826963256437971">"پست صوتی"</string>
     <string name="tab_speed_dial" msgid="6616404752227561075">"شماره‌گیری سریع"</string>
     <string name="tab_history" msgid="7420269368689503596">"سابقه تماس"</string>
     <string name="tab_all_contacts" msgid="5531733977693943015">"مخاطبین"</string>
     <string name="tab_voicemail" msgid="2458548090088316246">"پست صوتی"</string>
-    <string name="favorite_hidden" msgid="1077010324849831399">"از موارد دلخواه حذف شد"</string>
-    <string name="favorite_hidden_undo" msgid="5660280521854875320">"واگرد"</string>
     <string name="search_shortcut_call_number" msgid="8847918845036880688">"تماس با <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"ایجاد مخاطب جدید"</string>
     <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"افزودن به مخاطب"</string>
     <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"ارسال پیامک"</string>
     <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"برقراری تماس ویدئویی"</string>
     <string name="search_shortcut_block_number" msgid="4587283230665805776">"مسدود کردن شماره"</string>
-    <string name="num_missed_calls" msgid="5171791753696317082">"<xliff:g id="NUMBER">%s</xliff:g> تماس‌ بی‌پاسخ جدید"</string>
     <string name="speed_dial_empty" msgid="3346406399966039505">"هنوز کسی در فهرست شماره‌گیری سریع شما نیست"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"افزودن مورد دلخواه"</string>
-    <string name="all_contacts_empty" msgid="243071567853617177">"هنوز هیچ مخاطبی ندارید"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="2907328217206743952">"افزودن مخاطب"</string>
-    <string name="contact_tooltip" msgid="8871614660967439999">"برای مشاهده همه شماره‌ها، تصویر را لمس کنید، یا برای ترتیب مجدد، لمس کنید و نگه‌دارید"</string>
     <string name="remove_contact" msgid="2353580570488923668">"حذف"</string>
+    <string name="select_all" msgid="408601760696146245">"انتخاب همه"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"تماس ویدئویی"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"ارسال پیام"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"جزئیات تماس"</string>
@@ -164,25 +118,14 @@
     <string name="description_call_action" msgid="4042796498169106545">"تماس با <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="1237090968588659650">"تماس ویدئویی با <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="3290143432403538524">"گوش دادن به پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="737337291418966183">"پخش پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="2400610579956333661">"مکث پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="5305509366448404410">"حذف پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="7562208210097630839">
-      <item quantity="one">‏<xliff:g id="COUNT_1">%d</xliff:g> پست صوتی جدید</item>
-      <item quantity="other">‏<xliff:g id="COUNT_1">%d</xliff:g> پست صوتی جدید</item>
-    </plurals>
     <string name="description_create_new_contact_action" msgid="1928282350281564130">"ایجاد مخاطب برای <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"افزودن <xliff:g id="NAMEORNUMBER">^1</xliff:g> به مخاطب موجود"</string>
     <string name="description_details_action" msgid="2061866409737706174">"جزئیات تماس برای <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="toast_entry_removed" msgid="6821678859297454838">"از سابقه تماس حذف شد"</string>
     <string name="call_log_header_today" msgid="1576119097475845293">"امروز"</string>
     <string name="call_log_header_yesterday" msgid="5616077776205329563">"دیروز"</string>
     <string name="call_log_header_other" msgid="4940676886254217644">"قدیمی‌تر"</string>
-    <string name="call_detail_list_header" msgid="1174040565810083473">"فهرست تماس‌ها"</string>
     <string name="voicemail_speaker_on" msgid="3151333608926996668">"روشن کردن بلندگو."</string>
     <string name="voicemail_speaker_off" msgid="2530064206962034201">"خاموش کردن بلندگو."</string>
-    <string name="voicemail_play_faster" msgid="2742012169751409677">"پخش سریع‌تر"</string>
-    <string name="voicemail_play_slower" msgid="868588128301087884">"پخش آهسته‌تر."</string>
     <string name="voicemail_play_start_pause" msgid="3874823480278334664">"شروع یا مکث بازپخش."</string>
     <string name="display_options_title" msgid="3880091801055797975">"گزینه‌های نمایش"</string>
     <string name="sounds_and_vibration_title" msgid="3075050000721181384">"صدا و لرزش"</string>
@@ -199,7 +142,6 @@
     <string name="call_settings_label" msgid="7824611757200960807">"تماس‌ها"</string>
     <string name="manage_blocked_numbers_label" msgid="16823761991832273">"مسدود کردن تماس"</string>
     <string name="voicemail_settings_label" msgid="4594299554519920570">"پست صوتی"</string>
-    <string name="voicemail_settings_select_sim_title" msgid="129296966967476845">"انتخاب سیم‌کارت برای تنظیمات پست صوتی"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"انسداد تماس موقتاً خاموش است"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"چون در ۴۸ ساعت گذشته با این تلفن با سرویس‌های اضطراری تماس گرفتید، انسداد تماس غیرفعال شده است. پس از گذشت ۴۸ ساعت، این قابلیت دوباره فعال می‌شود."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"وارد کردن شماره‌ها"</string>
@@ -213,12 +155,8 @@
     <string name="block_list" msgid="4701585783411870782">"شماره‌های مسدود‌شده"</string>
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> درحال‌حاضر مسدود شده است."</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"حساب‌های تماس"</string>
-    <string name="permission_single_turn_on" msgid="8014796118294187894">"روشن کردن"</string>
-    <string name="permission_multiple_turn_on" msgid="5679888820253829400">"تنظیم مجوزها"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"برای فعال کردن شماره‌گیری سریع، مجوز «مخاطبین» را روشن کنید."</string>
     <string name="permission_no_calllog" msgid="4053705651238775784">"برای دیدن گزارش تماستان، مجوز «تلفن» را روشن کنید."</string>
-    <string name="permission_no_contacts" msgid="8995025765862026771">"برای دیدن مخاطبینتان، مجوز «مخاطبین» را روشن کنید."</string>
-    <string name="permission_no_voicemail" msgid="1908142679289209291">"برای دسترسی به پست صوتی‌تان، مجوز «تلفن» را روشن کنید."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"برای برقراری تماس، مجوز «تلفن» را روشن کنید."</string>
     <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"برنامه تلفن اجازه نوشتن در تنظیمات سیستم را ندارد."</string>
@@ -230,4 +168,10 @@
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"هرزنامه"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> آفلاین است و در دسترس نمی‌باشد"</string>
     <string name="about_phone_label" msgid="582991354677973731">"درباره"</string>
+    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"‏رونویسی‌شده توسط Google"</string>
+    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"‏Google درحال ترانویسی است…"</string>
+    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"رونوشت موجود نیست"</string>
+    <string name="view_conversation" msgid="7895904782094119702">"مشاهده"</string>
+    <string name="ec_data_deleted" msgid="4794880345545827107">"تماس حذف شد. پیوست‌های به اشتراک‌گذاشته‌شده درطول این تماس را در «پیام‌ها» مشاهده و حذف کنید."</string>
+    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"تماس‌ها حذف شدند. پیوست‌های به اشتراک‌گذاشته‌شده درطول تماس‌ها را در «پیام‌ها» مشاهده و حذف کنید."</string>
 </resources>

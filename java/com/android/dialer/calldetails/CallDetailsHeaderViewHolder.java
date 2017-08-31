@@ -19,17 +19,19 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.contacts.common.ContactPhotoManager;
-import com.android.dialer.callcomposer.CallComposerContact;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
 
@@ -40,23 +42,29 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   private final View callBackButton;
   private final TextView nameView;
   private final TextView numberView;
+  private final TextView networkView;
   private final QuickContactBadge contactPhoto;
   private final Context context;
 
-  private CallComposerContact contact;
+  private DialerContact contact;
 
   CallDetailsHeaderViewHolder(View container) {
     super(container);
     context = container.getContext();
     callBackButton = container.findViewById(R.id.call_back_button);
-    nameView = (TextView) container.findViewById(R.id.contact_name);
-    numberView = (TextView) container.findViewById(R.id.phone_number);
-    contactPhoto = (QuickContactBadge) container.findViewById(R.id.quick_contact_photo);
+    nameView = container.findViewById(R.id.contact_name);
+    numberView = container.findViewById(R.id.phone_number);
+    networkView = container.findViewById(R.id.network);
+    contactPhoto = container.findViewById(R.id.quick_contact_photo);
+
     callBackButton.setOnClickListener(this);
+    Logger.get(context)
+        .logQuickContactOnTouch(
+            contactPhoto, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_DETAILS, true);
   }
 
   /** Populates the contact info fields based on the current contact information. */
-  void updateContactInfo(CallComposerContact contact) {
+  void updateContactInfo(DialerContact contact) {
     this.contact = contact;
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
@@ -67,8 +75,6 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
             contact.getNameOrNumber(),
             contact.getContactType());
 
-    contactPhoto.setContentDescription(
-        context.getString(R.string.description_contact_photo_details, contact.getNameOrNumber()));
     nameView.setText(contact.getNameOrNumber());
     if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
       numberView.setVisibility(View.VISIBLE);
@@ -85,6 +91,14 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
       numberView.setText(null);
     }
 
+    if (!TextUtils.isEmpty(contact.getSimDetails().getNetwork())) {
+      networkView.setVisibility(View.VISIBLE);
+      networkView.setText(contact.getSimDetails().getNetwork());
+      if (contact.getSimDetails().getColor() != PhoneAccount.NO_HIGHLIGHT_COLOR) {
+        networkView.setTextColor(contact.getSimDetails().getColor());
+      }
+    }
+
     if (TextUtils.isEmpty(contact.getNumber())) {
       callBackButton.setVisibility(View.GONE);
     }
@@ -98,7 +112,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
           view.getContext(),
           new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_DETAILS).build());
     } else {
-      Assert.fail("View OnClickListener not implemented: " + view);
+      throw Assert.createIllegalStateFailException("View OnClickListener not implemented: " + view);
     }
   }
 }

@@ -21,6 +21,7 @@ import android.location.Location;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.constants.TrafficStatsTags;
 import com.android.incallui.calllocation.impl.LocationPresenter.LocationUi;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
@@ -49,9 +50,9 @@ class DownloadMapImageTask extends AsyncTask<Location, Void, Drawable> {
 
     try {
       URL mapUrl = new URL(LocationUrlBuilder.getStaticMapUrl(ui.getContext(), locations[0]));
+      TrafficStats.setThreadStatsTag(TrafficStatsTags.DOWNLOAD_LOCATION_MAP_TAG);
       InputStream content = (InputStream) mapUrl.getContent();
 
-      TrafficStats.setThreadStatsTag(TrafficStatsTags.DOWNLOAD_LOCATION_MAP_TAG);
       return Drawable.createFromStream(content, STATIC_MAP_SRC_NAME);
     } catch (Exception ex) {
       LogUtil.e("DownloadMapImageTask.doInBackground", "Exception!!!", ex);

@@ -24,11 +24,8 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
-import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -96,43 +93,11 @@ public class PhoneNumberHelper {
 
   /**
    * @return a geographical description string for the specified number.
-   * @see com.android.i18n.phonenumbers.PhoneNumberOfflineGeocoder
    */
   public static String getGeoDescription(Context context, String number) {
-    LogUtil.v("PhoneNumberHelper.getGeoDescription", "" + LogUtil.sanitizePii(number));
-
-    if (TextUtils.isEmpty(number)) {
-      return null;
-    }
-
-    PhoneNumberUtil util = PhoneNumberUtil.getInstance();
-    PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
-
-    Locale locale = context.getResources().getConfiguration().locale;
-    String countryIso = getCurrentCountryIso(context, locale);
-    Phonenumber.PhoneNumber pn = null;
-    try {
-      LogUtil.v(
-          "PhoneNumberHelper.getGeoDescription",
-          "parsing '" + LogUtil.sanitizePii(number) + "' for countryIso '" + countryIso + "'...");
-      pn = util.parse(number, countryIso);
-      LogUtil.v(
-          "PhoneNumberHelper.getGeoDescription", "- parsed number: " + LogUtil.sanitizePii(pn));
-    } catch (NumberParseException e) {
-      LogUtil.e(
-          "PhoneNumberHelper.getGeoDescription",
-          "getGeoDescription: NumberParseException for incoming number '"
-              + LogUtil.sanitizePii(number)
-              + "'");
-    }
-
-    if (pn != null) {
-      String description = geocoder.getDescriptionForNumber(pn, locale);
-      LogUtil.v("PhoneNumberHelper.getGeoDescription", "- got description: '" + description + "'");
-      return description;
-    }
-
-    return null;
+    return PhoneNumberGeoUtilComponent.get(context)
+        .getPhoneNumberGeoUtil()
+        .getGeoDescription(context, number);
   }
 
   /**
@@ -211,10 +176,9 @@ public class PhoneNumberHelper {
     return number.substring(0, delimiterIndex);
   }
 
-
   private static boolean isVerizon(Context context) {
     // Verizon MCC/MNC codes copied from com/android/voicemailomtp/res/xml/vvm_config.xml.
-    // TODO: Need a better way to do per carrier and per OEM configurations.
+    // TODO(sail): Need a better way to do per carrier and per OEM configurations.
     switch (context.getSystemService(TelephonyManager.class).getSimOperator()) {
       case "310004":
       case "310010":

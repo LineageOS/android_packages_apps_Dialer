@@ -18,91 +18,84 @@ package com.android.dialer.calllog;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.annotation.WorkerThread;
-import com.android.dialer.calllog.database.AnnotatedCallLog;
-import com.android.dialer.calllog.database.CallLogMutations;
+import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
+import com.android.dialer.calllog.datasources.CallLogMutations;
+import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.inject.ApplicationContext;
 import javax.inject.Inject;
 
 /**
  * Worker which brings the annotated call log up to date, if necessary.
  *
- * <p>Accepts a boolean which indicates if the dirty check should be skipped, and returns true if
- * the annotated call log was updated.
+ * <p>Accepts a boolean which indicates if the dirty check should be skipped.
  */
-public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Boolean> {
+public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
 
   private final Context appContext;
   private final DataSources dataSources;
 
   @Inject
-  public RefreshAnnotatedCallLogWorker(Context appContext, DataSources dataSources) {
+  RefreshAnnotatedCallLogWorker(@ApplicationContext Context appContext, DataSources dataSources) {
     this.appContext = appContext;
     this.dataSources = dataSources;
   }
 
   @Override
-  public Boolean doInBackground(Boolean skipDirtyCheck) {
-    LogUtil.enterBlock("RefreshAnnotatedCallLogWorker.doInBackgroundFallible");
+  public Void doInBackground(Boolean skipDirtyCheck)
+      throws RemoteException, OperationApplicationException {
+    LogUtil.enterBlock("RefreshAnnotatedCallLogWorker.doInBackground");
 
     long startTime = System.currentTimeMillis();
-    boolean annotatedCallLogUpdated = checkDirtyAndRebuildIfNecessary(appContext, skipDirtyCheck);
+    checkDirtyAndRebuildIfNecessary(appContext, skipDirtyCheck);
     LogUtil.i(
-        "RefreshAnnotatedCallLogWorker.doInBackgroundFallible",
-        "updated? %s, took %dms",
-        annotatedCallLogUpdated,
+        "RefreshAnnotatedCallLogWorker.doInBackground",
+        "took %dms",
         System.currentTimeMillis() - startTime);
-    return annotatedCallLogUpdated;
+    return null;
   }
 
   @WorkerThread
-  private boolean checkDirtyAndRebuildIfNecessary(Context appContext, boolean skipDirtyCheck) {
+  private void checkDirtyAndRebuildIfNecessary(Context appContext, boolean skipDirtyCheck)
+      throws RemoteException, OperationApplicationException {
     Assert.isWorkerThread();
 
     long startTime = System.currentTimeMillis();
 
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-    long lastRebuildTimeMillis =
-        sharedPreferences.getLong(CallLogFramework.PREF_LAST_REBUILD_TIMESTAMP_MILLIS, 0);
-    if (lastRebuildTimeMillis == 0) {
-      LogUtil.i(
-          "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
-          "annotated call log has never been built, marking it dirty");
-    }
+    // Default to true. If the pref doesn't exist, the annotated call log hasn't been created and
+    // we just skip isDirty checks and force a rebuild.
     boolean forceRebuildPrefValue =
-        sharedPreferences.getBoolean(CallLogFramework.PREF_FORCE_REBUILD, false);
+        sharedPreferences.getBoolean(CallLogFramework.PREF_FORCE_REBUILD, true);
     if (forceRebuildPrefValue) {
       LogUtil.i(
           "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
-          "call log has been marked dirty");
+          "annotated call log has been marked dirty or does not exist");
     }
 
-    boolean isDirty =
-        lastRebuildTimeMillis == 0
-            || skipDirtyCheck
-            || forceRebuildPrefValue
-            || isDirty(appContext);
+    boolean isDirty = skipDirtyCheck || forceRebuildPrefValue || isDirty(appContext);
+
     LogUtil.i(
         "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
         "isDirty took: %dms",
         System.currentTimeMillis() - startTime);
     if (isDirty) {
       startTime = System.currentTimeMillis();
-      rebuild(appContext, lastRebuildTimeMillis);
+      rebuild(appContext);
       LogUtil.i(
           "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
           "rebuild took: %dms",
           System.currentTimeMillis() - startTime);
-      return true; // Annotated call log was updated.
     }
-    return false; // Annotated call log was not updated.
   }
 
   @WorkerThread
@@ -129,52 +122,58 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Boolean> {
 
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
   @WorkerThread
-  private void rebuild(Context appContext, long lastRebuildTimeMillis) {
+  private void rebuild(Context appContext) throws RemoteException, OperationApplicationException {
     Assert.isWorkerThread();
 
-    // TODO: Start a transaction?
-    try (SQLiteDatabase database = AnnotatedCallLog.getWritableDatabase(appContext)) {
+    CallLogMutations mutations = new CallLogMutations();
 
-      CallLogMutations mutations = new CallLogMutations();
+    // System call log data source must go first!
+    CallLogDataSource systemCallLogDataSource = dataSources.getSystemCallLogDataSource();
+    String dataSourceName = getName(systemCallLogDataSource);
+    LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "filling %s", dataSourceName);
+    long startTime = System.currentTimeMillis();
+    systemCallLogDataSource.fill(appContext, mutations);
+    LogUtil.i(
+        "RefreshAnnotatedCallLogWorker.rebuild",
+        "%s.fill took: %dms",
+        dataSourceName,
+        System.currentTimeMillis() - startTime);
 
-      // System call log data source must go first!
-      CallLogDataSource systemCallLogDataSource = dataSources.getSystemCallLogDataSource();
-      String dataSourceName = getName(systemCallLogDataSource);
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesExcludingSystemCallLog()) {
+      dataSourceName = getName(dataSource);
       LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "filling %s", dataSourceName);
-      long startTime = System.currentTimeMillis();
-      systemCallLogDataSource.fill(appContext, database, lastRebuildTimeMillis, mutations);
+      startTime = System.currentTimeMillis();
+      dataSource.fill(appContext, mutations);
       LogUtil.i(
-          "RefreshAnnotatedCallLogWorker.rebuild",
+          "CallLogFramework.rebuild",
           "%s.fill took: %dms",
           dataSourceName,
           System.currentTimeMillis() - startTime);
+    }
+    LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "applying mutations to database");
+    startTime = System.currentTimeMillis();
+    CallLogDatabaseComponent.get(appContext)
+        .mutationApplier()
+        .applyToDatabase(mutations, appContext);
+    LogUtil.i(
+        "RefreshAnnotatedCallLogWorker.rebuild",
+        "applyToDatabase took: %dms",
+        System.currentTimeMillis() - startTime);
 
-      for (CallLogDataSource dataSource : dataSources.getDataSourcesExcludingSystemCallLog()) {
-        dataSourceName = getName(dataSource);
-        LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "filling %s", dataSourceName);
-        startTime = System.currentTimeMillis();
-        dataSource.fill(appContext, database, lastRebuildTimeMillis, mutations);
-        LogUtil.i(
-            "CallLogFramework.rebuild",
-            "%s.fill took: %dms",
-            dataSourceName,
-            System.currentTimeMillis() - startTime);
-      }
-      LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "applying mutations to database");
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+      dataSourceName = getName(dataSource);
+      LogUtil.i("RefreshAnnotatedCallLogWorker.rebuild", "onSuccessfulFill'ing %s", dataSourceName);
       startTime = System.currentTimeMillis();
-      mutations.applyToDatabase(database);
+      dataSource.onSuccessfulFill(appContext);
       LogUtil.i(
-          "RefreshAnnotatedCallLogWorker.rebuild",
-          "applyToDatabase took: %dms",
+          "CallLogFramework.rebuild",
+          "%s.onSuccessfulFill took: %dms",
+          dataSourceName,
           System.currentTimeMillis() - startTime);
     }
 
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-    sharedPreferences
-        .edit()
-        .putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false)
-        .putLong(CallLogFramework.PREF_LAST_REBUILD_TIMESTAMP_MILLIS, System.currentTimeMillis())
-        .commit();
+    sharedPreferences.edit().putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false).apply();
   }
 
   private static String getName(CallLogDataSource dataSource) {

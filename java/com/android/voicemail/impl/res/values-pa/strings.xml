@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"PIN ਬਦਲੋ"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"ਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ ਨੂੰ PIN ਬਦਲਣ ਲਈ ਯੋਗ ਬਣਾਇਆ ਜਾਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"ਦ੍ਰਿਸ਼ਟਾਂਤਕ ਵੌਇਸਮੇਲ ਹਾਲੇ ਕਿਰਿਆਸ਼ੀਲ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"ਪੁਰਾਣਾ PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"ਨਵਾਂ PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ।"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"ਨਵਾਂ PIN ਬਹੁਤ ਹੀ ਛੋਟਾ ਹੈ।"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"ਨਵਾਂ PIN ਬਹੁਤ ਹੀ ਲੰਬਾ ਹੈ।"</string>
