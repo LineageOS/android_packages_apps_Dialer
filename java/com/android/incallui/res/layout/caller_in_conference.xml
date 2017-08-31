@@ -113,7 +113,7 @@
     android:clickable="true"
     android:contentDescription="@string/conference_caller_disconnect_content_description"
     android:scaleType="center"
-    android:src="@drawable/ic_call_end_white_24dp"
+    android:src="@drawable/quantum_ic_call_end_white_24"
     android:tint="@color/conference_call_manager_icon_color"/>
 
 </LinearLayout>  <!-- End of single list element -->

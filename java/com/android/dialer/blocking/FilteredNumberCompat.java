@@ -38,6 +38,7 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
+import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,8 +125,10 @@ public class FilteredNumberCompat {
    *     android.provider.BlockedNumberContract} blocking, {@code false} otherwise.
    */
   public static boolean hasMigratedToNewBlocking(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
-        .getBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false);
+    return DialerStrictMode.bypass(
+        () ->
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false));
   }
 
   /**
@@ -270,7 +273,7 @@ public class FilteredNumberCompat {
     }
 
     // Great Wall blocking, must be primary user and the default or system dialer
-    // TODO: check that we're the system Dialer
+    // TODO(maxwelb): check that we're the system Dialer
     return TelecomUtil.isDefaultDialer(context)
         && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
   }

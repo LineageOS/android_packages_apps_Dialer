@@ -73,7 +73,7 @@ public final class Licenses {
     // When aapt is called with --rename-manifest-package, the package name is changed for the
     // application, but not for the resources. This is to find the package name of a known
     // resource to know what package to lookup the license files in.
-    String packageName = resources.getResourcePackageName(R.id.dummy_placeholder);
+    String packageName = resources.getResourcePackageName(R.id.license);
     InputStream stream =
         resources.openRawResource(resources.getIdentifier(filename, "raw", packageName));
     return getTextFromInputStream(stream, offset, length);

@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"បិទ​របៀប​ជិះ​​យន្តហោះ"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"អ្នក​ប្រហែលជា​​មិន​ទទួល​បាន​ការ​ជូនដំណឹង​ជា​សារ​សំឡេង​រហូត​​ទាល់តែ​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ពេញលេញ​​។ ហៅ​ជា​សារ​សំឡេង​ដើម្បី​​ទទួល​បាន​សារ​ថ្មី​រហូត​សារ​ជា​សំឡេង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​សកម្ម​ពេញលេញ។"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"មិន​អាច​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​បាន​ទេ"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ប្រអប់​សារ​របស់​អ្នក​ពេញហើយ។ ដើម្បី​បង្កើន​ទំហំ​ផ្ទុក​ទំនេរ សូម​បើក​ទំហំផ្ទុក​បន្ថែម ដើម្បី​ឲ្យ Google អាច​គ្រប់គ្រង និង​បម្រុងទុក​សារ​សារ​ជា​សំឡេង​របស់​អ្នក​បាន។"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"កំណត់កូដ PIN ​សារ​ជាសំឡេង​របស់​អ្នក"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"អ្នក​នឹង​ត្រូវការកូដ PIN សារ​ជាសំឡេងមួយ ​គ្រប់​ពេល​ដែល​អ្នក​ហៅ ​​ដើម្បី​ចូល​ដំណើរការ​សារ​ជា​សំឡេង​របស់​អ្នក។"</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"បញ្ហាមិនស្គាល់"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ការ​កំណត់​របៀប​​ពេល​ជិះ​យន្តហោះ"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"កំណត់​កូដ PIN"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"ព្យាយាម​ម្តង​ទៀត"</string>

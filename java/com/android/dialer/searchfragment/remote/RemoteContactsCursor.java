@@ -1,0 +1,105 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package com.android.dialer.searchfragment.remote;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.MergeCursor;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import com.android.dialer.common.Assert;
+import com.android.dialer.searchfragment.common.SearchCursor;
+import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * {@link MergeCursor} used for combining remote directory cursors into one cursor.
+ *
+ * <p>Usually a device with multiple Google accounts will have multiple remote directories returned
+ * by {@link RemoteDirectoriesCursorLoader}, each represented as a {@link Directory}.
+ *
+ * <p>This cursor merges them together with a header at the start of each cursor/list using {@link
+ * Directory#getDisplayName()} as the header text.
+ */
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+public final class RemoteContactsCursor extends MergeCursor implements SearchCursor {
+
+  /**
+   * Returns a single cursor with headers inserted between each non-empty cursor. If all cursors are
+   * empty, null or closed, this method returns null.
+   */
+  @Nullable
+  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+  public static RemoteContactsCursor newInstance(
+      Context context, Cursor[] cursors, List<Directory> directories) {
+    Assert.checkArgument(
+        cursors.length == directories.size(), "Directories and cursors must be the same size.");
+    Cursor[] cursorsWithHeaders = insertHeaders(context, cursors, directories);
+    if (cursorsWithHeaders.length > 0) {
+      return new RemoteContactsCursor(cursorsWithHeaders);
+    }
+    return null;
+  }
+
+  private RemoteContactsCursor(Cursor[] cursors) {
+    super(cursors);
+  }
+
+  private static Cursor[] insertHeaders(
+      Context context, Cursor[] cursors, List<Directory> directories) {
+    List<Cursor> cursorList = new ArrayList<>();
+    for (int i = 0; i < cursors.length; i++) {
+      Cursor cursor = cursors[i];
+
+      if (cursor == null || cursor.isClosed()) {
+        continue;
+      }
+
+      Directory directory = directories.get(i);
+      if (cursor.getCount() == 0) {
+        // Since the cursor isn't being merged in, we need to close it here.
+        cursor.close();
+        continue;
+      }
+
+      cursorList.add(createHeaderCursor(context, directory.getDisplayName()));
+      cursorList.add(cursor);
+    }
+    return cursorList.toArray(new Cursor[cursorList.size()]);
+  }
+
+  private static MatrixCursor createHeaderCursor(Context context, String name) {
+    MatrixCursor headerCursor = new MatrixCursor(HEADER_PROJECTION, 1);
+    headerCursor.addRow(new String[] {context.getString(R.string.directory, name)});
+    return headerCursor;
+  }
+
+  /** Returns true if the current position is a header row. */
+  @Override
+  public boolean isHeader() {
+    return !isClosed() && getColumnIndex(HEADER_PROJECTION[HEADER_TEXT_POSITION]) != -1;
+  }
+
+  @Override
+  public boolean updateQuery(@Nullable String query) {
+    // When the query changes, a new network request is made for nearby places. Meaning this cursor
+    // will be closed and another created, so return false.
+    return false;
+  }
+}

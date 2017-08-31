@@ -28,8 +28,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     }
   }
 
-  // TODO: add on click action to contact.
+  // TODO(calderwoodra): add on click action to contact.
   private View getContactView(ViewGroup container) {
     LayoutInflater inflater = LayoutInflater.from(getContext());
     View contactView = inflater.inflate(R.layout.contact_layout, container, false);

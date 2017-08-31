@@ -18,6 +18,7 @@ package com.android.dialer.calllogutils;
 
 import android.content.res.Resources;
 import com.android.dialer.compat.AppCompatConstants;
+import com.android.dialer.lightbringer.Lightbringer;
 
 /** Helper class to perform operations related to call types. */
 public class CallTypeHelper {
@@ -50,8 +51,12 @@ public class CallTypeHelper {
   private final CharSequence mBlockedName;
   /** Name used to identify calls which were answered on another device. */
   private final CharSequence mAnsweredElsewhereName;
+  /** Name used to identify incoming lightbringer calls. */
+  private final CharSequence mIncomingLightbringerCall;
+  /** Name used to identify outgoing lightbringer calls. */
+  private final CharSequence mOutgoingLightbringerCall;
 
-  public CallTypeHelper(Resources resources) {
+  public CallTypeHelper(Resources resources, Lightbringer lightbringer) {
     // Cache these values so that we do not need to look them up each time.
     mIncomingName = resources.getString(R.string.type_incoming);
     mIncomingPulledName = resources.getString(R.string.type_incoming_pulled);
@@ -67,6 +72,18 @@ public class CallTypeHelper {
     mRejectedName = resources.getString(R.string.type_rejected);
     mBlockedName = resources.getString(R.string.type_blocked);
     mAnsweredElsewhereName = resources.getString(R.string.type_answered_elsewhere);
+
+    if (lightbringer.getIncomingCallTypeText() != -1) {
+      mIncomingLightbringerCall = resources.getString(lightbringer.getIncomingCallTypeText());
+    } else {
+      mIncomingLightbringerCall = mIncomingVideoName;
+    }
+
+    if (lightbringer.getOutgoingCallTypeText() != -1) {
+      mOutgoingLightbringerCall = resources.getString(lightbringer.getOutgoingCallTypeText());
+    } else {
+      mOutgoingLightbringerCall = mOutgoingVideoName;
+    }
   }
 
   public static boolean isMissedCallType(int callType) {
@@ -77,13 +94,17 @@ public class CallTypeHelper {
   }
 
   /** Returns the text used to represent the given call type. */
-  public CharSequence getCallTypeText(int callType, boolean isVideoCall, boolean isPulledCall) {
+  public CharSequence getCallTypeText(
+      int callType, boolean isVideoCall, boolean isPulledCall, boolean isLightbringerCall) {
     switch (callType) {
       case AppCompatConstants.CALLS_INCOMING_TYPE:
         if (isVideoCall) {
           if (isPulledCall) {
             return mIncomingVideoPulledName;
           } else {
+            if (isLightbringerCall) {
+              return mIncomingLightbringerCall;
+            }
             return mIncomingVideoName;
           }
         } else {
@@ -99,6 +120,9 @@ public class CallTypeHelper {
           if (isPulledCall) {
             return mOutgoingVideoPulledName;
           } else {
+            if (isLightbringerCall) {
+              return mOutgoingLightbringerCall;
+            }
             return mOutgoingVideoName;
           }
         } else {

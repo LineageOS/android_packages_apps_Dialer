@@ -20,20 +20,16 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.AsyncTaskExecutor;
-import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.common.concurrent.FallibleAsyncTask;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Refreshes launcher shortcuts from UI components using provided list of contacts. */
 public final class ShortcutRefresher {
-
-  private static final AsyncTaskExecutor EXECUTOR = AsyncTaskExecutors.createThreadPoolExecutor();
 
   /** Asynchronously updates launcher shortcuts using the provided list of contacts. */
   @MainThread
@@ -49,36 +45,27 @@ public final class ShortcutRefresher {
       return;
     }
 
-    //noinspection unchecked
-    EXECUTOR.submit(Task.ID, new Task(context), new ArrayList<>(contacts));
+    DialerExecutors.createNonUiTaskBuilder(new RefreshWorker(context))
+        .build()
+        .executeSerial(new ArrayList<>(contacts));
   }
 
-  private static final class Task extends FallibleAsyncTask<List<ContactEntry>, Void, Void> {
-    private static final String ID = "ShortcutRefresher.Task";
-
+  private static final class RefreshWorker implements Worker<List<ContactEntry>, Void> {
     private final Context context;
 
-    Task(Context context) {
+    RefreshWorker(Context context) {
       this.context = context;
     }
 
-    /**
-     * @param params array containing exactly one element, the list of contacts from favorites
-     *     tiles, ordered in tile order.
-     */
-    @SafeVarargs
     @Override
-    @NonNull
-    @WorkerThread
-    protected final Void doInBackgroundFallible(List<ContactEntry>... params) {
-      Assert.isWorkerThread();
+    public Void doInBackground(List<ContactEntry> contacts) {
       LogUtil.enterBlock("ShortcutRefresher.Task.doInBackground");
 
       // Only dynamic shortcuts are maintained from UI components. Pinned shortcuts are maintained
       // by the job scheduler. This is because a pinned contact may not necessarily still be in the
       // favorites tiles, so refreshing it would require an additional database query. We don't want
       // to incur the cost of that extra database query every time the favorites tiles change.
-      new DynamicShortcuts(context, new IconFactory(context)).refresh(params[0]); // Blocking
+      new DynamicShortcuts(context, new IconFactory(context)).refresh(contacts); // Blocking
 
       return null;
     }

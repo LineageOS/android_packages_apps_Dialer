@@ -16,8 +16,6 @@
 
 package com.android.incallui.incall.protocol;
 
-import android.graphics.drawable.Drawable;
-
 /** Callbacks from the module out to the container. */
 public interface InCallScreenDelegate {
 
@@ -40,6 +38,4 @@ public interface InCallScreenDelegate {
   void onInCallScreenResumed();
 
   void onInCallScreenPaused();
-
-  Drawable getDefaultContactPhotoDrawable();
 }

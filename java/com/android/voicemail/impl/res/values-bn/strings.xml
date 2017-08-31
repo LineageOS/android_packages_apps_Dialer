@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"পিন পরিবর্তন করুন"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"পিন পরিবর্তন করতে ভিজ্যুয়াল ভয়েসমেল অবশ্যই সক্ষম করতে হবে"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"ভিজ্যুয়াল ভয়েসমেল এখনও সক্রিয় করা হয়নি, অনুগ্রহ করে পরে আবার চেষ্টা করুন"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"পুরোনো PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"নতুন PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"অনুগ্রহ করে অপেক্ষা করুন৷"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"নতুন PIN খুবই ছোট৷"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"নতুন PIN খুবই বড়৷"</string>

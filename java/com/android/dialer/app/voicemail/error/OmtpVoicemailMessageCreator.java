@@ -136,6 +136,25 @@ public class OmtpVoicemailMessageCreator {
     return null;
   }
 
+  public static boolean isSyncBlockingError(VoicemailStatus status) {
+    if (status.notificationChannelState != Status.NOTIFICATION_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    if (status.dataChannelState != Status.DATA_CHANNEL_STATE_OK) {
+      return true;
+    }
+
+    switch (status.configurationState) {
+      case Status.CONFIGURATION_STATE_OK:
+        // allow activation to be queued again in case it is interrupted
+      case Status.CONFIGURATION_STATE_CONFIGURING:
+        return false;
+      default:
+        return true;
+    }
+  }
+
   @Nullable
   private static VoicemailErrorMessage checkQuota(
       Context context, VoicemailStatus status, VoicemailStatusReader statusReader) {

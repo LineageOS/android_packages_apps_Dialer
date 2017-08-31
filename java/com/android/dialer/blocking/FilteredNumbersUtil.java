@@ -16,7 +16,6 @@
 package com.android.dialer.blocking;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
@@ -36,6 +35,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnHasBlockedN
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -242,8 +242,6 @@ public class FilteredNumbersUtil {
               return;
             }
 
-            NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification.Builder builder =
                 new Notification.Builder(context)
                     .setSmallIcon(R.drawable.quantum_ic_block_white_24)
@@ -263,7 +261,8 @@ public class FilteredNumbersUtil {
                     FilteredNumberCompat.createManageBlockedNumbersIntent(context),
                     PendingIntent.FLAG_UPDATE_CURRENT));
 
-            notificationManager.notify(
+            DialerNotificationManager.notify(
+                context,
                 CALL_BLOCKING_NOTIFICATION_TAG,
                 CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID,
                 builder.build());

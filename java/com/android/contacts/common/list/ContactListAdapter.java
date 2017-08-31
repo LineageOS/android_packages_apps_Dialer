@@ -23,9 +23,9 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.SearchSnippets;
 import android.view.ViewGroup;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.R;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 
 /**
  * A cursor adapter for the {@link ContactsContract.Contacts#CONTENT_TYPE} content type. Also

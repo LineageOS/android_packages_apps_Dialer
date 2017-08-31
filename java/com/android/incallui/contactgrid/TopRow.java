@@ -96,6 +96,8 @@ public class TopRow {
       label = context.getString(R.string.incall_remotely_held);
     } else if (state.state == State.ACTIVE && shouldShowNumber(primaryInfo)) {
       label = spanDisplayNumber(primaryInfo.number);
+    } else if (state.state == State.CALL_PENDING && !TextUtils.isEmpty(state.customLabel)) {
+      label = state.customLabel;
     } else {
       // Video calling...
       // [Wi-Fi icon] Starbucks Wi-Fi

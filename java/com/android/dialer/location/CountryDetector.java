@@ -72,7 +72,7 @@ public class CountryDetector {
   // exceedingly rare event that the device does not have a default locale set for some reason.
   private static final String DEFAULT_COUNTRY_ISO = "US";
 
-  @VisibleForTesting static CountryDetector sInstance;
+  @VisibleForTesting public static CountryDetector sInstance;
 
   private final TelephonyManager telephonyManager;
   private final LocaleProvider localeProvider;
@@ -80,7 +80,7 @@ public class CountryDetector {
   private final Context appContext;
 
   @VisibleForTesting
-  CountryDetector(
+  public CountryDetector(
       Context appContext,
       TelephonyManager telephonyManager,
       LocationManager locationManager,
@@ -192,7 +192,7 @@ public class CountryDetector {
   }
 
   /** Interface for accessing the current locale. */
-  interface LocaleProvider {
+  public interface LocaleProvider {
     Locale getLocale();
   }
 

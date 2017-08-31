@@ -18,6 +18,7 @@ message CallDetailsEntries {
     optional int64 duration = 5;
     optional int64 data_usage = 6;
     repeated enrichedcall.historyquery.proto.HistoryResult history_results = 7;
+    optional bool is_lightbringer_call = 8;
   }
 
   repeated CallDetailsEntry entries = 1;

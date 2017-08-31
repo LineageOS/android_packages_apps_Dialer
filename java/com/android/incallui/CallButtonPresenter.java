@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.v4.app.Fragment;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
@@ -101,6 +102,7 @@ public class CallButtonPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
+    Trace.beginSection("CallButtonPresenter.onStateChange");
     if (newState == InCallState.OUTGOING) {
       mCall = callList.getOutgoingCall();
     } else if (newState == InCallState.INCALL) {
@@ -124,6 +126,7 @@ public class CallButtonPresenter
       mCall = null;
     }
     updateUi(newState, mCall);
+    Trace.endSection();
   }
 
   /**
@@ -249,11 +252,21 @@ public class CallButtonPresenter
 
   @Override
   public void mergeClicked() {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_MERGE_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     TelecomAdapter.getInstance().merge(mCall.getId());
   }
 
   @Override
   public void addCallClicked() {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_ADD_CALL_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     // Automatically mute the current call
     mAutomaticallyMuted = true;
     mPreviousMuteState = AudioModeProvider.getInstance().getAudioState().isMuted();
@@ -264,6 +277,11 @@ public class CallButtonPresenter
 
   @Override
   public void showDialpadClicked(boolean checked) {
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SHOW_DIALPAD_BUTTON_PRESSED,
+            mCall.getUniqueCallId(),
+            mCall.getTimeAddedMs());
     LogUtil.v("CallButtonPresenter", "show dialpad " + String.valueOf(checked));
     getActivity().showDialpadFragment(checked /* show */, true /* animate */);
   }
@@ -365,7 +383,7 @@ public class CallButtonPresenter
   }
 
   private void updateUi(InCallState state, DialerCall call) {
-    LogUtil.v("CallButtonPresenter", "updating call UI for call: ", call);
+    LogUtil.v("CallButtonPresenter", "updating call UI for call: %s", call);
 
     if (mInCallButtonUi == null) {
       return;

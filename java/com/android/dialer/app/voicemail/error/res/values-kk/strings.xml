@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Ұшақ режимін өшіру"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Визуалды дауыстық хабарды іске қосу"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Визуалды дауыстық пошта толығымен белсендірілгенше, дауыстық пошта хабарландыруларын қабылдай алмайсыз. Дауыстық пошта толығымен белсендірілгенше, жаңа хабарлар шығарып алу үшін дауыстық поштаға қоңырау шалыңыз."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Визуалды дауыстық хабарды іске қосу мүмкін болмады"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Кіріс жәшігі толы. Орын босату үшін, қосымша жад функциясын қосып, Google-ға дауыстық хабарларыңызды басқарып, сақтық көшірмесін жасауға рұқсат беріңіз."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Дауыстық пошта PIN кодын орнатыңыз"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Дауыстық поштаны тыңдау үшін кез келген уақытта қоңырау шалғанда, дауыстық пошта PIN коды сұралады."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Белгісіз қате"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Ұшақ режимінің параметрлері"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN кодын орнату"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Әрекетті қайталау"</string>

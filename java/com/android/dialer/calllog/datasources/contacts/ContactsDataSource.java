@@ -20,10 +20,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
-import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.Assert;
 import java.util.List;
 import javax.inject.Inject;
@@ -39,7 +37,7 @@ public final class ContactsDataSource implements CallLogDataSource {
   public boolean isDirty(Context appContext) {
     Assert.isWorkerThread();
 
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
     return false;
   }
 
@@ -49,29 +47,24 @@ public final class ContactsDataSource implements CallLogDataSource {
       Context appContext,
       CallLogMutations mutations) {
     Assert.isWorkerThread();
-    // TODO: Implementation.
-    for (ContentValues contentValues : mutations.getInserts().values()) {
-      contentValues.put(AnnotatedCallLog.CONTACT_NAME, "Placeholder name");
-    }
+    // TODO(zachh): Implementation.
   }
 
   @Override
   public void onSuccessfulFill(Context appContext) {
-    // TODO: Implementation.
+    // TODO(zachh): Implementation.
   }
 
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    // TODO: Implementation.
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useSingleValueString(AnnotatedCallLog.CONTACT_NAME)
-        .combine();
+    // TODO(zachh): Implementation.
+    return new ContentValues();
   }
 
   @MainThread
   @Override
   public void registerContentObservers(
       Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
-    // TODO: Guard against missing permissions during callback registration.
+    // TODO(zachh): Guard against missing permissions during callback registration.
   }
 }

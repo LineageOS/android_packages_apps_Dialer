@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Desactiva el mode d\'avió"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"S\'està activant la bústia de veu visual"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"És possible que no rebis notificacions de missatges de veu fins que la bústia de veu visual estigui completament activada. Fins aleshores, truca a la bústia de veu per recuperar els missatges nous."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"No es pot activar la bústia de veu visual"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Tens la bústia gairebé plena. Per alliberar espai, activa l\'emmagatzematge addicional perquè Google pugui gestionar els missatges de veu i crear-ne una còpia de seguretat."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Defineix el PIN per als missatges de veu"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Necessitaràs el PIN per als missatges de veu cada vegada que truquis per accedir-hi."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Error desconegut"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Configuració del mode d\'avió"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"Defineix el PIN"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Torna-ho a provar"</string>
@@ -58,7 +56,7 @@
     <string name="voicemail_action_dimiss" msgid="6018415798136796966">"No, gràcies"</string>
     <string name="voicemail_action_sync" msgid="5139315923415392787">"Sincronitza"</string>
     <string name="voicemail_action_call_voicemail" msgid="6701710720535556395">"Truca a la bústia veu"</string>
-    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Truca a l\'assistència al client"</string>
+    <string name="voicemail_action_call_customer_support" msgid="7698973007656462748">"Truca a l\'atenció al client"</string>
     <string name="vvm3_error_vms_dns_failure_title" msgid="7561818769198666727">"S\'ha produït un error"</string>
     <string name="vvm3_error_vms_dns_failure_message" msgid="4284259553458502369">"Hem tingut un problema. Torna-ho a provar més tard. Si el problema continua, contacta amb el servei d\'atenció al client al <xliff:g id="NUMBER">%1$s</xliff:g> i informa\'ls que el codi d\'error és 9001."</string>
     <string name="vvm3_error_vmg_dns_failure_title" msgid="6257196468618464574">"S\'ha produït un error"</string>

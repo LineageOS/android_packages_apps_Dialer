@@ -31,7 +31,8 @@ public class IntentUtil {
   }
 
   public static Intent getNewContactIntent() {
-    return new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+    return new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI)
+        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
   }
 
   public static Intent getNewContactIntent(CharSequence phoneNumber) {

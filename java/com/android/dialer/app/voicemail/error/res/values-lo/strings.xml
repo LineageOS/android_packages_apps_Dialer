@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"ປິດໂໝດຢູ່ໃນຍົນ"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"ກຳລັງເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບ"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"ບໍ່ສາມາດເປີດໃຊ້ຂໍ້ຄວາມສຽງແບບພາບໄດ້"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"ກ່ອງອີເມວຂອງທ່ານໃກ້ເຕັມແລ້ວ. ເພື່ອເພີ່ມບ່ອນຈັດເກັບຂໍ້ມູນ, ໃຫ້ເປີດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່າມເຕີມເພື່ອໃຫ້ Google ສາມາດຈັດການ ແລະ ສຳຮອງຂໍ້ມູນຂໍ້ຄວາມສຽງຂອງທ່ານໄດ້."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"ຕັ້ງລະຫັດ PIN ຂໍ້ຄວາມສຽງຂອງທ່ານ"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ທ່ານຈະຕ້ອງໃຊ້ລະຫັດ PIN ໃນຕອນໃດກໍຕາມທີ່ທ່ານໂທເພື່ອເຂົ້າຟັງຂໍ້ຄວາມສຽງຂອງທ່ານ."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"ຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"ການຕ້ງຄ່າໂໝດຢູ່ໃນຍົນ"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"ຕັ້ງລະຫັດ PIN"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"ລອງໃໝ່ອີກເທື່ອໜຶ່ງ"</string>

@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"‏PIN تبدیل کریں"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"‏PIN تبدیل کرنے کیلئے بصری صوتی میل اہل ہونی چاہئیے"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"بصری صوتی میل ابھی فعال نہیں ہے، براہ کرم بعد میں دوبارہ کوشش کریں"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"‏پرانا PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"‏نیا PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"براہ کرم انتظار کریں۔"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"‏نیا PIN بہت مختصر ہے۔"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"‏نیا PIN بہت طویل ہے۔"</string>

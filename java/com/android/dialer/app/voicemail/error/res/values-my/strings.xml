@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"လေယာဉ်ပျံမုဒ်ပိတ်ရန်"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"မြင်နိုင်သောအသံမေးလ်ကို ဖွင့်နေသည်"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"မြင်ရသောအသံမေးလ်ကို အပြည့်အဝစမဖွင့်သရွေ့ အသံမေးလ်အကြောင်းကြားချက်များကို လက်ခံရရှိနိုင်မည်မဟုတ်ပါ။ အသံမေးလ်ကို အပြည့်အဝစဖွင့်မပြီးမချင်း မက်ဆေ့ဂျ်အသစ်များရယူရန် အသံမေးလ်ခေါ်ဆိုပါ။"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"မြင်ရသောအသံမေးလ်ကို ဖွင့်၍မရပါ"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"သင့်ဝင်စာ ပြည့်လုပါပြီ။ နေရာလွတ်ရရှိရန်အတွက် Google က သင်၏အသံမေးလ်မက်ဆေ့ဂျ်များကို စီမံခန့်ခွဲပြီး မိတ္တူကူးနိုင်ရန် အပိုသိုလှောင်မှုကို ဖွင့်ပါ။"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"သင်၏အသံမေးလ်ပင်နံပါတ် သတ်မှတ်ပါ"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"သင်၏အသံမေးလ်ကို သုံးစွဲရန်အတွက် သင်ခေါ်ဆိုသည့်အခါတိုင်း အသံမေးလ်ပင်နံပါတ်တစ်ခု လိုအပ်ပါမည်။"</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"အမျိုးအမည်မသိမှားယွင်းမှု"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"လေယာဉ်ပျံမုဒ်ဆက်တင်များ"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"ပင်နံပါတ်သတ်မှတ်ပါ"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"ထပ်စမ်းကြည့်ရန်"</string>

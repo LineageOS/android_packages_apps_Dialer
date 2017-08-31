@@ -615,7 +615,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         cce.photo = info.cachedPhoto;
         cce.photoType = ContactPhotoType.CONTACT;
       } else {
-        cce.photo = getDefaultContactPhotoDrawable();
         cce.photoType = ContactPhotoType.DEFAULT_PLACEHOLDER;
       }
     } else {
@@ -669,14 +668,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     mCallBacks.remove(callId);
   }
 
-  public Drawable getDefaultContactPhotoDrawable() {
-    if (mDefaultContactPhotoDrawable == null) {
-      mDefaultContactPhotoDrawable =
-          mContext.getResources().getDrawable(R.drawable.img_no_image_automirrored);
-    }
-    return mDefaultContactPhotoDrawable;
-  }
-
   /** Callback interface for the contact query. */
   public interface ContactInfoCacheCallback {
 
@@ -699,8 +690,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     // Note in cache entry whether this is a pending async loading action to know whether to
     // wait for its callback or not.
     boolean hasPendingQuery;
-    /** This will be used for the "view" notification. */
-    public Uri contactUri;
     /** Either a display photo or a thumbnail URI. */
     Uri displayPhotoUri;
 
@@ -741,8 +730,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
           + photo
           + ", isSipCall="
           + isSipCall
-          + ", contactUri="
-          + contactUri
           + ", displayPhotoUri="
           + displayPhotoUri
           + ", contactLookupResult="
@@ -895,7 +882,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // If no image and it's a business, switch to using the default business avatar.
       if (info.getImageUrl() == null && info.isBusiness()) {
         Log.d(TAG, "Business has no image. Using default.");
-        entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
         entry.photoType = ContactPhotoType.BUSINESS;
       }
 

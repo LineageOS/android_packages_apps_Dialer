@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը ծանո՞թ է"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը լցո՞ն է"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"<xliff:g id="NUMBER">%1$s</xliff:g> համարն արգելափակվեց, և զանգը նշվեց որպես լցոն:"</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"<xliff:g id="NUMBER">%1$s</xliff:g> համարից ստացված զանգը նշվեց որպես ոչ լցոն:"</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"Հպեք՝ կոնտակտներում ավելացնելու համար, կամ արգելափակեք լցոնային համարը:"</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"Այս համարից առաջին անգամ եք զանգ ստանում: Եթե այս զանգը լցոն էր, դուք կարող եք արգելափակել այս համարը և նշել այն որպես լցոն:"</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"Հպեք «ԼՑՈՆ ՉԷ» կոճակին՝ համարը որպես ոչ լցոն նշելու համար, կամ արգելափակեք այն:"</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"Կասկածներ կան, որ այս զանգը լցոնողից էր: Եթե այն լցոն չէր, ապա հպեք «ԼՑՈՆ ՉԷ» կոճակին՝ սխալմունքի մասին մեզ հայտնելու համար:"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"Արգելափակել և նշել լցոն"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"Ավելացնել կոնտակտ"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"Լցոն չէ"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"Արգելափակել համարը"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"Ավելացնել կոնտակտներում"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"Արգելափակել և նշել որպես լցոն"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"Լցոն չէ"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"Մերժել"</string>
+</resources>

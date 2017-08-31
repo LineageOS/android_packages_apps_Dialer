@@ -91,6 +91,7 @@ public class FastScroller extends RelativeLayout {
     int targetPos = getValueInRange(0, itemCount - 1, (int) scrolledPosition);
     layoutManager.scrollToPositionWithOffset(targetPos, 0);
     container.setText(adapter.getHeaderString(targetPos));
+    adapter.refreshHeaders();
   }
 
   // Returns a float in range [0, 1] which represents the position of the scroller.

@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Wyłącz tryb samolotowy"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Aktywuję wizualną pocztę głosową"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Powiadomienia poczty głosowej mogą być dostępne dopiero po pełnej aktywacji wizualnej poczty głosowej. Do tego momentu nowe wiadomości możesz pobierać, dzwoniąc na pocztę głosową."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Nie udało się aktywować wizualnej poczty głosowej"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Twoja skrzynka pocztowa jest prawie pełna. Jeśli chcesz zwolnić miejsce, włącz dodatkowe miejsce, aby umożliwić Google zarządzanie Twoimi wiadomościami głosowymi i tworzenie ich kopii zapasowej."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Ustaw kod PIN do poczty głosowej"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Za każdym razem, gdy zadzwonisz pod numer poczty głosowej, będzie konieczne wpisanie kodu PIN."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Nieznany błąd"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Ustawienia trybu samolotowego"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"Ustaw kod PIN"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Spróbuj jeszcze raz"</string>

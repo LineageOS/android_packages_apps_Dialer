@@ -30,9 +30,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
@@ -60,7 +60,7 @@ public class ContactGridManager {
   @Nullable private ImageView avatarImageView;
 
   // Row 2: Mobile +1 (650) 253-0000
-  // Row 2: [HD attempting icon]/[HD icon] 00:15
+  // Row 2: [HD attempting icon]/[HD icon] [Assisted Dialing Icon] 00:15
   // Row 2: Call ended
   // Row 2: Hanging up
   // Row 2: [Alert sign] Suspected spam caller
@@ -68,6 +68,7 @@ public class ContactGridManager {
   private final ImageView workIconImageView;
   private final ImageView hdIconImageView;
   private final ImageView forwardIconImageView;
+  private final ImageView assistedDialingImageView;
   private final TextView forwardedNumberView;
   private final ImageView spamIconImageView;
   private final ViewAnimator bottomTextSwitcher;
@@ -98,6 +99,7 @@ public class ContactGridManager {
     hdIconImageView = view.findViewById(R.id.contactgrid_hdIcon);
     forwardIconImageView = view.findViewById(R.id.contactgrid_forwardIcon);
     forwardedNumberView = view.findViewById(R.id.contactgrid_forwardNumber);
+    assistedDialingImageView = view.findViewById(R.id.contactgrid_assistedDialingIcon);
     spamIconImageView = view.findViewById(R.id.contactgrid_spamIcon);
     bottomTextSwitcher = view.findViewById(R.id.contactgrid_bottom_text_switcher);
     bottomTextView = view.findViewById(R.id.contactgrid_bottom_text);
@@ -309,6 +311,8 @@ public class ContactGridManager {
     bottomTextView.setText(info.label);
     bottomTextView.setAllCaps(info.isSpamIconVisible);
     workIconImageView.setVisibility(info.isWorkIconVisible ? View.VISIBLE : View.GONE);
+    assistedDialingImageView.setVisibility(
+        info.isAssistedDialedVisisble ? View.VISIBLE : View.GONE);
     if (hdIconImageView.getVisibility() == View.GONE) {
       if (info.isHdAttemptingIconVisible) {
         hdIconImageView.setVisibility(View.VISIBLE);

@@ -32,6 +32,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.inject.Inject;
 
 /**
@@ -129,12 +130,25 @@ public class Coalescer {
    */
   private static boolean rowsShouldBeCombined(
       DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
-    // TODO: Real implementation.
+    // Don't combine rows which don't use the same phone account.
+    if (!Objects.equals(
+        row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL),
+        row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL))) {
+      return false;
+    }
     DialerPhoneNumber number1;
     DialerPhoneNumber number2;
     try {
-      number1 = DialerPhoneNumber.parseFrom(row1.getAsByteArray(AnnotatedCallLog.NUMBER));
-      number2 = DialerPhoneNumber.parseFrom(row2.getAsByteArray(AnnotatedCallLog.NUMBER));
+      byte[] number1Bytes = row1.getAsByteArray(AnnotatedCallLog.NUMBER);
+      byte[] number2Bytes = row2.getAsByteArray(AnnotatedCallLog.NUMBER);
+
+      if (number1Bytes == null || number2Bytes == null) {
+        // Empty numbers should not be combined.
+        return false;
+      }
+
+      number1 = DialerPhoneNumber.parseFrom(number1Bytes);
+      number2 = DialerPhoneNumber.parseFrom(number2Bytes);
     } catch (InvalidProtocolBufferException e) {
       throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
     }

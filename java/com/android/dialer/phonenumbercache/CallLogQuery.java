@@ -60,6 +60,9 @@ public final class CallLogQuery {
   @RequiresApi(VERSION_CODES.N)
   public static final int VIA_NUMBER = 25;
 
+  @RequiresApi(VERSION_CODES.O)
+  public static final int TRANSCRIPTION_STATE = 26;
+
   private static final String[] PROJECTION_M =
       new String[] {
         Calls._ID, // 0
@@ -97,8 +100,23 @@ public final class CallLogQuery {
     PROJECTION_N = projectionList.toArray(new String[projectionList.size()]);
   }
 
+  private static final String[] PROJECTION_O;
+
+  // TODO(mdooley): remove when this becomes a public api
+  // Copied from android.provider.CallLog.Calls
+  private static final String TRANSCRIPTION_STATE_COLUMN = "transcription_state";
+
+  static {
+    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_N));
+    projectionList.add(TRANSCRIPTION_STATE_COLUMN);
+    PROJECTION_O = projectionList.toArray(new String[projectionList.size()]);
+  }
+
   @NonNull
   public static String[] getProjection() {
+    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+      return PROJECTION_O;
+    }
     if (VERSION.SDK_INT >= VERSION_CODES.N) {
       return PROJECTION_N;
     }

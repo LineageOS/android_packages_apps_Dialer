@@ -26,9 +26,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
+import com.android.dialer.contactsfragment.ContactsFragment.Header;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -47,6 +49,8 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   private final ArrayMap<ContactViewHolder, Integer> holderMap = new ArrayMap<>();
   private final Context context;
   private final Cursor cursor;
+  private final @Header int header;
+  private final @ClickAction int clickAction;
 
   // List of contact sublist headers
   private final String[] headers;
@@ -54,9 +58,12 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   // Number of contacts that correspond to each header in {@code headers}.
   private final int[] counts;
 
-  ContactsAdapter(Context context, Cursor cursor) {
+  ContactsAdapter(
+      Context context, Cursor cursor, @Header int header, @ClickAction int clickAction) {
     this.context = context;
     this.cursor = cursor;
+    this.header = header;
+    this.clickAction = clickAction;
     headers = cursor.getExtras().getStringArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_TITLES);
     counts = cursor.getExtras().getIntArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_COUNTS);
   }
@@ -70,7 +77,7 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             LayoutInflater.from(context).inflate(R.layout.add_contact_row, parent, false));
       case CONTACT_VIEW_TYPE:
         return new ContactViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.contact_row, parent, false));
+            LayoutInflater.from(context).inflate(R.layout.contact_row, parent, false), clickAction);
       case UNKNOWN_VIEW_TYPE:
       default:
         throw Assert.createIllegalStateFailException("Invalid view type: " + viewType);
@@ -85,8 +92,10 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     ContactViewHolder contactViewHolder = (ContactViewHolder) viewHolder;
     holderMap.put(contactViewHolder, position);
-    // Cursor should be offset by 1 because of add contact row
-    cursor.moveToPosition(position - 1);
+    cursor.moveToPosition(position);
+    if (header != Header.NONE) {
+      cursor.moveToPrevious();
+    }
 
     String name = getDisplayName(cursor);
     String header = getHeaderString(position);
@@ -112,9 +121,16 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     contactViewHolder.bind(header, name, contactUri, showHeader);
   }
 
+  /**
+   * Returns {@link #ADD_CONTACT_VIEW_TYPE} if the adapter was initialized with {@link
+   * Header#ADD_CONTACT} and the position is 0. Otherwise, {@link #CONTACT_VIEW_TYPE}.
+   */
   @Override
   public @ContactsViewType int getItemViewType(int position) {
-    return position == 0 ? ADD_CONTACT_VIEW_TYPE : CONTACT_VIEW_TYPE;
+    if (header != Header.NONE && position == 0) {
+      return ADD_CONTACT_VIEW_TYPE;
+    }
+    return CONTACT_VIEW_TYPE;
   }
 
   @Override
@@ -125,7 +141,7 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
   }
 
-  public void refreshHeaders() {
+  void refreshHeaders() {
     for (ContactViewHolder holder : holderMap.keySet()) {
       int position = holderMap.get(holder);
       boolean showHeader =
@@ -137,7 +153,12 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public int getItemCount() {
-    return (cursor == null ? 0 : cursor.getCount()) + 1; // add contact
+    int count = cursor == null || cursor.isClosed() ? 0 : cursor.getCount();
+    // Manually insert the header if one exists.
+    if (header != Header.NONE) {
+      count++;
+    }
+    return count;
   }
 
   private static String getDisplayName(Cursor cursor) {
@@ -159,11 +180,13 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     return Contacts.getLookupUri(contactId, lookupKey);
   }
 
-  public String getHeaderString(int position) {
-    if (position == 0) {
-      return "+";
+  String getHeaderString(int position) {
+    if (header != Header.NONE) {
+      if (position == 0) {
+        return "+";
+      }
+      position--;
     }
-    position--;
 
     int index = -1;
     int sum = 0;

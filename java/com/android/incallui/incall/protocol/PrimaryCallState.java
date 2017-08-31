@@ -17,13 +17,33 @@
 package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.telecom.DisconnectCause;
+import android.text.TextUtils;
+import com.android.dialer.common.Assert;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 
 /** State of the primary call. */
 public class PrimaryCallState {
+
+  /**
+   * Button state that will be invisible if not supported, visible but invalid if disabled, or
+   * visible if enabled.
+   */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({ButtonState.NOT_SUPPORT, ButtonState.DISABLED, ButtonState.ENABLED})
+  public @interface ButtonState {
+    int NOT_SUPPORT = 0;
+    int DISABLED = 1;
+    int ENABLED = 2;
+  }
+
   public final int state;
   public final boolean isVideoCall;
   @SessionModificationState public final int sessionModificationState;
@@ -45,11 +65,19 @@ public class PrimaryCallState {
   public final boolean isRemotelyHeld;
   public final boolean isBusinessNumber;
   public final boolean supportsCallOnHold;
+  public final @ButtonState int swapToSecondaryButtonState;
+  public final boolean isAssistedDialed;
+  @Nullable public final String customLabel;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
+    return createEmptyPrimaryCallStateWithState(DialerCall.State.IDLE, null);
+  }
+
+  public static PrimaryCallState createEmptyPrimaryCallStateWithState(
+      int state, String customLabel) {
     return new PrimaryCallState(
-        DialerCall.State.IDLE,
+        state,
         false, /* isVideoCall */
         SessionModificationState.NO_REQUEST,
         new DisconnectCause(DisconnectCause.UNKNOWN),
@@ -69,7 +97,10 @@ public class PrimaryCallState {
         false /* isVoiceMailNumber */,
         false /* isRemotelyHeld */,
         false /* isBusinessNumber */,
-        true /* supportsCallOnHold */);
+        true /* supportsCallOnHold */,
+        ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */,
+        false /* isAssistedDialed */,
+        customLabel);
   }
 
   public PrimaryCallState(
@@ -93,7 +124,10 @@ public class PrimaryCallState {
       boolean isVoiceMailNumber,
       boolean isRemotelyHeld,
       boolean isBusinessNumber,
-      boolean supportsCallOnHold) {
+      boolean supportsCallOnHold,
+      @ButtonState int swapToSecondaryButtonState,
+      boolean isAssistedDialed,
+      @Nullable String customLabel) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -115,6 +149,12 @@ public class PrimaryCallState {
     this.isRemotelyHeld = isRemotelyHeld;
     this.isBusinessNumber = isBusinessNumber;
     this.supportsCallOnHold = supportsCallOnHold;
+    this.swapToSecondaryButtonState = swapToSecondaryButtonState;
+    this.isAssistedDialed = isAssistedDialed;
+    if (!TextUtils.isEmpty(customLabel)) {
+      Assert.checkArgument(state == State.CALL_PENDING);
+    }
+    this.customLabel = customLabel;
   }
 
   @Override

@@ -75,13 +75,13 @@ public abstract class ContactListFilterController {
  */
 class ContactListFilterControllerImpl extends ContactListFilterController {
 
-  private final Context mContext;
+  private final Context mAppContext;
   private final List<ContactListFilterListener> mListeners =
       new ArrayList<ContactListFilterListener>();
   private ContactListFilter mFilter;
 
   public ContactListFilterControllerImpl(Context context) {
-    mContext = context;
+    mAppContext = context.getApplicationContext();
     mFilter = ContactListFilter.restoreDefaultPreferences(getSharedPreferences());
     checkFilterValidity(true /* notify listeners */);
   }
@@ -102,7 +102,7 @@ class ContactListFilterControllerImpl extends ContactListFilterController {
   }
 
   private SharedPreferences getSharedPreferences() {
-    return PreferenceManager.getDefaultSharedPreferences(mContext);
+    return PreferenceManager.getDefaultSharedPreferences(mAppContext);
   }
 
   @Override
@@ -162,7 +162,7 @@ class ContactListFilterControllerImpl extends ContactListFilterController {
 
   /** @return true if the Account for the current filter exists. */
   private boolean filterAccountExists() {
-    final AccountTypeManager accountTypeManager = AccountTypeManager.getInstance(mContext);
+    final AccountTypeManager accountTypeManager = AccountTypeManager.getInstance(mAppContext);
     final AccountWithDataSet filterAccount =
         new AccountWithDataSet(mFilter.accountName, mFilter.accountType, mFilter.dataSet);
     return accountTypeManager.contains(filterAccount, false);

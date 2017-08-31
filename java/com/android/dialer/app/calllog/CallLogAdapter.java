@@ -74,7 +74,6 @@ import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.lightbringer.LightbringerListener;
@@ -90,8 +89,6 @@ import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -344,14 +341,29 @@ public class CallLogAdapter extends GroupingListAdapter
           // If enriched call capabilities were unknown on the initial load,
           // viewHolder.isCallComposerCapable may be unset. Check here if we have the capabilities
           // as a last attempt at getting them before showing the expanded view to the user
-          EnrichedCallCapabilities capabilities =
-              getEnrichedCallManager().getCapabilities(viewHolder.number);
-          viewHolder.isCallComposerCapable =
-              capabilities != null && capabilities.supportsCallComposer();
-          generateAndMapNewCallDetailsEntriesHistoryResults(
-              viewHolder.number,
-              viewHolder.getDetailedPhoneDetails(),
-              getAllHistoricalData(viewHolder.number, viewHolder.getDetailedPhoneDetails()));
+          EnrichedCallCapabilities capabilities = null;
+
+          if (viewHolder.number != null) {
+            capabilities = getEnrichedCallManager().getCapabilities(viewHolder.number);
+          }
+
+          if (capabilities == null) {
+            capabilities = EnrichedCallCapabilities.NO_CAPABILITIES;
+          }
+
+          viewHolder.isCallComposerCapable = capabilities.isCallComposerCapable();
+
+          if (capabilities.isTemporarilyUnavailable()) {
+            LogUtil.i(
+                "mExpandCollapseListener.onClick",
+                "%s is temporarily unavailable, requesting capabilities",
+                LogUtil.sanitizePhoneNumber(viewHolder.number));
+            // Refresh the capabilities when temporarily unavailable, see go/ec-temp-unavailable.
+            // Similarly to when we request capabilities the first time, the 'Share and call' button
+            // won't pop in with the new capabilities. Instead the row needs to be collapsed and
+            // expanded again.
+            getEnrichedCallManager().requestCapabilities(viewHolder.number);
+          }
 
           if (viewHolder.rowId == mCurrentlyExpandedRowId) {
             // Hide actions, if the clicked item is the expanded item.
@@ -454,7 +466,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * Holds a list of URIs that are pending deletion or undo. If the activity ends before the undo
    * timeout, all of the pending URIs will be deleted.
    *
-   * <p>TODO: move this and OnVoicemailDeletedListener to somewhere like {@link
+   * <p>TODO(twyen): move this and OnVoicemailDeletedListener to somewhere like {@link
    * VisualVoicemailCallLogFragment}. The CallLogAdapter does not need to know about what to do with
    * hidden item or what to hide.
    */
@@ -817,12 +829,7 @@ public class CallLogAdapter extends GroupingListAdapter
     // the value will be false while capabilities are requested. mExpandCollapseListener will
     // attempt to set the field properly in that case
     views.isCallComposerCapable = isCallComposerCapable(views.number);
-    CallDetailsEntries updatedCallDetailsEntries =
-        generateAndMapNewCallDetailsEntriesHistoryResults(
-            views.number,
-            callDetailsEntries,
-            getAllHistoricalData(views.number, callDetailsEntries));
-    views.setDetailedPhoneDetails(updatedCallDetailsEntries);
+    views.setDetailedPhoneDetails(callDetailsEntries);
     views.lightbringerReady = getLightbringer().isReachable(mActivity, views.number);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
@@ -879,46 +886,7 @@ public class CallLogAdapter extends GroupingListAdapter
       getEnrichedCallManager().requestCapabilities(number);
       return false;
     }
-    return capabilities.supportsCallComposer();
-  }
-
-  @NonNull
-  private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
-      @Nullable String number, @NonNull CallDetailsEntries entries) {
-    if (number == null) {
-      return Collections.emptyMap();
-    }
-
-    Map<CallDetailsEntry, List<HistoryResult>> historicalData =
-        getEnrichedCallManager().getAllHistoricalData(number, entries);
-    if (historicalData == null) {
-      getEnrichedCallManager().requestAllHistoricalData(number, entries);
-      return Collections.emptyMap();
-    }
-    return historicalData;
-  }
-
-  private static CallDetailsEntries generateAndMapNewCallDetailsEntriesHistoryResults(
-      @Nullable String number,
-      @NonNull CallDetailsEntries callDetailsEntries,
-      @NonNull Map<CallDetailsEntry, List<HistoryResult>> mappedResults) {
-    if (number == null) {
-      return callDetailsEntries;
-    }
-    CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
-    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
-      CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
-      List<HistoryResult> results = mappedResults.get(entry);
-      if (results != null) {
-        newEntry.addAllHistoryResults(mappedResults.get(entry));
-        LogUtil.v(
-            "CallLogAdapter.generateAndMapNewCallDetailsEntriesHistoryResults",
-            "mapped %d results",
-            newEntry.getHistoryResultsList().size());
-      }
-      mutableCallDetailsEntries.addEntries(newEntry.build());
-    }
-    return mutableCallDetailsEntries.build();
+    return capabilities.isCallComposerCapable();
   }
 
   /**
@@ -936,6 +904,10 @@ public class CallLogAdapter extends GroupingListAdapter
         (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
+    final int transcriptionState =
+        (VERSION.SDK_INT >= VERSION_CODES.O)
+            ? cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE)
+            : PhoneCallDetailsHelper.TRANSCRIPTION_NOT_STARTED;
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;
@@ -945,6 +917,7 @@ public class CallLogAdapter extends GroupingListAdapter
     details.features = getCallFeatures(cursor, count);
     details.geocode = cursor.getString(CallLogQuery.GEOCODED_LOCATION);
     details.transcription = cursor.getString(CallLogQuery.TRANSCRIPTION);
+    details.transcriptionState = transcriptionState;
     details.callTypes = getCallTypes(cursor, count);
 
     details.accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
@@ -977,7 +950,7 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   @MainThread
-  private static CallDetailsEntries createCallDetailsEntries(Cursor cursor, int count) {
+  private CallDetailsEntries createCallDetailsEntries(Cursor cursor, int count) {
     Assert.isMainThread();
     int position = cursor.getPosition();
     CallDetailsEntries.Builder entries = CallDetailsEntries.newBuilder();
@@ -990,6 +963,16 @@ public class CallLogAdapter extends GroupingListAdapter
               .setDate(cursor.getLong(CallLogQuery.DATE))
               .setDuration(cursor.getLong(CallLogQuery.DURATION))
               .setFeatures(cursor.getInt(CallLogQuery.FEATURES));
+
+      String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+      if (getLightbringer().getPhoneAccountComponentName() != null
+          && getLightbringer()
+              .getPhoneAccountComponentName()
+              .flattenToString()
+              .equals(phoneAccountComponentName)) {
+        entry.setIsLightbringerCall(true);
+      }
+
       entries.addEntries(entry.build());
       cursor.moveToNext();
     }

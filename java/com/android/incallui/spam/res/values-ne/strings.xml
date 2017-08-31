@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"<xliff:g id="NUMBER">%1$s</xliff:g> लाई चिन्नुहुन्छ?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"<xliff:g id="NUMBER">%1$s</xliff:g> स्प्याम हो?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"<xliff:g id="NUMBER">%1$s</xliff:g> माथि रोक लगाइयो र कललाई स्प्याम भनी रिपोर्ट गरियो।"</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"<xliff:g id="NUMBER">%1$s</xliff:g> बाट आएको कललाई स्प्याम होइन भनी रिपोर्ट गरियो।"</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"सम्पर्कहरूमा थप्न वा स्प्याम नम्बरमाथि रोक लगाउन ट्याप गर्नुहोस्।"</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"यस नम्बरबाट तपाईंलाई कल आएको यो पहिलोपटक हो। यो कल स्प्याम हो भने तपाईं यो नम्बरमाथि रोक लगाउन र यसबारे रिपोर्ट गर्न सक्नुहुन्छ।"</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"स्प्याम होइन भनी रिपोर्ट गर्न वा यसमाथि रोक लगाउन ट्याप गर्नुहोस्।"</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"हामीलाई यो कल गर्ने व्यक्ति एक स्प्यामर हो भन्ने आशङ्का लाग्यो। यो कल स्प्याम थिएन भने हाम्रो गल्तीको रिपोर्ट गर्न स्प्याम होइनमा ट्याप गर्नुहोस्।"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"रोक लगाउनुहोस्‌ र रिपोर्ट गर्नुहोस्‌"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"सम्पर्क थप्नुहोस्"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"स्प्याम होइन"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"नम्बरमाथि रोक लगाउनुहोस्"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"सम्पर्कहरूमा थप्नुहोस्‌"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"रोक लगाउनुहोस्‌ र स्प्याम भनी रिपोर्ट गर्नुहोस्‌"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"स्प्याम होइन"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"अस्वीकार गर्नुहोस्"</string>
+</resources>

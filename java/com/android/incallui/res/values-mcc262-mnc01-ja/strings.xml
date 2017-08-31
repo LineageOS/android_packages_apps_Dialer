@@ -15,10 +15,10 @@
   ~ limitations under the License
    -->
 
+<!--  Specific brand names for mcc262-mnc01. See b/35614024  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="notification_ongoing_call_wifi" msgid="183835219440326838">"無線 LAN で通話中"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="284798501051700462">"無線 LAN で仕事の通話中"</string>
-    <string name="notification_incoming_call_wifi" msgid="2948417037217188797">"無線 LAN で通話を着信中"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="3668962820536702015">"無線 LAN で仕事の通話を着信中"</string>
+    <string name="notification_call_wifi_brand" msgid="255652823737617551">"無線 LAN 経由で通話"</string>
+    <string name="notification_call_wifi_work_brand" msgid="6283219237831628945">"無線 LAN 経由で仕事の通話"</string>
 </resources>

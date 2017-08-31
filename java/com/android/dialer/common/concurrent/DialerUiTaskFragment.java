@@ -88,7 +88,7 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
         (DialerUiTaskFragment<InputT, OutputT>) fragmentManager.findFragmentByTag(taskId);
 
     if (fragment == null) {
-      LogUtil.i("DialerUiTaskFragment.create", "creating new DialerUiTaskFragment");
+      LogUtil.i("DialerUiTaskFragment.create", "creating new DialerUiTaskFragment for " + taskId);
       fragment = new DialerUiTaskFragment<>();
       fragmentManager.beginTransaction().add(fragment, taskId).commit();
     }
@@ -146,14 +146,38 @@ public final class DialerUiTaskFragment<InputT, OutputT> extends Fragment {
       if (successListener == null) {
         LogUtil.i("DialerUiTaskFragment.runTask", "task succeeded but UI is dead");
       } else {
-        ThreadUtil.postOnUiThread(() -> successListener.onSuccess(output));
+        ThreadUtil.postOnUiThread(
+            () -> {
+              // Even though there is a null check above, it is possible for the activity/fragment
+              // to be finished between the time the runnable is posted and the time it executes. Do
+              // an additional check here.
+              if (successListener == null) {
+                LogUtil.i(
+                    "DialerUiTaskFragment.runTask",
+                    "task succeeded but UI died after success runnable posted");
+              } else {
+                successListener.onSuccess(output);
+              }
+            });
       }
     } catch (Throwable throwable) {
       LogUtil.e("DialerUiTaskFragment.runTask", "task failed", throwable);
       if (failureListener == null) {
         LogUtil.i("DialerUiTaskFragment.runTask", "task failed but UI is dead");
       } else {
-        ThreadUtil.postOnUiThread(() -> failureListener.onFailure(throwable));
+        ThreadUtil.postOnUiThread(
+            () -> {
+              // Even though there is a null check above, it is possible for the activity/fragment
+              // to be finished between the time the runnable is posted and the time it executes. Do
+              // an additional check here.
+              if (failureListener == null) {
+                LogUtil.i(
+                    "DialerUiTaskFragment.runTask",
+                    "task failed but UI died after failure runnable posted");
+              } else {
+                failureListener.onFailure(throwable);
+              }
+            });
       }
     }
   }

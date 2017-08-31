@@ -86,6 +86,7 @@ public final class VoicemailAudioManager
     if (newIsPluggedIn) {
       newRoute = CallAudioState.ROUTE_WIRED_HEADSET;
     } else {
+      mVoicemailPlaybackPresenter.pausePlayback();
       if (mWasSpeakerOn) {
         newRoute = CallAudioState.ROUTE_SPEAKER;
       } else {

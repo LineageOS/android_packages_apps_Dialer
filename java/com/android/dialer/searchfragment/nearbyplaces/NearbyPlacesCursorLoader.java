@@ -18,6 +18,7 @@ package com.android.dialer.searchfragment.nearbyplaces;
 
 import android.content.Context;
 import android.content.CursorLoader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
@@ -30,6 +31,11 @@ public final class NearbyPlacesCursorLoader extends CursorLoader {
 
   public NearbyPlacesCursorLoader(Context context, String query) {
     super(context, getContentUri(context, query), Projections.PHONE_PROJECTION, null, null, null);
+  }
+
+  @Override
+  public Cursor loadInBackground() {
+    return NearbyPlacesCursor.newInstnace(getContext(), super.loadInBackground());
   }
 
   private static Uri getContentUri(Context context, String query) {

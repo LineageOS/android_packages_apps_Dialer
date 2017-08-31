@@ -18,5 +18,6 @@
     android:id="@+id/header"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:paddingStart="16dp"
     style="@style/SecondaryText"/>

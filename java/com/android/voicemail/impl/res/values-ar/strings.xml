@@ -25,9 +25,7 @@
     <string name="voicemail_set_pin_preference_title" msgid="1034691230818233684">"تعيين رقم التعريف الشخصي"</string>
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"تغيير رقم التعريف الشخصي"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"ينبغي تشغيل البريد الصوتي المرئي لتغيير رقم التعريف الشخصي"</string>
-    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"لم يتم تنشيط البريد الصوتي المرئي بعد، الرجاء المحاولة مرة أخرى لاحقًا"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"رقم التعريف الشخصي القديم"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"رقم التعريف الشخصي الجديد"</string>
+    <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"لم يتم تنشيط البريد الصوتي المرئي بعد، يُرجى المحاولة مرة أخرى لاحقًا"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"يُرجى الانتظار."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"رقم التعريف الشخصي الجديد قصير جدًا."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"رقم التعريف الشخصي الجديد طويل جدًا."</string>

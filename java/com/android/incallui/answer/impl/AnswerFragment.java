@@ -954,7 +954,7 @@ public class AnswerFragment extends Fragment
 
   private void showMessageMenu() {
     LogUtil.i("AnswerFragment.showMessageMenu", "Show sms menu.");
-    if (getChildFragmentManager().isDestroyed()) {
+    if (getContext() == null || isDetached() || getChildFragmentManager().isDestroyed()) {
       return;
     }
 

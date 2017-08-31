@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import com.android.dialer.common.Assert;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.sessiondata.MultimediaFragment;
 
@@ -28,28 +29,44 @@ import com.android.incallui.sessiondata.MultimediaFragment;
 public class InCallPagerAdapter extends FragmentStatePagerAdapter {
 
   @Nullable private MultimediaData attachments;
+  private final boolean showInCallButtonGrid;
 
-  public InCallPagerAdapter(FragmentManager fragmentManager, @Nullable MultimediaData attachments) {
+  public InCallPagerAdapter(
+      FragmentManager fragmentManager,
+      @Nullable MultimediaData attachments,
+      boolean showInCallButtonGrid) {
     super(fragmentManager);
     this.attachments = attachments;
+    this.showInCallButtonGrid = showInCallButtonGrid;
   }
 
   @Override
   public Fragment getItem(int position) {
-    if (position == getButtonGridPosition()) {
+    if (!showInCallButtonGrid) {
+      // TODO(calderwoodra): handle fragment invalidation for when the data changes.
+      return MultimediaFragment.newInstance(
+          attachments, true /* isInteractive */, false /* showAvatar */, false /* isSpam */);
+
+    } else if (position == getButtonGridPosition()) {
       return InCallButtonGridFragment.newInstance();
+
     } else {
-      // TODO: handle fragment invalidation for when the data changes.
-      return MultimediaFragment.newInstance(attachments, true, false, false);
+      return MultimediaFragment.newInstance(
+          attachments, true /* isInteractive */, false /* showAvatar */, false /* isSpam */);
     }
   }
 
   @Override
   public int getCount() {
-    if (attachments != null && attachments.hasData()) {
-      return 2;
+    int count = 0;
+    if (showInCallButtonGrid) {
+      count++;
     }
-    return 1;
+    if (attachments != null && attachments.hasData()) {
+      count++;
+    }
+    Assert.checkArgument(count > 0, "InCallPager adapter doesn't have any pages.");
+    return count;
   }
 
   public void setAttachments(@Nullable MultimediaData attachments) {
