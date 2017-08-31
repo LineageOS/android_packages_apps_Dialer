@@ -61,7 +61,8 @@ public class SpamNotificationService extends Service {
     intent.putExtra(EXTRA_CALL_START_TIME_MILLIS, call.getTimeAddedMs());
     intent.putExtra(EXTRA_NOTIFICATION_TAG, notificationTag);
     intent.putExtra(EXTRA_NOTIFICATION_ID, notificationId);
-    intent.putExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult);
+    intent.putExtra(
+        EXTRA_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult.getNumber());
     return intent;
   }
 

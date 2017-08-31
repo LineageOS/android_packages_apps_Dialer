@@ -177,6 +177,34 @@ public interface EnrichedCallManager {
   @NonNull
   Filter createOutgoingCallComposerFilter();
 
+  /** Receives updates when the state of an historical data changes. */
+  interface HistoricalDataChangedListener {
+
+    /**
+     * Callback fired when historical data changes. Listeners should call {@link
+     * #getAllHistoricalData(String, CallDetailsEntries)} to retrieve the new data.
+     */
+    void onHistoricalDataChanged();
+  }
+
+  /**
+   * Registers the given {@link HistoricalDataChangedListener}.
+   *
+   * <p>As a result of this method, the listener will receive updates when the state of any enriched
+   * call historical data changes.
+   */
+  @MainThread
+  void registerHistoricalDataChangedListener(@NonNull HistoricalDataChangedListener listener);
+
+  /**
+   * Unregisters the given {@link HistoricalDataChangedListener}.
+   *
+   * <p>As a result of this method, the listener will not receive updates when the state of enriched
+   * call historical data changes.
+   */
+  @MainThread
+  void unregisterHistoricalDataChangedListener(@NonNull HistoricalDataChangedListener listener);
+
   /**
    * Starts an asynchronous process to get all historical data for the given number and set of
    * {@link CallDetailsEntries}.

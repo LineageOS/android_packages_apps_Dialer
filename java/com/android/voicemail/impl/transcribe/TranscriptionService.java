@@ -33,7 +33,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -58,27 +57,37 @@ public class TranscriptionService extends JobService {
 
   // Schedule a task to transcribe the indicated voicemail, return true if transcription task was
   // scheduled.
-  public static boolean transcribeVoicemail(Context context, Uri voicemailUri) {
+  @MainThread
+  public static boolean scheduleNewVoicemailTranscriptionJob(
+      Context context, Uri voicemailUri, boolean highPriority) {
     Assert.isMainThread();
     if (BuildCompat.isAtLeastO()) {
-      LogUtil.i("TranscriptionService.transcribeVoicemail", "scheduling transcription");
+      LogUtil.i(
+          "TranscriptionService.scheduleNewVoicemailTranscriptionJob", "scheduling transcription");
       Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED);
 
       ComponentName componentName = new ComponentName(context, TranscriptionService.class);
       JobInfo.Builder builder =
-          new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName)
-              .setMinimumLatency(0)
-              .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+          new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName);
+      if (highPriority) {
+        builder
+            .setMinimumLatency(0)
+            .setOverrideDeadline(0)
+            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+      } else {
+        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+      }
       JobScheduler scheduler = context.getSystemService(JobScheduler.class);
       JobWorkItem workItem = makeWorkItem(voicemailUri);
       return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
     } else {
-      LogUtil.i("TranscriptionService.transcribeVoicemail", "not supported");
+      LogUtil.i("TranscriptionService.scheduleNewVoicemailTranscriptionJob", "not supported");
       return false;
     }
   }
 
   // Cancel all transcription tasks
+  @MainThread
   public static void cancelTranscriptions(Context context) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.cancelTranscriptions");
@@ -86,6 +95,7 @@ public class TranscriptionService extends JobService {
     scheduler.cancel(ScheduledJobIds.VVM_TRANSCRIPTION_JOB);
   }
 
+  @MainThread
   public TranscriptionService() {
     Assert.isMainThread();
   }
@@ -101,6 +111,7 @@ public class TranscriptionService extends JobService {
   }
 
   @Override
+  @MainThread
   public boolean onStartJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStartJob");
@@ -114,13 +125,13 @@ public class TranscriptionService extends JobService {
       LogUtil.i(
           "TranscriptionService.onStartJob",
           "transcription server address: " + configProvider.getServerAddress());
-      DialerStrictMode.disableDeathPenalty(); // Re-enabled in cleanup.
       jobParameters = params;
       return checkForWork();
     }
   }
 
   @Override
+  @MainThread
   public boolean onStopJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStopJob");
@@ -129,6 +140,7 @@ public class TranscriptionService extends JobService {
   }
 
   @Override
+  @MainThread
   public void onDestroy() {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onDestroy");
@@ -144,7 +156,6 @@ public class TranscriptionService extends JobService {
       executorService.shutdownNow();
       executorService = null;
     }
-    DialerStrictMode.enableDeathPenalty();
   }
 
   @MainThread
@@ -165,6 +176,10 @@ public class TranscriptionService extends JobService {
     }
   }
 
+  static Uri getVoicemailUri(JobWorkItem workItem) {
+    return workItem.getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
+  }
+
   private ExecutorService getExecutorService() {
     if (executorService == null) {
       // The common use case is transcribing a single voicemail so just use a single thread executor
@@ -177,6 +192,7 @@ public class TranscriptionService extends JobService {
 
   private class Callback implements JobCallback {
     @Override
+    @MainThread
     public void onWorkCompleted(JobWorkItem completedWorkItem) {
       Assert.isMainThread();
       LogUtil.i("TranscriptionService.Callback.onWorkCompleted", completedWorkItem.toString());

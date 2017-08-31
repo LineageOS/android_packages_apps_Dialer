@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -77,6 +78,7 @@ public final class NewSearchFragment extends Fragment
   private RecyclerView recyclerView;
   private SearchAdapter adapter;
   private String query;
+  private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
   private boolean remoteDirectoriesDisabledForTesting;
 
   private final List<Directory> directories = new ArrayList<>();
@@ -94,6 +96,7 @@ public final class NewSearchFragment extends Fragment
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle bundle) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
+    adapter.setCallInitiationType(callInitiationType);
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -123,9 +126,8 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
-    // TODO(calderwoodra) add enterprise loader
     if (id == CONTACTS_LOADER_ID) {
-      return new SearchContactsCursorLoader(getContext());
+      return new SearchContactsCursorLoader(getContext(), query);
     } else if (id == NEARBY_PLACES_LOADER_ID) {
       return new NearbyPlacesCursorLoader(getContext(), query);
     } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
@@ -179,6 +181,13 @@ public final class NewSearchFragment extends Fragment
       adapter.setQuery(query);
       loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
+    }
+  }
+
+  public void setCallInitiationType(CallInitiationType.Type callInitiationType) {
+    this.callInitiationType = callInitiationType;
+    if (adapter != null) {
+      adapter.setCallInitiationType(callInitiationType);
     }
   }
 

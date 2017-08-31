@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
@@ -51,6 +50,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   private final Activity activity;
 
   private String query;
+  private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public SearchAdapter(Activity activity, SearchCursorManager searchCursorManager) {
@@ -124,6 +124,10 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     }
   }
 
+  void setCallInitiationType(CallInitiationType.Type callInitiationType) {
+    this.callInitiationType = callInitiationType;
+  }
+
   public void setNearbyPlacesCursor(SearchCursor nearbyPlacesCursor) {
     if (searchCursorManager.setNearbyPlacesCursor(nearbyPlacesCursor)) {
       notifyDataSetChanged();
@@ -149,7 +153,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   private void placeCall(String phoneNumber, int position, boolean isVideoCall) {
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder()
-            .setCallInitiationType(getCallInitiationType())
+            .setCallInitiationType(callInitiationType)
             .setPositionOfSelectedSearchResult(position)
             .setCharactersInSearchString(query == null ? 0 : query.length())
             .build();
@@ -171,10 +175,5 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   public void openCallAndShare(DialerContact contact) {
     Intent intent = CallComposerActivity.newIntent(activity, contact);
     DialerUtils.startActivityWithErrorToast(activity, intent);
-  }
-
-  private CallInitiationType.Type getCallInitiationType() {
-    // TODO(calderwoodra): add correct initiation type
-    return Type.REGULAR_SEARCH;
   }
 }

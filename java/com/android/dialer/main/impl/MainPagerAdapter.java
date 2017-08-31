@@ -21,7 +21,9 @@ import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.Assert;
+import com.android.dialer.voicemail.listui.VoicemailFragment;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -54,9 +56,16 @@ final class MainPagerAdapter extends FragmentStatePagerAdapter {
   }
 
   @Override
-  public Fragment getItem(int position) {
+  public Fragment getItem(@TabIndex int position) {
     // TODO(calderwoodra): implement tabs
-    return new StubFragment();
+    switch (position) {
+      case TabIndex.VOICEMAIL:
+        return new VoicemailFragment();
+      case TabIndex.HISTORY:
+        return new NewCallLogFragment();
+      default:
+        return new StubFragment();
+    }
   }
 
   @Override

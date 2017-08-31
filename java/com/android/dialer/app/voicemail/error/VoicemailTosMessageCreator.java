@@ -70,7 +70,8 @@ public class VoicemailTosMessageCreator {
     this.context = context;
     this.status = status;
     this.statusReader = statusReader;
-    this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    this.preferences =
+        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
   }
 
   @Nullable
@@ -232,6 +233,7 @@ public class VoicemailTosMessageCreator {
           .putInt(DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
+    VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context);
   }
 
   private void logTosCreatedImpression() {

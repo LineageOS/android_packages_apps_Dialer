@@ -75,7 +75,7 @@ public class VoicemailStatusCorruptionHandler {
         "VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus",
         "Source="
             + source
-            + ", CONFIGURATION_STAIE="
+            + ", CONFIGURATION_STATE="
             + status.configurationState
             + ", visualVoicemailEnabled="
             + visualVoicemailEnabled);

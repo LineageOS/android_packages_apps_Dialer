@@ -15,7 +15,7 @@
  -->
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.dialer.callcomposer">
+  package="com.android.dialer.postcall">
 
   <application android:theme="@style/Theme.AppCompat">
     <activity

@@ -45,6 +45,13 @@ public class PhoneCallDetailsHelper {
   /** The maximum number of icons will be shown to represent the call types in a group. */
   private static final int MAX_CALL_TYPE_ICONS = 3;
 
+  // TODO(mdooley): remove when these api's become public
+  // Copied from android.provider.VoicemailContract
+  static final int TRANSCRIPTION_NOT_STARTED = 0;
+  static final int TRANSCRIPTION_IN_PROGRESS = 1;
+  static final int TRANSCRIPTION_FAILED = 2;
+  static final int TRANSCRIPTION_AVAILABLE = 3;
+
   private final Context mContext;
   private final Resources mResources;
   private final CallLogCache mCallLogCache;
@@ -145,14 +152,37 @@ public class PhoneCallDetailsHelper {
     if (isVoicemail) {
       int relevantLinkTypes = Linkify.EMAIL_ADDRESSES | Linkify.PHONE_NUMBERS | Linkify.WEB_URLS;
       views.voicemailTranscriptionView.setAutoLinkMask(relevantLinkTypes);
-      views.voicemailTranscriptionView.setText(
-          TextUtils.isEmpty(details.transcription) ? null : details.transcription);
+      boolean showTranscriptBranding = false;
+      if (!TextUtils.isEmpty(details.transcription)) {
+        views.voicemailTranscriptionView.setText(details.transcription);
+
+        // Set the branding text if the voicemail was transcribed by google
+        // TODO(mdooley): the transcription state is only set by the google transcription code,
+        // but a better solution would be to check the SOURCE_PACKAGE
+        showTranscriptBranding = details.transcriptionState == TRANSCRIPTION_AVAILABLE;
+      } else {
+        if (details.transcriptionState == TRANSCRIPTION_IN_PROGRESS) {
+          views.voicemailTranscriptionView.setText(
+              mResources.getString(R.string.voicemail_transcription_in_progress));
+        } else if (details.transcriptionState == TRANSCRIPTION_FAILED) {
+          views.voicemailTranscriptionView.setText(
+              mResources.getString(R.string.voicemail_transcription_failed));
+        }
+      }
+
+      if (showTranscriptBranding) {
+        views.voicemailTranscriptionBrandingView.setText(
+            mResources.getString(R.string.voicemail_transcription_branding_text));
+      } else {
+        views.voicemailTranscriptionBrandingView.setText("");
+      }
     }
 
     // Bold if not read
     Typeface typeface = details.isRead ? Typeface.SANS_SERIF : Typeface.DEFAULT_BOLD;
     views.nameView.setTypeface(typeface);
     views.voicemailTranscriptionView.setTypeface(typeface);
+    views.voicemailTranscriptionBrandingView.setTypeface(typeface);
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(
         ContextCompat.getColor(

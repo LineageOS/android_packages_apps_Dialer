@@ -38,6 +38,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.answer.bindings.AnswerBindings;
@@ -48,6 +49,7 @@ import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.callpending.CallPendingActivity;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incall.bindings.InCallBindings;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
@@ -67,6 +69,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         InCallButtonUiDelegateFactory,
         VideoCallScreenDelegateFactory,
         PseudoScreenState.StateChangedListener {
+
+  public static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
+  public static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
+  public static final int PENDING_INTENT_REQUEST_CODE_BUBBLE = 2;
 
   private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_ANSWER_SCREEN = "tag_answer_screen";
@@ -117,6 +123,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     LogUtil.i("InCallActivity.onCreate", "");
     super.onCreate(icicle);
 
+    if (getIntent().getBooleanExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY, false)) {
+      Logger.get(this).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL);
+      getIntent().removeExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY);
+    }
+
     if (icicle != null) {
       didShowAnswerScreen = icicle.getBoolean(DID_SHOW_ANSWER_SCREEN_KEY);
       didShowInCallScreen = icicle.getBoolean(DID_SHOW_IN_CALL_SCREEN_KEY);
@@ -131,6 +142,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
+    sendBroadcast(CallPendingActivity.getFinishBroadcast());
     Trace.endSection();
   }
 

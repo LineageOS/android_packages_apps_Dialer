@@ -481,7 +481,8 @@ public class CallCardPresenter
                   isBusiness,
                   supports2ndCallOnHold(),
                   getSwapToSecondaryButtonState(),
-                  mPrimary.isAssistedDialed()));
+                  mPrimary.isAssistedDialed(),
+                  null));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
@@ -551,11 +552,6 @@ public class CallCardPresenter
   @Override
   public void onShrinkAnimationComplete() {
     InCallPresenter.getInstance().onShrinkAnimationComplete();
-  }
-
-  @Override
-  public Drawable getDefaultContactPhotoDrawable() {
-    return ContactInfoCache.getInstance(mContext).getDefaultContactPhotoDrawable();
   }
 
   private void maybeStartSearch(DialerCall call, boolean isPrimary) {
@@ -718,6 +714,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               null /* contactInfoLookupKey */,
               null /* enrichedCallMultimediaData */,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else if (mPrimaryContactInfo != null) {
       LogUtil.v(
@@ -765,6 +762,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               mPrimaryContactInfo.lookupKey,
               multimediaData,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else {
       // Clear the primary display info.
@@ -1008,6 +1006,11 @@ public class CallCardPresenter
       return;
     }
 
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SWAP_SECONDARY_BUTTON_PRESSED,
+            mPrimary.getUniqueCallId(),
+            mPrimary.getTimeAddedMs());
     LogUtil.i(
         "CallCardPresenter.onSecondaryInfoClicked", "swapping call to foreground: " + mSecondary);
     mSecondary.unhold();

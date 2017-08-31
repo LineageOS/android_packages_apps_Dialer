@@ -75,6 +75,16 @@ public final class CallLogPopulator {
 
   @WorkerThread
   public static void populateCallLog(@NonNull Context context) {
+    populateCallLog(context, false);
+  }
+
+  @WorkerThread
+  public static void populateCallLogWithoutMissed(@NonNull Context context) {
+    populateCallLog(context, true);
+  }
+
+  @WorkerThread
+  public static void populateCallLog(@NonNull Context context, boolean isWithoutMissedCalls) {
     Assert.isWorkerThread();
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     // Do this 4 times to make the call log 4 times bigger.
@@ -82,6 +92,9 @@ public final class CallLogPopulator {
     for (int i = 0; i < 4; i++) {
       for (CallEntry.Builder builder : SIMPLE_CALL_LOG) {
         CallEntry callEntry = builder.setTimeMillis(timeMillis).build();
+        if (isWithoutMissedCalls && builder.build().getType() == Calls.MISSED_TYPE) {
+          continue;
+        }
         operations.add(
             ContentProviderOperation.newInsert(Calls.CONTENT_URI)
                 .withValues(callEntry.getAsContentValues())

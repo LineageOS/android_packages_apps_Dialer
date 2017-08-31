@@ -25,8 +25,12 @@ import android.support.annotation.VisibleForTesting;
 import android.telecom.CallAudioState;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialershared.bubble.Bubble;
+import com.android.dialershared.bubble.Bubble.BubbleExpansionStateListener;
+import com.android.dialershared.bubble.Bubble.ExpansionState;
 import com.android.dialershared.bubble.BubbleInfo;
 import com.android.dialershared.bubble.BubbleInfo.Action;
 import com.android.incallui.InCallPresenter.InCallUiListener;
@@ -45,6 +49,8 @@ import java.util.List;
  * necessary
  */
 public class ReturnToCallController implements InCallUiListener, Listener, AudioModeListener {
+
+  public static final String RETURN_TO_CALL_EXTRA_KEY = "RETURN_TO_CALL_BUBBLE";
 
   private final Context context;
 
@@ -118,12 +124,30 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     }
   }
 
-  private Bubble startNewBubble() {
+  @VisibleForTesting
+  public Bubble startNewBubble() {
     if (!Bubble.canShowBubbles(context)) {
       LogUtil.i("ReturnToCallController.startNewBubble", "can't show bubble, no permission");
       return null;
     }
     Bubble returnToCallBubble = Bubble.createBubble(context, generateBubbleInfo());
+    returnToCallBubble.setBubbleExpansionStateListener(
+        new BubbleExpansionStateListener() {
+          @Override
+          public void onBubbleExpansionStateChanged(@ExpansionState int expansionState) {
+            switch (expansionState) {
+              case ExpansionState.START_EXPANDING:
+                Logger.get(context)
+                    .logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
+                break;
+              case ExpansionState.START_COLLAPSING:
+                Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
+                break;
+              default:
+                break;
+            }
+          }
+        });
     returnToCallBubble.show();
     return returnToCallBubble;
   }
@@ -182,12 +206,15 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private BubbleInfo generateBubbleInfo() {
     Intent activityIntent = InCallActivity.getIntent(context, false, false, false);
     activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    activityIntent.putExtra(RETURN_TO_CALL_EXTRA_KEY, true);
     return BubbleInfo.builder()
         .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
         .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
         .setStartingYPosition(
             context.getResources().getDimensionPixelOffset(R.dimen.return_to_call_initial_offset_y))
-        .setPrimaryIntent(PendingIntent.getActivity(context, 0, activityIntent, 0))
+        .setPrimaryIntent(
+            PendingIntent.getActivity(
+                context, InCallActivity.PENDING_INTENT_REQUEST_CODE_BUBBLE, activityIntent, 0))
         .setActions(generateActions())
         .build();
   }
@@ -214,7 +241,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
             .build());
     actions.add(
         Action.builder()
-            .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_end_white_24))
+            .setIcon(Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24))
             .setName(context.getText(R.string.incall_label_end_call))
             .setIntent(endCall)
             .build());

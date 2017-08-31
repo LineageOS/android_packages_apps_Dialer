@@ -1360,6 +1360,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     public static final int CONNECTING = 13; /* Waiting for Telecom broadcast to finish */
     public static final int BLOCKED = 14; /* The number was found on the block list */
     public static final int PULLING = 15; /* An external call being pulled to the device */
+    public static final int CALL_PENDING = 16; /* A call is pending on a long process to finish */
 
     public static boolean isConnectingOrConnected(int state) {
       switch (state) {

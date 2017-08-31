@@ -99,4 +99,7 @@ public final class StubVoicemailClient implements VoicemailClient {
 
   @Override
   public void onShutdown(@NonNull Context context) {}
+
+  @Override
+  public void onTosAccepted(Context context) {}
 }

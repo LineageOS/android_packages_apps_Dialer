@@ -79,6 +79,7 @@ public class LegacyModeSmsHandler {
     VvmLog.i(TAG, "sending voicemail notification");
     Intent intent = new Intent(VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL);
     intent.setPackage(context.getPackageName());
+    intent.putExtra(VoicemailClient.EXTRA_IS_LEGACY_MODE, true);
     intent.putExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
     // Setting voicemail message count to non-zero will show the telephony voicemail
     // notification, and zero will clear it.

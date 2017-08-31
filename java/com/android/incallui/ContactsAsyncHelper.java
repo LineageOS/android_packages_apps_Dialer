@@ -22,12 +22,12 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
 import android.support.annotation.MainThread;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutors;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -35,7 +35,7 @@ import java.io.InputStream;
 public class ContactsAsyncHelper {
 
   /** Interface for a WorkerHandler result return. */
-  public interface OnImageLoadCompleteListener {
+  interface OnImageLoadCompleteListener {
 
     /**
      * Called when the image load is complete. Must be called in main thread.
@@ -55,50 +55,6 @@ public class ContactsAsyncHelper {
     void onImageLoaded(int token, Drawable photo, Bitmap photoIcon, Object cookie);
   }
 
-  // constants
-  private static final int EVENT_LOAD_IMAGE = 1;
-  /** Handler run on a worker thread to load photo asynchronously. */
-  private static Handler sThreadHandler;
-  /** For forcing the system to call its constructor */
-  @SuppressWarnings("unused")
-  private static ContactsAsyncHelper sInstance;
-
-  static {
-    sInstance = new ContactsAsyncHelper();
-  }
-
-  private final Handler mResultHandler =
-      /** A handler that handles message to call listener notifying UI change on main thread. */
-      new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-          WorkerArgs args = (WorkerArgs) msg.obj;
-          switch (msg.arg1) {
-            case EVENT_LOAD_IMAGE:
-              if (args.listener != null) {
-                Log.d(
-                    this,
-                    "Notifying listener: "
-                        + args.listener.toString()
-                        + " image: "
-                        + args.displayPhotoUri
-                        + " completed");
-                args.listener.onImageLoadComplete(
-                    msg.what, args.photo, args.photoIcon, args.cookie);
-              }
-              break;
-            default:
-          }
-        }
-      };
-
-  /** Private constructor for static class */
-  private ContactsAsyncHelper() {
-    HandlerThread thread = new HandlerThread("ContactsAsyncWorker");
-    thread.start();
-    sThreadHandler = new WorkerHandler(thread.getLooper());
-  }
-
   /**
    * Starts an asynchronous image load. After finishing the load, {@link
    * OnImageLoadCompleteListener#onImageLoadComplete(int, Drawable, Bitmap, Object)} will be called.
@@ -114,7 +70,7 @@ public class ContactsAsyncHelper {
    *     argument of {@link OnImageLoadCompleteListener#onImageLoadComplete(int, Drawable, Bitmap,
    *     Object)}. Can be null, at which the callback will also has null for the argument.
    */
-  public static final void startObtainPhotoAsync(
+  static void startObtainPhotoAsync(
       int token,
       Context context,
       Uri displayPhotoUri,
@@ -123,7 +79,7 @@ public class ContactsAsyncHelper {
     // in case the source caller info is null, the URI will be null as well.
     // just update using the placeholder image in this case.
     if (displayPhotoUri == null) {
-      Log.e("startObjectPhotoAsync", "Uri is missing");
+      LogUtil.e("ContactsAsyncHelper.startObjectPhotoAsync", "uri is missing");
       return;
     }
 
@@ -132,26 +88,34 @@ public class ContactsAsyncHelper {
 
     // setup arguments
     WorkerArgs args = new WorkerArgs();
+    args.token = token;
     args.cookie = cookie;
     args.context = context;
     args.displayPhotoUri = displayPhotoUri;
     args.listener = listener;
 
-    // setup message arguments
-    Message msg = sThreadHandler.obtainMessage(token);
-    msg.arg1 = EVENT_LOAD_IMAGE;
-    msg.obj = args;
-
-    Log.d(
-        "startObjectPhotoAsync",
-        "Begin loading image: " + args.displayPhotoUri + ", displaying default image for now.");
-
-    // notify the thread to begin working
-    sThreadHandler.sendMessage(msg);
+    DialerExecutors.createNonUiTaskBuilder(new Worker())
+        .onSuccess(
+            output -> {
+              if (args.listener != null) {
+                LogUtil.d(
+                    "ContactsAsyncHelper.startObtainPhotoAsync",
+                    "notifying listener: "
+                        + args.listener
+                        + " image: "
+                        + args.displayPhotoUri
+                        + " completed");
+                args.listener.onImageLoadComplete(
+                    args.token, args.photo, args.photoIcon, args.cookie);
+              }
+            })
+        .build()
+        .executeParallel(args);
   }
 
   private static final class WorkerArgs {
 
+    public int token;
     public Context context;
     public Uri displayPhotoUri;
     public Drawable photo;
@@ -160,76 +124,53 @@ public class ContactsAsyncHelper {
     public OnImageLoadCompleteListener listener;
   }
 
-  /** Thread worker class that handles the task of opening the stream and loading the images. */
-  private class WorkerHandler extends Handler {
+  private static class Worker implements DialerExecutor.Worker<WorkerArgs, Void> {
 
-    public WorkerHandler(Looper looper) {
-      super(looper);
-    }
-
+    @Nullable
     @Override
-    public void handleMessage(Message msg) {
-      WorkerArgs args = (WorkerArgs) msg.obj;
+    public Void doInBackground(WorkerArgs args) throws Throwable {
+      InputStream inputStream = null;
+      try {
+        try {
+          inputStream = args.context.getContentResolver().openInputStream(args.displayPhotoUri);
+        } catch (Exception e) {
+          LogUtil.e(
+              "ContactsAsyncHelper.Worker.doInBackground", "error opening photo input stream", e);
+        }
 
-      switch (msg.arg1) {
-        case EVENT_LOAD_IMAGE:
-          InputStream inputStream = null;
+        if (inputStream != null) {
+          args.photo = Drawable.createFromStream(inputStream, args.displayPhotoUri.toString());
+
+          // This assumes Drawable coming from contact database is usually
+          // BitmapDrawable and thus we can have (down)scaled version of it.
+          args.photoIcon = getPhotoIconWhenAppropriate(args.context, args.photo);
+
+          LogUtil.d(
+              "ContactsAsyncHelper.Worker.doInBackground",
+              "loading image, URI: %s",
+              args.displayPhotoUri);
+        } else {
+          args.photo = null;
+          args.photoIcon = null;
+          LogUtil.d(
+              "ContactsAsyncHelper.Worker.doInBackground",
+              "problem with image, URI: %s, using default image.",
+              args.displayPhotoUri);
+        }
+        if (args.listener != null) {
+          args.listener.onImageLoaded(args.token, args.photo, args.photoIcon, args.cookie);
+        }
+      } finally {
+        if (inputStream != null) {
           try {
-            try {
-              inputStream = args.context.getContentResolver().openInputStream(args.displayPhotoUri);
-            } catch (Exception e) {
-              Log.e(this, "Error opening photo input stream", e);
-            }
-
-            if (inputStream != null) {
-              args.photo = Drawable.createFromStream(inputStream, args.displayPhotoUri.toString());
-
-              // This assumes Drawable coming from contact database is usually
-              // BitmapDrawable and thus we can have (down)scaled version of it.
-              args.photoIcon = getPhotoIconWhenAppropriate(args.context, args.photo);
-
-              Log.d(
-                  ContactsAsyncHelper.this,
-                  "Loading image: "
-                      + msg.arg1
-                      + " token: "
-                      + msg.what
-                      + " image URI: "
-                      + args.displayPhotoUri);
-            } else {
-              args.photo = null;
-              args.photoIcon = null;
-              Log.d(
-                  ContactsAsyncHelper.this,
-                  "Problem with image: "
-                      + msg.arg1
-                      + " token: "
-                      + msg.what
-                      + " image URI: "
-                      + args.displayPhotoUri
-                      + ", using default image.");
-            }
-            if (args.listener != null) {
-              args.listener.onImageLoaded(msg.what, args.photo, args.photoIcon, args.cookie);
-            }
-          } finally {
-            if (inputStream != null) {
-              try {
-                inputStream.close();
-              } catch (IOException e) {
-                Log.e(this, "Unable to close input stream.", e);
-              }
-            }
+            inputStream.close();
+          } catch (IOException e) {
+            LogUtil.e(
+                "ContactsAsyncHelper.Worker.doInBackground", "Unable to close input stream.", e);
           }
-          break;
-        default:
+        }
       }
-
-      // send the reply to the enclosing class.
-      Message reply = ContactsAsyncHelper.this.mResultHandler.obtainMessage(msg.what);
-      reply.arg1 = msg.arg1;
-      reply.obj = msg.obj;
-      reply.sendToTarget();
+      return null;
     }
 
     /**
@@ -254,7 +195,9 @@ public class ContactsAsyncHelper {
         // If the longer edge is much longer than the shorter edge, the latter may
         // become 0 which will cause a crash.
         if (newWidth <= 0 || newHeight <= 0) {
-          Log.w(this, "Photo icon's width or height become 0.");
+          LogUtil.w(
+              "ContactsAsyncHelper.Worker.getPhotoIconWhenAppropriate",
+              "Photo icon's width or height become 0.");
           return null;
         }
 

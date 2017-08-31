@@ -17,11 +17,9 @@
 <resources>
   <!-- Colors for the dialpad -->
   <color name="background_dialpad">#fcfcfc</color>
-  <color name="background_dialpad_pressed">#ececec</color>
   <color name="dialpad_primary_text_color">@color/dialer_theme_color</color>
   <color name="dialpad_secondary_text_color">#737373</color>
   <color name="dialpad_digits_text_color">#333</color>
-  <color name="dialpad_separator_line_color">#dadada</color>
   <color name="dialpad_icon_tint">#89000000</color>
   <color name="dialpad_voicemail_tint">#919191</color>
 </resources>

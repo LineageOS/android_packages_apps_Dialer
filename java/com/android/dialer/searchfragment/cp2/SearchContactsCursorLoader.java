@@ -20,12 +20,16 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.Nullable;
 import com.android.dialer.searchfragment.common.Projections;
 
 /** Cursor Loader for CP2 contacts. */
 public final class SearchContactsCursorLoader extends CursorLoader {
 
-  public SearchContactsCursorLoader(Context context) {
+  private final String query;
+
+  /** @param query Contacts cursor will be filtered based on this query. */
+  public SearchContactsCursorLoader(Context context, @Nullable String query) {
     super(
         context,
         Phone.CONTENT_URI,
@@ -33,6 +37,7 @@ public final class SearchContactsCursorLoader extends CursorLoader {
         null,
         null,
         Phone.SORT_KEY_PRIMARY + " ASC");
+    this.query = query;
   }
 
   @Override
@@ -40,7 +45,7 @@ public final class SearchContactsCursorLoader extends CursorLoader {
     // All contacts
     Cursor cursor = super.loadInBackground();
     // Filtering logic
-    ContactFilterCursor contactFilterCursor = new ContactFilterCursor(cursor, null);
+    ContactFilterCursor contactFilterCursor = new ContactFilterCursor(cursor, query);
     // Header logic
     return SearchContactsCursor.newInstnace(getContext(), contactFilterCursor);
   }

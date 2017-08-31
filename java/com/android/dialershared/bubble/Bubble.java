@@ -61,8 +61,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialershared.bubble.BubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -109,6 +107,8 @@ public class Bubble {
   private Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
 
+  private BubbleExpansionStateListener bubbleExpansionStateListener;
+
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
   private @interface CollapseEnd {
@@ -123,6 +123,15 @@ public class Bubble {
     int ENTERING = 1;
     int SHOWING = 2;
     int EXITING = 3;
+  }
+
+  /** Indicate bubble expansion state. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({ExpansionState.START_EXPANDING, ExpansionState.START_COLLAPSING})
+  public @interface ExpansionState {
+    // TODO(yueg): add more states when needed
+    int START_EXPANDING = 0;
+    int START_COLLAPSING = 1;
   }
 
   /**
@@ -168,6 +177,11 @@ public class Bubble {
   @VisibleForTesting
   public static void setBubbleFactory(@NonNull BubbleFactory bubbleFactory) {
     Bubble.bubbleFactory = bubbleFactory;
+  }
+
+  @VisibleForTesting
+  public static void resetBubbleFactory() {
+    Bubble.bubbleFactory = Bubble::new;
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -371,6 +385,11 @@ public class Bubble {
         SHOW_TEXT_DURATION_MILLIS);
   }
 
+  public void setBubbleExpansionStateListener(
+      BubbleExpansionStateListener bubbleExpansionStateListener) {
+    this.bubbleExpansionStateListener = bubbleExpansionStateListener;
+  }
+
   @Nullable
   Integer getGravityOverride() {
     return overrideGravity;
@@ -396,7 +415,6 @@ public class Bubble {
 
   void primaryButtonClick() {
     if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
-      Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL);
       try {
         currentInfo.getPrimaryIntent().send();
       } catch (CanceledException e) {
@@ -405,7 +423,9 @@ public class Bubble {
       return;
     }
 
-    Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
+    if (bubbleExpansionStateListener != null) {
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_EXPANDING);
+    }
     doResize(
         () -> {
           onLeftRightSwitch(isDrawingFromRight());
@@ -657,6 +677,9 @@ public class Bubble {
     if (collapseEndAction == CollapseEnd.NOTHING) {
       collapseEndAction = endAction;
     }
+    if (bubbleExpansionStateListener != null && collapseEndAction == CollapseEnd.NOTHING) {
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_COLLAPSING);
+    }
     collapseAnimation =
         expandedView
             .animate()
@@ -847,5 +870,10 @@ public class Bubble {
     public void undoGravityOverride() {
       moveHandler.undoGravityOverride();
     }
+  }
+
+  /** Listener for bubble expansion state change. */
+  public interface BubbleExpansionStateListener {
+    void onBubbleExpansionStateChanged(@ExpansionState int expansionState);
   }
 }

@@ -26,6 +26,7 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.strictmode.DialerStrictMode;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -177,7 +178,7 @@ public final class PersistentLogger {
   }
 
   private static byte[] buildTextLog(String tag, String string) {
-    Calendar c = Calendar.getInstance();
+    Calendar c = DialerStrictMode.bypass(() -> Calendar.getInstance());
     return String.format("%tm-%td %tH:%tM:%tS.%tL - %s - %s", c, c, c, c, c, c, tag, string)
         .getBytes(StandardCharsets.UTF_8);
   }

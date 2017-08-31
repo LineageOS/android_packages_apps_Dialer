@@ -77,6 +77,7 @@ final class SimulatorActionProvider extends ActionProvider {
     super.onPrepareSubMenu(subMenu);
     LogUtil.enterBlock("SimulatorActionProvider.onPrepareSubMenu");
     subMenu.clear();
+
     subMenu
         .add("Add call")
         .setOnMenuItemClickListener(
@@ -84,6 +85,10 @@ final class SimulatorActionProvider extends ActionProvider {
               SimulatorVoiceCall.addNewIncomingCall(context);
               return true;
             });
+
+    subMenu
+        .add("Notifiations")
+        .setActionProvider(SimulatorNotifications.getActionProvider(context));
     subMenu
         .add("Populate database")
         .setOnMenuItemClickListener(
@@ -94,7 +99,7 @@ final class SimulatorActionProvider extends ActionProvider {
     subMenu
         .add("Clean database")
         .setOnMenuItemClickListener(
-            (itme) -> {
+            (item) -> {
               cleanDatabase();
               return true;
             });
