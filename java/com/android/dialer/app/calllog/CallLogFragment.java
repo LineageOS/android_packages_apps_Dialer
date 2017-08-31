@@ -201,7 +201,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onCreate(Bundle state) {
-    LogUtil.d("CallLogFragment.onCreate", toString());
+    LogUtil.enterBlock("CallLogFragment.onCreate");
     super.onCreate(state);
     mRefreshDataRequired = true;
     if (state != null) {
@@ -362,6 +362,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
+    LogUtil.enterBlock("CallLogFragment.onActivityCreated");
     super.onActivityCreated(savedInstanceState);
     setupData();
     updateSelectAllState(savedInstanceState);
@@ -384,7 +385,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onResume() {
-    LogUtil.d("CallLogFragment.onResume", toString());
+    LogUtil.enterBlock("CallLogFragment.onResume");
     super.onResume();
     final boolean hasReadCallLogPermission =
         PermissionsUtil.hasPermission(getActivity(), READ_CALL_LOG);
@@ -411,7 +412,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onPause() {
-    LogUtil.d("CallLogFragment.onPause", toString());
+    LogUtil.enterBlock("CallLogFragment.onPause");
     cancelDisplayUpdate();
     mAdapter.onPause();
     super.onPause();
@@ -419,6 +420,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onStart() {
+    LogUtil.enterBlock("CallLogFragment.onStart");
     super.onStart();
     CequintCallerIdManager cequintCallerIdManager = null;
     if (CequintCallerIdManager.isCequintCallerIdEnabled(getContext())) {
@@ -429,6 +431,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onStop() {
+    LogUtil.enterBlock("CallLogFragment.onStop");
     super.onStop();
     mAdapter.onStop();
     mContactInfoCache.stop();
@@ -436,7 +439,7 @@ public class CallLogFragment extends Fragment
 
   @Override
   public void onDestroy() {
-    LogUtil.d("CallLogFragment.onDestroy", toString());
+    LogUtil.enterBlock("CallLogFragment.onDestroy");
     mAdapter.changeCursor(null);
 
     getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
@@ -552,6 +555,7 @@ public class CallLogFragment extends Fragment
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
       FragmentCompat.requestPermissions(this, deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
     } else if (!mIsCallLogActivity) {
+      LogUtil.i("CallLogFragment.onEmptyViewActionButtonClicked", "showing dialpad");
       // Show dialpad if we are not in the call log activity.
       ((HostInterface) activity).showDialpad();
     }
