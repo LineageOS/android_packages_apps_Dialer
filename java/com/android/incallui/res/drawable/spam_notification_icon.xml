@@ -22,8 +22,8 @@
     <shape android:shape="oval">
       <solid android:color="@color/incall_call_spam_background_color"/>
       <size
-        android:height="@dimen/notification_large_icon_height"
-        android:width="@dimen/notification_large_icon_width"/>
+        android:height="@android:dimen/notification_large_icon_height"
+        android:width="@android:dimen/notification_large_icon_width"/>
     </shape>
   </item>
 
