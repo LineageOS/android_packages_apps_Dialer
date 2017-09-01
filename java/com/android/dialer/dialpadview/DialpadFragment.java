@@ -1001,12 +1001,12 @@ public class DialpadFragment extends Fragment
     DialerUtils.startActivityWithErrorToast(
         getActivity(),
         new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.DIALPAD).build());
-    hideAndClearDialpad(false);
+    hideAndClearDialpad();
   }
 
-  private void hideAndClearDialpad(boolean animate) {
+  private void hideAndClearDialpad() {
     LogUtil.enterBlock("DialpadFragment.hideAndClearDialpad");
-    FragmentUtils.getParentUnsafe(this, DialpadListener.class).hideDialpadFragment(animate, true);
+    FragmentUtils.getParentUnsafe(this, DialpadListener.class).onCallPlacedFromDialpad();
   }
 
   /**
@@ -1053,7 +1053,7 @@ public class DialpadFragment extends Fragment
         final Intent intent =
             new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD).build();
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-        hideAndClearDialpad(false);
+        hideAndClearDialpad();
       }
     }
   }
@@ -1297,7 +1297,7 @@ public class DialpadFragment extends Fragment
       return true;
     } else if (resId == R.id.menu_call_with_note) {
       CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
-      hideAndClearDialpad(false);
+      hideAndClearDialpad();
       return true;
     } else {
       return false;
@@ -1710,7 +1710,7 @@ public class DialpadFragment extends Fragment
 
     void onDialpadShown();
 
-    void hideDialpadFragment(boolean animate, boolean value);
+    void onCallPlacedFromDialpad();
   }
 
   /** Callback for async lookup of the last number dialed. */
