@@ -309,10 +309,7 @@ public class DialtactsActivity extends TransactionSafeActivity
           } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
             mRegularSearchFragment.setQueryString(mSearchQuery);
           } else if (mNewSearchFragment != null && mNewSearchFragment.isVisible()) {
-            mNewSearchFragment.setQuery(mSearchQuery);
-            // When the user switches between dialpad and the serachbar, we need to reset the
-            // call initiation type.
-            mNewSearchFragment.setCallInitiationType(getCallInitiationType());
+            mNewSearchFragment.setQuery(mSearchQuery, getCallInitiationType());
           }
         }
 
@@ -1211,8 +1208,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (!smartDialSearch && !useNewSearch) {
       ((SearchFragment) fragment).setQueryString(query);
     } else if (useNewSearch) {
-      ((NewSearchFragment) fragment).setQuery(query);
-      ((NewSearchFragment) fragment).setCallInitiationType(getCallInitiationType());
+      ((NewSearchFragment) fragment).setQuery(query, getCallInitiationType());
     }
     transaction.commit();
 
