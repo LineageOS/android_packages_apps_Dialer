@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"关闭飞行模式"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"正在激活可视语音信箱"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"在可视语音信箱未完全激活前，您可能不会收到新语音邮件通知。在完全激活前，请呼叫语音信箱以获取新邮件。"</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"无法激活可视语音信箱"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"您的邮箱快满了。要释放空间，请启用额外存储空间，以便 Google 管理和备份您的语音邮件。"</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"设置语音信箱 PIN 码"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"您必须使用语音信箱 PIN 码，才能访问您的语音信箱。"</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"未知错误"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"飞行模式设置"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"设置 PIN 码"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"请重试"</string>

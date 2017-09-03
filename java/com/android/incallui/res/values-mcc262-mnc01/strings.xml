@@ -14,19 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
+<!-- Specific brand names for mcc262-mnc01. See b/35614024 -->
 <resources>
-  <!-- This is customization of wifi call notification only for DTAG of Germany. -->
-  <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
-       Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_call_wifi">Ongoing WLAN Call</string>
-  <!-- The "label" of the in-call Notification for an ongoing work call, which is being made
-       over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_ongoing_work_call_wifi">Ongoing WLAN work call</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_call_wifi">Incoming WLAN Call</string>
-  <!-- The "label" of the in-call Notification for an incoming ringing work call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_work_call_wifi">Incoming WLAN work call</string>
+  <!-- "Brand name" for WiFi calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40] -->
+  <string name="notification_call_wifi_brand">WLAN Call</string>
+
+  <!-- "Brand name" for WiFi work calls. Will be overridden for specific mcc-mnc combinations [CHAR LIMIT=40] -->
+  <string name="notification_call_wifi_work_brand">WLAN work call</string>
 </resources>

@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"إيقاف وضع الطائرة"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"تنشيط البريد الصوتي المرئي"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"قد لا تتلقّى إشعارات البريد الصوتي حتى يتم تنشيط البريد الصوتي المرئي تمامًا. يمكنك الاتصال بالبريد الصوتي لاسترداد الرسائل الجديدة إلى أن يتم تنشيط البريد الصوتي تمامًا."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"يتعذر تنشيط البريد الصوتي المرئي"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"‏صندوق بريدك ممتلئ. للحصول على بعض المساحة، ينبغي تشغيل سعة التخزين الإضافية حتى يتمكن Google من إدارة رسائل البريد الصوتي ونسخها احتياطيًا."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"إعداد رقم التعريف الشخصي للبريد الصوتي"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"ستحتاج رقم تعريف شخصي للبريد الصوتي في كل مرة تتصل فيها للوصول إلى بريدك الصوتي."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"حدث خطأ غير معروف"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"إعدادات وضع الطائرة"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"تعيين رقم التعريف الشخصي"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"إعادة المحاولة"</string>
@@ -101,13 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"يُرجى الاتصال بخدمة العملاء على الرقم <xliff:g id="NUMBER">%1$s</xliff:g> وإبلاغهم أن رمز الخطأ هو 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"حدث خطأٌ ما"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"يُرجى الاتصال بخدمة العملاء على الرقم <xliff:g id="NUMBER">%1$s</xliff:g> وإبلاغهم أن رمز الخطأ هو 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"البنود والشروط للبريد الصوتي المرئي"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nينبغي لك قبول البنود والشروط التي تخص Verizon Wireless لاستخدام البريد الصوتي المرئي:\n\n%2$s"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"الأحكام والشروط للبريد الصوتي المرئي"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nينبغي لك قبول الأحكام والشروط التي تخص Verizon Wireless لاستخدام البريد الصوتي المرئي:\n\n%2$s"</string>
     <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"تشغيل البريد الصوتي المرئي"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
-    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"سيتم تعطيل البريد الصوتي المرئي في حالة رفض البنود والشروط."</string>
+    <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"سيتم تعطيل البريد الصوتي المرئي في حالة رفض الأحكام والشروط."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"تعطيل البريد الصوتي المرئي"</string>
-    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"سيتم تعطيل نسخ البريد الصوتي في حالة رفض البنود والشروط."</string>
+    <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"سيتم تعطيل نسخ البريد الصوتي في حالة رفض الأحكام والشروط."</string>
     <string name="dialer_terms_and_conditions_decline_dialog_downgrade" msgid="6694612247173639685">"تعطيل نسخ البريد الصوتي"</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message" msgid="2200388197966526000">"يمكن الوصول إلى البريد الصوتي فقط عن طريق طلب *86. ينبغي تعيين رقم تعريف شخصي جديد للبريد الصوتي للمتابعة."</string>
     <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin" msgid="4320664492466296770">"تعيين رقم التعريف الشخصي"</string>

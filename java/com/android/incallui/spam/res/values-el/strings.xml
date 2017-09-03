@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"Γνωρίζετε τον αριθμό <xliff:g id="NUMBER">%1$s</xliff:g>;"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"Είναι ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> ανεπιθύμητος;"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"Ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> αποκλείστηκε και η κλήση αναφέρθηκε ως ανεπιθύμητη."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"Η κλήση από τον αριθμό <xliff:g id="NUMBER">%1$s</xliff:g> αναφέρθηκε ως μη ανεπιθύμητη."</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"Πατήστε για προσθήκη στις επαφές ή αποκλεισμό αριθμού ως ανεπιθύμητο."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"Αυτή είναι η πρώτη φορά που σας καλεί αυτός ο αριθμός. Αν η κλήση αυτή ήταν ανεπιθύμητη, μπορείτε να αποκλείσετε αυτόν τον αριθμό και να τον αναφέρετε."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"Πατήστε για αναφορά ως ΜΗ ΑΝΕΠΙΘΥΜΗΤΗΣ ή για αποκλεισμό της."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"Υποψιαστήκαμε ότι πρόκειται για ανεπιθύμητο καλούντα. Εάν η κλήση δεν ήταν ανεπιθύμητη, πατήστε ΜΗ ΑΝΕΠΙΘΥΜΗΤΗ για να αναφέρετε το λάθος μας."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"Αποκλεισμός και αναφορά"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"Προσθήκη επαφής"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"Μη ανεπιθύμητη"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"Αποκλεισμός αριθμού"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"Προσθήκη στις επαφές"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"Αποκλεισμός και αναφορά ως ανεπιθύμητης"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"Μη ανεπιθύμητη"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"Απόρριψη"</string>
+</resources>

@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"पिन बदला"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"पिन बदलण्‍यासाठी व्हिज्युअल व्हॉइसमेल सक्षम करणे आवश्‍यक आहे"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"व्हिज्युअल व्हॉइसमेल अद्याप सक्रिय केले नाही, कृपया नंतर पुन्हा प्रयत्न करा"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"जुना पिन"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"नवीन पिन"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"कृपया प्रतीक्षा करा."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"नवीन पिन खूप लहान आहे."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"नवीन पिन खूप दीर्घ आहे."</string>
@@ -46,6 +44,6 @@
     <string name="change_pin_enter_new_pin_hint" msgid="1289662932759932217">"पिन <xliff:g id="MIN">%1$d</xliff:g>-<xliff:g id="MAX">%2$d</xliff:g> अंकी असणे आवश्‍यक आहे."</string>
     <string name="change_pin_confirm_pin_header" msgid="7282604363655862136">"आपल्या पिनची पुष्टी करा"</string>
     <string name="change_pin_confirm_pins_dont_match" msgid="8626742552205369433">"पिन जुळत नाहीत"</string>
-    <string name="change_pin_succeeded" msgid="6869403202124894671">"व्हॉइसमेल पिन अद्यतनित केला"</string>
+    <string name="change_pin_succeeded" msgid="6869403202124894671">"व्हॉइसमेल पिन अपडेट केला"</string>
     <string name="change_pin_system_error" msgid="5762853042379833829">"पिन सेट करण्यात अक्षम"</string>
 </resources>

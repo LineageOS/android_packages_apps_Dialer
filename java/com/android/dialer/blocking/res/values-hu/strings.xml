@@ -33,7 +33,7 @@
     <string name="block_number_undo" msgid="5158120911892491697">"VISSZAVONÁS"</string>
     <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Az importálás nem sikerült"</string>
     <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"A hívások tiltása funkció kikapcsolva 48 órára"</string>
-    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Letiltva vészhívás miatt."</string>
+    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Letiltva segélyhívás miatt."</string>
     <string name="block_report_number_alert_title" msgid="2740581989824959611">"Letiltja a következő számot: <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_report_number_alert_details" msgid="2652479394593143562">"A jövőben nem fogad hívásokat erről a számról."</string>
     <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> A hívást spamként jelentjük be."</string>

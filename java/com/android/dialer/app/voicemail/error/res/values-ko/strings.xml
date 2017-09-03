@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"비행기 모드 사용 중지"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"시각적 음성사서함 활성화 중"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"시각적 음성사서함이 완전히 활성화될 때까지 음성사서함 알림을 받지 못할 수 있습니다. 음성사서함이 완전히 활성화될 때까지 음성사서함으로 전화하여 새 메시지를 가져오세요."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"시각적 음성사서함을 활성화할 수 없음"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"음성사서함이 거의 가득 찼습니다. Google에서 음성사서함 메시지를 관리하고 백업할 수 있도록 추가 저장용량을 사용 설정하여 여유 공간을 확보하세요."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"음성사서함 PIN 설정"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"음성사서함에 액세스하도록 호출할 때마다 음성사서함 PIN이 필요합니다."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"알 수 없는 오류"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"비행기 모드 설정"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"PIN 설정"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"다시 시도"</string>

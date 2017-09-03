@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"變更 PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"必須啟用視像留言才能變更 PIN"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"視像留言尚未啟用，請稍後再試"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"舊的 PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"新的 PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"請稍候。"</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"新的 PIN 太短。"</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"新的 PIN 太長。"</string>

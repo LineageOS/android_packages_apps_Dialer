@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Променете PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"За променување на PIN-кодот, мора да се овозможи визуелна говорна пошта"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Визуелната говорна пошта сѐ уште не е активна. Обидете се повторно подоцна"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Стар PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Нов PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Почекајте."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Новиот PIN е премногу кус."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Новиот PIN е премногу долг."</string>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="non_spam_notification_title" msgid="2599384745904934400">"Вы знаете, кому принадлежит номер <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="spam_notification_title" msgid="609838099069629476">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> использовался для распространения спама?"</string>
+    <string name="spam_notification_block_report_toast_text" msgid="2994030896996523592">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> заблокирован. Вы сообщили, что вызов использовался для распространения спама."</string>
+    <string name="spam_notification_not_spam_toast_text" msgid="6961471511874959300">"Вы сообщили, что вызов с номера <xliff:g id="NUMBER">%1$s</xliff:g> не использовался для распространения спама"</string>
+    <string name="spam_notification_non_spam_call_collapsed_text" msgid="8007064725837043431">"Нажмите, чтобы добавить номер в контакты или заблокировать его за распространение спама."</string>
+    <string name="spam_notification_non_spam_call_expanded_text" msgid="7719195419139567511">"Это был первый вызов с указанного номера. Если он использовался для распространения спама, вы можете сообщить об этом и заблокировать этот номер."</string>
+    <string name="spam_notification_spam_call_collapsed_text" msgid="7432685333790406255">"Нажмите, чтобы сообщить, что это был НЕ СПАМ, или заблокируйте номер."</string>
+    <string name="spam_notification_spam_call_expanded_text" msgid="913843295461912003">"Мы подозреваем, что этот вызов использовался для распространения спама. Если это не так, нажмите НЕ СПАМ, чтобы сообщить нам об ошибке."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="8195508419034910280">"Блокировать/сообщить"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="1917164963442201652">"Добавить в контакты"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="9078621900394255557">"Не спам"</string>
+    <string name="spam_notification_block_spam_action_text" msgid="6146679044605530341">"Заблокировать номер"</string>
+    <string name="spam_notification_dialog_add_contact_action_text" msgid="3776840041839107240">"Добавить в контакты"</string>
+    <string name="spam_notification_dialog_block_report_spam_action_text" msgid="8099935306225107529">"Заблокировать и сообщить о спаме"</string>
+    <string name="spam_notification_dialog_was_not_spam_action_text" msgid="644291782455190660">"Не спам"</string>
+    <string name="spam_notification_action_dismiss" msgid="2051469404624175977">"Отклонить"</string>
+</resources>

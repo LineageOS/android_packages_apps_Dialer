@@ -17,7 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="voicemail_error_turn_off_airplane_mode_title" msgid="335011175933917603">"Slökkva á flugstillingu"</string>
     <string name="voicemail_error_activating_title" msgid="2428457130578359186">"Virkjar myndrænt talhólf"</string>
     <string name="voicemail_error_activating_message" msgid="7157030596259443393">"Þú getur ekki fengið tilkynningar um talhólfsskilaboð fyrr en myndrænt talhólf er virkjað að fullu. Hringdu í talhólfið til að sækja ný skilaboð þar til talhólfið hefur verið virkjað að fullu."</string>
     <string name="voicemail_error_not_activate_no_signal_title" msgid="742273366199085615">"Ekki hægt að virkja myndrænt talhólf"</string>
@@ -50,7 +49,6 @@
     <string name="voicemail_error_inbox_almost_full_turn_archive_on_message" msgid="9140680538578301853">"Pósthólfið þitt er næstum fullt. Þú getur losað pláss með því að kveikja á viðbótargeymslu til að Google geti unnið með og tekið öryggisafrit af talhólfsskilaboðunum þínum."</string>
     <string name="voicemail_error_pin_not_set_title" msgid="1287168514277948082">"Stilla PIN-númer talhólfs"</string>
     <string name="voicemail_error_pin_not_set_message" msgid="3802375002103184625">"Þú þarft að nota PIN-númer talhólfsins í hvert skipti sem þú hringir til að athuga það."</string>
-    <string name="voicemail_error_unknown_title" msgid="7214482611706360680">"Óþekkt villa"</string>
     <string name="voicemail_action_turn_off_airplane_mode" msgid="6905706401164671086">"Stilling flugstillingar"</string>
     <string name="voicemail_action_set_pin" msgid="958510049866316228">"Stilla PIN-númer"</string>
     <string name="voicemail_action_retry" msgid="4450307484541052511">"Reyna aftur"</string>
