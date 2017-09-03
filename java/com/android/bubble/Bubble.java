@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialershared.bubble;
+package com.android.bubble;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -61,7 +61,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
-import com.android.dialershared.bubble.BubbleInfo.Action;
+import com.android.bubble.BubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -87,8 +87,7 @@ public class Bubble {
   private final Context context;
   private final WindowManager windowManager;
 
-  private final Handler handler = new Handler();
-
+  private final Handler handler;
   private LayoutParams windowParams;
 
   // Initialized in factory method
@@ -106,6 +105,21 @@ public class Bubble {
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
+
+  private final Runnable collapseRunnable =
+      new Runnable() {
+        @Override
+        public void run() {
+          textShowing = false;
+          if (hideAfterText) {
+            // Always reset here since text shouldn't keep showing.
+            hideAndReset();
+          } else {
+            doResize(
+                () -> viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_ICON));
+          }
+        }
+      };
 
   private BubbleExpansionStateListener bubbleExpansionStateListener;
 
@@ -163,13 +177,13 @@ public class Bubble {
   /** Creates instances of Bubble. The default implementation just calls the constructor. */
   @VisibleForTesting
   public interface BubbleFactory {
-    Bubble createBubble(@NonNull Context context);
+    Bubble createBubble(@NonNull Context context, @NonNull Handler handler);
   }
 
   private static BubbleFactory bubbleFactory = Bubble::new;
 
   public static Bubble createBubble(@NonNull Context context, @NonNull BubbleInfo info) {
-    Bubble bubble = bubbleFactory.createBubble(context);
+    Bubble bubble = bubbleFactory.createBubble(context, new Handler());
     bubble.setBubbleInfo(info);
     return bubble;
   }
@@ -185,12 +199,53 @@ public class Bubble {
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  Bubble(@NonNull Context context) {
+  Bubble(@NonNull Context context, @NonNull Handler handler) {
     context = new ContextThemeWrapper(context, R.style.Theme_AppCompat);
     this.context = context;
+    this.handler = handler;
     windowManager = context.getSystemService(WindowManager.class);
 
     viewHolder = new ViewHolder(context);
+  }
+
+  /** Expands the main bubble menu. */
+  public void expand() {
+    if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
+      try {
+        currentInfo.getPrimaryIntent().send();
+      } catch (CanceledException e) {
+        throw new RuntimeException(e);
+      }
+      return;
+    }
+
+    if (bubbleExpansionStateListener != null) {
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_EXPANDING);
+    }
+    doResize(
+        () -> {
+          onLeftRightSwitch(isDrawingFromRight());
+          viewHolder.setDrawerVisibility(View.VISIBLE);
+        });
+    View expandedView = viewHolder.getExpandedView();
+    expandedView
+        .getViewTreeObserver()
+        .addOnPreDrawListener(
+            new OnPreDrawListener() {
+              @Override
+              public boolean onPreDraw() {
+                expandedView.getViewTreeObserver().removeOnPreDrawListener(this);
+                expandedView.setTranslationX(
+                    isDrawingFromRight() ? expandedView.getWidth() : -expandedView.getWidth());
+                expandedView
+                    .animate()
+                    .setInterpolator(new LinearOutSlowInInterpolator())
+                    .translationX(0);
+                return false;
+              }
+            });
+    setFocused(true);
+    expanded = true;
   }
 
   /**
@@ -371,19 +426,8 @@ public class Bubble {
                     });
           });
     }
-    handler.removeCallbacks(null);
-    handler.postDelayed(
-        () -> {
-          textShowing = false;
-          if (hideAfterText) {
-            // Always reset here since text shouldn't keep showing.
-            hideAndReset();
-          } else {
-            doResize(
-                () -> viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_ICON));
-          }
-        },
-        SHOW_TEXT_DURATION_MILLIS);
+    handler.removeCallbacks(collapseRunnable);
+    handler.postDelayed(collapseRunnable, SHOW_TEXT_DURATION_MILLIS);
   }
 
   public void setBubbleExpansionStateListener(
@@ -415,42 +459,7 @@ public class Bubble {
   }
 
   void primaryButtonClick() {
-    if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
-      try {
-        currentInfo.getPrimaryIntent().send();
-      } catch (CanceledException e) {
-        throw new RuntimeException(e);
-      }
-      return;
-    }
-
-    if (bubbleExpansionStateListener != null) {
-      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_EXPANDING);
-    }
-    doResize(
-        () -> {
-          onLeftRightSwitch(isDrawingFromRight());
-          viewHolder.setDrawerVisibility(View.VISIBLE);
-        });
-    View expandedView = viewHolder.getExpandedView();
-    expandedView
-        .getViewTreeObserver()
-        .addOnPreDrawListener(
-            new OnPreDrawListener() {
-              @Override
-              public boolean onPreDraw() {
-                expandedView.getViewTreeObserver().removeOnPreDrawListener(this);
-                expandedView.setTranslationX(
-                    isDrawingFromRight() ? expandedView.getWidth() : -expandedView.getWidth());
-                expandedView
-                    .animate()
-                    .setInterpolator(new LinearOutSlowInInterpolator())
-                    .translationX(0);
-                return false;
-              }
-            });
-    setFocused(true);
-    expanded = true;
+    expand();
   }
 
   void onLeftRightSwitch(boolean onRight) {

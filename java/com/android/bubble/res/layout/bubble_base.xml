@@ -54,7 +54,7 @@
         android:visibility="gone"
         tools:backgroundTint="#FF0000FF"
         tools:visibility="visible">
-      <com.android.dialershared.bubble.CheckableImageButton
+      <com.android.bubble.CheckableImageButton
           android:id="@+id/bubble_icon_first"
           android:layout_width="@dimen/bubble_size"
           android:layout_height="@dimen/bubble_size"
@@ -64,7 +64,7 @@
           android:tintMode="src_in"
           tools:background="@drawable/bubble_ripple_checkable_circle"
           tools:src="@android:drawable/ic_lock_idle_lock"/>
-      <com.android.dialershared.bubble.CheckableImageButton
+      <com.android.bubble.CheckableImageButton
           android:id="@+id/bubble_icon_second"
           android:layout_width="@dimen/bubble_size"
           android:layout_height="@dimen/bubble_size"
@@ -74,7 +74,7 @@
           android:tintMode="src_in"
           tools:background="@drawable/bubble_ripple_checkable_circle"
           tools:src="@android:drawable/ic_input_add"/>
-      <com.android.dialershared.bubble.CheckableImageButton
+      <com.android.bubble.CheckableImageButton
           android:id="@+id/bubble_icon_third"
           android:layout_width="@dimen/bubble_size"
           android:layout_height="@dimen/bubble_size"
