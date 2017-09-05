@@ -191,16 +191,16 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-grpc-okhttp-target \
 	dialer-grpc-protobuf-lite-target \
 	dialer-grpc-stub-target \
-	dialer-guava-target \
 	dialer-javax-annotation-api-target \
 	dialer-javax-inject-target \
 	dialer-libshortcutbadger-target \
 	dialer-mime4j-core-target \
 	dialer-mime4j-dom-target \
+	guava \
 	jsr305 \
+	libbackup \
 	libphonenumber \
 	volley \
-	libbackup \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
@@ -296,16 +296,6 @@ include $(BUILD_MULTI_PREBUILT)
 
 # Enumerate target prebuilts to avoid linker warnings like
 # Dialer (java:sdk) should not link to dialer-guava (java:platform)
-include $(CLEAR_VARS)
-
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-LOCAL_MODULE := dialer-guava-target
-LOCAL_SDK_VERSION := current
-LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX)
-LOCAL_UNINSTALLABLE_MODULE := true
-
-include $(BUILD_PREBUILT)
-
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
