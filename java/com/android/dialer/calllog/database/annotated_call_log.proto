@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+// DIALER_SCRUB.UNCOMMENT_IN_OPEN_SOURCE option optimize_for = LITE_RUNTIME;
+
+package com.android.dialer;
+
+// A list of android.provider.CallLog.Calls.TYPE values ordered from newest to
+// oldest.
+message CallTypes {
+  repeated int32 type = 1;
+}

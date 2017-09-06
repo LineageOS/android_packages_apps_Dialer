@@ -38,7 +38,6 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.Constants;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource;
@@ -48,6 +47,7 @@ import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedConta
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONException;

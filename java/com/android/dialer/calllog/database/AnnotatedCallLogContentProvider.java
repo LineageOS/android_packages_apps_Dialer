@@ -112,7 +112,9 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
         }
         return cursor;
       case COALESCED_ANNOTATED_CALL_LOG_TABLE_CODE:
-        Assert.checkArgument(projection == null, "projection not supported for coalesced call log");
+        Assert.checkArgument(
+            projection == CoalescedAnnotatedCallLog.ALL_COLUMNS,
+            "only ALL_COLUMNS projection supported for coalesced call log");
         Assert.checkArgument(selection == null, "selection not supported for coalesced call log");
         Assert.checkArgument(
             selectionArgs == null, "selection args not supported for coalesced call log");

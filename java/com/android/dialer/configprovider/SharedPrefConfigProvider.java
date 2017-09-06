@@ -20,11 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.strictmode.DialerStrictMode;
 import com.android.dialer.util.DialerUtils;
 import javax.inject.Inject;
 
@@ -95,37 +95,26 @@ class SharedPrefConfigProvider implements ConfigProvider {
 
   @Override
   public String getString(String key, String defaultValue) {
-    return bypassStrictMode(
+    // Reading shared prefs on the main thread is generally safe since a single instance is cached.
+    return DialerStrictMode.bypass(
         () -> getSharedPrefs(appContext).getString(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public long getLong(String key, long defaultValue) {
-    return bypassStrictMode(
+    // Reading shared prefs on the main thread is generally safe since a single instance is cached.
+    return DialerStrictMode.bypass(
         () -> getSharedPrefs(appContext).getLong(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public boolean getBoolean(String key, boolean defaultValue) {
-    return bypassStrictMode(
+    // Reading shared prefs on the main thread is generally safe since a single instance is cached.
+    return DialerStrictMode.bypass(
         () -> getSharedPrefs(appContext).getBoolean(PREF_PREFIX + key, defaultValue));
   }
 
   private static SharedPreferences getSharedPrefs(Context appContext) {
     return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(appContext);
-  }
-
-  private interface Provider<T> {
-    T get();
-  }
-
-  // Reading shared prefs on the main thread is generally safe since a single instance is cached.
-  private static <T> T bypassStrictMode(Provider<T> provider) {
-    StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskReads();
-    try {
-      return provider.get();
-    } finally {
-      StrictMode.setThreadPolicy(oldPolicy);
-    }
   }
 }

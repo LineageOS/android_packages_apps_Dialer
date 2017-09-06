@@ -1149,12 +1149,12 @@ public class VideoCallFragment extends Fragment
       return;
     }
 
-    // TODO: When the view is first displayed after a rotation the bitmap is empty
+    // TODO(mdooley): When the view is first displayed after a rotation the bitmap is empty
     // and thus this blur has no effect.
     // This call can take 100 milliseconds.
     blur(getContext(), bitmap, blurRadius);
 
-    // TODO: Figure out why only have to apply the transform in landscape mode
+    // TODO(mdooley): Figure out why only have to apply the transform in landscape mode
     if (width > height) {
       bitmap =
           Bitmap.createBitmap(

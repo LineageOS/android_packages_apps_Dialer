@@ -35,6 +35,8 @@ import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadKeyButton.OnPressedListener;
 import com.android.dialer.dialpadview.DialpadView;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.incallui.DialpadPresenter.DialpadUi;
 import com.android.incallui.baseui.BaseFragment;
 import java.util.Map;
@@ -87,6 +89,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public void onClick(View v) {
     if (v.getId() == R.id.dialpad_back) {
+      Logger.get(getContext())
+          .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_CLOSE_BUTTON_PRESSED);
       getActivity().onBackPressed();
     }
   }
@@ -107,6 +111,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
           case KeyEvent.ACTION_UP:
             getPresenter().stopDtmf();
             break;
+          default: // fall out
         }
         // do not return true [handled] here, since we want the
         // press / click animation to be handled by the framework.
@@ -125,7 +130,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     return this;
   }
 
-  // TODO Adds hardware keyboard listener
+  // TODO(klp) Adds hardware keyboard listener
 
   @Override
   public View onCreateView(
@@ -261,6 +266,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public void onPressed(View view, boolean pressed) {
     if (pressed && mDisplayMap.containsKey(view.getId())) {
+      Logger.get(getContext())
+          .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_NUMBER_BUTTON_PRESSED);
       Log.d(this, "onPressed: " + pressed + " " + mDisplayMap.get(view.getId()));
       getPresenter().processDtmf(mDisplayMap.get(view.getId()));
     }
@@ -315,7 +322,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
      * Overrides the characters used in {@link DialerKeyListener#CHARACTERS} These are the valid
      * dtmf characters.
      */
-    public final char[] DTMF_CHARACTERS =
+    public final char[] dtmfCharacters =
         new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*'};
 
     private DTMFKeyListener() {
@@ -325,7 +332,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     /** Overriden to return correct DTMF-dialable characters. */
     @Override
     protected char[] getAcceptedChars() {
-      return DTMF_CHARACTERS;
+      return dtmfCharacters;
     }
 
     /** special key listener ignores backspace. */

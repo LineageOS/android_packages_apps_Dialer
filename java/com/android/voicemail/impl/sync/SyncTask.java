@@ -37,17 +37,14 @@ public class SyncTask extends BaseTask {
   private static final int MINIMAL_INTERVAL_MILLIS = 60_000;
 
   private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
-  private static final String EXTRA_SYNC_TYPE = "extra_sync_type";
 
   private final RetryPolicy mRetryPolicy;
 
   private PhoneAccountHandle mPhone;
-  private String mSyncType;
 
-  public static void start(Context context, PhoneAccountHandle phone, String syncType) {
+  public static void start(Context context, PhoneAccountHandle phone) {
     Intent intent = BaseTask.createIntent(context, SyncTask.class, phone);
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
-    intent.putExtra(EXTRA_SYNC_TYPE, syncType);
     context.sendBroadcast(intent);
   }
 
@@ -62,13 +59,12 @@ public class SyncTask extends BaseTask {
   public void onCreate(Context context, Bundle extras) {
     super.onCreate(context, extras);
     mPhone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mSyncType = extras.getString(EXTRA_SYNC_TYPE);
   }
 
   @Override
   public void onExecuteInBackgroundThread() {
     OmtpVvmSyncService service = new OmtpVvmSyncService(getContext());
-    service.sync(this, mSyncType, mPhone, null, mRetryPolicy.getVoicemailStatusEditor());
+    service.sync(this, mPhone, null, mRetryPolicy.getVoicemailStatusEditor());
   }
 
   @Override
@@ -76,7 +72,6 @@ public class SyncTask extends BaseTask {
     LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
-    intent.putExtra(EXTRA_SYNC_TYPE, mSyncType);
     return intent;
   }
 }

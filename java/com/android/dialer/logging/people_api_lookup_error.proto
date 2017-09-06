@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package com.android.dialer.logging;
+option java_package = "com.android.dialer.logging";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+
+
+message PeopleApiLookupError {
+  enum Type {
+    UNKNOWN = 0;
+    HTTP_RESPONSE_ERROR = 1;
+    WRONG_KIND_VALUE = 2;
+    NO_ITEM_FOUND = 3;
+    JSON_PARSING_ERROR = 4;
+  }
+}

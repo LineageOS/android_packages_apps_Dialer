@@ -18,7 +18,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/background_dialer_call_log"
   android:orientation="vertical">
 
   <LinearLayout
@@ -37,6 +36,7 @@
         android:paddingLeft="@dimen/select_all_icon_padding"
         android:paddingRight="@dimen/select_all_icon_padding"
         android:gravity="center_vertical"
+        android:contentDescription="@string/select_all"
         android:src="@drawable/ic_empty_check_mark_white_24dp"/>
     <TextView
         android:id="@+id/select_all_view_text"
@@ -64,7 +64,6 @@
     android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
     android:paddingStart="@dimen/call_log_horizontal_margin"
     android:paddingEnd="@dimen/call_log_horizontal_margin"
-    android:background="@color/background_dialer_call_log"
     android:clipToPadding="false"/>
 
   <com.android.dialer.widget.EmptyContentView

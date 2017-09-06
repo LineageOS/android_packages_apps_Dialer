@@ -92,21 +92,6 @@
       </intent-filter>
     </service>
 
-    <!--
-       Comments for attributes in SpamNotificationActivity:
-       taskAffinity=""             -> Open the dialog without opening the dialer app behind it
-       noHistory="true"            -> Navigating away finishes activity
-       excludeFromRecents="true"   -> Don't show in "recent apps" screen
-       -->
-    <activity
-        android:excludeFromRecents="true"
-        android:exported="false"
-        android:name="com.android.incallui.spam.SpamNotificationActivity"
-        android:noHistory="true"
-        android:taskAffinity=""
-        android:theme="@style/AfterCallNotificationTheme">
-    </activity>
-
     <activity
         android:excludeFromRecents="true"
         android:exported="false"
@@ -114,10 +99,6 @@
         android:noHistory="true"
         android:theme="@style/Theme.Incall.DialogHolder"
         />
-
-    <service
-        android:exported="false"
-        android:name="com.android.incallui.spam.SpamNotificationService"/>
 
     <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
     <receiver

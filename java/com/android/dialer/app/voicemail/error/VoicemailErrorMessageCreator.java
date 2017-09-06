@@ -43,4 +43,13 @@ public class VoicemailErrorMessageCreator {
         return OmtpVoicemailMessageCreator.create(context, status, statusReader);
     }
   }
+
+  public boolean isSyncBlockingError(VoicemailStatus status) {
+    switch (status.type) {
+      case VisualVoicemailTypeExtensions.VVM_TYPE_VVM3:
+        return Vvm3VoicemailMessageCreator.isSyncBlockingError(status);
+      default:
+        return OmtpVoicemailMessageCreator.isSyncBlockingError(status);
+    }
+  }
 }

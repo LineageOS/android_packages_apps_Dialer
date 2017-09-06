@@ -70,6 +70,7 @@ public class CallContactActivity extends TransactionSafeActivity
   private void makeCall() {
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder()
+            .setAllowAssistedDialing(true)
             .setCallInitiationType(CallInitiationType.Type.LAUNCHER_SHORTCUT)
             .build();
     PhoneNumberInteraction.startInteractionForPhoneCall(

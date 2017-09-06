@@ -18,20 +18,23 @@ package com.android.dialer.app.list;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.net.Uri;
 import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.MoreContactUtils;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.app.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.callintent.SpeedDialContactType;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 
@@ -94,11 +97,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     isPinned = (entry.pinned != PinnedPositions.UNPINNED);
     isStarred = entry.isFavorite;
     if (entry != null) {
+      sendViewNotification(getContext(), entry.lookupUri);
       // Grab the phone-number to call directly. See {@link onClick()}.
       mPhoneNumberString = entry.phoneNumber;
 
-      // If this is a blank entry, don't show anything.
-      // TODO krelease: Just hide the view for now. For this to truly look like an empty row
+      // If this is a blank entry, don't show anything. For this to truly look like an empty row
       // the entire ContactTileRow needs to be hidden.
       if (entry == ContactEntry.BLANK_ENTRY) {
         setVisibility(View.INVISIBLE);
@@ -126,6 +129,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
         CallSpecificAppData.Builder callSpecificAppData =
             CallSpecificAppData.newBuilder()
+                .setAllowAssistedDialing(true)
                 .setCallInitiationType(CallInitiationType.Type.SPEED_DIAL)
                 .setSpeedDialContactPosition(position);
         if (isStarred) {
@@ -185,5 +189,23 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
   public void setPosition(int position) {
     this.position = position;
+  }
+
+  /**
+   * Send a notification using a {@link ContactLoader} to inform the sync adapter that we are
+   * viewing a particular contact, so that it can download the high-res photo.
+   */
+  private static void sendViewNotification(Context context, Uri contactUri) {
+    ContactLoader loader = new ContactLoader(context, contactUri, true /* postViewNotification */);
+    loader.registerListener(
+        0,
+        (loader1, contact) -> {
+          try {
+            loader1.reset();
+          } catch (RuntimeException e) {
+            LogUtil.e("PhoneFavoriteTileView.onLoadComplete", "error resetting loader", e);
+          }
+        });
+    loader.startLoading();
   }
 }

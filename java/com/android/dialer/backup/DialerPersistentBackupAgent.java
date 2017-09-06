@@ -34,18 +34,20 @@ import java.util.Map;
 /** Implementation of Key/Value Backup that powers Dialer's backup and restore. */
 public class DialerPersistentBackupAgent extends PersistentBackupAgentHelper {
 
-  private static final String DEFAULT_SHARED_PREFS_NAME = "com.google.android.dialer_preferences";
+  private static final String[] BACKUP_NAMED_SHARED_PREFS = {
+    "com.google.android.dialer_preferences", "com.google.android.dialer", "com.android.dialer"
+  };
 
-  @NonNull private final String sharedPrefsName;
+  @NonNull private final String[] sharedPreferencesToBackup;
 
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  DialerPersistentBackupAgent(@NonNull String sharedPreferenceName) {
-    this.sharedPrefsName = Assert.isNotNull(sharedPreferenceName);
+  DialerPersistentBackupAgent(@NonNull String[] sharedPrefs) {
+    this.sharedPreferencesToBackup = Assert.isNotNull(sharedPrefs);
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_KEY_VALUE_BACKUP_AGENT_CONSTRUCTOR);
   }
 
   public DialerPersistentBackupAgent() {
-    this(DEFAULT_SHARED_PREFS_NAME);
+    this(BACKUP_NAMED_SHARED_PREFS);
   }
 
   @Override
@@ -70,10 +72,15 @@ public class DialerPersistentBackupAgent extends PersistentBackupAgentHelper {
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_KEY_VALUE_GET_BACKUP_SPECIFICATION);
     LogUtil.i(
         "DialerPersistentBackupAgent.getBackupSpecification",
-        "file being backed up: " + sharedPrefsName);
-    Map<String, BackupKeyPredicate> backupSpecification = new ArrayMap<>();
-    backupSpecification.put(sharedPrefsName, BackupKeyPredicates.alwaysTrue());
-    return backupSpecification;
+        "number of files being backed up: " + sharedPreferencesToBackup.length);
+
+    Map<String, BackupKeyPredicate> arrayMap = new ArrayMap<>();
+    for (String fileName : sharedPreferencesToBackup) {
+      LogUtil.i("DialerPersistentBackupAgent.getBackupSpecification", "arrayMap.put: " + fileName);
+      arrayMap.put(fileName, BackupKeyPredicates.alwaysTrue());
+    }
+
+    return arrayMap;
   }
 
   @Override

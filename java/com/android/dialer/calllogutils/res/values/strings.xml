@@ -127,4 +127,7 @@
 
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail_string">Voicemail</string>
+
+  <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
+  <string name="now">Now</string>
 </resources>

@@ -15,12 +15,11 @@
  */
 package com.android.dialer.calllog.ui;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,7 +28,6 @@ import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.CallLogFramework.CallLogUi;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -67,10 +65,11 @@ public final class NewCallLogFragment extends Fragment
     DialerExecutorFactory dialerExecutorFactory =
         DialerExecutorComponent.get(getContext()).dialerExecutorFactory();
 
+    // TODO(zachh): Use support fragment manager and add support for them in executors library.
     refreshAnnotatedCallLogTask =
         dialerExecutorFactory
             .createUiTaskBuilder(
-                getFragmentManager(),
+                getActivity().getFragmentManager(),
                 "NewCallLogFragment.refreshAnnotatedCallLog",
                 component.getRefreshAnnotatedCallLogWorker())
             .build();
@@ -92,7 +91,7 @@ public final class NewCallLogFragment extends Fragment
     CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
     callLogFramework.attachUi(this);
 
-    // TODO: Consider doing this when fragment becomes visible.
+    // TODO(zachh): Consider doing this when fragment becomes visible.
     checkAnnotatedCallLogDirtyAndRefreshIfNecessary();
   }
 
@@ -133,18 +132,22 @@ public final class NewCallLogFragment extends Fragment
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     LogUtil.enterBlock("NewCallLogFragment.onCreateLoader");
-    // CoalescedAnnotatedCallLog requires that all params be null.
-    return new CursorLoader(
-        getContext(), CoalescedAnnotatedCallLog.CONTENT_URI, null, null, null, null);
+    return new CoalescedAnnotatedCallLogCursorLoader(getContext());
   }
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
     LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");
 
-    // TODO: Handle empty cursor by showing empty view.
+    if (newCursor == null) {
+      // This might be possible when the annotated call log hasn't been created but we're trying
+      // to show the call log.
+      LogUtil.w("NewCallLogFragment.onLoadFinished", "null cursor");
+      return;
+    }
+    // TODO(zachh): Handle empty cursor by showing empty view.
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(new NewCallLogAdapter(newCursor));
+    recyclerView.setAdapter(new NewCallLogAdapter(newCursor, System::currentTimeMillis));
   }
 
   @Override

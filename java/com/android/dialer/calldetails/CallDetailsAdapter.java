@@ -26,6 +26,7 @@ import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.common.Assert;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.lightbringer.LightbringerComponent;
 import java.util.List;
 
 /** Adapter for RecyclerView in {@link CallDetailsActivity}. */
@@ -36,9 +37,9 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   private static final int FOOTER_VIEW_TYPE = 3;
 
   private final DialerContact contact;
-  private final List<CallDetailsEntry> callDetailsEntries;
   private final CallDetailsFooterViewHolder.ReportCallIdListener listener;
   private final CallTypeHelper callTypeHelper;
+  private List<CallDetailsEntry> callDetailsEntries;
 
   CallDetailsAdapter(
       Context context,
@@ -48,7 +49,9 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
     this.listener = listener;
-    callTypeHelper = new CallTypeHelper(context.getResources());
+    callTypeHelper =
+        new CallTypeHelper(
+            context.getResources(), LightbringerComponent.get(context).getLightbringer());
   }
 
   @Override
@@ -101,5 +104,10 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   @Override
   public int getItemCount() {
     return callDetailsEntries.size() + 2; // Header + footer
+  }
+
+  void updateCallDetailsEntries(List<CallDetailsEntry> entries) {
+    callDetailsEntries = entries;
+    notifyDataSetChanged();
   }
 }

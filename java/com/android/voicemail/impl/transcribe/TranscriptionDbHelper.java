@@ -17,29 +17,36 @@ package com.android.voicemail.impl.transcribe;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Voicemails;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.BuildCompat;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Helper class for reading and writing transcription data in the database */
 @TargetApi(VERSION_CODES.O)
 public class TranscriptionDbHelper {
-  private static final String[] PROJECTION =
+  @VisibleForTesting
+  static final String[] PROJECTION =
       new String[] {
-        Voicemails.TRANSCRIPTION, // 0
-        VoicemailCompat.TRANSCRIPTION_STATE // 1
+        Voicemails._ID, // 0
+        Voicemails.TRANSCRIPTION, // 1
+        VoicemailCompat.TRANSCRIPTION_STATE // 2
       };
 
-  public static final int TRANSCRIPTION = 0;
-  public static final int TRANSCRIPTION_STATE = 1;
+  static final int ID = 0;
+  static final int TRANSCRIPTION = 1;
+  static final int TRANSCRIPTION_STATE = 2;
 
   private final ContentResolver contentResolver;
   private final Uri uri;
@@ -50,10 +57,14 @@ public class TranscriptionDbHelper {
     this.uri = uri;
   }
 
+  TranscriptionDbHelper(Context context) {
+    this(context, Voicemails.buildSourceUri(context.getPackageName()));
+  }
+
   @WorkerThread
   @TargetApi(VERSION_CODES.M) // used for try with resources
   Pair<String, Integer> getTranscriptionAndState() {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
+    Assert.checkState(BuildCompat.isAtLeastO());
     Assert.isWorkerThread();
     try (Cursor cursor = contentResolver.query(uri, PROJECTION, null, null, null)) {
       if (cursor == null) {
@@ -69,6 +80,27 @@ public class TranscriptionDbHelper {
     }
     LogUtil.i("TranscriptionDbHelper.getTranscriptionAndState", "query returned no results");
     return null;
+  }
+
+  @WorkerThread
+  @TargetApi(VERSION_CODES.M) // used for try with resources
+  List<Uri> getUntranscribedVoicemails() {
+    Assert.checkArgument(BuildCompat.isAtLeastO());
+    Assert.isWorkerThread();
+    List<Uri> untranscribed = new ArrayList<>();
+    String whereClause =
+        Voicemails.TRANSCRIPTION + " is NULL AND " + VoicemailCompat.TRANSCRIPTION_STATE + "=?";
+    String[] whereArgs = {String.valueOf(VoicemailCompat.TRANSCRIPTION_NOT_STARTED)};
+    try (Cursor cursor = contentResolver.query(uri, PROJECTION, whereClause, whereArgs, null)) {
+      if (cursor == null) {
+        LogUtil.e("TranscriptionDbHelper.getUntranscribedVoicemails", "query failed.");
+      } else {
+        while (cursor.moveToNext()) {
+          untranscribed.add(ContentUris.withAppendedId(uri, cursor.getLong(ID)));
+        }
+      }
+    }
+    return untranscribed;
   }
 
   @WorkerThread

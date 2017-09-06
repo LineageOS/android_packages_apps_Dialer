@@ -187,7 +187,7 @@ public class ExifTag {
 
   /** Gets the component count of this tag. */
 
-  // TODO: fix integer overflows with this
+  // TODO(blemmon): fix integer overflows with this
   int getComponentCount() {
     return mComponentCountActual;
   }

@@ -23,6 +23,8 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Utility class for handling bolding queries contained in string. */
 public class QueryBoldingUtil {
@@ -30,12 +32,19 @@ public class QueryBoldingUtil {
   /**
    * Compares a name and query and returns a {@link CharSequence} with bolded characters.
    *
-   * <p>Some example:
+   * <p>Some example of matches:
    *
    * <ul>
    *   <li>"query" would bold "John [query] Smith"
    *   <li>"222" would bold "[AAA] Mom"
    *   <li>"222" would bold "[A]llen [A]lex [A]aron"
+   * </ul>
+   *
+   * <p>Some examples of non-matches:
+   *
+   * <ul>
+   *   <li>"ss" would not match "Jessica Jones"
+   *   <li>"77" would not match "Jessica Jones"
    * </ul>
    *
    * @param query containing any characters
@@ -47,43 +56,31 @@ public class QueryBoldingUtil {
       return name;
     }
 
-    int index = -1;
-    int numberOfBoldedCharacters = 0;
-
-    if (QueryFilteringUtil.nameMatchesT9Query(query, name)) {
-      // Bold the characters that match the t9 query
-      String t9 = QueryFilteringUtil.getT9Representation(name);
-      index = QueryFilteringUtil.indexOfQueryNonDigitsIgnored(query, t9);
-      if (index == -1) {
-        return getNameWithInitialsBolded(query, name);
-      }
-      numberOfBoldedCharacters = query.length();
-
-      for (int i = 0; i < query.length(); i++) {
-        char c = query.charAt(i);
-        if (!Character.isDigit(c)) {
-          numberOfBoldedCharacters--;
-        }
-      }
-
-      for (int i = 0; i < index + numberOfBoldedCharacters; i++) {
-        if (!Character.isLetterOrDigit(name.charAt(i))) {
-          if (i < index) {
-            index++;
-          } else {
-            numberOfBoldedCharacters++;
-          }
-        }
+    if (!QueryFilteringUtil.nameMatchesT9Query(query, name)) {
+      Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()));
+      Matcher matcher = pattern.matcher(name.toLowerCase());
+      if (matcher.find()) {
+        // query matches the start of a name (i.e. "jo" -> "Jessica [Jo]nes")
+        return getBoldedString(name, matcher.start(), query.length());
+      } else {
+        // query not found in name
+        return name;
       }
     }
 
-    if (index == -1) {
-      // Bold the query as an exact match in the name
-      index = name.toLowerCase().indexOf(query);
-      numberOfBoldedCharacters = query.length();
-    }
+    Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()));
+    Matcher matcher = pattern.matcher(QueryFilteringUtil.getT9Representation(name));
+    if (matcher.find()) {
+      // query matches the start of a T9 name (i.e. 75 -> "Jessica [Jo]nes")
+      int index = matcher.start();
+      // TODO(calderwoodra): investigate why this is consistently off by one.
+      index = index == 0 ? 0 : index + 1;
+      return getBoldedString(name, index, query.length());
 
-    return index == -1 ? name : getBoldedString(name, index, numberOfBoldedCharacters);
+    } else {
+      // query match the T9 initials (i.e. 222 -> "[A]l [B]ob [C]harlie")
+      return getNameWithInitialsBolded(query, name);
+    }
   }
 
   private static CharSequence getNameWithInitialsBolded(String query, String name) {

@@ -54,4 +54,11 @@ public class LoggingBindingsStub implements LoggingBindings {
       QuickContactBadge quickContact,
       InteractionEvent.Type interactionEvent,
       boolean shouldPerformClick) {}
+
+  @Override
+  public void logPeopleApiLookupReportWithError(
+      long latency, int httpResponseCode, PeopleApiLookupError.Type errorType) {}
+
+  @Override
+  public void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode) {}
 }

@@ -46,6 +46,7 @@ public class PostCall {
   private static final String KEY_POST_CALL_CALL_CONNECT_TIME = "post_call_call_connect_time";
   private static final String KEY_POST_CALL_CALL_NUMBER = "post_call_call_number";
   private static final String KEY_POST_CALL_MESSAGE_SENT = "post_call_message_sent";
+  private static final String KEY_POST_CALL_DISCONNECT_PRESSED = "post_call_disconnect_pressed";
 
   private static Snackbar activeSnackbar;
 
@@ -79,7 +80,7 @@ public class PostCall {
         LogUtil.sanitizePhoneNumber(getPhoneNumber(activity)),
         capabilities);
 
-    boolean isRcsPostCall = capabilities != null && capabilities.supportsPostCall();
+    boolean isRcsPostCall = capabilities != null && capabilities.isPostCallCapable();
     String actionText =
         isRcsPostCall
             ? activity.getString(R.string.post_call_add_message)
@@ -146,6 +147,13 @@ public class PostCall {
         .apply();
   }
 
+  public static void onDisconnectPressed(Context context) {
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+        .edit()
+        .putBoolean(KEY_POST_CALL_DISCONNECT_PRESSED, true)
+        .apply();
+  }
+
   public static void onCallDisconnected(Context context, String number, long callConnectedMillis) {
     DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
         .edit()
@@ -185,6 +193,7 @@ public class PostCall {
         .remove(KEY_POST_CALL_CALL_NUMBER)
         .remove(KEY_POST_CALL_MESSAGE_SENT)
         .remove(KEY_POST_CALL_CALL_CONNECT_TIME)
+        .remove(KEY_POST_CALL_DISCONNECT_PRESSED)
         .apply();
   }
 
@@ -197,6 +206,8 @@ public class PostCall {
     long timeSinceDisconnect = System.currentTimeMillis() - disconnectTimeMillis;
     long callDurationMillis = disconnectTimeMillis - connectTimeMillis;
 
+    boolean callDisconnectedByUser = manager.getBoolean(KEY_POST_CALL_DISCONNECT_PRESSED, false);
+
     ConfigProvider binding = ConfigProviderBindings.get(context);
     return disconnectTimeMillis != -1
         && connectTimeMillis != -1
@@ -204,7 +215,8 @@ public class PostCall {
         && binding.getLong("postcall_last_call_threshold", 30_000) > timeSinceDisconnect
         && (connectTimeMillis == 0
             || binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis)
-        && getPhoneNumber(context) != null;
+        && getPhoneNumber(context) != null
+        && callDisconnectedByUser;
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {

@@ -36,6 +36,7 @@ import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
 import com.android.voicemail.impl.sync.VvmAccountManager;
+import com.android.voicemail.impl.transcribe.TranscriptionBackfillService;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -229,5 +230,11 @@ public class VoicemailClientImpl implements VoicemailClient {
       }
       where.append(")");
     }
+  }
+
+  @Override
+  public void onTosAccepted(Context context) {
+    LogUtil.i("VoicemailClientImpl.onTosAccepted", "try backfilling voicemail transcriptions");
+    TranscriptionBackfillService.scheduleTask(context);
   }
 }

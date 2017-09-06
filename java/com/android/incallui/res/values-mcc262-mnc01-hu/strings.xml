@@ -15,10 +15,10 @@
   ~ limitations under the License
    -->
 
+<!--  Specific brand names for mcc262-mnc01. See b/35614024  -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="notification_ongoing_call_wifi" msgid="183835219440326838">"Folyamatban lévő WLAN-hívás"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="284798501051700462">"Folyamatban lévő munkahelyi WLAN-hívás"</string>
-    <string name="notification_incoming_call_wifi" msgid="2948417037217188797">"Bejövő WLAN-hívás"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="3668962820536702015">"Bejövő munkahelyi WLAN-hívás"</string>
+    <string name="notification_call_wifi_brand" msgid="255652823737617551">"WLAN-hívás"</string>
+    <string name="notification_call_wifi_work_brand" msgid="6283219237831628945">"munkahelyi WLAN-hívás"</string>
 </resources>

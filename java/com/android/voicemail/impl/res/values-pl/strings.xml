@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"Zmień kod PIN"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"Aby można było zmienić kod PIN, wizualna poczta głosowa musi być włączona"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"Wizualna poczta głosowa nie została jeszcze aktywowana – spróbuj ponownie później"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"Stary kod PIN"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"Nowy kod PIN"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"Poczekaj."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"Nowy kod PIN jest za krótki."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"Nowy kod PIN jest za długi."</string>

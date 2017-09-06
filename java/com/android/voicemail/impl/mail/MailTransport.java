@@ -195,6 +195,8 @@ public class MailTransport {
     } catch (IOException ioe) {
       LogUtils.d(TAG, ioe.toString());
       throw new MessagingException(MessagingException.IOERROR, ioe.toString());
+    } finally {
+      TrafficStats.clearThreadStatsTag();
     }
   }
 

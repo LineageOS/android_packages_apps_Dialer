@@ -98,7 +98,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
     LogUtil.d("ListsFragment.onCreate", null);
     Trace.beginSection(TAG + " onCreate");
     super.onCreate(savedInstanceState);
-    mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
     Trace.endSection();
   }
 

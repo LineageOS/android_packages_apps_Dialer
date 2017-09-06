@@ -97,7 +97,7 @@ public class VoicemailFetchedCallback {
     if (updateVoicemail(values)) {
       ThreadUtil.postOnUiThread(
           () -> {
-            if (!TranscriptionService.transcribeVoicemail(mContext, mUri)) {
+            if (!TranscriptionService.scheduleNewVoicemailTranscriptionJob(mContext, mUri, true)) {
               VvmLog.w(TAG, String.format("Failed to schedule transcription for %s", mUri));
             }
           });

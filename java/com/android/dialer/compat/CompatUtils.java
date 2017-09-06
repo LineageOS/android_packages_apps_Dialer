@@ -15,7 +15,12 @@
  */
 package com.android.dialer.compat;
 
+import android.content.Context;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.os.LocaleList;
+import java.util.Locale;
 
 public final class CompatUtils {
 
@@ -63,5 +68,18 @@ public final class CompatUtils {
    */
   public static boolean isCallSubjectCompatible() {
     return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP) >= Build.VERSION_CODES.M;
+  }
+
+  /** Returns locale of the device. */
+  public static Locale getLocale(Context context) {
+    if (VERSION.SDK_INT >= VERSION_CODES.N) {
+      LocaleList localList = context.getResources().getConfiguration().getLocales();
+      if (!localList.isEmpty()) {
+        return localList.get(0);
+      }
+      return Locale.getDefault();
+    } else {
+      return context.getResources().getConfiguration().locale;
+    }
   }
 }

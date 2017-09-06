@@ -32,7 +32,11 @@ import com.android.dialer.common.LogUtil;
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
 public final class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-  static Intent getIntent(Context context) {
+  /**
+   * @param context Context of the application package implementing MainActivity class.
+   * @return intent for MainActivity.class
+   */
+  public static Intent getIntent(Context context) {
     return new Intent(context, MainActivity.class)
         .setAction(Intent.ACTION_VIEW)
         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -77,7 +81,7 @@ public final class MainActivity extends AppCompatActivity implements View.OnClic
       // open contacts
       return true;
     } else {
-      // TODO handle other menu items
+      // TODO(calderwoodra) handle other menu items
       return super.onOptionsItemSelected(item);
     }
   }

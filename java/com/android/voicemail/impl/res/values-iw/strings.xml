@@ -26,8 +26,6 @@
     <string name="voicemail_change_pin_preference_title" msgid="8944570865151211693">"שינוי קוד הגישה"</string>
     <string name="voicemail_change_pin_preference_summary_disable" msgid="2787334822298063691">"צריך להפעיל את הדואר הקולי הוויזואלי כדי לשנות את קוד הגישה"</string>
     <string name="voicemail_change_pin_preference_summary_not_activated" msgid="8794039647258533633">"הדואר הקולי הוויזואלי לא הופעל עדיין. נסה שוב מאוחר יותר"</string>
-    <string name="vm_change_pin_old_pin" msgid="3732582036597386047">"קוד הגישה הישן"</string>
-    <string name="vm_change_pin_new_pin" msgid="5167496290646066333">"קוד הגישה החדש"</string>
     <string name="vm_change_pin_progress_message" msgid="4143209637626661679">"נא להמתין."</string>
     <string name="vm_change_pin_error_too_short" msgid="2825020644385639921">"קוד הגישה החדש קצר מדי."</string>
     <string name="vm_change_pin_error_too_long" msgid="683260438529171998">"קוד הגישה החדש ארוך מדי."</string>

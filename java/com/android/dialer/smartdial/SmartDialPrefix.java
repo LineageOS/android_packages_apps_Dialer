@@ -73,7 +73,8 @@ public class SmartDialPrefix {
       sUserSimCountryCode = manager.getSimCountryIso();
     }
 
-    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    final SharedPreferences prefs =
+        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
 
     if (sUserSimCountryCode != null) {
       /** Updates shared preferences with the latest country obtained from getSimCountryIso. */

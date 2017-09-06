@@ -31,9 +31,9 @@ import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -70,12 +70,13 @@ public class VoicemailTosMessageCreator {
     this.context = context;
     this.status = status;
     this.statusReader = statusReader;
-    this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    this.preferences =
+        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
   }
 
   @Nullable
   VoicemailErrorMessage maybeCreateTosMessage() {
-    // TODO: add filtering based on carrier
+    // TODO(mdooley): add filtering based on carrier
     if (hasAcceptedTos()) {
       return null;
     }
@@ -232,6 +233,7 @@ public class VoicemailTosMessageCreator {
           .putInt(DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
+    VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context);
   }
 
   private void logTosCreatedImpression() {
