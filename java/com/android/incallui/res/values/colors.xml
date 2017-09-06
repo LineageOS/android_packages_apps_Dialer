@@ -16,26 +16,15 @@
   -->
 
 <resources>
-
-  <color name="incall_action_bar_background_color">@color/dialer_theme_color</color>
-  <color name="incall_action_bar_text_color">#ffffff</color>
-
-  <!-- Put on top of each photo, implying 80% darker than usual. -->
-  <color name="on_hold_dim_effect">#cc000000</color>
-
   <color name="conference_call_manager_caller_name_text_color">#4d4d4d</color>
   <color name="conference_call_manager_icon_color">#999999</color>
   <!-- Used with some smaller texts in manage conference screen. -->
   <color name="conference_call_manager_secondary_text_color">#999999</color>
 
   <color name="incall_dialpad_background">#ffffff</color>
-  <color name="incall_dialpad_background_pressed">#ccaaaaaa</color>
-  <color name="incall_window_scrim">#b2000000</color>
 
   <!-- Background color for status bar. For portrait this will be ignored. -->
   <color name="statusbar_background_color">@color/dialer_theme_color</color>
-
-  <color name="translucent_shadow">#33999999</color>
 
   <!-- 20% opacity, theme color. -->
   <color name="incall_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
@@ -68,15 +57,6 @@
     <item>#B93221</item>
     <item>#841F10</item>
   </array>
-
-  <!-- Background color for spam. This color must match one of background_colors above. -->
-  <color name="incall_call_spam_background_color">@color/blocked_contact_background</color>
-
-  <!-- Ripple color used over light backgrounds. -->
-  <color name="ripple_light">#40000000</color>
-
-  <!-- Background color for large notification icon in after call from unknown numbers -->
-  <color name="unknown_number_color">#F4B400</color>
 
   <color name="incall_background_gradient_top">#E91141BB</color>
   <color name="incall_background_gradient_middle">#E91141BB</color>

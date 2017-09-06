@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -50,12 +51,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.contacts.common.ClipboardUtils;
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
-import com.android.contacts.common.lettertiles.LetterTileDrawable.ContactType;
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
@@ -72,9 +69,14 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
+import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactSource;
@@ -91,6 +93,7 @@ import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.UriUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -164,7 +167,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
    * The callable phone number for the current call log entry. Cached here as the call back intent
    * is set only when the actions ViewStub is inflated.
    */
-  public String number;
+  @Nullable public String number;
   /** The post-dial numbers that are dialed following the phone number. */
   public String postDialDigits;
   /** The formatted phone number to display. */
@@ -584,8 +587,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
+    TextView callTypeOrLocationView =
+        ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
     if (canPlaceCallToNumber) {
       callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+      callTypeOrLocationView.setVisibility(View.GONE);
     }
 
     if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -594,13 +601,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               TextUtils.expandTemplate(
                   mContext.getString(R.string.call_log_action_call),
                   nameOrNumber == null ? "" : nameOrNumber));
-      TextView callTypeOrLocationView =
-          ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
+
       if (callType == Calls.VOICEMAIL_TYPE && !TextUtils.isEmpty(callTypeOrLocation)) {
         callTypeOrLocationView.setText(callTypeOrLocation);
         callTypeOrLocationView.setVisibility(View.VISIBLE);
-      } else {
-        callTypeOrLocationView.setVisibility(View.GONE);
       }
       callButtonView.setVisibility(View.VISIBLE);
     }
@@ -774,12 +778,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return;
     }
 
-    final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
-    if (!isExpanded || TextUtils.isEmpty(view.getText())) {
-      view.setVisibility(View.GONE);
+    View transcriptContainerView = phoneCallDetailsViews.transcriptionView;
+    TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
+    TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
+    if (TextUtils.isEmpty(transcriptView.getText())) {
+      Assert.checkArgument(TextUtils.isEmpty(transcriptBrandingView.getText()));
+    }
+    if (!isExpanded || TextUtils.isEmpty(transcriptView.getText())) {
+      transcriptContainerView.setVisibility(View.GONE);
       return;
     }
-    view.setVisibility(View.VISIBLE);
+    transcriptContainerView.setVisibility(View.VISIBLE);
+    transcriptView.setVisibility(View.VISIBLE);
+    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
+      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+    } else {
+      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
+    }
   }
 
   public void updatePhoto() {
@@ -868,7 +883,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(
           CallComposerActivity.newIntent(activity, buildContact()),
-          DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_COMPOSE);
+          ActivityRequestCodes.DIALTACTS_CALL_COMPOSER);
     } else if (view.getId() == R.id.share_voicemail) {
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_PRESSED);
       mVoicemailPlaybackPresenter.shareVoicemail();
@@ -886,6 +901,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         return;
       }
 
+      if (info != null && info.lookupKey != null) {
+        Bundle extras = new Bundle();
+        if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+          extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+        }
+        extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+        intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+      }
+
       // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
@@ -896,7 +920,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
         ((Activity) mContext)
-            .startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_CALL_DETAILS);
+            .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
       } else {
         if (Intent.ACTION_CALL.equals(intent.getAction())
             && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
@@ -912,7 +936,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private void startLightbringerActivity(Intent intent) {
     try {
       Activity activity = (Activity) mContext;
-      activity.startActivityForResult(intent, DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER);
+      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
     } catch (ActivityNotFoundException e) {
       Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
@@ -931,7 +955,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       contact.setNameOrNumber((String) nameOrNumber);
     }
     contact.setContactType(getContactType());
-    contact.setNumber(number);
+    if (number != null) {
+      contact.setNumber(number);
+    }
     /* second line of contact view. */
     if (!TextUtils.isEmpty(info.name)) {
       contact.setDisplayNumber(displayNumber);

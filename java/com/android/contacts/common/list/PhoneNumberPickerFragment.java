@@ -235,6 +235,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
       cacheContactInfo(position);
       CallSpecificAppData callSpecificAppData =
           CallSpecificAppData.newBuilder()
+              .setAllowAssistedDialing(true)
               .setCallInitiationType(getCallInitiationType(true /* isRemoteDirectory */))
               .setPositionOfSelectedSearchResult(position)
               .setCharactersInSearchString(getQueryString() == null ? 0 : getQueryString().length())
@@ -278,7 +279,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   @MainThread
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     Assert.isMainThread();
-    // TODO: define and verify behavior for "Nearby places", corp directories,
+    // TODO(strongarm): define and verify behavior for "Nearby places", corp directories,
     // and dividers listed in UI between these categories
     if (mCursorReranker != null
         && data != null
@@ -353,7 +354,7 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
         if (view.getCallToAction() != ContactListItemView.NONE
             || view.getPhoneNumber() == null
             || manager.getCapabilities(view.getPhoneNumber()) == null
-            || !manager.getCapabilities(view.getPhoneNumber()).supportsCallComposer()) {
+            || !manager.getCapabilities(view.getPhoneNumber()).isCallComposerCapable()) {
           continue;
         }
         view.setCallToAction(ContactListItemView.CALL_AND_SHARE, listener, view.getPosition());

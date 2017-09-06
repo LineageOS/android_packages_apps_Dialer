@@ -18,7 +18,6 @@ package com.android.incallui.spam;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,8 +37,8 @@ import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.spam.Spam;
-import com.android.incallui.R;
 import com.android.incallui.call.DialerCall;
 
 /** Creates the after call notification dialogs. */
@@ -57,6 +56,7 @@ public class SpamNotificationActivity extends FragmentActivity {
       "com.android.incallui.spam.ACTION_MARK_NUMBER_AS_NOT_SPAM";
 
   private static final String TAG = "SpamNotifications";
+  private static final String EXTRA_NOTIFICATION_TAG = "notification_tag";
   private static final String EXTRA_NOTIFICATION_ID = "notification_id";
   private static final String EXTRA_CALL_INFO = "call_info";
 
@@ -82,12 +82,13 @@ public class SpamNotificationActivity extends FragmentActivity {
    * @return Intent intent that starts this activity.
    */
   public static Intent createActivityIntent(
-      Context context, DialerCall call, String action, int notificationId) {
+      Context context, DialerCall call, String action, String notificationTag, int notificationId) {
     Intent intent = new Intent(context, SpamNotificationActivity.class);
     intent.setAction(action);
     // This ensures only one activity of this kind exists at a time.
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.putExtra(EXTRA_NOTIFICATION_TAG, notificationTag);
     intent.putExtra(EXTRA_NOTIFICATION_ID, notificationId);
     intent.putExtra(EXTRA_CALL_INFO, newCallInfoBundle(call));
     return intent;
@@ -294,10 +295,9 @@ public class SpamNotificationActivity extends FragmentActivity {
 
   /** Cancels the notification associated with the number. */
   private void cancelNotification() {
+    String notificationTag = getIntent().getStringExtra(EXTRA_NOTIFICATION_TAG);
     int notificationId = getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 1);
-    String number = getCallInfo().getString(CALL_INFO_KEY_PHONE_NUMBER);
-    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
-        .cancel(number, notificationId);
+    DialerNotificationManager.cancel(this, notificationTag, notificationId);
   }
 
   private String getCountryIso() {
@@ -373,7 +373,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setTitle(getString(R.string.spam_notification_title, getFormattedNumber(number)))
           .setMessage(getString(R.string.spam_notification_spam_call_expanded_text))
           .setNeutralButton(
-              getString(R.string.notification_action_dismiss),
+              getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -459,7 +459,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setCancelable(false)
           .setMessage(getString(R.string.spam_notification_non_spam_call_expanded_text))
           .setNeutralButton(
-              getString(R.string.notification_action_dismiss),
+              getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

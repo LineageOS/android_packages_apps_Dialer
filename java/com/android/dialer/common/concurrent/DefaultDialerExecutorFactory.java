@@ -166,17 +166,7 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
             });
 
     private static final Executor defaultParallelExecutor =
-        Executors.newFixedThreadPool(
-            5,
-            new ThreadFactory() {
-              @Override
-              public Thread newThread(Runnable runnable) {
-                LogUtil.i("NonUiTaskBuilder.newThread", "creating parallel thread");
-                Thread thread = new Thread(runnable, "NonUiTaskBuilder-Parallel");
-                thread.setPriority(4); // Corresponds to Process.THREAD_PRIORITY_BACKGROUND
-                return thread;
-              }
-            });
+        DialerExecutors.getLowPriorityThreadPool();
 
     NonUiTaskBuilder(Worker<InputT, OutputT> worker) {
       this(worker, defaultSerialExecutorService, defaultParallelExecutor);

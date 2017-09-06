@@ -16,8 +16,6 @@
   -->
 
 <resources>
-  <drawable name="grayBg">#FF333333</drawable>
-
   <!-- Theme for the InCallActivity activity. Should have a transparent background for the
        circular reveal animation for a new outgoing call to work correctly. We don't just use
        Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the

@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
 
@@ -58,4 +59,12 @@ public interface Lightbringer {
   @Nullable
   @MainThread
   String getPackageName();
+
+  @StringRes
+  @MainThread
+  int getOutgoingCallTypeText();
+
+  @StringRes
+  @MainThread
+  int getIncomingCallTypeText();
 }

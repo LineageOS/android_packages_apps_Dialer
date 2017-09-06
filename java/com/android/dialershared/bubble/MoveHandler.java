@@ -22,7 +22,6 @@ import android.support.animation.FloatPropertyCompat;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
 import android.support.annotation.NonNull;
-import android.support.v4.math.MathUtils;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -61,6 +60,10 @@ class MoveHandler implements OnTouchListener {
   private VelocityTracker velocityTracker;
   private Scroller scroller;
 
+  private static float clamp(float value, float min, float max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
   // Handles the left/right gravity conversion and centering
   private final FloatPropertyCompat<WindowManager.LayoutParams> xProperty =
       new FloatPropertyCompat<LayoutParams>("xProperty") {
@@ -73,7 +76,7 @@ class MoveHandler implements OnTouchListener {
             int displayWidth = context.getResources().getDisplayMetrics().widthPixels;
             realX = displayWidth - realX;
           }
-          return MathUtils.clamp(realX, minX, maxX);
+          return clamp(realX, minX, maxX);
         }
 
         @Override
@@ -104,7 +107,7 @@ class MoveHandler implements OnTouchListener {
       new FloatPropertyCompat<LayoutParams>("yProperty") {
         @Override
         public float getValue(LayoutParams object) {
-          return MathUtils.clamp(object.y + bubbleSize + shadowPaddingSize, minY, maxY);
+          return clamp(object.y + bubbleSize + shadowPaddingSize, minY, maxY);
         }
 
         @Override
@@ -175,8 +178,8 @@ class MoveHandler implements OnTouchListener {
 
           ensureSprings();
 
-          moveXAnimation.animateToFinalPosition(MathUtils.clamp(eventX, minX, maxX));
-          moveYAnimation.animateToFinalPosition(MathUtils.clamp(eventY, minY, maxY));
+          moveXAnimation.animateToFinalPosition(clamp(eventX, minX, maxX));
+          moveYAnimation.animateToFinalPosition(clamp(eventY, minY, maxY));
         }
 
         velocityTracker.addMovement(event);
@@ -210,6 +213,7 @@ class MoveHandler implements OnTouchListener {
           bubble.primaryButtonClick();
         }
         break;
+      default: // fall out
     }
     return true;
   }

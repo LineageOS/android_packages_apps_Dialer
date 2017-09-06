@@ -17,7 +17,6 @@ package com.android.dialer.app.calllog;
 
 import android.app.Notification;
 import android.app.Notification.Builder;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +47,9 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
+import com.android.dialer.notification.NotificationManagerUtils;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
@@ -59,9 +60,17 @@ import java.util.Set;
 /** Creates a notification for calls that the user missed (neither answered nor rejected). */
 public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
-  static final String NOTIFICATION_TAG_PREFIX = "MissedCall_";
-  static final String NOTIFICATION_GROUP = "MissedCall";
+  /** Prefix used to generate a unique tag for each missed call notification. */
+  private static final String NOTIFICATION_TAG_PREFIX = "MissedCall_";
+  /** Common ID for all missed call notifications. */
   private static final int NOTIFICATION_ID = 1;
+  /** Tag for the group summary notification. */
+  private static final String GROUP_SUMMARY_NOTIFICATION_TAG = "GroupSummary_MissedCall";
+  /**
+   * Key used to associate all missed call notifications and the summary as belonging to a single
+   * group.
+   */
+  private static final String GROUP_KEY = "MissedCallGroup";
 
   private final Context context;
   private final CallLogNotificationsQueryHelper callLogNotificationsQueryHelper;
@@ -202,33 +211,29 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     configureLedOnNotification(notification);
 
     LogUtil.i("MissedCallNotifier.updateMissedCallNotification", "adding missed call notification");
-    getNotificationMgr().notify(getNotificationTagForGroupSummary(), NOTIFICATION_ID, notification);
+    DialerNotificationManager.notify(
+        context, GROUP_SUMMARY_NOTIFICATION_TAG, NOTIFICATION_ID, notification);
 
     if (useCallList) {
       // Do not repost active notifications to prevent erasing post call notes.
-      NotificationManager manager = getNotificationMgr();
       Set<String> activeTags = new ArraySet<>();
-      for (StatusBarNotification activeNotification : manager.getActiveNotifications()) {
+      for (StatusBarNotification activeNotification :
+          DialerNotificationManager.getActiveNotifications(context)) {
         activeTags.add(activeNotification.getTag());
       }
 
       for (NewCall call : newCalls) {
         String callTag = getNotificationTagForCall(call);
         if (!activeTags.contains(callTag)) {
-          manager.notify(callTag, NOTIFICATION_ID, getNotificationForCall(call, null));
+          DialerNotificationManager.notify(
+              context, callTag, NOTIFICATION_ID, getNotificationForCall(call, null));
         }
       }
     }
   }
 
   public static void cancelAllMissedCallNotifications(@NonNull Context context) {
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
-      String tag = notification.getTag();
-      if (tag != null && tag.startsWith(NOTIFICATION_TAG_PREFIX)) {
-        notificationManager.cancel(tag, notification.getId());
-      }
-    }
+    NotificationManagerUtils.cancelAllInGroup(context, GROUP_KEY);
   }
 
   public static void cancelSingleMissedCallNotification(
@@ -239,31 +244,9 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
           "unable to cancel notification, uri is null");
       return;
     }
-    NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-    String callTag = getNotificationTagForCallUri(callUri);
-    String summaryTag = getNotificationTagForGroupSummary();
-    int notificationCount = 0;
-
-    for (StatusBarNotification notification : notificationManager.getActiveNotifications()) {
-      String currentTag = notification.getTag();
-      if (currentTag == null) {
-        continue;
-      }
-      if (currentTag.equals(callTag)) {
-        notificationManager.cancel(notification.getTag(), notification.getId());
-      } else if (currentTag.startsWith(NOTIFICATION_TAG_PREFIX) && !currentTag.equals(summaryTag)) {
-        notificationCount++;
-      }
-    }
-
-    if (notificationCount == 0) {
-      // There are no more missed call notifications. Remove the summary notification too.
-      notificationManager.cancel(summaryTag, NOTIFICATION_ID);
-    }
-  }
-
-  private static String getNotificationTagForGroupSummary() {
-    return NOTIFICATION_TAG_PREFIX + "GroupSummary";
+    // This will also dismiss the group summary if there are no more missed call notifications.
+    DialerNotificationManager.cancel(
+        context, getNotificationTagForCallUri(callUri), NOTIFICATION_ID);
   }
 
   private static String getNotificationTagForCall(@NonNull NewCall call) {
@@ -280,11 +263,11 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       for (NewCall call : newCalls) {
         if (call.number.equals(number.replace("tel:", ""))) {
           // Update the first notification that matches our post call note sender.
-          getNotificationMgr()
-              .notify(
-                  getNotificationTagForCall(call),
-                  NOTIFICATION_ID,
-                  getNotificationForCall(call, note));
+          DialerNotificationManager.notify(
+              context,
+              getNotificationTagForCall(call),
+              NOTIFICATION_ID,
+              getNotificationForCall(call, note));
           break;
         }
       }
@@ -366,7 +349,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
   private Notification.Builder createNotificationBuilder() {
     return new Notification.Builder(context)
-        .setGroup(NOTIFICATION_GROUP)
+        .setGroup(GROUP_KEY)
         .setSmallIcon(android.R.drawable.stat_notify_missed_call)
         .setColor(context.getResources().getColor(R.color.dialer_theme_color, null))
         .setAutoCancel(true)
@@ -465,9 +448,5 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   /** Closes open system dialogs and the notification shade. */
   private void closeSystemDialogs(Context context) {
     context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-  }
-
-  private NotificationManager getNotificationMgr() {
-    return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
   }
 }

@@ -43,6 +43,7 @@ import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.RequestFailedException;
 import com.android.voicemail.impl.utils.LoggerUtils;
 import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,22 +51,13 @@ import java.util.Map;
 @TargetApi(VERSION_CODES.O)
 public class OmtpVvmSyncService {
 
-  private static final String TAG = OmtpVvmSyncService.class.getSimpleName();
+  private static final String TAG = "OmtpVvmSyncService";
 
-  /** Signifies a sync with both uploading to the server and downloading from the server. */
-  public static final String SYNC_FULL_SYNC = "full_sync";
-  /** Only upload to the server. */
-  public static final String SYNC_UPLOAD_ONLY = "upload_only";
-  /** Only download from the server. */
-  public static final String SYNC_DOWNLOAD_ONLY = "download_only";
-  /** Only download single voicemail transcription. */
-  public static final String SYNC_DOWNLOAD_ONE_TRANSCRIPTION = "download_one_transcription";
   /** Threshold for whether we should archive and delete voicemails from the remote VM server. */
   private static final float AUTO_DELETE_ARCHIVE_VM_THRESHOLD = 0.75f;
 
   private final Context mContext;
-
-  private VoicemailsQueryHelper mQueryHelper;
+  private final VoicemailsQueryHelper mQueryHelper;
 
   public OmtpVvmSyncService(Context context) {
     mContext = context;
@@ -74,23 +66,21 @@ public class OmtpVvmSyncService {
 
   public void sync(
       BaseTask task,
-      String action,
       PhoneAccountHandle phoneAccount,
       Voicemail voicemail,
       VoicemailStatus.Editor status) {
     Assert.isTrue(phoneAccount != null);
-    VvmLog.v(TAG, "Sync requested: " + action + " - for account: " + phoneAccount);
-    setupAndSendRequest(task, phoneAccount, voicemail, action, status);
+    VvmLog.v(TAG, "Sync requested for account: " + phoneAccount);
+    setupAndSendRequest(task, phoneAccount, voicemail, status);
   }
 
   private void setupAndSendRequest(
       BaseTask task,
       PhoneAccountHandle phoneAccount,
       Voicemail voicemail,
-      String action,
       VoicemailStatus.Editor status) {
     if (!VisualVoicemailSettingsUtil.isEnabled(mContext, phoneAccount)) {
-      VvmLog.v(TAG, "Sync requested for disabled account");
+      VvmLog.e(TAG, "Sync requested for disabled account");
       return;
     }
     if (!VvmAccountManager.isAccountActivated(mContext, phoneAccount)) {
@@ -102,7 +92,7 @@ public class OmtpVvmSyncService {
     LoggerUtils.logImpressionOnMainThread(mContext, DialerImpression.Type.VVM_SYNC_STARTED);
     // DATA_IMAP_OPERATION_STARTED posting should not be deferred. This event clears all data
     // channel errors, which should happen when the task starts, not when it ends. It is the
-    // "Sync in progress..." status.
+    // "Sync in progress..." status, which is currently displayed to the user as no error.
     config.handleEvent(
         VoicemailStatus.edit(mContext, phoneAccount), OmtpEvents.DATA_IMAP_OPERATION_STARTED);
     try (NetworkWrapper network = VvmNetworkRequest.getNetwork(config, phoneAccount, status)) {
@@ -111,7 +101,7 @@ public class OmtpVvmSyncService {
         task.fail();
         return;
       }
-      doSync(task, network.get(), phoneAccount, voicemail, action, status);
+      doSync(task, network.get(), phoneAccount, voicemail, status);
     } catch (RequestFailedException e) {
       config.handleEvent(status, OmtpEvents.DATA_NO_CONNECTION_CELLULAR_REQUIRED);
       task.fail();
@@ -123,14 +113,13 @@ public class OmtpVvmSyncService {
       Network network,
       PhoneAccountHandle phoneAccount,
       Voicemail voicemail,
-      String action,
       VoicemailStatus.Editor status) {
     try (ImapHelper imapHelper = new ImapHelper(mContext, phoneAccount, network, status)) {
       boolean success;
       if (voicemail == null) {
-        success = syncAll(action, imapHelper, phoneAccount);
+        success = syncAll(imapHelper, phoneAccount);
       } else {
-        success = syncOne(imapHelper, voicemail, phoneAccount);
+        success = downloadOneVoicemail(imapHelper, voicemail, phoneAccount);
       }
       if (success) {
         // TODO: b/30569269 failure should interrupt all subsequent task via exceptions
@@ -219,78 +208,32 @@ public class OmtpVvmSyncService {
     }
   }
 
-  private boolean syncAll(String action, ImapHelper imapHelper, PhoneAccountHandle account) {
-    boolean uploadSuccess = true;
-    boolean downloadSuccess = true;
+  private boolean syncAll(ImapHelper imapHelper, PhoneAccountHandle account) {
 
-    if (SYNC_FULL_SYNC.equals(action) || SYNC_UPLOAD_ONLY.equals(action)) {
-      uploadSuccess = upload(account, imapHelper);
-    }
-    if (SYNC_FULL_SYNC.equals(action) || SYNC_DOWNLOAD_ONLY.equals(action)) {
-      downloadSuccess = download(imapHelper, account);
-    }
-
-    VvmLog.v(
-        TAG,
-        "upload succeeded: ["
-            + String.valueOf(uploadSuccess)
-            + "] download succeeded: ["
-            + String.valueOf(downloadSuccess)
-            + "]");
-
-    return uploadSuccess && downloadSuccess;
-  }
-
-  private boolean syncOne(ImapHelper imapHelper, Voicemail voicemail, PhoneAccountHandle account) {
-    if (shouldPerformPrefetch(account, imapHelper)) {
-      VoicemailFetchedCallback callback =
-          new VoicemailFetchedCallback(mContext, voicemail.getUri(), account);
-      imapHelper.fetchVoicemailPayload(callback, voicemail.getSourceData());
-    }
-
-    return imapHelper.fetchTranscription(
-        new TranscriptionFetchedCallback(mContext, voicemail), voicemail.getSourceData());
-  }
-
-  private boolean upload(PhoneAccountHandle phoneAccountHandle, ImapHelper imapHelper) {
-    List<Voicemail> readVoicemails = mQueryHelper.getReadVoicemails(phoneAccountHandle);
-    List<Voicemail> deletedVoicemails = mQueryHelper.getDeletedVoicemails(phoneAccountHandle);
-
-    boolean success = true;
-
-    if (deletedVoicemails.size() > 0) {
-      if (imapHelper.markMessagesAsDeleted(deletedVoicemails)) {
-        // We want to delete selectively instead of all the voicemails for this provider
-        // in case the state changed since the IMAP query was completed.
-        mQueryHelper.deleteFromDatabase(deletedVoicemails);
-      } else {
-        success = false;
-      }
-    }
-
-    if (readVoicemails.size() > 0) {
-      VvmLog.i(TAG, "Marking voicemails as read");
-      if (imapHelper.markMessagesAsRead(readVoicemails)) {
-        VvmLog.i(TAG, "Marking voicemails as clean");
-        mQueryHelper.markCleanInDatabase(readVoicemails);
-      } else {
-        success = false;
-      }
-    }
-
-    return success;
-  }
-
-  private boolean download(ImapHelper imapHelper, PhoneAccountHandle account) {
     List<Voicemail> serverVoicemails = imapHelper.fetchAllVoicemails();
     List<Voicemail> localVoicemails = mQueryHelper.getAllVoicemails(account);
+    List<Voicemail> deletedVoicemails = mQueryHelper.getDeletedVoicemails(account);
+    boolean succeeded = true;
 
     if (localVoicemails == null || serverVoicemails == null) {
       // Null value means the query failed.
+      VvmLog.e(TAG, "syncAll: query failed");
       return false;
     }
 
+    if (deletedVoicemails.size() > 0) {
+      if (imapHelper.markMessagesAsDeleted(deletedVoicemails)) {
+        // Delete only the voicemails that was deleted on the server, in case more are deleted
+        // since the IMAP query was completed.
+        mQueryHelper.deleteFromDatabase(deletedVoicemails);
+      } else {
+        succeeded = false;
+      }
+    }
+
     Map<String, Voicemail> remoteMap = buildMap(serverVoicemails);
+
+    List<Voicemail> localReadVoicemails = new ArrayList<>();
 
     // Go through all the local voicemails and check if they are on the server.
     // They may be read or deleted on the server but not locally. Perform the
@@ -310,6 +253,8 @@ public class OmtpVvmSyncService {
       } else {
         if (remoteVoicemail.isRead() && !localVoicemail.isRead()) {
           mQueryHelper.markReadInDatabase(localVoicemail);
+        } else if (localVoicemail.isRead() && !remoteVoicemail.isRead()) {
+          localReadVoicemails.add(localVoicemail);
         }
 
         if (!TextUtils.isEmpty(remoteVoicemail.getTranscription())
@@ -318,6 +263,16 @@ public class OmtpVvmSyncService {
               mContext, DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
           mQueryHelper.updateWithTranscription(localVoicemail, remoteVoicemail.getTranscription());
         }
+      }
+    }
+
+    if (localReadVoicemails.size() > 0) {
+      VvmLog.i(TAG, "Marking voicemails as read");
+      if (imapHelper.markMessagesAsRead(localReadVoicemails)) {
+        VvmLog.i(TAG, "Marking voicemails as clean");
+        mQueryHelper.markCleanInDatabase(localReadVoicemails);
+      } else {
+        return false;
       }
     }
 
@@ -336,7 +291,19 @@ public class OmtpVvmSyncService {
       }
     }
 
-    return true;
+    return succeeded;
+  }
+
+  private boolean downloadOneVoicemail(
+      ImapHelper imapHelper, Voicemail voicemail, PhoneAccountHandle account) {
+    if (shouldPerformPrefetch(account, imapHelper)) {
+      VoicemailFetchedCallback callback =
+          new VoicemailFetchedCallback(mContext, voicemail.getUri(), account);
+      imapHelper.fetchVoicemailPayload(callback, voicemail.getSourceData());
+    }
+
+    return imapHelper.fetchTranscription(
+        new TranscriptionFetchedCallback(mContext, voicemail), voicemail.getSourceData());
   }
 
   private boolean shouldPerformPrefetch(PhoneAccountHandle account, ImapHelper imapHelper) {

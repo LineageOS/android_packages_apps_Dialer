@@ -7,6 +7,7 @@ option optimize_for = LITE_RUNTIME;
 
 
 
+
 message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
@@ -48,6 +49,7 @@ message DialerImpression {
     // This happens when the user had initially blocked a number and also claimed the number was
     // spam and had now proceeded to undo that.
     REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER = 1009
+
       ;
 
     // A number that was identified as spam and the user proceeded to block it. However this
@@ -63,10 +65,12 @@ message DialerImpression {
     // the number via call log. This is for case where the user wants to block a number and also
     // report it as spam
     REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG = 1011
+
       ;
 
     // User made it to the last step and actually blocked the number
     USER_ACTION_BLOCKED_NUMBER = 1012
+
       ;
 
     // User made it to the last step and actually unblocked the number
@@ -89,16 +93,19 @@ message DialerImpression {
 
     // User added the number to contacts from the after call notification
     SPAM_AFTER_CALL_NOTIFICATION_ADD_TO_CONTACTS = 1019
+
       ;
 
     // User marked the number as spam on the after call notification flow
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM = 1020
+
       ;
 
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_NOT_SPAM_AND_BLOCKED = 1021;
 
     // User reported the number as not spam
     SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM = 1022
+
       ;
 
     // User dismissed the spam notification
@@ -120,6 +127,7 @@ message DialerImpression {
     // able to stitch different types of events if they make sense e.g user pressed a speaker button
     // and we want to associate that to a call event
     USER_PARTICIPATED_IN_A_CALL = 1028
+
       ;
 
     // Incoming call is a spam call
@@ -152,44 +160,54 @@ message DialerImpression {
 
     // User deleted a call log entry
     USER_DELETED_CALL_LOG_ITEM = 1048
+
       ;
 
     // User tapped on "Send a message"
     CALL_LOG_SEND_MESSAGE = 1049
+
       ;
 
     // User tapped on "Add to contact"
     CALL_LOG_ADD_TO_CONTACT = 1050
+
       ;
 
     // User tapped on "Create new contact"
     CALL_LOG_CREATE_NEW_CONTACT = 1051
+
       ;
 
     // User deleted an entry from the voicemail tab
     VOICEMAIL_DELETE_ENTRY = 1052
+
       ;
 
     // Voicemail call log entry was expanded. Could be either if the user tapped the voicemail
     // call log entry or pressed the play button when the voicemail call log entry was not expanded
     VOICEMAIL_EXPAND_ENTRY = 1053
+
       ;
 
     // The play button for voicemail call log entry was tapped directly (i.e when the voicemail
     // call log entry was not expanded and the playbutton was tapped)
     VOICEMAIL_PLAY_AUDIO_DIRECTLY= 1054
+
       ;
 
     // The play button after expanding the voicemail call log entry was tapped
     VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY= 1055
+
       ;
 
     // Incoming call was rejected from the notifications
     REJECT_INCOMING_CALL_FROM_NOTIFICATION= 1056
+
       ;
 
     // Incoming call was rejected from the answer screen including rejecting via sms and talkback
     REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN= 1057
+
       ;
 
     // User tapped block and spam buttons in context menu, same as buttons in
@@ -362,14 +380,19 @@ message DialerImpression {
     EMERGENCY_LAUNCHED_MAP = 1173;
 
     VIDEO_CALL_UPGRADE_REQUESTED = 1174
+
         ;
     VIDEO_CALL_REQUEST_ACCEPTED = 1175
+
         ;
     VIDEO_CALL_REQUEST_ACCEPTED_AS_AUDIO = 1176
+
         ;
     VIDEO_CALL_REQUEST_DECLINED = 1177
+
         ;
     VIDEO_CALL_REQUEST_RECEIVED = 1178
+
         ;
 
     RCS_VIDEO_SHARE_UPGRADE_REQUESTED = 1179;
@@ -456,11 +479,56 @@ message DialerImpression {
     // In in call UI
     UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN = 1236;
 
+    // Bubble primary button first click to expand bubble
+    BUBBLE_PRIMARY_BUTTON_EXPAND = 1237;
+    // Bubble prinary button second click to return to call
+    BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL = 1238;
+
     // Dialer Key/Value Backup and Restore
     BACKUP_KEY_VALUE_ON_BACKUP = 1239;
     BACKUP_KEY_VALUE_ON_RESTORE = 1240;
     BACKUP_KEY_VALUE_ON_RESTORE_FINISHED = 1241;
     BACKUP_KEY_VALUE_GET_BACKUP_SPECIFICATION = 1242;
     BACKUP_KEY_VALUE_BACKUP_AGENT_CONSTRUCTOR = 1243;
+
+    // In the in call UI
+    UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_LIGHTBRINGER = 1244;
+    UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_IMS = 1245;
+    UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_RCS = 1246;
+    LIGHTBRINGER_UPGRADE_REQUESTED = 1247;
+
+    // Found Lightbringer reachable contact when launching Dialer
+    HAS_LIGHTBRINGER_REACHABLE_CONTACTS = 1248;
+
+    // This impression is logged once per process when the number of
+    // notifications is very high and the system may suppress future
+    // notifications.
+    HIGH_GLOBAL_NOTIFICATION_COUNT_REACHED = 1249;
+
+    // More impressions for interactions with the voicemail transcription server
+    VVM_TRANSCRIPTION_REQUEST_SENT_ASYNC = 1250;
+    VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED = 1251;
+    VVM_TRANSCRIPTION_VOICEMAIL_FORMAT_NOT_SUPPORTED = 1252;
+    VVM_TRANSCRIPTION_VOICEMAIL_INVALID_DATA = 1253;
+    VVM_TRANSCRIPTION_VOICEMAIL_UPLOAD_FAILED = 1254;
+    VVM_TRANSCRIPTION_RESPONSE_LANGUAGE_NOT_SUPPORTED = 1255;
+    VVM_TRANSCRIPTION_RESPONSE_NO_SPEECH_DETECTED = 1256;
+    VVM_TRANSCRIPTION_RESPONSE_EXPIRED = 1257;
+    VVM_TRANSCRIPTION_RESPONSE_TOO_MANY_ERRORS = 1258;
+    VVM_TRANSCRIPTION_POLLING_TIMEOUT = 1259;
+
+    // Bubble collapse initiated by user, i.e. no hiding after collapse
+    BUBBLE_COLLAPSE_BY_USER = 1260;
+
+    // In in-call UI
+    IN_CALL_SHOW_DIALPAD_BUTTON_PRESSED = 1261;
+    IN_CALL_ADD_CALL_BUTTON_PRESSED = 1262;
+    IN_CALL_MERGE_BUTTON_PRESSED = 1263;
+    IN_CALL_SWAP_SECONDARY_BUTTON_PRESSED = 1264;
+
+    // In in-call dialpad
+    IN_CALL_DIALPAD_NUMBER_BUTTON_PRESSED = 1265;
+    IN_CALL_DIALPAD_HANG_UP_BUTTON_PRESSED = 1266;
+    IN_CALL_DIALPAD_CLOSE_BUTTON_PRESSED = 1267;
   }
 }

@@ -41,6 +41,9 @@ public class ChangeOnScreenBounds extends Transition {
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String PROPNAME_SCREEN_Y = "bubble:changeScreenBounds:screenY";
 
+  static final String PROPNAME_WIDTH = "bubble:changeScreenBounds:width";
+  static final String PROPNAME_HEIGHT = "bubble:changeScreenBounds:height";
+
   private static final Property<ViewBounds, PointF> TOP_LEFT_PROPERTY =
       new Property<ViewBounds, PointF>(PointF.class, "topLeft") {
         @Override
@@ -70,21 +73,32 @@ public class ChangeOnScreenBounds extends Transition {
 
   @Override
   public void captureStartValues(TransitionValues transitionValues) {
-    captureValues(transitionValues);
+    captureValuesWithSize(transitionValues);
   }
 
   @Override
   public void captureEndValues(TransitionValues transitionValues) {
-    captureValues(transitionValues);
+    captureValuesWithSize(transitionValues);
   }
 
-  private void captureValues(TransitionValues values) {
+  /**
+   * Capture location (left and top) from {@code values.view} and size (width and height) from
+   * {@code values.values}. If size is not set, use the size of {@code values.view}.
+   */
+  private void captureValuesWithSize(TransitionValues values) {
     View view = values.view;
 
     if (view.isLaidOut() || view.getWidth() != 0 || view.getHeight() != 0) {
+      Integer width = (Integer) values.values.get(PROPNAME_WIDTH);
+      Integer height = (Integer) values.values.get(PROPNAME_HEIGHT);
+
       values.values.put(
           PROPNAME_BOUNDS,
-          new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom()));
+          new Rect(
+              view.getLeft(),
+              view.getTop(),
+              width == null ? view.getRight() : view.getLeft() + width,
+              height == null ? view.getBottom() : view.getTop() + height));
       values.view.getLocationOnScreen(tempLocation);
       values.values.put(PROPNAME_SCREEN_X, tempLocation[0]);
       values.values.put(PROPNAME_SCREEN_Y, tempLocation[1]);

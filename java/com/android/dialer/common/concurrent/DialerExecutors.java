@@ -19,7 +19,11 @@ package com.android.dialer.common.concurrent;
 import android.app.FragmentManager;
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Factory methods for creating {@link DialerExecutor} objects for doing background work.
@@ -130,5 +134,28 @@ public final class DialerExecutors {
   public static <InputT, OutputT> DialerExecutor.Builder<InputT, OutputT> createNonUiTaskBuilder(
       @NonNull Worker<InputT, OutputT> worker) {
     return new DefaultDialerExecutorFactory().createNonUiTaskBuilder(Assert.isNotNull(worker));
+  }
+
+  private static final Executor lowPriorityThreadPool =
+      Executors.newFixedThreadPool(
+          5,
+          new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable runnable) {
+              LogUtil.i("DialerExecutors.newThread", "creating low priority thread");
+              Thread thread = new Thread(runnable, "DialerExecutors-LowPriority");
+              thread.setPriority(4); // Corresponds to Process.THREAD_PRIORITY_BACKGROUND
+              return thread;
+            }
+          });
+
+  /**
+   * An application-wide thread pool used for low priority (non-UI) tasks.
+   *
+   * <p>This exists to prevent each individual dialer component from having to create its own
+   * threads/pools, which would result in the application having more threads than really necessary.
+   */
+  public static Executor getLowPriorityThreadPool() {
+    return lowPriorityThreadPool;
   }
 }

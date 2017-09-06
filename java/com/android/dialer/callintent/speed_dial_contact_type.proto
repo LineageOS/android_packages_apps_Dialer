@@ -8,6 +8,7 @@ option optimize_for = LITE_RUNTIME;
 package com.android.dialer.callintent;
 
 
+
 // The type of speed call contact (favorites). Applies to initiation type
 // SPEED_DIAL only.
 message SpeedDialContactType {

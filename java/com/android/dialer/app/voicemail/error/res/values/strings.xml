@@ -15,8 +15,6 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_error_turn_off_airplane_mode_title">Turn off airplane mode</string>
-
   <string name="voicemail_error_activating_title">Activating visual voicemail</string>
   <string name="voicemail_error_activating_message">You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated.</string>
 
@@ -62,8 +60,6 @@
 
   <string name="voicemail_error_pin_not_set_title">Set your voicemail PIN</string>
   <string name="voicemail_error_pin_not_set_message">You\'ll need a voicemail PIN anytime you call to access your voicemail.</string>
-
-  <string name="voicemail_error_unknown_title">Unknown error</string>
 
   <string name="voicemail_action_turn_off_airplane_mode">Airplane Mode Settings</string>
   <string name="voicemail_action_set_pin">Set PIN</string>

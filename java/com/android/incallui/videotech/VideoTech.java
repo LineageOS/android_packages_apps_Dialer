@@ -18,6 +18,7 @@ package com.android.incallui.videotech;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.utils.SessionModificationState;
@@ -69,6 +70,12 @@ public interface VideoTech {
 
   void setDeviceOrientation(int rotation);
 
+  /**
+   * Called on {@code VideoTechManager.savedTech} when it's first selected and it will always be
+   * used.
+   */
+  void becomePrimary();
+
   /** Listener for video call events. */
   interface VideoTechListener {
 
@@ -83,5 +90,7 @@ public interface VideoTech {
     void onVideoUpgradeRequestReceived();
 
     void onUpgradedToVideo(boolean switchToSpeaker);
+
+    void onImpressionLoggingNeeded(DialerImpression.Type impressionType);
   }
 }

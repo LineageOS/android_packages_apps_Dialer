@@ -87,6 +87,8 @@ public class Bubble {
   private final Context context;
   private final WindowManager windowManager;
 
+  private final Handler handler = new Handler();
+
   private LayoutParams windowParams;
 
   // Initialized in factory method
@@ -100,12 +102,12 @@ public class Bubble {
   private boolean hideAfterText;
   private int collapseEndAction;
 
-  private final Handler handler = new Handler();
-
-  private ViewHolder viewHolder;
+  @VisibleForTesting ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
+
+  private BubbleExpansionStateListener bubbleExpansionStateListener;
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
@@ -121,6 +123,15 @@ public class Bubble {
     int ENTERING = 1;
     int SHOWING = 2;
     int EXITING = 3;
+  }
+
+  /** Indicate bubble expansion state. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({ExpansionState.START_EXPANDING, ExpansionState.START_COLLAPSING})
+  public @interface ExpansionState {
+    // TODO(yueg): add more states when needed
+    int START_EXPANDING = 0;
+    int START_COLLAPSING = 1;
   }
 
   /**
@@ -166,6 +177,11 @@ public class Bubble {
   @VisibleForTesting
   public static void setBubbleFactory(@NonNull BubbleFactory bubbleFactory) {
     Bubble.bubbleFactory = bubbleFactory;
+  }
+
+  @VisibleForTesting
+  public static void resetBubbleFactory() {
+    Bubble.bubbleFactory = Bubble::new;
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -238,47 +254,22 @@ public class Bubble {
     updatePrimaryIconAnimation();
   }
 
-  /**
-   * Hide the button if visible. Will run a short exit animation before hiding. If the bubble is
-   * currently showing text, will hide after the text is done displaying. If the bubble is not
-   * visible this method does nothing.
-   */
+  /** Hide the bubble. */
   public void hide() {
-    if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
+    if (hideAfterText) {
+      // hideAndReset() will be called after showing text, do nothing here.
       return;
     }
+    hideHelper(this::defaultAfterHidingAnimation);
+  }
 
-    if (textShowing) {
-      hideAfterText = true;
-      return;
-    }
-
-    if (collapseAnimation != null) {
-      collapseEndAction = CollapseEnd.HIDE;
-      return;
-    }
-
-    if (expanded) {
-      startCollapse(CollapseEnd.HIDE);
-      return;
-    }
-
-    visibility = Visibility.EXITING;
-    exitAnimator =
-        viewHolder
-            .getPrimaryButton()
-            .animate()
-            .setInterpolator(new AnticipateInterpolator())
-            .scaleX(0)
-            .scaleY(0)
-            .withEndAction(
-                () -> {
-                  exitAnimator = null;
-                  windowManager.removeView(viewHolder.getRoot());
-                  visibility = Visibility.HIDDEN;
-                  updatePrimaryIconAnimation();
-                });
-    exitAnimator.start();
+  /** Hide the bubble and reset {@viewHolder} to initial state */
+  public void hideAndReset() {
+    hideHelper(
+        () -> {
+          defaultAfterHidingAnimation();
+          reset();
+        });
   }
 
   /** Returns whether the bubble is currently visible */
@@ -350,8 +341,15 @@ public class Bubble {
                       public boolean onPreDraw() {
                         primaryButton.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                        // Prepare and capture end values
+                        // Prepare and capture end values, always use the size of primaryText since
+                        // its invisibility makes primaryButton smaller than expected
                         TransitionValues endValues = new TransitionValues();
+                        endValues.values.put(
+                            ChangeOnScreenBounds.PROPNAME_WIDTH,
+                            viewHolder.getPrimaryText().getWidth());
+                        endValues.values.put(
+                            ChangeOnScreenBounds.PROPNAME_HEIGHT,
+                            viewHolder.getPrimaryText().getHeight());
                         endValues.view = primaryButton;
                         transition.addTarget(endValues.view);
                         transition.captureEndValues(endValues);
@@ -377,13 +375,19 @@ public class Bubble {
         () -> {
           textShowing = false;
           if (hideAfterText) {
-            hide();
+            // Always reset here since text shouldn't keep showing.
+            hideAndReset();
           } else {
             doResize(
                 () -> viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_ICON));
           }
         },
         SHOW_TEXT_DURATION_MILLIS);
+  }
+
+  public void setBubbleExpansionStateListener(
+      BubbleExpansionStateListener bubbleExpansionStateListener) {
+    this.bubbleExpansionStateListener = bubbleExpansionStateListener;
   }
 
   @Nullable
@@ -419,6 +423,9 @@ public class Bubble {
       return;
     }
 
+    if (bubbleExpansionStateListener != null) {
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_EXPANDING);
+    }
     doResize(
         () -> {
           onLeftRightSwitch(isDrawingFromRight());
@@ -476,6 +483,48 @@ public class Bubble {
 
   View getRootView() {
     return viewHolder.getRoot();
+  }
+
+  /**
+   * Hide the bubble if visible. Will run a short exit animation and before hiding, and {@code
+   * afterHiding} after hiding. If the bubble is currently showing text, will hide after the text is
+   * done displaying. If the bubble is not visible this method does nothing.
+   */
+  private void hideHelper(Runnable afterHiding) {
+    if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
+      return;
+    }
+
+    if (textShowing) {
+      hideAfterText = true;
+      return;
+    }
+
+    if (collapseAnimation != null) {
+      collapseEndAction = CollapseEnd.HIDE;
+      return;
+    }
+
+    if (expanded) {
+      startCollapse(CollapseEnd.HIDE);
+      return;
+    }
+
+    visibility = Visibility.EXITING;
+    exitAnimator =
+        viewHolder
+            .getPrimaryButton()
+            .animate()
+            .setInterpolator(new AnticipateInterpolator())
+            .scaleX(0)
+            .scaleY(0)
+            .withEndAction(afterHiding);
+    exitAnimator.start();
+  }
+
+  private void reset() {
+    viewHolder = new ViewHolder(viewHolder.getRoot().getContext());
+    update();
   }
 
   private void update() {
@@ -628,6 +677,9 @@ public class Bubble {
     if (collapseEndAction == CollapseEnd.NOTHING) {
       collapseEndAction = endAction;
     }
+    if (bubbleExpansionStateListener != null && collapseEndAction == CollapseEnd.NOTHING) {
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_COLLAPSING);
+    }
     collapseAnimation =
         expandedView
             .animate()
@@ -681,7 +733,16 @@ public class Bubble {
     windowManager.updateViewLayout(getRootView(), windowParams);
   }
 
-  private class ViewHolder {
+  private void defaultAfterHidingAnimation() {
+    exitAnimator = null;
+    windowManager.removeView(viewHolder.getRoot());
+    visibility = Visibility.HIDDEN;
+
+    updatePrimaryIconAnimation();
+  }
+
+  @VisibleForTesting
+  class ViewHolder {
 
     public static final int CHILD_INDEX_ICON = 0;
     public static final int CHILD_INDEX_TEXT = 1;
@@ -809,5 +870,10 @@ public class Bubble {
     public void undoGravityOverride() {
       moveHandler.undoGravityOverride();
     }
+  }
+
+  /** Listener for bubble expansion state change. */
+  public interface BubbleExpansionStateListener {
+    void onBubbleExpansionStateChanged(@ExpansionState int expansionState);
   }
 }

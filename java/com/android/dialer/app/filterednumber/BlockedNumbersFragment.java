@@ -31,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.BlockedNumbersMigrator.Listener;
@@ -40,6 +39,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.blocking.FilteredNumbersUtil.CheckForSendToVoicemailContactListener;
 import com.android.dialer.blocking.FilteredNumbersUtil.ImportSendToVoicemailContactsListener;
 import com.android.dialer.database.FilteredNumberContract;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 
 public class BlockedNumbersFragment extends ListFragment

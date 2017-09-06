@@ -27,6 +27,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.model.account.AccountWithDataSet;
+import com.android.dialer.strictmode.DialerStrictMode;
 
 /** Manages user preferences for contacts. */
 public class ContactsPreferences implements OnSharedPreferenceChangeListener {
@@ -69,7 +70,10 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
   public ContactsPreferences(Context context) {
     mContext = context;
     mHandler = new Handler();
-    mPreferences = mContext.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+    mPreferences =
+        mContext
+            .getApplicationContext()
+            .getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     mDefaultAccountKey =
         mContext.getResources().getString(R.string.contact_editor_default_account_key);
     mDefaultAccountSavedKey =
@@ -77,11 +81,11 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     maybeMigrateSystemSettings();
   }
 
-  public boolean isSortOrderUserChangeable() {
+  private boolean isSortOrderUserChangeable() {
     return mContext.getResources().getBoolean(R.bool.config_sort_order_user_changeable);
   }
 
-  public int getDefaultSortOrder() {
+  private int getDefaultSortOrder() {
     if (mContext.getResources().getBoolean(R.bool.config_default_sort_order_primary)) {
       return SORT_ORDER_PRIMARY;
     } else {
@@ -103,14 +107,14 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     mSortOrder = sortOrder;
     final Editor editor = mPreferences.edit();
     editor.putInt(SORT_ORDER_KEY, sortOrder);
-    editor.commit();
+    DialerStrictMode.bypass(editor::commit);
   }
 
-  public boolean isDisplayOrderUserChangeable() {
+  private boolean isDisplayOrderUserChangeable() {
     return mContext.getResources().getBoolean(R.bool.config_display_order_user_changeable);
   }
 
-  public int getDefaultDisplayOrder() {
+  private int getDefaultDisplayOrder() {
     if (mContext.getResources().getBoolean(R.bool.config_default_display_order_primary)) {
       return DISPLAY_ORDER_PRIMARY;
     } else {
@@ -132,14 +136,14 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     mDisplayOrder = displayOrder;
     final Editor editor = mPreferences.edit();
     editor.putInt(DISPLAY_ORDER_KEY, displayOrder);
-    editor.commit();
+    DialerStrictMode.bypass(editor::commit);
   }
 
-  public boolean isDefaultAccountUserChangeable() {
+  private boolean isDefaultAccountUserChangeable() {
     return mContext.getResources().getBoolean(R.bool.config_default_account_user_changeable);
   }
 
-  public String getDefaultAccount() {
+  private String getDefaultAccount() {
     if (!isDefaultAccountUserChangeable()) {
       return mDefaultAccount;
     }
@@ -153,7 +157,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     return mDefaultAccount;
   }
 
-  public void setDefaultAccount(AccountWithDataSet accountWithDataSet) {
+  private void setDefaultAccount(AccountWithDataSet accountWithDataSet) {
     mDefaultAccount = accountWithDataSet == null ? null : accountWithDataSet.name;
     final Editor editor = mPreferences.edit();
     if (TextUtils.isEmpty(mDefaultAccount)) {
@@ -162,7 +166,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
       editor.putString(mDefaultAccountKey, accountWithDataSet.stringify());
     }
     editor.putBoolean(mDefaultAccountSavedKey, true);
-    editor.commit();
+    DialerStrictMode.bypass(editor::commit);
   }
 
   public void registerChangeListener(ChangeListener listener) {
@@ -252,7 +256,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
 
     if (!mPreferences.contains(mDefaultAccountKey)) {
       final SharedPreferences previousPrefs =
-          PreferenceManager.getDefaultSharedPreferences(mContext);
+          PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
       final String defaultAccount = previousPrefs.getString(mDefaultAccountKey, null);
       if (!TextUtils.isEmpty(defaultAccount)) {
         final AccountWithDataSet accountWithDataSet =

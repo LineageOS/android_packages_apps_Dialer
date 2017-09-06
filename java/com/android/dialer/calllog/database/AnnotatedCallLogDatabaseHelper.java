@@ -35,10 +35,26 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
   private static final String CREATE_TABLE_SQL =
       new StringBuilder()
           .append("create table if not exists " + AnnotatedCallLog.TABLE + " (")
+          // Common columns.
           .append(AnnotatedCallLog._ID + " integer primary key, ")
           .append(AnnotatedCallLog.TIMESTAMP + " integer, ")
-          .append(AnnotatedCallLog.CONTACT_NAME + " string, ")
-          .append(AnnotatedCallLog.NUMBER + " blob")
+          .append(AnnotatedCallLog.NAME + " string, ")
+          .append(AnnotatedCallLog.FORMATTED_NUMBER + " string, ")
+          .append(AnnotatedCallLog.PHOTO_URI + " string, ")
+          .append(AnnotatedCallLog.PHOTO_ID + " integer, ")
+          .append(AnnotatedCallLog.LOOKUP_URI + " string, ")
+          .append(AnnotatedCallLog.NUMBER_TYPE_LABEL + " string, ")
+          .append(AnnotatedCallLog.IS_READ + " integer, ")
+          .append(AnnotatedCallLog.NEW + " integer, ")
+          .append(AnnotatedCallLog.GEOCODED_LOCATION + " string, ")
+          .append(AnnotatedCallLog.PHONE_ACCOUNT_LABEL + " string, ")
+          .append(AnnotatedCallLog.PHONE_ACCOUNT_COLOR + " integer, ")
+          .append(AnnotatedCallLog.FEATURES + " integer, ")
+          .append(AnnotatedCallLog.IS_BUSINESS + " integer, ")
+          .append(AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
+          // Columns only in AnnotatedCallLog
+          .append(AnnotatedCallLog.NUMBER + " blob, ")
+          .append(AnnotatedCallLog.TYPE + " integer")
           .append(");")
           .toString();
 
@@ -68,7 +84,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     long startTime = System.currentTimeMillis();
     db.execSQL(CREATE_TABLE_SQL);
     db.execSQL(String.format(Locale.US, CREATE_TRIGGER_SQL, maxRows, maxRows));
-    // TODO: Consider logging impression.
+    // TODO(zachh): Consider logging impression.
     LogUtil.i(
         "AnnotatedCallLogDatabaseHelper.onCreate",
         "took: %dms",

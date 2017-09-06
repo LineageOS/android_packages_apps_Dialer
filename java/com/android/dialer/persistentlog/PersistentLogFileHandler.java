@@ -27,6 +27,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
+import com.android.dialer.common.LogUtil;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -57,6 +58,16 @@ final class PersistentLogFileHandler {
 
   private static final String LOG_DIRECTORY = "persistent_log";
   private static final String NEXT_FILE_INDEX_PREFIX = "persistent_long_next_file_index_";
+
+  private static final byte[] ENTRY_PREFIX = {'P'};
+  private static final byte[] ENTRY_POSTFIX = {'L'};
+
+  private static class LogCorruptionException extends Exception {
+
+    public LogCorruptionException(String message) {
+      super(message);
+    }
+  };
 
   private File logDirectory;
   private final String subfolder;
@@ -106,9 +117,26 @@ final class PersistentLogFileHandler {
     try (DataOutputStream outputStream =
         new DataOutputStream(new FileOutputStream(outputFile, true))) {
       for (byte[] log : logs) {
+        outputStream.write(ENTRY_PREFIX);
         outputStream.writeInt(log.length);
         outputStream.write(log);
+        outputStream.write(ENTRY_POSTFIX);
       }
+      outputStream.close();
+      if (outputFile.length() > fileSizeLimit) {
+        selectNextFileToWrite();
+      }
+    }
+  }
+
+  void writeRawLogsForTest(byte[] data) throws IOException {
+    if (outputFile == null) {
+      selectNextFileToWrite();
+    }
+    outputFile.createNewFile();
+    try (DataOutputStream outputStream =
+        new DataOutputStream(new FileOutputStream(outputFile, true))) {
+      outputStream.write(data);
       outputStream.close();
       if (outputFile.length() > fileSizeLimit) {
         selectNextFileToWrite();
@@ -149,8 +177,19 @@ final class PersistentLogFileHandler {
         logs.add(log);
         log = readLog(input);
       }
+    } catch (LogCorruptionException e) {
+      LogUtil.e("PersistentLogFileHandler.getLogs", "logs corrupted, deleting", e);
+      deleteLogs();
+      return new ArrayList<>();
     }
     return logs;
+  }
+
+  private void deleteLogs() throws IOException {
+    for (File file : getLogFiles()) {
+      file.delete();
+    }
+    selectNextFileToWrite();
   }
 
   @WorkerThread
@@ -186,10 +225,28 @@ final class PersistentLogFileHandler {
 
   @Nullable
   @WorkerThread
-  private static byte[] readLog(DataInputStream inputStream) throws IOException {
+  private byte[] readLog(DataInputStream inputStream) throws IOException, LogCorruptionException {
     try {
-      byte[] data = new byte[inputStream.readInt()];
+      byte[] prefix = new byte[ENTRY_PREFIX.length];
+      if (inputStream.read(prefix) == -1) {
+        // EOF
+        return null;
+      }
+      if (!Arrays.equals(prefix, ENTRY_PREFIX)) {
+        throw new LogCorruptionException("entry prefix mismatch");
+      }
+      int dataLength = inputStream.readInt();
+      if (dataLength > fileSizeLimit) {
+        throw new LogCorruptionException("data length over max size");
+      }
+      byte[] data = new byte[dataLength];
       inputStream.read(data);
+
+      byte[] postfix = new byte[ENTRY_POSTFIX.length];
+      inputStream.read(postfix);
+      if (!Arrays.equals(postfix, ENTRY_POSTFIX)) {
+        throw new LogCorruptionException("entry postfix mismatch");
+      }
       return data;
     } catch (EOFException e) {
       return null;

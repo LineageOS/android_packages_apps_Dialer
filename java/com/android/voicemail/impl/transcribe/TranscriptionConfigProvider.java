@@ -53,10 +53,38 @@ public class TranscriptionConfigProvider {
         .getBoolean("voicemail_transcription_server_use_plaintext", false);
   }
 
+  public boolean shouldUseSyncApi() {
+    return ConfigProviderBindings.get(context)
+        .getBoolean("voicemail_transcription_server_use_sync_api", false);
+  }
+
+  public long getMaxTranscriptionRetries() {
+    return ConfigProviderBindings.get(context)
+        .getLong("voicemail_transcription_max_transcription_retries", 2L);
+  }
+
+  public long getMaxGetTranscriptPolls() {
+    return ConfigProviderBindings.get(context)
+        .getLong("voicemail_transcription_max_get_transcript_polls", 20L);
+  }
+
+  public long getGetTranscriptPollIntervalMillis() {
+    return ConfigProviderBindings.get(context)
+        .getLong("voicemail_transcription_get_transcript_poll_interval_millis", 1000L);
+  }
+
   @Override
   public String toString() {
     return String.format(
-        "{ address: %s, api key: %s, auth token: %s, plaintext: %b }",
-        getServerAddress(), getApiKey(), getAuthToken(), shouldUsePlaintext());
+        "{ address: %s, api key: %s, auth token: %s, plaintext: %b, sync: %b, retries: %d, polls:"
+            + " %d, poll ms: %d }",
+        getServerAddress(),
+        getApiKey(),
+        getAuthToken(),
+        shouldUsePlaintext(),
+        shouldUseSyncApi(),
+        getMaxTranscriptionRetries(),
+        getMaxGetTranscriptPolls(),
+        getGetTranscriptPollIntervalMillis());
   }
 }

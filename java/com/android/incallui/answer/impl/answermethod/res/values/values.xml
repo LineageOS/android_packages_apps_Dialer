@@ -16,10 +16,8 @@
   -->
 
 <resources>
-  <color name="incoming_or_outgoing_call_screen_mask">@android:color/transparent</color>
   <color name="call_hangup_background">#DF0000</color>
   <color name="call_accept_background">#00C853</color>
   <color name="incoming_answer_icon">#00C853</color>
-  <integer name="button_exit_fade_delay_ms">300</integer>
   <bool name="two_button_show_button_labels">false</bool>
 </resources>

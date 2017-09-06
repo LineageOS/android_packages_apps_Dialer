@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -41,6 +42,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
@@ -78,7 +80,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * of a state machine at this point. Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener {
-
+  private static final String PIXEL2017_SYSTEM_FEATURE =
+      "com.google.android.feature.PIXEL_2017_EXPERIENCE";
   private static final String EXTRA_FIRST_TIME_SHOWN =
       "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
@@ -323,11 +326,13 @@ public class InCallPresenter implements CallList.Listener {
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
       FilteredNumberAsyncQueryHandler filteredNumberQueryHandler) {
+    Trace.beginSection("InCallPresenter.setUp");
     if (mServiceConnected) {
       LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
       if (context != mContext || callList != mCallList) {
         throw new IllegalStateException();
       }
+      Trace.endSection();
       return;
     }
 
@@ -362,7 +367,7 @@ public class InCallPresenter implements CallList.Listener {
     mCallList.addListener(this);
 
     // Create spam call list listener and add it to the list of listeners
-    mSpamCallListListener = new SpamCallListListener(context);
+    mSpamCallListListener = new SpamCallListListener(context, new DefaultDialerExecutorFactory());
     mCallList.addListener(mSpamCallListListener);
 
     VideoPauseController.getInstance().setUp(this);
@@ -373,6 +378,7 @@ public class InCallPresenter implements CallList.Listener {
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
+    Trace.endSection();
   }
 
   /**
@@ -513,6 +519,7 @@ public class InCallPresenter implements CallList.Listener {
   }
 
   public void onCallAdded(final android.telecom.Call call) {
+    Trace.beginSection("InCallPresenter.onCallAdded");
     LatencyReport latencyReport = new LatencyReport(call);
     if (shouldAttemptBlocking(call)) {
       maybeBlockCall(call, latencyReport);
@@ -528,6 +535,7 @@ public class InCallPresenter implements CallList.Listener {
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
     setBoundAndWaitingForOutgoingCall(false, null);
     call.registerCallback(mCallCallback);
+    Trace.endSection();
   }
 
   private boolean shouldAttemptBlocking(android.telecom.Call call) {
@@ -690,11 +698,14 @@ public class InCallPresenter implements CallList.Listener {
    */
   @Override
   public void onCallListChange(CallList callList) {
+    Trace.beginSection("InCallPresenter.onCallListChange");
     if (mInCallActivity != null && mInCallActivity.isInCallScreenAnimating()) {
       mAwaitingCallListUpdate = true;
+      Trace.endSection();
       return;
     }
     if (callList == null) {
+      Trace.endSection();
       return;
     }
 
@@ -744,11 +755,13 @@ public class InCallPresenter implements CallList.Listener {
           callList.getActiveOrBackgroundCall() != null || callList.getOutgoingCall() != null;
       mInCallActivity.dismissKeyguard(hasCall);
     }
+    Trace.endSection();
   }
 
   /** Called when there is a new incoming call. */
   @Override
   public void onIncomingCall(DialerCall call) {
+    Trace.beginSection("InCallPresenter.onIncomingCall");
     InCallState newState = startOrFinishUi(InCallState.INCOMING);
     InCallState oldState = mInCallState;
 
@@ -764,6 +777,7 @@ public class InCallPresenter implements CallList.Listener {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();
     }
+    Trace.endSection();
   }
 
   @Override
@@ -855,7 +869,7 @@ public class InCallPresenter implements CallList.Listener {
 
     if (newState == InCallState.NO_CALLS) {
       if (mBoundAndWaitingForOutgoingCall) {
-        return InCallState.OUTGOING;
+        return InCallState.PENDING_OUTGOING;
       }
     }
 
@@ -873,7 +887,7 @@ public class InCallPresenter implements CallList.Listener {
     mBoundAndWaitingForOutgoingCall = isBound;
     mThemeColorManager.setPendingPhoneAccountHandle(handle);
     if (isBound && mInCallState == InCallState.NO_CALLS) {
-      mInCallState = InCallState.OUTGOING;
+      mInCallState = InCallState.PENDING_OUTGOING;
     }
   }
 
@@ -1064,7 +1078,7 @@ public class InCallPresenter implements CallList.Listener {
     LogUtil.d("InCallPresenter.onActivityStarted", "onActivityStarted");
     notifyVideoPauseController(true);
     if (mStatusBarNotifier != null) {
-      // TODO - b/36649622: Investigate this redundant call
+      // TODO(maxwelb) - b/36649622: Investigate this redundant call
       mStatusBarNotifier.updateNotification(mCallList);
     }
     applyScreenTimeout();
@@ -1660,14 +1674,18 @@ public class InCallPresenter implements CallList.Listener {
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (mLocalVideoSurfaceTexture == null) {
-      mLocalVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture();
+      mLocalVideoSurfaceTexture =
+          VideoSurfaceBindings.createLocalVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mLocalVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (mRemoteVideoSurfaceTexture == null) {
-      mRemoteVideoSurfaceTexture = VideoSurfaceBindings.createRemoteVideoSurfaceTexture();
+      mRemoteVideoSurfaceTexture =
+          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(
+              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
     }
     return mRemoteVideoSurfaceTexture;
   }

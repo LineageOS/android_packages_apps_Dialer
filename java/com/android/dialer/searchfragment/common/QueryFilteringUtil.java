@@ -25,25 +25,34 @@ import java.util.regex.Pattern;
 public class QueryFilteringUtil {
 
   /** Matches strings with "-", "(", ")", 2-9 of at least length one. */
-  static final Pattern T9_PATTERN = Pattern.compile("[\\-()2-9]+");
+  private static final Pattern T9_PATTERN = Pattern.compile("[\\-()2-9]+");
 
   /**
-   * @return true if the query is of T9 format and the name's T9 representation belongs to the
-   *     query; false otherwise.
+   * Returns true if the query is of T9 format and the name's T9 representation belongs to the query
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>#nameMatchesT9Query("7", "John Smith") returns true, 7 -> 'S'
+   *   <li>#nameMatchesT9Query("55", "Jessica Jones") returns true, 55 -> 'JJ'
+   *   <li>#nameMatchesT9Query("56", "Jessica Jones") returns true, 56 -> 'Jo'
+   *   <li>#nameMatchesT9Query("7", "Jessica Jones") returns false, no names start with P,Q,R or S
+   * </ul>
    */
   public static boolean nameMatchesT9Query(String query, String name) {
     if (!T9_PATTERN.matcher(query).matches()) {
       return false;
     }
 
-    // Substring
-    if (indexOfQueryNonDigitsIgnored(query, getT9Representation(name)) != -1) {
+    query = digitsOnly(query);
+    Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query));
+    if (pattern.matcher(getT9Representation(name)).find()) {
+      // query matches the start of a T9 name (i.e. 75 -> "Jessica [Jo]nes")
       return true;
     }
 
     // Check matches initials
-    // TODO investigate faster implementation
-    query = digitsOnly(query);
+    // TODO(calderwoodra) investigate faster implementation
     int queryIndex = 0;
 
     String[] names = name.toLowerCase().split("\\s");
@@ -58,6 +67,23 @@ public class QueryFilteringUtil {
     }
 
     return queryIndex == query.length();
+  }
+
+  /**
+   * Returns true if the subparts of the name (split by white space) begin with the query.
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>#nameContainsQuery("b", "Brandon") returns true
+   *   <li>#nameContainsQuery("o", "Bob") returns false
+   *   <li>#nameContainsQuery("o", "Bob Olive") returns true
+   * </ul>
+   */
+  public static boolean nameContainsQuery(String query, String name) {
+    return Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()))
+        .matcher(name.toLowerCase())
+        .find();
   }
 
   /** @return true if the number belongs to the query. */

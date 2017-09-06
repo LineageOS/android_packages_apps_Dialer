@@ -76,7 +76,9 @@ public class TranscriptionClientFactory {
 
   public void shutdown() {
     LogUtil.enterBlock("TranscriptionClientFactory.shutdown");
-    originalChannel.shutdown();
+    if (!originalChannel.isShutdown()) {
+      originalChannel.shutdown();
+    }
   }
 
   private static ManagedChannel getManagedChannel(TranscriptionConfigProvider configProvider) {

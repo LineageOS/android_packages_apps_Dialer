@@ -31,25 +31,25 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.CallableCompat;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.compat.PhoneCompat;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.contacts.common.list.ContactListItemView.CallToAction;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lightbringer.LightbringerComponent;
-import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,7 +381,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         text = phoneLabel;
       } else {
         final String phoneNumber = cursor.getString(PhoneQuery.PHONE_NUMBER);
-        text = GeoUtil.getGeocodedLocationFor(mContext, phoneNumber);
+        text = PhoneNumberHelper.getGeoDescription(mContext, phoneNumber);
       }
     }
     view.setPhoneNumber(text);
@@ -407,7 +407,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     if (action == ContactListItemView.NONE) {
       EnrichedCallManager manager = EnrichedCallComponent.get(mContext).getEnrichedCallManager();
       EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
-      if (capabilities != null && capabilities.supportsCallComposer()) {
+      if (capabilities != null && capabilities.isCallComposerCapable()) {
         action = ContactListItemView.CALL_AND_SHARE;
       } else if (capabilities == null
           && getQueryString() != null

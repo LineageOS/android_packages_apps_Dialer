@@ -16,14 +16,20 @@
 
 package com.android.incallui.spam;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Icon;
+import android.os.Build.VERSION_CODES;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
@@ -31,14 +37,19 @@ import android.text.TextUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorFactory;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.Spam;
-import com.android.incallui.R;
+import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CallHistoryStatus;
@@ -49,19 +60,79 @@ import java.util.Random;
  * etc).
  */
 public class SpamCallListListener implements CallList.Listener {
+  /** Common ID for all spam notifications. */
   static final int NOTIFICATION_ID = 1;
+  /** Prefix used to generate a unique tag for each spam notification. */
+  static final String NOTIFICATION_TAG_PREFIX = "SpamCall_";
+  /**
+   * Key used to associate all spam notifications into a single group. Note, unlike other group
+   * notifications in Dialer, spam notifications don't have a top level group summary notification.
+   * The group is still useful for things like rate limiting on a per group basis.
+   */
+  private static final String GROUP_KEY = "SpamCallGroup";
 
   private final Context context;
   private final Random random;
+  private final DialerExecutorFactory dialerExecutorFactory;
 
-  public SpamCallListListener(Context context) {
-    this.context = context;
-    this.random = new Random();
+  public SpamCallListListener(Context context, @NonNull DialerExecutorFactory factory) {
+    this(context, new Random(), factory);
   }
 
-  public SpamCallListListener(Context context, Random rand) {
+  public SpamCallListListener(
+      Context context, Random rand, @NonNull DialerExecutorFactory factory) {
     this.context = context;
     this.random = rand;
+    this.dialerExecutorFactory = Assert.isNotNull(factory);
+  }
+
+  /** Checks if the number is in the call history. */
+  @TargetApi(VERSION_CODES.M)
+  private static final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
+
+    private final Context appContext;
+    private final String number;
+    private final String countryIso;
+
+    public NumberInCallHistoryWorker(
+        @NonNull Context appContext, String number, String countryIso) {
+      this.appContext = Assert.isNotNull(appContext);
+      this.number = number;
+      this.countryIso = countryIso;
+    }
+
+    @Override
+    @NonNull
+    @CallHistoryStatus
+    public Integer doInBackground(@Nullable Void input) throws Throwable {
+      String numberToQuery = number;
+      String fieldToQuery = Calls.NUMBER;
+      String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+
+      // If we can normalize the number successfully, look in "normalized_number"
+      // field instead. Otherwise, look for number in "number" field.
+      if (!TextUtils.isEmpty(normalizedNumber)) {
+        numberToQuery = normalizedNumber;
+        fieldToQuery = Calls.CACHED_NORMALIZED_NUMBER;
+      }
+
+      try (Cursor cursor =
+          appContext
+              .getContentResolver()
+              .query(
+                  TelecomUtil.getCallLogUri(appContext),
+                  new String[] {CallLog.Calls._ID},
+                  fieldToQuery + " = ?",
+                  new String[] {numberToQuery},
+                  null)) {
+        return cursor != null && cursor.getCount() > 0
+            ? DialerCall.CALL_HISTORY_STATUS_PRESENT
+            : DialerCall.CALL_HISTORY_STATUS_NOT_PRESENT;
+      } catch (SQLiteException e) {
+        LogUtil.e("NumberInCallHistoryWorker.doInBackground", "query call log error", e);
+        return DialerCall.CALL_HISTORY_STATUS_UNKNOWN;
+      }
+    }
   }
 
   @Override
@@ -70,15 +141,21 @@ public class SpamCallListListener implements CallList.Listener {
     if (TextUtils.isEmpty(number)) {
       return;
     }
-    NumberInCallHistoryTask.Listener listener =
-        new NumberInCallHistoryTask.Listener() {
-          @Override
-          public void onComplete(@CallHistoryStatus int callHistoryStatus) {
-            call.setCallHistoryStatus(callHistoryStatus);
-          }
-        };
-    new NumberInCallHistoryTask(context, listener, number, GeoUtil.getCurrentCountryIso(context))
-        .submitTask();
+
+    if (!PermissionsUtil.hasCallLogReadPermissions(context)) {
+      LogUtil.i(
+          "SpamCallListListener.onIncomingCall",
+          "call log permission missing, not checking if number is in call history");
+      return;
+    }
+
+    NumberInCallHistoryWorker historyTask =
+        new NumberInCallHistoryWorker(context, number, GeoUtil.getCurrentCountryIso(context));
+    dialerExecutorFactory
+        .createNonUiTaskBuilder(historyTask)
+        .onSuccess((result) -> call.setCallHistoryStatus(result))
+        .build()
+        .executeParallel(null);
   }
 
   @Override
@@ -180,7 +257,8 @@ public class SpamCallListListener implements CallList.Listener {
             .setCategory(Notification.CATEGORY_STATUS)
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
-            .setSmallIcon(R.drawable.ic_call_end_white_24dp);
+            .setSmallIcon(R.drawable.quantum_ic_call_end_vd_theme_24)
+            .setGroup(GROUP_KEY);
     if (BuildCompat.isAtLeastO()) {
       builder.setChannelId(NotificationChannelId.DEFAULT);
     }
@@ -197,7 +275,6 @@ public class SpamCallListListener implements CallList.Listener {
   private void showNonSpamCallNotification(DialerCall call) {
     Notification.Builder notificationBuilder =
         createAfterCallNotificationBuilder(call)
-            .setLargeIcon(Icon.createWithResource(context, R.drawable.unknown_notification_icon))
             .setContentText(
                 context.getString(R.string.spam_notification_non_spam_call_collapsed_text))
             .setStyle(
@@ -207,7 +284,7 @@ public class SpamCallListListener implements CallList.Listener {
             // Add contact
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_person_add_grey600_24dp,
+                        R.drawable.quantum_ic_person_add_vd_theme_24,
                         context.getString(R.string.spam_notification_add_contact_action_text),
                         createActivityPendingIntent(
                             call, SpamNotificationActivity.ACTION_ADD_TO_CONTACTS))
@@ -215,14 +292,14 @@ public class SpamCallListListener implements CallList.Listener {
             // Block/report spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_block_grey600_24dp,
+                        R.drawable.quantum_ic_block_vd_theme_24,
                         context.getString(R.string.spam_notification_report_spam_action_text),
                         createBlockReportSpamPendingIntent(call))
                     .build())
             .setContentTitle(
                 context.getString(R.string.non_spam_notification_title, getDisplayNumber(call)));
-    ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
-        .notify(call.getNumber(), NOTIFICATION_ID, notificationBuilder.build());
+    DialerNotificationManager.notify(
+        context, getNotificationTagForCall(call), NOTIFICATION_ID, notificationBuilder.build());
   }
 
   private boolean shouldThrottleSpamNotification() {
@@ -319,21 +396,21 @@ public class SpamCallListListener implements CallList.Listener {
             // Not spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_close_grey600_24dp,
+                        R.drawable.quantum_ic_close_vd_theme_24,
                         context.getString(R.string.spam_notification_not_spam_action_text),
                         createNotSpamPendingIntent(call))
                     .build())
             // Block/report spam
             .addAction(
                 new Notification.Action.Builder(
-                        R.drawable.ic_block_grey600_24dp,
+                        R.drawable.quantum_ic_block_vd_theme_24,
                         context.getString(R.string.spam_notification_block_spam_action_text),
                         createBlockReportSpamPendingIntent(call))
                     .build())
             .setContentTitle(
                 context.getString(R.string.spam_notification_title, getDisplayNumber(call)));
-    ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
-        .notify(call.getNumber(), NOTIFICATION_ID, notificationBuilder.build());
+    DialerNotificationManager.notify(
+        context, getNotificationTagForCall(call), NOTIFICATION_ID, notificationBuilder.build());
   }
 
   /**
@@ -361,7 +438,8 @@ public class SpamCallListListener implements CallList.Listener {
   /** Creates a pending intent for {@link SpamNotificationService}. */
   private PendingIntent createServicePendingIntent(DialerCall call, String action) {
     Intent intent =
-        SpamNotificationService.createServiceIntent(context, call, action, NOTIFICATION_ID);
+        SpamNotificationService.createServiceIntent(
+            context, call, action, getNotificationTagForCall(call), NOTIFICATION_ID);
     return PendingIntent.getService(
         context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
   }
@@ -369,8 +447,13 @@ public class SpamCallListListener implements CallList.Listener {
   /** Creates a pending intent for {@link SpamNotificationActivity}. */
   private PendingIntent createActivityPendingIntent(DialerCall call, String action) {
     Intent intent =
-        SpamNotificationActivity.createActivityIntent(context, call, action, NOTIFICATION_ID);
+        SpamNotificationActivity.createActivityIntent(
+            context, call, action, getNotificationTagForCall(call), NOTIFICATION_ID);
     return PendingIntent.getActivity(
         context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
+  }
+
+  static String getNotificationTagForCall(@NonNull DialerCall call) {
+    return NOTIFICATION_TAG_PREFIX + call.getNumber();
   }
 }

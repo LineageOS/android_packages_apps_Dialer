@@ -146,7 +146,7 @@ public class AutoResizeTextView extends TextView {
     float maxTextSize = TypedValue.applyDimension(unit, size, displayMetrics);
     if (this.maxTextSize != maxTextSize) {
       this.maxTextSize = maxTextSize;
-      // TODO: It's not actually necessary to clear the whole cache here. To optimize cache
+      // TODO(tobyj): It's not actually necessary to clear the whole cache here. To optimize cache
       // deletion we'd have to delete all entries in the cache with a value equal or larger than
       // MIN(old_max_size, new_max_size) when changing maxTextSize; and all entries with a value
       // equal or smaller than MAX(old_min_size, new_min_size) when changing minTextSize.

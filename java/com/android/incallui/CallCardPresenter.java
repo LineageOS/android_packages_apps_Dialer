@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.postcall.PostCall;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -60,6 +62,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.calllocation.CallLocation;
 import com.android.incallui.calllocation.CallLocationComponent;
@@ -67,6 +70,7 @@ import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryCallState.ButtonState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.videotech.utils.SessionModificationState;
@@ -245,8 +249,10 @@ public class CallCardPresenter
 
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
+    Trace.beginSection("CallCardPresenter.onStateChange");
     LogUtil.v("CallCardPresenter.onStateChange", "oldState: %s, newState: %s", oldState, newState);
     if (mInCallScreen == null) {
+      Trace.endSection();
       return;
     }
 
@@ -343,6 +349,7 @@ public class CallCardPresenter
             callState != DialerCall.State.INCOMING /* animate */);
 
     maybeSendAccessibilityEvent(oldState, newState, primaryChanged);
+    Trace.endSection();
   }
 
   @Override
@@ -472,7 +479,10 @@ public class CallCardPresenter
                   CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
                   mPrimary.isRemotelyHeld(),
                   isBusiness,
-                  supports2ndCallOnHold()));
+                  supports2ndCallOnHold(),
+                  getSwapToSecondaryButtonState(),
+                  mPrimary.isAssistedDialed(),
+                  null));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
@@ -480,6 +490,16 @@ public class CallCardPresenter
         activity.onPrimaryCallStateChanged();
       }
     }
+  }
+
+  private @ButtonState int getSwapToSecondaryButtonState() {
+    if (mSecondary == null) {
+      return ButtonState.NOT_SUPPORT;
+    }
+    if (mPrimary.getState() == State.ACTIVE) {
+      return ButtonState.ENABLED;
+    }
+    return ButtonState.DISABLED;
   }
 
   /** Only show the conference call button if we can manage the conference. */
@@ -534,11 +554,6 @@ public class CallCardPresenter
     InCallPresenter.getInstance().onShrinkAnimationComplete();
   }
 
-  @Override
-  public Drawable getDefaultContactPhotoDrawable() {
-    return ContactInfoCache.getInstance(mContext).getDefaultContactPhotoDrawable();
-  }
-
   private void maybeStartSearch(DialerCall call, boolean isPrimary) {
     // no need to start search for conference calls which show generic info.
     if (call != null && !call.isConferenceCall()) {
@@ -570,8 +585,8 @@ public class CallCardPresenter
     if (call != null) {
       call.getLogState().contactLookupResult = entry.contactLookupResult;
     }
-    if (entry.contactUri != null) {
-      CallerInfoUtils.sendViewNotification(mContext, entry.contactUri);
+    if (entry.lookupUri != null) {
+      CallerInfoUtils.sendViewNotification(mContext, entry.lookupUri);
     }
   }
 
@@ -699,6 +714,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               null /* contactInfoLookupKey */,
               null /* enrichedCallMultimediaData */,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else if (mPrimaryContactInfo != null) {
       LogUtil.v(
@@ -746,6 +762,7 @@ public class CallCardPresenter
               shouldShowLocation(),
               mPrimaryContactInfo.lookupKey,
               multimediaData,
+              true /* showInCallButtonGrid */,
               mPrimary.getNumberPresentation()));
     } else {
       // Clear the primary display info.
@@ -989,6 +1006,11 @@ public class CallCardPresenter
       return;
     }
 
+    Logger.get(mContext)
+        .logCallImpression(
+            DialerImpression.Type.IN_CALL_SWAP_SECONDARY_BUTTON_PRESSED,
+            mPrimary.getUniqueCallId(),
+            mPrimary.getTimeAddedMs());
     LogUtil.i(
         "CallCardPresenter.onSecondaryInfoClicked", "swapping call to foreground: " + mSecondary);
     mSecondary.unhold();
@@ -1000,6 +1022,7 @@ public class CallCardPresenter
     if (mPrimary != null) {
       mPrimary.disconnect();
     }
+    PostCall.onDisconnectPressed(mContext);
   }
 
   /**

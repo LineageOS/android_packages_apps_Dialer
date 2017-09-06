@@ -28,7 +28,6 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_HANG_UP_
 import android.Manifest;
 import android.app.ActivityManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -60,16 +59,18 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
-import com.android.contacts.common.lettertiles.LetterTileDrawable;
-import com.android.contacts.common.lettertiles.LetterTileDrawable.ContactType;
 import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DrawableConverter;
@@ -106,14 +107,10 @@ public class StatusBarNotifier
   // This is non-interruptive, but otherwise behaves the same as NOTIFICATION_INCOMING_CALL
   private static final int NOTIFICATION_INCOMING_CALL_QUIET = 3;
 
-  private static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
-  private static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
-
   private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
 
   private final Context mContext;
   private final ContactInfoCache mContactInfoCache;
-  private final NotificationManager mNotificationManager;
   private final DialerRingtoneManager mDialerRingtoneManager;
   @Nullable private ContactsPreferences mContactsPreferences;
   private int mCurrentNotification = NOTIFICATION_NONE;
@@ -126,11 +123,9 @@ public class StatusBarNotifier
   private StatusBarCallListener mStatusBarCallListener;
 
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
-    Objects.requireNonNull(context);
-    mContext = context;
+    mContext = Assert.isNotNull(context);
     mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
     mContactInfoCache = contactInfoCache;
-    mNotificationManager = context.getSystemService(NotificationManager.class);
     mDialerRingtoneManager =
         new DialerRingtoneManager(
             new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
@@ -142,23 +137,17 @@ public class StatusBarNotifier
    * Should only be called from a irrecoverable state where it is necessary to dismiss all
    * notifications.
    */
-  static void clearAllCallNotifications(Context backupContext) {
-    LogUtil.i(
+  static void clearAllCallNotifications(Context context) {
+    LogUtil.e(
         "StatusBarNotifier.clearAllCallNotifications",
         "something terrible happened, clear all InCall notifications");
 
-    NotificationManager notificationManager =
-        backupContext.getSystemService(NotificationManager.class);
-    notificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+    DialerNotificationManager.cancel(context, NOTIFICATION_TAG, NOTIFICATION_ID);
   }
 
   private static int getWorkStringFromPersonalString(int resId) {
     if (resId == R.string.notification_ongoing_call) {
       return R.string.notification_ongoing_work_call;
-    } else if (resId == R.string.notification_ongoing_call_wifi) {
-      return R.string.notification_ongoing_work_call_wifi;
-    } else if (resId == R.string.notification_incoming_call_wifi) {
-      return R.string.notification_incoming_work_call_wifi;
     } else if (resId == R.string.notification_incoming_call) {
       return R.string.notification_incoming_work_call;
     } else {
@@ -222,7 +211,7 @@ public class StatusBarNotifier
     }
     if (mCurrentNotification != NOTIFICATION_NONE) {
       LogUtil.i("StatusBarNotifier.cancelNotification", "cancel");
-      mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+      DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
     }
     mCurrentNotification = NOTIFICATION_NONE;
   }
@@ -383,7 +372,7 @@ public class StatusBarNotifier
               "Canceling old notification so this one can be noisy");
           // Moving from a non-interuptive notification (or none) to a noisy one. Cancel the old
           // notification (if there is one) so the fullScreenIntent or HUN will show
-          mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
+          DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
         }
         break;
       case NOTIFICATION_INCOMING_CALL_QUIET:
@@ -397,6 +386,8 @@ public class StatusBarNotifier
           builder.setColorized(true);
           builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         }
+        break;
+      default:
         break;
     }
 
@@ -442,7 +433,7 @@ public class StatusBarNotifier
         "displaying notification for " + notificationType);
 
     try {
-      mNotificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notification);
+      DialerNotificationManager.notify(mContext, NOTIFICATION_TAG, NOTIFICATION_ID, notification);
     } catch (RuntimeException e) {
       // TODO(b/34744003): Move the memory stats into silent feedback PSD.
       ActivityManager activityManager = mContext.getSystemService(ActivityManager.class);
@@ -673,7 +664,7 @@ public class StatusBarNotifier
     }
     // If ReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
     if (ReturnToCallController.isEnabled(mContext)) {
-      return R.drawable.quantum_ic_call_white_24;
+      return R.drawable.quantum_ic_call_vd_theme_24;
     } else {
       return R.drawable.on_going_call;
     }
@@ -696,8 +687,9 @@ public class StatusBarNotifier
     }
 
     int resId = R.string.notification_ongoing_call;
+    String wifiBrand = mContext.getString(R.string.notification_call_wifi_brand);
     if (call.hasProperty(Details.PROPERTY_WIFI)) {
-      resId = R.string.notification_ongoing_call_wifi;
+      resId = R.string.notification_ongoing_call_wifi_template;
     }
 
     if (isIncomingOrWaiting) {
@@ -706,7 +698,8 @@ public class StatusBarNotifier
       } else if (shouldShowEnrichedCallNotification(call.getEnrichedCallSession())) {
         resId = getECIncomingCallText(call.getEnrichedCallSession());
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
-        resId = R.string.notification_incoming_call_wifi;
+        resId = R.string.notification_incoming_call_wifi_template;
+
       } else {
         resId = R.string.notification_incoming_call;
       }
@@ -723,6 +716,13 @@ public class StatusBarNotifier
     boolean isWorkCall = call.hasProperty(PROPERTY_ENTERPRISE_CALL);
     if (userType == ContactsUtils.USER_TYPE_WORK || isWorkCall) {
       resId = getWorkStringFromPersonalString(resId);
+      wifiBrand = mContext.getString(R.string.notification_call_wifi_work_brand);
+    }
+
+    if (resId == R.string.notification_incoming_call_wifi_template
+        || resId == R.string.notification_ongoing_call_wifi_template) {
+      // TODO(b/64525903): Potentially apply this template logic everywhere.
+      return mContext.getString(resId, wifiBrand);
     }
 
     return mContext.getString(resId);
@@ -865,7 +865,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(mContext, ACTION_HANG_UP_ONGOING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(mContext, R.drawable.ic_call_end_white_24dp),
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_call_end_white_24),
                 mContext.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());
@@ -944,11 +944,11 @@ public class StatusBarNotifier
         InCallActivity.getIntent(
             mContext, false /* showDialpad */, false /* newOutgoingCall */, isFullScreen);
 
-    int requestCode = PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
+    int requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
     if (isFullScreen) {
       // Use a unique request code so that the pending intent isn't clobbered by the
       // non-full screen pending intent.
-      requestCode = PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
+      requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
     }
 
     // PendingIntent that can be used to launch the InCallActivity.  The

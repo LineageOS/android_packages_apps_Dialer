@@ -23,9 +23,11 @@ import android.support.annotation.Nullable;
 import android.telecom.Call;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -53,11 +55,33 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context).getBoolean("enable_lightbringer_video_upgrade", true)
-        && callState == Call.STATE_ACTIVE
-        && lightbringer.supportsUpgrade(context, callingNumber)
-        && TelecomManagerCompat.supportsHandover();
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on O+");
+      return false;
+    }
+
+    if (!ConfigProviderBindings.get(context)
+        .getBoolean("enable_lightbringer_video_upgrade", true)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade disabled by flag");
+      return false;
+    }
+
+    if (callState != Call.STATE_ACTIVE) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
+      return false;
+    }
+
+    if (!TelecomManagerCompat.supportsHandover()) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, telephony support missing");
+      return false;
+    }
+
+    if (!lightbringer.supportsUpgrade(context, callingNumber)) {
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, number does not support it");
+      return false;
+    }
+
+    return true;
   }
 
   @Override
@@ -102,6 +126,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public void upgradeToVideo() {
+    listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
     lightbringer.requestUpgrade(call);
   }
 
@@ -144,6 +169,12 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   @Override
   public void setCamera(@Nullable String cameraId) {
     throw Assert.createUnsupportedOperationFailException();
+  }
+
+  @Override
+  public void becomePrimary() {
+    listener.onImpressionLoggingNeeded(
+        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_LIGHTBRINGER);
   }
 
   @Override

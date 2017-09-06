@@ -21,6 +21,7 @@ import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -105,6 +106,8 @@ public class InCallActivityCommon {
   private boolean animateDialpadOnShow;
   private String dtmfTextToPreopulate;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
+  // If activity is going to be recreated. This is usually happening in {@link onNewIntent}.
+  private boolean isRecreating;
 
   private final SelectPhoneAccountListener selectAccountListener =
       new SelectPhoneAccountListener() {
@@ -209,7 +212,8 @@ public class InCallActivityCommon {
           }
         });
 
-    if (icicle != null) {
+    // Don't override the value if show dialpad request is true in intent extras.
+    if (icicle != null && showDialpadRequest == DIALPAD_REQUEST_NONE) {
       // If the dialpad was shown before, set variables indicating it should be shown and
       // populated with the previous DTMF text.  The dialpad is actually shown and populated
       // in onResume() to ensure the hosting fragment has been inflated and is ready to receive it.
@@ -319,6 +323,18 @@ public class InCallActivityCommon {
   }
 
   public void onStop() {
+    // Disconnects call waiting for account when activity is hidden e.g. user press home button.
+    // This is necessary otherwise the pending call will stuck on account choose and no new call
+    // will be able to create. See b/63600434 for more details.
+    // Skip this on locked screen since the activity may go over life cycle and start again.
+    if (!isRecreating
+        && !inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+      DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
+      if (waitingForAccountCall != null) {
+        waitingForAccountCall.disconnect();
+      }
+    }
+
     enableInCallOrientationEventListener(false);
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
@@ -331,6 +347,7 @@ public class InCallActivityCommon {
 
   void onNewIntent(Intent intent, boolean isRecreating) {
     LogUtil.i("InCallActivityCommon.onNewIntent", "");
+    this.isRecreating = isRecreating;
 
     // We're being re-launched with a new Intent.  Since it's possible for a
     // single InCallActivity instance to persist indefinitely (even if we

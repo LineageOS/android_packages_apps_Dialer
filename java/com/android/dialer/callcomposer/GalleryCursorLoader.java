@@ -16,7 +16,6 @@
 
 package com.android.dialer.callcomposer;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.MediaStore.Files;
@@ -44,11 +43,10 @@ public class GalleryCursorLoader extends CursorLoader {
         SORT_ORDER);
   }
 
-  @SuppressLint("DefaultLocale")
   private static String createSelection() {
-    return String.format(
-        "mime_type IN ('image/jpeg', 'image/jpg', 'image/png', 'image/webp')"
-            + " AND media_type in (%d)",
-        FileColumns.MEDIA_TYPE_IMAGE);
+    return "mime_type IN ('image/jpeg', 'image/jpg', 'image/png', 'image/webp')"
+        + " AND media_type in ("
+        + FileColumns.MEDIA_TYPE_IMAGE
+        + ")";
   }
 }

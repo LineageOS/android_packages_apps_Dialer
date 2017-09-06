@@ -98,4 +98,7 @@ public class EmptyVideoTech implements VideoTech {
 
   @Override
   public void setDeviceOrientation(int rotation) {}
+
+  @Override
+  public void becomePrimary() {}
 }

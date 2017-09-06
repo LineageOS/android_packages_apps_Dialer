@@ -80,4 +80,11 @@ public interface LoggingBindings {
       QuickContactBadge quickContact,
       InteractionEvent.Type interactionEvent,
       boolean shouldPerformClick);
+
+  /** Logs People Api lookup result with error */
+  void logPeopleApiLookupReportWithError(
+      long latency, int httpResponseCode, PeopleApiLookupError.Type errorType);
+
+  /** Logs successful People Api lookup result */
+  void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode);
 }

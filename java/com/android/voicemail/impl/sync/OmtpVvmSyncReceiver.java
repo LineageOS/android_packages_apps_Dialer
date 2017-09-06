@@ -52,7 +52,7 @@ public class OmtpVvmSyncReceiver extends BroadcastReceiver {
           VvmLog.i(TAG, "Unactivated account " + phoneAccount + " found, activating");
           ActivationTask.start(context, phoneAccount, null);
         } else {
-          SyncTask.start(context, phoneAccount, OmtpVvmSyncService.SYNC_FULL_SYNC);
+          SyncTask.start(context, phoneAccount);
         }
       }
     }
