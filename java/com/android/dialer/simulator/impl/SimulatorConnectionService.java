@@ -40,6 +40,7 @@ public class SimulatorConnectionService extends ConnectionService {
   private static final String PHONE_ACCOUNT_ID = "SIMULATOR_ACCOUNT_ID";
   private static final String EXTRA_IS_SIMULATOR_CONNECTION = "is_simulator_connection";
   private static final List<Listener> listeners = new ArrayList<>();
+  private static SimulatorConnectionService instance;
 
   private static void register(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorConnectionService.register");
@@ -53,6 +54,30 @@ public class SimulatorConnectionService extends ConnectionService {
     context
         .getSystemService(TelecomManager.class)
         .unregisterPhoneAccount(buildPhoneAccount(context).getAccountHandle());
+  }
+
+  public static SimulatorConnectionService getInstance() {
+    return instance;
+  }
+
+  public static void addNewOutgoingCall(
+      @NonNull Context context, @NonNull Bundle extras, @NonNull String phoneNumber) {
+    LogUtil.enterBlock("SimulatorConnectionService.addNewOutgoingCall");
+    Assert.isNotNull(context);
+    Assert.isNotNull(extras);
+    Assert.isNotNull(phoneNumber);
+
+    register(context);
+
+    Bundle bundle = new Bundle(extras);
+    bundle.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
+    Bundle outgoingCallExtras = new Bundle();
+    outgoingCallExtras.putBundle(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, bundle);
+
+    // Use the system's phone account so that these look like regular SIM call.
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    telecomManager.placeCall(
+        Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null), outgoingCallExtras);
   }
 
   public static void addNewIncomingCall(
@@ -76,13 +101,11 @@ public class SimulatorConnectionService extends ConnectionService {
   }
 
   public static void addListener(@NonNull Listener listener) {
-    Assert.isNotNull(listener);
-    listeners.add(listener);
+    listeners.add(Assert.isNotNull(listener));
   }
 
   public static void removeListener(@NonNull Listener listener) {
-    Assert.isNotNull(listener);
-    listeners.remove(listener);
+    listeners.remove(Assert.isNotNull(listener));
   }
 
   @NonNull
@@ -112,6 +135,19 @@ public class SimulatorConnectionService extends ConnectionService {
   }
 
   @Override
+  public void onCreate() {
+    super.onCreate();
+    instance = this;
+  }
+
+  @Override
+  public void onDestroy() {
+    LogUtil.enterBlock("SimulatorConnectionService.onDestroy");
+    instance = null;
+    super.onDestroy();
+  }
+
+  @Override
   public Connection onCreateOutgoingConnection(
       PhoneAccountHandle phoneAccount, ConnectionRequest request) {
     LogUtil.enterBlock("SimulatorConnectionService.onCreateOutgoingConnection");
@@ -127,10 +163,12 @@ public class SimulatorConnectionService extends ConnectionService {
     }
 
     SimulatorConnection connection = new SimulatorConnection();
-    connection.setActive();
+    connection.setDialing();
     connection.setAddress(request.getAddress(), TelecomManager.PRESENTATION_ALLOWED);
     connection.setConnectionCapabilities(
-        Connection.CAPABILITY_MUTE | Connection.CAPABILITY_SUPPORT_HOLD);
+        Connection.CAPABILITY_MUTE
+            | Connection.CAPABILITY_SUPPORT_HOLD
+            | Connection.CAPABILITY_HOLD);
     connection.putExtras(request.getExtras());
 
     for (Listener listener : listeners) {
