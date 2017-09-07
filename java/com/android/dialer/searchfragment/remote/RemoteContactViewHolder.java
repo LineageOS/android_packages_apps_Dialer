@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -119,10 +120,14 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
     return (String) Phone.getTypeLabel(resources, numberType, numberLabel);
   }
 
-  private static Uri getContactUri(Cursor cursor) {
+  private static Uri getContactUri(SearchCursor cursor) {
     long contactId = cursor.getLong(Projections.PHONE_ID);
     String lookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
-    return ContactsContract.Contacts.getLookupUri(contactId, lookupKey);
+    return Contacts.getLookupUri(contactId, lookupKey)
+        .buildUpon()
+        .appendQueryParameter(
+            ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(cursor.getDirectoryId()))
+        .build();
   }
 
   @Override
