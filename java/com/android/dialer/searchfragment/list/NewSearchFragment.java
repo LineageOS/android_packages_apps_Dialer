@@ -32,6 +32,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
@@ -198,6 +200,7 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
+  /** Translate the search fragment and resize it to fit on the screen. */
   public void animatePosition(int start, int end, int duration) {
     // Called before the view is ready, prepare a runnable to run in onCreateView
     if (getView() == null) {
@@ -206,9 +209,28 @@ public final class NewSearchFragment extends Fragment
     }
     boolean slideUp = start > end;
     Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT;
+    int startHeight = getView().getHeight();
+    int endHeight = startHeight - (end - start);
     getView().setTranslationY(start);
-    getView().animate().translationY(end).setInterpolator(interpolator).setDuration(duration);
+    getView()
+        .animate()
+        .translationY(end)
+        .setInterpolator(interpolator)
+        .setDuration(duration)
+        .setUpdateListener(
+            animation -> setHeight(startHeight, endHeight, animation.getAnimatedFraction()));
     updatePositionRunnable = null;
+  }
+
+  private void setHeight(int start, int end, float percentage) {
+    View view = getView();
+    if (view == null) {
+      return;
+    }
+
+    FrameLayout.LayoutParams params = (LayoutParams) view.getLayoutParams();
+    params.height = (int) (start + (end - start) * percentage);
+    view.setLayoutParams(params);
   }
 
   @Override
