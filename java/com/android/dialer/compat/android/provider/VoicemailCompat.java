@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.voicemail.impl.transcribe;
+package com.android.dialer.compat.android.provider;
 
 /**
  * Provide access to new API constants before they're publicly available
@@ -47,7 +47,7 @@ public class VoicemailCompat {
 
   /**
    * Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has been attempted and
-   * failed.
+   * failed for an unspecified reason.
    */
   public static final int TRANSCRIPTION_FAILED = 2;
 
@@ -56,4 +56,20 @@ public class VoicemailCompat {
    * result has been stored in the {@link #TRANSCRIPTION} column.
    */
   public static final int TRANSCRIPTION_AVAILABLE = 3;
+
+  /**
+   * Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has been attempted and
+   * failed because no speech was detected.
+   *
+   * <p>Internal dialer use only, not part of the public SDK.
+   */
+  public static final int TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED = -1;
+
+  /**
+   * Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has been attempted and
+   * failed because the language was not supported.
+   *
+   * <p>Internal dialer use only, not part of the public SDK.
+   */
+  public static final int TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED = -2;
 }

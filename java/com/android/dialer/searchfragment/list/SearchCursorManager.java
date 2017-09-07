@@ -23,16 +23,19 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manages all of the cursors needed for {@link SearchAdapter}.
  *
- * <p>This class accepts three cursors:
+ * <p>This class accepts four data sources:
  *
  * <ul>
  *   <li>A contacts cursor {@link #setContactsCursor(SearchCursor)}
  *   <li>A google search results cursor {@link #setNearbyPlacesCursor(SearchCursor)}
  *   <li>A work directory cursor {@link #setCorpDirectoryCursor(SearchCursor)}
+ *   <li>A list of action to be performed on a number {@link #setSearchActions(List)}
  * </ul>
  *
  * <p>The key purpose of this class is to compose three aforementioned cursors together to function
@@ -56,7 +59,8 @@ public final class SearchCursorManager {
     SearchCursorManager.RowType.NEARBY_PLACES_HEADER,
     SearchCursorManager.RowType.NEARBY_PLACES_ROW,
     SearchCursorManager.RowType.DIRECTORY_HEADER,
-    SearchCursorManager.RowType.DIRECTORY_ROW
+    SearchCursorManager.RowType.DIRECTORY_ROW,
+    SearchCursorManager.RowType.SEARCH_ACTION
   })
   @interface RowType {
     int INVALID = 0;
@@ -73,11 +77,14 @@ public final class SearchCursorManager {
     int DIRECTORY_HEADER = 5;
     /** A row containing contact information for contacts stored externally in corp directories. */
     int DIRECTORY_ROW = 6;
+    /** A row containing a search action */
+    int SEARCH_ACTION = 7;
   }
 
   private SearchCursor contactsCursor = null;
   private SearchCursor nearbyPlacesCursor = null;
   private SearchCursor corpDirectoryCursor = null;
+  private List<Integer> searchActions = new ArrayList<>();
 
   /** Returns true if the cursor changed. */
   boolean setContactsCursor(@Nullable SearchCursor cursor) {
@@ -149,6 +156,20 @@ public final class SearchCursorManager {
     return updated;
   }
 
+  /** Sets search actions, returning true if different from existing actions. */
+  boolean setSearchActions(List<Integer> searchActions) {
+    if (!this.searchActions.equals(searchActions)) {
+      this.searchActions = searchActions;
+      return true;
+    }
+    return false;
+  }
+
+  /** Returns {@link SearchActionViewHolder.Action}. */
+  int getSearchAction(int position) {
+    return searchActions.get(position - getCount() + searchActions.size());
+  }
+
   /** Returns the sum of counts of all cursors, including headers. */
   int getCount() {
     int count = 0;
@@ -164,11 +185,19 @@ public final class SearchCursorManager {
       count += corpDirectoryCursor.getCount();
     }
 
-    return count;
+    return count + searchActions.size();
   }
 
   @RowType
   int getRowType(int position) {
+    int cursorCount = getCount();
+    if (position >= cursorCount) {
+      throw Assert.createIllegalStateFailException(
+          String.format("Invalid position: %d, cursor count: %d", position, cursorCount));
+    } else if (position >= cursorCount - searchActions.size()) {
+      return RowType.SEARCH_ACTION;
+    }
+
     SearchCursor cursor = getCursor(position);
     if (cursor == contactsCursor) {
       return cursor.isHeader() ? RowType.CONTACT_HEADER : RowType.CONTACT_ROW;

@@ -30,6 +30,7 @@ import android.support.v4.os.BuildCompat;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import java.util.ArrayList;
 import java.util.List;
 
