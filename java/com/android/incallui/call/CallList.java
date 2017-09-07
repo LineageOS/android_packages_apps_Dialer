@@ -44,6 +44,7 @@ import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -507,6 +508,10 @@ public class CallList implements DialerCallDelegate {
 
   public DialerCall getCallById(String callId) {
     return mCallById.get(callId);
+  }
+
+  public Collection<DialerCall> getAllCalls() {
+    return mCallById.values();
   }
 
   /** Returns first call found in the call map with the specified state. */

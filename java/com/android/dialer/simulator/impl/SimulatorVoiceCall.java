@@ -23,7 +23,7 @@ import com.android.dialer.common.LogUtil;
 
 /** Utilities to simulate phone calls. */
 final class SimulatorVoiceCall {
-  public static void addNewIncomingCall(@NonNull Context context) {
+  static void addNewIncomingCall(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorVoiceCall.addNewIncomingCall");
     // Set the caller ID to the Google London office.
     String callerId = "+44 (0) 20 7031 3000";

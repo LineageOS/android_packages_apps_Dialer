@@ -13,20 +13,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/search_box_expanded"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:gravity="center_vertical"
-  android:orientation="horizontal"
   android:visibility="gone">
 
   <ImageButton
     android:id="@+id/search_back_button"
     android:layout_width="@dimen/search_box_icon_size"
     android:layout_height="@dimen/search_box_icon_size"
-    android:layout_margin="@dimen/search_box_navigation_icon_margin"
+    android:layout_marginStart="16dp"
+    android:layout_centerVertical="true"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:contentDescription="@string/action_menu_back_from_search"
     android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
@@ -34,15 +33,17 @@
 
   <EditText
     android:id="@+id/search_view"
-    android:layout_width="0dp"
-    android:layout_height="@dimen/search_box_icon_size"
-    android:layout_weight="1"
-    android:layout_marginLeft="@dimen/search_box_text_left_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toEndOf="@+id/search_back_button"
+    android:layout_toStartOf="@+id/search_close_button"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="8dp"
     android:background="@null"
     android:fontFamily="@string/search_font_family"
     android:imeOptions="flagNoExtractUi"
     android:inputType="textFilter"
-    android:singleLine="true"
+    android:maxLines="1"
     android:textColor="@color/searchbox_text_color"
     android:textColorHint="@color/searchbox_hint_text_color"
     android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
@@ -52,11 +53,12 @@
     android:id="@+id/search_close_button"
     android:layout_width="@dimen/search_box_close_icon_size"
     android:layout_height="@dimen/search_box_close_icon_size"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
     android:padding="@dimen/search_box_close_icon_padding"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:clickable="true"
     android:contentDescription="@string/description_clear_search"
     android:src="@drawable/quantum_ic_close_vd_theme_24"
     android:tint="@color/searchbox_icon_tint"/>
-
-</LinearLayout>
+</RelativeLayout>
