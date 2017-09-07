@@ -35,4 +35,11 @@ public interface SearchCursor extends Cursor {
    * @return true if the data set has changed.
    */
   boolean updateQuery(@NonNull String query);
+
+  /**
+   * Returns an ID unique to the directory this cursor reads from. Generally this value will be
+   * related to {@link android.provider.ContactsContract.Directory} but could differ depending on
+   * the implementation.
+   */
+  long getDirectoryId();
 }

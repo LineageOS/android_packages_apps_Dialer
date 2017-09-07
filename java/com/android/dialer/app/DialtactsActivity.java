@@ -516,7 +516,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   protected void onResume() {
-    LogUtil.d("DialtactsActivity.onResume", "");
+    LogUtil.enterBlock("DialtactsActivity.onResume");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
@@ -529,11 +529,14 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mStateSaved = false;
     if (mFirstLaunch) {
+      LogUtil.i("DialtactsActivity.onResume", "mFirstLaunch true, displaying fragment");
       displayFragment(getIntent());
     } else if (!phoneIsInUse() && mInCallDialpadUp) {
+      LogUtil.i("DialtactsActivity.onResume", "phone not in use, hiding dialpad fragment");
       hideDialpadFragment(false, true);
       mInCallDialpadUp = false;
     } else if (mShowDialpadOnResume) {
+      LogUtil.i("DialtactsActivity.onResume", "showing dialpad on resume");
       showDialpadFragment(false);
       mShowDialpadOnResume = false;
     } else {
@@ -662,10 +665,11 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onAttachFragment(final Fragment fragment) {
-    LogUtil.d("DialtactsActivity.onAttachFragment", "fragment: %s", fragment);
+    LogUtil.i("DialtactsActivity.onAttachFragment", "fragment: %s", fragment);
     if (fragment instanceof DialpadFragment) {
       mDialpadFragment = (DialpadFragment) fragment;
       if (!mIsDialpadShown && !mShowDialpadOnResume) {
+        LogUtil.i("DialtactsActivity.onAttachFragment", "hiding dialpad fragment");
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.hide(mDialpadFragment);
         transaction.commit();
@@ -830,8 +834,13 @@ public class DialtactsActivity extends TransactionSafeActivity
    * @see #onDialpadShown
    */
   private void showDialpadFragment(boolean animate) {
-    LogUtil.d("DialtactActivity.showDialpadFragment", "animate: %b", animate);
-    if (mIsDialpadShown || mStateSaved) {
+    LogUtil.i("DialtactActivity.showDialpadFragment", "animate: %b", animate);
+    if (mIsDialpadShown) {
+      LogUtil.i("DialtactsActivity.showDialpadFragment", "dialpad already shown");
+      return;
+    }
+    if (mStateSaved) {
+      LogUtil.i("DialtactsActivity.showDialpadFragment", "state already saved");
       return;
     }
     mIsDialpadShown = true;
@@ -875,7 +884,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   /** Callback from child DialpadFragment when the dialpad is shown. */
   @Override
   public void onDialpadShown() {
-    LogUtil.d("DialtactsActivity.onDialpadShown", "");
+    LogUtil.enterBlock("DialtactsActivity.onDialpadShown");
     Assert.isNotNull(mDialpadFragment);
     if (mDialpadFragment.getAnimate()) {
       Assert.isNotNull(mDialpadFragment.getView()).startAnimation(mSlideIn);
@@ -894,6 +903,7 @@ public class DialtactsActivity extends TransactionSafeActivity
    */
   @Override
   public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
+    LogUtil.enterBlock("DialtactsActivity.hideDialpadFragment");
     if (mDialpadFragment == null || mDialpadFragment.getView() == null) {
       return;
     }
@@ -1081,11 +1091,17 @@ public class DialtactsActivity extends TransactionSafeActivity
       return;
     }
 
-    final boolean showDialpadChooser =
+    boolean showDialpadChooser =
         !ACTION_SHOW_TAB.equals(intent.getAction())
             && phoneIsInUse()
             && !DialpadFragment.isAddCallMode(intent);
-    if (showDialpadChooser || (intent.getData() != null && isDialIntent(intent))) {
+    boolean isDialIntent = intent.getData() != null && isDialIntent(intent);
+    if (showDialpadChooser || isDialIntent) {
+      LogUtil.i(
+          "DialtactsActivity.displayFragment",
+          "showing dialpad fragment (showDialpadChooser: %b, isDialIntent: %b)",
+          showDialpadChooser,
+          isDialIntent);
       showDialpadFragment(false);
       mDialpadFragment.setStartedFromNewIntent(true);
       if (showDialpadChooser && !mDialpadFragment.isVisible()) {
@@ -1109,6 +1125,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onNewIntent(Intent newIntent) {
+    LogUtil.enterBlock("DialtactsActivity.onNewIntent");
     setIntent(newIntent);
     mFirstLaunch = true;
 
@@ -1135,15 +1152,17 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Shows the search fragment */
   private void enterSearchUi(boolean smartDialSearch, String query, boolean animate) {
+    LogUtil.i("DialtactsActivity.enterSearchUi", "smart dial: %b", smartDialSearch);
     if (mStateSaved || getFragmentManager().isDestroyed()) {
       // Weird race condition where fragment is doing work after the activity is destroyed
       // due to talkback being on (b/10209937). Just return since we can't do any
       // constructive here.
+      LogUtil.i(
+          "DialtactsActivity.enterSearchUi",
+          "not entering search UI (mStateSaved: %b, isDestroyed: %b)",
+          mStateSaved,
+          getFragmentManager().isDestroyed());
       return;
-    }
-
-    if (DEBUG) {
-      LogUtil.v("DialtactsActivity.enterSearchUi", "smart dial " + smartDialSearch);
     }
 
     final FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -1232,6 +1251,8 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Hides the search fragment */
   private void exitSearchUi() {
+    LogUtil.enterBlock("DialtactsActivity.exitSearchUi");
+
     // See related bug in enterSearchUI();
     if (getFragmentManager().isDestroyed() || mStateSaved) {
       return;

@@ -67,7 +67,7 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
       return new AutoValue_RemoteDirectoriesCursorLoader_Directory(id, displayName, supportsPhotos);
     }
 
-    abstract int getId();
+    public abstract int getId();
 
     /** Returns a user facing display name of the directory. Null if none exists. */
     abstract @Nullable String getDisplayName();
