@@ -47,6 +47,6 @@ public final class SearchContactsCursorLoader extends CursorLoader {
     // Filtering logic
     ContactFilterCursor contactFilterCursor = new ContactFilterCursor(cursor, query);
     // Header logic
-    return SearchContactsCursor.newInstnace(getContext(), contactFilterCursor);
+    return SearchContactsCursor.newInstance(getContext(), contactFilterCursor);
   }
 }

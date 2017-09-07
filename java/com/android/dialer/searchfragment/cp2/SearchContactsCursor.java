@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
+import android.provider.ContactsContract.Directory;
 import android.support.annotation.Nullable;
 import com.android.dialer.searchfragment.common.SearchCursor;
 
@@ -32,7 +33,7 @@ final class SearchContactsCursor extends MergeCursor implements SearchCursor {
 
   private final ContactFilterCursor contactFilterCursor;
 
-  public static SearchContactsCursor newInstnace(
+  static SearchContactsCursor newInstance(
       Context context, ContactFilterCursor contactFilterCursor) {
     MatrixCursor headerCursor = new MatrixCursor(HEADER_PROJECTION);
     headerCursor.addRow(new String[] {context.getString(R.string.all_contacts)});
@@ -53,6 +54,11 @@ final class SearchContactsCursor extends MergeCursor implements SearchCursor {
   public boolean updateQuery(@Nullable String query) {
     contactFilterCursor.filter(query);
     return true;
+  }
+
+  @Override
+  public long getDirectoryId() {
+    return Directory.DEFAULT;
   }
 
   @Override
