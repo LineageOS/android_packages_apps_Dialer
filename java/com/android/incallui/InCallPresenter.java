@@ -1682,18 +1682,23 @@ public class InCallPresenter implements CallList.Listener {
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (mLocalVideoSurfaceTexture == null) {
-      mLocalVideoSurfaceTexture =
-          VideoSurfaceBindings.createLocalVideoSurfaceTexture(
-              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
+      boolean isPixel2017 = false;
+      if (mContext != null) {
+        isPixel2017 = mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
+      }
+      mLocalVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture(isPixel2017);
     }
     return mLocalVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (mRemoteVideoSurfaceTexture == null) {
+      boolean isPixel2017 = false;
+      if (mContext != null) {
+        isPixel2017 = mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
+      }
       mRemoteVideoSurfaceTexture =
-          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(
-              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
+          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(isPixel2017);
     }
     return mRemoteVideoSurfaceTexture;
   }

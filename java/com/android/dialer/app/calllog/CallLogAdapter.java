@@ -70,6 +70,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -907,7 +908,7 @@ public class CallLogAdapter extends GroupingListAdapter
     final int transcriptionState =
         (VERSION.SDK_INT >= VERSION_CODES.O)
             ? cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE)
-            : PhoneCallDetailsHelper.TRANSCRIPTION_NOT_STARTED;
+            : VoicemailCompat.TRANSCRIPTION_NOT_STARTED;
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;

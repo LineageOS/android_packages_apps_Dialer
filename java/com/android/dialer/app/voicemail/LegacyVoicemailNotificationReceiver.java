@@ -55,6 +55,12 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+
+    if (!TelephonyManager.ACTION_SHOW_VOICEMAIL_NOTIFICATION.equals(intent.getAction())
+        && !VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL.equals(intent.getAction())) {
+      return;
+    }
+
     LogUtil.i(
         "LegacyVoicemailNotificationReceiver.onReceive", "received legacy voicemail notification");
     if (!BuildCompat.isAtLeastO()) {

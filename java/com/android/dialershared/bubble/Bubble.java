@@ -241,6 +241,7 @@ public class Bubble {
       viewHolder.getPrimaryButton().setScaleY(0);
     }
 
+    viewHolder.setChildClickable(true);
     visibility = Visibility.ENTERING;
     viewHolder
         .getPrimaryButton()
@@ -494,6 +495,9 @@ public class Bubble {
     if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
       return;
     }
+
+    // Make bubble non clickable to prevent further buggy actions
+    viewHolder.setChildClickable(false);
 
     if (textShowing) {
       hideAfterText = true;
@@ -820,6 +824,14 @@ public class Bubble {
                 }
               });
       moveHandler = new MoveHandler(primaryButton, Bubble.this);
+    }
+
+    private void setChildClickable(boolean clickable) {
+      firstButton.setClickable(clickable);
+      secondButton.setClickable(clickable);
+      thirdButton.setClickable(clickable);
+
+      primaryButton.setOnTouchListener(clickable ? moveHandler : null);
     }
 
     public ViewGroup getRoot() {
