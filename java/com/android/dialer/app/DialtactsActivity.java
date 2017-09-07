@@ -1410,7 +1410,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   private boolean phoneIsInUse() {
-    return TelecomUtil.isInCall(this);
+    return TelecomUtil.isInManagedCall(this);
   }
 
   private boolean canIntentBeHandled(Intent intent) {

@@ -516,7 +516,7 @@ public class VoicemailPlaybackPresenter
     mView.disableUiElements();
     mIsPrepared = false;
 
-    if (mContext != null && TelecomUtil.isInCall(mContext)) {
+    if (mContext != null && TelecomUtil.isInManagedCall(mContext)) {
       handleError(new IllegalStateException("Cannot play voicemail when call is in progress"));
       return;
     }
