@@ -23,6 +23,7 @@ import android.os.SystemClock;
 import android.support.annotation.CallSuper;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.proguard.UsedByReflection;
@@ -38,7 +39,8 @@ import java.util.List;
 @UsedByReflection(value = "Tasks.java")
 public abstract class BaseTask implements Task {
 
-  private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
+  @VisibleForTesting
+  public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
 
   private static final String EXTRA_EXECUTION_TIME = "extra_execution_time";
 

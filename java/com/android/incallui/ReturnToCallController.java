@@ -94,7 +94,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     if (showing) {
       hide();
     } else {
-      if (TelecomUtil.isInCall(context)) {
+      if (TelecomUtil.isInManagedCall(context)) {
         show();
       }
     }
@@ -175,7 +175,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     }
     if (bubble != null
         && bubble.isVisible()
-        && (!TelecomUtil.isInCall(context)
+        && (!TelecomUtil.isInManagedCall(context)
             || CallList.getInstance().getActiveOrBackgroundCall() != null)) {
       bubble.showText(context.getText(R.string.incall_call_ended));
     }

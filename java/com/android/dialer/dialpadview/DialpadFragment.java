@@ -1278,7 +1278,7 @@ public class DialpadFragment extends Fragment
    *     or ringing or dialing, or on hold).
    */
   private boolean isPhoneInUse() {
-    return getContext() != null && TelecomUtil.isInCall(getContext());
+    return getContext() != null && TelecomUtil.isInManagedCall(getContext());
   }
 
   /** @return true if the phone is a CDMA phone type */

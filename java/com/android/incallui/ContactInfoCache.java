@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
+import android.os.Trace;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
@@ -123,8 +124,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   private ContactInfoCache(Context context) {
+    Trace.beginSection("ContactInfoCache constructor");
     mContext = context;
     mPhoneNumberService = Bindings.get(context).newPhoneNumberService(context);
+    Trace.endSection();
   }
 
   public static synchronized ContactInfoCache getInstance(Context mContext) {
@@ -343,6 +346,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       @NonNull final DialerCall call,
       final boolean isIncoming,
       @NonNull ContactInfoCacheCallback callback) {
+    Trace.beginSection("ContactInfoCache.findInfo");
     Assert.isMainThread();
     Objects.requireNonNull(callback);
 
@@ -364,6 +368,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       callback.onContactInfoComplete(callId, cacheEntry);
       // If no other callbacks are in flight, we're done.
       if (callBacks == null) {
+        Trace.endSection();
         return;
       }
     }
@@ -374,6 +379,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       callBacks.add(callback);
       if (!forceQuery) {
         Log.d(TAG, "No need to query again, just return and wait for existing query to finish");
+        Trace.endSection();
         return;
       }
     } else {
@@ -412,6 +418,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
               callId, call.getNumberPresentation(), callerInfo, false, queryToken);
       sendInfoNotifications(callId, initialCacheEntry);
     }
+    Trace.endSection();
   }
 
   @AnyThread
@@ -421,6 +428,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       CallerInfo callerInfo,
       boolean didLocalLookup,
       CallerInfoQueryToken queryToken) {
+    Trace.beginSection("ContactInfoCache.updateCallerInfoInCacheOnAnyThread");
     Log.d(
         TAG,
         "updateCallerInfoInCacheOnAnyThread: callId = "
@@ -488,6 +496,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       Log.d(TAG, "put entry into map if not exists: " + cacheEntry);
       mInfoMap.putIfAbsent(callId, cacheEntry);
     }
+    Trace.endSection();
     return cacheEntry;
   }
 
@@ -644,6 +653,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   /** Sends the updated information to call the callbacks for the entry. */
   @MainThread
   private void sendInfoNotifications(String callId, ContactCacheEntry entry) {
+    Trace.beginSection("ContactInfoCache.sendInfoNotifications");
     Assert.isMainThread();
     final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
     if (callBacks != null) {
@@ -651,10 +661,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         callBack.onContactInfoComplete(callId, entry);
       }
     }
+    Trace.endSection();
   }
 
   @MainThread
   private void sendImageNotifications(String callId, ContactCacheEntry entry) {
+    Trace.beginSection("ContactInfoCache.sendImageNotifications");
     Assert.isMainThread();
     final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
     if (callBacks != null && entry.photo != null) {
@@ -662,6 +674,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         callBack.onImageLoadComplete(callId, entry);
       }
     }
+    Trace.endSection();
   }
 
   private void clearCallbacks(String callId) {
