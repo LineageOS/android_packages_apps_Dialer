@@ -88,7 +88,7 @@ final class SimulatorSpamCallCreator implements SimulatorConnectionService.Liste
     extras.putInt(EXTRA_CALL_COUNT, callCount - 1);
     extras.putBoolean(EXTRA_IS_SPAM_CALL_CONNECTION, true);
 
-    // We need to clear the call log because spam notifiations are only shown for new calls.
+    // We need to clear the call log because spam notifications are only shown for new calls.
     clearCallLog(context);
 
     SimulatorConnectionService.addNewIncomingCall(context, extras, callerId);

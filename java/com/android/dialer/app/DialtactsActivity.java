@@ -419,6 +419,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mSearchView = searchEditTextLayout.findViewById(R.id.search_view);
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
+    mSearchView.setHint(getSearchBoxHint());
     mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
     searchEditTextLayout
         .findViewById(R.id.search_box_collapsed)
