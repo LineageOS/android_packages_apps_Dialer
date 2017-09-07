@@ -29,6 +29,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Trace;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
@@ -657,6 +658,7 @@ public class AnswerFragment extends Fragment
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    Trace.beginSection("AnswerFragment.onCreateView");
     Bundle arguments = getArguments();
     Assert.checkState(arguments.containsKey(ARG_CALL_ID));
     Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_CALL));
@@ -729,6 +731,7 @@ public class AnswerFragment extends Fragment
       }
     }
 
+    Trace.endSection();
     return view;
   }
 
