@@ -17,13 +17,14 @@
 package com.android.dialer.searchfragment.nearbyplaces;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import com.android.contacts.common.util.Constants;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -31,6 +32,7 @@ import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
+import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.telecom.TelecomUtil;
 
 /** ViewHolder for a nearby place row. */
@@ -57,14 +59,13 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
    * Binds the ViewHolder with a cursor from {@link NearbyPlacesCursorLoader} with the data found at
    * the cursors set position.
    */
-  public void bind(Cursor cursor, String query) {
+  public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
     String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
     String address = cursor.getString(Projections.PHONE_LABEL);
 
     placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
     placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address));
-
     String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
@@ -73,13 +74,21 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
             cursor.getLong(Projections.PHONE_PHOTO_ID),
             photoUri == null ? null : Uri.parse(photoUri),
             name,
-            LetterTileDrawable.TYPE_DEFAULT);
+            LetterTileDrawable.TYPE_BUSINESS);
   }
 
-  private static Uri getContactUri(Cursor cursor) {
-    long contactId = cursor.getLong(Projections.PHONE_ID);
-    String lookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
-    return ContactsContract.Contacts.getLookupUri(contactId, lookupKey);
+  private static Uri getContactUri(SearchCursor cursor) {
+    // Since the lookup key for Nearby Places is actually a JSON representation of the information,
+    // we need to pass it in as an encoded fragment in our contact uri.
+    // It includes information like display name, photo uri, phone number, ect.
+    String businessInfoJson = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    return Contacts.CONTENT_LOOKUP_URI
+        .buildUpon()
+        .appendPath(Constants.LOOKUP_URI_ENCODED)
+        .appendQueryParameter(
+            ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(cursor.getDirectoryId()))
+        .encodedFragment(businessInfoJson)
+        .build();
   }
 
   @Override

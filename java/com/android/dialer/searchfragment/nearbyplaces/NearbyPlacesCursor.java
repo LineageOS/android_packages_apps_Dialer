@@ -27,16 +27,23 @@ import com.android.dialer.searchfragment.common.SearchCursor;
 final class NearbyPlacesCursor extends MergeCursor implements SearchCursor {
 
   private final Cursor nearbyPlacesCursor;
+  private final long directoryId;
 
-  public static NearbyPlacesCursor newInstnace(Context context, Cursor nearbyPlacesCursor) {
+  /**
+   * @param directoryId unique directory id that doesn't collide with other remote/local
+   *     directories. directoryIds are needed to load the correct quick contact card.
+   */
+  static NearbyPlacesCursor newInstance(
+      Context context, Cursor nearbyPlacesCursor, long directoryId) {
     MatrixCursor headerCursor = new MatrixCursor(HEADER_PROJECTION);
     headerCursor.addRow(new String[] {context.getString(R.string.nearby_places)});
-    return new NearbyPlacesCursor(new Cursor[] {headerCursor, nearbyPlacesCursor});
+    return new NearbyPlacesCursor(new Cursor[] {headerCursor, nearbyPlacesCursor}, directoryId);
   }
 
-  private NearbyPlacesCursor(Cursor[] cursors) {
+  private NearbyPlacesCursor(Cursor[] cursors, long directoryId) {
     super(cursors);
     nearbyPlacesCursor = cursors[1];
+    this.directoryId = directoryId;
   }
 
   @Override
@@ -60,5 +67,10 @@ final class NearbyPlacesCursor extends MergeCursor implements SearchCursor {
 
     int count = nearbyPlacesCursor.getCount();
     return count == 0 ? 0 : count + 1;
+  }
+
+  @Override
+  public long getDirectoryId() {
+    return directoryId;
   }
 }

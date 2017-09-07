@@ -26,6 +26,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,6 +40,16 @@ import java.util.List;
  */
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 public final class RemoteContactsCursor extends MergeCursor implements SearchCursor {
+
+  /**
+   * {@link SearchCursor#HEADER_PROJECTION} with {@link #COLUMN_DIRECTORY_ID} appended on the end.
+   *
+   * <p>This is needed to get the directoryId associated with each contact. directoryIds are needed
+   * to load the correct quick contact card.
+   */
+  private static final String[] PROJECTION = buildProjection();
+
+  private static final String COLUMN_DIRECTORY_ID = "directory_id";
 
   /**
    * Returns a single cursor with headers inserted between each non-empty cursor. If all cursors are
@@ -78,22 +89,43 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
         continue;
       }
 
-      cursorList.add(createHeaderCursor(context, directory.getDisplayName()));
+      cursorList.add(createHeaderCursor(context, directory.getDisplayName(), directory.getId()));
       cursorList.add(cursor);
     }
     return cursorList.toArray(new Cursor[cursorList.size()]);
   }
 
-  private static MatrixCursor createHeaderCursor(Context context, String name) {
-    MatrixCursor headerCursor = new MatrixCursor(HEADER_PROJECTION, 1);
-    headerCursor.addRow(new String[] {context.getString(R.string.directory, name)});
+  private static MatrixCursor createHeaderCursor(Context context, String name, int id) {
+    MatrixCursor headerCursor = new MatrixCursor(PROJECTION, 1);
+    headerCursor.addRow(new Object[] {context.getString(R.string.directory, name), id});
     return headerCursor;
+  }
+
+  private static String[] buildProjection() {
+    String[] projection = Arrays.copyOf(HEADER_PROJECTION, HEADER_PROJECTION.length + 1);
+    projection[projection.length - 1] = COLUMN_DIRECTORY_ID;
+    return projection;
   }
 
   /** Returns true if the current position is a header row. */
   @Override
   public boolean isHeader() {
     return !isClosed() && getColumnIndex(HEADER_PROJECTION[HEADER_TEXT_POSITION]) != -1;
+  }
+
+  @Override
+  public long getDirectoryId() {
+    int position = getPosition();
+    // proceed backwards until we reach the header row, which contains the directory ID.
+    while (moveToPrevious()) {
+      int id = getInt(getColumnIndex(COLUMN_DIRECTORY_ID));
+      if (id != -1) {
+        // return the cursor to it's original position/state
+        moveToPosition(position);
+        return id;
+      }
+    }
+    throw Assert.createIllegalStateFailException("No directory id for contact at: " + position);
   }
 
   @Override
