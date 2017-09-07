@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Pair;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.voicemail.impl.VvmLog;
@@ -124,24 +125,29 @@ public abstract class TranscriptionTask implements Runnable {
     } else {
       VvmLog.i(TAG, "transcribeVoicemail, transcription unsuccessful, " + status);
       switch (status) {
+        case FAILED_NO_SPEECH_DETECTED:
+          updateTranscriptionAndState(
+              transcript, VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED);
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_NO_SPEECH_DETECTED);
+          break;
         case FAILED_LANGUAGE_NOT_SUPPORTED:
+          updateTranscriptionAndState(
+              transcript, VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED);
           Logger.get(context)
               .logImpression(
                   DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_LANGUAGE_NOT_SUPPORTED);
           break;
-        case FAILED_NO_SPEECH_DETECTED:
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_NO_SPEECH_DETECTED);
-          break;
         case EXPIRED:
+          updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_FAILED);
           Logger.get(context)
               .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EXPIRED);
           break;
         default:
+          updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_FAILED);
           Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EMPTY);
           break;
       }
-      updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_FAILED);
     }
   }
 
