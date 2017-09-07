@@ -40,6 +40,7 @@ import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
 import com.android.dialer.searchfragment.remote.RemoteContactViewHolder;
 import com.android.dialer.util.DialerUtils;
+import java.util.List;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
@@ -75,6 +76,9 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
       case RowType.DIRECTORY_ROW:
         return new RemoteContactViewHolder(
             LayoutInflater.from(activity).inflate(R.layout.search_contact_row, root, false));
+      case RowType.SEARCH_ACTION:
+        return new SearchActionViewHolder(
+            LayoutInflater.from(activity).inflate(R.layout.search_action_layout, root, false));
       case RowType.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid RowType: " + rowType);
@@ -98,6 +102,9 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
       String header =
           searchCursorManager.getCursor(position).getString(SearchCursor.HEADER_TEXT_POSITION);
       ((HeaderViewHolder) holder).setHeader(header);
+    } else if (holder instanceof SearchActionViewHolder) {
+      ((SearchActionViewHolder) holder)
+          .setAction(searchCursorManager.getSearchAction(position), position, query);
     } else {
       throw Assert.createIllegalStateFailException("Invalid ViewHolder: " + holder);
     }
@@ -120,6 +127,13 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   public void setQuery(String query) {
     this.query = query;
     if (searchCursorManager.setQuery(query)) {
+      notifyDataSetChanged();
+    }
+  }
+
+  /** Sets the actions to be shown at the bottom of the search results. */
+  void setSearchActions(List<Integer> actions) {
+    if (searchCursorManager.setSearchActions(actions)) {
       notifyDataSetChanged();
     }
   }

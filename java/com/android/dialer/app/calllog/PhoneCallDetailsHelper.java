@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -44,13 +45,6 @@ public class PhoneCallDetailsHelper {
 
   /** The maximum number of icons will be shown to represent the call types in a group. */
   private static final int MAX_CALL_TYPE_ICONS = 3;
-
-  // TODO(mdooley): remove when these api's become public
-  // Copied from android.provider.VoicemailContract
-  static final int TRANSCRIPTION_NOT_STARTED = 0;
-  static final int TRANSCRIPTION_IN_PROGRESS = 1;
-  static final int TRANSCRIPTION_FAILED = 2;
-  static final int TRANSCRIPTION_AVAILABLE = 3;
 
   private final Context mContext;
   private final Resources mResources;
@@ -159,12 +153,13 @@ public class PhoneCallDetailsHelper {
         // Set the branding text if the voicemail was transcribed by google
         // TODO(mdooley): the transcription state is only set by the google transcription code,
         // but a better solution would be to check the SOURCE_PACKAGE
-        showTranscriptBranding = details.transcriptionState == TRANSCRIPTION_AVAILABLE;
+        showTranscriptBranding =
+            details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE;
       } else {
-        if (details.transcriptionState == TRANSCRIPTION_IN_PROGRESS) {
+        if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_IN_PROGRESS) {
           views.voicemailTranscriptionView.setText(
               mResources.getString(R.string.voicemail_transcription_in_progress));
-        } else if (details.transcriptionState == TRANSCRIPTION_FAILED) {
+        } else if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_FAILED) {
           views.voicemailTranscriptionView.setText(
               mResources.getString(R.string.voicemail_transcription_failed));
         }
