@@ -120,7 +120,6 @@ public final class NewSearchFragment extends Fragment
 
   private void initLoaders() {
     getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
-    loadNearbyPlacesCursor();
     loadRemoteDirectoriesCursor();
   }
 
@@ -129,7 +128,14 @@ public final class NewSearchFragment extends Fragment
     if (id == CONTACTS_LOADER_ID) {
       return new SearchContactsCursorLoader(getContext(), query);
     } else if (id == NEARBY_PLACES_LOADER_ID) {
-      return new NearbyPlacesCursorLoader(getContext(), query);
+      // Directories represent contact data sources on the device, but since nearby places aren't
+      // stored on the device, they don't have a directory ID. We pass the list of all existing IDs
+      // so that we can find one that doesn't collide.
+      List<Integer> directoryIds = new ArrayList<>();
+      for (Directory directory : directories) {
+        directoryIds.add(directory.getId());
+      }
+      return new NearbyPlacesCursorLoader(getContext(), query, directoryIds);
     } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
       return new RemoteDirectoriesCursorLoader(getContext());
     } else if (id == REMOTE_CONTACTS_LOADER_ID) {
@@ -162,6 +168,7 @@ public final class NewSearchFragment extends Fragment
       while (cursor.moveToNext()) {
         directories.add(RemoteDirectoriesCursorLoader.readDirectory(cursor));
       }
+      loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
 
     } else {
@@ -212,18 +219,6 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
   }
 
-  private void loadNearbyPlacesCursor() {
-    // Cancel existing load if one exists.
-    ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
-
-    // If nearby places is not enabled, do not try to load them.
-    if (!PhoneDirectoryExtenderAccessor.get(getContext()).isEnabled(getContext())) {
-      return;
-    }
-    ThreadUtil.getUiThreadHandler()
-        .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
-  }
-
   @Override
   public void onRequestPermissionsResult(
       int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -250,12 +245,14 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
+  // Loads remote directories.
   private void loadRemoteDirectoriesCursor() {
     if (!remoteDirectoriesDisabledForTesting) {
       getLoaderManager().initLoader(REMOTE_DIRECTORIES_LOADER_ID, null, this);
     }
   }
 
+  // Should not be called before remote directories have finished loading.
   private void loadRemoteContactsCursors() {
     if (remoteDirectoriesDisabledForTesting) {
       return;
@@ -265,6 +262,19 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  // Should not be called before remote directories (not contacts) have finished loading.
+  private void loadNearbyPlacesCursor() {
+    // Cancel existing load if one exists.
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
+
+    // If nearby places is not enabled, do not try to load them.
+    if (!PhoneDirectoryExtenderAccessor.get(getContext()).isEnabled(getContext())) {
+      return;
+    }
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
   @Override
