@@ -136,6 +136,10 @@ public class CallLogNotificationsQueryHelper {
     return new DefaultNewCallsQuery(context.getApplicationContext(), contentResolver);
   }
 
+  NewCallsQuery getNewCallsQuery() {
+    return mNewCallsQuery;
+  }
+
   /**
    * Get all voicemails with the "new" flag set to 1.
    *
@@ -219,6 +223,10 @@ public class CallLogNotificationsQueryHelper {
     /** Returns the new calls of a certain type for which a notification should be generated. */
     @Nullable
     List<NewCall> query(int type);
+
+    /** Returns a {@link NewCall} pointed by the {@code callsUri} */
+    @Nullable
+    NewCall query(Uri callsUri);
   }
 
   /** Information about a new voicemail. */
@@ -343,6 +351,26 @@ public class CallLogNotificationsQueryHelper {
             "CallLogNotificationsQueryHelper.DefaultNewCallsQuery.query",
             "exception when querying Contacts Provider for calls lookup");
         return null;
+      }
+    }
+
+    @Nullable
+    @Override
+    public NewCall query(Uri callsUri) {
+      if (!PermissionsUtil.hasPermission(mContext, Manifest.permission.READ_CALL_LOG)) {
+        LogUtil.w(
+            "CallLogNotificationsQueryHelper.DefaultNewCallsQuery.query",
+            "No READ_CALL_LOG permission, returning null for calls lookup.");
+        return null;
+      }
+      try (Cursor cursor = mContentResolver.query(callsUri, PROJECTION, null, null, null)) {
+        if (cursor == null) {
+          return null;
+        }
+        if (!cursor.moveToFirst()) {
+          return null;
+        }
+        return createNewCallsFromCursor(cursor);
       }
     }
 

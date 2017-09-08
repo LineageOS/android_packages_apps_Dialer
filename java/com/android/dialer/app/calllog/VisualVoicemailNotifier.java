@@ -54,9 +54,9 @@ final class VisualVoicemailNotifier {
   /** Prefix used to generate a unique tag for each voicemail notification. */
   private static final String NOTIFICATION_TAG_PREFIX = "VisualVoicemail_";
   /** Common ID for all voicemail notifications. */
-  private static final int NOTIFICATION_ID = 1;
+  static final int NOTIFICATION_ID = 1;
   /** Tag for the group summary notification. */
-  private static final String GROUP_SUMMARY_NOTIFICATION_TAG = "GroupSummary_VisualVoicemail";
+  static final String GROUP_SUMMARY_NOTIFICATION_TAG = "GroupSummary_VisualVoicemail";
   /**
    * Key used to associate all voicemail notifications and the summary as belonging to a single
    * group.
