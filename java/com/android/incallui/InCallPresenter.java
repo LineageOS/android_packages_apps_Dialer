@@ -769,14 +769,18 @@ public class InCallPresenter implements CallList.Listener {
         "InCallPresenter.onIncomingCall", "Phone switching state: " + oldState + " -> " + newState);
     mInCallState = newState;
 
+    Trace.beginSection("listener.onIncomingCall");
     for (IncomingCallListener listener : mIncomingCallListeners) {
       listener.onIncomingCall(oldState, mInCallState, call);
     }
+    Trace.endSection();
 
+    Trace.beginSection("onPrimaryCallStateChanged");
     if (mInCallActivity != null) {
       // Re-evaluate which fragment is being shown.
       mInCallActivity.onPrimaryCallStateChanged();
     }
+    Trace.endSection();
     Trace.endSection();
   }
 
@@ -1278,6 +1282,7 @@ public class InCallPresenter implements CallList.Listener {
    * UI needs to be started or finished depending on the new state and does it.
    */
   private InCallState startOrFinishUi(InCallState newState) {
+    Trace.beginSection("InCallPresenter.startOrFinishUi");
     LogUtil.d(
         "InCallPresenter.startOrFinishUi", "startOrFinishUi: " + mInCallState + " -> " + newState);
 
@@ -1286,6 +1291,7 @@ public class InCallPresenter implements CallList.Listener {
     // If the state isn't changing we have already done any starting/stopping of activities in
     // a previous pass...so lets cut out early
     if (newState == mInCallState) {
+      Trace.endSection();
       return newState;
     }
 
@@ -1364,6 +1370,7 @@ public class InCallPresenter implements CallList.Listener {
       LogUtil.i(
           "InCallPresenter.startOrFinishUi",
           "Undo the state change: " + newState + " -> " + mInCallState);
+      Trace.endSection();
       return mInCallState;
     }
 
@@ -1390,6 +1397,7 @@ public class InCallPresenter implements CallList.Listener {
       attemptCleanup();
     }
 
+    Trace.endSection();
     return newState;
   }
 
@@ -1674,18 +1682,23 @@ public class InCallPresenter implements CallList.Listener {
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (mLocalVideoSurfaceTexture == null) {
-      mLocalVideoSurfaceTexture =
-          VideoSurfaceBindings.createLocalVideoSurfaceTexture(
-              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
+      boolean isPixel2017 = false;
+      if (mContext != null) {
+        isPixel2017 = mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
+      }
+      mLocalVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture(isPixel2017);
     }
     return mLocalVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (mRemoteVideoSurfaceTexture == null) {
+      boolean isPixel2017 = false;
+      if (mContext != null) {
+        isPixel2017 = mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
+      }
       mRemoteVideoSurfaceTexture =
-          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(
-              mContext.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE));
+          VideoSurfaceBindings.createRemoteVideoSurfaceTexture(isPixel2017);
     }
     return mRemoteVideoSurfaceTexture;
   }

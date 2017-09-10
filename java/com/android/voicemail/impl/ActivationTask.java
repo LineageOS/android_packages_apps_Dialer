@@ -23,6 +23,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
@@ -63,6 +64,8 @@ public class ActivationTask extends BaseTask {
   private static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
 
   private final RetryPolicy mRetryPolicy;
+
+  @Nullable private OmtpVvmCarrierConfigHelper configForTest;
 
   private Bundle mMessageData;
 
@@ -132,16 +135,24 @@ public class ActivationTask extends BaseTask {
 
     PreOMigrationHandler.migrate(getContext(), phoneAccountHandle);
 
-    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
-      VvmLog.i(TAG, "VVM is disabled");
-      return;
+    OmtpVvmCarrierConfigHelper helper;
+    if (configForTest != null) {
+      helper = configForTest;
+    } else {
+      helper = new OmtpVvmCarrierConfigHelper(getContext(), phoneAccountHandle);
     }
-
-    OmtpVvmCarrierConfigHelper helper =
-        new OmtpVvmCarrierConfigHelper(getContext(), phoneAccountHandle);
     if (!helper.isValid()) {
       VvmLog.i(TAG, "VVM not supported on phoneAccountHandle " + phoneAccountHandle);
       VvmAccountManager.removeAccount(getContext(), phoneAccountHandle);
+      return;
+    }
+
+    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
+      if (helper.isLegacyModeEnabled()) {
+        VvmLog.i(TAG, "Setting up filter for legacy mode");
+        helper.activateSmsFilter();
+      }
+      VvmLog.i(TAG, "VVM is disabled");
       return;
     }
 
@@ -277,5 +288,10 @@ public class ActivationTask extends BaseTask {
             .getSystemService(TelephonyManager.class)
             .createForPhoneAccountHandle(phoneAccountHandle);
     return telephonyManager.getServiceState().getState() == ServiceState.STATE_IN_SERVICE;
+  }
+
+  @VisibleForTesting
+  void setConfigForTest(OmtpVvmCarrierConfigHelper config) {
+    configForTest = config;
   }
 }

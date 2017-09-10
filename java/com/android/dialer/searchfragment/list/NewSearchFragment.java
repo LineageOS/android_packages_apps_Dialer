@@ -28,10 +28,13 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
@@ -42,16 +45,19 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
+import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /** Fragment used for searching contacts. */
@@ -97,6 +103,7 @@ public final class NewSearchFragment extends Fragment
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
     adapter.setCallInitiationType(callInitiationType);
+    adapter.setSearchActions(getActions());
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -120,7 +127,6 @@ public final class NewSearchFragment extends Fragment
 
   private void initLoaders() {
     getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
-    loadNearbyPlacesCursor();
     loadRemoteDirectoriesCursor();
   }
 
@@ -129,7 +135,14 @@ public final class NewSearchFragment extends Fragment
     if (id == CONTACTS_LOADER_ID) {
       return new SearchContactsCursorLoader(getContext(), query);
     } else if (id == NEARBY_PLACES_LOADER_ID) {
-      return new NearbyPlacesCursorLoader(getContext(), query);
+      // Directories represent contact data sources on the device, but since nearby places aren't
+      // stored on the device, they don't have a directory ID. We pass the list of all existing IDs
+      // so that we can find one that doesn't collide.
+      List<Integer> directoryIds = new ArrayList<>();
+      for (Directory directory : directories) {
+        directoryIds.add(directory.getId());
+      }
+      return new NearbyPlacesCursorLoader(getContext(), query, directoryIds);
     } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
       return new RemoteDirectoriesCursorLoader(getContext());
     } else if (id == REMOTE_CONTACTS_LOADER_ID) {
@@ -162,6 +175,7 @@ public final class NewSearchFragment extends Fragment
       while (cursor.moveToNext()) {
         directories.add(RemoteDirectoriesCursorLoader.readDirectory(cursor));
       }
+      loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
 
     } else {
@@ -175,22 +189,19 @@ public final class NewSearchFragment extends Fragment
     recyclerView.setAdapter(null);
   }
 
-  public void setQuery(String query) {
+  public void setQuery(String query, CallInitiationType.Type callInitiationType) {
     this.query = query;
+    this.callInitiationType = callInitiationType;
     if (adapter != null) {
       adapter.setQuery(query);
+      adapter.setCallInitiationType(callInitiationType);
+      adapter.setSearchActions(getActions());
       loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
     }
   }
 
-  public void setCallInitiationType(CallInitiationType.Type callInitiationType) {
-    this.callInitiationType = callInitiationType;
-    if (adapter != null) {
-      adapter.setCallInitiationType(callInitiationType);
-    }
-  }
-
+  /** Translate the search fragment and resize it to fit on the screen. */
   public void animatePosition(int start, int end, int duration) {
     // Called before the view is ready, prepare a runnable to run in onCreateView
     if (getView() == null) {
@@ -199,9 +210,28 @@ public final class NewSearchFragment extends Fragment
     }
     boolean slideUp = start > end;
     Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT;
+    int startHeight = getView().getHeight();
+    int endHeight = startHeight - (end - start);
     getView().setTranslationY(start);
-    getView().animate().translationY(end).setInterpolator(interpolator).setDuration(duration);
+    getView()
+        .animate()
+        .translationY(end)
+        .setInterpolator(interpolator)
+        .setDuration(duration)
+        .setUpdateListener(
+            animation -> setHeight(startHeight, endHeight, animation.getAnimatedFraction()));
     updatePositionRunnable = null;
+  }
+
+  private void setHeight(int start, int end, float percentage) {
+    View view = getView();
+    if (view == null) {
+      return;
+    }
+
+    FrameLayout.LayoutParams params = (LayoutParams) view.getLayoutParams();
+    params.height = (int) (start + (end - start) * percentage);
+    view.setLayoutParams(params);
   }
 
   @Override
@@ -210,18 +240,6 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
-  }
-
-  private void loadNearbyPlacesCursor() {
-    // Cancel existing load if one exists.
-    ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
-
-    // If nearby places is not enabled, do not try to load them.
-    if (!PhoneDirectoryExtenderAccessor.get(getContext()).isEnabled(getContext())) {
-      return;
-    }
-    ThreadUtil.getUiThreadHandler()
-        .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
   @Override
@@ -250,12 +268,14 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
+  // Loads remote directories.
   private void loadRemoteDirectoriesCursor() {
     if (!remoteDirectoriesDisabledForTesting) {
       getLoaderManager().initLoader(REMOTE_DIRECTORIES_LOADER_ID, null, this);
     }
   }
 
+  // Should not be called before remote directories have finished loading.
   private void loadRemoteContactsCursors() {
     if (remoteDirectoriesDisabledForTesting) {
       return;
@@ -265,6 +285,19 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  // Should not be called before remote directories (not contacts) have finished loading.
+  private void loadNearbyPlacesCursor() {
+    // Cancel existing load if one exists.
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
+
+    // If nearby places is not enabled, do not try to load them.
+    if (!PhoneDirectoryExtenderAccessor.get(getContext()).isEnabled(getContext())) {
+      return;
+    }
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
   @Override
@@ -296,5 +329,28 @@ public final class NewSearchFragment extends Fragment
   @VisibleForTesting
   public void setRemoteDirectoriesDisabled(boolean disabled) {
     remoteDirectoriesDisabledForTesting = disabled;
+  }
+
+  /**
+   * Returns a list of search actions to be shown in the search results.
+   *
+   * <p>List will be empty if query is 1 or 0 characters or the query isn't from the Dialpad. For
+   * the list of supported actions, see {@link SearchActionViewHolder.Action}.
+   */
+  private List<Integer> getActions() {
+    if (TextUtils.isEmpty(query)
+        || query.length() == 1
+        || callInitiationType == CallInitiationType.Type.REGULAR_SEARCH) {
+      return Collections.emptyList();
+    }
+
+    List<Integer> actions = new ArrayList<>();
+    actions.add(Action.CREATE_NEW_CONTACT);
+    actions.add(Action.ADD_TO_CONTACT);
+    actions.add(Action.SEND_SMS);
+    if (CallUtil.isVideoEnabled(getContext())) {
+      actions.add(Action.MAKE_VILTE_CALL);
+    }
+    return actions;
   }
 }

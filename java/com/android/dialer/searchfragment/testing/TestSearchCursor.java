@@ -44,4 +44,9 @@ public final class TestSearchCursor extends MergeCursor implements SearchCursor 
   public boolean updateQuery(@Nullable String query) {
     return false;
   }
+
+  @Override
+  public long getDirectoryId() {
+    return 0;
+  }
 }

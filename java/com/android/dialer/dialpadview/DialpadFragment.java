@@ -317,6 +317,7 @@ public class DialpadFragment extends Fragment
   @Override
   public void onCreate(Bundle state) {
     Trace.beginSection(TAG + " onCreate");
+    LogUtil.enterBlock("DialpadFragment.onCreate");
     super.onCreate(state);
 
     mFirstLaunch = state == null;
@@ -352,6 +353,7 @@ public class DialpadFragment extends Fragment
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
     Trace.beginSection(TAG + " onCreateView");
+    LogUtil.enterBlock("DialpadFragment.onCreateView");
     Trace.beginSection(TAG + " inflate view");
     View fragmentView = inflater.inflate(R.layout.dialpad_fragment, container, false);
     Trace.endSection();
@@ -393,6 +395,7 @@ public class DialpadFragment extends Fragment
             (v, event) -> {
               if (isDigitsEmpty()) {
                 if (getActivity() != null) {
+                  LogUtil.i("DialpadFragment.onCreateView", "dialpad spacer touched");
                   return ((HostInterface) getActivity()).onDialpadSpacerTouchWithEmptyQuery();
                 }
                 return true;
@@ -486,11 +489,15 @@ public class DialpadFragment extends Fragment
    * screen to enter "Add Call" mode, this method will show correct UI for the mode.
    */
   private void configureScreenFromIntent(Activity parent) {
+    LogUtil.enterBlock("DialpadFragment.configureScreenFromIntent");
+
     // If we were not invoked with a DIAL intent
     if (!Intent.ACTION_DIAL.equals(parent.getIntent().getAction())) {
       setStartedFromNewIntent(false);
       return;
     }
+
+    LogUtil.i("DialpadFragment.configureScreenFromIntent", "dial intent");
 
     // See if we were invoked with a DIAL intent. If we were, fill in the appropriate
     // digits in the dialer field.
@@ -521,6 +528,7 @@ public class DialpadFragment extends Fragment
       if (!(mStartedFromNewIntent && digitsFilled)) {
 
         final String action = intent.getAction();
+        LogUtil.i("DialpadFragment.configureScreenFromIntent", "action: %s", action);
         if (Intent.ACTION_DIAL.equals(action)
             || Intent.ACTION_VIEW.equals(action)
             || Intent.ACTION_MAIN.equals(action)) {
@@ -532,6 +540,10 @@ public class DialpadFragment extends Fragment
         }
       }
     }
+    LogUtil.i(
+        "DialpadFragment.configureScreenFromIntent",
+        "needToShowDialpadChooser? %b",
+        needToShowDialpadChooser);
     showDialpadChooser(needToShowDialpadChooser);
     setStartedFromNewIntent(false);
   }
@@ -595,7 +607,7 @@ public class DialpadFragment extends Fragment
 
   @Override
   public void onStart() {
-    LogUtil.d("DialpadFragment.onStart", "first launch: %b", mFirstLaunch);
+    LogUtil.i("DialpadFragment.onStart", "first launch: %b", mFirstLaunch);
     Trace.beginSection(TAG + " onStart");
     super.onStart();
     // if the mToneGenerator creation fails, just continue without it.  It is
@@ -622,7 +634,7 @@ public class DialpadFragment extends Fragment
 
   @Override
   public void onResume() {
-    LogUtil.d("DialpadFragment.onResume", "");
+    LogUtil.enterBlock("DialpadFragment.onResume");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
@@ -662,6 +674,7 @@ public class DialpadFragment extends Fragment
     stopWatch.lap("fdin");
 
     if (!isPhoneInUse()) {
+      LogUtil.i("DialpadFragment.onResume", "phone not in use");
       // A sanity-check: the "dialpad chooser" UI should not be visible if the phone is idle.
       showDialpadChooser(false);
     }
@@ -711,6 +724,7 @@ public class DialpadFragment extends Fragment
 
   @Override
   public void onStop() {
+    LogUtil.enterBlock("DialpadFragment.onStop");
     super.onStop();
 
     synchronized (mToneGeneratorLock) {
@@ -987,11 +1001,12 @@ public class DialpadFragment extends Fragment
     DialerUtils.startActivityWithErrorToast(
         getActivity(),
         new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.DIALPAD).build());
-    hideAndClearDialpad(false);
+    hideAndClearDialpad();
   }
 
-  private void hideAndClearDialpad(boolean animate) {
-    FragmentUtils.getParentUnsafe(this, DialpadListener.class).hideDialpadFragment(animate, true);
+  private void hideAndClearDialpad() {
+    LogUtil.enterBlock("DialpadFragment.hideAndClearDialpad");
+    FragmentUtils.getParentUnsafe(this, DialpadListener.class).onCallPlacedFromDialpad();
   }
 
   /**
@@ -1038,7 +1053,7 @@ public class DialpadFragment extends Fragment
         final Intent intent =
             new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD).build();
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-        hideAndClearDialpad(false);
+        hideAndClearDialpad();
       }
     }
   }
@@ -1194,8 +1209,10 @@ public class DialpadFragment extends Fragment
     } else {
       LogUtil.i("DialpadFragment.showDialpadChooser", "Displaying normal Dialer UI.");
       if (mDialpadView != null) {
+        LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView not null");
         mDialpadView.setVisibility(View.VISIBLE);
       } else {
+        LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView null");
         mDigits.setVisibility(View.VISIBLE);
       }
 
@@ -1261,7 +1278,7 @@ public class DialpadFragment extends Fragment
    *     or ringing or dialing, or on hold).
    */
   private boolean isPhoneInUse() {
-    return getContext() != null && TelecomUtil.isInCall(getContext());
+    return getContext() != null && TelecomUtil.isInManagedCall(getContext());
   }
 
   /** @return true if the phone is a CDMA phone type */
@@ -1280,7 +1297,7 @@ public class DialpadFragment extends Fragment
       return true;
     } else if (resId == R.id.menu_call_with_note) {
       CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
-      hideAndClearDialpad(false);
+      hideAndClearDialpad();
       return true;
     } else {
       return false;
@@ -1681,6 +1698,7 @@ public class DialpadFragment extends Fragment
         // one of the choices, which would be confusing.  (But at
         // least that's better than leaving the dialpad chooser
         // onscreen, but useless...)
+        LogUtil.i("CallStateReceiver.onReceive", "hiding dialpad chooser, state: %s", state);
         showDialpadChooser(false);
       }
     }
@@ -1692,7 +1710,7 @@ public class DialpadFragment extends Fragment
 
     void onDialpadShown();
 
-    void hideDialpadFragment(boolean animate, boolean value);
+    void onCallPlacedFromDialpad();
   }
 
   /** Callback for async lookup of the last number dialed. */

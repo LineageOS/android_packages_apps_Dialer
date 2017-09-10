@@ -16,7 +16,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   coreApp="true"
   package="com.google.android.google_stub_dialer"
-  android:versionCode="170000"
+  android:versionCode="180000"
   android:versionName="13.0">
 
   <uses-sdk

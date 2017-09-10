@@ -438,7 +438,7 @@ public class CallComposerActivity extends AppCompatActivity
     maybeShowPrivacyToast(data);
     if (data.hasImageData()
         && ConfigProviderBindings.get(this).getBoolean("enable_delayed_ec_images", true)
-        && !TelecomUtil.isInCall(this)) {
+        && !TelecomUtil.isInManagedCall(this)) {
       timeoutHandler.postDelayed(placeTelecomCallRunnable, getRCSTimeoutMillis());
       startActivity(
           CallPendingActivity.getIntent(

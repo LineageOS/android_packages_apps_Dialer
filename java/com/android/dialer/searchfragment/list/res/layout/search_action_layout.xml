@@ -14,18 +14,26 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="2dp">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp">
+
+  <ImageView
+      android:id="@+id/search_action_image"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:layout_marginStart="8dp"
+      android:layout_gravity="center_vertical"
+      android:padding="12dp"
+      android:tint="@color/dialer_theme_color"/>
 
   <TextView
-      android:id="@+id/header"
-      android:layout_width="wrap_content"
+      android:id="@+id/search_action_text"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginStart="72dp"
+      android:layout_marginEnd="16dp"
       android:layout_gravity="center_vertical"
-      style="@style/SecondaryText"/>
+      style="@style/PrimaryText"/>
 </FrameLayout>

@@ -40,6 +40,7 @@ import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Trace;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -236,6 +237,7 @@ public class StatusBarNotifier
 
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
   private void showNotification(final CallList callList, final DialerCall call) {
+    Trace.beginSection("StatusBarNotifier.showNotification");
     final boolean isIncoming =
         (call.getState() == DialerCall.State.INCOMING
             || call.getState() == DialerCall.State.CALL_WAITING);
@@ -269,20 +271,24 @@ public class StatusBarNotifier
             }
           }
         });
+    Trace.endSection();
   }
 
   /** Sets up the main Ui for the notification */
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
   private void buildAndSendNotification(
       CallList callList, DialerCall originalCall, ContactCacheEntry contactInfo) {
+    Trace.beginSection("StatusBarNotifier.buildAndSendNotification");
     // This can get called to update an existing notification after contact information has come
     // back. However, it can happen much later. Before we continue, we need to make sure that
     // the call being passed in is still the one we want to show in the notification.
     final DialerCall call = getCallToShow(callList);
     if (call == null || !call.getId().equals(originalCall.getId())) {
+      Trace.endSection();
       return;
     }
 
+    Trace.beginSection("prepare work");
     final int callState = call.getState();
 
     // Check if data has changed; if nothing is different, don't issue another notification.
@@ -314,6 +320,7 @@ public class StatusBarNotifier
     } else {
       notificationType = NOTIFICATION_IN_CALL;
     }
+    Trace.endSection(); // prepare work
 
     if (!checkForChangeAndSaveData(
         iconResId,
@@ -323,6 +330,7 @@ public class StatusBarNotifier
         callState,
         notificationType,
         contactInfo.contactRingtoneUri)) {
+      Trace.endSection();
       return;
     }
 
@@ -409,6 +417,7 @@ public class StatusBarNotifier
 
     addPersonReference(builder, contactInfo, call);
 
+    Trace.beginSection("fire notification");
     // Fire off the notification
     Notification notification = builder.build();
 
@@ -448,8 +457,10 @@ public class StatusBarNotifier
               memoryInfo.availMem),
           e);
     }
+    Trace.endSection();
     call.getLatencyReport().onNotificationShown();
     mCurrentNotification = notificationType;
+    Trace.endSection();
   }
 
   @Nullable

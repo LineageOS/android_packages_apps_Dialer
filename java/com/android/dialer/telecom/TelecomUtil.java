@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -140,7 +142,11 @@ public abstract class TelecomUtil {
     return new ArrayList<>();
   }
 
-  public static boolean isInCall(Context context) {
+  /**
+   * Returns true if there is a dialer managed call in progress. Self managed calls starting from O
+   * are not included.
+   */
+  public static boolean isInManagedCall(Context context) {
     return instance.isInCall(context);
   }
 
@@ -234,7 +240,19 @@ public abstract class TelecomUtil {
 
     public boolean isInCall(Context context) {
       if (hasReadPhoneStatePermission(context)) {
-        return getTelecomManager(context).isInCall();
+        // The TelecomManager#isInCall method returns true anytime the user is in a call.
+        // Starting in O, the APIs include support for self-managed ConnectionServices so that other
+        // apps like Duo can tell Telecom about its calls.  So, if the user is in a Duo call,
+        // isInCall would return true.
+        // Dialer uses this to determine whether to show the "return to call in progress" when
+        // Dialer is launched.
+        // Instead, Dialer should use TelecomManager#isInManagedCall, which only returns true if the
+        // device is in a managed call which Dialer would know about.
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+          return getTelecomManager(context).isInManagedCall();
+        } else {
+          return getTelecomManager(context).isInCall();
+        }
       }
       return false;
     }
