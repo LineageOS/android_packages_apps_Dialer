@@ -49,6 +49,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.DragEvent;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -168,7 +169,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String TAG = "DialtactsActivity";
   private static final String KEY_IN_REGULAR_SEARCH_UI = "in_regular_search_ui";
   private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
-  private static final String KEY_IN_NEW_SEARCH_UI = "in_new_search_ui";
   private static final String KEY_SEARCH_QUERY = "search_query";
   private static final String KEY_FIRST_LAUNCH = "first_launch";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
@@ -213,8 +213,6 @@ public class DialtactsActivity extends TransactionSafeActivity
    */
   private boolean mStateSaved;
 
-  private boolean mIsKeyboardOpen;
-  private boolean mInNewSearch;
   private boolean mIsRestarting;
   private boolean mInDialpadSearch;
   private boolean mInRegularSearch;
@@ -332,6 +330,27 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private int mActionBarHeight;
   private int mPreviouslySelectedTabIndex;
+  /** Handles the user closing the soft keyboard. */
+  private final View.OnKeyListener mSearchEditTextLayoutListener =
+      new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+          if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (TextUtils.isEmpty(mSearchView.getText().toString())) {
+              // If the search term is empty, close the search UI.
+              PerformanceReport.recordClick(UiAction.Type.CLOSE_SEARCH_WITH_HIDE_BUTTON);
+              maybeExitSearchUi();
+            } else {
+              // If the search term is not empty, show the dialpad fab.
+              if (!mFloatingActionButtonController.isVisible()) {
+                PerformanceReport.recordClick(UiAction.Type.HIDE_KEYBOARD_IN_SEARCH);
+              }
+              showFabInSearchUi();
+            }
+          }
+          return false;
+        }
+      };
 
   /**
    * The text returned from a voice search query. Set in {@link #onActivityResult} and used in
@@ -391,20 +410,30 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     SearchEditTextLayout searchEditTextLayout =
         actionBar.getCustomView().findViewById(R.id.search_view_container);
+    searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
     mActionBarController = new ActionBarController(this, searchEditTextLayout);
 
     mSearchView = searchEditTextLayout.findViewById(R.id.search_view);
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
     mSearchView.setHint(getSearchBoxHint());
-
     mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
     searchEditTextLayout
         .findViewById(R.id.search_box_collapsed)
         .setOnClickListener(mSearchViewOnClickListener);
-    searchEditTextLayout
-        .findViewById(R.id.search_back_button)
-        .setOnClickListener(v -> exitSearchUi());
+    searchEditTextLayout.setCallback(
+        new SearchEditTextLayout.Callback() {
+          @Override
+          public void onBackButtonClicked() {
+            onBackPressed();
+          }
+
+          @Override
+          public void onSearchViewClicked() {
+            // Hide FAB, as the keyboard is shown.
+            mFloatingActionButtonController.scaleOut();
+          }
+        });
 
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
@@ -431,7 +460,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
       mInRegularSearch = savedInstanceState.getBoolean(KEY_IN_REGULAR_SEARCH_UI);
       mInDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
-      mInNewSearch = savedInstanceState.getBoolean(KEY_IN_NEW_SEARCH_UI);
       mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
       mWasConfigurationChange = savedInstanceState.getBoolean(KEY_WAS_CONFIGURATION_CHANGE);
       mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
@@ -626,7 +654,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     outState.putString(KEY_SEARCH_QUERY, mSearchQuery);
     outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
     outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, mInDialpadSearch);
-    outState.putBoolean(KEY_IN_NEW_SEARCH_UI, mInNewSearch);
     outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
     outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
     outState.putBoolean(KEY_WAS_CONFIGURATION_CHANGE, isChangingConfigurations());
@@ -866,19 +893,14 @@ public class DialtactsActivity extends TransactionSafeActivity
     updateSearchFragmentPosition();
   }
 
-  @Override
-  public void onCallPlacedFromDialpad() {
-    hideDialpadFragment(false /* animate */, true /*clearDialpad */);
-    exitSearchUi();
-  }
-
   /**
    * Initiates animations and other visual updates to hide the dialpad. The fragment is hidden in a
    * callback after the hide animation ends.
    *
    * @see #commitDialpadFragmentHide
    */
-  private void hideDialpadFragment(boolean animate, boolean clearDialpad) {
+  @Override
+  public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
     LogUtil.enterBlock("DialtactsActivity.hideDialpadFragment");
     if (mDialpadFragment == null || mDialpadFragment.getView() == null) {
       return;
@@ -913,6 +935,11 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     mActionBarController.onDialpadDown();
 
+    if (isInSearchUi()) {
+      if (TextUtils.isEmpty(mSearchQuery)) {
+        exitSearchUi();
+      }
+    }
     // reset the title to normal.
     setTitle(R.string.launcherActivityLabel);
   }
@@ -960,7 +987,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public boolean isInSearchUi() {
-    return mInDialpadSearch || mInRegularSearch || mInNewSearch;
+    return mInDialpadSearch || mInRegularSearch;
   }
 
   @Override
@@ -971,7 +998,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   private void setNotInSearchUi() {
     mInDialpadSearch = false;
     mInRegularSearch = false;
-    mInNewSearch = false;
   }
 
   private void hideDialpadAndSearchUi() {
@@ -1145,21 +1171,17 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     final String tag;
-    mInDialpadSearch = false;
-    mInRegularSearch = false;
-    mInNewSearch = false;
     boolean useNewSearch =
         ConfigProviderBindings.get(this).getBoolean("enable_new_search_fragment", false);
     if (useNewSearch) {
       tag = TAG_NEW_SEARCH_FRAGMENT;
-      mInNewSearch = true;
     } else if (smartDialSearch) {
       tag = TAG_SMARTDIAL_SEARCH_FRAGMENT;
-      mInDialpadSearch = true;
     } else {
       tag = TAG_REGULAR_SEARCH_FRAGMENT;
-      mInRegularSearch = true;
     }
+    mInDialpadSearch = smartDialSearch;
+    mInRegularSearch = !smartDialSearch;
 
     mFloatingActionButtonController.scaleOut();
 
@@ -1282,27 +1304,18 @@ public class DialtactsActivity extends TransactionSafeActivity
       return;
     }
     if (mIsDialpadShown) {
-      hideDialpadFragment(true, false);
-    } else if (isInSearchUi()) {
-      if (mIsKeyboardOpen) {
-        DialerUtils.hideInputMethod(mParentLayout);
-        PerformanceReport.recordClick(UiAction.Type.HIDE_KEYBOARD_IN_SEARCH);
-      } else {
+      if (TextUtils.isEmpty(mSearchQuery)
+          || (mSmartDialSearchFragment != null
+              && mSmartDialSearchFragment.isVisible()
+              && mSmartDialSearchFragment.getAdapter().getCount() == 0)) {
         exitSearchUi();
       }
+      hideDialpadFragment(true, false);
+    } else if (isInSearchUi()) {
+      exitSearchUi();
+      DialerUtils.hideInputMethod(mParentLayout);
     } else {
       super.onBackPressed();
-    }
-  }
-
-  @Override
-  public void onConfigurationChanged(Configuration configuration) {
-    super.onConfigurationChanged(configuration);
-    // Checks whether a hardware keyboard is available
-    if (configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-      mIsKeyboardOpen = true;
-    } else if (configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-      mIsKeyboardOpen = false;
     }
   }
 
@@ -1310,6 +1323,24 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (!isInSearchUi()) {
       enterSearchUi(true /* isSmartDial */, mSearchQuery, false);
     }
+  }
+
+  /** @return True if the search UI was exited, false otherwise */
+  private boolean maybeExitSearchUi() {
+    if (isInSearchUi() && TextUtils.isEmpty(mSearchQuery)) {
+      exitSearchUi();
+      DialerUtils.hideInputMethod(mParentLayout);
+      return true;
+    }
+    return false;
+  }
+
+  private void showFabInSearchUi() {
+    mFloatingActionButtonController.changeIcon(
+        getResources().getDrawable(R.drawable.quantum_ic_dialpad_white_24, null),
+        getResources().getString(R.string.action_menu_dialpad_button));
+    mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+    mFloatingActionButtonController.scaleIn(FAB_SCALE_IN_DELAY_MS);
   }
 
   @Override
