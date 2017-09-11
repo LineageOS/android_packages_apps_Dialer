@@ -103,6 +103,11 @@
       android:name="com.android.dialer.app.calllog.CallLogNotificationsService"
       />
 
+    <service
+      android:name="com.android.dialer.app.calllog.VoicemailNotificationJobService"
+      android:permission="android.permission.BIND_JOB_SERVICE"
+      />
+
     <receiver
       android:directBootAware="true"
       android:name="com.android.dialer.app.calllog.MissedCallNotificationReceiver">

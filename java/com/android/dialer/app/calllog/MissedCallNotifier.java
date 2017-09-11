@@ -47,6 +47,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.notification.NotificationManagerUtils;
@@ -153,7 +154,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
                   null,
                   null,
                   null,
-                  System.currentTimeMillis());
+                  System.currentTimeMillis(),
+                  VoicemailCompat.TRANSCRIPTION_NOT_STARTED);
 
       // TODO: look up caller ID that is not in contacts.
       ContactInfo contactInfo =
