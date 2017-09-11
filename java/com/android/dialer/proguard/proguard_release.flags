@@ -22,3 +22,9 @@
   static *** v(...);
   static *** isLoggable(...);
 }
+
+# This allows proguard to strip Trace code from release builds.
+-assumenosideeffects class android.os.Trace {
+  static *** beginSection(...);
+  static *** endSection(...);
+}

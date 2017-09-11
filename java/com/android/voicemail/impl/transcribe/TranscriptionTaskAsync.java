@@ -62,7 +62,10 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
         (TranscriptionResponseAsync)
             sendRequest((client) -> client.sendUploadRequest(getUploadRequest()));
 
-    if (uploadResponse == null) {
+    if (cancelled) {
+      VvmLog.i(TAG, "getTranscription, cancelled.");
+      return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
+    } else if (uploadResponse == null) {
       VvmLog.i(TAG, "getTranscription, failed to upload voicemail.");
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
     } else {
@@ -87,10 +90,17 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     VvmLog.i(TAG, "pollForTranscription");
     GetTranscriptRequest request = getGetTranscriptRequest(uploadResponse);
     for (int i = 0; i < configProvider.getMaxGetTranscriptPolls(); i++) {
+      if (cancelled) {
+        VvmLog.i(TAG, "pollForTranscription, cancelled.");
+        return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
+      }
       GetTranscriptResponseAsync response =
           (GetTranscriptResponseAsync)
               sendRequest((client) -> client.sendGetTranscriptRequest(request));
-      if (response == null) {
+      if (cancelled) {
+        VvmLog.i(TAG, "pollForTranscription, cancelled.");
+        return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
+      } else if (response == null) {
         VvmLog.i(TAG, "pollForTranscription, no transcription result.");
       } else if (response.isTranscribing()) {
         VvmLog.i(TAG, "pollForTranscription, poll count: " + (i + 1));

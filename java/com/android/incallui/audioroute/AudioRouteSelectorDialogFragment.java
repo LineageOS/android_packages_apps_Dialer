@@ -37,6 +37,7 @@ import com.android.dialer.common.LogUtil;
 /** Shows picker for audio routes */
 public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment {
 
+  public static final String TAG = "AudioRouteSelectorDialogFragment";
   private static final String ARG_AUDIO_STATE = "audio_state";
 
   /** Called when an audio route is picked */
