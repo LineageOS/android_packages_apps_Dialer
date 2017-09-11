@@ -101,6 +101,8 @@ public class LegacyModeSmsHandler {
       Intent launchVoicemailSettingsIntent =
           new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
       launchVoicemailSettingsIntent.putExtra(TelephonyManager.EXTRA_HIDE_PUBLIC_SETTINGS, true);
+      launchVoicemailSettingsIntent.putExtra(
+          TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
 
       launchVoicemailSettingsPendingIntent =
           PendingIntent.getActivity(
