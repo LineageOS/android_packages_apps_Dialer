@@ -157,15 +157,6 @@
             android:orientation="vertical">
 
             <TextView
-              android:id="@+id/voicemail_transcription_branding"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textColor="@color/call_log_voicemail_transcript_branding_color"
-              android:textSize="@dimen/call_log_voicemail_transcription_text_size"
-              android:paddingBottom="2dp"
-              android:singleLine="true"/>
-
-            <TextView
               android:id="@+id/voicemail_transcription"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -174,6 +165,15 @@
               android:ellipsize="marquee"
               android:singleLine="false"
               android:maxLines="10"/>
+
+            <TextView
+              android:id="@+id/voicemail_transcription_branding"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/call_log_voicemail_transcript_branding_color"
+              android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:paddingTop="2dp"
+              android:singleLine="true"/>
 
           </LinearLayout>
 
