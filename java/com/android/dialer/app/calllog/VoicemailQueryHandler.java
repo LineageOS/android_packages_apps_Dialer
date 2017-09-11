@@ -45,7 +45,8 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
   public static void markAllNewVoicemailsAsRead(final @NonNull Context context) {
     ThreadUtil.postOnUiThread(
         () -> {
-          new VoicemailQueryHandler(context.getContentResolver()).markNewVoicemailsAsOld(null);
+          new VoicemailQueryHandler(context.getContentResolver())
+              .markNewVoicemailsAsOld(context, null);
         });
   }
 
@@ -59,12 +60,12 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
     ThreadUtil.postOnUiThread(
         () -> {
           new VoicemailQueryHandler(context.getContentResolver())
-              .markNewVoicemailsAsOld(voicemailUri);
+              .markNewVoicemailsAsOld(context, voicemailUri);
         });
   }
 
   /** Updates all new voicemails to mark them as old. */
-  private void markNewVoicemailsAsOld(@Nullable Uri voicemailUri) {
+  private void markNewVoicemailsAsOld(Context context, @Nullable Uri voicemailUri) {
     // Mark all "new" voicemails as not new anymore.
     StringBuilder where = new StringBuilder();
     where.append(Calls.NEW);
@@ -88,5 +89,8 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
         voicemailUri == null
             ? new String[] {Integer.toString(Calls.VOICEMAIL_TYPE)}
             : new String[] {Integer.toString(Calls.VOICEMAIL_TYPE), voicemailUri.toString()});
+
+    // No more notifications, stop monitoring the voicemail provider
+    VoicemailNotificationJobService.cancelJob(context);
   }
 }

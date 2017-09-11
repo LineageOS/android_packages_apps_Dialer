@@ -17,6 +17,8 @@
 package com.android.dialer.app.calllog;
 
 import android.content.Context;
+import android.net.Uri;
+import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
@@ -30,6 +32,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
@@ -57,13 +60,20 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       CallLogNotificationsQueryHelper queryHelper,
       FilteredNumberAsyncQueryHandler queryHandler) {
     Assert.isWorkerThread();
+    LogUtil.enterBlock("VisualVoicemailUpdateTask.updateNotification");
 
-    List<NewCall> newCalls = queryHelper.getNewVoicemails();
-    if (newCalls == null) {
+    List<NewCall> voicemailsToNotify = queryHelper.getNewVoicemails();
+    if (voicemailsToNotify == null) {
+      // Query failed, just return
       return;
     }
-    newCalls = filterBlockedNumbers(context, queryHandler, newCalls);
-    if (newCalls.isEmpty()) {
+
+    voicemailsToNotify.addAll(getAndUpdateVoicemailsWithExistingNotification(context, queryHelper));
+    voicemailsToNotify = filterBlockedNumbers(context, queryHandler, voicemailsToNotify);
+    if (voicemailsToNotify.isEmpty()) {
+      LogUtil.i("VisualVoicemailUpdateTask.updateNotification", "no voicemails to notify about");
+      VisualVoicemailNotifier.cancelAllVoicemailNotifications(context);
+      VoicemailNotificationJobService.cancelJob(context);
       return;
     }
 
@@ -73,7 +83,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
     // Maps each number into a name: if a number is in the map, it has already left a more
     // recent voicemail.
     Map<String, ContactInfo> contactInfos = new ArrayMap<>();
-    for (NewCall newCall : newCalls) {
+    for (NewCall newCall : voicemailsToNotify) {
       if (!contactInfos.containsKey(newCall.number)) {
         ContactInfo contactInfo =
             queryHelper.getContactInfo(
@@ -90,7 +100,43 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
         }
       }
     }
-    VisualVoicemailNotifier.showNotifications(context, newCalls, contactInfos, callers);
+    VisualVoicemailNotifier.showNotifications(context, voicemailsToNotify, contactInfos, callers);
+
+    // Set trigger to update notifications when database changes.
+    VoicemailNotificationJobService.scheduleJob(context);
+  }
+
+  /**
+   * Cancel notification for voicemail that is already deleted. Returns a list of voicemails that
+   * already has notifications posted and should be updated.
+   */
+  @WorkerThread
+  @NonNull
+  private static List<NewCall> getAndUpdateVoicemailsWithExistingNotification(
+      Context context, CallLogNotificationsQueryHelper queryHelper) {
+    Assert.isWorkerThread();
+    List<NewCall> result = new ArrayList<>();
+    for (StatusBarNotification notification :
+        DialerNotificationManager.getActiveNotifications(context)) {
+      if (notification.getId() != VisualVoicemailNotifier.NOTIFICATION_ID) {
+        continue;
+      }
+      if (TextUtils.equals(
+          notification.getTag(), VisualVoicemailNotifier.GROUP_SUMMARY_NOTIFICATION_TAG)) {
+        // Group header
+        continue;
+      }
+      NewCall existingCall = queryHelper.getNewCallsQuery().query(Uri.parse(notification.getTag()));
+      if (existingCall != null) {
+        result.add(existingCall);
+      } else {
+        LogUtil.i(
+            "VisualVoicemailUpdateTask.getVoicemailsWithExistingNotification",
+            "voicemail deleted, removing notification");
+        DialerNotificationManager.cancel(context, notification.getTag(), notification.getId());
+      }
+    }
+    return result;
   }
 
   @WorkerThread
