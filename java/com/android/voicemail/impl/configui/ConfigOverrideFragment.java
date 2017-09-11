@@ -49,7 +49,8 @@ public class ConfigOverrideFragment extends PreferenceFragment
    * Any preference with key that starts with this prefix will be written to the dialer carrier
    * config.
    */
-  @VisibleForTesting static final String CONFIG_OVERRIDE_KEY_PREFIX = "vvm_config_override_key_";
+  @VisibleForTesting
+  public static final String CONFIG_OVERRIDE_KEY_PREFIX = "vvm_config_override_key_";
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {

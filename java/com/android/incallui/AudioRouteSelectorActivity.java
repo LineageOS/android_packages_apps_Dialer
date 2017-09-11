@@ -32,7 +32,7 @@ public class AudioRouteSelectorActivity extends FragmentActivity
   protected void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
     AudioRouteSelectorDialogFragment.newInstance(AudioModeProvider.getInstance().getAudioState())
-        .show(getSupportFragmentManager(), null);
+        .show(getSupportFragmentManager(), AudioRouteSelectorDialogFragment.TAG);
   }
 
   @Override
@@ -42,6 +42,22 @@ public class AudioRouteSelectorActivity extends FragmentActivity
 
   @Override
   public void onAudioRouteSelectorDismiss() {
+    finish();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    AudioRouteSelectorDialogFragment audioRouteSelectorDialogFragment =
+        (AudioRouteSelectorDialogFragment)
+            getSupportFragmentManager().findFragmentByTag(AudioRouteSelectorDialogFragment.TAG);
+    // If Android back button is pressed, the fragment is dismissed and removed. If home button is
+    // pressed, we have to manually dismiss the fragment here. The fragment is also removed when
+    // dismissed.
+    if (audioRouteSelectorDialogFragment != null) {
+      audioRouteSelectorDialogFragment.dismiss();
+    }
+    // We don't expect the activity to resume
     finish();
   }
 }

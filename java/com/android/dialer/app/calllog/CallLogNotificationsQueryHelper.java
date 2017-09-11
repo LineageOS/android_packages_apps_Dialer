@@ -298,7 +298,13 @@ public class CallLogNotificationsQueryHelper {
             "no READ_CALL_LOG permission, returning null for calls lookup.");
         return null;
       }
-      final String selection = String.format("%s = 1 AND %s = ?", Calls.NEW, Calls.TYPE);
+      // A call is "new" when:
+      // NEW is 1. usually set when a new row is inserted
+      // TYPE matches the query type.
+      // IS_READ is not 1. A call might be backed up and restored, so it will be "new" to the
+      //   call log, but the user has already read it on another device.
+      final String selection =
+          String.format("%s = 1 AND %s = ? AND %s IS NOT 1", Calls.NEW, Calls.TYPE, Calls.IS_READ);
       final String[] selectionArgs = new String[] {Integer.toString(type)};
       try (Cursor cursor =
           mContentResolver.query(

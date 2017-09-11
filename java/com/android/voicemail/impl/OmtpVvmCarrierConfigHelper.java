@@ -50,6 +50,8 @@ import java.util.Set;
  * that may clutter CarrierConfigManager too much.
  *
  * <p>The current hidden configs are: {@link #getSslPort()} {@link #getDisabledCapabilities()}
+ *
+ * <p>TODO(twyen): refactor this to an interface.
  */
 @TargetApi(VERSION_CODES.O)
 public class OmtpVvmCarrierConfigHelper {
@@ -112,19 +114,19 @@ public class OmtpVvmCarrierConfigHelper {
       return;
     }
 
-    mCarrierConfig = getCarrierConfig(telephonyManager);
-    mTelephonyConfig =
-        new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
-
-    mVvmType = getVvmType();
-    mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
-
     if (ConfigOverrideFragment.isOverridden(context)) {
       mOverrideConfig = ConfigOverrideFragment.getConfig(context);
       VvmLog.w(TAG, "Config override is activated: " + mOverrideConfig);
     } else {
       mOverrideConfig = null;
     }
+
+    mCarrierConfig = getCarrierConfig(telephonyManager);
+    mTelephonyConfig =
+        new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
+
+    mVvmType = getVvmType();
+    mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
   }
 
   @VisibleForTesting
@@ -187,7 +189,11 @@ public class OmtpVvmCarrierConfigHelper {
   @Nullable
   public Set<String> getCarrierVvmPackageNames() {
     Assert.checkArgument(isValid());
-    Set<String> names = getCarrierVvmPackageNames(mCarrierConfig);
+    Set<String> names = getCarrierVvmPackageNames(mOverrideConfig);
+    if (names != null) {
+      return names;
+    }
+    names = getCarrierVvmPackageNames(mCarrierConfig);
     if (names != null) {
       return names;
     }
@@ -278,7 +284,12 @@ public class OmtpVvmCarrierConfigHelper {
   @Nullable
   public Set<String> getDisabledCapabilities() {
     Assert.checkArgument(isValid());
-    Set<String> disabledCapabilities = getDisabledCapabilities(mCarrierConfig);
+    Set<String> disabledCapabilities;
+    disabledCapabilities = getDisabledCapabilities(mOverrideConfig);
+    if (disabledCapabilities != null) {
+      return disabledCapabilities;
+    }
+    disabledCapabilities = getDisabledCapabilities(mCarrierConfig);
     if (disabledCapabilities != null) {
       return disabledCapabilities;
     }
