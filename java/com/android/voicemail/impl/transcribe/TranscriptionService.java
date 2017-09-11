@@ -49,6 +49,8 @@ public class TranscriptionService extends JobService {
   private JobParameters jobParameters;
   private TranscriptionClientFactory clientFactory;
   private TranscriptionConfigProvider configProvider;
+  private TranscriptionTask activeTask;
+  private boolean stopped;
 
   /** Callback used by a task to indicate it has finished processing its work item */
   interface JobCallback {
@@ -134,8 +136,14 @@ public class TranscriptionService extends JobService {
   @MainThread
   public boolean onStopJob(JobParameters params) {
     Assert.isMainThread();
-    LogUtil.enterBlock("TranscriptionService.onStopJob");
-    cleanup();
+    LogUtil.i("TranscriptionService.onStopJob", "params: " + params);
+    stopped = true;
+    Logger.get(this).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_JOB_STOPPED);
+    if (activeTask != null) {
+      LogUtil.i("TranscriptionService.onStopJob", "cancelling active task");
+      activeTask.cancel();
+      Logger.get(this).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_TASK_CANCELLED);
+    }
     return true;
   }
 
@@ -161,15 +169,20 @@ public class TranscriptionService extends JobService {
   @MainThread
   private boolean checkForWork() {
     Assert.isMainThread();
+    if (stopped) {
+      LogUtil.i("TranscriptionService.checkForWork", "stopped");
+      return false;
+    }
     JobWorkItem workItem = jobParameters.dequeueWork();
     if (workItem != null) {
-      TranscriptionTask task =
+      Assert.checkState(activeTask == null);
+      activeTask =
           configProvider.shouldUseSyncApi()
               ? new TranscriptionTaskSync(
                   this, new Callback(), workItem, getClientFactory(), configProvider)
               : new TranscriptionTaskAsync(
                   this, new Callback(), workItem, getClientFactory(), configProvider);
-      getExecutorService().execute(task);
+      getExecutorService().execute(activeTask);
       return true;
     } else {
       return false;
@@ -196,8 +209,13 @@ public class TranscriptionService extends JobService {
     public void onWorkCompleted(JobWorkItem completedWorkItem) {
       Assert.isMainThread();
       LogUtil.i("TranscriptionService.Callback.onWorkCompleted", completedWorkItem.toString());
-      jobParameters.completeWork(completedWorkItem);
-      checkForWork();
+      activeTask = null;
+      if (stopped) {
+        LogUtil.i("TranscriptionService.Callback.onWorkCompleted", "stopped");
+      } else {
+        jobParameters.completeWork(completedWorkItem);
+        checkForWork();
+      }
     }
   }
 
