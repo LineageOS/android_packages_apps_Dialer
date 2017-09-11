@@ -19,8 +19,10 @@ import android.annotation.TargetApi;
 import android.app.job.JobWorkItem;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.MainThread;
 import android.text.TextUtils;
 import android.util.Pair;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.logging.DialerImpression;
@@ -64,6 +66,7 @@ public abstract class TranscriptionTask implements Runnable {
   protected final TranscriptionConfigProvider configProvider;
   protected ByteString audioData;
   protected AudioFormat encoding;
+  protected volatile boolean cancelled;
 
   static final String AMR_PREFIX = "#!AMR\n";
 
@@ -85,6 +88,13 @@ public abstract class TranscriptionTask implements Runnable {
     this.voicemailUri = TranscriptionService.getVoicemailUri(workItem);
     this.configProvider = configProvider;
     databaseHelper = new TranscriptionDbHelper(context, voicemailUri);
+  }
+
+  @MainThread
+  void cancel() {
+    Assert.isMainThread();
+    VvmLog.i(TAG, "cancel");
+    cancelled = true;
   }
 
   @Override
@@ -144,7 +154,11 @@ public abstract class TranscriptionTask implements Runnable {
               .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EXPIRED);
           break;
         default:
-          updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_FAILED);
+          updateTranscriptionAndState(
+              transcript,
+              cancelled
+                  ? VoicemailCompat.TRANSCRIPTION_NOT_STARTED
+                  : VoicemailCompat.TRANSCRIPTION_FAILED);
           Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EMPTY);
           break;
       }
@@ -155,6 +169,11 @@ public abstract class TranscriptionTask implements Runnable {
     VvmLog.i(TAG, "sendRequest");
     TranscriptionClient client = clientFactory.getClient();
     for (int i = 0; i < configProvider.getMaxTranscriptionRetries(); i++) {
+      if (cancelled) {
+        VvmLog.i(TAG, "sendRequest, cancelled");
+        return null;
+      }
+
       VvmLog.i(TAG, "sendRequest, try: " + (i + 1));
       if (i == 0) {
         Logger.get(context).logImpression(getRequestSentImpression());
@@ -163,7 +182,10 @@ public abstract class TranscriptionTask implements Runnable {
       }
 
       TranscriptionResponse response = request.getResponse(client);
-      if (response.hasRecoverableError()) {
+      if (cancelled) {
+        VvmLog.i(TAG, "sendRequest, cancelled");
+        return null;
+      } else if (response.hasRecoverableError()) {
         Logger.get(context)
             .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_RECOVERABLE_ERROR);
         backoff(i);
@@ -187,7 +209,7 @@ public abstract class TranscriptionTask implements Runnable {
     try {
       Thread.sleep(millis);
     } catch (InterruptedException e) {
-      VvmLog.w(TAG, "interrupted");
+      VvmLog.e(TAG, "interrupted", e);
       Thread.currentThread().interrupt();
     }
   }
