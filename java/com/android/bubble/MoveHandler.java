@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialershared.bubble;
+package com.android.bubble;
 
 import android.content.Context;
 import android.graphics.Point;

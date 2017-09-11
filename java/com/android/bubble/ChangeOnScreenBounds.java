@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialershared.bubble;
+package com.android.bubble;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
