@@ -143,7 +143,7 @@ public class VoicemailTosMessageCreator {
     if (isVvm3() && Vvm3VoicemailMessageCreator.PIN_NOT_SET == status.configurationState) {
       LogUtil.i(
           "VoicemailTosMessageCreator.showDeclineTosDialog", "PIN_NOT_SET, showing set PIN dialog");
-      showSetPinBeforeDeclineDialog();
+      showSetPinBeforeDeclineDialog(handle);
       return;
     }
     LogUtil.i(
@@ -180,7 +180,7 @@ public class VoicemailTosMessageCreator {
     builder.show();
   }
 
-  private void showSetPinBeforeDeclineDialog() {
+  private void showSetPinBeforeDeclineDialog(PhoneAccountHandle phoneAccountHandle) {
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
     builder.setMessage(R.string.verizon_terms_and_conditions_decline_set_pin_dialog_message);
     builder.setPositiveButton(
@@ -191,6 +191,7 @@ public class VoicemailTosMessageCreator {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINE_CHANGE_PIN_SHOWN);
             Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+            intent.putExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
             context.startActivity(intent);
           }
         });
