@@ -77,7 +77,9 @@ public final class StubVoicemailClient implements VoicemailClient {
 
   @Override
   public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
-    return new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+    Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+    intent.putExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+    return intent;
   }
 
   @Override
