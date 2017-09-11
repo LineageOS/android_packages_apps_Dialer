@@ -15,14 +15,6 @@ include $(CLEAR_VARS)
 # The base directory for Dialer sources.
 BASE_DIR := java/com/android
 
-# Primary dialer module sources.
-SRC_DIRS := \
-	$(BASE_DIR)/contacts/common \
-	$(BASE_DIR)/dialer \
-	$(BASE_DIR)/dialershared \
-	$(BASE_DIR)/incallui \
-	$(BASE_DIR)/voicemail
-
 # Exclude files incompatible with AOSP.
 EXCLUDE_FILES := \
 	$(BASE_DIR)/incallui/calllocation/impl/AuthException.java \
@@ -81,8 +73,8 @@ DIALER_MANIFEST_FILES := $(filter-out $(EXCLUDE_MANIFESTS),$(DIALER_MANIFEST_FIL
 LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 
-LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
-LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
+LOCAL_SRC_FILES := $(call all-java-files-under, $(BASE_DIR))
+LOCAL_SRC_FILES += $(call all-proto-files-under, $(BASE_DIR))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 
 LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
@@ -98,6 +90,7 @@ EXCLUDE_EXTRA_PACKAGES := \
 # We specify each package explicitly to glob resource files.
 # find . -type f -name "AndroidManifest.xml" | uniq | sort | cut -c 8- | rev | cut -c 21- | rev | sed 's/\//./g' | sed 's/$/ \\/'
 LOCAL_AAPT_FLAGS := \
+	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
 	com.android.dialer.app \
@@ -136,7 +129,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.searchfragment.list \
 	com.android.dialer.searchfragment.nearbyplaces \
 	com.android.dialer.searchfragment.remote \
-	com.android.dialershared.bubble \
 	com.android.dialer.shortcuts \
 	com.android.dialer.simulator.impl \
 	com.android.dialer.speeddial \
@@ -238,7 +230,7 @@ ifdef LOCAL_JACK_ENABLED
 
 
 # Proguard includes
-LOCAL_PROGUARD_FLAG_FILES := $(call all-named-files-under,proguard.*flags,$(SRC_DIRS))
+LOCAL_PROGUARD_FLAG_FILES := $(call all-named-files-under,proguard.*flags,$(BASE_DIR))
 LOCAL_PROGUARD_ENABLED := custom
 
 LOCAL_PROGUARD_ENABLED += optimization
@@ -260,7 +252,6 @@ include $(BUILD_PACKAGE)
 
 # Cleanup local state
 BASE_DIR :=
-SRC_DIRS :=
 EXCLUDE_FILES :=
 RES_DIRS :=
 DIALER_MANIFEST_FILES :=
