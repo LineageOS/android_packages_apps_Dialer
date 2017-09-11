@@ -49,6 +49,18 @@ public class ActionBarController {
         }
       };
 
+  private final AnimationCallback mFadeInCallback =
+      new AnimationCallback() {
+        @Override
+        public void onAnimationEnd() {
+          slideActionBar(false /* slideUp */, false /* animate */);
+        }
+
+        @Override
+        public void onAnimationCancel() {
+          slideActionBar(false /* slideUp */, false /* animate */);
+        }
+      };
   private ValueAnimator mAnimator;
 
   public ActionBarController(ActivityUi activityUi, SearchEditTextLayout searchBox) {
@@ -100,13 +112,17 @@ public class ActionBarController {
         mSearchBox.isFadedOut(),
         mSearchBox.isExpanded());
     if (mActivityUi.isInSearchUi()) {
-      if (mSearchBox.isFadedOut()) {
-        mSearchBox.setVisible(true);
+      if (mActivityUi.hasSearchQuery()) {
+        if (mSearchBox.isFadedOut()) {
+          mSearchBox.setVisible(true);
+        }
+        if (!mSearchBox.isExpanded()) {
+          mSearchBox.expand(false /* animate */, false /* requestFocus */);
+        }
+        slideActionBar(false /* slideUp */, true /* animate */);
+      } else {
+        mSearchBox.fadeIn(mFadeInCallback);
       }
-      if (!mSearchBox.isExpanded()) {
-        mSearchBox.expand(false /* animate */, false /* requestFocus */);
-      }
-      slideActionBar(false /* slideUp */, true /* animate */);
     }
   }
 
