@@ -146,31 +146,41 @@ public class PhoneCallDetailsHelper {
     if (isVoicemail) {
       int relevantLinkTypes = Linkify.EMAIL_ADDRESSES | Linkify.PHONE_NUMBERS | Linkify.WEB_URLS;
       views.voicemailTranscriptionView.setAutoLinkMask(relevantLinkTypes);
-      boolean showTranscriptBranding = false;
+
+      String transcript = "";
+      String branding = "";
       if (!TextUtils.isEmpty(details.transcription)) {
-        views.voicemailTranscriptionView.setText(details.transcription);
+        transcript = details.transcription;
 
         // Set the branding text if the voicemail was transcribed by google
         // TODO(mdooley): the transcription state is only set by the google transcription code,
         // but a better solution would be to check the SOURCE_PACKAGE
-        showTranscriptBranding =
-            details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE;
+        if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE) {
+          branding = mResources.getString(R.string.voicemail_transcription_branding_text);
+        }
       } else {
-        if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_IN_PROGRESS) {
-          views.voicemailTranscriptionView.setText(
-              mResources.getString(R.string.voicemail_transcription_in_progress));
-        } else if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_FAILED) {
-          views.voicemailTranscriptionView.setText(
-              mResources.getString(R.string.voicemail_transcription_failed));
+        switch (details.transcriptionState) {
+          case VoicemailCompat.TRANSCRIPTION_IN_PROGRESS:
+            branding = mResources.getString(R.string.voicemail_transcription_in_progress);
+            break;
+          case VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED:
+            branding = mResources.getString(R.string.voicemail_transcription_failed_no_speech);
+            break;
+          case VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED:
+            branding =
+                mResources.getString(
+                    R.string.voicemail_transcription_failed_language_not_supported);
+            break;
+          case VoicemailCompat.TRANSCRIPTION_FAILED:
+            branding = mResources.getString(R.string.voicemail_transcription_failed);
+            break;
+          default:
+            break; // Fall through
         }
       }
 
-      if (showTranscriptBranding) {
-        views.voicemailTranscriptionBrandingView.setText(
-            mResources.getString(R.string.voicemail_transcription_branding_text));
-      } else {
-        views.voicemailTranscriptionBrandingView.setText("");
-      }
+      views.voicemailTranscriptionView.setText(transcript);
+      views.voicemailTranscriptionBrandingView.setText(branding);
     }
 
     // Bold if not read

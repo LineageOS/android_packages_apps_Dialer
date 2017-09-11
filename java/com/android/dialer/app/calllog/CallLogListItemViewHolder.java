@@ -781,19 +781,28 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     View transcriptContainerView = phoneCallDetailsViews.transcriptionView;
     TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
     TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
-    if (TextUtils.isEmpty(transcriptView.getText())) {
-      Assert.checkArgument(TextUtils.isEmpty(transcriptBrandingView.getText()));
-    }
-    if (!isExpanded || TextUtils.isEmpty(transcriptView.getText())) {
+    if (!isExpanded) {
       transcriptContainerView.setVisibility(View.GONE);
       return;
     }
-    transcriptContainerView.setVisibility(View.VISIBLE);
-    transcriptView.setVisibility(View.VISIBLE);
-    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+
+    boolean show = false;
+    if (TextUtils.isEmpty(transcriptView.getText())) {
+      transcriptView.setVisibility(View.GONE);
     } else {
-      phoneCallDetailsViews.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
+      transcriptView.setVisibility(View.VISIBLE);
+      show = true;
+    }
+    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
+      transcriptBrandingView.setVisibility(View.GONE);
+    } else {
+      transcriptBrandingView.setVisibility(View.VISIBLE);
+      show = true;
+    }
+    if (show) {
+      transcriptContainerView.setVisibility(View.VISIBLE);
+    } else {
+      transcriptContainerView.setVisibility(View.GONE);
     }
   }
 
