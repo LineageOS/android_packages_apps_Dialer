@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialershared.bubble;
+package com.android.bubble;
 
 import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
