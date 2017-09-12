@@ -23,6 +23,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -37,6 +38,7 @@ public class SearchEditTextLayout extends FrameLayout {
   /* Subclass-visible for testing */
   protected boolean mIsExpanded = false;
   protected boolean mIsFadedOut = false;
+  private OnKeyListener mPreImeKeyListener;
   private int mTopMargin;
   private int mBottomMargin;
   private int mLeftMargin;
@@ -54,8 +56,18 @@ public class SearchEditTextLayout extends FrameLayout {
 
   private ValueAnimator mAnimator;
 
+  private Callback mCallback;
+
   public SearchEditTextLayout(Context context, AttributeSet attrs) {
     super(context, attrs);
+  }
+
+  public void setPreImeKeyListener(OnKeyListener listener) {
+    mPreImeKeyListener = listener;
+  }
+
+  public void setCallback(Callback listener) {
+    mCallback = listener;
   }
 
   @Override
@@ -70,7 +82,7 @@ public class SearchEditTextLayout extends FrameLayout {
 
     mCollapsed = findViewById(R.id.search_box_collapsed);
     mExpanded = findViewById(R.id.search_box_expanded);
-    mSearchView = mExpanded.findViewById(R.id.search_view);
+    mSearchView = (EditText) mExpanded.findViewById(R.id.search_view);
 
     mSearchIcon = findViewById(R.id.search_magnifying_glass);
     mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
@@ -111,6 +123,16 @@ public class SearchEditTextLayout extends FrameLayout {
           }
         });
 
+    mSearchView.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            if (mCallback != null) {
+              mCallback.onSearchViewClicked();
+            }
+          }
+        });
+
     mSearchView.addTextChangedListener(
         new TextWatcher() {
           @Override
@@ -125,8 +147,41 @@ public class SearchEditTextLayout extends FrameLayout {
           public void afterTextChanged(Editable s) {}
         });
 
-    mClearButtonView.setOnClickListener(v -> mSearchView.setText(null));
+    findViewById(R.id.search_close_button)
+        .setOnClickListener(
+            new OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                mSearchView.setText(null);
+              }
+            });
+
+    findViewById(R.id.search_back_button)
+        .setOnClickListener(
+            new OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                if (mCallback != null) {
+                  mCallback.onBackButtonClicked();
+                }
+              }
+            });
+
     super.onFinishInflate();
+  }
+
+  @Override
+  public boolean dispatchKeyEventPreIme(KeyEvent event) {
+    if (mPreImeKeyListener != null) {
+      if (mPreImeKeyListener.onKey(this, event.getKeyCode(), event)) {
+        return true;
+      }
+    }
+    return super.dispatchKeyEventPreIme(event);
+  }
+
+  public void fadeOut() {
+    fadeOut(null);
   }
 
   public void fadeOut(AnimUtils.AnimationCallback callback) {
@@ -268,5 +323,13 @@ public class SearchEditTextLayout extends FrameLayout {
     params.leftMargin = (int) (mLeftMargin * fraction);
     params.rightMargin = (int) (mRightMargin * fraction);
     requestLayout();
+  }
+
+  /** Listener for the back button next to the search view being pressed */
+  public interface Callback {
+
+    void onBackButtonClicked();
+
+    void onSearchViewClicked();
   }
 }

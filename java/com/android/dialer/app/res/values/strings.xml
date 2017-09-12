@@ -648,14 +648,22 @@
   <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
   <string name="about_phone_label">About</string>
 
-  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=40] -->
+  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
 
-  <!-- Label indicating that a voicemail transcription is in progress [CHAR LIMIT=40] -->
-  <string name="voicemail_transcription_in_progress">Google is transcribing &#8230;</string>
+  <!-- Label indicating that a voicemail transcription is in progress [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_in_progress">Google is transcribing&#8230;</string>
 
-  <!-- Label indicating that a voicemail transcription failed [CHAR LIMIT=40] -->
-  <string name="voicemail_transcription_failed">Transcript not available</string>
+  <!-- Label indicating that a voicemail transcription failed [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed">Transcript not available.</string>
+
+  <!-- Label indicating that a voicemail transcription failed because it was in an
+       unsupported language [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed_language_not_supported">Transcript not available. Language not supported.</string>
+
+  <!-- Label indicating that a voicemail transcription failed because no speech was detected
+       [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
 
   <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
   <string name="view_conversation">View</string>
