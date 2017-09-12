@@ -16,8 +16,11 @@
 
 package com.android.dialer.simulator.impl;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.telecom.Connection;
+import android.telecom.ConnectionRequest;
+import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.simulator.Simulator.Event;
@@ -29,6 +32,18 @@ public final class SimulatorConnection extends Connection {
   private final List<Listener> listeners = new ArrayList<>();
   private final List<Event> events = new ArrayList<>();
   private int currentState = STATE_NEW;
+
+  SimulatorConnection(@NonNull Context context, @NonNull ConnectionRequest request) {
+    Assert.isNotNull(context);
+    Assert.isNotNull(request);
+    putExtras(request.getExtras());
+    setConnectionCapabilities(
+        CAPABILITY_MUTE
+            | CAPABILITY_SUPPORT_HOLD
+            | CAPABILITY_HOLD
+            | CAPABILITY_CAN_UPGRADE_TO_VIDEO);
+    setVideoProvider(new SimulatorVideoProvider(context, this));
+  }
 
   public void addListener(@NonNull Listener listener) {
     listeners.add(Assert.isNotNull(listener));
@@ -44,9 +59,9 @@ public final class SimulatorConnection extends Connection {
   }
 
   @Override
-  public void onAnswer() {
+  public void onAnswer(int videoState) {
     LogUtil.enterBlock("SimulatorConnection.onAnswer");
-    onEvent(new Event(Event.ANSWER));
+    onEvent(new Event(Event.ANSWER, Integer.toString(videoState), null));
   }
 
   @Override
@@ -75,9 +90,14 @@ public final class SimulatorConnection extends Connection {
 
   @Override
   public void onStateChanged(int newState) {
-    LogUtil.enterBlock("SimulatorConnection.onStateChanged");
-    onEvent(new Event(Event.STATE_CHANGE, stateToString(currentState), stateToString(newState)));
+    LogUtil.i(
+        "SimulatorConnection.onStateChanged",
+        "%s -> %s",
+        stateToString(currentState),
+        stateToString(newState));
+    int oldState = currentState;
     currentState = newState;
+    onEvent(new Event(Event.STATE_CHANGE, stateToString(oldState), stateToString(newState)));
   }
 
   @Override
@@ -86,11 +106,20 @@ public final class SimulatorConnection extends Connection {
     onEvent(new Event(Event.DTMF, Character.toString(c), null));
   }
 
-  private void onEvent(@NonNull Event event) {
+  void onEvent(@NonNull Event event) {
     events.add(Assert.isNotNull(event));
     for (Listener listener : listeners) {
       listener.onEvent(this, event);
     }
+  }
+
+  void handleSessionModifyRequest(@NonNull Event event) {
+    VideoProfile fromProfile = new VideoProfile(Integer.parseInt(event.data1));
+    VideoProfile toProfile = new VideoProfile(Integer.parseInt(event.data2));
+    setVideoState(toProfile.getVideoState());
+    getVideoProvider()
+        .receiveSessionModifyResponse(
+            Connection.VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS, fromProfile, toProfile);
   }
 
   /** Callback for when a new event arrives. */
