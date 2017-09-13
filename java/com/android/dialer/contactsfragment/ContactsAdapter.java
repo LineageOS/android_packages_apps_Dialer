@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
@@ -66,6 +67,17 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     this.clickAction = clickAction;
     headers = cursor.getExtras().getStringArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_TITLES);
     counts = cursor.getExtras().getIntArray(Contacts.EXTRA_ADDRESS_BOOK_INDEX_COUNTS);
+    if (counts != null) {
+      int sum = 0;
+      for (int count : counts) {
+        sum += count;
+      }
+
+      if (sum != cursor.getCount()) {
+        LogUtil.e(
+            "ContactsAdapter", "Count sum (%d) != cursor count (%d).", sum, cursor.getCount());
+      }
+    }
   }
 
   @Override
