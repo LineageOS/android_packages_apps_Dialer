@@ -16,10 +16,7 @@
 
 package com.android.dialer.simulator.impl;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.telecom.Connection;
 import android.telecom.ConnectionRequest;
@@ -34,70 +31,13 @@ import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Simple connection provider to create an incoming call. This is useful for emulators. */
+/** Simple connection provider to create phone calls. This is useful for emulators. */
 public class SimulatorConnectionService extends ConnectionService {
-
-  private static final String PHONE_ACCOUNT_ID = "SIMULATOR_ACCOUNT_ID";
-  private static final String EXTRA_IS_SIMULATOR_CONNECTION = "is_simulator_connection";
   private static final List<Listener> listeners = new ArrayList<>();
   private static SimulatorConnectionService instance;
 
-  private static void register(@NonNull Context context) {
-    LogUtil.enterBlock("SimulatorConnectionService.register");
-    Assert.isNotNull(context);
-    context.getSystemService(TelecomManager.class).registerPhoneAccount(buildPhoneAccount(context));
-  }
-
-  private static void unregister(@NonNull Context context) {
-    LogUtil.enterBlock("SimulatorConnectionService.unregister");
-    Assert.isNotNull(context);
-    context
-        .getSystemService(TelecomManager.class)
-        .unregisterPhoneAccount(buildPhoneAccount(context).getAccountHandle());
-  }
-
   public static SimulatorConnectionService getInstance() {
     return instance;
-  }
-
-  public static void addNewOutgoingCall(
-      @NonNull Context context, @NonNull Bundle extras, @NonNull String phoneNumber) {
-    LogUtil.enterBlock("SimulatorConnectionService.addNewOutgoingCall");
-    Assert.isNotNull(context);
-    Assert.isNotNull(extras);
-    Assert.isNotNull(phoneNumber);
-
-    register(context);
-
-    Bundle bundle = new Bundle(extras);
-    bundle.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
-    Bundle outgoingCallExtras = new Bundle();
-    outgoingCallExtras.putBundle(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, bundle);
-
-    // Use the system's phone account so that these look like regular SIM call.
-    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
-    telecomManager.placeCall(
-        Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null), outgoingCallExtras);
-  }
-
-  public static void addNewIncomingCall(
-      @NonNull Context context, @NonNull Bundle extras, @NonNull String callerId) {
-    LogUtil.enterBlock("SimulatorConnectionService.addNewIncomingCall");
-    Assert.isNotNull(context);
-    Assert.isNotNull(extras);
-    Assert.isNotNull(callerId);
-
-    register(context);
-
-    Bundle bundle = new Bundle(extras);
-    bundle.putString(TelephonyManager.EXTRA_INCOMING_NUMBER, callerId);
-    bundle.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
-
-    // Use the system's phone account so that these look like regular SIM call.
-    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
-    PhoneAccountHandle systemPhoneAccount =
-        telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
-    telecomManager.addNewIncomingCall(systemPhoneAccount, bundle);
   }
 
   public static void addListener(@NonNull Listener listener) {
@@ -106,32 +46,6 @@ public class SimulatorConnectionService extends ConnectionService {
 
   public static void removeListener(@NonNull Listener listener) {
     listeners.remove(Assert.isNotNull(listener));
-  }
-
-  @NonNull
-  private static PhoneAccount buildPhoneAccount(Context context) {
-    PhoneAccount.Builder builder =
-        new PhoneAccount.Builder(
-            getConnectionServiceHandle(context), "Simulator connection service");
-    List<String> uriSchemes = new ArrayList<>();
-    uriSchemes.add(PhoneAccount.SCHEME_TEL);
-
-    return builder
-        .setCapabilities(
-            PhoneAccount.CAPABILITY_CALL_PROVIDER | PhoneAccount.CAPABILITY_CONNECTION_MANAGER)
-        .setShortDescription("Simulator Connection Service")
-        .setSupportedUriSchemes(uriSchemes)
-        .build();
-  }
-
-  public static PhoneAccountHandle getConnectionServiceHandle(Context context) {
-    return new PhoneAccountHandle(
-        new ComponentName(context, SimulatorConnectionService.class), PHONE_ACCOUNT_ID);
-  }
-
-  private static Uri getPhoneNumber(ConnectionRequest request) {
-    String phoneNumber = request.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-    return Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null);
   }
 
   @Override
@@ -151,25 +65,19 @@ public class SimulatorConnectionService extends ConnectionService {
   public Connection onCreateOutgoingConnection(
       PhoneAccountHandle phoneAccount, ConnectionRequest request) {
     LogUtil.enterBlock("SimulatorConnectionService.onCreateOutgoingConnection");
-    if (!isSimulatorConnectionRequest(request)) {
+    if (!SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
       LogUtil.i(
           "SimulatorConnectionService.onCreateOutgoingConnection",
           "outgoing call not from simulator, unregistering");
-      Toast.makeText(
-              this, "Unregistering Dialer simulator, making a real phone call", Toast.LENGTH_LONG)
+      Toast.makeText(this, "Unregistering simulator, making a real phone call", Toast.LENGTH_LONG)
           .show();
-      unregister(this);
+      SimulatorSimCallManager.unregister(this);
       return null;
     }
 
-    SimulatorConnection connection = new SimulatorConnection();
+    SimulatorConnection connection = new SimulatorConnection(this, request);
     connection.setDialing();
     connection.setAddress(request.getAddress(), TelecomManager.PRESENTATION_ALLOWED);
-    connection.setConnectionCapabilities(
-        Connection.CAPABILITY_MUTE
-            | Connection.CAPABILITY_SUPPORT_HOLD
-            | Connection.CAPABILITY_HOLD);
-    connection.putExtras(request.getExtras());
 
     for (Listener listener : listeners) {
       listener.onNewOutgoingConnection(connection);
@@ -181,23 +89,19 @@ public class SimulatorConnectionService extends ConnectionService {
   public Connection onCreateIncomingConnection(
       PhoneAccountHandle phoneAccount, ConnectionRequest request) {
     LogUtil.enterBlock("SimulatorConnectionService.onCreateIncomingConnection");
-    if (!isSimulatorConnectionRequest(request)) {
+    if (!SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
       LogUtil.i(
           "SimulatorConnectionService.onCreateIncomingConnection",
           "incoming call not from simulator, unregistering");
-      Toast.makeText(
-              this, "Unregistering Dialer simulator, got a real incoming call", Toast.LENGTH_LONG)
+      Toast.makeText(this, "Unregistering simulator, got a real incoming call", Toast.LENGTH_LONG)
           .show();
-      unregister(this);
+      SimulatorSimCallManager.unregister(this);
       return null;
     }
 
-    SimulatorConnection connection = new SimulatorConnection();
+    SimulatorConnection connection = new SimulatorConnection(this, request);
     connection.setRinging();
     connection.setAddress(getPhoneNumber(request), TelecomManager.PRESENTATION_ALLOWED);
-    connection.setConnectionCapabilities(
-        Connection.CAPABILITY_MUTE | Connection.CAPABILITY_SUPPORT_HOLD);
-    connection.putExtras(request.getExtras());
 
     for (Listener listener : listeners) {
       listener.onNewIncomingConnection(connection);
@@ -205,9 +109,9 @@ public class SimulatorConnectionService extends ConnectionService {
     return connection;
   }
 
-  private static boolean isSimulatorConnectionRequest(@NonNull ConnectionRequest request) {
-    return request.getExtras() != null
-        && request.getExtras().getBoolean(EXTRA_IS_SIMULATOR_CONNECTION);
+  private static Uri getPhoneNumber(ConnectionRequest request) {
+    String phoneNumber = request.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+    return Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null);
   }
 
   /** Callback used to notify listeners when a new connection has been added. */

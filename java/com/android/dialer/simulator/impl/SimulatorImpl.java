@@ -35,6 +35,6 @@ final class SimulatorImpl implements Simulator {
 
   @Override
   public ActionProvider getActionProvider(Context context) {
-    return new SimulatorActionProvider(context);
+    return SimulatorMainMenu.getActionProvider(context);
   }
 }
