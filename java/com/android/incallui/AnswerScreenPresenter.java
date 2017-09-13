@@ -104,7 +104,7 @@ public class AnswerScreenPresenter
                 DialerImpression.Type.VIDEO_CALL_REQUEST_ACCEPTED,
                 call.getUniqueCallId(),
                 call.getTimeAddedMs());
-        call.getVideoTech().acceptVideoRequest();
+        call.getVideoTech().acceptVideoRequest(context);
       }
     } else {
       if (answerVideoAsAudio) {
