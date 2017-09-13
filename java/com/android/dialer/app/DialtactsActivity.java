@@ -695,10 +695,16 @@ public class DialtactsActivity extends TransactionSafeActivity
     int resId = view.getId();
     if (resId == R.id.floating_action_button) {
       if (!mIsDialpadShown) {
+        LogUtil.i(
+            "DialtactsActivity.onClick", "floating action button clicked, going to show dialpad");
         PerformanceReport.recordClick(UiAction.Type.OPEN_DIALPAD);
         mInCallDialpadUp = false;
         showDialpadFragment(true);
         PostCall.closePrompt();
+      } else {
+        LogUtil.i(
+            "DialtactsActivity.onClick",
+            "floating action button clicked, but dialpad is already showing");
       }
     } else if (resId == R.id.voice_search_button) {
       try {
