@@ -91,7 +91,7 @@ final class SimulatorSpamCallCreator implements SimulatorConnectionService.Liste
     // We need to clear the call log because spam notifications are only shown for new calls.
     clearCallLog(context);
 
-    SimulatorConnectionService.addNewIncomingCall(context, extras, callerId);
+    SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */, extras);
   }
 
   private static boolean isSpamCallConnection(@NonNull Connection connection) {

@@ -30,6 +30,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import java.lang.reflect.InvocationTargetException;
 
+/** Hidden APIs in {@link android.telephony.TelephonyManager}. */
 public class TelephonyManagerCompat {
 
   // TODO(maxwelb): Use public API for these constants when available
