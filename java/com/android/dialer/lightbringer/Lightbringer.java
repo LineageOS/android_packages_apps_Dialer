@@ -40,7 +40,7 @@ public interface Lightbringer {
   Intent getIntent(@NonNull Context context, @NonNull String number);
 
   @MainThread
-  void requestUpgrade(Call call);
+  void requestUpgrade(@NonNull Context context, Call call);
 
   @MainThread
   void registerListener(@NonNull LightbringerListener listener);
