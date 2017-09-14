@@ -95,7 +95,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     } else {
       DialerCall call = callList.getVideoUpgradeRequestCall();
       if (call != null) {
-        call.getVideoTech().acceptVideoRequest();
+        call.getVideoTech().acceptVideoRequest(context);
       }
     }
   }
