@@ -22,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.view.ActionProvider;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Objects;
 
 /** Used to add menu items to the Dialer menu to test the app using simulated calls and data. */
 public interface Simulator {
@@ -42,6 +43,7 @@ public interface Simulator {
       DISCONNECT,
       STATE_CHANGE,
       DTMF,
+      SESSION_MODIFY_REQUEST,
     })
     public @interface Type {}
 
@@ -53,6 +55,7 @@ public interface Simulator {
     public static final int DISCONNECT = 5;
     public static final int STATE_CHANGE = 6;
     public static final int DTMF = 7;
+    public static final int SESSION_MODIFY_REQUEST = 8;
 
     @Type public final int type;
     /** Holds event specific information. For example, for DTMF this could be the keycode. */
@@ -70,6 +73,25 @@ public interface Simulator {
       this.type = type;
       this.data1 = data1;
       this.data2 = data2;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+      if (this == other) {
+        return true;
+      }
+      if (!(other instanceof Event)) {
+        return false;
+      }
+      Event event = (Event) other;
+      return type == event.type
+          && Objects.equals(data1, event.data1)
+          && Objects.equals(data2, event.data2);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(Integer.valueOf(type), data1, data2);
     }
   }
 }

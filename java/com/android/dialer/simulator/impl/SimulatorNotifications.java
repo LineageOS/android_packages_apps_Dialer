@@ -20,10 +20,6 @@ import android.content.Context;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.view.ActionProvider;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
 import java.util.concurrent.TimeUnit;
@@ -33,68 +29,18 @@ final class SimulatorNotifications {
   private static final int NOTIFICATION_COUNT = 12;
 
   static ActionProvider getActionProvider(@NonNull Context context) {
-    return new NotificationsActionProvider(context);
-  }
-
-  private static class NotificationsActionProvider extends ActionProvider {
-    @NonNull private final Context context;
-
-    public NotificationsActionProvider(@NonNull Context context) {
-      super(Assert.isNotNull(context));
-      this.context = context;
-    }
-
-    @Override
-    public View onCreateActionView() {
-      return null;
-    }
-
-    @Override
-    public View onCreateActionView(MenuItem forItem) {
-      return null;
-    }
-
-    @Override
-    public boolean hasSubMenu() {
-      return true;
-    }
-
-    @Override
-    public void onPrepareSubMenu(@NonNull SubMenu subMenu) {
-      LogUtil.enterBlock("NotificationsActionProvider.onPrepareSubMenu");
-      Assert.isNotNull(subMenu);
-      super.onPrepareSubMenu(subMenu);
-
-      subMenu.clear();
-      subMenu
-          .add("Missed Calls")
-          .setOnMenuItemClickListener(
-              (item) -> {
-                new SimulatorMissedCallCreator(context).start(NOTIFICATION_COUNT);
-                return true;
-              });
-      subMenu
-          .add("Voicemails")
-          .setOnMenuItemClickListener(
-              (item) -> {
-                addVoicemailNotifications(context);
-                return true;
-              });
-      subMenu
-          .add("Non spam")
-          .setOnMenuItemClickListener(
-              (item) -> {
-                new SimulatorSpamCallCreator(context, false /* isSpam */).start(NOTIFICATION_COUNT);
-                return true;
-              });
-      subMenu
-          .add("Confirm spam")
-          .setOnMenuItemClickListener(
-              (item) -> {
-                new SimulatorSpamCallCreator(context, true /* isSpam */).start(NOTIFICATION_COUNT);
-                return true;
-              });
-    }
+    return new SimulatorSubMenu(context)
+        .addItem(
+            "Missed calls", () -> new SimulatorMissedCallCreator(context).start(NOTIFICATION_COUNT))
+        .addItem("Voicemails", () -> addVoicemailNotifications(context))
+        .addItem(
+            "Non spam",
+            () ->
+                new SimulatorSpamCallCreator(context, false /* isSpam */).start(NOTIFICATION_COUNT))
+        .addItem(
+            "Confirm spam",
+            () ->
+                new SimulatorSpamCallCreator(context, true /* isSpam */).start(NOTIFICATION_COUNT));
   }
 
   private static void addVoicemailNotifications(@NonNull Context context) {
