@@ -16,7 +16,9 @@
 
 package com.android.dialer.enrichedcall.videoshare;
 
+import android.content.Context;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 
 /** Receives updates when video share status has changed. */
 public interface VideoShareListener {
@@ -26,5 +28,5 @@ public interface VideoShareListener {
    * invite received or canceled, or when a session changes).
    */
   @MainThread
-  void onVideoShareChanged();
+  void onVideoShareChanged(@NonNull Context context);
 }

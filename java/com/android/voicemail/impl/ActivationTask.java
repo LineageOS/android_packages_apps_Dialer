@@ -170,7 +170,9 @@ public class ActivationTask extends BaseTask {
 
     if (VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle)) {
       VvmLog.i(TAG, "Account is already activated");
-      onSuccess(getContext(), phoneAccountHandle);
+      // The activated state might come from restored data, the filter still needs to be set up.
+      helper.activateSmsFilter();
+      onSuccess(getContext(), phoneAccountHandle, helper);
       return;
     }
     helper.handleEvent(
@@ -230,7 +232,7 @@ public class ActivationTask extends BaseTask {
             + message.getReturnCode());
     if (message.getProvisioningStatus().equals(OmtpConstants.SUBSCRIBER_READY)) {
       VvmLog.d(TAG, "subscriber ready, no activation required");
-      updateSource(getContext(), phoneAccountHandle, message);
+      updateSource(getContext(), phoneAccountHandle, message, helper);
     } else {
       if (helper.supportsProvisioning()) {
         VvmLog.i(TAG, "Subscriber not ready, start provisioning");
@@ -240,7 +242,7 @@ public class ActivationTask extends BaseTask {
         VvmLog.i(TAG, "Subscriber new but provisioning is not supported");
         // Ignore the non-ready state and attempt to use the provided info as is.
         // This is probably caused by not completing the new user tutorial.
-        updateSource(getContext(), phoneAccountHandle, message);
+        updateSource(getContext(), phoneAccountHandle, message, helper);
       } else {
         VvmLog.i(TAG, "Subscriber not ready but provisioning is not supported");
         helper.handleEvent(status, OmtpEvents.CONFIG_SERVICE_NOT_AVAILABLE);
@@ -251,20 +253,23 @@ public class ActivationTask extends BaseTask {
   }
 
   private static void updateSource(
-      Context context, PhoneAccountHandle phone, StatusMessage message) {
+      Context context,
+      PhoneAccountHandle phone,
+      StatusMessage message,
+      OmtpVvmCarrierConfigHelper config) {
 
     if (OmtpConstants.SUCCESS.equals(message.getReturnCode())) {
       // Save the IMAP credentials in preferences so they are persistent and can be retrieved.
       VvmAccountManager.addAccount(context, phone, message);
-      onSuccess(context, phone);
+      onSuccess(context, phone, config);
     } else {
       VvmLog.e(TAG, "Visual voicemail not available for subscriber.");
     }
   }
 
-  private static void onSuccess(Context context, PhoneAccountHandle phoneAccountHandle) {
-    OmtpVvmCarrierConfigHelper helper = new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle);
-    helper.handleEvent(
+  private static void onSuccess(
+      Context context, PhoneAccountHandle phoneAccountHandle, OmtpVvmCarrierConfigHelper config) {
+    config.handleEvent(
         VoicemailStatus.edit(context, phoneAccountHandle),
         OmtpEvents.CONFIG_REQUEST_STATUS_SUCCESS);
     clearLegacyVoicemailNotification(context, phoneAccountHandle);
