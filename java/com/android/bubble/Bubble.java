@@ -99,6 +99,7 @@ public class Bubble {
   private boolean expanded;
   private boolean textShowing;
   private boolean hideAfterText;
+  private CharSequence textAfterShow;
   private int collapseEndAction;
 
   @VisibleForTesting ViewHolder viewHolder;
@@ -304,7 +305,15 @@ public class Bubble {
         .setInterpolator(new OvershootInterpolator())
         .scaleX(1)
         .scaleY(1)
-        .withEndAction(() -> visibility = Visibility.SHOWING)
+        .withEndAction(
+            () -> {
+              visibility = Visibility.SHOWING;
+              // Show the queued up text, if available.
+              if (textAfterShow != null) {
+                showText(textAfterShow);
+                textAfterShow = null;
+              }
+            })
         .start();
 
     updatePrimaryIconAnimation();
@@ -379,6 +388,12 @@ public class Bubble {
       startValues.view = viewHolder.getPrimaryButton();
       transition.addTarget(startValues.view);
       transition.captureStartValues(startValues);
+
+      // If our view is not laid out yet, postpone showing the text.
+      if (startValues.values.isEmpty()) {
+        textAfterShow = text;
+        return;
+      }
 
       doResize(
           () -> {
