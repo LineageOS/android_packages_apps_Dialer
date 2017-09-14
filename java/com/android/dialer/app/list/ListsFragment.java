@@ -16,6 +16,8 @@
 
 package com.android.dialer.app.list;
 
+import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
+
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
@@ -77,6 +79,13 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
   private CallLogQueryHandler mCallLogQueryHandler;
 
   private UiAction.Type[] actionTypeList;
+  private final DialerImpression.Type[] swipeImpressionList =
+      new DialerImpression.Type[DialtactsPagerAdapter.TAB_COUNT_WITH_VOICEMAIL];
+  private final DialerImpression.Type[] clickImpressionList =
+      new DialerImpression.Type[DialtactsPagerAdapter.TAB_COUNT_WITH_VOICEMAIL];
+
+  // Only for detecting page selected by swiping or clicking.
+  private boolean onPageScrolledBeforeScrollStateSettling;
 
   private final ContentObserver mVoicemailStatusObserver =
       new ContentObserver(new Handler()) {
@@ -155,6 +164,24 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
         UiAction.Type.CHANGE_TAB_TO_CONTACTS;
     actionTypeList[DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL] =
         UiAction.Type.CHANGE_TAB_TO_VOICEMAIL;
+
+    swipeImpressionList[DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL] =
+        DialerImpression.Type.SWITCH_TAB_TO_FAVORITE_BY_SWIPE;
+    swipeImpressionList[DialtactsPagerAdapter.TAB_INDEX_HISTORY] =
+        DialerImpression.Type.SWITCH_TAB_TO_CALL_LOG_BY_SWIPE;
+    swipeImpressionList[DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS] =
+        DialerImpression.Type.SWITCH_TAB_TO_CONTACTS_BY_SWIPE;
+    swipeImpressionList[DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL] =
+        DialerImpression.Type.SWITCH_TAB_TO_VOICEMAIL_BY_SWIPE;
+
+    clickImpressionList[DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL] =
+        DialerImpression.Type.SWITCH_TAB_TO_FAVORITE_BY_CLICK;
+    clickImpressionList[DialtactsPagerAdapter.TAB_INDEX_HISTORY] =
+        DialerImpression.Type.SWITCH_TAB_TO_CALL_LOG_BY_CLICK;
+    clickImpressionList[DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS] =
+        DialerImpression.Type.SWITCH_TAB_TO_CONTACTS_BY_CLICK;
+    clickImpressionList[DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL] =
+        DialerImpression.Type.SWITCH_TAB_TO_VOICEMAIL_BY_CLICK;
 
     String[] tabTitles = new String[DialtactsPagerAdapter.TAB_COUNT_WITH_VOICEMAIL];
     tabTitles[DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL] =
@@ -240,6 +267,11 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
   @Override
   public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    // onPageScrolled(0, 0, 0) is called when app launch. And we should ignore it.
+    // It's also called when swipe right from first tab, but we don't care.
+    if (positionOffsetPixels != 0) {
+      onPageScrolledBeforeScrollStateSettling = true;
+    }
     mTabIndex = mAdapter.getRtlPosition(position);
 
     final int count = mOnPageChangeListeners.size();
@@ -250,6 +282,16 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
   @Override
   public void onPageSelected(int position) {
+    // onPageScrollStateChanged(SCROLL_STATE_SETTLING) must be called before this.
+    // If onPageScrolled() is called before that, the page is selected by swiping;
+    // otherwise the page is selected by clicking.
+    if (onPageScrolledBeforeScrollStateSettling) {
+      Logger.get(getContext()).logImpression(swipeImpressionList[position]);
+      onPageScrolledBeforeScrollStateSettling = false;
+    } else {
+      Logger.get(getContext()).logImpression(clickImpressionList[position]);
+    }
+
     PerformanceReport.recordClick(actionTypeList[position]);
 
     LogUtil.i("ListsFragment.onPageSelected", "position: %d", position);
@@ -275,6 +317,10 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
   @Override
   public void onPageScrollStateChanged(int state) {
+    if (state != SCROLL_STATE_SETTLING) {
+      onPageScrolledBeforeScrollStateSettling = false;
+    }
+
     final int count = mOnPageChangeListeners.size();
     for (int i = 0; i < count; i++) {
       mOnPageChangeListeners.get(i).onPageScrollStateChanged(state);

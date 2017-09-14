@@ -118,12 +118,19 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
     int position = getPosition();
     // proceed backwards until we reach the header row, which contains the directory ID.
     while (moveToPrevious()) {
-      int id = getInt(getColumnIndex(COLUMN_DIRECTORY_ID));
-      if (id != -1) {
-        // return the cursor to it's original position/state
-        moveToPosition(position);
-        return id;
+      int columnIndex = getColumnIndex(COLUMN_DIRECTORY_ID);
+      if (columnIndex == -1) {
+        continue;
       }
+
+      int id = getInt(columnIndex);
+      if (id == -1) {
+        continue;
+      }
+
+      // return the cursor to it's original position/state
+      moveToPosition(position);
+      return id;
     }
     throw Assert.createIllegalStateFailException("No directory id for contact at: " + position);
   }

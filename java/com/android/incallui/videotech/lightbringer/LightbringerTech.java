@@ -21,7 +21,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -55,7 +54,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
       LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on O+");
       return false;
     }
@@ -68,11 +67,6 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
     if (callState != Call.STATE_ACTIVE) {
       LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
-      return false;
-    }
-
-    if (!TelecomManagerCompat.supportsHandover()) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, telephony support missing");
       return false;
     }
 
@@ -125,13 +119,13 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
-  public void upgradeToVideo() {
+  public void upgradeToVideo(@NonNull Context context) {
     listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
-    lightbringer.requestUpgrade(call);
+    lightbringer.requestUpgrade(context, call);
   }
 
   @Override
-  public void acceptVideoRequest() {
+  public void acceptVideoRequest(@NonNull Context context) {
     throw Assert.createUnsupportedOperationFailException();
   }
 
@@ -156,7 +150,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
-  public void resumeTransmission() {
+  public void resumeTransmission(@NonNull Context context) {
     throw Assert.createUnsupportedOperationFailException();
   }
 

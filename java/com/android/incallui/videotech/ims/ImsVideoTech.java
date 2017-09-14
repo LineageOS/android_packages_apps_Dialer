@@ -18,6 +18,7 @@ package com.android.incallui.videotech.ims;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
@@ -120,7 +121,7 @@ public class ImsVideoTech implements VideoTech {
     }
 
     if (callback == null) {
-      callback = new ImsVideoCallCallback(logger, call, this, listener);
+      callback = new ImsVideoCallCallback(logger, call, this, listener, context);
       call.getVideoCall().registerCallback(callback);
     }
 
@@ -165,7 +166,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void upgradeToVideo() {
+  public void upgradeToVideo(@NonNull Context context) {
     LogUtil.enterBlock("ImsVideoTech.upgradeToVideo");
 
     int unpausedVideoState = getUnpausedVideoState(call.getDetails().getVideoState());
@@ -177,7 +178,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void acceptVideoRequest() {
+  public void acceptVideoRequest(@NonNull Context context) {
     int requestedVideoState = callback.getRequestedVideoState();
     Assert.checkArgument(requestedVideoState != VideoProfile.STATE_AUDIO_ONLY);
     LogUtil.i("ImsVideoTech.acceptUpgradeRequest", "videoState: " + requestedVideoState);
@@ -223,7 +224,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void resumeTransmission() {
+  public void resumeTransmission(@NonNull Context context) {
     LogUtil.enterBlock("ImsVideoTech.resumeTransmission");
 
     transmissionStopped = false;

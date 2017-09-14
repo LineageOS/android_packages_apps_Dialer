@@ -210,7 +210,7 @@ public final class NewSearchFragment extends Fragment
     }
     boolean slideUp = start > end;
     Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT;
-    int startHeight = getView().getHeight();
+    int startHeight = getActivity().findViewById(android.R.id.content).getHeight();
     int endHeight = startHeight - (end - start);
     getView().setTranslationY(start);
     getView()

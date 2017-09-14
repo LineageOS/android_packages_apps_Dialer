@@ -67,7 +67,7 @@ public class LightbringerStub implements Lightbringer {
 
   @MainThread
   @Override
-  public void requestUpgrade(Call call) {
+  public void requestUpgrade(@NonNull Context context, Call call) {
     Assert.isMainThread();
     Assert.isNotNull(call);
   }
