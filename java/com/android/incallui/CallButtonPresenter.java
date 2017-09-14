@@ -294,7 +294,7 @@ public class CallButtonPresenter
             DialerImpression.Type.VIDEO_CALL_UPGRADE_REQUESTED,
             mCall.getUniqueCallId(),
             mCall.getTimeAddedMs());
-    mCall.getVideoTech().upgradeToVideo();
+    mCall.getVideoTech().upgradeToVideo(mContext);
   }
 
   @Override
@@ -360,7 +360,7 @@ public class CallButtonPresenter
     } else {
       updateCamera(
           InCallPresenter.getInstance().getInCallCameraManager().isUsingFrontFacingCamera());
-      mCall.getVideoTech().resumeTransmission();
+      mCall.getVideoTech().resumeTransmission(mContext);
     }
 
     mInCallButtonUi.setVideoPaused(pause);
