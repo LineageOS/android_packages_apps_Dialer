@@ -1074,12 +1074,14 @@ public class DialtactsActivity extends TransactionSafeActivity
             && phoneIsInUse()
             && !DialpadFragment.isAddCallMode(intent);
     boolean isDialIntent = intent.getData() != null && isDialIntent(intent);
-    if (showDialpadChooser || isDialIntent) {
+    boolean isAddCallIntent = DialpadFragment.isAddCallMode(intent);
+    if (showDialpadChooser || isDialIntent || isAddCallIntent) {
       LogUtil.i(
           "DialtactsActivity.displayFragment",
-          "showing dialpad fragment (showDialpadChooser: %b, isDialIntent: %b)",
+          "show dialpad fragment (showDialpadChooser: %b, isDialIntent: %b, isAddCallIntent: %b)",
           showDialpadChooser,
-          isDialIntent);
+          isDialIntent,
+          isAddCallIntent);
       showDialpadFragment(false);
       mDialpadFragment.setStartedFromNewIntent(true);
       if (showDialpadChooser && !mDialpadFragment.isVisible()) {
