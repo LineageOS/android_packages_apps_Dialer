@@ -16,7 +16,8 @@
 
 package com.android.incallui;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -98,7 +99,7 @@ public class ConferenceManagerFragment
 
     public void onVisibilityChanged(boolean isVisible) {
         mIsVisible = isVisible;
-        ActionBar actionBar = getActivity().getActionBar();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         boolean isDsdaEnabled = CallList.getInstance().isDsdaEnabled();
         if (isVisible) {
             actionBar.setTitle(R.string.manageConferenceLabel);
