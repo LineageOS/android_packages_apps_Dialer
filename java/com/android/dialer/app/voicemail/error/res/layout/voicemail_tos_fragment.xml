@@ -29,33 +29,31 @@
       android:layout_height="wrap_content"
       android:paddingLeft="16dp"
       android:paddingRight="16dp"
+      android:paddingTop="32dp"
       android:orientation="vertical">
       <ImageView
         android:id="@+id/voicemail_image"
         android:layout_width="@dimen/voicemail_tos_image_size"
         android:layout_height="@dimen/voicemail_tos_image_size"
         android:layout_gravity="center"
-        android:paddingTop="24dp"
-        android:visibility="gone"
+        android:paddingBottom="32dp"
         android:importantForAccessibility="no"/>
       <TextView
         android:id="@+id/tos_message_title"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingBottom="12dp"
+        android:gravity="center_horizontal|top"
+        android:minHeight="20sp"
         android:text="@string/verizon_terms_and_conditions_title"
-        android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/call_log_primary_text_size"/>
+        style="@style/TosTitleStyle"/>
       <TextView
         android:id="@+id/tos_message_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="@string/verizon_terms_and_conditions_1.1_english"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="@dimen/call_log_detail_text_size"/>
+        style="@style/TosTextStyle"/>
     </LinearLayout>
   </ScrollView>
 
@@ -69,10 +67,12 @@
     android:id="@+id/voicemail_tos_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:orientation="horizontal">
     <TextView
       android:id="@+id/voicemail_tos_button_decline"

@@ -22,13 +22,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+import android.text.Layout;
 import android.text.SpannableString;
-import android.text.style.StyleSpan;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.AlignmentSpan;
+import android.text.style.TextAppearanceSpan;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
@@ -76,7 +80,6 @@ public class VoicemailTosMessageCreator {
 
   @Nullable
   VoicemailErrorMessage maybeCreateTosMessage() {
-    // TODO(mdooley): add filtering based on carrier
     if (hasAcceptedTos()) {
       return null;
     }
@@ -117,7 +120,7 @@ public class VoicemailTosMessageCreator {
                 },
                 true /* raised */))
         .setModal(true)
-        .setImageResourceId(getTosImageId());
+        .setImageResourceId(R.drawable.voicemail_tos_image);
   }
 
   private boolean shouldShowTos() {
@@ -263,9 +266,10 @@ public class VoicemailTosMessageCreator {
   }
 
   private CharSequence getVvm3Tos() {
+    String policyUrl = context.getString(R.string.verizon_terms_and_conditions_policy_url);
     return useSpanish()
-        ? context.getString(R.string.verizon_terms_and_conditions_1_1_spanish)
-        : context.getString(R.string.verizon_terms_and_conditions_1_1_english);
+        ? context.getString(R.string.verizon_terms_and_conditions_1_1_spanish, policyUrl)
+        : context.getString(R.string.verizon_terms_and_conditions_1_1_english, policyUrl);
   }
 
   private CharSequence getDialerTos() {
@@ -273,9 +277,10 @@ public class VoicemailTosMessageCreator {
       return "";
     }
 
-    return useSpanish()
-        ? context.getString(R.string.dialer_terms_and_conditions_1_0_spanish)
-        : context.getString(R.string.dialer_terms_and_conditions_1_0_english);
+    String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+    return isVvm3()
+        ? context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0, learnMoreText)
+        : context.getString(R.string.dialer_terms_and_conditions_1_0, learnMoreText);
   }
 
   private CharSequence getAcceptText() {
@@ -309,6 +314,7 @@ public class VoicemailTosMessageCreator {
   }
 
   private CharSequence getTosMessage() {
+    SpannableString spannableTos;
     if (isVvm3()) {
       // For verizon the TOS consist of three pieces: google dialer TOS, Verizon TOS message and
       // Verizon TOS details.
@@ -316,18 +322,51 @@ public class VoicemailTosMessageCreator {
       CharSequence tos =
           context.getString(
               R.string.verizon_terms_and_conditions_message, getDialerTos(), vvm3Details);
-      // Make all text bold except the details.
-      SpannableString spannableTos = new SpannableString(tos);
-      spannableTos.setSpan(new StyleSpan(Typeface.BOLD), 0, tos.length() - vvm3Details.length(), 0);
-      return spannableTos;
+      spannableTos = new SpannableString(tos);
+      // Set the text style for the details part of the TOS
+      int start = spannableTos.length() - vvm3Details.length();
+      spannableTos.setSpan(
+          new TextAppearanceSpan(context, R.style.TosDetailsTextStyle),
+          start,
+          start + vvm3Details.length(),
+          Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      // Add verizon policy link
+      String linkUrl = context.getString(R.string.verizon_terms_and_conditions_policy_url);
+      addLink(spannableTos, linkUrl, linkUrl);
     } else {
-      // The TOS for everyone else there are no details, so just make everything bold.
+      // The TOS for everyone else, there are no details, but change to center alignment.
       CharSequence tos =
           context.getString(R.string.dialer_terms_and_conditions_message, getDialerTos());
-      SpannableString spannableTos = new SpannableString(tos);
-      spannableTos.setSpan(new StyleSpan(Typeface.BOLD), 0, tos.length(), 0);
-      return spannableTos;
+      spannableTos = new SpannableString(tos);
+      spannableTos.setSpan(
+          new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+          0,
+          tos.length(),
+          Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
+
+    // Add 'Learn more' link for dialer TOS
+    String learnMore = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+    String linkUrl = context.getString(R.string.dialer_terms_and_conditions_learn_more_url);
+    return addLink(spannableTos, learnMore, linkUrl);
+  }
+
+  private SpannableString addLink(SpannableString spannable, String linkText, String linkUrl) {
+    if (TextUtils.isEmpty(linkUrl) || TextUtils.isEmpty(linkText)) {
+      return spannable;
+    }
+
+    int start = spannable.toString().indexOf(linkText);
+    if (start != -1) {
+      int end = start + linkText.length();
+      spannable.setSpan(new URLSpan(linkUrl), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      spannable.setSpan(
+          new TextAppearanceSpan(context, R.style.TosLinkStyle),
+          start,
+          end,
+          Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+    return spannable;
   }
 
   private int getTosDeclinedDialogMessageId() {
@@ -340,9 +379,5 @@ public class VoicemailTosMessageCreator {
     return isVvm3()
         ? R.string.verizon_terms_and_conditions_decline_dialog_downgrade
         : R.string.dialer_terms_and_conditions_decline_dialog_downgrade;
-  }
-
-  private Integer getTosImageId() {
-    return isVvm3() ? null : R.drawable.voicemail_tos_image;
   }
 }
