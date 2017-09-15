@@ -18,7 +18,7 @@ package com.android.dialer.app.voicemail.error;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
-import android.text.util.Linkify;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -121,8 +121,8 @@ public class VoicemailErrorAlert {
     TextView tosTitle = (TextView) view.findViewById(R.id.tos_message_title);
     tosTitle.setText(message.getTitle());
     TextView tosDetails = (TextView) view.findViewById(R.id.tos_message_details);
-    tosDetails.setAutoLinkMask(Linkify.WEB_URLS);
     tosDetails.setText(message.getDescription());
+    tosDetails.setMovementMethod(LinkMovementMethod.getInstance());
 
     Assert.checkArgument(message.getActions().size() == 2);
     Action primaryAction = message.getActions().get(0);
