@@ -30,5 +30,5 @@
   <dimen name="voicemail_promo_card_title_text_size">16sp</dimen>
   <dimen name="voicemail_promo_card_message_size">14sp</dimen>
 
-  <dimen name="voicemail_tos_image_size">200dp</dimen>
+  <dimen name="voicemail_tos_image_size">280dp</dimen>
 </resources>
