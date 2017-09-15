@@ -16,7 +16,7 @@
 
 package com.android.incallui;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -57,7 +57,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
@@ -65,6 +64,7 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.R;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.TransactionSafeActivity;
 import com.android.incallui.Call.State;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.phone.common.animation.AnimUtils;
@@ -193,11 +193,12 @@ public class InCallActivity extends TransactionSafeActivity implements
         getWindow().addFlags(flags);
 
         // Setup action bar for the conference call manager.
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setDisplayShowTitleEnabled(true);
-            getActionBar().hide();
+        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.hide();
         }
 
         // TODO(klp): Do we need to add this back when prox sensor is not available?
