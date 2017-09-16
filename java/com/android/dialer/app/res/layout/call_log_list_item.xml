@@ -101,7 +101,7 @@
             android:layout_marginEnd="@dimen/call_log_icon_margin"
             android:textColor="@color/call_log_primary_color"
             android:textSize="@dimen/call_log_primary_text_size"
-            android:singleLine="true"/>
+            android:maxLines="1"/>
 
           <LinearLayout
             android:id="@+id/call_type"
@@ -133,7 +133,7 @@
               android:layout_gravity="center_vertical"
               android:textColor="@color/call_log_detail_color"
               android:textSize="@dimen/call_log_detail_text_size"
-              android:singleLine="true"/>
+              android:maxLines="1"/>
 
           </LinearLayout>
 
@@ -146,7 +146,7 @@
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/call_log_detail_text_size"
             android:visibility="gone"
-            android:singleLine="true"/>
+            android:maxLines="1"/>
 
           <LinearLayout
             android:id="@+id/transcription"
@@ -162,8 +162,8 @@
               android:layout_height="wrap_content"
               android:textColor="@color/call_log_voicemail_transcript_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:textIsSelectable="true"
               android:ellipsize="marquee"
-              android:singleLine="false"
               android:maxLines="10"/>
 
             <TextView
@@ -173,7 +173,7 @@
               android:textColor="@color/call_log_voicemail_transcript_branding_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
               android:paddingTop="2dp"
-              android:singleLine="true"/>
+              android:maxLines="1"/>
 
           </LinearLayout>
 

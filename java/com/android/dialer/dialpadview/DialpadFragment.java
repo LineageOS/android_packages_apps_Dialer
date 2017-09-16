@@ -39,6 +39,7 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
@@ -485,24 +486,27 @@ public class DialpadFragment extends Fragment
   }
 
   /**
-   * Checks the given Intent and changes dialpad's UI state. For example, if the Intent requires the
-   * screen to enter "Add Call" mode, this method will show correct UI for the mode.
+   * Checks the given Intent and changes dialpad's UI state.
+   *
+   * <p>There are three modes:
+   *
+   * <ul>
+   *   <li>Empty Dialpad shown via "Add Call" in the in call ui
+   *   <li>Dialpad (digits filled), shown by {@link Intent#ACTION_DIAL} with a number.
+   *   <li>Return to call view, shown when a call is ongoing without {@link Intent#ACTION_DIAL}
+   * </ul>
+   *
+   * For example, if the user...
+   *
+   * <ul>
+   *   <li>clicks a number in gmail, this method will show the dialpad filled with the number,
+   *       regardless of whether a call is ongoing.
+   *   <li>places a call, presses home and opens dialer, this method will show the return to call
+   *       prompt to confirm what they want to do.
+   * </ul>
    */
-  private void configureScreenFromIntent(Activity parent) {
-    LogUtil.enterBlock("DialpadFragment.configureScreenFromIntent");
-
-    // If we were not invoked with a DIAL intent
-    if (!Intent.ACTION_DIAL.equals(parent.getIntent().getAction())) {
-      setStartedFromNewIntent(false);
-      return;
-    }
-
-    LogUtil.i("DialpadFragment.configureScreenFromIntent", "dial intent");
-
-    // See if we were invoked with a DIAL intent. If we were, fill in the appropriate
-    // digits in the dialer field.
-    Intent intent = parent.getIntent();
-
+  private void configureScreenFromIntent(@NonNull Intent intent) {
+    LogUtil.i("DialpadFragment.configureScreenFromIntent", "action: %s", intent.getAction());
     if (!isLayoutReady()) {
       // This happens typically when parent's Activity#onNewIntent() is called while
       // Fragment#onCreateView() isn't called yet, and thus we cannot configure Views at
@@ -514,37 +518,29 @@ public class DialpadFragment extends Fragment
       return;
     }
 
-    boolean needToShowDialpadChooser = false;
-
-    // Be sure *not* to show the dialpad chooser if this is an
-    // explicit "Add call" action, though.
-    final boolean isAddCallMode = isAddCallMode(intent);
-    if (!isAddCallMode) {
-
-      // Don't show the chooser when called via onNewIntent() and phone number is present.
-      // i.e. User clicks a telephone link from gmail for example.
-      // In this case, we want to show the dialpad with the phone number.
-      final boolean digitsFilled = fillDigitsIfNecessary(intent);
-      if (!(mStartedFromNewIntent && digitsFilled)) {
-
-        final String action = intent.getAction();
-        LogUtil.i("DialpadFragment.configureScreenFromIntent", "action: %s", action);
-        if (Intent.ACTION_DIAL.equals(action)
-            || Intent.ACTION_VIEW.equals(action)
-            || Intent.ACTION_MAIN.equals(action)) {
-          // If there's already an active call, bring up an intermediate UI to
-          // make the user confirm what they really want to do.
-          if (isPhoneInUse()) {
-            needToShowDialpadChooser = true;
-          }
-        }
-      }
+    // If "Add call" was selected, show the dialpad instead of the dialpad chooser prompt
+    if (isAddCallMode(intent)) {
+      LogUtil.i("DialpadFragment.configureScreenFromIntent", "Add call mode");
+      showDialpadChooser(false);
+      setStartedFromNewIntent(true);
+      return;
     }
-    LogUtil.i(
-        "DialpadFragment.configureScreenFromIntent",
-        "needToShowDialpadChooser? %b",
-        needToShowDialpadChooser);
-    showDialpadChooser(needToShowDialpadChooser);
+
+    // Don't show the chooser when called via onNewIntent() and phone number is present.
+    // i.e. User clicks a telephone link from gmail for example.
+    // In this case, we want to show the dialpad with the phone number.
+    boolean digitsFilled = fillDigitsIfNecessary(intent);
+    if (!(mStartedFromNewIntent && digitsFilled) && isPhoneInUse()) {
+      // If there's already an active call, bring up an intermediate UI to
+      // make the user confirm what they really want to do.
+      LogUtil.i("DialpadFragment.configureScreenFromIntent", "Dialpad chooser mode");
+      showDialpadChooser(true);
+      setStartedFromNewIntent(false);
+      return;
+    }
+
+    LogUtil.i("DialpadFragment.configureScreenFromIntent", "Nothing to show");
+    showDialpadChooser(false);
     setStartedFromNewIntent(false);
   }
 
@@ -669,7 +665,7 @@ public class DialpadFragment extends Fragment
 
     mPressedDialpadKeys.clear();
 
-    configureScreenFromIntent(getActivity());
+    configureScreenFromIntent(getActivity().getIntent());
 
     stopWatch.lap("fdin");
 
