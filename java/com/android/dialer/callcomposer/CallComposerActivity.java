@@ -157,6 +157,7 @@ public class CallComposerActivity extends AppCompatActivity
   private boolean inFullscreenMode;
   private boolean isSendAndCallHidingOrHidden = true;
   private boolean sendAndCallReady;
+  private boolean runningExitAnimation;
   private int currentIndex;
 
   public static Intent newIntent(Context context, DialerContact contact) {
@@ -529,7 +530,7 @@ public class CallComposerActivity extends AppCompatActivity
   public void onBackPressed() {
     if (!isSendAndCallHidingOrHidden) {
       ((CallComposerFragment) adapter.instantiateItem(pager, currentIndex)).clearComposer();
-    } else {
+    } else if (!runningExitAnimation) {
       // Unregister first to avoid receiving a callback when the session closes
       getEnrichedCallManager().unregisterStateChangedListener(this);
       getEnrichedCallManager().endCallComposerSession(sessionId);
@@ -676,6 +677,7 @@ public class CallComposerActivity extends AppCompatActivity
     } else {
       contentAnimation.start();
     }
+    runningExitAnimation = true;
   }
 
   @Override
