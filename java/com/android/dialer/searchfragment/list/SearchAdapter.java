@@ -111,8 +111,11 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   }
 
   public void setContactsCursor(SearchCursor cursor) {
-    searchCursorManager.setContactsCursor(cursor);
-    notifyDataSetChanged();
+    if (searchCursorManager.setContactsCursor(cursor)) {
+      // Since this is a new contacts cursor, we need to reapply the filter.
+      searchCursorManager.setQuery(query);
+      notifyDataSetChanged();
+    }
   }
 
   void clear() {
