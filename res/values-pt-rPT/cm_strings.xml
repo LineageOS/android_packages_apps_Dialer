@@ -66,7 +66,7 @@
   <string name="date_qs_lastquarter">Último trimestre</string>
   <string name="date_qs_lastyear">Último ano</string>
   <string name="call_stats_date_filter">Ajustar intervalo de tempo</string>
-  <string name="call_stats_reset_filter">Restaurar intervalo de tempo</string>
+  <string name="call_stats_reset_filter">Repor intervalo de tempo</string>
   <string name="call_stats_sort_by_duration">Ordenar pela duração da chamada</string>
   <string name="call_stats_sort_by_count">Ordenar pelo número de chamadas</string>
   <string name="call_stats_title_for_number">Este número</string>
@@ -86,7 +86,7 @@
   <string name="speed_dial_delete">Apagar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla não atribuída</string>
   <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de marcação rápida está atribuída à tecla número \'<xliff:g id="number">%s</xliff:g>\'. Quer atribuir uma ação agora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcação rápida, primeiro desligue o modo de voo</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcação rápida, primeiro desligue o modo de avião</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
   <string name="speed_dial_can_not_be_set">Não pode ser definida uma marcação rápida para esta tecla</string>
   <string name="yes">Sim</string>
