@@ -167,16 +167,14 @@ public class DialpadKeyButton extends FrameLayout {
           break;
         case MotionEvent.ACTION_HOVER_EXIT:
           if (mHoverBounds.contains(event.getX(), event.getY())) {
-            if (mLongHovered) {
-              performLongClick();
-            } else {
-              simulateClickForAccessibility();
-            }
+            simulateClickForAccessibility();
           }
 
           cancelLongHover();
           setClickable(mWasClickable);
           setLongClickable(mWasLongClickable);
+          break;
+        default: // No-op
           break;
       }
     }
