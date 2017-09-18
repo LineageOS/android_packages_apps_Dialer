@@ -1291,6 +1291,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     if (mIsDialpadShown) {
       hideDialpadFragment(true, false);
+      if (TextUtils.isEmpty(mDialpadQuery)) {
+        exitSearchUi();
+      }
     } else if (isInSearchUi()) {
       if (mIsKeyboardOpen) {
         DialerUtils.hideInputMethod(mParentLayout);
