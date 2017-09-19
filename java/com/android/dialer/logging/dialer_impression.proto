@@ -479,7 +479,7 @@ message DialerImpression {
     // In in call UI
     UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN = 1236;
 
-    // Bubble primary button first click to expand bubble
+    // Bubble primary button first click to expand bubble (by user)
     BUBBLE_PRIMARY_BUTTON_EXPAND = 1237;
     // Bubble prinary button second click to return to call
     BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL = 1238;
