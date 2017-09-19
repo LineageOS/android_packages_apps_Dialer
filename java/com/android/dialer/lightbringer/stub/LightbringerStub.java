@@ -28,6 +28,8 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerListener;
+import com.google.common.base.Optional;
+import java.util.List;
 import javax.inject.Inject;
 
 public class LightbringerStub implements Lightbringer {
@@ -50,10 +52,17 @@ public class LightbringerStub implements Lightbringer {
 
   @MainThread
   @Override
-  public boolean supportsUpgrade(@NonNull Context context, @Nullable String number) {
+  public Optional<Boolean> supportsUpgrade(@NonNull Context context, @Nullable String number) {
     Assert.isMainThread();
     Assert.isNotNull(context);
-    return false;
+    return Optional.of(false);
+  }
+
+  @Override
+  public void updateReachability(@NonNull Context context, @NonNull List<String> numbers) {
+    Assert.isMainThread();
+    Assert.isNotNull(context);
+    Assert.isNotNull(numbers);
   }
 
   @MainThread
