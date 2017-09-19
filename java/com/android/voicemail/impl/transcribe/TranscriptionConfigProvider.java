@@ -16,6 +16,7 @@
 package com.android.voicemail.impl.transcribe;
 
 import android.content.Context;
+import android.os.Build;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /** Provides configuration values needed to connect to the transcription server. */
@@ -27,7 +28,8 @@ public class TranscriptionConfigProvider {
   }
 
   public boolean isVoicemailTranscriptionEnabled() {
-    return ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+        && ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
   }
 
   public String getServerAddress() {
