@@ -134,14 +134,36 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     returnToCallBubble.setBubbleExpansionStateListener(
         new BubbleExpansionStateListener() {
           @Override
-          public void onBubbleExpansionStateChanged(@ExpansionState int expansionState) {
+          public void onBubbleExpansionStateChanged(
+              @ExpansionState int expansionState, boolean isUserAction) {
+            if (!isUserAction) {
+              return;
+            }
+
+            DialerCall call = CallList.getInstance().getActiveOrBackgroundCall();
             switch (expansionState) {
               case ExpansionState.START_EXPANDING:
-                Logger.get(context)
-                    .logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
+                if (call != null) {
+                  Logger.get(context)
+                      .logCallImpression(
+                          DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND,
+                          call.getUniqueCallId(),
+                          call.getTimeAddedMs());
+                } else {
+                  Logger.get(context)
+                      .logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
+                }
                 break;
               case ExpansionState.START_COLLAPSING:
-                Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
+                if (call != null) {
+                  Logger.get(context)
+                      .logCallImpression(
+                          DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER,
+                          call.getUniqueCallId(),
+                          call.getTimeAddedMs());
+                } else {
+                  Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
+                }
                 break;
               default:
                 break;
