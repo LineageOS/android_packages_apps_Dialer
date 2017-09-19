@@ -153,6 +153,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private int secondCallWithoutAnswerAndReleasedButtonTimes = 0;
   private VideoTech videoTech;
 
+  private boolean isImsReachable;
+
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
   }
@@ -1297,6 +1299,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     mVideoTechManager.dispatchRemovedFromCallList();
   }
 
+  public boolean isImsReachable() {
+    return isImsReachable;
+  }
+
+  private void setImsReachable(boolean imsReachable) {
+    isImsReachable = imsReachable;
+  }
+
   /**
    * Specifies whether a number is in the call history or not. {@link #CALL_HISTORY_STATUS_UNKNOWN}
    * means there is no result.
@@ -1502,7 +1512,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
       // Insert order here determines the priority of that video tech option
       videoTechs = new ArrayList<>();
-      videoTechs.add(new ImsVideoTech(Logger.get(call.mContext), call, call.mTelecomCall));
+
+      ImsVideoTech imsVideoTech =
+          new ImsVideoTech(Logger.get(call.mContext), call, call.mTelecomCall);
+      call.setImsReachable(imsVideoTech.isAvailable(context));
+      videoTechs.add(imsVideoTech);
 
       VideoTech rcsVideoTech =
           EnrichedCallComponent.get(call.mContext)
