@@ -124,9 +124,11 @@ public class Bubble {
 
   private BubbleExpansionStateListener bubbleExpansionStateListener;
 
+  /** Type of action after bubble collapse */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
-  private @interface CollapseEnd {
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  public @interface CollapseEnd {
     int NOTHING = 0;
     int HIDE = 1;
   }
@@ -210,18 +212,10 @@ public class Bubble {
   }
 
   /** Expands the main bubble menu. */
-  public void expand() {
-    if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
-      try {
-        currentInfo.getPrimaryIntent().send();
-      } catch (CanceledException e) {
-        throw new RuntimeException(e);
-      }
-      return;
-    }
-
+  public void expand(boolean isUserAction) {
     if (bubbleExpansionStateListener != null) {
-      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_EXPANDING);
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(
+          ExpansionState.START_EXPANDING, isUserAction);
     }
     doResize(
         () -> {
@@ -378,7 +372,7 @@ public class Bubble {
   public void showText(@NonNull CharSequence text) {
     textShowing = true;
     if (expanded) {
-      startCollapse(CollapseEnd.NOTHING);
+      startCollapse(CollapseEnd.NOTHING, false);
       doShowText(text);
     } else {
       // Need to transition from old bounds to new bounds manually
@@ -456,7 +450,7 @@ public class Bubble {
   }
 
   void onMoveStart() {
-    startCollapse(CollapseEnd.NOTHING);
+    startCollapse(CollapseEnd.NOTHING, true);
     viewHolder
         .getPrimaryButton()
         .animate()
@@ -474,7 +468,17 @@ public class Bubble {
   }
 
   void primaryButtonClick() {
-    expand();
+    // Send primary intent if not to expand.
+    if (expanded || textShowing || currentInfo.getActions().isEmpty()) {
+      try {
+        currentInfo.getPrimaryIntent().send();
+      } catch (CanceledException e) {
+        throw new RuntimeException(e);
+      }
+      return;
+    }
+
+    expand(true);
   }
 
   void onLeftRightSwitch(boolean onRight) {
@@ -534,7 +538,7 @@ public class Bubble {
     }
 
     if (expanded) {
-      startCollapse(CollapseEnd.HIDE);
+      startCollapse(CollapseEnd.HIDE, false);
       return;
     }
 
@@ -692,7 +696,8 @@ public class Bubble {
             });
   }
 
-  private void startCollapse(@CollapseEnd int endAction) {
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  public void startCollapse(@CollapseEnd int endAction, boolean isUserAction) {
     View expandedView = viewHolder.getExpandedView();
     if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
       // Drawer is already collapsed or animation is running.
@@ -706,7 +711,8 @@ public class Bubble {
       collapseEndAction = endAction;
     }
     if (bubbleExpansionStateListener != null && collapseEndAction == CollapseEnd.NOTHING) {
-      bubbleExpansionStateListener.onBubbleExpansionStateChanged(ExpansionState.START_COLLAPSING);
+      bubbleExpansionStateListener.onBubbleExpansionStateChanged(
+          ExpansionState.START_COLLAPSING, isUserAction);
     }
     collapseAnimation =
         expandedView
@@ -805,7 +811,7 @@ public class Bubble {
       root.setOnBackPressedListener(
           () -> {
             if (visibility == Visibility.SHOWING && expanded) {
-              startCollapse(CollapseEnd.NOTHING);
+              startCollapse(CollapseEnd.NOTHING, true);
               return true;
             }
             return false;
@@ -820,7 +826,7 @@ public class Bubble {
       root.setOnTouchListener(
           (v, event) -> {
             if (expanded && event.getActionMasked() == MotionEvent.ACTION_OUTSIDE) {
-              startCollapse(CollapseEnd.NOTHING);
+              startCollapse(CollapseEnd.NOTHING, true);
               return true;
             }
             return false;
@@ -910,6 +916,6 @@ public class Bubble {
 
   /** Listener for bubble expansion state change. */
   public interface BubbleExpansionStateListener {
-    void onBubbleExpansionStateChanged(@ExpansionState int expansionState);
+    void onBubbleExpansionStateChanged(@ExpansionState int expansionState, boolean isUserAction);
   }
 }
