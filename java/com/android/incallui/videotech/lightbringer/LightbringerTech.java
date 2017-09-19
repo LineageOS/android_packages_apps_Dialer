@@ -31,6 +31,8 @@ import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 
 public class LightbringerTech implements VideoTech, LightbringerListener {
   private final Lightbringer lightbringer;
@@ -38,6 +40,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   private final Call call;
   private final String callingNumber;
   private int callState = Call.STATE_NEW;
+  private boolean isRemoteUpgradeAvailabilityQueried;
 
   public LightbringerTech(
       @NonNull Lightbringer lightbringer,
@@ -69,13 +72,20 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
       LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
       return false;
     }
-
-    if (!lightbringer.supportsUpgrade(context, callingNumber)) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, number does not support it");
-      return false;
+    Optional<Boolean> localResult = lightbringer.supportsUpgrade(context, callingNumber);
+    if (localResult.isPresent()) {
+      LogUtil.v(
+          "LightbringerTech.isAvailable", "upgrade supported in local cache: " + localResult.get());
+      return localResult.get();
     }
 
-    return true;
+    if (!isRemoteUpgradeAvailabilityQueried) {
+      LogUtil.v("LightbringerTech.isAvailable", "reachability unknown, starting remote query");
+      isRemoteUpgradeAvailabilityQueried = true;
+      lightbringer.updateReachability(context, ImmutableList.of(callingNumber));
+    }
+
+    return false;
   }
 
   @Override

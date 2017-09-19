@@ -73,6 +73,8 @@ public final class NewSearchFragment extends Fragment
   // updates so they are bundled together
   private static final int ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY = 400;
 
+  private static final String KEY_SHOW_ZERO_SUGGEST = "use_zero_suggest";
+
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
   private static final int CONTACTS_LOADER_ID = 0;
@@ -99,6 +101,14 @@ public final class NewSearchFragment extends Fragment
 
   private Runnable updatePositionRunnable;
 
+  public static NewSearchFragment newInstance(boolean showZeroSuggest) {
+    NewSearchFragment fragment = new NewSearchFragment();
+    Bundle args = new Bundle();
+    args.putBoolean(KEY_SHOW_ZERO_SUGGEST, showZeroSuggest);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
   @Nullable
   @Override
   public View onCreateView(
@@ -107,6 +117,7 @@ public final class NewSearchFragment extends Fragment
     adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
     adapter.setCallInitiationType(callInitiationType);
     adapter.setSearchActions(getActions());
+    adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -212,6 +223,7 @@ public final class NewSearchFragment extends Fragment
       adapter.setQuery(query);
       adapter.setCallInitiationType(callInitiationType);
       adapter.setSearchActions(getActions());
+      adapter.setZeroSuggestVisible(isRegularSearch());
       loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
     }
@@ -354,9 +366,7 @@ public final class NewSearchFragment extends Fragment
    * the list of supported actions, see {@link SearchActionViewHolder.Action}.
    */
   private List<Integer> getActions() {
-    if (TextUtils.isEmpty(query)
-        || query.length() == 1
-        || callInitiationType == CallInitiationType.Type.REGULAR_SEARCH) {
+    if (TextUtils.isEmpty(query) || query.length() == 1 || isRegularSearch()) {
       return Collections.emptyList();
     }
 
@@ -368,5 +378,9 @@ public final class NewSearchFragment extends Fragment
       actions.add(Action.MAKE_VILTE_CALL);
     }
     return actions;
+  }
+
+  private boolean isRegularSearch() {
+    return callInitiationType == CallInitiationType.Type.REGULAR_SEARCH;
   }
 }
