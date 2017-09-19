@@ -24,6 +24,8 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_V
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_HANG_UP_ONGOING_CALL;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_OFF_SPEAKER;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_ON_SPEAKER;
 
 import android.Manifest;
 import android.app.ActivityManager;
@@ -49,6 +51,7 @@ import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
 import android.telecom.Call.Details;
+import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -79,6 +82,7 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.async.PausableExecutorImpl;
+import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
@@ -92,7 +96,9 @@ import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
 public class StatusBarNotifier
-    implements InCallPresenter.InCallStateListener, EnrichedCallManager.StateChangedListener {
+    implements InCallPresenter.InCallStateListener,
+        EnrichedCallManager.StateChangedListener,
+        AudioModeProvider.AudioModeListener {
 
   private static final String NOTIFICATION_TAG = "STATUS_BAR_NOTIFIER";
   private static final int NOTIFICATION_ID = 1;
@@ -120,6 +126,7 @@ public class StatusBarNotifier
   private String mSavedContent = null;
   private Bitmap mSavedLargeIcon;
   private String mSavedContentTitle;
+  private CallAudioState savedCallAudioState;
   private Uri mRingtone;
   private StatusBarCallListener mStatusBarCallListener;
 
@@ -132,6 +139,7 @@ public class StatusBarNotifier
             new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
             CallList.getInstance());
     mCurrentNotification = NOTIFICATION_NONE;
+    AudioModeProvider.getInstance().addListener(this);
   }
 
   /**
@@ -290,6 +298,7 @@ public class StatusBarNotifier
 
     Trace.beginSection("prepare work");
     final int callState = call.getState();
+    final CallAudioState callAudioState = AudioModeProvider.getInstance().getAudioState();
 
     // Check if data has changed; if nothing is different, don't issue another notification.
     final int iconResId = getIconToDisplay(call);
@@ -329,7 +338,8 @@ public class StatusBarNotifier
         contentTitle,
         callState,
         notificationType,
-        contactInfo.contactRingtoneUri)) {
+        contactInfo.contactRingtoneUri,
+        callAudioState)) {
       Trace.endSection();
       return;
     }
@@ -412,7 +422,7 @@ public class StatusBarNotifier
       addDismissUpgradeRequestAction(builder);
       addAcceptUpgradeRequestAction(builder);
     } else {
-      createIncomingCallNotification(call, callState, builder);
+      createIncomingCallNotification(call, callState, callAudioState, builder);
     }
 
     addPersonReference(builder, contactInfo, call);
@@ -479,7 +489,7 @@ public class StatusBarNotifier
   }
 
   private void createIncomingCallNotification(
-      DialerCall call, int state, Notification.Builder builder) {
+      DialerCall call, int state, CallAudioState callAudioState, Notification.Builder builder) {
     setNotificationWhen(call, state, builder);
 
     // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
@@ -487,6 +497,7 @@ public class StatusBarNotifier
         || state == DialerCall.State.ONHOLD
         || DialerCall.State.isDialing(state)) {
       addHangupAction(builder);
+      addSpeakerAction(builder, callAudioState);
     } else if (state == DialerCall.State.INCOMING || state == DialerCall.State.CALL_WAITING) {
       addDismissAction(builder);
       if (call.isVideoCall()) {
@@ -523,7 +534,8 @@ public class StatusBarNotifier
       String contentTitle,
       int state,
       int notificationType,
-      Uri ringtone) {
+      Uri ringtone,
+      CallAudioState callAudioState) {
 
     // The two are different:
     // if new title is not null, it should be different from saved version OR
@@ -542,7 +554,8 @@ public class StatusBarNotifier
             || (mCallState != state)
             || largeIconChanged
             || contentTitleChanged
-            || !Objects.equals(mRingtone, ringtone);
+            || !Objects.equals(mRingtone, ringtone)
+            || !Objects.equals(savedCallAudioState, callAudioState);
 
     // If we aren't showing a notification right now or the notification type is changing,
     // definitely do an update.
@@ -560,6 +573,7 @@ public class StatusBarNotifier
     mSavedLargeIcon = largeIcon;
     mSavedContentTitle = contentTitle;
     mRingtone = ringtone;
+    savedCallAudioState = callAudioState;
 
     if (retval) {
       LogUtil.d(
@@ -882,6 +896,47 @@ public class StatusBarNotifier
             .build());
   }
 
+  private void addSpeakerAction(Notification.Builder builder, CallAudioState callAudioState) {
+    if ((callAudioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
+        == CallAudioState.ROUTE_BLUETOOTH) {
+      // Don't add speaker button if bluetooth is connected
+      return;
+    }
+    if (callAudioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
+      addSpeakerOffAction(builder);
+    } else if ((callAudioState.getRoute() & CallAudioState.ROUTE_WIRED_OR_EARPIECE) != 0) {
+      addSpeakerOnAction(builder);
+    }
+  }
+
+  private void addSpeakerOnAction(Notification.Builder builder) {
+    LogUtil.d(
+        "StatusBarNotifier.addSpeakerOnAction",
+        "will show \"Speaker on\" action in the ongoing active call Notification");
+    PendingIntent speakerOnPendingIntent =
+        createNotificationPendingIntent(mContext, ACTION_TURN_ON_SPEAKER);
+    builder.addAction(
+        new Notification.Action.Builder(
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_volume_up_white_24),
+                mContext.getText(R.string.notification_action_speaker_on),
+                speakerOnPendingIntent)
+            .build());
+  }
+
+  private void addSpeakerOffAction(Notification.Builder builder) {
+    LogUtil.d(
+        "StatusBarNotifier.addSpeakerOffAction",
+        "will show \"Speaker off\" action in the ongoing active call Notification");
+    PendingIntent speakerOffPendingIntent =
+        createNotificationPendingIntent(mContext, ACTION_TURN_OFF_SPEAKER);
+    builder.addAction(
+        new Notification.Action.Builder(
+                Icon.createWithResource(mContext, R.drawable.quantum_ic_phone_in_talk_white_24),
+                mContext.getText(R.string.notification_action_speaker_off),
+                speakerOffPendingIntent)
+            .build());
+  }
+
   private void addVideoCallAction(Notification.Builder builder) {
     LogUtil.i(
         "StatusBarNotifier.addVideoCallAction",
@@ -975,6 +1030,16 @@ public class StatusBarNotifier
       mStatusBarCallListener.cleanup();
     }
     mStatusBarCallListener = listener;
+  }
+
+  @Override
+  public void onAudioStateChanged(CallAudioState audioState) {
+    if (CallList.getInstance().getActiveOrBackgroundCall() == null) {
+      // We only care about speaker mode when in call
+      return;
+    }
+
+    updateNotification(CallList.getInstance());
   }
 
   private class StatusBarCallListener implements DialerCallListener {
