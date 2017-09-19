@@ -38,7 +38,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
@@ -1156,46 +1155,15 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       boolean showCallbackNumber = hasProperty(Details.PROPERTY_EMERGENCY_CALLBACK_MODE);
 
       if (isEmergencyCall() || showCallbackNumber) {
-        callbackNumber = getSubscriptionNumber();
-      } else {
-        StatusHints statusHints = getTelecomCall().getDetails().getStatusHints();
-        if (statusHints != null) {
-          Bundle extras = statusHints.getExtras();
-          if (extras != null) {
-            callbackNumber = extras.getString(TelecomManager.EXTRA_CALL_BACK_NUMBER);
-          }
-        }
+        callbackNumber =
+            mContext.getSystemService(TelecomManager.class).getLine1Number(getAccountHandle());
       }
 
-      String simNumber =
-          mContext.getSystemService(TelecomManager.class).getLine1Number(getAccountHandle());
-      if (!showCallbackNumber && PhoneNumberUtils.compare(callbackNumber, simNumber)) {
-        LogUtil.v(
-            "DialerCall.getCallbackNumber",
-            "numbers are the same (and callback number is not being forced to show);"
-                + " not showing the callback number");
-        callbackNumber = "";
-      }
       if (callbackNumber == null) {
         callbackNumber = "";
       }
     }
     return callbackNumber;
-  }
-
-  private String getSubscriptionNumber() {
-    // If it's an emergency call, and they're not populating the callback number,
-    // then try to fall back to the phone sub info (to hopefully get the SIM's
-    // number directly from the telephony layer).
-    PhoneAccountHandle accountHandle = getAccountHandle();
-    if (accountHandle != null) {
-      PhoneAccount account =
-          mContext.getSystemService(TelecomManager.class).getPhoneAccount(accountHandle);
-      if (account != null) {
-        return getNumberFromHandle(account.getSubscriptionAddress());
-      }
-    }
-    return null;
   }
 
   @Override
