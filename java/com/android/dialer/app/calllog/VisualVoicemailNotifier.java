@@ -52,7 +52,7 @@ import java.util.Map;
 /** Shows a notification in the status bar for visual voicemail. */
 final class VisualVoicemailNotifier {
   /** Prefix used to generate a unique tag for each voicemail notification. */
-  private static final String NOTIFICATION_TAG_PREFIX = "VisualVoicemail_";
+  static final String NOTIFICATION_TAG_PREFIX = "VisualVoicemail_";
   /** Common ID for all voicemail notifications. */
   static final int NOTIFICATION_ID = 1;
   /** Tag for the group summary notification. */
