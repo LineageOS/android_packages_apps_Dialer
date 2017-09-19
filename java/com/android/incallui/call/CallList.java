@@ -118,7 +118,9 @@ public class CallList implements DialerCallDelegate {
     Trace.beginSection("CallList.onCallAdded");
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
-    logSecondIncomingCall(context, call);
+    if (getFirstCall() != null) {
+      logSecondIncomingCall(context, getFirstCall(), call);
+    }
 
     EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
     manager.registerCapabilitiesListener(call);
@@ -206,28 +208,26 @@ public class CallList implements DialerCallDelegate {
     Trace.endSection();
   }
 
-  private void logSecondIncomingCall(@NonNull Context context, @NonNull DialerCall incomingCall) {
-    DialerCall firstCall = getFirstCall();
-    if (firstCall != null) {
-      DialerImpression.Type impression;
-      if (firstCall.isVideoCall()) {
-        if (incomingCall.isVideoCall()) {
-          impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VIDEO_CALL;
-        } else {
-          impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VOICE_CALL;
-        }
+  private void logSecondIncomingCall(
+      @NonNull Context context, @NonNull DialerCall firstCall, @NonNull DialerCall incomingCall) {
+    DialerImpression.Type impression;
+    if (firstCall.isVideoCall()) {
+      if (incomingCall.isVideoCall()) {
+        impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VIDEO_CALL;
       } else {
-        if (incomingCall.isVideoCall()) {
-          impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VIDEO_CALL;
-        } else {
-          impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VOICE_CALL;
-        }
+        impression = DialerImpression.Type.VIDEO_CALL_WITH_INCOMING_VOICE_CALL;
       }
-      Assert.checkArgument(impression != null);
-      Logger.get(context)
-          .logCallImpression(
-              impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());
+    } else {
+      if (incomingCall.isVideoCall()) {
+        impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VIDEO_CALL;
+      } else {
+        impression = DialerImpression.Type.VOICE_CALL_WITH_INCOMING_VOICE_CALL;
+      }
     }
+    Assert.checkArgument(impression != null);
+    Logger.get(context)
+        .logCallImpression(
+            impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());
   }
 
   private static boolean isPotentialEmergencyCallback(Context context, DialerCall call) {
