@@ -173,6 +173,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String KEY_FIRST_LAUNCH = "first_launch";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
   private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
+  private static final String KEY_FAB_VISIBLE = "fab_visible";
   private static final String TAG_NEW_SEARCH_FRAGMENT = "new_search";
   private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
   private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
@@ -435,6 +436,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
       mWasConfigurationChange = savedInstanceState.getBoolean(KEY_WAS_CONFIGURATION_CHANGE);
       mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
+      mFloatingActionButtonController.setVisible(savedInstanceState.getBoolean(KEY_FAB_VISIBLE));
       mActionBarController.restoreInstanceState(savedInstanceState);
     }
 
@@ -629,6 +631,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     outState.putBoolean(KEY_IN_NEW_SEARCH_UI, mInNewSearch);
     outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
     outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
+    outState.putBoolean(KEY_FAB_VISIBLE, mFloatingActionButtonController.isVisible());
     outState.putBoolean(KEY_WAS_CONFIGURATION_CHANGE, isChangingConfigurations());
     mActionBarController.saveInstanceState(outState);
     mStateSaved = true;
@@ -1180,7 +1183,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     Fragment fragment = getFragmentManager().findFragmentByTag(tag);
     if (fragment == null) {
       if (useNewSearch) {
-        fragment = new NewSearchFragment();
+        fragment = NewSearchFragment.newInstance(!isDialpadShown());
       } else if (smartDialSearch) {
         fragment = new SmartDialSearchFragment();
       } else {

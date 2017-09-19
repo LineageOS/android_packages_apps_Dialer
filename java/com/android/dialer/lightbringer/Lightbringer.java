@@ -25,6 +25,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
+import com.google.auto.value.AutoValue;
+import com.google.common.base.Optional;
+import java.util.List;
 
 public interface Lightbringer {
 
@@ -33,8 +36,12 @@ public interface Lightbringer {
   @MainThread
   boolean isReachable(@NonNull Context context, @Nullable String number);
 
+  /** @return {@code null} if result is unknown. */
   @MainThread
-  boolean supportsUpgrade(@NonNull Context context, @Nullable String number);
+  Optional<Boolean> supportsUpgrade(@NonNull Context context, @Nullable String number);
+
+  @MainThread
+  void updateReachability(@NonNull Context context, @NonNull List<String> numbers);
 
   @MainThread
   Intent getIntent(@NonNull Context context, @NonNull String number);
@@ -67,4 +74,19 @@ public interface Lightbringer {
   @StringRes
   @MainThread
   int getIncomingCallTypeText();
+
+  /** Reachability information for a number. */
+  @AutoValue
+  abstract class ReachabilityData {
+    public abstract String number();
+
+    public abstract boolean videoCallable();
+
+    public abstract boolean supportsUpgrade();
+
+    public static ReachabilityData create(
+        String number, boolean videoCallable, boolean supportsUpgrade) {
+      return new AutoValue_Lightbringer_ReachabilityData(number, videoCallable, supportsUpgrade);
+    }
+  }
 }

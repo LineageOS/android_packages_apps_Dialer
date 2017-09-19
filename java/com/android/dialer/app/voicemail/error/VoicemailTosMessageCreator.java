@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
@@ -139,7 +140,8 @@ public class VoicemailTosMessageCreator {
   }
 
   private boolean isVoicemailTranscriptionEnabled() {
-    return ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+        && ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
   }
 
   private void showDeclineTosDialog(final PhoneAccountHandle handle) {
