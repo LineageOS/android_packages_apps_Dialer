@@ -80,6 +80,9 @@ public final class NewSearchFragment extends Fragment
   private static final int REMOTE_DIRECTORIES_LOADER_ID = 2;
   private static final int REMOTE_CONTACTS_LOADER_ID = 3;
 
+  private static final String KEY_QUERY = "key_query";
+  private static final String KEY_CALL_INITIATION_TYPE = "key_call_initiation_type";
+
   private EmptyContentView emptyContentView;
   private RecyclerView recyclerView;
   private SearchAdapter adapter;
@@ -99,7 +102,7 @@ public final class NewSearchFragment extends Fragment
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle bundle) {
+      LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
     adapter.setCallInitiationType(callInitiationType);
@@ -119,10 +122,23 @@ public final class NewSearchFragment extends Fragment
       initLoaders();
     }
 
+    if (savedInstanceState != null) {
+      setQuery(
+          savedInstanceState.getString(KEY_QUERY),
+          CallInitiationType.Type.forNumber(savedInstanceState.getInt(KEY_CALL_INITIATION_TYPE)));
+    }
+
     if (updatePositionRunnable != null) {
       ViewUtil.doOnPreDraw(view, false, updatePositionRunnable);
     }
     return view;
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt(KEY_CALL_INITIATION_TYPE, callInitiationType.getNumber());
+    outState.putString(KEY_QUERY, query);
   }
 
   private void initLoaders() {
