@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.callcomposer.CallComposerActivity;
@@ -50,6 +51,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   private final SearchCursorManager searchCursorManager;
   private final Activity activity;
 
+  private boolean showZeroSuggest;
   private String query;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
 
@@ -124,7 +126,19 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
 
   @Override
   public int getItemCount() {
+    if (TextUtils.isEmpty(query) && !showZeroSuggest) {
+      return 0;
+    }
     return searchCursorManager.getCount();
+  }
+
+  /**
+   * @param visible If true and query is empty, the adapter won't show any list elements.
+   * @see #setQuery(String)
+   * @see #getItemCount()
+   */
+  public void setZeroSuggestVisible(boolean visible) {
+    showZeroSuggest = visible;
   }
 
   public void setQuery(String query) {
