@@ -21,12 +21,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
+import android.telecom.CallAudioState;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.TelecomAdapter;
 
 /**
  * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus sent from
@@ -52,6 +54,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
       "com.android.incallui.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST";
   public static final String ACTION_DECLINE_VIDEO_UPGRADE_REQUEST =
       "com.android.incallui.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST";
+  public static final String ACTION_TURN_ON_SPEAKER = "com.android.incallui.ACTION_TURN_ON_SPEAKER";
+  public static final String ACTION_TURN_OFF_SPEAKER =
+      "com.android.incallui.ACTION_TURN_OFF_SPEAKER";
 
   @RequiresApi(VERSION_CODES.N_MR1)
   public static final String ACTION_PULL_EXTERNAL_CALL =
@@ -84,6 +89,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
       context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
       int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, -1);
       InCallPresenter.getInstance().getExternalCallNotifier().pullExternalCall(notificationId);
+    } else if (action.equals(ACTION_TURN_ON_SPEAKER)) {
+      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
+    } else if (action.equals(ACTION_TURN_OFF_SPEAKER)) {
+      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_WIRED_OR_EARPIECE);
     }
   }
 
