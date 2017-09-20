@@ -967,6 +967,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (number != null) {
       contact.setNumber(number);
     }
+
+    if (!TextUtils.isEmpty(postDialDigits)) {
+      contact.setPostDialDigits(postDialDigits);
+    }
+
     /* second line of contact view. */
     if (!TextUtils.isEmpty(info.name)) {
       contact.setDisplayNumber(displayNumber);
