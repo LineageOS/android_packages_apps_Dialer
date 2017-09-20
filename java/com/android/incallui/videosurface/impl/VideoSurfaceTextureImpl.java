@@ -220,10 +220,10 @@ public class VideoSurfaceTextureImpl implements VideoSurfaceTexture {
     public boolean onSurfaceTextureDestroyed(SurfaceTexture destroyedSurfaceTexture) {
       LogUtil.i(
           "SurfaceTextureListener.onSurfaceTextureDestroyed",
-          "destroyedSurfaceTexture: "
-              + destroyedSurfaceTexture
-              + " "
-              + VideoSurfaceTextureImpl.this.toString());
+          "destroyedSurfaceTexture: %s, %s, isDoneWithSurface: %b",
+          destroyedSurfaceTexture,
+          VideoSurfaceTextureImpl.this.toString(),
+          isDoneWithSurface);
       if (delegate != null) {
         delegate.onSurfaceDestroyed(VideoSurfaceTextureImpl.this);
       } else {
