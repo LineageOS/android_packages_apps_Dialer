@@ -16,6 +16,8 @@
 
 package com.android.dialer.searchfragment.list;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
@@ -76,6 +78,7 @@ public final class NewSearchFragment extends Fragment
   private static final String KEY_SHOW_ZERO_SUGGEST = "use_zero_suggest";
 
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+  @VisibleForTesting private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
 
   private static final int CONTACTS_LOADER_ID = 0;
   private static final int NEARBY_PLACES_LOADER_ID = 1;
@@ -279,6 +282,12 @@ public final class NewSearchFragment extends Fragment
         emptyContentView.setVisibility(View.GONE);
         initLoaders();
       }
+    } else if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+        // Force a refresh of the data since we were missing the permission before this.
+        loadNearbyPlacesCursor();
+        adapter.hideLocationPermissionRequest();
+      }
     }
   }
 
@@ -317,6 +326,12 @@ public final class NewSearchFragment extends Fragment
 
   // Should not be called before remote directories (not contacts) have finished loading.
   private void loadNearbyPlacesCursor() {
+    if (!PermissionsUtil.hasLocationPermissions(getContext())) {
+      if (adapter != null) {
+        adapter.showLocationPermissionRequest(v -> requestLocationPermission());
+      }
+      return;
+    }
     // Cancel existing load if one exists.
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
 
@@ -326,6 +341,16 @@ public final class NewSearchFragment extends Fragment
     }
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  private void requestLocationPermission() {
+    Assert.checkArgument(
+        !PermissionsUtil.hasPermission(getContext(), ACCESS_FINE_LOCATION),
+        "attempted to request already granted location permission");
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allLocationGroupPermissionsUsedInDialer);
+    requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
   }
 
   @Override

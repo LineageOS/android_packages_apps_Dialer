@@ -23,6 +23,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
@@ -54,6 +56,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   private boolean showZeroSuggest;
   private String query;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
+  private OnClickListener locationRequestClickListener;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public SearchAdapter(Activity activity, SearchCursorManager searchCursorManager) {
@@ -81,6 +84,10 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
       case RowType.SEARCH_ACTION:
         return new SearchActionViewHolder(
             LayoutInflater.from(activity).inflate(R.layout.search_action_layout, root, false));
+      case RowType.LOCATION_REQUEST:
+        return new LocationPermissionViewHolder(
+            LayoutInflater.from(activity).inflate(R.layout.location_permission_row, root, false),
+            locationRequestClickListener);
       case RowType.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid RowType: " + rowType);
@@ -107,6 +114,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     } else if (holder instanceof SearchActionViewHolder) {
       ((SearchActionViewHolder) holder)
           .setAction(searchCursorManager.getSearchAction(position), position, query);
+    } else if (holder instanceof LocationPermissionViewHolder) {
+      // No-op
     } else {
       throw Assert.createIllegalStateFailException("Invalid ViewHolder: " + holder);
     }
@@ -165,6 +174,28 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     }
   }
 
+  /**
+   * Updates the adapter to show the location request row element. If the element was previously
+   * hidden, the adapter will call {@link #notifyDataSetChanged()}.
+   */
+  public void showLocationPermissionRequest(OnClickListener clickListener) {
+    Assert.isNotNull(locationRequestClickListener = clickListener);
+    if (searchCursorManager.showLocationPermissionRequest(true)) {
+      notifyDataSetChanged();
+    }
+  }
+
+  /**
+   * Updates the adapter to hide the location request row element. If the element was previously
+   * visible, the adapter will call {@link #notifyDataSetChanged()}.
+   */
+  void hideLocationPermissionRequest() {
+    locationRequestClickListener = null;
+    if (searchCursorManager.showLocationPermissionRequest(false)) {
+      notifyDataSetChanged();
+    }
+  }
+
   public void setRemoteContactsCursor(SearchCursor remoteContactsCursor) {
     if (searchCursorManager.setCorpDirectoryCursor(remoteContactsCursor)) {
       notifyDataSetChanged();
@@ -206,5 +237,18 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   public void openCallAndShare(DialerContact contact) {
     Intent intent = CallComposerActivity.newIntent(activity, contact);
     DialerUtils.startActivityWithErrorToast(activity, intent);
+  }
+
+  /** Viewholder for R.layout.location_permission_row that requests the location permission. */
+  private static class LocationPermissionViewHolder extends RecyclerView.ViewHolder {
+
+    LocationPermissionViewHolder(View itemView, OnClickListener locationRequestClickListener) {
+      super(itemView);
+      Assert.isNotNull(locationRequestClickListener);
+      itemView
+          .findViewById(
+              com.android.dialer.searchfragment.nearbyplaces.R.id.location_permission_allow)
+          .setOnClickListener(locationRequestClickListener);
+    }
   }
 }
