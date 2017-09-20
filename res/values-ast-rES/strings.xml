@@ -26,7 +26,6 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="dialerIconLabel">Teléfonu</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -50,6 +49,7 @@
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
   <string name="clearCallLogConfirmation_title">¿Llimpiar historial de llamaes?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
+  <string name="clearCallLogConfirmation">Esto desaniciará toles llamaes del to historial</string>
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <string name="clearCallLogProgress_title">Llimpiando historial de llamaes\u2026</string>
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
@@ -74,7 +74,6 @@
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
-  <string name="visual_voicemail_settings">Axustes</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -133,7 +132,6 @@
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_overflow_description" msgid="2295659037509008453">Más opciones</string>
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
   <!-- Menu item to copy something [CHAR_LIMIT=10] -->
@@ -144,11 +142,11 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
-  <string name="dialer_settings_label">Axustes</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
   <!-- Toast for call detail screen when couldn't read the requested details -->
+  <string name="toast_call_detail_error">Detalles non disponibles</string>
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
@@ -218,24 +216,27 @@
   <!-- String describing the icon used to start a voice search -->
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <!-- String used to display calls from unknown numbers in the call log -->
+  <string name="unknown">Desconocíos</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String used to display calls from private numbers in the call log -->
   <!-- String used to display calls from pay phone in the call log -->
+  <string name="payphone">Teléfonu públicu</string>
   <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
+  <string name="callDetailsShortDurationFormat"><xliff:g id="seconds" example="28">%s</xliff:g> segs</string>
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
   <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
+  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Nun pue llamase a esti númberu</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
-  <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
   <!-- The title of a dialog that displays the IMEI of the phone -->
-  <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
+  <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM\u2026</string>
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
   <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
@@ -256,7 +257,6 @@
   <!-- Text displayed when the list of voicemails is empty -->
   <!--  Menu option to show favorite contacts only -->
   <!--  Title of activity that displays a list of all calls -->
-  <string name="call_log_activity_title">Historial</string>
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all missed calls only
@@ -289,7 +289,6 @@
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
-  <string name="remove_contact">Desaniciar</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
@@ -393,10 +392,8 @@
          [CHAR LIMIT=40] -->
   <!-- Title for the "Sounds and vibration" settings control settings related to ringtones,
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
-  <string name="sounds_and_vibration_title">Soníos y vibración</string>
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
-  <string name="accessibility_settings_title">Accesibilidá</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
   <string name="ringtone_title">Timbre del teléfonu</string>
   <!-- Setting option name to enable or disable vibration when ringing the phone.
@@ -405,15 +402,12 @@
   <string name="dtmf_tone_enable_title">Tonos del tecláu numbéricu</string>
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
-  <string-array name="dtmf_tone_length_entries">
-    <item>Normal</item>
-    <item>Long</item>
-  </string-array>
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
   <string name="call_settings_label">Llamaes</string>
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
+  <string name="phone_account_settings_label">Cuentes de llamaes</string>
   <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->

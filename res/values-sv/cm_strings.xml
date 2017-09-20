@@ -97,6 +97,8 @@
   <string name="call_playback_no_app_found_toast">Ingen app kunde hittas för uppspelning av den valda inspelningen.</string>
   <!-- T9 Search Text -->
   <string name="sign_in_hint_text">Logga in för att ringa %1$s samtal</string>
+  <string name="wifi_hint_text">Ring kostnadsfria %1$s till %1$s samtal via WiFi.</string>
+  <string name="emergency_call_hint_text">Inget SIM-kort. Endast nödsamtal.</string>
   <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> samtal</string>
   <!-- InCall Plugin Settings -->
   <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> inställningar</string>
@@ -106,9 +108,16 @@
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nej</string>
   <string name="callerinfo_provider_auth_no">Nej, tack</string>
+  <string name="callerinfo_provider_auth_learn_more">Lär dig mer</string>
+  <string name="block_hidden_title">Blockera dolda telefonnummer</string>
+  <string name="block_hidden_summary">Anse dolda nummer som spam</string>
+  <string name="block_dialog_title">Blockera detta nummer?</string>
   <string name="block_dialog_positive">Blockera</string>
   <string name="block_dialog_negative">Avbryt</string>
+  <string name="block_dialog_report_spam">Rapportera som spam till <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_disable_title">Inaktivera %1$s?</string>
+  <string name="powered_by_provider">Drivs av <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_search_help">"Sök %1$s kontakter genom att\nbyta lägen här"</string>
   <string name="provider_voice_call">"%1$s röstsamtal"</string>
   <string name="provider_video_call">"%1$s videosamtal"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
