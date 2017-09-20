@@ -63,6 +63,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             >
 
           <com.android.dialer.app.calllog.DialerQuickContactBadge
@@ -71,7 +72,6 @@
               android:layout_height="@dimen/contact_photo_size"
               android:paddingTop="2dp"
               android:nextFocusRight="@id/primary_action_view"
-              android:layout_gravity="top"
               android:focusable="true"/>
 
           <ImageView
@@ -162,9 +162,7 @@
               android:layout_height="wrap_content"
               android:textColor="@color/call_log_voicemail_transcript_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
-              android:textIsSelectable="true"
-              android:ellipsize="marquee"
-              android:maxLines="10"/>
+              android:textIsSelectable="true"/>
 
             <TextView
               android:id="@+id/voicemail_transcription_branding"
