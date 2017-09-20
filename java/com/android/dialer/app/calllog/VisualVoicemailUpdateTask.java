@@ -126,7 +126,9 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
         // Group header
         continue;
       }
-      NewCall existingCall = queryHelper.getNewCallsQuery().query(Uri.parse(notification.getTag()));
+      String uri =
+          notification.getTag().replace(VisualVoicemailNotifier.NOTIFICATION_TAG_PREFIX, "");
+      NewCall existingCall = queryHelper.getNewCallsQuery().query(Uri.parse(uri));
       if (existingCall != null) {
         result.add(existingCall);
       } else {
