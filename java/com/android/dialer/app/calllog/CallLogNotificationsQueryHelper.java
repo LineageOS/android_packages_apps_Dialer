@@ -363,7 +363,14 @@ public class CallLogNotificationsQueryHelper {
             "No READ_CALL_LOG permission, returning null for calls lookup.");
         return null;
       }
-      try (Cursor cursor = mContentResolver.query(callsUri, PROJECTION, null, null, null)) {
+      final String selection = String.format("%s = '%s'", Calls.VOICEMAIL_URI, callsUri.toString());
+      try (Cursor cursor =
+          mContentResolver.query(
+              Calls.CONTENT_URI_WITH_VOICEMAIL,
+              (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) ? PROJECTION_O : PROJECTION,
+              selection,
+              null,
+              null)) {
         if (cursor == null) {
           return null;
         }
