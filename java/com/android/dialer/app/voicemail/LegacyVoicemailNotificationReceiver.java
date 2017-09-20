@@ -25,6 +25,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
+import android.support.v4.os.UserManagerCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.app.calllog.LegacyVoicemailNotifier;
@@ -113,6 +114,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
     }
 
     if (!intent.getBooleanExtra(VoicemailClient.EXTRA_IS_LEGACY_MODE, false)
+        && UserManagerCompat.isUserUnlocked(context)
         && VoicemailComponent.get(context)
             .getVoicemailClient()
             .isActivated(context, phoneAccountHandle)) {
