@@ -130,6 +130,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       HistoryResult historyResult = entry.getHistoryResults(0);
       multimediaDetailsContainer.setVisibility(View.VISIBLE);
       multimediaDetailsContainer.setOnClickListener((v) -> startSmsIntent(context, number));
+      multimediaImageContainer.setOnClickListener((v) -> startSmsIntent(context, number));
       multimediaImageContainer.setClipToOutline(true);
 
       if (!TextUtils.isEmpty(historyResult.getImageUri())) {
