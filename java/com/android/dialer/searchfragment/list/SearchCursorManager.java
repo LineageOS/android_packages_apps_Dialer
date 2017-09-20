@@ -244,6 +244,13 @@ public final class SearchCursorManager {
    * @return Cursor moved to position specific to passed in position.
    */
   SearchCursor getCursor(int position) {
+    if (showLocationPermissionRequest) {
+      if (position == 0) {
+        return LOCATION_PERMISSION_CURSOR;
+      }
+      position--;
+    }
+
     if (contactsCursor != null) {
       int count = contactsCursor.getCount();
 
@@ -254,13 +261,7 @@ public final class SearchCursorManager {
       position -= count;
     }
 
-    if (showLocationPermissionRequest) {
-      if (position == 0) {
-        return LOCATION_PERMISSION_CURSOR;
-      }
-      position--;
-
-    } else if (nearbyPlacesCursor != null) {
+    if (!showLocationPermissionRequest && nearbyPlacesCursor != null) {
       int count = nearbyPlacesCursor.getCount();
 
       if (position - count < 0) {

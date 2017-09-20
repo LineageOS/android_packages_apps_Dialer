@@ -19,12 +19,13 @@
     android:layout_height="wrap_content"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:paddingTop="16dp">
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
 
   <ImageView
       android:id="@+id/permission_image"
-      android:layout_width="56dp"
-      android:layout_height="56dp"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
       android:layout_marginEnd="16dp"
       android:src="@drawable/quantum_ic_my_location_vd_theme_24"
       android:tint="@color/dialer_secondary_text_color"/>
@@ -34,8 +35,9 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_toEndOf="@id/permission_image"
-      android:minHeight="56dp"
-      android:text="@string/permission_no_location_for_search"
+      android:minHeight="40dp"
+      android:text="@string/search_location_permission"
+      android:lineSpacingMultiplier="1.2"
       android:textSize="16sp"
       android:textColor="@color/dialer_secondary_text_color"/>
 
@@ -45,7 +47,18 @@
       android:layout_height="wrap_content"
       android:layout_alignParentEnd="true"
       android:layout_below="@id/permission_text"
-      android:text="@string/nearby_places_allow"
+      android:layout_marginTop="24dp"
+      android:text="@string/nearby_places_allow"/>
+
+  <Button
+      android:id="@+id/location_permission_dismiss"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_toStartOf="@+id/location_permission_allow"
+      android:layout_below="@id/permission_text"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="24dp"
+      android:text="@string/nearby_places_dismiss"
       android:textColor="@color/dialer_theme_color"
       style="@style/Widget.AppCompat.Button.Borderless"/>
 </RelativeLayout>

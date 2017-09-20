@@ -56,7 +56,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   private boolean showZeroSuggest;
   private String query;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
-  private OnClickListener locationRequestClickListener;
+  private OnClickListener allowClickListener;
+  private OnClickListener dismissClickListener;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public SearchAdapter(Activity activity, SearchCursorManager searchCursorManager) {
@@ -87,7 +88,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
       case RowType.LOCATION_REQUEST:
         return new LocationPermissionViewHolder(
             LayoutInflater.from(activity).inflate(R.layout.location_permission_row, root, false),
-            locationRequestClickListener);
+            allowClickListener,
+            dismissClickListener);
       case RowType.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid RowType: " + rowType);
@@ -178,10 +180,12 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
    * Updates the adapter to show the location request row element. If the element was previously
    * hidden, the adapter will call {@link #notifyDataSetChanged()}.
    */
-  public void showLocationPermissionRequest(OnClickListener clickListener) {
-    Assert.isNotNull(locationRequestClickListener = clickListener);
+  public void showLocationPermissionRequest(
+      OnClickListener allowClickListener, OnClickListener dismissClickListener) {
+    this.allowClickListener = Assert.isNotNull(allowClickListener);
+    this.dismissClickListener = Assert.isNotNull(dismissClickListener);
     if (searchCursorManager.showLocationPermissionRequest(true)) {
-      notifyDataSetChanged();
+      notifyItemRemoved(0);
     }
   }
 
@@ -190,9 +194,10 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
    * visible, the adapter will call {@link #notifyDataSetChanged()}.
    */
   void hideLocationPermissionRequest() {
-    locationRequestClickListener = null;
+    allowClickListener = null;
+    dismissClickListener = null;
     if (searchCursorManager.showLocationPermissionRequest(false)) {
-      notifyDataSetChanged();
+      notifyItemRemoved(0);
     }
   }
 
@@ -242,13 +247,19 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   /** Viewholder for R.layout.location_permission_row that requests the location permission. */
   private static class LocationPermissionViewHolder extends RecyclerView.ViewHolder {
 
-    LocationPermissionViewHolder(View itemView, OnClickListener locationRequestClickListener) {
+    LocationPermissionViewHolder(
+        View itemView, OnClickListener allowClickListener, OnClickListener dismissClickListener) {
       super(itemView);
-      Assert.isNotNull(locationRequestClickListener);
+      Assert.isNotNull(allowClickListener);
+      Assert.isNotNull(dismissClickListener);
       itemView
           .findViewById(
               com.android.dialer.searchfragment.nearbyplaces.R.id.location_permission_allow)
-          .setOnClickListener(locationRequestClickListener);
+          .setOnClickListener(allowClickListener);
+      itemView
+          .findViewById(
+              com.android.dialer.searchfragment.nearbyplaces.R.id.location_permission_dismiss)
+          .setOnClickListener(dismissClickListener);
     }
   }
 }
