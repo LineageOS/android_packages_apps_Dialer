@@ -96,7 +96,7 @@ public final class SearchCursorManager {
       contactsCursor.close();
     }
 
-    if (cursor != null && cursor.getCount() > 0) {
+    if (cursor != null) {
       contactsCursor = cursor;
     } else {
       contactsCursor = null;
@@ -114,7 +114,7 @@ public final class SearchCursorManager {
       nearbyPlacesCursor.close();
     }
 
-    if (cursor != null && cursor.getCount() > 0) {
+    if (cursor != null) {
       nearbyPlacesCursor = cursor;
     } else {
       nearbyPlacesCursor = null;
@@ -132,7 +132,7 @@ public final class SearchCursorManager {
       corpDirectoryCursor.close();
     }
 
-    if (cursor != null && cursor.getCount() > 0) {
+    if (cursor != null) {
       corpDirectoryCursor = cursor;
     } else {
       corpDirectoryCursor = null;
