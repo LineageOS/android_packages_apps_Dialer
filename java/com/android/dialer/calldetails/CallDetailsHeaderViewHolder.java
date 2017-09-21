@@ -110,7 +110,10 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
       Logger.get(view.getContext()).logImpression(DialerImpression.Type.CALL_DETAILS_CALL_BACK);
       DialerUtils.startActivityWithErrorToast(
           view.getContext(),
-          new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_DETAILS).build());
+          new CallIntentBuilder(
+                  contact.getNumber() + contact.getPostDialDigits(),
+                  CallInitiationType.Type.CALL_DETAILS)
+              .build());
     } else {
       throw Assert.createIllegalStateFailException("View OnClickListener not implemented: " + view);
     }
