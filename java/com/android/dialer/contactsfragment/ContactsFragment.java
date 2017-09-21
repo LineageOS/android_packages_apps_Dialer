@@ -164,7 +164,9 @@ public class ContactsFragment extends Fragment
 
   @Override
   public void onChange() {
-    if (getActivity() != null && isAdded()) {
+    if (getActivity() != null
+        && isAdded()
+        && PermissionsUtil.hasContactsReadPermissions(getContext())) {
       getLoaderManager().restartLoader(0, null, this);
     }
   }
