@@ -100,6 +100,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpadview.DialpadFragment;
@@ -146,6 +147,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         CallLogAdapter.OnActionModeStateChangedListener,
+        ContactsFragment.OnContactsListScrolledListener,
         DialpadFragment.HostInterface,
         OldSpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -191,6 +193,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   /** Fragment containing the dialpad that slides into view */
   protected DialpadFragment mDialpadFragment;
 
+  /** Root layout of DialtactsActivity */
   private CoordinatorLayout mParentLayout;
   /** Fragment for searching phone numbers using the alphanumeric keyboard. */
   private RegularSearchFragment mRegularSearchFragment;
@@ -693,6 +696,10 @@ public class DialtactsActivity extends TransactionSafeActivity
     startActivity(intent);
   }
 
+  public boolean inAllContactsTab() {
+    return mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS;
+  }
+
   @Override
   public void onClick(View view) {
     int resId = view.getId();
@@ -879,6 +886,11 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onCallPlacedFromDialpad() {
     hideDialpadFragment(false /* animate */, true /*clearDialpad */);
     exitSearchUi();
+  }
+
+  @Override
+  public void onContactsListScrolled(int scrollState) {
+    // intentionally empty.
   }
 
   /**

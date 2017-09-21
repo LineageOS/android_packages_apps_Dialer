@@ -38,6 +38,7 @@ import android.widget.TextView;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.preference.ContactsPreferences.ChangeListener;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.DialerUtils;
@@ -89,6 +90,11 @@ public class ContactsFragment extends Fragment
   private ContactsPreferences contactsPrefs;
   private @Header int header;
   private @ClickAction int clickAction;
+
+  /** Listener for contacts list scroll state. */
+  public interface OnContactsListScrolledListener {
+    void onContactsListScrolled(int scrollState);
+  }
 
   /**
    * Used to get a configured instance of ContactsFragment.
@@ -238,6 +244,9 @@ public class ContactsFragment extends Fragment
       return;
     }
     String anchoredHeaderString = adapter.getHeaderString(firstCompletelyVisible);
+
+    FragmentUtils.getParentUnsafe(this, OnContactsListScrolledListener.class)
+        .onContactsListScrolled(recyclerView.getScrollState());
 
     // If the user swipes to the top of the list very quickly, there is some strange behavior
     // between this method updating headers and adapter#onBindViewHolder updating headers.
