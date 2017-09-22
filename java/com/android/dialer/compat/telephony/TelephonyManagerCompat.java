@@ -198,4 +198,34 @@ public class TelephonyManagerCompat {
       context.sendBroadcast(intent);
     }
   }
+
+  /**
+   * Returns network country iso for given {@code PhoneAccountHandle} for O+ devices and country iso
+   * for default sim for pre-O devices.
+   */
+  public static String getNetworkCountryIsoForPhoneAccountHandle(
+      Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
+    return getTelephonyManagerForPhoneAccountHandle(context, phoneAccountHandle)
+        .getNetworkCountryIso();
+  }
+
+  /**
+   * Returns TelephonyManager for given {@code PhoneAccountHandle} for O+ devices and default {@code
+   * TelephonyManager} for pre-O devices.
+   */
+  public static TelephonyManager getTelephonyManagerForPhoneAccountHandle(
+      Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    if (phoneAccountHandle == null) {
+      return telephonyManager;
+    }
+    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+      TelephonyManager telephonyManagerForPhoneAccount =
+          telephonyManager.createForPhoneAccountHandle(phoneAccountHandle);
+      if (telephonyManagerForPhoneAccount != null) {
+        return telephonyManagerForPhoneAccount;
+      }
+    }
+    return telephonyManager;
+  }
 }

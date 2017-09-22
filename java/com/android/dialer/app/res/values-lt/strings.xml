@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> yra neprisijungęs (-usi) ir su juo (ja) negalima susisiekti"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Apie"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transkribavo „Google“"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"„Google“ transkribuoja..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Scenarijus nepasiekiamas"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"„Google“ transkribuoja…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Scenarijus nepasiekiamas."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Scenarijus nepasiekiamas. Kalba nepalaikoma."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Scenarijus nepasiekiamas. Neaptikta, kad būtų kalbama."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Peržiūrėti"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Skambutis ištrintas. Peržiūrėkite ir ištrinkite priedus, kurie buvo bendrinti per šį skambutį programoje „Messages“."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Skambučiai ištrinti. Peržiūrėkite ir ištrinkite priedus, kurie buvo bendrinti per skambučius programoje „Messages“."</string>

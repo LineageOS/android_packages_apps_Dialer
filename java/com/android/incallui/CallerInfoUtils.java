@@ -70,7 +70,7 @@ public class CallerInfoUtils {
             "CallerInfoUtils.getCallerInfoForCall",
             "Actually starting CallerInfoAsyncQuery.startQuery()...");
 
-        //noinspection MissingPermission
+        // noinspection MissingPermission
         CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, info, listener, cookie);
       } else {
         LogUtil.w(
@@ -93,6 +93,7 @@ public class CallerInfoUtils {
     info.namePresentation = call.getCnapNamePresentation();
     info.callSubject = call.getCallSubject();
     info.contactExists = false;
+    info.countryIso = PhoneNumberHelper.getCurrentCountryIso(context, call.getAccountHandle());
 
     String number = call.getNumber();
     if (!TextUtils.isEmpty(number)) {

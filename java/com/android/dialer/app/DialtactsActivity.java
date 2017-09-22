@@ -100,6 +100,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpadview.DialpadFragment;
@@ -146,6 +147,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         CallLogAdapter.OnActionModeStateChangedListener,
+        ContactsFragment.OnContactsListScrolledListener,
         DialpadFragment.HostInterface,
         OldSpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -191,6 +193,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   /** Fragment containing the dialpad that slides into view */
   protected DialpadFragment mDialpadFragment;
 
+  /** Root layout of DialtactsActivity */
   private CoordinatorLayout mParentLayout;
   /** Fragment for searching phone numbers using the alphanumeric keyboard. */
   private RegularSearchFragment mRegularSearchFragment;
@@ -221,7 +224,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   private boolean mInRegularSearch;
   private boolean mClearSearchOnPause;
   private boolean mIsDialpadShown;
-  private boolean mShowDialpadOnResume;
   /** Whether or not the device is in landscape orientation. */
   private boolean mIsLandscape;
   /** True if the dialpad is only temporarily showing due to being in call */
@@ -371,6 +373,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     Trace.beginSection(TAG + " onCreate");
+    LogUtil.enterBlock("DialtactsActivity.onCreate");
     super.onCreate(savedInstanceState);
 
     mFirstLaunch = true;
@@ -435,7 +438,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mInNewSearch = savedInstanceState.getBoolean(KEY_IN_NEW_SEARCH_UI);
       mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
       mWasConfigurationChange = savedInstanceState.getBoolean(KEY_WAS_CONFIGURATION_CHANGE);
-      mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
+      mIsDialpadShown = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
       mFloatingActionButtonController.setVisible(savedInstanceState.getBoolean(KEY_FAB_VISIBLE));
       mActionBarController.restoreInstanceState(savedInstanceState);
     }
@@ -507,10 +510,9 @@ public class DialtactsActivity extends TransactionSafeActivity
       LogUtil.i("DialtactsActivity.onResume", "phone not in use, hiding dialpad fragment");
       hideDialpadFragment(false, true);
       mInCallDialpadUp = false;
-    } else if (mShowDialpadOnResume) {
+    } else if (mIsDialpadShown) {
       LogUtil.i("DialtactsActivity.onResume", "showing dialpad on resume");
       showDialpadFragment(false);
-      mShowDialpadOnResume = false;
     } else {
       PostCall.promptUserForMessageIfNecessary(this, mParentLayout);
     }
@@ -537,7 +539,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (!mWasConfigurationChange) {
       mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
-    mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+    if (mIsDialpadShown) {
+      mFloatingActionButtonController.setVisible(false);
+    } else {
+      mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+    }
 
     if (mFirstLaunch) {
       // Only process the Intent the first time onResume() is called after receiving it
@@ -624,6 +630,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
+    LogUtil.enterBlock("DialtactsActivity.onSaveInstanceState");
     super.onSaveInstanceState(outState);
     outState.putString(KEY_SEARCH_QUERY, mSearchQuery);
     outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
@@ -642,12 +649,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     LogUtil.i("DialtactsActivity.onAttachFragment", "fragment: %s", fragment);
     if (fragment instanceof DialpadFragment) {
       mDialpadFragment = (DialpadFragment) fragment;
-      if (!mIsDialpadShown && !mShowDialpadOnResume) {
-        LogUtil.i("DialtactsActivity.onAttachFragment", "hiding dialpad fragment");
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.hide(mDialpadFragment);
-        transaction.commit();
-      }
     } else if (fragment instanceof SmartDialSearchFragment) {
       mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
       mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(this);
@@ -691,6 +692,10 @@ public class DialtactsActivity extends TransactionSafeActivity
   protected void handleMenuSettings() {
     final Intent intent = new Intent(this, DialerSettingsActivity.class);
     startActivity(intent);
+  }
+
+  public boolean inAllContactsTab() {
+    return mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS;
   }
 
   @Override
@@ -879,6 +884,11 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onCallPlacedFromDialpad() {
     hideDialpadFragment(false /* animate */, true /*clearDialpad */);
     exitSearchUi();
+  }
+
+  @Override
+  public void onContactsListScrolled(int scrollState) {
+    // intentionally empty.
   }
 
   /**

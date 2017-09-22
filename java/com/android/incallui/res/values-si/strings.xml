@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"නැත"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"ඩයල් කරමින්"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"කරගෙනය යන ඇමතුම"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"කරගෙන යන වීඩියෝ ඇමතුම"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"කරගෙන යන වීඩියෝ ඇමතුම ‑ වීඩියෝව විරාම කෙරිණි"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"කරගෙන යන කාර්යාල ඇමතුම"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"කෙරෙමින් පවතින <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"එන <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"වීඩියෝව"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"පිළිගන්න"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"ප්‍රතික්ෂේප කිරීම"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"ස්පීකරය ක්‍රියාත්මක කරන්න"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"ස්පීකරය ක්‍රියාවිරහිත කරන්න"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"වෙනත් උපාංගයක සිදු වන ඇමතුම"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"වෙනත් උපාංගයක කෙරෙමින් පවතින වීඩියෝ ඇමතුම"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"ඇමතුම ගන්න"</string>

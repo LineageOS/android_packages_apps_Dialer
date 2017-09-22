@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> оффлайн режиминде болгондуктан, байланышууга болбойт"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Колдонмо жөнүндө"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google тарабынан чечмеленди"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Күтө туруңуз..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Чечмелөө жеткиликсиз."</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Күтө туруңуз…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Чечмелөө жеткиликсиз."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Чечмелүү жеткиликсиз. Тил колдоого алынбайт."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Чечмелөө жеткиликсиз. Cөз таанылган жок."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Карап көрүү"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Чалуу жок кылынды. Билдирүүлөр колдонмосунда чалуу убагында жөнөтүлгөн файлдарды текшерип, жок кылыңыз."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Чалуулар жок кылынды. Билдирүүлөр колдонмосунда чалуулар убагында жөнөтүлгөн файлдарды текшерип, жок кылыңыз."</string>

@@ -159,7 +159,7 @@
     <string name="permission_no_calllog" msgid="4053705651238775784">"आपला कॉल लॉग पाहण्‍यासाठी, फोन परवानगी चालू करा."</string>
     <string name="permission_no_search" msgid="2424710404207193826">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="8686908130349369423">"कॉल करण्यासाठी, फोन परवानगी चालू करा."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"फोन अॅपला सिस्टीम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
+    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"फोन अॅपला सिस्टम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
     <string name="blocked_number_call_log_label" msgid="4212282846299997693">"अवरोधित केले"</string>
     <string name="call_log_action_block_report_number" msgid="7302636538668696729">"अवरोधित करा/स्पॅमचा अहवाल द्या"</string>
     <string name="call_log_action_block_number" msgid="5048188386501998865">"नंबर अवरोधित करा"</string>
@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ऑफलाइन आहे आणि त्यांच्याशी संपर्क साधू शकत नाही"</string>
     <string name="about_phone_label" msgid="582991354677973731">"बद्दल"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google ने प्रतिलेखन केलेले"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google प्रतिलेखित करत आहे ..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"प्रतिलेखन उपलब्ध नाही"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google प्रतिलेखित करत आहे..."</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"प्रतिलेखन उपलब्ध नाही"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"प्रतिलेखन उपलब्ध नाही. भाषा सपोर्ट करत नाही."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"प्रतिलेखन उपलब्ध नाही. स्‍पीच सापडले नाही."</string>
     <string name="view_conversation" msgid="7895904782094119702">"पहा"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"कॉल हटविला. या कॉल दरम्यान Messages मध्ये सामायिक केलेली संलग्नके पहा आणि हटवा."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"कॉल हटविला. कॉल दरम्यान Messages मध्ये सामायिक केलेली संलग्नके पहा आणि हटवा."</string>

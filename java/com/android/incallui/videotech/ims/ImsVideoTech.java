@@ -108,6 +108,11 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean isPaused() {
+    return paused;
+  }
+
+  @Override
   public VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen) {
     // TODO move creating VideoCallPresenter here

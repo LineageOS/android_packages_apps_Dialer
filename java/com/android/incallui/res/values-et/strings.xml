@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"Ei"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Valimine"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Käimasolev kõne"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Käimasolev videokõne"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Käimasolev videokõne – video on peatatud"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Käimasolev töökõne"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Käimasolev <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Sissetulev <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"Nõustu"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"Keeldu"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Kõlari sisselülitamine"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Kõlari väljalülitamine"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"Pooleliolev kõne teise seadmes"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"Pooleliolev videokõne teises seadmes"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"Alusta helistamist"</string>

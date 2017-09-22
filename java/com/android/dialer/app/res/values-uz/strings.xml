@@ -37,7 +37,7 @@
     <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Telefon"</string>
     <string name="notification_missedCall_message" msgid="5086910028988305964">"SMS yozish"</string>
     <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Chaqirish: <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Chaqiruv: <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Ovozli pochta raqami noma’lum"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ta ovozli xabar </item>
@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> hozir oflayn va u bilan bog‘lanishning imkoni yo‘q"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Ilova haqida"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google tomon. trans-ya qilindi"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google transkripsiya qilmoqda…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transkripsiya mavjud emas"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transkripsiya qilmoqda…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transkripsiya qilib bo‘lmadi."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transkripsiya qilib bo‘lmadi. Bu til qo‘llab-quvvatlanmaydi."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transkripsiya qilib bo‘lmadi. Nutq aniqlanmadi."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Ko‘rish"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Chaqiruv o‘chirildi. Android Xabarlar ilovasi orqali bu qo‘ng‘iroq davomida ulashilgan biriktirmalarni ko‘rish va o‘chirsh mumkin."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Chaqiruvlar o‘chirildi. Android Xabarlar ilovasi orqali bu qo‘ng‘iroqlar davomida ulashilgan biriktirmalarni ko‘rish va o‘chirsh mumkin."</string>

@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ఆఫ్‌లైన్‌లో ఉన్నందున వారిని చేరుకోవడం సాధ్యపడదు"</string>
     <string name="about_phone_label" msgid="582991354677973731">"పరిచయం"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google లిప్యంతరీకరించింది"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google లిప్యంతరీకరిస్తోంది …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"లిప్యంతరీకరణ అందుబాటులో లేదు"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google లిప్యంతరీకరిస్తోంది…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"లిప్యంతరీకరణ అందుబాటులో లేదు."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"లిప్యంతరీకరణ అందుబాటులో లేదు. భాషకు మద్దతు లేదు."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"లిప్యంతరీకరణ అందుబాటులో లేదు. ప్రసంగం కనుగొనబడలేదు."</string>
     <string name="view_conversation" msgid="7895904782094119702">"వీక్షించండి"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"కాల్ తొలగించబడింది. ఈ కాల్‌లో భాగస్వామ్యం చేయబడిన జోడింపులను సందేశాల అనువర్తనంలో వీక్షించండి మరియు తొలగించండి."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"కాల్ తొలగించబడింది. కాల్‌ల్లో భాగస్వామ్యం చేయబడిన జోడింపులను సందేశాల అనువర్తనంలో వీక్షించండి మరియు తొలగించండి."</string>
