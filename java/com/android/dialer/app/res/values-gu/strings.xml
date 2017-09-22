@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ઑફલાઇન છે અને તેના સુધી પહોંચી શકતાં નથી"</string>
     <string name="about_phone_label" msgid="582991354677973731">"વિશે"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google દ્વારા ટ્રાન્સ્ક્રાઇબ કરેલ"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ટ્રાન્સ્ક્રાઇબ કરી રહ્યું છે..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ટ્રાન્સ્ક્રાઇબ કરી રહ્યું છે…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી. ભાષા સમર્થિત નથી."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ નથી. કોઈ ધ્વનિ સંભળાયો નથી."</string>
     <string name="view_conversation" msgid="7895904782094119702">"જુઓ"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"કૉલ કાઢી નાખ્યો. આ કૉલ દરમિયાન સંદેશામાં શેર કરેલ જોડાણ જુઓ અને કાઢી નાખો."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"કૉલ કાઢી નાખ્યા. કૉલ દરમિયાન સંદેશામાં શેર કરેલ જોડાણ જુઓ અને કાઢી નાખો."</string>

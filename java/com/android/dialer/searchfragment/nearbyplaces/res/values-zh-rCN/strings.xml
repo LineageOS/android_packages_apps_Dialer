@@ -18,4 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places" msgid="275117539511113867">"附近的地点"</string>
+    <string name="search_location_permission" msgid="5893183045324252816">"要获取附近地点的联系信息，请允许应用使用您的位置信息。"</string>
+    <string name="nearby_places_allow" msgid="4060507469206871903">"允许"</string>
+    <string name="nearby_places_dismiss" msgid="3255977972553076907">"关闭"</string>
 </resources>

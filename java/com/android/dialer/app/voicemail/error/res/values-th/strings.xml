@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"ขออภัย เราพบว่ามีปัญหาเกิดขึ้น โปรดลองอีกครั้งในภายหลัง หากยังพบปัญหาอยู่ โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9009"</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"เชื่อมต่อกล่องข้อความเสียงไม่ได้"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"ขออภัย เราไม่สามารถเชื่อมต่อกล่องข้อความเสียงได้ในขณะนี้ โปรดลองอีกครั้งในภายหลัง หากยังพบปัญหาอยู่ โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9990"</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"ตั้งค่าข้อความเสียง"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"ตั้งค่าข้อความเสียง"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"ยังไม่ได้ตั้งค่าข้อความเสียงในบัญชี โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9991"</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"ข้อความเสียง"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"ใช้ข้อความเสียงพร้อมภาพในอุปกรณ์เครื่องนี้ไม่ได้ โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9992"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"ข้อความเสียง"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"ใช้ข้อความเสียงพร้อมภาพในอุปกรณ์เครื่องนี้ไม่ได้ โปรดติดต่อฝ่ายบริการลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> แล้วแจ้งรหัสข้อผิดพลาด 9992"</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"เกิดข้อผิดพลาด"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9993"</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"ข้อความเสียงพร้อมภาพ"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสิ้น โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9994"</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"ข้อความเสียงพร้อมภาพ"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสิ้น โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9995"</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"ข้อความเสียงพร้อมภาพ"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสิ้น โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9996"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"ข้อความเสียงพร้อมภาพ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสมบูรณ์ โปรดติดต่อฝ่ายบริการลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> แล้วแจ้งรหัสข้อผิดพลาด 9994"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"ข้อความเสียงพร้อมภาพ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพ โปรดติดต่อฝ่ายบริการลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> แล้วแจ้งรหัสข้อผิดพลาด 9995"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"ข้อความเสียงพร้อมภาพ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"หากต้องการเปิดใช้งานข้อความเสียงพร้อมภาพ โปรดติดต่อฝ่ายบริการลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> แล้วแจ้งรหัสข้อผิดพลาด 9996"</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"เกิดข้อผิดพลาด"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสิ้น โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9998"</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"ปิดใช้ข้อความเสียงพร้อมภาพอยู่"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"หากต้องการตั้งค่าข้อความเสียงพร้อมภาพให้เสร็จสมบูรณ์ โปรดติดต่อฝ่ายบริการลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> แล้วแจ้งรหัสข้อผิดพลาด 9998"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"ปิดใช้ข้อความเสียงพร้อมภาพ"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> เพื่อเปิดใช้ข้อความเสียงพร้อมภาพ"</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"เกิดข้อผิดพลาด"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9997"</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9989"</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"เกิดข้อผิดพลาด"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"โปรดติดต่อฝ่ายสนับสนุนลูกค้าที่หมายเลข <xliff:g id="NUMBER">%1$s</xliff:g> และแจ้งรหัสข้อผิดพลาด 9999"</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"ข้อกำหนดในการให้บริการข้อความเสียงพร้อมภาพ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nคุณต้องยอมรับข้อกำหนดในการให้บริการของ Verizon Wireless เพื่อใช้ข้อความเสียงพร้อมภาพ:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"เปิดใช้ข้อความเสียงพร้อมภาพ"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"เปิดข้อความเสียงพร้อมภาพ"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nการเปิดข้อความเสียงพร้อมภาพ หมายความว่า คุณยอมรับข้อกำหนดในการให้บริการของ Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"เปิดข้อความเสียงพร้อมภาพ"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"ดูและฟังข้อความโดยไม่ต้องโทรไปฟังข้อความเสียงเอง เนื่องจากบริการถอดเสียงฟรีของ Google ได้ดำเนินการถอดเสียงข้อความให้แล้ว %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"ดูและฟังข้อความโดยไม่ต้องโทรไปฟังข้อความเสียงเอง %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"เรียนรู้เพิ่มเติม"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"หากคุณไม่ยอมรับข้อกำหนดในการใช้บริการ ข้อความเสียงพร้อมภาพจะถูกปิดใช้งาน"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"ปิดใช้ข้อความเสียงพร้อมภาพ"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"หากคุณไม่ยอมรับข้อกำหนดในการใช้บริการ การถอดข้อความเสียงจะปิดใช้งาน"</string>

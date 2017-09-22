@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ez dago konektatuta, eta ezin zara jarri harremanetan berarekin"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Honi buruz"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google-k transkribatu du"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ari da transkribatzen…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Ez dago transkripziorik"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Transkribatzen ari da Google…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transkripzioa ez dago erabilgarri."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transkripzioa ez dago erabilgarri. Ez da onartzen hizkuntza."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transkripzioa ez dago erabilgarri. Ez da detektatu ahotsik."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Ikusi"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Ezabatu da deia. Ikusi eta ezabatu dei honetan partekatutako eranskinak Mezuak aplikazioan."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Ezabatu dira deiak. Ikusi eta ezabatu dei hauetan partekatutako eranskinak Mezuak aplikazioan."</string>

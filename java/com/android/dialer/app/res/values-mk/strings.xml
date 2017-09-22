@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Контактот <xliff:g id="NAME">%1$s</xliff:g> е офлајн и недостапен"</string>
     <string name="about_phone_label" msgid="582991354677973731">"За"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Транскрибирано од Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google транскрибира…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Не е достапна транскрипција"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google транскрибира…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Не е достапна транскрипција."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Не е достапна транскрипција. Јазикот не е поддржан."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Не е достапна транскрипција. Нема откриен говор."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Прикажи"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Повикот е избришан. За преглед и бришење на прилозите споделени во текот на разговоров, одете во „Пораки“."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Повиците се избришани. За преглед и бришење на прилозите споделени во текот на разговорите, одете во „Пораки“."</string>

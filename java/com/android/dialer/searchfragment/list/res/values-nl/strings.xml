@@ -18,4 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="new_permission_no_search" msgid="6107959563874740441">"Als je wilt zoeken in je contacten, moet je het recht Contacten inschakelen."</string>
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"Nieuw contact maken"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"Toevoegen aan een contact"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"Sms verzenden"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"Videogesprek starten"</string>
 </resources>

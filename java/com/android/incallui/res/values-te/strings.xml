@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"కాదు"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"డయల్ చేస్తోంది"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"కాల్ కొనసాగుతోంది"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"వీడియో కాల్ జరుగుతోంది"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"వీడియో కాల్ జరుగుతోంది ‑ వీడియో పాజ్ చేయబడింది"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"కార్యాలయ కాల్ కొనసాగుతోంది"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> కొనసాగుతోంది"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ఇన్‌కమింగ్ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"వీడియో"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"ఆమోదిస్తున్నాను"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"తిరస్కరించు"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"స్పీకర్‌ను ఆన్ చేయండి"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"స్పీకర్‌ను ఆఫ్ చేయండి"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"మరో పరికరంలో కాల్ జరుగుతోంది"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"మరో పరికరంలో వీడియో కాల్ జరుగుతోంది"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"కాల్‌ను తీయి"</string>

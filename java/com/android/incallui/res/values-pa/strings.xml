@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"ਨਹੀਂ"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"ਡਾਇਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"ਜਾਰੀ ਕਾਲ"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"ਜਾਰੀ ਵੀਡੀਓ ਕਾਲ"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"ਜਾਰੀ ਵੀਡੀਓ ਕਾਲ - ਵੀਡੀਓ ਰੋਕਿਆ ਗਿਆ"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ਕੰਮ ਸਬੰਧਿਤ ਜਾਰੀ ਕਾਲ"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"ਜਾਰੀ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ਆ ਰਹੀ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"ਵੀਡੀਓ"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"ਸਵੀਕਾਰ ਕਰੋ"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"ਅਸਵੀਕਾਰ ਕਰੋ"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"ਸਪੀਕਰ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"ਸਪੀਕਰ ਬੰਦ ਕਰੋ"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ \'ਤੇ ਜਾਰੀ ਕਾਲ"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ \'ਤੇ ਜਾਰੀ ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"ਕਾਲ ਲਓ"</string>
@@ -68,8 +72,8 @@
     <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ਕਾਲ ਸਮਾਪਤ ਕਰੋ"</string>
     <string name="conference_call_name" msgid="8189987124611337174">"ਕਾਨਫਰੰਸ ਕਾਲ"</string>
     <string name="generic_conference_call_name" msgid="1546941472424243894">"ਕਾਲ ਵਿੱਚ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ਮੋਬਾਈਲ ਡੈਟੇ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕਾਲ ਜਾਰੀ ਰੱਖੀ ਜਾ ਰਹੀ ਹੈ…"</string>
+    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ਮੋਬਾਈਲ  ਡਾਟੇ  ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕਾਲ ਜਾਰੀ ਰੱਖੀ ਜਾ ਰਹੀ ਹੈ…"</string>
     <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi‑Fi ਨੈੱਟਵਰਕ \'ਤੇ ਬਦਲੀ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ਵੀਡੀਓ ਕਾਲ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ \'ਤੇ ਜਾਰੀ ਰਹੇਗੀ। ਮਿਆਰੀ ਡੈਟਾ ਖਰਚੇ ਲਾਗੂ ਹੋ ਸਕਦੇ ਹਨ।"</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ਇਸ ਨੂੰ ਦੁਬਾਰਾ ਨਾ ਵਿਖਾਓ"</string>
+    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ਵੀਡੀਓ ਕਾਲ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ \'ਤੇ ਜਾਰੀ ਰਹੇਗੀ। ਮਿਆਰੀ  ਡਾਟਾ  ਖਰਚੇ ਲਾਗੂ ਹੋ ਸਕਦੇ ਹਨ।"</string>
+    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ਇਸ ਨੂੰ ਦੁਬਾਰਾ ਨਾ  ਦਿਖਾਓ"</string>
 </resources>

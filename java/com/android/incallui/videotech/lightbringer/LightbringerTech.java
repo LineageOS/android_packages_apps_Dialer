@@ -104,6 +104,11 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
+  public boolean isPaused() {
+    return false;
+  }
+
+  @Override
   public VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen) {
     throw Assert.createUnsupportedOperationFailException();

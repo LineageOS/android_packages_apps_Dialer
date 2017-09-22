@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"Hayır"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Numara çevriliyor"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Devam eden çağrılar"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Devam eden görüntülü görüşme"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Devam eden görüntülü görüşme ‑ video duraklatıldı"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Süren iş çağrısı"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Devam eden <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Gelen <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"Kabul et"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"Reddet"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Hoparlörü açın"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Hoparlörü kapatın"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"Başka bir cihazda devam eden çağrı"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"Başka bir cihazda devam eden video görüşmesi var"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"Çağrıyı Al"</string>

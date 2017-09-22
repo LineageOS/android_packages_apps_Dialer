@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ഓഫ്‌ലൈനായതിനാൽ കോൾ ചെയ്യാനാവില്ല"</string>
     <string name="about_phone_label" msgid="582991354677973731">"ആമുഖം"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google ട്രാൻസ്‌ക്രൈബ് ചെയ്‌തത്"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google കേട്ടെഴുതുന്നു..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google കേട്ടെഴുതുന്നു…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല. ഭാഷ പിന്തുണയ്‌ക്കുന്നില്ല."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല. സംഭാഷണമൊന്നും കണ്ടെത്തിയില്ല."</string>
     <string name="view_conversation" msgid="7895904782094119702">"കാണുക"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"കോൾ ഇല്ലാതാക്കി. ഈ കോൾ ചെയ്യുമ്പോൾ പങ്കിട്ട അറ്റാച്ച്‌മെന്റുകൾ മെസേജിൽ കാണുകയും ഇല്ലാതാക്കുകയും ചെയ്യുക."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"കോളുകൾ ഇല്ലാതാക്കി. ഈ കോളുകൾ ചെയ്യുമ്പോൾ പങ്കിട്ട അറ്റാച്ച്‌മെന്റുകൾ മെസേജിൽ കാണുകയും ഇല്ലാതാക്കുകയും ചെയ്യുക."</string>

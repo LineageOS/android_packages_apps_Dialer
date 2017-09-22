@@ -16,12 +16,15 @@
 
 package com.android.dialer.searchfragment.list;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -51,6 +54,7 @@ import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
 import com.android.dialer.util.CallUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.EmptyContentView;
@@ -74,8 +78,10 @@ public final class NewSearchFragment extends Fragment
   private static final int ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY = 400;
 
   private static final String KEY_SHOW_ZERO_SUGGEST = "use_zero_suggest";
+  private static final String KEY_LOCATION_PROMPT_DISMISSED = "search_location_prompt_dismissed";
 
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+  @VisibleForTesting private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
 
   private static final int CONTACTS_LOADER_ID = 0;
   private static final int NEARBY_PLACES_LOADER_ID = 1;
@@ -279,6 +285,12 @@ public final class NewSearchFragment extends Fragment
         emptyContentView.setVisibility(View.GONE);
         initLoaders();
       }
+    } else if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+      if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+        // Force a refresh of the data since we were missing the permission before this.
+        loadNearbyPlacesCursor();
+        adapter.hideLocationPermissionRequest();
+      }
     }
   }
 
@@ -317,6 +329,15 @@ public final class NewSearchFragment extends Fragment
 
   // Should not be called before remote directories (not contacts) have finished loading.
   private void loadNearbyPlacesCursor() {
+    if (!PermissionsUtil.hasLocationPermissions(getContext())
+        && !DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(getContext())
+            .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false)) {
+      if (adapter != null) {
+        adapter.showLocationPermissionRequest(
+            v -> requestLocationPermission(), v -> dismissLocationPermission());
+      }
+      return;
+    }
     // Cancel existing load if one exists.
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
 
@@ -326,6 +347,24 @@ public final class NewSearchFragment extends Fragment
     }
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadNearbyPlacesRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  private void requestLocationPermission() {
+    Assert.checkArgument(
+        !PermissionsUtil.hasPermission(getContext(), ACCESS_FINE_LOCATION),
+        "attempted to request already granted location permission");
+    String[] deniedPermissions =
+        PermissionsUtil.getPermissionsCurrentlyDenied(
+            getContext(), PermissionsUtil.allLocationGroupPermissionsUsedInDialer);
+    requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
+  }
+
+  private void dismissLocationPermission() {
+    PreferenceManager.getDefaultSharedPreferences(getContext())
+        .edit()
+        .putBoolean(KEY_LOCATION_PROMPT_DISMISSED, true)
+        .apply();
+    adapter.hideLocationPermissionRequest();
   }
 
   @Override

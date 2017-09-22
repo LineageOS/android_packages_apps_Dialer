@@ -146,7 +146,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"ਕਾਲ ਬਲੌਕਿੰਗ ਅਸਮਰੱਥ ਕਰ ਦਿੱਤੀ ਗਈ ਹੈ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਫੋਨ ਦੁਆਰਾ ਪਿਛਲੇ 48 ਘੰਟਿਆਂ ਤੋਂ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਹੋਇਆ ਹੈ। ਇਹ 48 ਘੰਟਿਆਂ ਦਾ ਸਮਾਂ ਪੂਰਾ ਹੋਣ ਤੇੋਂ ਬਾਅਦ ਆਟੋਮੈਟਿਕਲੀ ਮੁੜ-ਸਮਰੱਥ ਹੋ ਜਾਵੇਗੀ।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"ਆਯਾਤ ਨੰਬਰ"</string>
     <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"ਤੁਹਾਡੇ ਚਿੰਨ੍ਹਿਤ ਕੀਤੇ ਪਿਛਲੇ ਕੁਝ ਕਾਲਰ ਹੋਰ ਐਪਸ ਦੁਆਰਾ ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ ਵੌਇਸਮੇਲ ਨੂੰ ਭੇਜੇ ਗਏ ਹਨ।"</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"ਨੰਬਰ ਵਿਖਾਓ"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"ਨੰਬਰ  ਦਿਖਾਓ"</string>
     <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"ਆਯਾਤ ਕਰੋ"</string>
     <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="addBlockedNumber" msgid="3053473735238295551">"ਨੰਬਰ ਜੋੜੋ"</string>
@@ -156,7 +156,7 @@
     <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> ਪਹਿਲਾਂ ਹੀ ਬਲੌਕ ਕੀਤਾ ਹੋਇਆ ਹੈ।"</string>
     <string name="phone_account_settings_label" msgid="8372485478006965920">"ਕਾਲਿੰਗ ਖਾਤੇ"</string>
     <string name="permission_no_speeddial" msgid="8487215628510596753">"ਸਪੀਡ ਡਾਇਲ ਨੂੰ ਸਮਰੱਥ ਕਰਨ ਲਈ, ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"ਆਪਣਾ ਕਾਲ ਲੌਗ ਵੇਖਣ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_calllog" msgid="4053705651238775784">"ਆਪਣਾ ਕਾਲ ਲੌਗ  ਦੇਖਣ  ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_no_search" msgid="2424710404207193826">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਦੀ ਖੋਜ ਕਰਨ ਲਈ,, ਸੰਪਰਕ ਅਨੁਮਤੀਆਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_place_call" msgid="8686908130349369423">"ਕਾਲ ਕਰਨ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"ਫ਼ੋਨ ਐਪ ਦੇ ਕੋਲ ਸਿਸਟਮ ਸੈਟਿੰਗਜ਼ ਵਿੱਚ ਲਿੱਖਣ ਦੀ ਅਨੁਮਤੀ ਨਹੀਂ ਹੁੰਦੀ ਹੈ।"</string>
@@ -166,11 +166,13 @@
     <string name="call_log_action_remove_spam" msgid="2045319806318398403">"ਸਪੈਮ ਨਹੀਂ"</string>
     <string name="call_log_action_unblock_number" msgid="6100117033288448758">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"ਸਪੈਮ"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ਔਫਲਾਈਨ ਹੈ ਅਤੇ ਉਸ \'ਤੇ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
+    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ਆਫ਼ਲਾਈਨ ਹੈ ਅਤੇ ਉਸ \'ਤੇ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"</string>
     <string name="about_phone_label" msgid="582991354677973731">"ਇਸ ਬਾਰੇ"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"ਇਹ ਟ੍ਰਾਂਸਕ੍ਰਾਈਬ Google ਵੱਲੋਂ ਕੀਤਾ ਗਿਆ ਹੈ"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ਵੱਲੋਂ ਪ੍ਰਤਿਲਿਪੀ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ਟ੍ਰਾਂਸਕ੍ਰਿਪਟ ਉਪਲਬਧ ਨਹੀਂ"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ਵੱਲੋਂ ਪ੍ਰਤਿਲਿਪੀ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ਪ੍ਰਤਿਲਿਪੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ਪ੍ਰਤਿਲਿਪੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਭਾਸ਼ਾ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ।"</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ਪ੍ਰਤਿਲਿਪੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕੋਈ ਬੋਲੀ ਨਹੀਂ ਮਿਲੀ।"</string>
     <string name="view_conversation" msgid="7895904782094119702">"ਦੇਖੋ"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"ਕਾਲ ਮਿਟਾਈ ਗਈ। ਇਸ ਕਾਲ ਦੌਰਾਨ &amp;quot;ਸੁਨੇਹੇ&amp;quot; ਐਪ ਵਿੱਚ ਸਾਂਝੀਆਂ ਕੀਤੀਆਂ ਅਟੈਚਮੈਂਟਾਂ ਨੂੰ ਦੇਖੋ ਅਤੇ ਮਿਟਾਓ।"</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"ਕਾਲ ਮਿਟਾਈ ਗਈ। ਕਾਲਾਂ ਦੌਰਾਨ &amp;quot;ਸੁਨੇਹੇ&amp;quot; ਐਪ ਵਿੱਚ ਸਾਂਝੀਆਂ ਕੀਤੀਆਂ ਅਟੈਚਮੈਂਟਾਂ ਨੂੰ ਦੇਖੋ ਅਤੇ ਮਿਟਾਓ।"</string>

@@ -127,8 +127,7 @@ public class CallList implements DialerCallDelegate {
     manager.registerStateChangedListener(call);
 
     Trace.beginSection("checkSpam");
-    final DialerCallListenerImpl dialerCallListener = new DialerCallListenerImpl(call);
-    call.addListener(dialerCallListener);
+    call.addListener(new DialerCallListenerImpl(call));
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
     if (Spam.get(context).isSpamEnabled()) {
       String number = TelecomCallUtil.getNumber(telecomCall);
@@ -167,11 +166,12 @@ public class CallList implements DialerCallDelegate {
                             call.getTimeAddedMs());
                   }
                   call.setSpam(isSpam);
-                  dialerCallListener.onDialerCallUpdate();
+                  onUpdateCall(call);
+                  notifyGenericListeners();
                 }
               });
 
-      updateUserMarkedSpamStatus(call, context, number, dialerCallListener);
+      updateUserMarkedSpamStatus(call, context, number);
     }
     Trace.endSection();
 
@@ -185,7 +185,8 @@ public class CallList implements DialerCallDelegate {
           public void onCheckComplete(Integer id) {
             if (id != null && id != FilteredNumberAsyncQueryHandler.INVALID_ID) {
               call.setBlockedStatus(true);
-              dialerCallListener.onDialerCallUpdate();
+              onUpdateCall(call);
+              notifyGenericListeners();
             }
           }
         },
@@ -197,7 +198,8 @@ public class CallList implements DialerCallDelegate {
         || call.getState() == DialerCall.State.CALL_WAITING) {
       onIncoming(call);
     } else {
-      dialerCallListener.onDialerCallUpdate();
+      onUpdateCall(call);
+      notifyGenericListeners();
     }
 
     if (call.getState() != State.INCOMING) {
@@ -244,11 +246,8 @@ public class CallList implements DialerCallDelegate {
     return mCallByTelecomCall.get(telecomCall);
   }
 
-  public void updateUserMarkedSpamStatus(
-      final DialerCall call,
-      final Context context,
-      String number,
-      final DialerCallListenerImpl dialerCallListener) {
+  private void updateUserMarkedSpamStatus(
+      final DialerCall call, final Context context, String number) {
 
     Spam.get(context)
         .checkUserMarkedNonSpamStatus(

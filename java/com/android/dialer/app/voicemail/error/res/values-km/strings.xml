@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"សូម​ទោស យើង​មាន​បញ្ហា​រៀបចំ​សេវាកម្ម​របស់​អ្នក។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9009។"</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"មិន​អាច​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក​បាន​ទេ"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"សូម​ទោស យើង​មាន​បញ្ហា​ភ្ជាប់​ទៅ​ប្រអប់​សំបុត្រ​សំឡេង​របស់​អ្នក។ សូម​ព្យាយាម​ម្ដង​ទៀត​ពេលក្រោយ។ បើ​​នៅ​តែ​មាន​បញ្ហា សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​ម​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​​កូដ​​មាន​បញ្ហា គឺ 9990។"</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"រៀបចំ​សារ​ជា​សំឡេង"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"រៀបចំ​សារ​ជា​សំឡេង"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"សារ​ជា​សំឡេង​មិន​បាន​រៀបចំ​នៅ​លើ​គណនី​របស់​អ្នក​ទេ។ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9991។"</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"សារ​ជា​សំឡេង"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​មិន​អាច​ប្រើ​បាន​នៅ​លើ​ឧបករណ៍​នេះ​ទេ។ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9992។"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"សារ​ជា​សំឡេង"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​មិន​អាច​ប្រើ​នៅ​លើ​ឧបករណ៍​នេះ​បាន​ទេ។ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួក​គេ​ថា លេខ​កូដ​មាន​បញ្ហា​គឺ 9992។"</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"មានអ្វីមួយមិនប្រក្រតី"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9993។"</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"សារជាសំឡេងអាចមើលឃើញ"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9994។"</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"សារជាសំឡេងអាចមើលឃើញ"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9995។"</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"សារជាសំឡេងអាចមើលឃើញ"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"ដើម្បី​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9996។"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួក​គេ​ថា លេខ​កូដ​មាន​បញ្ហា​គឺ 9994។"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​​ថា លេខ​កូដ​មាន​បញ្ហា​គឺ 9995។"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"ដើម្បី​បើក​ដំណើរការ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​ថា លេខ​កូដ​មាន​បញ្ហា​គឺ 9996។"</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"មានអ្វីមួយមិនប្រក្រតី"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9998។"</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ត្រូវ​បាន​បិទ"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"ដើម្បី​បញ្ចប់​ការ​រៀបចំ​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួក​គេ​ថា លេខ​កូដ​មាន​បញ្ហា​គឺ 9998។"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ​ត្រូវ​បាន​បិទ"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> ដើម្បី​ធ្វើ​ឲ្យ​សកម្ម​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ។"</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"មានអ្វីមួយមិនប្រក្រតី"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9997។"</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9989។"</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"មានអ្វីមួយមិនប្រក្រតី"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"សូម​ទាក់ទង​ផ្នែក​បម្រើ​សេវា​អតិថិជន​តាមរយៈ <xliff:g id="NUMBER">%1$s</xliff:g> និង​ប្រាប់​ពួកគេ​កូដ​មាន​បញ្ហា គឺ 9999។"</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"លក្ខខណ្ឌ​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nអ្នក​ត្រូវតែ​យល់ព្រម​នឹង​​គោលការណ៍ និង​លក្ខខណ្ឌ​របស់ Verizon Wireless ដើម្បី​ប្រើប្រាស់​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ៖\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"បើក​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"បើក​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nតាម​រយៈ​ការបើក​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ មាន​ន័យ​ថា អ្នក​យល់​ស្រប​នឹង​លក្ខខណ្ឌ​របស់ Verizon Wireless៖ \n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"បើក​សារ​ជា​សំឡេង​ដែល​មើល​ឃើញ"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"មើល និង​ស្ដាប់​សារ​របស់​អ្នក ដោយ​មិន​ចាំបាច់​ហៅ​សារ​ជា​សំឡេង។ ប្រតិចារឹក​នៃ​សារ​ជា​សំឡេង​របស់​អ្នក​ត្រូវ​បាន​ផ្ដល់​ដោយ​សេវាកម្ម​ប្រតិចារឹក​ឥត​គិត​ថ្លៃ​របស់ Google។ %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"មើល និង​ស្ដាប់​សារ​របស់​អ្នក ដោយ​មិន​ចាំបាច់​ហៅ​សារ​ជា​សំឡេង។ %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"ស្វែង​យល់​បន្ថែម"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"សារ​ជា​សំឡេង​ដែល​​មើល​ឃើញ​នឹង​ត្រូវ​បាន​បិទ បើ​លក្ខខណ្ឌ​ប្រើប្រាស់​ត្រូវ​បាន​បដិសេធ។"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"បិទសារជាសំឡេងដែលមើលឃើញ"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"ការធ្វើ​ប្រតិចារឹក​សារ​ជាសំឡេង​នឹង​ត្រូវ​បិទ ប្រសិនបើ​គោលការណ៍ និង​លក្ខខណ្ឌ​ត្រូវបាន​បដិសេធ។"</string>
