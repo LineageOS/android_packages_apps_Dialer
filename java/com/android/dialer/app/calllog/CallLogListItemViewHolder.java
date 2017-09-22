@@ -80,6 +80,7 @@ import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.lightbringer.Lightbringer;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactSource;
+import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
@@ -925,6 +926,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
         Logger.get(mContext)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
+        if (isNonContactEntry(info)) {
+          Logger.get(mContext)
+              .logImpression(
+                  DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG);
+        }
         startLightbringerActivity(intent);
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
@@ -940,6 +946,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         DialerUtils.startActivityWithErrorToast(mContext, intent);
       }
     }
+  }
+
+  private static boolean isNonContactEntry(ContactInfo info) {
+    if (info == null || info.sourceType != Type.SOURCE_TYPE_DIRECTORY) {
+      return true;
+    }
+    return false;
   }
 
   private void startLightbringerActivity(Intent intent) {
