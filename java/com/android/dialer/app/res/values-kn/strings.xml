@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ಆಫ್‌ಲೈನ್ ಆಗಿದ್ದಾರೆ ಮತ್ತು ಅವರನ್ನು ತಲುಪಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ"</string>
     <string name="about_phone_label" msgid="582991354677973731">"ಕುರಿತು"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google ನಿಂದ ಲಿಪ್ಯಂತರ ಮಾಡಲಾಗಿದೆ"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ಲಿಪ್ಯಂತರ ಮಾಡುತ್ತಿದೆ …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ಪ್ರತಿಲಿಪಿ ಲಭ್ಯವಿಲ್ಲ"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ಲಿಪ್ಯಂತರ ಮಾಡುತ್ತಿದೆ…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ಲಿಪ್ಯಂತರ ಲಭ್ಯವಿಲ್ಲ."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ಲಿಪ್ಯಂತರ ಲಭ್ಯವಿಲ್ಲ. ಈ ಭಾಷೆಗೆ ಬೆಂಬಲವಿಲ್ಲ."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ಲಿಪ್ಯಂತರ ಲಭ್ಯವಿಲ್ಲ. ಇದರಲ್ಲಿ ಮಾತು ಪತ್ತೆಯಾಗಿಲ್ಲ."</string>
     <string name="view_conversation" msgid="7895904782094119702">"ವೀಕ್ಷಿಸಿ"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"ಕರೆ ಅಳಿಸಲಾಗಿದೆ. ಈ ಕರೆಯ ಸಮಯದಲ್ಲಿ ಸಂದೇಶಗಳಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಲಾದ ಲಗತ್ತುಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಅಳಿಸಿ."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"ಕರೆಗಳನ್ನು ಅಳಿಸಲಾಗಿದೆ. ಈ ಕರೆಗಳನ್ನು ಮಾಡುವ ಸಮಯದಲ್ಲಿ ಸಂದೇಶಗಳಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಲಾದ ಲಗತ್ತುಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಅಳಿಸಿ."</string>

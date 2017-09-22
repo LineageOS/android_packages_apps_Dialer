@@ -40,6 +40,10 @@
   <string name="notification_dialing">Dialing</string>
   <!-- The "label" of the in-call Notification for an ongoing call. [CHAR LIMIT=60] -->
   <string name="notification_ongoing_call">Ongoing call</string>
+  <!-- The "label" of the in-call Notification for an ongoing video call. [CHAR LIMIT=60] -->
+  <string name="notification_ongoing_video_call">Ongoing video call</string>
+  <!-- The "label" of the in-call Notification for an ongoing paused video call. [CHAR LIMIT=60] -->
+  <string name="notification_ongoing_paused_video_call">Ongoing video call \u2011 video paused</string>
   <!-- The "label" of the in-call Notification for an ongoing work call. [CHAR LIMIT=60] -->
   <string name="notification_ongoing_work_call">Ongoing work call</string>
 

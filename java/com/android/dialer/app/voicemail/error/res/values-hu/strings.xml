@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Sajnos nem sikerült beállítanunk a szolgáltatást. Próbálkozzon újra később. Ha továbbra is problémát tapasztal, forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9009-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Nem sikerült csatlakozni a hangpostafiókjához"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Sajnos jelenleg nem tudunk csatlakozni a hangpostafiókjához. Ha továbbra is problémát tapasztal, forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9990-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Hangposta beállítása"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Hangposta beállítása"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Fiókjában nincs beállítva a hangposta. Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9991-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Hangposta"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"A vizuális hangposta nem használható ezen a készüléken. Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9992-es hibakódot:<xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Hangposta"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"A vizuális hangposta nem használható ezen a készüléken. Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9992-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Hiba történt"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9993-as hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Vizuális hangposta"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9994-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Vizuális hangposta"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9995-ös hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Vizuális hangposta"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"A vizuális hangposta aktiválásához hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9996-os hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Vizuális hangposta"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9994-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Vizuális hangposta"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9995-ös hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Vizuális hangposta"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"A vizuális hangposta aktiválásához hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9996-os hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Hiba történt"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9998-as hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"A vizuális hangposta ki van kapcsolva"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"A vizuális hangposta beállításának befejezéséhez hívja az ügyfélszolgálatot a következő telefonszámon, és adja meg a 9998-as hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"A vizuális hangposta ki van kapcsolva"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"A vizuális hangposta aktiválásához hívja az ügyfélszolgálatot a következő számon: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Hiba történt"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9997-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9989-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Hiba történt"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Forduljon az ügyfélszolgálathoz a következő telefonszámon, és adja meg a 9999-es hibakódot: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"A vizuális hangposta általános szerződési feltételei"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nA virtuális hangposta használatához el kell fogadnia a Verizon Wireless Általános Szerződési Feltételeit:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"A vizuális hangposta bekapcsolása"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"A vizuális hangposta bekapcsolása"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nA Vizuális hangposta szolgáltatás bekapcsolásával elfogadja a Verizon Wireless Általános Szerződési Feltételeit:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"A vizuális hangposta bekapcsolása"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Telefonálás nélkül tekintheti meg és hallgathatja vissza hangpostafiókja tartalmát. A hangpostaüzenetek átiratát a Google ingyenes átírási szolgáltatása biztosítja. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Telefonálás nélkül tekintheti meg és hallgathatja vissza hangpostafiókja tartalmát. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"További információ"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ha nem fogadja el az általános szerződési feltételeket, letiltjuk a vizuális hangpostát."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"A vizuális hangposta letiltása"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ha nem fogadja el az általános szerződési feltételeket, letiltjuk a hangpostaüzenetek átírását."</string>

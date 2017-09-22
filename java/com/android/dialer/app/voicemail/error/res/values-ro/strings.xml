@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"A apărut o problemă la configurarea serviciului. Încercați din nou mai târziu. Dacă problema persistă, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Nu vă puteți conecta la căsuța de mesaje vocale"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Nu s-a putut face conectarea la căsuța de mesaje vocale în acest moment. Încercați din nou mai târziu. Dacă problema persistă, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Configurați mesageria vocală"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Configurați mesageria vocală"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Mesageria vocală nu este configurată pentru contul dvs. Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Mesagerie vocală"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Nu puteți folosi mesageria vocală vizuală pe acest dispozitiv. Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Mesagerie vocală"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Nu puteți folosi mesageria vocală vizuală pe acest dispozitiv. Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"A apărut o eroare"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Mesagerie vocală vizuală"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Mesagerie vocală vizuală"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Mesagerie vocală vizuală"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Pentru a activa mesageria vocală vizuală, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Mesagerie vocală vizuală"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Mesagerie vocală vizuală"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Mesagerie vocală vizuală"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Pentru a activa mesageria vocală vizuală, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"A apărut o eroare"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Mesageria vocală vizuală este dezactivată"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Pentru a finaliza configurarea mesageriei vocale vizuale, contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Mesageria vocală vizuală e dezactivată"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> pentru a activa mesageria vocală vizuală."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"A apărut o eroare"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"A apărut o eroare"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Contactați Serviciul de asistență pentru clienți la <xliff:g id="NUMBER">%1$s</xliff:g> și comunicați-le codul erorii: 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Termeni și condiții pentru mesageria vocală vizuală"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nTrebuie să acceptați Termenii și condițiile Verizon Wireless pentru a folosi mesageria vocală vizuală:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Activați Mesageria vocală vizuală"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Activați Mesageria vocală vizuală"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nDacă activați Mesageria vocală vizuală, sunteți de acord să respectați termenii și condițiile Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Activați Mesageria vocală vizuală"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Vedeți și ascultați mesajele, fără să fie necesar să apelați mesageria vocală. Transcrierile mesajelor vocale sunt oferite de serviciul gratuit de transcriere de la Google. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Vedeți și ascultați mesajele vocale, fără să fie necesar să apelați mesageria vocală. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Aflați mai multe"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Mesageria vocală vizuală va fi dezactivată dacă nu acceptați termenii și condițiile."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Dezactivați mesageria vocală vizuală"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Transcrierea mesajelor vocale va fi dezactivată dacă termenii și condițiile sunt refuzate."</string>

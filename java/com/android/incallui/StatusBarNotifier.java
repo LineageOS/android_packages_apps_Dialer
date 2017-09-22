@@ -678,7 +678,8 @@ public class StatusBarNotifier
     if (call.getState() == DialerCall.State.ONHOLD) {
       return R.drawable.ic_phone_paused_white_24dp;
     } else if (call.getVideoTech().getSessionModificationState()
-        == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
+        || call.isVideoCall()) {
       return R.drawable.quantum_ic_videocam_white_24;
     } else if (call.hasProperty(PROPERTY_HIGH_DEF_AUDIO)
         && MotorolaUtils.shouldShowHdIconInNotification(mContext)) {
@@ -730,6 +731,11 @@ public class StatusBarNotifier
       }
     } else if (call.getState() == DialerCall.State.ONHOLD) {
       resId = R.string.notification_on_hold;
+    } else if (call.isVideoCall()) {
+      resId =
+          call.getVideoTech().isPaused()
+              ? R.string.notification_ongoing_paused_video_call
+              : R.string.notification_ongoing_video_call;
     } else if (DialerCall.State.isDialing(call.getState())) {
       resId = R.string.notification_dialing;
     } else if (call.getVideoTech().getSessionModificationState()

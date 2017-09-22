@@ -18,4 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="new_permission_no_search" msgid="6107959563874740441">"ਆਪਣੇ ਸੰਪਰਕ ਖੋਜਣ ਲਈ, ਸੰਪਰਕ ਇਜਾਜ਼ਤਾਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"ਨਵਾਂ ਸੰਪਰਕ ਬਣਾਓ"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"ਇੱਕ ਸੰਪਰਕ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"SMS ਭੇਜੋ"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"ਵੀਡੀਓ ਕਾਲ ਕਰੋ"</string>
 </resources>

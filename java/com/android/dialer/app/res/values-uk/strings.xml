@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> не в мережі, неможливо встановити зв’язок"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Про додаток"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Транскрипція від Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google транскрибує…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Транскрипція недоступна"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google транскрибує…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Транскрипція недоступна."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Транскрипція недоступна. Мова не підтримується."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Транскрипція недоступна. Не виявлено мовлення."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Переглянути"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Виклик видалено. Переглянути й видалити файли, надіслані під час цього виклику, можна в Повідомленнях."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Виклики видалено. Переглянути й видалити файли, надіслані під час цих викликів, можна в Повідомленнях."</string>
