@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> está sin conexión y no se lo puede contactar"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Acerca de"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transcrito por Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google está transcribiendo…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transcripción no disponible."</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google está transcribiendo…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transcripción no disponible."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transcripción no disponible. El idioma no es compatible."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transcripción no disponible. No se escuchó nada."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Ver"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Llamada eliminada. En Mensajes, puedes ver y eliminar archivos adjuntos compartidos durante esta llamada."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Llamadas eliminadas. En Mensajes, puedes ver y eliminar archivos adjuntos durante las llamadas."</string>

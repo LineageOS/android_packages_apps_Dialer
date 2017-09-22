@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"உங்கள் சேவையை அமைப்பதில் சிக்கலை எதிர்கொள்கிறோம். பிறகு முயலவும். சிக்கல் தொடர்ந்தால், <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9009 எனக் கூறவும்."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"குரல் அஞ்சல் பெட்டியுடன் இணைக்க முடியவில்லை"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"இந்த நேரத்தில், உங்கள் குரல் அஞ்சல்பெட்டியுடன் இணைக்க முடியவில்லை. பிறகு முயலவும். சிக்கல் தொடர்ந்தால், <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9990 எனக் கூறவும்."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"குரலஞ்சலை அமைக்கவும்"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"குரலஞ்சலை அமைக்கவும்"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"உங்கள் கணக்கில் குரலஞ்சலை அமைக்க முடியவில்லை. <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9991 எனக் கூறவும்."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"குரலஞ்சல்"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"இந்தச் சாதனத்தில் விஷுவல் குரலஞ்சலைப் பயன்படுத்த முடியாது. <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9992 எனக் கூறவும்."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"குரலஞ்சல்"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"இந்தச் சாதனத்தில் விஷுவல் குரலஞ்சலைப் பயன்படுத்த முடியாது. <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9992 எனக் கூறவும்."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"ஏதோ தவறாகிவிட்டது"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"<xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9993 எனக் கூறவும்."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"விஷுவல் குரலஞ்சல்"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9994 எனக் கூறவும்."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"விஷுவல் குரலஞ்சல்"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு பிழையின் குறியீடு 9995 எனக் கூறவும்."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"விஷுவல் குரலஞ்சல்"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"விஷுவல் குரலஞ்சலை இயக்க, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9996 எனக் கூறவும்."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"விஷூவல் குரலஞ்சல்"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9994 எனக் கூறவும்."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"விஷூவல் குரலஞ்சல்"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9995 எனக் கூறவும்."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"விஷூவல் குரலஞ்சல்"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"விஷுவல் குரலஞ்சலைச் செயல்படுத்த, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9996 எனக் கூறவும்."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"ஏதோ தவறாகிவிட்டது"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9998 எனக் கூறவும்."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"விஷுவல் குரலஞ்சல் முடக்கப்பட்டுள்ளது"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"விஷுவல் குரலஞ்சல் அமைவை நிறைவுசெய்ய, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9998 எனக் கூறவும்."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"விஷுவல் குரலஞ்சல் முடக்கப்பட்டுள்ளது"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"விஷுவல் குரலஞ்சலை இயக்க, <xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைக்கவும்."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"ஏதோ தவறாகிவிட்டது"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"<xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9997 எனக் கூறவும்."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"<xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9989 எனக் கூறவும்."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"ஏதோ தவறாகிவிட்டது"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"<xliff:g id="NUMBER">%1$s</xliff:g> என்ற எண்ணில் வாடிக்கையாளர் சேவையை அழைத்து, அவர்களிடம் பிழையின் குறியீடு 9999 எனக் கூறவும்."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"விஷுவல் குரலஞ்சலின் விதிமுறைகள் மற்றும் நிபந்தனைகள்"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nவிஷுவல் குரலஞ்சலைப் பயன்படுத்த, Verizon Wireless இன் விதிமுறைகளையும் நிபந்தனைகளையும் ஏற்க வேண்டும்:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"விஷுவல் குரலஞ்சலை இயக்கவும்"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"விஷுவல் குரலஞ்சலை இயக்கவும்"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nவிஷுவல் குரலஞ்சலை இயக்குவதன் மூலம், Verizon Wireless விதிமுறைகளையும் நிபந்தனைகளையும் ஏற்கிறீர்கள்:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"விஷுவல் குரலஞ்சலை இயக்கவும்"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"குரலஞ்சலை அழைக்காமலே, உங்கள் செய்திகளைப் பார்க்கலாம், கேட்கலாம். உங்கள் குரலஞ்சலின் டிரான்ஸ்கிரிப்ட்டுகளை, Google இன் இலவச டிரான்ஸ்கிரிப்ஷன் சேவை வழங்குகிறது. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"குரலஞ்சலை அழைக்காமலே, உங்கள் செய்திகளைப் பார்க்கலாம், கேட்கலாம். %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"மேலும் அறிக"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"விதிமுறைகள் மற்றும் நிபந்தனைகள் நிராகரிக்கப்பட்டால், விஷுவல் குரலஞ்சல் முடக்கப்படும்."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"விஷுவல் குரலஞ்சலை முடக்கு"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"விதிமுறைகளையும் நிபந்தனைகளையும் நிராகரித்தீர்கள் எனில், குரலஞ்சல் டிரான்ஸ்கிரிப்ஷன் முடக்கப்படும்."</string>

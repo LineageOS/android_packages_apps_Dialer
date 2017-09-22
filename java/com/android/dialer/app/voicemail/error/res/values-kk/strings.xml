@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Кешіріңіз, қызметіңізді орнату ақаулығы орын алды. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9009 екенін айтыңыз."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Дауыстық пошта жәшігіне қосылмайды"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Кешіріңіз, бұл уақытта дауыстық поштаңызға қосыла алмаймыз. Егер әлі де ақаулық болса, тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9990 екенін айтыңыз."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Дауыс пошта орнату"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Дауыстық хабар поштасын орнату"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Тіркелгіңізде дауыстық пошта орнатылмаған. Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9991 екенін айтыңыз."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Дауыстық пошта"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Бұл құрылғыда дауыстық пошта қолданылмайды. Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9992 екенін айтыңыз."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Дауыстық хабар"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Бұл құрылғыда визуалды дауыстық хабар қолданылмайды. <xliff:g id="NUMBER">%1$s</xliff:g> нөмірі бойынша тұтынушыларға қызмет көрсету орталығына хабарласып, қате коды 9992 екенін айтыңыз."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Бірдеңе дұрыс болмады"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9993 екенін айтыңыз."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Визуалды дауыстық пошта"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9994 екенін айтыңыз."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Визуалды дауыстық пошта"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9995 екенін айтыңыз."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Визуалды дауыстық пошта"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Визуалды дауыстық поштаны белсендіру үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9996 екенін айтыңыз."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Визуалды дауыстық хабар"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Визуалды дауыстық хабар поштасын орнатуды аяқтау үшін, <xliff:g id="NUMBER">%1$s</xliff:g> нөмірі бойынша тұтынушыларға қызмет көрсету орталығына  хабарласып, қате коды 9994 екенін айтыңыз."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Визуалды дауыстық хабар"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Визуалды дауыстық хабар поштасын орнатуды аяқтау үшін, <xliff:g id="NUMBER">%1$s</xliff:g> нөмірі бойынша тұтынушыларға қызмет көрсету орталығына  хабарласып, қате коды 9995 екенін айтыңыз."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Визуалды дауыстық хабар"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Визуалды дауыстық хабар поштасын қосу үшін, <xliff:g id="NUMBER">%1$s</xliff:g> нөмірі бойынша тұтынушыларға қызмет көрсету орталығына хабарласып, қате коды 9996 екенін айтыңыз."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Бірдеңе дұрыс болмады"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Визуалды дауыстық пошта орнатуды аяқтау үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9998 екенін айтыңыз."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Визуалды дауыстық пошта ажыратылды"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Визуалды дауыстық пошта орнатуды аяқтау үшін, <xliff:g id="NUMBER">%1$s</xliff:g> нөмірі бойынша тұтынушыларға қызмет көрсету орталығына хабарласып, қате коды 9998 екенін айтыңыз."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Визуалды дауыстық пошта өшірулі"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Визуалды дауыстық пошта белсендіру үшін тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Бірдеңе дұрыс болмады"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9997 екенін айтыңыз."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9989 екенін айтыңыз."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Бірдеңе дұрыс болмады"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Тұтынушыларға қызмет көрсету орталығына <xliff:g id="NUMBER">%1$s</xliff:g> бойынша хабарласыңыз және қате коды 9999 екенін айтыңыз."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Визуалды дауыстық хабар функциясының шарттары мен талаптары"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nВизуалды дауыстық хабар функциясын қолдану үшін Verizon Wireless шарттарын қабылдауыңыз қажет:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Visual дауыстық хабарын қосу"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Визуалды дауыстық хабар поштасын қосу"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nВизуалды дауыстық хабар поштасын қолдану арқылы Verizon Wireless шарттарын қабылдайсыз:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Визуалды дауыстық хабар поштасын қосу"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Хабарларды дауыстық хабар қызметіне қоңырау шалмай-ақ көру және есту мүмкіндігі. Дауыстық хабар транскриптілерін Google-дың тегін транскрипция қызметі жасайды. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Хабарларды дауыстық хабар қызметіне қоңырау шалмай-ақ көру және есту мүмкіндігі. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Қосымша мәліметтер"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Шарттары мен талаптары қабылданбаса, визуалды дауыстық хабар функциясы өшіріледі."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Визуалды дауыстық хабар функциясын өшіру"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Шарттары мен талаптары қабылданбаса, визуалды дауыстық хабар транскрипциясы өшіріледі."</string>

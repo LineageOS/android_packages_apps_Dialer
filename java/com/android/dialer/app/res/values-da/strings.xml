@@ -148,7 +148,7 @@
     <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"Du har tidligere angivet, at nogle opkaldere automatisk skal sendes til telefonsvareren via andre apps."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"Se numre"</string>
     <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Importér"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Ophæv blokering af nummer"</string>
+    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Fjern blokering af nummer"</string>
     <string name="addBlockedNumber" msgid="3053473735238295551">"Tilføj nummer"</string>
     <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Opkald fra disse numre blokeres, og beskeder i telefonsvareren slettes automatisk."</string>
     <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Opkald fra disse numre bliver blokeret, men der kan muligvis stadig lægges beskeder i din telefonsvarer."</string>
@@ -164,13 +164,15 @@
     <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Bloker/rapportér spam"</string>
     <string name="call_log_action_block_number" msgid="5048188386501998865">"Bloker nummer"</string>
     <string name="call_log_action_remove_spam" msgid="2045319806318398403">"Ikke spam"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Ophæv blokering af nummer"</string>
+    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Fjern blokering af nummer"</string>
     <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> er offline og kan ikke nås"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Om"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transskriberet af Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google transskriberer…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transskription ej tilgængelig"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transskriberer…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transskriptionen er ikke tilgængelig."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transskriptionen er ikke tilgængelig. Sproget understøttes ikke."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transskriptionen er ikke tilgængelig. Ingen tale er registreret."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Vis"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Opkaldet er slettet. Du kan se og slette vedhæftede filer, der er delt i forbindelse med dette opkald, i Beskeder."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Opkaldene er slettet. Du kan se og slette vedhæftede filer, der er delt i forbindelse med opkald, i Beskeder."</string>

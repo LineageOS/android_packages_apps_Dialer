@@ -143,9 +143,9 @@ public class TopRow {
       Context context, @SessionModificationState int sessionModificationState, boolean isWifi) {
     if (sessionModificationState == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       if (isWifi) {
-        return context.getString(R.string.contact_grid_incoming_wifi_video_request);
+        return context.getString(R.string.contact_grid_incoming_wifi_video_call);
       } else {
-        return context.getString(R.string.contact_grid_incoming_video_request);
+        return context.getString(R.string.contact_grid_incoming_video_call);
       }
     } else {
       if (isWifi) {
@@ -185,7 +185,7 @@ public class TopRow {
   private static CharSequence getLabelForVideoRequest(Context context, PrimaryCallState state) {
     switch (state.sessionModificationState) {
       case SessionModificationState.WAITING_FOR_UPGRADE_TO_VIDEO_RESPONSE:
-        return context.getString(R.string.incall_video_call_requesting);
+        return context.getString(R.string.incall_video_call_upgrade_request);
       case SessionModificationState.REQUEST_FAILED:
       case SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_FAILED:
         return context.getString(R.string.incall_video_call_request_failed);

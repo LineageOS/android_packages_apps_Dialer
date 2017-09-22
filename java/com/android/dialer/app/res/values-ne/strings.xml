@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> अफलाइन हुनुहुन्छ र वहाँलाई भेट्न सकिँदैन"</string>
     <string name="about_phone_label" msgid="582991354677973731">"बारेमा"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google द्वारा ट्रान्सक्राइब गरिएको"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ले ट्रान्सक्राइब गर्दैछ …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ट्रान्स्क्रिप्ट उपलब्ध छैन"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ले ट्रान्सक्राइब गर्दैछ…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ट्रान्स्क्रिप्ट उपलब्ध छैन।"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ट्रान्स्क्रिप्ट उपलब्ध छैन। भाषा समर्थित छैन।"</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ट्रान्स्क्रिप्ट उपलब्ध छैन। कुनै बोली पत्ता लागेन।"</string>
     <string name="view_conversation" msgid="7895904782094119702">"हेर्नुहोस्"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"कल मेटाइयो। Messages मा गरिएको यो कलका क्रममा समावेश गरी आदान-प्रदान गरिएका कागजातलाई हेर्नुहोस् र मेटाउनुहोस्।"</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"कलहरू मेटाइए। Messages मा गरिएका कलहरूमा समावेश गरी आदान-प्रदान गरिएका कागजातलाई हेर्नुहोस् र मेटाउनुहोस्।"</string>

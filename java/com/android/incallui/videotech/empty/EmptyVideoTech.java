@@ -49,6 +49,11 @@ public class EmptyVideoTech implements VideoTech {
   }
 
   @Override
+  public boolean isPaused() {
+    return false;
+  }
+
+  @Override
   public VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen) {
     throw Assert.createUnsupportedOperationFailException();

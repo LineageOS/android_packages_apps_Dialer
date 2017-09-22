@@ -52,7 +52,7 @@
     <string name="description_playback_speakerphone" msgid="4852027754869750227">"স্পিকার চালু বা বন্ধ করুন"</string>
     <string name="description_playback_seek" msgid="1340910573254132520">"প্লেব্যাক অবস্থান খুঁজুন"</string>
     <string name="action_menu_call_history_description" msgid="8829135306925008546">"কলের ইতিহাস"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"আরো বিকল্প"</string>
+    <string name="action_menu_overflow_description" msgid="7648679686746517341">"আরও বিকল্প"</string>
     <string name="action_menu_dialpad_button" msgid="1970631633457493180">"কীপ্যাড"</string>
     <string name="dialer_settings_label" msgid="4980176284150290175">"সেটিংস"</string>
     <string name="simulator_submenu_label" msgid="186156287346615267">"সিমুলেটার"</string>
@@ -81,7 +81,7 @@
     <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="voice_search_not_available" msgid="6546240433719732905">"ভয়েস অনুসন্ধান অনুপলব্ধ"</string>
     <string name="dialer_hint_find_contact" msgid="2023214799381149808">"পরিচিতিগুলি খুঁজুন"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"সংখ্যা যোগ করুন বা পরিচিতিগুলি অনুসন্ধান করুন"</string>
+    <string name="block_number_search_hint" msgid="5377706079015099416">"সংখ্যা যোগ করুন বা পরিচিতিগুলি খুঁজুন"</string>
     <string name="call_log_all_empty" msgid="3955572868518162004">"আপনার পুরোনো কলের তালিকা খালি আছে"</string>
     <string name="call_log_all_empty_action" msgid="852218280136243014">"একটি কল করুন"</string>
     <string name="call_log_missed_empty" msgid="7094936030845062214">"আপনার কোনো মিসড কল নেই।"</string>
@@ -102,7 +102,7 @@
     <string name="speed_dial_empty" msgid="3346406399966039505">"আপনার স্পীড ডায়ালে এখনও পর্যন্ত কেউ নেই"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"একটি পছন্দসই যোগ করুন"</string>
     <string name="remove_contact" msgid="2353580570488923668">"সরান"</string>
-    <string name="select_all" msgid="408601760696146245">"সবগুলি নির্বাচন করুন"</string>
+    <string name="select_all" msgid="408601760696146245">"সবগুলি বেছে নিন"</string>
     <string name="call_log_action_video_call" msgid="7565549950343850819">"ভিডিও কল"</string>
     <string name="call_log_action_send_message" msgid="6948727362660115554">"একটি বার্তা পাঠান"</string>
     <string name="call_log_action_details" msgid="2091370737371449501">"কলের বিশদ বিবরণ"</string>
@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> এখন অফলাইনে থাকায় যোগাযোগ করা যাবে না"</string>
     <string name="about_phone_label" msgid="582991354677973731">"সম্পর্কে"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google এর প্রতিলিপি করা হয়েছে"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ট্রান্সক্রাইব করছে …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"প্রতিলিপি উপলব্ধ নয়"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ক্যাপশন তৈরি করছে…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ক্যাপশন তৈরি করা যায়নি।"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"এই ভাষাটি সমর্থিত নয়। ক্যাপশন তৈরি করা যায়নি।"</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"কোনও ভাষ্য শনাক্ত করা যায়নি। ক্যাপশন তৈরি করা যাবে না।"</string>
     <string name="view_conversation" msgid="7895904782094119702">"দেখুন"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"কল মোছা হয়েছে। বার্তার মধ্যে কলের সময় শেয়ার করা সংযুক্তি দেখুন ও মুছুন।"</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"কলগুলি মোছা হয়েছে। বার্তার মধ্যে কলের সময় শেয়ার করা সংযুক্তিগুলি দেখুন ও মুছুন।"</string>

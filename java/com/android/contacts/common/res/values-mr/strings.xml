@@ -79,7 +79,7 @@
     <string name="list_filter_phones" msgid="8763316061763437182">"फोन नंबरसह सर्व संपर्क"</string>
     <string name="list_filter_phones_work" msgid="7083575404573422965">"कार्य प्रोफाईल संपर्क"</string>
     <string name="view_updates_from_group" msgid="9011641093168385729">"अपडेट पहा"</string>
-    <string name="account_phone" msgid="7067809073194061035">"केवळ डीव्हाइस, संकालित न केलेला"</string>
+    <string name="account_phone" msgid="7067809073194061035">"केवळ डिव्हाइस, संकालित न केलेला"</string>
     <string name="nameLabelsGroup" msgid="7730465833159557471">"नाव"</string>
     <string name="nicknameLabelsGroup" msgid="6310556912361840029">"टोपणनाव"</string>
     <string name="full_name" msgid="648186563998465740">"नाव"</string>

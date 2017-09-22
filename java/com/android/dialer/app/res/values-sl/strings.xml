@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Oseba <xliff:g id="NAME">%1$s</xliff:g> nima vzpostavljene povezave in ni dosegljiva"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Vizitka"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Prepis je zagotovil Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google ustvarja prepis …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Prepis ni na voljo"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google ustvarja prepis …"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Prepis ni na voljo."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Prepis ni na voljo. Jezik ni podprt."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Prepis ni na voljo. Govora ni bilo mogoče zaznati."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Prikaži"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Klic je izbrisan. Priloge, ki so bile dane v skupno rabo v tem klicu, si lahko ogledate in izbrišete v aplikaciji Messages."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Klici so izbrisani. Priloge, ki so bile dane v skupno rabo v teh klicih, si lahko ogledate in izbrišete v aplikaciji Messages."</string>

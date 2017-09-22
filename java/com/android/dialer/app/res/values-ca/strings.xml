@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> no té connexió i no s\'hi pot contactar"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Informació"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transcripció feta per Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google està transcrivint…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transcripció no disponible"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google està transcrivint…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transcripció no disponible."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transcripció no disponible. No s\'admet aquest idioma."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transcripció no disponible. No s\'ha detectat cap discurs."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Mostra"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"S\'ha suprimit la trucada. Consulta i suprimeix els fitxers adjunts compartits durant aquesta trucada a Missatges."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"S\'han suprimit les trucades. Consulta i suprimeix els fitxers adjunts compartits durant les trucades a Missatges."</string>

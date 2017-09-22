@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"માફ કરશો, અમને તમારી સેવા સેટ કરવામાં સમસ્યા આવી રહી છે. કૃપા કરીને પછીથી ફરી પ્રયાસ કરો. જો અહીં હજુ પણ કોઇ સમસ્યા હોય, તો કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9009 કહો."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"તમારા વૉઇસ મેઇલબોક્સ પર કનેક્ટ કરી શકતાં નથી"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"માફ કરશો, અમે આ સમયે તમારા વૉઇસ મેઇલબોક્સ સાથે કનેક્ટ થવામાં સમર્થ નથી. કૃપા કરીને પછીથી ફરી પ્રયાસ કરો. જો અહીં હજુ પણ કોઇ સમસ્યા હોય, તો કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9990 કહો."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"વૉઇસમેઇલ સેટ કરો"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"વૉઇસમેઇલ સેટ કરો"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"તમારા એકાઉન્ટ પર વૉઇસમેઇલ સેટ થયેલ નથી. કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9991 કહો."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"વૉઇસ મેઇલ"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"આ ઉપકરણ પર વિઝ્યુઅલ વૉઇસમેઇલનો ઉપયોગ કરી શકતાં નથી. કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9992 કહો."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"વૉઇસમેઇલ"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"આ ઉપકરણ પર વિઝ્યુઅલ વૉઇસમેઇલનો ઉપયોગ કરી શકતાં નથી. કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને કહો કે ભૂલનો કોડ 9992 છે."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"કંઈક ખોટું થયું"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને ભૂલ કોડ 9993 કહો."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"વિઝ્યુઅલ વૉઇસ મેઇલ"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9994 કહો."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"વિઝ્યુઅલ વૉઇસ મેઇલ"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9995 કહો."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"વિઝ્યુઅલ વૉઇસ મેઇલ"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"વિઝ્યુઅલ વૉઇસમેઇલ સક્રિય કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9996 કહો."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"વિઝ્યુઅલ વૉઇસમેઇલ"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને કહો કે ભૂલનો કોડ 9994 છે."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"વિઝ્યુઅલ વૉઇસમેઇલ"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને કહો કે ભૂલનો કોડ 9995 છે."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"વિઝ્યુઅલ વૉઇસમેઇલ"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"વિઝ્યુઅલ વૉઇસમેઇલ સક્રિય કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને કહો કે ભૂલનો કોડ 9996 છે."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"કંઈક ખોટું થયું"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9998 કહો."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"વિઝ્યુઅલ વૉઇસમેઇલ અક્ષમ છે"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"વિઝ્યુઅલ વૉઇસમેઇલ સેટઅપ પૂર્ણ કરવા માટે, કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો અને તેમને કહો કે ભૂલનો કોડ 9998 છે."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"વિઝ્યુઅલ વૉઇસમેઇલ બંધ છે"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"વિઝ્યુઅલ વૉઇસમેઇલ સક્રિય કરવા માટે કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરો."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"કંઈક ખોટું થયું"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9997 કહો."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9989 કહો."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"કંઈક ખોટું થયું"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"કૃપા કરીને <xliff:g id="NUMBER">%1$s</xliff:g> પર ગ્રાહક સેવાનો સંપર્ક કરી અને તેમને ભૂલ કોડ 9999 કહો."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"વિઝ્યુઅલ વૉઇસમેઇલની શરતો અને નિયમો"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nવિઝ્યુઅલ વૉઇસમેઇલનો ઉપયોગ કરવા માટે તમારે Verizon Wireless નાં નિયમો અને શરતોને સ્વીકારવી આવશ્યક છે:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"વિઝ્યુઅલ વૉઇસમેઇલ ચાલુ કરો"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"વિઝ્યુઅલ વૉઇસ મેઇલ ચાલુ કરો"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nવિઝ્યુઅલ વૉઇસ મેઇલ ચાલુ કરીને તમે Verizon Wirelessના નિયમો અને શરતો સાથે સંમત થાઓ છો:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"વિઝ્યુઅલ વૉઇસમેઇલ ચાલુ કરો"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"વૉઇસમેઇલને કૉલ કરવાની જરૂરિયાત વિના તમારા સંદેશા જુઓ અને સાંભળો. Googleની નિઃશુલ્ક ટ્રાન્સ્ક્રિપ્શન સેવા તમારા વૉઇસમેઇલની ટ્રાન્સ્ક્રિપ્ટ પ્રદાન કરે છે. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"વૉઇસમેઇલ પર કૉલ કરવાની જરૂરિયાત વિના, તમારા સંદેશા જુઓ અને સાંભળો. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"વધુ જાણો"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"જો શરતો અને નિયમો નકારવામાં આવે છે તો વિઝ્યુઅલ વૉઇસમેઇલ અક્ષમ કરવામાં આવશે."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"વિઝ્યુઅલ વૉઇસમેઇલ અક્ષમ કરો"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"જો શરતો અને નિયમો નકારવામાં આવે તો વૉઇસમેઇલ ટ્રાંસ્ક્રિપ્શન અક્ષમ કરવામાં આવશે."</string>

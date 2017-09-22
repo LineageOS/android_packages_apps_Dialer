@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Wystąpił problem podczas konfigurowania usługi. Spróbuj ponownie później. Jeśli problem będzie nadal występował, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Nie udało się połączyć ze skrzynką poczty głosowej"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Nie udało się połączyć ze skrzynką poczty głosowej. Spróbuj ponownie później. Jeśli problem będzie nadal występował, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Skonfiguruj pocztę głosową"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Skonfiguruj pocztę głosową"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Poczta głosowa nie została skonfigurowana na Twoim koncie. Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Poczta głosowa"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Na tym urządzeniu nie można używać wizualnej poczty głosowej. Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Poczta głosowa"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Na tym urządzeniu nie można używać wizualnej poczty głosowej. Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g> i podaj kod błędu 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Coś poszło nie tak"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Wizualna poczta głosowa"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Wizualna poczta głosowa"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Wizualna poczta głosowa"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Aby aktywować wizualną pocztę głosową, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Wizualna poczta głosowa"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g> i podaj kod błędu 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Wizualna poczta głosowa"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g> i podaj kod błędu 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Wizualna poczta głosowa"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Aby aktywować wizualną pocztę głosową, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g> i podaj kod błędu 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Coś poszło nie tak"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Wizualna poczta głosowa jest wyłączona"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Aby ukończyć konfigurację wizualnej poczty głosowej, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g> i podaj kod błędu 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Wizualna poczta głosowa jest wyłączona"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Aby aktywować wizualną pocztę głosową, skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Coś poszło nie tak"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Coś poszło nie tak"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Skontaktuj się z obsługą klienta pod numerem <xliff:g id="NUMBER">%1$s</xliff:g>, podając kod błędu 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Warunki korzystania z wizualnej poczty głosowej"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nAby korzystać z wizualnej poczty głosowej, musisz zaakceptować warunki operatora Verizon Wireless:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Włącz wizualną pocztę głosową"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Włącz wizualną pocztę głosową"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nWłączając wizualną pocztę głosową, akceptujesz warunki operatora Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Włącz wizualną pocztę głosową"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Sprawdź i odsłuchaj wiadomości bez dzwonienia na pocztę głosową. Zapisy wiadomości głosowych są udostępniane przez bezpłatną usługę transkrypcji Google. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Sprawdź i odsłuchaj wiadomości bez dzwonienia na pocztę głosową. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Więcej informacji"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Jeśli odrzucisz warunki korzystania z usługi, wizualna poczta głosowa zostanie wyłączona."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Wyłącz wizualną pocztę głosową"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Jeśli odrzucisz warunki korzystania z usługi, transkrypcja wiadomości w poczcie głosowej zostanie wyłączona."</string>

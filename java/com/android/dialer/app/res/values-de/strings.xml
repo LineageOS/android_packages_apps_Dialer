@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ist offline und nicht erreichbar"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Info"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transkribiert von Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google transkribiert…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transkript nicht verfügbar"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transkribiert…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transkript nicht verfügbar."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transkript nicht verfügbar. Sprache wird nicht unterstützt."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transkript nicht verfügbar. Keine Spracheingabe erkannt."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Ansehen"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Anruf gelöscht. Du kannst in diesem Anruf geteilte Anhänge unter \"Nachrichten\" ansehen und löschen."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Anrufe gelöscht. Du kannst in diesen Anrufen geteilte Anhänge unter \"Nachrichten\" ansehen und löschen."</string>

@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"არა"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"მიმდინარეობს აკრეფა"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"მიმდინარე ზარი"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"მიმდინარე ვიდეოზარი"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"მიმდინარე ვიდეოზარი — ვიდეო დაპაუზებულია"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"მიმდინარე ზარი (სამსახური)"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"მიმდინარე <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"შემომავალი <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"ვიდეო"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"მიღება"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"უარყოფა"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"სპიკერის ჩართვა"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"სპიკერის გამორთვა"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"სხვა მოწყობილობაზე მიმდინარე ზარი"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"მიმდინარე ვიდეო ზარი სხვა მოწყობილობაზე"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"ზარის მიღება"</string>

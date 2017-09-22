@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Er is een probleem opgetreden bij het instellen van je service. Probeer het later opnieuw. Blijft het probleem optreden, neem dan via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9009 door."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Kan geen verbinding maken met je voicemailbox"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Er kan momenteel geen verbinding worden gemaakt met je voicemailbox. Probeer het later opnieuw. Blijft het probleem optreden, neem dan via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9990 door."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Voicemail instellen"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Voicemail instellen"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Voicemail is niet ingesteld in je account. Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9991 door."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Voicemail"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Visuele voicemail kan niet worden gebruikt op dit apparaat. Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9992 door."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Voicemail"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Visuele voicemail kan niet worden gebruikt op dit apparaat. Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9992 door."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Er is iets misgegaan"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9993 door."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Visuele voicemail"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Om het instellen van visuele voicemail te voltooien, neem je via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef je de foutcode 9994 door."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Visuele voicemail"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Om het instellen van visuele voicemail te voltooien, neem je via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef je de foutcode 9995 door."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Visuele voicemail"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Om de visuele voicemail te activeren, neem je via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef je de foutcode 9996 door."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Visuele voicemail"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9994 door om het instellen van visuele voicemail te voltooien."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Visuele voicemail"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9995 door om het instellen van visuele voicemail te voltooien."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Visuele voicemail"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9996 door om visuele voicemail te activeren."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Er is iets misgegaan"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Om het instellen van visuele voicemail te voltooien, neem je via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef je de foutcode 9998 door."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Visuele voicemail is uitgeschakeld"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9998 door om het instellen van visuele voicemail te voltooien."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Visuele voicemail is uitgeschakeld"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice om visuele voicemail te activeren."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Er is iets misgegaan"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9997 door."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9989 door."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Er is iets misgegaan"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Neem via <xliff:g id="NUMBER">%1$s</xliff:g> contact op met de klantenservice en geef de foutcode 9999 door."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Algemene voorwaarden voor visuele voicemail"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nJe moet de Algemene voorwaarden van Verizon Wireless accepteren om visuele voicemail te kunnen gebruiken:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Visuele voicemail inschakelen"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Visuele voicemail inschakelen"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nAls je visuele voicemail inschakelt, ga je akkoord met de algemene voorwaarden van Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Visuele voicemail inschakelen"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Bekijk en beluister je berichten, zonder dat je je voicemail hoeft te bellen. Transcripten van je voicemail worden geleverd via de gratis transcriptieservice van Google. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Bekijk en beluister je berichten, zonder dat je je voicemail hoeft te bellen. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Meer informatie"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visuele voicemail wordt uitgeschakeld als de Algemene voorwaarden worden geweigerd."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Visuele voicemail uitschakelen"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Voicemail-transcriptie wordt uitgeschakeld als de Algemene voorwaarden worden geweigerd."</string>

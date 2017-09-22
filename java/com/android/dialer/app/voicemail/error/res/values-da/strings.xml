@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Vi har desværre problemer med at konfigurere din tjeneste. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Der kan ikke oprettes forbindelse til din telefonsvarer"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Vi kan desværre ikke oprette forbindelse til din telefonsvarer i øjeblikket. Prøv igen senere. Hvis der stadig er et problem, skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Konfigurer telefonsvarer"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Konfigurer telefonsvarer"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Telefonsvarer er ikke konfigureret på din konto. Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Telefonsvarer"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Visuel telefonsvarer kan ikke bruges på denne enhed. Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Telefonsvarer"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Visuel telefonsvarer kan ikke bruges på denne enhed. Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Der opstod en fejl"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Visuel telefonsvarer"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Visuel telefonsvarer"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Visuel telefonsvarer"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"For at aktivere den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Visuel telefonsvarer"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"For at aktivere den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Der opstod en fejl"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"For at fuldføre konfigurationen af den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Visuel telefonsvarer er deaktiveret"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"For at aktivere den visuelle telefonsvarer skal du kontakte kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> og fortælle dem, at fejlkoden er 9998"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Visuel telefonsvarer er deaktiveret"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g> for at aktivere visuel telefonsvarer."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Der opstod en fejl"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Der opstod en fejl"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Kontakt kundeservice på <xliff:g id="NUMBER">%1$s</xliff:g>, og fortæl dem, at fejlkoden er 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Vilkår og betingelser for visuel telefonsvarer"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nDu skal acceptere vilkår og betingelser for Verizon Wireless for at bruge visuel telefonsvarer:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Slå Visuel telefonsvarer til"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Aktivér Visuel telefonsvarer"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nNår du aktiverer visuel telefonsvarer, accepterer du vilkår og betingelser for Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Aktivér Visuel telefonsvarer"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Se og lyt til dine beskeder uden at skulle ringe til din telefonsvarer. Googles gratis transskriptionstjeneste leverer transskriptioner af dine talebeskeder. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Se og lyt til dine beskeder uden at skulle ringe til din telefonsvarer. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Få flere oplysninger"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Visuel telefonsvarer bliver deaktiveret, hvis vilkår og betingelser afvises."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Deaktiver visuel telefonsvarer"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Transskription af talebeskeder deaktiveres, hvis du ikke accepterer vilkår og betingelser."</string>

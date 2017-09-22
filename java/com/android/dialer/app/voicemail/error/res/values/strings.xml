@@ -179,7 +179,7 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
 
   <string name="dialer_terms_and_conditions_learn_more">Learn more</string>
 
-  <!-- TODO(mdooley): STOP SHIP, get real url, b/65734734 -->
+  <!-- TODO: STOP SHIP, get real url, b/65734734 -->
   <string translatable="false" name="dialer_terms_and_conditions_learn_more_url">https://www.google.com</string>
 
   <string translatable="false" name="verizon_terms_and_conditions_policy_url">http://www.verizon.com/about/privacy/policy/</string>
