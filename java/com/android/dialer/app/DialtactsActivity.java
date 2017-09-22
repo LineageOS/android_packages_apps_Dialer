@@ -695,7 +695,8 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   public boolean inAllContactsTab() {
-    return mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS;
+    return mListsFragment.getUserVisibleHint()
+        && mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS;
   }
 
   @Override
@@ -1268,7 +1269,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     mFloatingActionButtonController.scaleIn(FAB_SCALE_IN_DELAY_MS);
     onPageScrolled(mListsFragment.getCurrentTabIndex(), 0 /* offset */, 0 /* pixelOffset */);
-    onPageSelected(mListsFragment.getCurrentTabIndex());
 
     final FragmentTransaction transaction = getFragmentManager().beginTransaction();
     if (mSmartDialSearchFragment != null) {
@@ -1291,6 +1291,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mListsFragment.sendScreenViewForCurrentPosition();
       mListsFragment.setUserVisibleHint(true);
     }
+    onPageSelected(mListsFragment.getCurrentTabIndex());
 
     mActionBarController.onSearchUiExited();
   }
