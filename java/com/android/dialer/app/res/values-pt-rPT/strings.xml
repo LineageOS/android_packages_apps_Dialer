@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> está offline e não pode ser contactado"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Acerca de"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transcrito pelo Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"O Google está a transcrever…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transcrição não disponível"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"O Google está a transcrever…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transcrição não disponível"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transcrição não disponível. Idioma não suportado."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transcrição não disponível. Não foi detetada nenhuma voz."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Ver"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"A chamada foi eliminada. Veja e elimine os anexos partilhados durante esta chamada na aplicação Mensagens."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"As chamadas foram eliminadas. Veja e elimine os anexos partilhados durante as chamadas na aplicação Mensagens."</string>

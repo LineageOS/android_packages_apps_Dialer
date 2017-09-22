@@ -381,7 +381,11 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
         text = phoneLabel;
       } else {
         final String phoneNumber = cursor.getString(PhoneQuery.PHONE_NUMBER);
-        text = PhoneNumberHelper.getGeoDescription(mContext, phoneNumber);
+        text =
+            PhoneNumberHelper.getGeoDescription(
+                mContext,
+                phoneNumber,
+                PhoneNumberHelper.getCurrentCountryIso(mContext, null /* PhoneAccountHandle */));
       }
     }
     view.setPhoneNumber(text);

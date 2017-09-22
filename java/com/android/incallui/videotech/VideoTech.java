@@ -39,6 +39,14 @@ public interface VideoTech {
 
   boolean shouldUseSurfaceView();
 
+  /**
+   * Returns true if the video is paused. This is different than if the video stream has been turned
+   * off.
+   *
+   * <p>See {@link #isTransmitting()}
+   */
+  boolean isPaused();
+
   VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen);
 

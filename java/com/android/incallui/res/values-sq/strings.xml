@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"Jo"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Po formon numrin"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Telefonatë në vazhdim"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Telefonatë me video në vazhdim"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Telefonatë me video në vazhdim - videoja u ndërpre"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Telefonatë pune dalëse"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> në vazhdim"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> në ardhje"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"Prano"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"Refuzo"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Aktivizo altoparlantin"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Çaktivizo altoparlantin"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"Telefonatë në vazhdim në një pajisje tjetër"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"Telefonatë në vazhdim në një pajisje tjetër"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"Prano telefonatën"</string>

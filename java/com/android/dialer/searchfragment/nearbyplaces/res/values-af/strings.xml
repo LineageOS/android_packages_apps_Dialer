@@ -18,4 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places" msgid="275117539511113867">"Nabygeleë plekke"</string>
+    <string name="search_location_permission" msgid="5893183045324252816">"Om kontakinligting vir plekke naby jou te kry, laat toegang tot jou ligging toe."</string>
+    <string name="nearby_places_allow" msgid="4060507469206871903">"Laat toe"</string>
+    <string name="nearby_places_dismiss" msgid="3255977972553076907">"Weier"</string>
 </resources>

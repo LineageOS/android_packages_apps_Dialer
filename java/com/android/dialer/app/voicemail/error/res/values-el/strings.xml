@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Δυστυχώς, αντιμετωπίζουμε πρόβλημα με τη ρύθμιση της υπηρεσίας στην περίπτωσή σας. Δοκιμάστε ξανά αργότερα. Εάν το πρόβλημα παραμένει, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Δεν είναι δυνατή η σύνδεση στον αυτόματο τηλεφωνητή σας"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Δυστυχώς, δεν είμαστε σε θέση να συνδεθούμε στον αυτόματο τηλεφωνητή σας αυτήν τη στιγμή. Δοκιμάστε ξανά αργότερα. Εάν το πρόβλημα παραμένει, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Ρύθμιση αυτόματου τηλεφωνητή"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Ρύθμιση αυτόματου τηλεφωνητή"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Δεν έχει γίνει ρύθμιση του αυτόματου τηλεφωνητή για τον λογαριασμό σας. Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Αυτόματος τηλεφωνητής"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Ο οπτικός αυτόματος τηλεφωνητής δεν μπορεί να χρησιμοποιηθεί σε αυτήν τη συσκευή. Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Αυτόματος τηλεφωνητής"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Ο οπτικός αυτόματος τηλεφωνητής δεν μπορεί να χρησιμοποιηθεί σε αυτήν τη συσκευή. Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Παρουσιάστηκε κάποιο πρόβλημα"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Οπτικός αυτόματος τηλεφωνητής"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Οπτικός αυτόματος τηλεφωνητής"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Οπτικός αυτόματος τηλεφωνητής"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Οπτικός αυτόματος τηλεφωνητής"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Οπτικός αυτόματος τηλεφωνητής"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Οπτικός αυτόματος τηλεφωνητής"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Για να ενεργοποιήσετε τον οπτικό αυτόματο τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Παρουσιάστηκε κάποιο πρόβλημα"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Ο οπτικός αυτόματος τηλεφωνητής είναι απενεργοποιημένος"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Για να ολοκληρώσετε τη ρύθμιση του οπτικού αυτόματου τηλεφωνητή, επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Ο οπτικός αυτόματος τηλεφωνητής είναι απενεργοποιημένος"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> για να ενεργοποιήσετε τον οπτικό αυτόματο τηλεφωνητή."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Παρουσιάστηκε κάποιο πρόβλημα"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Παρουσιάστηκε κάποιο πρόβλημα"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Επικοινωνήστε με το τμήμα εξυπηρέτησης πελατών στο <xliff:g id="NUMBER">%1$s</xliff:g> και αναφέρετέ τους τον κωδικό σφάλματος 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Όροι και Προϋποθέσεις οπτικού αυτόματου τηλεφωνητή"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nΠρέπει να αποδεχτείτε τους όρους και τις προϋποθέσεις της Verizon Wirelessγια τη χρήση οπτικού αυτόματου τηλεφωνητή:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Ενεργοποίηση Οπτικού αυτόματου τηλεφωνητή"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Ενεργοποίηση Οπτικού αυτόματου τηλεφωνητή"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nΜε την ενεργοποίηση του Οπτικού αυτόματου τηλεφωνητή, δηλώνετε ότι αποδέχεστε τους όρους και προϋποθέσεις της Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Ενεργοποίηση οπτικού αυτόματου τηλεφωνητή"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Δείτε και ακούστε τα μηνύματα αυτόματου τηλεφωνητή, χωρίς να χρειάζεται να τον καλέσετε. Οι μεταγραφές των φωνητικών μηνυμάτων του τηλεφωνητή παρέχονται από τη δωρεάν υπηρεσία μεταγρφής της Google. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Δείτε και ακούστε τα μηνύματα αυτόματου τηλεφωνητή, χωρίς να χρειάζεται να τον καλέσετε. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Μάθετε περισσότερα"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ο οπτικός αυτόματος τηλεφωνητής θα απενεργοποιηθεί εάν δεν αποδεχτείτε τους Όρους και τις Προϋποθέσεις."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Απενεργοποίηση οπτικού αυτόματου τηλεφωνητή"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Η μεταγραφή αυτόματου τηλεφωνητή θα απενεργοποιηθεί εάν δεν αποδεχτείτε τους Όρους και τις Προϋποθέσεις."</string>

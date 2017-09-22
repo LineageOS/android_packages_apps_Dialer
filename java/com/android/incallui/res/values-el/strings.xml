@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"Όχι"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"Κλήση"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"Κλήση σε εξέλιξη"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Βιντεοκλήση σε εξέλιξη"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Βιντεοκλήση σε εξέλιξη - βίντεο σε παύση"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Κλήση εργασίας σε εξέλιξη"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Σε εξέλιξη <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Εισερχόμενη <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"Βίντεο"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"Αποδοχή"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"Απόρριψη"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Ενεργοποίηση ηχείου"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Απενεργοποίηση ηχείου"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"Κλήση σε εξέλιξη σε άλλη συσκευή"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"Τρέχουσα βιντεοκλήση σε άλλη συσκευή"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"Λήψη κλήσης"</string>

@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ஆஃப்லைனில் உள்ளதால், தொடர்புகொள்ள முடியாது"</string>
     <string name="about_phone_label" msgid="582991354677973731">"அறிமுகம்"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google டிரான்ஸ்கிரைப் செய்தது"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google டிரான்ஸ்கிரைப் செய்கிறது …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"டிரான்ஸ்கிரிப்ட் இல்லை"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google டிரான்ஸ்கிரைப் செய்கிறது…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"டிரான்ஸ்கிரிப்ட் இல்லை."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"டிரான்ஸ்கிரிப்ட் இல்லை. மொழி ஆதரிக்கப்படவில்லை."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"டிரான்ஸ்கிரிப்ட் இல்லை. பேச்சு எதுவும் கேட்கவில்லை."</string>
     <string name="view_conversation" msgid="7895904782094119702">"காட்டு"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"அழைப்பு நீக்கப்பட்டது. இந்த அழைப்பின் போது பகிர்ந்த இணைப்புகளை மெசேஜஸ் பயன்பாட்டில் பார்க்கலாம், நீக்கலாம்."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"அழைப்புகள் நீக்கப்பட்டன. அழைப்புகளின் போது பகிர்ந்த இணைப்புகளை மெசேஜஸ் பயன்பாட்டில் பார்க்கலாம், நீக்கலாம்."</string>

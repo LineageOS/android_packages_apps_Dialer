@@ -21,7 +21,7 @@
     <string name="nui_shortcut_name" msgid="6370942901789984087">"ফোন NUI"</string>
     <string name="main_call_history_tab_description" msgid="1705569872650796265">"কলের ইতিহাস"</string>
     <string name="search" msgid="3570654445331155513">"@android:string/search_go"</string>
-    <string name="description_search" msgid="3443578912463129718">"পরিচিতি এবং স্থানগুলি অনুসন্ধান করুন"</string>
+    <string name="description_search" msgid="3443578912463129718">"পরিচিতি এবং স্থানগুলি খুঁজুন"</string>
     <string name="contacts" msgid="4464246185723317911">"পরিচিতিগুলি"</string>
     <string name="description_contacts" msgid="12768481422137448">"পরিচিতিগুলি দেখুন"</string>
     <string name="tab_title_call_history" msgid="5191872501729332994">"কলের ইতিহাস"</string>

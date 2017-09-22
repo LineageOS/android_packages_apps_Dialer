@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"No"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"ခေါ်ဆိုနေသည်"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"ဆက်သွားနေသော ဖုန်းခေါ်မှု"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"လက်ရှိ ဗီဒီယိုခေါ်ဆိုမှု"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"လက်ရှိ ဗီဒီယိုခေါ်ဆိုမှု − ဗီဒီယိုကို ခေတ္တရပ်ထားသည်"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ခေါ်နေဆဲ အလုပ်မှ ခေါ်ဆိုမှု"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"လက်ရှိပြောနေခြင်း <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"အဝင်ခေါ်ဆိုမှု <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"ဗီဒီယို"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"လက်ခံရန်"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"ငြင်းပယ်ရန်"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"စပီကာ ဖွင့်ပါ"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"စပီကာ ပိတ်ပါ"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"အခြားကိရိယာတွင် လက်ရှိခေါ်ဆိုနေမှု"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"အခြားကိရိယာရှိ လက်ရှိဗီဒီယိုခေါ်ဆိုမှု"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"ဖုန်းခေါ်ဆိုမှုလွှဲယူပါ"</string>

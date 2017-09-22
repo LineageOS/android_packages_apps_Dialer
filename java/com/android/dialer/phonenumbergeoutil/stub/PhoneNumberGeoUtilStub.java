@@ -26,7 +26,7 @@ public final class PhoneNumberGeoUtilStub implements PhoneNumberGeoUtil {
   public PhoneNumberGeoUtilStub() {}
 
   @Override
-  public String getGeoDescription(Context context, String number) {
+  public String getGeoDescription(Context context, String number, String countryIso) {
     return null;
   }
 }

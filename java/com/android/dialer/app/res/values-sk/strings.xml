@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> je offline a nedá sa zastihnúť"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Informácie"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Prepísané Googlom"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google prepisuje…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Prepis nie je k dispozícii"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google prepisuje správu…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Prepis nie je k dispozícii."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Prepis nie je k dispozícii. Jazyk nie je podporovaný."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Prepis nie je k dispozícii. Nebola zistená žiadna reč."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Zobraziť"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Hovor bol odstránený. Prílohy zdieľané počas neho si môžete pozrieť a odstrániť v aplikácii Správy."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Hovory boli odstránené. Prílohy zdieľané počas nich si môžete pozrieť a odstrániť v aplikácii Správy."</string>

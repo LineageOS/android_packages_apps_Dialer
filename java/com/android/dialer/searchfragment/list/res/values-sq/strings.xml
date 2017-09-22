@@ -18,4 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="new_permission_no_search" msgid="6107959563874740441">"Për të kërkuar te kontaktet, aktivizo lejet e \"Kontakteve\""</string>
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"Krijo një kontakt të ri"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"Shto te një kontakt"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"Dërgo SMS"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"Bëj telefonatë me video"</string>
 </resources>

@@ -21,7 +21,6 @@ import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtil;
-import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
@@ -36,7 +35,7 @@ public class PhoneNumberGeoUtilImpl implements PhoneNumberGeoUtil {
   public PhoneNumberGeoUtilImpl() {}
 
   @Override
-  public String getGeoDescription(Context context, String number) {
+  public String getGeoDescription(Context context, String number, String countryIso) {
     LogUtil.v("PhoneNumberGeoUtilImpl.getGeoDescription", "" + LogUtil.sanitizePii(number));
 
     if (TextUtils.isEmpty(number)) {
@@ -47,7 +46,6 @@ public class PhoneNumberGeoUtilImpl implements PhoneNumberGeoUtil {
     PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
 
     Locale locale = CompatUtils.getLocale(context);
-    String countryIso = PhoneNumberHelper.getCurrentCountryIso(context, locale);
     Phonenumber.PhoneNumber pn = null;
     try {
       LogUtil.v(

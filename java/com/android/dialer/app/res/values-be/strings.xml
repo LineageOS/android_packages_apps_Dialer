@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Карыстальнік <xliff:g id="NAME">%1$s</xliff:g> па-за сеткай і не даступны"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Інфармацыя"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Расшыфравана Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google расшыфроўвае..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Расшыфроўка недаступная"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google расшыфроўвае…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Расшыфроўка недаступная."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Расшыфроўка недаступная. Мова не падтрымліваецца."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Расшыфроўка недаступная. Маўленне не выяўлена."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Праглядзець"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Выклік выдалены. У \"Паведамленнях\" праглядзіце і выдаліце далучэнні, якія былі абагулены падчас гэтага выкліку."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Выклікі выдалены. У \"Паведамленнях\" праглядзіце і выдаліце далучэнні, якія былі абагулены падчас гэтых выклікаў."</string>

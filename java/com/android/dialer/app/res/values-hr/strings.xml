@@ -171,8 +171,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> nije online i nije dostupan"</string>
     <string name="about_phone_label" msgid="582991354677973731">"O aplikaciji"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Prijepis: Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google provodi prijepis..."</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Prijepis nije dostupan"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google provodi prijepis..."</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Prijepis nije dostupan."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Prijepis nije dostupan. Jezik nije podržan."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Prijepis nije dostupan. Govor nije otkriven."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Prikaži"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Poziv je izbrisan. U Porukama pregledajte i izbrišite privitke podijeljene tijekom ovog poziva."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Pozivi su izbrisani. U Porukama pregledajte i izbrišite privitke podijeljene tijekom poziva."</string>

@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Кечиресиз, кызматыңызды жөндөө мүмкүн болбой жатат. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9009 деп айтыңыз."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Үн почтаңыздын кутусуна туташа албай жатабыз"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Кечиресиз, үн почтаңызга туташуу мүмкүн болбой жатат. Бир аздан кийин дагы аракет кылып көрүңүз. Көйгөй кайталана берсе, Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9990 деп айтыңыз."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Үн почтасын жөндөө"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Үн почтасын жөндөө"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Каттоо эсебиңизде үн  почтасы жөндөлгөн эмес. Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9991 деп айтыңыз."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Үн почтасы"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Визуалдык үн почтасын бул түзмөктө колдонууга болбойт. Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9992 деп айтыңыз."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Үн почтасы"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Визуалдык үн почтасын бул түзмөктө колдонууга болбойт. Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9992 деп айтыңыз."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Бир жерден ката кетти"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9993 деп айтыңыз."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Визуалдык үн почтасы"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9994 деп айтыңыз."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Визуалдык үн почтасы"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9995 деп айтыңыз."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Визуалдык үн почтасы"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Визуалдык үн почтасын иштетүү үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9996 деп айтыңыз."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9994 деп айтыңыз."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9995 деп айтыңыз."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Визуалдык үн почтасы"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Визуалдык үн почтасын иштетүү үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9996 деп айтыңыз."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Бир жерден ката кетти"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9998 деп айтыңыз."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Визуалдык үн почтасы өчүк"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Визуалдык үн почтасын жөндөөнү аягына чыгаруу үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9998 деп айтыңыз."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Визуалдык үн почтасы өчүк"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Визуалдык үн почтасын иштетүү үчүн Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине кайрылыңыз."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Бир жерден ката кетти"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9997 деп айтыңыз."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9989 деп айтыңыз."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Бир жерден ката кетти"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Кардарларды колдоо кызматынын <xliff:g id="NUMBER">%1$s</xliff:g> номерине чалып, ката коду 9999 деп айтыңыз."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Визуалдык үн почтасынын колдонуу жоболору жана шарттары"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nСиз Verizon Wireless\'тин визуалдык үн почтасын колдонуу жоболору менен шарттарына макул болушуңуз керек:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Визуалдык үн почтасын күйгүзүңүз"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Визуалдык үн почтасын күйгүзүңүз"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nВизуалдык үн почтасын күйгүзүү менен сиз Verizon Wireless\'тин жоболору менен шарттарына макулдугуңузду бересиз:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Визуалдык үн почтасын күйгүзүңүз"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Үн почтасына чалып отурбастан, үн почтаңызды көрүп, уга аласыз. Үн почтаңыздын транскрипттери Google’дун бекер транскрипция кызматын камсыз кылат. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Ун почтасына чалып отурбастан, билдирүүлөрүңүздү көрүп, уга аласыз. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Кеңири маалымат"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Эгер колдонуу жоболору менен шарттары четке кагылган болсо, визуалдык үн почтасы өчүрүлөт."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Визуалдык үн почтасын өчүрүү"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Эгер колдонуу жоболору менен шарттары четке кагылган болсо, үн почтасы өчүрүлөт."</string>

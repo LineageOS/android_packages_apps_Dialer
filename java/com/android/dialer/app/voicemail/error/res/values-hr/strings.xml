@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Naišli smo na problem pri postavljanju vaše usluge. Pokušajte ponovno kasnije. Ako se problem ne riješi, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Povezivanje s pretincem govorne pošte nije uspjelo"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Nažalost, povezivanje s pretincem govorne pošte trenutačno nije moguće. Pokušajte ponovno kasnije. Ako se problem ne riješi, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Postavljanje govorne pošte"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Postavljanje govorne pošte"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Govorna pošta nije postavljene na vašem računu. Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Govorna poša"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Vizualna govorna pošta ne može se koristiti na ovom uređaju. Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Govorna pošta"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Vizualna govorna pošta ne može se koristiti na ovom uređaju. Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Nešto je pošlo po zlu"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Vizualna govorna pošta"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Vizualna govorna pošta"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Vizualna govorna pošta"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Da biste aktivirali vizualnu govornu poštu, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Vizualna govorna pošta"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Vizualna govorna pošta"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Vizualna govorna pošta"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Da biste aktivirali vizualnu govornu poštu, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Nešto je pošlo po zlu"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Visual govorna pošta onemogućena"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Da biste dovršili postavljanje vizualne govorne pošte, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Vizualna govorna pošta onemogućena"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Da biste aktivirali vizualnu govornu poštu, obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Nešto je pošlo po zlu"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Nešto je pošlo po zlu"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Obratite se korisničkoj službi na broj <xliff:g id="NUMBER">%1$s</xliff:g> i recite da je kôd pogreške 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Uvjeti i odredbe za vizualnu govornu poštu"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nDa biste koristili vizualnu govornu poštu, morate prihvatiti uvjete i odredbe Verizon Wirelessa:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Uključivanje vizualne govorne pošte"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Uključivanje vizualne govorne pošte"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nAko uključite vizualnu govornu poštu, pristajete na uvjete i odredbe Verizon Wirelessa:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Uključivanje vizualne govorne pošte"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Pogledajte i poslušajte svoje poruke bez pozivanja govorne pošte. Googleova besplatna usluga prijepisa omogućuje vam prijepise vaših poruka govorne pošte. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Pogledajte i poslušajte govornu poštu bez pozivanja govorne pošte. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Saznajte više"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Ako odbijete uvjete i odredbe, onemogućit ćete vizualnu govornu poštu."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Onemogući vizualnu govornu poštu"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ako odbijete uvjete i odredbe, onemogućit ćete prijepis govorne pošte."</string>

@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> offline, és nem érhető el."</string>
     <string name="about_phone_label" msgid="582991354677973731">"Névjegy"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Az átirat készítője a Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"A Google átiratot készít…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Nincs elérhető átirat"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"A Google átiratot készít…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Sikertelen átírás."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Sikertelen átírás. A nyelv nem támogatott."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Sikertelen átírás. Nem észlelhető beszéd."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Megtekintés"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Hívás törölve. A hívás során megosztott mellékleteket az Üzenetek alkalmazásban tekintheti meg és törölheti."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Hívások törölve. A hívások során megosztott mellékleteket az Üzenetek alkalmazásban tekintheti meg és törölheti."</string>

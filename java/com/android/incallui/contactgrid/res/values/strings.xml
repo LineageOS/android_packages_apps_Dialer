@@ -28,13 +28,16 @@
        device. -->
   <string name="incall_transferring">Transferring…</string>
 
-  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
-       video call. -->
-  <string name="incall_video_call_requesting">Video calling…</string>
+  <!-- Displayed above the contact name when the user starts a video call. -->
+  <string name="incall_video_call_requesting">Carrier video calling…</string>
 
   <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
        Wi-Fi video call. -->
-  <string name="incall_wifi_video_call_requesting">Wi-Fi video calling…</string>
+  <string name="incall_wifi_video_call_requesting">Wi-Fi carrier video calling…</string>
+
+  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
+     video call. -->
+  <string name="incall_video_call_upgrade_request">Switching to carrier video…</string>
 
   <!-- Displayed above the contact name when the user's video upgrade failed due to an unknown
        reason. -->
@@ -60,16 +63,10 @@
   <string name="incall_remotely_held">On hold</string>
 
   <!-- Displayed in the answer call screen for incoming video calls. -->
-  <string name="contact_grid_incoming_video_call">Video call from</string>
+  <string name="contact_grid_incoming_video_call">Carrier video call from</string>
 
   <!-- Displayed in the answer call screen for incoming video calls over Wi-F. -->
-  <string name="contact_grid_incoming_wifi_video_call">Wi-Fi video call from</string>
-
-  <!-- Displayed in the answer call screen for incoming requests to upgrade to a video call. -->
-  <string name="contact_grid_incoming_video_request">Video upgrade request from</string>
-
-  <!-- Displayed in the answer call screen for incoming requests to upgrade to a video call over Wi-F. -->
-  <string name="contact_grid_incoming_wifi_video_request">Wi-Fi video upgrade request from</string>
+  <string name="contact_grid_incoming_wifi_video_call">Wi-Fi carrier video call from</string>
 
   <!-- Displayed in the answer call screen for incoming voice calls. -->
   <string name="contact_grid_incoming_voice_call">Call from</string>

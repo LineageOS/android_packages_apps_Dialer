@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g>님은 오프라인 상태이며 연락할 수 없습니다."</string>
     <string name="about_phone_label" msgid="582991354677973731">"정보"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"텍스트 변환 Google 제공"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google에서 텍스트 변환 중…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"텍스트 변환을 사용할 수 없음"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google에서 텍스트 변환 중…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"텍스트 변환을 사용할 수 없습니다."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"텍스트 변환을 사용할 수 없습니다. 지원되지 않는 언어입니다."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"텍스트 변환을 사용할 수 없습니다. 감지된 음성이 없습니다."</string>
     <string name="view_conversation" msgid="7895904782094119702">"보기"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"통화가 삭제되었습니다. 메시지에서 이 통화 중에 공유된 첨부파일을 확인하고 삭제하세요."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"통화가 삭제되었습니다. 메시지에서 통화 중에 공유된 첨부파일을 확인하고 삭제하세요."</string>

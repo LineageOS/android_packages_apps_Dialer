@@ -23,6 +23,8 @@
     <string name="pause_prompt_no" msgid="4691320111774935838">"नहीं"</string>
     <string name="notification_dialing" msgid="9072177265772083826">"डायल किया जा रहा है"</string>
     <string name="notification_ongoing_call" msgid="8712641937577776125">"चल रही कॉल"</string>
+    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"जारी वीडियो कॉल"</string>
+    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"जारी वीडियो कॉल ‑ वीडियो रुक गया"</string>
     <string name="notification_ongoing_work_call" msgid="3189581218078981547">"कार्यस्थल की जारी कॉल"</string>
     <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"जारी <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
     <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"इनकमिंग <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
@@ -55,6 +57,8 @@
     <string name="notification_action_answer_video" msgid="8488108892919917287">"वीडियो"</string>
     <string name="notification_action_accept" msgid="1272761514200507143">"स्वीकार करें"</string>
     <string name="notification_action_dismiss" msgid="3128241581632616226">"अस्वीकार करें"</string>
+    <string name="notification_action_speaker_on" msgid="1882659234405596540">"स्पीकर चालू करें"</string>
+    <string name="notification_action_speaker_off" msgid="6340085043115533948">"स्पीकर बंद करें"</string>
     <string name="notification_external_call" msgid="2504334597315343920">"दूसरे डिवाइस पर चल रहा कॉल"</string>
     <string name="notification_external_video_call" msgid="7709394856028436683">"दूसरे डिवाइस पर चल रहा वीडियो कॉल"</string>
     <string name="notification_take_call" msgid="5631659438864492229">"कॉल लें"</string>

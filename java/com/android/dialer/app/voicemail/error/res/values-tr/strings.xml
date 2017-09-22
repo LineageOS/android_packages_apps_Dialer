@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Maalesef hizmetin ayarlanmasında sorun yaşıyoruz. Lütfen daha sonra tekrar deneyin. Sorun devam ederse lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9009 olduğunu bildirin."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Sesli Mesaj Kutunuza Bağlanılamıyor"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Maalesef şu anda sesli mesaj kutunuza bağlanamadık. Lütfen daha sonra tekrar deneyin. Sorun devam ederse lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9990 olduğunu bildirin."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Sesli Mesajı Ayarlayın"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Sesli Mesajı Ayarlayın"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Hesabınızda sesli mesaj ayarlanmadı. Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9991 olduğunu bildirin."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Sesli Mesaj"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Görsel Sesli Mesaj bu cihazda kullanılamıyor. Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9992 olduğunu bildirin."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Sesli mesaj"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Görsel sesli mesaj bu cihazda kullanılamıyor. Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9992 olduğunu bildirin."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Bir Sorun Oluştu"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9993 olduğunu bildirin."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Görsel Sesli Mesaj"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Görsel Sesli Mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9994 olduğunu bildirin."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Görsel Sesli Mesaj"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Görsel Sesli Mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9995 olduğunu bildirin."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Görsel Sesli Mesaj"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Görsel Sesli Mesaj\'ı etkinleştirmek için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9996 olduğunu bildirin."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Görsel sesli mesaj"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Görsel sesli mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9994 olduğunu bildirin."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Görsel sesli mesaj"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Görsel sesli mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9995 olduğunu bildirin."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Görsel sesli mesaj"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Görsel sesli mesajı etkinleştirmek için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9996 olduğunu bildirin."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Bir Sorun Oluştu"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Görsel Sesli Mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9998 olduğunu bildirin."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Görsel Sesli Mesaj Devre Dışı"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Görsel sesli mesaj kurulumunu tamamlamak için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9998 olduğunu bildirin."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Görsel sesli mesaj devre dışı bırakıldı"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Görsel sesli mesajı etkinleştirmek için lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçin."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Bir Sorun Oluştu"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9997 olduğunu bildirin."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9989 olduğunu bildirin."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Bir Sorun Oluştu"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Lütfen <xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefondan Müşteri Hizmetleri ile iletişime geçerek hata kodunun 9999 olduğunu bildirin."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Görsel Sesli Mesaj Şartlar ve Koşulları"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nGörsel sesli mesajı kullanabilmek için Verizon Wireless\'ın şartlar ve koşullarını kabul etmelisiniz:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Görsel Sesli Mesaj\'ı etkinleştirme"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Görsel Sesli Mesaj\'ı etkinleştirme"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nGörsel Sesli Mesaj\'ı etkinleştirerek Verizon Wireless şartlar ve koşullarına uymayı kabul etmiş olursunuz:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Görsel sesli mesajı etkinleştirme"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Sesli mesaj hizmetini aramak zorunda kalmadan mesajlarınızı görün ve dinleyin. Sesli mesajlarınızın çeviri yazıları Google\'ın ücretsiz çeviri yazı hizmeti tarafından sağlanır. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Sesli mesaj hizmetini aramak zorunda kalmadan mesajlarınızı görün ve dinleyin. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Daha fazla bilgi"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Şartlar ve koşullar reddedilirse görsel sesli mesaj devre dışı bırakılır."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Görsel sesli mesajı devre dışı bırak"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Şartlar ve koşullar reddedilirse sesli mesaj çeviri yazısı devre dışı bırakılır."</string>
