@@ -26,6 +26,7 @@ import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
@@ -57,6 +58,7 @@ import com.android.dialer.enrichedcall.EnrichedCallManager.StateChangedListener;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.ContactLookupResult.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.theme.R;
@@ -318,6 +320,18 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     parseCallSpecificAppData();
 
     updateEnrichedCallSession();
+  }
+
+  /** Test only constructor to avoid initializing dependencies. */
+  @VisibleForTesting
+  DialerCall(Context context) {
+    mContext = context;
+    mTelecomCall = null;
+    mLatencyReport = null;
+    mId = null;
+    mHiddenId = 0;
+    mDialerCallDelegate = null;
+    mVideoTechManager = null;
   }
 
   private static int translateState(int state) {
@@ -1250,6 +1264,15 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   @Override
   public void onImpressionLoggingNeeded(DialerImpression.Type impressionType) {
     Logger.get(mContext).logCallImpression(impressionType, getUniqueCallId(), getTimeAddedMs());
+    if (impressionType == DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED) {
+      if (getLogState().contactLookupResult == Type.NOT_FOUND) {
+        Logger.get(mContext)
+            .logCallImpression(
+                DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_UPGRADE_REQUESTED,
+                getUniqueCallId(),
+                getTimeAddedMs());
+      }
+    }
   }
 
   private void updateEnrichedCallSession() {
