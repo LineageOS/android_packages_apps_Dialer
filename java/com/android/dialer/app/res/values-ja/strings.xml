@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> さんはオフラインのため、通話を受信できません"</string>
     <string name="about_phone_label" msgid="582991354677973731">"電話アプリについて"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"文字変換: Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google が文字に変換しています…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"文字変換を利用できません"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google が文字に変換しています…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"文字に変換できません。"</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"この言語はサポートされていないため、文字に変換できません。"</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"言語音が検出されなかったため、文字に変換できません。"</string>
     <string name="view_conversation" msgid="7895904782094119702">"表示"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。"</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。"</string>

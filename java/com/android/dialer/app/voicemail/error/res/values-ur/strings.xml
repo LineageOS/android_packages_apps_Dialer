@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"معذرت، ہمیں آپ کی سروس سیٹ اپ کرنے میں پریشانی ہو رہی ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سپورٹ سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9009 ہے۔"</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"آپ کے صوتی میل باکس سے منسلک نہیں ہو سکتا"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"معذرت، ہم اس وقت آپ کے میل باکس سے منسلک کرنے سے قاصر ہیں۔ براہ کرم بعد میں دوبارہ کوشش کریں۔ اگر مسئلہ موجود رہتا ہے تو براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9990 ہے۔"</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"صوتی میل ترتیب دیں"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"صوتی میل ترتیب دیں"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"آپ کے اکاؤنٹ پر صوتی میل ترتیب نہیں دی گئی ہے۔ براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9991 ہے۔"</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"صوتی میل"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"اس آلہ پر بصری صوتی میل استعمال نہیں ہو سکتی۔ براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9992 ہے۔"</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"صوتی میل"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"اس آلہ پر بصری صوتی میل استعمال نہیں ہو سکتی۔ براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9992 ہے۔"</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"کچھ غلط ہوگیا"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9993 ہے۔"</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"بصری صوتی میل"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9994 ہے۔"</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"بصری صوتی میل"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9995 ہے۔"</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"بصری صوتی میل"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"بصری صوتی میل فعال کرنے کیلئے براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9996 ہے۔"</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"بصری صوتی میل"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"بصری صوتی میل کا سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9994 ہے۔"</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"بصری صوتی میل"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"بصری صوتی میل کا سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9995 ہے۔"</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"بصری صوتی میل"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"بصری صوتی میل فعال کرنے کیلئے براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9996 ہے۔"</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"کچھ غلط ہوگیا"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"بصری صوتی میل سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9998 ہے۔"</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"بصری صوتی میل غیر فعال ہے"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"بصری صوتی میل کا سیٹ اپ مکمل کرنے کیلئے براہ کرم کسٹمر سروس سے <xliff:g id="NUMBER">%1$s</xliff:g> پر رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9998 ہے۔"</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"بصری صوتی میل غیر فعال ہے"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"بصری صوتی میل فعال کرنے کیلئے <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں۔"</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"کچھ غلط ہوگیا"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9997 ہے۔"</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9989 ہے۔"</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"کچھ غلط ہوگیا"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"براہ کرم <xliff:g id="NUMBER">%1$s</xliff:g> پر کسٹمر سروس سے رابطہ کریں اور انہیں بتائیں کہ خرابی کا کوڈ 9999 ہے۔"</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"بصری صوتی میل کی شرائط و ضوابط"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"‏%1$s\n\nصوتی میل استعمال کرنے کیلئے آپ کو Verizon وائرلیس کی شرائط و ضوابط قبول کرنی چاہئیں::\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"بصری صوتی میل آن کریں"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"بصری صوتی میل آن کریں"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"‏%1$s\n\nبصری صوتی میل کو آن کر کے آپ Verizon Wireless کی شرائط و ضوابط سے اتفاق کرتے ہیں:\n\n‎%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"بصری صوتی میل آن کریں"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"‎%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"‏صوتی میل میں کال کئے بغیر، اپنے پیغامات دیکھیں اور سنیں۔ آپ کے صوتی میل کی ٹرانسکرپٹس Google کی مفت نقل حرفی کی سروس کے ذریعے فراہم کرائی جاتی ہیں۔ ‎%s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"‏صوتی میل میں کال کئے بغیر، اپنے پیغامات دیکھیں اور سنیں۔ ‎%s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"مزید جانیں"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"شرائط و ضوابط مسترد کئے جانے کی صورت میں بصری صوتی میل غیر فعال کر دی جائے گی۔"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"بصری صوتی میل کو غیر فعال کریں"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"شرائط و ضوابط مسترد کئے جانے کی صورت میں صوتی میل ٹرانسکرپشن غیر فعال کر دی جائے گی۔"</string>

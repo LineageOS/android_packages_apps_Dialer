@@ -173,8 +173,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Uživatel <xliff:g id="NAME">%1$s</xliff:g> je offline a není možné se s ním spojit"</string>
     <string name="about_phone_label" msgid="582991354677973731">"O aplikaci"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Přepsáno Googlem"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google přepisuje zprávu…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Přepis není k dispozici"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google přepisuje zprávu…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Přepis není k dispozici."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Přepis není k dispozici. Jazyk není podporován."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Přepis není k dispozici. Nebyla zaznamenána žádná řeč."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Zobrazit"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Hovor byl smazán. Přílohy sdílené během něj můžete zobrazit a smazat v aplikaci Zprávy."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Hovory byly smazány. Přílohy sdílené během nich můžete zobrazit a smazat v aplikaci Zprávy."</string>

@@ -19,4 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- no translation found for new_permission_no_search (6107959563874740441) -->
     <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"नवीन संपर्क तयार करा"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"संपर्कामध्‍ये जोडा"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"SMS पाठवा"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"व्‍हिडिओ कॉल करा"</string>
 </resources>

@@ -107,9 +107,9 @@
     <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
     <string name="websiteLabelsGroup" msgid="1630734286462186790">"Web stranica"</string>
     <string name="groupsLabel" msgid="2694002798416868728">"Grupe"</string>
-    <string name="email_home" msgid="889830029388962171">"Pošalji poruku e-pošte na kućnu adresu e-pošte"</string>
+    <string name="email_home" msgid="889830029388962171">"Pošalji e-poruku na kućnu adresu e-pošte"</string>
     <string name="email_mobile" msgid="4487686436743741150">"Mobilna e-pošta"</string>
-    <string name="email_work" msgid="4223487303344613528">"Pošalji poruku e-pošte na poslovnu adresu e-pošte"</string>
+    <string name="email_work" msgid="4223487303344613528">"Pošalji e-poruku na poslovnu adresu e-pošte"</string>
     <string name="email_other" msgid="4246411900126012062">"E-pošta"</string>
     <string name="email_custom" msgid="7246580894327511013">"E-pošta <xliff:g id="CUSTOM">%s</xliff:g>"</string>
     <string name="email" msgid="2807318537887091606">"E-pošta"</string>

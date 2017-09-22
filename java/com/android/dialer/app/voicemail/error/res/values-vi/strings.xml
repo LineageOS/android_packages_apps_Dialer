@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"Rất tiếc, chúng tôi gặp phải sự cố khi thiết lập dịch vụ của bạn. Vui lòng thử lại sau. Nếu vẫn xảy ra sự cố, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9009."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"Không thể kết nối với hộp thư thoại của bạn"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"Rất tiếc, chúng tôi không thể kết nối với hộp thư thoại của bạn vào lúc này. Vui lòng thử lại sau. Nếu vẫn xảy ra sự cố, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9990."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"Thiết lập thư thoại"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"Thiết lập thư thoại"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"Thư thoại không được thiết lập trên tài khoản của bạn. Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9991."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"Thư thoại"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"Không thể sử dụng Thư thoại kèm theo hình ảnh trên thiết bị này. Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9992."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"Thư thoại"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"Không thể sử dụng thư thoại kèm theo hình ảnh trên thiết bị này. Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9992."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"Đã xảy ra lỗi"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9993."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"Thư thoại kèm theo hình ảnh"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"Để hoàn thành việc thiết lập Thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9994."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"Thư thoại kèm theo hình ảnh"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"Để hoàn thành việc thiết lập Thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9995."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"Thư thoại kèm theo hình ảnh"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"Để kích hoạt Thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9996."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"Thư thoại kèm theo hình ảnh"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"Để hoàn thành việc thiết lập thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9994."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"Thư thoại kèm theo hình ảnh"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"Để hoàn thành việc thiết lập thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9995."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"Thư thoại kèm theo hình ảnh"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"Để kích hoạt thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9996."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"Đã xảy ra lỗi"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"Để hoàn thành việc thiết lập Thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9998."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"Thư thoại kèm theo hình ảnh bị tắt"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"Để hoàn thành việc thiết lập thư thoại kèm theo hình ảnh, vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9998."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"Thư thoại kèm theo hình ảnh bị tắt"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> để kích hoạt thư thoại kèm theo hình ảnh."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"Đã xảy ra lỗi"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9997."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9989."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"Đã xảy ra lỗi"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"Vui lòng liên hệ với bộ phận Dịch vụ khách hàng theo số <xliff:g id="NUMBER">%1$s</xliff:g> và cho họ biết mã lỗi là 9999."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"Điều khoản và điều kiện của thư thoại kèm theo hình ảnh"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nBạn phải chấp nhận điều khoản và điều kiện của Verizon Wireless để sử dụng thư thoại kèm theo hình ảnh:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"Bật Thư thoại kèm theo hình ảnh"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"Bật Thư thoại kèm theo hình ảnh"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\nBằng cách bật Thư thoại kèm theo hình ảnh, bạn đồng ý với các điều khoản và điều kiện của Verizon Wireless:\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"Bật thư thoại kèm theo hình ảnh"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"Xem và nghe tin nhắn của bạn mà không phải gọi thư thoại. Bản ghi thư thoại của bạn do dịch vụ phiên âm miễn phí của Google cung cấp. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"Xem và nghe tin nhắn của bạn mà không phải gọi thư thoại. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"Tìm hiểu thêm"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"Thư thoại kèm theo hình ảnh sẽ bị tắt nếu điều khoản và điều kiện bị từ chối."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"Tắt thư thoại kèm theo hình ảnh"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"Ghi âm thư thoại sẽ bị vô hiệu hóa nếu bạn từ chối điều khoản và điều kiện."</string>

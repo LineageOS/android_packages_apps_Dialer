@@ -18,4 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="new_permission_no_search" msgid="6107959563874740441">"Để tìm kiếm liên hệ của bạn, hãy bật quyền đối với Danh bạ."</string>
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"Tạo liên hệ mới"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"Thêm vào một liên hệ"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"Gửi SMS"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"Gọi điện video"</string>
 </resources>

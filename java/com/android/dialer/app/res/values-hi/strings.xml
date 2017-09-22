@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ऑफ़लाइन हैं और उन तक नहीं पहुंचा जा सकता"</string>
     <string name="about_phone_label" msgid="582991354677973731">"संक्षिप्त विवरण"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"यह ट्रांसक्रिप्शन Google ने किया है"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google प्रतिलेखन कर रहा है …"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"ट्रांसक्रिप्ट उपलब्‍ध नहीं है"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google प्रतिलेखन कर रहा है…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"ट्रांसक्रिप्ट उपलब्‍ध नहीं है."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"ट्रांसक्रिप्ट उपलब्‍ध नहीं है. यह भाषा उपलब्ध नहीं है."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"ट्रांसक्रिप्ट उपलब्‍ध नहीं है. कोई भी भाषण नहीं मिला."</string>
     <string name="view_conversation" msgid="7895904782094119702">"देखें"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"कॉल हटाया गया. संदेश में जा कर इस कॉल के दौरान साझा किए गए अटैचमेंट देखें और हटाएं."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"कॉल हटाए गए. संदेश में जा कर इस कॉल के दौरान साझा किए गए अटैचमेंट देखें और हटाएं."</string>

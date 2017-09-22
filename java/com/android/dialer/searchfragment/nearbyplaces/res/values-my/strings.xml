@@ -18,4 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places" msgid="275117539511113867">"အနီးတဝိုက်ရှိ နေရာများ"</string>
+    <string name="search_location_permission" msgid="5893183045324252816">"သင့်အနီးရှိ နေရာများအတွက် အဆက်အသွယ် အချက်အလက်များ ရရှိရန် သင့်တည်နေရာကို သုံးခွင့်ပြုပါ။"</string>
+    <string name="nearby_places_allow" msgid="4060507469206871903">"ခွင့်ပြုရန်"</string>
+    <string name="nearby_places_dismiss" msgid="3255977972553076907">"ပယ်ရန်"</string>
 </resources>
