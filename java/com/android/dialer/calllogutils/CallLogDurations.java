@@ -20,9 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.text.format.Formatter;
 import com.android.dialer.util.DialerUtils;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +28,10 @@ import java.util.concurrent.TimeUnit;
 public class CallLogDurations {
 
   private static CharSequence formatDuration(Context context, long elapsedSeconds) {
+    // Getting this method into a good state took a bunch of work between eng, i18n team and
+    // translators. If at all possible, the strings should not be changed or updated.
+    long minutes = TimeUnit.SECONDS.toMinutes(elapsedSeconds);
+    long seconds = elapsedSeconds - TimeUnit.MINUTES.toSeconds(minutes);
     Resources res = context.getResources();
     String formatPattern;
     if (elapsedSeconds >= 60) {
@@ -38,35 +40,22 @@ public class CallLogDurations {
       // example output: "1m 1s"
       formatPattern =
           context.getString(
-              R.string.call_duration_format_pattern, "m", minutesString, "s", secondsString);
+              R.string.call_duration_format_pattern,
+              Long.toString(minutes),
+              minutesString,
+              Long.toString(seconds),
+              secondsString);
     } else {
       String secondsString = res.getString(R.string.call_details_seconds_abbreviation);
       // example output: "1s"
       formatPattern =
-          context.getString(R.string.call_duration_short_format_pattern, "s", secondsString);
-
-      // Temporary work around for a broken Hebrew(iw) translation.
-      if (formatPattern.endsWith("\'\'")) {
-        formatPattern = formatPattern.substring(0, formatPattern.length() - 1);
-      }
+          context.getString(
+              R.string.call_duration_short_format_pattern, Long.toString(seconds), secondsString);
     }
 
-    // If new translation issues arise, we should catch them here to prevent crashes.
-    try {
-      Date date = new Date(TimeUnit.SECONDS.toMillis(elapsedSeconds));
-      SimpleDateFormat format = new SimpleDateFormat(formatPattern);
-      String duration = format.format(date);
-
-      // SimpleDateFormat cannot display more than 59 minutes, instead it displays MINUTES % 60.
-      // Here we check for that value and replace it with the correct value.
-      if (elapsedSeconds >= TimeUnit.MINUTES.toSeconds(60)) {
-        int minutes = (int) (elapsedSeconds / 60);
-        duration = duration.replaceFirst(Integer.toString(minutes % 60), Integer.toString(minutes));
-      }
-      return duration;
-    } catch (Exception e) {
-      return "";
-    }
+    // Since we don't want to update the strings.xml, we need to remove the quotations from the
+    // previous implementation.
+    return formatPattern.replace("\'", "");
   }
 
   private static CharSequence formatDurationA11y(Context context, long elapsedSeconds) {
