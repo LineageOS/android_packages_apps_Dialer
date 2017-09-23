@@ -24,12 +24,19 @@
     <!-- Note in the referenced styles that we assign hard widths to these components
          because we want them to line up vertically when we arrange them in an MxN grid -->
 
-    <com.android.dialer.dialpadview.DialpadTextView
-      android:id="@+id/dialpad_key_number"
-      style="@style/DialpadKeyNumberStyle"/>
+        <TextView
+            android:id="@+id/dialpad_key_number"
+            style="@style/DialpadKeyNumberStyle" />
 
-    <TextView
-      android:id="@+id/dialpad_key_letters"
-      style="@style/DialpadKeyLettersStyle"/>
-  </LinearLayout>
+        <LinearLayout
+                style="@style/DialpadKeyLetterLayoutStyle">
+            <TextView
+                    android:id="@+id/dialpad_key2_letters"
+                    style="@style/DialpadKeyLettersStyle" />
+
+            <TextView
+                android:id="@+id/dialpad_key_letters"
+                style="@style/DialpadKeyLettersStyle" />
+        </LinearLayout>
+    </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>

@@ -19,7 +19,7 @@
   style="@style/DialpadKeyButtonStyle">
   <LinearLayout
     style="@style/DialpadKeyInternalLayoutStyle">
-    <com.android.dialer.dialpadview.DialpadTextView
+    <TextView
       android:id="@+id/dialpad_key_number"
       style="@style/DialpadKeyNumberStyle"/>
     <RelativeLayout
