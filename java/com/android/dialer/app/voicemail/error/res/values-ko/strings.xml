@@ -77,21 +77,21 @@
     <string name="vvm3_error_status_sms_timeout_message" msgid="9079367624352316780">"서비스를 설정하는 중에 문제가 발생했습니다. 나중에 다시 시도해 주세요. 문제가 지속되면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9009임을 알려주시기 바랍니다."</string>
     <string name="vvm3_error_subscriber_blocked_title" msgid="3650932081111129710">"음성사서함에 연결할 수 없음"</string>
     <string name="vvm3_error_subscriber_blocked_message" msgid="5162479488602796264">"현재 음성사서함에 연결할 수 없습니다. 나중에 다시 시도해 주세요. 문제가 지속되면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9990임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_unknown_user_title" msgid="3908082247867523916">"음성사서함 설정"</string>
+    <string name="vvm3_error_unknown_user_title" msgid="2667768481941705796">"음성사서함 설정"</string>
     <string name="vvm3_error_unknown_user_message" msgid="1509539640475335686">"계정에 음성사서함이 설정되지 않았습니다. 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9991임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_unknown_device_title" msgid="1894628172321293169">"음성사서함"</string>
-    <string name="vvm3_error_unknown_device_message" msgid="5653639091623486217">"이 기기에서 시각적 음성사서함을 사용할 수 없습니다. 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9992임을 알려주시기 바랍니다."</string>
+    <string name="vvm3_error_unknown_device_title" msgid="1759276751912714581">"음성사서함"</string>
+    <string name="vvm3_error_unknown_device_message" msgid="3135004871983210946">"이 기기에서 시각적 음성사서함을 사용할 수 없습니다. 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9992임을 알려주시기 바랍니다."</string>
     <string name="vvm3_error_invalid_password_title" msgid="4552360498026788519">"문제 발생"</string>
     <string name="vvm3_error_invalid_password_message" msgid="7203223289526274700">"고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9993임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7903951619707049472">"시각적 음성사서함"</string>
-    <string name="vvm3_error_mailbox_not_initialized_message" msgid="6411209982463628638">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9994임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_service_not_provisioned_title" msgid="6200721664168681357">"시각적 음성사서함"</string>
-    <string name="vvm3_error_service_not_provisioned_message" msgid="2652652017548677049">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9995임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_service_not_activated_title" msgid="8223482379756083354">"시각적 음성사서함"</string>
-    <string name="vvm3_error_service_not_activated_message" msgid="3877179443583231620">"시각적 음성사서함을 활성화하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9996임을 알려주시기 바랍니다."</string>
+    <string name="vvm3_error_mailbox_not_initialized_title" msgid="7764342270506951131">"시각적 음성사서함"</string>
+    <string name="vvm3_error_mailbox_not_initialized_message" msgid="362772845865359110">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9994임을 알려주시기 바랍니다."</string>
+    <string name="vvm3_error_service_not_provisioned_title" msgid="6061112314968583016">"시각적 음성사서함"</string>
+    <string name="vvm3_error_service_not_provisioned_message" msgid="543364752584952428">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9995임을 알려주시기 바랍니다."</string>
+    <string name="vvm3_error_service_not_activated_title" msgid="8083873030555985013">"시각적 음성사서함"</string>
+    <string name="vvm3_error_service_not_activated_message" msgid="6537476630560465297">"시각적 음성사서함을 활성화하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9996임을 알려주시기 바랍니다."</string>
     <string name="vvm3_error_user_blocked_title" msgid="3182280563102274326">"문제 발생"</string>
-    <string name="vvm3_error_user_blocked_message" msgid="5006388183845631086">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9998임을 알려주시기 바랍니다."</string>
-    <string name="vvm3_error_subscriber_unknown_title" msgid="2327013918755472131">"시각적 음성사서함이 사용 중지됨"</string>
+    <string name="vvm3_error_user_blocked_message" msgid="562687121370364596">"시각적 음성사서함 설정을 완료하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9998임을 알려주시기 바랍니다."</string>
+    <string name="vvm3_error_subscriber_unknown_title" msgid="2776762297746819776">"시각적 음성사서함이 사용 중지됨"</string>
     <string name="vvm3_error_subscriber_unknown_message" msgid="7991526423950940698">"시각적 음성사서함을 활성화하려면 고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하시기 바랍니다."</string>
     <string name="vvm3_error_imap_getquota_error_title" msgid="2229474251543811881">"문제 발생"</string>
     <string name="vvm3_error_imap_getquota_error_message" msgid="4266777005393484563">"고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9997임을 알려주시기 바랍니다."</string>
@@ -99,10 +99,13 @@
     <string name="vvm3_error_imap_select_error_message" msgid="7535508175537847085">"고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9989임을 알려주시기 바랍니다."</string>
     <string name="vvm3_error_imap_error_title" msgid="1952971680250515832">"문제 발생"</string>
     <string name="vvm3_error_imap_error_message" msgid="6668651261796655388">"고객 서비스 담당자(<xliff:g id="NUMBER">%1$s</xliff:g>)에게 문의하고 오류 코드가 9999임을 알려주시기 바랍니다."</string>
-    <string name="verizon_terms_and_conditions_title" msgid="9074967311276321500">"시각적 음성사서함 이용약관"</string>
-    <string name="verizon_terms_and_conditions_message" msgid="120258835788235077">"%1$s\n\nVerizon Wireless의 이용약관에 동의한 후 시각적 음성사서함을 사용할 수 있습니다:\n\n%2$s"</string>
-    <string name="dialer_terms_and_conditions_title" msgid="311603424861921251">"시각적 음성사서함 사용"</string>
+    <string name="verizon_terms_and_conditions_title" msgid="7885825788225936898">"시각적 음성사서함 사용"</string>
+    <string name="verizon_terms_and_conditions_message" msgid="115838469000232781">"%1$s\n\n시각적 음성사서함을 사용 설정하면 Verizon Wireless 이용약관에 동의하게 됩니다.\n\n%2$s"</string>
+    <string name="dialer_terms_and_conditions_title" msgid="3861661058770826975">"시각적 음성사서함 사용"</string>
     <string name="dialer_terms_and_conditions_message" msgid="6207219973959897196">"%s"</string>
+    <string name="dialer_terms_and_conditions_1.0" msgid="9151400923645683073">"음성사서함으로 전화를 걸지 않고도 메시지를 확인하고 들을 수 있습니다. Google의 무료 음성인식 서비스에서 음성메일의 스크립트를 제공합니다. %s"</string>
+    <string name="dialer_terms_and_conditions_for_verizon_1.0" msgid="4354228864875417888">"음성사서함으로 전화를 걸지 않고도 메시지를 확인하고 들을 수 있습니다. %s"</string>
+    <string name="dialer_terms_and_conditions_learn_more" msgid="658300158603798287">"자세히 알아보기"</string>
     <string name="verizon_terms_and_conditions_decline_dialog_message" msgid="7852059293806766767">"이용약관을 거부하는 경우 시각적 음성사서함이 사용 중지됩니다."</string>
     <string name="verizon_terms_and_conditions_decline_dialog_downgrade" msgid="8347128304508008823">"시각적 음성사서함 사용 중지"</string>
     <string name="dialer_terms_and_conditions_decline_dialog_message" msgid="1726573227032877573">"이용약관을 거부하면 음성사서함 텍스트 변환은 사용 중지됩니다."</string>

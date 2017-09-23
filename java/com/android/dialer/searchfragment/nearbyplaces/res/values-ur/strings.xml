@@ -18,4 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places" msgid="275117539511113867">"قریبی مقامات"</string>
+    <string name="search_location_permission" msgid="5893183045324252816">"اپنے قریبی مقامات کے بارے میں رابطہ کی معلومات حاصل کرنے کیلئے، اپنے مقام تک رسائی کی اجازت دیں۔"</string>
+    <string name="nearby_places_allow" msgid="4060507469206871903">"اجازت دیں"</string>
+    <string name="nearby_places_dismiss" msgid="3255977972553076907">"برخاست کریں"</string>
 </resources>

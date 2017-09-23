@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> çevrimdışı olduğundan ulaşılamıyor"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Hakkında"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Çeviri yazı Google\'a aittir"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google çeviri yazı oluşturuyor…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Çeviri yazı yok"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google, çeviri yazı oluşturuyor…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Çeviri yazı oluşturulamadı."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Çeviri yazı oluşturulamadı. Dil desteklenmiyor."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Çeviri yazı oluşturulamadı. Konuşma algılanmadı."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Göster"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Çağrı silindi. Bu çağrı sırasında paylaşılan ekleri Mesajlar\'da görebilir ve silebilirsiniz."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Çağrılar silindi. Çağrılar sırasında paylaşılan ekleri Mesajlar\'da görebilir ve silebilirsiniz."</string>

@@ -18,4 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places" msgid="275117539511113867">"Lugares cercanos"</string>
+    <string name="search_location_permission" msgid="5893183045324252816">"Para obtener información de contacto de lugares cercanos, permite el acceso a tu ubicación."</string>
+    <string name="nearby_places_allow" msgid="4060507469206871903">"Permitir"</string>
+    <string name="nearby_places_dismiss" msgid="3255977972553076907">"Descartar"</string>
 </resources>

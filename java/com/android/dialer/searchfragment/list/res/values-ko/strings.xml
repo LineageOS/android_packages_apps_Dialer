@@ -18,4 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="new_permission_no_search" msgid="6107959563874740441">"연락처를 검색하려면 연락처 권한을 사용하도록 설정하세요."</string>
+    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"새 연락처 만들기"</string>
+    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"연락처에 추가"</string>
+    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"SMS 보내기"</string>
+    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"화상 통화하기"</string>
 </resources>

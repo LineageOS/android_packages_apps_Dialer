@@ -22,6 +22,6 @@
     <string name="all_contacts_empty" msgid="4260556610403994011">"ਤੁਹਾਡੇ ਕੋਲ ਹਾਲੇ ਕੋਈ ਸੰਪਰਕ ਨਹੀਂ ਹਨ"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="7850060327481179533">"ਨਵਾਂ ਸੰਪਰਕ ਬਣਾਓ"</string>
     <string name="permission_single_turn_on" msgid="1306416016676232584">"ਚਾਲੂ ਕਰੋ"</string>
-    <string name="permission_no_contacts" msgid="2388204904477299207">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਸੰਪਰਕ ਇਜਾਜ਼ਤ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_contacts" msgid="2388204904477299207">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਨੂੰ  ਦੇਖਣ  ਲਈ, ਸੰਪਰਕ ਇਜਾਜ਼ਤ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="add_contact_not_available" msgid="3083256438899321502">"ਕੋਈ ਸੰਪਰਕ ਐਪ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
 </resources>

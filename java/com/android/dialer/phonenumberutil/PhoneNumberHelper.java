@@ -24,11 +24,12 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 public class PhoneNumberHelper {
@@ -92,27 +93,33 @@ public class PhoneNumberHelper {
   }
 
   /**
+   * @param countryIso Country ISO used if there is no country code in the number, may be null
+   *     otherwise.
    * @return a geographical description string for the specified number.
    */
-  public static String getGeoDescription(Context context, String number) {
+  public static String getGeoDescription(
+      Context context, String number, @Nullable String countryIso) {
     return PhoneNumberGeoUtilComponent.get(context)
         .getPhoneNumberGeoUtil()
-        .getGeoDescription(context, number);
+        .getGeoDescription(context, number, countryIso);
   }
 
   /**
+   * @param phoneAccountHandle {@code PhonAccountHandle} used to get current network country ISO.
+   *     May be null if no account is in use or selected, in which case default account will be
+   *     used.
    * @return The ISO 3166-1 two letters country code of the country the user is in based on the
    *     network location. If the network location does not exist, fall back to the locale setting.
    */
-  public static String getCurrentCountryIso(Context context, Locale locale) {
+  public static String getCurrentCountryIso(
+      Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
     // Without framework function calls, this seems to be the most accurate location service
     // we can rely on.
-    final TelephonyManager telephonyManager =
-        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-    String countryIso = telephonyManager.getNetworkCountryIso();
+    String countryIso =
+        TelephonyManagerCompat.getNetworkCountryIsoForPhoneAccountHandle(
+            context, phoneAccountHandle);
     if (TextUtils.isEmpty(countryIso)) {
-      countryIso = locale.getCountry();
+      countryIso = CompatUtils.getLocale(context).getCountry();
       LogUtil.i(
           "PhoneNumberHelper.getCurrentCountryIso",
           "No CountryDetector; falling back to countryIso based on locale: " + countryIso);
@@ -126,14 +133,12 @@ public class PhoneNumberHelper {
    * @return Formatted phone number. e.g. 1-123-456-7890. Returns the original number if formatting
    *     failed.
    */
-  public static String formatNumber(@Nullable String number, Context context) {
+  public static String formatNumber(@Nullable String number, String countryIso) {
     // The number can be null e.g. schema is voicemail and uri content is empty.
     if (number == null) {
       return null;
     }
-    String formattedNumber =
-        PhoneNumberUtils.formatNumber(
-            number, PhoneNumberHelper.getCurrentCountryIso(context, Locale.getDefault()));
+    String formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
     return formattedNumber != null ? formattedNumber : number;
   }
 

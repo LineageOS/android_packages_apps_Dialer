@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> est hors connexion et injoignable"</string>
     <string name="about_phone_label" msgid="582991354677973731">"À propos"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transcrit par Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Google transcrit…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Transcription non disponible"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transcrit…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transcription non disponible."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transcription non disponible. Langue non prise en charge."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transcription non disponible. Aucune parole détectée."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Afficher"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Appel supprimé. Affichez et supprimez les pièces jointes partagées pendant cet appel dans les messages."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Appels supprimés. Affichez et supprimez les pièces jointes partagées pendant ces appels dans les messages."</string>

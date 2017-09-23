@@ -169,8 +169,10 @@
     <string name="call_composer_connection_failed" msgid="6776461585447831242">"Ο χρήστης <xliff:g id="NAME">%1$s</xliff:g> είναι εκτός σύνδεσης και δεν μπορείτε να έρθετε σε επικοινωνία μαζί του"</string>
     <string name="about_phone_label" msgid="582991354677973731">"Πληροφορίες"</string>
     <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Μεταγραφή από την Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="7487903595413945308">"Μεταγραφή Google σε εξέλιξη…"</string>
-    <string name="voicemail_transcription_failed" msgid="8492006288177649340">"Δεν υπάρχει απομαγνητοφώνηση"</string>
+    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Μεταγραφή Google σε εξέλιξη…"</string>
+    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Δεν υπάρχει διαθέσιμη μεταγραφή."</string>
+    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Δεν υπάρχει διαθέσιμη μεταγραφή. Μη υποστηριζόμενη γλώσσα."</string>
+    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Δεν υπάρχει διαθέσιμη μεταγραφή. Δεν εντοπίστηκε ομιλία."</string>
     <string name="view_conversation" msgid="7895904782094119702">"Προβολή"</string>
     <string name="ec_data_deleted" msgid="4794880345545827107">"Η κλήση διαγράφηκε. Προβάλετε και διαγράψτε τα συνημμένα που κοινοποιήθηκαν κατά τη διάρκεια αυτής της κλήσης στο Messages."</string>
     <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Οι κλήσεις διαγράφηκαν. Προβάλετε και διαγράψτε τα συνημμένα που κοινοποιήθηκαν κατά τη διάρκεια αυτών των κλήσεων στο Messages."</string>
