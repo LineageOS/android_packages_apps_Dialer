@@ -17,9 +17,13 @@
 package com.android.dialer.smartdial;
 
 import android.support.annotation.Nullable;
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.Log;
+import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.smartdial.SmartDialPrefix.PhoneNumberTokens;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +34,8 @@ import java.util.ArrayList;
  * (J)ohn (S)mith.
  */
 public class SmartDialNameMatcher {
+
+  private final static String TAG = "SmartDialNameMatcher";
 
   public static final SmartDialMap LATIN_SMART_DIAL_MAP = new LatinSmartDialMap();
   // Whether or not we allow matches like 57 - (J)ohn (S)mith
@@ -45,17 +51,27 @@ public class SmartDialNameMatcher {
   private String mNameMatchMask = "";
   private String mPhoneNumberMatchMask = "";
 
+  private Context mContext;
+  private String mSchar = "+*#-.(,)/ ";
+  private Object mMultiMatchObject;
+  private Method mMultiMatchMethod;
+
   // Controls whether to treat an empty query as a match (with anything).
   private boolean mShouldMatchEmptyQuery = false;
 
   @VisibleForTesting
-  public SmartDialNameMatcher(String query) {
-    this(query, LATIN_SMART_DIAL_MAP);
+  public SmartDialNameMatcher(String query, Context context) {
+     this(query, LATIN_SMART_DIAL_MAP, context);
   }
 
-  public SmartDialNameMatcher(String query, SmartDialMap map) {
+  public SmartDialNameMatcher(String query, SmartDialMap map, Context context) {
     mQuery = query;
     mMap = map;
+    mContext = context;
+    mMultiMatchObject = DialerDatabaseHelper.getInstance(mContext)
+            .getMultiMatchObject();
+    mMultiMatchMethod = DialerDatabaseHelper.getInstance(mContext)
+            .getMultiMatchMethod();
   }
 
   /**
@@ -132,19 +148,6 @@ public class SmartDialNameMatcher {
 
     // Try matching the number as is
     SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
-    if (matchPos == null) {
-      final PhoneNumberTokens phoneNumberTokens = SmartDialPrefix.parsePhoneNumber(phoneNumber);
-
-      if (phoneNumberTokens == null) {
-        return matchPos;
-      }
-      if (phoneNumberTokens.countryCodeOffset != 0) {
-        matchPos = matchesNumberWithOffset(phoneNumber, query, phoneNumberTokens.countryCodeOffset);
-      }
-      if (matchPos == null && phoneNumberTokens.nanpCodeOffset != 0 && useNanp) {
-        matchPos = matchesNumberWithOffset(phoneNumber, query, phoneNumberTokens.nanpCodeOffset);
-      }
-    }
     if (matchPos != null) {
       replaceBitInMask(builder, matchPos);
       mPhoneNumberMatchMask = builder.toString();
@@ -187,43 +190,50 @@ public class SmartDialNameMatcher {
    * @return {@literal null} if the number and the query don't match, a valid SmartDialMatchPosition
    *     with the matching positions otherwise
    */
-  private SmartDialMatchPosition matchesNumberWithOffset(
-      String phoneNumber, String query, int offset) {
-    if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(query)) {
-      return mShouldMatchEmptyQuery ? new SmartDialMatchPosition(offset, offset) : null;
-    }
-    int queryAt = 0;
-    int numberAt = offset;
-    for (int i = offset; i < phoneNumber.length(); i++) {
-      if (queryAt == query.length()) {
-        break;
-      }
-      char ch = phoneNumber.charAt(i);
-      if (mMap.isValidDialpadNumericChar(ch)) {
-        if (ch != query.charAt(queryAt)) {
-          return null;
+    private SmartDialMatchPosition matchesNumberWithOffset(String phoneNumber, String query,
+            int offset) {
+        if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(query)
+                || query.length() > phoneNumber.length()) {
+            return null;
         }
-        queryAt++;
-      } else {
-        if (queryAt == 0) {
-          // Found a separator before any part of the query was matched, so advance the
-          // offset to avoid prematurely highlighting separators before the rest of the
-          // query.
-          // E.g. don't highlight the first '-' if we're matching 1-510-111-1111 with
-          // '510'.
-          // However, if the current offset is 0, just include the beginning separators
-          // anyway, otherwise the highlighting ends up looking weird.
-          // E.g. if we're matching (510)-111-1111 with '510', we should include the
-          // first '('.
-          if (offset != 0) {
-            offset++;
-          }
+
+        String phoneNum = phoneNumber.replaceAll("[\\+\\*\\#\\-\\.\\(\\,\\)\\/ ]", "");
+        if (!TextUtils.isEmpty(phoneNum) && phoneNum.contains(query)) {
+            // firstly, find the start position in original phone number.
+            int start = phoneNum.indexOf(query);
+            int length = phoneNumber.length();
+            for (int i = start; i < length; i++) {
+                char ch = phoneNumber.charAt(i);
+                if (ch != phoneNum.charAt(start)) {
+                    continue;
+                }
+                if (phoneNumber.substring(i).replaceAll("[\\+\\*\\#\\-\\.\\(\\,\\)\\/ ]", "")
+                        .indexOf(query) == 0) {
+                    start = i;
+                    break;
+                }
+            }
+            // secondly, find the end position in original phone number.
+            int specialCount = 0;
+            int queryLength = query.length();
+            int end = start + queryLength;
+            for (int i = start; i < length; i++) {
+                char ch = phoneNumber.charAt(i);
+                if (mSchar.indexOf(ch) != -1) {
+                    specialCount++;
+                    continue;
+                }
+
+                if (i - start + 1 - specialCount == queryLength) {
+                    end = i + 1;
+                    break;
+                }
+            }
+            return new SmartDialMatchPosition(start, end);
+        } else {
+            return null;
         }
-      }
-      numberAt++;
     }
-    return new SmartDialMatchPosition(0 + offset, numberAt);
-  }
 
   /**
    * This function iterates through each token in the display name, trying to match the query to the
@@ -403,7 +413,11 @@ public class SmartDialNameMatcher {
 
   public boolean matches(String displayName) {
     mMatchPositions.clear();
-    return matchesCombination(displayName, mQuery, mMatchPositions);
+    if (mMultiMatchObject != null && mMultiMatchMethod != null) {
+        return matchesMultiLanguage(displayName, mQuery, mMatchPositions);
+    } else {
+        return matchesCombination(displayName, mQuery, mMatchPositions);
+    }
   }
 
   public ArrayList<SmartDialMatchPosition> getMatchPositions() {
@@ -430,5 +444,46 @@ public class SmartDialNameMatcher {
 
   public void setShouldMatchEmptyQuery(boolean matches) {
     mShouldMatchEmptyQuery = matches;
+  }
+
+  boolean matchesMultiLanguage(String displayName, String query,
+        ArrayList<SmartDialMatchPosition> matchList) {
+    StringBuilder builder = new StringBuilder();
+    constructEmptyMask(builder, displayName.length());
+    mNameMatchMask = builder.toString();
+    final int nameLength = displayName.length();
+    final int queryLength = query.length();
+
+    if (queryLength == 0) {
+        return false;
+    }
+    // contains the start, not the end poing
+    try {
+        int[] indexs = (int[]) mMultiMatchMethod.invoke(mMultiMatchObject,
+                query, displayName, 0);
+        // mMultimatch.getMatchStringIndex(query, displayName, 0);
+        if (indexs == null) {
+            return false;
+        }
+        for (int i = 0; i < indexs.length; i = i + 2) {
+            int start = indexs[i];
+            int end = indexs[i + 1];
+            if (start >= 0 && end >= 0) {
+                matchList.add(new SmartDialMatchPosition(start, end + 1));
+            } else {
+                Log.d(TAG, "Invalid index, start is:" + start + " end is:"
+                        + end + " for name:" + displayName);
+            }
+        }
+    } catch (Exception e) {
+        Log.d(TAG, "Exception:" + e);
+        return false;
+    }
+
+    for (SmartDialMatchPosition match : matchList) {
+        replaceBitInMask(builder, match);
+    }
+    mNameMatchMask = builder.toString();
+    return true;
   }
 }
