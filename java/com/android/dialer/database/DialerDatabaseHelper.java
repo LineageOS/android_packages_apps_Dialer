@@ -46,6 +46,7 @@ import com.android.dialer.util.PermissionsUtil;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
+import android.util.Log;
 import java.util.Objects;
 import java.util.Set;
 
@@ -79,6 +80,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   private final Context mContext;
   private boolean mIsTestInstance = false;
+
+  private static DialerDatabaseHelper sSingleton = null;
 
   private Class mMultiMatchClass;
   private Object mMultiMatchObject;
@@ -1217,6 +1220,23 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       }
       return false;
     }
+  }
+
+  /**
+  * Access function to get the singleton instance of DialerDatabaseHelper.
+  */
+    public static synchronized DialerDatabaseHelper getInstance(Context context) {
+        if (DEBUG) {
+            Log.v(TAG, "Getting Instance");
+        }
+        if (sSingleton == null) {
+            // Use application context instead of activity context because this is a singleton,
+            // and we don't want to leak the activity if the activity is not running but the
+            // dialer database helper is still doing work.
+            sSingleton = new DialerDatabaseHelper(context.getApplicationContext(),
+                    DATABASE_NAME, DATABASE_VERSION);
+        }
+        return sSingleton;
   }
 
   /** Data format for finding duplicated contacts. */

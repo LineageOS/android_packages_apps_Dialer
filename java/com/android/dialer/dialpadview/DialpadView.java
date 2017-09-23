@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.util.SettingsUtil;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -125,6 +127,10 @@ public class DialpadView extends LinearLayout {
     }
   }
 
+  public void refreshKeypad() {
+    setupKeypad();
+  }
+
   private void setupKeypad() {
     final int[] letterIds =
         new int[] {
@@ -142,11 +148,21 @@ public class DialpadView extends LinearLayout {
           R.string.dialpad_pound_letters
         };
 
-    final Resources resources = getContext().getResources();
+    final int[] letter2Ids = new int[] {
+            R.string.dialpad_0_2_letters, R.string.dialpad_1_2_letters,
+            R.string.dialpad_2_2_letters, R.string.dialpad_3_2_letters,
+            R.string.dialpad_4_2_letters, R.string.dialpad_5_2_letters,
+            R.string.dialpad_6_2_letters, R.string.dialpad_7_2_letters,
+            R.string.dialpad_8_2_letters, R.string.dialpad_9_2_letters,
+            R.string.dialpad_star_2_letters, R.string.dialpad_pound_2_letters};
+
+    Locale t9SearchInputLocale = SettingsUtil.getT9SearchInputLocale(getContext());
+    final Resources resources = getResourcesForLocale(t9SearchInputLocale);
 
     DialpadKeyButton dialpadKey;
     TextView numberView;
     TextView lettersView;
+    TextView letters2View;
 
     final Locale currentLocale = resources.getConfiguration().locale;
     final NumberFormat nf;
@@ -162,6 +178,7 @@ public class DialpadView extends LinearLayout {
       dialpadKey = (DialpadKeyButton) findViewById(mButtonIds[i]);
       numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
       lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
+      letters2View = (TextView) dialpadKey.findViewById(R.id.dialpad_key2_letters);
 
       final String numberString;
       final CharSequence numberContentDescription;
@@ -200,6 +217,25 @@ public class DialpadView extends LinearLayout {
 
       if (lettersView != null) {
         lettersView.setText(resources.getString(letterIds[i]));
+      }
+
+      String secondaryLabel = resources.getString(letter2Ids[i]);
+        if (letters2View != null) {
+            if (!TextUtils.isEmpty(secondaryLabel)) {
+                letters2View.setText(secondaryLabel);
+                letters2View.setVisibility(View.VISIBLE);
+
+                // use smaller text size when both labels are present
+                if (lettersView != null) {
+                    float size =
+                            resources.getDimension(
+                                    R.dimen.dialpad_key_letters_small_size);
+                    letters2View.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+                    lettersView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+                }
+            } else {
+                letters2View.setVisibility(View.GONE);
+            }
       }
     }
 
@@ -460,5 +496,13 @@ public class DialpadView extends LinearLayout {
 
     Log.wtf(TAG, "Attempted to get animation duration for invalid key button id.");
     return 0;
+  }
+
+  private Resources getResourcesForLocale(Locale locale) {
+    Configuration defaultConfig = getContext().getResources().getConfiguration();
+    Configuration overrideConfig = new Configuration(defaultConfig);
+    overrideConfig.setLocale(locale);
+    Context localeContext = getContext().createConfigurationContext(overrideConfig);
+    return localeContext.getResources();
   }
 }
