@@ -20,11 +20,11 @@ import android.support.annotation.Nullable;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
-import android.util.Log;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.smartdial.SmartDialPrefix.PhoneNumberTokens;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import android.util.Log;
 
 /**
  * {@link #SmartDialNameMatcher} contains utility functions to remove accents from accented
@@ -37,7 +37,6 @@ public class SmartDialNameMatcher {
 
   private final static String TAG = "SmartDialNameMatcher";
 
-  public static final SmartDialMap LATIN_SMART_DIAL_MAP = new LatinSmartDialMap();
   // Whether or not we allow matches like 57 - (J)ohn (S)mith
   private static final boolean ALLOW_INITIAL_MATCH = true;
 
@@ -61,7 +60,7 @@ public class SmartDialNameMatcher {
 
   @VisibleForTesting
   public SmartDialNameMatcher(String query, Context context) {
-     this(query, LATIN_SMART_DIAL_MAP, context);
+     this(query, SmartDialPrefix.getMap(), context);
   }
 
   public SmartDialNameMatcher(String query, SmartDialMap map, Context context) {
