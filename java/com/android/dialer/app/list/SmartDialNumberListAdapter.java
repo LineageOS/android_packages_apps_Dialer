@@ -39,7 +39,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
 
   public SmartDialNumberListAdapter(Context context) {
     super(context);
-    mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap());
+    mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap(), context);
     setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
 
     if (DEBUG) {
