@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2006 The Android Open Source Project
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,14 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.dialer.dialpadview.DialpadKeyButton
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/star"
-  style="@style/DialpadKeyButtonStyle">
-  <LinearLayout
-    style="@style/SpecialCharInternalLayoutStyle" >
-    <TextView
-      android:id="@+id/dialpad_key_number"
-      style="@style/DialpadKeyStarStyle"/>
-  </LinearLayout>
-</com.android.dialer.dialpadview.DialpadKeyButton>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="dialpad_2_2_letters">ΑΒΓ</string>
+    <string name="dialpad_3_2_letters">ΔΕΖ</string>
+    <string name="dialpad_4_2_letters">ΗΘΙ</string>
+    <string name="dialpad_5_2_letters">ΚΛΜ</string>
+    <string name="dialpad_6_2_letters">ΝΞΟ</string>
+    <string name="dialpad_7_2_letters">ΠΡΣ</string>
+    <string name="dialpad_8_2_letters">ΤΥΦ</string>
+    <string name="dialpad_9_2_letters">ΧΨΩ</string>
+</resources>
