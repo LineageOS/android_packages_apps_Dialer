@@ -317,10 +317,6 @@ public class InCallActivityCommon {
     if (dialpadFragment != null) {
       dialpadFragment.onDialerKeyUp(null);
     }
-
-    if (inCallActivity.isFinishing()) {
-      InCallPresenter.getInstance().unsetActivity(inCallActivity);
-    }
   }
 
   public void onStop() {
@@ -341,6 +337,9 @@ public class InCallActivityCommon {
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(false);
+    }
+    if (inCallActivity.isFinishing()) {
+      InCallPresenter.getInstance().unsetActivity(inCallActivity);
     }
   }
 

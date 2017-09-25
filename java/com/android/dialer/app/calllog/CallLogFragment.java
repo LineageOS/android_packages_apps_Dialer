@@ -352,6 +352,9 @@ public class CallLogFragment extends Fragment
                 new FilteredNumberAsyncQueryHandler(getActivity()),
                 activityType);
     mRecyclerView.setAdapter(mAdapter);
+    if (mAdapter.getOnScrollListener() != null) {
+      mRecyclerView.addOnScrollListener(mAdapter.getOnScrollListener());
+    }
     fetchCalls();
   }
 
