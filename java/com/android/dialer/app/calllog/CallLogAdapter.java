@@ -407,6 +407,11 @@ public class CallLogAdapter extends GroupingListAdapter
         }
       };
 
+  @Nullable
+  public RecyclerView.OnScrollListener getOnScrollListener() {
+    return null;
+  }
+
   private void checkMarkCallLogEntry(CallLogListItemViewHolder viewHolder) {
     announceforAccessibility(
         mActivity.getCurrentFocus(),
