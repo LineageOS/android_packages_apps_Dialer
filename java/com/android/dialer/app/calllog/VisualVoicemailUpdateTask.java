@@ -121,9 +121,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       if (notification.getId() != VisualVoicemailNotifier.NOTIFICATION_ID) {
         continue;
       }
-      if (TextUtils.equals(
-          notification.getTag(), VisualVoicemailNotifier.GROUP_SUMMARY_NOTIFICATION_TAG)) {
-        // Group header
+      if (!notification.getTag().startsWith(VisualVoicemailNotifier.NOTIFICATION_TAG_PREFIX)) {
         continue;
       }
       String uri =
