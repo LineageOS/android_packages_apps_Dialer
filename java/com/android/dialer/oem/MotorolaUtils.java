@@ -17,6 +17,7 @@ package com.android.dialer.oem;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.provider.CallLog.Calls;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PackageUtils;
@@ -45,12 +46,6 @@ public class MotorolaUtils {
   // Thi is used to check if a Motorola device supports hidden menu feature.
   private static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
 
-  // Feature flag indicates it's a HD call, currently this is only used by Motorola system build.
-  // TODO(b/35359461): Use reference to android.provider.CallLog once it's in new SDK.
-  private static final int FEATURES_HD_CALL = 0x4;
-  // Feature flag indicates it's a WiFi call, currently this is only used by Motorola system build.
-  private static final int FEATURES_WIFI = 0x8;
-
   private static boolean hasCheckedSprintWifiCall;
   private static boolean supportSprintWifiCall;
 
@@ -58,7 +53,7 @@ public class MotorolaUtils {
    * Returns true if SPN is specified and matched the current sim operator name. This is necessary
    * since mcc310-mnc000 is not sufficient to identify Sprint network.
    */
-  static boolean isSpnMatched(Context context) {
+  private static boolean isSpnMatched(Context context) {
     try {
       String spnResource = context.getResources().getString(R.string.motorola_enabled_spn);
       return spnResource.equalsIgnoreCase(
@@ -88,14 +83,14 @@ public class MotorolaUtils {
   public static boolean shouldShowHdIconInCallLog(Context context, int features) {
     return ConfigProviderBindings.get(context)
             .getBoolean(CONFIG_HD_CODEC_SHOW_ICON_IN_CALL_LOG_ENABLED, true)
-        && (features & FEATURES_HD_CALL) == FEATURES_HD_CALL
+        && (features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL
         && isSupportingSprintHdCodec(context);
   }
 
   public static boolean shouldShowWifiIconInCallLog(Context context, int features) {
     return ConfigProviderBindings.get(context)
             .getBoolean(CONFIG_WIFI_CALL_SHOW_ICON_IN_CALL_LOG_ENABLED, true)
-        && (features & FEATURES_WIFI) == FEATURES_WIFI
+        && (features & Calls.FEATURES_WIFI) == Calls.FEATURES_WIFI
         && isSupportingSprintWifiCall(context);
   }
 
