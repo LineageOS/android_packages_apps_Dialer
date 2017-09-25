@@ -1182,6 +1182,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return callbackNumber;
   }
 
+  public String getSimCountryIso() {
+    String simCountryIso =
+        TelephonyManagerCompat.getTelephonyManagerForPhoneAccountHandle(
+                mContext, getAccountHandle())
+            .getSimCountryIso();
+    if (!TextUtils.isEmpty(simCountryIso)) {
+      simCountryIso = simCountryIso.toUpperCase(Locale.US);
+    }
+    return simCountryIso;
+  }
+
   @Override
   public void onVideoTechStateChanged() {
     update();
