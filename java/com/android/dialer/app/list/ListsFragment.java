@@ -107,7 +107,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
   @Override
   public void onResume() {
-    LogUtil.d("ListsFragment.onResume", null);
+    LogUtil.enterBlock("ListsFragment.onResume");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
@@ -124,17 +124,11 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
     mCallLogQueryHandler.fetchMissedCallsUnreadCount();
     Trace.endSection();
     mCurrentPage = mAdapter.getItem(mViewPager.getCurrentItem());
-    if (mCurrentPage instanceof CallLogFragment) {
-      ((CallLogFragment) mCurrentPage).onVisible();
-    }
   }
 
   @Override
   public void onPause() {
-    LogUtil.d("ListsFragment.onPause", null);
-    if (mCurrentPage instanceof CallLogFragment) {
-      ((CallLogFragment) mCurrentPage).onNotVisible();
-    }
+    LogUtil.enterBlock("ListsFragment.onPause");
     super.onPause();
 
     mPaused = true;
@@ -149,7 +143,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    LogUtil.d("ListsFragment.onCreateView", null);
+    LogUtil.enterBlock("ListsFragment.onCreateView");
     Trace.beginSection(TAG + " onCreateView");
     Trace.beginSection(TAG + " inflate view");
     final View parentView = inflater.inflate(R.layout.lists_fragment, container, false);

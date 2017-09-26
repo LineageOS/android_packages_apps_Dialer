@@ -411,11 +411,18 @@ public class CallLogFragment extends Fragment
     mAdapter.onResume();
 
     rescheduleDisplayUpdate();
+    // onResume() may also be called as a "side" page on the ViewPager, which is not visible.
+    if (getUserVisibleHint()) {
+      onVisible();
+    }
   }
 
   @Override
   public void onPause() {
     LogUtil.enterBlock("CallLogFragment.onPause");
+    if (getUserVisibleHint()) {
+      onNotVisible();
+    }
     cancelDisplayUpdate();
     mAdapter.onPause();
     super.onPause();
@@ -594,7 +601,7 @@ public class CallLogFragment extends Fragment
   @CallSuper
   public void onVisible() {
     LogUtil.enterBlock("CallLogFragment.onPageSelected");
-    if (getActivity() != null) {
+    if (getActivity() != null && getActivity() instanceof HostInterface) {
       ((HostInterface) getActivity())
           .enableFloatingButton(mModalAlertManager == null || mModalAlertManager.isEmpty());
     }
