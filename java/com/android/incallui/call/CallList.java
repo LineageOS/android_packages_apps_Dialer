@@ -79,6 +79,8 @@ public class CallList implements DialerCallDelegate {
 
   private final Set<DialerCall> mPendingDisconnectCalls =
       Collections.newSetFromMap(new ConcurrentHashMap<DialerCall, Boolean>(8, 0.9f, 1));
+
+  private UiListener mUiListeners;
   /** Handles the timeout for destroying disconnected calls. */
   private final Handler mHandler =
       new Handler() {
@@ -116,6 +118,9 @@ public class CallList implements DialerCallDelegate {
   public void onCallAdded(
       final Context context, final android.telecom.Call telecomCall, LatencyReport latencyReport) {
     Trace.beginSection("CallList.onCallAdded");
+    if (mUiListeners != null) {
+      mUiListeners.onCallAdded();
+    }
     final DialerCall call =
         new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
     if (getFirstCall() != null) {
@@ -375,6 +380,10 @@ public class CallList implements DialerCallDelegate {
 
     // Let the listener know about the active calls immediately.
     listener.onCallListChange(this);
+  }
+
+  public void setUiListener(UiListener uiListener) {
+    mUiListeners = uiListener;
   }
 
   public void removeListener(@Nullable Listener listener) {
@@ -727,6 +736,9 @@ public class CallList implements DialerCallDelegate {
     for (DialerCall call : mCallById.values()) {
       call.getLatencyReport().onInCallUiShown(forFullScreenIntent);
     }
+    if (mUiListeners != null) {
+      mUiListeners.onInCallUiShown();
+    }
   }
 
   /** Listener interface for any class that wants to be notified of changes to the call list. */
@@ -773,6 +785,16 @@ public class CallList implements DialerCallDelegate {
 
     /** Called when the user initiates a call to an international number while on WiFi. */
     void onInternationalCallOnWifi(@NonNull DialerCall call);
+  }
+
+  /** UiListener interface for measuring incall latency.(used by testing only) */
+  public interface UiListener {
+
+    /** Called when a new call gets added into call list from IncallServiceImpl */
+    void onCallAdded();
+
+    /** Called in the end of onResume method of IncallActivityCommon. */
+    void onInCallUiShown();
   }
 
   private class DialerCallListenerImpl implements DialerCallListener {

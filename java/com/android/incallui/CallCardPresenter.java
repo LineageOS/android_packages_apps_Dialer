@@ -52,6 +52,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.postcall.PostCall;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -466,7 +467,8 @@ public class CallCardPresenter
                   getCallStateIcon(),
                   getGatewayNumber(),
                   shouldShowCallSubject(mPrimary) ? mPrimary.getCallSubject() : null,
-                  mPrimary.getCallbackNumber(),
+                  PhoneNumberHelper.formatNumber(
+                      mPrimary.getCallbackNumber(), mPrimary.getSimCountryIso()),
                   mPrimary.hasProperty(Details.PROPERTY_WIFI),
                   mPrimary.isConferenceCall()
                       && !mPrimary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE),
