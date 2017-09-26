@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-
 package com.android.dialer.voicemail.listui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
-/** Fragment for Dialer Voicemail Tab. */
-public final class VoicemailFragment extends Fragment {
+/** {@link RecyclerView.ViewHolder} for the new voicemail call log. */
+final class NewVoicemailCallLogViewHolder extends RecyclerView.ViewHolder {
 
-  @Nullable
-  @Override
-  public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.voicemail_fragment, container, false);
+  private final TextView primaryTextView;
+
+  NewVoicemailCallLogViewHolder(View view) {
+    super(view);
+    primaryTextView = (TextView) view.findViewById(R.id.primary_text);
+  }
+
+  public void setPrimaryText(String name) {
+    this.primaryTextView.setText(name);
   }
 }
