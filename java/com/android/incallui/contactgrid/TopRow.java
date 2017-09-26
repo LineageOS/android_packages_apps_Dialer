@@ -79,7 +79,7 @@ public class TopRow {
         label = getLabelForIncoming(context, state);
         // Show phone number if it's not displayed in name (center row) or location field (bottom
         // row).
-        if (shouldShowNumber(primaryInfo)) {
+        if (shouldShowNumber(primaryInfo, true /* isIncoming */)) {
           label = TextUtils.concat(label, " ", spanDisplayNumber(primaryInfo.number));
         }
       }
@@ -94,7 +94,8 @@ public class TopRow {
       label = getLabelForDialing(context, state);
     } else if (state.state == State.ACTIVE && state.isRemotelyHeld) {
       label = context.getString(R.string.incall_remotely_held);
-    } else if (state.state == State.ACTIVE && shouldShowNumber(primaryInfo)) {
+    } else if (state.state == State.ACTIVE
+        && shouldShowNumber(primaryInfo, false /* isIncoming */)) {
       label = spanDisplayNumber(primaryInfo.number);
     } else if (state.state == State.CALL_PENDING && !TextUtils.isEmpty(state.customLabel)) {
       label = state.customLabel;
@@ -112,11 +113,13 @@ public class TopRow {
         BidiFormatter.getInstance().unicodeWrap(displayNumber, TextDirectionHeuristics.LTR));
   }
 
-  private static boolean shouldShowNumber(PrimaryInfo primaryInfo) {
+  private static boolean shouldShowNumber(PrimaryInfo primaryInfo, boolean isIncoming) {
     if (primaryInfo.nameIsNumber) {
       return false;
     }
-    if (primaryInfo.location == null) {
+    // Don't show number since it's already shown in bottom row of incoming screen if there is no
+    // location info.
+    if (primaryInfo.location == null && isIncoming) {
       return false;
     }
     if (TextUtils.isEmpty(primaryInfo.number)) {
