@@ -80,8 +80,7 @@
   <!-- Displayed in the answer call screen for incoming spam calls. -->
   <string name="contact_grid_incoming_suspected_spam">Suspected spam caller</string>
 
-  <!-- In-call screen: string shown to the user when their outgoing number is different than the
-     number reported by TelephonyManager#getLine1Number(). This is used for carriers like
-     Project Fi so that users can give their number to emergency responders. -->
-  <string name="contact_grid_callback_number">Callback number: <xliff:g id="dark_number">%1$s</xliff:g></string>
+  <!-- In-call screen: phone number of the device shown to the users so that users can give their
+      number to emergency responders. -->
+  <string name="contact_grid_callback_number">This phone\'s number: <xliff:g id="light_number">%1$s</xliff:g></string>
 </resources>
