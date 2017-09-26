@@ -135,10 +135,12 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       target.add(accessibilitySettingsHeader);
     }
 
-    Header aboutPhoneHeader = new Header();
-    aboutPhoneHeader.titleRes = R.string.about_phone_label;
-    aboutPhoneHeader.fragment = AboutPhoneFragment.class.getName();
-    target.add(aboutPhoneHeader);
+    if (showAbout()) {
+      Header aboutPhoneHeader = new Header();
+      aboutPhoneHeader.titleRes = R.string.about_phone_label;
+      aboutPhoneHeader.fragment = AboutPhoneFragment.class.getName();
+      target.add(aboutPhoneHeader);
+    }
   }
 
   private void addVoicemailSettings(List<Header> target, boolean isPrimaryUser) {
@@ -206,6 +208,11 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       }
     }
     return result;
+  }
+
+  /** Whether "about" should be shown in settings. Override to hide about. */
+  public boolean showAbout() {
+    return true;
   }
 
   /**
