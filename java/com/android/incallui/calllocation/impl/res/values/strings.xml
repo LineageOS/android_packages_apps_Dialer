@@ -21,7 +21,7 @@
   <!-- Description for location map shown during emergency calls. [CHAR LIMIT=NONE] -->
   <string name="location_map_description">Emergency Location Map</string>
 
-  <!-- Label for the address and map shown during emergency calls. [CHAR LIMIT=20] -->
+  <!-- Label for the address and map shown during emergency calls. [CHAR LIMIT=40] -->
   <string name="location_title">Tell emergency services where you are</string>
 
   <string name="lat_long_format"><xliff:g id="latitude">%f</xliff:g>, <xliff:g id="longitude">%f</xliff:g></string>
