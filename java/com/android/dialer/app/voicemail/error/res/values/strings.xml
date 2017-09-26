@@ -197,8 +197,8 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   <string name="verizon_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
   <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
 
-  <string name="dialer_terms_and_conditions_decline_dialog_message">Voicemail transcription will be disabled if the terms and conditions are declined.</string>
-  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Disable voicemail transcription</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
 
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Voicemail will only be accessible by calling *86. Set a new voicemail PIN to proceed.</string>
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Set PIN</string>
