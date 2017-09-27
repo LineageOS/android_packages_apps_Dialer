@@ -52,7 +52,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
   }
 
   @Override
