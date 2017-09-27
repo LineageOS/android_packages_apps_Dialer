@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.provider.Settings.Secure;
 import android.provider.Settings.SettingNotFoundException;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.strictmode.DialerStrictMode;
 
 /**
  * Helper class to check if Google Location Services is enabled. This class is based on
@@ -48,7 +49,7 @@ public class GoogleLocationSettingHelper {
   private static final String USE_LOCATION_FOR_SERVICES = "use_location_for_services";
 
   /** Determine if Google apps need to conform to the USE_LOCATION_FOR_SERVICES setting. */
-  public static boolean isEnforceable(Context context) {
+  private static boolean isEnforceable(Context context) {
     final ResolveInfo ri =
         context
             .getPackageManager()
@@ -102,7 +103,7 @@ public class GoogleLocationSettingHelper {
   }
 
   /** Whether or not the system location setting is enable */
-  public static boolean isSystemLocationSettingEnabled(Context context) {
+  static boolean isSystemLocationSettingEnabled(Context context) {
     try {
       return Secure.getInt(context.getContentResolver(), Secure.LOCATION_MODE)
           != Secure.LOCATION_MODE_OFF;
@@ -116,8 +117,11 @@ public class GoogleLocationSettingHelper {
   }
 
   /** Convenience method that returns true is GLS is ON or if it's not enforceable. */
-  public static boolean isGoogleLocationServicesEnabled(Context context) {
-    return !isEnforceable(context)
-        || getUseLocationForServices(context) == USE_LOCATION_FOR_SERVICES_ON;
+  static boolean isGoogleLocationServicesEnabled(Context context) {
+    if (!isEnforceable(context)) {
+      return true;
+    }
+    int locationServiceStatus = DialerStrictMode.bypass(() -> getUseLocationForServices(context));
+    return locationServiceStatus == USE_LOCATION_FOR_SERVICES_ON;
   }
 }
