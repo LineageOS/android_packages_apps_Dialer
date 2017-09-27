@@ -34,6 +34,7 @@ import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.DrawableConverter;
+import com.android.incallui.call.DialerCall;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -82,6 +83,9 @@ public class ContactGridManager {
   private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
   private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
   private final LetterTileDrawable letterTile;
+  // Define as static due to recreate this object after resume
+  private static long previousConnectTimeMillis = 0;
+  private static long timeBase = 0;
 
   public ContactGridManager(
       View view, @Nullable ImageView avatarImageView, int avatarSize, boolean showAnonymousAvatar) {
@@ -350,23 +354,32 @@ public class ContactGridManager {
     if (info.isTimerVisible) {
       bottomTextSwitcher.setVisibility(View.VISIBLE);
       bottomTextSwitcher.setDisplayedChild(1);
-      bottomTimerView.setBase(
-          primaryCallState.connectTimeMillis
-              - System.currentTimeMillis()
-              + SystemClock.elapsedRealtime());
-      if (!isTimerStarted) {
-        LogUtil.i(
-            "ContactGridManager.updateBottomRow",
-            "starting timer with base: %d",
-            bottomTimerView.getBase());
-        bottomTimerView.start();
-        isTimerStarted = true;
+      if (primaryCallState.connectTimeMillis > 0
+          && previousConnectTimeMillis != primaryCallState.connectTimeMillis) {
+          previousConnectTimeMillis = primaryCallState.connectTimeMillis;
+        timeBase = primaryCallState.connectTimeMillis - System.currentTimeMillis()
+            + SystemClock.elapsedRealtime();
+      }
+      if (timeBase > 0) {
+        bottomTimerView.setBase(timeBase);
+        if (!isTimerStarted) {
+          LogUtil.i(
+              "ContactGridManager.updateBottomRow",
+              "starting timer with base: %d",
+              bottomTimerView.getBase());
+          bottomTimerView.start();
+          isTimerStarted = true;
+        }
       }
     } else {
       bottomTextSwitcher.setVisibility(View.GONE);
       bottomTextSwitcher.setDisplayedChild(0);
       bottomTimerView.stop();
       isTimerStarted = false;
+      if (primaryCallState.state == DialerCall.State.DISCONNECTED) {
+        previousConnectTimeMillis = 0;
+        timeBase = 0;
+      }
     }
   }
 }
