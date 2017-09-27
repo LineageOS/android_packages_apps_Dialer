@@ -136,8 +136,8 @@
   <string translatable="false" name="verizon_domestic_customer_support_number">+18009220204</string>
   <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
 
-  <string name="verizon_terms_and_conditions_title">Turn on Visual Voice Mail</string>
-  <string name="verizon_terms_and_conditions_message">%1$s\n\nBy turning on Visual Voice Mail you agree to the Verizon Wireless terms and conditions:\n\n%2$s</string>
+  <string name="verizon_terms_and_conditions_title">Turn on visual voicemail</string>
+  <string name="verizon_terms_and_conditions_message">%1$s\n\nBy turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n%2$s</string>
 
   <string name="dialer_terms_and_conditions_title">Turn on visual voicemail</string>
   <string name="dialer_terms_and_conditions_message">%s</string>
