@@ -1,38 +1,42 @@
 40:10695 Android Annotations Support Library
-10754:11358 Android Common
-22147:10695 Android Compat Support Library
-32880:10695 Android Compatibility Library v13
-43612:10695 Android Compatibility Library v4
-54344:10695 Android Compatibility Library v7
-65075:10695 Android Core UI Support Library
-75809:10691 Android Core Utils Support Library
-86535:10695 Android Design Support Library
-97276:10695 Android Dynamic Animation Support Library
-108009:10695 Android Fragments Support Library
-118741:10695 Android Graphics Support Library
-129477:10691 Android Media Compat Support Library
-140207:10691 Android Transition Support Library
-150920:11359 Apache Commons IO
-162290:11358 Dagger
-173664:11357 Error Prone
-185037:11358 Google Auto
-196410:11358 Guava JDK5
-207783:11362 Guava JDK7
-219156:11358 J2ObjC
-230526:11358 JSR 250
-241896:11365 JSR 330
-253297:11358 Material Components for Android
-264666:11358 OkHttp
-276033:11358 Okio
-287402:11358 Volley
-298780:12847 carrierservices
-311636:10402 gRPC
-322058:11358 instrumentation
-333434:12847 jibercsclient
-346300:10173 libphonenumber
-356484:18982 mime4j
-375485:10699 shortcutbadger
-386200:16013 Android SDK
-402232:1096 Animal Sniffer
-403338:4771 Glide
-408121:1602 JSR 305
+10784:11344 Android Architecture Components Core Library
+22182:11344 Android Architecture Components Lifecycle Library
+33588:11344 Android Architecture Components Lifecycle Runtime Library
+44951:11358 Android Common
+56344:10695 Android Compat Support Library
+67077:10695 Android Compatibility Library v13
+77809:10695 Android Compatibility Library v4
+88541:10695 Android Compatibility Library v7
+99272:10695 Android Core UI Support Library
+110006:10691 Android Core Utils Support Library
+120732:10695 Android Design Support Library
+131473:10695 Android Dynamic Animation Support Library
+142206:10695 Android Fragments Support Library
+152938:10695 Android Graphics Support Library
+163674:10691 Android Media Compat Support Library
+174404:10691 Android Transition Support Library
+185117:11359 Apache Commons IO
+196487:11358 Dagger
+207861:11357 Error Prone
+219234:11358 Google Auto
+230607:11358 Guava JDK5
+241980:11362 Guava JDK7
+253353:11358 J2ObjC
+264723:11358 JSR 250
+276093:11365 JSR 330
+287494:11358 Material Components for Android
+298863:11358 OkHttp
+310230:11358 Okio
+321603:11358 OpenCensus
+332972:11358 Volley
+344341:10695 bubble
+355050:10402 gRPC Java
+365471:10173 libphonenumber
+375663:10699 shortcutbadger
+386378:16013 Android SDK
+402410:1096 Animal Sniffer
+403516:4771 Glide
+408299:1602 JSR 305
+409919:12847 jibercsclient
+422777:18982 mime4j
+441776:12847 rcsclientlib
