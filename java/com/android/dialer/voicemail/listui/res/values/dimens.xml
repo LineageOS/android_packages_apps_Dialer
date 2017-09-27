@@ -14,15 +14,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<resources>
 
-  <TextView
-      android:id="@+id/voicemail_fragment_text_view"
-      android:text="@string/welcome_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"/>
-</FrameLayout>
+  <!-- TODO(uabdullah): These values are to be shared with the call log entries -->
+  <dimen name="call_log_entry_top_margin">6dp</dimen>
+  <dimen name="call_log_entry_padding_bottom_end">16dp</dimen>
+  <dimen name="call_log_entry_padding_top_start">12dp</dimen>
+  <dimen name="call_log_entry_photo_size">48dp</dimen>
+  <dimen name="call_log_entry_photo_padding">4dp</dimen>
+  <dimen name="call_log_entry_photo_text_margin">8dp</dimen>
+  <dimen name="call_log_entry_menu_button_size">48dp</dimen>
+
+</resources>
