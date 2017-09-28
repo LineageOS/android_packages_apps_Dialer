@@ -142,7 +142,7 @@ public class CallCardPresenter
       };
 
   public CallCardPresenter(Context context) {
-    LogUtil.i("CallCardController.constructor", null);
+    LogUtil.i("CallCardPresenter.constructor", null);
     mContext = Assert.isNotNull(context).getApplicationContext();
     callLocation = CallLocationComponent.get(mContext).getCallLocation();
   }
@@ -179,7 +179,7 @@ public class CallCardPresenter
 
   @Override
   public void onInCallScreenReady() {
-    LogUtil.i("CallCardController.onInCallScreenReady", null);
+    LogUtil.i("CallCardPresenter.onInCallScreenReady", null);
     Assert.checkState(!isInCallScreenReady);
     if (mContactsPreferences != null) {
       mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
@@ -222,7 +222,7 @@ public class CallCardPresenter
 
   @Override
   public void onInCallScreenUnready() {
-    LogUtil.i("CallCardController.onInCallScreenUnready", null);
+    LogUtil.i("CallCardPresenter.onInCallScreenUnready", null);
     Assert.checkState(isInCallScreenReady);
 
     // stop getting call state changes

@@ -60,14 +60,14 @@ import java.util.Objects;
  * layer:
  *
  * <ul>
- * <li>{@code VideoCallPresenter} creates and informs telephony of the display surface.
- * <li>{@code VideoCallPresenter} creates the preview surface.
- * <li>{@code VideoCallPresenter} informs telephony of the currently selected camera.
- * <li>Telephony layer sends {@link CameraCapabilities}, including the dimensions of the video for
- *     the current camera.
- * <li>{@code VideoCallPresenter} adjusts size of the preview surface to match the aspect ratio of
- *     the camera.
- * <li>{@code VideoCallPresenter} informs telephony of the new preview surface.
+ *   <li>{@code VideoCallPresenter} creates and informs telephony of the display surface.
+ *   <li>{@code VideoCallPresenter} creates the preview surface.
+ *   <li>{@code VideoCallPresenter} informs telephony of the currently selected camera.
+ *   <li>Telephony layer sends {@link CameraCapabilities}, including the dimensions of the video for
+ *       the current camera.
+ *   <li>{@code VideoCallPresenter} adjusts size of the preview surface to match the aspect ratio of
+ *       the camera.
+ *   <li>{@code VideoCallPresenter} informs telephony of the new preview surface.
  * </ul>
  *
  * <p>When downgrading to an audio-only video state, the {@code VideoCallPresenter} nulls both
@@ -169,7 +169,7 @@ public class VideoCallPresenter
 
     boolean isPaused = VideoProfile.isPaused(videoState);
     boolean isCallActive = callState == DialerCall.State.ACTIVE;
-    //Show incoming Video for dialing calls to support early media
+    // Show incoming Video for dialing calls to support early media
     boolean isCallOutgoingPending =
         DialerCall.State.isDialing(callState) || callState == DialerCall.State.CONNECTING;
 
@@ -455,6 +455,13 @@ public class VideoCallPresenter
   @Override
   public void onIncomingCall(
       InCallPresenter.InCallState oldState, InCallPresenter.InCallState newState, DialerCall call) {
+    // If video call screen ui is already destroyed, this shouldn't be called. But the UI may be
+    // updated synchronized by {@link CallCardPresenter#onIncomingCall} before this is called, this
+    // could still be called. Thus just do nothing in this case.
+    if (!isVideoCallScreenUiReady) {
+      LogUtil.i("VideoCallPresenter.onIncomingCall", "UI is not ready");
+      return;
+    }
     // same logic should happen as with onStateChange()
     onStateChange(oldState, newState, CallList.getInstance());
   }
