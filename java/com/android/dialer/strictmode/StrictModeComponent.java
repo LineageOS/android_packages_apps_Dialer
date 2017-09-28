@@ -16,13 +16,24 @@
 
 package com.android.dialer.strictmode;
 
-import android.app.Application;
-import android.support.annotation.MainThread;
+import android.content.Context;
+import com.android.dialer.inject.HasRootComponent;
+import dagger.Subcomponent;
 
-/** Interface for strict mode to handle strict mode violations. */
-public interface DialerStrictMode {
+/** Dagger component for DialerStrictMode. */
+@Subcomponent
+public abstract class StrictModeComponent {
 
-  /** Initializes strict mode on application start. */
-  @MainThread
-  void onApplicationCreate(Application application);
+  public abstract DialerStrictMode getDialerStrictMode();
+
+  public static StrictModeComponent get(Context context) {
+    return ((StrictModeComponent.HasComponent)
+            ((HasRootComponent) context.getApplicationContext()).component())
+        .strictModeComponent();
+  }
+
+  /** Used to refer to the root application component. */
+  public interface HasComponent {
+    StrictModeComponent strictModeComponent();
+  }
 }

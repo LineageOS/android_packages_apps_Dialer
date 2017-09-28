@@ -27,7 +27,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.model.account.AccountWithDataSet;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeUtils;
 
 /** Manages user preferences for contacts. */
 public class ContactsPreferences implements OnSharedPreferenceChangeListener {
@@ -107,7 +107,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     mSortOrder = sortOrder;
     final Editor editor = mPreferences.edit();
     editor.putInt(SORT_ORDER_KEY, sortOrder);
-    DialerStrictMode.bypass(editor::commit);
+    StrictModeUtils.bypass(editor::commit);
   }
 
   private boolean isDisplayOrderUserChangeable() {
@@ -136,7 +136,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
     mDisplayOrder = displayOrder;
     final Editor editor = mPreferences.edit();
     editor.putInt(DISPLAY_ORDER_KEY, displayOrder);
-    DialerStrictMode.bypass(editor::commit);
+    StrictModeUtils.bypass(editor::commit);
   }
 
   private boolean isDefaultAccountUserChangeable() {
@@ -166,7 +166,7 @@ public class ContactsPreferences implements OnSharedPreferenceChangeListener {
       editor.putString(mDefaultAccountKey, accountWithDataSet.stringify());
     }
     editor.putBoolean(mDefaultAccountSavedKey, true);
-    DialerStrictMode.bypass(editor::commit);
+    StrictModeUtils.bypass(editor::commit);
   }
 
   public void registerChangeListener(ChangeListener listener) {

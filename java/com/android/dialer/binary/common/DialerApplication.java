@@ -27,7 +27,7 @@ import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeComponent;
 
 /** A common application subclass for all Dialer build variants. */
 public abstract class DialerApplication extends Application implements HasRootComponent {
@@ -37,7 +37,7 @@ public abstract class DialerApplication extends Application implements HasRootCo
   @Override
   public void onCreate() {
     Trace.beginSection("DialerApplication.onCreate");
-    DialerStrictMode.onApplicationCreate(this);
+    StrictModeComponent.get(this).getDialerStrictMode().onApplicationCreate(this);
 
     super.onCreate();
     new BlockedNumbersAutoMigrator(
