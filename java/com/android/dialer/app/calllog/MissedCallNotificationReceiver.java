@@ -53,7 +53,7 @@ public class MissedCallNotificationReceiver extends BroadcastReceiver {
 
     PendingResult pendingResult = goAsync();
 
-    DialerExecutors.createNonUiTaskBuilder(MissedCallNotifier.getIstance(context))
+    DialerExecutors.createNonUiTaskBuilder(MissedCallNotifier.getInstance(context))
         .onSuccess(
             output -> {
               LogUtil.i(
