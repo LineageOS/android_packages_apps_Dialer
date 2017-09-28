@@ -153,9 +153,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   // Times when a second call is received but AnswerAndRelease button is not shown
   // since it's not supported.
   private int secondCallWithoutAnswerAndReleasedButtonTimes = 0;
-  private VideoTech videoTech;
+  private VideoTech videoTech = new EmptyVideoTech();
 
-  private boolean isImsReachable;
+  private com.android.dialer.logging.VideoTech.Type selectedAvailableVideoTechType =
+      com.android.dialer.logging.VideoTech.Type.NONE;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -451,10 +452,15 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private void update() {
     Trace.beginSection("DialerCall.update");
     int oldState = getState();
-    // Clear any cache here that could potentially change on update.
-    videoTech = null;
     // We want to potentially register a video call callback here.
     updateFromTelecomCall();
+    // Only store the first video tech type found to be available during the life of the call.
+    if (selectedAvailableVideoTechType == com.android.dialer.logging.VideoTech.Type.NONE) {
+      // Update the video tech.
+      videoTech = mVideoTechManager.findBestAvailableVideoTech();
+      videoTech.becomePrimary();
+      selectedAvailableVideoTechType = videoTech.getVideoTechType();
+    }
     if (oldState != getState() && getState() == DialerCall.State.DISCONNECTED) {
       for (DialerCallListener listener : mListeners) {
         listener.onDialerCallDisconnect();
@@ -1156,9 +1162,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public VideoTech getVideoTech() {
-    if (videoTech == null) {
-      videoTech = mVideoTechManager.getVideoTech();
-    }
     return videoTech;
   }
 
@@ -1333,12 +1336,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     mVideoTechManager.dispatchRemovedFromCallList();
   }
 
-  public boolean isImsReachable() {
-    return isImsReachable;
-  }
-
-  private void setImsReachable(boolean imsReachable) {
-    isImsReachable = imsReachable;
+  public com.android.dialer.logging.VideoTech.Type getSelectedAvailableVideoTechType() {
+    return selectedAvailableVideoTechType;
   }
 
   /**
@@ -1535,7 +1534,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     private final Context context;
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
     private final List<VideoTech> videoTechs;
-    private VideoTech savedTech;
 
     VideoTechManager(DialerCall call) {
       this.context = call.mContext;
@@ -1547,10 +1545,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       // Insert order here determines the priority of that video tech option
       videoTechs = new ArrayList<>();
 
-      ImsVideoTech imsVideoTech =
-          new ImsVideoTech(Logger.get(call.mContext), call, call.mTelecomCall);
-      call.setImsReachable(imsVideoTech.isAvailable(context));
-      videoTechs.add(imsVideoTech);
+      videoTechs.add(new ImsVideoTech(Logger.get(call.mContext), call, call.mTelecomCall));
 
       VideoTech rcsVideoTech =
           EnrichedCallComponent.get(call.mContext)
@@ -1571,17 +1566,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
               phoneNumber));
     }
 
-    VideoTech getVideoTech() {
-      if (savedTech != null) {
-        return savedTech;
-      }
-
+    VideoTech findBestAvailableVideoTech() {
       for (VideoTech tech : videoTechs) {
         if (tech.isAvailable(context)) {
-          // Remember the first VideoTech that becomes available and always use it
-          savedTech = tech;
-          savedTech.becomePrimary();
-          return savedTech;
+          return tech;
         }
       }
 
