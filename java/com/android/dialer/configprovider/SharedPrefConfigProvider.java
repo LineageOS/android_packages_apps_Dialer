@@ -24,7 +24,7 @@ import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.dialer.util.DialerUtils;
 import javax.inject.Inject;
 
@@ -96,21 +96,21 @@ class SharedPrefConfigProvider implements ConfigProvider {
   @Override
   public String getString(String key, String defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
-    return DialerStrictMode.bypass(
+    return StrictModeUtils.bypass(
         () -> getSharedPrefs(appContext).getString(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public long getLong(String key, long defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
-    return DialerStrictMode.bypass(
+    return StrictModeUtils.bypass(
         () -> getSharedPrefs(appContext).getLong(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public boolean getBoolean(String key, boolean defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
-    return DialerStrictMode.bypass(
+    return StrictModeUtils.bypass(
         () -> getSharedPrefs(appContext).getBoolean(PREF_PREFIX + key, defaultValue));
   }
 

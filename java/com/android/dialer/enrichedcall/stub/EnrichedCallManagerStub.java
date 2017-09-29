@@ -16,6 +16,7 @@
 
 package com.android.dialer.enrichedcall.stub;
 
+import android.content.BroadcastReceiver.PendingResult;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -150,7 +151,12 @@ public final class EnrichedCallManagerStub implements EnrichedCallManager {
   public void onIncomingCallComposerData(long sessionId, @NonNull MultimediaData multimediaData) {}
 
   @Override
-  public void onIncomingPostCallData(long sessionId, @NonNull MultimediaData multimediaData) {}
+  public void onIncomingPostCallData(
+      @NonNull PendingResult pendingResult,
+      long sessionId,
+      @NonNull MultimediaData multimediaData) {
+    pendingResult.finish();
+  }
 
   @Override
   public void registerVideoShareListener(@NonNull VideoShareListener listener) {}

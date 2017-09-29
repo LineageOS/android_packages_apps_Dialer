@@ -20,6 +20,7 @@ import android.content.Context;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.transcribe.TranscriptionService.JobCallback;
 import com.android.voicemail.impl.transcribe.grpc.GetTranscriptResponseAsync;
@@ -94,6 +95,7 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
         VvmLog.i(TAG, "pollForTranscription, cancelled.");
         return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
       }
+      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_POLL_REQUEST);
       GetTranscriptResponseAsync response =
           (GetTranscriptResponseAsync)
               sendRequest((client) -> client.sendGetTranscriptRequest(request));

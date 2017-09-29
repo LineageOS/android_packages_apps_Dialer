@@ -16,6 +16,7 @@
 
 package com.android.dialer.enrichedcall;
 
+import android.content.BroadcastReceiver.PendingResult;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -269,10 +270,17 @@ public interface EnrichedCallManager {
   /**
    * Called when post call data arrives for the given session.
    *
+   * @param pendingResult PendingResult form a broadcast receiver. The broadcast might be received
+   *     when dialer is not in the foreground, and can not start {@link
+   *     com.android.dialer.app.calllog.CallLogNotificationsService} to handle the event. The
+   *     pendingResult allows dialer to hold on to resources when the event is handled in a
+   *     background thread. TODO(b/67015768): migrate CallLogNotificationsService to a
+   *     JobIntentService so it can be used in the background.
    * @throws IllegalStateException if there's no session for the given id
    */
   @MainThread
-  void onIncomingPostCallData(long sessionId, @NonNull MultimediaData multimediaData);
+  void onIncomingPostCallData(
+      @NonNull PendingResult pendingResult, long sessionId, @NonNull MultimediaData multimediaData);
 
   /**
    * Registers the given {@link VideoShareListener}.

@@ -551,5 +551,8 @@ message DialerImpression {
     LIGHTBRINGER_NON_CONTACT_UPGRADE_REQUESTED = 1281;
     LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG =
         1282;  // Including call history
+
+    // More voicemail transcription impressions
+    VVM_TRANSCRIPTION_POLL_REQUEST = 1283;
   }
 }
