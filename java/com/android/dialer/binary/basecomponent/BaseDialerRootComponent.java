@@ -26,6 +26,7 @@ import com.android.dialer.main.MainComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
 import com.android.voicemail.VoicemailComponent;
@@ -46,5 +47,6 @@ public interface BaseDialerRootComponent
         PhoneNumberGeoUtilComponent.HasComponent,
         SimulatorComponent.HasComponent,
         StorageComponent.HasComponent,
+        StrictModeComponent.HasComponent,
         VoicemailComponent.HasComponent,
         LightbringerComponent.HasComponent {}

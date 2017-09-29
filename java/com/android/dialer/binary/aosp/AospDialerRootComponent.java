@@ -26,6 +26,7 @@ import com.android.dialer.lightbringer.stub.StubLightbringerModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
+import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
 import com.android.incallui.maps.stub.StubMapsModule;
 import com.android.voicemail.impl.VoicemailModule;
@@ -43,6 +44,7 @@ import javax.inject.Singleton;
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StorageModule.class,
+    SystemStrictModeModule.class,
     StubCallLocationModule.class,
     StubEnrichedCallModule.class,
     StubMapsModule.class,
