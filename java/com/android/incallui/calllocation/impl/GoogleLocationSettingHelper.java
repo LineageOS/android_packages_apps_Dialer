@@ -26,7 +26,7 @@ import android.net.Uri;
 import android.provider.Settings.Secure;
 import android.provider.Settings.SettingNotFoundException;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeUtils;
 
 /**
  * Helper class to check if Google Location Services is enabled. This class is based on
@@ -121,7 +121,7 @@ public class GoogleLocationSettingHelper {
     if (!isEnforceable(context)) {
       return true;
     }
-    int locationServiceStatus = DialerStrictMode.bypass(() -> getUseLocationForServices(context));
+    int locationServiceStatus = StrictModeUtils.bypass(() -> getUseLocationForServices(context));
     return locationServiceStatus == USE_LOCATION_FOR_SERVICES_ON;
   }
 }

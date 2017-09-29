@@ -16,104 +16,76 @@
 
 package com.android.dialer.strictmode;
 
-import android.os.Build;
+import android.os.Looper;
 import android.os.StrictMode;
-import android.support.annotation.Nullable;
-import com.android.dialer.common.Assert;
-import com.google.auto.value.AutoValue;
-import java.util.Map;
-import java.util.Map.Entry;
+import android.os.StrictMode.ThreadPolicy;
+import android.support.annotation.AnyThread;
+import com.android.dialer.buildtype.BuildType;
+import com.android.dialer.function.Supplier;
 
 /** Utilities for enforcing strict-mode in an app. */
-final class StrictModeUtils {
+public final class StrictModeUtils {
+
+  private static final ThreadPolicy THREAD_NO_PENALTY =
+      new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
   /**
-   * Set the recommended policy for the app.
+   * Convenience method for disabling and enabling the thread policy death penalty using lambdas.
    *
-   * @param threadPenalties policy with preferred penalties. Detection bits will be ignored.
-   */
-  static void setRecommendedMainThreadPolicy(StrictMode.ThreadPolicy threadPenalties) {
-    StrictMode.ThreadPolicy threadPolicy =
-        new StrictMode.ThreadPolicy.Builder(threadPenalties).detectAll().build();
-    StrictMode.setThreadPolicy(threadPolicy);
-  }
-
-  /**
-   * Set the recommended policy for the app.
+   * <p>For example:
    *
-   * @param vmPenalties policy with preferred penalties. Detection bits should be unset.
-   */
-  static void setRecommendedVMPolicy(StrictMode.VmPolicy vmPenalties) {
-    setRecommendedVMPolicy(vmPenalties, StrictModeVmConfig.empty());
-  }
-
-  /**
-   * Set the recommended policy for the app.
+   * <p><code>
+   *   Value foo = StrictModeUtils.bypass(() -> doDiskAccessOnMainThreadReturningValue());
+   * </code>
    *
-   * @param vmPenalties policy with preferred penalties. Detection bits should be unset.
+   * <p>The thread policy is only mutated if this is called from the main thread.
    */
-  private static void setRecommendedVMPolicy(
-      StrictMode.VmPolicy vmPenalties, StrictModeVmConfig config) {
-    Assert.isNotNull(config);
-    StrictMode.VmPolicy.Builder vmPolicyBuilder =
-        new StrictMode.VmPolicy.Builder(vmPenalties)
-            .detectLeakedClosableObjects()
-            .detectLeakedSqlLiteObjects();
-    if (Build.VERSION.SDK_INT >= 16) {
-      vmPolicyBuilder.detectLeakedRegistrationObjects();
-    }
-    if (Build.VERSION.SDK_INT >= 18) {
-      vmPolicyBuilder.detectFileUriExposure();
-    }
-    if (Build.VERSION.SDK_INT >= 21) {
-      // Even though this API is available earlier, it did not properly run finalizers.
-      // This avoids lots of false positives.
-
-      // TODO(zachh): Use LeakCanary and remove this line.
-      vmPolicyBuilder.detectActivityLeaks();
-
-      if (config.maxInstanceLimits() != null) {
-        for (Entry<Class<?>, Integer> entry : config.maxInstanceLimits().entrySet()) {
-          vmPolicyBuilder.setClassInstanceLimit(entry.getKey(), entry.getValue());
-        }
+  @AnyThread
+  public static <T> T bypass(Supplier<T> supplier) {
+    if (isStrictModeAllowed() && onMainThread()) {
+      ThreadPolicy originalPolicy = StrictMode.getThreadPolicy();
+      StrictMode.setThreadPolicy(THREAD_NO_PENALTY);
+      try {
+        return supplier.get();
+      } finally {
+        StrictMode.setThreadPolicy(originalPolicy);
       }
     }
-    if (Build.VERSION.SDK_INT >= 23) {
-      // TODO(azlatin): Enable clear-text check once b/36730713 is fixed.
-      // vmPolicyBuilder.detectCleartextNetwork();
-    }
-    // Once OC Lands:
-    // .detectContentUriWithoutPermission()
-    // .detectUntaggedSockets()
-    StrictMode.setVmPolicy(vmPolicyBuilder.build());
+    return supplier.get();
   }
 
-  /** VmPolicy configuration. */
-  @AutoValue
-  abstract static class StrictModeVmConfig {
-    /** A map of a class to the maximum number of allowed instances of that class. */
-    @Nullable
-    abstract Map<Class<?>, Integer> maxInstanceLimits();
-
-    public static StrictModeVmConfig empty() {
-      return builder().build();
+  /**
+   * Convenience method for disabling and enabling the thread policy death penalty using lambdas.
+   *
+   * <p>For example:
+   *
+   * <p><code>
+   *   StrictModeUtils.bypass(() -> doDiskAccessOnMainThread());
+   * </code>
+   *
+   * <p>The thread policy is only mutated if this is called from the main thread.
+   */
+  @AnyThread
+  public static void bypass(Runnable runnable) {
+    if (isStrictModeAllowed() && onMainThread()) {
+      ThreadPolicy originalPolicy = StrictMode.getThreadPolicy();
+      StrictMode.setThreadPolicy(THREAD_NO_PENALTY);
+      try {
+        runnable.run();
+      } finally {
+        StrictMode.setThreadPolicy(originalPolicy);
+      }
+    } else {
+      runnable.run();
     }
+  }
 
-    public static Builder builder() {
-      return new AutoValue_StrictModeUtils_StrictModeVmConfig.Builder();
-    }
+  public static boolean isStrictModeAllowed() {
+    return BuildType.get() == BuildType.BUGFOOD;
+  }
 
-    /** VmPolicy configuration builder. */
-    @AutoValue.Builder
-    public abstract static class Builder {
-      public abstract Builder setMaxInstanceLimits(Map<Class<?>, Integer> limits);
-
-      public abstract StrictModeVmConfig build();
-
-      Builder() {}
-    }
-
-    StrictModeVmConfig() {}
+  private static boolean onMainThread() {
+    return Looper.getMainLooper().equals(Looper.myLooper());
   }
 
   private StrictModeUtils() {}

@@ -30,7 +30,7 @@ import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import com.android.dialer.constants.ScheduledJobIds;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
   public boolean onStartJob(JobParameters params) {
     int jobId = params.getTransientExtras().getInt(EXTRA_JOB_ID);
     int expectedJobId =
-        DialerStrictMode.bypass(
+        StrictModeUtils.bypass(
             () -> PreferenceManager.getDefaultSharedPreferences(this).getInt(EXPECTED_JOB_ID, 0));
     if (jobId != expectedJobId) {
       VvmLog.e(
