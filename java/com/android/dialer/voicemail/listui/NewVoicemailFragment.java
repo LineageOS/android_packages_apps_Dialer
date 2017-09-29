@@ -25,8 +25,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.voicemail.datasources.VoicemailData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /** Fragment for Dialer Voicemail Tab. */
 public final class NewVoicemailFragment extends Fragment {
@@ -40,13 +42,23 @@ public final class NewVoicemailFragment extends Fragment {
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
     // TODO(uabdullah): To be removed once we hook up the UI to the voicemail backend
-    List<String> input = new ArrayList<>();
+    List<VoicemailData> voicemailData = new ArrayList<>();
+    Random rand = new Random();
     for (int i = 0; i < 50; i++) {
-      input.add("Umer Abdullah " + i);
+      VoicemailData mocked =
+          VoicemailData.builder()
+              .setName("Fatima Abdullah " + i)
+              .setLocation("San Francisco, CA")
+              .setDate("March " + (rand.nextInt(30) + 1))
+              .setDuration("00:" + (rand.nextInt(50) + 10))
+              .setTranscription(
+                  "This is a transcription text message that literally means nothing.")
+              .build();
+      voicemailData.add(mocked);
     }
 
-    LogUtil.i("onCreateView", "size of input:" + input.size());
-    recyclerView.setAdapter(new NewVoicemailCallLogAdapter(input));
+    LogUtil.i("onCreateView", "size of input:" + voicemailData.size());
+    recyclerView.setAdapter(new NewVoicemailCallLogAdapter(voicemailData));
     return view;
   }
 }
