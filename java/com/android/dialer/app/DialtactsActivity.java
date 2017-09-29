@@ -517,6 +517,14 @@ public class DialtactsActivity extends TransactionSafeActivity
       PostCall.promptUserForMessageIfNecessary(this, mParentLayout);
     }
 
+    // On M the fragment manager does not restore the hidden state of a fragment from
+    // savedInstanceState so it must be hidden again.
+    if (!mIsDialpadShown && mDialpadFragment != null && !mDialpadFragment.isHidden()) {
+      LogUtil.i(
+          "DialtactsActivity.onResume", "mDialpadFragment attached but not hidden, forcing hide");
+      getFragmentManager().beginTransaction().hide(mDialpadFragment).commit();
+    }
+
     // If there was a voice query result returned in the {@link #onActivityResult} callback, it
     // will have been stashed in mVoiceSearchQuery since the search results fragment cannot be
     // shown until onResume has completed.  Active the search UI and set the search term now.

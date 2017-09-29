@@ -14,6 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <string name="welcome_text" translatable="false">hello world! Welcome to the Voicemail Tab!</string>
-</resources>
+
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/new_voicemail_call_log_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dialer_light"/>
