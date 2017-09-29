@@ -64,9 +64,6 @@ public class CallLogNotificationsService extends IntentService {
   private static final String ACTION_CANCEL_SINGLE_MISSED_CALL =
       "com.android.dialer.calllog.ACTION_CANCEL_SINGLE_MISSED_CALL";
 
-  private static final String ACTION_INCOMING_POST_CALL =
-      "com.android.dialer.calllog.INCOMING_POST_CALL";
-
   /** Action to call back a missed call. */
   public static final String ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION =
       "com.android.dialer.calllog.CALL_BACK_FROM_MISSED_CALL_NOTIFICATION";
@@ -75,35 +72,12 @@ public class CallLogNotificationsService extends IntentService {
   public static final String ACTION_LEGACY_VOICEMAIL_DISMISSED =
       "com.android.dialer.calllog.ACTION_LEGACY_VOICEMAIL_DISMISSED";
 
-  /**
-   * Extra to be included with {@link #ACTION_INCOMING_POST_CALL} to represent a post call note.
-   *
-   * <p>It must be a {@link String}
-   */
-  private static final String EXTRA_POST_CALL_NOTE = "POST_CALL_NOTE";
-
-  /**
-   * Extra to be included with {@link #ACTION_INCOMING_POST_CALL} to represent the phone number the
-   * post call note came from.
-   *
-   * <p>It must be a {@link String}
-   */
-  private static final String EXTRA_POST_CALL_NUMBER = "POST_CALL_NUMBER";
-
   private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "PHONE_ACCOUNT_HANDLE";
 
   public static final int UNKNOWN_MISSED_CALL_COUNT = -1;
 
   public CallLogNotificationsService() {
     super("CallLogNotificationsService");
-  }
-
-  public static void insertPostCallNote(Context context, String number, String postCallNote) {
-    Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-    serviceIntent.setAction(ACTION_INCOMING_POST_CALL);
-    serviceIntent.putExtra(EXTRA_POST_CALL_NUMBER, number);
-    serviceIntent.putExtra(EXTRA_POST_CALL_NOTE, postCallNote);
-    context.startService(serviceIntent);
   }
 
   public static void markAllNewVoicemailsAsOld(Context context) {
@@ -195,11 +169,6 @@ public class CallLogNotificationsService extends IntentService {
         LegacyVoicemailNotificationReceiver.setDismissed(
             this, intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE), true);
         break;
-      case ACTION_INCOMING_POST_CALL:
-        String note = intent.getStringExtra(EXTRA_POST_CALL_NOTE);
-        String phoneNumber = intent.getStringExtra(EXTRA_POST_CALL_NUMBER);
-        MissedCallNotifier.getIstance(this).insertPostCallNotification(phoneNumber, note);
-        break;
       case ACTION_CANCEL_ALL_MISSED_CALLS:
         cancelAllMissedCalls(this);
         break;
@@ -210,7 +179,7 @@ public class CallLogNotificationsService extends IntentService {
         TelecomUtil.cancelMissedCallsNotification(this);
         break;
       case ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION:
-        MissedCallNotifier.getIstance(this)
+        MissedCallNotifier.getInstance(this)
             .callBackFromMissedCall(
                 intent.getStringExtra(
                     MissedCallNotificationReceiver.EXTRA_NOTIFICATION_PHONE_NUMBER),

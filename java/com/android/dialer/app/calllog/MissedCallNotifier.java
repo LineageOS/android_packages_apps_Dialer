@@ -45,6 +45,7 @@ import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
@@ -83,7 +84,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     this.callLogNotificationsQueryHelper = callLogNotificationsQueryHelper;
   }
 
-  static MissedCallNotifier getIstance(Context context) {
+  public static MissedCallNotifier getInstance(Context context) {
     return new MissedCallNotifier(context, CallLogNotificationsQueryHelper.getInstance(context));
   }
 
@@ -259,7 +260,10 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     return NOTIFICATION_TAG_PREFIX + callUri;
   }
 
+  @WorkerThread
   public void insertPostCallNotification(@NonNull String number, @NonNull String note) {
+    Assert.isWorkerThread();
+    LogUtil.enterBlock("MissedCallNotifier.insertPostCallNotification");
     List<NewCall> newCalls = callLogNotificationsQueryHelper.getNewMissedCalls();
     if (newCalls != null && !newCalls.isEmpty()) {
       for (NewCall call : newCalls) {
@@ -270,10 +274,11 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
               getNotificationTagForCall(call),
               NOTIFICATION_ID,
               getNotificationForCall(call, note));
-          break;
+          return;
         }
       }
     }
+    LogUtil.i("MissedCallNotifier.insertPostCallNotification", "notification not found");
   }
 
   private Notification getNotificationForCall(
