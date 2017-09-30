@@ -14,15 +14,18 @@
  * limitations under the License
  */
 
-package com.android.dialer.strictmode;
+package com.android.dialer.strictmode.impl;
 
-import android.app.Application;
-import android.support.annotation.MainThread;
+import com.android.dialer.strictmode.DialerStrictMode;
+import dagger.Binds;
+import dagger.Module;
+import javax.inject.Singleton;
 
-/** Interface for strict mode to handle strict mode violations. */
-public interface DialerStrictMode {
+/** Module which binds {@link SystemDialerStrictMode}. */
+@Module
+public abstract class SystemStrictModeModule {
 
-  /** Initializes strict mode on application start. */
-  @MainThread
-  void onApplicationCreate(Application application);
+  @Binds
+  @Singleton
+  public abstract DialerStrictMode bindDialerStrictMode(SystemDialerStrictMode impl);
 }

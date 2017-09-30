@@ -38,7 +38,7 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
-import com.android.dialer.strictmode.DialerStrictMode;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +125,7 @@ public class FilteredNumberCompat {
    *     android.provider.BlockedNumberContract} blocking, {@code false} otherwise.
    */
   public static boolean hasMigratedToNewBlocking(Context context) {
-    return DialerStrictMode.bypass(
+    return StrictModeUtils.bypass(
         () ->
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false));
