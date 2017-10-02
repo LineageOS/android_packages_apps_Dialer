@@ -28,4 +28,5 @@
   <item name="contactgrid_avatar" type="id"/>
   <item name="contactgrid_top_row" type="id"/>
   <item name="contactgrid_bottom_row" type="id"/>
+  <item name="contactgrid_top_row_space" type="id"/>
 </resources>
