@@ -200,9 +200,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onStop() {
     Trace.beginSection("InCallActivity.onStop");
     LogUtil.i("InCallActivity.onStop", "");
+    isVisible = false;
     super.onStop();
     common.onStop();
-    isVisible = false;
     Trace.endSection();
   }
 
