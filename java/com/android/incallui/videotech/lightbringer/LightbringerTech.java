@@ -195,4 +195,9 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   public void onLightbringerStateChanged() {
     listener.onVideoTechStateChanged();
   }
+
+  @Override
+  public com.android.dialer.logging.VideoTech.Type getVideoTechType() {
+    return com.android.dialer.logging.VideoTech.Type.LIGHTBRINGER_VIDEO_TECH;
+  }
 }

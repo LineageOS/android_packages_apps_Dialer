@@ -85,6 +85,8 @@ public interface VideoTech {
    */
   void becomePrimary();
 
+  com.android.dialer.logging.VideoTech.Type getVideoTechType();
+
   /** Listener for video call events. */
   interface VideoTechListener {
 
