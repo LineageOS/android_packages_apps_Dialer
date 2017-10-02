@@ -52,6 +52,10 @@ final class SimulatorVideoProvider extends Connection.VideoProvider {
       simulatorPreviewCamera.stopCamera();
       simulatorPreviewCamera = null;
     }
+    if (previewCameraId == null && simulatorRemoteVideo != null) {
+      simulatorRemoteVideo.stopVideo();
+      simulatorRemoteVideo = null;
+    }
   }
 
   @Override
