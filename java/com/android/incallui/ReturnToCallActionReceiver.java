@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telecom.CallAudioState;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -51,6 +52,9 @@ public class ReturnToCallActionReceiver extends BroadcastReceiver {
       case ACTION_END_CALL:
         endCall(context);
         break;
+      default:
+        throw Assert.createIllegalStateFailException(
+            "Invalid intent action: " + intent.getAction());
     }
   }
 
@@ -87,7 +91,9 @@ public class ReturnToCallActionReceiver extends BroadcastReceiver {
   }
 
   public void showAudioRouteSelector(Context context) {
-    context.startActivity(new Intent(context, AudioRouteSelectorActivity.class));
+    Intent intent = new Intent(context, AudioRouteSelectorActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+    context.startActivity(intent);
   }
 
   private void toggleMute(Context context) {

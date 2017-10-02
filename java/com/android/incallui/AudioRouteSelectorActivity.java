@@ -57,7 +57,9 @@ public class AudioRouteSelectorActivity extends FragmentActivity
     if (audioRouteSelectorDialogFragment != null) {
       audioRouteSelectorDialogFragment.dismiss();
     }
-    // We don't expect the activity to resume
-    finish();
+    // We don't expect the activity to resume, except for orientation change.
+    if (!isChangingConfigurations()) {
+      finish();
+    }
   }
 }

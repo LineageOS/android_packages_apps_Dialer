@@ -327,6 +327,11 @@ public class ImsVideoTech implements VideoTech {
         DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_IMS);
   }
 
+  @Override
+  public com.android.dialer.logging.VideoTech.Type getVideoTechType() {
+    return com.android.dialer.logging.VideoTech.Type.IMS_VIDEO_TECH;
+  }
+
   private boolean canPause() {
     return call.getDetails().can(Details.CAPABILITY_CAN_PAUSE_VIDEO);
   }
