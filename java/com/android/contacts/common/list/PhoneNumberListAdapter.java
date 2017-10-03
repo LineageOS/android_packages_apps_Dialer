@@ -42,6 +42,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
@@ -500,14 +501,22 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     if (getDirectorySearchMode() == DirectoryListLoader.SEARCH_MODE_NONE) {
       return;
     }
-    final int numExtendedDirectories = mExtendedDirectories.size();
+    int numExtendedDirectories = mExtendedDirectories.size();
+
+    if (ConfigProviderBindings.get(getContext()).getBoolean("p13n_ranker_should_enable", false)) {
+      // Suggested results wasn't formulated as an extended directory, so manually
+      // increment the count here when the feature is enabled. Suggestions are
+      // only shown when the ranker is enabled.
+      numExtendedDirectories++;
+    }
+
     if (getPartitionCount() == cursor.getCount() + numExtendedDirectories) {
       // already added all directories;
       return;
     }
-    //
+
     mFirstExtendedDirectoryId = Long.MAX_VALUE;
-    if (numExtendedDirectories > 0) {
+    if (!mExtendedDirectories.isEmpty()) {
       // The Directory.LOCAL_INVISIBLE is not in the cursor but we can't reuse it's
       // "special" ID.
       long maxId = Directory.LOCAL_INVISIBLE;
@@ -527,7 +536,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
       }
       // Extended directories ID's cannot collide with base directories
       mFirstExtendedDirectoryId = maxId + 1;
-      for (int i = 0; i < numExtendedDirectories; i++) {
+      for (int i = 0; i < mExtendedDirectories.size(); i++) {
         final long id = mFirstExtendedDirectoryId + i;
         final DirectoryPartition directory = mExtendedDirectories.get(i);
         if (getPartitionByDirectoryId(id) == -1) {
