@@ -16,12 +16,17 @@
 
 package com.android.dialer.strictmode;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
+import android.preference.PreferenceManager;
 import android.support.annotation.AnyThread;
+import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.function.Supplier;
+import com.android.dialer.util.DialerUtils;
 
 /** Utilities for enforcing strict-mode in an app. */
 public final class StrictModeUtils {
@@ -86,6 +91,31 @@ public final class StrictModeUtils {
 
   private static boolean onMainThread() {
     return Looper.getMainLooper().equals(Looper.myLooper());
+  }
+
+  /**
+   * We frequently access shared preferences on the main thread, which causes strict mode
+   * violations. When strict mode is allowed, warm up the shared preferences so that later uses of
+   * shared preferences access the in-memory versions and we don't have to bypass strict mode at
+   * every point in the application where shared preferences are accessed.
+   */
+  public static void warmupSharedPrefs(Application application) {
+    // From credential-encrypted (CE) storage, i.e.:
+    //    /data/data/com.android.dialer/shared_prefs
+
+    if (UserManagerCompat.isUserUnlocked(application)) {
+      // <package_name>_preferences.xml
+      PreferenceManager.getDefaultSharedPreferences(application);
+
+      // <package_name>.xml
+      application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
+    }
+
+    // From device-encrypted (DE) storage, i.e.:
+    //   /data/user_de/0/com.android.dialer/shared_prefs/
+
+    // <package_name>_preferences.xml
+    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
   }
 
   private StrictModeUtils() {}
