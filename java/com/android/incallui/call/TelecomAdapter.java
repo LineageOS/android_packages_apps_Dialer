@@ -16,12 +16,14 @@
 
 package com.android.incallui.call;
 
+import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.InCallService;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.List;
 
@@ -166,5 +168,25 @@ public class TelecomAdapter implements InCallServiceListener {
       return mInCallService.canAddCall();
     }
     return false;
+  }
+
+  /**
+   * Start a foreground notification. Calling it multiple times with the same id only updates the
+   * existing notification. Whoever called this function are responsible for calling {@link
+   * #stopForegroundNotification()} to remove the notification.
+   */
+  public void startForegroundNotification(int id, Notification notification) {
+    Assert.isNotNull(
+        mInCallService, "No inCallService available for starting foreground notification");
+    mInCallService.startForeground(id, notification);
+  }
+
+  /**
+   * Stop a started foreground notification. This does not stop {@code mInCallService} from running.
+   */
+  public void stopForegroundNotification() {
+    Assert.isNotNull(
+        mInCallService, "No inCallService available for stopping foreground notification");
+    mInCallService.stopForeground(true /*removeNotification*/);
   }
 }
