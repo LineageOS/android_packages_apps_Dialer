@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
@@ -74,6 +75,7 @@ public class ContactGridManager {
   private final ViewAnimator bottomTextSwitcher;
   private final TextView bottomTextView;
   private final Chronometer bottomTimerView;
+  private final Space topRowSpace;
   private int avatarSize;
   private boolean hideAvatar;
   private boolean showAnonymousAvatar;
@@ -104,6 +106,7 @@ public class ContactGridManager {
     bottomTextSwitcher = view.findViewById(R.id.contactgrid_bottom_text_switcher);
     bottomTextView = view.findViewById(R.id.contactgrid_bottom_text);
     bottomTimerView = view.findViewById(R.id.contactgrid_bottom_timer);
+    topRowSpace = view.findViewById(R.id.contactgrid_top_row_space);
 
     contactGridLayout = (View) contactNameTextView.getParent();
     letterTile = new LetterTileDrawable(context.getResources());
@@ -229,9 +232,16 @@ public class ContactGridManager {
 
     if (info.icon == null) {
       connectionIconImageView.setVisibility(View.GONE);
+      topRowSpace.setVisibility(View.GONE);
     } else {
       connectionIconImageView.setVisibility(View.VISIBLE);
       connectionIconImageView.setImageDrawable(info.icon);
+      if (statusTextView.getVisibility() == View.VISIBLE
+          && !TextUtils.isEmpty(statusTextView.getText())) {
+        topRowSpace.setVisibility(View.VISIBLE);
+      } else {
+        topRowSpace.setVisibility(View.GONE);
+      }
     }
   }
 
