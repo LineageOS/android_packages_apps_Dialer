@@ -39,7 +39,8 @@ import java.util.List;
 /** Uses the Fused location service to get location and pass updates on to listeners. */
 public class LocationHelper {
 
-  private static final int MIN_UPDATE_INTERVAL_MS = 20 * 1000;
+  private static final int FAST_MIN_UPDATE_INTERVAL_MS = 5 * 1000;
+  private static final int SLOW_MIN_UPDATE_INTERVAL_MS = 30 * 1000;
   private static final int LAST_UPDATE_THRESHOLD_MS = 60 * 1000;
   private static final int LOCATION_ACCURACY_THRESHOLD_METERS = 100;
 
@@ -159,6 +160,7 @@ public class LocationHelper {
     private final FusedLocationProviderClient locationClient;
     private final ConnectivityManager connectivityManager;
     private final Handler mainThreadHandler = new Handler();
+    private boolean gotGoodLocation;
 
     @MainThread
     LocationHelperInternal(Context context) {
@@ -178,11 +180,12 @@ public class LocationHelper {
     private void requestUpdates() {
       LogUtil.enterBlock("LocationHelperInternal.requestUpdates");
 
+      int interval = gotGoodLocation ? SLOW_MIN_UPDATE_INTERVAL_MS : FAST_MIN_UPDATE_INTERVAL_MS;
       LocationRequest locationRequest =
           LocationRequest.create()
               .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-              .setInterval(MIN_UPDATE_INTERVAL_MS)
-              .setFastestInterval(MIN_UPDATE_INTERVAL_MS);
+              .setInterval(interval)
+              .setFastestInterval(interval);
 
       locationClient
           .requestLocationUpdates(locationRequest, this)
@@ -202,6 +205,7 @@ public class LocationHelper {
                 LogUtil.i("LocationHelperInternal.getLocation", "onSuccess");
                 Assert.isMainThread();
                 LocationHelper.this.onLocationChanged(location, isConnected());
+                maybeAdjustUpdateInterval(location);
               })
           .addOnFailureListener(
               e -> LogUtil.e("LocationHelperInternal.getLocation", "onFailure", e));
@@ -215,8 +219,17 @@ public class LocationHelper {
             @Override
             public void run() {
               LocationHelper.this.onLocationChanged(location, isConnected());
+              maybeAdjustUpdateInterval(location);
             }
           });
+    }
+
+    private void maybeAdjustUpdateInterval(Location location) {
+      if (!gotGoodLocation && checkLocation(location) == LOCATION_STATUS_OK) {
+        LogUtil.i("LocationHelperInternal.maybeAdjustUpdateInterval", "got good location");
+        gotGoodLocation = true;
+        requestUpdates();
+      }
     }
 
     /** @return Whether the phone is connected to data. */
