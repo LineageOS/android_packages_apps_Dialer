@@ -66,7 +66,7 @@ public final class AssistedDialingMediator {
    */
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
-  public Optional<String> attemptAssistedDial(@NonNull String numberToTransform) {
+  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform) {
     Optional<String> userHomeCountryCode = locationDetector.getUpperCaseUserHomeCountry();
     Optional<String> userRoamingCountryCode = locationDetector.getUpperCaseUserRoamingCountry();
 
