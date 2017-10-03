@@ -58,7 +58,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   @Override
   public boolean isAvailable(Context context) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on O+");
+      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on N+");
       return false;
     }
 

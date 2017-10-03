@@ -17,21 +17,17 @@
 package com.android.dialer.strictmode.impl;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.os.StrictMode.VmPolicy;
-import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
-import android.support.v4.os.UserManagerCompat;
-import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.strictmode.DialerStrictMode;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.auto.value.AutoValue;
 import java.util.Map;
 import javax.inject.Inject;
@@ -49,8 +45,8 @@ final class SystemDialerStrictMode implements DialerStrictMode {
   @MainThread
   @Override
   public void onApplicationCreate(Application application) {
-    if (isStrictModeAllowed()) {
-      warmupSharedPrefs(application);
+    if (StrictModeUtils.isStrictModeAllowed()) {
+      StrictModeUtils.warmupSharedPrefs(application);
       setRecommendedMainThreadPolicy(THREAD_DEATH_PENALTY);
       setRecommendedVMPolicy(VM_DEATH_PENALTY);
 
@@ -61,35 +57,6 @@ final class SystemDialerStrictMode implements DialerStrictMode {
       Handler handler = new Handler(Looper.myLooper());
       handler.postAtFrontOfQueue(() -> setRecommendedMainThreadPolicy(THREAD_DEATH_PENALTY));
     }
-  }
-
-  /**
-   * We frequently access shared preferences on the main thread, which causes strict mode
-   * violations. When strict mode is allowed, warm up the shared preferences so that later uses of
-   * shared preferences access the in-memory versions and we don't have to bypass strict mode at
-   * every point in the application where shared preferences are accessed.
-   */
-  private static void warmupSharedPrefs(Application application) {
-    // From credential-encrypted (CE) storage, i.e.:
-    //    /data/data/com.android.dialer/shared_prefs
-
-    if (UserManagerCompat.isUserUnlocked(application)) {
-      // <package_name>_preferences.xml
-      PreferenceManager.getDefaultSharedPreferences(application);
-
-      // <package_name>.xml
-      application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
-    }
-
-    // From device-encrypted (DE) storage, i.e.:
-    //   /data/user_de/0/com.android.dialer/shared_prefs/
-
-    // <package_name>_preferences.xml
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
-  }
-
-  private static boolean isStrictModeAllowed() {
-    return BuildType.get() == BuildType.BUGFOOD;
   }
 
   /**
