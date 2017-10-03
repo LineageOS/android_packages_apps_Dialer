@@ -18,18 +18,33 @@ package com.android.dialer.voicemail.listui;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import com.android.dialer.voicemail.datasources.VoicemailData;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail call log. */
 final class NewVoicemailCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private final TextView primaryTextView;
+  private final TextView secondaryTextView;
+  private final TextView transcriptionTextView;
 
   NewVoicemailCallLogViewHolder(View view) {
     super(view);
     primaryTextView = (TextView) view.findViewById(R.id.primary_text);
+    secondaryTextView = (TextView) view.findViewById(R.id.secondary_text);
+    transcriptionTextView = (TextView) view.findViewById(R.id.transcription_text);
   }
 
-  public void setPrimaryText(String name) {
-    this.primaryTextView.setText(name);
+  void bind(VoicemailData voicemailData) {
+    primaryTextView.setText(voicemailData.name());
+    secondaryTextView.setText(getVoicemailLocationDateAndDuration(voicemailData));
+    transcriptionTextView.setText(voicemailData.transcription());
+  }
+
+  private String getVoicemailLocationDateAndDuration(VoicemailData voicemailData) {
+    return voicemailData.location()
+        + " · "
+        + voicemailData.date()
+        + " · "
+        + voicemailData.duration();
   }
 }
