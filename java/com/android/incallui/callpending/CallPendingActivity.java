@@ -189,6 +189,7 @@ public class CallPendingActivity extends FragmentActivity
         true /* isContactPhotoShown */,
         false /* isWorkCall */,
         false /* isSpam */,
+        true /* isLocalContact */,
         false /* answeringDisconnectsOngoingCall */,
         false /* shouldShowLocation */,
         getLookupKey(),
