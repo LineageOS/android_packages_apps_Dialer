@@ -125,6 +125,17 @@ public class VoicemailTosMessageCreator {
   }
 
   private boolean shouldShowTos() {
+    if (!isValidVoicemailType(status.type)) {
+      LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "unsupported type: " + status.type);
+      return false;
+    }
+
+    if (status.getPhoneAccountHandle() == null
+        || status.getPhoneAccountHandle().getComponentName() == null) {
+      LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "invalid phone account");
+      return false;
+    }
+
     if (isVvm3()) {
       LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "showing TOS for verizon");
       return true;
@@ -137,6 +148,20 @@ public class VoicemailTosMessageCreator {
     }
 
     return false;
+  }
+
+  private static boolean isValidVoicemailType(String type) {
+    if (type == null) {
+      return false;
+    }
+    switch (type) {
+      case TelephonyManager.VVM_TYPE_OMTP:
+      case TelephonyManager.VVM_TYPE_CVVM:
+      case VisualVoicemailTypeExtensions.VVM_TYPE_VVM3:
+        return true;
+      default:
+        return false;
+    }
   }
 
   private boolean isVoicemailTranscriptionEnabled() {
