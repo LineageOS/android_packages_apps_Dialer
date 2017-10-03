@@ -36,6 +36,7 @@ public class PrimaryInfo {
   public final boolean isContactPhotoShown;
   public final boolean isWorkCall;
   public final boolean isSpam;
+  public final boolean isLocalContact;
   public final boolean answeringDisconnectsOngoingCall;
   public final boolean shouldShowLocation;
   // Used for consistent LetterTile coloring.
@@ -60,6 +61,7 @@ public class PrimaryInfo {
         false,
         false,
         false,
+        false,
         null,
         null,
         true,
@@ -78,6 +80,7 @@ public class PrimaryInfo {
       boolean isContactPhotoShown,
       boolean isWorkCall,
       boolean isSpam,
+      boolean isLocalContact,
       boolean answeringDisconnectsOngoingCall,
       boolean shouldShowLocation,
       @Nullable String contactInfoLookupKey,
@@ -95,6 +98,7 @@ public class PrimaryInfo {
     this.isContactPhotoShown = isContactPhotoShown;
     this.isWorkCall = isWorkCall;
     this.isSpam = isSpam;
+    this.isLocalContact = isLocalContact;
     this.answeringDisconnectsOngoingCall = answeringDisconnectsOngoingCall;
     this.shouldShowLocation = shouldShowLocation;
     this.contactInfoLookupKey = contactInfoLookupKey;

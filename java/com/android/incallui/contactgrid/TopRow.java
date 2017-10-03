@@ -122,6 +122,9 @@ public class TopRow {
     if (primaryInfo.location == null && isIncoming) {
       return false;
     }
+    if (primaryInfo.isLocalContact && !isIncoming) {
+      return false;
+    }
     if (TextUtils.isEmpty(primaryInfo.number)) {
       return false;
     }

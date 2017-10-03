@@ -721,6 +721,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     boolean isEmergencyNumber;
     boolean isVoicemailNumber;
 
+    public boolean isLocalContact() {
+      return contactLookupResult == ContactLookupResult.Type.LOCAL_CONTACT;
+    }
+
     @Override
     public String toString() {
       return "ContactCacheEntry{"
