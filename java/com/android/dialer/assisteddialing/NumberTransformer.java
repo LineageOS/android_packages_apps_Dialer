@@ -57,7 +57,7 @@ final class NumberTransformer {
    */
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
-  public Optional<String> doAssistedDialingTransformation(
+  public Optional<TransformationInfo> doAssistedDialingTransformation(
       String numbertoTransform, String userHomeCountryCode, String userRoamingCountryCode) {
 
     if (!constraints.meetsPreconditions(
@@ -88,6 +88,13 @@ final class NumberTransformer {
     }
 
     // TODO Verify the transformed number is still valid?
-    return Optional.of(transformedNumber);
+    return Optional.of(
+        TransformationInfo.builder()
+            .setOriginalNumber(numbertoTransform)
+            .setTransformedNumber(transformedNumber)
+            .setUserHomeCountryCode(userHomeCountryCode)
+            .setUserRoamingCountryCode(userRoamingCountryCode)
+            .setTransformedNumberCountryCallingCode(phoneNumber.getCountryCode())
+            .build());
   }
 }
