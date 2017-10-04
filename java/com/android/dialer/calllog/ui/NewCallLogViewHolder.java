@@ -66,8 +66,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryTextView.setText(buildPrimaryText(row));
     secondaryTextView.setText(buildSecondaryText(row));
 
-    if (row.isNew()) {
-      // TODO(zachh): Figure out correct styling for new/missed/unread calls.
+    if (isNewMissedCall(row)) {
       primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
       // TODO(zachh): Styling for call type icons when the call is new.
       secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
@@ -93,6 +92,12 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       primaryText.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
     }
     return primaryText.toString();
+  }
+
+  private boolean isNewMissedCall(CoalescedAnnotatedCallLogCursorLoader.Row row) {
+    // Show missed call styling if the most recent call in the group was missed and it is still
+    // marked as NEW. It is not clear what IS_READ should be used for and it is currently not used.
+    return row.callType() == Calls.MISSED_TYPE && row.isNew();
   }
 
   private String buildSecondaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
@@ -158,10 +163,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setSecondaryCallTypes(Row row) {
-    // Only call type icons are shown before the secondary text.
-    for (int callType : row.callTypes().getTypeList()) {
-      secondaryCallTypeIconsView.add(callType);
-    }
+    // Only call type icon is shown before the secondary text.
+    secondaryCallTypeIconsView.add(row.callType());
+
     // TODO(zachh): Per new mocks, may need to add method to CallTypeIconsView to disable coloring.
   }
 

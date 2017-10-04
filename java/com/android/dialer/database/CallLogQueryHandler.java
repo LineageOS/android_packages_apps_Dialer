@@ -54,12 +54,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    */
   public static final int CALL_TYPE_ALL = -1;
 
-  private static final String TAG = "CallLogQueryHandler";
   private static final int NUM_LOGS_TO_DISPLAY = 1000;
   /** The token for the query to fetch the old entries from the call log. */
   private static final int QUERY_CALLLOG_TOKEN = 54;
-  /** The token for the query to mark all missed calls as old after seeing the call log. */
-  private static final int UPDATE_MARK_AS_OLD_TOKEN = 55;
   /** The token for the query to mark all missed calls as read after seeing the call log. */
   private static final int UPDATE_MARK_MISSED_CALL_AS_READ_TOKEN = 56;
   /** The token for the query to fetch voicemail status messages. */
@@ -82,7 +79,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
       Context context, ContentResolver contentResolver, Listener listener, int limit) {
     super(contentResolver);
     mContext = context.getApplicationContext();
-    mListener = new WeakReference<Listener>(listener);
+    mListener = new WeakReference<>(listener);
     mLogLimit = limit;
   }
 
@@ -105,10 +102,6 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     } else {
       updateAdapterData(null);
     }
-  }
-
-  public void fetchCalls(int callType) {
-    fetchCalls(callType, 0);
   }
 
   public void fetchVoicemailStatus() {
@@ -226,28 +219,6 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     cancelOperation(QUERY_CALLLOG_TOKEN);
   }
 
-  /** Updates all new calls to mark them as old. */
-  public void markNewCallsAsOld() {
-    if (!PermissionsUtil.hasPhonePermissions(mContext)) {
-      return;
-    }
-    // Mark all "new" calls as not new anymore.
-    StringBuilder where = new StringBuilder();
-    where.append(Calls.NEW);
-    where.append(" = 1");
-
-    ContentValues values = new ContentValues(1);
-    values.put(Calls.NEW, "0");
-
-    startUpdate(
-        UPDATE_MARK_AS_OLD_TOKEN,
-        null,
-        TelecomUtil.getCallLogUri(mContext),
-        values,
-        where.toString(),
-        null);
-  }
-
   /** Updates all missed calls to mark them as read. */
   public void markMissedCallsAsRead() {
     if (!PermissionsUtil.hasPhonePermissions(mContext)) {
@@ -316,19 +287,19 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    */
   private boolean updateAdapterData(Cursor cursor) {
     final Listener listener = mListener.get();
-    if (listener != null) {
-      return listener.onCallsFetched(cursor);
-    }
-    return false;
+    return listener != null && listener.onCallsFetched(cursor);
   }
 
   /** @return Query string to get all unread missed calls. */
   private String getUnreadMissedCallsQuery() {
-    StringBuilder where = new StringBuilder();
-    where.append(Calls.IS_READ).append(" = 0 OR ").append(Calls.IS_READ).append(" IS NULL");
-    where.append(" AND ");
-    where.append(Calls.TYPE).append(" = ").append(Calls.MISSED_TYPE);
-    return where.toString();
+    return Calls.IS_READ
+        + " = 0 OR "
+        + Calls.IS_READ
+        + " IS NULL"
+        + " AND "
+        + Calls.TYPE
+        + " = "
+        + Calls.MISSED_TYPE;
   }
 
   private void updateVoicemailStatus(Cursor statusCursor) {
@@ -365,7 +336,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     void onMissedCallsUnreadCountFetched(Cursor cursor);
 
     /**
-     * Called when {@link CallLogQueryHandler#fetchCalls(int)} complete. Returns true if takes
+     * Called when {@link CallLogQueryHandler#fetchCalls(int, long)} complete. Returns true if takes
      * ownership of cursor.
      */
     boolean onCallsFetched(Cursor combinedCursor);
@@ -375,9 +346,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    * Simple handler that wraps background calls to catch {@link SQLiteException}, such as when the
    * disk is full.
    */
-  protected class CatchingWorkerHandler extends AsyncQueryHandler.WorkerHandler {
+  private class CatchingWorkerHandler extends AsyncQueryHandler.WorkerHandler {
 
-    public CatchingWorkerHandler(Looper looper) {
+    CatchingWorkerHandler(Looper looper) {
       super(looper);
     }
 
@@ -386,11 +357,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
       try {
         // Perform same query while catching any exceptions
         super.handleMessage(msg);
-      } catch (SQLiteDiskIOException e) {
-        LogUtil.e("CallLogQueryHandler.handleMessage", "exception on background worker thread", e);
-      } catch (SQLiteFullException e) {
-        LogUtil.e("CallLogQueryHandler.handleMessage", "exception on background worker thread", e);
-      } catch (SQLiteDatabaseCorruptException e) {
+      } catch (SQLiteDiskIOException | SQLiteFullException | SQLiteDatabaseCorruptException e) {
         LogUtil.e("CallLogQueryHandler.handleMessage", "exception on background worker thread", e);
       } catch (IllegalArgumentException e) {
         LogUtil.e("CallLogQueryHandler.handleMessage", "contactsProvider not present on device", e);

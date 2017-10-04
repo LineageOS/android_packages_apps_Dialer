@@ -19,12 +19,8 @@ package com.android.dialer.calllog.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
 import android.support.v4.content.CursorLoader;
-import com.android.dialer.CallTypes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
-import com.android.dialer.common.Assert;
-import com.google.protobuf.InvalidProtocolBufferException;
 
 /** CursorLoader for the coalesced annotated call log. */
 final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
@@ -47,8 +43,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int FEATURES = 13;
   private static final int IS_BUSINESS = 14;
   private static final int IS_VOICEMAIL = 15;
-  private static final int NUMBER_CALLS = 16;
-  private static final int CALL_TYPES = 17;
+  private static final int TYPE = 16;
+  private static final int NUMBER_CALLS = 17;
 
   /** Convenience class for accessing values using an abbreviated syntax. */
   static final class Row {
@@ -127,13 +123,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       return cursor.getInt(NUMBER_CALLS);
     }
 
-    @NonNull
-    CallTypes callTypes() {
-      try {
-        return CallTypes.parseFrom(cursor.getBlob(CALL_TYPES));
-      } catch (InvalidProtocolBufferException e) {
-        throw Assert.createAssertionFailException("Couldn't parse call types", e);
-      }
+    int callType() {
+      return cursor.getInt(TYPE);
     }
   }
 
