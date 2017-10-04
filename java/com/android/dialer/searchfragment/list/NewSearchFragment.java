@@ -165,6 +165,7 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
+    LogUtil.i("NewSearchFragment.onCreateLoader", "loading cursor: " + id);
     if (id == CONTACTS_LOADER_ID) {
       return new SearchContactsCursorLoader(getContext(), query);
     } else if (id == NEARBY_PLACES_LOADER_ID) {
@@ -187,6 +188,7 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    LogUtil.i("NewSearchFragment.onLoadFinished", "Loader finished: " + loader);
     if (cursor != null
         && !(loader instanceof RemoteDirectoriesCursorLoader)
         && !(cursor instanceof SearchCursor)) {
@@ -218,8 +220,14 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader) {
-    adapter.clear();
-    recyclerView.setAdapter(null);
+    LogUtil.i("NewSearchFragment.onLoaderReset", "Loader reset: " + loader);
+    if (loader instanceof SearchContactsCursorLoader) {
+      adapter.setContactsCursor(null);
+    } else if (loader instanceof NearbyPlacesCursorLoader) {
+      adapter.setNearbyPlacesCursor(null);
+    } else if (loader instanceof RemoteContactsCursorLoader) {
+      adapter.setRemoteContactsCursor(null);
+    }
   }
 
   public void setQuery(String query, CallInitiationType.Type callInitiationType) {
