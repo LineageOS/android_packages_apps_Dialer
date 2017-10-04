@@ -148,6 +148,13 @@ public class AnnotatedCallLogContract {
      */
     String IS_VOICEMAIL = "is_voicemail";
 
+    /**
+     * Copied from {@link android.provider.CallLog.Calls#TYPE}.
+     *
+     * <p>Type: INTEGER (int)
+     */
+    String CALL_TYPE = "call_type";
+
     String[] ALL_COMMON_COLUMNS =
         new String[] {
           _ID,
@@ -165,7 +172,8 @@ public class AnnotatedCallLogContract {
           PHONE_ACCOUNT_COLOR,
           FEATURES,
           IS_BUSINESS,
-          IS_VOICEMAIL
+          IS_VOICEMAIL,
+          CALL_TYPE
         };
   }
 
@@ -196,13 +204,6 @@ public class AnnotatedCallLogContract {
      * <p>Type: BLOB
      */
     public static final String NUMBER = "number";
-
-    /**
-     * Copied from {@link android.provider.CallLog.Calls#TYPE}.
-     *
-     * <p>Type: INTEGER (int)
-     */
-    public static final String TYPE = "type";
   }
 
   /**
@@ -233,18 +234,10 @@ public class AnnotatedCallLogContract {
     public static final String NUMBER_CALLS = "number_calls";
 
     /**
-     * The call types of the most recent 3 calls, encoded as a CallTypes proto.
-     *
-     * <p>TYPE: BLOB
-     */
-    public static final String CALL_TYPES = "call_types";
-
-    /**
      * Columns that are only in the {@link CoalescedAnnotatedCallLog} but not the {@link
      * AnnotatedCallLog}.
      */
-    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG =
-        new String[] {NUMBER_CALLS, CALL_TYPES};
+    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG = new String[] {NUMBER_CALLS};
 
     /** All columns in the {@link CoalescedAnnotatedCallLog}. */
     public static final String[] ALL_COLUMNS =
