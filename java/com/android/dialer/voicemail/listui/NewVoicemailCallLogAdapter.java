@@ -20,23 +20,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.voicemail.datasources.VoicemailData;
 import java.util.List;
 
 /** {@link RecyclerView.Adapter} for the new voicemail call log fragment. */
 final class NewVoicemailCallLogAdapter extends RecyclerView.Adapter<NewVoicemailCallLogViewHolder> {
 
-  private final List<String> values;
+  private final List<VoicemailData> voicemailData;
 
-  NewVoicemailCallLogAdapter(List<String> myDataset) {
-    values = myDataset;
+  NewVoicemailCallLogAdapter(List<VoicemailData> dataSet) {
+    voicemailData = dataSet;
   }
 
   @Override
   public NewVoicemailCallLogViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-    View v = inflater.inflate(R.layout.voicemail_call_log_entry, viewGroup, false);
-
+    View v = inflater.inflate(R.layout.new_voicemail_call_log_entry, viewGroup, false);
     NewVoicemailCallLogViewHolder newVoicemailCallLogViewHolder =
         new NewVoicemailCallLogViewHolder(v);
     return newVoicemailCallLogViewHolder;
@@ -45,12 +45,11 @@ final class NewVoicemailCallLogAdapter extends RecyclerView.Adapter<NewVoicemail
   @Override
   public void onBindViewHolder(NewVoicemailCallLogViewHolder viewHolder, int position) {
     LogUtil.i("onBindViewHolder", "position" + position);
-    String name = values.get(position);
-    viewHolder.setPrimaryText(name);
+    viewHolder.bind(voicemailData.get(position));
   }
 
   @Override
   public int getItemCount() {
-    return values.size();
+    return voicemailData.size();
   }
 }

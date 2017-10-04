@@ -14,17 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
+
 <resources>
 
-  <!-- TODO(uabdullah): These values are to be shared with the call log entries -->
-  <dimen name="call_log_entry_top_margin">6dp</dimen>
-  <dimen name="call_log_entry_padding_bottom_end">16dp</dimen>
-  <dimen name="call_log_entry_padding_top_start">12dp</dimen>
-  <dimen name="call_log_entry_photo_size">48dp</dimen>
-  <dimen name="call_log_entry_photo_padding">4dp</dimen>
-  <dimen name="call_log_entry_photo_text_margin">8dp</dimen>
-  <dimen name="call_log_entry_menu_button_size">48dp</dimen>
-
-  <dimen name="voicemail_icon_margin">12dp</dimen>
-  <dimen name="voicemail_icon_size">16dp</dimen>
+  <!-- Dimensions for connection icons -->
+  <dimen name="contactgrid_connection_icon_margin_end">10dp</dimen>
 </resources>
