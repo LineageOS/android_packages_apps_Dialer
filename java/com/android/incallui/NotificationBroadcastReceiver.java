@@ -72,19 +72,19 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
     // TODO: Commands of this nature should exist in the CallList.
     if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
-      answerIncomingCall(context, VideoProfile.STATE_BIDIRECTIONAL);
+      answerIncomingCall(VideoProfile.STATE_BIDIRECTIONAL);
     } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
-      answerIncomingCall(context, VideoProfile.STATE_AUDIO_ONLY);
+      answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY);
     } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
       Logger.get(context)
           .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_NOTIFICATION);
-      declineIncomingCall(context);
+      declineIncomingCall();
     } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
-      hangUpOngoingCall(context);
+      hangUpOngoingCall();
     } else if (action.equals(ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST)) {
       acceptUpgradeRequest(context);
     } else if (action.equals(ACTION_DECLINE_VIDEO_UPGRADE_REQUEST)) {
-      declineUpgradeRequest(context);
+      declineUpgradeRequest();
     } else if (action.equals(ACTION_PULL_EXTERNAL_CALL)) {
       context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
       int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, -1);
@@ -99,7 +99,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
   private void acceptUpgradeRequest(Context context) {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
-      StatusBarNotifier.clearAllCallNotifications(context);
+      StatusBarNotifier.clearAllCallNotifications();
       LogUtil.e("NotificationBroadcastReceiver.acceptUpgradeRequest", "call list is empty");
     } else {
       DialerCall call = callList.getVideoUpgradeRequestCall();
@@ -109,10 +109,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void declineUpgradeRequest(Context context) {
+  private void declineUpgradeRequest() {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
-      StatusBarNotifier.clearAllCallNotifications(context);
+      StatusBarNotifier.clearAllCallNotifications();
       LogUtil.e("NotificationBroadcastReceiver.declineUpgradeRequest", "call list is empty");
     } else {
       DialerCall call = callList.getVideoUpgradeRequestCall();
@@ -122,10 +122,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void hangUpOngoingCall(Context context) {
+  private void hangUpOngoingCall() {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
-      StatusBarNotifier.clearAllCallNotifications(context);
+      StatusBarNotifier.clearAllCallNotifications();
       LogUtil.e("NotificationBroadcastReceiver.hangUpOngoingCall", "call list is empty");
     } else {
       DialerCall call = callList.getOutgoingCall();
@@ -140,10 +140,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void answerIncomingCall(Context context, int videoState) {
+  private void answerIncomingCall(int videoState) {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
-      StatusBarNotifier.clearAllCallNotifications(context);
+      StatusBarNotifier.clearAllCallNotifications();
       LogUtil.e("NotificationBroadcastReceiver.answerIncomingCall", "call list is empty");
     } else {
       DialerCall call = callList.getIncomingCall();
@@ -155,10 +155,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void declineIncomingCall(Context context) {
+  private void declineIncomingCall() {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
-      StatusBarNotifier.clearAllCallNotifications(context);
+      StatusBarNotifier.clearAllCallNotifications();
       LogUtil.e("NotificationBroadcastReceiver.declineIncomingCall", "call list is empty");
     } else {
       DialerCall call = callList.getIncomingCall();

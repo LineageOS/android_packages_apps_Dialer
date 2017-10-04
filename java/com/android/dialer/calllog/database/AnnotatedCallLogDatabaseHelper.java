@@ -54,7 +54,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .append(AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
           // Columns only in AnnotatedCallLog
           .append(AnnotatedCallLog.NUMBER + " blob, ")
-          .append(AnnotatedCallLog.TYPE + " integer")
+          .append(AnnotatedCallLog.CALL_TYPE + " integer")
           .append(");")
           .toString();
 
