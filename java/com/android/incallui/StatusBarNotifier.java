@@ -28,7 +28,6 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_OFF
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_ON_SPEAKER;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -74,7 +73,6 @@ import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.multimedia.MultimediaData;
-import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DrawableConverter;
@@ -86,12 +84,12 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
+import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
@@ -100,7 +98,6 @@ public class StatusBarNotifier
         EnrichedCallManager.StateChangedListener,
         AudioModeProvider.AudioModeListener {
 
-  private static final String NOTIFICATION_TAG = "STATUS_BAR_NOTIFIER";
   private static final int NOTIFICATION_ID = 1;
 
   // Notification types
@@ -146,12 +143,12 @@ public class StatusBarNotifier
    * Should only be called from a irrecoverable state where it is necessary to dismiss all
    * notifications.
    */
-  static void clearAllCallNotifications(Context context) {
+  static void clearAllCallNotifications() {
     LogUtil.e(
         "StatusBarNotifier.clearAllCallNotifications",
         "something terrible happened, clear all InCall notifications");
 
-    DialerNotificationManager.cancel(context, NOTIFICATION_TAG, NOTIFICATION_ID);
+    TelecomAdapter.getInstance().stopForegroundNotification();
   }
 
   private static int getWorkStringFromPersonalString(int resId) {
@@ -219,10 +216,9 @@ public class StatusBarNotifier
       setStatusBarCallListener(null);
     }
     if (mCurrentNotification != NOTIFICATION_NONE) {
-      LogUtil.i("StatusBarNotifier.cancelNotification", "cancel");
-      DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
+      TelecomAdapter.getInstance().stopForegroundNotification();
+      mCurrentNotification = NOTIFICATION_NONE;
     }
-    mCurrentNotification = NOTIFICATION_NONE;
   }
 
   /**
@@ -390,7 +386,7 @@ public class StatusBarNotifier
               "Canceling old notification so this one can be noisy");
           // Moving from a non-interuptive notification (or none) to a noisy one. Cancel the old
           // notification (if there is one) so the fullScreenIntent or HUN will show
-          DialerNotificationManager.cancel(mContext, NOTIFICATION_TAG, NOTIFICATION_ID);
+          TelecomAdapter.getInstance().stopForegroundNotification();
         }
         break;
       case NOTIFICATION_INCOMING_CALL_QUIET:
@@ -404,6 +400,8 @@ public class StatusBarNotifier
           builder.setColorized(true);
           builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         }
+        // This will be ignored on O+ and handled by the channel
+        builder.setPriority(Notification.PRIORITY_MAX);
         break;
       default:
         break;
@@ -414,8 +412,7 @@ public class StatusBarNotifier
     builder.setSmallIcon(iconResId);
     builder.setContentTitle(contentTitle);
     builder.setLargeIcon(largeIcon);
-    builder.setColor(
-        mContext.getResources().getColor(R.color.dialer_theme_color, mContext.getTheme()));
+    builder.setColor(InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor());
 
     if (isVideoUpgradeRequest) {
       builder.setUsesChronometer(false);
@@ -451,22 +448,9 @@ public class StatusBarNotifier
         "StatusBarNotifier.buildAndSendNotification",
         "displaying notification for " + notificationType);
 
-    try {
-      DialerNotificationManager.notify(mContext, NOTIFICATION_TAG, NOTIFICATION_ID, notification);
-    } catch (RuntimeException e) {
-      // TODO(b/34744003): Move the memory stats into silent feedback PSD.
-      ActivityManager activityManager = mContext.getSystemService(ActivityManager.class);
-      ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-      activityManager.getMemoryInfo(memoryInfo);
-      throw new RuntimeException(
-          String.format(
-              Locale.US,
-              "Error displaying notification with photo type: %d (low memory? %b, availMem: %d)",
-              contactInfo.photoType,
-              memoryInfo.lowMemory,
-              memoryInfo.availMem),
-          e);
-    }
+    // If a notification exists, this will only update it.
+    TelecomAdapter.getInstance().startForegroundNotification(NOTIFICATION_ID, notification);
+
     Trace.endSection();
     call.getLatencyReport().onNotificationShown();
     mCurrentNotification = notificationType;
