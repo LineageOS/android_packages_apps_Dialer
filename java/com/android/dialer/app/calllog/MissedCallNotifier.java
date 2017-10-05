@@ -49,6 +49,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
+import com.android.dialer.enrichedcall.FuzzyPhoneNumberMatcher;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.notification.NotificationManagerUtils;
@@ -267,7 +268,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     List<NewCall> newCalls = callLogNotificationsQueryHelper.getNewMissedCalls();
     if (newCalls != null && !newCalls.isEmpty()) {
       for (NewCall call : newCalls) {
-        if (call.number.equals(number.replace("tel:", ""))) {
+        if (FuzzyPhoneNumberMatcher.matches(call.number, number.replace("tel:", ""))) {
+          LogUtil.i("MissedCallNotifier.insertPostCallNotification", "Notification updated");
           // Update the first notification that matches our post call note sender.
           DialerNotificationManager.notify(
               context,
