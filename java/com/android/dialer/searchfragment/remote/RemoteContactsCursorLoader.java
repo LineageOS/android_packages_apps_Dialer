@@ -28,6 +28,7 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
         null,
         Phone.SORT_KEY_PRIMARY);
     this.query = query;
-    this.directories = directories;
+    this.directories = new ArrayList<>(directories);
     cursors = new Cursor[directories.size()];
   }
 
