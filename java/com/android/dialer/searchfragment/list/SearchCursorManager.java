@@ -101,10 +101,6 @@ public final class SearchCursorManager {
       return false;
     }
 
-    if (contactsCursor != null && !contactsCursor.isClosed()) {
-      contactsCursor.close();
-    }
-
     if (cursor != null) {
       contactsCursor = cursor;
     } else {
@@ -117,10 +113,6 @@ public final class SearchCursorManager {
   boolean setNearbyPlacesCursor(@Nullable SearchCursor cursor) {
     if (cursor == nearbyPlacesCursor) {
       return false;
-    }
-
-    if (nearbyPlacesCursor != null && !nearbyPlacesCursor.isClosed()) {
-      nearbyPlacesCursor.close();
     }
 
     if (cursor != null) {
@@ -144,10 +136,6 @@ public final class SearchCursorManager {
   boolean setCorpDirectoryCursor(@Nullable SearchCursor cursor) {
     if (cursor == corpDirectoryCursor) {
       return false;
-    }
-
-    if (corpDirectoryCursor != null && !corpDirectoryCursor.isClosed()) {
-      corpDirectoryCursor.close();
     }
 
     if (cursor != null) {
@@ -286,20 +274,9 @@ public final class SearchCursorManager {
 
   /** removes all cursors. */
   void clear() {
-    if (contactsCursor != null) {
-      contactsCursor.close();
-      contactsCursor = null;
-    }
-
-    if (nearbyPlacesCursor != null) {
-      nearbyPlacesCursor.close();
-      nearbyPlacesCursor = null;
-    }
-
-    if (corpDirectoryCursor != null) {
-      corpDirectoryCursor.close();
-      corpDirectoryCursor = null;
-    }
+    contactsCursor = null;
+    nearbyPlacesCursor = null;
+    corpDirectoryCursor = null;
   }
 
   /**
