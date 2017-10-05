@@ -60,7 +60,10 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
   public static RemoteContactsCursor newInstance(
       Context context, Cursor[] cursors, List<Directory> directories) {
     Assert.checkArgument(
-        cursors.length == directories.size(), "Directories and cursors must be the same size.");
+        cursors.length == directories.size(),
+        "Directories (%d) and cursors (%d) must be the same size.",
+        directories.size(),
+        cursors.length);
     Cursor[] cursorsWithHeaders = insertHeaders(context, cursors, directories);
     if (cursorsWithHeaders.length > 0) {
       return new RemoteContactsCursor(cursorsWithHeaders);

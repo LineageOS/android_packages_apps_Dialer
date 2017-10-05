@@ -137,7 +137,7 @@
   <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
 
   <string name="verizon_terms_and_conditions_title">Turn on visual voicemail</string>
-  <string name="verizon_terms_and_conditions_message">%1$s\n\nBy turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n%2$s</string>
+  <string name="verizon_terms_and_conditions_message">%1$s By turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n%2$s</string>
 
   <string name="dialer_terms_and_conditions_title">Turn on visual voicemail</string>
   <string name="dialer_terms_and_conditions_message">%s</string>
@@ -174,10 +174,10 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string name="dialer_terms_and_conditions_for_verizon_1.0">
-  See and listen to your messages, without having to call voicemail. %s
+  See and listen to your messages, without having to call voicemail.
   </string>
 
-  <string name="dialer_terms_and_conditions_learn_more">Learn more</string>
+  <string name="dialer_terms_and_conditions_learn_more">Learn&#160;more</string>
 
   <!-- TODO(mdooley): STOP SHIP, get real url, b/65734734 -->
   <string translatable="false" name="dialer_terms_and_conditions_learn_more_url">https://www.google.com</string>
