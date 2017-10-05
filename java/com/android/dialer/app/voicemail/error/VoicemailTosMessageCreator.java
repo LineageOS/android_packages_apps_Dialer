@@ -304,10 +304,12 @@ public class VoicemailTosMessageCreator {
       return "";
     }
 
-    String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
-    return isVvm3()
-        ? context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0, learnMoreText)
-        : context.getString(R.string.dialer_terms_and_conditions_1_0, learnMoreText);
+    if (isVvm3()) {
+      return context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0);
+    } else {
+      String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+      return context.getString(R.string.dialer_terms_and_conditions_1_0, learnMoreText);
+    }
   }
 
   private CharSequence getAcceptText() {
@@ -359,7 +361,7 @@ public class VoicemailTosMessageCreator {
           Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
       // Add verizon policy link
       String linkUrl = context.getString(R.string.verizon_terms_and_conditions_policy_url);
-      addLink(spannableTos, linkUrl, linkUrl);
+      return addLink(spannableTos, linkUrl, linkUrl);
     } else {
       // The TOS for everyone else, there are no details, but change to center alignment.
       CharSequence tos =
@@ -370,12 +372,12 @@ public class VoicemailTosMessageCreator {
           0,
           tos.length(),
           Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
 
-    // Add 'Learn more' link for dialer TOS
-    String learnMore = context.getString(R.string.dialer_terms_and_conditions_learn_more);
-    String linkUrl = context.getString(R.string.dialer_terms_and_conditions_learn_more_url);
-    return addLink(spannableTos, learnMore, linkUrl);
+      // Add 'Learn more' link for dialer TOS
+      String learnMore = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+      String linkUrl = context.getString(R.string.dialer_terms_and_conditions_learn_more_url);
+      return addLink(spannableTos, learnMore, linkUrl);
+    }
   }
 
   private SpannableString addLink(SpannableString spannable, String linkText, String linkUrl) {

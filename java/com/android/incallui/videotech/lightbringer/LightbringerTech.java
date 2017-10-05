@@ -187,9 +187,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   }
 
   @Override
-  public void setDeviceOrientation(int rotation) {
-    throw Assert.createUnsupportedOperationFailException();
-  }
+  public void setDeviceOrientation(int rotation) {}
 
   @Override
   public void onLightbringerStateChanged() {
