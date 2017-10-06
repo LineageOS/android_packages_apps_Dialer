@@ -706,6 +706,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     }
   }
 
+  public int getNonConferenceState() {
+    return mState;
+  }
+
   public void setState(int state) {
     if (state == State.INCOMING) {
       mLogState.isIncoming = true;

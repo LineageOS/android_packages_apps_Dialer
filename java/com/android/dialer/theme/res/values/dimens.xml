@@ -38,4 +38,7 @@
   <dimen name="actionbar_contentInsetStart">72dp</dimen>
 
   <dimen name="call_log_icon_margin">2dp</dimen>
+
+  <item name="alpha_enabled" format="float" type="dimen">1.0</item>
+  <item name="alpha_hiden" format="float" type="dimen">0.54</item>
 </resources>

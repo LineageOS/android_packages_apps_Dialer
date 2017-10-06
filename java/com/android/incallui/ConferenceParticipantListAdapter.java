@@ -24,6 +24,7 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -245,7 +246,8 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         contactCache.lookupKey,
         contactCache.displayPhotoUri,
         thisRowCanSeparate,
-        thisRowCanDisconnect);
+        thisRowCanDisconnect,
+        call.getNonConferenceState());
 
     // Tag the row in the conference participant list with the call id to make it easier to
     // find calls when contact cache information is loaded.
@@ -290,15 +292,24 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       String lookupKey,
       Uri photoUri,
       boolean thisRowCanSeparate,
-      boolean thisRowCanDisconnect) {
+      boolean thisRowCanDisconnect,
+      int callState) {
 
     final ImageView photoView = (ImageView) view.findViewById(R.id.callerPhoto);
+    final TextView statusTextView = (TextView) view.findViewById(R.id.conferenceCallerStatus);
     final TextView nameTextView = (TextView) view.findViewById(R.id.conferenceCallerName);
     final TextView numberTextView = (TextView) view.findViewById(R.id.conferenceCallerNumber);
     final TextView numberTypeTextView =
         (TextView) view.findViewById(R.id.conferenceCallerNumberType);
     final View endButton = view.findViewById(R.id.conferenceCallerDisconnect);
     final View separateButton = view.findViewById(R.id.conferenceCallerSeparate);
+
+    if (callState == DialerCall.State.ONHOLD) {
+      setViewsOnHold(photoView, statusTextView, nameTextView, numberTextView, numberTypeTextView);
+    } else {
+      setViewsNotOnHold(
+          photoView, statusTextView, nameTextView, numberTextView, numberTypeTextView);
+    }
 
     endButton.setVisibility(thisRowCanDisconnect ? View.VISIBLE : View.GONE);
     if (thisRowCanDisconnect) {
@@ -336,6 +347,47 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       numberTypeTextView.setVisibility(View.VISIBLE);
       numberTypeTextView.setText(callerNumberType);
     }
+  }
+
+  private void setViewsOnHold(
+      ImageView photoView,
+      TextView statusTextView,
+      TextView nameTextView,
+      TextView numberTextView,
+      TextView numberTypeTextView) {
+    CharSequence onHoldText =
+        TextUtils.concat(getContext().getText(R.string.notification_on_hold).toString(), " • ");
+    statusTextView.setText(onHoldText);
+    statusTextView.setVisibility(View.VISIBLE);
+
+    int onHoldColor = getContext().getColor(R.color.dialer_secondary_text_color_hiden);
+    nameTextView.setTextColor(onHoldColor);
+    numberTextView.setTextColor(onHoldColor);
+    numberTypeTextView.setTextColor(onHoldColor);
+
+    TypedValue alpha = new TypedValue();
+    getContext().getResources().getValue(R.dimen.alpha_hiden, alpha, true);
+    photoView.setAlpha(alpha.getFloat());
+  }
+
+  private void setViewsNotOnHold(
+      ImageView photoView,
+      TextView statusTextView,
+      TextView nameTextView,
+      TextView numberTextView,
+      TextView numberTypeTextView) {
+    statusTextView.setVisibility(View.GONE);
+
+    nameTextView.setTextColor(
+        getContext().getColor(R.color.conference_call_manager_caller_name_text_color));
+    numberTextView.setTextColor(
+        getContext().getColor(R.color.conference_call_manager_secondary_text_color));
+    numberTypeTextView.setTextColor(
+        getContext().getColor(R.color.conference_call_manager_secondary_text_color));
+
+    TypedValue alpha = new TypedValue();
+    getContext().getResources().getValue(R.dimen.alpha_enabled, alpha, true);
+    photoView.setAlpha(alpha.getFloat());
   }
 
   /**
