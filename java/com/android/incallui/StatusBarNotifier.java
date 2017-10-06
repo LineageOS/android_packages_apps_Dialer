@@ -299,7 +299,7 @@ public class StatusBarNotifier
     // Check if data has changed; if nothing is different, don't issue another notification.
     final int iconResId = getIconToDisplay(call);
     Bitmap largeIcon = getLargeIconToDisplay(mContext, contactInfo, call);
-    final String content = getContentString(call, contactInfo.userType);
+    final CharSequence content = getContentString(call, contactInfo.userType);
     final String contentTitle = getContentTitle(contactInfo, call);
 
     final boolean isVideoUpgradeRequest =
@@ -329,7 +329,7 @@ public class StatusBarNotifier
 
     if (!checkForChangeAndSaveData(
         iconResId,
-        content,
+        content.toString(),
         largeIcon,
         contentTitle,
         callState,
@@ -681,7 +681,7 @@ public class StatusBarNotifier
   }
 
   /** Returns the message to use with the notification. */
-  private String getContentString(DialerCall call, @UserType long userType) {
+  private CharSequence getContentString(DialerCall call, @UserType long userType) {
     boolean isIncomingOrWaiting =
         call.getState() == DialerCall.State.INCOMING
             || call.getState() == DialerCall.State.CALL_WAITING;
@@ -709,7 +709,8 @@ public class StatusBarNotifier
         resId = getECIncomingCallText(call.getEnrichedCallSession());
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
         resId = R.string.notification_incoming_call_wifi_template;
-
+      } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts()) {
+        return getMultiSimIncomingText(call);
       } else {
         resId = R.string.notification_incoming_call;
       }
@@ -810,6 +811,24 @@ public class StatusBarNotifier
       resId = R.string.notification_incoming_call_attachments;
     }
     return resId;
+  }
+
+  private CharSequence getMultiSimIncomingText(DialerCall call) {
+    PhoneAccount phoneAccount =
+        mContext.getSystemService(TelecomManager.class).getPhoneAccount(call.getAccountHandle());
+    SpannableString string =
+        new SpannableString(
+            mContext.getString(
+                R.string.notification_incoming_call_mutli_sim, phoneAccount.getLabel()));
+    int accountStart = string.toString().lastIndexOf(phoneAccount.getLabel().toString());
+    int accountEnd = accountStart + phoneAccount.getLabel().length();
+
+    string.setSpan(
+        new ForegroundColorSpan(phoneAccount.getHighlightColor()),
+        accountStart,
+        accountEnd,
+        Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+    return string;
   }
 
   /** Gets the most relevant call to display in the notification. */
@@ -1020,6 +1039,11 @@ public class StatusBarNotifier
       mStatusBarCallListener.cleanup();
     }
     mStatusBarCallListener = listener;
+  }
+
+  @SuppressWarnings("MissingPermission")
+  private boolean hasMultiplePhoneAccounts() {
+    return mContext.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts().size() > 1;
   }
 
   @Override
