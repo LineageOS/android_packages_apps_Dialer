@@ -21,7 +21,7 @@ import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
@@ -136,7 +136,7 @@ public final class DialerExecutors {
     return new DefaultDialerExecutorFactory().createNonUiTaskBuilder(Assert.isNotNull(worker));
   }
 
-  private static final Executor lowPriorityThreadPool =
+  private static final ExecutorService lowPriorityThreadPool =
       Executors.newFixedThreadPool(
           5,
           new ThreadFactory() {
@@ -155,7 +155,7 @@ public final class DialerExecutors {
    * <p>This exists to prevent each individual dialer component from having to create its own
    * threads/pools, which would result in the application having more threads than really necessary.
    */
-  public static Executor getLowPriorityThreadPool() {
+  public static ExecutorService getLowPriorityThreadPool() {
     return lowPriorityThreadPool;
   }
 }

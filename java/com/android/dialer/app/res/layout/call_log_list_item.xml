@@ -170,8 +170,7 @@
               android:layout_height="wrap_content"
               android:textColor="@color/call_log_voicemail_transcript_branding_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
-              android:paddingTop="2dp"
-              android:maxLines="1"/>
+              android:paddingTop="2dp"/>
 
           </LinearLayout>
 
