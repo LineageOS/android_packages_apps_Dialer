@@ -38,9 +38,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import com.android.dialer.CallTypes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
@@ -153,30 +151,20 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     // TODO(zachh): Complete implementation.
-    ContentValues coalescedValues =
-        new RowCombiner(individualRowsSortedByTimestampDesc)
-            .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
-            .useMostRecentLong(AnnotatedCallLog.NEW)
-            .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
-            .useMostRecentString(AnnotatedCallLog.NAME)
-            .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
-            .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
-            .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
-            .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
-            .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
-            .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
-            .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
-            .combine();
-
-    CallTypes.Builder callTypes = CallTypes.newBuilder();
-    // Store a maximum of 3 call types since that's all we show to users via icons.
-    for (int i = 0; i < 3 && i < individualRowsSortedByTimestampDesc.size(); i++) {
-      callTypes.addType(
-          individualRowsSortedByTimestampDesc.get(i).getAsInteger(AnnotatedCallLog.TYPE));
-    }
-    coalescedValues.put(CoalescedAnnotatedCallLog.CALL_TYPES, callTypes.build().toByteArray());
-
-    return coalescedValues;
+    return new RowCombiner(individualRowsSortedByTimestampDesc)
+        .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
+        .useMostRecentLong(AnnotatedCallLog.NEW)
+        .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
+        .useMostRecentString(AnnotatedCallLog.NAME)
+        .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
+        .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
+        .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
+        .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
+        .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
+        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
+        .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
+        .useMostRecentLong(AnnotatedCallLog.CALL_TYPE)
+        .combine();
   }
 
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
@@ -286,7 +274,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             contentValues.put(AnnotatedCallLog.NUMBER, numberAsProtoBytes);
           }
 
-          contentValues.put(AnnotatedCallLog.TYPE, type);
+          contentValues.put(AnnotatedCallLog.CALL_TYPE, type);
           contentValues.put(AnnotatedCallLog.NAME, cachedName);
           contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
           contentValues.put(AnnotatedCallLog.PHOTO_URI, cachedPhotoUri);
