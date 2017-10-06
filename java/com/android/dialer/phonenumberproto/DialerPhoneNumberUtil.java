@@ -16,6 +16,7 @@
 
 package com.android.dialer.phonenumberproto;
 
+import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
@@ -24,6 +25,8 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.DialerPhoneNumber.RawInput;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.MatchType;
@@ -46,7 +49,7 @@ public class DialerPhoneNumberUtil {
   /**
    * Parses the provided raw phone number into a {@link DialerPhoneNumber}.
    *
-   * @see PhoneNumberUtil#parse(String, String)
+   * @see PhoneNumberUtil#parse(CharSequence, String)
    */
   @WorkerThread
   public DialerPhoneNumber parse(@Nullable String numberToParse, @Nullable String defaultRegion) {
@@ -70,6 +73,21 @@ public class DialerPhoneNumberUtil {
       LogUtil.w("DialerPhoneNumberUtil.parse", "couldn't parse phone number", e);
     }
     return dialerPhoneNumber.build();
+  }
+
+  /**
+   * Parses the provided raw phone number into a Future result of {@link DialerPhoneNumber}.
+   *
+   * <p>Work is run on the provided {@link ListeningExecutorService}.
+   *
+   * @see PhoneNumberUtil#parse(CharSequence, String)
+   */
+  @AnyThread
+  public ListenableFuture<DialerPhoneNumber> parse(
+      @Nullable String numberToParse,
+      @Nullable String defaultRegion,
+      @NonNull ListeningExecutorService service) {
+    return service.submit(() -> parse(numberToParse, defaultRegion));
   }
 
   /**
