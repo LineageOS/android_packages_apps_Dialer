@@ -42,6 +42,8 @@
 
   <!-- Secondary text color in the Phone app -->
   <color name="dialer_secondary_text_color">#636363</color>
+  <!-- 38% opacity -->
+  <color name="dialer_secondary_text_color_hiden">#61000000</color>
 
   <!-- Color of the theme of the Dialer app -->
   <color name="dialtacts_theme_color">@color/dialer_theme_color</color>
