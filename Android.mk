@@ -278,6 +278,9 @@ LOCAL_PROGUARD_ENABLED := custom
 ifdef LOCAL_JACK_ENABLED
 # Bug: 37077388
 LOCAL_PROGUARD_ENABLED += optimization
+else
+LOCAL_PROGUARD_ENABLED := disabled
+LOCAL_DX_FLAGS := --multi-dex
 endif
 
 LOCAL_SDK_VERSION := system_current
