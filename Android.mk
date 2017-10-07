@@ -352,6 +352,9 @@ LOCAL_PROGUARD_FLAG_FILES := \
 LOCAL_PROGUARD_ENABLED := custom
 
 LOCAL_PROGUARD_ENABLED += optimization
+else
+LOCAL_PROGUARD_ENABLED := disabled
+LOCAL_DX_FLAGS := --multi-dex
 endif
 
 # End Bug: 37077388
