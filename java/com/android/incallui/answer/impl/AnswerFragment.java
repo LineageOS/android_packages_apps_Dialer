@@ -78,6 +78,7 @@ import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
+import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
@@ -977,6 +978,11 @@ public class AnswerFragment extends Fragment
   }
 
   @Override
+  public InCallUiLock acquireInCallUiLock(String tag) {
+    return answerScreenDelegate.acquireInCallUiLock(tag);
+  }
+
+  @Override
   public void smsSelected(@Nullable CharSequence text) {
     LogUtil.i("AnswerFragment.smsSelected", null);
     textResponsesFragment = null;
@@ -997,7 +1003,6 @@ public class AnswerFragment extends Fragment
   public void smsDismissed() {
     LogUtil.i("AnswerFragment.smsDismissed", null);
     textResponsesFragment = null;
-    answerScreenDelegate.onDismissDialog();
   }
 
   @Override
@@ -1014,7 +1019,6 @@ public class AnswerFragment extends Fragment
   public void customSmsDismissed() {
     LogUtil.i("AnswerFragment.customSmsDismissed", null);
     createCustomSmsDialogFragment = null;
-    answerScreenDelegate.onDismissDialog();
   }
 
   private boolean canRejectCallWithSms() {

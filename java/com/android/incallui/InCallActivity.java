@@ -245,23 +245,16 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return true;
     }
 
-    if (common.hasPendingDialogs()) {
-      LogUtil.i(
-          "InCallActivity.shouldCloseActivityOnFinish", "dialog is visible, not closing activity");
-      return false;
-    }
-
-    AnswerScreen answerScreen = getAnswerScreen();
-    if (answerScreen != null && answerScreen.hasPendingDialogs()) {
+    if (InCallPresenter.getInstance().isInCallUiLocked()) {
       LogUtil.i(
           "InCallActivity.shouldCloseActivityOnFinish",
-          "answer screen dialog is visible, not closing activity");
+          "in call ui is locked, not closing activity");
       return false;
     }
 
     LogUtil.i(
         "InCallActivity.shouldCloseActivityOnFinish",
-        "activity is visible and has no dialogs, allowing activity to close");
+        "activity is visible and has no locks, allowing activity to close");
     return true;
   }
 
