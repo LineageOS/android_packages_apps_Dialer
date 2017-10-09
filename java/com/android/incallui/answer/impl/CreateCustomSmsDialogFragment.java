@@ -31,6 +31,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import com.android.dialer.common.FragmentUtils;
+import com.android.incallui.incalluilock.InCallUiLock;
 
 /**
  * Shows the dialog for users to enter a custom message when rejecting a call with an SMS message.
@@ -40,6 +41,7 @@ public class CreateCustomSmsDialogFragment extends AppCompatDialogFragment {
   private static final String ARG_ENTERED_TEXT = "enteredText";
 
   private EditText editText;
+  private InCallUiLock inCallUiLock;
 
   public static CreateCustomSmsDialogFragment newInstance() {
     return new CreateCustomSmsDialogFragment();
@@ -55,6 +57,11 @@ public class CreateCustomSmsDialogFragment extends AppCompatDialogFragment {
     if (savedInstanceState != null) {
       editText.setText(savedInstanceState.getCharSequence(ARG_ENTERED_TEXT));
     }
+
+    inCallUiLock =
+        FragmentUtils.getParentUnsafe(
+                CreateCustomSmsDialogFragment.this, CreateCustomSmsHolder.class)
+            .acquireInCallUiLock("CreateCustomSmsDialogFragment");
     builder
         .setCancelable(true)
         .setView(view)
@@ -124,11 +131,14 @@ public class CreateCustomSmsDialogFragment extends AppCompatDialogFragment {
   @Override
   public void onDismiss(DialogInterface dialogInterface) {
     super.onDismiss(dialogInterface);
+    inCallUiLock.release();
     FragmentUtils.getParentUnsafe(this, CreateCustomSmsHolder.class).customSmsDismissed();
   }
 
   /** Call back for {@link CreateCustomSmsDialogFragment} */
   public interface CreateCustomSmsHolder {
+
+    InCallUiLock acquireInCallUiLock(String tag);
 
     void customSmsCreated(@NonNull CharSequence text);
 

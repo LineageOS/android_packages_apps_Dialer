@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.support.annotation.FloatRange;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
+import com.android.incallui.incalluilock.InCallUiLock;
 
 /**
  * Stub implementation of the answer screen delegate. Used to keep the answer fragment visible when
@@ -26,9 +27,6 @@ import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
   @Override
   public void onAnswerScreenUnready() {}
-
-  @Override
-  public void onDismissDialog() {}
 
   @Override
   public void onRejectCallWithMessage(String message) {}
@@ -54,5 +52,10 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
   @Override
   public boolean isActionTimeout() {
     return false;
+  }
+
+  @Override
+  public InCallUiLock acquireInCallUiLock(String tag) {
+    return InCallPresenter.getInstance().acquireInCallUiLock(tag);
   }
 }
