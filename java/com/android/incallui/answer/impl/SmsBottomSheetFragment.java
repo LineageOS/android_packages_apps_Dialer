@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.android.dialer.common.DpUtil;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.incallui.incalluilock.InCallUiLock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,8 @@ import java.util.List;
 public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
 
   private static final String ARG_OPTIONS = "options";
+
+  private InCallUiLock inCallUiLock;
 
   public static SmsBottomSheetFragment newInstance(@Nullable ArrayList<CharSequence> options) {
     SmsBottomSheetFragment fragment = new SmsBottomSheetFragment();
@@ -80,6 +83,10 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
     LogUtil.i("SmsBottomSheetFragment.onCreateDialog", null);
     Dialog dialog = super.onCreateDialog(savedInstanceState);
     dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+
+    inCallUiLock =
+        FragmentUtils.getParentUnsafe(SmsBottomSheetFragment.this, SmsSheetHolder.class)
+            .acquireInCallUiLock("SmsBottomSheetFragment");
     return dialog;
   }
 
@@ -88,7 +95,7 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
     Context context = new ContextThemeWrapper(getContext(), getTheme());
     TypedArray typedArray = context.obtainStyledAttributes(attrs);
     Drawable background = typedArray.getDrawable(0);
-    //noinspection ResourceType
+    // noinspection ResourceType
     typedArray.recycle();
 
     TextView textView = new TextView(context);
@@ -124,10 +131,13 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
   public void onDismiss(DialogInterface dialogInterface) {
     super.onDismiss(dialogInterface);
     FragmentUtils.getParentUnsafe(this, SmsSheetHolder.class).smsDismissed();
+    inCallUiLock.release();
   }
 
   /** Callback interface for {@link SmsBottomSheetFragment} */
   public interface SmsSheetHolder {
+
+    InCallUiLock acquireInCallUiLock(String tag);
 
     void smsSelected(@Nullable CharSequence text);
 
