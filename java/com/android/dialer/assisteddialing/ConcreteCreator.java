@@ -18,10 +18,12 @@ package com.android.dialer.assisteddialing;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /**
  * A Creator for AssistedDialingMediators.
@@ -31,6 +33,11 @@ import com.android.dialer.common.LogUtil;
  */
 @TargetApi(VERSION_CODES.N)
 public final class ConcreteCreator {
+
+  // Floor set at N due to use of Optional.
+  protected static final int BUILD_CODE_FLOOR = Build.VERSION_CODES.N;
+  // Ceiling set at O because this feature will ship as part of the framework in P.
+  protected static final int BUILD_CODE_CEILING = Build.VERSION_CODES.O;
 
   /**
    * Creates a new AssistedDialingMediator
@@ -42,6 +49,7 @@ public final class ConcreteCreator {
    */
   public static AssistedDialingMediator createNewAssistedDialingMediator(
       @NonNull TelephonyManager telephonyManager, @NonNull Context context) {
+
     if (telephonyManager == null) {
       LogUtil.i(
           "ConcreteCreator.createNewAssistedDialingMediator", "provided TelephonyManager was null");
@@ -51,8 +59,14 @@ public final class ConcreteCreator {
       LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "provided context was null");
       throw new NullPointerException("Provided context was null");
     }
+
+    if ((Build.VERSION.SDK_INT < BUILD_CODE_FLOOR || Build.VERSION.SDK_INT > BUILD_CODE_CEILING)
+        || !ConfigProviderBindings.get(context).getBoolean("assisted_dialing_enabled", false)) {
+      return new AssistedDialingMediatorStub();
+    }
+
     Constraints constraints = new Constraints(context);
-    return new AssistedDialingMediator(
+    return new AssistedDialingMediatorImpl(
         new LocationDetector(telephonyManager), new NumberTransformer(constraints));
   }
 }

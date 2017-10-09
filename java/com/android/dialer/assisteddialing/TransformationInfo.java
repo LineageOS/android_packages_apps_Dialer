@@ -43,15 +43,15 @@ public abstract class TransformationInfo {
   private static final String TRANSFORMED_NUMBER_COUNTRY_CALLING_CODE_KEY =
       "TRANSFORMED_NUMBER_COUNTRY_CALLING_CODE";
 
-  abstract String originalNumber();
+  public abstract String originalNumber();
 
-  abstract String transformedNumber();
+  public abstract String transformedNumber();
 
-  abstract String userHomeCountryCode();
+  public abstract String userHomeCountryCode();
 
-  abstract String userRoamingCountryCode();
+  public abstract String userRoamingCountryCode();
 
-  abstract int transformedNumberCountryCallingCode();
+  public abstract int transformedNumberCountryCallingCode();
 
   public static Builder builder() {
     return new AutoValue_TransformationInfo.Builder();
