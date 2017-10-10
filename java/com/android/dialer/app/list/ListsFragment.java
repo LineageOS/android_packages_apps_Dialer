@@ -35,6 +35,7 @@ import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
+import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.app.voicemail.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.common.LogUtil;
@@ -407,6 +408,16 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
 
   public int getCurrentTabIndex() {
     return mTabIndex;
+  }
+
+  public boolean shouldShowFab() {
+    // If the VVM TOS is visible, don't show the fab
+    if (mCurrentPage instanceof VisualVoicemailCallLogFragment
+        && ((VisualVoicemailCallLogFragment) mCurrentPage).isModalAlertVisible()) {
+      return false;
+    }
+
+    return true;
   }
 
   /**
