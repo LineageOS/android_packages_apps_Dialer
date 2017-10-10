@@ -68,6 +68,11 @@ public class TelephonyManagerCompat {
    */
   public static final String IS_ASSISTED_DIALED = "android.telecom.extra.IS_ASSISTED_DIALED";
 
+  // TODO(erfanian): b/63995261 Replace with the platform/telecom API when available.
+  /** Additional information relating to the assisted dialing transformation. */
+  public static final String ASSISTED_DIALING_EXTRAS =
+      "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
+
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)

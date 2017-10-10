@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.calllog;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -25,6 +26,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.Time;
 import com.android.contacts.common.util.DateUtils;
+import com.android.dialer.calllogutils.CallbackActionHelper;
+import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -71,7 +74,7 @@ public class CallLogGroupBuilder {
    *
    * @see GroupingListAdapter#addGroups(Cursor)
    */
-  public void addGroups(Cursor cursor) {
+  public void addGroups(Cursor cursor, Context context) {
     final int count = cursor.getCount();
     if (count == 0) {
       return;
@@ -90,23 +93,32 @@ public class CallLogGroupBuilder {
     int groupDayGroup = getDayGroup(firstDate, currentTime);
     mGroupCreator.setDayGroup(firstRowId, groupDayGroup);
 
-    // Instantiate the group values to those of the first call in the cursor.
+    // Determine the callback action for the first call in the cursor.
     String groupNumber = cursor.getString(CallLogQuery.NUMBER);
+    String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+    int groupFeatures = cursor.getInt(CallLogQuery.FEATURES);
+    int groupCallbackAction =
+        CallbackActionHelper.getCallbackAction(
+            groupNumber, groupFeatures, groupAccountComponentName, context);
+    mGroupCreator.setCallbackAction(firstRowId, groupCallbackAction);
+
+    // Instantiate other group values to those of the first call in the cursor.
+    String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
     String groupPostDialDigits =
         (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
     String groupViaNumbers =
         (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
     int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
-    String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-    String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
     int groupSize = 1;
 
     String number;
     String numberPostDialDigits;
     String numberViaNumbers;
     int callType;
+    int features;
     String accountComponentName;
     String accountId;
+    int callbackAction;
 
     while (cursor.moveToNext()) {
       // Obtain the values for the current call to group.
@@ -118,21 +130,28 @@ public class CallLogGroupBuilder {
       numberViaNumbers =
           (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
       callType = cursor.getInt(CallLogQuery.CALL_TYPE);
+      features = cursor.getInt(CallLogQuery.FEATURES);
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
+      callbackAction =
+          CallbackActionHelper.getCallbackAction(number, features, accountComponentName, context);
 
       final boolean isSameNumber = equalNumbers(groupNumber, number);
       final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
       final boolean isSameViaNumbers = groupViaNumbers.equals(numberViaNumbers);
       final boolean isSameAccount =
           isSameAccount(groupAccountComponentName, accountComponentName, groupAccountId, accountId);
+      final boolean isSameCallbackAction = (groupCallbackAction == callbackAction);
 
-      // Group with the same number and account. Never group voicemails. Only group blocked
-      // calls with other blocked calls.
+      // Group calls with the following criteria:
+      // (1) Calls with the same number, account, and callback action should be in the same group;
+      // (2) Never group voice mails; and
+      // (3) Only group blocked calls with other blocked calls.
       if (isSameNumber
           && isSameAccount
           && isSamePostDialDigits
           && isSameViaNumbers
+          && isSameCallbackAction
           && areBothNotVoicemail(callType, groupCallType)
           && (areBothNotBlocked(callType, groupCallType)
               || areBothBlocked(callType, groupCallType))) {
@@ -158,10 +177,12 @@ public class CallLogGroupBuilder {
         groupCallType = callType;
         groupAccountComponentName = accountComponentName;
         groupAccountId = accountId;
+        groupCallbackAction = callbackAction;
       }
 
-      // Save the day group associated with the current call.
+      // Save the callback action and the day group associated with the current call.
       final long currentCallId = cursor.getLong(CallLogQuery.ID);
+      mGroupCreator.setCallbackAction(currentCallId, groupCallbackAction);
       mGroupCreator.setDayGroup(currentCallId, groupDayGroup);
     }
 
@@ -259,12 +280,22 @@ public class CallLogGroupBuilder {
     void addGroup(int cursorPosition, int size);
 
     /**
+     * Defines the interface for tracking each call's callback action. Calls in a call group are
+     * associated with the same callback action as the first call in the group. The value of a
+     * callback action should be one of the categories in {@link CallbackAction}.
+     *
+     * @param rowId The row ID of the current call.
+     * @param callbackAction The current call's callback action.
+     */
+    void setCallbackAction(long rowId, @CallbackAction int callbackAction);
+
+    /**
      * Defines the interface for tracking the day group each call belongs to. Calls in a call group
      * are assigned the same day group as the first call in the group. The day group assigns calls
      * to the buckets: Today, Yesterday, Last week, and Other
      *
-     * @param rowId The row Id of the current call.
-     * @param dayGroup The day group the call belongs in.
+     * @param rowId The row ID of the current call.
+     * @param dayGroup The day group the call belongs to.
      */
     void setDayGroup(long rowId, int dayGroup);
 
