@@ -40,6 +40,7 @@ import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallIntentParser;
@@ -83,6 +85,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   private static final String TAG = PhoneNumberInteraction.class.getSimpleName();
   /** The identifier for a permissions request if one is generated. */
   public static final int REQUEST_READ_CONTACTS = 1;
+
   public static final int REQUEST_CALL_PHONE = 2;
 
   @VisibleForTesting
@@ -183,7 +186,10 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         intent =
             new CallIntentBuilder(phoneNumber, callSpecificAppData)
                 .setIsVideoCall(isVideoCall)
-                .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing())
+                .setAllowAssistedDial(
+                    callSpecificAppData.getAllowAssistedDialing(),
+                    ConcreteCreator.createNewAssistedDialingMediator(
+                        context.getSystemService(TelephonyManager.class), context))
                 .build();
         break;
     }

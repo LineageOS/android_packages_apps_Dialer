@@ -64,6 +64,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
@@ -479,8 +480,17 @@ public class CallLogAdapter extends GroupingListAdapter
   @NonNull private final Set<Uri> mHiddenItemUris = new ArraySet<>();
 
   private CallLogListItemViewHolder.OnClickListener mBlockReportSpamListener;
+
   /**
-   * Map, keyed by call Id, used to track the day group for a call. As call log entries are put into
+   * Map, keyed by call ID, used to track the callback action for a call. Calls associated with the
+   * same callback action will be put into the same primary call group in {@link
+   * com.android.dialer.app.calllog.CallLogGroupBuilder}. This information is used to set the
+   * callback icon and trigger the corresponding action.
+   */
+  private final Map<Long, Integer> mCallbackActions = new ArrayMap<>();
+
+  /**
+   * Map, keyed by call ID, used to track the day group for a call. As call log entries are put into
    * the primary call groups in {@link com.android.dialer.app.calllog.CallLogGroupBuilder}, they are
    * also assigned a secondary "day group". This map tracks the day group assigned to all calls in
    * the call log. This information is used to trigger the display of a day group header above the
@@ -491,7 +501,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * previous day group without having to reverse the cursor to the start of the previous day call
    * log entry.
    */
-  private Map<Long, Integer> mDayGroups = new ArrayMap<>();
+  private final Map<Long, Integer> mDayGroups = new ArrayMap<>();
 
   private boolean mLoading = true;
   private ContactsPreferences mContactsPreferences;
@@ -688,7 +698,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
   @Override
   protected void addGroups(Cursor cursor) {
-    mCallLogGroupBuilder.addGroups(cursor);
+    mCallLogGroupBuilder.addGroups(cursor, mActivity);
   }
 
   @Override
@@ -865,10 +875,11 @@ public class CallLogAdapter extends GroupingListAdapter
           protected void onPostExecute(Boolean success) {
             views.isLoaded = true;
             if (success) {
-              int currentGroup = getDayGroupForCall(views.rowId);
-              if (currentGroup != details.previousGroup) {
+              views.callbackAction = getCallbackAction(views.rowId);
+              int currentDayGroup = getDayGroup(views.rowId);
+              if (currentDayGroup != details.previousGroup) {
                 views.dayGroupHeaderVisibility = View.VISIBLE;
-                views.dayGroupHeaderText = getGroupDescription(currentGroup);
+                views.dayGroupHeaderText = getGroupDescription(currentDayGroup);
               } else {
                 views.dayGroupHeaderVisibility = View.GONE;
               }
@@ -1226,7 +1237,7 @@ public class CallLogAdapter extends GroupingListAdapter
       cursor.moveToPosition(startingPosition);
       return CallLogGroupBuilder.DAY_GROUP_NONE;
     }
-    int result = getDayGroupForCall(cursor.getLong(CallLogQuery.ID));
+    int result = getDayGroup(cursor.getLong(CallLogQuery.ID));
     cursor.moveToPosition(startingPosition);
     return result;
   }
@@ -1236,14 +1247,30 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   /**
-   * Given a call Id, look up the day group that the call belongs to. The day group data is
-   * populated in {@link com.android.dialer.app.calllog.CallLogGroupBuilder}.
+   * Given a call ID, look up its callback action. Callback action data are populated in {@link
+   * com.android.dialer.app.calllog.CallLogGroupBuilder}.
    *
-   * @param callId The call to retrieve the day group for.
+   * @param callId The call ID to retrieve the callback action.
+   * @return The callback action for the call.
+   */
+  @MainThread
+  private int getCallbackAction(long callId) {
+    Integer result = mCallbackActions.get(callId);
+    if (result != null) {
+      return result;
+    }
+    return CallbackAction.NONE;
+  }
+
+  /**
+   * Given a call ID, look up the day group the call belongs to. Day group data are populated in
+   * {@link com.android.dialer.app.calllog.CallLogGroupBuilder}.
+   *
+   * @param callId The call ID to retrieve the day group.
    * @return The day group for the call.
    */
   @MainThread
-  private int getDayGroupForCall(long callId) {
+  private int getDayGroup(long callId) {
     Integer result = mDayGroups.get(callId);
     if (result != null) {
       return result;
@@ -1306,17 +1333,27 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   /**
+   * Stores the callback action associated with a call in the call log.
+   *
+   * @param rowId The row ID of the current call.
+   * @param callbackAction The current call's callback action.
+   */
+  @Override
+  @MainThread
+  public void setCallbackAction(long rowId, @CallbackAction int callbackAction) {
+    mCallbackActions.put(rowId, callbackAction);
+  }
+
+  /**
    * Stores the day group associated with a call in the call log.
    *
-   * @param rowId The row Id of the current call.
+   * @param rowId The row ID of the current call.
    * @param dayGroup The day group the call belongs in.
    */
   @Override
   @MainThread
   public void setDayGroup(long rowId, int dayGroup) {
-    if (!mDayGroups.containsKey(rowId)) {
-      mDayGroups.put(rowId, dayGroup);
-    }
+    mDayGroups.put(rowId, dayGroup);
   }
 
   /** Clears the day group associations on re-bind of the call log. */

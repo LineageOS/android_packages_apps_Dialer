@@ -711,6 +711,8 @@ public class StatusBarNotifier
         resId = R.string.notification_incoming_call_wifi_template;
       } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts()) {
         return getMultiSimIncomingText(call);
+      } else if (call.isVideoCall()) {
+        resId = R.string.notification_incoming_video_call;
       } else {
         resId = R.string.notification_incoming_call;
       }
