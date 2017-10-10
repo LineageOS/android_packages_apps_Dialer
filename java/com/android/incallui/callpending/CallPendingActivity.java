@@ -279,6 +279,9 @@ public class CallPendingActivity extends FragmentActivity
           public void showAudioRouteSelector() {}
 
           @Override
+          public void swapSimClicked() {}
+
+          @Override
           public Context getContext() {
             return CallPendingActivity.this;
           }

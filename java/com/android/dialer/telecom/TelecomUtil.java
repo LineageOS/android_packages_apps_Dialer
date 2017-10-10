@@ -17,6 +17,7 @@
 package com.android.dialer.telecom;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,7 +25,9 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.CallLog.Calls;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
@@ -232,6 +235,26 @@ public abstract class TelecomUtil {
 
   public static boolean isDefaultDialer(Context context) {
     return instance.isDefaultDialer(context);
+  }
+
+  /** @return the other SIM based PhoneAccountHandle that is not {@code currentAccount} */
+  @Nullable
+  @RequiresPermission(permission.READ_PHONE_STATE)
+  @SuppressWarnings("MissingPermission")
+  public static PhoneAccountHandle getOtherAccount(
+      @NonNull Context context, @Nullable PhoneAccountHandle currentAccount) {
+    if (currentAccount == null) {
+      return null;
+    }
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    for (PhoneAccountHandle phoneAccountHandle : telecomManager.getCallCapablePhoneAccounts()) {
+      PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
+      if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)
+          && !phoneAccountHandle.equals(currentAccount)) {
+        return phoneAccountHandle;
+      }
+    }
+    return null;
   }
 
   /** Contains an implementation for {@link TelecomUtil} methods */
