@@ -21,10 +21,14 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import java.util.Optional;
 
-/** The core interface for the AssistedDialingMediator. */
-public interface AssistedDialingMediator {
+/** A stub assisted dialing implementation. */
+public final class AssistedDialingMediatorStub implements AssistedDialingMediator {
 
+  /** Always returns an empty Optional. */
+  @Override
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
-  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
+  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform) {
+    return Optional.empty();
+  }
 }

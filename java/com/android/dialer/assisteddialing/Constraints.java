@@ -62,7 +62,7 @@ final class Constraints {
         "GB" /* United Kingdom */,
         "JP" /* Japan */,
         "MX" /* Mexico */,
-        "US" /* United States*/,
+        "US" /* United States */,
       };
 
   private final Set<String> supportedCountryCodes =
@@ -115,7 +115,8 @@ final class Constraints {
         && isUserRoaming(userHomeCountryCode, userRoamingCountryCode)
         && isNotInternationalNumber(parsedPhoneNumber)
         && isNotEmergencyNumber(numberToCheck, context)
-        && isValidNumber(parsedPhoneNumber);
+        && isValidNumber(parsedPhoneNumber)
+        && doesNotHaveExtension(parsedPhoneNumber);
   }
 
   /** Returns a boolean indicating the value equivalence of the provided country codes. */
@@ -165,10 +166,7 @@ final class Constraints {
     }
   }
 
-  /**
-   * Returns a boolean indicating if the provided number and home country code are already
-   * internationally formatted.
-   */
+  /** Returns a boolean indicating if the provided number is already internationally formatted. */
   private boolean isNotInternationalNumber(@NonNull Optional<PhoneNumber> parsedPhoneNumber) {
 
     if (parsedPhoneNumber.get().hasCountryCode()
@@ -176,6 +174,22 @@ final class Constraints {
             != CountryCodeSource.FROM_DEFAULT_COUNTRY) {
       LogUtil.i(
           "Constraints.isNotInternationalNumber", "phone number already provided the country code");
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Returns a boolean indicating if the provided number has an extension.
+   *
+   * <p>Extensions are currently stripped when formatting a number for mobile dialing, so we don't
+   * want to purposefully truncate a number.
+   */
+  private boolean doesNotHaveExtension(@NonNull Optional<PhoneNumber> parsedPhoneNumber) {
+
+    if (parsedPhoneNumber.get().hasExtension()
+        && !TextUtils.isEmpty(parsedPhoneNumber.get().getExtension())) {
+      LogUtil.i("Constraints.doesNotHaveExtension", "phone number has an extension");
       return false;
     }
     return true;
