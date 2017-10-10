@@ -22,6 +22,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Trace;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -34,6 +35,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.ArraySet;
 import android.view.Window;
 import android.view.WindowManager;
 import com.android.contacts.common.compat.CallCompat;
@@ -41,6 +43,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -57,6 +60,7 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
+import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
@@ -1190,18 +1194,6 @@ public class InCallPresenter implements CallList.Listener {
     return true;
   }
 
-  /**
-   * A dialog could have prevented in-call screen from being previously finished. This function
-   * checks to see if there should be any UI left and if not attempts to tear down the UI.
-   */
-  public void onDismissDialog() {
-    LogUtil.i("InCallPresenter.onDismissDialog", "Dialog dismissed");
-    if (mInCallState == InCallState.NO_CALLS) {
-      attemptFinishActivity();
-      attemptCleanup();
-    }
-  }
-
   /** Clears the previous fullscreen state. */
   public void clearFullscreen() {
     mIsFullScreen = false;
@@ -1491,7 +1483,10 @@ public class InCallPresenter implements CallList.Listener {
       mOrientationListeners.clear();
       mInCallEventListeners.clear();
       mInCallUiListeners.clear();
-
+      if (!mInCallUiLocks.isEmpty()) {
+        LogUtil.e("InCallPresenter.attemptCleanup", "held in call locks: " + mInCallUiLocks);
+        mInCallUiLocks.clear();
+      }
       LogUtil.d("InCallPresenter.attemptCleanup", "finished");
     }
   }
@@ -1784,4 +1779,61 @@ public class InCallPresenter implements CallList.Listener {
 
     void onUiShowing(boolean showing);
   }
+
+  private class InCallUiLockImpl implements InCallUiLock {
+    private final String tag;
+
+    private InCallUiLockImpl(String tag) {
+      this.tag = tag;
+    }
+
+    @MainThread
+    @Override
+    public void release() {
+      Assert.isMainThread();
+      releaseInCallUiLock(InCallUiLockImpl.this);
+    }
+
+    @Override
+    public String toString() {
+      return "InCallUiLock[" + tag + "]";
+    }
+  }
+
+  @MainThread
+  public InCallUiLock acquireInCallUiLock(String tag) {
+    Assert.isMainThread();
+    InCallUiLock lock = new InCallUiLockImpl(tag);
+    mInCallUiLocks.add(lock);
+    return lock;
+  }
+
+  @MainThread
+  private void releaseInCallUiLock(InCallUiLock lock) {
+    Assert.isMainThread();
+    LogUtil.i("InCallPresenter.releaseInCallUiLock", "releasing %s", lock);
+    mInCallUiLocks.remove(lock);
+    if (mInCallUiLocks.isEmpty()) {
+      LogUtil.i("InCallPresenter.releaseInCallUiLock", "all locks released");
+      if (mInCallState == InCallState.NO_CALLS) {
+        LogUtil.i("InCallPresenter.releaseInCallUiLock", "no more calls, finishing UI");
+        attemptFinishActivity();
+        attemptCleanup();
+      }
+    }
+  }
+
+  @MainThread
+  public boolean isInCallUiLocked() {
+    Assert.isMainThread();
+    if (mInCallUiLocks.isEmpty()) {
+      return false;
+    }
+    for (InCallUiLock lock : mInCallUiLocks) {
+      LogUtil.i("InCallPresenter.isInCallUiLocked", "still locked by %s", lock);
+    }
+    return true;
+  }
+
+  private final Set<InCallUiLock> mInCallUiLocks = new ArraySet<>();
 }

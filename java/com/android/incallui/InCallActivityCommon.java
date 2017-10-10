@@ -60,6 +60,7 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
+import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
 import java.lang.annotation.Retention;
@@ -337,6 +338,9 @@ public class InCallActivityCommon {
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(false);
+      if (dialog != null) {
+        dialog.dismiss();
+      }
     }
     if (inCallActivity.isFinishing()) {
       InCallPresenter.getInstance().unsetActivity(inCallActivity);
@@ -581,11 +585,13 @@ public class InCallActivityCommon {
     }
 
     this.dialog = dialog;
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("showErrorDialog");
     dialog.setOnDismissListener(
         new OnDismissListener() {
           @Override
           public void onDismiss(DialogInterface dialog) {
             LogUtil.i("InCallActivityCommon.showErrorDialog", "dialog dismissed");
+            lock.release();
             onDialogDismissed();
           }
         });
@@ -596,7 +602,6 @@ public class InCallActivityCommon {
   private void onDialogDismissed() {
     dialog = null;
     CallList.getInstance().onErrorDialogDismissed();
-    InCallPresenter.getInstance().onDismissDialog();
   }
 
   public void enableInCallOrientationEventListener(boolean enable) {
@@ -672,6 +677,7 @@ public class InCallActivityCommon {
         (CheckBox) dialogCheckBoxView.findViewById(R.id.video_call_lte_to_wifi_failed_checkbox);
     wifiHandoverFailureCheckbox.setChecked(false);
 
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("WifiFailedDialog");
     dialog =
         builder
             .setView(dialogCheckBoxView)
@@ -694,6 +700,7 @@ public class InCallActivityCommon {
                     onDialogDismissed();
                   }
                 })
+            .setOnDismissListener((dialog) -> lock.release())
             .create();
 
     LogUtil.i("InCallActivityCommon.showWifiFailedDialog", "as dialog");
