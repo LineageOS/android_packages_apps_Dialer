@@ -602,9 +602,12 @@ public class CallLogFragment extends Fragment
   public void onVisible() {
     LogUtil.enterBlock("CallLogFragment.onPageSelected");
     if (getActivity() != null && getActivity() instanceof HostInterface) {
-      ((HostInterface) getActivity())
-          .enableFloatingButton(mModalAlertManager == null || mModalAlertManager.isEmpty());
+      ((HostInterface) getActivity()).enableFloatingButton(!isModalAlertVisible());
     }
+  }
+
+  public boolean isModalAlertVisible() {
+    return mModalAlertManager != null && !mModalAlertManager.isEmpty();
   }
 
   @CallSuper
