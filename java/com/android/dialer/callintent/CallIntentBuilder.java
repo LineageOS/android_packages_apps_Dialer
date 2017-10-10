@@ -16,21 +16,27 @@
 
 package com.android.dialer.callintent;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
+import com.android.dialer.assisteddialing.AssistedDialingMediator;
+import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.common.Assert;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
+import java.util.Optional;
 
 /** Creates an intent to start a new outgoing call. */
 public class CallIntentBuilder {
@@ -40,6 +46,7 @@ public class CallIntentBuilder {
   private boolean isVideoCall;
   private String callSubject;
   private boolean allowAssistedDial;
+  private AssistedDialingMediator assistedDialingMediator;
 
   private static int lightbringerButtonAppearInExpandedCallLogItemCount = 0;
   private static int lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
@@ -103,7 +110,9 @@ public class CallIntentBuilder {
     return this;
   }
 
-  public CallIntentBuilder setAllowAssistedDial(boolean allowAssistedDial) {
+  public CallIntentBuilder setAllowAssistedDial(
+      boolean allowAssistedDial, @NonNull AssistedDialingMediator assistedDialingMediator) {
+    this.assistedDialingMediator = Assert.isNotNull(assistedDialingMediator);
     this.allowAssistedDial = allowAssistedDial;
     return this;
   }
@@ -115,17 +124,17 @@ public class CallIntentBuilder {
 
   public Intent build() {
     Intent intent = new Intent(Intent.ACTION_CALL, uri);
+    Bundle extras = new Bundle();
+
+    if (allowAssistedDial && this.assistedDialingMediator != null) {
+      intent = buildAssistedDialingParameters(intent, extras);
+    }
     intent.putExtra(
         TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE,
         isVideoCall ? VideoProfile.STATE_BIDIRECTIONAL : VideoProfile.STATE_AUDIO_ONLY);
 
-    Bundle extras = new Bundle();
     extras.putLong(Constants.EXTRA_CALL_CREATED_TIME_MILLIS, SystemClock.elapsedRealtime());
     CallIntentParser.putCallSpecificAppData(extras, callSpecificAppData);
-
-    if (allowAssistedDial) {
-      extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
-    }
 
     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
 
@@ -137,6 +146,26 @@ public class CallIntentBuilder {
       intent.putExtra(TelecomManager.EXTRA_CALL_SUBJECT, callSubject);
     }
 
+    return intent;
+  }
+
+  @SuppressWarnings("AndroidApiChecker") // Use of optional
+  @TargetApi(Build.VERSION_CODES.N)
+  private Intent buildAssistedDialingParameters(Intent intent, Bundle extras) {
+    extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
+    String phoneNumber =
+        uri.getScheme().equals(PhoneAccount.SCHEME_TEL) ? uri.getSchemeSpecificPart() : "";
+    Optional<TransformationInfo> transformedNumber =
+        assistedDialingMediator.attemptAssistedDial(phoneNumber);
+    if (transformedNumber.isPresent()) {
+      Bundle assistedDialingExtras = transformedNumber.get().toBundle();
+      extras.putBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, true);
+      extras.putBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS, assistedDialingExtras);
+      intent =
+          new Intent(
+              Intent.ACTION_CALL,
+              CallUtil.getCallUri(Assert.isNotNull(transformedNumber.get().transformedNumber())));
+    }
     return intent;
   }
 

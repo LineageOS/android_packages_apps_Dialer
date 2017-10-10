@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -38,6 +37,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -66,10 +66,10 @@ import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
-import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -229,6 +229,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private final View.OnLongClickListener longPressListener;
   private boolean mVoicemailPrimaryActionButtonClicked;
 
+  public int callbackAction;
   public int dayGroupHeaderVisibility;
   public CharSequence dayGroupHeaderText;
   public boolean isAttachedToWindow;
@@ -512,25 +513,50 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       } else {
         primaryActionButtonView.setVisibility(View.GONE);
       }
-    } else {
-      // Treat as normal list item; show call button, if possible.
-      if (PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)) {
-        boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
+      return;
+    }
 
-        if (!isVoicemailNumber && showLightbringerPrimaryButton()) {
+    // Treat as normal list item; show call button, if possible.
+    if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)) {
+      primaryActionButtonView.setTag(null);
+      primaryActionButtonView.setVisibility(View.GONE);
+      return;
+    }
+
+    switch (callbackAction) {
+      case CallbackAction.IMS_VIDEO:
+        primaryActionButtonView.setTag(
+            IntentProvider.getReturnVideoCallIntentProvider(number, accountHandle));
+        primaryActionButtonView.setContentDescription(
+            TextUtils.expandTemplate(
+                mContext.getString(R.string.description_video_call_action), validNameOrNumber));
+        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+        primaryActionButtonView.setVisibility(View.VISIBLE);
+        break;
+      case CallbackAction.LIGHTBRINGER:
+        if (showLightbringerPrimaryButton()) {
           CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
           primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
-          primaryActionButtonView.setContentDescription(
-              TextUtils.expandTemplate(
-                  mContext.getString(R.string.description_video_call_action), validNameOrNumber));
-          primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
-          primaryActionButtonView.setVisibility(View.VISIBLE);
-          return;
+        } else {
+          primaryActionButtonView.setTag(
+              IntentProvider.getReturnVideoCallIntentProvider(number, accountHandle));
         }
-
-        if (isVoicemailNumber) {
-          // Call to generic voicemail number, in case there are multiple accounts.
+        primaryActionButtonView.setContentDescription(
+            TextUtils.expandTemplate(
+                mContext.getString(R.string.description_video_call_action), validNameOrNumber));
+        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+        primaryActionButtonView.setVisibility(View.VISIBLE);
+        break;
+      case CallbackAction.VOICE:
+        if (mCallLogCache.isVoicemailNumber(accountHandle, number)) {
+          // Call to generic voicemail number, in case there are multiple accounts
           primaryActionButtonView.setTag(IntentProvider.getReturnVoicemailCallIntentProvider());
+        } else if (this.info != null && this.info.lookupKey != null) {
+          primaryActionButtonView.setTag(
+              IntentProvider.getAssistedDialIntentProvider(
+                  number + postDialDigits,
+                  mContext,
+                  mContext.getSystemService(TelephonyManager.class)));
         } else {
           primaryActionButtonView.setTag(
               IntentProvider.getReturnCallIntentProvider(number + postDialDigits));
@@ -541,10 +567,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 mContext.getString(R.string.description_call_action), validNameOrNumber));
         primaryActionButtonView.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
         primaryActionButtonView.setVisibility(View.VISIBLE);
-      } else {
+        break;
+      default:
         primaryActionButtonView.setTag(null);
         primaryActionButtonView.setVisibility(View.GONE);
-      }
     }
   }
 
@@ -592,8 +618,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
 
     if (canPlaceCallToNumber) {
-      callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-      callTypeOrLocationView.setVisibility(View.GONE);
+      if (this.info != null && this.info.lookupKey != null) {
+        callButtonView.setTag(
+            IntentProvider.getAssistedDialIntentProvider(
+                number, mContext, mContext.getSystemService(TelephonyManager.class)));
+      } else {
+        callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+        callTypeOrLocationView.setVisibility(View.GONE);
+      }
     }
 
     if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -909,15 +941,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
       if (intent == null) {
         return;
-      }
-
-      if (info != null && info.lookupKey != null) {
-        Bundle extras = new Bundle();
-        if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
-          extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
-        }
-        extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
-        intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
       }
 
       // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer

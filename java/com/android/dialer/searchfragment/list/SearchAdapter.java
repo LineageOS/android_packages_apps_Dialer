@@ -21,11 +21,13 @@ import android.content.Intent;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -209,23 +211,32 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
 
   @Override
   public void placeVoiceCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, false);
+    placeCall(phoneNumber, ranking, false, true);
   }
 
   @Override
   public void placeVideoCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, true);
+    placeCall(phoneNumber, ranking, true, false);
   }
 
-  private void placeCall(String phoneNumber, int position, boolean isVideoCall) {
+  private void placeCall(
+      String phoneNumber, int position, boolean isVideoCall, boolean allowAssistedDial) {
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder()
             .setCallInitiationType(callInitiationType)
             .setPositionOfSelectedSearchResult(position)
             .setCharactersInSearchString(query == null ? 0 : query.length())
+            .setAllowAssistedDialing(allowAssistedDial)
             .build();
     Intent intent =
-        new CallIntentBuilder(phoneNumber, callSpecificAppData).setIsVideoCall(isVideoCall).build();
+        new CallIntentBuilder(phoneNumber, callSpecificAppData)
+            .setIsVideoCall(isVideoCall)
+            .setAllowAssistedDial(
+                allowAssistedDial,
+                ConcreteCreator.createNewAssistedDialingMediator(
+                    activity.getSystemService(TelephonyManager.class),
+                    activity.getApplicationContext()))
+            .build();
     DialerUtils.startActivityWithErrorToast(activity, intent);
   }
 

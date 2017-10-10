@@ -65,6 +65,8 @@
   <string name="notification_on_hold">On hold</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
   <string name="notification_incoming_call">Incoming call</string>
+  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_video_call">Incoming video call</string>
   <!-- The "label" of the in-call Notification for an incoming ringing call on a device with multiple SIMs. [CHAR LIMIT=60] -->
   <string name="notification_incoming_call_mutli_sim">Incoming call via <xliff:g id="sim_label" example="SIM 1">%1$s</xliff:g></string>
   <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
