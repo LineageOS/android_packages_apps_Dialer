@@ -624,8 +624,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 number, mContext, mContext.getSystemService(TelephonyManager.class)));
       } else {
         callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-        callTypeOrLocationView.setVisibility(View.GONE);
       }
+      callTypeOrLocationView.setVisibility(View.GONE);
     }
 
     if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
