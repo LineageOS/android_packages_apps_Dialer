@@ -39,7 +39,7 @@ public class EnableWifiCallingPrompt implements DisconnectDialog {
   private static final String ANDROID_SETTINGS_PACKAGE = "com.android.settings";
 
   @Override
-  public boolean shouldShow(DisconnectCause disconnectCause) {
+  public boolean shouldShow(DialerCall call, DisconnectCause disconnectCause) {
     String reason = disconnectCause.getReason();
     if (reason != null && reason.startsWith(REASON_WIFI_ON_BUT_WFC_OFF)) {
       LogUtil.i(

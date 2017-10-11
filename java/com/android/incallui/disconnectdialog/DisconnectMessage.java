@@ -31,7 +31,9 @@ public class DisconnectMessage {
   // Disconnect dialog catalog. Default error dialog MUST be last one.
   private static final DisconnectDialog[] DISCONNECT_DIALOGS =
       new DisconnectDialog[] {
-        new EnableWifiCallingPrompt(), new VideoCallNotAvailablePrompt(), new DefaultErrorDialog()
+        new EnableWifiCallingPrompt(), new VideoCallNotAvailablePrompt(),
+        new UnansweredForwardedDialog(), new RemoteIncomingCallsBarredDialog(),
+        new DefaultErrorDialog()
       };
 
   public final Dialog dialog;
@@ -42,7 +44,7 @@ public class DisconnectMessage {
     cause = call.getDisconnectCause();
 
     for (DisconnectDialog disconnectDialog : DISCONNECT_DIALOGS) {
-      if (disconnectDialog.shouldShow(cause)) {
+      if (disconnectDialog.shouldShow(call, cause)) {
         Pair<Dialog, CharSequence> pair = disconnectDialog.createDialog(context, call);
         dialog = pair.first;
         toastMessage = pair.second;
