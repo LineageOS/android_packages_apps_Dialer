@@ -40,6 +40,10 @@ public class TelephonyManagerCompat {
   public static final String EVENT_CALL_REMOTELY_HELD = "android.telecom.event.CALL_REMOTELY_HELD";
   public static final String EVENT_CALL_REMOTELY_UNHELD =
       "android.telecom.event.CALL_REMOTELY_UNHELD";
+    public static final String EVENT_DIALING_IS_WAITING =
+      "android.telecom.event.DIALING_IS_WAITING";
+  public static final String EVENT_ADDITIONAL_CALL_FORWARDED =
+      "android.telecom.event.ADDITIONAL_CALL_FORWARDED";
 
   public static final String EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC =
       "android.telephony.event.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC";

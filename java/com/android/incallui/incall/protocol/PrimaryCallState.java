@@ -43,6 +43,7 @@ public class PrimaryCallState {
   public final long connectTimeMillis;
   public final boolean isVoiceMailNumber;
   public final boolean isRemotelyHeld;
+  public final boolean isDialingWaitingForRemoteSide;
   public final boolean isBusinessNumber;
 
   // TODO: Convert to autovalue. b/34502119
@@ -67,6 +68,7 @@ public class PrimaryCallState {
         0,
         false /* isVoiceMailNumber */,
         false /* isRemotelyHeld */,
+        false /* isDialingWaitingForRemoteSide */,
         false /* isBusinessNumber */);
   }
 
@@ -90,6 +92,7 @@ public class PrimaryCallState {
       long connectTimeMillis,
       boolean isVoiceMailNumber,
       boolean isRemotelyHeld,
+      boolean isDialingWaitingForRemoteSide,
       boolean isBusinessNumber) {
     this.state = state;
     this.isVideoCall = isVideoCall;
@@ -110,6 +113,7 @@ public class PrimaryCallState {
     this.connectTimeMillis = connectTimeMillis;
     this.isVoiceMailNumber = isVoiceMailNumber;
     this.isRemotelyHeld = isRemotelyHeld;
+    this.isDialingWaitingForRemoteSide = isDialingWaitingForRemoteSide;
     this.isBusinessNumber = isBusinessNumber;
   }
 

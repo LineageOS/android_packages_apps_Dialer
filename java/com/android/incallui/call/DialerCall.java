@@ -154,6 +154,16 @@ public class DialerCall implements VideoTechListener {
   private boolean isRemotelyHeld;
 
   /**
+   * Whether dialing is waiting for the busy remote party
+   */
+  private boolean dialingIsWaiting;
+
+  /**
+   * Whether an additional call was forwarded while this call was active
+   */
+  private boolean additionalCallForwarded;
+
+  /**
    * Indicates whether the phone account associated with this call supports specifying a call
    * subject.
    */
@@ -255,6 +265,12 @@ public class DialerCall implements VideoTechListener {
             case TelephonyManagerCompat.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC:
               notifyInternationalCallOnWifi();
               break;
+            case TelephonyManagerCompat.EVENT_DIALING_IS_WAITING:
+              dialingIsWaiting = true;
+              update();
+            case TelephonyManagerCompat.EVENT_ADDITIONAL_CALL_FORWARDED:
+              additionalCallForwarded = true;
+              update();
             default:
               break;
           }
@@ -753,6 +769,25 @@ public class DialerCall implements VideoTechListener {
 
   public boolean isConferenceCall() {
     return hasProperty(Call.Details.PROPERTY_CONFERENCE);
+  }
+
+  public boolean isForwarded() {
+    return hasProperty(Call.Details.PROPERTY_WAS_FORWARDED)
+        || !TextUtils.isEmpty(getLastForwardedNumber());
+  }
+
+  public boolean isDialingWaitingForRemoteSide() {
+    return mState == State.DIALING && dialingIsWaiting;
+  }
+
+  public boolean wasUnansweredForwarded() {
+    return getDisconnectCause().getCode() == DisconnectCause.MISSED
+        && additionalCallForwarded;
+  }
+
+  public boolean missedBecauseIncomingCallsBarredRemotely() {
+    return getDisconnectCause().getCode() == DisconnectCause.RESTRICTED
+        && hasProperty(Call.Details.PROPERTY_REMOTE_INCOMING_CALLS_BARRED);
   }
 
   @Nullable

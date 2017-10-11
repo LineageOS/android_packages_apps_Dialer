@@ -470,11 +470,12 @@ public class CallCardPresenter
                   isWorkCall,
                   isAttemptingHdAudioCall,
                   isHdAudioCall,
-                  !TextUtils.isEmpty(mPrimary.getLastForwardedNumber()),
+                  mPrimary.isForwarded(),
                   shouldShowContactPhoto,
                   mPrimary.getConnectTimeMillis(),
                   CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
                   mPrimary.isRemotelyHeld(),
+                  mPrimary.isDialingWaitingForRemoteSide(),
                   isBusiness));
 
       InCallActivity activity =
