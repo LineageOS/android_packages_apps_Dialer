@@ -42,6 +42,10 @@ public class TelephonyManagerCompat {
       "android.telecom.event.CALL_REMOTELY_UNHELD";
   public static final String EVENT_MERGE_START = "android.telecom.event.MERGE_START";
   public static final String EVENT_MERGE_COMPLETE = "android.telecom.event.MERGE_COMPLETE";
+  public static final String EVENT_DIALING_IS_WAITING =
+      "android.telecom.event.DIALING_IS_WAITING";
+  public static final String EVENT_ADDITIONAL_CALL_FORWARDED =
+      "android.telecom.event.ADDITIONAL_CALL_FORWARDED";
 
   public static final String EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC =
       "android.telephony.event.EVENT_NOTIFY_INTERNATIONAL_CALL_ON_WFC";
