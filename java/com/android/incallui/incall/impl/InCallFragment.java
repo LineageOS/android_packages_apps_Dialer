@@ -110,7 +110,8 @@ public class InCallFragment extends Fragment
         || id == InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO
         || id == InCallButtonIds.BUTTON_ADD_CALL
         || id == InCallButtonIds.BUTTON_MERGE
-        || id == InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE;
+        || id == InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE
+        || id == InCallButtonIds.BUTTON_SWAP_SIM;
   }
 
   @Override
@@ -198,6 +199,7 @@ public class InCallFragment extends Fragment
     buttonControllers.add(new ButtonController.AddCallButtonController(inCallButtonUiDelegate));
     buttonControllers.add(new ButtonController.SwapButtonController(inCallButtonUiDelegate));
     buttonControllers.add(new ButtonController.MergeButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.SwapSimButtonController(inCallButtonUiDelegate));
     buttonControllers.add(
         new ButtonController.UpgradeToVideoButtonController(inCallButtonUiDelegate));
     buttonControllers.add(
