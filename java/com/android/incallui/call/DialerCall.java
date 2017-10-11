@@ -857,7 +857,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public boolean isVideoCall() {
-    return getVideoTech().isTransmittingOrReceiving();
+    return getVideoTech().isTransmittingOrReceiving() || VideoProfile.isVideo(getVideoState());
   }
 
   public boolean hasReceivedVideoUpgradeRequest() {
