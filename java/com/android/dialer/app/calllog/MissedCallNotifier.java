@@ -18,6 +18,7 @@ package com.android.dialer.app.calllog;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,6 +33,9 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.support.v4.util.Pair;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -57,6 +61,7 @@ import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -112,6 +117,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     CharSequence expandedText; // The text in the notification's line 1 and 2.
 
     List<NewCall> newCalls = callLogNotificationsQueryHelper.getNewMissedCalls();
+
+    removeSelfManagedCalls(newCalls);
 
     if ((newCalls != null && newCalls.isEmpty()) || count == 0) {
       // No calls to notify about: clear the notification.
@@ -232,6 +239,39 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
           DialerNotificationManager.notify(
               context, callTag, NOTIFICATION_ID, getNotificationForCall(call, null));
         }
+      }
+    }
+  }
+
+  /**
+   * Remove self-managed calls from {@code newCalls}. If a {@link PhoneAccount} declared it is
+   * {@link PhoneAccount#CAPABILITY_SELF_MANAGED}, it should handle the in call UI and notifications
+   * itself, but might still write to call log with {@link
+   * PhoneAccount#EXTRA_LOG_SELF_MANAGED_CALLS}.
+   */
+  private void removeSelfManagedCalls(@Nullable List<NewCall> newCalls) {
+    if (newCalls == null) {
+      return;
+    }
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    Iterator<NewCall> iterator = newCalls.iterator();
+    while (iterator.hasNext()) {
+      NewCall call = iterator.next();
+      if (call.accountComponentName == null || call.accountId == null) {
+        continue;
+      }
+      PhoneAccountHandle phoneAccountHandle =
+          new PhoneAccountHandle(
+              ComponentName.unflattenFromString(call.accountComponentName), call.accountId);
+      PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
+      if (phoneAccount == null) {
+        continue;
+      }
+      if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SELF_MANAGED)) {
+        LogUtil.i(
+            "MissedCallNotifier.removeSelfManagedCalls",
+            "ignoring self-managed call " + call.callsUri);
+        iterator.remove();
       }
     }
   }
