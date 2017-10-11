@@ -497,12 +497,21 @@ public class InCallActivityCommon {
     }
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectCause cause) {
+  public void maybeShowErrorDialogOnDisconnect(DialerCall call) {
+    DisconnectCause cause = call.getDisconnectCause();
     LogUtil.i(
         "InCallActivityCommon.maybeShowErrorDialogOnDisconnect", "disconnect cause: %s", cause);
 
     if (!inCallActivity.isFinishing()) {
-      if (EnableWifiCallingPrompt.shouldShowPrompt(cause)) {
+      if (call.wasUnansweredForwarded()) {
+        Pair<Dialog, CharSequence> pair = getDisconnectErrorDialog(inCallActivity,
+                inCallActivity.getString(R.string.callUnanswered_forwarded));
+        showErrorDialog(pair.first, pair.second);
+      } else if (call.missedBecauseIncomingCallsBarredRemotely()) {
+        Pair<Dialog, CharSequence> pair = getDisconnectErrorDialog(inCallActivity,
+                inCallActivity.getString(R.string.callFailed_incoming_cb_enabled));
+        showErrorDialog(pair.first, pair.second);
+      } else if (EnableWifiCallingPrompt.shouldShowPrompt(cause)) {
         Pair<Dialog, CharSequence> pair =
             EnableWifiCallingPrompt.createDialog(inCallActivity, cause);
         showErrorDialog(pair.first, pair.second);

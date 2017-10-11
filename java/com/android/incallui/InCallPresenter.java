@@ -1209,7 +1209,7 @@ public class InCallPresenter implements CallList.Listener {
       if (call.getAccountHandle() == null && !call.isConferenceCall()) {
         setDisconnectCauseForMissingAccounts(call);
       }
-      mInCallActivity.maybeShowErrorDialogOnDisconnect(call.getDisconnectCause());
+      mInCallActivity.maybeShowErrorDialogOnDisconnect(call);
     }
   }
 
