@@ -24,6 +24,8 @@
 
   <string name="incall_content_description_swap_calls">Swap calls</string>
 
+  <string name="incall_content_description_swap_sim">Change SIM</string>
+
   <string name="incall_content_description_merge_calls">Merge calls</string>
 
   <string name="incall_content_description_earpiece">Handset earpiece</string>
