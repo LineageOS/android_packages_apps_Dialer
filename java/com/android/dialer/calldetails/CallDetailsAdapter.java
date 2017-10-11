@@ -23,7 +23,10 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallbackActionListener;
 import com.android.dialer.calllogutils.CallTypeHelper;
+import com.android.dialer.calllogutils.CallbackActionHelper;
+import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.lightbringer.LightbringerComponent;
@@ -37,7 +40,8 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   private static final int FOOTER_VIEW_TYPE = 3;
 
   private final DialerContact contact;
-  private final CallDetailsFooterViewHolder.ReportCallIdListener listener;
+  private final CallbackActionListener callbackActionListener;
+  private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener;
   private final CallTypeHelper callTypeHelper;
   private List<CallDetailsEntry> callDetailsEntries;
 
@@ -45,10 +49,12 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       Context context,
       @NonNull DialerContact contact,
       @NonNull List<CallDetailsEntry> callDetailsEntries,
-      CallDetailsFooterViewHolder.ReportCallIdListener listener) {
+      CallbackActionListener callbackActionListener,
+      CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener) {
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
-    this.listener = listener;
+    this.callbackActionListener = callbackActionListener;
+    this.reportCallIdListener = reportCallIdListener;
     callTypeHelper =
         new CallTypeHelper(
             context.getResources(), LightbringerComponent.get(context).getLightbringer());
@@ -60,13 +66,13 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     switch (viewType) {
       case HEADER_VIEW_TYPE:
         return new CallDetailsHeaderViewHolder(
-            inflater.inflate(R.layout.contact_container, parent, false));
+            inflater.inflate(R.layout.contact_container, parent, false), callbackActionListener);
       case CALL_ENTRY_VIEW_TYPE:
         return new CallDetailsEntryViewHolder(
             inflater.inflate(R.layout.call_details_entry, parent, false));
       case FOOTER_VIEW_TYPE:
         return new CallDetailsFooterViewHolder(
-            inflater.inflate(R.layout.call_details_footer, parent, false), listener);
+            inflater.inflate(R.layout.call_details_footer, parent, false), reportCallIdListener);
       default:
         throw Assert.createIllegalStateFailException(
             "No ViewHolder available for viewType: " + viewType);
@@ -76,7 +82,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     if (position == 0) { // Header
-      ((CallDetailsHeaderViewHolder) holder).updateContactInfo(contact);
+      ((CallDetailsHeaderViewHolder) holder).updateContactInfo(contact, getCallbackAction());
     } else if (position == getItemCount() - 1) {
       ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.getNumber());
     } else {
@@ -109,5 +115,13 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   void updateCallDetailsEntries(List<CallDetailsEntry> entries) {
     callDetailsEntries = entries;
     notifyDataSetChanged();
+  }
+
+  private @CallbackAction int getCallbackAction() {
+    Assert.checkState(!callDetailsEntries.isEmpty());
+
+    CallDetailsEntry entry = callDetailsEntries.get(0);
+    return CallbackActionHelper.getCallbackAction(
+        contact.getNumber(), entry.getFeatures(), entry.getIsLightbringerCall());
   }
 }

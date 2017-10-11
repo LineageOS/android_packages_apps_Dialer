@@ -560,4 +560,21 @@ interface ButtonController {
       inCallScreenDelegate.onSecondaryInfoClicked();
     }
   }
+
+  class SwapSimButtonController extends SimpleNonCheckableButtonController {
+
+    public SwapSimButtonController(InCallButtonUiDelegate delegate) {
+      super(
+          delegate,
+          InCallButtonIds.BUTTON_SWAP_SIM,
+          R.string.incall_content_description_swap_sim,
+          R.string.incall_label_swap_sim,
+          R.drawable.quantum_ic_swap_calls_white_36);
+    }
+
+    @Override
+    public void onClick(View view) {
+      delegate.swapSimClicked();
+    }
+  }
 }
