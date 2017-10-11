@@ -38,12 +38,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
-import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -67,7 +68,6 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.list.PhoneNumberPickerFragment.CursorReranker;
 import com.android.contacts.common.list.PhoneNumberPickerFragment.OnLoadFinishedListener;
-import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.app.calllog.CallLogActivity;
@@ -90,6 +90,7 @@ import com.android.dialer.app.list.SmartDialSearchFragment;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
+import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
@@ -97,7 +98,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -133,6 +134,7 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
+import com.android.dialer.widget.FloatingActionButtonController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -548,7 +550,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
     if (mIsDialpadShown) {
-      mFloatingActionButtonController.setVisible(false);
+      mFloatingActionButtonController.scaleOut();
     } else {
       mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
     }
@@ -857,7 +859,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mFloatingActionButtonController.scaleOut();
       maybeEnterSearchUi();
     } else {
-      mFloatingActionButtonController.setVisible(false);
+      mFloatingActionButtonController.scaleOut();
       maybeEnterSearchUi();
     }
     mActionBarController.onDialpadUp();
@@ -955,7 +957,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       ft.hide(mDialpadFragment);
       ft.commit();
     }
-    mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
+    mFloatingActionButtonController.scaleIn();
   }
 
   private void updateSearchFragmentPosition() {
@@ -1271,12 +1273,28 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     setNotInSearchUi();
 
-    // Restore the FAB for the lists fragment.
-    if (getFabAlignment() != FloatingActionButtonController.ALIGN_END) {
-      mFloatingActionButtonController.setVisible(false);
+    // There are four states the fab can be in:
+    //   - Not visible and should remain not visible (do nothing)
+    //   - Not visible (move then show the fab)
+    //   - Visible, in the correct position (do nothing)
+    //   - Visible, in the wrong position (hide, move, then show the fab)
+    if (mFloatingActionButtonController.isVisible()
+        && getFabAlignment() != FloatingActionButtonController.ALIGN_END) {
+      mFloatingActionButtonController.scaleOut(
+          new OnVisibilityChangedListener() {
+            @Override
+            public void onHidden(FloatingActionButton floatingActionButton) {
+              super.onHidden(floatingActionButton);
+              onPageScrolled(
+                  mListsFragment.getCurrentTabIndex(), 0 /* offset */, 0 /* pixelOffset */);
+              mFloatingActionButtonController.scaleIn();
+            }
+          });
+    } else if (!mFloatingActionButtonController.isVisible() && mListsFragment.shouldShowFab()) {
+      onPageScrolled(mListsFragment.getCurrentTabIndex(), 0 /* offset */, 0 /* pixelOffset */);
+      ThreadUtil.getUiThreadHandler()
+          .postDelayed(() -> mFloatingActionButtonController.scaleIn(), FAB_SCALE_IN_DELAY_MS);
     }
-    mFloatingActionButtonController.scaleIn(FAB_SCALE_IN_DELAY_MS);
-    onPageScrolled(mListsFragment.getCurrentTabIndex(), 0 /* offset */, 0 /* pixelOffset */);
 
     final FragmentTransaction transaction = getFragmentManager().beginTransaction();
     if (mSmartDialSearchFragment != null) {
@@ -1488,13 +1506,14 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     Intent intent =
-        new CallIntentBuilder(phoneNumber, callSpecificAppData).setIsVideoCall(isVideoCall).build();
-
-    if (callSpecificAppData.getAllowAssistedDialing()) {
-      Bundle extras = new Bundle();
-      extras.putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
-      intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
-    }
+        new CallIntentBuilder(phoneNumber, callSpecificAppData)
+            .setIsVideoCall(isVideoCall)
+            .setAllowAssistedDial(
+                callSpecificAppData.getAllowAssistedDialing(),
+                ConcreteCreator.createNewAssistedDialingMediator(
+                    getApplication().getSystemService(TelephonyManager.class),
+                    getApplicationContext()))
+            .build();
 
     DialerUtils.startActivityWithErrorToast(this, intent);
     mClearSearchOnPause = true;
@@ -1526,8 +1545,10 @@ public class DialtactsActivity extends TransactionSafeActivity
   public void onPageSelected(int position) {
     updateMissedCalls();
     int tabIndex = mListsFragment.getCurrentTabIndex();
+    if (tabIndex != mPreviouslySelectedTabIndex) {
+      mFloatingActionButtonController.scaleIn();
+    }
     mPreviouslySelectedTabIndex = tabIndex;
-    mFloatingActionButtonController.setVisible(true);
     timeTabSelected = SystemClock.elapsedRealtime();
   }
 
@@ -1562,7 +1583,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     return mActionBarHeight;
   }
 
-  private int getFabAlignment() {
+  @VisibleForTesting
+  public int getFabAlignment() {
     if (!mIsLandscape
         && !isInSearchUi()
         && mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {

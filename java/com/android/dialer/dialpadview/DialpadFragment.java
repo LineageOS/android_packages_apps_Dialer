@@ -69,7 +69,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.util.StopWatch;
-import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -79,6 +78,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.oem.MotorolaUtils;
@@ -88,6 +88,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.FloatingActionButtonController;
 import java.util.HashSet;
 import java.util.List;
 
@@ -1193,7 +1194,7 @@ public class DialpadFragment extends Fragment
         mOverflowPopupMenu.dismiss();
       }
 
-      mFloatingActionButtonController.setVisible(false);
+      mFloatingActionButtonController.scaleOut();
       mDialpadChooser.setVisibility(View.VISIBLE);
 
       // Instantiate the DialpadChooserAdapter and hook it up to the
@@ -1207,6 +1208,7 @@ public class DialpadFragment extends Fragment
       if (mDialpadView != null) {
         LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView not null");
         mDialpadView.setVisibility(View.VISIBLE);
+        mFloatingActionButtonController.scaleIn();
       } else {
         LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView null");
         mDigits.setVisibility(View.VISIBLE);
@@ -1217,7 +1219,7 @@ public class DialpadFragment extends Fragment
       if (!mFloatingActionButtonController.isVisible()) {
         // Just call 'scaleIn()' method if the mFloatingActionButtonController was not already
         // previously visible.
-        mFloatingActionButtonController.scaleIn(0);
+        mFloatingActionButtonController.scaleIn();
       }
       mDialpadChooser.setVisibility(View.GONE);
     }
@@ -1433,17 +1435,15 @@ public class DialpadFragment extends Fragment
       if (mAnimate) {
         dialpadView.animateShow();
       }
-      mFloatingActionButtonController.setVisible(false);
-      mFloatingActionButtonController.scaleIn(mAnimate ? mDialpadSlideInDuration : 0);
+      ThreadUtil.getUiThreadHandler()
+          .postDelayed(
+              () -> mFloatingActionButtonController.scaleIn(),
+              mAnimate ? mDialpadSlideInDuration : 0);
       FragmentUtils.getParentUnsafe(this, DialpadListener.class).onDialpadShown();
       mDigits.requestFocus();
     }
     if (hidden) {
-      if (mAnimate) {
-        mFloatingActionButtonController.scaleOut();
-      } else {
-        mFloatingActionButtonController.setVisible(false);
-      }
+      mFloatingActionButtonController.scaleOut();
     }
   }
 
