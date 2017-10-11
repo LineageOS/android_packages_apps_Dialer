@@ -528,12 +528,18 @@ public class CallComposerActivity extends AppCompatActivity
 
   @Override
   public void onBackPressed() {
+    LogUtil.enterBlock("CallComposerActivity.onBackPressed");
     if (!isSendAndCallHidingOrHidden) {
       ((CallComposerFragment) adapter.instantiateItem(pager, currentIndex)).clearComposer();
     } else if (!runningExitAnimation) {
       // Unregister first to avoid receiving a callback when the session closes
       getEnrichedCallManager().unregisterStateChangedListener(this);
-      getEnrichedCallManager().endCallComposerSession(sessionId);
+
+      // If the user presses the back button when the session fails, there's a race condition here
+      // since we clean up failed sessions.
+      if (getEnrichedCallManager().getSession(sessionId) != null) {
+        getEnrichedCallManager().endCallComposerSession(sessionId);
+      }
       runExitAnimation();
     }
   }
