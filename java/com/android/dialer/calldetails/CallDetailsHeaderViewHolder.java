@@ -23,23 +23,22 @@ import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.util.DialerUtils;
 
 /** ViewHolder for Header/Contact in {@link CallDetailsActivity}. */
 public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     implements OnClickListener {
 
-  private final View callBackButton;
+  private final CallbackActionListener callbackActionListener;
+  private final ImageView callbackButton;
   private final TextView nameView;
   private final TextView numberView;
   private final TextView networkView;
@@ -47,24 +46,26 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   private final Context context;
 
   private DialerContact contact;
+  private @CallbackAction int callbackAction;
 
-  CallDetailsHeaderViewHolder(View container) {
+  CallDetailsHeaderViewHolder(View container, CallbackActionListener callbackActionListener) {
     super(container);
     context = container.getContext();
-    callBackButton = container.findViewById(R.id.call_back_button);
+    callbackButton = container.findViewById(R.id.call_back_button);
     nameView = container.findViewById(R.id.contact_name);
     numberView = container.findViewById(R.id.phone_number);
     networkView = container.findViewById(R.id.network);
     contactPhoto = container.findViewById(R.id.quick_contact_photo);
 
-    callBackButton.setOnClickListener(this);
+    callbackButton.setOnClickListener(this);
+    this.callbackActionListener = callbackActionListener;
     Logger.get(context)
         .logQuickContactOnTouch(
             contactPhoto, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_DETAILS, true);
   }
 
   /** Populates the contact info fields based on the current contact information. */
-  void updateContactInfo(DialerContact contact) {
+  void updateContactInfo(DialerContact contact, @CallbackAction int callbackAction) {
     this.contact = contact;
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
@@ -99,23 +100,61 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
       }
     }
 
-    if (TextUtils.isEmpty(contact.getNumber())) {
-      callBackButton.setVisibility(View.GONE);
+    setCallbackAction(callbackAction);
+  }
+
+  private void setCallbackAction(@CallbackAction int callbackAction) {
+    this.callbackAction = callbackAction;
+    switch (callbackAction) {
+      case CallbackAction.LIGHTBRINGER:
+      case CallbackAction.IMS_VIDEO:
+        callbackButton.setVisibility(View.VISIBLE);
+        callbackButton.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+        break;
+      case CallbackAction.VOICE:
+        callbackButton.setVisibility(View.VISIBLE);
+        callbackButton.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
+        break;
+      case CallbackAction.NONE:
+        callbackButton.setVisibility(View.GONE);
+        break;
+      default:
+        throw Assert.createIllegalStateFailException("Invalid action: " + callbackAction);
     }
   }
 
   @Override
   public void onClick(View view) {
-    if (view == callBackButton) {
-      Logger.get(view.getContext()).logImpression(DialerImpression.Type.CALL_DETAILS_CALL_BACK);
-      DialerUtils.startActivityWithErrorToast(
-          view.getContext(),
-          new CallIntentBuilder(
-                  contact.getNumber() + contact.getPostDialDigits(),
-                  CallInitiationType.Type.CALL_DETAILS)
-              .build());
+    if (view == callbackButton) {
+      switch (callbackAction) {
+        case CallbackAction.IMS_VIDEO:
+          callbackActionListener.placeImsVideoCall(contact.getNumber());
+          break;
+        case CallbackAction.LIGHTBRINGER:
+          callbackActionListener.placeLightbringerCall(contact.getNumber());
+          break;
+        case CallbackAction.VOICE:
+          callbackActionListener.placeVoiceCall(contact.getNumber(), contact.getPostDialDigits());
+          break;
+        case CallbackAction.NONE:
+        default:
+          throw Assert.createIllegalStateFailException("Invalid action: " + callbackAction);
+      }
     } else {
       throw Assert.createIllegalStateFailException("View OnClickListener not implemented: " + view);
     }
+  }
+
+  /** Listener for making a callback */
+  interface CallbackActionListener {
+
+    /** Places an IMS video call. */
+    void placeImsVideoCall(String phoneNumber);
+
+    /** Places a Lightbringer call. */
+    void placeLightbringerCall(String phoneNumber);
+
+    /** Place a traditional voice call. */
+    void placeVoiceCall(String phoneNumber, String postDialDigits);
   }
 }
