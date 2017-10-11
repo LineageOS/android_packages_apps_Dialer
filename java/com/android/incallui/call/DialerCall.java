@@ -42,6 +42,7 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -1034,6 +1035,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       return getIntentExtras().getBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, false);
     }
     return false;
+  }
+
+  public TransformationInfo getAssistedDialingExtras() {
+    if (isAssistedDialed()) {
+      return TransformationInfo.newInstanceFromBundle(
+          getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
+    }
+    return null;
   }
 
   public LatencyReport getLatencyReport() {

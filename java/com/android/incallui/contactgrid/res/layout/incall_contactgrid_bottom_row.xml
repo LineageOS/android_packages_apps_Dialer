@@ -31,10 +31,6 @@
       style="@style/BottomRowIcon"
       android:visibility="gone"/>
   <ImageView
-      android:id="@+id/contactgrid_assistedDialingIcon"
-      style="@style/BottomRowIcon"
-      android:src="@drawable/quantum_ic_language_vd_theme_24"/>
-  <ImageView
       android:id="@id/contactgrid_forwardIcon"
       style="@style/BottomRowIcon"
       android:src="@drawable/quantum_ic_forward_vd_theme_24"/>

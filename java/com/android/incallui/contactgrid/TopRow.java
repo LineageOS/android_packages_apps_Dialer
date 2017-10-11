@@ -173,6 +173,15 @@ public class TopRow {
           return context.getString(R.string.incall_video_call_requesting);
         }
       }
+
+      if (state.isAssistedDialed) {
+        String countryCode =
+            String.valueOf(state.assistedDialingExtras.transformedNumberCountryCallingCode());
+        return context.getString(
+            R.string.incall_connecting_assited_dialed,
+            countryCode,
+            state.assistedDialingExtras.userHomeCountryCode());
+      }
       return context.getString(R.string.incall_connecting);
     }
   }
