@@ -22,11 +22,14 @@ import android.os.Trace;
 import android.support.v4.app.Fragment;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
+import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.incallui.InCallCameraManager.Listener;
 import com.android.incallui.InCallPresenter.CanAddCallListener;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -42,6 +45,7 @@ import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
+import com.android.incallui.multisim.SwapSimWorker;
 import com.android.incallui.videotech.utils.VideoUtils;
 
 /** Logic for call buttons. */
@@ -63,6 +67,7 @@ public class CallButtonPresenter
   private boolean mAutomaticallyMuted = false;
   private boolean mPreviousMuteState = false;
   private boolean isInCallButtonUiReady;
+  private PhoneAccountHandle mOtherAccount;
 
   public CallButtonPresenter(Context context) {
     mContext = context.getApplicationContext();
@@ -310,6 +315,23 @@ public class CallButtonPresenter
     mInCallButtonUi.showAudioRouteSelector();
   }
 
+  @Override
+  public void swapSimClicked() {
+    LogUtil.enterBlock("CallButtonPresenter.swapSimClicked");
+    SwapSimWorker worker =
+        new SwapSimWorker(
+            getContext(),
+            mCall,
+            InCallPresenter.getInstance().getCallList(),
+            mOtherAccount,
+            InCallPresenter.getInstance().acquireInCallUiLock("swapSim"));
+    DialerExecutorComponent.get(getContext())
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(worker)
+        .build()
+        .executeParallel(null);
+  }
+
   /**
    * Switches the camera between the front-facing and back-facing camera.
    *
@@ -409,6 +431,7 @@ public class CallButtonPresenter
    *
    * @param call The active call.
    */
+  @SuppressWarnings("MissingPermission")
   private void updateButtonsState(DialerCall call) {
     LogUtil.v("CallButtonPresenter.updateButtonsState", "");
     final boolean isVideo = call.isVideoCall();
@@ -439,11 +462,15 @@ public class CallButtonPresenter
             && call.getState() != DialerCall.State.DIALING
             && call.getState() != DialerCall.State.CONNECTING;
 
+    mOtherAccount = TelecomUtil.getOtherAccount(getContext(), call.getAccountHandle());
+    boolean showSwapSim = mOtherAccount != null && DialerCall.State.isDialing(call.getState());
+
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP, showSwap);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_HOLD, showHold);
     mInCallButtonUi.setHold(isCallOnHold);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_MUTE, showMute);
+    mInCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP_SIM, showSwapSim);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_ADD_CALL, true);
     mInCallButtonUi.enableButton(InCallButtonIds.BUTTON_ADD_CALL, showAddCall);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
@@ -532,4 +559,5 @@ public class CallButtonPresenter
     }
     return null;
   }
+
 }
