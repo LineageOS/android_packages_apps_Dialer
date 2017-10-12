@@ -119,6 +119,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-zxing-target \
 	jsr305 \
 	libbackup \
+	legacy-test \
 	libphonenumber \
 	volley \
 
@@ -169,11 +170,11 @@ endif
 
 # End Bug: 37077388
 
-LOCAL_SDK_VERSION := system_current
 LOCAL_MODULE_TAGS := optional
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_USE_AAPT2 := true
 
 # b/37483961 - Jack Not Compiling Dagger Class Properly
