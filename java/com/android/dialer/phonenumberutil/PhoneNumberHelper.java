@@ -17,6 +17,7 @@
 package com.android.dialer.phonenumberutil;
 
 import android.content.Context;
+import android.os.Trace;
 import android.provider.CallLog;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
@@ -113,6 +114,7 @@ public class PhoneNumberHelper {
    */
   public static String getCurrentCountryIso(
       Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
+    Trace.beginSection("PhoneNumberHelper.getCurrentCountryIso");
     // Without framework function calls, this seems to be the most accurate location service
     // we can rely on.
     String countryIso =
@@ -125,6 +127,7 @@ public class PhoneNumberHelper {
           "No CountryDetector; falling back to countryIso based on locale: " + countryIso);
     }
     countryIso = countryIso.toUpperCase();
+    Trace.endSection();
 
     return countryIso;
   }

@@ -22,6 +22,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.PowerManager;
+import android.os.Trace;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityManager;
 
@@ -130,11 +131,17 @@ public class FalsingManager implements SensorEventListener {
   }
 
   private void registerSensors(int[] sensors) {
+    Trace.beginSection("FalsingManager.registerSensors");
     for (int sensorType : sensors) {
+      Trace.beginSection("get sensor " + sensorType);
       Sensor s = mSensorManager.getDefaultSensor(sensorType);
+      Trace.endSection();
       if (s != null) {
+        Trace.beginSection("register");
         mSensorManager.registerListener(this, s, SensorManager.SENSOR_DELAY_GAME);
+        Trace.endSection();
       }
     }
+    Trace.endSection();
   }
 }

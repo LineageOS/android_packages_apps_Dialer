@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.PowerManager;
+import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.telecom.CallAudioState;
 import android.view.Display;
@@ -206,6 +207,7 @@ public class ProximitySensor
    * request for, or is in a video call; or the phone is horizontal while in a call.
    */
   private synchronized void updateProximitySensorMode() {
+    Trace.beginSection("ProximitySensor.updateProximitySensorMode");
     final int audioRoute = mAudioModeProvider.getAudioState().getRoute();
 
     boolean screenOnImmediately =
@@ -249,6 +251,7 @@ public class ProximitySensor
       // behavior in either case.
       turnOffProximitySensor(screenOnImmediately);
     }
+    Trace.endSection();
   }
 
   /**

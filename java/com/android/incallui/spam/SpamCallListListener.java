@@ -150,7 +150,7 @@ public class SpamCallListListener implements CallList.Listener {
     }
 
     NumberInCallHistoryWorker historyTask =
-        new NumberInCallHistoryWorker(context, number, GeoUtil.getCurrentCountryIso(context));
+        new NumberInCallHistoryWorker(context, number, call.getCountryIso());
     dialerExecutorFactory
         .createNonUiTaskBuilder(historyTask)
         .onSuccess((result) -> call.setCallHistoryStatus(result))

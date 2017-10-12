@@ -16,6 +16,7 @@
 
 package com.android.incallui.call;
 
+import android.Manifest.permission;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
@@ -42,6 +43,7 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -57,11 +59,14 @@ import com.android.dialer.enrichedcall.EnrichedCallManager.Filter;
 import com.android.dialer.enrichedcall.EnrichedCallManager.StateChangedListener;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactLookupResult.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
@@ -157,6 +162,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   private com.android.dialer.logging.VideoTech.Type selectedAvailableVideoTechType =
       com.android.dialer.logging.VideoTech.Type.NONE;
+  private boolean isVoicemailNumber;
+  private List<PhoneAccountHandle> callCapableAccounts;
+  private String countryIso;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -449,6 +457,30 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return mLogState.conferencedCalls != 0;
   }
 
+  public boolean isVoiceMailNumber() {
+    return isVoicemailNumber;
+  }
+
+  public List<PhoneAccountHandle> getCallCapableAccounts() {
+    return callCapableAccounts;
+  }
+
+  public String getCountryIso() {
+    return countryIso;
+  }
+
+  private void updateIsVoiceMailNumber() {
+    if (getHandle() != null && PhoneAccount.SCHEME_VOICEMAIL.equals(getHandle().getScheme())) {
+      isVoicemailNumber = true;
+    }
+
+    if (!PermissionsUtil.hasPermission(mContext, permission.READ_PHONE_STATE)) {
+      isVoicemailNumber = false;
+    }
+
+    isVoicemailNumber = TelecomUtil.isVoicemailNumber(mContext, getAccountHandle(), getNumber());
+  }
+
   private void update() {
     Trace.beginSection("DialerCall.update");
     int oldState = getState();
@@ -474,6 +506,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     Trace.endSection();
   }
 
+  @SuppressWarnings("MissingPermission")
   private void updateFromTelecomCall() {
     Trace.beginSection("DialerCall.updateFromTelecomCall");
     LogUtil.v("DialerCall.updateFromTelecomCall", mTelecomCall.toString());
@@ -509,6 +542,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       updateEmergencyCallState();
     }
 
+    TelecomManager telecomManager = mContext.getSystemService(TelecomManager.class);
     // If the phone account handle of the call is set, cache capability bit indicating whether
     // the phone account supports call subjects.
     PhoneAccountHandle newPhoneAccountHandle = mTelecomCall.getDetails().getAccountHandle();
@@ -516,13 +550,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       mPhoneAccountHandle = newPhoneAccountHandle;
 
       if (mPhoneAccountHandle != null) {
-        PhoneAccount phoneAccount =
-            mContext.getSystemService(TelecomManager.class).getPhoneAccount(mPhoneAccountHandle);
+        PhoneAccount phoneAccount = telecomManager.getPhoneAccount(mPhoneAccountHandle);
         if (phoneAccount != null) {
           mIsCallSubjectSupported =
               phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_CALL_SUBJECT);
         }
       }
+    }
+    if (PermissionsUtil.hasPermission(mContext, permission.READ_PHONE_STATE)) {
+      updateIsVoiceMailNumber();
+      callCapableAccounts = telecomManager.getCallCapablePhoneAccounts();
+      countryIso = GeoUtil.getCurrentCountryIso(mContext);
     }
     Trace.endSection();
   }
@@ -856,7 +894,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public boolean isVideoCall() {
-    return getVideoTech().isTransmittingOrReceiving();
+    return getVideoTech().isTransmittingOrReceiving() || VideoProfile.isVideo(getVideoState());
   }
 
   public boolean hasReceivedVideoUpgradeRequest() {
@@ -1036,6 +1074,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return false;
   }
 
+  public TransformationInfo getAssistedDialingExtras() {
+    if (isAssistedDialed()) {
+      return TransformationInfo.newInstanceFromBundle(
+          getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
+    }
+    return null;
+  }
+
   public LatencyReport getLatencyReport() {
     return mLatencyReport;
   }
@@ -1139,9 +1185,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (callProviderLabel == null) {
       PhoneAccount account = getPhoneAccount();
       if (account != null && !TextUtils.isEmpty(account.getLabel())) {
-        List<PhoneAccountHandle> accounts =
-            mContext.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts();
-        if (accounts != null && accounts.size() > 1) {
+        if (callCapableAccounts != null && callCapableAccounts.size() > 1) {
           callProviderLabel = account.getLabel().toString();
         }
       }
@@ -1211,9 +1255,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   @Override
   public void onSessionModificationStateChanged() {
+    Trace.beginSection("DialerCall.onSessionModificationStateChanged");
     for (DialerCallListener listener : mListeners) {
       listener.onDialerCallSessionModificationStateChange();
     }
+    Trace.endSection();
   }
 
   @Override
