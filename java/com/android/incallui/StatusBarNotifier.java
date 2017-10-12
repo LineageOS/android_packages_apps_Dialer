@@ -541,6 +541,18 @@ public class StatusBarNotifier
             || !Objects.equals(mRingtone, ringtone)
             || !Objects.equals(savedCallAudioState, callAudioState);
 
+    LogUtil.d(
+        "StatusBarNotifier.checkForChangeAndSaveData",
+        "data changed: icon: %b, content: %b, state: %b, largeIcon: %b, title: %b, ringtone: %b, "
+            + "audioState: %b, type: %b",
+        (mSavedIcon != icon),
+        !Objects.equals(mSavedContent, content),
+        (mCallState != state),
+        largeIconChanged,
+        contentTitleChanged,
+        !Objects.equals(mRingtone, ringtone),
+        !Objects.equals(savedCallAudioState, callAudioState),
+        mCurrentNotification != notificationType);
     // If we aren't showing a notification right now or the notification type is changing,
     // definitely do an update.
     if (mCurrentNotification != notificationType) {
@@ -614,7 +626,7 @@ public class StatusBarNotifier
       @ContactType
       int contactType =
           LetterTileDrawable.getContactTypeFromPrimitives(
-              CallerInfoUtils.isVoiceMailNumber(context, call),
+              call.isVoiceMailNumber(),
               call.isSpam(),
               contactInfo.isBusiness,
               call.getNumberPresentation(),
@@ -709,7 +721,7 @@ public class StatusBarNotifier
         resId = getECIncomingCallText(call.getEnrichedCallSession());
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
         resId = R.string.notification_incoming_call_wifi_template;
-      } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts()) {
+      } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts(call)) {
         return getMultiSimIncomingText(call);
       } else if (call.isVideoCall()) {
         resId = R.string.notification_incoming_video_call;
@@ -1043,9 +1055,11 @@ public class StatusBarNotifier
     mStatusBarCallListener = listener;
   }
 
-  @SuppressWarnings("MissingPermission")
-  private boolean hasMultiplePhoneAccounts() {
-    return mContext.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts().size() > 1;
+  private boolean hasMultiplePhoneAccounts(DialerCall call) {
+    if (call.getCallCapableAccounts() == null) {
+      return false;
+    }
+    return call.getCallCapableAccounts().size() > 1;
   }
 
   @Override

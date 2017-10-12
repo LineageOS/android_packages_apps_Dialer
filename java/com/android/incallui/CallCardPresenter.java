@@ -478,7 +478,7 @@ public class CallCardPresenter
                   !TextUtils.isEmpty(mPrimary.getLastForwardedNumber()),
                   shouldShowContactPhoto,
                   mPrimary.getConnectTimeMillis(),
-                  CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
+                  mPrimary.isVoiceMailNumber(),
                   mPrimary.isRemotelyHeld(),
                   isBusiness,
                   supports2ndCallOnHold(),

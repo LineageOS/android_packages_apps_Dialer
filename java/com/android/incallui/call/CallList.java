@@ -34,7 +34,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
@@ -139,7 +138,7 @@ public class CallList implements DialerCallDelegate {
       Spam.get(context)
           .checkSpamStatus(
               number,
-              null,
+              call.getCountryIso(),
               new SpamBindings.Listener() {
                 @Override
                 public void onComplete(boolean isSpam) {
@@ -196,7 +195,7 @@ public class CallList implements DialerCallDelegate {
           }
         },
         call.getNumber(),
-        GeoUtil.getCurrentCountryIso(context));
+        call.getCountryIso());
     Trace.endSection();
 
     if (call.getState() == DialerCall.State.INCOMING
@@ -257,7 +256,7 @@ public class CallList implements DialerCallDelegate {
     Spam.get(context)
         .checkUserMarkedNonSpamStatus(
             number,
-            null,
+            call.getCountryIso(),
             new SpamBindings.Listener() {
               @Override
               public void onComplete(boolean isInUserWhiteList) {
@@ -268,7 +267,7 @@ public class CallList implements DialerCallDelegate {
     Spam.get(context)
         .checkGlobalSpamListStatus(
             number,
-            null,
+            call.getCountryIso(),
             new SpamBindings.Listener() {
               @Override
               public void onComplete(boolean isInGlobalSpamList) {
@@ -279,7 +278,7 @@ public class CallList implements DialerCallDelegate {
     Spam.get(context)
         .checkUserMarkedSpamStatus(
             number,
-            null,
+            call.getCountryIso(),
             new SpamBindings.Listener() {
               @Override
               public void onComplete(boolean isInUserSpamList) {
@@ -626,9 +625,11 @@ public class CallList implements DialerCallDelegate {
    * listeners to call back to determine what changed.
    */
   private void notifyGenericListeners() {
+    Trace.beginSection("CallList.notifyGenericListeners");
     for (Listener listener : mListeners) {
       listener.onCallListChange(this);
     }
+    Trace.endSection();
   }
 
   private void notifyListenersOfDisconnect(DialerCall call) {
