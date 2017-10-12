@@ -20,11 +20,13 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -131,11 +133,19 @@ public class Coalescer {
   private static boolean rowsShouldBeCombined(
       DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
     // Don't combine rows which don't use the same phone account.
-    if (!Objects.equals(
-        row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL),
-        row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL))) {
+    PhoneAccountHandle phoneAccount1 =
+        PhoneAccountUtils.getAccount(
+            row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
+            row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
+    PhoneAccountHandle phoneAccount2 =
+        PhoneAccountUtils.getAccount(
+            row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
+            row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
+
+    if (!Objects.equals(phoneAccount1, phoneAccount2)) {
       return false;
     }
+
     DialerPhoneNumber number1;
     DialerPhoneNumber number2;
     try {
@@ -153,13 +163,8 @@ public class Coalescer {
       throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
     }
 
-    if (!number1.hasDialerInternalPhoneNumber() && !number2.hasDialerInternalPhoneNumber()) {
-      // Empty numbers should not be combined.
-      return false;
-    }
-
     if (!number1.hasDialerInternalPhoneNumber() || !number2.hasDialerInternalPhoneNumber()) {
-      // An empty number should not be combined with a non-empty number.
+      // An empty number should not be combined with any other number.
       return false;
     }
     return dialerPhoneNumberUtil.isExactMatch(number1, number2);

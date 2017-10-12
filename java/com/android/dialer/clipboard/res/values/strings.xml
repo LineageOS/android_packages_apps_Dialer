@@ -17,10 +17,7 @@
 
 <resources>
 
-  <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_today">Today</string>
-
-  <!-- Header in call log to group calls from before the current day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_older">Older</string>
+  <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
+  <string name="toast_text_copied">Text copied</string>
 
 </resources>

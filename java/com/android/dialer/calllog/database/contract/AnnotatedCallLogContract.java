@@ -52,6 +52,15 @@ public class AnnotatedCallLogContract {
     String NAME = "name";
 
     /**
+     * The phone number called or number the call came from, encoded as a {@link
+     * com.android.dialer.DialerPhoneNumber} proto. The number may be empty if it was an incoming
+     * call and the number was unknown.
+     *
+     * <p>Type: BLOB
+     */
+    String NUMBER = "number";
+
+    /**
      * Copied from {@link android.provider.CallLog.Calls#CACHED_FORMATTED_NUMBER}.
      *
      * <p>Type: TEXT
@@ -112,6 +121,20 @@ public class AnnotatedCallLogContract {
     String GEOCODED_LOCATION = "geocoded_location";
 
     /**
+     * See {@link android.provider.CallLog.Calls#PHONE_ACCOUNT_COMPONENT_NAME}.
+     *
+     * <p>TYPE: TEXT
+     */
+    String PHONE_ACCOUNT_COMPONENT_NAME = "phone_account_component_name";
+
+    /**
+     * See {@link android.provider.CallLog.Calls#PHONE_ACCOUNT_ID}.
+     *
+     * <p>TYPE: TEXT
+     */
+    String PHONE_ACCOUNT_ID = "phone_account_id";
+
+    /**
      * String suitable for display which indicates the phone account used to make the call.
      *
      * <p>TYPE: TEXT
@@ -160,6 +183,7 @@ public class AnnotatedCallLogContract {
           _ID,
           TIMESTAMP,
           NAME,
+          NUMBER,
           FORMATTED_NUMBER,
           PHOTO_URI,
           PHOTO_ID,
@@ -168,6 +192,8 @@ public class AnnotatedCallLogContract {
           IS_READ,
           NEW,
           GEOCODED_LOCATION,
+          PHONE_ACCOUNT_COMPONENT_NAME,
+          PHONE_ACCOUNT_ID,
           PHONE_ACCOUNT_LABEL,
           PHONE_ACCOUNT_COLOR,
           FEATURES,
@@ -192,18 +218,6 @@ public class AnnotatedCallLogContract {
 
     /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
-
-    /**
-     * The phone number called or number the call came from, encoded as a {@link
-     * com.android.dialer.DialerPhoneNumber} proto. The number may be empty if it was an incoming
-     * call and the number was unknown.
-     *
-     * <p>This column is only present in the annotated call log, and not the coalesced annotated
-     * call log. The coalesced version uses a formatted number string rather than proto bytes.
-     *
-     * <p>Type: BLOB
-     */
-    public static final String NUMBER = "number";
   }
 
   /**

@@ -22,7 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.contacts.common.ClipboardUtils;
+import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
