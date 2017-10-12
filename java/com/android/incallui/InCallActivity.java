@@ -95,6 +95,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean touchDownWhenPseudoScreenOff;
   private boolean isInShowMainInCallFragment;
   private boolean needDismissPendingDialogs;
+  private boolean allowOrientationChange;
 
   public InCallActivity() {
     common = new InCallActivityCommon(this);
@@ -161,7 +162,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onStart() {
     Trace.beginSection("InCallActivity.onStart");
     LogUtil.i("InCallActivity.onStart", "");
+    Trace.beginSection("call super");
     super.onStart();
+    Trace.endSection();
     isVisible = true;
     showMainInCallFragment();
     common.onStart();
@@ -514,6 +517,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void setAllowOrientationChange(boolean allowOrientationChange) {
+    if (this.allowOrientationChange == allowOrientationChange) {
+      return;
+    }
+    this.allowOrientationChange = allowOrientationChange;
     if (!allowOrientationChange) {
       setRequestedOrientation(InCallOrientationEventListener.ACTIVITY_PREFERENCE_DISALLOW_ROTATION);
     } else {

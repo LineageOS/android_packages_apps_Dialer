@@ -41,7 +41,9 @@ public class InCallServiceImpl extends InCallService {
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
+    Trace.beginSection("InCallServiceImpl.onCallAudioStateChanged");
     AudioModeProvider.getInstance().onAudioStateChanged(audioState);
+    Trace.endSection();
   }
 
   @Override

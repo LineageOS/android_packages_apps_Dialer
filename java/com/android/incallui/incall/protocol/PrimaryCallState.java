@@ -21,6 +21,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.telecom.DisconnectCause;
 import android.text.TextUtils;
+import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.common.Assert;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
@@ -68,6 +69,7 @@ public class PrimaryCallState {
   public final @ButtonState int swapToSecondaryButtonState;
   public final boolean isAssistedDialed;
   @Nullable public final String customLabel;
+  @Nullable public final TransformationInfo assistedDialingExtras;
 
   // TODO: Convert to autovalue. b/34502119
   public static PrimaryCallState createEmptyPrimaryCallState() {
@@ -100,7 +102,8 @@ public class PrimaryCallState {
         true /* supportsCallOnHold */,
         ButtonState.NOT_SUPPORT /* swapToSecondaryButtonState */,
         false /* isAssistedDialed */,
-        customLabel);
+        customLabel,
+        null /* assistedDialingExtras */);
   }
 
   public PrimaryCallState(
@@ -127,7 +130,8 @@ public class PrimaryCallState {
       boolean supportsCallOnHold,
       @ButtonState int swapToSecondaryButtonState,
       boolean isAssistedDialed,
-      @Nullable String customLabel) {
+      @Nullable String customLabel,
+      @Nullable TransformationInfo assistedDialingExtras) {
     this.state = state;
     this.isVideoCall = isVideoCall;
     this.sessionModificationState = sessionModificationState;
@@ -155,6 +159,7 @@ public class PrimaryCallState {
       Assert.checkArgument(state == State.CALL_PENDING);
     }
     this.customLabel = customLabel;
+    this.assistedDialingExtras = assistedDialingExtras;
   }
 
   @Override

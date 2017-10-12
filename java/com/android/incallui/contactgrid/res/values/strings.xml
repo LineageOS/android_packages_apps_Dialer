@@ -24,6 +24,9 @@
        in the connecting stage. -->
   <string name="incall_connecting">Calling…</string>
 
+  <!-- Display information related to assisted dialing, for example Calling using +1 (US)… -->
+  <string name="incall_connecting_assited_dialed">Calling using +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+
   <!-- Displayed above the contact name when an external call is being pulled to the local
        device. -->
   <string name="incall_transferring">Transferring…</string>

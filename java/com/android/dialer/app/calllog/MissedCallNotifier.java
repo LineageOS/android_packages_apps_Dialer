@@ -260,9 +260,11 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       if (call.accountComponentName == null || call.accountId == null) {
         continue;
       }
-      PhoneAccountHandle phoneAccountHandle =
-          new PhoneAccountHandle(
-              ComponentName.unflattenFromString(call.accountComponentName), call.accountId);
+      ComponentName componentName = ComponentName.unflattenFromString(call.accountComponentName);
+      if (componentName == null) {
+        continue;
+      }
+      PhoneAccountHandle phoneAccountHandle = new PhoneAccountHandle(componentName, call.accountId);
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
       if (phoneAccount == null) {
         continue;
