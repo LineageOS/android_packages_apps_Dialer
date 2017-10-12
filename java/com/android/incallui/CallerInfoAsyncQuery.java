@@ -29,6 +29,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Trace;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Directory;
 import android.support.annotation.MainThread;
@@ -191,9 +192,11 @@ public class CallerInfoAsyncQuery {
       CallerInfo info,
       OnQueryCompleteListener listener,
       Object cookie) {
+    Trace.beginSection("CallerInfoAsyncQuery.startOtherDirectoriesQuery");
     long[] directoryIds = StrictModeUtils.bypass(() -> getDirectoryIds(context));
     int size = directoryIds.length;
     if (size == 0) {
+      Trace.endSection();
       return false;
     }
 
@@ -213,6 +216,7 @@ public class CallerInfoAsyncQuery {
       OnQueryCompleteListener intermediateListener = listenerFactory.newListener(directoryId);
       startQueryInternal(token, context, info, intermediateListener, cookie, uri);
     }
+    Trace.endSection();
     return true;
   }
 

@@ -17,6 +17,7 @@
 package com.android.dialer.location;
 
 import android.content.Context;
+import android.os.Trace;
 
 /** Static methods related to Geo. */
 public class GeoUtil {
@@ -24,6 +25,9 @@ public class GeoUtil {
   /** @return the ISO 3166-1 two letters country code of the country the user is in. */
   public static String getCurrentCountryIso(Context context) {
     // The {@link CountryDetector} should never return null so this is safe to return as-is.
-    return CountryDetector.getInstance(context).getCurrentCountryIso();
+    Trace.beginSection("GeoUtil.getCurrentCountryIso");
+    String countryIso = CountryDetector.getInstance(context).getCurrentCountryIso();
+    Trace.endSection();
+    return countryIso;
   }
 }

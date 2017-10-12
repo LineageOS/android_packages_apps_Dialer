@@ -807,10 +807,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     @Override
     public void onQueryComplete(int token, Object cookie, CallerInfo callerInfo) {
+      Trace.beginSection("ContactInfoCache.FindInfoCallback.onQueryComplete");
       Assert.isMainThread();
       DialerCallCookieWrapper cw = (DialerCallCookieWrapper) cookie;
       String callId = cw.callId;
       if (!isWaitingForThisQuery(cw.callId, mQueryToken.mQueryId)) {
+        Trace.endSection();
         return;
       }
       ContactCacheEntry cacheEntry = mInfoMap.get(callId);
@@ -818,6 +820,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       if (cacheEntry == null) {
         Log.w(TAG, "Contact lookup done, but cache entry is not found.");
         clearCallbacks(callId);
+        Trace.endSection();
         return;
       }
       // Before issuing a request for more data from other services, we only check that the
@@ -842,6 +845,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         }
         clearCallbacks(callId);
       }
+      Trace.endSection();
     }
   }
 
