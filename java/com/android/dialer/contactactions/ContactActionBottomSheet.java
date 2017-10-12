@@ -29,33 +29,38 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
+import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
 import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.dialercontact.DialerContact;
 import java.util.List;
 
 /**
  * {@link BottomSheetDialog} used for building a list of contact actions in a bottom sheet menu.
  *
- * <p>{@link #show(Context, DialerContact, List)} should be used to create and display the menu.
- * Modules are built using {@link ContactActionModule} and some defaults are provided by {@link
- * IntentModule} and {@link DividerModule}.
+ * <p>{@link #show(Context, ContactPrimaryActionInfo, List)} should be used to create and display
+ * the menu. Modules are built using {@link ContactActionModule} and some defaults are provided by
+ * {@link IntentModule} and {@link DividerModule}.
  */
 public class ContactActionBottomSheet extends BottomSheetDialog implements OnClickListener {
 
   private final List<ContactActionModule> modules;
-  private final DialerContact contact;
+  private final ContactPrimaryActionInfo contactPrimaryActionInfo;
 
   private ContactActionBottomSheet(
-      Context context, DialerContact contact, List<ContactActionModule> modules) {
+      Context context,
+      ContactPrimaryActionInfo contactPrimaryActionInfo,
+      List<ContactActionModule> modules) {
     super(context);
     this.modules = modules;
-    this.contact = contact;
+    this.contactPrimaryActionInfo = contactPrimaryActionInfo;
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
   public static ContactActionBottomSheet show(
-      Context context, DialerContact contact, List<ContactActionModule> modules) {
-    ContactActionBottomSheet sheet = new ContactActionBottomSheet(context, contact, modules);
+      Context context,
+      ContactPrimaryActionInfo contactPrimaryActionInfo,
+      List<ContactActionModule> modules) {
+    ContactActionBottomSheet sheet =
+        new ContactActionBottomSheet(context, contactPrimaryActionInfo, modules);
     sheet.show();
     return sheet;
   }
@@ -75,38 +80,37 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     }
   }
 
-  // TODO(calderwoodra): add on click action to contact.
   private View getContactView(ViewGroup container) {
     LayoutInflater inflater = LayoutInflater.from(getContext());
     View contactView = inflater.inflate(R.layout.contact_layout, container, false);
 
+    // TODO(zachh): The contact image should be badged with a video icon if it is for a video call.
+    PhotoInfo photoInfo = contactPrimaryActionInfo.photoInfo();
     ContactPhotoManager.getInstance(getContext())
         .loadDialerThumbnailOrPhoto(
             contactView.findViewById(R.id.quick_contact_photo),
-            contact.hasContactUri() ? Uri.parse(contact.getContactUri()) : null,
-            contact.getPhotoId(),
-            contact.hasPhotoUri() ? Uri.parse(contact.getPhotoUri()) : null,
-            contact.getNameOrNumber(),
-            contact.getContactType());
+            photoInfo.lookupUri() != null ? Uri.parse(photoInfo.lookupUri()) : null,
+            photoInfo.photoId(),
+            photoInfo.photoUri() != null ? Uri.parse(photoInfo.photoUri()) : null,
+            photoInfo.displayName(),
+            photoInfo.contactType());
 
-    TextView nameView = contactView.findViewById(R.id.contact_name);
-    TextView numberView = contactView.findViewById(R.id.phone_number);
+    TextView primaryTextView = contactView.findViewById(R.id.primary_text);
+    TextView secondaryTextView = contactView.findViewById(R.id.secondary_text);
 
-    nameView.setText(contact.getNameOrNumber());
-    if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
-      numberView.setVisibility(View.VISIBLE);
-      String secondaryInfo =
-          TextUtils.isEmpty(contact.getNumberLabel())
-              ? contact.getDisplayNumber()
-              : getContext()
-                  .getString(
-                      com.android.contacts.common.R.string.call_subject_type_and_number,
-                      contact.getNumberLabel(),
-                      contact.getDisplayNumber());
-      numberView.setText(secondaryInfo);
+    primaryTextView.setText(contactPrimaryActionInfo.primaryText());
+    if (!TextUtils.isEmpty(contactPrimaryActionInfo.secondaryText())) {
+      secondaryTextView.setText(contactPrimaryActionInfo.secondaryText());
     } else {
-      numberView.setVisibility(View.GONE);
-      numberView.setText(null);
+      secondaryTextView.setVisibility(View.GONE);
+      secondaryTextView.setText(null);
+    }
+    if (contactPrimaryActionInfo.intent() != null) {
+      contactView.setOnClickListener(
+          (view) -> {
+            getContext().startActivity(contactPrimaryActionInfo.intent());
+            dismiss();
+          });
     }
     return contactView;
   }
