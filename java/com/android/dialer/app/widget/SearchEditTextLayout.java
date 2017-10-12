@@ -274,7 +274,6 @@ public class SearchEditTextLayout extends FrameLayout {
     mCollapsedSearchBox.setVisibility(collapsedViewVisibility);
     mVoiceSearchButtonView.setVisibility(collapsedViewVisibility);
     mOverflowButtonView.setVisibility(collapsedViewVisibility);
-    mBackButtonView.setVisibility(expandedViewVisibility);
     // TODO: Prevents keyboard from jumping up in landscape mode after exiting the
     // SearchFragment when the query string is empty. More elegant fix?
     //mExpandedSearchBox.setVisibility(expandedViewVisibility);

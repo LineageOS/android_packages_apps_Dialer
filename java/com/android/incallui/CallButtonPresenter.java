@@ -118,7 +118,7 @@ public class CallButtonPresenter
       // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
       // the dialpad too.)
       if (oldState == InCallState.OUTGOING && mCall != null) {
-        if (CallerInfoUtils.isVoiceMailNumber(mContext, mCall) && getActivity() != null) {
+        if (mCall.isVoiceMailNumber() && getActivity() != null) {
           getActivity().showDialpadFragment(true /* show */, true /* animate */);
         }
       }

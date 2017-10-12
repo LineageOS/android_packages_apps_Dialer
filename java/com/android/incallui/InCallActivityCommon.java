@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -257,6 +258,7 @@ public class InCallActivityCommon {
   }
 
   public void onStart() {
+    Trace.beginSection("InCallActivityCommon.onStart");
     // setting activity should be last thing in setup process
     InCallPresenter.getInstance().setActivity(inCallActivity);
     enableInCallOrientationEventListener(
@@ -267,9 +269,11 @@ public class InCallActivityCommon {
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(true);
     }
+    Trace.endSection();
   }
 
   public void onResume() {
+    Trace.beginSection("InCallActivityCommon.onResume");
     if (InCallPresenter.getInstance().isReadyForTearDown()) {
       LogUtil.i(
           "InCallActivityCommon.onResume",
@@ -309,6 +313,7 @@ public class InCallActivityCommon {
     CallList.getInstance()
         .onInCallUiShown(
             inCallActivity.getIntent().getBooleanExtra(INTENT_EXTRA_FOR_FULL_SCREEN, false));
+    Trace.endSection();
   }
 
   // onPause is guaranteed to be called when the InCallActivity goes

@@ -19,6 +19,7 @@ package com.android.incallui.answerproximitysensor;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.os.PowerManager;
+import android.os.Trace;
 import android.view.Display;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -43,16 +44,19 @@ public class AnswerProximitySensor
   private final AnswerProximityWakeLock answerProximityWakeLock;
 
   public static boolean shouldUse(Context context, DialerCall call) {
+    Trace.beginSection("AnswerProximitySensor.shouldUse");
     // Don't use the AnswerProximitySensor for call waiting and other states. Those states are
     // handled by the general ProximitySensor code.
     if (call.getState() != State.INCOMING) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "call state is not incoming");
+      Trace.endSection();
       return false;
     }
 
     if (!ConfigProviderBindings.get(context)
         .getBoolean(CONFIG_ANSWER_PROXIMITY_SENSOR_ENABLED, true)) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "disabled by config");
+      Trace.endSection();
       return false;
     }
 
@@ -60,19 +64,23 @@ public class AnswerProximitySensor
         .getSystemService(PowerManager.class)
         .isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "wake lock level not supported");
+      Trace.endSection();
       return false;
     }
 
     if (isDefaultDisplayOn(context)) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "display is already on");
+      Trace.endSection();
       return false;
     }
 
+    Trace.endSection();
     return true;
   }
 
   public AnswerProximitySensor(
       Context context, DialerCall call, PseudoScreenState pseudoScreenState) {
+    Trace.beginSection("AnswerProximitySensor Constructor");
     this.call = call;
 
     LogUtil.i("AnswerProximitySensor.constructor", "acquiring lock");
@@ -90,11 +98,14 @@ public class AnswerProximitySensor
     answerProximityWakeLock.acquire();
 
     call.addListener(this);
+    Trace.endSection();
   }
 
   private void cleanup() {
+    Trace.beginSection("AnswerProximitySensor.Cleanup");
     call.removeListener(this);
     releaseProximityWakeLock();
+    Trace.endSection();
   }
 
   private void releaseProximityWakeLock() {

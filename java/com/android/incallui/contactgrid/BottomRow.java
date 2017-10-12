@@ -49,7 +49,6 @@ public class BottomRow {
     public final boolean isForwardIconVisible;
     public final boolean isSpamIconVisible;
     public final boolean shouldPopulateAccessibilityEvent;
-    public final boolean isAssistedDialedVisisble;
 
     public Info(
         @Nullable CharSequence label,
@@ -59,8 +58,7 @@ public class BottomRow {
         boolean isHdIconVisible,
         boolean isForwardIconVisible,
         boolean isSpamIconVisible,
-        boolean shouldPopulateAccessibilityEvent,
-        boolean isAssistedDialedVisisble) {
+        boolean shouldPopulateAccessibilityEvent) {
       this.label = label;
       this.isTimerVisible = isTimerVisible;
       this.isWorkIconVisible = isWorkIconVisible;
@@ -69,7 +67,6 @@ public class BottomRow {
       this.isForwardIconVisible = isForwardIconVisible;
       this.isSpamIconVisible = isSpamIconVisible;
       this.shouldPopulateAccessibilityEvent = shouldPopulateAccessibilityEvent;
-      this.isAssistedDialedVisisble = isAssistedDialedVisisble;
     }
   }
 
@@ -84,7 +81,6 @@ public class BottomRow {
     boolean isHdAttemptingIconVisible = state.isHdAttempting;
     boolean isSpamIconVisible = false;
     boolean shouldPopulateAccessibilityEvent = true;
-    boolean isAssistedDialedVisisble = state.isAssistedDialed;
 
     if (isIncoming(state) && primaryInfo.isSpam) {
       label = context.getString(R.string.contact_grid_incoming_suspected_spam);
@@ -118,8 +114,7 @@ public class BottomRow {
         isHdIconVisible,
         isForwardIconVisible,
         isSpamIconVisible,
-        shouldPopulateAccessibilityEvent,
-        isAssistedDialedVisisble);
+        shouldPopulateAccessibilityEvent);
   }
 
   private static CharSequence getLabelForPhoneNumber(PrimaryInfo primaryInfo) {
