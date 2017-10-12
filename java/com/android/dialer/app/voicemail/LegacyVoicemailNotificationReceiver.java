@@ -22,7 +22,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
@@ -33,6 +32,7 @@ import com.android.dialer.app.calllog.LegacyVoicemailNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.util.DialerUtils;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -46,9 +46,6 @@ import com.android.voicemail.VoicemailComponent;
 public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
   @VisibleForTesting static final String LEGACY_VOICEMAIL_DISMISSED = "legacy_voicemail_dismissed";
-
-  /** Hidden version of {@link TelephonyManager#EXTRA_IS_REFRESH} in OC */
-  @VisibleForTesting static final String EXTRA_IS_REFRESH_LEGACY = "is_refresh";
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -76,12 +73,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
         Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));
     int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, -1);
 
-    boolean isRefresh =
-        intent.getBooleanExtra(
-            VERSION.SDK_INT >= VERSION_CODES.O_MR1
-                ? TelephonyManager.EXTRA_IS_REFRESH
-                : EXTRA_IS_REFRESH_LEGACY,
-            false);
+    boolean isRefresh = intent.getBooleanExtra(TelephonyManagerCompat.EXTRA_IS_REFRESH, false);
     LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "isRefresh: " + isRefresh);
     PerAccountSharedPreferences preferences = getSharedPreferences(context, phoneAccountHandle);
     if (isRefresh) {
