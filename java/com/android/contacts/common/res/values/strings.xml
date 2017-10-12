@@ -16,9 +16,6 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-  <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
-  <string name="toast_text_copied">Text copied</string>
-
   <!-- Action string for calling a custom phone number -->
     <string name="call_custom">Call
         <xliff:g id="custom">%s</xliff:g>
