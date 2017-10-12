@@ -38,6 +38,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
@@ -156,11 +157,17 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         .useMostRecentLong(AnnotatedCallLog.NEW)
         .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
         .useMostRecentString(AnnotatedCallLog.NAME)
+        // Two different DialerPhoneNumbers could be combined if they are different but considered
+        // to be an "exact match" by libphonenumber; in this case we arbitrarily select the most
+        // recent one.
+        .useMostRecentBlob(AnnotatedCallLog.NUMBER)
         .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
         .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
         .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
         .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
         .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
+        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME)
+        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_ID)
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
         .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
         .useMostRecentLong(AnnotatedCallLog.CALL_TYPE)
@@ -272,10 +279,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                 dialerPhoneNumberUtil.parse(numberAsStr, countryIso).toByteArray();
             // TODO(zachh): Need to handle post-dial digits; different on N and M.
             contentValues.put(AnnotatedCallLog.NUMBER, numberAsProtoBytes);
+          } else {
+            contentValues.put(
+                AnnotatedCallLog.NUMBER, DialerPhoneNumber.getDefaultInstance().toByteArray());
           }
 
           contentValues.put(AnnotatedCallLog.CALL_TYPE, type);
           contentValues.put(AnnotatedCallLog.NAME, cachedName);
+          // TODO(zachh): Format the number using DialerPhoneNumberUtil here.
           contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
           contentValues.put(AnnotatedCallLog.PHOTO_URI, cachedPhotoUri);
           contentValues.put(AnnotatedCallLog.PHOTO_ID, cachedPhotoId);
@@ -292,6 +303,9 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           contentValues.put(AnnotatedCallLog.IS_READ, isRead);
           contentValues.put(AnnotatedCallLog.NEW, isNew);
           contentValues.put(AnnotatedCallLog.GEOCODED_LOCATION, geocodedLocation);
+          contentValues.put(
+              AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME, phoneAccountComponentName);
+          contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_ID, phoneAccountId);
           populatePhoneAccountLabelAndColor(
               appContext, contentValues, phoneAccountComponentName, phoneAccountId);
           contentValues.put(AnnotatedCallLog.FEATURES, features);

@@ -58,15 +58,14 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
     if (cursor.moveToNext()) {
-      CoalescedAnnotatedCallLogCursorLoader.Row firstRow =
-          new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
-      if (CallLogDates.isSameDay(currentTimeMillis, firstRow.timestamp())) {
+      long firstTimestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
+      if (CallLogDates.isSameDay(currentTimeMillis, firstTimestamp)) {
         this.todayHeaderPosition = 0;
         int adapterPosition = 2; // Accounted for "Today" header and first row.
         while (cursor.moveToNext()) {
-          CoalescedAnnotatedCallLogCursorLoader.Row row =
-              new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
-          if (CallLogDates.isSameDay(currentTimeMillis, row.timestamp())) {
+          long timestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
+
+          if (CallLogDates.isSameDay(currentTimeMillis, timestamp)) {
             adapterPosition++;
           } else {
             this.olderHeaderPosition = adapterPosition;

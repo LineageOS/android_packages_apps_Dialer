@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.contacts.common;
+package com.android.dialer.clipboard;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -22,7 +22,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-public class ClipboardUtils {
+/** Copies provided label and text to the clipboard and optionally shows a "text copied" toast. */
+public final class ClipboardUtils {
 
   private ClipboardUtils() {}
 

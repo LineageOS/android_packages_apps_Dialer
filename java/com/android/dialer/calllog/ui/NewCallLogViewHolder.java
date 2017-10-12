@@ -16,16 +16,19 @@
 package com.android.dialer.calllog.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.dialer.calllog.ui.CoalescedAnnotatedCallLogCursorLoader.Row;
-import com.android.dialer.calllogutils.CallLogDates;
+import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
+import com.android.dialer.calllogutils.CallLogEntryText;
+import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
@@ -43,6 +46,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final CallTypeIconsView primaryCallTypeIconsView; // Used for Wifi, HD icons
   private final CallTypeIconsView secondaryCallTypeIconsView; // Used for call types
   private final TextView phoneAccountView;
+  private final ImageView menuButton;
+
   private final Clock clock;
 
   NewCallLogViewHolder(View view, Clock clock) {
@@ -54,17 +59,18 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryCallTypeIconsView = view.findViewById(R.id.primary_call_type_icons);
     secondaryCallTypeIconsView = view.findViewById(R.id.secondary_call_type_icons);
     phoneAccountView = view.findViewById(R.id.phone_account);
+    menuButton = view.findViewById(R.id.menu_button);
+
     this.clock = clock;
   }
 
   /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
   void bind(Cursor cursor) {
-    CoalescedAnnotatedCallLogCursorLoader.Row row =
-        new CoalescedAnnotatedCallLogCursorLoader.Row(cursor);
+    CoalescedRow row = CoalescedAnnotatedCallLogCursorLoader.toRow(cursor);
 
     // TODO(zachh): Handle RTL properly.
-    primaryTextView.setText(buildPrimaryText(row));
-    secondaryTextView.setText(buildSecondaryText(row));
+    primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
+    secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
 
     if (isNewMissedCall(row)) {
       primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
@@ -72,77 +78,29 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
     }
 
+    setNumberCalls(row);
     setPhoto(row);
     setPrimaryCallTypes(row);
     setSecondaryCallTypes(row);
     setPhoneAccounts(row);
+    setOnClickListenerForRow(row);
+    setOnClickListenerForMenuButon(row);
   }
 
-  private String buildPrimaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
-    StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(row.name())) {
-      primaryText.append(row.name());
-    } else if (!TextUtils.isEmpty(row.formattedNumber())) {
-      primaryText.append(row.formattedNumber());
-    } else {
-      // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
-      primaryText.append(context.getText(R.string.new_call_log_unknown));
-    }
+  private void setNumberCalls(CoalescedRow row) {
+    // TODO(zachh): Number of calls shouldn't be text, but a circle with a number inside.
     if (row.numberCalls() > 1) {
-      primaryText.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
+      primaryTextView.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
     }
-    return primaryText.toString();
   }
 
-  private boolean isNewMissedCall(CoalescedAnnotatedCallLogCursorLoader.Row row) {
+  private boolean isNewMissedCall(CoalescedRow row) {
     // Show missed call styling if the most recent call in the group was missed and it is still
     // marked as NEW. It is not clear what IS_READ should be used for and it is currently not used.
     return row.callType() == Calls.MISSED_TYPE && row.isNew();
   }
 
-  private String buildSecondaryText(CoalescedAnnotatedCallLogCursorLoader.Row row) {
-    /*
-     * Rules: (Duo video, )?$Label|$Location • Date
-     *
-     * Examples:
-     *   Duo Video, Mobile • Now
-     *   Duo Video • 11:45pm
-     *   Mobile • 11:45pm
-     *   Mobile • Sunday
-     *   Brooklyn, NJ • Jan 15
-     *
-     * Date rules:
-     *   if < 1 minute ago: "Now"; else if today: HH:MM(am|pm); else if < 3 days: day; else: MON D
-     */
-    StringBuilder secondaryText = new StringBuilder();
-    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      // TODO(zachh): Add "Duo" prefix?
-      secondaryText.append(context.getText(R.string.new_call_log_video));
-    }
-    String numberTypeLabel = row.numberTypeLabel();
-    if (!TextUtils.isEmpty(numberTypeLabel)) {
-      if (secondaryText.length() > 0) {
-        secondaryText.append(", ");
-      }
-      secondaryText.append(numberTypeLabel);
-    } else { // If there's a number type label, don't show the location.
-      String location = row.geocodedLocation();
-      if (!TextUtils.isEmpty(location)) {
-        if (secondaryText.length() > 0) {
-          secondaryText.append(", ");
-        }
-        secondaryText.append(location);
-      }
-    }
-    if (secondaryText.length() > 0) {
-      secondaryText.append(" • ");
-    }
-    secondaryText.append(
-        CallLogDates.newCallLogTimestampLabel(context, clock.currentTimeMillis(), row.timestamp()));
-    return secondaryText.toString();
-  }
-
-  private void setPhoto(Row row) {
+  private void setPhoto(CoalescedRow row) {
     // TODO(zachh): Set the contact type.
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
@@ -154,7 +112,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
             LetterTileDrawable.TYPE_DEFAULT);
   }
 
-  private void setPrimaryCallTypes(Row row) {
+  private void setPrimaryCallTypes(CoalescedRow row) {
     // Only HD and Wifi icons are shown following the primary text.
     primaryCallTypeIconsView.setShowHd(
         MotorolaUtils.shouldShowHdIconInCallLog(context, row.features()));
@@ -162,18 +120,32 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
         MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features()));
   }
 
-  private void setSecondaryCallTypes(Row row) {
+  private void setSecondaryCallTypes(CoalescedRow row) {
     // Only call type icon is shown before the secondary text.
     secondaryCallTypeIconsView.add(row.callType());
 
     // TODO(zachh): Per new mocks, may need to add method to CallTypeIconsView to disable coloring.
   }
 
-  private void setPhoneAccounts(Row row) {
+  private void setPhoneAccounts(CoalescedRow row) {
     if (row.phoneAccountLabel() != null) {
       phoneAccountView.setText(row.phoneAccountLabel());
       phoneAccountView.setTextColor(row.phoneAccountColor());
       phoneAccountView.setVisibility(View.VISIBLE);
     }
+  }
+
+  private void setOnClickListenerForRow(CoalescedRow row) {
+    itemView.setOnClickListener(
+        (view) -> {
+          Intent callbackIntent = CallLogIntents.getCallBackIntent(row);
+          if (callbackIntent != null) {
+            context.startActivity(callbackIntent);
+          }
+        });
+  }
+
+  private void setOnClickListenerForMenuButon(CoalescedRow row) {
+    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
   }
 }

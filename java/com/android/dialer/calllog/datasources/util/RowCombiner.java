@@ -43,6 +43,12 @@ public class RowCombiner {
     return this;
   }
 
+  public RowCombiner useMostRecentBlob(String columnName) {
+    combinedRow.put(
+        columnName, individualRowsSortedByTimestampDesc.get(0).getAsByteArray(columnName));
+    return this;
+  }
+
   /** Asserts that all column values for the given column name are the same, and uses it. */
   public RowCombiner useSingleValueString(String columnName) {
     Iterator<ContentValues> iterator = individualRowsSortedByTimestampDesc.iterator();

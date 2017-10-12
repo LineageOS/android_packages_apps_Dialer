@@ -102,7 +102,9 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.calldetails \
 	com.android.dialer.calllog.database \
 	com.android.dialer.calllog.ui \
+        com.android.dialer.calllog.ui.menu \
 	com.android.dialer.calllogutils \
+        com.android.dialer.clipboard \
 	com.android.dialer.common \
 	com.android.dialer.configprovider \
 	com.android.dialer.contactactions \
