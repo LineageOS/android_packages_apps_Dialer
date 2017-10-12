@@ -73,6 +73,9 @@ public class TelephonyManagerCompat {
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
 
+  public static final String EXTRA_IS_REFRESH =
+      BuildCompat.isAtLeastOMR1() ? "android.telephony.extra.IS_REFRESH" : "is_refresh";
+
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)

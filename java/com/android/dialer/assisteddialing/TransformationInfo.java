@@ -57,19 +57,20 @@ public abstract class TransformationInfo {
     return new AutoValue_TransformationInfo.Builder();
   }
 
+  /** A builder for TransformationInfo. */
   @AutoValue.Builder
-  abstract static class Builder {
-    abstract Builder setOriginalNumber(String value);
+  public abstract static class Builder {
+    public abstract Builder setOriginalNumber(String value);
 
-    abstract Builder setTransformedNumber(String value);
+    public abstract Builder setTransformedNumber(String value);
 
-    abstract Builder setUserHomeCountryCode(String value);
+    public abstract Builder setUserHomeCountryCode(String value);
 
-    abstract Builder setUserRoamingCountryCode(String value);
+    public abstract Builder setUserRoamingCountryCode(String value);
 
-    abstract Builder setTransformedNumberCountryCallingCode(int value);
+    public abstract Builder setTransformedNumberCountryCallingCode(int value);
 
-    abstract TransformationInfo build();
+    public abstract TransformationInfo build();
   }
 
   public static TransformationInfo newInstanceFromBundle(@NonNull Bundle transformationInfoBundle) {

@@ -478,13 +478,14 @@ public class CallCardPresenter
                   !TextUtils.isEmpty(mPrimary.getLastForwardedNumber()),
                   shouldShowContactPhoto,
                   mPrimary.getConnectTimeMillis(),
-                  CallerInfoUtils.isVoiceMailNumber(mContext, mPrimary),
+                  mPrimary.isVoiceMailNumber(),
                   mPrimary.isRemotelyHeld(),
                   isBusiness,
                   supports2ndCallOnHold(),
                   getSwapToSecondaryButtonState(),
                   mPrimary.isAssistedDialed(),
-                  null));
+                  null,
+                  mPrimary.getAssistedDialingExtras()));
 
       InCallActivity activity =
           (InCallActivity) (mInCallScreen.getInCallScreenFragment().getActivity());
