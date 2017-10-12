@@ -67,9 +67,9 @@ public class CallDetailsActivity extends AppCompatActivity
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
   public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
-  private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
-  private static final String EXTRA_CONTACT = "contact";
-  private static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
+  public static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
+  public static final String EXTRA_CONTACT = "contact";
+  public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
   private static final String TASK_DELETE = "task_delete";
 
