@@ -323,7 +323,7 @@ message DialerImpression {
 
     CALL_DETAILS_COPY_NUMBER = 1121;
     CALL_DETAILS_EDIT_BEFORE_CALL = 1122;
-    CALL_DETAILS_CALL_BACK = 1123;
+    CALL_DETAILS_CALL_BACK = 1123 [deprecated = true];
 
     VVM_USER_DISMISSED_VM_ALMOST_FULL_PROMO = 1124;
     VVM_USER_DISMISSED_VM_FULL_PROMO = 1125;
@@ -554,5 +554,10 @@ message DialerImpression {
 
     // More voicemail transcription impressions
     VVM_TRANSCRIPTION_POLL_REQUEST = 1283;
+
+    // Callback impressions (with more granularity) from the call details UI
+    CALL_DETAILS_IMS_VIDEO_CALL_BACK = 1284;
+    CALL_DETAILS_LIGHTBRINGER_CALL_BACK = 1285;
+    CALL_DETAILS_VOICE_CALL_BACK = 1286;
   }
 }

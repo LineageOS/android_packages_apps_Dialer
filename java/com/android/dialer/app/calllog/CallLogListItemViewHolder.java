@@ -50,7 +50,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.dialer.app.DialtactsActivity;
@@ -67,6 +66,7 @@ import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
+import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -551,7 +551,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (mCallLogCache.isVoicemailNumber(accountHandle, number)) {
           // Call to generic voicemail number, in case there are multiple accounts
           primaryActionButtonView.setTag(IntentProvider.getReturnVoicemailCallIntentProvider());
-        } else if (this.info != null && this.info.lookupKey != null) {
+        } else if (canSupportAssistedDialing()) {
           primaryActionButtonView.setTag(
               IntentProvider.getAssistedDialIntentProvider(
                   number + postDialDigits,
@@ -618,7 +618,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         ((TextView) callButtonView.findViewById(R.id.call_type_or_location_text));
 
     if (canPlaceCallToNumber) {
-      if (this.info != null && this.info.lookupKey != null) {
+      if (canSupportAssistedDialing()) {
         callButtonView.setTag(
             IntentProvider.getAssistedDialIntentProvider(
                 number, mContext, mContext.getSystemService(TelephonyManager.class)));
@@ -685,7 +685,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               && mCachedNumberLookupService.canReportAsInvalid(info.sourceType, info.objectId);
       detailsButtonView.setTag(
           IntentProvider.getCallDetailIntentProvider(
-              callDetailsEntries, buildContact(), canReportCallerId));
+              callDetailsEntries, buildContact(), canReportCallerId, canSupportAssistedDialing()));
     }
 
     boolean isBlockedOrSpam = blockId != null || (isSpamFeatureEnabled && isSpam);
@@ -762,6 +762,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return false;
     }
     return accountHandle.getComponentName().equals(mDefaultPhoneAccountHandle.getComponentName());
+  }
+
+  private boolean canSupportAssistedDialing() {
+    return info != null && info.lookupKey != null;
   }
 
   private boolean canSupportCarrierVideoCall() {

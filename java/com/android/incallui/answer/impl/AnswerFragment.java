@@ -744,6 +744,7 @@ public class AnswerFragment extends Fragment
 
   @Override
   public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+    Trace.beginSection("AnswerFragment.onViewCreated");
     super.onViewCreated(view, savedInstanceState);
     createInCallScreenDelegate();
     updateUI();
@@ -751,18 +752,22 @@ public class AnswerFragment extends Fragment
     if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_HAS_ANIMATED_ENTRY)) {
       ViewUtil.doOnGlobalLayout(view, this::animateEntry);
     }
+    Trace.endSection();
   }
 
   @Override
   public void onResume() {
+    Trace.beginSection("AnswerFragment.onResume");
     super.onResume();
     LogUtil.i("AnswerFragment.onResume", null);
     restoreSwipeHintTexts();
     inCallScreenDelegate.onInCallScreenResumed();
+    Trace.endSection();
   }
 
   @Override
   public void onStart() {
+    Trace.beginSection("AnswerFragment.onStart");
     super.onStart();
     LogUtil.i("AnswerFragment.onStart", null);
 
@@ -770,10 +775,12 @@ public class AnswerFragment extends Fragment
     if (answerVideoCallScreen != null) {
       answerVideoCallScreen.onVideoScreenStart();
     }
+    Trace.endSection();
   }
 
   @Override
   public void onStop() {
+    Trace.beginSection("AnswerFragment.onStop");
     super.onStop();
     LogUtil.i("AnswerFragment.onStop", null);
 
@@ -781,13 +788,16 @@ public class AnswerFragment extends Fragment
     if (answerVideoCallScreen != null) {
       answerVideoCallScreen.onVideoScreenStop();
     }
+    Trace.endSection();
   }
 
   @Override
   public void onPause() {
+    Trace.beginSection("AnswerFragment.onPause");
     super.onPause();
     LogUtil.i("AnswerFragment.onPause", null);
     inCallScreenDelegate.onInCallScreenPaused();
+    Trace.endSection();
   }
 
   @Override

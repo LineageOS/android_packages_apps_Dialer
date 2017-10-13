@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.phonelookup";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.phonelookup;
+
+// TODO(zachh) documentation
+message PhoneLookupInfo {
+  // TODO(calderwoodra): documentation
+  message Cp2Info {
+    optional string name = 1;
+    optional string photo_uri = 2;
+    optional fixed64 photo_id = 3;
+    optional string label = 4;  // "Home", "Mobile", ect.
+  }
+  optional Cp2Info cp2_info = 1;
+}

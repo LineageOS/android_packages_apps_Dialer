@@ -17,12 +17,6 @@
 
 <resources>
 
-  <!-- Text to show in call log for a video call. [CHAR LIMIT=16] -->
-  <string name="new_call_log_video">Video</string>
-
-  <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_unknown">Unknown</string>
-
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_today">Today</string>
 

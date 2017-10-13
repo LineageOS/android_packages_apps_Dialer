@@ -444,6 +444,7 @@ public class InCallPresenter implements CallList.Listener {
    * activity is provided, it means that the activity was finished and we should attempt to cleanup.
    */
   private void updateActivity(InCallActivity inCallActivity) {
+    Trace.beginSection("InCallPresenter.updateActivity");
     boolean updateListeners = false;
     boolean doAttemptCleanup = false;
 
@@ -475,6 +476,7 @@ public class InCallPresenter implements CallList.Listener {
       if (mInCallState == InCallState.NO_CALLS) {
         LogUtil.i("InCallPresenter.updateActivity", "UI Initialized, but no calls left. Shut down");
         attemptFinishActivity();
+        Trace.endSection();
         return;
       }
     } else {
@@ -510,6 +512,7 @@ public class InCallPresenter implements CallList.Listener {
     if (doAttemptCleanup) {
       attemptCleanup();
     }
+    Trace.endSection();
   }
 
   public void setManageConferenceActivity(
@@ -842,7 +845,7 @@ public class InCallPresenter implements CallList.Listener {
     if (!mCallList.hasLiveCall()
         && !call.getLogState().isIncoming
         && !isSecretCode(call.getNumber())
-        && !CallerInfoUtils.isVoiceMailNumber(mContext, call)) {
+        && !call.isVoiceMailNumber()) {
       PostCall.onCallDisconnected(mContext, call.getNumber(), call.getConnectTimeMillis());
     }
   }

@@ -31,7 +31,7 @@ public class PhoneAccountUtils {
 
   /** Return a list of phone accounts that are subscription/SIM accounts. */
   public static List<PhoneAccountHandle> getSubscriptionPhoneAccounts(Context context) {
-    List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<PhoneAccountHandle>();
+    List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<>();
     final List<PhoneAccountHandle> accountHandles =
         TelecomUtil.getCallCapablePhoneAccounts(context);
     for (PhoneAccountHandle accountHandle : accountHandles) {

@@ -16,6 +16,7 @@
 
 package com.android.dialer.calldetails;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -29,21 +30,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import android.telephony.TelephonyManager;
 import android.view.MenuItem;
+import android.widget.Toast;
+import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.HistoricalDataChangedListener;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
+import com.android.dialer.lightbringer.Lightbringer;
+import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.protos.ProtoParsers;
+import com.android.dialer.util.DialerUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -51,14 +61,16 @@ import java.util.Map;
 /** Displays the details of a specific call log entry. */
 public class CallDetailsActivity extends AppCompatActivity
     implements OnMenuItemClickListener,
+        CallDetailsHeaderViewHolder.CallbackActionListener,
         CallDetailsFooterViewHolder.ReportCallIdListener,
         HistoricalDataChangedListener {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
   public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
-  private static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
-  private static final String EXTRA_CONTACT = "contact";
-  private static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
+  public static final String EXTRA_CALL_DETAILS_ENTRIES = "call_details_entries";
+  public static final String EXTRA_CONTACT = "contact";
+  public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
+  private static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
   private static final String TASK_DELETE = "task_delete";
 
   private CallDetailsEntries entries;
@@ -74,7 +86,8 @@ public class CallDetailsActivity extends AppCompatActivity
       Context context,
       @NonNull CallDetailsEntries details,
       @NonNull DialerContact contact,
-      boolean canReportCallerId) {
+      boolean canReportCallerId,
+      boolean canSupportAssistedDialing) {
     Assert.isNotNull(details);
     Assert.isNotNull(contact);
 
@@ -82,6 +95,7 @@ public class CallDetailsActivity extends AppCompatActivity
     ProtoParsers.put(intent, EXTRA_CONTACT, contact);
     ProtoParsers.put(intent, EXTRA_CALL_DETAILS_ENTRIES, details);
     intent.putExtra(EXTRA_CAN_REPORT_CALLER_ID, canReportCallerId);
+    intent.putExtra(EXTRA_CAN_SUPPORT_ASSISTED_DIALING, canSupportAssistedDialing);
     return intent;
   }
 
@@ -142,7 +156,13 @@ public class CallDetailsActivity extends AppCompatActivity
     entries =
         ProtoParsers.getTrusted(
             intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance());
-    adapter = new CallDetailsAdapter(this, contact, entries.getEntriesList(), this);
+    adapter =
+        new CallDetailsAdapter(
+            this /* context */,
+            contact,
+            entries.getEntriesList(),
+            this /* callbackListener */,
+            this /* reportCallIdListener */);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -186,6 +206,51 @@ public class CallDetailsActivity extends AppCompatActivity
         generateAndMapNewCallDetailsEntriesHistoryResults(
                 contact.getNumber(), entries, mappedResults)
             .getEntriesList());
+  }
+
+  @Override
+  public void placeImsVideoCall(String phoneNumber) {
+    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_IMS_VIDEO_CALL_BACK);
+    DialerUtils.startActivityWithErrorToast(
+        this,
+        new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
+            .setIsVideoCall(true)
+            .build());
+  }
+
+  @Override
+  public void placeLightbringerCall(String phoneNumber) {
+    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
+    Lightbringer lightbringer = LightbringerComponent.get(this).getLightbringer();
+    if (!lightbringer.isReachable(this, phoneNumber)) {
+      placeImsVideoCall(phoneNumber);
+      return;
+    }
+
+    try {
+      startActivityForResult(
+          lightbringer.getIntent(this, phoneNumber), ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(this, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  @Override
+  public void placeVoiceCall(String phoneNumber, String postDialDigits) {
+    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_VOICE_CALL_BACK);
+
+    boolean canSupportedAssistedDialing =
+        getIntent().getExtras().getBoolean(EXTRA_CAN_SUPPORT_ASSISTED_DIALING, false);
+    CallIntentBuilder callIntentBuilder =
+        new CallIntentBuilder(phoneNumber + postDialDigits, CallInitiationType.Type.CALL_DETAILS);
+    if (canSupportedAssistedDialing) {
+      callIntentBuilder.setAllowAssistedDial(
+          true,
+          ConcreteCreator.createNewAssistedDialingMediator(
+              getSystemService(TelephonyManager.class), this));
+    }
+
+    DialerUtils.startActivityWithErrorToast(this, callIntentBuilder.build());
   }
 
   @NonNull

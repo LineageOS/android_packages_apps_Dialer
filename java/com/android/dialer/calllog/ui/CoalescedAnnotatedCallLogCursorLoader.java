@@ -18,115 +18,37 @@ package com.android.dialer.calllog.ui;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.ColorInt;
 import android.support.v4.content.CursorLoader;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
+import com.android.dialer.calllog.model.CoalescedRow;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 /** CursorLoader for the coalesced annotated call log. */
 final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
 
-  /** Indexes for CoalescedAnnotatedCallLog.ALL_COLUMNS */
+  // Indexes for CoalescedAnnotatedCallLog.ALL_COLUMNS
   private static final int ID = 0;
-
   private static final int TIMESTAMP = 1;
   private static final int NAME = 2;
-  private static final int FORMATTED_NUMBER = 3;
-  private static final int PHOTO_URI = 4;
-  private static final int PHOTO_ID = 5;
-  private static final int LOOKUP_URI = 6;
-  private static final int NUMBER_TYPE_LABEL = 7;
-  private static final int IS_READ = 8;
-  private static final int NEW = 9;
-  private static final int GEOCODED_LOCATION = 10;
-  private static final int PHONE_ACCOUNT_LABEL = 11;
-  private static final int PHONE_ACCOUNT_COLOR = 12;
-  private static final int FEATURES = 13;
-  private static final int IS_BUSINESS = 14;
-  private static final int IS_VOICEMAIL = 15;
-  private static final int TYPE = 16;
-  private static final int NUMBER_CALLS = 17;
-
-  /** Convenience class for accessing values using an abbreviated syntax. */
-  static final class Row {
-    private final Cursor cursor;
-
-    Row(Cursor cursor) {
-      this.cursor = cursor;
-    }
-
-    long id() {
-      return cursor.getInt(ID);
-    }
-
-    long timestamp() {
-      return cursor.getLong(TIMESTAMP);
-    }
-
-    String name() {
-      return cursor.getString(NAME);
-    }
-
-    String formattedNumber() {
-      return cursor.getString(FORMATTED_NUMBER);
-    }
-
-    String photoUri() {
-      return cursor.getString(PHOTO_URI);
-    }
-
-    long photoId() {
-      return cursor.getLong(PHOTO_ID);
-    }
-
-    String lookupUri() {
-      return cursor.getString(LOOKUP_URI);
-    }
-
-    String numberTypeLabel() {
-      return cursor.getString(NUMBER_TYPE_LABEL);
-    }
-
-    boolean isRead() {
-      return cursor.getInt(IS_READ) == 1;
-    }
-
-    boolean isNew() {
-      return cursor.getInt(NEW) == 1;
-    }
-
-    String geocodedLocation() {
-      return cursor.getString(GEOCODED_LOCATION);
-    }
-
-    String phoneAccountLabel() {
-      return cursor.getString(PHONE_ACCOUNT_LABEL);
-    }
-
-    @ColorInt
-    int phoneAccountColor() {
-      return cursor.getInt(PHONE_ACCOUNT_COLOR);
-    }
-
-    int features() {
-      return cursor.getInt(FEATURES);
-    }
-
-    boolean isBusiness() {
-      return cursor.getInt(IS_BUSINESS) == 1;
-    }
-
-    boolean isVoicemail() {
-      return cursor.getInt(IS_VOICEMAIL) == 1;
-    }
-
-    int numberCalls() {
-      return cursor.getInt(NUMBER_CALLS);
-    }
-
-    int callType() {
-      return cursor.getInt(TYPE);
-    }
-  }
+  private static final int NUMBER = 3;
+  private static final int FORMATTED_NUMBER = 4;
+  private static final int PHOTO_URI = 5;
+  private static final int PHOTO_ID = 6;
+  private static final int LOOKUP_URI = 7;
+  private static final int NUMBER_TYPE_LABEL = 8;
+  private static final int IS_READ = 9;
+  private static final int NEW = 10;
+  private static final int GEOCODED_LOCATION = 11;
+  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 12;
+  private static final int PHONE_ACCOUNT_ID = 13;
+  private static final int PHONE_ACCOUNT_LABEL = 14;
+  private static final int PHONE_ACCOUNT_COLOR = 15;
+  private static final int FEATURES = 16;
+  private static final int IS_BUSINESS = 17;
+  private static final int IS_VOICEMAIL = 18;
+  private static final int CALL_TYPE = 19;
+  private static final int NUMBER_CALLS = 20;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -138,5 +60,43 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         null,
         null,
         null);
+  }
+
+  /** Creates a new {@link CoalescedRow} from the provided cursor using the current position. */
+  static CoalescedRow toRow(Cursor cursor) {
+    DialerPhoneNumber number;
+    try {
+      number = DialerPhoneNumber.parseFrom(cursor.getBlob(NUMBER));
+    } catch (InvalidProtocolBufferException e) {
+      throw new IllegalStateException("Couldn't parse DialerPhoneNumber bytes");
+    }
+
+    return CoalescedRow.builder()
+        .setId(cursor.getInt(ID))
+        .setTimestamp(cursor.getLong(TIMESTAMP))
+        .setName(cursor.getString(NAME))
+        .setNumber(number)
+        .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
+        .setPhotoUri(cursor.getString(PHOTO_URI))
+        .setPhotoId(cursor.getLong(PHOTO_ID))
+        .setLookupUri(cursor.getString(LOOKUP_URI))
+        .setNumberTypeLabel(cursor.getString(NUMBER_TYPE_LABEL))
+        .setIsRead(cursor.getInt(IS_READ) == 1)
+        .setIsNew(cursor.getInt(NEW) == 1)
+        .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
+        .setPhoneAccountComponentName(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME))
+        .setPhoneAccountId(cursor.getString(PHONE_ACCOUNT_ID))
+        .setPhoneAccountLabel(cursor.getString(PHONE_ACCOUNT_LABEL))
+        .setPhoneAccountColor(cursor.getInt(PHONE_ACCOUNT_COLOR))
+        .setFeatures(cursor.getInt(FEATURES))
+        .setIsBusiness(cursor.getInt(IS_BUSINESS) == 1)
+        .setIsVoicemail(cursor.getInt(IS_VOICEMAIL) == 1)
+        .setCallType(cursor.getInt(CALL_TYPE))
+        .setNumberCalls(cursor.getInt(NUMBER_CALLS))
+        .build();
+  }
+
+  static long getTimestamp(Cursor cursor) {
+    return cursor.getLong(TIMESTAMP);
   }
 }
