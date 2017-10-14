@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.dialer.lightbringer;
+package com.android.dialer.duo.stub;
 
-public interface LightbringerListener {
-  void onLightbringerStateChanged();
+import com.android.dialer.duo.Duo;
+import dagger.Binds;
+import dagger.Module;
+import javax.inject.Singleton;
+
+@Module
+public abstract class StubDuoModule {
+
+  @Binds
+  @Singleton
+  public abstract Duo bindsDuo(DuoStub duoStub);
 }
