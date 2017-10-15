@@ -642,18 +642,29 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callButtonView.setVisibility(View.VISIBLE);
     }
 
-    // We need to check if we are showing the Lightbringer primary button. If we are, then we should
-    // show the "Call" button here regardless of IMS availability.
-    if (showLightbringerPrimaryButton()) {
-      callButtonView.setVisibility(View.VISIBLE);
-      videoCallButtonView.setVisibility(View.GONE);
-    } else if (CallUtil.isVideoEnabled(mContext)
-        && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
-      videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
-      videoCallButtonView.setVisibility(View.VISIBLE);
-    } else if (lightbringerReady) {
-      videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
-      videoCallButtonView.setVisibility(View.VISIBLE);
+    switch (callbackAction) {
+      case CallbackAction.IMS_VIDEO:
+      case CallbackAction.LIGHTBRINGER:
+        // For an IMS video call or a Lightbringer call, the secondary action should always be a
+        // voice callback.
+        callButtonView.setVisibility(View.VISIBLE);
+        videoCallButtonView.setVisibility(View.GONE);
+        break;
+      case CallbackAction.VOICE:
+        // For a voice call, set the secondary callback action to be an IMS video call if it is
+        // available. Otherwise try to set it as a Lightbringer call.
+        if (CallUtil.isVideoEnabled(mContext)
+            && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
+          videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
+          videoCallButtonView.setVisibility(View.VISIBLE);
+        } else if (lightbringerReady) {
+          videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
+          videoCallButtonView.setVisibility(View.VISIBLE);
+        }
+        break;
+      default:
+        callButtonView.setVisibility(View.GONE);
+        videoCallButtonView.setVisibility(View.GONE);
     }
 
     // For voicemail calls, show the voicemail playback layout; hide otherwise.
