@@ -124,6 +124,7 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
+import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListTouchListener;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
@@ -161,7 +162,8 @@ public class DialtactsActivity extends TransactionSafeActivity
         PhoneNumberInteraction.InteractionErrorListener,
         PhoneNumberInteraction.DisambigDialogDismissedListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        DialpadListener {
+        DialpadListener,
+        SearchFragmentListTouchListener {
 
   public static final boolean DEBUG = false;
   @VisibleForTesting public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
@@ -1648,6 +1650,17 @@ public class DialtactsActivity extends TransactionSafeActivity
     return mIsDialpadShown
         ? CallInitiationType.Type.DIALPAD
         : CallInitiationType.Type.REGULAR_SEARCH;
+  }
+
+  @Override
+  public boolean onSearchListTouch(MotionEvent event) {
+    if (mIsDialpadShown) {
+      hideDialpadFragment(true, false);
+      if (TextUtils.isEmpty(mDialpadQuery)) {
+        exitSearchUi();
+      }
+    }
+    return false;
   }
 
   /** Popup menu accessible from the search bar */
