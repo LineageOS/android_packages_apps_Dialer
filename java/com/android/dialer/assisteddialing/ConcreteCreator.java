@@ -23,6 +23,7 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /**
@@ -50,6 +51,8 @@ public final class ConcreteCreator {
   public static AssistedDialingMediator createNewAssistedDialingMediator(
       @NonNull TelephonyManager telephonyManager, @NonNull Context context) {
 
+    ConfigProvider configProvider = ConfigProviderBindings.get(context);
+
     if (telephonyManager == null) {
       LogUtil.i(
           "ConcreteCreator.createNewAssistedDialingMediator", "provided TelephonyManager was null");
@@ -61,11 +64,13 @@ public final class ConcreteCreator {
     }
 
     if ((Build.VERSION.SDK_INT < BUILD_CODE_FLOOR || Build.VERSION.SDK_INT > BUILD_CODE_CEILING)
-        || !ConfigProviderBindings.get(context).getBoolean("assisted_dialing_enabled", false)) {
+        || !configProvider.getBoolean("assisted_dialing_enabled", false)) {
       return new AssistedDialingMediatorStub();
     }
 
-    Constraints constraints = new Constraints(context);
+    Constraints constraints =
+        new Constraints(
+            context, configProvider.getString("assisted_dialing_csv_country_codes", ""));
     return new AssistedDialingMediatorImpl(
         new LocationDetector(telephonyManager), new NumberTransformer(constraints));
   }
