@@ -29,6 +29,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract;
@@ -121,7 +122,13 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
         Assert.checkArgument(sortOrder == null, "sort order not supported for coalesced call log");
         try (Cursor allAnnotatedCallLogRows =
             queryBuilder.query(
-                db, null, null, null, null, null, AnnotatedCallLog.TIMESTAMP + " DESC")) {
+                db,
+                null,
+                String.format("%s != ?", CoalescedAnnotatedCallLog.CALL_TYPE),
+                new String[] {Integer.toString(Calls.VOICEMAIL_TYPE)},
+                null,
+                null,
+                AnnotatedCallLog.TIMESTAMP + " DESC")) {
           Cursor coalescedRows = coalescer.coalesce(allAnnotatedCallLogRows);
           coalescedRows.setNotificationUri(
               getContext().getContentResolver(), CoalescedAnnotatedCallLog.CONTENT_URI);
