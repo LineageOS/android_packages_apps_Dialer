@@ -33,7 +33,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
@@ -42,6 +44,7 @@ import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -68,7 +71,8 @@ import java.util.List;
 public final class NewSearchFragment extends Fragment
     implements LoaderCallbacks<Cursor>,
         OnEmptyViewActionButtonClickedListener,
-        CapabilitiesListener {
+        CapabilitiesListener,
+        OnTouchListener {
 
   // Since some of our queries can generate network requests, we should delay them until the user
   // stops typing to prevent generating too much network traffic.
@@ -127,6 +131,7 @@ public final class NewSearchFragment extends Fragment
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setOnTouchListener(this);
     recyclerView.setAdapter(adapter);
 
     if (!PermissionsUtil.hasContactsReadPermissions(getContext())) {
@@ -340,7 +345,7 @@ public final class NewSearchFragment extends Fragment
     if (!PermissionsUtil.hasLocationPermissions(getContext())
         && !DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(getContext())
             .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false)) {
-      if (adapter != null) {
+      if (adapter != null && isRegularSearch()) {
         adapter.showLocationPermissionRequest(
             v -> requestLocationPermission(), v -> dismissLocationPermission());
       }
@@ -427,7 +432,28 @@ public final class NewSearchFragment extends Fragment
     return actions;
   }
 
+  // Returns true if currently in Regular Search (as opposed to Dialpad Search).
   private boolean isRegularSearch() {
     return callInitiationType == CallInitiationType.Type.REGULAR_SEARCH;
+  }
+
+  @Override
+  public boolean onTouch(View v, MotionEvent event) {
+    if (event.getAction() == MotionEvent.ACTION_UP) {
+      v.performClick();
+    }
+    return FragmentUtils.getParentUnsafe(this, SearchFragmentListTouchListener.class)
+        .onSearchListTouch(event);
+  }
+
+  /** Callback to {@link NewSearchFragment}'s parent to notify when the list is touched. */
+  public interface SearchFragmentListTouchListener {
+
+    /**
+     * Called when the list view in {@link NewSearchFragment} is touched.
+     *
+     * @see OnTouchListener#onTouch(View, MotionEvent)
+     */
+    boolean onSearchListTouch(MotionEvent event);
   }
 }
