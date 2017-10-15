@@ -129,7 +129,7 @@ public class ClearCallLogDialog extends DialogFragment {
     if (EnrichedCallComponent.get(activity).getEnrichedCallManager().hasStoredData()) {
       Snackbar.make(
               activity.findViewById(R.id.calllog_frame),
-              getString(R.string.multiple_ec_data_deleted),
+              activity.getString(R.string.multiple_ec_data_deleted),
               5_000)
           .show();
     }
