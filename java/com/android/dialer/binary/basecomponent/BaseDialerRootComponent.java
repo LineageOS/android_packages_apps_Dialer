@@ -20,8 +20,8 @@ import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.main.MainComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.simulator.SimulatorComponent;
@@ -49,4 +49,4 @@ public interface BaseDialerRootComponent
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
         VoicemailComponent.HasComponent,
-        LightbringerComponent.HasComponent {}
+        DuoComponent.HasComponent {}

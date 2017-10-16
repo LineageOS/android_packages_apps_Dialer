@@ -34,11 +34,11 @@ import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
@@ -194,7 +194,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
       return CallToAction.VIDEO_CALL;
     }
 
-    if (LightbringerComponent.get(context).getLightbringer().isReachable(context, number)) {
+    if (DuoComponent.get(context).getDuo().isReachable(context, number)) {
       return CallToAction.DUO_CALL;
     }
 

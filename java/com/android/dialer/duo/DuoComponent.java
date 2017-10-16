@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.lightbringer;
+package com.android.dialer.duo;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -24,18 +24,18 @@ import dagger.Subcomponent;
 /**
  */
 @Subcomponent
-public abstract class LightbringerComponent {
+public abstract class DuoComponent {
 
   @NonNull
-  public abstract Lightbringer getLightbringer();
+  public abstract Duo getDuo();
 
-  public static LightbringerComponent get(Context context) {
+  public static DuoComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
-        .lightbringerComponent();
+        .duoComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    LightbringerComponent lightbringerComponent();
+    DuoComponent duoComponent();
   }
 }

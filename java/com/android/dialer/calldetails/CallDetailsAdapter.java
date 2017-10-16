@@ -29,7 +29,7 @@ import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.duo.DuoComponent;
 import java.util.List;
 
 /** Adapter for RecyclerView in {@link CallDetailsActivity}. */
@@ -55,9 +55,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     this.callDetailsEntries = callDetailsEntries;
     this.callbackActionListener = callbackActionListener;
     this.reportCallIdListener = reportCallIdListener;
-    callTypeHelper =
-        new CallTypeHelper(
-            context.getResources(), LightbringerComponent.get(context).getLightbringer());
+    callTypeHelper = new CallTypeHelper(context.getResources(), DuoComponent.get(context).getDuo());
   }
 
   @Override
@@ -122,6 +120,6 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     CallDetailsEntry entry = callDetailsEntries.get(0);
     return CallbackActionHelper.getCallbackAction(
-        contact.getNumber(), entry.getFeatures(), entry.getIsLightbringerCall());
+        contact.getNumber(), entry.getFeatures(), entry.getIsDuoCall());
   }
 }
