@@ -51,6 +51,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -58,7 +59,6 @@ import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.enrichedcall.EnrichedCallManager.Filter;
 import com.android.dialer.enrichedcall.EnrichedCallManager.StateChangedListener;
 import com.android.dialer.enrichedcall.Session;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactLookupResult.Type;
@@ -72,9 +72,9 @@ import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
+import com.android.incallui.videotech.duo.DuoVideoTech;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
-import com.android.incallui.videotech.lightbringer.LightbringerTech;
 import com.android.incallui.videotech.utils.VideoUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -1614,11 +1614,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       }
 
       videoTechs.add(
-          new LightbringerTech(
-              LightbringerComponent.get(call.mContext).getLightbringer(),
-              call,
-              call.mTelecomCall,
-              phoneNumber));
+          new DuoVideoTech(
+              DuoComponent.get(call.mContext).getDuo(), call, call.mTelecomCall, phoneNumber));
     }
 
     VideoTech getVideoTech() {

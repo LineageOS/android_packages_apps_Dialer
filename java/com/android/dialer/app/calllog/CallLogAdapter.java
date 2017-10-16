@@ -73,12 +73,12 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.duo.DuoListener;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerComponent;
-import com.android.dialer.lightbringer.LightbringerListener;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -96,7 +96,7 @@ import java.util.Set;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
-    implements GroupCreator, OnVoicemailDeletedListener, LightbringerListener {
+    implements GroupCreator, OnVoicemailDeletedListener, DuoListener {
 
   // Types of activities the call log adapter is used for
   public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -382,13 +382,13 @@ public class CallLogAdapter extends GroupingListAdapter
             }
             expandViewHolderActions(viewHolder);
 
-            if (isLightbringerCallButtonVisible(viewHolder.videoCallButtonView)) {
+            if (isDuoCallButtonVisible(viewHolder.videoCallButtonView)) {
               CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
             }
           }
         }
 
-        private boolean isLightbringerCallButtonVisible(View videoCallButtonView) {
+        private boolean isDuoCallButtonVisible(View videoCallButtonView) {
           if (videoCallButtonView == null) {
             return false;
           }
@@ -399,8 +399,7 @@ public class CallLogAdapter extends GroupingListAdapter
           if (intentProvider == null) {
             return false;
           }
-          String packageName =
-              LightbringerComponent.get(mActivity).getLightbringer().getPackageName();
+          String packageName = DuoComponent.get(mActivity).getDuo().getPackageName();
           if (packageName == null) {
             return false;
           }
@@ -670,12 +669,12 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     mIsSpamEnabled = Spam.get(mActivity).isSpamEnabled();
-    getLightbringer().registerListener(this);
+    getDuo().registerListener(this);
     notifyDataSetChanged();
   }
 
   public void onPause() {
-    getLightbringer().unregisterListener(this);
+    getDuo().unregisterListener(this);
     pauseCache();
     for (Uri uri : mHiddenItemUris) {
       CallLogAsyncTaskUtil.deleteVoicemail(mActivity, uri, null);
@@ -846,7 +845,7 @@ public class CallLogAdapter extends GroupingListAdapter
     // attempt to set the field properly in that case
     views.isCallComposerCapable = isCallComposerCapable(views.number);
     views.setDetailedPhoneDetails(callDetailsEntries);
-    views.lightbringerReady = getLightbringer().isReachable(mActivity, views.number);
+    views.duoReady = getDuo().isReachable(mActivity, views.number);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
           @Override
@@ -982,12 +981,12 @@ public class CallLogAdapter extends GroupingListAdapter
               .setFeatures(cursor.getInt(CallLogQuery.FEATURES));
 
       String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-      if (getLightbringer().getPhoneAccountComponentName() != null
-          && getLightbringer()
+      if (getDuo().getPhoneAccountComponentName() != null
+          && getDuo()
               .getPhoneAccountComponentName()
               .flattenToString()
               .equals(phoneAccountComponentName)) {
-        entry.setIsLightbringerCall(true);
+        entry.setIsDuoCall(true);
       }
 
       entries.addEntries(entry.build());
@@ -1405,12 +1404,12 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   @NonNull
-  private Lightbringer getLightbringer() {
-    return LightbringerComponent.get(mActivity).getLightbringer();
+  private Duo getDuo() {
+    return DuoComponent.get(mActivity).getDuo();
   }
 
   @Override
-  public void onLightbringerStateChanged() {
+  public void onDuoStateChanged() {
     notifyDataSetChanged();
   }
 
