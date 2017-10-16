@@ -20,8 +20,8 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -30,16 +30,11 @@ public class CallbackActionHelper {
 
   /** Specifies the action a user can take to make a callback. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-    CallbackAction.NONE,
-    CallbackAction.IMS_VIDEO,
-    CallbackAction.LIGHTBRINGER,
-    CallbackAction.VOICE
-  })
+  @IntDef({CallbackAction.NONE, CallbackAction.IMS_VIDEO, CallbackAction.DUO, CallbackAction.VOICE})
   public @interface CallbackAction {
     int NONE = 0;
     int IMS_VIDEO = 1;
-    int LIGHTBRINGER = 2;
+    int DUO = 2;
     int VOICE = 3;
   }
 
@@ -55,8 +50,7 @@ public class CallbackActionHelper {
    */
   public static @CallbackAction int getCallbackAction(
       String number, int features, String phoneAccountComponentName, Context context) {
-    return getCallbackAction(
-        number, features, isLightbringerCall(phoneAccountComponentName, context));
+    return getCallbackAction(number, features, isDuoCall(phoneAccountComponentName, context));
   }
 
   /**
@@ -64,16 +58,16 @@ public class CallbackActionHelper {
    *
    * @param number The phone number in column {@link android.provider.CallLog.Calls#NUMBER}.
    * @param features Value of features in column {@link android.provider.CallLog.Calls#FEATURES}.
-   * @param isLightbringerCall Whether the call is a Lightbringer call.
+   * @param isDuoCall Whether the call is a Duo call.
    * @return One of the values in {@link CallbackAction}
    */
   public static @CallbackAction int getCallbackAction(
-      String number, int features, boolean isLightbringerCall) {
+      String number, int features, boolean isDuoCall) {
     if (TextUtils.isEmpty(number)) {
       return CallbackAction.NONE;
     }
-    if (isLightbringerCall) {
-      return CallbackAction.LIGHTBRINGER;
+    if (isDuoCall) {
+      return CallbackAction.DUO;
     }
 
     boolean isVideoCall = (features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
@@ -84,8 +78,8 @@ public class CallbackActionHelper {
     return CallbackAction.VOICE;
   }
 
-  private static boolean isLightbringerCall(String phoneAccountComponentName, Context context) {
-    Lightbringer lightBringer = LightbringerComponent.get(context).getLightbringer();
+  private static boolean isDuoCall(String phoneAccountComponentName, Context context) {
+    Duo lightBringer = DuoComponent.get(context).getDuo();
     return lightBringer.getPhoneAccountComponentName() != null
         && lightBringer
             .getPhoneAccountComponentName()
