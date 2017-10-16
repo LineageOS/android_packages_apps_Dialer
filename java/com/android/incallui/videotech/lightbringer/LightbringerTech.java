@@ -17,7 +17,6 @@
 package com.android.incallui.videotech.lightbringer;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
@@ -57,11 +56,6 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public boolean isAvailable(Context context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, only supported on N+");
-      return false;
-    }
-
     if (!ConfigProviderBindings.get(context)
         .getBoolean("enable_lightbringer_video_upgrade", true)) {
       LogUtil.v("LightbringerTech.isAvailable", "upgrade disabled by flag");

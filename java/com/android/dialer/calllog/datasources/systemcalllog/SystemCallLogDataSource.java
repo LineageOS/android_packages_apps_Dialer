@@ -88,7 +88,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     appContext
         .getContentResolver()
         .registerContentObserver(
-            CallLog.Calls.CONTENT_URI,
+            CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,
             true,
             new CallLogObserver(
                 ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks));
@@ -152,6 +152,9 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     // TODO(zachh): Complete implementation.
+
+    assertNoVoicemailsInRows(individualRowsSortedByTimestampDesc);
+
     return new RowCombiner(individualRowsSortedByTimestampDesc)
         .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
         .useMostRecentLong(AnnotatedCallLog.NEW)
@@ -174,6 +177,15 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         .combine();
   }
 
+  private void assertNoVoicemailsInRows(List<ContentValues> individualRowsSortedByTimestampDesc) {
+    for (ContentValues contentValue : individualRowsSortedByTimestampDesc) {
+      if (contentValue.getAsLong(AnnotatedCallLog.CALL_TYPE) != null) {
+        Assert.checkArgument(
+            contentValue.getAsLong(AnnotatedCallLog.CALL_TYPE) != Calls.VOICEMAIL_TYPE);
+      }
+    }
+  }
+
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
   private void handleInsertsAndUpdates(
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
@@ -189,7 +201,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         appContext
             .getContentResolver()
             .query(
-                Calls.CONTENT_URI, // Excludes voicemail
+                Calls.CONTENT_URI_WITH_VOICEMAIL,
                 new String[] {
                   Calls._ID,
                   Calls.DATE,
@@ -414,7 +426,12 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     try (Cursor cursor =
         appContext
             .getContentResolver()
-            .query(Calls.CONTENT_URI, new String[] {Calls._ID}, whereClause, whereArgs, null)) {
+            .query(
+                Calls.CONTENT_URI_WITH_VOICEMAIL,
+                new String[] {Calls._ID},
+                whereClause,
+                whereArgs,
+                null)) {
 
       if (cursor == null) {
         LogUtil.e("SystemCallLogDataSource.getIdsFromSystemCallLog", "null cursor");
