@@ -109,6 +109,19 @@ public class SimulatorConnectionService extends ConnectionService {
     return connection;
   }
 
+  @Override
+  public void onConference(Connection connection1, Connection connection2) {
+    LogUtil.i(
+        "SimulatorConnectionService.onConference",
+        "connection1: "
+            + SimulatorSimCallManager.getConnectionTag(connection1)
+            + ", connection2: "
+            + SimulatorSimCallManager.getConnectionTag(connection2));
+    for (Listener listener : listeners) {
+      listener.onConference((SimulatorConnection) connection1, (SimulatorConnection) connection2);
+    }
+  }
+
   private static Uri getPhoneNumber(ConnectionRequest request) {
     String phoneNumber = request.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
     return Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null);
@@ -116,8 +129,11 @@ public class SimulatorConnectionService extends ConnectionService {
 
   /** Callback used to notify listeners when a new connection has been added. */
   public interface Listener {
-    void onNewOutgoingConnection(SimulatorConnection connection);
+    void onNewOutgoingConnection(@NonNull SimulatorConnection connection);
 
-    void onNewIncomingConnection(SimulatorConnection connection);
+    void onNewIncomingConnection(@NonNull SimulatorConnection connection);
+
+    void onConference(
+        @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2);
   }
 }
