@@ -1430,19 +1430,21 @@ public class DialpadFragment extends Fragment
     if (getActivity() == null || getView() == null) {
       return;
     }
-    final DialpadView dialpadView = getView().findViewById(R.id.dialpad_view);
     if (!hidden && !isDialpadChooserVisible()) {
       if (mAnimate) {
-        dialpadView.animateShow();
+        mDialpadView.animateShow();
       }
       ThreadUtil.getUiThreadHandler()
           .postDelayed(
-              () -> mFloatingActionButtonController.scaleIn(),
+              () -> {
+                if (!isDialpadChooserVisible()) {
+                  mFloatingActionButtonController.scaleIn();
+                }
+              },
               mAnimate ? mDialpadSlideInDuration : 0);
       FragmentUtils.getParentUnsafe(this, DialpadListener.class).onDialpadShown();
       mDigits.requestFocus();
-    }
-    if (hidden) {
+    } else if (hidden) {
       mFloatingActionButtonController.scaleOut();
     }
   }
