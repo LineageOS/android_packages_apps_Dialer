@@ -41,8 +41,8 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutRefresher;
@@ -303,11 +303,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     ShortcutRefresher.refresh(mContext, mContactEntries);
     notifyDataSetChanged();
 
-    Lightbringer lightbringer = LightbringerComponent.get(mContext).getLightbringer();
+    Duo duo = DuoComponent.get(mContext).getDuo();
     for (ContactEntry contact : mContactEntries) {
       if (contact.phoneNumber == null) {
         multipleNumbersContactsCount++;
-      } else if (lightbringer.isReachable(mContext, contact.phoneNumber)) {
+      } else if (duo.isReachable(mContext, contact.phoneNumber)) {
         lightbringerReachableContactsCount++;
       }
     }

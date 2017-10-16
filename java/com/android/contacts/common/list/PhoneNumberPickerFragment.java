@@ -37,9 +37,9 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.performancereport.PerformanceReport;
@@ -91,13 +91,10 @@ public class PhoneNumberPickerFragment extends ContactEntryListFragment<ContactE
   }
 
   @Override
-  public void onLightbringerIconClicked(int position) {
+  public void onDuoVideoIconClicked(int position) {
     PerformanceReport.stopRecording();
     String phoneNumber = getPhoneNumber(position);
-    Intent intent =
-        LightbringerComponent.get(getContext())
-            .getLightbringer()
-            .getIntent(getContext(), phoneNumber);
+    Intent intent = DuoComponent.get(getContext()).getDuo().getIntent(getContext(), phoneNumber);
     // DialtactsActivity.ACTIVITY_REQUEST_CODE_LIGHTBRINGER
     // Cannot reference because of cyclic dependencies
     Logger.get(getContext())

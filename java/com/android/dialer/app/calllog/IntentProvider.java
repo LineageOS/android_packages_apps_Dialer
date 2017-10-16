@@ -31,7 +31,7 @@ import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -91,11 +91,11 @@ public abstract class IntentProvider {
     };
   }
 
-  public static IntentProvider getLightbringerIntentProvider(String number) {
+  public static IntentProvider getDuoVideoIntentProvider(String number) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return LightbringerComponent.get(context).getLightbringer().getIntent(context, number);
+        return DuoComponent.get(context).getDuo().getIntent(context, number);
       }
     };
   }

@@ -35,7 +35,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.lightbringer.LightbringerComponent;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.searchfragment.common.RowClickListener;
@@ -244,9 +244,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
   public void placeDuoCall(String phoneNumber) {
     Logger.get(activity)
         .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
-    Intent intent =
-        LightbringerComponent.get(activity).getLightbringer().getIntent(activity, phoneNumber);
-    activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
+    Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, phoneNumber);
+    activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
   }
 
   @Override

@@ -81,12 +81,12 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
 
   /** IntDef for indices of ViewPager tabs. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({NONE, VIDEO, LIGHTBRINGER, CALL_AND_SHARE})
+  @IntDef({NONE, VIDEO, DUO, CALL_AND_SHARE})
   public @interface CallToAction {}
 
   public static final int NONE = 0;
   public static final int VIDEO = 1;
-  public static final int LIGHTBRINGER = 2;
+  public static final int DUO = 2;
   public static final int CALL_AND_SHARE = 3;
 
   private final PhotoPosition mPhotoPosition = getDefaultPhotoPosition();
@@ -341,13 +341,13 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       drawable.setAutoMirrored(true);
       description = R.string.description_search_video_call;
       onClickListener = v -> listener.onVideoCallIconClicked(position);
-    } else if (action == LIGHTBRINGER) {
+    } else if (action == DUO) {
       CallIntentBuilder.increaseLightbringerCallButtonAppearInSearchCount();
       drawable =
           ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_videocam_vd_theme_24);
       drawable.setAutoMirrored(true);
       description = R.string.description_search_video_call;
-      onClickListener = v -> listener.onLightbringerIconClicked(position);
+      onClickListener = v -> listener.onDuoVideoIconClicked(position);
     } else {
       mCallToActionView.setVisibility(View.GONE);
       mCallToActionView.setOnClickListener(null);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.lightbringer.stub;
+package com.android.dialer.duo.stub;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,16 +26,16 @@ import android.support.annotation.StringRes;
 import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoListener;
 import com.google.common.base.Optional;
 import java.util.List;
 import javax.inject.Inject;
 
-public class LightbringerStub implements Lightbringer {
+public class DuoStub implements Duo {
 
   @Inject
-  public LightbringerStub() {}
+  public DuoStub() {}
 
   @Override
   public boolean isEnabled() {
@@ -83,14 +83,14 @@ public class LightbringerStub implements Lightbringer {
 
   @MainThread
   @Override
-  public void registerListener(LightbringerListener listener) {
+  public void registerListener(DuoListener listener) {
     Assert.isMainThread();
     Assert.isNotNull(listener);
   }
 
   @MainThread
   @Override
-  public void unregisterListener(LightbringerListener listener) {
+  public void unregisterListener(DuoListener listener) {
     Assert.isMainThread();
     Assert.isNotNull(listener);
   }

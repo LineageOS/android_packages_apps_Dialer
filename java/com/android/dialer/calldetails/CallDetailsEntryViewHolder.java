@@ -92,7 +92,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     boolean isPulledCall =
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
-    boolean isLightbringerCall = entry.getIsLightbringerCall();
+    boolean isDuoCall = entry.getIsDuoCall();
 
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
@@ -103,7 +103,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
 
     callTypeText.setText(
-        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isLightbringerCall));
+        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isDuoCall));
     callTime.setText(CallLogDates.formatDate(context, entry.getDate()));
 
     if (CallTypeHelper.isMissedCallType(callType)) {
