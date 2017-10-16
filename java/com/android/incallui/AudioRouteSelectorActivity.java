@@ -38,6 +38,7 @@ public class AudioRouteSelectorActivity extends FragmentActivity
   @Override
   public void onAudioRouteSelected(int audioRoute) {
     TelecomAdapter.getInstance().setAudioRoute(audioRoute);
+    finish();
   }
 
   @Override
