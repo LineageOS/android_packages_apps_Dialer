@@ -45,11 +45,11 @@ import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
@@ -405,8 +405,8 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
     }
 
     if (action == ContactListItemView.NONE
-        && LightbringerComponent.get(mContext).getLightbringer().isReachable(mContext, number)) {
-      action = ContactListItemView.LIGHTBRINGER;
+        && DuoComponent.get(mContext).getDuo().isReachable(mContext, number)) {
+      action = ContactListItemView.DUO;
     }
 
     if (action == ContactListItemView.NONE) {
@@ -576,7 +576,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
 
     void onVideoCallIconClicked(int position);
 
-    void onLightbringerIconClicked(int position);
+    void onDuoVideoIconClicked(int position);
 
     void onCallAndShareIconClicked(int position);
   }

@@ -106,7 +106,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   private void setCallbackAction(@CallbackAction int callbackAction) {
     this.callbackAction = callbackAction;
     switch (callbackAction) {
-      case CallbackAction.LIGHTBRINGER:
+      case CallbackAction.DUO:
       case CallbackAction.IMS_VIDEO:
         callbackButton.setVisibility(View.VISIBLE);
         callbackButton.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
@@ -130,8 +130,8 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
         case CallbackAction.IMS_VIDEO:
           callbackActionListener.placeImsVideoCall(contact.getNumber());
           break;
-        case CallbackAction.LIGHTBRINGER:
-          callbackActionListener.placeLightbringerCall(contact.getNumber());
+        case CallbackAction.DUO:
+          callbackActionListener.placeDuoVideoCall(contact.getNumber());
           break;
         case CallbackAction.VOICE:
           callbackActionListener.placeVoiceCall(contact.getNumber(), contact.getPostDialDigits());
@@ -151,8 +151,8 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     /** Places an IMS video call. */
     void placeImsVideoCall(String phoneNumber);
 
-    /** Places a Lightbringer call. */
-    void placeLightbringerCall(String phoneNumber);
+    /** Places a Duo video call. */
+    void placeDuoVideoCall(String phoneNumber);
 
     /** Place a traditional voice call. */
     void placeVoiceCall(String phoneNumber, String postDialDigits);
