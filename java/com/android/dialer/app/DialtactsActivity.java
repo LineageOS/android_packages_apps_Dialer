@@ -900,7 +900,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
-  public void onContactsListScrolled(int scrollState) {
+  public void onContactsListScrolled(boolean isDragging) {
     // intentionally empty.
   }
 
