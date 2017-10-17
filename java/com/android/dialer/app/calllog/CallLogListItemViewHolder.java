@@ -27,7 +27,6 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
@@ -75,8 +74,7 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.logging.ContactSource;
@@ -746,7 +744,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
   private boolean showDuoPrimaryButton() {
     return accountHandle != null
-        && accountHandle.getComponentName().equals(getDuo().getPhoneAccountComponentName())
+        && accountHandle.getComponentName().equals(DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME)
         && duoReady;
   }
 
@@ -961,7 +959,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       // We check to see if we are starting a Duo intent. The reason is Duo
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
-      if (packageName != null && packageName.equals(getDuo().getPackageName())) {
+      if (DuoConstants.PACKAGE_NAME.equals(packageName)) {
         Logger.get(mContext)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
         if (isNonContactEntry(info)) {
@@ -1123,11 +1121,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   @VisibleForTesting
   public CallDetailsEntries getDetailedPhoneDetails() {
     return callDetailsEntries;
-  }
-
-  @NonNull
-  private Duo getDuo() {
-    return DuoComponent.get(mContext).getDuo();
   }
 
   @Override
