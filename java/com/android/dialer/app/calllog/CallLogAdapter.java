@@ -75,6 +75,7 @@ import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.duo.DuoListener;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -399,11 +400,7 @@ public class CallLogAdapter extends GroupingListAdapter
           if (intentProvider == null) {
             return false;
           }
-          String packageName = DuoComponent.get(mActivity).getDuo().getPackageName();
-          if (packageName == null) {
-            return false;
-          }
-          return packageName.equals(intentProvider.getIntent(mActivity).getPackage());
+          return DuoConstants.PACKAGE_NAME.equals(intentProvider.getIntent(mActivity).getPackage());
         }
       };
 
@@ -697,7 +694,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
   @Override
   protected void addGroups(Cursor cursor) {
-    mCallLogGroupBuilder.addGroups(cursor, mActivity);
+    mCallLogGroupBuilder.addGroups(cursor);
   }
 
   @Override
@@ -981,11 +978,9 @@ public class CallLogAdapter extends GroupingListAdapter
               .setFeatures(cursor.getInt(CallLogQuery.FEATURES));
 
       String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-      if (getDuo().getPhoneAccountComponentName() != null
-          && getDuo()
-              .getPhoneAccountComponentName()
-              .flattenToString()
-              .equals(phoneAccountComponentName)) {
+      if (DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+          .flattenToString()
+          .equals(phoneAccountComponentName)) {
         entry.setIsDuoCall(true);
       }
 

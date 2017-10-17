@@ -16,12 +16,10 @@
 
 package com.android.dialer.calllogutils;
 
-import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.duo.DuoConstants;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -45,12 +43,11 @@ public class CallbackActionHelper {
    * @param features Value of features in column {@link android.provider.CallLog.Calls#FEATURES}.
    * @param phoneAccountComponentName Account name in column {@link
    *     android.provider.CallLog.Calls#PHONE_ACCOUNT_COMPONENT_NAME}.
-   * @param context The context in which the method is called.
    * @return One of the values in {@link CallbackAction}
    */
   public static @CallbackAction int getCallbackAction(
-      String number, int features, String phoneAccountComponentName, Context context) {
-    return getCallbackAction(number, features, isDuoCall(phoneAccountComponentName, context));
+      String number, int features, String phoneAccountComponentName) {
+    return getCallbackAction(number, features, isDuoCall(phoneAccountComponentName));
   }
 
   /**
@@ -78,12 +75,9 @@ public class CallbackActionHelper {
     return CallbackAction.VOICE;
   }
 
-  private static boolean isDuoCall(String phoneAccountComponentName, Context context) {
-    Duo lightBringer = DuoComponent.get(context).getDuo();
-    return lightBringer.getPhoneAccountComponentName() != null
-        && lightBringer
-            .getPhoneAccountComponentName()
-            .flattenToString()
-            .equals(phoneAccountComponentName);
+  private static boolean isDuoCall(String phoneAccountComponentName) {
+    return DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+        .flattenToString()
+        .equals(phoneAccountComponentName);
   }
 }
