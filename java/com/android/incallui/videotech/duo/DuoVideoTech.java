@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.incallui.videotech.lightbringer;
+package com.android.incallui.videotech.duo;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -23,8 +23,8 @@ import android.telecom.Call;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerListener;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoListener;
 import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -33,50 +33,50 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
-public class LightbringerTech implements VideoTech, LightbringerListener {
-  private final Lightbringer lightbringer;
+public class DuoVideoTech implements VideoTech, DuoListener {
+  private final Duo duo;
   private final VideoTechListener listener;
   private final Call call;
   private final String callingNumber;
   private int callState = Call.STATE_NEW;
   private boolean isRemoteUpgradeAvailabilityQueried;
 
-  public LightbringerTech(
-      @NonNull Lightbringer lightbringer,
+  public DuoVideoTech(
+      @NonNull Duo duo,
       @NonNull VideoTechListener listener,
       @NonNull Call call,
       @NonNull String callingNumber) {
-    this.lightbringer = Assert.isNotNull(lightbringer);
+    this.duo = Assert.isNotNull(duo);
     this.listener = Assert.isNotNull(listener);
     this.call = Assert.isNotNull(call);
     this.callingNumber = Assert.isNotNull(callingNumber);
 
-    lightbringer.registerListener(this);
+    duo.registerListener(this);
   }
 
   @Override
   public boolean isAvailable(Context context) {
     if (!ConfigProviderBindings.get(context)
         .getBoolean("enable_lightbringer_video_upgrade", true)) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade disabled by flag");
+      LogUtil.v("DuoVideoTech.isAvailable", "upgrade disabled by flag");
       return false;
     }
 
     if (callState != Call.STATE_ACTIVE) {
-      LogUtil.v("LightbringerTech.isAvailable", "upgrade unavailable, call must be active");
+      LogUtil.v("DuoVideoTech.isAvailable", "upgrade unavailable, call must be active");
       return false;
     }
-    Optional<Boolean> localResult = lightbringer.supportsUpgrade(context, callingNumber);
+    Optional<Boolean> localResult = duo.supportsUpgrade(context, callingNumber);
     if (localResult.isPresent()) {
       LogUtil.v(
-          "LightbringerTech.isAvailable", "upgrade supported in local cache: " + localResult.get());
+          "DuoVideoTech.isAvailable", "upgrade supported in local cache: " + localResult.get());
       return localResult.get();
     }
 
     if (!isRemoteUpgradeAvailabilityQueried) {
-      LogUtil.v("LightbringerTech.isAvailable", "reachability unknown, starting remote query");
+      LogUtil.v("DuoVideoTech.isAvailable", "reachability unknown, starting remote query");
       isRemoteUpgradeAvailabilityQueried = true;
-      lightbringer.updateReachability(context, ImmutableList.of(callingNumber));
+      duo.updateReachability(context, ImmutableList.of(callingNumber));
     }
 
     return false;
@@ -111,7 +111,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   @Override
   public void onCallStateChanged(Context context, int newState) {
     if (newState == Call.STATE_DISCONNECTING) {
-      lightbringer.unregisterListener(this);
+      duo.unregisterListener(this);
     }
 
     callState = newState;
@@ -119,7 +119,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
 
   @Override
   public void onRemovedFromCallList() {
-    lightbringer.unregisterListener(this);
+    duo.unregisterListener(this);
   }
 
   @Override
@@ -130,7 +130,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   @Override
   public void upgradeToVideo(@NonNull Context context) {
     listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
-    lightbringer.requestUpgrade(context, call);
+    duo.requestUpgrade(context, call);
   }
 
   @Override
@@ -184,7 +184,7 @@ public class LightbringerTech implements VideoTech, LightbringerListener {
   public void setDeviceOrientation(int rotation) {}
 
   @Override
-  public void onLightbringerStateChanged() {
+  public void onDuoStateChanged() {
     listener.onVideoTechStateChanged();
   }
 

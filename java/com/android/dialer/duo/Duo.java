@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.lightbringer;
+package com.android.dialer.duo;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,7 +29,7 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.util.List;
 
-public interface Lightbringer {
+public interface Duo {
 
   boolean isEnabled();
 
@@ -50,10 +50,10 @@ public interface Lightbringer {
   void requestUpgrade(@NonNull Context context, Call call);
 
   @MainThread
-  void registerListener(@NonNull LightbringerListener listener);
+  void registerListener(@NonNull DuoListener listener);
 
   @MainThread
-  void unregisterListener(@NonNull LightbringerListener listener);
+  void unregisterListener(@NonNull DuoListener listener);
 
   @Nullable
   @MainThread
@@ -86,7 +86,7 @@ public interface Lightbringer {
 
     public static ReachabilityData create(
         String number, boolean videoCallable, boolean supportsUpgrade) {
-      return new AutoValue_Lightbringer_ReachabilityData(number, videoCallable, supportsUpgrade);
+      return new AutoValue_Duo_ReachabilityData(number, videoCallable, supportsUpgrade);
     }
   }
 }

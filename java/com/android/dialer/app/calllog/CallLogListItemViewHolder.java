@@ -75,10 +75,10 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.logging.DialerImpression;
@@ -222,7 +222,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public boolean isSpam;
 
   public boolean isCallComposerCapable;
-  public boolean lightbringerReady;
+  public boolean duoReady;
 
   private View.OnClickListener mExpandCollapseListener;
   private final OnActionModeStateChangedListener onActionModeStateChangedListener;
@@ -533,10 +533,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
         primaryActionButtonView.setVisibility(View.VISIBLE);
         break;
-      case CallbackAction.LIGHTBRINGER:
-        if (showLightbringerPrimaryButton()) {
+      case CallbackAction.DUO:
+        if (showDuoPrimaryButton()) {
           CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
-          primaryActionButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
+          primaryActionButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
         } else {
           primaryActionButtonView.setTag(
               IntentProvider.getReturnVideoCallIntentProvider(number, accountHandle));
@@ -644,21 +644,21 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     switch (callbackAction) {
       case CallbackAction.IMS_VIDEO:
-      case CallbackAction.LIGHTBRINGER:
-        // For an IMS video call or a Lightbringer call, the secondary action should always be a
+      case CallbackAction.DUO:
+        // For an IMS video call or a Duo call, the secondary action should always be a
         // voice callback.
         callButtonView.setVisibility(View.VISIBLE);
         videoCallButtonView.setVisibility(View.GONE);
         break;
       case CallbackAction.VOICE:
         // For a voice call, set the secondary callback action to be an IMS video call if it is
-        // available. Otherwise try to set it as a Lightbringer call.
+        // available. Otherwise try to set it as a Duo call.
         if (CallUtil.isVideoEnabled(mContext)
             && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
           videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
-        } else if (lightbringerReady) {
-          videoCallButtonView.setTag(IntentProvider.getLightbringerIntentProvider(number));
+        } else if (duoReady) {
+          videoCallButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
         }
         break;
@@ -744,10 +744,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     return false;
   }
 
-  private boolean showLightbringerPrimaryButton() {
+  private boolean showDuoPrimaryButton() {
     return accountHandle != null
-        && accountHandle.getComponentName().equals(getLightbringer().getPhoneAccountComponentName())
-        && lightbringerReady;
+        && accountHandle.getComponentName().equals(getDuo().getPhoneAccountComponentName())
+        && duoReady;
   }
 
   private static boolean hasDialableChar(CharSequence number) {
@@ -958,10 +958,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         return;
       }
 
-      // We check to see if we are starting a Lightbringer intent. The reason is Lightbringer
+      // We check to see if we are starting a Duo intent. The reason is Duo
       // intents need to be started using startActivityForResult instead of the usual startActivity
       String packageName = intent.getPackage();
-      if (packageName != null && packageName.equals(getLightbringer().getPackageName())) {
+      if (packageName != null && packageName.equals(getDuo().getPackageName())) {
         Logger.get(mContext)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
         if (isNonContactEntry(info)) {
@@ -969,7 +969,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               .logImpression(
                   DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG);
         }
-        startLightbringerActivity(intent);
+        startDuoActivity(intent);
       } else if (CallDetailsActivity.isLaunchIntent(intent)) {
         PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
         ((Activity) mContext)
@@ -993,10 +993,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     return false;
   }
 
-  private void startLightbringerActivity(Intent intent) {
+  private void startDuoActivity(Intent intent) {
     try {
       Activity activity = (Activity) mContext;
-      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
+      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
     } catch (ActivityNotFoundException e) {
       Toast.makeText(mContext, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
@@ -1126,8 +1126,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   @NonNull
-  private Lightbringer getLightbringer() {
-    return LightbringerComponent.get(mContext).getLightbringer();
+  private Duo getDuo() {
+    return DuoComponent.get(mContext).getDuo();
   }
 
   @Override

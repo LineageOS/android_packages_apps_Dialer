@@ -42,11 +42,11 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.HistoricalDataChangedListener;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
-import com.android.dialer.lightbringer.Lightbringer;
-import com.android.dialer.lightbringer.LightbringerComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
@@ -219,17 +219,16 @@ public class CallDetailsActivity extends AppCompatActivity
   }
 
   @Override
-  public void placeLightbringerCall(String phoneNumber) {
+  public void placeDuoVideoCall(String phoneNumber) {
     Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
-    Lightbringer lightbringer = LightbringerComponent.get(this).getLightbringer();
-    if (!lightbringer.isReachable(this, phoneNumber)) {
+    Duo duo = DuoComponent.get(this).getDuo();
+    if (!duo.isReachable(this, phoneNumber)) {
       placeImsVideoCall(phoneNumber);
       return;
     }
 
     try {
-      startActivityForResult(
-          lightbringer.getIntent(this, phoneNumber), ActivityRequestCodes.DIALTACTS_LIGHTBRINGER);
+      startActivityForResult(duo.getIntent(this, phoneNumber), ActivityRequestCodes.DIALTACTS_DUO);
     } catch (ActivityNotFoundException e) {
       Toast.makeText(this, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
     }
