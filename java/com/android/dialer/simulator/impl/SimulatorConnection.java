@@ -41,7 +41,9 @@ public final class SimulatorConnection extends Connection {
         CAPABILITY_MUTE
             | CAPABILITY_SUPPORT_HOLD
             | CAPABILITY_HOLD
-            | CAPABILITY_CAN_UPGRADE_TO_VIDEO);
+            | CAPABILITY_CAN_UPGRADE_TO_VIDEO
+            | CAPABILITY_DISCONNECT_FROM_CONFERENCE
+            | CAPABILITY_SEPARATE_FROM_CONFERENCE);
     setVideoProvider(new SimulatorVideoProvider(context, this));
   }
 
@@ -108,7 +110,7 @@ public final class SimulatorConnection extends Connection {
 
   void onEvent(@NonNull Event event) {
     events.add(Assert.isNotNull(event));
-    for (Listener listener : listeners) {
+    for (Listener listener : new ArrayList<>(listeners)) {
       listener.onEvent(this, event);
     }
   }

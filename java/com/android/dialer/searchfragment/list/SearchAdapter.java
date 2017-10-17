@@ -187,7 +187,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     this.allowClickListener = Assert.isNotNull(allowClickListener);
     this.dismissClickListener = Assert.isNotNull(dismissClickListener);
     if (searchCursorManager.showLocationPermissionRequest(true)) {
-      notifyItemRemoved(0);
+      notifyItemInserted(0);
     }
   }
 
