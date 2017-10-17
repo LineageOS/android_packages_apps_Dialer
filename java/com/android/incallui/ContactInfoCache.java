@@ -85,7 +85,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   // worker thread.
   private final ConcurrentHashMap<String, ContactCacheEntry> mInfoMap = new ConcurrentHashMap<>();
   private final Map<String, Set<ContactInfoCacheCallback>> mCallBacks = new ArrayMap<>();
-  private Drawable mDefaultContactPhotoDrawable;
   private int mQueryId;
   private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor =
       DialerExecutors.createNonUiTaskBuilder(new CachedNumberLookupWorker()).build();
@@ -350,12 +349,14 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     Assert.isMainThread();
     Objects.requireNonNull(callback);
 
+    Trace.beginSection("prepare callback");
     final String callId = call.getId();
     final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
     Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
 
     // We need to force a new query if phone number has changed.
     boolean forceQuery = needForceQuery(call, cacheEntry);
+    Trace.endSection();
     Log.d(TAG, "findInfo: callId = " + callId + "; forceQuery = " + forceQuery);
 
     // If we have a previously obtained intermediate result return that now except needs
@@ -390,6 +391,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       mCallBacks.put(callId, callBacks);
     }
 
+    Trace.beginSection("prepare query");
     /**
      * Performs a query for caller information. Save any immediate data we get from the query. An
      * asynchronous query may also be made for any data that we do not already have. Some queries,
@@ -404,6 +406,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
             call,
             new DialerCallCookieWrapper(callId, call.getNumberPresentation(), call.getCnapName()),
             new FindInfoCallback(isIncoming, queryToken));
+    Trace.endSection();
 
     if (cacheEntry != null) {
       // We should not override the old cache item until the new query is

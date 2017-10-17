@@ -52,7 +52,6 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.BidiFormatter;
 import android.text.Spannable;
@@ -89,14 +88,14 @@ import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
 import com.android.incallui.videotech.utils.SessionModificationState;
-import java.util.List;
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
 public class StatusBarNotifier
     implements InCallPresenter.InCallStateListener,
         EnrichedCallManager.StateChangedListener,
-        AudioModeProvider.AudioModeListener {
+        AudioModeProvider.AudioModeListener,
+        ContactInfoCacheCallback {
 
   private static final int NOTIFICATION_ID = 1;
 
@@ -128,6 +127,7 @@ public class StatusBarNotifier
   private StatusBarCallListener mStatusBarCallListener;
 
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
+    Trace.beginSection("StatusBarNotifier.Constructor");
     mContext = Assert.isNotNull(context);
     mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
     mContactInfoCache = contactInfoCache;
@@ -137,6 +137,7 @@ public class StatusBarNotifier
             CallList.getInstance());
     mCurrentNotification = NOTIFICATION_NONE;
     AudioModeProvider.getInstance().addListener(this);
+    Trace.endSection();
   }
 
   /**
@@ -175,13 +176,13 @@ public class StatusBarNotifier
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
     LogUtil.d("StatusBarNotifier.onStateChange", "%s->%s", oldState, newState);
-    updateNotification(callList);
+    updateNotification();
   }
 
   @Override
   public void onEnrichedCallStateChanged() {
     LogUtil.enterBlock("StatusBarNotifier.onEnrichedCallStateChanged");
-    updateNotification(CallList.getInstance());
+    updateNotification();
   }
 
   /**
@@ -199,17 +200,17 @@ public class StatusBarNotifier
    * more likely, if an incoming call *was* ringing briefly but then disconnected). In that case,
    * we'll simply update or cancel the in-call notification based on the current phone state.
    *
-   * @see #updateInCallNotification(CallList)
+   * @see #updateInCallNotification()
    */
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-  public void updateNotification(CallList callList) {
-    updateInCallNotification(callList);
+  public void updateNotification() {
+    updateInCallNotification();
   }
 
   /**
    * Take down the in-call notification.
    *
-   * @see #updateInCallNotification(CallList)
+   * @see #updateInCallNotification()
    */
   private void cancelNotification() {
     if (mStatusBarCallListener != null) {
@@ -227,20 +228,20 @@ public class StatusBarNotifier
    * the phone is totally idle.
    */
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-  private void updateInCallNotification(CallList callList) {
+  private void updateInCallNotification() {
     LogUtil.d("StatusBarNotifier.updateInCallNotification", "");
 
-    final DialerCall call = getCallToShow(callList);
+    final DialerCall call = getCallToShow(CallList.getInstance());
 
     if (call != null) {
-      showNotification(callList, call);
+      showNotification(call);
     } else {
       cancelNotification();
     }
   }
 
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-  private void showNotification(final CallList callList, final DialerCall call) {
+  private void showNotification(final DialerCall call) {
     Trace.beginSection("StatusBarNotifier.showNotification");
     final boolean isIncoming =
         (call.getState() == DialerCall.State.INCOMING
@@ -252,29 +253,7 @@ public class StatusBarNotifier
     // This callback will always get called immediately and synchronously with whatever data
     // it has available, and may make a subsequent call later (same thread) if it had to
     // call into the contacts provider for more data.
-    mContactInfoCache.findInfo(
-        call,
-        isIncoming,
-        new ContactInfoCacheCallback() {
-          @Override
-          @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-          public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
-            DialerCall call = callList.getCallById(callId);
-            if (call != null) {
-              call.getLogState().contactLookupResult = entry.contactLookupResult;
-              buildAndSendNotification(callList, call, entry);
-            }
-          }
-
-          @Override
-          @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-          public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
-            DialerCall call = callList.getCallById(callId);
-            if (call != null) {
-              buildAndSendNotification(callList, call, entry);
-            }
-          }
-        });
+    mContactInfoCache.findInfo(call, isIncoming, this);
     Trace.endSection();
   }
 
@@ -296,11 +275,13 @@ public class StatusBarNotifier
     final int callState = call.getState();
     final CallAudioState callAudioState = AudioModeProvider.getInstance().getAudioState();
 
+    Trace.beginSection("read icon and strings");
     // Check if data has changed; if nothing is different, don't issue another notification.
     final int iconResId = getIconToDisplay(call);
     Bitmap largeIcon = getLargeIconToDisplay(mContext, contactInfo, call);
     final CharSequence content = getContentString(call, contactInfo.userType);
     final String contentTitle = getContentTitle(contactInfo, call);
+    Trace.endSection();
 
     final boolean isVideoUpgradeRequest =
         call.getVideoTech().getSessionModificationState()
@@ -363,18 +344,13 @@ public class StatusBarNotifier
     // Set up the main intent to send the user to the in-call screen
     builder.setContentIntent(createLaunchPendingIntent(false /* isFullScreen */));
 
-    // Set the intent as a full screen intent as well if a call is incoming
-    PhoneAccountHandle accountHandle = call.getAccountHandle();
-    if (accountHandle == null) {
-      accountHandle = getAnyPhoneAccount();
-    }
-
     LogUtil.i("StatusBarNotifier.buildAndSendNotification", "notificationType=" + notificationType);
     switch (notificationType) {
       case NOTIFICATION_INCOMING_CALL:
         if (BuildCompat.isAtLeastO()) {
           builder.setChannelId(NotificationChannelId.INCOMING_CALL);
         }
+        // Set the intent as a full screen intent as well if a call is incoming
         configureFullScreenIntent(builder, createLaunchPendingIntent(true /* isFullScreen */));
         // Set the notification category and bump the priority for incoming calls
         builder.setCategory(Notification.CATEGORY_CALL);
@@ -455,21 +431,6 @@ public class StatusBarNotifier
     call.getLatencyReport().onNotificationShown();
     mCurrentNotification = notificationType;
     Trace.endSection();
-  }
-
-  @Nullable
-  @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-  private PhoneAccountHandle getAnyPhoneAccount() {
-    PhoneAccountHandle accountHandle;
-    TelecomManager telecomManager = mContext.getSystemService(TelecomManager.class);
-    accountHandle = telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
-    if (accountHandle == null) {
-      List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
-      if (!accountHandles.isEmpty()) {
-        accountHandle = accountHandles.get(0);
-      }
-    }
-    return accountHandle;
   }
 
   private void createIncomingCallNotification(
@@ -615,6 +576,7 @@ public class StatusBarNotifier
   /** Gets a large icon from the contact info object to display in the notification. */
   private static Bitmap getLargeIconToDisplay(
       Context context, ContactCacheEntry contactInfo, DialerCall call) {
+    Trace.beginSection("StatusBarNotifier.getLargeIconToDisplay");
     Resources resources = context.getResources();
     Bitmap largeIcon = null;
     if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
@@ -645,6 +607,7 @@ public class StatusBarNotifier
       Drawable drawable = resources.getDrawable(R.drawable.blocked_contact, context.getTheme());
       largeIcon = DrawableConverter.drawableToBitmap(drawable);
     }
+    Trace.endSection();
     return largeIcon;
   }
 
@@ -1069,7 +1032,26 @@ public class StatusBarNotifier
       return;
     }
 
-    updateNotification(CallList.getInstance());
+    updateNotification();
+  }
+
+  @Override
+  @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+  public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
+    DialerCall call = CallList.getInstance().getCallById(callId);
+    if (call != null) {
+      call.getLogState().contactLookupResult = entry.contactLookupResult;
+      buildAndSendNotification(CallList.getInstance(), call, entry);
+    }
+  }
+
+  @Override
+  @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+  public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+    DialerCall call = CallList.getInstance().getCallById(callId);
+    if (call != null) {
+      buildAndSendNotification(CallList.getInstance(), call, entry);
+    }
   }
 
   private class StatusBarCallListener implements DialerCallListener {
@@ -1125,7 +1107,7 @@ public class StatusBarNotifier
       if (mDialerCall.getVideoTech().getSessionModificationState()
           == SessionModificationState.NO_REQUEST) {
         cleanup();
-        updateNotification(CallList.getInstance());
+        updateNotification();
       }
     }
   }
