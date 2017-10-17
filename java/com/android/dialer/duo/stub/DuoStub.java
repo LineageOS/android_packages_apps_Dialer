@@ -16,7 +16,6 @@
 
 package com.android.dialer.duo.stub;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
@@ -24,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.telecom.Call;
-import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoListener;
@@ -93,24 +91,6 @@ public class DuoStub implements Duo {
   public void unregisterListener(DuoListener listener) {
     Assert.isMainThread();
     Assert.isNotNull(listener);
-  }
-
-  @Nullable
-  @Override
-  public ComponentName getPhoneAccountComponentName() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public PhoneAccountHandle getPhoneAccountHandle() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public String getPackageName() {
-    return null;
   }
 
   @StringRes

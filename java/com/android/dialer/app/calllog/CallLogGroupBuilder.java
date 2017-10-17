@@ -16,7 +16,6 @@
 
 package com.android.dialer.app.calllog;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -74,7 +73,7 @@ public class CallLogGroupBuilder {
    *
    * @see GroupingListAdapter#addGroups(Cursor)
    */
-  public void addGroups(Cursor cursor, Context context) {
+  public void addGroups(Cursor cursor) {
     final int count = cursor.getCount();
     if (count == 0) {
       return;
@@ -99,7 +98,7 @@ public class CallLogGroupBuilder {
     int groupFeatures = cursor.getInt(CallLogQuery.FEATURES);
     int groupCallbackAction =
         CallbackActionHelper.getCallbackAction(
-            groupNumber, groupFeatures, groupAccountComponentName, context);
+            groupNumber, groupFeatures, groupAccountComponentName);
     mGroupCreator.setCallbackAction(firstRowId, groupCallbackAction);
 
     // Instantiate other group values to those of the first call in the cursor.
@@ -134,7 +133,7 @@ public class CallLogGroupBuilder {
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
       callbackAction =
-          CallbackActionHelper.getCallbackAction(number, features, accountComponentName, context);
+          CallbackActionHelper.getCallbackAction(number, features, accountComponentName);
 
       final boolean isSameNumber = equalNumbers(groupNumber, number);
       final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
