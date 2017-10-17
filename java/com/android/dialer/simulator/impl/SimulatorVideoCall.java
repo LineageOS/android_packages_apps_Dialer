@@ -109,6 +109,10 @@ final class SimulatorVideoCall
     }
   }
 
+  @Override
+  public void onConference(
+      @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2) {}
+
   private boolean isVideoAccountEnabled() {
     SimulatorSimCallManager.register(context);
     return context
@@ -150,15 +154,12 @@ final class SimulatorVideoCall
       case Event.DISCONNECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
         break;
-      case Event.STATE_CHANGE:
-        break;
-      case Event.DTMF:
-        break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
         break;
       default:
-        throw Assert.createIllegalStateFailException();
+        LogUtil.i("SimulatorVideoCall.onEvent", "unexpected event: " + event.type);
+        break;
     }
   }
 }

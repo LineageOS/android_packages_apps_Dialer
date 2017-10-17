@@ -16,7 +16,6 @@
 
 package com.android.dialer.duo;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.MainThread;
@@ -24,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.telecom.Call;
-import android.telecom.PhoneAccountHandle;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.util.List;
@@ -54,18 +52,6 @@ public interface Duo {
 
   @MainThread
   void unregisterListener(@NonNull DuoListener listener);
-
-  @Nullable
-  @MainThread
-  ComponentName getPhoneAccountComponentName();
-
-  @Nullable
-  @MainThread
-  PhoneAccountHandle getPhoneAccountHandle();
-
-  @Nullable
-  @MainThread
-  String getPackageName();
 
   @StringRes
   @MainThread

@@ -345,7 +345,7 @@ public final class NewSearchFragment extends Fragment
     if (!PermissionsUtil.hasLocationPermissions(getContext())
         && !DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(getContext())
             .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false)) {
-      if (adapter != null && isRegularSearch()) {
+      if (adapter != null && isRegularSearch() && !hasBeenDismissed()) {
         adapter.showLocationPermissionRequest(
             v -> requestLocationPermission(), v -> dismissLocationPermission());
       }
@@ -372,12 +372,18 @@ public final class NewSearchFragment extends Fragment
     requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
   }
 
-  private void dismissLocationPermission() {
+  @VisibleForTesting
+  public void dismissLocationPermission() {
     PreferenceManager.getDefaultSharedPreferences(getContext())
         .edit()
         .putBoolean(KEY_LOCATION_PROMPT_DISMISSED, true)
         .apply();
     adapter.hideLocationPermissionRequest();
+  }
+
+  private boolean hasBeenDismissed() {
+    return PreferenceManager.getDefaultSharedPreferences(getContext())
+        .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false);
   }
 
   @Override

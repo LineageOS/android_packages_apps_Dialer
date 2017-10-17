@@ -25,6 +25,7 @@ import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
 
 /** Entry point in the simulator to create voice calls. */
@@ -37,7 +38,10 @@ final class SimulatorVoiceCall
     return new SimulatorSubMenu(context)
         .addItem("Incoming call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(false))
         .addItem("Outgoing call", () -> new SimulatorVoiceCall(context).addNewOutgoingCall())
-        .addItem("Spam call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(true));
+        .addItem("Spam call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(true))
+        .addItem(
+            "GSM conference",
+            () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5));
   }
 
   private SimulatorVoiceCall(@NonNull Context context) {
@@ -62,20 +66,27 @@ final class SimulatorVoiceCall
 
   @Override
   public void onNewOutgoingConnection(@NonNull SimulatorConnection connection) {
-    if (connection.getExtras().getBoolean(connectionTag)) {
+    if (isMyConnection(connection)) {
       LogUtil.i("SimulatorVoiceCall.onNewOutgoingConnection", "connection created");
       handleNewConnection(connection);
-      connection.setActive();
+
+      // Telecom will force the connection to switch to Dialing when we return it. Wait until after
+      // we're returned it before changing call state.
+      ThreadUtil.postOnUiThread(connection::setActive);
     }
   }
 
   @Override
   public void onNewIncomingConnection(@NonNull SimulatorConnection connection) {
-    if (connection.getExtras().getBoolean(connectionTag)) {
+    if (isMyConnection(connection)) {
       LogUtil.i("SimulatorVoiceCall.onNewIncomingConnection", "connection created");
       handleNewConnection(connection);
     }
   }
+
+  @Override
+  public void onConference(
+      @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2) {}
 
   private void handleNewConnection(@NonNull SimulatorConnection connection) {
     connection.addListener(this);
@@ -83,6 +94,10 @@ final class SimulatorVoiceCall
         connection.getConnectionCapabilities()
             | Connection.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL
             | Connection.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
+  }
+
+  private boolean isMyConnection(@NonNull Connection connection) {
+    return connection.getExtras().getBoolean(connectionTag);
   }
 
   @Override
@@ -105,15 +120,12 @@ final class SimulatorVoiceCall
       case Event.DISCONNECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
         break;
-      case Event.STATE_CHANGE:
-        break;
-      case Event.DTMF:
-        break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
         break;
       default:
-        throw Assert.createIllegalStateFailException();
+        LogUtil.i("SimulatorVoiceCall.onEvent", "unexpected event: " + event.type);
+        break;
     }
   }
 }
