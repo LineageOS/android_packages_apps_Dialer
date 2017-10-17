@@ -273,7 +273,9 @@ public class InCallPresenter implements CallList.Listener {
 
   public static synchronized InCallPresenter getInstance() {
     if (sInCallPresenter == null) {
+      Trace.beginSection("InCallPresenter.Constructor");
       sInCallPresenter = new InCallPresenter();
+      Trace.endSection();
     }
     return sInCallPresenter;
   }
@@ -1033,7 +1035,7 @@ public class InCallPresenter implements CallList.Listener {
     // We need to update the notification bar when we leave the UI because that
     // could trigger it to show again.
     if (mStatusBarNotifier != null) {
-      mStatusBarNotifier.updateNotification(mCallList);
+      mStatusBarNotifier.updateNotification();
     }
 
     if (mProximitySensor != null) {
@@ -1088,10 +1090,6 @@ public class InCallPresenter implements CallList.Listener {
   void onActivityStarted() {
     LogUtil.d("InCallPresenter.onActivityStarted", "onActivityStarted");
     notifyVideoPauseController(true);
-    if (mStatusBarNotifier != null) {
-      // TODO(maxwelb) - b/36649622: Investigate this redundant call
-      mStatusBarNotifier.updateNotification(mCallList);
-    }
     applyScreenTimeout();
   }
 
@@ -1385,7 +1383,7 @@ public class InCallPresenter implements CallList.Listener {
     } else if (startIncomingCallSequence) {
       LogUtil.i("InCallPresenter.startOrFinishUi", "Start Full Screen in call UI");
 
-      mStatusBarNotifier.updateNotification(mCallList);
+      mStatusBarNotifier.updateNotification();
     } else if (newState == InCallState.NO_CALLS) {
       // The new state is the no calls state.  Tear everything down.
       attemptFinishActivity();
