@@ -16,49 +16,50 @@
 
 package com.android.dialer.voicemail.listui;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.voicemail.datasources.VoicemailData;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /** Fragment for Dialer Voicemail Tab. */
-public final class NewVoicemailFragment extends Fragment {
+public final class NewVoicemailFragment extends Fragment implements LoaderCallbacks<Cursor> {
+
+  private RecyclerView recyclerView;
+
   @Nullable
   @Override
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.new_voicemail_call_log_fragment, container, false);
-    RecyclerView recyclerView =
-        (RecyclerView) view.findViewById(R.id.new_voicemail_call_log_recycler_view);
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-    // TODO(uabdullah): To be removed once we hook up the UI to the voicemail backend
-    List<VoicemailData> voicemailData = new ArrayList<>();
-    Random rand = new Random();
-    for (int i = 0; i < 50; i++) {
-      VoicemailData mocked =
-          VoicemailData.builder()
-              .setName("Fatima Abdullah " + i)
-              .setLocation("San Francisco, CA")
-              .setDate("March " + (rand.nextInt(30) + 1))
-              .setDuration("00:" + (rand.nextInt(50) + 10))
-              .setTranscription(
-                  "This is a transcription text message that literally means nothing.")
-              .build();
-      voicemailData.add(mocked);
-    }
-
-    LogUtil.i("onCreateView", "size of input:" + voicemailData.size());
-    recyclerView.setAdapter(new NewVoicemailCallLogAdapter(voicemailData));
+    recyclerView = view.findViewById(R.id.new_voicemail_call_log_recycler_view);
+    getLoaderManager().restartLoader(0, null, this);
     return view;
+  }
+
+  @Override
+  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    LogUtil.enterBlock("NewVoicemailFragment.onCreateLoader");
+    return new VoicemailCursorLoader(getContext());
+  }
+
+  @Override
+  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    LogUtil.i("NewVoicemailFragment.onCreateLoader", "cursor size is %d", data.getCount());
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(new NewVoicemailAdapter(data));
+  }
+
+  @Override
+  public void onLoaderReset(Loader<Cursor> loader) {
+    LogUtil.enterBlock("NewVoicemailFragment.onLoaderReset");
+    recyclerView.setAdapter(null);
   }
 }
