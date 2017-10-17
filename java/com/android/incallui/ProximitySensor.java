@@ -60,6 +60,7 @@ public class ProximitySensor
       @NonNull Context context,
       @NonNull AudioModeProvider audioModeProvider,
       @NonNull AccelerometerListener accelerometerListener) {
+    Trace.beginSection("ProximitySensor.Constructor");
     mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
     if (mPowerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
       mProximityWakeLock =
@@ -78,6 +79,7 @@ public class ProximitySensor
 
     mAudioModeProvider = audioModeProvider;
     mAudioModeProvider.addListener(this);
+    Trace.endSection();
   }
 
   public void tearDown() {
