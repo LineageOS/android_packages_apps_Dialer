@@ -39,6 +39,7 @@ final class SimulatorVoiceCall
         .addItem("Incoming call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(false))
         .addItem("Outgoing call", () -> new SimulatorVoiceCall(context).addNewOutgoingCall())
         .addItem("Spam call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(true))
+        .addItem("Emergency call", () -> new SimulatorVoiceCall(context).addNewEmergencyCall())
         .addItem(
             "GSM conference",
             () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5));
@@ -62,6 +63,11 @@ final class SimulatorVoiceCall
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
+  }
+
+  private void addNewEmergencyCall() {
+    String callerId = "911";
+    connectionTag = SimulatorSimCallManager.addNewIncomingCall(context, callerId, false);
   }
 
   @Override
