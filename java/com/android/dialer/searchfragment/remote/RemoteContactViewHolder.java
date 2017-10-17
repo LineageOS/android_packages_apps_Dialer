@@ -64,7 +64,7 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
    */
   public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
-    String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+    String name = cursor.getString(Projections.DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);
     String secondaryInfo =
         TextUtils.isEmpty(label)
@@ -78,12 +78,12 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
     if (shouldShowPhoto(cursor)) {
       nameView.setVisibility(View.VISIBLE);
       photo.setVisibility(View.VISIBLE);
-      String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
+      String photoUri = cursor.getString(Projections.PHOTO_URI);
       ContactPhotoManager.getInstance(context)
           .loadDialerThumbnailOrPhoto(
               photo,
               getContactUri(cursor),
-              cursor.getLong(Projections.PHONE_PHOTO_ID),
+              cursor.getLong(Projections.PHOTO_ID),
               photoUri == null ? null : Uri.parse(photoUri),
               name,
               LetterTileDrawable.TYPE_DEFAULT);
@@ -96,11 +96,11 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
   // Show the contact photo next to only the first number if a contact has multiple numbers
   private boolean shouldShowPhoto(SearchCursor cursor) {
     int currentPosition = cursor.getPosition();
-    String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    String currentLookupKey = cursor.getString(Projections.LOOKUP_KEY);
     cursor.moveToPosition(currentPosition - 1);
 
     if (!cursor.isHeader() && !cursor.isBeforeFirst()) {
-      String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+      String previousLookupKey = cursor.getString(Projections.LOOKUP_KEY);
       cursor.moveToPosition(currentPosition);
       return !currentLookupKey.equals(previousLookupKey);
     }
@@ -121,8 +121,8 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
   }
 
   private static Uri getContactUri(SearchCursor cursor) {
-    long contactId = cursor.getLong(Projections.PHONE_ID);
-    String lookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    long contactId = cursor.getLong(Projections.ID);
+    String lookupKey = cursor.getString(Projections.LOOKUP_KEY);
     return Contacts.getLookupUri(contactId, lookupKey)
         .buildUpon()
         .appendQueryParameter(

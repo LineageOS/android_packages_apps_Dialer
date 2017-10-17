@@ -61,17 +61,17 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
    */
   public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
-    String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+    String name = cursor.getString(Projections.DISPLAY_NAME);
     String address = cursor.getString(Projections.PHONE_LABEL);
 
     placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
     placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address));
-    String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
+    String photoUri = cursor.getString(Projections.PHOTO_URI);
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             photo,
             getContactUri(cursor),
-            cursor.getLong(Projections.PHONE_PHOTO_ID),
+            cursor.getLong(Projections.PHOTO_ID),
             photoUri == null ? null : Uri.parse(photoUri),
             name,
             LetterTileDrawable.TYPE_BUSINESS);
@@ -81,7 +81,7 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
     // Since the lookup key for Nearby Places is actually a JSON representation of the information,
     // we need to pass it in as an encoded fragment in our contact uri.
     // It includes information like display name, photo uri, phone number, ect.
-    String businessInfoJson = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    String businessInfoJson = cursor.getString(Projections.LOOKUP_KEY);
     return Contacts.CONTENT_LOOKUP_URI
         .buildUpon()
         .appendPath(Constants.LOOKUP_URI_ENCODED)
