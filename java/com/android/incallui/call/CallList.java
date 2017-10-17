@@ -175,7 +175,9 @@ public class CallList implements DialerCallDelegate {
                 }
               });
 
+      Trace.beginSection("updateUserMarkedSpamStatus");
       updateUserMarkedSpamStatus(call, context, number);
+      Trace.endSection();
     }
     Trace.endSection();
 
@@ -189,8 +191,7 @@ public class CallList implements DialerCallDelegate {
           public void onCheckComplete(Integer id) {
             if (id != null && id != FilteredNumberAsyncQueryHandler.INVALID_ID) {
               call.setBlockedStatus(true);
-              onUpdateCall(call);
-              notifyGenericListeners();
+              // No need to update UI since it's only used for logging.
             }
           }
         },

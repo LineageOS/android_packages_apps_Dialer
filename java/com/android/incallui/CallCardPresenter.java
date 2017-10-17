@@ -319,17 +319,19 @@ public class CallCardPresenter
       previousPrimary.removeListener(this);
     }
 
-    if (mSecondary == null) {
-      // Secondary call may have ended.  Update the ui.
-      mSecondaryContactInfo = null;
-      updateSecondaryDisplayInfo();
-    } else if (secondaryChanged) {
-      // secondary call has changed
-      mSecondaryContactInfo =
-          ContactInfoCache.buildCacheEntryFromCall(
-              mContext, mSecondary, mSecondary.getState() == DialerCall.State.INCOMING);
-      updateSecondaryDisplayInfo();
-      maybeStartSearch(mSecondary, false);
+    if (secondaryChanged) {
+      if (mSecondary == null) {
+        // Secondary call may have ended.  Update the ui.
+        mSecondaryContactInfo = null;
+        updateSecondaryDisplayInfo();
+      } else {
+        // secondary call has changed
+        mSecondaryContactInfo =
+            ContactInfoCache.buildCacheEntryFromCall(
+                mContext, mSecondary, mSecondary.getState() == DialerCall.State.INCOMING);
+        updateSecondaryDisplayInfo();
+        maybeStartSearch(mSecondary, false);
+      }
     }
 
     // Set the call state
