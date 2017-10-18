@@ -54,7 +54,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
     super(
         context,
         null,
-        Projections.PHONE_PROJECTION,
+        Projections.DATA_PROJECTION,
         IGNORE_NUMBER_TOO_LONG_CLAUSE,
         null,
         Phone.SORT_KEY_PRIMARY);
