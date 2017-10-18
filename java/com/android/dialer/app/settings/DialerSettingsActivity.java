@@ -33,9 +33,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import com.android.dialer.about.AboutPhoneFragment;
 import com.android.dialer.app.R;
+import com.android.dialer.assisteddialing.ConcreteCreator;
+import com.android.dialer.assisteddialing.ui.AssistedDialingSettingFragment;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -133,6 +136,21 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
       accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
       target.add(accessibilitySettingsHeader);
+    }
+
+    boolean isAssistedDialingEnabled =
+        ConcreteCreator.isAssistedDialingEnabled(
+            ConfigProviderBindings.get(getApplicationContext()));
+    LogUtil.i(
+        "DialerSettingsActivity.onBuildHeaders",
+        "showing assisted dialing header: " + isAssistedDialingEnabled);
+    if (isAssistedDialingEnabled) {
+
+      Header assistedDialingSettingsHeader = new Header();
+      assistedDialingSettingsHeader.titleRes =
+          com.android.dialer.assisteddialing.ui.R.string.assisted_dialing_setting_title;
+      assistedDialingSettingsHeader.fragment = AssistedDialingSettingFragment.class.getName();
+      target.add(assistedDialingSettingsHeader);
     }
 
     if (showAbout()) {

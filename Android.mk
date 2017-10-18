@@ -96,6 +96,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.app \
 	com.android.dialer.app.manifests.activities \
 	com.android.dialer.app.voicemail.error \
+	com.android.dialer.assisteddialing.ui \
 	com.android.dialer.backup \
 	com.android.dialer.binary.aosp.testing \
 	com.android.dialer.binary.google \
@@ -107,9 +108,9 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.calldetails \
 	com.android.dialer.calllog.database \
 	com.android.dialer.calllog.ui \
-        com.android.dialer.calllog.ui.menu \
+	com.android.dialer.calllog.ui.menu \
 	com.android.dialer.calllogutils \
-        com.android.dialer.clipboard \
+	com.android.dialer.clipboard \
 	com.android.dialer.common \
 	com.android.dialer.configprovider \
 	com.android.dialer.contactactions \
