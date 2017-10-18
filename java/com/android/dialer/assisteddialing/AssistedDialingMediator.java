@@ -24,6 +24,9 @@ import java.util.Optional;
 /** The core interface for the AssistedDialingMediator. */
 public interface AssistedDialingMediator {
 
+  /** Returns {@code true} if the current client platform supports Assisted Dialing. */
+  public boolean isPlatformEligible();
+
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
   public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
