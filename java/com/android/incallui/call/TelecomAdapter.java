@@ -185,8 +185,12 @@ public class TelecomAdapter implements InCallServiceListener {
    * Stop a started foreground notification. This does not stop {@code mInCallService} from running.
    */
   public void stopForegroundNotification() {
-    Assert.isNotNull(
-        mInCallService, "No inCallService available for stopping foreground notification");
-    mInCallService.stopForeground(true /*removeNotification*/);
+    if (mInCallService != null) {
+      mInCallService.stopForeground(true /*removeNotification*/);
+    } else {
+      LogUtil.e(
+          "TelecomAdapter.stopForegroundNotification",
+          "no inCallService available for stopping foreground notification");
+    }
   }
 }
