@@ -136,6 +136,7 @@ import com.android.dialer.util.TouchPointManager;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -194,6 +195,8 @@ public class DialtactsActivity extends TransactionSafeActivity
    */
   private static final long HISTORY_TAB_SEEN_TIMEOUT = TimeUnit.SECONDS.toMillis(3);
 
+  private static Optional<Boolean> sVoiceSearchEnabledForTest = Optional.absent();
+
   /** Fragment containing the dialpad that slides into view */
   protected DialpadFragment mDialpadFragment;
 
@@ -242,6 +245,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   private PopupMenu mOverflowMenu;
   private EditText mSearchView;
+  private SearchEditTextLayout mSearchEditTextLayout;
   private View mVoiceSearchButton;
   private String mSearchQuery;
   private String mDialpadQuery;
@@ -397,20 +401,19 @@ public class DialtactsActivity extends TransactionSafeActivity
     actionBar.setDisplayShowCustomEnabled(true);
     actionBar.setBackgroundDrawable(null);
 
-    SearchEditTextLayout searchEditTextLayout =
-        actionBar.getCustomView().findViewById(R.id.search_view_container);
+    mSearchEditTextLayout = actionBar.getCustomView().findViewById(R.id.search_view_container);
 
-    mActionBarController = new ActionBarController(this, searchEditTextLayout);
+    mActionBarController = new ActionBarController(this, mSearchEditTextLayout);
 
-    mSearchView = searchEditTextLayout.findViewById(R.id.search_view);
+    mSearchView = mSearchEditTextLayout.findViewById(R.id.search_view);
     mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
     mSearchView.setHint(getSearchBoxHint());
 
-    mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
-    searchEditTextLayout
+    mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
+    mSearchEditTextLayout
         .findViewById(R.id.search_box_collapsed)
         .setOnClickListener(mSearchViewOnClickListener);
-    searchEditTextLayout
+    mSearchEditTextLayout
         .findViewById(R.id.search_back_button)
         .setOnClickListener(v -> exitSearchUi());
 
@@ -423,7 +426,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         new FloatingActionButtonController(this, floatingActionButton);
 
     ImageButton optionsMenuButton =
-        searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
+        mSearchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
     optionsMenuButton.setOnClickListener(this);
     mOverflowMenu = buildOptionsMenu(optionsMenuButton);
     optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
@@ -1015,13 +1018,15 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   private void prepareVoiceSearchButton() {
-    final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-    if (canIntentBeHandled(voiceIntent)) {
-      mVoiceSearchButton.setVisibility(View.VISIBLE);
-      mVoiceSearchButton.setOnClickListener(this);
-    } else {
-      mVoiceSearchButton.setVisibility(View.GONE);
+    mSearchEditTextLayout.setVoiceSearchEnabled(isVoiceSearchEnabled());
+    mVoiceSearchButton.setOnClickListener(this);
+  }
+
+  private boolean isVoiceSearchEnabled() {
+    if (sVoiceSearchEnabledForTest.isPresent()) {
+      return sVoiceSearchEnabledForTest.get();
     }
+    return canIntentBeHandled(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
   }
 
   public boolean isNearbyPlacesSearchEnabled() {
@@ -1034,10 +1039,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   /** Sets the hint text for the contacts search box */
   private void setSearchBoxHint() {
-    SearchEditTextLayout searchEditTextLayout =
-        (SearchEditTextLayout)
-            getActionBarSafely().getCustomView().findViewById(R.id.search_view_container);
-    ((TextView) searchEditTextLayout.findViewById(R.id.search_box_start_search))
+    ((TextView) mSearchEditTextLayout.findViewById(R.id.search_box_start_search))
         .setHint(getSearchBoxHint());
   }
 
@@ -1713,5 +1715,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
       return true;
     }
+  }
+
+  @VisibleForTesting
+  static void setVoiceSearchEnabledForTest(Optional<Boolean> enabled) {
+    sVoiceSearchEnabledForTest = enabled;
   }
 }
