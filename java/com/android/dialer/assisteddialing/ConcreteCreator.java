@@ -20,8 +20,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
+import com.android.dialer.assisteddialing.ui.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -63,8 +65,15 @@ public final class ConcreteCreator {
       throw new NullPointerException("Provided context was null");
     }
 
-    if ((Build.VERSION.SDK_INT < BUILD_CODE_FLOOR || Build.VERSION.SDK_INT > BUILD_CODE_CEILING)
-        || !configProvider.getBoolean("assisted_dialing_enabled", false)) {
+    if (!isAssistedDialingEnabled(configProvider)) {
+      LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "feature not enabled");
+      return new AssistedDialingMediatorStub();
+    }
+
+    if (!PreferenceManager.getDefaultSharedPreferences(context)
+        .getBoolean(context.getString(R.string.assisted_dialing_setting_toggle_key), false)) {
+      LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "disabled by local setting");
+
       return new AssistedDialingMediatorStub();
     }
 
@@ -73,5 +82,17 @@ public final class ConcreteCreator {
             context, configProvider.getString("assisted_dialing_csv_country_codes", ""));
     return new AssistedDialingMediatorImpl(
         new LocationDetector(telephonyManager), new NumberTransformer(constraints));
+  }
+
+  /** Returns a boolean indicating whether or not the assisted dialing feature is enabled. */
+  public static boolean isAssistedDialingEnabled(@NonNull ConfigProvider configProvider) {
+    if (configProvider == null) {
+      LogUtil.i("ConcreteCreator.isAssistedDialingEnabled", "provided configProvider was null");
+      throw new NullPointerException("Provided configProvider was null");
+    }
+
+    return (Build.VERSION.SDK_INT >= BUILD_CODE_FLOOR
+            && Build.VERSION.SDK_INT <= BUILD_CODE_CEILING)
+        && configProvider.getBoolean("assisted_dialing_enabled", false);
   }
 }

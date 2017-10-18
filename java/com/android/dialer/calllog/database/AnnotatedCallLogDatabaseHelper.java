@@ -60,6 +60,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .toString();
 
   /** Deletes all but the first maxRows rows (by timestamp) to keep the table a manageable size. */
+  // TODO(zachh): Prevent voicemails from being garbage collected.
   private static final String CREATE_TRIGGER_SQL =
       "create trigger delete_old_rows after insert on "
           + AnnotatedCallLog.TABLE
@@ -79,12 +80,20 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + AnnotatedCallLog.TABLE
           + " )); end;";
 
+  private static final String CREATE_INDEX_ON_CALL_TYPE_SQL =
+      "create index call_type_index on "
+          + AnnotatedCallLog.TABLE
+          + " ("
+          + AnnotatedCallLog.CALL_TYPE
+          + ");";
+
   @Override
   public void onCreate(SQLiteDatabase db) {
     LogUtil.enterBlock("AnnotatedCallLogDatabaseHelper.onCreate");
     long startTime = System.currentTimeMillis();
     db.execSQL(CREATE_TABLE_SQL);
     db.execSQL(String.format(Locale.US, CREATE_TRIGGER_SQL, maxRows, maxRows));
+    db.execSQL(CREATE_INDEX_ON_CALL_TYPE_SQL);
     // TODO(zachh): Consider logging impression.
     LogUtil.i(
         "AnnotatedCallLogDatabaseHelper.onCreate",

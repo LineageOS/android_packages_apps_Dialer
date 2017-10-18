@@ -15,41 +15,40 @@
  */
 package com.android.dialer.voicemail.listui;
 
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.voicemail.datasources.VoicemailData;
-import java.util.List;
 
 /** {@link RecyclerView.Adapter} for the new voicemail call log fragment. */
-final class NewVoicemailCallLogAdapter extends RecyclerView.Adapter<NewVoicemailCallLogViewHolder> {
+final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHolder> {
 
-  private final List<VoicemailData> voicemailData;
+  private final Cursor cursor;
 
-  NewVoicemailCallLogAdapter(List<VoicemailData> dataSet) {
-    voicemailData = dataSet;
+  /** @param cursor whose projection is {@link VoicemailCursorLoader.VOICEMAIL_COLUMNS} */
+  NewVoicemailAdapter(Cursor cursor) {
+    this.cursor = cursor;
   }
 
   @Override
-  public NewVoicemailCallLogViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
+  public NewVoicemailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-    View v = inflater.inflate(R.layout.new_voicemail_call_log_entry, viewGroup, false);
-    NewVoicemailCallLogViewHolder newVoicemailCallLogViewHolder =
-        new NewVoicemailCallLogViewHolder(v);
-    return newVoicemailCallLogViewHolder;
+    View view = inflater.inflate(R.layout.new_voicemail_call_log_entry, viewGroup, false);
+    NewVoicemailViewHolder newVoicemailViewHolder = new NewVoicemailViewHolder(view);
+    return newVoicemailViewHolder;
   }
 
   @Override
-  public void onBindViewHolder(NewVoicemailCallLogViewHolder viewHolder, int position) {
+  public void onBindViewHolder(NewVoicemailViewHolder viewHolder, int position) {
     LogUtil.i("onBindViewHolder", "position" + position);
-    viewHolder.bind(voicemailData.get(position));
+    cursor.moveToPosition(position);
+    viewHolder.bind(cursor);
   }
 
   @Override
   public int getItemCount() {
-    return voicemailData.size();
+    return cursor.getCount();
   }
 }
