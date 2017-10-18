@@ -21,17 +21,25 @@ import android.database.CharArrayBuffer;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Nickname;
+import android.provider.ContactsContract.CommonDataKinds.Organization;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryFilteringUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Wrapper for a cursor containing all on device contacts.
@@ -63,92 +71,109 @@ final class ContactFilterCursor implements Cursor {
   }
 
   /**
-   * @param cursor with projection {@link Projections#PHONE_PROJECTION}.
+   * @param cursor with projection {@link Projections#DATA_PROJECTION}.
    * @param query to filter cursor results.
    */
   ContactFilterCursor(Cursor cursor, @Nullable String query) {
-    // TODO(calderwoodra) investigate copying this into a MatrixCursor and holding in memory
-    this.cursor = cursor;
+    this.cursor = createCursor(cursor);
     filter(query);
   }
 
   /**
-   * Filters out contacts that do not match the query.
+   * Returns a new cursor with contact information coalesced.
    *
-   * <p>The query can have at least 1 of 3 forms:
+   * <p>Here are some sample rows and columns that might exist in cp2 database:
    *
    * <ul>
-   *   <li>A phone number
-   *   <li>A T9 representation of a name (matches {@link QueryFilteringUtil#T9_PATTERN}).
-   *   <li>A name
+   *   <li>display Name (William), contactID (202), mimeType (name), data1 (A Pixel)
+   *   <li>display Name (William), contactID (202), mimeType (phone), data1 (+1 650-200-3333)
+   *   <li>display Name (William), contactID (202), mimeType (phone), data1 (+1 540-555-6666)
+   *   <li>display Name (William), contactID (202), mimeType (organization), data1 (Walmart)
+   *   <li>display Name (William), contactID (202), mimeType (nickname), data1 (Will)
    * </ul>
    *
-   * <p>A contact is considered a match if:
+   * <p>These rows would be coalesced into new rows like so:
    *
    * <ul>
-   *   <li>Its phone number contains the phone number query
-   *   <li>Its name represented in T9 contains the T9 query
-   *   <li>Its name contains the query
+   *   <li>display Name (William), phoneNumber (+1 650-200-3333), organization (Walmart), nickname
+   *       (Will)
+   *   <li>display Name (William), phoneNumber (+1 540-555-6666), organization (Walmart), nickname
+   *       (Will)
    * </ul>
    */
-  public void filter(@Nullable String query) {
-    if (query == null) {
-      query = "";
-    }
-    queryFilteredPositions.clear();
-
-    // On some devices, contacts have multiple rows with identical phone numbers. These numbers are
-    // considered duplicates. Since the order might not be guaranteed, we compare all of the numbers
-    // and hold onto the most qualified one as the one we want to display to the user.
-    // See #getQualification for details on how qualification is determined.
-    int previousMostQualifiedPosition = 0;
-    String previousName = "";
-    String previousMostQualifiedNumber = "";
-
-    query = query.toLowerCase();
+  private static Cursor createCursor(Cursor cursor) {
+    // Convert cursor rows into Cp2Contacts
+    List<Cp2Contact> cp2Contacts = new ArrayList<>();
+    Set<Integer> contactIds = new ArraySet<>();
     cursor.moveToPosition(-1);
-
     while (cursor.moveToNext()) {
-      int position = cursor.getPosition();
-      String currentNumber = cursor.getString(Projections.PHONE_NUMBER);
-      String currentName = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+      Cp2Contact contact = Cp2Contact.fromCursor(cursor);
+      cp2Contacts.add(contact);
+      contactIds.add(contact.contactId());
+    }
+    cursor.close();
 
-      if (!previousName.equals(currentName)) {
-        previousName = currentName;
-        previousMostQualifiedNumber = currentNumber;
-        previousMostQualifiedPosition = position;
-      } else {
-        // Since the contact name is the same, check if this number is a duplicate
-        switch (getQualification(currentNumber, previousMostQualifiedNumber)) {
-          case Qualification.CURRENT_MORE_QUALIFIED:
-            // Number is a less qualified duplicate, ignore it.
-            continue;
-          case Qualification.NEW_NUMBER_IS_MORE_QUALIFIED:
-            // If number wasn't filtered out before, remove it and add it's more qualified version.
-            int index = queryFilteredPositions.indexOf(previousMostQualifiedPosition);
-            if (index != -1) {
-              queryFilteredPositions.remove(index);
-              queryFilteredPositions.add(position);
-            }
-            previousMostQualifiedNumber = currentNumber;
-            previousMostQualifiedPosition = position;
-            continue;
-          case Qualification.NUMBERS_ARE_NOT_DUPLICATES:
-          default:
-            previousMostQualifiedNumber = currentNumber;
-            previousMostQualifiedPosition = position;
+    // Group then combine contact data
+    List<Cp2Contact> coalescedContacts = new ArrayList<>();
+    for (Integer contactId : contactIds) {
+      List<Cp2Contact> duplicateContacts = getAllContactsWithContactId(contactId, cp2Contacts);
+      coalescedContacts.addAll(coalesceContacts(duplicateContacts));
+    }
+
+    // Sort by display name, then build new cursor from coalesced contacts.
+    // We sort the contacts so that they are displayed to the user in lexicographic order.
+    Collections.sort(coalescedContacts, (o1, o2) -> o1.displayName().compareTo(o2.displayName()));
+    MatrixCursor newCursor =
+        new MatrixCursor(Projections.DATA_PROJECTION, coalescedContacts.size());
+    for (Cp2Contact contact : coalescedContacts) {
+      newCursor.addRow(contact.toCursorRow());
+    }
+    return newCursor;
+  }
+
+  private static List<Cp2Contact> coalesceContacts(List<Cp2Contact> contactsWithSameContactId) {
+    String companyName = null;
+    String nickName = null;
+    List<Cp2Contact> phoneContacts = new ArrayList<>();
+    for (Cp2Contact contact : contactsWithSameContactId) {
+      if (contact.mimeType().equals(Phone.CONTENT_ITEM_TYPE)) {
+        phoneContacts.add(contact);
+      } else if (contact.mimeType().equals(Organization.CONTENT_ITEM_TYPE)) {
+        Assert.checkArgument(TextUtils.isEmpty(companyName));
+        companyName = contact.companyName();
+      } else if (contact.mimeType().equals(Nickname.CONTENT_ITEM_TYPE)) {
+        Assert.checkArgument(TextUtils.isEmpty(nickName));
+        nickName = contact.nickName();
+      }
+    }
+
+    removeDuplicatePhoneNumbers(phoneContacts);
+
+    List<Cp2Contact> coalescedContacts = new ArrayList<>();
+    for (Cp2Contact phoneContact : phoneContacts) {
+      coalescedContacts.add(
+          phoneContact.toBuilder().setCompanyName(companyName).setNickName(nickName).build());
+    }
+    return coalescedContacts;
+  }
+
+  private static void removeDuplicatePhoneNumbers(List<Cp2Contact> phoneContacts) {
+    for (int i = 0; i < phoneContacts.size(); i++) {
+      Cp2Contact contact1 = phoneContacts.get(i);
+      for (int j = i + 1; j < phoneContacts.size(); /* don't iterate by default */ ) {
+        Cp2Contact contact2 = phoneContacts.get(j);
+        int qualification = getQualification(contact2.phoneNumber(), contact1.phoneNumber());
+        if (qualification == Qualification.CURRENT_MORE_QUALIFIED) {
+          phoneContacts.remove(contact2);
+        } else if (qualification == Qualification.NEW_NUMBER_IS_MORE_QUALIFIED) {
+          phoneContacts.remove(contact1);
+          break;
+        } else if (qualification == Qualification.NUMBERS_ARE_NOT_DUPLICATES) {
+          // Keep both contacts
+          j++;
         }
       }
-
-      if (TextUtils.isEmpty(query)
-          || QueryFilteringUtil.nameMatchesT9Query(query, previousName)
-          || QueryFilteringUtil.numberMatchesNumberQuery(query, previousMostQualifiedNumber)
-          || QueryFilteringUtil.nameContainsQuery(query, previousName)) {
-        queryFilteredPositions.add(previousMostQualifiedPosition);
-      }
     }
-    currentPosition = 0;
-    cursor.moveToFirst();
   }
 
   /**
@@ -157,7 +182,7 @@ final class ContactFilterCursor implements Cursor {
    * @return {@link Qualification} where the more qualified number is the number with the most
    *     digits. If the digits are the same, the number with the most formatting is more qualified.
    */
-  private @Qualification int getQualification(String number, String mostQualifiedNumber) {
+  private static @Qualification int getQualification(String number, String mostQualifiedNumber) {
     // Ignore formatting
     String numberDigits = QueryFilteringUtil.digitsOnly(number);
     String qualifiedNumberDigits = QueryFilteringUtil.digitsOnly(mostQualifiedNumber);
@@ -180,6 +205,64 @@ final class ContactFilterCursor implements Cursor {
       return Qualification.NEW_NUMBER_IS_MORE_QUALIFIED;
     }
     return Qualification.NUMBERS_ARE_NOT_DUPLICATES;
+  }
+
+  private static List<Cp2Contact> getAllContactsWithContactId(
+      int contactId, List<Cp2Contact> contacts) {
+    List<Cp2Contact> contactIdContacts = new ArrayList<>();
+    for (Cp2Contact contact : contacts) {
+      if (contact.contactId() == contactId) {
+        contactIdContacts.add(contact);
+      }
+    }
+    return contactIdContacts;
+  }
+
+  /**
+   * Filters out contacts that do not match the query.
+   *
+   * <p>The query can have at least 1 of 3 forms:
+   *
+   * <ul>
+   *   <li>A phone number
+   *   <li>A T9 representation of a name (matches {@link QueryFilteringUtil#T9_PATTERN}).
+   *   <li>A name
+   * </ul>
+   *
+   * <p>A contact is considered a match if:
+   *
+   * <ul>
+   *   <li>Its phone number contains the phone number query
+   *   <li>Its name represented in T9 contains the T9 query
+   *   <li>Its name contains the query
+   *   <li>Its company contains the query
+   * </ul>
+   */
+  public void filter(@Nullable String query) {
+    if (query == null) {
+      query = "";
+    }
+    queryFilteredPositions.clear();
+    query = query.toLowerCase();
+    cursor.moveToPosition(-1);
+
+    while (cursor.moveToNext()) {
+      int position = cursor.getPosition();
+      String number = cursor.getString(Projections.PHONE_NUMBER);
+      String name = cursor.getString(Projections.DISPLAY_NAME);
+      String companyName = cursor.getString(Projections.COMPANY_NAME);
+      String nickName = cursor.getString(Projections.NICKNAME);
+      if (TextUtils.isEmpty(query)
+          || QueryFilteringUtil.nameMatchesT9Query(query, name)
+          || QueryFilteringUtil.numberMatchesNumberQuery(query, number)
+          || QueryFilteringUtil.nameContainsQuery(query, name)
+          || QueryFilteringUtil.nameContainsQuery(query, companyName)
+          || QueryFilteringUtil.nameContainsQuery(query, nickName)) {
+        queryFilteredPositions.add(position);
+      }
+    }
+    currentPosition = 0;
+    cursor.moveToFirst();
   }
 
   @Override
