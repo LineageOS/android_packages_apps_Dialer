@@ -35,7 +35,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHol
   @Override
   public NewVoicemailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-    View view = inflater.inflate(R.layout.new_voicemail_call_log_entry, viewGroup, false);
+    View view = inflater.inflate(R.layout.new_voicemail_entry, viewGroup, false);
     NewVoicemailViewHolder newVoicemailViewHolder = new NewVoicemailViewHolder(view);
     return newVoicemailViewHolder;
   }
