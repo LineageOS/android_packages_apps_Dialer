@@ -348,6 +348,7 @@ public class ContactGridManager {
     }
 
     if (info.isTimerVisible) {
+      bottomTextSwitcher.setVisibility(View.VISIBLE);
       bottomTextSwitcher.setDisplayedChild(1);
       bottomTimerView.setBase(
           primaryCallState.connectTimeMillis
@@ -362,6 +363,7 @@ public class ContactGridManager {
         isTimerStarted = true;
       }
     } else {
+      bottomTextSwitcher.setVisibility(View.GONE);
       bottomTextSwitcher.setDisplayedChild(0);
       bottomTimerView.stop();
       isTimerStarted = false;
