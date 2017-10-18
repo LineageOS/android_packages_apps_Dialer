@@ -64,11 +64,16 @@ final class VisualVoicemailNotifier {
    */
   private static final String GROUP_KEY = "VisualVoicemailGroup";
 
+  /**
+   * @param shouldAlert whether ringtone or vibration should be made when the notification is posted
+   *     or updated. Should only be true when there is a real new voicemail.
+   */
   public static void showNotifications(
       @NonNull Context context,
       @NonNull List<NewCall> newCalls,
       @NonNull Map<String, ContactInfo> contactInfos,
-      @Nullable String callers) {
+      @Nullable String callers,
+      boolean shouldAlert) {
     LogUtil.enterBlock("VisualVoicemailNotifier.showNotifications");
     PendingIntent deleteIntent =
         CallLogNotificationsService.createMarkAllNewVoicemailsAsOldIntent(context);
@@ -86,7 +91,15 @@ final class VisualVoicemailNotifier {
             .setContentIntent(newVoicemailIntent(context, null));
 
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
-      groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+      if (shouldAlert) {
+        groupSummary.setOnlyAlertOnce(false);
+        // Group summary will alert when posted/updated
+        groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_ALL);
+      } else {
+        // Only children will alert. but since all children are set to "only alert summary" it is
+        // effectively silenced.
+        groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+      }
       PhoneAccountHandle handle = getAccountForCall(context, newCalls.get(0));
       groupSummary.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
     }
@@ -203,6 +216,7 @@ final class VisualVoicemailNotifier {
 
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
       builder.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
+      builder.setGroupAlertBehavior(Notification.GROUP_ALERT_SUMMARY);
     }
 
     ContactPhotoLoader loader = new ContactPhotoLoader(context, contactInfo);
