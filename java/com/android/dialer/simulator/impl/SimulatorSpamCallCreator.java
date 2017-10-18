@@ -74,6 +74,10 @@ final class SimulatorSpamCallCreator implements SimulatorConnectionService.Liste
         DISCONNECT_DELAY_MILLIS);
   }
 
+  @Override
+  public void onConference(
+      @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2) {}
+
   private void addNextIncomingCall(int callCount) {
     if (callCount <= 0) {
       LogUtil.i("SimulatorSpamCallCreator.addNextIncomingCall", "done adding calls");

@@ -30,6 +30,16 @@ public interface Simulator {
 
   ActionProvider getActionProvider(Context context);
 
+  /** The type of conference to emulate. */
+  // TODO(b/67785540): add VoLTE and CDMA conference call
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    CONFERENCE_TYPE_GSM,
+  })
+  @interface ConferenceType {}
+
+  static final int CONFERENCE_TYPE_GSM = 1;
+
   /** Information about a connection event. */
   public static class Event {
     /** The type of connection event. */
@@ -44,6 +54,11 @@ public interface Simulator {
       STATE_CHANGE,
       DTMF,
       SESSION_MODIFY_REQUEST,
+      CALL_AUDIO_STATE_CHANGED,
+      CONNECTION_ADDED,
+      MERGE,
+      SEPARATE,
+      SWAP,
     })
     public @interface Type {}
 
@@ -56,6 +71,11 @@ public interface Simulator {
     public static final int STATE_CHANGE = 6;
     public static final int DTMF = 7;
     public static final int SESSION_MODIFY_REQUEST = 8;
+    public static final int CALL_AUDIO_STATE_CHANGED = 9;
+    public static final int CONNECTION_ADDED = 10;
+    public static final int MERGE = 11;
+    public static final int SEPARATE = 12;
+    public static final int SWAP = 13;
 
     @Type public final int type;
     /** Holds event specific information. For example, for DTMF this could be the keycode. */

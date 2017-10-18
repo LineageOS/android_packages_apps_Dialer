@@ -93,7 +93,7 @@ public class ContactsFragment extends Fragment
 
   /** Listener for contacts list scroll state. */
   public interface OnContactsListScrolledListener {
-    void onContactsListScrolled(int scrollState);
+    void onContactsListScrolled(boolean isDragging);
   }
 
   /**
@@ -248,7 +248,9 @@ public class ContactsFragment extends Fragment
     String anchoredHeaderString = adapter.getHeaderString(firstCompletelyVisible);
 
     FragmentUtils.getParentUnsafe(this, OnContactsListScrolledListener.class)
-        .onContactsListScrolled(recyclerView.getScrollState());
+        .onContactsListScrolled(
+            recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING
+                || fastScroller.isDragStarted());
 
     // If the user swipes to the top of the list very quickly, there is some strange behavior
     // between this method updating headers and adapter#onBindViewHolder updating headers.

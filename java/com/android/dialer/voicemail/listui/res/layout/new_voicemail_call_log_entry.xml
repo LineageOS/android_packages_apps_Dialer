@@ -31,7 +31,6 @@
       android:layout_height="@dimen/call_log_entry_photo_size"
       android:layout_centerVertical="true"
       android:padding="@dimen/call_log_entry_photo_padding"
-      android:background="@color/dialer_secondary_color"
       android:focusable="true"/>
 
   <LinearLayout
@@ -42,6 +41,7 @@
       android:layout_toStartOf="@+id/menu_button"
       android:orientation="vertical">
 
+    <!--TODO(uabdullah): Resolve text clipping on top of primary text -->
     <TextView
         android:id="@+id/primary_text"
         style="@style/PrimaryText"

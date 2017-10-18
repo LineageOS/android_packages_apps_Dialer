@@ -21,6 +21,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.telecom.Connection;
 import android.telecom.ConnectionRequest;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -47,6 +48,7 @@ public class SimulatorSimCallManager {
   private static final String SIM_CALL_MANAGER_ACCOUNT_ID = "SIMULATOR_ACCOUNT_ID";
   private static final String VIDEO_PROVIDER_ACCOUNT_ID = "SIMULATOR_VIDEO_ACCOUNT_ID";
   private static final String EXTRA_IS_SIMULATOR_CONNECTION = "is_simulator_connection";
+  private static final String EXTRA_CONNECTION_TAG = "connection_tag";
 
   static void register(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.register");
@@ -85,9 +87,7 @@ public class SimulatorSimCallManager {
     register(context);
 
     extras = new Bundle(extras);
-    extras.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
-    String connectionTag = createUniqueConnectionTag();
-    extras.putBoolean(connectionTag, true);
+    extras.putAll(createSimulatorConnectionExtras());
 
     Bundle outgoingCallExtras = new Bundle();
     outgoingCallExtras.putBundle(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
@@ -102,7 +102,7 @@ public class SimulatorSimCallManager {
     } catch (SecurityException e) {
       throw Assert.createIllegalStateFailException("Unable to place call: " + e);
     }
-    return connectionTag;
+    return extras.getString(EXTRA_CONNECTION_TAG);
   }
 
   @NonNull
@@ -123,14 +123,12 @@ public class SimulatorSimCallManager {
 
     extras = new Bundle(extras);
     extras.putString(TelephonyManager.EXTRA_INCOMING_NUMBER, callerId);
-    extras.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
-    String connectionTag = createUniqueConnectionTag();
-    extras.putBoolean(connectionTag, true);
+    extras.putAll(createSimulatorConnectionExtras());
 
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     telecomManager.addNewIncomingCall(
         isVideo ? getVideoProviderHandle(context) : getSystemPhoneAccountHandle(context), extras);
-    return connectionTag;
+    return extras.getString(EXTRA_CONNECTION_TAG);
   }
 
   @NonNull
@@ -167,7 +165,7 @@ public class SimulatorSimCallManager {
   }
 
   @NonNull
-  private static PhoneAccountHandle getSystemPhoneAccountHandle(@NonNull Context context) {
+  public static PhoneAccountHandle getSystemPhoneAccountHandle(@NonNull Context context) {
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     List<PhoneAccountHandle> handles;
     try {
@@ -190,9 +188,36 @@ public class SimulatorSimCallManager {
   }
 
   @NonNull
+  public static String getConnectionTag(@NonNull Connection connection) {
+    String connectionTag = connection.getExtras().getString(EXTRA_CONNECTION_TAG);
+    return Assert.isNotNull(connectionTag);
+  }
+
+  @NonNull
+  public static SimulatorConnection findConnectionByTag(@NonNull String connectionTag) {
+    Assert.isNotNull(connectionTag);
+    for (Connection connection : SimulatorConnectionService.getInstance().getAllConnections()) {
+      if (connection.getExtras().getBoolean(connectionTag)) {
+        return (SimulatorConnection) connection;
+      }
+    }
+    throw Assert.createIllegalStateFailException();
+  }
+
+  @NonNull
   private static String createUniqueConnectionTag() {
     int callId = new Random().nextInt();
     return String.format("simulator_phone_call_%x", Math.abs(callId));
+  }
+
+  @NonNull
+  static Bundle createSimulatorConnectionExtras() {
+    Bundle extras = new Bundle();
+    extras.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
+    String connectionTag = createUniqueConnectionTag();
+    extras.putString(EXTRA_CONNECTION_TAG, connectionTag);
+    extras.putBoolean(connectionTag, true);
+    return extras;
   }
 
   private SimulatorSimCallManager() {}

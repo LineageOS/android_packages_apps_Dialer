@@ -81,8 +81,13 @@ public class FastScroller extends RelativeLayout {
         container.setVisibility(INVISIBLE);
         scrollBar.setSelected(false);
         return true;
+      default:
+        return super.onTouchEvent(event);
     }
-    return super.onTouchEvent(event);
+  }
+
+  public boolean isDragStarted() {
+    return dragStarted;
   }
 
   private void setRecyclerViewPosition(float y) {
