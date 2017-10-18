@@ -81,6 +81,10 @@ public class QueryFilteringUtil {
    * </ul>
    */
   public static boolean nameContainsQuery(String query, String name) {
+    if (TextUtils.isEmpty(name)) {
+      return false;
+    }
+
     return Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()))
         .matcher(name.toLowerCase())
         .find();
