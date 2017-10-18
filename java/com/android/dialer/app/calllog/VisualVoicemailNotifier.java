@@ -27,6 +27,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -76,7 +77,7 @@ final class VisualVoicemailNotifier {
             .getResources()
             .getQuantityString(
                 R.plurals.notification_voicemail_title, newCalls.size(), newCalls.size());
-    Notification.Builder groupSummary =
+    NotificationCompat.Builder groupSummary =
         createNotificationBuilder(context)
             .setContentTitle(contentTitle)
             .setContentText(callers)
@@ -127,8 +128,8 @@ final class VisualVoicemailNotifier {
     return NOTIFICATION_TAG_PREFIX + voicemailUri;
   }
 
-  private static Notification.Builder createNotificationBuilder(@NonNull Context context) {
-    return new Notification.Builder(context)
+  private static NotificationCompat.Builder createNotificationBuilder(@NonNull Context context) {
+    return new NotificationCompat.Builder(context)
         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
         .setColor(context.getColor(R.color.dialer_theme_color))
         .setGroup(GROUP_KEY)
@@ -143,7 +144,7 @@ final class VisualVoicemailNotifier {
     PhoneAccountHandle handle = getAccountForCall(context, voicemail);
     ContactInfo contactInfo = contactInfos.get(voicemail.number);
 
-    Notification.Builder builder =
+    NotificationCompat.Builder builder =
         createNotificationBuilder(context)
             .setContentTitle(
                 ContactDisplayUtils.getTtsSpannedPhoneNumber(
@@ -157,7 +158,9 @@ final class VisualVoicemailNotifier {
     if (!TextUtils.isEmpty(voicemail.transcription)) {
       Logger.get(context)
           .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION);
-      builder.setContentText(voicemail.transcription);
+      builder
+          .setContentText(voicemail.transcription)
+          .setStyle(new NotificationCompat.BigTextStyle().bigText(voicemail.transcription));
     } else {
       switch (voicemail.transcriptionState) {
         case VoicemailCompat.TRANSCRIPTION_IN_PROGRESS:
