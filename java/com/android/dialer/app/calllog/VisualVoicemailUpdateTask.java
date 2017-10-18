@@ -67,7 +67,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       // Query failed, just return
       return;
     }
-
+    boolean shouldAlert = !voicemailsToNotify.isEmpty();
     voicemailsToNotify.addAll(getAndUpdateVoicemailsWithExistingNotification(context, queryHelper));
     voicemailsToNotify = filterBlockedNumbers(context, queryHandler, voicemailsToNotify);
     if (voicemailsToNotify.isEmpty()) {
@@ -100,7 +100,8 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
         }
       }
     }
-    VisualVoicemailNotifier.showNotifications(context, voicemailsToNotify, contactInfos, callers);
+    VisualVoicemailNotifier.showNotifications(
+        context, voicemailsToNotify, contactInfos, callers, shouldAlert);
 
     // Set trigger to update notifications when database changes.
     VoicemailNotificationJobService.scheduleJob(context);

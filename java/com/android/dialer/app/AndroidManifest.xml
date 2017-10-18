@@ -86,6 +86,11 @@
           android:mimeType="vnd.android.cursor.item/voicemail"
           android:scheme="content"
           />
+        <data
+            android:host="com.android.voicemail"
+            android:mimeType="vnd.android.cursor.dir/voicemails"
+            android:scheme="content"
+            />
       </intent-filter>
       <intent-filter android:priority="100">
         <action android:name="android.intent.action.BOOT_COMPLETED"/>

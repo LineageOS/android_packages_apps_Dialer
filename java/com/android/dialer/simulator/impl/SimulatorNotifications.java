@@ -16,12 +16,15 @@
 
 package com.android.dialer.simulator.impl;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.view.ActionProvider;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /** Implements the simulator submenu. */
@@ -45,6 +48,7 @@ final class SimulatorNotifications {
 
   private static void addVoicemailNotifications(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorNotifications.addVoicemailNotifications");
+    List<ContentValues> voicemails = new ArrayList<>();
     for (int i = NOTIFICATION_COUNT; i > 0; i--) {
       VoicemailPopulator.Voicemail voicemail =
           VoicemailPopulator.Voicemail.builder()
@@ -54,11 +58,12 @@ final class SimulatorNotifications {
               .setIsRead(false)
               .setTimeMillis(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(i))
               .build();
-      context
-          .getContentResolver()
-          .insert(
-              Voicemails.buildSourceUri(context.getPackageName()),
-              voicemail.getAsContentValues(context));
+      voicemails.add(voicemail.getAsContentValues(context));
     }
+    context
+        .getContentResolver()
+        .bulkInsert(
+            Voicemails.buildSourceUri(context.getPackageName()),
+            voicemails.toArray(new ContentValues[voicemails.size()]));
   }
 }
