@@ -41,7 +41,7 @@ public final class NearbyPlacesCursorLoader extends CursorLoader {
    */
   public NearbyPlacesCursorLoader(
       Context context, String query, @NonNull List<Integer> directoryIds) {
-    super(context, getContentUri(context, query), Projections.PHONE_PROJECTION, null, null, null);
+    super(context, getContentUri(context, query), Projections.DATA_PROJECTION, null, null, null);
     this.directoryId = getDirectoryId(directoryIds);
   }
 
