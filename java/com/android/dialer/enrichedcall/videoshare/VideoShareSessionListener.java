@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.android.dialer.assisteddialing;
+package com.android.dialer.enrichedcall.videoshare;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
-import android.support.annotation.NonNull;
-import java.util.Optional;
+/** Interface for receiving updates on session initialization failure or termination. */
+public interface VideoShareSessionListener {
 
-/** The core interface for the AssistedDialingMediator. */
-public interface AssistedDialingMediator {
+  void onSessionTerminated(VideoShareSession session);
 
-  /** Returns {@code true} if the current client platform supports Assisted Dialing. */
-  public boolean isPlatformEligible();
+  void onSessionInitializationFailed(VideoShareSession session, Exception e);
 
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
+  /**
+   * Called when a session hasn't received a keep-alive or video packet within the timeout time
+   * period.
+   *
+   * @param session The session that timed out
+   */
+  void onSessionTimedOut(VideoShareSession session);
 }
