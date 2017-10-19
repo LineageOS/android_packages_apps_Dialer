@@ -17,6 +17,7 @@
 package com.android.dialer.assisteddialing;
 
 import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import com.android.dialer.common.LogUtil;
@@ -45,6 +46,12 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
     }
     this.locationDetector = locationDetector;
     this.numberTransformer = numberTransformer;
+  }
+
+  @Override
+  public boolean isPlatformEligible() {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+        && Build.VERSION.SDK_INT <= Build.VERSION_CODES.O;
   }
 
   /**
