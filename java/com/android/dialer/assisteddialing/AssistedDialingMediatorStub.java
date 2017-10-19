@@ -31,4 +31,9 @@ public final class AssistedDialingMediatorStub implements AssistedDialingMediato
   public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform) {
     return Optional.empty();
   }
+
+  @Override
+  public boolean isPlatformEligible() {
+    return false;
+  }
 }

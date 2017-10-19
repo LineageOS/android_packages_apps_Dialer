@@ -119,8 +119,8 @@ public class InCallServiceImpl extends InCallService {
     Trace.beginSection("InCallServiceImpl.tearDown");
     Log.v(this, "tearDown");
     // Tear down the InCall system
-    TelecomAdapter.getInstance().clearInCallService();
     InCallPresenter.getInstance().tearDown();
+    TelecomAdapter.getInstance().clearInCallService();
     if (returnToCallController != null) {
       returnToCallController.tearDown();
       returnToCallController = null;
