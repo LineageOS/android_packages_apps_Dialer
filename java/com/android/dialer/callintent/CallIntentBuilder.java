@@ -126,7 +126,9 @@ public class CallIntentBuilder {
     Intent intent = new Intent(Intent.ACTION_CALL, uri);
     Bundle extras = new Bundle();
 
-    if (allowAssistedDial && this.assistedDialingMediator != null) {
+    if (allowAssistedDial
+        && this.assistedDialingMediator != null
+        && this.assistedDialingMediator.isPlatformEligible()) {
       intent = buildAssistedDialingParameters(intent, extras);
     }
     intent.putExtra(

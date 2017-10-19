@@ -21,7 +21,6 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.Time;
 import com.android.contacts.common.util.DateUtils;
@@ -194,7 +193,7 @@ public class CallLogGroupBuilder {
     if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {
       return compareSipAddresses(number1, number2);
     } else {
-      return PhoneNumberUtils.compare(number1, number2);
+      return PhoneNumberHelper.compare(number1, number2);
     }
   }
 

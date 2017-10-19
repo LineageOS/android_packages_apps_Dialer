@@ -203,11 +203,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
             mPrefs.getBoolean(
                 VisualVoicemailEnabledChecker.PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false));
     mViewPager.setAdapter(mAdapter);
-
-    // This is deliberate. See cl/172018946 for the app startup implications of using 1 here
-    // versus loading more fragments upfront.
-    mViewPager.setOffscreenPageLimit(1);
-
+    mViewPager.setOffscreenPageLimit(DialtactsPagerAdapter.TAB_COUNT_WITH_VOICEMAIL - 1);
     mViewPager.addOnPageChangeListener(this);
     showTab(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
 
