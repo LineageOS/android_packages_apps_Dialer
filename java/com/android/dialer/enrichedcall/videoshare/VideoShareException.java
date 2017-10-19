@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.dialer.assisteddialing;
+package com.android.dialer.enrichedcall.videoshare;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
-import android.support.annotation.NonNull;
-import java.util.Optional;
+/** Exceptions occurring from using DreamVideo and video share configuration. */
+public class VideoShareException extends Exception {
 
-/** The core interface for the AssistedDialingMediator. */
-public interface AssistedDialingMediator {
-
-  /** Returns {@code true} if the current client platform supports Assisted Dialing. */
-  public boolean isPlatformEligible();
-
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
+  public VideoShareException(String message) {
+    super(message);
+  }
 }

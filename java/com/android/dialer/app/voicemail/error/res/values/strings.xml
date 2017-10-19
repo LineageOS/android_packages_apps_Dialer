@@ -137,10 +137,10 @@
   <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
 
   <string name="verizon_terms_and_conditions_title">Turn on visual voicemail</string>
-  <string name="verizon_terms_and_conditions_message">%1$s By turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n%2$s</string>
+  <string name="verizon_terms_and_conditions_message"><xliff:g>%1$s</xliff:g> By turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n<xliff:g>%2$s</xliff:g></string>
 
   <string name="dialer_terms_and_conditions_title">Turn on visual voicemail</string>
-  <string name="dialer_terms_and_conditions_message">%s</string>
+  <string name="dialer_terms_and_conditions_message"><xliff:g>%s</xliff:g></string>
 
   <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
 Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
@@ -149,7 +149,7 @@ You may disable VVM in settings. This will revert you to basic voice mail. In so
 \n
 For the Premium Visual Voice Mail service, some voice messages may not be completely transcribed; incomplete messages will end with [...]. Only the first 45 seconds of each voice message will be transcribed, so for longer messages, you will need to listen to the voice message itself. Any profane or offensive language also will not be transcribed and will appear as [...] in the transcription.\n
 \n
-Speech recordings may be collected and stored for a period of 30 days, solely for the purpose of testing and improving transcription technology and performance, subject to the Verizon Wireless Privacy Policy, which can be found at %s\n
+Speech recordings may be collected and stored for a period of 30 days, solely for the purpose of testing and improving transcription technology and performance, subject to the Verizon Wireless Privacy Policy, which can be found at <xliff:g>%s</xliff:g>\n
 \n
 You understand that by selecting ACCEPT, your messages will be stored and anyone in possession of this device will have access to your voice mail. You further understand that your voice mail messages may be stored in electronic format on this device. To limit unauthorized access to your voice mail, you should consider locking your phone when not in use. Not available in all areas or over Wi\u2011Fi.\n
 \n
@@ -162,7 +162,7 @@ Puede inhabilitar el VVM en la configuración. Esto le permite volver al buzón 
 \n
 En el caso del servicio de buzón de voz visual premium, es posible que algunos mensajes no se transcriban totalmente; los mensajes incompletos finalizan con "[…]". Solo se transcriben los primeros 45 segundos de cada mensaje de voz, por lo que debe escuchar los mensajes de voz más largos. Tampoco se transcribe ninguna palabra ofensiva o profana; aparece como "[…]" en la transcripción.\n
 \n
-Es posible que reunamos y almacenemos grabaciones de voz durante 30 días, con el único fin de probar y mejorar el rendimiento y la tecnología de la transcripción, sujeto a la Política de privacidad de Verizon Wireless, disponible en %s\n
+Es posible que reunamos y almacenemos grabaciones de voz durante 30 días, con el único fin de probar y mejorar el rendimiento y la tecnología de la transcripción, sujeto a la Política de privacidad de Verizon Wireless, disponible en <xliff:g>%s</xliff:g>\n
 \n
 Entiende que, al seleccionar ACEPTAR, sus mensajes se almacenarán, y cualquier persona que disponga de este dispositivo tendrá acceso al buzón de voz. Entiende, además, que los mensajes de voz pueden almacenarse en formato electrónico en este dispositivo. Para limitar el acceso no autorizado al buzón de voz, debe considerar el bloqueo del teléfono cuando no está en uso. No está disponible en todas las áreas ni mediante Wi\u2011Fi.\n
 \n
@@ -170,7 +170,7 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string name="dialer_terms_and_conditions_1.0">
-  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. %s
+  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. <xliff:g>%s</xliff:g>
   </string>
 
   <string name="dialer_terms_and_conditions_for_verizon_1.0">
