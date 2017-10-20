@@ -96,7 +96,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     dialerContact = getDialerContact(context, cursor);
     position = cursor.getPosition();
     number = cursor.getString(Projections.PHONE_NUMBER);
-    String name = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+    String name = cursor.getString(Projections.DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);
     String secondaryInfo =
         TextUtils.isEmpty(label)
@@ -111,12 +111,12 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     if (shouldShowPhoto(cursor)) {
       nameOrNumberView.setVisibility(View.VISIBLE);
       photo.setVisibility(View.VISIBLE);
-      String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
+      String photoUri = cursor.getString(Projections.PHOTO_URI);
       ContactPhotoManager.getInstance(context)
           .loadDialerThumbnailOrPhoto(
               photo,
               getContactUri(cursor),
-              cursor.getLong(Projections.PHONE_PHOTO_ID),
+              cursor.getLong(Projections.PHOTO_ID),
               photoUri == null ? null : Uri.parse(photoUri),
               name,
               LetterTileDrawable.TYPE_DEFAULT);
@@ -129,11 +129,11 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
   // Show the contact photo next to only the first number if a contact has multiple numbers
   private boolean shouldShowPhoto(SearchCursor cursor) {
     int currentPosition = cursor.getPosition();
-    String currentLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    String currentLookupKey = cursor.getString(Projections.LOOKUP_KEY);
     cursor.moveToPosition(currentPosition - 1);
 
     if (!cursor.isHeader() && !cursor.isBeforeFirst()) {
-      String previousLookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+      String previousLookupKey = cursor.getString(Projections.LOOKUP_KEY);
       cursor.moveToPosition(currentPosition);
       return !currentLookupKey.equals(previousLookupKey);
     }
@@ -142,8 +142,8 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
   }
 
   private static Uri getContactUri(Cursor cursor) {
-    long contactId = cursor.getLong(Projections.PHONE_ID);
-    String lookupKey = cursor.getString(Projections.PHONE_LOOKUP_KEY);
+    long contactId = cursor.getLong(Projections.ID);
+    String lookupKey = cursor.getString(Projections.LOOKUP_KEY);
     return Contacts.getLookupUri(contactId, lookupKey);
   }
 
@@ -188,7 +188,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
 
   private static @CallToAction int getCallToAction(
       Context context, SearchCursor cursor, String query) {
-    int carrierPresence = cursor.getInt(Projections.PHONE_CARRIER_PRESENCE);
+    int carrierPresence = cursor.getInt(Projections.CARRIER_PRESENCE);
     String number = cursor.getString(Projections.PHONE_NUMBER);
     if ((carrierPresence & Phone.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
       return CallToAction.VIDEO_CALL;
@@ -262,16 +262,15 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
 
   private static DialerContact getDialerContact(Context context, Cursor cursor) {
     DialerContact.Builder contact = DialerContact.newBuilder();
-    String displayName = cursor.getString(Projections.PHONE_DISPLAY_NAME);
+    String displayName = cursor.getString(Projections.DISPLAY_NAME);
     String number = cursor.getString(Projections.PHONE_NUMBER);
     Uri contactUri =
         Contacts.getLookupUri(
-            cursor.getLong(Projections.PHONE_CONTACT_ID),
-            cursor.getString(Projections.PHONE_LOOKUP_KEY));
+            cursor.getLong(Projections.CONTACT_ID), cursor.getString(Projections.LOOKUP_KEY));
 
     contact
         .setNumber(number)
-        .setPhotoId(cursor.getLong(Projections.PHONE_PHOTO_ID))
+        .setPhotoId(cursor.getLong(Projections.PHOTO_ID))
         .setContactType(LetterTileDrawable.TYPE_DEFAULT)
         .setNameOrNumber(displayName)
         .setNumberLabel(
@@ -281,7 +280,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
                     cursor.getString(Projections.PHONE_LABEL))
                 .toString());
 
-    String photoUri = cursor.getString(Projections.PHONE_PHOTO_URI);
+    String photoUri = cursor.getString(Projections.PHOTO_URI);
     if (photoUri != null) {
       contact.setPhotoUri(photoUri);
     }

@@ -27,6 +27,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -63,11 +64,16 @@ final class VisualVoicemailNotifier {
    */
   private static final String GROUP_KEY = "VisualVoicemailGroup";
 
+  /**
+   * @param shouldAlert whether ringtone or vibration should be made when the notification is posted
+   *     or updated. Should only be true when there is a real new voicemail.
+   */
   public static void showNotifications(
       @NonNull Context context,
       @NonNull List<NewCall> newCalls,
       @NonNull Map<String, ContactInfo> contactInfos,
-      @Nullable String callers) {
+      @Nullable String callers,
+      boolean shouldAlert) {
     LogUtil.enterBlock("VisualVoicemailNotifier.showNotifications");
     PendingIntent deleteIntent =
         CallLogNotificationsService.createMarkAllNewVoicemailsAsOldIntent(context);
@@ -76,7 +82,7 @@ final class VisualVoicemailNotifier {
             .getResources()
             .getQuantityString(
                 R.plurals.notification_voicemail_title, newCalls.size(), newCalls.size());
-    Notification.Builder groupSummary =
+    NotificationCompat.Builder groupSummary =
         createNotificationBuilder(context)
             .setContentTitle(contentTitle)
             .setContentText(callers)
@@ -85,7 +91,15 @@ final class VisualVoicemailNotifier {
             .setContentIntent(newVoicemailIntent(context, null));
 
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
-      groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+      if (shouldAlert) {
+        groupSummary.setOnlyAlertOnce(false);
+        // Group summary will alert when posted/updated
+        groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_ALL);
+      } else {
+        // Only children will alert. but since all children are set to "only alert summary" it is
+        // effectively silenced.
+        groupSummary.setGroupAlertBehavior(Notification.GROUP_ALERT_CHILDREN);
+      }
       PhoneAccountHandle handle = getAccountForCall(context, newCalls.get(0));
       groupSummary.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
     }
@@ -127,8 +141,8 @@ final class VisualVoicemailNotifier {
     return NOTIFICATION_TAG_PREFIX + voicemailUri;
   }
 
-  private static Notification.Builder createNotificationBuilder(@NonNull Context context) {
-    return new Notification.Builder(context)
+  private static NotificationCompat.Builder createNotificationBuilder(@NonNull Context context) {
+    return new NotificationCompat.Builder(context)
         .setSmallIcon(android.R.drawable.stat_notify_voicemail)
         .setColor(context.getColor(R.color.dialer_theme_color))
         .setGroup(GROUP_KEY)
@@ -143,7 +157,7 @@ final class VisualVoicemailNotifier {
     PhoneAccountHandle handle = getAccountForCall(context, voicemail);
     ContactInfo contactInfo = contactInfos.get(voicemail.number);
 
-    Notification.Builder builder =
+    NotificationCompat.Builder builder =
         createNotificationBuilder(context)
             .setContentTitle(
                 ContactDisplayUtils.getTtsSpannedPhoneNumber(
@@ -157,7 +171,9 @@ final class VisualVoicemailNotifier {
     if (!TextUtils.isEmpty(voicemail.transcription)) {
       Logger.get(context)
           .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION);
-      builder.setContentText(voicemail.transcription);
+      builder
+          .setContentText(voicemail.transcription)
+          .setStyle(new NotificationCompat.BigTextStyle().bigText(voicemail.transcription));
     } else {
       switch (voicemail.transcriptionState) {
         case VoicemailCompat.TRANSCRIPTION_IN_PROGRESS:
@@ -200,6 +216,7 @@ final class VisualVoicemailNotifier {
 
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
       builder.setChannelId(NotificationChannelManager.getVoicemailChannelId(context, handle));
+      builder.setGroupAlertBehavior(Notification.GROUP_ALERT_SUMMARY);
     }
 
     ContactPhotoLoader loader = new ContactPhotoLoader(context, contactInfo);
