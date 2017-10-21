@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">附近的地點</string>
   <string name="people">人員</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">T9 撥號鍵盤</string>
+  <string name="t9_search_input_locale">T9 搜尋輸入</string>
+  <string name="t9_search_input_locale_default">預設</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">搜尋電話號碼</string>
   <string name="enable_forward_lookup_title">正向搜尋</string>
@@ -43,7 +47,7 @@
   <string name="call_log_show_all_slots">所有 SIM 卡</string>
   <string name="call_log_all_calls_header">所有通話</string>
   <string name="call_log_blacklist_header">僅限已封鎖通話</string>
-  <string name="call_log_blocked_empty">您沒有已封鎖的電話。</string>
+  <string name="call_log_blocked_empty">您沒有已封鎖的來電。</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">統計資料</string>
   <string name="callStatsDetailTitle">通話統計詳細資料</string>

@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Nabygeleë plekke</string>
   <string name="people">Mense</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Nommerbord T9 soek</string>
+  <string name="t9_search_input_locale">T9 soektog</string>
+  <string name="t9_search_input_locale_default">Standaard</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Soek Telefoonnommer</string>
   <string name="enable_forward_lookup_title">Vorentoe soek</string>

@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">شوێنە نزیەکاکان</string>
   <string name="people">ناوەکان</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">گه‌ڕانی ته‌خته‌لێدانی T9</string>
+  <string name="t9_search_input_locale">نوسینی گه‌ڕان بۆ T9</string>
+  <string name="t9_search_input_locale_default">بنه‌ڕه‌ت</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">گه‌ڕان به‌دوای ژماره‌ی ته‌له‌فۆن</string>
   <string name="enable_forward_lookup_title">گه‌ڕان به‌دوای به‌دواکه‌وتن</string>

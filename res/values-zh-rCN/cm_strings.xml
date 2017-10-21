@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">附近地点</string>
   <string name="people">人</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">拨号盘 T9 搜索</string>
+  <string name="t9_search_input_locale">T9 搜索输入</string>
+  <string name="t9_search_input_locale_default">默认</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">号码查询</string>
   <string name="enable_forward_lookup_title">正向查询</string>

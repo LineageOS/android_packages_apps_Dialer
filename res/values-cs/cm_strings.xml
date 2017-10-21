@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Blízká místa</string>
   <string name="people">Lidé</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Vyhledávání na T9 číselníku</string>
+  <string name="t9_search_input_locale">Vstup vyhledávání T9</string>
+  <string name="t9_search_input_locale_default">Výchozí</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
   <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>

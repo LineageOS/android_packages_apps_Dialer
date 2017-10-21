@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Близки места</string>
   <string name="people">Хора</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Търсене в T9</string>
+  <string name="t9_search_input_locale">Вход в T9 търсене</string>
+  <string name="t9_search_input_locale_default">Стандартен</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Търсене на телефонен номер</string>
   <string name="enable_forward_lookup_title">Пренасочване на търсенето</string>

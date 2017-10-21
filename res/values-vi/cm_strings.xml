@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Địa điểm gần kề</string>
   <string name="people">Mọi người</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Bàn phím tìm kiếm T9</string>
+  <string name="t9_search_input_locale">Ô tìm kiếm T9</string>
+  <string name="t9_search_input_locale_default">Mặc định</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Tra cứu số điện thoại</string>
   <string name="enable_forward_lookup_title">Tra cứu xuôi</string>

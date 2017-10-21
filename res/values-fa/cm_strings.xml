@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">مکان‌های نزدیک</string>
   <string name="people">افراد</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">جستجوی صفحه شماره‌گیری T9</string>
+  <string name="t9_search_input_locale">ورودی جستجوی T9</string>
+  <string name="t9_search_input_locale_default">پیش‌فرض</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">جستجوی شماره تلفن</string>
   <string name="enable_forward_lookup_title">ارسال جستجو</string>

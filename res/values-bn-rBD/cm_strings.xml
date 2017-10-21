@@ -19,6 +19,7 @@
   <!-- Forward lookup -->
   <string name="nearby_places">নিকটবর্তী স্থান অনুসারে</string>
   <string name="people">জনসাধারণ</string>
+  <!-- dialpad t9 search -->
   <!-- Number lookup -->
   <!-- Chinese Reverse Lookup Provider -->
   <string name="call_log_show_all_slots">সব সিম</string>

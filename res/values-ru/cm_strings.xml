@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Места рядом</string>
   <string name="people">Люди</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">T9-поиск в номеронабирателе</string>
+  <string name="t9_search_input_locale">Язык поиска</string>
+  <string name="t9_search_input_locale_default">Язык системы</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Поиск номеров телефона</string>
   <string name="enable_forward_lookup_title">Прямой поиск</string>

@@ -24,6 +24,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Tuvākās vietas</string>
   <string name="people">Cilvēki</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Numuru tastatūras T9 meklēšana</string>
+  <string name="t9_search_input_locale">T9 meklēšanas ievade</string>
+  <string name="t9_search_input_locale_default">Noklusētais</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Telefona numura uzmeklēšana</string>
   <string name="enable_forward_lookup_title">Pārsūtīšanas uzmeklēšana</string>

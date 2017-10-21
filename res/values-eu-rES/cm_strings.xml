@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Kokaleku hurbilak</string>
   <string name="people">Jendea</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
+  <string name="t9_search_input_locale">T9 bilatzeko sarrera</string>
+  <string name="t9_search_input_locale_default">Lehenetsia</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Telefono zenbakien bilaketa</string>
   <string name="enable_forward_lookup_title">Tokien bilaketa</string>

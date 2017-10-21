@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">สถานที่ใกล้เคียง</string>
   <string name="people">บุคคล</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">แผงค้นหา T9</string>
+  <string name="t9_search_input_locale">ป้อนข้อมูลค้นหา T9</string>
+  <string name="t9_search_input_locale_default">ค่าเริ่มต้น</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">ค้นหาหมายเลขโทรศัพท์</string>
   <string name="enable_forward_lookup_title">ค้นหาการส่งต่อ</string>

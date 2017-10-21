@@ -24,6 +24,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Llugares averaos</string>
   <string name="people">Persones</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Guetar Dialpad T9</string>
+  <string name="t9_search_input_locale">Entrada gueta T9</string>
+  <string name="t9_search_input_locale_default">Predetermináu</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
   <string name="enable_forward_lookup_title">Gueta direuta</string>

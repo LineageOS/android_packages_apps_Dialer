@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">الأماكن القريبة</string>
   <string name="people">الناس</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">بحث لوحة الطلب T9</string>
+  <string name="t9_search_input_locale">إدخال بحث T9</string>
+  <string name="t9_search_input_locale_default">افتراضي</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">البحث عن رقم الهاتف</string>
   <string name="enable_forward_lookup_title">بحث إلى الأمام</string>

@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">आसपास के स्थान</string>
   <string name="people">लोग</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">डायलपैड टी9 खोज</string>
+  <string name="t9_search_input_locale">टी9 खोज इन्पुट</string>
+  <string name="t9_search_input_locale_default">डिफ़ॉल्ट</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">फ़ोन नंबर लुकअप</string>
   <string name="enable_forward_lookup_title">आगे की ओर लुकअप</string>

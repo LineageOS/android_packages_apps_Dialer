@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">近くの場所</string>
   <string name="people">人物</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">ダイヤルパッドT9検索</string>
+  <string name="t9_search_input_locale">T9検索の入力</string>
+  <string name="t9_search_input_locale_default">デフォルト</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">電話番号検索</string>
   <string name="enable_forward_lookup_title">正引き</string>

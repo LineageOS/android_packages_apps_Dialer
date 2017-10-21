@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">ئەتراپتىكى ئورۇنلار</string>
   <string name="people">كىشى</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">نومۇر تاختا T9 ئىزدەش</string>
+  <string name="t9_search_input_locale">T9 ئىزدەش كىرگۈزۈش</string>
+  <string name="t9_search_input_locale_default">كۆڭۈلدىكى</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">تېلېفون نومۇر ئىزدەش</string>
   <string name="enable_forward_lookup_title">ئوڭ ئىزدەش</string>

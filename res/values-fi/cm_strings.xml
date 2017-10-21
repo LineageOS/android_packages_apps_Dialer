@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Lähellä olevat sijainnit</string>
   <string name="people">Ihmiset</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Numeronäppäimistön T9-haku</string>
+  <string name="t9_search_input_locale">T9-haun syöttötapa</string>
+  <string name="t9_search_input_locale_default">Oletus</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Puhelinnumeron haku</string>
   <string name="enable_forward_lookup_title">Paikkahaku</string>

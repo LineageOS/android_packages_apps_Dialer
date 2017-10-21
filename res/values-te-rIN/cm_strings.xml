@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">దగ్గరి ప్రదేశాలు</string>
   <string name="people">వ్యక్తులు</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">డయల్ ప్యాడ్ T9 శోధన</string>
+  <string name="t9_search_input_locale">T9 శోధన ఇన్పుట్</string>
+  <string name="t9_search_input_locale_default">డిఫాల్ట్</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">ఫోన్ నంబర్ శోధన</string>
   <string name="enable_forward_lookup_title">ముందుకు శోధన</string>

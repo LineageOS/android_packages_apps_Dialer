@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Yakın yerler</string>
   <string name="people">Kişiler</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Tuş takımı T9 arama</string>
+  <string name="t9_search_input_locale">T9 arama girişi</string>
+  <string name="t9_search_input_locale_default">Varsayılan</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Telefon numarası arama</string>
   <string name="enable_forward_lookup_title">Yönlendirme araması</string>

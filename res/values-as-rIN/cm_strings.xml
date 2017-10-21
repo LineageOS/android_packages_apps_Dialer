@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">চুবুৰীয়া ঠাইবোৰ</string>
   <string name="people">লোকসকল</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">ডায়েলপেড T9 অনুসন্ধান</string>
+  <string name="t9_search_input_locale">T9 অনুসন্ধান প্ৰবিষ্ট কৰক</string>
+  <string name="t9_search_input_locale_default">ডিফল্ট</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">ফোন নম্বৰ বিচৰা</string>
   <string name="enable_forward_lookup_title">আগলৈ বিচৰা</string>

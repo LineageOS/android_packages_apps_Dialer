@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Netoliese esančios vietos</string>
   <string name="people">Žmonės</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Skambinimo skydelio T9 paieška</string>
+  <string name="t9_search_input_locale">T9 paieškos įvestis</string>
+  <string name="t9_search_input_locale_default">Numatytoji</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Telefono numerių paieška</string>
   <string name="enable_forward_lookup_title">Tolimesnė paieška</string>

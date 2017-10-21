@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Κοντινές τοποθεσίες</string>
   <string name="people">Άτομα</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
+  <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
+  <string name="t9_search_input_locale_default">Προεπιλογή</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
   <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>

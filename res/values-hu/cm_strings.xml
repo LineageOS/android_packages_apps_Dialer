@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Közeli helyek</string>
   <string name="people">Emberek</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Tárcsázó T9 keresés</string>
+  <string name="t9_search_input_locale">T9 keresés bevitel</string>
+  <string name="t9_search_input_locale_default">Alapértelmezett</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Telefonszám keresés</string>
   <string name="enable_forward_lookup_title">Címkeresés</string>

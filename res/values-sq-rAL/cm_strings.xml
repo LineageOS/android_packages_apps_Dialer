@@ -25,6 +25,9 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Vendet përreth</string>
   <string name="people">Persona</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Kërkimi me tastierë T9</string>
+  <string name="t9_search_input_locale_default">E paracaktuar</string>
   <!-- Number lookup -->
   <string name="enable_forward_lookup_summary">Shfaq vendet përreth kur kërkon me tastierë</string>
   <string name="enable_people_lookup_title">Kërko persona</string>

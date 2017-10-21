@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Tempat terdekat</string>
   <string name="people">Orang</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
+  <string name="t9_search_input_locale">Masukan penelusuran T9</string>
+  <string name="t9_search_input_locale_default">Standar</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Penelusuran nomor telepon</string>
   <string name="enable_forward_lookup_title">Penelusuran kedepan</string>

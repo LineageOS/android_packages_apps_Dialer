@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">주변 장소</string>
   <string name="people">사람</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">다이얼패드 T9 검색</string>
+  <string name="t9_search_input_locale">T9 검색 입력</string>
+  <string name="t9_search_input_locale_default">기본</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">전화번호 검색</string>
   <string name="enable_forward_lookup_title">순서대로 검색</string>

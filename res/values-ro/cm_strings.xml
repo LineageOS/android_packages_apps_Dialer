@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Persoane</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Căutare Dialpad T9</string>
+  <string name="t9_search_input_locale">Căutare T9</string>
+  <string name="t9_search_input_locale_default">Implicit</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Căutare număr de telefon</string>
   <string name="enable_forward_lookup_title">Căutare redirecționată</string>

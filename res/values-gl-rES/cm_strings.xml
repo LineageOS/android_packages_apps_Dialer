@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Lugares próximos</string>
   <string name="people">Xente</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Busca con Dialpad T9</string>
+  <string name="t9_search_input_locale">Entrada de busca T9</string>
+  <string name="t9_search_input_locale_default">Predeterminado</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Busca de número de teléfono</string>
   <string name="enable_forward_lookup_title">Busca avanzada</string>

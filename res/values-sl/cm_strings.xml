@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Bližnja mesta</string>
   <string name="people">Ljudje</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Iskanje tipkovnice za klicanje T9</string>
+  <string name="t9_search_input_locale">Vnos iskanja T9</string>
+  <string name="t9_search_input_locale_default">Privzeti</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Iskanje telefonske številke</string>
   <string name="enable_forward_lookup_title">Iskanje naprej</string>
@@ -115,7 +119,7 @@
   <string name="call_data_info_description">Čas uporabe in poraba podatkov glasovnega klica</string>
   <string name="alert_call_over_wifi">Klici bodo opravljeni preko omr. Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Na voljo ni nobenega mobilnega omrežja. Za klice se povežite na razpoložljivo omrežje Wi-Fi.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite na omr. Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite prek omrežja Wi-Fi.</string>
   <string name="alert_user_connect_to_wifi_for_call_text">Tapnite tukaj za ogled razpoložljivih omrežij</string>
   <string name="menu_add_to_4g_conference_call">Dodaj k konferenčnemu klicu 4G</string>
   <string name="menu_4g_conference_call">Konferenčni klic 4G</string>

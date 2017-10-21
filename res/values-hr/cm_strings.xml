@@ -25,6 +25,10 @@
   <!-- Forward lookup -->
   <string name="nearby_places">Mjesta u blizini</string>
   <string name="people">Osobe</string>
+  <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">T9 pretraživanje u biraču brojeva</string>
+  <string name="t9_search_input_locale">T9 unos za pretraživanje</string>
+  <string name="t9_search_input_locale_default">Zadano</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Pretraživanje po telefonskom broju</string>
   <string name="enable_forward_lookup_title">Pretraživanje po informacijama</string>
