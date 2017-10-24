@@ -58,4 +58,10 @@ public class ConstantsImpl extends Constants {
 
     return userAgent.toString();
   }
+
+  @NonNull
+  @Override
+  public String getSettingsActivity() {
+    return "com.google.android.apps.dialer.settings.GoogleDialerSettingsActivity";
+  }
 }

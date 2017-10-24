@@ -23,7 +23,7 @@ public final class TestCursorSchema {
 
   /**
    * If new rows are added to {@link
-   * com.android.dialer.searchfragment.common.Projections#DATA_PROJECTION}, this schema should be
+   * com.android.dialer.searchfragment.common.Projections#CP2_PROJECTION}, this schema should be
    * updated.
    */
   // TODO(67909522): remove these extra columns and remove all references to "Phone."

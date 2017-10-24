@@ -15,6 +15,7 @@
  */
 package com.android.dialer.interactions;
 
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -227,15 +228,10 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
-    String[] deniedPhonePermissions =
-        PermissionsUtil.getPermissionsCurrentlyDenied(
-            mContext, PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
-    if (deniedPhonePermissions.length > 0) {
-      LogUtil.i(
-          "PhoneNumberInteraction.startInteraction",
-          "Need phone permissions: " + Arrays.toString(deniedPhonePermissions));
+    if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+      LogUtil.i("PhoneNumberInteraction.startInteraction", "Need phone permissions: CALL_PHONE");
       ActivityCompat.requestPermissions(
-          (Activity) mContext, deniedPhonePermissions, REQUEST_CALL_PHONE);
+          (Activity) mContext, new String[] {permission.CALL_PHONE}, REQUEST_CALL_PHONE);
       return;
     }
 

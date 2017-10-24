@@ -122,7 +122,7 @@ public class OmtpVvmSyncService {
         success = downloadOneVoicemail(imapHelper, voicemail, phoneAccount);
       }
       if (success) {
-        // TODO: b/30569269 failure should interrupt all subsequent task via exceptions
+        // TODO: a bug failure should interrupt all subsequent task via exceptions
         imapHelper.updateQuota();
         autoDeleteAndArchiveVM(imapHelper, phoneAccount);
         imapHelper.handleEvent(OmtpEvents.DATA_IMAP_OPERATION_COMPLETED);

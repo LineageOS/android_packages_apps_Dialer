@@ -94,7 +94,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   public static final int CALL_HISTORY_STATUS_NOT_PRESENT = 2;
 
   // Hard coded property for {@code Call}. Upstreamed change from Motorola.
-  // TODO(b/35359461): Move it to Telecom in framework.
+  // TODO(a bug): Move it to Telecom in framework.
   public static final int PROPERTY_CODEC_KNOWN = 0x04000000;
 
   private static final String ID_PREFIX = "DialerCall_";
@@ -143,9 +143,12 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   @CallHistoryStatus private int mCallHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
   private boolean mIsSpam;
   private boolean mIsBlocked;
-  private boolean isInUserSpamList;
-  private boolean isInUserWhiteList;
-  private boolean isInGlobalSpamList;
+
+  @Nullable private Boolean isInUserSpamList;
+
+  @Nullable private Boolean isInUserWhiteList;
+
+  @Nullable private Boolean isInGlobalSpamList;
   private boolean didShowCameraPermission;
   private String callProviderLabel;
   private String callbackNumber;
@@ -575,7 +578,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    */
   protected boolean areCallExtrasCorrupted(Bundle callExtras) {
     /**
-     * There's currently a bug in Telephony service (b/25613098) that could corrupt the extras
+     * There's currently a bug in Telephony service (a bug) that could corrupt the extras
      * bundle, resulting in a IllegalArgumentException while validating data under {@link
      * Bundle#containsKey(String)}.
      */
@@ -1015,7 +1018,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     didShowCameraPermission = didShow;
   }
 
-  public boolean isInGlobalSpamList() {
+  @Nullable
+  public Boolean isInGlobalSpamList() {
     return isInGlobalSpamList;
   }
 
@@ -1023,7 +1027,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     isInGlobalSpamList = inSpamList;
   }
 
-  public boolean isInUserSpamList() {
+  @Nullable
+  public Boolean isInUserSpamList() {
     return isInUserSpamList;
   }
 
@@ -1031,7 +1036,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     isInUserSpamList = inSpamList;
   }
 
-  public boolean isInUserWhiteList() {
+  @Nullable
+  public Boolean isInUserWhiteList() {
     return isInUserWhiteList;
   }
 

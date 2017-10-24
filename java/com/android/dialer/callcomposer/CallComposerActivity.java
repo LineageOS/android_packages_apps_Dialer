@@ -242,7 +242,7 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void onCopyAndResizeImageFailure(Throwable throwable) {
-    // TODO(b/34279096) - gracefully handle message failure
+    // TODO(a bug) - gracefully handle message failure
     LogUtil.e("CallComposerActivity.onCopyAndResizeImageFailure", "copy Failed", throwable);
   }
 

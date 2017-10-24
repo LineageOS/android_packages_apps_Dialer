@@ -51,7 +51,7 @@ public class TelephonyManagerCompat {
 
   private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
 
-  // TODO(erfanian): b/63995261 Replace with the platform/telecom constant when available.
+  // TODO(erfanian): a bug Replace with the platform/telecom constant when available.
   /**
    * Indicates that the call being placed originated from a known contact.
    *
@@ -59,7 +59,7 @@ public class TelephonyManagerCompat {
    */
   public static final String ALLOW_ASSISTED_DIAL = "android.telecom.extra.ALLOW_ASSISTED_DIAL";
 
-  // TODO(erfanian): b/63995261 Replace with the platform/telecom constant when available.
+  // TODO(erfanian): a bug Replace with the platform/telecom constant when available.
   /**
    * Indicates that an outgoing call has undergone assisted dialing.
    *
@@ -68,7 +68,7 @@ public class TelephonyManagerCompat {
    */
   public static final String IS_ASSISTED_DIALED = "android.telecom.extra.IS_ASSISTED_DIALED";
 
-  // TODO(erfanian): b/63995261 Replace with the platform/telecom API when available.
+  // TODO(erfanian): a bug Replace with the platform/telecom API when available.
   /** Additional information relating to the assisted dialing transformation. */
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";

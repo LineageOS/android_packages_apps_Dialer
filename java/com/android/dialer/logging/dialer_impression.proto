@@ -13,7 +13,6 @@ message DialerImpression {
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
   enum Type {
-
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
     // User opened the app
@@ -25,88 +24,94 @@ message DialerImpression {
     // User pressed the speaker phone button again
     IN_CALL_SCREEN_TURN_ON_WIRED_OR_EARPIECE = 1003;
 
-    // Number not identified as spam and the user tapped the block/report spam button in the
-    // call log
+    // Number not identified as spam and the user tapped the block/report spam
+    // button in the call log
     CALL_LOG_BLOCK_REPORT_SPAM = 1004;
 
-    // Number identified as spam and the user tapped on the block number call log item
+    // Number identified as spam and the user tapped on the block number call
+    // log item
     CALL_LOG_BLOCK_NUMBER = 1005;
 
     // User tapped on the unblock number in the call log
-    // This does not deal with whether the user reported this spam or not while initially blocking
-    // For that refer to REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER. If the user had not reported it as
-    // spam they then have the option of directly unblocking the number, a success of which is
-    // logged in USER_ACTION_UNBLOCKED_NUMBER
+    // This does not deal with whether the user reported this spam or not while
+    // initially blocking For that refer to
+    // REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER. If the user had not reported it as
+    // spam they then have the option of directly unblocking the number, a
+    // success of which is logged in USER_ACTION_UNBLOCKED_NUMBER
     CALL_LOG_UNBLOCK_NUMBER = 1006;
 
     // Number was identified as spam, and the user tapped that it was not spam
     CALL_LOG_REPORT_AS_NOT_SPAM = 1007;
 
-    // Confirmation dialog in which the user confirmed that the number was not spam
+    // Confirmation dialog in which the user confirmed that the number was not
+    // spam
     DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM = 1008;
 
     // User unblocked a number and also acknowledged that the number is not spam
-    // This happens when the user had initially blocked a number and also claimed the number was
-    // spam and had now proceeded to undo that.
+    // This happens when the user had initially blocked a number and also
+    // claimed the number was spam and had now proceeded to undo that.
     REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER = 1009
 
-      ;
+        ;
 
-    // A number that was identified as spam and the user proceeded to block it. However this
-    // impression was to make sure that while blocking the number the user also acknowledged that
-    // they were going to be reporting this as spam. There is no option for the user in this case
-    // to not report it as spam and block it only. The only flow is:
-    // system identified number as spam -> user wants to block it -> confirmation dialog shows up
-    // asking user to acknowledge they want to block and report as spam -> user acknowledges and
-    // this is when this impression is sent
+    // A number that was identified as spam and the user proceeded to block it.
+    // However this impression was to make sure that while blocking the number
+    // the user also acknowledged that they were going to be reporting this as
+    // spam. There is no option for the user in this case to not report it as
+    // spam and block it only. The only flow is: system identified number as
+    // spam -> user wants to block it -> confirmation dialog shows up asking
+    // user to acknowledge they want to block and report as spam -> user
+    // acknowledges and this is when this impression is sent
     DIALOG_ACTION_CONFIRM_NUMBER_SPAM_INDIRECTLY_VIA_BLOCK_NUMBER = 1010;
 
-    // User reported the number as spam by tick marking on report spam when blocking
-    // the number via call log. This is for case where the user wants to block a number and also
-    // report it as spam
-    REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG = 1011
+    // User reported the number as spam by tick marking on report spam when
+    // blocking the number via call log. This is for case where the user wants
+    // to block a number and also report it as spam
+    REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG =
+        1011
 
-      ;
+        ;
 
     // User made it to the last step and actually blocked the number
     USER_ACTION_BLOCKED_NUMBER = 1012
 
-      ;
+        ;
 
     // User made it to the last step and actually unblocked the number
     USER_ACTION_UNBLOCKED_NUMBER = 1013;
 
-    // User blocked a number, does not guarantee if the number was reported as spam or not
-    // To compute the number of blocked numbers that were reported as not spam and yet blocked
-    // Subtract this value from SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM. It would be
+    // User blocked a number, does not guarantee if the number was reported as
+    // spam or not To compute the number of blocked numbers that were reported
+    // as not spam and yet blocked Subtract this value from
+    // SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM. It would be
     // interesting to see how this value compares with
     // SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM
     SPAM_AFTER_CALL_NOTIFICATION_BLOCK_NUMBER = 1014;
 
-    // Displays the dialog for first time spam calls with actions "Not spam", "Block", and
-    // "Dismiss".
+    // Displays the dialog for first time spam calls with actions "Not spam",
+    // "Block", and "Dismiss".
     SPAM_AFTER_CALL_NOTIFICATION_SHOW_SPAM_DIALOG = 1015;
 
-    // Displays the dialog for the first time unknown calls with actions "Add contact",
-    // "Block/report spam", and "Dismiss".
+    // Displays the dialog for the first time unknown calls with actions "Add
+    // contact", "Block/report spam", and "Dismiss".
     SPAM_AFTER_CALL_NOTIFICATION_SHOW_NON_SPAM_DIALOG = 1016;
 
     // User added the number to contacts from the after call notification
     SPAM_AFTER_CALL_NOTIFICATION_ADD_TO_CONTACTS = 1019
 
-      ;
+        ;
 
     // User marked the number as spam on the after call notification flow
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM = 1020
 
-      ;
+        ;
 
     SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_NOT_SPAM_AND_BLOCKED = 1021;
 
     // User reported the number as not spam
     SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM = 1022
 
-      ;
+        ;
 
     // User dismissed the spam notification
     SPAM_AFTER_CALL_NOTIFICATION_ON_DISMISS_SPAM_DIALOG = 1024;
@@ -114,21 +119,22 @@ message DialerImpression {
     // User dismissed the non spam notification
     SPAM_AFTER_CALL_NOTIFICATION_ON_DISMISS_NON_SPAM_DIALOG = 1025;
 
-    // From the service instead of an activity logs the number of times the number was marked as
-    // Spam by the user (e.g from the feedback prompt)
+    // From the service instead of an activity logs the number of times the
+    // number was marked as Spam by the user (e.g from the feedback prompt)
     SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM = 1026;
 
-    // From the service instead of an activity logs the number of times the number was marked as
-    // Not Spam by the user (e.g from the feedback prompt)
+    // From the service instead of an activity logs the number of times the
+    // number was marked as Not Spam by the user (e.g from the feedback prompt)
     SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM = 1027;
 
     // User is in a active call i.e either incoming or outgoing
-    // This is mainly so we can assign an impression event to a call event i.e so that we may be
-    // able to stitch different types of events if they make sense e.g user pressed a speaker button
-    // and we want to associate that to a call event
+    // This is mainly so we can assign an impression event to a call event i.e
+    // so that we may be able to stitch different types of events if they make
+    // sense e.g user pressed a speaker button and we want to associate that to
+    // a call event
     USER_PARTICIPATED_IN_A_CALL = 1028
 
-      ;
+        ;
 
     // Incoming call is a spam call
     INCOMING_SPAM_CALL = 1029;
@@ -155,60 +161,64 @@ message DialerImpression {
     // User has clicked the change PIN action in the voicemail tab
     VOICEMAIL_ALERT_SET_PIN_CLICKED = 1046;
 
-    // User was not able to or did not participate in the call e.g missed calls, rejected calls
+    // User was not able to or did not participate in the call e.g missed calls,
+    // rejected calls
     USER_DID_NOT_PARTICIPATE_IN_CALL = 1047;
 
     // User deleted a call log entry
     USER_DELETED_CALL_LOG_ITEM = 1048
 
-      ;
+        ;
 
     // User tapped on "Send a message"
     CALL_LOG_SEND_MESSAGE = 1049
 
-      ;
+        ;
 
     // User tapped on "Add to contact"
     CALL_LOG_ADD_TO_CONTACT = 1050
 
-      ;
+        ;
 
     // User tapped on "Create new contact"
     CALL_LOG_CREATE_NEW_CONTACT = 1051
 
-      ;
+        ;
 
     // User deleted an entry from the voicemail tab
     VOICEMAIL_DELETE_ENTRY = 1052
 
-      ;
+        ;
 
-    // Voicemail call log entry was expanded. Could be either if the user tapped the voicemail
-    // call log entry or pressed the play button when the voicemail call log entry was not expanded
+    // Voicemail call log entry was expanded. Could be either if the user tapped
+    // the voicemail call log entry or pressed the play button when the
+    // voicemail call log entry was not expanded
     VOICEMAIL_EXPAND_ENTRY = 1053
 
-      ;
+        ;
 
-    // The play button for voicemail call log entry was tapped directly (i.e when the voicemail
-    // call log entry was not expanded and the playbutton was tapped)
-    VOICEMAIL_PLAY_AUDIO_DIRECTLY= 1054
+    // The play button for voicemail call log entry was tapped directly (i.e
+    // when the voicemail call log entry was not expanded and the playbutton was
+    // tapped)
+    VOICEMAIL_PLAY_AUDIO_DIRECTLY = 1054
 
-      ;
+        ;
 
     // The play button after expanding the voicemail call log entry was tapped
-    VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY= 1055
+    VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY = 1055
 
-      ;
+        ;
 
     // Incoming call was rejected from the notifications
-    REJECT_INCOMING_CALL_FROM_NOTIFICATION= 1056
+    REJECT_INCOMING_CALL_FROM_NOTIFICATION = 1056
 
-      ;
+        ;
 
-    // Incoming call was rejected from the answer screen including rejecting via sms and talkback
-    REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN= 1057
+    // Incoming call was rejected from the answer screen including rejecting via
+    // sms and talkback
+    REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN = 1057
 
-      ;
+        ;
 
     // User tapped block and spam buttons in context menu, same as buttons in
     // call log drop down
@@ -441,7 +451,7 @@ message DialerImpression {
     MULTISELECT_DELETE_ENTRY_VIA_CONFIRMATION_DIALOG = 1209;
     MULTISELECT_CANCEL_CONFIRMATION_DIALOG_VIA_CANCEL_BUTTON = 1210;
     MULTISELECT_CANCEL_CONFIRMATION_DIALOG_VIA_CANCEL_TOUCH = 1211;
-    MULTISELECT_ROTATE_AND_SHOW_ACTION_MODE= 1212;
+    MULTISELECT_ROTATE_AND_SHOW_ACTION_MODE = 1212;
 
     // Impressions for verizon VVM with backup and transcription ToS
     VOICEMAIL_VVM3_TOS_V2_CREATED = 1213;
@@ -559,5 +569,17 @@ message DialerImpression {
     CALL_DETAILS_IMS_VIDEO_CALL_BACK = 1284;
     CALL_DETAILS_LIGHTBRINGER_CALL_BACK = 1285;
     CALL_DETAILS_VOICE_CALL_BACK = 1286;
+
+    // Assisted Dialing related impressions tracking failures modes within the
+    // library.
+
+    // Indicates a failure to parse a provided number string in libphonenumber.
+    ASSISTED_DIALING_CONSTRAINT_PARSING_FAILURE = 1287;
+    // Indicates that the number attempting to be assisted dialed already
+    // specified a country code.
+    ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_COUNTRY_CODE = 1288;
+    // Indicates that the number attempting to be assisted dialed had an
+    // extension.
+    ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_EXTENSION = 1289;
   }
 }

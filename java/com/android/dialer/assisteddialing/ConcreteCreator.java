@@ -71,7 +71,7 @@ public final class ConcreteCreator {
     }
 
     if (!PreferenceManager.getDefaultSharedPreferences(context)
-        .getBoolean(context.getString(R.string.assisted_dialing_setting_toggle_key), false)) {
+        .getBoolean(context.getString(R.string.assisted_dialing_setting_toggle_key), true)) {
       LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "disabled by local setting");
 
       return new AssistedDialingMediatorStub();

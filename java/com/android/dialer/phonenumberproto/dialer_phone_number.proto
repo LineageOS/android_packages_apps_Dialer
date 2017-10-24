@@ -97,8 +97,7 @@ message DialerInternalPhoneNumber {
   // leading zeros.
   //
   // Clients who use the parsing or conversion functionality of the i18n phone
-  // number libraries (go/phonenumbers) will have these fields set if necessary
-  // automatically.
+  // number libraries will have these fields set if necessary automatically.
   optional bool italian_leading_zero = 4;
   optional int32 number_of_leading_zeros = 8 [default = 1];
 

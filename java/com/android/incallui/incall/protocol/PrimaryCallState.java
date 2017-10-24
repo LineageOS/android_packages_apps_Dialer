@@ -71,7 +71,7 @@ public class PrimaryCallState {
   @Nullable public final String customLabel;
   @Nullable public final TransformationInfo assistedDialingExtras;
 
-  // TODO: Convert to autovalue. b/34502119
+  // TODO: Convert to autovalue. a bug
   public static PrimaryCallState createEmptyPrimaryCallState() {
     return createEmptyPrimaryCallStateWithState(DialerCall.State.IDLE, null);
   }
