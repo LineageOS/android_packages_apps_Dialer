@@ -102,7 +102,7 @@ public class MotorolaUtils {
    * @return true if the input is consumed and the intent is launched
    */
   public static boolean handleSpecialCharSequence(Context context, String input) {
-    // TODO(b/35395377): Add check for Motorola devices.
+    // TODO(a bug): Add check for Motorola devices.
     return MotorolaHiddenMenuKeySequence.handleCharSequence(context, input);
   }
 

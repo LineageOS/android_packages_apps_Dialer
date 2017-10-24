@@ -27,7 +27,7 @@ import java.util.Set;
  * new DOWN event once the point started moving and then behave as a normal gesture. To prevent
  * accidental answer/rejects, touches that started when the screen is off should be ignored.
  *
- * <p>b/31499931 on certain devices with N-DR1, if the screen is already touched when the screen is
+ * <p>a bug on certain devices with N-DR1, if the screen is already touched when the screen is
  * turned on, a "DOWN MOVE UP" will be sent for each movement before the touch is actually released.
  * These events is hard to discern from other normal events, and keeping the screen on reduces its'
  * probability.

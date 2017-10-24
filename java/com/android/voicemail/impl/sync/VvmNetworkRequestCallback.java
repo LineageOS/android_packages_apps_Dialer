@@ -128,7 +128,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
 
   @CallSuper
   public void onUnavailable() {
-    // TODO(twyen): b/32637799 this is hidden, do we really need this?
+    // TODO(twyen): a bug this is hidden, do we really need this?
     mResultReceived = true;
     onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
   }

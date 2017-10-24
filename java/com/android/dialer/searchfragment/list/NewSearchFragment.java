@@ -412,7 +412,7 @@ public final class NewSearchFragment extends Fragment
 
   // Currently, setting up multiple FakeContentProviders doesn't work and results in this fragment
   // being untestable while it can query multiple datasources. This is a temporary fix.
-  // TODO(b/64099602): Remove this method and test this fragment with multiple data sources
+  // TODO(a bug): Remove this method and test this fragment with multiple data sources
   @VisibleForTesting
   public void setRemoteDirectoriesDisabled(boolean disabled) {
     remoteDirectoriesDisabledForTesting = disabled;

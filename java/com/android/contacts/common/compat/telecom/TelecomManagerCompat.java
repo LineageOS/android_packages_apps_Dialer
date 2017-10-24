@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 public class TelecomManagerCompat {
 
   // TODO(mdooley): remove once this is available in android.telecom.Call
-  // b/33779976
+  // a bug
   public static final String EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS =
       "android.telecom.extra.LAST_EMERGENCY_CALLBACK_TIME_MILLIS";
 

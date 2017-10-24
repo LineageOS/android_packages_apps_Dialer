@@ -1163,7 +1163,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     LogUtil.i("DialtactsActivity.enterSearchUi", "smart dial: %b", smartDialSearch);
     if (mStateSaved || getFragmentManager().isDestroyed()) {
       // Weird race condition where fragment is doing work after the activity is destroyed
-      // due to talkback being on (b/10209937). Just return since we can't do any
+      // due to talkback being on (a bug). Just return since we can't do any
       // constructive here.
       LogUtil.i(
           "DialtactsActivity.enterSearchUi",

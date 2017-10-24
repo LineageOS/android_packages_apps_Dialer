@@ -38,6 +38,7 @@ import com.android.incallui.call.TelecomAdapter;
 public class InCallServiceImpl extends InCallService {
 
   private ReturnToCallController returnToCallController;
+  private NewReturnToCallController newReturnToCallController;
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -97,6 +98,9 @@ public class InCallServiceImpl extends InCallService {
     if (ReturnToCallController.isEnabled(this)) {
       returnToCallController = new ReturnToCallController(this);
     }
+    if (NewReturnToCallController.isEnabled(this)) {
+      newReturnToCallController = new NewReturnToCallController(this);
+    }
 
     IBinder iBinder = super.onBind(intent);
     Trace.endSection();
@@ -124,6 +128,10 @@ public class InCallServiceImpl extends InCallService {
     if (returnToCallController != null) {
       returnToCallController.tearDown();
       returnToCallController = null;
+    }
+    if (newReturnToCallController != null) {
+      newReturnToCallController.tearDown();
+      newReturnToCallController = null;
     }
     Trace.endSection();
   }

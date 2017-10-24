@@ -68,7 +68,7 @@ public class RemoveView extends FrameLayout {
     switch (action) {
       case DragEvent.ACTION_DRAG_ENTERED:
         // TODO: This is temporary solution and should be removed once accessibility for
-        // drag and drop is supported by framework(b/26871588).
+        // drag and drop is supported by framework(a bug).
         sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
         setAppearanceHighlighted();
         break;

@@ -44,6 +44,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .append(AnnotatedCallLog.PHOTO_URI + " string, ")
           .append(AnnotatedCallLog.PHOTO_ID + " integer, ")
           .append(AnnotatedCallLog.LOOKUP_URI + " string, ")
+          .append(AnnotatedCallLog.DURATION + " integer, ")
           .append(AnnotatedCallLog.NUMBER_TYPE_LABEL + " string, ")
           .append(AnnotatedCallLog.IS_READ + " integer, ")
           .append(AnnotatedCallLog.NEW + " integer, ")
@@ -55,7 +56,9 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .append(AnnotatedCallLog.FEATURES + " integer, ")
           .append(AnnotatedCallLog.IS_BUSINESS + " integer, ")
           .append(AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
-          .append(AnnotatedCallLog.CALL_TYPE + " integer")
+          .append(AnnotatedCallLog.TRANSCRIPTION + " integer, ")
+          .append(AnnotatedCallLog.CALL_TYPE)
+          .append(" integer")
           .append(");")
           .toString();
 

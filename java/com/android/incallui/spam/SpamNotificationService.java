@@ -117,7 +117,7 @@ public class SpamNotificationService extends Service {
         break;
       default: // fall out
     }
-    // TODO: call stopSelf() after async tasks complete (b/28441936)
+    // TODO: call stopSelf() after async tasks complete (a bug)
     stopSelf();
     return START_NOT_STICKY;
   }

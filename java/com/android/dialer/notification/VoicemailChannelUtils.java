@@ -16,6 +16,7 @@
 
 package com.android.dialer.notification;
 
+import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -25,6 +26,8 @@ import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -34,6 +37,7 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -41,9 +45,10 @@ import java.util.Set;
 /** Utilities for working with voicemail channels. */
 @TargetApi(VERSION_CODES.O)
 /* package */ final class VoicemailChannelUtils {
-  private static final String GLOBAL_VOICEMAIL_CHANNEL_ID = "phone_voicemail";
+  @VisibleForTesting static final String GLOBAL_VOICEMAIL_CHANNEL_ID = "phone_voicemail";
   private static final String PER_ACCOUNT_VOICEMAIL_CHANNEL_ID_PREFIX = "phone_voicemail_account_";
 
+  @SuppressWarnings("MissingPermission") // isSingleSimDevice() returns true if no permission
   static Set<String> getAllChannelIds(@NonNull Context context) {
     Assert.checkArgument(BuildCompat.isAtLeastO());
     Assert.isNotNull(context);
@@ -59,6 +64,7 @@ import java.util.Set;
     return result;
   }
 
+  @SuppressWarnings("MissingPermission") // isSingleSimDevice() returns true if no permission
   static void createAllChannels(@NonNull Context context) {
     Assert.checkArgument(BuildCompat.isAtLeastO());
     Assert.isNotNull(context);
@@ -127,24 +133,38 @@ import java.util.Set;
    */
   private static void createGlobalVoicemailChannel(@NonNull Context context) {
     NotificationChannel channel = newChannel(context, GLOBAL_VOICEMAIL_CHANNEL_ID, null);
+    migrateGlobalVoicemailSoundSettings(context, channel);
+    context.getSystemService(NotificationManager.class).createNotificationChannel(channel);
+  }
 
+  @SuppressWarnings("MissingPermission") // checked with PermissionsUtil
+  private static void migrateGlobalVoicemailSoundSettings(
+      Context context, NotificationChannel channel) {
+    if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
+      LogUtil.i(
+          "VoicemailChannelUtils.migrateGlobalVoicemailSoundSettings",
+          "missing phone permission, not migrating sound settings");
+      return;
+    }
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     PhoneAccountHandle handle =
         telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
     if (handle == null) {
       LogUtil.i(
-          "VoicemailChannelUtils.createGlobalVoicemailChannel",
+          "VoicemailChannelUtils.migrateGlobalVoicemailSoundSettings",
           "phone account is null, not migrating sound settings");
-    } else if (!isChannelAllowedForAccount(context, handle)) {
-      LogUtil.i(
-          "VoicemailChannelUtils.createGlobalVoicemailChannel",
-          "phone account is not eligable, not migrating sound settings");
-    } else {
-      migrateVoicemailSoundSettings(context, channel, handle);
+      return;
     }
-    context.getSystemService(NotificationManager.class).createNotificationChannel(channel);
+    if (!isChannelAllowedForAccount(context, handle)) {
+      LogUtil.i(
+          "VoicemailChannelUtils.migrateGlobalVoicemailSoundSettings",
+          "phone account is not eligable, not migrating sound settings");
+      return;
+    }
+    migrateVoicemailSoundSettings(context, channel, handle);
   }
 
+  @RequiresPermission(permission.READ_PHONE_STATE)
   private static List<PhoneAccountHandle> getAllEligableAccounts(@NonNull Context context) {
     List<PhoneAccountHandle> handles = new ArrayList<>();
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
@@ -210,6 +230,9 @@ import java.util.Set;
   }
 
   private static boolean isSingleSimDevice(@NonNull Context context) {
+    if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
+      return true;
+    }
     return context.getSystemService(TelephonyManager.class).getPhoneCount() <= 1;
   }
 

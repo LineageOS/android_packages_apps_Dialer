@@ -39,7 +39,7 @@ import com.android.dialer.logging.Logger;
 public class Vvm3VoicemailMessageCreator {
 
   // Copied from com.android.phone.vvm.omtp.protocol.Vvm3EventHandler
-  // TODO(b/28380841): unbundle VVM client so we can access these values directly
+  // TODO(a bug): unbundle VVM client so we can access these values directly
   public static final int VMS_DNS_FAILURE = -9001;
   public static final int VMG_DNS_FAILURE = -9002;
   public static final int SPG_DNS_FAILURE = -9003;

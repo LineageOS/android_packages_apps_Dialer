@@ -216,7 +216,7 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
           new ImapHelper(config.getContext(), phoneAccountHandle, network, status)) {
         // VVM3 has inconsistent error language code to OMTP. Just issue a raw command
         // here.
-        // TODO(b/29082671): use LocaleList
+        // TODO(a bug): use LocaleList
         if (Locale.getDefault().getLanguage().equals(new Locale(ISO639_Spanish).getLanguage())) {
           // Spanish
           helper.changeVoicemailTuiLanguage(VVM3_VM_LANGUAGE_SPANISH_STANDARD_NO_GUEST_PROMPTS);

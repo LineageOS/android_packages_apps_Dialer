@@ -216,6 +216,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.CACHED_LOOKUP_URI,
                   Calls.CACHED_NUMBER_TYPE,
                   Calls.CACHED_NUMBER_LABEL,
+                  Calls.DURATION,
+                  Calls.TRANSCRIPTION,
                   Calls.IS_READ,
                   Calls.NEW,
                   Calls.GEOCODED_LOCATION,
@@ -252,6 +254,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int cachedLookupUriColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_LOOKUP_URI);
         int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
+        int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
+        int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
         int newColumn = cursor.getColumnIndexOrThrow(Calls.NEW);
         int geocodedLocationColumn = cursor.getColumnIndexOrThrow(Calls.GEOCODED_LOCATION);
@@ -276,6 +280,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           String cachedLookupUri = cursor.getString(cachedLookupUriColumn);
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
+          int duration = cursor.getInt(durationsColumn);
+          String transcription = cursor.getString(transcriptionColumn);
           int isRead = cursor.getInt(isReadColumn);
           int isNew = cursor.getInt(newColumn);
           String geocodedLocation = cursor.getString(geocodedLocationColumn);
@@ -321,6 +327,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           populatePhoneAccountLabelAndColor(
               appContext, contentValues, phoneAccountComponentName, phoneAccountId);
           contentValues.put(AnnotatedCallLog.FEATURES, features);
+          contentValues.put(AnnotatedCallLog.DURATION, duration);
+          contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
 
           if (existingAnnotatedCallLogIds.contains(id)) {
             mutations.update(id, contentValues);

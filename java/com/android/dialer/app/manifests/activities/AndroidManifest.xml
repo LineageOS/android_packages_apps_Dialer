@@ -27,6 +27,11 @@
       android:name="com.android.dialer.app.settings.DialerSettingsActivity"
       android:parentActivityName="com.android.dialer.app.DialtactsActivity"
       android:theme="@style/SettingsStyle">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:scheme="header"/>
+      </intent-filter>
     </activity>
 
     <!-- The entrance point for Phone UI.
@@ -41,7 +46,7 @@
       android:resizeableActivity="true"
       android:theme="@style/DialtactsActivityTheme"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
-      <!-- LINT.IfChange -->
+
       <intent-filter>
         <action android:name="android.intent.action.DIAL"/>
 
@@ -107,7 +112,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
-      <!-- LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/dialer/dialtacts/impl/AndroidManifest.xml) -->
+
 
       <meta-data
         android:name="com.android.keyguard.layout"

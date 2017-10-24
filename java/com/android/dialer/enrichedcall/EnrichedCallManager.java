@@ -274,7 +274,7 @@ public interface EnrichedCallManager {
    *     when dialer is not in the foreground, and can not start {@link
    *     com.android.dialer.app.calllog.CallLogNotificationsService} to handle the event. The
    *     pendingResult allows dialer to hold on to resources when the event is handled in a
-   *     background thread. TODO(b/67015768): migrate CallLogNotificationsService to a
+   *     background thread. TODO(a bug): migrate CallLogNotificationsService to a
    *     JobIntentService so it can be used in the background.
    * @throws IllegalStateException if there's no session for the given id
    */

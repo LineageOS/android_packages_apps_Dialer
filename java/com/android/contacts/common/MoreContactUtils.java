@@ -65,7 +65,7 @@ public class MoreContactUtils {
 
   // TODO: Move this to PhoneDataItem.shouldCollapse override
   private static boolean shouldCollapsePhoneNumbers(String number1, String number2) {
-    // Work around to address b/20724444. We want to distinguish between #555, *555 and 555.
+    // Work around to address a bug. We want to distinguish between #555, *555 and 555.
     // This makes no attempt to distinguish between 555 and 55*5, since 55*5 is an improbable
     // number. PhoneNumberUtil already distinguishes between 555 and 55#5.
     if (number1.contains("#") != number2.contains("#")
@@ -119,7 +119,7 @@ public class MoreContactUtils {
               // +14155551212
               //   4155551212
               //
-              // From b/7519057, case 2 needs to be equal.  But also that bug, case 3
+              // From a bug, case 2 needs to be equal.  But also that bug, case 3
               // below should not be equal.
               //
               // case 3)

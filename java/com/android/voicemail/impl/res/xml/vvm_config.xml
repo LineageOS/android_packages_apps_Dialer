@@ -38,7 +38,7 @@
         value="true"/>
     <!-- Carrier VVM app com.orange.vvm only supports Orange FR-->
     <string-array name="vvm_disabled_capabilities_string_array">
-      <!-- b/32365569 -->
+      <!-- a bug -->
       <item value="STARTTLS"/>
     </string-array>
   </pbundle_as_map>
@@ -62,7 +62,7 @@
       name="vvm_cellular_data_required_bool"
       value="true"/>
     <string-array name="vvm_disabled_capabilities_string_array">
-      <!-- b/32365569 -->
+      <!-- a bug -->
       <item value="STARTTLS"/>
     </string-array>
   </pbundle_as_map>
@@ -101,7 +101,7 @@
     </string-array>
     <string name="vvm_type_string">vvm_type_cvvm</string>>
     <string-array name="vvm_disabled_capabilities_string_array">
-      <!-- b/28717550 -->
+      <!-- a bug -->
       <item value="AUTH=DIGEST-MD5"/>
     </string-array>
   </pbundle_as_map>

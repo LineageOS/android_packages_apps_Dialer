@@ -15,7 +15,7 @@ message ContactSource {
   // time they made the spam report, which could be different from the
   // number's status at the time they made or received the call.
   // Type definitions are from the CachedContactInfo interface in
-  // google3/java/com/android/dialer/phonenumbercache/CachedNumberLookupService.java
+  // CachedNumberLookupService.java
   enum Type {
     UNKNOWN_SOURCE_TYPE = 0;
 

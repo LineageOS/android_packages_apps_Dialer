@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -40,6 +41,7 @@ import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
@@ -52,14 +54,21 @@ import java.util.Locale;
  * terms of service for Verizon and for other carriers.
  */
 public class VoicemailTosMessageCreator {
-  // Flag to check which version of the Verizon ToS that the user has accepted.
-  public static final String VVM3_TOS_VERSION_ACCEPTED_KEY = "vvm3_tos_version_accepted";
+  // Preference key to check which version of the Verizon ToS that the user has accepted.
+  static final String PREF_VVM3_TOS_VERSION_ACCEPTED_KEY = "vvm3_tos_version_accepted";
 
-  // Flag to check which version of the Google Dialer ToS that the user has accepted.
-  public static final String DIALER_TOS_VERSION_ACCEPTED_KEY = "dialer_tos_version_accepted";
+  // Preference key to check which version of the Google Dialer ToS that the user has accepted.
+  static final String PREF_DIALER_TOS_VERSION_ACCEPTED_KEY = "dialer_tos_version_accepted";
 
-  public static final int CURRENT_VVM3_TOS_VERSION = 2;
-  public static final int CURRENT_DIALER_TOS_VERSION = 1;
+  // Preference key to check which feature version the user has acknowledged
+  static final String PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY =
+      "dialer_feature_version_acknowledged";
+
+  static final int CURRENT_VVM3_TOS_VERSION = 2;
+  static final int CURRENT_DIALER_TOS_VERSION = 1;
+  static final int LEGACY_VOICEMAIL_FEATURE_VERSION = 1; // original visual voicemail
+  static final int TRANSCRIPTION_VOICEMAIL_FEATURE_VERSION = 2; // adds voicemail transcription
+  static final int CURRENT_VOICEMAIL_FEATURE_VERSION = TRANSCRIPTION_VOICEMAIL_FEATURE_VERSION;
 
   private static final String ISO639_SPANISH = "es";
 
@@ -81,25 +90,28 @@ public class VoicemailTosMessageCreator {
 
   @Nullable
   VoicemailErrorMessage maybeCreateTosMessage() {
-    if (hasAcceptedTos()) {
+    if (!canShowTos()) {
+      return null;
+    } else if (shouldShowTos()) {
+      logTosCreatedImpression();
+      return getTosMessage();
+    } else if (shouldShowPromo()) {
+      return getPromoMessage();
+    } else {
       return null;
     }
+  }
 
-    if (!shouldShowTos()) {
-      return null;
-    }
-
-    logTosCreatedImpression();
-
+  private VoicemailErrorMessage getTosMessage() {
     return new VoicemailTosMessage(
-            getTosTitle(),
-            getTosMessage(),
+            getNewUserTosTitle(),
+            getNewUserTosMessageText(),
             new Action(
                 getDeclineText(),
                 new OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    LogUtil.i("VoicemailTosMessageCreator.maybeShowTosMessage", "decline clicked");
+                    LogUtil.i("VoicemailTosMessageCreator.getTosMessage", "decline clicked");
                     PhoneAccountHandle handle =
                         new PhoneAccountHandle(
                             ComponentName.unflattenFromString(status.phoneAccountComponentName),
@@ -113,8 +125,10 @@ public class VoicemailTosMessageCreator {
                 new OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    LogUtil.i("VoicemailTosMessageCreator.maybeShowTosMessage", "accept clicked");
+                    LogUtil.i("VoicemailTosMessageCreator.getTosMessage", "accept clicked");
                     recordTosAcceptance();
+                    // Accepting the TOS also acknowledges the latest features
+                    recordFeatureAcknowledgement();
                     logTosAcceptedImpression();
                     statusReader.refresh();
                   }
@@ -124,15 +138,65 @@ public class VoicemailTosMessageCreator {
         .setImageResourceId(R.drawable.voicemail_tos_image);
   }
 
-  private boolean shouldShowTos() {
+  private VoicemailErrorMessage getPromoMessage() {
+    return new VoicemailTosMessage(
+            getExistingUserTosTitle(),
+            getExistingUserTosMessageText(),
+            new Action(
+                context.getString(R.string.dialer_terms_and_conditions_existing_user_setings),
+                new OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "open settings");
+                    Intent intent =
+                        new Intent(Intent.ACTION_VIEW)
+                            .setComponent(
+                                new ComponentName(context, Constants.get().getSettingsActivity()))
+                            .setData(
+                                Uri.fromParts(
+                                    "header",
+                                    VoicemailComponent.get(context)
+                                        .getVoicemailClient()
+                                        .getSettingsFragment(),
+                                    null));
+                    context.startActivity(intent);
+                  }
+                }),
+            new Action(
+                context.getString(R.string.dialer_terms_and_conditions_existing_user_ack),
+                new OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                    LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "acknowledge clicked");
+                    // Feature acknowledgement also means accepting TOS
+                    recordTosAcceptance();
+                    recordFeatureAcknowledgement();
+                    statusReader.refresh();
+                  }
+                },
+                true /* raised */))
+        .setModal(true)
+        .setImageResourceId(R.drawable.voicemail_tos_image);
+  }
+
+  private boolean canShowTos() {
     if (!isValidVoicemailType(status.type)) {
-      LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "unsupported type: " + status.type);
+      LogUtil.i("VoicemailTosMessageCreator.canShowTos", "unsupported type: " + status.type);
       return false;
     }
 
     if (status.getPhoneAccountHandle() == null
         || status.getPhoneAccountHandle().getComponentName() == null) {
-      LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "invalid phone account");
+      LogUtil.i("VoicemailTosMessageCreator.canShowTos", "invalid phone account");
+      return false;
+    }
+
+    return true;
+  }
+
+  private boolean shouldShowTos() {
+    if (hasAcceptedTos()) {
+      LogUtil.i("VoicemailTosMessageCreator.shouldShowTos", "already accepted TOS");
       return false;
     }
 
@@ -141,9 +205,26 @@ public class VoicemailTosMessageCreator {
       return true;
     }
 
-    if (isVoicemailTranscriptionEnabled()) {
+    if (isVoicemailTranscriptionEnabled() && !isLegacyVoicemailUser()) {
       LogUtil.i(
           "VoicemailTosMessageCreator.shouldShowTos", "showing TOS for Google transcription users");
+      return true;
+    }
+
+    return false;
+  }
+
+  private boolean shouldShowPromo() {
+    if (hasAcknowledgedFeatures()) {
+      LogUtil.i(
+          "VoicemailTosMessageCreator.shouldShowPromo", "already acknowledeged latest features");
+      return false;
+    }
+
+    if (isVoicemailTranscriptionEnabled()) {
+      LogUtil.i(
+          "VoicemailTosMessageCreator.shouldShowPromo",
+          "showing promo for Google transcription users");
       return true;
     }
 
@@ -181,6 +262,7 @@ public class VoicemailTosMessageCreator {
         "showing decline ToS dialog, status=" + status);
     final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    builder.setTitle(R.string.terms_and_conditions_decline_dialog_title);
     builder.setMessage(getTosDeclinedDialogMessageId());
     builder.setPositiveButton(
         getTosDeclinedDialogDowngradeId(),
@@ -249,22 +331,47 @@ public class VoicemailTosMessageCreator {
 
   private boolean hasAcceptedTos() {
     if (isVvm3()) {
-      return preferences.getInt(VVM3_TOS_VERSION_ACCEPTED_KEY, 0) >= CURRENT_VVM3_TOS_VERSION;
+      return preferences.getInt(PREF_VVM3_TOS_VERSION_ACCEPTED_KEY, 0) >= CURRENT_VVM3_TOS_VERSION;
     } else {
-      return preferences.getInt(DIALER_TOS_VERSION_ACCEPTED_KEY, 0) >= CURRENT_DIALER_TOS_VERSION;
+      return preferences.getInt(PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, 0)
+          >= CURRENT_DIALER_TOS_VERSION;
     }
   }
 
   private void recordTosAcceptance() {
     if (isVvm3()) {
-      preferences.edit().putInt(VVM3_TOS_VERSION_ACCEPTED_KEY, CURRENT_VVM3_TOS_VERSION).apply();
+      preferences
+          .edit()
+          .putInt(PREF_VVM3_TOS_VERSION_ACCEPTED_KEY, CURRENT_VVM3_TOS_VERSION)
+          .apply();
     } else {
       preferences
           .edit()
-          .putInt(DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
+          .putInt(PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
     VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context);
+  }
+
+  private boolean hasAcknowledgedFeatures() {
+    if (isVvm3()) {
+      return true;
+    }
+
+    return preferences.getInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
+        >= CURRENT_VOICEMAIL_FEATURE_VERSION;
+  }
+
+  private void recordFeatureAcknowledgement() {
+    preferences
+        .edit()
+        .putInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, CURRENT_VOICEMAIL_FEATURE_VERSION)
+        .apply();
+  }
+
+  private boolean isLegacyVoicemailUser() {
+    return preferences.getInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
+        == LEGACY_VOICEMAIL_FEATURE_VERSION;
   }
 
   private void logTosCreatedImpression() {
@@ -299,17 +406,30 @@ public class VoicemailTosMessageCreator {
         : context.getString(R.string.verizon_terms_and_conditions_1_1_english, policyUrl);
   }
 
-  private CharSequence getDialerTos() {
+  private CharSequence getVvmDialerTos() {
     if (!isVoicemailTranscriptionEnabled()) {
       return "";
     }
 
-    if (isVvm3()) {
-      return context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0);
-    } else {
-      String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
-      return context.getString(R.string.dialer_terms_and_conditions_1_0, learnMoreText);
+    return context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0);
+  }
+
+  private CharSequence getNewUserDialerTos() {
+    if (!isVoicemailTranscriptionEnabled()) {
+      return "";
     }
+
+    String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+    return context.getString(R.string.dialer_terms_and_conditions_1_0, learnMoreText);
+  }
+
+  private CharSequence getExistingUserDialerTos() {
+    if (!isVoicemailTranscriptionEnabled()) {
+      return "";
+    }
+
+    String learnMoreText = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+    return context.getString(R.string.dialer_terms_and_conditions_existing_user, learnMoreText);
   }
 
   private CharSequence getAcceptText() {
@@ -336,13 +456,19 @@ public class VoicemailTosMessageCreator {
     }
   }
 
-  private CharSequence getTosTitle() {
+  private CharSequence getNewUserTosTitle() {
     return isVvm3()
         ? context.getString(R.string.verizon_terms_and_conditions_title)
         : context.getString(R.string.dialer_terms_and_conditions_title);
   }
 
-  private CharSequence getTosMessage() {
+  private CharSequence getExistingUserTosTitle() {
+    return isVvm3()
+        ? context.getString(R.string.verizon_terms_and_conditions_title)
+        : context.getString(R.string.dialer_terms_and_conditions_existing_user_title);
+  }
+
+  private CharSequence getNewUserTosMessageText() {
     SpannableString spannableTos;
     if (isVvm3()) {
       // For verizon the TOS consist of three pieces: google dialer TOS, Verizon TOS message and
@@ -350,7 +476,7 @@ public class VoicemailTosMessageCreator {
       CharSequence vvm3Details = getVvm3Tos();
       CharSequence tos =
           context.getString(
-              R.string.verizon_terms_and_conditions_message, getDialerTos(), vvm3Details);
+              R.string.verizon_terms_and_conditions_message, getVvmDialerTos(), vvm3Details);
       spannableTos = new SpannableString(tos);
       // Set the text style for the details part of the TOS
       int start = spannableTos.length() - vvm3Details.length();
@@ -365,7 +491,7 @@ public class VoicemailTosMessageCreator {
     } else {
       // The TOS for everyone else, there are no details, but change to center alignment.
       CharSequence tos =
-          context.getString(R.string.dialer_terms_and_conditions_message, getDialerTos());
+          context.getString(R.string.dialer_terms_and_conditions_message, getNewUserDialerTos());
       spannableTos = new SpannableString(tos);
       spannableTos.setSpan(
           new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
@@ -375,9 +501,25 @@ public class VoicemailTosMessageCreator {
 
       // Add 'Learn more' link for dialer TOS
       String learnMore = context.getString(R.string.dialer_terms_and_conditions_learn_more);
-      String linkUrl = context.getString(R.string.dialer_terms_and_conditions_learn_more_url);
-      return addLink(spannableTos, learnMore, linkUrl);
+      return addLink(spannableTos, learnMore, getLearnMoreUrl());
     }
+  }
+
+  private CharSequence getExistingUserTosMessageText() {
+    SpannableString spannableTos;
+    // Change to center alignment.
+    CharSequence tos =
+        context.getString(R.string.dialer_terms_and_conditions_message, getExistingUserDialerTos());
+    spannableTos = new SpannableString(tos);
+    spannableTos.setSpan(
+        new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+        0,
+        tos.length(),
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+    // Add 'Learn more' link for dialer TOS
+    String learnMore = context.getString(R.string.dialer_terms_and_conditions_learn_more);
+    return addLink(spannableTos, learnMore, getLearnMoreUrl());
   }
 
   private SpannableString addLink(SpannableString spannable, String linkText, String linkUrl) {
@@ -396,6 +538,13 @@ public class VoicemailTosMessageCreator {
           Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
     return spannable;
+  }
+
+  private String getLearnMoreUrl() {
+    return ConfigProviderBindings.get(context)
+        .getString(
+            "voicemail_transcription_learn_more_url",
+            context.getString(R.string.dialer_terms_and_conditions_learn_more_url));
   }
 
   private int getTosDeclinedDialogMessageId() {
