@@ -24,7 +24,7 @@ import com.android.voicemail.impl.sync.VoicemailStatusQueryHelper;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 
 /**
- * Check if service is lost and indicate this in the voicemail status. TODO(b/35125657): Not used
+ * Check if service is lost and indicate this in the voicemail status. TODO(a bug): Not used
  * for now, restore it.
  */
 public class VvmPhoneStateListener extends PhoneStateListener {
@@ -36,7 +36,7 @@ public class VvmPhoneStateListener extends PhoneStateListener {
   private int mPreviousState = -1;
 
   public VvmPhoneStateListener(Context context, PhoneAccountHandle accountHandle) {
-    // TODO(twyen): b/32637799 too much trouble to call super constructor through reflection,
+    // TODO(twyen): a bug too much trouble to call super constructor through reflection,
     // just use non-phoneAccountHandle version for now.
     super();
     mContext = context;

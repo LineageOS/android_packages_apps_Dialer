@@ -53,7 +53,7 @@ final class SystemDialerStrictMode implements DialerStrictMode {
       // Because Android resets StrictMode policies after Application.onCreate is done, we set it
       // again right after.
       // See cl/105932355 for the discussion.
-      // See b/36951662 for the public bug.
+      // See a bug for the public bug.
       Handler handler = new Handler(Looper.myLooper());
       handler.postAtFrontOfQueue(() -> setRecommendedMainThreadPolicy(THREAD_DEATH_PENALTY));
     }
@@ -93,7 +93,7 @@ final class SystemDialerStrictMode implements DialerStrictMode {
             .detectLeakedSqlLiteObjects();
     if (Build.VERSION.SDK_INT >= 26) {
       vmPolicyBuilder.detectContentUriWithoutPermission();
-      // TODO(azlatin): Enable detecting untagged sockets once: b/64840386 is fixed.
+      // TODO(azlatin): Enable detecting untagged sockets once: a bug is fixed.
       // vmPolicyBuilder.detectUntaggedSockets();
     }
     StrictMode.setVmPolicy(vmPolicyBuilder.build());

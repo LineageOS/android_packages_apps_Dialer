@@ -25,6 +25,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
 import android.telephony.VisualVoicemailService;
 import android.telephony.VisualVoicemailSms;
 import com.android.dialer.logging.DialerImpression;
@@ -63,6 +64,7 @@ public class OmtpService extends VisualVoicemailService {
     }
 
     if (!isServiceEnabled(phoneAccountHandle)) {
+      disableFilter(phoneAccountHandle);
       task.finish();
       return;
     }
@@ -87,6 +89,8 @@ public class OmtpService extends VisualVoicemailService {
     }
 
     if (!isServiceEnabled(sms.getPhoneAccountHandle())) {
+      VvmLog.e(TAG, "onSmsReceived received when service is disabled");
+      disableFilter(sms.getPhoneAccountHandle());
       task.finish();
       return;
     }
@@ -176,6 +180,15 @@ public class OmtpService extends VisualVoicemailService {
       return false;
     }
     return true;
+  }
+
+  private void disableFilter(PhoneAccountHandle phoneAccountHandle) {
+    TelephonyManager telephonyManager =
+        getSystemService(TelephonyManager.class).createForPhoneAccountHandle(phoneAccountHandle);
+    if (telephonyManager != null) {
+      VvmLog.i(TAG, "disabling SMS filter");
+      telephonyManager.setVisualVoicemailSmsFilterSettings(null);
+    }
   }
 
   private static boolean isUserUnlocked(@NonNull Context context) {

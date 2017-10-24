@@ -510,7 +510,7 @@ public class CallerInfo {
       Log.e(TAG, "Cannot access VoiceMail.", se);
     }
     // TODO: There is no voicemail picture?
-    // FIXME: FIND ANOTHER ICON
+
     // photoResource = android.R.drawable.badge_voicemail;
     return this;
   }

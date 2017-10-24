@@ -129,7 +129,7 @@ public class OmtpVoicemailMessageCreator {
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
-    // This should be an assertion error, but there's a bug in NYC-DR (b/31069259) that will
+    // This should be an assertion error, but there's a bug in NYC-DR (a bug) that will
     // sometimes give status mixed from multiple SIMs. There's no meaningful message to be displayed
     // from it, so just suppress the message.
     LogUtil.e("OmtpVoicemailMessageCreator.create", "Unhandled status: " + status);

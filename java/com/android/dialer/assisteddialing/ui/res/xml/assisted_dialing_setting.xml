@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="@string/assisted_dialing_setting_toggle_key"
         android:title="@string/assisted_dialing_setting_title"
         android:summary="@string/assisted_dialing_setting_summary" />

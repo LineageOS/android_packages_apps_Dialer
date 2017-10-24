@@ -51,7 +51,6 @@ public class SearchEditTextLayout extends FrameLayout {
   private View mCollapsedSearchBox;
   private View mVoiceSearchButtonView;
   private View mOverflowButtonView;
-  private View mBackButtonView;
   private View mClearButtonView;
 
   private ValueAnimator mAnimator;
@@ -95,11 +94,6 @@ public class SearchEditTextLayout extends FrameLayout {
     mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
     mVoiceSearchButtonView = findViewById(R.id.voice_search_button);
     mOverflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
-    mBackButtonView = findViewById(R.id.search_back_button);
-    mBackButtonView
-        .getResources()
-        .getDrawable(R.drawable.quantum_ic_arrow_back_vd_theme_24, null)
-        .setAutoMirrored(true);
     mClearButtonView = findViewById(R.id.search_close_button);
 
     // Convert a long click into a click to expand the search box. Touch events are also

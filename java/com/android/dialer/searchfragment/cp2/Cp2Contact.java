@@ -111,7 +111,7 @@ public abstract class Cp2Contact {
   }
 
   public Object[] toCursorRow() {
-    Object[] row = new Object[Projections.DATA_PROJECTION.length];
+    Object[] row = new Object[Projections.CP2_PROJECTION.length];
     row[Projections.ID] = phoneId();
     row[Projections.PHONE_TYPE] = phoneType();
     row[Projections.PHONE_LABEL] = phoneLabel();

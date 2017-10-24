@@ -18,6 +18,7 @@ package com.android.dialer.app.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -51,11 +52,28 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
   protected SharedPreferences mPreferences;
   private boolean migrationStatusOnBuildHeaders;
+  private List<Header> headers;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    LogUtil.enterBlock("DialerSettingsActivity.onCreate");
     super.onCreate(savedInstanceState);
     mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+
+    Intent intent = getIntent();
+    Uri data = intent.getData();
+    if (data != null) {
+      String headerToOpen = data.getSchemeSpecificPart();
+      if (headerToOpen != null && headers != null) {
+        for (Header header : headers) {
+          if (headerToOpen.equals(header.fragment)) {
+            LogUtil.i("DialerSettingsActivity.onCreate", "switching to header: " + headerToOpen);
+            switchToHeader(header);
+            break;
+          }
+        }
+      }
+    }
   }
 
   @Override
@@ -72,6 +90,9 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
   @Override
   public void onBuildHeaders(List<Header> target) {
+    // Keep a reference to the list of headers (since PreferenceActivity.getHeaders() is @Hide)
+    headers = target;
+
     if (showDisplayOptions()) {
       Header displayOptionsHeader = new Header();
       displayOptionsHeader.titleRes = R.string.display_options_title;

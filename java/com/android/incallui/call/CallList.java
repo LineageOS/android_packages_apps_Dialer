@@ -298,7 +298,7 @@ public class CallList implements DialerCallDelegate {
       manager.unregisterStateChangedListener(call);
 
       // Don't log an already logged call. logCall() might be called multiple times
-      // for the same call due to b/24109437.
+      // for the same call due to a bug.
       if (call.getLogState() != null && !call.getLogState().isLogged) {
         getLegacyBindings(context).logCall(call);
         call.getLogState().isLogged = true;
@@ -344,7 +344,7 @@ public class CallList implements DialerCallDelegate {
       DialerCall call = mCallByTelecomCall.get(telecomCall);
 
       // Don't log an already logged call. logCall() might be called multiple times
-      // for the same call due to b/24109437.
+      // for the same call due to a bug.
       if (call.getLogState() != null && !call.getLogState().isLogged) {
         getLegacyBindings(context).logCall(call);
         call.getLogState().isLogged = true;

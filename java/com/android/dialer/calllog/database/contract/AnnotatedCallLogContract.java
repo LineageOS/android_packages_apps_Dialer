@@ -218,6 +218,20 @@ public class AnnotatedCallLogContract {
 
     /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
+
+    /**
+     * See {@link android.provider.CallLog.Calls#DURATION}.
+     *
+     * <p>TYPE: INTEGER (int)
+     */
+    public static final String DURATION = "duration";
+
+    /**
+     * See {@link android.provider.CallLog.Calls#TRANSCRIPTION}.
+     *
+     * <p>TYPE: TEXT
+     */
+    public static final String TRANSCRIPTION = "transcription";
   }
 
   /**

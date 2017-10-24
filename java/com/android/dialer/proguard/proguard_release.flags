@@ -1,4 +1,3 @@
-# Copied from http://google3/java/com/google/android/apps/common/proguard/release.flags
 
 # Used for building release binaries. Obfuscates, optimizes, and shrinks.
 

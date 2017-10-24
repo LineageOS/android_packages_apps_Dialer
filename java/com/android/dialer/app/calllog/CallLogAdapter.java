@@ -361,7 +361,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 "mExpandCollapseListener.onClick",
                 "%s is temporarily unavailable, requesting capabilities",
                 LogUtil.sanitizePhoneNumber(viewHolder.number));
-            // Refresh the capabilities when temporarily unavailable, see go/ec-temp-unavailable.
+            // Refresh the capabilities when temporarily unavailable.
             // Similarly to when we request capabilities the first time, the 'Share and call' button
             // won't pop in with the new capabilities. Instead the row needs to be collapsed and
             // expanded again.

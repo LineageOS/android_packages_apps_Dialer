@@ -69,7 +69,7 @@ public class AudioModeProvider {
    * Sets a approximated audio state before {@link #onAudioStateChanged} is called. Classes such as
    * {@link com.android.incallui.ProximitySensor} fetches the audio state before it is updated by
    * telecom. This method attempts to guess the correct routing based on connected audio devices.
-   * The audio state may still be wrong on a second call due to b/64811128, telecom setting the
+   * The audio state may still be wrong on a second call due to a bug, telecom setting the
    * route back to earpiece when a call ends.
    */
   public void initializeAudioState(Context context) {

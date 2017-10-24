@@ -83,7 +83,7 @@ public class VoicemailsQueryHelper {
   /**
    * Utility method to make queries to the voicemail database.
    *
-   * <p>TODO(b/36588206) add PhoneAccountHandle filtering back
+   * <p>TODO(a bug) add PhoneAccountHandle filtering back
    *
    * @param selection A filter declaring which rows to return. {@code null} returns all rows.
    * @return A list of voicemails according to the selection statement.

@@ -44,7 +44,8 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
       Uri.withAppendedPath(Phone.CONTENT_URI, "filter_enterprise");
 
   private static final String IGNORE_NUMBER_TOO_LONG_CLAUSE = "length(" + Phone.NUMBER + ") < 1000";
-  private static final String MAX_RESULTS = "20";
+  private static final String PHONE_NUMBER_NOT_NULL = Phone.NUMBER + " IS NOT NULL";
+  private static final String MAX_RESULTS = "10";
 
   private final String query;
   private final List<Directory> directories;
@@ -55,7 +56,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
         context,
         null,
         Projections.DATA_PROJECTION,
-        IGNORE_NUMBER_TOO_LONG_CLAUSE,
+        IGNORE_NUMBER_TOO_LONG_CLAUSE + " AND " + PHONE_NUMBER_NOT_NULL,
         null,
         Phone.SORT_KEY_PRIMARY);
     this.query = query;

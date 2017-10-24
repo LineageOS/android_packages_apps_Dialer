@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
  * A TextView that automatically scales its text to completely fill its allotted width.
  *
  * <p>Note: In some edge cases, the binary search algorithm to find the best fit may slightly
- * overshoot / undershoot its constraints. See b/26704434. No minimal repro case has been
+ * overshoot / undershoot its constraints. See a bug. No minimal repro case has been
  * found yet. A known workaround is the solution provided on StackOverflow:
  * http://stackoverflow.com/a/5535672
  */

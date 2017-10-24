@@ -222,7 +222,7 @@ public class HttpFetcher {
   /**
    * Lookup up url re-write rules from gServices and apply to the given url.
    *
-   * <p>https://wiki.corp.google.com/twiki/bin/view/Main/AndroidGservices#URL_Rewriting_Rules
+
    *
    * @return The new url.
    */

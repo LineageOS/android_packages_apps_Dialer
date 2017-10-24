@@ -825,7 +825,7 @@ public abstract class ContactEntryListFragment<T extends ContactEntryListAdapter
   @Override
   public void onResume() {
     super.onResume();
-    // Restore the selection of the list view. See b/19982820.
+    // Restore the selection of the list view. See a bug.
     // This has to be done manually because if the list view has its emptyView set,
     // the scrolling state will be reset when clearPartitions() is called on the adapter.
     mListView.setSelectionFromTop(mListViewTopIndex, mListViewTopOffset);
