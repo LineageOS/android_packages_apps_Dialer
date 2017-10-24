@@ -452,6 +452,7 @@ public class InCallPresenter implements CallList.Listener {
 
     if (inCallActivity != null) {
       if (mInCallActivity == null) {
+        mContext = inCallActivity.getApplicationContext();
         updateListeners = true;
         LogUtil.i("InCallPresenter.updateActivity", "UI Initialized");
       } else {
@@ -500,7 +501,7 @@ public class InCallPresenter implements CallList.Listener {
     //           (2) All calls could disconnect and then get a new incoming call before the
     //               activity is destroyed.
     //
-    // b/1122139 - We previously had a check for mServiceConnected here as well, but there are
+    // a bug - We previously had a check for mServiceConnected here as well, but there are
     // cases where we need to recalculate the current state even if the service in not
     // connected.  In particular the case where startOrFinish() is called while the app is
     // already finish()ing. In that case, we skip updating the state with the knowledge that
@@ -730,7 +731,7 @@ public class InCallPresenter implements CallList.Listener {
     // incall activity for that call will still exist (even if it's not visible). In the case of
     // an incoming call in that situation, just disconnect that "waiting for account" call and
     // dismiss the dialog. The same activity will be reused to handle the new incoming call. See
-    // b/33247755 for more details.
+    // a bug for more details.
     DialerCall waitingForAccountCall;
     if (newState == InCallState.INCOMING
         && (waitingForAccountCall = callList.getWaitingForAccountCall()) != null) {

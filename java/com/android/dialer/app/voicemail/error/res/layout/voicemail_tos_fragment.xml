@@ -73,6 +73,7 @@
     android:paddingEnd="16dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
+    android:background="#ffffffff"
     android:orientation="horizontal">
     <TextView
       android:id="@+id/voicemail_tos_button_decline"
@@ -82,7 +83,7 @@
       android:layout_height="wrap_content"
       android:text="@string/verizon_terms_and_conditions_decline_english"/>
     <android.support.v4.widget.Space
-      android:layout_width="0dp"
+      android:layout_width="8dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>
     <TextView

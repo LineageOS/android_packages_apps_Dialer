@@ -72,6 +72,7 @@
           android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"/>
     </LinearLayout>
 
+    <!-- TODO(uabdullah): Fix text cropping issue -->
     <TextView
         android:id="@+id/transcription_text"
         style="@style/SecondaryText"

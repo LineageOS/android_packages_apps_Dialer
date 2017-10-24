@@ -262,7 +262,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
   }
 
   /*
-   * TODO(maxwelb): b/27779827, non-e164 numbers can be blocked in the new form of blocking. As a
+   * TODO(maxwelb): a bug, non-e164 numbers can be blocked in the new form of blocking. As a
    * temporary workaround, determine which column of the database to query based on whether the
    * number is e164 or not.
    */

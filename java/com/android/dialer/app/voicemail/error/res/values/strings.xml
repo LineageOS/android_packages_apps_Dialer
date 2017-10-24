@@ -140,6 +140,8 @@
   <string name="verizon_terms_and_conditions_message"><xliff:g>%1$s</xliff:g> By turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n<xliff:g>%2$s</xliff:g></string>
 
   <string name="dialer_terms_and_conditions_title">Turn on visual voicemail</string>
+
+  <string name="dialer_terms_and_conditions_existing_user_title">New! Read your voicemail</string>
   <string name="dialer_terms_and_conditions_message"><xliff:g>%s</xliff:g></string>
 
   <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
@@ -173,14 +175,16 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. <xliff:g>%s</xliff:g>
   </string>
 
+  <string name="dialer_terms_and_conditions_existing_user">
+  Transcripts of your voicemail are now provided by Google’s free transcription service. %s
+  </string>
+
   <string name="dialer_terms_and_conditions_for_verizon_1.0">
   See and listen to your messages, without having to call voicemail.
   </string>
 
   <string name="dialer_terms_and_conditions_learn_more">Learn&#160;more</string>
-
-  <!-- TODO(mdooley): STOP SHIP, get real url, b/65734734 -->
-  <string translatable="false" name="dialer_terms_and_conditions_learn_more_url">https://www.google.com</string>
+  <string translatable="false" name="dialer_terms_and_conditions_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
   <string translatable="false" name="verizon_terms_and_conditions_policy_url">http://www.verizon.com/about/privacy/policy/</string>
 
@@ -194,11 +198,16 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   <string translatable="false" name="dialer_terms_and_conditions_decline_english">No Thanks</string>
   <string translatable="false" name="dialer_terms_and_conditions_decline_spanish">Rechazar</string>
 
-  <string name="verizon_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
-  <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
+  <string name="dialer_terms_and_conditions_existing_user_ack">Ok, got it</string>
+  <string name="dialer_terms_and_conditions_existing_user_setings">Settings</string>
 
-  <string name="dialer_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
-  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
+  <string name="terms_and_conditions_decline_dialog_title">Disable visual voicemail?</string>
+
+  <string name="verizon_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Disable</string>
+
+  <string name="dialer_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if you turn off visual voicemail.</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Disable</string>
 
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Voicemail will only be accessible by calling *86. Set a new voicemail PIN to proceed.</string>
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Set PIN</string>

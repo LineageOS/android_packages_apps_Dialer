@@ -21,22 +21,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.time.Clock;
 
 /** {@link RecyclerView.Adapter} for the new voicemail call log fragment. */
 final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHolder> {
 
   private final Cursor cursor;
+  private final Clock clock;
 
   /** @param cursor whose projection is {@link VoicemailCursorLoader.VOICEMAIL_COLUMNS} */
-  NewVoicemailAdapter(Cursor cursor) {
+  NewVoicemailAdapter(Cursor cursor, Clock clock) {
     this.cursor = cursor;
+    this.clock = clock;
   }
 
   @Override
   public NewVoicemailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
     View view = inflater.inflate(R.layout.new_voicemail_entry, viewGroup, false);
-    NewVoicemailViewHolder newVoicemailViewHolder = new NewVoicemailViewHolder(view);
+    NewVoicemailViewHolder newVoicemailViewHolder = new NewVoicemailViewHolder(view, clock);
     return newVoicemailViewHolder;
   }
 

@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!-- layoutDirection set to ltr as a workaround to a framework bug (b/22010411) causing view with
+<!-- layoutDirection set to ltr as a workaround to a framework bug (a bug) causing view with
      layout_centerInParent inside a RelativeLayout to expand to screen width when RTL is active -->
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"

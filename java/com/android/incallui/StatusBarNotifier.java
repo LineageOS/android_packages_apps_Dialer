@@ -376,8 +376,6 @@ public class StatusBarNotifier
           builder.setColorized(true);
           builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         }
-        // This will be ignored on O+ and handled by the channel
-        builder.setPriority(Notification.PRIORITY_MAX);
         break;
       default:
         break;
@@ -648,7 +646,8 @@ public class StatusBarNotifier
       return R.drawable.ic_hd_call;
     }
     // If ReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
-    if (ReturnToCallController.isEnabled(mContext)) {
+    if (ReturnToCallController.isEnabled(mContext)
+        || NewReturnToCallController.isEnabled(mContext)) {
       return R.drawable.quantum_ic_call_vd_theme_24;
     } else {
       return R.drawable.on_going_call;
@@ -714,7 +713,7 @@ public class StatusBarNotifier
 
     if (resId == R.string.notification_incoming_call_wifi_template
         || resId == R.string.notification_ongoing_call_wifi_template) {
-      // TODO(b/64525903): Potentially apply this template logic everywhere.
+      // TODO(a bug): Potentially apply this template logic everywhere.
       return mContext.getString(resId, wifiBrand);
     }
 
@@ -1027,11 +1026,6 @@ public class StatusBarNotifier
 
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
-    if (CallList.getInstance().getActiveOrBackgroundCall() == null) {
-      // We only care about speaker mode when in call
-      return;
-    }
-
     updateNotification();
   }
 

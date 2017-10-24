@@ -42,7 +42,7 @@ public class Projections {
   public static final int COMPANY_NAME = 12;
   public static final int NICKNAME = 13;
 
-  public static final String[] DATA_PROJECTION =
+  public static final String[] CP2_PROJECTION =
       new String[] {
         Data._ID, // 0
         Phone.TYPE, // 1
@@ -58,5 +58,21 @@ public class Projections {
         Data.SORT_KEY_PRIMARY, // 11
         Organization.COMPANY, // 12
         Nickname.NAME // 13
+      };
+
+  public static final String[] DATA_PROJECTION =
+      new String[] {
+        Data._ID, // 0
+        Phone.TYPE, // 1
+        Phone.LABEL, // 2
+        Phone.NUMBER, // 3
+        Data.DISPLAY_NAME_PRIMARY, // 4
+        Data.PHOTO_ID, // 5
+        Data.PHOTO_THUMBNAIL_URI, // 6
+        Data.LOOKUP_KEY, // 7
+        Data.CARRIER_PRESENCE, // 8
+        Data.CONTACT_ID, // 9
+        Data.MIMETYPE, // 10
+        Data.SORT_KEY_PRIMARY, // 11
       };
 }

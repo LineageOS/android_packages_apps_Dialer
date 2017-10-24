@@ -421,9 +421,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     // spec timeline can be divided into 9 slots. Each slot is equivalent to 83ms in the spec.
     // Therefore, we use 9 slots of 83ms to map user gesture into the spec timeline.
     //
-    // See specs -
-    // Accept: https://direct.googleplex.com/#/spec/8510001
-    // Decline: https://direct.googleplex.com/#/spec/3850001
+
     final float progressSlots = 9;
 
     // Fade out the "swipe up to answer". It only takes 1 slot to complete the fade.

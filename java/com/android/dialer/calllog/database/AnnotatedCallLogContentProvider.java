@@ -148,7 +148,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
   @Nullable
   @Override
   public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-    // Javadoc states values is not nullable, even though it is annotated as such (b/38123194)!
+    // Javadoc states values is not nullable, even though it is annotated as such (a bug)!
     Assert.checkArgument(values != null);
 
     SQLiteDatabase database = databaseHelper.getWritableDatabase();
@@ -228,7 +228,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
       @Nullable ContentValues values,
       @Nullable String selection,
       @Nullable String[] selectionArgs) {
-    // Javadoc states values is not nullable, even though it is annotated as such (b/38123194)!
+    // Javadoc states values is not nullable, even though it is annotated as such (a bug)!
     Assert.checkArgument(values != null);
 
     SQLiteDatabase database = databaseHelper.getWritableDatabase();

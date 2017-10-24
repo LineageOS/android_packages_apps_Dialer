@@ -19,11 +19,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail tab. */
@@ -31,18 +33,37 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
 
   private final Context context;
   private final TextView primaryTextView;
+  private final TextView secondaryTextView;
+  private final TextView transcriptionTextView;
   private final QuickContactBadge quickContactBadge;
+  private final Clock clock;
 
-  NewVoicemailViewHolder(View view) {
+  NewVoicemailViewHolder(View view, Clock clock) {
     super(view);
     this.context = view.getContext();
-    primaryTextView = (TextView) view.findViewById(R.id.primary_text);
+    primaryTextView = view.findViewById(R.id.primary_text);
+    secondaryTextView = view.findViewById(R.id.secondary_text);
+    transcriptionTextView = view.findViewById(R.id.transcription_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    this.clock = clock;
   }
 
   void bind(Cursor cursor) {
     VoicemailEntry voicemailEntry = VoicemailCursorLoader.toVoicemailEntry(cursor);
     primaryTextView.setText(VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry));
+    secondaryTextView.setText(
+        VoicemailEntryText.buildSecondaryVoicemailText(context, clock, voicemailEntry));
+
+    String voicemailTranscription = voicemailEntry.transcription();
+
+    if (TextUtils.isEmpty(voicemailTranscription)) {
+      transcriptionTextView.setVisibility(View.GONE);
+      transcriptionTextView.setText(null);
+    } else {
+      transcriptionTextView.setVisibility(View.VISIBLE);
+      transcriptionTextView.setText(voicemailTranscription);
+    }
+
     setPhoto(voicemailEntry);
   }
 

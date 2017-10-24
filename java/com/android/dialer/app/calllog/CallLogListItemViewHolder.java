@@ -536,8 +536,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
           primaryActionButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
         } else {
-          primaryActionButtonView.setTag(
-              IntentProvider.getReturnVideoCallIntentProvider(number, accountHandle));
+          primaryActionButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
         }
         primaryActionButtonView.setContentDescription(
             TextUtils.expandTemplate(
@@ -793,7 +792,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     if (show) {
       if (!isLoaded) {
-        // b/31268128 for some unidentified reason showActions() can be called before the item is
+        // a bug for some unidentified reason showActions() can be called before the item is
         // loaded, causing NPE on uninitialized fields. Just log and return here, showActions() will
         // be called again once the item is loaded.
         LogUtil.e(

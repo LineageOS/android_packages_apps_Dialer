@@ -59,5 +59,8 @@ public abstract class Constants {
 
   public abstract String getUserAgent(Context context);
 
+  @NonNull
+  public abstract String getSettingsActivity();
+
   protected Constants() {}
 }

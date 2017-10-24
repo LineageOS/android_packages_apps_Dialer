@@ -1028,7 +1028,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * Ignores contacts that have an unreasonably long lookup key. These are likely to be the result
      * of multiple (> 50) merged raw contacts, and are likely to cause OutOfMemoryExceptions within
      * SQLite, or cause memory allocation problems later on when iterating through the cursor set
-     * (see b/13133579)
+     * (see a bug)
      */
     String SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE = "length(" + Phone.LOOKUP_KEY + ") < 1000";
 

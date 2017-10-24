@@ -39,8 +39,10 @@ final class VoicemailCursorLoader extends CursorLoader {
         AnnotatedCallLog.PHOTO_URI,
         AnnotatedCallLog.PHOTO_ID,
         AnnotatedCallLog.LOOKUP_URI,
+        AnnotatedCallLog.DURATION,
         AnnotatedCallLog.GEOCODED_LOCATION,
-        AnnotatedCallLog.CALL_TYPE
+        AnnotatedCallLog.CALL_TYPE,
+        AnnotatedCallLog.TRANSCRIPTION
       };
 
   // Indexes for VOICEMAIL_COLUMNS
@@ -52,8 +54,10 @@ final class VoicemailCursorLoader extends CursorLoader {
   private static final int PHOTO_URI = 5;
   private static final int PHOTO_ID = 6;
   private static final int LOOKUP_URI = 7;
-  private static final int GEOCODED_LOCATION = 8;
-  private static final int CALL_TYPE = 9;
+  private static final int DURATION = 8;
+  private static final int GEOCODED_LOCATION = 9;
+  private static final int CALL_TYPE = 10;
+  private static final int TRANSCRIPTION = 11;
 
   // TODO(zachh): Optimize indexes
   VoicemailCursorLoader(Context context) {
@@ -84,6 +88,8 @@ final class VoicemailCursorLoader extends CursorLoader {
         .setPhotoUri(cursor.getString(PHOTO_URI))
         .setPhotoId(cursor.getLong(PHOTO_ID))
         .setLookupUri(cursor.getString(LOOKUP_URI))
+        .setDuration(cursor.getLong(DURATION))
+        .setTranscription(cursor.getString(TRANSCRIPTION))
         .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
         .setCallType(cursor.getInt(CALL_TYPE))
         .build();

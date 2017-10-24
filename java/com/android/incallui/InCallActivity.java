@@ -516,6 +516,14 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     common.showInternationalCallOnWifiDialog(call);
   }
 
+  @Override
+  public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+    super.onMultiWindowModeChanged(isInMultiWindowMode);
+    if (!isInMultiWindowMode) {
+      common.updateNavigationBar(isDialpadVisible());
+    }
+  }
+
   public void setAllowOrientationChange(boolean allowOrientationChange) {
     if (this.allowOrientationChange == allowOrientationChange) {
       return;
