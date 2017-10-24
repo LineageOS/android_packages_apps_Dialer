@@ -166,7 +166,7 @@ public class CequintCallerIdManager {
     Assert.isWorkerThread();
     Assert.isNotNull(number);
 
-    // Cequint is using custom arguments for content provider. See more details in b/35766080.
+    // Cequint is using custom arguments for content provider. See more details in a bug.
     try (Cursor cursor =
         context.getContentResolver().query(uri, EMPTY_PROJECTION, number, flags, null)) {
       if (cursor != null && cursor.moveToFirst()) {

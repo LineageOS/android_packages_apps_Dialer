@@ -46,4 +46,10 @@ public class ConstantsImpl extends Constants {
   public String getUserAgent(Context context) {
     return null;
   }
+
+  @NonNull
+  @Override
+  public String getSettingsActivity() {
+    return "com.android.dialer.app.settings.DialerSettingsActivity";
+  }
 }

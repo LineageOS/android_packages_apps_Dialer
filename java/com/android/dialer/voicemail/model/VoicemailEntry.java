@@ -31,6 +31,7 @@ public abstract class VoicemailEntry {
         .setTimestamp(0)
         .setNumber(DialerPhoneNumber.getDefaultInstance())
         .setPhotoId(0)
+        .setDuration(0)
         .setCallType(0);
   }
 
@@ -58,6 +59,11 @@ public abstract class VoicemailEntry {
   @Nullable
   public abstract String geocodedLocation();
 
+  public abstract long duration();
+
+  @Nullable
+  public abstract String transcription();
+
   public abstract int callType();
 
   /** Builder for {@link VoicemailEntry}. */
@@ -79,6 +85,10 @@ public abstract class VoicemailEntry {
     public abstract Builder setPhotoId(long photoId);
 
     public abstract Builder setLookupUri(@Nullable String lookupUri);
+
+    public abstract Builder setDuration(long duration);
+
+    public abstract Builder setTranscription(@Nullable String transcription);
 
     public abstract Builder setGeocodedLocation(@Nullable String geocodedLocation);
 

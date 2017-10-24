@@ -1,4 +1,4 @@
-// LINT.IfChange
+
 
 syntax = "proto2";
 
@@ -151,5 +151,4 @@ service VoicemailTranscriptionService {
   }
 }
 
-// LINT.ThenChange(//depot/google3/google/internal/communications/voicemailtranscription/v1/\
-//         voicemail_transcription.proto)
+

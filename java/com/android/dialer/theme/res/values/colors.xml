@@ -38,6 +38,7 @@
 
   <!-- Primary text color in the Phone app -->
   <color name="dialer_primary_text_color">#333333</color>
+  <color name="dialer_primary_text_color_white">#ffffff</color>
   <color name="dialer_edit_text_hint_color">#DE78909C</color>
 
   <!-- Secondary text color in the Phone app -->
@@ -69,4 +70,7 @@
 
   <!-- Color of call type icons in call log, e.g. voicemail, video, WiFi, HD etc. -->
   <color name="call_type_icon_color">#89000000</color>
+
+  <!-- Color for bubble -->
+  <color name="dialer_end_call_button_color">#FFDF0000</color>
 </resources>

@@ -116,7 +116,7 @@ public class AutoScrollListView extends ListView {
   protected void onLayout(boolean changed, int l, int t, int r, int b) {
     super.onLayout(changed, l, t, r, b);
 
-    // Workaround for b/31160338 and b/32778636.
+    // Workaround for a bug and a bug.
     if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.N
         || android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
       layoutChildren();

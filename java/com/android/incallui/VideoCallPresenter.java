@@ -358,7 +358,7 @@ public class VideoCallPresenter
 
     // Ensure that the call's camera direction is updated (most likely to UNKNOWN). Normally this
     // happens after any call state changes but we're unregistering from InCallPresenter above so
-    // we won't get any more call state changes. See b/32957114.
+    // we won't get any more call state changes. See a bug.
     if (mPrimaryCall != null) {
       updateCameraSelection(mPrimaryCall);
     }
@@ -851,7 +851,7 @@ public class VideoCallPresenter
     if (!hasCameraPermission) {
       videoCall.setCamera(null);
       mPreviewSurfaceState = PreviewSurfaceState.NONE;
-      // TODO(wangqi): Inform remote party that the video is off. This is similar to b/30256571.
+      // TODO(wangqi): Inform remote party that the video is off. This is similar to a bug.
     } else if (isCameraRequired) {
       InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
       videoCall.setCamera(cameraManager.getActiveCameraId());

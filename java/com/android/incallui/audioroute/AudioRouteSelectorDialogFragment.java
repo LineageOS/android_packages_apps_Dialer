@@ -92,7 +92,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         CallAudioState.ROUTE_EARPIECE,
         audioState);
 
-    // TODO(b/67013452): set peak height correctly to fully expand it in landscape mode.
+    // TODO(a bug): set peak height correctly to fully expand it in landscape mode.
     return view;
   }
 

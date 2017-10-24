@@ -31,7 +31,7 @@ public interface Simulator {
   ActionProvider getActionProvider(Context context);
 
   /** The type of conference to emulate. */
-  // TODO(b/67785540): add VoLTE and CDMA conference call
+  // TODO(a bug): add VoLTE and CDMA conference call
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     CONFERENCE_TYPE_GSM,

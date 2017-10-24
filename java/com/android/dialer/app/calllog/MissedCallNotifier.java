@@ -470,7 +470,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   private PendingIntent createCallLogPendingIntent(@Nullable Uri callUri) {
     Intent contentIntent =
         DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_HISTORY);
-    // TODO (b/35486204): scroll to call
+    // TODO (a bug): scroll to call
     contentIntent.setData(callUri);
     return PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
   }

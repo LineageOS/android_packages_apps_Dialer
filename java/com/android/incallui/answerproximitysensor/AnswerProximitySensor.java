@@ -90,8 +90,8 @@ public class AnswerProximitySensor
     } else {
       // TODO(twyen): choose a wake lock implementation base on framework/device.
       // These bugs requires the PseudoProximityWakeLock workaround:
-      // b/30439151 Proximity sensor not working on M
-      // b/31499931 fautly touch input when screen is off on marlin/sailfish
+      // a bug Proximity sensor not working on M
+      // a bug fautly touch input when screen is off on marlin/sailfish
       answerProximityWakeLock = new SystemProximityWakeLock(context);
     }
     answerProximityWakeLock.setScreenOnListener(this);

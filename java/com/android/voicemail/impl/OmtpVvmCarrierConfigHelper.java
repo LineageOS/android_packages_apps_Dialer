@@ -87,6 +87,8 @@ public class OmtpVvmCarrierConfigHelper {
 
   public static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
 
+  @Nullable private static PersistableBundle sOverrideConfigForTest;
+
   private final Context mContext;
   private final PersistableBundle mCarrierConfig;
   private final String mVvmType;
@@ -114,16 +116,22 @@ public class OmtpVvmCarrierConfigHelper {
       return;
     }
 
-    if (ConfigOverrideFragment.isOverridden(context)) {
-      mOverrideConfig = ConfigOverrideFragment.getConfig(context);
-      VvmLog.w(TAG, "Config override is activated: " + mOverrideConfig);
+    if (sOverrideConfigForTest != null) {
+      mOverrideConfig = sOverrideConfigForTest;
+      mCarrierConfig = new PersistableBundle();
+      mTelephonyConfig = new PersistableBundle();
     } else {
-      mOverrideConfig = null;
-    }
+      if (ConfigOverrideFragment.isOverridden(context)) {
+        mOverrideConfig = ConfigOverrideFragment.getConfig(context);
+        VvmLog.w(TAG, "Config override is activated: " + mOverrideConfig);
+      } else {
+        mOverrideConfig = null;
+      }
 
-    mCarrierConfig = getCarrierConfig(telephonyManager);
-    mTelephonyConfig =
-        new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
+      mCarrierConfig = getCarrierConfig(telephonyManager);
+      mTelephonyConfig =
+          new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
+    }
 
     mVvmType = getVvmType();
     mProtocol = VisualVoicemailProtocolFactory.create(mContext.getResources(), mVvmType);
@@ -275,7 +283,7 @@ public class OmtpVvmCarrierConfigHelper {
    * Hidden Config.
    *
    * <p>Sometimes the server states it supports a certain feature but we found they have bug on the
-   * server side. For example, in b/28717550 the server reported AUTH=DIGEST-MD5 capability but
+   * server side. For example, in a bug the server reported AUTH=DIGEST-MD5 capability but
    * using it to login will cause subsequent response to be erroneous.
    *
    * @return A set of capabilities that is reported by the IMAP CAPABILITY command, but determined
@@ -484,5 +492,10 @@ public class OmtpVvmCarrierConfigHelper {
       }
     }
     return defaultValue;
+  }
+
+  @VisibleForTesting
+  public static void setOverrideConfigForTest(PersistableBundle config) {
+    sOverrideConfigForTest = config;
   }
 }

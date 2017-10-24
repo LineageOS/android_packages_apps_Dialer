@@ -103,7 +103,7 @@ public class CallLogAsyncTaskUtil {
     ContentValues values = new ContentValues();
     values.put(Voicemails.DELETED, "1");
     context.getContentResolver().update(voicemailUri, values, null, null);
-    // TODO(b/35440541): check which source package is changed. Don't need
+    // TODO(a bug): check which source package is changed. Don't need
     // to upload changes on foreign voicemails, they will get a PROVIDER_CHANGED
     uploadVoicemailLocalChangesToServer(context);
   }

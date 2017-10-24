@@ -65,7 +65,7 @@ public class CameraPreview {
   }
 
   // Opening camera is very expensive. Most of the ANR reports seem to be related to the camera.
-  // So we delay until the camera is actually needed.  See b/23287938
+  // So we delay until the camera is actually needed.  See a bug
   private void maybeOpenCamera() {
     boolean visible = mHost.getView().getVisibility() == View.VISIBLE;
     if (mTabHasBeenShown && visible && PermissionsUtil.hasCameraPermissions(getContext())) {

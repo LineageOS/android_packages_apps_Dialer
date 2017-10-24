@@ -39,10 +39,6 @@ EXCLUDE_FILES += \
 
 # Exclude build variants for now
 EXCLUDE_FILES += \
-	$(BASE_DIR)/dialer/buildtype/bugfood/BuildTypeAccessorImpl.java \
-	$(BASE_DIR)/dialer/buildtype/dogfood/BuildTypeAccessorImpl.java \
-	$(BASE_DIR)/dialer/buildtype/fishfood/BuildTypeAccessorImpl.java \
-	$(BASE_DIR)/dialer/buildtype/test/BuildTypeAccessorImpl.java \
 	$(BASE_DIR)/dialer/constants/googledialer/ConstantsImpl.java \
 	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerRootComponent.java \
 	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerApplication.java \
@@ -156,6 +152,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.telecomeventui \
 	com.android.incallui.video.impl \
 	com.android.incallui.video.protocol \
+	com.android.newbubble \
 	com.android.voicemail \
 	com.android.voicemail.impl \
 	com.android.voicemail.impl.configui \

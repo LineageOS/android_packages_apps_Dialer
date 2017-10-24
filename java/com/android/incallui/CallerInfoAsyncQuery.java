@@ -103,7 +103,7 @@ public class CallerInfoAsyncQuery {
           public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
             Log.d(LOG_TAG, "contactsProviderQueryCompleteListener onQueryComplete");
             // If there are no other directory queries, make sure that the listener is
-            // notified of this result.  see b/27621628
+            // notified of this result.  see a bug
             if ((ci != null && ci.contactExists)
                 || !startOtherDirectoriesQuery(token, context, info, listener, cookie)) {
               if (listener != null && ci != null) {
@@ -206,7 +206,7 @@ public class CallerInfoAsyncQuery {
     // The current implementation of multiple async query runs in single handler thread
     // in AsyncQueryHandler.
     // intermediateListener.onQueryComplete is also called from the same caller thread.
-    // TODO(b/26019872): use thread pool instead of single thread.
+    // TODO(a bug): use thread pool instead of single thread.
     for (int i = 0; i < size; i++) {
       long directoryId = directoryIds[i];
       Uri uri = ContactInfoHelper.getContactInfoLookupUri(info.phoneNumber, directoryId);

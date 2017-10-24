@@ -45,7 +45,7 @@ public class PrimaryInfo {
   public final boolean showInCallButtonGrid;
   public final int numberPresentation;
 
-  // TODO: Convert to autovalue. b/34502119
+  // TODO: Convert to autovalue. a bug
   public static PrimaryInfo createEmptyPrimaryInfo() {
     return new PrimaryInfo(
         null,

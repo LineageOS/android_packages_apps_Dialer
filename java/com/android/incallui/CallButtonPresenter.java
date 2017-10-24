@@ -456,7 +456,7 @@ public class CallButtonPresenter
 
     final boolean hasCameraPermission =
         isVideo && VideoUtils.hasCameraPermissionAndShownPrivacyToast(mContext);
-    // Disabling local video doesn't seem to work when dialing. See b/30256571.
+    // Disabling local video doesn't seem to work when dialing. See a bug.
     final boolean showPauseVideo =
         isVideo
             && call.getState() != DialerCall.State.DIALING
@@ -500,7 +500,7 @@ public class CallButtonPresenter
    * @return {@code true} if downgrading to an audio-only call from a video call is supported.
    */
   private boolean isDowngradeToAudioSupported(DialerCall call) {
-    // TODO(b/33676907): If there is an RCS video share session, return true here
+    // TODO(a bug): If there is an RCS video share session, return true here
     return !call.can(CallCompat.Details.CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO);
   }
 

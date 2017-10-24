@@ -1,4 +1,3 @@
-# Copied from http://google3/java/com/google/android/apps/common/proguard/base.flags
 
 # This file is intended to contain proguard options that *nobody* would ever
 # not want, in *any* configuration - they ensure basic correctness, and have
