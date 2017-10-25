@@ -32,6 +32,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     this.maxRows = maxRows;
   }
 
+  // TODO(uabdullah): Use concatenation to avoid klippy warnings
   private static final String CREATE_TABLE_SQL =
       new StringBuilder()
           .append("create table if not exists " + AnnotatedCallLog.TABLE + " (")
@@ -57,8 +58,8 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           .append(AnnotatedCallLog.IS_BUSINESS + " integer, ")
           .append(AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
           .append(AnnotatedCallLog.TRANSCRIPTION + " integer, ")
-          .append(AnnotatedCallLog.CALL_TYPE)
-          .append(" integer")
+          .append(AnnotatedCallLog.VOICEMAIL_URI + " string, ")
+          .append(AnnotatedCallLog.CALL_TYPE + " integer")
           .append(");")
           .toString();
 
