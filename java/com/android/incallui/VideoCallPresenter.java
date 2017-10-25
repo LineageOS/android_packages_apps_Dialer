@@ -423,7 +423,7 @@ public class VideoCallPresenter
   public void onCameraPermissionGranted() {
     LogUtil.i("VideoCallPresenter.onCameraPermissionGranted", "");
     PermissionsUtil.setCameraPrivacyToastShown(mContext);
-    enableCamera(mPrimaryCall.getVideoCall(), isCameraRequired());
+    enableCamera(mPrimaryCall, isCameraRequired());
     showVideoUi(
         mPrimaryCall.getVideoState(),
         mPrimaryCall.getState(),
@@ -609,7 +609,7 @@ public class VideoCallPresenter
       String newCameraId = cameraManager.getActiveCameraId();
 
       if (!Objects.equals(prevCameraId, newCameraId) && isActiveVideoCall(call)) {
-        enableCamera(call.getVideoCall(), true);
+        enableCamera(call, true);
       }
     }
 
@@ -806,8 +806,7 @@ public class VideoCallPresenter
           mDeviceOrientation != InCallOrientationEventListener.SCREEN_ORIENTATION_UNKNOWN);
       videoCall.setDeviceOrientation(mDeviceOrientation);
       enableCamera(
-          videoCall,
-          isCameraRequired(newVideoState, call.getVideoTech().getSessionModificationState()));
+          call, isCameraRequired(newVideoState, call.getVideoTech().getSessionModificationState()));
     }
     int previousVideoState = mCurrentVideoState;
     mCurrentVideoState = newVideoState;
@@ -836,30 +835,25 @@ public class VideoCallPresenter
     return false;
   }
 
-  private void enableCamera(VideoCall videoCall, boolean isCameraRequired) {
-    LogUtil.v(
-        "VideoCallPresenter.enableCamera",
-        "videoCall: %s, enabling: %b",
-        videoCall,
-        isCameraRequired);
-    if (videoCall == null) {
-      LogUtil.i("VideoCallPresenter.enableCamera", "videoCall is null.");
+  private void enableCamera(DialerCall call, boolean isCameraRequired) {
+    LogUtil.v("VideoCallPresenter.enableCamera", "call: %s, enabling: %b", call, isCameraRequired);
+    if (call == null) {
+      LogUtil.i("VideoCallPresenter.enableCamera", "call is null");
       return;
     }
 
     boolean hasCameraPermission = VideoUtils.hasCameraPermissionAndShownPrivacyToast(mContext);
     if (!hasCameraPermission) {
-      videoCall.setCamera(null);
+      call.getVideoTech().setCamera(null);
       mPreviewSurfaceState = PreviewSurfaceState.NONE;
       // TODO(wangqi): Inform remote party that the video is off. This is similar to a bug.
     } else if (isCameraRequired) {
       InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
-      videoCall.setCamera(cameraManager.getActiveCameraId());
+      call.getVideoTech().setCamera(cameraManager.getActiveCameraId());
       mPreviewSurfaceState = PreviewSurfaceState.CAMERA_SET;
-      videoCall.requestCameraCapabilities();
     } else {
       mPreviewSurfaceState = PreviewSurfaceState.NONE;
-      videoCall.setCamera(null);
+      call.getVideoTech().setCamera(null);
     }
   }
 
@@ -872,7 +866,7 @@ public class VideoCallPresenter
         DialerCall.State.ACTIVE,
         SessionModificationState.NO_REQUEST,
         false /* isRemotelyHeld */);
-    enableCamera(mVideoCall, false);
+    enableCamera(mPrimaryCall, false);
     InCallPresenter.getInstance().setFullScreen(false);
     InCallPresenter.getInstance().enableScreenTimeout(false);
     mIsVideoMode = false;
@@ -1152,7 +1146,7 @@ public class VideoCallPresenter
         mPreviewSurfaceState = PreviewSurfaceState.SURFACE_SET;
         mVideoCall.setPreviewSurface(videoCallSurface.getSavedSurface());
       } else if (mPreviewSurfaceState == PreviewSurfaceState.NONE && isCameraRequired()) {
-        enableCamera(mVideoCall, true);
+        enableCamera(mPrimaryCall, true);
       }
     }
 
@@ -1164,7 +1158,7 @@ public class VideoCallPresenter
       }
 
       mVideoCall.setPreviewSurface(null);
-      enableCamera(mVideoCall, false);
+      enableCamera(mPrimaryCall, false);
     }
 
     @Override
@@ -1176,7 +1170,7 @@ public class VideoCallPresenter
 
       boolean isChangingConfigurations = InCallPresenter.getInstance().isChangingConfigurations();
       if (!isChangingConfigurations) {
-        enableCamera(mVideoCall, false);
+        enableCamera(mPrimaryCall, false);
       } else {
         LogUtil.i(
             "VideoCallPresenter.LocalDelegate.onSurfaceDestroyed",
