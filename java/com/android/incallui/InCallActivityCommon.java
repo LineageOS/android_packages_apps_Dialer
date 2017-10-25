@@ -51,6 +51,7 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
@@ -714,7 +715,7 @@ public class InCallActivityCommon {
   }
 
   void updateNavigationBar(boolean isDialpadVisible) {
-    if (!inCallActivity.isInMultiWindowMode()) {
+    if (!ActivityCompat.isInMultiWindowMode(inCallActivity)) {
       View navigationBarBackground =
           inCallActivity.getWindow().findViewById(R.id.navigation_bar_background);
       if (navigationBarBackground != null) {
