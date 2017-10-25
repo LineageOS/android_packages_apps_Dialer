@@ -48,13 +48,13 @@ final class SimulatorMainMenu {
   }
 
   private static void populateDatabase(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(new PopulateDatabaseWorker())
+    DialerExecutors.createNonUiTaskBuilder(context, new PopulateDatabaseWorker())
         .build()
         .executeSerial(context);
   }
 
   private static void cleanDatabase(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(new CleanDatabaseWorker())
+    DialerExecutors.createNonUiTaskBuilder(context, new CleanDatabaseWorker())
         .build()
         .executeSerial(context);
   }
@@ -65,7 +65,7 @@ final class SimulatorMainMenu {
   }
 
   private static void sharePersistentLog(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(new ShareLogWorker())
+    DialerExecutors.createNonUiTaskBuilder(context, new ShareLogWorker())
         .onSuccess(
             (String log) -> {
               Intent intent = new Intent(Intent.ACTION_SEND);

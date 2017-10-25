@@ -86,8 +86,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   private final ConcurrentHashMap<String, ContactCacheEntry> mInfoMap = new ConcurrentHashMap<>();
   private final Map<String, Set<ContactInfoCacheCallback>> mCallBacks = new ArrayMap<>();
   private int mQueryId;
-  private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor =
-      DialerExecutors.createNonUiTaskBuilder(new CachedNumberLookupWorker()).build();
+  private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor;
 
   private static class CachedNumberLookupWorker implements Worker<CnapInformationWrapper, Void> {
     @Nullable
@@ -126,6 +125,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     Trace.beginSection("ContactInfoCache constructor");
     mContext = context;
     mPhoneNumberService = Bindings.get(context).newPhoneNumberService(context);
+    cachedNumberLookupExecutor =
+        DialerExecutors.createNonUiTaskBuilder(mContext, new CachedNumberLookupWorker()).build();
     Trace.endSection();
   }
 
@@ -718,6 +719,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     int queryId;
     /** The phone number without any changes to display to the user (ex: cnap...) */
     String originalPhoneNumber;
+
     boolean shouldShowLocation;
 
     boolean isBusiness;

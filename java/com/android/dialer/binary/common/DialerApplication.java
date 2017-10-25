@@ -23,7 +23,7 @@ import android.support.v4.os.BuildCompat;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calllog.CallLogComponent;
-import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
@@ -43,7 +43,7 @@ public abstract class DialerApplication extends Application implements HasRootCo
     new BlockedNumbersAutoMigrator(
             this.getApplicationContext(),
             new FilteredNumberAsyncQueryHandler(this),
-            new DefaultDialerExecutorFactory())
+            DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
     CallLogComponent.get(this).callLogFramework().registerContentObservers(getApplicationContext());
     PersistentLogger.initialize(this);
