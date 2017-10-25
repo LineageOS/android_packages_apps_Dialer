@@ -218,6 +218,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.CACHED_NUMBER_LABEL,
                   Calls.DURATION,
                   Calls.TRANSCRIPTION,
+                  Calls.VOICEMAIL_URI,
                   Calls.IS_READ,
                   Calls.NEW,
                   Calls.GEOCODED_LOCATION,
@@ -256,6 +257,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
         int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
         int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
+        int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
         int newColumn = cursor.getColumnIndexOrThrow(Calls.NEW);
         int geocodedLocationColumn = cursor.getColumnIndexOrThrow(Calls.GEOCODED_LOCATION);
@@ -282,6 +284,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
           int duration = cursor.getInt(durationsColumn);
           String transcription = cursor.getString(transcriptionColumn);
+          String voicemailUri = cursor.getString(voicemailUriColumn);
           int isRead = cursor.getInt(isReadColumn);
           int isNew = cursor.getInt(newColumn);
           String geocodedLocation = cursor.getString(geocodedLocationColumn);
@@ -329,6 +332,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           contentValues.put(AnnotatedCallLog.FEATURES, features);
           contentValues.put(AnnotatedCallLog.DURATION, duration);
           contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
+          contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
 
           if (existingAnnotatedCallLogIds.contains(id)) {
             mutations.update(id, contentValues);
