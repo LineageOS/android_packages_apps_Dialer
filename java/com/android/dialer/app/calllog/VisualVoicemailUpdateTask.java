@@ -184,7 +184,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
             context,
             CallLogNotificationsQueryHelper.getInstance(context),
             new FilteredNumberAsyncQueryHandler(context));
-    DialerExecutors.createNonUiTaskBuilder(new VisualVoicemailUpdateTask())
+    DialerExecutors.createNonUiTaskBuilder(context, new VisualVoicemailUpdateTask())
         .onSuccess(
             output -> {
               LogUtil.i("VisualVoicemailUpdateTask.scheduleTask", "update successful");

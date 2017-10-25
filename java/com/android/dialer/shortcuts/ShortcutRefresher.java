@@ -45,7 +45,7 @@ public final class ShortcutRefresher {
       return;
     }
 
-    DialerExecutors.createNonUiTaskBuilder(new RefreshWorker(context))
+    DialerExecutors.createNonUiTaskBuilder(context, new RefreshWorker(context))
         .build()
         .executeSerial(new ArrayList<>(contacts));
   }
