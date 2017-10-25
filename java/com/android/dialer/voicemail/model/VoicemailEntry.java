@@ -64,6 +64,9 @@ public abstract class VoicemailEntry {
   @Nullable
   public abstract String transcription();
 
+  @Nullable
+  public abstract String voicemailUri();
+
   public abstract int callType();
 
   /** Builder for {@link VoicemailEntry}. */
@@ -89,6 +92,8 @@ public abstract class VoicemailEntry {
     public abstract Builder setDuration(long duration);
 
     public abstract Builder setTranscription(@Nullable String transcription);
+
+    public abstract Builder setVoicemailUri(@Nullable String voicemailUri);
 
     public abstract Builder setGeocodedLocation(@Nullable String geocodedLocation);
 
