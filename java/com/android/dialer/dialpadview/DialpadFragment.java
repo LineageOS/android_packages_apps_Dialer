@@ -344,6 +344,7 @@ public class DialpadFragment extends Fragment
 
     initPhoneNumberFormattingTextWatcherExecutor =
         DialerExecutors.createUiTaskBuilder(
+                getContext(),
                 getFragmentManager(),
                 "DialpadFragment.initPhoneNumberFormattingTextWatcher",
                 new InitPhoneNumberFormattingTextWatcherWorker())
