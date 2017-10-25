@@ -17,29 +17,43 @@
 package com.android.dialer.common.concurrent;
 
 import android.app.FragmentManager;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.android.dialer.common.concurrent.Annotations.NonUiSerial;
+import com.android.dialer.common.concurrent.Annotations.UiParallel;
+import com.android.dialer.common.concurrent.Annotations.UiSerial;
 import com.android.dialer.common.concurrent.DialerExecutor.Builder;
 import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 /** The production {@link DialerExecutorFactory}. */
 public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
+  private final ExecutorService nonUiThreadPool;
+  private final ScheduledExecutorService nonUiSerialExecutor;
+  private final Executor uiThreadPool;
+  private final ScheduledExecutorService uiSerialExecutor;
 
   @Inject
-  public DefaultDialerExecutorFactory() {}
+  DefaultDialerExecutorFactory(
+      @NonUiParallel ExecutorService nonUiThreadPool,
+      @NonUiSerial ScheduledExecutorService nonUiSerialExecutor,
+      @UiParallel Executor uiThreadPool,
+      @UiSerial ScheduledExecutorService uiSerialExecutor) {
+    this.nonUiThreadPool = nonUiThreadPool;
+    this.nonUiSerialExecutor = nonUiSerialExecutor;
+    this.uiThreadPool = uiThreadPool;
+    this.uiSerialExecutor = uiSerialExecutor;
+  }
 
   @Override
   @NonNull
@@ -48,14 +62,18 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
       @NonNull String taskId,
       @NonNull Worker<InputT, OutputT> worker) {
     return new UiTaskBuilder<>(
-        Assert.isNotNull(fragmentManager), Assert.isNotNull(taskId), Assert.isNotNull(worker));
+        Assert.isNotNull(fragmentManager),
+        Assert.isNotNull(taskId),
+        Assert.isNotNull(worker),
+        uiSerialExecutor,
+        uiThreadPool);
   }
 
   @Override
   @NonNull
   public <InputT, OutputT> DialerExecutor.Builder<InputT, OutputT> createNonUiTaskBuilder(
       @NonNull Worker<InputT, OutputT> worker) {
-    return new NonUiTaskBuilder<>(Assert.isNotNull(worker));
+    return new NonUiTaskBuilder<>(Assert.isNotNull(worker), nonUiSerialExecutor, nonUiThreadPool);
   }
 
   private abstract static class BaseTaskBuilder<InputT, OutputT>
@@ -96,33 +114,10 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
 
   /** Convenience class for use by {@link DialerExecutorFactory} implementations. */
   public static class UiTaskBuilder<InputT, OutputT> extends BaseTaskBuilder<InputT, OutputT> {
-    private static final ScheduledExecutorService defaultSerialExecutorService =
-        Executors.newSingleThreadScheduledExecutor(
-            new ThreadFactory() {
-              @Override
-              public Thread newThread(Runnable runnable) {
-                LogUtil.i("UiTaskBuilder.newThread", "creating serial thread");
-                Thread thread = new Thread(runnable, "UiTaskBuilder-Serial");
-                thread.setPriority(5); // Corresponds to Process.THREAD_PRIORITY_DEFAULT
-                return thread;
-              }
-            });
-
-    private static final Executor defaultParallelExecutorService = AsyncTask.THREAD_POOL_EXECUTOR;
-
     private final FragmentManager fragmentManager;
     private final String id;
 
     private DialerUiTaskFragment<InputT, OutputT> dialerUiTaskFragment;
-
-    UiTaskBuilder(FragmentManager fragmentManager, String id, Worker<InputT, OutputT> worker) {
-      this(
-          fragmentManager,
-          id,
-          worker,
-          defaultSerialExecutorService,
-          defaultParallelExecutorService);
-    }
 
     public UiTaskBuilder(
         FragmentManager fragmentManager,
@@ -153,24 +148,6 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
 
   /** Convenience class for use by {@link DialerExecutorFactory} implementations. */
   public static class NonUiTaskBuilder<InputT, OutputT> extends BaseTaskBuilder<InputT, OutputT> {
-    private static final ScheduledExecutorService defaultSerialExecutorService =
-        Executors.newSingleThreadScheduledExecutor(
-            new ThreadFactory() {
-              @Override
-              public Thread newThread(Runnable runnable) {
-                LogUtil.i("NonUiTaskBuilder.newThread", "creating serial thread");
-                Thread thread = new Thread(runnable, "NonUiTaskBuilder-Serial");
-                thread.setPriority(4); // Corresponds to Process.THREAD_PRIORITY_BACKGROUND
-                return thread;
-              }
-            });
-
-    private static final Executor defaultParallelExecutor =
-        DialerExecutors.getLowPriorityThreadPool();
-
-    NonUiTaskBuilder(Worker<InputT, OutputT> worker) {
-      this(worker, defaultSerialExecutorService, defaultParallelExecutor);
-    }
 
     public NonUiTaskBuilder(
         Worker<InputT, OutputT> worker,

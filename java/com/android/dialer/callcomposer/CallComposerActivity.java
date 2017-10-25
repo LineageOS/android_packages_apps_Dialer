@@ -224,6 +224,7 @@ public class CallComposerActivity extends AppCompatActivity
 
     copyAndResizeExecutor =
         DialerExecutors.createUiTaskBuilder(
+                getApplicationContext(),
                 getFragmentManager(),
                 "copyAndResizeImageToSend",
                 new CopyAndResizeImageWorker(this.getApplicationContext()))

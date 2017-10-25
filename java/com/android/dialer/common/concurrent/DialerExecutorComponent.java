@@ -17,14 +17,19 @@
 package com.android.dialer.common.concurrent;
 
 import android.content.Context;
+import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
+import java.util.concurrent.ExecutorService;
 
 /** Dagger component which provides a {@link DialerExecutorFactory}. */
 @Subcomponent
 public abstract class DialerExecutorComponent {
 
   public abstract DialerExecutorFactory dialerExecutorFactory();
+
+  @NonUiParallel
+  public abstract ExecutorService lowPriorityThreadPool();
 
   public static DialerExecutorComponent get(Context context) {
     return ((DialerExecutorComponent.HasComponent)

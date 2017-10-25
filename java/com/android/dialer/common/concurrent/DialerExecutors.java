@@ -17,13 +17,11 @@
 package com.android.dialer.common.concurrent;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
 /**
  * Factory methods for creating {@link DialerExecutor} objects for doing background work.
@@ -118,44 +116,43 @@ import java.util.concurrent.ThreadFactory;
  */
 public final class DialerExecutors {
 
-  /** @see DialerExecutorFactory#createUiTaskBuilder(FragmentManager, String, Worker) */
+  /**
+   * @param context any valid context object from which the application context can be retrieved
+   * @see DialerExecutorFactory#createUiTaskBuilder(FragmentManager, String, Worker)
+   */
   @NonNull
   public static <InputT, OutputT> DialerExecutor.Builder<InputT, OutputT> createUiTaskBuilder(
+      @NonNull Context context,
       @NonNull FragmentManager fragmentManager,
       @NonNull String taskId,
       @NonNull Worker<InputT, OutputT> worker) {
-    return new DefaultDialerExecutorFactory()
+    return DialerExecutorComponent.get(Assert.isNotNull(context))
+        .dialerExecutorFactory()
         .createUiTaskBuilder(
             Assert.isNotNull(fragmentManager), Assert.isNotNull(taskId), Assert.isNotNull(worker));
   }
 
-  /** @see DialerExecutorFactory#createNonUiTaskBuilder(Worker) */
+  /**
+   * @param context any valid context object from which the application context can be retrieved
+   * @see DialerExecutorFactory#createNonUiTaskBuilder(Worker)
+   */
   @NonNull
   public static <InputT, OutputT> DialerExecutor.Builder<InputT, OutputT> createNonUiTaskBuilder(
-      @NonNull Worker<InputT, OutputT> worker) {
-    return new DefaultDialerExecutorFactory().createNonUiTaskBuilder(Assert.isNotNull(worker));
+      Context context, @NonNull Worker<InputT, OutputT> worker) {
+    return DialerExecutorComponent.get(Assert.isNotNull(context))
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(Assert.isNotNull(worker));
   }
-
-  private static final ExecutorService lowPriorityThreadPool =
-      Executors.newFixedThreadPool(
-          5,
-          new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable runnable) {
-              LogUtil.i("DialerExecutors.newThread", "creating low priority thread");
-              Thread thread = new Thread(runnable, "DialerExecutors-LowPriority");
-              thread.setPriority(4); // Corresponds to Process.THREAD_PRIORITY_BACKGROUND
-              return thread;
-            }
-          });
 
   /**
    * An application-wide thread pool used for low priority (non-UI) tasks.
    *
    * <p>This exists to prevent each individual dialer component from having to create its own
    * threads/pools, which would result in the application having more threads than really necessary.
+   *
+   * @param context any valid context object from which the application context can be retrieved
    */
-  public static ExecutorService getLowPriorityThreadPool() {
-    return lowPriorityThreadPool;
+  public static ExecutorService getLowPriorityThreadPool(@NonNull Context context) {
+    return DialerExecutorComponent.get(Assert.isNotNull(context)).lowPriorityThreadPool();
   }
 }
