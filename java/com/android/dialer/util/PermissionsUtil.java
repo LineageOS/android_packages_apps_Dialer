@@ -77,6 +77,10 @@ public class PermissionsUtil {
     return hasPermission(context, permission.CALL_PHONE);
   }
 
+  public static boolean hasReadPhoneStatePermissions(Context context) {
+    return hasPermission(context, permission.READ_PHONE_STATE);
+  }
+
   public static boolean hasContactsReadPermissions(Context context) {
     return hasPermission(context, permission.READ_CONTACTS);
   }

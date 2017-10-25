@@ -45,6 +45,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.strictmode.StrictModeUtils;
+import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.LockableViewPager;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
@@ -174,6 +175,9 @@ public class InCallFragment extends Fragment
               : TelephonyManager.NETWORK_TYPE_UNKNOWN;
     }
     phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();
+    View space = view.findViewById(R.id.navigation_bar_background);
+    space.getLayoutParams().height = ViewUtil.getNavigationBarHeight(getContext());
+
     return view;
   }
 

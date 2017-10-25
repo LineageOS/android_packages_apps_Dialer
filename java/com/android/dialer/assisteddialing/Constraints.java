@@ -25,6 +25,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -216,6 +218,8 @@ final class Constraints {
       // framework
       return Optional.of(phoneNumberUtil.parseAndKeepRawInput(numberToParse, userHomeCountryCode));
     } catch (NumberParseException e) {
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.ASSISTED_DIALING_CONSTRAINT_PARSING_FAILURE);
       LogUtil.i("Constraints.parsePhoneNumber", "could not parse the number");
       return Optional.empty();
     }
@@ -227,6 +231,8 @@ final class Constraints {
     if (parsedPhoneNumber.get().hasCountryCode()
         && parsedPhoneNumber.get().getCountryCodeSource()
             != CountryCodeSource.FROM_DEFAULT_COUNTRY) {
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_COUNTRY_CODE);
       LogUtil.i(
           "Constraints.isNotInternationalNumber", "phone number already provided the country code");
       return false;
@@ -244,6 +250,8 @@ final class Constraints {
 
     if (parsedPhoneNumber.get().hasExtension()
         && !TextUtils.isEmpty(parsedPhoneNumber.get().getExtension())) {
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_EXTENSION);
       LogUtil.i("Constraints.doesNotHaveExtension", "phone number has an extension");
       return false;
     }

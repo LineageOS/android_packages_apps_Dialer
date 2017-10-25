@@ -305,6 +305,7 @@ public class InCallActivityCommon {
       }
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
+    updateNavigationBar(isDialpadVisible());
 
     if (showPostCharWaitDialogOnResume) {
       showPostCharWaitDialog(showPostCharWaitDialogCallId, showPostCharWaitDialogChars);
@@ -328,7 +329,7 @@ public class InCallActivityCommon {
   public void onStop() {
     // Disconnects call waiting for account when activity is hidden e.g. user press home button.
     // This is necessary otherwise the pending call will stuck on account choose and no new call
-    // will be able to create. See b/63600434 for more details.
+    // will be able to create. See a bug for more details.
     // Skip this on locked screen since the activity may go over life cycle and start again.
     if (!isRecreating
         && !inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
@@ -712,6 +713,16 @@ public class InCallActivityCommon {
     dialog.show();
   }
 
+  void updateNavigationBar(boolean isDialpadVisible) {
+    if (!inCallActivity.isInMultiWindowMode()) {
+      View navigationBarBackground =
+          inCallActivity.getWindow().findViewById(R.id.navigation_bar_background);
+      if (navigationBarBackground != null) {
+        navigationBarBackground.setVisibility(isDialpadVisible ? View.VISIBLE : View.GONE);
+      }
+    }
+  }
+
   public boolean showDialpadFragment(boolean show, boolean animate) {
     // If the dialpad is already visible, don't animate in. If it's gone, don't animate out.
     boolean isDialpadVisible = isDialpadVisible();
@@ -772,6 +783,7 @@ public class InCallActivityCommon {
     dialpadFragmentManager.executePendingTransactions();
 
     Logger.get(inCallActivity).logScreenView(ScreenEvent.Type.INCALL_DIALPAD, inCallActivity);
+    updateNavigationBar(true /* isDialpadVisible */);
   }
 
   private void performHideDialpadFragment() {
@@ -789,6 +801,7 @@ public class InCallActivityCommon {
       transaction.commitAllowingStateLoss();
       fragmentManager.executePendingTransactions();
     }
+    updateNavigationBar(false /* isDialpadVisible */);
   }
 
   public boolean isDialpadVisible() {

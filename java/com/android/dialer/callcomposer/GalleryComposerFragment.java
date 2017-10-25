@@ -137,7 +137,7 @@ public class GalleryComposerFragment extends CallComposerFragment
                 })
             .onFailure(
                 throwable -> {
-                  // TODO(b/34279096) - gracefully handle message failure
+                  // TODO(a bug) - gracefully handle message failure
                   LogUtil.e(
                       "GalleryComposerFragment.onFailure", "data preparation failed", throwable);
                 })
@@ -303,7 +303,7 @@ public class GalleryComposerFragment extends CallComposerFragment
     if (url != null) {
       copyAndResizeImage.executeParallel(Uri.parse(url));
     } else {
-      // TODO(b/34279096) - gracefully handle message failure
+      // TODO(a bug) - gracefully handle message failure
     }
   }
 }

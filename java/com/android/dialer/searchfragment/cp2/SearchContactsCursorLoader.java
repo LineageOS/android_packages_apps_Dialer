@@ -36,7 +36,7 @@ public final class SearchContactsCursorLoader extends CursorLoader {
     super(
         context,
         Data.CONTENT_URI,
-        Projections.DATA_PROJECTION,
+        Projections.CP2_PROJECTION,
         whereStatement(),
         null,
         Phone.SORT_KEY_PRIMARY + " ASC");

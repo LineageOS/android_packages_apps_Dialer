@@ -182,7 +182,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
                     boolean isFirstResource) {
                   view.findViewById(R.id.loading_spinner).setVisibility(View.GONE);
                   LogUtil.e("MultimediaFragment.onLoadFailed", null, e);
-                  // TODO(b/34720074) handle error cases nicely
+                  // TODO(a bug) handle error cases nicely
                   return false; // Let Glide handle the rest
                 }
 

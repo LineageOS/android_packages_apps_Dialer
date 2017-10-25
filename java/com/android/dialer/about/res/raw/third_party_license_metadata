@@ -30,13 +30,13 @@
 321603:11358 OpenCensus
 332972:11358 Volley
 344341:10695 bubble
-355050:10402 gRPC Java
-365471:10173 libphonenumber
-375663:10699 shortcutbadger
-386378:16013 Android SDK
-402410:1096 Animal Sniffer
-403516:4771 Glide
-408299:1602 JSR 305
-409919:12847 jibercsclient
-422777:18982 mime4j
-441776:12847 rcsclientlib
+355050:11358 gRPC Java
+366427:10173 libphonenumber
+376619:10699 shortcutbadger
+387334:16013 Android SDK
+403366:1096 Animal Sniffer
+404472:4771 Glide
+409255:1602 JSR 305
+410875:12847 jibercsclient
+423733:18982 mime4j
+442732:12847 rcsclientlib

@@ -32,7 +32,7 @@
       android:theme="@style/NuiMainActivityTheme"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
 
-      <!-- LINT.IfChange -->
+
       <intent-filter>
         <action android:name="android.intent.action.DIAL"/>
 
@@ -98,7 +98,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
-      <!-- LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/dialer/app/manifests/activities/AndroidManifest.xml) -->
+
 
       <meta-data
         android:name="com.android.keyguard.layout"

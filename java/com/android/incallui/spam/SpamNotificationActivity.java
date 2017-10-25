@@ -274,7 +274,7 @@ public class SpamNotificationActivity extends FragmentActivity {
 
     logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_BLOCK_NUMBER);
     filteredNumberAsyncQueryHandler.blockNumber(null, number, getCountryIso());
-    // TODO: DialerCall finish() after block/reporting async tasks complete (b/28441936)
+    // TODO: DialerCall finish() after block/reporting async tasks complete (a bug)
     finish();
   }
 
@@ -289,7 +289,7 @@ public class SpamNotificationActivity extends FragmentActivity {
             CallLog.Calls.INCOMING_TYPE,
             ReportingLocation.Type.FEEDBACK_PROMPT,
             contactLookupResultType);
-    // TODO: DialerCall finish() after async task completes (b/28441936)
+    // TODO: DialerCall finish() after async task completes (a bug)
     finish();
   }
 

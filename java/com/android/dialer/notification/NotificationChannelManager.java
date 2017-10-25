@@ -133,7 +133,7 @@ public final class NotificationChannelManager {
         new NotificationChannel(
             NotificationChannelId.ONGOING_CALL,
             context.getText(R.string.notification_channel_ongoing_call),
-            NotificationManager.IMPORTANCE_MAX);
+            NotificationManager.IMPORTANCE_DEFAULT);
     channel.setShowBadge(false);
     channel.enableLights(false);
     channel.enableVibration(false);

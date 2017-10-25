@@ -31,7 +31,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
-import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryFilteringUtil;
 import java.lang.annotation.Retention;
@@ -71,7 +70,7 @@ final class ContactFilterCursor implements Cursor {
   }
 
   /**
-   * @param cursor with projection {@link Projections#DATA_PROJECTION}.
+   * @param cursor with projection {@link Projections#CP2_PROJECTION}.
    * @param query to filter cursor results.
    */
   ContactFilterCursor(Cursor cursor, @Nullable String query) {
@@ -123,8 +122,7 @@ final class ContactFilterCursor implements Cursor {
     // Sort by display name, then build new cursor from coalesced contacts.
     // We sort the contacts so that they are displayed to the user in lexicographic order.
     Collections.sort(coalescedContacts, (o1, o2) -> o1.displayName().compareTo(o2.displayName()));
-    MatrixCursor newCursor =
-        new MatrixCursor(Projections.DATA_PROJECTION, coalescedContacts.size());
+    MatrixCursor newCursor = new MatrixCursor(Projections.CP2_PROJECTION, coalescedContacts.size());
     for (Cp2Contact contact : coalescedContacts) {
       newCursor.addRow(contact.toCursorRow());
     }
@@ -139,11 +137,13 @@ final class ContactFilterCursor implements Cursor {
       if (contact.mimeType().equals(Phone.CONTENT_ITEM_TYPE)) {
         phoneContacts.add(contact);
       } else if (contact.mimeType().equals(Organization.CONTENT_ITEM_TYPE)) {
-        Assert.checkArgument(TextUtils.isEmpty(companyName));
-        companyName = contact.companyName();
+        // Since a contact can have more than one company name but they aren't visible to the user
+        // in our search UI, we can lazily concatenate them together to make them all searchable.
+        companyName += " " + contact.companyName();
       } else if (contact.mimeType().equals(Nickname.CONTENT_ITEM_TYPE)) {
-        Assert.checkArgument(TextUtils.isEmpty(nickName));
-        nickName = contact.nickName();
+        // Since a contact can have more than one nickname but they aren't visible to the user
+        // in our search UI, we can lazily concatenate them together to make them all searchable.
+        nickName += " " + contact.nickName();
       }
     }
 

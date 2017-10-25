@@ -85,7 +85,7 @@ import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
 
 /** Contains UI elements for a video call. */
-// LINT.IfChange
+
 public class VideoCallFragment extends Fragment
     implements InCallScreen,
         InCallButtonUi,
@@ -1271,4 +1271,4 @@ public class VideoCallFragment extends Fragment
     }
   }
 }
-// LINT.ThenChange(//depot/google3/third_party/java_src/android_app/dialer/java/com/android/incallui/video/impl/SurfaceViewVideoCallFragment.java)
+

@@ -87,7 +87,7 @@
           android:layout_marginEnd="24dp"/>
 
       <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
-           b/31396406 -->
+           a bug -->
       <com.android.incallui.autoresizetext.AutoResizeTextView
           android:id="@id/contactgrid_contact_name"
           android:layout_width="wrap_content"

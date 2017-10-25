@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:theme="@style/Theme.AppCompat">
+  <RelativeLayout
+      android:id="@+id/bubble_primary_container"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:animateLayoutChanges="true"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:elevation="12dp">
+    <ViewAnimator
+        android:id="@+id/bubble_button_primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bubble_ripple_circle"
+        android:measureAllChildren="false"
+        tools:backgroundTint="#FF0000AA">
+      <ImageView
+          android:id="@+id/bubble_icon_primary"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@android:color/white"
+          android:tintMode="src_in"
+          tools:src="@android:drawable/ic_btn_speak_now"/>
+      <TextView
+          android:id="@+id/bubble_text"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/bubble_size"
+          android:paddingStart="@dimen/bubble_icon_padding"
+          android:paddingEnd="@dimen/bubble_icon_padding"
+          android:gravity="center"
+          android:minWidth="@dimen/bubble_size"
+          android:textAppearance="@style/TextAppearance.AppCompat"
+          tools:text="Call ended"/>
+    </ViewAnimator>
+  </RelativeLayout>
+  <RelativeLayout
+      android:id="@+id/bubble_expanded_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/bubble_primary_container"
+      android:paddingTop="@dimen/bubble_shadow_padding_size_vertical"
+      android:paddingBottom="@dimen/bubble_shadow_padding_size_vertical"
+      android:paddingStart="@dimen/bubble_shadow_padding_size_horizontal"
+      android:paddingEnd="@dimen/bubble_shadow_padding_size_horizontal"
+      android:clipToPadding="false"
+      android:visibility="gone"
+      tools:visibility="visible">
+    <RelativeLayout
+        android:id="@+id/bubble_expanded_layout_part_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bubble_background_with_radius"
+        android:elevation="@dimen/bubble_elevation"
+        android:layoutDirection="inherit">
+      <com.android.newbubble.NewCheckableButton
+          android:id="@+id/bubble_button_full_screen"
+          android:layout_width="@dimen/bubble_expanded_width"
+          android:layout_height="@dimen/bubble_size"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_button_text_color_blue"
+          android:tintMode="src_in"
+          android:text="Full screen"
+          android:textColor="@color/bubble_button_text_color_black"
+          android:background="@android:color/transparent"
+          android:drawablePadding="@dimen/bubble_icon_padding"/>
+      <com.android.newbubble.NewCheckableButton
+          android:id="@+id/bubble_button_mute"
+          android:layout_width="@dimen/bubble_expanded_width"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_below="@id/bubble_button_full_screen"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_button_text_color_blue"
+          android:tintMode="src_in"
+          android:text="Mute"
+          android:textColor="@color/bubble_button_text_color_black"
+          android:background="@android:color/transparent"
+          android:drawablePadding="@dimen/bubble_icon_padding"/>
+      <com.android.newbubble.NewCheckableButton
+          android:id="@+id/bubble_button_audio_route"
+          android:layout_width="@dimen/bubble_expanded_width"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_below="@id/bubble_button_mute"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_button_text_color_blue"
+          android:tintMode="src_in"
+          android:text="Speakerphone"
+          android:textColor="@color/bubble_button_text_color_black"
+          android:background="@android:color/transparent"
+          android:drawablePadding="@dimen/bubble_icon_padding"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/bubble_expanded_layout_part_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bubble_expanded_separator_height"
+        android:layout_below="@id/bubble_expanded_layout_part_one"
+        android:background="@drawable/bubble_ripple_circle"
+        android:backgroundTint="@color/bubble_end_call_button_background"
+        android:elevation="@dimen/bubble_elevation"
+        android:layoutDirection="inherit">
+      <com.android.newbubble.NewCheckableButton
+          android:id="@+id/bubble_button_end_call"
+          android:layout_width="@dimen/bubble_expanded_width"
+          android:layout_height="@dimen/bubble_size"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_button_text_color_white"
+          android:tintMode="src_in"
+          android:text="End Call"
+          android:textColor="@color/bubble_button_text_color_white"
+          android:background="@android:color/transparent"
+          android:drawablePadding="@dimen/bubble_icon_padding"/>
+    </RelativeLayout>
+  </RelativeLayout>
+</RelativeLayout>

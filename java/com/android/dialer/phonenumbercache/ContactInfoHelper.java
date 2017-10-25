@@ -159,7 +159,7 @@ public class ContactInfoHelper {
         // ENTERPRISE_CONTENT_FILTER_URI in M doesn't support directory lookup
         uri = PhoneLookup.CONTENT_FILTER_URI;
       } else {
-        // b/25900607 in M. PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, encodes twice.
+        // a bug in M. PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, encodes twice.
         number = Uri.encode(number);
       }
     }

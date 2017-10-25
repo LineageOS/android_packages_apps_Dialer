@@ -82,7 +82,7 @@ public class VoicemailStatusCorruptionHandler {
 
     // If visual voicemail is enabled, the CONFIGURATION_STATE should be either OK, PIN_NOT_SET,
     // or other failure code. CONFIGURATION_STATE_NOT_CONFIGURED means that the client has been
-    // shut down improperly (b/32371710). The client should be reset or the VVM tab will be
+    // shut down improperly (a bug). The client should be reset or the VVM tab will be
     // missing.
     if (Status.CONFIGURATION_STATE_NOT_CONFIGURED == status.configurationState
         && visualVoicemailEnabled) {

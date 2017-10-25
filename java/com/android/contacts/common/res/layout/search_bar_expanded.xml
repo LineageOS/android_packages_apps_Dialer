@@ -28,7 +28,7 @@
     android:layout_centerVertical="true"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:contentDescription="@string/action_menu_back_from_search"
-    android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
+    android:src="@drawable/back_arrow"
     android:tint="@color/contactscommon_actionbar_background_color"/>
 
   <EditText

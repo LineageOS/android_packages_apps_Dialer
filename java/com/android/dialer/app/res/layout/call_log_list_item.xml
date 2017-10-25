@@ -162,6 +162,8 @@
               android:layout_height="wrap_content"
               android:textColor="@color/call_log_voicemail_transcript_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:focusable="true"
+              android:nextFocusDown="@+id/voicemail_transcription_branding"
               android:textIsSelectable="true"/>
 
             <TextView
@@ -170,6 +172,8 @@
               android:layout_height="wrap_content"
               android:textColor="@color/call_log_voicemail_transcript_branding_color"
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
+              android:focusable="true"
+              android:nextFocusUp="@id/voicemail_transcription"
               android:paddingTop="2dp"/>
 
           </LinearLayout>

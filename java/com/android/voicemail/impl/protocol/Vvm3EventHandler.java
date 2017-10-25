@@ -34,7 +34,7 @@ import java.lang.annotation.RetentionPolicy;
  * Handles {@link OmtpEvents} when {@link Vvm3Protocol} is being used. This handler writes custom
  * error codes into the voicemail status table so support on the dialer side is required.
  *
- * <p>TODO(b/29577838) disable VVM3 by default so support on system dialer can be ensured.
+ * <p>TODO(a bug) disable VVM3 by default so support on system dialer can be ensured.
  */
 public class Vvm3EventHandler {
 

@@ -274,7 +274,7 @@ final class VisualVoicemailNotifier {
       @NonNull Context context, @Nullable NewCall voicemail) {
     Intent intent =
         DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
-    // TODO (b/35486204): scroll to this voicemail
+    // TODO (a bug): scroll to this voicemail
     if (voicemail != null) {
       intent.setData(voicemail.voicemailUri);
     }
