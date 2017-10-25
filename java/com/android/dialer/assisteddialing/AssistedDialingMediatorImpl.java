@@ -17,9 +17,9 @@
 package com.android.dialer.assisteddialing;
 
 import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import com.android.dialer.common.LogUtil;
 import java.util.Optional;
 
@@ -30,6 +30,7 @@ import java.util.Optional;
  * call is eligible for assisted dialing, and performing the transformation of numbers eligible for
  * assisted dialing.
  */
+@RequiresApi(VERSION_CODES.N)
 final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
 
   private final LocationDetector locationDetector;
@@ -50,8 +51,9 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
 
   @Override
   public boolean isPlatformEligible() {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-        && Build.VERSION.SDK_INT <= Build.VERSION_CODES.O;
+    // This impl is only instantiated if it passes platform checks in ConcreteCreator,
+    // so we return true here.
+    return true;
   }
 
   /**
