@@ -469,6 +469,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
             LogUtil.i(
                 "CameraManager.onPictureTaken", "taken picture size: " + bytes.length + " bytes");
             DialerExecutors.createNonUiTaskBuilder(
+                    mCameraPreview.getContext(),
                     new ImagePersistWorker(
                         width, height, heightPercent, bytes, mCameraPreview.getContext()))
                 .onSuccess(

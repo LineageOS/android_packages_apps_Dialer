@@ -67,6 +67,7 @@ public class RegularSearchFragment extends SearchFragment
 
     addContactTask =
         DialerExecutors.createUiTaskBuilder(
+                getContext(),
                 getFragmentManager(),
                 "RegularSearchFragment.addContact",
                 new AddContactWorker(getContext().getApplicationContext()))

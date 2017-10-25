@@ -28,7 +28,6 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
@@ -40,11 +39,9 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
 import com.android.dialer.common.concurrent.DialerExecutor;
-import com.android.dialer.common.concurrent.DialerExecutorFactory;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PermissionsUtil;
@@ -62,8 +59,6 @@ public class GalleryComposerFragment extends CallComposerFragment
   private static final int RESULT_LOAD_IMAGE = 1;
   private static final int RESULT_OPEN_SETTINGS = 2;
 
-  private DialerExecutorFactory executorFactory = new DefaultDialerExecutorFactory();
-
   private GalleryGridAdapter adapter;
   private GridView galleryGridView;
   private View permissionView;
@@ -79,11 +74,6 @@ public class GalleryComposerFragment extends CallComposerFragment
 
   public static GalleryComposerFragment newInstance() {
     return new GalleryComposerFragment();
-  }
-
-  @VisibleForTesting
-  void setExecutorFactory(@NonNull DialerExecutorFactory executorFactory) {
-    this.executorFactory = Assert.isNotNull(executorFactory);
   }
 
   @Nullable
@@ -123,7 +113,8 @@ public class GalleryComposerFragment extends CallComposerFragment
     super.onActivityCreated(bundle);
 
     copyAndResizeImage =
-        executorFactory
+        DialerExecutorComponent.get(getContext())
+            .dialerExecutorFactory()
             .createUiTaskBuilder(
                 getActivity().getFragmentManager(),
                 "copyAndResizeImage",

@@ -80,6 +80,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
     mPreSyncVoicemailStatusCheckExecutor =
         DialerExecutors.createUiTaskBuilder(
+                getContext(),
                 getActivity().getFragmentManager(),
                 "fetchVoicemailStatus",
                 new VoicemailStatusWorker())

@@ -221,7 +221,10 @@ public class VoicemailPlaybackPresenter
       }
       shareVoicemailExecutor =
           DialerExecutors.createUiTaskBuilder(
-                  mActivity.getFragmentManager(), "shareVoicemail", new ShareVoicemailWorker())
+                  mContext,
+                  mActivity.getFragmentManager(),
+                  "shareVoicemail",
+                  new ShareVoicemailWorker())
               .onSuccess(
                   output -> {
                     if (output == null) {
