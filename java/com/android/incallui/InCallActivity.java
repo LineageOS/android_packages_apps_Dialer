@@ -40,6 +40,8 @@ import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.logging.LoggingBindingsFactory;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -145,6 +147,14 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
     sendBroadcast(CallPendingActivity.getFinishBroadcast());
     Trace.endSection();
+    if (getApplicationContext() instanceof LoggingBindingsFactory) {
+      LoggingBindings loggingBindings =
+          ((LoggingBindingsFactory) getApplicationContext()).newLoggingBindings();
+      loggingBindings.logStopLatencyTimer(
+          LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
+      loggingBindings.logStopLatencyTimer(
+          LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
+    }
   }
 
   @Override
