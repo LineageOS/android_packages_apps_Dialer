@@ -13,13 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
+package com.android.dialer.common.concurrent;
 
-package com.android.dialer.binary.aosp.testing;
+import javax.inject.Qualifier;
 
-import android.app.Activity;
+/** Annotations for dagger concurrency bindings. */
+public class Annotations {
 
-/**
- * An empty Activity to use in tests. This can be useful when UI needs to be tested outside an
- * Activity, either as a background or to keep the test framework running.
- */
-public class TestActivity extends Activity {}
+  /** Annotation for retrieving the non-UI thread pool. */
+  @Qualifier
+  public @interface NonUiParallel {}
+
+  /** Annotation for retrieving the non-UI serial executor. */
+  @Qualifier
+  public @interface NonUiSerial {}
+
+  /** Annotation for retrieving the UI thread pool. */
+  @Qualifier
+  public @interface UiParallel {}
+
+  /** Annotation for retrieving the UI serial executor. */
+  @Qualifier
+  public @interface UiSerial {}
+}

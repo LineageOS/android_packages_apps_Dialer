@@ -709,9 +709,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     startActivity(intent);
   }
 
-  public boolean inAllContactsTab() {
-    return mListsFragment.getUserVisibleHint()
-        && mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_ALL_CONTACTS;
+  public boolean isListsFragmentVisible() {
+    return mListsFragment.getUserVisibleHint();
   }
 
   @Override

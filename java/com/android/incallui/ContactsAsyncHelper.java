@@ -94,7 +94,7 @@ public class ContactsAsyncHelper {
     args.displayPhotoUri = displayPhotoUri;
     args.listener = listener;
 
-    DialerExecutors.createNonUiTaskBuilder(new Worker())
+    DialerExecutors.createNonUiTaskBuilder(context, new Worker())
         .onSuccess(
             output -> {
               if (args.listener != null) {

@@ -45,7 +45,7 @@ import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DefaultDialerExecutorFactory;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
@@ -373,7 +373,9 @@ public class InCallPresenter implements CallList.Listener {
     mCallList.addListener(this);
 
     // Create spam call list listener and add it to the list of listeners
-    mSpamCallListListener = new SpamCallListListener(context, new DefaultDialerExecutorFactory());
+    mSpamCallListListener =
+        new SpamCallListListener(
+            context, DialerExecutorComponent.get(context).dialerExecutorFactory());
     mCallList.addListener(mSpamCallListListener);
 
     VideoPauseController.getInstance().setUp(this);

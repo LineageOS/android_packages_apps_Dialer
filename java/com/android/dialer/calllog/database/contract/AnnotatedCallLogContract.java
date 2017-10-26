@@ -232,6 +232,13 @@ public class AnnotatedCallLogContract {
      * <p>TYPE: TEXT
      */
     public static final String TRANSCRIPTION = "transcription";
+
+    /**
+     * See {@link android.provider.CallLog.Calls#VOICEMAIL_URI}.
+     *
+     * <p>TYPE: TEXT
+     */
+    public static final String VOICEMAIL_URI = "voicemail_uri";
   }
 
   /**
