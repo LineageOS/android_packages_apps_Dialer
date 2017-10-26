@@ -36,6 +36,8 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.logging.LoggingBindingsFactory;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamBindings;
@@ -117,6 +119,17 @@ public class CallList implements DialerCallDelegate {
   public void onCallAdded(
       final Context context, final android.telecom.Call telecomCall, LatencyReport latencyReport) {
     Trace.beginSection("CallList.onCallAdded");
+    if (context.getApplicationContext() instanceof LoggingBindingsFactory) {
+      if (telecomCall.getState() == Call.STATE_CONNECTING) {
+        ((LoggingBindingsFactory) context.getApplicationContext())
+            .newLoggingBindings()
+            .logStartLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
+      } else if (telecomCall.getState() == Call.STATE_RINGING) {
+        ((LoggingBindingsFactory) context.getApplicationContext())
+            .newLoggingBindings()
+            .logStartLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
+      }
+    }
     if (mUiListeners != null) {
       mUiListeners.onCallAdded();
     }
