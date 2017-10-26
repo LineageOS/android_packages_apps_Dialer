@@ -20,6 +20,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -31,6 +32,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -42,13 +44,23 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.assisteddialing.ConcreteCreator;
+import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
@@ -72,7 +84,8 @@ public final class NewSearchFragment extends Fragment
     implements LoaderCallbacks<Cursor>,
         OnEmptyViewActionButtonClickedListener,
         CapabilitiesListener,
-        OnTouchListener {
+        OnTouchListener,
+        RowClickListener {
 
   // Since some of our queries can generate network requests, we should delay them until the user
   // stops typing to prevent generating too much network traffic.
@@ -124,9 +137,8 @@ public final class NewSearchFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
-    adapter = new SearchAdapter(getActivity(), new SearchCursorManager());
+    adapter = new SearchAdapter(getContext(), new SearchCursorManager(), this);
     adapter.setQuery(query);
-    adapter.setCallInitiationType(callInitiationType);
     adapter.setSearchActions(getActions());
     adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
     emptyContentView = view.findViewById(R.id.empty_view);
@@ -241,7 +253,6 @@ public final class NewSearchFragment extends Fragment
     this.callInitiationType = callInitiationType;
     if (adapter != null) {
       adapter.setQuery(query);
-      adapter.setCallInitiationType(callInitiationType);
       adapter.setSearchActions(getActions());
       adapter.setZeroSuggestVisible(isRegularSearch());
       loadNearbyPlacesCursor();
@@ -449,12 +460,59 @@ public final class NewSearchFragment extends Fragment
     if (event.getAction() == MotionEvent.ACTION_UP) {
       v.performClick();
     }
-    return FragmentUtils.getParentUnsafe(this, SearchFragmentListTouchListener.class)
+    return FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class)
         .onSearchListTouch(event);
   }
 
-  /** Callback to {@link NewSearchFragment}'s parent to notify when the list is touched. */
-  public interface SearchFragmentListTouchListener {
+  @Override
+  public void placeVoiceCall(String phoneNumber, int ranking) {
+    placeCall(phoneNumber, ranking, false, true);
+  }
+
+  @Override
+  public void placeVideoCall(String phoneNumber, int ranking) {
+    placeCall(phoneNumber, ranking, true, false);
+  }
+
+  private void placeCall(
+      String phoneNumber, int position, boolean isVideoCall, boolean allowAssistedDial) {
+    CallSpecificAppData callSpecificAppData =
+        CallSpecificAppData.newBuilder()
+            .setCallInitiationType(callInitiationType)
+            .setPositionOfSelectedSearchResult(position)
+            .setCharactersInSearchString(query == null ? 0 : query.length())
+            .setAllowAssistedDialing(allowAssistedDial)
+            .build();
+    Intent intent =
+        new CallIntentBuilder(phoneNumber, callSpecificAppData)
+            .setIsVideoCall(isVideoCall)
+            .setAllowAssistedDial(
+                allowAssistedDial,
+                ConcreteCreator.createNewAssistedDialingMediator(
+                    getContext().getSystemService(TelephonyManager.class),
+                    getContext().getApplicationContext()))
+            .build();
+    DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
+  }
+
+  @Override
+  public void placeDuoCall(String phoneNumber) {
+    Logger.get(getContext())
+        .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
+    Intent intent = DuoComponent.get(getContext()).getDuo().getIntent(getContext(), phoneNumber);
+    getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
+  }
+
+  @Override
+  public void openCallAndShare(DialerContact contact) {
+    Intent intent = CallComposerActivity.newIntent(getContext(), contact);
+    DialerUtils.startActivityWithErrorToast(getContext(), intent);
+  }
+
+  /** Callback to {@link NewSearchFragment}'s parent to be notified of important events. */
+  public interface SearchFragmentListener {
 
     /**
      * Called when the list view in {@link NewSearchFragment} is touched.
@@ -462,5 +520,8 @@ public final class NewSearchFragment extends Fragment
      * @see OnTouchListener#onTouch(View, MotionEvent)
      */
     boolean onSearchListTouch(MotionEvent event);
+
+    /** Called when a call is placed from the search fragment. */
+    void onCallPlaced();
   }
 }
