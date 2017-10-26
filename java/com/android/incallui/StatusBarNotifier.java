@@ -624,7 +624,8 @@ public class StatusBarNotifier
    * Returns the appropriate icon res Id to display based on the call for which we want to display
    * information.
    */
-  private int getIconToDisplay(DialerCall call) {
+  @VisibleForTesting
+  public int getIconToDisplay(DialerCall call) {
     // Even if both lines are in use, we only show a single item in
     // the expanded Notifications UI.  It's labeled "Ongoing call"
     // (or "On hold" if there's only one call, and it's on hold.)
@@ -633,7 +634,7 @@ public class StatusBarNotifier
     // from the foreground call.  And if there's a ringing call,
     // display that regardless of the state of the other calls.
     if (call.getState() == DialerCall.State.ONHOLD) {
-      return R.drawable.ic_phone_paused_white_24dp;
+      return R.drawable.quantum_ic_phone_paused_vd_theme_24;
     } else if (call.getVideoTech().getSessionModificationState()
             == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
         || call.isVideoCall()) {
@@ -644,6 +645,8 @@ public class StatusBarNotifier
       // helpful hint for users so they know how to get back to the call. For Sprint HD calls, we
       // replace this icon with an icon of a phone with a HD badge. This is a carrier requirement.
       return R.drawable.ic_hd_call;
+    } else if (call.hasProperty(Details.PROPERTY_HAS_CDMA_VOICE_PRIVACY)) {
+      return R.drawable.quantum_ic_phone_locked_vd_theme_24;
     }
     // If ReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
     if (ReturnToCallController.isEnabled(mContext)
