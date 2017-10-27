@@ -450,7 +450,9 @@ public class CallLogFragment extends Fragment
   @Override
   public void onDestroy() {
     LogUtil.enterBlock("CallLogFragment.onDestroy");
-    mAdapter.changeCursor(null);
+    if (mAdapter != null) {
+      mAdapter.changeCursor(null);
+    }
 
     getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
     getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
@@ -467,7 +469,9 @@ public class CallLogFragment extends Fragment
     outState.putBoolean(KEY_HAS_READ_CALL_LOG_PERMISSION, mHasReadCallLogPermission);
     outState.putBoolean(KEY_REFRESH_DATA_REQUIRED, mRefreshDataRequired);
     outState.putBoolean(KEY_SELECT_ALL_MODE, selectAllMode);
-    mAdapter.onSaveInstanceState(outState);
+    if (mAdapter != null) {
+      mAdapter.onSaveInstanceState(outState);
+    }
   }
 
   @Override
