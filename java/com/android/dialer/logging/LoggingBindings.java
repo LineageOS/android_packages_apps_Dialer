@@ -21,8 +21,7 @@ import android.widget.QuickContactBadge;
 public interface LoggingBindings {
 
   String ON_CREATE_PRIMES_EVENT_NAME = "Application.onCreate";
-  String ON_CREATE_TO_ACTIVITY_ON_CREATE_PRIMES_EVENT_NAME =
-      "Application.onCreate_To_GoogleDialtactsActivity.onCreate";
+  String ACTIVITY_ON_CREATE_PRIMES_EVENT_NAME = "GoogleDialtactsActivity.onCreate";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
