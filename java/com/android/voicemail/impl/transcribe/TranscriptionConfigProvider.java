@@ -75,6 +75,11 @@ public class TranscriptionConfigProvider {
         .getLong("voicemail_transcription_get_transcript_poll_interval_millis", 1000L);
   }
 
+  public boolean isVoicemailDonationEnabled() {
+    return ConfigProviderBindings.get(context)
+        .getBoolean("voicemail_transcription_donation_enabled", false);
+  }
+
   @Override
   public String toString() {
     return String.format(

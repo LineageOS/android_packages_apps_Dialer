@@ -76,6 +76,16 @@ public final class StubVoicemailClient implements VoicemailClient {
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {}
 
   @Override
+  public boolean isVoicemailTranscriptionAvailable(Context context) {
+    return false;
+  }
+
+  @Override
+  public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
+    return false;
+  }
+
+  @Override
   public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
     Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
     intent.putExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
