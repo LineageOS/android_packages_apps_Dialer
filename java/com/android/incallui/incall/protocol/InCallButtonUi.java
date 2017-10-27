@@ -16,6 +16,7 @@
 
 package com.android.incallui.incall.protocol;
 
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.telecom.CallAudioState;
 
@@ -42,7 +43,7 @@ public interface InCallButtonUi {
    */
   void updateButtonStates();
 
-  void updateInCallButtonUiColors();
+  void updateInCallButtonUiColors(@ColorInt int color);
 
   Fragment getInCallButtonUiFragment();
 
