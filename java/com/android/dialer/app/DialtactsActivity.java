@@ -129,6 +129,7 @@ import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -637,7 +638,8 @@ public class DialtactsActivity extends TransactionSafeActivity
         && !getSystemService(KeyguardManager.class).isKeyguardLocked()) {
       mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
     }
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+    StorageComponent.get(this)
+        .unencryptedSharedPrefs()
         .edit()
         .putInt(KEY_LAST_TAB, mListsFragment.getCurrentTabIndex())
         .apply();
@@ -1117,7 +1119,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (isLastTabEnabled) {
       @TabIndex
       int tabIndex =
-          DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+          StorageComponent.get(this)
+              .unencryptedSharedPrefs()
               .getInt(KEY_LAST_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
       // If voicemail tab is saved and its availability changes, we still move to the voicemail tab
       // but it is quickly removed and shown the contacts tab.

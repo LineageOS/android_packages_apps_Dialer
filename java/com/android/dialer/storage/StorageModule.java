@@ -30,9 +30,7 @@ public class StorageModule {
 
   @Provides
   @Singleton
-  @DeviceProtected
-  static SharedPreferences provideDeviceProtectedSharedPreferences(
-      @ApplicationContext Context appContext) {
+  static SharedPreferences provideUnencryptedSharedPrefs(@ApplicationContext Context appContext) {
     // #createDeviceProtectedStorageContext returns a new context each time, so we cache the shared
     // preferences object in order to avoid accessing disk for every operation.
     Context deviceProtectedContext = ContextCompat.createDeviceProtectedStorageContext(appContext);

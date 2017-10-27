@@ -73,8 +73,8 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.protos.ProtoParsers;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.UriUtils;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.DialerToolbar;
@@ -459,8 +459,7 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void maybeShowPrivacyToast(MultimediaData data) {
-    SharedPreferences preferences =
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this);
+    SharedPreferences preferences = StorageComponent.get(this).unencryptedSharedPrefs();
     // Show a toast for privacy purposes if this is the first time a user uses call composer.
     if (preferences.getBoolean(KEY_IS_FIRST_CALL_COMPOSE, true)) {
       int privacyMessage =

@@ -74,6 +74,10 @@ class ButtonChooserFactory {
     mapping.put(
         InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, MappingInfo.builder(4).setSlotOrder(10).build());
     mapping.put(InCallButtonIds.BUTTON_SWAP, MappingInfo.builder(5).setSlotOrder(0).build());
+    // For multi-sim devices, the first sim's phoneType is used so hold button might be not
+    // available for CDMA + GSM devices calling with GSM sim. Adding hold button as low priority
+    // here to let telecom control whether it should be shown.
+    mapping.put(InCallButtonIds.BUTTON_HOLD, MappingInfo.builder(5).setSlotOrder(5).build());
     mapping.put(
         InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY,
         MappingInfo.builder(5)

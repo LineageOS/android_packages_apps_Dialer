@@ -24,8 +24,8 @@ import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeUtils;
-import com.android.dialer.util.DialerUtils;
 import javax.inject.Inject;
 
 /**
@@ -115,6 +115,6 @@ class SharedPrefConfigProvider implements ConfigProvider {
   }
 
   private static SharedPreferences getSharedPrefs(Context appContext) {
-    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(appContext);
+    return StorageComponent.get(appContext).unencryptedSharedPrefs();
   }
 }

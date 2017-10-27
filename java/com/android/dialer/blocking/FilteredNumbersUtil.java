@@ -37,7 +37,7 @@ import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.concurrent.TimeUnit;
 
@@ -187,7 +187,8 @@ public class FilteredNumbersUtil {
   }
 
   public static long getLastEmergencyCallTimeMillis(Context context) {
-    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+    return StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .getLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, 0);
   }
 
@@ -210,7 +211,8 @@ public class FilteredNumbersUtil {
       return;
     }
 
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+    StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .edit()
         .putLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, System.currentTimeMillis())
         .putBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)
@@ -227,7 +229,8 @@ public class FilteredNumbersUtil {
       return;
     }
     // Skip if the user has already received a notification for the most recent emergency call.
-    if (DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+    if (StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .getBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)) {
       return;
     }
@@ -268,7 +271,8 @@ public class FilteredNumbersUtil {
                 builder.build());
 
             // Record that the user has been notified for this emergency call.
-            DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+            StorageComponent.get(context)
+                .unencryptedSharedPrefs()
                 .edit()
                 .putBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, true)
                 .apply();
