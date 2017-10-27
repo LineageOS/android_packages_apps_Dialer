@@ -134,6 +134,7 @@ public class ImsVideoCallCallback extends VideoCall.Callback {
           CLEAR_FAILED_REQUEST_TIMEOUT_MILLIS);
     } else if (videoTech.getSessionModificationState()
         == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+      requestedVideoState = VideoProfile.STATE_AUDIO_ONLY;
       videoTech.setSessionModificationState(SessionModificationState.NO_REQUEST);
     } else if (videoTech.getSessionModificationState()
         == SessionModificationState.WAITING_FOR_RESPONSE) {
