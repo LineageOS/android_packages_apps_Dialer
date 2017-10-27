@@ -23,6 +23,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -476,7 +477,9 @@ public class InCallFragment extends Fragment
   }
 
   @Override
-  public void updateInCallButtonUiColors() {}
+  public void updateInCallButtonUiColors(@ColorInt int color) {
+    inCallButtonGridFragment.updateButtonColor(color);
+  }
 
   @Override
   public Fragment getInCallButtonUiFragment() {

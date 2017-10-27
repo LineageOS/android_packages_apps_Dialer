@@ -18,11 +18,14 @@ package com.android.incallui.incall.impl;
 
 import android.animation.AnimatorInflater;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.text.TextUtils.TruncateAt;
@@ -88,6 +91,7 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
     iconView.setImageDrawable(icon);
     iconView.setImageTintMode(Mode.SRC_IN);
     iconView.setImageTintList(getResources().getColorStateList(R.color.incall_button_icon, null));
+
     iconView.setBackground(getResources().getDrawable(R.drawable.incall_button_background, null));
     iconView.setDuplicateParentStateEnabled(true);
     iconView.setElevation(getResources().getDimension(R.dimen.incall_button_elevation));
@@ -122,6 +126,13 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
     super.refreshDrawableState();
     iconView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
     labelView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
+  }
+
+  public void setCheckedColor(@ColorInt int color) {
+    iconView.setImageTintList(
+        new ColorStateList(
+            new int[][] {new int[] {android.R.attr.state_checked}, new int[] {}},
+            new int[] {color, Color.WHITE}));
   }
 
   public void setIconDrawable(@DrawableRes int drawableRes) {
