@@ -14,22 +14,26 @@
      limitations under the License.
 -->
 
-<!-- A layout representing a single key in the dialpad -->
+<!-- A layout representing each of keys "2" ~ "9" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/DialpadKeyButtonStyle">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DialpadKeyButtonStyle">
 
-  <LinearLayout style="@style/DialpadKeyInternalLayoutStyle">
-
-    <!-- Note in the referenced styles that we assign hard widths to these components
-         because we want them to line up vertically when we arrange them in an MxN grid -->
+  <LinearLayout
+      android:id="@+id/dialpad_key_layout"
+      style="@style/DialpadKeyInternalLayoutStyle">
 
     <com.android.dialer.dialpadview.DialpadTextView
-      android:id="@+id/dialpad_key_number"
-      style="@style/DialpadKeyNumberStyle"/>
+        android:id="@+id/dialpad_key_number"
+        style="@style/DialpadKeyNumberStyle"/>
 
-    <TextView
-      android:id="@+id/dialpad_key_letters"
-      style="@style/DialpadKeyLettersStyle"/>
+    <LinearLayout
+        android:id="@+id/dialpad_key_icon_or_letters_layout"
+        style="@style/DialpadKeyInternalLayoutStyle">
+
+      <TextView
+          android:id="@+id/dialpad_key_letters"
+          style="@style/DialpadKeyLettersStyle"/>
+    </LinearLayout>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>
