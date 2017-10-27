@@ -412,7 +412,8 @@ public class CallButtonPresenter
     }
 
     if (call != null) {
-      mInCallButtonUi.updateInCallButtonUiColors();
+      mInCallButtonUi.updateInCallButtonUiColors(
+          InCallPresenter.getInstance().getThemeColorManager().getSecondaryColor());
     }
 
     final boolean isEnabled =
@@ -559,5 +560,4 @@ public class CallButtonPresenter
     }
     return null;
   }
-
 }
