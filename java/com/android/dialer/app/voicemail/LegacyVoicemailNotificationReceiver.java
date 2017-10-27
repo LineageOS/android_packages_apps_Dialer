@@ -33,7 +33,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 
@@ -140,8 +140,6 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
   static PerAccountSharedPreferences getSharedPreferences(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     return new PerAccountSharedPreferences(
-        context,
-        phoneAccountHandle,
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context));
+        context, phoneAccountHandle, StorageComponent.get(context).unencryptedSharedPrefs());
   }
 }
