@@ -175,6 +175,7 @@ public class InCallFragment extends Fragment
               ? getContext().getSystemService(TelephonyManager.class).getVoiceNetworkType()
               : TelephonyManager.NETWORK_TYPE_UNKNOWN;
     }
+    // TODO(a bug): Change to use corresponding phone type used for current call.
     phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();
     View space = view.findViewById(R.id.navigation_bar_background);
     space.getLayoutParams().height = ViewUtil.getNavigationBarHeight(getContext());
