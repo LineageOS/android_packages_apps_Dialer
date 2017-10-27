@@ -21,14 +21,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
@@ -36,9 +32,7 @@ import android.text.TextDirectionHeuristics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.io.File;
 import java.util.Iterator;
@@ -222,21 +216,5 @@ public class DialerUtils {
       parentDir.mkdirs();
     }
     return new File(parentDir, String.valueOf(fileId));
-  }
-
-  /**
-   * Returns default preference for context accessing device protected storage. This is used when
-   * directBoot is enabled (before device unlocked after boot) since the default shared preference
-   * used normally is not available at this moment for N devices. Returns regular default shared
-   * preference for pre-N devices.
-   */
-  @NonNull
-  public static SharedPreferences getDefaultSharedPreferenceForDeviceProtectedStorageContext(
-      @NonNull Context context) {
-    Assert.isNotNull(context);
-    if (ContextCompat.isDeviceProtectedStorage(context)) {
-      return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-    return StorageComponent.get(context.getApplicationContext()).deviceProtectedSharedPreferences();
   }
 }

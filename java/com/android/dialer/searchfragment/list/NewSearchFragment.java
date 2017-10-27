@@ -68,6 +68,7 @@ import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -355,7 +356,8 @@ public final class NewSearchFragment extends Fragment
   // Should not be called before remote directories (not contacts) have finished loading.
   private void loadNearbyPlacesCursor() {
     if (!PermissionsUtil.hasLocationPermissions(getContext())
-        && !DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(getContext())
+        && !StorageComponent.get(getContext())
+            .unencryptedSharedPrefs()
             .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false)) {
       if (adapter != null && isRegularSearch() && !hasBeenDismissed()) {
         adapter.showLocationPermissionRequest(
