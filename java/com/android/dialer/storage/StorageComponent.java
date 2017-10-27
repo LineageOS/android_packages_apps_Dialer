@@ -25,7 +25,11 @@ import dagger.Subcomponent;
 @Subcomponent
 public abstract class StorageComponent {
 
-  public abstract @DeviceProtected SharedPreferences deviceProtectedSharedPreferences();
+  /**
+   * Returns unencrypted default shared preferences. This method should not be used for private
+   * data.
+   */
+  public abstract SharedPreferences unencryptedSharedPrefs();
 
   public static StorageComponent get(Context context) {
     return ((StorageComponent.HasComponent)

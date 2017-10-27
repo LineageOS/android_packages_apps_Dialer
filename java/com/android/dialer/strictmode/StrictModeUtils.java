@@ -26,7 +26,7 @@ import android.support.annotation.AnyThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.function.Supplier;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 
 /** Utilities for enforcing strict-mode in an app. */
 public final class StrictModeUtils {
@@ -115,7 +115,7 @@ public final class StrictModeUtils {
     //   /data/user_de/0/com.android.dialer/shared_prefs/
 
     // <package_name>_preferences.xml
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(application);
+    StorageComponent.get(application).unencryptedSharedPrefs();
   }
 
   private StrictModeUtils() {}

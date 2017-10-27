@@ -40,6 +40,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.storage.StorageComponent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -221,7 +222,8 @@ public class PermissionsUtil {
    * @return true if we've already shown the camera privacy toast.
    */
   public static boolean hasCameraPrivacyToastShown(@NonNull Context context) {
-    return DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+    return StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .getBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, false);
   }
 
@@ -232,7 +234,8 @@ public class PermissionsUtil {
   }
 
   public static void setCameraPrivacyToastShown(@NonNull Context context) {
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context)
+    StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .edit()
         .putBoolean(PREFERENCE_CAMERA_ALLOWED_BY_USER, true)
         .apply();
