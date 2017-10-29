@@ -61,4 +61,10 @@ public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
   public void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode) {}
+
+  @Override
+  public void logStartLatencyTimer(String timerEventName) {}
+
+  @Override
+  public void logStopLatencyTimer(String timerEventName) {}
 }

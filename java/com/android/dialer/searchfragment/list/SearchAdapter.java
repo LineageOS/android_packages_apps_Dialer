@@ -16,55 +16,43 @@
 
 package com.android.dialer.searchfragment.list;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import com.android.dialer.assisteddialing.ConcreteCreator;
-import com.android.dialer.callcomposer.CallComposerActivity;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
-import com.android.dialer.constants.ActivityRequestCodes;
-import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactViewHolder;
 import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
 import com.android.dialer.searchfragment.remote.RemoteContactViewHolder;
-import com.android.dialer.util.DialerUtils;
 import java.util.List;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
-    implements RowClickListener {
+public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final SearchCursorManager searchCursorManager;
-  private final Activity activity;
+  private final Context context;
 
   private boolean showZeroSuggest;
   private String query;
-  private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
   private OnClickListener allowClickListener;
   private OnClickListener dismissClickListener;
+  private RowClickListener rowClickListener;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-  public SearchAdapter(Activity activity, SearchCursorManager searchCursorManager) {
-    this.activity = activity;
+  public SearchAdapter(
+      Context context, SearchCursorManager searchCursorManager, RowClickListener rowClickListener) {
+    this.context = context;
     this.searchCursorManager = searchCursorManager;
+    this.rowClickListener = rowClickListener;
   }
 
   @Override
@@ -72,24 +60,25 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     switch (rowType) {
       case RowType.CONTACT_ROW:
         return new SearchContactViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.search_contact_row, root, false), this);
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false),
+            rowClickListener);
       case RowType.NEARBY_PLACES_ROW:
         return new NearbyPlaceViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.search_contact_row, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
       case RowType.CONTACT_HEADER:
       case RowType.DIRECTORY_HEADER:
       case RowType.NEARBY_PLACES_HEADER:
         return new HeaderViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.header_layout, root, false));
+            LayoutInflater.from(context).inflate(R.layout.header_layout, root, false));
       case RowType.DIRECTORY_ROW:
         return new RemoteContactViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.search_contact_row, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
       case RowType.SEARCH_ACTION:
         return new SearchActionViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.search_action_layout, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_action_layout, root, false));
       case RowType.LOCATION_REQUEST:
         return new LocationPermissionViewHolder(
-            LayoutInflater.from(activity).inflate(R.layout.location_permission_row, root, false),
+            LayoutInflater.from(context).inflate(R.layout.location_permission_row, root, false),
             allowClickListener,
             dismissClickListener);
       case RowType.INVALID:
@@ -168,10 +157,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     }
   }
 
-  void setCallInitiationType(CallInitiationType.Type callInitiationType) {
-    this.callInitiationType = callInitiationType;
-  }
-
   public void setNearbyPlacesCursor(SearchCursor nearbyPlacesCursor) {
     if (searchCursorManager.setNearbyPlacesCursor(nearbyPlacesCursor)) {
       notifyDataSetChanged();
@@ -207,51 +192,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder>
     if (searchCursorManager.setCorpDirectoryCursor(remoteContactsCursor)) {
       notifyDataSetChanged();
     }
-  }
-
-  @Override
-  public void placeVoiceCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, false, true);
-  }
-
-  @Override
-  public void placeVideoCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, true, false);
-  }
-
-  private void placeCall(
-      String phoneNumber, int position, boolean isVideoCall, boolean allowAssistedDial) {
-    CallSpecificAppData callSpecificAppData =
-        CallSpecificAppData.newBuilder()
-            .setCallInitiationType(callInitiationType)
-            .setPositionOfSelectedSearchResult(position)
-            .setCharactersInSearchString(query == null ? 0 : query.length())
-            .setAllowAssistedDialing(allowAssistedDial)
-            .build();
-    Intent intent =
-        new CallIntentBuilder(phoneNumber, callSpecificAppData)
-            .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(
-                allowAssistedDial,
-                ConcreteCreator.createNewAssistedDialingMediator(
-                    activity.getSystemService(TelephonyManager.class),
-                    activity.getApplicationContext()))
-            .build();
-    DialerUtils.startActivityWithErrorToast(activity, intent);
-  }
-
-  @Override
-  public void placeDuoCall(String phoneNumber) {
-    Logger.get(activity)
-        .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
-    Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, phoneNumber);
-    activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
-  }
-
-  @Override
-  public void openCallAndShare(DialerContact contact) {
-    Intent intent = CallComposerActivity.newIntent(activity, contact);
-    DialerUtils.startActivityWithErrorToast(activity, intent);
   }
 
   /** Viewholder for R.layout.location_permission_row that requests the location permission. */

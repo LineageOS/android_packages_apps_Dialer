@@ -25,7 +25,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 import com.android.incallui.answer.impl.hint.PawSecretCodeListener.PawType;
 
 /** Decrypt the event payload to be shown if in a specific time range and the key is received. */
@@ -37,8 +37,7 @@ public final class PawImageLoaderImpl implements PawImageLoader {
   public Drawable loadPayload(@NonNull Context context) {
     Assert.isNotNull(context);
 
-    SharedPreferences preferences =
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
+    SharedPreferences preferences = StorageComponent.get(context).unencryptedSharedPrefs();
     if (!preferences.getBoolean(PawSecretCodeListener.PAW_ENABLED_WITH_SECRET_CODE_KEY, false)) {
       return null;
     }

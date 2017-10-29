@@ -124,11 +124,12 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
-import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListTouchListener;
+import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -164,7 +165,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         PhoneNumberInteraction.DisambigDialogDismissedListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
         DialpadListener,
-        SearchFragmentListTouchListener {
+        SearchFragmentListener {
 
   public static final boolean DEBUG = false;
   @VisibleForTesting public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
@@ -637,7 +638,8 @@ public class DialtactsActivity extends TransactionSafeActivity
         && !getSystemService(KeyguardManager.class).isKeyguardLocked()) {
       mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
     }
-    DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+    StorageComponent.get(this)
+        .unencryptedSharedPrefs()
         .edit()
         .putInt(KEY_LAST_TAB, mListsFragment.getCurrentTabIndex())
         .apply();
@@ -1117,7 +1119,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (isLastTabEnabled) {
       @TabIndex
       int tabIndex =
-          DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(this)
+          StorageComponent.get(this)
+              .unencryptedSharedPrefs()
               .getInt(KEY_LAST_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
       // If voicemail tab is saved and its availability changes, we still move to the voicemail tab
       // but it is quickly removed and shown the contacts tab.
@@ -1662,6 +1665,14 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
     }
     return false;
+  }
+
+  @Override
+  public void onCallPlaced() {
+    if (mIsDialpadShown) {
+      hideDialpadFragment(false, true);
+    }
+    exitSearchUi();
   }
 
   /** Popup menu accessible from the search bar */

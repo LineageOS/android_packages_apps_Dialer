@@ -32,36 +32,34 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     this.maxRows = maxRows;
   }
 
-  // TODO(uabdullah): Use concatenation to avoid klippy warnings
   private static final String CREATE_TABLE_SQL =
-      new StringBuilder()
-          .append("create table if not exists " + AnnotatedCallLog.TABLE + " (")
-          // Common columns.
-          .append(AnnotatedCallLog._ID + " integer primary key, ")
-          .append(AnnotatedCallLog.TIMESTAMP + " integer, ")
-          .append(AnnotatedCallLog.NAME + " string, ")
-          .append(AnnotatedCallLog.NUMBER + " blob, ")
-          .append(AnnotatedCallLog.FORMATTED_NUMBER + " string, ")
-          .append(AnnotatedCallLog.PHOTO_URI + " string, ")
-          .append(AnnotatedCallLog.PHOTO_ID + " integer, ")
-          .append(AnnotatedCallLog.LOOKUP_URI + " string, ")
-          .append(AnnotatedCallLog.DURATION + " integer, ")
-          .append(AnnotatedCallLog.NUMBER_TYPE_LABEL + " string, ")
-          .append(AnnotatedCallLog.IS_READ + " integer, ")
-          .append(AnnotatedCallLog.NEW + " integer, ")
-          .append(AnnotatedCallLog.GEOCODED_LOCATION + " string, ")
-          .append(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME + " string, ")
-          .append(AnnotatedCallLog.PHONE_ACCOUNT_ID + " string, ")
-          .append(AnnotatedCallLog.PHONE_ACCOUNT_LABEL + " string, ")
-          .append(AnnotatedCallLog.PHONE_ACCOUNT_COLOR + " integer, ")
-          .append(AnnotatedCallLog.FEATURES + " integer, ")
-          .append(AnnotatedCallLog.IS_BUSINESS + " integer, ")
-          .append(AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
-          .append(AnnotatedCallLog.TRANSCRIPTION + " integer, ")
-          .append(AnnotatedCallLog.VOICEMAIL_URI + " string, ")
-          .append(AnnotatedCallLog.CALL_TYPE + " integer")
-          .append(");")
-          .toString();
+      "create table if not exists "
+          + AnnotatedCallLog.TABLE
+          + " ("
+          + (AnnotatedCallLog._ID + " integer primary key, ")
+          + (AnnotatedCallLog.TIMESTAMP + " integer, ")
+          + (AnnotatedCallLog.NAME + " string, ")
+          + (AnnotatedCallLog.NUMBER + " blob, ")
+          + (AnnotatedCallLog.FORMATTED_NUMBER + " string, ")
+          + (AnnotatedCallLog.PHOTO_URI + " string, ")
+          + (AnnotatedCallLog.PHOTO_ID + " integer, ")
+          + (AnnotatedCallLog.LOOKUP_URI + " string, ")
+          + (AnnotatedCallLog.DURATION + " integer, ")
+          + (AnnotatedCallLog.NUMBER_TYPE_LABEL + " string, ")
+          + (AnnotatedCallLog.IS_READ + " integer, ")
+          + (AnnotatedCallLog.NEW + " integer, ")
+          + (AnnotatedCallLog.GEOCODED_LOCATION + " string, ")
+          + (AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME + " string, ")
+          + (AnnotatedCallLog.PHONE_ACCOUNT_ID + " string, ")
+          + (AnnotatedCallLog.PHONE_ACCOUNT_LABEL + " string, ")
+          + (AnnotatedCallLog.PHONE_ACCOUNT_COLOR + " integer, ")
+          + (AnnotatedCallLog.FEATURES + " integer, ")
+          + (AnnotatedCallLog.IS_BUSINESS + " integer, ")
+          + (AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
+          + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
+          + (AnnotatedCallLog.VOICEMAIL_URI + " string, ")
+          + (AnnotatedCallLog.CALL_TYPE + " integer")
+          + ");";
 
   /** Deletes all but the first maxRows rows (by timestamp) to keep the table a manageable size. */
   // TODO(zachh): Prevent voicemails from being garbage collected.

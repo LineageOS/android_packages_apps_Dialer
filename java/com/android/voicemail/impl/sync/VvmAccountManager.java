@@ -28,7 +28,7 @@ import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VoicemailStatus;
@@ -162,8 +162,6 @@ public class VvmAccountManager {
   private static PerAccountSharedPreferences getPreferenceForActivationState(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     return new PerAccountSharedPreferences(
-        context,
-        phoneAccountHandle,
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context));
+        context, phoneAccountHandle, StorageComponent.get(context).unencryptedSharedPrefs());
   }
 }

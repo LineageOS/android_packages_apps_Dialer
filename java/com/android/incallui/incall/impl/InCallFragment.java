@@ -23,6 +23,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -174,6 +175,7 @@ public class InCallFragment extends Fragment
               ? getContext().getSystemService(TelephonyManager.class).getVoiceNetworkType()
               : TelephonyManager.NETWORK_TYPE_UNKNOWN;
     }
+    // TODO(a bug): Change to use corresponding phone type used for current call.
     phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();
     View space = view.findViewById(R.id.navigation_bar_background);
     space.getLayoutParams().height = ViewUtil.getNavigationBarHeight(getContext());
@@ -476,7 +478,9 @@ public class InCallFragment extends Fragment
   }
 
   @Override
-  public void updateInCallButtonUiColors() {}
+  public void updateInCallButtonUiColors(@ColorInt int color) {
+    inCallButtonGridFragment.updateButtonColor(color);
+  }
 
   @Override
   public Fragment getInCallButtonUiFragment() {

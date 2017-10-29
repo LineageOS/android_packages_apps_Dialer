@@ -28,7 +28,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.storage.StorageComponent;
 import java.util.Random;
 
 /**
@@ -69,8 +69,7 @@ public class PawSecretCodeListener extends BroadcastReceiver {
     if (!TextUtils.equals(secretCode, host)) {
       return;
     }
-    SharedPreferences preferences =
-        DialerUtils.getDefaultSharedPreferenceForDeviceProtectedStorageContext(context);
+    SharedPreferences preferences = StorageComponent.get(context).unencryptedSharedPrefs();
     boolean wasEnabled = preferences.getBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, false);
     if (wasEnabled) {
       preferences.edit().putBoolean(PAW_ENABLED_WITH_SECRET_CODE_KEY, false).apply();
