@@ -13,12 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!-- A layout representing key "*" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/star"
     style="@style/DialpadKeyButtonStyle">
 
   <LinearLayout
+      android:id="@+id/dialpad_key_layout"
       style="@style/DialpadKeyInternalLayoutStyle"
       android:layout_gravity="right|center_vertical"
       android:baselineAligned="false"
@@ -33,8 +36,10 @@
           style="@style/DialpadKeyStarStyle"/>
     </FrameLayout>
 
+    <!-- A placeholder to make the width the same as other keys. -->
     <View
-        style="@style/DialpadKeyLettersStyle"
-        android:layout_width="@dimen/dialpad_key_text_width"/>
+        android:id="@+id/dialpad_key_horizontal_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>

@@ -20,6 +20,8 @@ import android.app.job.JobWorkItem;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.MainThread;
+import android.support.annotation.VisibleForTesting;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
@@ -62,6 +64,7 @@ public abstract class TranscriptionTask implements Runnable {
   private final JobWorkItem workItem;
   private final TranscriptionClientFactory clientFactory;
   private final Uri voicemailUri;
+  protected final PhoneAccountHandle phoneAccountHandle;
   private final TranscriptionDbHelper databaseHelper;
   protected final TranscriptionConfigProvider configProvider;
   protected ByteString audioData;
@@ -86,6 +89,7 @@ public abstract class TranscriptionTask implements Runnable {
     this.workItem = workItem;
     this.clientFactory = clientFactory;
     this.voicemailUri = TranscriptionService.getVoicemailUri(workItem);
+    this.phoneAccountHandle = TranscriptionService.getPhoneAccountHandle(workItem);
     this.configProvider = configProvider;
     databaseHelper = new TranscriptionDbHelper(context, voicemailUri);
   }
@@ -240,14 +244,24 @@ public abstract class TranscriptionTask implements Runnable {
       return false;
     }
 
-    if (audioData.startsWith(ByteString.copyFromUtf8(AMR_PREFIX))) {
-      encoding = AudioFormat.AMR_NB_8KHZ;
-    } else {
+    encoding = getAudioFormat(audioData);
+    if (encoding == AudioFormat.AUDIO_FORMAT_UNSPECIFIED) {
       VvmLog.i(TAG, "Transcriber.readAndValidateAudioFile, unknown encoding");
-      encoding = AudioFormat.AUDIO_FORMAT_UNSPECIFIED;
       return false;
     }
 
     return true;
+  }
+
+  private static AudioFormat getAudioFormat(ByteString audioData) {
+    return audioData != null && audioData.startsWith(ByteString.copyFromUtf8(AMR_PREFIX))
+        ? AudioFormat.AMR_NB_8KHZ
+        : AudioFormat.AUDIO_FORMAT_UNSPECIFIED;
+  }
+
+  @VisibleForTesting
+  void setAudioDataForTesting(ByteString audioData) {
+    this.audioData = audioData;
+    encoding = getAudioFormat(audioData);
   }
 }

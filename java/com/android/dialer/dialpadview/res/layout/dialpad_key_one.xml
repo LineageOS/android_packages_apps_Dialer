@@ -13,29 +13,40 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!-- A layout representing key "1" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/one"
-  style="@style/DialpadKeyButtonStyle">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/one"
+    style="@style/DialpadKeyButtonStyle">
+
   <LinearLayout
-      android:layout_marginTop="1dp"
+      android:id="@+id/dialpad_key_layout"
       style="@style/DialpadKeyInternalLayoutStyle">
+
     <com.android.dialer.dialpadview.DialpadTextView
-      android:id="@+id/dialpad_key_number"
-      style="@style/DialpadKeyNumberStyle"/>
-    <RelativeLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+        android:id="@+id/dialpad_key_number"
+        style="@style/DialpadKeyNumberStyle"/>
+
+    <LinearLayout
+        android:id="@+id/dialpad_key_icon_or_letters_layout"
+        style="@style/DialpadKeyInternalLayoutStyle">
+
+      <!--
+          A placeholder to make the horizontal center line of the voice mail icon lined up with
+          those of the other buttons in the same row
+      -->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+
       <ImageView
-        android:id="@+id/dialpad_key_voicemail"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dialpad_voicemail_icon_size"
-        android:layout_centerInParent="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/quantum_ic_voicemail_white_24"
-        android:tint="?attr/dialpad_voicemail_tint"/>
-      <!-- Place empty text view so vertical height is same as other dialpad keys. -->
-      <TextView style="@style/DialpadKeyLettersStyle"/>
-    </RelativeLayout>
+          android:id="@+id/dialpad_key_voicemail"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/dialpad_voicemail_icon_size"
+          android:scaleType="fitCenter"
+          android:src="@drawable/quantum_ic_voicemail_white_24"
+          android:tint="?attr/dialpad_voicemail_tint"/>
+    </LinearLayout>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>

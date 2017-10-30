@@ -21,11 +21,13 @@ import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.transcribe.TranscriptionService.JobCallback;
 import com.android.voicemail.impl.transcribe.grpc.GetTranscriptResponseAsync;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionResponseAsync;
+import com.google.internal.communications.voicemailtranscription.v1.DonationPreference;
 import com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscriptionStatus;
@@ -119,11 +121,20 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
   }
 
-  private TranscribeVoicemailAsyncRequest getUploadRequest() {
+  TranscribeVoicemailAsyncRequest getUploadRequest() {
     return TranscribeVoicemailAsyncRequest.newBuilder()
         .setVoicemailData(audioData)
         .setAudioFormat(encoding)
+        .setDonationPreference(
+            isDonationEnabled() ? DonationPreference.DONATE : DonationPreference.DO_NOT_DONATE)
         .build();
+  }
+
+  private boolean isDonationEnabled() {
+    return phoneAccountHandle != null
+        && VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isVoicemailDonationEnabled(context, phoneAccountHandle);
   }
 
   private GetTranscriptRequest getGetTranscriptRequest(TranscriptionResponseAsync uploadResponse) {

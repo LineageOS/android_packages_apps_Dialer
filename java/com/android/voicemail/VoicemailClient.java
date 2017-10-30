@@ -125,6 +125,16 @@ public interface VoicemailClient {
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value);
 
   /**
+   * @return if the voicemail transcription feature is available on the current device. This depends
+   *     on whether the server side flag is turned on for the feature, and if the OS meets the
+   *     requirement for this feature.
+   */
+  boolean isVoicemailTranscriptionAvailable(Context context);
+
+  /** @return if the voicemail donation setting has been enabled by the user. */
+  boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account);
+
+  /**
    * @return an intent that will launch the activity to change the voicemail PIN. The PIN is used
    *     when calling into the mailbox.
    */

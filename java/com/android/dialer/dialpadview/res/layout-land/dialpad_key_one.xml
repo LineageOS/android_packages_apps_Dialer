@@ -13,12 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!-- A layout representing key "1" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/one"
     style="@style/DialpadKeyButtonStyle">
 
   <LinearLayout
+      android:id="@+id/dialpad_key_layout"
       style="@style/DialpadKeyInternalLayoutStyle"
       android:layout_gravity="right|center_vertical"
       android:baselineAligned="false"
@@ -33,10 +36,10 @@
           style="@style/DialpadKeyNumberStyle"/>
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="@dimen/dialpad_key_text_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center">
+    <LinearLayout
+        android:id="@+id/dialpad_key_icon_or_letters_layout"
+        style="@style/DialpadKeyInternalLayoutStyle">
+
       <ImageView
           android:id="@+id/dialpad_key_voicemail"
           android:layout_width="wrap_content"
@@ -44,6 +47,13 @@
           android:scaleType="fitCenter"
           android:src="@drawable/quantum_ic_voicemail_white_24"
           android:tint="@color/dialpad_voicemail_tint"/>
-    </FrameLayout>
+    </LinearLayout>
+
+    <!-- A placeholder to make the width the same as other dialpad keys. -->
+    <View
+        android:id="@+id/dialpad_key_horizontal_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
   </LinearLayout>
+
 </com.android.dialer.dialpadview.DialpadKeyButton>

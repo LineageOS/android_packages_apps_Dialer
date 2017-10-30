@@ -42,6 +42,9 @@
     <string name="voicemail_visual_voicemail_archive_key" translatable="false">
         archive_is_enabled
     </string>
+    <string name="voicemail_visual_voicemail_donation_key" translatable="false">
+        donate_voicemails
+    </string>
   <!-- DO NOT TRANSLATE. Internal key for a voicemail change pin preference. -->
   <string name="voicemail_change_pin_key" translatable="false">voicemail_change_pin_key</string>
 
@@ -52,6 +55,20 @@
   <string name="voicemail_visual_voicemail_auto_archive_switch_title">
     Extra backup and storage
   </string>
+
+  <!-- Title for visual voicemail setting that enables user to donate their voicemails for analysis.
+       [CHAR LIMIT=40] -->
+  <string name="voicemail_visual_voicemail_donation_switch_title">
+    Voicemail transcription analysis
+  </string>
+  <!-- Summary information for visual voicemail donation setting when visual voicemail is not enabled
+       [CHAR LIMIT=NONE] -->
+  <string name="voicemail_donate_preference_summary_disable">Visual voicemail must be enabled to donate voicemails</string>
+  <!-- Summary information for visual voicemail donation setting when visual voicemail is not activated
+       [CHAR LIMIT=NONE] -->
+  <string name="voicemail_donate_preference_summary_not_activated">Visual voicemail is not activated yet, please try again later</string>
+  <!-- Summary information for visual voicemail donation setting [CHAR LIMIT=NONE] -->
+  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription quality</string>
 
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
   <string name="voicemail_set_pin_preference_title">Set PIN</string>
