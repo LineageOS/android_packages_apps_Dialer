@@ -94,7 +94,6 @@ import java.util.Objects;
 public class StatusBarNotifier
     implements InCallPresenter.InCallStateListener,
         EnrichedCallManager.StateChangedListener,
-        AudioModeProvider.AudioModeListener,
         ContactInfoCacheCallback {
 
   private static final int NOTIFICATION_ID = 1;
@@ -136,7 +135,6 @@ public class StatusBarNotifier
             new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
             CallList.getInstance());
     mCurrentNotification = NOTIFICATION_NONE;
-    AudioModeProvider.getInstance().addListener(this);
     Trace.endSection();
   }
 
@@ -1025,11 +1023,6 @@ public class StatusBarNotifier
       return false;
     }
     return call.getCallCapableAccounts().size() > 1;
-  }
-
-  @Override
-  public void onAudioStateChanged(CallAudioState audioState) {
-    updateNotification();
   }
 
   @Override
