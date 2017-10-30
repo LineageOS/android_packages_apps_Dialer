@@ -197,14 +197,15 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    *     and {@link DisambigDialogDismissedListener}.
    * @param isVideoCall {@code true} if the call is a video call, {@code false} otherwise.
    */
-  public static void startInteractionForPhoneCall(
+  public static PhoneNumberInteraction startInteractionForPhoneCall(
       TransactionSafeActivity activity,
       Uri uri,
       boolean isVideoCall,
       CallSpecificAppData callSpecificAppData) {
-    new PhoneNumberInteraction(
-            activity, ContactDisplayUtils.INTERACTION_CALL, isVideoCall, callSpecificAppData)
-        .startInteraction(uri);
+    PhoneNumberInteraction phoneNumberInteraction = new PhoneNumberInteraction(
+        activity, ContactDisplayUtils.INTERACTION_CALL, isVideoCall, callSpecificAppData);
+    phoneNumberInteraction.startInteraction(uri);
+    return phoneNumberInteraction;
   }
 
   private void performAction(String phoneNumber) {
@@ -217,7 +218,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
    *
    * @param uri Contact Uri
    */
-  private void startInteraction(Uri uri) {
+  public void startInteraction(Uri uri) {
     // It's possible for a shortcut to have been created, and then permissions revoked. To avoid a
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
