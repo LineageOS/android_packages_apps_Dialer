@@ -39,6 +39,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import java.text.DecimalFormat;
@@ -50,16 +51,13 @@ public class DialpadView extends LinearLayout {
 
   private static final String TAG = DialpadView.class.getSimpleName();
 
+  // Parameters for animation
   private static final double DELAY_MULTIPLIER = 0.66;
   private static final double DURATION_MULTIPLIER = 0.8;
-  // For animation.
   private static final int KEY_FRAME_DURATION = 33;
-  /** {@code True} if the dialpad is in landscape orientation. */
-  private final boolean mIsLandscape;
-  /** {@code True} if the dialpad is showing in a right-to-left locale. */
-  private final boolean mIsRtl;
 
-  private final int[] mButtonIds =
+  // Resource IDs for buttons (0-9, *, and #)
+  private static final int[] BUTTON_IDS =
       new int[] {
         R.id.zero,
         R.id.one,
@@ -74,6 +72,30 @@ public class DialpadView extends LinearLayout {
         R.id.star,
         R.id.pound
       };
+
+  // Resource IDs for the button-letter mapping
+  private static final int[] LETTER_MAPPING_IDS =
+      new int[] {
+        R.string.dialpad_0_letters,
+        R.string.dialpad_1_letters,
+        R.string.dialpad_2_letters,
+        R.string.dialpad_3_letters,
+        R.string.dialpad_4_letters,
+        R.string.dialpad_5_letters,
+        R.string.dialpad_6_letters,
+        R.string.dialpad_7_letters,
+        R.string.dialpad_8_letters,
+        R.string.dialpad_9_letters,
+        R.string.dialpad_star_letters,
+        R.string.dialpad_pound_letters
+      };
+
+  // Whether the device is in landscape mode
+  private final boolean mIsLandscape;
+
+  // Whether the dialpad is shown in a right-to-left locale
+  private final boolean mIsRtl;
+
   private EditText mDigits;
   private ImageButton mDelete;
   private View mOverflowMenuButton;
@@ -110,6 +132,8 @@ public class DialpadView extends LinearLayout {
 
   @Override
   protected void onFinishInflate() {
+    super.onFinishInflate();
+
     setupKeypad();
     mDigits = (EditText) findViewById(R.id.digits);
     mDelete = (ImageButton) findViewById(R.id.deleteButton);
@@ -127,27 +151,7 @@ public class DialpadView extends LinearLayout {
   }
 
   private void setupKeypad() {
-    final int[] letterIds =
-        new int[] {
-          R.string.dialpad_0_letters,
-          R.string.dialpad_1_letters,
-          R.string.dialpad_2_letters,
-          R.string.dialpad_3_letters,
-          R.string.dialpad_4_letters,
-          R.string.dialpad_5_letters,
-          R.string.dialpad_6_letters,
-          R.string.dialpad_7_letters,
-          R.string.dialpad_8_letters,
-          R.string.dialpad_9_letters,
-          R.string.dialpad_star_letters,
-          R.string.dialpad_pound_letters
-        };
-
     final Resources resources = getContext().getResources();
-
-    DialpadKeyButton dialpadKey;
-    TextView numberView;
-    TextView lettersView;
 
     final Locale currentLocale = resources.getConfiguration().locale;
     final NumberFormat nf;
@@ -159,17 +163,16 @@ public class DialpadView extends LinearLayout {
       nf = DecimalFormat.getInstance(Locale.ENGLISH);
     }
 
-    for (int i = 0; i < mButtonIds.length; i++) {
-      dialpadKey = (DialpadKeyButton) findViewById(mButtonIds[i]);
-      numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
-      lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
+    for (int i = 0; i < BUTTON_IDS.length; i++) {
+      DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
+      TextView numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
 
       final String numberString;
       final CharSequence numberContentDescription;
-      if (mButtonIds[i] == R.id.pound) {
+      if (BUTTON_IDS[i] == R.id.pound) {
         numberString = resources.getString(R.string.dialpad_pound_number);
         numberContentDescription = numberString;
-      } else if (mButtonIds[i] == R.id.star) {
+      } else if (BUTTON_IDS[i] == R.id.star) {
         numberString = resources.getString(R.string.dialpad_star_number);
         numberContentDescription = numberString;
       } else {
@@ -177,7 +180,7 @@ public class DialpadView extends LinearLayout {
         // The content description is used for Talkback key presses. The number is
         // separated by a "," to introduce a slight delay. Convert letters into a verbatim
         // span so that they are read as letters instead of as one word.
-        String letters = resources.getString(letterIds[i]);
+        String letters = resources.getString(LETTER_MAPPING_IDS[i]);
         Spannable spannable =
             Spannable.Factory.getInstance().newSpannable(numberString + "," + letters);
         spannable.setSpan(
@@ -199,8 +202,9 @@ public class DialpadView extends LinearLayout {
       dialpadKey.setContentDescription(numberContentDescription);
       dialpadKey.setBackground(rippleBackground);
 
+      TextView lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
       if (lettersView != null) {
-        lettersView.setText(resources.getString(letterIds[i]));
+        lettersView.setText(resources.getString(LETTER_MAPPING_IDS[i]));
       }
     }
 
@@ -209,6 +213,103 @@ public class DialpadView extends LinearLayout {
 
     final DialpadKeyButton zero = (DialpadKeyButton) findViewById(R.id.zero);
     zero.setLongHoverContentDescription(resources.getText(R.string.description_image_button_plus));
+  }
+
+  @Override
+  protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    super.onLayout(changed, l, t, r, b);
+
+    if (changed) {
+      if (mIsLandscape) {
+        adjustKeyWidths();
+      } else {
+        adjustKeyHeightsInFirstRow();
+      }
+    }
+  }
+
+  /**
+   * Adjust key heights in the first row.
+   *
+   * <p>A voice mail icon is shown under key "1", which makes its height different from other keys
+   * in the first row.
+   *
+   * <p>This method should be called after the sizes of related layouts have been calculated by the
+   * framework.
+   */
+  private void adjustKeyHeightsInFirstRow() {
+    int maxHeight = 0;
+    for (int i = 1; i <= 3; i++) {
+      DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
+      LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
+      maxHeight = Math.max(maxHeight, keyLayout.getHeight());
+    }
+
+    for (int i = 1; i <= 3; i++) {
+      DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
+      LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
+
+      DialpadTextView numberView =
+          (DialpadTextView) keyLayout.findViewById(R.id.dialpad_key_number);
+      MarginLayoutParams numberViewLayoutParams = (MarginLayoutParams) numberView.getLayoutParams();
+
+      LinearLayout iconOrLettersLayout =
+          (LinearLayout) keyLayout.findViewById(R.id.dialpad_key_icon_or_letters_layout);
+      iconOrLettersLayout.setLayoutParams(
+          new LayoutParams(
+              LayoutParams.WRAP_CONTENT /* width */,
+              maxHeight
+                  - numberView.getHeight()
+                  - numberViewLayoutParams.topMargin
+                  - numberViewLayoutParams.bottomMargin /* height */));
+    }
+  }
+
+  /**
+   * Adjust key widths to align keys in each column.
+   *
+   * <p>When the device is in landscape mode, we first find the maximum among a pre-defined width
+   * and the width of each key layout. Then we adjust the width of each layout's horizontal
+   * placeholder to align keys in each column. This is to accommodate the scenario where not all
+   * letters associated with a key can be displayed in one line due to large font size.
+   *
+   * <p>This method should be called after the sizes of related layouts have been calculated by the
+   * framework.
+   */
+  private void adjustKeyWidths() {
+    Assert.checkState(mIsLandscape);
+
+    // A pre-defined minimum width for the letters shown beside a key.
+    final int minimumKeyLettersWidth =
+        getContext().getResources().getDimensionPixelSize(R.dimen.dialpad_key_text_width);
+
+    // The maximum width of the key layouts. A key layout includes both the number and the letters.
+    int maxWidth = 0;
+
+    for (int buttonId : BUTTON_IDS) {
+      DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(buttonId);
+      LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
+      TextView keyLettersView = (TextView) keyLayout.findViewById(R.id.dialpad_key_letters);
+      if (keyLettersView != null && keyLettersView.getWidth() < minimumKeyLettersWidth) {
+        // If the width of the letters is less than the pre-defined minimum, use the pre-defined
+        // minimum to obtain the maximum width.
+        maxWidth =
+            Math.max(
+                maxWidth,
+                keyLayout.getWidth() - keyLettersView.getWidth() + minimumKeyLettersWidth);
+      } else {
+        maxWidth = Math.max(maxWidth, keyLayout.getWidth());
+      }
+    }
+
+    for (int buttonId : BUTTON_IDS) {
+      DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(buttonId);
+      LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
+      View horizontalPlaceholder = keyLayout.findViewById(R.id.dialpad_key_horizontal_placeholder);
+      horizontalPlaceholder.setLayoutParams(
+          new LayoutParams(
+              maxWidth - keyLayout.getWidth() /* width */, LayoutParams.MATCH_PARENT /* height */));
+    }
   }
 
   private Drawable getDrawableCompat(Context context, int id) {
@@ -275,10 +376,10 @@ public class DialpadView extends LinearLayout {
     // numbers appear at their original position (0) momentarily before animating.
     final AnimatorListenerAdapter showListener = new AnimatorListenerAdapter() {};
 
-    for (int i = 0; i < mButtonIds.length; i++) {
-      int delay = (int) (getKeyButtonAnimationDelay(mButtonIds[i]) * DELAY_MULTIPLIER);
-      int duration = (int) (getKeyButtonAnimationDuration(mButtonIds[i]) * DURATION_MULTIPLIER);
-      final DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(mButtonIds[i]);
+    for (int i = 0; i < BUTTON_IDS.length; i++) {
+      int delay = (int) (getKeyButtonAnimationDelay(BUTTON_IDS[i]) * DELAY_MULTIPLIER);
+      int duration = (int) (getKeyButtonAnimationDuration(BUTTON_IDS[i]) * DURATION_MULTIPLIER);
+      final DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
 
       ViewPropertyAnimator animator = dialpadKey.animate();
       if (mIsLandscape) {
