@@ -14,20 +14,27 @@
      limitations under the License.
 -->
 <com.android.dialer.dialpadview.DialpadKeyButton
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/star"
-  style="@style/DialpadKeyButtonStyle">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/star"
+    style="@style/DialpadKeyButtonStyle">
+
   <LinearLayout
-    style="@style/DialpadKeyInternalLayoutStyle"
-    android:layout_gravity="center_vertical|right"
-    android:orientation="horizontal">
-    <com.android.dialer.dialpadview.DialpadTextView
-      android:id="@id/dialpad_key_number"
-      style="@style/DialpadKeyStarStyle"
-      android:layout_width="@dimen/dialpad_key_number_width"
-      android:layout_marginRight="@dimen/dialpad_key_margin_right"/>
+      style="@style/DialpadKeyInternalLayoutStyle"
+      android:layout_gravity="right|center_vertical"
+      android:baselineAligned="false"
+      android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/dialpad_key_number_width"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dialpad_key_margin_right">
+      <com.android.dialer.dialpadview.DialpadTextView
+          android:id="@id/dialpad_key_number"
+          style="@style/DialpadKeyStarStyle"/>
+    </FrameLayout>
+
     <View
-      style="@style/DialpadKeyLettersStyle"
-      android:layout_width="@dimen/dialpad_key_text_width"/>
+        style="@style/DialpadKeyLettersStyle"
+        android:layout_width="@dimen/dialpad_key_text_width"/>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>
