@@ -128,19 +128,23 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   @Override
   public void onDestroy() {
-    getActivity()
-        .getContentResolver()
-        .unregisterContentObserver(mVoicemailErrorManager.getContentObserver());
-    mVoicemailPlaybackPresenter.onDestroy();
-    mVoicemailErrorManager.onDestroy();
-    getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
+    if (isAdded()) {
+      getActivity()
+          .getContentResolver()
+          .unregisterContentObserver(mVoicemailErrorManager.getContentObserver());
+      mVoicemailPlaybackPresenter.onDestroy();
+      mVoicemailErrorManager.onDestroy();
+      getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
+    }
     super.onDestroy();
   }
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
+    if (mVoicemailPlaybackPresenter != null) {
+      mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
+    }
   }
 
   @Override
