@@ -25,8 +25,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.MainThread;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -44,6 +46,7 @@ import java.util.concurrent.Executors;
  */
 public class TranscriptionService extends JobService {
   @VisibleForTesting static final String EXTRA_VOICEMAIL_URI = "extra_voicemail_uri";
+  @VisibleForTesting static final String EXTRA_ACCOUNT_HANDLE = "extra_account_handle";
 
   private ExecutorService executorService;
   private JobParameters jobParameters;
@@ -58,10 +61,14 @@ public class TranscriptionService extends JobService {
   }
 
   // Schedule a task to transcribe the indicated voicemail, return true if transcription task was
-  // scheduled.
+  // scheduled. If the PhoneAccountHandle is null then the voicemail will not be considered for
+  // donation.
   @MainThread
   public static boolean scheduleNewVoicemailTranscriptionJob(
-      Context context, Uri voicemailUri, boolean highPriority) {
+      Context context,
+      Uri voicemailUri,
+      @Nullable PhoneAccountHandle account,
+      boolean highPriority) {
     Assert.isMainThread();
     if (BuildCompat.isAtLeastO()) {
       LogUtil.i(
@@ -80,7 +87,7 @@ public class TranscriptionService extends JobService {
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
       }
       JobScheduler scheduler = context.getSystemService(JobScheduler.class);
-      JobWorkItem workItem = makeWorkItem(voicemailUri);
+      JobWorkItem workItem = makeWorkItem(voicemailUri, account);
       return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
     } else {
       LogUtil.i("TranscriptionService.scheduleNewVoicemailTranscriptionJob", "not supported");
@@ -193,6 +200,10 @@ public class TranscriptionService extends JobService {
     return workItem.getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
   }
 
+  static PhoneAccountHandle getPhoneAccountHandle(JobWorkItem workItem) {
+    return workItem.getIntent().getParcelableExtra(EXTRA_ACCOUNT_HANDLE);
+  }
+
   private ExecutorService getExecutorService() {
     if (executorService == null) {
       // The common use case is transcribing a single voicemail so just use a single thread executor
@@ -219,9 +230,12 @@ public class TranscriptionService extends JobService {
     }
   }
 
-  private static JobWorkItem makeWorkItem(Uri voicemailUri) {
+  private static JobWorkItem makeWorkItem(Uri voicemailUri, PhoneAccountHandle account) {
     Intent intent = new Intent();
     intent.putExtra(EXTRA_VOICEMAIL_URI, voicemailUri);
+    if (account != null) {
+      intent.putExtra(EXTRA_ACCOUNT_HANDLE, account);
+    }
     return new JobWorkItem(intent);
   }
 
