@@ -65,7 +65,7 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
   private ContactsFragment contactsFragment;
   private CallLogFragment voicemailFragment;
 
-  public boolean hasActiveVoicemailProvider;
+  private boolean hasActiveVoicemailProvider;
 
   public DialtactsPagerAdapter(
       Context context, FragmentManager fm, String[] tabTitles, boolean hasVoicemailProvider) {
