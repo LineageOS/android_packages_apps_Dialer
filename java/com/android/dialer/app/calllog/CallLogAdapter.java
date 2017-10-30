@@ -610,29 +610,31 @@ public class CallLogAdapter extends GroupingListAdapter
       // Restoring multi selected entries
       ArrayList<String> listOfSelectedItems =
           savedInstanceState.getStringArrayList(KEY_ACTION_MODE);
-      LogUtil.i(
-          "CallLogAdapter.onRestoreInstanceState",
-          "restored selectedItemsList:%d",
-          listOfSelectedItems.size());
-
-      if (!listOfSelectedItems.isEmpty()) {
-        for (int i = 0; i < listOfSelectedItems.size(); i++) {
-          String voicemailUri = listOfSelectedItems.get(i);
-          int id = getVoicemailId(voicemailUri);
-          LogUtil.i(
-              "CallLogAdapter.onRestoreInstanceState",
-              "restoring selected index %d, id=%d, uri=%s ",
-              i,
-              id,
-              voicemailUri);
-          selectedItems.put(id, voicemailUri);
-        }
-
+      if (listOfSelectedItems != null) {
         LogUtil.i(
-            "CallLogAdapter.onRestoreInstance",
-            "restored selectedItems %s",
-            selectedItems.toString());
-        updateActionBar();
+            "CallLogAdapter.onRestoreInstanceState",
+            "restored selectedItemsList:%d",
+            listOfSelectedItems.size());
+
+        if (!listOfSelectedItems.isEmpty()) {
+          for (int i = 0; i < listOfSelectedItems.size(); i++) {
+            String voicemailUri = listOfSelectedItems.get(i);
+            int id = getVoicemailId(voicemailUri);
+            LogUtil.i(
+                "CallLogAdapter.onRestoreInstanceState",
+                "restoring selected index %d, id=%d, uri=%s ",
+                i,
+                id,
+                voicemailUri);
+            selectedItems.put(id, voicemailUri);
+          }
+
+          LogUtil.i(
+              "CallLogAdapter.onRestoreInstance",
+              "restored selectedItems %s",
+              selectedItems.toString());
+          updateActionBar();
+        }
       }
     }
   }
