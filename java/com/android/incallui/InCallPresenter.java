@@ -28,6 +28,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.Call.Details;
+import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -55,6 +56,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TouchPointManager;
 import com.android.incallui.InCallOrientationEventListener.ScreenOrientation;
 import com.android.incallui.answerproximitysensor.PseudoScreenState;
+import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
@@ -83,7 +85,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * presenters that want to listen in on the in-call state changes. TODO: This class has become more
  * of a state machine at this point. Consider renaming.
  */
-public class InCallPresenter implements CallList.Listener {
+public class InCallPresenter implements CallList.Listener, AudioModeProvider.AudioModeListener {
   private static final String PIXEL2017_SYSTEM_FEATURE =
       "com.google.android.feature.PIXEL_2017_EXPERIENCE";
   private static final String EXTRA_FIRST_TIME_SHOWN =
@@ -387,6 +389,8 @@ public class InCallPresenter implements CallList.Listener {
         .getSystemService(TelephonyManager.class)
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
+    AudioModeProvider.getInstance().addListener(this);
+
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
     Trace.endSection();
   }
@@ -410,6 +414,7 @@ public class InCallPresenter implements CallList.Listener {
 
     attemptCleanup();
     VideoPauseController.getInstance().tearDown();
+    AudioModeProvider.getInstance().removeListener(this);
   }
 
   private void attemptFinishActivity() {
@@ -1717,6 +1722,13 @@ public class InCallPresenter implements CallList.Listener {
     if (mLocalVideoSurfaceTexture != null) {
       mLocalVideoSurfaceTexture.setDoneWithSurface();
       mLocalVideoSurfaceTexture = null;
+    }
+  }
+
+  @Override
+  public void onAudioStateChanged(CallAudioState audioState) {
+    if (mStatusBarNotifier != null) {
+      mStatusBarNotifier.updateNotification();
     }
   }
 
