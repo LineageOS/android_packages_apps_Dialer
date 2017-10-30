@@ -53,6 +53,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   private Preference voicemailNotificationPreference;
   private SwitchPreference voicemailVisualVoicemail;
   private SwitchPreference autoArchiveSwitchPreference;
+  private SwitchPreference donateVoicemailSwitchPreference;
   private Preference voicemailChangePinPreference;
   private PreferenceScreen advancedSettings;
 
@@ -102,10 +103,20 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         (SwitchPreference)
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
 
+    donateVoicemailSwitchPreference =
+        (SwitchPreference)
+            findPreference(getString(R.string.voicemail_visual_voicemail_donation_key));
+
     if (!VoicemailComponent.get(getContext())
         .getVoicemailClient()
         .isVoicemailArchiveAvailable(getContext())) {
       getPreferenceScreen().removePreference(autoArchiveSwitchPreference);
+    }
+
+    if (!VoicemailComponent.get(getContext())
+        .getVoicemailClient()
+        .isVoicemailDonationEnabled(getContext(), phoneAccountHandle)) {
+      getPreferenceScreen().removePreference(donateVoicemailSwitchPreference);
     }
 
     voicemailChangePinPreference = findPreference(getString(R.string.voicemail_change_pin_key));
@@ -141,9 +152,15 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       autoArchiveSwitchPreference.setOnPreferenceChangeListener(this);
       autoArchiveSwitchPreference.setChecked(
           VisualVoicemailSettingsUtil.isArchiveEnabled(getContext(), phoneAccountHandle));
+
+      donateVoicemailSwitchPreference.setOnPreferenceChangeListener(this);
+      donateVoicemailSwitchPreference.setChecked(
+          VisualVoicemailSettingsUtil.isVoicemailDonationEnabled(getContext(), phoneAccountHandle));
+      updateDonateVoicemail();
     } else {
       prefSet.removePreference(voicemailVisualVoicemail);
       prefSet.removePreference(autoArchiveSwitchPreference);
+      prefSet.removePreference(donateVoicemailSwitchPreference);
       prefSet.removePreference(voicemailChangePinPreference);
     }
 
@@ -192,9 +209,14 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       }
 
       updateChangePin();
+      updateDonateVoicemail();
     } else if (preference.getKey().equals(autoArchiveSwitchPreference.getKey())) {
       logArchiveToggle((boolean) objValue);
       VisualVoicemailSettingsUtil.setArchiveEnabled(
+          getContext(), phoneAccountHandle, (boolean) objValue);
+    } else if (preference.getKey().equals(donateVoicemailSwitchPreference.getKey())) {
+      logArchiveToggle((boolean) objValue);
+      VisualVoicemailSettingsUtil.setVoicemailDonationEnabled(
           getContext(), phoneAccountHandle, (boolean) objValue);
     }
 
@@ -217,6 +239,21 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     }
   }
 
+  private void updateDonateVoicemail() {
+    if (!VisualVoicemailSettingsUtil.isEnabled(getContext(), phoneAccountHandle)) {
+      donateVoicemailSwitchPreference.setSummary(
+          R.string.voicemail_donate_preference_summary_disable);
+      donateVoicemailSwitchPreference.setEnabled(false);
+    } else if (!VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle)) {
+      donateVoicemailSwitchPreference.setSummary(
+          R.string.voicemail_donate_preference_summary_not_activated);
+      donateVoicemailSwitchPreference.setEnabled(false);
+    } else {
+      donateVoicemailSwitchPreference.setSummary(R.string.voicemail_donate_preference_summary_info);
+      donateVoicemailSwitchPreference.setEnabled(true);
+    }
+  }
+
   private void logArchiveToggle(boolean userTurnedOn) {
     if (userTurnedOn) {
       Logger.get(getContext())
@@ -231,6 +268,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   public void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated) {
     if (this.phoneAccountHandle.equals(phoneAccountHandle)) {
       updateChangePin();
+      updateDonateVoicemail();
     }
   }
 

@@ -29,6 +29,12 @@
     android:key="@string/voicemail_visual_voicemail_archive_key"
     android:dependency="@string/voicemail_visual_voicemail_key"
     android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
+
+  <SwitchPreference
+    android:key="@string/voicemail_visual_voicemail_donation_key"
+    android:dependency="@string/voicemail_visual_voicemail_key"
+    android:title="@string/voicemail_visual_voicemail_donation_switch_title"/>"
+
   <Preference
     android:key="@string/voicemail_change_pin_key"
     android:title="@string/voicemail_change_pin_preference_title"/>

@@ -37,6 +37,7 @@ import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.transcribe.TranscriptionBackfillService;
+import com.android.voicemail.impl.transcribe.TranscriptionConfigProvider;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -117,6 +118,30 @@ public class VoicemailClientImpl implements VoicemailClient {
   public void setVoicemailArchiveEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {
     VisualVoicemailSettingsUtil.setArchiveEnabled(context, phoneAccountHandle, value);
+  }
+
+  @Override
+  public boolean isVoicemailTranscriptionAvailable(Context context) {
+    if (!BuildCompat.isAtLeastO()) {
+      LogUtil.i(
+          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "not running on O or later");
+      return false;
+    }
+
+    TranscriptionConfigProvider provider = new TranscriptionConfigProvider(context);
+    if (!provider.isVoicemailTranscriptionEnabled()) {
+      LogUtil.i(
+          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "feature disabled by config");
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
+    return isVoicemailTranscriptionAvailable(context)
+        && VisualVoicemailSettingsUtil.isVoicemailDonationEnabled(context, account);
   }
 
   @Override
