@@ -27,7 +27,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -94,7 +94,9 @@ public class ContactsAsyncHelper {
     args.displayPhotoUri = displayPhotoUri;
     args.listener = listener;
 
-    DialerExecutors.createNonUiTaskBuilder(context, new Worker())
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new Worker())
         .onSuccess(
             output -> {
               if (args.listener != null) {

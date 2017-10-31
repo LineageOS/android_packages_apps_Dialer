@@ -77,7 +77,7 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.UiAction;
@@ -343,8 +343,9 @@ public class DialpadFragment extends Fragment
     }
 
     initPhoneNumberFormattingTextWatcherExecutor =
-        DialerExecutors.createUiTaskBuilder(
-                getContext(),
+        DialerExecutorComponent.get(getContext())
+            .dialerExecutorFactory()
+            .createUiTaskBuilder(
                 getFragmentManager(),
                 "DialpadFragment.initPhoneNumberFormattingTextWatcher",
                 new InitPhoneNumberFormattingTextWatcherWorker())

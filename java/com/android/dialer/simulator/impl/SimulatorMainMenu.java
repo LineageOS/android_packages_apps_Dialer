@@ -23,7 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.ActionProvider;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.databasepopulator.CallLogPopulator;
 import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
@@ -48,13 +48,17 @@ final class SimulatorMainMenu {
   }
 
   private static void populateDatabase(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(context, new PopulateDatabaseWorker())
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new PopulateDatabaseWorker())
         .build()
         .executeSerial(context);
   }
 
   private static void cleanDatabase(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(context, new CleanDatabaseWorker())
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new CleanDatabaseWorker())
         .build()
         .executeSerial(context);
   }
@@ -65,7 +69,9 @@ final class SimulatorMainMenu {
   }
 
   private static void sharePersistentLog(@NonNull Context context) {
-    DialerExecutors.createNonUiTaskBuilder(context, new ShareLogWorker())
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new ShareLogWorker())
         .onSuccess(
             (String log) -> {
               Intent intent = new Intent(Intent.ACTION_SEND);

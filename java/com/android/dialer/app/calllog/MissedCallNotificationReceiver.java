@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.util.Pair;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
@@ -30,7 +30,7 @@ import me.leolin.shortcutbadger.ShortcutBadger;
  */
 public class MissedCallNotificationReceiver extends BroadcastReceiver {
 
-  //TODO: Use compat class for these methods.
+  // TODO: Use compat class for these methods.
   public static final String ACTION_SHOW_MISSED_CALLS_NOTIFICATION =
       "android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION";
 
@@ -53,7 +53,9 @@ public class MissedCallNotificationReceiver extends BroadcastReceiver {
 
     PendingResult pendingResult = goAsync();
 
-    DialerExecutors.createNonUiTaskBuilder(context, MissedCallNotifier.getInstance(context))
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(MissedCallNotifier.getInstance(context))
         .onSuccess(
             output -> {
               LogUtil.i(
