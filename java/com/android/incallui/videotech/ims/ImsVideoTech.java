@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.VideoProfile;
@@ -38,7 +39,7 @@ public class ImsVideoTech implements VideoTech {
   private final LoggingBindings logger;
   private final Call call;
   private final VideoTechListener listener;
-  private ImsVideoCallCallback callback;
+  @VisibleForTesting ImsVideoCallCallback callback;
   private @SessionModificationState int sessionModificationState =
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;
@@ -188,7 +189,6 @@ public class ImsVideoTech implements VideoTech {
     Assert.checkArgument(requestedVideoState != VideoProfile.STATE_AUDIO_ONLY);
     LogUtil.i("ImsVideoTech.acceptUpgradeRequest", "videoState: " + requestedVideoState);
     call.getVideoCall().sendSessionModifyResponse(new VideoProfile(requestedVideoState));
-    setSessionModificationState(SessionModificationState.NO_REQUEST);
     // Telecom manages audio route for us
     listener.onUpgradedToVideo(false /* switchToSpeaker */);
     logger.logImpression(DialerImpression.Type.IMS_VIDEO_REQUEST_ACCEPTED);
@@ -198,7 +198,6 @@ public class ImsVideoTech implements VideoTech {
   public void acceptVideoRequestAsAudio() {
     LogUtil.enterBlock("ImsVideoTech.acceptVideoRequestAsAudio");
     call.getVideoCall().sendSessionModifyResponse(new VideoProfile(VideoProfile.STATE_AUDIO_ONLY));
-    setSessionModificationState(SessionModificationState.NO_REQUEST);
     logger.logImpression(DialerImpression.Type.IMS_VIDEO_REQUEST_ACCEPTED_AS_AUDIO);
   }
 
@@ -207,7 +206,6 @@ public class ImsVideoTech implements VideoTech {
     LogUtil.enterBlock("ImsVideoTech.declineUpgradeRequest");
     call.getVideoCall()
         .sendSessionModifyResponse(new VideoProfile(call.getDetails().getVideoState()));
-    setSessionModificationState(SessionModificationState.NO_REQUEST);
     logger.logImpression(DialerImpression.Type.IMS_VIDEO_REQUEST_DECLINED);
   }
 

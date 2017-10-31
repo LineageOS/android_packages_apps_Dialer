@@ -57,6 +57,18 @@ public class VisualVoicemailSettingsUtil {
         .apply();
   }
 
+  public static void setVoicemailDonationEnabled(
+      Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
+    Assert.checkArgument(
+        VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isVoicemailTranscriptionAvailable(context));
+    new VisualVoicemailPreferences(context, phoneAccount)
+        .edit()
+        .putBoolean(context.getString(R.string.voicemail_visual_voicemail_donation_key), isEnabled)
+        .apply();
+  }
+
   public static boolean isEnabled(Context context, PhoneAccountHandle phoneAccount) {
     if (phoneAccount == null) {
       return false;
@@ -77,6 +89,15 @@ public class VisualVoicemailSettingsUtil {
     VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
     return prefs.getBoolean(
         context.getString(R.string.voicemail_visual_voicemail_archive_key), false);
+  }
+
+  public static boolean isVoicemailDonationEnabled(
+      Context context, PhoneAccountHandle phoneAccount) {
+    Assert.isNotNull(phoneAccount);
+
+    VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
+    return prefs.getBoolean(
+        context.getString(R.string.voicemail_visual_voicemail_donation_key), false);
   }
 
   /**
