@@ -24,6 +24,7 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -175,6 +176,7 @@ public class TopRow {
       }
 
       if (state.isAssistedDialed) {
+        LogUtil.i("TopRow.getLabelForDialing", "using assisted dialing label.");
         String countryCode =
             String.valueOf(state.assistedDialingExtras.transformedNumberCountryCallingCode());
         return context.getString(
