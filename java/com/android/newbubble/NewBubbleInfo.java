@@ -35,6 +35,9 @@ public abstract class NewBubbleInfo {
 
   public abstract Icon getPrimaryIcon();
 
+  @Nullable
+  public abstract Drawable getAvatar();
+
   @Px
   public abstract int getStartingYPosition();
 
@@ -60,6 +63,8 @@ public abstract class NewBubbleInfo {
     public abstract Builder setPrimaryColor(@ColorInt int primaryColor);
 
     public abstract Builder setPrimaryIcon(@NonNull Icon primaryIcon);
+
+    public abstract Builder setAvatar(@Nullable Drawable avatar);
 
     public abstract Builder setStartingYPosition(@Px int startingYPosition);
 

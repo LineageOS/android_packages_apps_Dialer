@@ -36,14 +36,28 @@
         android:background="@drawable/bubble_ripple_circle"
         android:measureAllChildren="false"
         tools:backgroundTint="#FF0000AA">
-      <ImageView
-          android:id="@+id/bubble_icon_primary"
-          android:layout_width="@dimen/bubble_size"
-          android:layout_height="@dimen/bubble_size"
-          android:padding="@dimen/bubble_icon_padding"
-          android:tint="@android:color/white"
-          android:tintMode="src_in"
-          tools:src="@android:drawable/ic_btn_speak_now"/>
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bubble_icon_avatar"
+            android:layout_width="@dimen/bubble_size"
+            android:layout_height="@dimen/bubble_size"
+            tools:src="@android:drawable/ic_btn_speak_now"/>
+        <ImageView
+            android:id="@+id/bubble_icon_primary"
+            android:layout_width="@dimen/bubble_small_icon_size"
+            android:layout_height="@dimen/bubble_small_icon_size"
+            android:layout_alignBottom="@id/bubble_icon_avatar"
+            android:layout_alignEnd="@id/bubble_icon_avatar"
+            android:padding="@dimen/bubble_small_icon_padding"
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            android:background="@drawable/bubble_ripple_circle_small"
+            android:measureAllChildren="false"
+            tools:backgroundTint="#FF0000AA"
+            tools:src="@android:drawable/ic_btn_speak_now"/>
+      </RelativeLayout>
       <TextView
           android:id="@+id/bubble_text"
           android:layout_width="wrap_content"
