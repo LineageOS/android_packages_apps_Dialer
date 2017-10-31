@@ -39,7 +39,7 @@
         android:id="@+id/dialpad_key_icon_or_letters_layout"
         style="@style/DialpadKeyInternalLayoutStyle">
 
-      <TextView
+      <com.android.dialer.dialpadview.DialpadTextView
           android:id="@+id/dialpad_key_letters"
           style="@style/DialpadKeyLettersStyle"/>
     </LinearLayout>

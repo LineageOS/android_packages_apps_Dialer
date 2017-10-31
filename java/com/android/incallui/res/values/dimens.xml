@@ -20,8 +20,6 @@
        from dialer. Note, these are the default sizes for small devices. Larger
        screen sizes apply the values in values-sw360dp/dimens.xml. -->
   <dimen name="incall_dialpad_key_number_margin_bottom">1dp</dimen>
-  <!-- Zero key should have less space between self and text because "+" is smaller -->
-  <dimen name="incall_dialpad_zero_key_number_margin_bottom">0dp</dimen>
   <dimen name="incall_dialpad_digits_adjustable_text_size">20sp</dimen>
   <dimen name="incall_dialpad_digits_adjustable_height">50dp</dimen>
   <dimen name="incall_dialpad_key_numbers_size">36dp</dimen>
