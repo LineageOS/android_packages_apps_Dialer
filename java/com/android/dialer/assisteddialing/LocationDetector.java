@@ -19,7 +19,9 @@ package com.android.dialer.assisteddialing;
 import android.annotation.TargetApi;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import java.util.Locale;
 import java.util.Optional;
@@ -32,12 +34,16 @@ import java.util.Optional;
 final class LocationDetector {
 
   private final TelephonyManager telephonyManager;
+  private final String userProvidedHomeCountry;
 
-  public LocationDetector(@NonNull TelephonyManager telephonyManager) {
+  public LocationDetector(
+      @NonNull TelephonyManager telephonyManager, @Nullable String userProvidedHomeCountry) {
     if (telephonyManager == null) {
       throw new NullPointerException("Provided TelephonyManager was null");
     }
+
     this.telephonyManager = telephonyManager;
+    this.userProvidedHomeCountry = userProvidedHomeCountry;
   }
 
   // TODO(erfanian):  confirm this is based on ISO 3166-1 alpha-2. libphonenumber expects Unicode's
@@ -50,8 +56,16 @@ final class LocationDetector {
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
   public Optional<String> getUpperCaseUserHomeCountry() {
+
+    if (!TextUtils.isEmpty(userProvidedHomeCountry)) {
+      LogUtil.i(
+          "LocationDetector.getUpperCaseUserRoamingCountry", "user provided home country code");
+      return Optional.of(userProvidedHomeCountry.toUpperCase(Locale.US));
+    }
+
     String simCountryIso = telephonyManager.getSimCountryIso();
     if (simCountryIso != null) {
+      LogUtil.i("LocationDetector.getUpperCaseUserRoamingCountry", "using sim country iso");
       return Optional.of(telephonyManager.getSimCountryIso().toUpperCase(Locale.US));
     }
     LogUtil.i("LocationDetector.getUpperCaseUserHomeCountry", "user home country was null");
