@@ -98,7 +98,8 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTypeIcon.clear();
     callTypeIcon.add(callType);
     callTypeIcon.setShowVideo(isVideoCall);
-    callTypeIcon.setShowHd(MotorolaUtils.shouldShowHdIconInCallLog(context, entry.getFeatures()));
+    callTypeIcon.setShowHd(
+        (entry.getFeatures() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
 
