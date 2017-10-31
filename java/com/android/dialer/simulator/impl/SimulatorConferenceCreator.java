@@ -64,6 +64,13 @@ final class SimulatorConferenceCreator
     String callerId = String.format(Locale.US, "+1-650-234%04d", callCount);
     Bundle extras = new Bundle();
     extras.putInt(EXTRA_CALL_COUNT, callCount - 1);
+    switch (conferenceType) {
+      case Simulator.CONFERENCE_TYPE_VOLTE:
+        extras.putBoolean("ISVOLTE", true);
+        break;
+      default:
+        break;
+    }
     connectionTags.add(
         SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */, extras));
   }
@@ -78,16 +85,11 @@ final class SimulatorConferenceCreator
     LogUtil.i("SimulatorConferenceCreator.onNewOutgoingConnection", "connection created");
     connection.addListener(this);
 
-    // Telecom will force the connection to switch to DIALING when we return it. Wait until after
-    // we're returned it before changing call state.
-    ThreadUtil.postOnUiThread(() -> connection.setActive());
-
     // Once the connection is active, go ahead and conference it and add the next call.
     ThreadUtil.postDelayedOnUiThread(
         () -> {
           SimulatorConference conference = findCurrentConference();
           if (conference == null) {
-            Assert.checkArgument(conferenceType == Simulator.CONFERENCE_TYPE_GSM);
             conference =
                 SimulatorConference.newGsmConference(
                     SimulatorSimCallManager.getSystemPhoneAccountHandle(context));
@@ -95,6 +97,7 @@ final class SimulatorConferenceCreator
             SimulatorConnectionService.getInstance().addConference(conference);
           }
           updateConferenceableConnections();
+          connection.setActive();
           conference.addConnection(connection);
           addNextCall(getCallCount(connection));
         },
