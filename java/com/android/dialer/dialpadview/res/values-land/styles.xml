@@ -50,7 +50,7 @@
 
   <style name="DialpadKeyLettersStyle">
     <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
-    <item name="android:textSize">@dimen/dialpad_key_letters_size</item>
+    <item name="android:textSize">?attr/dialpad_key_letters_size_for_single_alphabet</item>
     <item name="android:fontFamily">sans-serif-regular</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
