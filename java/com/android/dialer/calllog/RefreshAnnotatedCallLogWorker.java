@@ -22,7 +22,6 @@ import android.content.OperationApplicationException;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
@@ -32,6 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.storage.Unencrypted;
 import javax.inject.Inject;
 
 /**
@@ -43,11 +43,16 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
 
   private final Context appContext;
   private final DataSources dataSources;
+  private final SharedPreferences sharedPreferences;
 
   @Inject
-  RefreshAnnotatedCallLogWorker(@ApplicationContext Context appContext, DataSources dataSources) {
+  RefreshAnnotatedCallLogWorker(
+      @ApplicationContext Context appContext,
+      DataSources dataSources,
+      @Unencrypted SharedPreferences sharedPreferences) {
     this.appContext = appContext;
     this.dataSources = dataSources;
+    this.sharedPreferences = sharedPreferences;
   }
 
   @Override
@@ -71,7 +76,6 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
 
     long startTime = System.currentTimeMillis();
 
-    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     // Default to true. If the pref doesn't exist, the annotated call log hasn't been created and
     // we just skip isDirty checks and force a rebuild.
     boolean forceRebuildPrefValue =
@@ -171,8 +175,6 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
           dataSourceName,
           System.currentTimeMillis() - startTime);
     }
-
-    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     sharedPreferences.edit().putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false).apply();
   }
 

@@ -24,8 +24,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * This is a custom text view intended only for rendering the numerals (and star and pound) on the
- * dialpad. TextView has built in top/bottom padding to help account for ascenders/descenders.
+ * This is a custom text view intended for rendering text on the dialpad. TextView has built-in
+ * top/bottom padding to help account for ascenders/descenders.
  *
  * <p>Since vertical space is at a premium on the dialpad, particularly if the font size is scaled
  * to a larger default, for the dialpad we use this class to more precisely render characters

@@ -17,10 +17,22 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="@string/assisted_dialing_setting_toggle_key"
-        android:title="@string/assisted_dialing_setting_title"
-        android:summary="@string/assisted_dialing_setting_summary" />
+  <SwitchPreference
+      android:defaultValue="true"
+      android:key="@string/assisted_dialing_setting_toggle_key"
+      android:summary="@string/assisted_dialing_setting_summary"
+      android:title="@string/assisted_dialing_setting_title"/>
+
+  <PreferenceCategory
+      android:title="@string/assisted_dialing_setting_cc_category_title">
+    <ListPreference
+        android:dependency="@string/assisted_dialing_setting_toggle_key"
+        android:defaultValue=""
+        android:entries="@array/assisted_dialing_cc_entries"
+        android:entryValues="@array/assisted_dialing_cc_values"
+        android:key="@string/assisted_dialing_setting_cc_key"
+        android:summary="@string/assisted_dialing_setting_cc_default_summary"
+        android:title="@string/assisted_dialing_setting_cc_title"/>
+  </PreferenceCategory>
 
 </PreferenceScreen>

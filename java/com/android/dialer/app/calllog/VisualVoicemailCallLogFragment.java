@@ -38,7 +38,7 @@ import com.android.dialer.app.voicemail.error.VoicemailStatus;
 import com.android.dialer.app.voicemail.error.VoicemailStatusWorker;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PermissionsUtil;
@@ -79,8 +79,9 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     super.onActivityCreated(savedInstanceState);
 
     mPreSyncVoicemailStatusCheckExecutor =
-        DialerExecutors.createUiTaskBuilder(
-                getContext(),
+        DialerExecutorComponent.get(getContext())
+            .dialerExecutorFactory()
+            .createUiTaskBuilder(
                 getActivity().getFragmentManager(),
                 "fetchVoicemailStatus",
                 new VoicemailStatusWorker())

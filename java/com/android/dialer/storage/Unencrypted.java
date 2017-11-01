@@ -17,6 +17,6 @@ package com.android.dialer.storage;
 
 import javax.inject.Qualifier;
 
-/** Annotation for retrieving device protected storage objects. */
+/** Annotation for retrieving unencrypted storage objects. */
 @Qualifier
-public @interface DeviceProtected {}
+public @interface Unencrypted {}

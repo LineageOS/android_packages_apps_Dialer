@@ -24,7 +24,7 @@ import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,9 @@ public final class ShortcutRefresher {
       return;
     }
 
-    DialerExecutors.createNonUiTaskBuilder(context, new RefreshWorker(context))
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new RefreshWorker(context))
         .build()
         .executeSerial(new ArrayList<>(contacts));
   }

@@ -42,7 +42,11 @@ final class SimulatorVoiceCall
         .addItem("Emergency call", () -> new SimulatorVoiceCall(context).addNewEmergencyCall())
         .addItem(
             "GSM conference",
-            () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5));
+            () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5))
+        .addItem(
+            "VoLTE conference",
+            () ->
+                new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_VOLTE).start(5));
   }
 
   private SimulatorVoiceCall(@NonNull Context context) {

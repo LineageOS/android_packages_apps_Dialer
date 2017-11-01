@@ -28,7 +28,11 @@ public abstract class StorageComponent {
   /**
    * Returns unencrypted default shared preferences. This method should not be used for private
    * data.
+   *
+   * <p>These shared prefs are available even when the device is in FBE mode and are generally the
+   * ones that should be used, because Dialer needs to function while in FBE mode.
    */
+  @Unencrypted
   public abstract SharedPreferences unencryptedSharedPrefs();
 
   public static StorageComponent get(Context context) {

@@ -58,7 +58,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
@@ -223,8 +223,9 @@ public class CallComposerActivity extends AppCompatActivity
     setMediaIconSelected(currentIndex);
 
     copyAndResizeExecutor =
-        DialerExecutors.createUiTaskBuilder(
-                getApplicationContext(),
+        DialerExecutorComponent.get(getApplicationContext())
+            .dialerExecutorFactory()
+            .createUiTaskBuilder(
                 getFragmentManager(),
                 "copyAndResizeImageToSend",
                 new CopyAndResizeImageWorker(this.getApplicationContext()))

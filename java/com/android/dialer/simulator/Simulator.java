@@ -35,10 +35,12 @@ public interface Simulator {
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     CONFERENCE_TYPE_GSM,
+    CONFERENCE_TYPE_VOLTE,
   })
   @interface ConferenceType {}
 
   static final int CONFERENCE_TYPE_GSM = 1;
+  static final int CONFERENCE_TYPE_VOLTE = 2;
 
   /** Information about a connection event. */
   public static class Event {
