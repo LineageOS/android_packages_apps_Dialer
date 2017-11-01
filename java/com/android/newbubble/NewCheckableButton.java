@@ -17,6 +17,7 @@
 package com.android.newbubble;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
@@ -68,10 +69,12 @@ public class NewCheckableButton extends AppCompatButton implements Checkable {
   public void setChecked(boolean checked) {
     if (mChecked != checked) {
       mChecked = checked;
-      setTextColor(
+      int newColor =
           checked
-              ? getContext().getColor(R.color.bubble_button_text_color_blue)
-              : getContext().getColor(R.color.bubble_button_text_color_black));
+              ? getContext().getColor(R.color.bubble_button_color_blue)
+              : getContext().getColor(R.color.bubble_button_color_grey);
+      setTextColor(newColor);
+      setCompoundDrawableTintList(ColorStateList.valueOf(newColor));
     }
   }
 

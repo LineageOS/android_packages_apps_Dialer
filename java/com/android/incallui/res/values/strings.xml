@@ -202,4 +202,7 @@
   </string>
   <string name="video_call_lte_to_wifi_failed_do_not_show">Do not show this again</string>
 
+  <!-- Text for bubble return-to-call button -->
+  <string name="bubble_return_to_call">Back to call</string>
+
 </resources>
