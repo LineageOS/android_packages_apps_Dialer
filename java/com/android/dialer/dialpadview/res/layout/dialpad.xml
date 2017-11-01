@@ -16,84 +16,86 @@
 
 <!-- Dialpad in the Phone app. -->
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/dialpad"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:clipChildren="false"
-  android:orientation="vertical">
-  <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialpad"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:orientation="vertical">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="horizontal">
     <Space style="@style/DialpadSpaceStyle"/>
     <include layout="@layout/dialpad_key_one"/>
     <include
-      android:id="@+id/two"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
+        android:id="@+id/two"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
     <include
-      android:id="@+id/three"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
+        android:id="@+id/three"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
     <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:orientation="horizontal">
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="horizontal">
     <Space style="@style/DialpadSpaceStyle"/>
     <include
-      android:id="@+id/four"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
+        android:id="@+id/four"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
     <include
-      android:id="@+id/five"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
+        android:id="@+id/five"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
     <include
-      android:id="@+id/six"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
-    <Space style="@style/DialpadSpaceStyle"/>
-  </LinearLayout>
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:orientation="horizontal">
-    <Space style="@style/DialpadSpaceStyle"/>
-    <include
-      android:id="@+id/seven"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
-    <include
-      android:id="@+id/eight"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
-    <include
-      android:id="@+id/nine"
-      style="@style/DialpadKeyButtonStyle"
-      layout="@layout/dialpad_key"/>
+        android:id="@+id/six"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
     <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:orientation="horizontal">
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="horizontal">
+    <Space style="@style/DialpadSpaceStyle"/>
+    <include
+        android:id="@+id/seven"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
+    <include
+        android:id="@+id/eight"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
+    <include
+        android:id="@+id/nine"
+        style="@style/DialpadKeyButtonStyle"
+        layout="@layout/dialpad_key"/>
+    <Space style="@style/DialpadSpaceStyle"/>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="horizontal">
     <Space style="@style/DialpadSpaceStyle"/>
     <include layout="@layout/dialpad_key_star"/>
-    <include layout="@layout/dialpad_key_zero"/>
+    <include
+        android:id="@+id/zero"
+        layout="@layout/dialpad_key"/>
     <include layout="@layout/dialpad_key_pound"/>
     <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
   <Space
-    android:layout_width="match_parent"
-    android:layout_height="?attr/dialpad_end_key_spacing"/>
+      android:layout_width="match_parent"
+      android:layout_height="?attr/dialpad_end_key_spacing"/>
 </LinearLayout>
