@@ -53,6 +53,7 @@ import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -117,6 +118,7 @@ public class StatusBarNotifier
   @Nullable private ContactsPreferences mContactsPreferences;
   private int mCurrentNotification = NOTIFICATION_NONE;
   private int mCallState = DialerCall.State.INVALID;
+  private int mVideoState = VideoProfile.STATE_AUDIO_ONLY;
   private int mSavedIcon = 0;
   private String mSavedContent = null;
   private Bitmap mSavedLargeIcon;
@@ -312,6 +314,7 @@ public class StatusBarNotifier
         largeIcon,
         contentTitle,
         callState,
+        call.getVideoState(),
         notificationType,
         contactInfo.contactRingtoneUri,
         callAudioState)) {
@@ -474,6 +477,7 @@ public class StatusBarNotifier
       Bitmap largeIcon,
       String contentTitle,
       int state,
+      int videoState,
       int notificationType,
       Uri ringtone,
       CallAudioState callAudioState) {
@@ -485,14 +489,19 @@ public class StatusBarNotifier
         (contentTitle != null && !contentTitle.equals(mSavedContentTitle))
             || (contentTitle == null && mSavedContentTitle != null);
 
-    boolean largeIconChanged =
-        mSavedLargeIcon == null ? largeIcon != null : !mSavedLargeIcon.sameAs(largeIcon);
+    boolean largeIconChanged;
+    if (mSavedLargeIcon == null) {
+      largeIconChanged = largeIcon != null;
+    } else {
+      largeIconChanged = largeIcon == null || !mSavedLargeIcon.sameAs(largeIcon);
+    }
 
     // any change means we are definitely updating
     boolean retval =
         (mSavedIcon != icon)
             || !Objects.equals(mSavedContent, content)
             || (mCallState != state)
+            || (mVideoState != videoState)
             || largeIconChanged
             || contentTitleChanged
             || !Objects.equals(mRingtone, ringtone)
@@ -500,11 +509,12 @@ public class StatusBarNotifier
 
     LogUtil.d(
         "StatusBarNotifier.checkForChangeAndSaveData",
-        "data changed: icon: %b, content: %b, state: %b, largeIcon: %b, title: %b, ringtone: %b, "
-            + "audioState: %b, type: %b",
+        "data changed: icon: %b, content: %b, state: %b, videoState: %b, largeIcon: %b, title: %b,"
+            + "ringtone: %b, audioState: %b, type: %b",
         (mSavedIcon != icon),
         !Objects.equals(mSavedContent, content),
         (mCallState != state),
+        (mVideoState != videoState),
         largeIconChanged,
         contentTitleChanged,
         !Objects.equals(mRingtone, ringtone),
@@ -523,6 +533,7 @@ public class StatusBarNotifier
     mSavedIcon = icon;
     mSavedContent = content;
     mCallState = state;
+    mVideoState = videoState;
     mSavedLargeIcon = largeIcon;
     mSavedContentTitle = contentTitle;
     mRingtone = ringtone;
