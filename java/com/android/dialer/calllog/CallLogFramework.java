@@ -18,7 +18,6 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import com.android.dialer.buildtype.BuildType;
@@ -26,6 +25,7 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.storage.Unencrypted;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -41,12 +41,14 @@ public final class CallLogFramework implements CallLogDataSource.ContentObserver
   static final String PREF_FORCE_REBUILD = "callLogFrameworkForceRebuild";
 
   private final DataSources dataSources;
+  private final SharedPreferences sharedPreferences;
 
   @Nullable private CallLogUi ui;
 
   @Inject
-  CallLogFramework(DataSources dataSources) {
+  CallLogFramework(DataSources dataSources, @Unencrypted SharedPreferences sharedPreferences) {
     this.dataSources = dataSources;
+    this.sharedPreferences = sharedPreferences;
   }
 
   /** Registers the content observers for all data sources. */
@@ -99,7 +101,6 @@ public final class CallLogFramework implements CallLogDataSource.ContentObserver
     Assert.isMainThread();
     LogUtil.enterBlock("CallLogFramework.markDirtyAndNotify");
 
-    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     sharedPreferences.edit().putBoolean(PREF_FORCE_REBUILD, true).apply();
 
     if (ui != null) {

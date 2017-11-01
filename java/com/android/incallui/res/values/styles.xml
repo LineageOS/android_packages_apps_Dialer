@@ -46,9 +46,6 @@
     <item name="dialpad_key_number_margin_bottom">
       @dimen/incall_dialpad_key_number_margin_bottom
     </item>
-    <item name="dialpad_zero_key_number_margin_bottom">
-      @dimen/incall_dialpad_zero_key_number_margin_bottom
-    </item>
     <item name="dialpad_digits_adjustable_text_size">
       @dimen/incall_dialpad_digits_adjustable_text_size
     </item>

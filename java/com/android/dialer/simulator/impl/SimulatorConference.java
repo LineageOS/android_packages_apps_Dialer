@@ -58,6 +58,17 @@ public final class SimulatorConference extends Conference implements SimulatorCo
     return simulatorConference;
   }
 
+  static SimulatorConference newVoLteConference(PhoneAccountHandle handle) {
+    SimulatorConference simulatorConference =
+        new SimulatorConference(handle, Simulator.CONFERENCE_TYPE_VOLTE);
+    simulatorConference.setConnectionCapabilities(
+        Connection.CAPABILITY_MUTE
+            | Connection.CAPABILITY_SUPPORT_HOLD
+            | Connection.CAPABILITY_HOLD
+            | Connection.CAPABILITY_MANAGE_CONFERENCE);
+    return simulatorConference;
+  }
+
   public void addListener(@NonNull Listener listener) {
     listeners.add(Assert.isNotNull(listener));
   }
@@ -120,6 +131,11 @@ public final class SimulatorConference extends Conference implements SimulatorCo
   public void onSeparate(Connection connection) {
     LogUtil.i("SimulatorConference.onSeparate", "connection: " + connection);
     onEvent(new Event(Event.SEPARATE, SimulatorSimCallManager.getConnectionTag(connection), null));
+    // if there is only 1 connection in a gsm conference, destroy the conference.
+    if (conferenceType == Simulator.CONFERENCE_TYPE_GSM && getConnections().size() == 1) {
+      removeConnection(getConnections().get(0));
+      destroy();
+    }
   }
 
   @Override

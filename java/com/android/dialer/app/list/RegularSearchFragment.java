@@ -32,7 +32,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
@@ -66,8 +66,9 @@ public class RegularSearchFragment extends SearchFragment
     super.onCreate(savedState);
 
     addContactTask =
-        DialerExecutors.createUiTaskBuilder(
-                getContext(),
+        DialerExecutorComponent.get(getContext())
+            .dialerExecutorFactory()
+            .createUiTaskBuilder(
                 getFragmentManager(),
                 "RegularSearchFragment.addContact",
                 new AddContactWorker(getContext().getApplicationContext()))
