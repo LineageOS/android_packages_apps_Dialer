@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import com.android.dialer.assisteddialing.ui.R;
 import com.android.dialer.common.LogUtil;
@@ -63,6 +64,13 @@ public final class ConcreteCreator {
     if (context == null) {
       LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "provided context was null");
       throw new NullPointerException("Provided context was null");
+    }
+
+    if (!UserManagerCompat.isUserUnlocked(context)) {
+      // To avoid any issues reading preferences, we disable the feature when the user is in a
+      // locked state.
+      LogUtil.i("ConcreteCreator.createNewAssistedDialingMediator", "user is locked");
+      return new AssistedDialingMediatorStub();
     }
 
     if (!isAssistedDialingEnabled(configProvider)) {
