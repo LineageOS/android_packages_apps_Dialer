@@ -25,7 +25,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -48,6 +47,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -107,7 +107,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
      *
      * Just return false unless the table has never been written to.
      */
-    return !PreferenceManager.getDefaultSharedPreferences(appContext)
+    return !StorageComponent.get(appContext)
+        .unencryptedSharedPrefs()
         .contains(PREF_LAST_TIMESTAMP_PROCESSED);
   }
 
@@ -142,7 +143,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   public void onSuccessfulFill(Context appContext) {
     // If a fill operation was a no-op, lastTimestampProcessed could still be null.
     if (lastTimestampProcessed != null) {
-      PreferenceManager.getDefaultSharedPreferences(appContext)
+      StorageComponent.get(appContext)
+          .unencryptedSharedPrefs()
           .edit()
           .putLong(PREF_LAST_TIMESTAMP_PROCESSED, lastTimestampProcessed)
           .apply();
@@ -190,7 +192,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   private void handleInsertsAndUpdates(
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
     long previousTimestampProcessed =
-        PreferenceManager.getDefaultSharedPreferences(appContext)
+        StorageComponent.get(appContext)
+            .unencryptedSharedPrefs()
             .getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
 
     DialerPhoneNumberUtil dialerPhoneNumberUtil =

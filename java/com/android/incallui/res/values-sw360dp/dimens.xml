@@ -21,10 +21,6 @@
   <dimen name="incall_dialpad_key_number_margin_bottom">
     @dimen/dialpad_key_number_default_margin_bottom
   </dimen>
-  <!-- Zero key should have less space between self and text because "+" is smaller -->
-  <dimen name="incall_dialpad_zero_key_number_margin_bottom">
-    @dimen/dialpad_zero_key_number_default_margin_bottom
-  </dimen>
   <dimen name="incall_dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</dimen>
   <dimen name="incall_dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</dimen>
   <dimen name="incall_dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</dimen>

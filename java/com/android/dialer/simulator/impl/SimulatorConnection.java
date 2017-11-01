@@ -42,8 +42,10 @@ public final class SimulatorConnection extends Connection {
             | CAPABILITY_SUPPORT_HOLD
             | CAPABILITY_HOLD
             | CAPABILITY_CAN_UPGRADE_TO_VIDEO
-            | CAPABILITY_DISCONNECT_FROM_CONFERENCE
-            | CAPABILITY_SEPARATE_FROM_CONFERENCE);
+            | CAPABILITY_DISCONNECT_FROM_CONFERENCE);
+    if (request.getExtras() != null && !request.getExtras().getBoolean("ISVOLTE")) {
+      setConnectionCapabilities(getConnectionCapabilities() | CAPABILITY_SEPARATE_FROM_CONFERENCE);
+    }
     setVideoProvider(new SimulatorVideoProvider(context, this));
   }
 

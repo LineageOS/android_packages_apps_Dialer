@@ -223,29 +223,32 @@ public class DialpadView extends LinearLayout {
       if (mIsLandscape) {
         adjustKeyWidths();
       } else {
-        adjustKeyHeightsInFirstRow();
+        adjustDigitKeyHeights();
       }
     }
   }
 
   /**
-   * Adjust key heights in the first row.
+   * Make the heights of all digit keys the same.
    *
-   * <p>A voice mail icon is shown under key "1", which makes its height different from other keys
-   * in the first row.
+   * <p>When the device is in portrait mode, we first find the maximum height among digit key
+   * layouts. Then for each key, we adjust the height of the layout containing letters/the voice
+   * mail icon to ensure the height of each digit key is the same.
    *
    * <p>This method should be called after the sizes of related layouts have been calculated by the
    * framework.
    */
-  private void adjustKeyHeightsInFirstRow() {
+  private void adjustDigitKeyHeights() {
+    Assert.checkState(!mIsLandscape);
+
     int maxHeight = 0;
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 0; i <= 9; i++) {
       DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
       LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
       maxHeight = Math.max(maxHeight, keyLayout.getHeight());
     }
 
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 0; i <= 9; i++) {
       DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
       LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
 

@@ -89,7 +89,11 @@ public final class ConcreteCreator {
         new Constraints(
             context, configProvider.getString("assisted_dialing_csv_country_codes", ""));
     return new AssistedDialingMediatorImpl(
-        new LocationDetector(telephonyManager), new NumberTransformer(constraints));
+        new LocationDetector(
+            telephonyManager,
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(context.getString(R.string.assisted_dialing_setting_cc_key), null)),
+        new NumberTransformer(constraints));
   }
 
   /** Returns a boolean indicating whether or not the assisted dialing feature is enabled. */

@@ -37,8 +37,6 @@
     <item name="android:layout_gravity">center</item>
   </style>
 
-  <style name="DialpadBottomKeyNumberStyle" parent="DialpadKeyNumberStyle"/>
-
   <style name="DialpadKeyPoundStyle">
     <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
     <item name="android:textSize">@dimen/dialpad_key_pound_size</item>
@@ -56,6 +54,6 @@
     <item name="android:fontFamily">sans-serif-regular</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:gravity">left</item>
+    <item name="android:layout_gravity">left|center_vertical</item>
   </style>
 </resources>
