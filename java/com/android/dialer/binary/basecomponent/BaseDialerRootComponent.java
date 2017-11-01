@@ -23,6 +23,7 @@ import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.main.MainComponent;
+import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.storage.StorageComponent;
@@ -41,12 +42,13 @@ public interface BaseDialerRootComponent
         CallLogDatabaseComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
-        MainComponent.HasComponent,
+        DuoComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
+        MainComponent.HasComponent,
         MapsComponent.HasComponent,
+        PhoneLookupComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
         SimulatorComponent.HasComponent,
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
-        VoicemailComponent.HasComponent,
-        DuoComponent.HasComponent {}
+        VoicemailComponent.HasComponent {}
