@@ -7,9 +7,15 @@ option optimize_for = LITE_RUNTIME;
 
 package com.android.dialer.phonelookup;
 
-// TODO(zachh) documentation
+// Contains information about a phone number, possibly from many sources.
+//
+// This message is organized into sub-messages where each sub-message
+// corresponds to an implementation of PhoneLookup. For example, the Cp2Info
+// corresponds to Cp2PhoneLookup class, and the Cp2PhoneLookup class alone is
+// responsible for populating its fields.
 message PhoneLookupInfo {
-  // TODO(calderwoodra): documentation
+  // Information about a PhoneNumber retrieved from CP2. Cp2PhoneLookup is
+  // responsible for populating the data in this message.
   message Cp2Info {
     optional string name = 1;
     optional string photo_uri = 2;
