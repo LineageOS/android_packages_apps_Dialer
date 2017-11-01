@@ -1,6 +1,6 @@
 # Update this when adding a new AndroidManifest.xml.
 LOCAL_AAPT_FLAGS := \
-  com.android.bubble \
+	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
 	com.android.dialer.app \
