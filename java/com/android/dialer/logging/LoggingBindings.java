@@ -26,6 +26,8 @@ public interface LoggingBindings {
       "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
+  String ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
+  String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
   /**
    * Logs an DialerImpression event that's not associated with a specific call.
    *
@@ -99,4 +101,7 @@ public interface LoggingBindings {
 
   /** Log end a latency timer */
   void logStopLatencyTimer(String timerEventName);
+
+  /** Log get a memory snapshot */
+  void logRecordMemory(String memoryEventName);
 }
