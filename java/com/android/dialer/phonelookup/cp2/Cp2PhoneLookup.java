@@ -21,9 +21,12 @@ import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
+import android.support.annotation.NonNull;
 import android.support.v4.util.ArraySet;
+import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.google.common.collect.ImmutableMap;
@@ -31,21 +34,28 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.util.Set;
+import javax.inject.Inject;
 
 /** PhoneLookup implementation for local contacts. */
 public final class Cp2PhoneLookup implements PhoneLookup {
 
-  private final Context context;
+  private final Context appContext;
 
-  Cp2PhoneLookup(Context context) {
-    this.context = context;
+  @Inject
+  Cp2PhoneLookup(@ApplicationContext Context appContext) {
+    this.appContext = appContext;
+  }
+
+  @Override
+  public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public ListenableFuture<Boolean> isDirty(
       ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
     // TODO(calderwoodra): consider a different thread pool
-    return MoreExecutors.listeningDecorator(DialerExecutors.getLowPriorityThreadPool(context))
+    return MoreExecutors.listeningDecorator(DialerExecutors.getLowPriorityThreadPool(appContext))
         .submit(() -> isDirtyInternal(phoneNumbers, lastModified));
   }
 
@@ -58,7 +68,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   private Set<Long> getContactIdsFromPhoneNumbers(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     Set<Long> contactIds = new ArraySet<>();
     try (Cursor cursor =
-        context
+        appContext
             .getContentResolver()
             .query(
                 Phone.CONTENT_URI,
@@ -91,7 +101,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   /** Returns true if any contacts were modified after {@code lastModified}. */
   private boolean contactsUpdated(Set<Long> contactIds, long lastModified) {
     try (Cursor cursor =
-        context
+        appContext
             .getContentResolver()
             .query(
                 Contacts.CONTENT_URI,
@@ -126,7 +136,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   /** Returns true if any contacts were deleted after {@code lastModified}. */
   private boolean contactsDeleted(long lastModified) {
     try (Cursor cursor =
-        context
+        appContext
             .getContentResolver()
             .query(
                 DeletedContacts.CONTENT_URI,
