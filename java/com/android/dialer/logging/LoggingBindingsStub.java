@@ -67,4 +67,7 @@ public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
   public void logStopLatencyTimer(String timerEventName) {}
+
+  @Override
+  public void logRecordMemory(String memoryEventName) {}
 }

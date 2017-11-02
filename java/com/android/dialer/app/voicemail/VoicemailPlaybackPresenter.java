@@ -51,7 +51,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
@@ -220,11 +220,10 @@ public class VoicemailPlaybackPresenter
         mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
       }
       shareVoicemailExecutor =
-          DialerExecutors.createUiTaskBuilder(
-                  mContext,
-                  mActivity.getFragmentManager(),
-                  "shareVoicemail",
-                  new ShareVoicemailWorker())
+          DialerExecutorComponent.get(mContext)
+              .dialerExecutorFactory()
+              .createUiTaskBuilder(
+                  mActivity.getFragmentManager(), "shareVoicemail", new ShareVoicemailWorker())
               .onSuccess(
                   output -> {
                     if (output == null) {

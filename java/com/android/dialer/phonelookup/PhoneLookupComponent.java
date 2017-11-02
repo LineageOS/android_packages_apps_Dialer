@@ -13,36 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-
-package com.android.dialer.storage;
+package com.android.dialer.phonelookup;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
 
-/** Dagger component for storage. */
+/** Dagger component for the PhoneLookup package. */
 @Subcomponent
-public abstract class StorageComponent {
+public abstract class PhoneLookupComponent {
 
-  /**
-   * Returns unencrypted default shared preferences. This method should not be used for private
-   * data.
-   *
-   * <p>These shared prefs are available even when the device is in FBE mode and are generally the
-   * ones that should be used, because Dialer needs to function while in FBE mode.
-   */
-  @Unencrypted
-  public abstract SharedPreferences unencryptedSharedPrefs();
+  public abstract PhoneLookup phoneLookup();
 
-  public static StorageComponent get(Context context) {
-    return ((StorageComponent.HasComponent)
-            ((HasRootComponent) context.getApplicationContext()).component())
-        .storageComponent();
+  public static PhoneLookupComponent get(Context context) {
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .phoneLookupComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    StorageComponent storageComponent();
+    PhoneLookupComponent phoneLookupComponent();
   }
 }

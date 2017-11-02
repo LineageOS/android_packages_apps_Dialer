@@ -36,6 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
@@ -196,6 +197,16 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoScreenState.addListener(this);
     onPseudoScreenStateChanged(pseudoScreenState.isOn());
     Trace.endSection();
+    // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
+    ThreadUtil.postDelayedOnUiThread(
+        () -> {
+          if (getApplicationContext() instanceof LoggingBindingsFactory) {
+            ((LoggingBindingsFactory) getApplicationContext())
+                .newLoggingBindings()
+                .logRecordMemory(LoggingBindings.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME);
+          }
+        },
+        1000);
   }
 
   /** onPause is guaranteed to be called when the InCallActivity goes in the background. */

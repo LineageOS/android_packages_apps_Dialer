@@ -31,7 +31,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.telecom.TelecomUtil;
@@ -184,7 +184,9 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
             context,
             CallLogNotificationsQueryHelper.getInstance(context),
             new FilteredNumberAsyncQueryHandler(context));
-    DialerExecutors.createNonUiTaskBuilder(context, new VisualVoicemailUpdateTask())
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new VisualVoicemailUpdateTask())
         .onSuccess(
             output -> {
               LogUtil.i("VisualVoicemailUpdateTask.scheduleTask", "update successful");

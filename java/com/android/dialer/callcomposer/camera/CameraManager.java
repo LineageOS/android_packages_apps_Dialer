@@ -35,7 +35,7 @@ import com.android.dialer.callcomposer.camera.camerafocus.FocusOverlayManager;
 import com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -468,8 +468,9 @@ public class CameraManager implements FocusOverlayManager.Listener {
             }
             LogUtil.i(
                 "CameraManager.onPictureTaken", "taken picture size: " + bytes.length + " bytes");
-            DialerExecutors.createNonUiTaskBuilder(
-                    mCameraPreview.getContext(),
+            DialerExecutorComponent.get(mCameraPreview.getContext())
+                .dialerExecutorFactory()
+                .createNonUiTaskBuilder(
                     new ImagePersistWorker(
                         width, height, heightPercent, bytes, mCameraPreview.getContext()))
                 .onSuccess(

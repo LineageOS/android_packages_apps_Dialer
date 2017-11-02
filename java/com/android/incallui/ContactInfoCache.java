@@ -45,7 +45,7 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.CequintCallerIdManager;
@@ -126,7 +126,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     mContext = context;
     mPhoneNumberService = Bindings.get(context).newPhoneNumberService(context);
     cachedNumberLookupExecutor =
-        DialerExecutors.createNonUiTaskBuilder(mContext, new CachedNumberLookupWorker()).build();
+        DialerExecutorComponent.get(mContext)
+            .dialerExecutorFactory()
+            .createNonUiTaskBuilder(new CachedNumberLookupWorker())
+            .build();
     Trace.endSection();
   }
 

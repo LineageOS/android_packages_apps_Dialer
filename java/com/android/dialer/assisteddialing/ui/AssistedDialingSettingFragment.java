@@ -16,7 +16,10 @@
 package com.android.dialer.assisteddialing.ui;
 
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.text.TextUtils;
 
 /** The setting for Assisted Dialing */
 public class AssistedDialingSettingFragment extends PreferenceFragment {
@@ -27,5 +30,20 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
 
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.assisted_dialing_setting);
+    ListPreference countryChooserPref =
+        (ListPreference)
+            findPreference(getContext().getString(R.string.assisted_dialing_setting_cc_key));
+
+    if (!TextUtils.isEmpty(countryChooserPref.getEntry())) {
+      countryChooserPref.setSummary(countryChooserPref.getEntry());
+    }
+    countryChooserPref.setOnPreferenceChangeListener(this::updateListSummary);
+  }
+
+  boolean updateListSummary(Preference pref, Object newValue) {
+    ListPreference listPref = (ListPreference) pref;
+    CharSequence[] entries = listPref.getEntries();
+    listPref.setSummary(entries[listPref.findIndexOfValue(newValue.toString())]);
+    return true;
   }
 }
