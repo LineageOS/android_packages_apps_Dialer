@@ -30,6 +30,6 @@
 
   <!-- Option shown in call log menu to navigate the user to the call details screen where the user
        can view details for the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_details">Call details</string>
+  <string name="call_details_menu_label">Call details</string>
 
 </resources>
