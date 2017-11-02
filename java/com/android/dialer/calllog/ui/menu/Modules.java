@@ -198,7 +198,7 @@ final class Modules {
                 dialerContact,
                 canReportInaccurateNumber,
                 canSupportAssistedDialing),
-            R.string.call_details,
+            R.string.call_details_menu_label,
             R.drawable.quantum_ic_info_outline_vd_theme_24));
   }
 
