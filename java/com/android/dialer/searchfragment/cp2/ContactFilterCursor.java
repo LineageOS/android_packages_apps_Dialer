@@ -17,6 +17,7 @@
 package com.android.dialer.searchfragment.cp2;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.CharArrayBuffer;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -44,7 +45,7 @@ import java.util.Set;
  * Wrapper for a cursor containing all on device contacts.
  *
  * <p>This cursor removes duplicate phone numbers associated with the same contact and can filter
- * contacts based on a query by calling {@link #filter(String)}.
+ * contacts based on a query by calling {@link #filter(String, Context)}.
  */
 final class ContactFilterCursor implements Cursor {
 
@@ -72,10 +73,11 @@ final class ContactFilterCursor implements Cursor {
   /**
    * @param cursor with projection {@link Projections#CP2_PROJECTION}.
    * @param query to filter cursor results.
+   * @param context of the app.
    */
-  ContactFilterCursor(Cursor cursor, @Nullable String query) {
+  ContactFilterCursor(Cursor cursor, @Nullable String query, Context context) {
     this.cursor = createCursor(cursor);
-    filter(query);
+    filter(query, context);
   }
 
   /**
@@ -238,7 +240,7 @@ final class ContactFilterCursor implements Cursor {
    *   <li>Its company contains the query
    * </ul>
    */
-  public void filter(@Nullable String query) {
+  public void filter(@Nullable String query, Context context) {
     if (query == null) {
       query = "";
     }
@@ -253,7 +255,7 @@ final class ContactFilterCursor implements Cursor {
       String companyName = cursor.getString(Projections.COMPANY_NAME);
       String nickName = cursor.getString(Projections.NICKNAME);
       if (TextUtils.isEmpty(query)
-          || QueryFilteringUtil.nameMatchesT9Query(query, name)
+          || QueryFilteringUtil.nameMatchesT9Query(query, name, context)
           || QueryFilteringUtil.numberMatchesNumberQuery(query, number)
           || QueryFilteringUtil.nameContainsQuery(query, name)
           || QueryFilteringUtil.nameContainsQuery(query, companyName)
