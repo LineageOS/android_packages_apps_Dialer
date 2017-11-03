@@ -80,6 +80,11 @@ public class TranscriptionConfigProvider {
         .getBoolean("voicemail_transcription_donation_available", false);
   }
 
+  public boolean useClientGeneratedVoicemailIds() {
+    return ConfigProviderBindings.get(context)
+        .getBoolean("voicemail_transcription_client_generated_voicemail_ids", false);
+  }
+
   @Override
   public String toString() {
     return String.format(
