@@ -57,6 +57,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+import com.android.dialer.util.DrawableConverter;
 import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -113,7 +114,10 @@ public class NewBubble {
             hideAndReset();
           } else {
             doResize(
-                () -> viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_ICON));
+                () ->
+                    viewHolder
+                        .getPrimaryButton()
+                        .setDisplayedChild(ViewHolder.CHILD_INDEX_AVATAR_AND_ICON));
           }
         }
       };
@@ -351,6 +355,32 @@ public class NewBubble {
     updateButtonStates();
   }
 
+  /**
+   * Update the avatar from photo.
+   *
+   * @param avatar the new photo avatar in the bubble's primary button
+   */
+  public void updatePhotoAvatar(@NonNull Drawable avatar) {
+    // Make it round
+    int bubbleSize = context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+    Drawable roundAvatar =
+        DrawableConverter.getRoundedDrawable(context, avatar, bubbleSize, bubbleSize);
+
+    updateAvatar(roundAvatar);
+  }
+
+  /**
+   * Update the avatar.
+   *
+   * @param avatar the new avatar in the bubble's primary button
+   */
+  public void updateAvatar(@NonNull Drawable avatar) {
+    if (!avatar.equals(currentInfo.getAvatar())) {
+      currentInfo = NewBubbleInfo.from(currentInfo).setAvatar(avatar).build();
+      viewHolder.getPrimaryAvatar().setImageDrawable(currentInfo.getAvatar());
+    }
+  }
+
   /** Returns the currently displayed NewBubbleInfo */
   public NewBubbleInfo getBubbleInfo() {
     return currentInfo;
@@ -525,6 +555,7 @@ public class NewBubble {
   }
 
   private void update() {
+    // Whole primary button background
     RippleDrawable backgroundRipple =
         (RippleDrawable)
             context.getResources().getDrawable(R.drawable.bubble_ripple_circle, context.getTheme());
@@ -532,12 +563,23 @@ public class NewBubble {
         ColorUtils.compositeColors(
             context.getColor(R.color.bubble_primary_background_darken),
             currentInfo.getPrimaryColor());
-    backgroundRipple.getDrawable(0).setTint(primaryTint);
+    backgroundRipple.getDrawable(0).mutate().setTint(primaryTint);
     viewHolder.getPrimaryButton().setBackground(backgroundRipple);
 
+    // Small icon
+    RippleDrawable smallIconBackgroundRipple =
+        (RippleDrawable)
+            context
+                .getResources()
+                .getDrawable(R.drawable.bubble_ripple_circle_small, context.getTheme());
+    smallIconBackgroundRipple
+        .getDrawable(0)
+        .setTint(context.getColor(R.color.bubble_button_text_color_blue));
+    viewHolder.getPrimaryIcon().setBackground(smallIconBackgroundRipple);
     viewHolder.getPrimaryIcon().setImageIcon(currentInfo.getPrimaryIcon());
-    updatePrimaryIconAnimation();
+    viewHolder.getPrimaryAvatar().setImageDrawable(currentInfo.getAvatar());
 
+    updatePrimaryIconAnimation();
     updateButtonStates();
   }
 
@@ -715,13 +757,14 @@ public class NewBubble {
   @VisibleForTesting
   class ViewHolder {
 
-    public static final int CHILD_INDEX_ICON = 0;
+    public static final int CHILD_INDEX_AVATAR_AND_ICON = 0;
     public static final int CHILD_INDEX_TEXT = 1;
 
     private final NewMoveHandler moveHandler;
     private final NewWindowRoot root;
     private final ViewAnimator primaryButton;
     private final ImageView primaryIcon;
+    private final ImageView primaryAvatar;
     private final TextView primaryText;
 
     private final NewCheckableButton fullScreenButton;
@@ -737,6 +780,7 @@ public class NewBubble {
       View contentView = inflater.inflate(R.layout.new_bubble_base, root, true);
       expandedView = contentView.findViewById(R.id.bubble_expanded_layout);
       primaryButton = contentView.findViewById(R.id.bubble_button_primary);
+      primaryAvatar = contentView.findViewById(R.id.bubble_icon_avatar);
       primaryIcon = contentView.findViewById(R.id.bubble_icon_primary);
       primaryText = contentView.findViewById(R.id.bubble_text);
 
@@ -791,6 +835,10 @@ public class NewBubble {
 
     public ImageView getPrimaryIcon() {
       return primaryIcon;
+    }
+
+    public ImageView getPrimaryAvatar() {
+      return primaryAvatar;
     }
 
     public TextView getPrimaryText() {
