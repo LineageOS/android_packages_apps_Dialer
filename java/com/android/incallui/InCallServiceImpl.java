@@ -99,7 +99,8 @@ public class InCallServiceImpl extends InCallService {
       returnToCallController = new ReturnToCallController(this);
     }
     if (NewReturnToCallController.isEnabled(this)) {
-      newReturnToCallController = new NewReturnToCallController(this);
+      newReturnToCallController =
+          new NewReturnToCallController(this, ContactInfoCache.getInstance(context));
     }
 
     IBinder iBinder = super.onBind(intent);
