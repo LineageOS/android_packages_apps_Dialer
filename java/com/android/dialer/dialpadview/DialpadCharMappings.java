@@ -50,19 +50,61 @@ public class DialpadCharMappings {
         getCharToKeyMap(KEY_TO_CHARS);
   }
 
-  /** The character mapping for the Russian alphabet */
-  private static class Rus {
+  /** The character mapping for the Bulgarian alphabet */
+  private static class Bul {
     private static final String[] KEY_TO_CHARS = {
       "" /* 0 */,
       "" /* 1 */,
       "АБВГ" /* 2 */,
       "ДЕЖЗ" /* 3 */,
       "ИЙКЛ" /* 4 */,
+      "МНО" /* 5 */,
+      "ПРС" /* 6 */,
+      "ТУФХ" /* 7 */,
+      "ЦЧШЩ" /* 8 */,
+      "ЪЬЮЯ" /* 9 */,
+      "" /* * */,
+      "" /* # */,
+    };
+
+    private static final SimpleArrayMap<Character, Character> CHAR_TO_KEY =
+        getCharToKeyMap(KEY_TO_CHARS);
+  }
+
+  /** The character mapping for the Russian alphabet */
+  private static class Rus {
+    private static final String[] KEY_TO_CHARS = {
+      "" /* 0 */,
+      "" /* 1 */,
+      "АБВГ" /* 2 */,
+      "ДЕЁЖЗ" /* 3 */,
+      "ИЙКЛ" /* 4 */,
       "МНОП" /* 5 */,
       "РСТУ" /* 6 */,
       "ФХЦЧ" /* 7 */,
       "ШЩЪЫ" /* 8 */,
       "ЬЭЮЯ" /* 9 */,
+      "" /* * */,
+      "" /* # */,
+    };
+
+    private static final SimpleArrayMap<Character, Character> CHAR_TO_KEY =
+        getCharToKeyMap(KEY_TO_CHARS);
+  }
+
+  /** The character mapping for the Ukrainian alphabet */
+  private static class Ukr {
+    private static final String[] KEY_TO_CHARS = {
+      "" /* 0 */,
+      "" /* 1 */,
+      "АБВГҐ" /* 2 */,
+      "ДЕЄЖЗ" /* 3 */,
+      "ИІЇЙКЛ" /* 4 */,
+      "МНОП" /* 5 */,
+      "РСТУ" /* 6 */,
+      "ФХЦЧ" /* 7 */,
+      "ШЩ" /* 8 */,
+      "ЬЮЯ" /* 9 */,
       "" /* * */,
       "" /* # */,
     };
@@ -81,8 +123,13 @@ public class DialpadCharMappings {
   private static final SimpleArrayMap<String, String[]> KEY_TO_CHAR_MAPS = new SimpleArrayMap<>();
 
   static {
+    CHAR_TO_KEY_MAPS.put("bul", Bul.CHAR_TO_KEY);
     CHAR_TO_KEY_MAPS.put("rus", Rus.CHAR_TO_KEY);
+    CHAR_TO_KEY_MAPS.put("ukr", Ukr.CHAR_TO_KEY);
+
+    KEY_TO_CHAR_MAPS.put("bul", Bul.KEY_TO_CHARS);
     KEY_TO_CHAR_MAPS.put("rus", Rus.KEY_TO_CHARS);
+    KEY_TO_CHAR_MAPS.put("ukr", Ukr.KEY_TO_CHARS);
   }
 
   /**
