@@ -68,6 +68,18 @@ enum DonationPreference {
   DONATE = 2;
 }
 
+// Enum that specifies the user's rating for a voicemail transcription.
+enum TranscriptionRatingValue {
+  // Default but invalid value.
+  UNSPECIFIED = 0;
+
+  // User indicated that the transcription was good.
+  GOOD_TRANSCRIPTION = 1;
+
+  // User indicated that the transcription was bad.
+  BAD_TRANSCRIPTION = 2;
+}
+
 // Request for synchronous voicemail transcription.
 message TranscribeVoicemailRequest {
   // Voicemail audio file containing the raw bytes we receive from the carrier.
@@ -133,6 +145,26 @@ message GetTranscriptResponse {
   optional string transcript = 2;
 }
 
+// The rating for a single voicemail transcription.
+message TranscriptionRating {
+  // The id of the voicemail transcription.
+  optional string transcription_id = 1;
+
+  // The user's rating of the voicemail transcription.
+  optional TranscriptionRatingValue rating_value = 2;
+}
+
+// Request for uploading transcription ratings.
+message TranscriptionFeedbackRequest {
+  // User feedback indicating the transcription quality for one or more
+  // voicemails
+  repeated TranscriptionRating ratings = 1;
+}
+
+// Response for uploading transcription ratings
+message TranscriptionFeedbackResponse {
+}
+
 // RPC service for transcribing voicemails.
 service VoicemailTranscriptionService {
   // Returns a transcript of the given voicemail.
@@ -148,6 +180,12 @@ service VoicemailTranscriptionService {
   // Returns the transcript corresponding to the given ID, which was returned
   // by TranscribeVoicemailAsync.
   rpc GetTranscript(GetTranscriptRequest) returns (GetTranscriptResponse) {
+  }
+
+  // Uploads user's transcription feedback. Feedback will only be collected from
+  // user's who have consented to donate their voicemails.
+  rpc SendTranscriptionFeedback(TranscriptionFeedbackRequest)
+      returns (TranscriptionFeedbackResponse) {
   }
 }
 
