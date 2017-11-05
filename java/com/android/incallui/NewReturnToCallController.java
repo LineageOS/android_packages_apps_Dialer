@@ -19,15 +19,21 @@ package com.android.incallui;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.CallAudioState;
+import android.text.TextUtils;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.incallui.ContactInfoCache.ContactCacheEntry;
+import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallUiListener;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
@@ -41,6 +47,7 @@ import com.android.newbubble.NewBubble.BubbleExpansionStateListener;
 import com.android.newbubble.NewBubble.ExpansionState;
 import com.android.newbubble.NewBubbleInfo;
 import com.android.newbubble.NewBubbleInfo.Action;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +72,15 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   private final PendingIntent endCall;
   private final PendingIntent fullScreen;
 
+  private final ContactInfoCache contactInfoCache;
+
   public static boolean isEnabled(Context context) {
     return ConfigProviderBindings.get(context).getBoolean("enable_return_to_call_bubble_v2", false);
   }
 
-  public NewReturnToCallController(Context context) {
+  public NewReturnToCallController(Context context, ContactInfoCache contactInfoCache) {
     this.context = context;
+    this.contactInfoCache = contactInfoCache;
 
     toggleSpeaker = createActionIntent(ReturnToCallActionReceiver.ACTION_TOGGLE_SPEAKER);
     showSpeakerSelect =
@@ -130,6 +140,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     } else {
       bubble.show();
     }
+    startContactInfoSearch();
   }
 
   @VisibleForTesting
@@ -213,6 +224,8 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     // parent call is still there.
     if (!CallList.getInstance().hasNonParentActiveOrBackgroundCall()) {
       hideAndReset();
+    } else {
+      startContactInfoSearch();
     }
   }
 
@@ -231,6 +244,22 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     if (bubble != null) {
       bubble.updateActions(generateActions());
     }
+  }
+
+  private void startContactInfoSearch() {
+    DialerCall dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    if (dialerCall != null) {
+      contactInfoCache.findInfo(
+          dialerCall, false /* isIncoming */, new ReturnToCallContactInfoCacheCallback(this));
+    }
+  }
+
+  private void onPhotoAvatarReceived(@NonNull Drawable photo) {
+    bubble.updatePhotoAvatar(photo);
+  }
+
+  private void onLetterTileAvatarReceived(@NonNull Drawable photo) {
+    bubble.updateAvatar(photo);
   }
 
   private NewBubbleInfo generateBubbleInfo() {
@@ -279,5 +308,73 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     Intent toggleSpeaker = new Intent(context, ReturnToCallActionReceiver.class);
     toggleSpeaker.setAction(action);
     return PendingIntent.getBroadcast(context, 0, toggleSpeaker, 0);
+  }
+
+  @NonNull
+  private LetterTileDrawable createLettleTileDrawable(
+      DialerCall dialerCall, ContactCacheEntry entry) {
+    String preferredName =
+        ContactDisplayUtils.getPreferredDisplayName(
+            entry.namePrimary,
+            entry.nameAlternative,
+            ContactsPreferencesFactory.newContactsPreferences(context));
+    if (TextUtils.isEmpty(preferredName)) {
+      preferredName = entry.number;
+    }
+
+    LetterTileDrawable letterTile = new LetterTileDrawable(context.getResources());
+    letterTile.setCanonicalDialerLetterTileDetails(
+        dialerCall.updateNameIfRestricted(preferredName),
+        entry.lookupKey,
+        LetterTileDrawable.SHAPE_CIRCLE,
+        LetterTileDrawable.getContactTypeFromPrimitives(
+            dialerCall.isVoiceMailNumber(),
+            dialerCall.isSpam(),
+            entry.isBusiness,
+            dialerCall.getNumberPresentation(),
+            dialerCall.isConferenceCall()));
+    return letterTile;
+  }
+
+  private static class ReturnToCallContactInfoCacheCallback implements ContactInfoCacheCallback {
+
+    private final WeakReference<NewReturnToCallController> newReturnToCallControllerWeakReference;
+
+    private ReturnToCallContactInfoCacheCallback(
+        NewReturnToCallController newReturnToCallController) {
+      newReturnToCallControllerWeakReference = new WeakReference<>(newReturnToCallController);
+    }
+
+    @Override
+    public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
+      NewReturnToCallController newReturnToCallController =
+          newReturnToCallControllerWeakReference.get();
+      if (newReturnToCallController == null) {
+        return;
+      }
+      if (entry.photo != null) {
+        newReturnToCallController.onPhotoAvatarReceived(entry.photo);
+      } else {
+        DialerCall dialerCall = CallList.getInstance().getCallById(callId);
+        newReturnToCallController.onLetterTileAvatarReceived(
+            newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+      }
+    }
+
+    @Override
+    public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+      NewReturnToCallController newReturnToCallController =
+          newReturnToCallControllerWeakReference.get();
+      if (newReturnToCallController == null) {
+        return;
+      }
+      if (entry.photo != null) {
+        newReturnToCallController.onPhotoAvatarReceived(entry.photo);
+      } else {
+        DialerCall dialerCall = CallList.getInstance().getCallById(callId);
+        newReturnToCallController.onLetterTileAvatarReceived(
+            newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+      }
+    }
   }
 }
