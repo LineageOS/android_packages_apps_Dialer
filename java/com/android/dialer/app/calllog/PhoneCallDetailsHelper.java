@@ -89,7 +89,7 @@ public class PhoneCallDetailsHelper {
     views.callTypeIcons.setShowVideo(
         (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
     views.callTypeIcons.setShowHd(
-        MotorolaUtils.shouldShowHdIconInCallLog(mContext, details.features));
+        (details.features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     views.callTypeIcons.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(mContext, details.features));
     views.callTypeIcons.requestLayout();
