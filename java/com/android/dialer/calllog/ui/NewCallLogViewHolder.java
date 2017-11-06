@@ -115,7 +115,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setPrimaryCallTypes(CoalescedRow row) {
     // Only HD and Wifi icons are shown following the primary text.
     primaryCallTypeIconsView.setShowHd(
-        MotorolaUtils.shouldShowHdIconInCallLog(context, row.features()));
+        (row.features() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     primaryCallTypeIconsView.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features()));
   }
