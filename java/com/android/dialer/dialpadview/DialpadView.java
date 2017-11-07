@@ -78,7 +78,6 @@ public class DialpadView extends LinearLayout {
   private final ColorStateList mRippleColor;
   private final String[] mPrimaryLettersMapping;
   private final String[] mSecondaryLettersMapping;
-  private final boolean mIsLandscape; // whether the device is in landscape mode
   private final boolean mIsRtl; // whether the dialpad is shown in a right-to-left locale
   private final int mTranslateDistance;
 
@@ -108,9 +107,6 @@ public class DialpadView extends LinearLayout {
 
     mTranslateDistance =
         getResources().getDimensionPixelSize(R.dimen.dialpad_key_button_translate_y);
-
-    mIsLandscape =
-        getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     mIsRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
 
@@ -230,7 +226,7 @@ public class DialpadView extends LinearLayout {
     super.onLayout(changed, l, t, r, b);
 
     if (changed) {
-      if (mIsLandscape) {
+      if (isLandscapeMode()) {
         adjustKeyWidths();
       } else {
         adjustDigitKeyHeights();
@@ -249,7 +245,7 @@ public class DialpadView extends LinearLayout {
    * framework.
    */
   private void adjustDigitKeyHeights() {
-    Assert.checkState(!mIsLandscape);
+    Assert.checkState(!isLandscapeMode());
 
     int maxHeight = 0;
     for (int i = 0; i <= 9; i++) {
@@ -290,7 +286,7 @@ public class DialpadView extends LinearLayout {
    * framework.
    */
   private void adjustKeyWidths() {
-    Assert.checkState(mIsLandscape);
+    Assert.checkState(isLandscapeMode());
 
     // A pre-defined minimum width for the letters shown beside a key.
     final int minimumKeyLettersWidth =
@@ -395,7 +391,7 @@ public class DialpadView extends LinearLayout {
       final DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
 
       ViewPropertyAnimator animator = dialpadKey.animate();
-      if (mIsLandscape) {
+      if (isLandscapeMode()) {
         // Landscape orientation requires translation along the X axis.
         // For RTL locales, ensure we translate negative on the X axis.
         dialpadKey.setTranslationX((mIsRtl ? -1 : 1) * mTranslateDistance);
@@ -434,7 +430,7 @@ public class DialpadView extends LinearLayout {
    * @return The animation delay.
    */
   private int getKeyButtonAnimationDelay(int buttonId) {
-    if (mIsLandscape) {
+    if (isLandscapeMode()) {
       if (mIsRtl) {
         if (buttonId == R.id.three) {
           return KEY_FRAME_DURATION * 1;
@@ -522,7 +518,7 @@ public class DialpadView extends LinearLayout {
    * @return The animation duration.
    */
   private int getKeyButtonAnimationDuration(int buttonId) {
-    if (mIsLandscape) {
+    if (isLandscapeMode()) {
       if (mIsRtl) {
         if (buttonId == R.id.one
             || buttonId == R.id.four
@@ -575,5 +571,9 @@ public class DialpadView extends LinearLayout {
 
     LogUtil.e(TAG, "Attempted to get animation duration for invalid key button id.");
     return 0;
+  }
+
+  private boolean isLandscapeMode() {
+    return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   }
 }
