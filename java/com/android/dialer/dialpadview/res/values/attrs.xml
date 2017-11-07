@@ -23,6 +23,8 @@
     <attr format="color" name="dialpad_key_button_touch_tint"/>
     <attr format="dimension" name="dialpad_digits_adjustable_text_size"/>
     <attr format="dimension" name="dialpad_digits_adjustable_height"/>
+    <attr format="dimension" name="dialpad_key_letters_size_for_dual_alphabets"/>
+    <attr format="dimension" name="dialpad_key_letters_size_for_single_alphabet"/>
     <attr format="dimension" name="dialpad_key_numbers_size"/>
     <attr format="dimension" name="dialpad_key_number_margin_bottom"/>
   </declare-styleable>

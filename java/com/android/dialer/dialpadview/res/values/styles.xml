@@ -56,7 +56,7 @@
 
   <style name="DialpadKeyLettersStyle">
     <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
-    <item name="android:textSize">@dimen/dialpad_key_letters_size</item>
+    <item name="android:textSize">?attr/dialpad_key_letters_size_for_single_alphabet</item>
     <item name="android:fontFamily">sans-serif-regular</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
@@ -85,8 +85,15 @@
   <style name="Dialpad">
     <item name="dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</item>
     <item name="dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</item>
+    <item name="dialpad_key_letters_size_for_dual_alphabets">
+      @dimen/dialpad_key_letters_default_size_for_dual_alphabets
+    </item>
+    <item name="dialpad_key_letters_size_for_single_alphabet">
+      @dimen/dialpad_key_letters_default_size_for_single_alphabet
+    </item>
     <item name="dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</item>
-    <item name="dialpad_key_number_margin_bottom">@dimen/dialpad_key_number_default_margin_bottom
+    <item name="dialpad_key_number_margin_bottom">
+      @dimen/dialpad_key_number_default_margin_bottom
     </item>
     <item name="dialpad_end_key_spacing">@dimen/dialpad_bottom_space_height</item>
     <item name="dialpad_elevation">0dp</item>
