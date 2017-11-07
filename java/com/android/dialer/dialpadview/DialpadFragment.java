@@ -999,7 +999,7 @@ public class DialpadFragment extends Fragment
   public void callVoicemail() {
     DialerUtils.startActivityWithErrorToast(
         getActivity(),
-        new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.DIALPAD).build());
+        CallIntentBuilder.forVoicemail(null, CallInitiationType.Type.DIALPAD).build());
     hideAndClearDialpad();
   }
 

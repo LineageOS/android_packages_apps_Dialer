@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
@@ -32,7 +33,6 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
 
@@ -100,11 +100,12 @@ public abstract class IntentProvider {
     };
   }
 
-  public static IntentProvider getReturnVoicemailCallIntentProvider() {
+  public static IntentProvider getReturnVoicemailCallIntentProvider(
+      @Nullable PhoneAccountHandle phoneAccountHandle) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.CALL_LOG)
+        return CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG)
             .build();
       }
     };

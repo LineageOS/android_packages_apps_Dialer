@@ -96,6 +96,13 @@ public class CallIntentBuilder {
     this(CallUtil.getCallUri(Assert.isNotNull(number)), callInitiationType);
   }
 
+  public static CallIntentBuilder forVoicemail(
+      @Nullable PhoneAccountHandle phoneAccountHandle, CallInitiationType.Type callInitiationType) {
+    return new CallIntentBuilder(
+            Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null), callInitiationType)
+        .setPhoneAccountHandle(phoneAccountHandle);
+  }
+
   public CallSpecificAppData getCallSpecificAppData() {
     return callSpecificAppData;
   }
