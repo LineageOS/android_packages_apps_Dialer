@@ -50,8 +50,8 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
-import com.android.dialer.util.DialerUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -209,11 +209,10 @@ public class CallDetailsActivity extends AppCompatActivity
   @Override
   public void placeImsVideoCall(String phoneNumber) {
     Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_IMS_VIDEO_CALL_BACK);
-    DialerUtils.startActivityWithErrorToast(
+    PreCall.start(
         this,
         new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
-            .setIsVideoCall(true)
-            .build());
+            .setIsVideoCall(true));
   }
 
   @Override
@@ -244,7 +243,7 @@ public class CallDetailsActivity extends AppCompatActivity
       callIntentBuilder.setAllowAssistedDial(true);
     }
 
-    DialerUtils.startActivityWithErrorToast(this, callIntentBuilder.build());
+    PreCall.start(this, callIntentBuilder);
   }
 
   @NonNull
