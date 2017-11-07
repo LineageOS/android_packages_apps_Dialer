@@ -26,7 +26,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
@@ -67,8 +66,7 @@ public abstract class IntentProvider {
       @Override
       public Intent getIntent(Context context) {
         return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setAllowAssistedDial(
-                true, ConcreteCreator.createNewAssistedDialingMediator(telephonyManager, context))
+            .setAllowAssistedDial(true)
             .build();
       }
     };

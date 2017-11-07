@@ -30,10 +30,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
-import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -243,10 +241,7 @@ public class CallDetailsActivity extends AppCompatActivity
     CallIntentBuilder callIntentBuilder =
         new CallIntentBuilder(phoneNumber + postDialDigits, CallInitiationType.Type.CALL_DETAILS);
     if (canSupportedAssistedDialing) {
-      callIntentBuilder.setAllowAssistedDial(
-          true,
-          ConcreteCreator.createNewAssistedDialingMediator(
-              getSystemService(TelephonyManager.class), this));
+      callIntentBuilder.setAllowAssistedDial(true);
     }
 
     DialerUtils.startActivityWithErrorToast(this, callIntentBuilder.build());
