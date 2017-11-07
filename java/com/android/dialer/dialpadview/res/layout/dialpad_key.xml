@@ -34,6 +34,10 @@
       <com.android.dialer.dialpadview.DialpadTextView
           android:id="@+id/dialpad_key_letters"
           style="@style/DialpadKeyLettersStyle"/>
+      <com.android.dialer.dialpadview.DialpadTextView
+          android:id="@+id/dialpad_key_secondary_letters"
+          style="@style/DialpadKeyLettersStyle"
+          android:layout_marginTop="2dp"/>
     </LinearLayout>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>

@@ -22,6 +22,10 @@
   <dimen name="incall_dialpad_key_number_margin_bottom">1dp</dimen>
   <dimen name="incall_dialpad_digits_adjustable_text_size">20sp</dimen>
   <dimen name="incall_dialpad_digits_adjustable_height">50dp</dimen>
+  <dimen name="incall_dialpad_key_letters_size_for_dual_alphabets">9sp</dimen>
+  <dimen name="incall_dialpad_key_letters_size_for_single_alphabet">
+    @dimen/dialpad_key_letters_default_size_for_single_alphabet
+  </dimen>
   <dimen name="incall_dialpad_key_numbers_size">36dp</dimen>
 
   <!-- Dimension used to possibly down-scale high-res photo into what is suitable

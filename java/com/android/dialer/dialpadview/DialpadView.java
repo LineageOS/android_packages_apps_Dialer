@@ -29,6 +29,7 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,38 +74,21 @@ public class DialpadView extends LinearLayout {
         R.id.pound
       };
 
-  // Resource IDs for the button-letter mapping
-  private static final int[] LETTER_MAPPING_IDS =
-      new int[] {
-        R.string.dialpad_0_letters,
-        R.string.dialpad_1_letters,
-        R.string.dialpad_2_letters,
-        R.string.dialpad_3_letters,
-        R.string.dialpad_4_letters,
-        R.string.dialpad_5_letters,
-        R.string.dialpad_6_letters,
-        R.string.dialpad_7_letters,
-        R.string.dialpad_8_letters,
-        R.string.dialpad_9_letters,
-        R.string.dialpad_star_letters,
-        R.string.dialpad_pound_letters
-      };
-
-  // Whether the device is in landscape mode
-  private final boolean mIsLandscape;
-
-  // Whether the dialpad is shown in a right-to-left locale
-  private final boolean mIsRtl;
+  private final AttributeSet mAttributeSet;
+  private final ColorStateList mRippleColor;
+  private final String[] mPrimaryLettersMapping;
+  private final String[] mSecondaryLettersMapping;
+  private final boolean mIsLandscape; // whether the device is in landscape mode
+  private final boolean mIsRtl; // whether the dialpad is shown in a right-to-left locale
+  private final int mTranslateDistance;
 
   private EditText mDigits;
   private ImageButton mDelete;
   private View mOverflowMenuButton;
-  private ColorStateList mRippleColor;
   private ViewGroup mRateContainer;
   private TextView mIldCountry;
   private TextView mIldRate;
   private boolean mCanDigitsBeEdited;
-  private int mTranslateDistance;
 
   public DialpadView(Context context) {
     this(context, null);
@@ -116,6 +100,7 @@ public class DialpadView extends LinearLayout {
 
   public DialpadView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
+    mAttributeSet = attrs;
 
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Dialpad);
     mRippleColor = a.getColorStateList(R.styleable.Dialpad_dialpad_key_button_touch_tint);
@@ -128,6 +113,10 @@ public class DialpadView extends LinearLayout {
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     mIsRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+
+    mPrimaryLettersMapping = DialpadAlphabets.getDefaultAlphabet();
+    mSecondaryLettersMapping =
+        DialpadAlphabets.getAlphabetForLanguage(CompatUtils.getLocale(context).getISO3Language());
   }
 
   @Override
@@ -180,7 +169,7 @@ public class DialpadView extends LinearLayout {
         // The content description is used for Talkback key presses. The number is
         // separated by a "," to introduce a slight delay. Convert letters into a verbatim
         // span so that they are read as letters instead of as one word.
-        String letters = resources.getString(LETTER_MAPPING_IDS[i]);
+        String letters = mPrimaryLettersMapping[i];
         Spannable spannable =
             Spannable.Factory.getInstance().newSpannable(numberString + "," + letters);
         spannable.setSpan(
@@ -202,9 +191,31 @@ public class DialpadView extends LinearLayout {
       dialpadKey.setContentDescription(numberContentDescription);
       dialpadKey.setBackground(rippleBackground);
 
-      TextView lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
-      if (lettersView != null) {
-        lettersView.setText(resources.getString(LETTER_MAPPING_IDS[i]));
+      TextView primaryLettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
+      TextView secondaryLettersView =
+          (TextView) dialpadKey.findViewById(R.id.dialpad_key_secondary_letters);
+      if (primaryLettersView != null) {
+        primaryLettersView.setText(mPrimaryLettersMapping[i]);
+      }
+      if (primaryLettersView != null && secondaryLettersView != null) {
+        if (mSecondaryLettersMapping == null) {
+          secondaryLettersView.setVisibility(View.GONE);
+        } else {
+          secondaryLettersView.setVisibility(View.VISIBLE);
+          secondaryLettersView.setText(mSecondaryLettersMapping[i]);
+
+          // Adjust the font size of the letters if a secondary alphabet is available.
+          TypedArray a =
+              getContext()
+                  .getTheme()
+                  .obtainStyledAttributes(mAttributeSet, R.styleable.Dialpad, 0, 0);
+          int textSize =
+              a.getDimensionPixelSize(
+                  R.styleable.Dialpad_dialpad_key_letters_size_for_dual_alphabets, 0);
+          a.recycle();
+          primaryLettersView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+          secondaryLettersView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        }
       }
     }
 
