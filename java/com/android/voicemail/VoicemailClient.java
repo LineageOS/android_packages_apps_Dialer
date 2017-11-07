@@ -17,7 +17,6 @@
 package com.android.voicemail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.PersistableBundle;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
@@ -67,6 +66,12 @@ public interface VoicemailClient {
   String VOICEMAIL_SECRET_CODE = "886266344";
 
   /**
+   * Whether visual voicemail is supported by the carrier for the {@code phoneAccountHandle}. This
+   * is purely based on the MCCMNC, and a single account might still be disabled by the carrier.
+   */
+  boolean hasCarrierSupport(Context context, PhoneAccountHandle phoneAccountHandle);
+
+  /**
    * Whether the visual voicemail service is enabled for the {@code phoneAccountHandle}. "Enable"
    * means the user "wants" to have this service on, and does not mean the service is actually
    * functional(For example, the service is blocked on the carrier side. The service will be
@@ -104,14 +109,6 @@ public interface VoicemailClient {
   void appendOmtpVoicemailStatusSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs);
 
-  /**
-   * @return the class name of the {@link android.preference.PreferenceFragment} for voicemail
-   *     settings, or {@code null} if dialer cannot control voicemail settings. Always return {@code
-   *     null} before OC.
-   */
-  @Nullable
-  String getSettingsFragment();
-
   boolean isVoicemailArchiveEnabled(Context context, PhoneAccountHandle phoneAccountHandle);
 
   /**
@@ -134,11 +131,8 @@ public interface VoicemailClient {
   /** @return if the voicemail donation setting has been enabled by the user. */
   boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account);
 
-  /**
-   * @return an intent that will launch the activity to change the voicemail PIN. The PIN is used
-   *     when calling into the mailbox.
-   */
-  Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle);
+  void setVoicemailDonationEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
 
   /**
    * Whether the client is activated and handling visual voicemail for the {@code
@@ -164,6 +158,21 @@ public interface VoicemailClient {
 
   @MainThread
   void onShutdown(@NonNull Context context);
+
+  /** Listener for changes in {@link #isActivated(Context, PhoneAccountHandle)} */
+  interface ActivationStateListener {
+    @MainThread
+    void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated);
+  }
+
+  @MainThread
+  void addActivationStateListener(ActivationStateListener listener);
+
+  @MainThread
+  void removeActivationStateListener(ActivationStateListener listener);
+
+  /** Provides interface to change the PIN used to access the mailbox by calling. */
+  PinChanger createPinChanger(Context context, PhoneAccountHandle phoneAccountHandle);
 
   void onTosAccepted(Context context);
 }

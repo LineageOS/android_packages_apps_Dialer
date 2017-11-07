@@ -22,8 +22,9 @@ import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.util.Base64;
+import com.android.voicemail.PinChanger;
+import com.android.voicemail.PinChanger.ChangePinResult;
 import com.android.voicemail.impl.OmtpConstants;
-import com.android.voicemail.impl.OmtpConstants.ChangePinResult;
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
@@ -393,7 +394,7 @@ public class ImapHelper implements Closeable {
       return getChangePinResultFromImapResponse(connection.readResponse());
     } catch (IOException ioe) {
       VvmLog.e(TAG, "changePin: ", ioe);
-      return OmtpConstants.CHANGE_PIN_SYSTEM_ERROR;
+      return PinChanger.CHANGE_PIN_SYSTEM_ERROR;
     } finally {
       connection.destroyResponses();
     }
@@ -434,24 +435,24 @@ public class ImapHelper implements Closeable {
       String message = response.getStringOrEmpty(1).getString();
       LogUtils.d(TAG, "change PIN failed: " + message);
       if (OmtpConstants.RESPONSE_CHANGE_PIN_TOO_SHORT.equals(message)) {
-        return OmtpConstants.CHANGE_PIN_TOO_SHORT;
+        return PinChanger.CHANGE_PIN_TOO_SHORT;
       }
       if (OmtpConstants.RESPONSE_CHANGE_PIN_TOO_LONG.equals(message)) {
-        return OmtpConstants.CHANGE_PIN_TOO_LONG;
+        return PinChanger.CHANGE_PIN_TOO_LONG;
       }
       if (OmtpConstants.RESPONSE_CHANGE_PIN_TOO_WEAK.equals(message)) {
-        return OmtpConstants.CHANGE_PIN_TOO_WEAK;
+        return PinChanger.CHANGE_PIN_TOO_WEAK;
       }
       if (OmtpConstants.RESPONSE_CHANGE_PIN_MISMATCH.equals(message)) {
-        return OmtpConstants.CHANGE_PIN_MISMATCH;
+        return PinChanger.CHANGE_PIN_MISMATCH;
       }
       if (OmtpConstants.RESPONSE_CHANGE_PIN_INVALID_CHARACTER.equals(message)) {
-        return OmtpConstants.CHANGE_PIN_INVALID_CHARACTER;
+        return PinChanger.CHANGE_PIN_INVALID_CHARACTER;
       }
-      return OmtpConstants.CHANGE_PIN_SYSTEM_ERROR;
+      return PinChanger.CHANGE_PIN_SYSTEM_ERROR;
     }
     LogUtils.d(TAG, "change PIN succeeded");
-    return OmtpConstants.CHANGE_PIN_SUCCESS;
+    return PinChanger.CHANGE_PIN_SUCCESS;
   }
 
   public void updateQuota() {
