@@ -1,5 +1,7 @@
 # Update this when adding a new AndroidManifest.xml.
 LOCAL_AAPT_FLAGS := \
+	com.android.assets.product \
+	com.android.assets.quantum \
 	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
