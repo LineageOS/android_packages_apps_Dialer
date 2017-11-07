@@ -22,19 +22,17 @@ import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.voicemail.PinChanger;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.configui.VoicemailSecretCodeActivity;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
-import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
-import com.android.voicemail.impl.settings.VoicemailSettingsFragment;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.transcribe.TranscriptionBackfillService;
 import com.android.voicemail.impl.transcribe.TranscriptionConfigProvider;
@@ -75,6 +73,11 @@ public class VoicemailClientImpl implements VoicemailClient {
   }
 
   @Override
+  public boolean hasCarrierSupport(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle).isValid();
+  }
+
+  @Override
   public boolean isVoicemailEnabled(Context context, PhoneAccountHandle phoneAccountHandle) {
     return VisualVoicemailSettingsUtil.isEnabled(context, phoneAccountHandle);
   }
@@ -83,12 +86,6 @@ public class VoicemailClientImpl implements VoicemailClient {
   public void setVoicemailEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {
     VisualVoicemailSettingsUtil.setEnabled(context, phoneAccountHandle, enabled);
-  }
-
-  @Nullable
-  @Override
-  public String getSettingsFragment() {
-    return VoicemailSettingsFragment.class.getName();
   }
 
   @Override
@@ -145,10 +142,9 @@ public class VoicemailClientImpl implements VoicemailClient {
   }
 
   @Override
-  public Intent getSetPinIntent(Context context, PhoneAccountHandle phoneAccountHandle) {
-    Intent intent = new Intent(context, VoicemailChangePinActivity.class);
-    intent.putExtra(VoicemailChangePinActivity.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
-    return intent;
+  public void setVoicemailDonationEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {
+    VisualVoicemailSettingsUtil.setVoicemailDonationEnabled(context, phoneAccountHandle, enabled);
   }
 
   @Override
@@ -179,6 +175,21 @@ public class VoicemailClientImpl implements VoicemailClient {
   @MainThread
   public void onShutdown(@NonNull Context context) {
     OmtpService.onShutdown(context);
+  }
+
+  @Override
+  public void addActivationStateListener(ActivationStateListener listener) {
+    VvmAccountManager.addListener(listener);
+  }
+
+  @Override
+  public void removeActivationStateListener(ActivationStateListener listener) {
+    VvmAccountManager.removeListener(listener);
+  }
+
+  @Override
+  public PinChanger createPinChanger(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return new PinChangerImpl(context, phoneAccountHandle);
   }
 
   @TargetApi(VERSION_CODES.O)

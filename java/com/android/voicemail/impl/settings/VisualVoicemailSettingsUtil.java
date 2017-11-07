@@ -21,7 +21,6 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
-import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.sync.VvmAccountManager;
@@ -30,6 +29,8 @@ import com.android.voicemail.impl.sync.VvmAccountManager;
 public class VisualVoicemailSettingsUtil {
 
   @VisibleForTesting public static final String IS_ENABLED_KEY = "is_enabled";
+  private static final String ARCHIVE_ENABLED_KEY = "archive_is_enabled";
+  private static final String DONATE_VOICEMAILS_KEY = "donate_voicemails";
 
   public static void setEnabled(
       Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
@@ -53,7 +54,7 @@ public class VisualVoicemailSettingsUtil {
         VoicemailComponent.get(context).getVoicemailClient().isVoicemailArchiveAvailable(context));
     new VisualVoicemailPreferences(context, phoneAccount)
         .edit()
-        .putBoolean(context.getString(R.string.voicemail_visual_voicemail_archive_key), isEnabled)
+        .putBoolean(ARCHIVE_ENABLED_KEY, isEnabled)
         .apply();
   }
 
@@ -65,7 +66,7 @@ public class VisualVoicemailSettingsUtil {
             .isVoicemailTranscriptionAvailable(context));
     new VisualVoicemailPreferences(context, phoneAccount)
         .edit()
-        .putBoolean(context.getString(R.string.voicemail_visual_voicemail_donation_key), isEnabled)
+        .putBoolean(DONATE_VOICEMAILS_KEY, isEnabled)
         .apply();
   }
 
@@ -87,8 +88,7 @@ public class VisualVoicemailSettingsUtil {
     Assert.isNotNull(phoneAccount);
 
     VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
-    return prefs.getBoolean(
-        context.getString(R.string.voicemail_visual_voicemail_archive_key), false);
+    return prefs.getBoolean(ARCHIVE_ENABLED_KEY, false);
   }
 
   public static boolean isVoicemailDonationEnabled(
@@ -96,8 +96,7 @@ public class VisualVoicemailSettingsUtil {
     Assert.isNotNull(phoneAccount);
 
     VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
-    return prefs.getBoolean(
-        context.getString(R.string.voicemail_visual_voicemail_donation_key), false);
+    return prefs.getBoolean(DONATE_VOICEMAILS_KEY, false);
   }
 
   /**
