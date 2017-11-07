@@ -29,6 +29,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.storage.StorageComponent;
+import com.android.voicemail.VoicemailClient.ActivationStateListener;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VoicemailStatus;
@@ -50,15 +51,9 @@ import java.util.Set;
 public class VvmAccountManager {
   public static final String TAG = "VvmAccountManager";
 
-  /** Listener for activation state changes. Will be called on the main thread. */
-  public interface Listener {
-    @MainThread
-    void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated);
-  }
-
   @VisibleForTesting static final String IS_ACCOUNT_ACTIVATED = "is_account_activated";
 
-  private static Set<Listener> listeners = new ArraySet<>();
+  private static final Set<ActivationStateListener> listeners = new ArraySet<>();
 
   public static void addAccount(
       Context context, PhoneAccountHandle phoneAccountHandle, StatusMessage statusMessage) {
@@ -69,7 +64,7 @@ public class VvmAccountManager {
 
     ThreadUtil.postOnUiThread(
         () -> {
-          for (Listener listener : listeners) {
+          for (ActivationStateListener listener : listeners) {
             listener.onActivationStateChanged(phoneAccountHandle, true);
           }
         });
@@ -86,7 +81,7 @@ public class VvmAccountManager {
         .apply();
     ThreadUtil.postOnUiThread(
         () -> {
-          for (Listener listener : listeners) {
+          for (ActivationStateListener listener : listeners) {
             listener.onActivationStateChanged(phoneAccount, false);
           }
         });
@@ -113,13 +108,13 @@ public class VvmAccountManager {
   }
 
   @MainThread
-  public static void addListener(Listener listener) {
+  public static void addListener(ActivationStateListener listener) {
     Assert.isMainThread();
     listeners.add(listener);
   }
 
   @MainThread
-  public static void removeListener(Listener listener) {
+  public static void removeListener(ActivationStateListener listener) {
     Assert.isMainThread();
     listeners.remove(listener);
   }

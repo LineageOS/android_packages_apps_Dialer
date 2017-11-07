@@ -30,6 +30,7 @@ import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.CallUtil;
+import com.android.dialer.voicemail.settings.VoicemailChangePinActivity;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import java.util.Arrays;
@@ -147,10 +148,9 @@ public class VoicemailErrorMessage {
           public void onClick(View v) {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.VOICEMAIL_ALERT_SET_PIN_CLICKED);
-            context.startActivity(
-                VoicemailComponent.get(context)
-                    .getVoicemailClient()
-                    .getSetPinIntent(context, phoneAccountHandle));
+            Intent intent = new Intent(VoicemailChangePinActivity.ACTION_CHANGE_PIN);
+            intent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
+            context.startActivity(intent);
           }
         });
   }

@@ -41,8 +41,8 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VoicemailClient;
-import com.android.voicemail.VoicemailComponent;
 import java.util.List;
 
 /** Activity for dialer settings. */
@@ -187,12 +187,10 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       LogUtil.i("DialerSettingsActivity.addVoicemailSettings", "user not primary user");
       return;
     }
-    String voicemailSettingsFragment =
-        VoicemailComponent.get(this).getVoicemailClient().getSettingsFragment();
-    if (voicemailSettingsFragment == null) {
+    if (VERSION.SDK_INT < VERSION_CODES.O) {
       LogUtil.i(
           "DialerSettingsActivity.addVoicemailSettings",
-          "VoicemailClient does not provide settings");
+          "Dialer voicemail settings not supported by system");
       return;
     }
 
@@ -206,7 +204,8 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       voicemailSettings.fragment = PhoneAccountSelectionFragment.class.getName();
       Bundle bundle = new Bundle();
       bundle.putString(
-          PhoneAccountSelectionFragment.PARAM_TARGET_FRAGMENT, voicemailSettingsFragment);
+          PhoneAccountSelectionFragment.PARAM_TARGET_FRAGMENT,
+          VoicemailSettingsFragment.class.getName());
       bundle.putString(
           PhoneAccountSelectionFragment.PARAM_PHONE_ACCOUNT_HANDLE_KEY,
           VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE);
@@ -218,7 +217,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
     } else {
       LogUtil.i(
           "DialerSettingsActivity.addVoicemailSettings", "showing single-SIM voicemail settings");
-      voicemailSettings.fragment = voicemailSettingsFragment;
+      voicemailSettings.fragment = VoicemailSettingsFragment.class.getName();
       Bundle bundle = new Bundle();
       bundle.putParcelable(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, soleAccount);
       voicemailSettings.fragmentArguments = bundle;

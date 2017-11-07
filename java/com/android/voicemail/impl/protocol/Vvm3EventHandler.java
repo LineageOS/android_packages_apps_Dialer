@@ -20,13 +20,13 @@ import android.content.Context;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.IntDef;
 import android.telecom.PhoneAccountHandle;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.DefaultOmtpEventHandler;
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.OmtpEvents.Type;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.VvmLog;
-import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -302,6 +302,10 @@ public class Vvm3EventHandler {
       VvmLog.e(TAG, "status editor has null phone account handle");
       return false;
     }
-    return VoicemailChangePinActivity.isDefaultOldPinSet(context, phoneAccountHandle);
+    return VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .createPinChanger(context, phoneAccountHandle)
+            .getScrambledPin()
+        != null;
   }
 }
