@@ -275,12 +275,11 @@ public class DialpadView extends LinearLayout {
   }
 
   /**
-   * Adjust key widths to align keys in each column.
+   * Make the widths of all keys the same.
    *
-   * <p>When the device is in landscape mode, we first find the maximum among a pre-defined width
-   * and the width of each key layout. Then we adjust the width of each layout's horizontal
-   * placeholder to align keys in each column. This is to accommodate the scenario where not all
-   * letters associated with a key can be displayed in one line due to large font size.
+   * <p>When the device is in landscape mode, we first find the maximum width among key layouts.
+   * Then we adjust the width of each layout's horizontal placeholder so that each key has the same
+   * width.
    *
    * <p>This method should be called after the sizes of related layouts have been calculated by the
    * framework.
@@ -288,27 +287,11 @@ public class DialpadView extends LinearLayout {
   private void adjustKeyWidths() {
     Assert.checkState(isLandscapeMode());
 
-    // A pre-defined minimum width for the letters shown beside a key.
-    final int minimumKeyLettersWidth =
-        getContext().getResources().getDimensionPixelSize(R.dimen.dialpad_key_text_width);
-
-    // The maximum width of the key layouts. A key layout includes both the number and the letters.
     int maxWidth = 0;
-
     for (int buttonId : BUTTON_IDS) {
       DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(buttonId);
       LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
-      TextView keyLettersView = (TextView) keyLayout.findViewById(R.id.dialpad_key_letters);
-      if (keyLettersView != null && keyLettersView.getWidth() < minimumKeyLettersWidth) {
-        // If the width of the letters is less than the pre-defined minimum, use the pre-defined
-        // minimum to obtain the maximum width.
-        maxWidth =
-            Math.max(
-                maxWidth,
-                keyLayout.getWidth() - keyLettersView.getWidth() + minimumKeyLettersWidth);
-      } else {
-        maxWidth = Math.max(maxWidth, keyLayout.getWidth());
-      }
+      maxWidth = Math.max(maxWidth, keyLayout.getWidth());
     }
 
     for (int buttonId : BUTTON_IDS) {
