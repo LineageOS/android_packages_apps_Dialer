@@ -139,6 +139,9 @@ public class PhoneCallDetailsHelper {
       views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
     } else {
       nameText = details.getPreferredName();
+      // "nameView" is updated from phone number to contact name after number matching.
+      // Since TextDirection remains at View.TEXT_DIRECTION_LTR, initialize it.
+      views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
     }
 
     views.nameView.setText(nameText);
