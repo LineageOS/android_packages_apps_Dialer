@@ -26,6 +26,8 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.logging.DialerImpression;
+import com.android.voicemail.PinChanger;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.OmtpEvents;
@@ -37,7 +39,6 @@ import com.android.voicemail.impl.imap.ImapHelper;
 import com.android.voicemail.impl.imap.ImapHelper.InitializingException;
 import com.android.voicemail.impl.mail.MessagingException;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
-import com.android.voicemail.impl.settings.VoicemailChangePinActivity;
 import com.android.voicemail.impl.sms.OmtpMessageSender;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sms.Vvm3MessageSender;
@@ -68,7 +69,7 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
   private static final String IMAP_CHANGE_VM_LANG_FORMAT = "CHANGE_VM_LANG Lang=%1$s";
   private static final String IMAP_CLOSE_NUT = "CLOSE_NUT";
 
-  private static final String ISO639_Spanish = "es";
+  private static final String ISO639_SPANISH = "es";
 
   /**
    * For VVM3, if the STATUS SMS returns {@link StatusMessage#getProvisioningStatus()} of {@link
@@ -217,7 +218,7 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
         // VVM3 has inconsistent error language code to OMTP. Just issue a raw command
         // here.
         // TODO(a bug): use LocaleList
-        if (Locale.getDefault().getLanguage().equals(new Locale(ISO639_Spanish).getLanguage())) {
+        if (Locale.getDefault().getLanguage().equals(new Locale(ISO639_SPANISH).getLanguage())) {
           // Spanish
           helper.changeVoicemailTuiLanguage(VVM3_VM_LANGUAGE_SPANISH_STANDARD_NO_GUEST_PROMPTS);
         } else {
@@ -257,14 +258,19 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
       return false;
     }
 
-    if (VoicemailChangePinActivity.isDefaultOldPinSet(context, phoneAccountHandle)) {
+    PinChanger pinChanger =
+        VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .createPinChanger(context, phoneAccountHandle);
+
+    if (pinChanger.getScrambledPin() != null) {
       // The pin was already set
       VvmLog.i(TAG, "PIN already set");
       return true;
     }
     String newPin = generatePin(getMinimumPinLength(context, phoneAccountHandle));
-    if (helper.changePin(defaultPin, newPin) == OmtpConstants.CHANGE_PIN_SUCCESS) {
-      VoicemailChangePinActivity.setDefaultOldPIN(context, phoneAccountHandle, newPin);
+    if (helper.changePin(defaultPin, newPin) == PinChanger.CHANGE_PIN_SUCCESS) {
+      pinChanger.setScrambledPin(newPin);
       helper.handleEvent(OmtpEvents.CONFIG_DEFAULT_PIN_REPLACED);
     }
     VvmLog.i(TAG, "new user: PIN set");

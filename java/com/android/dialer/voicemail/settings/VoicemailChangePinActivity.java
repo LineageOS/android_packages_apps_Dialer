@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.voicemail.impl.settings;
+package com.android.dialer.voicemail.settings;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -23,7 +23,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.net.Network;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,40 +44,44 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
-import com.android.voicemail.impl.OmtpConstants;
-import com.android.voicemail.impl.OmtpConstants.ChangePinResult;
-import com.android.voicemail.impl.OmtpEvents;
-import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
-import com.android.voicemail.impl.R;
-import com.android.voicemail.impl.VisualVoicemailPreferences;
-import com.android.voicemail.impl.VoicemailStatus;
-import com.android.voicemail.impl.VvmLog;
-import com.android.voicemail.impl.imap.ImapHelper;
-import com.android.voicemail.impl.imap.ImapHelper.InitializingException;
-import com.android.voicemail.impl.mail.MessagingException;
-import com.android.voicemail.impl.sync.VvmNetworkRequestCallback;
-import com.android.voicemail.impl.utils.LoggerUtils;
+import com.android.dialer.logging.Logger;
+import com.android.voicemail.PinChanger;
+import com.android.voicemail.PinChanger.ChangePinResult;
+import com.android.voicemail.PinChanger.PinSpecification;
+import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
+import java.lang.ref.WeakReference;
 
 /**
  * Dialog to change the voicemail PIN. The TUI (Telephony User Interface) PIN is used when accessing
  * traditional voicemail through phone call. The intent to launch this activity must contain {@link
- * #EXTRA_PHONE_ACCOUNT_HANDLE}
+ * VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE}
  */
 @TargetApi(VERSION_CODES.O)
 public class VoicemailChangePinActivity extends Activity
     implements OnClickListener, OnEditorActionListener, TextWatcher {
 
   private static final String TAG = "VmChangePinActivity";
-
-  public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
-
-  private static final String KEY_DEFAULT_OLD_PIN = "default_old_pin";
+  public static final String ACTION_CHANGE_PIN = "com.android.dialer.action.CHANGE_PIN";
 
   private static final int MESSAGE_HANDLE_RESULT = 1;
 
   private PhoneAccountHandle mPhoneAccountHandle;
-  private OmtpVvmCarrierConfigHelper mConfig;
+  private PinChanger mPinChanger;
+
+  private static class ChangePinParams {
+    PinChanger pinChanger;
+    PhoneAccountHandle phoneAccountHandle;
+    String oldPin;
+    String newPin;
+  }
+
+  private DialerExecutor<ChangePinParams> mChangePinExecutor;
 
   private int mPinMinLength;
   private int mPinMaxLength;
@@ -96,15 +99,7 @@ public class VoicemailChangePinActivity extends Activity
   private Button mCancelButton;
   private Button mNextButton;
 
-  private Handler mHandler =
-      new Handler() {
-        @Override
-        public void handleMessage(Message message) {
-          if (message.what == MESSAGE_HANDLE_RESULT) {
-            mUiState.handleResult(VoicemailChangePinActivity.this, message.arg1);
-          }
-        }
-      };
+  private Handler mHandler = new ChangePinHandler(new WeakReference<>(this));
 
   private enum State {
     /**
@@ -139,7 +134,7 @@ public class VoicemailChangePinActivity extends Activity
 
       @Override
       public void handleResult(VoicemailChangePinActivity activity, @ChangePinResult int result) {
-        if (result == OmtpConstants.CHANGE_PIN_SUCCESS) {
+        if (result == PinChanger.CHANGE_PIN_SUCCESS) {
           activity.updateState(State.EnterNewPin);
         } else {
           CharSequence message = activity.getChangePinResultMessage(result);
@@ -164,9 +159,9 @@ public class VoicemailChangePinActivity extends Activity
       @Override
       public void handleResult(
           final VoicemailChangePinActivity activity, @ChangePinResult int result) {
-        if (result == OmtpConstants.CHANGE_PIN_SUCCESS) {
+        if (result == PinChanger.CHANGE_PIN_SUCCESS) {
           activity.updateState(State.EnterNewPin);
-        } else if (result == OmtpConstants.CHANGE_PIN_SYSTEM_ERROR) {
+        } else if (result == PinChanger.CHANGE_PIN_SYSTEM_ERROR) {
           activity
               .getWindow()
               .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -179,13 +174,12 @@ public class VoicemailChangePinActivity extends Activity
                 }
               });
         } else {
-          VvmLog.e(TAG, "invalid default old PIN: " + activity.getChangePinResultMessage(result));
+          LogUtil.e(TAG, "invalid default old PIN: " + activity.getChangePinResultMessage(result));
           // If the default old PIN is rejected by the server, the PIN is probably changed
           // through other means, or the generated pin is invalid
           // Wipe the default old PIN so the old PIN input box will be shown to the user
           // on the next time.
-          setDefaultOldPIN(activity, activity.mPhoneAccountHandle, null);
-          activity.handleOmtpEvent(OmtpEvents.CONFIG_PIN_SET);
+          activity.mPinChanger.setScrambledPin(null);
           activity.updateState(State.EnterOldPin);
         }
       }
@@ -270,24 +264,22 @@ public class VoicemailChangePinActivity extends Activity
 
       @Override
       public void handleResult(VoicemailChangePinActivity activity, @ChangePinResult int result) {
-        if (result == OmtpConstants.CHANGE_PIN_SUCCESS) {
+        if (result == PinChanger.CHANGE_PIN_SUCCESS) {
           // If the PIN change succeeded we no longer know what the old (current) PIN is.
           // Wipe the default old PIN so the old PIN input box will be shown to the user
           // on the next time.
-          setDefaultOldPIN(activity, activity.mPhoneAccountHandle, null);
-          activity.handleOmtpEvent(OmtpEvents.CONFIG_PIN_SET);
+          activity.mPinChanger.setScrambledPin(null);
 
           activity.finish();
-          LoggerUtils.logImpressionOnMainThread(
-              activity, DialerImpression.Type.VVM_CHANGE_PIN_COMPLETED);
+          Logger.get(activity).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_COMPLETED);
           Toast.makeText(
                   activity, activity.getString(R.string.change_pin_succeeded), Toast.LENGTH_SHORT)
               .show();
         } else {
           CharSequence message = activity.getChangePinResultMessage(result);
-          VvmLog.i(TAG, "Change PIN failed: " + message);
+          LogUtil.i(TAG, "Change PIN failed: " + message);
           activity.showError(message);
-          if (result == OmtpConstants.CHANGE_PIN_MISMATCH) {
+          if (result == PinChanger.CHANGE_PIN_MISMATCH) {
             // Somehow the PIN has changed, prompt to enter the old PIN again.
             activity.updateState(State.EnterOldPin);
           } else {
@@ -336,8 +328,12 @@ public class VoicemailChangePinActivity extends Activity
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mPhoneAccountHandle = getIntent().getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mConfig = new OmtpVvmCarrierConfigHelper(this, mPhoneAccountHandle);
+    mPhoneAccountHandle =
+        getIntent().getParcelableExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE);
+    mPinChanger =
+        VoicemailComponent.get(this)
+            .getVoicemailClient()
+            .createPinChanger(getApplicationContext(), mPhoneAccountHandle);
     setContentView(R.layout.voicemail_change_pin);
     setTitle(R.string.change_pin_title);
 
@@ -361,42 +357,27 @@ public class VoicemailChangePinActivity extends Activity
     mHintText = (TextView) view.findViewById(R.id.hintText);
     mErrorText = (TextView) view.findViewById(R.id.errorText);
 
-    if (isDefaultOldPinSet(this, mPhoneAccountHandle)) {
-      mOldPin = getDefaultOldPin(this, mPhoneAccountHandle);
+    if (isPinScrambled(this, mPhoneAccountHandle)) {
+      mOldPin = mPinChanger.getScrambledPin();
       updateState(State.VerifyOldPin);
     } else {
       updateState(State.EnterOldPin);
     }
-  }
 
-  private void handleOmtpEvent(OmtpEvents event) {
-    mConfig.handleEvent(getVoicemailStatusEditor(), event);
-  }
-
-  private VoicemailStatus.Editor getVoicemailStatusEditor() {
-    // This activity does not have any automatic retry mechanism, errors should be written right
-    // away.
-    return VoicemailStatus.edit(this, mPhoneAccountHandle);
+    mChangePinExecutor =
+        DialerExecutorComponent.get(this)
+            .dialerExecutorFactory()
+            .createUiTaskBuilder(getFragmentManager(), "changePin", new ChangePinWorker())
+            .onSuccess(this::sendResult)
+            .onFailure((tr) -> sendResult(PinChanger.CHANGE_PIN_SYSTEM_ERROR))
+            .build();
   }
 
   /** Extracts the pin length requirement sent by the server with a STATUS SMS. */
   private void readPinLength() {
-    VisualVoicemailPreferences preferences =
-        new VisualVoicemailPreferences(this, mPhoneAccountHandle);
-    // The OMTP pin length format is {min}-{max}
-    String[] lengths = preferences.getString(OmtpConstants.TUI_PASSWORD_LENGTH, "").split("-");
-    if (lengths.length == 2) {
-      try {
-        mPinMinLength = Integer.parseInt(lengths[0]);
-        mPinMaxLength = Integer.parseInt(lengths[1]);
-      } catch (NumberFormatException e) {
-        mPinMinLength = 0;
-        mPinMaxLength = 0;
-      }
-    } else {
-      mPinMinLength = 0;
-      mPinMaxLength = 0;
-    }
+    PinSpecification pinSpecification = mPinChanger.getPinSpecification();
+    mPinMinLength = pinSpecification.minLength;
+    mPinMaxLength = pinSpecification.maxLength;
   }
 
   @Override
@@ -464,21 +445,12 @@ public class VoicemailChangePinActivity extends Activity
    * After replacing the default PIN with a random PIN, call this to store the random PIN. The
    * stored PIN will be automatically entered when the user attempts to change the PIN.
    */
-  public static void setDefaultOldPIN(
-      Context context, PhoneAccountHandle phoneAccountHandle, String pin) {
-    new VisualVoicemailPreferences(context, phoneAccountHandle)
-        .edit()
-        .putString(KEY_DEFAULT_OLD_PIN, pin)
-        .apply();
-  }
-
-  public static boolean isDefaultOldPinSet(Context context, PhoneAccountHandle phoneAccountHandle) {
-    return getDefaultOldPin(context, phoneAccountHandle) != null;
-  }
-
-  private static String getDefaultOldPin(Context context, PhoneAccountHandle phoneAccountHandle) {
-    return new VisualVoicemailPreferences(context, phoneAccountHandle)
-        .getString(KEY_DEFAULT_OLD_PIN);
+  public static boolean isPinScrambled(Context context, PhoneAccountHandle phoneAccountHandle) {
+    return VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .createPinChanger(context, phoneAccountHandle)
+            .getScrambledPin()
+        != null;
   }
 
   private String getCurrentPasswordInput() {
@@ -522,24 +494,24 @@ public class VoicemailChangePinActivity extends Activity
 
   /**
    * Get the corresponding message for the {@link ChangePinResult}.<code>result</code> must not
-   * {@link OmtpConstants#CHANGE_PIN_SUCCESS}
+   * {@link PinChanger#CHANGE_PIN_SUCCESS}
    */
   private CharSequence getChangePinResultMessage(@ChangePinResult int result) {
     switch (result) {
-      case OmtpConstants.CHANGE_PIN_TOO_SHORT:
+      case PinChanger.CHANGE_PIN_TOO_SHORT:
         return getString(R.string.vm_change_pin_error_too_short);
-      case OmtpConstants.CHANGE_PIN_TOO_LONG:
+      case PinChanger.CHANGE_PIN_TOO_LONG:
         return getString(R.string.vm_change_pin_error_too_long);
-      case OmtpConstants.CHANGE_PIN_TOO_WEAK:
+      case PinChanger.CHANGE_PIN_TOO_WEAK:
         return getString(R.string.vm_change_pin_error_too_weak);
-      case OmtpConstants.CHANGE_PIN_INVALID_CHARACTER:
+      case PinChanger.CHANGE_PIN_INVALID_CHARACTER:
         return getString(R.string.vm_change_pin_error_invalid);
-      case OmtpConstants.CHANGE_PIN_MISMATCH:
+      case PinChanger.CHANGE_PIN_MISMATCH:
         return getString(R.string.vm_change_pin_error_mismatch);
-      case OmtpConstants.CHANGE_PIN_SYSTEM_ERROR:
+      case PinChanger.CHANGE_PIN_SYSTEM_ERROR:
         return getString(R.string.vm_change_pin_error_system_error);
       default:
-        VvmLog.wtf(TAG, "Unexpected ChangePinResult " + result);
+        LogUtil.e(TAG, "Unexpected ChangePinResult " + result);
         return null;
     }
   }
@@ -571,57 +543,53 @@ public class VoicemailChangePinActivity extends Activity
     mProgressDialog.setMessage(getString(R.string.vm_change_pin_progress_message));
     mProgressDialog.show();
 
-    ChangePinNetworkRequestCallback callback = new ChangePinNetworkRequestCallback(oldPin, newPin);
-    callback.requestNetwork();
+    ChangePinParams params = new ChangePinParams();
+    params.pinChanger = mPinChanger;
+    params.phoneAccountHandle = mPhoneAccountHandle;
+    params.oldPin = oldPin;
+    params.newPin = newPin;
+
+    mChangePinExecutor.executeSerial(params);
   }
 
-  private class ChangePinNetworkRequestCallback extends VvmNetworkRequestCallback {
+  private void sendResult(@ChangePinResult int result) {
+    LogUtil.i(TAG, "Change PIN result: " + result);
+    if (mProgressDialog.isShowing()
+        && !VoicemailChangePinActivity.this.isDestroyed()
+        && !VoicemailChangePinActivity.this.isFinishing()) {
+      mProgressDialog.dismiss();
+    } else {
+      LogUtil.i(TAG, "Dialog not visible, not dismissing");
+    }
+    mHandler.obtainMessage(MESSAGE_HANDLE_RESULT, result, 0).sendToTarget();
+  }
 
-    private final String mOldPin;
-    private final String mNewPin;
+  private static class ChangePinHandler extends Handler {
 
-    public ChangePinNetworkRequestCallback(String oldPin, String newPin) {
-      super(
-          mConfig, mPhoneAccountHandle, VoicemailChangePinActivity.this.getVoicemailStatusEditor());
-      mOldPin = oldPin;
-      mNewPin = newPin;
+    private final WeakReference<VoicemailChangePinActivity> activityWeakReference;
+
+    private ChangePinHandler(WeakReference<VoicemailChangePinActivity> activityWeakReference) {
+      this.activityWeakReference = activityWeakReference;
     }
 
     @Override
-    public void onAvailable(Network network) {
-      super.onAvailable(network);
-      try (ImapHelper helper =
-          new ImapHelper(
-              VoicemailChangePinActivity.this,
-              mPhoneAccountHandle,
-              network,
-              getVoicemailStatusEditor())) {
-
-        @ChangePinResult int result = helper.changePin(mOldPin, mNewPin);
-        sendResult(result);
-      } catch (InitializingException | MessagingException e) {
-        VvmLog.e(TAG, "ChangePinNetworkRequestCallback: onAvailable: ", e);
-        sendResult(OmtpConstants.CHANGE_PIN_SYSTEM_ERROR);
+    public void handleMessage(Message message) {
+      VoicemailChangePinActivity activity = activityWeakReference.get();
+      if (activity == null) {
+        return;
+      }
+      if (message.what == MESSAGE_HANDLE_RESULT) {
+        activity.mUiState.handleResult(activity, message.arg1);
       }
     }
+  }
 
+  private static class ChangePinWorker implements Worker<ChangePinParams, Integer> {
+
+    @Nullable
     @Override
-    public void onFailed(String reason) {
-      super.onFailed(reason);
-      sendResult(OmtpConstants.CHANGE_PIN_SYSTEM_ERROR);
-    }
-
-    private void sendResult(@ChangePinResult int result) {
-      VvmLog.i(TAG, "Change PIN result: " + result);
-      if (mProgressDialog.isShowing()
-          && !VoicemailChangePinActivity.this.isDestroyed()
-          && !VoicemailChangePinActivity.this.isFinishing()) {
-        mProgressDialog.dismiss();
-      } else {
-        VvmLog.i(TAG, "Dialog not visible, not dismissing");
-      }
-      mHandler.obtainMessage(MESSAGE_HANDLE_RESULT, result, 0).sendToTarget();
-      releaseNetwork();
+    public Integer doInBackground(@Nullable ChangePinParams input) throws Throwable {
+      return input.pinChanger.changePin(input.oldPin, input.newPin);
     }
   }
 }
