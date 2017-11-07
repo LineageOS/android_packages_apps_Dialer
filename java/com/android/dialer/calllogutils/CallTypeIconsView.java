@@ -24,6 +24,7 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 import com.android.dialer.compat.AppCompatConstants;
@@ -115,6 +116,11 @@ public class CallTypeIconsView extends View {
       mHeight = Math.max(mHeight, sResources.hdCall.getIntrinsicHeight());
       invalidate();
     }
+  }
+
+  @VisibleForTesting
+  public boolean isHdShown() {
+    return mShowHd;
   }
 
   public void setShowWifi(boolean showWifi) {

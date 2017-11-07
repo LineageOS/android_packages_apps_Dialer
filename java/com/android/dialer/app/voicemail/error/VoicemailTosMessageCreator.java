@@ -44,6 +44,7 @@ import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -154,11 +155,7 @@ public class VoicemailTosMessageCreator {
                                 new ComponentName(context, Constants.get().getSettingsActivity()))
                             .setData(
                                 Uri.fromParts(
-                                    "header",
-                                    VoicemailComponent.get(context)
-                                        .getVoicemailClient()
-                                        .getSettingsFragment(),
-                                    null));
+                                    "header", VoicemailSettingsFragment.class.getName(), null));
                     context.startActivity(intent);
                   }
                 }),

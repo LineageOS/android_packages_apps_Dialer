@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.voicemail.impl;
 
-import android.support.annotation.IntDef;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+package com.android.voicemail.impl;
 
 /**
  * Wrapper class to hold relevant OMTP constants as defined in the OMTP spec.
@@ -211,28 +208,6 @@ public class OmtpConstants {
   public static final String RESPONSE_CHANGE_PIN_MISMATCH = "old password mismatch";
   public static final String RESPONSE_CHANGE_PIN_INVALID_CHARACTER =
       "password contains invalid characters";
-
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef(
-    value = {
-      CHANGE_PIN_SUCCESS,
-      CHANGE_PIN_TOO_SHORT,
-      CHANGE_PIN_TOO_LONG,
-      CHANGE_PIN_TOO_WEAK,
-      CHANGE_PIN_MISMATCH,
-      CHANGE_PIN_INVALID_CHARACTER,
-      CHANGE_PIN_SYSTEM_ERROR
-    }
-  )
-  public @interface ChangePinResult {}
-
-  public static final int CHANGE_PIN_SUCCESS = 0;
-  public static final int CHANGE_PIN_TOO_SHORT = 1;
-  public static final int CHANGE_PIN_TOO_LONG = 2;
-  public static final int CHANGE_PIN_TOO_WEAK = 3;
-  public static final int CHANGE_PIN_MISMATCH = 4;
-  public static final int CHANGE_PIN_INVALID_CHARACTER = 5;
-  public static final int CHANGE_PIN_SYSTEM_ERROR = 6;
 
   public static String getClientType() {
     String manufacturer =

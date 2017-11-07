@@ -32,8 +32,6 @@ public class MotorolaUtils {
       "hd_codec_blinking_icon_when_connecting_enabled";
   private static final String CONFIG_HD_CODEC_SHOW_ICON_IN_NOTIFICATION_ENABLED =
       "hd_codec_show_icon_in_notification_enabled";
-  private static final String CONFIG_HD_CODEC_SHOW_ICON_IN_CALL_LOG_ENABLED =
-      "hd_codec_show_icon_in_call_log_enabled";
   private static final String CONFIG_WIFI_CALL_SHOW_ICON_IN_CALL_LOG_ENABLED =
       "wifi_call_show_icon_in_call_log_enabled";
 
@@ -77,13 +75,6 @@ public class MotorolaUtils {
   public static boolean shouldShowHdIconInNotification(Context context) {
     return ConfigProviderBindings.get(context)
             .getBoolean(CONFIG_HD_CODEC_SHOW_ICON_IN_NOTIFICATION_ENABLED, true)
-        && isSupportingSprintHdCodec(context);
-  }
-
-  public static boolean shouldShowHdIconInCallLog(Context context, int features) {
-    return ConfigProviderBindings.get(context)
-            .getBoolean(CONFIG_HD_CODEC_SHOW_ICON_IN_CALL_LOG_ENABLED, true)
-        && (features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL
         && isSupportingSprintHdCodec(context);
   }
 

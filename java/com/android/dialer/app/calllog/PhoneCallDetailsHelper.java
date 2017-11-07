@@ -89,7 +89,7 @@ public class PhoneCallDetailsHelper {
     views.callTypeIcons.setShowVideo(
         (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
     views.callTypeIcons.setShowHd(
-        MotorolaUtils.shouldShowHdIconInCallLog(mContext, details.features));
+        (details.features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     views.callTypeIcons.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(mContext, details.features));
     views.callTypeIcons.requestLayout();
@@ -139,6 +139,9 @@ public class PhoneCallDetailsHelper {
       views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
     } else {
       nameText = details.getPreferredName();
+      // "nameView" is updated from phone number to contact name after number matching.
+      // Since TextDirection remains at View.TEXT_DIRECTION_LTR, initialize it.
+      views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
     }
 
     views.nameView.setText(nameText);

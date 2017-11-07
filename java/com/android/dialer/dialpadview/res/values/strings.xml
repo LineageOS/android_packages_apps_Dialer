@@ -18,19 +18,6 @@
   <string name="dialpad_star_number" translatable="false">*</string>
   <string name="dialpad_pound_number" translatable="false">#</string>
 
-  <string name="dialpad_0_letters" translatable="false">+</string>
-  <string name="dialpad_1_letters" translatable="false"></string>
-  <string name="dialpad_2_letters" translatable="false">ABC</string>
-  <string name="dialpad_3_letters" translatable="false">DEF</string>
-  <string name="dialpad_4_letters" translatable="false">GHI</string>
-  <string name="dialpad_5_letters" translatable="false">JKL</string>
-  <string name="dialpad_6_letters" translatable="false">MNO</string>
-  <string name="dialpad_7_letters" translatable="false">PQRS</string>
-  <string name="dialpad_8_letters" translatable="false">TUV</string>
-  <string name="dialpad_9_letters" translatable="false">WXYZ</string>
-  <string name="dialpad_star_letters" translatable="false"></string>
-  <string name="dialpad_pound_letters" translatable="false"></string>
-
   <!-- String describing the back button in the dialpad. -->
   <string name="description_dialpad_back">Navigate back</string>
 
