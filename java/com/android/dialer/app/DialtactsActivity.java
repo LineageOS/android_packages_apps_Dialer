@@ -1554,6 +1554,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (tabIndex != mPreviouslySelectedTabIndex) {
       mFloatingActionButtonController.scaleIn();
     }
+    LogUtil.i("DialtactsActivity.onPageSelected", "tabIndex: %d", tabIndex);
     mPreviouslySelectedTabIndex = tabIndex;
     timeTabSelected = SystemClock.elapsedRealtime();
   }
@@ -1673,6 +1674,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       hideDialpadFragment(false, true);
     }
     exitSearchUi();
+  }
+
+  protected int getPreviouslySelectedTabIndex() {
+    return mPreviouslySelectedTabIndex;
   }
 
   /** Popup menu accessible from the search bar */
