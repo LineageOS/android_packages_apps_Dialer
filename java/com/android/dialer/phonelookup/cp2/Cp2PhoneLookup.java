@@ -33,6 +33,7 @@ import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
+import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -182,9 +183,9 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         getDeletedPhoneNumbers(existingInfoMap, lastModified);
 
     // For each DialerPhoneNumber that was associated with a contact or added to a contact,
-    // build a map of those DialerPhoneNumbers to a set Cp2Infos, where each Cp2Info represents a
-    // contact.
-    ImmutableMap<DialerPhoneNumber, Set<Cp2Info>> updatedContacts =
+    // build a map of those DialerPhoneNumbers to a set Cp2ContactInfos, where each Cp2ContactInfo
+    // represents a contact.
+    ImmutableMap<DialerPhoneNumber, Set<Cp2ContactInfo>> updatedContacts =
         buildMapForUpdatedOrAddedContacts(existingInfoMap, lastModified, deletedPhoneNumbers);
 
     // Start build a new map of updated info. This will replace existing info.
@@ -196,16 +197,16 @@ public final class Cp2PhoneLookup implements PhoneLookup {
       // Build off the existing info
       PhoneLookupInfo.Builder infoBuilder = PhoneLookupInfo.newBuilder(entry.getValue());
 
-      // If the contact was updated, replace the Cp2Info list
+      // If the contact was updated, replace the Cp2ContactInfo list
       if (updatedContacts.containsKey(entry.getKey())) {
-        infoBuilder.clearCp2Info();
-        infoBuilder.addAllCp2Info(updatedContacts.get(entry.getKey()));
+        infoBuilder.setCp2Info(
+            Cp2Info.newBuilder().addAllCp2ContactInfo(updatedContacts.get(entry.getKey())));
 
-        // If it was deleted and not added to a new contact, replace the Cp2Info list with
-        // the default instance of Cp2Info
+        // If it was deleted and not added to a new contact, replace the Cp2ContactInfo list with
+        // the default instance of Cp2ContactInfo
       } else if (deletedPhoneNumbers.contains(entry.getKey())) {
-        infoBuilder.clearCp2Info();
-        infoBuilder.addCp2Info(Cp2Info.getDefaultInstance());
+        infoBuilder.setCp2Info(
+            Cp2Info.newBuilder().addCp2ContactInfo(Cp2ContactInfo.getDefaultInstance()));
       }
 
       // If the DialerPhoneNumber didn't change, add the unchanged existing info.
@@ -218,12 +219,12 @@ public final class Cp2PhoneLookup implements PhoneLookup {
    * 1. get all contact ids. if the id is unset, add the number to the list of contacts to look up.
    * 2. reduce our list of contact ids to those that were updated after lastModified. 3. Now we have
    * the smallest set of dialer phone numbers to query cp2 against. 4. build and return the map of
-   * dialerphonenumbers to their new cp2info
+   * dialerphonenumbers to their new Cp2ContactInfo
    *
    * @return Map of {@link DialerPhoneNumber} to {@link PhoneLookupInfo} with updated {@link
-   *     Cp2Info}.
+   *     Cp2ContactInfo}.
    */
-  private ImmutableMap<DialerPhoneNumber, Set<Cp2Info>> buildMapForUpdatedOrAddedContacts(
+  private ImmutableMap<DialerPhoneNumber, Set<Cp2ContactInfo>> buildMapForUpdatedOrAddedContacts(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap,
       long lastModified,
       Set<DialerPhoneNumber> deletedPhoneNumbers) {
@@ -239,20 +240,20 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         continue;
       }
 
-      // For each Cp2Info for each existing DialerPhoneNumber...
+      // For each Cp2ContactInfo for each existing DialerPhoneNumber...
       // Store the contact id if it exist, else automatically add the DialerPhoneNumber to our
       // set of DialerPhoneNumbers we want to update.
-      for (Cp2Info cp2Info : entry.getValue().getCp2InfoList()) {
-        if (Objects.equals(cp2Info, Cp2Info.getDefaultInstance())) {
-          // If the number doesn't have any Cp2Info set to it, for various reasons, we need to look
-          // up the number to check if any exists.
+      for (Cp2ContactInfo cp2ContactInfo : entry.getValue().getCp2Info().getCp2ContactInfoList()) {
+        if (Objects.equals(cp2ContactInfo, Cp2ContactInfo.getDefaultInstance())) {
+          // If the number doesn't have any Cp2ContactInfo set to it, for various reasons, we need
+          // to look up the number to check if any exists.
           // The various reasons this might happen are:
           //  - An existing contact that wasn't in the call log is now in the call log.
           //  - A number was in the call log before but has now been added to a contact.
           //  - A number is in the call log, but isn't associated with any contact.
           updatedNumbers.add(entry.getKey());
         } else {
-          contactIds.add(cp2Info.getContactId());
+          contactIds.add(cp2ContactInfo.getContactId());
         }
       }
     }
@@ -264,28 +265,29 @@ public final class Cp2PhoneLookup implements PhoneLookup {
       cursor.moveToPosition(-1);
       while (cursor.moveToNext()) {
         // Find the DialerPhoneNumber for each contact id and add it to our updated numbers set.
-        // These, along with our number not associated with any Cp2Info need to be updated.
+        // These, along with our number not associated with any Cp2ContactInfo need to be updated.
         long contactId = cursor.getLong(contactIdIndex);
         updatedNumbers.addAll(getDialerPhoneNumber(existingInfoMap, contactId));
       }
     }
 
-    // Query the Phone table and build Cp2Info for each DialerPhoneNumber in our updatedNumbers set.
-    Map<DialerPhoneNumber, Set<Cp2Info>> map = new ArrayMap<>();
+    // Query the Phone table and build Cp2ContactInfo for each DialerPhoneNumber in our
+    // updatedNumbers set.
+    Map<DialerPhoneNumber, Set<Cp2ContactInfo>> map = new ArrayMap<>();
     try (Cursor cursor = getAllCp2Rows(updatedNumbers)) {
       cursor.moveToPosition(-1);
       while (cursor.moveToNext()) {
         // Map each dialer phone number to it's new cp2 info
         Set<DialerPhoneNumber> phoneNumbers =
             getDialerPhoneNumbers(updatedNumbers, cursor.getString(CP2_INFO_NUMBER_INDEX));
-        Cp2Info info = buildCp2InfoFromUpdatedContactsCursor(cursor);
+        Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(cursor);
         for (DialerPhoneNumber phoneNumber : phoneNumbers) {
           if (map.containsKey(phoneNumber)) {
             map.get(phoneNumber).add(info);
           } else {
-            Set<Cp2Info> cp2Infos = new ArraySet<>();
-            cp2Infos.add(info);
-            map.put(phoneNumber, cp2Infos);
+            Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
+            cp2ContactInfos.add(info);
+            map.put(phoneNumber, cp2ContactInfos);
           }
         }
       }
@@ -312,14 +314,14 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   /**
    * @param cursor with projection {@link #CP2_INFO_PROJECTION}.
-   * @return new {@link Cp2Info} based on current row of {@code cursor}.
+   * @return new {@link Cp2ContactInfo} based on current row of {@code cursor}.
    */
-  private static Cp2Info buildCp2InfoFromUpdatedContactsCursor(Cursor cursor) {
+  private static Cp2ContactInfo buildCp2ContactInfoFromUpdatedContactsCursor(Cursor cursor) {
     String displayName = cursor.getString(CP2_INFO_NAME_INDEX);
     String photoUri = cursor.getString(CP2_INFO_PHOTO_URI_INDEX);
     String label = cursor.getString(CP2_INFO_LABEL_INDEX);
 
-    Cp2Info.Builder infoBuilder = Cp2Info.newBuilder();
+    Cp2ContactInfo.Builder infoBuilder = Cp2ContactInfo.newBuilder();
     if (!TextUtils.isEmpty(displayName)) {
       infoBuilder.setName(displayName);
     }
@@ -351,8 +353,8 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   private Set<Long> findContactIdsIn(ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map) {
     Set<Long> contactIds = new ArraySet<>();
     for (PhoneLookupInfo info : map.values()) {
-      for (Cp2Info cp2Info : info.getCp2InfoList()) {
-        contactIds.add(cp2Info.getContactId());
+      for (Cp2ContactInfo cp2ContactInfo : info.getCp2Info().getCp2ContactInfoList()) {
+        contactIds.add(cp2ContactInfo.getContactId());
       }
     }
     return contactIds;
@@ -414,8 +416,8 @@ public final class Cp2PhoneLookup implements PhoneLookup {
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long contactId) {
     Set<DialerPhoneNumber> matches = new ArraySet<>();
     for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : existingInfoMap.entrySet()) {
-      for (Cp2Info cp2Info : entry.getValue().getCp2InfoList()) {
-        if (cp2Info.getContactId() == contactId) {
+      for (Cp2ContactInfo cp2ContactInfo : entry.getValue().getCp2Info().getCp2ContactInfoList()) {
+        if (cp2ContactInfo.getContactId() == contactId) {
           matches.add(entry.getKey());
         }
       }
