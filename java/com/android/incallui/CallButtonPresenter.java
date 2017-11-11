@@ -477,7 +477,8 @@ public class CallButtonPresenter
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio);
     mInCallButtonUi.showButton(
-        InCallButtonIds.BUTTON_SWITCH_CAMERA, isVideo && hasCameraPermission);
+        InCallButtonIds.BUTTON_SWITCH_CAMERA,
+        isVideo && hasCameraPermission && call.getVideoTech().isTransmitting());
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_PAUSE_VIDEO, showPauseVideo);
     if (isVideo) {
       mInCallButtonUi.setVideoPaused(!call.getVideoTech().isTransmitting() || !hasCameraPermission);
