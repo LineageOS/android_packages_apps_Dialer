@@ -64,8 +64,8 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
     String name = cursor.getString(Projections.DISPLAY_NAME);
     String address = cursor.getString(Projections.PHONE_LABEL);
 
-    placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
-    placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address));
+    placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
+    placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address, context));
     String photoUri = cursor.getString(Projections.PHOTO_URI);
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
