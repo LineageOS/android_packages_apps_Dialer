@@ -50,6 +50,12 @@ public class ConstantsImpl extends Constants {
     return "com.google.android.dialer.phonelookuphistory";
   }
 
+  @NonNull
+  @Override
+  public String getPreferredSimFallbackProviderAuthority() {
+    return "com.google.android.dialer.preferredsimfallback";
+  }
+
   @Override
   public String getUserAgent(Context context) {
     StringBuilder userAgent = new StringBuilder("GoogleDialer ");
