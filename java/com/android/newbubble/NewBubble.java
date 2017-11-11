@@ -475,7 +475,9 @@ public class NewBubble {
         .getPrimaryButton()
         .animate()
         .translationZ(
-            context.getResources().getDimensionPixelOffset(R.dimen.bubble_move_elevation_change));
+            context
+                .getResources()
+                .getDimensionPixelOffset(R.dimen.bubble_dragging_elevation_change));
   }
 
   void onMoveFinish() {
