@@ -52,11 +52,6 @@ public class CallUtil {
     return Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null);
   }
 
-  /** @return Uri that directly dials a user's voicemail inbox. */
-  public static Uri getVoicemailUri() {
-    return Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null);
-  }
-
   /**
    * Determines if video calling is available, and if so whether presence checking is available as
    * well.

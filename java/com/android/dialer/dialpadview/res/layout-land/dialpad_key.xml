@@ -22,7 +22,7 @@
   <LinearLayout
       android:id="@+id/dialpad_key_layout"
       style="@style/DialpadKeyInternalLayoutStyle"
-      android:layout_gravity="right|center_vertical"
+      android:layout_gravity="center"
       android:baselineAligned="false"
       android:orientation="horizontal">
 
