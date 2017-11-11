@@ -38,6 +38,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private final TextView secondaryTextView;
   private final TextView transcriptionTextView;
   private final QuickContactBadge quickContactBadge;
+  private final View mediaPlayerView;
   private final Clock clock;
   private boolean isViewHolderExpanded;
   private int viewHolderId;
@@ -51,6 +52,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     secondaryTextView = view.findViewById(R.id.secondary_text);
     transcriptionTextView = view.findViewById(R.id.transcription_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    mediaPlayerView = view.findViewById(R.id.new_voicemail_media_player);
     this.clock = clock;
     voicemailViewHolderListener = newVoicemailViewHolderListener;
   }
@@ -91,11 +93,13 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   void collapseViewHolder() {
     transcriptionTextView.setMaxLines(1);
     isViewHolderExpanded = false;
+    mediaPlayerView.setVisibility(View.GONE);
   }
 
   void expandViewHolder() {
     transcriptionTextView.setMaxLines(999);
     isViewHolderExpanded = true;
+    mediaPlayerView.setVisibility(View.VISIBLE);
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
