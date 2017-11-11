@@ -18,17 +18,23 @@
 <resources>
   <dimen name="bubble_size">56dp</dimen>
   <dimen name="bubble_icon_padding">16dp</dimen>
-  <dimen name="bubble_move_elevation_change">4dp</dimen>
+  <dimen name="bubble_move_elevation_change">6dp</dimen>
 
+  <dimen name="bubble_button_height">36dp</dimen>
   <dimen name="bubble_button_icon_padding">16dp</dimen>
-  <dimen name="bubble_safe_margin_horizontal">-4dp</dimen>
+  <dimen name="bubble_button_padding_vertical">12dp</dimen>
+  <dimen name="bubble_button_padding_horizontal">16dp</dimen>
+  <dimen name="bubble_safe_margin_horizontal">-16dp</dimen>
   <dimen name="bubble_safe_margin_vertical">64dp</dimen>
   <dimen name="bubble_shadow_padding_size_vertical">16dp</dimen>
+  <dimen name="bubble_shadow_padding_size_vertical_minus">-16dp</dimen>
   <dimen name="bubble_shadow_padding_size_horizontal">12dp</dimen>
+  <dimen name="bubble_shadow_padding_size_horizontal_double">24dp</dimen>
 
-  <dimen name="bubble_elevation">10dp</dimen>
+  <dimen name="bubble_elevation">6dp</dimen>
+  <dimen name="bubble_expanded_elevation">8dp</dimen>
   <dimen name="bubble_expanded_width">160dp</dimen>
-  <dimen name="bubble_radius">20dp</dimen>
+  <dimen name="bubble_radius">12dp</dimen>
   <dimen name="bubble_expanded_separator_height">4dp</dimen>
   <dimen name="bubble_small_icon_size">24dp</dimen>
   <dimen name="bubble_small_icon_padding">4dp</dimen>
