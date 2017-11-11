@@ -136,6 +136,22 @@ public class VoicemailClientImpl implements VoicemailClient {
   }
 
   @Override
+  public boolean isVoicemailDonationAvailable(Context context) {
+    if (!isVoicemailTranscriptionAvailable(context)) {
+      LogUtil.i("VoicemailClientImpl.isVoicemailDonationAvailable", "transcription not available");
+      return false;
+    }
+
+    TranscriptionConfigProvider provider = new TranscriptionConfigProvider(context);
+    if (!provider.isVoicemailDonationAvailable()) {
+      LogUtil.i("VoicemailClientImpl.isVoicemailDonationAvailable", "feature disabled by config");
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
   public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
     return isVoicemailTranscriptionAvailable(context)
         && VisualVoicemailSettingsUtil.isVoicemailDonationEnabled(context, account);

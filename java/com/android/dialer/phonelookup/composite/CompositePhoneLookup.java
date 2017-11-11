@@ -21,6 +21,7 @@ import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -56,12 +57,15 @@ public final class CompositePhoneLookup implements PhoneLookup {
     }
     return Futures.transform(
         Futures.allAsList(futures),
-        infos -> {
-          PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
-          for (PhoneLookupInfo info : infos) {
-            mergedInfo.mergeFrom(info);
+        new Function<List<PhoneLookupInfo>, PhoneLookupInfo>() {
+          @Override
+          public PhoneLookupInfo apply(List<PhoneLookupInfo> infos) {
+            PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
+            for (PhoneLookupInfo info : infos) {
+              mergedInfo.mergeFrom(info);
+            }
+            return mergedInfo.build();
           }
-          return mergedInfo.build();
         },
         MoreExecutors.directExecutor());
   }

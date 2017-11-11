@@ -26,17 +26,14 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.ColorUtils;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -556,26 +553,22 @@ public class NewBubble {
 
   private void update() {
     // Whole primary button background
-    RippleDrawable backgroundRipple =
-        (RippleDrawable)
-            context.getResources().getDrawable(R.drawable.bubble_ripple_circle, context.getTheme());
+    Drawable backgroundCirle =
+        context.getResources().getDrawable(R.drawable.bubble_shape_circle, context.getTheme());
     int primaryTint =
         ColorUtils.compositeColors(
             context.getColor(R.color.bubble_primary_background_darken),
             currentInfo.getPrimaryColor());
-    backgroundRipple.getDrawable(0).mutate().setTint(primaryTint);
-    viewHolder.getPrimaryButton().setBackground(backgroundRipple);
+    backgroundCirle.mutate().setTint(primaryTint);
+    viewHolder.getPrimaryButton().setBackground(backgroundCirle);
 
     // Small icon
-    RippleDrawable smallIconBackgroundRipple =
-        (RippleDrawable)
-            context
-                .getResources()
-                .getDrawable(R.drawable.bubble_ripple_circle_small, context.getTheme());
-    smallIconBackgroundRipple
-        .getDrawable(0)
-        .setTint(context.getColor(R.color.bubble_button_text_color_blue));
-    viewHolder.getPrimaryIcon().setBackground(smallIconBackgroundRipple);
+    Drawable smallIconBackgroundCircle =
+        context
+            .getResources()
+            .getDrawable(R.drawable.bubble_shape_circle_small, context.getTheme());
+    smallIconBackgroundCircle.setTint(context.getColor(R.color.bubble_button_color_blue));
+    viewHolder.getPrimaryIcon().setBackground(smallIconBackgroundCircle);
     viewHolder.getPrimaryIcon().setImageIcon(currentInfo.getPrimaryIcon());
     viewHolder.getPrimaryAvatar().setImageDrawable(currentInfo.getAvatar());
 
@@ -595,13 +588,10 @@ public class NewBubble {
   }
 
   private void updateButtonStates() {
-    int colorBlue = context.getColor(R.color.bubble_button_text_color_blue);
-    int colorWhite = context.getColor(R.color.bubble_button_text_color_white);
-
-    configureButton(currentInfo.getActions().get(0), viewHolder.getFullScreenButton(), colorBlue);
-    configureButton(currentInfo.getActions().get(1), viewHolder.getMuteButton(), colorBlue);
-    configureButton(currentInfo.getActions().get(2), viewHolder.getAudioRouteButton(), colorBlue);
-    configureButton(currentInfo.getActions().get(3), viewHolder.getEndCallButton(), colorWhite);
+    configureButton(currentInfo.getActions().get(0), viewHolder.getFullScreenButton());
+    configureButton(currentInfo.getActions().get(1), viewHolder.getMuteButton());
+    configureButton(currentInfo.getActions().get(2), viewHolder.getAudioRouteButton());
+    configureButton(currentInfo.getActions().get(3), viewHolder.getEndCallButton());
   }
 
   private void doShowText(@NonNull CharSequence text) {
@@ -610,16 +600,11 @@ public class NewBubble {
     viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_TEXT);
   }
 
-  private void configureButton(Action action, NewCheckableButton button, @ColorInt int iconColor) {
-    Drawable iconDrawable = DrawableCompat.wrap(action.getIconDrawable());
-    DrawableCompat.setTint(iconDrawable.mutate(), iconColor);
-
-    button.setCompoundDrawablesWithIntrinsicBounds(iconDrawable, null, null, null);
+  private void configureButton(Action action, NewCheckableButton button) {
+    button.setCompoundDrawablesWithIntrinsicBounds(action.getIconDrawable(), null, null, null);
     button.setChecked(action.isChecked());
     button.setEnabled(action.isEnabled());
-    if (action.getName() != null) {
-      button.setText(action.getName());
-    }
+    button.setText(action.getName());
     button.setOnClickListener(v -> doAction(action));
   }
 

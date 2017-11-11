@@ -113,7 +113,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     if (!VoicemailComponent.get(getContext())
         .getVoicemailClient()
-        .isVoicemailDonationEnabled(getContext(), phoneAccountHandle)) {
+        .isVoicemailDonationAvailable(getContext())) {
       getPreferenceScreen().removePreference(donateVoicemailSwitchPreference);
     }
 
