@@ -33,7 +33,7 @@ public class PreCallImpl implements PreCall {
 
   @Override
   public ImmutableList<PreCallAction> getActions() {
-    return ImmutableList.of();
+    return ImmutableList.of(new CallingAccountSelector(), new AssistedDialAction());
   }
 
   @NonNull
