@@ -25,6 +25,7 @@ import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
+import com.android.dialer.precall.impl.PreCallModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
@@ -43,6 +44,7 @@ import javax.inject.Singleton;
     DialerExecutorModule.class,
     PhoneLookupModule.class,
     PhoneNumberGeoUtilModule.class,
+    PreCallModule.class,
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StorageModule.class,

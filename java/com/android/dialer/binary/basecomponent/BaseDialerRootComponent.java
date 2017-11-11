@@ -25,6 +25,7 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.main.MainComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
+import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
@@ -48,6 +49,7 @@ public interface BaseDialerRootComponent
         MapsComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
+        PreCallComponent.HasComponent,
         SimulatorComponent.HasComponent,
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
