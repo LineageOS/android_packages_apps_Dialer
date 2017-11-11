@@ -30,6 +30,7 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.VoicemailStatusQuery;
 
@@ -293,8 +294,15 @@ public class VoicemailStatus {
     return cursor.getString(index);
   }
 
+  @Nullable
   public PhoneAccountHandle getPhoneAccountHandle() {
-    return new PhoneAccountHandle(
-        ComponentName.unflattenFromString(phoneAccountComponentName), phoneAccountId);
+    if (TextUtils.isEmpty(phoneAccountComponentName) || TextUtils.isEmpty(phoneAccountId)) {
+      return null;
+    }
+    ComponentName componentName = ComponentName.unflattenFromString(phoneAccountComponentName);
+    if (componentName == null) {
+      return null;
+    }
+    return new PhoneAccountHandle(componentName, phoneAccountId);
   }
 }
