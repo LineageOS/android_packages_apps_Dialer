@@ -18,9 +18,11 @@ package com.android.dialer.voicemail.listui;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -29,7 +31,7 @@ import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail tab. */
-final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
+final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
   private final Context context;
   private final TextView primaryTextView;
@@ -37,8 +39,12 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
   private final TextView transcriptionTextView;
   private final QuickContactBadge quickContactBadge;
   private final Clock clock;
+  private boolean isViewHolderExpanded;
+  private int viewHolderId;
+  private final NewVoicemailViewHolderListener voicemailViewHolderListener;
 
-  NewVoicemailViewHolder(View view, Clock clock) {
+  NewVoicemailViewHolder(
+      View view, Clock clock, NewVoicemailViewHolderListener newVoicemailViewHolderListener) {
     super(view);
     this.context = view.getContext();
     primaryTextView = view.findViewById(R.id.primary_text);
@@ -46,10 +52,12 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
     transcriptionTextView = view.findViewById(R.id.transcription_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
     this.clock = clock;
+    voicemailViewHolderListener = newVoicemailViewHolderListener;
   }
 
   void bind(Cursor cursor) {
     VoicemailEntry voicemailEntry = VoicemailCursorLoader.toVoicemailEntry(cursor);
+    viewHolderId = voicemailEntry.id();
     primaryTextView.setText(VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry));
     secondaryTextView.setText(
         VoicemailEntryText.buildSecondaryVoicemailText(context, clock, voicemailEntry));
@@ -64,6 +72,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
       transcriptionTextView.setText(voicemailTranscription);
     }
 
+    itemView.setOnClickListener(this);
     setPhoto(voicemailEntry);
   }
 
@@ -77,5 +86,38 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder {
             voicemailEntry.photoUri() == null ? null : Uri.parse(voicemailEntry.photoUri()),
             voicemailEntry.name(),
             LetterTileDrawable.TYPE_DEFAULT);
+  }
+
+  void collapseViewHolder() {
+    transcriptionTextView.setMaxLines(1);
+    isViewHolderExpanded = false;
+  }
+
+  void expandViewHolder() {
+    transcriptionTextView.setMaxLines(999);
+    isViewHolderExpanded = true;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  boolean isViewHolderExpanded() {
+    return isViewHolderExpanded;
+  }
+
+  public int getViewHolderId() {
+    return viewHolderId;
+  }
+
+  interface NewVoicemailViewHolderListener {
+    void onViewHolderExpanded(NewVoicemailViewHolder expandedViewHolder);
+  }
+
+  @Override
+  public void onClick(View v) {
+    if (isViewHolderExpanded) {
+      collapseViewHolder();
+    } else {
+      expandViewHolder();
+      voicemailViewHolderListener.onViewHolderExpanded(this);
+    }
   }
 }
