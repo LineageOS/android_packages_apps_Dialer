@@ -72,8 +72,8 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
             : context.getString(
                 com.android.contacts.common.R.string.call_subject_type_and_number, label, number);
 
-    nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
-    numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo));
+    nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
+    numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo, context));
 
     if (shouldShowPhoto(cursor)) {
       nameView.setVisibility(View.VISIBLE);

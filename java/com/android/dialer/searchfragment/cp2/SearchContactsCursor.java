@@ -32,17 +32,19 @@ import com.android.dialer.searchfragment.common.SearchCursor;
 final class SearchContactsCursor extends MergeCursor implements SearchCursor {
 
   private final ContactFilterCursor contactFilterCursor;
+  private final Context context;
 
   static SearchContactsCursor newInstance(
       Context context, ContactFilterCursor contactFilterCursor) {
     MatrixCursor headerCursor = new MatrixCursor(HEADER_PROJECTION);
     headerCursor.addRow(new String[] {context.getString(R.string.all_contacts)});
-    return new SearchContactsCursor(new Cursor[] {headerCursor, contactFilterCursor});
+    return new SearchContactsCursor(new Cursor[] {headerCursor, contactFilterCursor}, context);
   }
 
-  private SearchContactsCursor(Cursor[] cursors) {
+  private SearchContactsCursor(Cursor[] cursors, Context context) {
     super(cursors);
-    contactFilterCursor = (ContactFilterCursor) cursors[1];
+    this.contactFilterCursor = (ContactFilterCursor) cursors[1];
+    this.context = context;
   }
 
   @Override
@@ -52,7 +54,7 @@ final class SearchContactsCursor extends MergeCursor implements SearchCursor {
 
   @Override
   public boolean updateQuery(@Nullable String query) {
-    contactFilterCursor.filter(query);
+    contactFilterCursor.filter(query, context);
     return true;
   }
 

@@ -16,6 +16,7 @@
 
 package com.android.dialer.searchfragment.common;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,14 +50,16 @@ public class QueryBoldingUtil {
    *
    * @param query containing any characters
    * @param name of a contact/string that query will compare to
+   * @param context of the app
    * @return name with query bolded if query can be found in the name.
    */
-  public static CharSequence getNameWithQueryBolded(@Nullable String query, @NonNull String name) {
+  public static CharSequence getNameWithQueryBolded(
+      @Nullable String query, @NonNull String name, @NonNull Context context) {
     if (TextUtils.isEmpty(query)) {
       return name;
     }
 
-    if (!QueryFilteringUtil.nameMatchesT9Query(query, name)) {
+    if (!QueryFilteringUtil.nameMatchesT9Query(query, name, context)) {
       Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()));
       Matcher matcher = pattern.matcher(name.toLowerCase());
       if (matcher.find()) {
@@ -69,7 +72,7 @@ public class QueryBoldingUtil {
     }
 
     Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()));
-    Matcher matcher = pattern.matcher(QueryFilteringUtil.getT9Representation(name));
+    Matcher matcher = pattern.matcher(QueryFilteringUtil.getT9Representation(name, context));
     if (matcher.find()) {
       // query matches the start of a T9 name (i.e. 75 -> "Jessica [Jo]nes")
       int index = matcher.start();
@@ -79,11 +82,12 @@ public class QueryBoldingUtil {
 
     } else {
       // query match the T9 initials (i.e. 222 -> "[A]l [B]ob [C]harlie")
-      return getNameWithInitialsBolded(query, name);
+      return getNameWithInitialsBolded(query, name, context);
     }
   }
 
-  private static CharSequence getNameWithInitialsBolded(String query, String name) {
+  private static CharSequence getNameWithInitialsBolded(
+      String query, String name, Context context) {
     SpannableString boldedInitials = new SpannableString(name);
     name = name.toLowerCase();
     int initialsBolded = 0;
@@ -91,7 +95,8 @@ public class QueryBoldingUtil {
 
     while (++nameIndex < name.length() && initialsBolded < query.length()) {
       if ((nameIndex == 0 || name.charAt(nameIndex - 1) == ' ')
-          && QueryFilteringUtil.getDigit(name.charAt(nameIndex)) == query.charAt(initialsBolded)) {
+          && QueryFilteringUtil.getDigit(name.charAt(nameIndex), context)
+              == query.charAt(initialsBolded)) {
         boldedInitials.setSpan(
             new StyleSpan(Typeface.BOLD),
             nameIndex,

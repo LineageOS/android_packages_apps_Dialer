@@ -114,9 +114,8 @@ public class DialpadView extends LinearLayout {
     mIsRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
 
-    mPrimaryLettersMapping = DialpadAlphabets.getDefaultAlphabet();
-    mSecondaryLettersMapping =
-        DialpadAlphabets.getAlphabetForLanguage(CompatUtils.getLocale(context).getISO3Language());
+    mPrimaryLettersMapping = DialpadCharMappings.getDefaultKeyToCharsMap();
+    mSecondaryLettersMapping = DialpadCharMappings.getKeyToCharsMap(context);
   }
 
   @Override

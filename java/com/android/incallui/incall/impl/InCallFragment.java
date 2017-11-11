@@ -320,7 +320,7 @@ public class InCallFragment extends Fragment
       }
     }
     transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
-    transaction.commitAllowingStateLoss();
+    transaction.commitNowAllowingStateLoss();
   }
 
   @Override
