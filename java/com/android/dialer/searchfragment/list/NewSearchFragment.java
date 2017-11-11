@@ -32,7 +32,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +43,6 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -488,11 +486,7 @@ public final class NewSearchFragment extends Fragment
     Intent intent =
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(
-                allowAssistedDial,
-                ConcreteCreator.createNewAssistedDialingMediator(
-                    getContext().getSystemService(TelephonyManager.class),
-                    getContext().getApplicationContext()))
+            .setAllowAssistedDial(allowAssistedDial)
             .build();
     DialerUtils.startActivityWithErrorToast(getActivity(), intent);
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
