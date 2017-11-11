@@ -17,6 +17,7 @@ package com.android.voicemail.impl.transcribe;
 
 import android.app.job.JobWorkItem;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
@@ -121,13 +122,21 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
   }
 
+  @VisibleForTesting
   TranscribeVoicemailAsyncRequest getUploadRequest() {
-    return TranscribeVoicemailAsyncRequest.newBuilder()
-        .setVoicemailData(audioData)
-        .setAudioFormat(encoding)
-        .setDonationPreference(
-            isDonationEnabled() ? DonationPreference.DONATE : DonationPreference.DO_NOT_DONATE)
-        .build();
+    TranscribeVoicemailAsyncRequest.Builder builder =
+        TranscribeVoicemailAsyncRequest.newBuilder()
+            .setVoicemailData(audioData)
+            .setAudioFormat(encoding)
+            .setDonationPreference(
+                isDonationEnabled() ? DonationPreference.DONATE : DonationPreference.DO_NOT_DONATE);
+    // Generate the transcript id locally if configured to do so, or if voicemail donation is
+    // available (because rating donating voicemails requires locally generated voicemail ids).
+    if (configProvider.useClientGeneratedVoicemailIds()
+        || configProvider.isVoicemailDonationAvailable()) {
+      builder.setTranscriptionId(TranscriptionUtils.getFingerprintFor(audioData));
+    }
+    return builder.build();
   }
 
   private boolean isDonationEnabled() {
