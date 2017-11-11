@@ -19,9 +19,11 @@ package com.android.dialer.phonelookup.composite;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -73,7 +75,14 @@ public final class CompositePhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<Boolean> isDirty(
       ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
-    return null;
+    List<ListenableFuture<Boolean>> futures = new ArrayList<>();
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      futures.add(phoneLookup.isDirty(phoneNumbers, lastModified));
+    }
+    // Executes all child lookups (possibly in parallel), completing when the first composite lookup
+    // which returns "true" completes, and cancels the others.
+    return DialerFutures.firstMatching(
+        futures, Preconditions::checkNotNull, false /* defaultValue */);
   }
 
   @Override
