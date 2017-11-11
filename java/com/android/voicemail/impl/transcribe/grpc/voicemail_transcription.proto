@@ -71,7 +71,7 @@ enum DonationPreference {
 // Enum that specifies the user's rating for a voicemail transcription.
 enum TranscriptionRatingValue {
   // Default but invalid value.
-  UNSPECIFIED = 0;
+  TRANSCRIPTION_RATING_VALUE_UNSPECIFIED = 0;
 
   // User indicated that the transcription was good.
   GOOD_TRANSCRIPTION = 1;
@@ -155,14 +155,14 @@ message TranscriptionRating {
 }
 
 // Request for uploading transcription ratings.
-message TranscriptionFeedbackRequest {
+message SendTranscriptionFeedbackRequest {
   // User feedback indicating the transcription quality for one or more
   // voicemails
-  repeated TranscriptionRating ratings = 1;
+  repeated TranscriptionRating rating = 1;
 }
 
 // Response for uploading transcription ratings
-message TranscriptionFeedbackResponse {
+message SendTranscriptionFeedbackResponse {
 }
 
 // RPC service for transcribing voicemails.
@@ -184,8 +184,8 @@ service VoicemailTranscriptionService {
 
   // Uploads user's transcription feedback. Feedback will only be collected from
   // user's who have consented to donate their voicemails.
-  rpc SendTranscriptionFeedback(TranscriptionFeedbackRequest)
-      returns (TranscriptionFeedbackResponse) {
+  rpc SendTranscriptionFeedback(SendTranscriptionFeedbackResponse)
+      returns (SendTranscriptionFeedbackResponse) {
   }
 }
 
