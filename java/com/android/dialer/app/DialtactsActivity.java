@@ -298,10 +298,8 @@ public class DialtactsActivity extends TransactionSafeActivity
             PerformanceReport.recordClick(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
           }
 
-          if (DEBUG) {
-            LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
-            LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + mSearchQuery);
-          }
+          LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
+          LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + mSearchQuery);
           mSearchQuery = newText;
 
           // TODO(calderwoodra): show p13n when newText is empty.
@@ -1380,6 +1378,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     mDialpadQuery = query;
     if (mSmartDialSearchFragment != null) {
       mSmartDialSearchFragment.setAddToContactNumber(query);
+    }
+    if (mNewSearchFragment != null) {
+      mNewSearchFragment.setRawNumber(query);
     }
     final String normalizedQuery =
         SmartDialNameMatcher.normalizeNumber(query, SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
