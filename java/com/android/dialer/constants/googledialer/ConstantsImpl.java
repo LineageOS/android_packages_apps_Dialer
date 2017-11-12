@@ -44,6 +44,12 @@ public class ConstantsImpl extends Constants {
     return "com.google.android.dialer.annotatedcalllog";
   }
 
+  @NonNull
+  @Override
+  public String getPhoneLookupHistoryProviderAuthority() {
+    return "com.google.android.dialer.phonelookuphistory";
+  }
+
   @Override
   public String getUserAgent(Context context) {
     StringBuilder userAgent = new StringBuilder("GoogleDialer ");
