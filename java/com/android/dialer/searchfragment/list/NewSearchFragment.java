@@ -112,6 +112,9 @@ public final class NewSearchFragment extends Fragment
   private RecyclerView recyclerView;
   private SearchAdapter adapter;
   private String query;
+  // Raw query number from dialpad, which may contain special character such as "+". This is used
+  // for actions to add contact or send sms.
+  private String rawNumber;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
   private boolean remoteDirectoriesDisabledForTesting;
 
@@ -138,7 +141,7 @@ public final class NewSearchFragment extends Fragment
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getContext(), new SearchCursorManager(), this);
-    adapter.setQuery(query);
+    adapter.setQuery(query, rawNumber);
     adapter.setSearchActions(getActions());
     adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
     emptyContentView = view.findViewById(R.id.empty_view);
@@ -248,11 +251,15 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
+  public void setRawNumber(String rawNumber) {
+    this.rawNumber = rawNumber;
+  }
+
   public void setQuery(String query, CallInitiationType.Type callInitiationType) {
     this.query = query;
     this.callInitiationType = callInitiationType;
     if (adapter != null) {
-      adapter.setQuery(query);
+      adapter.setQuery(query, rawNumber);
       adapter.setSearchActions(getActions());
       adapter.setZeroSuggestVisible(isRegularSearch());
       loadNearbyPlacesCursor();
