@@ -189,6 +189,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-libshortcutbadger-target \
 	dialer-mime4j-core-target \
 	dialer-mime4j-dom-target \
+	dialer-error-prone-target \
 	dialer-guava-target \
 	jsr305 \
 	libbackup \
@@ -286,6 +287,16 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := dialer-guava-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-error-prone-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
