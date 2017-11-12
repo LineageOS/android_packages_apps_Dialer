@@ -68,8 +68,8 @@
 
   <color name="blue_grey_100">#CFD8DC</color>
 
-  <!-- Color of call type icons in call log, e.g. voicemail, video, WiFi, HD etc. -->
-  <color name="call_type_icon_color">#89000000</color>
+  <!-- 54% opacity -->
+  <color name="icon_color_grey">#89000000</color>
 
   <!-- Color for bubble -->
   <color name="dialer_end_call_button_color">#FFDF0000</color>

@@ -242,7 +242,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         contactCache.namePrimary,
         call.updateNameIfRestricted(name),
         contactCache.number,
-        contactCache.label,
         contactCache.lookupKey,
         contactCache.displayPhotoUri,
         thisRowCanSeparate,
@@ -277,7 +276,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
    * @param view The view to set the details on.
    * @param callerName The participant's name.
    * @param callerNumber The participant's phone number.
-   * @param callerNumberType The participant's phone number typ.e
    * @param lookupKey The lookup key for the participant (for photo lookup).
    * @param photoUri The URI of the contact photo.
    * @param thisRowCanSeparate {@code True} if this participant can separate from the conference.
@@ -288,7 +286,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       String callerName,
       String preferredName,
       String callerNumber,
-      String callerNumberType,
       String lookupKey,
       Uri photoUri,
       boolean thisRowCanSeparate,
@@ -299,16 +296,13 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     final TextView statusTextView = (TextView) view.findViewById(R.id.conferenceCallerStatus);
     final TextView nameTextView = (TextView) view.findViewById(R.id.conferenceCallerName);
     final TextView numberTextView = (TextView) view.findViewById(R.id.conferenceCallerNumber);
-    final TextView numberTypeTextView =
-        (TextView) view.findViewById(R.id.conferenceCallerNumberType);
     final View endButton = view.findViewById(R.id.conferenceCallerDisconnect);
     final View separateButton = view.findViewById(R.id.conferenceCallerSeparate);
 
     if (callState == DialerCall.State.ONHOLD) {
-      setViewsOnHold(photoView, statusTextView, nameTextView, numberTextView, numberTypeTextView);
+      setViewsOnHold(photoView, statusTextView, nameTextView, numberTextView);
     } else {
-      setViewsNotOnHold(
-          photoView, statusTextView, nameTextView, numberTextView, numberTypeTextView);
+      setViewsNotOnHold(photoView, statusTextView, nameTextView, numberTextView);
     }
 
     endButton.setVisibility(thisRowCanDisconnect ? View.VISIBLE : View.GONE);
@@ -325,27 +319,30 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       separateButton.setOnClickListener(null);
     }
 
+    String displayNameForImage = TextUtils.isEmpty(callerName) ? callerNumber : callerName;
     DefaultImageRequest imageRequest =
         (photoUri != null)
             ? null
-            : new DefaultImageRequest(callerName, lookupKey, true /* isCircularPhoto */);
+            : new DefaultImageRequest(displayNameForImage, lookupKey, true /* isCircularPhoto */);
 
     mContactPhotoManager.loadDirectoryPhoto(photoView, photoUri, false, true, imageRequest);
 
     // set the caller name
-    nameTextView.setText(preferredName);
+    if (TextUtils.isEmpty(preferredName)) {
+      nameTextView.setVisibility(View.GONE);
+    } else {
+      nameTextView.setVisibility(View.VISIBLE);
+      nameTextView.setText(preferredName);
+    }
 
     // set the caller number in subscript, or make the field disappear.
     if (TextUtils.isEmpty(callerNumber)) {
       numberTextView.setVisibility(View.GONE);
-      numberTypeTextView.setVisibility(View.GONE);
     } else {
       numberTextView.setVisibility(View.VISIBLE);
       numberTextView.setText(
           PhoneNumberUtilsCompat.createTtsSpannable(
               BidiFormatter.getInstance().unicodeWrap(callerNumber, TextDirectionHeuristics.LTR)));
-      numberTypeTextView.setVisibility(View.VISIBLE);
-      numberTypeTextView.setText(callerNumberType);
     }
   }
 
@@ -353,8 +350,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       ImageView photoView,
       TextView statusTextView,
       TextView nameTextView,
-      TextView numberTextView,
-      TextView numberTypeTextView) {
+      TextView numberTextView) {
     CharSequence onHoldText =
         TextUtils.concat(getContext().getText(R.string.notification_on_hold).toString(), " • ");
     statusTextView.setText(onHoldText);
@@ -363,7 +359,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     int onHoldColor = getContext().getColor(R.color.dialer_secondary_text_color_hiden);
     nameTextView.setTextColor(onHoldColor);
     numberTextView.setTextColor(onHoldColor);
-    numberTypeTextView.setTextColor(onHoldColor);
 
     TypedValue alpha = new TypedValue();
     getContext().getResources().getValue(R.dimen.alpha_hiden, alpha, true);
@@ -374,15 +369,12 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       ImageView photoView,
       TextView statusTextView,
       TextView nameTextView,
-      TextView numberTextView,
-      TextView numberTypeTextView) {
+      TextView numberTextView) {
     statusTextView.setVisibility(View.GONE);
 
     nameTextView.setTextColor(
         getContext().getColor(R.color.conference_call_manager_caller_name_text_color));
     numberTextView.setTextColor(
-        getContext().getColor(R.color.conference_call_manager_secondary_text_color));
-    numberTypeTextView.setTextColor(
         getContext().getColor(R.color.conference_call_manager_secondary_text_color));
 
     TypedValue alpha = new TypedValue();

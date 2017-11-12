@@ -17,7 +17,6 @@
 
 <resources>
   <color name="conference_call_manager_caller_name_text_color">#4d4d4d</color>
-  <color name="conference_call_manager_icon_color">#999999</color>
   <!-- Used with some smaller texts in manage conference screen. -->
   <color name="conference_call_manager_secondary_text_color">#999999</color>
 
@@ -34,7 +33,6 @@
 
       These colors are also used by InCallUIMaterialColorMapUtils to generate
       primary activity colors.
-
   -->
   <array name="background_colors">
     <item>#00796B</item>
