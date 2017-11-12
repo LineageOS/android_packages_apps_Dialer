@@ -23,7 +23,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -60,15 +59,12 @@ public final class CompositePhoneLookup implements PhoneLookup {
     }
     return Futures.transform(
         Futures.allAsList(futures),
-        new Function<List<PhoneLookupInfo>, PhoneLookupInfo>() {
-          @Override
-          public PhoneLookupInfo apply(List<PhoneLookupInfo> infos) {
-            PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
-            for (PhoneLookupInfo info : infos) {
-              mergedInfo.mergeFrom(info);
-            }
-            return mergedInfo.build();
+        infos -> {
+          PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
+          for (PhoneLookupInfo info : infos) {
+            mergedInfo.mergeFrom(info);
           }
+          return mergedInfo.build();
         },
         MoreExecutors.directExecutor());
   }
@@ -102,30 +98,23 @@ public final class CompositePhoneLookup implements PhoneLookup {
     }
     return Futures.transform(
         Futures.allAsList(futures),
-        new Function<
-            List<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>,
-            ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>() {
-          @Override
-          public ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> apply(
-              List<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> allMaps) {
-            ImmutableMap.Builder<DialerPhoneNumber, PhoneLookupInfo> combinedMap =
-                ImmutableMap.builder();
-            for (DialerPhoneNumber dialerPhoneNumber : existingInfoMap.keySet()) {
-              PhoneLookupInfo.Builder combinedInfo = PhoneLookupInfo.newBuilder();
-              for (ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map : allMaps) {
-                PhoneLookupInfo subInfo = map.get(dialerPhoneNumber);
-                if (subInfo == null) {
-                  throw new IllegalStateException(
-                      "A sublookup didn't return an info for number: "
-                          + LogUtil.sanitizePhoneNumber(
-                              dialerPhoneNumber.getRawInput().getNumber()));
-                }
-                combinedInfo.mergeFrom(subInfo);
+        (allMaps) -> {
+          ImmutableMap.Builder<DialerPhoneNumber, PhoneLookupInfo> combinedMap =
+              ImmutableMap.builder();
+          for (DialerPhoneNumber dialerPhoneNumber : existingInfoMap.keySet()) {
+            PhoneLookupInfo.Builder combinedInfo = PhoneLookupInfo.newBuilder();
+            for (ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map : allMaps) {
+              PhoneLookupInfo subInfo = map.get(dialerPhoneNumber);
+              if (subInfo == null) {
+                throw new IllegalStateException(
+                    "A sublookup didn't return an info for number: "
+                        + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getRawInput().getNumber()));
               }
-              combinedMap.put(dialerPhoneNumber, combinedInfo.build());
+              combinedInfo.mergeFrom(subInfo);
             }
-            return combinedMap.build();
+            combinedMap.put(dialerPhoneNumber, combinedInfo.build());
           }
+          return combinedMap.build();
         },
         MoreExecutors.directExecutor());
   }
