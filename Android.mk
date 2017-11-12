@@ -86,6 +86,8 @@ EXCLUDE_EXTRA_PACKAGES := \
 # We specify each package explicitly to glob resource files.
 # find . -type f -name "AndroidManifest.xml" | uniq | sort | cut -c 8- | rev | cut -c 21- | rev | sed 's/\//./g' | sed 's/$/ \\/'
 LOCAL_AAPT_FLAGS := \
+	com.android.assets.product \
+	com.android.assets.quantum \
 	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
@@ -121,8 +123,11 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.main.impl \
 	com.android.dialer.notification \
 	com.android.dialer.oem \
+	com.android.dialer.phonelookup.database \
 	com.android.dialer.phonenumberutil \
 	com.android.dialer.postcall \
+	com.android.dialer.precall.impl \
+	com.android.dialer.preferredsim.impl \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \
 	com.android.dialer.searchfragment.list \
@@ -134,7 +139,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.theme \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
-        com.android.dialer.voicemail.settings \
+	com.android.dialer.voicemail.settings \
 	com.android.dialer.voicemailstatus \
 	com.android.dialer.widget \
 	com.android.incallui \
@@ -189,7 +194,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-libshortcutbadger-target \
 	dialer-mime4j-core-target \
 	dialer-mime4j-dom-target \
-	guava \
+	dialer-error-prone-target \
+	dialer-guava-target \
 	jsr305 \
 	libbackup \
 	libphonenumber \
@@ -280,6 +286,26 @@ include $(BUILD_HOST_PREBUILT)
 
 # Enumerate target prebuilts to avoid linker warnings like
 # Dialer (java:sdk) should not link to dialer-guava (java:platform)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-guava-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/guava/guava/20.0/guava-20.0$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-error-prone-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES

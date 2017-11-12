@@ -75,9 +75,14 @@ public class TranscriptionConfigProvider {
         .getLong("voicemail_transcription_get_transcript_poll_interval_millis", 1000L);
   }
 
-  public boolean isVoicemailDonationEnabled() {
+  public boolean isVoicemailDonationAvailable() {
     return ConfigProviderBindings.get(context)
-        .getBoolean("voicemail_transcription_donation_enabled", false);
+        .getBoolean("voicemail_transcription_donation_available", false);
+  }
+
+  public boolean useClientGeneratedVoicemailIds() {
+    return ConfigProviderBindings.get(context)
+        .getBoolean("voicemail_transcription_client_generated_voicemail_ids", false);
   }
 
   @Override

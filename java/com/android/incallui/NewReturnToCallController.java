@@ -277,17 +277,22 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     List<Action> actions = new ArrayList<>();
     SpeakerButtonInfo speakerButtonInfo = new SpeakerButtonInfo(audioState, IconSize.SIZE_24_DP);
 
+    // Return to call
     actions.add(
         Action.builder()
             .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_fullscreen_vd_theme_24))
             .setIntent(fullScreen)
+            .setName(context.getText(R.string.bubble_return_to_call))
             .build());
+    // Mute/unmute
     actions.add(
         Action.builder()
             .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_mic_off_white_24))
             .setChecked(audioState.isMuted())
             .setIntent(toggleMute)
+            .setName(context.getText(R.string.incall_label_mute))
             .build());
+    // Speaker/audio selector
     actions.add(
         Action.builder()
             .setIconDrawable(context.getDrawable(speakerButtonInfo.icon))
@@ -295,10 +300,12 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
             .setChecked(speakerButtonInfo.isChecked)
             .setIntent(speakerButtonInfo.checkable ? toggleSpeaker : showSpeakerSelect)
             .build());
+    // End call
     actions.add(
         Action.builder()
             .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_call_end_vd_theme_24))
             .setIntent(endCall)
+            .setName(context.getText(R.string.incall_label_end_call))
             .build());
     return actions;
   }

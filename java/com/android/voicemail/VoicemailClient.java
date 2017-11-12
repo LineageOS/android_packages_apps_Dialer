@@ -128,6 +128,9 @@ public interface VoicemailClient {
    */
   boolean isVoicemailTranscriptionAvailable(Context context);
 
+  /** @return if the voicemail donation feature is available. */
+  boolean isVoicemailDonationAvailable(Context context);
+
   /** @return if the voicemail donation setting has been enabled by the user. */
   boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account);
 

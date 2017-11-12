@@ -32,7 +32,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +43,6 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.animation.AnimUtils;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -60,6 +58,7 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
@@ -113,6 +112,9 @@ public final class NewSearchFragment extends Fragment
   private RecyclerView recyclerView;
   private SearchAdapter adapter;
   private String query;
+  // Raw query number from dialpad, which may contain special character such as "+". This is used
+  // for actions to add contact or send sms.
+  private String rawNumber;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
   private boolean remoteDirectoriesDisabledForTesting;
 
@@ -139,7 +141,7 @@ public final class NewSearchFragment extends Fragment
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getContext(), new SearchCursorManager(), this);
-    adapter.setQuery(query);
+    adapter.setQuery(query, rawNumber);
     adapter.setSearchActions(getActions());
     adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
     emptyContentView = view.findViewById(R.id.empty_view);
@@ -249,11 +251,15 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
+  public void setRawNumber(String rawNumber) {
+    this.rawNumber = rawNumber;
+  }
+
   public void setQuery(String query, CallInitiationType.Type callInitiationType) {
     this.query = query;
     this.callInitiationType = callInitiationType;
     if (adapter != null) {
-      adapter.setQuery(query);
+      adapter.setQuery(query, rawNumber);
       adapter.setSearchActions(getActions());
       adapter.setZeroSuggestVisible(isRegularSearch());
       loadNearbyPlacesCursor();
@@ -485,16 +491,11 @@ public final class NewSearchFragment extends Fragment
             .setCharactersInSearchString(query == null ? 0 : query.length())
             .setAllowAssistedDialing(allowAssistedDial)
             .build();
-    Intent intent =
+    PreCall.start(
+        getContext(),
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(
-                allowAssistedDial,
-                ConcreteCreator.createNewAssistedDialingMediator(
-                    getContext().getSystemService(TelephonyManager.class),
-                    getContext().getApplicationContext()))
-            .build();
-    DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+            .setAllowAssistedDial(allowAssistedDial));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
   }
 

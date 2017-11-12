@@ -104,7 +104,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
             : context.getString(
                 com.android.contacts.common.R.string.call_subject_type_and_number, label, number);
 
-    nameOrNumberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
+    nameOrNumberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
     numberView.setText(QueryBoldingUtil.getNumberWithQueryBolded(query, secondaryInfo));
     setCallToAction(cursor, query);
 

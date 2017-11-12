@@ -33,10 +33,12 @@ import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
+import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -65,6 +67,7 @@ import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
+import com.google.common.base.Optional;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -95,6 +98,8 @@ public class InCallActivityCommon {
   private static final int DIALPAD_REQUEST_NONE = 1;
   private static final int DIALPAD_REQUEST_SHOW = 2;
   private static final int DIALPAD_REQUEST_HIDE = 3;
+
+  private static Optional<Integer> audioRouteForTesting = Optional.absent();
 
   private final InCallActivity inCallActivity;
   private boolean dismissKeyguard;
@@ -171,14 +176,7 @@ public class InCallActivityCommon {
   }
 
   public void onCreate(Bundle icicle) {
-    // set this flag so this activity will stay in front of the keyguard
-    // Have the WindowManager filter out touch events that are "too fat".
-    int flags =
-        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-            | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-            | WindowManager.LayoutParams.FLAG_IGNORE_CHEEK_PRESSES;
-
-    inCallActivity.getWindow().addFlags(flags);
+    setWindowFlags();
 
     inCallActivity.setContentView(R.layout.incall_screen);
 
@@ -481,6 +479,36 @@ public class InCallActivityCommon {
     }
 
     return event.getRepeatCount() == 0 && handleDialerKeyDown(keyCode, event);
+  }
+
+  private void setWindowFlags() {
+    // Allow the activity to be shown when the screen is locked and filter out touch events that are
+    // "too fat".
+    int flags =
+        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            | WindowManager.LayoutParams.FLAG_IGNORE_CHEEK_PRESSES;
+
+    // When the audio stream is not directed through Bluetooth, turn the screen on once the
+    // activity is shown.
+    final int audioRoute = getAudioRoute();
+    if (audioRoute != CallAudioState.ROUTE_BLUETOOTH) {
+      flags |= WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+    }
+
+    inCallActivity.getWindow().addFlags(flags);
+  }
+
+  private static int getAudioRoute() {
+    if (audioRouteForTesting.isPresent()) {
+      return audioRouteForTesting.get();
+    }
+
+    return AudioModeProvider.getInstance().getAudioState().getRoute();
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setAudioRouteForTesting(int audioRoute) {
+    audioRouteForTesting = Optional.of(audioRoute);
   }
 
   private boolean handleDialerKeyDown(int keyCode, KeyEvent event) {

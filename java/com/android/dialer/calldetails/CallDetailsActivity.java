@@ -30,10 +30,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
-import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -52,8 +50,8 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
-import com.android.dialer.util.DialerUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -211,11 +209,10 @@ public class CallDetailsActivity extends AppCompatActivity
   @Override
   public void placeImsVideoCall(String phoneNumber) {
     Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_IMS_VIDEO_CALL_BACK);
-    DialerUtils.startActivityWithErrorToast(
+    PreCall.start(
         this,
         new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
-            .setIsVideoCall(true)
-            .build());
+            .setIsVideoCall(true));
   }
 
   @Override
@@ -243,13 +240,10 @@ public class CallDetailsActivity extends AppCompatActivity
     CallIntentBuilder callIntentBuilder =
         new CallIntentBuilder(phoneNumber + postDialDigits, CallInitiationType.Type.CALL_DETAILS);
     if (canSupportedAssistedDialing) {
-      callIntentBuilder.setAllowAssistedDial(
-          true,
-          ConcreteCreator.createNewAssistedDialingMediator(
-              getSystemService(TelephonyManager.class), this));
+      callIntentBuilder.setAllowAssistedDial(true);
     }
 
-    DialerUtils.startActivityWithErrorToast(this, callIntentBuilder.build());
+    PreCall.start(this, callIntentBuilder);
   }
 
   @NonNull

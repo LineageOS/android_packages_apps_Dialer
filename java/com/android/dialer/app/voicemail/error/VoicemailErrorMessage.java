@@ -25,11 +25,13 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.util.CallUtil;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.voicemail.settings.VoicemailChangePinActivity;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -156,15 +158,18 @@ public class VoicemailErrorMessage {
   }
 
   @NonNull
-  public static Action createCallVoicemailAction(final Context context) {
+  public static Action createCallVoicemailAction(
+      final Context context, final PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_call_voicemail),
         new OnClickListener() {
           @Override
           public void onClick(View v) {
             Logger.get(context).logImpression(DialerImpression.Type.VVM_CALL_VOICEMAIL_CLICKED);
-            Intent intent = new Intent(Intent.ACTION_CALL, CallUtil.getVoicemailUri());
-            context.startActivity(intent);
+            PreCall.start(
+                context,
+                CallIntentBuilder.forVoicemail(
+                    phoneAccountHandle, CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE));
           }
         });
   }

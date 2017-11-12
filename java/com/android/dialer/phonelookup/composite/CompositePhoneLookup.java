@@ -19,9 +19,11 @@ package com.android.dialer.phonelookup.composite;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -57,15 +59,12 @@ public final class CompositePhoneLookup implements PhoneLookup {
     }
     return Futures.transform(
         Futures.allAsList(futures),
-        new Function<List<PhoneLookupInfo>, PhoneLookupInfo>() {
-          @Override
-          public PhoneLookupInfo apply(List<PhoneLookupInfo> infos) {
-            PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
-            for (PhoneLookupInfo info : infos) {
-              mergedInfo.mergeFrom(info);
-            }
-            return mergedInfo.build();
+        infos -> {
+          PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
+          for (PhoneLookupInfo info : infos) {
+            mergedInfo.mergeFrom(info);
           }
+          return mergedInfo.build();
         },
         MoreExecutors.directExecutor());
   }
@@ -73,12 +72,50 @@ public final class CompositePhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<Boolean> isDirty(
       ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
-    return null;
+    List<ListenableFuture<Boolean>> futures = new ArrayList<>();
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      futures.add(phoneLookup.isDirty(phoneNumbers, lastModified));
+    }
+    // Executes all child lookups (possibly in parallel), completing when the first composite lookup
+    // which returns "true" completes, and cancels the others.
+    return DialerFutures.firstMatching(
+        futures, Preconditions::checkNotNull, false /* defaultValue */);
   }
 
+  /**
+   * Delegates to a set of dependent lookups and combines results.
+   *
+   * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
+   * the dependent lookups does not complete, the returned future will also not complete.
+   */
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long lastModified) {
-    return null;
+    List<ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>> futures =
+        new ArrayList<>();
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      futures.add(phoneLookup.bulkUpdate(existingInfoMap, lastModified));
+    }
+    return Futures.transform(
+        Futures.allAsList(futures),
+        (allMaps) -> {
+          ImmutableMap.Builder<DialerPhoneNumber, PhoneLookupInfo> combinedMap =
+              ImmutableMap.builder();
+          for (DialerPhoneNumber dialerPhoneNumber : existingInfoMap.keySet()) {
+            PhoneLookupInfo.Builder combinedInfo = PhoneLookupInfo.newBuilder();
+            for (ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map : allMaps) {
+              PhoneLookupInfo subInfo = map.get(dialerPhoneNumber);
+              if (subInfo == null) {
+                throw new IllegalStateException(
+                    "A sublookup didn't return an info for number: "
+                        + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getRawInput().getNumber()));
+              }
+              combinedInfo.mergeFrom(subInfo);
+            }
+            combinedMap.put(dialerPhoneNumber, combinedInfo.build());
+          }
+          return combinedMap.build();
+        },
+        MoreExecutors.directExecutor());
   }
 }

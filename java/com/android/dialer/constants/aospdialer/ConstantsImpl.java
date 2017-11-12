@@ -42,6 +42,18 @@ public class ConstantsImpl extends Constants {
     return "com.android.dialer.annotatedcalllog";
   }
 
+  @NonNull
+  @Override
+  public String getPhoneLookupHistoryProviderAuthority() {
+    return "com.android.dialer.phonelookuphistory";
+  }
+
+  @NonNull
+  @Override
+  public String getPreferredSimFallbackProviderAuthority() {
+    return "com.android.dialer.preferredsimfallback";
+  }
+
   @Override
   public String getUserAgent(Context context) {
     return null;

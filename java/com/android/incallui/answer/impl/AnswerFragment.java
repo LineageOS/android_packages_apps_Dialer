@@ -57,6 +57,7 @@ import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.impl.CreateCustomSmsDialogFragment.CreateCustomSmsHolder;
 import com.android.incallui.answer.impl.SmsBottomSheetFragment.SmsSheetHolder;
@@ -985,6 +986,8 @@ public class AnswerFragment extends Fragment
                 secondaryButton.animate().alpha(1);
               }
             });
+
+    TelecomUtil.silenceRinger(getContext());
   }
 
   @Override

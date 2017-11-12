@@ -44,7 +44,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -90,7 +89,6 @@ import com.android.dialer.app.list.SmartDialSearchFragment;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
@@ -112,7 +110,6 @@ import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCo
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
-import com.android.dialer.logging.LoggingBindingsFactory;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.main.Main;
@@ -124,6 +121,7 @@ import com.android.dialer.p13n.logging.P13nLogger;
 import com.android.dialer.p13n.logging.P13nLogging;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
@@ -300,10 +298,8 @@ public class DialtactsActivity extends TransactionSafeActivity
             PerformanceReport.recordClick(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
           }
 
-          if (DEBUG) {
-            LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
-            LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + mSearchQuery);
-          }
+          LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
+          LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + mSearchQuery);
           mSearchQuery = newText;
 
           // TODO(calderwoodra): show p13n when newText is empty.
@@ -593,13 +589,9 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
       // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
       ThreadUtil.postDelayedOnUiThread(
-          () -> {
-            if (getApplicationContext() instanceof LoggingBindingsFactory) {
-              ((LoggingBindingsFactory) getApplicationContext())
-                  .newLoggingBindings()
-                  .logRecordMemory(LoggingBindings.ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME);
-            }
-          },
+          () ->
+              Logger.get(this)
+                  .logRecordMemory(LoggingBindings.ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
           1000);
     }
 
@@ -1387,6 +1379,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (mSmartDialSearchFragment != null) {
       mSmartDialSearchFragment.setAddToContactNumber(query);
     }
+    if (mNewSearchFragment != null) {
+      mNewSearchFragment.setRawNumber(query);
+    }
     final String normalizedQuery =
         SmartDialNameMatcher.normalizeNumber(query, SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
 
@@ -1522,18 +1517,12 @@ public class DialtactsActivity extends TransactionSafeActivity
       // an error message.
       phoneNumber = "";
     }
-
-    Intent intent =
+    PreCall.start(
+        this,
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(
-                callSpecificAppData.getAllowAssistedDialing(),
-                ConcreteCreator.createNewAssistedDialingMediator(
-                    getApplication().getSystemService(TelephonyManager.class),
-                    getApplicationContext()))
-            .build();
+            .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing()));
 
-    DialerUtils.startActivityWithErrorToast(this, intent);
     mClearSearchOnPause = true;
   }
 
@@ -1566,6 +1555,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (tabIndex != mPreviouslySelectedTabIndex) {
       mFloatingActionButtonController.scaleIn();
     }
+    LogUtil.i("DialtactsActivity.onPageSelected", "tabIndex: %d", tabIndex);
     mPreviouslySelectedTabIndex = tabIndex;
     timeTabSelected = SystemClock.elapsedRealtime();
   }
@@ -1685,6 +1675,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       hideDialpadFragment(false, true);
     }
     exitSearchUi();
+  }
+
+  protected int getPreviouslySelectedTabIndex() {
+    return mPreviouslySelectedTabIndex;
   }
 
   /** Popup menu accessible from the search bar */

@@ -21,18 +21,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.util.CallUtil;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
 
@@ -54,9 +54,10 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(accountHandle)
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setPhoneAccountHandle(accountHandle));
       }
     };
   }
@@ -66,10 +67,10 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setAllowAssistedDial(
-                true, ConcreteCreator.createNewAssistedDialingMediator(telephonyManager, context))
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setAllowAssistedDial(true));
       }
     };
   }
@@ -83,10 +84,11 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(accountHandle)
-            .setIsVideoCall(true)
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setPhoneAccountHandle(accountHandle)
+                .setIsVideoCall(true));
       }
     };
   }
@@ -100,12 +102,14 @@ public abstract class IntentProvider {
     };
   }
 
-  public static IntentProvider getReturnVoicemailCallIntentProvider() {
+  public static IntentProvider getReturnVoicemailCallIntentProvider(
+      @Nullable PhoneAccountHandle phoneAccountHandle) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.CALL_LOG)
-            .build();
+        return PreCall.getIntent(
+            context,
+            CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
       }
     };
   }

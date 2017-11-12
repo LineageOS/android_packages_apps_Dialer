@@ -18,8 +18,7 @@
 <resources>
   <color name="bubble_primary_background_darken">#33000000</color>
 
-  <color name="bubble_button_text_color_black">@color/dialer_primary_text_color</color>
-  <color name="bubble_button_text_color_white">@color/dialer_primary_text_color_white</color>
-  <color name="bubble_button_text_color_blue">@color/dialer_theme_color</color>
-  <color name="bubble_end_call_button_background">@color/dialer_end_call_button_color</color>
+  <color name="bubble_button_color_grey">@color/dialer_secondary_text_color</color>
+  <color name="bubble_button_color_white">@color/dialer_primary_text_color_white</color>
+  <color name="bubble_button_color_blue">@color/dialer_theme_color</color>
 </resources>

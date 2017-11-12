@@ -57,6 +57,12 @@ public abstract class Constants {
   @NonNull
   public abstract String getAnnotatedCallLogProviderAuthority();
 
+  @NonNull
+  public abstract String getPhoneLookupHistoryProviderAuthority();
+
+  @NonNull
+  public abstract String getPreferredSimFallbackProviderAuthority();
+
   public abstract String getUserAgent(Context context);
 
   @NonNull

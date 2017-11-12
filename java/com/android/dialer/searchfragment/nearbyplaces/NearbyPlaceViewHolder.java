@@ -29,11 +29,11 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
 import com.android.dialer.searchfragment.common.SearchCursor;
-import com.android.dialer.telecom.TelecomUtil;
 
 /** ViewHolder for a nearby place row. */
 public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
@@ -64,8 +64,8 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
     String name = cursor.getString(Projections.DISPLAY_NAME);
     String address = cursor.getString(Projections.PHONE_LABEL);
 
-    placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name));
-    placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address));
+    placeName.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
+    placeAddress.setText(QueryBoldingUtil.getNameWithQueryBolded(query, address, context));
     String photoUri = cursor.getString(Projections.PHOTO_URI);
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
@@ -93,7 +93,6 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    TelecomUtil.placeCall(
-        context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH).build());
+    PreCall.start(context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH));
   }
 }
