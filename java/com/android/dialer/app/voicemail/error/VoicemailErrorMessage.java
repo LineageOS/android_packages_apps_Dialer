@@ -31,6 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.voicemail.settings.VoicemailChangePinActivity;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -165,10 +166,10 @@ public class VoicemailErrorMessage {
           @Override
           public void onClick(View v) {
             Logger.get(context).logImpression(DialerImpression.Type.VVM_CALL_VOICEMAIL_CLICKED);
-            context.startActivity(
+            PreCall.start(
+                context,
                 CallIntentBuilder.forVoicemail(
-                        phoneAccountHandle, CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE)
-                    .build());
+                    phoneAccountHandle, CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE));
           }
         });
   }

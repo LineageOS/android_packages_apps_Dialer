@@ -138,7 +138,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setOnClickListenerForRow(CoalescedRow row) {
     itemView.setOnClickListener(
         (view) -> {
-          Intent callbackIntent = CallLogIntents.getCallBackIntent(row);
+          Intent callbackIntent = CallLogIntents.getCallBackIntent(context, row);
           if (callbackIntent != null) {
             context.startActivity(callbackIntent);
           }

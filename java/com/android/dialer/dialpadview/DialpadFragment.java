@@ -83,10 +83,10 @@ import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.performancereport.PerformanceReport;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
 import java.util.HashSet;
@@ -997,9 +997,8 @@ public class DialpadFragment extends Fragment
   }
 
   public void callVoicemail() {
-    DialerUtils.startActivityWithErrorToast(
-        getActivity(),
-        CallIntentBuilder.forVoicemail(null, CallInitiationType.Type.DIALPAD).build());
+    PreCall.start(
+        getContext(), CallIntentBuilder.forVoicemail(null, CallInitiationType.Type.DIALPAD));
     hideAndClearDialpad();
   }
 
@@ -1049,9 +1048,7 @@ public class DialpadFragment extends Fragment
         // Clear the digits just in case.
         clearDialpad();
       } else {
-        final Intent intent =
-            new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD).build();
-        DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+        PreCall.start(getContext(), new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD));
         hideAndClearDialpad();
       }
     }

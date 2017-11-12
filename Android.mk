@@ -86,6 +86,8 @@ EXCLUDE_EXTRA_PACKAGES := \
 # We specify each package explicitly to glob resource files.
 # find . -type f -name "AndroidManifest.xml" | uniq | sort | cut -c 8- | rev | cut -c 21- | rev | sed 's/\//./g' | sed 's/$/ \\/'
 LOCAL_AAPT_FLAGS := \
+	com.android.assets.product \
+	com.android.assets.quantum \
 	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
@@ -121,8 +123,11 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.main.impl \
 	com.android.dialer.notification \
 	com.android.dialer.oem \
+	com.android.dialer.phonelookup.database \
 	com.android.dialer.phonenumberutil \
 	com.android.dialer.postcall \
+	com.android.dialer.precall.impl \
+	com.android.dialer.preferredsim.impl \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \
 	com.android.dialer.searchfragment.list \
@@ -134,7 +139,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.theme \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
-        com.android.dialer.voicemail.settings \
+	com.android.dialer.voicemail.settings \
 	com.android.dialer.voicemailstatus \
 	com.android.dialer.widget \
 	com.android.incallui \

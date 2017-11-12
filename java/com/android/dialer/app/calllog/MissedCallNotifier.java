@@ -60,6 +60,7 @@ import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.notification.NotificationManagerUtils;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import java.util.Iterator;
@@ -438,8 +439,9 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     cancelSingleMissedCallNotification(context, callUri);
     DialerUtils.startActivityWithErrorToast(
         context,
-        new CallIntentBuilder(number, CallInitiationType.Type.MISSED_CALL_NOTIFICATION)
-            .build()
+        PreCall.getIntent(
+                context,
+                new CallIntentBuilder(number, CallInitiationType.Type.MISSED_CALL_NOTIFICATION))
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
   }
 

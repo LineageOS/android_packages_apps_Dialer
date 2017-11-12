@@ -58,6 +58,7 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
@@ -483,12 +484,11 @@ public final class NewSearchFragment extends Fragment
             .setCharactersInSearchString(query == null ? 0 : query.length())
             .setAllowAssistedDialing(allowAssistedDial)
             .build();
-    Intent intent =
+    PreCall.start(
+        getContext(),
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(allowAssistedDial)
-            .build();
-    DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+            .setAllowAssistedDial(allowAssistedDial));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
   }
 
