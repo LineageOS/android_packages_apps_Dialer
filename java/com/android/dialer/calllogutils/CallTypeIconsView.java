@@ -268,7 +268,7 @@ public class CallTypeIconsView extends View {
       iconId = R.drawable.quantum_ic_voicemail_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       voicemail = drawable.mutate();
-      voicemail.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
+      voicemail.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_block_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
@@ -278,17 +278,17 @@ public class CallTypeIconsView extends View {
       iconId = R.drawable.quantum_ic_videocam_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       videoCall = drawable.mutate();
-      videoCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
+      videoCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_hd_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       hdCall = drawable.mutate();
-      hdCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
+      hdCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_signal_wifi_4_bar_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       wifiCall = drawable.mutate();
-      wifiCall.setColorFilter(r.getColor(R.color.call_type_icon_color), PorterDuff.Mode.MULTIPLY);
+      wifiCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }
