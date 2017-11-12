@@ -18,6 +18,7 @@ package com.android.dialer.searchfragment.list;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -47,6 +48,9 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private boolean showZeroSuggest;
   private String query;
+  // Raw query number from dialpad, which may contain special character such as "+". This is used
+  // for actions to add contact or send sms.
+  private String rawNumber;
   private OnClickListener allowClickListener;
   private OnClickListener dismissClickListener;
   private RowClickListener rowClickListener;
@@ -127,7 +131,10 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       ((HeaderViewHolder) holder).setHeader(header);
     } else if (holder instanceof SearchActionViewHolder) {
       ((SearchActionViewHolder) holder)
-          .setAction(searchCursorManager.getSearchAction(position), position, query);
+          .setAction(
+              searchCursorManager.getSearchAction(position),
+              position,
+              TextUtils.isEmpty(rawNumber) ? query : rawNumber);
     } else if (holder instanceof LocationPermissionViewHolder) {
       // No-op
     } else {
@@ -179,8 +186,9 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
     showZeroSuggest = visible;
   }
 
-  public void setQuery(String query) {
+  public void setQuery(String query, @Nullable String rawNumber) {
     this.query = query;
+    this.rawNumber = rawNumber;
     if (searchCursorManager.setQuery(query)) {
       notifyDataSetChanged();
     }
