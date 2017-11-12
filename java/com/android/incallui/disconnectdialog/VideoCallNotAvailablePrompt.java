@@ -19,7 +19,6 @@ package com.android.incallui.disconnectdialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
@@ -28,7 +27,7 @@ import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.precall.PreCall;
 import com.android.incallui.call.DialerCall;
 
 /** Prompt user to make voice call if video call is not currently available. */
@@ -67,10 +66,9 @@ public class VideoCallNotAvailablePrompt implements DisconnectDialog {
 
   private void makeVoiceCall(Context context, String number, PhoneAccountHandle accountHandle) {
     LogUtil.enterBlock("VideoCallNotAvailablePrompt.makeVoiceCall");
-    Intent intent =
+    PreCall.start(
+        context,
         new CallIntentBuilder(number, CallInitiationType.Type.IMS_VIDEO_BLOCKED_FALLBACK_TO_VOICE)
-            .setPhoneAccountHandle(accountHandle)
-            .build();
-    DialerUtils.startActivityWithErrorToast(context, intent);
+            .setPhoneAccountHandle(accountHandle));
   }
 }

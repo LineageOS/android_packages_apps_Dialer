@@ -32,11 +32,11 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
 import com.android.dialer.searchfragment.common.SearchCursor;
-import com.android.dialer.telecom.TelecomUtil;
 
 /** ViewHolder for a nearby place row. */
 public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
@@ -132,7 +132,6 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    TelecomUtil.placeCall(
-        context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH).build());
+    PreCall.start(context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH));
   }
 }
