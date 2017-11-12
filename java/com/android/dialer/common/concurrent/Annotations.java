@@ -20,6 +20,10 @@ import javax.inject.Qualifier;
 /** Annotations for dagger concurrency bindings. */
 public class Annotations {
 
+  /** Annotation for retrieving the UI thread. */
+  @Qualifier
+  public @interface Ui {}
+
   /** Annotation for retrieving the non-UI thread pool. */
   @Qualifier
   public @interface NonUiParallel {}
