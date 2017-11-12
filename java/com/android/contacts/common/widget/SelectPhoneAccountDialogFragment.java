@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -114,6 +115,12 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
   public void setListener(SelectPhoneAccountListener listener) {
     mListener = listener;
+  }
+
+  @Nullable
+  @VisibleForTesting
+  public SelectPhoneAccountListener getListener() {
+    return mListener;
   }
 
   @Override

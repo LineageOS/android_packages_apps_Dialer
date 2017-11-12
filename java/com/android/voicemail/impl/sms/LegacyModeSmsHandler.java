@@ -28,6 +28,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.VisualVoicemailSms;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.precall.PreCall;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
@@ -94,9 +95,10 @@ public class LegacyModeSmsHandler {
           PendingIntent.getActivity(
               context,
               CALL_VOICEMAIL_REQUEST_CODE,
-              CallIntentBuilder.forVoicemail(
-                      phoneAccountHandle, CallInitiationType.Type.LEGACY_VOICEMAIL_NOTIFICATION)
-                  .build(),
+              PreCall.getIntent(
+                  context,
+                  CallIntentBuilder.forVoicemail(
+                      phoneAccountHandle, CallInitiationType.Type.LEGACY_VOICEMAIL_NOTIFICATION)),
               PendingIntent.FLAG_UPDATE_CURRENT);
     } else {
       Intent launchVoicemailSettingsIntent =

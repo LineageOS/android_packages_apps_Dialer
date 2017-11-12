@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.precall.PreCallAction;
+import com.android.dialer.precall.PreCallCoordinator;
 import com.google.common.collect.ImmutableList;
 import javax.inject.Inject;
 
@@ -33,14 +34,14 @@ public class PreCallImpl implements PreCall {
 
   @Override
   public ImmutableList<PreCallAction> getActions() {
-    return ImmutableList.of();
+    return ImmutableList.of(new CallingAccountSelector(), new AssistedDialAction());
   }
 
   @NonNull
   @Override
   public Intent buildIntent(Context context, CallIntentBuilder builder) {
     Intent intent = new Intent(context, PreCallActivity.class);
-    intent.putExtra(PreCallCoordinatorImpl.EXTRA_CALL_INTENT_BUILDER, builder);
+    intent.putExtra(PreCallCoordinator.EXTRA_CALL_INTENT_BUILDER, builder);
     return intent;
   }
 }

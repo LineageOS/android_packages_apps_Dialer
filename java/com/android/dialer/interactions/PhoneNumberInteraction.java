@@ -60,6 +60,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
@@ -183,10 +184,11 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         break;
       default:
         intent =
-            new CallIntentBuilder(phoneNumber, callSpecificAppData)
-                .setIsVideoCall(isVideoCall)
-                .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing())
-                .build();
+            PreCall.getIntent(
+                context,
+                new CallIntentBuilder(phoneNumber, callSpecificAppData)
+                    .setIsVideoCall(isVideoCall)
+                    .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing()));
         break;
     }
     DialerUtils.startActivityWithErrorToast(context, intent);
@@ -224,7 +226,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     // crash when the user tries to use such a shortcut, check for this condition and ask the user
     // for the permission.
     if (!PermissionsUtil.hasPhonePermissions(mContext)) {
-      LogUtil.i("PhoneNumberInteraction.startInteraction", "Need phone permissions: CALL_PHONE");
+      LogUtil.i("PhoneNumberInteraction.startInteraction", "Need phone permission: CALL_PHONE");
       ActivityCompat.requestPermissions(
           (Activity) mContext, new String[] {permission.CALL_PHONE}, REQUEST_CALL_PHONE);
       return;

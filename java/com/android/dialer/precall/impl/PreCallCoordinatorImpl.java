@@ -38,8 +38,6 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
 
   private static final String SAVED_STATE_CURRENT_ACTION = "current_action";
 
-  static final String EXTRA_CALL_INTENT_BUILDER = "extra_call_intent_builder";
-
   @NonNull private final Activity activity;
 
   private CallIntentBuilder builder;

@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import com.android.dialer.assisteddialing.ui.R;
@@ -41,7 +42,7 @@ public final class ConcreteCreator {
   // Floor set at N due to use of Optional.
   protected static final int BUILD_CODE_FLOOR = Build.VERSION_CODES.N;
   // Ceiling set at O because this feature will ship as part of the framework in P.
-  protected static final int BUILD_CODE_CEILING = Build.VERSION_CODES.O;
+  @VisibleForTesting public static final int BUILD_CODE_CEILING = Build.VERSION_CODES.O;
 
   /**
    * Creates a new AssistedDialingMediator

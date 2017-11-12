@@ -36,12 +36,14 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
 
   private static final int DISPLAY_NAME = 1;
   private static final int PHOTO_SUPPORT = 2;
+  private static final int AUTHORITY = 3;
 
   @VisibleForTesting
   static final String[] PROJECTION = {
     ContactsContract.Directory._ID,
     ContactsContract.Directory.DISPLAY_NAME,
     ContactsContract.Directory.PHOTO_SUPPORT,
+    ContactsContract.Directory.DIRECTORY_AUTHORITY,
   };
 
   public RemoteDirectoriesCursorLoader(Context context) {
@@ -51,7 +53,10 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
   /** @return current cursor row represented as a {@link Directory}. */
   public static Directory readDirectory(Cursor cursor) {
     return Directory.create(
-        cursor.getInt(ID), cursor.getString(DISPLAY_NAME), cursor.getInt(PHOTO_SUPPORT) != 0);
+        cursor.getInt(ID),
+        cursor.getString(DISPLAY_NAME),
+        cursor.getInt(PHOTO_SUPPORT) != 0,
+        cursor.getString(AUTHORITY));
   }
 
   private static Uri getContentUri() {
@@ -63,8 +68,14 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
   /** POJO representing the results returned from {@link RemoteDirectoriesCursorLoader}. */
   @AutoValue
   public abstract static class Directory {
+    public static Directory create(
+        int id, @Nullable String displayName, boolean supportsPhotos, @Nullable String authority) {
+      return new AutoValue_RemoteDirectoriesCursorLoader_Directory(
+          id, displayName, supportsPhotos, authority);
+    }
+
     public static Directory create(int id, @Nullable String displayName, boolean supportsPhotos) {
-      return new AutoValue_RemoteDirectoriesCursorLoader_Directory(id, displayName, supportsPhotos);
+      return create(id, displayName, supportsPhotos, null);
     }
 
     public abstract int getId();
@@ -73,5 +84,7 @@ public final class RemoteDirectoriesCursorLoader extends CursorLoader {
     abstract @Nullable String getDisplayName();
 
     abstract boolean supportsPhotos();
+
+    abstract @Nullable String authority();
   }
 }

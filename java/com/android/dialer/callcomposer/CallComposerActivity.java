@@ -72,6 +72,7 @@ import com.android.dialer.enrichedcall.extensions.StateExtension;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
@@ -479,9 +480,8 @@ public class CallComposerActivity extends AppCompatActivity
   }
 
   private void placeTelecomCall() {
-    TelecomUtil.placeCall(
-        this,
-        new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER).build());
+    PreCall.start(
+        this, new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER));
     setResult(RESULT_OK);
     finish();
   }
