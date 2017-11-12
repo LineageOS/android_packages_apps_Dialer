@@ -43,8 +43,19 @@ public final class SearchContactsCursorLoader extends CursorLoader {
     this.query = query;
   }
 
+  /**
+   * Note: ContactsProvider can make no guarantee that any given field is non-null, and display name
+   * has been observed to be null in the wild, though it is unclear when that might happen (possibly
+   * a third-party is inserting such data). See a bug.
+   *
+   * <p>We skip showing contacts without a display name because there is no UI treatment for showing
+   * such results. (Note that even contacts with only a number still have a display name set to the
+   * number.)
+   */
   private static String whereStatement() {
     return (Phone.NUMBER + " IS NOT NULL")
+        + " AND "
+        + (Data.DISPLAY_NAME_PRIMARY + " IS NOT NULL")
         + " AND "
         + Data.MIMETYPE
         + " IN (\'"
