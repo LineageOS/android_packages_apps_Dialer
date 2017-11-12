@@ -172,6 +172,11 @@ public class CallIntentBuilder implements Parcelable {
     return outgoingCallExtras;
   }
 
+  /**
+   * @deprecated Use {@link com.android.dialer.precall.PreCall#getIntent(android.content.Context,
+   *     CallIntentBuilder)} instead.
+   */
+  @Deprecated
   public Intent build() {
     Intent intent = new Intent(Intent.ACTION_CALL, uri);
 

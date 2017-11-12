@@ -42,7 +42,7 @@ final class PrimaryAction {
                 .build())
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row))
         .setSecondaryText(CallLogEntryText.buildSecondaryTextForBottomSheet(context, row))
-        .setIntent(CallLogIntents.getCallBackIntent(row))
+        .setIntent(CallLogIntents.getCallBackIntent(context, row))
         .build();
   }
 }

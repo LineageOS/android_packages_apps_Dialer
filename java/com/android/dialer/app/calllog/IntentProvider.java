@@ -32,6 +32,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
 
@@ -53,9 +54,10 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(accountHandle)
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setPhoneAccountHandle(accountHandle));
       }
     };
   }
@@ -65,9 +67,10 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setAllowAssistedDial(true)
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setAllowAssistedDial(true));
       }
     };
   }
@@ -81,10 +84,11 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(accountHandle)
-            .setIsVideoCall(true)
-            .build();
+        return PreCall.getIntent(
+            context,
+            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
+                .setPhoneAccountHandle(accountHandle)
+                .setIsVideoCall(true));
       }
     };
   }
@@ -103,8 +107,9 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG)
-            .build();
+        return PreCall.getIntent(
+            context,
+            CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
       }
     };
   }

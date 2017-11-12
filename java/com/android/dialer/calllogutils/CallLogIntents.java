@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllogutils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import android.text.TextUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.precall.PreCall;
 
 /** Provides intents related to call log entries. */
 public final class CallLogIntents {
@@ -35,10 +37,9 @@ public final class CallLogIntents {
    * @return null if the provided {@code row} doesn't have a number
    */
   @Nullable
-  public static Intent getCallBackIntent(CoalescedRow row) {
+  public static Intent getCallBackIntent(Context context, CoalescedRow row) {
     // TODO(zachh): Do something with parsed values to make more dialable?
     String originalNumber = row.number().getRawInput().getNumber();
-
     // TODO(zachh): Make this more sophisticated, e.g. return null for non-dialable numbers?
     if (TextUtils.isEmpty(originalNumber)) {
       return null;
@@ -46,10 +47,11 @@ public final class CallLogIntents {
 
     // TODO(zachh): More granular logging?
     // TODO(zachh): Support assisted dialing.
-    return new CallIntentBuilder(originalNumber, CallInitiationType.Type.CALL_LOG)
-        .setPhoneAccountHandle(
-            PhoneAccountUtils.getAccount(row.phoneAccountComponentName(), row.phoneAccountId()))
-        .setIsVideoCall((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-        .build();
+    return PreCall.getIntent(
+        context,
+        new CallIntentBuilder(originalNumber, CallInitiationType.Type.CALL_LOG)
+            .setPhoneAccountHandle(
+                PhoneAccountUtils.getAccount(row.phoneAccountComponentName(), row.phoneAccountId()))
+            .setIsVideoCall((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
   }
 }

@@ -121,6 +121,7 @@ import com.android.dialer.p13n.logging.P13nLogger;
 import com.android.dialer.p13n.logging.P13nLogging;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
@@ -1515,14 +1516,12 @@ public class DialtactsActivity extends TransactionSafeActivity
       // an error message.
       phoneNumber = "";
     }
-
-    Intent intent =
+    PreCall.start(
+        this,
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing())
-            .build();
+            .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing()));
 
-    DialerUtils.startActivityWithErrorToast(this, intent);
     mClearSearchOnPause = true;
   }
 
@@ -1555,6 +1554,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (tabIndex != mPreviouslySelectedTabIndex) {
       mFloatingActionButtonController.scaleIn();
     }
+    LogUtil.i("DialtactsActivity.onPageSelected", "tabIndex: %d", tabIndex);
     mPreviouslySelectedTabIndex = tabIndex;
     timeTabSelected = SystemClock.elapsedRealtime();
   }
@@ -1674,6 +1674,10 @@ public class DialtactsActivity extends TransactionSafeActivity
       hideDialpadFragment(false, true);
     }
     exitSearchUi();
+  }
+
+  protected int getPreviouslySelectedTabIndex() {
+    return mPreviouslySelectedTabIndex;
   }
 
   /** Popup menu accessible from the search bar */

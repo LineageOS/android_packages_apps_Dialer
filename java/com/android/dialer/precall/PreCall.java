@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.util.DialerUtils;
 import com.google.common.collect.ImmutableList;
 
 /** Interface to prepare a {@link CallIntentBuilder} before placing the call with telecom. */
@@ -41,4 +42,12 @@ public interface PreCall {
   @NonNull
   @MainThread
   Intent buildIntent(Context context, CallIntentBuilder builder);
+
+  static Intent getIntent(Context context, CallIntentBuilder builder) {
+    return PreCallComponent.get(context).getPreCall().buildIntent(context, builder);
+  }
+
+  static void start(Context context, CallIntentBuilder builder) {
+    DialerUtils.startActivityWithErrorToast(context, getIntent(context, builder));
+  }
 }

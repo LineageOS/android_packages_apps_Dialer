@@ -31,6 +31,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import java.lang.annotation.Retention;
@@ -128,8 +129,8 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
                 .setPositionOfSelectedSearchResult(position)
                 .setCharactersInSearchString(query.length())
                 .build();
-        intent = new CallIntentBuilder(query, callSpecificAppData).setIsVideoCall(true).build();
-        DialerUtils.startActivityWithErrorToast(context, intent);
+        PreCall.start(
+            context, new CallIntentBuilder(query, callSpecificAppData).setIsVideoCall(true));
         break;
 
       case Action.SEND_SMS:
