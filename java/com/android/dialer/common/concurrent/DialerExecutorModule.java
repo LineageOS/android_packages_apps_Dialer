@@ -19,8 +19,10 @@ import android.os.AsyncTask;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
 import com.android.dialer.common.concurrent.Annotations.NonUiSerial;
+import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.common.concurrent.Annotations.UiParallel;
 import com.android.dialer.common.concurrent.Annotations.UiSerial;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -38,6 +40,13 @@ public abstract class DialerExecutorModule {
   @Binds
   abstract DialerExecutorFactory bindDialerExecutorFactory(
       DefaultDialerExecutorFactory defaultDialerExecutorFactory);
+
+  @Provides
+  @Singleton
+  @Ui
+  static ListeningExecutorService provideUiThreadExecutorService() {
+    return new UiThreadExecutor();
+  }
 
   @Provides
   @Singleton
