@@ -132,8 +132,8 @@ final class ContactFilterCursor implements Cursor {
   }
 
   private static List<Cp2Contact> coalesceContacts(List<Cp2Contact> contactsWithSameContactId) {
-    String companyName = null;
-    String nickName = null;
+    StringBuilder companyName = new StringBuilder();
+    StringBuilder nickName = new StringBuilder();
     List<Cp2Contact> phoneContacts = new ArrayList<>();
     for (Cp2Contact contact : contactsWithSameContactId) {
       if (contact.mimeType().equals(Phone.CONTENT_ITEM_TYPE)) {
@@ -141,11 +141,11 @@ final class ContactFilterCursor implements Cursor {
       } else if (contact.mimeType().equals(Organization.CONTENT_ITEM_TYPE)) {
         // Since a contact can have more than one company name but they aren't visible to the user
         // in our search UI, we can lazily concatenate them together to make them all searchable.
-        companyName += " " + contact.companyName();
+        companyName.append(" ").append(contact.companyName());
       } else if (contact.mimeType().equals(Nickname.CONTENT_ITEM_TYPE)) {
         // Since a contact can have more than one nickname but they aren't visible to the user
         // in our search UI, we can lazily concatenate them together to make them all searchable.
-        nickName += " " + contact.nickName();
+        nickName.append(" ").append(contact.nickName());
       }
     }
 
@@ -154,7 +154,11 @@ final class ContactFilterCursor implements Cursor {
     List<Cp2Contact> coalescedContacts = new ArrayList<>();
     for (Cp2Contact phoneContact : phoneContacts) {
       coalescedContacts.add(
-          phoneContact.toBuilder().setCompanyName(companyName).setNickName(nickName).build());
+          phoneContact
+              .toBuilder()
+              .setCompanyName(companyName.length() == 0 ? null : companyName.toString())
+              .setNickName(nickName.length() == 0 ? null : nickName.toString())
+              .build());
     }
     return coalescedContacts;
   }
