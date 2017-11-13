@@ -216,7 +216,7 @@ public class ContactDisplayUtils {
       return null;
     }
     final Spannable spannable = new SpannableString(message);
-    int start = phoneNumber == null ? -1 : message.indexOf(phoneNumber);
+    int start = TextUtils.isEmpty(phoneNumber) ? -1 : message.indexOf(phoneNumber);
     while (start >= 0) {
       final int end = start + phoneNumber.length();
       final TtsSpan ttsSpan = PhoneNumberUtilsCompat.createTtsSpan(phoneNumber);
