@@ -121,11 +121,15 @@ message DialerImpression {
 
     // From the service instead of an activity logs the number of times the
     // number was marked as Spam by the user (e.g from the feedback prompt)
-    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM = 1026;
+    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM = 1026
+
+        ;
 
     // From the service instead of an activity logs the number of times the
     // number was marked as Not Spam by the user (e.g from the feedback prompt)
-    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM = 1027;
+    SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM = 1027
+
+        ;
 
     // User is in a active call i.e either incoming or outgoing
     // This is mainly so we can assign an impression event to a call event i.e
@@ -143,13 +147,17 @@ message DialerImpression {
     INCOMING_NON_SPAM_CALL = 1030;
 
     // Spam notifications shown despite throttling
-    SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1041;
+    SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1041
+
+        ;
 
     // Spam notifications not shown due to throttling
     SPAM_NOTIFICATION_NOT_SHOWN_AFTER_THROTTLE = 1042;
 
     // Non spam notifications shown despite throttling
-    NON_SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1043;
+    NON_SPAM_NOTIFICATION_SHOWN_AFTER_THROTTLE = 1043
+
+        ;
 
     // Non spam notifications not shown due to throttling
     NON_SPAM_NOTIFICATION_NOT_SHOWN_AFTER_THROTTLE = 1044;
@@ -581,5 +589,17 @@ message DialerImpression {
     // Indicates that the number attempting to be assisted dialed had an
     // extension.
     ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_EXTENSION = 1289;
+
+    // User reports a same prefix call as spam from call history
+    REPORT_SAME_PREFIX_CALL_AS_SPAM_VIA_CALL_HISTORY =
+        1290
+
+        ;
+
+    // User reports a same prefix call as not spam from call history
+    REPORT_SAME_PREFIX_CALL_AS_NOT_SPAM_VIA_CALL_HISTORY =
+        1291
+
+        ;
   }
 }
