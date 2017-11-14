@@ -25,6 +25,7 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.provider.VoicemailContract;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -174,6 +175,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   OnCompletionListener onCompletionListener =
       new OnCompletionListener() {
 
@@ -199,6 +201,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   OnErrorListener onErrorListener =
       new OnErrorListener() {
         @Override
@@ -211,20 +214,17 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
-  void setVoicemailUri(Uri voicemailUri) {
-    Assert.isNotNull(voicemailUri);
-    this.voicemailUri = voicemailUri;
-  }
-
   void setFragmentManager(FragmentManager fragmentManager) {
     this.fragmentManager = fragmentManager;
   }
 
-  // TODO(uabdullah): Merge with voicemailUri (http://cl/175585919)
-  void setVoicemailDuration(VoicemailEntry voicemailEntry) {
+  void setVoicemailEntryValues(VoicemailEntry voicemailEntry) {
     Assert.isNotNull(voicemailEntry);
+    Uri uri = Uri.parse(voicemailEntry.voicemailUri());
+    Assert.isNotNull(uri);
     Assert.isNotNull(totalDurationView);
 
+    voicemailUri = uri;
     totalDurationView.setText(
         VoicemailEntryText.getVoicemailDuration(getContext(), voicemailEntry));
   }
