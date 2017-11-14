@@ -34,6 +34,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -90,6 +91,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean didShowAnswerScreen;
   private boolean didShowInCallScreen;
   private boolean didShowVideoCallScreen;
+  private boolean dismissKeyguard;
   private int[] backgroundDrawableColors;
   private GradientDrawable backgroundDrawable;
   private boolean isVisible;
@@ -419,7 +421,16 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void dismissKeyguard(boolean dismiss) {
-    common.dismissKeyguard(dismiss);
+    if (dismissKeyguard == dismiss) {
+      return;
+    }
+
+    dismissKeyguard = dismiss;
+    if (dismiss) {
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    } else {
+      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    }
   }
 
   public void showPostCharWaitDialog(String callId, String chars) {

@@ -102,7 +102,6 @@ public class InCallActivityCommon {
   private static Optional<Integer> audioRouteForTesting = Optional.absent();
 
   private final InCallActivity inCallActivity;
-  private boolean dismissKeyguard;
   private boolean showPostCharWaitDialogOnResume;
   private String showPostCharWaitDialogCallId;
   private String showPostCharWaitDialogChars;
@@ -525,18 +524,6 @@ public class InCallActivityCommon {
     return false;
   }
 
-  public void dismissKeyguard(boolean dismiss) {
-    if (dismissKeyguard == dismiss) {
-      return;
-    }
-    dismissKeyguard = dismiss;
-    if (dismiss) {
-      inCallActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-    } else {
-      inCallActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-    }
-  }
-
   public void showPostCharWaitDialog(String callId, String chars) {
     if (inCallActivity.isVisible()) {
       PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
@@ -902,7 +889,7 @@ public class InCallActivityCommon {
         outgoingCall.disconnect();
       }
 
-      dismissKeyguard(true);
+      inCallActivity.dismissKeyguard(true);
     }
 
     boolean didShowAccountSelectionDialog = maybeShowAccountSelectionDialog();
