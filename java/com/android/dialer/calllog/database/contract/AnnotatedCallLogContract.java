@@ -211,10 +211,15 @@ public class AnnotatedCallLogContract {
   public static final class AnnotatedCallLog implements CommonColumns {
 
     public static final String TABLE = "AnnotatedCallLog";
+    public static final String DISTINCT_PHONE_NUMBERS = "DistinctPhoneNumbers";
 
     /** The content URI for this table. */
     public static final Uri CONTENT_URI =
         Uri.withAppendedPath(AnnotatedCallLogContract.CONTENT_URI, TABLE);
+
+    /** Content URI for selecting the distinct phone numbers from the AnnotatedCallLog. */
+    public static final Uri DISTINCT_NUMBERS_CONTENT_URI =
+        Uri.withAppendedPath(AnnotatedCallLogContract.CONTENT_URI, DISTINCT_PHONE_NUMBERS);
 
     /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
