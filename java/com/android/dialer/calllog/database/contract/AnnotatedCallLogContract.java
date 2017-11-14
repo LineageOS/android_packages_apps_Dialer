@@ -227,7 +227,7 @@ public class AnnotatedCallLogContract {
     /**
      * See {@link android.provider.CallLog.Calls#DURATION}.
      *
-     * <p>TYPE: INTEGER (int)
+     * <p>TYPE: INTEGER (long)
      */
     public static final String DURATION = "duration";
 

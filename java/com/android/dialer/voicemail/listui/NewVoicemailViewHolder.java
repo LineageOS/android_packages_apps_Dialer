@@ -81,6 +81,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     setPhoto(voicemailEntry);
     mediaPlayerView.setVoicemailUri(Uri.parse(voicemailEntry.voicemailUri()));
     mediaPlayerView.setFragmentManager(fragmentManager);
+    mediaPlayerView.setVoicemailDuration(voicemailEntry);
   }
 
   // TODO(uabdullah): Consider/Implement TYPE (e.g Spam, TYPE_VOICEMAIL)

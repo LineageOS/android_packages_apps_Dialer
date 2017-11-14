@@ -91,7 +91,7 @@ public class VoicemailEntryText {
     return secondaryText.toString();
   }
 
-  private static String getVoicemailDuration(Context context, VoicemailEntry voicemailEntry) {
+  static String getVoicemailDuration(Context context, VoicemailEntry voicemailEntry) {
     long minutes = TimeUnit.SECONDS.toMinutes(voicemailEntry.duration());
     long seconds = voicemailEntry.duration() - TimeUnit.MINUTES.toSeconds(minutes);
 
