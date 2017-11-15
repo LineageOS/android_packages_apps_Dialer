@@ -30,7 +30,7 @@ import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
@@ -45,9 +45,10 @@ import com.android.dialer.voicemail.model.VoicemailEntry;
  */
 public class NewVoicemailMediaPlayerView extends LinearLayout {
 
-  private Button playButton;
-  private Button speakerButton;
-  private Button deleteButton;
+  private ImageButton playButton;
+  private ImageButton speakerButton;
+  private ImageButton phoneButton;
+  private ImageButton deleteButton;
   private TextView totalDurationView;
   private Uri voicemailUri;
   private FragmentManager fragmentManager;
@@ -72,6 +73,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   private void initializeMediaPlayerButtonsAndViews() {
     playButton = findViewById(R.id.playButton);
     speakerButton = findViewById(R.id.speakerButton);
+    phoneButton = findViewById(R.id.phoneButton);
     deleteButton = findViewById(R.id.deleteButton);
     totalDurationView = findViewById(R.id.playback_seek_total_duration);
   }
@@ -79,6 +81,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   private void setupListenersForMediaPlayerButtons() {
     playButton.setOnClickListener(playButtonListener);
     speakerButton.setOnClickListener(speakerButtonListener);
+    phoneButton.setOnClickListener(phoneButtonListener);
     deleteButton.setOnClickListener(deleteButtonListener);
   }
 
@@ -159,6 +162,17 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         public void onClick(View view) {
           LogUtil.i(
               "NewVoicemailMediaPlayer.speakerButtonListener",
+              "speaker request for voicemailUri: %s",
+              voicemailUri.toString());
+        }
+      };
+
+  private final View.OnClickListener phoneButtonListener =
+      new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          LogUtil.i(
+              "NewVoicemailMediaPlayer.phoneButtonListener",
               "speaker request for voicemailUri: %s",
               voicemailUri.toString());
         }

@@ -29,6 +29,11 @@
   <dimen name="voicemail_icon_size">16dp</dimen>
 
   <dimen name="voicemail_playback_state_text_size">14sp</dimen>
+  <!-- TODO(uabdullah): Work with UX on this value to ensure proper spacing between
+  the seekbar and transcription -->
   <dimen name="voicemail_media_player_padding_top">20dp</dimen>
   <dimen name="voicemail_duration_size">14sp</dimen>
+  <!-- TODO(uabdullah): Work with UX on these values so that the touch target is not too small -->
+  <dimen name="voicemail_media_player_height">56dp</dimen>
+  <dimen name="voicemail_media_player_width">0dp</dimen>
 </resources>
