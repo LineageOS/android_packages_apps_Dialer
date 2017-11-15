@@ -105,7 +105,7 @@ public class InCallActivityCommon {
   private boolean showPostCharWaitDialogOnResume;
   private String showPostCharWaitDialogCallId;
   private String showPostCharWaitDialogChars;
-  private Dialog dialog;
+  private Dialog errorDialog;
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
   private InCallOrientationEventListener inCallOrientationEventListener;
   private Animation dialpadSlideInAnimation;
@@ -346,8 +346,8 @@ public class InCallActivityCommon {
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(false);
-      if (dialog != null) {
-        dialog.dismiss();
+      if (errorDialog != null) {
+        errorDialog.dismiss();
       }
     }
   }
@@ -574,29 +574,6 @@ public class InCallActivityCommon {
     }
   }
 
-  void dismissPendingDialogs() {
-    if (dialog != null) {
-      dialog.dismiss();
-      dialog = null;
-    }
-    if (selectPhoneAccountDialogFragment != null) {
-      selectPhoneAccountDialogFragment.dismiss();
-      selectPhoneAccountDialogFragment = null;
-    }
-
-    InternationalCallOnWifiDialogFragment internationalCallOnWifiFragment =
-        (InternationalCallOnWifiDialogFragment)
-            inCallActivity
-                .getSupportFragmentManager()
-                .findFragmentByTag(TAG_INTERNATIONAL_CALL_ON_WIFI);
-    if (internationalCallOnWifiFragment != null) {
-      LogUtil.i(
-          "InCallActivityCommon.dismissPendingDialogs",
-          "dismissing InternationalCallOnWifiDialogFragment");
-      internationalCallOnWifiFragment.dismiss();
-    }
-  }
-
   private void showErrorDialog(Dialog dialog, CharSequence message) {
     LogUtil.i("InCallActivityCommon.showErrorDialog", "message: %s", message);
     inCallActivity.dismissPendingDialogs();
@@ -607,7 +584,7 @@ public class InCallActivityCommon {
       return;
     }
 
-    this.dialog = dialog;
+    this.errorDialog = dialog;
     InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("showErrorDialog");
     dialog.setOnDismissListener(
         new OnDismissListener() {
@@ -623,7 +600,7 @@ public class InCallActivityCommon {
   }
 
   private void onDialogDismissed() {
-    dialog = null;
+    errorDialog = null;
     CallList.getInstance().onErrorDialogDismissed();
   }
 
@@ -687,7 +664,7 @@ public class InCallActivityCommon {
       return;
     }
 
-    dismissPendingDialogs();
+    inCallActivity.dismissPendingDialogs();
 
     AlertDialog.Builder builder =
         new AlertDialog.Builder(inCallActivity)
@@ -701,7 +678,7 @@ public class InCallActivityCommon {
     wifiHandoverFailureCheckbox.setChecked(false);
 
     InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("WifiFailedDialog");
-    dialog =
+    errorDialog =
         builder
             .setView(dialogCheckBoxView)
             .setMessage(R.string.video_call_lte_to_wifi_failed_message)
@@ -727,7 +704,7 @@ public class InCallActivityCommon {
             .create();
 
     LogUtil.i("InCallActivityCommon.showWifiFailedDialog", "as dialog");
-    dialog.show();
+    errorDialog.show();
   }
 
   void updateNavigationBar(boolean isDialpadVisible) {
@@ -852,10 +829,6 @@ public class InCallActivityCommon {
     inCallActivity.setTaskDescription(td);
   }
 
-  public boolean hasPendingDialogs() {
-    return dialog != null;
-  }
-
   private void internalResolveIntent(Intent intent) {
     if (!intent.getAction().equals(Intent.ACTION_MAIN)) {
       return;
@@ -924,5 +897,32 @@ public class InCallActivityCommon {
     selectPhoneAccountDialogFragment.show(
         inCallActivity.getFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
     return true;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  @Nullable
+  Dialog getErrorDialog() {
+    return errorDialog;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  void setErrorDialog(@Nullable Dialog errorDialog) {
+    this.errorDialog = errorDialog;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  @Nullable
+  SelectPhoneAccountDialogFragment getSelectPhoneAccountDialogFragment() {
+    return selectPhoneAccountDialogFragment;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  void setSelectPhoneAccountDialogFragment(
+      @Nullable SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment) {
+    this.selectPhoneAccountDialogFragment = selectPhoneAccountDialogFragment;
   }
 }

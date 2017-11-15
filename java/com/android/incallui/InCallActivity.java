@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -35,6 +36,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -60,6 +62,7 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -77,8 +80,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   public static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
   public static final int PENDING_INTENT_REQUEST_CODE_BUBBLE = 2;
 
-  private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_ANSWER_SCREEN = "tag_answer_screen";
+  private static final String TAG_INTERNATIONAL_CALL_ON_WIFI = "tag_international_call_on_wifi";
+  private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_VIDEO_CALL_SCREEN = "tag_video_call_screen";
 
   private static final String DID_SHOW_ANSWER_SCREEN_KEY = "did_show_answer_screen";
@@ -442,21 +446,47 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void dismissPendingDialogs() {
-    if (isVisible) {
-      LogUtil.i("InCallActivity.dismissPendingDialogs", "");
-      common.dismissPendingDialogs();
-      AnswerScreen answerScreen = getAnswerScreen();
-      if (answerScreen != null) {
-        answerScreen.dismissPendingDialogs();
-      }
-      needDismissPendingDialogs = false;
-    } else {
-      // The activity is not visible and onSaveInstanceState may have been called so defer the
-      // dismissing action.
+    LogUtil.i("InCallActivity.dismissPendingDialogs", "");
+
+    if (!isVisible) {
+      // Defer the dismissing action as the activity is not visible and onSaveInstanceState may have
+      // been called.
       LogUtil.i(
           "InCallActivity.dismissPendingDialogs", "defer actions since activity is not visible");
       needDismissPendingDialogs = true;
+      return;
     }
+
+    // Dismiss the error dialog
+    Dialog errorDialog = common.getErrorDialog();
+    if (errorDialog != null) {
+      errorDialog.dismiss();
+      common.setErrorDialog(null);
+    }
+
+    // Dismiss the phone account selection dialog
+    SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment =
+        common.getSelectPhoneAccountDialogFragment();
+    if (selectPhoneAccountDialogFragment != null) {
+      selectPhoneAccountDialogFragment.dismiss();
+      common.setSelectPhoneAccountDialogFragment(null);
+    }
+
+    // Dismiss the dialog for international call on WiFi
+    InternationalCallOnWifiDialogFragment internationalCallOnWifiFragment =
+        (InternationalCallOnWifiDialogFragment)
+            getSupportFragmentManager().findFragmentByTag(TAG_INTERNATIONAL_CALL_ON_WIFI);
+    if (internationalCallOnWifiFragment != null) {
+      internationalCallOnWifiFragment.dismiss();
+    }
+
+    // Dismiss the answer screen
+    AnswerScreen answerScreen = getAnswerScreen();
+    if (answerScreen != null) {
+      answerScreen.dismissPendingDialogs();
+    }
+
+    needDismissPendingDialogs = false;
   }
 
   private void enableInCallOrientationEventListener(boolean enable) {
