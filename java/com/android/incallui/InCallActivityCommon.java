@@ -264,9 +264,6 @@ public class InCallActivityCommon {
             == InCallOrientationEventListener.ACTIVITY_PREFERENCE_ALLOW_ROTATION);
 
     InCallPresenter.getInstance().onActivityStarted();
-    if (!isRecreating) {
-      InCallPresenter.getInstance().onUiShowing(true);
-    }
     Trace.endSection();
   }
 
@@ -278,6 +275,7 @@ public class InCallActivityCommon {
           "InCallPresenter is ready for tear down, not sending updates");
     } else {
       updateTaskDescription();
+      InCallPresenter.getInstance().onUiShowing(true);
     }
 
     // If there is a pending request to show or hide the dialpad, handle that now.
@@ -323,6 +321,7 @@ public class InCallActivityCommon {
       dialpadFragment.onDialerKeyUp(null);
     }
 
+    InCallPresenter.getInstance().onUiShowing(false);
     if (inCallActivity.isFinishing()) {
       InCallPresenter.getInstance().unsetActivity(inCallActivity);
     }
@@ -345,7 +344,6 @@ public class InCallActivityCommon {
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
-      InCallPresenter.getInstance().onUiShowing(false);
       if (errorDialog != null) {
         errorDialog.dismiss();
       }
