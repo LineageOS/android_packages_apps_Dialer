@@ -107,7 +107,6 @@ public class InCallActivityCommon {
   private String showPostCharWaitDialogChars;
   private Dialog errorDialog;
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
-  private InCallOrientationEventListener inCallOrientationEventListener;
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
   private boolean animateDialpadOnShow;
@@ -242,14 +241,12 @@ public class InCallActivityCommon {
           "InCallActivityCommon.onCreate", "international fragment exists attaching callback");
       existingInternationalFragment.setCallback(internationalCallOnWifiCallback);
     }
-
-    inCallOrientationEventListener = new InCallOrientationEventListener(inCallActivity);
   }
 
   public void onSaveInstanceState(Bundle out) {
     // TODO: The dialpad fragment should handle this as part of its own state
-    out.putBoolean(INTENT_EXTRA_SHOW_DIALPAD, isDialpadVisible());
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    out.putBoolean(INTENT_EXTRA_SHOW_DIALPAD, inCallActivity.isDialpadVisible());
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     if (dialpadFragment != null) {
       out.putString(DIALPAD_TEXT_KEY, dialpadFragment.getDtmfText());
     }
@@ -259,7 +256,7 @@ public class InCallActivityCommon {
     Trace.beginSection("InCallActivityCommon.onStart");
     // setting activity should be last thing in setup process
     InCallPresenter.getInstance().setActivity(inCallActivity);
-    enableInCallOrientationEventListener(
+    inCallActivity.enableInCallOrientationEventListener(
         inCallActivity.getRequestedOrientation()
             == InCallOrientationEventListener.ACTIVITY_PREFERENCE_ALLOW_ROTATION);
 
@@ -288,20 +285,20 @@ public class InCallActivityCommon {
         inCallActivity.showDialpadFragment(true /* show */, animateDialpadOnShow /* animate */);
         animateDialpadOnShow = false;
 
-        DialpadFragment dialpadFragment = getDialpadFragment();
+        DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
         if (dialpadFragment != null) {
           dialpadFragment.setDtmfText(dtmfTextToPreopulate);
           dtmfTextToPreopulate = null;
         }
       } else {
         LogUtil.i("InCallActivityCommon.onResume", "force hide dialpad");
-        if (getDialpadFragment() != null) {
+        if (inCallActivity.getDialpadFragment() != null) {
           inCallActivity.showDialpadFragment(false /* show */, false /* animate */);
         }
       }
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
-    updateNavigationBar(isDialpadVisible());
+    updateNavigationBar(inCallActivity.isDialpadVisible());
 
     if (showPostCharWaitDialogOnResume) {
       showPostCharWaitDialog(showPostCharWaitDialogCallId, showPostCharWaitDialogChars);
@@ -316,7 +313,7 @@ public class InCallActivityCommon {
   // onPause is guaranteed to be called when the InCallActivity goes
   // in the background.
   public void onPause() {
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     if (dialpadFragment != null) {
       dialpadFragment.onDialerKeyUp(null);
     }
@@ -340,7 +337,7 @@ public class InCallActivityCommon {
       }
     }
 
-    enableInCallOrientationEventListener(false);
+    inCallActivity.enableInCallOrientationEventListener(false);
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
@@ -392,7 +389,7 @@ public class InCallActivityCommon {
       return true;
     }
 
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     if (dialpadFragment != null && dialpadFragment.isVisible()) {
       inCallActivity.showDialpadFragment(false /* show */, true /* animate */);
       return true;
@@ -410,7 +407,7 @@ public class InCallActivityCommon {
   }
 
   public boolean onKeyUp(int keyCode, KeyEvent event) {
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     // push input to the dialer.
     if (dialpadFragment != null
         && (dialpadFragment.isVisible())
@@ -515,7 +512,7 @@ public class InCallActivityCommon {
     // As soon as the user starts typing valid dialable keys on the
     // keyboard (presumably to type DTMF tones) we start passing the
     // key events to the DTMFDialer's onDialerKeyDown.
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     if (dialpadFragment != null && dialpadFragment.isVisible()) {
       return dialpadFragment.onDialerKeyDown(event);
     }
@@ -600,14 +597,6 @@ public class InCallActivityCommon {
   private void onDialogDismissed() {
     errorDialog = null;
     CallList.getInstance().onErrorDialogDismissed();
-  }
-
-  public void enableInCallOrientationEventListener(boolean enable) {
-    if (enable) {
-      inCallOrientationEventListener.enable(true);
-    } else {
-      inCallOrientationEventListener.disable();
-    }
   }
 
   public void setExcludeFromRecents(boolean exclude) {
@@ -717,7 +706,7 @@ public class InCallActivityCommon {
 
   public boolean showDialpadFragment(boolean show, boolean animate) {
     // If the dialpad is already visible, don't animate in. If it's gone, don't animate out.
-    boolean isDialpadVisible = isDialpadVisible();
+    boolean isDialpadVisible = inCallActivity.isDialpadVisible();
     LogUtil.i(
         "InCallActivityCommon.showDialpadFragment",
         "show: %b, animate: %b, " + "isDialpadVisible: %b",
@@ -746,9 +735,10 @@ public class InCallActivityCommon {
     } else {
       if (show) {
         performShowDialpadFragment(dialpadFragmentManager);
-        getDialpadFragment().animateShowDialpad();
+        inCallActivity.getDialpadFragment().animateShowDialpad();
       }
-      getDialpadFragment()
+      inCallActivity
+          .getDialpadFragment()
           .getView()
           .startAnimation(show ? dialpadSlideInAnimation : dialpadSlideOutAnimation);
     }
@@ -763,7 +753,7 @@ public class InCallActivityCommon {
 
   private void performShowDialpadFragment(@NonNull FragmentManager dialpadFragmentManager) {
     FragmentTransaction transaction = dialpadFragmentManager.beginTransaction();
-    DialpadFragment dialpadFragment = getDialpadFragment();
+    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
     if (dialpadFragment == null) {
       transaction.add(
           inCallActivity.getDialpadContainerId(), new DialpadFragment(), TAG_DIALPAD_FRAGMENT);
@@ -794,21 +784,6 @@ public class InCallActivityCommon {
       fragmentManager.executePendingTransactions();
     }
     updateNavigationBar(false /* isDialpadVisible */);
-  }
-
-  public boolean isDialpadVisible() {
-    DialpadFragment dialpadFragment = getDialpadFragment();
-    return dialpadFragment != null && dialpadFragment.isVisible();
-  }
-
-  /** Returns the {@link DialpadFragment} that's shown by this activity, or {@code null} */
-  @Nullable
-  private DialpadFragment getDialpadFragment() {
-    FragmentManager fragmentManager = inCallActivity.getDialpadFragmentManager();
-    if (fragmentManager == null) {
-      return null;
-    }
-    return (DialpadFragment) fragmentManager.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
   }
 
   public void updateTaskDescription() {

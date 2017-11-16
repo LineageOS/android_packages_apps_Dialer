@@ -81,6 +81,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   public static final int PENDING_INTENT_REQUEST_CODE_BUBBLE = 2;
 
   private static final String TAG_ANSWER_SCREEN = "tag_answer_screen";
+  private static final String TAG_DIALPAD_FRAGMENT = "tag_dialpad_fragment";
   private static final String TAG_INTERNATIONAL_CALL_ON_WIFI = "tag_international_call_on_wifi";
   private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_VIDEO_CALL_SCREEN = "tag_video_call_screen";
@@ -92,6 +93,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static final String CONFIG_ANSWER_AND_RELEASE_ENABLED = "answer_and_release_enabled";
 
   private final InCallActivityCommon common;
+  private InCallOrientationEventListener inCallOrientationEventListener;
   private boolean didShowAnswerScreen;
   private boolean didShowInCallScreen;
   private boolean didShowVideoCallScreen;
@@ -144,6 +146,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
 
     common.onCreate(icicle);
+    inCallOrientationEventListener = new InCallOrientationEventListener(this);
 
     getWindow()
         .getDecorView()
@@ -346,7 +349,21 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public boolean isDialpadVisible() {
-    return common.isDialpadVisible();
+    DialpadFragment dialpadFragment = getDialpadFragment();
+    return dialpadFragment != null && dialpadFragment.isVisible();
+  }
+
+  /**
+   * Returns the {@link DialpadFragment} that's shown by this activity, or {@code null}
+   * TODO(a bug): Make this method private after InCallActivityCommon is deleted.
+   */
+  @Nullable
+  DialpadFragment getDialpadFragment() {
+    FragmentManager fragmentManager = getDialpadFragmentManager();
+    if (fragmentManager == null) {
+      return null;
+    }
+    return (DialpadFragment) fragmentManager.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
   }
 
   public void onForegroundCallChanged(DialerCall newForegroundCall) {
@@ -489,8 +506,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     needDismissPendingDialogs = false;
   }
 
-  private void enableInCallOrientationEventListener(boolean enable) {
-    common.enableInCallOrientationEventListener(enable);
+  // TODO(a bug): Make this method private after InCallActivityCommon is deleted.
+  void enableInCallOrientationEventListener(boolean enable) {
+    if (enable) {
+      inCallOrientationEventListener.enable(true /* notifyDeviceOrientationChange */);
+    } else {
+      inCallOrientationEventListener.disable();
+    }
   }
 
   public void setExcludeFromRecents(boolean exclude) {
