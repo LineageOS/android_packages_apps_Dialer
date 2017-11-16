@@ -19,12 +19,8 @@ package com.android.incallui;
 import android.app.ActivityManager;
 import android.app.ActivityManager.AppTask;
 import android.app.ActivityManager.TaskDescription;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -46,8 +42,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.CheckBox;
-import android.widget.Toast;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.animation.AnimUtils;
@@ -63,8 +57,6 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
-import com.android.incallui.disconnectdialog.DisconnectMessage;
-import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
 import com.google.common.base.Optional;
@@ -535,19 +527,6 @@ public class InCallActivityCommon {
     }
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
-    LogUtil.i(
-        "InCallActivityCommon.maybeShowErrorDialogOnDisconnect",
-        "disconnect cause: %s",
-        disconnectMessage);
-
-    if (!inCallActivity.isFinishing()) {
-      if (disconnectMessage.dialog != null) {
-        showErrorDialog(disconnectMessage.dialog, disconnectMessage.toastMessage);
-      }
-    }
-  }
-
   /**
    * When relaunching from the dialer app, {@code showDialpad} indicates whether the dialpad should
    * be shown on launch.
@@ -569,36 +548,6 @@ public class InCallActivityCommon {
     }
   }
 
-  private void showErrorDialog(Dialog dialog, CharSequence message) {
-    LogUtil.i("InCallActivityCommon.showErrorDialog", "message: %s", message);
-    inCallActivity.dismissPendingDialogs();
-
-    // Show toast if apps is in background when dialog won't be visible.
-    if (!inCallActivity.isVisible()) {
-      Toast.makeText(inCallActivity.getApplicationContext(), message, Toast.LENGTH_LONG).show();
-      return;
-    }
-
-    this.errorDialog = dialog;
-    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("showErrorDialog");
-    dialog.setOnDismissListener(
-        new OnDismissListener() {
-          @Override
-          public void onDismiss(DialogInterface dialog) {
-            LogUtil.i("InCallActivityCommon.showErrorDialog", "dialog dismissed");
-            lock.release();
-            onDialogDismissed();
-          }
-        });
-    dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-    dialog.show();
-  }
-
-  private void onDialogDismissed() {
-    errorDialog = null;
-    CallList.getInstance().onErrorDialogDismissed();
-  }
-
   public void setExcludeFromRecents(boolean exclude) {
     List<AppTask> tasks = inCallActivity.getSystemService(ActivityManager.class).getAppTasks();
     int taskId = inCallActivity.getTaskId();
@@ -615,83 +564,6 @@ public class InCallActivityCommon {
             e);
       }
     }
-  }
-
-  void showInternationalCallOnWifiDialog(@NonNull DialerCall call) {
-    LogUtil.enterBlock("InCallActivityCommon.showInternationalCallOnWifiDialog");
-    if (!InternationalCallOnWifiDialogFragment.shouldShow(inCallActivity)) {
-      LogUtil.i(
-          "InCallActivityCommon.showInternationalCallOnWifiDialog",
-          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
-      return;
-    }
-
-    InternationalCallOnWifiDialogFragment fragment =
-        InternationalCallOnWifiDialogFragment.newInstance(
-            call.getId(), internationalCallOnWifiCallback);
-    fragment.show(inCallActivity.getSupportFragmentManager(), TAG_INTERNATIONAL_CALL_ON_WIFI);
-  }
-
-  public void showWifiToLteHandoverToast(DialerCall call) {
-    if (call.hasShownWiFiToLteHandoverToast()) {
-      return;
-    }
-    Toast.makeText(
-            inCallActivity, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG)
-        .show();
-    call.setHasShownWiFiToLteHandoverToast();
-  }
-
-  public void showWifiFailedDialog(final DialerCall call) {
-    if (call.showWifiHandoverAlertAsToast()) {
-      LogUtil.i("InCallActivityCommon.showWifiFailedDialog", "as toast");
-      Toast.makeText(
-              inCallActivity, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
-          .show();
-      return;
-    }
-
-    inCallActivity.dismissPendingDialogs();
-
-    AlertDialog.Builder builder =
-        new AlertDialog.Builder(inCallActivity)
-            .setTitle(R.string.video_call_lte_to_wifi_failed_title);
-
-    // This allows us to use the theme of the dialog instead of the activity
-    View dialogCheckBoxView =
-        View.inflate(builder.getContext(), R.layout.video_call_lte_to_wifi_failed, null);
-    final CheckBox wifiHandoverFailureCheckbox =
-        (CheckBox) dialogCheckBoxView.findViewById(R.id.video_call_lte_to_wifi_failed_checkbox);
-    wifiHandoverFailureCheckbox.setChecked(false);
-
-    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("WifiFailedDialog");
-    errorDialog =
-        builder
-            .setView(dialogCheckBoxView)
-            .setMessage(R.string.video_call_lte_to_wifi_failed_message)
-            .setOnCancelListener(
-                new OnCancelListener() {
-                  @Override
-                  public void onCancel(DialogInterface dialog) {
-                    onDialogDismissed();
-                  }
-                })
-            .setPositiveButton(
-                android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                  @Override
-                  public void onClick(DialogInterface dialog, int id) {
-                    call.setDoNotShowDialogForHandoffToWifiFailure(
-                        wifiHandoverFailureCheckbox.isChecked());
-                    dialog.cancel();
-                    onDialogDismissed();
-                  }
-                })
-            .setOnDismissListener((dialog) -> lock.release())
-            .create();
-
-    LogUtil.i("InCallActivityCommon.showWifiFailedDialog", "as dialog");
-    errorDialog.show();
   }
 
   void updateNavigationBar(boolean isDialpadVisible) {
@@ -897,5 +769,11 @@ public class InCallActivityCommon {
   void setSelectPhoneAccountDialogFragment(
       @Nullable SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment) {
     this.selectPhoneAccountDialogFragment = selectPhoneAccountDialogFragment;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  InternationalCallOnWifiDialogFragment.Callback getCallbackForInternationalCallOnWifiDialog() {
+    return internationalCallOnWifiCallback;
   }
 }

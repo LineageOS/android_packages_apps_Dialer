@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.Toast;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -62,6 +65,7 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -458,8 +462,40 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     common.showPostCharWaitDialog(callId, chars);
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
-    common.maybeShowErrorDialogOnDisconnect(disconnectMessage);
+  public void showDialogOrToastForDisconnectedCall(DisconnectMessage disconnectMessage) {
+    LogUtil.i(
+        "InCallActivity.showDialogOrToastForDisconnectedCall",
+        "disconnect cause: %s",
+        disconnectMessage);
+
+    if (disconnectMessage.dialog == null || isFinishing()) {
+      return;
+    }
+
+    dismissPendingDialogs();
+
+    // Show a toast if the app is in background when a dialog can't be visible.
+    if (!isVisible()) {
+      Toast.makeText(getApplicationContext(), disconnectMessage.toastMessage, Toast.LENGTH_LONG)
+          .show();
+      return;
+    }
+
+    // Show the dialog.
+    common.setErrorDialog(disconnectMessage.dialog);
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("showErrorDialog");
+    disconnectMessage.dialog.setOnDismissListener(
+        dialogInterface -> {
+          lock.release();
+          onDialogDismissed();
+        });
+    disconnectMessage.dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    disconnectMessage.dialog.show();
+  }
+
+  private void onDialogDismissed() {
+    common.setErrorDialog(null);
+    CallList.getInstance().onErrorDialogDismissed();
   }
 
   public void dismissPendingDialogs() {
@@ -578,17 +614,67 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     Trace.endSection();
   }
 
-  public void onWiFiToLteHandover(DialerCall call) {
-    common.showWifiToLteHandoverToast(call);
+  public void showToastForWiFiToLteHandover(DialerCall call) {
+    if (call.hasShownWiFiToLteHandoverToast()) {
+      return;
+    }
+
+    Toast.makeText(this, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG).show();
+    call.setHasShownWiFiToLteHandoverToast();
   }
 
-  public void onHandoverToWifiFailed(DialerCall call) {
-    common.showWifiFailedDialog(call);
+  public void showDialogOrToastForWifiHandoverFailure(DialerCall call) {
+    if (call.showWifiHandoverAlertAsToast()) {
+      Toast.makeText(this, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+
+    dismissPendingDialogs();
+
+    AlertDialog.Builder builder =
+        new AlertDialog.Builder(this).setTitle(R.string.video_call_lte_to_wifi_failed_title);
+
+    // This allows us to use the theme of the dialog instead of the activity
+    View dialogCheckBoxView =
+        View.inflate(builder.getContext(), R.layout.video_call_lte_to_wifi_failed, null /* root */);
+    CheckBox wifiHandoverFailureCheckbox =
+        (CheckBox) dialogCheckBoxView.findViewById(R.id.video_call_lte_to_wifi_failed_checkbox);
+    wifiHandoverFailureCheckbox.setChecked(false);
+
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("WifiFailedDialog");
+    Dialog errorDialog =
+        builder
+            .setView(dialogCheckBoxView)
+            .setMessage(R.string.video_call_lte_to_wifi_failed_message)
+            .setOnCancelListener(dialogInterface -> onDialogDismissed())
+            .setPositiveButton(
+                android.R.string.ok,
+                (dialogInterface, id) -> {
+                  call.setDoNotShowDialogForHandoffToWifiFailure(
+                      wifiHandoverFailureCheckbox.isChecked());
+                  dialogInterface.cancel();
+                  onDialogDismissed();
+                })
+            .setOnDismissListener(dialogInterface -> lock.release())
+            .create();
+
+    common.setErrorDialog(errorDialog);
+    errorDialog.show();
   }
 
-  public void onInternationalCallOnWifi(@NonNull DialerCall call) {
-    LogUtil.enterBlock("InCallActivity.onInternationalCallOnWifi");
-    common.showInternationalCallOnWifiDialog(call);
+  public void showDialogForInternationalCallOnWifi(@NonNull DialerCall call) {
+    if (!InternationalCallOnWifiDialogFragment.shouldShow(this)) {
+      LogUtil.i(
+          "InCallActivity.showDialogForInternationalCallOnWifi",
+          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
+      return;
+    }
+
+    InternationalCallOnWifiDialogFragment fragment =
+        InternationalCallOnWifiDialogFragment.newInstance(
+            call.getId(), common.getCallbackForInternationalCallOnWifiDialog());
+    fragment.show(getSupportFragmentManager(), TAG_INTERNATIONAL_CALL_ON_WIFI);
   }
 
   @Override

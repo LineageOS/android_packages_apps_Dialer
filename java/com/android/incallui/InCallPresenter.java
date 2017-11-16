@@ -467,7 +467,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       // By the time the UI finally comes up, the call may already be disconnected.
       // If that's the case, we may need to show an error dialog.
       if (mCallList != null && mCallList.getDisconnectedCall() != null) {
-        maybeShowErrorDialogOnDisconnect(mCallList.getDisconnectedCall());
+        showDialogOrToastForDisconnectedCall(mCallList.getDisconnectedCall());
       }
 
       // When the UI comes up, we need to first check the in-call state.
@@ -681,14 +681,14 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   @Override
   public void onWiFiToLteHandover(DialerCall call) {
     if (mInCallActivity != null) {
-      mInCallActivity.onWiFiToLteHandover(call);
+      mInCallActivity.showToastForWiFiToLteHandover(call);
     }
   }
 
   @Override
   public void onHandoverToWifiFailed(DialerCall call) {
     if (mInCallActivity != null) {
-      mInCallActivity.onHandoverToWifiFailed(call);
+      mInCallActivity.showDialogOrToastForWifiHandoverFailure(call);
     }
   }
 
@@ -696,7 +696,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   public void onInternationalCallOnWifi(@NonNull DialerCall call) {
     LogUtil.enterBlock("InCallPresenter.onInternationalCallOnWifi");
     if (mInCallActivity != null) {
-      mInCallActivity.onInternationalCallOnWifi(call);
+      mInCallActivity.showDialogForInternationalCallOnWifi(call);
     }
   }
 
@@ -832,7 +832,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
    */
   @Override
   public void onDisconnect(DialerCall call) {
-    maybeShowErrorDialogOnDisconnect(call);
+    showDialogOrToastForDisconnectedCall(call);
 
     // We need to do the run the same code as onCallListChange.
     onCallListChange(mCallList);
@@ -1241,19 +1241,19 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
   }
 
-  /**
-   * For some disconnected causes, we show a dialog. This calls into the activity to show the dialog
-   * if appropriate for the call.
-   */
-  private void maybeShowErrorDialogOnDisconnect(DialerCall call) {
-    // For newly disconnected calls, we may want to show a dialog on specific error conditions
-    if (isActivityStarted() && call.getState() == DialerCall.State.DISCONNECTED) {
-      if (call.getAccountHandle() == null && !call.isConferenceCall()) {
-        setDisconnectCauseForMissingAccounts(call);
-      }
-      mInCallActivity.maybeShowErrorDialogOnDisconnect(
-          new DisconnectMessage(mInCallActivity, call));
+  /** Instruct the in-call activity to show an error dialog or toast for a disconnected call. */
+  private void showDialogOrToastForDisconnectedCall(DialerCall call) {
+    if (!isActivityStarted() || call.getState() != DialerCall.State.DISCONNECTED) {
+      return;
     }
+
+    // For newly disconnected calls, we may want to show a dialog on specific error conditions
+    if (call.getAccountHandle() == null && !call.isConferenceCall()) {
+      setDisconnectCauseForMissingAccounts(call);
+    }
+
+    mInCallActivity.showDialogOrToastForDisconnectedCall(
+        new DisconnectMessage(mInCallActivity, call));
   }
 
   /**
