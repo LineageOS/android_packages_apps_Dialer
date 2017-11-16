@@ -88,8 +88,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class InCallPresenter implements CallList.Listener, AudioModeProvider.AudioModeListener {
   private static final String PIXEL2017_SYSTEM_FEATURE =
       "com.google.android.feature.PIXEL_2017_EXPERIENCE";
-  private static final String EXTRA_FIRST_TIME_SHOWN =
-      "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
   private static final long BLOCK_QUERY_TIMEOUT_MS = 1000;
 
@@ -215,14 +213,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
           }
         }
       };
-  /**
-   * Is true when the activity has been previously started. Some code needs to know not just if the
-   * activity is currently up, but if it had been previously shown in foreground for this in-call
-   * session (e.g., StatusBarNotifier). This gets reset when the session ends in the tear-down
-   * method.
-   */
-  private boolean mIsActivityPreviouslyStarted = false;
-
+  
   /** Whether or not InCallService is bound to Telecom. */
   private boolean mServiceBound = false;
 
@@ -1052,22 +1043,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       mProximitySensor.onInCallShowing(showing);
     }
 
-    Intent broadcastIntent = Bindings.get(mContext).getUiReadyBroadcastIntent(mContext);
-    if (broadcastIntent != null) {
-      broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
-
-      if (showing) {
-        LogUtil.d("InCallPresenter.onUiShowing", "Sending sticky broadcast: ", broadcastIntent);
-        mContext.sendStickyBroadcast(broadcastIntent);
-      } else {
-        LogUtil.d("InCallPresenter.onUiShowing", "Removing sticky broadcast: ", broadcastIntent);
-        mContext.removeStickyBroadcast(broadcastIntent);
-      }
-    }
-
-    if (showing) {
-      mIsActivityPreviouslyStarted = true;
-    } else {
+    if (!showing) {
       updateIsChangingConfigurations();
     }
 
@@ -1449,7 +1425,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       cleanupSurfaces();
 
-      mIsActivityPreviouslyStarted = false;
       mIsChangingConfigurations = false;
 
       // blow away stale contact info so that we get fresh data on
