@@ -19,12 +19,11 @@ package com.android.dialer.calllog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllog.datasources.contacts.ContactsDataSource;
+import com.android.dialer.calllog.datasources.phonelookup.PhoneLookupDataSource;
 import com.android.dialer.calllog.datasources.systemcalllog.SystemCallLogDataSource;
+import com.google.common.collect.ImmutableList;
 import dagger.Module;
 import dagger.Provides;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /** Dagger module which satisfies call log dependencies. */
 @Module
@@ -32,10 +31,12 @@ public abstract class CallLogModule {
 
   @Provides
   static DataSources provideCallLogDataSources(
-      SystemCallLogDataSource systemCallLogDataSource, ContactsDataSource contactsDataSource) {
+      SystemCallLogDataSource systemCallLogDataSource,
+      ContactsDataSource contactsDataSource,
+      PhoneLookupDataSource phoneLookupDataSource) {
     // System call log must be first, see getDataSourcesExcludingSystemCallLog below.
-    List<CallLogDataSource> allDataSources =
-        Collections.unmodifiableList(Arrays.asList(systemCallLogDataSource, contactsDataSource));
+    ImmutableList<CallLogDataSource> allDataSources =
+        ImmutableList.of(systemCallLogDataSource, contactsDataSource, phoneLookupDataSource);
     return new DataSources() {
       @Override
       public SystemCallLogDataSource getSystemCallLogDataSource() {
@@ -43,12 +44,12 @@ public abstract class CallLogModule {
       }
 
       @Override
-      public List<CallLogDataSource> getDataSourcesIncludingSystemCallLog() {
+      public ImmutableList<CallLogDataSource> getDataSourcesIncludingSystemCallLog() {
         return allDataSources;
       }
 
       @Override
-      public List<CallLogDataSource> getDataSourcesExcludingSystemCallLog() {
+      public ImmutableList<CallLogDataSource> getDataSourcesExcludingSystemCallLog() {
         return allDataSources.subList(1, allDataSources.size());
       }
     };
