@@ -47,6 +47,7 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
   private boolean isChecked;
   private OnCheckedChangeListener onCheckedChangeListener;
   private ImageView iconView;
+  @DrawableRes private int iconResource = 0;
   private TextView labelView;
   private Drawable background;
   private Drawable backgroundMore;
@@ -135,8 +136,15 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
             new int[] {color, Color.WHITE}));
   }
 
+  public Drawable getIconDrawable() {
+    return iconView.getDrawable();
+  }
+
   public void setIconDrawable(@DrawableRes int drawableRes) {
-    iconView.setImageResource(drawableRes);
+    if (iconResource != drawableRes) {
+      iconView.setImageResource(drawableRes);
+      iconResource = drawableRes;
+    }
   }
 
   public void setLabelText(@StringRes int stringRes) {
