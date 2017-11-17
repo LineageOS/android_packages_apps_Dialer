@@ -17,6 +17,7 @@
 package com.android.dialer.simulator.impl;
 
 import com.android.dialer.simulator.Simulator;
+import com.android.dialer.simulator.SimulatorConnectionsBank;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
@@ -27,4 +28,9 @@ public abstract class SimulatorModule {
   @Binds
   @Singleton
   public abstract Simulator bindsSimulator(SimulatorImpl simulator);
+
+  @Binds
+  @Singleton
+  public abstract SimulatorConnectionsBank bindsSimulatorConnectionsBank(
+      SimulatorConnectionsBankImpl simulatorConnectionsBank);
 }
