@@ -42,6 +42,19 @@ public interface Simulator {
   static final int CONFERENCE_TYPE_GSM = 1;
   static final int CONFERENCE_TYPE_VOLTE = 2;
 
+  /** The types of connection service listener events */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    ON_NEW_OUTGOING_CONNECTION,
+    ON_NEW_INCOMING_CONNECTION,
+    ON_CONFERENCE,
+  })
+  @interface ConnectionServiceEventType {}
+
+  static final int ON_NEW_OUTGOING_CONNECTION = 1;
+  static final int ON_NEW_INCOMING_CONNECTION = 2;
+  static final int ON_CONFERENCE = 3;
+
   /** Information about a connection event. */
   public static class Event {
     /** The type of connection event. */

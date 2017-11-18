@@ -52,6 +52,8 @@ final class SimulatorVoiceCall
   private SimulatorVoiceCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
     SimulatorConnectionService.addListener(this);
+    SimulatorConnectionService.addListener(
+        new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
   private void addNewIncomingCall(boolean isSpam) {

@@ -16,14 +16,27 @@
 
 package com.android.voicemail.impl;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.provider.CallLog.Calls;
+import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.voicemail.VoicemailComponent;
+import com.android.voicemail.VoicemailVersionConstants;
 
-/** Receives MY_PACKAGE_REPLACED to trigger VVM activation. */
+/**
+ * Receives MY_PACKAGE_REPLACED to trigger VVM activation and to check for legacy voicemail users.
+ */
 public class PackageReplacedReceiver extends BroadcastReceiver {
 
   @Override
@@ -38,6 +51,75 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
     for (PhoneAccountHandle phoneAccountHandle :
         context.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts()) {
       ActivationTask.start(context, phoneAccountHandle, null);
+    }
+
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    if (!prefs.contains(VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY)) {
+      setVoicemailFeatureVersionAsync(context);
+    }
+  }
+
+  private void setVoicemailFeatureVersionAsync(Context context) {
+    LogUtil.enterBlock("PackageReplacedReceiver.setVoicemailFeatureVersionAsync");
+
+    // Check if user is already using voicemail (ie do they have any voicemails), and set the
+    // acknowledged feature value accordingly.
+    PendingResult pendingResult = goAsync();
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new ExistingVoicemailCheck(context))
+        .onSuccess(
+            output -> {
+              LogUtil.i("PackageReplacedReceiver.setVoicemailFeatureVersionAsync", "success");
+              pendingResult.finish();
+            })
+        .onFailure(
+            throwable -> {
+              LogUtil.i("PackageReplacedReceiver.setVoicemailFeatureVersionAsync", "failure");
+              pendingResult.finish();
+            })
+        .build()
+        .executeParallel(null);
+  }
+
+  private static class ExistingVoicemailCheck implements Worker<Void, Void> {
+    private static final String[] PROJECTION = new String[] {Voicemails._ID};
+
+    private final Context context;
+
+    ExistingVoicemailCheck(Context context) {
+      this.context = context;
+    }
+
+    @TargetApi(android.os.Build.VERSION_CODES.M) // used for try with resources
+    @Override
+    public Void doInBackground(Void arg) throws Throwable {
+      LogUtil.i("PackageReplacedReceiver.ExistingVoicemailCheck.doInBackground", "");
+
+      // Check the database for existing voicemails.
+      boolean hasVoicemails = false;
+      Uri uri = Voicemails.buildSourceUri(context.getPackageName());
+      String whereClause = Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE;
+      try (Cursor cursor =
+          context.getContentResolver().query(uri, PROJECTION, whereClause, null, null)) {
+        if (cursor == null) {
+          LogUtil.e(
+              "PackageReplacedReceiver.ExistingVoicemailCheck.doInBackground",
+              "failed to check for existing voicemails");
+        } else if (cursor.moveToFirst()) {
+          hasVoicemails = true;
+        }
+      }
+
+      LogUtil.i(
+          "PackageReplacedReceiver.ExistingVoicemailCheck.doInBackground",
+          "has voicemails: " + hasVoicemails);
+      int version = hasVoicemails ? VoicemailVersionConstants.LEGACY_VOICEMAIL_FEATURE_VERSION : 0;
+      PreferenceManager.getDefaultSharedPreferences(context)
+          .edit()
+          .putInt(VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, version)
+          .apply();
+      return null;
     }
   }
 }

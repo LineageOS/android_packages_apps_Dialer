@@ -26,6 +26,7 @@ import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.precall.impl.PreCallModule;
+import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
@@ -53,7 +54,8 @@ import javax.inject.Singleton;
     StubDuoModule.class,
     StubEnrichedCallModule.class,
     StubMapsModule.class,
-    VoicemailModule.class
+    VoicemailModule.class,
+    StubSimSuggestionModule.class
   }
 )
 public interface AospDialerRootComponent extends BaseDialerRootComponent {}
