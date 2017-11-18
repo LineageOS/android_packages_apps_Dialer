@@ -119,13 +119,20 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
   interface NewVoicemailViewHolderListener {
     void onViewHolderExpanded(NewVoicemailViewHolder expandedViewHolder);
+
+    void onViewHolderCollapsed(NewVoicemailViewHolder expandedViewHolder);
   }
 
   @Override
   public void onClick(View v) {
-    LogUtil.i("NewVoicemailViewHolder.onClick", "voicemail id: %d", viewHolderId);
+    LogUtil.i(
+        "NewVoicemailViewHolder.onClick",
+        "voicemail id: %d, isViewHolderExpanded:%b",
+        viewHolderId,
+        isViewHolderExpanded);
     if (isViewHolderExpanded) {
       collapseViewHolder();
+      voicemailViewHolderListener.onViewHolderCollapsed(this);
     } else {
       expandViewHolder();
       voicemailViewHolderListener.onViewHolderExpanded(this);
