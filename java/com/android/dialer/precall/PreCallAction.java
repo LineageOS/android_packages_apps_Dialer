@@ -16,6 +16,7 @@
 
 package com.android.dialer.precall;
 
+import android.content.Context;
 import android.support.annotation.MainThread;
 import com.android.dialer.callintent.CallIntentBuilder;
 
@@ -28,12 +29,29 @@ import com.android.dialer.callintent.CallIntentBuilder;
 public interface PreCallAction {
 
   /**
+   * Whether the action requires an activity to operate. This method is called on all actions before
+   * {@link #runWithUi(PreCallCoordinator)} is called. If {@link true} is returned, {@link
+   * #runWithUi(PreCallCoordinator)} will be guaranteed to be called on the execution phase.
+   * Otherwise {@link #runWithoutUi(Context, CallIntentBuilder)} may be called instead and the
+   * action will not be able to show UI, perform async task, or abort the call. This method should
+   * not make any state changes.
+   */
+  @MainThread
+  boolean requiresUi(Context context, CallIntentBuilder builder);
+
+  /**
+   * Called when all actions returned {@code false} for {@link #requiresUi(Context,
+   * CallIntentBuilder)}.
+   */
+  void runWithoutUi(Context context, CallIntentBuilder builder);
+
+  /**
    * Runs the action. Should block on the main thread until the action is finished. If the action is
    * not instantaneous, {@link PreCallCoordinator#startPendingAction()} should be called to release
    * the thread and continue later.
    */
   @MainThread
-  void run(PreCallCoordinator coordinator);
+  void runWithUi(PreCallCoordinator coordinator);
 
   /**
    * Called when the UI is being paused when a {@link PreCallCoordinator.PendingAction} is started,

@@ -31,12 +31,6 @@ public class InCallUiBindingsStub implements InCallUiBindings {
 
   @Override
   @Nullable
-  public Intent getUiReadyBroadcastIntent(Context context) {
-    return null;
-  }
-
-  @Override
-  @Nullable
   public Intent getCallStateButtonBroadcastIntent(Context context) {
     return null;
   }

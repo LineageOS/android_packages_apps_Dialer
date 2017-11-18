@@ -26,10 +26,6 @@ public interface InCallUiBindings {
   @Nullable
   PhoneNumberService newPhoneNumberService(Context context);
 
-  /** @return An {@link Intent} to be broadcast when the InCallUI is visible. */
-  @Nullable
-  Intent getUiReadyBroadcastIntent(Context context);
-
   /**
    * @return An {@link Intent} to be broadcast when the call state button in the InCallUI is touched
    *     while in a call.

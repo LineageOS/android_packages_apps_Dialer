@@ -17,6 +17,7 @@
 package com.android.dialer.precall.impl;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.telecom.PhoneAccount;
@@ -35,18 +36,21 @@ import java.util.Optional;
 /** Rewrites the call URI with country code. TODO(erfanian): use phone account for multi SIM */
 public class AssistedDialAction implements PreCallAction {
 
+  @Override
+  public boolean requiresUi(Context context, CallIntentBuilder builder) {
+    return false;
+  }
+
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(Build.VERSION_CODES.N)
   @Override
-  public void run(PreCallCoordinator coordinator) {
-    CallIntentBuilder builder = coordinator.getBuilder();
+  public void runWithoutUi(Context context, CallIntentBuilder builder) {
     if (!builder.isAssistedDialAllowed()) {
       return;
     }
     AssistedDialingMediator assistedDialingMediator =
         ConcreteCreator.createNewAssistedDialingMediator(
-            coordinator.getActivity().getSystemService(TelephonyManager.class),
-            coordinator.getActivity());
+            context.getSystemService(TelephonyManager.class), context);
     if (!assistedDialingMediator.isPlatformEligible()) {
       return;
     }
@@ -66,6 +70,11 @@ public class AssistedDialAction implements PreCallAction {
       builder.setUri(
           CallUtil.getCallUri(Assert.isNotNull(transformedNumber.get().transformedNumber())));
     }
+  }
+
+  @Override
+  public void runWithUi(PreCallCoordinator coordinator) {
+    runWithoutUi(coordinator.getActivity(), coordinator.getBuilder());
   }
 
   @Override
