@@ -22,6 +22,7 @@ import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -285,8 +286,15 @@ public class VoicemailClientImpl implements VoicemailClient {
   }
 
   @Override
-  public void onTosAccepted(Context context) {
+  public void onTosAccepted(Context context, PhoneAccountHandle account) {
     LogUtil.i("VoicemailClientImpl.onTosAccepted", "try backfilling voicemail transcriptions");
-    TranscriptionBackfillService.scheduleTask(context);
+    TranscriptionBackfillService.scheduleTask(context, account);
+  }
+
+  @Override
+  @Nullable
+  public String getCarrierConfigString(Context context, PhoneAccountHandle account, String key) {
+    OmtpVvmCarrierConfigHelper helper = new OmtpVvmCarrierConfigHelper(context, account);
+    return helper.isValid() ? helper.getString(key) : null;
   }
 }
