@@ -54,7 +54,9 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     LogUtil.i("NewVoicemailFragment.onCreateLoader", "cursor size is %d", data.getCount());
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(new NewVoicemailAdapter(data, System::currentTimeMillis));
+    recyclerView.setAdapter(
+        new NewVoicemailAdapter(
+            data, System::currentTimeMillis, getActivity().getFragmentManager()));
   }
 
   @Override

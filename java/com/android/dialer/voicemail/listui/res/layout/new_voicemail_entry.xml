@@ -82,7 +82,7 @@
         android:layout_gravity="center_vertical"
         android:visibility="gone"/>
 
-    <com.android.dialer.voicemail.listui.NewVoicemailMediaPlayer
+    <com.android.dialer.voicemail.listui.NewVoicemailMediaPlayerView
         android:id="@+id/new_voicemail_media_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
