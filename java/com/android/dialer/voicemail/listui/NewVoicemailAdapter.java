@@ -15,6 +15,7 @@
  */
 package com.android.dialer.voicemail.listui;
 
+import android.app.FragmentManager;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArraySet;
@@ -33,6 +34,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHol
 
   private final Cursor cursor;
   private final Clock clock;
+  private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
   private int currentlyExpandedViewHolderId = -1;
 
@@ -40,13 +42,16 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHol
   private final Set<NewVoicemailViewHolder> newVoicemailViewHolderSet = new ArraySet<>();
 
   /** @param cursor whose projection is {@link VoicemailCursorLoader.VOICEMAIL_COLUMNS} */
-  NewVoicemailAdapter(Cursor cursor, Clock clock) {
+  NewVoicemailAdapter(Cursor cursor, Clock clock, FragmentManager fragmentManager) {
+    LogUtil.enterBlock("NewVoicemailAdapter");
     this.cursor = cursor;
     this.clock = clock;
+    this.fragmentManager = fragmentManager;
   }
 
   @Override
   public NewVoicemailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    LogUtil.enterBlock("NewVoicemailAdapter.onCreateViewHolder");
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
     View view = inflater.inflate(R.layout.new_voicemail_entry, viewGroup, false);
     NewVoicemailViewHolder newVoicemailViewHolder = new NewVoicemailViewHolder(view, clock, this);
@@ -56,9 +61,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHol
 
   @Override
   public void onBindViewHolder(NewVoicemailViewHolder viewHolder, int position) {
-    LogUtil.i("onBindViewHolder", "position" + position);
     cursor.moveToPosition(position);
-    viewHolder.bind(cursor);
+    viewHolder.bind(cursor, fragmentManager);
     expandOrCollapseViewHolder(viewHolder);
   }
 
