@@ -15,6 +15,7 @@
  */
 package com.android.dialer.voicemail.listui;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.time.Clock;
@@ -38,7 +40,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private final TextView secondaryTextView;
   private final TextView transcriptionTextView;
   private final QuickContactBadge quickContactBadge;
-  private final View mediaPlayerView;
+  private final NewVoicemailMediaPlayerView mediaPlayerView;
   private final Clock clock;
   private boolean isViewHolderExpanded;
   private int viewHolderId;
@@ -47,6 +49,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   NewVoicemailViewHolder(
       View view, Clock clock, NewVoicemailViewHolderListener newVoicemailViewHolderListener) {
     super(view);
+    LogUtil.enterBlock("NewVoicemailViewHolder");
     this.context = view.getContext();
     primaryTextView = view.findViewById(R.id.primary_text);
     secondaryTextView = view.findViewById(R.id.secondary_text);
@@ -57,7 +60,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     voicemailViewHolderListener = newVoicemailViewHolderListener;
   }
 
-  void bind(Cursor cursor) {
+  void bind(Cursor cursor, FragmentManager fragmentManager) {
     VoicemailEntry voicemailEntry = VoicemailCursorLoader.toVoicemailEntry(cursor);
     viewHolderId = voicemailEntry.id();
     primaryTextView.setText(VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry));
@@ -76,6 +79,8 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
     itemView.setOnClickListener(this);
     setPhoto(voicemailEntry);
+    mediaPlayerView.setVoicemailUri(Uri.parse(voicemailEntry.voicemailUri()));
+    mediaPlayerView.setFragmentManager(fragmentManager);
   }
 
   // TODO(uabdullah): Consider/Implement TYPE (e.g Spam, TYPE_VOICEMAIL)
@@ -97,6 +102,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   }
 
   void expandViewHolder() {
+    LogUtil.i("NewVoicemailViewHolder.expandViewHolder", "voicemail id: %d", viewHolderId);
     transcriptionTextView.setMaxLines(999);
     isViewHolderExpanded = true;
     mediaPlayerView.setVisibility(View.VISIBLE);
@@ -117,6 +123,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
   @Override
   public void onClick(View v) {
+    LogUtil.i("NewVoicemailViewHolder.onClick", "voicemail id: %d", viewHolderId);
     if (isViewHolderExpanded) {
       collapseViewHolder();
     } else {
