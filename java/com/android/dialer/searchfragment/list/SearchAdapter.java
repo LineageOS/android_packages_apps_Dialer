@@ -17,7 +17,6 @@
 package com.android.dialer.searchfragment.list;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
@@ -28,15 +27,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.LogUtil;
-import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactViewHolder;
 import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
 import com.android.dialer.searchfragment.remote.RemoteContactViewHolder;
-import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
 import java.util.List;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
@@ -107,23 +103,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
     } else if (holder instanceof NearbyPlaceViewHolder) {
       ((NearbyPlaceViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof RemoteContactViewHolder) {
-      Cursor cursor = searchCursorManager.getCursor(position);
-      // Temporary logging to identify cause of a bug:
-      if (cursor.getString(Projections.PHONE_NUMBER) == null) {
-        LogUtil.e(
-            "SearchAdapter.onBindViewHolder", "cursor class: %s", cursor.getClass().getName());
-        LogUtil.e("SearchAdapter.onBindViewHolder", "position: %d", position);
-        LogUtil.e(
-            "SearchAdapter.onBindViewHolder",
-            "query length: %s",
-            query == null ? "null" : query.length());
-        logDirectories();
-        LogUtil.e(
-            "SearchAdapter.onBindViewHolder",
-            "directory id: %d",
-            ((SearchCursor) cursor).getDirectoryId());
-        throw new IllegalStateException("Null phone number reading remote contact");
-      }
       ((RemoteContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof HeaderViewHolder) {
       String header =
@@ -139,21 +118,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       // No-op
     } else {
       throw Assert.createIllegalStateFailException("Invalid ViewHolder: " + holder);
-    }
-  }
-
-  private void logDirectories() {
-    try (Cursor directories = new RemoteDirectoriesCursorLoader(context).loadInBackground()) {
-      if (directories.moveToFirst()) {
-        do {
-          LogUtil.e(
-              "SearchAdapter.logDirectories",
-              "directory: %s",
-              RemoteDirectoriesCursorLoader.readDirectory(directories));
-        } while (directories.moveToNext());
-      } else {
-        LogUtil.e("SearchAdapter.logDirectories", "no directories found");
-      }
     }
   }
 

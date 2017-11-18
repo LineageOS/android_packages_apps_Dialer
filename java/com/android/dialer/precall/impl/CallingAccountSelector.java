@@ -44,6 +44,8 @@ import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
+import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.google.common.base.Optional;
 import java.util.List;
 import java.util.Set;
@@ -84,7 +86,7 @@ public class CallingAccountSelector implements PreCallAction {
     }
     switch (builder.getUri().getScheme()) {
       case PhoneAccount.SCHEME_VOICEMAIL:
-        showDialog(coordinator, coordinator.startPendingAction(), null);
+        showDialog(coordinator, coordinator.startPendingAction(), null, null, null);
         break;
       case PhoneAccount.SCHEME_TEL:
         processPreferredAccount(coordinator);
@@ -128,7 +130,17 @@ public class CallingAccountSelector implements PreCallAction {
                 pendingAction.finish();
                 return;
               }
-              showDialog(coordinator, pendingAction, result.dataId.orNull());
+              if (result.suggestion.isPresent()) {
+                LogUtil.i(
+                    "CallingAccountSelector.processPreferredAccount",
+                    "SIM suggested: " + result.suggestion.get().reason);
+              }
+              showDialog(
+                  coordinator,
+                  pendingAction,
+                  result.dataId.orNull(),
+                  phoneNumber,
+                  result.suggestion.orNull());
             }))
         .build()
         .executeParallel(activity);
@@ -136,7 +148,11 @@ public class CallingAccountSelector implements PreCallAction {
 
   @MainThread
   private void showDialog(
-      PreCallCoordinator coordinator, PendingAction pendingAction, @Nullable String dataId) {
+      PreCallCoordinator coordinator,
+      PendingAction pendingAction,
+      @Nullable String dataId,
+      @Nullable String number,
+      @Nullable Suggestion unusedSuggestion) { // TODO(twyen): incoporate suggestion in dialog
     Assert.isMainThread();
     selectPhoneAccountDialogFragment =
         SelectPhoneAccountDialogFragment.newInstance(
@@ -146,7 +162,7 @@ public class CallingAccountSelector implements PreCallAction {
                 .getActivity()
                 .getSystemService(TelecomManager.class)
                 .getCallCapablePhoneAccounts(),
-            new SelectedListener(coordinator, pendingAction, dataId),
+            new SelectedListener(coordinator, pendingAction, dataId, number),
             null /* call ID */);
     selectPhoneAccountDialogFragment.show(
         coordinator.getActivity().getFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
@@ -169,6 +185,8 @@ public class CallingAccountSelector implements PreCallAction {
      * preferred account is to be set it should be stored in this row
      */
     Optional<String> dataId = Optional.absent();
+
+    Optional<Suggestion> suggestion = Optional.absent();
   }
 
   private static class PreferredAccountWorker
@@ -188,6 +206,12 @@ public class CallingAccountSelector implements PreCallAction {
       result.dataId = getDataId(context.getContentResolver(), phoneNumber);
       if (result.dataId.isPresent()) {
         result.phoneAccountHandle = getPreferredAccount(context, result.dataId.get());
+      }
+      if (!result.phoneAccountHandle.isPresent()) {
+        result.suggestion =
+            SimSuggestionComponent.get(context)
+                .getSuggestionProvider()
+                .getSuggestion(context, phoneNumber);
       }
       return result;
     }
@@ -257,14 +281,17 @@ public class CallingAccountSelector implements PreCallAction {
     private final PreCallCoordinator coordinator;
     private final PreCallCoordinator.PendingAction listener;
     private final String dataId;
+    private final String number;
 
     public SelectedListener(
         @NonNull PreCallCoordinator builder,
         @NonNull PreCallCoordinator.PendingAction listener,
-        @Nullable String dataId) {
+        @Nullable String dataId,
+        @Nullable String number) {
       this.coordinator = Assert.isNotNull(builder);
       this.listener = Assert.isNotNull(listener);
       this.dataId = dataId;
+      this.number = number;
     }
 
     @MainThread
@@ -282,7 +309,11 @@ public class CallingAccountSelector implements PreCallAction {
                 new WritePreferredAccountWorkerInput(
                     coordinator.getActivity(), dataId, selectedAccountHandle));
       }
-
+      DialerExecutorComponent.get(coordinator.getActivity())
+          .dialerExecutorFactory()
+          .createNonUiTaskBuilder(new UserSelectionReporter(selectedAccountHandle, number))
+          .build()
+          .executeParallel(coordinator.getActivity());
       listener.finish();
     }
 
@@ -294,6 +325,27 @@ public class CallingAccountSelector implements PreCallAction {
       }
       coordinator.abortCall();
       listener.finish();
+    }
+  }
+
+  private static class UserSelectionReporter implements Worker<Context, Void> {
+
+    private final String number;
+    private final PhoneAccountHandle phoneAccountHandle;
+
+    public UserSelectionReporter(
+        @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number) {
+      this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
+      this.number = Assert.isNotNull(number);
+    }
+
+    @Nullable
+    @Override
+    public Void doInBackground(@NonNull Context context) throws Throwable {
+      SimSuggestionComponent.get(context)
+          .getSuggestionProvider()
+          .reportUserSelection(context, number, phoneAccountHandle);
+      return null;
     }
   }
 

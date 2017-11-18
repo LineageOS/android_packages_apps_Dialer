@@ -19,8 +19,6 @@ package com.android.dialer.simulator.impl;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.telecom.Conferenceable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import com.android.dialer.common.Assert;
@@ -28,8 +26,9 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
+import com.android.dialer.simulator.SimulatorComponent;
+import com.android.dialer.simulator.SimulatorConnectionsBank;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /** Creates a conference with a given number of participants. */
@@ -38,32 +37,59 @@ final class SimulatorConferenceCreator
         SimulatorConnection.Listener,
         SimulatorConference.Listener {
   private static final String EXTRA_CALL_COUNT = "call_count";
-
+  private static final String RECONNECT = "reconnect";
   @NonNull private final Context context;
-  @NonNull private final List<String> connectionTags = new ArrayList<>();
+
+  private final SimulatorConnectionsBank simulatorConnectionsBank;
+
+  private boolean onNewIncomingConnectionEnabled = false;
+
   @Simulator.ConferenceType private final int conferenceType;
 
   public SimulatorConferenceCreator(
       @NonNull Context context, @Simulator.ConferenceType int conferenceType) {
     this.context = Assert.isNotNull(context);
     this.conferenceType = conferenceType;
+    simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
   }
 
   void start(int callCount) {
+    onNewIncomingConnectionEnabled = true;
     SimulatorConnectionService.addListener(this);
-    addNextCall(callCount);
+    if (conferenceType == Simulator.CONFERENCE_TYPE_VOLTE) {
+      addNextCall(callCount, true);
+    } else if (conferenceType == Simulator.CONFERENCE_TYPE_GSM) {
+      addNextCall(callCount, false);
+    }
   }
-
-  private void addNextCall(int callCount) {
+  /**
+   * Add a call in a process of making a conference.
+   *
+   * @param callCount the remaining number of calls to make
+   * @param reconnect whether all connections should reconnect once (connections are reconnected
+   *     once in making VoLTE conference)
+   */
+  private void addNextCall(int callCount, boolean reconnect) {
     LogUtil.i("SimulatorConferenceCreator.addNextIncomingCall", "callCount: " + callCount);
     if (callCount <= 0) {
       LogUtil.i("SimulatorConferenceCreator.addNextCall", "done adding calls");
+      if (reconnect) {
+        simulatorConnectionsBank.disconnectAllConnections();
+        addNextCall(simulatorConnectionsBank.getConnectionTags().size(), false);
+      } else {
+        simulatorConnectionsBank.mergeAllConnections(conferenceType, context);
+        SimulatorConnectionService.removeListener(this);
+      }
       return;
     }
-
     String callerId = String.format(Locale.US, "+1-650-234%04d", callCount);
     Bundle extras = new Bundle();
     extras.putInt(EXTRA_CALL_COUNT, callCount - 1);
+    extras.putBoolean(RECONNECT, reconnect);
+    addConferenceCall(callerId, extras);
+  }
+
+  private void addConferenceCall(String number, Bundle extras) {
     switch (conferenceType) {
       case Simulator.CONFERENCE_TYPE_VOLTE:
         extras.putBoolean("ISVOLTE", true);
@@ -71,35 +97,25 @@ final class SimulatorConferenceCreator
       default:
         break;
     }
-    connectionTags.add(
-        SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */, extras));
+    SimulatorSimCallManager.addNewIncomingCall(context, number, false /* isVideo */, extras);
   }
 
   @Override
   public void onNewIncomingConnection(@NonNull SimulatorConnection connection) {
-    if (!isMyConnection(connection)) {
+    if (!onNewIncomingConnectionEnabled) {
+      return;
+    }
+    if (!simulatorConnectionsBank.isSimulatorConnection(connection)) {
       LogUtil.i("SimulatorConferenceCreator.onNewOutgoingConnection", "unknown connection");
       return;
     }
-
     LogUtil.i("SimulatorConferenceCreator.onNewOutgoingConnection", "connection created");
     connection.addListener(this);
-
     // Once the connection is active, go ahead and conference it and add the next call.
     ThreadUtil.postDelayedOnUiThread(
         () -> {
-          SimulatorConference conference = findCurrentConference();
-          if (conference == null) {
-            conference =
-                SimulatorConference.newGsmConference(
-                    SimulatorSimCallManager.getSystemPhoneAccountHandle(context));
-            conference.addListener(this);
-            SimulatorConnectionService.getInstance().addConference(conference);
-          }
-          updateConferenceableConnections();
           connection.setActive();
-          conference.addConnection(connection);
-          addNextCall(getCallCount(connection));
+          addNextCall(getCallCount(connection), shouldReconnect(connection));
         },
         1000);
   }
@@ -115,7 +131,8 @@ final class SimulatorConferenceCreator
   public void onConference(
       @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2) {
     LogUtil.enterBlock("SimulatorConferenceCreator.onConference");
-    if (!isMyConnection(connection1) || !isMyConnection(connection2)) {
+    if (!simulatorConnectionsBank.isSimulatorConnection(connection1)
+        || !simulatorConnectionsBank.isSimulatorConnection(connection2)) {
       LogUtil.i("SimulatorConferenceCreator.onConference", "unknown connections, ignoring");
       return;
     }
@@ -125,7 +142,6 @@ final class SimulatorConferenceCreator
     } else if (connection2.getConference() != null) {
       connection2.getConference().addConnection(connection1);
     } else {
-      Assert.checkArgument(conferenceType == Simulator.CONFERENCE_TYPE_GSM);
       SimulatorConference conference =
           SimulatorConference.newGsmConference(
               SimulatorSimCallManager.getSystemPhoneAccountHandle(context));
@@ -136,52 +152,12 @@ final class SimulatorConferenceCreator
     }
   }
 
-  private boolean isMyConnection(@NonNull Connection connection) {
-    for (String connectionTag : connectionTags) {
-      if (connection.getExtras().getBoolean(connectionTag)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private void updateConferenceableConnections() {
-    LogUtil.enterBlock("SimulatorConferenceCreator.updateConferenceableConnections");
-    for (String connectionTag : connectionTags) {
-      SimulatorConnection connection = SimulatorSimCallManager.findConnectionByTag(connectionTag);
-      List<Conferenceable> conferenceables = getMyConferenceables();
-      conferenceables.remove(connection);
-      conferenceables.remove(connection.getConference());
-      connection.setConferenceables(conferenceables);
-    }
-  }
-
-  private List<Conferenceable> getMyConferenceables() {
-    List<Conferenceable> conferenceables = new ArrayList<>();
-    for (String connectionTag : connectionTags) {
-      SimulatorConnection connection = SimulatorSimCallManager.findConnectionByTag(connectionTag);
-      conferenceables.add(connection);
-      if (connection.getConference() != null
-          && !conferenceables.contains(connection.getConference())) {
-        conferenceables.add(connection.getConference());
-      }
-    }
-    return conferenceables;
-  }
-
-  @Nullable
-  private SimulatorConference findCurrentConference() {
-    for (String connectionTag : connectionTags) {
-      SimulatorConnection connection = SimulatorSimCallManager.findConnectionByTag(connectionTag);
-      if (connection.getConference() != null) {
-        return (SimulatorConference) connection.getConference();
-      }
-    }
-    return null;
-  }
-
   private static int getCallCount(@NonNull Connection connection) {
     return connection.getExtras().getInt(EXTRA_CALL_COUNT);
+  }
+
+  private static boolean shouldReconnect(@NonNull Connection connection) {
+    return connection.getExtras().getBoolean(RECONNECT);
   }
 
   @Override
@@ -222,6 +198,7 @@ final class SimulatorConferenceCreator
         for (Connection connection : new ArrayList<>(conference.getConnections())) {
           connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
         }
+        conference.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
         break;
       default:
         LogUtil.i(

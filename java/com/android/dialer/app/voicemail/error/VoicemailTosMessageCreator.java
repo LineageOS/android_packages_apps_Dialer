@@ -48,6 +48,7 @@ import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
+import com.android.voicemail.VoicemailVersionConstants;
 import java.util.Locale;
 
 /**
@@ -55,22 +56,6 @@ import java.util.Locale;
  * terms of service for Verizon and for other carriers.
  */
 public class VoicemailTosMessageCreator {
-  // Preference key to check which version of the Verizon ToS that the user has accepted.
-  static final String PREF_VVM3_TOS_VERSION_ACCEPTED_KEY = "vvm3_tos_version_accepted";
-
-  // Preference key to check which version of the Google Dialer ToS that the user has accepted.
-  static final String PREF_DIALER_TOS_VERSION_ACCEPTED_KEY = "dialer_tos_version_accepted";
-
-  // Preference key to check which feature version the user has acknowledged
-  static final String PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY =
-      "dialer_feature_version_acknowledged";
-
-  static final int CURRENT_VVM3_TOS_VERSION = 2;
-  static final int CURRENT_DIALER_TOS_VERSION = 1;
-  static final int LEGACY_VOICEMAIL_FEATURE_VERSION = 1; // original visual voicemail
-  static final int TRANSCRIPTION_VOICEMAIL_FEATURE_VERSION = 2; // adds voicemail transcription
-  static final int CURRENT_VOICEMAIL_FEATURE_VERSION = TRANSCRIPTION_VOICEMAIL_FEATURE_VERSION;
-
   private static final String ISO639_SPANISH = "es";
 
   private final Context context;
@@ -328,10 +313,11 @@ public class VoicemailTosMessageCreator {
 
   private boolean hasAcceptedTos() {
     if (isVvm3()) {
-      return preferences.getInt(PREF_VVM3_TOS_VERSION_ACCEPTED_KEY, 0) >= CURRENT_VVM3_TOS_VERSION;
+      return preferences.getInt(VoicemailVersionConstants.PREF_VVM3_TOS_VERSION_ACCEPTED_KEY, 0)
+          >= VoicemailVersionConstants.CURRENT_VVM3_TOS_VERSION;
     } else {
-      return preferences.getInt(PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, 0)
-          >= CURRENT_DIALER_TOS_VERSION;
+      return preferences.getInt(VoicemailVersionConstants.PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, 0)
+          >= VoicemailVersionConstants.CURRENT_DIALER_TOS_VERSION;
     }
   }
 
@@ -339,12 +325,16 @@ public class VoicemailTosMessageCreator {
     if (isVvm3()) {
       preferences
           .edit()
-          .putInt(PREF_VVM3_TOS_VERSION_ACCEPTED_KEY, CURRENT_VVM3_TOS_VERSION)
+          .putInt(
+              VoicemailVersionConstants.PREF_VVM3_TOS_VERSION_ACCEPTED_KEY,
+              VoicemailVersionConstants.CURRENT_VVM3_TOS_VERSION)
           .apply();
     } else {
       preferences
           .edit()
-          .putInt(PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
+          .putInt(
+              VoicemailVersionConstants.PREF_DIALER_TOS_VERSION_ACCEPTED_KEY,
+              VoicemailVersionConstants.CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
 
@@ -360,20 +350,24 @@ public class VoicemailTosMessageCreator {
       return true;
     }
 
-    return preferences.getInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
-        >= CURRENT_VOICEMAIL_FEATURE_VERSION;
+    return preferences.getInt(
+            VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
+        >= VoicemailVersionConstants.CURRENT_VOICEMAIL_FEATURE_VERSION;
   }
 
   private void recordFeatureAcknowledgement() {
     preferences
         .edit()
-        .putInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, CURRENT_VOICEMAIL_FEATURE_VERSION)
+        .putInt(
+            VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY,
+            VoicemailVersionConstants.CURRENT_VOICEMAIL_FEATURE_VERSION)
         .apply();
   }
 
   private boolean isLegacyVoicemailUser() {
-    return preferences.getInt(PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
-        == LEGACY_VOICEMAIL_FEATURE_VERSION;
+    return preferences.getInt(
+            VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY, 0)
+        == VoicemailVersionConstants.LEGACY_VOICEMAIL_FEATURE_VERSION;
   }
 
   private void logTosCreatedImpression() {
