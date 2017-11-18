@@ -102,4 +102,17 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<NewVoicemailViewHol
       }
     }
   }
+
+  /**
+   * Ensures that when we collapse the expanded view, we don't expand it again when we are recycling
+   * the viewholders.
+   *
+   * @param collapseViewHolder is the view holder that is currently collapsed.
+   */
+  @Override
+  public void onViewHolderCollapsed(NewVoicemailViewHolder collapseViewHolder) {
+    if (collapseViewHolder.getViewHolderId() == currentlyExpandedViewHolderId) {
+      currentlyExpandedViewHolderId = -1;
+    }
+  }
 }
