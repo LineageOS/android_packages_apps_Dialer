@@ -177,5 +177,12 @@ public interface VoicemailClient {
   /** Provides interface to change the PIN used to access the mailbox by calling. */
   PinChanger createPinChanger(Context context, PhoneAccountHandle phoneAccountHandle);
 
-  void onTosAccepted(Context context);
+  void onTosAccepted(Context context, PhoneAccountHandle phoneAccountHandle);
+
+  /**
+   * @return arbitrary carrier configuration String value associate with the indicated key. See
+   *     {@code CarrierConfigKeys.java}
+   */
+  @Nullable
+  String getCarrierConfigString(Context context, PhoneAccountHandle phoneAccountHandle, String key);
 }

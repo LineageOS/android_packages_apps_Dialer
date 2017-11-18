@@ -347,7 +347,12 @@ public class VoicemailTosMessageCreator {
           .putInt(PREF_DIALER_TOS_VERSION_ACCEPTED_KEY, CURRENT_DIALER_TOS_VERSION)
           .apply();
     }
-    VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context);
+
+    PhoneAccountHandle handle =
+        new PhoneAccountHandle(
+            ComponentName.unflattenFromString(status.phoneAccountComponentName),
+            status.phoneAccountId);
+    VoicemailComponent.get(context).getVoicemailClient().onTosAccepted(context, handle);
   }
 
   private boolean hasAcknowledgedFeatures() {
