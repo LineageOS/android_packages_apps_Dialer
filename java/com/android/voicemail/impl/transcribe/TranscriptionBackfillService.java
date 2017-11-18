@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.os.BuildCompat;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.constants.ScheduledJobIds;
@@ -38,7 +39,7 @@ import java.util.List;
 public class TranscriptionBackfillService extends JobIntentService {
 
   /** Schedule a task to scan the database for untranscribed voicemails */
-  public static boolean scheduleTask(Context context) {
+  public static boolean scheduleTask(Context context, PhoneAccountHandle account) {
     if (BuildCompat.isAtLeastO()) {
       LogUtil.enterBlock("TranscriptionBackfillService.transcribeOldVoicemails");
       ComponentName componentName = new ComponentName(context, TranscriptionBackfillService.class);
@@ -46,15 +47,17 @@ public class TranscriptionBackfillService extends JobIntentService {
           new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_BACKFILL_JOB, componentName)
               .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
       JobScheduler scheduler = context.getSystemService(JobScheduler.class);
-      return scheduler.enqueue(builder.build(), makeWorkItem()) == JobScheduler.RESULT_SUCCESS;
+      return scheduler.enqueue(builder.build(), makeWorkItem(account))
+          == JobScheduler.RESULT_SUCCESS;
     } else {
       LogUtil.i("TranscriptionBackfillService.transcribeOldVoicemails", "not supported");
       return false;
     }
   }
 
-  private static JobWorkItem makeWorkItem() {
+  private static JobWorkItem makeWorkItem(PhoneAccountHandle account) {
     Intent intent = new Intent();
+    intent.putExtra(TranscriptionService.EXTRA_ACCOUNT_HANDLE, account);
     return new JobWorkItem(intent);
   }
 
