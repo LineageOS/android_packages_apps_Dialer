@@ -55,13 +55,11 @@
         android:max="0"
         android:progress="0"/>
 
-    <!-- TODO(uabdullah): Remove android:text and replace with real value when binding -->
     <TextView
         android:id="@+id/playback_seek_total_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:importantForAccessibility="no"
-        android:text="03:00"
         android:textSize="@dimen/voicemail_duration_size"/>
   </LinearLayout>
 
