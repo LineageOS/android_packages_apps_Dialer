@@ -142,7 +142,7 @@ public final class NewSearchFragment extends Fragment
       LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_search, parent, false);
     adapter = new SearchAdapter(getContext(), new SearchCursorManager(), this);
-    adapter.setQuery(query, rawNumber);
+    adapter.setQuery(query, rawNumber, callInitiationType);
     adapter.setSearchActions(getActions());
     adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
     emptyContentView = view.findViewById(R.id.empty_view);
@@ -260,7 +260,7 @@ public final class NewSearchFragment extends Fragment
     this.query = query;
     this.callInitiationType = callInitiationType;
     if (adapter != null) {
-      adapter.setQuery(query, rawNumber);
+      adapter.setQuery(query, rawNumber, callInitiationType);
       adapter.setSearchActions(getActions());
       adapter.setZeroSuggestVisible(isRegularSearch());
       loadNearbyPlacesCursor();
@@ -445,19 +445,27 @@ public final class NewSearchFragment extends Fragment
    * the list of supported actions, see {@link SearchActionViewHolder.Action}.
    */
   private List<Integer> getActions() {
-    boolean nonDialableQueryInRegularSearch =
-        isRegularSearch() && !PhoneNumberUtils.isGlobalPhoneNumber(query);
+    boolean isDialableNumber = PhoneNumberUtils.isGlobalPhoneNumber(query);
+    boolean nonDialableQueryInRegularSearch = isRegularSearch() && !isDialableNumber;
     if (TextUtils.isEmpty(query) || query.length() == 1 || nonDialableQueryInRegularSearch) {
       return Collections.emptyList();
     }
 
     List<Integer> actions = new ArrayList<>();
-    actions.add(Action.CREATE_NEW_CONTACT);
-    actions.add(Action.ADD_TO_CONTACT);
+    if (!isRegularSearch()) {
+      actions.add(Action.CREATE_NEW_CONTACT);
+      actions.add(Action.ADD_TO_CONTACT);
+    }
+
+    if (isRegularSearch() && isDialableNumber) {
+      actions.add(Action.MAKE_VOICE_CALL);
+    }
+
     actions.add(Action.SEND_SMS);
     if (CallUtil.isVideoEnabled(getContext())) {
       actions.add(Action.MAKE_VILTE_CALL);
     }
+
     return actions;
   }
 
