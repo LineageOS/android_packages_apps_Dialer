@@ -123,6 +123,11 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     return mListener;
   }
 
+  @VisibleForTesting
+  public boolean canSetDefault() {
+    return getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
+  }
+
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
