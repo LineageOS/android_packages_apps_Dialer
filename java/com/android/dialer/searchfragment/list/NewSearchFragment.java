@@ -32,6 +32,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -444,7 +445,9 @@ public final class NewSearchFragment extends Fragment
    * the list of supported actions, see {@link SearchActionViewHolder.Action}.
    */
   private List<Integer> getActions() {
-    if (TextUtils.isEmpty(query) || query.length() == 1 || isRegularSearch()) {
+    boolean nonDialableQueryInRegularSearch =
+        isRegularSearch() && !PhoneNumberUtils.isGlobalPhoneNumber(query);
+    if (TextUtils.isEmpty(query) || query.length() == 1 || nonDialableQueryInRegularSearch) {
       return Collections.emptyList();
     }
 

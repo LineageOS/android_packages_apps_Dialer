@@ -67,22 +67,36 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingTop="10dp"
-      android:orientation="horizontal">
-    <!-- TODO(a bug): Remove these buttons as this is a place holder for the Media Player -->
-    <Button
+      android:gravity="center"
+      android:orientation="horizontal"
+      android:weightSum="4">
+
+
+    <ImageButton
         android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"/>
-    <Button
+        style="@style/voicemail_media_player_buttons"
+        android:layout_weight="1"
+        android:src="@drawable/quantum_ic_play_arrow_vd_theme_24"/>
+
+
+    <ImageButton
         android:id="@+id/speakerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speaker"/>
-    <Button
+        style="@style/voicemail_media_player_buttons"
+        android:layout_weight="1"
+        android:src="@drawable/quantum_ic_volume_up_vd_theme_24"/>
+
+
+    <ImageButton
+        android:id="@+id/phoneButton"
+        style="@style/voicemail_media_player_buttons"
+        android:layout_weight="1"
+        android:src="@drawable/quantum_ic_phone_vd_theme_24"/>
+
+    <ImageButton
         android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"/>
+        style="@style/voicemail_media_player_buttons"
+        android:layout_weight="1"
+        android:src="@drawable/quantum_ic_delete_vd_theme_24"/>
+
   </LinearLayout>
 </LinearLayout>

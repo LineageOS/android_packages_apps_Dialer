@@ -131,6 +131,7 @@ public class PreferredSimFallbackProvider extends ContentProvider {
         == -1) {
       throw new IllegalStateException("update failed");
     }
+    getContext().getContentResolver().notifyChange(PreferredSimFallbackContract.CONTENT_URI, null);
     return 1;
   }
 

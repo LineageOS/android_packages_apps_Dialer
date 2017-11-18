@@ -137,7 +137,7 @@ public class QueryFilteringUtil {
    * @param context The context
    * @return The original string with characters replaced with T9 representations.
    */
-  static String getT9Representation(String s, Context context) {
+  public static String getT9Representation(String s, Context context) {
     StringBuilder builder = new StringBuilder(s.length());
     for (char c : s.toLowerCase().toCharArray()) {
       builder.append(getDigit(c, context));

@@ -33,10 +33,7 @@ public interface PreCallCoordinator {
   @NonNull
   CallIntentBuilder getBuilder();
 
-  /**
-   * @return the activity to attach the UI to. Returns {@link null} if the coordinator is running on
-   *     headless mode. TODO(twyen): implement headless mode.
-   */
+  /** @return the activity to attach the UI to. */
   @NonNull
   Activity getActivity();
 
@@ -60,10 +57,10 @@ public interface PreCallCoordinator {
    * Called by the current running {@link PreCallAction} to release the main thread and resume
    * pre-call later.
    *
-   * @return a {@link PendingAction} which {@link PendingAction#finish(boolean)} should be called to
-   *     resume pre-call. For example the action shows a dialog to the user, startPendingAction()
-   *     should be called as the action will not be finished immediately. When the dialog is
-   *     completed, {@code finish()} is then called to continue the next step.
+   * @return a {@link PendingAction} which {@link PendingAction#finish()} should be called to resume
+   *     pre-call. For example the action shows a dialog to the user, startPendingAction() should be
+   *     called as the action will not be finished immediately. When the dialog is completed, {@code
+   *     finish()} is then called to continue the next step.
    */
   @MainThread
   @NonNull

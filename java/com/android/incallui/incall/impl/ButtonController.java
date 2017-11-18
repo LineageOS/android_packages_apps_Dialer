@@ -16,6 +16,7 @@
 
 package com.android.incallui.incall.impl;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.CallSuper;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -569,11 +570,14 @@ interface ButtonController {
           InCallButtonIds.BUTTON_SWAP_SIM,
           R.string.incall_content_description_swap_sim,
           R.string.incall_label_swap_sim,
-          R.drawable.quantum_ic_swap_calls_white_36);
+          R.drawable.ic_sim_change_white);
     }
 
     @Override
     public void onClick(View view) {
+      AnimationDrawable drawable = (AnimationDrawable) button.getIconDrawable();
+      drawable.stop(); // animation is one shot, stop it so it can be started again.
+      drawable.start();
       delegate.swapSimClicked();
     }
   }

@@ -96,7 +96,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     if (count == 0) {
       LogUtil.i("LegacyVoicemailNotificationReceiver.onReceive", "clearing notification");
-      LegacyVoicemailNotifier.cancelNotification(context);
+      LegacyVoicemailNotifier.cancelNotification(context, phoneAccountHandle);
       return;
     }
 
