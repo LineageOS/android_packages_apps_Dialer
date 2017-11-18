@@ -20,4 +20,11 @@
 
   <!-- Format for duration of voicemails which are displayed when viewing voicemail. For example "01:22" -->
   <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+
+  <!-- TODO(ubdullah): Confirm string with UX before allowing translation -->
+  <!-- String used to display the state of the voicemail media player -->
+  <string name="voicemail_media_player_state" translatable="false">Loading Voicemail</string>
+
+  <!-- String used to display the default staring point of a voicemail-->
+  <string name="voicemail_media_player_inital_start_position" translatable="false">00:00</string>
 </resources>
