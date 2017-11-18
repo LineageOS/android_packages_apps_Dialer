@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]. See 2424710404207193826 for current translation. -->
   <string name="new_permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
 
@@ -31,4 +31,7 @@
 
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_video_call">Make video call</string>
+
+  <!-- Shortcut item used to make a voice call directly from search. [CHAR LIMIT=25] -->
+  <string name="search_shortcut_make_voice_call">Call <xliff:g id="phone_number">%1$s</xliff:g></string>
 </resources>
