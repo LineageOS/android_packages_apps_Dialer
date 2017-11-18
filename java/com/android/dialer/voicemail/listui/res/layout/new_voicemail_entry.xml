@@ -97,7 +97,6 @@
       android:layout_width="@dimen/call_log_entry_menu_button_size"
       android:layout_height="@dimen/call_log_entry_menu_button_size"
       android:layout_alignParentEnd="true"
-      android:layout_centerVertical="true"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
       android:tint="@color/dialer_secondary_text_color"/>
