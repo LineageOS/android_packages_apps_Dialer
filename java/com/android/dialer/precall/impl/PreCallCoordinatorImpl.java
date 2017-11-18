@@ -93,7 +93,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
     }
     LogUtil.i("PreCallCoordinatorImpl.runNextAction", "running " + actions.get(currentActionIndex));
     currentAction = actions.get(currentActionIndex);
-    actions.get(currentActionIndex).run(this);
+    actions.get(currentActionIndex).runWithUi(this);
     if (pendingAction == null) {
       onActionFinished();
     }

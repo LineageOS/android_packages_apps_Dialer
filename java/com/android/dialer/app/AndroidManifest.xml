@@ -140,5 +140,6 @@
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/file_paths"/>
     </provider>
+    <meta-data android:name="supports_per_number_preferred_account" android:value="true" />
   </application>
 </manifest>

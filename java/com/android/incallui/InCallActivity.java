@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -34,6 +36,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.Toast;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -59,6 +65,8 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
 import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.incalluilock.InCallUiLock;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -76,8 +84,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   public static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
   public static final int PENDING_INTENT_REQUEST_CODE_BUBBLE = 2;
 
-  private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_ANSWER_SCREEN = "tag_answer_screen";
+  private static final String TAG_DIALPAD_FRAGMENT = "tag_dialpad_fragment";
+  private static final String TAG_INTERNATIONAL_CALL_ON_WIFI = "tag_international_call_on_wifi";
+  private static final String TAG_IN_CALL_SCREEN = "tag_in_call_screen";
   private static final String TAG_VIDEO_CALL_SCREEN = "tag_video_call_screen";
 
   private static final String DID_SHOW_ANSWER_SCREEN_KEY = "did_show_answer_screen";
@@ -87,9 +97,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static final String CONFIG_ANSWER_AND_RELEASE_ENABLED = "answer_and_release_enabled";
 
   private final InCallActivityCommon common;
+  private InCallOrientationEventListener inCallOrientationEventListener;
   private boolean didShowAnswerScreen;
   private boolean didShowInCallScreen;
   private boolean didShowVideoCallScreen;
+  private boolean dismissKeyguard;
   private int[] backgroundDrawableColors;
   private GradientDrawable backgroundDrawable;
   private boolean isVisible;
@@ -138,6 +150,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
 
     common.onCreate(icicle);
+    inCallOrientationEventListener = new InCallOrientationEventListener(this);
 
     getWindow()
         .getDecorView()
@@ -340,7 +353,21 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public boolean isDialpadVisible() {
-    return common.isDialpadVisible();
+    DialpadFragment dialpadFragment = getDialpadFragment();
+    return dialpadFragment != null && dialpadFragment.isVisible();
+  }
+
+  /**
+   * Returns the {@link DialpadFragment} that's shown by this activity, or {@code null}
+   * TODO(a bug): Make this method private after InCallActivityCommon is deleted.
+   */
+  @Nullable
+  DialpadFragment getDialpadFragment() {
+    FragmentManager fragmentManager = getDialpadFragmentManager();
+    if (fragmentManager == null) {
+      return null;
+    }
+    return (DialpadFragment) fragmentManager.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
   }
 
   public void onForegroundCallChanged(DialerCall newForegroundCall) {
@@ -419,37 +446,109 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void dismissKeyguard(boolean dismiss) {
-    common.dismissKeyguard(dismiss);
+    if (dismissKeyguard == dismiss) {
+      return;
+    }
+
+    dismissKeyguard = dismiss;
+    if (dismiss) {
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    } else {
+      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    }
   }
 
   public void showPostCharWaitDialog(String callId, String chars) {
     common.showPostCharWaitDialog(callId, chars);
   }
 
-  public void maybeShowErrorDialogOnDisconnect(DisconnectMessage disconnectMessage) {
-    common.maybeShowErrorDialogOnDisconnect(disconnectMessage);
+  public void showDialogOrToastForDisconnectedCall(DisconnectMessage disconnectMessage) {
+    LogUtil.i(
+        "InCallActivity.showDialogOrToastForDisconnectedCall",
+        "disconnect cause: %s",
+        disconnectMessage);
+
+    if (disconnectMessage.dialog == null || isFinishing()) {
+      return;
+    }
+
+    dismissPendingDialogs();
+
+    // Show a toast if the app is in background when a dialog can't be visible.
+    if (!isVisible()) {
+      Toast.makeText(getApplicationContext(), disconnectMessage.toastMessage, Toast.LENGTH_LONG)
+          .show();
+      return;
+    }
+
+    // Show the dialog.
+    common.setErrorDialog(disconnectMessage.dialog);
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("showErrorDialog");
+    disconnectMessage.dialog.setOnDismissListener(
+        dialogInterface -> {
+          lock.release();
+          onDialogDismissed();
+        });
+    disconnectMessage.dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    disconnectMessage.dialog.show();
+  }
+
+  private void onDialogDismissed() {
+    common.setErrorDialog(null);
+    CallList.getInstance().onErrorDialogDismissed();
   }
 
   public void dismissPendingDialogs() {
-    if (isVisible) {
-      LogUtil.i("InCallActivity.dismissPendingDialogs", "");
-      common.dismissPendingDialogs();
-      AnswerScreen answerScreen = getAnswerScreen();
-      if (answerScreen != null) {
-        answerScreen.dismissPendingDialogs();
-      }
-      needDismissPendingDialogs = false;
-    } else {
-      // The activity is not visible and onSaveInstanceState may have been called so defer the
-      // dismissing action.
+    LogUtil.i("InCallActivity.dismissPendingDialogs", "");
+
+    if (!isVisible) {
+      // Defer the dismissing action as the activity is not visible and onSaveInstanceState may have
+      // been called.
       LogUtil.i(
           "InCallActivity.dismissPendingDialogs", "defer actions since activity is not visible");
       needDismissPendingDialogs = true;
+      return;
     }
+
+    // Dismiss the error dialog
+    Dialog errorDialog = common.getErrorDialog();
+    if (errorDialog != null) {
+      errorDialog.dismiss();
+      common.setErrorDialog(null);
+    }
+
+    // Dismiss the phone account selection dialog
+    SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment =
+        common.getSelectPhoneAccountDialogFragment();
+    if (selectPhoneAccountDialogFragment != null) {
+      selectPhoneAccountDialogFragment.dismiss();
+      common.setSelectPhoneAccountDialogFragment(null);
+    }
+
+    // Dismiss the dialog for international call on WiFi
+    InternationalCallOnWifiDialogFragment internationalCallOnWifiFragment =
+        (InternationalCallOnWifiDialogFragment)
+            getSupportFragmentManager().findFragmentByTag(TAG_INTERNATIONAL_CALL_ON_WIFI);
+    if (internationalCallOnWifiFragment != null) {
+      internationalCallOnWifiFragment.dismiss();
+    }
+
+    // Dismiss the answer screen
+    AnswerScreen answerScreen = getAnswerScreen();
+    if (answerScreen != null) {
+      answerScreen.dismissPendingDialogs();
+    }
+
+    needDismissPendingDialogs = false;
   }
 
-  private void enableInCallOrientationEventListener(boolean enable) {
-    common.enableInCallOrientationEventListener(enable);
+  // TODO(a bug): Make this method private after InCallActivityCommon is deleted.
+  void enableInCallOrientationEventListener(boolean enable) {
+    if (enable) {
+      inCallOrientationEventListener.enable(true /* notifyDeviceOrientationChange */);
+    } else {
+      inCallOrientationEventListener.disable();
+    }
   }
 
   public void setExcludeFromRecents(boolean exclude) {
@@ -515,17 +614,67 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     Trace.endSection();
   }
 
-  public void onWiFiToLteHandover(DialerCall call) {
-    common.showWifiToLteHandoverToast(call);
+  public void showToastForWiFiToLteHandover(DialerCall call) {
+    if (call.hasShownWiFiToLteHandoverToast()) {
+      return;
+    }
+
+    Toast.makeText(this, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG).show();
+    call.setHasShownWiFiToLteHandoverToast();
   }
 
-  public void onHandoverToWifiFailed(DialerCall call) {
-    common.showWifiFailedDialog(call);
+  public void showDialogOrToastForWifiHandoverFailure(DialerCall call) {
+    if (call.showWifiHandoverAlertAsToast()) {
+      Toast.makeText(this, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+
+    dismissPendingDialogs();
+
+    AlertDialog.Builder builder =
+        new AlertDialog.Builder(this).setTitle(R.string.video_call_lte_to_wifi_failed_title);
+
+    // This allows us to use the theme of the dialog instead of the activity
+    View dialogCheckBoxView =
+        View.inflate(builder.getContext(), R.layout.video_call_lte_to_wifi_failed, null /* root */);
+    CheckBox wifiHandoverFailureCheckbox =
+        (CheckBox) dialogCheckBoxView.findViewById(R.id.video_call_lte_to_wifi_failed_checkbox);
+    wifiHandoverFailureCheckbox.setChecked(false);
+
+    InCallUiLock lock = InCallPresenter.getInstance().acquireInCallUiLock("WifiFailedDialog");
+    Dialog errorDialog =
+        builder
+            .setView(dialogCheckBoxView)
+            .setMessage(R.string.video_call_lte_to_wifi_failed_message)
+            .setOnCancelListener(dialogInterface -> onDialogDismissed())
+            .setPositiveButton(
+                android.R.string.ok,
+                (dialogInterface, id) -> {
+                  call.setDoNotShowDialogForHandoffToWifiFailure(
+                      wifiHandoverFailureCheckbox.isChecked());
+                  dialogInterface.cancel();
+                  onDialogDismissed();
+                })
+            .setOnDismissListener(dialogInterface -> lock.release())
+            .create();
+
+    common.setErrorDialog(errorDialog);
+    errorDialog.show();
   }
 
-  public void onInternationalCallOnWifi(@NonNull DialerCall call) {
-    LogUtil.enterBlock("InCallActivity.onInternationalCallOnWifi");
-    common.showInternationalCallOnWifiDialog(call);
+  public void showDialogForInternationalCallOnWifi(@NonNull DialerCall call) {
+    if (!InternationalCallOnWifiDialogFragment.shouldShow(this)) {
+      LogUtil.i(
+          "InCallActivity.showDialogForInternationalCallOnWifi",
+          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
+      return;
+    }
+
+    InternationalCallOnWifiDialogFragment fragment =
+        InternationalCallOnWifiDialogFragment.newInstance(
+            call.getId(), common.getCallbackForInternationalCallOnWifiDialog());
+    fragment.show(getSupportFragmentManager(), TAG_INTERNATIONAL_CALL_ON_WIFI);
   }
 
   @Override

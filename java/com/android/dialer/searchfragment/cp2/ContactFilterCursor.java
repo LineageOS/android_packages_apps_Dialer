@@ -39,6 +39,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -52,6 +53,7 @@ final class ContactFilterCursor implements Cursor {
   private final Cursor cursor;
   // List of cursor ids that are valid for displaying after filtering.
   private final List<Integer> queryFilteredPositions = new ArrayList<>();
+  private final ContactTernarySearchTree contactTree;
 
   private int currentPosition = 0;
 
@@ -77,6 +79,7 @@ final class ContactFilterCursor implements Cursor {
    */
   ContactFilterCursor(Cursor cursor, @Nullable String query, Context context) {
     this.cursor = createCursor(cursor);
+    contactTree = buildContactSearchTree(context, this.cursor);
     filter(query, context);
   }
 
@@ -225,6 +228,69 @@ final class ContactFilterCursor implements Cursor {
   }
 
   /**
+   * Returns a ternary search trie based on the contact at the cursor's current position with the
+   * following terms inserted:
+   *
+   * <ul>
+   *   <li>Contact's whole display name, company name and nickname.
+   *   <li>The T9 representations of those values
+   *   <li>The T9 initials of those values
+   *   <li>All possible substrings a contact's phone number
+   * </ul>
+   */
+  private static ContactTernarySearchTree buildContactSearchTree(Context context, Cursor cursor) {
+    ContactTernarySearchTree tree = new ContactTernarySearchTree();
+    cursor.moveToPosition(-1);
+    while (cursor.moveToNext()) {
+      int position = cursor.getPosition();
+      Set<String> queryMatches = new ArraySet<>();
+      addMatches(context, queryMatches, cursor.getString(Projections.DISPLAY_NAME));
+      addMatches(context, queryMatches, cursor.getString(Projections.COMPANY_NAME));
+      addMatches(context, queryMatches, cursor.getString(Projections.NICKNAME));
+      for (String query : queryMatches) {
+        tree.put(query, position);
+      }
+      String number = QueryFilteringUtil.digitsOnly(cursor.getString(Projections.PHONE_NUMBER));
+      Set<String> numberSubstrings = new ArraySet<>();
+      numberSubstrings.add(number);
+      for (int start = 0; start < number.length(); start++) {
+        numberSubstrings.add(number.substring(start, number.length()));
+      }
+      for (String substring : numberSubstrings) {
+        tree.put(substring, position);
+      }
+    }
+    return tree;
+  }
+
+  /**
+   * Returns a set containing:
+   *
+   * <ul>
+   *   <li>The white space divided parts of phrase
+   *   <li>The T9 representation of the white space divided parts of phrase
+   *   <li>The T9 representation of the initials (i.e. first character of each part) of phrase
+   * </ul>
+   */
+  private static void addMatches(Context context, Set<String> existingMatches, String phrase) {
+    if (TextUtils.isEmpty(phrase)) {
+      return;
+    }
+    String initials = "";
+    phrase = phrase.toLowerCase(Locale.getDefault());
+    existingMatches.add(phrase);
+    for (String name : phrase.split("\\s")) {
+      if (TextUtils.isEmpty(name)) {
+        continue;
+      }
+      existingMatches.add(name);
+      existingMatches.add(QueryFilteringUtil.getT9Representation(name, context));
+      initials += name.charAt(0);
+    }
+    existingMatches.add(QueryFilteringUtil.getT9Representation(initials, context));
+  }
+
+  /**
    * Filters out contacts that do not match the query.
    *
    * <p>The query can have at least 1 of 3 forms:
@@ -249,24 +315,14 @@ final class ContactFilterCursor implements Cursor {
       query = "";
     }
     queryFilteredPositions.clear();
-    query = query.toLowerCase();
-    cursor.moveToPosition(-1);
-
-    while (cursor.moveToNext()) {
-      int position = cursor.getPosition();
-      String number = cursor.getString(Projections.PHONE_NUMBER);
-      String name = cursor.getString(Projections.DISPLAY_NAME);
-      String companyName = cursor.getString(Projections.COMPANY_NAME);
-      String nickName = cursor.getString(Projections.NICKNAME);
-      if (TextUtils.isEmpty(query)
-          || QueryFilteringUtil.nameMatchesT9Query(query, name, context)
-          || QueryFilteringUtil.numberMatchesNumberQuery(query, number)
-          || QueryFilteringUtil.nameContainsQuery(query, name)
-          || QueryFilteringUtil.nameContainsQuery(query, companyName)
-          || QueryFilteringUtil.nameContainsQuery(query, nickName)) {
-        queryFilteredPositions.add(position);
+    if (TextUtils.isEmpty(query)) {
+      for (int i = 0; i < cursor.getCount(); i++) {
+        queryFilteredPositions.add(i);
       }
+    } else {
+      queryFilteredPositions.addAll(contactTree.get(query.toLowerCase(Locale.getDefault())));
     }
+    Collections.sort(queryFilteredPositions);
     currentPosition = 0;
     cursor.moveToFirst();
   }

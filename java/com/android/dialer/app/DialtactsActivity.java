@@ -96,6 +96,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
@@ -178,6 +179,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
   private static final String KEY_IN_NEW_SEARCH_UI = "in_new_search_ui";
   private static final String KEY_SEARCH_QUERY = "search_query";
+  private static final String KEY_DIALPAD_QUERY = "dialpad_query";
   private static final String KEY_FIRST_LAUNCH = "first_launch";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
   private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
@@ -439,6 +441,7 @@ public class DialtactsActivity extends TransactionSafeActivity
           .commit();
     } else {
       mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
+      mDialpadQuery = savedInstanceState.getString(KEY_DIALPAD_QUERY);
       mInRegularSearch = savedInstanceState.getBoolean(KEY_IN_REGULAR_SEARCH_UI);
       mInDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
       mInNewSearch = savedInstanceState.getBoolean(KEY_IN_NEW_SEARCH_UI);
@@ -654,6 +657,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     LogUtil.enterBlock("DialtactsActivity.onSaveInstanceState");
     super.onSaveInstanceState(outState);
     outState.putString(KEY_SEARCH_QUERY, mSearchQuery);
+    outState.putString(KEY_DIALPAD_QUERY, mDialpadQuery);
     outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
     outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, mInDialpadSearch);
     outState.putBoolean(KEY_IN_NEW_SEARCH_UI, mInNewSearch);
@@ -1425,6 +1429,21 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
+  public boolean onSearchListTouch(MotionEvent event) {
+    if (mIsDialpadShown) {
+      PerformanceReport.recordClick(UiAction.Type.CLOSE_DIALPAD);
+      hideDialpadFragment(true, false);
+      if (TextUtils.isEmpty(mDialpadQuery)) {
+        exitSearchUi();
+      }
+      return true;
+    } else {
+      UiUtil.hideKeyboardFrom(this, mSearchEditTextLayout);
+    }
+    return false;
+  }
+
+  @Override
   public void onListFragmentScrollStateChange(int scrollState) {
     PerformanceReport.recordScrollStateChange(scrollState);
     if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -1656,17 +1675,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     return mIsDialpadShown
         ? CallInitiationType.Type.DIALPAD
         : CallInitiationType.Type.REGULAR_SEARCH;
-  }
-
-  @Override
-  public boolean onSearchListTouch(MotionEvent event) {
-    if (mIsDialpadShown) {
-      hideDialpadFragment(true, false);
-      if (TextUtils.isEmpty(mDialpadQuery)) {
-        exitSearchUi();
-      }
-    }
-    return false;
   }
 
   @Override
