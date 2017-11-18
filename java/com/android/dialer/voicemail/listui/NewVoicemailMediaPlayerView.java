@@ -32,11 +32,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /**
  * The view of the media player that is visible when a {@link NewVoicemailViewHolder} is expanded.
@@ -46,6 +48,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   private Button playButton;
   private Button speakerButton;
   private Button deleteButton;
+  private TextView totalDurationView;
   private Uri voicemailUri;
   private FragmentManager fragmentManager;
   private MediaPlayer mediaPlayer;
@@ -62,14 +65,15 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   protected void onFinishInflate() {
     super.onFinishInflate();
     LogUtil.enterBlock("NewVoicemailMediaPlayer.onFinishInflate");
-    initializeMediaPlayerButtons();
+    initializeMediaPlayerButtonsAndViews();
     setupListenersForMediaPlayerButtons();
   }
 
-  private void initializeMediaPlayerButtons() {
+  private void initializeMediaPlayerButtonsAndViews() {
     playButton = findViewById(R.id.playButton);
     speakerButton = findViewById(R.id.speakerButton);
     deleteButton = findViewById(R.id.deleteButton);
+    totalDurationView = findViewById(R.id.playback_seek_total_duration);
   }
 
   private void setupListenersForMediaPlayerButtons() {
@@ -171,7 +175,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   OnCompletionListener onCompletionListener =
       new OnCompletionListener() {
 
@@ -197,7 +201,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   OnErrorListener onErrorListener =
       new OnErrorListener() {
         @Override
@@ -210,12 +214,18 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
-  public void setVoicemailUri(Uri voicemailUri) {
-    Assert.isNotNull(voicemailUri);
-    this.voicemailUri = voicemailUri;
+  void setFragmentManager(FragmentManager fragmentManager) {
+    this.fragmentManager = fragmentManager;
   }
 
-  public void setFragmentManager(FragmentManager fragmentManager) {
-    this.fragmentManager = fragmentManager;
+  void setVoicemailEntryValues(VoicemailEntry voicemailEntry) {
+    Assert.isNotNull(voicemailEntry);
+    Uri uri = Uri.parse(voicemailEntry.voicemailUri());
+    Assert.isNotNull(uri);
+    Assert.isNotNull(totalDurationView);
+
+    voicemailUri = uri;
+    totalDurationView.setText(
+        VoicemailEntryText.getVoicemailDuration(getContext(), voicemailEntry));
   }
 }
