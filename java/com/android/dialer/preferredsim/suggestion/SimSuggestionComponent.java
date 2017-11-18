@@ -14,27 +14,28 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator;
+package com.android.dialer.preferredsim.suggestion;
 
 import android.content.Context;
+import android.support.annotation.WorkerThread;
+import com.android.dialer.common.Assert;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
 
-/** Subcomponent that can be used to access the simulator implementation. */
+/** Dagger component for {@link SuggestionProvider} */
 @Subcomponent
-public abstract class SimulatorComponent {
+public abstract class SimSuggestionComponent {
+  public abstract SuggestionProvider getSuggestionProvider();
 
-  public abstract Simulator getSimulator();
-
-  public abstract SimulatorConnectionsBank getSimulatorConnectionsBank();
-
-  public static SimulatorComponent get(Context context) {
+  @WorkerThread
+  public static SimSuggestionComponent get(Context context) {
+    Assert.isWorkerThread();
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
-        .simulatorComponent();
+        .simSuggestionComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    SimulatorComponent simulatorComponent();
+    SimSuggestionComponent simSuggestionComponent();
   }
 }

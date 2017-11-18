@@ -14,23 +14,19 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.impl;
+package com.android.dialer.preferredsim.suggestion.stub;
 
-import com.android.dialer.simulator.Simulator;
-import com.android.dialer.simulator.SimulatorConnectionsBank;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
-/** This module provides an instance of the simulator. */
+/** Stub module for {@link com.android.dialer.preferredsim.suggestion.SimSuggestionComponent} */
 @Module
-public abstract class SimulatorModule {
-  @Binds
-  @Singleton
-  public abstract Simulator bindsSimulator(SimulatorImpl simulator);
+public abstract class StubSimSuggestionModule {
 
   @Binds
   @Singleton
-  public abstract SimulatorConnectionsBank bindsSimulatorConnectionsBank(
-      SimulatorConnectionsBankImpl simulatorConnectionsBank);
+  public abstract SuggestionProvider bindSuggestionProvider(
+      StubSuggestionProvider suggestionProvider);
 }
