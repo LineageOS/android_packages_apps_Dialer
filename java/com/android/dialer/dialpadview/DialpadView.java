@@ -22,9 +22,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
-import android.os.Build;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
@@ -33,7 +31,6 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.accessibility.AccessibilityManager;
@@ -90,7 +87,6 @@ public class DialpadView extends LinearLayout {
   private ViewGroup mRateContainer;
   private TextView mIldCountry;
   private TextView mIldRate;
-  private boolean mCanDigitsBeEdited;
 
   public DialpadView(Context context) {
     this(context, null);
@@ -154,16 +150,7 @@ public class DialpadView extends LinearLayout {
 
   private void setupKeypad() {
     final Resources resources = getContext().getResources();
-
-    final Locale currentLocale = resources.getConfiguration().locale;
-    final NumberFormat nf;
-    // We translate dialpad numbers only for "fa" and not any other locale
-    // ("ar" anybody ?).
-    if ("fa".equals(currentLocale.getLanguage())) {
-      nf = DecimalFormat.getInstance(CompatUtils.getLocale(getContext()));
-    } else {
-      nf = DecimalFormat.getInstance(Locale.ENGLISH);
-    }
+    final NumberFormat numberFormat = getNumberFormat();
 
     for (int i = 0; i < BUTTON_IDS.length; i++) {
       DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
@@ -178,7 +165,7 @@ public class DialpadView extends LinearLayout {
         numberString = resources.getString(R.string.dialpad_star_number);
         numberContentDescription = numberString;
       } else {
-        numberString = nf.format(i);
+        numberString = numberFormat.format(i);
         // The content description is used for Talkback key presses. The number is
         // separated by a "," to introduce a slight delay. Convert letters into a verbatim
         // span so that they are read as letters instead of as one word.
@@ -194,7 +181,7 @@ public class DialpadView extends LinearLayout {
       }
 
       final RippleDrawable rippleBackground =
-          (RippleDrawable) getDrawableCompat(getContext(), R.drawable.btn_dialpad_key);
+          (RippleDrawable) getContext().getDrawable(R.drawable.btn_dialpad_key);
       if (mRippleColor != null) {
         rippleBackground.setColor(mRippleColor);
       }
@@ -239,26 +226,19 @@ public class DialpadView extends LinearLayout {
     zero.setLongHoverContentDescription(resources.getText(R.string.description_image_button_plus));
   }
 
-  private Drawable getDrawableCompat(Context context, int id) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      return context.getDrawable(id);
-    } else {
-      return context.getResources().getDrawable(id);
-    }
-  }
+  private NumberFormat getNumberFormat() {
+    Locale locale = CompatUtils.getLocale(getContext());
 
-  public void setShowVoicemailButton(boolean show) {
-    View view = findViewById(R.id.dialpad_key_voicemail);
-    if (view != null) {
-      view.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
-    }
+    // Return the Persian number format if the current language is Persian.
+    return "fas".equals(locale.getISO3Language())
+        ? DecimalFormat.getInstance(locale)
+        : DecimalFormat.getInstance(Locale.ENGLISH);
   }
 
   /**
-   * Whether or not the digits above the dialer can be edited.
+   * Configure whether or not the digits above the dialpad can be edited.
    *
-   * @param canBeEdited If true, the backspace button will be shown and the digits EditText will be
-   *     configured to allow text manipulation.
+   * <p>If we allow editing digits, the backspace button will be shown.
    */
   public void setCanDigitsBeEdited(boolean canBeEdited) {
     View deleteButton = findViewById(R.id.deleteButton);
@@ -271,8 +251,6 @@ public class DialpadView extends LinearLayout {
     digits.setLongClickable(canBeEdited);
     digits.setFocusableInTouchMode(canBeEdited);
     digits.setCursorVisible(false);
-
-    mCanDigitsBeEdited = canBeEdited;
   }
 
   public void setCallRateInformation(String countryName, String displayRate) {
@@ -283,10 +261,6 @@ public class DialpadView extends LinearLayout {
     mRateContainer.setVisibility(View.VISIBLE);
     mIldCountry.setText(countryName);
     mIldRate.setText(displayRate);
-  }
-
-  public boolean canDigitsBeEdited() {
-    return mCanDigitsBeEdited;
   }
 
   /**

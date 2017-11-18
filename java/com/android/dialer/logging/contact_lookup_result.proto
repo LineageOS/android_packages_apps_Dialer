@@ -65,5 +65,40 @@ message ContactLookupResult {
     // Number was found in Dialer's local cache and was originally identified
     // via Cequint caller ID.
     LOCAL_CACHE_CEQUINT = 15;
+
+    // Number was identified by a remote data source not listed below
+    REMOTE_OTHER = 16;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as REMOTE_OTHER
+    LOCAL_CACHE_REMOTE_OTHER = 17;
+
+    // Number was identified by manually-entered caller ID data
+    REMOTE_MANUAL = 18;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as REMOTE_MANUAL
+    LOCAL_CACHE_REMOTE_MANUAL = 19;
+
+    // Number was identified by Google Voice data
+    REMOTE_GOOGLE_VOICE = 20;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as REMOTE_GOOGLE_VOICE
+    LOCAL_CACHE_REMOTE_GOOGLE_VOICE = 21;
+
+    // Number was identified by Customer Service Apps data
+    REMOTE_CSA = 22;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as REMOTE_CSA
+    LOCAL_CACHE_REMOTE_CSA = 23;
+
+    // Number was identified by Knowledge Graph data
+    REMOTE_KNOWLEDGE_GRAPH = 24;
+
+    // Number was found in Dialer's local cache and was originally identified
+    // as REMOTE_KNOWLEDGE_GRAPH
+    LOCAL_CACHE_REMOTE_KNOWLEDGE_GRAPH = 25;
   }
 }

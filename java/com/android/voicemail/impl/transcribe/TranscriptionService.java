@@ -69,15 +69,7 @@ public class TranscriptionService extends JobService {
   public static boolean scheduleNewVoicemailTranscriptionJob(
       Context context, Uri voicemailUri, PhoneAccountHandle account, boolean highPriority) {
     Assert.isMainThread();
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-      LogUtil.i(
-          "TranscriptionService.scheduleNewVoicemailTranscriptionJob", "not supported by sdk");
-      return false;
-    }
-    if (!carrierAllowsOttTranscription(context, account)) {
-      LogUtil.i(
-          "TranscriptionService.scheduleNewVoicemailTranscriptionJob",
-          "carrier doesn't allow transcription");
+    if (!canTranscribeVoicemail(context, account)) {
       return false;
     }
 
@@ -101,12 +93,24 @@ public class TranscriptionService extends JobService {
     return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
   }
 
-  private static boolean carrierAllowsOttTranscription(
-      Context context, PhoneAccountHandle account) {
+  private static boolean canTranscribeVoicemail(Context context, PhoneAccountHandle account) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "not supported by sdk");
+      return false;
+    }
     VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
-    return Boolean.parseBoolean(
+    if (!client.hasAcceptedTos(context, account)) {
+      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "hasn't accepted TOS");
+      return false;
+    }
+    if (!Boolean.parseBoolean(
         client.getCarrierConfigString(
-            context, account, CarrierConfigKeys.VVM_CARRIER_ALLOWS_OTT_TRANSCRIPTION_STRING));
+            context, account, CarrierConfigKeys.VVM_CARRIER_ALLOWS_OTT_TRANSCRIPTION_STRING))) {
+      LogUtil.i(
+          "TranscriptionService.canTranscribeVoicemail", "carrier doesn't allow transcription");
+      return false;
+    }
+    return true;
   }
 
   // Cancel all transcription tasks

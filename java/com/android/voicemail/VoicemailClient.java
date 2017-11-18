@@ -179,6 +179,8 @@ public interface VoicemailClient {
 
   void onTosAccepted(Context context, PhoneAccountHandle phoneAccountHandle);
 
+  boolean hasAcceptedTos(Context context, PhoneAccountHandle phoneAccountHandle);
+
   /**
    * @return arbitrary carrier configuration String value associate with the indicated key. See
    *     {@code CarrierConfigKeys.java}

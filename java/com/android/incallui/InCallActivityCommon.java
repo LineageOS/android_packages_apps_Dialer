@@ -18,12 +18,9 @@ package com.android.incallui;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.AppTask;
-import android.app.ActivityManager.TaskDescription;
 import android.app.Dialog;
-import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Trace;
 import android.support.annotation.IntDef;
@@ -33,12 +30,8 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.res.ResourcesCompat;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -47,7 +40,6 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
@@ -56,7 +48,6 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
-import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment.Callback;
 import com.google.common.base.Optional;
@@ -235,27 +226,6 @@ public class InCallActivityCommon {
     }
   }
 
-  public void onSaveInstanceState(Bundle out) {
-    // TODO: The dialpad fragment should handle this as part of its own state
-    out.putBoolean(INTENT_EXTRA_SHOW_DIALPAD, inCallActivity.isDialpadVisible());
-    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
-    if (dialpadFragment != null) {
-      out.putString(DIALPAD_TEXT_KEY, dialpadFragment.getDtmfText());
-    }
-  }
-
-  public void onStart() {
-    Trace.beginSection("InCallActivityCommon.onStart");
-    // setting activity should be last thing in setup process
-    InCallPresenter.getInstance().setActivity(inCallActivity);
-    inCallActivity.enableInCallOrientationEventListener(
-        inCallActivity.getRequestedOrientation()
-            == InCallOrientationEventListener.ACTIVITY_PREFERENCE_ALLOW_ROTATION);
-
-    InCallPresenter.getInstance().onActivityStarted();
-    Trace.endSection();
-  }
-
   public void onResume() {
     Trace.beginSection("InCallActivityCommon.onResume");
     if (InCallPresenter.getInstance().isReadyForTearDown()) {
@@ -263,7 +233,7 @@ public class InCallActivityCommon {
           "InCallActivityCommon.onResume",
           "InCallPresenter is ready for tear down, not sending updates");
     } else {
-      updateTaskDescription();
+      inCallActivity.updateTaskDescription();
       InCallPresenter.getInstance().onUiShowing(true);
     }
 
@@ -290,7 +260,7 @@ public class InCallActivityCommon {
       }
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
-    updateNavigationBar(inCallActivity.isDialpadVisible());
+    inCallActivity.updateNavigationBar(inCallActivity.isDialpadVisible());
 
     if (showPostCharWaitDialogOnResume) {
       showPostCharWaitDialog(showPostCharWaitDialogCallId, showPostCharWaitDialogChars);
@@ -300,48 +270,6 @@ public class InCallActivityCommon {
         .onInCallUiShown(
             inCallActivity.getIntent().getBooleanExtra(INTENT_EXTRA_FOR_FULL_SCREEN, false));
     Trace.endSection();
-  }
-
-  // onPause is guaranteed to be called when the InCallActivity goes
-  // in the background.
-  public void onPause() {
-    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
-    if (dialpadFragment != null) {
-      dialpadFragment.onDialerKeyUp(null);
-    }
-
-    InCallPresenter.getInstance().onUiShowing(false);
-    if (inCallActivity.isFinishing()) {
-      InCallPresenter.getInstance().unsetActivity(inCallActivity);
-    }
-  }
-
-  public void onStop() {
-    // Disconnects call waiting for account when activity is hidden e.g. user press home button.
-    // This is necessary otherwise the pending call will stuck on account choose and no new call
-    // will be able to create. See a bug for more details.
-    // Skip this on locked screen since the activity may go over life cycle and start again.
-    if (!isRecreating
-        && !inCallActivity.getSystemService(KeyguardManager.class).isKeyguardLocked()) {
-      DialerCall waitingForAccountCall = CallList.getInstance().getWaitingForAccountCall();
-      if (waitingForAccountCall != null) {
-        waitingForAccountCall.disconnect();
-      }
-    }
-
-    inCallActivity.enableInCallOrientationEventListener(false);
-    InCallPresenter.getInstance().updateIsChangingConfigurations();
-    InCallPresenter.getInstance().onActivityStopped();
-    if (!isRecreating) {
-      if (errorDialog != null) {
-        errorDialog.dismiss();
-      }
-    }
-  }
-
-  public void onDestroy() {
-    InCallPresenter.getInstance().unsetActivity(inCallActivity);
-    InCallPresenter.getInstance().updateIsChangingConfigurations();
   }
 
   void onNewIntent(Intent intent, boolean isRecreating) {
@@ -366,106 +294,6 @@ public class InCallActivityCommon {
     if (!isRecreating) {
       internalResolveIntent(intent);
     }
-  }
-
-  public boolean onBackPressed(boolean isInCallScreenVisible) {
-    LogUtil.i("InCallActivityCommon.onBackPressed", "");
-
-    // BACK is also used to exit out of any "special modes" of the
-    // in-call UI:
-    if (!inCallActivity.isVisible()) {
-      return true;
-    }
-
-    if (!isInCallScreenVisible) {
-      return true;
-    }
-
-    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
-    if (dialpadFragment != null && dialpadFragment.isVisible()) {
-      inCallActivity.showDialpadFragment(false /* show */, true /* animate */);
-      return true;
-    }
-
-    // Always disable the Back key while an incoming call is ringing
-    DialerCall call = CallList.getInstance().getIncomingCall();
-    if (call != null) {
-      LogUtil.i("InCallActivityCommon.onBackPressed", "consume Back press for an incoming call");
-      return true;
-    }
-
-    // Nothing special to do. Fall back to the default behavior.
-    return false;
-  }
-
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
-    // push input to the dialer.
-    if (dialpadFragment != null
-        && (dialpadFragment.isVisible())
-        && (dialpadFragment.onDialerKeyUp(event))) {
-      return true;
-    } else if (keyCode == KeyEvent.KEYCODE_CALL) {
-      // Always consume CALL to be sure the PhoneWindow won't do anything with it
-      return true;
-    }
-    return false;
-  }
-
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    switch (keyCode) {
-      case KeyEvent.KEYCODE_CALL:
-        boolean handled = InCallPresenter.getInstance().handleCallKey();
-        if (!handled) {
-          LogUtil.e(
-              "InCallActivityCommon.onKeyDown",
-              "InCallPresenter should always handle KEYCODE_CALL in onKeyDown");
-        }
-        // Always consume CALL to be sure the PhoneWindow won't do anything with it
-        return true;
-
-        // Note there's no KeyEvent.KEYCODE_ENDCALL case here.
-        // The standard system-wide handling of the ENDCALL key
-        // (see PhoneWindowManager's handling of KEYCODE_ENDCALL)
-        // already implements exactly what the UI spec wants,
-        // namely (1) "hang up" if there's a current active call,
-        // or (2) "don't answer" if there's a current ringing call.
-
-      case KeyEvent.KEYCODE_CAMERA:
-        // Disable the CAMERA button while in-call since it's too
-        // easy to press accidentally.
-        return true;
-
-      case KeyEvent.KEYCODE_VOLUME_UP:
-      case KeyEvent.KEYCODE_VOLUME_DOWN:
-      case KeyEvent.KEYCODE_VOLUME_MUTE:
-        // Ringer silencing handled by PhoneWindowManager.
-        break;
-
-      case KeyEvent.KEYCODE_MUTE:
-        TelecomAdapter.getInstance()
-            .mute(!AudioModeProvider.getInstance().getAudioState().isMuted());
-        return true;
-
-        // Various testing/debugging features, enabled ONLY when VERBOSE == true.
-      case KeyEvent.KEYCODE_SLASH:
-        if (LogUtil.isVerboseEnabled()) {
-          LogUtil.v(
-              "InCallActivityCommon.onKeyDown",
-              "----------- InCallActivity View dump --------------");
-          // Dump starting from the top-level view of the entire activity:
-          Window w = inCallActivity.getWindow();
-          View decorView = w.getDecorView();
-          LogUtil.v("InCallActivityCommon.onKeyDown", "View dump:" + decorView);
-          return true;
-        }
-        break;
-      case KeyEvent.KEYCODE_EQUALS:
-        break;
-      default: // fall out
-    }
-
-    return event.getRepeatCount() == 0 && handleDialerKeyDown(keyCode, event);
   }
 
   private void setWindowFlags() {
@@ -496,20 +324,6 @@ public class InCallActivityCommon {
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
   public static void setAudioRouteForTesting(int audioRoute) {
     audioRouteForTesting = Optional.of(audioRoute);
-  }
-
-  private boolean handleDialerKeyDown(int keyCode, KeyEvent event) {
-    LogUtil.v("InCallActivityCommon.handleDialerKeyDown", "keyCode %d, event: %s", keyCode, event);
-
-    // As soon as the user starts typing valid dialable keys on the
-    // keyboard (presumably to type DTMF tones) we start passing the
-    // key events to the DTMFDialer's onDialerKeyDown.
-    DialpadFragment dialpadFragment = inCallActivity.getDialpadFragment();
-    if (dialpadFragment != null && dialpadFragment.isVisible()) {
-      return dialpadFragment.onDialerKeyDown(event);
-    }
-
-    return false;
   }
 
   public void showPostCharWaitDialog(String callId, String chars) {
@@ -562,16 +376,6 @@ public class InCallActivityCommon {
             "InCallActivityCommon.setExcludeFromRecents",
             "RuntimeException when excluding task from recents.",
             e);
-      }
-    }
-  }
-
-  void updateNavigationBar(boolean isDialpadVisible) {
-    if (!ActivityCompat.isInMultiWindowMode(inCallActivity)) {
-      View navigationBarBackground =
-          inCallActivity.getWindow().findViewById(R.id.navigation_bar_background);
-      if (navigationBarBackground != null) {
-        navigationBarBackground.setVisibility(isDialpadVisible ? View.VISIBLE : View.GONE);
       }
     }
   }
@@ -637,7 +441,7 @@ public class InCallActivityCommon {
     dialpadFragmentManager.executePendingTransactions();
 
     Logger.get(inCallActivity).logScreenView(ScreenEvent.Type.INCALL_DIALPAD, inCallActivity);
-    updateNavigationBar(true /* isDialpadVisible */);
+    inCallActivity.updateNavigationBar(true /* isDialpadVisible */);
   }
 
   private void performHideDialpadFragment() {
@@ -655,23 +459,7 @@ public class InCallActivityCommon {
       transaction.commitAllowingStateLoss();
       fragmentManager.executePendingTransactions();
     }
-    updateNavigationBar(false /* isDialpadVisible */);
-  }
-
-  public void updateTaskDescription() {
-    Resources resources = inCallActivity.getResources();
-    int color;
-    if (resources.getBoolean(R.bool.is_layout_landscape)) {
-      color =
-          ResourcesCompat.getColor(
-              resources, R.color.statusbar_background_color, inCallActivity.getTheme());
-    } else {
-      color = InCallPresenter.getInstance().getThemeColorManager().getSecondaryColor();
-    }
-
-    TaskDescription td =
-        new TaskDescription(resources.getString(R.string.notification_ongoing_call), null, color);
-    inCallActivity.setTaskDescription(td);
+    inCallActivity.updateNavigationBar(false /* isDialpadVisible */);
   }
 
   private void internalResolveIntent(Intent intent) {
@@ -755,6 +543,12 @@ public class InCallActivityCommon {
   @Deprecated
   void setErrorDialog(@Nullable Dialog errorDialog) {
     this.errorDialog = errorDialog;
+  }
+
+  /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
+  @Deprecated
+  boolean getIsRecreating() {
+    return isRecreating;
   }
 
   /** @deprecated Only for temporary use during the deprecation of {@link InCallActivityCommon} */
