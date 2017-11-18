@@ -104,6 +104,7 @@
       <!-- a bug -->
       <item value="AUTH=DIGEST-MD5"/>
     </string-array>
+    <string name="vvm_carrier_allows_ott_transcription_string">true</string>
   </pbundle_as_map>
 
   <pbundle_as_map>
