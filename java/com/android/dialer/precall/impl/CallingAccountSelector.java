@@ -59,16 +59,27 @@ public class CallingAccountSelector implements PreCallAction {
   private boolean isDiscarding;
 
   @Override
-  @MainThread
-  public void run(PreCallCoordinator coordinator) {
-    CallIntentBuilder builder = coordinator.getBuilder();
+  public boolean requiresUi(Context context, CallIntentBuilder builder) {
     if (builder.getPhoneAccountHandle() != null) {
-      return;
+      return false;
     }
-    Activity activity = coordinator.getActivity();
-    TelecomManager telecomManager = activity.getSystemService(TelecomManager.class);
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     List<PhoneAccountHandle> accounts = telecomManager.getCallCapablePhoneAccounts();
     if (accounts.size() <= 1) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public void runWithoutUi(Context context, CallIntentBuilder builder) {
+    // do nothing.
+  }
+
+  @Override
+  public void runWithUi(PreCallCoordinator coordinator) {
+    CallIntentBuilder builder = coordinator.getBuilder();
+    if (!requiresUi(coordinator.getActivity(), builder)) {
       return;
     }
     switch (builder.getUri().getScheme()) {

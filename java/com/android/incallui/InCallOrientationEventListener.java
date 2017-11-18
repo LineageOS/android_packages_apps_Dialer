@@ -126,12 +126,13 @@ public class InCallOrientationEventListener extends OrientationEventListener {
   }
 
   /**
-   * Enables the OrientationEventListener and notifies listeners of current orientation if notify
-   * flag is true
+   * Enables the OrientationEventListener and optionally notifies listeners of the current
+   * orientation.
    *
-   * @param notify true or false. Notify device orientation changed if true.
+   * @param notifyDeviceOrientationChange Whether to notify listeners that the device orientation is
+   *     changed.
    */
-  public void enable(boolean notify) {
+  public void enable(boolean notifyDeviceOrientationChange) {
     if (mEnabled) {
       Log.v(this, "enable: Orientation listener is already enabled. Ignoring...");
       return;
@@ -139,15 +140,15 @@ public class InCallOrientationEventListener extends OrientationEventListener {
 
     super.enable();
     mEnabled = true;
-    if (notify) {
+    if (notifyDeviceOrientationChange) {
       InCallPresenter.getInstance().onDeviceOrientationChange(sCurrentOrientation);
     }
   }
 
-  /** Enables the OrientationEventListener with notify flag defaulting to false. */
+  /** Enables the OrientationEventListener. */
   @Override
   public void enable() {
-    enable(false);
+    enable(false /* notifyDeviceOrientationChange */);
   }
 
   /** Disables the OrientationEventListener. */
