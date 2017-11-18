@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,7 +50,8 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
     Action.CREATE_NEW_CONTACT,
     Action.ADD_TO_CONTACT,
     Action.SEND_SMS,
-    Action.MAKE_VILTE_CALL
+    Action.MAKE_VILTE_CALL,
+    Action.MAKE_VOICE_CALL
   })
   @interface Action {
     int INVALID = 0;
@@ -61,6 +63,8 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
     int SEND_SMS = 3;
     /** Attempts to make a VILTE call to the number. */
     int MAKE_VILTE_CALL = 4;
+    /** Places a voice call to the number. */
+    int MAKE_VOICE_CALL = 5;
   }
 
   private final Context context;
@@ -70,6 +74,7 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
   private @Action int action;
   private int position;
   private String query;
+  private CallInitiationType.Type callInitiationType;
 
   SearchActionViewHolder(View view) {
     super(view);
@@ -79,10 +84,11 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
     view.setOnClickListener(this);
   }
 
-  void setAction(@Action int action, int position, String query) {
+  void setAction(@Action int action, int position, String query, CallInitiationType.Type type) {
     this.action = action;
     this.position = position;
     this.query = query;
+    this.callInitiationType = type;
     switch (action) {
       case Action.ADD_TO_CONTACT:
         actionText.setText(R.string.search_shortcut_add_to_contact);
@@ -100,10 +106,21 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
         actionText.setText(R.string.search_shortcut_send_sms_message);
         actionImage.setImageResource(R.drawable.quantum_ic_message_vd_theme_24);
         break;
+      case Action.MAKE_VOICE_CALL:
+        actionText.setText(context.getString(R.string.search_shortcut_make_voice_call, query));
+        actionImage.setImageResource(R.drawable.quantum_ic_phone_vd_theme_24);
+        break;
       case Action.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid action: " + action);
+
     }
+  }
+
+  @VisibleForTesting
+  @Action
+  int getAction() {
+    return action;
   }
 
   @Override
@@ -123,19 +140,29 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
         break;
 
       case Action.MAKE_VILTE_CALL:
-        CallSpecificAppData callSpecificAppData =
+        CallSpecificAppData videoCallSpecificAppData =
             CallSpecificAppData.newBuilder()
-                .setCallInitiationType(CallInitiationType.Type.DIALPAD)
+                .setCallInitiationType(callInitiationType)
                 .setPositionOfSelectedSearchResult(position)
                 .setCharactersInSearchString(query.length())
                 .build();
         PreCall.start(
-            context, new CallIntentBuilder(query, callSpecificAppData).setIsVideoCall(true));
+            context, new CallIntentBuilder(query, videoCallSpecificAppData).setIsVideoCall(true));
         break;
 
       case Action.SEND_SMS:
         intent = IntentUtil.getSendSmsIntent(query);
         DialerUtils.startActivityWithErrorToast(context, intent);
+        break;
+
+      case Action.MAKE_VOICE_CALL:
+        CallSpecificAppData voiceCallSpecificAppData =
+            CallSpecificAppData.newBuilder()
+                .setCallInitiationType(callInitiationType)
+                .setPositionOfSelectedSearchResult(position)
+                .setCharactersInSearchString(query.length())
+                .build();
+        PreCall.start(context, new CallIntentBuilder(query, voiceCallSpecificAppData));
         break;
 
       case Action.INVALID:
