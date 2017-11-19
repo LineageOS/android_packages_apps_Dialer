@@ -28,6 +28,9 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.simulator.SimulatorComponent;
+import com.android.dialer.simulator.SimulatorConnectionsBank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,7 @@ import java.util.List;
 public class SimulatorConnectionService extends ConnectionService {
   private static final List<Listener> listeners = new ArrayList<>();
   private static SimulatorConnectionService instance;
+  private SimulatorConnectionsBank simulatorConnectionsBank;
 
   public static SimulatorConnectionService getInstance() {
     return instance;
@@ -52,12 +56,14 @@ public class SimulatorConnectionService extends ConnectionService {
   public void onCreate() {
     super.onCreate();
     instance = this;
+    simulatorConnectionsBank = SimulatorComponent.get(this).getSimulatorConnectionsBank();
   }
 
   @Override
   public void onDestroy() {
     LogUtil.enterBlock("SimulatorConnectionService.onDestroy");
     instance = null;
+    simulatorConnectionsBank = null;
     super.onDestroy();
   }
 
@@ -78,7 +84,12 @@ public class SimulatorConnectionService extends ConnectionService {
     SimulatorConnection connection = new SimulatorConnection(this, request);
     connection.setDialing();
     connection.setAddress(request.getAddress(), TelecomManager.PRESENTATION_ALLOWED);
-
+    simulatorConnectionsBank.add(connection);
+    ThreadUtil.postOnUiThread(
+        () ->
+            SimulatorComponent.get(instance)
+                .getSimulatorConnectionsBank()
+                .updateConferenceableConnections());
     for (Listener listener : listeners) {
       listener.onNewOutgoingConnection(connection);
     }
@@ -102,7 +113,12 @@ public class SimulatorConnectionService extends ConnectionService {
     SimulatorConnection connection = new SimulatorConnection(this, request);
     connection.setRinging();
     connection.setAddress(getPhoneNumber(request), TelecomManager.PRESENTATION_ALLOWED);
-
+    simulatorConnectionsBank.add(connection);
+    ThreadUtil.postOnUiThread(
+        () ->
+            SimulatorComponent.get(instance)
+                .getSimulatorConnectionsBank()
+                .updateConferenceableConnections());
     for (Listener listener : listeners) {
       listener.onNewIncomingConnection(connection);
     }

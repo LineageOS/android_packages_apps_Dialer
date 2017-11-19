@@ -82,7 +82,7 @@ import java.util.List;
  */
 public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
-  private static final String TAG = PhoneNumberInteraction.class.getSimpleName();
+  static final String TAG = PhoneNumberInteraction.class.getSimpleName();
   /** The identifier for a permissions request if one is generated. */
   public static final int REQUEST_READ_CONTACTS = 1;
 
@@ -356,12 +356,19 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   }
 
   private void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
+    // TODO(a bug): don't leak the activity
     final Activity activity = (Activity) mContext;
+    if (activity.isFinishing()) {
+      LogUtil.i("PhoneNumberInteraction.showDisambiguationDialog", "activity finishing");
+      return;
+    }
+
     if (activity.isDestroyed()) {
       // Check whether the activity is still running
       LogUtil.i("PhoneNumberInteraction.showDisambiguationDialog", "activity destroyed");
       return;
     }
+
     try {
       PhoneDisambiguationDialogFragment.show(
           activity.getFragmentManager(),

@@ -14,25 +14,19 @@
  * limitations under the License
  */
 
-package com.android.voicemail.testing;
+package com.android.dialer.preferredsim.suggestion.stub;
 
-import com.android.voicemail.VoicemailClient;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 import javax.inject.Singleton;
 
-/** Used to set a mock voicemail client for unit tests. */
+/** Stub module for {@link com.android.dialer.preferredsim.suggestion.SimSuggestionComponent} */
 @Module
-public final class TestVoicemailModule {
-  private static VoicemailClient voicemailClient;
+public abstract class StubSimSuggestionModule {
 
-  public static void setVoicemailClient(VoicemailClient voicemailClient) {
-    TestVoicemailModule.voicemailClient = voicemailClient;
-  }
-
-  @Provides
+  @Binds
   @Singleton
-  public static VoicemailClient provideVoicemailClient() {
-    return voicemailClient;
-  }
+  public abstract SuggestionProvider bindSuggestionProvider(
+      StubSuggestionProvider suggestionProvider);
 }

@@ -16,6 +16,8 @@ message ContactSource {
   // number's status at the time they made or received the call.
   // Type definitions are from the CachedContactInfo interface in
   // CachedNumberLookupService.java
+  // When adding new sources here, consider updating the isPeopleApiSource() and
+  // isBusiness() methods in LookupSourceUtils.java if needed.
   enum Type {
     UNKNOWN_SOURCE_TYPE = 0;
 
@@ -36,5 +38,20 @@ message ContactSource {
     SOURCE_TYPE_CNAP = 5;
 
     SOURCE_TYPE_CEQUINT_CALLER_ID = 6;
+
+    // A remote source not listed below
+    SOURCE_TYPE_REMOTE_OTHER = 7;
+
+    // Manually-entered caller ID data
+    SOURCE_TYPE_REMOTE_MANUAL = 8;
+
+    // Google Voice short code data
+    SOURCE_TYPE_REMOTE_GOOGLE_VOICE = 9;
+
+    // Customer Service Applications data
+    SOURCE_TYPE_REMOTE_CSA = 10;
+
+    // Knowledge Graph data
+    SOURCE_TYPE_REMOTE_KNOWLEDGE_GRAPH = 11;
   }
 }

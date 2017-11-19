@@ -19,11 +19,13 @@ package com.android.dialer.searchfragment.remote;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.searchfragment.common.Projections;
@@ -77,7 +79,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
         cursors[i] = null;
         continue;
       }
-      cursors[i] =
+      Cursor cursor =
           getContext()
               .getContentResolver()
               .query(
@@ -86,8 +88,55 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
                   getSelection(),
                   getSelectionArgs(),
                   getSortOrder());
+      // Even though the cursor specifies "WHERE PHONE_NUMBER IS NOT NULL" the Blackberry Hub app's
+      // directory extension doesn't appear to respect it, and sometimes returns a null phone
+      // number. In this case just hide the row entirely. See a bug.
+      cursors[i] = createMatrixCursorFilteringNullNumbers(cursor);
     }
     return RemoteContactsCursor.newInstance(getContext(), cursors, directories);
+  }
+
+  private MatrixCursor createMatrixCursorFilteringNullNumbers(Cursor cursor) {
+    if (cursor == null) {
+      return null;
+    }
+    MatrixCursor matrixCursor = new MatrixCursor(cursor.getColumnNames());
+    try {
+      if (cursor.moveToFirst()) {
+        do {
+          String number = cursor.getString(Projections.PHONE_NUMBER);
+          if (number == null) {
+            continue;
+          }
+          matrixCursor.addRow(objectArrayFromCursor(cursor));
+        } while (cursor.moveToNext());
+      }
+    } finally {
+      cursor.close();
+    }
+    return matrixCursor;
+  }
+
+  @NonNull
+  private static Object[] objectArrayFromCursor(@NonNull Cursor cursor) {
+    Object[] values = new Object[cursor.getColumnCount()];
+    for (int i = 0; i < cursor.getColumnCount(); i++) {
+      int fieldType = cursor.getType(i);
+      if (fieldType == Cursor.FIELD_TYPE_BLOB) {
+        values[i] = cursor.getBlob(i);
+      } else if (fieldType == Cursor.FIELD_TYPE_FLOAT) {
+        values[i] = cursor.getDouble(i);
+      } else if (fieldType == Cursor.FIELD_TYPE_INTEGER) {
+        values[i] = cursor.getLong(i);
+      } else if (fieldType == Cursor.FIELD_TYPE_STRING) {
+        values[i] = cursor.getString(i);
+      } else if (fieldType == Cursor.FIELD_TYPE_NULL) {
+        values[i] = null;
+      } else {
+        throw new IllegalStateException("Unknown fieldType (" + fieldType + ") for column: " + i);
+      }
+    }
+    return values;
   }
 
   @VisibleForTesting

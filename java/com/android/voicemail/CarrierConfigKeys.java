@@ -14,27 +14,18 @@
  * limitations under the License
  */
 
-package com.android.incallui.maps.testing;
+package com.android.voicemail;
 
-import android.support.annotation.Nullable;
-import com.android.incallui.maps.Maps;
-import dagger.Module;
-import dagger.Provides;
+/**
+ * Keys used to lookup carrier specific configuration strings. See {@code
+ * VoicemailClient.getCarrierConfigString}
+ */
+public interface CarrierConfigKeys {
 
-/** This module provides a instance of maps for testing. */
-@Module
-public final class TestMapsModule {
-
-  @Nullable private static Maps maps;
-
-  public static void setMaps(@Nullable Maps maps) {
-    TestMapsModule.maps = maps;
-  }
-
-  @Provides
-  static Maps getMaps() {
-    return maps;
-  }
-
-  private TestMapsModule() {}
+  /**
+   * Carrier config key whose value will be 'true' for carriers that allow over the top voicemail
+   * transcription.
+   */
+  String VVM_CARRIER_ALLOWS_OTT_TRANSCRIPTION_STRING =
+      "vvm_carrier_allows_ott_transcription_string";
 }

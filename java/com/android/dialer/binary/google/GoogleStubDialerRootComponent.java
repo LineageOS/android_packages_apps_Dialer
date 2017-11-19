@@ -26,6 +26,7 @@ import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.precall.impl.PreCallModule;
+import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
@@ -49,6 +50,7 @@ import javax.inject.Singleton;
     PhoneLookupModule.class, // TODO(zachh): Module which uses APDL?
     PhoneNumberGeoUtilModule.class,
     PreCallModule.class,
+    StubSimSuggestionModule.class,
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StorageModule.class,

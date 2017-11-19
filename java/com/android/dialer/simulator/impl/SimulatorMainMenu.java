@@ -29,6 +29,7 @@ import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
+import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 
 /** Implements the top level simulator menu. */
 final class SimulatorMainMenu {
@@ -40,6 +41,7 @@ final class SimulatorMainMenu {
         .addItem("Notifications", SimulatorNotifications.getActionProvider(context))
         .addItem("Populate database", () -> populateDatabase(context))
         .addItem("Clean database", () -> cleanDatabase(context))
+        .addItem("clear preferred SIM", () -> clearPreferredSim(context))
         .addItem("Sync voicemail", () -> syncVoicemail(context))
         .addItem("Share persistent log", () -> sharePersistentLog(context))
         .addItem(
@@ -59,6 +61,14 @@ final class SimulatorMainMenu {
     DialerExecutorComponent.get(context)
         .dialerExecutorFactory()
         .createNonUiTaskBuilder(new CleanDatabaseWorker())
+        .build()
+        .executeSerial(context);
+  }
+
+  private static void clearPreferredSim(Context context) {
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new ClearPreferredSimWorker())
         .build()
         .executeSerial(context);
   }
@@ -105,6 +115,15 @@ final class SimulatorMainMenu {
       ContactsPopulator.deleteAllContacts(context);
       CallLogPopulator.deleteAllCallLog(context);
       VoicemailPopulator.deleteAllVoicemail(context);
+      return null;
+    }
+  }
+
+  private static class ClearPreferredSimWorker implements Worker<Context, Void> {
+    @Nullable
+    @Override
+    public Void doInBackground(Context context) {
+      context.getContentResolver().delete(PreferredSimFallbackContract.CONTENT_URI, null, null);
       return null;
     }
   }

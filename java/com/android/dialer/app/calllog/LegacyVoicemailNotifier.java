@@ -40,6 +40,7 @@ import com.android.dialer.notification.NotificationChannelManager;
 /** Shows a notification in the status bar for legacy vociemail. */
 @TargetApi(VERSION_CODES.O)
 public final class LegacyVoicemailNotifier {
+  private static final String NOTIFICATION_TAG_PREFIX = "LegacyVoicemail_";
   private static final String NOTIFICATION_TAG = "LegacyVoicemail";
   private static final int NOTIFICATION_ID = 1;
 
@@ -77,7 +78,8 @@ public final class LegacyVoicemailNotifier {
             callVoicemailIntent,
             voicemailSettingsIntent,
             isRefresh);
-    DialerNotificationManager.notify(context, NOTIFICATION_TAG, NOTIFICATION_ID, notification);
+    DialerNotificationManager.notify(
+        context, getNotificationTag(context, handle), NOTIFICATION_ID, notification);
   }
 
   @NonNull
@@ -146,10 +148,22 @@ public final class LegacyVoicemailNotifier {
     }
   }
 
-  public static void cancelNotification(@NonNull Context context) {
+  public static void cancelNotification(
+      @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
     LogUtil.enterBlock("LegacyVoicemailNotifier.cancelNotification");
     Assert.checkArgument(BuildCompat.isAtLeastO());
-    DialerNotificationManager.cancel(context, NOTIFICATION_TAG, NOTIFICATION_ID);
+    Assert.isNotNull(phoneAccountHandle);
+    DialerNotificationManager.cancel(
+        context, getNotificationTag(context, phoneAccountHandle), NOTIFICATION_ID);
+  }
+
+  @NonNull
+  private static String getNotificationTag(
+      @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
+    if (context.getSystemService(TelephonyManager.class).getPhoneCount() <= 1) {
+      return NOTIFICATION_TAG;
+    }
+    return NOTIFICATION_TAG_PREFIX + phoneAccountHandle.getId();
   }
 
   private LegacyVoicemailNotifier() {}

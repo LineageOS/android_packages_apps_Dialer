@@ -89,6 +89,13 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + AnnotatedCallLog.CALL_TYPE
           + ");";
 
+  private static final String CREATE_INDEX_ON_NUMBER_SQL =
+      "create index number_index on "
+          + AnnotatedCallLog.TABLE
+          + " ("
+          + AnnotatedCallLog.NUMBER
+          + ");";
+
   @Override
   public void onCreate(SQLiteDatabase db) {
     LogUtil.enterBlock("AnnotatedCallLogDatabaseHelper.onCreate");
@@ -96,6 +103,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     db.execSQL(CREATE_TABLE_SQL);
     db.execSQL(String.format(Locale.US, CREATE_TRIGGER_SQL, maxRows, maxRows));
     db.execSQL(CREATE_INDEX_ON_CALL_TYPE_SQL);
+    db.execSQL(CREATE_INDEX_ON_NUMBER_SQL);
     // TODO(zachh): Consider logging impression.
     LogUtil.i(
         "AnnotatedCallLogDatabaseHelper.onCreate",

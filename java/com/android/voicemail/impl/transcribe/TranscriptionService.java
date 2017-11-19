@@ -24,10 +24,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
@@ -35,6 +34,9 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.voicemail.CarrierConfigKeys;
+import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,34 +67,50 @@ public class TranscriptionService extends JobService {
   // donation.
   @MainThread
   public static boolean scheduleNewVoicemailTranscriptionJob(
-      Context context,
-      Uri voicemailUri,
-      @Nullable PhoneAccountHandle account,
-      boolean highPriority) {
+      Context context, Uri voicemailUri, PhoneAccountHandle account, boolean highPriority) {
     Assert.isMainThread();
-    if (BuildCompat.isAtLeastO()) {
-      LogUtil.i(
-          "TranscriptionService.scheduleNewVoicemailTranscriptionJob", "scheduling transcription");
-      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED);
-
-      ComponentName componentName = new ComponentName(context, TranscriptionService.class);
-      JobInfo.Builder builder =
-          new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName);
-      if (highPriority) {
-        builder
-            .setMinimumLatency(0)
-            .setOverrideDeadline(0)
-            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
-      } else {
-        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
-      }
-      JobScheduler scheduler = context.getSystemService(JobScheduler.class);
-      JobWorkItem workItem = makeWorkItem(voicemailUri, account);
-      return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
-    } else {
-      LogUtil.i("TranscriptionService.scheduleNewVoicemailTranscriptionJob", "not supported");
+    if (!canTranscribeVoicemail(context, account)) {
       return false;
     }
+
+    LogUtil.i(
+        "TranscriptionService.scheduleNewVoicemailTranscriptionJob", "scheduling transcription");
+    Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_VOICEMAIL_RECEIVED);
+
+    ComponentName componentName = new ComponentName(context, TranscriptionService.class);
+    JobInfo.Builder builder =
+        new JobInfo.Builder(ScheduledJobIds.VVM_TRANSCRIPTION_JOB, componentName);
+    if (highPriority) {
+      builder
+          .setMinimumLatency(0)
+          .setOverrideDeadline(0)
+          .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+    } else {
+      builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+    }
+    JobScheduler scheduler = context.getSystemService(JobScheduler.class);
+    JobWorkItem workItem = makeWorkItem(voicemailUri, account);
+    return scheduler.enqueue(builder.build(), workItem) == JobScheduler.RESULT_SUCCESS;
+  }
+
+  private static boolean canTranscribeVoicemail(Context context, PhoneAccountHandle account) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "not supported by sdk");
+      return false;
+    }
+    VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
+    if (!client.hasAcceptedTos(context, account)) {
+      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "hasn't accepted TOS");
+      return false;
+    }
+    if (!Boolean.parseBoolean(
+        client.getCarrierConfigString(
+            context, account, CarrierConfigKeys.VVM_CARRIER_ALLOWS_OTT_TRANSCRIPTION_STRING))) {
+      LogUtil.i(
+          "TranscriptionService.canTranscribeVoicemail", "carrier doesn't allow transcription");
+      return false;
+    }
+    return true;
   }
 
   // Cancel all transcription tasks
