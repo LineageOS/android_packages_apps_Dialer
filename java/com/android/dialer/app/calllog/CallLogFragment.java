@@ -20,6 +20,7 @@ import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -600,6 +601,15 @@ public class CallLogFragment extends Fragment
   /** Cancels any pending update requests to update the relative call times (X mins ago). */
   private void cancelDisplayUpdate() {
     mDisplayUpdateHandler.removeMessages(EVENT_UPDATE_DISPLAY);
+  }
+
+  /** Mark all missed calls as read if Keyguard not locked and possible. */
+  void markMissedCallsAsReadAndRemoveNotifications() {
+    if (mCallLogQueryHandler != null
+        && !getContext().getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+      mCallLogQueryHandler.markMissedCallsAsRead();
+      CallLogNotificationsService.cancelAllMissedCalls(getContext());
+    }
   }
 
   @CallSuper
