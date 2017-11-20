@@ -74,4 +74,10 @@
   <string-array name="motorola_hidden_menu_key_pattern_intents">
     <item>@string/motorola_hidden_menu_intent</item>
   </string-array>
+
+  <!-- This defines the provider names for cequint callerid applications
+       used for different carriers-->
+  <string-array name="cequint_providers">
+    <item>com.cequint.ecid</item>
+  </string-array>
 </resources>
