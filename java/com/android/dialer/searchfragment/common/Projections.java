@@ -39,8 +39,10 @@ public class Projections {
   @SuppressWarnings("unused")
   public static final int SORT_KEY = 11;
 
-  public static final int COMPANY_NAME = 12;
-  public static final int NICKNAME = 13;
+  public static final int SORT_ALTERNATIVE = 12;
+
+  public static final int COMPANY_NAME = 13;
+  public static final int NICKNAME = 14;
 
   public static final String[] CP2_PROJECTION =
       new String[] {
@@ -56,8 +58,29 @@ public class Projections {
         Data.CONTACT_ID, // 9
         Data.MIMETYPE, // 10
         Data.SORT_KEY_PRIMARY, // 11
-        Organization.COMPANY, // 12
-        Nickname.NAME // 13
+        Data.SORT_KEY_ALTERNATIVE, // 12
+        Organization.COMPANY, // 13
+        Nickname.NAME // 14
+      };
+
+  // Uses alternative display names (i.e. "Bob Dylan" becomes "Dylan, Bob").
+  public static final String[] CP2_PROJECTION_ALTERNATIVE =
+      new String[] {
+        Data._ID, // 0
+        Phone.TYPE, // 1
+        Phone.LABEL, // 2
+        Phone.NUMBER, // 3
+        Data.DISPLAY_NAME_ALTERNATIVE, // 4
+        Data.PHOTO_ID, // 5
+        Data.PHOTO_THUMBNAIL_URI, // 6
+        Data.LOOKUP_KEY, // 7
+        Data.CARRIER_PRESENCE, // 8
+        Data.CONTACT_ID, // 9
+        Data.MIMETYPE, // 10
+        Data.SORT_KEY_PRIMARY, // 11
+        Data.SORT_KEY_ALTERNATIVE, // 12
+        Organization.COMPANY, // 13
+        Nickname.NAME // 14
       };
 
   public static final String[] DATA_PROJECTION =
