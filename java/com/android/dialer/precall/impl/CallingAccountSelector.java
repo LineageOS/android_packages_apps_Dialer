@@ -39,6 +39,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
@@ -62,6 +63,11 @@ public class CallingAccountSelector implements PreCallAction {
 
   @Override
   public boolean requiresUi(Context context, CallIntentBuilder builder) {
+    if (!ConfigProviderBindings.get(context)
+        .getBoolean("precall_calling_account_selector_enabled", true)) {
+      return false;
+    }
+
     if (builder.getPhoneAccountHandle() != null) {
       return false;
     }
