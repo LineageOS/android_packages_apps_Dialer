@@ -29,7 +29,11 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
+import com.android.dialer.databasepopulator.VoicemailPopulator.Voicemail.Builder;
 import com.google.auto.value.AutoValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /** Populates the device database with voicemail entries. */
@@ -74,14 +78,19 @@ public final class VoicemailPopulator {
   };
 
   @WorkerThread
-  public static void populateVoicemail(@NonNull Context context) {
+  public static void populateVoicemail(@NonNull Context context, boolean fastMode) {
     Assert.isWorkerThread();
     enableVoicemail(context);
-
+    List<Builder> voicemails = new ArrayList<>();
+    if (fastMode) {
+      voicemails.add(SIMPLE_VOICEMAILS[0]);
+    } else {
+      voicemails = Arrays.asList(SIMPLE_VOICEMAILS);
+    }
     // Do this 4 times to make the voicemail database 4 times bigger.
     long timeMillis = System.currentTimeMillis();
     for (int i = 0; i < 4; i++) {
-      for (Voicemail.Builder builder : SIMPLE_VOICEMAILS) {
+      for (Voicemail.Builder builder : voicemails) {
         Voicemail voicemail = builder.setTimeMillis(timeMillis).build();
         context
             .getContentResolver()
@@ -94,11 +103,16 @@ public final class VoicemailPopulator {
   }
 
   @WorkerThread
+  public static void populateVoicemail(@NonNull Context context) {
+    populateVoicemail(context, false);
+  }
+
+  @WorkerThread
   public static void deleteAllVoicemail(@NonNull Context context) {
     Assert.isWorkerThread();
     context
         .getContentResolver()
-        .delete(Voicemails.buildSourceUri(context.getPackageName()), "", new String[] {});
+        .delete(Voicemails.buildSourceUri(context.getPackageName()), null, null);
   }
 
   @VisibleForTesting
