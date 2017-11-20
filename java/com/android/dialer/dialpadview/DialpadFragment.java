@@ -643,7 +643,7 @@ public class DialpadFragment extends Fragment
       iconId = R.drawable.ic_wifi_calling;
     }
     mFloatingActionButtonController.changeIcon(
-        iconId, res.getString(R.string.description_dial_button));
+        getContext(), iconId, res.getString(R.string.description_dial_button));
 
     mDialpadQueryListener =
         FragmentUtils.getParentUnsafe(this, OnDialpadQueryChangedListener.class);
