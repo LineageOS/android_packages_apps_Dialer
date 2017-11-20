@@ -32,6 +32,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryFilteringUtil;
 import java.lang.annotation.Retention;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -108,25 +110,24 @@ final class ContactFilterCursor implements Cursor {
   private static Cursor createCursor(Cursor cursor) {
     // Convert cursor rows into Cp2Contacts
     List<Cp2Contact> cp2Contacts = new ArrayList<>();
-    Set<Integer> contactIds = new ArraySet<>();
+    Map<Integer, Integer> contactIdsToPosition = new ArrayMap<>();
     cursor.moveToPosition(-1);
     while (cursor.moveToNext()) {
       Cp2Contact contact = Cp2Contact.fromCursor(cursor);
       cp2Contacts.add(contact);
-      contactIds.add(contact.contactId());
+      contactIdsToPosition.put(contact.contactId(), cursor.getPosition());
     }
     cursor.close();
 
     // Group then combine contact data
     List<Cp2Contact> coalescedContacts = new ArrayList<>();
-    for (Integer contactId : contactIds) {
+    for (Integer contactId : contactIdsToPosition.keySet()) {
       List<Cp2Contact> duplicateContacts = getAllContactsWithContactId(contactId, cp2Contacts);
       coalescedContacts.addAll(coalesceContacts(duplicateContacts));
     }
 
-    // Sort by display name, then build new cursor from coalesced contacts.
-    // We sort the contacts so that they are displayed to the user in lexicographic order.
-    Collections.sort(coalescedContacts, (o1, o2) -> o1.displayName().compareTo(o2.displayName()));
+    // Sort the contacts back into the exact same order they were inside of {@code cursor}
+    Collections.sort(coalescedContacts, (o1, o2) -> compare(contactIdsToPosition, o1, o2));
     MatrixCursor newCursor = new MatrixCursor(Projections.CP2_PROJECTION, coalescedContacts.size());
     for (Cp2Contact contact : coalescedContacts) {
       newCursor.addRow(contact.toCursorRow());
@@ -164,6 +165,13 @@ final class ContactFilterCursor implements Cursor {
               .build());
     }
     return coalescedContacts;
+  }
+
+  private static int compare(
+      Map<Integer, Integer> contactIdsToPosition, Cp2Contact o1, Cp2Contact o2) {
+    int position1 = contactIdsToPosition.get(o1.contactId());
+    int position2 = contactIdsToPosition.get(o2.contactId());
+    return Integer.compare(position1, position2);
   }
 
   private static void removeDuplicatePhoneNumbers(List<Cp2Contact> phoneContacts) {

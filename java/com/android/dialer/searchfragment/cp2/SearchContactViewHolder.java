@@ -171,6 +171,8 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
         callToActionView.setVisibility(View.VISIBLE);
         callToActionView.setImageDrawable(
             context.getDrawable(com.android.contacts.common.R.drawable.ic_phone_attach));
+        callToActionView.setContentDescription(
+            context.getString(R.string.description_search_call_and_share));
         callToActionView.setOnClickListener(this);
         break;
       case CallToAction.DUO_CALL:
@@ -178,6 +180,8 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
         callToActionView.setVisibility(View.VISIBLE);
         callToActionView.setImageDrawable(
             context.getDrawable(R.drawable.quantum_ic_videocam_white_24));
+        callToActionView.setContentDescription(
+            context.getString(R.string.description_search_video_call));
         callToActionView.setOnClickListener(this);
         break;
       default:
