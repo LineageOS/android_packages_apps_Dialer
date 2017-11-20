@@ -403,10 +403,6 @@ public class VoicemailTosMessageCreator {
   }
 
   private CharSequence getVvmDialerTos() {
-    if (!isVoicemailTranscriptionEnabled()) {
-      return "";
-    }
-
     return context.getString(R.string.dialer_terms_and_conditions_for_verizon_1_0);
   }
 
