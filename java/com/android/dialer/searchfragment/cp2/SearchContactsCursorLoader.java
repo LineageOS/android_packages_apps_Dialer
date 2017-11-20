@@ -24,6 +24,7 @@ import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.searchfragment.common.Projections;
 
 /** Cursor Loader for CP2 contacts. */
@@ -41,6 +42,14 @@ public final class SearchContactsCursorLoader extends CursorLoader {
         null,
         Phone.SORT_KEY_PRIMARY + " ASC");
     this.query = query;
+
+    ContactsPreferences preferences = new ContactsPreferences(getContext());
+    if (preferences.getSortOrder() == ContactsPreferences.SORT_ORDER_ALTERNATIVE) {
+      setSortOrder(Phone.SORT_KEY_ALTERNATIVE + " ASC");
+    }
+    if (preferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_ALTERNATIVE) {
+      setProjection(Projections.CP2_PROJECTION_ALTERNATIVE);
+    }
   }
 
   /**

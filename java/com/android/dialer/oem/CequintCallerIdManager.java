@@ -46,16 +46,9 @@ public class CequintCallerIdManager {
 
   private static final String CONFIG_CALLER_ID_ENABLED = "config_caller_id_enabled";
 
-  private static final String PROVIDER_NAME = "com.cequint.ecid";
-
-  private static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/lookup");
-
   private static final int CALLER_ID_LOOKUP_USER_PROVIDED_CID = 0x0001;
   private static final int CALLER_ID_LOOKUP_SYSTEM_PROVIDED_CID = 0x0002;
   private static final int CALLER_ID_LOOKUP_INCOMING_CALL = 0x0020;
-
-  private static final Uri CONTENT_URI_FOR_INCALL =
-      Uri.parse("content://" + PROVIDER_NAME + "/incalllookup");
 
   private static final String[] EMPTY_PROJECTION = new String[] {};
 
@@ -72,7 +65,7 @@ public class CequintCallerIdManager {
   private static final String DISPLAY_NAME = "cid_pDisplayName";
 
   private static boolean hasAlreadyCheckedCequintCallerIdPackage;
-  private static boolean isCequintCallerIdEnabled;
+  private static String cequintProviderAuthority;
 
   // TODO(wangqi): Revisit it and maybe remove it if it's not necessary.
   private final ConcurrentHashMap<String, CequintCallerIdContact> callLogCache;
@@ -98,16 +91,20 @@ public class CequintCallerIdManager {
     }
     if (!hasAlreadyCheckedCequintCallerIdPackage) {
       hasAlreadyCheckedCequintCallerIdPackage = true;
-      isCequintCallerIdEnabled = false;
 
-      try {
-        context.getPackageManager().getPackageInfo(PROVIDER_NAME, 0);
-        isCequintCallerIdEnabled = true;
-      } catch (PackageManager.NameNotFoundException e) {
-        isCequintCallerIdEnabled = false;
+      String[] providerNames = context.getResources().getStringArray(R.array.cequint_providers);
+      PackageManager packageManager = context.getPackageManager();
+      for (String provider : providerNames) {
+        if (CequintPackageUtils.isCallerIdInstalled(packageManager, provider)) {
+          cequintProviderAuthority = provider;
+          LogUtil.i(
+              "CequintCallerIdManager.isCequintCallerIdEnabled", "found provider: %s", provider);
+          return true;
+        }
       }
+      LogUtil.d("CequintCallerIdManager.isCequintCallerIdEnabled", "no provider found");
     }
-    return isCequintCallerIdEnabled;
+    return cequintProviderAuthority != null;
   }
 
   public static CequintCallerIdManager createInstanceForCallLog() {
@@ -133,7 +130,7 @@ public class CequintCallerIdManager {
       flag |= CALLER_ID_LOOKUP_USER_PROVIDED_CID;
     }
     String[] flags = {cnapName, String.valueOf(flag)};
-    return lookup(context, CONTENT_URI_FOR_INCALL, number, flags);
+    return lookup(context, getIncallLookupUri(), number, flags);
   }
 
   @WorkerThread
@@ -150,7 +147,7 @@ public class CequintCallerIdManager {
     CequintCallerIdContact cequintCallerIdContact =
         lookup(
             context,
-            CONTENT_URI,
+            getLookupUri(),
             PhoneNumberUtils.stripSeparators(number),
             new String[] {"system"});
     if (cequintCallerIdContact != null) {
@@ -265,6 +262,14 @@ public class CequintCallerIdManager {
       geoDescription = country;
     }
     return geoDescription;
+  }
+
+  private static Uri getLookupUri() {
+    return Uri.parse("content://" + cequintProviderAuthority + "/lookup");
+  }
+
+  private static Uri getIncallLookupUri() {
+    return Uri.parse("content://" + cequintProviderAuthority + "/incalllookup");
   }
 
   private CequintCallerIdManager() {
