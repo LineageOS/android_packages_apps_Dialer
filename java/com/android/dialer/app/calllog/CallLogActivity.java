@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.Snackbar;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -33,6 +34,7 @@ import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.common.Assert;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.logging.Logger;
@@ -47,15 +49,17 @@ import com.android.dialer.util.ViewUtil;
 public class CallLogActivity extends TransactionSafeActivity
     implements ViewPager.OnPageChangeListener {
 
-  private static final int TAB_INDEX_ALL = 0;
-  private static final int TAB_INDEX_MISSED = 1;
+  @VisibleForTesting static final int TAB_INDEX_ALL = 0;
+  @VisibleForTesting static final int TAB_INDEX_MISSED = 1;
   private static final int TAB_INDEX_COUNT = 2;
   private ViewPager mViewPager;
   private ViewPagerTabs mViewPagerTabs;
   private ViewPagerAdapter mViewPagerAdapter;
   private CallLogFragment mAllCallsFragment;
+  private CallLogFragment mMissedCallsFragment;
   private String[] mTabTitles;
   private boolean mIsResumed;
+  private int selectedPageIndex;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class CallLogActivity extends TransactionSafeActivity
         startingTab = TAB_INDEX_MISSED;
       }
     }
+    selectedPageIndex = startingTab;
 
     mTabTitles = new String[TAB_INDEX_COUNT];
     mTabTitles[0] = getString(R.string.call_log_all_title);
@@ -114,6 +119,16 @@ public class CallLogActivity extends TransactionSafeActivity
   protected void onPause() {
     mIsResumed = false;
     super.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    if (!isChangingConfigurations() && mViewPager != null) {
+      // Make sure current index != selectedPageIndex
+      selectedPageIndex = -1;
+      updateMissedCalls(mViewPager.getCurrentItem());
+    }
+    super.onStop();
   }
 
   @Override
@@ -160,6 +175,8 @@ public class CallLogActivity extends TransactionSafeActivity
 
   @Override
   public void onPageSelected(int position) {
+    updateMissedCalls(position);
+    selectedPageIndex = position;
     if (mIsResumed) {
       sendScreenViewForChildFragment();
     }
@@ -180,6 +197,26 @@ public class CallLogActivity extends TransactionSafeActivity
       return mViewPagerAdapter.getCount() - 1 - position;
     }
     return position;
+  }
+
+  private void updateMissedCalls(int position) {
+    if (position == selectedPageIndex) {
+      return;
+    }
+    switch (getRtlPosition(position)) {
+      case TAB_INDEX_ALL:
+        if (mAllCallsFragment != null) {
+          mAllCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        }
+        break;
+      case TAB_INDEX_MISSED:
+        if (mMissedCallsFragment != null) {
+          mMissedCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        }
+        break;
+      default:
+        throw Assert.createIllegalStateFailException("Invalid position: " + position);
+    }
   }
 
   @Override
@@ -216,8 +253,15 @@ public class CallLogActivity extends TransactionSafeActivity
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
       final CallLogFragment fragment = (CallLogFragment) super.instantiateItem(container, position);
-      if (getRtlPosition(position) == TAB_INDEX_ALL) {
+      switch (getRtlPosition(position)) {
+        case TAB_INDEX_ALL:
           mAllCallsFragment = fragment;
+          break;
+        case TAB_INDEX_MISSED:
+          mMissedCallsFragment = fragment;
+          break;
+        default:
+          throw Assert.createIllegalStateFailException("Invalid position: " + position);
       }
       return fragment;
     }
