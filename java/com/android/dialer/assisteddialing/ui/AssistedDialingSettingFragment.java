@@ -19,7 +19,10 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.text.TextUtils;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 
 /** The setting for Assisted Dialing */
 public class AssistedDialingSettingFragment extends PreferenceFragment {
@@ -30,6 +33,10 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
 
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.assisted_dialing_setting);
+    SwitchPreference switchPref =
+        (SwitchPreference)
+            findPreference(getContext().getString(R.string.assisted_dialing_setting_toggle_key));
+
     ListPreference countryChooserPref =
         (ListPreference)
             findPreference(getContext().getString(R.string.assisted_dialing_setting_cc_key));
@@ -38,12 +45,22 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
       countryChooserPref.setSummary(countryChooserPref.getEntry());
     }
     countryChooserPref.setOnPreferenceChangeListener(this::updateListSummary);
+    switchPref.setOnPreferenceChangeListener(this::logIfUserDisabledFeature);
   }
 
   boolean updateListSummary(Preference pref, Object newValue) {
     ListPreference listPref = (ListPreference) pref;
     CharSequence[] entries = listPref.getEntries();
     listPref.setSummary(entries[listPref.findIndexOfValue(newValue.toString())]);
+    return true;
+  }
+
+  boolean logIfUserDisabledFeature(Preference pref, Object newValue) {
+    if (!((boolean) newValue)) {
+      Logger.get(getActivity().getApplicationContext())
+          .logImpression(DialerImpression.Type.ASSISTED_DIALING_FEATURE_DISABLED_BY_USER);
+    }
+
     return true;
   }
 }

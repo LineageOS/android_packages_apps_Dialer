@@ -357,13 +357,6 @@ public class VoicemailChangePinActivity extends Activity
     mHintText = (TextView) view.findViewById(R.id.hintText);
     mErrorText = (TextView) view.findViewById(R.id.errorText);
 
-    if (isPinScrambled(this, mPhoneAccountHandle)) {
-      mOldPin = mPinChanger.getScrambledPin();
-      updateState(State.VerifyOldPin);
-    } else {
-      updateState(State.EnterOldPin);
-    }
-
     mChangePinExecutor =
         DialerExecutorComponent.get(this)
             .dialerExecutorFactory()
@@ -371,6 +364,13 @@ public class VoicemailChangePinActivity extends Activity
             .onSuccess(this::sendResult)
             .onFailure((tr) -> sendResult(PinChanger.CHANGE_PIN_SYSTEM_ERROR))
             .build();
+
+    if (isPinScrambled(this, mPhoneAccountHandle)) {
+      mOldPin = mPinChanger.getScrambledPin();
+      updateState(State.VerifyOldPin);
+    } else {
+      updateState(State.EnterOldPin);
+    }
   }
 
   /** Extracts the pin length requirement sent by the server with a STATUS SMS. */
