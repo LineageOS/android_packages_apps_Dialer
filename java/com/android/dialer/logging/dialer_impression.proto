@@ -12,6 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
+  // Next Tag: 1293
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -589,6 +590,8 @@ message DialerImpression {
     // Indicates that the number attempting to be assisted dialed had an
     // extension.
     ASSISTED_DIALING_CONSTRAINT_NUMBER_HAS_EXTENSION = 1289;
+    // Indicates that the user disabled the feature.
+    ASSISTED_DIALING_FEATURE_DISABLED_BY_USER = 1292;
 
     // User reports a same prefix call as spam from call history
     REPORT_SAME_PREFIX_CALL_AS_SPAM_VIA_CALL_HISTORY =

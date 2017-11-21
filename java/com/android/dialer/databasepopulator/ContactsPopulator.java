@@ -127,17 +127,29 @@ public final class ContactsPopulator {
   };
 
   @WorkerThread
-  public static void populateContacts(@NonNull Context context) {
+  public static void populateContacts(@NonNull Context context, boolean fastMode) {
     Assert.isWorkerThread();
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
-    for (Contact contact : SIMPLE_CONTACTS) {
+    List<Contact> contacts = new ArrayList<>();
+    if (fastMode) {
+      contacts.add(SIMPLE_CONTACTS[0]);
+    } else {
+      contacts = Arrays.asList(SIMPLE_CONTACTS);
+    }
+    for (Contact contact : contacts) {
       addContact(contact, operations);
     }
+
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
     } catch (RemoteException | OperationApplicationException e) {
       Assert.fail("error adding contacts: " + e);
     }
+  }
+
+  @WorkerThread
+  public static void populateContacts(@NonNull Context context) {
+    populateContacts(context, false);
   }
 
   @WorkerThread
