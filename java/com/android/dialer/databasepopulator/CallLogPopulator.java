@@ -29,6 +29,7 @@ import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /** Populates the device database with call log entries. */
@@ -84,13 +85,20 @@ public final class CallLogPopulator {
   }
 
   @WorkerThread
-  public static void populateCallLog(@NonNull Context context, boolean isWithoutMissedCalls) {
+  public static void populateCallLog(
+      @NonNull Context context, boolean isWithoutMissedCalls, boolean fastMode) {
     Assert.isWorkerThread();
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     // Do this 4 times to make the call log 4 times bigger.
     long timeMillis = System.currentTimeMillis();
+    List<CallEntry.Builder> callLogs = new ArrayList<>();
+    if (fastMode) {
+      callLogs.add(SIMPLE_CALL_LOG[0]);
+    } else {
+      callLogs = Arrays.asList(SIMPLE_CALL_LOG);
+    }
     for (int i = 0; i < 4; i++) {
-      for (CallEntry.Builder builder : SIMPLE_CALL_LOG) {
+      for (CallEntry.Builder builder : callLogs) {
         CallEntry callEntry = builder.setTimeMillis(timeMillis).build();
         if (isWithoutMissedCalls && builder.build().getType() == Calls.MISSED_TYPE) {
           continue;
@@ -108,6 +116,11 @@ public final class CallLogPopulator {
     } catch (RemoteException | OperationApplicationException e) {
       Assert.fail("error adding call entries: " + e);
     }
+  }
+
+  @WorkerThread
+  public static void populateCallLog(@NonNull Context context, boolean isWithoutMissedCalls) {
+    populateCallLog(context, isWithoutMissedCalls, false);
   }
 
   @WorkerThread

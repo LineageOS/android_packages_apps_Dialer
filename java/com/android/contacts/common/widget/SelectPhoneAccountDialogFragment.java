@@ -55,12 +55,15 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
   private static final String ARG_TITLE_RES_ID = "title_res_id";
   private static final String ARG_CAN_SET_DEFAULT = "can_set_default";
+  private static final String ARG_SET_DEFAULT_RES_ID = "set_default_res_id";
   private static final String ARG_ACCOUNT_HANDLES = "account_handles";
   private static final String ARG_IS_DEFAULT_CHECKED = "is_default_checked";
   private static final String ARG_LISTENER = "listener";
   private static final String ARG_CALL_ID = "call_id";
+  private static final String ARG_HINTS = "hints";
 
   private List<PhoneAccountHandle> mAccountHandles;
+  private List<String> mHints;
   private boolean mIsSelected;
   private boolean mIsDefaultChecked;
   private SelectPhoneAccountListener mListener;
@@ -78,7 +81,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       SelectPhoneAccountListener listener,
       @Nullable String callId) {
     return newInstance(
-        R.string.select_account_dialog_title, false, accountHandles, listener, callId);
+        R.string.select_account_dialog_title, false, 0, accountHandles, listener, callId, null);
   }
 
   /**
@@ -88,15 +91,22 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
    * @param titleResId The resource ID for the string to use in the title of the dialog.
    * @param canSetDefault {@code true} if the dialog should include an option to set the selection
    *     as the default. False otherwise.
+   * @param setDefaultResId The resource ID for the string to use in the "set as default" checkbox
    * @param accountHandles The {@code PhoneAccountHandle}s available to select from.
    * @param listener The listener for the results of the account selection.
+   * @param callId The callId to be passed back to the listener in {@link
+   *     SelectPhoneAccountListener#EXTRA_CALL_ID}
+   * @param hints Additional information to be shown underneath the phone account to help user
+   *     choose. Index must match {@code accountHandles}
    */
   public static SelectPhoneAccountDialogFragment newInstance(
       int titleResId,
       boolean canSetDefault,
+      int setDefaultResId,
       List<PhoneAccountHandle> accountHandles,
       SelectPhoneAccountListener listener,
-      @Nullable String callId) {
+      @Nullable String callId,
+      @Nullable List<String> hints) {
     ArrayList<PhoneAccountHandle> accountHandlesCopy = new ArrayList<>();
     if (accountHandles != null) {
       accountHandlesCopy.addAll(accountHandles);
@@ -105,9 +115,13 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     final Bundle args = new Bundle();
     args.putInt(ARG_TITLE_RES_ID, titleResId);
     args.putBoolean(ARG_CAN_SET_DEFAULT, canSetDefault);
+    args.putInt(ARG_SET_DEFAULT_RES_ID, setDefaultResId);
     args.putParcelableArrayList(ARG_ACCOUNT_HANDLES, accountHandlesCopy);
     args.putParcelable(ARG_LISTENER, listener);
     args.putString(ARG_CALL_ID, callId);
+    if (hints != null) {
+      args.putStringArrayList(ARG_HINTS, new ArrayList<>(hints));
+    }
     fragment.setArguments(args);
     fragment.setListener(listener);
     return fragment;
@@ -140,6 +154,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     boolean canSetDefault = getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
     mAccountHandles = getArguments().getParcelableArrayList(ARG_ACCOUNT_HANDLES);
     mListener = getArguments().getParcelable(ARG_LISTENER);
+    mHints = getArguments().getStringArrayList(ARG_HINTS);
     if (savedInstanceState != null) {
       mIsDefaultChecked = savedInstanceState.getBoolean(ARG_IS_DEFAULT_CHECKED);
     }
@@ -173,7 +188,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     ListAdapter selectAccountListAdapter =
         new SelectAccountListAdapter(
-            builder.getContext(), R.layout.select_account_list_item, mAccountHandles);
+            builder.getContext(), R.layout.select_account_list_item, mAccountHandles, mHints);
 
     AlertDialog dialog =
         builder
@@ -189,10 +204,17 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
               LayoutInflater.from(builder.getContext())
                   .inflate(R.layout.default_account_checkbox, null);
 
-      CheckBox cb = (CheckBox) checkboxLayout.findViewById(R.id.default_account_checkbox_view);
-      cb.setOnCheckedChangeListener(checkListener);
-      cb.setChecked(mIsDefaultChecked);
+      CheckBox checkBox = checkboxLayout.findViewById(R.id.default_account_checkbox_view);
+      checkBox.setOnCheckedChangeListener(checkListener);
+      checkBox.setChecked(mIsDefaultChecked);
 
+      TextView textView = checkboxLayout.findViewById(R.id.default_account_checkbox_text);
+      int setDefaultResId =
+          getArguments().getInt(ARG_SET_DEFAULT_RES_ID, R.string.set_default_account);
+      textView.setText(setDefaultResId);
+      textView.setOnClickListener((view) -> checkBox.performClick());
+      checkboxLayout.setOnClickListener((view) -> checkBox.performClick());
+      checkboxLayout.setContentDescription(getString(setDefaultResId));
       dialog.getListView().addFooterView(checkboxLayout);
     }
 
@@ -248,10 +270,15 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
   private static class SelectAccountListAdapter extends ArrayAdapter<PhoneAccountHandle> {
 
     private int mResId;
+    private final List<String> mHints;
 
     SelectAccountListAdapter(
-        Context context, int resource, List<PhoneAccountHandle> accountHandles) {
+        Context context,
+        int resource,
+        List<PhoneAccountHandle> accountHandles,
+        @Nullable List<String> hints) {
       super(context, resource, accountHandles);
+      mHints = hints;
       mResId = resource;
     }
 
@@ -269,6 +296,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         holder = new ViewHolder();
         holder.labelTextView = (TextView) rowView.findViewById(R.id.label);
         holder.numberTextView = (TextView) rowView.findViewById(R.id.number);
+        holder.hintTextView = rowView.findViewById(R.id.hint);
         holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
         rowView.setTag(holder);
       } else {
@@ -294,6 +322,18 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       }
       holder.imageView.setImageDrawable(
           PhoneAccountCompat.createIconDrawable(account, getContext()));
+      if (mHints != null && position < mHints.size()) {
+        String hint = mHints.get(position);
+        if (TextUtils.isEmpty(hint)) {
+          holder.hintTextView.setVisibility(View.GONE);
+        } else {
+          holder.hintTextView.setVisibility(View.VISIBLE);
+          holder.hintTextView.setText(hint);
+        }
+      } else {
+        holder.hintTextView.setVisibility(View.GONE);
+      }
+
       return rowView;
     }
 
@@ -301,6 +341,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
       TextView labelTextView;
       TextView numberTextView;
+      TextView hintTextView;
       ImageView imageView;
     }
   }

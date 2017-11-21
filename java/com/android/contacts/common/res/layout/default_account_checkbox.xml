@@ -15,22 +15,36 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/default_account_checkbox_layout"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:padding="4dp"
-  android:orientation="vertical">
-  <CheckBox
-    android:id="@+id/default_account_checkbox_view"
+    android:id="@+id/default_account_checkbox_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dip"
-    android:layout_marginLeft="13dip"
-    android:paddingStart="15dip"
+    android:padding="4dp"
+    android:paddingStart="0dp"
+    android:paddingEnd="24dp"
     android:gravity="center"
-    android:text="@string/set_default_account"
-    android:textAlignment="viewStart"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:textColor="@color/dialer_secondary_text_color"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:focusable="true">
+  <FrameLayout
+      android:layout_width="72dp"
+      android:layout_height="wrap_content">
+    <CheckBox
+        android:id="@+id/default_account_checkbox_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:checked="false"/>
     />
+  </FrameLayout>
+  <TextView
+      android:id="@+id/default_account_checkbox_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="@string/set_default_account"
+      android:textAlignment="viewStart"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:textColor="@color/dialer_secondary_text_color"
+      />
+
 </LinearLayout>
