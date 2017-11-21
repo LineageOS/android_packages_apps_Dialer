@@ -19,7 +19,7 @@
   <string name="nearby_places">Nearby places</string>
 
   <!-- Shown as a prompt to turn on location permissions and/or enable location to allow nearby places search [CHAR LIMIT=NONE]-->
-  <string name="search_location_permission">To get contact information for places near you, allow access to your location</string>
+  <string name="search_location_permission">To get contact information for places near you, allow access to your location.</string>
 
   <!-- Text on a button asking the user to grant the location permission -->
   <string name="nearby_places_allow">Allow</string>

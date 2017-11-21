@@ -1007,11 +1007,11 @@ public class StatusBarNotifier
         InCallActivity.getIntent(
             mContext, false /* showDialpad */, false /* newOutgoingCall */, isFullScreen);
 
-    int requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
+    int requestCode = InCallActivity.PendingIntentRequestCodes.NON_FULL_SCREEN;
     if (isFullScreen) {
       // Use a unique request code so that the pending intent isn't clobbered by the
       // non-full screen pending intent.
-      requestCode = InCallActivity.PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
+      requestCode = InCallActivity.PendingIntentRequestCodes.FULL_SCREEN;
     }
 
     // PendingIntent that can be used to launch the InCallActivity.  The

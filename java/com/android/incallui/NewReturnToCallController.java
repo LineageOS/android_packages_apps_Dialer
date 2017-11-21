@@ -93,7 +93,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     activityIntent.putExtra(RETURN_TO_CALL_EXTRA_KEY, true);
     fullScreen =
         PendingIntent.getActivity(
-            context, InCallActivity.PENDING_INTENT_REQUEST_CODE_BUBBLE, activityIntent, 0);
+            context, InCallActivity.PendingIntentRequestCodes.BUBBLE, activityIntent, 0);
 
     InCallPresenter.getInstance().addInCallUiListener(this);
     CallList.getInstance().addListener(this);

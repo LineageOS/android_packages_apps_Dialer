@@ -907,8 +907,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onCallPlacedFromDialpad() {
-    hideDialpadFragment(false /* animate */, true /*clearDialpad */);
-    exitSearchUi();
+    mClearSearchOnPause = true;
   }
 
   @Override
@@ -1021,9 +1020,8 @@ public class DialtactsActivity extends TransactionSafeActivity
   private void hideDialpadAndSearchUi() {
     if (mIsDialpadShown) {
       hideDialpadFragment(false, true);
-    } else {
-      exitSearchUi();
     }
+    exitSearchUi();
   }
 
   private void prepareVoiceSearchButton() {
@@ -1678,11 +1676,9 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
-  public void onCallPlaced() {
-    if (mIsDialpadShown) {
-      hideDialpadFragment(false, true);
-    }
-    exitSearchUi();
+  public void onCallPlacedFromSearch() {
+    DialerUtils.hideInputMethod(mParentLayout);
+    mClearSearchOnPause = true;
   }
 
   protected int getPreviouslySelectedTabIndex() {
