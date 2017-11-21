@@ -29,7 +29,6 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
-import com.android.dialer.databasepopulator.VoicemailPopulator.Voicemail.Builder;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,7 +80,7 @@ public final class VoicemailPopulator {
   public static void populateVoicemail(@NonNull Context context, boolean fastMode) {
     Assert.isWorkerThread();
     enableVoicemail(context);
-    List<Builder> voicemails = new ArrayList<>();
+    List<Voicemail.Builder> voicemails = new ArrayList<>();
     if (fastMode) {
       voicemails.add(SIMPLE_VOICEMAILS[0]);
     } else {

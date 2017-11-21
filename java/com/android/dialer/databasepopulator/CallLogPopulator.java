@@ -26,7 +26,6 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
-import com.android.dialer.databasepopulator.CallLogPopulator.CallEntry.Builder;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,7 +91,7 @@ public final class CallLogPopulator {
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     // Do this 4 times to make the call log 4 times bigger.
     long timeMillis = System.currentTimeMillis();
-    List<Builder> callLogs = new ArrayList<>();
+    List<CallEntry.Builder> callLogs = new ArrayList<>();
     if (fastMode) {
       callLogs.add(SIMPLE_CALL_LOG[0]);
     } else {
