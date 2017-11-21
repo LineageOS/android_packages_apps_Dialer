@@ -76,6 +76,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
       currentAction.onDiscard();
     }
     currentAction = null;
+    pendingAction = null;
   }
 
   void onSaveInstanceState(Bundle outState) {

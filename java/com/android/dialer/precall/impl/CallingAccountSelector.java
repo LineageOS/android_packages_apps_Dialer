@@ -48,6 +48,7 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.google.common.base.Optional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -158,20 +159,52 @@ public class CallingAccountSelector implements PreCallAction {
       PendingAction pendingAction,
       @Nullable String dataId,
       @Nullable String number,
-      @Nullable Suggestion unusedSuggestion) { // TODO(twyen): incoporate suggestion in dialog
+      @Nullable Suggestion suggestion) {
     Assert.isMainThread();
+    List<PhoneAccountHandle> phoneAccountHandles =
+        coordinator
+            .getActivity()
+            .getSystemService(TelecomManager.class)
+            .getCallCapablePhoneAccounts();
     selectPhoneAccountDialogFragment =
         SelectPhoneAccountDialogFragment.newInstance(
             R.string.pre_call_select_phone_account,
             dataId != null /* canSetDefault */,
-            coordinator
-                .getActivity()
-                .getSystemService(TelecomManager.class)
-                .getCallCapablePhoneAccounts(),
+            R.string.pre_call_select_phone_account_remember,
+            phoneAccountHandles,
             new SelectedListener(coordinator, pendingAction, dataId, number),
-            null /* call ID */);
+            null /* call ID */,
+            buildHint(coordinator.getActivity(), phoneAccountHandles, suggestion));
     selectPhoneAccountDialogFragment.show(
         coordinator.getActivity().getFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
+  }
+
+  @Nullable
+  private static List<String> buildHint(
+      Context context,
+      List<PhoneAccountHandle> phoneAccountHandles,
+      @Nullable Suggestion suggestion) {
+    if (suggestion == null) {
+      return null;
+    }
+    List<String> hints = new ArrayList<>();
+    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+      if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
+        hints.add(null);
+        continue;
+      }
+      switch (suggestion.reason) {
+        case INTRA_CARRIER:
+          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_intra_carrier));
+          break;
+        case FREQUENT:
+          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
+          break;
+        default:
+          throw Assert.createAssertionFailException("unexpected reason " + suggestion.reason);
+      }
+    }
+    return hints;
   }
 
   @MainThread
