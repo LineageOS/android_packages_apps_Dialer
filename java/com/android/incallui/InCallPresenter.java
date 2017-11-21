@@ -1110,7 +1110,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   public void onPostDialCharWait(String callId, String chars) {
     if (isActivityStarted()) {
-      mInCallActivity.showPostCharWaitDialog(callId, chars);
+      mInCallActivity.showDialogForPostCharWait(callId, chars);
     }
   }
 

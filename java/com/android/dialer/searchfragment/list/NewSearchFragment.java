@@ -507,7 +507,7 @@ public final class NewSearchFragment extends Fragment
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
             .setAllowAssistedDial(allowAssistedDial));
-    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }
 
   @Override
@@ -516,7 +516,7 @@ public final class NewSearchFragment extends Fragment
         .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
     Intent intent = DuoComponent.get(getContext()).getDuo().getIntent(getContext(), phoneNumber);
     getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
-    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlaced();
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }
 
   @Override
@@ -536,6 +536,6 @@ public final class NewSearchFragment extends Fragment
     boolean onSearchListTouch(MotionEvent event);
 
     /** Called when a call is placed from the search fragment. */
-    void onCallPlaced();
+    void onCallPlacedFromSearch();
   }
 }
