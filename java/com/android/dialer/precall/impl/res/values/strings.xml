@@ -19,4 +19,16 @@
   multiple SIMs [CHAR LIMIT=40]-->
   <string name="pre_call_select_phone_account">Call with</string>
 
+  <!-- Checkbox label when selecting a SIM when calling a contact, to use the selected SIM for the
+   same contact and never ask again [CHAR LIMIT=40]-->
+  <string name="pre_call_select_phone_account_remember">Remember this choice</string>
+
+  <!-- Hint text under a SIM when selecting SIM to call, indicating the SIM is on the same carrier
+   as the outgoing call.[CHAR LIMIT=40]-->
+  <string name="pre_call_select_phone_account_hint_intra_carrier">Same carrier</string>
+
+  <!-- Hint text under a SIM when selecting SIM to call, indicating user often use the SIM to call
+  the contact.[CHAR LIMIT=40]-->
+  <string name="pre_call_select_phone_account_hint_frequent">You use often</string>
+
 </resources>

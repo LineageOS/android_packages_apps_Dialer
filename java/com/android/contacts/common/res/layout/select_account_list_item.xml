@@ -16,41 +16,53 @@
 
 <!-- Layout of a single item in the InCallUI Account Chooser Dialog. -->
 <com.android.contacts.common.widget.ActivityTouchLinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:padding="8dp"
-  android:orientation="horizontal">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="64dp"
+    android:padding="8dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:orientation="horizontal"
+    android:gravity="center">
 
   <ImageView
-    android:id="@+id/icon"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:scaleType="center"/>
+      android:id="@+id/icon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:scaleType="center"/>
 
   <LinearLayout
-    android:id="@+id/text"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:layout_marginStart="8dp"
-    android:gravity="start|center_vertical"
-    android:orientation="vertical">
-    <TextView
-      android:id="@+id/label"
-      android:layout_width="match_parent"
+      android:id="@+id/text"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:includeFontPadding="false"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:textColor="@color/dialer_primary_text_color"/>
+      android:layout_weight="1"
+      android:paddingStart="24dp"
+      android:gravity="start|center_vertical"
+      android:orientation="vertical">
     <TextView
-      android:id="@+id/number"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:includeFontPadding="false"
-      android:maxLines="1"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:visibility="gone"/>
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/dialer_primary_text_color"/>
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone"/>
   </LinearLayout>
 
 </com.android.contacts.common.widget.ActivityTouchLinearLayout>

@@ -111,12 +111,12 @@ public final class StubVoicemailClient implements VoicemailClient {
 
   @Override
   public void addActivationStateListener(ActivationStateListener listener) {
-    throw Assert.createAssertionFailException("should never be called on stub.");
+    // Do nothing
   }
 
   @Override
   public void removeActivationStateListener(ActivationStateListener listener) {
-    throw Assert.createAssertionFailException("should never be called on stub.");
+    // Do nothing
   }
 
   @Override

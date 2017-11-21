@@ -524,9 +524,11 @@ public class InCallActivityCommon {
         SelectPhoneAccountDialogFragment.newInstance(
             R.string.select_phone_account_for_calls,
             true,
+            0,
             phoneAccountHandles,
             selectAccountListener,
-            waitingForAccountCall.getId());
+            waitingForAccountCall.getId(),
+            null);
     selectPhoneAccountDialogFragment.show(
         inCallActivity.getFragmentManager(), TAG_SELECT_ACCOUNT_FRAGMENT);
     return true;
