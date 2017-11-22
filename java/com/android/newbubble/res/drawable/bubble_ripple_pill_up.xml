@@ -15,11 +15,7 @@
   ~ limitations under the License
   -->
 
-<resources>
-  <color name="bubble_primary_background_darken">#33000000</color>
-
-  <color name="bubble_ripple_color">@color/bubble_primary_background_darken</color>
-  <color name="bubble_button_color_grey">@color/icon_color_grey</color>
-  <color name="bubble_button_color_white">@color/dialer_primary_text_color_white</color>
-  <color name="bubble_button_color_blue">@color/dialer_theme_color</color>
-</resources>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/bubble_ripple_color">
+  <item android:drawable="@drawable/bubble_pill_up"/>
+</ripple>
