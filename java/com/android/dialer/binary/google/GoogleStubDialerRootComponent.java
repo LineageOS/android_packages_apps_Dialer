@@ -22,6 +22,7 @@ import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.duo.stub.StubDuoModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
+import com.android.dialer.feedback.stub.StubFeedbackModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
@@ -58,7 +59,8 @@ import javax.inject.Singleton;
     StubEnrichedCallModule.class,
     MapsModule.class,
     VoicemailModule.class,
-    StubDuoModule.class
+    StubDuoModule.class,
+    StubFeedbackModule.class,
   }
 )
 public interface GoogleStubDialerRootComponent extends BaseDialerRootComponent {}
