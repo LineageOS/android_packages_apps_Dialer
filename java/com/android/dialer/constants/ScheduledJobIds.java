@@ -16,15 +16,26 @@
 
 package com.android.dialer.constants;
 
+import android.support.annotation.IntDef;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Registry of scheduled job ids used by the dialer UID.
  *
  * <p>Any dialer jobs which use the android JobScheduler should register their IDs here, to avoid
  * the same ID accidentally being reused.
+ *
+ * <p>Do not change any existing IDs.
  */
 public final class ScheduledJobIds {
   public static final int SPAM_JOB_WIFI = 50;
   public static final int SPAM_JOB_ANY_NETWORK = 51;
+
+  /** Spam job type including all spam job IDs. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({SPAM_JOB_WIFI, SPAM_JOB_ANY_NETWORK})
+  public @interface SpamJobType {}
 
   // This job refreshes dynamic launcher shortcuts.
   public static final int SHORTCUT_PERIODIC_JOB = 100;
