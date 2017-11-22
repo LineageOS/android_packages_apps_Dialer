@@ -20,11 +20,16 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
+import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -59,6 +64,9 @@ import java.util.Set;
 public class CallingAccountSelector implements PreCallAction {
 
   @VisibleForTesting static final String TAG_CALLING_ACCOUNT_SELECTOR = "CallingAccountSelector";
+
+  @VisibleForTesting
+  static final String METADATA_SUPPORTS_PREFERRED_SIM = "supports_per_number_preferred_account";
 
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
 
@@ -246,6 +254,9 @@ public class CallingAccountSelector implements PreCallAction {
     @WorkerThread
     public PreferredAccountWorkerResult doInBackground(Context context) throws Throwable {
       PreferredAccountWorkerResult result = new PreferredAccountWorkerResult();
+      if (!isPreferredSimEnabled(context)) {
+        return result;
+      }
       result.dataId = getDataId(context.getContentResolver(), phoneNumber);
       if (result.dataId.isPresent()) {
         result.phoneAccountHandle = getPreferredAccount(context, result.dataId.get());
@@ -434,5 +445,42 @@ public class CallingAccountSelector implements PreCallAction {
               new String[] {String.valueOf(input.dataId)});
       return null;
     }
+  }
+
+  @WorkerThread
+  private static boolean isPreferredSimEnabled(Context context) {
+    Assert.isWorkerThread();
+    if (!ConfigProviderBindings.get(context).getBoolean("preferred_sim_enabled", true)) {
+      return false;
+    }
+
+    Intent quickContactIntent = getQuickContactIntent();
+    ResolveInfo resolveInfo =
+        context
+            .getPackageManager()
+            .resolveActivity(quickContactIntent, PackageManager.GET_META_DATA);
+    if (resolveInfo == null
+        || resolveInfo.activityInfo == null
+        || resolveInfo.activityInfo.applicationInfo == null
+        || resolveInfo.activityInfo.applicationInfo.metaData == null) {
+      LogUtil.e("CallingAccountSelector.isPreferredSimEnabled", "cannot resolve quick contact app");
+      return false;
+    }
+    if (!resolveInfo.activityInfo.applicationInfo.metaData.getBoolean(
+        METADATA_SUPPORTS_PREFERRED_SIM, false)) {
+      LogUtil.i(
+          "CallingAccountSelector.isPreferredSimEnabled",
+          "system contacts does not support preferred SIM");
+      return false;
+    }
+    return true;
+  }
+
+  @VisibleForTesting
+  static Intent getQuickContactIntent() {
+    Intent intent = new Intent(QuickContact.ACTION_QUICK_CONTACT);
+    intent.addCategory(Intent.CATEGORY_DEFAULT);
+    intent.setData(Contacts.CONTENT_URI.buildUpon().appendPath("1").build());
+    return intent;
   }
 }
