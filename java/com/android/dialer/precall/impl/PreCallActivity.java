@@ -19,6 +19,7 @@ package com.android.dialer.precall.impl;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.WindowManager.LayoutParams;
 
 /** A transparent activity to host dialogs for {@link PreCallCoordinatorImpl} */
 public class PreCallActivity extends Activity {
@@ -30,6 +31,7 @@ public class PreCallActivity extends Activity {
     super.onCreate(savedInstanceState);
     preCallCoordinator = new PreCallCoordinatorImpl(this);
     preCallCoordinator.onCreate(getIntent(), savedInstanceState);
+    getWindow().addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
   }
 
   @Override

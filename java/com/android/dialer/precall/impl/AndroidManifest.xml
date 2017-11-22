@@ -23,6 +23,7 @@
         android:name="com.android.dialer.precall.impl.PreCallActivity"
         android:excludeFromRecents="true"
         android:noHistory="true"
+        android:showWhenLocked="true"
         android:theme="@style/Theme.PreCall.DialogHolder">
     </activity>
   </application>
