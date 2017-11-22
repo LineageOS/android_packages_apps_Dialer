@@ -15,7 +15,7 @@
 -->
 
 <resources>
-  <item name="call_detail_delete_menu_item" type="id"/>
+  <item name="call_detail_action_delete" type="id"/>
   <item name="context_menu_copy_to_clipboard" type="id"/>
   <item name="context_menu_copy_transcript_to_clipboard" type="id"/>
   <item name="context_menu_edit_before_call" type="id"/>
@@ -23,6 +23,7 @@
   <item name="context_menu_block" type="id"/>
   <item name="context_menu_unblock" type="id"/>
   <item name="context_menu_report_not_spam" type="id"/>
+  <item name="context_menu_delete" type="id"/>
   <item name="settings_header_sounds_and_vibration" type="id"/>
   <item name="block_id" type="id"/>
 </resources>

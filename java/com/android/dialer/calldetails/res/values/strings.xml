@@ -18,7 +18,7 @@
   <!-- Title bar for call detail screen -->
   <string name="call_details">Call details</string>
 
-  <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
+  <!-- Text for the action item to remove a call or voicemail from the call log. -->
   <string name="delete">Delete</string>
 
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->

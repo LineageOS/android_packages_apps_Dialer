@@ -16,6 +16,8 @@
 
 package com.android.dialer.app.calllog;
 
+import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -28,6 +30,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -68,6 +71,7 @@ import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
@@ -95,6 +99,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.UriUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.WeakReference;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -107,6 +112,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     implements View.OnClickListener,
         MenuItem.OnMenuItemClickListener,
         View.OnCreateContextMenuListener {
+
+  private static final String TASK_DELETE = "task_delete";
+
   /** The root view of the call log list item */
   public final View rootView;
   /** The quick contact badge for the contact. */
@@ -431,6 +439,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           .logImpression(DialerImpression.Type.CALL_LOG_CONTEXT_MENU_REPORT_AS_NOT_SPAM);
       mBlockReportListener.onReportNotSpam(
           displayNumber, number, countryIso, callType, info.sourceType);
+    } else if (resId == R.id.context_menu_delete) {
+      AsyncTaskExecutors.createAsyncTaskExecutor()
+          .submit(TASK_DELETE, new DeleteCallTask(mContext, callIds));
     }
     return false;
   }
@@ -1217,6 +1228,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       }
     }
 
+    if (callType != CallLog.Calls.VOICEMAIL_TYPE) {
+      menu.add(ContextMenu.NONE, R.id.context_menu_delete, ContextMenu.NONE, R.string.delete)
+          .setOnMenuItemClickListener(this);
+    }
+
     Logger.get(mContext).logScreenView(ScreenEvent.Type.CALL_LOG_CONTEXT_MENU, (Activity) mContext);
   }
 
@@ -1260,5 +1276,59 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         String countryIso,
         int callType,
         ContactSource.Type contactSourceType);
+  }
+
+  private static class DeleteCallTask extends AsyncTask<Void, Void, Void> {
+    // Using a weak reference to hold the Context so that there is no memory leak.
+    private final WeakReference<Context> contextWeakReference;
+
+    private final String callIdsStr;
+
+    DeleteCallTask(Context context, long[] callIdsArray) {
+      this.contextWeakReference = new WeakReference<>(context);
+      this.callIdsStr = concatCallIds(callIdsArray);
+    }
+
+    @Override
+    // Suppress the lint check here as the user will not be able to see call log entries if
+    // permission.WRITE_CALL_LOG is not granted.
+    @SuppressLint("MissingPermission")
+    @RequiresPermission(value = permission.WRITE_CALL_LOG)
+    protected Void doInBackground(Void... params) {
+      Context context = contextWeakReference.get();
+      if (context == null) {
+        return null;
+      }
+
+      if (callIdsStr != null) {
+        context
+            .getContentResolver()
+            .delete(
+                Calls.CONTENT_URI,
+                CallLog.Calls._ID + " IN (" + callIdsStr + ")" /* where */,
+                null /* selectionArgs */);
+      }
+
+      return null;
+    }
+
+    @Override
+    public void onPostExecute(Void result) {}
+
+    private String concatCallIds(long[] callIds) {
+      if (callIds == null || callIds.length == 0) {
+        return null;
+      }
+
+      StringBuilder str = new StringBuilder();
+      for (long callId : callIds) {
+        if (str.length() != 0) {
+          str.append(",");
+        }
+        str.append(callId);
+      }
+
+      return str.toString();
+    }
   }
 }
