@@ -14,53 +14,65 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingTop="16dp">
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    app:cardElevation="2dp">
 
-  <ImageView
-      android:id="@+id/permission_image"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_marginEnd="16dp"
-      android:src="@drawable/business_asset"/>
-
-  <TextView
-      android:id="@+id/permission_text"
-      android:layout_width="wrap_content"
+  <RelativeLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_toEndOf="@id/permission_image"
-      android:minHeight="40dp"
-      android:text="@string/search_location_permission"
-      android:lineSpacingMultiplier="1.2"
-      android:textSize="16sp"
-      android:textColor="@color/dialer_secondary_text_color"/>
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:paddingTop="16dp"
+      android:paddingBottom="12dp">
 
-  <Button
-      android:id="@+id/location_permission_allow"
-      android:layout_width="wrap_content"
-      android:layout_height="52dp"
-      android:layout_alignParentEnd="true"
-      android:layout_below="@id/permission_text"
-      android:layout_marginTop="16dp"
-      android:paddingTop="8dp"
-      android:paddingBottom="8dp"
-      android:text="@string/nearby_places_allow"/>
+    <ImageView
+        android:id="@+id/permission_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/business_asset"/>
 
-  <Button
-      android:id="@+id/location_permission_dismiss"
-      android:layout_width="wrap_content"
-      android:layout_height="52dp"
-      android:layout_toStartOf="@+id/location_permission_allow"
-      android:layout_below="@id/permission_text"
-      android:layout_marginEnd="8dp"
-      android:layout_marginTop="16dp"
-      android:paddingTop="8dp"
-      android:paddingBottom="8dp"
-      android:text="@string/nearby_places_dismiss"
-      android:textColor="@color/dialer_theme_color"
-      style="@style/Widget.AppCompat.Button.Borderless"/>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/permission_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/permission_image"
+        android:minHeight="40dp"
+        android:text="@string/search_location_permission"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="16sp"
+        android:textColor="@color/dialer_secondary_text_color"/>
+
+    <Button
+        android:id="@+id/location_permission_allow"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/permission_text"
+        android:layout_marginTop="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/nearby_places_allow"/>
+
+    <Button
+        android:id="@+id/location_permission_dismiss"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_toStartOf="@+id/location_permission_allow"
+        android:layout_below="@id/permission_text"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/nearby_places_dismiss"
+        android:textColor="@color/dialer_theme_color"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+  </RelativeLayout>
+</android.support.v7.widget.CardView>

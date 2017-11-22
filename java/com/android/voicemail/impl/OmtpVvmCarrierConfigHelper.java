@@ -18,6 +18,7 @@ package com.android.voicemail.impl;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -174,7 +175,13 @@ public class OmtpVvmCarrierConfigHelper {
    * known protocol.
    */
   public boolean isValid() {
-    return mProtocol != null;
+    if (mProtocol == null) {
+      return false;
+    }
+    if (isCarrierAppPreloaded()) {
+      return false;
+    }
+    return true;
   }
 
   @Nullable
@@ -197,6 +204,11 @@ public class OmtpVvmCarrierConfigHelper {
   @Nullable
   public Set<String> getCarrierVvmPackageNames() {
     Assert.checkArgument(isValid());
+    return getCarrierVvmPackageNamesWithoutValidation();
+  }
+
+  @Nullable
+  private Set<String> getCarrierVvmPackageNamesWithoutValidation() {
     Set<String> names = getCarrierVvmPackageNames(mOverrideConfig);
     if (names != null) {
       return names;
@@ -497,5 +509,29 @@ public class OmtpVvmCarrierConfigHelper {
   @VisibleForTesting
   public static void setOverrideConfigForTest(PersistableBundle config) {
     sOverrideConfigForTest = config;
+  }
+
+  private boolean isCarrierAppPreloaded() {
+    Set<String> carrierPackages = getCarrierVvmPackageNamesWithoutValidation();
+    if (carrierPackages == null) {
+      return false;
+    }
+    for (String packageName : carrierPackages) {
+      try {
+        ApplicationInfo info = getContext().getPackageManager().getApplicationInfo(packageName, 0);
+        if (!info.enabled) {
+          continue;
+        }
+        if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0
+            || (info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+          VvmLog.i(TAG, packageName + " preloaded, force disabling dialer vvm");
+          return true;
+        }
+
+      } catch (NameNotFoundException e) {
+        continue;
+      }
+    }
+    return false;
   }
 }

@@ -22,6 +22,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.PhoneLookup;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -261,6 +263,9 @@ public class CallingAccountSelector implements PreCallAction {
   private static Optional<String> getDataId(
       @NonNull ContentResolver contentResolver, @Nullable String phoneNumber) {
     Assert.isWorkerThread();
+    if (VERSION.SDK_INT < VERSION_CODES.N) {
+      return Optional.absent();
+    }
     try (Cursor cursor =
         contentResolver.query(
             Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber)),
