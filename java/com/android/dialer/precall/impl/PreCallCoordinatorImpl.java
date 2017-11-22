@@ -59,6 +59,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
     } else {
       builder = Assert.isNotNull(intent.getParcelableExtra(EXTRA_CALL_INTENT_BUILDER));
     }
+    actions = PreCallComponent.get(activity).getPreCall().getActions();
   }
 
   void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -67,7 +68,6 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
   }
 
   void onResume() {
-    actions = PreCallComponent.get(activity).getPreCall().getActions();
     runNextAction();
   }
 
