@@ -503,10 +503,26 @@ public class DialpadView extends LinearLayout {
     @Override
     public boolean onPreDraw() {
       if (!shouldAdjustKeySizes()) {
-        return true; // Return true to proceed with the current drawing pass.
+        // Return true to proceed with the current drawing pass.
+        // Note that we must NOT remove this listener here. The fact that we don't need to adjust
+        // keys at the moment doesn't mean they won't need adjustments in the future. For example,
+        // when DialpadFragment is hidden, all keys are of the same size (0) and nothing needs to be
+        // done. Removing the listener will cost us the ability to adjust them when they reappear.
+        // It is only safe to remove the listener after adjusting keys for the first time. See the
+        // comment below for more details.
+        return true;
       }
 
       adjustKeySizes();
+
+      // After all keys are adjusted for the first time, no more adjustments will be needed during
+      // the rest of DialpadView's lifecycle. It is therefore safe to remove this listener.
+      // Another important reason for removing the listener is that it can be triggered AFTER a
+      // device orientation change but BEFORE DialpadView's onDetachedFromWindow() and
+      // onFinishInflate() are called, i.e., the listener will attempt to adjust the layout before
+      // it is inflated, which results in a crash.
+      getViewTreeObserver().removeOnPreDrawListener(this);
+
       return false; // Return false to cancel the current drawing pass.
     }
 
