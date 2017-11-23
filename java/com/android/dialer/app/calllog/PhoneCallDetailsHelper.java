@@ -19,30 +19,39 @@ package com.android.dialer.app.calllog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.util.Linkify;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
+import com.android.voicemail.VoicemailComponent;
+import com.android.voicemail.impl.transcribe.TranscriptionRatingHelper;
+import com.google.internal.communications.voicemailtranscription.v1.TranscriptionRatingValue;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 /** Helper class to fill in the views in {@link PhoneCallDetailsViews}. */
-public class PhoneCallDetailsHelper {
-
+public class PhoneCallDetailsHelper
+    implements TranscriptionRatingHelper.SuccessListener,
+        TranscriptionRatingHelper.FailureListener {
   /** The maximum number of icons will be shown to represent the call types in a group. */
   private static final int MAX_CALL_TYPE_ICONS = 3;
 
@@ -152,13 +161,16 @@ public class PhoneCallDetailsHelper {
 
       String transcript = "";
       String branding = "";
+      boolean showRatingPrompt = false;
       if (!TextUtils.isEmpty(details.transcription)) {
         transcript = details.transcription;
 
-        // Set the branding text if the voicemail was transcribed by google
-        // TODO(mdooley): the transcription state is only set by the google transcription code,
-        // but a better solution would be to check the SOURCE_PACKAGE
-        if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE) {
+        // Show a transcription quality rating prompt or set the branding text if the voicemail was
+        // transcribed by google
+        if (shouldShowTranscriptionRating(details.transcriptionState, details.accountHandle)) {
+          showRatingPrompt = true;
+        } else if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
+            || details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE_AND_RATED) {
           branding = mResources.getString(R.string.voicemail_transcription_branding_text);
         }
       } else {
@@ -183,7 +195,28 @@ public class PhoneCallDetailsHelper {
       }
 
       views.voicemailTranscriptionView.setText(transcript);
-      views.voicemailTranscriptionBrandingView.setText(branding);
+      if (showRatingPrompt) {
+        views.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+
+        View ratingView = views.voicemailTranscriptionRatingView;
+        ratingView.setVisibility(View.VISIBLE);
+        ratingView
+            .findViewById(R.id.voicemail_transcription_rating_good)
+            .setOnClickListener(
+                view ->
+                    recordTranscriptionRating(
+                        TranscriptionRatingValue.GOOD_TRANSCRIPTION, details));
+        ratingView
+            .findViewById(R.id.voicemail_transcription_rating_bad)
+            .setOnClickListener(
+                view ->
+                    recordTranscriptionRating(TranscriptionRatingValue.BAD_TRANSCRIPTION, details));
+      } else {
+        views.voicemailTranscriptionRatingView.setVisibility(View.GONE);
+
+        views.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
+        views.voicemailTranscriptionBrandingView.setText(branding);
+      }
     }
 
     // Bold if not read
@@ -196,6 +229,40 @@ public class PhoneCallDetailsHelper {
         ContextCompat.getColor(
             mContext,
             details.isRead ? R.color.call_log_detail_color : R.color.call_log_unread_text_color));
+  }
+
+  private boolean shouldShowTranscriptionRating(
+      int transcriptionState, PhoneAccountHandle account) {
+    // TODO(mdooley): add a configurable random element here?
+    return transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
+        && VoicemailComponent.get(mContext)
+            .getVoicemailClient()
+            .isVoicemailDonationEnabled(mContext, account);
+  }
+
+  private void recordTranscriptionRating(
+      TranscriptionRatingValue ratingValue, PhoneCallDetails details) {
+    LogUtil.enterBlock("PhoneCallDetailsHelper.recordTranscriptionRating");
+    TranscriptionRatingHelper.sendRating(
+        mContext,
+        ratingValue,
+        Uri.parse(details.voicemailUri),
+        this::onRatingSuccess,
+        this::onRatingFailure);
+  }
+
+  @Override
+  public void onRatingSuccess(Uri voicemailUri) {
+    LogUtil.enterBlock("PhoneCallDetailsHelper.onRatingSuccess");
+    Toast toast =
+        Toast.makeText(mContext, R.string.voicemail_transcription_rating_thanks, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 50);
+    toast.show();
+  }
+
+  @Override
+  public void onRatingFailure(Throwable t) {
+    LogUtil.e("PhoneCallDetailsHelper.onRatingFailure", "failed to send rating", t);
   }
 
   /**

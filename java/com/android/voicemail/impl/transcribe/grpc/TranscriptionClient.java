@@ -17,6 +17,7 @@ package com.android.voicemail.impl.transcribe.grpc;
 
 import android.support.annotation.WorkerThread;
 import com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest;
+import com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailRequest;
 import com.google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionServiceGrpc;
@@ -56,6 +57,16 @@ public class TranscriptionClient {
       return new GetTranscriptResponseAsync(stub.getTranscript(request));
     } catch (StatusRuntimeException e) {
       return new GetTranscriptResponseAsync(e.getStatus());
+    }
+  }
+
+  @WorkerThread
+  public TranscriptionFeedbackResponseAsync sendTranscriptFeedbackRequest(
+      SendTranscriptionFeedbackRequest request) {
+    try {
+      return new TranscriptionFeedbackResponseAsync(stub.sendTranscriptionFeedback(request));
+    } catch (StatusRuntimeException e) {
+      return new TranscriptionFeedbackResponseAsync(e.getStatus());
     }
   }
 }

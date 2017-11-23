@@ -72,4 +72,21 @@ public class VoicemailCompat {
    * <p>Internal dialer use only, not part of the public SDK.
    */
   public static final int TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED = -2;
+
+  /**
+   * Value of {@link #TRANSCRIPTION_STATE} when the voicemail transcription has completed and the
+   * result has been stored in the {@link #TRANSCRIPTION} column of the database, and the user has
+   * provided a quality rating for the transcription.
+   */
+  public static final int TRANSCRIPTION_AVAILABLE_AND_RATED = -3;
+
+  /**
+   * Voicemail transcription quality rating value sent to the server indicating a good transcription
+   */
+  public static final int TRANSCRIPTION_QUALITY_RATING_GOOD = 1;
+
+  /**
+   * Voicemail transcription quality rating value sent to the server indicating a bad transcription
+   */
+  public static final int TRANSCRIPTION_QUALITY_RATING_BAD = 2;
 }
