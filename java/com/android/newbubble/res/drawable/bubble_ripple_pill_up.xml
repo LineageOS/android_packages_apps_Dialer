@@ -14,11 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-    android:id="@+id/call_detail_delete_menu_item"
-    android:icon="@drawable/quantum_ic_delete_white_24"
-    android:title="@string/delete"
-    app:showAsAction="ifRoom"/>
-</menu>
+
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/bubble_ripple_color">
+  <item android:drawable="@drawable/bubble_pill_up"/>
+</ripple>

@@ -72,5 +72,5 @@
   <color name="icon_color_grey">#89000000</color>
 
   <!-- Color for bubble -->
-  <color name="dialer_end_call_button_color">#FFDF0000</color>
+  <color name="dialer_end_call_button_color">#BD2A2A</color>
 </resources>
