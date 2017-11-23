@@ -127,12 +127,12 @@ public class CallingAccountSelector implements PreCallAction {
     PendingAction pendingAction = coordinator.startPendingAction();
     DialerExecutorComponent.get(coordinator.getActivity())
         .dialerExecutorFactory()
-        .createUiTaskBuilder(
-            activity.getFragmentManager(),
-            "PreferredAccountWorker",
-            new PreferredAccountWorker(phoneNumber))
+        .createNonUiTaskBuilder(new PreferredAccountWorker(phoneNumber))
         .onSuccess(
             (result -> {
+              if (isDiscarding) {
+                return;
+              }
               if (result.phoneAccountHandle.isPresent()) {
                 coordinator.getBuilder().setPhoneAccountHandle(result.phoneAccountHandle.get());
                 pendingAction.finish();
@@ -221,7 +221,9 @@ public class CallingAccountSelector implements PreCallAction {
   @Override
   public void onDiscard() {
     isDiscarding = true;
-    selectPhoneAccountDialogFragment.dismiss();
+    if (selectPhoneAccountDialogFragment != null) {
+      selectPhoneAccountDialogFragment.dismiss();
+    }
   }
 
   private static class PreferredAccountWorkerResult {
@@ -364,11 +366,13 @@ public class CallingAccountSelector implements PreCallAction {
                 new WritePreferredAccountWorkerInput(
                     coordinator.getActivity(), dataId, selectedAccountHandle));
       }
-      DialerExecutorComponent.get(coordinator.getActivity())
-          .dialerExecutorFactory()
-          .createNonUiTaskBuilder(new UserSelectionReporter(selectedAccountHandle, number))
-          .build()
-          .executeParallel(coordinator.getActivity());
+      if (number != null) {
+        DialerExecutorComponent.get(coordinator.getActivity())
+            .dialerExecutorFactory()
+            .createNonUiTaskBuilder(new UserSelectionReporter(selectedAccountHandle, number))
+            .build()
+            .executeParallel(coordinator.getActivity());
+      }
       listener.finish();
     }
 
