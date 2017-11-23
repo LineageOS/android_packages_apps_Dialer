@@ -28,7 +28,7 @@
   </style>
 
   <style name="SelectableItemTheme">
-    <item name="colorControlHighlight">@color/dialer_secondary_text_color_hiden</item>
+    <item name="colorControlHighlight">@color/bubble_ripple_color</item>
   </style>
   <style name="CheckableButtonWithSelectableItemBackground" parent="CheckableButton">
     <item name="android:theme">@style/SelectableItemTheme</item>

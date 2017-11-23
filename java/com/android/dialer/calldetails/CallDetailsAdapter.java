@@ -23,6 +23,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallbackActionListener;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper;
@@ -42,6 +43,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   private final DialerContact contact;
   private final CallbackActionListener callbackActionListener;
   private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener;
+  private final DeleteCallDetailsListener deleteCallDetailsListener;
   private final CallTypeHelper callTypeHelper;
   private List<CallDetailsEntry> callDetailsEntries;
 
@@ -50,11 +52,13 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       @NonNull DialerContact contact,
       @NonNull List<CallDetailsEntry> callDetailsEntries,
       CallbackActionListener callbackActionListener,
-      CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener) {
+      CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
+      DeleteCallDetailsListener deleteCallDetailsListener) {
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
     this.callbackActionListener = callbackActionListener;
     this.reportCallIdListener = reportCallIdListener;
+    this.deleteCallDetailsListener = deleteCallDetailsListener;
     callTypeHelper = new CallTypeHelper(context.getResources(), DuoComponent.get(context).getDuo());
   }
 
@@ -70,7 +74,9 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             inflater.inflate(R.layout.call_details_entry, parent, false));
       case FOOTER_VIEW_TYPE:
         return new CallDetailsFooterViewHolder(
-            inflater.inflate(R.layout.call_details_footer, parent, false), reportCallIdListener);
+            inflater.inflate(R.layout.call_details_footer, parent, false),
+            reportCallIdListener,
+            deleteCallDetailsListener);
       default:
         throw Assert.createIllegalStateFailException(
             "No ViewHolder available for viewType: " + viewType);

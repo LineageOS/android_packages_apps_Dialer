@@ -15,11 +15,9 @@
   ~ limitations under the License
   -->
 
-<resources>
-  <color name="bubble_primary_background_darken">#33000000</color>
-
-  <color name="bubble_ripple_color">@color/bubble_primary_background_darken</color>
-  <color name="bubble_button_color_grey">@color/icon_color_grey</color>
-  <color name="bubble_button_color_white">@color/dialer_primary_text_color_white</color>
-  <color name="bubble_button_color_blue">@color/dialer_theme_color</color>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <corners
+      android:topRightRadius="8dp"
+      android:topLeftRadius="8dp"/>
+  <solid android:color="@android:color/white"/>
+</shape>
