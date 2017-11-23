@@ -50,4 +50,13 @@
       android:drawableStart="@drawable/quantum_ic_report_grey600_24"
       android:text="@string/call_details_report_call_id"
       android:visibility="gone"/>
+
+  <TextView
+      android:id="@+id/call_detail_action_delete"
+      style="@style/CallDetailsActionItemStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/quantum_ic_delete_vd_theme_24"
+      android:tint="@color/dialer_secondary_text_color"
+      android:text="@string/delete"/>
 </LinearLayout>
