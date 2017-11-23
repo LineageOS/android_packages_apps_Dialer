@@ -54,6 +54,7 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
+import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,17 @@ public class CallingAccountSelector implements PreCallAction {
     if (accounts.size() <= 1) {
       return false;
     }
+
+    if (TelecomUtil.isInManagedCall(context)) {
+      // Most devices are DSDS (dual SIM dual standby) which only one SIM can have active calls at
+      // a time. Telecom will ignore the phone account handle and use the current active SIM, thus
+      // there's no point of selecting SIMs
+      // TODO(a bug): let the user know selections are not available and preferred SIM is not
+      // used
+      // TODO(twyen): support other dual SIM modes when the API is exposed.
+      return false;
+    }
+
     return true;
   }
 
