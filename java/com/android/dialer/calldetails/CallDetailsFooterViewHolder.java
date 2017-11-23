@@ -34,32 +34,39 @@ import com.android.dialer.util.DialerUtils;
 /** ViewHolder container for {@link CallDetailsActivity} footer. */
 final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
-  private final ReportCallIdListener listener;
+  private final ReportCallIdListener reportCallIdListener;
+  private final DeleteCallDetailsListener deleteCallDetailsListener;
   private final View container;
   private final View copy;
   private final View edit;
   private final View reportCallerId;
+  private final View delete;
 
   private String number;
 
-  CallDetailsFooterViewHolder(View view, ReportCallIdListener listener) {
+  CallDetailsFooterViewHolder(
+      View view,
+      ReportCallIdListener reportCallIdListener,
+      DeleteCallDetailsListener deleteCallDetailsListener) {
     super(view);
-    this.listener = listener;
+    this.reportCallIdListener = reportCallIdListener;
+    this.deleteCallDetailsListener = deleteCallDetailsListener;
     container = view.findViewById(R.id.footer_container);
     copy = view.findViewById(R.id.call_detail_action_copy);
     edit = view.findViewById(R.id.call_detail_action_edit_before_call);
     reportCallerId = view.findViewById(R.id.call_detail_action_report_caller_id);
-
+    delete = view.findViewById(R.id.call_detail_action_delete);
     copy.setOnClickListener(this);
     edit.setOnClickListener(this);
     reportCallerId.setOnClickListener(this);
+    delete.setOnClickListener(this);
   }
 
   public void setPhoneNumber(String number) {
     this.number = number;
     if (TextUtils.isEmpty(number)) {
       container.setVisibility(View.GONE);
-    } else if (listener.canReportCallerId(number)) {
+    } else if (reportCallIdListener.canReportCallerId(number)) {
       reportCallerId.setVisibility(View.VISIBLE);
     }
   }
@@ -81,7 +88,9 @@ final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implemen
       Intent dialIntent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(number));
       DialerUtils.startActivityWithErrorToast(context, dialIntent);
     } else if (view == reportCallerId) {
-      listener.reportCallId(number);
+      reportCallIdListener.reportCallId(number);
+    } else if (view == delete) {
+      deleteCallDetailsListener.delete();
     } else {
       Assert.fail("View on click not implemented: " + view);
     }
@@ -95,5 +104,12 @@ final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implemen
 
     /** returns true if the number can be reported as inaccurate. */
     boolean canReportCallerId(String number);
+  }
+
+  /** Listener for deleting call details */
+  interface DeleteCallDetailsListener {
+
+    /** Delete call details */
+    void delete();
   }
 }

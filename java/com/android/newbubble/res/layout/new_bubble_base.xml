@@ -88,10 +88,10 @@
       tools:visibility="visible">
     <RelativeLayout
         android:id="@+id/bubble_triangle"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="-10dp"
+        android:layout_marginBottom="-6dp"
         android:layout_centerHorizontal="true"
         android:background="@color/background_dialer_white"
         android:elevation="@dimen/bubble_expanded_elevation"
@@ -107,15 +107,14 @@
         android:layoutDirection="inherit">
       <com.android.newbubble.NewCheckableButton
           android:id="@+id/bubble_button_full_screen"
-          android:layout_marginTop="@dimen/bubble_radius"
+          android:layout_marginTop="8dp"
           android:textColor="@color/bubble_button_color_grey"
-          android:background="@color/background_dialer_white"
+          android:background="@drawable/bubble_ripple_pill_up"
           android:drawableTint="@color/bubble_button_color_grey"
-          style="@style/CheckableButtonWithSelectableItemBackground"/>
+          style="@style/CheckableButton"/>
       <com.android.newbubble.NewCheckableButton
           android:id="@+id/bubble_button_mute"
           android:layout_below="@id/bubble_button_full_screen"
-          android:layout_marginTop="@dimen/bubble_expanded_separator_height"
           android:textColor="@color/bubble_button_color_grey"
           android:background="@color/background_dialer_white"
           android:drawableTint="@color/bubble_button_color_grey"
@@ -123,7 +122,6 @@
       <com.android.newbubble.NewCheckableButton
           android:id="@+id/bubble_button_audio_route"
           android:layout_below="@id/bubble_button_mute"
-          android:layout_marginTop="@dimen/bubble_expanded_separator_height"
           android:textColor="@color/bubble_button_color_grey"
           android:background="@color/background_dialer_white"
           android:drawableTint="@color/bubble_button_color_grey"
