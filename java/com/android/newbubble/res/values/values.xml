@@ -34,8 +34,8 @@
   <dimen name="bubble_elevation">6dp</dimen>
   <dimen name="bubble_expanded_elevation">8dp</dimen>
   <dimen name="bubble_expanded_width">160dp</dimen>
-  <dimen name="bubble_radius">12dp</dimen>
-  <dimen name="bubble_expanded_separator_height">4dp</dimen>
+  <dimen name="bubble_radius">16dp</dimen>
+  <dimen name="bubble_expanded_separator_height">8dp</dimen>
   <dimen name="bubble_small_icon_size">24dp</dimen>
   <dimen name="bubble_small_icon_padding">4dp</dimen>
 </resources>

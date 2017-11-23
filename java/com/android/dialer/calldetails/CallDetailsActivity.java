@@ -16,6 +16,9 @@
 
 package com.android.dialer.calldetails;
 
+import android.Manifest.permission;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -25,14 +28,14 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
-import android.view.MenuItem;
 import android.widget.Toast;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
@@ -52,15 +55,16 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 /** Displays the details of a specific call log entry. */
 public class CallDetailsActivity extends AppCompatActivity
-    implements OnMenuItemClickListener,
-        CallDetailsHeaderViewHolder.CallbackActionListener,
+    implements CallDetailsHeaderViewHolder.CallbackActionListener,
         CallDetailsFooterViewHolder.ReportCallIdListener,
+        DeleteCallDetailsListener,
         HistoricalDataChangedListener {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
@@ -102,8 +106,6 @@ public class CallDetailsActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.call_details_activity);
     Toolbar toolbar = findViewById(R.id.toolbar);
-    toolbar.inflateMenu(R.menu.call_details_menu);
-    toolbar.setOnMenuItemClickListener(this);
     toolbar.setTitle(R.string.call_details);
     toolbar.setNavigationOnClickListener(
         v -> {
@@ -160,23 +162,13 @@ public class CallDetailsActivity extends AppCompatActivity
             contact,
             entries.getEntriesList(),
             this /* callbackListener */,
-            this /* reportCallIdListener */);
+            this /* reportCallIdListener */,
+            this /* callDetailDeletionListener */);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
     PerformanceReport.logOnScrollStateChange(recyclerView);
-  }
-
-  @Override
-  public boolean onMenuItemClick(MenuItem item) {
-    if (item.getItemId() == R.id.call_detail_delete_menu_item) {
-      Logger.get(this).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
-      AsyncTaskExecutors.createAsyncTaskExecutor().submit(TASK_DELETE, new DeleteCallsTask());
-      item.setEnabled(false);
-      return true;
-    }
-    return false;
   }
 
   @Override
@@ -246,6 +238,12 @@ public class CallDetailsActivity extends AppCompatActivity
     PreCall.start(this, callIntentBuilder);
   }
 
+  @Override
+  public void delete() {
+    AsyncTaskExecutors.createAsyncTaskExecutor()
+        .submit(TASK_DELETE, new DeleteCallsTask(this, contact, entries));
+  }
+
   @NonNull
   private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
       @Nullable String number, @NonNull CallDetailsEntries entries) {
@@ -287,13 +285,22 @@ public class CallDetailsActivity extends AppCompatActivity
   }
 
   /** Delete specified calls from the call log. */
-  private class DeleteCallsTask extends AsyncTask<Void, Void, Void> {
+  private static class DeleteCallsTask extends AsyncTask<Void, Void, Void> {
+    // Use a weak reference to hold the Activity so that there is no memory leak.
+    private final WeakReference<Activity> activityWeakReference;
 
+    private final DialerContact contact;
+    private final CallDetailsEntries callDetailsEntries;
     private final String callIds;
 
-    DeleteCallsTask() {
+    DeleteCallsTask(
+        Activity activity, DialerContact contact, CallDetailsEntries callDetailsEntries) {
+      this.activityWeakReference = new WeakReference<>(activity);
+      this.contact = contact;
+      this.callDetailsEntries = callDetailsEntries;
+
       StringBuilder callIds = new StringBuilder();
-      for (CallDetailsEntry entry : entries.getEntriesList()) {
+      for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
         if (callIds.length() != 0) {
           callIds.append(",");
         }
@@ -303,24 +310,43 @@ public class CallDetailsActivity extends AppCompatActivity
     }
 
     @Override
+    // Suppress the lint check here as the user will not be able to see call log entries if
+    // permission.WRITE_CALL_LOG is not granted.
+    @SuppressLint("MissingPermission")
+    @RequiresPermission(value = permission.WRITE_CALL_LOG)
     protected Void doInBackground(Void... params) {
-      getContentResolver()
-          .delete(Calls.CONTENT_URI, CallLog.Calls._ID + " IN (" + callIds + ")", null);
+      Activity activity = activityWeakReference.get();
+      if (activity == null) {
+        return null;
+      }
+
+      activity
+          .getContentResolver()
+          .delete(
+              Calls.CONTENT_URI,
+              CallLog.Calls._ID + " IN (" + callIds + ")" /* where */,
+              null /* selectionArgs */);
       return null;
     }
 
     @Override
     public void onPostExecute(Void result) {
+      Activity activity = activityWeakReference.get();
+      if (activity == null) {
+        return;
+      }
+
       Intent data = new Intent();
       data.putExtra(EXTRA_PHONE_NUMBER, contact.getNumber());
-      for (CallDetailsEntry entry : entries.getEntriesList()) {
+      for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
         if (entry.getHistoryResultsCount() > 0) {
           data.putExtra(EXTRA_HAS_ENRICHED_CALL_DATA, true);
           break;
         }
       }
-      setResult(RESULT_OK, data);
-      finish();
+
+      activity.setResult(RESULT_OK, data);
+      activity.finish();
     }
   }
 }

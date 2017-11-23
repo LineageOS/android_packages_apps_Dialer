@@ -280,7 +280,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     // Return to call
     actions.add(
         Action.builder()
-            .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_fullscreen_vd_theme_24))
+            .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_exit_to_app_vd_theme_24))
             .setIntent(fullScreen)
             .setName(context.getText(R.string.bubble_return_to_call))
             .build());
