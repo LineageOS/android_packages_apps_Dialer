@@ -28,6 +28,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.incallui.InCallCameraManager.Listener;
@@ -318,6 +319,7 @@ public class CallButtonPresenter
   @Override
   public void swapSimClicked() {
     LogUtil.enterBlock("CallButtonPresenter.swapSimClicked");
+    Logger.get(getContext()).logImpression(Type.DUAL_SIM_CHANGE_SIM_PRESSED);
     SwapSimWorker worker =
         new SwapSimWorker(
             getContext(),
