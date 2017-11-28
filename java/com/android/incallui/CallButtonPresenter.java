@@ -468,6 +468,7 @@ public class CallButtonPresenter
     mOtherAccount = TelecomUtil.getOtherAccount(getContext(), call.getAccountHandle());
     boolean showSwapSim =
         mOtherAccount != null
+            && !call.isVoiceMailNumber()
             && DialerCall.State.isDialing(call.getState())
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
