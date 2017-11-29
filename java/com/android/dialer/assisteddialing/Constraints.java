@@ -20,10 +20,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.ArraySet;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -31,14 +29,8 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
 /** Ensures that a number is eligible for Assisted Dialing */
 @TargetApi(VERSION_CODES.N)
@@ -46,19 +38,7 @@ import java.util.stream.Collectors;
 final class Constraints {
   private final PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
   private final Context context;
-
-  // TODO(erfanian): Ensure the below standard is consistent between libphonenumber and the
-  // platform.
-  // ISO 3166-1 alpha-2 Country Codes that are eligible for assisted dialing.
-  private static final List<String> DEFAULT_COUNTRY_CODES =
-      Arrays.asList(
-          "CA" /* Canada */,
-          "GB" /* United Kingdom */,
-          "JP" /* Japan */,
-          "MX" /* Mexico */,
-          "US" /* United States */);
-
-  @VisibleForTesting final Set<String> supportedCountryCodes;
+  private final CountryCodeProvider countryCodeProvider;
 
   /**
    * Create a new instance of Constraints.
@@ -66,65 +46,20 @@ final class Constraints {
    * @param context The context used to determine whether or not a number is an emergency number.
    * @param configProviderCountryCodes A csv of supported country codes, e.g. "US,CA"
    */
-  public Constraints(@NonNull Context context, @NonNull String configProviderCountryCodes) {
+  public Constraints(@NonNull Context context, @NonNull CountryCodeProvider countryCodeProvider) {
     if (context == null) {
       throw new NullPointerException("Provided context cannot be null");
     }
     this.context = context;
 
-    if (configProviderCountryCodes == null) {
+    if (countryCodeProvider == null) {
       throw new NullPointerException("Provided configProviderCountryCodes cannot be null");
     }
 
     // We allow dynamic country support only in Dialer; this should be removed in the framework
     // implementation.
-    // TODO(erfanian): Remove in the framework implementation, or add a service to provide these
-    // values to the framework.
-    supportedCountryCodes =
-        parseConfigProviderCountryCodes(configProviderCountryCodes)
-            .stream()
-            .map(v -> v.toUpperCase(Locale.US))
-            .collect(Collectors.toCollection(ArraySet::new));
-    LogUtil.i("Constraints.Constraints", "Using country codes: " + supportedCountryCodes);
-  }
-
-  private List<String> parseConfigProviderCountryCodes(String configProviderCountryCodes) {
-    if (TextUtils.isEmpty(configProviderCountryCodes)) {
-      LogUtil.i(
-          "Constraints.parseConfigProviderCountryCodes",
-          "configProviderCountryCodes was empty, returning default");
-      return DEFAULT_COUNTRY_CODES;
-    }
-
-    StringTokenizer tokenizer = new StringTokenizer(configProviderCountryCodes, ",");
-
-    if (tokenizer.countTokens() < 1) {
-      LogUtil.i(
-          "Constraints.parseConfigProviderCountryCodes", "insufficient provided country codes");
-      return DEFAULT_COUNTRY_CODES;
-    }
-
-    List<String> parsedCountryCodes = new ArrayList<>();
-    while (tokenizer.hasMoreTokens()) {
-      String foundLocale = tokenizer.nextToken();
-      if (foundLocale == null) {
-        LogUtil.i(
-            "Constraints.parseConfigProviderCountryCodes",
-            "Unexpected empty value, returning default.");
-        return DEFAULT_COUNTRY_CODES;
-      }
-
-      if (foundLocale.length() != 2) {
-        LogUtil.i(
-            "Constraints.parseConfigProviderCountryCodes",
-            "Unexpected locale %s, returning default",
-            foundLocale);
-        return DEFAULT_COUNTRY_CODES;
-      }
-
-      parsedCountryCodes.add(foundLocale);
-    }
-    return parsedCountryCodes;
+    // TODO(erfanian): Remove in the framework implementation.
+    this.countryCodeProvider = countryCodeProvider;
   }
 
   /**
@@ -201,8 +136,8 @@ final class Constraints {
     }
 
     boolean result =
-        supportedCountryCodes.contains(userHomeCountryCode)
-            && supportedCountryCodes.contains(userRoamingCountryCode);
+        countryCodeProvider.isSupportedCountryCode(userHomeCountryCode)
+            && countryCodeProvider.isSupportedCountryCode(userRoamingCountryCode);
     LogUtil.i("Constraints.areSupportedCountryCodes", String.valueOf(result));
     return result;
   }
