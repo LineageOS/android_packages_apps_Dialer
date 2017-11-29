@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.method.DialerKeyListener;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -32,6 +30,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadKeyButton.OnPressedListener;
 import com.android.dialer.dialpadview.DialpadView;
@@ -82,7 +81,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
       };
   private EditText mDtmfDialerField;
   // KeyListener used with the "dialpad digits" EditText widget.
-  private DTMFKeyListener mDialerKeyListener;
+  private DtmfKeyListener mDtmfKeyListener;
   private DialpadView mDialpadView;
   private int mCurrentTextColor;
 
@@ -141,8 +140,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     mDialpadView.setBackgroundResource(R.color.incall_dialpad_background);
     mDtmfDialerField = (EditText) parent.findViewById(R.id.digits);
     if (mDtmfDialerField != null) {
-      mDialerKeyListener = new DTMFKeyListener();
-      mDtmfDialerField.setKeyListener(mDialerKeyListener);
+      LogUtil.i("DialpadFragment.onCreateView", "creating dtmfKeyListener");
+      mDtmfKeyListener = new DtmfKeyListener(getPresenter());
+      mDtmfDialerField.setKeyListener(mDtmfKeyListener);
       // remove the long-press context menus that support
       // the edit (copy / paste / select) functions.
       mDtmfDialerField.setLongClickable(false);
@@ -180,7 +180,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
   @Override
   public void onDestroyView() {
-    mDialerKeyListener = null;
+    mDtmfKeyListener = null;
     super.onDestroyView();
   }
 
@@ -236,8 +236,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   /** Called externally (from InCallScreen) to play a DTMF Tone. */
   /* package */ boolean onDialerKeyDown(KeyEvent event) {
     Log.d(this, "Notifying dtmf key down.");
-    if (mDialerKeyListener != null) {
-      return mDialerKeyListener.onKeyDown(event);
+    if (mDtmfKeyListener != null) {
+      return mDtmfKeyListener.onKeyDown(event);
     } else {
       return false;
     }
@@ -246,8 +246,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   /** Called externally (from InCallScreen) to cancel the last DTMF Tone played. */
   public boolean onDialerKeyUp(KeyEvent event) {
     Log.d(this, "Notifying dtmf key up.");
-    if (mDialerKeyListener != null) {
-      return mDialerKeyListener.onKeyUp(event);
+    if (mDtmfKeyListener != null) {
+      return mDtmfKeyListener.onKeyUp(event);
     } else {
       return false;
     }
@@ -305,164 +305,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
     public void setYFraction(float yFraction) {
       setTranslationY(yFraction * getHeight());
-    }
-  }
-
-  /**
-   * Our own key listener, specialized for dealing with DTMF codes. 1. Ignore the backspace since it
-   * is irrelevant. 2. Allow ONLY valid DTMF characters to generate a tone and be sent as a DTMF
-   * code. 3. All other remaining characters are handled by the superclass.
-   *
-   * <p>This code is purely here to handle events from the hardware keyboard while the DTMF dialpad
-   * is up.
-   */
-  private class DTMFKeyListener extends DialerKeyListener {
-
-    /**
-     * Overrides the characters used in {@link DialerKeyListener#CHARACTERS} These are the valid
-     * dtmf characters.
-     */
-    public final char[] dtmfCharacters =
-        new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*'};
-
-    private DTMFKeyListener() {
-      super();
-    }
-
-    /** Overriden to return correct DTMF-dialable characters. */
-    @Override
-    protected char[] getAcceptedChars() {
-      return dtmfCharacters;
-    }
-
-    /** special key listener ignores backspace. */
-    @Override
-    public boolean backspace(View view, Editable content, int keyCode, KeyEvent event) {
-      return false;
-    }
-
-    /**
-     * Overriden so that with each valid button press, we start sending a dtmf code and play a local
-     * dtmf tone.
-     */
-    @Override
-    public boolean onKeyDown(View view, Editable content, int keyCode, KeyEvent event) {
-      // if (DBG) log("DTMFKeyListener.onKeyDown, keyCode " + keyCode + ", view " + view);
-
-      // find the character
-      char c = (char) lookup(event, content);
-
-      // if not a long press, and parent onKeyDown accepts the input
-      if (event.getRepeatCount() == 0 && super.onKeyDown(view, content, keyCode, event)) {
-
-        boolean keyOK = ok(getAcceptedChars(), c);
-
-        // if the character is a valid dtmf code, start playing the tone and send the
-        // code.
-        if (keyOK) {
-          Log.d(this, "DTMFKeyListener reading '" + c + "' from input.");
-          getPresenter().processDtmf(c);
-        } else {
-          Log.d(this, "DTMFKeyListener rejecting '" + c + "' from input.");
-        }
-        return true;
-      }
-      return false;
-    }
-
-    /**
-     * Overriden so that with each valid button up, we stop sending a dtmf code and the dtmf tone.
-     */
-    @Override
-    public boolean onKeyUp(View view, Editable content, int keyCode, KeyEvent event) {
-      // if (DBG) log("DTMFKeyListener.onKeyUp, keyCode " + keyCode + ", view " + view);
-
-      super.onKeyUp(view, content, keyCode, event);
-
-      // find the character
-      char c = (char) lookup(event, content);
-
-      boolean keyOK = ok(getAcceptedChars(), c);
-
-      if (keyOK) {
-        Log.d(this, "Stopping the tone for '" + c + "'");
-        getPresenter().stopDtmf();
-        return true;
-      }
-
-      return false;
-    }
-
-    /** Handle individual keydown events when we DO NOT have an Editable handy. */
-    public boolean onKeyDown(KeyEvent event) {
-      char c = lookup(event);
-      Log.d(this, "DTMFKeyListener.onKeyDown: event '" + c + "'");
-
-      // if not a long press, and parent onKeyDown accepts the input
-      if (event.getRepeatCount() == 0 && c != 0) {
-        // if the character is a valid dtmf code, start playing the tone and send the
-        // code.
-        if (ok(getAcceptedChars(), c)) {
-          Log.d(this, "DTMFKeyListener reading '" + c + "' from input.");
-          getPresenter().processDtmf(c);
-          return true;
-        } else {
-          Log.d(this, "DTMFKeyListener rejecting '" + c + "' from input.");
-        }
-      }
-      return false;
-    }
-
-    /**
-     * Handle individual keyup events.
-     *
-     * @param event is the event we are trying to stop. If this is null, then we just force-stop the
-     *     last tone without checking if the event is an acceptable dialer event.
-     */
-    public boolean onKeyUp(KeyEvent event) {
-      if (event == null) {
-        //the below piece of code sends stopDTMF event unnecessarily even when a null event
-        //is received, hence commenting it.
-        /*if (DBG) log("Stopping the last played tone.");
-        stopTone();*/
-        return true;
-      }
-
-      char c = lookup(event);
-      Log.d(this, "DTMFKeyListener.onKeyUp: event '" + c + "'");
-
-      // TODO: stopTone does not take in character input, we may want to
-      // consider checking for this ourselves.
-      if (ok(getAcceptedChars(), c)) {
-        Log.d(this, "Stopping the tone for '" + c + "'");
-        getPresenter().stopDtmf();
-        return true;
-      }
-
-      return false;
-    }
-
-    /**
-     * Find the Dialer Key mapped to this event.
-     *
-     * @return The char value of the input event, otherwise 0 if no matching character was found.
-     */
-    private char lookup(KeyEvent event) {
-      // This code is similar to {@link DialerKeyListener#lookup(KeyEvent, Spannable) lookup}
-      int meta = event.getMetaState();
-      int number = event.getNumber();
-
-      if (!((meta & (KeyEvent.META_ALT_ON | KeyEvent.META_SHIFT_ON)) == 0) || (number == 0)) {
-        int match = event.getMatch(getAcceptedChars(), meta);
-        number = (match != 0) ? match : number;
-      }
-
-      return (char) number;
-    }
-
-    /** Check to see if the keyEvent is dialable. */
-    boolean isKeyEventAcceptable(KeyEvent event) {
-      return (ok(getAcceptedChars(), lookup(event)));
     }
   }
 }
