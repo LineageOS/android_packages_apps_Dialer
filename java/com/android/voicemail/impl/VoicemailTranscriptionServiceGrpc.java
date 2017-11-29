@@ -73,6 +73,15 @@ public class VoicemailTranscriptionServiceGrpc {
               "google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionService", "GetTranscript"),
           io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest.getDefaultInstance()),
           io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest,
+      com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse> METHOD_SEND_TRANSCRIPTION_FEEDBACK =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "google.internal.communications.voicemailtranscription.v1.VoicemailTranscriptionService", "SendTranscriptionFeedback"),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest.getDefaultInstance()),
+          io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -136,6 +145,17 @@ public class VoicemailTranscriptionServiceGrpc {
       asyncUnimplementedUnaryCall(METHOD_GET_TRANSCRIPT, responseObserver);
     }
 
+    /**
+     * <pre>
+     * Uploads user's transcription feedback. Feedback will only be collected from
+     * user's who have consented to donate their voicemails.
+     * </pre>
+     */
+    public void sendTranscriptionFeedback(com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_SEND_TRANSCRIPTION_FEEDBACK, responseObserver);
+    }
+
     @java.lang.Override public io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -159,6 +179,13 @@ public class VoicemailTranscriptionServiceGrpc {
                 com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest,
                 com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse>(
                   this, METHODID_GET_TRANSCRIPT)))
+          .addMethod(
+            METHOD_SEND_TRANSCRIPTION_FEEDBACK,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest,
+                com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse>(
+                  this, METHODID_SEND_TRANSCRIPTION_FEEDBACK)))
           .build();
     }
   }
@@ -218,6 +245,18 @@ public class VoicemailTranscriptionServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_TRANSCRIPT, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Uploads user's transcription feedback. Feedback will only be collected from
+     * user's who have consented to donate their voicemails.
+     * </pre>
+     */
+    public void sendTranscriptionFeedback(com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest request,
+        io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_SEND_TRANSCRIPTION_FEEDBACK, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -271,6 +310,17 @@ public class VoicemailTranscriptionServiceGrpc {
     public com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse getTranscript(com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_TRANSCRIPT, getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Uploads user's transcription feedback. Feedback will only be collected from
+     * user's who have consented to donate their voicemails.
+     * </pre>
+     */
+    public com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse sendTranscriptionFeedback(com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_SEND_TRANSCRIPTION_FEEDBACK, getCallOptions(), request);
     }
   }
 
@@ -329,11 +379,24 @@ public class VoicemailTranscriptionServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_TRANSCRIPT, getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Uploads user's transcription feedback. Feedback will only be collected from
+     * user's who have consented to donate their voicemails.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse> sendTranscriptionFeedback(
+        com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_SEND_TRANSCRIPTION_FEEDBACK, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_TRANSCRIBE_VOICEMAIL = 0;
   private static final int METHODID_TRANSCRIBE_VOICEMAIL_ASYNC = 1;
   private static final int METHODID_GET_TRANSCRIPT = 2;
+  private static final int METHODID_SEND_TRANSCRIPTION_FEEDBACK = 3;
 
   private static class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -364,6 +427,10 @@ public class VoicemailTranscriptionServiceGrpc {
           serviceImpl.getTranscript((com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest) request,
               (io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.GetTranscriptResponse>) responseObserver);
           break;
+        case METHODID_SEND_TRANSCRIPTION_FEEDBACK:
+          serviceImpl.sendTranscriptionFeedback((com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -384,7 +451,8 @@ public class VoicemailTranscriptionServiceGrpc {
     return new io.grpc.ServiceDescriptor(SERVICE_NAME,
         METHOD_TRANSCRIBE_VOICEMAIL,
         METHOD_TRANSCRIBE_VOICEMAIL_ASYNC,
-        METHOD_GET_TRANSCRIPT);
+        METHOD_GET_TRANSCRIPT,
+        METHOD_SEND_TRANSCRIPTION_FEEDBACK);
   }
 
 }

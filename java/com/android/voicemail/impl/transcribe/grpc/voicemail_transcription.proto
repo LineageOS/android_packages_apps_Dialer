@@ -184,7 +184,7 @@ service VoicemailTranscriptionService {
 
   // Uploads user's transcription feedback. Feedback will only be collected from
   // user's who have consented to donate their voicemails.
-  rpc SendTranscriptionFeedback(SendTranscriptionFeedbackResponse)
+  rpc SendTranscriptionFeedback(SendTranscriptionFeedbackRequest)
       returns (SendTranscriptionFeedbackResponse) {
   }
 }
