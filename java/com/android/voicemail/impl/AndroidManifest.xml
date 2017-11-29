@@ -138,5 +138,9 @@
             android:name="com.android.internal.telephony.CARRIER_VVM_PACKAGE_INSTALLED" />
       </intent-filter>
     </receiver>
+
+    <receiver android:name="com.android.voicemail.impl.transcribe.GetTranscriptReceiver"
+        android:exported="false">
+    </receiver>
   </application>
 </manifest>
