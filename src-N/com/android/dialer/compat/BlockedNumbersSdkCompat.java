@@ -20,8 +20,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
+import android.util.Log;
 
 public class BlockedNumbersSdkCompat {
+
+    private static final String TAG = "BlockedNumbersSdkCompat";
 
     public static final Uri CONTENT_URI = BlockedNumbers.CONTENT_URI;
 
@@ -32,6 +35,11 @@ public class BlockedNumbersSdkCompat {
     public static final String E164_NUMBER = BlockedNumbers.COLUMN_E164_NUMBER;
 
     public static boolean canCurrentUserBlockNumbers(Context context) {
-        return BlockedNumberContract.canCurrentUserBlockNumbers(context);
+        try {
+            return BlockedNumberContract.canCurrentUserBlockNumbers(context);
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "Could not get content resolver", e);
+            return false;
+        }
     }
 }
