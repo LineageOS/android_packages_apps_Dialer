@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -60,10 +59,10 @@ public abstract class TranscriptionTask implements Runnable {
   private final JobCallback callback;
   private final JobWorkItem workItem;
   private final TranscriptionClientFactory clientFactory;
-  private final Uri voicemailUri;
+  protected final Uri voicemailUri;
   protected final PhoneAccountHandle phoneAccountHandle;
-  private final TranscriptionDbHelper databaseHelper;
   protected final TranscriptionConfigProvider configProvider;
+  protected final TranscriptionDbHelper dbHelper;
   protected ByteString audioData;
   protected AudioFormat encoding;
   protected volatile boolean cancelled;
@@ -86,7 +85,7 @@ public abstract class TranscriptionTask implements Runnable {
     this.voicemailUri = TranscriptionService.getVoicemailUri(workItem);
     this.phoneAccountHandle = TranscriptionService.getPhoneAccountHandle(workItem);
     this.configProvider = configProvider;
-    databaseHelper = new TranscriptionDbHelper(context, voicemailUri);
+    dbHelper = new TranscriptionDbHelper(context, voicemailUri);
   }
 
   @MainThread
@@ -124,44 +123,7 @@ public abstract class TranscriptionTask implements Runnable {
 
   private void transcribeVoicemail() {
     VvmLog.i(TAG, "transcribeVoicemail");
-    Pair<String, TranscriptionStatus> pair = getTranscription();
-    String transcript = pair.first;
-    TranscriptionStatus status = pair.second;
-    if (!TextUtils.isEmpty(transcript)) {
-      updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_AVAILABLE);
-      VvmLog.i(TAG, "transcribeVoicemail, got response");
-      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_SUCCESS);
-    } else {
-      VvmLog.i(TAG, "transcribeVoicemail, transcription unsuccessful, " + status);
-      switch (status) {
-        case FAILED_NO_SPEECH_DETECTED:
-          updateTranscriptionAndState(
-              transcript, VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED);
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_NO_SPEECH_DETECTED);
-          break;
-        case FAILED_LANGUAGE_NOT_SUPPORTED:
-          updateTranscriptionAndState(
-              transcript, VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED);
-          Logger.get(context)
-              .logImpression(
-                  DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_LANGUAGE_NOT_SUPPORTED);
-          break;
-        case EXPIRED:
-          updateTranscriptionAndState(transcript, VoicemailCompat.TRANSCRIPTION_FAILED);
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EXPIRED);
-          break;
-        default:
-          updateTranscriptionAndState(
-              transcript,
-              cancelled
-                  ? VoicemailCompat.TRANSCRIPTION_NOT_STARTED
-                  : VoicemailCompat.TRANSCRIPTION_FAILED);
-          Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EMPTY);
-          break;
-      }
-    }
+    recordResult(context, getTranscription(), dbHelper, cancelled);
   }
 
   protected TranscriptionResponse sendRequest(Request request) {
@@ -213,12 +175,57 @@ public abstract class TranscriptionTask implements Runnable {
     }
   }
 
-  private void updateTranscriptionAndState(String transcript, int newState) {
-    databaseHelper.setTranscriptionAndState(transcript, newState);
+  protected void updateTranscriptionState(int newState) {
+    dbHelper.setTranscriptionState(newState);
   }
 
-  private void updateTranscriptionState(int newState) {
-    databaseHelper.setTranscriptionState(newState);
+  protected void updateTranscriptionAndState(String transcript, int newState) {
+    dbHelper.setTranscriptionAndState(transcript, newState);
+  }
+
+  static void recordResult(
+      Context context, Pair<String, TranscriptionStatus> result, TranscriptionDbHelper dbHelper) {
+    recordResult(context, result, dbHelper, false);
+  }
+
+  static void recordResult(
+      Context context,
+      Pair<String, TranscriptionStatus> result,
+      TranscriptionDbHelper dbHelper,
+      boolean cancelled) {
+    if (result.first != null) {
+      VvmLog.i(TAG, "recordResult, got transcription");
+      dbHelper.setTranscriptionAndState(result.first, VoicemailCompat.TRANSCRIPTION_AVAILABLE);
+      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_SUCCESS);
+    } else if (result.second != null) {
+      VvmLog.i(TAG, "recordResult, failed to transcribe, reason: " + result.second);
+      switch (result.second) {
+        case FAILED_NO_SPEECH_DETECTED:
+          dbHelper.setTranscriptionState(VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED);
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_NO_SPEECH_DETECTED);
+          break;
+        case FAILED_LANGUAGE_NOT_SUPPORTED:
+          dbHelper.setTranscriptionState(
+              VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED);
+          Logger.get(context)
+              .logImpression(
+                  DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_LANGUAGE_NOT_SUPPORTED);
+          break;
+        case EXPIRED:
+          dbHelper.setTranscriptionState(VoicemailCompat.TRANSCRIPTION_FAILED);
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EXPIRED);
+          break;
+        default:
+          dbHelper.setTranscriptionState(
+              cancelled
+                  ? VoicemailCompat.TRANSCRIPTION_NOT_STARTED
+                  : VoicemailCompat.TRANSCRIPTION_FAILED);
+          Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_RESPONSE_EMPTY);
+          break;
+      }
+    }
   }
 
   private boolean readAndValidateAudioFile() {

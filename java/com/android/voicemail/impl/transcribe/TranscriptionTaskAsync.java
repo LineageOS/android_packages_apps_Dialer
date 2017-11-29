@@ -19,17 +19,13 @@ import android.app.job.JobWorkItem;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.util.Pair;
-import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.transcribe.TranscriptionService.JobCallback;
-import com.android.voicemail.impl.transcribe.grpc.GetTranscriptResponseAsync;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionResponseAsync;
 import com.google.internal.communications.voicemailtranscription.v1.DonationPreference;
-import com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailAsyncRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscriptionStatus;
 
@@ -73,53 +69,21 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
       VvmLog.i(TAG, "getTranscription, failed to upload voicemail.");
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
     } else {
-      waitForTranscription(uploadResponse);
-      return pollForTranscription(uploadResponse);
+      VvmLog.i(TAG, "getTranscription, begin polling for result.");
+      GetTranscriptReceiver.beginPolling(
+          context,
+          voicemailUri,
+          uploadResponse.getTranscriptionId(),
+          uploadResponse.getEstimatedWaitMillis(),
+          configProvider);
+      // This indicates that the result is not available yet
+      return new Pair<>(null, null);
     }
   }
 
   @Override
   protected DialerImpression.Type getRequestSentImpression() {
     return DialerImpression.Type.VVM_TRANSCRIPTION_REQUEST_SENT_ASYNC;
-  }
-
-  private static void waitForTranscription(TranscriptionResponseAsync uploadResponse) {
-    long millis = uploadResponse.getEstimatedWaitMillis();
-    VvmLog.i(TAG, "waitForTranscription, " + millis + " millis");
-    sleep(millis);
-  }
-
-  private Pair<String, TranscriptionStatus> pollForTranscription(
-      TranscriptionResponseAsync uploadResponse) {
-    VvmLog.i(TAG, "pollForTranscription");
-    GetTranscriptRequest request = getGetTranscriptRequest(uploadResponse);
-    for (int i = 0; i < configProvider.getMaxGetTranscriptPolls(); i++) {
-      if (cancelled) {
-        VvmLog.i(TAG, "pollForTranscription, cancelled.");
-        return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
-      }
-      Logger.get(context).logImpression(DialerImpression.Type.VVM_TRANSCRIPTION_POLL_REQUEST);
-      GetTranscriptResponseAsync response =
-          (GetTranscriptResponseAsync)
-              sendRequest((client) -> client.sendGetTranscriptRequest(request));
-      if (cancelled) {
-        VvmLog.i(TAG, "pollForTranscription, cancelled.");
-        return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
-      } else if (response == null) {
-        VvmLog.i(TAG, "pollForTranscription, no transcription result.");
-      } else if (response.isTranscribing()) {
-        VvmLog.i(TAG, "pollForTranscription, poll count: " + (i + 1));
-      } else if (response.hasFatalError()) {
-        VvmLog.i(TAG, "pollForTranscription, fail. " + response.getErrorDescription());
-        return new Pair<>(null, response.getTranscriptionStatus());
-      } else {
-        VvmLog.i(TAG, "pollForTranscription, got transcription");
-        return new Pair<>(response.getTranscript(), TranscriptionStatus.SUCCESS);
-      }
-      sleep(configProvider.getGetTranscriptPollIntervalMillis());
-    }
-    VvmLog.i(TAG, "pollForTranscription, timed out.");
-    return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
   }
 
   @VisibleForTesting
@@ -144,12 +108,5 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
         && VoicemailComponent.get(context)
             .getVoicemailClient()
             .isVoicemailDonationEnabled(context, phoneAccountHandle);
-  }
-
-  private GetTranscriptRequest getGetTranscriptRequest(TranscriptionResponseAsync uploadResponse) {
-    Assert.checkArgument(uploadResponse.getTranscriptionId() != null);
-    return GetTranscriptRequest.newBuilder()
-        .setTranscriptionId(uploadResponse.getTranscriptionId())
-        .build();
   }
 }
