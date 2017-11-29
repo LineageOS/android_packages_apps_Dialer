@@ -28,7 +28,6 @@ import android.telecom.Call;
 import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.concurrent.DialerExecutors;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -80,7 +79,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   public ListenableFuture<Boolean> isDirty(
       ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
     // TODO(calderwoodra): consider a different thread pool
-    return MoreExecutors.listeningDecorator(DialerExecutors.getLowPriorityThreadPool(appContext))
+    return MoreExecutors.newDirectExecutorService()
         .submit(() -> isDirtyInternal(phoneNumbers, lastModified));
   }
 
@@ -171,7 +170,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long lastModified) {
-    return MoreExecutors.listeningDecorator(DialerExecutors.getLowPriorityThreadPool(appContext))
+    return MoreExecutors.newDirectExecutorService()
         .submit(() -> bulkUpdateInternal(existingInfoMap, lastModified));
   }
 
