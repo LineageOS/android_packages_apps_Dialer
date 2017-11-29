@@ -115,7 +115,9 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     final Bundle args = new Bundle();
     args.putInt(ARG_TITLE_RES_ID, titleResId);
     args.putBoolean(ARG_CAN_SET_DEFAULT, canSetDefault);
-    args.putInt(ARG_SET_DEFAULT_RES_ID, setDefaultResId);
+    if (setDefaultResId != 0) {
+      args.putInt(ARG_SET_DEFAULT_RES_ID, setDefaultResId);
+    }
     args.putParcelableArrayList(ARG_ACCOUNT_HANDLES, accountHandlesCopy);
     args.putParcelable(ARG_LISTENER, listener);
     args.putString(ARG_CALL_ID, callId);
