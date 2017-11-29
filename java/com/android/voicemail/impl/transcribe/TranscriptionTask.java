@@ -55,10 +55,10 @@ import com.google.protobuf.ByteString;
 public abstract class TranscriptionTask implements Runnable {
   private static final String TAG = "TranscriptionTask";
 
-  protected final Context context;
   private final JobCallback callback;
   private final JobWorkItem workItem;
   private final TranscriptionClientFactory clientFactory;
+  protected final Context context;
   protected final Uri voicemailUri;
   protected final PhoneAccountHandle phoneAccountHandle;
   protected final TranscriptionConfigProvider configProvider;

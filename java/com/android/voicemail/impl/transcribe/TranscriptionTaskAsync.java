@@ -68,6 +68,9 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     } else if (uploadResponse == null) {
       VvmLog.i(TAG, "getTranscription, failed to upload voicemail.");
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
+    } else if (uploadResponse.getTranscriptionId() == null) {
+      VvmLog.i(TAG, "getTranscription, upload error: " + uploadResponse.status);
+      return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
     } else {
       VvmLog.i(TAG, "getTranscription, begin polling for result.");
       GetTranscriptReceiver.beginPolling(
@@ -98,7 +101,12 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     // available (because rating donating voicemails requires locally generated voicemail ids).
     if (configProvider.useClientGeneratedVoicemailIds()
         || configProvider.isVoicemailDonationAvailable()) {
-      builder.setTranscriptionId(TranscriptionUtils.getFingerprintFor(audioData));
+      // The server currently can't handle repeated transcription id's so if we add the Uri to the
+      // fingerprint (which contains the voicemail id) which is different each time a voicemail is
+      // downloaded.  If this becomes a problem then it should be possible to change the server
+      // behavior to allow id's to be re-used, a bug
+      String salt = voicemailUri.toString();
+      builder.setTranscriptionId(TranscriptionUtils.getFingerprintFor(audioData, salt));
     }
     return builder.build();
   }
