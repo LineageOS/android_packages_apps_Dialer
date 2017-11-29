@@ -150,7 +150,7 @@
 
           <LinearLayout
             android:id="@+id/transcription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/call_log_icon_margin"
             android:visibility="gone"
@@ -174,7 +174,53 @@
               android:textSize="@dimen/call_log_voicemail_transcription_text_size"
               android:focusable="true"
               android:nextFocusUp="@id/voicemail_transcription"
+              android:nextFocusDown="@+id/voicemail_transcription_rating"
               android:paddingTop="2dp"/>
+
+            <LinearLayout
+                android:id="@+id/voicemail_transcription_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/call_log_icon_margin"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:paddingTop="2dp"
+                android:orientation="horizontal">
+
+              <TextView
+                  style="@style/TranscriptionQualityRating"
+                  android:id="@+id/voicemail_transcription_rating_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:gravity="start"
+                  android:text="@string/voicemail_transcription_rating"/>
+
+              <TextView
+                  style="@style/TranscriptionQualityRatingLink"
+                  android:id="@+id/voicemail_transcription_rating_good"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="end"
+                  android:text="@string/voicemail_transcription_rating_good"/>
+
+              <TextView
+                  style="@style/TranscriptionQualityRating"
+                  android:id="@+id/voicemail_transcription_rating_separator"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="end"
+                  android:text="@string/voicemail_transcription_rating_separator"/>
+
+              <TextView
+                  style="@style/TranscriptionQualityRatingLink"
+                  android:id="@+id/voicemail_transcription_rating_bad"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="end"
+                  android:text="@string/voicemail_transcription_rating_bad"/>
+
+            </LinearLayout>
 
           </LinearLayout>
 

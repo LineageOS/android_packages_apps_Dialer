@@ -46,6 +46,7 @@ public final class ScheduledJobIds {
   public static final int VVM_TRANSCRIPTION_JOB = 203;
   public static final int VVM_TRANSCRIPTION_BACKFILL_JOB = 204;
   public static final int VVM_NOTIFICATION_JOB = 205;
+  public static final int VVM_TRANSCRIPTION_RATING_JOB = 206;
 
   public static final int VOIP_REGISTRATION = 300;
 

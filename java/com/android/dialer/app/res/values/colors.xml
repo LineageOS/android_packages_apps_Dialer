@@ -34,6 +34,8 @@
   <color name="call_log_voicemail_transcript_color">#de000000</color>
   <!-- 54% black -->
   <color name="call_log_voicemail_transcript_branding_color">#8a000000</color>
+  <!-- 100% blue -->
+  <color name="call_log_voicemail_transcript_rating_color">#ff2a56c6</color>
   <!-- 70% black -->
   <color name="call_log_action_color">#b3000000</color>
   <!-- 54% black -->

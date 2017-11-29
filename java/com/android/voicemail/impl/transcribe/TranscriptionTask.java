@@ -15,7 +15,6 @@
  */
 package com.android.voicemail.impl.transcribe;
 
-import android.annotation.TargetApi;
 import android.app.job.JobWorkItem;
 import android.content.Context;
 import android.net.Uri;
@@ -37,8 +36,6 @@ import com.android.voicemail.impl.transcribe.grpc.TranscriptionResponse;
 import com.google.internal.communications.voicemailtranscription.v1.AudioFormat;
 import com.google.internal.communications.voicemailtranscription.v1.TranscriptionStatus;
 import com.google.protobuf.ByteString;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Background task to get a voicemail transcription and update the database.
@@ -70,8 +67,6 @@ public abstract class TranscriptionTask implements Runnable {
   protected ByteString audioData;
   protected AudioFormat encoding;
   protected volatile boolean cancelled;
-
-  static final String AMR_PREFIX = "#!AMR\n";
 
   /** Functional interface for sending requests to the transcription server */
   public interface Request {
@@ -226,8 +221,6 @@ public abstract class TranscriptionTask implements Runnable {
     databaseHelper.setTranscriptionState(newState);
   }
 
-  // Uses try-with-resource
-  @TargetApi(android.os.Build.VERSION_CODES.M)
   private boolean readAndValidateAudioFile() {
     if (voicemailUri == null) {
       VvmLog.i(TAG, "Transcriber.readAndValidateAudioFile, file not found.");
@@ -236,15 +229,15 @@ public abstract class TranscriptionTask implements Runnable {
       VvmLog.i(TAG, "Transcriber.readAndValidateAudioFile, reading: " + voicemailUri);
     }
 
-    try (InputStream in = context.getContentResolver().openInputStream(voicemailUri)) {
-      audioData = ByteString.readFrom(in);
-      VvmLog.i(TAG, "Transcriber.readAndValidateAudioFile, read " + audioData.size() + " bytes");
-    } catch (IOException e) {
-      VvmLog.e(TAG, "Transcriber.readAndValidateAudioFile", e);
+    audioData = TranscriptionUtils.getAudioData(context, voicemailUri);
+    if (audioData != null) {
+      VvmLog.i(TAG, "readAndValidateAudioFile, read " + audioData.size() + " bytes");
+    } else {
+      VvmLog.i(TAG, "readAndValidateAudioFile, unable to read audio data for " + voicemailUri);
       return false;
     }
 
-    encoding = getAudioFormat(audioData);
+    encoding = TranscriptionUtils.getAudioFormat(audioData);
     if (encoding == AudioFormat.AUDIO_FORMAT_UNSPECIFIED) {
       VvmLog.i(TAG, "Transcriber.readAndValidateAudioFile, unknown encoding");
       return false;
@@ -253,15 +246,9 @@ public abstract class TranscriptionTask implements Runnable {
     return true;
   }
 
-  private static AudioFormat getAudioFormat(ByteString audioData) {
-    return audioData != null && audioData.startsWith(ByteString.copyFromUtf8(AMR_PREFIX))
-        ? AudioFormat.AMR_NB_8KHZ
-        : AudioFormat.AUDIO_FORMAT_UNSPECIFIED;
-  }
-
   @VisibleForTesting
   void setAudioDataForTesting(ByteString audioData) {
     this.audioData = audioData;
-    encoding = getAudioFormat(audioData);
+    encoding = TranscriptionUtils.getAudioFormat(audioData);
   }
 }
