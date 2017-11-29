@@ -50,4 +50,9 @@ public abstract class TranscriptionResponse {
 
     return false;
   }
+
+  @Override
+  public String toString() {
+    return "status: " + status;
+  }
 }

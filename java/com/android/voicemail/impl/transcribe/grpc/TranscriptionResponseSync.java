@@ -40,4 +40,9 @@ public class TranscriptionResponseSync extends TranscriptionResponse {
   public @Nullable String getTranscript() {
     return (response != null) ? response.getTranscript() : null;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + ", response: " + response;
+  }
 }

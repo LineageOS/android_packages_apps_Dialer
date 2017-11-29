@@ -18,6 +18,8 @@ package com.android.voicemail.impl.transcribe;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build.VERSION_CODES;
+import android.support.annotation.Nullable;
 import android.util.Base64;
 import com.android.dialer.common.Assert;
 import com.google.internal.communications.voicemailtranscription.v1.AudioFormat;
@@ -47,11 +49,14 @@ public class TranscriptionUtils {
         : AudioFormat.AUDIO_FORMAT_UNSPECIFIED;
   }
 
-  @TargetApi(android.os.Build.VERSION_CODES.O)
-  static String getFingerprintFor(ByteString data) {
+  @TargetApi(VERSION_CODES.O)
+  static String getFingerprintFor(ByteString data, @Nullable String salt) {
     Assert.checkArgument(data != null);
     try {
       MessageDigest md = MessageDigest.getInstance("MD5");
+      if (salt != null) {
+        md.update(salt.getBytes());
+      }
       byte[] md5Bytes = md.digest(data.toByteArray());
       return Base64.encodeToString(md5Bytes, Base64.DEFAULT);
     } catch (NoSuchAlgorithmException e) {

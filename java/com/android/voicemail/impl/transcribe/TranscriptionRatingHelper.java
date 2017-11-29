@@ -85,7 +85,8 @@ public class TranscriptionRatingHelper {
 
     private SendTranscriptionFeedbackRequest getFeedbackRequest() {
       ByteString audioData = TranscriptionUtils.getAudioData(context, voicemailUri);
-      String voicemailId = TranscriptionUtils.getFingerprintFor(audioData);
+      String salt = voicemailUri.toString();
+      String voicemailId = TranscriptionUtils.getFingerprintFor(audioData, salt);
       TranscriptionRating rating =
           TranscriptionRating.newBuilder()
               .setTranscriptionId(voicemailId)

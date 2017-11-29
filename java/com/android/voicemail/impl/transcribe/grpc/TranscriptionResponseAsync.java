@@ -50,4 +50,9 @@ public class TranscriptionResponseAsync extends TranscriptionResponse {
     }
     return 0;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + ", response: " + response;
+  }
 }

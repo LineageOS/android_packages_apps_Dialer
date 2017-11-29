@@ -89,8 +89,11 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
+import com.google.common.base.Optional;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Fragment that displays a twelve-key phone dialpad. */
 public class DialpadFragment extends Fragment
@@ -129,6 +132,9 @@ public class DialpadFragment extends Fragment
   private static final String EXTRA_SEND_EMPTY_FLASH = "com.android.phone.extra.SEND_EMPTY_FLASH";
 
   private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
+
+  private static Optional<String> currentCountryIsoForTesting = Optional.absent();
+
   private final Object mToneGeneratorLock = new Object();
   /** Set of dialpad keys that are currently being pressed */
   private final HashSet<View> mPressedDialpadKeys = new HashSet<>(12);
@@ -156,7 +162,6 @@ public class DialpadFragment extends Fragment
 
   // determines if we want to playback local DTMF tones.
   private boolean mDTMFToneEnabled;
-  private String mCurrentCountryIso;
   private CallStateReceiver mCallStateReceiver;
   private boolean mWasEmptyBeforeTextChange;
   /**
@@ -324,8 +329,6 @@ public class DialpadFragment extends Fragment
 
     mFirstLaunch = state == null;
 
-    mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-
     mProhibitedPhoneNumberRegexp =
         getResources().getString(R.string.config_prohibited_phone_number_regexp);
 
@@ -377,8 +380,7 @@ public class DialpadFragment extends Fragment
     mDigits.addTextChangedListener(this);
     mDigits.setElegantTextHeight(false);
 
-    initPhoneNumberFormattingTextWatcherExecutor.executeSerial(
-        GeoUtil.getCurrentCountryIso(getActivity()));
+    initPhoneNumberFormattingTextWatcherExecutor.executeSerial(getCurrentCountryIso());
 
     // Check for the presence of the keypad
     View oneButton = fragmentView.findViewById(R.id.one);
@@ -420,6 +422,19 @@ public class DialpadFragment extends Fragment
     Trace.endSection();
     Trace.endSection();
     return fragmentView;
+  }
+
+  private String getCurrentCountryIso() {
+    if (currentCountryIsoForTesting.isPresent()) {
+      return currentCountryIsoForTesting.get();
+    }
+
+    return GeoUtil.getCurrentCountryIso(getActivity());
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setCurrentCountryIsoForTesting(String countryCode) {
+    currentCountryIsoForTesting = Optional.of(countryCode);
   }
 
   private boolean isLayoutReady() {
@@ -561,7 +576,7 @@ public class DialpadFragment extends Fragment
 
   /** Sets formatted digits to digits field. */
   private void setFormattedDigits(String data, String normalizedNumber) {
-    final String formatted = getFormattedDigits(data, normalizedNumber, mCurrentCountryIso);
+    final String formatted = getFormattedDigits(data, normalizedNumber, getCurrentCountryIso());
     if (!TextUtils.isEmpty(formatted)) {
       Editable digits = mDigits.getText();
       digits.replace(0, digits.length(), formatted);
@@ -1717,19 +1732,189 @@ public class DialpadFragment extends Fragment
   }
 
   /**
-   * Input: the ISO 3166-1 two letters country code of the country the user is in
+   * A worker that helps formatting the phone number as the user types it in.
    *
-   * <p>Output: PhoneNumberFormattingTextWatcher. Note: It is unusual to return a non-data value
-   * from a worker, but it is a limitation in libphonenumber API that the watcher cannot be
-   * initialized on the main thread.
+   * <p>Input: the ISO 3166-1 two-letter country code of the country the user is in.
+   *
+   * <p>Output: an instance of {@link DialerPhoneNumberFormattingTextWatcher}. Note: It is unusual
+   * to return a non-data value from a worker. But {@link DialerPhoneNumberFormattingTextWatcher}
+   * depends on libphonenumber API, which cannot be initialized on the main thread.
    */
   private static class InitPhoneNumberFormattingTextWatcherWorker
-      implements Worker<String, PhoneNumberFormattingTextWatcher> {
+      implements Worker<String, DialerPhoneNumberFormattingTextWatcher> {
 
     @Nullable
     @Override
-    public PhoneNumberFormattingTextWatcher doInBackground(@Nullable String countryCode) {
-      return new PhoneNumberFormattingTextWatcher(countryCode);
+    public DialerPhoneNumberFormattingTextWatcher doInBackground(@Nullable String countryCode) {
+      return new DialerPhoneNumberFormattingTextWatcher(countryCode);
+    }
+  }
+
+  /**
+   * An extension of Android telephony's {@link PhoneNumberFormattingTextWatcher}. This watcher
+   * skips formatting Argentina mobile numbers for domestic calls.
+   *
+   * <p>As of Nov. 28, 2017, the as-you-type-formatting provided by libphonenumber's
+   * AsYouTypeFormatter (which {@link PhoneNumberFormattingTextWatcher} depends on) can't correctly
+   * format Argentina mobile numbers for domestic calls (a bug). We temporarily disable the
+   * formatting for such numbers until libphonenumber is fixed (which will come as early as the next
+   * Android release).
+   */
+  @VisibleForTesting
+  public static class DialerPhoneNumberFormattingTextWatcher
+      extends PhoneNumberFormattingTextWatcher {
+    private static final Pattern AR_DOMESTIC_CALL_MOBILE_NUMBER_PATTERN;
+
+    // This static initialization block builds a pattern for domestic calls to Argentina mobile
+    // numbers:
+    // (1) Local calls: 15 <local number>
+    // (2) Long distance calls: <area code> 15 <local number>
+    // See https://en.wikipedia.org/wiki/Telephone_numbers_in_Argentina for detailed explanations.
+    static {
+      String regex =
+          "0?("
+              + "  ("
+              + "   11|"
+              + "   2("
+              + "     2("
+              + "       02?|"
+              + "       [13]|"
+              + "       2[13-79]|"
+              + "       4[1-6]|"
+              + "       5[2457]|"
+              + "       6[124-8]|"
+              + "       7[1-4]|"
+              + "       8[13-6]|"
+              + "       9[1267]"
+              + "     )|"
+              + "     3("
+              + "       02?|"
+              + "       1[467]|"
+              + "       2[03-6]|"
+              + "       3[13-8]|"
+              + "       [49][2-6]|"
+              + "       5[2-8]|"
+              + "       [67]"
+              + "     )|"
+              + "     4("
+              + "       7[3-578]|"
+              + "       9"
+              + "     )|"
+              + "     6("
+              + "       [0136]|"
+              + "       2[24-6]|"
+              + "       4[6-8]?|"
+              + "       5[15-8]"
+              + "     )|"
+              + "     80|"
+              + "     9("
+              + "       0[1-3]|"
+              + "       [19]|"
+              + "       2\\d|"
+              + "       3[1-6]|"
+              + "       4[02568]?|"
+              + "       5[2-4]|"
+              + "       6[2-46]|"
+              + "       72?|"
+              + "       8[23]?"
+              + "     )"
+              + "   )|"
+              + "   3("
+              + "     3("
+              + "       2[79]|"
+              + "       6|"
+              + "       8[2578]"
+              + "     )|"
+              + "     4("
+              + "       0[0-24-9]|"
+              + "       [12]|"
+              + "       3[5-8]?|"
+              + "       4[24-7]|"
+              + "       5[4-68]?|"
+              + "       6[02-9]|"
+              + "       7[126]|"
+              + "       8[2379]?|"
+              + "       9[1-36-8]"
+              + "     )|"
+              + "     5("
+              + "       1|"
+              + "       2[1245]|"
+              + "       3[237]?|"
+              + "       4[1-46-9]|"
+              + "       6[2-4]|"
+              + "       7[1-6]|"
+              + "       8[2-5]?"
+              + "     )|"
+              + "     6[24]|"
+              + "     7("
+              + "       [069]|"
+              + "       1[1568]|"
+              + "       2[15]|"
+              + "       3[145]|"
+              + "       4[13]|"
+              + "       5[14-8]|"
+              + "       7[2-57]|"
+              + "       8[126]"
+              + "     )|"
+              + "     8("
+              + "       [01]|"
+              + "       2[15-7]|"
+              + "       3[2578]?|"
+              + "       4[13-6]|"
+              + "       5[4-8]?|"
+              + "       6[1-357-9]|"
+              + "       7[36-8]?|"
+              + "       8[5-8]?|"
+              + "       9[124]"
+              + "     )"
+              + "   )"
+              + " )?15"
+              + ").*";
+      AR_DOMESTIC_CALL_MOBILE_NUMBER_PATTERN = Pattern.compile(regex.replaceAll("\\s+", ""));
+    }
+
+    private final String countryCode;
+
+    DialerPhoneNumberFormattingTextWatcher(String countryCode) {
+      super(countryCode);
+      this.countryCode = countryCode;
+    }
+
+    @Override
+    public synchronized void afterTextChanged(Editable s) {
+      super.afterTextChanged(s);
+
+      if (!"AR".equals(countryCode)) {
+        return;
+      }
+
+      String rawNumber = getRawNumber(s);
+
+      // As modifying the input will trigger another call to afterTextChanged(Editable), we must
+      // check whether the input's format has already been removed and return if it has
+      // been to avoid infinite recursion.
+      if (rawNumber.contentEquals(s)) {
+        return;
+      }
+
+      Matcher matcher = AR_DOMESTIC_CALL_MOBILE_NUMBER_PATTERN.matcher(rawNumber);
+      if (matcher.matches()) {
+        s.replace(0, s.length(), rawNumber);
+        PhoneNumberUtils.addTtsSpan(s, 0 /* start */, s.length() /* endExclusive */);
+      }
+    }
+
+    private static String getRawNumber(Editable s) {
+      StringBuilder rawNumberBuilder = new StringBuilder();
+
+      for (int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
+        if (PhoneNumberUtils.isNonSeparator(c)) {
+          rawNumberBuilder.append(c);
+        }
+      }
+
+      return rawNumberBuilder.toString();
     }
   }
 }
