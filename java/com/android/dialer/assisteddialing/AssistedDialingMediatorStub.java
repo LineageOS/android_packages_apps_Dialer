@@ -32,6 +32,14 @@ public final class AssistedDialingMediatorStub implements AssistedDialingMediato
     return Optional.empty();
   }
 
+  /** Always returns an empty Optional. */
+  @Override
+  @SuppressWarnings("AndroidApiChecker") // Use of optional
+  @TargetApi(VERSION_CODES.N)
+  public Optional<String> userHomeCountryCode() {
+    return Optional.empty();
+  }
+
   @Override
   public boolean isPlatformEligible() {
     return false;
