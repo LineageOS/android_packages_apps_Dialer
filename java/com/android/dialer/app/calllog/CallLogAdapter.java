@@ -960,6 +960,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     views.callType = cursor.getInt(CallLogQuery.CALL_TYPE);
     views.voicemailUri = cursor.getString(CallLogQuery.VOICEMAIL_URI);
+    details.voicemailUri = views.voicemailUri;
 
     return details;
   }

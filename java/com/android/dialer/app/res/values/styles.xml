@@ -251,4 +251,19 @@
     <item name="android:layout_height">1dp</item>
     <item name="android:background">?android:attr/listDivider</item>
   </style>
+
+  <style name="TranscriptionQualityRating">
+    <item name="android:textColor">@color/call_log_voicemail_transcript_branding_color</item>
+    <item name="android:textSize">@dimen/call_log_voicemail_transcription_text_size</item>
+  </style>
+
+  <style name="TranscriptionQualityRatingLink">
+    <item name="android:textColor">@color/call_log_voicemail_transcript_rating_color</item>
+    <item name="android:textSize">@dimen/call_log_voicemail_transcription_text_size</item>
+    <item name="android:paddingTop">8dp</item>
+    <item name="android:paddingBottom">8dp</item>
+    <item name="android:paddingLeft">4dp</item>
+    <item name="android:paddingRight">4dp</item>
+    <item name="android:minHeight">48dp</item>
+  </style>
 </resources>

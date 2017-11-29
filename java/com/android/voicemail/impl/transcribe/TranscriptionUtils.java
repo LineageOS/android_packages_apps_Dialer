@@ -16,17 +16,38 @@
 package com.android.voicemail.impl.transcribe;
 
 import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
+import android.content.Context;
+import android.net.Uri;
 import android.util.Base64;
 import com.android.dialer.common.Assert;
+import com.google.internal.communications.voicemailtranscription.v1.AudioFormat;
 import com.google.protobuf.ByteString;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /** Utility methods used by this transcription package. */
 public class TranscriptionUtils {
+  static final String AMR_PREFIX = "#!AMR\n";
 
-  @TargetApi(VERSION_CODES.O)
+  // Uses try-with-resource
+  @TargetApi(android.os.Build.VERSION_CODES.M)
+  static ByteString getAudioData(Context context, Uri voicemailUri) {
+    try (InputStream in = context.getContentResolver().openInputStream(voicemailUri)) {
+      return ByteString.readFrom(in);
+    } catch (IOException e) {
+      return null;
+    }
+  }
+
+  static AudioFormat getAudioFormat(ByteString audioData) {
+    return audioData != null && audioData.startsWith(ByteString.copyFromUtf8(AMR_PREFIX))
+        ? AudioFormat.AMR_NB_8KHZ
+        : AudioFormat.AUDIO_FORMAT_UNSPECIFIED;
+  }
+
+  @TargetApi(android.os.Build.VERSION_CODES.O)
   static String getFingerprintFor(ByteString data) {
     Assert.checkArgument(data != null);
     try {
