@@ -56,6 +56,14 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
     return true;
   }
 
+  /** Returns the country code in which the library thinks the user typically resides. */
+  @Override
+  @SuppressWarnings("AndroidApiChecker") // Use of optional
+  @TargetApi(VERSION_CODES.N)
+  public Optional<String> userHomeCountryCode() {
+    return locationDetector.getUpperCaseUserHomeCountry();
+  }
+
   /**
    * Returns an Optional of type String containing the transformed number that was provided. The
    * transformed number should be capable of dialing out of the User's current country and

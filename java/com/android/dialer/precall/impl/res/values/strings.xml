@@ -17,7 +17,7 @@
 <resources>
   <!-- Title of the dialog to select which SIM to call with before making a call, if the device has
   multiple SIMs [CHAR LIMIT=40]-->
-  <string name="pre_call_select_phone_account">Call with</string>
+  <string name="pre_call_select_phone_account">Choose SIM for this call</string>
 
   <!-- Checkbox label when selecting a SIM when calling a contact, to use the selected SIM for the
    same contact and never ask again [CHAR LIMIT=40]-->
@@ -25,10 +25,10 @@
 
   <!-- Hint text under a SIM when selecting SIM to call, indicating the SIM is on the same carrier
    as the outgoing call.[CHAR LIMIT=40]-->
-  <string name="pre_call_select_phone_account_hint_intra_carrier">Same carrier</string>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">Uses your carrier</string>
 
   <!-- Hint text under a SIM when selecting SIM to call, indicating user often use the SIM to call
   the contact.[CHAR LIMIT=40]-->
-  <string name="pre_call_select_phone_account_hint_frequent">You use often</string>
+  <string name="pre_call_select_phone_account_hint_frequent">Recently used</string>
 
 </resources>
