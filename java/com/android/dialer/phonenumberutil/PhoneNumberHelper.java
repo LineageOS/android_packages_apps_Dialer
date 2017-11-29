@@ -26,6 +26,8 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
 import com.android.dialer.common.Assert;
@@ -335,6 +337,18 @@ public class PhoneNumberHelper {
     }
     String formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
     return formattedNumber != null ? formattedNumber : number;
+  }
+
+  @Nullable
+  public static CharSequence formatNumberForDisplay(
+      @Nullable String number, @NonNull String countryIso) {
+    if (number == null) {
+      return null;
+    }
+
+    return PhoneNumberUtils.createTtsSpannable(
+        BidiFormatter.getInstance()
+            .unicodeWrap(formatNumber(number, countryIso), TextDirectionHeuristics.LTR));
   }
 
   /**

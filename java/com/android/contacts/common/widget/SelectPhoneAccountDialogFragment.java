@@ -25,11 +25,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.SubscriptionInfo;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,10 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import com.android.contacts.common.R;
 import com.android.contacts.common.compat.PhoneAccountCompat;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -319,8 +324,9 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       } else {
         holder.numberTextView.setVisibility(View.VISIBLE);
         holder.numberTextView.setText(
-            PhoneNumberUtilsCompat.createTtsSpannable(
-                account.getAddress().getSchemeSpecificPart()));
+            PhoneNumberHelper.formatNumberForDisplay(
+                account.getAddress().getSchemeSpecificPart(),
+                getCountryIso(getContext(), accountHandle)));
       }
       holder.imageView.setImageDrawable(
           PhoneAccountCompat.createIconDrawable(account, getContext()));
@@ -337,6 +343,16 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       }
 
       return rowView;
+    }
+
+    private static String getCountryIso(
+        Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
+      Optional<SubscriptionInfo> info =
+          TelecomUtil.getSubscriptionInfo(context, phoneAccountHandle);
+      if (!info.isPresent()) {
+        return GeoUtil.getCurrentCountryIso(context);
+      }
+      return info.get().getCountryIso().toUpperCase();
     }
 
     private static final class ViewHolder {

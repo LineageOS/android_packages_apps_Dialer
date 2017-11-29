@@ -18,6 +18,7 @@ package com.android.voicemail.impl.transcribe;
 import android.content.Context;
 import android.os.Build;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import java.util.concurrent.TimeUnit;
 
 /** Provides configuration values needed to connect to the transcription server. */
 public class TranscriptionConfigProvider {
@@ -65,14 +66,24 @@ public class TranscriptionConfigProvider {
         .getLong("voicemail_transcription_max_transcription_retries", 2L);
   }
 
-  public long getMaxGetTranscriptPolls() {
-    return ConfigProviderBindings.get(context)
-        .getLong("voicemail_transcription_max_get_transcript_polls", 20L);
+  public int getMaxGetTranscriptPolls() {
+    return (int)
+        ConfigProviderBindings.get(context)
+            .getLong("voicemail_transcription_max_get_transcript_polls", 20L);
   }
 
-  public long getGetTranscriptPollIntervalMillis() {
+  public long getInitialGetTranscriptPollDelayMillis() {
     return ConfigProviderBindings.get(context)
-        .getLong("voicemail_transcription_get_transcript_poll_interval_millis", 1000L);
+        .getLong(
+            "voicemail_transcription_get_initial_transcript_poll_delay_millis",
+            TimeUnit.SECONDS.toMillis(1));
+  }
+
+  public long getMaxGetTranscriptPollTimeMillis() {
+    return ConfigProviderBindings.get(context)
+        .getLong(
+            "voicemail_transcription_get_max_transcript_poll_time_millis",
+            TimeUnit.MINUTES.toMillis(20));
   }
 
   public boolean isVoicemailDonationAvailable() {
@@ -97,6 +108,6 @@ public class TranscriptionConfigProvider {
         shouldUseSyncApi(),
         getMaxTranscriptionRetries(),
         getMaxGetTranscriptPolls(),
-        getGetTranscriptPollIntervalMillis());
+        getMaxGetTranscriptPollTimeMillis());
   }
 }

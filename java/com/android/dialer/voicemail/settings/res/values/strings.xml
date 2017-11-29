@@ -118,4 +118,11 @@
   <!-- Summary information for visual voicemail donation setting [CHAR LIMIT=NONE] -->
   <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription quality</string>
 
+  <!-- Title for disable visual voicemail confirmation dialog [CHAR LIMIT=40] -->
+  <string name="confirm_disable_voicemail_dialog_title">Turn off visual voicemail</string>
+  <!-- Message explaining the implictions of disabling visual voicemail [CHAR LIMIT=NONE] -->
+  <string name="confirm_disable_voicemail_dialog_message">This will delete any voicemail and Google transcripts stored within this app. Your carrier may keep its own copies.</string>
+  <!-- The label for the confirm-disable-voicemail button [CHAR LIMIT=16] -->
+  <string name="confirm_disable_voicemail_accept_dialog_label">TURN OFF</string>
+
 </resources>

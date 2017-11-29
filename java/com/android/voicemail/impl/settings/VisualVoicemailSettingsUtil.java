@@ -19,11 +19,14 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.sync.VvmAccountManager;
+import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
 
 /** Save whether or not a particular account is enabled in shared to be retrieved later. */
 public class VisualVoicemailSettingsUtil {
@@ -45,7 +48,38 @@ public class VisualVoicemailSettingsUtil {
     } else {
       VvmAccountManager.removeAccount(context, phoneAccount);
       config.startDeactivation();
+      // Remove all voicemails from the database
+      DialerExecutorComponent.get(context)
+          .dialerExecutorFactory()
+          .createNonUiTaskBuilder(new VoicemailDeleteWorker(context))
+          .onSuccess(VisualVoicemailSettingsUtil::onSuccess)
+          .onFailure(VisualVoicemailSettingsUtil::onFailure)
+          .build()
+          .executeParallel(null);
     }
+  }
+
+  private static class VoicemailDeleteWorker implements Worker<Void, Void> {
+    private final Context context;
+
+    VoicemailDeleteWorker(Context context) {
+      this.context = context;
+    }
+
+    @Override
+    public Void doInBackground(Void unused) {
+      int deleted = VoicemailDatabaseUtil.deleteAll(context);
+      VvmLog.i("VisualVoicemailSettingsUtil.doInBackground", "deleted " + deleted + " voicemails");
+      return null;
+    }
+  }
+
+  private static void onSuccess(Void unused) {
+    VvmLog.i("VisualVoicemailSettingsUtil.onSuccess", "delete voicemails");
+  }
+
+  private static void onFailure(Throwable t) {
+    VvmLog.e("VisualVoicemailSettingsUtil.onFailure", "delete voicemails", t);
   }
 
   public static void setArchiveEnabled(
