@@ -18,6 +18,7 @@ package com.android.dialer.precall.impl;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -34,8 +35,10 @@ public class PreCallActivity extends Activity {
     super.onCreate(savedInstanceState);
     preCallCoordinator = new PreCallCoordinatorImpl(this);
     preCallCoordinator.onCreate(getIntent(), savedInstanceState);
-      getWindow().addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    if (getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+        getWindow().addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
+    }
   }
 
   @Override

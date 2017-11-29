@@ -24,6 +24,8 @@ import android.support.annotation.Nullable;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression.Type;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.precall.PreCallCoordinator;
@@ -116,6 +118,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
   public void abortCall() {
     Assert.checkState(currentAction != null);
     aborted = true;
+    Logger.get(getActivity()).logImpression(Type.PRECALL_CANCELED);
   }
 
   @NonNull

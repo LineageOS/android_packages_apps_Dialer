@@ -47,6 +47,9 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.DialerImpression.Type;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
@@ -116,6 +119,7 @@ public class CallingAccountSelector implements PreCallAction {
     switch (builder.getUri().getScheme()) {
       case PhoneAccount.SCHEME_VOICEMAIL:
         showDialog(coordinator, coordinator.startPendingAction(), null, null, null);
+        Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_VOICEMAIL);
         break;
       case PhoneAccount.SCHEME_TEL:
         processPreferredAccount(coordinator);
@@ -146,6 +150,8 @@ public class CallingAccountSelector implements PreCallAction {
                 return;
               }
               if (result.phoneAccountHandle.isPresent()) {
+                Logger.get(coordinator.getActivity())
+                    .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_USED);
                 coordinator.getBuilder().setPhoneAccountHandle(result.phoneAccountHandle.get());
                 pendingAction.finish();
                 return;
@@ -155,6 +161,8 @@ public class CallingAccountSelector implements PreCallAction {
                       .getSystemService(TelecomManager.class)
                       .getDefaultOutgoingPhoneAccount(builder.getUri().getScheme());
               if (defaultPhoneAccount != null) {
+                Logger.get(coordinator.getActivity())
+                    .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_GLOBAL_USED);
                 builder.setPhoneAccountHandle(defaultPhoneAccount);
                 pendingAction.finish();
                 return;
@@ -183,6 +191,25 @@ public class CallingAccountSelector implements PreCallAction {
       @Nullable String number,
       @Nullable Suggestion suggestion) {
     Assert.isMainThread();
+    Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_SHOWN);
+    if (dataId != null) {
+      Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_IN_CONTACTS);
+    }
+    if (suggestion != null) {
+      Logger.get(coordinator.getActivity())
+          .logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AVAILABLE);
+      switch (suggestion.reason) {
+        case INTRA_CARRIER:
+          Logger.get(coordinator.getActivity())
+              .logImpression(Type.DUAL_SIM_SELECTION_SUGGESTED_CARRIER);
+          break;
+        case FREQUENT:
+          Logger.get(coordinator.getActivity())
+              .logImpression(Type.DUAL_SIM_SELECTION_SUGGESTED_FREQUENCY);
+          break;
+        default:
+      }
+    }
     List<PhoneAccountHandle> phoneAccountHandles =
         coordinator
             .getActivity()
@@ -194,7 +221,7 @@ public class CallingAccountSelector implements PreCallAction {
             dataId != null /* canSetDefault */,
             R.string.pre_call_select_phone_account_remember,
             phoneAccountHandles,
-            new SelectedListener(coordinator, pendingAction, dataId, number),
+            new SelectedListener(coordinator, pendingAction, dataId, number, suggestion),
             null /* call ID */,
             buildHint(coordinator.getActivity(), phoneAccountHandles, suggestion));
     selectPhoneAccountDialogFragment.show(
@@ -351,25 +378,39 @@ public class CallingAccountSelector implements PreCallAction {
     private final PreCallCoordinator.PendingAction listener;
     private final String dataId;
     private final String number;
+    private final Suggestion suggestion;
 
     public SelectedListener(
         @NonNull PreCallCoordinator builder,
         @NonNull PreCallCoordinator.PendingAction listener,
         @Nullable String dataId,
-        @Nullable String number) {
+        @Nullable String number,
+        @Nullable Suggestion suggestion) {
       this.coordinator = Assert.isNotNull(builder);
       this.listener = Assert.isNotNull(listener);
       this.dataId = dataId;
       this.number = number;
+      this.suggestion = suggestion;
     }
 
     @MainThread
     @Override
     public void onPhoneAccountSelected(
         PhoneAccountHandle selectedAccountHandle, boolean setDefault, @Nullable String callId) {
+      if (suggestion != null) {
+        if (suggestion.phoneAccountHandle.equals(selectedAccountHandle)) {
+          Logger.get(coordinator.getActivity())
+              .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTED_SIM_SELECTED);
+        } else {
+          Logger.get(coordinator.getActivity())
+              .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_NON_SUGGESTED_SIM_SELECTED);
+        }
+      }
       coordinator.getBuilder().setPhoneAccountHandle(selectedAccountHandle);
 
       if (dataId != null && setDefault) {
+        Logger.get(coordinator.getActivity())
+            .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_SET);
         DialerExecutorComponent.get(coordinator.getActivity())
             .dialerExecutorFactory()
             .createNonUiTaskBuilder(new WritePreferredAccountWorker())
