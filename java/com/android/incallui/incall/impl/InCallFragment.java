@@ -42,6 +42,7 @@ import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -153,6 +154,7 @@ public class InCallFragment extends Fragment
             (ImageView) view.findViewById(R.id.contactgrid_avatar),
             getResources().getDimensionPixelSize(R.dimen.incall_avatar_size),
             true /* showAnonymousAvatar */);
+    contactGridManager.onMultiWindowModeChanged(ActivityCompat.isInMultiWindowMode(getActivity()));
 
     paginator = (InCallPaginator) view.findViewById(R.id.incall_paginator);
     pager = (LockableViewPager) view.findViewById(R.id.incall_pager);
@@ -258,18 +260,9 @@ public class InCallFragment extends Fragment
       // Hide the avatar to make room for location
       contactGridManager.setAvatarHidden(true);
 
-      // Need to widen the contact grid to fit location information
-      View contactGridView = getView().findViewById(R.id.incall_contact_grid);
-      ViewGroup.LayoutParams params = contactGridView.getLayoutParams();
-      if (params instanceof ViewGroup.MarginLayoutParams) {
-        ((ViewGroup.MarginLayoutParams) params).setMarginStart(0);
-        ((ViewGroup.MarginLayoutParams) params).setMarginEnd(0);
-      }
-      contactGridView.setLayoutParams(params);
-
       // Need to let the dialpad move up a little further when location info is being shown
       View dialpadView = getView().findViewById(R.id.incall_dialpad_container);
-      params = dialpadView.getLayoutParams();
+      ViewGroup.LayoutParams params = dialpadView.getLayoutParams();
       if (params instanceof RelativeLayout.LayoutParams) {
         ((RelativeLayout.LayoutParams) params).removeRule(RelativeLayout.BELOW);
       }
@@ -560,6 +553,7 @@ public class InCallFragment extends Fragment
       // Need to show or hide location
       showLocationUi(isInMultiWindowMode ? null : getLocationFragment());
     }
+    contactGridManager.onMultiWindowModeChanged(isInMultiWindowMode);
   }
 
   private Fragment getLocationFragment() {

@@ -97,10 +97,6 @@ public class BottomRow {
       if (TextUtils.isEmpty(label)) {
         label = context.getString(R.string.incall_call_ended);
       }
-    } else if (!TextUtils.isEmpty(state.callbackNumber)) {
-      // This is used for carriers like Project Fi to show the callback number for emergency calls.
-      label = context.getString(R.string.contact_grid_callback_number, state.callbackNumber);
-      isTimerVisible = false;
     } else {
       label = getLabelForPhoneNumber(primaryInfo);
       shouldPopulateAccessibilityEvent = primaryInfo.nameIsNumber;
