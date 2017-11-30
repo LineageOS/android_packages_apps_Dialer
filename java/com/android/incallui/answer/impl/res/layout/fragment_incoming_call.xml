@@ -131,6 +131,11 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
 
+      <include
+          layout="@layout/device_number_row"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
       <FrameLayout
           android:id="@+id/incall_data_container"
           android:layout_width="match_parent"

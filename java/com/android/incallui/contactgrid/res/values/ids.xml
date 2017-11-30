@@ -29,4 +29,6 @@
   <item name="contactgrid_top_row" type="id"/>
   <item name="contactgrid_bottom_row" type="id"/>
   <item name="contactgrid_top_row_space" type="id"/>
+  <item name="contactgrid_location_divider" type="id"/>
+  <item name="contactgrid_device_number_text" type="id"/>
 </resources>
