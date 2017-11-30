@@ -491,6 +491,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     mP13nLogger = P13nLogging.get(getApplicationContext());
     mP13nRanker = P13nRanking.get(getApplicationContext());
     Trace.endSection();
+
+    // Update the new search fragment to the correct position and the ActionBar's visibility.
+    if (ConfigProviderBindings.get(this).getBoolean("enable_new_search_fragment", false)) {
+      updateSearchFragmentPosition();
+    }
   }
 
   @NonNull
