@@ -20,7 +20,7 @@
   <string name="assisted_dialing_setting_title">Assisted dialing</string>
 
   <!-- Label for a setting enabling assisted dialing switch preference-->
-  <string name="assisted_dialing_setting_summary">Automatically correct the phone number prefix when traveling and calling international numbers</string>
+  <string name="assisted_dialing_setting_summary">Predict and add a country code when you call while traveling abroad</string>
 
   <!-- Key for the assisted dialing setting toggle-->
   <string name="assisted_dialing_setting_toggle_key" translatable="false">assisted_dialing_setting_toggle_key</string>

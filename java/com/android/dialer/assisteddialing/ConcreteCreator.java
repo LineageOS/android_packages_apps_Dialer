@@ -41,8 +41,9 @@ public final class ConcreteCreator {
 
   // Floor set at N due to use of Optional.
   protected static final int BUILD_CODE_FLOOR = Build.VERSION_CODES.N;
-  // Ceiling set at O because this feature will ship as part of the framework in P.
-  @VisibleForTesting public static final int BUILD_CODE_CEILING = Build.VERSION_CODES.O;
+  // Ceiling set at O_MR1 because this feature will ship as part of the framework in P.
+  // TODO(erfanian): Switch to public build constant when 27 is available in public master.
+  @VisibleForTesting public static final int BUILD_CODE_CEILING = 27;
 
   /**
    * Creates a new AssistedDialingMediator
@@ -86,9 +87,7 @@ public final class ConcreteCreator {
       return new AssistedDialingMediatorStub();
     }
 
-    Constraints constraints =
-        new Constraints(
-            context, configProvider.getString("assisted_dialing_csv_country_codes", ""));
+    Constraints constraints = new Constraints(context, getCountryCodeProvider(configProvider));
     return new AssistedDialingMediatorImpl(
         new LocationDetector(
             telephonyManager,
@@ -107,5 +106,17 @@ public final class ConcreteCreator {
     return (Build.VERSION.SDK_INT >= BUILD_CODE_FLOOR
             && Build.VERSION.SDK_INT <= BUILD_CODE_CEILING)
         && configProvider.getBoolean("assisted_dialing_enabled", false);
+  }
+
+  /**
+   * Returns a CountryCodeProvider responsible for providing countries eligible for assisted Dialing
+   */
+  public static CountryCodeProvider getCountryCodeProvider(ConfigProvider configProvider) {
+    if (configProvider == null) {
+      LogUtil.i("ConcreteCreator.getCountryCodeProvider", "provided configProvider was null");
+      throw new NullPointerException("Provided configProvider was null");
+    }
+
+    return new CountryCodeProvider(configProvider);
   }
 }

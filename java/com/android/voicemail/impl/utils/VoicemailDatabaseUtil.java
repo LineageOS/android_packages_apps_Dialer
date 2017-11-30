@@ -57,6 +57,16 @@ public class VoicemailDatabaseUtil {
     return voicemails.size();
   }
 
+  /**
+   * Delete all the voicemails whose source_package field matches this package
+   *
+   * @return the number of voicemails deleted
+   */
+  public static int deleteAll(Context context) {
+    ContentResolver contentResolver = context.getContentResolver();
+    return contentResolver.delete(Voicemails.buildSourceUri(context.getPackageName()), null, null);
+  }
+
   /** Maps structured {@link Voicemail} to {@link ContentValues} in content provider. */
   private static ContentValues getContentValues(Voicemail voicemail) {
     ContentValues contentValues = new ContentValues();

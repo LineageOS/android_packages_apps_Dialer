@@ -17,117 +17,116 @@
 -->
 
 <ViewAnimator xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/location_view_animator"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:layout_marginTop="16dp"
-  android:layout_marginBottom="16dp"
-  android:background="@drawable/bg_location_card"
-  android:elevation="2dp"
-  android:inAnimation="@android:anim/fade_in"
-  android:measureAllChildren="true"
-  android:outAnimation="@android:anim/fade_out">
-
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/location_loading_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/location_view_animator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:orientation="vertical">
+    android:layout_marginTop="16dp"
+    android:background="@drawable/bg_location_card"
+    android:elevation="2dp"
+    android:inAnimation="@android:anim/fade_in"
+    android:measureAllChildren="true"
+    android:outAnimation="@android:anim/fade_out">
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/location_loading_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:orientation="vertical">
 
     <ProgressBar
-      android:id="@+id/location_loading_spinner"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="28dp"
-      android:layout_marginBottom="12dp"
-      android:layout_gravity="center_horizontal"/>
+        android:id="@+id/location_loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="12dp"
+        android:layout_gravity="center_horizontal"/>
 
     <TextView
-      android:id="@+id/location_loading_text"
-      style="@style/LocationLoadingTextStyle"
-      android:layout_width="match_parent"
-      android:layout_height="24sp"
-      android:layout_marginBottom="20dp"
-      android:layout_marginStart="24dp"
-      android:layout_marginEnd="24dp"
-      android:gravity="center"
-      android:text="@string/location_loading"/>
+        android:id="@+id/location_loading_text"
+        style="@style/LocationLoadingTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="24sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="@string/location_loading"/>
 
   </LinearLayout>
 
   <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/location_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:columnCount="2"
-    android:orientation="horizontal">
+      android:id="@+id/location_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:columnCount="2"
+      android:orientation="horizontal">
 
     <TextView
-      android:id="@+id/location_address_title"
-      style="@style/LocationAddressTitleTextStyle"
-      android:layout_width="0dp"
-      android:layout_height="20sp"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_columnWeight="1"
-      android:text="@string/location_title"/>
+        android:id="@+id/location_address_title"
+        style="@style/LocationAddressTitleTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="20sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_columnWeight="1"
+        android:text="@string/location_title"/>
 
     <ImageView
-      android:id="@+id/location_map"
-      android:layout_width="@dimen/location_map_width"
-      android:layout_height="@dimen/location_map_height"
-      android:layout_margin="16dp"
-      android:layout_gravity="end|center_vertical"
-      android:layout_rowSpan="4"
-      android:contentDescription="@string/location_map_description"
-      android:scaleType="centerCrop"
-      android:visibility="invisible"
-      tools:src="?android:colorPrimaryDark"
-      tools:visibility="visible"/>
+        android:id="@+id/location_map"
+        android:layout_width="@dimen/location_map_width"
+        android:layout_height="@dimen/location_map_height"
+        android:layout_margin="16dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_rowSpan="4"
+        android:contentDescription="@string/location_map_description"
+        android:scaleType="centerCrop"
+        android:visibility="invisible"
+        tools:src="?android:colorPrimaryDark"
+        tools:visibility="visible"/>
 
     <TextView
-      android:id="@+id/address_line_one"
-      style="@style/LocationAddressTextStyle"
-      android:layout_width="0dp"
-      android:layout_height="24sp"
-      android:layout_marginStart="16dp"
-      android:layout_columnWeight="1"
-      android:ellipsize="end"
-      android:lines="1"
-      android:visibility="invisible"
-      tools:text="1600 Amphitheatre Pkwy And a bit"
-      tools:visibility="visible"/>
+        android:id="@+id/address_line_one"
+        style="@style/LocationAddressTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="24sp"
+        android:layout_marginStart="16dp"
+        android:layout_columnWeight="1"
+        android:ellipsize="end"
+        android:lines="1"
+        android:visibility="invisible"
+        tools:text="1600 Amphitheatre Pkwy And a bit"
+        tools:visibility="visible"/>
 
     <TextView
-      android:id="@+id/address_line_two"
-      style="@style/LocationAddressTextStyle"
-      android:layout_width="0dp"
-      android:layout_height="24sp"
-      android:layout_marginStart="16dp"
-      android:layout_columnWeight="1"
-      android:ellipsize="end"
-      android:lines="1"
-      android:visibility="invisible"
-      tools:text="Mountain View, CA 94043"
-      tools:visibility="visible"/>
+        android:id="@+id/address_line_two"
+        style="@style/LocationAddressTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="24sp"
+        android:layout_marginStart="16dp"
+        android:layout_columnWeight="1"
+        android:ellipsize="end"
+        android:lines="1"
+        android:visibility="invisible"
+        tools:text="Mountain View, CA 94043"
+        tools:visibility="visible"/>
 
     <TextView
-      android:id="@+id/lat_long_line"
-      style="@style/LocationLatLongTextStyle"
-      android:layout_width="0dp"
-      android:layout_height="24sp"
-      android:layout_marginBottom="12dp"
-      android:layout_marginStart="16dp"
-      android:layout_columnWeight="1"
-      android:ellipsize="end"
-      android:lines="1"
-      android:visibility="invisible"
-      tools:text="Lat: 37.421719, Long: -122.085297"
-      tools:visibility="visible"/>
+        android:id="@+id/lat_long_line"
+        style="@style/LocationLatLongTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="24sp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_columnWeight="1"
+        android:ellipsize="end"
+        android:lines="1"
+        android:visibility="invisible"
+        tools:text="Lat: 37.421719, Long: -122.085297"
+        tools:visibility="visible"/>
 
   </GridLayout>
 

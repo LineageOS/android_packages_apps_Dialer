@@ -15,34 +15,21 @@
  */
 package com.android.voicemail.impl.transcribe.grpc;
 
-import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
-import com.google.internal.communications.voicemailtranscription.v1.TranscribeVoicemailResponse;
+import com.google.internal.communications.voicemailtranscription.v1.SendTranscriptionFeedbackResponse;
 import io.grpc.Status;
 
-/** Container for response and status objects for a synchronous transcription request */
-public class TranscriptionResponseSync extends TranscriptionResponse {
-  @Nullable private final TranscribeVoicemailResponse response;
+/** Container for response and status objects for an asynchronous transcription feedback request */
+public class TranscriptionFeedbackResponseAsync extends TranscriptionResponse {
 
   @VisibleForTesting
-  public TranscriptionResponseSync(Status status) {
-    super(status);
-    this.response = null;
-  }
-
-  @VisibleForTesting
-  public TranscriptionResponseSync(TranscribeVoicemailResponse response) {
+  public TranscriptionFeedbackResponseAsync(SendTranscriptionFeedbackResponse response) {
     Assert.checkArgument(response != null);
-    this.response = response;
   }
 
-  public @Nullable String getTranscript() {
-    return (response != null) ? response.getTranscript() : null;
-  }
-
-  @Override
-  public String toString() {
-    return super.toString() + ", response: " + response;
+  @VisibleForTesting
+  public TranscriptionFeedbackResponseAsync(Status status) {
+    super(status);
   }
 }

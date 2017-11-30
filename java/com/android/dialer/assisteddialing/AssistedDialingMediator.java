@@ -27,6 +27,11 @@ public interface AssistedDialingMediator {
   /** Returns {@code true} if the current client platform supports Assisted Dialing. */
   public boolean isPlatformEligible();
 
+  /** Returns the country code in which the library thinks the user typically resides. */
+  @SuppressWarnings("AndroidApiChecker") // Use of optional
+  @TargetApi(VERSION_CODES.N)
+  public Optional<String> userHomeCountryCode();
+
   @SuppressWarnings("AndroidApiChecker") // Use of optional
   @TargetApi(VERSION_CODES.N)
   public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);

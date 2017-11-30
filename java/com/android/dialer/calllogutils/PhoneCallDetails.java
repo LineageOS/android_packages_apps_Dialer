@@ -134,6 +134,9 @@ public class PhoneCallDetails {
   public int voicemailId;
   public int previousGroup;
 
+  // The URI of the voicemail associated with this phone call, if this call went to voicemail.
+  public String voicemailUri;
+
   /**
    * Constructor with required fields for the details of a call with a number associated with a
    * contact.

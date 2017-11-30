@@ -14,6 +14,8 @@
 package com.android.dialer.voicemail.settings;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -226,16 +228,13 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     LogUtil.d(TAG, "onPreferenceChange: \"" + preference + "\" changed to \"" + objValue + "\"");
     if (preference.getKey().equals(voicemailVisualVoicemail.getKey())) {
       boolean isEnabled = (boolean) objValue;
-      voicemailClient.setVoicemailEnabled(getContext(), phoneAccountHandle, isEnabled);
-
-      if (isEnabled) {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_ENABLED_IN_SETTINGS);
+      if (!isEnabled) {
+        showDisableConfirmationDialog();
+        // Don't let the preference setting proceed.
+        return false;
       } else {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
+        updateVoicemailEnabled(true);
       }
-
-      updateChangePin();
-      updateDonateVoicemail();
     } else if (preference.getKey().equals(autoArchiveSwitchPreference.getKey())) {
       logArchiveToggle((boolean) objValue);
       voicemailClient.setVoicemailArchiveEnabled(
@@ -246,8 +245,22 @@ public class VoicemailSettingsFragment extends PreferenceFragment
           getContext(), phoneAccountHandle, (boolean) objValue);
     }
 
-    // Always let the preference setting proceed.
+    // Let the preference setting proceed.
     return true;
+  }
+
+  private void updateVoicemailEnabled(boolean isEnabled) {
+    voicemailClient.setVoicemailEnabled(getContext(), phoneAccountHandle, isEnabled);
+    voicemailVisualVoicemail.setChecked(isEnabled);
+
+    if (isEnabled) {
+      Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_ENABLED_IN_SETTINGS);
+    } else {
+      Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
+    }
+
+    updateChangePin();
+    updateDonateVoicemail();
   }
 
   private void updateChangePin() {
@@ -304,5 +317,35 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     return new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
         .putExtra(Settings.EXTRA_CHANNEL_ID, channelId)
         .putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
+  }
+
+  private void showDisableConfirmationDialog() {
+    LogUtil.i(TAG, "showDisableConfirmationDialog");
+    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+    builder.setTitle(R.string.confirm_disable_voicemail_dialog_title);
+    builder.setMessage(R.string.confirm_disable_voicemail_dialog_message);
+    builder.setPositiveButton(
+        R.string.confirm_disable_voicemail_accept_dialog_label,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            LogUtil.i(TAG, "showDisableConfirmationDialog, confirmed");
+            updateVoicemailEnabled(false);
+            dialog.dismiss();
+          }
+        });
+
+    builder.setNegativeButton(
+        android.R.string.cancel,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            LogUtil.i(TAG, "showDisableConfirmationDialog, cancelled");
+            dialog.dismiss();
+          }
+        });
+
+    builder.setCancelable(true);
+    builder.show();
   }
 }
