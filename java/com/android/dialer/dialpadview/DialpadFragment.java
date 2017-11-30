@@ -49,6 +49,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -89,6 +90,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
+import com.google.common.base.Ascii;
 import com.google.common.base.Optional;
 import java.util.HashSet;
 import java.util.List;
@@ -1882,13 +1884,21 @@ public class DialpadFragment extends Fragment
 
     @Override
     public synchronized void afterTextChanged(Editable s) {
-      super.afterTextChanged(s);
-
-      if (!"AR".equals(countryCode)) {
+      // When the country code is NOT "AR", Android telephony's PhoneNumberFormattingTextWatcher can
+      // correctly handle the input so we will let it do its job.
+      if (!Ascii.toUpperCase(countryCode).equals("AR")) {
+        super.afterTextChanged(s);
         return;
       }
 
+      // When the country code is "AR", PhoneNumberFormattingTextWatcher can also format the input
+      // correctly if the number is NOT for a domestic call to a mobile phone.
       String rawNumber = getRawNumber(s);
+      Matcher matcher = AR_DOMESTIC_CALL_MOBILE_NUMBER_PATTERN.matcher(rawNumber);
+      if (!matcher.matches()) {
+        super.afterTextChanged(s);
+        return;
+      }
 
       // As modifying the input will trigger another call to afterTextChanged(Editable), we must
       // check whether the input's format has already been removed and return if it has
@@ -1897,11 +1907,16 @@ public class DialpadFragment extends Fragment
         return;
       }
 
-      Matcher matcher = AR_DOMESTIC_CALL_MOBILE_NUMBER_PATTERN.matcher(rawNumber);
-      if (matcher.matches()) {
-        s.replace(0, s.length(), rawNumber);
-        PhoneNumberUtils.addTtsSpan(s, 0 /* start */, s.length() /* endExclusive */);
-      }
+      // If we reach this point, the country code must be "AR" and variable "s" represents a number
+      // for a domestic call to a mobile phone. "s" is incorrectly formatted by Android telephony's
+      // PhoneNumberFormattingTextWatcher so we remove its format by replacing it with the raw
+      // number.
+      s.replace(0, s.length(), rawNumber);
+
+      // Make sure the cursor is at the end of the text.
+      Selection.setSelection(s, s.length());
+
+      PhoneNumberUtils.addTtsSpan(s, 0 /* start */, s.length() /* endExclusive */);
     }
 
     private static String getRawNumber(Editable s) {

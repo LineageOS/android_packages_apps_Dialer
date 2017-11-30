@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.configprovider.ConfigProvider;
@@ -56,8 +58,14 @@ public class LaunchPreCallActivity extends Activity {
     ConfigProvider configProvider = ConfigProviderBindings.get(getApplicationContext());
     Intent intent = getIntent();
     CallIntentBuilder builder = new CallIntentBuilder(intent.getData(), Type.EXTERNAL_INITIATION);
+
+    PhoneAccountHandle phoneAccountHandle = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE);
+    if (phoneAccountHandle == null) {
+      phoneAccountHandle = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
+    }
+
     builder
-        .setPhoneAccountHandle(intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT_HANDLE))
+        .setPhoneAccountHandle(phoneAccountHandle)
         .setIsVideoCall(intent.getBooleanExtra(EXTRA_IS_VIDEO_CALL, false))
         .setCallSubject(intent.getStringExtra(EXTRA_CALL_SUBJECT))
         .setAllowAssistedDial(
