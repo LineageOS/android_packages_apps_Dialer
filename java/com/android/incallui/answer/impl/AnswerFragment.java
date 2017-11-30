@@ -694,6 +694,8 @@ public class AnswerFragment extends Fragment
     updateImportanceBadgeVisibility();
 
     contactGridManager = new ContactGridManager(view, null, 0, false /* showAnonymousAvatar */);
+    boolean isInMultiWindowMode = ActivityCompat.isInMultiWindowMode(getActivity());
+    contactGridManager.onMultiWindowModeChanged(isInMultiWindowMode);
 
     Fragment answerMethod =
         getChildFragmentManager().findFragmentById(R.id.answer_method_container);
@@ -712,7 +714,7 @@ public class AnswerFragment extends Fragment
     initSecondaryButton();
 
     int flags = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-    if (!ActivityCompat.isInMultiWindowMode(getActivity())
+    if (!isInMultiWindowMode
         && (getActivity().checkSelfPermission(permission.STATUS_BAR)
             == PackageManager.PERMISSION_GRANTED)) {
       LogUtil.i("AnswerFragment.onCreateView", "STATUS_BAR permission granted, disabling nav bar");
