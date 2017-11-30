@@ -21,7 +21,7 @@
     <item name="android:colorAccent">@color/dialtacts_theme_color</item>
   </style>
 
-  <style name="DialtactsTheme" parent="DialerThemeBase">
+  <style name="DialtactsThemeBase" parent="DialerThemeBase">
 
     <!-- Styles that require AppCompat compatibility, remember to update both sets -->
     <item name="android:windowActionBarOverlay">true</item>
@@ -75,6 +75,9 @@
     <item name="list_item_video_call_icon_margin">8dip</item>
 
     <item name="dialpad_style">@style/Dialpad.Light</item>
+  </style>
+
+  <style name="DialtactsTheme" parent="DialtactsThemeBase">
   </style>
 
   <!-- Action bar overflow menu icon.  White with no shadow. -->

@@ -21,6 +21,7 @@ import com.google.common.util.concurrent.SettableFuture;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 
 /**
  * An ExecutorService that delegates to the UI thread. Rejects attempts to shut down, and all
@@ -28,6 +29,9 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class UiThreadExecutor extends AbstractListeningExecutorService {
+
+  @Inject
+  UiThreadExecutor() {}
 
   @Override
   public void shutdown() {
