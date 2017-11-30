@@ -15,7 +15,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.incallui">
+    package="com.android.incallui"
+    xmlns:tools="http://schemas.android.com/tools">
 
   <uses-sdk
       android:minSdkVersion="23"
@@ -36,6 +37,13 @@
 
   <!-- Testing location -->
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+  <!-- Broadcasting in-call UI changes -->
+  <uses-permission android:name="com.motorola.incallui.permission.INCOMING_CALL_VISIBILITY_CHANGED" />
+  <!-- System permission to restrict access to Intent INCOMING_CALL_VISIBILITY_CHANGED. -->
+  <permission android:name="com.motorola.incallui.permission.INCOMING_CALL_VISIBILITY_CHANGED"
+      android:protectionLevel="signatureOrSystem"
+      tools:ignore="SignatureOrSystemPermissions"/>
 
   <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
   navigation. Otherwise system could bring up DialtactsActivity instead, e.g. when user unmerge a

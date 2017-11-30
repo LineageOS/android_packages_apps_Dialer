@@ -260,6 +260,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private VideoSurfaceTexture mLocalVideoSurfaceTexture;
   private VideoSurfaceTexture mRemoteVideoSurfaceTexture;
 
+  private MotorolaInCallUiNotifier motorolaInCallUiNotifier;
+
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -381,6 +383,15 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         .listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
     AudioModeProvider.getInstance().addListener(this);
+
+    if (motorolaInCallUiNotifier == null) {
+      // Add listener to notify Telephony process when the incoming call screen is started or
+      // finished. This is for hiding USSD dialog because the incoming call screen should have
+      // higher precedence over this dialog.
+      motorolaInCallUiNotifier = new MotorolaInCallUiNotifier(context);
+      addInCallUiListener(motorolaInCallUiNotifier);
+      addListener(motorolaInCallUiNotifier);
+    }
 
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
     Trace.endSection();
@@ -1457,6 +1468,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         mCallList.removeListener(mSpamCallListListener);
       }
       mCallList = null;
+
+      motorolaInCallUiNotifier = null;
 
       mContext = null;
       mInCallActivity = null;
