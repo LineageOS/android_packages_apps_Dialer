@@ -81,9 +81,14 @@ public class ContactGridManager {
   private boolean middleRowVisible = true;
   private boolean isTimerStarted;
 
+  // Row in emergency call: This phone's number: +1 (650) 253-0000
+  private final TextView deviceNumberTextView;
+  private final View deviceNumberDivider;
+
   private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
   private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
   private final LetterTileDrawable letterTile;
+  private boolean isInMultiWindowMode;
 
   public ContactGridManager(
       View view, @Nullable ImageView avatarImageView, int avatarSize, boolean showAnonymousAvatar) {
@@ -109,6 +114,9 @@ public class ContactGridManager {
     contactGridLayout = (View) contactNameTextView.getParent();
     letterTile = new LetterTileDrawable(context.getResources());
     isTimerStarted = false;
+
+    deviceNumberTextView = view.findViewById(R.id.contactgrid_device_number_text);
+    deviceNumberDivider = view.findViewById(R.id.contactgrid_location_divider);
   }
 
   public void show() {
@@ -148,6 +156,7 @@ public class ContactGridManager {
     this.primaryInfo = primaryInfo;
     updatePrimaryNameAndPhoto();
     updateBottomRow();
+    updateDeviceNumberRow();
   }
 
   public void setCallState(PrimaryCallState primaryCallState) {
@@ -155,6 +164,7 @@ public class ContactGridManager {
     updatePrimaryNameAndPhoto();
     updateBottomRow();
     updateTopRow();
+    updateDeviceNumberRow();
   }
 
   public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -172,6 +182,14 @@ public class ContactGridManager {
     this.avatarSize = avatarSize;
     this.showAnonymousAvatar = showAnonymousAvatar;
     updatePrimaryNameAndPhoto();
+  }
+
+  public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+    if (this.isInMultiWindowMode == isInMultiWindowMode) {
+      return;
+    }
+    this.isInMultiWindowMode = isInMultiWindowMode;
+    updateDeviceNumberRow();
   }
 
   private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
@@ -377,6 +395,21 @@ public class ContactGridManager {
       bottomTextSwitcher.setDisplayedChild(0);
       bottomTimerView.stop();
       isTimerStarted = false;
+    }
+  }
+
+  private void updateDeviceNumberRow() {
+    if (isInMultiWindowMode || TextUtils.isEmpty(primaryCallState.callbackNumber)) {
+      deviceNumberTextView.setVisibility(View.GONE);
+      deviceNumberDivider.setVisibility(View.GONE);
+      return;
+    }
+    // This is used for carriers like Project Fi to show the callback number for emergency calls.
+    deviceNumberTextView.setText(
+        context.getString(R.string.contact_grid_callback_number, primaryCallState.callbackNumber));
+    deviceNumberTextView.setVisibility(View.VISIBLE);
+    if (primaryInfo.shouldShowLocation) {
+      deviceNumberDivider.setVisibility(View.VISIBLE);
     }
   }
 }
