@@ -30,6 +30,8 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.MatchType;
+import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
 /**
  * Wrapper for selected methods in {@link PhoneNumberUtil} which uses the {@link DialerPhoneNumber}
@@ -122,5 +124,20 @@ public class DialerPhoneNumberUtil {
     return phoneNumberUtil.isNumberMatch(
         Converter.protoToPojo(Assert.isNotNull(firstNumberIn)),
         Converter.protoToPojo(Assert.isNotNull(secondNumberIn)));
+  }
+
+  /**
+   * Formats the provided number to e164 format. May return raw number if number is unparseable.
+   *
+   * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
+   */
+  @WorkerThread
+  public String formatToE164(@NonNull DialerPhoneNumber number) {
+    Assert.isWorkerThread();
+    if (number.hasDialerInternalPhoneNumber()) {
+      return phoneNumberUtil.format(
+          Converter.protoToPojo(number.getDialerInternalPhoneNumber()), PhoneNumberFormat.E164);
+    }
+    return number.getRawInput().getNumber();
   }
 }
