@@ -375,6 +375,7 @@ public class ContactGridManager {
     } else {
       forwardIconImageView.setVisibility(View.GONE);
       forwardedNumberView.setVisibility(View.GONE);
+      bottomTextSwitcher.setVisibility(View.VISIBLE);
     }
 
     if (info.isTimerVisible) {

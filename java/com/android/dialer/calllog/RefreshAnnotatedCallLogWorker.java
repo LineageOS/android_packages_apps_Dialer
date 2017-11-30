@@ -29,39 +29,74 @@ import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.Annotations.UiSerial;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.storage.Unencrypted;
+import com.google.common.util.concurrent.ListenableScheduledFuture;
+import com.google.common.util.concurrent.ListeningScheduledExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
-/**
- * Worker which brings the annotated call log up to date, if necessary.
- *
- * <p>Accepts a boolean which indicates if the dirty check should be skipped.
- */
-public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
+/** Brings the annotated call log up to date, if necessary. */
+public class RefreshAnnotatedCallLogWorker {
+
+  /*
+   * This is a reasonable time that it might take between related call log writes, that also
+   * shouldn't slow down single-writes too much. For example, when populating the database using
+   * the simulator, using this value results in ~6 refresh cycles (on a release build) to write 120
+   * call log entries.
+   */
+  private static final long WAIT_MILLIS = 100L;
 
   private final Context appContext;
   private final DataSources dataSources;
   private final SharedPreferences sharedPreferences;
+  private final ListeningScheduledExecutorService listeningScheduledExecutorService;
+  private ListenableScheduledFuture<Void> scheduledFuture;
 
   @Inject
   RefreshAnnotatedCallLogWorker(
       @ApplicationContext Context appContext,
       DataSources dataSources,
-      @Unencrypted SharedPreferences sharedPreferences) {
+      @Unencrypted SharedPreferences sharedPreferences,
+      @UiSerial ScheduledExecutorService serialUiExecutorService) {
     this.appContext = appContext;
     this.dataSources = dataSources;
     this.sharedPreferences = sharedPreferences;
+    this.listeningScheduledExecutorService =
+        MoreExecutors.listeningDecorator(serialUiExecutorService);
   }
 
-  @Override
-  public Void doInBackground(Boolean skipDirtyCheck)
+  /** Checks if the annotated call log is dirty and refreshes it if necessary. */
+  public ListenableScheduledFuture<Void> refreshWithDirtyCheck() {
+    return refresh(true);
+  }
+
+  /** Refreshes the annotated call log, bypassing dirty checks. */
+  public ListenableScheduledFuture<Void> refreshWithoutDirtyCheck() {
+    return refresh(false);
+  }
+
+  private ListenableScheduledFuture<Void> refresh(boolean checkDirty) {
+    if (scheduledFuture != null) {
+      LogUtil.i("RefreshAnnotatedCallLogWorker.refresh", "cancelling waiting task");
+      scheduledFuture.cancel(false /* mayInterrupt */);
+    }
+    scheduledFuture =
+        listeningScheduledExecutorService.schedule(
+            () -> doInBackground(checkDirty), WAIT_MILLIS, TimeUnit.MILLISECONDS);
+    return scheduledFuture;
+  }
+
+  @WorkerThread
+  private Void doInBackground(boolean checkDirty)
       throws RemoteException, OperationApplicationException {
     LogUtil.enterBlock("RefreshAnnotatedCallLogWorker.doInBackground");
 
     long startTime = System.currentTimeMillis();
-    checkDirtyAndRebuildIfNecessary(appContext, skipDirtyCheck);
+    checkDirtyAndRebuildIfNecessary(appContext, checkDirty);
     LogUtil.i(
         "RefreshAnnotatedCallLogWorker.doInBackground",
         "took %dms",
@@ -70,7 +105,7 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
   }
 
   @WorkerThread
-  private void checkDirtyAndRebuildIfNecessary(Context appContext, boolean skipDirtyCheck)
+  private void checkDirtyAndRebuildIfNecessary(Context appContext, boolean checkDirty)
       throws RemoteException, OperationApplicationException {
     Assert.isWorkerThread();
 
@@ -86,7 +121,7 @@ public class RefreshAnnotatedCallLogWorker implements Worker<Boolean, Void> {
           "annotated call log has been marked dirty or does not exist");
     }
 
-    boolean isDirty = skipDirtyCheck || forceRebuildPrefValue || isDirty(appContext);
+    boolean isDirty = !checkDirty || forceRebuildPrefValue || isDirty(appContext);
 
     LogUtil.i(
         "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
