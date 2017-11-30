@@ -413,6 +413,7 @@ public final class NewSearchFragment extends Fragment
     EnrichedCallComponent.get(getContext())
         .getEnrichedCallManager()
         .registerCapabilitiesListener(this);
+    getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
   }
 
   @Override
