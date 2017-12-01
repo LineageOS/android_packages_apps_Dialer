@@ -400,6 +400,10 @@ public class ContactGridManager {
   }
 
   private void updateDeviceNumberRow() {
+    // It might not be available, e.g. in video call.
+    if (deviceNumberTextView == null) {
+      return;
+    }
     if (isInMultiWindowMode || TextUtils.isEmpty(primaryCallState.callbackNumber)) {
       deviceNumberTextView.setVisibility(View.GONE);
       deviceNumberDivider.setVisibility(View.GONE);
