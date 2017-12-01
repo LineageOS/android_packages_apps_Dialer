@@ -491,6 +491,11 @@ public class DialtactsActivity extends TransactionSafeActivity
     mP13nLogger = P13nLogging.get(getApplicationContext());
     mP13nRanker = P13nRanking.get(getApplicationContext());
     Trace.endSection();
+
+    // Update the new search fragment to the correct position and the ActionBar's visibility.
+    if (ConfigProviderBindings.get(this).getBoolean("enable_new_search_fragment", false)) {
+      updateSearchFragmentPosition();
+    }
   }
 
   @NonNull
@@ -1550,6 +1555,10 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    // FAB does not move with the new favorites UI
+    if (newFavoritesIsEnabled()) {
+      return;
+    }
     int tabIndex = mListsFragment.getCurrentTabIndex();
 
     // Scroll the button from center to end when moving from the Speed Dial to Call History tab.
@@ -1610,7 +1619,8 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @VisibleForTesting
   public int getFabAlignment() {
-    if (!mIsLandscape
+    if (!newFavoritesIsEnabled()
+        && !mIsLandscape
         && !isInSearchUi()
         && mListsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {
       return FloatingActionButtonController.ALIGN_MIDDLE;
@@ -1740,5 +1750,9 @@ public class DialtactsActivity extends TransactionSafeActivity
   @VisibleForTesting
   static void setVoiceSearchEnabledForTest(Optional<Boolean> enabled) {
     sVoiceSearchEnabledForTest = enabled;
+  }
+
+  private boolean newFavoritesIsEnabled() {
+    return ConfigProviderBindings.get(this).getBoolean("enable_new_favorites_tab", false);
   }
 }

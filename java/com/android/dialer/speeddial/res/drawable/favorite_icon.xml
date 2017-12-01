@@ -14,13 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <!-- header for a list of contacts that are the users favorites. -->
-  <string name="favorites_header">Favorites</string>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
 
-  <!-- header for a list of contacts that are suggestions for the user to place calls to -->
-  <string name="suggestions_header">Suggestions</string>
-
-  <!-- text for a button that prompts the user to add a contact to their favorites -->
-  <string name="speed_dial_add_button_text">Add</string>
-</resources>
+  <solid android:color="@color/dialer_theme_color"/>
+  <stroke android:color="@color/background_dialer_light" android:width="3dp"/>
+</shape>
