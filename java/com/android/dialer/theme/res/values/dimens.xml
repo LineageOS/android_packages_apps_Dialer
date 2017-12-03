@@ -41,4 +41,13 @@
 
   <item name="alpha_enabled" format="float" type="dimen">1.0</item>
   <item name="alpha_hiden" format="float" type="dimen">0.54</item>
+
+  <!-- Minimum height required for all row elements in Dialer lists. -->
+  <dimen name="dialer_list_item_min_height">56dp</dimen>
+
+  <!-- Minimum a11y height and width required for all touch targets. -->
+  <dimen name="dialer_touch_target_min_size">48dp</dimen>
+
+  <!-- Minimum width for material compliant buttons. -->
+  <dimen name="dialer_button_min_width">72dp</dimen>
 </resources>

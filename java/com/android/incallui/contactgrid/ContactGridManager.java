@@ -375,6 +375,7 @@ public class ContactGridManager {
     } else {
       forwardIconImageView.setVisibility(View.GONE);
       forwardedNumberView.setVisibility(View.GONE);
+      bottomTextSwitcher.setVisibility(View.VISIBLE);
     }
 
     if (info.isTimerVisible) {
@@ -399,6 +400,10 @@ public class ContactGridManager {
   }
 
   private void updateDeviceNumberRow() {
+    // It might not be available, e.g. in video call.
+    if (deviceNumberTextView == null) {
+      return;
+    }
     if (isInMultiWindowMode || TextUtils.isEmpty(primaryCallState.callbackNumber)) {
       deviceNumberTextView.setVisibility(View.GONE);
       deviceNumberDivider.setVisibility(View.GONE);
