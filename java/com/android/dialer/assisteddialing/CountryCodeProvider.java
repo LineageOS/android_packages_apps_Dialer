@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /** A class to provide the appropriate country codes related to assisted dialing. */
 @TargetApi(VERSION_CODES.N)
 @SuppressWarnings("AndroidApiChecker") // Java 8 APIs
-final class CountryCodeProvider {
+public final class CountryCodeProvider {
 
   // TODO(erfanian): Ensure the below standard is consistent between libphonenumber and the
   // platform.

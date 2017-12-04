@@ -25,7 +25,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
-import com.android.dialer.assisteddialing.ui.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.configprovider.ConfigProviderBindings;
