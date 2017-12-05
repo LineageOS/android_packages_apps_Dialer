@@ -201,6 +201,12 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
     return rows;
   }
 
+  /**
+   * Note: If the normalized number is included as part of the URI (for example,
+   * "content://com.android.dialer.phonelookuphistory/PhoneLookupHistory/+123") then the update
+   * operation will actually be a "replace" operation, inserting a new row if one does not already
+   * exist.
+   */
   @Override
   public int update(
       @NonNull Uri uri,
@@ -214,7 +220,13 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
     int match = uriMatcher.match(uri);
     switch (match) {
       case PHONE_LOOKUP_HISTORY_TABLE_CODE:
-        break;
+        int rows = database.update(PhoneLookupHistory.TABLE, values, selection, selectionArgs);
+        if (rows == 0) {
+          LogUtil.w("PhoneLookupHistoryContentProvider.update", "no rows updated");
+          return rows;
+        }
+        notifyChange(uri);
+        return rows;
       case PHONE_LOOKUP_HISTORY_TABLE_ID_CODE:
         Assert.checkArgument(
             !values.containsKey(PhoneLookupHistory.NORMALIZED_NUMBER),
@@ -222,19 +234,15 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
         Assert.checkArgument(selection == null, "Do not specify selection when updating by ID");
         Assert.checkArgument(
             selectionArgs == null, "Do not specify selection args when updating by ID");
-        selection = PhoneLookupHistory.NORMALIZED_NUMBER + "= ?";
-        selectionArgs = new String[] {uri.getLastPathSegment()};
-        break;
+
+        String normalizedNumber = uri.getLastPathSegment();
+        values.put(PhoneLookupHistory.NORMALIZED_NUMBER, normalizedNumber);
+        database.replace(PhoneLookupHistory.TABLE, null, values);
+        notifyChange(uri);
+        return 1;
       default:
         throw new IllegalArgumentException("Unknown uri: " + uri);
     }
-    int rows = database.update(PhoneLookupHistory.TABLE, values, selection, selectionArgs);
-    if (rows == 0) {
-      LogUtil.w("PhoneLookupHistoryContentProvider.update", "no rows updated");
-      return rows;
-    }
-    notifyChange(uri);
-    return rows;
   }
 
   private void notifyChange(Uri uri) {
