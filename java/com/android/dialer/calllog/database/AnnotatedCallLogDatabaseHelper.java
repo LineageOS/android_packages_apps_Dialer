@@ -45,6 +45,7 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.PHOTO_ID + " integer, ")
           + (AnnotatedCallLog.LOOKUP_URI + " text, ")
           + (AnnotatedCallLog.DURATION + " integer, ")
+          + (AnnotatedCallLog.DATA_USAGE + " integer, ")
           + (AnnotatedCallLog.NUMBER_TYPE_LABEL + " text, ")
           + (AnnotatedCallLog.IS_READ + " integer, ")
           + (AnnotatedCallLog.NEW + " integer, ")
