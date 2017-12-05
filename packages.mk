@@ -8,6 +8,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.app \
 	com.android.dialer.app.manifests.activities \
 	com.android.dialer.app.voicemail.error \
+	com.android.dialer.assisteddialing \
 	com.android.dialer.assisteddialing.ui \
 	com.android.dialer.backup \
 	com.android.dialer.binary.aosp.testing \
