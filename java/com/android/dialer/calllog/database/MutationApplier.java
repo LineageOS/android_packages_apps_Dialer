@@ -28,26 +28,43 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 /** Applies {@link CallLogMutations} to the annotated call log. */
 public class MutationApplier {
 
+  private final ListeningExecutorService executorService;
+
   @Inject
-  MutationApplier() {}
+  MutationApplier(@NonUiParallel ExecutorService executorService) {
+    this.executorService = MoreExecutors.listeningDecorator(executorService);
+  }
 
   /** Applies the provided {@link CallLogMutations} to the annotated call log. */
+  public ListenableFuture<Void> applyToDatabase(CallLogMutations mutations, Context appContext) {
+    if (mutations.isEmpty()) {
+      return Futures.immediateFuture(null);
+    }
+    return executorService.submit(
+        () -> {
+          applyToDatabaseInternal(mutations, appContext);
+          return null;
+        });
+  }
+
   @WorkerThread
-  public void applyToDatabase(CallLogMutations mutations, Context appContext)
+  private void applyToDatabaseInternal(CallLogMutations mutations, Context appContext)
       throws RemoteException, OperationApplicationException {
     Assert.isWorkerThread();
-
-    if (mutations.isEmpty()) {
-      return;
-    }
 
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
 

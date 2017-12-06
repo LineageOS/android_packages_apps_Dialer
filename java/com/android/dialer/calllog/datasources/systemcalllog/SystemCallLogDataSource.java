@@ -45,15 +45,20 @@ import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 /**
@@ -66,10 +71,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
+  private final ListeningExecutorService executorService;
+
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
-  public SystemCallLogDataSource() {}
+  SystemCallLogDataSource(@NonUiParallel ExecutorService executorService) {
+    this.executorService = MoreExecutors.listeningDecorator(executorService);
+  }
 
   @MainThread
   @Override
@@ -94,9 +103,23 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                 ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks));
   }
 
-  @WorkerThread
   @Override
-  public boolean isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty(Context appContext) {
+    return executorService.submit(() -> isDirtyInternal(appContext));
+  }
+
+  @Override
+  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    return executorService.submit(() -> fillInternal(appContext, mutations));
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+    return executorService.submit(() -> onSuccessfulFillInternal(appContext));
+  }
+
+  @WorkerThread
+  private boolean isDirtyInternal(Context appContext) {
     Assert.isWorkerThread();
 
     /*
@@ -113,15 +136,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @WorkerThread
-  @Override
-  public void fill(Context appContext, CallLogMutations mutations) {
+  private Void fillInternal(Context appContext, CallLogMutations mutations) {
     Assert.isWorkerThread();
 
     lastTimestampProcessed = null;
 
     if (!PermissionsUtil.hasPermission(appContext, permission.READ_CALL_LOG)) {
       LogUtil.i("SystemCallLogDataSource.fill", "no call log permissions");
-      return;
+      return null;
     }
 
     // This data source should always run first so the mutations should always be empty.
@@ -136,11 +158,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
     handleInsertsAndUpdates(appContext, mutations, annotatedCallLogIds);
     handleDeletes(appContext, annotatedCallLogIds, mutations);
+    return null;
   }
 
   @WorkerThread
-  @Override
-  public void onSuccessfulFill(Context appContext) {
+  private Void onSuccessfulFillInternal(Context appContext) {
     // If a fill operation was a no-op, lastTimestampProcessed could still be null.
     if (lastTimestampProcessed != null) {
       StorageComponent.get(appContext)
@@ -149,6 +171,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           .putLong(PREF_LAST_TIMESTAMP_PROCESSED, lastTimestampProcessed)
           .apply();
     }
+    return null;
   }
 
   @Override
