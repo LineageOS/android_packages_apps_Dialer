@@ -24,7 +24,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
-import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallbackActionListener;
+import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
@@ -41,7 +41,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   private static final int FOOTER_VIEW_TYPE = 3;
 
   private final DialerContact contact;
-  private final CallbackActionListener callbackActionListener;
+  private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener;
   private final DeleteCallDetailsListener deleteCallDetailsListener;
   private final CallTypeHelper callTypeHelper;
@@ -51,12 +51,12 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       Context context,
       @NonNull DialerContact contact,
       @NonNull List<CallDetailsEntry> callDetailsEntries,
-      CallbackActionListener callbackActionListener,
+      CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
     this.contact = Assert.isNotNull(contact);
     this.callDetailsEntries = callDetailsEntries;
-    this.callbackActionListener = callbackActionListener;
+    this.callDetailsHeaderListener = callDetailsHeaderListener;
     this.reportCallIdListener = reportCallIdListener;
     this.deleteCallDetailsListener = deleteCallDetailsListener;
     callTypeHelper = new CallTypeHelper(context.getResources(), DuoComponent.get(context).getDuo());
@@ -68,7 +68,7 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     switch (viewType) {
       case HEADER_VIEW_TYPE:
         return new CallDetailsHeaderViewHolder(
-            inflater.inflate(R.layout.contact_container, parent, false), callbackActionListener);
+            inflater.inflate(R.layout.contact_container, parent, false), callDetailsHeaderListener);
       case CALL_ENTRY_VIEW_TYPE:
         return new CallDetailsEntryViewHolder(
             inflater.inflate(R.layout.call_details_entry, parent, false));
@@ -87,6 +87,8 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   public void onBindViewHolder(ViewHolder holder, int position) {
     if (position == 0) { // Header
       ((CallDetailsHeaderViewHolder) holder).updateContactInfo(contact, getCallbackAction());
+      ((CallDetailsHeaderViewHolder) holder)
+          .updateAssistedDialingInfo(callDetailsEntries.get(position));
     } else if (position == getItemCount() - 1) {
       ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.getNumber());
     } else {
