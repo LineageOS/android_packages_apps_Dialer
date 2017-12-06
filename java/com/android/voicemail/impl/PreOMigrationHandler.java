@@ -18,6 +18,7 @@ package com.android.voicemail.impl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -49,7 +50,7 @@ public final class PreOMigrationHandler {
   private static final String EXTRA_VOICEMAIL_SCRAMBLED_PIN_STRING =
       "android.telephony.extra.VOICEMAIL_SCRAMBLED_PIN_STRING";
 
-  private static final String PRE_O_MIGRATION_FINISHED = "pre_o_migration_finished";
+  @VisibleForTesting static final String PRE_O_MIGRATION_FINISHED = "pre_o_migration_finished";
 
   @WorkerThread
   public static void migrate(Context context, PhoneAccountHandle phoneAccountHandle) {
