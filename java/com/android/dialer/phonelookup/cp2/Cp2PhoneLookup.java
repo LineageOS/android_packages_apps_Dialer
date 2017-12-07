@@ -17,11 +17,13 @@
 package com.android.dialer.phonelookup.cp2;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.ArraySet;
 import android.telecom.Call;
@@ -33,6 +35,7 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
+import com.android.dialer.storage.Unencrypted;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -45,6 +48,9 @@ import javax.inject.Inject;
 
 /** PhoneLookup implementation for local contacts. */
 public final class Cp2PhoneLookup implements PhoneLookup {
+
+  private static final String PREF_LAST_TIMESTAMP_PROCESSED =
+      "cp2PhoneLookupLastTimestampProcessed";
 
   private static final String[] CP2_INFO_PROJECTION =
       new String[] {
@@ -64,10 +70,14 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   private static final int CP2_INFO_CONTACT_ID_INDEX = 5;
 
   private final Context appContext;
+  private final SharedPreferences sharedPreferences;
+  @Nullable private Long currentLastTimestampProcessed;
 
   @Inject
-  Cp2PhoneLookup(@ApplicationContext Context appContext) {
+  Cp2PhoneLookup(
+      @ApplicationContext Context appContext, @Unencrypted SharedPreferences sharedPreferences) {
     this.appContext = appContext;
+    this.sharedPreferences = sharedPreferences;
   }
 
   @Override
@@ -76,14 +86,13 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(
-      ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
+  public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     // TODO(calderwoodra): consider a different thread pool
-    return MoreExecutors.newDirectExecutorService()
-        .submit(() -> isDirtyInternal(phoneNumbers, lastModified));
+    return MoreExecutors.newDirectExecutorService().submit(() -> isDirtyInternal(phoneNumbers));
   }
 
-  private boolean isDirtyInternal(ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
+  private boolean isDirtyInternal(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
+    long lastModified = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
     return contactsUpdated(queryPhoneTableForContactIds(phoneNumbers), lastModified)
         || contactsDeleted(lastModified);
   }
@@ -149,7 +158,12 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
     return appContext
         .getContentResolver()
-        .query(Contacts.CONTENT_URI, new String[] {Contacts._ID}, where, args, null);
+        .query(
+            Contacts.CONTENT_URI,
+            new String[] {Contacts._ID, Contacts.CONTACT_LAST_UPDATED_TIMESTAMP},
+            where,
+            args,
+            null);
   }
 
   /** Returns true if any contacts were deleted after {@code lastModified}. */
@@ -169,13 +183,16 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long lastModified) {
+      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     return MoreExecutors.newDirectExecutorService()
-        .submit(() -> bulkUpdateInternal(existingInfoMap, lastModified));
+        .submit(() -> bulkUpdateInternal(existingInfoMap));
   }
 
   private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> bulkUpdateInternal(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long lastModified) {
+      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
+    currentLastTimestampProcessed = null;
+    long lastModified = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
+
     // Build a set of each DialerPhoneNumber that was associated with a contact, and is no longer
     // associated with that same contact.
     Set<DialerPhoneNumber> deletedPhoneNumbers =
@@ -212,6 +229,21 @@ public final class Cp2PhoneLookup implements PhoneLookup {
       newInfoMapBuilder.put(entry.getKey(), infoBuilder.build());
     }
     return newInfoMapBuilder.build();
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulBulkUpdate() {
+    return MoreExecutors.newDirectExecutorService()
+        .submit(
+            () -> {
+              if (currentLastTimestampProcessed != null) {
+                sharedPreferences
+                    .edit()
+                    .putLong(PREF_LAST_TIMESTAMP_PROCESSED, currentLastTimestampProcessed)
+                    .apply();
+              }
+              return null;
+            });
   }
 
   /**
@@ -261,12 +293,18 @@ public final class Cp2PhoneLookup implements PhoneLookup {
     // after lastModified, such that Contacts._ID is in our set of contact IDs we build above.
     try (Cursor cursor = queryContactsTableForContacts(contactIds, lastModified)) {
       int contactIdIndex = cursor.getColumnIndex(Contacts._ID);
+      int lastUpdatedIndex = cursor.getColumnIndex(Contacts.CONTACT_LAST_UPDATED_TIMESTAMP);
       cursor.moveToPosition(-1);
       while (cursor.moveToNext()) {
         // Find the DialerPhoneNumber for each contact id and add it to our updated numbers set.
         // These, along with our number not associated with any Cp2ContactInfo need to be updated.
         long contactId = cursor.getLong(contactIdIndex);
         updatedNumbers.addAll(getDialerPhoneNumber(existingInfoMap, contactId));
+        long lastUpdatedTimestamp = cursor.getLong(lastUpdatedIndex);
+        if (currentLastTimestampProcessed == null
+            || currentLastTimestampProcessed < lastUpdatedTimestamp) {
+          currentLastTimestampProcessed = lastUpdatedTimestamp;
+        }
       }
     }
 
@@ -379,7 +417,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         .getContentResolver()
         .query(
             DeletedContacts.CONTENT_URI,
-            new String[] {DeletedContacts.CONTACT_ID},
+            new String[] {DeletedContacts.CONTACT_ID, DeletedContacts.CONTACT_DELETED_TIMESTAMP},
             where,
             args,
             null);
@@ -389,11 +427,17 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   private Set<DialerPhoneNumber> findDeletedPhoneNumbersIn(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, Cursor cursor) {
     int contactIdIndex = cursor.getColumnIndexOrThrow(DeletedContacts.CONTACT_ID);
+    int deletedTimeIndex = cursor.getColumnIndexOrThrow(DeletedContacts.CONTACT_DELETED_TIMESTAMP);
     Set<DialerPhoneNumber> deletedPhoneNumbers = new ArraySet<>();
     cursor.moveToPosition(-1);
     while (cursor.moveToNext()) {
       long contactId = cursor.getLong(contactIdIndex);
       deletedPhoneNumbers.addAll(getDialerPhoneNumber(existingInfoMap, contactId));
+      long deletedTime = cursor.getLong(deletedTimeIndex);
+      if (currentLastTimestampProcessed == null || currentLastTimestampProcessed < deletedTime) {
+        // TODO(zachh): There's a problem here if a contact for a new row is deleted?
+        currentLastTimestampProcessed = deletedTime;
+      }
     }
     return deletedPhoneNumbers;
   }
