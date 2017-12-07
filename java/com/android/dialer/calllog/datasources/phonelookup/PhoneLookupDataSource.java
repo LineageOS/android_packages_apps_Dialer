@@ -83,18 +83,10 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   }
 
   @WorkerThread
-  private boolean isDirtyInternal(Context appContext) {
+  private boolean isDirtyInternal(Context appContext) throws Exception {
     ImmutableSet<DialerPhoneNumber> uniqueDialerPhoneNumbers =
         queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext);
-
-    try {
-      // TODO(zachh): Would be good to rework call log architecture to properly use futures.
-      // TODO(zachh): Consider how individual lookups should behave wrt timeouts/exceptions and
-      // handle appropriately here.
-      return phoneLookup.isDirty(uniqueDialerPhoneNumbers).get();
-    } catch (InterruptedException | ExecutionException e) {
-      throw new IllegalStateException(e);
-    }
+    return phoneLookup.isDirty(uniqueDialerPhoneNumbers).get();
   }
 
   /**
@@ -113,8 +105,9 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    *   <li>For inserts, uses the contents of PhoneLookupHistory to populate the fields of the
    *       provided mutations. (Note that at this point, data may not be fully up-to-date, but the
    *       next steps will take care of that.)
-   *   <li>Uses all of the numbers from AnnotatedCallLog to invoke CompositePhoneLookup:bulkUpdate
-   *   <li>Looks through the results of bulkUpdate
+   *   <li>Uses all of the numbers from AnnotatedCallLog to invoke (composite) {@link
+   *       PhoneLookup#getMostRecentPhoneLookupInfo(ImmutableMap)}
+   *   <li>Looks through the results of getMostRecentPhoneLookupInfo
    *       <ul>
    *         <li>For each number, checks if the original PhoneLookupInfo differs from the new one
    *         <li>If so, it applies the update to the mutations and (in onSuccessfulFill) writes the
@@ -142,7 +135,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
     ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> updatedInfoMap;
     try {
-      updatedInfoMap = phoneLookup.bulkUpdate(originalPhoneLookupInfosByNumber).get();
+      updatedInfoMap =
+          phoneLookup.getMostRecentPhoneLookupInfo(originalPhoneLookupInfosByNumber).get();
     } catch (InterruptedException | ExecutionException e) {
       throw new IllegalStateException(e);
     }

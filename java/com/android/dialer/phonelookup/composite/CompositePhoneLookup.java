@@ -97,12 +97,13 @@ public final class CompositePhoneLookup implements PhoneLookup {
    * the dependent lookups does not complete, the returned future will also not complete.
    */
   @Override
-  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>
+      getMostRecentPhoneLookupInfo(
+          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     List<ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>> futures =
         new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.bulkUpdate(existingInfoMap));
+      futures.add(phoneLookup.getMostRecentPhoneLookupInfo(existingInfoMap));
     }
     return Futures.transform(
         Futures.allAsList(futures),

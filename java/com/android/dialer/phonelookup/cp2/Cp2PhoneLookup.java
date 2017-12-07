@@ -188,8 +188,9 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   }
 
   @Override
-  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>
+      getMostRecentPhoneLookupInfo(
+          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     return backgroundExecutorService.submit(() -> bulkUpdateInternal(existingInfoMap));
   }
 
