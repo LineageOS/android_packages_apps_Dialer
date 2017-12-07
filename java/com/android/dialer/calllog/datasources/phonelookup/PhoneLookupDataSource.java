@@ -30,6 +30,7 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupSelector;
@@ -38,6 +39,7 @@ import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -47,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 /**
@@ -58,35 +60,24 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   private final PhoneLookup phoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
+  private final ListeningExecutorService lightweightExecutorService;
 
   @Inject
   PhoneLookupDataSource(
       PhoneLookup phoneLookup,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookup = phoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
+    this.lightweightExecutorService = lightweightExecutorService;
   }
 
   @Override
   public ListenableFuture<Boolean> isDirty(Context appContext) {
-    return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
-  }
-
-  @Override
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
-    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
-  }
-
-  @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
-    return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
-  }
-
-  @WorkerThread
-  private boolean isDirtyInternal(Context appContext) throws Exception {
-    ImmutableSet<DialerPhoneNumber> uniqueDialerPhoneNumbers =
-        queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext);
-    return phoneLookup.isDirty(uniqueDialerPhoneNumbers).get();
+    ListenableFuture<ImmutableSet<DialerPhoneNumber>> phoneNumbers =
+        backgroundExecutorService.submit(
+            () -> queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext));
+    return Futures.transformAsync(phoneNumbers, phoneLookup::isDirty, lightweightExecutorService);
   }
 
   /**
@@ -115,43 +106,82 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    *       </ul>
    * </ul>
    */
-  @WorkerThread
-  private Void fillInternal(Context appContext, CallLogMutations mutations) {
-    Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber =
-        queryIdAndNumberFromAnnotatedCallLog(appContext);
-    ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> originalPhoneLookupInfosByNumber =
-        queryPhoneLookupHistoryForNumbers(appContext, annotatedCallLogIdsByNumber.keySet());
-    ImmutableMap.Builder<Long, PhoneLookupInfo> originalPhoneLookupHistoryDataByAnnotatedCallLogId =
-        ImmutableMap.builder();
-    for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry :
-        originalPhoneLookupInfosByNumber.entrySet()) {
-      DialerPhoneNumber dialerPhoneNumber = entry.getKey();
-      PhoneLookupInfo phoneLookupInfo = entry.getValue();
-      for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
-        originalPhoneLookupHistoryDataByAnnotatedCallLogId.put(id, phoneLookupInfo);
-      }
-    }
-    populateInserts(originalPhoneLookupHistoryDataByAnnotatedCallLogId.build(), mutations);
+  @Override
+  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    // First query information from annotated call log.
+    ListenableFuture<Map<DialerPhoneNumber, Set<Long>>> annotatedCallLogIdsByNumberFuture =
+        backgroundExecutorService.submit(() -> queryIdAndNumberFromAnnotatedCallLog(appContext));
 
-    ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> updatedInfoMap;
-    try {
-      updatedInfoMap =
-          phoneLookup.getMostRecentPhoneLookupInfo(originalPhoneLookupInfosByNumber).get();
-    } catch (InterruptedException | ExecutionException e) {
-      throw new IllegalStateException(e);
-    }
-    ImmutableMap.Builder<Long, PhoneLookupInfo> rowsToUpdate = ImmutableMap.builder();
-    for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : updatedInfoMap.entrySet()) {
-      DialerPhoneNumber dialerPhoneNumber = entry.getKey();
-      PhoneLookupInfo upToDateInfo = entry.getValue();
-      if (!originalPhoneLookupInfosByNumber.get(dialerPhoneNumber).equals(upToDateInfo)) {
-        for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
-          rowsToUpdate.put(id, upToDateInfo);
-        }
-      }
-    }
-    updateMutations(rowsToUpdate.build(), mutations);
-    return null;
+    // Use it to create the original info map.
+    ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> originalInfoMapFuture =
+        Futures.transform(
+            annotatedCallLogIdsByNumberFuture,
+            annotatedCallLogIdsByNumber ->
+                queryPhoneLookupHistoryForNumbers(appContext, annotatedCallLogIdsByNumber.keySet()),
+            backgroundExecutorService);
+
+    // Use the original info map to generate the updated info map by delegating to phoneLookup.
+    ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> updatedInfoMapFuture =
+        Futures.transformAsync(
+            originalInfoMapFuture,
+            phoneLookup::getMostRecentPhoneLookupInfo,
+            lightweightExecutorService);
+
+    // This is the computation that will use the result of all of the above.
+    Callable<ImmutableMap<Long, PhoneLookupInfo>> computeRowsToUpdate =
+        () -> {
+          // These get() calls are safe because we are using whenAllSucceed below.
+          Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber =
+              annotatedCallLogIdsByNumberFuture.get();
+          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> originalInfoMap =
+              originalInfoMapFuture.get();
+          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> updatedInfoMap =
+              updatedInfoMapFuture.get();
+
+          // First populate the insert mutations
+          ImmutableMap.Builder<Long, PhoneLookupInfo>
+              originalPhoneLookupHistoryDataByAnnotatedCallLogId = ImmutableMap.builder();
+          for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : originalInfoMap.entrySet()) {
+            DialerPhoneNumber dialerPhoneNumber = entry.getKey();
+            PhoneLookupInfo phoneLookupInfo = entry.getValue();
+            for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
+              originalPhoneLookupHistoryDataByAnnotatedCallLogId.put(id, phoneLookupInfo);
+            }
+          }
+          populateInserts(originalPhoneLookupHistoryDataByAnnotatedCallLogId.build(), mutations);
+
+          // Now compute the rows to update.
+          ImmutableMap.Builder<Long, PhoneLookupInfo> rowsToUpdate = ImmutableMap.builder();
+          for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : updatedInfoMap.entrySet()) {
+            DialerPhoneNumber dialerPhoneNumber = entry.getKey();
+            PhoneLookupInfo upToDateInfo = entry.getValue();
+            if (!originalInfoMap.get(dialerPhoneNumber).equals(upToDateInfo)) {
+              for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
+                rowsToUpdate.put(id, upToDateInfo);
+              }
+            }
+          }
+          return rowsToUpdate.build();
+        };
+
+    ListenableFuture<ImmutableMap<Long, PhoneLookupInfo>> rowsToUpdateFuture =
+        Futures.whenAllSucceed(
+                annotatedCallLogIdsByNumberFuture, updatedInfoMapFuture, originalInfoMapFuture)
+            .call(computeRowsToUpdate, lightweightExecutorService);
+
+    // Finally apply the computed rows to update to mutations.
+    return Futures.transform(
+        rowsToUpdateFuture,
+        rowsToUpdate -> {
+          updateMutations(rowsToUpdate, mutations);
+          return null;
+        },
+        lightweightExecutorService);
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+    return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
   }
 
   @WorkerThread
