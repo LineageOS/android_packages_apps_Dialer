@@ -33,6 +33,19 @@
       android:elevation="10dp"
       android:visibility="invisible"
       />
+  <View
+      android:id="@+id/bubble_drawer_shadow_provider_rtl"
+      android:layout_width="@dimen/bubble_size"
+      android:layout_height="@dimen/bubble_size"
+      android:layout_marginTop="@dimen/bubble_shadow_padding_size"
+      android:layout_marginBottom="@dimen/bubble_shadow_padding_size"
+      android:layout_marginRight="@dimen/bubble_shadow_padding_size"
+      android:layout_gravity="right"
+      android:background="@drawable/bubble_ripple_circle"
+      android:backgroundTint="@android:color/transparent"
+      android:elevation="10dp"
+      android:visibility="invisible"
+      />
   <FrameLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -49,7 +62,7 @@
         android:paddingStart="32dp"
         android:paddingEnd="8dp"
         android:background="@drawable/bubble_background_pill_ltr"
-        android:layoutDirection="inherit"
+        android:layoutDirection="ltr"
         android:orientation="horizontal"
         android:visibility="gone"
         tools:backgroundTint="#FF0000FF"
@@ -79,6 +92,58 @@
           android:layout_width="@dimen/bubble_size"
           android:layout_height="@dimen/bubble_size"
           android:layout_marginStart="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_menu_call"/>
+    </LinearLayout>
+  </FrameLayout>
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="48dp"
+      android:elevation="10dp"
+      android:paddingTop="@dimen/bubble_shadow_padding_size"
+      android:paddingBottom="@dimen/bubble_shadow_padding_size"
+      android:paddingLeft="@dimen/bubble_shadow_padding_size">
+    <LinearLayout
+        android:id="@+id/bubble_expanded_layout_rtl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="32dp"
+        android:paddingLeft="8dp"
+        android:background="@drawable/bubble_background_pill_rtl"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:backgroundTint="#FF0000FF"
+        tools:visibility="invisible">
+      <com.android.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_first_rtl"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginRight="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_lock_idle_lock"/>
+      <com.android.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_second_rtl"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginRight="4dp"
+          android:padding="@dimen/bubble_icon_padding"
+          android:tint="@color/bubble_icon_tint_states"
+          android:tintMode="src_in"
+          tools:background="@drawable/bubble_ripple_checkable_circle"
+          tools:src="@android:drawable/ic_input_add"/>
+      <com.android.bubble.CheckableImageButton
+          android:id="@+id/bubble_icon_third_rtl"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          android:layout_marginRight="4dp"
           android:padding="@dimen/bubble_icon_padding"
           android:tint="@color/bubble_icon_tint_states"
           android:tintMode="src_in"
