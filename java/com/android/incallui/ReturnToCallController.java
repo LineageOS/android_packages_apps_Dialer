@@ -84,6 +84,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   }
 
   public void tearDown() {
+    hide();
     InCallPresenter.getInstance().removeInCallUiListener(this);
     CallList.getInstance().removeListener(this);
     AudioModeProvider.getInstance().removeListener(this);

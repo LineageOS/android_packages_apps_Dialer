@@ -82,7 +82,8 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
-    throw new UnsupportedOperationException();
+    // TODO(zachh): Implementation.
+    return MoreExecutors.newDirectExecutorService().submit(PhoneLookupInfo::getDefaultInstance);
   }
 
   @Override

@@ -53,6 +53,8 @@ public final class CompositePhoneLookup implements PhoneLookup {
    */
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
+    // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
+    // lookups finishing when a higher-priority one has already finished.
     List<ListenableFuture<PhoneLookupInfo>> futures = new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
       futures.add(phoneLookup.lookup(call));

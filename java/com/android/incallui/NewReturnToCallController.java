@@ -29,8 +29,6 @@ import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -43,8 +41,6 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 import com.android.newbubble.NewBubble;
-import com.android.newbubble.NewBubble.BubbleExpansionStateListener;
-import com.android.newbubble.NewBubble.ExpansionState;
 import com.android.newbubble.NewBubbleInfo;
 import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.ref.WeakReference;
@@ -102,6 +98,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   public void tearDown() {
+    hide();
     InCallPresenter.getInstance().removeInCallUiListener(this);
     CallList.getInstance().removeListener(this);
     AudioModeProvider.getInstance().removeListener(this);
@@ -150,45 +147,6 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
       return null;
     }
     NewBubble returnToCallBubble = NewBubble.createBubble(context, generateBubbleInfo());
-    returnToCallBubble.setBubbleExpansionStateListener(
-        new BubbleExpansionStateListener() {
-          @Override
-          public void onBubbleExpansionStateChanged(
-              @ExpansionState int expansionState, boolean isUserAction) {
-            if (!isUserAction) {
-              return;
-            }
-
-            DialerCall call = CallList.getInstance().getActiveOrBackgroundCall();
-            switch (expansionState) {
-              case ExpansionState.START_EXPANDING:
-                if (call != null) {
-                  Logger.get(context)
-                      .logCallImpression(
-                          DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND,
-                          call.getUniqueCallId(),
-                          call.getTimeAddedMs());
-                } else {
-                  Logger.get(context)
-                      .logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
-                }
-                break;
-              case ExpansionState.START_COLLAPSING:
-                if (call != null) {
-                  Logger.get(context)
-                      .logCallImpression(
-                          DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER,
-                          call.getUniqueCallId(),
-                          call.getTimeAddedMs());
-                } else {
-                  Logger.get(context).logImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
-                }
-                break;
-              default:
-                break;
-            }
-          }
-        });
     returnToCallBubble.show();
     return returnToCallBubble;
   }
