@@ -61,7 +61,7 @@ public class ActivationTask extends BaseTask {
   private static final int RETRY_TIMES = 4;
   private static final int RETRY_INTERVAL_MILLIS = 5_000;
 
-  private static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
+  @VisibleForTesting static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
 
   private final RetryPolicy mRetryPolicy;
 
@@ -168,7 +168,8 @@ public class ActivationTask extends BaseTask {
     }
     VvmLog.i(TAG, "VVM content provider configured - " + helper.getVvmType());
 
-    if (VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle)) {
+    if (mMessageData == null
+        && VvmAccountManager.isAccountActivated(getContext(), phoneAccountHandle)) {
       VvmLog.i(TAG, "Account is already activated");
       // The activated state might come from restored data, the filter still needs to be set up.
       helper.activateSmsFilter();
