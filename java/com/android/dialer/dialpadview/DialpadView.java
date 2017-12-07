@@ -116,13 +116,6 @@ public class DialpadView extends LinearLayout {
   }
 
   @Override
-  protected void onAttachedToWindow() {
-    super.onAttachedToWindow();
-    getViewTreeObserver().removeOnPreDrawListener(mOnPreDrawListenerForKeyLayoutAdjust);
-    getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListenerForKeyLayoutAdjust);
-  }
-
-  @Override
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     getViewTreeObserver().removeOnPreDrawListener(mOnPreDrawListenerForKeyLayoutAdjust);
@@ -146,6 +139,11 @@ public class DialpadView extends LinearLayout {
       // The text view must be selected to send accessibility events.
       mDigits.setSelected(true);
     }
+
+    // As OnPreDrawListenerForKeyLayoutAdjust makes changes to LayoutParams, it is added here to
+    // ensure it can only be triggered after the layout is inflated.
+    getViewTreeObserver().removeOnPreDrawListener(mOnPreDrawListenerForKeyLayoutAdjust);
+    getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListenerForKeyLayoutAdjust);
   }
 
   private void setupKeypad() {
