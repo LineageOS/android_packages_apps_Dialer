@@ -18,7 +18,6 @@ package com.android.dialer.calllog.datasources.phonelookup;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
@@ -34,8 +33,6 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
-import com.android.dialer.storage.Unencrypted;
-import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -54,15 +51,12 @@ import javax.inject.Inject;
  * numbers.
  */
 public final class PhoneLookupDataSource implements CallLogDataSource {
-  private static final String PREF_LAST_TIMESTAMP_PROCESSED = "phoneLookupLastTimestampProcessed";
 
   private final PhoneLookup phoneLookup;
-  private final SharedPreferences sharedPreferences;
 
   @Inject
-  PhoneLookupDataSource(PhoneLookup phoneLookup, @Unencrypted SharedPreferences sharedPreferences) {
+  PhoneLookupDataSource(PhoneLookup phoneLookup) {
     this.phoneLookup = phoneLookup;
-    this.sharedPreferences = sharedPreferences;
   }
 
   @WorkerThread
@@ -71,15 +65,11 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     ImmutableSet<DialerPhoneNumber> uniqueDialerPhoneNumbers =
         queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext);
 
-    long lastTimestampProcessedSharedPrefValue =
-        sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
     try {
       // TODO(zachh): Would be good to rework call log architecture to properly use futures.
       // TODO(zachh): Consider how individual lookups should behave wrt timeouts/exceptions and
       // handle appropriately here.
-      return phoneLookup
-          .isDirty(uniqueDialerPhoneNumbers, lastTimestampProcessedSharedPrefValue)
-          .get();
+      return phoneLookup.isDirty(uniqueDialerPhoneNumbers).get();
     } catch (InterruptedException | ExecutionException e) {
       throw new IllegalStateException(e);
     }
@@ -101,16 +91,12 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    *   <li>For inserts, uses the contents of PhoneLookupHistory to populate the fields of the
    *       provided mutations. (Note that at this point, data may not be fully up-to-date, but the
    *       next steps will take care of that.)
-   *   <li>Uses all of the numbers from AnnotatedCallLog along with the callLogLastUpdated timestamp
-   *       to invoke CompositePhoneLookup:bulkUpdate
+   *   <li>Uses all of the numbers from AnnotatedCallLog to invoke CompositePhoneLookup:bulkUpdate
    *   <li>Looks through the results of bulkUpdate
    *       <ul>
-   *         <li>For each number, checks if the original PhoneLookupInfo differs from the new one or
-   *             if the lastModified date from PhoneLookupInfo table is newer than
-   *             callLogLastUpdated.
+   *         <li>For each number, checks if the original PhoneLookupInfo differs from the new one
    *         <li>If so, it applies the update to the mutations and (in onSuccessfulFill) writes the
-   *             new value back to the PhoneLookupHistory along with current time as the
-   *             lastModified date.
+   *             new value back to the PhoneLookupHistory.
    *       </ul>
    * </ul>
    */
@@ -119,36 +105,23 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   public void fill(Context appContext, CallLogMutations mutations) {
     Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber =
         queryIdAndNumberFromAnnotatedCallLog(appContext);
-    Map<DialerPhoneNumber, PhoneLookupInfoAndTimestamp> originalPhoneLookupHistoryDataByNumber =
+    ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> originalPhoneLookupInfosByNumber =
         queryPhoneLookupHistoryForNumbers(appContext, annotatedCallLogIdsByNumber.keySet());
     ImmutableMap.Builder<Long, PhoneLookupInfo> originalPhoneLookupHistoryDataByAnnotatedCallLogId =
         ImmutableMap.builder();
-    for (Entry<DialerPhoneNumber, PhoneLookupInfoAndTimestamp> entry :
-        originalPhoneLookupHistoryDataByNumber.entrySet()) {
+    for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry :
+        originalPhoneLookupInfosByNumber.entrySet()) {
       DialerPhoneNumber dialerPhoneNumber = entry.getKey();
-      PhoneLookupInfoAndTimestamp phoneLookupInfoAndTimestamp = entry.getValue();
+      PhoneLookupInfo phoneLookupInfo = entry.getValue();
       for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
-        originalPhoneLookupHistoryDataByAnnotatedCallLogId.put(
-            id, phoneLookupInfoAndTimestamp.phoneLookupInfo());
+        originalPhoneLookupHistoryDataByAnnotatedCallLogId.put(id, phoneLookupInfo);
       }
     }
     populateInserts(originalPhoneLookupHistoryDataByAnnotatedCallLogId.build(), mutations);
 
-    ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> originalPhoneLookupInfosByNumber =
-        ImmutableMap.copyOf(
-            Maps.transformValues(
-                originalPhoneLookupHistoryDataByNumber,
-                PhoneLookupInfoAndTimestamp::phoneLookupInfo));
-
-    long lastTimestampProcessedSharedPrefValue =
-        sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
-    // TODO(zachh): Push last timestamp processed down into each individual lookup.
     ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> updatedInfoMap;
     try {
-      updatedInfoMap =
-          phoneLookup
-              .bulkUpdate(originalPhoneLookupInfosByNumber, lastTimestampProcessedSharedPrefValue)
-              .get();
+      updatedInfoMap = phoneLookup.bulkUpdate(originalPhoneLookupInfosByNumber).get();
     } catch (InterruptedException | ExecutionException e) {
       throw new IllegalStateException(e);
     }
@@ -156,10 +129,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : updatedInfoMap.entrySet()) {
       DialerPhoneNumber dialerPhoneNumber = entry.getKey();
       PhoneLookupInfo upToDateInfo = entry.getValue();
-      long numberLastModified =
-          originalPhoneLookupHistoryDataByNumber.get(dialerPhoneNumber).lastModified();
-      if (numberLastModified > lastTimestampProcessedSharedPrefValue
-          || !originalPhoneLookupInfosByNumber.get(dialerPhoneNumber).equals(upToDateInfo)) {
+      if (!originalPhoneLookupInfosByNumber.get(dialerPhoneNumber).equals(upToDateInfo)) {
         for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
           rowsToUpdate.put(id, upToDateInfo);
         }
@@ -171,7 +141,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   @WorkerThread
   @Override
   public void onSuccessfulFill(Context appContext) {
-    // TODO(zachh): Implementation.
+    // TODO(zachh): Update PhoneLookupHistory.
   }
 
   @WorkerThread
@@ -275,7 +245,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     return idsByNumber;
   }
 
-  private Map<DialerPhoneNumber, PhoneLookupInfoAndTimestamp> queryPhoneLookupHistoryForNumbers(
+  private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> queryPhoneLookupHistoryForNumbers(
       Context appContext, Set<DialerPhoneNumber> uniqueDialerPhoneNumbers) {
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
         new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
@@ -291,16 +261,14 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     String selection =
         PhoneLookupHistory.NORMALIZED_NUMBER + " in (" + TextUtils.join(",", questionMarks) + ")";
 
-    Map<String, PhoneLookupInfoAndTimestamp> normalizedNumberToInfoMap = new ArrayMap<>();
+    Map<String, PhoneLookupInfo> normalizedNumberToInfoMap = new ArrayMap<>();
     try (Cursor cursor =
         appContext
             .getContentResolver()
             .query(
                 PhoneLookupHistory.CONTENT_URI,
                 new String[] {
-                  PhoneLookupHistory.NORMALIZED_NUMBER,
-                  PhoneLookupHistory.PHONE_LOOKUP_INFO,
-                  PhoneLookupHistory.LAST_MODIFIED
+                  PhoneLookupHistory.NORMALIZED_NUMBER, PhoneLookupHistory.PHONE_LOOKUP_INFO,
                 },
                 selection,
                 normalizedNumbers,
@@ -316,7 +284,6 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
             cursor.getColumnIndexOrThrow(PhoneLookupHistory.NORMALIZED_NUMBER);
         int phoneLookupInfoColumn =
             cursor.getColumnIndexOrThrow(PhoneLookupHistory.PHONE_LOOKUP_INFO);
-        int lastModifiedColumn = cursor.getColumnIndexOrThrow(PhoneLookupHistory.LAST_MODIFIED);
         do {
           String normalizedNumber = cursor.getString(normalizedNumberColumn);
           PhoneLookupInfo phoneLookupInfo;
@@ -325,27 +292,25 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
           } catch (InvalidProtocolBufferException e) {
             throw new IllegalStateException(e);
           }
-          long lastModified = cursor.getLong(lastModifiedColumn);
-          normalizedNumberToInfoMap.put(
-              normalizedNumber, PhoneLookupInfoAndTimestamp.create(phoneLookupInfo, lastModified));
+          normalizedNumberToInfoMap.put(normalizedNumber, phoneLookupInfo);
         } while (cursor.moveToNext());
       }
     }
 
     // We have the required information in normalizedNumberToInfoMap but it's keyed by normalized
     // number instead of DialerPhoneNumber. Build and return a new map keyed by DialerPhoneNumber.
-    return Maps.asMap(
-        uniqueDialerPhoneNumbers,
-        (dialerPhoneNumber) -> {
-          String normalizedNumber = dialerPhoneNumberToNormalizedNumbers.get(dialerPhoneNumber);
-          PhoneLookupInfoAndTimestamp infoAndTimestamp =
-              normalizedNumberToInfoMap.get(normalizedNumber);
-          // If data is cleared or for other reasons, the PhoneLookupHistory may not contain an
-          // entry for a number. Just use an empty value for that case.
-          return infoAndTimestamp == null
-              ? PhoneLookupInfoAndTimestamp.create(PhoneLookupInfo.getDefaultInstance(), 0L)
-              : infoAndTimestamp;
-        });
+    return ImmutableMap.copyOf(
+        Maps.asMap(
+            uniqueDialerPhoneNumbers,
+            (dialerPhoneNumber) -> {
+              String normalizedNumber = dialerPhoneNumberToNormalizedNumbers.get(dialerPhoneNumber);
+              PhoneLookupInfo phoneLookupInfo = normalizedNumberToInfoMap.get(normalizedNumber);
+              // If data is cleared or for other reasons, the PhoneLookupHistory may not contain an
+              // entry for a number. Just use an empty value for that case.
+              return phoneLookupInfo == null
+                  ? PhoneLookupInfo.getDefaultInstance()
+                  : phoneLookupInfo;
+            }));
   }
 
   private static void populateInserts(
@@ -417,17 +382,5 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
       return phoneLookupInfo.getCp2Info().getCp2ContactInfo(0).getName();
     }
     return "";
-  }
-
-  @AutoValue
-  abstract static class PhoneLookupInfoAndTimestamp {
-    abstract PhoneLookupInfo phoneLookupInfo();
-
-    abstract long lastModified();
-
-    static PhoneLookupInfoAndTimestamp create(PhoneLookupInfo phoneLookupInfo, long lastModified) {
-      return new AutoValue_PhoneLookupDataSource_PhoneLookupInfoAndTimestamp(
-          phoneLookupInfo, lastModified);
-    }
   }
 }
