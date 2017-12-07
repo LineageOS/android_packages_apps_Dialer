@@ -31,6 +31,7 @@ import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.PhoneLookupSelector;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
@@ -376,11 +377,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     }
   }
 
-  // TODO(zachh): Extract this logic into a proper selection class or package.
   private static String selectName(PhoneLookupInfo phoneLookupInfo) {
-    if (phoneLookupInfo.getCp2Info().getCp2ContactInfoCount() > 0) {
-      return phoneLookupInfo.getCp2Info().getCp2ContactInfo(0).getName();
-    }
-    return "";
+    return PhoneLookupSelector.selectName(phoneLookupInfo);
   }
 }

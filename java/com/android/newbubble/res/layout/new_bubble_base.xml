@@ -19,7 +19,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clipChildren="false"
+    android:clipChildren="true"
+    android:clipToPadding="false"
     tools:theme="@style/Theme.AppCompat">
   <RelativeLayout
       android:id="@+id/bubble_primary_container"
@@ -41,7 +42,8 @@
         android:measureAllChildren="false"
         android:elevation="@dimen/bubble_elevation"
         tools:backgroundTint="#FF0000AA">
-      <RelativeLayout
+      <FrameLayout
+          android:id="@+id/bubble_icon_container"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content">
         <ImageView
@@ -53,8 +55,7 @@
             android:id="@+id/bubble_icon_primary"
             android:layout_width="@dimen/bubble_small_icon_size"
             android:layout_height="@dimen/bubble_small_icon_size"
-            android:layout_alignBottom="@id/bubble_icon_avatar"
-            android:layout_alignEnd="@id/bubble_icon_avatar"
+            android:layout_gravity="bottom|right"
             android:padding="@dimen/bubble_small_icon_padding"
             android:tint="@android:color/white"
             android:tintMode="src_in"
@@ -62,7 +63,7 @@
             android:measureAllChildren="false"
             tools:backgroundTint="#FF0000AA"
             tools:src="@android:drawable/ic_btn_speak_now"/>
-      </RelativeLayout>
+      </FrameLayout>
       <TextView
           android:id="@+id/bubble_text"
           android:layout_width="wrap_content"
@@ -75,67 +76,77 @@
           tools:text="Call ended"/>
     </ViewAnimator>
   </RelativeLayout>
+  <!-- The RelativeLayout below serves as boundary for @id/bubble_expanded_layout during animation -->
   <RelativeLayout
-      android:id="@+id/bubble_expanded_layout"
-      android:layout_width="@dimen/bubble_expanded_width"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@id/bubble_primary_container"
-      android:layout_marginStart="@dimen/bubble_shadow_padding_size_horizontal_double"
-      android:layout_marginEnd="@dimen/bubble_shadow_padding_size_horizontal_double"
       android:layout_marginTop="@dimen/bubble_shadow_padding_size_vertical_minus"
-      android:layout_marginBottom="@dimen/bubble_shadow_padding_size_vertical"
-      android:visibility="gone"
-      tools:visibility="visible">
+      android:clipChildren="true"
+      android:clipToPadding="false"
+      android:layout_below="@id/bubble_primary_container">
     <RelativeLayout
-        android:id="@+id/bubble_triangle"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="-6dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/background_dialer_white"
-        android:elevation="@dimen/bubble_expanded_elevation"
-        android:rotation="45">
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@+id/bubble_expanded_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bubble_triangle"
+        android:paddingStart="@dimen/bubble_shadow_padding_size_horizontal_double"
+        android:paddingEnd="@dimen/bubble_shadow_padding_size_horizontal_double"
+        android:paddingBottom="@dimen/bubble_shadow_padding_size_vertical"
+        android:clipChildren="false"
         android:clipToPadding="false"
-        android:background="@drawable/bubble_background_with_radius"
-        android:elevation="@dimen/bubble_expanded_elevation"
-        android:layoutDirection="inherit">
-      <com.android.newbubble.NewCheckableButton
-          android:id="@+id/bubble_button_full_screen"
-          android:layout_marginTop="8dp"
-          android:textColor="@color/bubble_button_color_grey"
-          android:background="@drawable/bubble_ripple_pill_up"
-          android:drawableTint="@color/bubble_button_color_grey"
-          style="@style/CheckableButton"/>
-      <com.android.newbubble.NewCheckableButton
-          android:id="@+id/bubble_button_mute"
-          android:layout_below="@id/bubble_button_full_screen"
-          android:textColor="@color/bubble_button_color_grey"
+        android:visibility="gone"
+        tools:visibility="visible">
+      <RelativeLayout
+          android:id="@+id/bubble_triangle"
+          android:layout_width="12dp"
+          android:layout_height="12dp"
+          android:layout_marginTop="7dp"
+          android:layout_marginBottom="-6dp"
+          android:layout_centerHorizontal="true"
           android:background="@color/background_dialer_white"
-          android:drawableTint="@color/bubble_button_color_grey"
-          style="@style/CheckableButtonWithSelectableItemBackground"/>
-      <com.android.newbubble.NewCheckableButton
-          android:id="@+id/bubble_button_audio_route"
-          android:layout_below="@id/bubble_button_mute"
-          android:textColor="@color/bubble_button_color_grey"
-          android:background="@color/background_dialer_white"
-          android:drawableTint="@color/bubble_button_color_grey"
-          style="@style/CheckableButtonWithSelectableItemBackground"/>
-      <com.android.newbubble.NewCheckableButton
-          android:id="@+id/bubble_button_end_call"
-          android:layout_below="@id/bubble_button_audio_route"
-          android:layout_marginTop="@dimen/bubble_expanded_separator_height"
-          android:textColor="@color/bubble_button_color_white"
-          android:background="@drawable/bubble_pill_down"
-          android:backgroundTint="@color/dialer_end_call_button_color"
-          android:foreground="?attr/selectableItemBackground"
-          android:drawableTint="@color/bubble_button_color_white"
-          style="@style/CheckableButton"/>
+          android:elevation="@dimen/bubble_expanded_elevation"
+          android:rotation="45">
+      </RelativeLayout>
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/bubble_triangle"
+          android:background="@drawable/bubble_background_with_radius"
+          android:elevation="@dimen/bubble_expanded_elevation"
+          android:clipChildren="false"
+          android:clipToPadding="false"
+          android:layoutDirection="inherit">
+        <com.android.newbubble.NewCheckableButton
+            android:id="@+id/bubble_button_full_screen"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/bubble_button_color_grey"
+            android:background="@drawable/bubble_ripple_pill_up"
+            android:drawableTint="@color/bubble_button_color_grey"
+            style="@style/CheckableButton"/>
+        <com.android.newbubble.NewCheckableButton
+            android:id="@+id/bubble_button_mute"
+            android:layout_below="@id/bubble_button_full_screen"
+            android:textColor="@color/bubble_button_color_grey"
+            android:background="@color/background_dialer_white"
+            android:drawableTint="@color/bubble_button_color_grey"
+            style="@style/CheckableButtonWithSelectableItemBackground"/>
+        <com.android.newbubble.NewCheckableButton
+            android:id="@+id/bubble_button_audio_route"
+            android:layout_below="@id/bubble_button_mute"
+            android:textColor="@color/bubble_button_color_grey"
+            android:background="@color/background_dialer_white"
+            android:drawableTint="@color/bubble_button_color_grey"
+            style="@style/CheckableButtonWithSelectableItemBackground"/>
+        <com.android.newbubble.NewCheckableButton
+            android:id="@+id/bubble_button_end_call"
+            android:layout_below="@id/bubble_button_audio_route"
+            android:layout_marginTop="@dimen/bubble_expanded_separator_height"
+            android:textColor="@color/bubble_button_color_white"
+            android:background="@drawable/bubble_pill_down"
+            android:backgroundTint="@color/dialer_end_call_button_color"
+            android:foreground="?attr/selectableItemBackground"
+            android:drawableTint="@color/bubble_button_color_white"
+            style="@style/CheckableButton"/>
+      </RelativeLayout>
     </RelativeLayout>
   </RelativeLayout>
 </RelativeLayout>

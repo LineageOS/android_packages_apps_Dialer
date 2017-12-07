@@ -22,15 +22,18 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.text.TextUtils;
+import android.telephony.TelephonyManager;
+import com.android.dialer.assisteddialing.AssistedDialingMediator;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.CountryCodeProvider;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /** The setting for Assisted Dialing */
 @TargetApi(VERSION_CODES.N)
@@ -38,6 +41,7 @@ import java.util.List;
 public class AssistedDialingSettingFragment extends PreferenceFragment {
 
   private CountryCodeProvider countryCodeProvider;
+  private AssistedDialingMediator assistedDialingMediator;
 
   @AutoValue
   abstract static class DisplayNameAndCountryCodeTuple {
@@ -59,6 +63,10 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    assistedDialingMediator =
+        ConcreteCreator.createNewAssistedDialingMediator(
+            getContext().getSystemService(TelephonyManager.class), getContext());
+
     countryCodeProvider =
         ConcreteCreator.getCountryCodeProvider(ConfigProviderBindings.get(getContext()));
 
@@ -73,12 +81,37 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
             findPreference(getContext().getString(R.string.assisted_dialing_setting_cc_key));
 
     updateCountryChoices(countryChooserPref);
+    updateCountryChooserSummary(countryChooserPref);
 
-    if (!TextUtils.isEmpty(countryChooserPref.getEntry())) {
-      countryChooserPref.setSummary(countryChooserPref.getEntry());
-    }
     countryChooserPref.setOnPreferenceChangeListener(this::updateListSummary);
     switchPref.setOnPreferenceChangeListener(this::logIfUserDisabledFeature);
+  }
+
+  private void updateCountryChooserSummary(ListPreference countryChooserPref) {
+    String defaultSummaryText = countryChooserPref.getEntries()[0].toString();
+
+    if (countryChooserPref.getEntry().equals(defaultSummaryText)) {
+      Optional<String> userHomeCountryCode = assistedDialingMediator.userHomeCountryCode();
+      if (userHomeCountryCode.isPresent()) {
+        CharSequence[] entries = countryChooserPref.getEntries();
+        try {
+          CharSequence regionalDisplayName =
+              entries[countryChooserPref.findIndexOfValue(userHomeCountryCode.get())];
+          countryChooserPref.setSummary(
+              getContext()
+                  .getString(
+                      R.string.assisted_dialing_setting_cc_default_summary, regionalDisplayName));
+        } catch (ArrayIndexOutOfBoundsException e) {
+          // This might happen if there is a mismatch between the automatically
+          // detected home country, and the countries currently eligible to select in the settings.
+          LogUtil.i(
+              "AssistedDialingSettingFragment.onCreate",
+              "Failed to find human readable mapping for country code, using default.");
+        }
+      }
+    } else {
+      countryChooserPref.setSummary(countryChooserPref.getEntry());
+    }
   }
 
   /**

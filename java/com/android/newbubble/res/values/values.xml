@@ -24,8 +24,11 @@
   <dimen name="bubble_button_icon_padding">16dp</dimen>
   <dimen name="bubble_button_padding_vertical">12dp</dimen>
   <dimen name="bubble_button_padding_horizontal">16dp</dimen>
-  <dimen name="bubble_safe_margin_horizontal">-16dp</dimen>
-  <dimen name="bubble_safe_margin_vertical">64dp</dimen>
+
+  <dimen name="bubble_off_screen_size_horizontal">-4dp</dimen>
+  <!-- 64dp - 16dp(bubble_shadow_padding_size_vertical) -->
+  <dimen name="bubble_safe_margin_vertical">48dp</dimen>
+
   <dimen name="bubble_shadow_padding_size_vertical">16dp</dimen>
   <dimen name="bubble_shadow_padding_size_vertical_minus">-16dp</dimen>
   <dimen name="bubble_shadow_padding_size_horizontal">12dp</dimen>
