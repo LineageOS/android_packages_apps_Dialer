@@ -23,7 +23,8 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.inject.ApplicationContext;
@@ -32,10 +33,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -46,7 +45,8 @@ public class RefreshAnnotatedCallLogWorker {
   private final Context appContext;
   private final DataSources dataSources;
   private final SharedPreferences sharedPreferences;
-  private final ListeningExecutorService parallelUiListeningExecutorService;
+  private final ListeningExecutorService backgroundExecutorService;
+  private final ListeningExecutorService lightweightExecutorService;
   // Used to ensure that only one refresh flow runs at a time. (Note that
   // RefreshAnnotatedCallLogWorker is a @Singleton.)
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
@@ -56,14 +56,13 @@ public class RefreshAnnotatedCallLogWorker {
       @ApplicationContext Context appContext,
       DataSources dataSources,
       @Unencrypted SharedPreferences sharedPreferences,
-      @NonUiParallel ExecutorService parallelUiExecutorService) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.appContext = appContext;
     this.dataSources = dataSources;
     this.sharedPreferences = sharedPreferences;
-
-    // TODO(zachh): Create and use bindings for ListeningExecutorServices.
-    this.parallelUiListeningExecutorService =
-        MoreExecutors.listeningDecorator(parallelUiExecutorService);
+    this.backgroundExecutorService = backgroundExecutorService;
+    this.lightweightExecutorService = lightweightExecutorService;
   }
 
   /** Checks if the annotated call log is dirty and refreshes it if necessary. */
@@ -78,16 +77,14 @@ public class RefreshAnnotatedCallLogWorker {
 
   private ListenableFuture<Void> refresh(boolean checkDirty) {
     LogUtil.i("RefreshAnnotatedCallLogWorker.refresh", "submitting serialized refresh request");
-    // Note: directExecutor is safe to use here and throughout because all methods are async.
     return dialerFutureSerializer.submitAsync(
-        () -> checkDirtyAndRebuildIfNecessary(appContext, checkDirty),
-        MoreExecutors.directExecutor());
+        () -> checkDirtyAndRebuildIfNecessary(appContext, checkDirty), lightweightExecutorService);
   }
 
   private ListenableFuture<Void> checkDirtyAndRebuildIfNecessary(
       Context appContext, boolean checkDirty) {
     ListenableFuture<Boolean> forceRebuildFuture =
-        parallelUiListeningExecutorService.submit(
+        backgroundExecutorService.submit(
             () -> {
               LogUtil.i(
                   "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
@@ -115,7 +112,7 @@ public class RefreshAnnotatedCallLogWorker {
                 Preconditions.checkNotNull(forceRebuild)
                     ? Futures.immediateFuture(true)
                     : isDirty(appContext),
-            MoreExecutors.directExecutor());
+            lightweightExecutorService);
 
     // After determining isDirty, conditionally call rebuild.
     return Futures.transformAsync(
@@ -124,7 +121,7 @@ public class RefreshAnnotatedCallLogWorker {
             Preconditions.checkNotNull(isDirty)
                 ? rebuild(appContext)
                 : Futures.immediateFuture(null),
-        MoreExecutors.directExecutor());
+        lightweightExecutorService);
   }
 
   private ListenableFuture<Boolean> isDirty(Context appContext) {
@@ -151,7 +148,7 @@ public class RefreshAnnotatedCallLogWorker {
           Futures.transformAsync(
               fillFuture,
               unused -> dataSource.fill(appContext, mutations),
-              MoreExecutors.directExecutor());
+              lightweightExecutorService);
     }
 
     // After all data sources are filled, apply mutations (at this point "fillFuture" is the result
@@ -163,7 +160,7 @@ public class RefreshAnnotatedCallLogWorker {
                 CallLogDatabaseComponent.get(appContext)
                     .mutationApplier()
                     .applyToDatabase(mutations, appContext),
-            MoreExecutors.directExecutor());
+            lightweightExecutorService);
 
     // After mutations applied, call onSuccessfulFill for each data source (in parallel).
     ListenableFuture<List<Void>> onSuccessfulFillFuture =
@@ -177,7 +174,7 @@ public class RefreshAnnotatedCallLogWorker {
               }
               return Futures.allAsList(onSuccessfulFillFutures);
             },
-            MoreExecutors.directExecutor());
+            lightweightExecutorService);
 
     // After onSuccessfulFill is called for every data source, write the shared pref.
     return Futures.transform(
@@ -186,6 +183,6 @@ public class RefreshAnnotatedCallLogWorker {
           sharedPreferences.edit().putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false).apply();
           return null;
         },
-        parallelUiListeningExecutorService);
+        backgroundExecutorService);
   }
 }

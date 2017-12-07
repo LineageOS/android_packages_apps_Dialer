@@ -29,7 +29,7 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupSelector;
@@ -40,7 +40,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
@@ -49,7 +48,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 /**
@@ -59,27 +57,29 @@ import javax.inject.Inject;
 public final class PhoneLookupDataSource implements CallLogDataSource {
 
   private final PhoneLookup phoneLookup;
-  private final ListeningExecutorService executorService;
+  private final ListeningExecutorService backgroundExecutorService;
 
   @Inject
-  PhoneLookupDataSource(PhoneLookup phoneLookup, @NonUiParallel ExecutorService executorService) {
+  PhoneLookupDataSource(
+      PhoneLookup phoneLookup,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
     this.phoneLookup = phoneLookup;
-    this.executorService = MoreExecutors.listeningDecorator(executorService);
+    this.backgroundExecutorService = backgroundExecutorService;
   }
 
   @Override
   public ListenableFuture<Boolean> isDirty(Context appContext) {
-    return executorService.submit(() -> isDirtyInternal(appContext));
+    return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
   }
 
   @Override
   public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
-    return executorService.submit(() -> fillInternal(appContext, mutations));
+    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
   }
 
   @Override
   public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
-    return executorService.submit(this::onSuccessfulFillInternal);
+    return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
   }
 
   @WorkerThread

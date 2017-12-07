@@ -30,6 +30,7 @@ import android.telecom.Call;
 import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -39,7 +40,7 @@ import com.android.dialer.storage.Unencrypted;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -71,25 +72,29 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   private final Context appContext;
   private final SharedPreferences sharedPreferences;
+  private final ListeningExecutorService backgroundExecutorService;
+
   @Nullable private Long currentLastTimestampProcessed;
 
   @Inject
   Cp2PhoneLookup(
-      @ApplicationContext Context appContext, @Unencrypted SharedPreferences sharedPreferences) {
+      @ApplicationContext Context appContext,
+      @Unencrypted SharedPreferences sharedPreferences,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
     this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
+    this.backgroundExecutorService = backgroundExecutorService;
   }
 
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
     // TODO(zachh): Implementation.
-    return MoreExecutors.newDirectExecutorService().submit(PhoneLookupInfo::getDefaultInstance);
+    return backgroundExecutorService.submit(PhoneLookupInfo::getDefaultInstance);
   }
 
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
-    // TODO(calderwoodra): consider a different thread pool
-    return MoreExecutors.newDirectExecutorService().submit(() -> isDirtyInternal(phoneNumbers));
+    return backgroundExecutorService.submit(() -> isDirtyInternal(phoneNumbers));
   }
 
   private boolean isDirtyInternal(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
@@ -185,8 +190,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
-    return MoreExecutors.newDirectExecutorService()
-        .submit(() -> bulkUpdateInternal(existingInfoMap));
+    return backgroundExecutorService.submit(() -> bulkUpdateInternal(existingInfoMap));
   }
 
   private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> bulkUpdateInternal(
@@ -234,17 +238,16 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   @Override
   public ListenableFuture<Void> onSuccessfulBulkUpdate() {
-    return MoreExecutors.newDirectExecutorService()
-        .submit(
-            () -> {
-              if (currentLastTimestampProcessed != null) {
-                sharedPreferences
-                    .edit()
-                    .putLong(PREF_LAST_TIMESTAMP_PROCESSED, currentLastTimestampProcessed)
-                    .apply();
-              }
-              return null;
-            });
+    return backgroundExecutorService.submit(
+        () -> {
+          if (currentLastTimestampProcessed != null) {
+            sharedPreferences
+                .edit()
+                .putLong(PREF_LAST_TIMESTAMP_PROCESSED, currentLastTimestampProcessed)
+                .apply();
+          }
+          return null;
+        });
   }
 
   /**

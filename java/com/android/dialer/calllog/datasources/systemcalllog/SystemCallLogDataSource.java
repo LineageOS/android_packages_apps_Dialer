@@ -45,7 +45,7 @@ import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
@@ -53,12 +53,10 @@ import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 /**
@@ -71,13 +69,13 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
-  private final ListeningExecutorService executorService;
+  private final ListeningExecutorService backgroundExecutorService;
 
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
-  SystemCallLogDataSource(@NonUiParallel ExecutorService executorService) {
-    this.executorService = MoreExecutors.listeningDecorator(executorService);
+  SystemCallLogDataSource(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+    this.backgroundExecutorService = backgroundExecutorService;
   }
 
   @MainThread
@@ -105,17 +103,17 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
   @Override
   public ListenableFuture<Boolean> isDirty(Context appContext) {
-    return executorService.submit(() -> isDirtyInternal(appContext));
+    return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
   }
 
   @Override
   public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
-    return executorService.submit(() -> fillInternal(appContext, mutations));
+    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
   }
 
   @Override
   public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
-    return executorService.submit(() -> onSuccessfulFillInternal(appContext));
+    return backgroundExecutorService.submit(() -> onSuccessfulFillInternal(appContext));
   }
 
   @WorkerThread

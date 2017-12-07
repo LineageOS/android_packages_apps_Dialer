@@ -28,25 +28,23 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 
 /** Applies {@link CallLogMutations} to the annotated call log. */
 public class MutationApplier {
 
-  private final ListeningExecutorService executorService;
+  private final ListeningExecutorService backgroundExecutorService;
 
   @Inject
-  MutationApplier(@NonUiParallel ExecutorService executorService) {
-    this.executorService = MoreExecutors.listeningDecorator(executorService);
+  MutationApplier(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+    this.backgroundExecutorService = backgroundExecutorService;
   }
 
   /** Applies the provided {@link CallLogMutations} to the annotated call log. */
@@ -54,7 +52,7 @@ public class MutationApplier {
     if (mutations.isEmpty()) {
       return Futures.immediateFuture(null);
     }
-    return executorService.submit(
+    return backgroundExecutorService.submit(
         () -> {
           applyToDatabaseInternal(mutations, appContext);
           return null;
