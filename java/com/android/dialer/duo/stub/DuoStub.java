@@ -40,6 +40,11 @@ public class DuoStub implements Duo {
     return false;
   }
 
+  @Override
+  public boolean isActivated(@NonNull Context context) {
+    return false;
+  }
+
   @MainThread
   @Override
   public boolean isReachable(@NonNull Context context, @Nullable String number) {

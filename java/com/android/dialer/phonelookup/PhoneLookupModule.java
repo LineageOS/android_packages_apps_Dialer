@@ -27,7 +27,12 @@ import dagger.Provides;
 public abstract class PhoneLookupModule {
 
   @Provides
-  static PhoneLookup providePhoneLookup(Cp2PhoneLookup cp2PhoneLookup) {
-    return new CompositePhoneLookup(ImmutableList.of(cp2PhoneLookup));
+  static ImmutableList<PhoneLookup> providePhoneLookupList(Cp2PhoneLookup cp2PhoneLookup) {
+    return ImmutableList.of(cp2PhoneLookup);
+  }
+
+  @Provides
+  static PhoneLookup providePhoneLookup(CompositePhoneLookup compositePhoneLookup) {
+    return compositePhoneLookup;
   }
 }

@@ -27,8 +27,8 @@ import com.google.common.util.concurrent.ListenableFuture;
  * Provides operations related to retrieving information about phone numbers.
  *
  * <p>Some operations defined by this interface are generally targeted towards specific use cases;
- * for example {@link #isDirty(ImmutableSet)}, {@link #bulkUpdate(ImmutableMap)}, and {@link
- * #onSuccessfulBulkUpdate()} are generally intended to be used by the call log.
+ * for example {@link #isDirty(ImmutableSet)}, {@link #getMostRecentPhoneLookupInfo(ImmutableMap)},
+ * and {@link #onSuccessfulBulkUpdate()} are generally intended to be used by the call log.
  */
 public interface PhoneLookup {
 
@@ -48,9 +48,9 @@ public interface PhoneLookup {
   ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers);
 
   /**
-   * Performs a bulk update of this {@link PhoneLookup}. The returned map must contain the exact
-   * same keys as the provided map. Most implementations will rely on last modified timestamps to
-   * efficiently only update the data which needs to be updated.
+   * Get the most recent phone lookup information for this {@link PhoneLookup}. The returned map
+   * must contain the exact same keys as the provided map. Most implementations will rely on last
+   * modified timestamps to efficiently only update the data which needs to be updated.
    *
    * <p>If there are no changes required, it is valid for this method to simply return the provided
    * {@code existingInfoMap}.
@@ -58,16 +58,16 @@ public interface PhoneLookup {
    * <p>If there is no longer information associated with a number (for example, a local contact was
    * deleted) the returned map should contain an empty {@link PhoneLookupInfo} for that number.
    */
-  ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
+  ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> getMostRecentPhoneLookupInfo(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap);
 
   /**
-   * Called when the results of the {@link #bulkUpdate(ImmutableMap)} have been applied by the
-   * caller.
+   * Called when the results of the {@link #getMostRecentPhoneLookupInfo(ImmutableMap)} have been
+   * applied by the caller.
    *
    * <p>Typically implementations will use this to store a "last processed" timestamp so that future
-   * invocations of {@link #isDirty(ImmutableSet)} and {@link #bulkUpdate(ImmutableMap)} can be
-   * efficiently implemented.
+   * invocations of {@link #isDirty(ImmutableSet)} and {@link
+   * #getMostRecentPhoneLookupInfo(ImmutableMap)} can be efficiently implemented.
    */
   ListenableFuture<Void> onSuccessfulBulkUpdate();
 }

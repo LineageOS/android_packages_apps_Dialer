@@ -40,14 +40,14 @@ import javax.inject.Inject;
 public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
   private final ExecutorService nonUiThreadPool;
   private final ScheduledExecutorService nonUiSerialExecutor;
-  private final Executor uiThreadPool;
+  private final ExecutorService uiThreadPool;
   private final ScheduledExecutorService uiSerialExecutor;
 
   @Inject
   DefaultDialerExecutorFactory(
       @NonUiParallel ExecutorService nonUiThreadPool,
       @NonUiSerial ScheduledExecutorService nonUiSerialExecutor,
-      @UiParallel Executor uiThreadPool,
+      @UiParallel ExecutorService uiThreadPool,
       @UiSerial ScheduledExecutorService uiSerialExecutor) {
     this.nonUiThreadPool = nonUiThreadPool;
     this.nonUiSerialExecutor = nonUiSerialExecutor;
