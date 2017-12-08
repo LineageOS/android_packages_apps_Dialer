@@ -18,7 +18,7 @@
   <dimen name="call_details_top_margin">6dp</dimen>
 
   <!-- contact container -->
-  <dimen name="contact_container_padding_bottom_end">16dp</dimen>
+  <dimen name="contact_container_padding_bottom_end">8dp</dimen>
   <dimen name="contact_container_padding_top_start">12dp</dimen>
   <dimen name="call_details_contact_photo_size">48dp</dimen>
   <dimen name="call_details_contact_photo_padding">4dp</dimen>
@@ -34,4 +34,14 @@
   <dimen name="ec_container_height">48dp</dimen>
   <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
+
+  <!-- Assisted Dialing -->
+  <dimen name="ad_container_height">48dp</dimen>
+  <dimen name="ad_icon_size">18dp</dimen>
+  <dimen name="ad_end_margin">16dp</dimen>
+  <dimen name="ad_text_margin_start">8dp</dimen>
+  <!-- Used to help smooth the text alignment to the center of the icon -->
+  <dimen name="ad_icon_margin_top_offset">2dp</dimen>
+  <dimen name="ad_icon_margin_start_offset">60dp</dimen>
+
 </resources>
