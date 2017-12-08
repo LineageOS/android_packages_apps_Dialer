@@ -31,7 +31,7 @@
         android:entries="@array/assisted_dialing_cc_entries"
         android:entryValues="@array/assisted_dialing_cc_values"
         android:key="@string/assisted_dialing_setting_cc_key"
-        android:summary="@string/assisted_dialing_setting_cc_default_summary"
+        android:summary="@string/assisted_dialing_setting_cc_default_summary_fallback"
         android:title="@string/assisted_dialing_setting_cc_title"/>
   </PreferenceCategory>
 

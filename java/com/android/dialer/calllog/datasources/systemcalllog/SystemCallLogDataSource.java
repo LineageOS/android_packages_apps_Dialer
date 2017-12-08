@@ -220,6 +220,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.CACHED_NUMBER_TYPE,
                   Calls.CACHED_NUMBER_LABEL,
                   Calls.DURATION,
+                  Calls.DATA_USAGE,
                   Calls.TRANSCRIPTION,
                   Calls.VOICEMAIL_URI,
                   Calls.IS_READ,
@@ -259,6 +260,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
         int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
+        int dataUsageColumn = cursor.getColumnIndexOrThrow(Calls.DATA_USAGE);
         int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
         int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
@@ -286,6 +288,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
           int duration = cursor.getInt(durationsColumn);
+          int dataUsage = cursor.getInt(dataUsageColumn);
           String transcription = cursor.getString(transcriptionColumn);
           String voicemailUri = cursor.getString(voicemailUriColumn);
           int isRead = cursor.getInt(isReadColumn);
@@ -334,6 +337,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
               appContext, contentValues, phoneAccountComponentName, phoneAccountId);
           contentValues.put(AnnotatedCallLog.FEATURES, features);
           contentValues.put(AnnotatedCallLog.DURATION, duration);
+          contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
           contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
           contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
 

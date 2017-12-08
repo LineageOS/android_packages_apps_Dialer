@@ -225,6 +225,13 @@ public class AnnotatedCallLogContract {
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
 
     /**
+     * See {@link android.provider.CallLog.Calls#DATA_USAGE}.
+     *
+     * <p>Type: INTEGER (long)
+     */
+    public static final String DATA_USAGE = "data_usage";
+
+    /**
      * See {@link android.provider.CallLog.Calls#DURATION}.
      *
      * <p>TYPE: INTEGER (long)
