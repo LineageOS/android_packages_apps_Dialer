@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
@@ -32,6 +33,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -98,6 +100,29 @@ public abstract class IntentProvider {
       @Override
       public Intent getIntent(Context context) {
         return DuoComponent.get(context).getDuo().getIntent(context, number);
+      }
+    };
+  }
+
+  public static IntentProvider getSetUpDuoIntentProvider() {
+    return new IntentProvider() {
+      @Override
+      public Intent getIntent(Context context) {
+        return new Intent("com.google.android.apps.tachyon.action.REGISTER")
+            .setPackage(DuoConstants.PACKAGE_NAME);
+      }
+    };
+  }
+
+  public static IntentProvider getDuoInviteIntentProvider(String number) {
+    return new IntentProvider() {
+      @Override
+      public Intent getIntent(Context context) {
+        Intent intent =
+            new Intent("com.google.android.apps.tachyon.action.INVITE")
+                .setPackage(DuoConstants.PACKAGE_NAME)
+                .setData(Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null /* fragment */));
+        return intent;
       }
     };
   }
