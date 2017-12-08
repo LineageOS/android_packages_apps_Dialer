@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 /** Populates the device database with voicemail entries. */
 public final class VoicemailPopulator {
   private static final String ACCOUNT_ID = "ACCOUNT_ID";
-
+  private static String componentName = "";
   private static final Voicemail.Builder[] SIMPLE_VOICEMAILS = {
     // Long transcription with an embedded phone number.
     Voicemail.builder()
@@ -48,6 +48,7 @@ public final class VoicemailPopulator {
                 + "I hope you listen to all of it. This is very important. "
                 + "Hi, this is a very long voicemail. "
                 + "I hope you listen to all of it. It's very important.")
+        .setPhoneAccountComponentName(componentName)
         .setDurationSeconds(10)
         .setIsRead(false),
     // RTL transcription.
@@ -55,24 +56,28 @@ public final class VoicemailPopulator {
         .setPhoneNumber("+1-302-6365454")
         .setTranscription("هزاران دوست کم اند و یک دشمن زیاد")
         .setDurationSeconds(60)
+        .setPhoneAccountComponentName(componentName)
         .setIsRead(true),
     // Empty number.
     Voicemail.builder()
         .setPhoneNumber("")
         .setTranscription("")
         .setDurationSeconds(60)
+        .setPhoneAccountComponentName(componentName)
         .setIsRead(true),
     // No duration.
     Voicemail.builder()
         .setPhoneNumber("+1-302-6365454")
         .setTranscription("")
         .setDurationSeconds(0)
+        .setPhoneAccountComponentName(componentName)
         .setIsRead(true),
     // Short number.
     Voicemail.builder()
         .setPhoneNumber("711")
         .setTranscription("This is a short voicemail.")
         .setDurationSeconds(12)
+        .setPhoneAccountComponentName(componentName)
         .setIsRead(true),
   };
 
@@ -118,7 +123,7 @@ public final class VoicemailPopulator {
   public static void enableVoicemail(@NonNull Context context) {
     PhoneAccountHandle handle =
         new PhoneAccountHandle(new ComponentName(context, VoicemailPopulator.class), ACCOUNT_ID);
-
+    componentName = handle.getComponentName().toString();
     ContentValues values = new ContentValues();
     values.put(Status.SOURCE_PACKAGE, handle.getComponentName().getPackageName());
     if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
@@ -147,6 +152,8 @@ public final class VoicemailPopulator {
 
     public abstract boolean getIsRead();
 
+    public abstract String getPhoneAccountComponentName();
+
     public static Builder builder() {
       return new AutoValue_VoicemailPopulator_Voicemail.Builder();
     }
@@ -159,6 +166,7 @@ public final class VoicemailPopulator {
       values.put(Voicemails.SOURCE_PACKAGE, context.getPackageName());
       values.put(Voicemails.IS_READ, getIsRead() ? 1 : 0);
       values.put(Voicemails.TRANSCRIPTION, getTranscription());
+      values.put(Voicemails.PHONE_ACCOUNT_COMPONENT_NAME, getPhoneAccountComponentName());
       return values;
     }
 
@@ -174,6 +182,8 @@ public final class VoicemailPopulator {
       public abstract Builder setTimeMillis(long timeMillis);
 
       public abstract Builder setIsRead(boolean isRead);
+
+      public abstract Builder setPhoneAccountComponentName(String phoneAccountComponentName);
 
       public abstract Voicemail build();
     }
