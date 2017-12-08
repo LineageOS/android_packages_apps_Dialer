@@ -120,6 +120,8 @@ public final class NewSearchFragment extends Fragment
   private boolean remoteDirectoriesDisabledForTesting;
 
   private final List<Directory> directories = new ArrayList<>();
+  private final Runnable loaderCp2ContactsRunnable =
+      () -> getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
   private final Runnable loadNearbyPlacesRunnable =
       () -> getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
   private final Runnable loadRemoteContactsRunnable =
@@ -189,7 +191,7 @@ public final class NewSearchFragment extends Fragment
   public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
     LogUtil.i("NewSearchFragment.onCreateLoader", "loading cursor: " + id);
     if (id == CONTACTS_LOADER_ID) {
-      return new SearchContactsCursorLoader(getContext(), query);
+      return new SearchContactsCursorLoader(getContext(), query, isRegularSearch());
     } else if (id == NEARBY_PLACES_LOADER_ID) {
       // Directories represent contact data sources on the device, but since nearby places aren't
       // stored on the device, they don't have a directory ID. We pass the list of all existing IDs
@@ -263,6 +265,7 @@ public final class NewSearchFragment extends Fragment
       adapter.setQuery(query, rawNumber, callInitiationType);
       adapter.setSearchActions(getActions());
       adapter.setZeroSuggestVisible(isRegularSearch());
+      loadCp2ContactsCursor();
       loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
     }
@@ -304,6 +307,7 @@ public final class NewSearchFragment extends Fragment
   @Override
   public void onDestroy() {
     super.onDestroy();
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loaderCp2ContactsRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
@@ -358,6 +362,13 @@ public final class NewSearchFragment extends Fragment
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
     ThreadUtil.getUiThreadHandler()
         .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+  }
+
+  private void loadCp2ContactsCursor() {
+    // Cancel existing load if one exists.
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loaderCp2ContactsRunnable);
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(loaderCp2ContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
   // Should not be called before remote directories (not contacts) have finished loading.
