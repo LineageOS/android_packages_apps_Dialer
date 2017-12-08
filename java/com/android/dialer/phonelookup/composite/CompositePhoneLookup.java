@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -29,9 +30,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * {@link PhoneLookup} which delegates to a configured set of {@link PhoneLookup PhoneLookups},
@@ -40,9 +42,14 @@ import java.util.List;
 public final class CompositePhoneLookup implements PhoneLookup {
 
   private final ImmutableList<PhoneLookup> phoneLookups;
+  private final ListeningExecutorService lightweightExecutorService;
 
-  public CompositePhoneLookup(ImmutableList<PhoneLookup> phoneLookups) {
+  @Inject
+  CompositePhoneLookup(
+      ImmutableList<PhoneLookup> phoneLookups,
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookups = phoneLookups;
+    this.lightweightExecutorService = lightweightExecutorService;
   }
 
   /**
@@ -68,7 +75,7 @@ public final class CompositePhoneLookup implements PhoneLookup {
           }
           return mergedInfo.build();
         },
-        MoreExecutors.directExecutor());
+        lightweightExecutorService);
   }
 
   @Override
@@ -90,12 +97,13 @@ public final class CompositePhoneLookup implements PhoneLookup {
    * the dependent lookups does not complete, the returned future will also not complete.
    */
   @Override
-  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>
+      getMostRecentPhoneLookupInfo(
+          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     List<ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>> futures =
         new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.bulkUpdate(existingInfoMap));
+      futures.add(phoneLookup.getMostRecentPhoneLookupInfo(existingInfoMap));
     }
     return Futures.transform(
         Futures.allAsList(futures),
@@ -117,7 +125,7 @@ public final class CompositePhoneLookup implements PhoneLookup {
           }
           return combinedMap.build();
         },
-        MoreExecutors.directExecutor());
+        lightweightExecutorService);
   }
 
   @Override
@@ -127,6 +135,6 @@ public final class CompositePhoneLookup implements PhoneLookup {
       futures.add(phoneLookup.onSuccessfulBulkUpdate());
     }
     return Futures.transform(
-        Futures.allAsList(futures), unused -> null, MoreExecutors.directExecutor());
+        Futures.allAsList(futures), unused -> null, lightweightExecutorService);
   }
 }

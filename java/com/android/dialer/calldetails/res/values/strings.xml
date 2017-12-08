@@ -49,4 +49,10 @@
 
   <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_toast">Number reported</string>
+
+  <!-- Assisted dialing section header. [CHAR LIMIT=NONE] -->
+  <string name="assisted_dialing_country_code_entry">Assisted dialing: Used country code +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g></string>
+
+  <!-- A fallback string for the assisted dialing header incase parsing failes.. [CHAR LIMIT=NONE] -->
+  <string name="assisted_dialing_country_code_entry_failure">Assisted dialing was used</string>
 </resources>

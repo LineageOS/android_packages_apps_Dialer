@@ -33,13 +33,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
+import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.assisteddialing.ui.AssistedDialingSettingActivity;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
+import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.Duo;
@@ -51,10 +58,12 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
 import com.google.common.base.Preconditions;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
@@ -70,8 +79,8 @@ public class CallDetailsActivity extends AppCompatActivity {
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
 
-  private final CallDetailsHeaderViewHolder.CallbackActionListener callbackActionListener =
-      new CallbackActionListener(this);
+  private final CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener =
+      new CallDetailsHeaderListener(this);
   private final CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener =
       new DeleteCallDetailsListener(this);
   private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener =
@@ -166,7 +175,7 @@ public class CallDetailsActivity extends AppCompatActivity {
             this /* context */,
             contact,
             entries.getEntriesList(),
-            callbackActionListener,
+            callDetailsHeaderListener,
             reportCallIdListener,
             deleteCallDetailsListener);
 
@@ -248,11 +257,11 @@ public class CallDetailsActivity extends AppCompatActivity {
     }
   }
 
-  private static final class CallbackActionListener
-      implements CallDetailsHeaderViewHolder.CallbackActionListener {
-    private final WeakReference<Activity> activityWeakReference;
+  private static final class CallDetailsHeaderListener
+      implements CallDetailsHeaderViewHolder.CallDetailsHeaderListener {
+    private final WeakReference<CallDetailsActivity> activityWeakReference;
 
-    CallbackActionListener(Activity activity) {
+    CallDetailsHeaderListener(CallDetailsActivity activity) {
       this.activityWeakReference = new WeakReference<>(activity);
     }
 
@@ -303,8 +312,42 @@ public class CallDetailsActivity extends AppCompatActivity {
       PreCall.start(getActivity(), callIntentBuilder);
     }
 
-    private Activity getActivity() {
+    private CallDetailsActivity getActivity() {
       return Preconditions.checkNotNull(activityWeakReference.get());
+    }
+
+    @Override
+    public void openAssistedDialingSettings(View unused) {
+      Intent intent = new Intent(getActivity(), AssistedDialingSettingActivity.class);
+      getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void createAssistedDialerNumberParserTask(
+        AssistedDialingNumberParseWorker worker,
+        SuccessListener<Integer> successListener,
+        FailureListener failureListener) {
+      DialerExecutorComponent.get(getActivity().getApplicationContext())
+          .dialerExecutorFactory()
+          .createUiTaskBuilder(
+              getActivity().getFragmentManager(),
+              "CallDetailsActivity.createAssistedDialerNumberParserTask",
+              new AssistedDialingNumberParseWorker())
+          .onSuccess(successListener)
+          .onFailure(failureListener)
+          .build()
+          .executeParallel(getActivity().contact.getNumber());
+    }
+  }
+
+  static class AssistedDialingNumberParseWorker implements Worker<String, Integer> {
+
+    @Override
+    public Integer doInBackground(@NonNull String phoneNumber) {
+      DialerPhoneNumberUtil dialerPhoneNumberUtil =
+          new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+      DialerPhoneNumber parsedNumber = dialerPhoneNumberUtil.parse(phoneNumber, null);
+      return parsedNumber.getDialerInternalPhoneNumber().getCountryCode();
     }
   }
 

@@ -25,9 +25,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.android.dialer.calldetails.CallDetailsActivity.AssistedDialingNumberParseWorker;
+import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
+import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.logging.InteractionEvent;
@@ -35,20 +42,22 @@ import com.android.dialer.logging.Logger;
 
 /** ViewHolder for Header/Contact in {@link CallDetailsActivity}. */
 public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener {
+    implements OnClickListener, FailureListener {
 
-  private final CallbackActionListener callbackActionListener;
+  private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final ImageView callbackButton;
   private final TextView nameView;
   private final TextView numberView;
   private final TextView networkView;
   private final QuickContactBadge contactPhoto;
   private final Context context;
+  private final TextView assistedDialingInternationalDirectDialCodeAndCountryCodeText;
+  private final RelativeLayout assistedDialingContainer;
 
   private DialerContact contact;
   private @CallbackAction int callbackAction;
 
-  CallDetailsHeaderViewHolder(View container, CallbackActionListener callbackActionListener) {
+  CallDetailsHeaderViewHolder(View container, CallDetailsHeaderListener callDetailsHeaderListener) {
     super(container);
     context = container.getContext();
     callbackButton = container.findViewById(R.id.call_back_button);
@@ -56,12 +65,69 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     numberView = container.findViewById(R.id.phone_number);
     networkView = container.findViewById(R.id.network);
     contactPhoto = container.findViewById(R.id.quick_contact_photo);
+    assistedDialingInternationalDirectDialCodeAndCountryCodeText =
+        container.findViewById(R.id.assisted_dialing_text);
+    assistedDialingContainer = container.findViewById(R.id.assisted_dialing_container);
+
+    assistedDialingContainer.setOnClickListener(
+        callDetailsHeaderListener::openAssistedDialingSettings);
 
     callbackButton.setOnClickListener(this);
-    this.callbackActionListener = callbackActionListener;
+    this.callDetailsHeaderListener = callDetailsHeaderListener;
     Logger.get(context)
         .logQuickContactOnTouch(
             contactPhoto, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_DETAILS, true);
+  }
+
+  private boolean hasAssistedDialingFeature(Integer features) {
+    return (features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+        == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING;
+  }
+
+  void updateAssistedDialingInfo(CallDetailsEntry callDetailsEntry) {
+
+    if (callDetailsEntry != null && hasAssistedDialingFeature(callDetailsEntry.getFeatures())) {
+      showAssistedDialingContainer(true);
+      callDetailsHeaderListener.createAssistedDialerNumberParserTask(
+          new CallDetailsActivity.AssistedDialingNumberParseWorker(),
+          this::updateAssistedDialingText,
+          this::onFailure);
+
+    } else {
+      showAssistedDialingContainer(false);
+    }
+  }
+
+  private void showAssistedDialingContainer(boolean shouldShowContainer) {
+    if (shouldShowContainer) {
+      assistedDialingContainer.setVisibility(View.VISIBLE);
+    } else {
+      LogUtil.i(
+          "CallDetailsHeaderViewHolder.updateAssistedDialingInfo",
+          "hiding assisted dialing ui elements");
+      assistedDialingContainer.setVisibility(View.GONE);
+    }
+  }
+
+  private void updateAssistedDialingText(Integer countryCode) {
+
+    // Try and handle any poorly formed inputs.
+    if (countryCode <= 0) {
+      onFailure(new IllegalStateException());
+      return;
+    }
+
+    LogUtil.i(
+        "CallDetailsHeaderViewHolder.updateAssistedDialingText", "Updating Assisted Dialing Text");
+    assistedDialingInternationalDirectDialCodeAndCountryCodeText.setText(
+        context.getString(
+            R.string.assisted_dialing_country_code_entry, String.valueOf(countryCode)));
+  }
+
+  @Override
+  public void onFailure(Throwable unused) {
+    assistedDialingInternationalDirectDialCodeAndCountryCodeText.setText(
+        R.string.assisted_dialing_country_code_entry_failure);
   }
 
   /** Populates the contact info fields based on the current contact information. */
@@ -128,13 +194,14 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     if (view == callbackButton) {
       switch (callbackAction) {
         case CallbackAction.IMS_VIDEO:
-          callbackActionListener.placeImsVideoCall(contact.getNumber());
+          callDetailsHeaderListener.placeImsVideoCall(contact.getNumber());
           break;
         case CallbackAction.DUO:
-          callbackActionListener.placeDuoVideoCall(contact.getNumber());
+          callDetailsHeaderListener.placeDuoVideoCall(contact.getNumber());
           break;
         case CallbackAction.VOICE:
-          callbackActionListener.placeVoiceCall(contact.getNumber(), contact.getPostDialDigits());
+          callDetailsHeaderListener.placeVoiceCall(
+              contact.getNumber(), contact.getPostDialDigits());
           break;
         case CallbackAction.NONE:
         default:
@@ -145,8 +212,8 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     }
   }
 
-  /** Listener for making a callback */
-  interface CallbackActionListener {
+  /** Listener for the call details header */
+  interface CallDetailsHeaderListener {
 
     /** Places an IMS video call. */
     void placeImsVideoCall(String phoneNumber);
@@ -156,5 +223,13 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
 
     /** Place a traditional voice call. */
     void placeVoiceCall(String phoneNumber, String postDialDigits);
+
+    /** Access the Assisted Dialing settings * */
+    void openAssistedDialingSettings(View view);
+
+    void createAssistedDialerNumberParserTask(
+        AssistedDialingNumberParseWorker worker,
+        SuccessListener<Integer> onSuccess,
+        FailureListener onFailure);
   }
 }
