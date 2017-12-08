@@ -89,8 +89,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setNumberCalls(CoalescedRow row) {
     // TODO(zachh): Number of calls shouldn't be text, but a circle with a number inside.
-    if (row.numberCalls() > 1) {
-      primaryTextView.append(String.format(Locale.getDefault(), " (%d)", row.numberCalls()));
+    int numberCalls = row.coalescedIds().getCoalescedIdCount();
+    if (numberCalls > 1) {
+      primaryTextView.append(String.format(Locale.getDefault(), " (%d)", numberCalls));
     }
   }
 
