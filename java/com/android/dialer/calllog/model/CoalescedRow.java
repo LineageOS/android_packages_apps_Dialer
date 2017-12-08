@@ -17,8 +17,8 @@
 package com.android.dialer.calllog.model;
 
 import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
 import com.google.auto.value.AutoValue;
 
@@ -38,15 +38,14 @@ public abstract class CoalescedRow {
         .setFeatures(0)
         .setIsBusiness(false)
         .setIsVoicemail(false)
-        .setNumberCalls(0)
-        .setCallType(0);
+        .setCallType(0)
+        .setCoalescedIds(CoalescedIds.getDefaultInstance());
   }
 
   public abstract int id();
 
   public abstract long timestamp();
 
-  @NonNull
   public abstract DialerPhoneNumber number();
 
   @Nullable
@@ -93,7 +92,7 @@ public abstract class CoalescedRow {
 
   public abstract int callType();
 
-  public abstract int numberCalls();
+  public abstract CoalescedIds coalescedIds();
 
   /** Builder for {@link CoalescedRow}. */
   @AutoValue.Builder
@@ -103,7 +102,7 @@ public abstract class CoalescedRow {
 
     public abstract Builder setTimestamp(long timestamp);
 
-    public abstract Builder setNumber(@NonNull DialerPhoneNumber number);
+    public abstract Builder setNumber(DialerPhoneNumber number);
 
     public abstract Builder setName(@Nullable String name);
 
@@ -140,7 +139,7 @@ public abstract class CoalescedRow {
 
     public abstract Builder setCallType(int callType);
 
-    public abstract Builder setNumberCalls(int numberCalls);
+    public abstract Builder setCoalescedIds(CoalescedIds coalescedIds);
 
     public abstract CoalescedRow build();
   }
