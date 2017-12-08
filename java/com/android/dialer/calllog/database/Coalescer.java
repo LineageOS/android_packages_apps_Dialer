@@ -21,6 +21,7 @@ import android.database.MatrixCursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
@@ -29,6 +30,7 @@ import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.google.common.base.Preconditions;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
@@ -40,11 +42,10 @@ import javax.inject.Inject;
 /**
  * Coalesces call log rows by combining some adjacent rows.
  *
- * <p>Applies the business which logic which determines which adjacent rows should be coalasced, and
- * then delegates to each data source to determine how individual columns should be aggregated.
+ * <p>Applies the logic that determines which adjacent rows should be coalesced, and then delegates
+ * to each data source to determine how individual columns should be aggregated.
  */
 public class Coalescer {
-
   private final DataSources dataSources;
 
   @Inject
@@ -96,7 +97,9 @@ public class Coalescer {
 
         if (!rowsShouldBeCombined(dialerPhoneNumberUtil, previousRow, currentRow)) {
           ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
-          coalescedRow.put(CoalescedAnnotatedCallLog.NUMBER_CALLS, currentRowGroup.size());
+          coalescedRow.put(
+              CoalescedAnnotatedCallLog.COALESCED_IDS,
+              getCoalescedIds(currentRowGroup).toByteArray());
           addContentValuesToMatrixCursor(
               coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId++);
           currentRowGroup.clear();
@@ -106,7 +109,8 @@ public class Coalescer {
 
       // Deal with leftover rows.
       ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
-      coalescedRow.put(CoalescedAnnotatedCallLog.NUMBER_CALLS, currentRowGroup.size());
+      coalescedRow.put(
+          CoalescedAnnotatedCallLog.COALESCED_IDS, getCoalescedIds(currentRowGroup).toByteArray());
       addContentValuesToMatrixCursor(coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId);
     }
     return allCoalescedRowsMatrixCursor;
@@ -182,6 +186,23 @@ public class Coalescer {
       coalescedValues.putAll(dataSource.coalesce(individualRows));
     }
     return coalescedValues;
+  }
+
+  /**
+   * Build a {@link CoalescedIds} proto that contains IDs of the rows in {@link AnnotatedCallLog}
+   * that are coalesced into one row in {@link CoalescedAnnotatedCallLog}.
+   *
+   * @param individualRows {@link AnnotatedCallLog} rows sorted by timestamp descending
+   * @return A {@link CoalescedIds} proto containing IDs of {@code individualRows}.
+   */
+  private CoalescedIds getCoalescedIds(List<ContentValues> individualRows) {
+    CoalescedIds.Builder coalescedIds = CoalescedIds.newBuilder();
+
+    for (ContentValues row : individualRows) {
+      coalescedIds.addCoalescedId(Preconditions.checkNotNull(row.getAsLong(AnnotatedCallLog._ID)));
+    }
+
+    return coalescedIds.build();
   }
 
   /**
