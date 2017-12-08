@@ -70,11 +70,10 @@ public final class CompositePhoneLookup implements PhoneLookup {
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(
-      ImmutableSet<DialerPhoneNumber> phoneNumbers, long lastModified) {
+  public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     List<ListenableFuture<Boolean>> futures = new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.isDirty(phoneNumbers, lastModified));
+      futures.add(phoneLookup.isDirty(phoneNumbers));
     }
     // Executes all child lookups (possibly in parallel), completing when the first composite lookup
     // which returns "true" completes, and cancels the others.
@@ -90,11 +89,11 @@ public final class CompositePhoneLookup implements PhoneLookup {
    */
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> bulkUpdate(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long lastModified) {
+      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     List<ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>> futures =
         new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.bulkUpdate(existingInfoMap, lastModified));
+      futures.add(phoneLookup.bulkUpdate(existingInfoMap));
     }
     return Futures.transform(
         Futures.allAsList(futures),
@@ -117,5 +116,15 @@ public final class CompositePhoneLookup implements PhoneLookup {
           return combinedMap.build();
         },
         MoreExecutors.directExecutor());
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulBulkUpdate() {
+    List<ListenableFuture<Void>> futures = new ArrayList<>();
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      futures.add(phoneLookup.onSuccessfulBulkUpdate());
+    }
+    return Futures.transform(
+        Futures.allAsList(futures), unused -> null, MoreExecutors.directExecutor());
   }
 }
