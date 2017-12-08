@@ -16,9 +16,13 @@
 
 package com.android.dialer.calllog.datasources.phonelookup;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.RemoteException;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
@@ -34,6 +38,7 @@ import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupSelector;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
@@ -44,6 +49,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +67,23 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   private final PhoneLookup phoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
+
+  /**
+   * Keyed by normalized number (the primary key for PhoneLookupHistory).
+   *
+   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
+   * #onSuccessfulFill(Context)} operations.
+   */
+  private final Map<String, PhoneLookupInfo> phoneLookupHistoryRowsToUpdate = new ArrayMap<>();
+
+  /**
+   * Normalized numbers (the primary key for PhoneLookupHistory) which should be deleted from
+   * PhoneLookupHistory.
+   *
+   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
+   * #onSuccessfulFill(Context)} operations.
+   */
+  private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
   @Inject
   PhoneLookupDataSource(
@@ -108,6 +131,11 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    */
   @Override
   public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    // Clear state saved since the last call to fill. This is necessary in case fill is called but
+    // onSuccessfulFill is not called during a previous flow.
+    phoneLookupHistoryRowsToUpdate.clear();
+    phoneLookupHistoryRowsToDelete.clear();
+
     // First query information from annotated call log.
     ListenableFuture<Map<DialerPhoneNumber, Set<Long>>> annotatedCallLogIdsByNumberFuture =
         backgroundExecutorService.submit(() -> queryIdAndNumberFromAnnotatedCallLog(appContext));
@@ -150,6 +178,13 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
           }
           populateInserts(originalPhoneLookupHistoryDataByAnnotatedCallLogId.build(), mutations);
 
+          // Compute and save the PhoneLookupHistory rows which can be deleted in onSuccessfulFill.
+          DialerPhoneNumberUtil dialerPhoneNumberUtil =
+              new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+          phoneLookupHistoryRowsToDelete.addAll(
+              computePhoneLookupHistoryRowsToDelete(
+                  annotatedCallLogIdsByNumber, mutations, dialerPhoneNumberUtil));
+
           // Now compute the rows to update.
           ImmutableMap.Builder<Long, PhoneLookupInfo> rowsToUpdate = ImmutableMap.builder();
           for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : updatedInfoMap.entrySet()) {
@@ -159,6 +194,10 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
               for (Long id : annotatedCallLogIdsByNumber.get(dialerPhoneNumber)) {
                 rowsToUpdate.put(id, upToDateInfo);
               }
+              // Also save the updated information so that it can be written to PhoneLookupHistory
+              // in onSuccessfulFill.
+              String normalizedNumber = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
+              phoneLookupHistoryRowsToUpdate.put(normalizedNumber, upToDateInfo);
             }
           }
           return rowsToUpdate.build();
@@ -167,9 +206,11 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     ListenableFuture<ImmutableMap<Long, PhoneLookupInfo>> rowsToUpdateFuture =
         Futures.whenAllSucceed(
                 annotatedCallLogIdsByNumberFuture, updatedInfoMapFuture, originalInfoMapFuture)
-            .call(computeRowsToUpdate, lightweightExecutorService);
+            .call(
+                computeRowsToUpdate,
+                backgroundExecutorService /* PhoneNumberUtil may do disk IO */);
 
-    // Finally apply the computed rows to update to mutations.
+    // Finally update the mutations with the computed rows.
     return Futures.transform(
         rowsToUpdateFuture,
         rowsToUpdate -> {
@@ -181,12 +222,38 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @Override
   public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
-    return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
+    // First update and/or delete the appropriate rows in PhoneLookupHistory.
+    ListenableFuture<Void> writePhoneLookupHistory =
+        backgroundExecutorService.submit(() -> writePhoneLookupHistory(appContext));
+
+    // If that succeeds, delegate to the composite PhoneLookup to notify all PhoneLookups that both
+    // the AnnotatedCallLog and PhoneLookupHistory have been successfully updated.
+    return Futures.transformAsync(
+        writePhoneLookupHistory,
+        unused -> phoneLookup.onSuccessfulBulkUpdate(),
+        lightweightExecutorService);
   }
 
   @WorkerThread
-  private Void onSuccessfulFillInternal() {
-    // TODO(zachh): Update PhoneLookupHistory.
+  private Void writePhoneLookupHistory(Context appContext)
+      throws RemoteException, OperationApplicationException {
+    ArrayList<ContentProviderOperation> operations = new ArrayList<>();
+    long currentTimestamp = System.currentTimeMillis();
+    for (Entry<String, PhoneLookupInfo> entry : phoneLookupHistoryRowsToUpdate.entrySet()) {
+      String normalizedNumber = entry.getKey();
+      PhoneLookupInfo phoneLookupInfo = entry.getValue();
+      ContentValues contentValues = new ContentValues();
+      contentValues.put(PhoneLookupHistory.PHONE_LOOKUP_INFO, phoneLookupInfo.toByteArray());
+      contentValues.put(PhoneLookupHistory.LAST_MODIFIED, currentTimestamp);
+      operations.add(
+          ContentProviderOperation.newUpdate(numberUri(normalizedNumber))
+              .withValues(contentValues)
+              .build());
+    }
+    for (String normalizedNumber : phoneLookupHistoryRowsToDelete) {
+      operations.add(ContentProviderOperation.newDelete(numberUri(normalizedNumber)).build());
+    }
+    appContext.getContentResolver().applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations);
     return null;
   }
 
@@ -422,7 +489,47 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     }
   }
 
+  private Set<String> computePhoneLookupHistoryRowsToDelete(
+      Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber,
+      CallLogMutations mutations,
+      DialerPhoneNumberUtil dialerPhoneNumberUtil) {
+    if (mutations.getDeletes().isEmpty()) {
+      return ImmutableSet.of();
+    }
+    // First convert the dialer phone numbers to normalized numbers; we need to combine entries
+    // because different DialerPhoneNumbers can map to the same normalized number.
+    Map<String, Set<Long>> idsByNormalizedNumber = new ArrayMap<>();
+    for (Entry<DialerPhoneNumber, Set<Long>> entry : annotatedCallLogIdsByNumber.entrySet()) {
+      DialerPhoneNumber dialerPhoneNumber = entry.getKey();
+      Set<Long> idsForDialerPhoneNumber = entry.getValue();
+      String normalizedNumber = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
+      Set<Long> idsForNormalizedNumber = idsByNormalizedNumber.get(normalizedNumber);
+      if (idsForNormalizedNumber == null) {
+        idsForNormalizedNumber = new ArraySet<>();
+        idsByNormalizedNumber.put(normalizedNumber, idsForNormalizedNumber);
+      }
+      idsForNormalizedNumber.addAll(idsForDialerPhoneNumber);
+    }
+    // Now look through and remove all IDs that were scheduled for delete; after doing that, if
+    // there are no remaining IDs left for a normalized number, the number can be deleted from
+    // PhoneLookupHistory.
+    Set<String> normalizedNumbersToDelete = new ArraySet<>();
+    for (Entry<String, Set<Long>> entry : idsByNormalizedNumber.entrySet()) {
+      String normalizedNumber = entry.getKey();
+      Set<Long> idsForNormalizedNumber = entry.getValue();
+      idsForNormalizedNumber.removeAll(mutations.getDeletes());
+      if (idsForNormalizedNumber.isEmpty()) {
+        normalizedNumbersToDelete.add(normalizedNumber);
+      }
+    }
+    return normalizedNumbersToDelete;
+  }
+
   private static String selectName(PhoneLookupInfo phoneLookupInfo) {
     return PhoneLookupSelector.selectName(phoneLookupInfo);
+  }
+
+  private static Uri numberUri(String number) {
+    return PhoneLookupHistory.CONTENT_URI.buildUpon().appendEncodedPath(number).build();
   }
 }
