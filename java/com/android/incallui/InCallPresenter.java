@@ -545,6 +545,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
     setBoundAndWaitingForOutgoingCall(false, null);
     call.registerCallback(mCallCallback);
+    // TODO(maxwelb): Return the future in recordPhoneLookupInfo and propagate.
+    PhoneLookupHistoryRecorder.recordPhoneLookupInfo(mContext.getApplicationContext(), call);
     Trace.endSection();
   }
 
