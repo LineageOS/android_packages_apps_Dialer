@@ -26,8 +26,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract.Contacts;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
@@ -39,12 +39,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.preference.ContactsPreferences.ChangeListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -62,15 +64,6 @@ public class ContactsFragment extends Fragment
         OnEmptyViewActionButtonClickedListener,
         ChangeListener {
 
-  /** IntDef to define the OnClick action for contact rows. */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({ClickAction.INVALID, ClickAction.OPEN_CONTACT_CARD})
-  public @interface ClickAction {
-    int INVALID = 0;
-    /** Open contact card on click. */
-    int OPEN_CONTACT_CARD = 1;
-  }
-
   /** An enum for the different types of headers that be inserted at position 0 in the list. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({Header.NONE, Header.ADD_CONTACT})
@@ -83,7 +76,7 @@ public class ContactsFragment extends Fragment
   public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
   private static final String EXTRA_HEADER = "extra_header";
-  private static final String EXTRA_CLICK_ACTION = "extra_click_action";
+  private static final String EXTRA_HAS_PHONE_NUMBERS = "extra_has_phone_numbers";
 
   /**
    * Listen to broadcast events about permissions in order to be notified if the READ_CONTACTS
@@ -104,14 +97,11 @@ public class ContactsFragment extends Fragment
   private ContactsAdapter adapter;
   private EmptyContentView emptyContentView;
 
-  private ContactsPreferences contactsPrefs;
   private @Header int header;
-  private @ClickAction int clickAction;
 
-  /** Listener for contacts list scroll state. */
-  public interface OnContactsListScrolledListener {
-    void onContactsListScrolled(boolean isDragging);
-  }
+  private ContactsPreferences contactsPrefs;
+  private boolean hasPhoneNumbers;
+  private String query;
 
   /**
    * Used to get a configured instance of ContactsFragment.
@@ -121,26 +111,42 @@ public class ContactsFragment extends Fragment
    *
    * <ul>
    *   <li>{@link Header#ADD_CONTACT} to insert a header that allows users to add a contact
-   *   <li>{@link ClickAction#OPEN_CONTACT_CARD} to open contact cards on click
+   *   <li>Open contact cards on click
    * </ul>
    *
    * And for the add favorite contact screen we might use:
    *
    * <ul>
    *   <li>{@link Header#NONE} so that all rows are contacts (i.e. no header inserted)
-   *   <li>{@link ClickAction#SET_RESULT_AND_FINISH} to send a selected contact to the previous
-   *       activity.
+   *   <li>Send a selected contact to the parent activity.
    * </ul>
    *
    * @param header determines the type of header inserted at position 0 in the contacts list
-   * @param clickAction defines the on click actions on rows that represent contacts
    */
-  public static ContactsFragment newInstance(@Header int header, @ClickAction int clickAction) {
-    Assert.checkArgument(clickAction != ClickAction.INVALID, "Invalid click action");
+  public static ContactsFragment newInstance(@Header int header) {
     ContactsFragment fragment = new ContactsFragment();
     Bundle args = new Bundle();
     args.putInt(EXTRA_HEADER, header);
-    args.putInt(EXTRA_CLICK_ACTION, clickAction);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
+  /**
+   * Returns {@link ContactsFragment} with a list of contacts such that:
+   *
+   * <ul>
+   *   <li>Each contact has a phone number
+   *   <li>Contacts are filterable via {@link #updateQuery(String)}
+   *   <li>There is no list header (i.e. {@link Header#NONE}
+   *   <li>Clicking on a contact notifies the parent activity via {@link
+   *       OnContactSelectedListener#onContactSelected(ImageView, Uri, long)}.
+   * </ul>
+   */
+  public static ContactsFragment newAddFavoritesInstance() {
+    ContactsFragment fragment = new ContactsFragment();
+    Bundle args = new Bundle();
+    args.putInt(EXTRA_HEADER, Header.NONE);
+    args.putBoolean(EXTRA_HAS_PHONE_NUMBERS, true);
     fragment.setArguments(args);
     return fragment;
   }
@@ -152,7 +158,21 @@ public class ContactsFragment extends Fragment
     contactsPrefs = new ContactsPreferences(getContext());
     contactsPrefs.registerChangeListener(this);
     header = getArguments().getInt(EXTRA_HEADER);
-    clickAction = getArguments().getInt(EXTRA_CLICK_ACTION);
+    hasPhoneNumbers = getArguments().getBoolean(EXTRA_HAS_PHONE_NUMBERS);
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    PermissionsUtil.registerPermissionReceiver(
+        getActivity(), readContactsPermissionGrantedReceiver, READ_CONTACTS);
+  }
+
+  @Override
+  public void onStop() {
+    PermissionsUtil.unregisterPermissionReceiver(
+        getActivity(), readContactsPermissionGrantedReceiver);
+    super.onStop();
   }
 
   @Nullable
@@ -163,7 +183,9 @@ public class ContactsFragment extends Fragment
     fastScroller = view.findViewById(R.id.fast_scroller);
     anchoredHeader = view.findViewById(R.id.header);
     recyclerView = view.findViewById(R.id.recycler_view);
-    adapter = new ContactsAdapter(getContext(), header, clickAction);
+    adapter =
+        new ContactsAdapter(
+            getContext(), header, FragmentUtils.getParent(this, OnContactSelectedListener.class));
     recyclerView.setAdapter(adapter);
     manager =
         new LinearLayoutManager(getContext()) {
@@ -208,15 +230,14 @@ public class ContactsFragment extends Fragment
   /** @return a loader according to sort order and display order. */
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    boolean sortOrderPrimary =
-        (contactsPrefs.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY);
-    boolean displayOrderPrimary =
-        (contactsPrefs.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY);
+    ContactsCursorLoader cursorLoader = new ContactsCursorLoader(getContext(), hasPhoneNumbers);
+    cursorLoader.setQuery(query);
+    return cursorLoader;
+  }
 
-    String sortKey = sortOrderPrimary ? Contacts.SORT_KEY_PRIMARY : Contacts.SORT_KEY_ALTERNATIVE;
-    return displayOrderPrimary
-        ? ContactsCursorLoader.createInstanceDisplayNamePrimary(getContext(), sortKey)
-        : ContactsCursorLoader.createInstanceDisplayNameAlternative(getContext(), sortKey);
+  public void updateQuery(String query) {
+    this.query = query;
+    getLoaderManager().restartLoader(0, null, this);
   }
 
   @Override
@@ -266,10 +287,13 @@ public class ContactsFragment extends Fragment
     }
     String anchoredHeaderString = adapter.getHeaderString(firstCompletelyVisible);
 
-    FragmentUtils.getParentUnsafe(this, OnContactsListScrolledListener.class)
-        .onContactsListScrolled(
-            recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING
-                || fastScroller.isDragStarted());
+    OnContactsListScrolledListener listener =
+        FragmentUtils.getParent(this, OnContactsListScrolledListener.class);
+    if (listener != null) {
+      listener.onContactsListScrolled(
+          recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING
+              || fastScroller.isDragStarted());
+    }
 
     // If the user swipes to the top of the list very quickly, there is some strange behavior
     // between this method updating headers and adapter#onBindViewHolder updating headers.
@@ -331,17 +355,15 @@ public class ContactsFragment extends Fragment
     }
   }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    PermissionsUtil.registerPermissionReceiver(
-        getActivity(), readContactsPermissionGrantedReceiver, READ_CONTACTS);
+  /** Listener for contacts list scroll state. */
+  public interface OnContactsListScrolledListener {
+    void onContactsListScrolled(boolean isDragging);
   }
 
-  @Override
-  public void onStop() {
-    PermissionsUtil.unregisterPermissionReceiver(
-        getActivity(), readContactsPermissionGrantedReceiver);
-    super.onStop();
+  /** Listener to notify parents when a contact is selected. */
+  public interface OnContactSelectedListener {
+
+    /** Called when a contact is selected in {@link ContactsFragment}. */
+    void onContactSelected(ImageView photo, Uri contactUri, long contactId);
   }
 }
