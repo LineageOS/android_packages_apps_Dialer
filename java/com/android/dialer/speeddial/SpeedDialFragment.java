@@ -18,10 +18,10 @@ package com.android.dialer.speeddial;
 
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract.Contacts;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +35,16 @@ import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
 
-/** Favorites fragment. Contents TBD. TODO(calderwoodra) */
+/**
+ * Fragment for displaying:
+ *
+ * <ul>
+ *   <li>Favorite/Starred contacts
+ *   <li>Suggested contacts
+ * </ul>
+ *
+ * <p>Suggested contacts built from {@link android.provider.ContactsContract#STREQUENT_PHONE_ONLY}.
+ */
 public class SpeedDialFragment extends Fragment {
 
   private static final int STREQUENT_CONTACTS_LOADER_ID = 1;
@@ -73,16 +82,16 @@ public class SpeedDialFragment extends Fragment {
   }
 
   @Override
-  public void onPause() {
-    super.onPause();
-    loaderCallback.unregisterContentObserver();
+  public void onResume() {
+    super.onResume();
+    getLoaderManager().restartLoader(STREQUENT_CONTACTS_LOADER_ID, null, loaderCallback);
   }
 
-  private static class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
+  private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
 
     @Override
     public void onAddFavoriteClicked() {
-      // TODO(calderwoodra): implement add favorite screen
+      startActivity(new Intent(getContext(), AddFavoriteActivity.class));
     }
   }
 
@@ -123,8 +132,6 @@ public class SpeedDialFragment extends Fragment {
    */
   private class SpeedDialFragmentLoaderCallback implements LoaderCallbacks<Cursor> {
 
-    private StrequentContactsCursorLoader cursorLoader;
-
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
       if (id == STREQUENT_CONTACTS_LOADER_ID) {
@@ -135,22 +142,7 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-      cursorLoader = (StrequentContactsCursorLoader) loader;
-      // Since the original cursor we queried against was modified and closed, we need to register a
-      // new content observer in order to get updates on changes to our contacts.
-      getContext()
-          .getContentResolver()
-          .registerContentObserver(
-              Contacts.CONTENT_STREQUENT_URI,
-              true /* notifyForDescendants*/,
-              cursorLoader.getContentObserver());
       adapter.setCursor((SpeedDialCursor) data);
-    }
-
-    public void unregisterContentObserver() {
-      getContext()
-          .getContentResolver()
-          .unregisterContentObserver(cursorLoader.getContentObserver());
     }
 
     @Override

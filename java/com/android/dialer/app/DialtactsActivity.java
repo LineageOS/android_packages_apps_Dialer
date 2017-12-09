@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract.QuickContact;
 import android.speech.RecognizerIntent;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -59,6 +60,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,6 +103,7 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
+import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpadview.DialpadFragment;
@@ -109,6 +112,7 @@ import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
@@ -166,7 +170,8 @@ public class DialtactsActivity extends TransactionSafeActivity
         PhoneNumberInteraction.DisambigDialogDismissedListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
         DialpadListener,
-        SearchFragmentListener {
+        SearchFragmentListener,
+        OnContactSelectedListener {
 
   public static final boolean DEBUG = false;
   @VisibleForTesting public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
@@ -1693,6 +1698,14 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   protected int getPreviouslySelectedTabIndex() {
     return mPreviouslySelectedTabIndex;
+  }
+
+  @Override
+  public void onContactSelected(ImageView photo, Uri contactUri, long contactId) {
+    Logger.get(this)
+        .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM);
+    QuickContact.showQuickContact(
+        this, photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
   }
 
   /** Popup menu accessible from the search bar */
