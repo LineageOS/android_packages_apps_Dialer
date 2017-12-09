@@ -56,6 +56,7 @@ final class SimulatorNotifications {
               .setTranscription(String.format("Short transcript %d", i))
               .setDurationSeconds(60)
               .setIsRead(false)
+              .setPhoneAccountComponentName("")
               .setTimeMillis(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(i))
               .build();
       voicemails.add(voicemail.getAsContentValues(context));

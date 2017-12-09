@@ -73,6 +73,34 @@
   </LinearLayout>
 
   <LinearLayout
+      android:id="@+id/set_up_video_action"
+      style="@style/CallLogActionStyle">
+
+    <ImageView
+        style="@style/CallLogActionIconStyle"
+        android:src="@drawable/quantum_ic_videocam_white_24"/>
+
+    <TextView
+        style="@style/CallLogActionTextStyle"
+        android:text="@string/call_log_action_set_up_video"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/invite_video_action"
+      style="@style/CallLogActionStyle">
+
+    <ImageView
+        style="@style/CallLogActionIconStyle"
+        android:src="@drawable/quantum_ic_videocam_white_24"/>
+
+    <TextView
+        style="@style/CallLogActionTextStyle"
+        android:text="@string/call_log_action_invite_video"/>
+
+  </LinearLayout>
+
+  <LinearLayout
     android:id="@+id/create_new_contact_action"
     style="@style/CallLogActionStyle">
 
