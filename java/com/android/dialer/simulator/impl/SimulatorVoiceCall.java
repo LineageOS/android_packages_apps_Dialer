@@ -39,7 +39,8 @@ final class SimulatorVoiceCall
         .addItem("Incoming call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(false))
         .addItem("Outgoing call", () -> new SimulatorVoiceCall(context).addNewOutgoingCall())
         .addItem("Spam call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(true))
-        .addItem("Emergency call", () -> new SimulatorVoiceCall(context).addNewEmergencyCall())
+        .addItem(
+            "Emergency call back", () -> new SimulatorVoiceCall(context).addNewEmergencyCallBack())
         .addItem(
             "GSM conference",
             () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5))
@@ -71,7 +72,7 @@ final class SimulatorVoiceCall
         SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
   }
 
-  private void addNewEmergencyCall() {
+  private void addNewEmergencyCallBack() {
     String callerId = "911";
     connectionTag = SimulatorSimCallManager.addNewIncomingCall(context, callerId, false);
   }
