@@ -64,10 +64,6 @@ final class SpeedDialCursor extends MergeCursor {
 
     strequentCursor.moveToPosition(-1);
     while (strequentCursor.moveToNext()) {
-      if (strequentCursor.getInt(StrequentContactsCursorLoader.PHONE_IS_SUPER_PRIMARY) != 0) {
-        continue;
-      }
-
       if (strequentCursor.getPosition() != 0) {
         long contactId = strequentCursor.getLong(StrequentContactsCursorLoader.PHONE_CONTACT_ID);
         int position = strequentCursor.getPosition();
