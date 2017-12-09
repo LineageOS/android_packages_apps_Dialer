@@ -17,7 +17,7 @@
 package com.android.newbubble;
 
 import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -54,7 +54,6 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
@@ -108,9 +107,10 @@ public class NewBubble {
   ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
-  private ViewPropertyAnimator exitAnimator;
+  @VisibleForTesting AnimatorSet exitAnimatorSet;
 
-  private int leftBoundary;
+  private final int primaryIconMoveDistance;
+  private final int leftBoundary;
   private int savedYPosition = -1;
 
   private final Runnable collapseRunnable =
@@ -218,6 +218,9 @@ public class NewBubble {
             - context
                 .getResources()
                 .getDimensionPixelSize(R.dimen.bubble_shadow_padding_size_horizontal);
+    primaryIconMoveDistance =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_size)
+            - context.getResources().getDimensionPixelSize(R.dimen.bubble_small_icon_size);
   }
 
   /** Expands the main bubble menu. */
@@ -265,26 +268,19 @@ public class NewBubble {
                       windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
                     });
                 animator.addListener(
-                    new AnimatorListener() {
+                    new AnimatorListenerAdapter() {
                       @Override
                       public void onAnimationEnd(Animator animation) {
                         // Show expanded view
                         expandedView.setVisibility(View.VISIBLE);
                         expandedView.setTranslationY(-expandedView.getHeight());
+                        expandedView.setAlpha(0);
                         expandedView
                             .animate()
                             .setInterpolator(new LinearOutSlowInInterpolator())
-                            .translationY(0);
+                            .translationY(0)
+                            .alpha(1);
                       }
-
-                      @Override
-                      public void onAnimationStart(Animator animation) {}
-
-                      @Override
-                      public void onAnimationCancel(Animator animation) {}
-
-                      @Override
-                      public void onAnimationRepeat(Animator animation) {}
                     });
                 animator.start();
 
@@ -319,6 +315,7 @@ public class NewBubble {
         expandedView
             .animate()
             .translationY(-expandedView.getHeight())
+            .alpha(0)
             .setInterpolator(new FastOutLinearInInterpolator())
             .withEndAction(
                 () -> {
@@ -366,7 +363,7 @@ public class NewBubble {
                         windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
                       });
                   animator.addListener(
-                      new AnimatorListener() {
+                      new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                           // If collapse on the right side, the primary button move left a bit after
@@ -374,15 +371,6 @@ public class NewBubble {
                           // visibility becoming GONE. To avoid it, we create a new ViewHolder.
                           replaceViewHolder();
                         }
-
-                        @Override
-                        public void onAnimationStart(Animator animation) {}
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {}
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {}
                       });
                   animator.start();
 
@@ -444,33 +432,48 @@ public class NewBubble {
       windowParams.width = LayoutParams.WRAP_CONTENT;
     }
 
-    if (exitAnimator != null) {
-      exitAnimator.cancel();
-      exitAnimator = null;
+    if (exitAnimatorSet != null) {
+      exitAnimatorSet.removeAllListeners();
+      exitAnimatorSet.cancel();
+      exitAnimatorSet = null;
     } else {
       windowManager.addView(viewHolder.getRoot(), windowParams);
+      viewHolder.getPrimaryButton().setVisibility(View.VISIBLE);
       viewHolder.getPrimaryButton().setScaleX(0);
       viewHolder.getPrimaryButton().setScaleY(0);
+      viewHolder.getPrimaryAvatar().setAlpha(0f);
+      viewHolder.getPrimaryIcon().setAlpha(0f);
     }
 
     viewHolder.setChildClickable(true);
     visibility = Visibility.ENTERING;
-    viewHolder
-        .getPrimaryButton()
-        .animate()
-        .setInterpolator(new OvershootInterpolator())
-        .scaleX(1)
-        .scaleY(1)
-        .withEndAction(
-            () -> {
-              visibility = Visibility.SHOWING;
-              // Show the queued up text, if available.
-              if (textAfterShow != null) {
-                showText(textAfterShow);
-                textAfterShow = null;
-              }
-            })
-        .start();
+
+    // Show bubble animation: scale the whole bubble to 1, and change avatar+icon's alpha to 1
+    ObjectAnimator scaleXAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleX", 1);
+    ObjectAnimator scaleYAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleY", 1);
+    ObjectAnimator avatarAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryAvatar(), "alpha", 1);
+    ObjectAnimator iconAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryIcon(), "alpha", 1);
+    AnimatorSet enterAnimatorSet = new AnimatorSet();
+    enterAnimatorSet.playTogether(
+        scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
+    enterAnimatorSet.setInterpolator(new OvershootInterpolator());
+    enterAnimatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            visibility = Visibility.SHOWING;
+            // Show the queued up text, if available.
+            if (textAfterShow != null) {
+              showText(textAfterShow);
+              textAfterShow = null;
+            }
+          }
+        });
+    enterAnimatorSet.start();
 
     updatePrimaryIconAnimation();
   }
@@ -663,12 +666,9 @@ public class NewBubble {
   }
 
   void onLeftRightSwitch(boolean onRight) {
-    // Set layout direction so the small icon is not partially hidden.
+    // Move primary icon to the other side so it's not partially hiden
     View primaryIcon = viewHolder.getPrimaryIcon();
-    int newGravity = (onRight ? Gravity.LEFT : Gravity.RIGHT) | Gravity.BOTTOM;
-    FrameLayout.LayoutParams layoutParams =
-        new FrameLayout.LayoutParams(primaryIcon.getWidth(), primaryIcon.getHeight(), newGravity);
-    primaryIcon.setLayoutParams(layoutParams);
+    primaryIcon.animate().translationX(onRight ? -primaryIconMoveDistance : 0).start();
   }
 
   LayoutParams getWindowParams() {
@@ -684,7 +684,8 @@ public class NewBubble {
    * afterHiding} after hiding. If the bubble is currently showing text, will hide after the text is
    * done displaying. If the bubble is not visible this method does nothing.
    */
-  private void hideHelper(Runnable afterHiding) {
+  @VisibleForTesting
+  void hideHelper(Runnable afterHiding) {
     if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
       return;
     }
@@ -708,15 +709,28 @@ public class NewBubble {
     }
 
     visibility = Visibility.EXITING;
-    exitAnimator =
-        viewHolder
-            .getPrimaryButton()
-            .animate()
-            .setInterpolator(new AnticipateInterpolator())
-            .scaleX(0)
-            .scaleY(0)
-            .withEndAction(afterHiding);
-    exitAnimator.start();
+
+    // Hide bubble animation: scale the whole bubble to 0, and change avatar+icon's alpha to 0
+    ObjectAnimator scaleXAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleX", 0);
+    ObjectAnimator scaleYAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleY", 0);
+    ObjectAnimator avatarAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryAvatar(), "alpha", 0);
+    ObjectAnimator iconAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryIcon(), "alpha", 0);
+    exitAnimatorSet = new AnimatorSet();
+    exitAnimatorSet.playTogether(
+        scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
+    exitAnimatorSet.setInterpolator(new AnticipateInterpolator());
+    exitAnimatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            afterHiding.run();
+          }
+        });
+    exitAnimatorSet.start();
   }
 
   private void reset() {
@@ -767,7 +781,8 @@ public class NewBubble {
     configureButton(currentInfo.getActions().get(3), viewHolder.getEndCallButton());
   }
 
-  private void doShowText(@NonNull CharSequence text) {
+  @VisibleForTesting
+  void doShowText(@NonNull CharSequence text) {
     TransitionManager.beginDelayedTransition((ViewGroup) viewHolder.getPrimaryButton().getParent());
     viewHolder.getPrimaryText().setText(text);
     viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_TEXT);
@@ -803,15 +818,10 @@ public class NewBubble {
         .getPrimaryButton()
         .setDisplayedChild(oldViewHolder.getPrimaryButton().getDisplayedChild());
     viewHolder.getPrimaryText().setText(oldViewHolder.getPrimaryText().getText());
-
-    int size = context.getResources().getDimensionPixelSize(R.dimen.bubble_small_icon_size);
+    viewHolder.getPrimaryIcon().setX(isDrawingFromRight() ? 0 : primaryIconMoveDistance);
     viewHolder
         .getPrimaryIcon()
-        .setLayoutParams(
-            new FrameLayout.LayoutParams(
-                size,
-                size,
-                Gravity.BOTTOM | (isDrawingFromRight() ? Gravity.LEFT : Gravity.RIGHT)));
+        .setTranslationX(isDrawingFromRight() ? -primaryIconMoveDistance : 0);
 
     update();
 
@@ -855,7 +865,8 @@ public class NewBubble {
   }
 
   private void defaultAfterHidingAnimation() {
-    exitAnimator = null;
+    exitAnimatorSet = null;
+    viewHolder.getPrimaryButton().setVisibility(View.INVISIBLE);
     windowManager.removeView(viewHolder.getRoot());
     visibility = Visibility.HIDDEN;
 
