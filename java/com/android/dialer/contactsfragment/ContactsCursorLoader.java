@@ -18,7 +18,10 @@ package com.android.dialer.contactsfragment;
 
 import android.content.Context;
 import android.content.CursorLoader;
+import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
+import android.text.TextUtils;
+import com.android.contacts.common.preference.ContactsPreferences;
 
 /** Cursor Loader for {@link ContactsFragment}. */
 final class ContactsCursorLoader extends CursorLoader {
@@ -47,26 +50,52 @@ final class ContactsCursorLoader extends CursorLoader {
         Contacts.LOOKUP_KEY, // 4
       };
 
-  private ContactsCursorLoader(Context context, String[] contactProjection, String sortKey) {
+  ContactsCursorLoader(Context context, boolean hasPhoneNumbers) {
     super(
         context,
-        Contacts.CONTENT_URI
-            .buildUpon()
-            .appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true")
-            .build(),
-        contactProjection,
-        contactProjection[CONTACT_DISPLAY_NAME] + " IS NOT NULL",
+        buildUri(""),
+        getProjection(context),
+        getWhere(context, hasPhoneNumbers),
         null,
-        sortKey + " ASC");
+        getSortKey(context) + " ASC");
   }
 
-  public static ContactsCursorLoader createInstanceDisplayNamePrimary(
-      Context context, String sortKey) {
-    return new ContactsCursorLoader(context, CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY, sortKey);
+  private static String[] getProjection(Context context) {
+    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
+    boolean displayOrderPrimary =
+        (contactsPrefs.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY);
+    return displayOrderPrimary
+        ? CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY
+        : CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE;
   }
 
-  public static ContactsCursorLoader createInstanceDisplayNameAlternative(
-      Context context, String sortKey) {
-    return new ContactsCursorLoader(context, CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE, sortKey);
+  private static String getWhere(Context context, boolean hasPhoneNumbers) {
+    String where = getProjection(context)[CONTACT_DISPLAY_NAME] + " IS NOT NULL";
+    if (hasPhoneNumbers) {
+      where += " AND " + Contacts.HAS_PHONE_NUMBER + "=1";
+    }
+    return where;
+  }
+
+  private static String getSortKey(Context context) {
+    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
+    boolean sortOrderPrimary =
+        (contactsPrefs.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY);
+    return sortOrderPrimary ? Contacts.SORT_KEY_PRIMARY : Contacts.SORT_KEY_ALTERNATIVE;
+  }
+
+  /** Update cursor loader to filter contacts based on the provided query. */
+  public void setQuery(String query) {
+    setUri(buildUri(query));
+  }
+
+  private static Uri buildUri(String query) {
+    Uri.Builder baseUri;
+    if (TextUtils.isEmpty(query)) {
+      baseUri = Contacts.CONTENT_URI.buildUpon();
+    } else {
+      baseUri = Contacts.CONTENT_FILTER_URI.buildUpon().appendPath(query);
+    }
+    return baseUri.appendQueryParameter(Contacts.EXTRA_ADDRESS_BOOK_INDEX, "true").build();
   }
 }

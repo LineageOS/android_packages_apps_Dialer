@@ -15,12 +15,15 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- header for a list of contacts that are the users favorites. -->
+  <!-- header for a list of contacts that are the users favorites. [CHAR LIMIT=30] -->
   <string name="favorites_header">Favorites</string>
 
-  <!-- header for a list of contacts that are suggestions for the user to place calls to -->
+  <!-- header for a list of contacts that are suggestions for the user to place calls to. [CHAR LIMIT=30] -->
   <string name="suggestions_header">Suggestions</string>
 
-  <!-- text for a button that prompts the user to add a contact to their favorites -->
+  <!-- text for a button that prompts the user to add a contact to their favorites. [CHAR LIMIT=12] -->
   <string name="speed_dial_add_button_text">Add</string>
+
+  <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
+  <string name="add_favorite_activity_title">Add Favorite</string>
 </resources>

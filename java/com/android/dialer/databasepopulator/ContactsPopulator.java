@@ -148,6 +148,19 @@ public final class ContactsPopulator {
   }
 
   @WorkerThread
+  public static void populateSpeedDialTestContacts(@NonNull Context context) {
+    Assert.isWorkerThread();
+    ArrayList<ContentProviderOperation> operations = new ArrayList<>();
+    addContact(SIMPLE_CONTACTS[0], operations);
+    addContact(SIMPLE_CONTACTS[5], operations);
+    try {
+      context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+    } catch (RemoteException | OperationApplicationException e) {
+      Assert.fail("error adding contacts: " + e);
+    }
+  }
+
+  @WorkerThread
   public static void populateContacts(@NonNull Context context) {
     populateContacts(context, false);
   }
