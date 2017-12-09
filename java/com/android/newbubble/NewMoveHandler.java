@@ -88,6 +88,7 @@ class NewMoveHandler implements OnTouchListener {
 
         @Override
         public void setValue(LayoutParams windowParams, float value) {
+          boolean wasOnRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
           int displayWidth = context.getResources().getDisplayMetrics().widthPixels;
           boolean onRight;
           Integer gravityOverride = bubble.getGravityOverride();
@@ -108,7 +109,9 @@ class NewMoveHandler implements OnTouchListener {
           windowParams.gravity = Gravity.TOP | (onRight ? Gravity.RIGHT : Gravity.LEFT);
           if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), windowParams);
-            bubble.onLeftRightSwitch(onRight);
+            if (onRight != wasOnRight) {
+              bubble.onLeftRightSwitch(onRight);
+            }
           }
         }
       };
