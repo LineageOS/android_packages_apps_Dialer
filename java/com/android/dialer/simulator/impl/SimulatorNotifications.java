@@ -35,15 +35,7 @@ final class SimulatorNotifications {
     return new SimulatorSubMenu(context)
         .addItem(
             "Missed calls", () -> new SimulatorMissedCallCreator(context).start(NOTIFICATION_COUNT))
-        .addItem("Voicemails", () -> addVoicemailNotifications(context))
-        .addItem(
-            "Non spam",
-            () ->
-                new SimulatorSpamCallCreator(context, false /* isSpam */).start(NOTIFICATION_COUNT))
-        .addItem(
-            "Confirm spam",
-            () ->
-                new SimulatorSpamCallCreator(context, true /* isSpam */).start(NOTIFICATION_COUNT));
+        .addItem("Voicemails", () -> addVoicemailNotifications(context));
   }
 
   private static void addVoicemailNotifications(@NonNull Context context) {

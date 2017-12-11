@@ -30,7 +30,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
-import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamComponent;
 import com.android.incallui.call.DialerCall;
 
 /**
@@ -95,7 +95,8 @@ public class SpamNotificationService extends Service {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM:
         logCallImpression(
             intent, DialerImpression.Type.SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM);
-        Spam.get(this)
+        SpamComponent.get(this)
+            .spam()
             .reportSpamFromAfterCallNotification(
                 number,
                 countryIso,
@@ -107,7 +108,8 @@ public class SpamNotificationService extends Service {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_NOT_SPAM:
         logCallImpression(
             intent, DialerImpression.Type.SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM);
-        Spam.get(this)
+        SpamComponent.get(this)
+            .spam()
             .reportNotSpamFromAfterCallNotification(
                 number,
                 countryIso,
