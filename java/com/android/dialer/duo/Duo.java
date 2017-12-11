@@ -27,9 +27,16 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.util.List;
 
+/** Interface for Duo video call integration. */
 public interface Duo {
 
-  boolean isEnabled();
+  boolean isEnabled(@NonNull Context context);
+
+  /**
+   * @return true if Duo is installed and the user has gone through the set-up flow confirming their
+   *     phone number.
+   */
+  boolean isActivated(@NonNull Context context);
 
   @MainThread
   boolean isReachable(@NonNull Context context, @Nullable String number);

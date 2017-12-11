@@ -225,6 +225,13 @@ public class AnnotatedCallLogContract {
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/annotated_call_log";
 
     /**
+     * See {@link android.provider.CallLog.Calls#DATA_USAGE}.
+     *
+     * <p>Type: INTEGER (long)
+     */
+    public static final String DATA_USAGE = "data_usage";
+
+    /**
      * See {@link android.provider.CallLog.Calls#DURATION}.
      *
      * <p>TYPE: INTEGER (long)
@@ -267,17 +274,18 @@ public class AnnotatedCallLogContract {
         "vnd.android.cursor.item/coalesced_annotated_call_log";
 
     /**
-     * Number of AnnotatedCallLog rows represented by this CoalescedAnnotatedCallLog row.
+     * IDs of rows in {@link AnnotatedCallLog} that are coalesced into one row in {@link
+     * CoalescedAnnotatedCallLog}, encoded as a {@link com.android.dialer.CoalescedIds} proto.
      *
-     * <p>Type: INTEGER
+     * <p>Type: BLOB
      */
-    public static final String NUMBER_CALLS = "number_calls";
+    public static final String COALESCED_IDS = "coalesced_ids";
 
     /**
      * Columns that are only in the {@link CoalescedAnnotatedCallLog} but not the {@link
      * AnnotatedCallLog}.
      */
-    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG = new String[] {NUMBER_CALLS};
+    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG = new String[] {COALESCED_IDS};
 
     /** All columns in the {@link CoalescedAnnotatedCallLog}. */
     public static final String[] ALL_COLUMNS =

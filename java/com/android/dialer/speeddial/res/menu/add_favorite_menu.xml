@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
  ~ Copyright (C) 2017 The Android Open Source Project
  ~
@@ -13,15 +14,11 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.dialer.speeddial">
-
-  <application android:theme="@style/Theme.AppCompat">
-    <activity
-        android:name="com.android.dialer.speeddial.AddFavoriteActivity"
-        android:label="@string/add_favorite_activity_title"
-        android:exported="false"
-        android:theme="@style/DialtactsTheme"/>
-  </application>
-</manifest>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/action_search"
+      android:title="@android:string/search_go"
+      app:showAsAction="always"
+      app:actionViewClass="android.support.v7.widget.SearchView"/>
+</menu>

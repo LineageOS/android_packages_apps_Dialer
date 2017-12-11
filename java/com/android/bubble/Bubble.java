@@ -64,6 +64,7 @@ import android.widget.ViewAnimator;
 import com.android.bubble.BubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -96,7 +97,7 @@ public class Bubble {
   private BubbleInfo currentInfo;
 
   @Visibility private int visibility;
-  private boolean expanded;
+  @VisibleForTesting boolean expanded;
   private boolean textShowing;
   private boolean hideAfterText;
   private CharSequence textAfterShow;
@@ -104,7 +105,7 @@ public class Bubble {
 
   @VisibleForTesting ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
-  private Integer overrideGravity;
+  @VisibleForTesting Integer overrideGravity;
   private ViewPropertyAnimator exitAnimator;
 
   private final Runnable collapseRunnable =
@@ -497,13 +498,6 @@ public class Bubble {
     ViewGroup.LayoutParams layoutParams = primaryContainer.getLayoutParams();
     ((FrameLayout.LayoutParams) layoutParams).gravity = onRight ? Gravity.RIGHT : Gravity.LEFT;
     primaryContainer.setLayoutParams(layoutParams);
-
-    viewHolder
-        .getExpandedView()
-        .setBackgroundResource(
-            onRight
-                ? R.drawable.bubble_background_pill_rtl
-                : R.drawable.bubble_background_pill_ltr);
   }
 
   LayoutParams getWindowParams() {
@@ -570,20 +564,23 @@ public class Bubble {
     backgroundRipple.getDrawable(0).setTint(primaryTint);
     viewHolder.getPrimaryButton().setBackground(backgroundRipple);
 
-    setBackgroundDrawable(viewHolder.getFirstButton(), primaryTint);
-    setBackgroundDrawable(viewHolder.getSecondButton(), primaryTint);
-    setBackgroundDrawable(viewHolder.getThirdButton(), primaryTint);
+    for (CheckableImageButton button : viewHolder.getActionButtons()) {
+      setBackgroundDrawable(button, primaryTint);
+    }
 
     int numButtons = currentInfo.getActions().size();
-    viewHolder.getThirdButton().setVisibility(numButtons < 3 ? View.GONE : View.VISIBLE);
-    viewHolder.getSecondButton().setVisibility(numButtons < 2 ? View.GONE : View.VISIBLE);
+    for (CheckableImageButton button : viewHolder.getThirdButtons()) {
+      button.setVisibility(numButtons < 3 ? View.GONE : View.VISIBLE);
+    }
+    for (CheckableImageButton button : viewHolder.getSecondButtons()) {
+      button.setVisibility(numButtons < 2 ? View.GONE : View.VISIBLE);
+    }
 
     viewHolder.getPrimaryIcon().setImageIcon(currentInfo.getPrimaryIcon());
     updatePrimaryIconAnimation();
-
-    viewHolder
-        .getExpandedView()
-        .setBackgroundTintList(ColorStateList.valueOf(currentInfo.getPrimaryColor()));
+    for (View expandedView : viewHolder.getExpandedViews()) {
+      expandedView.setBackgroundTintList(ColorStateList.valueOf(currentInfo.getPrimaryColor()));
+    }
 
     updateButtonStates();
   }
@@ -613,11 +610,17 @@ public class Bubble {
     int numButtons = currentInfo.getActions().size();
 
     if (numButtons >= 1) {
-      configureButton(currentInfo.getActions().get(0), viewHolder.getFirstButton());
+      for (CheckableImageButton button : viewHolder.getFirstButtons()) {
+        configureButton(currentInfo.getActions().get(0), button);
+      }
       if (numButtons >= 2) {
-        configureButton(currentInfo.getActions().get(1), viewHolder.getSecondButton());
+        for (CheckableImageButton button : viewHolder.getSecondButtons()) {
+          configureButton(currentInfo.getActions().get(1), button);
+        }
         if (numButtons >= 3) {
-          configureButton(currentInfo.getActions().get(2), viewHolder.getThirdButton());
+          for (CheckableImageButton button : viewHolder.getThirdButtons()) {
+            configureButton(currentInfo.getActions().get(2), button);
+          }
         }
       }
     }
@@ -788,10 +791,15 @@ public class Bubble {
     private final TextView primaryText;
 
     private final CheckableImageButton firstButton;
+    private final CheckableImageButton firstButtonRtl;
     private final CheckableImageButton secondButton;
+    private final CheckableImageButton secondButtonRtl;
     private final CheckableImageButton thirdButton;
+    private final CheckableImageButton thirdButtonRtl;
     private final View expandedView;
+    private final View expandedViewRtl;
     private final View shadowProvider;
+    private final View shadowProviderRtl;
 
     public ViewHolder(Context context) {
       // Window root is not in the layout file so that the inflater has a view to inflate into
@@ -799,14 +807,19 @@ public class Bubble {
       LayoutInflater inflater = LayoutInflater.from(root.getContext());
       View contentView = inflater.inflate(R.layout.bubble_base, root, true);
       expandedView = contentView.findViewById(R.id.bubble_expanded_layout);
+      expandedViewRtl = contentView.findViewById(R.id.bubble_expanded_layout_rtl);
       primaryButton = contentView.findViewById(R.id.bubble_button_primary);
       primaryIcon = contentView.findViewById(R.id.bubble_icon_primary);
       primaryText = contentView.findViewById(R.id.bubble_text);
       shadowProvider = contentView.findViewById(R.id.bubble_drawer_shadow_provider);
+      shadowProviderRtl = contentView.findViewById(R.id.bubble_drawer_shadow_provider_rtl);
 
       firstButton = contentView.findViewById(R.id.bubble_icon_first);
+      firstButtonRtl = contentView.findViewById(R.id.bubble_icon_first_rtl);
       secondButton = contentView.findViewById(R.id.bubble_icon_second);
+      secondButtonRtl = contentView.findViewById(R.id.bubble_icon_second_rtl);
       thirdButton = contentView.findViewById(R.id.bubble_icon_third);
+      thirdButtonRtl = contentView.findViewById(R.id.bubble_icon_third_rtl);
 
       root.setOnBackPressedListener(
           () -> {
@@ -839,27 +852,34 @@ public class Bubble {
                 int parentOffset =
                     ((MarginLayoutParams) ((ViewGroup) expandedView.getParent()).getLayoutParams())
                         .leftMargin;
-                if (isDrawingFromRight()) {
-                  int maxLeft =
-                      shadowProvider.getRight()
-                          - context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
-                  shadowProvider.setLeft(
-                      Math.min(maxLeft, expandedView.getLeft() + translationX + parentOffset));
-                } else {
-                  int minRight =
-                      shadowProvider.getLeft()
-                          + context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
-                  shadowProvider.setRight(
-                      Math.max(minRight, expandedView.getRight() + translationX + parentOffset));
-                }
+                int minRight =
+                    shadowProvider.getLeft()
+                        + context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+                shadowProvider.setRight(
+                    Math.max(minRight, expandedView.getRight() + translationX + parentOffset));
+              });
+      expandedViewRtl
+          .getViewTreeObserver()
+          .addOnDrawListener(
+              () -> {
+                int translationX = (int) expandedViewRtl.getTranslationX();
+                int parentOffset =
+                    ((MarginLayoutParams)
+                            ((ViewGroup) expandedViewRtl.getParent()).getLayoutParams())
+                        .leftMargin;
+                int maxLeft =
+                    shadowProviderRtl.getRight()
+                        - context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+                shadowProviderRtl.setLeft(
+                    Math.min(maxLeft, expandedViewRtl.getLeft() + translationX + parentOffset));
               });
       moveHandler = new MoveHandler(primaryButton, Bubble.this);
     }
 
     private void setChildClickable(boolean clickable) {
-      firstButton.setClickable(clickable);
-      secondButton.setClickable(clickable);
-      thirdButton.setClickable(clickable);
+      for (CheckableImageButton button : getActionButtons()) {
+        button.setClickable(clickable);
+      }
 
       primaryButton.setOnTouchListener(clickable ? moveHandler : null);
     }
@@ -880,29 +900,65 @@ public class Bubble {
       return primaryText;
     }
 
+    /** Get list of all the action buttons from both LTR/RTL drawers. */
+    public List<CheckableImageButton> getActionButtons() {
+      return Arrays.asList(
+          firstButton, firstButtonRtl, secondButton, secondButtonRtl, thirdButton, thirdButtonRtl);
+    }
+
+    /** Get the first action button used in the current orientation drawer. */
     public CheckableImageButton getFirstButton() {
-      return firstButton;
+      return isDrawingFromRight() ? firstButtonRtl : firstButton;
     }
 
+    /** Get both of the first action buttons from both LTR/RTL drawers. */
+    public List<CheckableImageButton> getFirstButtons() {
+      return Arrays.asList(firstButton, firstButtonRtl);
+    }
+
+    /** Get the second action button used in the current orientation drawer. */
     public CheckableImageButton getSecondButton() {
-      return secondButton;
+      return isDrawingFromRight() ? secondButtonRtl : secondButton;
     }
 
+    /** Get both of the second action buttons from both LTR/RTL drawers. */
+    public List<CheckableImageButton> getSecondButtons() {
+      return Arrays.asList(secondButton, secondButtonRtl);
+    }
+
+    /** Get the third action button used in the current orientation drawer. */
     public CheckableImageButton getThirdButton() {
-      return thirdButton;
+      return isDrawingFromRight() ? thirdButtonRtl : thirdButton;
     }
 
+    /** Get both of the third action buttons from both LTR/RTL drawers. */
+    public List<CheckableImageButton> getThirdButtons() {
+      return Arrays.asList(thirdButton, thirdButtonRtl);
+    }
+
+    /** Get the correct expanded view used in current bubble orientation. */
     public View getExpandedView() {
-      return expandedView;
+      return isDrawingFromRight() ? expandedViewRtl : expandedView;
     }
 
+    /** Get both views of the LTR and RTL drawers. */
+    public List<View> getExpandedViews() {
+      return Arrays.asList(expandedView, expandedViewRtl);
+    }
+
+    /** Get the correct shadow provider view used in current bubble orientation. */
     public View getShadowProvider() {
-      return shadowProvider;
+      return isDrawingFromRight() ? shadowProviderRtl : shadowProvider;
     }
 
     public void setDrawerVisibility(int visibility) {
-      expandedView.setVisibility(visibility);
-      shadowProvider.setVisibility(visibility);
+      if (isDrawingFromRight()) {
+        expandedViewRtl.setVisibility(visibility);
+        shadowProviderRtl.setVisibility(visibility);
+      } else {
+        expandedView.setVisibility(visibility);
+        shadowProvider.setVisibility(visibility);
+      }
     }
 
     public boolean isMoving() {

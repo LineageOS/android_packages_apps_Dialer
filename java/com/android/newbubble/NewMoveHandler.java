@@ -48,6 +48,8 @@ class NewMoveHandler implements OnTouchListener {
   private final int maxX;
   private final int maxY;
   private final int bubbleSize;
+  private final int bubbleShadowPaddingHorizontal;
+  private final int bubbleExpandedViewWidth;
   private final float touchSlopSquared;
 
   private boolean clickable = true;
@@ -70,8 +72,14 @@ class NewMoveHandler implements OnTouchListener {
         @Override
         public float getValue(LayoutParams windowParams) {
           int realX = windowParams.x;
-          realX = realX + bubbleSize / 2;
+          // Get bubble center position from real position
+          if (bubble.getDrawerVisibility() == View.INVISIBLE) {
+            realX += bubbleExpandedViewWidth / 2 + bubbleShadowPaddingHorizontal * 2;
+          } else {
+            realX += bubbleSize / 2 + bubbleShadowPaddingHorizontal;
+          }
           if (relativeToRight(windowParams)) {
+            // If gravity is right, get distant from bubble center position to screen right edge
             int displayWidth = context.getResources().getDisplayMetrics().widthPixels;
             realX = displayWidth - realX;
           }
@@ -80,6 +88,7 @@ class NewMoveHandler implements OnTouchListener {
 
         @Override
         public void setValue(LayoutParams windowParams, float value) {
+          boolean wasOnRight = (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
           int displayWidth = context.getResources().getDisplayMetrics().widthPixels;
           boolean onRight;
           Integer gravityOverride = bubble.getGravityOverride();
@@ -88,12 +97,21 @@ class NewMoveHandler implements OnTouchListener {
           } else {
             onRight = (gravityOverride & Gravity.RIGHT) == Gravity.RIGHT;
           }
-          int centeringOffset = bubbleSize / 2;
+          // Get real position from bubble center position
+          int centeringOffset;
+          if (bubble.getDrawerVisibility() == View.INVISIBLE) {
+            centeringOffset = bubbleExpandedViewWidth / 2 + bubbleShadowPaddingHorizontal * 2;
+          } else {
+            centeringOffset = bubbleSize / 2 + bubbleShadowPaddingHorizontal;
+          }
           windowParams.x =
               (int) (onRight ? (displayWidth - value - centeringOffset) : value - centeringOffset);
           windowParams.gravity = Gravity.TOP | (onRight ? Gravity.RIGHT : Gravity.LEFT);
           if (bubble.isVisible()) {
             windowManager.updateViewLayout(bubble.getRootView(), windowParams);
+            if (onRight != wasOnRight) {
+              bubble.onLeftRightSwitch(onRight);
+            }
           }
         }
       };
@@ -120,8 +138,13 @@ class NewMoveHandler implements OnTouchListener {
     windowManager = context.getSystemService(WindowManager.class);
 
     bubbleSize = context.getResources().getDimensionPixelSize(R.dimen.bubble_size);
+    bubbleShadowPaddingHorizontal =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_shadow_padding_size_horizontal);
+    bubbleExpandedViewWidth =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_expanded_width);
+    // The following value is based on bubble center
     minX =
-        context.getResources().getDimensionPixelOffset(R.dimen.bubble_safe_margin_horizontal)
+        context.getResources().getDimensionPixelOffset(R.dimen.bubble_off_screen_size_horizontal)
             + bubbleSize / 2;
     minY =
         context.getResources().getDimensionPixelOffset(R.dimen.bubble_safe_margin_vertical)
@@ -154,6 +177,12 @@ class NewMoveHandler implements OnTouchListener {
 
     moveXAnimation.animateToFinalPosition(relativeToRight(bubble.getWindowParams()) ? maxX : minX);
     moveYAnimation.animateToFinalPosition(yProperty.getValue(bubble.getWindowParams()));
+  }
+
+  public int getMoveUpDistance(int deltaAllowed) {
+    int currentY = (int) yProperty.getValue(bubble.getWindowParams());
+    int currentDelta = maxY - currentY;
+    return currentDelta >= deltaAllowed ? 0 : deltaAllowed - currentDelta;
   }
 
   @Override
@@ -222,6 +251,14 @@ class NewMoveHandler implements OnTouchListener {
       moveXAnimation = new SpringAnimation(bubble.getWindowParams(), xProperty);
       moveXAnimation.setSpring(new SpringForce());
       moveXAnimation.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_NO_BOUNCY);
+      // Moving when expanded makes expanded view INVISIBLE, and the whole view is not at the
+      // boundary. It's time to create a viewHolder.
+      moveXAnimation.addEndListener(
+          (animation, canceled, value, velocity) -> {
+            if (!isMoving && bubble.getDrawerVisibility() == View.INVISIBLE) {
+              bubble.replaceViewHolder();
+            }
+          });
     }
 
     if (moveYAnimation == null) {

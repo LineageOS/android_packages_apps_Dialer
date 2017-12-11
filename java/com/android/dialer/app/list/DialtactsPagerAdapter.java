@@ -28,7 +28,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.contactsfragment.ContactsFragment;
-import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.speeddial.SpeedDialFragment;
@@ -108,8 +107,7 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
       case TAB_INDEX_ALL_CONTACTS:
         if (useNewContactsTab) {
           if (contactsFragment == null) {
-            contactsFragment =
-                ContactsFragment.newInstance(Header.ADD_CONTACT, ClickAction.OPEN_CONTACT_CARD);
+            contactsFragment = ContactsFragment.newInstance(Header.ADD_CONTACT);
           }
           return contactsFragment;
         } else {

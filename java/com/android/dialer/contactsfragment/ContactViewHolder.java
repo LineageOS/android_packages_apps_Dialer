@@ -18,7 +18,6 @@ package com.android.dialer.contactsfragment;
 
 import android.content.Context;
 import android.net.Uri;
-import android.provider.ContactsContract.QuickContact;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.contactsfragment.ContactsFragment.ClickAction;
+import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 
@@ -37,20 +36,20 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
   private final TextView name;
   private final QuickContactBadge photo;
   private final Context context;
-  private final @ClickAction int clickAction;
+  private final OnContactSelectedListener onContactSelectedListener;
 
   private String headerText;
   private Uri contactUri;
+  private long contactId;
 
-  ContactViewHolder(View itemView, @ClickAction int clickAction) {
+  ContactViewHolder(View itemView, OnContactSelectedListener onContactSelectedListener) {
     super(itemView);
-    Assert.checkArgument(clickAction != ClickAction.INVALID, "Invalid click action.");
+    this.onContactSelectedListener = Assert.isNotNull(onContactSelectedListener);
     context = itemView.getContext();
     itemView.findViewById(R.id.click_target).setOnClickListener(this);
     header = itemView.findViewById(R.id.header);
     name = itemView.findViewById(R.id.contact_name);
     photo = itemView.findViewById(R.id.photo);
-    this.clickAction = clickAction;
   }
 
   /**
@@ -61,9 +60,11 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
    * @param contactUri to be shown by the contact card on photo click.
    * @param showHeader if header view should be shown {@code True}, {@code False} otherwise.
    */
-  public void bind(String headerText, String displayName, Uri contactUri, boolean showHeader) {
+  public void bind(
+      String headerText, String displayName, Uri contactUri, long contactId, boolean showHeader) {
     Assert.checkArgument(!TextUtils.isEmpty(displayName));
     this.contactUri = contactUri;
+    this.contactId = contactId;
     this.headerText = headerText;
 
     name.setText(displayName);
@@ -89,20 +90,6 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
 
   @Override
   public void onClick(View v) {
-    switch (clickAction) {
-      case ClickAction.OPEN_CONTACT_CARD:
-        Logger.get(context)
-            .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM);
-        QuickContact.showQuickContact(
-            photo.getContext(),
-            photo,
-            contactUri,
-            QuickContact.MODE_LARGE,
-            null /* excludeMimes */);
-        break;
-      case ClickAction.INVALID:
-      default:
-        throw Assert.createIllegalStateFailException("Invalid click action.");
-    }
+    onContactSelectedListener.onContactSelected(photo, contactUri, contactId);
   }
 }

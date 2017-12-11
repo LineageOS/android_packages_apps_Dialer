@@ -45,11 +45,14 @@ import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.Arrays;
 import java.util.List;
@@ -66,10 +69,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
+  private final ListeningExecutorService backgroundExecutorService;
+
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
-  public SystemCallLogDataSource() {}
+  SystemCallLogDataSource(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+    this.backgroundExecutorService = backgroundExecutorService;
+  }
 
   @MainThread
   @Override
@@ -94,9 +101,23 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                 ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks));
   }
 
-  @WorkerThread
   @Override
-  public boolean isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty(Context appContext) {
+    return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
+  }
+
+  @Override
+  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+    return backgroundExecutorService.submit(() -> onSuccessfulFillInternal(appContext));
+  }
+
+  @WorkerThread
+  private boolean isDirtyInternal(Context appContext) {
     Assert.isWorkerThread();
 
     /*
@@ -113,15 +134,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @WorkerThread
-  @Override
-  public void fill(Context appContext, CallLogMutations mutations) {
+  private Void fillInternal(Context appContext, CallLogMutations mutations) {
     Assert.isWorkerThread();
 
     lastTimestampProcessed = null;
 
     if (!PermissionsUtil.hasPermission(appContext, permission.READ_CALL_LOG)) {
       LogUtil.i("SystemCallLogDataSource.fill", "no call log permissions");
-      return;
+      return null;
     }
 
     // This data source should always run first so the mutations should always be empty.
@@ -136,11 +156,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
     handleInsertsAndUpdates(appContext, mutations, annotatedCallLogIds);
     handleDeletes(appContext, annotatedCallLogIds, mutations);
+    return null;
   }
 
   @WorkerThread
-  @Override
-  public void onSuccessfulFill(Context appContext) {
+  private Void onSuccessfulFillInternal(Context appContext) {
     // If a fill operation was a no-op, lastTimestampProcessed could still be null.
     if (lastTimestampProcessed != null) {
       StorageComponent.get(appContext)
@@ -149,6 +169,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           .putLong(PREF_LAST_TIMESTAMP_PROCESSED, lastTimestampProcessed)
           .apply();
     }
+    return null;
   }
 
   @Override
@@ -220,6 +241,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.CACHED_NUMBER_TYPE,
                   Calls.CACHED_NUMBER_LABEL,
                   Calls.DURATION,
+                  Calls.DATA_USAGE,
                   Calls.TRANSCRIPTION,
                   Calls.VOICEMAIL_URI,
                   Calls.IS_READ,
@@ -259,6 +281,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int cachedNumberTypeColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_TYPE);
         int cachedNumberLabelColumn = cursor.getColumnIndexOrThrow(Calls.CACHED_NUMBER_LABEL);
         int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
+        int dataUsageColumn = cursor.getColumnIndexOrThrow(Calls.DATA_USAGE);
         int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
         int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
         int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
@@ -286,6 +309,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           int cachedNumberType = cursor.getInt(cachedNumberTypeColumn);
           String cachedNumberLabel = cursor.getString(cachedNumberLabelColumn);
           int duration = cursor.getInt(durationsColumn);
+          int dataUsage = cursor.getInt(dataUsageColumn);
           String transcription = cursor.getString(transcriptionColumn);
           String voicemailUri = cursor.getString(voicemailUriColumn);
           int isRead = cursor.getInt(isReadColumn);
@@ -334,6 +358,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
               appContext, contentValues, phoneAccountComponentName, phoneAccountId);
           contentValues.put(AnnotatedCallLog.FEATURES, features);
           contentValues.put(AnnotatedCallLog.DURATION, duration);
+          contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
           contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
           contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
 

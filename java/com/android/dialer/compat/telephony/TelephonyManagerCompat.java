@@ -77,6 +77,12 @@ public class TelephonyManagerCompat {
       BuildCompat.isAtLeastOMR1() ? "android.telephony.extra.IS_REFRESH" : "is_refresh";
 
   /**
+   * Indicates the call underwent Assisted Dialing; typically set as a feature available from the
+   * CallLog.
+   */
+  public static final Integer FEATURES_ASSISTED_DIALING = 0x10;
+
+  /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)
    *

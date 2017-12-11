@@ -158,7 +158,11 @@ public abstract class TelecomUtil {
       return Optional.absent();
     }
     SubscriptionManager subscriptionManager = context.getSystemService(SubscriptionManager.class);
-    for (SubscriptionInfo info : subscriptionManager.getActiveSubscriptionInfoList()) {
+    List<SubscriptionInfo> subscriptionInfos = subscriptionManager.getActiveSubscriptionInfoList();
+    if (subscriptionInfos == null) {
+      return Optional.absent();
+    }
+    for (SubscriptionInfo info : subscriptionInfos) {
       if (phoneAccountHandle.getId().startsWith(info.getIccId())) {
         return Optional.of(info);
       }

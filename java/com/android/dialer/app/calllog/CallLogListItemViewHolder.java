@@ -78,6 +78,7 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
+import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
@@ -147,6 +148,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
   public View callButtonView;
   public View videoCallButtonView;
+  public View setUpVideoButtonView;
+  public View inviteVideoButtonView;
   public View createNewContactButtonView;
   public View addToExistingContactButtonView;
   public View sendMessageView;
@@ -228,7 +231,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public boolean isSpam;
 
   public boolean isCallComposerCapable;
-  public boolean duoReady;
+  public Duo duo;
 
   private View.OnClickListener mExpandCollapseListener;
   private final OnActionModeStateChangedListener onActionModeStateChangedListener;
@@ -466,6 +469,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
       videoCallButtonView.setOnClickListener(this);
 
+      setUpVideoButtonView = actionsView.findViewById(R.id.set_up_video_action);
+      setUpVideoButtonView.setOnClickListener(this);
+
+      inviteVideoButtonView = actionsView.findViewById(R.id.invite_video_action);
+      inviteVideoButtonView.setOnClickListener(this);
+
       createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
       createNewContactButtonView.setOnClickListener(this);
 
@@ -593,6 +602,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     // This saves us having to remember to set it to GONE in multiple places.
     callButtonView.setVisibility(View.GONE);
     videoCallButtonView.setVisibility(View.GONE);
+    setUpVideoButtonView.setVisibility(View.GONE);
+    inviteVideoButtonView.setVisibility(View.GONE);
 
     if (isFullyUndialableVoicemail()) {
       // Sometimes the voicemail server will report the message is from some non phone number
@@ -665,9 +676,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
           videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
-        } else if (duoReady) {
+        } else if (duo.isReachable(mContext, number)) {
           videoCallButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
+        } else if (duo.isActivated(mContext)) {
+          inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
+          inviteVideoButtonView.setVisibility(View.VISIBLE);
+        } else if (duo.isEnabled(mContext)) {
+          setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
+          setUpVideoButtonView.setVisibility(View.VISIBLE);
         }
         break;
       default:
@@ -755,7 +772,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private boolean showDuoPrimaryButton() {
     return accountHandle != null
         && accountHandle.getComponentName().equals(DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME)
-        && duoReady;
+        && duo.isReachable(mContext, number);
   }
 
   private static boolean hasDialableChar(CharSequence number) {

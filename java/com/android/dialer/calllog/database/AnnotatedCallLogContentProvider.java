@@ -245,12 +245,12 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
         throw new IllegalArgumentException("Unknown uri: " + uri);
     }
     int rows = database.delete(AnnotatedCallLog.TABLE, selection, selectionArgs);
-    if (rows > 0) {
-      if (!isApplyingBatch()) {
-        notifyChange(uri);
-      }
-    } else {
+    if (rows == 0) {
       LogUtil.w("AnnotatedCallLogContentProvider.delete", "no rows deleted");
+      return rows;
+    }
+    if (!isApplyingBatch()) {
+      notifyChange(uri);
     }
     return rows;
   }
@@ -268,7 +268,15 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
     int match = uriMatcher.match(uri);
     switch (match) {
       case ANNOTATED_CALL_LOG_TABLE_CODE:
-        break;
+        int rows = database.update(AnnotatedCallLog.TABLE, values, selection, selectionArgs);
+        if (rows == 0) {
+          LogUtil.w("AnnotatedCallLogContentProvider.update", "no rows updated");
+          return rows;
+        }
+        if (!isApplyingBatch()) {
+          notifyChange(uri);
+        }
+        return rows;
       case ANNOTATED_CALL_LOG_TABLE_ID_CODE:
         Assert.checkArgument(
             !values.containsKey(AnnotatedCallLog._ID), "Do not specify _ID when updating by ID");
@@ -276,23 +284,21 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
         Assert.checkArgument(
             selectionArgs == null, "Do not specify selection args when updating by ID");
         selection = getSelectionWithId(ContentUris.parseId(uri));
-        break;
+        rows = database.update(AnnotatedCallLog.TABLE, values, selection, selectionArgs);
+        if (rows == 0) {
+          LogUtil.w("AnnotatedCallLogContentProvider.update", "no rows updated");
+          return rows;
+        }
+        if (!isApplyingBatch()) {
+          notifyChange(uri);
+        }
+        return rows;
       case ANNOTATED_CALL_LOG_TABLE_DISTINCT_NUMBER_CODE:
-        throw new UnsupportedOperationException();
       case COALESCED_ANNOTATED_CALL_LOG_TABLE_CODE:
         throw new UnsupportedOperationException();
       default:
         throw new IllegalArgumentException("Unknown uri: " + uri);
     }
-    int rows = database.update(AnnotatedCallLog.TABLE, values, selection, selectionArgs);
-    if (rows > 0) {
-      if (!isApplyingBatch()) {
-        notifyChange(uri);
-      }
-    } else {
-      LogUtil.w("AnnotatedCallLogContentProvider.update", "no rows updated");
-    }
-    return rows;
   }
 
   /**

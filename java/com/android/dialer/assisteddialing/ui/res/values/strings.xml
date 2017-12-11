@@ -23,7 +23,10 @@
   <string name="assisted_dialing_setting_summary">Predict and add a country code when you call while traveling abroad</string>
 
   <!-- Indicates the default state for the home country selector-->
-  <string name="assisted_dialing_setting_cc_default_summary">Automatically detected</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatically detected • <xliff:g example="United Kingdom (+44)" id="ad_country_code_info">%1$s</xliff:g></string>
+
+  <!-- Indicates the default failure state for the home country selector-->
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatically detected</string>
 
   <!-- Category title for the country code picker in assisted dialing [CHAR LIMIT=40]-->
   <string name="assisted_dialing_setting_cc_category_title">Home country</string>
@@ -36,7 +39,7 @@
   <!-- Excluding ['Antarctica', 'Bouvet Island', 'French Southern Territories (the)', 'Heard Island and McDonald Islands', 'Pitcairn', 'South Georgia and the South Sandwich Islands', 'United States Minor Outlying Islands (the)'] -->
   <!-- Options for the country codes used in assisted dialing. DO NOT TRANSLATE NUMBERS. [CHAR LIMIT=40] -->
   <string-array name="assisted_dialing_cc_entries">
-    <item>@string/assisted_dialing_setting_cc_default_summary</item>
+    <item>@string/assisted_dialing_setting_cc_default_summary_fallback</item>
     <item>Afghanistan <xliff:g>(+93)</xliff:g></item>
     <item>Åland Islands <xliff:g>(+358)</xliff:g></item>
     <item>Albania <xliff:g>(+355)</xliff:g></item>

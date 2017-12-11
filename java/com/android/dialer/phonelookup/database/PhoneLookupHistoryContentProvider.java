@@ -17,7 +17,10 @@
 package com.android.dialer.phonelookup.database;
 
 import android.content.ContentProvider;
+import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
 import android.content.ContentValues;
+import android.content.OperationApplicationException;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -31,6 +34,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import java.util.ArrayList;
 
 /**
  * {@link ContentProvider} for the PhoneLookupHistory.
@@ -49,13 +53,6 @@ import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContra
  * </pre>
  */
 public class PhoneLookupHistoryContentProvider extends ContentProvider {
-
-  /**
-   * We sometimes run queries where we potentially pass numbers into a where clause using the
-   * (?,?,?,...) syntax. The maximum number of host parameters is 999, so that's the maximum size
-   * this table can be. See https://www.sqlite.org/limits.html for more details.
-   */
-  private static final int MAX_ROWS = 999;
 
   // For operations against: content://com.android.dialer.phonelookuphistory/PhoneLookupHistory
   private static final int PHONE_LOOKUP_HISTORY_TABLE_CODE = 1;
@@ -77,9 +74,16 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
 
   private PhoneLookupHistoryDatabaseHelper databaseHelper;
 
+  private final ThreadLocal<Boolean> applyingBatch = new ThreadLocal<>();
+
+  /** Ensures that only a single notification is generated from {@link #applyBatch(ArrayList)}. */
+  private boolean isApplyingBatch() {
+    return applyingBatch.get() != null && applyingBatch.get();
+  }
+
   @Override
   public boolean onCreate() {
-    databaseHelper = new PhoneLookupHistoryDatabaseHelper(getContext(), MAX_ROWS);
+    databaseHelper = new PhoneLookupHistoryDatabaseHelper(getContext());
     return true;
   }
 
@@ -168,7 +172,9 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
             .buildUpon()
             .appendEncodedPath(values.getAsString(PhoneLookupHistory.NORMALIZED_NUMBER))
             .build();
-    notifyChange(insertedUri);
+    if (!isApplyingBatch()) {
+      notifyChange(insertedUri);
+    }
     return insertedUri;
   }
 
@@ -197,10 +203,21 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
       LogUtil.w("PhoneLookupHistoryContentProvider.delete", "no rows deleted");
       return rows;
     }
-    notifyChange(uri);
+    if (!isApplyingBatch()) {
+      notifyChange(uri);
+    }
     return rows;
   }
 
+  /**
+   * Note: If the normalized number is included as part of the URI (for example,
+   * "content://com.android.dialer.phonelookuphistory/PhoneLookupHistory/+123") then the update
+   * operation will actually be a "replace" operation, inserting a new row if one does not already
+   * exist.
+   *
+   * <p>All columns in an existing row will be replaced which means you must specify all required
+   * columns in {@code values} when using this method.
+   */
   @Override
   public int update(
       @NonNull Uri uri,
@@ -214,7 +231,15 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
     int match = uriMatcher.match(uri);
     switch (match) {
       case PHONE_LOOKUP_HISTORY_TABLE_CODE:
-        break;
+        int rows = database.update(PhoneLookupHistory.TABLE, values, selection, selectionArgs);
+        if (rows == 0) {
+          LogUtil.w("PhoneLookupHistoryContentProvider.update", "no rows updated");
+          return rows;
+        }
+        if (!isApplyingBatch()) {
+          notifyChange(uri);
+        }
+        return rows;
       case PHONE_LOOKUP_HISTORY_TABLE_ID_CODE:
         Assert.checkArgument(
             !values.containsKey(PhoneLookupHistory.NORMALIZED_NUMBER),
@@ -222,19 +247,66 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
         Assert.checkArgument(selection == null, "Do not specify selection when updating by ID");
         Assert.checkArgument(
             selectionArgs == null, "Do not specify selection args when updating by ID");
-        selection = PhoneLookupHistory.NORMALIZED_NUMBER + "= ?";
-        selectionArgs = new String[] {uri.getLastPathSegment()};
-        break;
+
+        String normalizedNumber = uri.getLastPathSegment();
+        values.put(PhoneLookupHistory.NORMALIZED_NUMBER, normalizedNumber);
+        long result = database.replace(PhoneLookupHistory.TABLE, null, values);
+        Assert.checkArgument(result != -1, "replacing PhoneLookupHistory row failed");
+        if (!isApplyingBatch()) {
+          notifyChange(uri);
+        }
+        return 1;
       default:
         throw new IllegalArgumentException("Unknown uri: " + uri);
     }
-    int rows = database.update(PhoneLookupHistory.TABLE, values, selection, selectionArgs);
-    if (rows == 0) {
-      LogUtil.w("PhoneLookupHistoryContentProvider.update", "no rows updated");
-      return rows;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Note: When applyBatch is used with the PhoneLookupHistory, only a single notification for
+   * the content URI is generated, not individual notifications for each affected URI.
+   */
+  @NonNull
+  @Override
+  public ContentProviderResult[] applyBatch(@NonNull ArrayList<ContentProviderOperation> operations)
+      throws OperationApplicationException {
+    ContentProviderResult[] results = new ContentProviderResult[operations.size()];
+    if (operations.isEmpty()) {
+      return results;
     }
-    notifyChange(uri);
-    return rows;
+
+    SQLiteDatabase database = databaseHelper.getWritableDatabase();
+    try {
+      applyingBatch.set(true);
+      database.beginTransaction();
+      for (int i = 0; i < operations.size(); i++) {
+        ContentProviderOperation operation = operations.get(i);
+        int match = uriMatcher.match(operation.getUri());
+        switch (match) {
+          case PHONE_LOOKUP_HISTORY_TABLE_CODE:
+          case PHONE_LOOKUP_HISTORY_TABLE_ID_CODE:
+            ContentProviderResult result = operation.apply(this, results, i);
+            if (operation.isInsert()) {
+              if (result.uri == null) {
+                throw new OperationApplicationException("error inserting row");
+              }
+            } else if (result.count == 0) {
+              throw new OperationApplicationException("error applying operation");
+            }
+            results[i] = result;
+            break;
+          default:
+            throw new IllegalArgumentException("Unknown uri: " + operation.getUri());
+        }
+      }
+      database.setTransactionSuccessful();
+    } finally {
+      applyingBatch.set(false);
+      database.endTransaction();
+    }
+    notifyChange(PhoneLookupHistory.CONTENT_URI);
+    return results;
   }
 
   private void notifyChange(Uri uri) {

@@ -33,39 +33,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
+import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.assisteddialing.ui.AssistedDialingSettingActivity;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
-import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
+import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
+import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager.HistoricalDataChangedListener;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
+import com.google.common.base.Preconditions;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 /** Displays the details of a specific call log entry. */
-public class CallDetailsActivity extends AppCompatActivity
-    implements CallDetailsHeaderViewHolder.CallbackActionListener,
-        CallDetailsFooterViewHolder.ReportCallIdListener,
-        DeleteCallDetailsListener,
-        HistoricalDataChangedListener {
+public class CallDetailsActivity extends AppCompatActivity {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
   public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
@@ -73,7 +78,16 @@ public class CallDetailsActivity extends AppCompatActivity
   public static final String EXTRA_CONTACT = "contact";
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   private static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
-  private static final String TASK_DELETE = "task_delete";
+
+  private final CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener =
+      new CallDetailsHeaderListener(this);
+  private final CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener =
+      new DeleteCallDetailsListener(this);
+  private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener =
+      new ReportCallIdListener(this);
+  private final EnrichedCallManager.HistoricalDataChangedListener
+      enrichedCallHistoricalDataChangedListener =
+          new EnrichedCallHistoricalDataChangedListener(this);
 
   private CallDetailsEntries entries;
   private DialerContact contact;
@@ -130,7 +144,7 @@ public class CallDetailsActivity extends AppCompatActivity
 
     EnrichedCallComponent.get(this)
         .getEnrichedCallManager()
-        .registerHistoricalDataChangedListener(this);
+        .registerHistoricalDataChangedListener(enrichedCallHistoricalDataChangedListener);
     EnrichedCallComponent.get(this)
         .getEnrichedCallManager()
         .requestAllHistoricalData(contact.getNumber(), entries);
@@ -142,7 +156,7 @@ public class CallDetailsActivity extends AppCompatActivity
 
     EnrichedCallComponent.get(this)
         .getEnrichedCallManager()
-        .unregisterHistoricalDataChangedListener(this);
+        .unregisterHistoricalDataChangedListener(enrichedCallHistoricalDataChangedListener);
   }
 
   @Override
@@ -161,9 +175,9 @@ public class CallDetailsActivity extends AppCompatActivity
             this /* context */,
             contact,
             entries.getEntriesList(),
-            this /* callbackListener */,
-            this /* reportCallIdListener */,
-            this /* callDetailDeletionListener */);
+            callDetailsHeaderListener,
+            reportCallIdListener,
+            deleteCallDetailsListener);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -175,113 +189,6 @@ public class CallDetailsActivity extends AppCompatActivity
   public void onBackPressed() {
     PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
     super.onBackPressed();
-  }
-
-  @Override
-  public void reportCallId(String number) {
-    ReportDialogFragment.newInstance(number).show(getFragmentManager(), null);
-  }
-
-  @Override
-  public boolean canReportCallerId(String number) {
-    return getIntent().getExtras().getBoolean(EXTRA_CAN_REPORT_CALLER_ID, false);
-  }
-
-  @Override
-  public void onHistoricalDataChanged() {
-    Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
-        getAllHistoricalData(contact.getNumber(), entries);
-
-    adapter.updateCallDetailsEntries(
-        generateAndMapNewCallDetailsEntriesHistoryResults(
-                contact.getNumber(), entries, mappedResults)
-            .getEntriesList());
-  }
-
-  @Override
-  public void placeImsVideoCall(String phoneNumber) {
-    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_IMS_VIDEO_CALL_BACK);
-    PreCall.start(
-        this,
-        new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
-            .setIsVideoCall(true));
-  }
-
-  @Override
-  public void placeDuoVideoCall(String phoneNumber) {
-    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
-    Duo duo = DuoComponent.get(this).getDuo();
-    if (!duo.isReachable(this, phoneNumber)) {
-      placeImsVideoCall(phoneNumber);
-      return;
-    }
-
-    try {
-      startActivityForResult(duo.getIntent(this, phoneNumber), ActivityRequestCodes.DIALTACTS_DUO);
-    } catch (ActivityNotFoundException e) {
-      Toast.makeText(this, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
-    }
-  }
-
-  @Override
-  public void placeVoiceCall(String phoneNumber, String postDialDigits) {
-    Logger.get(this).logImpression(DialerImpression.Type.CALL_DETAILS_VOICE_CALL_BACK);
-
-    boolean canSupportedAssistedDialing =
-        getIntent().getExtras().getBoolean(EXTRA_CAN_SUPPORT_ASSISTED_DIALING, false);
-    CallIntentBuilder callIntentBuilder =
-        new CallIntentBuilder(phoneNumber + postDialDigits, CallInitiationType.Type.CALL_DETAILS);
-    if (canSupportedAssistedDialing) {
-      callIntentBuilder.setAllowAssistedDial(true);
-    }
-
-    PreCall.start(this, callIntentBuilder);
-  }
-
-  @Override
-  public void delete() {
-    AsyncTaskExecutors.createAsyncTaskExecutor()
-        .submit(TASK_DELETE, new DeleteCallsTask(this, contact, entries));
-  }
-
-  @NonNull
-  private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
-      @Nullable String number, @NonNull CallDetailsEntries entries) {
-    if (number == null) {
-      return Collections.emptyMap();
-    }
-
-    Map<CallDetailsEntry, List<HistoryResult>> historicalData =
-        EnrichedCallComponent.get(this)
-            .getEnrichedCallManager()
-            .getAllHistoricalData(number, entries);
-    if (historicalData == null) {
-      return Collections.emptyMap();
-    }
-    return historicalData;
-  }
-
-  private static CallDetailsEntries generateAndMapNewCallDetailsEntriesHistoryResults(
-      @Nullable String number,
-      @NonNull CallDetailsEntries callDetailsEntries,
-      @NonNull Map<CallDetailsEntry, List<HistoryResult>> mappedResults) {
-    if (number == null) {
-      return callDetailsEntries;
-    }
-    CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
-    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
-      CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
-      List<HistoryResult> results = mappedResults.get(entry);
-      if (results != null) {
-        newEntry.addAllHistoryResults(mappedResults.get(entry));
-        LogUtil.v(
-            "CallLogAdapter.generateAndMapNewCallDetailsEntriesHistoryResults",
-            "mapped %d results",
-            newEntry.getHistoryResultsList().size());
-      }
-      mutableCallDetailsEntries.addEntries(newEntry.build());
-    }
-    return mutableCallDetailsEntries.build();
   }
 
   /** Delete specified calls from the call log. */
@@ -347,6 +254,212 @@ public class CallDetailsActivity extends AppCompatActivity
 
       activity.setResult(RESULT_OK, data);
       activity.finish();
+    }
+  }
+
+  private static final class CallDetailsHeaderListener
+      implements CallDetailsHeaderViewHolder.CallDetailsHeaderListener {
+    private final WeakReference<CallDetailsActivity> activityWeakReference;
+
+    CallDetailsHeaderListener(CallDetailsActivity activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void placeImsVideoCall(String phoneNumber) {
+      Logger.get(getActivity())
+          .logImpression(DialerImpression.Type.CALL_DETAILS_IMS_VIDEO_CALL_BACK);
+      PreCall.start(
+          getActivity(),
+          new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
+              .setIsVideoCall(true));
+    }
+
+    @Override
+    public void placeDuoVideoCall(String phoneNumber) {
+      Logger.get(getActivity())
+          .logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
+      Duo duo = DuoComponent.get(getActivity()).getDuo();
+      if (!duo.isReachable(getActivity(), phoneNumber)) {
+        placeImsVideoCall(phoneNumber);
+        return;
+      }
+
+      try {
+        getActivity()
+            .startActivityForResult(
+                duo.getIntent(getActivity(), phoneNumber), ActivityRequestCodes.DIALTACTS_DUO);
+      } catch (ActivityNotFoundException e) {
+        Toast.makeText(getActivity(), R.string.activity_not_available, Toast.LENGTH_SHORT).show();
+      }
+    }
+
+    @Override
+    public void placeVoiceCall(String phoneNumber, String postDialDigits) {
+      Logger.get(getActivity()).logImpression(DialerImpression.Type.CALL_DETAILS_VOICE_CALL_BACK);
+
+      boolean canSupportedAssistedDialing =
+          getActivity()
+              .getIntent()
+              .getExtras()
+              .getBoolean(EXTRA_CAN_SUPPORT_ASSISTED_DIALING, false);
+      CallIntentBuilder callIntentBuilder =
+          new CallIntentBuilder(phoneNumber + postDialDigits, CallInitiationType.Type.CALL_DETAILS);
+      if (canSupportedAssistedDialing) {
+        callIntentBuilder.setAllowAssistedDial(true);
+      }
+
+      PreCall.start(getActivity(), callIntentBuilder);
+    }
+
+    private CallDetailsActivity getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
+    }
+
+    @Override
+    public void openAssistedDialingSettings(View unused) {
+      Intent intent = new Intent(getActivity(), AssistedDialingSettingActivity.class);
+      getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void createAssistedDialerNumberParserTask(
+        AssistedDialingNumberParseWorker worker,
+        SuccessListener<Integer> successListener,
+        FailureListener failureListener) {
+      DialerExecutorComponent.get(getActivity().getApplicationContext())
+          .dialerExecutorFactory()
+          .createUiTaskBuilder(
+              getActivity().getFragmentManager(),
+              "CallDetailsActivity.createAssistedDialerNumberParserTask",
+              new AssistedDialingNumberParseWorker())
+          .onSuccess(successListener)
+          .onFailure(failureListener)
+          .build()
+          .executeParallel(getActivity().contact.getNumber());
+    }
+  }
+
+  static class AssistedDialingNumberParseWorker implements Worker<String, Integer> {
+
+    @Override
+    public Integer doInBackground(@NonNull String phoneNumber) {
+      DialerPhoneNumberUtil dialerPhoneNumberUtil =
+          new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+      DialerPhoneNumber parsedNumber = dialerPhoneNumberUtil.parse(phoneNumber, null);
+      return parsedNumber.getDialerInternalPhoneNumber().getCountryCode();
+    }
+  }
+
+  private static final class DeleteCallDetailsListener
+      implements CallDetailsFooterViewHolder.DeleteCallDetailsListener {
+    private static final String ASYNC_TASK_ID = "task_delete";
+
+    private final WeakReference<CallDetailsActivity> activityWeakReference;
+
+    DeleteCallDetailsListener(CallDetailsActivity activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void delete() {
+      AsyncTaskExecutors.createAsyncTaskExecutor()
+          .submit(
+              ASYNC_TASK_ID,
+              new DeleteCallsTask(getActivity(), getActivity().contact, getActivity().entries));
+    }
+
+    private CallDetailsActivity getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
+    }
+  }
+
+  private static final class ReportCallIdListener
+      implements CallDetailsFooterViewHolder.ReportCallIdListener {
+    private final WeakReference<Activity> activityWeakReference;
+
+    ReportCallIdListener(Activity activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void reportCallId(String number) {
+      ReportDialogFragment.newInstance(number)
+          .show(getActivity().getFragmentManager(), null /* tag */);
+    }
+
+    @Override
+    public boolean canReportCallerId(String number) {
+      return getActivity().getIntent().getExtras().getBoolean(EXTRA_CAN_REPORT_CALLER_ID, false);
+    }
+
+    private Activity getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
+    }
+  }
+
+  private static final class EnrichedCallHistoricalDataChangedListener
+      implements EnrichedCallManager.HistoricalDataChangedListener {
+    private final WeakReference<CallDetailsActivity> activityWeakReference;
+
+    EnrichedCallHistoricalDataChangedListener(CallDetailsActivity activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void onHistoricalDataChanged() {
+      CallDetailsActivity activity = getActivity();
+      Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
+          getAllHistoricalData(activity.contact.getNumber(), activity.entries);
+
+      activity.adapter.updateCallDetailsEntries(
+          generateAndMapNewCallDetailsEntriesHistoryResults(
+                  activity.contact.getNumber(), activity.entries, mappedResults)
+              .getEntriesList());
+    }
+
+    private CallDetailsActivity getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
+    }
+
+    @NonNull
+    private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
+        @Nullable String number, @NonNull CallDetailsEntries entries) {
+      if (number == null) {
+        return Collections.emptyMap();
+      }
+
+      Map<CallDetailsEntry, List<HistoryResult>> historicalData =
+          EnrichedCallComponent.get(getActivity())
+              .getEnrichedCallManager()
+              .getAllHistoricalData(number, entries);
+      if (historicalData == null) {
+        return Collections.emptyMap();
+      }
+      return historicalData;
+    }
+
+    private static CallDetailsEntries generateAndMapNewCallDetailsEntriesHistoryResults(
+        @Nullable String number,
+        @NonNull CallDetailsEntries callDetailsEntries,
+        @NonNull Map<CallDetailsEntry, List<HistoryResult>> mappedResults) {
+      if (number == null) {
+        return callDetailsEntries;
+      }
+      CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
+      for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
+        CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
+        List<HistoryResult> results = mappedResults.get(entry);
+        if (results != null) {
+          newEntry.addAllHistoryResults(mappedResults.get(entry));
+          LogUtil.v(
+              "CallDetailsActivity.generateAndMapNewCallDetailsEntriesHistoryResults",
+              "mapped %d results",
+              newEntry.getHistoryResultsList().size());
+        }
+        mutableCallDetailsEntries.addEntries(newEntry.build());
+      }
+      return mutableCallDetailsEntries.build();
     }
   }
 }

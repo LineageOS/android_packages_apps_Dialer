@@ -21,6 +21,7 @@ import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.util.List;
 
 /**
@@ -64,8 +65,7 @@ public interface CallLogDataSource {
    *
    * @see CallLogDataSource class doc for complete lifecyle information
    */
-  @WorkerThread
-  boolean isDirty(Context appContext);
+  ListenableFuture<Boolean> isDirty(Context appContext);
 
   /**
    * Computes the set of mutations necessary to update the annotated call log with respect to this
@@ -76,8 +76,7 @@ public interface CallLogDataSource {
    *     contain inserts from the system call log, and these inserts should be modified by each data
    *     source.
    */
-  @WorkerThread
-  void fill(Context appContext, CallLogMutations mutations);
+  ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations);
 
   /**
    * Called after database mutations have been applied to all data sources. This is useful for
@@ -86,8 +85,7 @@ public interface CallLogDataSource {
    *
    * @see CallLogDataSource class doc for complete lifecyle information
    */
-  @WorkerThread
-  void onSuccessfulFill(Context appContext);
+  ListenableFuture<Void> onSuccessfulFill(Context appContext);
 
   /**
    * Combines raw annotated call log rows into a single coalesced row.

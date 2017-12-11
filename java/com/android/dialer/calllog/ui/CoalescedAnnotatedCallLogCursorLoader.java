@@ -19,6 +19,7 @@ package com.android.dialer.calllog.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.CursorLoader;
+import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.model.CoalescedRow;
@@ -48,7 +49,7 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int IS_BUSINESS = 17;
   private static final int IS_VOICEMAIL = 18;
   private static final int CALL_TYPE = 19;
-  private static final int NUMBER_CALLS = 20;
+  private static final int COALESCED_IDS = 20;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -69,6 +70,13 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       number = DialerPhoneNumber.parseFrom(cursor.getBlob(NUMBER));
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse DialerPhoneNumber bytes");
+    }
+
+    CoalescedIds coalescedIds;
+    try {
+      coalescedIds = CoalescedIds.parseFrom(cursor.getBlob(COALESCED_IDS));
+    } catch (InvalidProtocolBufferException e) {
+      throw new IllegalStateException("Couldn't parse CoalescedIds bytes");
     }
 
     return CoalescedRow.builder()
@@ -92,7 +100,7 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         .setIsBusiness(cursor.getInt(IS_BUSINESS) == 1)
         .setIsVoicemail(cursor.getInt(IS_VOICEMAIL) == 1)
         .setCallType(cursor.getInt(CALL_TYPE))
-        .setNumberCalls(cursor.getInt(NUMBER_CALLS))
+        .setCoalescedIds(coalescedIds)
         .build();
   }
 

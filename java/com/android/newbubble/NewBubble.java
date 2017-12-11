@@ -17,12 +17,15 @@
 package com.android.newbubble;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent.CanceledException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -54,7 +57,12 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DrawableConverter;
+import com.android.incallui.call.CallList;
+import com.android.incallui.call.DialerCall;
 import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -96,10 +104,14 @@ public class NewBubble {
   private CharSequence textAfterShow;
   private int collapseEndAction;
 
-  @VisibleForTesting ViewHolder viewHolder;
+  ViewHolder viewHolder;
   private ViewPropertyAnimator collapseAnimation;
   private Integer overrideGravity;
-  private ViewPropertyAnimator exitAnimator;
+  @VisibleForTesting AnimatorSet exitAnimatorSet;
+
+  private final int primaryIconMoveDistance;
+  private final int leftBoundary;
+  private int savedYPosition = -1;
 
   private final Runnable collapseRunnable =
       new Runnable() {
@@ -110,16 +122,10 @@ public class NewBubble {
             // Always reset here since text shouldn't keep showing.
             hideAndReset();
           } else {
-            doResize(
-                () ->
-                    viewHolder
-                        .getPrimaryButton()
-                        .setDisplayedChild(ViewHolder.CHILD_INDEX_AVATAR_AND_ICON));
+            viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_AVATAR_AND_ICON);
           }
         }
       };
-
-  private BubbleExpansionStateListener bubbleExpansionStateListener;
 
   /** Type of action after bubble collapse */
   @Retention(RetentionPolicy.SOURCE)
@@ -206,15 +212,23 @@ public class NewBubble {
     windowManager = context.getSystemService(WindowManager.class);
 
     viewHolder = new ViewHolder(context);
+
+    leftBoundary =
+        context.getResources().getDimensionPixelOffset(R.dimen.bubble_off_screen_size_horizontal)
+            - context
+                .getResources()
+                .getDimensionPixelSize(R.dimen.bubble_shadow_padding_size_horizontal);
+    primaryIconMoveDistance =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_size)
+            - context.getResources().getDimensionPixelSize(R.dimen.bubble_small_icon_size);
   }
 
   /** Expands the main bubble menu. */
   public void expand(boolean isUserAction) {
-    if (bubbleExpansionStateListener != null) {
-      bubbleExpansionStateListener.onBubbleExpansionStateChanged(
-          ExpansionState.START_EXPANDING, isUserAction);
+    if (isUserAction) {
+      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
     }
-    doResize(() -> viewHolder.setDrawerVisibility(View.VISIBLE));
+    viewHolder.setDrawerVisibility(View.INVISIBLE);
     View expandedView = viewHolder.getExpandedView();
     expandedView
         .getViewTreeObserver()
@@ -222,18 +236,161 @@ public class NewBubble {
             new OnPreDrawListener() {
               @Override
               public boolean onPreDraw() {
-                // Animate expanded view to move from above primary button to its final position
+                // Move the whole bubble up so that expanded view is still in screen
+                int moveUpDistance = viewHolder.getMoveUpDistance();
+                if (moveUpDistance != 0) {
+                  savedYPosition = windowParams.y;
+                }
+
+                // Calculate the move-to-middle distance
+                int deltaX =
+                    (int) viewHolder.getRoot().findViewById(R.id.bubble_primary_container).getX();
+                float k = (float) moveUpDistance / deltaX;
+                if (isDrawingFromRight()) {
+                  deltaX = -deltaX;
+                }
+
+                // Do X-move and Y-move together
+
+                final int startX = windowParams.x - deltaX;
+                final int startY = windowParams.y;
+                ValueAnimator animator = ValueAnimator.ofFloat(startX, windowParams.x);
+                animator.setInterpolator(new LinearOutSlowInInterpolator());
+                animator.addUpdateListener(
+                    (valueAnimator) -> {
+                      // Update windowParams and the root layout.
+                      // We can't do ViewPropertyAnimation since it clips children.
+                      float newX = (float) valueAnimator.getAnimatedValue();
+                      if (moveUpDistance != 0) {
+                        windowParams.y = startY - (int) (Math.abs(newX - (float) startX) * k);
+                      }
+                      windowParams.x = (int) newX;
+                      windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
+                    });
+                animator.addListener(
+                    new AnimatorListenerAdapter() {
+                      @Override
+                      public void onAnimationEnd(Animator animation) {
+                        // Show expanded view
+                        expandedView.setVisibility(View.VISIBLE);
+                        expandedView.setTranslationY(-expandedView.getHeight());
+                        expandedView.setAlpha(0);
+                        expandedView
+                            .animate()
+                            .setInterpolator(new LinearOutSlowInInterpolator())
+                            .translationY(0)
+                            .alpha(1);
+                      }
+                    });
+                animator.start();
+
                 expandedView.getViewTreeObserver().removeOnPreDrawListener(this);
-                expandedView.setTranslationY(-viewHolder.getRoot().getHeight());
-                expandedView
-                    .animate()
-                    .setInterpolator(new LinearOutSlowInInterpolator())
-                    .translationY(0);
                 return false;
               }
             });
     setFocused(true);
     expanded = true;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  public void startCollapse(
+      @CollapseEnd int endAction, boolean isUserAction, boolean shouldRecoverYPosition) {
+    View expandedView = viewHolder.getExpandedView();
+    if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
+      // Drawer is already collapsed or animation is running.
+      return;
+    }
+
+    overrideGravity = isDrawingFromRight() ? Gravity.RIGHT : Gravity.LEFT;
+    setFocused(false);
+
+    if (collapseEndAction == CollapseEnd.NOTHING) {
+      collapseEndAction = endAction;
+    }
+    if (isUserAction && collapseEndAction == CollapseEnd.NOTHING) {
+      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
+    }
+    // Animate expanded view to move from its position to above primary button and hide
+    collapseAnimation =
+        expandedView
+            .animate()
+            .translationY(-expandedView.getHeight())
+            .alpha(0)
+            .setInterpolator(new FastOutLinearInInterpolator())
+            .withEndAction(
+                () -> {
+                  collapseAnimation = null;
+                  expanded = false;
+
+                  if (textShowing) {
+                    // Will do resize once the text is done.
+                    return;
+                  }
+
+                  // Set drawer visibility to INVISIBLE instead of GONE to keep primary button fixed
+                  viewHolder.setDrawerVisibility(View.INVISIBLE);
+
+                  // Do X-move and Y-move together
+                  int deltaX =
+                      (int) viewHolder.getRoot().findViewById(R.id.bubble_primary_container).getX();
+                  int startX = windowParams.x;
+                  int startY = windowParams.y;
+                  float k =
+                      (savedYPosition != -1 && shouldRecoverYPosition)
+                          ? (savedYPosition - startY) / (float) deltaX
+                          : 0;
+                  Path path = new Path();
+                  path.moveTo(windowParams.x, windowParams.y);
+                  path.lineTo(
+                      windowParams.x - deltaX,
+                      (savedYPosition != -1 && shouldRecoverYPosition)
+                          ? savedYPosition
+                          : windowParams.y);
+                  // The position is not useful after collapse
+                  savedYPosition = -1;
+
+                  ValueAnimator animator = ValueAnimator.ofFloat(startX, startX - deltaX);
+                  animator.setInterpolator(new LinearOutSlowInInterpolator());
+                  animator.addUpdateListener(
+                      (valueAnimator) -> {
+                        // Update windowParams and the root layout.
+                        // We can't do ViewPropertyAnimation since it clips children.
+                        float newX = (float) valueAnimator.getAnimatedValue();
+                        if (k != 0) {
+                          windowParams.y = startY + (int) (Math.abs(newX - (float) startX) * k);
+                        }
+                        windowParams.x = (int) newX;
+                        windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
+                      });
+                  animator.addListener(
+                      new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                          // If collapse on the right side, the primary button move left a bit after
+                          // drawer
+                          // visibility becoming GONE. To avoid it, we create a new ViewHolder.
+                          replaceViewHolder();
+                        }
+                      });
+                  animator.start();
+
+                  // If this collapse was to come before a hide, do it now.
+                  if (collapseEndAction == CollapseEnd.HIDE) {
+                    hide();
+                  }
+                  collapseEndAction = CollapseEnd.NOTHING;
+
+                  // Resume normal gravity after any resizing is done.
+                  handler.postDelayed(
+                      () -> {
+                        overrideGravity = null;
+                        if (!viewHolder.isMoving()) {
+                          viewHolder.undoGravityOverride();
+                        }
+                      },
+                      // Need to wait twice as long for resize and layout
+                      WINDOW_REDRAW_DELAY_MILLIS * 2);
+                });
   }
 
   /**
@@ -269,40 +426,54 @@ public class NewBubble {
                   | LayoutParams.FLAG_LAYOUT_NO_LIMITS,
               PixelFormat.TRANSLUCENT);
       windowParams.gravity = Gravity.TOP | Gravity.LEFT;
-      windowParams.x =
-          context.getResources().getDimensionPixelOffset(R.dimen.bubble_safe_margin_horizontal);
+      windowParams.x = leftBoundary;
       windowParams.y = currentInfo.getStartingYPosition();
       windowParams.height = LayoutParams.WRAP_CONTENT;
       windowParams.width = LayoutParams.WRAP_CONTENT;
     }
 
-    if (exitAnimator != null) {
-      exitAnimator.cancel();
-      exitAnimator = null;
+    if (exitAnimatorSet != null) {
+      exitAnimatorSet.removeAllListeners();
+      exitAnimatorSet.cancel();
+      exitAnimatorSet = null;
     } else {
       windowManager.addView(viewHolder.getRoot(), windowParams);
+      viewHolder.getPrimaryButton().setVisibility(View.VISIBLE);
       viewHolder.getPrimaryButton().setScaleX(0);
       viewHolder.getPrimaryButton().setScaleY(0);
+      viewHolder.getPrimaryAvatar().setAlpha(0f);
+      viewHolder.getPrimaryIcon().setAlpha(0f);
     }
 
     viewHolder.setChildClickable(true);
     visibility = Visibility.ENTERING;
-    viewHolder
-        .getPrimaryButton()
-        .animate()
-        .setInterpolator(new OvershootInterpolator())
-        .scaleX(1)
-        .scaleY(1)
-        .withEndAction(
-            () -> {
-              visibility = Visibility.SHOWING;
-              // Show the queued up text, if available.
-              if (textAfterShow != null) {
-                showText(textAfterShow);
-                textAfterShow = null;
-              }
-            })
-        .start();
+
+    // Show bubble animation: scale the whole bubble to 1, and change avatar+icon's alpha to 1
+    ObjectAnimator scaleXAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleX", 1);
+    ObjectAnimator scaleYAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleY", 1);
+    ObjectAnimator avatarAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryAvatar(), "alpha", 1);
+    ObjectAnimator iconAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryIcon(), "alpha", 1);
+    AnimatorSet enterAnimatorSet = new AnimatorSet();
+    enterAnimatorSet.playTogether(
+        scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
+    enterAnimatorSet.setInterpolator(new OvershootInterpolator());
+    enterAnimatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            visibility = Visibility.SHOWING;
+            // Show the queued up text, if available.
+            if (textAfterShow != null) {
+              showText(textAfterShow);
+              textAfterShow = null;
+            }
+          }
+        });
+    enterAnimatorSet.start();
 
     updatePrimaryIconAnimation();
   }
@@ -392,7 +563,8 @@ public class NewBubble {
   public void showText(@NonNull CharSequence text) {
     textShowing = true;
     if (expanded) {
-      startCollapse(CollapseEnd.NOTHING, false);
+      startCollapse(
+          CollapseEnd.NOTHING, false /* isUserAction */, false /* shouldRecoverYPosition */);
       doShowText(text);
     } else {
       // Need to transition from old bounds to new bounds manually
@@ -409,59 +581,51 @@ public class NewBubble {
         return;
       }
 
-      doResize(
-          () -> {
-            doShowText(text);
-            // Hide the text so we can animate it in
-            viewHolder.getPrimaryText().setAlpha(0);
+      doShowText(text);
+      // Hide the text so we can animate it in
+      viewHolder.getPrimaryText().setAlpha(0);
 
-            ViewAnimator primaryButton = viewHolder.getPrimaryButton();
-            // Cancel the automatic transition scheduled in doShowText
-            TransitionManager.endTransitions((ViewGroup) primaryButton.getParent());
-            primaryButton
-                .getViewTreeObserver()
-                .addOnPreDrawListener(
-                    new OnPreDrawListener() {
-                      @Override
-                      public boolean onPreDraw() {
-                        primaryButton.getViewTreeObserver().removeOnPreDrawListener(this);
+      ViewAnimator primaryButton = viewHolder.getPrimaryButton();
+      // Cancel the automatic transition scheduled in doShowText
+      TransitionManager.endTransitions((ViewGroup) primaryButton.getParent());
+      primaryButton
+          .getViewTreeObserver()
+          .addOnPreDrawListener(
+              new OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                  primaryButton.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                        // Prepare and capture end values, always use the size of primaryText since
-                        // its invisibility makes primaryButton smaller than expected
-                        TransitionValues endValues = new TransitionValues();
-                        endValues.values.put(
-                            NewChangeOnScreenBounds.PROPNAME_WIDTH,
-                            viewHolder.getPrimaryText().getWidth());
-                        endValues.values.put(
-                            NewChangeOnScreenBounds.PROPNAME_HEIGHT,
-                            viewHolder.getPrimaryText().getHeight());
-                        endValues.view = primaryButton;
-                        transition.addTarget(endValues.view);
-                        transition.captureEndValues(endValues);
+                  // Prepare and capture end values, always use the size of primaryText since
+                  // its invisibility makes primaryButton smaller than expected
+                  TransitionValues endValues = new TransitionValues();
+                  endValues.values.put(
+                      NewChangeOnScreenBounds.PROPNAME_WIDTH,
+                      viewHolder.getPrimaryText().getWidth());
+                  endValues.values.put(
+                      NewChangeOnScreenBounds.PROPNAME_HEIGHT,
+                      viewHolder.getPrimaryText().getHeight());
+                  endValues.view = primaryButton;
+                  transition.addTarget(endValues.view);
+                  transition.captureEndValues(endValues);
 
-                        // animate the primary button bounds change
-                        Animator bounds =
-                            transition.createAnimator(primaryButton, startValues, endValues);
+                  // animate the primary button bounds change
+                  Animator bounds =
+                      transition.createAnimator(primaryButton, startValues, endValues);
 
-                        // Animate the text in
-                        Animator alpha =
-                            ObjectAnimator.ofFloat(viewHolder.getPrimaryText(), View.ALPHA, 1f);
+                  // Animate the text in
+                  Animator alpha =
+                      ObjectAnimator.ofFloat(viewHolder.getPrimaryText(), View.ALPHA, 1f);
 
-                        AnimatorSet set = new AnimatorSet();
-                        set.play(bounds).before(alpha);
-                        set.start();
-                        return false;
-                      }
-                    });
-          });
+                  AnimatorSet set = new AnimatorSet();
+                  set.play(bounds).before(alpha);
+                  set.start();
+                  return false;
+                }
+              });
     }
     handler.removeCallbacks(collapseRunnable);
     handler.postDelayed(collapseRunnable, SHOW_TEXT_DURATION_MILLIS);
-  }
-
-  public void setBubbleExpansionStateListener(
-      BubbleExpansionStateListener bubbleExpansionStateListener) {
-    this.bubbleExpansionStateListener = bubbleExpansionStateListener;
   }
 
   @Nullable
@@ -470,7 +634,12 @@ public class NewBubble {
   }
 
   void onMoveStart() {
-    startCollapse(CollapseEnd.NOTHING, true);
+    if (viewHolder.getExpandedView().getVisibility() == View.VISIBLE) {
+      viewHolder.setDrawerVisibility(View.INVISIBLE);
+    }
+    expanded = false;
+    savedYPosition = -1;
+
     viewHolder
         .getPrimaryButton()
         .animate()
@@ -482,11 +651,6 @@ public class NewBubble {
 
   void onMoveFinish() {
     viewHolder.getPrimaryButton().animate().translationZ(0);
-    // If it's GONE, no resize is necessary. If it's VISIBLE, it will get cleaned up when the
-    // collapse animation finishes
-    if (viewHolder.getExpandedView().getVisibility() == View.INVISIBLE) {
-      doResize(null);
-    }
   }
 
   void primaryButtonClick() {
@@ -494,10 +658,17 @@ public class NewBubble {
       return;
     }
     if (expanded) {
-      startCollapse(CollapseEnd.NOTHING, true);
+      startCollapse(
+          CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
     } else {
       expand(true);
     }
+  }
+
+  void onLeftRightSwitch(boolean onRight) {
+    // Move primary icon to the other side so it's not partially hiden
+    View primaryIcon = viewHolder.getPrimaryIcon();
+    primaryIcon.animate().translationX(onRight ? -primaryIconMoveDistance : 0).start();
   }
 
   LayoutParams getWindowParams() {
@@ -513,7 +684,8 @@ public class NewBubble {
    * afterHiding} after hiding. If the bubble is currently showing text, will hide after the text is
    * done displaying. If the bubble is not visible this method does nothing.
    */
-  private void hideHelper(Runnable afterHiding) {
+  @VisibleForTesting
+  void hideHelper(Runnable afterHiding) {
     if (visibility == Visibility.HIDDEN || visibility == Visibility.EXITING) {
       return;
     }
@@ -532,20 +704,33 @@ public class NewBubble {
     }
 
     if (expanded) {
-      startCollapse(CollapseEnd.HIDE, false);
+      startCollapse(CollapseEnd.HIDE, false /* isUserAction */, false /* shouldRecoverYPosition */);
       return;
     }
 
     visibility = Visibility.EXITING;
-    exitAnimator =
-        viewHolder
-            .getPrimaryButton()
-            .animate()
-            .setInterpolator(new AnticipateInterpolator())
-            .scaleX(0)
-            .scaleY(0)
-            .withEndAction(afterHiding);
-    exitAnimator.start();
+
+    // Hide bubble animation: scale the whole bubble to 0, and change avatar+icon's alpha to 0
+    ObjectAnimator scaleXAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleX", 0);
+    ObjectAnimator scaleYAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryButton(), "scaleY", 0);
+    ObjectAnimator avatarAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryAvatar(), "alpha", 0);
+    ObjectAnimator iconAlphaAnimator =
+        ObjectAnimator.ofFloat(viewHolder.getPrimaryIcon(), "alpha", 0);
+    exitAnimatorSet = new AnimatorSet();
+    exitAnimatorSet.playTogether(
+        scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
+    exitAnimatorSet.setInterpolator(new AnticipateInterpolator());
+    exitAnimatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            afterHiding.run();
+          }
+        });
+    exitAnimatorSet.start();
   }
 
   private void reset() {
@@ -596,7 +781,8 @@ public class NewBubble {
     configureButton(currentInfo.getActions().get(3), viewHolder.getEndCallButton());
   }
 
-  private void doShowText(@NonNull CharSequence text) {
+  @VisibleForTesting
+  void doShowText(@NonNull CharSequence text) {
     TransitionManager.beginDelayedTransition((ViewGroup) viewHolder.getPrimaryButton().getParent());
     viewHolder.getPrimaryText().setText(text);
     viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_TEXT);
@@ -618,34 +804,34 @@ public class NewBubble {
     }
   }
 
-  private void doResize(@Nullable Runnable operation) {
-    // If we're resizing on the right side of the screen, there is an implicit move operation
-    // necessary. The WindowManager does not sync the move and resize operations, so serious jank
-    // would occur. To fix this, instead of resizing the window, we create a new one and destroy
-    // the old one. There is a short delay before destroying the old view to ensure the new one has
-    // had time to draw.
+  /**
+   * Create a new ViewHolder object to replace the old one.It only happens when not moving and
+   * collapsed.
+   */
+  void replaceViewHolder() {
+    LogUtil.enterBlock("NewBubble.replaceViewHolder");
     ViewHolder oldViewHolder = viewHolder;
-    if (isDrawingFromRight()) {
-      viewHolder = new ViewHolder(oldViewHolder.getRoot().getContext());
-      update();
-      viewHolder
-          .getPrimaryButton()
-          .setDisplayedChild(oldViewHolder.getPrimaryButton().getDisplayedChild());
-      viewHolder.getPrimaryText().setText(oldViewHolder.getPrimaryText().getText());
-    }
 
-    if (operation != null) {
-      operation.run();
-    }
+    // Create a new ViewHolder and copy needed info.
+    viewHolder = new ViewHolder(oldViewHolder.getRoot().getContext());
+    viewHolder
+        .getPrimaryButton()
+        .setDisplayedChild(oldViewHolder.getPrimaryButton().getDisplayedChild());
+    viewHolder.getPrimaryText().setText(oldViewHolder.getPrimaryText().getText());
+    viewHolder.getPrimaryIcon().setX(isDrawingFromRight() ? 0 : primaryIconMoveDistance);
+    viewHolder
+        .getPrimaryIcon()
+        .setTranslationX(isDrawingFromRight() ? -primaryIconMoveDistance : 0);
 
-    if (isDrawingFromRight()) {
-      swapViewHolders(oldViewHolder);
-    }
-  }
+    update();
 
-  private void swapViewHolders(ViewHolder oldViewHolder) {
+    // Add new view at its horizontal boundary
     ViewGroup root = viewHolder.getRoot();
+    windowParams.x = leftBoundary;
+    windowParams.gravity = Gravity.TOP | (isDrawingFromRight() ? Gravity.RIGHT : Gravity.LEFT);
     windowManager.addView(root, windowParams);
+
+    // Remove the old view after delay
     root.getViewTreeObserver()
         .addOnPreDrawListener(
             new OnPreDrawListener() {
@@ -661,63 +847,8 @@ public class NewBubble {
             });
   }
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  public void startCollapse(@CollapseEnd int endAction, boolean isUserAction) {
-    View expandedView = viewHolder.getExpandedView();
-    if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
-      // Drawer is already collapsed or animation is running.
-      return;
-    }
-
-    overrideGravity = isDrawingFromRight() ? Gravity.RIGHT : Gravity.LEFT;
-    setFocused(false);
-
-    if (collapseEndAction == CollapseEnd.NOTHING) {
-      collapseEndAction = endAction;
-    }
-    if (bubbleExpansionStateListener != null && collapseEndAction == CollapseEnd.NOTHING) {
-      bubbleExpansionStateListener.onBubbleExpansionStateChanged(
-          ExpansionState.START_COLLAPSING, isUserAction);
-    }
-    // Animate expanded view to move from its position to above primary button and hide
-    collapseAnimation =
-        expandedView
-            .animate()
-            .translationY(-viewHolder.getRoot().getHeight())
-            .setInterpolator(new FastOutLinearInInterpolator())
-            .withEndAction(
-                () -> {
-                  collapseAnimation = null;
-                  expanded = false;
-
-                  if (textShowing) {
-                    // Will do resize once the text is done.
-                    return;
-                  }
-
-                  // Hide the drawer and resize if possible.
-                  viewHolder.setDrawerVisibility(View.INVISIBLE);
-                  if (!viewHolder.isMoving() || !isDrawingFromRight()) {
-                    doResize(() -> viewHolder.setDrawerVisibility(View.GONE));
-                  }
-
-                  // If this collapse was to come before a hide, do it now.
-                  if (collapseEndAction == CollapseEnd.HIDE) {
-                    hide();
-                  }
-                  collapseEndAction = CollapseEnd.NOTHING;
-
-                  // Resume normal gravity after any resizing is done.
-                  handler.postDelayed(
-                      () -> {
-                        overrideGravity = null;
-                        if (!viewHolder.isMoving()) {
-                          viewHolder.undoGravityOverride();
-                        }
-                      },
-                      // Need to wait twice as long for resize and layout
-                      WINDOW_REDRAW_DELAY_MILLIS * 2);
-                });
+  int getDrawerVisibility() {
+    return viewHolder.getExpandedView().getVisibility();
   }
 
   private boolean isDrawingFromRight() {
@@ -734,11 +865,22 @@ public class NewBubble {
   }
 
   private void defaultAfterHidingAnimation() {
-    exitAnimator = null;
+    exitAnimatorSet = null;
+    viewHolder.getPrimaryButton().setVisibility(View.INVISIBLE);
     windowManager.removeView(viewHolder.getRoot());
     visibility = Visibility.HIDDEN;
 
     updatePrimaryIconAnimation();
+  }
+
+  private void logBasicOrCallImpression(DialerImpression.Type impressionType) {
+    DialerCall call = CallList.getInstance().getActiveOrBackgroundCall();
+    if (call != null) {
+      Logger.get(context)
+          .logCallImpression(impressionType, call.getUniqueCallId(), call.getTimeAddedMs());
+    } else {
+      Logger.get(context).logImpression(impressionType);
+    }
   }
 
   @VisibleForTesting
@@ -779,7 +921,8 @@ public class NewBubble {
       root.setOnBackPressedListener(
           () -> {
             if (visibility == Visibility.SHOWING && expanded) {
-              startCollapse(CollapseEnd.NOTHING, true);
+              startCollapse(
+                  CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
               return true;
             }
             return false;
@@ -794,7 +937,8 @@ public class NewBubble {
       root.setOnTouchListener(
           (v, event) -> {
             if (expanded && event.getActionMasked() == MotionEvent.ACTION_OUTSIDE) {
-              startCollapse(CollapseEnd.NOTHING, true);
+              startCollapse(
+                  CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
               return true;
             }
             return false;
@@ -810,6 +954,16 @@ public class NewBubble {
 
       // For primaryButton
       moveHandler.setClickable(clickable);
+    }
+
+    public int getMoveUpDistance() {
+      int deltaAllowed =
+          expandedView.getHeight()
+              - context
+                      .getResources()
+                      .getDimensionPixelOffset(R.dimen.bubble_button_padding_vertical)
+                  * 2;
+      return moveHandler.getMoveUpDistance(deltaAllowed);
     }
 
     public ViewGroup getRoot() {
@@ -863,10 +1017,5 @@ public class NewBubble {
     public void undoGravityOverride() {
       moveHandler.undoGravityOverride();
     }
-  }
-
-  /** Listener for bubble expansion state change. */
-  public interface BubbleExpansionStateListener {
-    void onBubbleExpansionStateChanged(@ExpansionState int expansionState, boolean isUserAction);
   }
 }
