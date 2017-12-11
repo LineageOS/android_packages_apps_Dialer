@@ -16,11 +16,24 @@
 
 package com.android.dialer.spam;
 
-/**
- * This interface should be implementated by the Application subclass. It allows this module to get
- * references to the SpamBindings.
- */
-public interface SpamBindingsFactory {
+import android.content.Context;
+import com.android.dialer.inject.HasRootComponent;
+import dagger.Subcomponent;
 
-  SpamBindings newSpamBindings();
+/** Dagger component to get Spam. */
+@Subcomponent
+public abstract class SpamComponent {
+
+  public abstract Spam spam();
+
+  public static SpamComponent get(Context context) {
+    return ((SpamComponent.HasComponent)
+            ((HasRootComponent) context.getApplicationContext()).component())
+        .spamComponent();
+  }
+
+  /** Used to refer to the root application component. */
+  public interface HasComponent {
+    SpamComponent spamComponent();
+  }
 }

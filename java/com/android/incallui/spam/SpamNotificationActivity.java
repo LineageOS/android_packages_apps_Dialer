@@ -38,7 +38,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
-import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamComponent;
 import com.android.incallui.call.DialerCall;
 
 /** Creates the after call notification dialogs. */
@@ -188,7 +188,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Creates and displays the dialog for whitelisting a number. */
   private void maybeShowNotSpamDialog(
       final String number, final ContactLookupResult.Type contactLookupResultType) {
-    if (Spam.get(this).isDialogEnabledForSpamNotification()) {
+    if (SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
       BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
               getFormattedNumber(number),
               new BlockReportSpamDialogs.OnConfirmListener() {
@@ -207,14 +207,16 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Creates and displays the dialog for blocking/reporting a number as spam. */
   private void maybeShowBlockReportSpamDialog(
       final String number, final ContactLookupResult.Type contactLookupResultType) {
-    if (Spam.get(this).isDialogEnabledForSpamNotification()) {
+    if (SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
       maybeShowBlockNumberMigrationDialog(
           new BlockedNumbersMigrator.Listener() {
             @Override
             public void onComplete() {
               BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
                       getFormattedNumber(number),
-                      Spam.get(SpamNotificationActivity.this).isDialogReportSpamCheckedByDefault(),
+                      SpamComponent.get(SpamNotificationActivity.this)
+                          .spam()
+                          .isDialogReportSpamCheckedByDefault(),
                       new BlockReportSpamDialogs.OnSpamDialogClickListener() {
                         @Override
                         public void onClick(boolean isSpamChecked) {
@@ -263,7 +265,8 @@ public class SpamNotificationActivity extends FragmentActivity {
       String number, boolean reportAsSpam, ContactLookupResult.Type contactLookupResultType) {
     if (reportAsSpam) {
       logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_MARKED_NUMBER_AS_SPAM);
-      Spam.get(this)
+      SpamComponent.get(this)
+          .spam()
           .reportSpamFromAfterCallNotification(
               number,
               getCountryIso(),
@@ -282,7 +285,8 @@ public class SpamNotificationActivity extends FragmentActivity {
   private void reportNotSpamAndFinish(
       String number, ContactLookupResult.Type contactLookupResultType) {
     logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_REPORT_NUMBER_AS_NOT_SPAM);
-    Spam.get(this)
+    SpamComponent.get(this)
+        .spam()
         .reportNotSpamFromAfterCallNotification(
             number,
             getCountryIso(),
@@ -305,7 +309,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   private void assertDialogsEnabled() {
-    if (!Spam.get(this).isDialogEnabledForSpamNotification()) {
+    if (!SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
       throw new IllegalStateException(
           "Cannot start this activity with given action because dialogs are not enabled.");
     }
