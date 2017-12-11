@@ -141,7 +141,8 @@ public final class NewCallLogFragment extends Fragment
               checkDirty
                   ? refreshAnnotatedCallLogWorker.refreshWithDirtyCheck()
                   : refreshAnnotatedCallLogWorker.refreshWithoutDirtyCheck();
-          refreshAnnotatedCallLogListener.listen(future, unused -> {}, RuntimeException::new);
+          refreshAnnotatedCallLogListener.listen(
+              getContext(), future, unused -> {}, RuntimeException::new);
         };
     ThreadUtil.getUiThreadHandler().postDelayed(refreshAnnotatedCallLogRunnable, WAIT_MILLIS);
   }
