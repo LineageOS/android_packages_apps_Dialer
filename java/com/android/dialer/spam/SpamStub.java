@@ -19,9 +19,13 @@ package com.android.dialer.spam;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import javax.inject.Inject;
 
-/** Default implementation of SpamBindings. */
-public class SpamBindingsStub implements SpamBindings {
+/** Default implementation of Spam. */
+public class SpamStub implements Spam {
+
+  @Inject
+  public SpamStub() {}
 
   @Override
   public boolean isSpamEnabled() {

@@ -39,7 +39,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
-import com.android.dialer.spam.SpamBindings;
+import com.android.dialer.spam.SpamComponent;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.util.TelecomCallUtil;
@@ -141,13 +141,14 @@ public class CallList implements DialerCallDelegate {
     Trace.beginSection("checkSpam");
     call.addListener(new DialerCallListenerImpl(call));
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
-    if (Spam.get(context).isSpamEnabled()) {
+    if (SpamComponent.get(context).spam().isSpamEnabled()) {
       String number = TelecomCallUtil.getNumber(telecomCall);
-      Spam.get(context)
+      SpamComponent.get(context)
+          .spam()
           .checkSpamStatus(
               number,
               call.getCountryIso(),
-              new SpamBindings.Listener() {
+              new Spam.Listener() {
                 @Override
                 public void onComplete(boolean isSpam) {
                   boolean isIncomingCall =
@@ -262,33 +263,36 @@ public class CallList implements DialerCallDelegate {
   private void updateUserMarkedSpamStatus(
       final DialerCall call, final Context context, String number) {
 
-    Spam.get(context)
+    SpamComponent.get(context)
+        .spam()
         .checkUserMarkedNonSpamStatus(
             number,
             call.getCountryIso(),
-            new SpamBindings.Listener() {
+            new Spam.Listener() {
               @Override
               public void onComplete(boolean isInUserWhiteList) {
                 call.setIsInUserWhiteList(isInUserWhiteList);
               }
             });
 
-    Spam.get(context)
+    SpamComponent.get(context)
+        .spam()
         .checkGlobalSpamListStatus(
             number,
             call.getCountryIso(),
-            new SpamBindings.Listener() {
+            new Spam.Listener() {
               @Override
               public void onComplete(boolean isInGlobalSpamList) {
                 call.setIsInGlobalSpamList(isInGlobalSpamList);
               }
             });
 
-    Spam.get(context)
+    SpamComponent.get(context)
+        .spam()
         .checkUserMarkedSpamStatus(
             number,
             call.getCountryIso(),
-            new SpamBindings.Listener() {
+            new Spam.Listener() {
               @Override
               public void onComplete(boolean isInUserSpamList) {
                 call.setIsInUserSpamList(isInUserSpamList);

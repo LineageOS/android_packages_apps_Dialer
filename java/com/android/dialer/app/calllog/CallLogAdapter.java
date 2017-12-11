@@ -89,7 +89,7 @@ import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.Map;
@@ -667,7 +667,7 @@ public class CallLogAdapter extends GroupingListAdapter
       mContactInfoCache.start();
     }
     mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    mIsSpamEnabled = Spam.get(mActivity).isSpamEnabled();
+    mIsSpamEnabled = SpamComponent.get(mActivity).spam().isSpamEnabled();
     getDuo().registerListener(this);
     notifyDataSetChanged();
   }
@@ -862,7 +862,8 @@ public class CallLogAdapter extends GroupingListAdapter
               // Call log cards with only outgoing calls should never be displayed as spam.
               viewHolder.isSpam =
                   details.hasIncomingCalls()
-                      && Spam.get(mActivity)
+                      && SpamComponent.get(mActivity)
+                          .spam()
                           .checkSpamStatusSynchronous(viewHolder.number, viewHolder.countryIso);
               details.isSpam = viewHolder.isSpam;
             }
