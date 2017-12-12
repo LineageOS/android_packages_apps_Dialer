@@ -36,7 +36,7 @@ public abstract class DialerExecutorComponent {
 
   public <OutputT> UiListener<OutputT> createUiListener(
       FragmentManager fragmentManager, String taskId) {
-    return UiListener.create(uiExecutorService(), fragmentManager, taskId);
+    return UiListener.create(fragmentManager, taskId);
   }
 
   @NonUiParallel
