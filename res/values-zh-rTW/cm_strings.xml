@@ -45,8 +45,8 @@
   <string name="speed_dial_edit_title">編輯快速撥號 <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">請輸入數字</string>
   <string name="call_log_show_all_slots">所有 SIM 卡</string>
-  <string name="call_log_all_calls_header">所有通話</string>
-  <string name="call_log_blacklist_header">僅限已封鎖通話</string>
+  <string name="call_log_all_calls_header">所有來電</string>
+  <string name="call_log_blacklist_header">僅限已封鎖來電</string>
   <string name="call_log_blocked_empty">您沒有已封鎖的來電。</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">統計資料</string>

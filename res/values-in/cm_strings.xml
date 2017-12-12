@@ -101,6 +101,7 @@
   <string name="recentOutgoing_empty">Tidak ada panggilan keluar.</string>
   <!-- Text displayed when the call log is empty. -->
   <string name="recentCalls_empty">Log panggilan kosong</string>
+  <string name="calllog_search_hint">Cari log panggilan</string>
   <string name="no_call_log">Tidak ada log panggilan</string>
   <string name="clear">Bersihkan</string>
   <string name="description_clear_search">Bersihkan pencarian</string>
