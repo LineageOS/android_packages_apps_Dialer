@@ -16,34 +16,150 @@
 
 package com.android.dialer.spam;
 
-import android.content.Context;
-import java.util.Objects;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import com.android.dialer.logging.ContactLookupResult;
+import com.android.dialer.logging.ContactSource;
+import com.android.dialer.logging.ReportingLocation;
 
-/** Accessor for the spam bindings. */
-public class Spam {
+/** Allows the container application to mark calls as spam. */
+public interface Spam {
 
-  private static SpamBindings spamBindings;
+  boolean isSpamEnabled();
 
-  private Spam() {}
+  boolean isSpamNotificationEnabled();
 
-  public static SpamBindings get(Context context) {
-    Objects.requireNonNull(context);
-    if (spamBindings != null) {
-      return spamBindings;
-    }
+  boolean isDialogEnabledForSpamNotification();
 
-    Context application = context.getApplicationContext();
-    if (application instanceof SpamBindingsFactory) {
-      spamBindings = ((SpamBindingsFactory) application).newSpamBindings();
-    }
+  boolean isDialogReportSpamCheckedByDefault();
 
-    if (spamBindings == null) {
-      spamBindings = new SpamBindingsStub();
-    }
-    return spamBindings;
-  }
+  /** @return what percentage of aftercall notifications to show to the user */
+  int percentOfSpamNotificationsToShow();
 
-  public static void setForTesting(SpamBindings spamBindings) {
-    Spam.spamBindings = spamBindings;
+  int percentOfNonSpamNotificationsToShow();
+
+  /**
+   * Checks if the given number is suspected of being a spamer.
+   *
+   * @param number The phone number of the call.
+   * @param countryIso The country ISO of the call.
+   * @param listener The callback to be invoked after {@code Info} is fetched.
+   */
+  void checkSpamStatus(String number, String countryIso, Listener listener);
+
+  /**
+   * @param number The number to check if the number is in the user's white list (non spam list)
+   * @param countryIso The country ISO of the call.
+   * @param listener The callback to be invoked after {@code Info} is fetched.
+   */
+  void checkUserMarkedNonSpamStatus(
+      String number, @Nullable String countryIso, @NonNull Listener listener);
+
+  /**
+   * @param number The number to check if it is in user's spam list
+   * @param countryIso The country ISO of the call.
+   * @param listener The callback to be invoked after {@code Info} is fetched.
+   */
+  void checkUserMarkedSpamStatus(
+      String number, @Nullable String countryIso, @NonNull Listener listener);
+
+  /**
+   * @param number The number to check if it is in the global spam list
+   * @param countryIso The country ISO of the call.
+   * @param listener The callback to be invoked after {@code Info} is fetched.
+   */
+  void checkGlobalSpamListStatus(
+      String number, @Nullable String countryIso, @NonNull Listener listener);
+
+  /**
+   * Synchronously checks if the given number is suspected of being a spamer.
+   *
+   * @param number The phone number of the call.
+   * @param countryIso The country ISO of the call.
+   * @return True if the number is spam.
+   */
+  boolean checkSpamStatusSynchronous(String number, String countryIso);
+
+  /**
+   * Reports number as spam.
+   *
+   * @param number The number to be reported.
+   * @param countryIso The country ISO of the number.
+   * @param callType Whether the type of call is missed, voicemail, etc. Example of this is {@link
+   *     android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+   * @param from Where in the dialer this was reported from. Must be one of {@link
+   *     com.android.dialer.logging.ReportingLocation}.
+   * @param contactLookupResultType The result of the contact lookup for this phone number. Must be
+   *     one of {@link com.android.dialer.logging.ContactLookupResult}.
+   */
+  void reportSpamFromAfterCallNotification(
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactLookupResult.Type contactLookupResultType);
+
+  /**
+   * Reports number as spam.
+   *
+   * @param number The number to be reported.
+   * @param countryIso The country ISO of the number.
+   * @param callType Whether the type of call is missed, voicemail, etc. Example of this is {@link
+   *     android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+   * @param from Where in the dialer this was reported from. Must be one of {@link
+   *     com.android.dialer.logging.ReportingLocation}.
+   * @param contactSourceType If we have cached contact information for the phone number, this
+   *     indicates its source. Must be one of {@link com.android.dialer.logging.ContactSource}.
+   */
+  void reportSpamFromCallHistory(
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactSource.Type contactSourceType);
+
+  /**
+   * Reports number as not spam.
+   *
+   * @param number The number to be reported.
+   * @param countryIso The country ISO of the number.
+   * @param callType Whether the type of call is missed, voicemail, etc. Example of this is {@link
+   *     android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+   * @param from Where in the dialer this was reported from. Must be one of {@link
+   *     com.android.dialer.logging.ReportingLocation}.
+   * @param contactLookupResultType The result of the contact lookup for this phone number. Must be
+   *     one of {@link com.android.dialer.logging.ContactLookupResult}.
+   */
+  void reportNotSpamFromAfterCallNotification(
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactLookupResult.Type contactLookupResultType);
+
+  /**
+   * Reports number as not spam.
+   *
+   * @param number The number to be reported.
+   * @param countryIso The country ISO of the number.
+   * @param callType Whether the type of call is missed, voicemail, etc. Example of this is {@link
+   *     android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+   * @param from Where in the dialer this was reported from. Must be one of {@link
+   *     com.android.dialer.logging.ReportingLocation}.
+   * @param contactSourceType If we have cached contact information for the phone number, this
+   *     indicates its source. Must be one of {@link com.android.dialer.logging.ContactSource}.
+   */
+  void reportNotSpamFromCallHistory(
+      String number,
+      String countryIso,
+      int callType,
+      ReportingLocation.Type from,
+      ContactSource.Type contactSourceType);
+
+  /** Callback to be invoked when data is fetched. */
+  interface Listener {
+
+    /** Called when data is fetched. */
+    void onComplete(boolean isSpam);
   }
 }

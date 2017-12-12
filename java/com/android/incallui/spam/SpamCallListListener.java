@@ -47,7 +47,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
-import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
@@ -205,7 +205,7 @@ public class SpamCallListListener implements CallList.Listener {
 
   /** Determines if the after call notification should be shown for the specified call. */
   private boolean shouldShowAfterCallNotification(DialerCall call) {
-    if (!Spam.get(context).isSpamNotificationEnabled()) {
+    if (!SpamComponent.get(context).spam().isSpamNotificationEnabled()) {
       return false;
     }
 
@@ -304,7 +304,7 @@ public class SpamCallListListener implements CallList.Listener {
 
   private boolean shouldThrottleSpamNotification() {
     int randomNumber = random.nextInt(100);
-    int thresholdForShowing = Spam.get(context).percentOfSpamNotificationsToShow();
+    int thresholdForShowing = SpamComponent.get(context).spam().percentOfSpamNotificationsToShow();
     if (thresholdForShowing == 0) {
       LogUtil.d(
           "SpamCallListListener.shouldThrottleSpamNotification",
@@ -327,7 +327,8 @@ public class SpamCallListListener implements CallList.Listener {
 
   private boolean shouldThrottleNonSpamNotification() {
     int randomNumber = random.nextInt(100);
-    int thresholdForShowing = Spam.get(context).percentOfNonSpamNotificationsToShow();
+    int thresholdForShowing =
+        SpamComponent.get(context).spam().percentOfNonSpamNotificationsToShow();
     if (thresholdForShowing == 0) {
       LogUtil.d(
           "SpamCallListListener.shouldThrottleNonSpamNotification",
@@ -419,7 +420,7 @@ public class SpamCallListListener implements CallList.Listener {
    */
   private PendingIntent createBlockReportSpamPendingIntent(DialerCall call) {
     String action = SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM;
-    return Spam.get(context).isDialogEnabledForSpamNotification()
+    return SpamComponent.get(context).spam().isDialogEnabledForSpamNotification()
         ? createActivityPendingIntent(call, action)
         : createServicePendingIntent(call, action);
   }
@@ -430,7 +431,7 @@ public class SpamCallListListener implements CallList.Listener {
    */
   private PendingIntent createNotSpamPendingIntent(DialerCall call) {
     String action = SpamNotificationActivity.ACTION_MARK_NUMBER_AS_NOT_SPAM;
-    return Spam.get(context).isDialogEnabledForSpamNotification()
+    return SpamComponent.get(context).spam().isDialogEnabledForSpamNotification()
         ? createActivityPendingIntent(call, action)
         : createServicePendingIntent(call, action);
   }

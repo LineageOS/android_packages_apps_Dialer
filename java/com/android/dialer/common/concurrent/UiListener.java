@@ -18,6 +18,7 @@ package com.android.dialer.common.concurrent;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -29,7 +30,6 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import java.util.concurrent.Executor;
 
 /**
  * A headless fragment for use in UI components that interact with ListenableFutures.
@@ -53,19 +53,17 @@ import java.util.concurrent.Executor;
  *
  *   private void userDidSomething() {
  *     ListenableFuture&lt;MyOutputType&gt; future = callSomeMethodReturningListenableFuture(input);
- *     uiListener.listen(future, this::onSuccess, this::onFailure);
+ *     uiListener.listen(this, future, this::onSuccess, this::onFailure);
  *   }
  * }
  * </pre></code>
  */
 public class UiListener<OutputT> extends Fragment {
 
-  private Executor uiThreadExecutor;
   private CallbackWrapper<OutputT> callbackWrapper;
 
   @MainThread
-  static <OutputT> UiListener<OutputT> create(
-      Executor uiThreadExecutor, FragmentManager fragmentManager, String taskId) {
+  static <OutputT> UiListener<OutputT> create(FragmentManager fragmentManager, String taskId) {
     @SuppressWarnings("unchecked")
     UiListener<OutputT> uiListener =
         (UiListener<OutputT>) fragmentManager.findFragmentByTag(taskId);
@@ -73,7 +71,6 @@ public class UiListener<OutputT> extends Fragment {
     if (uiListener == null) {
       LogUtil.i("UiListener.create", "creating new UiListener for " + taskId);
       uiListener = new UiListener<>();
-      uiListener.uiThreadExecutor = uiThreadExecutor;
       fragmentManager.beginTransaction().add(uiListener, taskId).commit();
     }
     return uiListener;
@@ -87,12 +84,16 @@ public class UiListener<OutputT> extends Fragment {
    */
   @MainThread
   public void listen(
+      Context context,
       @NonNull ListenableFuture<OutputT> future,
       @NonNull SuccessListener<OutputT> successListener,
       @NonNull FailureListener failureListener) {
     callbackWrapper =
         new CallbackWrapper<>(Assert.isNotNull(successListener), Assert.isNotNull(failureListener));
-    Futures.addCallback(Assert.isNotNull(future), callbackWrapper, uiThreadExecutor);
+    Futures.addCallback(
+        Assert.isNotNull(future),
+        callbackWrapper,
+        DialerExecutorComponent.get(context).uiExecutorService());
   }
 
   private static class CallbackWrapper<OutputT> implements FutureCallback<OutputT> {
