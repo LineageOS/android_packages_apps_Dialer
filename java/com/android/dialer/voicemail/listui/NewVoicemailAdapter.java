@@ -56,7 +56,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     int VOICEMAIL_ENTRY = 2;
   }
 
-  private final Cursor cursor;
+  private Cursor cursor;
   private final Clock clock;
 
   /** {@link Integer#MAX_VALUE} when the "Today" header should not be displayed. */
@@ -127,6 +127,11 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     mediaPlayer.setOnCompletionListener(onCompletionListener);
     mediaPlayer.setOnPreparedListener(onPreparedListener);
     mediaPlayer.setOnErrorListener(onErrorListener);
+  }
+
+  public void updateCursor(Cursor updatedCursor) {
+    this.cursor = updatedCursor;
+    notifyDataSetChanged();
   }
 
   @Override
@@ -714,7 +719,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       // returned when currentlyExpandedViewHolderId = -1 (viewholder was collapsed)
       LogUtil.i(
           "NewVoicemailAdapter.getCurrentlyExpandedViewHolder",
-          "no view holder found in newVoicemailViewHolderArrayMap size:%d for %d",
+          "no view holder found in hashmap size:%d for %d",
           newVoicemailViewHolderArrayMap.size(),
           currentlyExpandedViewHolderId);
       // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
@@ -748,5 +753,35 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       return RowType.HEADER;
     }
     return RowType.VOICEMAIL_ENTRY;
+  }
+
+  /**
+   * This will be called once the voicemail that was attempted to be played (and was not locally
+   * available) was downloaded from the server. However it is possible that by the time the download
+   * was completed, the view holder was collapsed. In that case we shouldn't play the voicemail.
+   */
+  public void checkAndPlayVoicemail() {
+    LogUtil.i(
+        "NewVoicemailAdapter.checkAndPlayVoicemail",
+        "expandedViewHolder:%d, inViewHolderSet:%b, MPRequestToDownload:%s",
+        currentlyExpandedViewHolderId,
+        isCurrentlyExpandedViewHolderInViewHolderSet(),
+        String.valueOf(mediaPlayer.getVoicemailRequestedToDownload()));
+
+    NewVoicemailViewHolder currentlyExpandedViewHolder = getCurrentlyExpandedViewHolder();
+    if (currentlyExpandedViewHolderId != -1
+        && isCurrentlyExpandedViewHolderInViewHolderSet()
+        && currentlyExpandedViewHolder != null
+        // Used to differentiate underlying table changes from voicemail downloads and other changes
+        // (e.g delete)
+        && mediaPlayer.getVoicemailRequestedToDownload() != null
+        && (mediaPlayer
+            .getVoicemailRequestedToDownload()
+            .equals(currentlyExpandedViewHolder.getViewHolderVoicemailUri()))) {
+      currentlyExpandedViewHolder.clickPlayButtonOfViewHoldersMediaPlayerView(
+          currentlyExpandedViewHolder);
+    } else {
+      LogUtil.i("NewVoicemailAdapter.checkAndPlayVoicemail", "not playing downloaded voicemail");
+    }
   }
 }
