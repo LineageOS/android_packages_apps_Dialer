@@ -53,7 +53,8 @@ public abstract class NewBubbleInfo {
         .setPrimaryColor(bubbleInfo.getPrimaryColor())
         .setPrimaryIcon(bubbleInfo.getPrimaryIcon())
         .setStartingYPosition(bubbleInfo.getStartingYPosition())
-        .setActions(bubbleInfo.getActions());
+        .setActions(bubbleInfo.getActions())
+        .setAvatar(bubbleInfo.getAvatar());
   }
 
   /** Builder for {@link NewBubbleInfo} */
