@@ -92,8 +92,18 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
       int position,
       int currentlyExpandedViewHolderId) {
 
+    LogUtil.i(
+        "NewVoicemailViewHolder.bindViewHolderValuesFromAdapter",
+        "view holder at pos:%d, adapterPos:%d, cursorPos:%d, cursorSize:%d",
+        position,
+        getAdapterPosition(),
+        cursor.getPosition(),
+        cursor.getCount());
+
     voicemailEntryOfViewHolder = VoicemailCursorLoader.toVoicemailEntry(cursor);
     viewHolderId = voicemailEntryOfViewHolder.id();
+    LogUtil.i(
+        "NewVoicemailViewHolder.bindViewHolderValuesFromAdapter", "viewholderId:%d", viewHolderId);
     viewHolderVoicemailUri = Uri.parse(voicemailEntryOfViewHolder.voicemailUri());
     primaryTextView.setText(
         VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntryOfViewHolder));

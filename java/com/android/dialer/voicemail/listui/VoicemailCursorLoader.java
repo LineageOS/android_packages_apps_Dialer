@@ -97,4 +97,8 @@ final class VoicemailCursorLoader extends CursorLoader {
         .setCallType(cursor.getInt(CALL_TYPE))
         .build();
   }
+
+  static long getTimestamp(Cursor cursor) {
+    return cursor.getLong(TIMESTAMP);
+  }
 }
