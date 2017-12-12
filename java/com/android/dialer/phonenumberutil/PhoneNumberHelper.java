@@ -29,7 +29,6 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.SparseIntArray;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -46,71 +45,6 @@ public class PhoneNumberHelper {
   private static final String TAG = "PhoneNumberUtil";
   private static final Set<String> LEGACY_UNKNOWN_NUMBERS =
       new HashSet<>(Arrays.asList("-1", "-2", "-3"));
-
-  /** The phone keypad letter mapping (see ITU E.161 or ISO/IEC 9995-8.) */
-  private static final SparseIntArray KEYPAD_MAP = new SparseIntArray();
-
-  static {
-    KEYPAD_MAP.put('a', '2');
-    KEYPAD_MAP.put('b', '2');
-    KEYPAD_MAP.put('c', '2');
-    KEYPAD_MAP.put('A', '2');
-    KEYPAD_MAP.put('B', '2');
-    KEYPAD_MAP.put('C', '2');
-
-    KEYPAD_MAP.put('d', '3');
-    KEYPAD_MAP.put('e', '3');
-    KEYPAD_MAP.put('f', '3');
-    KEYPAD_MAP.put('D', '3');
-    KEYPAD_MAP.put('E', '3');
-    KEYPAD_MAP.put('F', '3');
-
-    KEYPAD_MAP.put('g', '4');
-    KEYPAD_MAP.put('h', '4');
-    KEYPAD_MAP.put('i', '4');
-    KEYPAD_MAP.put('G', '4');
-    KEYPAD_MAP.put('H', '4');
-    KEYPAD_MAP.put('I', '4');
-
-    KEYPAD_MAP.put('j', '5');
-    KEYPAD_MAP.put('k', '5');
-    KEYPAD_MAP.put('l', '5');
-    KEYPAD_MAP.put('J', '5');
-    KEYPAD_MAP.put('K', '5');
-    KEYPAD_MAP.put('L', '5');
-
-    KEYPAD_MAP.put('m', '6');
-    KEYPAD_MAP.put('n', '6');
-    KEYPAD_MAP.put('o', '6');
-    KEYPAD_MAP.put('M', '6');
-    KEYPAD_MAP.put('N', '6');
-    KEYPAD_MAP.put('O', '6');
-
-    KEYPAD_MAP.put('p', '7');
-    KEYPAD_MAP.put('q', '7');
-    KEYPAD_MAP.put('r', '7');
-    KEYPAD_MAP.put('s', '7');
-    KEYPAD_MAP.put('P', '7');
-    KEYPAD_MAP.put('Q', '7');
-    KEYPAD_MAP.put('R', '7');
-    KEYPAD_MAP.put('S', '7');
-
-    KEYPAD_MAP.put('t', '8');
-    KEYPAD_MAP.put('u', '8');
-    KEYPAD_MAP.put('v', '8');
-    KEYPAD_MAP.put('T', '8');
-    KEYPAD_MAP.put('U', '8');
-    KEYPAD_MAP.put('V', '8');
-
-    KEYPAD_MAP.put('w', '9');
-    KEYPAD_MAP.put('x', '9');
-    KEYPAD_MAP.put('y', '9');
-    KEYPAD_MAP.put('z', '9');
-    KEYPAD_MAP.put('W', '9');
-    KEYPAD_MAP.put('X', '9');
-    KEYPAD_MAP.put('Y', '9');
-    KEYPAD_MAP.put('Z', '9');
-  }
 
   /** Returns true if it is possible to place a call to the given number. */
   public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
@@ -129,59 +63,29 @@ public class PhoneNumberHelper {
    *   <li>their corresponding raw numbers are both global phone numbers (i.e., they can be accepted
    *       by {@link PhoneNumberUtils#isGlobalPhoneNumber(String)}) and {@link
    *       PhoneNumberUtils#compare(String, String)} deems them as "identical enough"; OR
-   *   <li>neither of the raw numbers is a global phone number and they are identical.
+   *   <li>at least one of the raw numbers is not a global phone number and the two raw numbers are
+   *       exactly the same.
    * </ul>
    *
-   * See {@link #convertAndStrip(String)} for how a raw number is obtained.
+   * The raw number of a phone number is obtained by first translating any alphabetic letters
+   * ([A-Za-z]) into the equivalent numeric digits and then removing all separators. See {@link
+   * PhoneNumberUtils#convertKeypadLettersToDigits(String)} and {@link
+   * PhoneNumberUtils#stripSeparators(String)}.
    */
   public static boolean compare(@Nullable String number1, @Nullable String number2) {
     if (number1 == null || number2 == null) {
       return Objects.equals(number1, number2);
     }
 
-    String rawNumber1 = convertAndStrip(number1);
-    String rawNumber2 = convertAndStrip(number2);
+    String rawNumber1 =
+        PhoneNumberUtils.stripSeparators(PhoneNumberUtils.convertKeypadLettersToDigits(number1));
+    String rawNumber2 =
+        PhoneNumberUtils.stripSeparators(PhoneNumberUtils.convertKeypadLettersToDigits(number2));
 
-    boolean isGlobalPhoneNumber1 = PhoneNumberUtils.isGlobalPhoneNumber(rawNumber1);
-    boolean isGlobalPhoneNumber2 = PhoneNumberUtils.isGlobalPhoneNumber(rawNumber2);
-
-    if (isGlobalPhoneNumber1 && isGlobalPhoneNumber2) {
-      return PhoneNumberUtils.compare(rawNumber1, rawNumber2);
-    }
-    if (!isGlobalPhoneNumber1 && !isGlobalPhoneNumber2) {
-      return rawNumber1.equals(rawNumber2);
-    }
-    return false;
-  }
-
-  /**
-   * Translating any alphabetic letters ([A-Za-z]) in the given phone number into the equivalent
-   * numeric digits and then removing all separators. The caller should ensure the number passed to
-   * this method is not null.
-   */
-  private static String convertAndStrip(@NonNull String number) {
-    int len = number.length();
-    if (len == 0) {
-      return number;
-    }
-
-    StringBuilder ret = new StringBuilder(len);
-    for (int i = 0; i < len; i++) {
-      char c = number.charAt(i);
-
-      // If the char isn't in KEYPAD_MAP, leave it alone for now.
-      c = (char) KEYPAD_MAP.get(c, c);
-
-      // Append the char to the result if it's a digit or non-separator.
-      int digit = Character.digit(c, 10);
-      if (digit != -1) {
-        ret.append(digit);
-      } else if (PhoneNumberUtils.isNonSeparator(c)) {
-        ret.append(c);
-      }
-    }
-
-    return ret.toString();
+    return PhoneNumberUtils.isGlobalPhoneNumber(rawNumber1)
+            && PhoneNumberUtils.isGlobalPhoneNumber(rawNumber2)
+        ? PhoneNumberUtils.compare(rawNumber1, rawNumber2)
+        : rawNumber1.equals(rawNumber2);
   }
 
   /**
