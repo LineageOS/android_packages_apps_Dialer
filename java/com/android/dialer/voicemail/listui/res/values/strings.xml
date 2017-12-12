@@ -27,4 +27,11 @@
 
   <!-- String used to display the default staring point of a voicemail-->
   <string name="voicemail_media_player_inital_start_position" translatable="false">00:00</string>
+
+  <!-- Header in voicemail tab to group calls from the current day.  [CHAR LIMIT=30] -->
+  <string name="new_voicemail_header_today">Today</string>
+
+  <!-- Header in voicemail tab to group calls from before the current day.  [CHAR LIMIT=30] -->
+  <string name="new_voicemail_header_older">Older</string>
+
 </resources>
