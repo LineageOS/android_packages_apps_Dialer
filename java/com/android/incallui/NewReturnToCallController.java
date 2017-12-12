@@ -205,7 +205,13 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   private void startContactInfoSearch() {
-    DialerCall dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    DialerCall dialerCall = CallList.getInstance().getIncomingCall();
+    if (dialerCall == null) {
+      dialerCall = CallList.getInstance().getOutgoingCall();
+    }
+    if (dialerCall == null) {
+      dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    }
     if (dialerCall != null) {
       contactInfoCache.findInfo(
           dialerCall, false /* isIncoming */, new ReturnToCallContactInfoCacheCallback(this));
