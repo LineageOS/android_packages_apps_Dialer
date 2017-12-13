@@ -22,7 +22,6 @@
     android:paddingTop="@dimen/voicemail_media_player_padding_top"
     android:orientation="vertical">
 
-  <!-- TODO(uabdullah): Make visibility gone (once implement fetching from vm server) -->
   <TextView
       android:id="@+id/playback_state_text"
       android:layout_width="match_parent"

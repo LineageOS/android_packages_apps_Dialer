@@ -32,6 +32,7 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
+import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
@@ -260,8 +261,13 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   @WorkerThread
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    // TODO(zachh): Implementation.
-    return new ContentValues();
+    return new RowCombiner(individualRowsSortedByTimestampDesc)
+        .useMostRecentString(AnnotatedCallLog.NAME)
+        .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
+        .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
+        .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
+        .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
+        .combine();
   }
 
   @MainThread
@@ -434,7 +440,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
       PhoneLookupInfo phoneLookupInfo = existingInfo.get(id);
       // Existing info might be missing if data was cleared or for other reasons.
       if (phoneLookupInfo != null) {
-        contentValues.put(AnnotatedCallLog.NAME, selectName(phoneLookupInfo));
+        updateContentValues(contentValues, phoneLookupInfo);
       }
     }
   }
@@ -474,17 +480,17 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
          * mutations from PhoneLookupHistory; in this case "John" would be copied during
          * populateInserts() and there wouldn't be further updates needed here.
          */
-        contentValuesToInsert.put(AnnotatedCallLog.NAME, selectName(phoneLookupInfo));
+        updateContentValues(contentValuesToInsert, phoneLookupInfo);
         continue;
       }
       ContentValues contentValuesToUpdate = mutations.getUpdates().get(id);
       if (contentValuesToUpdate != null) {
-        contentValuesToUpdate.put(AnnotatedCallLog.NAME, selectName(phoneLookupInfo));
+        updateContentValues(contentValuesToUpdate, phoneLookupInfo);
         continue;
       }
       // Else this row is not already scheduled for insert or update and we need to schedule it.
       ContentValues contentValues = new ContentValues();
-      contentValues.put(AnnotatedCallLog.NAME, selectName(phoneLookupInfo));
+      updateContentValues(contentValues, phoneLookupInfo);
       mutations.getUpdates().put(id, contentValues);
     }
   }
@@ -525,8 +531,17 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     return normalizedNumbersToDelete;
   }
 
-  private static String selectName(PhoneLookupInfo phoneLookupInfo) {
-    return PhoneLookupSelector.selectName(phoneLookupInfo);
+  private static void updateContentValues(
+      ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
+    contentValues.put(AnnotatedCallLog.NAME, PhoneLookupSelector.selectName(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.PHOTO_URI, PhoneLookupSelector.selectPhotoUri(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.PHOTO_ID, PhoneLookupSelector.selectPhotoId(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.LOOKUP_URI, PhoneLookupSelector.selectLookupUri(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.NUMBER_TYPE_LABEL, PhoneLookupSelector.selectNumberLabel(phoneLookupInfo));
   }
 
   private static Uri numberUri(String number) {

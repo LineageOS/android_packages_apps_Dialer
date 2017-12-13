@@ -42,10 +42,9 @@ public class AnnotatedCallLogContract {
     String TIMESTAMP = "timestamp";
 
     /**
-     * Copied from {@link android.provider.CallLog.Calls#CACHED_NAME}.
-     *
-     * <p>This is exactly how it should appear to the user. If the user's locale or name display
-     * preferences change, this column should be rewritten.
+     * The name (which may be a person's name or business name, but not a number) formatted exactly
+     * as it should appear to the user. If the user's locale or name display preferences change,
+     * this column should be rewritten.
      *
      * <p>Type: TEXT
      */
@@ -61,28 +60,29 @@ public class AnnotatedCallLogContract {
     String NUMBER = "number";
 
     /**
-     * Copied from {@link android.provider.CallLog.Calls#CACHED_FORMATTED_NUMBER}.
+     * The number formatted as it should be displayed to the user. Note that it may not always be
+     * displayed, for example if the number has a corresponding person or business name.
      *
      * <p>Type: TEXT
      */
     String FORMATTED_NUMBER = "formatted_number";
 
     /**
-     * Copied from {@link android.provider.CallLog.Calls#CACHED_PHOTO_URI}.
+     * A photo URI for the contact to display in the call log list view.
      *
      * <p>TYPE: TEXT
      */
     String PHOTO_URI = "photo_uri";
 
     /**
-     * Copied from {@link android.provider.CallLog.Calls#CACHED_PHOTO_ID}.
+     * A photo ID (from the contacts provider) for the contact to display in the call log list view.
      *
      * <p>Type: INTEGER (long)
      */
     String PHOTO_ID = "photo_id";
 
     /**
-     * Copied from {@link android.provider.CallLog.Calls#CACHED_LOOKUP_URI}.
+     * The contacts provider lookup URI for the contact associated with the call.
      *
      * <p>TYPE: TEXT
      */
