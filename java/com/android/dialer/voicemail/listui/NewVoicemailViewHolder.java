@@ -187,6 +187,8 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         String.valueOf(viewHolderVoicemailUri));
     transcriptionTextView.setMaxLines(1);
     isViewHolderExpanded = false;
+
+    mediaPlayerView.reset();
     mediaPlayerView.setVisibility(GONE);
   }
 
@@ -331,6 +333,23 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
   public Uri getViewHolderVoicemailUri() {
     return viewHolderVoicemailUri;
+  }
+
+  public void clickPlayButtonOfViewHoldersMediaPlayerView(
+      NewVoicemailViewHolder expandedViewHolder) {
+    LogUtil.i(
+        "NewVoicemailViewHolder.clickPlayButtonOfViewHoldersMediaPlayerView",
+        "expandedViewHolderID:%d",
+        expandedViewHolder.getViewHolderId());
+
+    Assert.checkArgument(
+        mediaPlayerView.getVoicemailUri().equals(expandedViewHolder.getViewHolderVoicemailUri()));
+    Assert.checkArgument(
+        expandedViewHolder.getViewHolderVoicemailUri().equals(getViewHolderVoicemailUri()));
+    Assert.checkArgument(
+        mediaPlayerView.getVisibility() == View.VISIBLE,
+        "the media player must be visible for viewholder id:%d, before we attempt to play");
+    mediaPlayerView.clickPlayButton();
   }
 
   interface NewVoicemailViewHolderListener {
