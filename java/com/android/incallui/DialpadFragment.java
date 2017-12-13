@@ -202,15 +202,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     mDtmfDialerField.setText(PhoneNumberUtilsCompat.createTtsSpannable(text));
   }
 
-  @Override
-  public void setVisible(boolean on) {
-    if (on) {
-      getView().setVisibility(View.VISIBLE);
-    } else {
-      getView().setVisibility(View.INVISIBLE);
-    }
-  }
-
   /** Starts the slide up animation for the Dialpad keys when the Dialpad is revealed. */
   public void animateShowDialpad() {
     final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);

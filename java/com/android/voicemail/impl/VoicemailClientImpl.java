@@ -130,7 +130,7 @@ public class VoicemailClientImpl implements VoicemailClient {
     }
 
     TranscriptionConfigProvider provider = new TranscriptionConfigProvider(context);
-    if (!provider.isVoicemailTranscriptionEnabled()) {
+    if (!provider.isVoicemailTranscriptionAvailable()) {
       LogUtil.i(
           "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "feature disabled by config");
       return false;

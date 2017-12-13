@@ -17,12 +17,15 @@
 package com.android.dialer.voicemail.listui;
 
 import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.VoicemailContract;
+import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -45,7 +48,7 @@ import java.util.Locale;
 /**
  * The view of the media player that is visible when a {@link NewVoicemailViewHolder} is expanded.
  */
-public class NewVoicemailMediaPlayerView extends LinearLayout {
+public final class NewVoicemailMediaPlayerView extends LinearLayout {
 
   private ImageButton playButton;
   private ImageButton pauseButton;
@@ -55,6 +58,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   private TextView currentSeekBarPosition;
   private SeekBar seekBarView;
   private TextView totalDurationView;
+  private TextView voicemailLoadingStatusView;
   private Uri voicemailUri;
   private FragmentManager fragmentManager;
   private NewVoicemailViewHolder newVoicemailViewHolder;
@@ -86,6 +90,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
     phoneButton = findViewById(R.id.phoneButton);
     deleteButton = findViewById(R.id.deleteButton);
     totalDurationView = findViewById(R.id.playback_seek_total_duration);
+    voicemailLoadingStatusView = findViewById(R.id.playback_state_text);
   }
 
   private void setupListenersForMediaPlayerButtons() {
@@ -100,6 +105,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
   public void reset() {
     LogUtil.i("NewVoicemailMediaPlayer.reset", "the uri for this is " + voicemailUri);
     voicemailUri = null;
+    voicemailLoadingStatusView.setVisibility(GONE);
   }
 
   /**
@@ -261,6 +267,16 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
+  /**
+   * Attempts to imitate clicking the play button. This is useful for when we the user attempted to
+   * play a voicemail, but the media player didn't start playing till the voicemail was downloaded
+   * from the server. However once we have the voicemail downloaded, we want to start playing, so as
+   * to make it seem like that this is a continuation of the users initial play button click.
+   */
+  public final void clickPlayButton() {
+    playButtonListener.onClick(null);
+  }
+
   private final View.OnClickListener playButtonListener =
       new View.OnClickListener() {
         @Override
@@ -268,7 +284,8 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
           LogUtil.i(
               "NewVoicemailMediaPlayer.playButtonListener",
               "play button for voicemailUri: %s",
-              voicemailUri.toString());
+              String.valueOf(voicemailUri));
+
           if (mediaPlayer.getLastPausedVoicemailUri() != null
               && mediaPlayer
                   .getLastPausedVoicemailUri()
@@ -350,10 +367,83 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
                 + getContext());
       }
     } else {
-      // TODO(a bug): Add logic for downloading voicemail content from the server.
       LogUtil.i(
           "NewVoicemailMediaPlayer.prepareVoicemailForMediaPlayer", "need to download content");
+      // Important to set since it allows the adapter to differentiate when to start playing the
+      // voicemail, after it's downloaded.
+      mediaPlayer.setVoicemailRequestedToDownload(uri);
+      voicemailLoadingStatusView.setVisibility(VISIBLE);
+      sendIntentToDownloadVoicemail(uri);
     }
+  }
+
+  private void sendIntentToDownloadVoicemail(Uri uri) {
+    LogUtil.i("NewVoicemailMediaPlayer.sendIntentToDownloadVoicemail", "uri:%s", uri.toString());
+    // Send voicemail fetch request.
+    Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, uri);
+
+    Worker<Pair<Context, Uri>, Pair<String, Uri>> getVoicemailSourcePackage =
+        this::queryVoicemailSourcePackage;
+    SuccessListener<Pair<String, Uri>> checkVoicemailHasSourcePackageCallBack = this::sendIntent;
+
+    DialerExecutorComponent.get(getContext())
+        .dialerExecutorFactory()
+        .createUiTaskBuilder(fragmentManager, "lookup_voicemail_pkg", getVoicemailSourcePackage)
+        .onSuccess(checkVoicemailHasSourcePackageCallBack)
+        .build()
+        .executeSerial(new Pair<>(getContext(), voicemailUri));
+  }
+
+  private void sendIntent(Pair<String, Uri> booleanUriPair) {
+    String sourcePackage = booleanUriPair.first;
+    Uri uri = booleanUriPair.second;
+    LogUtil.i(
+        "NewVoicemailMediaPlayer.sendIntent",
+        "srcPkg:%s, uri:%%s",
+        sourcePackage,
+        String.valueOf(uri));
+    Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, uri);
+    intent.setPackage(sourcePackage);
+    voicemailLoadingStatusView.setVisibility(VISIBLE);
+    getContext().sendBroadcast(intent);
+  }
+
+  @Nullable
+  private Pair<String, Uri> queryVoicemailSourcePackage(Pair<Context, Uri> contextUriPair) {
+    LogUtil.enterBlock("NewVoicemailMediaPlayer.queryVoicemailSourcePackage");
+    Context context = contextUriPair.first;
+    Uri uri = contextUriPair.second;
+    String sourcePackage;
+    try (Cursor cursor =
+        context
+            .getContentResolver()
+            .query(uri, new String[] {Voicemails.SOURCE_PACKAGE}, null, null, null)) {
+
+      if (!hasContent(cursor)) {
+        LogUtil.e(
+            "NewVoicemailMediaPlayer.queryVoicemailSourcePackage",
+            "uri: %s does not return a SOURCE_PACKAGE",
+            uri.toString());
+        sourcePackage = null;
+      } else {
+        sourcePackage = cursor.getString(0);
+        LogUtil.i(
+            "NewVoicemailMediaPlayer.queryVoicemailSourcePackage",
+            "uri: %s has a SOURCE_PACKAGE: %s",
+            uri.toString(),
+            sourcePackage);
+      }
+      LogUtil.i(
+          "NewVoicemailMediaPlayer.queryVoicemailSourcePackage",
+          "uri: %s has a SOURCE_PACKAGE: %s",
+          uri.toString(),
+          sourcePackage);
+    }
+    return new Pair<>(sourcePackage, uri);
+  }
+
+  private boolean hasContent(Cursor cursor) {
+    return cursor != null && cursor.moveToFirst();
   }
 
   private final View.OnClickListener speakerButtonListener =
@@ -386,6 +476,21 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
               "NewVoicemailMediaPlayer.deleteButtonListener",
               "delete voicemailUri %s",
               voicemailUri.toString());
+          // TODO(uabdullah): This will be removed in cl/177404259. It only sets the has_content to
+          // 0, to allow the annotated call log to change, and refresh the fragment. This is used to
+          // demo and test the downloading of voicemails from the server.
+          ContentValues contentValues = new ContentValues();
+          contentValues.put("has_content", 0);
+
+          try {
+            getContext().getContentResolver().update(voicemailUri, contentValues, "type = 4", null);
+          } catch (Exception e) {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.deleteButtonListener",
+                "update has content of voicemailUri %s caused an error: %s",
+                voicemailUri.toString(),
+                e.toString());
+          }
         }
       };
 
@@ -401,6 +506,7 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
 
     playButton.setVisibility(GONE);
     pauseButton.setVisibility(VISIBLE);
+    voicemailLoadingStatusView.setVisibility(GONE);
 
     Assert.checkArgument(
         mp.equals(mediaPlayer), "there should only be one instance of a media player");
@@ -509,10 +615,5 @@ public class NewVoicemailMediaPlayerView extends LinearLayout {
       minutes = 99;
     }
     return String.format(Locale.US, "%02d:%02d", minutes, seconds);
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  void setFragmentManager(FragmentManager fragmentManager) {
-    this.fragmentManager = fragmentManager;
   }
 }
