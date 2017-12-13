@@ -68,6 +68,9 @@ public class DuoStub implements Duo {
     Assert.isNotNull(numbers);
   }
 
+  @Override
+  public void reloadReachability(@NonNull Context context) {}
+
   @MainThread
   @Override
   public Intent getIntent(@NonNull Context context, @NonNull String number) {
