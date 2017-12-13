@@ -47,11 +47,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -228,6 +231,8 @@ public class NewBubble {
     if (isUserAction) {
       logBasicOrCallImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
     }
+    setPrimaryButtonAccessibilityAction(
+        context.getString(R.string.a11y_bubble_primary_button_collapse_action));
     viewHolder.setDrawerVisibility(View.INVISIBLE);
     View expandedView = viewHolder.getExpandedView();
     expandedView
@@ -310,6 +315,8 @@ public class NewBubble {
     if (isUserAction && collapseEndAction == CollapseEnd.NOTHING) {
       logBasicOrCallImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
     }
+    setPrimaryButtonAccessibilityAction(
+        context.getString(R.string.a11y_bubble_primary_button_expand_action));
     // Animate expanded view to move from its position to above primary button and hide
     collapseAnimation =
         expandedView
@@ -447,6 +454,9 @@ public class NewBubble {
 
     viewHolder.setChildClickable(true);
     visibility = Visibility.ENTERING;
+
+    setPrimaryButtonAccessibilityAction(
+        context.getString(R.string.a11y_bubble_primary_button_expand_action));
 
     // Show bubble animation: scale the whole bubble to 1, and change avatar+icon's alpha to 1
     ObjectAnimator scaleXAnimator =
@@ -726,6 +736,11 @@ public class NewBubble {
     exitAnimatorSet.addListener(
         new AnimatorListenerAdapter() {
           @Override
+          public void onAnimationStart(Animator animation) {
+            viewHolder.getPrimaryButton().setAccessibilityDelegate(null);
+          }
+
+          @Override
           public void onAnimationEnd(Animator animation) {
             afterHiding.run();
           }
@@ -793,6 +808,7 @@ public class NewBubble {
     button.setChecked(action.isChecked());
     button.setEnabled(action.isEnabled());
     button.setText(action.getName());
+    button.setContentDescription(action.getName());
     button.setOnClickListener(v -> doAction(action));
   }
 
@@ -822,6 +838,8 @@ public class NewBubble {
     viewHolder
         .getPrimaryIcon()
         .setTranslationX(isDrawingFromRight() ? -primaryIconMoveDistance : 0);
+    setPrimaryButtonAccessibilityAction(
+        context.getString(R.string.a11y_bubble_primary_button_expand_action));
 
     update();
 
@@ -881,6 +899,22 @@ public class NewBubble {
     } else {
       Logger.get(context).logImpression(impressionType);
     }
+  }
+
+  private void setPrimaryButtonAccessibilityAction(String description) {
+    viewHolder
+        .getPrimaryButton()
+        .setAccessibilityDelegate(
+            new AccessibilityDelegate() {
+              @Override
+              public void onInitializeAccessibilityNodeInfo(View v, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(v, info);
+
+                AccessibilityAction clickAction =
+                    new AccessibilityAction(AccessibilityNodeInfo.ACTION_CLICK, description);
+                info.addAction(clickAction);
+              }
+            });
   }
 
   @VisibleForTesting
