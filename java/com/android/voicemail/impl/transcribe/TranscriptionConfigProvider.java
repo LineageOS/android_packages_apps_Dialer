@@ -28,9 +28,10 @@ public class TranscriptionConfigProvider {
     this.context = context;
   }
 
-  public boolean isVoicemailTranscriptionEnabled() {
+  public boolean isVoicemailTranscriptionAvailable() {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
+        && ConfigProviderBindings.get(context)
+            .getBoolean("voicemail_transcription_available", false);
   }
 
   public String getServerAddress() {

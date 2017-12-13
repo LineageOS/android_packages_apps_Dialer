@@ -142,8 +142,8 @@ public class TranscriptionService extends JobService {
   public boolean onStartJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStartJob");
-    if (!getConfigProvider().isVoicemailTranscriptionEnabled()) {
-      LogUtil.i("TranscriptionService.onStartJob", "transcription not enabled, exiting.");
+    if (!getConfigProvider().isVoicemailTranscriptionAvailable()) {
+      LogUtil.i("TranscriptionService.onStartJob", "transcription not available, exiting.");
       return false;
     } else if (TextUtils.isEmpty(getConfigProvider().getServerAddress())) {
       LogUtil.i("TranscriptionService.onStartJob", "transcription server not configured, exiting.");
