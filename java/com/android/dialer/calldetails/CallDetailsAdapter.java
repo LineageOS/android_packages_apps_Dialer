@@ -115,7 +115,9 @@ final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
   @Override
   public int getItemCount() {
-    return callDetailsEntries.size() + 2; // Header + footer
+    return callDetailsEntries.isEmpty()
+        ? 0
+        : callDetailsEntries.size() + 2; // plus header and footer
   }
 
   void updateCallDetailsEntries(List<CallDetailsEntry> entries) {
