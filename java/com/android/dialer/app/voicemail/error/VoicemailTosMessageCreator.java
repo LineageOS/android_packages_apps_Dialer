@@ -187,7 +187,7 @@ public class VoicemailTosMessageCreator {
       return true;
     }
 
-    if (isVoicemailTranscriptionEnabled() && !isLegacyVoicemailUser()) {
+    if (isVoicemailTranscriptionAvailable() && !isLegacyVoicemailUser()) {
       LogUtil.i(
           "VoicemailTosMessageCreator.shouldShowTos", "showing TOS for Google transcription users");
       return true;
@@ -203,7 +203,7 @@ public class VoicemailTosMessageCreator {
       return false;
     }
 
-    if (isVoicemailTranscriptionEnabled()) {
+    if (isVoicemailTranscriptionAvailable()) {
       LogUtil.i(
           "VoicemailTosMessageCreator.shouldShowPromo",
           "showing promo for Google transcription users");
@@ -227,9 +227,10 @@ public class VoicemailTosMessageCreator {
     }
   }
 
-  private boolean isVoicemailTranscriptionEnabled() {
+  private boolean isVoicemailTranscriptionAvailable() {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context).getBoolean("voicemail_transcription_enabled", false);
+        && ConfigProviderBindings.get(context)
+            .getBoolean("voicemail_transcription_available", false);
   }
 
   private void showDeclineTosDialog(final PhoneAccountHandle handle) {
@@ -407,7 +408,7 @@ public class VoicemailTosMessageCreator {
   }
 
   private CharSequence getNewUserDialerTos() {
-    if (!isVoicemailTranscriptionEnabled()) {
+    if (!isVoicemailTranscriptionAvailable()) {
       return "";
     }
 
@@ -416,7 +417,7 @@ public class VoicemailTosMessageCreator {
   }
 
   private CharSequence getExistingUserDialerTos() {
-    if (!isVoicemailTranscriptionEnabled()) {
+    if (!isVoicemailTranscriptionAvailable()) {
       return "";
     }
 
