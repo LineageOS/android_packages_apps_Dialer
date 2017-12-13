@@ -17,8 +17,6 @@
 package com.android.dialer.phonenumberutil;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Trace;
 import android.provider.CallLog;
 import android.support.annotation.NonNull;
@@ -29,7 +27,6 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
@@ -50,78 +47,6 @@ public class PhoneNumberHelper {
     return presentation == CallLog.Calls.PRESENTATION_ALLOWED
         && !TextUtils.isEmpty(number)
         && !isLegacyUnknownNumbers(number);
-  }
-
-  /**
-   * Find the cursor pointing to a number that matches the number in a contact lookup URI.
-   *
-   * <p>When determining whether two phone numbers are identical enough for caller ID purposes, the
-   * Contacts Provider uses {@link PhoneNumberUtils#compare(String, String)}, which ignores special
-   * dialable characters such as '#', '*', '+', etc. This makes it possible for the cursor returned
-   * by the Contacts Provider to have multiple rows even when the URI asks for a specific number.
-   *
-   * <p>For example, suppose the user has two contacts whose numbers are "#123" and "123",
-   * respectively. When the URI asks for number "123", both numbers will be returned. Therefore, the
-   * following strategy is employed to find a match.
-   *
-   * <p>If the cursor points to a global phone number (i.e., a number that can be accepted by {@link
-   * PhoneNumberUtils#isGlobalPhoneNumber(String)}) and the lookup number in the URI is a PARTIAL
-   * match, return the cursor.
-   *
-   * <p>If the cursor points to a number that is not a global phone number, return the cursor iff
-   * the lookup number in the URI is an EXACT match.
-   *
-   * <p>Return null in all other circumstances.
-   *
-   * @param cursor A cursor returned by the Contacts Provider.
-   * @param columnIndexForNumber The index of the column where phone numbers are stored. It is the
-   *     caller's responsibility to pass the correct column index.
-   * @param contactLookupUri A URI used to retrieve a contact via the Contacts Provider. It is the
-   *     caller's responsibility to ensure the URI is one that asks for a specific phone number.
-   * @return The cursor considered as a match by the description above or null if no such cursor can
-   *     be found.
-   */
-  public static Cursor getCursorMatchForContactLookupUri(
-      Cursor cursor, int columnIndexForNumber, Uri contactLookupUri) {
-    if (cursor == null || contactLookupUri == null) {
-      return null;
-    }
-
-    if (!cursor.moveToFirst()) {
-      return null;
-    }
-
-    Assert.checkArgument(
-        0 <= columnIndexForNumber && columnIndexForNumber < cursor.getColumnCount());
-
-    String lookupNumber = contactLookupUri.getLastPathSegment();
-    if (lookupNumber == null) {
-      return null;
-    }
-
-    boolean isMatchFound;
-    do {
-      // All undialable characters should be converted/removed before comparing the lookup number
-      // and the existing contact number.
-      String rawExistingContactNumber =
-          PhoneNumberUtils.stripSeparators(
-              PhoneNumberUtils.convertKeypadLettersToDigits(
-                  cursor.getString(columnIndexForNumber)));
-      String rawQueryNumber =
-          PhoneNumberUtils.stripSeparators(
-              PhoneNumberUtils.convertKeypadLettersToDigits(lookupNumber));
-
-      isMatchFound =
-          PhoneNumberUtils.isGlobalPhoneNumber(rawExistingContactNumber)
-              ? rawExistingContactNumber.contains(rawQueryNumber)
-              : rawExistingContactNumber.equals(rawQueryNumber);
-
-      if (isMatchFound) {
-        return cursor;
-      }
-    } while (cursor.moveToNext());
-
-    return null;
   }
 
   /**
