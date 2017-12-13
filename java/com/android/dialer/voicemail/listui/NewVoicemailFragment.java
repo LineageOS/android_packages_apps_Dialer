@@ -38,6 +38,7 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   @Override
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    LogUtil.enterBlock("NewVoicemailFragment.onCreateView");
     View view = inflater.inflate(R.layout.new_voicemail_call_log_fragment, container, false);
     recyclerView = view.findViewById(R.id.new_voicemail_call_log_recycler_view);
     getLoaderManager().restartLoader(0, null, this);
@@ -52,11 +53,24 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    LogUtil.i("NewVoicemailFragment.onCreateLoader", "cursor size is %d", data.getCount());
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(
-        new NewVoicemailAdapter(
-            data, System::currentTimeMillis, getActivity().getFragmentManager()));
+    LogUtil.i("NewVoicemailFragment.onLoadFinished", "cursor size is %d", data.getCount());
+    if (recyclerView.getAdapter() == null) {
+      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+      recyclerView.setAdapter(
+          new NewVoicemailAdapter(
+              data, System::currentTimeMillis, getActivity().getFragmentManager()));
+    } else {
+      // This would only be called in cases such as when voicemail has been fetched from the server
+      // or a changed occurred in the annotated table changed (e.g deletes). To check if the change
+      // was due to a voicemail download,
+      // NewVoicemailAdapter.mediaPlayer.getVoicemailRequestedToDownload() is called.
+      LogUtil.i(
+          "NewVoicemailFragment.onLoadFinished",
+          "adapter: %s was not null, checking and playing the voicemail if conditions met",
+          recyclerView.getAdapter());
+      ((NewVoicemailAdapter) recyclerView.getAdapter()).updateCursor(data);
+      ((NewVoicemailAdapter) recyclerView.getAdapter()).checkAndPlayVoicemail();
+    }
   }
 
   @Override

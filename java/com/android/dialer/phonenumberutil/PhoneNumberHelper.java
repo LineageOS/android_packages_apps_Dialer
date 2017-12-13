@@ -29,7 +29,6 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.SparseIntArray;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
@@ -38,7 +37,6 @@ import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class PhoneNumberHelper {
@@ -46,71 +44,6 @@ public class PhoneNumberHelper {
   private static final String TAG = "PhoneNumberUtil";
   private static final Set<String> LEGACY_UNKNOWN_NUMBERS =
       new HashSet<>(Arrays.asList("-1", "-2", "-3"));
-
-  /** The phone keypad letter mapping (see ITU E.161 or ISO/IEC 9995-8.) */
-  private static final SparseIntArray KEYPAD_MAP = new SparseIntArray();
-
-  static {
-    KEYPAD_MAP.put('a', '2');
-    KEYPAD_MAP.put('b', '2');
-    KEYPAD_MAP.put('c', '2');
-    KEYPAD_MAP.put('A', '2');
-    KEYPAD_MAP.put('B', '2');
-    KEYPAD_MAP.put('C', '2');
-
-    KEYPAD_MAP.put('d', '3');
-    KEYPAD_MAP.put('e', '3');
-    KEYPAD_MAP.put('f', '3');
-    KEYPAD_MAP.put('D', '3');
-    KEYPAD_MAP.put('E', '3');
-    KEYPAD_MAP.put('F', '3');
-
-    KEYPAD_MAP.put('g', '4');
-    KEYPAD_MAP.put('h', '4');
-    KEYPAD_MAP.put('i', '4');
-    KEYPAD_MAP.put('G', '4');
-    KEYPAD_MAP.put('H', '4');
-    KEYPAD_MAP.put('I', '4');
-
-    KEYPAD_MAP.put('j', '5');
-    KEYPAD_MAP.put('k', '5');
-    KEYPAD_MAP.put('l', '5');
-    KEYPAD_MAP.put('J', '5');
-    KEYPAD_MAP.put('K', '5');
-    KEYPAD_MAP.put('L', '5');
-
-    KEYPAD_MAP.put('m', '6');
-    KEYPAD_MAP.put('n', '6');
-    KEYPAD_MAP.put('o', '6');
-    KEYPAD_MAP.put('M', '6');
-    KEYPAD_MAP.put('N', '6');
-    KEYPAD_MAP.put('O', '6');
-
-    KEYPAD_MAP.put('p', '7');
-    KEYPAD_MAP.put('q', '7');
-    KEYPAD_MAP.put('r', '7');
-    KEYPAD_MAP.put('s', '7');
-    KEYPAD_MAP.put('P', '7');
-    KEYPAD_MAP.put('Q', '7');
-    KEYPAD_MAP.put('R', '7');
-    KEYPAD_MAP.put('S', '7');
-
-    KEYPAD_MAP.put('t', '8');
-    KEYPAD_MAP.put('u', '8');
-    KEYPAD_MAP.put('v', '8');
-    KEYPAD_MAP.put('T', '8');
-    KEYPAD_MAP.put('U', '8');
-    KEYPAD_MAP.put('V', '8');
-
-    KEYPAD_MAP.put('w', '9');
-    KEYPAD_MAP.put('x', '9');
-    KEYPAD_MAP.put('y', '9');
-    KEYPAD_MAP.put('z', '9');
-    KEYPAD_MAP.put('W', '9');
-    KEYPAD_MAP.put('X', '9');
-    KEYPAD_MAP.put('Y', '9');
-    KEYPAD_MAP.put('Z', '9');
-  }
 
   /** Returns true if it is possible to place a call to the given number. */
   public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
@@ -120,76 +53,7 @@ public class PhoneNumberHelper {
   }
 
   /**
-   * Compare two phone numbers, return true if they're identical enough for caller ID purposes. This
-   * is an enhanced version of {@link PhoneNumberUtils#compare(String, String)}.
-   *
-   * <p>The two phone numbers are considered "identical enough" if
-   *
-   * <ul>
-   *   <li>their corresponding raw numbers are both global phone numbers (i.e., they can be accepted
-   *       by {@link PhoneNumberUtils#isGlobalPhoneNumber(String)}) and {@link
-   *       PhoneNumberUtils#compare(String, String)} deems them as "identical enough"; OR
-   *   <li>neither of the raw numbers is a global phone number and they are identical.
-   * </ul>
-   *
-   * See {@link #convertAndStrip(String)} for how a raw number is obtained.
-   */
-  public static boolean compare(@Nullable String number1, @Nullable String number2) {
-    if (number1 == null || number2 == null) {
-      return Objects.equals(number1, number2);
-    }
-
-    String rawNumber1 = convertAndStrip(number1);
-    String rawNumber2 = convertAndStrip(number2);
-
-    boolean isGlobalPhoneNumber1 = PhoneNumberUtils.isGlobalPhoneNumber(rawNumber1);
-    boolean isGlobalPhoneNumber2 = PhoneNumberUtils.isGlobalPhoneNumber(rawNumber2);
-
-    if (isGlobalPhoneNumber1 && isGlobalPhoneNumber2) {
-      return PhoneNumberUtils.compare(rawNumber1, rawNumber2);
-    }
-    if (!isGlobalPhoneNumber1 && !isGlobalPhoneNumber2) {
-      return rawNumber1.equals(rawNumber2);
-    }
-    return false;
-  }
-
-  /**
-   * Translating any alphabetic letters ([A-Za-z]) in the given phone number into the equivalent
-   * numeric digits and then removing all separators. The caller should ensure the number passed to
-   * this method is not null.
-   */
-  private static String convertAndStrip(@NonNull String number) {
-    int len = number.length();
-    if (len == 0) {
-      return number;
-    }
-
-    StringBuilder ret = new StringBuilder(len);
-    for (int i = 0; i < len; i++) {
-      char c = number.charAt(i);
-
-      // If the char isn't in KEYPAD_MAP, leave it alone for now.
-      c = (char) KEYPAD_MAP.get(c, c);
-
-      // Append the char to the result if it's a digit or non-separator.
-      int digit = Character.digit(c, 10);
-      if (digit != -1) {
-        ret.append(digit);
-      } else if (PhoneNumberUtils.isNonSeparator(c)) {
-        ret.append(c);
-      }
-    }
-
-    return ret.toString();
-  }
-
-  /**
-   * Find the cursor pointing to the row in which a number is identical enough to the number in a
-   * contact lookup URI.
-   *
-   * <p>See the description of {@link PhoneNumberHelper#compare(String, String)} for the definition
-   * of "identical enough".
+   * Find the cursor pointing to a number that matches the number in a contact lookup URI.
    *
    * <p>When determining whether two phone numbers are identical enough for caller ID purposes, the
    * Contacts Provider uses {@link PhoneNumberUtils#compare(String, String)}, which ignores special
@@ -197,17 +61,25 @@ public class PhoneNumberHelper {
    * by the Contacts Provider to have multiple rows even when the URI asks for a specific number.
    *
    * <p>For example, suppose the user has two contacts whose numbers are "#123" and "123",
-   * respectively. When the URI asks for number "123", both numbers will be returned. Therefore,
-   * {@link PhoneNumberHelper#compare(String, String)}, which is an enhanced version of {@link
-   * PhoneNumberUtils#compare(String, String)}, is employed to find a match.
+   * respectively. When the URI asks for number "123", both numbers will be returned. Therefore, the
+   * following strategy is employed to find a match.
+   *
+   * <p>If the cursor points to a global phone number (i.e., a number that can be accepted by {@link
+   * PhoneNumberUtils#isGlobalPhoneNumber(String)}) and the lookup number in the URI is a PARTIAL
+   * match, return the cursor.
+   *
+   * <p>If the cursor points to a number that is not a global phone number, return the cursor iff
+   * the lookup number in the URI is an EXACT match.
+   *
+   * <p>Return null in all other circumstances.
    *
    * @param cursor A cursor returned by the Contacts Provider.
    * @param columnIndexForNumber The index of the column where phone numbers are stored. It is the
    *     caller's responsibility to pass the correct column index.
    * @param contactLookupUri A URI used to retrieve a contact via the Contacts Provider. It is the
    *     caller's responsibility to ensure the URI is one that asks for a specific phone number.
-   * @return The cursor pointing to the row in which the number is considered a match by the
-   *     description above or null if no such cursor can be found.
+   * @return The cursor considered as a match by the description above or null if no such cursor can
+   *     be found.
    */
   public static Cursor getCursorMatchForContactLookupUri(
       Cursor cursor, int columnIndexForNumber, Uri contactLookupUri) {
@@ -227,10 +99,22 @@ public class PhoneNumberHelper {
       return null;
     }
 
+    boolean isMatchFound;
     do {
-      String existingContactNumber = cursor.getString(columnIndexForNumber);
+      // All undialable characters should be converted/removed before comparing the lookup number
+      // and the existing contact number.
+      String rawExistingContactNumber =
+          PhoneNumberUtils.stripSeparators(
+              PhoneNumberUtils.convertKeypadLettersToDigits(
+                  cursor.getString(columnIndexForNumber)));
+      String rawQueryNumber =
+          PhoneNumberUtils.stripSeparators(
+              PhoneNumberUtils.convertKeypadLettersToDigits(lookupNumber));
 
-      boolean isMatchFound = compare(existingContactNumber, lookupNumber);
+      isMatchFound =
+          PhoneNumberUtils.isGlobalPhoneNumber(rawExistingContactNumber)
+              ? rawExistingContactNumber.contains(rawQueryNumber)
+              : rawExistingContactNumber.equals(rawQueryNumber);
 
       if (isMatchFound) {
         return cursor;
