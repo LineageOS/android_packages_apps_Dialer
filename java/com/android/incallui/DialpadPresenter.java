@@ -84,8 +84,6 @@ public class DialpadPresenter extends Presenter<DialpadUi>
 
   public interface DialpadUi extends Ui {
 
-    void setVisible(boolean on);
-
     void appendDigitsToField(char digit);
   }
 }
