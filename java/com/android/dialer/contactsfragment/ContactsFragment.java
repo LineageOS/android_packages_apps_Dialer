@@ -118,7 +118,7 @@ public class ContactsFragment extends Fragment
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    if (cursor.getCount() == 0) {
+    if (cursor == null || (cursor != null && cursor.getCount() == 0)) {
       emptyContentView.setDescription(R.string.all_contacts_empty);
       emptyContentView.setActionLabel(R.string.all_contacts_empty_add_contact_action);
       emptyContentView.setVisibility(View.VISIBLE);
