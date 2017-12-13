@@ -337,30 +337,30 @@ public class ContactInfoHelper {
       return ContactInfo.EMPTY;
     }
 
-    try (Cursor phoneLookupCursor =
-        mContext
-            .getContentResolver()
-            .query(uri, PhoneQuery.getPhoneLookupProjection(uri), null, null, null)) {
-      if (phoneLookupCursor == null) {
-        LogUtil.d("ContactInfoHelper.lookupContactFromUri", "phoneLookupCursor is null");
-        return null;
-      }
+    Cursor phoneLookupCursor = null;
+    try {
+      String[] projection = PhoneQuery.getPhoneLookupProjection(uri);
+      phoneLookupCursor = mContext.getContentResolver().query(uri, projection, null, null, null);
+    } catch (NullPointerException e) {
+      LogUtil.e("ContactInfoHelper.lookupContactFromUri", "phone lookup", e);
+      // Trap NPE from pre-N CP2
+      return null;
+    }
+    if (phoneLookupCursor == null) {
+      LogUtil.d("ContactInfoHelper.lookupContactFromUri", "phoneLookupCursor is null");
+      return null;
+    }
 
+    try {
       if (!phoneLookupCursor.moveToFirst()) {
         return ContactInfo.EMPTY;
       }
-
-      Cursor matchedCursor =
-          PhoneNumberHelper.getCursorMatchForContactLookupUri(
-              phoneLookupCursor, PhoneQuery.MATCHED_NUMBER, uri);
-      if (matchedCursor == null) {
-        return ContactInfo.EMPTY;
-      }
-
-      String lookupKey = matchedCursor.getString(PhoneQuery.LOOKUP_KEY);
-      ContactInfo contactInfo = createPhoneLookupContactInfo(matchedCursor, lookupKey);
+      String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
+      ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
       fillAdditionalContactInfo(mContext, contactInfo);
       return contactInfo;
+    } finally {
+      phoneLookupCursor.close();
     }
   }
 
