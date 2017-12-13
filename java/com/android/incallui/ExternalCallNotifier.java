@@ -44,11 +44,11 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
+import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallDelegate;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.latencyreport.LatencyReport;
-import com.android.incallui.util.TelecomCallUtil;
 import java.util.Map;
 
 /**
