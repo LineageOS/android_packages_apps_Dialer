@@ -35,7 +35,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -787,6 +786,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       transaction.add(getDialpadContainerId(), new DialpadFragment(), Tags.DIALPAD_FRAGMENT);
     } else {
       transaction.show(dialpadFragment);
+      dialpadFragment.setUserVisibleHint(true);
     }
     transaction.commitAllowingStateLoss();
     dialpadFragmentManager.executePendingTransactions();
@@ -801,19 +801,20 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return;
     }
 
-    Fragment dialpadFragment = dialpadFragmentManager.findFragmentByTag(Tags.DIALPAD_FRAGMENT);
+    DialpadFragment dialpadFragment = getDialpadFragment();
     if (dialpadFragment != null) {
       FragmentTransaction transaction = dialpadFragmentManager.beginTransaction();
       transaction.hide(dialpadFragment);
       transaction.commitAllowingStateLoss();
       dialpadFragmentManager.executePendingTransactions();
+      dialpadFragment.setUserVisibleHint(false);
     }
     updateNavigationBar(false /* isDialpadVisible */);
   }
 
   public boolean isDialpadVisible() {
     DialpadFragment dialpadFragment = getDialpadFragment();
-    return dialpadFragment != null && dialpadFragment.isVisible();
+    return dialpadFragment != null && dialpadFragment.getUserVisibleHint();
   }
 
   /** Returns the {@link DialpadFragment} that's shown by this activity, or {@code null} */
