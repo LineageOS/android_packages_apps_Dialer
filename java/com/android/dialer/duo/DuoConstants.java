@@ -34,5 +34,12 @@ public final class DuoConstants {
   public static final PhoneAccountHandle PHONE_ACCOUNT_HANDLE =
       new PhoneAccountHandle(PHONE_ACCOUNT_COMPONENT_NAME, PHONE_ACCOUNT_ID);
 
+  public static final String DUO_ACTIVATE_ACTION =
+      "com.google.android.apps.tachyon.action.REGISTER";
+
+  public static final String DUO_INVITE_ACTION = "com.google.android.apps.tachyon.action.INVITE";
+
+  public static final String DUO_CALL_ACTION = "com.google.android.apps.tachyon.action.CALL";
+
   private DuoConstants() {}
 }
