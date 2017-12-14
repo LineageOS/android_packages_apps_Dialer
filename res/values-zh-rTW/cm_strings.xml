@@ -58,8 +58,8 @@
   <string name="incall_vibrate_45_title">每分鐘震動一次</string>
   <string name="incall_vibrate_45_summary">撥出電話後每分鐘的 45 秒時震動</string>
   <string name="call_log_show_all_slots">所有 SIM 卡</string>
-  <string name="call_log_all_calls_header">所有通話</string>
-  <string name="call_log_blacklist_header">僅限已封鎖通話</string>
+  <string name="call_log_all_calls_header">所有來電</string>
+  <string name="call_log_blacklist_header">僅限已封鎖來電</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">統計資料</string>
   <string name="callStatsDetailTitle">通話統計詳細資料</string>
@@ -113,10 +113,10 @@
   <string name="callerinfo_provider_auth_no">不用了，謝謝</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 會存取您的聯絡人，我的設定檔和 Cyanogen OS 帳戶，其中可能包括您的電子郵件地址。</string>
   <string name="callerinfo_provider_auth_learn_more">了解更多</string>
-  <string name="callerinfo_provider_auth_desc">歡迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 來識別未知的來電和封鎖來電嗎？</string>
+  <string name="callerinfo_provider_auth_desc">歡迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 來辨識未知來電和封鎖來電嗎？</string>
   <string name="callerinfo_provider_auth_desc_no_spam">歡迎！您想開啟 <xliff:g id="provider_name">%s</xliff:g> 來辨識未知來電嗎？</string>
-  <string name="callerinfo_provider_summary">標示未知的來電和垃圾廣告</string>
-  <string name="callerinfo_provider_summary_no_spam">標示未知來電</string>
+  <string name="callerinfo_provider_summary">辨識未知來電和垃圾廣告</string>
+  <string name="callerinfo_provider_summary_no_spam">辨識未知來電</string>
   <string name="silence_spam_title">將垃圾電話靜音</string>
   <string name="silence_spam_summary">當收到不受歡迎的來電時不響鈴</string>
   <string name="block_hidden_title">封鎖隱藏的電話號碼</string>
