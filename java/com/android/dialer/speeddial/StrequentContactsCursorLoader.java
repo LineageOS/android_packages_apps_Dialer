@@ -18,7 +18,6 @@ package com.android.dialer.speeddial;
 
 import android.content.Context;
 import android.content.CursorLoader;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -58,8 +57,6 @@ final class StrequentContactsCursorLoader extends CursorLoader {
         Phone.CONTACT_ID, // 11
       };
 
-  private final ContentObserver contentObserver = new ForceLoadContentObserver();
-
   StrequentContactsCursorLoader(Context context) {
     super(
         context,
@@ -96,9 +93,5 @@ final class StrequentContactsCursorLoader extends CursorLoader {
   @Override
   public Cursor loadInBackground() {
     return SpeedDialCursor.newInstance(super.loadInBackground());
-  }
-
-  ContentObserver getContentObserver() {
-    return contentObserver;
   }
 }
