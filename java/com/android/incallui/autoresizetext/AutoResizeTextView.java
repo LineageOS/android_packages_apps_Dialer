@@ -21,6 +21,7 @@ import android.content.res.TypedArray;
 import android.graphics.RectF;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.Nullable;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -29,7 +30,6 @@ import android.util.DisplayMetrics;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.widget.TextView;
-import javax.annotation.Nullable;
 
 /**
  * A TextView that automatically scales its text to completely fill its allotted width.
@@ -82,6 +82,7 @@ public class AutoResizeTextView extends TextView {
     TypedArray typedArray = context.getTheme().obtainStyledAttributes(
         attrs, R.styleable.AutoResizeTextView, defStyleAttr, defStyleRes);
     readAttrs(typedArray);
+    typedArray.recycle();
     textPaint.set(getPaint());
   }
 
