@@ -23,6 +23,7 @@ import android.telecom.ConnectionRequest;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.simulator.SimulatorConnectionsBank;
@@ -46,8 +47,12 @@ public final class SimulatorConnection extends Connection {
             | CAPABILITY_HOLD
             | CAPABILITY_CAN_UPGRADE_TO_VIDEO
             | CAPABILITY_DISCONNECT_FROM_CONFERENCE);
-    if (request.getExtras() != null && !request.getExtras().getBoolean("ISVOLTE")) {
-      setConnectionCapabilities(getConnectionCapabilities() | CAPABILITY_SEPARATE_FROM_CONFERENCE);
+
+    if (request.getExtras() != null) {
+      if (!request.getExtras().getBoolean(Simulator.IS_VOLTE)) {
+        setConnectionCapabilities(
+            getConnectionCapabilities() | CAPABILITY_SEPARATE_FROM_CONFERENCE);
+      }
     }
     setVideoProvider(new SimulatorVideoProvider(context, this));
     simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
@@ -136,4 +141,6 @@ public final class SimulatorConnection extends Connection {
   public interface Listener {
     void onEvent(@NonNull SimulatorConnection connection, @NonNull Event event);
   }
+
+
 }
