@@ -197,7 +197,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
               }
               // Also save the updated information so that it can be written to PhoneLookupHistory
               // in onSuccessfulFill.
-              String normalizedNumber = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
+              String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
               phoneLookupHistoryRowsToUpdate.put(normalizedNumber, upToDateInfo);
             }
           }
@@ -369,7 +369,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
         new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
     Map<DialerPhoneNumber, String> dialerPhoneNumberToNormalizedNumbers =
-        Maps.asMap(uniqueDialerPhoneNumbers, dialerPhoneNumberUtil::formatToE164);
+        Maps.asMap(uniqueDialerPhoneNumbers, dialerPhoneNumberUtil::normalizeNumber);
 
     // Convert values to a set to remove any duplicates that are the result of two
     // DialerPhoneNumbers mapping to the same normalized number.
@@ -508,7 +508,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     for (Entry<DialerPhoneNumber, Set<Long>> entry : annotatedCallLogIdsByNumber.entrySet()) {
       DialerPhoneNumber dialerPhoneNumber = entry.getKey();
       Set<Long> idsForDialerPhoneNumber = entry.getValue();
-      String normalizedNumber = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
+      String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
       Set<Long> idsForNormalizedNumber = idsByNormalizedNumber.get(normalizedNumber);
       if (idsForNormalizedNumber == null) {
         idsForNormalizedNumber = new ArraySet<>();
