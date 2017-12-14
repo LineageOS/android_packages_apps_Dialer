@@ -41,6 +41,11 @@ public class DuoStub implements Duo {
   }
 
   @Override
+  public boolean isInstalled(@NonNull Context context) {
+    return false;
+  }
+
+  @Override
   public boolean isActivated(@NonNull Context context) {
     return false;
   }
