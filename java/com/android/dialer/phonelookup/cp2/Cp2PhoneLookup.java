@@ -30,17 +30,21 @@ import android.telecom.Call;
 import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -61,8 +65,9 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         Phone.TYPE, // 3
         Phone.LABEL, // 4
         Phone.NORMALIZED_NUMBER, // 5
-        Phone.CONTACT_ID, // 6
-        Phone.LOOKUP_KEY // 7
+        Phone.NUMBER, // 6
+        Phone.CONTACT_ID, // 7
+        Phone.LOOKUP_KEY // 8
       };
 
   private static final int CP2_INFO_NAME_INDEX = 0;
@@ -70,9 +75,10 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   private static final int CP2_INFO_PHOTO_ID_INDEX = 2;
   private static final int CP2_INFO_TYPE_INDEX = 3;
   private static final int CP2_INFO_LABEL_INDEX = 4;
-  private static final int CP2_INFO_NUMBER_INDEX = 5;
-  private static final int CP2_INFO_CONTACT_ID_INDEX = 6;
-  private static final int CP2_INFO_LOOKUP_KEY_INDEX = 7;
+  private static final int CP2_INFO_NORMALIZED_NUMBER_INDEX = 5;
+  private static final int CP2_INFO_NUMBER_INDEX = 6;
+  private static final int CP2_INFO_CONTACT_ID_INDEX = 7;
+  private static final int CP2_INFO_LOOKUP_KEY_INDEX = 8;
 
   private final Context appContext;
   private final SharedPreferences sharedPreferences;
@@ -108,19 +114,37 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         || contactsDeleted(lastModified);
   }
 
-  /** Returns set of contact ids that correspond to {@code phoneNumbers} if the contact exists. */
-  private Set<Long> queryPhoneTableForContactIds(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
+  /**
+   * Returns set of contact ids that correspond to {@code dialerPhoneNumbers} if the contact exists.
+   */
+  private Set<Long> queryPhoneTableForContactIds(
+      ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers) {
     Set<Long> contactIds = new ArraySet<>();
+
+    PartitionedNumbers partitionedNumbers = new PartitionedNumbers(dialerPhoneNumbers);
+
+    // First use the E164 numbers to query the NORMALIZED_NUMBER column.
+    contactIds.addAll(
+        queryPhoneTableForContactIdsBasedOnE164(partitionedNumbers.validE164Numbers()));
+
+    // Then run a separate query using the NUMBER column to handle numbers that can't be formatted.
+    contactIds.addAll(
+        queryPhoneTableForContactIdsBasedOnRawNumber(partitionedNumbers.unformattableNumbers()));
+
+    return contactIds;
+  }
+
+  private Set<Long> queryPhoneTableForContactIdsBasedOnE164(Set<String> validE164Numbers) {
+    Set<Long> contactIds = new ArraySet<>();
+    if (validE164Numbers.isEmpty()) {
+      return contactIds;
+    }
     try (Cursor cursor =
-        appContext
-            .getContentResolver()
-            .query(
-                Phone.CONTENT_URI,
-                new String[] {Phone.CONTACT_ID},
-                Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(phoneNumbers.size()) + ")",
-                contactIdsSelectionArgs(phoneNumbers),
-                null)) {
-      cursor.moveToPosition(-1);
+        queryPhoneTableBasedOnE164(new String[] {Phone.CONTACT_ID}, validE164Numbers)) {
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.queryPhoneTableForContactIdsBasedOnE164", "null cursor");
+        return contactIds;
+      }
       while (cursor.moveToNext()) {
         contactIds.add(cursor.getLong(0 /* columnIndex */));
       }
@@ -128,18 +152,22 @@ public final class Cp2PhoneLookup implements PhoneLookup {
     return contactIds;
   }
 
-  private static String[] contactIdsSelectionArgs(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
-    String[] args = new String[phoneNumbers.size()];
-    int i = 0;
-    for (DialerPhoneNumber phoneNumber : phoneNumbers) {
-      args[i++] = getNormalizedNumber(phoneNumber);
+  private Set<Long> queryPhoneTableForContactIdsBasedOnRawNumber(Set<String> unformattableNumbers) {
+    Set<Long> contactIds = new ArraySet<>();
+    if (unformattableNumbers.isEmpty()) {
+      return contactIds;
     }
-    return args;
-  }
-
-  private static String getNormalizedNumber(DialerPhoneNumber phoneNumber) {
-    // TODO(calderwoodra): implement normalization logic that matches contacts.
-    return phoneNumber.getRawInput().getNumber();
+    try (Cursor cursor =
+        queryPhoneTableBasedOnRawNumber(new String[] {Phone.CONTACT_ID}, unformattableNumbers)) {
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.queryPhoneTableForContactIdsBasedOnE164", "null cursor");
+        return contactIds;
+      }
+      while (cursor.moveToNext()) {
+        contactIds.add(cursor.getLong(0 /* columnIndex */));
+      }
+    }
+    return contactIds;
   }
 
   /** Returns true if any contacts were modified after {@code lastModified}. */
@@ -188,6 +216,10 @@ public final class Cp2PhoneLookup implements PhoneLookup {
                 DeletedContacts.CONTACT_DELETED_TIMESTAMP + " > ?",
                 new String[] {Long.toString(lastModified)},
                 null)) {
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.contactsDeleted", "null cursor");
+        return false;
+      }
       return cursor.getCount() > 0;
     }
   }
@@ -312,40 +344,65 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
     // Query the contacts table and get those that whose Contacts.CONTACT_LAST_UPDATED_TIMESTAMP is
     // after lastModified, such that Contacts._ID is in our set of contact IDs we build above.
-    try (Cursor cursor = queryContactsTableForContacts(contactIds, lastModified)) {
-      int contactIdIndex = cursor.getColumnIndex(Contacts._ID);
-      int lastUpdatedIndex = cursor.getColumnIndex(Contacts.CONTACT_LAST_UPDATED_TIMESTAMP);
-      cursor.moveToPosition(-1);
-      while (cursor.moveToNext()) {
-        // Find the DialerPhoneNumber for each contact id and add it to our updated numbers set.
-        // These, along with our number not associated with any Cp2ContactInfo need to be updated.
-        long contactId = cursor.getLong(contactIdIndex);
-        updatedNumbers.addAll(getDialerPhoneNumber(existingInfoMap, contactId));
-        long lastUpdatedTimestamp = cursor.getLong(lastUpdatedIndex);
-        if (currentLastTimestampProcessed == null
-            || currentLastTimestampProcessed < lastUpdatedTimestamp) {
-          currentLastTimestampProcessed = lastUpdatedTimestamp;
+    if (!contactIds.isEmpty()) {
+      try (Cursor cursor = queryContactsTableForContacts(contactIds, lastModified)) {
+        int contactIdIndex = cursor.getColumnIndex(Contacts._ID);
+        int lastUpdatedIndex = cursor.getColumnIndex(Contacts.CONTACT_LAST_UPDATED_TIMESTAMP);
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+          // Find the DialerPhoneNumber for each contact id and add it to our updated numbers set.
+          // These, along with our number not associated with any Cp2ContactInfo need to be updated.
+          long contactId = cursor.getLong(contactIdIndex);
+          updatedNumbers.addAll(
+              findDialerPhoneNumbersContainingContactId(existingInfoMap, contactId));
+          long lastUpdatedTimestamp = cursor.getLong(lastUpdatedIndex);
+          if (currentLastTimestampProcessed == null
+              || currentLastTimestampProcessed < lastUpdatedTimestamp) {
+            currentLastTimestampProcessed = lastUpdatedTimestamp;
+          }
         }
       }
     }
 
-    // Query the Phone table and build Cp2ContactInfo for each DialerPhoneNumber in our
-    // updatedNumbers set.
+    if (updatedNumbers.isEmpty()) {
+      return new ArrayMap<>();
+    }
+
     Map<DialerPhoneNumber, Set<Cp2ContactInfo>> map = new ArrayMap<>();
-    try (Cursor cursor = getAllCp2Rows(updatedNumbers)) {
-      cursor.moveToPosition(-1);
-      while (cursor.moveToNext()) {
-        // Map each dialer phone number to it's new cp2 info
-        Set<DialerPhoneNumber> phoneNumbers =
-            getDialerPhoneNumbers(updatedNumbers, cursor.getString(CP2_INFO_NUMBER_INDEX));
-        Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(appContext, cursor);
-        for (DialerPhoneNumber phoneNumber : phoneNumbers) {
-          if (map.containsKey(phoneNumber)) {
-            map.get(phoneNumber).add(info);
-          } else {
-            Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
-            cp2ContactInfos.add(info);
-            map.put(phoneNumber, cp2ContactInfos);
+
+    // Divide the numbers into those we can format to E164 and those we can't. Then run separate
+    // queries against the contacts table using the NORMALIZED_NUMBER and NUMBER columns.
+    // TODO(zachh): These queries are inefficient without a lastModified column to filter on.
+    PartitionedNumbers partitionedNumbers = new PartitionedNumbers(updatedNumbers);
+    if (!partitionedNumbers.validE164Numbers().isEmpty()) {
+      try (Cursor cursor =
+          queryPhoneTableBasedOnE164(CP2_INFO_PROJECTION, partitionedNumbers.validE164Numbers())) {
+        if (cursor == null) {
+          LogUtil.w("Cp2PhoneLookup.buildMapForUpdatedOrAddedContacts", "null cursor");
+        } else {
+          while (cursor.moveToNext()) {
+            String e164Number = cursor.getString(CP2_INFO_NORMALIZED_NUMBER_INDEX);
+            Set<DialerPhoneNumber> dialerPhoneNumbers =
+                partitionedNumbers.dialerPhoneNumbersForE164(e164Number);
+            Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(appContext, cursor);
+            addInfo(map, dialerPhoneNumbers, info);
+          }
+        }
+      }
+    }
+    if (!partitionedNumbers.unformattableNumbers().isEmpty()) {
+      try (Cursor cursor =
+          queryPhoneTableBasedOnRawNumber(
+              CP2_INFO_PROJECTION, partitionedNumbers.unformattableNumbers())) {
+        if (cursor == null) {
+          LogUtil.w("Cp2PhoneLookup.buildMapForUpdatedOrAddedContacts", "null cursor");
+        } else {
+          while (cursor.moveToNext()) {
+            String unformattableNumber = cursor.getString(CP2_INFO_NUMBER_INDEX);
+            Set<DialerPhoneNumber> dialerPhoneNumbers =
+                partitionedNumbers.dialerPhoneNumbersForUnformattable(unformattableNumber);
+            Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(appContext, cursor);
+            addInfo(map, dialerPhoneNumbers, info);
           }
         }
       }
@@ -354,20 +411,45 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   }
 
   /**
-   * Returns cursor with projection {@link #CP2_INFO_PROJECTION} and only phone numbers that are in
-   * {@code updateNumbers}.
+   * Adds the {@code cp2ContactInfo} to the entries for all specified {@code dialerPhoneNumbers} in
+   * the {@code map}.
    */
-  private Cursor getAllCp2Rows(Set<DialerPhoneNumber> updatedNumbers) {
-    String where = Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(updatedNumbers.size()) + ")";
-    String[] selectionArgs = new String[updatedNumbers.size()];
-    int i = 0;
-    for (DialerPhoneNumber phoneNumber : updatedNumbers) {
-      selectionArgs[i++] = getNormalizedNumber(phoneNumber);
+  private static void addInfo(
+      Map<DialerPhoneNumber, Set<Cp2ContactInfo>> map,
+      Set<DialerPhoneNumber> dialerPhoneNumbers,
+      Cp2ContactInfo cp2ContactInfo) {
+    for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
+      if (map.containsKey(dialerPhoneNumber)) {
+        map.get(dialerPhoneNumber).add(cp2ContactInfo);
+      } else {
+        Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
+        cp2ContactInfos.add(cp2ContactInfo);
+        map.put(dialerPhoneNumber, cp2ContactInfos);
+      }
     }
+  }
 
+  private Cursor queryPhoneTableBasedOnE164(String[] projection, Set<String> validE164Numbers) {
     return appContext
         .getContentResolver()
-        .query(Phone.CONTENT_URI, CP2_INFO_PROJECTION, where, selectionArgs, null);
+        .query(
+            Phone.CONTENT_URI,
+            projection,
+            Phone.NORMALIZED_NUMBER + " IN (" + questionMarks(validE164Numbers.size()) + ")",
+            validE164Numbers.toArray(new String[validE164Numbers.size()]),
+            null);
+  }
+
+  private Cursor queryPhoneTableBasedOnRawNumber(
+      String[] projection, Set<String> unformattableNumbers) {
+    return appContext
+        .getContentResolver()
+        .query(
+            Phone.CONTENT_URI,
+            projection,
+            Phone.NUMBER + " IN (" + questionMarks(unformattableNumbers.size()) + ")",
+            unformattableNumbers.toArray(new String[unformattableNumbers.size()]),
+            null);
   }
 
   /**
@@ -466,7 +548,8 @@ public final class Cp2PhoneLookup implements PhoneLookup {
     cursor.moveToPosition(-1);
     while (cursor.moveToNext()) {
       long contactId = cursor.getLong(contactIdIndex);
-      deletedPhoneNumbers.addAll(getDialerPhoneNumber(existingInfoMap, contactId));
+      deletedPhoneNumbers.addAll(
+          findDialerPhoneNumbersContainingContactId(existingInfoMap, contactId));
       long deletedTime = cursor.getLong(deletedTimeIndex);
       if (currentLastTimestampProcessed == null || currentLastTimestampProcessed < deletedTime) {
         // TODO(zachh): There's a problem here if a contact for a new row is deleted?
@@ -476,20 +559,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
     return deletedPhoneNumbers;
   }
 
-  private static Set<DialerPhoneNumber> getDialerPhoneNumbers(
-      Set<DialerPhoneNumber> phoneNumbers, String number) {
-    Set<DialerPhoneNumber> matches = new ArraySet<>();
-    for (DialerPhoneNumber phoneNumber : phoneNumbers) {
-      if (getNormalizedNumber(phoneNumber).equals(number)) {
-        matches.add(phoneNumber);
-      }
-    }
-    Assert.checkArgument(
-        matches.size() > 0, "Couldn't find DialerPhoneNumber for number: " + number);
-    return matches;
-  }
-
-  private static Set<DialerPhoneNumber> getDialerPhoneNumber(
+  private static Set<DialerPhoneNumber> findDialerPhoneNumbersContainingContactId(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap, long contactId) {
     Set<DialerPhoneNumber> matches = new ArraySet<>();
     for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : existingInfoMap.entrySet()) {
@@ -513,5 +583,57 @@ public final class Cp2PhoneLookup implements PhoneLookup {
       where.append("?");
     }
     return where.toString();
+  }
+
+  /**
+   * Divides a set of {@link DialerPhoneNumber DialerPhoneNumbers} by those that can be formatted to
+   * E164 and those that cannot.
+   */
+  private static class PartitionedNumbers {
+    private Map<String, Set<DialerPhoneNumber>> e164NumbersToDialerPhoneNumbers = new ArrayMap<>();
+    private Map<String, Set<DialerPhoneNumber>> unformattableNumbersToDialerPhoneNumbers =
+        new ArrayMap<>();
+
+    PartitionedNumbers(Set<DialerPhoneNumber> dialerPhoneNumbers) {
+      DialerPhoneNumberUtil dialerPhoneNumberUtil =
+          new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+      for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
+        Optional<String> e164 = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
+        if (e164.isPresent()) {
+          String validE164 = e164.get();
+          Set<DialerPhoneNumber> currentNumbers = e164NumbersToDialerPhoneNumbers.get(validE164);
+          if (currentNumbers == null) {
+            currentNumbers = new ArraySet<>();
+            e164NumbersToDialerPhoneNumbers.put(validE164, currentNumbers);
+          }
+          currentNumbers.add(dialerPhoneNumber);
+        } else {
+          String unformattableNumber = dialerPhoneNumber.getRawInput().getNumber();
+          Set<DialerPhoneNumber> currentNumbers =
+              unformattableNumbersToDialerPhoneNumbers.get(unformattableNumber);
+          if (currentNumbers == null) {
+            currentNumbers = new ArraySet<>();
+            unformattableNumbersToDialerPhoneNumbers.put(unformattableNumber, currentNumbers);
+          }
+          currentNumbers.add(dialerPhoneNumber);
+        }
+      }
+    }
+
+    Set<String> unformattableNumbers() {
+      return unformattableNumbersToDialerPhoneNumbers.keySet();
+    }
+
+    Set<String> validE164Numbers() {
+      return e164NumbersToDialerPhoneNumbers.keySet();
+    }
+
+    Set<DialerPhoneNumber> dialerPhoneNumbersForE164(String e164) {
+      return e164NumbersToDialerPhoneNumbers.get(e164);
+    }
+
+    Set<DialerPhoneNumber> dialerPhoneNumbersForUnformattable(String unformattableNumber) {
+      return unformattableNumbersToDialerPhoneNumbers.get(unformattableNumber);
+    }
   }
 }
