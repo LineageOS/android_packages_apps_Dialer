@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Google Inc. All Rights Reserved.
+ * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public class OmtpCvvmMessageSender extends OmtpMessageSender {
   private void sendCvvmMessage(String request, PendingIntent sentIntent) {
     StringBuilder sb = new StringBuilder().append(request);
     sb.append(OmtpConstants.SMS_PREFIX_SEPARATOR);
-    appendField(sb, "dt", "15");
+    appendField(sb, "dt" /* device type */, "6" /* no VTT (transcription) support*/);
     sendSms(sb.toString(), sentIntent);
   }
 }
