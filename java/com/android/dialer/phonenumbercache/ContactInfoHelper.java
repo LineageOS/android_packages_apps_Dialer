@@ -337,30 +337,28 @@ public class ContactInfoHelper {
       return ContactInfo.EMPTY;
     }
 
-    Cursor phoneLookupCursor = null;
-    try {
-      String[] projection = PhoneQuery.getPhoneLookupProjection(uri);
-      phoneLookupCursor = mContext.getContentResolver().query(uri, projection, null, null, null);
-    } catch (NullPointerException e) {
-      LogUtil.e("ContactInfoHelper.lookupContactFromUri", "phone lookup", e);
-      // Trap NPE from pre-N CP2
-      return null;
-    }
-    if (phoneLookupCursor == null) {
-      LogUtil.d("ContactInfoHelper.lookupContactFromUri", "phoneLookupCursor is null");
-      return null;
-    }
+    try (Cursor phoneLookupCursor =
+        mContext
+            .getContentResolver()
+            .query(
+                uri,
+                PhoneQuery.getPhoneLookupProjection(uri),
+                null /* selection */,
+                null /* selectionArgs */,
+                null /* sortOrder */)) {
+      if (phoneLookupCursor == null) {
+        LogUtil.d("ContactInfoHelper.lookupContactFromUri", "phoneLookupCursor is null");
+        return null;
+      }
 
-    try {
       if (!phoneLookupCursor.moveToFirst()) {
         return ContactInfo.EMPTY;
       }
+
       String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
       ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
       fillAdditionalContactInfo(mContext, contactInfo);
       return contactInfo;
-    } finally {
-      phoneLookupCursor.close();
     }
   }
 

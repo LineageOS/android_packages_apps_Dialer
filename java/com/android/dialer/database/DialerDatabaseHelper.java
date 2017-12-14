@@ -26,19 +26,21 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
@@ -332,7 +334,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   /** Starts the database upgrade process in the background. */
   public void startSmartDialUpdateThread() {
     if (PermissionsUtil.hasContactsReadPermissions(mContext)) {
-      new SmartDialUpdateAsyncTask().execute();
+      DialerExecutorComponent.get(mContext)
+          .dialerExecutorFactory()
+          .createNonUiTaskBuilder(new UpdateSmartDialWorker())
+          .build()
+          .executeParallel(null);
     }
   }
 
@@ -1228,10 +1234,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
   }
 
-  private class SmartDialUpdateAsyncTask extends AsyncTask<Object, Object, Object> {
+  private class UpdateSmartDialWorker implements Worker<Void, Void> {
 
+    @Nullable
     @Override
-    protected Object doInBackground(Object... objects) {
+    public Void doInBackground(@Nullable Void input) throws Throwable {
       updateSmartDialDatabase();
       return null;
     }

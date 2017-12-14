@@ -104,6 +104,26 @@ public abstract class IntentProvider {
     };
   }
 
+  public static IntentProvider getInstallDuoIntentProvider() {
+    return new IntentProvider() {
+      @Override
+      public Intent getIntent(Context context) {
+        return new Intent(
+            Intent.ACTION_VIEW,
+            new Uri.Builder()
+                .scheme("https")
+                .authority("play.google.com")
+                .appendEncodedPath("store/apps/details")
+                .appendQueryParameter("id", "com.google.android.apps.tachyon")
+                .appendQueryParameter(
+                    "referrer",
+                    "utm_source=dialer&utm_medium=text&utm_campaign=product") // This string is from
+                // the Duo team
+                .build());
+      }
+    };
+  }
+
   public static IntentProvider getSetUpDuoIntentProvider() {
     return new IntentProvider() {
       @Override

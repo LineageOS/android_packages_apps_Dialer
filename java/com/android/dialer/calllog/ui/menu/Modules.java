@@ -24,7 +24,6 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.calldetails.CallDetailsActivity;
-import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
@@ -65,7 +64,7 @@ final class Modules {
 
     // TODO(zachh): Revisit if DialerContact is the best thing to pass to CallDetails; could
     // it use a ContactPrimaryActionInfo instead?
-    addModuleForAccessingCallDetails(context, createDialerContactFromRow(row), modules);
+    addModuleForAccessingCallDetails(context, row, modules);
 
     return modules;
   }
@@ -182,10 +181,9 @@ final class Modules {
   }
 
   private static void addModuleForAccessingCallDetails(
-      Context context, DialerContact dialerContact, List<ContactActionModule> modules) {
-    // TODO(zachh): Load CallDetailsEntries and canReportInaccurateNumber in
-    // CallDetailsActivity (see also isPeopleApiSource(sourceType)).
-    CallDetailsEntries callDetailsEntries = CallDetailsEntries.getDefaultInstance();
+      Context context, CoalescedRow row, List<ContactActionModule> modules) {
+    // TODO(zachh): Load canReportInaccurateNumber in CallDetailsActivity
+    // (see also isPeopleApiSource(sourceType)).
     boolean canReportInaccurateNumber = false;
     boolean canSupportAssistedDialing = false; // TODO(zachh): Properly set value.
 
@@ -194,8 +192,8 @@ final class Modules {
             context,
             CallDetailsActivity.newInstance(
                 context,
-                callDetailsEntries,
-                dialerContact,
+                row.coalescedIds(),
+                createDialerContactFromRow(row),
                 canReportInaccurateNumber,
                 canSupportAssistedDialing),
             R.string.call_details_menu_label,
