@@ -25,6 +25,7 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.DialerPhoneNumber.RawInput;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -127,17 +128,30 @@ public class DialerPhoneNumberUtil {
   }
 
   /**
-   * Formats the provided number to e164 format. May return raw number if number is unparseable.
+   * Formats the provided number to e164 format or return raw number if number is unparseable.
    *
    * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
    */
   @WorkerThread
-  public String formatToE164(@NonNull DialerPhoneNumber number) {
+  public String normalizeNumber(DialerPhoneNumber number) {
+    Assert.isWorkerThread();
+    return formatToE164(number).or(number.getRawInput().getNumber());
+  }
+
+  /**
+   * Formats the provided number to e164 format if possible.
+   *
+   * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
+   */
+  @WorkerThread
+  public Optional<String> formatToE164(DialerPhoneNumber number) {
     Assert.isWorkerThread();
     if (number.hasDialerInternalPhoneNumber()) {
-      return phoneNumberUtil.format(
-          Converter.protoToPojo(number.getDialerInternalPhoneNumber()), PhoneNumberFormat.E164);
+      return Optional.of(
+          phoneNumberUtil.format(
+              Converter.protoToPojo(number.getDialerInternalPhoneNumber()),
+              PhoneNumberFormat.E164));
     }
-    return number.getRawInput().getNumber();
+    return Optional.absent();
   }
 }
