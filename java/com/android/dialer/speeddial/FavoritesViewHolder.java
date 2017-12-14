@@ -45,8 +45,10 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   private final TextView phoneType;
   private final FrameLayout videoCallIcon;
 
+  private boolean hasDefaultNumber;
   private boolean isVideoCall;
   private String number;
+  private String lookupKey;
 
   public FavoritesViewHolder(View view, FavoriteContactsListener listener) {
     super(view);
@@ -67,7 +69,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
     String name = cursor.getString(StrequentContactsCursorLoader.PHONE_DISPLAY_NAME);
     long contactId = cursor.getLong(StrequentContactsCursorLoader.PHONE_ID);
-    String lookupKey = cursor.getString(StrequentContactsCursorLoader.PHONE_LOOKUP_KEY);
+    lookupKey = cursor.getString(StrequentContactsCursorLoader.PHONE_LOOKUP_KEY);
     Uri contactUri = Contacts.getLookupUri(contactId, lookupKey);
 
     String photoUri = cursor.getString(StrequentContactsCursorLoader.PHONE_PHOTO_URI);
@@ -82,6 +84,9 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     nameView.setText(name);
     phoneType.setText(getLabel(context.getResources(), cursor));
     videoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
+
+    // TODO(calderwoodra): Update this to include communication avenues also
+    hasDefaultNumber = cursor.getInt(StrequentContactsCursorLoader.PHONE_IS_SUPER_PRIMARY) != 0;
   }
 
   // TODO(calderwoodra): handle CNAP and cequint types.
@@ -99,7 +104,11 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    listener.onClick(number, isVideoCall);
+    if (hasDefaultNumber) {
+      listener.onClick(number, isVideoCall);
+    } else {
+      listener.onAmbiguousContactClicked(lookupKey);
+    }
   }
 
   @Override
@@ -111,6 +120,9 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
   /** Listener/callback for {@link FavoritesViewHolder} actions. */
   public interface FavoriteContactsListener {
+
+    /** Called when the user clicks on a favorite contact that doesn't have a default number. */
+    void onAmbiguousContactClicked(String contactId);
 
     /** Called when the user clicks on a favorite contact. */
     void onClick(String number, boolean isVideoCall);

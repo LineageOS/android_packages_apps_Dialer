@@ -98,6 +98,11 @@ public class SpeedDialFragment extends Fragment {
   private class SpeedDialFavoritesListener implements FavoriteContactsListener {
 
     @Override
+    public void onAmbiguousContactClicked(String lookupKey) {
+      DisambigDialog.show(lookupKey, getFragmentManager());
+    }
+
+    @Override
     public void onClick(String number, boolean isVideoCall) {
       // TODO(calderwoodra): add logic for duo video calls
       PreCall.start(
