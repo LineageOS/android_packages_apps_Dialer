@@ -379,8 +379,6 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
 
   private void sendIntentToDownloadVoicemail(Uri uri) {
     LogUtil.i("NewVoicemailMediaPlayer.sendIntentToDownloadVoicemail", "uri:%s", uri.toString());
-    // Send voicemail fetch request.
-    Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, uri);
 
     Worker<Pair<Context, Uri>, Pair<String, Uri>> getVoicemailSourcePackage =
         this::queryVoicemailSourcePackage;
@@ -399,7 +397,7 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     Uri uri = booleanUriPair.second;
     LogUtil.i(
         "NewVoicemailMediaPlayer.sendIntent",
-        "srcPkg:%s, uri:%%s",
+        "srcPkg:%s, uri:%s",
         sourcePackage,
         String.valueOf(uri));
     Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, uri);
@@ -465,6 +463,20 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
               "NewVoicemailMediaPlayer.phoneButtonListener",
               "speaker request for voicemailUri: %s",
               voicemailUri.toString());
+          ContentValues contentValues = new ContentValues();
+          contentValues.put("has_content", 0);
+          // TODO(uabdullah): It only sets the has_content to 0, to allow the annotated call log to
+          // change, and refresh the fragment. This is used to demo and test the downloading of
+          // voicemails from the server. This will be removed once we implement this listener.
+          try {
+            getContext().getContentResolver().update(voicemailUri, contentValues, "type = 4", null);
+          } catch (Exception e) {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.deleteButtonListener",
+                "update has content of voicemailUri %s caused an error: %s",
+                voicemailUri.toString(),
+                e.toString());
+          }
         }
       };
 
@@ -475,22 +487,9 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
           LogUtil.i(
               "NewVoicemailMediaPlayer.deleteButtonListener",
               "delete voicemailUri %s",
-              voicemailUri.toString());
-          // TODO(uabdullah): This will be removed in cl/177404259. It only sets the has_content to
-          // 0, to allow the annotated call log to change, and refresh the fragment. This is used to
-          // demo and test the downloading of voicemails from the server.
-          ContentValues contentValues = new ContentValues();
-          contentValues.put("has_content", 0);
-
-          try {
-            getContext().getContentResolver().update(voicemailUri, contentValues, "type = 4", null);
-          } catch (Exception e) {
-            LogUtil.i(
-                "NewVoicemailMediaPlayer.deleteButtonListener",
-                "update has content of voicemailUri %s caused an error: %s",
-                voicemailUri.toString(),
-                e.toString());
-          }
+              String.valueOf(voicemailUri));
+          newVoicemailViewHolderListener.deleteViewHolder(
+              getContext(), fragmentManager, newVoicemailViewHolder, voicemailUri);
         }
       };
 

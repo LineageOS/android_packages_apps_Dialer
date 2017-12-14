@@ -16,23 +16,30 @@
 package com.android.dialer.voicemail.listui;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.NewVoicemailViewHolder.NewVoicemailViewHolderListener;
@@ -67,6 +74,12 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
   private int currentlyExpandedViewHolderId = -1;
+
+  /**
+   * It takes time to delete voicemails from the server, so we "remove" them and remember the
+   * positions we removed until a new cursor is ready.
+   */
+  Set<Integer> deletedVoicemailPosition = new ArraySet<>();
 
   /**
    * A set of (re-usable) view holders being used by the recycler view to display voicemails. This
@@ -130,6 +143,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   }
 
   public void updateCursor(Cursor updatedCursor) {
+    deletedVoicemailPosition.clear();
     this.cursor = updatedCursor;
     notifyDataSetChanged();
   }
@@ -159,6 +173,20 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int position) {
     LogUtil.enterBlock("NewVoicemailAdapter.onBindViewHolder, pos:" + position);
+    // Re-request a bind when a viewholder is deleted to ensure correct position
+    if (deletedVoicemailPosition.contains(position)) {
+      LogUtil.i(
+          "NewVoicemailAdapter.onBindViewHolder",
+          "pos:%d contains deleted voicemail, re-bind. #of deleted voicemail positions: %d",
+          position,
+          deletedVoicemailPosition.size());
+      // TODO(uabdullah): This should be removed when we support multi-select delete
+      Assert.checkArgument(
+          deletedVoicemailPosition.size() == 1, "multi-deletes not currently supported");
+      onBindViewHolder(viewHolder, ++position);
+      return;
+    }
+
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
@@ -464,6 +492,55 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     onPreparedListener.onPrepared(mediaPlayer.getMediaPlayer());
   }
 
+  @Override
+  public void deleteViewHolder(
+      Context context,
+      FragmentManager fragmentManager,
+      NewVoicemailViewHolder expandedViewHolder,
+      Uri voicemailUri) {
+    LogUtil.i(
+        "NewVoicemailAdapter.deleteViewHolder",
+        "deleting adapter position %d, id:%d, uri:%s ",
+        expandedViewHolder.getAdapterPosition(),
+        expandedViewHolder.getViewHolderId(),
+        String.valueOf(voicemailUri));
+
+    deletedVoicemailPosition.add(expandedViewHolder.getAdapterPosition());
+
+    Assert.checkArgument(expandedViewHolder.getViewHolderVoicemailUri().equals(voicemailUri));
+
+    notifyItemRemoved(expandedViewHolder.getAdapterPosition());
+
+    Assert.checkArgument(currentlyExpandedViewHolderId == expandedViewHolder.getViewHolderId());
+
+    collapseExpandedViewHolder(expandedViewHolder);
+
+    Worker<Pair<Context, Uri>, Integer> deleteVoicemail = this::deleteVoicemail;
+    SuccessListener<Integer> deleteVoicemailCallBack = this::onVoicemailDeleted;
+
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createUiTaskBuilder(fragmentManager, "delete_voicemail", deleteVoicemail)
+        .onSuccess(deleteVoicemailCallBack)
+        .build()
+        .executeSerial(new Pair<>(context, voicemailUri));
+  }
+
+  private void onVoicemailDeleted(Integer integer) {
+    LogUtil.i("NewVoicemailAdapter.onVoicemailDeleted", "return value:%d", integer);
+    Assert.checkArgument(integer == 1, "voicemail delete was not successful");
+  }
+
+  @WorkerThread
+  private Integer deleteVoicemail(Pair<Context, Uri> contextUriPair) {
+    Assert.isWorkerThread();
+    LogUtil.enterBlock("NewVoicemailAdapter.deleteVoicemail");
+    Context context = contextUriPair.first;
+    Uri uri = contextUriPair.second;
+    LogUtil.i("NewVoicemailAdapter.deleteVoicemail", "deleting uri:%s", String.valueOf(uri));
+    return context.getContentResolver().delete(uri, null, null);
+  }
+
   /**
    * This function is called recursively to update the seekbar, duration, play/pause buttons of the
    * expanded view holder if its playing.
@@ -731,6 +808,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
   @Override
   public int getItemCount() {
+    // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     LogUtil.enterBlock("NewVoicemailAdapter.getItemCount");
     int numberOfHeaders = 0;
     if (todayHeaderPosition != Integer.MAX_VALUE) {
@@ -739,7 +817,14 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     if (olderHeaderPosition != Integer.MAX_VALUE) {
       numberOfHeaders++;
     }
-    return cursor.getCount() + numberOfHeaders;
+    // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
+    LogUtil.i(
+        "NewVoicemailAdapter.getItemCount",
+        "cursor cnt:%d, num of headers:%d, delete size:%d",
+        cursor.getCount(),
+        numberOfHeaders,
+        deletedVoicemailPosition.size());
+    return cursor.getCount() + numberOfHeaders - deletedVoicemailPosition.size();
   }
 
   @RowType
