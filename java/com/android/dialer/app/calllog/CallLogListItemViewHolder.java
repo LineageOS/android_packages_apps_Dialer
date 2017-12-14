@@ -922,7 +922,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       Logger.get(mContext).logImpression(DialerImpression.Type.VOICEMAIL_PLAY_AUDIO_DIRECTLY);
       mVoicemailPrimaryActionButtonClicked = true;
       mExpandCollapseListener.onClick(primaryActionView);
-    } else if (view.getId() == R.id.call_with_note_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.call_with_note_action) {
       CallSubjectDialog.start(
           (Activity) mContext,
           info.photoId,
@@ -935,7 +938,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           numberType, /* phone number type (e.g. mobile) in second line of contact view */
           getContactType(),
           accountHandle);
-    } else if (view.getId() == R.id.block_report_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.block_report_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_BLOCK_REPORT_SPAM);
       maybeShowBlockNumberMigrationDialog(
           new BlockedNumbersMigrator.Listener() {
@@ -945,7 +951,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                   displayNumber, number, countryIso, callType, info.sourceType);
             }
           });
-    } else if (view.getId() == R.id.block_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.block_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_BLOCK_NUMBER);
       maybeShowBlockNumberMigrationDialog(
           new BlockedNumbersMigrator.Listener() {
@@ -955,63 +964,72 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                   displayNumber, number, countryIso, callType, info.sourceType);
             }
           });
-    } else if (view.getId() == R.id.unblock_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.unblock_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_UNBLOCK_NUMBER);
       mBlockReportListener.onUnblock(
           displayNumber, number, countryIso, callType, info.sourceType, isSpam, blockId);
-    } else if (view.getId() == R.id.report_not_spam_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.report_not_spam_action) {
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_REPORT_AS_NOT_SPAM);
       mBlockReportListener.onReportNotSpam(
           displayNumber, number, countryIso, callType, info.sourceType);
-    } else if (view.getId() == R.id.call_compose_action) {
+      return;
+    }
+
+    if (view.getId() == R.id.call_compose_action) {
       LogUtil.i("CallLogListItemViewHolder.onClick", "share and call pressed");
       Logger.get(mContext).logImpression(DialerImpression.Type.CALL_LOG_SHARE_AND_CALL);
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(
           CallComposerActivity.newIntent(activity, buildContact()),
           ActivityRequestCodes.DIALTACTS_CALL_COMPOSER);
-    } else if (view.getId() == R.id.share_voicemail) {
+      return;
+    }
+
+    if (view.getId() == R.id.share_voicemail) {
       Logger.get(mContext).logImpression(DialerImpression.Type.VVM_SHARE_PRESSED);
       mVoicemailPlaybackPresenter.shareVoicemail();
+      return;
+    }
+
+    logCallLogAction(view.getId());
+
+    final IntentProvider intentProvider = (IntentProvider) view.getTag();
+    if (intentProvider == null) {
+      return;
+    }
+
+    final Intent intent = intentProvider.getIntent(mContext);
+    // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+    if (intent == null) {
+      return;
+    }
+
+    // We check to see if we are starting a Duo intent. The reason is Duo
+    // intents need to be started using startActivityForResult instead of the usual startActivity
+    String packageName = intent.getPackage();
+    if (DuoConstants.PACKAGE_NAME.equals(packageName)) {
+      startDuoActivity(intent);
+    } else if (CallDetailsActivity.isLaunchIntent(intent)) {
+      PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
+      ((Activity) mContext)
+          .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
     } else {
-      logCallLogAction(view.getId());
-
-      final IntentProvider intentProvider = (IntentProvider) view.getTag();
-      if (intentProvider == null) {
-        return;
+      if (Intent.ACTION_CALL.equals(intent.getAction())
+          && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
+              == VideoProfile.STATE_BIDIRECTIONAL) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
+      }
+      if (intent.getDataString().contains(DuoConstants.PACKAGE_NAME)) {
+        Logger.get(mContext).logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL);
       }
 
-      final Intent intent = intentProvider.getIntent(mContext);
-      // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-      if (intent == null) {
-        return;
-      }
-
-      // We check to see if we are starting a Duo intent. The reason is Duo
-      // intents need to be started using startActivityForResult instead of the usual startActivity
-      String packageName = intent.getPackage();
-      if (DuoConstants.PACKAGE_NAME.equals(packageName)) {
-        Logger.get(mContext)
-            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
-        if (isNonContactEntry(info)) {
-          Logger.get(mContext)
-              .logImpression(
-                  DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG);
-        }
-        startDuoActivity(intent);
-      } else if (CallDetailsActivity.isLaunchIntent(intent)) {
-        PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
-        ((Activity) mContext)
-            .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
-      } else {
-        if (Intent.ACTION_CALL.equals(intent.getAction())
-            && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
-                == VideoProfile.STATE_BIDIRECTIONAL) {
-          Logger.get(mContext)
-              .logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
-        }
-        DialerUtils.startActivityWithErrorToast(mContext, intent);
-      }
+      DialerUtils.startActivityWithErrorToast(mContext, intent);
     }
   }
 
@@ -1023,6 +1041,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   private void startDuoActivity(Intent intent) {
+    if (DuoConstants.DUO_ACTIVATE_ACTION.equals(intent.getAction())) {
+      Logger.get(mContext).logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_ACTIVATE);
+    } else if (DuoConstants.DUO_INVITE_ACTION.equals(intent.getAction())) {
+      Logger.get(mContext).logImpression(DialerImpression.Type.DUO_CALL_LOG_INVITE);
+    } else if (DuoConstants.DUO_CALL_ACTION.equals(intent.getAction())) {
+      Logger.get(mContext)
+          .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
+      if (isNonContactEntry(info)) {
+        Logger.get(mContext)
+            .logImpression(
+                DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG);
+      }
+    } else {
+      throw Assert.createIllegalStateFailException(
+          "Duo intent with invalid action" + intent.getAction());
+    }
+
     try {
       Activity activity = (Activity) mContext;
       activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
