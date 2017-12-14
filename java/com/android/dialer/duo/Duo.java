@@ -33,6 +33,9 @@ public interface Duo {
   /** @return true if the Duo integration is enabled on this device. */
   boolean isEnabled(@NonNull Context context);
 
+  /** @return true if Duo is installed on this device. */
+  boolean isInstalled(@NonNull Context context);
+
   /**
    * @return true if Duo is installed and the user has gone through the set-up flow confirming their
    *     phone number.

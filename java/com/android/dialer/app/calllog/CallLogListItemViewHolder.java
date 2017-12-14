@@ -683,7 +683,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
           inviteVideoButtonView.setVisibility(View.VISIBLE);
         } else if (duo.isEnabled(mContext)) {
-          setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
+          if (!duo.isInstalled(mContext)) {
+            setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
+          } else {
+            setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
+          }
           setUpVideoButtonView.setVisibility(View.VISIBLE);
         }
         break;
