@@ -363,6 +363,12 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     void pauseViewHolder(NewVoicemailViewHolder expandedViewHolder);
 
     void resumePausedViewHolder(NewVoicemailViewHolder expandedViewHolder);
+
+    void deleteViewHolder(
+        Context context,
+        FragmentManager fragmentManager,
+        NewVoicemailViewHolder expandedViewHolder,
+        Uri uri);
   }
 
   @Override
