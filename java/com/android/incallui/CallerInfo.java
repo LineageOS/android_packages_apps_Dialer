@@ -223,16 +223,26 @@ public class CallerInfo {
     long contactId = 0L;
     int columnIndex;
 
+    // Look for the number
+    columnIndex = cursor.getColumnIndex(PhoneLookup.NUMBER);
+    if (columnIndex != -1) {
+      // The Contacts provider ignores special characters in phone numbers when searching for a
+      // contact. For example, number "123" is considered a match with a contact with number "#123".
+      // We need to check whether the result contains a number that truly matches the query and move
+      // the cursor to that position before filling in the fields in CallerInfo.
+      boolean hasNumberMatch =
+          PhoneNumberHelper.updateCursorToMatchContactLookupUri(cursor, columnIndex, contactRef);
+      if (hasNumberMatch) {
+        info.phoneNumber = cursor.getString(columnIndex);
+      } else {
+        return info;
+      }
+    }
+
     // Look for the name
     columnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
     if (columnIndex != -1) {
       info.name = normalize(cursor.getString(columnIndex));
-    }
-
-    // Look for the number
-    columnIndex = cursor.getColumnIndex(PhoneLookup.NUMBER);
-    if (columnIndex != -1) {
-      info.phoneNumber = cursor.getString(columnIndex);
     }
 
     // Look for the normalized number
