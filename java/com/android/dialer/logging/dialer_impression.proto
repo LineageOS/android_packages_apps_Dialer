@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1308
+  // Next Tag: 1311
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -621,5 +621,9 @@ message DialerImpression {
     DUAL_SIM_SELECTION_PREFERRED_SET = 1305;
     DUAL_SIM_SELECTION_PREFERRED_USED = 1306;
     DUAL_SIM_SELECTION_GLOBAL_USED = 1307;
+
+    DUO_CALL_LOG_SET_UP_INSTALL = 1308;
+    DUO_CALL_LOG_SET_UP_ACTIVATE = 1309;
+    DUO_CALL_LOG_INVITE = 1310;
   }
 }
