@@ -109,6 +109,7 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.logging.DialerImpression;
@@ -836,6 +837,10 @@ public class DialtactsActivity extends TransactionSafeActivity
             .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
             .show();
       }
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_DUO) {
+      // We just returned from starting Duo for a task. Reload our reachability data since it
+      // may have changed after a user finished activating Duo.
+      DuoComponent.get(this).getDuo().reloadReachability(this);
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
