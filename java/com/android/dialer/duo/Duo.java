@@ -30,6 +30,7 @@ import java.util.List;
 /** Interface for Duo video call integration. */
 public interface Duo {
 
+  /** @return true if the Duo integration is enabled on this device. */
   boolean isEnabled(@NonNull Context context);
 
   /**
@@ -38,32 +39,53 @@ public interface Duo {
    */
   boolean isActivated(@NonNull Context context);
 
+  /** @return true if the parameter number is reachable on Duo. */
   @MainThread
   boolean isReachable(@NonNull Context context, @Nullable String number);
 
-  /** @return {@code null} if result is unknown. */
+  /**
+   * @return true if the number supports upgrading a voice call to a Duo video call. Returns {@code
+   *     null} if result is unknown.
+   */
   @MainThread
   Optional<Boolean> supportsUpgrade(@NonNull Context context, @Nullable String number);
 
+  /** Starts a task to update the reachability of the parameter numbers asynchronously. */
   @MainThread
   void updateReachability(@NonNull Context context, @NonNull List<String> numbers);
 
+  /**
+   * Clears the current reachability data and starts a task to load the latest reachability data
+   * asynchronously.
+   */
+  @MainThread
+  void reloadReachability(@NonNull Context context);
+
+  /**
+   * @return an Intent to start a Duo video call with the parameter number. Must be started using
+   *     startActivityForResult.
+   */
   @MainThread
   Intent getIntent(@NonNull Context context, @NonNull String number);
 
+  /** Requests upgrading the parameter ongoing call to a Duo video call. */
   @MainThread
   void requestUpgrade(@NonNull Context context, Call call);
 
+  /** Registers a listener for reachability data changes. */
   @MainThread
   void registerListener(@NonNull DuoListener listener);
 
+  /** Unregisters a listener for reachability data changes. */
   @MainThread
   void unregisterListener(@NonNull DuoListener listener);
 
+  /** The string resource to use for outgoing Duo call entries in call details. */
   @StringRes
   @MainThread
   int getOutgoingCallTypeText();
 
+  /** The string resource to use for incoming Duo call entries in call details. */
   @StringRes
   @MainThread
   int getIncomingCallTypeText();
