@@ -355,6 +355,17 @@ public class ContactInfoHelper {
         return ContactInfo.EMPTY;
       }
 
+      // The Contacts provider ignores special characters in phone numbers when searching for a
+      // contact. For example, number "123" is considered a match with a contact with number "#123".
+      // We need to check whether the result contains a number that truly matches the query and move
+      // the cursor to that position before building a ContactInfo.
+      boolean hasNumberMatch =
+          PhoneNumberHelper.updateCursorToMatchContactLookupUri(
+              phoneLookupCursor, PhoneQuery.MATCHED_NUMBER, uri);
+      if (!hasNumberMatch) {
+        return ContactInfo.EMPTY;
+      }
+
       String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
       ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
       fillAdditionalContactInfo(mContext, contactInfo);
