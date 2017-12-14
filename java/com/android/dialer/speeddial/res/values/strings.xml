@@ -24,6 +24,20 @@
   <!-- text for a button that prompts the user to add a contact to their favorites. [CHAR LIMIT=12] -->
   <string name="speed_dial_add_button_text">Add</string>
 
+  <!-- text for a checkbox in a dialog that prompts the user to select a phone number from a list.
+    If the user checks this box, we will remember their selection and never ask for it again. [CHAR LIMIT=NONE]-->
+  <string name="speed_dial_remember_this_choice">Remember this choice</string>
+
+  <!-- Title of a dialog asking the user to choose their favorite mode of communication for a
+    specific contact where communication modes are video calling and voice calling. [CHAR LIMIT=NONE]-->
+  <string name="speed_dial_disambig_dialog_title">Choose a Favorite mode</string>
+
+  <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
+  <string name="disambig_option_video_call">Video call</string>
+
+  <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
+  <string name="disambig_option_voice_call">Call</string>
+
   <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
   <string name="add_favorite_activity_title">Add Favorite</string>
 </resources>
