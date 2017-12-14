@@ -114,7 +114,7 @@ public abstract class IntentProvider {
                 .scheme("https")
                 .authority("play.google.com")
                 .appendEncodedPath("store/apps/details")
-                .appendQueryParameter("id", "com.google.android.apps.tachyon")
+                .appendQueryParameter("id", DuoConstants.PACKAGE_NAME)
                 .appendQueryParameter(
                     "referrer",
                     "utm_source=dialer&utm_medium=text&utm_campaign=product") // This string is from
@@ -128,8 +128,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new Intent("com.google.android.apps.tachyon.action.REGISTER")
-            .setPackage(DuoConstants.PACKAGE_NAME);
+        return new Intent(DuoConstants.DUO_ACTIVATE_ACTION).setPackage(DuoConstants.PACKAGE_NAME);
       }
     };
   }
@@ -139,7 +138,7 @@ public abstract class IntentProvider {
       @Override
       public Intent getIntent(Context context) {
         Intent intent =
-            new Intent("com.google.android.apps.tachyon.action.INVITE")
+            new Intent(DuoConstants.DUO_INVITE_ACTION)
                 .setPackage(DuoConstants.PACKAGE_NAME)
                 .setData(Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null /* fragment */));
         return intent;
