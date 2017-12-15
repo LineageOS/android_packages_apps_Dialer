@@ -27,6 +27,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
@@ -35,6 +36,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.time.Clock;
+import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail tab. */
@@ -46,6 +48,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private final TextView transcriptionTextView;
   private final QuickContactBadge quickContactBadge;
   private final NewVoicemailMediaPlayerView mediaPlayerView;
+  private final ImageView menuButton;
   private final Clock clock;
   private boolean isViewHolderExpanded;
   private int viewHolderId;
@@ -63,6 +66,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     transcriptionTextView = view.findViewById(R.id.transcription_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
     mediaPlayerView = view.findViewById(R.id.new_voicemail_media_player);
+    menuButton = view.findViewById(R.id.menu_button);
     this.clock = clock;
     voicemailViewHolderListener = newVoicemailViewHolderListener;
 
@@ -121,6 +125,9 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     }
 
     itemView.setOnClickListener(this);
+    menuButton.setOnClickListener(
+        NewVoicemailMenu.createOnClickListener(context, voicemailEntryOfViewHolder));
+
     setPhoto(voicemailEntryOfViewHolder);
 
     // Update the expanded/collapsed state of this view holder
