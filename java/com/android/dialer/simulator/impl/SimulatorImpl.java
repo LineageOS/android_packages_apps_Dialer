@@ -16,7 +16,7 @@
 
 package com.android.dialer.simulator.impl;
 
-import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ActionProvider;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.common.LogUtil;
@@ -34,7 +34,7 @@ final class SimulatorImpl implements Simulator {
   }
 
   @Override
-  public ActionProvider getActionProvider(Context context) {
-    return SimulatorMainMenu.getActionProvider(context);
+  public ActionProvider getActionProvider(AppCompatActivity activity) {
+    return SimulatorMainMenu.getActionProvider(activity);
   }
 }

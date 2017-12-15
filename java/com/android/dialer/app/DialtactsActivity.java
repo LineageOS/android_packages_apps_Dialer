@@ -1737,7 +1737,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       Simulator simulator = SimulatorComponent.get(context).getSimulator();
       if (simulator.shouldShow()) {
         simulatorMenuItem.setVisible(true);
-        simulatorMenuItem.setActionProvider(simulator.getActionProvider(context));
+        simulatorMenuItem.setActionProvider(simulator.getActionProvider(DialtactsActivity.this));
       } else {
         simulatorMenuItem.setVisible(false);
       }
