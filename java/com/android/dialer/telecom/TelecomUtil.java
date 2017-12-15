@@ -157,6 +157,9 @@ public abstract class TelecomUtil {
     if (TextUtils.isEmpty(phoneAccountHandle.getId())) {
       return Optional.absent();
     }
+    if (!hasPermission(context, permission.READ_PHONE_STATE)) {
+      return Optional.absent();
+    }
     SubscriptionManager subscriptionManager = context.getSystemService(SubscriptionManager.class);
     List<SubscriptionInfo> subscriptionInfos = subscriptionManager.getActiveSubscriptionInfoList();
     if (subscriptionInfos == null) {
