@@ -359,15 +359,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   }
 
   public static CallLogListItemViewHolder createForTest(Context context) {
-    return createForTest(context, null, null);
+    return createForTest(context, null, null, new CallLogCache(context));
   }
 
   public static CallLogListItemViewHolder createForTest(
       Context context,
       View.OnClickListener expandCollapseListener,
-      VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+      VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+      CallLogCache callLogCache) {
     Resources resources = context.getResources();
-    CallLogCache callLogCache = new CallLogCache(context);
     PhoneCallDetailsHelper phoneCallDetailsHelper =
         new PhoneCallDetailsHelper(context, resources, callLogCache);
 
@@ -661,6 +661,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callButtonView.setVisibility(View.VISIBLE);
     }
 
+    boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
+
     switch (callbackAction) {
       case CallbackAction.IMS_VIDEO:
       case CallbackAction.DUO:
@@ -677,13 +679,21 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             && (hasPlacedCarrierVideoCall() || canSupportCarrierVideoCall())) {
           videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
-        } else if (duo.isReachable(mContext, number)) {
+          break;
+        }
+
+        if (isVoicemailNumber) {
+          break;
+        }
+
+        boolean identifiedSpamCall = isSpamFeatureEnabled && isSpam;
+        if (duo.isReachable(mContext, number)) {
           videoCallButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
-        } else if (duo.isActivated(mContext)) {
+        } else if (duo.isActivated(mContext) && !identifiedSpamCall) {
           inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
           inviteVideoButtonView.setVisibility(View.VISIBLE);
-        } else if (duo.isEnabled(mContext)) {
+        } else if (duo.isEnabled(mContext) && !identifiedSpamCall) {
           if (!duo.isInstalled(mContext)) {
             setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
           } else {
@@ -730,7 +740,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     boolean isBlockedOrSpam = blockId != null || (isSpamFeatureEnabled && isSpam);
-
+    
     if (!isBlockedOrSpam && info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
       createNewContactButtonView.setTag(
           IntentProvider.getAddContactIntentProvider(
@@ -746,7 +756,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       addToExistingContactButtonView.setVisibility(View.GONE);
     }
 
-    boolean isVoicemailNumber = mCallLogCache.isVoicemailNumber(accountHandle, number);
     if (canPlaceCallToNumber && !isBlockedOrSpam && !isVoicemailNumber) {
       sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
       sendMessageView.setVisibility(View.VISIBLE);
