@@ -16,9 +16,14 @@
   -->
 
 <resources>
+  <!-- Option shown in call log menu/voicemail to add the phone number from an entry to an existing contact
+       (also provides option to create a new contact from the number). [CHAR LIMIT=30] -->
+  <string name="add_to_contacts">Add to contacts</string>
 
-  <!-- Option shown in call log menu to navigate the user to the call details screen where the user
-       can view details for the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_details_menu_label">Call details</string>
+  <!-- Options shown in call log/voicemail menu to send a SMS to the number represented by the call log/voicemailentry.
+     [CHAR LIMIT=30] -->
+  <string name="send_a_message">Send a message</string>
 
+  <!-- Option displayed in call log/voicemail menu to copy phone number. [CHAR LIMIT=30] -->
+  <string name="copy_number">Copy number</string>
 </resources>
