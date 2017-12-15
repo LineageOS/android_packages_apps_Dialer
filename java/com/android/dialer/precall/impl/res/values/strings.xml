@@ -15,6 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Toast when the user tried to place a call but has revoked phone permission [CHAR_LIMIT=none]  -->
+  <string name="pre_call_permission_check_no_phone_permission">Cannot make call without phone permission</string>
+
   <!-- Title of the dialog to select which SIM to call with before making a call, if the device has
   multiple SIMs [CHAR LIMIT=40]-->
   <string name="pre_call_select_phone_account">Choose SIM for this call</string>
