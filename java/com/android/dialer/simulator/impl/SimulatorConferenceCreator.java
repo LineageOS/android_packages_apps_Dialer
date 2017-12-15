@@ -92,7 +92,7 @@ final class SimulatorConferenceCreator
   private void addConferenceCall(String number, Bundle extras) {
     switch (conferenceType) {
       case Simulator.CONFERENCE_TYPE_VOLTE:
-        extras.putBoolean("ISVOLTE", true);
+        extras.putBoolean(Simulator.IS_VOLTE, true);
         break;
       default:
         break;

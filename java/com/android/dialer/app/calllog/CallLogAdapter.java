@@ -844,7 +844,6 @@ public class CallLogAdapter extends GroupingListAdapter
     // attempt to set the field properly in that case
     viewHolder.isCallComposerCapable = isCallComposerCapable(viewHolder.number);
     viewHolder.setDetailedPhoneDetails(callDetailsEntries);
-    viewHolder.duo = getDuo();
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
           @Override
