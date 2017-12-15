@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.provider.VoicemailContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ActionProvider;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -34,20 +35,26 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 /** Implements the top level simulator menu. */
 final class SimulatorMainMenu {
 
-  static ActionProvider getActionProvider(@NonNull Context context) {
-    return new SimulatorSubMenu(context)
-        .addItem("Voice call", SimulatorVoiceCall.getActionProvider(context))
-        .addItem("IMS video", SimulatorVideoCall.getActionProvider(context))
-        .addItem("Notifications", SimulatorNotifications.getActionProvider(context))
-        .addItem("Populate database", () -> populateDatabase(context))
-        .addItem("Fast populate database", () -> fastPopulateDatabase(context))
-        .addItem("Clean database", () -> cleanDatabase(context))
-        .addItem("clear preferred SIM", () -> clearPreferredSim(context))
-        .addItem("Sync voicemail", () -> syncVoicemail(context))
-        .addItem("Share persistent log", () -> sharePersistentLog(context))
+  static ActionProvider getActionProvider(@NonNull AppCompatActivity activity) {
+    return new SimulatorSubMenu(activity.getApplicationContext())
+        .addItem("Voice call", SimulatorVoiceCall.getActionProvider(activity))
+        .addItem(
+            "IMS video", SimulatorVideoCall.getActionProvider(activity.getApplicationContext()))
+        .addItem(
+            "Notifications",
+            SimulatorNotifications.getActionProvider(activity.getApplicationContext()))
+        .addItem("Populate database", () -> populateDatabase(activity.getApplicationContext()))
+        .addItem(
+            "Fast populate database", () -> fastPopulateDatabase(activity.getApplicationContext()))
+        .addItem("Clean database", () -> cleanDatabase(activity.getApplicationContext()))
+        .addItem("clear preferred SIM", () -> clearPreferredSim(activity.getApplicationContext()))
+        .addItem("Sync voicemail", () -> syncVoicemail(activity.getApplicationContext()))
+        .addItem("Share persistent log", () -> sharePersistentLog(activity.getApplicationContext()))
         .addItem(
             "Enriched call simulator",
-            () -> context.startActivity(EnrichedCallSimulatorActivity.newIntent(context)));
+            () ->
+                activity.startActivity(
+                    EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())));
   }
 
   private static void populateDatabase(@NonNull Context context) {

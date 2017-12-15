@@ -79,6 +79,7 @@ import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
 import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
@@ -231,7 +232,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public boolean isSpam;
 
   public boolean isCallComposerCapable;
-  public Duo duo;
 
   private View.OnClickListener mExpandCollapseListener;
   private final OnActionModeStateChangedListener onActionModeStateChangedListener;
@@ -670,6 +670,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         videoCallButtonView.setVisibility(View.GONE);
         break;
       case CallbackAction.VOICE:
+        Duo duo = DuoComponent.get(mContext).getDuo();
         // For a voice call, set the secondary callback action to be an IMS video call if it is
         // available. Otherwise try to set it as a Duo call.
         if (CallUtil.isVideoEnabled(mContext)
@@ -776,7 +777,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   private boolean showDuoPrimaryButton() {
     return accountHandle != null
         && accountHandle.getComponentName().equals(DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME)
-        && duo.isReachable(mContext, number);
+        && DuoComponent.get(mContext).getDuo().isReachable(mContext, number);
   }
 
   private static boolean hasDialableChar(CharSequence number) {
