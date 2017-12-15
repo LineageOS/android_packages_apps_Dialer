@@ -17,24 +17,19 @@
 package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
-import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.contactactions.ContactActionModule;
 import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.IntentModule;
+import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.util.IntentUtil;
-import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +43,12 @@ final class Modules {
     // Conditionally add each module, which are items in the bottom sheet's menu.
     List<ContactActionModule> modules = new ArrayList<>();
 
-    maybeAddModuleForVideoOrAudioCall(context, row, modules);
-    maybeAddModuleForAddingToContacts(context, row, modules);
+    maybeAddModuleForVideoOrAudioCall(context, modules, row);
+    SharedModules.maybeAddModuleForAddingToContacts(
+        context, modules, row.number(), row.name(), row.lookupUri());
 
     String originalNumber = row.number().getRawInput().getNumber();
-    maybeAddModuleForSendingTextMessage(context, originalNumber, modules);
+    SharedModules.maybeAddModuleForSendingTextMessage(context, modules, originalNumber);
 
     if (!modules.isEmpty()) {
       modules.add(new DividerModule());
@@ -60,17 +56,17 @@ final class Modules {
 
     // TODO(zachh): Module for blocking/unblocking spam.
     // TODO(zachh): Module for CallComposer.
-    maybeAddModuleForCopyingNumber(context, originalNumber, modules);
+    SharedModules.maybeAddModuleForCopyingNumber(context, modules, originalNumber);
 
     // TODO(zachh): Revisit if DialerContact is the best thing to pass to CallDetails; could
     // it use a ContactPrimaryActionInfo instead?
-    addModuleForAccessingCallDetails(context, row, modules);
+    addModuleForAccessingCallDetails(context, modules, row);
 
     return modules;
   }
 
   private static void maybeAddModuleForVideoOrAudioCall(
-      Context context, CoalescedRow row, List<ContactActionModule> modules) {
+      Context context, List<ContactActionModule> modules, CoalescedRow row) {
     String originalNumber = row.number().getRawInput().getNumber();
     if (TextUtils.isEmpty(originalNumber)) {
       // Skip adding the menu item if the phone number is unknown.
@@ -96,92 +92,8 @@ final class Modules {
     }
   }
 
-  private static void maybeAddModuleForAddingToContacts(
-      Context context, CoalescedRow row, List<ContactActionModule> modules) {
-    // TODO(zachh): Only show this for non-spam/blocked numbers.
-
-    // Skip showing the menu item for existing contacts.
-    if (isExistingContact(row)) {
-      return;
-    }
-
-    // Skip showing the menu item if there is no number.
-    String originalNumber = row.number().getRawInput().getNumber();
-    if (TextUtils.isEmpty(originalNumber)) {
-      return;
-    }
-
-    Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-    intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
-    intent.putExtra(ContactsContract.Intents.Insert.PHONE, originalNumber);
-
-    if (!TextUtils.isEmpty(row.name())) {
-      intent.putExtra(ContactsContract.Intents.Insert.NAME, row.name());
-    }
-    modules.add(
-        new IntentModule(
-            context,
-            intent,
-            R.string.add_to_contacts,
-            R.drawable.quantum_ic_person_add_vd_theme_24));
-  }
-
-  /**
-   * Lookup URIs are currently fetched from the cached column of the system call log. This URI
-   * contains encoded information for non-contacts for the purposes of populating contact cards.
-   *
-   * <p>We infer whether a contact is existing or not by checking if the lookup URI is "encoded" or
-   * not.
-   *
-   * <p>TODO(zachh): We should revisit this once the contact URI is no longer being read from the
-   * cached column in the system database, in case we decide not to overload the column.
-   */
-  private static boolean isExistingContact(CoalescedRow row) {
-    return !TextUtils.isEmpty(row.lookupUri())
-        && !UriUtils.isEncodedContactUri(Uri.parse(row.lookupUri()));
-  }
-
-  private static void maybeAddModuleForSendingTextMessage(
-      Context context, String originalNumber, List<ContactActionModule> modules) {
-    // TODO(zachh): There are some conditions where this module should not be shown; consider
-    // voicemail, business numbers, blocked numbers, spam numbers, etc.
-    if (!TextUtils.isEmpty(originalNumber)) {
-      modules.add(
-          new IntentModule(
-              context,
-              IntentUtil.getSendSmsIntent(originalNumber),
-              R.string.send_a_message,
-              R.drawable.quantum_ic_message_vd_theme_24));
-    }
-  }
-
-  private static void maybeAddModuleForCopyingNumber(
-      Context context, String originalNumber, List<ContactActionModule> modules) {
-    if (TextUtils.isEmpty(originalNumber)) {
-      return;
-    }
-    modules.add(
-        new ContactActionModule() {
-          @Override
-          public int getStringId() {
-            return R.string.copy_number;
-          }
-
-          @Override
-          public int getDrawableId() {
-            return R.drawable.quantum_ic_content_copy_vd_theme_24;
-          }
-
-          @Override
-          public boolean onClick() {
-            ClipboardUtils.copyText(context, null, originalNumber, true);
-            return false;
-          }
-        });
-  }
-
   private static void addModuleForAccessingCallDetails(
-      Context context, CoalescedRow row, List<ContactActionModule> modules) {
+      Context context, List<ContactActionModule> modules, CoalescedRow row) {
     // TODO(zachh): Load canReportInaccurateNumber in CallDetailsActivity
     // (see also isPeopleApiSource(sourceType)).
     boolean canReportInaccurateNumber = false;
