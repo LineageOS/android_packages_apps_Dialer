@@ -50,4 +50,36 @@ message PhoneLookupInfo {
     optional bool is_spam = 1;
   }
   optional ApdlInfo apdl_info = 2;
+
+  // Message for PeopleApi, including G+ contacts and nearby places
+  message PeopleApiInfo {
+    // Best display name determined by people API if available, first display
+    // name otherwise.
+    optional string display_name = 1;
+
+    // The type of the number, for example "phone" or "home".
+    optional string number_type = 2;
+
+    // The number_type label in human readable string, for example "Phone".
+    // The UI should display known number_type with string resources if possible
+    // but if number_type is unrecognized formatted_number_type. For example
+    // if the user set an custom type label.
+    optional string formatted_number_type = 3;
+
+    // URL to the contact's full size photo.
+    optional string image_url = 4;
+
+    // The primary key of the contact in people API.
+    optional string person_id = 5;
+
+    enum InfoType {
+      UNKNOWN = 0;
+      CONTACT = 1;          // the result is a saved contact in people API
+      NEARBY_BUSINESS = 2;  // the result is found through nearby places
+    }
+    // The type of the lookup result, for example, a saved contact or a nearby
+    // business.
+    optional InfoType info_type = 6;
+  }
+  optional PeopleApiInfo people_api_info = 3;
 }
