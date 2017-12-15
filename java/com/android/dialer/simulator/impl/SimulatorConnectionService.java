@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.simulator.SimulatorConnectionsBank;
 import java.util.ArrayList;
@@ -80,10 +81,13 @@ public class SimulatorConnectionService extends ConnectionService {
       SimulatorSimCallManager.unregister(this);
       return null;
     }
-
     SimulatorConnection connection = new SimulatorConnection(this, request);
+    connection.setAddress(
+        request.getAddress(),
+        request
+            .getExtras()
+            .getInt(Simulator.PRESENTATION_CHOICE, TelecomManager.PRESENTATION_ALLOWED));
     connection.setDialing();
-    connection.setAddress(request.getAddress(), TelecomManager.PRESENTATION_ALLOWED);
     simulatorConnectionsBank.add(connection);
     ThreadUtil.postOnUiThread(
         () ->
@@ -109,10 +113,13 @@ public class SimulatorConnectionService extends ConnectionService {
       SimulatorSimCallManager.unregister(this);
       return null;
     }
-
     SimulatorConnection connection = new SimulatorConnection(this, request);
+    connection.setAddress(
+        getPhoneNumber(request),
+        request
+            .getExtras()
+            .getInt(Simulator.PRESENTATION_CHOICE, TelecomManager.PRESENTATION_ALLOWED));
     connection.setRinging();
-    connection.setAddress(getPhoneNumber(request), TelecomManager.PRESENTATION_ALLOWED);
     simulatorConnectionsBank.add(connection);
     ThreadUtil.postOnUiThread(
         () ->
@@ -138,11 +145,6 @@ public class SimulatorConnectionService extends ConnectionService {
     }
   }
 
-  private static Uri getPhoneNumber(ConnectionRequest request) {
-    String phoneNumber = request.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-    return Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null);
-  }
-
   /** Callback used to notify listeners when a new connection has been added. */
   public interface Listener {
     void onNewOutgoingConnection(@NonNull SimulatorConnection connection);
@@ -151,5 +153,10 @@ public class SimulatorConnectionService extends ConnectionService {
 
     void onConference(
         @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2);
+  }
+
+  private static Uri getPhoneNumber(ConnectionRequest request) {
+    String phoneNumber = request.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+    return Uri.fromParts(PhoneAccount.SCHEME_TEL, phoneNumber, null);
   }
 }
