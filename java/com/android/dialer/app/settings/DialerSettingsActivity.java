@@ -40,6 +40,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.proguard.UsedByReflection;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VoicemailClient;
 import java.util.List;
@@ -191,6 +192,11 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       LogUtil.i(
           "DialerSettingsActivity.addVoicemailSettings",
           "Dialer voicemail settings not supported by system");
+      return;
+    }
+
+    if (!PermissionsUtil.hasReadPhoneStatePermissions(this)) {
+      LogUtil.i("DialerSettingsActivity.addVoicemailSettings", "Missing READ_PHONE_STATE");
       return;
     }
 
