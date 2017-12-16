@@ -39,8 +39,9 @@ message PhoneLookupInfo {
       optional string lookup_uri = 6;
     }
     // Repeated because one phone number can be associated with multiple CP2
-    // contacts. If no contact is found for a number, this will contain exactly
-    // one element which is the default Cp2ContactInfo instance.
+    // contacts.
+    //
+    // Empty if there is no CP2 contact information for the number.
     repeated Cp2ContactInfo cp2_contact_info = 1;
   }
   optional Cp2Info cp2_info = 1;
