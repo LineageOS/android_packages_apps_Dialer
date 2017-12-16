@@ -22,7 +22,6 @@ import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.ArraySet;
@@ -39,6 +38,7 @@ import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
+import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -96,9 +96,32 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   }
 
   @Override
-  public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
-    // TODO(zachh): Implementation.
-    return backgroundExecutorService.submit(PhoneLookupInfo::getDefaultInstance);
+  public ListenableFuture<PhoneLookupInfo> lookup(Call call) {
+    return backgroundExecutorService.submit(() -> lookupInternal(call));
+  }
+
+  private PhoneLookupInfo lookupInternal(Call call) {
+    String rawNumber = TelecomCallUtil.getNumber(call);
+    if (TextUtils.isEmpty(rawNumber)) {
+      return PhoneLookupInfo.getDefaultInstance();
+    }
+    Optional<String> e164 = TelecomCallUtil.getE164Number(appContext, call);
+    Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
+    try (Cursor cursor =
+        e164.isPresent()
+            ? queryPhoneTableBasedOnE164(CP2_INFO_PROJECTION, ImmutableSet.of(e164.get()))
+            : queryPhoneTableBasedOnRawNumber(CP2_INFO_PROJECTION, ImmutableSet.of(rawNumber))) {
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.lookupInternal", "null cursor");
+        return PhoneLookupInfo.getDefaultInstance();
+      }
+      while (cursor.moveToNext()) {
+        cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+      }
+    }
+    return PhoneLookupInfo.newBuilder()
+        .setCp2Info(Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos))
+        .build();
   }
 
   @Override
@@ -226,10 +249,11 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>
       getMostRecentPhoneLookupInfo(
           ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
-    return backgroundExecutorService.submit(() -> bulkUpdateInternal(existingInfoMap));
+    return backgroundExecutorService.submit(
+        () -> getMostRecentPhoneLookupInfoInternal(existingInfoMap));
   }
 
-  private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> bulkUpdateInternal(
+  private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> getMostRecentPhoneLookupInfoInternal(
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     currentLastTimestampProcessed = null;
     long lastModified = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
@@ -381,7 +405,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
             String e164Number = cursor.getString(CP2_INFO_NORMALIZED_NUMBER_INDEX);
             Set<DialerPhoneNumber> dialerPhoneNumbers =
                 partitionedNumbers.dialerPhoneNumbersForE164(e164Number);
-            Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(appContext, cursor);
+            Cp2ContactInfo info = buildCp2ContactInfoFromPhoneCursor(appContext, cursor);
             addInfo(map, dialerPhoneNumbers, info);
           }
         }
@@ -398,7 +422,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
             String unformattableNumber = cursor.getString(CP2_INFO_NUMBER_INDEX);
             Set<DialerPhoneNumber> dialerPhoneNumbers =
                 partitionedNumbers.dialerPhoneNumbersForUnformattable(unformattableNumber);
-            Cp2ContactInfo info = buildCp2ContactInfoFromUpdatedContactsCursor(appContext, cursor);
+            Cp2ContactInfo info = buildCp2ContactInfoFromPhoneCursor(appContext, cursor);
             addInfo(map, dialerPhoneNumbers, info);
           }
         }
@@ -453,7 +477,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
    * @param cursor with projection {@link #CP2_INFO_PROJECTION}.
    * @return new {@link Cp2ContactInfo} based on current row of {@code cursor}.
    */
-  private static Cp2ContactInfo buildCp2ContactInfoFromUpdatedContactsCursor(
+  private static Cp2ContactInfo buildCp2ContactInfoFromPhoneCursor(
       Context appContext, Cursor cursor) {
     String displayName = cursor.getString(CP2_INFO_NAME_INDEX);
     String photoUri = cursor.getString(CP2_INFO_PHOTO_URI_INDEX);
