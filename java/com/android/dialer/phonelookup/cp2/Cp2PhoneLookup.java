@@ -47,7 +47,6 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Set;
 import javax.inject.Inject;
 
@@ -99,7 +98,6 @@ public final class Cp2PhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
     // TODO(zachh): Implementation.
-    // TODO(zachh): Note: Should write empty Cp2Info even when no contact found.
     return backgroundExecutorService.submit(PhoneLookupInfo::getDefaultInstance);
   }
 
@@ -264,11 +262,9 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         infoBuilder.setCp2Info(
             Cp2Info.newBuilder().addAllCp2ContactInfo(updatedContacts.get(dialerPhoneNumber)));
 
-        // If it was deleted and not added to a new contact, replace the Cp2ContactInfo list with
-        // the default instance of Cp2ContactInfo
+        // If it was deleted and not added to a new contact, clear all the CP2 information.
       } else if (deletedPhoneNumbers.contains(dialerPhoneNumber)) {
-        infoBuilder.setCp2Info(
-            Cp2Info.newBuilder().addCp2ContactInfo(Cp2ContactInfo.getDefaultInstance()));
+        infoBuilder.clearCp2Info();
       }
 
       // If the DialerPhoneNumber didn't change, add the unchanged existing info.
@@ -319,25 +315,26 @@ public final class Cp2PhoneLookup implements PhoneLookup {
         continue;
       }
 
-      // Note: Methods in this class must always set at least one Cp2Info, setting it to
-      // getDefaultInstance() if there is no information for the contact.
-      Assert.checkState(
-          existingInfo.getCp2Info().getCp2ContactInfoCount() > 0, "existing info has no cp2 infos");
-
-      // For each Cp2ContactInfo for each existing DialerPhoneNumber...
-      // Store the contact id if it exist, else automatically add the DialerPhoneNumber to our
-      // set of DialerPhoneNumbers we want to update.
-      for (Cp2ContactInfo cp2ContactInfo : existingInfo.getCp2Info().getCp2ContactInfoList()) {
-        if (Objects.equals(cp2ContactInfo, Cp2ContactInfo.getDefaultInstance())) {
-          // If the number doesn't have any Cp2ContactInfo set to it, for various reasons, we need
-          // to look up the number to check if any exists.
-          // The various reasons this might happen are:
-          //  - An existing contact that wasn't in the call log is now in the call log.
-          //  - A number was in the call log before but has now been added to a contact.
-          //  - A number is in the call log, but isn't associated with any contact.
-          updatedNumbers.add(dialerPhoneNumber);
-        } else {
-          contactIds.add(cp2ContactInfo.getContactId());
+      /// When the PhoneLookupHistory contains no information for a number, because for example the
+      // user just upgraded to the new UI, or cleared data, we need to check for updated info.
+      if (existingInfo.getCp2Info().getCp2ContactInfoCount() == 0) {
+        updatedNumbers.add(dialerPhoneNumber);
+      } else {
+        // For each Cp2ContactInfo for each existing DialerPhoneNumber...
+        // Store the contact id if it exist, else automatically add the DialerPhoneNumber to our
+        // set of DialerPhoneNumbers we want to update.
+        for (Cp2ContactInfo cp2ContactInfo : existingInfo.getCp2Info().getCp2ContactInfoList()) {
+          long existingContactId = cp2ContactInfo.getContactId();
+          if (existingContactId == 0) {
+            // If the number doesn't have a contact id, for various reasons, we need to look up the
+            // number to check if any exists. The various reasons this might happen are:
+            //  - An existing contact that wasn't in the call log is now in the call log.
+            //  - A number was in the call log before but has now been added to a contact.
+            //  - A number is in the call log, but isn't associated with any contact.
+            updatedNumbers.add(dialerPhoneNumber);
+          } else {
+            contactIds.add(cp2ContactInfo.getContactId());
+          }
         }
       }
     }
