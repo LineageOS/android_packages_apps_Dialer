@@ -261,10 +261,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
             | WindowManager.LayoutParams.FLAG_IGNORE_CHEEK_PRESSES;
 
-    // When the audio stream is not directed through Bluetooth, turn the screen on once the
-    // activity is shown.
+    // When the audio stream is not via Bluetooth, turn on the screen once the activity is shown.
+    // When the audio stream is via Bluetooth, turn on the screen only for an incoming call.
     final int audioRoute = getAudioRoute();
-    if (audioRoute != CallAudioState.ROUTE_BLUETOOTH) {
+    if (audioRoute != CallAudioState.ROUTE_BLUETOOTH
+        || CallList.getInstance().getIncomingCall() != null) {
       flags |= WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
     }
 
