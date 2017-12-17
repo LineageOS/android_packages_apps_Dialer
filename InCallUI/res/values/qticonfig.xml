@@ -50,4 +50,6 @@
     <bool name="config_show_hd2">false</bool>
     <!-- Config to enalbe call record -->
     <bool name="enable_call_record">false</bool>
+    <!-- Determine whether emergency calls should be marked. -->
+    <bool name="mark_emergency_call">true</bool>
 </resources>

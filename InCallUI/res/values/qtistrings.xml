@@ -31,8 +31,6 @@
 
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Dtermine whether emergency calls should be marked. -->
-    <bool name="mark_emergency_call">true</bool>
     <!-- Call substate label -->
     <string name="call_substate_label"> Call substate - \u000a</string>
     <!-- Call substate label for call resumed -->
@@ -107,8 +105,7 @@
     <!-- Title of the IMS to CS redial dialog -->
     <string name="cs_redial_option">Redial Option</string>
     <!-- Message text of the IMS to CS redial dialog -->
-    <string name="cs_redial_msg">Unable to make an IMS Video call, try to dial as non-IMS voice call
-?</string>
+    <string name="cs_redial_msg">Unable to make an IMS Video call, try to dial as non-IMS voice call?</string>
     <!-- Yes option of the IMS to CS redial dialog -->
     <string name="cs_redial_yes">Yes</string>
     <!-- No option of the IMS to CS redial dialog -->
