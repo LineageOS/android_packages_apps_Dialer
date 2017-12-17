@@ -171,8 +171,8 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
 
         if (!callSubstateChangedText.isEmpty()) {
             String callSubstateLabelText = mContext.getResources().getString(
-                    R.string.call_substate_label);
-            QtiCallUtils.displayToast(mContext, callSubstateLabelText + callSubstateChangedText);
+                    R.string.call_substate_label, call.getId(), callSubstateChangedText);
+            QtiCallUtils.displayToast(mContext, callSubstateLabelText);
         }
     }
 
@@ -193,7 +193,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
                 QtiCarrierConfigs.SHOW_VIDEO_QUALITY_TOAST)) {
             final Resources resources = mContext.getResources();
             final String videoQualityChangedText = resources.getString(
-                    R.string.video_quality_changed) + resources.getString(
+                    R.string.video_quality_changed, call.getId(),
                     QtiCallUtils.getVideoQualityResourceId(videoQuality));
             QtiCallUtils.displayToast(mContext, videoQualityChangedText);
         }
@@ -254,7 +254,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
                 QtiCarrierConfigs.SHOW_DATA_USAGE_TOAST)) {
             final String dataUsageChangedText = mContext.getResources().getString(
-                    R.string.wlan_data_usage_label) + wlanUsage;
+                    R.string.wlan_data_usage_label, wlanUsage);
             QtiCallUtils.displayToast(mContext, dataUsageChangedText);
         }
     }
@@ -269,7 +269,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
                 QtiCarrierConfigs.SHOW_DATA_USAGE_TOAST)) {
             final String dataUsageChangedText = mContext.getResources().getString(
-                    R.string.lte_data_usage_label) + dataUsage;
+                    R.string.lte_data_usage_label, dataUsage);
             QtiCallUtils.displayToast(mContext, dataUsageChangedText);
         }
     }
