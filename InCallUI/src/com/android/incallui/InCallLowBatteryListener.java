@@ -411,7 +411,7 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
             });
 
             alertDialog.setMessage(R.string.low_battery_msg);
-            alertDialog.setPositiveButton(R.string.low_battery_yes, new OnClickListener() {
+            alertDialog.setPositiveButton(android.R.string.yes, new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                      Log.d(this, "displayLowBatteryAlert answer as Video Call");
@@ -437,7 +437,7 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
             });
 
             alertDialog.setMessage(R.string.low_battery_msg);
-            alertDialog.setPositiveButton(R.string.low_battery_yes, new OnClickListener() {
+            alertDialog.setPositiveButton(android.R.string.yes, new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                      Log.d(this, "displayLowBatteryAlert place Video Call");
@@ -453,7 +453,7 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
             if (QtiCallUtils.hasVoiceCapabilities(call)) {
                 //active video call can be downgraded to voice
                 alertDialog.setMessage(R.string.low_battery_msg);
-                alertDialog.setPositiveButton(R.string.low_battery_yes, null);
+                alertDialog.setPositiveButton(android.R.string.yes, null);
                 alertDialog.setNegativeButton(R.string.low_battery_convert, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -465,8 +465,8 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
                 /* video call doesn't have downgrade capabilities, so alert the user
                    with a hangup dialog*/
                 alertDialog.setMessage(R.string.low_battery_hangup_msg);
-                alertDialog.setNegativeButton(R.string.low_battery_no, null);
-                alertDialog.setPositiveButton(R.string.low_battery_yes, new OnClickListener() {
+                alertDialog.setNegativeButton(android.R.string.no, null);
+                alertDialog.setPositiveButton(android.R.string.yes, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(this, "displayLowBatteryAlert hanging up the call: " + call);
