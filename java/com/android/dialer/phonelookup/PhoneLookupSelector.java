@@ -46,6 +46,9 @@ public final class PhoneLookupSelector {
         return firstLocalContact.getName();
       }
     }
+    if (phoneLookupInfo.hasPeopleApiInfo()) {
+      return phoneLookupInfo.getPeopleApiInfo().getDisplayName();
+    }
     return "";
   }
 

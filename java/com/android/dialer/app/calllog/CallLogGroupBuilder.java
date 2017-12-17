@@ -189,13 +189,26 @@ public class CallLogGroupBuilder {
     mGroupCreator.addGroup(count - groupSize, groupSize);
   }
 
+  /**
+   * Returns true when the two input numbers can be considered identical enough for caller ID
+   * purposes and put in a call log group.
+   */
   @VisibleForTesting
   boolean equalNumbers(@Nullable String number1, @Nullable String number2) {
     if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {
       return compareSipAddresses(number1, number2);
-    } else {
-      return PhoneNumberUtils.compare(number1, number2);
     }
+
+    // PhoneNumberUtils.compare(String, String) ignores special characters such as '#'. For example,
+    // it thinks "123" and "#123" are identical enough for caller ID purposes.
+    // When either input number contains special characters, we put the two in the same group iff
+    // their raw numbers are exactly the same.
+    if (PhoneNumberHelper.numberHasSpecialChars(number1)
+        || PhoneNumberHelper.numberHasSpecialChars(number2)) {
+      return PhoneNumberHelper.sameRawNumbers(number1, number2);
+    }
+
+    return PhoneNumberUtils.compare(number1, number2);
   }
 
   private boolean isSameAccount(String name1, String name2, String id1, String id2) {

@@ -17,8 +17,10 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.view.ActionProvider;
@@ -34,20 +36,43 @@ final class SimulatorVoiceCall
   @NonNull private final Context context;
   @Nullable private String connectionTag;
 
-  static ActionProvider getActionProvider(@NonNull Context context) {
-    return new SimulatorSubMenu(context)
-        .addItem("Incoming call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(false))
-        .addItem("Outgoing call", () -> new SimulatorVoiceCall(context).addNewOutgoingCall())
-        .addItem("Spam call", () -> new SimulatorVoiceCall(context).addNewIncomingCall(true))
+  static ActionProvider getActionProvider(@NonNull AppCompatActivity activity) {
+    return new SimulatorSubMenu(activity.getApplicationContext())
         .addItem(
-            "Emergency call back", () -> new SimulatorVoiceCall(context).addNewEmergencyCallBack())
+            "Incoming call",
+            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addNewIncomingCall())
+        .addItem(
+            "Outgoing call",
+            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addNewOutgoingCall())
+        .addItem(
+            "Customized incoming call",
+            () ->
+                new SimulatorVoiceCall(activity.getApplicationContext())
+                    .addNewIncomingCall(activity))
+        .addItem(
+            "Customized outgoing call",
+            () ->
+                new SimulatorVoiceCall(activity.getApplicationContext())
+                    .addNewOutgoingCall(activity))
+        .addItem(
+            "Spam incoming call",
+            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addSpamIncomingCall())
+        .addItem(
+            "Emergency call back",
+            () ->
+                new SimulatorVoiceCall(activity.getApplicationContext()).addNewEmergencyCallBack())
         .addItem(
             "GSM conference",
-            () -> new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM).start(5))
+            () ->
+                new SimulatorConferenceCreator(
+                        activity.getApplicationContext(), Simulator.CONFERENCE_TYPE_GSM)
+                    .start(5))
         .addItem(
             "VoLTE conference",
             () ->
-                new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_VOLTE).start(5));
+                new SimulatorConferenceCreator(
+                        activity.getApplicationContext(), Simulator.CONFERENCE_TYPE_VOLTE)
+                    .start(5));
   }
 
   private SimulatorVoiceCall(@NonNull Context context) {
@@ -57,11 +82,8 @@ final class SimulatorVoiceCall
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  private void addNewIncomingCall(boolean isSpam) {
-    String callerId =
-        isSpam
-            ? "+1-661-778-3020" /* Blacklisted custom spam number */
-            : "+44 (0) 20 7031 3000" /* Google London office */;
+  private void addNewIncomingCall() {
+    String callerId = "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
   }
@@ -70,6 +92,35 @@ final class SimulatorVoiceCall
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
+  }
+
+  private void addNewIncomingCall(AppCompatActivity activity) {
+    SimulatorDialogFragment.newInstance(
+            (callerId, callerIdPresentation) -> {
+              Bundle extras = new Bundle();
+              extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
+              connectionTag =
+                  SimulatorSimCallManager.addNewIncomingCall(
+                      context, callerId, false /* isVideo */, extras);
+            })
+        .show(activity.getSupportFragmentManager(), "SimulatorDialog");
+  }
+
+  private void addNewOutgoingCall(AppCompatActivity activity) {
+    SimulatorDialogFragment.newInstance(
+            (callerId, callerIdPresentation) -> {
+              Bundle extras = new Bundle();
+              extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
+              connectionTag =
+                  SimulatorSimCallManager.addNewOutgoingCall(
+                      context, callerId, false /* isVideo */, extras);
+            })
+        .show(activity.getSupportFragmentManager(), "SimulatorDialog");
+  }
+
+  private void addSpamIncomingCall() {
+    String callerId = "+1-661-778-3020"; /* Blacklisted custom spam number */
+    SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
   }
 
   private void addNewEmergencyCallBack() {
@@ -140,5 +191,9 @@ final class SimulatorVoiceCall
         LogUtil.i("SimulatorVoiceCall.onEvent", "unexpected event: " + event.type);
         break;
     }
+  }
+
+  private interface DialogCallback {
+    void callback(String callerId, int callerIdPresentation);
   }
 }

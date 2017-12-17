@@ -17,6 +17,8 @@
 package com.android.dialer.phonenumberutil;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Trace;
 import android.provider.CallLog;
 import android.support.annotation.NonNull;
@@ -27,6 +29,7 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
@@ -47,6 +50,91 @@ public class PhoneNumberHelper {
     return presentation == CallLog.Calls.PRESENTATION_ALLOWED
         && !TextUtils.isEmpty(number)
         && !isLegacyUnknownNumbers(number);
+  }
+
+  /**
+   * Move the given cursor to a position where the number it points to matches the number in a
+   * contact lookup URI.
+   *
+   * <p>We assume the cursor is one returned by the Contacts Provider when the URI asks for a
+   * specific number. This method's behavior is undefined when the cursor doesn't meet the
+   * assumption.
+   *
+   * <p>When determining whether two phone numbers are identical enough for caller ID purposes, the
+   * Contacts Provider ignores special characters such as '#'. This makes it possible for the cursor
+   * returned by the Contacts Provider to have multiple rows even when the URI asks for a specific
+   * number.
+   *
+   * <p>For example, suppose the user has two contacts whose numbers are "#123" and "123",
+   * respectively. When the URI asks for number "123", both numbers will be returned. Therefore, the
+   * following strategy is employed to find a match.
+   *
+   * <p>In the following description, we use E to denote a number the cursor points to (an existing
+   * contact number), and L to denote the number in the contact lookup URI.
+   *
+   * <p>If neither E nor L contains special characters, return true to indicate a match is found.
+   *
+   * <p>If either E or L contains special characters, return true when the raw numbers of E and L
+   * are the same. Otherwise, move the cursor to its next position and start over.
+   *
+   * <p>Return false in all other circumstances to indicate that no match can be found.
+   *
+   * <p>When no match can be found, the cursor is after the last result when the method returns.
+   *
+   * @param cursor A cursor returned by the Contacts Provider.
+   * @param columnIndexForNumber The index of the column where phone numbers are stored. It is the
+   *     caller's responsibility to pass the correct column index.
+   * @param contactLookupUri A URI used to retrieve a contact via the Contacts Provider. It is the
+   *     caller's responsibility to ensure the URI is one that asks for a specific phone number.
+   * @return true if a match can be found.
+   */
+  public static boolean updateCursorToMatchContactLookupUri(
+      @Nullable Cursor cursor, int columnIndexForNumber, @Nullable Uri contactLookupUri) {
+    if (cursor == null || contactLookupUri == null) {
+      return false;
+    }
+
+    if (!cursor.moveToFirst()) {
+      return false;
+    }
+
+    Assert.checkArgument(
+        0 <= columnIndexForNumber && columnIndexForNumber < cursor.getColumnCount());
+
+    String lookupNumber = contactLookupUri.getLastPathSegment();
+    if (TextUtils.isEmpty(lookupNumber)) {
+      return false;
+    }
+
+    boolean lookupNumberHasSpecialChars = numberHasSpecialChars(lookupNumber);
+
+    do {
+      String existingContactNumber = cursor.getString(columnIndexForNumber);
+      boolean existingContactNumberHasSpecialChars = numberHasSpecialChars(existingContactNumber);
+
+      if ((!lookupNumberHasSpecialChars && !existingContactNumberHasSpecialChars)
+          || sameRawNumbers(existingContactNumber, lookupNumber)) {
+        return true;
+      }
+
+    } while (cursor.moveToNext());
+
+    return false;
+  }
+
+  /** Returns true if the input phone number contains special characters. */
+  public static boolean numberHasSpecialChars(String number) {
+    return !TextUtils.isEmpty(number) && number.contains("#");
+  }
+
+  /** Returns true if the raw numbers of the two input phone numbers are the same. */
+  public static boolean sameRawNumbers(String number1, String number2) {
+    String rawNumber1 =
+        PhoneNumberUtils.stripSeparators(PhoneNumberUtils.convertKeypadLettersToDigits(number1));
+    String rawNumber2 =
+        PhoneNumberUtils.stripSeparators(PhoneNumberUtils.convertKeypadLettersToDigits(number2));
+
+    return rawNumber1.equals(rawNumber2);
   }
 
   /**

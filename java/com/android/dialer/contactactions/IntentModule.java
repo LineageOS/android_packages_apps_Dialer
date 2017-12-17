@@ -25,6 +25,7 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.util.DialerUtils;
 
 /**
  * {@link ContactActionModule} useful for making easy to build modules based on starting an intent.
@@ -55,7 +56,7 @@ public class IntentModule implements ContactActionModule {
 
   @Override
   public boolean onClick() {
-    context.startActivity(intent);
+    DialerUtils.startActivityWithErrorToast(context, intent);
     return true;
   }
 

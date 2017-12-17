@@ -55,6 +55,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.theme \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
+	com.android.dialer.voicemail.listui.menu \
 	com.android.dialer.voicemail.settings \
 	com.android.dialer.voicemailstatus \
 	com.android.dialer.widget \

@@ -72,12 +72,36 @@ public class TelecomCallUtil {
   }
 
   /**
-   * Normalizes the number of the {@code call} to E.164. If the country code is missing in the
-   * number the SIM's country will be used. Only removes non-dialable digits if the country code is
-   * missing.
+   * Normalizes the number of the {@code call} to E.164. The country of the SIM associated with the
+   * call is used to determine the country.
+   *
+   * <p>If the number cannot be formatted (because for example the country cannot be determined),
+   * returns the number with non-dialable digits removed.
    */
   @WorkerThread
   public static Optional<String> getNormalizedNumber(Context appContext, Call call) {
+    Assert.isWorkerThread();
+
+    Optional<String> e164 = getE164Number(appContext, call);
+    if (e164.isPresent()) {
+      return e164;
+    }
+    String rawNumber = getNumber(call);
+    if (TextUtils.isEmpty(rawNumber)) {
+      return Optional.absent();
+    }
+    return Optional.of(PhoneNumberUtils.normalizeNumber(rawNumber));
+  }
+
+  /**
+   * Formats the number of the {@code call} to E.164. The country of the SIM associated with the
+   * call is used to determine the country.
+   *
+   * <p>If the number cannot be formatted (because for example the country cannot be determined),
+   * returns {@link Optional#absent()}.
+   */
+  @WorkerThread
+  public static Optional<String> getE164Number(Context appContext, Call call) {
     Assert.isWorkerThread();
     PhoneAccountHandle phoneAccountHandle = call.getDetails().getAccountHandle();
     Optional<SubscriptionInfo> subscriptionInfo =
@@ -86,21 +110,13 @@ public class TelecomCallUtil {
     if (TextUtils.isEmpty(rawNumber)) {
       return Optional.absent();
     }
-    String normalizedNumber = PhoneNumberUtils.normalizeNumber(rawNumber);
-    if (TextUtils.isEmpty(normalizedNumber)) {
-      return Optional.absent();
-    }
     String countryCode =
         subscriptionInfo.isPresent() ? subscriptionInfo.get().getCountryIso() : null;
     if (countryCode == null) {
-      LogUtil.w(
-          "PhoneLookupHistoryRecorder.getNormalizedNumber",
-          "couldn't find a country code for call");
-      return Optional.of(normalizedNumber);
+      LogUtil.w("TelecomCallUtil.getE164Number", "couldn't find a country code for call");
+      return Optional.absent();
     }
-
-    String e164Number =
-        PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.toUpperCase(Locale.US));
-    return e164Number == null ? Optional.of(normalizedNumber) : Optional.of(e164Number);
+    return Optional.fromNullable(
+        PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.toUpperCase(Locale.US)));
   }
 }
