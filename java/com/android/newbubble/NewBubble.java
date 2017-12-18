@@ -25,8 +25,8 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent.CanceledException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Path;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -38,7 +38,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v4.os.BuildCompat;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.transition.TransitionManager;
 import android.transition.TransitionValues;
@@ -55,6 +54,7 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -87,7 +87,12 @@ public class NewBubble {
   // This ensures the new window has had time to draw first.
   private static final int WINDOW_REDRAW_DELAY_MILLIS = 50;
 
+  private static final int EXPAND_AND_COLLAPSE_ANIMATION_DURATION = 200;
+
   private static Boolean canShowBubblesForTesting = null;
+
+  private final AccelerateDecelerateInterpolator accelerateDecelerateInterpolator =
+      new AccelerateDecelerateInterpolator();
 
   private final Context context;
   private final WindowManager windowManager;
@@ -233,7 +238,12 @@ public class NewBubble {
     }
     setPrimaryButtonAccessibilityAction(
         context.getString(R.string.a11y_bubble_primary_button_collapse_action));
+
     viewHolder.setDrawerVisibility(View.INVISIBLE);
+    viewHolder.getArrow().setVisibility(View.INVISIBLE);
+    // No click during animation to avoid jank.
+    viewHolder.setPrimaryButtonClickable(false);
+
     View expandedView = viewHolder.getExpandedView();
     expandedView
         .getViewTreeObserver()
@@ -247,47 +257,46 @@ public class NewBubble {
                   savedYPosition = windowParams.y;
                 }
 
-                // Calculate the move-to-middle distance
+                // Animation 1: animate x-move and y-move (if needed) together
                 int deltaX =
                     (int) viewHolder.getRoot().findViewById(R.id.bubble_primary_container).getX();
-                float k = (float) moveUpDistance / deltaX;
+                float k = -(float) moveUpDistance / deltaX;
                 if (isDrawingFromRight()) {
                   deltaX = -deltaX;
                 }
+                ValueAnimator xValueAnimator =
+                    createBubbleMoveAnimator(
+                        windowParams.x - deltaX, windowParams.x, windowParams.y, k);
 
-                // Do X-move and Y-move together
+                // Show expanded view
+                expandedView.setVisibility(View.VISIBLE);
 
-                final int startX = windowParams.x - deltaX;
-                final int startY = windowParams.y;
-                ValueAnimator animator = ValueAnimator.ofFloat(startX, windowParams.x);
-                animator.setInterpolator(new LinearOutSlowInInterpolator());
-                animator.addUpdateListener(
-                    (valueAnimator) -> {
-                      // Update windowParams and the root layout.
-                      // We can't do ViewPropertyAnimation since it clips children.
-                      float newX = (float) valueAnimator.getAnimatedValue();
-                      if (moveUpDistance != 0) {
-                        windowParams.y = startY - (int) (Math.abs(newX - (float) startX) * k);
-                      }
-                      windowParams.x = (int) newX;
-                      windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
-                    });
-                animator.addListener(
+                // Animator 2: reveal expanded view from top left or top right
+                View expandedMenu = viewHolder.getRoot().findViewById(R.id.bubble_expanded_menu);
+                ValueAnimator revealAnim =
+                    createOpenCloseOutlineProvider(expandedMenu)
+                        .createRevealAnimator(expandedMenu, false);
+                revealAnim.setInterpolator(accelerateDecelerateInterpolator);
+
+                // Animator 3: expanded view fade in
+                Animator fadeIn = ObjectAnimator.ofFloat(expandedView, "alpha", 0, 1);
+                fadeIn.setInterpolator(accelerateDecelerateInterpolator);
+
+                // Play all animation together
+                AnimatorSet expandAnimatorSet = new AnimatorSet();
+                expandAnimatorSet.playTogether(revealAnim, fadeIn, xValueAnimator);
+                expandAnimatorSet.setDuration(EXPAND_AND_COLLAPSE_ANIMATION_DURATION);
+                expandAnimatorSet.addListener(
                     new AnimatorListenerAdapter() {
                       @Override
                       public void onAnimationEnd(Animator animation) {
-                        // Show expanded view
-                        expandedView.setVisibility(View.VISIBLE);
-                        expandedView.setTranslationY(-expandedView.getHeight());
-                        expandedView.setAlpha(0);
-                        expandedView
-                            .animate()
-                            .setInterpolator(new LinearOutSlowInInterpolator())
-                            .translationY(0)
-                            .alpha(1);
+                        // Show arrow after animation
+                        viewHolder.getArrow().setVisibility(View.VISIBLE);
+                        // Safe to click primary button now
+                        viewHolder.setPrimaryButtonClickable(true);
                       }
                     });
-                animator.start();
+                expandAnimatorSet.start();
 
                 expandedView.getViewTreeObserver().removeOnPreDrawListener(this);
                 return false;
@@ -315,89 +324,79 @@ public class NewBubble {
     if (isUserAction && collapseEndAction == CollapseEnd.NOTHING) {
       logBasicOrCallImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
     }
+
     setPrimaryButtonAccessibilityAction(
         context.getString(R.string.a11y_bubble_primary_button_expand_action));
-    // Animate expanded view to move from its position to above primary button and hide
-    collapseAnimation =
-        expandedView
-            .animate()
-            .translationY(-expandedView.getHeight())
-            .alpha(0)
-            .setInterpolator(new FastOutLinearInInterpolator())
-            .withEndAction(
+
+    // Hide arrow before animation
+    viewHolder.getArrow().setVisibility(View.INVISIBLE);
+
+    // No click during animation to avoid jank.
+    viewHolder.setPrimaryButtonClickable(false);
+
+    // Calculate animation values
+    int deltaX = (int) viewHolder.getRoot().findViewById(R.id.bubble_primary_container).getX();
+    float k =
+        (savedYPosition != -1 && shouldRecoverYPosition)
+            ? (savedYPosition - windowParams.y) / (float) deltaX
+            : 0;
+    // The position is not useful after collapse
+    savedYPosition = -1;
+
+    // Animation 1: animate x-move and y-move (if needed) together
+    ValueAnimator xValueAnimator =
+        createBubbleMoveAnimator(windowParams.x, windowParams.x - deltaX, windowParams.y, k);
+
+    // Animator 2: hide expanded view to top left or top right
+    View expandedMenu = viewHolder.getRoot().findViewById(R.id.bubble_expanded_menu);
+    ValueAnimator revealAnim =
+        createOpenCloseOutlineProvider(expandedMenu).createRevealAnimator(expandedMenu, true);
+    revealAnim.setInterpolator(accelerateDecelerateInterpolator);
+
+    // Animator 3: expanded view fade out
+    Animator fadeOut = ObjectAnimator.ofFloat(expandedView, "alpha", 1, 0);
+    fadeOut.setInterpolator(accelerateDecelerateInterpolator);
+
+    // Play all animation together
+    AnimatorSet collapseAnimatorSet = new AnimatorSet();
+    collapseAnimatorSet.setDuration(EXPAND_AND_COLLAPSE_ANIMATION_DURATION);
+    collapseAnimatorSet.playTogether(revealAnim, fadeOut, xValueAnimator);
+    collapseAnimatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            collapseAnimation = null;
+            expanded = false;
+
+            if (textShowing) {
+              // Will do resize once the text is done.
+              return;
+            }
+
+            // If this collapse was to come before a hide, do it now.
+            if (collapseEndAction == CollapseEnd.HIDE) {
+              hide();
+            }
+            collapseEndAction = CollapseEnd.NOTHING;
+
+            // If collapse on the right side, the primary button move left a bit after drawer
+            // visibility becoming GONE. To avoid it, we create a new ViewHolder.
+            // It also set primary button clickable back to true, so no need to reset manually.
+            replaceViewHolder();
+
+            // Resume normal gravity after any resizing is done.
+            handler.postDelayed(
                 () -> {
-                  collapseAnimation = null;
-                  expanded = false;
-
-                  if (textShowing) {
-                    // Will do resize once the text is done.
-                    return;
+                  overrideGravity = null;
+                  if (!viewHolder.isMoving()) {
+                    viewHolder.undoGravityOverride();
                   }
-
-                  // Set drawer visibility to INVISIBLE instead of GONE to keep primary button fixed
-                  viewHolder.setDrawerVisibility(View.INVISIBLE);
-
-                  // Do X-move and Y-move together
-                  int deltaX =
-                      (int) viewHolder.getRoot().findViewById(R.id.bubble_primary_container).getX();
-                  int startX = windowParams.x;
-                  int startY = windowParams.y;
-                  float k =
-                      (savedYPosition != -1 && shouldRecoverYPosition)
-                          ? (savedYPosition - startY) / (float) deltaX
-                          : 0;
-                  Path path = new Path();
-                  path.moveTo(windowParams.x, windowParams.y);
-                  path.lineTo(
-                      windowParams.x - deltaX,
-                      (savedYPosition != -1 && shouldRecoverYPosition)
-                          ? savedYPosition
-                          : windowParams.y);
-                  // The position is not useful after collapse
-                  savedYPosition = -1;
-
-                  ValueAnimator animator = ValueAnimator.ofFloat(startX, startX - deltaX);
-                  animator.setInterpolator(new LinearOutSlowInInterpolator());
-                  animator.addUpdateListener(
-                      (valueAnimator) -> {
-                        // Update windowParams and the root layout.
-                        // We can't do ViewPropertyAnimation since it clips children.
-                        float newX = (float) valueAnimator.getAnimatedValue();
-                        if (k != 0) {
-                          windowParams.y = startY + (int) (Math.abs(newX - (float) startX) * k);
-                        }
-                        windowParams.x = (int) newX;
-                        windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
-                      });
-                  animator.addListener(
-                      new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                          // If collapse on the right side, the primary button move left a bit after
-                          // drawer
-                          // visibility becoming GONE. To avoid it, we create a new ViewHolder.
-                          replaceViewHolder();
-                        }
-                      });
-                  animator.start();
-
-                  // If this collapse was to come before a hide, do it now.
-                  if (collapseEndAction == CollapseEnd.HIDE) {
-                    hide();
-                  }
-                  collapseEndAction = CollapseEnd.NOTHING;
-
-                  // Resume normal gravity after any resizing is done.
-                  handler.postDelayed(
-                      () -> {
-                        overrideGravity = null;
-                        if (!viewHolder.isMoving()) {
-                          viewHolder.undoGravityOverride();
-                        }
-                      },
-                      // Need to wait twice as long for resize and layout
-                      WINDOW_REDRAW_DELAY_MILLIS * 2);
-                });
+                },
+                // Need to wait twice as long for resize and layout
+                WINDOW_REDRAW_DELAY_MILLIS * 2);
+          }
+        });
+    collapseAnimatorSet.start();
   }
 
   /**
@@ -917,18 +916,45 @@ public class NewBubble {
             });
   }
 
+  private RoundedRectRevealOutlineProvider createOpenCloseOutlineProvider(View view) {
+    int startRectX = isDrawingFromRight() ? view.getMeasuredWidth() : 0;
+    Rect startRect = new Rect(startRectX, 0, startRectX, 0);
+    Rect endRect = new Rect(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+
+    float bubbleRadius = context.getResources().getDimension(R.dimen.bubble_radius);
+    return new RoundedRectRevealOutlineProvider(bubbleRadius, bubbleRadius, startRect, endRect);
+  }
+
+  private ValueAnimator createBubbleMoveAnimator(int startX, int endX, int startY, float k) {
+    ValueAnimator xValueAnimator = ValueAnimator.ofFloat(startX, endX);
+    xValueAnimator.setInterpolator(new LinearOutSlowInInterpolator());
+    xValueAnimator.addUpdateListener(
+        (valueAnimator) -> {
+          // Update windowParams and the root layout.
+          // We can't do ViewPropertyAnimation since it clips children.
+          float newX = (float) valueAnimator.getAnimatedValue();
+          if (k != 0) {
+            windowParams.y = startY + (int) (Math.abs(newX - (float) startX) * k);
+          }
+          windowParams.x = (int) newX;
+          windowManager.updateViewLayout(viewHolder.getRoot(), windowParams);
+        });
+    return xValueAnimator;
+  }
+
   @VisibleForTesting
   class ViewHolder {
 
     public static final int CHILD_INDEX_AVATAR_AND_ICON = 0;
     public static final int CHILD_INDEX_TEXT = 1;
 
-    private final NewMoveHandler moveHandler;
+    private NewMoveHandler moveHandler;
     private final NewWindowRoot root;
     private final ViewAnimator primaryButton;
     private final ImageView primaryIcon;
     private final ImageView primaryAvatar;
     private final TextView primaryText;
+    private final View arrow;
 
     private final NewCheckableButton fullScreenButton;
     private final NewCheckableButton muteButton;
@@ -946,6 +972,7 @@ public class NewBubble {
       primaryAvatar = contentView.findViewById(R.id.bubble_icon_avatar);
       primaryIcon = contentView.findViewById(R.id.bubble_icon_primary);
       primaryText = contentView.findViewById(R.id.bubble_text);
+      arrow = contentView.findViewById(R.id.bubble_triangle);
 
       fullScreenButton = contentView.findViewById(R.id.bubble_button_full_screen);
       muteButton = contentView.findViewById(R.id.bubble_button_mute);
@@ -985,8 +1012,10 @@ public class NewBubble {
       muteButton.setClickable(clickable);
       audioRouteButton.setClickable(clickable);
       endCallButton.setClickable(clickable);
+      setPrimaryButtonClickable(clickable);
+    }
 
-      // For primaryButton
+    private void setPrimaryButtonClickable(boolean clickable) {
       moveHandler.setClickable(clickable);
     }
 
@@ -1022,6 +1051,10 @@ public class NewBubble {
 
     public View getExpandedView() {
       return expandedView;
+    }
+
+    public View getArrow() {
+      return arrow;
     }
 
     public NewCheckableButton getFullScreenButton() {
