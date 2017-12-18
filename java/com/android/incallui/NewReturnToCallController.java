@@ -219,11 +219,15 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   private void onPhotoAvatarReceived(@NonNull Drawable photo) {
-    bubble.updatePhotoAvatar(photo);
+    if (bubble != null) {
+      bubble.updatePhotoAvatar(photo);
+    }
   }
 
   private void onLetterTileAvatarReceived(@NonNull Drawable photo) {
-    bubble.updateAvatar(photo);
+    if (bubble != null) {
+      bubble.updateAvatar(photo);
+    }
   }
 
   private NewBubbleInfo generateBubbleInfo() {
