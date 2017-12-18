@@ -17,14 +17,11 @@
 
 
 <resources>
-  <dimen name="bubble_safe_margin_x">16dp</dimen>
-  <dimen name="bubble_safe_margin_y">64dp</dimen>
-  <dimen name="bubble_size">56dp</dimen>
-  <dimen name="bubble_drawer_margin">48dp</dimen>
-  <dimen name="bubble_drawer_padding_start">32dp</dimen>
-  <dimen name="bubble_drawer_padding_end">8dp</dimen>
-  <dimen name="bubble_icon_padding">16dp</dimen>
-  <dimen name="bubble_move_elevation_change">4dp</dimen>
-  <dimen name="bubble_shadow_padding_size">16dp</dimen>
+    <dimen name="bubble_size">64dp</dimen>
+    <dimen name="bubble_drawer_margin">54dp</dimen>
+    <dimen name="bubble_drawer_padding_start">38dp</dimen>
+    <dimen name="bubble_drawer_padding_end">10dp</dimen>
+    <dimen name="bubble_icon_padding">18dp</dimen>
+    <dimen name="bubble_shadow_padding_size">18dp</dimen>
 </resources>
 
