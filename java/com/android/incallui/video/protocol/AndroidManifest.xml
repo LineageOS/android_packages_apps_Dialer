@@ -18,5 +18,5 @@
     package="com.android.incallui.video.protocol">
   <uses-sdk
       android:minSdkVersion="23"
-      android:targetSdkVersion="26"/>
+      android:targetSdkVersion="27"/>
 </manifest>
