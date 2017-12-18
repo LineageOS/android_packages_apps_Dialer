@@ -16,6 +16,7 @@
 
 package com.android.dialer.smartdial;
 
+/** {@link SmartDialMap} for Latin based T9 dialpad searching. */
 public class LatinSmartDialMap implements SmartDialMap {
 
   private static final char[] LATIN_LETTERS_TO_DIGITS = {
