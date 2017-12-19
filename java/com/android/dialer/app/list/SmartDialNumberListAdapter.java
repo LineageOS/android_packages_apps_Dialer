@@ -25,7 +25,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.SmartDialCursorLoader;
 import com.android.dialer.smartdial.SmartDialMatchPosition;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
-import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
 
@@ -35,11 +34,13 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
   private static final String TAG = SmartDialNumberListAdapter.class.getSimpleName();
   private static final boolean DEBUG = false;
 
+  private final Context mContext;
   @NonNull private final SmartDialNameMatcher mNameMatcher;
 
   public SmartDialNumberListAdapter(Context context) {
     super(context);
-    mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap());
+    mContext = context;
+    mNameMatcher = new SmartDialNameMatcher("");
     setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
 
     if (DEBUG) {
@@ -72,7 +73,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
   protected void setHighlight(ContactListItemView view, Cursor cursor) {
     view.clearHighlightSequences();
 
-    if (mNameMatcher.matches(cursor.getString(PhoneQuery.DISPLAY_NAME))) {
+    if (mNameMatcher.matches(mContext, cursor.getString(PhoneQuery.DISPLAY_NAME))) {
       final ArrayList<SmartDialMatchPosition> nameMatches = mNameMatcher.getMatchPositions();
       for (SmartDialMatchPosition match : nameMatches) {
         view.addNameHighlightSequence(match.start, match.end);
@@ -89,7 +90,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     }
 
     final SmartDialMatchPosition numberMatch =
-        mNameMatcher.matchesNumber(cursor.getString(PhoneQuery.PHONE_NUMBER));
+        mNameMatcher.matchesNumber(mContext, cursor.getString(PhoneQuery.PHONE_NUMBER));
     if (numberMatch != null) {
       view.addNumberHighlightSequence(numberMatch.start, numberMatch.end);
     }

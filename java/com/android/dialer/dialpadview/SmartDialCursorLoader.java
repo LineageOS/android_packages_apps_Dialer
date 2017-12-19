@@ -26,7 +26,6 @@ import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
-import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 
@@ -59,10 +58,10 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     if (DEBUG) {
       LogUtil.v(TAG, "Configure new query to be " + query);
     }
-    mQuery = SmartDialNameMatcher.normalizeNumber(query, SmartDialPrefix.getMap());
+    mQuery = SmartDialNameMatcher.normalizeNumber(mContext, query);
 
     /** Constructs a name matcher object for matching names. */
-    mNameMatcher = new SmartDialNameMatcher(mQuery, SmartDialPrefix.getMap());
+    mNameMatcher = new SmartDialNameMatcher(mQuery);
     mNameMatcher.setShouldMatchEmptyQuery(!mShowEmptyListForNullQuery);
   }
 
