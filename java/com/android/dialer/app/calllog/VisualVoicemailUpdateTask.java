@@ -67,9 +67,11 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       // Query failed, just return
       return;
     }
-    boolean shouldAlert = !voicemailsToNotify.isEmpty();
-    voicemailsToNotify.addAll(getAndUpdateVoicemailsWithExistingNotification(context, queryHelper));
     voicemailsToNotify = filterBlockedNumbers(context, queryHandler, voicemailsToNotify);
+    boolean shouldAlert =
+        !voicemailsToNotify.isEmpty()
+            && voicemailsToNotify.size() > getExistingNotificationCount(context);
+    voicemailsToNotify.addAll(getAndUpdateVoicemailsWithExistingNotification(context, queryHelper));
     if (voicemailsToNotify.isEmpty()) {
       LogUtil.i("VisualVoicemailUpdateTask.updateNotification", "no voicemails to notify about");
       VisualVoicemailNotifier.cancelAllVoicemailNotifications(context);
@@ -105,6 +107,25 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
 
     // Set trigger to update notifications when database changes.
     VoicemailNotificationJobService.scheduleJob(context);
+  }
+
+  @WorkerThread
+  @NonNull
+  private static int getExistingNotificationCount(Context context) {
+    Assert.isWorkerThread();
+    int result = 0;
+    for (StatusBarNotification notification :
+        DialerNotificationManager.getActiveNotifications(context)) {
+      if (notification.getId() != VisualVoicemailNotifier.NOTIFICATION_ID) {
+        continue;
+      }
+      if (TextUtils.isEmpty(notification.getTag())
+          || !notification.getTag().startsWith(VisualVoicemailNotifier.NOTIFICATION_TAG_PREFIX)) {
+        continue;
+      }
+      result++;
+    }
+    return result;
   }
 
   /**
