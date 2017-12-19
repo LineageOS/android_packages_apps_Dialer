@@ -1295,7 +1295,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return new ShouldShowUiResult(true, call);
     }
 
-    if (call.hasSentVideoUpgradeRequest()) {
+    if (call.hasSentVideoUpgradeRequest() || call.hasReceivedVideoUpgradeRequest()) {
       LogUtil.i("InCallActivity.getShouldShowVideoUi", "upgrading to video");
       return new ShouldShowUiResult(true, call);
     }
