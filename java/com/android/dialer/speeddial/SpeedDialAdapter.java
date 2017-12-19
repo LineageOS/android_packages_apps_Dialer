@@ -90,7 +90,7 @@ final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     switch (cursor.getRowType(position)) {
       case RowType.HEADER:
         ((HeaderViewHolder) holder).setHeaderText(cursor.getHeader());
-        ((HeaderViewHolder) holder).showAddButton(cursor.hasFavorites() && position == 0);
+        ((HeaderViewHolder) holder).showAddButton(position == 0);
         break;
       case RowType.STARRED:
         ((FavoritesViewHolder) holder).bind(context, cursor);

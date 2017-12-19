@@ -32,6 +32,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.speeddial.room.SpeedDialDatabaseComponent;
+import com.android.dialer.speeddial.room.SpeedDialEntry;
 import com.google.auto.value.AutoValue;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ public final class ContactsPopulator {
         .addEmail(new Email("m@example.com"))
         .setIsStarred(true)
         .setPinned(1)
+        .setContactId(1L)
         .setOrangePhoto()
         .build(),
     // US, contact with a non-e164 number.
@@ -58,6 +61,7 @@ public final class ContactsPopulator {
         .addEmail(new Email("l@example.com"))
         .setIsStarred(true)
         .setPinned(2)
+        .setContactId(2L)
         .setBluePhoto()
         .build(),
     // UK, number where the (0) should be dropped.
@@ -67,6 +71,7 @@ public final class ContactsPopulator {
         .addEmail(new Email("r@example.com"))
         .setIsStarred(true)
         .setPinned(3)
+        .setContactId(3L)
         .setRedPhoto()
         .build(),
     // US and Australia, contact with a long name and multiple phone numbers.
@@ -77,6 +82,7 @@ public final class ContactsPopulator {
         .addPhoneNumber(new PhoneNumber("+61 2 9374 4001", Phone.TYPE_FAX_HOME))
         .setIsStarred(true)
         .setPinned(4)
+        .setContactId(4L)
         .setPurplePhoto()
         .build(),
     // US, phone number shared with another contact and 2nd phone number with wait and pause.
@@ -155,6 +161,14 @@ public final class ContactsPopulator {
     addContact(SIMPLE_CONTACTS[5], operations);
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+      SpeedDialDatabaseComponent.get(context.getApplicationContext())
+          .speedDialDatabase()
+          .getSpeedDialEntryDao()
+          .insert(
+              new SpeedDialEntry(
+                  SIMPLE_CONTACTS[0].getPhoneNumbers().get(0).value,
+                  SIMPLE_CONTACTS[0].getContactId(),
+                  SpeedDialEntry.VOICE));
     } catch (RemoteException | OperationApplicationException e) {
       Assert.fail("error adding contacts: " + e);
     }
@@ -192,6 +206,7 @@ public final class ContactsPopulator {
             .withValue(
                 ContactsContract.RawContacts.PINNED,
                 contact.getIsStarred() ? contact.getPinned() : 0)
+            .withValue(ContactsContract.RawContacts.CONTACT_ID, contact.getContactId())
             .withYieldAllowed(true)
             .build());
 
@@ -262,6 +277,9 @@ public final class ContactsPopulator {
 
     abstract int getPinned();
 
+    @NonNull
+    abstract long getContactId();
+
     @Nullable
     abstract ByteArrayOutputStream getPhotoStream();
 
@@ -277,6 +295,7 @@ public final class ContactsPopulator {
           .setAccountName("foo@example")
           .setPinned(0)
           .setIsStarred(false)
+          .setContactId(0)
           .setPhoneNumbers(new ArrayList<>())
           .setEmails(new ArrayList<>());
     }
@@ -295,6 +314,8 @@ public final class ContactsPopulator {
       abstract Builder setIsStarred(boolean isStarred);
 
       abstract Builder setPinned(int position);
+
+      abstract Builder setContactId(long contactId);
 
       abstract Builder setPhotoStream(ByteArrayOutputStream photoStream);
 

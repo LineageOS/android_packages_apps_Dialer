@@ -31,6 +31,8 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
+import com.android.dialer.speeddial.room.SpeedDialDatabaseComponent;
+import com.android.dialer.speeddial.room.SpeedDialEntry;
 
 /**
  * Activity for selecting a single contact and adding it to favorites.
@@ -93,13 +95,19 @@ public class AddFavoriteActivity extends AppCompatActivity implements OnContactS
 
   @WorkerThread
   private int markContactStarred(long contactId) {
-    // TODO(calderwoodra): For now, we will just mark contacts as starred. This means that contacts
-    // will only be able to exist once in favorites until we implement multiple contact avenues.
+    // Insert into SpeedDialEntry database
+    SpeedDialDatabaseComponent.get(getApplicationContext())
+        .speedDialDatabase()
+        .getSpeedDialEntryDao()
+        .insert(SpeedDialEntry.newSpeedDialEntry(contactId));
+
+    // Insert into Cp2
     ContentValues contentValues = new ContentValues();
     contentValues.put(Contacts.STARRED, 1);
 
     String where = Contacts._ID + " = ?";
     String[] selectionArgs = new String[] {Long.toString(contactId)};
+
     return getContentResolver().update(Contacts.CONTENT_URI, contentValues, where, selectionArgs);
   }
 

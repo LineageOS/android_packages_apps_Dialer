@@ -30,6 +30,7 @@ import com.android.dialer.precall.impl.PreCallModule;
 import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.spam.StubSpamModule;
+import com.android.dialer.speeddial.room.SpeedDialDatabaseModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
@@ -60,6 +61,7 @@ import javax.inject.Singleton;
     StubSimSuggestionModule.class,
     StubFeedbackModule.class,
     StubSpamModule.class,
+    SpeedDialDatabaseModule.class,
   }
 )
 public interface AospDialerRootComponent extends BaseDialerRootComponent {}

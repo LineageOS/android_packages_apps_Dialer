@@ -234,6 +234,8 @@ public class DisambigDialog extends DialogFragment {
     ArrayList<String> projection =
         new ArrayList<>(Arrays.asList(LookupContactInfoWorker.projection));
     projection.add(Phone.LOOKUP_KEY);
+    projection.add(Phone.CONTACT_ID);
+    projection.add(Phone.STARRED);
     return projection.toArray(new String[projection.size()]);
   }
 

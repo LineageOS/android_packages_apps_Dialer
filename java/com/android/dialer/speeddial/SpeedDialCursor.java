@@ -22,14 +22,19 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
+import android.util.ArraySet;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.speeddial.room.SpeedDialEntry;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /** Cursor for favorites contacts. */
-final class SpeedDialCursor extends MergeCursor {
+public final class SpeedDialCursor extends MergeCursor {
 
   /**
    * Caps the speed dial list to contain at most 20 contacts, including favorites and suggestions.
@@ -49,50 +54,55 @@ final class SpeedDialCursor extends MergeCursor {
     int SUGGESTION = 2;
   }
 
-  public static SpeedDialCursor newInstance(Cursor strequentCursor) {
+  public static SpeedDialCursor newInstance(Cursor strequentCursor, List<SpeedDialEntry> entries) {
     if (strequentCursor == null || strequentCursor.getCount() == 0) {
       return null;
     }
-    SpeedDialCursor cursor = new SpeedDialCursor(buildCursors(strequentCursor));
+    SpeedDialCursor cursor = new SpeedDialCursor(buildCursors(strequentCursor, entries));
     strequentCursor.close();
     return cursor;
   }
 
-  private static Cursor[] buildCursors(Cursor strequentCursor) {
+  private static Cursor[] buildCursors(Cursor strequentCursor, List<SpeedDialEntry> entries) {
     MatrixCursor starred = new MatrixCursor(StrequentContactsCursorLoader.PHONE_PROJECTION);
     MatrixCursor suggestions = new MatrixCursor(StrequentContactsCursorLoader.PHONE_PROJECTION);
 
-    strequentCursor.moveToPosition(-1);
-    while (strequentCursor.moveToNext()) {
-      if (strequentCursor.getPosition() != 0) {
-        long contactId = strequentCursor.getLong(StrequentContactsCursorLoader.PHONE_CONTACT_ID);
-        int position = strequentCursor.getPosition();
-        boolean duplicate = false;
-        // Iterate backwards through the cursor to check that this isn't a duplicate contact
-        // TODO(calderwoodra): improve this algorithm (currently O(n^2)).
-        while (strequentCursor.moveToPrevious() && !duplicate) {
-          duplicate |=
-              strequentCursor.getLong(StrequentContactsCursorLoader.PHONE_CONTACT_ID) == contactId;
-        }
-        strequentCursor.moveToPosition(position);
-        if (duplicate) {
-          continue;
-        }
+    // Build starred cursor
+    for (SpeedDialEntry entry : entries) {
+      if (!moveToContactEntry(strequentCursor, entry)) {
+        LogUtil.e("SpeedDialCursor.buildCursors", "Entry not found: " + entry);
+        continue;
       }
 
-      if (strequentCursor.getInt(StrequentContactsCursorLoader.PHONE_STARRED) == 1) {
-        StrequentContactsCursorLoader.addToCursor(starred, strequentCursor);
-      } else if (starred.getCount() + suggestions.getCount() < SPEED_DIAL_CONTACT_LIST_SOFT_LIMIT) {
-        // Since all starred contacts come before each non-starred contact, it's safe to assume that
-        // this list will never exceed the soft limit unless there are more starred contacts than
-        // the limit permits.
-        StrequentContactsCursorLoader.addToCursor(suggestions, strequentCursor);
+      if (strequentCursor.getInt(StrequentContactsCursorLoader.PHONE_STARRED) != 1) {
+        LogUtil.e("SpeedDialCursor.buildCursors", "SpeedDialEntry contact is no longer starred");
+        continue;
       }
+      StrequentContactsCursorLoader.addToCursor(starred, strequentCursor);
     }
 
+    // Build suggestions cursor
+    strequentCursor.moveToFirst();
+    Set<Long> contactIds = new ArraySet<>();
+    do {
+      if (strequentCursor.getInt(StrequentContactsCursorLoader.PHONE_STARRED) == 1) {
+        // Starred contact
+        continue;
+      }
+
+      long contactId = strequentCursor.getLong(StrequentContactsCursorLoader.PHONE_CONTACT_ID);
+      if (!contactIds.add(contactId)) {
+        // duplicate contact
+        continue;
+      }
+
+      StrequentContactsCursorLoader.addToCursor(suggestions, strequentCursor);
+    } while (strequentCursor.moveToNext()
+        && starred.getCount() + suggestions.getCount() < SPEED_DIAL_CONTACT_LIST_SOFT_LIMIT);
+
     List<Cursor> cursorList = new ArrayList<>();
+    cursorList.add(createHeaderCursor(R.string.favorites_header));
     if (starred.getCount() > 0) {
-      cursorList.add(createHeaderCursor(R.string.favorites_header));
       cursorList.add(starred);
     }
     if (suggestions.getCount() > 0) {
@@ -100,6 +110,17 @@ final class SpeedDialCursor extends MergeCursor {
       cursorList.add(suggestions);
     }
     return cursorList.toArray(new Cursor[cursorList.size()]);
+  }
+
+  private static boolean moveToContactEntry(Cursor strequentCursor, SpeedDialEntry entry) {
+    boolean matchFound;
+    strequentCursor.moveToFirst();
+    do {
+      long contactId = strequentCursor.getLong(StrequentContactsCursorLoader.PHONE_CONTACT_ID);
+      String number = strequentCursor.getString(StrequentContactsCursorLoader.PHONE_NUMBER);
+      matchFound = contactId == entry.contactId || Objects.equals(number, entry.number);
+    } while (!matchFound && strequentCursor.moveToNext());
+    return matchFound;
   }
 
   private static Cursor createHeaderCursor(@StringRes int header) {
