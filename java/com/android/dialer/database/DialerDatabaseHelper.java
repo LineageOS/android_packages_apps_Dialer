@@ -535,7 +535,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         insert.executeInsert();
         final String contactPhoneNumber = updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
         final ArrayList<String> numberPrefixes =
-            SmartDialPrefix.parseToNumberTokens(contactPhoneNumber);
+            SmartDialPrefix.parseToNumberTokens(mContext, contactPhoneNumber);
 
         for (String numberPrefix : numberPrefixes) {
           numberInsert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
@@ -578,7 +578,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       while (nameCursor.moveToNext()) {
         /** Computes a list of prefixes of a given contact name. */
         final ArrayList<String> namePrefixes =
-            SmartDialPrefix.generateNamePrefixes(nameCursor.getString(columnIndexName));
+            SmartDialPrefix.generateNamePrefixes(mContext, nameCursor.getString(columnIndexName));
 
         for (String namePrefix : namePrefixes) {
           insert.bindLong(1, nameCursor.getLong(columnIndexContactId));
@@ -912,8 +912,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         /**
          * If the contact has either the name or number that matches the query, add to the result.
          */
-        final boolean nameMatches = nameMatcher.matches(displayName);
-        final boolean numberMatches = (nameMatcher.matchesNumber(phoneNumber, query) != null);
+        final boolean nameMatches = nameMatcher.matches(mContext, displayName);
+        final boolean numberMatches =
+            (nameMatcher.matchesNumber(mContext, phoneNumber, query) != null);
         if (nameMatches || numberMatches) {
           /** If a contact has not been added, add it to the result and the hash set. */
           duplicates.add(contactMatch);
