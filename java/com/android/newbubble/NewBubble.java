@@ -232,10 +232,7 @@ public class NewBubble {
   }
 
   /** Expands the main bubble menu. */
-  public void expand(boolean isUserAction) {
-    if (isUserAction) {
-      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_EXPAND);
-    }
+  public void expand() {
     setPrimaryButtonAccessibilityAction(
         context.getString(R.string.a11y_bubble_primary_button_collapse_action));
 
@@ -307,8 +304,7 @@ public class NewBubble {
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  public void startCollapse(
-      @CollapseEnd int endAction, boolean isUserAction, boolean shouldRecoverYPosition) {
+  public void startCollapse(@CollapseEnd int endAction, boolean shouldRecoverYPosition) {
     View expandedView = viewHolder.getExpandedView();
     if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
       // Drawer is already collapsed or animation is running.
@@ -321,10 +317,6 @@ public class NewBubble {
     if (collapseEndAction == CollapseEnd.NOTHING) {
       collapseEndAction = endAction;
     }
-    if (isUserAction && collapseEndAction == CollapseEnd.NOTHING) {
-      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_COLLAPSE_BY_USER);
-    }
-
     setPrimaryButtonAccessibilityAction(
         context.getString(R.string.a11y_bubble_primary_button_expand_action));
 
@@ -572,8 +564,7 @@ public class NewBubble {
   public void showText(@NonNull CharSequence text) {
     textShowing = true;
     if (expanded) {
-      startCollapse(
-          CollapseEnd.NOTHING, false /* isUserAction */, false /* shouldRecoverYPosition */);
+      startCollapse(CollapseEnd.NOTHING, false /* shouldRecoverYPosition */);
       doShowText(text);
     } else {
       // Need to transition from old bounds to new bounds manually
@@ -667,10 +658,11 @@ public class NewBubble {
       return;
     }
     if (expanded) {
-      startCollapse(
-          CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
+      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_CLICK_TO_COLLAPSE);
+      startCollapse(CollapseEnd.NOTHING, true /* shouldRecoverYPosition */);
     } else {
-      expand(true);
+      logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_CLICK_TO_EXPAND);
+      expand();
     }
   }
 
@@ -713,7 +705,7 @@ public class NewBubble {
     }
 
     if (expanded) {
-      startCollapse(CollapseEnd.HIDE, false /* isUserAction */, false /* shouldRecoverYPosition */);
+      startCollapse(CollapseEnd.HIDE, false /* shouldRecoverYPosition */);
       return;
     }
 
@@ -891,7 +883,11 @@ public class NewBubble {
   }
 
   private void logBasicOrCallImpression(DialerImpression.Type impressionType) {
-    DialerCall call = CallList.getInstance().getActiveOrBackgroundCall();
+    // Bubble is shown for outgoing, active or background call
+    DialerCall call = CallList.getInstance().getOutgoingCall();
+    if (call == null) {
+      call = CallList.getInstance().getActiveOrBackgroundCall();
+    }
     if (call != null) {
       Logger.get(context)
           .logCallImpression(impressionType, call.getUniqueCallId(), call.getTimeAddedMs());
@@ -982,8 +978,8 @@ public class NewBubble {
       root.setOnBackPressedListener(
           () -> {
             if (visibility == Visibility.SHOWING && expanded) {
-              startCollapse(
-                  CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
+              logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_CLICK_TO_COLLAPSE);
+              startCollapse(CollapseEnd.NOTHING, true /* shouldRecoverYPosition */);
               return true;
             }
             return false;
@@ -998,8 +994,8 @@ public class NewBubble {
       root.setOnTouchListener(
           (v, event) -> {
             if (expanded && event.getActionMasked() == MotionEvent.ACTION_OUTSIDE) {
-              startCollapse(
-                  CollapseEnd.NOTHING, true /* isUserAction */, true /* shouldRecoverYPosition */);
+              logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_CLICK_TO_COLLAPSE);
+              startCollapse(CollapseEnd.NOTHING, true /* shouldRecoverYPosition */);
               return true;
             }
             return false;
