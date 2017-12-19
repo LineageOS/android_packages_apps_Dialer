@@ -740,7 +740,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     boolean isBlockedOrSpam = blockId != null || (isSpamFeatureEnabled && isSpam);
-    
+
     if (!isBlockedOrSpam && info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
       createNewContactButtonView.setTag(
           IntentProvider.getAddContactIntentProvider(
@@ -1034,8 +1034,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
               == VideoProfile.STATE_BIDIRECTIONAL) {
         Logger.get(mContext).logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
-      }
-      if (intent.getDataString().contains(DuoConstants.PACKAGE_NAME)) {
+      } else if (intent.getDataString() != null
+          && intent.getDataString().contains(DuoConstants.PACKAGE_NAME)) {
         Logger.get(mContext).logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL);
       }
 
