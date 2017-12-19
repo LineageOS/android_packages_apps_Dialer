@@ -691,15 +691,25 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           videoCallButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
           videoCallButtonView.setVisibility(View.VISIBLE);
         } else if (duo.isActivated(mContext) && !identifiedSpamCall) {
-          inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
-          inviteVideoButtonView.setVisibility(View.VISIBLE);
+          if (ConfigProviderBindings.get(mContext)
+              .getBoolean("enable_call_log_duo_invite_button", false)) {
+            inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
+            inviteVideoButtonView.setVisibility(View.VISIBLE);
+          }
         } else if (duo.isEnabled(mContext) && !identifiedSpamCall) {
           if (!duo.isInstalled(mContext)) {
-            setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
+            if (ConfigProviderBindings.get(mContext)
+                .getBoolean("enable_call_log_install_duo_button", false)) {
+              setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
+              setUpVideoButtonView.setVisibility(View.VISIBLE);
+            }
           } else {
-            setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
+            if (ConfigProviderBindings.get(mContext)
+                .getBoolean("enable_call_log_activate_duo_button", false)) {
+              setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
+              setUpVideoButtonView.setVisibility(View.VISIBLE);
+            }
           }
-          setUpVideoButtonView.setVisibility(View.VISIBLE);
         }
         break;
       default:
