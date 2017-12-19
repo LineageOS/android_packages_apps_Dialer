@@ -190,7 +190,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
 
     if (viewHolder instanceof NewVoicemailHeaderViewHolder) {
       LogUtil.i(
@@ -241,7 +241,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
       newVoicemailViewHolderArrayMap.remove(newVoicemailViewHolder.getViewHolderId());
       printHashSet();
-      printHashMap();
+      printArrayMap();
     }
 
     newVoicemailViewHolder.reset();
@@ -265,7 +265,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
 
     // If the viewholder is playing the voicemail, keep updating its media player view (seekbar,
     // duration etc.)
@@ -298,12 +298,12 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
   }
 
-  private void printHashMap() {
+  private void printArrayMap() {
     LogUtil.i(
-        "NewVoicemailAdapter.printHashMap",
+        "NewVoicemailAdapter.printArrayMap",
         "hashMapSize: %d, currentlyExpandedViewHolderId:%d",
         newVoicemailViewHolderArrayMap.size(),
         currentlyExpandedViewHolderId);
@@ -311,9 +311,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     if (!newVoicemailViewHolderArrayMap.isEmpty()) {
       String ids = "";
       for (int id : newVoicemailViewHolderArrayMap.keySet()) {
-        ids = id + String.valueOf(id) + " ";
+        ids = ids + id + " ";
       }
-      LogUtil.i("NewVoicemailAdapter.printHashMap", "ids are " + ids);
+      LogUtil.i("NewVoicemailAdapter.printArrayMap", "ids are " + ids);
     }
   }
 
@@ -801,7 +801,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
           currentlyExpandedViewHolderId);
       // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
       printHashSet();
-      printHashMap();
+      printArrayMap();
       return null;
     }
   }
