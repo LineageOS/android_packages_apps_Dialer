@@ -17,7 +17,6 @@
 package com.android.dialer.smartdial;
 
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.smartdial.SmartDialPrefix.PhoneNumberTokens;
 import java.util.ArrayList;
@@ -42,16 +41,9 @@ public class SmartDialNameMatcher {
   private final ArrayList<SmartDialMatchPosition> mMatchPositions = new ArrayList<>();
   private final SmartDialMap mMap;
   private String mQuery;
-  private String mNameMatchMask = "";
-  private String mPhoneNumberMatchMask = "";
 
   // Controls whether to treat an empty query as a match (with anything).
   private boolean mShouldMatchEmptyQuery = false;
-
-  @VisibleForTesting
-  public SmartDialNameMatcher(String query) {
-    this(query, LATIN_SMART_DIAL_MAP);
-  }
 
   public SmartDialNameMatcher(String query, SmartDialMap map) {
     mQuery = query;
@@ -116,38 +108,31 @@ public class SmartDialNameMatcher {
    *
    * @param phoneNumber - Raw phone number
    * @param query - Normalized query (only contains numbers from 0-9)
-   * @param useNanp - Overwriting nanp setting boolean, used for testing.
    * @return {@literal null} if the number and the query don't match, a valid SmartDialMatchPosition
    *     with the matching positions otherwise
    */
-  @VisibleForTesting
   @Nullable
-  public SmartDialMatchPosition matchesNumber(String phoneNumber, String query, boolean useNanp) {
+  public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
     if (TextUtils.isEmpty(phoneNumber)) {
       return mShouldMatchEmptyQuery ? new SmartDialMatchPosition(0, 0) : null;
     }
     StringBuilder builder = new StringBuilder();
     constructEmptyMask(builder, phoneNumber.length());
-    mPhoneNumberMatchMask = builder.toString();
 
     // Try matching the number as is
     SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
     if (matchPos == null) {
-      final PhoneNumberTokens phoneNumberTokens = SmartDialPrefix.parsePhoneNumber(phoneNumber);
+      PhoneNumberTokens phoneNumberTokens = SmartDialPrefix.parsePhoneNumber(phoneNumber);
 
-      if (phoneNumberTokens == null) {
-        return matchPos;
-      }
       if (phoneNumberTokens.countryCodeOffset != 0) {
         matchPos = matchesNumberWithOffset(phoneNumber, query, phoneNumberTokens.countryCodeOffset);
       }
-      if (matchPos == null && phoneNumberTokens.nanpCodeOffset != 0 && useNanp) {
+      if (matchPos == null && phoneNumberTokens.nanpCodeOffset != 0) {
         matchPos = matchesNumberWithOffset(phoneNumber, query, phoneNumberTokens.nanpCodeOffset);
       }
     }
     if (matchPos != null) {
       replaceBitInMask(builder, matchPos);
-      mPhoneNumberMatchMask = builder.toString();
     }
     return matchPos;
   }
@@ -161,20 +146,7 @@ public class SmartDialNameMatcher {
    *     with the matching positions otherwise
    */
   public SmartDialMatchPosition matchesNumber(String phoneNumber) {
-    return matchesNumber(phoneNumber, mQuery, true);
-  }
-
-  /**
-   * Matches a phone number against a query, taking care of formatting characters and also taking
-   * into account country code prefixes and special NANP number treatment.
-   *
-   * @param phoneNumber - Raw phone number
-   * @param query - Normalized query (only contains numbers from 0-9)
-   * @return {@literal null} if the number and the query don't match, a valid SmartDialMatchPosition
-   *     with the matching positions otherwise
-   */
-  public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
-    return matchesNumber(phoneNumber, query, true);
+    return matchesNumber(phoneNumber, mQuery);
   }
 
   /**
@@ -252,12 +224,10 @@ public class SmartDialNameMatcher {
    *     contained in query. If the function returns true, matchList will contain an ArrayList of
    *     match positions (multiple matches correspond to initial matches).
    */
-  @VisibleForTesting
-  boolean matchesCombination(
+  private boolean matchesCombination(
       String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
     StringBuilder builder = new StringBuilder();
     constructEmptyMask(builder, displayName.length());
-    mNameMatchMask = builder.toString();
     final int nameLength = displayName.length();
     final int queryLength = query.length();
 
@@ -338,7 +308,6 @@ public class SmartDialNameMatcher {
             for (SmartDialMatchPosition match : matchList) {
               replaceBitInMask(builder, match);
             }
-            mNameMatchMask = builder.toString();
             return true;
           } else if (ALLOW_INITIAL_MATCH && queryStart < INITIAL_LENGTH_LIMIT) {
             // we matched the first character.
@@ -395,12 +364,35 @@ public class SmartDialNameMatcher {
       for (SmartDialMatchPosition match : matchList) {
         replaceBitInMask(builder, match);
       }
-      mNameMatchMask = builder.toString();
       return true;
     }
     return false;
   }
 
+  /**
+   * This function iterates through each token in the display name, trying to match the query to the
+   * numeric equivalent of the token.
+   *
+   * <p>A token is defined as a range in the display name delimited by characters that have no latin
+   * alphabet equivalents (e.g. spaces - ' ', periods - ',', underscores - '_' or chinese characters
+   * - '王'). Transliteration from non-latin characters to latin character will be done on a best
+   * effort basis - e.g. 'Ü' - 'u'.
+   *
+   * <p>For example, the display name "Phillips Thomas Jr" contains three tokens: "phillips",
+   * "thomas", and "jr".
+   *
+   * <p>A match must begin at the start of a token. For example, typing 846(Tho) would match
+   * "Phillips Thomas", but 466(hom) would not.
+   *
+   * <p>Also, a match can extend across tokens. For example, typing 37337(FredS) would match (Fred
+   * S)mith.
+   *
+   * @param displayName The normalized(no accented characters) display name we intend to match
+   *     against.
+   * @return Returns true if a combination of the tokens in displayName match the query string
+   *     contained in query. If the function returns true, matchList will contain an ArrayList of
+   *     match positions (multiple matches correspond to initial matches).
+   */
   public boolean matches(String displayName) {
     mMatchPositions.clear();
     return matchesCombination(displayName, mQuery, mMatchPositions);
@@ -409,15 +401,7 @@ public class SmartDialNameMatcher {
   public ArrayList<SmartDialMatchPosition> getMatchPositions() {
     // Return a clone of mMatchPositions so that the caller can use it without
     // worrying about it changing
-    return new ArrayList<SmartDialMatchPosition>(mMatchPositions);
-  }
-
-  public String getNameMatchPositionsInString() {
-    return mNameMatchMask;
-  }
-
-  public String getNumberMatchPositionsInString() {
-    return mPhoneNumberMatchMask;
+    return new ArrayList<>(mMatchPositions);
   }
 
   public String getQuery() {

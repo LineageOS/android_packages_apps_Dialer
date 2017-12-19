@@ -53,8 +53,6 @@ import java.util.List;
  */
 public class NewReturnToCallController implements InCallUiListener, Listener, AudioModeListener {
 
-  public static final String RETURN_TO_CALL_EXTRA_KEY = "RETURN_TO_CALL_BUBBLE";
-
   private final Context context;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -78,18 +76,12 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     this.context = context;
     this.contactInfoCache = contactInfoCache;
 
-    toggleSpeaker = createActionIntent(ReturnToCallActionReceiver.ACTION_TOGGLE_SPEAKER);
+    toggleSpeaker = createActionIntent(NewReturnToCallActionReceiver.ACTION_TOGGLE_SPEAKER);
     showSpeakerSelect =
-        createActionIntent(ReturnToCallActionReceiver.ACTION_SHOW_AUDIO_ROUTE_SELECTOR);
-    toggleMute = createActionIntent(ReturnToCallActionReceiver.ACTION_TOGGLE_MUTE);
-    endCall = createActionIntent(ReturnToCallActionReceiver.ACTION_END_CALL);
-
-    Intent activityIntent = InCallActivity.getIntent(context, false, false, false);
-    activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    activityIntent.putExtra(RETURN_TO_CALL_EXTRA_KEY, true);
-    fullScreen =
-        PendingIntent.getActivity(
-            context, InCallActivity.PendingIntentRequestCodes.BUBBLE, activityIntent, 0);
+        createActionIntent(NewReturnToCallActionReceiver.ACTION_SHOW_AUDIO_ROUTE_SELECTOR);
+    toggleMute = createActionIntent(NewReturnToCallActionReceiver.ACTION_TOGGLE_MUTE);
+    endCall = createActionIntent(NewReturnToCallActionReceiver.ACTION_END_CALL);
+    fullScreen = createActionIntent(NewReturnToCallActionReceiver.ACTION_RETURN_TO_CALL);
 
     InCallPresenter.getInstance().addInCallUiListener(this);
     CallList.getInstance().addListener(this);
@@ -219,11 +211,15 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   private void onPhotoAvatarReceived(@NonNull Drawable photo) {
-    bubble.updatePhotoAvatar(photo);
+    if (bubble != null) {
+      bubble.updatePhotoAvatar(photo);
+    }
   }
 
   private void onLetterTileAvatarReceived(@NonNull Drawable photo) {
-    bubble.updateAvatar(photo);
+    if (bubble != null) {
+      bubble.updateAvatar(photo);
+    }
   }
 
   private NewBubbleInfo generateBubbleInfo() {
@@ -276,9 +272,9 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   @NonNull
   private PendingIntent createActionIntent(String action) {
-    Intent toggleSpeaker = new Intent(context, ReturnToCallActionReceiver.class);
-    toggleSpeaker.setAction(action);
-    return PendingIntent.getBroadcast(context, 0, toggleSpeaker, 0);
+    Intent intent = new Intent(context, NewReturnToCallActionReceiver.class);
+    intent.setAction(action);
+    return PendingIntent.getBroadcast(context, 0, intent, 0);
   }
 
   @NonNull

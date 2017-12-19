@@ -21,7 +21,7 @@
 
   <uses-sdk
     android:minSdkVersion="23"
-    android:targetSdkVersion="26"/>
+    android:targetSdkVersion="27"/>
 
   <uses-permission android:name="android.permission.CALL_PHONE"/>
   <uses-permission android:name="android.permission.READ_CONTACTS"/>

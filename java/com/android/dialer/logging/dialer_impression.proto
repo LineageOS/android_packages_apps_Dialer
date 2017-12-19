@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1311
+  // Next Tag: 1320
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -625,5 +625,24 @@ message DialerImpression {
     DUO_CALL_LOG_SET_UP_INSTALL = 1308;
     DUO_CALL_LOG_SET_UP_ACTIVATE = 1309;
     DUO_CALL_LOG_INVITE = 1310;
+
+    // Bubble primary button first click to expand bubble
+    BUBBLE_V2_CLICK_TO_EXPAND = 1311;
+    // Bubble primary button second click to collapse bubble
+    BUBBLE_V2_CLICK_TO_COLLAPSE = 1312;
+    // User return to call from bubble call action menu
+    BUBBLE_V2_RETURN_TO_CALL = 1313;
+    // User muted call from bubble call action menu
+    BUBBLE_V2_MUTE_CALL = 1314;
+    // User unmuted call from bubble call action menu
+    BUBBLE_V2_UNMUTE_CALL = 1315;
+    // User choose audio route speakerphone from bubble call action menu
+    BUBBLE_V2_SPEAKERPHONE = 1316;
+    // User choose audio route wired or earpiece from bubble call action menu
+    BUBBLE_V2_WIRED_OR_EARPIECE = 1317;
+    // User choose audio route bluetooth from bubble call action menu
+    BUBBLE_V2_BLUETOOTH = 1318;
+    // User ended call from bubble call action menu
+    BUBBLE_V2_END_CALL = 1319;
   }
 }
