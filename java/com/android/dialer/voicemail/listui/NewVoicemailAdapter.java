@@ -509,8 +509,6 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
     Assert.checkArgument(expandedViewHolder.getViewHolderVoicemailUri().equals(voicemailUri));
 
-    notifyItemRemoved(expandedViewHolder.getAdapterPosition());
-
     Assert.checkArgument(currentlyExpandedViewHolderId == expandedViewHolder.getViewHolderId());
 
     collapseExpandedViewHolder(expandedViewHolder);
@@ -524,6 +522,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
         .onSuccess(deleteVoicemailCallBack)
         .build()
         .executeSerial(new Pair<>(context, voicemailUri));
+
+    notifyItemRemoved(expandedViewHolder.getAdapterPosition());
   }
 
   private void onVoicemailDeleted(Integer integer) {
