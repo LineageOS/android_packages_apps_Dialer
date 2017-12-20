@@ -39,6 +39,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.transition.TransitionValues;
 import android.view.ContextThemeWrapper;
@@ -70,6 +71,7 @@ import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Creates and manages a bubble window from information in a {@link NewBubbleInfo}. Before creating,
@@ -406,6 +408,8 @@ public class NewBubble {
 
     hideAfterText = false;
 
+    boolean isRtl =
+        TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
     if (windowParams == null) {
       // Apps targeting O+ must use TYPE_APPLICATION_OVERLAY, which is not available prior to O.
       @SuppressWarnings("deprecation")
@@ -423,7 +427,7 @@ public class NewBubble {
                   | LayoutParams.FLAG_NOT_FOCUSABLE
                   | LayoutParams.FLAG_LAYOUT_NO_LIMITS,
               PixelFormat.TRANSLUCENT);
-      windowParams.gravity = Gravity.TOP | Gravity.LEFT;
+      windowParams.gravity = Gravity.TOP | (isRtl ? Gravity.RIGHT : Gravity.LEFT);
       windowParams.x = leftBoundary;
       windowParams.y = currentInfo.getStartingYPosition();
       windowParams.height = LayoutParams.WRAP_CONTENT;
@@ -441,6 +445,9 @@ public class NewBubble {
       viewHolder.getPrimaryButton().setScaleY(0);
       viewHolder.getPrimaryAvatar().setAlpha(0f);
       viewHolder.getPrimaryIcon().setAlpha(0f);
+      if (isRtl) {
+        onLeftRightSwitch(true);
+      }
     }
 
     viewHolder.setChildClickable(true);
@@ -795,7 +802,13 @@ public class NewBubble {
   }
 
   private void configureButton(Action action, NewCheckableButton button) {
-    button.setCompoundDrawablesWithIntrinsicBounds(action.getIconDrawable(), null, null, null);
+    boolean isRtl =
+        TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+    if (isRtl) {
+      button.setCompoundDrawablesWithIntrinsicBounds(null, null, action.getIconDrawable(), null);
+    } else {
+      button.setCompoundDrawablesWithIntrinsicBounds(action.getIconDrawable(), null, null, null);
+    }
     button.setChecked(action.isChecked());
     button.setEnabled(action.isEnabled());
     button.setText(action.getName());
