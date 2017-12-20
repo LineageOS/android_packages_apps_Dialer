@@ -67,9 +67,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private final Clock clock;
 
   /** {@link Integer#MAX_VALUE} when the "Today" header should not be displayed. */
-  private final int todayHeaderPosition;
+  private int todayHeaderPosition = Integer.MAX_VALUE;
   /** {@link Integer#MAX_VALUE} when the "Older" header should not be displayed. */
-  private final int olderHeaderPosition;
+  private int olderHeaderPosition = Integer.MAX_VALUE;
 
   private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
@@ -107,7 +107,15 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     this.clock = clock;
     this.fragmentManager = fragmentManager;
     initializeMediaPlayerListeners();
+    updateHeaderPositions();
+  }
 
+  private void updateHeaderPositions() {
+    LogUtil.i(
+        "NewVoicemailAdapter.updateHeaderPositions",
+        "before updating todayPos:%d, olderPos:%d",
+        todayHeaderPosition,
+        olderHeaderPosition);
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
     if (cursor.moveToNext()) {
@@ -134,6 +142,11 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       this.todayHeaderPosition = Integer.MAX_VALUE;
       this.olderHeaderPosition = Integer.MAX_VALUE;
     }
+    LogUtil.i(
+        "NewVoicemailAdapter.updateHeaderPositions",
+        "after updating todayPos:%d, olderPos:%d",
+        todayHeaderPosition,
+        olderHeaderPosition);
   }
 
   private void initializeMediaPlayerListeners() {
@@ -143,8 +156,10 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   }
 
   public void updateCursor(Cursor updatedCursor) {
+    LogUtil.enterBlock("NewVoicemailAdapter.updateCursor");
     deletedVoicemailPosition.clear();
     this.cursor = updatedCursor;
+    updateHeaderPositions();
     notifyDataSetChanged();
   }
 
