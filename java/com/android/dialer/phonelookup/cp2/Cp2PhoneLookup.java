@@ -131,6 +131,7 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   private boolean isDirtyInternal(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     long lastModified = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
+    // TODO(zachh): If a number got disassociated with a contact; the contactIds will be empty.
     return contactsUpdated(queryPhoneTableForContactIds(phoneNumbers), lastModified)
         || contactsDeleted(lastModified);
   }
@@ -251,6 +252,11 @@ public final class Cp2PhoneLookup implements PhoneLookup {
           ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
     return backgroundExecutorService.submit(
         () -> getMostRecentPhoneLookupInfoInternal(existingInfoMap));
+  }
+
+  @Override
+  public void copySubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source) {
+    destination.setCp2Info(source.getCp2Info());
   }
 
   private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> getMostRecentPhoneLookupInfoInternal(
