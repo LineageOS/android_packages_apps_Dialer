@@ -44,8 +44,12 @@ final class SimulatorMainMenu {
             "Notifications",
             SimulatorNotifications.getActionProvider(activity.getApplicationContext()))
         .addItem("Populate database", () -> populateDatabase(activity.getApplicationContext()))
+        .addItem("Populate voicemail", () -> populateVoicemail(activity.getApplicationContext()))
         .addItem(
             "Fast populate database", () -> fastPopulateDatabase(activity.getApplicationContext()))
+        .addItem(
+            "Fast populate voicemail database",
+            () -> populateVoicemailFast(activity.getApplicationContext()))
         .addItem("Clean database", () -> cleanDatabase(activity.getApplicationContext()))
         .addItem("clear preferred SIM", () -> clearPreferredSim(activity.getApplicationContext()))
         .addItem("Sync voicemail", () -> syncVoicemail(activity.getApplicationContext()))
@@ -63,6 +67,32 @@ final class SimulatorMainMenu {
         .createNonUiTaskBuilder(new PopulateDatabaseWorker())
         .build()
         .executeSerial(new PopulateDatabaseWorkerInput(context, false));
+  }
+
+  private static void populateVoicemail(@NonNull Context context) {
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new PopulateVoicemailWorker())
+        .build()
+        .executeSerial(new PopulateDatabaseWorkerInput(context, false));
+  }
+
+  private static void populateVoicemailFast(@NonNull Context context) {
+    DialerExecutorComponent.get(context)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new PopulateVoicemailWorker())
+        .build()
+        .executeSerial(new PopulateDatabaseWorkerInput(context, true));
+  }
+
+  private static class PopulateVoicemailWorker
+      implements Worker<PopulateDatabaseWorkerInput, Void> {
+    @Nullable
+    @Override
+    public Void doInBackground(PopulateDatabaseWorkerInput input) {
+      VoicemailPopulator.populateVoicemail(input.context, input.fastMode);
+      return null;
+    }
   }
 
   private static void fastPopulateDatabase(@NonNull Context context) {
