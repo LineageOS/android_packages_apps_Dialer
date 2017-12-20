@@ -1400,7 +1400,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       mNewSearchFragment.setRawNumber(query);
     }
     final String normalizedQuery =
-        SmartDialNameMatcher.normalizeNumber(query, SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
+        SmartDialNameMatcher.normalizeNumber(/* context = */ this, query);
 
     if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
       if (DEBUG) {

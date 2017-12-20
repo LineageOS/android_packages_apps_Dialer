@@ -26,6 +26,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.CallLog.Calls;
+import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -365,6 +366,11 @@ public class CallLogNotificationsQueryHelper {
               .and(Selection.column(Calls.NEW).is("= 1"))
               .and(Selection.column(Calls.TYPE).is("=", type))
               .and(Selection.column(Calls.IS_READ).is("IS NOT 1"));
+
+      if (type == Calls.VOICEMAIL_TYPE) {
+        selectionBuilder.and(Selection.column(Voicemails.DELETED).is(" = 0"));
+      }
+
       if (thresholdMillis != NO_THRESHOLD) {
         selectionBuilder =
             selectionBuilder.and(

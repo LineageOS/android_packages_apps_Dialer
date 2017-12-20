@@ -52,8 +52,6 @@ public class SmartDialPrefix {
       "DialtactsActivity_user_sim_country_code";
 
   private static final String PREF_USER_SIM_COUNTRY_CODE_DEFAULT = null;
-  /** Dialpad mapping. */
-  private static final SmartDialMap mMap = new LatinSmartDialMap();
 
   private static String sUserSimCountryCode = PREF_USER_SIM_COUNTRY_CODE_DEFAULT;
   /** Indicates whether user is in NANP regions. */
@@ -95,7 +93,7 @@ public class SmartDialPrefix {
    * @param contactName Contact's name stored in string.
    * @return A list of name tokens, for example separated first names, last name, etc.
    */
-  public static ArrayList<String> parseToIndexTokens(String contactName) {
+  public static ArrayList<String> parseToIndexTokens(Context context, String contactName) {
     final int length = contactName.length();
     final ArrayList<String> result = new ArrayList<>();
     char c;
@@ -106,10 +104,10 @@ public class SmartDialPrefix {
      * " ", mark the current token as complete and add it to the list of tokens.
      */
     for (int i = 0; i < length; i++) {
-      c = mMap.normalizeCharacter(contactName.charAt(i));
-      if (mMap.isValidDialpadCharacter(c)) {
+      c = CompositeSmartDialMap.normalizeCharacter(context, contactName.charAt(i));
+      if (CompositeSmartDialMap.isValidDialpadCharacter(context, c)) {
         /** Converts a character into the number on dialpad that represents the character. */
-        currentIndexToken.append(mMap.getDialpadIndex(c));
+        currentIndexToken.append(CompositeSmartDialMap.getDialpadIndex(context, c));
       } else {
         if (currentIndexToken.length() != 0) {
           result.add(currentIndexToken.toString());
@@ -132,11 +130,11 @@ public class SmartDialPrefix {
    * @param index The contact's name in string.
    * @return A List of strings, whose prefix can be used to look up the contact.
    */
-  public static ArrayList<String> generateNamePrefixes(String index) {
+  public static ArrayList<String> generateNamePrefixes(Context context, String index) {
     final ArrayList<String> result = new ArrayList<>();
 
     /** Parses the name into a list of tokens. */
-    final ArrayList<String> indexTokens = parseToIndexTokens(index);
+    final ArrayList<String> indexTokens = parseToIndexTokens(context, index);
 
     if (indexTokens.size() > 0) {
       /**
@@ -198,13 +196,13 @@ public class SmartDialPrefix {
    * @param number String of user's phone number.
    * @return A list of strings where any prefix of any entry can be used to look up the number.
    */
-  public static ArrayList<String> parseToNumberTokens(String number) {
+  public static ArrayList<String> parseToNumberTokens(Context context, String number) {
     final ArrayList<String> result = new ArrayList<>();
     if (!TextUtils.isEmpty(number)) {
       /** Adds the full number to the list. */
-      result.add(SmartDialNameMatcher.normalizeNumber(number, mMap));
+      result.add(SmartDialNameMatcher.normalizeNumber(context, number));
 
-      final PhoneNumberTokens phoneNumberTokens = parsePhoneNumber(number);
+      final PhoneNumberTokens phoneNumberTokens = parsePhoneNumber(context, number);
       if (phoneNumberTokens == null) {
         return result;
       }
@@ -212,12 +210,13 @@ public class SmartDialPrefix {
       if (phoneNumberTokens.countryCodeOffset != 0) {
         result.add(
             SmartDialNameMatcher.normalizeNumber(
-                number, phoneNumberTokens.countryCodeOffset, mMap));
+                context, number, phoneNumberTokens.countryCodeOffset));
       }
 
       if (phoneNumberTokens.nanpCodeOffset != 0) {
         result.add(
-            SmartDialNameMatcher.normalizeNumber(number, phoneNumberTokens.nanpCodeOffset, mMap));
+            SmartDialNameMatcher.normalizeNumber(
+                context, number, phoneNumberTokens.nanpCodeOffset));
       }
     }
     return result;
@@ -229,13 +228,13 @@ public class SmartDialPrefix {
    * @param number Raw phone number.
    * @return a PhoneNumberToken instance with country code, NANP code information.
    */
-  public static PhoneNumberTokens parsePhoneNumber(String number) {
+  public static PhoneNumberTokens parsePhoneNumber(Context context, String number) {
     String countryCode = "";
     int countryCodeOffset = 0;
     int nanpNumberOffset = 0;
 
     if (!TextUtils.isEmpty(number)) {
-      String normalizedNumber = SmartDialNameMatcher.normalizeNumber(number, mMap);
+      String normalizedNumber = SmartDialNameMatcher.normalizeNumber(context, number);
       if (number.charAt(0) == '+') {
         /** If the number starts with '+', tries to find valid country code. */
         for (int i = 1; i <= 1 + 3; i++) {
@@ -516,10 +515,6 @@ public class SmartDialPrefix {
     result.add("996");
     result.add("998");
     return result;
-  }
-
-  public static SmartDialMap getMap() {
-    return mMap;
   }
 
   /**
