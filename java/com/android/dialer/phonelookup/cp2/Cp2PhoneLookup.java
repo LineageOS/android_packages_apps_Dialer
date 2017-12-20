@@ -36,6 +36,7 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomCallUtil;
@@ -45,6 +46,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -131,9 +133,25 @@ public final class Cp2PhoneLookup implements PhoneLookup {
 
   private boolean isDirtyInternal(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     long lastModified = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
-    // TODO(zachh): If a number got disassociated with a contact; the contactIds will be empty.
-    return contactsUpdated(queryPhoneTableForContactIds(phoneNumbers), lastModified)
-        || contactsDeleted(lastModified);
+    // We are always going to need to do this check and it is pretty cheap so do it first.
+    if (anyContactsDeletedSince(lastModified)) {
+      return true;
+    }
+    // Hopefully the most common case is there are no contacts updated; we can detect this cheaply.
+    if (noContactsModifiedSince(lastModified)) {
+      return false;
+    }
+    // This method is more expensive but is probably the most likely scenario; we are looking for
+    // changes to contacts which have been called.
+    if (contactsUpdated(queryPhoneTableForContactIds(phoneNumbers), lastModified)) {
+      return true;
+    }
+    // This is the most expensive method so do it last; the scenario is that a contact which has
+    // been called got disassociated with a number and we need to clear their information.
+    if (contactsUpdated(queryPhoneLookupHistoryForContactIds(), lastModified)) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -152,6 +170,46 @@ public final class Cp2PhoneLookup implements PhoneLookup {
     // Then run a separate query using the NUMBER column to handle numbers that can't be formatted.
     contactIds.addAll(
         queryPhoneTableForContactIdsBasedOnRawNumber(partitionedNumbers.unformattableNumbers()));
+
+    return contactIds;
+  }
+
+  /** Gets all of the contact ids from PhoneLookupHistory. */
+  private Set<Long> queryPhoneLookupHistoryForContactIds() {
+    Set<Long> contactIds = new ArraySet<>();
+    try (Cursor cursor =
+        appContext
+            .getContentResolver()
+            .query(
+                PhoneLookupHistory.CONTENT_URI,
+                new String[] {
+                  PhoneLookupHistory.PHONE_LOOKUP_INFO,
+                },
+                null,
+                null,
+                null)) {
+
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.queryPhoneLookupHistoryForContactIds", "null cursor");
+        return contactIds;
+      }
+
+      if (cursor.moveToFirst()) {
+        int phoneLookupInfoColumn =
+            cursor.getColumnIndexOrThrow(PhoneLookupHistory.PHONE_LOOKUP_INFO);
+        do {
+          PhoneLookupInfo phoneLookupInfo;
+          try {
+            phoneLookupInfo = PhoneLookupInfo.parseFrom(cursor.getBlob(phoneLookupInfoColumn));
+          } catch (InvalidProtocolBufferException e) {
+            throw new IllegalStateException(e);
+          }
+          for (Cp2ContactInfo info : phoneLookupInfo.getCp2Info().getCp2ContactInfoList()) {
+            contactIds.add(info.getContactId());
+          }
+        } while (cursor.moveToNext());
+      }
+    }
 
     return contactIds;
   }
@@ -227,8 +285,26 @@ public final class Cp2PhoneLookup implements PhoneLookup {
             null);
   }
 
+  private boolean noContactsModifiedSince(long lastModified) {
+    try (Cursor cursor =
+        appContext
+            .getContentResolver()
+            .query(
+                Contacts.CONTENT_URI,
+                new String[] {Contacts._ID},
+                Contacts.CONTACT_LAST_UPDATED_TIMESTAMP + " > ?",
+                new String[] {Long.toString(lastModified)},
+                Contacts._ID + " limit 1")) {
+      if (cursor == null) {
+        LogUtil.w("Cp2PhoneLookup.noContactsModifiedSince", "null cursor");
+        return false;
+      }
+      return cursor.getCount() == 0;
+    }
+  }
+
   /** Returns true if any contacts were deleted after {@code lastModified}. */
-  private boolean contactsDeleted(long lastModified) {
+  private boolean anyContactsDeletedSince(long lastModified) {
     try (Cursor cursor =
         appContext
             .getContentResolver()
@@ -237,9 +313,9 @@ public final class Cp2PhoneLookup implements PhoneLookup {
                 new String[] {DeletedContacts.CONTACT_DELETED_TIMESTAMP},
                 DeletedContacts.CONTACT_DELETED_TIMESTAMP + " > ?",
                 new String[] {Long.toString(lastModified)},
-                null)) {
+                DeletedContacts.CONTACT_DELETED_TIMESTAMP + " limit 1")) {
       if (cursor == null) {
-        LogUtil.w("Cp2PhoneLookup.contactsDeleted", "null cursor");
+        LogUtil.w("Cp2PhoneLookup.anyContactsDeletedSince", "null cursor");
         return false;
       }
       return cursor.getCount() > 0;
@@ -413,6 +489,11 @@ public final class Cp2PhoneLookup implements PhoneLookup {
                 partitionedNumbers.dialerPhoneNumbersForE164(e164Number);
             Cp2ContactInfo info = buildCp2ContactInfoFromPhoneCursor(appContext, cursor);
             addInfo(map, dialerPhoneNumbers, info);
+
+            // We are going to remove the numbers that we've handled so that we later can detect
+            // numbers that weren't handled and therefore need to have their contact information
+            // removed.
+            updatedNumbers.removeAll(dialerPhoneNumbers);
           }
         }
       }
@@ -430,9 +511,19 @@ public final class Cp2PhoneLookup implements PhoneLookup {
                 partitionedNumbers.dialerPhoneNumbersForUnformattable(unformattableNumber);
             Cp2ContactInfo info = buildCp2ContactInfoFromPhoneCursor(appContext, cursor);
             addInfo(map, dialerPhoneNumbers, info);
+
+            // We are going to remove the numbers that we've handled so that we later can detect
+            // numbers that weren't handled and therefore need to have their contact information
+            // removed.
+            updatedNumbers.removeAll(dialerPhoneNumbers);
           }
         }
       }
+    }
+    // The leftovers in updatedNumbers that weren't removed are numbers that were previously
+    // associated with contacts, but are no longer. Remove the contact information for them.
+    for (DialerPhoneNumber dialerPhoneNumber : updatedNumbers) {
+      map.put(dialerPhoneNumber, ImmutableSet.of());
     }
     return map;
   }
