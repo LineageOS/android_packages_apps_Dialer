@@ -45,7 +45,9 @@ public class CompositeSmartDialMap {
   private static final SimpleArrayMap<String, SmartDialMap> EXTRA_MAPS = new SimpleArrayMap<>();
 
   static {
+    EXTRA_MAPS.put("bul", BulgarianSmartDialMap.getInstance());
     EXTRA_MAPS.put("rus", RussianSmartDialMap.getInstance());
+    EXTRA_MAPS.put("ukr", UkrainianSmartDialMap.getInstance());
   }
 
   private CompositeSmartDialMap() {}
