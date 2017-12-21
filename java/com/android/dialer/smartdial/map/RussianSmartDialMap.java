@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.android.dialer.smartdial;
+package com.android.dialer.smartdial.map;
 
 import android.support.v4.util.SimpleArrayMap;
 import com.google.common.base.Optional;
 
-/** A {@link SmartDialMap} for the Bulgarian alphabet. */
+/** A {@link SmartDialMap} for the Russian alphabet. */
 @SuppressWarnings("Guava")
-final class BulgarianSmartDialMap extends SmartDialMap {
+final class RussianSmartDialMap extends SmartDialMap {
   private static final SimpleArrayMap<Character, Character> CHAR_TO_KEY_MAP =
       new SimpleArrayMap<>();
 
-  // Reference: https://en.wikipedia.org/wiki/Bulgarian_alphabet
+  // Reference: https://en.wikipedia.org/wiki/Russian_alphabet
   static {
     CHAR_TO_KEY_MAP.put('а', '2');
     CHAR_TO_KEY_MAP.put('б', '2');
@@ -34,6 +34,7 @@ final class BulgarianSmartDialMap extends SmartDialMap {
 
     CHAR_TO_KEY_MAP.put('д', '3');
     CHAR_TO_KEY_MAP.put('е', '3');
+    CHAR_TO_KEY_MAP.put('ё', '3');
     CHAR_TO_KEY_MAP.put('ж', '3');
     CHAR_TO_KEY_MAP.put('з', '3');
 
@@ -45,38 +46,40 @@ final class BulgarianSmartDialMap extends SmartDialMap {
     CHAR_TO_KEY_MAP.put('м', '5');
     CHAR_TO_KEY_MAP.put('н', '5');
     CHAR_TO_KEY_MAP.put('о', '5');
+    CHAR_TO_KEY_MAP.put('п', '5');
 
-    CHAR_TO_KEY_MAP.put('п', '6');
     CHAR_TO_KEY_MAP.put('р', '6');
     CHAR_TO_KEY_MAP.put('с', '6');
+    CHAR_TO_KEY_MAP.put('т', '6');
+    CHAR_TO_KEY_MAP.put('у', '6');
 
-    CHAR_TO_KEY_MAP.put('т', '7');
-    CHAR_TO_KEY_MAP.put('у', '7');
     CHAR_TO_KEY_MAP.put('ф', '7');
     CHAR_TO_KEY_MAP.put('х', '7');
+    CHAR_TO_KEY_MAP.put('ц', '7');
+    CHAR_TO_KEY_MAP.put('ч', '7');
 
-    CHAR_TO_KEY_MAP.put('ц', '8');
-    CHAR_TO_KEY_MAP.put('ч', '8');
     CHAR_TO_KEY_MAP.put('ш', '8');
     CHAR_TO_KEY_MAP.put('щ', '8');
+    CHAR_TO_KEY_MAP.put('ъ', '8');
+    CHAR_TO_KEY_MAP.put('ы', '8');
 
-    CHAR_TO_KEY_MAP.put('ъ', '9');
     CHAR_TO_KEY_MAP.put('ь', '9');
+    CHAR_TO_KEY_MAP.put('э', '9');
     CHAR_TO_KEY_MAP.put('ю', '9');
     CHAR_TO_KEY_MAP.put('я', '9');
   }
 
-  private static BulgarianSmartDialMap instance;
+  private static RussianSmartDialMap instance;
 
-  static BulgarianSmartDialMap getInstance() {
+  static RussianSmartDialMap getInstance() {
     if (instance == null) {
-      instance = new BulgarianSmartDialMap();
+      instance = new RussianSmartDialMap();
     }
 
     return instance;
   }
 
-  private BulgarianSmartDialMap() {}
+  private RussianSmartDialMap() {}
 
   @Override
   Optional<Character> normalizeCharacter(char ch) {

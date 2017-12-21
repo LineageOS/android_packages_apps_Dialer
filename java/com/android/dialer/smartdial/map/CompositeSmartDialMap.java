@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.smartdial;
+package com.android.dialer.smartdial.map;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
@@ -58,7 +58,7 @@ public class CompositeSmartDialMap {
    * <p>The provided character is expected to be a normalized character. See {@link
    * SmartDialMap#normalizeCharacter(char)} for details.
    */
-  static boolean isValidDialpadCharacter(Context context, char ch) {
+  public static boolean isValidDialpadCharacter(Context context, char ch) {
     if (DEFAULT_MAP.isValidDialpadCharacter(ch)) {
       return true;
     }
@@ -73,7 +73,7 @@ public class CompositeSmartDialMap {
    * <p>The provided character is expected to be a normalized character. See {@link
    * SmartDialMap#normalizeCharacter(char)} for details.
    */
-  static boolean isValidDialpadAlphabeticChar(Context context, char ch) {
+  public static boolean isValidDialpadAlphabeticChar(Context context, char ch) {
     if (DEFAULT_MAP.isValidDialpadAlphabeticChar(ch)) {
       return true;
     }
@@ -85,7 +85,7 @@ public class CompositeSmartDialMap {
   /**
    * Returns true if the provided character is a digit, and can be mapped to a key on the dialpad.
    */
-  static boolean isValidDialpadNumericChar(Context context, char ch) {
+  public static boolean isValidDialpadNumericChar(Context context, char ch) {
     if (DEFAULT_MAP.isValidDialpadNumericChar(ch)) {
       return true;
     }
@@ -102,7 +102,7 @@ public class CompositeSmartDialMap {
    *
    * <p>If the provided character can't be mapped to a key on the dialpad, return -1.
    */
-  static byte getDialpadIndex(Context context, char ch) {
+  public static byte getDialpadIndex(Context context, char ch) {
     Optional<Byte> dialpadIndex = DEFAULT_MAP.getDialpadIndex(ch);
     if (dialpadIndex.isPresent()) {
       return dialpadIndex.get();
@@ -124,7 +124,7 @@ public class CompositeSmartDialMap {
    *
    * <p>If the provided character can't be mapped to a key on the dialpad, return the character.
    */
-  static char getDialpadNumericCharacter(Context context, char ch) {
+  public static char getDialpadNumericCharacter(Context context, char ch) {
     Optional<Character> dialpadNumericChar = DEFAULT_MAP.getDialpadNumericCharacter(ch);
     if (dialpadNumericChar.isPresent()) {
       return dialpadNumericChar.get();
@@ -144,7 +144,7 @@ public class CompositeSmartDialMap {
    *
    * <p>If the provided character can't be mapped to a key on the dialpad, return the character.
    */
-  static char normalizeCharacter(Context context, char ch) {
+  public static char normalizeCharacter(Context context, char ch) {
     Optional<Character> normalizedChar = DEFAULT_MAP.normalizeCharacter(ch);
     if (normalizedChar.isPresent()) {
       return normalizedChar.get();

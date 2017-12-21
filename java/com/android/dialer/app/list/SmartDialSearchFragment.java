@@ -31,7 +31,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.DialerDatabaseHelper;
-import com.android.dialer.dialpadview.SmartDialCursorLoader;
+import com.android.dialer.smartdial.SmartDialCursorLoader;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import java.util.Arrays;
