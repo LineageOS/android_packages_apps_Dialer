@@ -120,7 +120,8 @@ final class SimulatorVoiceCall
 
   private void addSpamIncomingCall() {
     String callerId = "+1-661-778-3020"; /* Blacklisted custom spam number */
-    SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
+    connectionTag =
+        SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
   }
 
   private void addNewEmergencyCallBack() {
