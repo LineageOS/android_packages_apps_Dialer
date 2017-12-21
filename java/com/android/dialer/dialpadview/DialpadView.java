@@ -87,6 +87,7 @@ public class DialpadView extends LinearLayout {
   private ViewGroup mRateContainer;
   private TextView mIldCountry;
   private TextView mIldRate;
+  private boolean mIsLandscapeMode;
 
   public DialpadView(Context context) {
     this(context, null);
@@ -124,6 +125,12 @@ public class DialpadView extends LinearLayout {
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
+
+    // The orientation obtained at this point should be used as the only truth for DialpadView as we
+    // observed inconsistency between configurations obtained here and in
+    // OnPreDrawListenerForKeyLayoutAdjust under rare circumstances.
+    mIsLandscapeMode =
+        (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
 
     setupKeypad();
     mDigits = (EditText) findViewById(R.id.digits);
@@ -281,7 +288,7 @@ public class DialpadView extends LinearLayout {
       final DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[i]);
 
       ViewPropertyAnimator animator = dialpadKey.animate();
-      if (isLandscapeMode()) {
+      if (mIsLandscapeMode) {
         // Landscape orientation requires translation along the X axis.
         // For RTL locales, ensure we translate negative on the X axis.
         dialpadKey.setTranslationX((mIsRtl ? -1 : 1) * mTranslateDistance);
@@ -320,7 +327,7 @@ public class DialpadView extends LinearLayout {
    * @return The animation delay.
    */
   private int getKeyButtonAnimationDelay(int buttonId) {
-    if (isLandscapeMode()) {
+    if (mIsLandscapeMode) {
       if (mIsRtl) {
         if (buttonId == R.id.three) {
           return KEY_FRAME_DURATION * 1;
@@ -408,7 +415,7 @@ public class DialpadView extends LinearLayout {
    * @return The animation duration.
    */
   private int getKeyButtonAnimationDuration(int buttonId) {
-    if (isLandscapeMode()) {
+    if (mIsLandscapeMode) {
       if (mIsRtl) {
         if (buttonId == R.id.one
             || buttonId == R.id.four
@@ -461,10 +468,6 @@ public class DialpadView extends LinearLayout {
 
     LogUtil.e(TAG, "Attempted to get animation duration for invalid key button id.");
     return 0;
-  }
-
-  private boolean isLandscapeMode() {
-    return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   }
 
   /**
@@ -525,7 +528,7 @@ public class DialpadView extends LinearLayout {
     }
 
     private boolean shouldAdjustKeySizes() {
-      return isLandscapeMode() ? shouldAdjustKeyWidths() : shouldAdjustDigitKeyHeights();
+      return mIsLandscapeMode ? shouldAdjustKeyWidths() : shouldAdjustDigitKeyHeights();
     }
 
     /**
@@ -533,7 +536,7 @@ public class DialpadView extends LinearLayout {
      * device is in landscape mode.
      */
     private boolean shouldAdjustKeyWidths() {
-      Assert.checkState(isLandscapeMode());
+      Assert.checkState(mIsLandscapeMode);
 
       DialpadKeyButton dialpadKeyButton = (DialpadKeyButton) findViewById(BUTTON_IDS[0]);
       LinearLayout keyLayout =
@@ -556,7 +559,7 @@ public class DialpadView extends LinearLayout {
      * called when the device is in portrait mode.
      */
     private boolean shouldAdjustDigitKeyHeights() {
-      Assert.checkState(!isLandscapeMode());
+      Assert.checkState(!mIsLandscapeMode);
 
       DialpadKeyButton dialpadKey = (DialpadKeyButton) findViewById(BUTTON_IDS[0]);
       LinearLayout keyLayout = (LinearLayout) dialpadKey.findViewById(R.id.dialpad_key_layout);
@@ -576,7 +579,7 @@ public class DialpadView extends LinearLayout {
     }
 
     private void adjustKeySizes() {
-      if (isLandscapeMode()) {
+      if (mIsLandscapeMode) {
         adjustKeyWidths();
       } else {
         adjustDigitKeyHeights();
@@ -594,7 +597,7 @@ public class DialpadView extends LinearLayout {
      * LinearLayout#setLayoutParams(ViewGroup.LayoutParams)}.
      */
     private void adjustDigitKeyHeights() {
-      Assert.checkState(!isLandscapeMode());
+      Assert.checkState(!mIsLandscapeMode);
 
       int maxHeight = 0;
 
@@ -638,7 +641,7 @@ public class DialpadView extends LinearLayout {
      * View#setLayoutParams(ViewGroup.LayoutParams)}.
      */
     private void adjustKeyWidths() {
-      Assert.checkState(isLandscapeMode());
+      Assert.checkState(mIsLandscapeMode);
 
       int maxWidth = 0;
       for (int buttonId : BUTTON_IDS) {
