@@ -37,251 +37,251 @@
   <!-- Composed from https://www.iso.org/obp/ui/#search and
        https://github.com/googlei18n/libphonenumber/blob/master/javascript/i18n/phonenumbers/metadata.js#L34 -->
   <!-- Excluding ['Antarctica', 'Bouvet Island', 'French Southern Territories (the)', 'Heard Island and McDonald Islands', 'Pitcairn', 'South Georgia and the South Sandwich Islands', 'United States Minor Outlying Islands (the)'] -->
-  <!-- Options for the country codes used in assisted dialing. DO NOT TRANSLATE NUMBERS. [CHAR LIMIT=40] -->
-  <string-array name="assisted_dialing_cc_entries">
+  <!-- DO NOT TRANSLATE. Country codes used in assisted dialing. [CHAR LIMIT=40] -->
+  <string-array name="assisted_dialing_cc_entries" translatable="false">
     <item>@string/assisted_dialing_setting_cc_default_summary_fallback</item>
-    <item>Afghanistan <xliff:g>(+93)</xliff:g></item>
-    <item>Åland Islands <xliff:g>(+358)</xliff:g></item>
-    <item>Albania <xliff:g>(+355)</xliff:g></item>
-    <item>Algeria <xliff:g>(+213)</xliff:g></item>
-    <item>American Samoa <xliff:g>(+1)</xliff:g></item>
-    <item>Andorra <xliff:g>(+376)</xliff:g></item>
-    <item>Angola <xliff:g>(+244)</xliff:g></item>
-    <item>Anguilla <xliff:g>(+1)</xliff:g></item>
-    <item>Antigua and Barbuda <xliff:g>(+1)</xliff:g></item>
-    <item>Argentina <xliff:g>(+54)</xliff:g></item>
-    <item>Armenia <xliff:g>(+374)</xliff:g></item>
-    <item>Aruba <xliff:g>(+297)</xliff:g></item>
-    <item>Australia <xliff:g>(+61)</xliff:g></item>
-    <item>Austria <xliff:g>(+43)</xliff:g></item>
-    <item>Azerbaijan <xliff:g>(+994)</xliff:g></item>
-    <item>Bahamas <xliff:g>(+1)</xliff:g></item>
-    <item>Bahrain <xliff:g>(+973)</xliff:g></item>
-    <item>Bangladesh <xliff:g>(+880)</xliff:g></item>
-    <item>Barbados <xliff:g>(+1)</xliff:g></item>
-    <item>Belarus <xliff:g>(+375)</xliff:g></item>
-    <item>Belgium <xliff:g>(+32)</xliff:g></item>
-    <item>Belize <xliff:g>(+501)</xliff:g></item>
-    <item>Benin <xliff:g>(+229)</xliff:g></item>
-    <item>Bermuda <xliff:g>(+1)</xliff:g></item>
-    <item>Bhutan <xliff:g>(+975)</xliff:g></item>
-    <item>Bolivia <xliff:g>(+591)</xliff:g></item>
-    <item>Caribbean Netherlands <xliff:g>(+599)</xliff:g></item>
-    <item>Bosnia and Herzegovina <xliff:g>(+387)</xliff:g></item>
-    <item>Botswana <xliff:g>(+267)</xliff:g></item>
-    <item>Brazil <xliff:g>(+55)</xliff:g></item>
-    <item>British Indian Ocean Territory <xliff:g>(+246)</xliff:g></item>
-    <item>Brunei <xliff:g>(+673)</xliff:g></item>
-    <item>Bulgaria <xliff:g>(+359)</xliff:g></item>
-    <item>Burkina Faso <xliff:g>(+226)</xliff:g></item>
-    <item>Burundi <xliff:g>(+257)</xliff:g></item>
-    <item>Cabo Verde <xliff:g>(+238)</xliff:g></item>
-    <item>Cambodia <xliff:g>(+855)</xliff:g></item>
-    <item>Cameroon <xliff:g>(+237)</xliff:g></item>
-    <item>Canada <xliff:g>(+1)</xliff:g></item>
-    <item>Cayman Islands <xliff:g>(+1)</xliff:g></item>
-    <item>Central African Republic <xliff:g>(+236)</xliff:g></item>
-    <item>Chad <xliff:g>(+235)</xliff:g></item>
-    <item>Chile <xliff:g>(+56)</xliff:g></item>
-    <item>China <xliff:g>(+86)</xliff:g></item>
-    <item>Christmas Island <xliff:g>(+61)</xliff:g></item>
-    <item>Cocos (Keeling) Islands <xliff:g>(+61)</xliff:g></item>
-    <item>Colombia <xliff:g>(+57)</xliff:g></item>
-    <item>Comoros <xliff:g>(+269)</xliff:g></item>
-    <item>Democratic Republic of the Congo <xliff:g>(+243)</xliff:g></item>
-    <item>Congo <xliff:g>(+242)</xliff:g></item>
-    <item>Cook Islands <xliff:g>(+682)</xliff:g></item>
-    <item>Costa Rica <xliff:g>(+506)</xliff:g></item>
-    <item>Côte d\'Ivoire <xliff:g>(+225)</xliff:g></item>
-    <item>Croatia <xliff:g>(+385)</xliff:g></item>
-    <item>Cuba <xliff:g>(+53)</xliff:g></item>
-    <item>Curaçao <xliff:g>(+599)</xliff:g></item>
-    <item>Cyprus <xliff:g>(+357)</xliff:g></item>
-    <item>Czechia <xliff:g>(+420)</xliff:g></item>
-    <item>Denmark <xliff:g>(+45)</xliff:g></item>
-    <item>Djibouti <xliff:g>(+253)</xliff:g></item>
-    <item>Dominica <xliff:g>(+1)</xliff:g></item>
-    <item>Dominican Republic <xliff:g>(+1)</xliff:g></item>
-    <item>Ecuador <xliff:g>(+593)</xliff:g></item>
-    <item>Egypt <xliff:g>(+20)</xliff:g></item>
-    <item>El Salvador <xliff:g>(+503)</xliff:g></item>
-    <item>Equatorial Guinea <xliff:g>(+240)</xliff:g></item>
-    <item>Eritrea <xliff:g>(+291)</xliff:g></item>
-    <item>Estonia <xliff:g>(+372)</xliff:g></item>
-    <item>Ethiopia <xliff:g>(+251)</xliff:g></item>
-    <item>Falkland Islands (Islas Malvinas) <xliff:g>(+500)</xliff:g></item>
-    <item>Faroe Islands <xliff:g>(+298)</xliff:g></item>
-    <item>Fiji <xliff:g>(+679)</xliff:g></item>
-    <item>Finland <xliff:g>(+358)</xliff:g></item>
-    <item>France <xliff:g>(+33)</xliff:g></item>
-    <item>French Guiana <xliff:g>(+594)</xliff:g></item>
-    <item>French Polynesia <xliff:g>(+689)</xliff:g></item>
-    <item>Gabon <xliff:g>(+241)</xliff:g></item>
-    <item>Gambia <xliff:g>(+220)</xliff:g></item>
-    <item>Georgia <xliff:g>(+995)</xliff:g></item>
-    <item>Germany <xliff:g>(+49)</xliff:g></item>
-    <item>Ghana <xliff:g>(+233)</xliff:g></item>
-    <item>Gibraltar <xliff:g>(+350)</xliff:g></item>
-    <item>Greece <xliff:g>(+30)</xliff:g></item>
-    <item>Greenland <xliff:g>(+299)</xliff:g></item>
-    <item>Grenada <xliff:g>(+1)</xliff:g></item>
-    <item>Guadeloupe <xliff:g>(+590)</xliff:g></item>
-    <item>Guam <xliff:g>(+1)</xliff:g></item>
-    <item>Guatemala <xliff:g>(+502)</xliff:g></item>
-    <item>Guernsey <xliff:g>(+44)</xliff:g></item>
-    <item>Guinea <xliff:g>(+224)</xliff:g></item>
-    <item>Guinea-Bissau <xliff:g>(+245)</xliff:g></item>
-    <item>Guyana <xliff:g>(+592)</xliff:g></item>
-    <item>Haiti <xliff:g>(+509)</xliff:g></item>
-    <item>Holy See <xliff:g>(+39)</xliff:g></item>
-    <item>Honduras <xliff:g>(+504)</xliff:g></item>
-    <item>Hong Kong <xliff:g>(+852)</xliff:g></item>
-    <item>Hungary <xliff:g>(+36)</xliff:g></item>
-    <item>Iceland <xliff:g>(+354)</xliff:g></item>
-    <item>India <xliff:g>(+91)</xliff:g></item>
-    <item>Indonesia <xliff:g>(+62)</xliff:g></item>
-    <item>Iran <xliff:g>(+98)</xliff:g></item>
-    <item>Iraq <xliff:g>(+964)</xliff:g></item>
-    <item>Ireland <xliff:g>(+353)</xliff:g></item>
-    <item>Isle of Man <xliff:g>(+44)</xliff:g></item>
-    <item>Israel <xliff:g>(+972)</xliff:g></item>
-    <item>Italy <xliff:g>(+39)</xliff:g></item>
-    <item>Jamaica <xliff:g>(+1)</xliff:g></item>
-    <item>Japan <xliff:g>(+81)</xliff:g></item>
-    <item>Jersey <xliff:g>(+44)</xliff:g></item>
-    <item>Jordan <xliff:g>(+962)</xliff:g></item>
-    <item>Kazakhstan <xliff:g>(+7)</xliff:g></item>
-    <item>Kenya <xliff:g>(+254)</xliff:g></item>
-    <item>Kiribati <xliff:g>(+686)</xliff:g></item>
-    <item>North Korea <xliff:g>(+850)</xliff:g></item>
-    <item>South Korea <xliff:g>(+82)</xliff:g></item>
-    <item>Kuwait <xliff:g>(+965)</xliff:g></item>
-    <item>Kyrgyzstan <xliff:g>(+996)</xliff:g></item>
-    <item>Laos <xliff:g>(+856)</xliff:g></item>
-    <item>Latvia <xliff:g>(+371)</xliff:g></item>
-    <item>Lebanon <xliff:g>(+961)</xliff:g></item>
-    <item>Lesotho <xliff:g>(+266)</xliff:g></item>
-    <item>Liberia <xliff:g>(+231)</xliff:g></item>
-    <item>Libya <xliff:g>(+218)</xliff:g></item>
-    <item>Liechtenstein <xliff:g>(+423)</xliff:g></item>
-    <item>Lithuania <xliff:g>(+370)</xliff:g></item>
-    <item>Luxembourg <xliff:g>(+352)</xliff:g></item>
-    <item>Macao <xliff:g>(+853)</xliff:g></item>
-    <item>Macedonia (FYROM) <xliff:g>(+389)</xliff:g></item>
-    <item>Madagascar <xliff:g>(+261)</xliff:g></item>
-    <item>Malawi <xliff:g>(+265)</xliff:g></item>
-    <item>Malaysia <xliff:g>(+60)</xliff:g></item>
-    <item>Maldives <xliff:g>(+960)</xliff:g></item>
-    <item>Mali <xliff:g>(+223)</xliff:g></item>
-    <item>Malta <xliff:g>(+356)</xliff:g></item>
-    <item>Marshall Islands <xliff:g>(+692)</xliff:g></item>
-    <item>Martinique <xliff:g>(+596)</xliff:g></item>
-    <item>Mauritania <xliff:g>(+222)</xliff:g></item>
-    <item>Mauritius <xliff:g>(+230)</xliff:g></item>
-    <item>Mayotte <xliff:g>(+262)</xliff:g></item>
-    <item>Mexico <xliff:g>(+52)</xliff:g></item>
-    <item>Micronesia <xliff:g>(+691)</xliff:g></item>
-    <item>Moldova <xliff:g>(+373)</xliff:g></item>
-    <item>Monaco <xliff:g>(+377)</xliff:g></item>
-    <item>Mongolia <xliff:g>(+976)</xliff:g></item>
-    <item>Montenegro <xliff:g>(+382)</xliff:g></item>
-    <item>Montserrat <xliff:g>(+1)</xliff:g></item>
-    <item>Morocco <xliff:g>(+212)</xliff:g></item>
-    <item>Mozambique <xliff:g>(+258)</xliff:g></item>
-    <item>Myanmar <xliff:g>(+95)</xliff:g></item>
-    <item>Namibia <xliff:g>(+264)</xliff:g></item>
-    <item>Nauru <xliff:g>(+674)</xliff:g></item>
-    <item>Nepal <xliff:g>(+977)</xliff:g></item>
-    <item>Netherlands <xliff:g>(+31)</xliff:g></item>
-    <item>New Caledonia <xliff:g>(+687)</xliff:g></item>
-    <item>New Zealand <xliff:g>(+64)</xliff:g></item>
-    <item>Nicaragua <xliff:g>(+505)</xliff:g></item>
-    <item>Niger <xliff:g>(+227)</xliff:g></item>
-    <item>Nigeria <xliff:g>(+234)</xliff:g></item>
-    <item>Niue <xliff:g>(+683)</xliff:g></item>
-    <item>Norfolk Island <xliff:g>(+672)</xliff:g></item>
-    <item>Northern Mariana Islands <xliff:g>(+1)</xliff:g></item>
-    <item>Norway <xliff:g>(+47)</xliff:g></item>
-    <item>Oman <xliff:g>(+968)</xliff:g></item>
-    <item>Pakistan <xliff:g>(+92)</xliff:g></item>
-    <item>Palau <xliff:g>(+680)</xliff:g></item>
-    <item>Palestine <xliff:g>(+970)</xliff:g></item>
-    <item>Panama <xliff:g>(+507)</xliff:g></item>
-    <item>Papua New Guinea <xliff:g>(+675)</xliff:g></item>
-    <item>Paraguay <xliff:g>(+595)</xliff:g></item>
-    <item>Peru <xliff:g>(+51)</xliff:g></item>
-    <item>Philippines <xliff:g>(+63)</xliff:g></item>
-    <item>Poland <xliff:g>(+48)</xliff:g></item>
-    <item>Portugal <xliff:g>(+351)</xliff:g></item>
-    <item>Puerto Rico <xliff:g>(+1)</xliff:g></item>
-    <item>Qatar <xliff:g>(+974)</xliff:g></item>
-    <item>Réunion <xliff:g>(+262)</xliff:g></item>
-    <item>Romania <xliff:g>(+40)</xliff:g></item>
-    <item>Russian <xliff:g>(+7)</xliff:g></item>
-    <item>Rwanda <xliff:g>(+250)</xliff:g></item>
-    <item>St. Barthélemy <xliff:g>(+590)</xliff:g></item>
-    <item>St. Helena <xliff:g>(+290)</xliff:g></item>
-    <item>St. Kitts and Nevis <xliff:g>(+1)</xliff:g></item>
-    <item>St. Lucia <xliff:g>(+1)</xliff:g></item>
-    <item>St. Martin <xliff:g>(+590)</xliff:g></item>
-    <item>St. Pierre and Miquelon <xliff:g>(+508)</xliff:g></item>
-    <item>St. Vincent and the Grenadines <xliff:g>(+1)</xliff:g></item>
-    <item>Samoa <xliff:g>(+685)</xliff:g></item>
-    <item>San Marino <xliff:g>(+378)</xliff:g></item>
-    <item>Sao Tome and Principe <xliff:g>(+239)</xliff:g></item>
-    <item>Saudi Arabia <xliff:g>(+966)</xliff:g></item>
-    <item>Senegal <xliff:g>(+221)</xliff:g></item>
-    <item>Serbia <xliff:g>(+381)</xliff:g></item>
-    <item>Seychelles <xliff:g>(+248)</xliff:g></item>
-    <item>Sierra Leone <xliff:g>(+232)</xliff:g></item>
-    <item>Singapore <xliff:g>(+65)</xliff:g></item>
-    <item>Sint Maarten <xliff:g>(+1)</xliff:g></item>
-    <item>Slovakia <xliff:g>(+421)</xliff:g></item>
-    <item>Slovenia <xliff:g>(+386)</xliff:g></item>
-    <item>Solomon Islands <xliff:g>(+677)</xliff:g></item>
-    <item>Somalia <xliff:g>(+252)</xliff:g></item>
-    <item>South Africa <xliff:g>(+27)</xliff:g></item>
-    <item>South Sudan <xliff:g>(+211)</xliff:g></item>
-    <item>Spain <xliff:g>(+34)</xliff:g></item>
-    <item>Sri Lanka <xliff:g>(+94)</xliff:g></item>
-    <item>Sudan <xliff:g>(+249)</xliff:g></item>
-    <item>Suriname <xliff:g>(+597)</xliff:g></item>
-    <item>Svalbard and Jan Mayen <xliff:g>(+47)</xliff:g></item>
-    <item>Swaziland <xliff:g>(+268)</xliff:g></item>
-    <item>Sweden <xliff:g>(+46)</xliff:g></item>
-    <item>Switzerland <xliff:g>(+41)</xliff:g></item>
-    <item>Syria <xliff:g>(+963)</xliff:g></item>
-    <item>Taiwan <xliff:g>(+886)</xliff:g></item>
-    <item>Tajikistan <xliff:g>(+992)</xliff:g></item>
-    <item>Tanzania <xliff:g>(+255)</xliff:g></item>
-    <item>Thailand <xliff:g>(+66)</xliff:g></item>
-    <item>Timor-Leste <xliff:g>(+670)</xliff:g></item>
-    <item>Togo <xliff:g>(+228)</xliff:g></item>
-    <item>Tokelau <xliff:g>(+690)</xliff:g></item>
-    <item>Tonga <xliff:g>(+676)</xliff:g></item>
-    <item>Trinidad and Tobago <xliff:g>(+1)</xliff:g></item>
-    <item>Tunisia <xliff:g>(+216)</xliff:g></item>
-    <item>Turkey <xliff:g>(+90)</xliff:g></item>
-    <item>Turkmenistan <xliff:g>(+993)</xliff:g></item>
-    <item>Turks and Caicos Islands <xliff:g>(+1)</xliff:g></item>
-    <item>Tuvalu <xliff:g>(+688)</xliff:g></item>
-    <item>Uganda <xliff:g>(+256)</xliff:g></item>
-    <item>Ukraine <xliff:g>(+380)</xliff:g></item>
-    <item>United Arab Emirates <xliff:g>(+971)</xliff:g></item>
-    <item>United Kingdom <xliff:g>(+44)</xliff:g></item>
-    <item>United States <xliff:g>(+1)</xliff:g></item>
-    <item>Uruguay <xliff:g>(+598)</xliff:g></item>
-    <item>Uzbekistan <xliff:g>(+998)</xliff:g></item>
-    <item>Vanuatu <xliff:g>(+678)</xliff:g></item>
-    <item>Venezuela <xliff:g>(+58)</xliff:g></item>
-    <item>Viet Nam <xliff:g>(+84)</xliff:g></item>
-    <item>Virgin Islands (British) <xliff:g>(+1)</xliff:g></item>
-    <item>Virgin Islands (U.S.) <xliff:g>(+1)</xliff:g></item>
-    <item>Wallis and Futuna <xliff:g>(+681)</xliff:g></item>
-    <item>Western Sahara <xliff:g>(+212)</xliff:g></item>
-    <item>Yemen <xliff:g>(+967)</xliff:g></item>
-    <item>Zambia <xliff:g>(+260)</xliff:g></item>
-    <item>Zimbabwe <xliff:g>(+263)</xliff:g></item>
+    <item>(+93)</item>
+    <item>(+358)</item>
+    <item>(+355)</item>
+    <item>(+213)</item>
+    <item>(+1)</item>
+    <item>(+376)</item>
+    <item>(+244)</item>
+    <item>(+1)</item>
+    <item>(+1)</item>
+    <item>(+54)</item>
+    <item>(+374)</item>
+    <item>(+297)</item>
+    <item>(+61)</item>
+    <item>(+43)</item>
+    <item>(+994)</item>
+    <item>(+1)</item>
+    <item>(+973)</item>
+    <item>(+880)</item>
+    <item>(+1)</item>
+    <item>(+375)</item>
+    <item>(+32)</item>
+    <item>(+501)</item>
+    <item>(+229)</item>
+    <item>(+1)</item>
+    <item>(+975)</item>
+    <item>(+591)</item>
+    <item>(+599)</item>
+    <item>(+387)</item>
+    <item>(+267)</item>
+    <item>(+55)</item>
+    <item>(+246)</item>
+    <item>(+673)</item>
+    <item>(+359)</item>
+    <item>(+226)</item>
+    <item>(+257)</item>
+    <item>(+238)</item>
+    <item>(+855)</item>
+    <item>(+237)</item>
+    <item>(+1)</item>
+    <item>(+1)</item>
+    <item>(+236)</item>
+    <item>(+235)</item>
+    <item>(+56)</item>
+    <item>(+86)</item>
+    <item>(+61)</item>
+    <item>(+61)</item>
+    <item>(+57)</item>
+    <item>(+269)</item>
+    <item>(+243)</item>
+    <item>(+242)</item>
+    <item>(+682)</item>
+    <item>(+506)</item>
+    <item>(+225)</item>
+    <item>(+385)</item>
+    <item>(+53)</item>
+    <item>(+599)</item>
+    <item>(+357)</item>
+    <item>(+420)</item>
+    <item>(+45)</item>
+    <item>(+253)</item>
+    <item>(+1)</item>
+    <item>(+1)</item>
+    <item>(+593)</item>
+    <item>(+20)</item>
+    <item>(+503)</item>
+    <item>(+240)</item>
+    <item>(+291)</item>
+    <item>(+372)</item>
+    <item>(+251)</item>
+    <item>(+500)</item>
+    <item>(+298)</item>
+    <item>(+679)</item>
+    <item>(+358)</item>
+    <item>(+33)</item>
+    <item>(+594)</item>
+    <item>(+689)</item>
+    <item>(+241)</item>
+    <item>(+220)</item>
+    <item>(+995)</item>
+    <item>(+49)</item>
+    <item>(+233)</item>
+    <item>(+350)</item>
+    <item>(+30)</item>
+    <item>(+299)</item>
+    <item>(+1)</item>
+    <item>(+590)</item>
+    <item>(+1)</item>
+    <item>(+502)</item>
+    <item>(+44)</item>
+    <item>(+224)</item>
+    <item>(+245)</item>
+    <item>(+592)</item>
+    <item>(+509)</item>
+    <item>(+39)</item>
+    <item>(+504)</item>
+    <item>(+852)</item>
+    <item>(+36)</item>
+    <item>(+354)</item>
+    <item>(+91)</item>
+    <item>(+62)</item>
+    <item>(+98)</item>
+    <item>(+964)</item>
+    <item>(+353)</item>
+    <item>(+44)</item>
+    <item>(+972)</item>
+    <item>(+39)</item>
+    <item>(+1)</item>
+    <item>(+81)</item>
+    <item>(+44)</item>
+    <item>(+962)</item>
+    <item>(+7)</item>
+    <item>(+254)</item>
+    <item>(+686)</item>
+    <item>(+850)</item>
+    <item>(+82)</item>
+    <item>(+965)</item>
+    <item>(+996)</item>
+    <item>(+856)</item>
+    <item>(+371)</item>
+    <item>(+961)</item>
+    <item>(+266)</item>
+    <item>(+231)</item>
+    <item>(+218)</item>
+    <item>(+423)</item>
+    <item>(+370)</item>
+    <item>(+352)</item>
+    <item>(+853)</item>
+    <item>(+389)</item>
+    <item>(+261)</item>
+    <item>(+265)</item>
+    <item>(+60)</item>
+    <item>(+960)</item>
+    <item>(+223)</item>
+    <item>(+356)</item>
+    <item>(+692)</item>
+    <item>(+596)</item>
+    <item>(+222)</item>
+    <item>(+230)</item>
+    <item>(+262)</item>
+    <item>(+52)</item>
+    <item>(+691)</item>
+    <item>(+373)</item>
+    <item>(+377)</item>
+    <item>(+976)</item>
+    <item>(+382)</item>
+    <item>(+1)</item>
+    <item>(+212)</item>
+    <item>(+258)</item>
+    <item>(+95)</item>
+    <item>(+264)</item>
+    <item>(+674)</item>
+    <item>(+977)</item>
+    <item>(+31)</item>
+    <item>(+687)</item>
+    <item>(+64)</item>
+    <item>(+505)</item>
+    <item>(+227)</item>
+    <item>(+234)</item>
+    <item>(+683)</item>
+    <item>(+672)</item>
+    <item>(+1)</item>
+    <item>(+47)</item>
+    <item>(+968)</item>
+    <item>(+92)</item>
+    <item>(+680)</item>
+    <item>(+970)</item>
+    <item>(+507)</item>
+    <item>(+675)</item>
+    <item>(+595)</item>
+    <item>(+51)</item>
+    <item>(+63)</item>
+    <item>(+48)</item>
+    <item>(+351)</item>
+    <item>(+1)</item>
+    <item>(+974)</item>
+    <item>(+262)</item>
+    <item>(+40)</item>
+    <item>(+7)</item>
+    <item>(+250)</item>
+    <item>(+590)</item>
+    <item>(+290)</item>
+    <item>(+1)</item>
+    <item>(+1)</item>
+    <item>(+590)</item>
+    <item>(+508)</item>
+    <item>(+1)</item>
+    <item>(+685)</item>
+    <item>(+378)</item>
+    <item>(+239)</item>
+    <item>(+966)</item>
+    <item>(+221)</item>
+    <item>(+381)</item>
+    <item>(+248)</item>
+    <item>(+232)</item>
+    <item>(+65)</item>
+    <item>(+1)</item>
+    <item>(+421)</item>
+    <item>(+386)</item>
+    <item>(+677)</item>
+    <item>(+252)</item>
+    <item>(+27)</item>
+    <item>(+211)</item>
+    <item>(+34)</item>
+    <item>(+94)</item>
+    <item>(+249)</item>
+    <item>(+597)</item>
+    <item>(+47)</item>
+    <item>(+268)</item>
+    <item>(+46)</item>
+    <item>(+41)</item>
+    <item>(+963)</item>
+    <item>(+886)</item>
+    <item>(+992)</item>
+    <item>(+255)</item>
+    <item>(+66)</item>
+    <item>(+670)</item>
+    <item>(+228)</item>
+    <item>(+690)</item>
+    <item>(+676)</item>
+    <item>(+1)</item>
+    <item>(+216)</item>
+    <item>(+90)</item>
+    <item>(+993)</item>
+    <item>(+1)</item>
+    <item>(+688)</item>
+    <item>(+256)</item>
+    <item>(+380)</item>
+    <item>(+971)</item>
+    <item>(+44)</item>
+    <item>(+1)</item>
+    <item>(+598)</item>
+    <item>(+998)</item>
+    <item>(+678)</item>
+    <item>(+58)</item>
+    <item>(+84)</item>
+    <item>(+1)</item>
+    <item>(+1)</item>
+    <item>(+681)</item>
+    <item>(+212)</item>
+    <item>(+967)</item>
+    <item>(+260)</item>
+    <item>(+263)</item>
   </string-array>
   <string-array name="assisted_dialing_cc_values" translatable="false">
     <item></item>
