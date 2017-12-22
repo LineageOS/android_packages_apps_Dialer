@@ -21,6 +21,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="true"
     android:clipToPadding="false"
+    android:layoutDirection="ltr"
     tools:theme="@style/Theme.AppCompat">
   <RelativeLayout
       android:id="@+id/bubble_primary_container"

@@ -47,10 +47,13 @@
         android:name="android.telephony.hide_voicemail_settings_menu"
         android:value="true"/>
 
+    <!-- Go variants need hardware acceleration for IMS video calls even though it is disabled at
+    the application level -->
     <activity
         android:directBootAware="true"
         android:excludeFromRecents="true"
         android:exported="false"
+        android:hardwareAccelerated="true"
         android:label="@string/phoneAppLabel"
         android:launchMode="singleInstance"
         android:name="com.android.incallui.InCallActivity"

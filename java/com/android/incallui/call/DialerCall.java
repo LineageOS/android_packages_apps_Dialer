@@ -20,6 +20,7 @@ import android.Manifest.permission;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
@@ -1073,19 +1075,50 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return mLogState.isIncoming;
   }
 
+  /**
+   * Try and determine if the call used assisted dialing.
+   *
+   * <p>We will not be able to verify a call underwent assisted dialing until the Platform
+   * implmentation is complete in P+.
+   *
+   * @return a boolean indicating assisted dialing may have been performed
+   */
   public boolean isAssistedDialed() {
     if (getIntentExtras() != null) {
-      return getIntentExtras().getBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, false);
+      // O_MR1 and below uses the existence of USE_ASSISTED_DIALING to indicate assisted dialing
+      // was used. The Dialer client is responsible for performing assisted dialing before
+      // placing the outgoing call.
+      //
+      // The existence of the assisted dialing extras indicates that assisted dialing took place.
+      if (getIntentExtras().getBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, false)
+          && getAssistedDialingExtras() != null
+          && Build.VERSION.SDK_INT <= ConcreteCreator.BUILD_CODE_CEILING) {
+        return true;
+      }
+    }
+
+    // Starting in P+ USE_ASSISTED_DIALING indicates that the client requested the platform
+    // perform assisted dialing. PROPERTY_ASSISTED_DIALING_USED indicates assisted dialing took
+    // place.
+    if (hasProperty(TelephonyManagerCompat.PROPERTY_ASSISTED_DIALING_USED)
+        && Build.VERSION.SDK_INT > ConcreteCreator.BUILD_CODE_CEILING) {
+      return true;
     }
     return false;
   }
 
+  @Nullable
   public TransformationInfo getAssistedDialingExtras() {
-    if (isAssistedDialed()) {
-      return TransformationInfo.newInstanceFromBundle(
-          getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
+    if (getIntentExtras() == null) {
+      return null;
     }
-    return null;
+
+    if (getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS) == null) {
+      return null;
+    }
+
+    return TransformationInfo.newInstanceFromBundle(
+        getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
   }
 
   public LatencyReport getLatencyReport() {

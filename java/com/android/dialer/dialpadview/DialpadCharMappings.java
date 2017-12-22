@@ -147,6 +147,23 @@ public class DialpadCharMappings {
         : null;
   }
 
+  /**
+   * Returns the character-key map of the provided ISO 639-2 language code.
+   *
+   * <p>Note: this method is for implementations of {@link
+   * com.android.dialer.smartdial.map.SmartDialMap} only. {@link #getCharToKeyMap(Context)} should
+   * be used for all other purposes.
+   *
+   * <p>It is the caller's responsibility to ensure the language code is valid and a character
+   * mapping is defined for that language. Otherwise, an exception will be thrown.
+   */
+  public static SimpleArrayMap<Character, Character> getCharToKeyMap(String languageCode) {
+    SimpleArrayMap<Character, Character> charToKeyMap = CHAR_TO_KEY_MAPS.get(languageCode);
+
+    return Assert.isNotNull(
+        charToKeyMap, "No character mappings can be found for language code '%s'", languageCode);
+  }
+
   /** Returns the default character-key map (the one that uses the Latin alphabet). */
   public static SimpleArrayMap<Character, Character> getDefaultCharToKeyMap() {
     return Latin.CHAR_TO_KEY;

@@ -178,6 +178,10 @@ public abstract class TelecomUtil {
    * are not included.
    */
   public static boolean isInManagedCall(Context context) {
+    return instance.isInManagedCall(context);
+  }
+
+  public static boolean isInCall(Context context) {
     return instance.isInCall(context);
   }
 
@@ -289,7 +293,7 @@ public abstract class TelecomUtil {
   @VisibleForTesting()
   public static class TelecomUtilImpl {
 
-    public boolean isInCall(Context context) {
+    public boolean isInManagedCall(Context context) {
       if (hasReadPhoneStatePermission(context)) {
         // The TelecomManager#isInCall method returns true anytime the user is in a call.
         // Starting in O, the APIs include support for self-managed ConnectionServices so that other
@@ -306,6 +310,10 @@ public abstract class TelecomUtil {
         }
       }
       return false;
+    }
+
+    public boolean isInCall(Context context) {
+      return hasReadPhoneStatePermission(context) && getTelecomManager(context).isInCall();
     }
 
     public boolean hasPermission(Context context, String permission) {

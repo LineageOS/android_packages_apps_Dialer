@@ -21,6 +21,7 @@ import static android.view.View.VISIBLE;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -124,6 +125,9 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
       transcriptionTextView.setText(voicemailTranscription);
     }
 
+    // Bold if voicemail is unread
+    boldViewHolderIfUnread();
+
     itemView.setOnClickListener(this);
     menuButton.setOnClickListener(
         NewVoicemailMenu.createOnClickListener(context, voicemailEntryOfViewHolder));
@@ -173,6 +177,20 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         mediaPlayerView.getVisibility() == VISIBLE);
   }
 
+  private void boldViewHolderIfUnread() {
+    LogUtil.v(
+        "NewVoicemailViewHolder.boldViewHolderIfUnread",
+        "id:%d, isRead:%d",
+        voicemailEntryOfViewHolder.id(),
+        voicemailEntryOfViewHolder.isRead());
+
+    if (voicemailEntryOfViewHolder.isRead() == 0) {
+      primaryTextView.setTypeface(null, Typeface.BOLD);
+      secondaryTextView.setTypeface(null, Typeface.BOLD);
+      transcriptionTextView.setTypeface(null, Typeface.BOLD);
+    }
+  }
+
   // TODO(uabdullah): Consider/Implement TYPE (e.g Spam, TYPE_VOICEMAIL)
   private void setPhoto(VoicemailEntry voicemailEntry) {
     ContactPhotoManager.getInstance(context)
@@ -213,6 +231,10 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     viewHolderId = -1;
     isViewHolderExpanded = false;
     viewHolderVoicemailUri = null;
+
+    primaryTextView.setTypeface(null, Typeface.NORMAL);
+    secondaryTextView.setTypeface(null, Typeface.NORMAL);
+    transcriptionTextView.setTypeface(null, Typeface.NORMAL);
 
     mediaPlayerView.reset();
 

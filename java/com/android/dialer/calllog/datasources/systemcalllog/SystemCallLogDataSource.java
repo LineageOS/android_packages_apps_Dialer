@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.provider.VoicemailContract;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
@@ -92,13 +93,21 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
     // TODO(zachh): Need to somehow register observers if user enables permission after launch?
 
+    CallLogObserver callLogObserver =
+        new CallLogObserver(ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks);
+
     appContext
         .getContentResolver()
-        .registerContentObserver(
-            CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,
-            true,
-            new CallLogObserver(
-                ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks));
+        .registerContentObserver(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL, true, callLogObserver);
+
+    if (!PermissionsUtil.hasAddVoicemailPermissions(appContext)) {
+      LogUtil.i("SystemCallLogDataSource.registerContentObservers", "no add voicemail permissions");
+      return;
+    }
+    // TODO(uabdullah): Need to somehow register observers if user enables permission after launch?
+    appContext
+        .getContentResolver()
+        .registerContentObserver(VoicemailContract.Status.CONTENT_URI, true, callLogObserver);
   }
 
   @Override
@@ -462,7 +471,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     @Override
     public void onChange(boolean selfChange, Uri uri) {
       Assert.isMainThread();
-      LogUtil.enterBlock("SystemCallLogDataSource.CallLogObserver.onChange");
+      LogUtil.i(
+          "SystemCallLogDataSource.CallLogObserver.onChange",
+          "Uri:%s, SelfChange:%b",
+          String.valueOf(uri),
+          selfChange);
       super.onChange(selfChange, uri);
 
       /*
