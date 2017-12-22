@@ -16,6 +16,8 @@
 package com.android.dialer.assisteddialing.ui;
 
 import android.annotation.TargetApi;
+import android.icu.util.ULocale;
+import android.icu.util.ULocale.Builder;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -150,8 +152,19 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
     }
 
     List<DisplayNameAndCountryCodeTuple> displayNamesandCountryCodes = new ArrayList<>();
+    // getCountry() is actually getRegion() and conforms to the iso standards of input for the
+    // builder.
+    ULocale userLocale =
+        new ULocale.Builder()
+            .setRegion(getResources().getConfiguration().getLocales().get(0).getCountry())
+            .setLanguage(getResources().getConfiguration().getLocales().get(0).getLanguage())
+            .build();
     for (int i = 0; i < keys.length; i++) {
-      displayNamesandCountryCodes.add(DisplayNameAndCountryCodeTuple.create(keys[i], values[i]));
+      ULocale settingRowDisplayCountry = new Builder().setRegion(values[i].toString()).build();
+      String localizedDisplayCountry = settingRowDisplayCountry.getDisplayCountry(userLocale);
+      String settingDisplayName = localizedDisplayCountry + " " + keys[i];
+      displayNamesandCountryCodes.add(
+          DisplayNameAndCountryCodeTuple.create(settingDisplayName, values[i]));
     }
 
     return displayNamesandCountryCodes;
