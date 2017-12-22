@@ -122,7 +122,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   public interface FavoriteContactsListener {
 
     /** Called when the user clicks on a favorite contact that doesn't have a default number. */
-    void onAmbiguousContactClicked(String lookupKey);
+    void onAmbiguousContactClicked(String contactId);
 
     /** Called when the user clicks on a favorite contact. */
     void onClick(String number, boolean isVideoCall);

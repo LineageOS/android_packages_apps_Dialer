@@ -24,27 +24,24 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import com.android.dialer.speeddial.room.SpeedDialDatabaseComponent;
-import com.android.dialer.speeddial.room.SpeedDialEntry;
-import java.util.List;
 
 /** Cursor Loader for strequent contacts. */
-public final class StrequentContactsCursorLoader extends CursorLoader {
+final class StrequentContactsCursorLoader extends CursorLoader {
 
-  public static final int PHONE_ID = 0;
-  public static final int PHONE_DISPLAY_NAME = 1;
-  public static final int PHONE_STARRED = 2;
-  public static final int PHONE_PHOTO_URI = 3;
-  public static final int PHONE_LOOKUP_KEY = 4;
-  public static final int PHONE_PHOTO_ID = 5;
-  public static final int PHONE_NUMBER = 6;
-  public static final int PHONE_TYPE = 7;
-  public static final int PHONE_LABEL = 8;
-  public static final int PHONE_IS_SUPER_PRIMARY = 9;
-  public static final int PHONE_PINNED = 10;
-  public static final int PHONE_CONTACT_ID = 11;
+  static final int PHONE_ID = 0;
+  static final int PHONE_DISPLAY_NAME = 1;
+  static final int PHONE_STARRED = 2;
+  static final int PHONE_PHOTO_URI = 3;
+  static final int PHONE_LOOKUP_KEY = 4;
+  static final int PHONE_PHOTO_ID = 5;
+  static final int PHONE_NUMBER = 6;
+  static final int PHONE_TYPE = 7;
+  static final int PHONE_LABEL = 8;
+  static final int PHONE_IS_SUPER_PRIMARY = 9;
+  static final int PHONE_PINNED = 10;
+  static final int PHONE_CONTACT_ID = 11;
 
-  public static final String[] PHONE_PROJECTION =
+  static final String[] PHONE_PROJECTION =
       new String[] {
         Phone._ID, // 0
         Phone.DISPLAY_NAME, // 1
@@ -95,12 +92,6 @@ public final class StrequentContactsCursorLoader extends CursorLoader {
 
   @Override
   public Cursor loadInBackground() {
-    Cursor strequentCursor = super.loadInBackground();
-    List<SpeedDialEntry> entries =
-        SpeedDialDatabaseComponent.get(getContext().getApplicationContext())
-            .speedDialDatabase()
-            .getSpeedDialEntryDao()
-            .getAllEntries();
-    return SpeedDialCursor.newInstance(strequentCursor, entries);
+    return SpeedDialCursor.newInstance(super.loadInBackground());
   }
 }
