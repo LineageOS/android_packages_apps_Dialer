@@ -57,21 +57,15 @@ public class TelephonyManagerCompat {
    *
    * <p>This signals to the telephony platform that an outgoing call qualifies for assisted dialing.
    */
-  public static final String ALLOW_ASSISTED_DIAL = "android.telecom.extra.ALLOW_ASSISTED_DIAL";
-
-  // TODO(erfanian): a bug Replace with the platform/telecom constant when available.
-  /**
-   * Indicates that an outgoing call has undergone assisted dialing.
-   *
-   * <p>Unlike {@link ALLOW_ASSISTED_DIAL}, the presence of this key further indicates that a call
-   * has undergone Assisted Dialing -- not just that it qualified for Assisted Dialing.
-   */
-  public static final String IS_ASSISTED_DIALED = "android.telecom.extra.IS_ASSISTED_DIALED";
+  public static final String USE_ASSISTED_DIALING = "android.telecom.extra.USE_ASSISTED_DIALING";
 
   // TODO(erfanian): a bug Replace with the platform/telecom API when available.
   /** Additional information relating to the assisted dialing transformation. */
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
+
+  /** Indicates the Connection/Call used assisted dialing. */
+  public static final int PROPERTY_ASSISTED_DIALING_USED = 0x00000200;
 
   public static final String EXTRA_IS_REFRESH =
       BuildCompat.isAtLeastOMR1() ? "android.telephony.extra.IS_REFRESH" : "is_refresh";

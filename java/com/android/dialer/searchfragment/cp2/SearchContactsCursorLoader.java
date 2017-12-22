@@ -28,9 +28,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.dialer.dialpadview.SmartDialCursorLoader;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.SearchCursor;
+import com.android.dialer.smartdial.SmartDialCursorLoader;
 
 /** Cursor Loader for CP2 contacts. */
 public final class SearchContactsCursorLoader extends CursorLoader {

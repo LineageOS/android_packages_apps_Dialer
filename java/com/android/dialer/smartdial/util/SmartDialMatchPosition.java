@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.dialer.smartdial;
+package com.android.dialer.smartdial.util;
 
-import android.util.Log;
+import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +59,7 @@ public class SmartDialMatchPosition {
   public static void print(ArrayList<SmartDialMatchPosition> list) {
     for (int i = 0; i < list.size(); i++) {
       SmartDialMatchPosition m = list.get(i);
-      Log.d(TAG, "[" + m.start + "," + m.end + "]");
+      LogUtil.d(TAG, "[" + m.start + "," + m.end + "]");
     }
   }
 

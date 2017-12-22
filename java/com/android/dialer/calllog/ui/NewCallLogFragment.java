@@ -58,10 +58,10 @@ public final class NewCallLogFragment extends Fragment
   }
 
   @Override
-  public void onCreate(Bundle state) {
-    super.onCreate(state);
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
 
-    LogUtil.enterBlock("NewCallLogFragment.onCreate");
+    LogUtil.enterBlock("NewCallLogFragment.onActivityCreated");
 
     CallLogComponent component = CallLogComponent.get(getContext());
     CallLogFramework callLogFramework = component.callLogFramework();

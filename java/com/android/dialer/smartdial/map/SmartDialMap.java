@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.smartdial;
+package com.android.dialer.smartdial.map;
 
 import android.support.v4.util.SimpleArrayMap;
 import com.google.common.base.Optional;

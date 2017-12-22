@@ -18,10 +18,8 @@
 
 <resources>
     <dimen name="bubble_size">64dp</dimen>
-    <dimen name="bubble_drawer_margin">54dp</dimen>
+    <dimen name="bubble_drawer_margin">50dp</dimen>
     <dimen name="bubble_drawer_padding_start">38dp</dimen>
-    <dimen name="bubble_drawer_padding_end">10dp</dimen>
-    <dimen name="bubble_icon_padding">18dp</dimen>
-    <dimen name="bubble_shadow_padding_size">18dp</dimen>
+    <dimen name="bubble_drawer_padding_end">12dp</dimen>
 </resources>
 

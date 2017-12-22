@@ -112,20 +112,26 @@ public final class CompositePhoneLookup implements PhoneLookup {
               ImmutableMap.builder();
           for (DialerPhoneNumber dialerPhoneNumber : existingInfoMap.keySet()) {
             PhoneLookupInfo.Builder combinedInfo = PhoneLookupInfo.newBuilder();
-            for (ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map : allMaps) {
+            for (int i = 0; i < allMaps.size(); i++) {
+              ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map = allMaps.get(i);
               PhoneLookupInfo subInfo = map.get(dialerPhoneNumber);
               if (subInfo == null) {
                 throw new IllegalStateException(
                     "A sublookup didn't return an info for number: "
                         + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getRawInput().getNumber()));
               }
-              combinedInfo.mergeFrom(subInfo);
+              phoneLookups.get(i).copySubMessage(combinedInfo, subInfo);
             }
             combinedMap.put(dialerPhoneNumber, combinedInfo.build());
           }
           return combinedMap.build();
         },
         lightweightExecutorService);
+  }
+
+  @Override
+  public void copySubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
