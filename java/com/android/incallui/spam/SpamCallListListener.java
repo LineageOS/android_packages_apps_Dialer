@@ -455,6 +455,6 @@ public class SpamCallListListener implements CallList.Listener {
   }
 
   static String getNotificationTagForCall(@NonNull DialerCall call) {
-    return NOTIFICATION_TAG_PREFIX + call.getNumber();
+    return NOTIFICATION_TAG_PREFIX + call.getUniqueCallId();
   }
 }

@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.dialer.smartdial;
+package com.android.dialer.smartdial.util;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import com.android.dialer.smartdial.SmartDialPrefix.PhoneNumberTokens;
+import com.android.dialer.smartdial.map.CompositeSmartDialMap;
+import com.android.dialer.smartdial.util.SmartDialPrefix.PhoneNumberTokens;
 import java.util.ArrayList;
 
 /**

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.Assert;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
@@ -28,7 +28,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /** Adapter for {@link MainActivity} ViewPager. */
-final class MainPagerAdapter extends FragmentStatePagerAdapter {
+final class MainPagerAdapter extends FragmentPagerAdapter {
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({

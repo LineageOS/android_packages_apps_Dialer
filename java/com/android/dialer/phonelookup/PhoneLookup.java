@@ -62,6 +62,12 @@ public interface PhoneLookup {
       ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap);
 
   /**
+   * Populates the sub-message that this {@link PhoneLookup} is responsible for by copying the
+   * sub-message value from {@code source} to {@code destination}
+   */
+  void copySubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source);
+
+  /**
    * Called when the results of the {@link #getMostRecentPhoneLookupInfo(ImmutableMap)} have been
    * applied by the caller.
    *

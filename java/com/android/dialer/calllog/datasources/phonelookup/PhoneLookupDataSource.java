@@ -110,7 +110,9 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    * <p>This method uses the following algorithm:
    *
    * <ul>
-   *   <li>Selects the distinct DialerPhoneNumbers from the AnnotatedCallLog
+   *   <li>Finds the phone numbers of interest by taking the union of the distinct
+   *       DialerPhoneNumbers from the AnnotatedCallLog and the pending inserts provided in {@code
+   *       mutations}
    *   <li>Uses them to fetch the current information from PhoneLookupHistory, in order to construct
    *       a map from DialerPhoneNumber to PhoneLookupInfo
    *       <ul>
@@ -137,9 +139,10 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     phoneLookupHistoryRowsToUpdate.clear();
     phoneLookupHistoryRowsToDelete.clear();
 
-    // First query information from annotated call log.
+    // First query information from annotated call log (and include pending inserts).
     ListenableFuture<Map<DialerPhoneNumber, Set<Long>>> annotatedCallLogIdsByNumberFuture =
-        backgroundExecutorService.submit(() -> queryIdAndNumberFromAnnotatedCallLog(appContext));
+        backgroundExecutorService.submit(
+            () -> collectIdAndNumberFromAnnotatedCallLogAndPendingInserts(appContext, mutations));
 
     // Use it to create the original info map.
     ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> originalInfoMapFuture =
@@ -317,9 +320,28 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     return numbers.build();
   }
 
-  private Map<DialerPhoneNumber, Set<Long>> queryIdAndNumberFromAnnotatedCallLog(
-      Context appContext) {
+  private Map<DialerPhoneNumber, Set<Long>> collectIdAndNumberFromAnnotatedCallLogAndPendingInserts(
+      Context appContext, CallLogMutations mutations) {
     Map<DialerPhoneNumber, Set<Long>> idsByNumber = new ArrayMap<>();
+    // First add any pending inserts to the map.
+    for (Entry<Long, ContentValues> entry : mutations.getInserts().entrySet()) {
+      long id = entry.getKey();
+      ContentValues insertedContentValues = entry.getValue();
+      DialerPhoneNumber dialerPhoneNumber;
+      try {
+        dialerPhoneNumber =
+            DialerPhoneNumber.parseFrom(
+                insertedContentValues.getAsByteArray(AnnotatedCallLog.NUMBER));
+      } catch (InvalidProtocolBufferException e) {
+        throw new IllegalStateException(e);
+      }
+      Set<Long> ids = idsByNumber.get(dialerPhoneNumber);
+      if (ids == null) {
+        ids = new ArraySet<>();
+        idsByNumber.put(dialerPhoneNumber, ids);
+      }
+      ids.add(id);
+    }
 
     try (Cursor cursor =
         appContext
@@ -332,7 +354,9 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
                 null)) {
 
       if (cursor == null) {
-        LogUtil.e("PhoneLookupDataSource.queryIdAndNumberFromAnnotatedCallLog", "null cursor");
+        LogUtil.e(
+            "PhoneLookupDataSource.collectIdAndNumberFromAnnotatedCallLogAndPendingInserts",
+            "null cursor");
         return ImmutableMap.of();
       }
 
