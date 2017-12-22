@@ -22,9 +22,9 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.dialpadview.SmartDialCursorLoader;
-import com.android.dialer.smartdial.SmartDialMatchPosition;
-import com.android.dialer.smartdial.SmartDialNameMatcher;
+import com.android.dialer.smartdial.SmartDialCursorLoader;
+import com.android.dialer.smartdial.util.SmartDialMatchPosition;
+import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.util.CallUtil;
 import java.util.ArrayList;
 

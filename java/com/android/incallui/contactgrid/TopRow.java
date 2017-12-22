@@ -175,7 +175,7 @@ public class TopRow {
         }
       }
 
-      if (state.isAssistedDialed) {
+      if (state.isAssistedDialed && state.assistedDialingExtras != null) {
         LogUtil.i("TopRow.getLabelForDialing", "using assisted dialing label.");
         String countryCode =
             String.valueOf(state.assistedDialingExtras.transformedNumberCountryCallingCode());

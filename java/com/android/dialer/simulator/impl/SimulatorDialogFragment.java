@@ -29,7 +29,7 @@ public final class SimulatorDialogFragment extends DialogFragment {
   private final String[] callerIdPresentationItems = {
     "ALLOWED", "PAYPHONE", "RESTRICTED", "UNKNOWN"
   };
-  private int callerIdPresentationChoice;
+  private int callerIdPresentationChoice = 1;
 
   private DialogCallback dialogCallback;
 
@@ -47,6 +47,7 @@ public final class SimulatorDialogFragment extends DialogFragment {
   public Dialog onCreateDialog(Bundle bundle) {
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     final EditText input = new EditText(getActivity());
+    input.setHint("Please input phone number");
     builder
         .setTitle("Phone Number:")
         .setView(input)

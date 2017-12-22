@@ -51,10 +51,12 @@ public class AssistedDialAction implements PreCallAction {
     AssistedDialingMediator assistedDialingMediator =
         ConcreteCreator.createNewAssistedDialingMediator(
             context.getSystemService(TelephonyManager.class), context);
+    if (Build.VERSION.SDK_INT > ConcreteCreator.BUILD_CODE_CEILING) {
+      builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, true);
+    }
     if (!assistedDialingMediator.isPlatformEligible()) {
       return;
     }
-    builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.ALLOW_ASSISTED_DIAL, true);
     String phoneNumber =
         builder.getUri().getScheme().equals(PhoneAccount.SCHEME_TEL)
             ? builder.getUri().getSchemeSpecificPart()
@@ -62,8 +64,8 @@ public class AssistedDialAction implements PreCallAction {
     Optional<TransformationInfo> transformedNumber =
         assistedDialingMediator.attemptAssistedDial(phoneNumber);
     if (transformedNumber.isPresent()) {
+      builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, true);
       Bundle assistedDialingExtras = transformedNumber.get().toBundle();
-      builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.IS_ASSISTED_DIALED, true);
       builder
           .getOutgoingCallExtras()
           .putBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS, assistedDialingExtras);

@@ -46,7 +46,6 @@ import java.util.Map;
  * <p>When refreshing pinned shortcuts, we check to make sure that pinned contact information is
  * still up to date (e.g. photo and name). We also check to see if the contact has been deleted from
  * the user's contacts, and if so, we disable the pinned shortcut.
- *
  */
 @TargetApi(VERSION_CODES.N_MR1) // Shortcuts introduced in N MR1
 final class PinnedShortcuts {
@@ -105,6 +104,14 @@ final class PinnedShortcuts {
         // If the shortcut is both pinned and dynamic, let the logic which updates dynamic shortcuts
         // handle the update. It would be problematic to try and apply the update here, because the
         // setRank is nonsensical for pinned shortcuts and therefore could not be calculated.
+        continue;
+      }
+      // Exclude shortcuts like the "Phone NUI" shortcut.
+      String action = null;
+      if (shortcutInfo.getIntent() != null) {
+        action = shortcutInfo.getIntent().getAction();
+      }
+      if (action == null || !action.equals("com.android.dialer.shortcuts.CALL_CONTACT")) {
         continue;
       }
 

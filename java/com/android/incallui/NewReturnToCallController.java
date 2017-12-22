@@ -101,7 +101,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     if (showing) {
       hide();
     } else {
-      if (TelecomUtil.isInManagedCall(context)) {
+      if (getCall() != null) {
         show();
       }
     }
@@ -157,22 +157,15 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   @Override
   public void onDisconnect(DialerCall call) {
-    if (call.wasParentCall()) {
-      // It's disconnected after the last child call is disconnected, and we already did everything
-      // for the last child.
-      LogUtil.i(
-          "ReturnToCallController.onDisconnect", "being called for a parent call and do nothing");
-      return;
-    }
-    if (bubble != null
-        && bubble.isVisible()
-        && (!TelecomUtil.isInManagedCall(context)
-            || CallList.getInstance().getActiveOrBackgroundCall() != null)) {
-      bubble.showText(context.getText(R.string.incall_call_ended));
-    }
-    // For conference call, we should hideAndReset for the last disconnected child call while the
-    // parent call is still there.
-    if (!CallList.getInstance().hasNonParentActiveOrBackgroundCall()) {
+    LogUtil.enterBlock("ReturnToCallController.onDisconnect");
+    if (bubble != null && bubble.isVisible() && (getCall() == null)) {
+      // Show "Call ended" and hide bubble when there is no outgoing, active or background call
+      LogUtil.i("ReturnToCallController.onDisconnect", "show call ended and hide bubble");
+      // Don't show text if it's Duo upgrade
+      // It doesn't work for Duo fallback upgrade since we're not considered in call
+      if (!TelecomUtil.isInCall(context) || CallList.getInstance().getIncomingCall() != null) {
+        bubble.showText(context.getText(R.string.incall_call_ended));
+      }
       hideAndReset();
     } else {
       startContactInfoSearch();
@@ -197,17 +190,19 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   private void startContactInfoSearch() {
-    DialerCall dialerCall = CallList.getInstance().getIncomingCall();
-    if (dialerCall == null) {
-      dialerCall = CallList.getInstance().getOutgoingCall();
-    }
-    if (dialerCall == null) {
-      dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
-    }
+    DialerCall dialerCall = getCall();
     if (dialerCall != null) {
       contactInfoCache.findInfo(
           dialerCall, false /* isIncoming */, new ReturnToCallContactInfoCacheCallback(this));
     }
+  }
+
+  private DialerCall getCall() {
+    DialerCall dialerCall = CallList.getInstance().getOutgoingCall();
+    if (dialerCall == null) {
+      dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    }
+    return dialerCall;
   }
 
   private void onPhotoAvatarReceived(@NonNull Drawable photo) {
