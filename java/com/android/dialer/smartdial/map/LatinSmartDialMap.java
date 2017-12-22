@@ -17,49 +17,12 @@
 package com.android.dialer.smartdial.map;
 
 import android.support.v4.util.SimpleArrayMap;
+import com.android.dialer.dialpadview.DialpadCharMappings;
 import com.google.common.base.Optional;
 
 /** A {@link SmartDialMap} for the Latin alphabet, which is for T9 dialpad searching. */
 @SuppressWarnings("Guava")
 final class LatinSmartDialMap extends SmartDialMap {
-  private static final SimpleArrayMap<Character, Character> CHAR_TO_KEY_MAP =
-      new SimpleArrayMap<>();
-
-  static {
-    CHAR_TO_KEY_MAP.put('a', '2');
-    CHAR_TO_KEY_MAP.put('b', '2');
-    CHAR_TO_KEY_MAP.put('c', '2');
-
-    CHAR_TO_KEY_MAP.put('d', '3');
-    CHAR_TO_KEY_MAP.put('e', '3');
-    CHAR_TO_KEY_MAP.put('f', '3');
-
-    CHAR_TO_KEY_MAP.put('g', '4');
-    CHAR_TO_KEY_MAP.put('h', '4');
-    CHAR_TO_KEY_MAP.put('i', '4');
-
-    CHAR_TO_KEY_MAP.put('j', '5');
-    CHAR_TO_KEY_MAP.put('k', '5');
-    CHAR_TO_KEY_MAP.put('l', '5');
-
-    CHAR_TO_KEY_MAP.put('m', '6');
-    CHAR_TO_KEY_MAP.put('n', '6');
-    CHAR_TO_KEY_MAP.put('o', '6');
-
-    CHAR_TO_KEY_MAP.put('p', '7');
-    CHAR_TO_KEY_MAP.put('q', '7');
-    CHAR_TO_KEY_MAP.put('r', '7');
-    CHAR_TO_KEY_MAP.put('s', '7');
-
-    CHAR_TO_KEY_MAP.put('t', '8');
-    CHAR_TO_KEY_MAP.put('u', '8');
-    CHAR_TO_KEY_MAP.put('v', '8');
-
-    CHAR_TO_KEY_MAP.put('w', '9');
-    CHAR_TO_KEY_MAP.put('x', '9');
-    CHAR_TO_KEY_MAP.put('y', '9');
-    CHAR_TO_KEY_MAP.put('z', '9');
-  }
 
   private static LatinSmartDialMap instance;
 
@@ -780,6 +743,6 @@ final class LatinSmartDialMap extends SmartDialMap {
 
   @Override
   SimpleArrayMap<Character, Character> getCharToKeyMap() {
-    return CHAR_TO_KEY_MAP;
+    return DialpadCharMappings.getDefaultCharToKeyMap();
   }
 }

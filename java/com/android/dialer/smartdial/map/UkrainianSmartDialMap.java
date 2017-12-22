@@ -17,56 +17,11 @@
 package com.android.dialer.smartdial.map;
 
 import android.support.v4.util.SimpleArrayMap;
+import com.android.dialer.dialpadview.DialpadCharMappings;
 import com.google.common.base.Optional;
 
 /** A {@link SmartDialMap} for the Ukrainian alphabet. */
 final class UkrainianSmartDialMap extends SmartDialMap {
-  private static final SimpleArrayMap<Character, Character> CHAR_TO_KEY_MAP =
-      new SimpleArrayMap<>();
-
-  // Reference: https://en.wikipedia.org/wiki/Ukrainian_alphabet
-  static {
-    CHAR_TO_KEY_MAP.put('а', '2');
-    CHAR_TO_KEY_MAP.put('б', '2');
-    CHAR_TO_KEY_MAP.put('в', '2');
-    CHAR_TO_KEY_MAP.put('г', '2');
-    CHAR_TO_KEY_MAP.put('ґ', '2');
-
-    CHAR_TO_KEY_MAP.put('д', '3');
-    CHAR_TO_KEY_MAP.put('е', '3');
-    CHAR_TO_KEY_MAP.put('є', '3');
-    CHAR_TO_KEY_MAP.put('ж', '3');
-    CHAR_TO_KEY_MAP.put('з', '3');
-
-    CHAR_TO_KEY_MAP.put('и', '4');
-    CHAR_TO_KEY_MAP.put('і', '4');
-    CHAR_TO_KEY_MAP.put('ї', '4');
-    CHAR_TO_KEY_MAP.put('й', '4');
-    CHAR_TO_KEY_MAP.put('к', '4');
-    CHAR_TO_KEY_MAP.put('л', '4');
-
-    CHAR_TO_KEY_MAP.put('м', '5');
-    CHAR_TO_KEY_MAP.put('н', '5');
-    CHAR_TO_KEY_MAP.put('о', '5');
-    CHAR_TO_KEY_MAP.put('п', '5');
-
-    CHAR_TO_KEY_MAP.put('р', '6');
-    CHAR_TO_KEY_MAP.put('с', '6');
-    CHAR_TO_KEY_MAP.put('т', '6');
-    CHAR_TO_KEY_MAP.put('у', '6');
-
-    CHAR_TO_KEY_MAP.put('ф', '7');
-    CHAR_TO_KEY_MAP.put('х', '7');
-    CHAR_TO_KEY_MAP.put('ц', '7');
-    CHAR_TO_KEY_MAP.put('ч', '7');
-
-    CHAR_TO_KEY_MAP.put('ш', '8');
-    CHAR_TO_KEY_MAP.put('щ', '8');
-
-    CHAR_TO_KEY_MAP.put('ь', '9');
-    CHAR_TO_KEY_MAP.put('ю', '9');
-    CHAR_TO_KEY_MAP.put('я', '9');
-  }
 
   private static UkrainianSmartDialMap instance;
 
@@ -88,6 +43,6 @@ final class UkrainianSmartDialMap extends SmartDialMap {
 
   @Override
   SimpleArrayMap<Character, Character> getCharToKeyMap() {
-    return CHAR_TO_KEY_MAP;
+    return DialpadCharMappings.getCharToKeyMap("ukr");
   }
 }
