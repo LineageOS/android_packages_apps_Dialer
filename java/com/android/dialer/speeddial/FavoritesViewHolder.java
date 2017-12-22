@@ -22,16 +22,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.PopupWindow;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
@@ -48,9 +44,6 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   private final TextView nameView;
   private final TextView phoneType;
   private final FrameLayout videoCallIcon;
-  private final View contextMenuAnchor;
-
-  private PopupWindow contextMenu;
 
   private boolean hasDefaultNumber;
   private boolean isVideoCall;
@@ -63,7 +56,6 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     nameView = view.findViewById(R.id.name);
     phoneType = view.findViewById(R.id.phone_type);
     videoCallIcon = view.findViewById(R.id.video_call_container);
-    contextMenuAnchor = view.findViewById(R.id.avatar_container);
     view.setOnClickListener(this);
     view.setOnLongClickListener(this);
     photoView.setClickable(false);
@@ -120,42 +112,10 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   }
 
   @Override
-  public boolean onLongClick(View view) {
-    Context context = itemView.getContext();
-    View contentView = LayoutInflater.from(context).inflate(R.layout.favorite_context_menu, null);
-    contentView
-        .findViewById(R.id.voice_call_container)
-        .setOnClickListener(v -> listener.onClick(Assert.isNotNull(number), false));
-    contentView
-        .findViewById(R.id.video_call_container)
-        .setOnClickListener(v -> listener.onClick(Assert.isNotNull(number), true));
-    contentView
-        .findViewById(R.id.send_message_container)
-        .setOnClickListener(v -> listener.openSmsConversation(Assert.isNotNull(number)));
-    contentView
-        .findViewById(R.id.remove_container)
-        .setOnClickListener(v -> listener.removeFavoriteContact());
-    contentView
-        .findViewById(R.id.contact_info_container)
-        .setOnClickListener(v -> listener.openContactInfo());
-
-    int offset =
-        context.getResources().getDimensionPixelSize(R.dimen.speed_dial_context_menu_x_offset);
-    int padding =
-        context.getResources().getDimensionPixelSize(R.dimen.speed_dial_context_menu_extra_width);
-    int width = padding + itemView.getWidth();
-    int elevation = context.getResources().getDimensionPixelSize(R.dimen.context_menu_elevation);
-    contextMenu = new PopupWindow(contentView, width, LayoutParams.WRAP_CONTENT, true);
-    contextMenu.setBackgroundDrawable(context.getDrawable(R.drawable.context_menu_background));
-    contextMenu.setElevation(elevation);
-    contextMenu.setOnDismissListener(() -> contextMenu = null);
-    contextMenu.showAsDropDown(contextMenuAnchor, offset, 0);
+  public boolean onLongClick(View v) {
+    // TODO(calderwoodra): implement drag and drop logic
+    listener.onLongClick(number);
     return true;
-  }
-
-  @VisibleForTesting
-  public PopupWindow getContextMenu() {
-    return contextMenu;
   }
 
   /** Listener/callback for {@link FavoritesViewHolder} actions. */
@@ -167,13 +127,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     /** Called when the user clicks on a favorite contact. */
     void onClick(String number, boolean isVideoCall);
 
-    /** Called when the user selects send message from the context menu. */
-    void openSmsConversation(String number);
-
-    /** Called when the user selects remove from the context menu. */
-    void removeFavoriteContact();
-
-    /** Called when the user selects contact info from the context menu. */
-    void openContactInfo();
+    /** Called when the user long clicks on a favorite contact. */
+    void onLongClick(String number);
   }
 }

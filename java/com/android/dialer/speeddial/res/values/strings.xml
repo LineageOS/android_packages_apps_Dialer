@@ -38,21 +38,6 @@
   <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
   <string name="disambig_option_voice_call">Call</string>
 
-  <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
-  <string name="contact_menu_voice_call">Voice Call</string>
-
-  <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
-  <string name="contact_menu_video_call">Video Call</string>
-
-  <!-- Text for a button that opens the contact in the SMS app [CHAR LIMIT=15]-->
-  <string name="contact_menu_message">Message</string>
-
-  <!-- Text for a button that removes the item from the list [CHAR LIMIT=15]-->
-  <string name="contact_menu_remove">Remove</string>
-
-  <!-- Text for a button that opens the contact's info [CHAR LIMIT=15]-->
-  <string name="contact_menu_contact_info">Contact info</string>
-
   <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
   <string name="add_favorite_activity_title">Add Favorite</string>
 </resources>

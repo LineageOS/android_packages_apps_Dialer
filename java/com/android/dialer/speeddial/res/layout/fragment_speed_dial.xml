@@ -19,6 +19,6 @@
     android:id="@+id/speed_dial_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/speed_dial_recyclerview_horizontal_padding"
-    android:paddingEnd="@dimen/speed_dial_recyclerview_horizontal_padding"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:clipToPadding="false"/>

@@ -112,18 +112,8 @@ public class SpeedDialFragment extends Fragment {
     }
 
     @Override
-    public void openSmsConversation(String number) {
-      // TODO(calderwoodra): open sms conversation
-    }
-
-    @Override
-    public void removeFavoriteContact() {
-      // TODO(calderwoodra): remove contact from favorites
-    }
-
-    @Override
-    public void openContactInfo() {
-      // TODO(calderwoodra): open quick contact info
+    public void onLongClick(String number) {
+      // TODO(calderwoodra): show favorite contact floating context menu
     }
   }
 
