@@ -19,13 +19,18 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
+import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -34,11 +39,15 @@ import android.widget.TextView;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
 import com.android.dialer.voicemail.model.VoicemailEntry;
+import com.android.voicemail.VoicemailClient;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail tab. */
 final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -185,9 +194,9 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         voicemailEntryOfViewHolder.isRead());
 
     if (voicemailEntryOfViewHolder.isRead() == 0) {
-      primaryTextView.setTypeface(null, Typeface.BOLD);
-      secondaryTextView.setTypeface(null, Typeface.BOLD);
-      transcriptionTextView.setTypeface(null, Typeface.BOLD);
+      primaryTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+      secondaryTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+      transcriptionTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
     }
   }
 
@@ -276,11 +285,31 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     LogUtil.i(
         "NewVoicemailViewHolder.expandAndBindViewHolderAndMediaPlayerViewWithAdapterValues",
         "voicemail id: %d, value of isViewHolderExpanded:%b, before setting it to be true, and"
-            + " value of ViewholderUri:%s, MPView:%s, before updating it",
+            + " value of ViewholderUri:%s, MPView:%s, VoicemailRead:%d, before updating it",
         viewHolderId,
         isViewHolderExpanded,
         String.valueOf(viewHolderVoicemailUri),
-        String.valueOf(mediaPlayerView.getVoicemailUri()));
+        String.valueOf(mediaPlayerView.getVoicemailUri()),
+        voicemailEntry.isRead());
+
+    if (voicemailEntry.isRead() == 0) {
+      // update as read.
+      primaryTextView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+      secondaryTextView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+      transcriptionTextView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+
+      Uri uri = Uri.parse(voicemailEntry.voicemailUri());
+
+      Worker<Pair<Context, Uri>, Integer> markVoicemailRead = this::markVoicemailAsRead;
+      SuccessListener<Integer> markedAsReadVoicemailCallBack = this::onVoicemailMarkedAsRead;
+
+      DialerExecutorComponent.get(context)
+          .dialerExecutorFactory()
+          .createUiTaskBuilder(fragmentManager, "mark_voicemail_read", markVoicemailRead)
+          .onSuccess(markedAsReadVoicemailCallBack)
+          .build()
+          .executeSerial(new Pair<>(context, uri));
+    }
 
     transcriptionTextView.setMaxLines(999);
     isViewHolderExpanded = true;
@@ -296,6 +325,31 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         isViewHolderExpanded,
         String.valueOf(viewHolderVoicemailUri),
         String.valueOf(mediaPlayerView.getVoicemailUri()));
+  }
+
+  @WorkerThread
+  private Integer markVoicemailAsRead(Pair<Context, Uri> contextUriPair) {
+    Assert.isWorkerThread();
+    LogUtil.enterBlock("NewVoicemailAdapter.markVoicemailAsRead");
+    Context context = contextUriPair.first;
+    Uri uri = contextUriPair.second;
+
+    ContentValues values = new ContentValues();
+    values.put(Voicemails.IS_READ, true);
+    values.put(Voicemails.DIRTY, 1);
+
+    LogUtil.i(
+        "NewVoicemailAdapter.markVoicemailAsRead", "marking as read uri:%s", String.valueOf(uri));
+    return context.getContentResolver().update(uri, values, null, null);
+  }
+
+  private void onVoicemailMarkedAsRead(Integer integer) {
+    LogUtil.i("NewVoicemailAdapter.markVoicemailAsRead", "return value:%d", integer);
+    Assert.checkArgument(integer > 0, "marking voicemail read was not successful");
+
+    Intent intent = new Intent(VoicemailClient.ACTION_UPLOAD);
+    intent.setPackage(context.getPackageName());
+    context.sendBroadcast(intent);
   }
 
   /**
