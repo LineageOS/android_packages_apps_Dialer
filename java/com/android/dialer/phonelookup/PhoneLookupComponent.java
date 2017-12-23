@@ -23,7 +23,7 @@ import dagger.Subcomponent;
 @Subcomponent
 public abstract class PhoneLookupComponent {
 
-  public abstract PhoneLookup phoneLookup();
+  public abstract PhoneLookup<PhoneLookupInfo> phoneLookup();
 
   public static PhoneLookupComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
