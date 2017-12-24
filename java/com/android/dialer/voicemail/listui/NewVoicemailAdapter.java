@@ -67,9 +67,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private final Clock clock;
 
   /** {@link Integer#MAX_VALUE} when the "Today" header should not be displayed. */
-  private final int todayHeaderPosition;
+  private int todayHeaderPosition = Integer.MAX_VALUE;
   /** {@link Integer#MAX_VALUE} when the "Older" header should not be displayed. */
-  private final int olderHeaderPosition;
+  private int olderHeaderPosition = Integer.MAX_VALUE;
 
   private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
@@ -107,7 +107,15 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     this.clock = clock;
     this.fragmentManager = fragmentManager;
     initializeMediaPlayerListeners();
+    updateHeaderPositions();
+  }
 
+  private void updateHeaderPositions() {
+    LogUtil.i(
+        "NewVoicemailAdapter.updateHeaderPositions",
+        "before updating todayPos:%d, olderPos:%d",
+        todayHeaderPosition,
+        olderHeaderPosition);
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
     if (cursor.moveToNext()) {
@@ -134,6 +142,11 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       this.todayHeaderPosition = Integer.MAX_VALUE;
       this.olderHeaderPosition = Integer.MAX_VALUE;
     }
+    LogUtil.i(
+        "NewVoicemailAdapter.updateHeaderPositions",
+        "after updating todayPos:%d, olderPos:%d",
+        todayHeaderPosition,
+        olderHeaderPosition);
   }
 
   private void initializeMediaPlayerListeners() {
@@ -143,8 +156,10 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   }
 
   public void updateCursor(Cursor updatedCursor) {
+    LogUtil.enterBlock("NewVoicemailAdapter.updateCursor");
     deletedVoicemailPosition.clear();
     this.cursor = updatedCursor;
+    updateHeaderPositions();
     notifyDataSetChanged();
   }
 
@@ -190,7 +205,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
 
     if (viewHolder instanceof NewVoicemailHeaderViewHolder) {
       LogUtil.i(
@@ -241,7 +256,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
       newVoicemailViewHolderArrayMap.remove(newVoicemailViewHolder.getViewHolderId());
       printHashSet();
-      printHashMap();
+      printArrayMap();
     }
 
     newVoicemailViewHolder.reset();
@@ -265,7 +280,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
 
     // If the viewholder is playing the voicemail, keep updating its media player view (seekbar,
     // duration etc.)
@@ -298,12 +313,12 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     printHashSet();
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
-    printHashMap();
+    printArrayMap();
   }
 
-  private void printHashMap() {
+  private void printArrayMap() {
     LogUtil.i(
-        "NewVoicemailAdapter.printHashMap",
+        "NewVoicemailAdapter.printArrayMap",
         "hashMapSize: %d, currentlyExpandedViewHolderId:%d",
         newVoicemailViewHolderArrayMap.size(),
         currentlyExpandedViewHolderId);
@@ -311,9 +326,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     if (!newVoicemailViewHolderArrayMap.isEmpty()) {
       String ids = "";
       for (int id : newVoicemailViewHolderArrayMap.keySet()) {
-        ids = id + String.valueOf(id) + " ";
+        ids = ids + id + " ";
       }
-      LogUtil.i("NewVoicemailAdapter.printHashMap", "ids are " + ids);
+      LogUtil.i("NewVoicemailAdapter.printArrayMap", "ids are " + ids);
     }
   }
 
@@ -509,8 +524,6 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
     Assert.checkArgument(expandedViewHolder.getViewHolderVoicemailUri().equals(voicemailUri));
 
-    notifyItemRemoved(expandedViewHolder.getAdapterPosition());
-
     Assert.checkArgument(currentlyExpandedViewHolderId == expandedViewHolder.getViewHolderId());
 
     collapseExpandedViewHolder(expandedViewHolder);
@@ -524,6 +537,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
         .onSuccess(deleteVoicemailCallBack)
         .build()
         .executeSerial(new Pair<>(context, voicemailUri));
+
+    notifyItemRemoved(expandedViewHolder.getAdapterPosition());
   }
 
   private void onVoicemailDeleted(Integer integer) {
@@ -801,7 +816,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
           currentlyExpandedViewHolderId);
       // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
       printHashSet();
-      printHashMap();
+      printArrayMap();
       return null;
     }
   }

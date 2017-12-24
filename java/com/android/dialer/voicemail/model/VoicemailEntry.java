@@ -32,7 +32,8 @@ public abstract class VoicemailEntry {
         .setNumber(DialerPhoneNumber.getDefaultInstance())
         .setPhotoId(0)
         .setDuration(0)
-        .setCallType(0);
+        .setCallType(0)
+        .setIsRead(0);
   }
 
   public abstract int id();
@@ -69,6 +70,8 @@ public abstract class VoicemailEntry {
 
   public abstract int callType();
 
+  public abstract int isRead();
+
   /** Builder for {@link VoicemailEntry}. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -98,6 +101,8 @@ public abstract class VoicemailEntry {
     public abstract Builder setGeocodedLocation(@Nullable String geocodedLocation);
 
     public abstract Builder setCallType(int callType);
+
+    public abstract Builder setIsRead(int isRead);
 
     public abstract VoicemailEntry build();
   }

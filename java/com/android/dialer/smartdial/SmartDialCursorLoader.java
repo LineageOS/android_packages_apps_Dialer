@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.dialpadview;
+package com.android.dialer.smartdial;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -25,7 +25,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
-import com.android.dialer.smartdial.SmartDialNameMatcher;
+import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 
