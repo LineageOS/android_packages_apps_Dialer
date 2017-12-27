@@ -32,7 +32,8 @@ public abstract class PhoneLookupModule {
   }
 
   @Provides
-  static PhoneLookup providePhoneLookup(CompositePhoneLookup compositePhoneLookup) {
+  static PhoneLookup<PhoneLookupInfo> providePhoneLookup(
+      CompositePhoneLookup compositePhoneLookup) {
     return compositePhoneLookup;
   }
 }

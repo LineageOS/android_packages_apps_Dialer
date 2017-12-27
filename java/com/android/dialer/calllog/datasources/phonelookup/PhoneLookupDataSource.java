@@ -65,7 +65,7 @@ import javax.inject.Inject;
  */
 public final class PhoneLookupDataSource implements CallLogDataSource {
 
-  private final PhoneLookup phoneLookup;
+  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
@@ -88,7 +88,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @Inject
   PhoneLookupDataSource(
-      PhoneLookup phoneLookup,
+      PhoneLookup<PhoneLookupInfo> phoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookup = phoneLookup;
@@ -123,8 +123,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    *       provided mutations. (Note that at this point, data may not be fully up-to-date, but the
    *       next steps will take care of that.)
    *   <li>Uses all of the numbers from AnnotatedCallLog to invoke (composite) {@link
-   *       PhoneLookup#getMostRecentPhoneLookupInfo(ImmutableMap)}
-   *   <li>Looks through the results of getMostRecentPhoneLookupInfo
+   *       PhoneLookup#getMostRecentInfo(ImmutableMap)}
+   *   <li>Looks through the results of getMostRecentInfo
    *       <ul>
    *         <li>For each number, checks if the original PhoneLookupInfo differs from the new one
    *         <li>If so, it applies the update to the mutations and (in onSuccessfulFill) writes the
@@ -155,9 +155,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     // Use the original info map to generate the updated info map by delegating to phoneLookup.
     ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> updatedInfoMapFuture =
         Futures.transformAsync(
-            originalInfoMapFuture,
-            phoneLookup::getMostRecentPhoneLookupInfo,
-            lightweightExecutorService);
+            originalInfoMapFuture, phoneLookup::getMostRecentInfo, lightweightExecutorService);
 
     // This is the computation that will use the result of all of the above.
     Callable<ImmutableMap<Long, PhoneLookupInfo>> computeRowsToUpdate =
