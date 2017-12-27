@@ -197,6 +197,7 @@ public class PhoneCallDetailsHelper
       views.voicemailTranscriptionView.setText(transcript);
       if (showRatingPrompt) {
         views.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+        views.voicemailTranscriptionBrandingView.setText(branding);
 
         View ratingView = views.voicemailTranscriptionRatingView;
         ratingView.setVisibility(View.VISIBLE);
