@@ -28,18 +28,20 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 
 /**
  * {@link PhoneLookup} which delegates to a configured set of {@link PhoneLookup PhoneLookups},
  * iterating, prioritizing, and coalescing data as necessary.
  */
-public final class CompositePhoneLookup implements PhoneLookup {
+public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> {
 
   private final ImmutableList<PhoneLookup> phoneLookups;
   private final ListeningExecutorService lightweightExecutorService;
@@ -58,20 +60,22 @@ public final class CompositePhoneLookup implements PhoneLookup {
    * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
    * the dependent lookups does not complete, the returned future will also not complete.
    */
+  @SuppressWarnings("unchecked")
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
     // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
     // lookups finishing when a higher-priority one has already finished.
-    List<ListenableFuture<PhoneLookupInfo>> futures = new ArrayList<>();
-    for (PhoneLookup phoneLookup : phoneLookups) {
+    List<ListenableFuture<?>> futures = new ArrayList<>();
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
       futures.add(phoneLookup.lookup(call));
     }
     return Futures.transform(
         Futures.allAsList(futures),
         infos -> {
           PhoneLookupInfo.Builder mergedInfo = PhoneLookupInfo.newBuilder();
-          for (PhoneLookupInfo info : infos) {
-            mergedInfo.mergeFrom(info);
+          for (int i = 0; i < infos.size(); i++) {
+            PhoneLookup phoneLookup = phoneLookups.get(i);
+            phoneLookup.setSubMessage(mergedInfo, infos.get(i));
           }
           return mergedInfo.build();
         },
@@ -81,7 +85,7 @@ public final class CompositePhoneLookup implements PhoneLookup {
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     List<ListenableFuture<Boolean>> futures = new ArrayList<>();
-    for (PhoneLookup phoneLookup : phoneLookups) {
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
       futures.add(phoneLookup.isDirty(phoneNumbers));
     }
     // Executes all child lookups (possibly in parallel), completing when the first composite lookup
@@ -96,14 +100,13 @@ public final class CompositePhoneLookup implements PhoneLookup {
    * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
    * the dependent lookups does not complete, the returned future will also not complete.
    */
+  @SuppressWarnings("unchecked")
   @Override
-  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>
-      getMostRecentPhoneLookupInfo(
-          ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
-    List<ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>>> futures =
-        new ArrayList<>();
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> getMostRecentInfo(
+      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap) {
+    List<ListenableFuture<ImmutableMap<DialerPhoneNumber, ?>>> futures = new ArrayList<>();
     for (PhoneLookup phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.getMostRecentPhoneLookupInfo(existingInfoMap));
+      futures.add(buildSubmapAndGetMostRecentInfo(existingInfoMap, phoneLookup));
     }
     return Futures.transform(
         Futures.allAsList(futures),
@@ -113,14 +116,14 @@ public final class CompositePhoneLookup implements PhoneLookup {
           for (DialerPhoneNumber dialerPhoneNumber : existingInfoMap.keySet()) {
             PhoneLookupInfo.Builder combinedInfo = PhoneLookupInfo.newBuilder();
             for (int i = 0; i < allMaps.size(); i++) {
-              ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> map = allMaps.get(i);
-              PhoneLookupInfo subInfo = map.get(dialerPhoneNumber);
+              ImmutableMap<DialerPhoneNumber, ?> map = allMaps.get(i);
+              Object subInfo = map.get(dialerPhoneNumber);
               if (subInfo == null) {
                 throw new IllegalStateException(
                     "A sublookup didn't return an info for number: "
                         + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getRawInput().getNumber()));
               }
-              phoneLookups.get(i).copySubMessage(combinedInfo, subInfo);
+              phoneLookups.get(i).setSubMessage(combinedInfo, subInfo);
             }
             combinedMap.put(dialerPhoneNumber, combinedInfo.build());
           }
@@ -129,15 +132,33 @@ public final class CompositePhoneLookup implements PhoneLookup {
         lightweightExecutorService);
   }
 
+  private <T> ListenableFuture<ImmutableMap<DialerPhoneNumber, T>> buildSubmapAndGetMostRecentInfo(
+      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap,
+      PhoneLookup<T> phoneLookup) {
+    Map<DialerPhoneNumber, T> submap =
+        Maps.transformEntries(
+            existingInfoMap,
+            (dialerPhoneNumber, phoneLookupInfo) ->
+                phoneLookup.getSubMessage(existingInfoMap.get(dialerPhoneNumber)));
+    return phoneLookup.getMostRecentInfo(ImmutableMap.copyOf(submap));
+  }
+
   @Override
-  public void copySubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source) {
-    throw new UnsupportedOperationException();
+  public void setSubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source) {
+    throw new UnsupportedOperationException(
+        "This method is only expected to be called by CompositePhoneLookup itself");
+  }
+
+  @Override
+  public PhoneLookupInfo getSubMessage(PhoneLookupInfo phoneLookupInfo) {
+    throw new UnsupportedOperationException(
+        "This method is only expected to be called by CompositePhoneLookup itself");
   }
 
   @Override
   public ListenableFuture<Void> onSuccessfulBulkUpdate() {
     List<ListenableFuture<Void>> futures = new ArrayList<>();
-    for (PhoneLookup phoneLookup : phoneLookups) {
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
       futures.add(phoneLookup.onSuccessfulBulkUpdate());
     }
     return Futures.transform(
