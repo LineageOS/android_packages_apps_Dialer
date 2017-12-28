@@ -57,7 +57,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   private static final String DEFAULT_IMAGE_URI_SCHEME = "defaultimage";
   private static final Uri DEFAULT_IMAGE_URI = Uri.parse(DEFAULT_IMAGE_URI_SCHEME + "://");
   public static final DefaultImageProvider DEFAULT_AVATAR = new LetterTileDefaultImageProvider();
-  private static ContactPhotoManager sInstance;
+  private static ContactPhotoManager instance;
 
   /**
    * Given a {@link DefaultImageRequest}, returns an Uri that can be used to request a letter tile
@@ -179,15 +179,15 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   }
 
   public static ContactPhotoManager getInstance(Context context) {
-    if (sInstance == null) {
+    if (instance == null) {
       Context applicationContext = context.getApplicationContext();
-      sInstance = createContactPhotoManager(applicationContext);
-      applicationContext.registerComponentCallbacks(sInstance);
+      instance = createContactPhotoManager(applicationContext);
+      applicationContext.registerComponentCallbacks(instance);
       if (PermissionsUtil.hasContactsReadPermissions(context)) {
-        sInstance.preloadPhotosInBackground();
+        instance.preloadPhotosInBackground();
       }
     }
-    return sInstance;
+    return instance;
   }
 
   public static synchronized ContactPhotoManager createContactPhotoManager(Context context) {
@@ -196,7 +196,7 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
 
   @VisibleForTesting
   public static void injectContactPhotoManagerForTesting(ContactPhotoManager photoManager) {
-    sInstance = photoManager;
+    instance = photoManager;
   }
 
   protected boolean isDefaultImageUri(Uri uri) {

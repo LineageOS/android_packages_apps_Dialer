@@ -72,7 +72,7 @@ public class CountryDetector {
   // exceedingly rare event that the device does not have a default locale set for some reason.
   private static final String DEFAULT_COUNTRY_ISO = "US";
 
-  @VisibleForTesting public static CountryDetector sInstance;
+  @VisibleForTesting public static CountryDetector instance;
 
   private final TelephonyManager telephonyManager;
   private final LocaleProvider localeProvider;
@@ -121,9 +121,9 @@ public class CountryDetector {
 
   /** @return the single instance of the {@link CountryDetector} */
   public static synchronized CountryDetector getInstance(Context context) {
-    if (sInstance == null) {
+    if (instance == null) {
       Context appContext = context.getApplicationContext();
-      sInstance =
+      instance =
           new CountryDetector(
               appContext,
               (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE),
@@ -131,7 +131,7 @@ public class CountryDetector {
               Locale::getDefault,
               new Geocoder(appContext));
     }
-    return sInstance;
+    return instance;
   }
 
   public String getCurrentCountryIso() {

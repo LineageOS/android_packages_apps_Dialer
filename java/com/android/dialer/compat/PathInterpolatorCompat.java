@@ -37,8 +37,8 @@ public class PathInterpolatorCompat {
     /** Governs the accuracy of the approximation of the {@link Path}. */
     private static final float PRECISION = 0.002f;
 
-    private final float[] mX;
-    private final float[] mY;
+    private final float[] x;
+    private final float[] y;
 
     public PathInterpolatorBase(Path path) {
       final PathMeasure pathMeasure = new PathMeasure(path, false /* forceClosed */);
@@ -46,16 +46,16 @@ public class PathInterpolatorCompat {
       final float pathLength = pathMeasure.getLength();
       final int numPoints = (int) (pathLength / PRECISION) + 1;
 
-      mX = new float[numPoints];
-      mY = new float[numPoints];
+      x = new float[numPoints];
+      y = new float[numPoints];
 
       final float[] position = new float[2];
       for (int i = 0; i < numPoints; ++i) {
         final float distance = (i * pathLength) / (numPoints - 1);
         pathMeasure.getPosTan(distance, position, null /* tangent */);
 
-        mX[i] = position[0];
-        mY[i] = position[1];
+        x[i] = position[0];
+        y[i] = position[1];
       }
     }
 
@@ -93,26 +93,26 @@ public class PathInterpolatorCompat {
 
       // Do a binary search for the correct x to interpolate between.
       int startIndex = 0;
-      int endIndex = mX.length - 1;
+      int endIndex = x.length - 1;
       while (endIndex - startIndex > 1) {
         int midIndex = (startIndex + endIndex) / 2;
-        if (t < mX[midIndex]) {
+        if (t < x[midIndex]) {
           endIndex = midIndex;
         } else {
           startIndex = midIndex;
         }
       }
 
-      final float xRange = mX[endIndex] - mX[startIndex];
+      final float xRange = x[endIndex] - x[startIndex];
       if (xRange == 0) {
-        return mY[startIndex];
+        return y[startIndex];
       }
 
-      final float tInRange = t - mX[startIndex];
+      final float tInRange = t - x[startIndex];
       final float fraction = tInRange / xRange;
 
-      final float startY = mY[startIndex];
-      final float endY = mY[endIndex];
+      final float startY = y[startIndex];
+      final float endY = y[endIndex];
 
       return startY + (fraction * (endY - startY));
     }

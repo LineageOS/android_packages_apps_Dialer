@@ -25,20 +25,20 @@ package com.android.dialer.callcomposer.camera.exif;
  */
 public class ExifData {
 
-  private final IfdData[] mIfdDatas = new IfdData[IfdId.TYPE_IFD_COUNT];
+  private final IfdData[] ifdDatas = new IfdData[IfdId.TYPE_IFD_COUNT];
 
   /**
    * Adds IFD data. If IFD data of the same type already exists, it will be replaced by the new
    * data.
    */
   void addIfdData(IfdData data) {
-    mIfdDatas[data.getId()] = data;
+    ifdDatas[data.getId()] = data;
   }
 
   /** Returns the {@link IfdData} object corresponding to a given IFD if it exists or null. */
   IfdData getIfdData(int ifdId) {
     if (ExifTag.isValidIfd(ifdId)) {
-      return mIfdDatas[ifdId];
+      return ifdDatas[ifdId];
     }
     return null;
   }
@@ -47,7 +47,7 @@ public class ExifData {
    * Returns the tag with a given TID in the given IFD if the tag exists. Otherwise returns null.
    */
   protected ExifTag getTag(short tag, int ifd) {
-    IfdData ifdData = mIfdDatas[ifd];
+    IfdData ifdData = ifdDatas[ifd];
     return (ifdData == null) ? null : ifdData.getTag(tag);
   }
 
@@ -79,10 +79,10 @@ public class ExifData {
    * Returns the {@link IfdData} object corresponding to a given IFD or generates one if none exist.
    */
   private IfdData getOrCreateIfdData(int ifdId) {
-    IfdData ifdData = mIfdDatas[ifdId];
+    IfdData ifdData = ifdDatas[ifdId];
     if (ifdData == null) {
       ifdData = new IfdData(ifdId);
-      mIfdDatas[ifdId] = ifdData;
+      ifdDatas[ifdId] = ifdData;
     }
     return ifdData;
   }

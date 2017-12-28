@@ -24,65 +24,65 @@ import com.android.dialer.duo.Duo;
 public class CallTypeHelper {
 
   /** Name used to identify incoming calls. */
-  private final CharSequence mIncomingName;
+  private final CharSequence incomingName;
   /** Name used to identify incoming calls which were transferred to another device. */
-  private final CharSequence mIncomingPulledName;
+  private final CharSequence incomingPulledName;
   /** Name used to identify outgoing calls. */
-  private final CharSequence mOutgoingName;
+  private final CharSequence outgoingName;
   /** Name used to identify outgoing calls which were transferred to another device. */
-  private final CharSequence mOutgoingPulledName;
+  private final CharSequence outgoingPulledName;
   /** Name used to identify missed calls. */
-  private final CharSequence mMissedName;
+  private final CharSequence missedName;
   /** Name used to identify incoming video calls. */
-  private final CharSequence mIncomingVideoName;
+  private final CharSequence incomingVideoName;
   /** Name used to identify incoming video calls which were transferred to another device. */
-  private final CharSequence mIncomingVideoPulledName;
+  private final CharSequence incomingVideoPulledName;
   /** Name used to identify outgoing video calls. */
-  private final CharSequence mOutgoingVideoName;
+  private final CharSequence outgoingVideoName;
   /** Name used to identify outgoing video calls which were transferred to another device. */
-  private final CharSequence mOutgoingVideoPulledName;
+  private final CharSequence outgoingVideoPulledName;
   /** Name used to identify missed video calls. */
-  private final CharSequence mMissedVideoName;
+  private final CharSequence missedVideoName;
   /** Name used to identify voicemail calls. */
-  private final CharSequence mVoicemailName;
+  private final CharSequence voicemailName;
   /** Name used to identify rejected calls. */
-  private final CharSequence mRejectedName;
+  private final CharSequence rejectedName;
   /** Name used to identify blocked calls. */
-  private final CharSequence mBlockedName;
+  private final CharSequence blockedName;
   /** Name used to identify calls which were answered on another device. */
-  private final CharSequence mAnsweredElsewhereName;
+  private final CharSequence answeredElsewhereName;
   /** Name used to identify incoming Duo calls. */
-  private final CharSequence mIncomingDuoCall;
+  private final CharSequence incomingDuoCall;
   /** Name used to identify outgoing Duo calls. */
-  private final CharSequence mOutgoingDuoCall;
+  private final CharSequence outgoingDuoCall;
 
   public CallTypeHelper(Resources resources, Duo duo) {
     // Cache these values so that we do not need to look them up each time.
-    mIncomingName = resources.getString(R.string.type_incoming);
-    mIncomingPulledName = resources.getString(R.string.type_incoming_pulled);
-    mOutgoingName = resources.getString(R.string.type_outgoing);
-    mOutgoingPulledName = resources.getString(R.string.type_outgoing_pulled);
-    mMissedName = resources.getString(R.string.type_missed);
-    mIncomingVideoName = resources.getString(R.string.type_incoming_video);
-    mIncomingVideoPulledName = resources.getString(R.string.type_incoming_video_pulled);
-    mOutgoingVideoName = resources.getString(R.string.type_outgoing_video);
-    mOutgoingVideoPulledName = resources.getString(R.string.type_outgoing_video_pulled);
-    mMissedVideoName = resources.getString(R.string.type_missed_video);
-    mVoicemailName = resources.getString(R.string.type_voicemail);
-    mRejectedName = resources.getString(R.string.type_rejected);
-    mBlockedName = resources.getString(R.string.type_blocked);
-    mAnsweredElsewhereName = resources.getString(R.string.type_answered_elsewhere);
+    incomingName = resources.getString(R.string.type_incoming);
+    incomingPulledName = resources.getString(R.string.type_incoming_pulled);
+    outgoingName = resources.getString(R.string.type_outgoing);
+    outgoingPulledName = resources.getString(R.string.type_outgoing_pulled);
+    missedName = resources.getString(R.string.type_missed);
+    incomingVideoName = resources.getString(R.string.type_incoming_video);
+    incomingVideoPulledName = resources.getString(R.string.type_incoming_video_pulled);
+    outgoingVideoName = resources.getString(R.string.type_outgoing_video);
+    outgoingVideoPulledName = resources.getString(R.string.type_outgoing_video_pulled);
+    missedVideoName = resources.getString(R.string.type_missed_video);
+    voicemailName = resources.getString(R.string.type_voicemail);
+    rejectedName = resources.getString(R.string.type_rejected);
+    blockedName = resources.getString(R.string.type_blocked);
+    answeredElsewhereName = resources.getString(R.string.type_answered_elsewhere);
 
     if (duo.getIncomingCallTypeText() != -1) {
-      mIncomingDuoCall = resources.getString(duo.getIncomingCallTypeText());
+      incomingDuoCall = resources.getString(duo.getIncomingCallTypeText());
     } else {
-      mIncomingDuoCall = mIncomingVideoName;
+      incomingDuoCall = incomingVideoName;
     }
 
     if (duo.getOutgoingCallTypeText() != -1) {
-      mOutgoingDuoCall = resources.getString(duo.getOutgoingCallTypeText());
+      outgoingDuoCall = resources.getString(duo.getOutgoingCallTypeText());
     } else {
-      mOutgoingDuoCall = mOutgoingVideoName;
+      outgoingDuoCall = outgoingVideoName;
     }
   }
 
@@ -100,60 +100,60 @@ public class CallTypeHelper {
       case AppCompatConstants.CALLS_INCOMING_TYPE:
         if (isVideoCall) {
           if (isPulledCall) {
-            return mIncomingVideoPulledName;
+            return incomingVideoPulledName;
           } else {
             if (isDuoCall) {
-              return mIncomingDuoCall;
+              return incomingDuoCall;
             }
-            return mIncomingVideoName;
+            return incomingVideoName;
           }
         } else {
           if (isPulledCall) {
-            return mIncomingPulledName;
+            return incomingPulledName;
           } else {
-            return mIncomingName;
+            return incomingName;
           }
         }
 
       case AppCompatConstants.CALLS_OUTGOING_TYPE:
         if (isVideoCall) {
           if (isPulledCall) {
-            return mOutgoingVideoPulledName;
+            return outgoingVideoPulledName;
           } else {
             if (isDuoCall) {
-              return mOutgoingDuoCall;
+              return outgoingDuoCall;
             }
-            return mOutgoingVideoName;
+            return outgoingVideoName;
           }
         } else {
           if (isPulledCall) {
-            return mOutgoingPulledName;
+            return outgoingPulledName;
           } else {
-            return mOutgoingName;
+            return outgoingName;
           }
         }
 
       case AppCompatConstants.CALLS_MISSED_TYPE:
         if (isVideoCall) {
-          return mMissedVideoName;
+          return missedVideoName;
         } else {
-          return mMissedName;
+          return missedName;
         }
 
       case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
-        return mVoicemailName;
+        return voicemailName;
 
       case AppCompatConstants.CALLS_REJECTED_TYPE:
-        return mRejectedName;
+        return rejectedName;
 
       case AppCompatConstants.CALLS_BLOCKED_TYPE:
-        return mBlockedName;
+        return blockedName;
 
       case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
-        return mAnsweredElsewhereName;
+        return answeredElsewhereName;
 
       default:
-        return mMissedName;
+        return missedName;
     }
   }
 }

@@ -23,26 +23,26 @@ import java.io.OutputStream;
  * count available to callers.
  */
 public class CountingOutputStream extends OutputStream {
-  private long mCount;
-  private final OutputStream mOutputStream;
+  private long count;
+  private final OutputStream outputStream;
 
   public CountingOutputStream(OutputStream outputStream) {
-    mOutputStream = outputStream;
+    this.outputStream = outputStream;
   }
 
   public long getCount() {
-    return mCount;
+    return count;
   }
 
   @Override
   public void write(byte[] buffer, int offset, int count) throws IOException {
-    mOutputStream.write(buffer, offset, count);
-    mCount += count;
+    outputStream.write(buffer, offset, count);
+    this.count += count;
   }
 
   @Override
   public void write(int oneByte) throws IOException {
-    mOutputStream.write(oneByte);
-    mCount++;
+    outputStream.write(oneByte);
+    count++;
   }
 }

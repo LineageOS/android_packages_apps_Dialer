@@ -23,7 +23,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import com.android.dialer.common.LogUtil;
 
 /**
  * This class is used to listen to the accelerometer to monitor the orientation of the phone. The
@@ -42,40 +42,40 @@ public class AccelerometerListener {
   private static final int VERTICAL_DEBOUNCE = 100;
   private static final int HORIZONTAL_DEBOUNCE = 500;
   private static final double VERTICAL_ANGLE = 50.0;
-  private SensorManager mSensorManager;
-  private Sensor mSensor;
+  private SensorManager sensorManager;
+  private Sensor sensor;
   // mOrientation is the orientation value most recently reported to the client.
-  private int mOrientation;
+  private int orientation;
   // mPendingOrientation is the latest orientation computed based on the sensor value.
   // This is sent to the client after a rebounce delay, at which point it is copied to
   // mOrientation.
-  private int mPendingOrientation;
-  private OrientationListener mListener;
-  Handler mHandler =
+  private int pendingOrientation;
+  private OrientationListener listener;
+  Handler handler =
       new Handler() {
         @Override
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case ORIENTATION_CHANGED:
               synchronized (this) {
-                mOrientation = mPendingOrientation;
+                orientation = pendingOrientation;
                 if (DEBUG) {
-                  Log.d(
+                  LogUtil.d(
                       TAG,
                       "orientation: "
-                          + (mOrientation == ORIENTATION_HORIZONTAL
+                          + (orientation == ORIENTATION_HORIZONTAL
                               ? "horizontal"
-                              : (mOrientation == ORIENTATION_VERTICAL ? "vertical" : "unknown")));
+                              : (orientation == ORIENTATION_VERTICAL ? "vertical" : "unknown")));
                 }
-                if (mListener != null) {
-                  mListener.orientationChanged(mOrientation);
+                if (listener != null) {
+                  listener.orientationChanged(orientation);
                 }
               }
               break;
           }
         }
       };
-  SensorEventListener mSensorListener =
+  SensorEventListener sensorListener =
       new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -89,34 +89,33 @@ public class AccelerometerListener {
       };
 
   public AccelerometerListener(Context context) {
-    mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+    sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
   }
 
   public void setListener(OrientationListener listener) {
-    mListener = listener;
+    this.listener = listener;
   }
 
   public void enable(boolean enable) {
     if (DEBUG) {
-      Log.d(TAG, "enable(" + enable + ")");
+      LogUtil.d(TAG, "enable(" + enable + ")");
     }
     synchronized (this) {
       if (enable) {
-        mOrientation = ORIENTATION_UNKNOWN;
-        mPendingOrientation = ORIENTATION_UNKNOWN;
-        mSensorManager.registerListener(
-            mSensorListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        orientation = ORIENTATION_UNKNOWN;
+        pendingOrientation = ORIENTATION_UNKNOWN;
+        sensorManager.registerListener(sensorListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
       } else {
-        mSensorManager.unregisterListener(mSensorListener);
-        mHandler.removeMessages(ORIENTATION_CHANGED);
+        sensorManager.unregisterListener(sensorListener);
+        handler.removeMessages(ORIENTATION_CHANGED);
       }
     }
   }
 
   private void setOrientation(int orientation) {
     synchronized (this) {
-      if (mPendingOrientation == orientation) {
+      if (pendingOrientation == orientation) {
         // Pending orientation has not changed, so do nothing.
         return;
       }
@@ -124,26 +123,26 @@ public class AccelerometerListener {
       // Cancel any pending messages.
       // We will either start a new timer or cancel alltogether
       // if the orientation has not changed.
-      mHandler.removeMessages(ORIENTATION_CHANGED);
+      handler.removeMessages(ORIENTATION_CHANGED);
 
-      if (mOrientation != orientation) {
+      if (this.orientation != orientation) {
         // Set timer to send an event if the orientation has changed since its
         // previously reported value.
-        mPendingOrientation = orientation;
-        final Message m = mHandler.obtainMessage(ORIENTATION_CHANGED);
+        pendingOrientation = orientation;
+        final Message m = handler.obtainMessage(ORIENTATION_CHANGED);
         // set delay to our debounce timeout
         int delay = (orientation == ORIENTATION_VERTICAL ? VERTICAL_DEBOUNCE : HORIZONTAL_DEBOUNCE);
-        mHandler.sendMessageDelayed(m, delay);
+        handler.sendMessageDelayed(m, delay);
       } else {
         // no message is pending
-        mPendingOrientation = ORIENTATION_UNKNOWN;
+        pendingOrientation = ORIENTATION_UNKNOWN;
       }
     }
   }
 
   private void onSensorEvent(double x, double y, double z) {
     if (VDEBUG) {
-      Log.d(TAG, "onSensorEvent(" + x + ", " + y + ", " + z + ")");
+      LogUtil.d(TAG, "onSensorEvent(" + x + ", " + y + ", " + z + ")");
     }
 
     // If some values are exactly zero, then likely the sensor is not powered up yet.
@@ -161,7 +160,7 @@ public class AccelerometerListener {
     final int orientation =
         (angle > VERTICAL_ANGLE ? ORIENTATION_VERTICAL : ORIENTATION_HORIZONTAL);
     if (VDEBUG) {
-      Log.d(TAG, "angle: " + angle + " orientation: " + orientation);
+      LogUtil.d(TAG, "angle: " + angle + " orientation: " + orientation);
     }
     setOrientation(orientation);
   }

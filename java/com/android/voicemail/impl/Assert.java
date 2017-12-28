@@ -21,7 +21,7 @@ import android.os.Looper;
 /** Assertions which will result in program termination. */
 public class Assert {
 
-  private static Boolean sIsMainThreadForTest;
+  private static Boolean isMainThreadForTest;
 
   public static void isTrue(boolean condition) {
     if (!condition) {
@@ -30,16 +30,16 @@ public class Assert {
   }
 
   public static void isMainThread() {
-    if (sIsMainThreadForTest != null) {
-      isTrue(sIsMainThreadForTest);
+    if (isMainThreadForTest != null) {
+      isTrue(isMainThreadForTest);
       return;
     }
     isTrue(Looper.getMainLooper().equals(Looper.myLooper()));
   }
 
   public static void isNotMainThread() {
-    if (sIsMainThreadForTest != null) {
-      isTrue(!sIsMainThreadForTest);
+    if (isMainThreadForTest != null) {
+      isTrue(!isMainThreadForTest);
       return;
     }
     isTrue(!Looper.getMainLooper().equals(Looper.myLooper()));
@@ -52,6 +52,6 @@ public class Assert {
   /** Override the main thread status for tests. Set to null to revert to normal behavior */
   @NeededForTesting
   public static void setIsMainThreadForTesting(Boolean isMainThread) {
-    sIsMainThreadForTest = isMainThread;
+    isMainThreadForTest = isMainThread;
   }
 }

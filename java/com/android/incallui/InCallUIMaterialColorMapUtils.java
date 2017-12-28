@@ -23,15 +23,15 @@ import com.android.contacts.common.util.MaterialColorMapUtils;
 
 public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
 
-  private final TypedArray mPrimaryColors;
-  private final TypedArray mSecondaryColors;
-  private final Resources mResources;
+  private final TypedArray primaryColors;
+  private final TypedArray secondaryColors;
+  private final Resources resources;
 
   public InCallUIMaterialColorMapUtils(Resources resources) {
     super(resources);
-    mPrimaryColors = resources.obtainTypedArray(R.array.background_colors);
-    mSecondaryColors = resources.obtainTypedArray(R.array.background_colors_dark);
-    mResources = resources;
+    primaryColors = resources.obtainTypedArray(R.array.background_colors);
+    secondaryColors = resources.obtainTypedArray(R.array.background_colors_dark);
+    this.resources = resources;
   }
 
   /**
@@ -52,12 +52,12 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
   @Override
   public MaterialPalette calculatePrimaryAndSecondaryColor(int color) {
     if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-      return getDefaultPrimaryAndSecondaryColors(mResources);
+      return getDefaultPrimaryAndSecondaryColors(resources);
     }
 
-    for (int i = 0; i < mPrimaryColors.length(); i++) {
-      if (mPrimaryColors.getColor(i, 0) == color) {
-        return new MaterialPalette(mPrimaryColors.getColor(i, 0), mSecondaryColors.getColor(i, 0));
+    for (int i = 0; i < primaryColors.length(); i++) {
+      if (primaryColors.getColor(i, 0) == color) {
+        return new MaterialPalette(primaryColors.getColor(i, 0), secondaryColors.getColor(i, 0));
       }
     }
 

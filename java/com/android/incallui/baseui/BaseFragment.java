@@ -24,10 +24,10 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
 
   private static final String KEY_FRAGMENT_HIDDEN = "key_fragment_hidden";
 
-  private T mPresenter;
+  private T presenter;
 
   protected BaseFragment() {
-    mPresenter = createPresenter();
+    presenter = createPresenter();
   }
 
   public abstract T createPresenter();
@@ -40,20 +40,20 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
    * @return The presenter associated with this fragment.
    */
   public T getPresenter() {
-    return mPresenter;
+    return presenter;
   }
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    mPresenter.onUiReady(getUi());
+    presenter.onUiReady(getUi());
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (savedInstanceState != null) {
-      mPresenter.onRestoreInstanceState(savedInstanceState);
+      presenter.onRestoreInstanceState(savedInstanceState);
       if (savedInstanceState.getBoolean(KEY_FRAGMENT_HIDDEN)) {
         getFragmentManager().beginTransaction().hide(this).commit();
       }
@@ -63,13 +63,13 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
   @Override
   public void onDestroyView() {
     super.onDestroyView();
-    mPresenter.onUiDestroy(getUi());
+    presenter.onUiDestroy(getUi());
   }
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mPresenter.onSaveInstanceState(outState);
+    presenter.onSaveInstanceState(outState);
     outState.putBoolean(KEY_FRAGMENT_HIDDEN, isHidden());
   }
 }

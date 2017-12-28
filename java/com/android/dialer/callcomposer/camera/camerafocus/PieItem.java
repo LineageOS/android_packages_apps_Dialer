@@ -30,54 +30,54 @@ public class PieItem {
     void onClick(PieItem item);
   }
 
-  private Drawable mDrawable;
+  private Drawable drawable;
   private int level;
-  private float mCenter;
+  private float center;
   private float start;
   private float sweep;
   private float animate;
   private int inner;
   private int outer;
-  private boolean mSelected;
-  private boolean mEnabled;
-  private List<PieItem> mItems;
-  private Path mPath;
-  private OnClickListener mOnClickListener;
-  private float mAlpha;
+  private boolean selected;
+  private boolean enabled;
+  private List<PieItem> items;
+  private Path path;
+  private OnClickListener onClickListener;
+  private float alpha;
 
   // Gray out the view when disabled
   private static final float ENABLED_ALPHA = 1;
   private static final float DISABLED_ALPHA = (float) 0.3;
 
   public PieItem(Drawable drawable, int level) {
-    mDrawable = drawable;
+    this.drawable = drawable;
     this.level = level;
     setAlpha(1f);
-    mEnabled = true;
+    enabled = true;
     setAnimationAngle(getAnimationAngle());
     start = -1;
-    mCenter = -1;
+    center = -1;
   }
 
   public boolean hasItems() {
-    return mItems != null;
+    return items != null;
   }
 
   public List<PieItem> getItems() {
-    return mItems;
+    return items;
   }
 
   public void setPath(Path p) {
-    mPath = p;
+    path = p;
   }
 
   public Path getPath() {
-    return mPath;
+    return path;
   }
 
   public void setAlpha(float alpha) {
-    mAlpha = alpha;
-    mDrawable.setAlpha((int) (255 * alpha));
+    this.alpha = alpha;
+    drawable.setAlpha((int) (255 * alpha));
   }
 
   public void setAnimationAngle(float a) {
@@ -89,8 +89,8 @@ public class PieItem {
   }
 
   public void setEnabled(boolean enabled) {
-    mEnabled = enabled;
-    if (mEnabled) {
+    this.enabled = enabled;
+    if (this.enabled) {
       setAlpha(ENABLED_ALPHA);
     } else {
       setAlpha(DISABLED_ALPHA);
@@ -98,15 +98,15 @@ public class PieItem {
   }
 
   public boolean isEnabled() {
-    return mEnabled;
+    return enabled;
   }
 
   public void setSelected(boolean s) {
-    mSelected = s;
+    selected = s;
   }
 
   public boolean isSelected() {
-    return mSelected;
+    return selected;
   }
 
   public int getLevel() {
@@ -121,7 +121,7 @@ public class PieItem {
   }
 
   public float getCenter() {
-    return mCenter;
+    return center;
   }
 
   public float getStart() {
@@ -145,35 +145,35 @@ public class PieItem {
   }
 
   public void setOnClickListener(OnClickListener listener) {
-    mOnClickListener = listener;
+    onClickListener = listener;
   }
 
   public void performClick() {
-    if (mOnClickListener != null) {
-      mOnClickListener.onClick(this);
+    if (onClickListener != null) {
+      onClickListener.onClick(this);
     }
   }
 
   public int getIntrinsicWidth() {
-    return mDrawable.getIntrinsicWidth();
+    return drawable.getIntrinsicWidth();
   }
 
   public int getIntrinsicHeight() {
-    return mDrawable.getIntrinsicHeight();
+    return drawable.getIntrinsicHeight();
   }
 
   public void setBounds(int left, int top, int right, int bottom) {
-    mDrawable.setBounds(left, top, right, bottom);
+    drawable.setBounds(left, top, right, bottom);
   }
 
   public void draw(Canvas canvas) {
-    mDrawable.draw(canvas);
+    drawable.draw(canvas);
   }
 
   public void setImageResource(Context context, int resId) {
     Drawable d = context.getResources().getDrawable(resId).mutate();
-    d.setBounds(mDrawable.getBounds());
-    mDrawable = d;
-    setAlpha(mAlpha);
+    d.setBounds(drawable.getBounds());
+    drawable = d;
+    setAlpha(alpha);
   }
 }

@@ -34,7 +34,7 @@ import com.android.dialer.common.Assert;
 public class FixedAspectSurfaceView extends SurfaceView {
 
   /** Desired width/height ratio */
-  private float mAspectRatio;
+  private float aspectRatio;
 
   private final boolean scaleWidth;
   private final boolean scaleHeight;
@@ -60,7 +60,7 @@ public class FixedAspectSurfaceView extends SurfaceView {
    */
   public void setAspectRatio(float aspect) {
     Assert.checkArgument(aspect >= 0, "Aspect ratio must be positive");
-    mAspectRatio = aspect;
+    aspectRatio = aspect;
     requestLayout();
   }
 
@@ -71,9 +71,9 @@ public class FixedAspectSurfaceView extends SurfaceView {
 
     // Do the scaling
     if (scaleWidth) {
-      width = (int) (height * mAspectRatio);
+      width = (int) (height * aspectRatio);
     } else if (scaleHeight) {
-      height = (int) (width / mAspectRatio);
+      height = (int) (width / aspectRatio);
     }
 
     // Override width/height if needed for EXACTLY and AT_MOST specs

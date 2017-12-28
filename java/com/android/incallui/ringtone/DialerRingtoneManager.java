@@ -38,9 +38,9 @@ public class DialerRingtoneManager {
    * Once we're ready to enable Dialer Ringing, these flags should be removed.
    */
   private static final boolean IS_DIALER_RINGING_ENABLED = false;
-  private final InCallTonePlayer mInCallTonePlayer;
-  private final CallList mCallList;
-  private Boolean mIsDialerRingingEnabledForTesting;
+  private final InCallTonePlayer inCallTonePlayer;
+  private final CallList callList;
+  private Boolean isDialerRingingEnabledForTesting;
 
   /**
    * Creates the DialerRingtoneManager with the given {@link InCallTonePlayer}.
@@ -51,8 +51,8 @@ public class DialerRingtoneManager {
    */
   public DialerRingtoneManager(
       @NonNull InCallTonePlayer inCallTonePlayer, @NonNull CallList callList) {
-    mInCallTonePlayer = Objects.requireNonNull(inCallTonePlayer);
-    mCallList = Objects.requireNonNull(callList);
+    this.inCallTonePlayer = Objects.requireNonNull(inCallTonePlayer);
+    this.callList = Objects.requireNonNull(callList);
   }
 
   /**
@@ -88,13 +88,13 @@ public class DialerRingtoneManager {
     if (callState != State.INCOMING) {
       return callState;
     }
-    return mCallList.getActiveCall() == null ? State.INCOMING : State.CALL_WAITING;
+    return callList.getActiveCall() == null ? State.INCOMING : State.CALL_WAITING;
   }
 
   private boolean isDialerRingingEnabled() {
     boolean enabledFlag =
-        mIsDialerRingingEnabledForTesting != null
-            ? mIsDialerRingingEnabledForTesting
+        isDialerRingingEnabledForTesting != null
+            ? isDialerRingingEnabledForTesting
             : IS_DIALER_RINGING_ENABLED;
     return VERSION.SDK_INT >= VERSION_CODES.N && enabledFlag;
   }
@@ -109,7 +109,7 @@ public class DialerRingtoneManager {
   public boolean shouldPlayCallWaitingTone(int callState) {
     return isDialerRingingEnabled()
         && translateCallStateForCallWaiting(callState) == State.CALL_WAITING
-        && !mInCallTonePlayer.isPlayingTone();
+        && !inCallTonePlayer.isPlayingTone();
   }
 
   /** Plays the call waiting tone. */
@@ -117,7 +117,7 @@ public class DialerRingtoneManager {
     if (!isDialerRingingEnabled()) {
       return;
     }
-    mInCallTonePlayer.play(InCallTonePlayer.TONE_CALL_WAITING);
+    inCallTonePlayer.play(InCallTonePlayer.TONE_CALL_WAITING);
   }
 
   /** Stops playing the call waiting tone. */
@@ -125,10 +125,10 @@ public class DialerRingtoneManager {
     if (!isDialerRingingEnabled()) {
       return;
     }
-    mInCallTonePlayer.stop();
+    inCallTonePlayer.stop();
   }
 
   void setDialerRingingEnabledForTesting(boolean status) {
-    mIsDialerRingingEnabledForTesting = status;
+    isDialerRingingEnabledForTesting = status;
   }
 }

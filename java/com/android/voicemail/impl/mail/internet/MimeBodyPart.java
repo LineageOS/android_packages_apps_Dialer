@@ -27,10 +27,10 @@ import java.util.regex.Pattern;
 
 /** TODO this is a close approximation of Message, need to update along with Message. */
 public class MimeBodyPart extends BodyPart {
-  protected MimeHeader mHeader = new MimeHeader();
-  protected MimeHeader mExtendedHeader;
-  protected Body mBody;
-  protected int mSize;
+  protected MimeHeader header = new MimeHeader();
+  protected MimeHeader extendedHeader;
+  protected Body body;
+  protected int size;
 
   // regex that matches content id surrounded by "<>" optionally.
   private static final Pattern REMOVE_OPTIONAL_BRACKETS = Pattern.compile("^<?([^>]+)>?$");
@@ -53,37 +53,37 @@ public class MimeBodyPart extends BodyPart {
   }
 
   protected String getFirstHeader(String name) throws MessagingException {
-    return mHeader.getFirstHeader(name);
+    return header.getFirstHeader(name);
   }
 
   @Override
   public void addHeader(String name, String value) throws MessagingException {
-    mHeader.addHeader(name, value);
+    header.addHeader(name, value);
   }
 
   @Override
   public void setHeader(String name, String value) throws MessagingException {
-    mHeader.setHeader(name, value);
+    header.setHeader(name, value);
   }
 
   @Override
   public String[] getHeader(String name) throws MessagingException {
-    return mHeader.getHeader(name);
+    return header.getHeader(name);
   }
 
   @Override
   public void removeHeader(String name) throws MessagingException {
-    mHeader.removeHeader(name);
+    header.removeHeader(name);
   }
 
   @Override
   public Body getBody() throws MessagingException {
-    return mBody;
+    return body;
   }
 
   @Override
   public void setBody(Body body) throws MessagingException {
-    this.mBody = body;
+    this.body = body;
     if (body instanceof Multipart) {
       Multipart multipart =
           ((Multipart) body);
@@ -142,12 +142,12 @@ public class MimeBodyPart extends BodyPart {
   }
 
   public void setSize(int size) {
-    this.mSize = size;
+    this.size = size;
   }
 
   @Override
   public int getSize() throws MessagingException {
-    return mSize;
+    return size;
   }
 
   /**
@@ -160,15 +160,15 @@ public class MimeBodyPart extends BodyPart {
   @Override
   public void setExtendedHeader(String name, String value) throws MessagingException {
     if (value == null) {
-      if (mExtendedHeader != null) {
-        mExtendedHeader.removeHeader(name);
+      if (extendedHeader != null) {
+        extendedHeader.removeHeader(name);
       }
       return;
     }
-    if (mExtendedHeader == null) {
-      mExtendedHeader = new MimeHeader();
+    if (extendedHeader == null) {
+      extendedHeader = new MimeHeader();
     }
-    mExtendedHeader.setHeader(name, END_OF_LINE.matcher(value).replaceAll(""));
+    extendedHeader.setHeader(name, END_OF_LINE.matcher(value).replaceAll(""));
   }
 
   /**
@@ -180,21 +180,21 @@ public class MimeBodyPart extends BodyPart {
    */
   @Override
   public String getExtendedHeader(String name) throws MessagingException {
-    if (mExtendedHeader == null) {
+    if (extendedHeader == null) {
       return null;
     }
-    return mExtendedHeader.getFirstHeader(name);
+    return extendedHeader.getFirstHeader(name);
   }
 
   /** Write the MimeMessage out in MIME format. */
   @Override
   public void writeTo(OutputStream out) throws IOException, MessagingException {
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out), 1024);
-    mHeader.writeTo(out);
+    header.writeTo(out);
     writer.write("\r\n");
     writer.flush();
-    if (mBody != null) {
-      mBody.writeTo(out);
+    if (body != null) {
+      body.writeTo(out);
     }
   }
 }

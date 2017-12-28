@@ -88,53 +88,53 @@ public class LetterTileDrawable extends Drawable {
   private static final float VECTOR_ICON_SCALE = 0.7f;
 
   /** Reusable components to avoid new allocations */
-  private final Paint mPaint = new Paint();
+  private final Paint paint = new Paint();
 
-  private final Rect mRect = new Rect();
-  private final char[] mFirstChar = new char[1];
+  private final Rect rect = new Rect();
+  private final char[] firstChar = new char[1];
 
   /** Letter tile */
-  @NonNull private final TypedArray mColors;
+  @NonNull private final TypedArray colors;
 
-  private final int mSpamColor;
-  private final int mDefaultColor;
-  private final int mTileFontColor;
-  private final float mLetterToTileRatio;
-  @NonNull private final Drawable mDefaultPersonAvatar;
-  @NonNull private final Drawable mDefaultBusinessAvatar;
-  @NonNull private final Drawable mDefaultVoicemailAvatar;
-  @NonNull private final Drawable mDefaultSpamAvatar;
-  @NonNull private final Drawable mDefaultConferenceAvatar;
+  private final int spamColor;
+  private final int defaultColor;
+  private final int tileFontColor;
+  private final float letterToTileRatio;
+  @NonNull private final Drawable defaultPersonAvatar;
+  @NonNull private final Drawable defaultBusinessAvatar;
+  @NonNull private final Drawable defaultVoicemailAvatar;
+  @NonNull private final Drawable defaultSpamAvatar;
+  @NonNull private final Drawable defaultConferenceAvatar;
 
-  @ContactType private int mContactType = TYPE_DEFAULT;
-  private float mScale = 1.0f;
-  private float mOffset = 0.0f;
-  private boolean mIsCircle = false;
+  @ContactType private int contactType = TYPE_DEFAULT;
+  private float scale = 1.0f;
+  private float offset = 0.0f;
+  private boolean isCircle = false;
 
-  private int mColor;
-  private Character mLetter = null;
+  private int color;
+  private Character letter = null;
 
-  private String mDisplayName;
+  private String displayName;
 
   public LetterTileDrawable(final Resources res) {
-    mColors = res.obtainTypedArray(R.array.letter_tile_colors);
-    mSpamColor = res.getColor(R.color.spam_contact_background);
-    mDefaultColor = res.getColor(R.color.letter_tile_default_color);
-    mTileFontColor = res.getColor(R.color.letter_tile_font_color);
-    mLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
-    mDefaultPersonAvatar =
+    colors = res.obtainTypedArray(R.array.letter_tile_colors);
+    spamColor = res.getColor(R.color.spam_contact_background);
+    defaultColor = res.getColor(R.color.letter_tile_default_color);
+    tileFontColor = res.getColor(R.color.letter_tile_font_color);
+    letterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
+    defaultPersonAvatar =
         res.getDrawable(R.drawable.product_logo_avatar_anonymous_white_color_120, null);
-    mDefaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
-    mDefaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
-    mDefaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
-    mDefaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
+    defaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
+    defaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
+    defaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
+    defaultConferenceAvatar = res.getDrawable(R.drawable.quantum_ic_group_vd_theme_24, null);
 
-    mPaint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-    mPaint.setTextAlign(Align.CENTER);
-    mPaint.setAntiAlias(true);
-    mPaint.setFilterBitmap(true);
-    mPaint.setDither(true);
-    mColor = mDefaultColor;
+    paint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+    paint.setTextAlign(Align.CENTER);
+    paint.setAntiAlias(true);
+    paint.setFilterBitmap(true);
+    paint.setDither(true);
+    color = defaultColor;
   }
 
   private Rect getScaledBounds(float scale, float offset) {
@@ -155,21 +155,21 @@ public class LetterTileDrawable extends Drawable {
   private Drawable getDrawableForContactType(int contactType) {
     switch (contactType) {
       case TYPE_BUSINESS:
-        mScale = VECTOR_ICON_SCALE;
-        return mDefaultBusinessAvatar;
+        scale = VECTOR_ICON_SCALE;
+        return defaultBusinessAvatar;
       case TYPE_VOICEMAIL:
-        mScale = VECTOR_ICON_SCALE;
-        return mDefaultVoicemailAvatar;
+        scale = VECTOR_ICON_SCALE;
+        return defaultVoicemailAvatar;
       case TYPE_SPAM:
-        mScale = VECTOR_ICON_SCALE;
-        return mDefaultSpamAvatar;
+        scale = VECTOR_ICON_SCALE;
+        return defaultSpamAvatar;
       case TYPE_CONFERENCE:
-        mScale = VECTOR_ICON_SCALE;
-        return mDefaultConferenceAvatar;
+        scale = VECTOR_ICON_SCALE;
+        return defaultConferenceAvatar;
       case TYPE_PERSON:
       case TYPE_GENERIC_AVATAR:
       default:
-        return mDefaultPersonAvatar;
+        return defaultPersonAvatar;
     }
   }
 
@@ -197,88 +197,88 @@ public class LetterTileDrawable extends Drawable {
 
   private void drawLetterTile(final Canvas canvas) {
     // Draw background color.
-    mPaint.setColor(mColor);
+    paint.setColor(color);
 
     final Rect bounds = getBounds();
     final int minDimension = Math.min(bounds.width(), bounds.height());
 
-    if (mIsCircle) {
-      canvas.drawCircle(bounds.centerX(), bounds.centerY(), minDimension / 2, mPaint);
+    if (isCircle) {
+      canvas.drawCircle(bounds.centerX(), bounds.centerY(), minDimension / 2, paint);
     } else {
-      canvas.drawRect(bounds, mPaint);
+      canvas.drawRect(bounds, paint);
     }
 
     // Draw letter/digit only if the first character is an english letter or there's a override
-    if (mLetter != null) {
+    if (letter != null) {
       // Draw letter or digit.
-      mFirstChar[0] = mLetter;
+      firstChar[0] = letter;
 
       // Scale text by canvas bounds and user selected scaling factor
-      mPaint.setTextSize(mScale * mLetterToTileRatio * minDimension);
-      mPaint.getTextBounds(mFirstChar, 0, 1, mRect);
-      mPaint.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
-      mPaint.setColor(mTileFontColor);
-      mPaint.setAlpha(ALPHA);
+      paint.setTextSize(scale * letterToTileRatio * minDimension);
+      paint.getTextBounds(firstChar, 0, 1, rect);
+      paint.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+      paint.setColor(tileFontColor);
+      paint.setAlpha(ALPHA);
 
       // Draw the letter in the canvas, vertically shifted up or down by the user-defined
       // offset
       canvas.drawText(
-          mFirstChar,
+          firstChar,
           0,
           1,
           bounds.centerX(),
-          bounds.centerY() + mOffset * bounds.height() - mRect.exactCenterY(),
-          mPaint);
+          bounds.centerY() + offset * bounds.height() - rect.exactCenterY(),
+          paint);
     } else {
       // Draw the default image if there is no letter/digit to be drawn
-      Drawable drawable = getDrawableForContactType(mContactType);
+      Drawable drawable = getDrawableForContactType(contactType);
       if (drawable == null) {
         throw Assert.createIllegalStateFailException(
-            "Unable to find drawable for contact type " + mContactType);
+            "Unable to find drawable for contact type " + contactType);
       }
 
-      drawable.setBounds(getScaledBounds(mScale, mOffset));
-      drawable.setAlpha(drawable == mDefaultSpamAvatar ? SPAM_ALPHA : ALPHA);
+      drawable.setBounds(getScaledBounds(scale, offset));
+      drawable.setAlpha(drawable == defaultSpamAvatar ? SPAM_ALPHA : ALPHA);
       drawable.draw(canvas);
     }
   }
 
   public int getColor() {
-    return mColor;
+    return color;
   }
 
   public LetterTileDrawable setColor(int color) {
-    mColor = color;
+    this.color = color;
     return this;
   }
 
   /** Returns a deterministic color based on the provided contact identifier string. */
   private int pickColor(final String identifier) {
-    if (mContactType == TYPE_SPAM) {
-      return mSpamColor;
+    if (contactType == TYPE_SPAM) {
+      return spamColor;
     }
 
-    if (mContactType == TYPE_VOICEMAIL
-        || mContactType == TYPE_BUSINESS
+    if (contactType == TYPE_VOICEMAIL
+        || contactType == TYPE_BUSINESS
         || TextUtils.isEmpty(identifier)) {
-      return mDefaultColor;
+      return defaultColor;
     }
 
     // String.hashCode() implementation is not supposed to change across java versions, so
     // this should guarantee the same email address always maps to the same color.
     // The email should already have been normalized by the ContactRequest.
-    final int color = Math.abs(identifier.hashCode()) % mColors.length();
-    return mColors.getColor(color, mDefaultColor);
+    final int color = Math.abs(identifier.hashCode()) % colors.length();
+    return colors.getColor(color, defaultColor);
   }
 
   @Override
   public void setAlpha(final int alpha) {
-    mPaint.setAlpha(alpha);
+    paint.setAlpha(alpha);
   }
 
   @Override
   public void setColorFilter(final ColorFilter cf) {
-    mPaint.setColorFilter(cf);
+    paint.setColorFilter(cf);
   }
 
   @Override
@@ -288,7 +288,7 @@ public class LetterTileDrawable extends Drawable {
 
   @Override
   public void getOutline(Outline outline) {
-    if (mIsCircle) {
+    if (isCircle) {
       outline.setOval(getBounds());
     } else {
       outline.setRect(getBounds());
@@ -304,7 +304,7 @@ public class LetterTileDrawable extends Drawable {
    *     from a scale of 0 to 2.0f. The default is 1.0f.
    */
   public LetterTileDrawable setScale(float scale) {
-    mScale = scale;
+    this.scale = scale;
     return this;
   }
 
@@ -320,47 +320,47 @@ public class LetterTileDrawable extends Drawable {
    */
   public LetterTileDrawable setOffset(float offset) {
     Assert.checkArgument(offset >= -0.5f && offset <= 0.5f);
-    mOffset = offset;
+    this.offset = offset;
     return this;
   }
 
   public LetterTileDrawable setLetter(Character letter) {
-    mLetter = letter;
+    this.letter = letter;
     return this;
   }
 
   public Character getLetter() {
-    return this.mLetter;
+    return this.letter;
   }
 
   private LetterTileDrawable setLetterAndColorFromContactDetails(
       final String displayName, final String identifier) {
     if (!TextUtils.isEmpty(displayName) && isEnglishLetter(displayName.charAt(0))) {
-      mLetter = Character.toUpperCase(displayName.charAt(0));
+      letter = Character.toUpperCase(displayName.charAt(0));
     } else {
-      mLetter = null;
+      letter = null;
     }
-    mColor = pickColor(identifier);
+    color = pickColor(identifier);
     return this;
   }
 
   private LetterTileDrawable setContactType(@ContactType int contactType) {
-    mContactType = contactType;
+    this.contactType = contactType;
     return this;
   }
 
   @ContactType
   public int getContactType() {
-    return this.mContactType;
+    return this.contactType;
   }
 
   public LetterTileDrawable setIsCircular(boolean isCircle) {
-    mIsCircle = isCircle;
+    this.isCircle = isCircle;
     return this;
   }
 
   public boolean tileIsCircular() {
-    return this.mIsCircle;
+    return this.isCircle;
   }
 
   /**
@@ -391,11 +391,11 @@ public class LetterTileDrawable extends Drawable {
      */
     if (contactType == TYPE_DEFAULT
         && ((displayName == null && identifierForTileColor == null)
-            || (displayName != null && displayName.equals(mDisplayName)))) {
+            || (displayName != null && displayName.equals(this.displayName)))) {
       return this;
     }
 
-    this.mDisplayName = displayName;
+    this.displayName = displayName;
     setContactType(contactType);
 
     // Special contact types receive default color and no letter tile, but special iconography.

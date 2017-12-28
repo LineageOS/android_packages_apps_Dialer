@@ -32,28 +32,28 @@ public final class VoicemailAudioManager
 
   public static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
 
-  private AudioManager mAudioManager;
-  private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
-  private WiredHeadsetManager mWiredHeadsetManager;
-  private boolean mWasSpeakerOn;
-  private CallAudioState mCallAudioState;
-  private boolean mBluetoothScoEnabled;
+  private AudioManager audioManager;
+  private VoicemailPlaybackPresenter voicemailPlaybackPresenter;
+  private WiredHeadsetManager wiredHeadsetManager;
+  private boolean wasSpeakerOn;
+  private CallAudioState callAudioState;
+  private boolean bluetoothScoEnabled;
 
   public VoicemailAudioManager(
       Context context, VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
-    mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-    mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
-    mWiredHeadsetManager = new WiredHeadsetManager(context);
-    mWiredHeadsetManager.setListener(this);
+    audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    this.voicemailPlaybackPresenter = voicemailPlaybackPresenter;
+    wiredHeadsetManager = new WiredHeadsetManager(context);
+    wiredHeadsetManager.setListener(this);
 
-    mCallAudioState = getInitialAudioState();
+    callAudioState = getInitialAudioState();
     LogUtil.i(
-        "VoicemailAudioManager.VoicemailAudioManager", "Initial audioState = " + mCallAudioState);
+        "VoicemailAudioManager.VoicemailAudioManager", "Initial audioState = " + callAudioState);
   }
 
   public void requestAudioFocus() {
     int result =
-        mAudioManager.requestAudioFocus(
+        audioManager.requestAudioFocus(
             this, PLAYBACK_STREAM, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
     if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
       throw new RejectedExecutionException("Could not capture audio focus.");
@@ -63,13 +63,13 @@ public final class VoicemailAudioManager
 
   public void abandonAudioFocus() {
     updateBluetoothScoState(false);
-    mAudioManager.abandonAudioFocus(this);
+    audioManager.abandonAudioFocus(this);
   }
 
   @Override
   public void onAudioFocusChange(int focusChange) {
     LogUtil.d("VoicemailAudioManager.onAudioFocusChange", "focusChange=" + focusChange);
-    mVoicemailPlaybackPresenter.onAudioFocusChange(focusChange == AudioManager.AUDIOFOCUS_GAIN);
+    voicemailPlaybackPresenter.onAudioFocusChange(focusChange == AudioManager.AUDIOFOCUS_GAIN);
   }
 
   @Override
@@ -82,19 +82,19 @@ public final class VoicemailAudioManager
       return;
     }
 
-    int newRoute = mCallAudioState.getRoute(); // start out with existing route
+    int newRoute = callAudioState.getRoute(); // start out with existing route
     if (newIsPluggedIn) {
       newRoute = CallAudioState.ROUTE_WIRED_HEADSET;
     } else {
-      mVoicemailPlaybackPresenter.pausePlayback();
-      if (mWasSpeakerOn) {
+      voicemailPlaybackPresenter.pausePlayback();
+      if (wasSpeakerOn) {
         newRoute = CallAudioState.ROUTE_SPEAKER;
       } else {
         newRoute = CallAudioState.ROUTE_EARPIECE;
       }
     }
 
-    mVoicemailPlaybackPresenter.setSpeakerphoneOn(newRoute == CallAudioState.ROUTE_SPEAKER);
+    voicemailPlaybackPresenter.setSpeakerphoneOn(newRoute == CallAudioState.ROUTE_SPEAKER);
 
     // We need to call this every time even if we do not change the route because the supported
     // routes changed either to include or not include WIRED_HEADSET.
@@ -107,16 +107,16 @@ public final class VoicemailAudioManager
   }
 
   public boolean isWiredHeadsetPluggedIn() {
-    return mWiredHeadsetManager.isPluggedIn();
+    return wiredHeadsetManager.isPluggedIn();
   }
 
   public void registerReceivers() {
     // Receivers is plural because we expect to add bluetooth support.
-    mWiredHeadsetManager.registerReceiver();
+    wiredHeadsetManager.registerReceiver();
   }
 
   public void unregisterReceivers() {
-    mWiredHeadsetManager.unregisterReceiver();
+    wiredHeadsetManager.unregisterReceiver();
   }
 
   /**
@@ -127,34 +127,34 @@ public final class VoicemailAudioManager
   private void updateBluetoothScoState(boolean hasAudioFocus) {
     if (hasAudioFocus) {
       if (hasMediaAudioCapability()) {
-        mBluetoothScoEnabled = false;
+        bluetoothScoEnabled = false;
       } else {
-        mBluetoothScoEnabled = true;
+        bluetoothScoEnabled = true;
         LogUtil.i(
             "VoicemailAudioManager.updateBluetoothScoState",
             "bluetooth device doesn't support media, using SCO instead");
       }
     } else {
-      mBluetoothScoEnabled = false;
+      bluetoothScoEnabled = false;
     }
     applyBluetoothScoState();
   }
 
   private void applyBluetoothScoState() {
-    if (mBluetoothScoEnabled) {
-      mAudioManager.startBluetoothSco();
+    if (bluetoothScoEnabled) {
+      audioManager.startBluetoothSco();
       // The doc for startBluetoothSco() states it could take seconds to establish the SCO
       // connection, so we should probably resume the playback after we've acquired SCO.
       // In practice the delay is unnoticeable so this is ignored for simplicity.
-      mAudioManager.setBluetoothScoOn(true);
+      audioManager.setBluetoothScoOn(true);
     } else {
-      mAudioManager.setBluetoothScoOn(false);
-      mAudioManager.stopBluetoothSco();
+      audioManager.setBluetoothScoOn(false);
+      audioManager.stopBluetoothSco();
     }
   }
 
   private boolean hasMediaAudioCapability() {
-    for (AudioDeviceInfo info : mAudioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)) {
+    for (AudioDeviceInfo info : audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)) {
       if (info.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP) {
         return true;
       }
@@ -173,10 +173,10 @@ public final class VoicemailAudioManager
         "route: " + CallAudioState.audioRouteToString(route));
 
     // Change ROUTE_WIRED_OR_EARPIECE to a single entry.
-    int newRoute = selectWiredOrEarpiece(route, mCallAudioState.getSupportedRouteMask());
+    int newRoute = selectWiredOrEarpiece(route, callAudioState.getSupportedRouteMask());
 
     // If route is unsupported, do nothing.
-    if ((mCallAudioState.getSupportedRouteMask() | newRoute) == 0) {
+    if ((callAudioState.getSupportedRouteMask() | newRoute) == 0) {
       LogUtil.w(
           "VoicemailAudioManager.setAudioRoute",
           "Asking to set to a route that is unsupported: " + newRoute);
@@ -185,9 +185,9 @@ public final class VoicemailAudioManager
 
     // Remember the new speaker state so it can be restored when the user plugs and unplugs
     // a headset.
-    mWasSpeakerOn = newRoute == CallAudioState.ROUTE_SPEAKER;
+    wasSpeakerOn = newRoute == CallAudioState.ROUTE_SPEAKER;
     setSystemAudioState(
-        new CallAudioState(false /* muted */, newRoute, mCallAudioState.getSupportedRouteMask()));
+        new CallAudioState(false /* muted */, newRoute, callAudioState.getSupportedRouteMask()));
   }
 
   private CallAudioState getInitialAudioState() {
@@ -198,7 +198,7 @@ public final class VoicemailAudioManager
 
   private int calculateSupportedRoutes() {
     int routeMask = CallAudioState.ROUTE_SPEAKER;
-    if (mWiredHeadsetManager.isPluggedIn()) {
+    if (wiredHeadsetManager.isPluggedIn()) {
       routeMask |= CallAudioState.ROUTE_WIRED_HEADSET;
     } else {
       routeMask |= CallAudioState.ROUTE_EARPIECE;
@@ -224,18 +224,18 @@ public final class VoicemailAudioManager
   }
 
   private void setSystemAudioState(CallAudioState callAudioState) {
-    CallAudioState oldAudioState = mCallAudioState;
-    mCallAudioState = callAudioState;
+    CallAudioState oldAudioState = this.callAudioState;
+    this.callAudioState = callAudioState;
 
     LogUtil.i(
         "VoicemailAudioManager.setSystemAudioState",
-        "changing from " + oldAudioState + " to " + mCallAudioState);
+        "changing from " + oldAudioState + " to " + this.callAudioState);
 
     // Audio route.
-    if (mCallAudioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
+    if (this.callAudioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
       turnOnSpeaker(true);
-    } else if (mCallAudioState.getRoute() == CallAudioState.ROUTE_EARPIECE
-        || mCallAudioState.getRoute() == CallAudioState.ROUTE_WIRED_HEADSET) {
+    } else if (this.callAudioState.getRoute() == CallAudioState.ROUTE_EARPIECE
+        || this.callAudioState.getRoute() == CallAudioState.ROUTE_WIRED_HEADSET) {
       // Just handle turning off the speaker, the system will handle switching between wired
       // headset and earpiece.
       turnOnSpeaker(false);
@@ -245,9 +245,9 @@ public final class VoicemailAudioManager
   }
 
   private void turnOnSpeaker(boolean on) {
-    if (mAudioManager.isSpeakerphoneOn() != on) {
+    if (audioManager.isSpeakerphoneOn() != on) {
       LogUtil.i("VoicemailAudioManager.turnOnSpeaker", "turning speaker phone on: " + on);
-      mAudioManager.setSpeakerphoneOn(on);
+      audioManager.setSpeakerphoneOn(on);
     }
   }
 }

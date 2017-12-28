@@ -23,17 +23,17 @@ import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
 
 public class Base64Body implements Body {
-  private final InputStream mSource;
+  private final InputStream source;
   // Because we consume the input stream, we can only write out once
-  private boolean mAlreadyWritten;
+  private boolean alreadyWritten;
 
   public Base64Body(InputStream source) {
-    mSource = source;
+    this.source = source;
   }
 
   @Override
   public InputStream getInputStream() throws MessagingException {
-    return mSource;
+    return source;
   }
 
   /**
@@ -47,15 +47,15 @@ public class Base64Body implements Body {
   @Override
   public void writeTo(OutputStream out)
       throws IllegalStateException, IOException, MessagingException {
-    if (mAlreadyWritten) {
+    if (alreadyWritten) {
       throw new IllegalStateException("Base64Body can only be written once");
     }
-    mAlreadyWritten = true;
+    alreadyWritten = true;
     try {
       final Base64OutputStream b64out = new Base64OutputStream(out, Base64.DEFAULT);
-      IOUtils.copyLarge(mSource, b64out);
+      IOUtils.copyLarge(source, b64out);
     } finally {
-      mSource.close();
+      source.close();
     }
   }
 }

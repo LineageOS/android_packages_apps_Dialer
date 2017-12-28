@@ -23,7 +23,7 @@ import android.view.MotionEvent;
 abstract class Classifier {
 
   /** Contains all the information about touch events from which the classifier can query */
-  protected ClassifierData mClassifierData;
+  protected ClassifierData classifierData;
 
   /** Informs the classifier that a new touch event has occurred */
   public void onTouchEvent(MotionEvent event) {}

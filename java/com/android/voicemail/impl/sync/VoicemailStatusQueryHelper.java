@@ -39,14 +39,14 @@ public class VoicemailStatusQueryHelper {
   public static final int NOTIFICATION_CHANNEL_STATE = 2;
   public static final int SOURCE_PACKAGE = 3;
 
-  private Context mContext;
-  private ContentResolver mContentResolver;
-  private Uri mSourceUri;
+  private Context context;
+  private ContentResolver contentResolver;
+  private Uri sourceUri;
 
   public VoicemailStatusQueryHelper(Context context) {
-    mContext = context;
-    mContentResolver = context.getContentResolver();
-    mSourceUri = VoicemailContract.Status.buildSourceUri(mContext.getPackageName());
+    this.context = context;
+    contentResolver = context.getContentResolver();
+    sourceUri = VoicemailContract.Status.buildSourceUri(this.context.getPackageName());
   }
 
   /**
@@ -97,8 +97,8 @@ public class VoicemailStatusQueryHelper {
                 + "=? AND "
                 + Status.SOURCE_PACKAGE
                 + "=?";
-        String[] whereArgs = {phoneAccountComponentName, phoneAccountId, mContext.getPackageName()};
-        cursor = mContentResolver.query(mSourceUri, PROJECTION, whereClause, whereArgs, null);
+        String[] whereArgs = {phoneAccountComponentName, phoneAccountId, context.getPackageName()};
+        cursor = contentResolver.query(sourceUri, PROJECTION, whereClause, whereArgs, null);
         if (cursor != null && cursor.moveToFirst()) {
           return cursor.getInt(columnIndex) == value;
         }

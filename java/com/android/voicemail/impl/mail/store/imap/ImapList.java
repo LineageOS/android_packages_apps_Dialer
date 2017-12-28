@@ -35,13 +35,13 @@ public class ImapList extends ImapElement {
         }
       };
 
-  private ArrayList<ImapElement> mList = new ArrayList<ImapElement>();
+  private ArrayList<ImapElement> list = new ArrayList<ImapElement>();
 
   /* package */ void add(ImapElement e) {
     if (e == null) {
       throw new RuntimeException("Can't add null");
     }
-    mList.add(e);
+    list.add(e);
   }
 
   @Override
@@ -55,7 +55,7 @@ public class ImapList extends ImapElement {
   }
 
   public final int size() {
-    return mList.size();
+    return list.size();
   }
 
   public final boolean isEmpty() {
@@ -84,7 +84,7 @@ public class ImapList extends ImapElement {
    * ImapElement#NONE}.
    */
   public final ImapElement getElementOrNone(int index) {
-    return (index >= mList.size()) ? ImapElement.NONE : mList.get(index);
+    return (index >= list.size()) ? ImapElement.NONE : list.get(index);
   }
 
   /**
@@ -112,7 +112,7 @@ public class ImapList extends ImapElement {
   /* package */ final ImapElement getKeyedElementOrNull(String key, boolean prefixMatch) {
     for (int i = 1; i < size(); i += 2) {
       if (is(i - 1, key, prefixMatch)) {
-        return mList.get(i);
+        return list.get(i);
       }
     }
     return null;
@@ -162,18 +162,18 @@ public class ImapList extends ImapElement {
 
   @Override
   public void destroy() {
-    if (mList != null) {
-      for (ImapElement e : mList) {
+    if (list != null) {
+      for (ImapElement e : list) {
         e.destroy();
       }
-      mList = null;
+      list = null;
     }
     super.destroy();
   }
 
   @Override
   public String toString() {
-    return mList.toString();
+    return list.toString();
   }
 
   /** Return the text representations of the contents concatenated with ",". */
@@ -192,7 +192,7 @@ public class ImapList extends ImapElement {
    */
   private final StringBuilder flatten(StringBuilder sb) {
     sb.append('[');
-    for (int i = 0; i < mList.size(); i++) {
+    for (int i = 0; i < list.size(); i++) {
       if (i > 0) {
         sb.append(',');
       }
@@ -217,7 +217,7 @@ public class ImapList extends ImapElement {
       return false;
     }
     for (int i = 0; i < size(); i++) {
-      if (!mList.get(i).equalsForTest(thatList.getElementOrNone(i))) {
+      if (!list.get(i).equalsForTest(thatList.getElementOrNone(i))) {
         return false;
       }
     }

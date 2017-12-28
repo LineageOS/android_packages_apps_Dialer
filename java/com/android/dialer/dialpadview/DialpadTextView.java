@@ -33,8 +33,8 @@ import android.widget.TextView;
  */
 public class DialpadTextView extends TextView {
 
-  private Rect mTextBounds = new Rect();
-  private String mTextStr;
+  private Rect textBounds = new Rect();
+  private String textStr;
 
   public DialpadTextView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -51,7 +51,7 @@ public class DialpadTextView extends TextView {
     // The text bounds values are relative and can be negative,, so rather than specifying a
     // standard origin such as 0, 0, we need to use negative of the left/top bounds.
     // For example, the bounds may be: Left: 11, Right: 37, Top: -77, Bottom: 0
-    canvas.drawText(mTextStr, -mTextBounds.left, -mTextBounds.top, paint);
+    canvas.drawText(textStr, -textBounds.left, -textBounds.top, paint);
   }
 
   /**
@@ -61,11 +61,11 @@ public class DialpadTextView extends TextView {
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    mTextStr = getText().toString();
-    getPaint().getTextBounds(mTextStr, 0, mTextStr.length(), mTextBounds);
+    textStr = getText().toString();
+    getPaint().getTextBounds(textStr, 0, textStr.length(), textBounds);
 
-    int width = resolveSize(mTextBounds.width(), widthMeasureSpec);
-    int height = resolveSize(mTextBounds.height(), heightMeasureSpec);
+    int width = resolveSize(textBounds.width(), widthMeasureSpec);
+    int height = resolveSize(textBounds.height(), heightMeasureSpec);
     setMeasuredDimension(width, height);
   }
 }

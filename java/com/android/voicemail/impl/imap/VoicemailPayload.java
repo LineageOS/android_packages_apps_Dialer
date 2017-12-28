@@ -18,19 +18,19 @@ package com.android.voicemail.impl.imap;
 
 /** The payload for a voicemail, usually audio data. */
 public class VoicemailPayload {
-  private final String mMimeType;
-  private final byte[] mBytes;
+  private final String mimeType;
+  private final byte[] bytes;
 
   public VoicemailPayload(String mimeType, byte[] bytes) {
-    mMimeType = mimeType;
-    mBytes = bytes;
+    this.mimeType = mimeType;
+    this.bytes = bytes;
   }
 
   public byte[] getBytes() {
-    return mBytes;
+    return bytes;
   }
 
   public String getMimeType() {
-    return mMimeType;
+    return mimeType;
   }
 }

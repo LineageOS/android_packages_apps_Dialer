@@ -25,17 +25,17 @@ import android.text.TextUtils;
 /** Represents a single voicemail stored in the voicemail content provider. */
 public class Voicemail implements Parcelable {
 
-  private final Long mTimestamp;
-  private final String mNumber;
-  private final PhoneAccountHandle mPhoneAccount;
-  private final Long mId;
-  private final Long mDuration;
-  private final String mSource;
-  private final String mProviderData;
-  private final Uri mUri;
-  private final Boolean mIsRead;
-  private final Boolean mHasContent;
-  private final String mTranscription;
+  private final Long timestamp;
+  private final String number;
+  private final PhoneAccountHandle phoneAccount;
+  private final Long id;
+  private final Long duration;
+  private final String source;
+  private final String providerData;
+  private final Uri uri;
+  private final Boolean isRead;
+  private final Boolean hasContent;
+  private final String transcription;
 
   private Voicemail(
       Long timestamp,
@@ -49,17 +49,17 @@ public class Voicemail implements Parcelable {
       Boolean isRead,
       Boolean hasContent,
       String transcription) {
-    mTimestamp = timestamp;
-    mNumber = number;
-    mPhoneAccount = phoneAccountHandle;
-    mId = id;
-    mDuration = duration;
-    mSource = source;
-    mProviderData = providerData;
-    mUri = uri;
-    mIsRead = isRead;
-    mHasContent = hasContent;
-    mTranscription = transcription;
+    this.timestamp = timestamp;
+    this.number = number;
+    phoneAccount = phoneAccountHandle;
+    this.id = id;
+    this.duration = duration;
+    this.source = source;
+    this.providerData = providerData;
+    this.uri = uri;
+    this.isRead = isRead;
+    this.hasContent = hasContent;
+    this.transcription = transcription;
   }
 
   /**
@@ -89,93 +89,93 @@ public class Voicemail implements Parcelable {
    */
   public static class Builder {
 
-    private Long mBuilderTimestamp;
-    private String mBuilderNumber;
-    private PhoneAccountHandle mBuilderPhoneAccount;
-    private Long mBuilderId;
-    private Long mBuilderDuration;
-    private String mBuilderSourcePackage;
-    private String mBuilderSourceData;
-    private Uri mBuilderUri;
-    private Boolean mBuilderIsRead;
-    private boolean mBuilderHasContent;
-    private String mBuilderTranscription;
+    private Long builderTimestamp;
+    private String builderNumber;
+    private PhoneAccountHandle builderPhoneAccount;
+    private Long builderId;
+    private Long builderDuration;
+    private String builderSourcePackage;
+    private String builderSourceData;
+    private Uri builderUri;
+    private Boolean builderIsRead;
+    private boolean builderHasContent;
+    private String builderTranscription;
 
     /** You should use the correct factory method to construct a builder. */
     private Builder() {}
 
     public Builder setNumber(String number) {
-      mBuilderNumber = number;
+      builderNumber = number;
       return this;
     }
 
     public Builder setTimestamp(long timestamp) {
-      mBuilderTimestamp = timestamp;
+      builderTimestamp = timestamp;
       return this;
     }
 
     public Builder setPhoneAccount(PhoneAccountHandle phoneAccount) {
-      mBuilderPhoneAccount = phoneAccount;
+      builderPhoneAccount = phoneAccount;
       return this;
     }
 
     public Builder setId(long id) {
-      mBuilderId = id;
+      builderId = id;
       return this;
     }
 
     public Builder setDuration(long duration) {
-      mBuilderDuration = duration;
+      builderDuration = duration;
       return this;
     }
 
     public Builder setSourcePackage(String sourcePackage) {
-      mBuilderSourcePackage = sourcePackage;
+      builderSourcePackage = sourcePackage;
       return this;
     }
 
     public Builder setSourceData(String sourceData) {
-      mBuilderSourceData = sourceData;
+      builderSourceData = sourceData;
       return this;
     }
 
     public Builder setUri(Uri uri) {
-      mBuilderUri = uri;
+      builderUri = uri;
       return this;
     }
 
     public Builder setIsRead(boolean isRead) {
-      mBuilderIsRead = isRead;
+      builderIsRead = isRead;
       return this;
     }
 
     public Builder setHasContent(boolean hasContent) {
-      mBuilderHasContent = hasContent;
+      builderHasContent = hasContent;
       return this;
     }
 
     public Builder setTranscription(String transcription) {
-      mBuilderTranscription = transcription;
+      builderTranscription = transcription;
       return this;
     }
 
     public Voicemail build() {
-      mBuilderId = mBuilderId == null ? -1 : mBuilderId;
-      mBuilderTimestamp = mBuilderTimestamp == null ? 0 : mBuilderTimestamp;
-      mBuilderDuration = mBuilderDuration == null ? 0 : mBuilderDuration;
-      mBuilderIsRead = mBuilderIsRead == null ? false : mBuilderIsRead;
+      builderId = builderId == null ? -1 : builderId;
+      builderTimestamp = builderTimestamp == null ? 0 : builderTimestamp;
+      builderDuration = builderDuration == null ? 0 : builderDuration;
+      builderIsRead = builderIsRead == null ? false : builderIsRead;
       return new Voicemail(
-          mBuilderTimestamp,
-          mBuilderNumber,
-          mBuilderPhoneAccount,
-          mBuilderId,
-          mBuilderDuration,
-          mBuilderSourcePackage,
-          mBuilderSourceData,
-          mBuilderUri,
-          mBuilderIsRead,
-          mBuilderHasContent,
-          mBuilderTranscription);
+          builderTimestamp,
+          builderNumber,
+          builderPhoneAccount,
+          builderId,
+          builderDuration,
+          builderSourcePackage,
+          builderSourceData,
+          builderUri,
+          builderIsRead,
+          builderHasContent,
+          builderTranscription);
     }
   }
 
@@ -187,27 +187,27 @@ public class Voicemail implements Parcelable {
    * none is specified, we return -1.
    */
   public long getId() {
-    return mId;
+    return id;
   }
 
   /** The number of the person leaving the voicemail, empty string if unknown, null if not set. */
   public String getNumber() {
-    return mNumber;
+    return number;
   }
 
   /** The phone account associated with the voicemail, null if not set. */
   public PhoneAccountHandle getPhoneAccount() {
-    return mPhoneAccount;
+    return phoneAccount;
   }
 
   /** The timestamp the voicemail was received, in millis since the epoch, zero if not set. */
   public long getTimestampMillis() {
-    return mTimestamp;
+    return timestamp;
   }
 
   /** Gets the duration of the voicemail in millis, or zero if the field is not set. */
   public long getDuration() {
-    return mDuration;
+    return duration;
   }
 
   /**
@@ -215,7 +215,7 @@ public class Voicemail implements Parcelable {
    * set.
    */
   public String getSourcePackage() {
-    return mSource;
+    return source;
   }
 
   /**
@@ -227,7 +227,7 @@ public class Voicemail implements Parcelable {
    * server-generated identifying string.
    */
   public String getSourceData() {
-    return mProviderData;
+    return providerData;
   }
 
   /**
@@ -236,7 +236,7 @@ public class Voicemail implements Parcelable {
    * <p>Returns null if we don't know the Uri.
    */
   public Uri getUri() {
-    return mUri;
+    return uri;
   }
 
   /**
@@ -245,17 +245,17 @@ public class Voicemail implements Parcelable {
    * <p>Always returns false if this field has not been set, i.e. if hasRead() returns false.
    */
   public boolean isRead() {
-    return mIsRead;
+    return isRead;
   }
 
   /** Tells us if there is content stored at the Uri. */
   public boolean hasContent() {
-    return mHasContent;
+    return hasContent;
   }
 
   /** Returns the text transcription of this voicemail, or null if this field is not set. */
   public String getTranscription() {
-    return mTranscription;
+    return transcription;
   }
 
   @Override
@@ -265,35 +265,35 @@ public class Voicemail implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(mTimestamp);
-    writeCharSequence(dest, mNumber);
-    if (mPhoneAccount == null) {
+    dest.writeLong(timestamp);
+    writeCharSequence(dest, number);
+    if (phoneAccount == null) {
       dest.writeInt(0);
     } else {
       dest.writeInt(1);
-      mPhoneAccount.writeToParcel(dest, flags);
+      phoneAccount.writeToParcel(dest, flags);
     }
-    dest.writeLong(mId);
-    dest.writeLong(mDuration);
-    writeCharSequence(dest, mSource);
-    writeCharSequence(dest, mProviderData);
-    if (mUri == null) {
+    dest.writeLong(id);
+    dest.writeLong(duration);
+    writeCharSequence(dest, source);
+    writeCharSequence(dest, providerData);
+    if (uri == null) {
       dest.writeInt(0);
     } else {
       dest.writeInt(1);
-      mUri.writeToParcel(dest, flags);
+      uri.writeToParcel(dest, flags);
     }
-    if (mIsRead) {
-      dest.writeInt(1);
-    } else {
-      dest.writeInt(0);
-    }
-    if (mHasContent) {
+    if (isRead) {
       dest.writeInt(1);
     } else {
       dest.writeInt(0);
     }
-    writeCharSequence(dest, mTranscription);
+    if (hasContent) {
+      dest.writeInt(1);
+    } else {
+      dest.writeInt(0);
+    }
+    writeCharSequence(dest, transcription);
   }
 
   public static final Creator<Voicemail> CREATOR =
@@ -310,25 +310,25 @@ public class Voicemail implements Parcelable {
       };
 
   private Voicemail(Parcel in) {
-    mTimestamp = in.readLong();
-    mNumber = (String) readCharSequence(in);
+    timestamp = in.readLong();
+    number = (String) readCharSequence(in);
     if (in.readInt() > 0) {
-      mPhoneAccount = PhoneAccountHandle.CREATOR.createFromParcel(in);
+      phoneAccount = PhoneAccountHandle.CREATOR.createFromParcel(in);
     } else {
-      mPhoneAccount = null;
+      phoneAccount = null;
     }
-    mId = in.readLong();
-    mDuration = in.readLong();
-    mSource = (String) readCharSequence(in);
-    mProviderData = (String) readCharSequence(in);
+    id = in.readLong();
+    duration = in.readLong();
+    source = (String) readCharSequence(in);
+    providerData = (String) readCharSequence(in);
     if (in.readInt() > 0) {
-      mUri = Uri.CREATOR.createFromParcel(in);
+      uri = Uri.CREATOR.createFromParcel(in);
     } else {
-      mUri = null;
+      uri = null;
     }
-    mIsRead = in.readInt() > 0 ? true : false;
-    mHasContent = in.readInt() > 0 ? true : false;
-    mTranscription = (String) readCharSequence(in);
+    isRead = in.readInt() > 0 ? true : false;
+    hasContent = in.readInt() > 0 ? true : false;
+    transcription = (String) readCharSequence(in);
   }
 
   private static CharSequence readCharSequence(Parcel in) {

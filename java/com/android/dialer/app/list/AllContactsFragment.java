@@ -56,13 +56,13 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
   private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
-  private EmptyContentView mEmptyListView;
+  private EmptyContentView emptyListView;
 
   /**
    * Listen to broadcast events about permissions in order to be notified if the READ_CONTACTS
    * permission is granted via the UI in another fragment.
    */
-  private BroadcastReceiver mReadContactsPermissionGrantedReceiver =
+  private BroadcastReceiver readContactsPermissionGrantedReceiver =
       new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -83,25 +83,25 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
   public void onViewCreated(View view, android.os.Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
-    mEmptyListView.setImage(R.drawable.empty_contacts);
-    mEmptyListView.setDescription(R.string.all_contacts_empty);
-    mEmptyListView.setActionClickedListener(this);
-    getListView().setEmptyView(mEmptyListView);
-    mEmptyListView.setVisibility(View.GONE);
+    emptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
+    emptyListView.setImage(R.drawable.empty_contacts);
+    emptyListView.setDescription(R.string.all_contacts_empty);
+    emptyListView.setActionClickedListener(this);
+    getListView().setEmptyView(emptyListView);
+    emptyListView.setVisibility(View.GONE);
   }
 
   @Override
   public void onStart() {
     super.onStart();
     PermissionsUtil.registerPermissionReceiver(
-        getActivity(), mReadContactsPermissionGrantedReceiver, READ_CONTACTS);
+        getActivity(), readContactsPermissionGrantedReceiver, READ_CONTACTS);
   }
 
   @Override
   public void onStop() {
     PermissionsUtil.unregisterPermissionReceiver(
-        getActivity(), mReadContactsPermissionGrantedReceiver);
+        getActivity(), readContactsPermissionGrantedReceiver);
     super.onStop();
   }
 
@@ -109,12 +109,12 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
   protected void startLoading() {
     if (PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
       super.startLoading();
-      mEmptyListView.setDescription(R.string.all_contacts_empty);
-      mEmptyListView.setActionLabel(R.string.all_contacts_empty_add_contact_action);
+      emptyListView.setDescription(R.string.all_contacts_empty);
+      emptyListView.setActionLabel(R.string.all_contacts_empty_add_contact_action);
     } else {
-      mEmptyListView.setDescription(R.string.permission_no_contacts);
-      mEmptyListView.setActionLabel(R.string.permission_single_turn_on);
-      mEmptyListView.setVisibility(View.VISIBLE);
+      emptyListView.setDescription(R.string.permission_no_contacts);
+      emptyListView.setActionLabel(R.string.permission_single_turn_on);
+      emptyListView.setVisibility(View.VISIBLE);
     }
   }
 
@@ -123,7 +123,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     super.onLoadFinished(loader, data);
 
     if (data == null || data.getCount() == 0) {
-      mEmptyListView.setVisibility(View.VISIBLE);
+      emptyListView.setVisibility(View.VISIBLE);
     }
   }
 

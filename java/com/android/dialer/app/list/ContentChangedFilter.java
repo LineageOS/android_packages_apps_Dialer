@@ -29,12 +29,12 @@ import android.view.accessibility.AccessibilityEvent;
  */
 public class ContentChangedFilter extends AccessibilityDelegate {
 
-  //the view we don't want TYPE_WINDOW_CONTENT_CHANGED to fire.
-  private View mView;
+  // the view we don't want TYPE_WINDOW_CONTENT_CHANGED to fire.
+  private View view;
 
   private ContentChangedFilter(View view) {
     super();
-    mView = view;
+    this.view = view;
   }
 
   /** Add this delegate to the parent of @param view to filter out TYPE_WINDOW_CONTENT_CHANGED */
@@ -46,7 +46,7 @@ public class ContentChangedFilter extends AccessibilityDelegate {
   @Override
   public boolean onRequestSendAccessibilityEvent(
       ViewGroup host, View child, AccessibilityEvent event) {
-    if (child == mView) {
+    if (child == view) {
       if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
         return false;
       }

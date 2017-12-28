@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Google Inc. All Rights Reserved.
+ * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ import com.android.voicemail.impl.OmtpConstants;
 
 /** A implementation of the OmtpMessageSender using the standard OMTP sms protocol. */
 public class OmtpStandardMessageSender extends OmtpMessageSender {
-  private final String mClientType;
-  private final String mProtocolVersion;
-  private final String mClientPrefix;
+  private final String clientType;
+  private final String protocolVersion;
+  private final String clientPrefix;
 
   /**
    * Creates a new instance of OmtpStandardMessageSender.
@@ -49,9 +49,9 @@ public class OmtpStandardMessageSender extends OmtpMessageSender {
       String protocolVersion,
       String clientPrefix) {
     super(context, phoneAccountHandle, applicationPort, destinationNumber);
-    mClientType = clientType;
-    mProtocolVersion = protocolVersion;
-    mClientPrefix = clientPrefix;
+    this.clientType = clientType;
+    this.protocolVersion = protocolVersion;
+    this.clientPrefix = clientPrefix;
   }
 
   // Activate message:
@@ -63,8 +63,8 @@ public class OmtpStandardMessageSender extends OmtpMessageSender {
     StringBuilder sb = new StringBuilder().append(OmtpConstants.ACTIVATE_REQUEST);
 
     appendProtocolVersionAndClientType(sb);
-    if (TextUtils.equals(mProtocolVersion, OmtpConstants.PROTOCOL_VERSION1_2)
-        || TextUtils.equals(mProtocolVersion, OmtpConstants.PROTOCOL_VERSION1_3)) {
+    if (TextUtils.equals(protocolVersion, OmtpConstants.PROTOCOL_VERSION1_2)
+        || TextUtils.equals(protocolVersion, OmtpConstants.PROTOCOL_VERSION1_3)) {
       appendApplicationPort(sb);
       appendClientPrefix(sb);
     }
@@ -92,7 +92,7 @@ public class OmtpStandardMessageSender extends OmtpMessageSender {
   public void requestVvmStatus(@Nullable PendingIntent sentIntent) {
     StringBuilder sb = new StringBuilder().append(OmtpConstants.STATUS_REQUEST);
 
-    if (TextUtils.equals(mProtocolVersion, OmtpConstants.PROTOCOL_VERSION1_3)) {
+    if (TextUtils.equals(protocolVersion, OmtpConstants.PROTOCOL_VERSION1_3)) {
       appendProtocolVersionAndClientType(sb);
       appendApplicationPort(sb);
       appendClientPrefix(sb);
@@ -103,18 +103,18 @@ public class OmtpStandardMessageSender extends OmtpMessageSender {
 
   private void appendProtocolVersionAndClientType(StringBuilder sb) {
     sb.append(OmtpConstants.SMS_PREFIX_SEPARATOR);
-    appendField(sb, OmtpConstants.PROTOCOL_VERSION, mProtocolVersion);
+    appendField(sb, OmtpConstants.PROTOCOL_VERSION, protocolVersion);
     sb.append(OmtpConstants.SMS_FIELD_SEPARATOR);
-    appendField(sb, OmtpConstants.CLIENT_TYPE, mClientType);
+    appendField(sb, OmtpConstants.CLIENT_TYPE, clientType);
   }
 
   private void appendApplicationPort(StringBuilder sb) {
     sb.append(OmtpConstants.SMS_FIELD_SEPARATOR);
-    appendField(sb, OmtpConstants.APPLICATION_PORT, mApplicationPort);
+    appendField(sb, OmtpConstants.APPLICATION_PORT, applicationPort);
   }
 
   private void appendClientPrefix(StringBuilder sb) {
     sb.append(OmtpConstants.SMS_FIELD_SEPARATOR);
-    sb.append(mClientPrefix);
+    sb.append(clientPrefix);
   }
 }

@@ -27,21 +27,21 @@ import java.util.concurrent.ConcurrentHashMap;
 /** Used to track which camera is used for outgoing video. */
 public class InCallCameraManager {
 
-  private final Set<Listener> mCameraSelectionListeners =
+  private final Set<Listener> cameraSelectionListeners =
       Collections.newSetFromMap(new ConcurrentHashMap<Listener, Boolean>(8, 0.9f, 1));
   /** The camera ID for the front facing camera. */
-  private String mFrontFacingCameraId;
+  private String frontFacingCameraId;
   /** The camera ID for the rear facing camera. */
-  private String mRearFacingCameraId;
+  private String rearFacingCameraId;
   /** The currently active camera. */
-  private boolean mUseFrontFacingCamera;
+  private boolean useFrontFacingCamera;
   /**
    * Indicates whether the list of cameras has been initialized yet. Initialization is delayed until
    * a video call is present.
    */
-  private boolean mIsInitialized = false;
+  private boolean isInitialized = false;
   /** The context. */
-  private Context mContext;
+  private Context context;
 
   /**
    * Initializes the InCall CameraManager.
@@ -49,8 +49,8 @@ public class InCallCameraManager {
    * @param context The current context.
    */
   public InCallCameraManager(Context context) {
-    mUseFrontFacingCamera = true;
-    mContext = context;
+    useFrontFacingCamera = true;
+    this.context = context;
   }
 
   /**
@@ -59,9 +59,9 @@ public class InCallCameraManager {
    * @param useFrontFacingCamera {@code True} if the front facing camera is to be used.
    */
   public void setUseFrontFacingCamera(boolean useFrontFacingCamera) {
-    mUseFrontFacingCamera = useFrontFacingCamera;
-    for (Listener listener : mCameraSelectionListeners) {
-      listener.onActiveCameraSelectionChanged(mUseFrontFacingCamera);
+    this.useFrontFacingCamera = useFrontFacingCamera;
+    for (Listener listener : cameraSelectionListeners) {
+      listener.onActiveCameraSelectionChanged(this.useFrontFacingCamera);
     }
   }
 
@@ -71,7 +71,7 @@ public class InCallCameraManager {
    * @return {@code True} if the front facing camera is in use.
    */
   public boolean isUsingFrontFacingCamera() {
-    return mUseFrontFacingCamera;
+    return useFrontFacingCamera;
   }
 
   /**
@@ -80,18 +80,18 @@ public class InCallCameraManager {
    * @return The active camera ID.
    */
   public String getActiveCameraId() {
-    maybeInitializeCameraList(mContext);
+    maybeInitializeCameraList(context);
 
-    if (mUseFrontFacingCamera) {
-      return mFrontFacingCameraId;
+    if (useFrontFacingCamera) {
+      return frontFacingCameraId;
     } else {
-      return mRearFacingCameraId;
+      return rearFacingCameraId;
     }
   }
 
   /** Calls when camera permission is granted by user. */
   public void onCameraPermissionGranted() {
-    for (Listener listener : mCameraSelectionListeners) {
+    for (Listener listener : cameraSelectionListeners) {
       listener.onCameraPermissionGranted();
     }
   }
@@ -102,7 +102,7 @@ public class InCallCameraManager {
    * @param context The context.
    */
   private void maybeInitializeCameraList(Context context) {
-    if (mIsInitialized || context == null) {
+    if (isInitialized || context == null) {
       return;
     }
 
@@ -141,26 +141,26 @@ public class InCallCameraManager {
       if (c != null) {
         int facingCharacteristic = c.get(CameraCharacteristics.LENS_FACING);
         if (facingCharacteristic == CameraCharacteristics.LENS_FACING_FRONT) {
-          mFrontFacingCameraId = cameraIds[i];
+          frontFacingCameraId = cameraIds[i];
         } else if (facingCharacteristic == CameraCharacteristics.LENS_FACING_BACK) {
-          mRearFacingCameraId = cameraIds[i];
+          rearFacingCameraId = cameraIds[i];
         }
       }
     }
 
-    mIsInitialized = true;
+    isInitialized = true;
     Log.v(this, "initializeCameraList : done");
   }
 
   public void addCameraSelectionListener(Listener listener) {
     if (listener != null) {
-      mCameraSelectionListeners.add(listener);
+      cameraSelectionListeners.add(listener);
     }
   }
 
   public void removeCameraSelectionListener(Listener listener) {
     if (listener != null) {
-      mCameraSelectionListeners.remove(listener);
+      cameraSelectionListeners.remove(listener);
     }
   }
 
