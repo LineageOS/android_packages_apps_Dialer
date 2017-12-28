@@ -25,40 +25,40 @@ import java.io.InputStream;
  * will still return the peeked byte.
  */
 public class PeekableInputStream extends InputStream {
-  private final InputStream mIn;
-  private boolean mPeeked;
-  private int mPeekedByte;
+  private final InputStream in;
+  private boolean peeked;
+  private int peekedByte;
 
   public PeekableInputStream(InputStream in) {
-    this.mIn = in;
+    this.in = in;
   }
 
   @Override
   public int read() throws IOException {
-    if (!mPeeked) {
-      return mIn.read();
+    if (!peeked) {
+      return in.read();
     } else {
-      mPeeked = false;
-      return mPeekedByte;
+      peeked = false;
+      return peekedByte;
     }
   }
 
   public int peek() throws IOException {
-    if (!mPeeked) {
-      mPeekedByte = read();
-      mPeeked = true;
+    if (!peeked) {
+      peekedByte = read();
+      peeked = true;
     }
-    return mPeekedByte;
+    return peekedByte;
   }
 
   @Override
   public int read(byte[] b, int offset, int length) throws IOException {
-    if (!mPeeked) {
-      return mIn.read(b, offset, length);
+    if (!peeked) {
+      return in.read(b, offset, length);
     } else {
-      b[0] = (byte) mPeekedByte;
-      mPeeked = false;
-      int r = mIn.read(b, offset + 1, length - 1);
+      b[0] = (byte) peekedByte;
+      peeked = false;
+      int r = in.read(b, offset + 1, length - 1);
       if (r == -1) {
         return 1;
       } else {
@@ -75,7 +75,6 @@ public class PeekableInputStream extends InputStream {
   @Override
   public String toString() {
     return String.format(
-        "PeekableInputStream(in=%s, peeked=%b, peekedByte=%d)",
-        mIn.toString(), mPeeked, mPeekedByte);
+        "PeekableInputStream(in=%s, peeked=%b, peekedByte=%d)", in.toString(), peeked, peekedByte);
   }
 }

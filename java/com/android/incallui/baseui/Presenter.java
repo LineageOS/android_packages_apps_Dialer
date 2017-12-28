@@ -21,7 +21,7 @@ import android.os.Bundle;
 /** Base class for Presenters. */
 public abstract class Presenter<U extends Ui> {
 
-  private U mUi;
+  private U ui;
 
   /**
    * Called after the UI view has been created. That is when fragment.onViewCreated() is called.
@@ -29,13 +29,13 @@ public abstract class Presenter<U extends Ui> {
    * @param ui The Ui implementation that is now ready to be used.
    */
   public void onUiReady(U ui) {
-    mUi = ui;
+    this.ui = ui;
   }
 
   /** Called when the UI view is destroyed in Fragment.onDestroyView(). */
   public final void onUiDestroy(U ui) {
     onUiUnready(ui);
-    mUi = null;
+    this.ui = null;
   }
 
   /**
@@ -49,6 +49,6 @@ public abstract class Presenter<U extends Ui> {
   public void onRestoreInstanceState(Bundle savedInstanceState) {}
 
   public U getUi() {
-    return mUi;
+    return ui;
   }
 }

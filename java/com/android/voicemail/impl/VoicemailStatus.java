@@ -32,15 +32,15 @@ public class VoicemailStatus {
 
   public static class Editor {
 
-    private final Context mContext;
-    @Nullable private final PhoneAccountHandle mPhoneAccountHandle;
+    private final Context context;
+    @Nullable private final PhoneAccountHandle phoneAccountHandle;
 
-    private ContentValues mValues = new ContentValues();
+    private ContentValues values = new ContentValues();
 
     private Editor(Context context, PhoneAccountHandle phoneAccountHandle) {
-      mContext = context;
-      mPhoneAccountHandle = phoneAccountHandle;
-      if (mPhoneAccountHandle == null) {
+      this.context = context;
+      this.phoneAccountHandle = phoneAccountHandle;
+      if (this.phoneAccountHandle == null) {
         VvmLog.w(
             TAG,
             "VoicemailStatus.Editor created with null phone account, status will"
@@ -50,26 +50,26 @@ public class VoicemailStatus {
 
     @Nullable
     public PhoneAccountHandle getPhoneAccountHandle() {
-      return mPhoneAccountHandle;
+      return phoneAccountHandle;
     }
 
     public Editor setType(String type) {
-      mValues.put(Status.SOURCE_TYPE, type);
+      values.put(Status.SOURCE_TYPE, type);
       return this;
     }
 
     public Editor setConfigurationState(int configurationState) {
-      mValues.put(Status.CONFIGURATION_STATE, configurationState);
+      values.put(Status.CONFIGURATION_STATE, configurationState);
       return this;
     }
 
     public Editor setDataChannelState(int dataChannelState) {
-      mValues.put(Status.DATA_CHANNEL_STATE, dataChannelState);
+      values.put(Status.DATA_CHANNEL_STATE, dataChannelState);
       return this;
     }
 
     public Editor setNotificationChannelState(int notificationChannelState) {
-      mValues.put(Status.NOTIFICATION_CHANNEL_STATE, notificationChannelState);
+      values.put(Status.NOTIFICATION_CHANNEL_STATE, notificationChannelState);
       return this;
     }
 
@@ -79,8 +79,8 @@ public class VoicemailStatus {
         return this;
       }
 
-      mValues.put(Status.QUOTA_OCCUPIED, occupied);
-      mValues.put(Status.QUOTA_TOTAL, total);
+      values.put(Status.QUOTA_OCCUPIED, occupied);
+      values.put(Status.QUOTA_TOTAL, total);
       return this;
     }
 
@@ -90,28 +90,28 @@ public class VoicemailStatus {
      * @return {@code true} if the changes were successfully applied, {@code false} otherwise.
      */
     public boolean apply() {
-      if (mPhoneAccountHandle == null) {
+      if (phoneAccountHandle == null) {
         return false;
       }
-      mValues.put(
+      values.put(
           Status.PHONE_ACCOUNT_COMPONENT_NAME,
-          mPhoneAccountHandle.getComponentName().flattenToString());
-      mValues.put(Status.PHONE_ACCOUNT_ID, mPhoneAccountHandle.getId());
-      ContentResolver contentResolver = mContext.getContentResolver();
-      Uri statusUri = VoicemailContract.Status.buildSourceUri(mContext.getPackageName());
+          phoneAccountHandle.getComponentName().flattenToString());
+      values.put(Status.PHONE_ACCOUNT_ID, phoneAccountHandle.getId());
+      ContentResolver contentResolver = context.getContentResolver();
+      Uri statusUri = VoicemailContract.Status.buildSourceUri(context.getPackageName());
       try {
-        StrictModeUtils.bypass(() -> contentResolver.insert(statusUri, mValues));
+        StrictModeUtils.bypass(() -> contentResolver.insert(statusUri, values));
       } catch (IllegalArgumentException iae) {
         VvmLog.e(TAG, "apply :: failed to insert content resolver ", iae);
-        mValues.clear();
+        values.clear();
         return false;
       }
-      mValues.clear();
+      values.clear();
       return true;
     }
 
     public ContentValues getValues() {
-      return mValues;
+      return values;
     }
   }
 

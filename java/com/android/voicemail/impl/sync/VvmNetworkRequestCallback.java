@@ -48,37 +48,37 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   public static final String NETWORK_REQUEST_FAILED_TIMEOUT = "timeout";
   public static final String NETWORK_REQUEST_FAILED_LOST = "lost";
 
-  protected Context mContext;
-  protected PhoneAccountHandle mPhoneAccount;
-  protected NetworkRequest mNetworkRequest;
-  private ConnectivityManager mConnectivityManager;
-  private final OmtpVvmCarrierConfigHelper mCarrierConfigHelper;
-  private final VoicemailStatus.Editor mStatus;
-  private boolean mRequestSent = false;
-  private boolean mResultReceived = false;
+  protected Context context;
+  protected PhoneAccountHandle phoneAccount;
+  protected NetworkRequest networkRequest;
+  private ConnectivityManager connectivityManager;
+  private final OmtpVvmCarrierConfigHelper carrierConfigHelper;
+  private final VoicemailStatus.Editor status;
+  private boolean requestSent = false;
+  private boolean resultReceived = false;
 
   public VvmNetworkRequestCallback(
       Context context, PhoneAccountHandle phoneAccount, VoicemailStatus.Editor status) {
-    mContext = context;
-    mPhoneAccount = phoneAccount;
-    mStatus = status;
-    mCarrierConfigHelper = new OmtpVvmCarrierConfigHelper(context, mPhoneAccount);
-    mNetworkRequest = createNetworkRequest();
+    this.context = context;
+    this.phoneAccount = phoneAccount;
+    this.status = status;
+    carrierConfigHelper = new OmtpVvmCarrierConfigHelper(context, this.phoneAccount);
+    networkRequest = createNetworkRequest();
   }
 
   public VvmNetworkRequestCallback(
       OmtpVvmCarrierConfigHelper config,
       PhoneAccountHandle phoneAccount,
       VoicemailStatus.Editor status) {
-    mContext = config.getContext();
-    mPhoneAccount = phoneAccount;
-    mStatus = status;
-    mCarrierConfigHelper = config;
-    mNetworkRequest = createNetworkRequest();
+    context = config.getContext();
+    this.phoneAccount = phoneAccount;
+    this.status = status;
+    carrierConfigHelper = config;
+    networkRequest = createNetworkRequest();
   }
 
   public VoicemailStatus.Editor getVoicemailStatusEditor() {
-    return mStatus;
+    return status;
   }
 
   /**
@@ -91,12 +91,10 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
         new NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
 
     TelephonyManager telephonyManager =
-        mContext
-            .getSystemService(TelephonyManager.class)
-            .createForPhoneAccountHandle(mPhoneAccount);
+        context.getSystemService(TelephonyManager.class).createForPhoneAccountHandle(phoneAccount);
     // At this point mPhoneAccount should always be valid and telephonyManager will never be null
     Assert.isNotNull(telephonyManager);
-    if (mCarrierConfigHelper.isCellularDataRequired()) {
+    if (carrierConfigHelper.isCellularDataRequired()) {
       VvmLog.d(TAG, "Transport type: CELLULAR");
       builder
           .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
@@ -108,14 +106,14 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   }
 
   public NetworkRequest getNetworkRequest() {
-    return mNetworkRequest;
+    return networkRequest;
   }
 
   @Override
   @CallSuper
   public void onLost(Network network) {
     VvmLog.d(TAG, "onLost");
-    mResultReceived = true;
+    resultReceived = true;
     onFailed(NETWORK_REQUEST_FAILED_LOST);
   }
 
@@ -123,22 +121,22 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   @CallSuper
   public void onAvailable(Network network) {
     super.onAvailable(network);
-    mResultReceived = true;
+    resultReceived = true;
   }
 
   @CallSuper
   public void onUnavailable() {
     // TODO(twyen): a bug this is hidden, do we really need this?
-    mResultReceived = true;
+    resultReceived = true;
     onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
   }
 
   public void requestNetwork() {
-    if (mRequestSent == true) {
+    if (requestSent == true) {
       VvmLog.e(TAG, "requestNetwork() called twice");
       return;
     }
-    mRequestSent = true;
+    requestSent = true;
     getConnectivityManager().requestNetwork(getNetworkRequest(), this);
     /**
      * Somehow requestNetwork() with timeout doesn't work, and it's a hidden method. Implement our
@@ -149,7 +147,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
         new Runnable() {
           @Override
           public void run() {
-            if (mResultReceived == false) {
+            if (resultReceived == false) {
               onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
             }
           }
@@ -163,20 +161,20 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   }
 
   public ConnectivityManager getConnectivityManager() {
-    if (mConnectivityManager == null) {
-      mConnectivityManager =
-          (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+    if (connectivityManager == null) {
+      connectivityManager =
+          (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
-    return mConnectivityManager;
+    return connectivityManager;
   }
 
   @CallSuper
   public void onFailed(String reason) {
     VvmLog.d(TAG, "onFailed: " + reason);
-    if (mCarrierConfigHelper.isCellularDataRequired()) {
-      mCarrierConfigHelper.handleEvent(mStatus, OmtpEvents.DATA_NO_CONNECTION_CELLULAR_REQUIRED);
+    if (carrierConfigHelper.isCellularDataRequired()) {
+      carrierConfigHelper.handleEvent(status, OmtpEvents.DATA_NO_CONNECTION_CELLULAR_REQUIRED);
     } else {
-      mCarrierConfigHelper.handleEvent(mStatus, OmtpEvents.DATA_NO_CONNECTION);
+      carrierConfigHelper.handleEvent(status, OmtpEvents.DATA_NO_CONNECTION);
     }
     releaseNetwork();
   }

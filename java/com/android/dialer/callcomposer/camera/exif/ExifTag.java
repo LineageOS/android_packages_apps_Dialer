@@ -81,19 +81,19 @@ public class ExifTag {
   static final int SIZE_UNDEFINED = 0;
 
   // Exif TagId
-  private final short mTagId;
+  private final short tagId;
   // Exif Tag Type
-  private final short mDataType;
+  private final short dataType;
   // If tag has defined count
-  private boolean mHasDefinedDefaultComponentCount;
+  private boolean hasDefinedDefaultComponentCount;
   // Actual data count in tag (should be number of elements in value array)
-  private int mComponentCountActual;
+  private int componentCountActual;
   // The ifd that this tag should be put in
-  private int mIfd;
+  private int ifd;
   // The value (array of elements of type Tag Type)
-  private Object mValue;
+  private Object value;
   // Value offset in exif header.
-  private int mOffset;
+  private int offset;
 
   /** Returns true if the given IFD is a valid IFD. */
   static boolean isValidIfd(int ifdId) {
@@ -118,12 +118,12 @@ public class ExifTag {
 
   // Use builtTag in ExifInterface instead of constructor.
   ExifTag(short tagId, short type, int componentCount, int ifd, boolean hasDefinedComponentCount) {
-    mTagId = tagId;
-    mDataType = type;
-    mComponentCountActual = componentCount;
-    mHasDefinedDefaultComponentCount = hasDefinedComponentCount;
-    mIfd = ifd;
-    mValue = null;
+    this.tagId = tagId;
+    dataType = type;
+    componentCountActual = componentCount;
+    hasDefinedDefaultComponentCount = hasDefinedComponentCount;
+    this.ifd = ifd;
+    value = null;
   }
 
   /**
@@ -152,16 +152,16 @@ public class ExifTag {
    * @see IfdId#TYPE_IFD_INTEROPERABILITY
    */
   int getIfd() {
-    return mIfd;
+    return ifd;
   }
 
   void setIfd(int ifdId) {
-    mIfd = ifdId;
+    ifd = ifdId;
   }
 
   /** Gets the TID of this tag. */
   short getTagId() {
-    return mTagId;
+    return tagId;
   }
 
   /**
@@ -177,7 +177,7 @@ public class ExifTag {
    * @see #TYPE_UNSIGNED_SHORT
    */
   short getDataType() {
-    return mDataType;
+    return dataType;
   }
 
   /** Gets the total data size in bytes of the value of this tag. */
@@ -189,7 +189,7 @@ public class ExifTag {
 
   // TODO(blemmon): fix integer overflows with this
   int getComponentCount() {
-    return mComponentCountActual;
+    return componentCountActual;
   }
 
   /**
@@ -197,7 +197,7 @@ public class ExifTag {
    * value does not match the component count.
    */
   void forceSetComponentCount(int count) {
-    mComponentCountActual = count;
+    componentCountActual = count;
   }
 
   /**
@@ -205,7 +205,7 @@ public class ExifTag {
    * that is determined when the tag is written.
    */
   boolean hasValue() {
-    return mValue != null;
+    return value != null;
   }
 
   /**
@@ -223,14 +223,14 @@ public class ExifTag {
     if (checkBadComponentCount(value.length)) {
       return false;
     }
-    if (mDataType != TYPE_UNSIGNED_SHORT
-        && mDataType != TYPE_LONG
-        && mDataType != TYPE_UNSIGNED_LONG) {
+    if (dataType != TYPE_UNSIGNED_SHORT
+        && dataType != TYPE_LONG
+        && dataType != TYPE_UNSIGNED_LONG) {
       return false;
     }
-    if (mDataType == TYPE_UNSIGNED_SHORT && checkOverflowForUnsignedShort(value)) {
+    if (dataType == TYPE_UNSIGNED_SHORT && checkOverflowForUnsignedShort(value)) {
       return false;
-    } else if (mDataType == TYPE_UNSIGNED_LONG && checkOverflowForUnsignedLong(value)) {
+    } else if (dataType == TYPE_UNSIGNED_LONG && checkOverflowForUnsignedLong(value)) {
       return false;
     }
 
@@ -238,8 +238,8 @@ public class ExifTag {
     for (int i = 0; i < value.length; i++) {
       data[i] = value[i];
     }
-    mValue = data;
-    mComponentCountActual = value.length;
+    this.value = data;
+    componentCountActual = value.length;
     return true;
   }
 
@@ -254,14 +254,14 @@ public class ExifTag {
    * </ul>
    */
   boolean setValue(long[] value) {
-    if (checkBadComponentCount(value.length) || mDataType != TYPE_UNSIGNED_LONG) {
+    if (checkBadComponentCount(value.length) || dataType != TYPE_UNSIGNED_LONG) {
       return false;
     }
     if (checkOverflowForUnsignedLong(value)) {
       return false;
     }
-    mValue = value;
-    mComponentCountActual = value.length;
+    this.value = value;
+    componentCountActual = value.length;
     return true;
   }
 
@@ -280,7 +280,7 @@ public class ExifTag {
    * </ul>
    */
   boolean setValue(String value) {
-    if (mDataType != TYPE_ASCII && mDataType != TYPE_UNDEFINED) {
+    if (dataType != TYPE_ASCII && dataType != TYPE_UNDEFINED) {
       return false;
     }
 
@@ -288,18 +288,18 @@ public class ExifTag {
     byte[] finalBuf = buf;
     if (buf.length > 0) {
       finalBuf =
-          (buf[buf.length - 1] == 0 || mDataType == TYPE_UNDEFINED)
+          (buf[buf.length - 1] == 0 || dataType == TYPE_UNDEFINED)
               ? buf
               : Arrays.copyOf(buf, buf.length + 1);
-    } else if (mDataType == TYPE_ASCII && mComponentCountActual == 1) {
+    } else if (dataType == TYPE_ASCII && componentCountActual == 1) {
       finalBuf = new byte[] {0};
     }
     int count = finalBuf.length;
     if (checkBadComponentCount(count)) {
       return false;
     }
-    mComponentCountActual = count;
-    mValue = finalBuf;
+    componentCountActual = count;
+    this.value = finalBuf;
     return true;
   }
 
@@ -320,17 +320,17 @@ public class ExifTag {
     if (checkBadComponentCount(value.length)) {
       return false;
     }
-    if (mDataType != TYPE_UNSIGNED_RATIONAL && mDataType != TYPE_RATIONAL) {
+    if (dataType != TYPE_UNSIGNED_RATIONAL && dataType != TYPE_RATIONAL) {
       return false;
     }
-    if (mDataType == TYPE_UNSIGNED_RATIONAL && checkOverflowForUnsignedRational(value)) {
+    if (dataType == TYPE_UNSIGNED_RATIONAL && checkOverflowForUnsignedRational(value)) {
       return false;
-    } else if (mDataType == TYPE_RATIONAL && checkOverflowForRational(value)) {
+    } else if (dataType == TYPE_RATIONAL && checkOverflowForRational(value)) {
       return false;
     }
 
-    mValue = value;
-    mComponentCountActual = value.length;
+    this.value = value;
+    componentCountActual = value.length;
     return true;
   }
 
@@ -348,12 +348,12 @@ public class ExifTag {
     if (checkBadComponentCount(length)) {
       return false;
     }
-    if (mDataType != TYPE_UNSIGNED_BYTE && mDataType != TYPE_UNDEFINED) {
+    if (dataType != TYPE_UNSIGNED_BYTE && dataType != TYPE_UNDEFINED) {
       return false;
     }
-    mValue = new byte[length];
-    System.arraycopy(value, offset, mValue, 0, length);
-    mComponentCountActual = length;
+    this.value = new byte[length];
+    System.arraycopy(value, offset, this.value, 0, length);
+    componentCountActual = length;
     return true;
   }
 
@@ -370,10 +370,10 @@ public class ExifTag {
    *     be converted to an array of ints.
    */
   int[] getValueAsInts() {
-    if (mValue == null) {
+    if (value == null) {
       return null;
-    } else if (mValue instanceof long[]) {
-      long[] val = (long[]) mValue;
+    } else if (value instanceof long[]) {
+      long[] val = (long[]) value;
       int[] arr = new int[val.length];
       for (int i = 0; i < val.length; i++) {
         arr[i] = (int) val[i]; // Truncates
@@ -385,38 +385,38 @@ public class ExifTag {
 
   /** Gets the tag's value or null if none exists. */
   public Object getValue() {
-    return mValue;
+    return value;
   }
 
   /** Gets a string representation of the value. */
   private String forceGetValueAsString() {
-    if (mValue == null) {
+    if (value == null) {
       return "";
-    } else if (mValue instanceof byte[]) {
-      if (mDataType == TYPE_ASCII) {
-        return new String((byte[]) mValue, US_ASCII);
+    } else if (value instanceof byte[]) {
+      if (dataType == TYPE_ASCII) {
+        return new String((byte[]) value, US_ASCII);
       } else {
-        return Arrays.toString((byte[]) mValue);
+        return Arrays.toString((byte[]) value);
       }
-    } else if (mValue instanceof long[]) {
-      if (((long[]) mValue).length == 1) {
-        return String.valueOf(((long[]) mValue)[0]);
+    } else if (value instanceof long[]) {
+      if (((long[]) value).length == 1) {
+        return String.valueOf(((long[]) value)[0]);
       } else {
-        return Arrays.toString((long[]) mValue);
+        return Arrays.toString((long[]) value);
       }
-    } else if (mValue instanceof Object[]) {
-      if (((Object[]) mValue).length == 1) {
-        Object val = ((Object[]) mValue)[0];
+    } else if (value instanceof Object[]) {
+      if (((Object[]) value).length == 1) {
+        Object val = ((Object[]) value)[0];
         if (val == null) {
           return "";
         } else {
           return val.toString();
         }
       } else {
-        return Arrays.toString((Object[]) mValue);
+        return Arrays.toString((Object[]) value);
       }
     } else {
-      return mValue.toString();
+      return value.toString();
     }
   }
 
@@ -428,13 +428,13 @@ public class ExifTag {
    *     #TYPE_UNSIGNED_RATIONAL}.
    */
   long getValueAt(int index) {
-    if (mValue instanceof long[]) {
-      return ((long[]) mValue)[index];
-    } else if (mValue instanceof byte[]) {
-      return ((byte[]) mValue)[index];
+    if (value instanceof long[]) {
+      return ((long[]) value)[index];
+    } else if (value instanceof byte[]) {
+      return ((byte[]) value)[index];
     }
     throw new IllegalArgumentException(
-        "Cannot get integer value from " + convertTypeToString(mDataType));
+        "Cannot get integer value from " + convertTypeToString(dataType));
   }
 
   /**
@@ -443,11 +443,11 @@ public class ExifTag {
    * @exception IllegalArgumentException If the type is NOT {@link #TYPE_ASCII}.
    */
   protected String getString() {
-    if (mDataType != TYPE_ASCII) {
+    if (dataType != TYPE_ASCII) {
       throw new IllegalArgumentException(
-          "Cannot get ASCII value from " + convertTypeToString(mDataType));
+          "Cannot get ASCII value from " + convertTypeToString(dataType));
     }
-    return new String((byte[]) mValue, US_ASCII);
+    return new String((byte[]) value, US_ASCII);
   }
 
   /**
@@ -455,24 +455,24 @@ public class ExifTag {
    * the location of the actual value.
    */
   protected int getOffset() {
-    return mOffset;
+    return offset;
   }
 
   /** Sets the offset of this tag. */
   protected void setOffset(int offset) {
-    mOffset = offset;
+    this.offset = offset;
   }
 
   void setHasDefinedCount(boolean d) {
-    mHasDefinedDefaultComponentCount = d;
+    hasDefinedDefaultComponentCount = d;
   }
 
   boolean hasDefinedCount() {
-    return mHasDefinedDefaultComponentCount;
+    return hasDefinedDefaultComponentCount;
   }
 
   private boolean checkBadComponentCount(int count) {
-    return mHasDefinedDefaultComponentCount && (mComponentCountActual != count);
+    return hasDefinedDefaultComponentCount && (componentCountActual != count);
   }
 
   private static String convertTypeToString(short type) {
@@ -556,34 +556,34 @@ public class ExifTag {
     }
     if (obj instanceof ExifTag) {
       ExifTag tag = (ExifTag) obj;
-      if (tag.mTagId != this.mTagId
-          || tag.mComponentCountActual != this.mComponentCountActual
-          || tag.mDataType != this.mDataType) {
+      if (tag.tagId != this.tagId
+          || tag.componentCountActual != this.componentCountActual
+          || tag.dataType != this.dataType) {
         return false;
       }
-      if (mValue != null) {
-        if (tag.mValue == null) {
+      if (value != null) {
+        if (tag.value == null) {
           return false;
-        } else if (mValue instanceof long[]) {
-          if (!(tag.mValue instanceof long[])) {
+        } else if (value instanceof long[]) {
+          if (!(tag.value instanceof long[])) {
             return false;
           }
-          return Arrays.equals((long[]) mValue, (long[]) tag.mValue);
-        } else if (mValue instanceof Rational[]) {
-          if (!(tag.mValue instanceof Rational[])) {
+          return Arrays.equals((long[]) value, (long[]) tag.value);
+        } else if (value instanceof Rational[]) {
+          if (!(tag.value instanceof Rational[])) {
             return false;
           }
-          return Arrays.equals((Rational[]) mValue, (Rational[]) tag.mValue);
-        } else if (mValue instanceof byte[]) {
-          if (!(tag.mValue instanceof byte[])) {
+          return Arrays.equals((Rational[]) value, (Rational[]) tag.value);
+        } else if (value instanceof byte[]) {
+          if (!(tag.value instanceof byte[])) {
             return false;
           }
-          return Arrays.equals((byte[]) mValue, (byte[]) tag.mValue);
+          return Arrays.equals((byte[]) value, (byte[]) tag.value);
         } else {
-          return mValue.equals(tag.mValue);
+          return value.equals(tag.value);
         }
       } else {
-        return tag.mValue == null;
+        return tag.value == null;
       }
     }
     return false;
@@ -592,26 +592,20 @@ public class ExifTag {
   @Override
   public int hashCode() {
     return Objects.hash(
-        mTagId,
-        mDataType,
-        mHasDefinedDefaultComponentCount,
-        mComponentCountActual,
-        mIfd,
-        mValue,
-        mOffset);
+        tagId, dataType, hasDefinedDefaultComponentCount, componentCountActual, ifd, value, offset);
   }
 
   @Override
   public String toString() {
-    return String.format("tag id: %04X\n", mTagId)
+    return String.format("tag id: %04X\n", tagId)
         + "ifd id: "
-        + mIfd
+        + ifd
         + "\ntype: "
-        + convertTypeToString(mDataType)
+        + convertTypeToString(dataType)
         + "\ncount: "
-        + mComponentCountActual
+        + componentCountActual
         + "\noffset: "
-        + mOffset
+        + offset
         + "\nvalue: "
         + forceGetValueAsString()
         + "\n";

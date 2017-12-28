@@ -35,40 +35,40 @@ public class PseudoEmergencyAnimator {
   private static final int VIBRATE_LENGTH_MILLIS = 200;
   private static final int ITERATION_LENGTH_MILLIS = 1000;
   private static final int ANIMATION_ITERATION_COUNT = 6;
-  private ViewProvider mViewProvider;
-  private ValueAnimator mPseudoEmergencyColorAnimator;
+  private ViewProvider viewProvider;
+  private ValueAnimator pseudoEmergencyColorAnimator;
 
   PseudoEmergencyAnimator(ViewProvider viewProvider) {
-    mViewProvider = viewProvider;
+    this.viewProvider = viewProvider;
   }
 
   public void destroy() {
     end();
-    mViewProvider = null;
+    viewProvider = null;
   }
 
   public void start() {
-    if (mPseudoEmergencyColorAnimator == null) {
+    if (pseudoEmergencyColorAnimator == null) {
       Integer colorFrom = Color.BLUE;
       Integer colorTo = Color.RED;
-      mPseudoEmergencyColorAnimator =
+      pseudoEmergencyColorAnimator =
           ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
 
-      mPseudoEmergencyColorAnimator.addUpdateListener(
+      pseudoEmergencyColorAnimator.addUpdateListener(
           animator -> {
             try {
               int color = (int) animator.getAnimatedValue();
               ColorFilter colorFilter = new LightingColorFilter(Color.BLACK, color);
 
-              if (mViewProvider.getFab() != null) {
-                mViewProvider.getFab().getBackground().setColorFilter(colorFilter);
+              if (viewProvider.getFab() != null) {
+                viewProvider.getFab().getBackground().setColorFilter(colorFilter);
               }
             } catch (Exception e) {
               animator.cancel();
             }
           });
 
-      mPseudoEmergencyColorAnimator.addListener(
+      pseudoEmergencyColorAnimator.addListener(
           new AnimatorListener() {
             @Override
             public void onAnimationCancel(Animator animation) {}
@@ -88,8 +88,8 @@ public class PseudoEmergencyAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
               try {
-                if (mViewProvider.getFab() != null) {
-                  mViewProvider.getFab().getBackground().clearColorFilter();
+                if (viewProvider.getFab() != null) {
+                  viewProvider.getFab().getBackground().clearColorFilter();
                 }
 
                 new Handler()
@@ -108,23 +108,23 @@ public class PseudoEmergencyAnimator {
             }
           });
 
-      mPseudoEmergencyColorAnimator.setDuration(VIBRATE_LENGTH_MILLIS);
-      mPseudoEmergencyColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
-      mPseudoEmergencyColorAnimator.setRepeatCount(ANIMATION_ITERATION_COUNT);
+      pseudoEmergencyColorAnimator.setDuration(VIBRATE_LENGTH_MILLIS);
+      pseudoEmergencyColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+      pseudoEmergencyColorAnimator.setRepeatCount(ANIMATION_ITERATION_COUNT);
     }
-    if (!mPseudoEmergencyColorAnimator.isStarted()) {
-      mPseudoEmergencyColorAnimator.start();
+    if (!pseudoEmergencyColorAnimator.isStarted()) {
+      pseudoEmergencyColorAnimator.start();
     }
   }
 
   public void end() {
-    if (mPseudoEmergencyColorAnimator != null && mPseudoEmergencyColorAnimator.isStarted()) {
-      mPseudoEmergencyColorAnimator.end();
+    if (pseudoEmergencyColorAnimator != null && pseudoEmergencyColorAnimator.isStarted()) {
+      pseudoEmergencyColorAnimator.end();
     }
   }
 
   private void vibrate(long milliseconds) {
-    Context context = mViewProvider.getContext();
+    Context context = viewProvider.getContext();
     if (context != null) {
       Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
       if (vibrator != null) {

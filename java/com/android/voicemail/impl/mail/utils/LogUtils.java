@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2015 The Android Open Source Project
+/*
+ * Copyright (C) 2015 The Android Open Source Project
  *
  * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -46,7 +46,7 @@ public class LogUtils {
    */
   private static final int MAX_ENABLED_LOG_LEVEL = DEBUG;
 
-  private static Boolean sDebugLoggingEnabledForTests = null;
+  private static Boolean debugLoggingEnabledForTests = null;
 
   /** Enable debug logging for unit tests. */
   @VisibleForTesting
@@ -55,7 +55,7 @@ public class LogUtils {
   }
 
   protected static void setDebugLoggingEnabledForTestsInternal(boolean enabled) {
-    sDebugLoggingEnabledForTests = Boolean.valueOf(enabled);
+    debugLoggingEnabledForTests = Boolean.valueOf(enabled);
   }
 
   /** Returns true if the build configuration prevents debug logging. */
@@ -69,8 +69,8 @@ public class LogUtils {
     if (buildPreventsDebugLogging()) {
       return false;
     }
-    if (sDebugLoggingEnabledForTests != null) {
-      return sDebugLoggingEnabledForTests.booleanValue();
+    if (debugLoggingEnabledForTests != null) {
+      return debugLoggingEnabledForTests.booleanValue();
     }
     return Log.isLoggable(tag, Log.DEBUG) || Log.isLoggable(TAG, Log.DEBUG);
   }

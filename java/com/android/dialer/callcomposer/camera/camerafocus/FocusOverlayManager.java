@@ -54,7 +54,7 @@ public class FocusOverlayManager {
   private static final int RESET_TOUCH_FOCUS = 0;
   private static final int RESET_TOUCH_FOCUS_DELAY = 3000;
 
-  private int mState = STATE_IDLE;
+  private int state = STATE_IDLE;
   private static final int STATE_IDLE = 0; // Focus is not active.
   private static final int STATE_FOCUSING = 1; // Focus is in progress.
   // Focus is in progress and the camera should take a picture after focus finishes.
@@ -62,24 +62,24 @@ public class FocusOverlayManager {
   private static final int STATE_SUCCESS = 3; // Focus finishes and succeeds.
   private static final int STATE_FAIL = 4; // Focus finishes and fails.
 
-  private boolean mInitialized;
-  private boolean mFocusAreaSupported;
-  private boolean mMeteringAreaSupported;
-  private boolean mLockAeAwbNeeded;
-  private boolean mAeAwbLock;
-  private Matrix mMatrix;
+  private boolean initialized;
+  private boolean focusAreaSupported;
+  private boolean meteringAreaSupported;
+  private boolean lockAeAwbNeeded;
+  private boolean aeAwbLock;
+  private Matrix matrix;
 
-  private PieRenderer mPieRenderer;
+  private PieRenderer pieRenderer;
 
-  private int mPreviewWidth; // The width of the preview frame layout.
-  private int mPreviewHeight; // The height of the preview frame layout.
-  private boolean mMirror; // true if the camera is front-facing.
-  private List<Area> mFocusArea; // focus area in driver format
-  private List<Area> mMeteringArea; // metering area in driver format
-  private String mFocusMode;
-  private Parameters mParameters;
-  private Handler mHandler;
-  private Listener mListener;
+  private int previewWidth; // The width of the preview frame layout.
+  private int previewHeight; // The height of the preview frame layout.
+  private boolean mirror; // true if the camera is front-facing.
+  private List<Area> focusArea; // focus area in driver format
+  private List<Area> meteringArea; // metering area in driver format
+  private String focusMode;
+  private Parameters parameters;
+  private Handler handler;
+  private Listener listener;
 
   /** Listener used for the focus indicator to communicate back to the camera. */
   public interface Listener {
@@ -110,14 +110,14 @@ public class FocusOverlayManager {
   }
 
   public FocusOverlayManager(Listener listener, Looper looper) {
-    mHandler = new MainHandler(looper);
-    mMatrix = new Matrix();
-    mListener = listener;
+    handler = new MainHandler(looper);
+    matrix = new Matrix();
+    this.listener = listener;
   }
 
   public void setFocusRenderer(PieRenderer renderer) {
-    mPieRenderer = renderer;
-    mInitialized = (mMatrix != null);
+    pieRenderer = renderer;
+    initialized = (matrix != null);
   }
 
   public void setParameters(Parameters parameters) {
@@ -128,182 +128,176 @@ public class FocusOverlayManager {
     if (parameters == null) {
       return;
     }
-    mParameters = parameters;
-    mFocusAreaSupported = isFocusAreaSupported(parameters);
-    mMeteringAreaSupported = isMeteringAreaSupported(parameters);
-    mLockAeAwbNeeded =
-        (isAutoExposureLockSupported(mParameters) || isAutoWhiteBalanceLockSupported(mParameters));
+    this.parameters = parameters;
+    focusAreaSupported = isFocusAreaSupported(parameters);
+    meteringAreaSupported = isMeteringAreaSupported(parameters);
+    lockAeAwbNeeded =
+        (isAutoExposureLockSupported(this.parameters)
+            || isAutoWhiteBalanceLockSupported(this.parameters));
   }
 
   public void setPreviewSize(int previewWidth, int previewHeight) {
-    if (mPreviewWidth != previewWidth || mPreviewHeight != previewHeight) {
-      mPreviewWidth = previewWidth;
-      mPreviewHeight = previewHeight;
+    if (this.previewWidth != previewWidth || this.previewHeight != previewHeight) {
+      this.previewWidth = previewWidth;
+      this.previewHeight = previewHeight;
       setMatrix();
     }
   }
 
   public void setMirror(boolean mirror) {
-    mMirror = mirror;
+    this.mirror = mirror;
     setMatrix();
   }
 
   private void setMatrix() {
-    if (mPreviewWidth != 0 && mPreviewHeight != 0) {
+    if (previewWidth != 0 && previewHeight != 0) {
       Matrix matrix = new Matrix();
-      prepareMatrix(matrix, mMirror, mPreviewWidth, mPreviewHeight);
+      prepareMatrix(matrix, mirror, previewWidth, previewHeight);
       // In face detection, the matrix converts the driver coordinates to UI
       // coordinates. In tap focus, the inverted matrix converts the UI
       // coordinates to driver coordinates.
-      matrix.invert(mMatrix);
-      mInitialized = (mPieRenderer != null);
+      matrix.invert(this.matrix);
+      initialized = (pieRenderer != null);
     }
   }
 
   private void lockAeAwbIfNeeded() {
-    if (mLockAeAwbNeeded && !mAeAwbLock) {
-      mAeAwbLock = true;
-      mListener.setFocusParameters();
+    if (lockAeAwbNeeded && !aeAwbLock) {
+      aeAwbLock = true;
+      listener.setFocusParameters();
     }
   }
 
   public void onAutoFocus(boolean focused, boolean shutterButtonPressed) {
-    if (mState == STATE_FOCUSING_SNAP_ON_FINISH) {
+    if (state == STATE_FOCUSING_SNAP_ON_FINISH) {
       // Take the picture no matter focus succeeds or fails. No need
       // to play the AF sound if we're about to play the shutter
       // sound.
       if (focused) {
-        mState = STATE_SUCCESS;
+        state = STATE_SUCCESS;
       } else {
-        mState = STATE_FAIL;
+        state = STATE_FAIL;
       }
       updateFocusUI();
       capture();
-    } else if (mState == STATE_FOCUSING) {
+    } else if (state == STATE_FOCUSING) {
       // This happens when (1) user is half-pressing the focus key or
       // (2) touch focus is triggered. Play the focus tone. Do not
       // take the picture now.
       if (focused) {
-        mState = STATE_SUCCESS;
+        state = STATE_SUCCESS;
       } else {
-        mState = STATE_FAIL;
+        state = STATE_FAIL;
       }
       updateFocusUI();
       // If this is triggered by touch focus, cancel focus after a
       // while.
-      if (mFocusArea != null) {
-        mHandler.sendEmptyMessageDelayed(RESET_TOUCH_FOCUS, RESET_TOUCH_FOCUS_DELAY);
+      if (focusArea != null) {
+        handler.sendEmptyMessageDelayed(RESET_TOUCH_FOCUS, RESET_TOUCH_FOCUS_DELAY);
       }
       if (shutterButtonPressed) {
         // Lock AE & AWB so users can half-press shutter and recompose.
         lockAeAwbIfNeeded();
       }
-    } else if (mState == STATE_IDLE) {
+    } else if (state == STATE_IDLE) {
       // User has released the focus key before focus completes.
       // Do nothing.
     }
   }
 
   public void onAutoFocusMoving(boolean moving) {
-    if (!mInitialized) {
+    if (!initialized) {
       return;
     }
 
     // Ignore if we have requested autofocus. This method only handles
     // continuous autofocus.
-    if (mState != STATE_IDLE) {
+    if (state != STATE_IDLE) {
       return;
     }
 
     if (moving) {
-      mPieRenderer.showStart();
+      pieRenderer.showStart();
     } else {
-      mPieRenderer.showSuccess(true);
+      pieRenderer.showSuccess(true);
     }
   }
 
   private void initializeFocusAreas(
       int focusWidth, int focusHeight, int x, int y, int previewWidth, int previewHeight) {
-    if (mFocusArea == null) {
-      mFocusArea = new ArrayList<>();
-      mFocusArea.add(new Area(new Rect(), 1));
+    if (focusArea == null) {
+      focusArea = new ArrayList<>();
+      focusArea.add(new Area(new Rect(), 1));
     }
 
     // Convert the coordinates to driver format.
     calculateTapArea(
-        focusWidth, focusHeight, 1f, x, y, previewWidth, previewHeight, mFocusArea.get(0).rect);
+        focusWidth, focusHeight, 1f, x, y, previewWidth, previewHeight, focusArea.get(0).rect);
   }
 
   private void initializeMeteringAreas(
       int focusWidth, int focusHeight, int x, int y, int previewWidth, int previewHeight) {
-    if (mMeteringArea == null) {
-      mMeteringArea = new ArrayList<>();
-      mMeteringArea.add(new Area(new Rect(), 1));
+    if (meteringArea == null) {
+      meteringArea = new ArrayList<>();
+      meteringArea.add(new Area(new Rect(), 1));
     }
 
     // Convert the coordinates to driver format.
     // AE area is bigger because exposure is sensitive and
     // easy to over- or underexposure if area is too small.
     calculateTapArea(
-        focusWidth,
-        focusHeight,
-        1.5f,
-        x,
-        y,
-        previewWidth,
-        previewHeight,
-        mMeteringArea.get(0).rect);
+        focusWidth, focusHeight, 1.5f, x, y, previewWidth, previewHeight, meteringArea.get(0).rect);
   }
 
   public void onSingleTapUp(int x, int y) {
-    if (!mInitialized || mState == STATE_FOCUSING_SNAP_ON_FINISH) {
+    if (!initialized || state == STATE_FOCUSING_SNAP_ON_FINISH) {
       return;
     }
 
     // Let users be able to cancel previous touch focus.
-    if ((mFocusArea != null)
-        && (mState == STATE_FOCUSING || mState == STATE_SUCCESS || mState == STATE_FAIL)) {
+    if ((focusArea != null)
+        && (state == STATE_FOCUSING || state == STATE_SUCCESS || state == STATE_FAIL)) {
       cancelAutoFocus();
     }
     // Initialize variables.
-    int focusWidth = mPieRenderer.getSize();
-    int focusHeight = mPieRenderer.getSize();
-    if (focusWidth == 0 || mPieRenderer.getWidth() == 0 || mPieRenderer.getHeight() == 0) {
+    int focusWidth = pieRenderer.getSize();
+    int focusHeight = pieRenderer.getSize();
+    if (focusWidth == 0 || pieRenderer.getWidth() == 0 || pieRenderer.getHeight() == 0) {
       return;
     }
-    int previewWidth = mPreviewWidth;
-    int previewHeight = mPreviewHeight;
+    int previewWidth = this.previewWidth;
+    int previewHeight = this.previewHeight;
     // Initialize mFocusArea.
-    if (mFocusAreaSupported) {
+    if (focusAreaSupported) {
       initializeFocusAreas(focusWidth, focusHeight, x, y, previewWidth, previewHeight);
     }
     // Initialize mMeteringArea.
-    if (mMeteringAreaSupported) {
+    if (meteringAreaSupported) {
       initializeMeteringAreas(focusWidth, focusHeight, x, y, previewWidth, previewHeight);
     }
 
     // Use margin to set the focus indicator to the touched area.
-    mPieRenderer.setFocus(x, y);
+    pieRenderer.setFocus(x, y);
 
     // Set the focus area and metering area.
-    mListener.setFocusParameters();
-    if (mFocusAreaSupported) {
+    listener.setFocusParameters();
+    if (focusAreaSupported) {
       autoFocus();
     } else { // Just show the indicator in all other cases.
       updateFocusUI();
       // Reset the metering area in 3 seconds.
-      mHandler.removeMessages(RESET_TOUCH_FOCUS);
-      mHandler.sendEmptyMessageDelayed(RESET_TOUCH_FOCUS, RESET_TOUCH_FOCUS_DELAY);
+      handler.removeMessages(RESET_TOUCH_FOCUS);
+      handler.sendEmptyMessageDelayed(RESET_TOUCH_FOCUS, RESET_TOUCH_FOCUS_DELAY);
     }
   }
 
   public void onPreviewStarted() {
-    mState = STATE_IDLE;
+    state = STATE_IDLE;
   }
 
   public void onPreviewStopped() {
     // If auto focus was in progress, it would have been stopped.
-    mState = STATE_IDLE;
+    state = STATE_IDLE;
     resetTouchFocus();
     updateFocusUI();
   }
@@ -314,10 +308,10 @@ public class FocusOverlayManager {
 
   private void autoFocus() {
     LogUtil.v("FocusOverlayManager.autoFocus", "Start autofocus.");
-    mListener.autoFocus();
-    mState = STATE_FOCUSING;
+    listener.autoFocus();
+    state = STATE_FOCUSING;
     updateFocusUI();
-    mHandler.removeMessages(RESET_TOUCH_FOCUS);
+    handler.removeMessages(RESET_TOUCH_FOCUS);
   }
 
   public void cancelAutoFocus() {
@@ -327,57 +321,57 @@ public class FocusOverlayManager {
     // Otherwise, focus mode stays at auto and the tap area passed to the
     // driver is not reset.
     resetTouchFocus();
-    mListener.cancelAutoFocus();
-    mState = STATE_IDLE;
+    listener.cancelAutoFocus();
+    state = STATE_IDLE;
     updateFocusUI();
-    mHandler.removeMessages(RESET_TOUCH_FOCUS);
+    handler.removeMessages(RESET_TOUCH_FOCUS);
   }
 
   private void capture() {
-    if (mListener.capture()) {
-      mState = STATE_IDLE;
-      mHandler.removeMessages(RESET_TOUCH_FOCUS);
+    if (listener.capture()) {
+      state = STATE_IDLE;
+      handler.removeMessages(RESET_TOUCH_FOCUS);
     }
   }
 
   public String getFocusMode() {
-    List<String> supportedFocusModes = mParameters.getSupportedFocusModes();
+    List<String> supportedFocusModes = parameters.getSupportedFocusModes();
 
-    if (mFocusAreaSupported && mFocusArea != null) {
+    if (focusAreaSupported && focusArea != null) {
       // Always use autofocus in tap-to-focus.
-      mFocusMode = Parameters.FOCUS_MODE_AUTO;
+      focusMode = Parameters.FOCUS_MODE_AUTO;
     } else {
-      mFocusMode = Parameters.FOCUS_MODE_CONTINUOUS_PICTURE;
+      focusMode = Parameters.FOCUS_MODE_CONTINUOUS_PICTURE;
     }
 
-    if (!isSupported(mFocusMode, supportedFocusModes)) {
+    if (!isSupported(focusMode, supportedFocusModes)) {
       // For some reasons, the driver does not support the current
       // focus mode. Fall back to auto.
-      if (isSupported(Parameters.FOCUS_MODE_AUTO, mParameters.getSupportedFocusModes())) {
-        mFocusMode = Parameters.FOCUS_MODE_AUTO;
+      if (isSupported(Parameters.FOCUS_MODE_AUTO, parameters.getSupportedFocusModes())) {
+        focusMode = Parameters.FOCUS_MODE_AUTO;
       } else {
-        mFocusMode = mParameters.getFocusMode();
+        focusMode = parameters.getFocusMode();
       }
     }
-    return mFocusMode;
+    return focusMode;
   }
 
   public List<Area> getFocusAreas() {
-    return mFocusArea;
+    return focusArea;
   }
 
   public List<Area> getMeteringAreas() {
-    return mMeteringArea;
+    return meteringArea;
   }
 
   private void updateFocusUI() {
-    if (!mInitialized) {
+    if (!initialized) {
       return;
     }
-    FocusIndicator focusIndicator = mPieRenderer;
+    FocusIndicator focusIndicator = pieRenderer;
 
-    if (mState == STATE_IDLE) {
-      if (mFocusArea == null) {
+    if (state == STATE_IDLE) {
+      if (focusArea == null) {
         focusIndicator.clear();
       } else {
         // Users touch on the preview and the indicator represents the
@@ -385,30 +379,30 @@ public class FocusOverlayManager {
         // autoFocus call is not required.
         focusIndicator.showStart();
       }
-    } else if (mState == STATE_FOCUSING || mState == STATE_FOCUSING_SNAP_ON_FINISH) {
+    } else if (state == STATE_FOCUSING || state == STATE_FOCUSING_SNAP_ON_FINISH) {
       focusIndicator.showStart();
     } else {
-      if (Parameters.FOCUS_MODE_CONTINUOUS_PICTURE.equals(mFocusMode)) {
+      if (Parameters.FOCUS_MODE_CONTINUOUS_PICTURE.equals(focusMode)) {
         // TODO(blemmon): check HAL behavior and decide if this can be removed.
         focusIndicator.showSuccess(false);
-      } else if (mState == STATE_SUCCESS) {
+      } else if (state == STATE_SUCCESS) {
         focusIndicator.showSuccess(false);
-      } else if (mState == STATE_FAIL) {
+      } else if (state == STATE_FAIL) {
         focusIndicator.showFail(false);
       }
     }
   }
 
   private void resetTouchFocus() {
-    if (!mInitialized) {
+    if (!initialized) {
       return;
     }
 
     // Put focus indicator to the center. clear reset position
-    mPieRenderer.clear();
+    pieRenderer.clear();
 
-    mFocusArea = null;
-    mMeteringArea = null;
+    focusArea = null;
+    meteringArea = null;
   }
 
   private void calculateTapArea(
@@ -428,7 +422,7 @@ public class FocusOverlayManager {
     int top = maxH > 0 ? clamp(y - areaHeight / 2, 0, maxH) : 0;
 
     RectF rectF = new RectF(left, top, left + areaWidth, top + areaHeight);
-    mMatrix.mapRect(rectF);
+    matrix.mapRect(rectF);
     rectFToRect(rectF, rect);
   }
 

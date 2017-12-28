@@ -38,58 +38,58 @@ public class PhoneFavoriteListView extends GridView
     implements OnDragDropListener, DragItemContainer {
 
   public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
-  final int[] mLocationOnScreen = new int[2];
+  final int[] locationOnScreen = new int[2];
   private static final long SCROLL_HANDLER_DELAY_MILLIS = 5;
   private static final int DRAG_SCROLL_PX_UNIT = 25;
   private static final float DRAG_SHADOW_ALPHA = 0.7f;
   /**
-   * {@link #mTopScrollBound} and {@link mBottomScrollBound} will be offseted to the top / bottom by
+   * {@link #topScrollBound} and {@link bottomScrollBound} will be offseted to the top / bottom by
    * {@link #getHeight} * {@link #BOUND_GAP_RATIO} pixels.
    */
   private static final float BOUND_GAP_RATIO = 0.2f;
 
-  private float mTouchSlop;
-  private int mTopScrollBound;
-  private int mBottomScrollBound;
-  private int mLastDragY;
-  private Handler mScrollHandler;
-  private final Runnable mDragScroller =
+  private float touchSlop;
+  private int topScrollBound;
+  private int bottomScrollBound;
+  private int lastDragY;
+  private Handler scrollHandler;
+  private final Runnable dragScroller =
       new Runnable() {
         @Override
         public void run() {
-          if (mLastDragY <= mTopScrollBound) {
+          if (lastDragY <= topScrollBound) {
             smoothScrollBy(-DRAG_SCROLL_PX_UNIT, (int) SCROLL_HANDLER_DELAY_MILLIS);
-          } else if (mLastDragY >= mBottomScrollBound) {
+          } else if (lastDragY >= bottomScrollBound) {
             smoothScrollBy(DRAG_SCROLL_PX_UNIT, (int) SCROLL_HANDLER_DELAY_MILLIS);
           }
-          mScrollHandler.postDelayed(this, SCROLL_HANDLER_DELAY_MILLIS);
+          scrollHandler.postDelayed(this, SCROLL_HANDLER_DELAY_MILLIS);
         }
       };
-  private boolean mIsDragScrollerRunning = false;
-  private int mTouchDownForDragStartY;
-  private Bitmap mDragShadowBitmap;
-  private ImageView mDragShadowOverlay;
-  private final AnimatorListenerAdapter mDragShadowOverAnimatorListener =
+  private boolean isDragScrollerRunning = false;
+  private int touchDownForDragStartY;
+  private Bitmap dragShadowBitmap;
+  private ImageView dragShadowOverlay;
+  private final AnimatorListenerAdapter dragShadowOverAnimatorListener =
       new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
-          if (mDragShadowBitmap != null) {
-            mDragShadowBitmap.recycle();
-            mDragShadowBitmap = null;
+          if (dragShadowBitmap != null) {
+            dragShadowBitmap.recycle();
+            dragShadowBitmap = null;
           }
-          mDragShadowOverlay.setVisibility(GONE);
-          mDragShadowOverlay.setImageBitmap(null);
+          dragShadowOverlay.setVisibility(GONE);
+          dragShadowOverlay.setImageBitmap(null);
         }
       };
-  private View mDragShadowParent;
-  private int mAnimationDuration;
+  private View dragShadowParent;
+  private int animationDuration;
   // X and Y offsets inside the item from where the user grabbed to the
   // child's left coordinate. This is used to aid in the drawing of the drag shadow.
-  private int mTouchOffsetToChildLeft;
-  private int mTouchOffsetToChildTop;
-  private int mDragShadowLeft;
-  private int mDragShadowTop;
-  private DragDropController mDragDropController = new DragDropController(this);
+  private int touchOffsetToChildLeft;
+  private int touchOffsetToChildTop;
+  private int dragShadowLeft;
+  private int dragShadowTop;
+  private DragDropController dragDropController = new DragDropController(this);
 
   public PhoneFavoriteListView(Context context) {
     this(context, null);
@@ -101,15 +101,15 @@ public class PhoneFavoriteListView extends GridView
 
   public PhoneFavoriteListView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-    mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
-    mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
-    mDragDropController.addOnDragDropListener(this);
+    animationDuration = context.getResources().getInteger(R.integer.fade_duration);
+    touchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
+    dragDropController.addOnDragDropListener(this);
   }
 
   @Override
   protected void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
-    mTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
+    touchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
   }
 
   /**
@@ -119,7 +119,7 @@ public class PhoneFavoriteListView extends GridView
   @Override
   public boolean onInterceptTouchEvent(MotionEvent ev) {
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-      mTouchDownForDragStartY = (int) ev.getY();
+      touchDownForDragStartY = (int) ev.getY();
     }
 
     return super.onInterceptTouchEvent(ev);
@@ -138,38 +138,38 @@ public class PhoneFavoriteListView extends GridView
             // on a {@link PhoneFavoriteTileView}
             return false;
           }
-          if (!mDragDropController.handleDragStarted(this, eX, eY)) {
+          if (!dragDropController.handleDragStarted(this, eX, eY)) {
             return false;
           }
           break;
         }
       case DragEvent.ACTION_DRAG_LOCATION:
-        mLastDragY = eY;
-        mDragDropController.handleDragHovered(this, eX, eY);
+        lastDragY = eY;
+        dragDropController.handleDragHovered(this, eX, eY);
         // Kick off {@link #mScrollHandler} if it's not started yet.
-        if (!mIsDragScrollerRunning
+        if (!isDragScrollerRunning
             &&
             // And if the distance traveled while dragging exceeds the touch slop
-            (Math.abs(mLastDragY - mTouchDownForDragStartY) >= 4 * mTouchSlop)) {
-          mIsDragScrollerRunning = true;
+            (Math.abs(lastDragY - touchDownForDragStartY) >= 4 * touchSlop)) {
+          isDragScrollerRunning = true;
           ensureScrollHandler();
-          mScrollHandler.postDelayed(mDragScroller, SCROLL_HANDLER_DELAY_MILLIS);
+          scrollHandler.postDelayed(dragScroller, SCROLL_HANDLER_DELAY_MILLIS);
         }
         break;
       case DragEvent.ACTION_DRAG_ENTERED:
         final int boundGap = (int) (getHeight() * BOUND_GAP_RATIO);
-        mTopScrollBound = (getTop() + boundGap);
-        mBottomScrollBound = (getBottom() - boundGap);
+        topScrollBound = (getTop() + boundGap);
+        bottomScrollBound = (getBottom() - boundGap);
         break;
       case DragEvent.ACTION_DRAG_EXITED:
       case DragEvent.ACTION_DRAG_ENDED:
       case DragEvent.ACTION_DROP:
         ensureScrollHandler();
-        mScrollHandler.removeCallbacks(mDragScroller);
-        mIsDragScrollerRunning = false;
+        scrollHandler.removeCallbacks(dragScroller);
+        isDragScrollerRunning = false;
         // Either a successful drop or it's ended with out drop.
         if (action == DragEvent.ACTION_DROP || action == DragEvent.ACTION_DRAG_ENDED) {
-          mDragDropController.handleDragFinished(eX, eY, false);
+          dragDropController.handleDragFinished(eX, eY, false);
         }
         break;
       default:
@@ -180,8 +180,8 @@ public class PhoneFavoriteListView extends GridView
   }
 
   public void setDragShadowOverlay(ImageView overlay) {
-    mDragShadowOverlay = overlay;
-    mDragShadowParent = (View) mDragShadowOverlay.getParent();
+    dragShadowOverlay = overlay;
+    dragShadowParent = (View) dragShadowOverlay.getParent();
   }
 
   /** Find the view under the pointer. */
@@ -201,73 +201,73 @@ public class PhoneFavoriteListView extends GridView
   }
 
   private void ensureScrollHandler() {
-    if (mScrollHandler == null) {
-      mScrollHandler = getHandler();
+    if (scrollHandler == null) {
+      scrollHandler = getHandler();
     }
   }
 
   public DragDropController getDragDropController() {
-    return mDragDropController;
+    return dragDropController;
   }
 
   @Override
   public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView tileView) {
-    if (mDragShadowOverlay == null) {
+    if (dragShadowOverlay == null) {
       return;
     }
 
-    mDragShadowOverlay.clearAnimation();
-    mDragShadowBitmap = createDraggedChildBitmap(tileView);
-    if (mDragShadowBitmap == null) {
+    dragShadowOverlay.clearAnimation();
+    dragShadowBitmap = createDraggedChildBitmap(tileView);
+    if (dragShadowBitmap == null) {
       return;
     }
 
-    tileView.getLocationOnScreen(mLocationOnScreen);
-    mDragShadowLeft = mLocationOnScreen[0];
-    mDragShadowTop = mLocationOnScreen[1];
+    tileView.getLocationOnScreen(locationOnScreen);
+    dragShadowLeft = locationOnScreen[0];
+    dragShadowTop = locationOnScreen[1];
 
     // x and y are the coordinates of the on-screen touch event. Using these
     // and the on-screen location of the tileView, calculate the difference between
     // the position of the user's finger and the position of the tileView. These will
     // be used to offset the location of the drag shadow so that it appears that the
     // tileView is positioned directly under the user's finger.
-    mTouchOffsetToChildLeft = x - mDragShadowLeft;
-    mTouchOffsetToChildTop = y - mDragShadowTop;
+    touchOffsetToChildLeft = x - dragShadowLeft;
+    touchOffsetToChildTop = y - dragShadowTop;
 
-    mDragShadowParent.getLocationOnScreen(mLocationOnScreen);
-    mDragShadowLeft -= mLocationOnScreen[0];
-    mDragShadowTop -= mLocationOnScreen[1];
+    dragShadowParent.getLocationOnScreen(locationOnScreen);
+    dragShadowLeft -= locationOnScreen[0];
+    dragShadowTop -= locationOnScreen[1];
 
-    mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
-    mDragShadowOverlay.setVisibility(VISIBLE);
-    mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
+    dragShadowOverlay.setImageBitmap(dragShadowBitmap);
+    dragShadowOverlay.setVisibility(VISIBLE);
+    dragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
 
-    mDragShadowOverlay.setX(mDragShadowLeft);
-    mDragShadowOverlay.setY(mDragShadowTop);
+    dragShadowOverlay.setX(dragShadowLeft);
+    dragShadowOverlay.setY(dragShadowTop);
   }
 
   @Override
   public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView tileView) {
     // Update the drag shadow location.
-    mDragShadowParent.getLocationOnScreen(mLocationOnScreen);
-    mDragShadowLeft = x - mTouchOffsetToChildLeft - mLocationOnScreen[0];
-    mDragShadowTop = y - mTouchOffsetToChildTop - mLocationOnScreen[1];
+    dragShadowParent.getLocationOnScreen(locationOnScreen);
+    dragShadowLeft = x - touchOffsetToChildLeft - locationOnScreen[0];
+    dragShadowTop = y - touchOffsetToChildTop - locationOnScreen[1];
     // Draw the drag shadow at its last known location if the drag shadow exists.
-    if (mDragShadowOverlay != null) {
-      mDragShadowOverlay.setX(mDragShadowLeft);
-      mDragShadowOverlay.setY(mDragShadowTop);
+    if (dragShadowOverlay != null) {
+      dragShadowOverlay.setX(dragShadowLeft);
+      dragShadowOverlay.setY(dragShadowTop);
     }
   }
 
   @Override
   public void onDragFinished(int x, int y) {
-    if (mDragShadowOverlay != null) {
-      mDragShadowOverlay.clearAnimation();
-      mDragShadowOverlay
+    if (dragShadowOverlay != null) {
+      dragShadowOverlay.clearAnimation();
+      dragShadowOverlay
           .animate()
           .alpha(0.0f)
-          .setDuration(mAnimationDuration)
-          .setListener(mDragShadowOverAnimatorListener)
+          .setDuration(animationDuration)
+          .setListener(dragShadowOverAnimatorListener)
           .start();
     }
   }
@@ -297,10 +297,10 @@ public class PhoneFavoriteListView extends GridView
 
   @Override
   public PhoneFavoriteSquareTileView getViewForLocation(int x, int y) {
-    getLocationOnScreen(mLocationOnScreen);
+    getLocationOnScreen(locationOnScreen);
     // Calculate the X and Y coordinates of the drag event relative to the view
-    final int viewX = x - mLocationOnScreen[0];
-    final int viewY = y - mLocationOnScreen[1];
+    final int viewX = x - locationOnScreen[0];
+    final int viewY = y - locationOnScreen[1];
     final View child = getViewAtPosition(viewX, viewY);
 
     if (!(child instanceof PhoneFavoriteSquareTileView)) {

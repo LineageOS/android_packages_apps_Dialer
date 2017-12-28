@@ -28,13 +28,13 @@ import com.android.incallui.call.TelecomAdapter;
 public class DialpadPresenter extends Presenter<DialpadUi>
     implements InCallPresenter.InCallStateListener {
 
-  private DialerCall mCall;
+  private DialerCall call;
 
   @Override
   public void onUiReady(DialpadUi ui) {
     super.onUiReady(ui);
     InCallPresenter.getInstance().addListener(this);
-    mCall = CallList.getInstance().getOutgoingOrActive();
+    call = CallList.getInstance().getOutgoingOrActive();
   }
 
   @Override
@@ -48,8 +48,8 @@ public class DialpadPresenter extends Presenter<DialpadUi>
       InCallPresenter.InCallState oldState,
       InCallPresenter.InCallState newState,
       CallList callList) {
-    mCall = callList.getOutgoingOrActive();
-    Log.d(this, "DialpadPresenter mCall = " + mCall);
+    call = callList.getOutgoingOrActive();
+    Log.d(this, "DialpadPresenter mCall = " + call);
   }
 
   /**
@@ -59,7 +59,7 @@ public class DialpadPresenter extends Presenter<DialpadUi>
   public final void processDtmf(char c) {
     Log.d(this, "Processing dtmf key " + c);
     // if it is a valid key, then update the display and send the dtmf tone.
-    if (PhoneNumberUtils.is12Key(c) && mCall != null) {
+    if (PhoneNumberUtils.is12Key(c) && call != null) {
       Log.d(this, "updating display and sending dtmf tone for '" + c + "'");
 
       // Append this key to the "digits" widget.
@@ -68,7 +68,7 @@ public class DialpadPresenter extends Presenter<DialpadUi>
         dialpadUi.appendDigitsToField(c);
       }
       // Plays the tone through Telecom.
-      TelecomAdapter.getInstance().playDtmfTone(mCall.getId(), c);
+      TelecomAdapter.getInstance().playDtmfTone(call.getId(), c);
     } else {
       Log.d(this, "ignoring dtmf request for '" + c + "'");
     }
@@ -76,9 +76,9 @@ public class DialpadPresenter extends Presenter<DialpadUi>
 
   /** Stops the local tone based on the phone type. */
   public void stopDtmf() {
-    if (mCall != null) {
+    if (call != null) {
       Log.d(this, "stopping remote tone");
-      TelecomAdapter.getInstance().stopDtmfTone(mCall.getId());
+      TelecomAdapter.getInstance().stopDtmfTone(call.getId());
     }
   }
 

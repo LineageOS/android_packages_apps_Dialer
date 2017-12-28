@@ -43,28 +43,28 @@ public class TelephonyVvmConfigManager {
 
   private static final String KEY_FEATURE_FLAG_NAME = "feature_flag_name";
 
-  private static Map<String, PersistableBundle> sCachedConfigs;
+  private static Map<String, PersistableBundle> cachedConfigs;
 
-  private final Map<String, PersistableBundle> mConfigs;
+  private final Map<String, PersistableBundle> configs;
 
   public TelephonyVvmConfigManager(Context context) {
-    if (sCachedConfigs == null) {
-      sCachedConfigs = loadConfigs(context, context.getResources().getXml(R.xml.vvm_config));
+    if (cachedConfigs == null) {
+      cachedConfigs = loadConfigs(context, context.getResources().getXml(R.xml.vvm_config));
     }
-    mConfigs = sCachedConfigs;
+    configs = cachedConfigs;
   }
 
   @VisibleForTesting
   TelephonyVvmConfigManager(Context context, XmlPullParser parser) {
-    mConfigs = loadConfigs(context, parser);
+    configs = loadConfigs(context, parser);
   }
 
   @Nullable
   public PersistableBundle getConfig(String mccMnc) {
     if (USE_DEBUG_CONFIG) {
-      return mConfigs.get("TEST");
+      return configs.get("TEST");
     }
-    return mConfigs.get(mccMnc);
+    return configs.get(mccMnc);
   }
 
   private static Map<String, PersistableBundle> loadConfigs(Context context, XmlPullParser parser) {

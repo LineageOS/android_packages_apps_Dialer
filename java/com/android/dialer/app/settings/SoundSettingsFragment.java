@@ -49,28 +49,28 @@ public class SoundSettingsFragment extends PreferenceFragment
 
   private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
-  private Preference mRingtonePreference;
-  private final Handler mRingtoneLookupComplete =
+  private Preference ringtonePreference;
+  private final Handler ringtoneLookupComplete =
       new Handler() {
         @Override
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case MSG_UPDATE_RINGTONE_SUMMARY:
-              mRingtonePreference.setSummary((CharSequence) msg.obj);
+              ringtonePreference.setSummary((CharSequence) msg.obj);
               break;
           }
         }
       };
-  private final Runnable mRingtoneLookupRunnable =
+  private final Runnable ringtoneLookupRunnable =
       new Runnable() {
         @Override
         public void run() {
           updateRingtonePreferenceSummary();
         }
       };
-  private SwitchPreference mVibrateWhenRinging;
-  private SwitchPreference mPlayDtmfTone;
-  private ListPreference mDtmfToneLength;
+  private SwitchPreference vibrateWhenRinging;
+  private SwitchPreference playDtmfTone;
+  private ListPreference dtmfToneLength;
 
   @Override
   public Context getContext() {
@@ -85,39 +85,39 @@ public class SoundSettingsFragment extends PreferenceFragment
 
     Context context = getActivity();
 
-    mRingtonePreference = findPreference(context.getString(R.string.ringtone_preference_key));
-    mVibrateWhenRinging =
+    ringtonePreference = findPreference(context.getString(R.string.ringtone_preference_key));
+    vibrateWhenRinging =
         (SwitchPreference) findPreference(context.getString(R.string.vibrate_on_preference_key));
-    mPlayDtmfTone =
+    playDtmfTone =
         (SwitchPreference) findPreference(context.getString(R.string.play_dtmf_preference_key));
-    mDtmfToneLength =
+    dtmfToneLength =
         (ListPreference)
             findPreference(context.getString(R.string.dtmf_tone_length_preference_key));
 
     if (hasVibrator()) {
-      mVibrateWhenRinging.setOnPreferenceChangeListener(this);
+      vibrateWhenRinging.setOnPreferenceChangeListener(this);
     } else {
-      getPreferenceScreen().removePreference(mVibrateWhenRinging);
-      mVibrateWhenRinging = null;
+      getPreferenceScreen().removePreference(vibrateWhenRinging);
+      vibrateWhenRinging = null;
     }
 
-    mPlayDtmfTone.setOnPreferenceChangeListener(this);
-    mPlayDtmfTone.setChecked(shouldPlayDtmfTone());
+    playDtmfTone.setOnPreferenceChangeListener(this);
+    playDtmfTone.setChecked(shouldPlayDtmfTone());
 
     TelephonyManager telephonyManager =
         (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M
         && telephonyManager.canChangeDtmfToneLength()
         && (telephonyManager.isWorldPhone() || !shouldHideCarrierSettings())) {
-      mDtmfToneLength.setOnPreferenceChangeListener(this);
-      mDtmfToneLength.setValueIndex(
+      dtmfToneLength.setOnPreferenceChangeListener(this);
+      dtmfToneLength.setValueIndex(
           Settings.System.getInt(
               context.getContentResolver(),
               Settings.System.DTMF_TONE_TYPE_WHEN_DIALING,
               DTMF_TONE_TYPE_NORMAL));
     } else {
-      getPreferenceScreen().removePreference(mDtmfToneLength);
-      mDtmfToneLength = null;
+      getPreferenceScreen().removePreference(dtmfToneLength);
+      dtmfToneLength = null;
     }
   }
 
@@ -132,12 +132,12 @@ public class SoundSettingsFragment extends PreferenceFragment
       return;
     }
 
-    if (mVibrateWhenRinging != null) {
-      mVibrateWhenRinging.setChecked(shouldVibrateWhenRinging());
+    if (vibrateWhenRinging != null) {
+      vibrateWhenRinging.setChecked(shouldVibrateWhenRinging());
     }
 
     // Lookup the ringtone name asynchronously.
-    new Thread(mRingtoneLookupRunnable).start();
+    new Thread(ringtoneLookupRunnable).start();
   }
 
   /**
@@ -157,14 +157,14 @@ public class SoundSettingsFragment extends PreferenceFragment
           .show();
       return true;
     }
-    if (preference == mVibrateWhenRinging) {
+    if (preference == vibrateWhenRinging) {
       boolean doVibrate = (Boolean) objValue;
       Settings.System.putInt(
           getActivity().getContentResolver(),
           Settings.System.VIBRATE_WHEN_RINGING,
           doVibrate ? DO_VIBRATION_FOR_CALLS : NO_VIBRATION_FOR_CALLS);
-    } else if (preference == mDtmfToneLength) {
-      int index = mDtmfToneLength.findIndexOfValue((String) objValue);
+    } else if (preference == dtmfToneLength) {
+      int index = dtmfToneLength.findIndexOfValue((String) objValue);
       Settings.System.putInt(
           getActivity().getContentResolver(), Settings.System.DTMF_TONE_TYPE_WHEN_DIALING, index);
     }
@@ -182,11 +182,11 @@ public class SoundSettingsFragment extends PreferenceFragment
           .show();
       return true;
     }
-    if (preference == mPlayDtmfTone) {
+    if (preference == playDtmfTone) {
       Settings.System.putInt(
           getActivity().getContentResolver(),
           Settings.System.DTMF_TONE_WHEN_DIALING,
-          mPlayDtmfTone.isChecked() ? PLAY_DTMF_TONE : NO_DTMF_TONE);
+          playDtmfTone.isChecked() ? PLAY_DTMF_TONE : NO_DTMF_TONE);
     }
     return true;
   }
@@ -195,9 +195,9 @@ public class SoundSettingsFragment extends PreferenceFragment
   private void updateRingtonePreferenceSummary() {
     SettingsUtil.updateRingtoneName(
         getActivity(),
-        mRingtoneLookupComplete,
+        ringtoneLookupComplete,
         RingtoneManager.TYPE_RINGTONE,
-        mRingtonePreference.getKey(),
+        ringtonePreference.getKey(),
         MSG_UPDATE_RINGTONE_SUMMARY);
   }
 

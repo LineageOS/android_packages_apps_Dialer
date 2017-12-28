@@ -24,23 +24,23 @@ import java.util.Objects;
  */
 public class Rational {
 
-  private final long mNumerator;
-  private final long mDenominator;
+  private final long numerator;
+  private final long denominator;
 
   /** Create a Rational with a given numerator and denominator. */
   Rational(long nominator, long denominator) {
-    mNumerator = nominator;
-    mDenominator = denominator;
+    numerator = nominator;
+    this.denominator = denominator;
   }
 
   /** Gets the numerator of the rational. */
   long getNumerator() {
-    return mNumerator;
+    return numerator;
   }
 
   /** Gets the denominator of the rational */
   long getDenominator() {
-    return mDenominator;
+    return denominator;
   }
 
   @Override
@@ -53,18 +53,18 @@ public class Rational {
     }
     if (obj instanceof Rational) {
       Rational data = (Rational) obj;
-      return mNumerator == data.mNumerator && mDenominator == data.mDenominator;
+      return numerator == data.numerator && denominator == data.denominator;
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(mNumerator, mDenominator);
+    return Objects.hash(numerator, denominator);
   }
 
   @Override
   public String toString() {
-    return mNumerator + "/" + mDenominator;
+    return numerator + "/" + denominator;
   }
 }

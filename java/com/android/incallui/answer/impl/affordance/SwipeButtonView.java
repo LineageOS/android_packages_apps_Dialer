@@ -474,16 +474,16 @@ public class SwipeButtonView extends ImageView {
 
   private Animator.AnimatorListener getEndListener(final Runnable runnable) {
     return new AnimatorListenerAdapter() {
-      boolean mCancelled;
+      boolean cancelled;
 
       @Override
       public void onAnimationCancel(Animator animation) {
-        mCancelled = true;
+        cancelled = true;
       }
 
       @Override
       public void onAnimationEnd(Animator animation) {
-        if (!mCancelled) {
+        if (!cancelled) {
           runnable.run();
         }
       }

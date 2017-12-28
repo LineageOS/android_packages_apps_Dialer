@@ -29,10 +29,10 @@ import java.util.Map;
  * the speed of a part.
  */
 class AccelerationClassifier extends StrokeClassifier {
-  private final Map<Stroke, Data> mStrokeMap = new ArrayMap<>();
+  private final Map<Stroke, Data> strokeMap = new ArrayMap<>();
 
   public AccelerationClassifier(ClassifierData classifierData) {
-    mClassifierData = classifierData;
+    this.classifierData = classifierData;
   }
 
   @Override
@@ -45,23 +45,23 @@ class AccelerationClassifier extends StrokeClassifier {
     int action = event.getActionMasked();
 
     if (action == MotionEvent.ACTION_DOWN) {
-      mStrokeMap.clear();
+      strokeMap.clear();
     }
 
     for (int i = 0; i < event.getPointerCount(); i++) {
-      Stroke stroke = mClassifierData.getStroke(event.getPointerId(i));
+      Stroke stroke = classifierData.getStroke(event.getPointerId(i));
       Point point = stroke.getPoints().get(stroke.getPoints().size() - 1);
-      if (mStrokeMap.get(stroke) == null) {
-        mStrokeMap.put(stroke, new Data(point));
+      if (strokeMap.get(stroke) == null) {
+        strokeMap.put(stroke, new Data(point));
       } else {
-        mStrokeMap.get(stroke).addPoint(point);
+        strokeMap.get(stroke).addPoint(point);
       }
     }
   }
 
   @Override
   public float getFalseTouchEvaluation(Stroke stroke) {
-    Data data = mStrokeMap.get(stroke);
+    Data data = strokeMap.get(stroke);
     return 2 * SpeedRatioEvaluator.evaluate(data.maxSpeedRatio);
   }
 

@@ -25,30 +25,30 @@ import android.support.v7.app.AppCompatActivity;
  */
 public abstract class TransactionSafeActivity extends AppCompatActivity {
 
-  private boolean mIsSafeToCommitTransactions;
+  private boolean isSafeToCommitTransactions;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mIsSafeToCommitTransactions = false;
+    isSafeToCommitTransactions = false;
   }
 
   /**
@@ -59,6 +59,6 @@ public abstract class TransactionSafeActivity extends AppCompatActivity {
    * outState)} (if that method is overridden), so the flag is properly set.
    */
   public boolean isSafeToCommitTransactions() {
-    return mIsSafeToCommitTransactions;
+    return isSafeToCommitTransactions;
   }
 }

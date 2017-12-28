@@ -23,21 +23,21 @@ import android.view.MotionEvent;
 /** Abstract class that all Camera overlays should implement. */
 public abstract class OverlayRenderer implements RenderOverlay.Renderer {
 
-  protected RenderOverlay mOverlay;
+  protected RenderOverlay overlay;
 
-  private int mLeft;
-  private int mTop;
-  private int mRight;
-  private int mBottom;
-  private boolean mVisible;
+  private int left;
+  private int top;
+  private int right;
+  private int bottom;
+  private boolean visible;
 
   public void setVisible(boolean vis) {
-    mVisible = vis;
+    visible = vis;
     update();
   }
 
   public boolean isVisible() {
-    return mVisible;
+    return visible;
   }
 
   // default does not handle touch
@@ -55,43 +55,43 @@ public abstract class OverlayRenderer implements RenderOverlay.Renderer {
 
   @Override
   public void draw(Canvas canvas) {
-    if (mVisible) {
+    if (visible) {
       onDraw(canvas);
     }
   }
 
   @Override
   public void setOverlay(RenderOverlay overlay) {
-    mOverlay = overlay;
+    this.overlay = overlay;
   }
 
   @Override
   public void layout(int left, int top, int right, int bottom) {
-    mLeft = left;
-    mRight = right;
-    mTop = top;
-    mBottom = bottom;
+    this.left = left;
+    this.right = right;
+    this.top = top;
+    this.bottom = bottom;
   }
 
   protected Context getContext() {
-    if (mOverlay != null) {
-      return mOverlay.getContext();
+    if (overlay != null) {
+      return overlay.getContext();
     } else {
       return null;
     }
   }
 
   public int getWidth() {
-    return mRight - mLeft;
+    return right - left;
   }
 
   public int getHeight() {
-    return mBottom - mTop;
+    return bottom - top;
   }
 
   protected void update() {
-    if (mOverlay != null) {
-      mOverlay.update();
+    if (overlay != null) {
+      overlay.update();
     }
   }
 }

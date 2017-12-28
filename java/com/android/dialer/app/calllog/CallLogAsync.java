@@ -65,10 +65,10 @@ public class CallLogAsync {
   /** AsyncTask to get the last outgoing call from the DB. */
   private class GetLastOutgoingCallTask extends AsyncTask<GetLastOutgoingCallArgs, Void, String> {
 
-    private final OnLastOutgoingCallComplete mCallback;
+    private final OnLastOutgoingCallComplete callback;
 
     public GetLastOutgoingCallTask(OnLastOutgoingCallComplete callback) {
-      mCallback = callback;
+      this.callback = callback;
     }
 
     // Happens on a background thread. We cannot run the callback
@@ -90,7 +90,7 @@ public class CallLogAsync {
     @Override
     protected void onPostExecute(String number) {
       Assert.isMainThread();
-      mCallback.lastOutgoingCall(number);
+      callback.lastOutgoingCall(number);
     }
   }
 }

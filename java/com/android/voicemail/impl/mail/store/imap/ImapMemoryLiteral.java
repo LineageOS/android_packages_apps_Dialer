@@ -26,35 +26,35 @@ import java.io.UnsupportedEncodingException;
 /** Subclass of {@link ImapString} used for literals backed by an in-memory byte array. */
 public class ImapMemoryLiteral extends ImapString {
   private final String TAG = "ImapMemoryLiteral";
-  private byte[] mData;
+  private byte[] data;
 
   /* package */ ImapMemoryLiteral(FixedLengthInputStream in) throws IOException {
     // We could use ByteArrayOutputStream and IOUtils.copy, but it'd perform an unnecessary
     // copy....
-    mData = new byte[in.getLength()];
+    data = new byte[in.getLength()];
     int pos = 0;
-    while (pos < mData.length) {
-      int read = in.read(mData, pos, mData.length - pos);
+    while (pos < data.length) {
+      int read = in.read(data, pos, data.length - pos);
       if (read < 0) {
         break;
       }
       pos += read;
     }
-    if (pos != mData.length) {
+    if (pos != data.length) {
       VvmLog.w(TAG, "length mismatch");
     }
   }
 
   @Override
   public void destroy() {
-    mData = null;
+    data = null;
     super.destroy();
   }
 
   @Override
   public String getString() {
     try {
-      return new String(mData, "US-ASCII");
+      return new String(data, "US-ASCII");
     } catch (UnsupportedEncodingException e) {
       VvmLog.e(TAG, "Unsupported encoding: ", e);
     }
@@ -63,11 +63,11 @@ public class ImapMemoryLiteral extends ImapString {
 
   @Override
   public InputStream getAsStream() {
-    return new ByteArrayInputStream(mData);
+    return new ByteArrayInputStream(data);
   }
 
   @Override
   public String toString() {
-    return String.format("{%d byte literal(memory)}", mData.length);
+    return String.format("{%d byte literal(memory)}", data.length);
   }
 }

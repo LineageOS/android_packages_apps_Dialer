@@ -164,13 +164,13 @@ public class CallerInfo {
 
   public String countryIso;
 
-  private boolean mIsEmergency;
-  private boolean mIsVoiceMail;
+  private boolean isEmergency;
+  private boolean isVoiceMail;
 
   public CallerInfo() {
     // TODO: Move all the basic initialization here?
-    mIsEmergency = false;
-    mIsVoiceMail = false;
+    isEmergency = false;
+    isVoiceMail = false;
     userType = ContactsUtils.USER_TYPE_CURRENT;
   }
 
@@ -467,12 +467,12 @@ public class CallerInfo {
 
   /** @return true if the caller info is an emergency number. */
   public boolean isEmergencyNumber() {
-    return mIsEmergency;
+    return isEmergency;
   }
 
   /** @return true if the caller info is a voicemail number. */
   public boolean isVoiceMailNumber() {
-    return mIsVoiceMail;
+    return isVoiceMail;
   }
 
   /**
@@ -485,7 +485,7 @@ public class CallerInfo {
     name = context.getString(R.string.emergency_call_dialog_number_for_display);
     phoneNumber = null;
 
-    mIsEmergency = true;
+    isEmergency = true;
     return this;
   }
 
@@ -497,7 +497,7 @@ public class CallerInfo {
    * @return this instance.
    */
   /* package */ CallerInfo markAsVoiceMail(Context context) {
-    mIsVoiceMail = true;
+    isVoiceMail = true;
 
     try {
       // For voicemail calls, we display the voice mail tag
@@ -565,8 +565,8 @@ public class CallerInfo {
           .append("\nshouldSendToVoicemail: " + shouldSendToVoicemail)
           .append("\ncachedPhoto: " + cachedPhoto)
           .append("\nisCachedPhotoCurrent: " + isCachedPhotoCurrent)
-          .append("\nemergency: " + mIsEmergency)
-          .append("\nvoicemail: " + mIsVoiceMail)
+          .append("\nemergency: " + isEmergency)
+          .append("\nvoicemail: " + isVoiceMail)
           .append("\nuserType: " + userType)
           .append(" }")
           .toString();

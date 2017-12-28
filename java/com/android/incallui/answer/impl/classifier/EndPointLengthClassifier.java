@@ -21,7 +21,7 @@ package com.android.incallui.answer.impl.classifier;
  */
 class EndPointLengthClassifier extends StrokeClassifier {
   public EndPointLengthClassifier(ClassifierData classifierData) {
-    mClassifierData = classifierData;
+    this.classifierData = classifierData;
   }
 
   @Override

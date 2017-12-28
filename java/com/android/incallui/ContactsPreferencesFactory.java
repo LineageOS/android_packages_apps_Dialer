@@ -24,8 +24,8 @@ import com.android.contacts.common.preference.ContactsPreferences;
 /** Factory class for {@link ContactsPreferences}. */
 public class ContactsPreferencesFactory {
 
-  private static boolean sUseTestInstance;
-  private static ContactsPreferences sTestInstance;
+  private static boolean useTestInstance;
+  private static ContactsPreferences testInstance;
 
   /**
    * Creates a new {@link ContactsPreferences} object if possible.
@@ -35,8 +35,8 @@ public class ContactsPreferencesFactory {
    */
   @Nullable
   public static ContactsPreferences newContactsPreferences(Context context) {
-    if (sUseTestInstance) {
-      return sTestInstance;
+    if (useTestInstance) {
+      return testInstance;
     }
     if (UserManagerCompat.isUserUnlocked(context)) {
       return new ContactsPreferences(context);
@@ -50,7 +50,7 @@ public class ContactsPreferencesFactory {
    * @param testInstance the instance to return.
    */
   static void setTestInstance(ContactsPreferences testInstance) {
-    sUseTestInstance = true;
-    sTestInstance = testInstance;
+    useTestInstance = true;
+    ContactsPreferencesFactory.testInstance = testInstance;
   }
 }

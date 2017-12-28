@@ -35,9 +35,9 @@ public class ConferenceManagerFragment
     extends BaseFragment<ConferenceManagerPresenter, ConferenceManagerUi>
     implements ConferenceManagerPresenter.ConferenceManagerUi {
 
-  private ListView mConferenceParticipantList;
-  private ContactPhotoManager mContactPhotoManager;
-  private ConferenceParticipantListAdapter mConferenceParticipantListAdapter;
+  private ListView conferenceParticipantList;
+  private ContactPhotoManager contactPhotoManager;
+  private ConferenceParticipantListAdapter conferenceParticipantListAdapter;
 
   @Override
   public ConferenceManagerPresenter createPresenter() {
@@ -62,8 +62,8 @@ public class ConferenceManagerFragment
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     final View parent = inflater.inflate(R.layout.conference_manager_fragment, container, false);
 
-    mConferenceParticipantList = (ListView) parent.findViewById(R.id.participantList);
-    mContactPhotoManager = ContactPhotoManager.getInstance(getActivity().getApplicationContext());
+    conferenceParticipantList = (ListView) parent.findViewById(R.id.participantList);
+    contactPhotoManager = ContactPhotoManager.getInstance(getActivity().getApplicationContext());
 
     return parent;
   }
@@ -75,7 +75,7 @@ public class ConferenceManagerFragment
     getPresenter().init(calls);
     // Request focus on the list of participants for accessibility purposes.  This ensures
     // that once the list of participants is shown, the first participant is announced.
-    mConferenceParticipantList.requestFocus();
+    conferenceParticipantList.requestFocus();
   }
 
   @Override
@@ -90,17 +90,17 @@ public class ConferenceManagerFragment
 
   @Override
   public void update(List<DialerCall> participants, boolean parentCanSeparate) {
-    if (mConferenceParticipantListAdapter == null) {
-      mConferenceParticipantListAdapter =
-          new ConferenceParticipantListAdapter(mConferenceParticipantList, mContactPhotoManager);
+    if (conferenceParticipantListAdapter == null) {
+      conferenceParticipantListAdapter =
+          new ConferenceParticipantListAdapter(conferenceParticipantList, contactPhotoManager);
 
-      mConferenceParticipantList.setAdapter(mConferenceParticipantListAdapter);
+      conferenceParticipantList.setAdapter(conferenceParticipantListAdapter);
     }
-    mConferenceParticipantListAdapter.updateParticipants(participants, parentCanSeparate);
+    conferenceParticipantListAdapter.updateParticipants(participants, parentCanSeparate);
   }
 
   @Override
   public void refreshCall(DialerCall call) {
-    mConferenceParticipantListAdapter.refreshCall(call);
+    conferenceParticipantListAdapter.refreshCall(call);
   }
 }

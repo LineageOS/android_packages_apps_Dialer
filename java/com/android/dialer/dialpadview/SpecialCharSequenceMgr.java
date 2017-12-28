@@ -92,7 +92,7 @@ public class SpecialCharSequenceMgr {
    * Phone side doesn't have this functionality. Fundamental fix would be to have one shared
    * implementation and resolve this corner case more gracefully.
    */
-  private static QueryHandler sPreviousAdnQueryHandler;
+  private static QueryHandler previousAdnQueryHandler;
 
   /** This class is never instantiated. */
   private SpecialCharSequenceMgr() {}
@@ -124,9 +124,9 @@ public class SpecialCharSequenceMgr {
   public static void cleanup() {
     Assert.isMainThread();
 
-    if (sPreviousAdnQueryHandler != null) {
-      sPreviousAdnQueryHandler.cancel();
-      sPreviousAdnQueryHandler = null;
+    if (previousAdnQueryHandler != null) {
+      previousAdnQueryHandler.cancel();
+      previousAdnQueryHandler = null;
     }
   }
 
@@ -255,11 +255,11 @@ public class SpecialCharSequenceMgr {
         null,
         null);
 
-    if (sPreviousAdnQueryHandler != null) {
+    if (previousAdnQueryHandler != null) {
       // It is harmless to call cancel() even after the handler's gone.
-      sPreviousAdnQueryHandler.cancel();
+      previousAdnQueryHandler.cancel();
     }
-    sPreviousAdnQueryHandler = handler;
+    previousAdnQueryHandler = handler;
   }
 
   static boolean handlePinEntry(final Context context, final String input) {
@@ -343,40 +343,40 @@ public class SpecialCharSequenceMgr {
 
   public static class HandleAdnEntryAccountSelectedCallback extends SelectPhoneAccountListener {
 
-    private final Context mContext;
-    private final QueryHandler mQueryHandler;
-    private final SimContactQueryCookie mCookie;
+    private final Context context;
+    private final QueryHandler queryHandler;
+    private final SimContactQueryCookie cookie;
 
     public HandleAdnEntryAccountSelectedCallback(
         Context context, QueryHandler queryHandler, SimContactQueryCookie cookie) {
-      mContext = context;
-      mQueryHandler = queryHandler;
-      mCookie = cookie;
+      this.context = context;
+      this.queryHandler = queryHandler;
+      this.cookie = cookie;
     }
 
     @Override
     public void onPhoneAccountSelected(
         PhoneAccountHandle selectedAccountHandle, boolean setDefault, @Nullable String callId) {
-      Uri uri = TelecomUtil.getAdnUriForPhoneAccount(mContext, selectedAccountHandle);
-      handleAdnQuery(mQueryHandler, mCookie, uri);
+      Uri uri = TelecomUtil.getAdnUriForPhoneAccount(context, selectedAccountHandle);
+      handleAdnQuery(queryHandler, cookie, uri);
       // TODO: Show error dialog if result isn't valid.
     }
   }
 
   public static class HandleMmiAccountSelectedCallback extends SelectPhoneAccountListener {
 
-    private final Context mContext;
-    private final String mInput;
+    private final Context context;
+    private final String input;
 
     public HandleMmiAccountSelectedCallback(Context context, String input) {
-      mContext = context.getApplicationContext();
-      mInput = input;
+      this.context = context.getApplicationContext();
+      this.input = input;
     }
 
     @Override
     public void onPhoneAccountSelected(
         PhoneAccountHandle selectedAccountHandle, boolean setDefault, @Nullable String callId) {
-      TelecomUtil.handleMmi(mContext, mInput, selectedAccountHandle);
+      TelecomUtil.handleMmi(context, input, selectedAccountHandle);
     }
   }
 
@@ -393,16 +393,16 @@ public class SpecialCharSequenceMgr {
     public int contactNum;
 
     // Used to identify the query request.
-    private int mToken;
-    private QueryHandler mHandler;
+    private int token;
+    private QueryHandler handler;
 
     // The text field we're going to update
     private EditText textField;
 
     public SimContactQueryCookie(int number, QueryHandler handler, int token) {
       contactNum = number;
-      mHandler = handler;
-      mToken = token;
+      this.handler = handler;
+      this.token = token;
     }
 
     /** Synchronized getter for the EditText. */
@@ -431,7 +431,7 @@ public class SpecialCharSequenceMgr {
       textField = null;
 
       // Cancel the operation if possible.
-      mHandler.cancelOperation(mToken);
+      handler.cancelOperation(token);
     }
   }
 
@@ -442,7 +442,7 @@ public class SpecialCharSequenceMgr {
    */
   private static class QueryHandler extends NoNullCursorAsyncQueryHandler {
 
-    private boolean mCanceled;
+    private boolean canceled;
 
     public QueryHandler(ContentResolver cr) {
       super(cr);
@@ -452,8 +452,8 @@ public class SpecialCharSequenceMgr {
     @Override
     protected void onNotNullableQueryComplete(int token, Object cookie, Cursor c) {
       try {
-        sPreviousAdnQueryHandler = null;
-        if (mCanceled) {
+        previousAdnQueryHandler = null;
+        if (canceled) {
           return;
         }
 
@@ -488,7 +488,7 @@ public class SpecialCharSequenceMgr {
     }
 
     public void cancel() {
-      mCanceled = true;
+      canceled = true;
       // Ask AsyncQueryHandler to cancel the whole request. This will fail when the query is
       // already started.
       cancelOperation(ADN_QUERY_TOKEN);
