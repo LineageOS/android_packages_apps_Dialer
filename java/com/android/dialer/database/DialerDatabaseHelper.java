@@ -331,14 +331,18 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     editor.apply();
   }
 
-  /** Starts the database upgrade process in the background. */
-  public void startSmartDialUpdateThread() {
+  /**
+   * Starts the database upgrade process in the background.
+   *
+   * @see #updateSmartDialDatabase(boolean) for the usage of {@code forceUpdate}.
+   */
+  public void startSmartDialUpdateThread(boolean forceUpdate) {
     if (PermissionsUtil.hasContactsReadPermissions(context)) {
       DialerExecutorComponent.get(context)
           .dialerExecutorFactory()
           .createNonUiTaskBuilder(new UpdateSmartDialWorker())
           .build()
-          .executeParallel(null);
+          .executeParallel(forceUpdate);
     }
   }
 
@@ -599,9 +603,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * contacts since last update, and updates the records in smartdial database and prefix database
    * accordingly. It also queries the deleted contact database to remove newly deleted contacts
    * since last update.
+   *
+   * @param forceUpdate If set to true, update the database by reloading all contacts.
    */
   @WorkerThread
-  public synchronized void updateSmartDialDatabase() {
+  public synchronized void updateSmartDialDatabase(boolean forceUpdate) {
     LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
 
     final SQLiteDatabase db = getWritableDatabase();
@@ -613,7 +619,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     final SharedPreferences databaseLastUpdateSharedPref =
         context.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
     final String lastUpdateMillis =
-        String.valueOf(databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
+        String.valueOf(
+            forceUpdate ? 0 : databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
 
     LogUtil.v(
         "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at " + lastUpdateMillis);
@@ -1235,12 +1242,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
   }
 
-  private class UpdateSmartDialWorker implements Worker<Void, Void> {
+  private class UpdateSmartDialWorker implements Worker<Boolean, Void> {
 
     @Nullable
     @Override
-    public Void doInBackground(@Nullable Void input) throws Throwable {
-      updateSmartDialDatabase();
+    public Void doInBackground(Boolean forceUpdate) throws Throwable {
+      updateSmartDialDatabase(forceUpdate);
       return null;
     }
   }

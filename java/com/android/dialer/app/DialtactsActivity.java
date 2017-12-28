@@ -100,6 +100,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -187,6 +188,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private static final String KEY_SEARCH_QUERY = "search_query";
   private static final String KEY_DIALPAD_QUERY = "dialpad_query";
   private static final String KEY_FIRST_LAUNCH = "first_launch";
+  private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
   private static final String KEY_WAS_CONFIGURATION_CHANGE = "was_configuration_change";
   private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
   private static final String KEY_FAB_VISIBLE = "fab_visible";
@@ -262,6 +264,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   private DragDropController dragDropController;
   private ActionBarController actionBarController;
   private FloatingActionButtonController floatingActionButtonController;
+  private String savedLanguageCode;
   private boolean wasConfigurationChange;
   private long timeTabSelected;
 
@@ -451,6 +454,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       inDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
       inNewSearch = savedInstanceState.getBoolean(KEY_IN_NEW_SEARCH_UI);
       firstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
+      savedLanguageCode = savedInstanceState.getString(KEY_SAVED_LANGUAGE_CODE);
       wasConfigurationChange = savedInstanceState.getBoolean(KEY_WAS_CONFIGURATION_CHANGE);
       isDialpadShown = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
       floatingActionButtonController.setVisible(savedInstanceState.getBoolean(KEY_FAB_VISIBLE));
@@ -563,9 +567,16 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     prepareVoiceSearchButton();
-    if (!wasConfigurationChange) {
-      dialerDatabaseHelper.startSmartDialUpdateThread();
+
+    // Start the thread that updates the smart dial database if
+    // (1) the activity is not recreated with a new configuration, or
+    // (2) the activity is recreated with a new configuration but the change is a language change.
+    boolean isLanguageChanged =
+        !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
+    if (!wasConfigurationChange || isLanguageChanged) {
+      dialerDatabaseHelper.startSmartDialUpdateThread(/* forceUpdate = */ isLanguageChanged);
     }
+
     if (isDialpadShown) {
       floatingActionButtonController.scaleOut();
     } else {
@@ -668,6 +679,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     super.onSaveInstanceState(outState);
     outState.putString(KEY_SEARCH_QUERY, searchQuery);
     outState.putString(KEY_DIALPAD_QUERY, dialpadQuery);
+    outState.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
     outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, inRegularSearch);
     outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, inDialpadSearch);
     outState.putBoolean(KEY_IN_NEW_SEARCH_UI, inNewSearch);
