@@ -34,13 +34,13 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
   private static final String TAG = SmartDialNumberListAdapter.class.getSimpleName();
   private static final boolean DEBUG = false;
 
-  private final Context mContext;
-  @NonNull private final SmartDialNameMatcher mNameMatcher;
+  private final Context context;
+  @NonNull private final SmartDialNameMatcher nameMatcher;
 
   public SmartDialNumberListAdapter(Context context) {
     super(context);
-    mContext = context;
-    mNameMatcher = new SmartDialNameMatcher("");
+    this.context = context;
+    nameMatcher = new SmartDialNameMatcher("");
     setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
 
     if (DEBUG) {
@@ -56,10 +56,10 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
 
     if (getQueryString() == null) {
       loader.configureQuery("");
-      mNameMatcher.setQuery("");
+      nameMatcher.setQuery("");
     } else {
       loader.configureQuery(getQueryString());
-      mNameMatcher.setQuery(PhoneNumberUtils.normalizeNumber(getQueryString()));
+      nameMatcher.setQuery(PhoneNumberUtils.normalizeNumber(getQueryString()));
     }
   }
 
@@ -73,8 +73,8 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
   protected void setHighlight(ContactListItemView view, Cursor cursor) {
     view.clearHighlightSequences();
 
-    if (mNameMatcher.matches(mContext, cursor.getString(PhoneQuery.DISPLAY_NAME))) {
-      final ArrayList<SmartDialMatchPosition> nameMatches = mNameMatcher.getMatchPositions();
+    if (nameMatcher.matches(context, cursor.getString(PhoneQuery.DISPLAY_NAME))) {
+      final ArrayList<SmartDialMatchPosition> nameMatches = nameMatcher.getMatchPositions();
       for (SmartDialMatchPosition match : nameMatches) {
         view.addNameHighlightSequence(match.start, match.end);
         if (DEBUG) {
@@ -82,7 +82,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
               TAG,
               cursor.getString(PhoneQuery.DISPLAY_NAME)
                   + " "
-                  + mNameMatcher.getQuery()
+                  + nameMatcher.getQuery()
                   + " "
                   + String.valueOf(match.start));
         }
@@ -90,7 +90,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     }
 
     final SmartDialMatchPosition numberMatch =
-        mNameMatcher.matchesNumber(mContext, cursor.getString(PhoneQuery.PHONE_NUMBER));
+        nameMatcher.matchesNumber(context, cursor.getString(PhoneQuery.PHONE_NUMBER));
     if (numberMatch != null) {
       view.addNumberHighlightSequence(numberMatch.start, numberMatch.end);
     }
@@ -113,6 +113,6 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
   }
 
   public void setShowEmptyListForNullQuery(boolean show) {
-    mNameMatcher.setShouldMatchEmptyQuery(!show);
+    nameMatcher.setShouldMatchEmptyQuery(!show);
   }
 }

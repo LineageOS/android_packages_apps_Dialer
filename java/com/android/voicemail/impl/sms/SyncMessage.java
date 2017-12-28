@@ -31,47 +31,47 @@ import java.util.Locale;
  */
 public class SyncMessage {
   // Sync event that triggered this message.
-  private final String mSyncTriggerEvent;
+  private final String syncTriggerEvent;
   // Total number of new messages on the server.
-  private final int mNewMessageCount;
+  private final int newMessageCount;
   // UID of the new message.
-  private final String mMessageId;
+  private final String messageId;
   // Length of the message.
-  private final int mMessageLength;
+  private final int messageLength;
   // Content type (voice, video, fax...) of the new message.
-  private final String mContentType;
+  private final String contentType;
   // Sender of the new message.
-  private final String mSender;
+  private final String sender;
   // Timestamp (in millis) of the new message.
-  private final long mMsgTimeMillis;
+  private final long msgTimeMillis;
 
   @Override
   public String toString() {
     return "SyncMessage [mSyncTriggerEvent="
-        + mSyncTriggerEvent
+        + syncTriggerEvent
         + ", mNewMessageCount="
-        + mNewMessageCount
+        + newMessageCount
         + ", mMessageId="
-        + mMessageId
+        + messageId
         + ", mMessageLength="
-        + mMessageLength
+        + messageLength
         + ", mContentType="
-        + mContentType
+        + contentType
         + ", mSender="
-        + mSender
+        + sender
         + ", mMsgTimeMillis="
-        + mMsgTimeMillis
+        + msgTimeMillis
         + "]";
   }
 
   public SyncMessage(Bundle wrappedData) {
-    mSyncTriggerEvent = getString(wrappedData, OmtpConstants.SYNC_TRIGGER_EVENT);
-    mMessageId = getString(wrappedData, OmtpConstants.MESSAGE_UID);
-    mMessageLength = getInt(wrappedData, OmtpConstants.MESSAGE_LENGTH);
-    mContentType = getString(wrappedData, OmtpConstants.CONTENT_TYPE);
-    mSender = getString(wrappedData, OmtpConstants.SENDER);
-    mNewMessageCount = getInt(wrappedData, OmtpConstants.NUM_MESSAGE_COUNT);
-    mMsgTimeMillis = parseTime(wrappedData.getString(OmtpConstants.TIME));
+    syncTriggerEvent = getString(wrappedData, OmtpConstants.SYNC_TRIGGER_EVENT);
+    messageId = getString(wrappedData, OmtpConstants.MESSAGE_UID);
+    messageLength = getInt(wrappedData, OmtpConstants.MESSAGE_LENGTH);
+    contentType = getString(wrappedData, OmtpConstants.CONTENT_TYPE);
+    sender = getString(wrappedData, OmtpConstants.SENDER);
+    newMessageCount = getInt(wrappedData, OmtpConstants.NUM_MESSAGE_COUNT);
+    msgTimeMillis = parseTime(wrappedData.getString(OmtpConstants.TIME));
   }
 
   private static long parseTime(@Nullable String value) {
@@ -89,13 +89,13 @@ public class SyncMessage {
    *     set.
    */
   public String getSyncTriggerEvent() {
-    return mSyncTriggerEvent;
+    return syncTriggerEvent;
   }
 
   /** @return the number of new messages stored on the voicemail server. */
   @NeededForTesting
   public int getNewMessageCount() {
-    return mNewMessageCount;
+    return newMessageCount;
   }
 
   /**
@@ -103,7 +103,7 @@ public class SyncMessage {
    *     <p>Expected to be set only for {@link OmtpConstants#NEW_MESSAGE}
    */
   public String getId() {
-    return mMessageId;
+    return messageId;
   }
 
   /**
@@ -112,7 +112,7 @@ public class SyncMessage {
    */
   @NeededForTesting
   public String getContentType() {
-    return mContentType;
+    return contentType;
   }
 
   /**
@@ -120,7 +120,7 @@ public class SyncMessage {
    *     <p>Expected to be set only for {@link OmtpConstants#NEW_MESSAGE}
    */
   public int getLength() {
-    return mMessageLength;
+    return messageLength;
   }
 
   /**
@@ -128,7 +128,7 @@ public class SyncMessage {
    *     <p>Expected to be set only for {@link OmtpConstants#NEW_MESSAGE}
    */
   public String getSender() {
-    return mSender;
+    return sender;
   }
 
   /**
@@ -136,7 +136,7 @@ public class SyncMessage {
    *     <p>Expected to be set only for {@link OmtpConstants#NEW_MESSAGE}
    */
   public long getTimestampMillis() {
-    return mMsgTimeMillis;
+    return msgTimeMillis;
   }
 
   private static int getInt(Bundle wrappedData, String key) {

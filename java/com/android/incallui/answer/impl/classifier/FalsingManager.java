@@ -36,23 +36,23 @@ public class FalsingManager implements SensorEventListener {
         Sensor.TYPE_PROXIMITY,
       };
 
-  private final SensorManager mSensorManager;
-  private final HumanInteractionClassifier mHumanInteractionClassifier;
-  private final AccessibilityManager mAccessibilityManager;
+  private final SensorManager sensorManager;
+  private final HumanInteractionClassifier humanInteractionClassifier;
+  private final AccessibilityManager accessibilityManager;
 
-  private boolean mSessionActive = false;
-  private boolean mScreenOn;
+  private boolean sessionActive = false;
+  private boolean screenOn;
 
   public FalsingManager(Context context) {
-    mSensorManager = context.getSystemService(SensorManager.class);
-    mAccessibilityManager = context.getSystemService(AccessibilityManager.class);
-    mHumanInteractionClassifier = new HumanInteractionClassifier(context);
-    mScreenOn = context.getSystemService(PowerManager.class).isInteractive();
+    sensorManager = context.getSystemService(SensorManager.class);
+    accessibilityManager = context.getSystemService(AccessibilityManager.class);
+    humanInteractionClassifier = new HumanInteractionClassifier(context);
+    screenOn = context.getSystemService(PowerManager.class).isInteractive();
   }
 
   /** Returns {@code true} iff the FalsingManager is enabled and able to classify touches */
   public boolean isEnabled() {
-    return mHumanInteractionClassifier.isEnabled();
+    return humanInteractionClassifier.isEnabled();
   }
 
   /**
@@ -62,8 +62,8 @@ public class FalsingManager implements SensorEventListener {
   public boolean isFalseTouch() {
     // Touch exploration triggers false positives in the classifier and
     // already sufficiently prevents false unlocks.
-    return !mAccessibilityManager.isTouchExplorationEnabled()
-        && mHumanInteractionClassifier.isFalseTouch();
+    return !accessibilityManager.isTouchExplorationEnabled()
+        && humanInteractionClassifier.isFalseTouch();
   }
 
   /**
@@ -71,7 +71,7 @@ public class FalsingManager implements SensorEventListener {
    * tracking changes if the manager is enabled.
    */
   public void onScreenOn() {
-    mScreenOn = true;
+    screenOn = true;
     sessionEntrypoint();
   }
 
@@ -80,7 +80,7 @@ public class FalsingManager implements SensorEventListener {
    * will cause the manager to stop tracking changes.
    */
   public void onScreenOff() {
-    mScreenOn = false;
+    screenOn = false;
     sessionExitpoint();
   }
 
@@ -90,25 +90,25 @@ public class FalsingManager implements SensorEventListener {
    * @param event MotionEvent to be classified as human or false.
    */
   public void onTouchEvent(MotionEvent event) {
-    if (mSessionActive) {
-      mHumanInteractionClassifier.onTouchEvent(event);
+    if (sessionActive) {
+      humanInteractionClassifier.onTouchEvent(event);
     }
   }
 
   @Override
   public synchronized void onSensorChanged(SensorEvent event) {
-    mHumanInteractionClassifier.onSensorChanged(event);
+    humanInteractionClassifier.onSensorChanged(event);
   }
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
   private boolean shouldSessionBeActive() {
-    return isEnabled() && mScreenOn;
+    return isEnabled() && screenOn;
   }
 
   private boolean sessionEntrypoint() {
-    if (!mSessionActive && shouldSessionBeActive()) {
+    if (!sessionActive && shouldSessionBeActive()) {
       onSessionStart();
       return true;
     }
@@ -116,16 +116,16 @@ public class FalsingManager implements SensorEventListener {
   }
 
   private void sessionExitpoint() {
-    if (mSessionActive && !shouldSessionBeActive()) {
-      mSessionActive = false;
-      mSensorManager.unregisterListener(this);
+    if (sessionActive && !shouldSessionBeActive()) {
+      sessionActive = false;
+      sensorManager.unregisterListener(this);
     }
   }
 
   private void onSessionStart() {
-    mSessionActive = true;
+    sessionActive = true;
 
-    if (mHumanInteractionClassifier.isEnabled()) {
+    if (humanInteractionClassifier.isEnabled()) {
       registerSensors(CLASSIFIER_SENSORS);
     }
   }
@@ -134,11 +134,11 @@ public class FalsingManager implements SensorEventListener {
     Trace.beginSection("FalsingManager.registerSensors");
     for (int sensorType : sensors) {
       Trace.beginSection("get sensor " + sensorType);
-      Sensor s = mSensorManager.getDefaultSensor(sensorType);
+      Sensor s = sensorManager.getDefaultSensor(sensorType);
       Trace.endSection();
       if (s != null) {
         Trace.beginSection("register");
-        mSensorManager.registerListener(this, s, SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, s, SensorManager.SENSOR_DELAY_GAME);
         Trace.endSection();
       }
     }

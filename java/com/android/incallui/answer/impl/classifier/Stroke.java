@@ -26,40 +26,40 @@ class Stroke {
 
   private static final float NANOS_TO_SECONDS = 1e9f;
 
-  private ArrayList<Point> mPoints = new ArrayList<>();
-  private long mStartTimeNano;
-  private long mEndTimeNano;
-  private float mLength;
-  private final float mDpi;
+  private ArrayList<Point> points = new ArrayList<>();
+  private long startTimeNano;
+  private long endTimeNano;
+  private float length;
+  private final float dpi;
 
   public Stroke(long eventTimeNano, float dpi) {
-    mDpi = dpi;
-    mStartTimeNano = mEndTimeNano = eventTimeNano;
+    this.dpi = dpi;
+    startTimeNano = endTimeNano = eventTimeNano;
   }
 
   public void addPoint(float x, float y, long eventTimeNano) {
-    mEndTimeNano = eventTimeNano;
-    Point point = new Point(x / mDpi, y / mDpi, eventTimeNano - mStartTimeNano);
-    if (!mPoints.isEmpty()) {
-      mLength += mPoints.get(mPoints.size() - 1).dist(point);
+    endTimeNano = eventTimeNano;
+    Point point = new Point(x / dpi, y / dpi, eventTimeNano - startTimeNano);
+    if (!points.isEmpty()) {
+      length += points.get(points.size() - 1).dist(point);
     }
-    mPoints.add(point);
+    points.add(point);
   }
 
   public int getCount() {
-    return mPoints.size();
+    return points.size();
   }
 
   public float getTotalLength() {
-    return mLength;
+    return length;
   }
 
   public float getEndPointLength() {
-    return mPoints.get(0).dist(mPoints.get(mPoints.size() - 1));
+    return points.get(0).dist(points.get(points.size() - 1));
   }
 
   public long getDurationNanos() {
-    return mEndTimeNano - mStartTimeNano;
+    return endTimeNano - startTimeNano;
   }
 
   public float getDurationSeconds() {
@@ -67,6 +67,6 @@ class Stroke {
   }
 
   public ArrayList<Point> getPoints() {
-    return mPoints;
+    return points;
   }
 }

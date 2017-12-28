@@ -49,13 +49,13 @@ public class BlockNumberDialogFragment extends DialogFragment {
   private static final String ARG_COUNTRY_ISO = "argCountryIso";
   private static final String ARG_DISPLAY_NUMBER = "argDisplayNumber";
   private static final String ARG_PARENT_VIEW_ID = "parentViewId";
-  private String mNumber;
-  private String mDisplayNumber;
-  private String mCountryIso;
-  private FilteredNumberAsyncQueryHandler mHandler;
-  private View mParentView;
-  private VisualVoicemailEnabledChecker mVoicemailEnabledChecker;
-  private Callback mCallback;
+  private String number;
+  private String displayNumber;
+  private String countryIso;
+  private FilteredNumberAsyncQueryHandler handler;
+  private View parentView;
+  private VisualVoicemailEnabledChecker voicemailEnabledChecker;
+  private Callback callback;
 
   public static BlockNumberDialogFragment show(
       Integer blockId,
@@ -97,7 +97,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
   public void setFilteredNumberAsyncQueryHandlerForTesting(
       FilteredNumberAsyncQueryHandler handler) {
-    mHandler = handler;
+    this.handler = handler;
   }
 
   @Override
@@ -110,19 +110,19 @@ public class BlockNumberDialogFragment extends DialogFragment {
     super.onCreateDialog(savedInstanceState);
     final boolean isBlocked = getArguments().containsKey(ARG_BLOCK_ID);
 
-    mNumber = getArguments().getString(ARG_NUMBER);
-    mDisplayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
-    mCountryIso = getArguments().getString(ARG_COUNTRY_ISO);
+    number = getArguments().getString(ARG_NUMBER);
+    displayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
+    countryIso = getArguments().getString(ARG_COUNTRY_ISO);
 
-    if (TextUtils.isEmpty(mDisplayNumber)) {
-      mDisplayNumber = mNumber;
+    if (TextUtils.isEmpty(displayNumber)) {
+      displayNumber = number;
     }
 
-    mHandler = new FilteredNumberAsyncQueryHandler(getContext());
-    mVoicemailEnabledChecker = new VisualVoicemailEnabledChecker(getActivity(), null);
+    handler = new FilteredNumberAsyncQueryHandler(getContext());
+    voicemailEnabledChecker = new VisualVoicemailEnabledChecker(getActivity(), null);
     // Choose not to update VoicemailEnabledChecker, as checks should already been done in
     // all current use cases.
-    mParentView = getActivity().findViewById(getArguments().getInt(ARG_PARENT_VIEW_ID));
+    parentView = getActivity().findViewById(getArguments().getInt(ARG_PARENT_VIEW_ID));
 
     CharSequence title;
     String okText;
@@ -132,16 +132,16 @@ public class BlockNumberDialogFragment extends DialogFragment {
       okText = getString(R.string.unblock_number_ok);
       message =
           ContactDisplayUtils.getTtsSpannedPhoneNumber(
-                  getResources(), R.string.unblock_number_confirmation_title, mDisplayNumber)
+                  getResources(), R.string.unblock_number_confirmation_title, displayNumber)
               .toString();
     } else {
       title =
           ContactDisplayUtils.getTtsSpannedPhoneNumber(
-              getResources(), R.string.block_number_confirmation_title, mDisplayNumber);
+              getResources(), R.string.block_number_confirmation_title, displayNumber);
       okText = getString(R.string.block_number_ok);
       if (FilteredNumberCompat.useNewFiltering(getContext())) {
         message = getString(R.string.block_number_confirmation_message_new_filtering);
-      } else if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
+      } else if (voicemailEnabledChecker.isVisualVoicemailEnabled()) {
         message = getString(R.string.block_number_confirmation_message_vvm);
       } else {
         message = getString(R.string.block_number_confirmation_message_no_vvm);
@@ -171,13 +171,13 @@ public class BlockNumberDialogFragment extends DialogFragment {
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    String e164Number = PhoneNumberUtils.formatNumberToE164(mNumber, mCountryIso);
-    if (!FilteredNumbersUtil.canBlockNumber(getContext(), e164Number, mNumber)) {
+    String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+    if (!FilteredNumbersUtil.canBlockNumber(getContext(), e164Number, number)) {
       dismiss();
       Toast.makeText(
               getContext(),
               ContactDisplayUtils.getTtsSpannedPhoneNumber(
-                  getResources(), R.string.invalidNumber, mDisplayNumber),
+                  getResources(), R.string.invalidNumber, displayNumber),
               Toast.LENGTH_SHORT)
           .show();
     }
@@ -187,23 +187,23 @@ public class BlockNumberDialogFragment extends DialogFragment {
   public void onPause() {
     // Dismiss on rotation.
     dismiss();
-    mCallback = null;
+    callback = null;
 
     super.onPause();
   }
 
   public void setCallback(Callback callback) {
-    mCallback = callback;
+    this.callback = callback;
   }
 
   private CharSequence getBlockedMessage() {
     return ContactDisplayUtils.getTtsSpannedPhoneNumber(
-        getResources(), R.string.snackbar_number_blocked, mDisplayNumber);
+        getResources(), R.string.snackbar_number_blocked, displayNumber);
   }
 
   private CharSequence getUnblockedMessage() {
     return ContactDisplayUtils.getTtsSpannedPhoneNumber(
-        getResources(), R.string.snackbar_number_unblocked, mDisplayNumber);
+        getResources(), R.string.snackbar_number_unblocked, displayNumber);
   }
 
   private int getActionTextColor() {
@@ -213,7 +213,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
   private void blockNumber() {
     final CharSequence message = getBlockedMessage();
     final CharSequence undoMessage = getUnblockedMessage();
-    final Callback callback = mCallback;
+    final Callback callback = this.callback;
     final int actionTextColor = getActionTextColor();
     final Context applicationContext = getContext().getApplicationContext();
 
@@ -221,7 +221,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
         new OnUnblockNumberListener() {
           @Override
           public void onUnblockComplete(int rows, ContentValues values) {
-            Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(parentView, undoMessage, Snackbar.LENGTH_LONG).show();
             if (callback != null) {
               callback.onChangeFilteredNumberUndo();
             }
@@ -239,11 +239,11 @@ public class BlockNumberDialogFragment extends DialogFragment {
                     // Delete the newly created row on 'undo'.
                     Logger.get(applicationContext)
                         .logInteraction(InteractionEvent.Type.UNDO_BLOCK_NUMBER);
-                    mHandler.unblock(onUndoListener, uri);
+                    handler.unblock(onUndoListener, uri);
                   }
                 };
 
-            Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
+            Snackbar.make(parentView, message, Snackbar.LENGTH_LONG)
                 .setAction(R.string.block_number_undo, undoListener)
                 .setActionTextColor(actionTextColor)
                 .show();
@@ -258,13 +258,13 @@ public class BlockNumberDialogFragment extends DialogFragment {
           }
         };
 
-    mHandler.blockNumber(onBlockNumberListener, mNumber, mCountryIso);
+    handler.blockNumber(onBlockNumberListener, number, countryIso);
   }
 
   private void unblockNumber() {
     final CharSequence message = getUnblockedMessage();
     final CharSequence undoMessage = getBlockedMessage();
-    final Callback callback = mCallback;
+    final Callback callback = this.callback;
     final int actionTextColor = getActionTextColor();
     final Context applicationContext = getContext().getApplicationContext();
 
@@ -272,14 +272,14 @@ public class BlockNumberDialogFragment extends DialogFragment {
         new OnBlockNumberListener() {
           @Override
           public void onBlockComplete(final Uri uri) {
-            Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(parentView, undoMessage, Snackbar.LENGTH_LONG).show();
             if (callback != null) {
               callback.onChangeFilteredNumberUndo();
             }
           }
         };
 
-    mHandler.unblock(
+    handler.unblock(
         new OnUnblockNumberListener() {
           @Override
           public void onUnblockComplete(int rows, final ContentValues values) {
@@ -290,11 +290,11 @@ public class BlockNumberDialogFragment extends DialogFragment {
                     // Re-insert the row on 'undo', with a new ID.
                     Logger.get(applicationContext)
                         .logInteraction(InteractionEvent.Type.UNDO_UNBLOCK_NUMBER);
-                    mHandler.blockNumber(onUndoListener, values);
+                    handler.blockNumber(onUndoListener, values);
                   }
                 };
 
-            Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
+            Snackbar.make(parentView, message, Snackbar.LENGTH_LONG)
                 .setAction(R.string.block_number_undo, undoListener)
                 .setActionTextColor(actionTextColor)
                 .show();

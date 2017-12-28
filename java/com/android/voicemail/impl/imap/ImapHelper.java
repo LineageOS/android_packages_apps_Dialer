@@ -66,17 +66,17 @@ public class ImapHelper implements Closeable {
 
   private static final String TAG = "ImapHelper";
 
-  private ImapFolder mFolder;
-  private ImapStore mImapStore;
+  private ImapFolder folder;
+  private ImapStore imapStore;
 
-  private final Context mContext;
-  private final PhoneAccountHandle mPhoneAccount;
-  private final Network mNetwork;
-  private final Editor mStatus;
+  private final Context context;
+  private final PhoneAccountHandle phoneAccount;
+  private final Network network;
+  private final Editor status;
 
-  VisualVoicemailPreferences mPrefs;
+  VisualVoicemailPreferences prefs;
 
-  private final OmtpVvmCarrierConfigHelper mConfig;
+  private final OmtpVvmCarrierConfigHelper config;
 
   /** InitializingException */
   public static class InitializingException extends Exception {
@@ -104,30 +104,29 @@ public class ImapHelper implements Closeable {
       Network network,
       Editor status)
       throws InitializingException {
-    mContext = context;
-    mPhoneAccount = phoneAccount;
-    mNetwork = network;
-    mStatus = status;
-    mConfig = config;
-    mPrefs = new VisualVoicemailPreferences(context, phoneAccount);
+    this.context = context;
+    this.phoneAccount = phoneAccount;
+    this.network = network;
+    this.status = status;
+    this.config = config;
+    prefs = new VisualVoicemailPreferences(context, phoneAccount);
 
     try {
       TempDirectory.setTempDirectory(context);
 
-      String username = mPrefs.getString(OmtpConstants.IMAP_USER_NAME, null);
-      String password = mPrefs.getString(OmtpConstants.IMAP_PASSWORD, null);
-      String serverName = mPrefs.getString(OmtpConstants.SERVER_ADDRESS, null);
-      int port = Integer.parseInt(mPrefs.getString(OmtpConstants.IMAP_PORT, null));
+      String username = prefs.getString(OmtpConstants.IMAP_USER_NAME, null);
+      String password = prefs.getString(OmtpConstants.IMAP_PASSWORD, null);
+      String serverName = prefs.getString(OmtpConstants.SERVER_ADDRESS, null);
+      int port = Integer.parseInt(prefs.getString(OmtpConstants.IMAP_PORT, null));
       int auth = ImapStore.FLAG_NONE;
 
-      int sslPort = mConfig.getSslPort();
+      int sslPort = this.config.getSslPort();
       if (sslPort != 0) {
         port = sslPort;
         auth = ImapStore.FLAG_SSL;
       }
 
-      mImapStore =
-          new ImapStore(context, this, username, password, port, serverName, auth, network);
+      imapStore = new ImapStore(context, this, username, password, port, serverName, auth, network);
     } catch (NumberFormatException e) {
       handleEvent(OmtpEvents.DATA_INVALID_PORT);
       LogUtils.w(TAG, "Could not parse port number");
@@ -137,13 +136,13 @@ public class ImapHelper implements Closeable {
 
   @Override
   public void close() {
-    mImapStore.closeConnection();
+    imapStore.closeConnection();
   }
 
   public boolean isRoaming() {
     ConnectivityManager connectivityManager =
-        (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo info = connectivityManager.getNetworkInfo(mNetwork);
+        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo info = connectivityManager.getNetworkInfo(network);
     if (info == null) {
       return false;
     }
@@ -151,11 +150,11 @@ public class ImapHelper implements Closeable {
   }
 
   public OmtpVvmCarrierConfigHelper getConfig() {
-    return mConfig;
+    return config;
   }
 
   public ImapConnection connect() {
-    return mImapStore.getConnection();
+    return imapStore.getConnection();
   }
 
   /** The caller thread will block until the method returns. */
@@ -169,7 +168,7 @@ public class ImapHelper implements Closeable {
   }
 
   public void handleEvent(OmtpEvents event) {
-    mConfig.handleEvent(mStatus, event);
+    config.handleEvent(status, event);
   }
 
   /**
@@ -184,9 +183,9 @@ public class ImapHelper implements Closeable {
       return false;
     }
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_WRITE);
-      if (mFolder != null) {
-        mFolder.setFlags(convertToImapMessages(voicemails), flags, true);
+      folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
+      if (folder != null) {
+        folder.setFlags(convertToImapMessages(voicemails), flags, true);
         return true;
       }
       return false;
@@ -207,14 +206,14 @@ public class ImapHelper implements Closeable {
     List<Voicemail> result = new ArrayList<Voicemail>();
     Message[] messages;
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_WRITE);
-      if (mFolder == null) {
+      folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
+      if (folder == null) {
         // This means we were unable to successfully open the folder.
         return null;
       }
 
       // This method retrieves lightweight messages containing only the uid of the message.
-      messages = mFolder.getMessages(null);
+      messages = folder.getMessages(null);
 
       for (Message message : messages) {
         // Get the voicemail details (message structure).
@@ -245,7 +244,7 @@ public class ImapHelper implements Closeable {
       FetchProfile fetchProfile = new FetchProfile();
       fetchProfile.add(messageStructureWrapper.transcriptionBodyPart);
 
-      mFolder.fetch(new Message[] {messageDetails}, fetchProfile, listener);
+      folder.fetch(new Message[] {messageDetails}, fetchProfile, listener);
     }
 
     // Found an audio attachment, this is a valid voicemail.
@@ -255,8 +254,8 @@ public class ImapHelper implements Closeable {
     Long duration = messageDetails.getDuration();
     Voicemail.Builder builder =
         Voicemail.createForInsertion(time, number)
-            .setPhoneAccount(mPhoneAccount)
-            .setSourcePackage(mContext.getPackageName())
+            .setPhoneAccount(phoneAccount)
+            .setSourcePackage(context.getPackageName())
             .setSourceData(messageDetails.getUid())
             .setIsRead(isRead)
             .setTranscription(listener.getVoicemailTranscription());
@@ -307,18 +306,18 @@ public class ImapHelper implements Closeable {
 
     // The IMAP folder fetch method will call "messageRetrieved" on the listener when the
     // message is successfully retrieved.
-    mFolder.fetch(new Message[] {message}, fetchProfile, listener);
+    folder.fetch(new Message[] {message}, fetchProfile, listener);
     return listener.getMessageStructure();
   }
 
   public boolean fetchVoicemailPayload(VoicemailFetchedCallback callback, final String uid) {
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_WRITE);
-      if (mFolder == null) {
+      folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
+      if (folder == null) {
         // This means we were unable to successfully open the folder.
         return false;
       }
-      Message message = mFolder.getMessage(uid);
+      Message message = folder.getMessage(uid);
       if (message == null) {
         return false;
       }
@@ -345,19 +344,19 @@ public class ImapHelper implements Closeable {
     FetchProfile fetchProfile = new FetchProfile();
     fetchProfile.add(FetchProfile.Item.BODY);
 
-    mFolder.fetch(new Message[] {message}, fetchProfile, listener);
+    folder.fetch(new Message[] {message}, fetchProfile, listener);
     return listener.getVoicemailPayload();
   }
 
   public boolean fetchTranscription(TranscriptionFetchedCallback callback, String uid) {
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_WRITE);
-      if (mFolder == null) {
+      folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
+      if (folder == null) {
         // This means we were unable to successfully open the folder.
         return false;
       }
 
-      Message message = mFolder.getMessage(uid);
+      Message message = folder.getMessage(uid);
       if (message == null) {
         return false;
       }
@@ -371,7 +370,7 @@ public class ImapHelper implements Closeable {
 
           // This method is called synchronously so the transcription will be populated
           // in the listener once the next method is called.
-          mFolder.fetch(new Message[] {message}, fetchProfile, listener);
+          folder.fetch(new Message[] {message}, fetchProfile, listener);
           callback.setVoicemailTranscription(listener.getVoicemailTranscription());
         }
       }
@@ -386,7 +385,7 @@ public class ImapHelper implements Closeable {
 
   @ChangePinResult
   public int changePin(String oldPin, String newPin) throws MessagingException {
-    ImapConnection connection = mImapStore.getConnection();
+    ImapConnection connection = imapStore.getConnection();
     try {
       String command =
           getConfig().getProtocol().getCommand(OmtpConstants.IMAP_CHANGE_TUI_PWD_FORMAT);
@@ -401,7 +400,7 @@ public class ImapHelper implements Closeable {
   }
 
   public void changeVoicemailTuiLanguage(String languageCode) throws MessagingException {
-    ImapConnection connection = mImapStore.getConnection();
+    ImapConnection connection = imapStore.getConnection();
     try {
       String command =
           getConfig().getProtocol().getCommand(OmtpConstants.IMAP_CHANGE_VM_LANG_FORMAT);
@@ -414,7 +413,7 @@ public class ImapHelper implements Closeable {
   }
 
   public void closeNewUserTutorial() throws MessagingException {
-    ImapConnection connection = mImapStore.getConnection();
+    ImapConnection connection = imapStore.getConnection();
     try {
       String command = getConfig().getProtocol().getCommand(OmtpConstants.IMAP_CLOSE_NUT);
       connection.executeSimpleCommand(command, false);
@@ -457,12 +456,12 @@ public class ImapHelper implements Closeable {
 
   public void updateQuota() {
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_WRITE);
-      if (mFolder == null) {
+      folder = openImapFolder(ImapFolder.MODE_READ_WRITE);
+      if (folder == null) {
         // This means we were unable to successfully open the folder.
         return;
       }
-      updateQuota(mFolder);
+      updateQuota(folder);
     } catch (MessagingException e) {
       LogUtils.e(TAG, e, "Messaging Exception");
     } finally {
@@ -473,13 +472,13 @@ public class ImapHelper implements Closeable {
   @Nullable
   public Quota getQuota() {
     try {
-      mFolder = openImapFolder(ImapFolder.MODE_READ_ONLY);
-      if (mFolder == null) {
+      folder = openImapFolder(ImapFolder.MODE_READ_ONLY);
+      if (folder == null) {
         // This means we were unable to successfully open the folder.
         LogUtils.e(TAG, "Unable to open folder");
         return null;
       }
-      return mFolder.getQuota();
+      return folder.getQuota();
     } catch (MessagingException e) {
       LogUtils.e(TAG, e, "Messaging Exception");
       return null;
@@ -505,7 +504,7 @@ public class ImapHelper implements Closeable {
             + quota.occupied
             + " new quota total:"
             + quota.total);
-    VoicemailStatus.edit(mContext, mPhoneAccount).setQuota(quota.occupied, quota.total).apply();
+    VoicemailStatus.edit(context, phoneAccount).setQuota(quota.occupied, quota.total).apply();
     LogUtils.i(TAG, "Updated quota occupied and total");
   }
 
@@ -525,12 +524,12 @@ public class ImapHelper implements Closeable {
   private final class MessageStructureFetchedListener
       implements ImapFolder.MessageRetrievalListener {
 
-    private MessageStructureWrapper mMessageStructure;
+    private MessageStructureWrapper messageStructure;
 
     public MessageStructureFetchedListener() {}
 
     public MessageStructureWrapper getMessageStructure() {
-      return mMessageStructure;
+      return messageStructure;
     }
 
     @Override
@@ -538,8 +537,8 @@ public class ImapHelper implements Closeable {
       LogUtils.d(TAG, "Fetched message structure for " + message.getUid());
       LogUtils.d(TAG, "Message retrieved: " + message);
       try {
-        mMessageStructure = getMessageOrNull(message);
-        if (mMessageStructure == null) {
+        messageStructure = getMessageOrNull(message);
+        if (messageStructure == null) {
           LogUtils.d(TAG, "This voicemail does not have an attachment...");
           return;
         }
@@ -591,11 +590,11 @@ public class ImapHelper implements Closeable {
   /** Listener for the message body being fetched. */
   private final class MessageBodyFetchedListener implements ImapFolder.MessageRetrievalListener {
 
-    private VoicemailPayload mVoicemailPayload;
+    private VoicemailPayload voicemailPayload;
 
     /** Returns the fetch voicemail payload. */
     public VoicemailPayload getVoicemailPayload() {
-      return mVoicemailPayload;
+      return voicemailPayload;
     }
 
     @Override
@@ -603,7 +602,7 @@ public class ImapHelper implements Closeable {
       LogUtils.d(TAG, "Fetched message body for " + message.getUid());
       LogUtils.d(TAG, "Message retrieved: " + message);
       try {
-        mVoicemailPayload = getVoicemailPayloadFromMessage(message);
+        voicemailPayload = getVoicemailPayloadFromMessage(message);
       } catch (MessagingException e) {
         LogUtils.e(TAG, "Messaging Exception:", e);
       } catch (IOException e) {
@@ -633,18 +632,18 @@ public class ImapHelper implements Closeable {
   /** Listener for the transcription being fetched. */
   private final class TranscriptionFetchedListener implements ImapFolder.MessageRetrievalListener {
 
-    private String mVoicemailTranscription;
+    private String voicemailTranscription;
 
     /** Returns the fetched voicemail transcription. */
     public String getVoicemailTranscription() {
-      return mVoicemailTranscription;
+      return voicemailTranscription;
     }
 
     @Override
     public void messageRetrieved(Message message) {
       LogUtils.d(TAG, "Fetched transcription for " + message.getUid());
       try {
-        mVoicemailTranscription = new String(getDataFromBody(message.getBody()));
+        voicemailTranscription = new String(getDataFromBody(message.getBody()));
       } catch (MessagingException e) {
         LogUtils.e(TAG, "Messaging Exception:", e);
       } catch (IOException e) {
@@ -655,10 +654,10 @@ public class ImapHelper implements Closeable {
 
   private ImapFolder openImapFolder(String modeReadWrite) {
     try {
-      if (mImapStore == null) {
+      if (imapStore == null) {
         return null;
       }
-      ImapFolder folder = new ImapFolder(mImapStore, ImapConstants.INBOX);
+      ImapFolder folder = new ImapFolder(imapStore, ImapConstants.INBOX);
       folder.open(modeReadWrite);
       return folder;
     } catch (MessagingException e) {
@@ -677,8 +676,8 @@ public class ImapHelper implements Closeable {
   }
 
   private void closeImapFolder() {
-    if (mFolder != null) {
-      mFolder.close(true);
+    if (folder != null) {
+      folder.close(true);
     }
   }
 

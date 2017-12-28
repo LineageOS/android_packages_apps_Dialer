@@ -78,14 +78,14 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
   private static final String TAG = ContactInfoCache.class.getSimpleName();
   private static final int TOKEN_UPDATE_PHOTO_FOR_CALL_STATE = 0;
-  private static ContactInfoCache sCache = null;
-  private final Context mContext;
-  private final PhoneNumberService mPhoneNumberService;
+  private static ContactInfoCache cache = null;
+  private final Context context;
+  private final PhoneNumberService phoneNumberService;
   // Cache info map needs to be thread-safe since it could be modified by both main thread and
   // worker thread.
-  private final ConcurrentHashMap<String, ContactCacheEntry> mInfoMap = new ConcurrentHashMap<>();
-  private final Map<String, Set<ContactInfoCacheCallback>> mCallBacks = new ArrayMap<>();
-  private int mQueryId;
+  private final ConcurrentHashMap<String, ContactCacheEntry> infoMap = new ConcurrentHashMap<>();
+  private final Map<String, Set<ContactInfoCacheCallback>> callBacks = new ArrayMap<>();
+  private int queryId;
   private final DialerExecutor<CnapInformationWrapper> cachedNumberLookupExecutor;
 
   private static class CachedNumberLookupWorker implements Worker<CnapInformationWrapper, Void> {
@@ -123,10 +123,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
   private ContactInfoCache(Context context) {
     Trace.beginSection("ContactInfoCache constructor");
-    mContext = context;
-    mPhoneNumberService = Bindings.get(context).newPhoneNumberService(context);
+    this.context = context;
+    phoneNumberService = Bindings.get(context).newPhoneNumberService(context);
     cachedNumberLookupExecutor =
-        DialerExecutorComponent.get(mContext)
+        DialerExecutorComponent.get(this.context)
             .dialerExecutorFactory()
             .createNonUiTaskBuilder(new CachedNumberLookupWorker())
             .build();
@@ -134,10 +134,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   public static synchronized ContactInfoCache getInstance(Context mContext) {
-    if (sCache == null) {
-      sCache = new ContactInfoCache(mContext.getApplicationContext());
+    if (cache == null) {
+      cache = new ContactInfoCache(mContext.getApplicationContext());
     }
-    return sCache;
+    return cache;
   }
 
   static ContactCacheEntry buildCacheEntryFromCall(
@@ -300,7 +300,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   ContactCacheEntry getInfo(String callId) {
-    return mInfoMap.get(callId);
+    return infoMap.get(callId);
   }
 
   private static final class CnapInformationWrapper {
@@ -328,7 +328,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
     if (cachedNumberLookupService == null
         || TextUtils.isEmpty(info.cnapName)
-        || mInfoMap.get(call.getId()) != null) {
+        || infoMap.get(call.getId()) != null) {
       return;
     }
     Log.i(TAG, "Found contact with CNAP name - inserting into cache");
@@ -355,8 +355,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     Trace.beginSection("prepare callback");
     final String callId = call.getId();
-    final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
-    Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+    final ContactCacheEntry cacheEntry = infoMap.get(callId);
+    Set<ContactInfoCacheCallback> callBacks = this.callBacks.get(callId);
 
     // We need to force a new query if phone number has changed.
     boolean forceQuery = needForceQuery(call, cacheEntry);
@@ -392,7 +392,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // New lookup
       callBacks = new ArraySet<>();
       callBacks.add(callback);
-      mCallBacks.put(callId, callBacks);
+      this.callBacks.put(callId, callBacks);
     }
 
     Trace.beginSection("prepare query");
@@ -402,11 +402,11 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
      * such as those for voicemail and emergency call information, will not perform an additional
      * asynchronous query.
      */
-    final CallerInfoQueryToken queryToken = new CallerInfoQueryToken(mQueryId, callId);
-    mQueryId++;
+    final CallerInfoQueryToken queryToken = new CallerInfoQueryToken(queryId, callId);
+    queryId++;
     final CallerInfo callerInfo =
         CallerInfoUtils.getCallerInfoForCall(
-            mContext,
+            context,
             call,
             new DialerCallCookieWrapper(callId, call.getNumberPresentation(), call.getCnapName()),
             new FindInfoCallback(isIncoming, queryToken));
@@ -417,7 +417,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // back. We should only update the queryId. Otherwise, we may see
       // flicker of the name and image (old cache -> new cache before query
       // -> new cache after query)
-      cacheEntry.queryId = queryToken.mQueryId;
+      cacheEntry.queryId = queryToken.queryId;
       Log.d(TAG, "There is an existing cache. Do not override until new query is back");
     } else {
       ContactCacheEntry initialCacheEntry =
@@ -441,20 +441,20 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         "updateCallerInfoInCacheOnAnyThread: callId = "
             + callId
             + "; queryId = "
-            + queryToken.mQueryId
+            + queryToken.queryId
             + "; didLocalLookup = "
             + didLocalLookup);
 
-    ContactCacheEntry existingCacheEntry = mInfoMap.get(callId);
+    ContactCacheEntry existingCacheEntry = infoMap.get(callId);
     Log.d(TAG, "Existing cacheEntry in hashMap " + existingCacheEntry);
 
     // Mark it as emergency/voicemail if the cache exists and was emergency/voicemail before the
     // number changed.
     if (existingCacheEntry != null) {
       if (existingCacheEntry.isEmergencyNumber) {
-        callerInfo.markAsEmergency(mContext);
+        callerInfo.markAsEmergency(context);
       } else if (existingCacheEntry.isVoicemailNumber) {
-        callerInfo.markAsVoiceMail(mContext);
+        callerInfo.markAsVoiceMail(context);
       }
     }
 
@@ -466,8 +466,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
 
     // We always replace the entry. The only exception is the same photo case.
-    ContactCacheEntry cacheEntry = buildEntry(mContext, callerInfo, presentationMode);
-    cacheEntry.queryId = queryToken.mQueryId;
+    ContactCacheEntry cacheEntry = buildEntry(context, callerInfo, presentationMode);
+    cacheEntry.queryId = queryToken.queryId;
 
     if (didLocalLookup) {
       if (cacheEntry.displayPhotoUri != null) {
@@ -491,17 +491,17 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         cacheEntry.hasPendingQuery = true;
         ContactsAsyncHelper.startObtainPhotoAsync(
             TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
-            mContext,
+            context,
             cacheEntry.displayPhotoUri,
             ContactInfoCache.this,
             queryToken);
       }
       Log.d(TAG, "put entry into map: " + cacheEntry);
-      mInfoMap.put(callId, cacheEntry);
+      infoMap.put(callId, cacheEntry);
     } else {
       // Don't overwrite if there is existing cache.
       Log.d(TAG, "put entry into map if not exists: " + cacheEntry);
-      mInfoMap.putIfAbsent(callId, cacheEntry);
+      infoMap.putIfAbsent(callId, cacheEntry);
     }
     Trace.endSection();
     return cacheEntry;
@@ -509,7 +509,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
   private void maybeUpdateFromCequintCallerId(
       CallerInfo callerInfo, String cnapName, boolean isIncoming) {
-    if (!CequintCallerIdManager.isCequintCallerIdEnabled(mContext)) {
+    if (!CequintCallerIdManager.isCequintCallerIdEnabled(context)) {
       return;
     }
     if (callerInfo.phoneNumber == null) {
@@ -517,7 +517,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
     CequintCallerIdContact cequintCallerIdContact =
         CequintCallerIdManager.getCequintCallerIdContactForInCall(
-            mContext, callerInfo.phoneNumber, cnapName, isIncoming);
+            context, callerInfo.phoneNumber, cnapName, isIncoming);
 
     if (cequintCallerIdContact == null) {
       return;
@@ -553,8 +553,8 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   public void onImageLoaded(int token, Drawable photo, Bitmap photoIcon, Object cookie) {
     Assert.isWorkerThread();
     CallerInfoQueryToken myCookie = (CallerInfoQueryToken) cookie;
-    final String callId = myCookie.mCallId;
-    final int queryId = myCookie.mQueryId;
+    final String callId = myCookie.callId;
+    final int queryId = myCookie.queryId;
     if (!isWaitingForThisQuery(callId, queryId)) {
       return;
     }
@@ -562,12 +562,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   private void loadImage(Drawable photo, Bitmap photoIcon, Object cookie) {
-    Log.d(TAG, "Image load complete with context: ", mContext);
+    Log.d(TAG, "Image load complete with context: ", context);
     // TODO: may be nice to update the image view again once the newer one
     // is available on contacts database.
     CallerInfoQueryToken myCookie = (CallerInfoQueryToken) cookie;
-    final String callId = myCookie.mCallId;
-    ContactCacheEntry entry = mInfoMap.get(callId);
+    final String callId = myCookie.callId;
+    ContactCacheEntry entry = infoMap.get(callId);
 
     if (entry == null) {
       Log.e(TAG, "Image Load received for empty search entry.");
@@ -584,7 +584,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       entry.photoType = ContactPhotoType.CONTACT;
     } else if (photoIcon != null) {
       Log.v(TAG, "photo icon: ", photoIcon);
-      entry.photo = new BitmapDrawable(mContext.getResources(), photoIcon);
+      entry.photo = new BitmapDrawable(context.getResources(), photoIcon);
       entry.photoType = ContactPhotoType.CONTACT;
     } else {
       Log.v(TAG, "unknown photo");
@@ -602,21 +602,21 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   public void onImageLoadComplete(int token, Drawable photo, Bitmap photoIcon, Object cookie) {
     Assert.isMainThread();
     CallerInfoQueryToken myCookie = (CallerInfoQueryToken) cookie;
-    final String callId = myCookie.mCallId;
-    final int queryId = myCookie.mQueryId;
+    final String callId = myCookie.callId;
+    final int queryId = myCookie.queryId;
     if (!isWaitingForThisQuery(callId, queryId)) {
       return;
     }
-    sendImageNotifications(callId, mInfoMap.get(callId));
+    sendImageNotifications(callId, infoMap.get(callId));
 
     clearCallbacks(callId);
   }
 
   /** Blows away the stored cache values. */
   public void clearCache() {
-    mInfoMap.clear();
-    mCallBacks.clear();
-    mQueryId = 0;
+    infoMap.clear();
+    callBacks.clear();
+    queryId = 0;
   }
 
   private ContactCacheEntry buildEntry(Context context, CallerInfo info, int presentation) {
@@ -662,7 +662,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   private void sendInfoNotifications(String callId, ContactCacheEntry entry) {
     Trace.beginSection("ContactInfoCache.sendInfoNotifications");
     Assert.isMainThread();
-    final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+    final Set<ContactInfoCacheCallback> callBacks = this.callBacks.get(callId);
     if (callBacks != null) {
       for (ContactInfoCacheCallback callBack : callBacks) {
         callBack.onContactInfoComplete(callId, entry);
@@ -675,7 +675,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   private void sendImageNotifications(String callId, ContactCacheEntry entry) {
     Trace.beginSection("ContactInfoCache.sendImageNotifications");
     Assert.isMainThread();
-    final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+    final Set<ContactInfoCacheCallback> callBacks = this.callBacks.get(callId);
     if (callBacks != null && entry.photo != null) {
       for (ContactInfoCacheCallback callBack : callBacks) {
         callBack.onImageLoadComplete(callId, entry);
@@ -685,7 +685,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   private void clearCallbacks(String callId) {
-    mCallBacks.remove(callId);
+    callBacks.remove(callId);
   }
 
   /** Callback interface for the contact query. */
@@ -791,26 +791,26 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
   private class FindInfoCallback implements OnQueryCompleteListener {
 
-    private final boolean mIsIncoming;
-    private final CallerInfoQueryToken mQueryToken;
+    private final boolean isIncoming;
+    private final CallerInfoQueryToken queryToken;
 
     FindInfoCallback(boolean isIncoming, CallerInfoQueryToken queryToken) {
-      mIsIncoming = isIncoming;
-      mQueryToken = queryToken;
+      this.isIncoming = isIncoming;
+      this.queryToken = queryToken;
     }
 
     @Override
     public void onDataLoaded(int token, Object cookie, CallerInfo ci) {
       Assert.isWorkerThread();
       DialerCallCookieWrapper cw = (DialerCallCookieWrapper) cookie;
-      if (!isWaitingForThisQuery(cw.callId, mQueryToken.mQueryId)) {
+      if (!isWaitingForThisQuery(cw.callId, queryToken.queryId)) {
         return;
       }
       long start = SystemClock.uptimeMillis();
-      maybeUpdateFromCequintCallerId(ci, cw.cnapName, mIsIncoming);
+      maybeUpdateFromCequintCallerId(ci, cw.cnapName, isIncoming);
       long time = SystemClock.uptimeMillis() - start;
       Log.d(TAG, "Cequint Caller Id look up takes " + time + " ms.");
-      updateCallerInfoInCacheOnAnyThread(cw.callId, cw.numberPresentation, ci, true, mQueryToken);
+      updateCallerInfoInCacheOnAnyThread(cw.callId, cw.numberPresentation, ci, true, queryToken);
     }
 
     @Override
@@ -819,11 +819,11 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       Assert.isMainThread();
       DialerCallCookieWrapper cw = (DialerCallCookieWrapper) cookie;
       String callId = cw.callId;
-      if (!isWaitingForThisQuery(cw.callId, mQueryToken.mQueryId)) {
+      if (!isWaitingForThisQuery(cw.callId, queryToken.queryId)) {
         Trace.endSection();
         return;
       }
-      ContactCacheEntry cacheEntry = mInfoMap.get(callId);
+      ContactCacheEntry cacheEntry = infoMap.get(callId);
       // This may happen only when InCallPresenter attempt to cleanup.
       if (cacheEntry == null) {
         Log.w(TAG, "Contact lookup done, but cache entry is not found.");
@@ -834,12 +834,12 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // Before issuing a request for more data from other services, we only check that the
       // contact wasn't found in the local DB.  We don't check the if the cache entry already
       // has a name because we allow overriding cnap data with data from other services.
-      if (!callerInfo.contactExists && mPhoneNumberService != null) {
+      if (!callerInfo.contactExists && phoneNumberService != null) {
         Log.d(TAG, "Contact lookup. Local contacts miss, checking remote");
         final PhoneNumberServiceListener listener =
-            new PhoneNumberServiceListener(callId, mQueryToken.mQueryId);
+            new PhoneNumberServiceListener(callId, queryToken.queryId);
         cacheEntry.hasPendingQuery = true;
-        mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener, mIsIncoming);
+        phoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener, isIncoming);
       }
       sendInfoNotifications(callId, cacheEntry);
       if (!cacheEntry.hasPendingQuery) {
@@ -860,18 +860,18 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   class PhoneNumberServiceListener
       implements PhoneNumberService.NumberLookupListener, PhoneNumberService.ImageLookupListener {
 
-    private final String mCallId;
-    private final int mQueryIdOfRemoteLookup;
+    private final String callId;
+    private final int queryIdOfRemoteLookup;
 
     PhoneNumberServiceListener(String callId, int queryId) {
-      mCallId = callId;
-      mQueryIdOfRemoteLookup = queryId;
+      this.callId = callId;
+      queryIdOfRemoteLookup = queryId;
     }
 
     @Override
     public void onPhoneNumberInfoComplete(final PhoneNumberService.PhoneNumberInfo info) {
       Log.d(TAG, "PhoneNumberServiceListener.onPhoneNumberInfoComplete");
-      if (!isWaitingForThisQuery(mCallId, mQueryIdOfRemoteLookup)) {
+      if (!isWaitingForThisQuery(callId, queryIdOfRemoteLookup)) {
         return;
       }
 
@@ -879,7 +879,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       // so clear the callbacks and return.
       if (info == null) {
         Log.d(TAG, "Contact lookup done. Remote contact not found.");
-        clearCallbacks(mCallId);
+        clearCallbacks(callId);
         return;
       }
       ContactCacheEntry entry = new ContactCacheEntry();
@@ -892,10 +892,10 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       if (type == Phone.TYPE_CUSTOM) {
         entry.label = label;
       } else {
-        final CharSequence typeStr = Phone.getTypeLabel(mContext.getResources(), type, label);
+        final CharSequence typeStr = Phone.getTypeLabel(context.getResources(), type, label);
         entry.label = typeStr == null ? null : typeStr.toString();
       }
-      final ContactCacheEntry oldEntry = mInfoMap.get(mCallId);
+      final ContactCacheEntry oldEntry = infoMap.get(callId);
       if (oldEntry != null) {
         // Location is only obtained from local lookup so persist
         // the value for remote lookups. Once we have a name this
@@ -915,25 +915,25 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       }
 
       Log.d(TAG, "put entry into map: " + entry);
-      mInfoMap.put(mCallId, entry);
-      sendInfoNotifications(mCallId, entry);
+      infoMap.put(callId, entry);
+      sendInfoNotifications(callId, entry);
 
       entry.hasPendingQuery = info.getImageUrl() != null;
 
       // If there is no image then we should not expect another callback.
       if (!entry.hasPendingQuery) {
         // We're done, so clear callbacks
-        clearCallbacks(mCallId);
+        clearCallbacks(callId);
       }
     }
 
     @Override
     public void onImageFetchComplete(Bitmap bitmap) {
       Log.d(TAG, "PhoneNumberServiceListener.onImageFetchComplete");
-      if (!isWaitingForThisQuery(mCallId, mQueryIdOfRemoteLookup)) {
+      if (!isWaitingForThisQuery(callId, queryIdOfRemoteLookup)) {
         return;
       }
-      CallerInfoQueryToken queryToken = new CallerInfoQueryToken(mQueryIdOfRemoteLookup, mCallId);
+      CallerInfoQueryToken queryToken = new CallerInfoQueryToken(queryIdOfRemoteLookup, callId);
       loadImage(null, bitmap, queryToken);
       onImageLoadComplete(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE, null, bitmap, queryToken);
     }
@@ -961,18 +961,18 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
   }
 
   private static final class CallerInfoQueryToken {
-    final int mQueryId;
-    final String mCallId;
+    final int queryId;
+    final String callId;
 
     CallerInfoQueryToken(int queryId, String callId) {
-      mQueryId = queryId;
-      mCallId = callId;
+      this.queryId = queryId;
+      this.callId = callId;
     }
   }
 
   /** Check if the queryId in the cached map is the same as the one from query result. */
   private boolean isWaitingForThisQuery(String callId, int queryId) {
-    final ContactCacheEntry existingCacheEntry = mInfoMap.get(callId);
+    final ContactCacheEntry existingCacheEntry = infoMap.get(callId);
     if (existingCacheEntry == null) {
       // This might happen if lookup on background thread comes back before the initial entry is
       // created.

@@ -41,8 +41,8 @@ public class SyncOneTask extends BaseTask {
   private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
   private static final String EXTRA_VOICEMAIL = "extra_voicemail";
 
-  private PhoneAccountHandle mPhone;
-  private Voicemail mVoicemail;
+  private PhoneAccountHandle phone;
+  private Voicemail voicemail;
 
   public static void start(Context context, PhoneAccountHandle phone, Voicemail voicemail) {
     Intent intent = BaseTask.createIntent(context, SyncOneTask.class, phone);
@@ -59,22 +59,22 @@ public class SyncOneTask extends BaseTask {
   @Override
   public void onCreate(Context context, Bundle extras) {
     super.onCreate(context, extras);
-    mPhone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
-    mVoicemail = extras.getParcelable(EXTRA_VOICEMAIL);
+    phone = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
+    voicemail = extras.getParcelable(EXTRA_VOICEMAIL);
   }
 
   @Override
   public void onExecuteInBackgroundThread() {
     OmtpVvmSyncService service = new OmtpVvmSyncService(getContext());
-    service.sync(this, mPhone, mVoicemail, VoicemailStatus.edit(getContext(), mPhone));
+    service.sync(this, phone, voicemail, VoicemailStatus.edit(getContext(), phone));
   }
 
   @Override
   public Intent createRestartIntent() {
     LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
-    intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, mPhone);
-    intent.putExtra(EXTRA_VOICEMAIL, mVoicemail);
+    intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
+    intent.putExtra(EXTRA_VOICEMAIL, voicemail);
     return intent;
   }
 }

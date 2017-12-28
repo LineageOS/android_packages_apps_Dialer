@@ -27,26 +27,26 @@ import com.android.dialer.location.GeoUtil;
 /** List adapter to display search results for adding a blocked number. */
 public class BlockedListSearchAdapter extends RegularSearchListAdapter {
 
-  private Resources mResources;
-  private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+  private Resources resources;
+  private FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
 
   public BlockedListSearchAdapter(Context context) {
     super(context);
-    mResources = context.getResources();
+    resources = context.getResources();
     disableAllShortcuts();
     setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, true);
 
-    mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(context);
+    filteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(context);
   }
 
   @Override
   protected boolean isChanged(boolean showNumberShortcuts) {
-    return setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, showNumberShortcuts || mIsQuerySipAddress);
+    return setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, showNumberShortcuts || isQuerySipAddress);
   }
 
   public void setViewBlocked(ContactListItemView view, Integer id) {
     view.setTag(R.id.block_id, id);
-    final int textColor = mResources.getColor(R.color.blocked_number_block_color);
+    final int textColor = resources.getColor(R.color.blocked_number_block_color);
     view.getDataView().setTextColor(textColor);
     view.getLabelView().setTextColor(textColor);
     //TODO: Add icon
@@ -54,7 +54,7 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
 
   public void setViewUnblocked(ContactListItemView view) {
     view.setTag(R.id.block_id, null);
-    final int textColor = mResources.getColor(R.color.dialer_secondary_text_color);
+    final int textColor = resources.getColor(R.color.dialer_secondary_text_color);
     view.getDataView().setTextColor(textColor);
     view.getLabelView().setTextColor(textColor);
     //TODO: Remove icon
@@ -79,6 +79,6 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
             }
           }
         };
-    mFilteredNumberAsyncQueryHandler.isBlockedNumber(onCheckListener, number, countryIso);
+    filteredNumberAsyncQueryHandler.isBlockedNumber(onCheckListener, number, countryIso);
   }
 }

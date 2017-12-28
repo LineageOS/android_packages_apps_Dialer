@@ -34,12 +34,12 @@ public class ImapStore {
    */
   public static final int FETCH_BODY_SANE_SUGGESTED_SIZE = (125 * 1024);
 
-  private final Context mContext;
-  private final ImapHelper mHelper;
-  private final String mUsername;
-  private final String mPassword;
-  private final MailTransport mTransport;
-  private ImapConnection mConnection;
+  private final Context context;
+  private final ImapHelper helper;
+  private final String username;
+  private final String password;
+  private final MailTransport transport;
+  private ImapConnection connection;
 
   public static final int FLAG_NONE = 0x00; // No flags
   public static final int FLAG_SSL = 0x01; // Use SSL
@@ -58,32 +58,32 @@ public class ImapStore {
       String serverName,
       int flags,
       Network network) {
-    mContext = context;
-    mHelper = helper;
-    mUsername = username;
-    mPassword = password;
-    mTransport = new MailTransport(context, this.getImapHelper(), network, serverName, port, flags);
+    this.context = context;
+    this.helper = helper;
+    this.username = username;
+    this.password = password;
+    transport = new MailTransport(context, this.getImapHelper(), network, serverName, port, flags);
   }
 
   public Context getContext() {
-    return mContext;
+    return context;
   }
 
   public ImapHelper getImapHelper() {
-    return mHelper;
+    return helper;
   }
 
   public String getUsername() {
-    return mUsername;
+    return username;
   }
 
   public String getPassword() {
-    return mPassword;
+    return password;
   }
 
   /** Returns a clone of the transport associated with this store. */
   MailTransport cloneTransport() {
-    return mTransport.clone();
+    return transport.clone();
   }
 
   /** Returns UIDs of Messages joined with "," as the separator. */
@@ -101,15 +101,15 @@ public class ImapStore {
   }
 
   static class ImapMessage extends MimeMessage {
-    private ImapFolder mFolder;
+    private ImapFolder folder;
 
     ImapMessage(String uid, ImapFolder folder) {
-      mUid = uid;
-      mFolder = folder;
+      this.uid = uid;
+      this.folder = folder;
     }
 
     public void setSize(int size) {
-      mSize = size;
+      this.size = size;
     }
 
     @Override
@@ -124,17 +124,17 @@ public class ImapStore {
     @Override
     public void setFlag(String flag, boolean set) throws MessagingException {
       super.setFlag(flag, set);
-      mFolder.setFlags(new Message[] {this}, new String[] {flag}, set);
+      folder.setFlags(new Message[] {this}, new String[] {flag}, set);
     }
   }
 
   static class ImapException extends MessagingException {
     private static final long serialVersionUID = 1L;
 
-    private final String mStatus;
-    private final String mStatusMessage;
-    private final String mAlertText;
-    private final String mResponseCode;
+    private final String status;
+    private final String statusMessage;
+    private final String alertText;
+    private final String responseCode;
 
     public ImapException(
         String message,
@@ -143,40 +143,40 @@ public class ImapStore {
         String alertText,
         String responseCode) {
       super(message);
-      mStatus = status;
-      mStatusMessage = statusMessage;
-      mAlertText = alertText;
-      mResponseCode = responseCode;
+      this.status = status;
+      this.statusMessage = statusMessage;
+      this.alertText = alertText;
+      this.responseCode = responseCode;
     }
 
     public String getStatus() {
-      return mStatus;
+      return status;
     }
 
     public String getStatusMessage() {
-      return mStatusMessage;
+      return statusMessage;
     }
 
     public String getAlertText() {
-      return mAlertText;
+      return alertText;
     }
 
     public String getResponseCode() {
-      return mResponseCode;
+      return responseCode;
     }
   }
 
   public void closeConnection() {
-    if (mConnection != null) {
-      mConnection.close();
-      mConnection = null;
+    if (connection != null) {
+      connection.close();
+      connection = null;
     }
   }
 
   public ImapConnection getConnection() {
-    if (mConnection == null) {
-      mConnection = new ImapConnection(this);
+    if (connection == null) {
+      connection = new ImapConnection(this);
     }
-    return mConnection;
+    return connection;
   }
 }

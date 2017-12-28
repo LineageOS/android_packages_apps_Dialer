@@ -36,83 +36,83 @@ public class SearchEditTextLayout extends FrameLayout {
   private static final float EXPAND_MARGIN_FRACTION_START = 0.8f;
   private static final int ANIMATION_DURATION = 200;
   /* Subclass-visible for testing */
-  protected boolean mIsExpanded = false;
-  protected boolean mIsFadedOut = false;
-  private OnKeyListener mPreImeKeyListener;
-  private int mTopMargin;
-  private int mBottomMargin;
-  private int mLeftMargin;
-  private int mRightMargin;
-  private float mCollapsedElevation;
-  private View mCollapsed;
-  private View mExpanded;
-  private EditText mSearchView;
-  private View mSearchIcon;
-  private View mCollapsedSearchBox;
-  private View mVoiceSearchButtonView;
-  private View mOverflowButtonView;
-  private View mClearButtonView;
+  protected boolean isExpanded = false;
+  protected boolean isFadedOut = false;
+  private OnKeyListener preImeKeyListener;
+  private int topMargin;
+  private int bottomMargin;
+  private int leftMargin;
+  private int rightMargin;
+  private float collapsedElevation;
+  private View collapsed;
+  private View expanded;
+  private EditText searchView;
+  private View searchIcon;
+  private View collapsedSearchBox;
+  private View voiceSearchButtonView;
+  private View overflowButtonView;
+  private View clearButtonView;
 
-  private ValueAnimator mAnimator;
+  private ValueAnimator animator;
 
-  private Callback mCallback;
+  private Callback callback;
 
-  private boolean mVoiceSearchEnabled;
+  private boolean voiceSearchEnabled;
 
   public SearchEditTextLayout(Context context, AttributeSet attrs) {
     super(context, attrs);
   }
 
   public void setPreImeKeyListener(OnKeyListener listener) {
-    mPreImeKeyListener = listener;
+    preImeKeyListener = listener;
   }
 
   public void setCallback(Callback listener) {
-    mCallback = listener;
+    callback = listener;
   }
 
   public void setVoiceSearchEnabled(boolean enabled) {
-    mVoiceSearchEnabled = enabled;
-    updateVisibility(mIsExpanded);
+    voiceSearchEnabled = enabled;
+    updateVisibility(isExpanded);
   }
 
   @Override
   protected void onFinishInflate() {
     MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
-    mTopMargin = params.topMargin;
-    mBottomMargin = params.bottomMargin;
-    mLeftMargin = params.leftMargin;
-    mRightMargin = params.rightMargin;
+    topMargin = params.topMargin;
+    bottomMargin = params.bottomMargin;
+    leftMargin = params.leftMargin;
+    rightMargin = params.rightMargin;
 
-    mCollapsedElevation = getElevation();
+    collapsedElevation = getElevation();
 
-    mCollapsed = findViewById(R.id.search_box_collapsed);
-    mExpanded = findViewById(R.id.search_box_expanded);
-    mSearchView = (EditText) mExpanded.findViewById(R.id.search_view);
+    collapsed = findViewById(R.id.search_box_collapsed);
+    expanded = findViewById(R.id.search_box_expanded);
+    searchView = (EditText) expanded.findViewById(R.id.search_view);
 
-    mSearchIcon = findViewById(R.id.search_magnifying_glass);
-    mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
-    mVoiceSearchButtonView = findViewById(R.id.voice_search_button);
-    mOverflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
-    mClearButtonView = findViewById(R.id.search_close_button);
+    searchIcon = findViewById(R.id.search_magnifying_glass);
+    collapsedSearchBox = findViewById(R.id.search_box_start_search);
+    voiceSearchButtonView = findViewById(R.id.voice_search_button);
+    overflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
+    clearButtonView = findViewById(R.id.search_close_button);
 
     // Convert a long click into a click to expand the search box. Touch events are also
     // forwarded to the searchView. This accelerates the long-press scenario for copy/paste.
-    mCollapsed.setOnLongClickListener(
+    collapsed.setOnLongClickListener(
         new OnLongClickListener() {
           @Override
           public boolean onLongClick(View view) {
-            mCollapsed.performClick();
+            collapsed.performClick();
             return false;
           }
         });
-    mCollapsed.setOnTouchListener(
+    collapsed.setOnTouchListener(
         (v, event) -> {
-          mSearchView.onTouchEvent(event);
+          searchView.onTouchEvent(event);
           return false;
         });
 
-    mSearchView.setOnFocusChangeListener(
+    searchView.setOnFocusChangeListener(
         new OnFocusChangeListener() {
           @Override
           public void onFocusChange(View v, boolean hasFocus) {
@@ -124,24 +124,24 @@ public class SearchEditTextLayout extends FrameLayout {
           }
         });
 
-    mSearchView.setOnClickListener(
+    searchView.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            if (mCallback != null) {
-              mCallback.onSearchViewClicked();
+            if (callback != null) {
+              callback.onSearchViewClicked();
             }
           }
         });
 
-    mSearchView.addTextChangedListener(
+    searchView.addTextChangedListener(
         new TextWatcher() {
           @Override
           public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
           @Override
           public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mClearButtonView.setVisibility(TextUtils.isEmpty(s) ? View.GONE : View.VISIBLE);
+            clearButtonView.setVisibility(TextUtils.isEmpty(s) ? View.GONE : View.VISIBLE);
           }
 
           @Override
@@ -153,7 +153,7 @@ public class SearchEditTextLayout extends FrameLayout {
             new OnClickListener() {
               @Override
               public void onClick(View v) {
-                mSearchView.setText(null);
+                searchView.setText(null);
               }
             });
 
@@ -162,8 +162,8 @@ public class SearchEditTextLayout extends FrameLayout {
             new OnClickListener() {
               @Override
               public void onClick(View v) {
-                if (mCallback != null) {
-                  mCallback.onBackButtonClicked();
+                if (callback != null) {
+                  callback.onBackButtonClicked();
                 }
               }
             });
@@ -173,8 +173,8 @@ public class SearchEditTextLayout extends FrameLayout {
 
   @Override
   public boolean dispatchKeyEventPreIme(KeyEvent event) {
-    if (mPreImeKeyListener != null) {
-      if (mPreImeKeyListener.onKey(this, event.getKeyCode(), event)) {
+    if (preImeKeyListener != null) {
+      if (preImeKeyListener.onKey(this, event.getKeyCode(), event)) {
         return true;
       }
     }
@@ -187,28 +187,28 @@ public class SearchEditTextLayout extends FrameLayout {
 
   public void fadeOut(AnimUtils.AnimationCallback callback) {
     AnimUtils.fadeOut(this, ANIMATION_DURATION, callback);
-    mIsFadedOut = true;
+    isFadedOut = true;
   }
 
   public void fadeIn() {
     AnimUtils.fadeIn(this, ANIMATION_DURATION);
-    mIsFadedOut = false;
+    isFadedOut = false;
   }
 
   public void fadeIn(AnimUtils.AnimationCallback callback) {
     AnimUtils.fadeIn(this, ANIMATION_DURATION, AnimUtils.NO_DELAY, callback);
-    mIsFadedOut = false;
+    isFadedOut = false;
   }
 
   public void setVisible(boolean visible) {
     if (visible) {
       setAlpha(1);
       setVisibility(View.VISIBLE);
-      mIsFadedOut = false;
+      isFadedOut = false;
     } else {
       setAlpha(0);
       setVisibility(View.GONE);
-      mIsFadedOut = true;
+      isFadedOut = true;
     }
   }
 
@@ -216,15 +216,15 @@ public class SearchEditTextLayout extends FrameLayout {
     updateVisibility(true /* isExpand */);
 
     if (animate) {
-      AnimUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
-      mAnimator = ValueAnimator.ofFloat(EXPAND_MARGIN_FRACTION_START, 0f);
+      AnimUtils.crossFadeViews(expanded, collapsed, ANIMATION_DURATION);
+      animator = ValueAnimator.ofFloat(EXPAND_MARGIN_FRACTION_START, 0f);
       setMargins(EXPAND_MARGIN_FRACTION_START);
       prepareAnimator();
     } else {
-      mExpanded.setVisibility(View.VISIBLE);
-      mExpanded.setAlpha(1);
+      expanded.setVisibility(View.VISIBLE);
+      expanded.setAlpha(1);
       setMargins(0f);
-      mCollapsed.setVisibility(View.GONE);
+      collapsed.setVisibility(View.GONE);
     }
 
     // Set 9-patch background. This owns the padding, so we need to restore the original values.
@@ -237,27 +237,27 @@ public class SearchEditTextLayout extends FrameLayout {
     setPaddingRelative(paddingStart, paddingTop, paddingEnd, paddingBottom);
 
     if (requestFocus) {
-      mSearchView.requestFocus();
+      searchView.requestFocus();
     }
-    mIsExpanded = true;
+    isExpanded = true;
   }
 
   public void collapse(boolean animate) {
     updateVisibility(false /* isExpand */);
 
     if (animate) {
-      AnimUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
-      mAnimator = ValueAnimator.ofFloat(0f, 1f);
+      AnimUtils.crossFadeViews(collapsed, expanded, ANIMATION_DURATION);
+      animator = ValueAnimator.ofFloat(0f, 1f);
       prepareAnimator();
     } else {
-      mCollapsed.setVisibility(View.VISIBLE);
-      mCollapsed.setAlpha(1);
+      collapsed.setVisibility(View.VISIBLE);
+      collapsed.setAlpha(1);
       setMargins(1f);
-      mExpanded.setVisibility(View.GONE);
+      expanded.setVisibility(View.GONE);
     }
 
-    mIsExpanded = false;
-    setElevation(mCollapsedElevation);
+    isExpanded = false;
+    setElevation(collapsedElevation);
     setBackgroundResource(R.drawable.rounded_corner);
   }
 
@@ -271,30 +271,30 @@ public class SearchEditTextLayout extends FrameLayout {
     int collapsedViewVisibility = isExpand ? View.GONE : View.VISIBLE;
     int expandedViewVisibility = isExpand ? View.VISIBLE : View.GONE;
 
-    mSearchIcon.setVisibility(collapsedViewVisibility);
-    mCollapsedSearchBox.setVisibility(collapsedViewVisibility);
-    if (mVoiceSearchEnabled) {
-      mVoiceSearchButtonView.setVisibility(collapsedViewVisibility);
+    searchIcon.setVisibility(collapsedViewVisibility);
+    collapsedSearchBox.setVisibility(collapsedViewVisibility);
+    if (voiceSearchEnabled) {
+      voiceSearchButtonView.setVisibility(collapsedViewVisibility);
     } else {
-      mVoiceSearchButtonView.setVisibility(View.GONE);
+      voiceSearchButtonView.setVisibility(View.GONE);
     }
-    mOverflowButtonView.setVisibility(collapsedViewVisibility);
+    overflowButtonView.setVisibility(collapsedViewVisibility);
     // TODO: Prevents keyboard from jumping up in landscape mode after exiting the
     // SearchFragment when the query string is empty. More elegant fix?
-    //mExpandedSearchBox.setVisibility(expandedViewVisibility);
-    if (TextUtils.isEmpty(mSearchView.getText())) {
-      mClearButtonView.setVisibility(View.GONE);
+    // mExpandedSearchBox.setVisibility(expandedViewVisibility);
+    if (TextUtils.isEmpty(searchView.getText())) {
+      clearButtonView.setVisibility(View.GONE);
     } else {
-      mClearButtonView.setVisibility(expandedViewVisibility);
+      clearButtonView.setVisibility(expandedViewVisibility);
     }
   }
 
   private void prepareAnimator() {
-    if (mAnimator != null) {
-      mAnimator.cancel();
+    if (animator != null) {
+      animator.cancel();
     }
 
-    mAnimator.addUpdateListener(
+    animator.addUpdateListener(
         new AnimatorUpdateListener() {
           @Override
           public void onAnimationUpdate(ValueAnimator animation) {
@@ -303,16 +303,16 @@ public class SearchEditTextLayout extends FrameLayout {
           }
         });
 
-    mAnimator.setDuration(ANIMATION_DURATION);
-    mAnimator.start();
+    animator.setDuration(ANIMATION_DURATION);
+    animator.start();
   }
 
   public boolean isExpanded() {
-    return mIsExpanded;
+    return isExpanded;
   }
 
   public boolean isFadedOut() {
-    return mIsFadedOut;
+    return isFadedOut;
   }
 
   /**
@@ -322,10 +322,10 @@ public class SearchEditTextLayout extends FrameLayout {
    */
   private void setMargins(float fraction) {
     MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
-    params.topMargin = (int) (mTopMargin * fraction);
-    params.bottomMargin = (int) (mBottomMargin * fraction);
-    params.leftMargin = (int) (mLeftMargin * fraction);
-    params.rightMargin = (int) (mRightMargin * fraction);
+    params.topMargin = (int) (topMargin * fraction);
+    params.bottomMargin = (int) (bottomMargin * fraction);
+    params.leftMargin = (int) (leftMargin * fraction);
+    params.rightMargin = (int) (rightMargin * fraction);
     requestLayout();
   }
 

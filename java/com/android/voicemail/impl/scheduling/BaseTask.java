@@ -44,25 +44,25 @@ public abstract class BaseTask implements Task {
 
   private static final String EXTRA_EXECUTION_TIME = "extra_execution_time";
 
-  private Bundle mExtras;
+  private Bundle extras;
 
-  private Context mContext;
+  private Context context;
 
-  private int mId;
-  private PhoneAccountHandle mPhoneAccountHandle;
+  private int id;
+  private PhoneAccountHandle phoneAccountHandle;
 
-  private boolean mHasStarted;
-  private volatile boolean mHasFailed;
+  private boolean hasStarted;
+  private volatile boolean hasFailed;
 
-  @NonNull private final List<Policy> mPolicies = new ArrayList<>();
+  @NonNull private final List<Policy> policies = new ArrayList<>();
 
-  private long mExecutionTime;
+  private long executionTime;
 
-  private static Clock sClock = new Clock();
+  private static Clock clock = new Clock();
 
   protected BaseTask(int id) {
-    mId = id;
-    mExecutionTime = getTimeMillis();
+    this.id = id;
+    executionTime = getTimeMillis();
   }
 
   /**
@@ -72,27 +72,27 @@ public abstract class BaseTask implements Task {
   @MainThread
   public void setId(int id) {
     Assert.isMainThread();
-    mId = id;
+    this.id = id;
   }
 
   @MainThread
   public boolean hasStarted() {
     Assert.isMainThread();
-    return mHasStarted;
+    return hasStarted;
   }
 
   @MainThread
   public boolean hasFailed() {
     Assert.isMainThread();
-    return mHasFailed;
+    return hasFailed;
   }
 
   public Context getContext() {
-    return mContext;
+    return context;
   }
 
   public PhoneAccountHandle getPhoneAccountHandle() {
-    return mPhoneAccountHandle;
+    return phoneAccountHandle;
   }
   /**
    * Should be call in the constructor or {@link Policy#onCreate(BaseTask, Bundle)} will be missed.
@@ -100,7 +100,7 @@ public abstract class BaseTask implements Task {
   @MainThread
   public BaseTask addPolicy(Policy policy) {
     Assert.isMainThread();
-    mPolicies.add(policy);
+    policies.add(policy);
     return this;
   }
 
@@ -112,18 +112,18 @@ public abstract class BaseTask implements Task {
   @WorkerThread
   public void fail() {
     Assert.isNotMainThread();
-    mHasFailed = true;
+    hasFailed = true;
   }
 
   /** @param timeMillis the time since epoch, in milliseconds. */
   @MainThread
   public void setExecutionTime(long timeMillis) {
     Assert.isMainThread();
-    mExecutionTime = timeMillis;
+    executionTime = timeMillis;
   }
 
   public long getTimeMillis() {
-    return sClock.getTimeMillis();
+    return clock.getTimeMillis();
   }
 
   /**
@@ -131,7 +131,7 @@ public abstract class BaseTask implements Task {
    * their intent upon this.
    */
   public Intent createRestartIntent() {
-    return createIntent(getContext(), this.getClass(), mPhoneAccountHandle);
+    return createIntent(getContext(), this.getClass(), phoneAccountHandle);
   }
 
   /**
@@ -147,22 +147,22 @@ public abstract class BaseTask implements Task {
 
   @Override
   public TaskId getId() {
-    return new TaskId(mId, mPhoneAccountHandle);
+    return new TaskId(id, phoneAccountHandle);
   }
 
   @Override
   public Bundle toBundle() {
-    mExtras.putLong(EXTRA_EXECUTION_TIME, mExecutionTime);
-    return mExtras;
+    extras.putLong(EXTRA_EXECUTION_TIME, executionTime);
+    return extras;
   }
 
   @Override
   @CallSuper
   public void onCreate(Context context, Bundle extras) {
-    mContext = context;
-    mExtras = extras;
-    mPhoneAccountHandle = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
-    for (Policy policy : mPolicies) {
+    this.context = context;
+    this.extras = extras;
+    phoneAccountHandle = extras.getParcelable(EXTRA_PHONE_ACCOUNT_HANDLE);
+    for (Policy policy : policies) {
       policy.onCreate(this, extras);
     }
   }
@@ -170,42 +170,42 @@ public abstract class BaseTask implements Task {
   @Override
   @CallSuper
   public void onRestore(Bundle extras) {
-    if (mExtras.containsKey(EXTRA_EXECUTION_TIME)) {
-      mExecutionTime = extras.getLong(EXTRA_EXECUTION_TIME);
+    if (this.extras.containsKey(EXTRA_EXECUTION_TIME)) {
+      executionTime = extras.getLong(EXTRA_EXECUTION_TIME);
     }
   }
 
   @Override
   public long getReadyInMilliSeconds() {
-    return mExecutionTime - getTimeMillis();
+    return executionTime - getTimeMillis();
   }
 
   @Override
   @CallSuper
   public void onBeforeExecute() {
-    for (Policy policy : mPolicies) {
+    for (Policy policy : policies) {
       policy.onBeforeExecute();
     }
-    mHasStarted = true;
+    hasStarted = true;
   }
 
   @Override
   @CallSuper
   public void onCompleted() {
-    if (mHasFailed) {
-      for (Policy policy : mPolicies) {
+    if (hasFailed) {
+      for (Policy policy : policies) {
         policy.onFail();
       }
     }
 
-    for (Policy policy : mPolicies) {
+    for (Policy policy : policies) {
       policy.onCompleted();
     }
   }
 
   @Override
   public void onDuplicatedTaskAdded(Task task) {
-    for (Policy policy : mPolicies) {
+    for (Policy policy : policies) {
       policy.onDuplicatedTaskAdded();
     }
   }
@@ -221,6 +221,6 @@ public abstract class BaseTask implements Task {
   /** Used to replace the clock with an deterministic clock */
   @NeededForTesting
   static void setClockForTesting(Clock clock) {
-    sClock = clock;
+    BaseTask.clock = clock;
   }
 }

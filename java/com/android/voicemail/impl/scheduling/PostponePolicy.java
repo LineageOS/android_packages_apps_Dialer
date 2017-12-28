@@ -29,17 +29,17 @@ public class PostponePolicy implements Policy {
 
   private static final String TAG = "PostponePolicy";
 
-  private final int mPostponeMillis;
-  private BaseTask mTask;
+  private final int postponeMillis;
+  private BaseTask task;
 
   public PostponePolicy(int postponeMillis) {
-    mPostponeMillis = postponeMillis;
+    this.postponeMillis = postponeMillis;
   }
 
   @Override
   public void onCreate(BaseTask task, Bundle extras) {
-    mTask = task;
-    mTask.setExecutionTime(mTask.getTimeMillis() + mPostponeMillis);
+    this.task = task;
+    this.task.setExecutionTime(this.task.getTimeMillis() + postponeMillis);
   }
 
   @Override
@@ -59,10 +59,10 @@ public class PostponePolicy implements Policy {
 
   @Override
   public void onDuplicatedTaskAdded() {
-    if (mTask.hasStarted()) {
+    if (task.hasStarted()) {
       return;
     }
-    VvmLog.i(TAG, "postponing " + mTask);
-    mTask.setExecutionTime(mTask.getTimeMillis() + mPostponeMillis);
+    VvmLog.i(TAG, "postponing " + task);
+    task.setExecutionTime(task.getTimeMillis() + postponeMillis);
   }
 }

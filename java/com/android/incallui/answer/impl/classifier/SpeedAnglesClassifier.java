@@ -33,10 +33,10 @@ import java.util.Map;
  * a good stroke is most often increases, so most of these angels should be in this interval.
  */
 class SpeedAnglesClassifier extends StrokeClassifier {
-  private Map<Stroke, Data> mStrokeMap = new ArrayMap<>();
+  private Map<Stroke, Data> strokeMap = new ArrayMap<>();
 
   public SpeedAnglesClassifier(ClassifierData classifierData) {
-    mClassifierData = classifierData;
+    this.classifierData = classifierData;
   }
 
   @Override
@@ -49,27 +49,27 @@ class SpeedAnglesClassifier extends StrokeClassifier {
     int action = event.getActionMasked();
 
     if (action == MotionEvent.ACTION_DOWN) {
-      mStrokeMap.clear();
+      strokeMap.clear();
     }
 
     for (int i = 0; i < event.getPointerCount(); i++) {
-      Stroke stroke = mClassifierData.getStroke(event.getPointerId(i));
+      Stroke stroke = classifierData.getStroke(event.getPointerId(i));
 
-      if (mStrokeMap.get(stroke) == null) {
-        mStrokeMap.put(stroke, new Data());
+      if (strokeMap.get(stroke) == null) {
+        strokeMap.put(stroke, new Data());
       }
 
       if (action != MotionEvent.ACTION_UP
           && action != MotionEvent.ACTION_CANCEL
           && !(action == MotionEvent.ACTION_POINTER_UP && i == event.getActionIndex())) {
-        mStrokeMap.get(stroke).addPoint(stroke.getPoints().get(stroke.getPoints().size() - 1));
+        strokeMap.get(stroke).addPoint(stroke.getPoints().get(stroke.getPoints().size() - 1));
       }
     }
   }
 
   @Override
   public float getFalseTouchEvaluation(Stroke stroke) {
-    Data data = mStrokeMap.get(stroke);
+    Data data = strokeMap.get(stroke);
     return SpeedVarianceEvaluator.evaluate(data.getAnglesVariance())
         + SpeedAnglesPercentageEvaluator.evaluate(data.getAnglesPercentage());
   }
@@ -79,69 +79,69 @@ class SpeedAnglesClassifier extends StrokeClassifier {
     private static final float LENGTH_SCALE = 1.0f;
     private static final float ANGLE_DEVIATION = (float) Math.PI / 10.0f;
 
-    private List<Point> mLastThreePoints = new ArrayList<>();
-    private Point mPreviousPoint;
-    private float mPreviousAngle;
-    private float mSumSquares;
-    private float mSum;
-    private float mCount;
-    private float mDist;
-    private float mAnglesCount;
-    private float mAcceleratingAngles;
+    private List<Point> lastThreePoints = new ArrayList<>();
+    private Point previousPoint;
+    private float previousAngle;
+    private float sumSquares;
+    private float sum;
+    private float count;
+    private float dist;
+    private float anglesCount;
+    private float acceleratingAngles;
 
     public Data() {
-      mPreviousPoint = null;
-      mPreviousAngle = (float) Math.PI;
-      mSumSquares = 0.0f;
-      mSum = 0.0f;
-      mCount = 1.0f;
-      mDist = 0.0f;
-      mAnglesCount = mAcceleratingAngles = 0.0f;
+      previousPoint = null;
+      previousAngle = (float) Math.PI;
+      sumSquares = 0.0f;
+      sum = 0.0f;
+      count = 1.0f;
+      dist = 0.0f;
+      anglesCount = acceleratingAngles = 0.0f;
     }
 
     public void addPoint(Point point) {
-      if (mPreviousPoint != null) {
-        mDist += mPreviousPoint.dist(point);
+      if (previousPoint != null) {
+        dist += previousPoint.dist(point);
       }
 
-      mPreviousPoint = point;
+      previousPoint = point;
       Point speedPoint =
-          new Point((float) point.timeOffsetNano / DURATION_SCALE, mDist / LENGTH_SCALE);
+          new Point((float) point.timeOffsetNano / DURATION_SCALE, dist / LENGTH_SCALE);
 
       // Checking if the added point is different than the previously added point
       // Repetitions are being ignored so that proper angles are calculated.
-      if (mLastThreePoints.isEmpty()
-          || !mLastThreePoints.get(mLastThreePoints.size() - 1).equals(speedPoint)) {
-        mLastThreePoints.add(speedPoint);
-        if (mLastThreePoints.size() == 4) {
-          mLastThreePoints.remove(0);
+      if (lastThreePoints.isEmpty()
+          || !lastThreePoints.get(lastThreePoints.size() - 1).equals(speedPoint)) {
+        lastThreePoints.add(speedPoint);
+        if (lastThreePoints.size() == 4) {
+          lastThreePoints.remove(0);
 
           float angle =
-              mLastThreePoints.get(1).getAngle(mLastThreePoints.get(0), mLastThreePoints.get(2));
+              lastThreePoints.get(1).getAngle(lastThreePoints.get(0), lastThreePoints.get(2));
 
-          mAnglesCount++;
+          anglesCount++;
           if (angle >= (float) Math.PI - ANGLE_DEVIATION) {
-            mAcceleratingAngles++;
+            acceleratingAngles++;
           }
 
-          float difference = angle - mPreviousAngle;
-          mSum += difference;
-          mSumSquares += difference * difference;
-          mCount += 1.0f;
-          mPreviousAngle = angle;
+          float difference = angle - previousAngle;
+          sum += difference;
+          sumSquares += difference * difference;
+          count += 1.0f;
+          previousAngle = angle;
         }
       }
     }
 
     public float getAnglesVariance() {
-      return mSumSquares / mCount - (mSum / mCount) * (mSum / mCount);
+      return sumSquares / count - (sum / count) * (sum / count);
     }
 
     public float getAnglesPercentage() {
-      if (mAnglesCount == 0.0f) {
+      if (anglesCount == 0.0f) {
         return 1.0f;
       }
-      return (mAcceleratingAngles) / mAnglesCount;
+      return (acceleratingAngles) / anglesCount;
     }
   }
 }

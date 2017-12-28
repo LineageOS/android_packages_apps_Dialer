@@ -40,11 +40,11 @@ import java.io.OutputStream;
 /** Persisting image routine. */
 @TargetApi(VERSION_CODES.M)
 public class ImagePersistWorker implements Worker<Void, Result> {
-  private int mWidth;
-  private int mHeight;
-  private final float mHeightPercent;
-  private final byte[] mBytes;
-  private final Context mContext;
+  private int width;
+  private int height;
+  private final float heightPercent;
+  private final byte[] bytes;
+  private final Context context;
 
   @AutoValue
   abstract static class Result {
@@ -81,16 +81,16 @@ public class ImagePersistWorker implements Worker<Void, Result> {
     Assert.checkArgument(heightPercent >= 0 && heightPercent <= 1);
     Assert.isNotNull(bytes);
     Assert.isNotNull(context);
-    mWidth = width;
-    mHeight = height;
-    mHeightPercent = heightPercent;
-    mBytes = bytes;
-    mContext = context;
+    this.width = width;
+    this.height = height;
+    this.heightPercent = heightPercent;
+    this.bytes = bytes;
+    this.context = context;
   }
 
   @Override
   public Result doInBackground(Void unused) throws Exception {
-    File outputFile = DialerUtils.createShareableFile(mContext);
+    File outputFile = DialerUtils.createShareableFile(context);
 
     try (OutputStream outputStream = new FileOutputStream(outputFile)) {
       writeClippedBitmap(outputStream);
@@ -99,9 +99,9 @@ public class ImagePersistWorker implements Worker<Void, Result> {
     return Result.builder()
         .setUri(
             FileProvider.getUriForFile(
-                mContext, Constants.get().getFileProviderAuthority(), outputFile))
-        .setWidth(mWidth)
-        .setHeight(mHeight)
+                context, Constants.get().getFileProviderAuthority(), outputFile))
+        .setWidth(width)
+        .setHeight(height)
         .build();
   }
 
@@ -109,7 +109,7 @@ public class ImagePersistWorker implements Worker<Void, Result> {
     int orientation = android.media.ExifInterface.ORIENTATION_UNDEFINED;
     final ExifInterface exifInterface = new ExifInterface();
     try {
-      exifInterface.readExif(mBytes);
+      exifInterface.readExif(bytes);
       final Integer orientationValue = exifInterface.getTagIntValue(ExifInterface.TAG_ORIENTATION);
       if (orientationValue != null) {
         orientation = orientationValue.intValue();
@@ -119,25 +119,25 @@ public class ImagePersistWorker implements Worker<Void, Result> {
     }
 
     ExifInterface.OrientationParams params = ExifInterface.getOrientationParams(orientation);
-    Bitmap bitmap = BitmapFactory.decodeByteArray(mBytes, 0, mBytes.length);
+    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     final int clippedWidth;
     final int clippedHeight;
     if (params.invertDimensions) {
-      Assert.checkState(mWidth == bitmap.getHeight());
-      Assert.checkState(mHeight == bitmap.getWidth());
-      clippedWidth = (int) (mHeight * mHeightPercent);
-      clippedHeight = mWidth;
+      Assert.checkState(width == bitmap.getHeight());
+      Assert.checkState(height == bitmap.getWidth());
+      clippedWidth = (int) (height * heightPercent);
+      clippedHeight = width;
     } else {
-      Assert.checkState(mWidth == bitmap.getWidth());
-      Assert.checkState(mHeight == bitmap.getHeight());
-      clippedWidth = mWidth;
-      clippedHeight = (int) (mHeight * mHeightPercent);
+      Assert.checkState(width == bitmap.getWidth());
+      Assert.checkState(height == bitmap.getHeight());
+      clippedWidth = width;
+      clippedHeight = (int) (height * heightPercent);
     }
 
     int offsetTop = (bitmap.getHeight() - clippedHeight) / 2;
     int offsetLeft = (bitmap.getWidth() - clippedWidth) / 2;
-    mWidth = clippedWidth;
-    mHeight = clippedHeight;
+    width = clippedWidth;
+    height = clippedHeight;
 
     Bitmap clippedBitmap =
         Bitmap.createBitmap(bitmap, offsetLeft, offsetTop, clippedWidth, clippedHeight);

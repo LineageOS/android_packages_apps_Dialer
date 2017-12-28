@@ -27,45 +27,45 @@ import java.nio.charset.Charset;
 
 class CountedDataInputStream extends FilterInputStream {
 
-  private int mCount = 0;
+  private int count = 0;
 
   // allocate a byte buffer for a long value;
-  private final byte[] mByteArray = new byte[8];
-  private final ByteBuffer mByteBuffer = ByteBuffer.wrap(mByteArray);
+  private final byte[] byteArray = new byte[8];
+  private final ByteBuffer byteBuffer = ByteBuffer.wrap(byteArray);
 
   CountedDataInputStream(InputStream in) {
     super(in);
   }
 
   int getReadByteCount() {
-    return mCount;
+    return count;
   }
 
   @Override
   public int read(byte[] b) throws IOException {
     int r = in.read(b);
-    mCount += (r >= 0) ? r : 0;
+    count += (r >= 0) ? r : 0;
     return r;
   }
 
   @Override
   public int read(byte[] b, int off, int len) throws IOException {
     int r = in.read(b, off, len);
-    mCount += (r >= 0) ? r : 0;
+    count += (r >= 0) ? r : 0;
     return r;
   }
 
   @Override
   public int read() throws IOException {
     int r = in.read();
-    mCount += (r >= 0) ? 1 : 0;
+    count += (r >= 0) ? 1 : 0;
     return r;
   }
 
   @Override
   public long skip(long length) throws IOException {
     long skip = in.skip(length);
-    mCount += skip;
+    count += skip;
     return skip;
   }
 
@@ -76,7 +76,7 @@ class CountedDataInputStream extends FilterInputStream {
   }
 
   void skipTo(long target) throws IOException {
-    long cur = mCount;
+    long cur = count;
     long diff = target - cur;
     Assert.checkArgument(diff >= 0);
     skipOrThrow(diff);
@@ -94,17 +94,17 @@ class CountedDataInputStream extends FilterInputStream {
   }
 
   void setByteOrder(ByteOrder order) {
-    mByteBuffer.order(order);
+    byteBuffer.order(order);
   }
 
   ByteOrder getByteOrder() {
-    return mByteBuffer.order();
+    return byteBuffer.order();
   }
 
   short readShort() throws IOException {
-    readOrThrow(mByteArray, 0, 2);
-    mByteBuffer.rewind();
-    return mByteBuffer.getShort();
+    readOrThrow(byteArray, 0, 2);
+    byteBuffer.rewind();
+    return byteBuffer.getShort();
   }
 
   int readUnsignedShort() throws IOException {
@@ -112,9 +112,9 @@ class CountedDataInputStream extends FilterInputStream {
   }
 
   int readInt() throws IOException {
-    readOrThrow(mByteArray, 0, 4);
-    mByteBuffer.rewind();
-    return mByteBuffer.getInt();
+    readOrThrow(byteArray, 0, 4);
+    byteBuffer.rewind();
+    return byteBuffer.getInt();
   }
 
   long readUnsignedInt() throws IOException {

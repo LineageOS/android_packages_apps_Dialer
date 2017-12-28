@@ -56,12 +56,12 @@ public class OmtpVvmSyncService {
   /** Threshold for whether we should archive and delete voicemails from the remote VM server. */
   private static final float AUTO_DELETE_ARCHIVE_VM_THRESHOLD = 0.75f;
 
-  private final Context mContext;
-  private final VoicemailsQueryHelper mQueryHelper;
+  private final Context context;
+  private final VoicemailsQueryHelper queryHelper;
 
   public OmtpVvmSyncService(Context context) {
-    mContext = context;
-    mQueryHelper = new VoicemailsQueryHelper(mContext);
+    this.context = context;
+    queryHelper = new VoicemailsQueryHelper(this.context);
   }
 
   public void sync(
@@ -79,22 +79,22 @@ public class OmtpVvmSyncService {
       PhoneAccountHandle phoneAccount,
       Voicemail voicemail,
       VoicemailStatus.Editor status) {
-    if (!VisualVoicemailSettingsUtil.isEnabled(mContext, phoneAccount)) {
+    if (!VisualVoicemailSettingsUtil.isEnabled(context, phoneAccount)) {
       VvmLog.e(TAG, "Sync requested for disabled account");
       return;
     }
-    if (!VvmAccountManager.isAccountActivated(mContext, phoneAccount)) {
-      ActivationTask.start(mContext, phoneAccount, null);
+    if (!VvmAccountManager.isAccountActivated(context, phoneAccount)) {
+      ActivationTask.start(context, phoneAccount, null);
       return;
     }
 
-    OmtpVvmCarrierConfigHelper config = new OmtpVvmCarrierConfigHelper(mContext, phoneAccount);
-    LoggerUtils.logImpressionOnMainThread(mContext, DialerImpression.Type.VVM_SYNC_STARTED);
+    OmtpVvmCarrierConfigHelper config = new OmtpVvmCarrierConfigHelper(context, phoneAccount);
+    LoggerUtils.logImpressionOnMainThread(context, DialerImpression.Type.VVM_SYNC_STARTED);
     // DATA_IMAP_OPERATION_STARTED posting should not be deferred. This event clears all data
     // channel errors, which should happen when the task starts, not when it ends. It is the
     // "Sync in progress..." status, which is currently displayed to the user as no error.
     config.handleEvent(
-        VoicemailStatus.edit(mContext, phoneAccount), OmtpEvents.DATA_IMAP_OPERATION_STARTED);
+        VoicemailStatus.edit(context, phoneAccount), OmtpEvents.DATA_IMAP_OPERATION_STARTED);
     try (NetworkWrapper network = VvmNetworkRequest.getNetwork(config, phoneAccount, status)) {
       if (network == null) {
         VvmLog.e(TAG, "unable to acquire network");
@@ -114,7 +114,7 @@ public class OmtpVvmSyncService {
       PhoneAccountHandle phoneAccount,
       Voicemail voicemail,
       VoicemailStatus.Editor status) {
-    try (ImapHelper imapHelper = new ImapHelper(mContext, phoneAccount, network, status)) {
+    try (ImapHelper imapHelper = new ImapHelper(context, phoneAccount, network, status)) {
       boolean success;
       if (voicemail == null) {
         success = syncAll(imapHelper, phoneAccount);
@@ -126,7 +126,7 @@ public class OmtpVvmSyncService {
         imapHelper.updateQuota();
         autoDeleteAndArchiveVM(imapHelper, phoneAccount);
         imapHelper.handleEvent(OmtpEvents.DATA_IMAP_OPERATION_COMPLETED);
-        LoggerUtils.logImpressionOnMainThread(mContext, DialerImpression.Type.VVM_SYNC_COMPLETED);
+        LoggerUtils.logImpressionOnMainThread(context, DialerImpression.Type.VVM_SYNC_COMPLETED);
       } else {
         task.fail();
       }
@@ -142,16 +142,16 @@ public class OmtpVvmSyncService {
    */
   private void autoDeleteAndArchiveVM(
       ImapHelper imapHelper, PhoneAccountHandle phoneAccountHandle) {
-    if (!isArchiveAllowedAndEnabled(mContext, phoneAccountHandle)) {
+    if (!isArchiveAllowedAndEnabled(context, phoneAccountHandle)) {
       VvmLog.i(TAG, "autoDeleteAndArchiveVM is turned off");
       LoggerUtils.logImpressionOnMainThread(
-          mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF);
+          context, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_TURNED_OFF);
       return;
     }
     Quota quotaOnServer = imapHelper.getQuota();
     if (quotaOnServer == null) {
       LoggerUtils.logImpressionOnMainThread(
-          mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_FAILED_DUE_TO_FAILED_QUOTA_CHECK);
+          context, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETE_FAILED_DUE_TO_FAILED_QUOTA_CHECK);
       VvmLog.e(TAG, "autoDeleteAndArchiveVM failed - Can't retrieve Imap quota.");
       return;
     }
@@ -161,7 +161,7 @@ public class OmtpVvmSyncService {
       deleteAndArchiveVM(imapHelper, quotaOnServer);
       imapHelper.updateQuota();
       LoggerUtils.logImpressionOnMainThread(
-          mContext, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER);
+          context, DialerImpression.Type.VVM_ARCHIVE_AUTO_DELETED_VM_FROM_SERVER);
     } else {
       VvmLog.i(TAG, "no need to archive and auto delete VM, quota below threshold");
     }
@@ -194,10 +194,10 @@ public class OmtpVvmSyncService {
     // The number of voicemails that exceed our threshold and should be deleted from the server
     int numVoicemails =
         quotaOnServer.occupied - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * quotaOnServer.total);
-    List<Voicemail> oldestVoicemails = mQueryHelper.oldestVoicemailsOnServer(numVoicemails);
+    List<Voicemail> oldestVoicemails = queryHelper.oldestVoicemailsOnServer(numVoicemails);
     VvmLog.w(TAG, "number of voicemails to delete " + numVoicemails);
     if (!oldestVoicemails.isEmpty()) {
-      mQueryHelper.markArchivedInDatabase(oldestVoicemails);
+      queryHelper.markArchivedInDatabase(oldestVoicemails);
       imapHelper.markMessagesAsDeleted(oldestVoicemails);
       VvmLog.i(
           TAG,
@@ -211,8 +211,8 @@ public class OmtpVvmSyncService {
   private boolean syncAll(ImapHelper imapHelper, PhoneAccountHandle account) {
 
     List<Voicemail> serverVoicemails = imapHelper.fetchAllVoicemails();
-    List<Voicemail> localVoicemails = mQueryHelper.getAllVoicemails(account);
-    List<Voicemail> deletedVoicemails = mQueryHelper.getDeletedVoicemails(account);
+    List<Voicemail> localVoicemails = queryHelper.getAllVoicemails(account);
+    List<Voicemail> deletedVoicemails = queryHelper.getDeletedVoicemails(account);
     boolean succeeded = true;
 
     if (localVoicemails == null || serverVoicemails == null) {
@@ -225,7 +225,7 @@ public class OmtpVvmSyncService {
       if (imapHelper.markMessagesAsDeleted(deletedVoicemails)) {
         // Delete only the voicemails that was deleted on the server, in case more are deleted
         // since the IMAP query was completed.
-        mQueryHelper.deleteFromDatabase(deletedVoicemails);
+        queryHelper.deleteFromDatabase(deletedVoicemails);
       } else {
         succeeded = false;
       }
@@ -249,10 +249,10 @@ public class OmtpVvmSyncService {
 
       // Do not delete voicemails that are archived marked as archived.
       if (remoteVoicemail == null) {
-        mQueryHelper.deleteNonArchivedFromDatabase(localVoicemail);
+        queryHelper.deleteNonArchivedFromDatabase(localVoicemail);
       } else {
         if (remoteVoicemail.isRead() && !localVoicemail.isRead()) {
-          mQueryHelper.markReadInDatabase(localVoicemail);
+          queryHelper.markReadInDatabase(localVoicemail);
         } else if (localVoicemail.isRead() && !remoteVoicemail.isRead()) {
           localReadVoicemails.add(localVoicemail);
         }
@@ -260,8 +260,8 @@ public class OmtpVvmSyncService {
         if (!TextUtils.isEmpty(remoteVoicemail.getTranscription())
             && TextUtils.isEmpty(localVoicemail.getTranscription())) {
           LoggerUtils.logImpressionOnMainThread(
-              mContext, DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
-          mQueryHelper.updateWithTranscription(localVoicemail, remoteVoicemail.getTranscription());
+              context, DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
+          queryHelper.updateWithTranscription(localVoicemail, remoteVoicemail.getTranscription());
         }
       }
     }
@@ -270,7 +270,7 @@ public class OmtpVvmSyncService {
       VvmLog.i(TAG, "Marking voicemails as read");
       if (imapHelper.markMessagesAsRead(localReadVoicemails)) {
         VvmLog.i(TAG, "Marking voicemails as clean");
-        mQueryHelper.markCleanInDatabase(localReadVoicemails);
+        queryHelper.markCleanInDatabase(localReadVoicemails);
       } else {
         return false;
       }
@@ -281,12 +281,12 @@ public class OmtpVvmSyncService {
     for (Voicemail remoteVoicemail : remoteMap.values()) {
       if (!TextUtils.isEmpty(remoteVoicemail.getTranscription())) {
         LoggerUtils.logImpressionOnMainThread(
-            mContext, DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
+            context, DialerImpression.Type.VVM_TRANSCRIPTION_DOWNLOADED);
       }
-      Uri uri = VoicemailDatabaseUtil.insert(mContext, remoteVoicemail);
+      Uri uri = VoicemailDatabaseUtil.insert(context, remoteVoicemail);
       if (prefetchEnabled) {
         VoicemailFetchedCallback fetchedCallback =
-            new VoicemailFetchedCallback(mContext, uri, account);
+            new VoicemailFetchedCallback(context, uri, account);
         imapHelper.fetchVoicemailPayload(fetchedCallback, remoteVoicemail.getSourceData());
       }
     }
@@ -298,17 +298,17 @@ public class OmtpVvmSyncService {
       ImapHelper imapHelper, Voicemail voicemail, PhoneAccountHandle account) {
     if (shouldPerformPrefetch(account, imapHelper)) {
       VoicemailFetchedCallback callback =
-          new VoicemailFetchedCallback(mContext, voicemail.getUri(), account);
+          new VoicemailFetchedCallback(context, voicemail.getUri(), account);
       imapHelper.fetchVoicemailPayload(callback, voicemail.getSourceData());
     }
 
     return imapHelper.fetchTranscription(
-        new TranscriptionFetchedCallback(mContext, voicemail), voicemail.getSourceData());
+        new TranscriptionFetchedCallback(context, voicemail), voicemail.getSourceData());
   }
 
   private boolean shouldPerformPrefetch(PhoneAccountHandle account, ImapHelper imapHelper) {
     OmtpVvmCarrierConfigHelper carrierConfigHelper =
-        new OmtpVvmCarrierConfigHelper(mContext, account);
+        new OmtpVvmCarrierConfigHelper(context, account);
     return carrierConfigHelper.isPrefetchEnabled() && !imapHelper.isRoaming();
   }
 
@@ -324,17 +324,17 @@ public class OmtpVvmSyncService {
   /** Callback for {@link ImapHelper#fetchTranscription(TranscriptionFetchedCallback, String)} */
   public static class TranscriptionFetchedCallback {
 
-    private Context mContext;
-    private Voicemail mVoicemail;
+    private Context context;
+    private Voicemail voicemail;
 
     public TranscriptionFetchedCallback(Context context, Voicemail voicemail) {
-      mContext = context;
-      mVoicemail = voicemail;
+      this.context = context;
+      this.voicemail = voicemail;
     }
 
     public void setVoicemailTranscription(String transcription) {
-      VoicemailsQueryHelper queryHelper = new VoicemailsQueryHelper(mContext);
-      queryHelper.updateWithTranscription(mVoicemail, transcription);
+      VoicemailsQueryHelper queryHelper = new VoicemailsQueryHelper(context);
+      queryHelper.updateWithTranscription(voicemail, transcription);
     }
   }
 }

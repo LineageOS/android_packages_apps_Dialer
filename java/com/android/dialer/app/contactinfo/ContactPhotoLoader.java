@@ -43,12 +43,12 @@ import java.util.Objects;
  */
 public class ContactPhotoLoader {
 
-  private final Context mContext;
-  private final ContactInfo mContactInfo;
+  private final Context context;
+  private final ContactInfo contactInfo;
 
   public ContactPhotoLoader(Context context, ContactInfo contactInfo) {
-    mContext = Objects.requireNonNull(context);
-    mContactInfo = Objects.requireNonNull(contactInfo);
+    this.context = Objects.requireNonNull(context);
+    this.contactInfo = Objects.requireNonNull(contactInfo);
   }
 
   private static Bitmap drawableToBitmap(Drawable drawable, int width, int height) {
@@ -62,7 +62,7 @@ public class ContactPhotoLoader {
   /** Create a contact photo icon bitmap appropriate for the ContactInfo. */
   public Bitmap loadPhotoIcon() {
     Assert.isWorkerThread();
-    int photoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
+    int photoSize = context.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
     return drawableToBitmap(getIcon(), photoSize, photoSize);
   }
 
@@ -81,11 +81,11 @@ public class ContactPhotoLoader {
    */
   @Nullable
   private Drawable createPhotoIconDrawable() {
-    if (mContactInfo.photoUri == null) {
+    if (contactInfo.photoUri == null) {
       return null;
     }
     try {
-      InputStream input = mContext.getContentResolver().openInputStream(mContactInfo.photoUri);
+      InputStream input = context.getContentResolver().openInputStream(contactInfo.photoUri);
       if (input == null) {
         LogUtil.w(
             "ContactPhotoLoader.createPhotoIconDrawable",
@@ -102,7 +102,7 @@ public class ContactPhotoLoader {
         return null;
       }
       final RoundedBitmapDrawable drawable =
-          RoundedBitmapDrawableFactory.create(mContext.getResources(), bitmap);
+          RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
       drawable.setAntiAlias(true);
       drawable.setCircular(true);
       return drawable;
@@ -115,13 +115,13 @@ public class ContactPhotoLoader {
   /** @return a {@link LetterTileDrawable} based on the ContactInfo. */
   private Drawable createLetterTileDrawable() {
     ContactInfoHelper helper =
-        new ContactInfoHelper(mContext, GeoUtil.getCurrentCountryIso(mContext));
-    LetterTileDrawable drawable = new LetterTileDrawable(mContext.getResources());
+        new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context));
+    LetterTileDrawable drawable = new LetterTileDrawable(context.getResources());
     drawable.setCanonicalDialerLetterTileDetails(
-        mContactInfo.name,
-        mContactInfo.lookupKey,
+        contactInfo.name,
+        contactInfo.lookupKey,
         LetterTileDrawable.SHAPE_CIRCLE,
-        helper.isBusiness(mContactInfo.sourceType)
+        helper.isBusiness(contactInfo.sourceType)
             ? LetterTileDrawable.TYPE_BUSINESS
             : LetterTileDrawable.TYPE_DEFAULT);
     return drawable;

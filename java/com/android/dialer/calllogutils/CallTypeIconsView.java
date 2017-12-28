@@ -43,14 +43,14 @@ public class CallTypeIconsView extends View {
 
   private final boolean useLargeIcons;
 
-  private static Resources sResources;
-  private static Resources sLargeResouces;
-  private List<Integer> mCallTypes = new ArrayList<>(3);
-  private boolean mShowVideo;
-  private boolean mShowHd;
-  private boolean mShowWifi;
-  private int mWidth;
-  private int mHeight;
+  private static Resources resources;
+  private static Resources largeResouces;
+  private List<Integer> callTypes = new ArrayList<>(3);
+  private boolean showVideo;
+  private boolean showHd;
+  private boolean showWifi;
+  private int width;
+  private int height;
 
   public CallTypeIconsView(Context context) {
     this(context, null);
@@ -62,27 +62,27 @@ public class CallTypeIconsView extends View {
         context.getTheme().obtainStyledAttributes(attrs, R.styleable.CallTypeIconsView, 0, 0);
     useLargeIcons = typedArray.getBoolean(R.styleable.CallTypeIconsView_useLargeIcons, false);
     typedArray.recycle();
-    if (sResources == null) {
-      sResources = new Resources(context, false);
+    if (resources == null) {
+      resources = new Resources(context, false);
     }
-    if (sLargeResouces == null && useLargeIcons) {
-      sLargeResouces = new Resources(context, true);
+    if (largeResouces == null && useLargeIcons) {
+      largeResouces = new Resources(context, true);
     }
   }
 
   public void clear() {
-    mCallTypes.clear();
-    mWidth = 0;
-    mHeight = 0;
+    callTypes.clear();
+    width = 0;
+    height = 0;
     invalidate();
   }
 
   public void add(int callType) {
-    mCallTypes.add(callType);
+    callTypes.add(callType);
 
     final Drawable drawable = getCallTypeDrawable(callType);
-    mWidth += drawable.getIntrinsicWidth() + sResources.iconMargin;
-    mHeight = Math.max(mHeight, drawable.getIntrinsicWidth());
+    width += drawable.getIntrinsicWidth() + resources.iconMargin;
+    height = Math.max(height, drawable.getIntrinsicWidth());
     invalidate();
   }
 
@@ -92,10 +92,10 @@ public class CallTypeIconsView extends View {
    * @param showVideo True where the video icon should be shown.
    */
   public void setShowVideo(boolean showVideo) {
-    mShowVideo = showVideo;
+    this.showVideo = showVideo;
     if (showVideo) {
-      mWidth += sResources.videoCall.getIntrinsicWidth() + sResources.iconMargin;
-      mHeight = Math.max(mHeight, sResources.videoCall.getIntrinsicHeight());
+      width += resources.videoCall.getIntrinsicWidth() + resources.iconMargin;
+      height = Math.max(height, resources.videoCall.getIntrinsicHeight());
       invalidate();
     }
   }
@@ -106,42 +106,42 @@ public class CallTypeIconsView extends View {
    * @return True if the video icon should be shown.
    */
   public boolean isVideoShown() {
-    return mShowVideo;
+    return showVideo;
   }
 
   public void setShowHd(boolean showHd) {
-    mShowHd = showHd;
+    this.showHd = showHd;
     if (showHd) {
-      mWidth += sResources.hdCall.getIntrinsicWidth() + sResources.iconMargin;
-      mHeight = Math.max(mHeight, sResources.hdCall.getIntrinsicHeight());
+      width += resources.hdCall.getIntrinsicWidth() + resources.iconMargin;
+      height = Math.max(height, resources.hdCall.getIntrinsicHeight());
       invalidate();
     }
   }
 
   @VisibleForTesting
   public boolean isHdShown() {
-    return mShowHd;
+    return showHd;
   }
 
   public void setShowWifi(boolean showWifi) {
-    mShowWifi = showWifi;
+    this.showWifi = showWifi;
     if (showWifi) {
-      mWidth += sResources.wifiCall.getIntrinsicWidth() + sResources.iconMargin;
-      mHeight = Math.max(mHeight, sResources.wifiCall.getIntrinsicHeight());
+      width += resources.wifiCall.getIntrinsicWidth() + resources.iconMargin;
+      height = Math.max(height, resources.wifiCall.getIntrinsicHeight());
       invalidate();
     }
   }
 
   public int getCount() {
-    return mCallTypes.size();
+    return callTypes.size();
   }
 
   public int getCallType(int index) {
-    return mCallTypes.get(index);
+    return callTypes.get(index);
   }
 
   private Drawable getCallTypeDrawable(int callType) {
-    Resources resources = useLargeIcons ? sLargeResouces : sResources;
+    Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
     switch (callType) {
       case AppCompatConstants.CALLS_INCOMING_TYPE:
       case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
@@ -165,17 +165,17 @@ public class CallTypeIconsView extends View {
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    setMeasuredDimension(mWidth, mHeight);
+    setMeasuredDimension(width, height);
   }
 
   @Override
   protected void onDraw(Canvas canvas) {
-    Resources resources = useLargeIcons ? sLargeResouces : sResources;
+    Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
     int left = 0;
     // If we are using large icons, we should only show one icon (video, hd or call type) with
     // priority give to HD or Video. So we skip the call type icon if we plan to show them.
-    if (!useLargeIcons || !(mShowHd || mShowVideo || mShowWifi)) {
-      for (Integer callType : mCallTypes) {
+    if (!useLargeIcons || !(showHd || showVideo || showWifi)) {
+      for (Integer callType : callTypes) {
         final Drawable drawable = getCallTypeDrawable(callType);
         final int right = left + drawable.getIntrinsicWidth();
         drawable.setBounds(left, 0, right, drawable.getIntrinsicHeight());
@@ -185,15 +185,15 @@ public class CallTypeIconsView extends View {
     }
 
     // If showing the video call icon, draw it scaled appropriately.
-    if (mShowVideo) {
+    if (showVideo) {
       left = addDrawable(canvas, resources.videoCall, left) + resources.iconMargin;
     }
     // If showing HD call icon, draw it scaled appropriately.
-    if (mShowHd) {
+    if (showHd) {
       left = addDrawable(canvas, resources.hdCall, left) + resources.iconMargin;
     }
     // If showing HD call icon, draw it scaled appropriately.
-    if (mShowWifi) {
+    if (showWifi) {
       left = addDrawable(canvas, resources.wifiCall, left) + resources.iconMargin;
     }
   }

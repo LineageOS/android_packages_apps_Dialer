@@ -27,19 +27,19 @@ import com.google.common.util.concurrent.ListenableFuture;
  * Provides operations related to retrieving information about phone numbers.
  *
  * <p>Some operations defined by this interface are generally targeted towards specific use cases;
- * for example {@link #isDirty(ImmutableSet)}, {@link #getMostRecentPhoneLookupInfo(ImmutableMap)},
- * and {@link #onSuccessfulBulkUpdate()} are generally intended to be used by the call log.
+ * for example {@link #isDirty(ImmutableSet)}, {@link #getMostRecentInfo(ImmutableMap)}, and {@link
+ * #onSuccessfulBulkUpdate()} are generally intended to be used by the call log.
  */
-public interface PhoneLookup {
+public interface PhoneLookup<T> {
 
   /**
-   * Returns a future containing a new {@link PhoneLookupInfo} for the provided call.
+   * Returns a future containing a new info for the provided call.
    *
    * <p>The returned message should contain populated data for the sub-message corresponding to this
-   * {@link PhoneLookup}. For example, the CP2 implementation returns a {@link PhoneLookupInfo} with
-   * the {@link PhoneLookupInfo.Cp2Info} sub-message populated.
+   * {@link PhoneLookup}. For example, the CP2 implementation returns a {@link
+   * PhoneLookupInfo.Cp2Info} sub-message.
    */
-  ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call);
+  ListenableFuture<T> lookup(@NonNull Call call);
 
   /**
    * Returns a future which returns true if the information for any of the provided phone numbers
@@ -56,24 +56,30 @@ public interface PhoneLookup {
    * {@code existingInfoMap}.
    *
    * <p>If there is no longer information associated with a number (for example, a local contact was
-   * deleted) the returned map should contain an empty {@link PhoneLookupInfo} for that number.
+   * deleted) the returned map should contain an empty info for that number.
    */
-  ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> getMostRecentPhoneLookupInfo(
-      ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> existingInfoMap);
+  ListenableFuture<ImmutableMap<DialerPhoneNumber, T>> getMostRecentInfo(
+      ImmutableMap<DialerPhoneNumber, T> existingInfoMap);
 
   /**
-   * Populates the sub-message that this {@link PhoneLookup} is responsible for by copying the
-   * sub-message value from {@code source} to {@code destination}
+   * Populates the sub-message that this {@link PhoneLookup} is responsible for by copying {@code
+   * subMessage} into the provided {@code phoneLookupInfo} builder.
    */
-  void copySubMessage(PhoneLookupInfo.Builder destination, PhoneLookupInfo source);
+  void setSubMessage(PhoneLookupInfo.Builder phoneLookupInfo, T subMessage);
 
   /**
-   * Called when the results of the {@link #getMostRecentPhoneLookupInfo(ImmutableMap)} have been
-   * applied by the caller.
+   * Gets the sub-message that this {@link PhoneLookup} is responsible for from the provided {@code
+   * phoneLookupInfo}.
+   */
+  T getSubMessage(PhoneLookupInfo phoneLookupInfo);
+
+  /**
+   * Called when the results of the {@link #getMostRecentInfo(ImmutableMap)} have been applied by
+   * the caller.
    *
    * <p>Typically implementations will use this to store a "last processed" timestamp so that future
-   * invocations of {@link #isDirty(ImmutableSet)} and {@link
-   * #getMostRecentPhoneLookupInfo(ImmutableMap)} can be efficiently implemented.
+   * invocations of {@link #isDirty(ImmutableSet)} and {@link #getMostRecentInfo(ImmutableMap)} can
+   * be efficiently implemented.
    */
   ListenableFuture<Void> onSuccessfulBulkUpdate();
 }

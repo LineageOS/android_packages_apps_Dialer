@@ -34,16 +34,16 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
 
   private static final String TAG = PhoneFavoriteSquareTileView.class.getSimpleName();
 
-  private final float mHeightToWidthRatio;
+  private final float heightToWidthRatio;
 
-  private ImageButton mSecondaryButton;
+  private ImageButton secondaryButton;
 
-  private ContactEntry mContactEntry;
+  private ContactEntry contactEntry;
 
   public PhoneFavoriteSquareTileView(Context context, AttributeSet attrs) {
     super(context, attrs);
 
-    mHeightToWidthRatio =
+    heightToWidthRatio =
         getResources().getFraction(R.dimen.contact_tile_height_to_width_ratio, 1, 1);
   }
 
@@ -54,7 +54,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     nameView.setElegantTextHeight(false);
     final TextView phoneTypeView = (TextView) findViewById(R.id.contact_tile_phone_type);
     phoneTypeView.setElegantTextHeight(false);
-    mSecondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
+    secondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
   public void loadFromContact(ContactEntry entry) {
     super.loadFromContact(entry);
     if (entry != null) {
-      mSecondaryButton.setOnClickListener(
+      secondaryButton.setOnClickListener(
           new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,13 +95,13 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
             }
           });
     }
-    mContactEntry = entry;
+    contactEntry = entry;
   }
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     final int width = MeasureSpec.getSize(widthMeasureSpec);
-    final int height = (int) (mHeightToWidthRatio * width);
+    final int height = (int) (heightToWidthRatio * width);
     final int count = getChildCount();
     for (int i = 0; i < count; i++) {
       getChildAt(i)
@@ -118,6 +118,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
   }
 
   public ContactEntry getContactEntry() {
-    return mContactEntry;
+    return contactEntry;
   }
 }

@@ -78,16 +78,16 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private static final String DATABASE_VERSION_PROPERTY = "database_version";
   private static final int MAX_ENTRIES = 20;
 
-  private final Context mContext;
-  private boolean mIsTestInstance = false;
+  private final Context context;
+  private boolean isTestInstance = false;
 
   protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
     super(context, databaseName, null, dbVersion);
-    mContext = Objects.requireNonNull(context, "Context must not be null");
+    this.context = Objects.requireNonNull(context, "Context must not be null");
   }
 
   public void setIsTestInstance(boolean isTestInstance) {
-    mIsTestInstance = isTestInstance;
+    this.isTestInstance = isTestInstance;
   }
 
   /**
@@ -188,7 +188,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             + ");");
 
     setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
-    if (!mIsTestInstance) {
+    if (!isTestInstance) {
       resetSmartDialLastUpdatedTime();
     }
   }
@@ -325,7 +325,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   private void resetSmartDialLastUpdatedTime() {
     final SharedPreferences databaseLastUpdateSharedPref =
-        mContext.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
+        context.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
     final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
     editor.putLong(LAST_UPDATED_MILLIS, 0);
     editor.apply();
@@ -333,8 +333,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   /** Starts the database upgrade process in the background. */
   public void startSmartDialUpdateThread() {
-    if (PermissionsUtil.hasContactsReadPermissions(mContext)) {
-      DialerExecutorComponent.get(mContext)
+    if (PermissionsUtil.hasContactsReadPermissions(context)) {
+      DialerExecutorComponent.get(context)
           .dialerExecutorFactory()
           .createNonUiTaskBuilder(new UpdateSmartDialWorker())
           .build()
@@ -373,7 +373,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   }
 
   private Cursor getDeletedContactCursor(String lastUpdateMillis) {
-    return mContext
+    return context
         .getContentResolver()
         .query(
             DeleteContactQuery.URI,
@@ -517,7 +517,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
         final String displayName = updatedContactCursor.getString(PhoneQuery.PHONE_DISPLAY_NAME);
         if (displayName == null) {
-          insert.bindString(5, mContext.getResources().getString(R.string.missing_name));
+          insert.bindString(5, context.getResources().getString(R.string.missing_name));
         } else {
           insert.bindString(5, displayName);
         }
@@ -535,7 +535,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         insert.executeInsert();
         final String contactPhoneNumber = updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
         final ArrayList<String> numberPrefixes =
-            SmartDialPrefix.parseToNumberTokens(mContext, contactPhoneNumber);
+            SmartDialPrefix.parseToNumberTokens(context, contactPhoneNumber);
 
         for (String numberPrefix : numberPrefixes) {
           numberInsert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
@@ -578,7 +578,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       while (nameCursor.moveToNext()) {
         /** Computes a list of prefixes of a given contact name. */
         final ArrayList<String> namePrefixes =
-            SmartDialPrefix.generateNamePrefixes(mContext, nameCursor.getString(columnIndexName));
+            SmartDialPrefix.generateNamePrefixes(context, nameCursor.getString(columnIndexName));
 
         for (String namePrefix : namePrefixes) {
           insert.bindLong(1, nameCursor.getLong(columnIndexContactId));
@@ -611,7 +611,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
     /** Gets the last update time on the database. */
     final SharedPreferences databaseLastUpdateSharedPref =
-        mContext.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
+        context.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
     final String lastUpdateMillis =
         String.valueOf(databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
 
@@ -644,7 +644,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
        * up in updatedPhoneCursor (since all of its phone numbers have been deleted).
        */
       final Cursor updatedContactCursor =
-          mContext
+          context
               .getContentResolver()
               .query(
                   UpdatedContactQuery.URI,
@@ -673,7 +673,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * update time.
      */
     final Cursor updatedPhoneCursor =
-        mContext
+        context
             .getContentResolver()
             .query(
                 PhoneQuery.URI,
@@ -804,8 +804,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
     // Notify content observers that smart dial database has been updated.
     Intent intent = new Intent(ACTION_SMART_DIAL_UPDATED);
-    intent.setPackage(mContext.getPackageName());
-    mContext.sendBroadcast(intent);
+    intent.setPackage(context.getPackageName());
+    context.sendBroadcast(intent);
   }
 
   /**
@@ -912,9 +912,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         /**
          * If the contact has either the name or number that matches the query, add to the result.
          */
-        final boolean nameMatches = nameMatcher.matches(mContext, displayName);
+        final boolean nameMatches = nameMatcher.matches(context, displayName);
         final boolean numberMatches =
-            (nameMatcher.matchesNumber(mContext, phoneNumber, query) != null);
+            (nameMatcher.matchesNumber(context, phoneNumber, query) != null);
         if (nameMatches || numberMatches) {
           /** If a contact has not been added, add it to the result and the hash set. */
           duplicates.add(contactMatch);

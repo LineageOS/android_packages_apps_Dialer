@@ -53,24 +53,24 @@ import org.apache.james.mime4j.stream.Field;
  * It would be better to simply do it explicitly on local creation of new outgoing messages.
  */
 public class MimeMessage extends Message {
-  private MimeHeader mHeader;
-  private MimeHeader mExtendedHeader;
+  private MimeHeader header;
+  private MimeHeader extendedHeader;
 
   // NOTE:  The fields here are transcribed out of headers, and values stored here will supersede
   // the values found in the headers.  Use caution to prevent any out-of-phase errors.  In
   // particular, any adds/changes/deletes here must be echoed by changes in the parse() function.
-  private Address[] mFrom;
-  private Address[] mTo;
-  private Address[] mCc;
-  private Address[] mBcc;
-  private Address[] mReplyTo;
-  private Date mSentDate;
-  private Body mBody;
-  protected int mSize;
-  private boolean mInhibitLocalMessageId = false;
+  private Address[] from;
+  private Address[] to;
+  private Address[] cc;
+  private Address[] bcc;
+  private Address[] replyTo;
+  private Date sentDate;
+  private Body body;
+  protected int size;
+  private boolean inhibitLocalMessageId = false;
 
   // Shared random source for generating local message-id values
-  private static final java.util.Random sRandom = new java.util.Random();
+  private static final java.util.Random random = new java.util.Random();
 
   // In MIME, en_US-like date format should be used. In other words "MMM" should be encoded to
   // "Jan", not the other localized format like "Ene" (meaning January in locale es).
@@ -86,7 +86,7 @@ public class MimeMessage extends Message {
   private static final Pattern END_OF_LINE = Pattern.compile("\r?\n");
 
   public MimeMessage() {
-    mHeader = null;
+    header = null;
   }
 
   /**
@@ -100,7 +100,7 @@ public class MimeMessage extends Message {
     sb.append("<");
     for (int i = 0; i < 24; i++) {
       // We'll use a 5-bit range (0..31)
-      final int value = sRandom.nextInt() & 31;
+      final int value = random.nextInt() & 31;
       final char c = "0123456789abcdefghijklmnopqrstuv".charAt(value);
       sb.append(c);
     }
@@ -125,14 +125,14 @@ public class MimeMessage extends Message {
     // Before parsing the input stream, clear all local fields that may be superceded by
     // the new incoming message.
     getMimeHeaders().clear();
-    mInhibitLocalMessageId = true;
-    mFrom = null;
-    mTo = null;
-    mCc = null;
-    mBcc = null;
-    mReplyTo = null;
-    mSentDate = null;
-    mBody = null;
+    inhibitLocalMessageId = true;
+    from = null;
+    to = null;
+    cc = null;
+    bcc = null;
+    replyTo = null;
+    sentDate = null;
+    body = null;
 
     final MimeStreamParser parser = new MimeStreamParser();
     parser.setContentHandler(new MimeMessageBuilder());
@@ -149,10 +149,10 @@ public class MimeMessage extends Message {
    * not creating the headers until needed.
    */
   private MimeHeader getMimeHeaders() {
-    if (mHeader == null) {
-      mHeader = new MimeHeader();
+    if (header == null) {
+      header = new MimeHeader();
     }
-    return mHeader;
+    return header;
   }
 
   @Override
@@ -162,40 +162,40 @@ public class MimeMessage extends Message {
 
   @Override
   public Date getSentDate() throws MessagingException {
-    if (mSentDate == null) {
+    if (sentDate == null) {
       try {
         DateTimeField field =
             (DateTimeField)
                 DefaultFieldParser.parse(
                     "Date: " + MimeUtility.unfoldAndDecode(getFirstHeader("Date")));
-        mSentDate = field.getDate();
+        sentDate = field.getDate();
         // TODO: We should make it more clear what exceptions can be thrown here,
         // and whether they reflect a normal or error condition.
       } catch (Exception e) {
         LogUtils.v(LogUtils.TAG, "Message missing Date header");
       }
     }
-    if (mSentDate == null) {
+    if (sentDate == null) {
       // If we still don't have a date, fall back to "Delivery-date"
       try {
         DateTimeField field =
             (DateTimeField)
                 DefaultFieldParser.parse(
                     "Date: " + MimeUtility.unfoldAndDecode(getFirstHeader("Delivery-date")));
-        mSentDate = field.getDate();
+        sentDate = field.getDate();
         // TODO: We should make it more clear what exceptions can be thrown here,
         // and whether they reflect a normal or error condition.
       } catch (Exception e) {
         LogUtils.v(LogUtils.TAG, "Message also missing Delivery-Date header");
       }
     }
-    return mSentDate;
+    return sentDate;
   }
 
   @Override
   public void setSentDate(Date sentDate) throws MessagingException {
     setHeader("Date", DATE_FORMAT.format(sentDate));
-    this.mSentDate = sentDate;
+    this.sentDate = sentDate;
   }
 
   @Override
@@ -253,7 +253,7 @@ public class MimeMessage extends Message {
 
   @Override
   public int getSize() throws MessagingException {
-    return mSize;
+    return size;
   }
 
   /**
@@ -263,20 +263,20 @@ public class MimeMessage extends Message {
   @Override
   public Address[] getRecipients(String type) throws MessagingException {
     if (type == RECIPIENT_TYPE_TO) {
-      if (mTo == null) {
-        mTo = Address.parse(MimeUtility.unfold(getFirstHeader("To")));
+      if (to == null) {
+        to = Address.parse(MimeUtility.unfold(getFirstHeader("To")));
       }
-      return mTo;
+      return to;
     } else if (type == RECIPIENT_TYPE_CC) {
-      if (mCc == null) {
-        mCc = Address.parse(MimeUtility.unfold(getFirstHeader("CC")));
+      if (cc == null) {
+        cc = Address.parse(MimeUtility.unfold(getFirstHeader("CC")));
       }
-      return mCc;
+      return cc;
     } else if (type == RECIPIENT_TYPE_BCC) {
-      if (mBcc == null) {
-        mBcc = Address.parse(MimeUtility.unfold(getFirstHeader("BCC")));
+      if (bcc == null) {
+        bcc = Address.parse(MimeUtility.unfold(getFirstHeader("BCC")));
       }
-      return mBcc;
+      return bcc;
     } else {
       throw new MessagingException("Unrecognized recipient type.");
     }
@@ -290,26 +290,26 @@ public class MimeMessage extends Message {
     if (type == RECIPIENT_TYPE_TO) {
       if (addresses == null || addresses.length == 0) {
         removeHeader("To");
-        this.mTo = null;
+        this.to = null;
       } else {
         setHeader("To", MimeUtility.fold(Address.toHeader(addresses), toLength));
-        this.mTo = addresses;
+        this.to = addresses;
       }
     } else if (type == RECIPIENT_TYPE_CC) {
       if (addresses == null || addresses.length == 0) {
         removeHeader("CC");
-        this.mCc = null;
+        this.cc = null;
       } else {
         setHeader("CC", MimeUtility.fold(Address.toHeader(addresses), ccLength));
-        this.mCc = addresses;
+        this.cc = addresses;
       }
     } else if (type == RECIPIENT_TYPE_BCC) {
       if (addresses == null || addresses.length == 0) {
         removeHeader("BCC");
-        this.mBcc = null;
+        this.bcc = null;
       } else {
         setHeader("BCC", MimeUtility.fold(Address.toHeader(addresses), bccLength));
-        this.mBcc = addresses;
+        this.bcc = addresses;
       }
     } else {
       throw new MessagingException("Unrecognized recipient type.");
@@ -330,14 +330,14 @@ public class MimeMessage extends Message {
 
   @Override
   public Address[] getFrom() throws MessagingException {
-    if (mFrom == null) {
+    if (from == null) {
       String list = MimeUtility.unfold(getFirstHeader("From"));
       if (list == null || list.length() == 0) {
         list = MimeUtility.unfold(getFirstHeader("Sender"));
       }
-      mFrom = Address.parse(list);
+      from = Address.parse(list);
     }
-    return mFrom;
+    return from;
   }
 
   @Override
@@ -345,18 +345,18 @@ public class MimeMessage extends Message {
     final int fromLength = 6; // "From: "
     if (from != null) {
       setHeader("From", MimeUtility.fold(from.toHeader(), fromLength));
-      this.mFrom = new Address[] {from};
+      this.from = new Address[] {from};
     } else {
-      this.mFrom = null;
+      this.from = null;
     }
   }
 
   @Override
   public Address[] getReplyTo() throws MessagingException {
-    if (mReplyTo == null) {
-      mReplyTo = Address.parse(MimeUtility.unfold(getFirstHeader("Reply-to")));
+    if (replyTo == null) {
+      replyTo = Address.parse(MimeUtility.unfold(getFirstHeader("Reply-to")));
     }
-    return mReplyTo;
+    return replyTo;
   }
 
   @Override
@@ -364,10 +364,10 @@ public class MimeMessage extends Message {
     final int replyToLength = 10; // "Reply-to: "
     if (replyTo == null || replyTo.length == 0) {
       removeHeader("Reply-to");
-      mReplyTo = null;
+      this.replyTo = null;
     } else {
       setHeader("Reply-to", MimeUtility.fold(Address.toHeader(replyTo), replyToLength));
-      mReplyTo = replyTo;
+      this.replyTo = replyTo;
     }
   }
 
@@ -392,7 +392,7 @@ public class MimeMessage extends Message {
   @Override
   public String getMessageId() throws MessagingException {
     String messageId = getFirstHeader("Message-ID");
-    if (messageId == null && !mInhibitLocalMessageId) {
+    if (messageId == null && !inhibitLocalMessageId) {
       messageId = generateMessageId();
       setMessageId(messageId);
     }
@@ -406,12 +406,12 @@ public class MimeMessage extends Message {
 
   @Override
   public Body getBody() throws MessagingException {
-    return mBody;
+    return body;
   }
 
   @Override
   public void setBody(Body body) throws MessagingException {
-    this.mBody = body;
+    this.body = body;
     if (body instanceof Multipart) {
       final Multipart multipart = ((Multipart) body);
       multipart.setParent(this);
@@ -447,7 +447,7 @@ public class MimeMessage extends Message {
   public void removeHeader(String name) throws MessagingException {
     getMimeHeaders().removeHeader(name);
     if ("Message-ID".equalsIgnoreCase(name)) {
-      mInhibitLocalMessageId = true;
+      inhibitLocalMessageId = true;
     }
   }
 
@@ -461,15 +461,15 @@ public class MimeMessage extends Message {
   @Override
   public void setExtendedHeader(String name, String value) throws MessagingException {
     if (value == null) {
-      if (mExtendedHeader != null) {
-        mExtendedHeader.removeHeader(name);
+      if (extendedHeader != null) {
+        extendedHeader.removeHeader(name);
       }
       return;
     }
-    if (mExtendedHeader == null) {
-      mExtendedHeader = new MimeHeader();
+    if (extendedHeader == null) {
+      extendedHeader = new MimeHeader();
     }
-    mExtendedHeader.setHeader(name, END_OF_LINE.matcher(value).replaceAll(""));
+    extendedHeader.setHeader(name, END_OF_LINE.matcher(value).replaceAll(""));
   }
 
   /**
@@ -481,10 +481,10 @@ public class MimeMessage extends Message {
    */
   @Override
   public String getExtendedHeader(String name) throws MessagingException {
-    if (mExtendedHeader == null) {
+    if (extendedHeader == null) {
       return null;
     }
-    return mExtendedHeader.getFirstHeader(name);
+    return extendedHeader.getFirstHeader(name);
   }
 
   /**
@@ -496,15 +496,15 @@ public class MimeMessage extends Message {
    */
   public void setExtendedHeaders(String headers) throws MessagingException {
     if (TextUtils.isEmpty(headers)) {
-      mExtendedHeader = null;
+      extendedHeader = null;
     } else {
-      mExtendedHeader = new MimeHeader();
+      extendedHeader = new MimeHeader();
       for (final String header : END_OF_LINE.split(headers)) {
         final String[] tokens = header.split(":", 2);
         if (tokens.length != 2) {
           throw new MessagingException("Illegal extended headers: " + headers);
         }
-        mExtendedHeader.setHeader(tokens[0].trim(), tokens[1].trim());
+        extendedHeader.setHeader(tokens[0].trim(), tokens[1].trim());
       }
     }
   }
@@ -515,8 +515,8 @@ public class MimeMessage extends Message {
    * @return "CR-NL-separated extended headers - null if extended header does not exist
    */
   public String getExtendedHeaders() {
-    if (mExtendedHeader != null) {
-      return mExtendedHeader.writeToString();
+    if (extendedHeader != null) {
+      return extendedHeader.writeToString();
     }
     return null;
   }
@@ -536,8 +536,8 @@ public class MimeMessage extends Message {
     // because it is intended to internal use.
     writer.write("\r\n");
     writer.flush();
-    if (mBody != null) {
-      mBody.writeTo(out);
+    if (body != null) {
+      body.writeTo(out);
     }
   }
 

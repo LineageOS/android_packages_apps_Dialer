@@ -38,14 +38,14 @@ public class SmartDialNameMatcher {
   // positives
   private static final int INITIAL_LENGTH_LIMIT = 1;
 
-  private final ArrayList<SmartDialMatchPosition> mMatchPositions = new ArrayList<>();
-  private String mQuery;
+  private final ArrayList<SmartDialMatchPosition> matchPositions = new ArrayList<>();
+  private String query;
 
   // Controls whether to treat an empty query as a match (with anything).
-  private boolean mShouldMatchEmptyQuery = false;
+  private boolean shouldMatchEmptyQuery = false;
 
   public SmartDialNameMatcher(String query) {
-    mQuery = query;
+    this.query = query;
   }
 
   /**
@@ -112,7 +112,7 @@ public class SmartDialNameMatcher {
   @Nullable
   public SmartDialMatchPosition matchesNumber(Context context, String phoneNumber, String query) {
     if (TextUtils.isEmpty(phoneNumber)) {
-      return mShouldMatchEmptyQuery ? new SmartDialMatchPosition(0, 0) : null;
+      return shouldMatchEmptyQuery ? new SmartDialMatchPosition(0, 0) : null;
     }
     StringBuilder builder = new StringBuilder();
     constructEmptyMask(builder, phoneNumber.length());
@@ -148,7 +148,7 @@ public class SmartDialNameMatcher {
    *     with the matching positions otherwise
    */
   public SmartDialMatchPosition matchesNumber(Context context, String phoneNumber) {
-    return matchesNumber(context, phoneNumber, mQuery);
+    return matchesNumber(context, phoneNumber, query);
   }
 
   /**
@@ -164,7 +164,7 @@ public class SmartDialNameMatcher {
   private SmartDialMatchPosition matchesNumberWithOffset(
       Context context, String phoneNumber, String query, int offset) {
     if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(query)) {
-      return mShouldMatchEmptyQuery ? new SmartDialMatchPosition(offset, offset) : null;
+      return shouldMatchEmptyQuery ? new SmartDialMatchPosition(offset, offset) : null;
     }
     int queryAt = 0;
     int numberAt = offset;
@@ -406,25 +406,25 @@ public class SmartDialNameMatcher {
    *     match positions (multiple matches correspond to initial matches).
    */
   public boolean matches(Context context, String displayName) {
-    mMatchPositions.clear();
-    return matchesCombination(context, displayName, mQuery, mMatchPositions);
+    matchPositions.clear();
+    return matchesCombination(context, displayName, query, matchPositions);
   }
 
   public ArrayList<SmartDialMatchPosition> getMatchPositions() {
     // Return a clone of mMatchPositions so that the caller can use it without
     // worrying about it changing
-    return new ArrayList<>(mMatchPositions);
+    return new ArrayList<>(matchPositions);
   }
 
   public String getQuery() {
-    return mQuery;
+    return query;
   }
 
   public void setQuery(String query) {
-    mQuery = query;
+    this.query = query;
   }
 
   public void setShouldMatchEmptyQuery(boolean matches) {
-    mShouldMatchEmptyQuery = matches;
+    shouldMatchEmptyQuery = matches;
   }
 }

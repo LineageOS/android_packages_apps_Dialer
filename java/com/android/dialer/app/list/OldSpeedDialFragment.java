@@ -81,22 +81,22 @@ public class OldSpeedDialFragment extends Fragment
   /** Used with LoaderManager. */
   private static final int LOADER_ID_CONTACT_TILE = 1;
 
-  private final LongSparseArray<Integer> mItemIdTopMap = new LongSparseArray<>();
-  private final LongSparseArray<Integer> mItemIdLeftMap = new LongSparseArray<>();
-  private final ContactTileView.Listener mContactTileAdapterListener =
+  private final LongSparseArray<Integer> itemIdTopMap = new LongSparseArray<>();
+  private final LongSparseArray<Integer> itemIdLeftMap = new LongSparseArray<>();
+  private final ContactTileView.Listener contactTileAdapterListener =
       new ContactTileAdapterListener();
-  private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
+  private final LoaderManager.LoaderCallbacks<Cursor> contactTileLoaderListener =
       new ContactTileLoaderListener();
-  private final ScrollListener mScrollListener = new ScrollListener();
-  private int mAnimationDuration;
-  private OnPhoneNumberPickerActionListener mPhoneNumberPickerActionListener;
-  private OnListFragmentScrolledListener mActivityScrollListener;
-  private PhoneFavoritesTileAdapter mContactTileAdapter;
-  private View mParentView;
-  private PhoneFavoriteListView mListView;
-  private View mContactTileFrame;
+  private final ScrollListener scrollListener = new ScrollListener();
+  private int animationDuration;
+  private OnPhoneNumberPickerActionListener phoneNumberPickerActionListener;
+  private OnListFragmentScrolledListener activityScrollListener;
+  private PhoneFavoritesTileAdapter contactTileAdapter;
+  private View parentView;
+  private PhoneFavoriteListView listView;
+  private View contactTileFrame;
   /** Layout used when there are no favorites. */
-  private EmptyContentView mEmptyView;
+  private EmptyContentView emptyView;
 
   @Override
   public void onCreate(Bundle savedState) {
@@ -109,10 +109,10 @@ public class OldSpeedDialFragment extends Fragment
     // Construct two base adapters which will become part of PhoneFavoriteMergedAdapter.
     // We don't construct the resultant adapter at this moment since it requires LayoutInflater
     // that will be available on onCreateView().
-    mContactTileAdapter =
-        new PhoneFavoritesTileAdapter(getActivity(), mContactTileAdapterListener, this);
-    mContactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(getActivity()));
-    mAnimationDuration = getResources().getInteger(R.integer.fade_duration);
+    contactTileAdapter =
+        new PhoneFavoritesTileAdapter(getActivity(), contactTileAdapterListener, this);
+    contactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(getActivity()));
+    animationDuration = getResources().getInteger(R.integer.fade_duration);
     Trace.endSection();
   }
 
@@ -120,22 +120,22 @@ public class OldSpeedDialFragment extends Fragment
   public void onResume() {
     Trace.beginSection(TAG + " onResume");
     super.onResume();
-    if (mContactTileAdapter != null) {
-      mContactTileAdapter.refreshContactsPreferences();
+    if (contactTileAdapter != null) {
+      contactTileAdapter.refreshContactsPreferences();
     }
     if (PermissionsUtil.hasContactsReadPermissions(getActivity())) {
       if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
-        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
 
       } else {
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
       }
 
-      mEmptyView.setDescription(R.string.speed_dial_empty);
-      mEmptyView.setActionLabel(R.string.speed_dial_empty_add_favorite_action);
+      emptyView.setDescription(R.string.speed_dial_empty);
+      emptyView.setActionLabel(R.string.speed_dial_empty_add_favorite_action);
     } else {
-      mEmptyView.setDescription(R.string.permission_no_speeddial);
-      mEmptyView.setActionLabel(R.string.permission_single_turn_on);
+      emptyView.setDescription(R.string.permission_no_speeddial);
+      emptyView.setActionLabel(R.string.permission_single_turn_on);
     }
     Trace.endSection();
   }
@@ -144,62 +144,62 @@ public class OldSpeedDialFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     Trace.beginSection(TAG + " onCreateView");
-    mParentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
+    parentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
 
-    mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
-    mListView.setOnItemClickListener(this);
-    mListView.setVerticalScrollBarEnabled(false);
-    mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
-    mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-    mListView.getDragDropController().addOnDragDropListener(mContactTileAdapter);
+    listView = (PhoneFavoriteListView) parentView.findViewById(R.id.contact_tile_list);
+    listView.setOnItemClickListener(this);
+    listView.setVerticalScrollBarEnabled(false);
+    listView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
+    listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
+    listView.getDragDropController().addOnDragDropListener(contactTileAdapter);
 
     final ImageView dragShadowOverlay =
         (ImageView) getActivity().findViewById(R.id.contact_tile_drag_shadow_overlay);
-    mListView.setDragShadowOverlay(dragShadowOverlay);
+    listView.setDragShadowOverlay(dragShadowOverlay);
 
-    mEmptyView = (EmptyContentView) mParentView.findViewById(R.id.empty_list_view);
-    mEmptyView.setImage(R.drawable.empty_speed_dial);
-    mEmptyView.setActionClickedListener(this);
+    emptyView = (EmptyContentView) parentView.findViewById(R.id.empty_list_view);
+    emptyView.setImage(R.drawable.empty_speed_dial);
+    emptyView.setActionClickedListener(this);
 
-    mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
+    contactTileFrame = parentView.findViewById(R.id.contact_tile_frame);
 
     final LayoutAnimationController controller =
         new LayoutAnimationController(
             AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
     controller.setDelay(0);
-    mListView.setLayoutAnimation(controller);
-    mListView.setAdapter(mContactTileAdapter);
+    listView.setLayoutAnimation(controller);
+    listView.setAdapter(contactTileAdapter);
 
-    mListView.setOnScrollListener(mScrollListener);
-    mListView.setFastScrollEnabled(false);
-    mListView.setFastScrollAlwaysVisible(false);
+    listView.setOnScrollListener(scrollListener);
+    listView.setFastScrollEnabled(false);
+    listView.setFastScrollAlwaysVisible(false);
 
-    //prevent content changes of the list from firing accessibility events.
-    mListView.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
-    ContentChangedFilter.addToParent(mListView);
+    // prevent content changes of the list from firing accessibility events.
+    listView.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
+    ContentChangedFilter.addToParent(listView);
 
     Trace.endSection();
-    return mParentView;
+    return parentView;
   }
 
   public boolean hasFrequents() {
-    if (mContactTileAdapter == null) {
+    if (contactTileAdapter == null) {
       return false;
     }
-    return mContactTileAdapter.getNumFrequents() > 0;
+    return contactTileAdapter.getNumFrequents() > 0;
   }
 
   /* package */ void setEmptyViewVisibility(final boolean visible) {
-    final int previousVisibility = mEmptyView.getVisibility();
+    final int previousVisibility = emptyView.getVisibility();
     final int emptyViewVisibility = visible ? View.VISIBLE : View.GONE;
     final int listViewVisibility = visible ? View.GONE : View.VISIBLE;
 
     if (previousVisibility != emptyViewVisibility) {
-      final FrameLayout.LayoutParams params = (LayoutParams) mContactTileFrame.getLayoutParams();
+      final FrameLayout.LayoutParams params = (LayoutParams) contactTileFrame.getLayoutParams();
       params.height = visible ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
-      mContactTileFrame.setLayoutParams(params);
-      mEmptyView.setVisibility(emptyViewVisibility);
-      mListView.setVisibility(listViewVisibility);
+      contactTileFrame.setLayoutParams(params);
+      emptyView.setVisibility(emptyViewVisibility);
+      listView.setVisibility(listViewVisibility);
     }
   }
 
@@ -210,7 +210,7 @@ public class OldSpeedDialFragment extends Fragment
     final Activity activity = getActivity();
 
     try {
-      mActivityScrollListener = (OnListFragmentScrolledListener) activity;
+      activityScrollListener = (OnListFragmentScrolledListener) activity;
     } catch (ClassCastException e) {
       throw new ClassCastException(
           activity.toString() + " must implement OnListFragmentScrolledListener");
@@ -218,15 +218,15 @@ public class OldSpeedDialFragment extends Fragment
 
     try {
       OnDragDropListener listener = (OnDragDropListener) activity;
-      mListView.getDragDropController().addOnDragDropListener(listener);
-      ((HostInterface) activity).setDragDropController(mListView.getDragDropController());
+      listView.getDragDropController().addOnDragDropListener(listener);
+      ((HostInterface) activity).setDragDropController(listView.getDragDropController());
     } catch (ClassCastException e) {
       throw new ClassCastException(
           activity.toString() + " must implement OnDragDropListener and HostInterface");
     }
 
     try {
-      mPhoneNumberPickerActionListener = (OnPhoneNumberPickerActionListener) activity;
+      phoneNumberPickerActionListener = (OnPhoneNumberPickerActionListener) activity;
     } catch (ClassCastException e) {
       throw new ClassCastException(
           activity.toString() + " must implement PhoneFavoritesFragment.listener");
@@ -236,7 +236,7 @@ public class OldSpeedDialFragment extends Fragment
     // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
     // be called, on which we'll check if "all" contacts should be reloaded again or not.
     if (PermissionsUtil.hasContactsReadPermissions(activity)) {
-      getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+      getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
     } else {
       setEmptyViewVisibility(true);
     }
@@ -245,12 +245,12 @@ public class OldSpeedDialFragment extends Fragment
   /**
    * {@inheritDoc}
    *
-   * <p>This is only effective for elements provided by {@link #mContactTileAdapter}. {@link
-   * #mContactTileAdapter} has its own logic for click events.
+   * <p>This is only effective for elements provided by {@link #contactTileAdapter}. {@link
+   * #contactTileAdapter} has its own logic for click events.
    */
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    final int contactTileAdapterCount = mContactTileAdapter.getCount();
+    final int contactTileAdapterCount = contactTileAdapter.getCount();
     if (position <= contactTileAdapterCount) {
       LogUtil.e(
           "OldSpeedDialFragment.onItemClick",
@@ -267,36 +267,36 @@ public class OldSpeedDialFragment extends Fragment
    * are sliding into their new positions.
    */
   private void saveOffsets(int removedItemHeight) {
-    final int firstVisiblePosition = mListView.getFirstVisiblePosition();
+    final int firstVisiblePosition = listView.getFirstVisiblePosition();
     if (DEBUG) {
-      LogUtil.d("OldSpeedDialFragment.saveOffsets", "Child count : " + mListView.getChildCount());
+      LogUtil.d("OldSpeedDialFragment.saveOffsets", "Child count : " + listView.getChildCount());
     }
-    for (int i = 0; i < mListView.getChildCount(); i++) {
-      final View child = mListView.getChildAt(i);
+    for (int i = 0; i < listView.getChildCount(); i++) {
+      final View child = listView.getChildAt(i);
       final int position = firstVisiblePosition + i;
       // Since we are getting the position from mListView and then querying
       // mContactTileAdapter, its very possible that things are out of sync
       // and we might index out of bounds.  Let's make sure that this doesn't happen.
-      if (!mContactTileAdapter.isIndexInBound(position)) {
+      if (!contactTileAdapter.isIndexInBound(position)) {
         continue;
       }
-      final long itemId = mContactTileAdapter.getItemId(position);
+      final long itemId = contactTileAdapter.getItemId(position);
       if (DEBUG) {
         LogUtil.d(
             "OldSpeedDialFragment.saveOffsets",
             "Saving itemId: " + itemId + " for listview child " + i + " Top: " + child.getTop());
       }
-      mItemIdTopMap.put(itemId, child.getTop());
-      mItemIdLeftMap.put(itemId, child.getLeft());
+      itemIdTopMap.put(itemId, child.getTop());
+      itemIdLeftMap.put(itemId, child.getLeft());
     }
-    mItemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
+    itemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
   }
 
   /*
    * Performs animations for the gridView
    */
   private void animateGridView(final long... idsInPlace) {
-    if (mItemIdTopMap.size() == 0) {
+    if (itemIdTopMap.size() == 0) {
       // Don't do animations if the database is being queried for the first time and
       // the previous item offsets have not been cached, or the user hasn't done anything
       // (dragging, swiping etc) that requires an animation.
@@ -304,34 +304,34 @@ public class OldSpeedDialFragment extends Fragment
     }
 
     ViewUtil.doOnPreDraw(
-        mListView,
+        listView,
         true,
         new Runnable() {
           @Override
           public void run() {
 
-            final int firstVisiblePosition = mListView.getFirstVisiblePosition();
+            final int firstVisiblePosition = listView.getFirstVisiblePosition();
             final AnimatorSet animSet = new AnimatorSet();
             final ArrayList<Animator> animators = new ArrayList<Animator>();
-            for (int i = 0; i < mListView.getChildCount(); i++) {
-              final View child = mListView.getChildAt(i);
+            for (int i = 0; i < listView.getChildCount(); i++) {
+              final View child = listView.getChildAt(i);
               int position = firstVisiblePosition + i;
 
               // Since we are getting the position from mListView and then querying
               // mContactTileAdapter, its very possible that things are out of sync
               // and we might index out of bounds.  Let's make sure that this doesn't happen.
-              if (!mContactTileAdapter.isIndexInBound(position)) {
+              if (!contactTileAdapter.isIndexInBound(position)) {
                 continue;
               }
 
-              final long itemId = mContactTileAdapter.getItemId(position);
+              final long itemId = contactTileAdapter.getItemId(position);
 
               if (containsId(idsInPlace, itemId)) {
                 animators.add(ObjectAnimator.ofFloat(child, "alpha", 0.0f, 1.0f));
                 break;
               } else {
-                Integer startTop = mItemIdTopMap.get(itemId);
-                Integer startLeft = mItemIdLeftMap.get(itemId);
+                Integer startTop = itemIdTopMap.get(itemId);
+                Integer startLeft = itemIdLeftMap.get(itemId);
                 final int top = child.getTop();
                 final int left = child.getLeft();
                 int deltaX = 0;
@@ -367,12 +367,12 @@ public class OldSpeedDialFragment extends Fragment
             }
 
             if (animators.size() > 0) {
-              animSet.setDuration(mAnimationDuration).playTogether(animators);
+              animSet.setDuration(animationDuration).playTogether(animators);
               animSet.start();
             }
 
-            mItemIdTopMap.clear();
-            mItemIdLeftMap.clear();
+            itemIdTopMap.clear();
+            itemIdLeftMap.clear();
           }
         });
   }
@@ -451,8 +451,8 @@ public class OldSpeedDialFragment extends Fragment
       if (DEBUG) {
         LogUtil.d("ContactTileLoaderListener.onLoadFinished", null);
       }
-      mContactTileAdapter.setContactCursor(data);
-      setEmptyViewVisibility(mContactTileAdapter.getCount() == 0);
+      contactTileAdapter.setContactCursor(data);
+      setEmptyViewVisibility(contactTileAdapter.getCount() == 0);
     }
 
     @Override
@@ -468,16 +468,16 @@ public class OldSpeedDialFragment extends Fragment
     @Override
     public void onContactSelected(
         Uri contactUri, Rect targetRect, CallSpecificAppData callSpecificAppData) {
-      if (mPhoneNumberPickerActionListener != null) {
-        mPhoneNumberPickerActionListener.onPickDataUri(
+      if (phoneNumberPickerActionListener != null) {
+        phoneNumberPickerActionListener.onPickDataUri(
             contactUri, false /* isVideoCall */, callSpecificAppData);
       }
     }
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, CallSpecificAppData callSpecificAppData) {
-      if (mPhoneNumberPickerActionListener != null) {
-        mPhoneNumberPickerActionListener.onPickPhoneNumber(
+      if (phoneNumberPickerActionListener != null) {
+        phoneNumberPickerActionListener.onPickPhoneNumber(
             phoneNumber, false /* isVideoCall */, callSpecificAppData);
       }
     }
@@ -488,15 +488,15 @@ public class OldSpeedDialFragment extends Fragment
     @Override
     public void onScroll(
         AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-      if (mActivityScrollListener != null) {
-        mActivityScrollListener.onListFragmentScroll(
+      if (activityScrollListener != null) {
+        activityScrollListener.onListFragmentScroll(
             firstVisibleItem, visibleItemCount, totalItemCount);
       }
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-      mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
+      activityScrollListener.onListFragmentScrollStateChange(scrollState);
     }
   }
 }

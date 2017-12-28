@@ -32,7 +32,7 @@ import android.util.SparseIntArray;
  */
 abstract class GroupingListAdapter extends RecyclerView.Adapter {
 
-  protected ContentObserver mChangeObserver =
+  protected ContentObserver changeObserver =
       new ContentObserver(new Handler()) {
         @Override
         public boolean deliverSelfNotifications() {
@@ -44,21 +44,21 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
           onContentChanged();
         }
       };
-  protected DataSetObserver mDataSetObserver =
+  protected DataSetObserver dataSetObserver =
       new DataSetObserver() {
         @Override
         public void onChanged() {
           notifyDataSetChanged();
         }
       };
-  private Cursor mCursor;
+  private Cursor cursor;
   /**
    * SparseIntArray, which maps the cursor position of the first element of a group to the size of
    * the group. The index of a key in this map corresponds to the list position of that group.
    */
-  private SparseIntArray mGroupMetadata;
+  private SparseIntArray groupMetadata;
 
-  private int mItemCount;
+  private int itemCount;
 
   public GroupingListAdapter() {
     reset();
@@ -72,28 +72,28 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
   protected abstract void onContentChanged();
 
   public void changeCursor(Cursor cursor) {
-    if (cursor == mCursor) {
+    if (cursor == this.cursor) {
       return;
     }
 
-    if (mCursor != null) {
-      mCursor.unregisterContentObserver(mChangeObserver);
-      mCursor.unregisterDataSetObserver(mDataSetObserver);
-      mCursor.close();
+    if (this.cursor != null) {
+      this.cursor.unregisterContentObserver(changeObserver);
+      this.cursor.unregisterDataSetObserver(dataSetObserver);
+      this.cursor.close();
     }
 
     // Reset whenever the cursor is changed.
     reset();
-    mCursor = cursor;
+    this.cursor = cursor;
 
     if (cursor != null) {
-      addGroups(mCursor);
+      addGroups(this.cursor);
 
       // Calculate the item count by subtracting group child counts from the cursor count.
-      mItemCount = mGroupMetadata.size();
+      itemCount = groupMetadata.size();
 
-      cursor.registerContentObserver(mChangeObserver);
-      cursor.registerDataSetObserver(mDataSetObserver);
+      cursor.registerContentObserver(changeObserver);
+      cursor.registerDataSetObserver(dataSetObserver);
       notifyDataSetChanged();
     }
   }
@@ -103,18 +103,18 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
    * #addGroups} method.
    */
   public void addGroup(int cursorPosition, int groupSize) {
-    int lastIndex = mGroupMetadata.size() - 1;
-    if (lastIndex < 0 || cursorPosition <= mGroupMetadata.keyAt(lastIndex)) {
-      mGroupMetadata.put(cursorPosition, groupSize);
+    int lastIndex = groupMetadata.size() - 1;
+    if (lastIndex < 0 || cursorPosition <= groupMetadata.keyAt(lastIndex)) {
+      groupMetadata.put(cursorPosition, groupSize);
     } else {
       // Optimization to avoid binary search if adding groups in ascending cursor position.
-      mGroupMetadata.append(cursorPosition, groupSize);
+      groupMetadata.append(cursorPosition, groupSize);
     }
   }
 
   @Override
   public int getItemCount() {
-    return mItemCount;
+    return itemCount;
   }
 
   /**
@@ -122,11 +122,11 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
    * position.
    */
   public int getGroupSize(int listPosition) {
-    if (listPosition < 0 || listPosition >= mGroupMetadata.size()) {
+    if (listPosition < 0 || listPosition >= groupMetadata.size()) {
       return 0;
     }
 
-    return mGroupMetadata.valueAt(listPosition);
+    return groupMetadata.valueAt(listPosition);
   }
 
   /**
@@ -134,20 +134,20 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
    * corresponding to that position.
    */
   public Object getItem(int listPosition) {
-    if (mCursor == null || listPosition < 0 || listPosition >= mGroupMetadata.size()) {
+    if (cursor == null || listPosition < 0 || listPosition >= groupMetadata.size()) {
       return null;
     }
 
-    int cursorPosition = mGroupMetadata.keyAt(listPosition);
-    if (mCursor.moveToPosition(cursorPosition)) {
-      return mCursor;
+    int cursorPosition = groupMetadata.keyAt(listPosition);
+    if (cursor.moveToPosition(cursorPosition)) {
+      return cursor;
     } else {
       return null;
     }
   }
 
   private void reset() {
-    mItemCount = 0;
-    mGroupMetadata = new SparseIntArray();
+    itemCount = 0;
+    groupMetadata = new SparseIntArray();
   }
 }

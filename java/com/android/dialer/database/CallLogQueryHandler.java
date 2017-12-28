@@ -66,10 +66,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   /** The token for the query to fetch the number of missed calls. */
   private static final int QUERY_MISSED_CALLS_UNREAD_COUNT_TOKEN = 59;
 
-  private final int mLogLimit;
-  private final WeakReference<Listener> mListener;
+  private final int logLimit;
+  private final WeakReference<Listener> listener;
 
-  private final Context mContext;
+  private final Context context;
 
   public CallLogQueryHandler(Context context, ContentResolver contentResolver, Listener listener) {
     this(context, contentResolver, listener, -1);
@@ -78,9 +78,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   public CallLogQueryHandler(
       Context context, ContentResolver contentResolver, Listener listener, int limit) {
     super(contentResolver);
-    mContext = context.getApplicationContext();
-    mListener = new WeakReference<>(listener);
-    mLogLimit = limit;
+    this.context = context.getApplicationContext();
+    this.listener = new WeakReference<>(listener);
+    logLimit = limit;
   }
 
   @Override
@@ -97,7 +97,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    */
   public void fetchCalls(int callType, long newerThan) {
     cancelFetch();
-    if (PermissionsUtil.hasPhonePermissions(mContext)) {
+    if (PermissionsUtil.hasPhonePermissions(context)) {
       fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
     } else {
       updateAdapterData(null);
@@ -108,11 +108,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     StringBuilder where = new StringBuilder();
     List<String> selectionArgs = new ArrayList<>();
 
-    VoicemailComponent.get(mContext)
+    VoicemailComponent.get(context)
         .getVoicemailClient()
-        .appendOmtpVoicemailStatusSelectionClause(mContext, where, selectionArgs);
+        .appendOmtpVoicemailStatusSelectionClause(context, where, selectionArgs);
 
-    if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
+    if (TelecomUtil.hasReadWriteVoicemailPermissions(context)) {
       startQuery(
           QUERY_VOICEMAIL_STATUS_TOKEN,
           null,
@@ -125,15 +125,15 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   }
 
   public void fetchVoicemailUnreadCount() {
-    if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
+    if (TelecomUtil.hasReadWriteVoicemailPermissions(context)) {
       // Only count voicemails that have not been read and have not been deleted.
       StringBuilder where =
           new StringBuilder(Voicemails.IS_READ + "=0" + " AND " + Voicemails.DELETED + "=0 ");
       List<String> selectionArgs = new ArrayList<>();
 
-      VoicemailComponent.get(mContext)
+      VoicemailComponent.get(context)
           .getVoicemailClient()
-          .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
+          .appendOmtpVoicemailSelectionClause(context, where, selectionArgs);
 
       startQuery(
           QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN,
@@ -178,9 +178,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     if (callType == Calls.VOICEMAIL_TYPE) {
-      VoicemailComponent.get(mContext)
+      VoicemailComponent.get(context)
           .getVoicemailClient()
-          .appendOmtpVoicemailSelectionClause(mContext, where, selectionArgs);
+          .appendOmtpVoicemailSelectionClause(context, where, selectionArgs);
     } else {
       // Filter out all Duo entries other than video calls
       where
@@ -197,10 +197,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           .append(")");
     }
 
-    final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
+    final int limit = (logLimit == -1) ? NUM_LOGS_TO_DISPLAY : logLimit;
     final String selection = where.length() > 0 ? where.toString() : null;
     Uri uri =
-        TelecomUtil.getCallLogUri(mContext)
+        TelecomUtil.getCallLogUri(context)
             .buildUpon()
             .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
             .build();
@@ -221,7 +221,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
   /** Updates all missed calls to mark them as read. */
   public void markMissedCallsAsRead() {
-    if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+    if (!PermissionsUtil.hasPhonePermissions(context)) {
       return;
     }
 
@@ -239,7 +239,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
   /** Fetch all missed calls received since last time the tab was opened. */
   public void fetchMissedCallsUnreadCount() {
-    if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+    if (!PermissionsUtil.hasPhonePermissions(context)) {
       return;
     }
 
@@ -286,7 +286,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
    * listener took ownership of the cursor.
    */
   private boolean updateAdapterData(Cursor cursor) {
-    final Listener listener = mListener.get();
+    final Listener listener = this.listener.get();
     return listener != null && listener.onCallsFetched(cursor);
   }
 
@@ -303,21 +303,21 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
   }
 
   private void updateVoicemailStatus(Cursor statusCursor) {
-    final Listener listener = mListener.get();
+    final Listener listener = this.listener.get();
     if (listener != null) {
       listener.onVoicemailStatusFetched(statusCursor);
     }
   }
 
   private void updateVoicemailUnreadCount(Cursor statusCursor) {
-    final Listener listener = mListener.get();
+    final Listener listener = this.listener.get();
     if (listener != null) {
       listener.onVoicemailUnreadCountFetched(statusCursor);
     }
   }
 
   private void updateMissedCallsUnreadCount(Cursor statusCursor) {
-    final Listener listener = mListener.get();
+    final Listener listener = this.listener.get();
     if (listener != null) {
       listener.onMissedCallsUnreadCountFetched(statusCursor);
     }

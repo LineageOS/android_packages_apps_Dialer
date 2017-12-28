@@ -36,7 +36,7 @@ import org.apache.commons.io.IOUtils;
  * closed the file is deleted and the Body should be considered disposed of.
  */
 public class BinaryTempFileBody implements Body {
-  private File mFile;
+  private File file;
 
   /**
    * An alternate way to put data into a BinaryTempFileBody is to simply supply an already- created
@@ -45,19 +45,19 @@ public class BinaryTempFileBody implements Body {
    * @param filePath The file containing the data to be stored on disk temporarily
    */
   public void setFile(String filePath) {
-    mFile = new File(filePath);
+    file = new File(filePath);
   }
 
   public OutputStream getOutputStream() throws IOException {
-    mFile = File.createTempFile("body", null, TempDirectory.getTempDirectory());
-    mFile.deleteOnExit();
-    return new FileOutputStream(mFile);
+    file = File.createTempFile("body", null, TempDirectory.getTempDirectory());
+    file.deleteOnExit();
+    return new FileOutputStream(file);
   }
 
   @Override
   public InputStream getInputStream() throws MessagingException {
     try {
-      return new BinaryTempFileBodyInputStream(new FileInputStream(mFile));
+      return new BinaryTempFileBodyInputStream(new FileInputStream(file));
     } catch (IOException ioe) {
       throw new MessagingException("Unable to open body", ioe);
     }
@@ -69,7 +69,7 @@ public class BinaryTempFileBody implements Body {
     Base64OutputStream base64Out = new Base64OutputStream(out, Base64.CRLF | Base64.NO_CLOSE);
     IOUtils.copy(in, base64Out);
     base64Out.close();
-    mFile.delete();
+    file.delete();
     in.close();
   }
 
@@ -81,7 +81,7 @@ public class BinaryTempFileBody implements Body {
     @Override
     public void close() throws IOException {
       super.close();
-      mFile.delete();
+      file.delete();
     }
   }
 }

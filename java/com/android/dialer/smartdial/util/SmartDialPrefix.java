@@ -54,38 +54,38 @@ public class SmartDialPrefix {
 
   private static final String PREF_USER_SIM_COUNTRY_CODE_DEFAULT = null;
 
-  private static String sUserSimCountryCode = PREF_USER_SIM_COUNTRY_CODE_DEFAULT;
+  private static String userSimCountryCode = PREF_USER_SIM_COUNTRY_CODE_DEFAULT;
   /** Indicates whether user is in NANP regions. */
-  private static boolean sUserInNanpRegion = false;
+  private static boolean userInNanpRegion = false;
   /** Set of country names that use NANP code. */
-  private static Set<String> sNanpCountries = null;
+  private static Set<String> nanpCountries = null;
   /** Set of supported country codes in front of the phone number. */
-  private static Set<String> sCountryCodes = null;
+  private static Set<String> countryCodes = null;
 
-  private static boolean sNanpInitialized = false;
+  private static boolean nanpInitialized = false;
 
   /** Initializes the Nanp settings, and finds out whether user is in a NANP region. */
   public static void initializeNanpSettings(Context context) {
     final TelephonyManager manager =
         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     if (manager != null) {
-      sUserSimCountryCode = manager.getSimCountryIso();
+      userSimCountryCode = manager.getSimCountryIso();
     }
 
     final SharedPreferences prefs =
         PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
 
-    if (sUserSimCountryCode != null) {
+    if (userSimCountryCode != null) {
       /** Updates shared preferences with the latest country obtained from getSimCountryIso. */
-      prefs.edit().putString(PREF_USER_SIM_COUNTRY_CODE, sUserSimCountryCode).apply();
+      prefs.edit().putString(PREF_USER_SIM_COUNTRY_CODE, userSimCountryCode).apply();
     } else {
       /** Uses previously stored country code if loading fails. */
-      sUserSimCountryCode =
+      userSimCountryCode =
           prefs.getString(PREF_USER_SIM_COUNTRY_CODE, PREF_USER_SIM_COUNTRY_CODE_DEFAULT);
     }
     /** Queries the NANP country list to find out whether user is in a NANP region. */
-    sUserInNanpRegion = isCountryNanp(sUserSimCountryCode);
-    sNanpInitialized = true;
+    userInNanpRegion = isCountryNanp(userSimCountryCode);
+    nanpInitialized = true;
   }
 
   /**
@@ -255,7 +255,7 @@ public class SmartDialPrefix {
          */
         if ((normalizedNumber.length() == 11)
             && (normalizedNumber.charAt(0) == '1')
-            && (sUserInNanpRegion)) {
+            && (userInNanpRegion)) {
           countryCode = "1";
           countryCodeOffset = number.indexOf(normalizedNumber.charAt(1));
           if (countryCodeOffset == -1) {
@@ -265,7 +265,7 @@ public class SmartDialPrefix {
       }
 
       /** If user is in NANP region, finds out whether a number is in NANP format. */
-      if (sUserInNanpRegion) {
+      if (userInNanpRegion) {
         String areaCode = "";
         if (countryCode.equals("") && normalizedNumber.length() == 10) {
           /**
@@ -292,10 +292,10 @@ public class SmartDialPrefix {
 
   /** Checkes whether a country code is valid. */
   private static boolean isValidCountryCode(String countryCode) {
-    if (sCountryCodes == null) {
-      sCountryCodes = initCountryCodes();
+    if (countryCodes == null) {
+      countryCodes = initCountryCodes();
     }
-    return sCountryCodes.contains(countryCode);
+    return countryCodes.contains(countryCode);
   }
 
   private static Set<String> initCountryCodes() {
@@ -531,10 +531,10 @@ public class SmartDialPrefix {
     if (TextUtils.isEmpty(country)) {
       return false;
     }
-    if (sNanpCountries == null) {
-      sNanpCountries = initNanpCountries();
+    if (nanpCountries == null) {
+      nanpCountries = initNanpCountries();
     }
-    return sNanpCountries.contains(country.toUpperCase());
+    return nanpCountries.contains(country.toUpperCase());
   }
 
   private static Set<String> initNanpCountries() {
@@ -572,13 +572,13 @@ public class SmartDialPrefix {
    * @return Whether user is in Nanp region.
    */
   public static boolean getUserInNanpRegion() {
-    return sUserInNanpRegion;
+    return userInNanpRegion;
   }
 
   /** Explicitly setting the user Nanp to the given boolean */
   @VisibleForTesting
   public static void setUserInNanpRegion(boolean userInNanpRegion) {
-    sUserInNanpRegion = userInNanpRegion;
+    SmartDialPrefix.userInNanpRegion = userInNanpRegion;
   }
 
   /** Class to record phone number parsing information. */

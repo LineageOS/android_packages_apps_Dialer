@@ -58,27 +58,27 @@ public class VoicemailPlaybackLayout extends LinearLayout
   private static final String TAG = VoicemailPlaybackLayout.class.getSimpleName();
   private static final int VOICEMAIL_DELETE_DELAY_MS = 3000;
 
-  private Context mContext;
-  private CallLogListItemViewHolder mViewHolder;
-  private VoicemailPlaybackPresenter mPresenter;
+  private Context context;
+  private CallLogListItemViewHolder viewHolder;
+  private VoicemailPlaybackPresenter presenter;
   /** Click listener to toggle speakerphone. */
-  private final View.OnClickListener mSpeakerphoneListener =
+  private final View.OnClickListener speakerphoneListener =
       new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          if (mPresenter != null) {
-            mPresenter.toggleSpeakerphone();
+          if (presenter != null) {
+            presenter.toggleSpeakerphone();
           }
         }
       };
 
-  private Uri mVoicemailUri;
-  private final View.OnClickListener mDeleteButtonListener =
+  private Uri voicemailUri;
+  private final View.OnClickListener deleteButtonListener =
       new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          Logger.get(mContext).logImpression(DialerImpression.Type.VOICEMAIL_DELETE_ENTRY);
-          if (mPresenter == null) {
+          Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_DELETE_ENTRY);
+          if (presenter == null) {
             return;
           }
 
@@ -86,19 +86,19 @@ public class VoicemailPlaybackLayout extends LinearLayout
           // we hide the view it is binded to something else, and the layout is not updated for
           // hidden items. copy the adapter position so we can update the view upon undo.
           // TODO(twyen): refactor this so the view holder will always be valid.
-          final int adapterPosition = mViewHolder.getAdapterPosition();
+          final int adapterPosition = viewHolder.getAdapterPosition();
 
-          mPresenter.pausePlayback();
-          mPresenter.onVoicemailDeleted(mViewHolder);
+          presenter.pausePlayback();
+          presenter.onVoicemailDeleted(viewHolder);
 
-          final Uri deleteUri = mVoicemailUri;
+          final Uri deleteUri = voicemailUri;
           final Runnable deleteCallback =
               new Runnable() {
                 @Override
                 public void run() {
-                  if (Objects.equals(deleteUri, mVoicemailUri)) {
+                  if (Objects.equals(deleteUri, voicemailUri)) {
                     CallLogAsyncTaskUtil.deleteVoicemail(
-                        mContext, deleteUri, VoicemailPlaybackLayout.this);
+                        context, deleteUri, VoicemailPlaybackLayout.this);
                   }
                 }
               };
@@ -118,56 +118,56 @@ public class VoicemailPlaybackLayout extends LinearLayout
                   new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                      mPresenter.onVoicemailDeleteUndo(adapterPosition);
+                      presenter.onVoicemailDeleteUndo(adapterPosition);
                       handler.removeCallbacks(deleteCallback);
                     }
                   })
               .setActionTextColor(
-                  mContext.getResources().getColor(R.color.dialer_snackbar_action_text_color))
+                  context.getResources().getColor(R.color.dialer_snackbar_action_text_color))
               .show();
         }
       };
-  private boolean mIsPlaying = false;
+  private boolean isPlaying = false;
   /** Click listener to play or pause voicemail playback. */
-  private final View.OnClickListener mStartStopButtonListener =
+  private final View.OnClickListener startStopButtonListener =
       new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          if (mPresenter == null) {
+          if (presenter == null) {
             return;
           }
 
-          if (mIsPlaying) {
-            mPresenter.pausePlayback();
+          if (isPlaying) {
+            presenter.pausePlayback();
           } else {
-            Logger.get(mContext)
+            Logger.get(context)
                 .logImpression(DialerImpression.Type.VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY);
-            mPresenter.resumePlayback();
+            presenter.resumePlayback();
           }
         }
       };
 
-  private SeekBar mPlaybackSeek;
-  private ImageButton mStartStopButton;
-  private ImageButton mPlaybackSpeakerphone;
-  private ImageButton mDeleteButton;
-  private TextView mStateText;
-  private TextView mPositionText;
-  private TextView mTotalDurationText;
+  private SeekBar playbackSeek;
+  private ImageButton startStopButton;
+  private ImageButton playbackSpeakerphone;
+  private ImageButton deleteButton;
+  private TextView stateText;
+  private TextView positionText;
+  private TextView totalDurationText;
   /** Handle state changes when the user manipulates the seek bar. */
-  private final OnSeekBarChangeListener mSeekBarChangeListener =
+  private final OnSeekBarChangeListener seekBarChangeListener =
       new OnSeekBarChangeListener() {
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-          if (mPresenter != null) {
-            mPresenter.pausePlaybackForSeeking();
+          if (presenter != null) {
+            presenter.pausePlaybackForSeeking();
           }
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-          if (mPresenter != null) {
-            mPresenter.resumePlaybackAfterSeeking(seekBar.getProgress());
+          if (presenter != null) {
+            presenter.resumePlaybackAfterSeeking(seekBar.getProgress());
           }
         }
 
@@ -177,14 +177,14 @@ public class VoicemailPlaybackLayout extends LinearLayout
           // Update the seek position if user manually changed it. This makes sure position gets
           // updated when user use volume button to seek playback in talkback mode.
           if (fromUser) {
-            mPresenter.seek(progress);
+            presenter.seek(progress);
           }
         }
       };
 
-  private PositionUpdater mPositionUpdater;
-  private Drawable mVoicemailSeekHandleEnabled;
-  private Drawable mVoicemailSeekHandleDisabled;
+  private PositionUpdater positionUpdater;
+  private Drawable voicemailSeekHandleEnabled;
+  private Drawable voicemailSeekHandleDisabled;
 
   public VoicemailPlaybackLayout(Context context) {
     this(context, null);
@@ -192,99 +192,97 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
   public VoicemailPlaybackLayout(Context context, AttributeSet attrs) {
     super(context, attrs);
-    mContext = context;
+    this.context = context;
     LayoutInflater inflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     inflater.inflate(R.layout.voicemail_playback_layout, this);
   }
 
   public void setViewHolder(CallLogListItemViewHolder mViewHolder) {
-    this.mViewHolder = mViewHolder;
+    this.viewHolder = mViewHolder;
   }
 
   @Override
   public void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri) {
-    mPresenter = presenter;
-    mVoicemailUri = voicemailUri;
+    this.presenter = presenter;
+    this.voicemailUri = voicemailUri;
   }
 
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
 
-    mPlaybackSeek = (SeekBar) findViewById(R.id.playback_seek);
-    mStartStopButton = (ImageButton) findViewById(R.id.playback_start_stop);
-    mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
-    mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
+    playbackSeek = (SeekBar) findViewById(R.id.playback_seek);
+    startStopButton = (ImageButton) findViewById(R.id.playback_start_stop);
+    playbackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
+    deleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
 
-    mStateText = (TextView) findViewById(R.id.playback_state_text);
-    mStateText.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
-    mPositionText = (TextView) findViewById(R.id.playback_position_text);
-    mTotalDurationText = (TextView) findViewById(R.id.total_duration_text);
+    stateText = (TextView) findViewById(R.id.playback_state_text);
+    stateText.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
+    positionText = (TextView) findViewById(R.id.playback_position_text);
+    totalDurationText = (TextView) findViewById(R.id.total_duration_text);
 
-    mPlaybackSeek.setOnSeekBarChangeListener(mSeekBarChangeListener);
-    mStartStopButton.setOnClickListener(mStartStopButtonListener);
-    mPlaybackSpeakerphone.setOnClickListener(mSpeakerphoneListener);
-    mDeleteButton.setOnClickListener(mDeleteButtonListener);
+    playbackSeek.setOnSeekBarChangeListener(seekBarChangeListener);
+    startStopButton.setOnClickListener(startStopButtonListener);
+    playbackSpeakerphone.setOnClickListener(speakerphoneListener);
+    deleteButton.setOnClickListener(deleteButtonListener);
 
-    mPositionText.setText(formatAsMinutesAndSeconds(0));
-    mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
+    positionText.setText(formatAsMinutesAndSeconds(0));
+    totalDurationText.setText(formatAsMinutesAndSeconds(0));
 
-    mVoicemailSeekHandleEnabled =
-        getResources().getDrawable(R.drawable.ic_voicemail_seek_handle, mContext.getTheme());
-    mVoicemailSeekHandleDisabled =
+    voicemailSeekHandleEnabled =
+        getResources().getDrawable(R.drawable.ic_voicemail_seek_handle, context.getTheme());
+    voicemailSeekHandleDisabled =
         getResources()
-            .getDrawable(R.drawable.ic_voicemail_seek_handle_disabled, mContext.getTheme());
+            .getDrawable(R.drawable.ic_voicemail_seek_handle_disabled, context.getTheme());
   }
 
   @Override
   public void onPlaybackStarted(int duration, ScheduledExecutorService executorService) {
-    mIsPlaying = true;
+    isPlaying = true;
 
-    mStartStopButton.setImageResource(R.drawable.ic_pause);
+    startStopButton.setImageResource(R.drawable.ic_pause);
 
-    if (mPositionUpdater != null) {
-      mPositionUpdater.stopUpdating();
-      mPositionUpdater = null;
+    if (positionUpdater != null) {
+      positionUpdater.stopUpdating();
+      positionUpdater = null;
     }
-    mPositionUpdater = new PositionUpdater(duration, executorService);
-    mPositionUpdater.startUpdating();
+    positionUpdater = new PositionUpdater(duration, executorService);
+    positionUpdater.startUpdating();
   }
 
   @Override
   public void onPlaybackStopped() {
-    mIsPlaying = false;
+    isPlaying = false;
 
-    mStartStopButton.setImageResource(R.drawable.ic_play_arrow);
+    startStopButton.setImageResource(R.drawable.ic_play_arrow);
 
-    if (mPositionUpdater != null) {
-      mPositionUpdater.stopUpdating();
-      mPositionUpdater = null;
+    if (positionUpdater != null) {
+      positionUpdater.stopUpdating();
+      positionUpdater = null;
     }
   }
 
   @Override
   public void onPlaybackError() {
-    if (mPositionUpdater != null) {
-      mPositionUpdater.stopUpdating();
+    if (positionUpdater != null) {
+      positionUpdater.stopUpdating();
     }
 
     disableUiElements();
-    mStateText.setText(getString(R.string.voicemail_playback_error));
+    stateText.setText(getString(R.string.voicemail_playback_error));
   }
 
   @Override
   public void onSpeakerphoneOn(boolean on) {
     if (on) {
-      mPlaybackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_up_white_24);
+      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_up_white_24);
       // Speaker is now on, tapping button will turn it off.
-      mPlaybackSpeakerphone.setContentDescription(
-          mContext.getString(R.string.voicemail_speaker_off));
+      playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_off));
     } else {
-      mPlaybackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_white_24);
+      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_white_24);
       // Speaker is now off, tapping button will turn it on.
-      mPlaybackSpeakerphone.setContentDescription(
-          mContext.getString(R.string.voicemail_speaker_on));
+      playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_on));
     }
   }
 
@@ -292,66 +290,66 @@ public class VoicemailPlaybackLayout extends LinearLayout
   public void setClipPosition(int positionMs, int durationMs) {
     int seekBarPositionMs = Math.max(0, positionMs);
     int seekBarMax = Math.max(seekBarPositionMs, durationMs);
-    if (mPlaybackSeek.getMax() != seekBarMax) {
-      mPlaybackSeek.setMax(seekBarMax);
+    if (playbackSeek.getMax() != seekBarMax) {
+      playbackSeek.setMax(seekBarMax);
     }
 
-    mPlaybackSeek.setProgress(seekBarPositionMs);
+    playbackSeek.setProgress(seekBarPositionMs);
 
-    mPositionText.setText(formatAsMinutesAndSeconds(seekBarPositionMs));
-    mTotalDurationText.setText(formatAsMinutesAndSeconds(durationMs));
+    positionText.setText(formatAsMinutesAndSeconds(seekBarPositionMs));
+    totalDurationText.setText(formatAsMinutesAndSeconds(durationMs));
   }
 
   @Override
   public void setSuccess() {
-    mStateText.setText(null);
+    stateText.setText(null);
   }
 
   @Override
   public void setIsFetchingContent() {
     disableUiElements();
-    mStateText.setText(getString(R.string.voicemail_fetching_content));
+    stateText.setText(getString(R.string.voicemail_fetching_content));
   }
 
   @Override
   public void setFetchContentTimeout() {
-    mStartStopButton.setEnabled(true);
-    mStateText.setText(getString(R.string.voicemail_fetching_timout));
+    startStopButton.setEnabled(true);
+    stateText.setText(getString(R.string.voicemail_fetching_timout));
   }
 
   @Override
   public int getDesiredClipPosition() {
-    return mPlaybackSeek.getProgress();
+    return playbackSeek.getProgress();
   }
 
   @Override
   public void disableUiElements() {
-    mStartStopButton.setEnabled(false);
+    startStopButton.setEnabled(false);
     resetSeekBar();
   }
 
   @Override
   public void enableUiElements() {
-    mDeleteButton.setEnabled(true);
-    mStartStopButton.setEnabled(true);
-    mPlaybackSeek.setEnabled(true);
-    mPlaybackSeek.setThumb(mVoicemailSeekHandleEnabled);
+    deleteButton.setEnabled(true);
+    startStopButton.setEnabled(true);
+    playbackSeek.setEnabled(true);
+    playbackSeek.setThumb(voicemailSeekHandleEnabled);
   }
 
   @Override
   public void resetSeekBar() {
-    mPlaybackSeek.setProgress(0);
-    mPlaybackSeek.setEnabled(false);
-    mPlaybackSeek.setThumb(mVoicemailSeekHandleDisabled);
+    playbackSeek.setProgress(0);
+    playbackSeek.setEnabled(false);
+    playbackSeek.setThumb(voicemailSeekHandleDisabled);
   }
 
   @Override
   public void onDeleteVoicemail() {
-    mPresenter.onVoicemailDeletedInDatabase();
+    presenter.onVoicemailDeletedInDatabase();
   }
 
   private String getString(int resId) {
-    return mContext.getString(resId);
+    return context.getString(resId);
   }
 
   /**
@@ -372,7 +370,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
   @VisibleForTesting
   public String getStateText() {
-    return mStateText.getText().toString();
+    return stateText.getText().toString();
   }
 
   /** Controls the animation of the playback slider. */
@@ -382,61 +380,61 @@ public class VoicemailPlaybackLayout extends LinearLayout
     /** Update rate for the slider, 30fps. */
     private static final int SLIDER_UPDATE_PERIOD_MILLIS = 1000 / 30;
 
-    private final ScheduledExecutorService mExecutorService;
-    private final Object mLock = new Object();
-    private int mDurationMs;
+    private final ScheduledExecutorService executorService;
+    private final Object lock = new Object();
+    private int durationMs;
 
-    @GuardedBy("mLock")
-    private ScheduledFuture<?> mScheduledFuture;
+    @GuardedBy("lock")
+    private ScheduledFuture<?> scheduledFuture;
 
-    private Runnable mUpdateClipPositionRunnable =
+    private Runnable updateClipPositionRunnable =
         new Runnable() {
           @Override
           public void run() {
             int currentPositionMs = 0;
-            synchronized (mLock) {
-              if (mScheduledFuture == null || mPresenter == null) {
+            synchronized (lock) {
+              if (scheduledFuture == null || presenter == null) {
                 // This task has been canceled. Just stop now.
                 return;
               }
-              currentPositionMs = mPresenter.getMediaPlayerPosition();
+              currentPositionMs = presenter.getMediaPlayerPosition();
             }
-            setClipPosition(currentPositionMs, mDurationMs);
+            setClipPosition(currentPositionMs, durationMs);
           }
         };
 
     public PositionUpdater(int durationMs, ScheduledExecutorService executorService) {
-      mDurationMs = durationMs;
-      mExecutorService = executorService;
+      this.durationMs = durationMs;
+      this.executorService = executorService;
     }
 
     @Override
     public void run() {
-      post(mUpdateClipPositionRunnable);
+      post(updateClipPositionRunnable);
     }
 
     public void startUpdating() {
-      synchronized (mLock) {
+      synchronized (lock) {
         cancelPendingRunnables();
-        mScheduledFuture =
-            mExecutorService.scheduleAtFixedRate(
+        scheduledFuture =
+            executorService.scheduleAtFixedRate(
                 this, 0, SLIDER_UPDATE_PERIOD_MILLIS, TimeUnit.MILLISECONDS);
       }
     }
 
     public void stopUpdating() {
-      synchronized (mLock) {
+      synchronized (lock) {
         cancelPendingRunnables();
       }
     }
 
-    @GuardedBy("mLock")
+    @GuardedBy("lock")
     private void cancelPendingRunnables() {
-      if (mScheduledFuture != null) {
-        mScheduledFuture.cancel(true);
-        mScheduledFuture = null;
+      if (scheduledFuture != null) {
+        scheduledFuture.cancel(true);
+        scheduledFuture = null;
       }
-      removeCallbacks(mUpdateClipPositionRunnable);
+      removeCallbacks(updateClipPositionRunnable);
     }
   }
 }

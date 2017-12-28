@@ -55,17 +55,17 @@ public class PhoneCallDetailsHelper
   /** The maximum number of icons will be shown to represent the call types in a group. */
   private static final int MAX_CALL_TYPE_ICONS = 3;
 
-  private final Context mContext;
-  private final Resources mResources;
-  private final CallLogCache mCallLogCache;
+  private final Context context;
+  private final Resources resources;
+  private final CallLogCache callLogCache;
   /** Calendar used to construct dates */
-  private final Calendar mCalendar;
+  private final Calendar calendar;
   /** The injected current time in milliseconds since the epoch. Used only by tests. */
-  private Long mCurrentTimeMillisForTest;
+  private Long currentTimeMillisForTest;
 
-  private CharSequence mPhoneTypeLabelForTest;
+  private CharSequence phoneTypeLabelForTest;
   /** List of items to be concatenated together for accessibility descriptions */
-  private ArrayList<CharSequence> mDescriptionItems = new ArrayList<>();
+  private ArrayList<CharSequence> descriptionItems = new ArrayList<>();
 
   /**
    * Creates a new instance of the helper.
@@ -75,10 +75,10 @@ public class PhoneCallDetailsHelper
    * @param resources used to look up strings
    */
   public PhoneCallDetailsHelper(Context context, Resources resources, CallLogCache callLogCache) {
-    mContext = context;
-    mResources = resources;
-    mCallLogCache = callLogCache;
-    mCalendar = Calendar.getInstance();
+    this.context = context;
+    this.resources = resources;
+    this.callLogCache = callLogCache;
+    calendar = Calendar.getInstance();
   }
 
   /** Fills the call details views with content. */
@@ -100,7 +100,7 @@ public class PhoneCallDetailsHelper
     views.callTypeIcons.setShowHd(
         (details.features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     views.callTypeIcons.setShowWifi(
-        MotorolaUtils.shouldShowWifiIconInCallLog(mContext, details.features));
+        MotorolaUtils.shouldShowWifiIconInCallLog(context, details.features));
     views.callTypeIcons.requestLayout();
     views.callTypeIcons.setVisibility(View.VISIBLE);
 
@@ -116,23 +116,23 @@ public class PhoneCallDetailsHelper
     setDetailText(views, callCount, details);
 
     // Set the account label if it exists.
-    String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
+    String accountLabel = callLogCache.getAccountLabel(details.accountHandle);
     if (!TextUtils.isEmpty(details.viaNumber)) {
       if (!TextUtils.isEmpty(accountLabel)) {
         accountLabel =
-            mResources.getString(
+            resources.getString(
                 R.string.call_log_via_number_phone_account, accountLabel, details.viaNumber);
       } else {
-        accountLabel = mResources.getString(R.string.call_log_via_number, details.viaNumber);
+        accountLabel = resources.getString(R.string.call_log_via_number, details.viaNumber);
       }
     }
     if (!TextUtils.isEmpty(accountLabel)) {
       views.callAccountLabel.setVisibility(View.VISIBLE);
       views.callAccountLabel.setText(accountLabel);
-      int color = mCallLogCache.getAccountColor(details.accountHandle);
+      int color = callLogCache.getAccountColor(details.accountHandle);
       if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
         int defaultColor = R.color.dialer_secondary_text_color;
-        views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
+        views.callAccountLabel.setTextColor(context.getResources().getColor(defaultColor));
       } else {
         views.callAccountLabel.setTextColor(color);
       }
@@ -171,23 +171,22 @@ public class PhoneCallDetailsHelper
           showRatingPrompt = true;
         } else if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
             || details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE_AND_RATED) {
-          branding = mResources.getString(R.string.voicemail_transcription_branding_text);
+          branding = resources.getString(R.string.voicemail_transcription_branding_text);
         }
       } else {
         switch (details.transcriptionState) {
           case VoicemailCompat.TRANSCRIPTION_IN_PROGRESS:
-            branding = mResources.getString(R.string.voicemail_transcription_in_progress);
+            branding = resources.getString(R.string.voicemail_transcription_in_progress);
             break;
           case VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED:
-            branding = mResources.getString(R.string.voicemail_transcription_failed_no_speech);
+            branding = resources.getString(R.string.voicemail_transcription_failed_no_speech);
             break;
           case VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED:
             branding =
-                mResources.getString(
-                    R.string.voicemail_transcription_failed_language_not_supported);
+                resources.getString(R.string.voicemail_transcription_failed_language_not_supported);
             break;
           case VoicemailCompat.TRANSCRIPTION_FAILED:
-            branding = mResources.getString(R.string.voicemail_transcription_failed);
+            branding = resources.getString(R.string.voicemail_transcription_failed);
             break;
           default:
             break; // Fall through
@@ -197,6 +196,7 @@ public class PhoneCallDetailsHelper
       views.voicemailTranscriptionView.setText(transcript);
       if (showRatingPrompt) {
         views.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
+        views.voicemailTranscriptionBrandingView.setText(branding);
 
         View ratingView = views.voicemailTranscriptionRatingView;
         ratingView.setVisibility(View.VISIBLE);
@@ -227,7 +227,7 @@ public class PhoneCallDetailsHelper
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(
         ContextCompat.getColor(
-            mContext,
+            context,
             details.isRead ? R.color.call_log_detail_color : R.color.call_log_unread_text_color));
   }
 
@@ -235,16 +235,16 @@ public class PhoneCallDetailsHelper
       int transcriptionState, PhoneAccountHandle account) {
     // TODO(mdooley): add a configurable random element here?
     return transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
-        && VoicemailComponent.get(mContext)
+        && VoicemailComponent.get(context)
             .getVoicemailClient()
-            .isVoicemailDonationEnabled(mContext, account);
+            .isVoicemailDonationEnabled(context, account);
   }
 
   private void recordTranscriptionRating(
       TranscriptionRatingValue ratingValue, PhoneCallDetails details) {
     LogUtil.enterBlock("PhoneCallDetailsHelper.recordTranscriptionRating");
     TranscriptionRatingHelper.sendRating(
-        mContext,
+        context,
         ratingValue,
         Uri.parse(details.voicemailUri),
         this::onRatingSuccess,
@@ -255,7 +255,7 @@ public class PhoneCallDetailsHelper
   public void onRatingSuccess(Uri voicemailUri) {
     LogUtil.enterBlock("PhoneCallDetailsHelper.onRatingSuccess");
     Toast toast =
-        Toast.makeText(mContext, R.string.voicemail_transcription_rating_thanks, Toast.LENGTH_LONG);
+        Toast.makeText(context, R.string.voicemail_transcription_rating_thanks, Toast.LENGTH_LONG);
     toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 50);
     toast.show();
   }
@@ -273,7 +273,7 @@ public class PhoneCallDetailsHelper
    * @return The call location and date string.
    */
   public CharSequence getCallLocationAndDate(PhoneCallDetails details) {
-    mDescriptionItems.clear();
+    descriptionItems.clear();
 
     if (details.callTypes[0] != Calls.VOICEMAIL_TYPE) {
       // Get type of call (ie mobile, home, etc) if known, or the caller's location.
@@ -282,15 +282,15 @@ public class PhoneCallDetailsHelper
       // Only add the call type or location if its not empty.  It will be empty for unknown
       // callers.
       if (!TextUtils.isEmpty(callTypeOrLocation)) {
-        mDescriptionItems.add(callTypeOrLocation);
+        descriptionItems.add(callTypeOrLocation);
       }
     }
 
     // The date of this call
-    mDescriptionItems.add(getCallDate(details));
+    descriptionItems.add(getCallDate(details));
 
     // Create a comma separated list from the call type or location, and call date.
-    return DialerUtils.join(mDescriptionItems);
+    return DialerUtils.join(descriptionItems);
   }
 
   /**
@@ -303,16 +303,16 @@ public class PhoneCallDetailsHelper
    */
   public CharSequence getCallTypeOrLocation(PhoneCallDetails details) {
     if (details.isSpam) {
-      return mResources.getString(R.string.spam_number_call_log_label);
+      return resources.getString(R.string.spam_number_call_log_label);
     } else if (details.isBlocked) {
-      return mResources.getString(R.string.blocked_number_call_log_label);
+      return resources.getString(R.string.blocked_number_call_log_label);
     }
 
     CharSequence numberFormattedLabel = null;
     // Only show a label if the number is shown and it is not a SIP address.
     if (!TextUtils.isEmpty(details.number)
         && !PhoneNumberHelper.isUriNumber(details.number.toString())
-        && !mCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
+        && !callLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
 
       if (shouldShowLocation(details)) {
         numberFormattedLabel = details.geocode;
@@ -320,9 +320,9 @@ public class PhoneCallDetailsHelper
           && TextUtils.isEmpty(details.numberLabel))) {
         // Get type label only if it will not be "Custom" because of an empty number label.
         numberFormattedLabel =
-            mPhoneTypeLabelForTest != null
-                ? mPhoneTypeLabelForTest
-                : Phone.getTypeLabel(mResources, details.numberType, details.numberLabel);
+            phoneTypeLabelForTest != null
+                ? phoneTypeLabelForTest
+                : Phone.getTypeLabel(resources, details.numberType, details.numberLabel);
       }
     }
 
@@ -349,7 +349,7 @@ public class PhoneCallDetailsHelper
   }
 
   public void setPhoneTypeLabelForTest(CharSequence phoneTypeLabel) {
-    this.mPhoneTypeLabelForTest = phoneTypeLabel;
+    this.phoneTypeLabelForTest = phoneTypeLabel;
   }
 
   /**
@@ -384,10 +384,10 @@ public class PhoneCallDetailsHelper
    * @return String representing when the call occurred
    */
   public CharSequence getGranularDateTime(PhoneCallDetails details) {
-    return mResources.getString(
+    return resources.getString(
         R.string.voicemailCallLogDateTimeFormat,
         getGranularDate(details.date),
-        DateUtils.formatDateTime(mContext, details.date, DateUtils.FORMAT_SHOW_TIME));
+        DateUtils.formatDateTime(context, details.date, DateUtils.FORMAT_SHOW_TIME));
   }
 
   /**
@@ -395,10 +395,10 @@ public class PhoneCallDetailsHelper
    */
   private String getGranularDate(long date) {
     if (DateUtils.isToday(date)) {
-      return mResources.getString(R.string.voicemailCallLogToday);
+      return resources.getString(R.string.voicemailCallLogToday);
     }
     return DateUtils.formatDateTime(
-        mContext,
+        context,
         date,
         DateUtils.FORMAT_SHOW_DATE
             | DateUtils.FORMAT_ABBREV_MONTH
@@ -411,10 +411,10 @@ public class PhoneCallDetailsHelper
    * @return {@code true} if date is within the current year, {@code false} otherwise
    */
   private boolean shouldShowYear(long date) {
-    mCalendar.setTimeInMillis(getCurrentTimeMillis());
-    int currentYear = mCalendar.get(Calendar.YEAR);
-    mCalendar.setTimeInMillis(date);
-    return currentYear != mCalendar.get(Calendar.YEAR);
+    calendar.setTimeInMillis(getCurrentTimeMillis());
+    int currentYear = calendar.get(Calendar.YEAR);
+    calendar.setTimeInMillis(date);
+    return currentYear != calendar.get(Calendar.YEAR);
   }
 
   /** Sets the text of the header view for the details page of a phone call. */
@@ -425,14 +425,14 @@ public class PhoneCallDetailsHelper
     } else if (!TextUtils.isEmpty(details.displayNumber)) {
       nameText = details.displayNumber;
     } else {
-      nameText = mResources.getString(R.string.unknown);
+      nameText = resources.getString(R.string.unknown);
     }
 
     nameView.setText(nameText);
   }
 
   public void setCurrentTimeForTest(long currentTimeMillis) {
-    mCurrentTimeMillisForTest = currentTimeMillis;
+    currentTimeMillisForTest = currentTimeMillis;
   }
 
   /**
@@ -441,10 +441,10 @@ public class PhoneCallDetailsHelper
    * <p>It can be injected in tests using {@link #setCurrentTimeForTest(long)}.
    */
   private long getCurrentTimeMillis() {
-    if (mCurrentTimeMillisForTest == null) {
+    if (currentTimeMillisForTest == null) {
       return System.currentTimeMillis();
     } else {
-      return mCurrentTimeMillisForTest;
+      return currentTimeMillisForTest;
     }
   }
 
@@ -455,14 +455,14 @@ public class PhoneCallDetailsHelper
     CharSequence dateText = details.callLocationAndDate;
     final CharSequence text;
     if (callCount != null) {
-      text = mResources.getString(R.string.call_log_item_count_and_date, callCount, dateText);
+      text = resources.getString(R.string.call_log_item_count_and_date, callCount, dateText);
     } else {
       text = dateText;
     }
 
     if (details.callTypes[0] == Calls.VOICEMAIL_TYPE && details.duration > 0) {
       views.callLocationAndDate.setText(
-          mResources.getString(
+          resources.getString(
               R.string.voicemailCallLogDateTimeFormatWithDuration,
               text,
               getVoicemailDuration(details)));
@@ -477,6 +477,6 @@ public class PhoneCallDetailsHelper
     if (minutes > 99) {
       minutes = 99;
     }
-    return mResources.getString(R.string.voicemailDurationFormat, minutes, seconds);
+    return resources.getString(R.string.voicemailDurationFormat, minutes, seconds);
   }
 }

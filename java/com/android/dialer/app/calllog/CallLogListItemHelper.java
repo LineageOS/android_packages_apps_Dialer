@@ -32,11 +32,11 @@ import com.android.dialer.compat.AppCompatConstants;
 /* package */ class CallLogListItemHelper {
 
   /** Helper for populating the details of a phone call. */
-  private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
+  private final PhoneCallDetailsHelper phoneCallDetailsHelper;
   /** Resources to look up strings. */
-  private final Resources mResources;
+  private final Resources resources;
 
-  private final CallLogCache mCallLogCache;
+  private final CallLogCache callLogCache;
 
   /**
    * Creates a new helper instance.
@@ -49,9 +49,9 @@ import com.android.dialer.compat.AppCompatConstants;
       PhoneCallDetailsHelper phoneCallDetailsHelper,
       Resources resources,
       CallLogCache callLogCache) {
-    mPhoneCallDetailsHelper = phoneCallDetailsHelper;
-    mResources = resources;
-    mCallLogCache = callLogCache;
+    this.phoneCallDetailsHelper = phoneCallDetailsHelper;
+    this.resources = resources;
+    this.callLogCache = callLogCache;
   }
 
   /**
@@ -63,7 +63,7 @@ import com.android.dialer.compat.AppCompatConstants;
   @WorkerThread
   public void updatePhoneCallDetails(PhoneCallDetails details) {
     Assert.isWorkerThread();
-    details.callLocationAndDate = mPhoneCallDetailsHelper.getCallLocationAndDate(details);
+    details.callLocationAndDate = phoneCallDetailsHelper.getCallLocationAndDate(details);
     details.callDescription = getCallDescription(details);
   }
 
@@ -74,7 +74,7 @@ import com.android.dialer.compat.AppCompatConstants;
    * @param details the details of a phone call needed to fill in the data
    */
   public void setPhoneCallDetails(CallLogListItemViewHolder views, PhoneCallDetails details) {
-    mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
+    phoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
 
     // Set the accessibility text for the contact badge
     views.quickContactView.setContentDescription(getContactBadgeDescription(details));
@@ -88,7 +88,7 @@ import com.android.dialer.compat.AppCompatConstants;
 
     // The call type or Location associated with the call. Use when setting text for a
     // voicemail log's call button
-    views.callTypeOrLocation = mPhoneCallDetailsHelper.getCallTypeOrLocation(details);
+    views.callTypeOrLocation = phoneCallDetailsHelper.getCallTypeOrLocation(details);
 
     // Cache country iso. Used for number filtering.
     views.countryIso = details.countryIso;
@@ -114,20 +114,20 @@ import com.android.dialer.compat.AppCompatConstants;
 
     views.videoCallButtonView.setContentDescription(
         TextUtils.expandTemplate(
-            mResources.getString(R.string.description_video_call_action), nameOrNumber));
+            resources.getString(R.string.description_video_call_action), nameOrNumber));
 
     views.createNewContactButtonView.setContentDescription(
         TextUtils.expandTemplate(
-            mResources.getString(R.string.description_create_new_contact_action), nameOrNumber));
+            resources.getString(R.string.description_create_new_contact_action), nameOrNumber));
 
     views.addToExistingContactButtonView.setContentDescription(
         TextUtils.expandTemplate(
-            mResources.getString(R.string.description_add_to_existing_contact_action),
+            resources.getString(R.string.description_add_to_existing_contact_action),
             nameOrNumber));
 
     views.detailsButtonView.setContentDescription(
         TextUtils.expandTemplate(
-            mResources.getString(R.string.description_details_action), nameOrNumber));
+            resources.getString(R.string.description_details_action), nameOrNumber));
   }
 
   /**
@@ -138,10 +138,10 @@ import com.android.dialer.compat.AppCompatConstants;
    */
   private CharSequence getContactBadgeDescription(PhoneCallDetails details) {
     if (details.isSpam) {
-      return mResources.getString(
+      return resources.getString(
           R.string.description_spam_contact_details, getNameOrNumber(details));
     }
-    return mResources.getString(R.string.description_contact_details, getNameOrNumber(details));
+    return resources.getString(R.string.description_contact_details, getNameOrNumber(details));
   }
 
   /**
@@ -178,32 +178,32 @@ import com.android.dialer.compat.AppCompatConstants;
     final CharSequence nameOrNumber = getNameOrNumber(details);
 
     // Get the call type or location of the caller; null if not applicable
-    final CharSequence typeOrLocation = mPhoneCallDetailsHelper.getCallTypeOrLocation(details);
+    final CharSequence typeOrLocation = phoneCallDetailsHelper.getCallTypeOrLocation(details);
 
     // Get the time/date of the call
-    final CharSequence timeOfCall = mPhoneCallDetailsHelper.getCallDate(details);
+    final CharSequence timeOfCall = phoneCallDetailsHelper.getCallDate(details);
 
     SpannableStringBuilder callDescription = new SpannableStringBuilder();
 
     // Add number of calls if more than one.
     if (details.callTypes.length > 1) {
       callDescription.append(
-          mResources.getString(R.string.description_num_calls, details.callTypes.length));
+          resources.getString(R.string.description_num_calls, details.callTypes.length));
     }
 
     // If call had video capabilities, add the "Video Call" string.
     if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      callDescription.append(mResources.getString(R.string.description_video_call));
+      callDescription.append(resources.getString(R.string.description_video_call));
     }
 
-    String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
+    String accountLabel = callLogCache.getAccountLabel(details.accountHandle);
     CharSequence onAccountLabel =
-        PhoneCallDetails.createAccountLabelDescription(mResources, details.viaNumber, accountLabel);
+        PhoneCallDetails.createAccountLabelDescription(resources, details.viaNumber, accountLabel);
 
     int stringID = getCallDescriptionStringID(details.callTypes, details.isRead);
     callDescription.append(
         TextUtils.expandTemplate(
-            mResources.getString(stringID),
+            resources.getString(stringID),
             nameOrNumber,
             typeOrLocation == null ? "" : typeOrLocation,
             timeOfCall,
