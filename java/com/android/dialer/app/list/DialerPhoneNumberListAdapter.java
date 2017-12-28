@@ -49,16 +49,16 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
   public static final int SHORTCUT_BLOCK_NUMBER = 5;
   public static final int SHORTCUT_COUNT = 6;
 
-  private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
-  private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
-  private final String mCountryIso;
+  private final boolean[] shortcutEnabled = new boolean[SHORTCUT_COUNT];
+  private final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
+  private final String countryIso;
 
-  private String mFormattedQueryString;
+  private String formattedQueryString;
 
   public DialerPhoneNumberListAdapter(Context context) {
     super(context);
 
-    mCountryIso = GeoUtil.getCurrentCountryIso(context);
+    countryIso = GeoUtil.getCurrentCountryIso(context);
   }
 
   @Override
@@ -69,8 +69,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
   /** @return The number of enabled shortcuts. Ranges from 0 to a maximum of SHORTCUT_COUNT */
   public int getShortcutCount() {
     int count = 0;
-    for (int i = 0; i < mShortcutEnabled.length; i++) {
-      if (mShortcutEnabled[i]) {
+    for (int i = 0; i < shortcutEnabled.length; i++) {
+      if (shortcutEnabled[i]) {
         count++;
       }
     }
@@ -78,8 +78,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
   }
 
   public void disableAllShortcuts() {
-    for (int i = 0; i < mShortcutEnabled.length; i++) {
-      mShortcutEnabled[i] = false;
+    for (int i = 0; i < shortcutEnabled.length; i++) {
+      shortcutEnabled[i] = false;
     }
   }
 
@@ -137,8 +137,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     if (shortcutCount >= 0) {
       // Iterate through the array of shortcuts, looking only for shortcuts where
       // mShortcutEnabled[i] is true
-      for (int i = 0; shortcutCount >= 0 && i < mShortcutEnabled.length; i++) {
-        if (mShortcutEnabled[i]) {
+      for (int i = 0; shortcutCount >= 0 && i < shortcutEnabled.length; i++) {
+        if (shortcutEnabled[i]) {
           shortcutCount--;
           if (shortcutCount < 0) {
             return i;
@@ -177,7 +177,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             ContactDisplayUtils.getTtsSpannedPhoneNumber(
                 resources,
                 R.string.search_shortcut_call_number,
-                mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
+                bidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
         drawable = ContextCompat.getDrawable(getContext(), R.drawable.quantum_ic_call_vd_theme_24);
         break;
       case SHORTCUT_CREATE_NEW_CONTACT:
@@ -216,19 +216,19 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
   /** @return True if the shortcut state (disabled vs enabled) was changed by this operation */
   public boolean setShortcutEnabled(int shortcutType, boolean visible) {
-    final boolean changed = mShortcutEnabled[shortcutType] != visible;
-    mShortcutEnabled[shortcutType] = visible;
+    final boolean changed = shortcutEnabled[shortcutType] != visible;
+    shortcutEnabled[shortcutType] = visible;
     return changed;
   }
 
   public String getFormattedQueryString() {
-    return mFormattedQueryString;
+    return formattedQueryString;
   }
 
   @Override
   public void setQueryString(String queryString) {
-    mFormattedQueryString =
-        PhoneNumberUtils.formatNumber(PhoneNumberUtils.normalizeNumber(queryString), mCountryIso);
+    formattedQueryString =
+        PhoneNumberUtils.formatNumber(PhoneNumberUtils.normalizeNumber(queryString), countryIso);
     super.setQueryString(queryString);
   }
 }

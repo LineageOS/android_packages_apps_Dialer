@@ -25,15 +25,15 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 public class TextBody implements Body {
-  String mBody;
+  String body;
 
   public TextBody(String body) {
-    this.mBody = body;
+    this.body = body;
   }
 
   @Override
   public void writeTo(OutputStream out) throws IOException, MessagingException {
-    byte[] bytes = mBody.getBytes("UTF-8");
+    byte[] bytes = body.getBytes("UTF-8");
     out.write(Base64.encode(bytes, Base64.CRLF));
   }
 
@@ -43,14 +43,14 @@ public class TextBody implements Body {
    * @return
    */
   public String getText() {
-    return mBody;
+    return body;
   }
 
   /** Returns an InputStream that reads this body's text in UTF-8 format. */
   @Override
   public InputStream getInputStream() throws MessagingException {
     try {
-      byte[] b = mBody.getBytes("UTF-8");
+      byte[] b = body.getBytes("UTF-8");
       return new ByteArrayInputStream(b);
     } catch (UnsupportedEncodingException usee) {
       return null;

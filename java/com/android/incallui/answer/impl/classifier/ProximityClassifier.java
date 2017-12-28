@@ -26,11 +26,11 @@ import java.util.concurrent.TimeUnit;
  * the proximity sensor showing the near state during the whole gesture
  */
 class ProximityClassifier extends GestureClassifier {
-  private long mGestureStartTimeNano;
-  private long mNearStartTimeNano;
-  private long mNearDuration;
-  private boolean mNear;
-  private float mAverageNear;
+  private long gestureStartTimeNano;
+  private long nearStartTimeNano;
+  private long nearDuration;
+  private boolean near;
+  private float averageNear;
 
   public ProximityClassifier(ClassifierData classifierData) {}
 
@@ -51,19 +51,19 @@ class ProximityClassifier extends GestureClassifier {
     int action = event.getActionMasked();
 
     if (action == MotionEvent.ACTION_DOWN) {
-      mGestureStartTimeNano = TimeUnit.MILLISECONDS.toNanos(event.getEventTime());
-      mNearStartTimeNano = TimeUnit.MILLISECONDS.toNanos(event.getEventTime());
-      mNearDuration = 0;
+      gestureStartTimeNano = TimeUnit.MILLISECONDS.toNanos(event.getEventTime());
+      nearStartTimeNano = TimeUnit.MILLISECONDS.toNanos(event.getEventTime());
+      nearDuration = 0;
     }
 
     if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-      update(mNear, TimeUnit.MILLISECONDS.toNanos(event.getEventTime()));
-      long duration = TimeUnit.MILLISECONDS.toNanos(event.getEventTime()) - mGestureStartTimeNano;
+      update(near, TimeUnit.MILLISECONDS.toNanos(event.getEventTime()));
+      long duration = TimeUnit.MILLISECONDS.toNanos(event.getEventTime()) - gestureStartTimeNano;
 
       if (duration == 0) {
-        mAverageNear = mNear ? 1.0f : 0.0f;
+        averageNear = near ? 1.0f : 0.0f;
       } else {
-        mAverageNear = (float) mNearDuration / (float) duration;
+        averageNear = (float) nearDuration / (float) duration;
       }
     }
   }
@@ -75,23 +75,23 @@ class ProximityClassifier extends GestureClassifier {
   private void update(boolean near, long timestampNano) {
     // This if is necessary because MotionEvents and SensorEvents do not come in
     // chronological order
-    if (timestampNano > mNearStartTimeNano) {
+    if (timestampNano > nearStartTimeNano) {
       // if the state before was near then add the difference of the current time and
       // mNearStartTimeNano to mNearDuration.
-      if (mNear) {
-        mNearDuration += timestampNano - mNearStartTimeNano;
+      if (this.near) {
+        nearDuration += timestampNano - nearStartTimeNano;
       }
 
       // if the new state is near, set mNearStartTimeNano equal to this moment.
       if (near) {
-        mNearStartTimeNano = timestampNano;
+        nearStartTimeNano = timestampNano;
       }
     }
-    mNear = near;
+    this.near = near;
   }
 
   @Override
   public float getFalseTouchEvaluation() {
-    return ProximityEvaluator.evaluate(mAverageNear);
+    return ProximityEvaluator.evaluate(averageNear);
   }
 }

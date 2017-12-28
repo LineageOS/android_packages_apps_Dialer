@@ -27,7 +27,7 @@ import com.android.dialer.logging.Logger;
 /** Allows us to click the contact badge for non multi select mode. */
 class DialerQuickContactBadge extends QuickContactBadge {
 
-  private View.OnClickListener mExtraOnClickListener;
+  private View.OnClickListener extraOnClickListener;
   private OnActionModeStateChangedListener onActionModeStateChangeListener;
 
   public DialerQuickContactBadge(Context context) {
@@ -44,11 +44,11 @@ class DialerQuickContactBadge extends QuickContactBadge {
 
   @Override
   public void onClick(View v) {
-    if (mExtraOnClickListener != null
+    if (extraOnClickListener != null
         && onActionModeStateChangeListener.isActionModeStateEnabled()) {
       Logger.get(v.getContext())
           .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_TAP_VIA_CONTACT_BADGE);
-      mExtraOnClickListener.onClick(v);
+      extraOnClickListener.onClick(v);
     } else {
       super.onClick(v);
     }
@@ -57,7 +57,7 @@ class DialerQuickContactBadge extends QuickContactBadge {
   public void setMulitSelectListeners(
       View.OnClickListener extraOnClickListener,
       OnActionModeStateChangedListener actionModeStateChangeListener) {
-    mExtraOnClickListener = extraOnClickListener;
+    this.extraOnClickListener = extraOnClickListener;
     onActionModeStateChangeListener = actionModeStateChangeListener;
   }
 }

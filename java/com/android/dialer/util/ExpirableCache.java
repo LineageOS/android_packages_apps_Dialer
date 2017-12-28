@@ -98,13 +98,13 @@ public class ExpirableCache<K, V> {
    *
    * @see ExpirableCache.CachedValue#isExpired()
    */
-  private final AtomicInteger mGeneration;
+  private final AtomicInteger generation;
   /** The underlying cache used to stored the cached values. */
-  private LruCache<K, CachedValue<V>> mCache;
+  private LruCache<K, CachedValue<V>> cache;
 
   private ExpirableCache(LruCache<K, CachedValue<V>> cache) {
-    mCache = cache;
-    mGeneration = new AtomicInteger(0);
+    this.cache = cache;
+    generation = new AtomicInteger(0);
   }
 
   /**
@@ -147,7 +147,7 @@ public class ExpirableCache<K, V> {
    * @param key the key to look up
    */
   public CachedValue<V> getCachedValue(K key) {
-    return mCache.get(key);
+    return cache.get(key);
   }
 
   /**
@@ -190,7 +190,7 @@ public class ExpirableCache<K, V> {
    * @param value the value to associate with the key
    */
   public void put(K key, V value) {
-    mCache.put(key, newCachedValue(value));
+    cache.put(key, newCachedValue(value));
   }
 
   /**
@@ -201,7 +201,7 @@ public class ExpirableCache<K, V> {
    * <p>Expiring the items in the cache does not imply they will be evicted.
    */
   public void expireAll() {
-    mGeneration.incrementAndGet();
+    generation.incrementAndGet();
   }
 
   /**
@@ -210,7 +210,7 @@ public class ExpirableCache<K, V> {
    * <p>Implementation of {@link LruCache#create(K)} can use this method to create a new entry.
    */
   public CachedValue<V> newCachedValue(V value) {
-    return new GenerationalCachedValue<V>(value, mGeneration);
+    return new GenerationalCachedValue<V>(value, generation);
   }
 
   /**
@@ -239,31 +239,31 @@ public class ExpirableCache<K, V> {
   private static class GenerationalCachedValue<V> implements ExpirableCache.CachedValue<V> {
 
     /** The value stored in the cache. */
-    public final V mValue;
+    public final V value;
     /** The generation at which the value was added to the cache. */
-    private final int mGeneration;
+    private final int generation;
     /** The atomic integer storing the current generation of the cache it belongs to. */
-    private final AtomicInteger mCacheGeneration;
+    private final AtomicInteger cacheGeneration;
 
     /**
      * @param cacheGeneration the atomic integer storing the generation of the cache in which this
      *     value will be stored
      */
     public GenerationalCachedValue(V value, AtomicInteger cacheGeneration) {
-      mValue = value;
-      mCacheGeneration = cacheGeneration;
+      this.value = value;
+      this.cacheGeneration = cacheGeneration;
       // Snapshot the current generation.
-      mGeneration = mCacheGeneration.get();
+      generation = this.cacheGeneration.get();
     }
 
     @Override
     public V getValue() {
-      return mValue;
+      return value;
     }
 
     @Override
     public boolean isExpired() {
-      return mGeneration != mCacheGeneration.get();
+      return generation != cacheGeneration.get();
     }
   }
 }

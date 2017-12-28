@@ -70,9 +70,9 @@ public class MessagingException extends Exception {
   /** The server indicates it experienced an internal error */
   public static final int SERVER_ERROR = 19;
 
-  protected int mExceptionType;
+  protected int exceptionType;
   // Exception type-specific data
-  protected Object mExceptionData;
+  protected Object exceptionData;
 
   public MessagingException(String message, Throwable throwable) {
     this(UNSPECIFIED_EXCEPTION, message, throwable);
@@ -80,8 +80,8 @@ public class MessagingException extends Exception {
 
   public MessagingException(int exceptionType, String message, Throwable throwable) {
     super(message, throwable);
-    mExceptionType = exceptionType;
-    mExceptionData = null;
+    this.exceptionType = exceptionType;
+    exceptionData = null;
   }
 
   /**
@@ -120,8 +120,8 @@ public class MessagingException extends Exception {
    */
   public MessagingException(int exceptionType, String message, Object data) {
     super(message);
-    mExceptionType = exceptionType;
-    mExceptionData = data;
+    this.exceptionType = exceptionType;
+    exceptionData = data;
   }
 
   /**
@@ -130,7 +130,7 @@ public class MessagingException extends Exception {
    * @return Returns the exception type.
    */
   public int getExceptionType() {
-    return mExceptionType;
+    return exceptionType;
   }
   /**
    * Return the exception data. Will be null if not explicitly set.
@@ -138,6 +138,6 @@ public class MessagingException extends Exception {
    * @return Returns the exception data.
    */
   public Object getExceptionData() {
-    return mExceptionData;
+    return exceptionData;
   }
 }

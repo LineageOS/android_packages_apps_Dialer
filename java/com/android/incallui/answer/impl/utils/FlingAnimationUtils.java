@@ -41,7 +41,7 @@ public class FlingAnimationUtils {
   private float maxLengthSeconds;
   private float highVelocityPxPerSecond;
 
-  private AnimatorProperties mAnimatorProperties = new AnimatorProperties();
+  private AnimatorProperties animatorProperties = new AnimatorProperties();
 
   public FlingAnimationUtils(Context ctx, float maxLengthSeconds) {
     this.maxLengthSeconds = maxLengthSeconds;
@@ -127,23 +127,23 @@ public class FlingAnimationUtils {
     float velAbs = Math.abs(velocity);
     float durationSeconds = LINEAR_OUT_SLOW_IN_START_GRADIENT * diff / velAbs;
     if (durationSeconds <= maxLengthSeconds) {
-      mAnimatorProperties.interpolator = linearOutSlowIn;
+      animatorProperties.interpolator = linearOutSlowIn;
     } else if (velAbs >= minVelocityPxPerSecond) {
 
       // Cross fade between fast-out-slow-in and linear interpolator with current velocity.
       durationSeconds = maxLengthSeconds;
       VelocityInterpolator velocityInterpolator =
           new VelocityInterpolator(durationSeconds, velAbs, diff);
-      mAnimatorProperties.interpolator =
+      animatorProperties.interpolator =
           new InterpolatorInterpolator(velocityInterpolator, linearOutSlowIn, linearOutSlowIn);
     } else {
 
       // Just use a normal interpolator which doesn't take the velocity into account.
       durationSeconds = maxLengthSeconds;
-      mAnimatorProperties.interpolator = Interpolators.FAST_OUT_SLOW_IN;
+      animatorProperties.interpolator = Interpolators.FAST_OUT_SLOW_IN;
     }
-    mAnimatorProperties.duration = (long) (durationSeconds * 1000);
-    return mAnimatorProperties;
+    animatorProperties.duration = (long) (durationSeconds * 1000);
+    return animatorProperties;
   }
 
   /**
@@ -203,7 +203,7 @@ public class FlingAnimationUtils {
     Interpolator mLinearOutFasterIn = new PathInterpolator(0, 0, LINEAR_OUT_FASTER_IN_X2, y2);
     float durationSeconds = startGradient * diff / velAbs;
     if (durationSeconds <= maxLengthSeconds) {
-      mAnimatorProperties.interpolator = mLinearOutFasterIn;
+      animatorProperties.interpolator = mLinearOutFasterIn;
     } else if (velAbs >= minVelocityPxPerSecond) {
 
       // Cross fade between linear-out-faster-in and linear interpolator with current
@@ -213,15 +213,15 @@ public class FlingAnimationUtils {
           new VelocityInterpolator(durationSeconds, velAbs, diff);
       InterpolatorInterpolator superInterpolator =
           new InterpolatorInterpolator(velocityInterpolator, mLinearOutFasterIn, linearOutSlowIn);
-      mAnimatorProperties.interpolator = superInterpolator;
+      animatorProperties.interpolator = superInterpolator;
     } else {
 
       // Just use a normal interpolator which doesn't take the velocity into account.
       durationSeconds = maxLengthSeconds;
-      mAnimatorProperties.interpolator = Interpolators.FAST_OUT_LINEAR_IN;
+      animatorProperties.interpolator = Interpolators.FAST_OUT_LINEAR_IN;
     }
-    mAnimatorProperties.duration = (long) (durationSeconds * 1000);
-    return mAnimatorProperties;
+    animatorProperties.duration = (long) (durationSeconds * 1000);
+    return animatorProperties;
   }
 
   /**
@@ -246,42 +246,42 @@ public class FlingAnimationUtils {
   /** An interpolator which interpolates two interpolators with an interpolator. */
   private static final class InterpolatorInterpolator implements Interpolator {
 
-    private Interpolator mInterpolator1;
-    private Interpolator mInterpolator2;
-    private Interpolator mCrossfader;
+    private Interpolator interpolator1;
+    private Interpolator interpolator2;
+    private Interpolator crossfader;
 
     InterpolatorInterpolator(
         Interpolator interpolator1, Interpolator interpolator2, Interpolator crossfader) {
-      mInterpolator1 = interpolator1;
-      mInterpolator2 = interpolator2;
-      mCrossfader = crossfader;
+      this.interpolator1 = interpolator1;
+      this.interpolator2 = interpolator2;
+      this.crossfader = crossfader;
     }
 
     @Override
     public float getInterpolation(float input) {
-      float t = mCrossfader.getInterpolation(input);
-      return (1 - t) * mInterpolator1.getInterpolation(input)
-          + t * mInterpolator2.getInterpolation(input);
+      float t = crossfader.getInterpolation(input);
+      return (1 - t) * interpolator1.getInterpolation(input)
+          + t * interpolator2.getInterpolation(input);
     }
   }
 
   /** An interpolator which interpolates with a fixed velocity. */
   private static final class VelocityInterpolator implements Interpolator {
 
-    private float mDurationSeconds;
-    private float mVelocity;
-    private float mDiff;
+    private float durationSeconds;
+    private float velocity;
+    private float diff;
 
     private VelocityInterpolator(float durationSeconds, float velocity, float diff) {
-      mDurationSeconds = durationSeconds;
-      mVelocity = velocity;
-      mDiff = diff;
+      this.durationSeconds = durationSeconds;
+      this.velocity = velocity;
+      this.diff = diff;
     }
 
     @Override
     public float getInterpolation(float input) {
-      float time = input * mDurationSeconds;
-      return time * mVelocity / mDiff;
+      float time = input * durationSeconds;
+      return time * velocity / diff;
     }
   }
 

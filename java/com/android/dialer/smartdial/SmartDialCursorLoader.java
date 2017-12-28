@@ -35,18 +35,18 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   private static final String TAG = "SmartDialCursorLoader";
   private static final boolean DEBUG = false;
 
-  private final Context mContext;
+  private final Context context;
 
-  private Cursor mCursor;
+  private Cursor cursor;
 
-  private String mQuery;
-  private SmartDialNameMatcher mNameMatcher;
+  private String query;
+  private SmartDialNameMatcher nameMatcher;
 
-  private boolean mShowEmptyListForNullQuery = true;
+  private boolean showEmptyListForNullQuery = true;
 
   public SmartDialCursorLoader(Context context) {
     super(context);
-    mContext = context;
+    this.context = context;
   }
 
   /**
@@ -58,11 +58,11 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     if (DEBUG) {
       LogUtil.v(TAG, "Configure new query to be " + query);
     }
-    mQuery = SmartDialNameMatcher.normalizeNumber(mContext, query);
+    this.query = SmartDialNameMatcher.normalizeNumber(context, query);
 
     /** Constructs a name matcher object for matching names. */
-    mNameMatcher = new SmartDialNameMatcher(mQuery);
-    mNameMatcher.setShouldMatchEmptyQuery(!mShowEmptyListForNullQuery);
+    nameMatcher = new SmartDialNameMatcher(this.query);
+    nameMatcher.setShouldMatchEmptyQuery(!showEmptyListForNullQuery);
   }
 
   /**
@@ -73,18 +73,18 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   @Override
   public Cursor loadInBackground() {
     if (DEBUG) {
-      LogUtil.v(TAG, "Load in background " + mQuery);
+      LogUtil.v(TAG, "Load in background " + query);
     }
 
-    if (!PermissionsUtil.hasContactsReadPermissions(mContext)) {
+    if (!PermissionsUtil.hasContactsReadPermissions(context)) {
       return new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
     }
 
     /** Loads results from the database helper. */
     final DialerDatabaseHelper dialerDatabaseHelper =
-        Database.get(mContext).getDatabaseHelper(mContext);
+        Database.get(context).getDatabaseHelper(context);
     final ArrayList<ContactNumber> allMatches =
-        dialerDatabaseHelper.getLooseMatches(mQuery, mNameMatcher);
+        dialerDatabaseHelper.getLooseMatches(query, nameMatcher);
 
     if (DEBUG) {
       LogUtil.v(TAG, "Loaded matches " + allMatches.size());
@@ -115,8 +115,8 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     }
 
     /** Hold a reference to the old data so it doesn't get garbage collected. */
-    Cursor oldCursor = mCursor;
-    mCursor = cursor;
+    Cursor oldCursor = this.cursor;
+    this.cursor = cursor;
 
     if (isStarted()) {
       /** If the Loader is in a started state, deliver the results to the client. */
@@ -131,11 +131,11 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
 
   @Override
   protected void onStartLoading() {
-    if (mCursor != null) {
+    if (cursor != null) {
       /** Deliver any previously loaded data immediately. */
-      deliverResult(mCursor);
+      deliverResult(cursor);
     }
-    if (mCursor == null) {
+    if (cursor == null) {
       /** Force loads every time as our results change with queries. */
       forceLoad();
     }
@@ -153,9 +153,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     onStopLoading();
 
     /** Release all previously saved query results. */
-    if (mCursor != null) {
-      releaseResources(mCursor);
-      mCursor = null;
+    if (cursor != null) {
+      releaseResources(cursor);
+      cursor = null;
     }
   }
 
@@ -174,9 +174,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
   }
 
   public void setShowEmptyListForNullQuery(boolean show) {
-    mShowEmptyListForNullQuery = show;
-    if (mNameMatcher != null) {
-      mNameMatcher.setShouldMatchEmptyQuery(!show);
+    showEmptyListForNullQuery = show;
+    if (nameMatcher != null) {
+      nameMatcher.setShouldMatchEmptyQuery(!show);
     }
   }
 }

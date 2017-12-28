@@ -52,13 +52,13 @@ public class CallLogActivity extends TransactionSafeActivity
   @VisibleForTesting static final int TAB_INDEX_ALL = 0;
   @VisibleForTesting static final int TAB_INDEX_MISSED = 1;
   private static final int TAB_INDEX_COUNT = 2;
-  private ViewPager mViewPager;
-  private ViewPagerTabs mViewPagerTabs;
-  private ViewPagerAdapter mViewPagerAdapter;
-  private CallLogFragment mAllCallsFragment;
-  private CallLogFragment mMissedCallsFragment;
-  private String[] mTabTitles;
-  private boolean mIsResumed;
+  private ViewPager viewPager;
+  private ViewPagerTabs viewPagerTabs;
+  private ViewPagerAdapter viewPagerAdapter;
+  private CallLogFragment allCallsFragment;
+  private CallLogFragment missedCallsFragment;
+  private String[] tabTitles;
+  private boolean isResumed;
   private int selectedPageIndex;
 
   @Override
@@ -84,21 +84,21 @@ public class CallLogActivity extends TransactionSafeActivity
     }
     selectedPageIndex = startingTab;
 
-    mTabTitles = new String[TAB_INDEX_COUNT];
-    mTabTitles[0] = getString(R.string.call_log_all_title);
-    mTabTitles[1] = getString(R.string.call_log_missed_title);
+    tabTitles = new String[TAB_INDEX_COUNT];
+    tabTitles[0] = getString(R.string.call_log_all_title);
+    tabTitles[1] = getString(R.string.call_log_missed_title);
 
-    mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
+    viewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
-    mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
-    mViewPager.setAdapter(mViewPagerAdapter);
-    mViewPager.setOffscreenPageLimit(1);
-    mViewPager.setOnPageChangeListener(this);
+    viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+    viewPager.setAdapter(viewPagerAdapter);
+    viewPager.setOffscreenPageLimit(1);
+    viewPager.setOnPageChangeListener(this);
 
-    mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
+    viewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
 
-    mViewPagerTabs.setViewPager(mViewPager);
-    mViewPager.setCurrentItem(startingTab);
+    viewPagerTabs.setViewPager(viewPager);
+    viewPager.setCurrentItem(startingTab);
   }
 
   @Override
@@ -110,23 +110,23 @@ public class CallLogActivity extends TransactionSafeActivity
       PerformanceReport.startRecording();
     }
 
-    mIsResumed = true;
+    isResumed = true;
     super.onResume();
     sendScreenViewForChildFragment();
   }
 
   @Override
   protected void onPause() {
-    mIsResumed = false;
+    isResumed = false;
     super.onPause();
   }
 
   @Override
   protected void onStop() {
-    if (!isChangingConfigurations() && mViewPager != null) {
+    if (!isChangingConfigurations() && viewPager != null) {
       // Make sure current index != selectedPageIndex
       selectedPageIndex = -1;
-      updateMissedCalls(mViewPager.getCurrentItem());
+      updateMissedCalls(viewPager.getCurrentItem());
     }
     super.onStop();
   }
@@ -141,9 +141,9 @@ public class CallLogActivity extends TransactionSafeActivity
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
     final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
-    if (mAllCallsFragment != null && itemDeleteAll != null) {
+    if (allCallsFragment != null && itemDeleteAll != null) {
       // If onPrepareOptionsMenu is called before fragments are loaded, don't do anything.
-      final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
+      final CallLogAdapter adapter = allCallsFragment.getAdapter();
       itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
     }
     return true;
@@ -170,22 +170,22 @@ public class CallLogActivity extends TransactionSafeActivity
 
   @Override
   public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    mViewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
+    viewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
   }
 
   @Override
   public void onPageSelected(int position) {
     updateMissedCalls(position);
     selectedPageIndex = position;
-    if (mIsResumed) {
+    if (isResumed) {
       sendScreenViewForChildFragment();
     }
-    mViewPagerTabs.onPageSelected(position);
+    viewPagerTabs.onPageSelected(position);
   }
 
   @Override
   public void onPageScrollStateChanged(int state) {
-    mViewPagerTabs.onPageScrollStateChanged(state);
+    viewPagerTabs.onPageScrollStateChanged(state);
   }
 
   private void sendScreenViewForChildFragment() {
@@ -194,7 +194,7 @@ public class CallLogActivity extends TransactionSafeActivity
 
   private int getRtlPosition(int position) {
     if (ViewUtil.isRtl()) {
-      return mViewPagerAdapter.getCount() - 1 - position;
+      return viewPagerAdapter.getCount() - 1 - position;
     }
     return position;
   }
@@ -205,13 +205,13 @@ public class CallLogActivity extends TransactionSafeActivity
     }
     switch (getRtlPosition(position)) {
       case TAB_INDEX_ALL:
-        if (mAllCallsFragment != null) {
-          mAllCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        if (allCallsFragment != null) {
+          allCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
         }
         break;
       case TAB_INDEX_MISSED:
-        if (mMissedCallsFragment != null) {
-          mMissedCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        if (missedCallsFragment != null) {
+          missedCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
         }
         break;
       default:
@@ -255,10 +255,10 @@ public class CallLogActivity extends TransactionSafeActivity
       final CallLogFragment fragment = (CallLogFragment) super.instantiateItem(container, position);
       switch (getRtlPosition(position)) {
         case TAB_INDEX_ALL:
-          mAllCallsFragment = fragment;
+          allCallsFragment = fragment;
           break;
         case TAB_INDEX_MISSED:
-          mMissedCallsFragment = fragment;
+          missedCallsFragment = fragment;
           break;
         default:
           throw Assert.createIllegalStateFailException("Invalid position: " + position);
@@ -268,7 +268,7 @@ public class CallLogActivity extends TransactionSafeActivity
 
     @Override
     public CharSequence getPageTitle(int position) {
-      return mTabTitles[position];
+      return tabTitles[position];
     }
 
     @Override

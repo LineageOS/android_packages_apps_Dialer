@@ -26,31 +26,31 @@ import java.util.concurrent.TimeUnit;
  * example, provide information on the current touch state.
  */
 class ClassifierData {
-  private SparseArray<Stroke> mCurrentStrokes = new SparseArray<>();
-  private ArrayList<Stroke> mEndingStrokes = new ArrayList<>();
-  private final float mDpi;
-  private final float mScreenHeight;
+  private SparseArray<Stroke> currentStrokes = new SparseArray<>();
+  private ArrayList<Stroke> endingStrokes = new ArrayList<>();
+  private final float dpi;
+  private final float screenHeight;
 
   public ClassifierData(float dpi, float screenHeight) {
-    mDpi = dpi;
-    mScreenHeight = screenHeight / dpi;
+    this.dpi = dpi;
+    this.screenHeight = screenHeight / dpi;
   }
 
   public void update(MotionEvent event) {
-    mEndingStrokes.clear();
+    endingStrokes.clear();
     int action = event.getActionMasked();
     if (action == MotionEvent.ACTION_DOWN) {
-      mCurrentStrokes.clear();
+      currentStrokes.clear();
     }
 
     for (int i = 0; i < event.getPointerCount(); i++) {
       int id = event.getPointerId(i);
-      if (mCurrentStrokes.get(id) == null) {
+      if (currentStrokes.get(id) == null) {
         // TODO (keyboardr): See if there's a way to use event.getEventTimeNanos() instead
-        mCurrentStrokes.put(
-            id, new Stroke(TimeUnit.MILLISECONDS.toNanos(event.getEventTime()), mDpi));
+        currentStrokes.put(
+            id, new Stroke(TimeUnit.MILLISECONDS.toNanos(event.getEventTime()), dpi));
       }
-      mCurrentStrokes
+      currentStrokes
           .get(id)
           .addPoint(
               event.getX(i), event.getY(i), TimeUnit.MILLISECONDS.toNanos(event.getEventTime()));
@@ -58,27 +58,27 @@ class ClassifierData {
       if (action == MotionEvent.ACTION_UP
           || action == MotionEvent.ACTION_CANCEL
           || (action == MotionEvent.ACTION_POINTER_UP && i == event.getActionIndex())) {
-        mEndingStrokes.add(getStroke(id));
+        endingStrokes.add(getStroke(id));
       }
     }
   }
 
   void cleanUp(MotionEvent event) {
-    mEndingStrokes.clear();
+    endingStrokes.clear();
     int action = event.getActionMasked();
     for (int i = 0; i < event.getPointerCount(); i++) {
       int id = event.getPointerId(i);
       if (action == MotionEvent.ACTION_UP
           || action == MotionEvent.ACTION_CANCEL
           || (action == MotionEvent.ACTION_POINTER_UP && i == event.getActionIndex())) {
-        mCurrentStrokes.remove(id);
+        currentStrokes.remove(id);
       }
     }
   }
 
   /** @return the list of Strokes which are ending in the recently added MotionEvent */
   public ArrayList<Stroke> getEndingStrokes() {
-    return mEndingStrokes;
+    return endingStrokes;
   }
 
   /**
@@ -86,11 +86,11 @@ class ClassifierData {
    * @return the Stroke assigned to the id
    */
   public Stroke getStroke(int id) {
-    return mCurrentStrokes.get(id);
+    return currentStrokes.get(id);
   }
 
   /** @return the height of the screen in inches */
   public float getScreenHeight() {
-    return mScreenHeight;
+    return screenHeight;
   }
 }

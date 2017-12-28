@@ -287,56 +287,56 @@ public class CallerInfoAsyncQuery {
 
   private static final class DirectoryQueryCompleteListenerFactory {
 
-    private final OnQueryCompleteListener mListener;
-    private final Context mContext;
+    private final OnQueryCompleteListener listener;
+    private final Context context;
     // Make sure listener to be called once and only once
-    private int mCount;
-    private boolean mIsListenerCalled;
+    private int count;
+    private boolean isListenerCalled;
 
     DirectoryQueryCompleteListenerFactory(
         Context context, int size, OnQueryCompleteListener listener) {
-      mCount = size;
-      mListener = listener;
-      mIsListenerCalled = false;
-      mContext = context;
+      count = size;
+      this.listener = listener;
+      isListenerCalled = false;
+      this.context = context;
     }
 
     private void onDirectoryQueryComplete(
         int token, Object cookie, CallerInfo ci, long directoryId) {
       boolean shouldCallListener = false;
       synchronized (this) {
-        mCount = mCount - 1;
-        if (!mIsListenerCalled && (ci.contactExists || mCount == 0)) {
-          mIsListenerCalled = true;
+        count = count - 1;
+        if (!isListenerCalled && (ci.contactExists || count == 0)) {
+          isListenerCalled = true;
           shouldCallListener = true;
         }
       }
 
       // Don't call callback in synchronized block because mListener.onQueryComplete may
       // take long time to complete
-      if (shouldCallListener && mListener != null) {
+      if (shouldCallListener && listener != null) {
         addCallerInfoIntoCache(ci, directoryId);
-        mListener.onQueryComplete(token, cookie, ci);
+        listener.onQueryComplete(token, cookie, ci);
       }
     }
 
     private void addCallerInfoIntoCache(CallerInfo ci, long directoryId) {
       CachedNumberLookupService cachedNumberLookupService =
-          PhoneNumberCache.get(mContext).getCachedNumberLookupService();
+          PhoneNumberCache.get(context).getCachedNumberLookupService();
       if (ci.contactExists && cachedNumberLookupService != null) {
         // 1. Cache caller info
         CachedContactInfo cachedContactInfo =
             CallerInfoUtils.buildCachedContactInfo(cachedNumberLookupService, ci);
-        String directoryLabel = mContext.getString(R.string.directory_search_label);
+        String directoryLabel = context.getString(R.string.directory_search_label);
         cachedContactInfo.setDirectorySource(directoryLabel, directoryId);
-        cachedNumberLookupService.addContact(mContext, cachedContactInfo);
+        cachedNumberLookupService.addContact(context, cachedContactInfo);
 
         // 2. Cache photo
         if (ci.contactDisplayPhotoUri != null && ci.normalizedNumber != null) {
           try (InputStream in =
-              mContext.getContentResolver().openInputStream(ci.contactDisplayPhotoUri)) {
+              context.getContentResolver().openInputStream(ci.contactDisplayPhotoUri)) {
             if (in != null) {
-              cachedNumberLookupService.addPhoto(mContext, ci.normalizedNumber, in);
+              cachedNumberLookupService.addPhoto(context, ci.normalizedNumber, in);
             }
           } catch (IOException e) {
             Log.e(LOG_TAG, "failed to fetch directory contact photo", e);
@@ -351,22 +351,22 @@ public class CallerInfoAsyncQuery {
 
     private class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
 
-      private final long mDirectoryId;
+      private final long directoryId;
 
       DirectoryQueryCompleteListener(long directoryId) {
-        mDirectoryId = directoryId;
+        this.directoryId = directoryId;
       }
 
       @Override
       public void onDataLoaded(int token, Object cookie, CallerInfo ci) {
         Log.d(LOG_TAG, "DirectoryQueryCompleteListener.onDataLoaded");
-        mListener.onDataLoaded(token, cookie, ci);
+        listener.onDataLoaded(token, cookie, ci);
       }
 
       @Override
       public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
         Log.d(LOG_TAG, "DirectoryQueryCompleteListener.onQueryComplete");
-        onDirectoryQueryComplete(token, cookie, ci, mDirectoryId);
+        onDirectoryQueryComplete(token, cookie, ci, directoryId);
       }
     }
   }
@@ -380,16 +380,16 @@ public class CallerInfoAsyncQuery {
      * with a new query event, and one with a end event, with 0 or more additional listeners in
      * between).
      */
-    private Context mQueryContext;
+    private Context queryContext;
 
-    private Uri mQueryUri;
-    private CallerInfo mCallerInfo;
+    private Uri queryUri;
+    private CallerInfo callerInfo;
 
     /** Asynchronous query handler class for the contact / callerinfo object. */
     private CallerInfoAsyncQueryHandler(Context context, Uri contactRef) {
       super(context.getContentResolver());
-      this.mQueryContext = context;
-      this.mQueryUri = contactRef;
+      this.queryContext = context;
+      this.queryUri = contactRef;
     }
 
     @Override
@@ -448,12 +448,12 @@ public class CallerInfoAsyncQuery {
                 + cw.listener.getClass().toString()
                 + " for token: "
                 + token
-                + mCallerInfo);
-        cw.listener.onQueryComplete(token, cw.cookie, mCallerInfo);
+                + callerInfo);
+        cw.listener.onQueryComplete(token, cw.cookie, callerInfo);
       }
-      mQueryContext = null;
-      mQueryUri = null;
-      mCallerInfo = null;
+      queryContext = null;
+      queryUri = null;
+      callerInfo = null;
     }
 
     void updateData(int token, Object cookie, Cursor cursor) {
@@ -472,8 +472,8 @@ public class CallerInfoAsyncQuery {
         }
 
         // check the token and if needed, create the callerinfo object.
-        if (mCallerInfo == null) {
-          if ((mQueryContext == null) || (mQueryUri == null)) {
+        if (callerInfo == null) {
+          if ((queryContext == null) || (queryUri == null)) {
             throw new QueryPoolException(
                 "Bad context or query uri, or CallerInfoAsyncQuery already released.");
           }
@@ -486,20 +486,20 @@ public class CallerInfoAsyncQuery {
           if (cw.event == EVENT_EMERGENCY_NUMBER) {
             // Note we're setting the phone number here (refer to javadoc
             // comments at the top of CallerInfo class).
-            mCallerInfo = new CallerInfo().markAsEmergency(mQueryContext);
+            callerInfo = new CallerInfo().markAsEmergency(queryContext);
           } else if (cw.event == EVENT_VOICEMAIL_NUMBER) {
-            mCallerInfo = new CallerInfo().markAsVoiceMail(mQueryContext);
+            callerInfo = new CallerInfo().markAsVoiceMail(queryContext);
           } else {
-            mCallerInfo = CallerInfo.getCallerInfo(mQueryContext, mQueryUri, cursor);
-            Log.d(this, "==> Got mCallerInfo: " + mCallerInfo);
+            callerInfo = CallerInfo.getCallerInfo(queryContext, queryUri, cursor);
+            Log.d(this, "==> Got mCallerInfo: " + callerInfo);
 
             CallerInfo newCallerInfo =
-                CallerInfo.doSecondaryLookupIfNecessary(mQueryContext, cw.number, mCallerInfo);
-            if (newCallerInfo != mCallerInfo) {
-              mCallerInfo = newCallerInfo;
-              Log.d(this, "#####async contact look up with numeric username" + mCallerInfo);
+                CallerInfo.doSecondaryLookupIfNecessary(queryContext, cw.number, callerInfo);
+            if (newCallerInfo != callerInfo) {
+              callerInfo = newCallerInfo;
+              Log.d(this, "#####async contact look up with numeric username" + callerInfo);
             }
-            mCallerInfo.countryIso = cw.countryIso;
+            callerInfo.countryIso = cw.countryIso;
 
             // Final step: look up the geocoded description.
             if (ENABLE_UNKNOWN_NUMBER_GEO_DESCRIPTION) {
@@ -514,25 +514,25 @@ public class CallerInfoAsyncQuery {
               // new parameter to CallerInfoAsyncQuery.startQuery() to force
               // the geoDescription field to be populated.)
 
-              if (TextUtils.isEmpty(mCallerInfo.name)) {
+              if (TextUtils.isEmpty(callerInfo.name)) {
                 // Actually when no contacts match the incoming phone number,
                 // the CallerInfo object is totally blank here (i.e. no name
                 // *or* phoneNumber).  So we need to pass in cw.number as
                 // a fallback number.
-                mCallerInfo.updateGeoDescription(mQueryContext, cw.number);
+                callerInfo.updateGeoDescription(queryContext, cw.number);
               }
             }
 
             // Use the number entered by the user for display.
             if (!TextUtils.isEmpty(cw.number)) {
-              mCallerInfo.phoneNumber = cw.number;
+              callerInfo.phoneNumber = cw.number;
             }
           }
 
           Log.d(this, "constructing CallerInfo object for token: " + token);
 
           if (cw.listener != null) {
-            cw.listener.onDataLoaded(token, cw.cookie, mCallerInfo);
+            cw.listener.onDataLoaded(token, cw.cookie, callerInfo);
           }
         }
 
@@ -598,14 +598,14 @@ public class CallerInfoAsyncQuery {
 
           switch (cw.event) {
             case EVENT_NEW_QUERY:
-              final ContentResolver resolver = mQueryContext.getContentResolver();
+              final ContentResolver resolver = queryContext.getContentResolver();
 
               // This should never happen.
               if (resolver == null) {
                 Log.e(this, "Content Resolver is null!");
                 return;
               }
-              //start the sql command.
+              // start the sql command.
               Cursor cursor;
               try {
                 cursor =

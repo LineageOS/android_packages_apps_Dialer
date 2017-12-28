@@ -17,7 +17,6 @@
 package com.android.incallui.answer.impl.classifier;
 
 import android.os.SystemClock;
-
 import java.util.ArrayList;
 
 /**
@@ -28,27 +27,27 @@ class HistoryEvaluator {
   private static final float HISTORY_FACTOR = 0.9f;
   private static final float EPSILON = 1e-5f;
 
-  private final ArrayList<Data> mStrokes = new ArrayList<>();
-  private final ArrayList<Data> mGestureWeights = new ArrayList<>();
-  private long mLastUpdate;
+  private final ArrayList<Data> strokes = new ArrayList<>();
+  private final ArrayList<Data> gestureWeights = new ArrayList<>();
+  private long lastUpdate;
 
   public HistoryEvaluator() {
-    mLastUpdate = SystemClock.elapsedRealtime();
+    lastUpdate = SystemClock.elapsedRealtime();
   }
 
   public void addStroke(float evaluation) {
     decayValue();
-    mStrokes.add(new Data(evaluation));
+    strokes.add(new Data(evaluation));
   }
 
   public void addGesture(float evaluation) {
     decayValue();
-    mGestureWeights.add(new Data(evaluation));
+    gestureWeights.add(new Data(evaluation));
   }
 
   /** Calculates the weighted average of strokes and adds to it the weighted average of gestures */
   public float getEvaluation() {
-    return weightedAverage(mStrokes) + weightedAverage(mGestureWeights);
+    return weightedAverage(strokes) + weightedAverage(gestureWeights);
   }
 
   private float weightedAverage(ArrayList<Data> list) {
@@ -71,16 +70,16 @@ class HistoryEvaluator {
   private void decayValue() {
     long time = SystemClock.elapsedRealtime();
 
-    if (time <= mLastUpdate) {
+    if (time <= lastUpdate) {
       return;
     }
 
     // All weights are multiplied by HISTORY_FACTOR after each INTERVAL milliseconds.
-    float factor = (float) Math.pow(HISTORY_FACTOR, (time - mLastUpdate) / INTERVAL);
+    float factor = (float) Math.pow(HISTORY_FACTOR, (time - lastUpdate) / INTERVAL);
 
-    decayValue(mStrokes, factor);
-    decayValue(mGestureWeights, factor);
-    mLastUpdate = time;
+    decayValue(strokes, factor);
+    decayValue(gestureWeights, factor);
+    lastUpdate = time;
   }
 
   private void decayValue(ArrayList<Data> list, float factor) {

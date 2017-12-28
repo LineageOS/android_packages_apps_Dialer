@@ -24,25 +24,25 @@ import java.io.InputStream;
  * where the protocol handler intended the client to read.
  */
 public class FixedLengthInputStream extends InputStream {
-  private final InputStream mIn;
-  private final int mLength;
-  private int mCount;
+  private final InputStream in;
+  private final int length;
+  private int count;
 
   public FixedLengthInputStream(InputStream in, int length) {
-    this.mIn = in;
-    this.mLength = length;
+    this.in = in;
+    this.length = length;
   }
 
   @Override
   public int available() throws IOException {
-    return mLength - mCount;
+    return length - count;
   }
 
   @Override
   public int read() throws IOException {
-    if (mCount < mLength) {
-      mCount++;
-      return mIn.read();
+    if (count < length) {
+      count++;
+      return in.read();
     } else {
       return -1;
     }
@@ -50,12 +50,12 @@ public class FixedLengthInputStream extends InputStream {
 
   @Override
   public int read(byte[] b, int offset, int length) throws IOException {
-    if (mCount < mLength) {
-      int d = mIn.read(b, offset, Math.min(mLength - mCount, length));
+    if (count < this.length) {
+      int d = in.read(b, offset, Math.min(this.length - count, length));
       if (d == -1) {
         return -1;
       } else {
-        mCount += d;
+        count += d;
         return d;
       }
     } else {
@@ -69,11 +69,11 @@ public class FixedLengthInputStream extends InputStream {
   }
 
   public int getLength() {
-    return mLength;
+    return length;
   }
 
   @Override
   public String toString() {
-    return String.format("FixedLengthInputStream(in=%s, length=%d)", mIn.toString(), mLength);
+    return String.format("FixedLengthInputStream(in=%s, length=%d)", in.toString(), length);
   }
 }

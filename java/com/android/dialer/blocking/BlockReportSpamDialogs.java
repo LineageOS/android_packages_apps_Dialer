@@ -102,18 +102,18 @@ public class BlockReportSpamDialogs {
   private static class CommonDialogsFragment extends DialogFragment {
 
     /** The number to display in the dialog title. */
-    protected String mDisplayNumber;
+    protected String displayNumber;
 
     /** Called when dialog positive button is pressed. */
-    protected OnConfirmListener mPositiveListener;
+    protected OnConfirmListener positiveListener;
 
     /** Called when dialog is dismissed. */
-    @Nullable protected DialogInterface.OnDismissListener mDismissListener;
+    @Nullable protected DialogInterface.OnDismissListener dismissListener;
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-      if (mDismissListener != null) {
-        mDismissListener.onDismiss(dialog);
+      if (dismissListener != null) {
+        dismissListener.onDismiss(dialog);
       }
       super.onDismiss(dialog);
     }
@@ -122,9 +122,9 @@ public class BlockReportSpamDialogs {
     public void onPause() {
       // The dialog is dismissed onPause, i.e. rotation.
       dismiss();
-      mDismissListener = null;
-      mPositiveListener = null;
-      mDisplayNumber = null;
+      dismissListener = null;
+      positiveListener = null;
+      displayNumber = null;
       super.onPause();
     }
   }
@@ -133,10 +133,10 @@ public class BlockReportSpamDialogs {
   public static class BlockReportSpamDialogFragment extends CommonDialogsFragment {
 
     /** Called when dialog positive button is pressed. */
-    private OnSpamDialogClickListener mPositiveListener;
+    private OnSpamDialogClickListener positiveListener;
 
     /** Whether the mark as spam checkbox is checked before displaying the dialog. */
-    private boolean mSpamChecked;
+    private boolean spamChecked;
 
     public static DialogFragment newInstance(
         String displayNumber,
@@ -144,10 +144,10 @@ public class BlockReportSpamDialogs {
         OnSpamDialogClickListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       BlockReportSpamDialogFragment fragment = new BlockReportSpamDialogFragment();
-      fragment.mSpamChecked = spamChecked;
-      fragment.mDisplayNumber = displayNumber;
-      fragment.mPositiveListener = positiveListener;
-      fragment.mDismissListener = dismissListener;
+      fragment.spamChecked = spamChecked;
+      fragment.displayNumber = displayNumber;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
       return fragment;
     }
 
@@ -158,12 +158,12 @@ public class BlockReportSpamDialogs {
       final CheckBox isSpamCheckbox =
           (CheckBox) dialogView.findViewById(R.id.report_number_as_spam_action);
       // Listen for changes on the checkbox and update if orientation changes
-      isSpamCheckbox.setChecked(mSpamChecked);
+      isSpamCheckbox.setChecked(spamChecked);
       isSpamCheckbox.setOnCheckedChangeListener(
           new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-              mSpamChecked = isChecked;
+              spamChecked = isChecked;
             }
           });
 
@@ -174,14 +174,14 @@ public class BlockReportSpamDialogs {
       Dialog dialog =
           alertDialogBuilder
               .setView(dialogView)
-              .setTitle(getString(R.string.block_report_number_alert_title, mDisplayNumber))
+              .setTitle(getString(R.string.block_report_number_alert_title, displayNumber))
               .setPositiveButton(
                   R.string.block_number_ok,
                   new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                       dismiss();
-                      mPositiveListener.onClick(isSpamCheckbox.isChecked());
+                      positiveListener.onClick(isSpamCheckbox.isChecked());
                     }
                   })
               .create();
@@ -201,9 +201,9 @@ public class BlockReportSpamDialogs {
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       BlockDialogFragment fragment = new BlockDialogFragment();
-      fragment.mDisplayNumber = displayNumber;
-      fragment.mPositiveListener = positiveListener;
-      fragment.mDismissListener = dismissListener;
+      fragment.displayNumber = displayNumber;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
       fragment.isSpamEnabled = isSpamEnabled;
       return fragment;
     }
@@ -215,14 +215,14 @@ public class BlockReportSpamDialogs {
       AlertDialog.Builder alertDialogBuilder = createDialogBuilder(getActivity(), this);
       Dialog dialog =
           alertDialogBuilder
-              .setTitle(getString(R.string.block_number_confirmation_title, mDisplayNumber))
+              .setTitle(getString(R.string.block_number_confirmation_title, displayNumber))
               .setMessage(
                   isSpamEnabled
                       ? getString(
                           R.string.block_number_alert_details, getBlockMessage(getContext()))
                       : getString(R.string.block_report_number_alert_details))
               .setPositiveButton(
-                  R.string.block_number_ok, createGenericOnClickListener(this, mPositiveListener))
+                  R.string.block_number_ok, createGenericOnClickListener(this, positiveListener))
               .create();
       dialog.setCanceledOnTouchOutside(true);
       return dialog;
@@ -233,7 +233,7 @@ public class BlockReportSpamDialogs {
   public static class UnblockDialogFragment extends CommonDialogsFragment {
 
     /** Whether or not the number is spam. */
-    private boolean mIsSpam;
+    private boolean isSpam;
 
     public static DialogFragment newInstance(
         String displayNumber,
@@ -241,10 +241,10 @@ public class BlockReportSpamDialogs {
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       UnblockDialogFragment fragment = new UnblockDialogFragment();
-      fragment.mDisplayNumber = displayNumber;
-      fragment.mIsSpam = isSpam;
-      fragment.mPositiveListener = positiveListener;
-      fragment.mDismissListener = dismissListener;
+      fragment.displayNumber = displayNumber;
+      fragment.isSpam = isSpam;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
       return fragment;
     }
 
@@ -253,18 +253,18 @@ public class BlockReportSpamDialogs {
       super.onCreateDialog(savedInstanceState);
       // Return the newly created dialog
       AlertDialog.Builder alertDialogBuilder = createDialogBuilder(getActivity(), this);
-      if (mIsSpam) {
+      if (isSpam) {
         alertDialogBuilder
             .setMessage(R.string.unblock_number_alert_details)
-            .setTitle(getString(R.string.unblock_report_number_alert_title, mDisplayNumber));
+            .setTitle(getString(R.string.unblock_report_number_alert_title, displayNumber));
       } else {
         alertDialogBuilder.setMessage(
-            getString(R.string.unblock_report_number_alert_title, mDisplayNumber));
+            getString(R.string.unblock_report_number_alert_title, displayNumber));
       }
       Dialog dialog =
           alertDialogBuilder
               .setPositiveButton(
-                  R.string.unblock_number_ok, createGenericOnClickListener(this, mPositiveListener))
+                  R.string.unblock_number_ok, createGenericOnClickListener(this, positiveListener))
               .create();
       dialog.setCanceledOnTouchOutside(true);
       return dialog;
@@ -279,9 +279,9 @@ public class BlockReportSpamDialogs {
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       ReportNotSpamDialogFragment fragment = new ReportNotSpamDialogFragment();
-      fragment.mDisplayNumber = displayNumber;
-      fragment.mPositiveListener = positiveListener;
-      fragment.mDismissListener = dismissListener;
+      fragment.displayNumber = displayNumber;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
       return fragment;
     }
 
@@ -293,10 +293,10 @@ public class BlockReportSpamDialogs {
       Dialog dialog =
           alertDialogBuilder
               .setTitle(R.string.report_not_spam_alert_title)
-              .setMessage(getString(R.string.report_not_spam_alert_details, mDisplayNumber))
+              .setMessage(getString(R.string.report_not_spam_alert_details, displayNumber))
               .setPositiveButton(
                   R.string.report_not_spam_alert_button,
-                  createGenericOnClickListener(this, mPositiveListener))
+                  createGenericOnClickListener(this, positiveListener))
               .create();
       dialog.setCanceledOnTouchOutside(true);
       return dialog;

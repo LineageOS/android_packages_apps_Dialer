@@ -27,23 +27,23 @@ public class TouchPointManager {
 
   public static final String TOUCH_POINT = "touchPoint";
 
-  private static TouchPointManager sInstance = new TouchPointManager();
+  private static TouchPointManager instance = new TouchPointManager();
 
-  private Point mPoint = new Point();
+  private Point point = new Point();
 
   /** Private constructor. Instance should only be acquired through getRunningInstance(). */
   private TouchPointManager() {}
 
   public static TouchPointManager getInstance() {
-    return sInstance;
+    return instance;
   }
 
   public Point getPoint() {
-    return mPoint;
+    return point;
   }
 
   public void setPoint(int x, int y) {
-    mPoint.set(x, y);
+    point.set(x, y);
   }
 
   /**
@@ -55,6 +55,6 @@ public class TouchPointManager {
    *     (0,0).
    */
   public boolean hasValidPoint() {
-    return mPoint.x != 0 || mPoint.y != 0;
+    return point.x != 0 || point.y != 0;
   }
 }

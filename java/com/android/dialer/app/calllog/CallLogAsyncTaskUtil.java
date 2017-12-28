@@ -38,20 +38,20 @@ import com.android.voicemail.VoicemailClient;
 public class CallLogAsyncTaskUtil {
 
   private static final String TAG = "CallLogAsyncTaskUtil";
-  private static AsyncTaskExecutor sAsyncTaskExecutor;
+  private static AsyncTaskExecutor asyncTaskExecutor;
 
   private static void initTaskExecutor() {
-    sAsyncTaskExecutor = AsyncTaskExecutors.createThreadPoolExecutor();
+    asyncTaskExecutor = AsyncTaskExecutors.createThreadPoolExecutor();
   }
 
   public static void markVoicemailAsRead(
       @NonNull final Context context, @NonNull final Uri voicemailUri) {
     LogUtil.enterBlock("CallLogAsyncTaskUtil.markVoicemailAsRead, voicemailUri: " + voicemailUri);
-    if (sAsyncTaskExecutor == null) {
+    if (asyncTaskExecutor == null) {
       initTaskExecutor();
     }
 
-    sAsyncTaskExecutor.submit(
+    asyncTaskExecutor.submit(
         Tasks.MARK_VOICEMAIL_READ,
         new AsyncTask<Void, Void, Void>() {
           @Override
@@ -77,11 +77,11 @@ public class CallLogAsyncTaskUtil {
       @NonNull final Context context,
       final Uri voicemailUri,
       @Nullable final CallLogAsyncTaskListener callLogAsyncTaskListener) {
-    if (sAsyncTaskExecutor == null) {
+    if (asyncTaskExecutor == null) {
       initTaskExecutor();
     }
 
-    sAsyncTaskExecutor.submit(
+    asyncTaskExecutor.submit(
         Tasks.DELETE_VOICEMAIL,
         new AsyncTask<Void, Void, Void>() {
           @Override
@@ -113,11 +113,11 @@ public class CallLogAsyncTaskUtil {
         || !PermissionsUtil.hasCallLogWritePermissions(context)) {
       return;
     }
-    if (sAsyncTaskExecutor == null) {
+    if (asyncTaskExecutor == null) {
       initTaskExecutor();
     }
 
-    sAsyncTaskExecutor.submit(
+    asyncTaskExecutor.submit(
         Tasks.MARK_CALL_READ,
         new AsyncTask<Void, Void, Void>() {
           @Override

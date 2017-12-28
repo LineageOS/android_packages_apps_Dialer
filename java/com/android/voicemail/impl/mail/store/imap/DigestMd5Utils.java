@@ -121,27 +121,27 @@ public class DigestMd5Utils {
 
     private static class ResponseBuilder {
 
-      private StringBuilder mBuilder = new StringBuilder();
+      private StringBuilder builder = new StringBuilder();
 
       public ResponseBuilder appendQuoted(String key, String value) {
-        if (mBuilder.length() != 0) {
-          mBuilder.append(",");
+        if (builder.length() != 0) {
+          builder.append(",");
         }
-        mBuilder.append(key).append("=\"").append(value).append("\"");
+        builder.append(key).append("=\"").append(value).append("\"");
         return this;
       }
 
       public ResponseBuilder append(String key, String value) {
-        if (mBuilder.length() != 0) {
-          mBuilder.append(",");
+        if (builder.length() != 0) {
+          builder.append(",");
         }
-        mBuilder.append(key).append("=").append(value);
+        builder.append(key).append("=").append(value);
         return this;
       }
 
       @Override
       public String toString() {
-        return mBuilder.toString();
+        return builder.toString();
       }
     }
   }
@@ -229,20 +229,20 @@ public class DigestMd5Utils {
   /** Parse the key-value pair returned by the server. */
   private static class DigestMessageParser {
 
-    private final String mMessage;
-    private int mPosition = 0;
-    private Map<String, String> mResult = new ArrayMap<>();
+    private final String message;
+    private int position = 0;
+    private Map<String, String> result = new ArrayMap<>();
 
     public DigestMessageParser(String message) {
-      mMessage = message;
+      this.message = message;
     }
 
     @Nullable
     public Map<String, String> parse() {
       try {
-        while (mPosition < mMessage.length()) {
+        while (position < message.length()) {
           parsePair();
-          if (mPosition != mMessage.length()) {
+          if (position != message.length()) {
             expect(',');
           }
         }
@@ -250,42 +250,42 @@ public class DigestMd5Utils {
         VvmLog.e(TAG, e.toString());
         return null;
       }
-      return mResult;
+      return result;
     }
 
     private void parsePair() {
       String key = parseKey();
       expect('=');
       String value = parseValue();
-      mResult.put(key, value);
+      result.put(key, value);
     }
 
     private void expect(char c) {
       if (pop() != c) {
-        throw new IllegalStateException("unexpected character " + mMessage.charAt(mPosition));
+        throw new IllegalStateException("unexpected character " + message.charAt(position));
       }
     }
 
     private char pop() {
       char result = peek();
-      mPosition++;
+      position++;
       return result;
     }
 
     private char peek() {
-      return mMessage.charAt(mPosition);
+      return message.charAt(position);
     }
 
     private void goToNext(char c) {
       while (peek() != c) {
-        mPosition++;
+        position++;
       }
     }
 
     private String parseKey() {
-      int start = mPosition;
+      int start = position;
       goToNext('=');
-      return mMessage.substring(start, mPosition);
+      return message.substring(start, position);
     }
 
     private String parseValue() {
@@ -319,13 +319,13 @@ public class DigestMd5Utils {
         if (c == '\\') {
           result.append(pop());
         } else if (c == ',') {
-          mPosition--;
+          position--;
           break;
         } else {
           result.append(c);
         }
 
-        if (mPosition == mMessage.length()) {
+        if (position == message.length()) {
           break;
         }
       }

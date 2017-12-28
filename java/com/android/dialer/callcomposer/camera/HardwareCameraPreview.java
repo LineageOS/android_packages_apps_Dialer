@@ -35,23 +35,23 @@ import java.io.IOException;
  * implementations of the shared methods are delegated to CameraPreview
  */
 public class HardwareCameraPreview extends TextureView implements CameraPreview.CameraPreviewHost {
-  private CameraPreview mPreview;
+  private CameraPreview preview;
 
   public HardwareCameraPreview(final Context context, final AttributeSet attrs) {
     super(context, attrs);
-    mPreview = new CameraPreview(this);
+    preview = new CameraPreview(this);
     setSurfaceTextureListener(
         new SurfaceTextureListener() {
           @Override
           public void onSurfaceTextureAvailable(
               final SurfaceTexture surfaceTexture, final int i, final int i2) {
-            CameraManager.get().setSurface(mPreview);
+            CameraManager.get().setSurface(preview);
           }
 
           @Override
           public void onSurfaceTextureSizeChanged(
               final SurfaceTexture surfaceTexture, final int i, final int i2) {
-            CameraManager.get().setSurface(mPreview);
+            CameraManager.get().setSurface(preview);
           }
 
           @Override
@@ -62,44 +62,44 @@ public class HardwareCameraPreview extends TextureView implements CameraPreview.
 
           @Override
           public void onSurfaceTextureUpdated(final SurfaceTexture surfaceTexture) {
-            CameraManager.get().setSurface(mPreview);
+            CameraManager.get().setSurface(preview);
           }
         });
   }
 
   @Override
   public void setShown() {
-    mPreview.setShown();
+    preview.setShown();
   }
 
   @Override
   protected void onVisibilityChanged(final View changedView, final int visibility) {
     super.onVisibilityChanged(changedView, visibility);
-    mPreview.onVisibilityChanged(visibility);
+    preview.onVisibilityChanged(visibility);
   }
 
   @Override
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
-    mPreview.onDetachedFromWindow();
+    preview.onDetachedFromWindow();
   }
 
   @Override
   protected void onAttachedToWindow() {
     super.onAttachedToWindow();
-    mPreview.onAttachedToWindow();
+    preview.onAttachedToWindow();
   }
 
   @Override
   protected void onRestoreInstanceState(final Parcelable state) {
     super.onRestoreInstanceState(state);
-    mPreview.onRestoreInstanceState();
+    preview.onRestoreInstanceState();
   }
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    widthMeasureSpec = mPreview.getWidthMeasureSpec(widthMeasureSpec, heightMeasureSpec);
-    heightMeasureSpec = mPreview.getHeightMeasureSpec(widthMeasureSpec, heightMeasureSpec);
+    widthMeasureSpec = preview.getWidthMeasureSpec(widthMeasureSpec, heightMeasureSpec);
+    heightMeasureSpec = preview.getHeightMeasureSpec(widthMeasureSpec, heightMeasureSpec);
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
   }
 
@@ -120,6 +120,6 @@ public class HardwareCameraPreview extends TextureView implements CameraPreview.
 
   @Override
   public void onCameraPermissionGranted() {
-    mPreview.onCameraPermissionGranted();
+    preview.onCameraPermissionGranted();
   }
 }

@@ -16,7 +16,7 @@
 
 package com.android.dialer.callcomposer.camera.exif;
 
-import java.util.HashMap;
+import android.support.v4.util.ArrayMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -28,9 +28,9 @@ import java.util.Objects;
  */
 class IfdData {
 
-  private final int mIfdId;
-  private final Map<Short, ExifTag> mExifTags = new HashMap<>();
-  private static final int[] sIfds = {
+  private final int ifdId;
+  private final Map<Short, ExifTag> exifTags = new ArrayMap<>();
+  private static final int[] ifds = {
     IfdId.TYPE_IFD_0,
     IfdId.TYPE_IFD_1,
     IfdId.TYPE_IFD_EXIF,
@@ -47,16 +47,16 @@ class IfdData {
    * @see IfdId#TYPE_IFD_INTEROPERABILITY
    */
   IfdData(int ifdId) {
-    mIfdId = ifdId;
+    this.ifdId = ifdId;
   }
 
   static int[] getIfds() {
-    return sIfds;
+    return ifds;
   }
 
   /** Get a array the contains all {@link ExifTag} in this IFD. */
   private ExifTag[] getAllTags() {
-    return mExifTags.values().toArray(new ExifTag[mExifTags.size()]);
+    return exifTags.values().toArray(new ExifTag[exifTags.size()]);
   }
 
   /**
@@ -69,23 +69,23 @@ class IfdData {
    * @see IfdId#TYPE_IFD_INTEROPERABILITY
    */
   protected int getId() {
-    return mIfdId;
+    return ifdId;
   }
 
   /** Gets the {@link ExifTag} with given tag id. Return null if there is no such tag. */
   protected ExifTag getTag(short tagId) {
-    return mExifTags.get(tagId);
+    return exifTags.get(tagId);
   }
 
   /** Adds or replaces a {@link ExifTag}. */
   protected ExifTag setTag(ExifTag tag) {
-    tag.setIfd(mIfdId);
-    return mExifTags.put(tag.getTagId(), tag);
+    tag.setIfd(ifdId);
+    return exifTags.put(tag.getTagId(), tag);
   }
 
   /** Gets the tags count in the IFD. */
   private int getTagCount() {
-    return mExifTags.size();
+    return exifTags.size();
   }
 
   /**
@@ -102,13 +102,13 @@ class IfdData {
     }
     if (obj instanceof IfdData) {
       IfdData data = (IfdData) obj;
-      if (data.getId() == mIfdId && data.getTagCount() == getTagCount()) {
+      if (data.getId() == ifdId && data.getTagCount() == getTagCount()) {
         ExifTag[] tags = data.getAllTags();
         for (ExifTag tag : tags) {
           if (ExifInterface.isOffsetTag(tag.getTagId())) {
             continue;
           }
-          ExifTag tag2 = mExifTags.get(tag.getTagId());
+          ExifTag tag2 = exifTags.get(tag.getTagId());
           if (!tag.equals(tag2)) {
             return false;
           }
@@ -121,6 +121,6 @@ class IfdData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(mIfdId, mExifTags);
+    return Objects.hash(ifdId, exifTags);
   }
 }

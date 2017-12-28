@@ -32,8 +32,8 @@ public class TelecomAdapter implements InCallServiceListener {
 
   private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
-  private static TelecomAdapter sInstance;
-  private InCallService mInCallService;
+  private static TelecomAdapter instance;
+  private InCallService inCallService;
 
   private TelecomAdapter() {}
 
@@ -42,25 +42,25 @@ public class TelecomAdapter implements InCallServiceListener {
     if (!Looper.getMainLooper().isCurrentThread()) {
       throw new IllegalStateException();
     }
-    if (sInstance == null) {
-      sInstance = new TelecomAdapter();
+    if (instance == null) {
+      instance = new TelecomAdapter();
     }
-    return sInstance;
+    return instance;
   }
 
   @VisibleForTesting(otherwise = VisibleForTesting.NONE)
   public static void setInstanceForTesting(TelecomAdapter telecomAdapter) {
-    sInstance = telecomAdapter;
+    instance = telecomAdapter;
   }
 
   @Override
   public void setInCallService(InCallService inCallService) {
-    mInCallService = inCallService;
+    this.inCallService = inCallService;
   }
 
   @Override
   public void clearInCallService() {
-    mInCallService = null;
+    inCallService = null;
   }
 
   private android.telecom.Call getTelecomCallById(String callId) {
@@ -69,16 +69,16 @@ public class TelecomAdapter implements InCallServiceListener {
   }
 
   public void mute(boolean shouldMute) {
-    if (mInCallService != null) {
-      mInCallService.setMuted(shouldMute);
+    if (inCallService != null) {
+      inCallService.setMuted(shouldMute);
     } else {
       LogUtil.e("TelecomAdapter.mute", "mInCallService is null");
     }
   }
 
   public void setAudioRoute(int route) {
-    if (mInCallService != null) {
-      mInCallService.setAudioRoute(route);
+    if (inCallService != null) {
+      inCallService.setAudioRoute(route);
     } else {
       LogUtil.e("TelecomAdapter.setAudioRoute", "mInCallService is null");
     }
@@ -116,7 +116,7 @@ public class TelecomAdapter implements InCallServiceListener {
   }
 
   public void addCall() {
-    if (mInCallService != null) {
+    if (inCallService != null) {
       Intent intent = new Intent(Intent.ACTION_DIAL);
       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -126,7 +126,7 @@ public class TelecomAdapter implements InCallServiceListener {
       intent.putExtra(ADD_CALL_MODE_KEY, true);
       try {
         LogUtil.d("TelecomAdapter.addCall", "Sending the add DialerCall intent");
-        mInCallService.startActivity(intent);
+        inCallService.startActivity(intent);
       } catch (ActivityNotFoundException e) {
         // This is rather rare but possible.
         // Note: this method is used even when the phone is encrypted. At that moment
@@ -164,8 +164,8 @@ public class TelecomAdapter implements InCallServiceListener {
   }
 
   public boolean canAddCall() {
-    if (mInCallService != null) {
-      return mInCallService.canAddCall();
+    if (inCallService != null) {
+      return inCallService.canAddCall();
     }
     return false;
   }
@@ -177,16 +177,16 @@ public class TelecomAdapter implements InCallServiceListener {
    */
   public void startForegroundNotification(int id, Notification notification) {
     Assert.isNotNull(
-        mInCallService, "No inCallService available for starting foreground notification");
-    mInCallService.startForeground(id, notification);
+        inCallService, "No inCallService available for starting foreground notification");
+    inCallService.startForeground(id, notification);
   }
 
   /**
    * Stop a started foreground notification. This does not stop {@code mInCallService} from running.
    */
   public void stopForegroundNotification() {
-    if (mInCallService != null) {
-      mInCallService.stopForeground(true /*removeNotification*/);
+    if (inCallService != null) {
+      inCallService.stopForeground(true /*removeNotification*/);
     } else {
       LogUtil.e(
           "TelecomAdapter.stopForegroundNotification",

@@ -73,18 +73,18 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
    */
   private static final String GROUP_KEY = "ExternalCallGroup";
 
-  private final Context mContext;
-  private final ContactInfoCache mContactInfoCache;
-  private Map<Call, NotificationInfo> mNotifications = new ArrayMap<>();
-  private int mNextUniqueNotificationId;
-  private ContactsPreferences mContactsPreferences;
+  private final Context context;
+  private final ContactInfoCache contactInfoCache;
+  private Map<Call, NotificationInfo> notifications = new ArrayMap<>();
+  private int nextUniqueNotificationId;
+  private ContactsPreferences contactsPreferences;
 
   /** Initializes a new instance of the external call notifier. */
   public ExternalCallNotifier(
       @NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
-    mContext = context;
-    mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
-    mContactInfoCache = contactInfoCache;
+    this.context = context;
+    contactsPreferences = ContactsPreferencesFactory.newContactsPreferences(this.context);
+    this.contactInfoCache = contactInfoCache;
   }
 
   /**
@@ -94,9 +94,9 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
   @Override
   public void onExternalCallAdded(android.telecom.Call call) {
     Log.i(this, "onExternalCallAdded " + call);
-    Assert.checkArgument(!mNotifications.containsKey(call));
-    NotificationInfo info = new NotificationInfo(call, mNextUniqueNotificationId++);
-    mNotifications.put(call, info);
+    Assert.checkArgument(!notifications.containsKey(call));
+    NotificationInfo info = new NotificationInfo(call, nextUniqueNotificationId++);
+    notifications.put(call, info);
 
     showNotifcation(info);
   }
@@ -115,8 +115,8 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
   /** Handles updates to an external call. */
   @Override
   public void onExternalCallUpdated(Call call) {
-    Assert.checkArgument(mNotifications.containsKey(call));
-    postNotification(mNotifications.get(call));
+    Assert.checkArgument(notifications.containsKey(call));
+    postNotification(notifications.get(call));
   }
 
   @Override
@@ -132,7 +132,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
    */
   @TargetApi(VERSION_CODES.N_MR1)
   public void pullExternalCall(int notificationId) {
-    for (NotificationInfo info : mNotifications.values()) {
+    for (NotificationInfo info : notifications.values()) {
       if (info.getNotificationId() == notificationId
           && CallCompat.canPullExternalCall(info.getCall())) {
         info.getCall().pullExternalCall();
@@ -153,13 +153,13 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     // call into the contacts provider for more data.
     DialerCall dialerCall =
         new DialerCall(
-            mContext,
+            context,
             new DialerCallDelegateStub(),
             info.getCall(),
             new LatencyReport(),
             false /* registerCallback */);
 
-    mContactInfoCache.findInfo(
+    contactInfoCache.findInfo(
         dialerCall,
         false /* isIncoming */,
         new ContactInfoCache.ContactInfoCacheCallback() {
@@ -169,7 +169,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
             // Ensure notification still exists as the external call could have been
             // removed during async contact info lookup.
-            if (mNotifications.containsKey(info.getCall())) {
+            if (notifications.containsKey(info.getCall())) {
               saveContactInfo(info, entry);
             }
           }
@@ -179,7 +179,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
             // Ensure notification still exists as the external call could have been
             // removed during async contact info lookup.
-            if (mNotifications.containsKey(info.getCall())) {
+            if (notifications.containsKey(info.getCall())) {
               savePhoto(info, entry);
             }
           }
@@ -188,13 +188,13 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
 
   /** Dismisses a notification for an external call. */
   private void dismissNotification(Call call) {
-    Assert.checkArgument(mNotifications.containsKey(call));
+    Assert.checkArgument(notifications.containsKey(call));
 
     // This will also dismiss the group summary if there are no more external call notifications.
     DialerNotificationManager.cancel(
-        mContext, NOTIFICATION_TAG, mNotifications.get(call).getNotificationId());
+        context, NOTIFICATION_TAG, notifications.get(call).getNotificationId());
 
-    mNotifications.remove(call);
+    notifications.remove(call);
   }
 
   /**
@@ -202,9 +202,9 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
    * the updated notification to the notification manager.
    */
   private void savePhoto(NotificationInfo info, ContactInfoCache.ContactCacheEntry entry) {
-    Bitmap largeIcon = getLargeIconToDisplay(mContext, entry, info.getCall());
+    Bitmap largeIcon = getLargeIconToDisplay(context, entry, info.getCall());
     if (largeIcon != null) {
-      largeIcon = getRoundedIcon(mContext, largeIcon);
+      largeIcon = getRoundedIcon(context, largeIcon);
     }
     info.setLargeIcon(largeIcon);
     postNotification(info);
@@ -215,14 +215,14 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
    * notification to the notification manager.
    */
   private void saveContactInfo(NotificationInfo info, ContactInfoCache.ContactCacheEntry entry) {
-    info.setContentTitle(getContentTitle(mContext, mContactsPreferences, entry, info.getCall()));
+    info.setContentTitle(getContentTitle(context, contactsPreferences, entry, info.getCall()));
     info.setPersonReference(getPersonReference(entry, info.getCall()));
     postNotification(info);
   }
 
   /** Rebuild an existing or show a new notification given {@link NotificationInfo}. */
   private void postNotification(NotificationInfo info) {
-    Notification.Builder builder = new Notification.Builder(mContext);
+    Notification.Builder builder = new Notification.Builder(context);
     // Set notification as ongoing since calls are long-running versus a point-in-time notice.
     builder.setOngoing(true);
     // Make the notification prioritized over the other normal notifications.
@@ -232,14 +232,14 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     boolean isVideoCall = VideoProfile.isVideo(info.getCall().getDetails().getVideoState());
     // Set the content ("Ongoing call on another device")
     builder.setContentText(
-        mContext.getString(
+        context.getString(
             isVideoCall
                 ? R.string.notification_external_video_call
                 : R.string.notification_external_call));
     builder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
     builder.setContentTitle(info.getContentTitle());
     builder.setLargeIcon(info.getLargeIcon());
-    builder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
+    builder.setColor(context.getResources().getColor(R.color.dialer_theme_color));
     builder.addPerson(info.getPersonReference());
     if (BuildCompat.isAtLeastO()) {
       builder.setChannelId(NotificationChannelId.DEFAULT);
@@ -253,18 +253,18 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
           new Intent(
               NotificationBroadcastReceiver.ACTION_PULL_EXTERNAL_CALL,
               null,
-              mContext,
+              context,
               NotificationBroadcastReceiver.class);
       intent.putExtra(
           NotificationBroadcastReceiver.EXTRA_NOTIFICATION_ID, info.getNotificationId());
       builder.addAction(
           new Notification.Action.Builder(
                   R.drawable.quantum_ic_call_white_24,
-                  mContext.getString(
+                  context.getString(
                       isVideoCall
                           ? R.string.notification_take_video_call
                           : R.string.notification_take_call),
-                  PendingIntent.getBroadcast(mContext, info.getNotificationId(), intent, 0))
+                  PendingIntent.getBroadcast(context, info.getNotificationId(), intent, 0))
               .build());
     }
 
@@ -273,9 +273,9 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
      * set their notification settings to 'hide sensitive content' {@see
      * Notification.Builder#setPublicVersion}.
      */
-    Notification.Builder publicBuilder = new Notification.Builder(mContext);
+    Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
-    publicBuilder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
+    publicBuilder.setColor(context.getResources().getColor(R.color.dialer_theme_color));
     if (BuildCompat.isAtLeastO()) {
       publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
     }
@@ -284,9 +284,9 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     Notification notification = builder.build();
 
     DialerNotificationManager.notify(
-        mContext, NOTIFICATION_TAG, info.getNotificationId(), notification);
+        context, NOTIFICATION_TAG, info.getNotificationId(), notification);
 
-    showGroupSummaryNotification(mContext);
+    showGroupSummaryNotification(context);
   }
 
   /**
@@ -404,47 +404,47 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
   /** Represents a call and associated cached notification data. */
   private static class NotificationInfo {
 
-    @NonNull private final Call mCall;
-    private final int mNotificationId;
-    @Nullable private String mContentTitle;
-    @Nullable private Bitmap mLargeIcon;
-    @Nullable private String mPersonReference;
+    @NonNull private final Call call;
+    private final int notificationId;
+    @Nullable private String contentTitle;
+    @Nullable private Bitmap largeIcon;
+    @Nullable private String personReference;
 
     public NotificationInfo(@NonNull Call call, int notificationId) {
-      mCall = call;
-      mNotificationId = notificationId;
+      this.call = call;
+      this.notificationId = notificationId;
     }
 
     public Call getCall() {
-      return mCall;
+      return call;
     }
 
     public int getNotificationId() {
-      return mNotificationId;
+      return notificationId;
     }
 
     public @Nullable String getContentTitle() {
-      return mContentTitle;
+      return contentTitle;
     }
 
     public void setContentTitle(@Nullable String contentTitle) {
-      mContentTitle = contentTitle;
+      this.contentTitle = contentTitle;
     }
 
     public @Nullable Bitmap getLargeIcon() {
-      return mLargeIcon;
+      return largeIcon;
     }
 
     public void setLargeIcon(@Nullable Bitmap largeIcon) {
-      mLargeIcon = largeIcon;
+      this.largeIcon = largeIcon;
     }
 
     public @Nullable String getPersonReference() {
-      return mPersonReference;
+      return personReference;
     }
 
     public void setPersonReference(@Nullable String personReference) {
-      mPersonReference = personReference;
+      this.personReference = personReference;
     }
   }
 

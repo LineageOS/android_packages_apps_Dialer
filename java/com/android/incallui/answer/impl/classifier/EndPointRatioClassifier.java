@@ -22,7 +22,7 @@ package com.android.incallui.answer.impl.classifier;
  */
 class EndPointRatioClassifier extends StrokeClassifier {
   public EndPointRatioClassifier(ClassifierData classifierData) {
-    mClassifierData = classifierData;
+    this.classifierData = classifierData;
   }
 
   @Override

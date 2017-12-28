@@ -42,24 +42,24 @@ public class CallLogCache {
   // TODO: Dialer should be fixed so as not to check isVoicemail() so often but at the time of
   // this writing, that was a much larger undertaking than creating this cache.
 
-  protected final Context mContext;
+  protected final Context context;
 
-  private boolean mHasCheckedForVideoAvailability;
-  private int mVideoAvailability;
-  private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new ArrayMap<>();
-  private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new ArrayMap<>();
-  private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new ArrayMap<>();
+  private boolean hasCheckedForVideoAvailability;
+  private int videoAvailability;
+  private final Map<PhoneAccountHandle, String> phoneAccountLabelCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Integer> phoneAccountColorCache = new ArrayMap<>();
+  private final Map<PhoneAccountHandle, Boolean> phoneAccountCallWithNoteCache = new ArrayMap<>();
 
   public CallLogCache(Context context) {
-    mContext = context;
+    this.context = context;
   }
 
   public synchronized void reset() {
-    mPhoneAccountLabelCache.clear();
-    mPhoneAccountColorCache.clear();
-    mPhoneAccountCallWithNoteCache.clear();
-    mHasCheckedForVideoAvailability = false;
-    mVideoAvailability = 0;
+    phoneAccountLabelCache.clear();
+    phoneAccountColorCache.clear();
+    phoneAccountCallWithNoteCache.clear();
+    hasCheckedForVideoAvailability = false;
+    videoAvailability = 0;
   }
 
   /**
@@ -71,7 +71,7 @@ public class CallLogCache {
     if (TextUtils.isEmpty(number)) {
       return false;
     }
-    return TelecomUtil.isVoicemailNumber(mContext, accountHandle, number.toString());
+    return TelecomUtil.isVoicemailNumber(context, accountHandle, number.toString());
   }
 
   /**
@@ -79,31 +79,31 @@ public class CallLogCache {
    * {@link android.provider.ContactsContract.CommonDataKinds.Phone#CARRIER_PRESENCE} column.
    */
   public boolean canRelyOnVideoPresence() {
-    if (!mHasCheckedForVideoAvailability) {
-      mVideoAvailability = CallUtil.getVideoCallingAvailability(mContext);
-      mHasCheckedForVideoAvailability = true;
+    if (!hasCheckedForVideoAvailability) {
+      videoAvailability = CallUtil.getVideoCallingAvailability(context);
+      hasCheckedForVideoAvailability = true;
     }
-    return (mVideoAvailability & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
+    return (videoAvailability & CallUtil.VIDEO_CALLING_PRESENCE) != 0;
   }
 
   /** Extract account label from PhoneAccount object. */
   public synchronized String getAccountLabel(PhoneAccountHandle accountHandle) {
-    if (mPhoneAccountLabelCache.containsKey(accountHandle)) {
-      return mPhoneAccountLabelCache.get(accountHandle);
+    if (phoneAccountLabelCache.containsKey(accountHandle)) {
+      return phoneAccountLabelCache.get(accountHandle);
     } else {
-      String label = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
-      mPhoneAccountLabelCache.put(accountHandle, label);
+      String label = PhoneAccountUtils.getAccountLabel(context, accountHandle);
+      phoneAccountLabelCache.put(accountHandle, label);
       return label;
     }
   }
 
   /** Extract account color from PhoneAccount object. */
   public synchronized int getAccountColor(PhoneAccountHandle accountHandle) {
-    if (mPhoneAccountColorCache.containsKey(accountHandle)) {
-      return mPhoneAccountColorCache.get(accountHandle);
+    if (phoneAccountColorCache.containsKey(accountHandle)) {
+      return phoneAccountColorCache.get(accountHandle);
     } else {
-      Integer color = PhoneAccountUtils.getAccountColor(mContext, accountHandle);
-      mPhoneAccountColorCache.put(accountHandle, color);
+      Integer color = PhoneAccountUtils.getAccountColor(context, accountHandle);
+      phoneAccountColorCache.put(accountHandle, color);
       return color;
     }
   }
@@ -116,12 +116,12 @@ public class CallLogCache {
    * @return {@code true} if calling with a note is supported, {@code false} otherwise.
    */
   public synchronized boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle) {
-    if (mPhoneAccountCallWithNoteCache.containsKey(accountHandle)) {
-      return mPhoneAccountCallWithNoteCache.get(accountHandle);
+    if (phoneAccountCallWithNoteCache.containsKey(accountHandle)) {
+      return phoneAccountCallWithNoteCache.get(accountHandle);
     } else {
       Boolean supportsCallWithNote =
-          PhoneAccountUtils.getAccountSupportsCallSubject(mContext, accountHandle);
-      mPhoneAccountCallWithNoteCache.put(accountHandle, supportsCallWithNote);
+          PhoneAccountUtils.getAccountSupportsCallSubject(context, accountHandle);
+      phoneAccountCallWithNoteCache.put(accountHandle, supportsCallWithNote);
       return supportsCallWithNote;
     }
   }

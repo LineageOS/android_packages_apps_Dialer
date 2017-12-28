@@ -32,28 +32,28 @@ public class PostCharDialogFragment extends DialogFragment {
   private static final String STATE_CALL_ID = "CALL_ID";
   private static final String STATE_POST_CHARS = "POST_CHARS";
 
-  private String mCallId;
-  private String mPostDialStr;
+  private String callId;
+  private String postDialStr;
 
   public PostCharDialogFragment() {}
 
   public PostCharDialogFragment(String callId, String postDialStr) {
-    mCallId = callId;
-    mPostDialStr = postDialStr;
+    this.callId = callId;
+    this.postDialStr = postDialStr;
   }
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     super.onCreateDialog(savedInstanceState);
 
-    if (mPostDialStr == null && savedInstanceState != null) {
-      mCallId = savedInstanceState.getString(STATE_CALL_ID);
-      mPostDialStr = savedInstanceState.getString(STATE_POST_CHARS);
+    if (postDialStr == null && savedInstanceState != null) {
+      callId = savedInstanceState.getString(STATE_CALL_ID);
+      postDialStr = savedInstanceState.getString(STATE_POST_CHARS);
     }
 
     final StringBuilder buf = new StringBuilder();
     buf.append(getResources().getText(R.string.wait_prompt_str));
-    buf.append(mPostDialStr);
+    buf.append(postDialStr);
 
     final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     builder.setMessage(buf.toString());
@@ -63,7 +63,7 @@ public class PostCharDialogFragment extends DialogFragment {
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int whichButton) {
-            TelecomAdapter.getInstance().postDialContinue(mCallId, true);
+            TelecomAdapter.getInstance().postDialContinue(callId, true);
           }
         });
     builder.setNegativeButton(
@@ -83,14 +83,14 @@ public class PostCharDialogFragment extends DialogFragment {
   public void onCancel(DialogInterface dialog) {
     super.onCancel(dialog);
 
-    TelecomAdapter.getInstance().postDialContinue(mCallId, false);
+    TelecomAdapter.getInstance().postDialContinue(callId, false);
   }
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
 
-    outState.putString(STATE_CALL_ID, mCallId);
-    outState.putString(STATE_POST_CHARS, mPostDialStr);
+    outState.putString(STATE_CALL_ID, callId);
+    outState.putString(STATE_POST_CHARS, postDialStr);
   }
 }

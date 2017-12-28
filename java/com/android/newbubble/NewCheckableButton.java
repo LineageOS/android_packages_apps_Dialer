@@ -33,7 +33,7 @@ import android.widget.Checkable;
  */
 public class NewCheckableButton extends AppCompatButton implements Checkable {
 
-  private boolean mChecked;
+  private boolean checked;
 
   public NewCheckableButton(Context context) {
     this(context, null);
@@ -67,8 +67,8 @@ public class NewCheckableButton extends AppCompatButton implements Checkable {
 
   @Override
   public void setChecked(boolean checked) {
-    if (mChecked != checked) {
-      mChecked = checked;
+    if (this.checked != checked) {
+      this.checked = checked;
       int newColor =
           checked
               ? getContext().getColor(R.color.bubble_button_color_blue)
@@ -80,11 +80,11 @@ public class NewCheckableButton extends AppCompatButton implements Checkable {
 
   @Override
   public boolean isChecked() {
-    return mChecked;
+    return checked;
   }
 
   @Override
   public void toggle() {
-    setChecked(!mChecked);
+    setChecked(!checked);
   }
 }

@@ -36,7 +36,7 @@ public class CameraMediaChooserView extends FrameLayout {
 
   // True if we have at least queued an update to the view tree to support software rendering
   // fallback
-  private boolean mIsSoftwareFallbackActive;
+  private boolean isSoftwareFallbackActive;
 
   public CameraMediaChooserView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
@@ -80,8 +80,8 @@ public class CameraMediaChooserView extends FrameLayout {
     super.onDraw(canvas);
     // If the canvas isn't hardware accelerated, we have to replace the HardwareCameraPreview
     // with a SoftwareCameraPreview which supports software rendering
-    if (!canvas.isHardwareAccelerated() && !mIsSoftwareFallbackActive) {
-      mIsSoftwareFallbackActive = true;
+    if (!canvas.isHardwareAccelerated() && !isSoftwareFallbackActive) {
+      isSoftwareFallbackActive = true;
       // Post modifying the tree since we can't modify the view tree during a draw pass
       post(
           new Runnable() {
