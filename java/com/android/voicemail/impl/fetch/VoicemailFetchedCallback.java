@@ -40,16 +40,16 @@ import org.apache.commons.io.IOUtils;
 public class VoicemailFetchedCallback {
   private static final String TAG = "VoicemailFetchedCallback";
 
-  private final Context mContext;
-  private final ContentResolver mContentResolver;
-  private final Uri mUri;
-  private final PhoneAccountHandle mPhoneAccountHandle;
+  private final Context context;
+  private final ContentResolver contentResolver;
+  private final Uri uri;
+  private final PhoneAccountHandle phoneAccountHandle;
 
   public VoicemailFetchedCallback(Context context, Uri uri, PhoneAccountHandle phoneAccountHandle) {
-    mContext = context;
-    mContentResolver = context.getContentResolver();
-    mUri = uri;
-    mPhoneAccountHandle = phoneAccountHandle;
+    this.context = context;
+    contentResolver = context.getContentResolver();
+    this.uri = uri;
+    this.phoneAccountHandle = phoneAccountHandle;
   }
 
   /**
@@ -65,26 +65,26 @@ public class VoicemailFetchedCallback {
       ContentValues values = new ContentValues();
       values.put(
           Voicemails.TRANSCRIPTION,
-          mContext.getString(
+          context.getString(
               R.string.vvm_unsupported_message_format,
-              mContext
+              context
                   .getSystemService(TelecomManager.class)
-                  .getVoiceMailNumber(mPhoneAccountHandle)));
+                  .getVoiceMailNumber(phoneAccountHandle)));
       updateVoicemail(values);
       return;
     }
 
-    VvmLog.d(TAG, String.format("Writing new voicemail content: %s", mUri));
+    VvmLog.d(TAG, String.format("Writing new voicemail content: %s", uri));
     OutputStream outputStream = null;
 
     try {
-      outputStream = mContentResolver.openOutputStream(mUri);
+      outputStream = contentResolver.openOutputStream(uri);
       byte[] inputBytes = voicemailPayload.getBytes();
       if (inputBytes != null) {
         outputStream.write(inputBytes);
       }
     } catch (IOException e) {
-      VvmLog.w(TAG, String.format("File not found for %s", mUri));
+      VvmLog.w(TAG, String.format("File not found for %s", uri));
       return;
     } finally {
       IOUtils.closeQuietly(outputStream);
@@ -98,15 +98,15 @@ public class VoicemailFetchedCallback {
       ThreadUtil.postOnUiThread(
           () -> {
             if (!TranscriptionService.scheduleNewVoicemailTranscriptionJob(
-                mContext, mUri, mPhoneAccountHandle, true)) {
-              VvmLog.w(TAG, String.format("Failed to schedule transcription for %s", mUri));
+                context, uri, phoneAccountHandle, true)) {
+              VvmLog.w(TAG, String.format("Failed to schedule transcription for %s", uri));
             }
           });
     }
   }
 
   private boolean updateVoicemail(ContentValues values) {
-    int updatedCount = mContentResolver.update(mUri, values, null, null);
+    int updatedCount = contentResolver.update(uri, values, null, null);
     if (updatedCount != 1) {
       VvmLog.e(TAG, "Updating voicemail should have updated 1 row, was: " + updatedCount);
       return false;

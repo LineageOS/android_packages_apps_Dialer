@@ -32,23 +32,23 @@ public class RetryPolicy implements Policy {
   private static final String TAG = "RetryPolicy";
   private static final String EXTRA_RETRY_COUNT = "extra_retry_count";
 
-  private final int mRetryLimit;
-  private final int mRetryDelayMillis;
+  private final int retryLimit;
+  private final int retryDelayMillis;
 
-  private BaseTask mTask;
+  private BaseTask task;
 
-  private int mRetryCount;
-  private boolean mFailed;
+  private int retryCount;
+  private boolean failed;
 
-  private VoicemailStatus.DeferredEditor mVoicemailStatusEditor;
+  private VoicemailStatus.DeferredEditor voicemailStatusEditor;
 
   public RetryPolicy(int retryLimit, int retryDelayMillis) {
-    mRetryLimit = retryLimit;
-    mRetryDelayMillis = retryDelayMillis;
+    this.retryLimit = retryLimit;
+    this.retryDelayMillis = retryDelayMillis;
   }
 
   private boolean hasMoreRetries() {
-    return mRetryCount < mRetryLimit;
+    return retryCount < retryLimit;
   }
 
   /**
@@ -57,18 +57,23 @@ public class RetryPolicy implements Policy {
    * the task is successful or there are no retries left.
    */
   public VoicemailStatus.Editor getVoicemailStatusEditor() {
-    return mVoicemailStatusEditor;
+    return voicemailStatusEditor;
   }
 
   @Override
   public void onCreate(BaseTask task, Bundle extras) {
-    mTask = task;
-    mRetryCount = extras.getInt(EXTRA_RETRY_COUNT, 0);
-    if (mRetryCount > 0) {
+    this.task = task;
+    retryCount = extras.getInt(EXTRA_RETRY_COUNT, 0);
+    if (retryCount > 0) {
       VvmLog.i(
           TAG,
-          "retry #" + mRetryCount + " for " + mTask + " queued, executing in " + mRetryDelayMillis);
-      mTask.setExecutionTime(mTask.getTimeMillis() + mRetryDelayMillis);
+          "retry #"
+              + retryCount
+              + " for "
+              + this.task
+              + " queued, executing in "
+              + retryDelayMillis);
+      this.task.setExecutionTime(this.task.getTimeMillis() + retryDelayMillis);
     }
     PhoneAccountHandle phoneAccountHandle = task.getPhoneAccountHandle();
     if (phoneAccountHandle == null) {
@@ -76,7 +81,7 @@ public class RetryPolicy implements Policy {
       // This should never happen, but continue on if it does. The status write will be
       // discarded.
     }
-    mVoicemailStatusEditor = VoicemailStatus.deferredEdit(task.getContext(), phoneAccountHandle);
+    voicemailStatusEditor = VoicemailStatus.deferredEdit(task.getContext(), phoneAccountHandle);
   }
 
   @Override
@@ -84,27 +89,27 @@ public class RetryPolicy implements Policy {
 
   @Override
   public void onCompleted() {
-    if (!mFailed || !hasMoreRetries()) {
-      if (!mFailed) {
-        VvmLog.i(TAG, mTask + " completed successfully");
+    if (!failed || !hasMoreRetries()) {
+      if (!failed) {
+        VvmLog.i(TAG, task + " completed successfully");
       }
       if (!hasMoreRetries()) {
-        VvmLog.i(TAG, "Retry limit for " + mTask + " reached");
+        VvmLog.i(TAG, "Retry limit for " + task + " reached");
       }
-      VvmLog.i(TAG, "committing deferred status: " + mVoicemailStatusEditor.getValues());
-      mVoicemailStatusEditor.deferredApply();
+      VvmLog.i(TAG, "committing deferred status: " + voicemailStatusEditor.getValues());
+      voicemailStatusEditor.deferredApply();
       return;
     }
-    VvmLog.i(TAG, "discarding deferred status: " + mVoicemailStatusEditor.getValues());
-    Intent intent = mTask.createRestartIntent();
-    intent.putExtra(EXTRA_RETRY_COUNT, mRetryCount + 1);
+    VvmLog.i(TAG, "discarding deferred status: " + voicemailStatusEditor.getValues());
+    Intent intent = task.createRestartIntent();
+    intent.putExtra(EXTRA_RETRY_COUNT, retryCount + 1);
 
-    mTask.getContext().sendBroadcast(intent);
+    task.getContext().sendBroadcast(intent);
   }
 
   @Override
   public void onFail() {
-    mFailed = true;
+    failed = true;
   }
 
   @Override

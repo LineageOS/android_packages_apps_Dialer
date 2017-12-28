@@ -24,27 +24,27 @@ import java.io.UnsupportedEncodingException;
 /** Subclass of {@link ImapString} used for non literals. */
 public class ImapSimpleString extends ImapString {
   private final String TAG = "ImapSimpleString";
-  private String mString;
+  private String string;
 
   /* package */ ImapSimpleString(String string) {
-    mString = (string != null) ? string : "";
+    this.string = (string != null) ? string : "";
   }
 
   @Override
   public void destroy() {
-    mString = null;
+    string = null;
     super.destroy();
   }
 
   @Override
   public String getString() {
-    return mString;
+    return string;
   }
 
   @Override
   public InputStream getAsStream() {
     try {
-      return new ByteArrayInputStream(mString.getBytes("US-ASCII"));
+      return new ByteArrayInputStream(string.getBytes("US-ASCII"));
     } catch (UnsupportedEncodingException e) {
       VvmLog.e(TAG, "Unsupported encoding: ", e);
     }
@@ -54,6 +54,6 @@ public class ImapSimpleString extends ImapString {
   @Override
   public String toString() {
     // Purposefully not return just mString, in order to prevent using it instead of getString.
-    return "\"" + mString + "\"";
+    return "\"" + string + "\"";
   }
 }

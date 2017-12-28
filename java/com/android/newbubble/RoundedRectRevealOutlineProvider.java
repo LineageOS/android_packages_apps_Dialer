@@ -32,38 +32,38 @@ import android.view.ViewOutlineProvider;
  * rounded rectangle.
  */
 public class RoundedRectRevealOutlineProvider extends ViewOutlineProvider {
-  private final float mStartRadius;
-  private final float mEndRadius;
+  private final float startRadius;
+  private final float endRadius;
 
-  private final Rect mStartRect;
-  private final Rect mEndRect;
+  private final Rect startRect;
+  private final Rect endRect;
 
-  private final Rect mOutline;
-  private float mOutlineRadius;
+  private final Rect outline;
+  private float outlineRadius;
 
   public RoundedRectRevealOutlineProvider(
       float startRadius, float endRadius, Rect startRect, Rect endRect) {
-    mStartRadius = startRadius;
-    mEndRadius = endRadius;
-    mStartRect = startRect;
-    mEndRect = endRect;
+    this.startRadius = startRadius;
+    this.endRadius = endRadius;
+    this.startRect = startRect;
+    this.endRect = endRect;
 
-    mOutline = new Rect();
+    outline = new Rect();
   }
 
   @Override
   public void getOutline(View v, Outline outline) {
-    outline.setRoundRect(mOutline, mOutlineRadius);
+    outline.setRoundRect(this.outline, outlineRadius);
   }
 
   /** Sets the progress, from 0 to 1, of the reveal animation. */
   public void setProgress(float progress) {
-    mOutlineRadius = (1 - progress) * mStartRadius + progress * mEndRadius;
+    outlineRadius = (1 - progress) * startRadius + progress * endRadius;
 
-    mOutline.left = (int) ((1 - progress) * mStartRect.left + progress * mEndRect.left);
-    mOutline.top = (int) ((1 - progress) * mStartRect.top + progress * mEndRect.top);
-    mOutline.right = (int) ((1 - progress) * mStartRect.right + progress * mEndRect.right);
-    mOutline.bottom = (int) ((1 - progress) * mStartRect.bottom + progress * mEndRect.bottom);
+    outline.left = (int) ((1 - progress) * startRect.left + progress * endRect.left);
+    outline.top = (int) ((1 - progress) * startRect.top + progress * endRect.top);
+    outline.right = (int) ((1 - progress) * startRect.right + progress * endRect.right);
+    outline.bottom = (int) ((1 - progress) * startRect.bottom + progress * endRect.bottom);
   }
 
   ValueAnimator createRevealAnimator(final View revealView, boolean isReversed) {
@@ -72,7 +72,7 @@ public class RoundedRectRevealOutlineProvider extends ViewOutlineProvider {
 
     valueAnimator.addListener(
         new AnimatorListenerAdapter() {
-          private boolean mWasCanceled = false;
+          private boolean wasCanceled = false;
 
           @Override
           public void onAnimationStart(Animator animation) {
@@ -82,12 +82,12 @@ public class RoundedRectRevealOutlineProvider extends ViewOutlineProvider {
 
           @Override
           public void onAnimationCancel(Animator animation) {
-            mWasCanceled = true;
+            wasCanceled = true;
           }
 
           @Override
           public void onAnimationEnd(Animator animation) {
-            if (!mWasCanceled) {
+            if (!wasCanceled) {
               revealView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
               revealView.setClipToOutline(false);
             }

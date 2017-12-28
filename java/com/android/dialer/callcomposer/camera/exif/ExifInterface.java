@@ -61,21 +61,21 @@ public class ExifInterface {
   static final int TAG_INTEROPERABILITY_IFD = defineTag(IfdId.TYPE_IFD_EXIF, (short) 0xA005);
 
   /** Tags that contain offset markers. These are included in the banned defines. */
-  private static HashSet<Short> sOffsetTags = new HashSet<>();
+  private static HashSet<Short> offsetTags = new HashSet<>();
 
   static {
-    sOffsetTags.add(getTrueTagKey(TAG_GPS_IFD));
-    sOffsetTags.add(getTrueTagKey(TAG_EXIF_IFD));
-    sOffsetTags.add(getTrueTagKey(TAG_JPEG_INTERCHANGE_FORMAT));
-    sOffsetTags.add(getTrueTagKey(TAG_INTEROPERABILITY_IFD));
-    sOffsetTags.add(getTrueTagKey(TAG_STRIP_OFFSETS));
+    offsetTags.add(getTrueTagKey(TAG_GPS_IFD));
+    offsetTags.add(getTrueTagKey(TAG_EXIF_IFD));
+    offsetTags.add(getTrueTagKey(TAG_JPEG_INTERCHANGE_FORMAT));
+    offsetTags.add(getTrueTagKey(TAG_INTEROPERABILITY_IFD));
+    offsetTags.add(getTrueTagKey(TAG_STRIP_OFFSETS));
   }
 
   private static final String NULL_ARGUMENT_STRING = "Argument is null";
 
   private static final String GPS_DATE_FORMAT_STR = "yyyy:MM:dd";
 
-  private ExifData mData = new ExifData();
+  private ExifData data = new ExifData();
 
   @SuppressLint("SimpleDateFormat")
   public ExifInterface() {
@@ -110,7 +110,7 @@ public class ExifInterface {
     } catch (ExifInvalidFormatException e) {
       throw new IOException("Invalid exif format : " + e);
     }
-    mData = d;
+    data = d;
   }
 
   /** Returns the TID for a tag constant. */
@@ -151,17 +151,17 @@ public class ExifInterface {
    * @return true if the TID is that of an offset tag.
    */
   static boolean isOffsetTag(short tag) {
-    return sOffsetTags.contains(tag);
+    return offsetTags.contains(tag);
   }
 
-  private SparseIntArray mTagInfo = null;
+  private SparseIntArray tagInfo = null;
 
   SparseIntArray getTagInfo() {
-    if (mTagInfo == null) {
-      mTagInfo = new SparseIntArray();
+    if (tagInfo == null) {
+      tagInfo = new SparseIntArray();
       initTagInfo();
     }
-    return mTagInfo;
+    return tagInfo;
   }
 
   private void initTagInfo() {
@@ -173,24 +173,24 @@ public class ExifInterface {
     // IFD0 tags
     int[] ifdAllowedIfds = {IfdId.TYPE_IFD_0, IfdId.TYPE_IFD_1};
     int ifdFlags = getFlagsFromAllowedIfds(ifdAllowedIfds) << 24;
-    mTagInfo.put(ExifInterface.TAG_STRIP_OFFSETS, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16);
-    mTagInfo.put(ExifInterface.TAG_EXIF_IFD, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
-    mTagInfo.put(ExifInterface.TAG_GPS_IFD, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
-    mTagInfo.put(ExifInterface.TAG_ORIENTATION, ifdFlags | ExifTag.TYPE_UNSIGNED_SHORT << 16 | 1);
-    mTagInfo.put(ExifInterface.TAG_STRIP_BYTE_COUNTS, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16);
+    tagInfo.put(ExifInterface.TAG_STRIP_OFFSETS, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16);
+    tagInfo.put(ExifInterface.TAG_EXIF_IFD, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
+    tagInfo.put(ExifInterface.TAG_GPS_IFD, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
+    tagInfo.put(ExifInterface.TAG_ORIENTATION, ifdFlags | ExifTag.TYPE_UNSIGNED_SHORT << 16 | 1);
+    tagInfo.put(ExifInterface.TAG_STRIP_BYTE_COUNTS, ifdFlags | ExifTag.TYPE_UNSIGNED_LONG << 16);
     // IFD1 tags
     int[] ifd1AllowedIfds = {IfdId.TYPE_IFD_1};
     int ifdFlags1 = getFlagsFromAllowedIfds(ifd1AllowedIfds) << 24;
-    mTagInfo.put(
+    tagInfo.put(
         ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT,
         ifdFlags1 | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
-    mTagInfo.put(
+    tagInfo.put(
         ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT_LENGTH,
         ifdFlags1 | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
     // Exif tags
     int[] exifAllowedIfds = {IfdId.TYPE_IFD_EXIF};
     int exifFlags = getFlagsFromAllowedIfds(exifAllowedIfds) << 24;
-    mTagInfo.put(
+    tagInfo.put(
         ExifInterface.TAG_INTEROPERABILITY_IFD, exifFlags | ExifTag.TYPE_UNSIGNED_LONG << 16 | 1);
   }
 
@@ -232,7 +232,7 @@ public class ExifInterface {
     if (!ExifTag.isValidIfd(ifdId)) {
       return null;
     }
-    return mData.getTag(getTrueTagKey(tagId), ifdId);
+    return data.getTag(getTrueTagKey(tagId), ifdId);
   }
 
   public Integer getTagIntValue(int tagId) {
@@ -328,7 +328,7 @@ public class ExifInterface {
 
   /** Clears this ExifInterface object's existing exif tags. */
   public void clearExif() {
-    mData = new ExifData();
+    data = new ExifData();
   }
 
   /**
@@ -340,7 +340,7 @@ public class ExifInterface {
    * @return the previous ExifTag with the same TID and IFD or null if none exists.
    */
   public ExifTag setTag(ExifTag tag) {
-    return mData.addTag(tag);
+    return data.addTag(tag);
   }
 
   /**

@@ -123,30 +123,30 @@ public enum OmtpEvents {
     public static final int OTHER = 4;
   }
 
-  private final int mType;
-  private final boolean mIsSuccess;
+  private final int type;
+  private final boolean isSuccess;
 
   OmtpEvents(int type, boolean isSuccess) {
-    mType = type;
-    mIsSuccess = isSuccess;
+    this.type = type;
+    this.isSuccess = isSuccess;
   }
 
   OmtpEvents(int type) {
-    mType = type;
-    mIsSuccess = false;
+    this.type = type;
+    isSuccess = false;
   }
 
   OmtpEvents() {
-    mType = Type.OTHER;
-    mIsSuccess = false;
+    type = Type.OTHER;
+    isSuccess = false;
   }
 
   @Type.Values
   public int getType() {
-    return mType;
+    return type;
   }
 
   public boolean isSuccess() {
-    return mIsSuccess;
+    return isSuccess;
   }
 }

@@ -51,14 +51,14 @@ public class ContactInfoCache {
   private static final int START_THREAD = 2;
   private static final int START_PROCESSING_REQUESTS_DELAY_MS = 1000;
 
-  private final ExpirableCache<NumberWithCountryIso, ContactInfo> mCache;
-  private final ContactInfoHelper mContactInfoHelper;
-  private final OnContactInfoChangedListener mOnContactInfoChangedListener;
-  private final BlockingQueue<ContactInfoRequest> mUpdateRequests;
-  private final Handler mHandler;
-  private CequintCallerIdManager mCequintCallerIdManager;
-  private QueryThread mContactInfoQueryThread;
-  private volatile boolean mRequestProcessingDisabled = false;
+  private final ExpirableCache<NumberWithCountryIso, ContactInfo> cache;
+  private final ContactInfoHelper contactInfoHelper;
+  private final OnContactInfoChangedListener onContactInfoChangedListener;
+  private final BlockingQueue<ContactInfoRequest> updateRequests;
+  private final Handler handler;
+  private CequintCallerIdManager cequintCallerIdManager;
+  private QueryThread contactInfoQueryThread;
+  private volatile boolean requestProcessingDisabled = false;
 
   private static class InnerHandler extends Handler {
 
@@ -76,7 +76,7 @@ public class ContactInfoCache {
       }
       switch (msg.what) {
         case REDRAW:
-          reference.mOnContactInfoChangedListener.onContactInfoChanged();
+          reference.onContactInfoChangedListener.onContactInfoChanged();
           break;
         case START_THREAD:
           reference.startRequestProcessing();
@@ -90,15 +90,15 @@ public class ContactInfoCache {
       @NonNull ExpirableCache<NumberWithCountryIso, ContactInfo> internalCache,
       @NonNull ContactInfoHelper contactInfoHelper,
       @NonNull OnContactInfoChangedListener listener) {
-    mCache = internalCache;
-    mContactInfoHelper = contactInfoHelper;
-    mOnContactInfoChangedListener = listener;
-    mUpdateRequests = new PriorityBlockingQueue<>();
-    mHandler = new InnerHandler(new WeakReference<>(this));
+    cache = internalCache;
+    this.contactInfoHelper = contactInfoHelper;
+    onContactInfoChangedListener = listener;
+    updateRequests = new PriorityBlockingQueue<>();
+    handler = new InnerHandler(new WeakReference<>(this));
   }
 
   public void setCequintCallerIdManager(CequintCallerIdManager cequintCallerIdManager) {
-    mCequintCallerIdManager = cequintCallerIdManager;
+    this.cequintCallerIdManager = cequintCallerIdManager;
   }
 
   public ContactInfo getValue(
@@ -107,14 +107,14 @@ public class ContactInfoCache {
       ContactInfo callLogContactInfo,
       boolean remoteLookupIfNotFoundLocally) {
     NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-    ExpirableCache.CachedValue<ContactInfo> cachedInfo = mCache.getCachedValue(numberCountryIso);
+    ExpirableCache.CachedValue<ContactInfo> cachedInfo = cache.getCachedValue(numberCountryIso);
     ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
     int requestType =
         remoteLookupIfNotFoundLocally
             ? ContactInfoRequest.TYPE_LOCAL_AND_REMOTE
             : ContactInfoRequest.TYPE_LOCAL;
     if (cachedInfo == null) {
-      mCache.put(numberCountryIso, ContactInfo.EMPTY);
+      cache.put(numberCountryIso, ContactInfo.EMPTY);
       // Use the cached contact info from the call log.
       info = callLogContactInfo;
       // The db request should happen on a non-UI thread.
@@ -161,18 +161,18 @@ public class ContactInfoCache {
         request.type);
     ContactInfo info;
     if (request.isLocalRequest()) {
-      info = mContactInfoHelper.lookupNumber(request.number, request.countryIso);
+      info = contactInfoHelper.lookupNumber(request.number, request.countryIso);
       if (info != null && !info.contactExists) {
         // TODO(wangqi): Maybe skip look up if it's already available in cached number lookup
         // service.
         long start = SystemClock.elapsedRealtime();
-        mContactInfoHelper.updateFromCequintCallerId(mCequintCallerIdManager, info, request.number);
+        contactInfoHelper.updateFromCequintCallerId(cequintCallerIdManager, info, request.number);
         long time = SystemClock.elapsedRealtime() - start;
         LogUtil.d(
             "ContactInfoCache.queryContactInfo", "Cequint Caller Id look up takes %d ms", time);
       }
       if (request.type == ContactInfoRequest.TYPE_LOCAL_AND_REMOTE) {
-        if (!mContactInfoHelper.hasName(info)) {
+        if (!contactInfoHelper.hasName(info)) {
           enqueueRequest(
               request.number,
               request.countryIso,
@@ -183,7 +183,7 @@ public class ContactInfoCache {
         }
       }
     } else {
-      info = mContactInfoHelper.lookupNumberInRemoteDirectory(request.number, request.countryIso);
+      info = contactInfoHelper.lookupNumberInRemoteDirectory(request.number, request.countryIso);
     }
 
     if (info == null) {
@@ -195,7 +195,7 @@ public class ContactInfoCache {
     // view.
     NumberWithCountryIso numberCountryIso =
         new NumberWithCountryIso(request.number, request.countryIso);
-    ContactInfo existingInfo = mCache.getPossiblyExpired(numberCountryIso);
+    ContactInfo existingInfo = cache.getPossiblyExpired(numberCountryIso);
 
     final boolean isRemoteSource = info.sourceType != Type.UNKNOWN_SOURCE_TYPE;
 
@@ -210,14 +210,14 @@ public class ContactInfoCache {
 
     // Store the data in the cache so that the UI thread can use to display it. Store it
     // even if it has not changed so that it is marked as not expired.
-    mCache.put(numberCountryIso, info);
+    cache.put(numberCountryIso, info);
 
     // Update the call log even if the cache it is up-to-date: it is possible that the cache
     // contains the value from a different call log entry.
-    mContactInfoHelper.updateCallLogContactInfo(
+    contactInfoHelper.updateCallLogContactInfo(
         request.number, request.countryIso, info, request.callLogInfo);
     if (!request.isLocalRequest()) {
-      mContactInfoHelper.updateCachedNumberLookupService(info);
+      contactInfoHelper.updateCachedNumberLookupService(info);
     }
     return updated;
   }
@@ -229,9 +229,9 @@ public class ContactInfoCache {
   public void start() {
     // Schedule a thread-creation message if the thread hasn't been created yet, as an
     // optimization to queue fewer messages.
-    if (mContactInfoQueryThread == null) {
+    if (contactInfoQueryThread == null) {
       // TODO: Check whether this delay before starting to process is necessary.
-      mHandler.sendEmptyMessageDelayed(START_THREAD, START_PROCESSING_REQUESTS_DELAY_MS);
+      handler.sendEmptyMessageDelayed(START_THREAD, START_PROCESSING_REQUESTS_DELAY_MS);
     }
   }
 
@@ -249,22 +249,22 @@ public class ContactInfoCache {
    */
   private synchronized void startRequestProcessing() {
     // For unit-testing.
-    if (mRequestProcessingDisabled) {
+    if (requestProcessingDisabled) {
       return;
     }
 
     // If a thread is already started, don't start another.
-    if (mContactInfoQueryThread != null) {
+    if (contactInfoQueryThread != null) {
       return;
     }
 
-    mContactInfoQueryThread = new QueryThread();
-    mContactInfoQueryThread.setPriority(Thread.MIN_PRIORITY);
-    mContactInfoQueryThread.start();
+    contactInfoQueryThread = new QueryThread();
+    contactInfoQueryThread.setPriority(Thread.MIN_PRIORITY);
+    contactInfoQueryThread.start();
   }
 
   public void invalidate() {
-    mCache.expireAll();
+    cache.expireAll();
     stopRequestProcessing();
   }
 
@@ -274,12 +274,12 @@ public class ContactInfoCache {
    */
   private synchronized void stopRequestProcessing() {
     // Remove any pending requests to start the processing thread.
-    mHandler.removeMessages(START_THREAD);
-    if (mContactInfoQueryThread != null) {
+    handler.removeMessages(START_THREAD);
+    if (contactInfoQueryThread != null) {
       // Stop the thread; we are finished with it.
-      mContactInfoQueryThread.stopProcessing();
-      mContactInfoQueryThread.interrupt();
-      mContactInfoQueryThread = null;
+      contactInfoQueryThread.stopProcessing();
+      contactInfoQueryThread.interrupt();
+      contactInfoQueryThread = null;
     }
   }
 
@@ -299,8 +299,8 @@ public class ContactInfoCache {
       boolean immediate,
       @ContactInfoRequest.TYPE int type) {
     ContactInfoRequest request = new ContactInfoRequest(number, countryIso, callLogInfo, type);
-    if (!mUpdateRequests.contains(request)) {
-      mUpdateRequests.offer(request);
+    if (!updateRequests.contains(request)) {
+      updateRequests.offer(request);
     }
 
     if (immediate) {
@@ -318,13 +318,13 @@ public class ContactInfoCache {
 
   /** Sets whether processing of requests for contact details should be enabled. */
   public void disableRequestProcessing() {
-    mRequestProcessingDisabled = true;
+    requestProcessingDisabled = true;
   }
 
   @VisibleForTesting
   public void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
     NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-    mCache.put(numberCountryIso, contactInfo);
+    cache.put(numberCountryIso, contactInfo);
   }
 
   public interface OnContactInfoChangedListener {
@@ -337,14 +337,14 @@ public class ContactInfoCache {
    */
   private class QueryThread extends Thread {
 
-    private volatile boolean mDone = false;
+    private volatile boolean done = false;
 
     public QueryThread() {
       super("ContactInfoCache.QueryThread");
     }
 
     public void stopProcessing() {
-      mDone = true;
+      done = true;
     }
 
     @Override
@@ -352,18 +352,18 @@ public class ContactInfoCache {
       boolean shouldRedraw = false;
       while (true) {
         // Check if thread is finished, and if so return immediately.
-        if (mDone) {
+        if (done) {
           return;
         }
 
         try {
-          ContactInfoRequest request = mUpdateRequests.take();
+          ContactInfoRequest request = updateRequests.take();
           shouldRedraw |= queryContactInfo(request);
           if (shouldRedraw
-              && (mUpdateRequests.isEmpty()
-                  || (request.isLocalRequest() && !mUpdateRequests.peek().isLocalRequest()))) {
+              && (updateRequests.isEmpty()
+                  || (request.isLocalRequest() && !updateRequests.peek().isLocalRequest()))) {
             shouldRedraw = false;
-            mHandler.sendEmptyMessage(REDRAW);
+            handler.sendEmptyMessage(REDRAW);
           }
         } catch (InterruptedException e) {
           // Ignore and attempt to continue processing requests

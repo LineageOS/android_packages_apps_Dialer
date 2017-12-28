@@ -48,7 +48,7 @@ public class RegularSearchFragment extends SearchFragment
   public static final int PERMISSION_REQUEST_CODE = 1;
 
   private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
-  protected String mPermissionToRequest;
+  protected String permissionToRequest;
 
   private DialerExecutor<CachedContactInfo> addContactTask;
 
@@ -104,7 +104,7 @@ public class RegularSearchFragment extends SearchFragment
 
   @Override
   protected void setupEmptyView() {
-    if (mEmptyView != null && getActivity() != null) {
+    if (emptyView != null && getActivity() != null) {
       final int imageResource;
       final int actionLabelResource;
       final int descriptionResource;
@@ -114,20 +114,20 @@ public class RegularSearchFragment extends SearchFragment
         actionLabelResource = R.string.permission_single_turn_on;
         descriptionResource = R.string.permission_no_search;
         listener = this;
-        mPermissionToRequest = READ_CONTACTS;
+        permissionToRequest = READ_CONTACTS;
       } else {
         imageResource = EmptyContentView.NO_IMAGE;
         actionLabelResource = EmptyContentView.NO_LABEL;
         descriptionResource = EmptyContentView.NO_LABEL;
         listener = null;
-        mPermissionToRequest = null;
+        permissionToRequest = null;
       }
 
-      mEmptyView.setImage(imageResource);
-      mEmptyView.setActionLabel(actionLabelResource);
-      mEmptyView.setDescription(descriptionResource);
+      emptyView.setImage(imageResource);
+      emptyView.setActionLabel(actionLabelResource);
+      emptyView.setDescription(descriptionResource);
       if (listener != null) {
-        mEmptyView.setActionClickedListener(listener);
+        emptyView.setActionClickedListener(listener);
       }
     }
   }
@@ -139,7 +139,7 @@ public class RegularSearchFragment extends SearchFragment
       return;
     }
 
-    if (READ_CONTACTS.equals(mPermissionToRequest)) {
+    if (READ_CONTACTS.equals(permissionToRequest)) {
       String[] deniedPermissions =
           PermissionsUtil.getPermissionsCurrentlyDenied(
               getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);

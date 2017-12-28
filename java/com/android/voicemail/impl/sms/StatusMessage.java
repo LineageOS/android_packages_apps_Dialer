@@ -32,66 +32,66 @@ public class StatusMessage {
   // to be useful for initial omtp source implementation.
   // lang, g_len, vs_len, pw_len, pm, gm, vtc, vt
 
-  private final String mProvisioningStatus;
-  private final String mStatusReturnCode;
-  private final String mSubscriptionUrl;
-  private final String mServerAddress;
-  private final String mTuiAccessNumber;
-  private final String mClientSmsDestinationNumber;
-  private final String mImapPort;
-  private final String mImapUserName;
-  private final String mImapPassword;
-  private final String mSmtpPort;
-  private final String mSmtpUserName;
-  private final String mSmtpPassword;
-  private final String mTuiPasswordLength;
+  private final String provisioningStatus;
+  private final String statusReturnCode;
+  private final String subscriptionUrl;
+  private final String serverAddress;
+  private final String tuiAccessNumber;
+  private final String clientSmsDestinationNumber;
+  private final String imapPort;
+  private final String imapUserName;
+  private final String imapPassword;
+  private final String smtpPort;
+  private final String smtpUserName;
+  private final String smtpPassword;
+  private final String tuiPasswordLength;
 
   @Override
   public String toString() {
     return "StatusMessage [mProvisioningStatus="
-        + mProvisioningStatus
+        + provisioningStatus
         + ", mStatusReturnCode="
-        + mStatusReturnCode
+        + statusReturnCode
         + ", mSubscriptionUrl="
-        + mSubscriptionUrl
+        + subscriptionUrl
         + ", mServerAddress="
-        + mServerAddress
+        + serverAddress
         + ", mTuiAccessNumber="
-        + mTuiAccessNumber
+        + tuiAccessNumber
         + ", mClientSmsDestinationNumber="
-        + mClientSmsDestinationNumber
+        + clientSmsDestinationNumber
         + ", mImapPort="
-        + mImapPort
+        + imapPort
         + ", mImapUserName="
-        + mImapUserName
+        + imapUserName
         + ", mImapPassword="
-        + VvmLog.pii(mImapPassword)
+        + VvmLog.pii(imapPassword)
         + ", mSmtpPort="
-        + mSmtpPort
+        + smtpPort
         + ", mSmtpUserName="
-        + mSmtpUserName
+        + smtpUserName
         + ", mSmtpPassword="
-        + VvmLog.pii(mSmtpPassword)
+        + VvmLog.pii(smtpPassword)
         + ", mTuiPasswordLength="
-        + mTuiPasswordLength
+        + tuiPasswordLength
         + "]";
   }
 
   public StatusMessage(Bundle wrappedData) {
-    mProvisioningStatus = unquote(getString(wrappedData, OmtpConstants.PROVISIONING_STATUS));
-    mStatusReturnCode = getString(wrappedData, OmtpConstants.RETURN_CODE);
-    mSubscriptionUrl = getString(wrappedData, OmtpConstants.SUBSCRIPTION_URL);
-    mServerAddress = getString(wrappedData, OmtpConstants.SERVER_ADDRESS);
-    mTuiAccessNumber = getString(wrappedData, OmtpConstants.TUI_ACCESS_NUMBER);
-    mClientSmsDestinationNumber =
+    provisioningStatus = unquote(getString(wrappedData, OmtpConstants.PROVISIONING_STATUS));
+    statusReturnCode = getString(wrappedData, OmtpConstants.RETURN_CODE);
+    subscriptionUrl = getString(wrappedData, OmtpConstants.SUBSCRIPTION_URL);
+    serverAddress = getString(wrappedData, OmtpConstants.SERVER_ADDRESS);
+    tuiAccessNumber = getString(wrappedData, OmtpConstants.TUI_ACCESS_NUMBER);
+    clientSmsDestinationNumber =
         getString(wrappedData, OmtpConstants.CLIENT_SMS_DESTINATION_NUMBER);
-    mImapPort = getString(wrappedData, OmtpConstants.IMAP_PORT);
-    mImapUserName = getString(wrappedData, OmtpConstants.IMAP_USER_NAME);
-    mImapPassword = getString(wrappedData, OmtpConstants.IMAP_PASSWORD);
-    mSmtpPort = getString(wrappedData, OmtpConstants.SMTP_PORT);
-    mSmtpUserName = getString(wrappedData, OmtpConstants.SMTP_USER_NAME);
-    mSmtpPassword = getString(wrappedData, OmtpConstants.SMTP_PASSWORD);
-    mTuiPasswordLength = getString(wrappedData, OmtpConstants.TUI_PASSWORD_LENGTH);
+    imapPort = getString(wrappedData, OmtpConstants.IMAP_PORT);
+    imapUserName = getString(wrappedData, OmtpConstants.IMAP_USER_NAME);
+    imapPassword = getString(wrappedData, OmtpConstants.IMAP_PASSWORD);
+    smtpPort = getString(wrappedData, OmtpConstants.SMTP_PORT);
+    smtpUserName = getString(wrappedData, OmtpConstants.SMTP_USER_NAME);
+    smtpPassword = getString(wrappedData, OmtpConstants.SMTP_PASSWORD);
+    tuiPasswordLength = getString(wrappedData, OmtpConstants.TUI_PASSWORD_LENGTH);
   }
 
   private static String unquote(String string) {
@@ -106,12 +106,12 @@ public class StatusMessage {
 
   /** @return the subscriber's VVM provisioning status. */
   public String getProvisioningStatus() {
-    return mProvisioningStatus;
+    return provisioningStatus;
   }
 
   /** @return the return-code of the status SMS. */
   public String getReturnCode() {
-    return mStatusReturnCode;
+    return statusReturnCode;
   }
 
   /**
@@ -120,14 +120,14 @@ public class StatusMessage {
    */
   @NeededForTesting
   public String getSubscriptionUrl() {
-    return mSubscriptionUrl;
+    return subscriptionUrl;
   }
 
   /**
    * @return the voicemail server address. Either server IP address or fully qualified domain name.
    */
   public String getServerAddress() {
-    return mServerAddress;
+    return serverAddress;
   }
 
   /**
@@ -135,50 +135,50 @@ public class StatusMessage {
    */
   @NeededForTesting
   public String getTuiAccessNumber() {
-    return mTuiAccessNumber;
+    return tuiAccessNumber;
   }
 
   /** @return the number to which client originated SMSes should be sent to. */
   @NeededForTesting
   public String getClientSmsDestinationNumber() {
-    return mClientSmsDestinationNumber;
+    return clientSmsDestinationNumber;
   }
 
   /** @return the IMAP server port to talk to. */
   public String getImapPort() {
-    return mImapPort;
+    return imapPort;
   }
 
   /** @return the IMAP user name to be used for authentication. */
   public String getImapUserName() {
-    return mImapUserName;
+    return imapUserName;
   }
 
   /** @return the IMAP password to be used for authentication. */
   public String getImapPassword() {
-    return mImapPassword;
+    return imapPassword;
   }
 
   /** @return the SMTP server port to talk to. */
   @NeededForTesting
   public String getSmtpPort() {
-    return mSmtpPort;
+    return smtpPort;
   }
 
   /** @return the SMTP user name to be used for SMTP authentication. */
   @NeededForTesting
   public String getSmtpUserName() {
-    return mSmtpUserName;
+    return smtpUserName;
   }
 
   /** @return the SMTP password to be used for SMTP authentication. */
   @NeededForTesting
   public String getSmtpPassword() {
-    return mSmtpPassword;
+    return smtpPassword;
   }
 
   public String getTuiPasswordLength() {
-    return mTuiPasswordLength;
+    return tuiPasswordLength;
   }
 
   private static String getString(Bundle bundle, String key) {

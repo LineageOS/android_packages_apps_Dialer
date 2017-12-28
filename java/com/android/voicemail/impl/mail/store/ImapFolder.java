@@ -59,21 +59,21 @@ public class ImapFolder {
   };
   private static final int COPY_BUFFER_SIZE = 16 * 1024;
 
-  private final ImapStore mStore;
-  private final String mName;
-  private int mMessageCount = -1;
-  private ImapConnection mConnection;
-  private String mMode;
-  private boolean mExists;
+  private final ImapStore store;
+  private final String name;
+  private int messageCount = -1;
+  private ImapConnection connection;
+  private String mode;
+  private boolean exists;
   /** A set of hashes that can be used to track dirtiness */
-  Object[] mHash;
+  Object[] hash;
 
   public static final String MODE_READ_ONLY = "mode_read_only";
   public static final String MODE_READ_WRITE = "mode_read_write";
 
   public ImapFolder(ImapStore store, String name) {
-    mStore = store;
-    mName = name;
+    this.store = store;
+    this.name = name;
   }
 
   /** Callback for each message retrieval. */
@@ -82,8 +82,8 @@ public class ImapFolder {
   }
 
   private void destroyResponses() {
-    if (mConnection != null) {
-      mConnection.destroyResponses();
+    if (connection != null) {
+      connection.destroyResponses();
     }
   }
 
@@ -93,7 +93,7 @@ public class ImapFolder {
         throw new AssertionError("Duplicated open on ImapFolder");
       }
       synchronized (this) {
-        mConnection = mStore.getConnection();
+        connection = store.getConnection();
       }
       // * FLAGS (\Answered \Flagged \Deleted \Seen \Draft NonJunk
       // $MDNSent)
@@ -107,28 +107,28 @@ public class ImapFolder {
       try {
         doSelect();
       } catch (IOException ioe) {
-        throw ioExceptionHandler(mConnection, ioe);
+        throw ioExceptionHandler(connection, ioe);
       } finally {
         destroyResponses();
       }
     } catch (AuthenticationFailedException e) {
       // Don't cache this connection, so we're forced to try connecting/login again
-      mConnection = null;
+      connection = null;
       close(false);
       throw e;
     } catch (MessagingException e) {
-      mExists = false;
+      exists = false;
       close(false);
       throw e;
     }
   }
 
   public boolean isOpen() {
-    return mExists && mConnection != null;
+    return exists && connection != null;
   }
 
   public String getMode() {
-    return mMode;
+    return mode;
   }
 
   public void close(boolean expunge) {
@@ -139,14 +139,14 @@ public class ImapFolder {
         VvmLog.e(TAG, "Messaging Exception", e);
       }
     }
-    mMessageCount = -1;
+    messageCount = -1;
     synchronized (this) {
-      mConnection = null;
+      connection = null;
     }
   }
 
   public int getMessageCount() {
-    return mMessageCount;
+    return messageCount;
   }
 
   String[] getSearchUids(List<ImapResponse> responses) {
@@ -173,7 +173,7 @@ public class ImapFolder {
     try {
       try {
         final String command = ImapConstants.UID_SEARCH + " " + searchCriteria;
-        final String[] result = getSearchUids(mConnection.executeSimpleCommand(command));
+        final String[] result = getSearchUids(connection.executeSimpleCommand(command));
         VvmLog.d(TAG, "searchForUids '" + searchCriteria + "' results: " + result.length);
         return result;
       } catch (ImapException me) {
@@ -181,8 +181,8 @@ public class ImapFolder {
         return Utility.EMPTY_STRINGS; // Not found
       } catch (IOException ioe) {
         VvmLog.d(TAG, "IOException in search: " + searchCriteria, ioe);
-        mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
-        throw ioExceptionHandler(mConnection, ioe);
+        store.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
+        throw ioExceptionHandler(connection, ioe);
       }
     } finally {
       destroyResponses();
@@ -296,7 +296,7 @@ public class ImapFolder {
     }
 
     try {
-      mConnection.sendCommand(
+      connection.sendCommand(
           String.format(
               Locale.US,
               ImapConstants.UID_FETCH + " %s (%s)",
@@ -307,7 +307,7 @@ public class ImapFolder {
       do {
         response = null;
         try {
-          response = mConnection.readResponse();
+          response = connection.readResponse();
 
           if (!response.isDataResponse(1, ImapConstants.FETCH)) {
             continue; // Ignore
@@ -395,7 +395,7 @@ public class ImapFolder {
               // (We'll need to share a temp file.  Protect it with a ref-count.)
               message.setBody(
                   decodeBody(
-                      mStore.getContext(),
+                      store.getContext(),
                       bodyStream,
                       contentTransferEncoding,
                       fetchPart.getSize(),
@@ -417,8 +417,8 @@ public class ImapFolder {
         }
       } while (!response.isTagged());
     } catch (IOException ioe) {
-      mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
-      throw ioExceptionHandler(mConnection, ioe);
+      store.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
+      throw ioExceptionHandler(connection, ioe);
     }
   }
 
@@ -476,7 +476,7 @@ public class ImapFolder {
    */
   private void handleUntaggedResponse(ImapResponse response) {
     if (response.isDataResponse(1, ImapConstants.EXISTS)) {
-      mMessageCount = response.getStringOrEmpty(0).getNumberOrZero();
+      messageCount = response.getStringOrEmpty(0).getNumberOrZero();
     }
   }
 
@@ -660,10 +660,10 @@ public class ImapFolder {
   public Message[] expunge() throws MessagingException {
     checkOpen();
     try {
-      handleUntaggedResponses(mConnection.executeSimpleCommand(ImapConstants.EXPUNGE));
+      handleUntaggedResponses(connection.executeSimpleCommand(ImapConstants.EXPUNGE));
     } catch (IOException ioe) {
-      mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
-      throw ioExceptionHandler(mConnection, ioe);
+      store.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
+      throw ioExceptionHandler(connection, ioe);
     } finally {
       destroyResponses();
     }
@@ -692,7 +692,7 @@ public class ImapFolder {
       allFlags = flagList.substring(1);
     }
     try {
-      mConnection.executeSimpleCommand(
+      connection.executeSimpleCommand(
           String.format(
               Locale.US,
               ImapConstants.UID_STORE + " %s %s" + ImapConstants.FLAGS_SILENT + " (%s)",
@@ -701,8 +701,8 @@ public class ImapFolder {
               allFlags));
 
     } catch (IOException ioe) {
-      mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
-      throw ioExceptionHandler(mConnection, ioe);
+      store.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
+      throw ioExceptionHandler(connection, ioe);
     } finally {
       destroyResponses();
     }
@@ -714,11 +714,11 @@ public class ImapFolder {
    */
   private void doSelect() throws IOException, MessagingException {
     final List<ImapResponse> responses =
-        mConnection.executeSimpleCommand(
-            String.format(Locale.US, ImapConstants.SELECT + " \"%s\"", mName));
+        connection.executeSimpleCommand(
+            String.format(Locale.US, ImapConstants.SELECT + " \"%s\"", name));
 
     // Assume the folder is opened read-write; unless we are notified otherwise
-    mMode = MODE_READ_WRITE;
+    mode = MODE_READ_WRITE;
     int messageCount = -1;
     for (ImapResponse response : responses) {
       if (response.isDataResponse(1, ImapConstants.EXISTS)) {
@@ -726,12 +726,12 @@ public class ImapFolder {
       } else if (response.isOk()) {
         final ImapString responseCode = response.getResponseCodeOrEmpty();
         if (responseCode.is(ImapConstants.READ_ONLY)) {
-          mMode = MODE_READ_ONLY;
+          mode = MODE_READ_ONLY;
         } else if (responseCode.is(ImapConstants.READ_WRITE)) {
-          mMode = MODE_READ_WRITE;
+          mode = MODE_READ_WRITE;
         }
       } else if (response.isTagged()) { // Not OK
-        mStore.getImapHelper().handleEvent(OmtpEvents.DATA_MAILBOX_OPEN_FAILED);
+        store.getImapHelper().handleEvent(OmtpEvents.DATA_MAILBOX_OPEN_FAILED);
         throw new MessagingException(
             "Can't open mailbox: " + response.getStatusResponseTextOrEmpty());
       }
@@ -739,8 +739,8 @@ public class ImapFolder {
     if (messageCount == -1) {
       throw new MessagingException("Did not find message count during select");
     }
-    mMessageCount = messageCount;
-    mExists = true;
+    this.messageCount = messageCount;
+    exists = true;
   }
 
   public class Quota {
@@ -757,8 +757,8 @@ public class ImapFolder {
   public Quota getQuota() throws MessagingException {
     try {
       final List<ImapResponse> responses =
-          mConnection.executeSimpleCommand(
-              String.format(Locale.US, ImapConstants.GETQUOTAROOT + " \"%s\"", mName));
+          connection.executeSimpleCommand(
+              String.format(Locale.US, ImapConstants.GETQUOTAROOT + " \"%s\"", name));
 
       for (ImapResponse response : responses) {
         if (!response.isDataResponse(0, ImapConstants.QUOTA)) {
@@ -775,8 +775,8 @@ public class ImapFolder {
         }
       }
     } catch (IOException ioe) {
-      mStore.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
-      throw ioExceptionHandler(mConnection, ioe);
+      store.getImapHelper().handleEvent(OmtpEvents.DATA_GENERIC_IMAP_IOE);
+      throw ioExceptionHandler(connection, ioe);
     } finally {
       destroyResponses();
     }
@@ -785,15 +785,15 @@ public class ImapFolder {
 
   private void checkOpen() throws MessagingException {
     if (!isOpen()) {
-      throw new MessagingException("Folder " + mName + " is not open.");
+      throw new MessagingException("Folder " + name + " is not open.");
     }
   }
 
   private MessagingException ioExceptionHandler(ImapConnection connection, IOException ioe) {
     VvmLog.d(TAG, "IO Exception detected: ", ioe);
     connection.close();
-    if (connection == mConnection) {
-      mConnection = null; // To prevent close() from returning the connection to the pool.
+    if (connection == this.connection) {
+      this.connection = null; // To prevent close() from returning the connection to the pool.
       close(false);
     }
     return new MessagingException(MessagingException.IOERROR, "IO Error", ioe);

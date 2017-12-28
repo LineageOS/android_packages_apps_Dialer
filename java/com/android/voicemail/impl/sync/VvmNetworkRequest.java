@@ -45,21 +45,21 @@ public class VvmNetworkRequest {
    */
   public static class NetworkWrapper implements Closeable {
 
-    private final Network mNetwork;
-    private final VvmNetworkRequestCallback mCallback;
+    private final Network network;
+    private final VvmNetworkRequestCallback callback;
 
     private NetworkWrapper(Network network, VvmNetworkRequestCallback callback) {
-      mNetwork = network;
-      mCallback = callback;
+      this.network = network;
+      this.callback = callback;
     }
 
     public Network get() {
-      return mNetwork;
+      return network;
     }
 
     @Override
     public void close() {
-      mCallback.releaseNetwork();
+      callback.releaseNetwork();
     }
   }
 
@@ -92,7 +92,7 @@ public class VvmNetworkRequest {
      * {@link CompletableFuture#get()} will block until {@link CompletableFuture# complete(Object) }
      * has been called on the other thread.
      */
-    private final CompletableFuture<NetworkWrapper> mFuture = new CompletableFuture<>();
+    private final CompletableFuture<NetworkWrapper> future = new CompletableFuture<>();
 
     public FutureNetworkRequestCallback(
         OmtpVvmCarrierConfigHelper config,
@@ -102,19 +102,19 @@ public class VvmNetworkRequest {
     }
 
     public Future<NetworkWrapper> getFuture() {
-      return mFuture;
+      return future;
     }
 
     @Override
     public void onAvailable(Network network) {
       super.onAvailable(network);
-      mFuture.complete(new NetworkWrapper(network, this));
+      future.complete(new NetworkWrapper(network, this));
     }
 
     @Override
     public void onFailed(String reason) {
       super.onFailed(reason);
-      mFuture.complete(null);
+      future.complete(null);
     }
   }
 }

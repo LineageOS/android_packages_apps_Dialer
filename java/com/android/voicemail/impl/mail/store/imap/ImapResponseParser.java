@@ -33,21 +33,21 @@ public class ImapResponseParser {
   public static final int LITERAL_KEEP_IN_MEMORY_THRESHOLD = 2 * 1024 * 1024;
 
   /** Input stream */
-  private final PeekableInputStream mIn;
+  private final PeekableInputStream in;
 
-  private final int mLiteralKeepInMemoryThreshold;
+  private final int literalKeepInMemoryThreshold;
 
   /** StringBuilder used by readUntil() */
-  private final StringBuilder mBufferReadUntil = new StringBuilder();
+  private final StringBuilder bufferReadUntil = new StringBuilder();
 
   /** StringBuilder used by parseBareString() */
-  private final StringBuilder mParseBareString = new StringBuilder();
+  private final StringBuilder parseBareString = new StringBuilder();
 
   /**
    * We store all {@link ImapResponse} in it. {@link #destroyResponses()} must be called from time
    * to time to destroy them and clear it.
    */
-  private final ArrayList<ImapResponse> mResponsesToDestroy = new ArrayList<ImapResponse>();
+  private final ArrayList<ImapResponse> responsesToDestroy = new ArrayList<ImapResponse>();
 
   /**
    * Exception thrown when we receive BYE. It derives from IOException, so it'll be treated in the
@@ -68,8 +68,8 @@ public class ImapResponseParser {
 
   /** Constructor for testing to override the literal size threshold. */
   /* package for test */ ImapResponseParser(InputStream in, int literalKeepInMemoryThreshold) {
-    mIn = new PeekableInputStream(in);
-    mLiteralKeepInMemoryThreshold = literalKeepInMemoryThreshold;
+    this.in = new PeekableInputStream(in);
+    this.literalKeepInMemoryThreshold = literalKeepInMemoryThreshold;
   }
 
   private static IOException newEOSException() {
@@ -85,7 +85,7 @@ public class ImapResponseParser {
    * shouldn't see EOF during parsing.
    */
   private int peek() throws IOException {
-    final int next = mIn.peek();
+    final int next = in.peek();
     if (next == -1) {
       throw newEOSException();
     }
@@ -93,13 +93,13 @@ public class ImapResponseParser {
   }
 
   /**
-   * Read and return one byte from {@link #mIn}, and put it in {@link #mDiscourseLogger}.
+   * Read and return one byte from {@link #in}, and put it in {@link #mDiscourseLogger}.
    *
    * <p>Throws IOException() if reaches EOF. As long as logical response lines end with \r\n, we
    * shouldn't see EOF during parsing.
    */
   private int readByte() throws IOException {
-    int next = mIn.read();
+    int next = in.read();
     if (next == -1) {
       throw newEOSException();
     }
@@ -112,10 +112,10 @@ public class ImapResponseParser {
    * @see #readResponse()
    */
   public void destroyResponses() {
-    for (ImapResponse r : mResponsesToDestroy) {
+    for (ImapResponse r : responsesToDestroy) {
       r.destroy();
     }
-    mResponsesToDestroy.clear();
+    responsesToDestroy.clear();
   }
 
   /**
@@ -151,7 +151,7 @@ public class ImapResponseParser {
       response.destroy();
       throw new ByeException();
     }
-    mResponsesToDestroy.add(response);
+    responsesToDestroy.add(response);
     return response;
   }
 
@@ -192,13 +192,13 @@ public class ImapResponseParser {
    * (rather than peeked) and won't be included in the result.
    */
   /* package for test */ String readUntil(char end) throws IOException {
-    mBufferReadUntil.setLength(0);
+    bufferReadUntil.setLength(0);
     for (; ; ) {
       final int ch = readByte();
       if (ch != end) {
-        mBufferReadUntil.append((char) ch);
+        bufferReadUntil.append((char) ch);
       } else {
-        return mBufferReadUntil.toString();
+        return bufferReadUntil.toString();
       }
     }
   }
@@ -326,7 +326,7 @@ public class ImapResponseParser {
    * <p>If the value is "NIL", returns an empty string.
    */
   private ImapString parseBareString() throws IOException, MessagingException {
-    mParseBareString.setLength(0);
+    parseBareString.setLength(0);
     for (; ; ) {
       final int ch = peek();
 
@@ -351,10 +351,10 @@ public class ImapResponseParser {
           ch == '"'
           || (0x00 <= ch && ch <= 0x1f)
           || ch == 0x7f) {
-        if (mParseBareString.length() == 0) {
+        if (parseBareString.length() == 0) {
           throw new MessagingException("Expected string, none found.");
         }
-        String s = mParseBareString.toString();
+        String s = parseBareString.toString();
 
         // NIL will be always converted into the empty string.
         if (ImapConstants.NIL.equalsIgnoreCase(s)) {
@@ -363,11 +363,11 @@ public class ImapResponseParser {
         return new ImapSimpleString(s);
       } else if (ch == '[') {
         // Eat all until next ']'
-        mParseBareString.append((char) readByte());
-        mParseBareString.append(readUntil(']'));
-        mParseBareString.append(']'); // readUntil won't include the end char.
+        parseBareString.append((char) readByte());
+        parseBareString.append(readUntil(']'));
+        parseBareString.append(']'); // readUntil won't include the end char.
       } else {
-        mParseBareString.append((char) readByte());
+        parseBareString.append((char) readByte());
       }
     }
   }
@@ -414,8 +414,8 @@ public class ImapResponseParser {
     }
     expect('\r');
     expect('\n');
-    FixedLengthInputStream in = new FixedLengthInputStream(mIn, size);
-    if (size > mLiteralKeepInMemoryThreshold) {
+    FixedLengthInputStream in = new FixedLengthInputStream(this.in, size);
+    if (size > literalKeepInMemoryThreshold) {
       return new ImapTempFileLiteral(in);
     } else {
       return new ImapMemoryLiteral(in);

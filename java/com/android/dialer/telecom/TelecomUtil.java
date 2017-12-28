@@ -52,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
-  private static boolean sWarningLogged = false;
+  private static boolean warningLogged = false;
 
   private static TelecomUtilImpl instance = new TelecomUtilImpl();
 
@@ -326,12 +326,12 @@ public abstract class TelecomUtil {
           TextUtils.equals(
               context.getPackageName(), getTelecomManager(context).getDefaultDialerPackage());
       if (result) {
-        sWarningLogged = false;
+        warningLogged = false;
       } else {
-        if (!sWarningLogged) {
+        if (!warningLogged) {
           // Log only once to prevent spam.
           LogUtil.w(TAG, "Dialer is not currently set to be default dialer");
-          sWarningLogged = true;
+          warningLogged = true;
         }
       }
       return result;

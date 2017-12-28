@@ -222,8 +222,6 @@ public class HttpFetcher {
   /**
    * Lookup up url re-write rules from gServices and apply to the given url.
    *
-
-   *
    * @return The new url.
    */
   private static URL reWriteUrl(Context context, String url) {
@@ -267,21 +265,21 @@ public class HttpFetcher {
   /** Disconnect {@link HttpURLConnection} when InputStream is closed */
   private static class HttpInputStreamWrapper extends FilterInputStream {
 
-    final HttpURLConnection mHttpUrlConnection;
-    final long mStartMillis = SystemClock.uptimeMillis();
+    final HttpURLConnection httpUrlConnection;
+    final long startMillis = SystemClock.uptimeMillis();
 
     public HttpInputStreamWrapper(HttpURLConnection conn, InputStream in) {
       super(in);
-      mHttpUrlConnection = conn;
+      httpUrlConnection = conn;
     }
 
     @Override
     public void close() throws IOException {
       super.close();
-      mHttpUrlConnection.disconnect();
+      httpUrlConnection.disconnect();
       if (LogUtil.isDebugEnabled()) {
         long endMillis = SystemClock.uptimeMillis();
-        LogUtil.i("HttpFetcher.close", "fetch took " + (endMillis - mStartMillis) + " ms");
+        LogUtil.i("HttpFetcher.close", "fetch took " + (endMillis - startMillis) + " ms");
       }
     }
   }

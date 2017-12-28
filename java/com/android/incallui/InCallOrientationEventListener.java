@@ -68,9 +68,9 @@ public class InCallOrientationEventListener extends OrientationEventListener {
   private static final int ROTATION_THRESHOLD = 10;
 
   /** Cache the current rotation of the device. */
-  @ScreenOrientation private static int sCurrentOrientation = SCREEN_ORIENTATION_0;
+  @ScreenOrientation private static int currentOrientation = SCREEN_ORIENTATION_0;
 
-  private boolean mEnabled = false;
+  private boolean enabled = false;
 
   public InCallOrientationEventListener(Context context) {
     super(context);
@@ -94,7 +94,7 @@ public class InCallOrientationEventListener extends OrientationEventListener {
 
   @ScreenOrientation
   public static int getCurrentOrientation() {
-    return sCurrentOrientation;
+    return currentOrientation;
   }
 
   /**
@@ -114,14 +114,14 @@ public class InCallOrientationEventListener extends OrientationEventListener {
 
     final int orientation = toScreenOrientation(rotation);
 
-    if (orientation != SCREEN_ORIENTATION_UNKNOWN && sCurrentOrientation != orientation) {
+    if (orientation != SCREEN_ORIENTATION_UNKNOWN && currentOrientation != orientation) {
       LogUtil.i(
           "InCallOrientationEventListener.onOrientationChanged",
           "orientation: %d -> %d",
-          sCurrentOrientation,
+          currentOrientation,
           orientation);
-      sCurrentOrientation = orientation;
-      InCallPresenter.getInstance().onDeviceOrientationChange(sCurrentOrientation);
+      currentOrientation = orientation;
+      InCallPresenter.getInstance().onDeviceOrientationChange(currentOrientation);
     }
   }
 
@@ -133,15 +133,15 @@ public class InCallOrientationEventListener extends OrientationEventListener {
    *     changed.
    */
   public void enable(boolean notifyDeviceOrientationChange) {
-    if (mEnabled) {
+    if (enabled) {
       Log.v(this, "enable: Orientation listener is already enabled. Ignoring...");
       return;
     }
 
     super.enable();
-    mEnabled = true;
+    enabled = true;
     if (notifyDeviceOrientationChange) {
-      InCallPresenter.getInstance().onDeviceOrientationChange(sCurrentOrientation);
+      InCallPresenter.getInstance().onDeviceOrientationChange(currentOrientation);
     }
   }
 
@@ -154,18 +154,18 @@ public class InCallOrientationEventListener extends OrientationEventListener {
   /** Disables the OrientationEventListener. */
   @Override
   public void disable() {
-    if (!mEnabled) {
+    if (!enabled) {
       Log.v(this, "enable: Orientation listener is already disabled. Ignoring...");
       return;
     }
 
-    mEnabled = false;
+    enabled = false;
     super.disable();
   }
 
   /** Returns true the OrientationEventListener is enabled, false otherwise. */
   public boolean isEnabled() {
-    return mEnabled;
+    return enabled;
   }
 
   /**

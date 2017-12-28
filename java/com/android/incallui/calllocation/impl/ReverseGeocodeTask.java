@@ -39,15 +39,15 @@ class ReverseGeocodeTask extends AsyncTask<Location, Void, String> {
   private static final String JSON_KEY_LONG_NAME = "long_name";
   private static final String JSON_KEY_SHORT_NAME = "short_name";
 
-  private WeakReference<LocationUi> mUiReference;
+  private WeakReference<LocationUi> uiReference;
 
   public ReverseGeocodeTask(WeakReference<LocationUi> uiReference) {
-    mUiReference = uiReference;
+    this.uiReference = uiReference;
   }
 
   @Override
   protected String doInBackground(Location... locations) {
-    LocationUi ui = mUiReference.get();
+    LocationUi ui = uiReference.get();
     if (ui == null) {
       return null;
     }
@@ -131,7 +131,7 @@ class ReverseGeocodeTask extends AsyncTask<Location, Void, String> {
 
   @Override
   protected void onPostExecute(String address) {
-    LocationUi ui = mUiReference.get();
+    LocationUi ui = uiReference.get();
     if (ui == null) {
       return;
     }

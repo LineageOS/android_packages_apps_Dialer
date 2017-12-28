@@ -31,7 +31,7 @@ import com.android.dialer.util.CallUtil;
 /** List adapter to display regular search results. */
 public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
 
-  protected boolean mIsQuerySipAddress;
+  protected boolean isQuerySipAddress;
 
   public RegularSearchListAdapter(Context context) {
     super(context);
@@ -82,7 +82,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
 
   @Override
   public String getFormattedQueryString() {
-    if (mIsQuerySipAddress) {
+    if (isQuerySipAddress) {
       // Return unnormalized SIP address
       return getQueryString();
     }
@@ -94,7 +94,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
     // Don't show actions if the query string contains a letter.
     final boolean showNumberShortcuts =
         !TextUtils.isEmpty(getFormattedQueryString()) && hasDigitsInQueryString();
-    mIsQuerySipAddress = PhoneNumberHelper.isUriNumber(queryString);
+    isQuerySipAddress = PhoneNumberHelper.isUriNumber(queryString);
 
     if (isChanged(showNumberShortcuts)) {
       notifyDataSetChanged();
@@ -104,7 +104,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
 
   protected boolean isChanged(boolean showNumberShortcuts) {
     boolean changed = false;
-    changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts || mIsQuerySipAddress);
+    changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts || isQuerySipAddress);
     changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
     changed |=
         setShortcutEnabled(

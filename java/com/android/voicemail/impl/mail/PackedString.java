@@ -36,8 +36,8 @@ public class PackedString {
 
   private static final char DELIMITER_TAG = '\2';
 
-  private String mString;
-  private ArrayMap<String, String> mExploded;
+  private String string;
+  private ArrayMap<String, String> exploded;
   private static final ArrayMap<String, String> EMPTY_MAP = new ArrayMap<String, String>();
 
   /**
@@ -46,8 +46,8 @@ public class PackedString {
    * @param string packed string
    */
   public PackedString(String string) {
-    mString = string;
-    mExploded = null;
+    this.string = string;
+    exploded = null;
   }
 
   /**
@@ -57,10 +57,10 @@ public class PackedString {
    * @return returns value, or null if no string is found
    */
   public String get(String tag) {
-    if (mExploded == null) {
-      mExploded = explode(mString);
+    if (exploded == null) {
+      exploded = explode(string);
     }
-    return mExploded.get(tag);
+    return exploded.get(tag);
   }
 
   /**
@@ -70,10 +70,10 @@ public class PackedString {
    * @return a map of the values in the packed string
    */
   public Map<String, String> unpack() {
-    if (mExploded == null) {
-      mExploded = explode(mString);
+    if (exploded == null) {
+      exploded = explode(string);
     }
-    return new ArrayMap<String, String>(mExploded);
+    return new ArrayMap<String, String>(exploded);
   }
 
   /** Read out all values into a map. */
@@ -118,16 +118,16 @@ public class PackedString {
    * PackedString representations.
    */
   public static class Builder {
-    ArrayMap<String, String> mMap;
+    ArrayMap<String, String> map;
 
     /** Create a builder that's empty (for filling) */
     public Builder() {
-      mMap = new ArrayMap<String, String>();
+      map = new ArrayMap<String, String>();
     }
 
     /** Create a builder using the values of an existing PackedString (for editing). */
     public Builder(String packed) {
-      mMap = explode(packed);
+      map = explode(packed);
     }
 
     /**
@@ -138,9 +138,9 @@ public class PackedString {
      */
     public void put(String tag, String value) {
       if (value == null) {
-        mMap.remove(tag);
+        map.remove(tag);
       } else {
-        mMap.put(tag, value);
+        map.put(tag, value);
       }
     }
 
@@ -151,14 +151,14 @@ public class PackedString {
      * @return returns value, or null if no string is found
      */
     public String get(String tag) {
-      return mMap.get(tag);
+      return map.get(tag);
     }
 
     /** Pack the values and return a single, encoded string */
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder();
-      for (Map.Entry<String, String> entry : mMap.entrySet()) {
+      for (Map.Entry<String, String> entry : map.entrySet()) {
         if (sb.length() > 0) {
           sb.append(DELIMITER_ELEMENT);
         }

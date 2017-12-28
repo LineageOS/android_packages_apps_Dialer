@@ -42,11 +42,11 @@ import javax.net.ssl.SSLException;
 public class ImapConnection {
   private final String TAG = "ImapConnection";
 
-  private String mLoginPhrase;
-  private ImapStore mImapStore;
-  private MailTransport mTransport;
-  private ImapResponseParser mParser;
-  private Set<String> mCapabilities = new ArraySet<>();
+  private String loginPhrase;
+  private ImapStore imapStore;
+  private MailTransport transport;
+  private ImapResponseParser parser;
+  private Set<String> capabilities = new ArraySet<>();
 
   static final String IMAP_REDACTED_LOG = "[IMAP command redacted]";
 
@@ -55,7 +55,7 @@ public class ImapConnection {
    * counter to make tests simpler. (Some of the tests involve multiple connections but only have a
    * single counter to track the tag.)
    */
-  private final AtomicInteger mNextCommandTag = new AtomicInteger(0);
+  private final AtomicInteger nextCommandTag = new AtomicInteger(0);
 
   ImapConnection(ImapStore store) {
     setStore(store);
@@ -65,8 +65,8 @@ public class ImapConnection {
     // TODO: maybe we should throw an exception if the connection is not closed here,
     // if it's not currently closed, then we won't reopen it, so if the credentials have
     // changed, the connection will not be reestablished.
-    mImapStore = store;
-    mLoginPhrase = null;
+    imapStore = store;
+    loginPhrase = null;
   }
 
   /**
@@ -76,42 +76,42 @@ public class ImapConnection {
    * @return the login command string to sent to the IMAP server
    */
   String getLoginPhrase() {
-    if (mLoginPhrase == null) {
-      if (mImapStore.getUsername() != null && mImapStore.getPassword() != null) {
+    if (loginPhrase == null) {
+      if (imapStore.getUsername() != null && imapStore.getPassword() != null) {
         // build the LOGIN string once (instead of over-and-over again.)
         // apply the quoting here around the built-up password
-        mLoginPhrase =
+        loginPhrase =
             ImapConstants.LOGIN
                 + " "
-                + mImapStore.getUsername()
+                + imapStore.getUsername()
                 + " "
-                + ImapUtility.imapQuoted(mImapStore.getPassword());
+                + ImapUtility.imapQuoted(imapStore.getPassword());
       }
     }
-    return mLoginPhrase;
+    return loginPhrase;
   }
 
   public void open() throws IOException, MessagingException {
-    if (mTransport != null && mTransport.isOpen()) {
+    if (transport != null && transport.isOpen()) {
       return;
     }
 
     try {
       // copy configuration into a clean transport, if necessary
-      if (mTransport == null) {
-        mTransport = mImapStore.cloneTransport();
+      if (transport == null) {
+        transport = imapStore.cloneTransport();
       }
 
-      mTransport.open();
+      transport.open();
 
       createParser();
 
       // The server should greet us with something like
       // * OK IMAP4rev1 Server
       // consume the response before doing anything else.
-      ImapResponse response = mParser.readResponse(false);
+      ImapResponse response = parser.readResponse(false);
       if (!response.isOk()) {
-        mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_INVALID_INITIAL_SERVER_RESPONSE);
+        imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_INVALID_INITIAL_SERVER_RESPONSE);
         throw new MessagingException(
             MessagingException.AUTHENTICATION_FAILED_OR_SERVER_ERROR,
             "Invalid server initial response");
@@ -125,11 +125,11 @@ public class ImapConnection {
       doLogin();
     } catch (SSLException e) {
       LogUtils.d(TAG, "SSLException ", e);
-      mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_SSL_EXCEPTION);
+      imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_SSL_EXCEPTION);
       throw new CertificateValidationException(e.getMessage(), e);
     } catch (IOException ioe) {
       LogUtils.d(TAG, "IOException", ioe);
-      mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_IOE_ON_OPEN);
+      imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_IOE_ON_OPEN);
       throw ioe;
     } finally {
       destroyResponses();
@@ -139,10 +139,10 @@ public class ImapConnection {
   void logout() {
     try {
       sendCommand(ImapConstants.LOGOUT, false);
-      if (!mParser.readResponse(true).is(0, ImapConstants.BYE)) {
+      if (!parser.readResponse(true).is(0, ImapConstants.BYE)) {
         VvmLog.e(TAG, "Server did not respond LOGOUT with BYE");
       }
-      if (!mParser.readResponse(false).isOk()) {
+      if (!parser.readResponse(false).isOk()) {
         VvmLog.e(TAG, "Server did not respond OK after LOGOUT");
       }
     } catch (IOException | MessagingException e) {
@@ -155,14 +155,14 @@ public class ImapConnection {
    * {@link #setStore(ImapStore)} is called.
    */
   void close() {
-    if (mTransport != null) {
+    if (transport != null) {
       logout();
-      mTransport.close();
-      mTransport = null;
+      transport.close();
+      transport = null;
     }
     destroyResponses();
-    mParser = null;
-    mImapStore = null;
+    parser = null;
+    imapStore = null;
   }
 
   /** Attempts to convert the connection into secure connection. */
@@ -171,7 +171,7 @@ public class ImapConnection {
     // Make sure the server does have this capability
     if (hasCapability(ImapConstants.CAPABILITY_STARTTLS)) {
       executeSimpleCommand(ImapConstants.STARTTLS);
-      mTransport.reopenTls();
+      transport.reopenTls();
       createParser();
       // The cached capabilities should be refreshed after TLS is established.
       queryCapability();
@@ -181,7 +181,7 @@ public class ImapConnection {
   /** Logs into the IMAP server */
   private void doLogin() throws IOException, MessagingException, AuthenticationFailedException {
     try {
-      if (mCapabilities.contains(ImapConstants.CAPABILITY_AUTH_DIGEST_MD5)) {
+      if (capabilities.contains(ImapConstants.CAPABILITY_AUTH_DIGEST_MD5)) {
         doDigestMd5Auth();
       } else {
         executeSimpleCommand(getLoginPhrase(), true);
@@ -195,36 +195,36 @@ public class ImapConnection {
       if (ImapConstants.NO.equals(status)) {
         switch (statusMessage) {
           case ImapConstants.NO_UNKNOWN_USER:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_UNKNOWN_USER);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_UNKNOWN_USER);
             break;
           case ImapConstants.NO_UNKNOWN_CLIENT:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_UNKNOWN_DEVICE);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_UNKNOWN_DEVICE);
             break;
           case ImapConstants.NO_INVALID_PASSWORD:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_INVALID_PASSWORD);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_INVALID_PASSWORD);
             break;
           case ImapConstants.NO_MAILBOX_NOT_INITIALIZED:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_MAILBOX_NOT_INITIALIZED);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_MAILBOX_NOT_INITIALIZED);
             break;
           case ImapConstants.NO_SERVICE_IS_NOT_PROVISIONED:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_SERVICE_NOT_PROVISIONED);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_SERVICE_NOT_PROVISIONED);
             break;
           case ImapConstants.NO_SERVICE_IS_NOT_ACTIVATED:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_SERVICE_NOT_ACTIVATED);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_SERVICE_NOT_ACTIVATED);
             break;
           case ImapConstants.NO_USER_IS_BLOCKED:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_USER_IS_BLOCKED);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_AUTH_USER_IS_BLOCKED);
             break;
           case ImapConstants.NO_APPLICATION_ERROR:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_REJECTED_SERVER_RESPONSE);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_REJECTED_SERVER_RESPONSE);
             break;
           default:
-            mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_BAD_IMAP_CREDENTIAL);
+            imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_BAD_IMAP_CREDENTIAL);
         }
         throw new AuthenticationFailedException(alertText, ie);
       }
 
-      mImapStore.getImapHelper().handleEvent(OmtpEvents.DATA_REJECTED_SERVER_RESPONSE);
+      imapStore.getImapHelper().handleEvent(OmtpEvents.DATA_REJECTED_SERVER_RESPONSE);
       throw new MessagingException(alertText, ie);
     }
   }
@@ -243,7 +243,7 @@ public class ImapConnection {
     String decodedChallenge = decodeBase64(responses.get(0).getStringOrEmpty(0).getString());
 
     Map<String, String> challenge = DigestMd5Utils.parseDigestMessage(decodedChallenge);
-    DigestMd5Utils.Data data = new DigestMd5Utils.Data(mImapStore, mTransport, challenge);
+    DigestMd5Utils.Data data = new DigestMd5Utils.Data(imapStore, transport, challenge);
 
     String response = data.createResponse();
     //  Respond to the challenge. If the server accepts it, it will reply a response-auth which
@@ -281,9 +281,9 @@ public class ImapConnection {
 
   private void queryCapability() throws IOException, MessagingException {
     List<ImapResponse> responses = executeSimpleCommand(ImapConstants.CAPABILITY);
-    mCapabilities.clear();
+    capabilities.clear();
     Set<String> disabledCapabilities =
-        mImapStore.getImapHelper().getConfig().getDisabledCapabilities();
+        imapStore.getImapHelper().getConfig().getDisabledCapabilities();
     for (ImapResponse response : responses) {
       if (response.isTagged()) {
         continue;
@@ -292,40 +292,40 @@ public class ImapConnection {
         String capability = response.getStringOrEmpty(i).getString();
         if (disabledCapabilities != null) {
           if (!disabledCapabilities.contains(capability)) {
-            mCapabilities.add(capability);
+            capabilities.add(capability);
           }
         } else {
-          mCapabilities.add(capability);
+          capabilities.add(capability);
         }
       }
     }
 
-    LogUtils.d(TAG, "Capabilities: " + mCapabilities.toString());
+    LogUtils.d(TAG, "Capabilities: " + capabilities.toString());
   }
 
   private boolean hasCapability(String capability) {
-    return mCapabilities.contains(capability);
+    return capabilities.contains(capability);
   }
   /**
    * Create an {@link ImapResponseParser} from {@code mTransport.getInputStream()} and set it to
-   * {@link #mParser}.
+   * {@link #parser}.
    *
    * <p>If we already have an {@link ImapResponseParser}, we {@link #destroyResponses()} and throw
    * it away.
    */
   private void createParser() {
     destroyResponses();
-    mParser = new ImapResponseParser(mTransport.getInputStream());
+    parser = new ImapResponseParser(transport.getInputStream());
   }
 
   public void destroyResponses() {
-    if (mParser != null) {
-      mParser.destroyResponses();
+    if (parser != null) {
+      parser.destroyResponses();
     }
   }
 
   public ImapResponse readResponse() throws IOException, MessagingException {
-    return mParser.readResponse(false);
+    return parser.readResponse(false);
   }
 
   public List<ImapResponse> executeSimpleCommand(String command)
@@ -356,18 +356,18 @@ public class ImapConnection {
       throws IOException, MessagingException {
     open();
 
-    if (mTransport == null) {
+    if (transport == null) {
       throw new IOException("Null transport");
     }
-    String tag = Integer.toString(mNextCommandTag.incrementAndGet());
+    String tag = Integer.toString(nextCommandTag.incrementAndGet());
     String commandToSend = tag + " " + command;
-    mTransport.writeLine(commandToSend, (sensitive ? IMAP_REDACTED_LOG : command));
+    transport.writeLine(commandToSend, (sensitive ? IMAP_REDACTED_LOG : command));
     return tag;
   }
 
   List<ImapResponse> executeContinuationResponse(String response, boolean sensitive)
       throws IOException, MessagingException {
-    mTransport.writeLine(response, (sensitive ? IMAP_REDACTED_LOG : response));
+    transport.writeLine(response, (sensitive ? IMAP_REDACTED_LOG : response));
     return getCommandResponses();
   }
 
@@ -382,7 +382,7 @@ public class ImapConnection {
     final List<ImapResponse> responses = new ArrayList<ImapResponse>();
     ImapResponse response;
     do {
-      response = mParser.readResponse(false);
+      response = parser.readResponse(false);
       responses.add(response);
     } while (!(response.isTagged() || response.isContinuationRequest()));
 

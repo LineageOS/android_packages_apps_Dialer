@@ -36,9 +36,9 @@ public class InCallTonePlayer {
 
   public static final int VOLUME_RELATIVE_HIGH_PRIORITY = 80;
 
-  @NonNull private final ToneGeneratorFactory mToneGeneratorFactory;
-  @NonNull private final PausableExecutor mExecutor;
-  private @Nullable CountDownLatch mNumPlayingTones;
+  @NonNull private final ToneGeneratorFactory toneGeneratorFactory;
+  @NonNull private final PausableExecutor executor;
+  private @Nullable CountDownLatch numPlayingTones;
 
   /**
    * Creates a new InCallTonePlayer.
@@ -51,13 +51,13 @@ public class InCallTonePlayer {
    */
   public InCallTonePlayer(
       @NonNull ToneGeneratorFactory toneGeneratorFactory, @NonNull PausableExecutor executor) {
-    mToneGeneratorFactory = Objects.requireNonNull(toneGeneratorFactory);
-    mExecutor = Objects.requireNonNull(executor);
+    this.toneGeneratorFactory = Objects.requireNonNull(toneGeneratorFactory);
+    this.executor = Objects.requireNonNull(executor);
   }
 
   /** @return {@code true} if a tone is currently playing, {@code false} otherwise. */
   public boolean isPlayingTone() {
-    return mNumPlayingTones != null && mNumPlayingTones.getCount() > 0;
+    return numPlayingTones != null && numPlayingTones.getCount() > 0;
   }
 
   /**
@@ -72,8 +72,8 @@ public class InCallTonePlayer {
       throw new IllegalStateException("Tone already playing");
     }
     final ToneGeneratorInfo info = getToneGeneratorInfo(tone);
-    mNumPlayingTones = new CountDownLatch(1);
-    mExecutor.execute(
+    numPlayingTones = new CountDownLatch(1);
+    executor.execute(
         new Runnable() {
           @Override
           public void run() {
@@ -106,17 +106,17 @@ public class InCallTonePlayer {
     ToneGenerator toneGenerator = null;
     try {
       Log.v(this, "Starting tone " + info);
-      toneGenerator = mToneGeneratorFactory.newInCallToneGenerator(info.stream, info.volume);
+      toneGenerator = toneGeneratorFactory.newInCallToneGenerator(info.stream, info.volume);
       toneGenerator.startTone(info.tone);
       /*
        * During tests, this will block until the tests call mExecutor.ackMilestone. This call
        * allows for synchronization to the point where the tone has started playing.
        */
-      mExecutor.milestone();
-      if (mNumPlayingTones != null) {
-        mNumPlayingTones.await(info.toneLengthMillis, TimeUnit.MILLISECONDS);
+      executor.milestone();
+      if (numPlayingTones != null) {
+        numPlayingTones.await(info.toneLengthMillis, TimeUnit.MILLISECONDS);
         // Allows for synchronization to the point where the tone has completed playing.
-        mExecutor.milestone();
+        executor.milestone();
       }
     } catch (InterruptedException e) {
       Log.w(this, "Interrupted while playing in-call tone.");
@@ -124,18 +124,18 @@ public class InCallTonePlayer {
       if (toneGenerator != null) {
         toneGenerator.release();
       }
-      if (mNumPlayingTones != null) {
-        mNumPlayingTones.countDown();
+      if (numPlayingTones != null) {
+        numPlayingTones.countDown();
       }
       // Allows for synchronization to the point where this background thread has cleaned up.
-      mExecutor.milestone();
+      executor.milestone();
     }
   }
 
   /** Stops playback of the current tone. */
   public void stop() {
-    if (mNumPlayingTones != null) {
-      mNumPlayingTones.countDown();
+    if (numPlayingTones != null) {
+      numPlayingTones.countDown();
     }
   }
 

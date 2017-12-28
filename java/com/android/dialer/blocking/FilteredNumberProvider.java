@@ -38,20 +38,20 @@ public class FilteredNumberProvider extends ContentProvider {
 
   private static final int FILTERED_NUMBERS_TABLE = 1;
   private static final int FILTERED_NUMBERS_TABLE_ID = 2;
-  private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-  private DialerDatabaseHelper mDialerDatabaseHelper;
+  private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+  private DialerDatabaseHelper dialerDatabaseHelper;
 
   @Override
   public boolean onCreate() {
-    mDialerDatabaseHelper = Database.get(getContext()).getDatabaseHelper(getContext());
-    if (mDialerDatabaseHelper == null) {
+    dialerDatabaseHelper = Database.get(getContext()).getDatabaseHelper(getContext());
+    if (dialerDatabaseHelper == null) {
       return false;
     }
-    sUriMatcher.addURI(
+    uriMatcher.addURI(
         FilteredNumberContract.AUTHORITY,
         FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE,
         FILTERED_NUMBERS_TABLE);
-    sUriMatcher.addURI(
+    uriMatcher.addURI(
         FilteredNumberContract.AUTHORITY,
         FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE + "/#",
         FILTERED_NUMBERS_TABLE_ID);
@@ -61,10 +61,10 @@ public class FilteredNumberProvider extends ContentProvider {
   @Override
   public Cursor query(
       Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-    final SQLiteDatabase db = mDialerDatabaseHelper.getReadableDatabase();
+    final SQLiteDatabase db = dialerDatabaseHelper.getReadableDatabase();
     SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
     qb.setTables(DialerDatabaseHelper.Tables.FILTERED_NUMBER_TABLE);
-    final int match = sUriMatcher.match(uri);
+    final int match = uriMatcher.match(uri);
     switch (match) {
       case FILTERED_NUMBERS_TABLE:
         break;
@@ -91,7 +91,7 @@ public class FilteredNumberProvider extends ContentProvider {
 
   @Override
   public Uri insert(Uri uri, ContentValues values) {
-    SQLiteDatabase db = mDialerDatabaseHelper.getWritableDatabase();
+    SQLiteDatabase db = dialerDatabaseHelper.getWritableDatabase();
     setDefaultValues(values);
     long id = db.insert(DialerDatabaseHelper.Tables.FILTERED_NUMBER_TABLE, null, values);
     if (id < 0) {
@@ -120,8 +120,8 @@ public class FilteredNumberProvider extends ContentProvider {
 
   @Override
   public int delete(Uri uri, String selection, String[] selectionArgs) {
-    SQLiteDatabase db = mDialerDatabaseHelper.getWritableDatabase();
-    final int match = sUriMatcher.match(uri);
+    SQLiteDatabase db = dialerDatabaseHelper.getWritableDatabase();
+    final int match = uriMatcher.match(uri);
     switch (match) {
       case FILTERED_NUMBERS_TABLE:
         break;
@@ -141,8 +141,8 @@ public class FilteredNumberProvider extends ContentProvider {
 
   @Override
   public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-    SQLiteDatabase db = mDialerDatabaseHelper.getWritableDatabase();
-    final int match = sUriMatcher.match(uri);
+    SQLiteDatabase db = dialerDatabaseHelper.getWritableDatabase();
+    final int match = uriMatcher.match(uri);
     switch (match) {
       case FILTERED_NUMBERS_TABLE:
         break;

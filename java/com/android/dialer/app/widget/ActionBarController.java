@@ -31,12 +31,12 @@ public class ActionBarController {
   private static final String KEY_IS_FADED_OUT = "key_actionbar_is_faded_out";
   private static final String KEY_IS_EXPANDED = "key_actionbar_is_expanded";
 
-  private ActivityUi mActivityUi;
-  private SearchEditTextLayout mSearchBox;
+  private ActivityUi activityUi;
+  private SearchEditTextLayout searchBox;
 
-  private boolean mIsActionBarSlidUp;
+  private boolean isActionBarSlidUp;
 
-  private final AnimationCallback mFadeOutCallback =
+  private final AnimationCallback fadeOutCallback =
       new AnimationCallback() {
         @Override
         public void onAnimationEnd() {
@@ -49,24 +49,23 @@ public class ActionBarController {
         }
       };
 
-  private ValueAnimator mAnimator;
+  private ValueAnimator animator;
 
   public ActionBarController(ActivityUi activityUi, SearchEditTextLayout searchBox) {
-    mActivityUi = activityUi;
-    mSearchBox = searchBox;
+    this.activityUi = activityUi;
+    this.searchBox = searchBox;
   }
 
   /** @return Whether or not the action bar is currently showing (both slid down and visible) */
   public boolean isActionBarShowing() {
-    return !mIsActionBarSlidUp && !mSearchBox.isFadedOut();
+    return !isActionBarSlidUp && !searchBox.isFadedOut();
   }
 
   /** Called when the user has tapped on the collapsed search box, to start a new search query. */
   public void onSearchBoxTapped() {
-    LogUtil.d(
-        "ActionBarController.onSearchBoxTapped", "isInSearchUi " + mActivityUi.isInSearchUi());
-    if (!mActivityUi.isInSearchUi()) {
-      mSearchBox.expand(true /* animate */, true /* requestFocus */);
+    LogUtil.d("ActionBarController.onSearchBoxTapped", "isInSearchUi " + activityUi.isInSearchUi());
+    if (!activityUi.isInSearchUi()) {
+      searchBox.expand(true /* animate */, true /* requestFocus */);
     }
   }
 
@@ -75,13 +74,13 @@ public class ActionBarController {
     LogUtil.d(
         "ActionBarController.onSearchUIExited",
         "isExpanded: %b, isFadedOut %b",
-        mSearchBox.isExpanded(),
-        mSearchBox.isFadedOut());
-    if (mSearchBox.isExpanded()) {
-      mSearchBox.collapse(true /* animate */);
+        searchBox.isExpanded(),
+        searchBox.isFadedOut());
+    if (searchBox.isExpanded()) {
+      searchBox.collapse(true /* animate */);
     }
-    if (mSearchBox.isFadedOut()) {
-      mSearchBox.fadeIn();
+    if (searchBox.isFadedOut()) {
+      searchBox.fadeIn();
     }
 
     slideActionBar(false /* slideUp */, false /* animate */);
@@ -95,16 +94,16 @@ public class ActionBarController {
     LogUtil.d(
         "ActionBarController.onDialpadDown",
         "isInSearchUi: %b, hasSearchQuery: %b, isFadedOut: %b, isExpanded: %b",
-        mActivityUi.isInSearchUi(),
-        mActivityUi.hasSearchQuery(),
-        mSearchBox.isFadedOut(),
-        mSearchBox.isExpanded());
-    if (mActivityUi.isInSearchUi()) {
-      if (mSearchBox.isFadedOut()) {
-        mSearchBox.setVisible(true);
+        activityUi.isInSearchUi(),
+        activityUi.hasSearchQuery(),
+        searchBox.isFadedOut(),
+        searchBox.isExpanded());
+    if (activityUi.isInSearchUi()) {
+      if (searchBox.isFadedOut()) {
+        searchBox.setVisible(true);
       }
-      if (!mSearchBox.isExpanded()) {
-        mSearchBox.expand(false /* animate */, false /* requestFocus */);
+      if (!searchBox.isExpanded()) {
+        searchBox.expand(false /* animate */, false /* requestFocus */);
       }
       slideActionBar(false /* slideUp */, true /* animate */);
     }
@@ -115,71 +114,71 @@ public class ActionBarController {
    * state changes have actually occurred.
    */
   public void onDialpadUp() {
-    LogUtil.d("ActionBarController.onDialpadUp", "isInSearchUi " + mActivityUi.isInSearchUi());
-    if (mActivityUi.isInSearchUi()) {
+    LogUtil.d("ActionBarController.onDialpadUp", "isInSearchUi " + activityUi.isInSearchUi());
+    if (activityUi.isInSearchUi()) {
       slideActionBar(true /* slideUp */, true /* animate */);
     } else {
       // From the lists fragment
-      mSearchBox.fadeOut(mFadeOutCallback);
+      searchBox.fadeOut(fadeOutCallback);
     }
   }
 
   public void slideActionBar(boolean slideUp, boolean animate) {
     LogUtil.d("ActionBarController.slidingActionBar", "up: %b, animate: %b", slideUp, animate);
 
-    if (mAnimator != null && mAnimator.isRunning()) {
-      mAnimator.cancel();
-      mAnimator.removeAllUpdateListeners();
+    if (animator != null && animator.isRunning()) {
+      animator.cancel();
+      animator.removeAllUpdateListeners();
     }
     if (animate) {
-      mAnimator = slideUp ? ValueAnimator.ofFloat(0, 1) : ValueAnimator.ofFloat(1, 0);
-      mAnimator.addUpdateListener(
+      animator = slideUp ? ValueAnimator.ofFloat(0, 1) : ValueAnimator.ofFloat(1, 0);
+      animator.addUpdateListener(
           animation -> {
             final float value = (float) animation.getAnimatedValue();
-            setHideOffset((int) (mActivityUi.getActionBarHeight() * value));
+            setHideOffset((int) (activityUi.getActionBarHeight() * value));
           });
-      mAnimator.start();
+      animator.start();
     } else {
-      setHideOffset(slideUp ? mActivityUi.getActionBarHeight() : 0);
+      setHideOffset(slideUp ? activityUi.getActionBarHeight() : 0);
     }
-    mIsActionBarSlidUp = slideUp;
+    isActionBarSlidUp = slideUp;
   }
 
   public void setAlpha(float alphaValue) {
-    mSearchBox.animate().alpha(alphaValue).start();
+    searchBox.animate().alpha(alphaValue).start();
   }
 
   private void setHideOffset(int offset) {
-    mActivityUi.setActionBarHideOffset(offset);
+    activityUi.setActionBarHideOffset(offset);
   }
 
   /** Saves the current state of the action bar into a provided {@link Bundle} */
   public void saveInstanceState(Bundle outState) {
-    outState.putBoolean(KEY_IS_SLID_UP, mIsActionBarSlidUp);
-    outState.putBoolean(KEY_IS_FADED_OUT, mSearchBox.isFadedOut());
-    outState.putBoolean(KEY_IS_EXPANDED, mSearchBox.isExpanded());
+    outState.putBoolean(KEY_IS_SLID_UP, isActionBarSlidUp);
+    outState.putBoolean(KEY_IS_FADED_OUT, searchBox.isFadedOut());
+    outState.putBoolean(KEY_IS_EXPANDED, searchBox.isExpanded());
   }
 
   /** Restores the action bar state from a provided {@link Bundle}. */
   public void restoreInstanceState(Bundle inState) {
-    mIsActionBarSlidUp = inState.getBoolean(KEY_IS_SLID_UP);
+    isActionBarSlidUp = inState.getBoolean(KEY_IS_SLID_UP);
 
     final boolean isSearchBoxFadedOut = inState.getBoolean(KEY_IS_FADED_OUT);
     if (isSearchBoxFadedOut) {
-      if (!mSearchBox.isFadedOut()) {
-        mSearchBox.setVisible(false);
+      if (!searchBox.isFadedOut()) {
+        searchBox.setVisible(false);
       }
-    } else if (mSearchBox.isFadedOut()) {
-      mSearchBox.setVisible(true);
+    } else if (searchBox.isFadedOut()) {
+      searchBox.setVisible(true);
     }
 
     final boolean isSearchBoxExpanded = inState.getBoolean(KEY_IS_EXPANDED);
     if (isSearchBoxExpanded) {
-      if (!mSearchBox.isExpanded()) {
-        mSearchBox.expand(false, false);
+      if (!searchBox.isExpanded()) {
+        searchBox.expand(false, false);
       }
-    } else if (mSearchBox.isExpanded()) {
-      mSearchBox.collapse(false);
+    } else if (searchBox.isExpanded()) {
+      searchBox.collapse(false);
     }
   }
 
@@ -188,7 +187,7 @@ public class ActionBarController {
    * laid out and actually has a height.
    */
   public void restoreActionBarOffset() {
-    slideActionBar(mIsActionBarSlidUp /* slideUp */, false /* animate */);
+    slideActionBar(isActionBarSlidUp /* slideUp */, false /* animate */);
   }
 
   public interface ActivityUi {

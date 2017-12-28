@@ -27,18 +27,18 @@ import com.android.voicemail.impl.scheduling.Task.TaskId;
  */
 public class MinimalIntervalPolicy implements Policy {
 
-  BaseTask mTask;
-  TaskId mId;
-  int mBlockForMillis;
+  BaseTask task;
+  TaskId id;
+  int blockForMillis;
 
   public MinimalIntervalPolicy(int blockForMillis) {
-    mBlockForMillis = blockForMillis;
+    this.blockForMillis = blockForMillis;
   }
 
   @Override
   public void onCreate(BaseTask task, Bundle extras) {
-    mTask = task;
-    mId = mTask.getId();
+    this.task = task;
+    id = this.task.getId();
   }
 
   @Override
@@ -46,12 +46,12 @@ public class MinimalIntervalPolicy implements Policy {
 
   @Override
   public void onCompleted() {
-    if (!mTask.hasFailed()) {
+    if (!task.hasFailed()) {
       Intent intent =
-          BaseTask.createIntent(mTask.getContext(), BlockerTask.class, mId.phoneAccountHandle);
-      intent.putExtra(BlockerTask.EXTRA_TASK_ID, mId.id);
-      intent.putExtra(BlockerTask.EXTRA_BLOCK_FOR_MILLIS, mBlockForMillis);
-      mTask.getContext().sendBroadcast(intent);
+          BaseTask.createIntent(task.getContext(), BlockerTask.class, id.phoneAccountHandle);
+      intent.putExtra(BlockerTask.EXTRA_TASK_ID, id.id);
+      intent.putExtra(BlockerTask.EXTRA_BLOCK_FOR_MILLIS, blockForMillis);
+      task.getContext().sendBroadcast(intent);
     }
   }
 

@@ -52,17 +52,17 @@ public class MailTransport {
   private static final HostnameVerifier HOSTNAME_VERIFIER =
       HttpsURLConnection.getDefaultHostnameVerifier();
 
-  private final Context mContext;
-  private final ImapHelper mImapHelper;
-  private final Network mNetwork;
-  private final String mHost;
-  private final int mPort;
-  private Socket mSocket;
-  private BufferedInputStream mIn;
-  private BufferedOutputStream mOut;
-  private final int mFlags;
-  private SocketCreator mSocketCreator;
-  private InetSocketAddress mAddress;
+  private final Context context;
+  private final ImapHelper imapHelper;
+  private final Network network;
+  private final String host;
+  private final int port;
+  private Socket socket;
+  private BufferedInputStream in;
+  private BufferedOutputStream out;
+  private final int flags;
+  private SocketCreator socketCreator;
+  private InetSocketAddress address;
 
   public MailTransport(
       Context context,
@@ -71,12 +71,12 @@ public class MailTransport {
       String address,
       int port,
       int flags) {
-    mContext = context;
-    mImapHelper = imapHelper;
-    mNetwork = network;
-    mHost = address;
-    mPort = port;
-    mFlags = flags;
+    this.context = context;
+    this.imapHelper = imapHelper;
+    this.network = network;
+    host = address;
+    this.port = port;
+    this.flags = flags;
   }
 
   /**
@@ -85,15 +85,15 @@ public class MailTransport {
    */
   @Override
   public MailTransport clone() {
-    return new MailTransport(mContext, mImapHelper, mNetwork, mHost, mPort, mFlags);
+    return new MailTransport(context, imapHelper, network, host, port, flags);
   }
 
   public boolean canTrySslSecurity() {
-    return (mFlags & ImapStore.FLAG_SSL) != 0;
+    return (flags & ImapStore.FLAG_SSL) != 0;
   }
 
   public boolean canTrustAllCertificates() {
-    return (mFlags & ImapStore.FLAG_TRUST_ALL) != 0;
+    return (flags & ImapStore.FLAG_TRUST_ALL) != 0;
   }
 
   /**
@@ -101,36 +101,36 @@ public class MailTransport {
    * SSL connection if indicated.
    */
   public void open() throws MessagingException {
-    LogUtils.d(TAG, "*** IMAP open " + mHost + ":" + String.valueOf(mPort));
+    LogUtils.d(TAG, "*** IMAP open " + host + ":" + String.valueOf(port));
 
     List<InetSocketAddress> socketAddresses = new ArrayList<InetSocketAddress>();
 
-    if (mNetwork == null) {
-      socketAddresses.add(new InetSocketAddress(mHost, mPort));
+    if (network == null) {
+      socketAddresses.add(new InetSocketAddress(host, port));
     } else {
       try {
-        InetAddress[] inetAddresses = mNetwork.getAllByName(mHost);
+        InetAddress[] inetAddresses = network.getAllByName(host);
         if (inetAddresses.length == 0) {
           throw new MessagingException(
               MessagingException.IOERROR,
-              "Host name " + mHost + "cannot be resolved on designated network");
+              "Host name " + host + "cannot be resolved on designated network");
         }
         for (int i = 0; i < inetAddresses.length; i++) {
-          socketAddresses.add(new InetSocketAddress(inetAddresses[i], mPort));
+          socketAddresses.add(new InetSocketAddress(inetAddresses[i], port));
         }
       } catch (IOException ioe) {
         LogUtils.d(TAG, ioe.toString());
-        mImapHelper.handleEvent(OmtpEvents.DATA_CANNOT_RESOLVE_HOST_ON_NETWORK);
+        imapHelper.handleEvent(OmtpEvents.DATA_CANNOT_RESOLVE_HOST_ON_NETWORK);
         throw new MessagingException(MessagingException.IOERROR, ioe.toString());
       }
     }
 
     boolean success = false;
     while (socketAddresses.size() > 0) {
-      mSocket = createSocket();
+      socket = createSocket();
       try {
-        mAddress = socketAddresses.remove(0);
-        mSocket.connect(mAddress, SOCKET_CONNECT_TIMEOUT);
+        address = socketAddresses.remove(0);
+        socket.connect(address, SOCKET_CONNECT_TIMEOUT);
 
         if (canTrySslSecurity()) {
           /*
@@ -140,9 +140,9 @@ public class MailTransport {
            */
           reopenTls();
         } else {
-          mIn = new BufferedInputStream(mSocket.getInputStream(), 1024);
-          mOut = new BufferedOutputStream(mSocket.getOutputStream(), 512);
-          mSocket.setSoTimeout(SOCKET_READ_TIMEOUT);
+          in = new BufferedInputStream(socket.getInputStream(), 1024);
+          out = new BufferedOutputStream(socket.getOutputStream(), 512);
+          socket.setSoTimeout(SOCKET_READ_TIMEOUT);
         }
         success = true;
         return;
@@ -150,14 +150,14 @@ public class MailTransport {
         LogUtils.d(TAG, ioe.toString());
         if (socketAddresses.size() == 0) {
           // Only throw an error when there are no more sockets to try.
-          mImapHelper.handleEvent(OmtpEvents.DATA_ALL_SOCKET_CONNECTION_FAILED);
+          imapHelper.handleEvent(OmtpEvents.DATA_ALL_SOCKET_CONNECTION_FAILED);
           throw new MessagingException(MessagingException.IOERROR, ioe.toString());
         }
       } finally {
         if (!success) {
           try {
-            mSocket.close();
-            mSocket = null;
+            socket.close();
+            socket = null;
           } catch (IOException ioe) {
             throw new MessagingException(MessagingException.IOERROR, ioe.toString());
           }
@@ -175,15 +175,15 @@ public class MailTransport {
 
   @VisibleForTesting
   void setSocketCreator(SocketCreator creator) {
-    mSocketCreator = creator;
+    socketCreator = creator;
   }
 
   protected Socket createSocket() throws MessagingException {
-    if (mSocketCreator != null) {
-      return mSocketCreator.createSocket();
+    if (socketCreator != null) {
+      return socketCreator.createSocket();
     }
 
-    if (mNetwork == null) {
+    if (network == null) {
       LogUtils.v(TAG, "createSocket: network not specified");
       return new Socket();
     }
@@ -191,7 +191,7 @@ public class MailTransport {
     try {
       LogUtils.v(TAG, "createSocket: network specified");
       TrafficStats.setThreadStatsTag(TrafficStatsTags.VISUAL_VOICEMAIL_TAG);
-      return mNetwork.getSocketFactory().createSocket();
+      return network.getSocketFactory().createSocket();
     } catch (IOException ioe) {
       LogUtils.d(TAG, ioe.toString());
       throw new MessagingException(MessagingException.IOERROR, ioe.toString());
@@ -204,17 +204,17 @@ public class MailTransport {
   public void reopenTls() throws MessagingException {
     try {
       LogUtils.d(TAG, "open: converting to TLS socket");
-      mSocket =
+      socket =
           HttpsURLConnection.getDefaultSSLSocketFactory()
-              .createSocket(mSocket, mAddress.getHostName(), mAddress.getPort(), true);
+              .createSocket(socket, address.getHostName(), address.getPort(), true);
       // After the socket connects to an SSL server, confirm that the hostname is as
       // expected
       if (!canTrustAllCertificates()) {
-        verifyHostname(mSocket, mHost);
+        verifyHostname(socket, host);
       }
-      mSocket.setSoTimeout(SOCKET_READ_TIMEOUT);
-      mIn = new BufferedInputStream(mSocket.getInputStream(), 1024);
-      mOut = new BufferedOutputStream(mSocket.getOutputStream(), 512);
+      socket.setSoTimeout(SOCKET_READ_TIMEOUT);
+      in = new BufferedInputStream(socket.getInputStream(), 1024);
+      out = new BufferedOutputStream(socket.getOutputStream(), 512);
 
     } catch (SSLException e) {
       LogUtils.d(TAG, e.toString());
@@ -248,7 +248,7 @@ public class MailTransport {
 
     SSLSession session = ssl.getSession();
     if (session == null) {
-      mImapHelper.handleEvent(OmtpEvents.DATA_CANNOT_ESTABLISH_SSL_SESSION);
+      imapHelper.handleEvent(OmtpEvents.DATA_CANNOT_ESTABLISH_SSL_SESSION);
       throw new SSLException("Cannot verify SSL socket without session");
     }
     // TODO: Instead of reporting the name of the server we think we're connecting to,
@@ -256,52 +256,52 @@ public class MailTransport {
     // in the verifier code and is not available in the verifier API, and extracting the
     // CN & alts is beyond the scope of this patch.
     if (!HOSTNAME_VERIFIER.verify(hostname, session)) {
-      mImapHelper.handleEvent(OmtpEvents.DATA_SSL_INVALID_HOST_NAME);
+      imapHelper.handleEvent(OmtpEvents.DATA_SSL_INVALID_HOST_NAME);
       throw new SSLPeerUnverifiedException(
           "Certificate hostname not useable for server: " + session.getPeerPrincipal());
     }
   }
 
   public boolean isOpen() {
-    return (mIn != null
-        && mOut != null
-        && mSocket != null
-        && mSocket.isConnected()
-        && !mSocket.isClosed());
+    return (in != null
+        && out != null
+        && socket != null
+        && socket.isConnected()
+        && !socket.isClosed());
   }
 
   /** Close the connection. MUST NOT return any exceptions - must be "best effort" and safe. */
   public void close() {
     try {
-      mIn.close();
+      in.close();
     } catch (Exception e) {
       // May fail if the connection is already closed.
     }
     try {
-      mOut.close();
+      out.close();
     } catch (Exception e) {
       // May fail if the connection is already closed.
     }
     try {
-      mSocket.close();
+      socket.close();
     } catch (Exception e) {
       // May fail if the connection is already closed.
     }
-    mIn = null;
-    mOut = null;
-    mSocket = null;
+    in = null;
+    out = null;
+    socket = null;
   }
 
   public String getHost() {
-    return mHost;
+    return host;
   }
 
   public InputStream getInputStream() {
-    return mIn;
+    return in;
   }
 
   public OutputStream getOutputStream() {
-    return mOut;
+    return out;
   }
 
   /** Writes a single line to the server using \r\n termination. */

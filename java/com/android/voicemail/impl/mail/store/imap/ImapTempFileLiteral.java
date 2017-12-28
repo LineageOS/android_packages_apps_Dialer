@@ -33,20 +33,20 @@ import org.apache.commons.io.IOUtils;
 public class ImapTempFileLiteral extends ImapString {
   private final String TAG = "ImapTempFileLiteral";
 
-  /* package for test */ final File mFile;
+  /* package for test */ final File file;
 
   /** Size is purely for toString() */
-  private final int mSize;
+  private final int size;
 
   /* package */ ImapTempFileLiteral(FixedLengthInputStream stream) throws IOException {
-    mSize = stream.getLength();
-    mFile = File.createTempFile("imap", ".tmp", TempDirectory.getTempDirectory());
+    size = stream.getLength();
+    file = File.createTempFile("imap", ".tmp", TempDirectory.getTempDirectory());
 
     // Unfortunately, we can't really use deleteOnExit(), because temp filenames are random
     // so it'd simply cause a memory leak.
     // deleteOnExit() simply adds filenames to a static list and the list will never shrink.
     // mFile.deleteOnExit();
-    OutputStream out = new FileOutputStream(mFile);
+    OutputStream out = new FileOutputStream(file);
     IOUtils.copy(stream, out);
     out.close();
   }
@@ -69,7 +69,7 @@ public class ImapTempFileLiteral extends ImapString {
   public InputStream getAsStream() {
     checkNotDestroyed();
     try {
-      return new FileInputStream(mFile);
+      return new FileInputStream(file);
     } catch (FileNotFoundException e) {
       // It's probably possible if we're low on storage and the system clears the cache dir.
       LogUtils.w(TAG, "ImapTempFileLiteral: Temp file not found");
@@ -98,8 +98,8 @@ public class ImapTempFileLiteral extends ImapString {
   @Override
   public void destroy() {
     try {
-      if (!isDestroyed() && mFile.exists()) {
-        mFile.delete();
+      if (!isDestroyed() && file.exists()) {
+        file.delete();
       }
     } catch (RuntimeException re) {
       // Just log and ignore.
@@ -110,10 +110,10 @@ public class ImapTempFileLiteral extends ImapString {
 
   @Override
   public String toString() {
-    return String.format("{%d byte literal(file)}", mSize);
+    return String.format("{%d byte literal(file)}", size);
   }
 
   public boolean tempFileExistsForTest() {
-    return mFile.exists();
+    return file.exists();
   }
 }

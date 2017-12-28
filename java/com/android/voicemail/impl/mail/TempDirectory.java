@@ -23,18 +23,18 @@ import java.io.File;
  * initialization.
  */
 public class TempDirectory {
-  private static File sTempDirectory = null;
+  private static File tempDirectory = null;
 
   public static void setTempDirectory(Context context) {
-    sTempDirectory = context.getCacheDir();
+    tempDirectory = context.getCacheDir();
   }
 
   public static File getTempDirectory() {
-    if (sTempDirectory == null) {
+    if (tempDirectory == null) {
       throw new RuntimeException(
           "TempDirectory not set.  "
               + "If in a unit test, call Email.setTempDirectory(context) in setUp().");
     }
-    return sTempDirectory;
+    return tempDirectory;
   }
 }

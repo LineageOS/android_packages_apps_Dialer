@@ -68,17 +68,17 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    */
   private static final int TILES_SOFT_LIMIT = 20;
   /** Contact data stored in cache. This is used to populate the associated view. */
-  private ArrayList<ContactEntry> mContactEntries = null;
+  private ArrayList<ContactEntry> contactEntries = null;
 
-  private int mNumFrequents;
-  private int mNumStarred;
+  private int numFrequents;
+  private int numStarred;
 
-  private ContactTileView.Listener mListener;
-  private OnDataSetChangedForAnimationListener mDataSetChangedListener;
-  private Context mContext;
-  private Resources mResources;
-  private ContactsPreferences mContactsPreferences;
-  private final Comparator<ContactEntry> mContactEntryComparator =
+  private ContactTileView.Listener listener;
+  private OnDataSetChangedForAnimationListener dataSetChangedListener;
+  private Context context;
+  private Resources resources;
+  private ContactsPreferences contactsPreferences;
+  private final Comparator<ContactEntry> contactEntryComparator =
       new Comparator<ContactEntry>() {
         @Override
         public int compare(ContactEntry lhs, ContactEntry rhs) {
@@ -89,7 +89,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         }
 
         private String getPreferredSortName(ContactEntry contactEntry) {
-          if (mContactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY
+          if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY
               || TextUtils.isEmpty(contactEntry.nameAlternative)) {
             return contactEntry.namePrimary;
           }
@@ -97,36 +97,36 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         }
       };
   /** Back up of the temporarily removed Contact during dragging. */
-  private ContactEntry mDraggedEntry = null;
+  private ContactEntry draggedEntry = null;
   /** Position of the temporarily removed contact in the cache. */
-  private int mDraggedEntryIndex = -1;
+  private int draggedEntryIndex = -1;
   /** New position of the temporarily removed contact in the cache. */
-  private int mDropEntryIndex = -1;
+  private int dropEntryIndex = -1;
   /** New position of the temporarily entered contact in the cache. */
-  private int mDragEnteredEntryIndex = -1;
+  private int dragEnteredEntryIndex = -1;
 
-  private boolean mAwaitingRemove = false;
-  private boolean mDelayCursorUpdates = false;
-  private ContactPhotoManager mPhotoManager;
+  private boolean awaitingRemove = false;
+  private boolean delayCursorUpdates = false;
+  private ContactPhotoManager photoManager;
 
   /** Indicates whether a drag is in process. */
-  private boolean mInDragging = false;
+  private boolean inDragging = false;
 
   public PhoneFavoritesTileAdapter(
       Context context,
       ContactTileView.Listener listener,
       OnDataSetChangedForAnimationListener dataSetChangedListener) {
-    mDataSetChangedListener = dataSetChangedListener;
-    mListener = listener;
-    mContext = context;
-    mResources = context.getResources();
-    mContactsPreferences = new ContactsPreferences(mContext);
-    mNumFrequents = 0;
-    mContactEntries = new ArrayList<>();
+    this.dataSetChangedListener = dataSetChangedListener;
+    this.listener = listener;
+    this.context = context;
+    resources = context.getResources();
+    contactsPreferences = new ContactsPreferences(this.context);
+    numFrequents = 0;
+    contactEntries = new ArrayList<>();
   }
 
   void setPhotoLoader(ContactPhotoManager photoLoader) {
-    mPhotoManager = photoLoader;
+    photoManager = photoLoader;
   }
 
   /**
@@ -135,13 +135,13 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    * @param inDragging Boolean variable indicating whether there is a drag in process.
    */
   private void setInDragging(boolean inDragging) {
-    mDelayCursorUpdates = inDragging;
-    mInDragging = inDragging;
+    delayCursorUpdates = inDragging;
+    this.inDragging = inDragging;
   }
 
   void refreshContactsPreferences() {
-    mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    mContactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
+    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
+    contactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
   }
 
   /**
@@ -152,7 +152,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    * @param cursor The cursor to get number of frequents from.
    */
   private void saveNumFrequentsFromCursor(Cursor cursor) {
-    mNumFrequents = cursor.getCount() - mNumStarred;
+    numFrequents = cursor.getCount() - numStarred;
   }
 
   /**
@@ -161,10 +161,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    * <p>Else use {@link ContactTileLoaderFactory}
    */
   void setContactCursor(Cursor cursor) {
-    if (!mDelayCursorUpdates && cursor != null && !cursor.isClosed()) {
-      mNumStarred = getNumStarredContacts(cursor);
-      if (mAwaitingRemove) {
-        mDataSetChangedListener.cacheOffsetsForDatasetChange();
+    if (!delayCursorUpdates && cursor != null && !cursor.isClosed()) {
+      numStarred = getNumStarredContacts(cursor);
+      if (awaitingRemove) {
+        dataSetChangedListener.cacheOffsetsForDatasetChange();
       }
 
       saveNumFrequentsFromCursor(cursor);
@@ -172,7 +172,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       // cause a refresh of any views that rely on this data
       notifyDataSetChanged();
       // about to start redraw
-      mDataSetChangedListener.onDataSetChangedForAnimation();
+      dataSetChangedListener.onDataSetChangedForAnimation();
     }
   }
 
@@ -183,7 +183,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    *     view.
    */
   private void saveCursorToCache(Cursor cursor) {
-    mContactEntries.clear();
+    contactEntries.clear();
 
     if (cursor == null) {
       return;
@@ -250,12 +250,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
 
         contact.id = id;
         contact.namePrimary =
-            (!TextUtils.isEmpty(name)) ? name : mResources.getString(R.string.missing_name);
+            (!TextUtils.isEmpty(name)) ? name : resources.getString(R.string.missing_name);
         contact.nameAlternative =
             (!TextUtils.isEmpty(nameAlternative))
                 ? nameAlternative
-                : mResources.getString(R.string.missing_name);
-        contact.nameDisplayOrder = mContactsPreferences.getDisplayOrder();
+                : resources.getString(R.string.missing_name);
+        contact.nameDisplayOrder = contactsPreferences.getDisplayOrder();
         contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
         contact.lookupKey = lookupKey;
         contact.lookupUri =
@@ -268,11 +268,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         final int phoneNumberType = cursor.getInt(phoneTypeColumn);
         final String phoneNumberCustomLabel = cursor.getString(phoneLabelColumn);
         contact.phoneLabel =
-            (String) Phone.getTypeLabel(mResources, phoneNumberType, phoneNumberCustomLabel);
+            (String) Phone.getTypeLabel(resources, phoneNumberType, phoneNumberCustomLabel);
         contact.phoneNumber = cursor.getString(phoneNumberColumn);
 
         contact.pinned = pinned;
-        mContactEntries.add(contact);
+        contactEntries.add(contact);
 
         // Set counts for logging
         if (isStarred) {
@@ -296,23 +296,23 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       } while (cursor.moveToNext());
     }
 
-    mAwaitingRemove = false;
+    awaitingRemove = false;
 
-    arrangeContactsByPinnedPosition(mContactEntries);
+    arrangeContactsByPinnedPosition(contactEntries);
 
-    ShortcutRefresher.refresh(mContext, mContactEntries);
+    ShortcutRefresher.refresh(context, contactEntries);
     notifyDataSetChanged();
 
-    Duo duo = DuoComponent.get(mContext).getDuo();
-    for (ContactEntry contact : mContactEntries) {
+    Duo duo = DuoComponent.get(context).getDuo();
+    for (ContactEntry contact : contactEntries) {
       if (contact.phoneNumber == null) {
         multipleNumbersContactsCount++;
-      } else if (duo.isReachable(mContext, contact.phoneNumber)) {
+      } else if (duo.isReachable(context, contact.phoneNumber)) {
         lightbringerReachableContactsCount++;
       }
     }
 
-    Logger.get(mContext)
+    Logger.get(context)
         .logSpeedDialContactComposition(
             counter,
             starredContactsCount,
@@ -366,16 +366,16 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
 
   /** Returns the number of frequents that will be displayed in the list. */
   int getNumFrequents() {
-    return mNumFrequents;
+    return numFrequents;
   }
 
   @Override
   public int getCount() {
-    if (mContactEntries == null) {
+    if (contactEntries == null) {
       return 0;
     }
 
-    return mContactEntries.size();
+    return contactEntries.size();
   }
 
   /**
@@ -384,7 +384,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    */
   @Override
   public ContactEntry getItem(int position) {
-    return mContactEntries.get(position);
+    return contactEntries.get(position);
   }
 
   /**
@@ -435,10 +435,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
 
     if (tileView == null) {
       tileView =
-          (PhoneFavoriteTileView) View.inflate(mContext, R.layout.phone_favorite_tile_view, null);
+          (PhoneFavoriteTileView) View.inflate(context, R.layout.phone_favorite_tile_view, null);
     }
-    tileView.setPhotoManager(mPhotoManager);
-    tileView.setListener(mListener);
+    tileView.setPhotoManager(photoManager);
+    tileView.setListener(listener);
     tileView.loadFromContact(getItem(position));
     tileView.setPosition(position);
     return tileView;
@@ -462,37 +462,37 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    */
   private void popContactEntry(int index) {
     if (isIndexInBound(index)) {
-      mDraggedEntry = mContactEntries.get(index);
-      mDraggedEntryIndex = index;
-      mDragEnteredEntryIndex = index;
-      markDropArea(mDragEnteredEntryIndex);
+      draggedEntry = contactEntries.get(index);
+      draggedEntryIndex = index;
+      dragEnteredEntryIndex = index;
+      markDropArea(dragEnteredEntryIndex);
     }
   }
 
   /**
-   * @param itemIndex Position of the contact in {@link #mContactEntries}.
-   * @return True if the given index is valid for {@link #mContactEntries}.
+   * @param itemIndex Position of the contact in {@link #contactEntries}.
+   * @return True if the given index is valid for {@link #contactEntries}.
    */
   boolean isIndexInBound(int itemIndex) {
-    return itemIndex >= 0 && itemIndex < mContactEntries.size();
+    return itemIndex >= 0 && itemIndex < contactEntries.size();
   }
 
   /**
-   * Mark the tile as drop area by given the item index in {@link #mContactEntries}.
+   * Mark the tile as drop area by given the item index in {@link #contactEntries}.
    *
-   * @param itemIndex Position of the contact in {@link #mContactEntries}.
+   * @param itemIndex Position of the contact in {@link #contactEntries}.
    */
   private void markDropArea(int itemIndex) {
-    if (mDraggedEntry != null
-        && isIndexInBound(mDragEnteredEntryIndex)
+    if (draggedEntry != null
+        && isIndexInBound(dragEnteredEntryIndex)
         && isIndexInBound(itemIndex)) {
-      mDataSetChangedListener.cacheOffsetsForDatasetChange();
+      dataSetChangedListener.cacheOffsetsForDatasetChange();
       // Remove the old placeholder item and place the new placeholder item.
-      mContactEntries.remove(mDragEnteredEntryIndex);
-      mDragEnteredEntryIndex = itemIndex;
-      mContactEntries.add(mDragEnteredEntryIndex, ContactEntry.BLANK_ENTRY);
-      ContactEntry.BLANK_ENTRY.id = mDraggedEntry.id;
-      mDataSetChangedListener.onDataSetChangedForAnimation();
+      contactEntries.remove(dragEnteredEntryIndex);
+      dragEnteredEntryIndex = itemIndex;
+      contactEntries.add(dragEnteredEntryIndex, ContactEntry.BLANK_ENTRY);
+      ContactEntry.BLANK_ENTRY.id = draggedEntry.id;
+      dataSetChangedListener.onDataSetChangedForAnimation();
       notifyDataSetChanged();
     }
   }
@@ -500,38 +500,38 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   /** Drops the temporarily removed contact to the desired location in the list. */
   private void handleDrop() {
     boolean changed = false;
-    if (mDraggedEntry != null) {
-      if (isIndexInBound(mDragEnteredEntryIndex) && mDragEnteredEntryIndex != mDraggedEntryIndex) {
+    if (draggedEntry != null) {
+      if (isIndexInBound(dragEnteredEntryIndex) && dragEnteredEntryIndex != draggedEntryIndex) {
         // Don't add the ContactEntry here (to prevent a double animation from occuring).
         // When we receive a new cursor the list of contact entries will automatically be
         // populated with the dragged ContactEntry at the correct spot.
-        mDropEntryIndex = mDragEnteredEntryIndex;
-        mContactEntries.set(mDropEntryIndex, mDraggedEntry);
-        mDataSetChangedListener.cacheOffsetsForDatasetChange();
+        dropEntryIndex = dragEnteredEntryIndex;
+        contactEntries.set(dropEntryIndex, draggedEntry);
+        dataSetChangedListener.cacheOffsetsForDatasetChange();
         changed = true;
-      } else if (isIndexInBound(mDraggedEntryIndex)) {
+      } else if (isIndexInBound(draggedEntryIndex)) {
         // If {@link #mDragEnteredEntryIndex} is invalid,
         // falls back to the original position of the contact.
-        mContactEntries.remove(mDragEnteredEntryIndex);
-        mContactEntries.add(mDraggedEntryIndex, mDraggedEntry);
-        mDropEntryIndex = mDraggedEntryIndex;
+        contactEntries.remove(dragEnteredEntryIndex);
+        contactEntries.add(draggedEntryIndex, draggedEntry);
+        dropEntryIndex = draggedEntryIndex;
         notifyDataSetChanged();
       }
 
-      if (changed && mDropEntryIndex < PIN_LIMIT) {
+      if (changed && dropEntryIndex < PIN_LIMIT) {
         final ArrayList<ContentProviderOperation> operations =
-            getReflowedPinningOperations(mContactEntries, mDraggedEntryIndex, mDropEntryIndex);
+            getReflowedPinningOperations(contactEntries, draggedEntryIndex, dropEntryIndex);
         if (!operations.isEmpty()) {
           // update the database here with the new pinned positions
           try {
-            mContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
-            Logger.get(mContext).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
+            context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+            Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
           } catch (RemoteException | OperationApplicationException e) {
             LogUtil.e(TAG, "Exception thrown when pinning contacts", e);
           }
         }
       }
-      mDraggedEntry = null;
+      draggedEntry = null;
     }
   }
 
@@ -543,7 +543,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     final ContentValues values = new ContentValues(2);
     values.put(Contacts.STARRED, false);
     values.put(Contacts.PINNED, PinnedPositions.DEMOTED);
-    mContext.getContentResolver().update(contactUri, values, null, null);
+    context.getContentResolver().update(contactUri, values, null, null);
   }
 
   /**
@@ -559,7 +559,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   @VisibleForTesting
   private void arrangeContactsByPinnedPosition(ArrayList<ContactEntry> toArrange) {
     final PriorityQueue<ContactEntry> pinnedQueue =
-        new PriorityQueue<>(PIN_LIMIT, mContactEntryComparator);
+        new PriorityQueue<>(PIN_LIMIT, contactEntryComparator);
 
     final List<ContactEntry> unpinnedContacts = new LinkedList<>();
 
@@ -643,7 +643,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   @Override
   public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
     setInDragging(true);
-    final int itemIndex = mContactEntries.indexOf(view.getContactEntry());
+    final int itemIndex = contactEntries.indexOf(view.getContactEntry());
     popContactEntry(itemIndex);
   }
 
@@ -654,9 +654,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       // anything here.
       return;
     }
-    final int itemIndex = mContactEntries.indexOf(view.getContactEntry());
-    if (mInDragging
-        && mDragEnteredEntryIndex != itemIndex
+    final int itemIndex = contactEntries.indexOf(view.getContactEntry());
+    if (inDragging
+        && dragEnteredEntryIndex != itemIndex
         && isIndexInBound(itemIndex)
         && itemIndex < PIN_LIMIT
         && itemIndex >= 0) {
@@ -670,17 +670,17 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     // A contact has been dragged to the RemoveView in order to be unstarred,  so simply wait
     // for the new contact cursor which will cause the UI to be refreshed without the unstarred
     // contact.
-    if (!mAwaitingRemove) {
+    if (!awaitingRemove) {
       handleDrop();
     }
   }
 
   @Override
   public void onDroppedOnRemove() {
-    if (mDraggedEntry != null) {
-      unstarAndUnpinContact(mDraggedEntry.lookupUri);
-      mAwaitingRemove = true;
-      Logger.get(mContext).logInteraction(InteractionEvent.Type.SPEED_DIAL_REMOVE_CONTACT);
+    if (draggedEntry != null) {
+      unstarAndUnpinContact(draggedEntry.lookupUri);
+      awaitingRemove = true;
+      Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_REMOVE_CONTACT);
     }
   }
 
