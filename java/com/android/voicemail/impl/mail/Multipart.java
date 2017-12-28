@@ -18,45 +18,45 @@ package com.android.voicemail.impl.mail;
 import java.util.ArrayList;
 
 public abstract class Multipart implements Body {
-  protected Part mParent;
+  protected Part parent;
 
-  protected ArrayList<BodyPart> mParts = new ArrayList<BodyPart>();
+  protected ArrayList<BodyPart> parts = new ArrayList<BodyPart>();
 
-  protected String mContentType;
+  protected String contentType;
 
   public void addBodyPart(BodyPart part) throws MessagingException {
-    mParts.add(part);
+    parts.add(part);
   }
 
   public void addBodyPart(BodyPart part, int index) throws MessagingException {
-    mParts.add(index, part);
+    parts.add(index, part);
   }
 
   public BodyPart getBodyPart(int index) throws MessagingException {
-    return mParts.get(index);
+    return parts.get(index);
   }
 
   public String getContentType() throws MessagingException {
-    return mContentType;
+    return contentType;
   }
 
   public int getCount() throws MessagingException {
-    return mParts.size();
+    return parts.size();
   }
 
   public boolean removeBodyPart(BodyPart part) throws MessagingException {
-    return mParts.remove(part);
+    return parts.remove(part);
   }
 
   public void removeBodyPart(int index) throws MessagingException {
-    mParts.remove(index);
+    parts.remove(index);
   }
 
   public Part getParent() throws MessagingException {
-    return mParent;
+    return parent;
   }
 
   public void setParent(Part parent) throws MessagingException {
-    this.mParent = parent;
+    this.parent = parent;
   }
 }

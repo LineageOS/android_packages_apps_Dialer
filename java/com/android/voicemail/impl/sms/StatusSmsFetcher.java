@@ -58,14 +58,14 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
       "com.android.voicemailomtp.sms.REQUEST_SENT";
   private static final int ACTION_REQUEST_SENT_REQUEST_CODE = 0;
 
-  private CompletableFuture<Bundle> mFuture = new CompletableFuture<>();
+  private CompletableFuture<Bundle> future = new CompletableFuture<>();
 
-  private final Context mContext;
-  private final PhoneAccountHandle mPhoneAccountHandle;
+  private final Context context;
+  private final PhoneAccountHandle phoneAccountHandle;
 
   public StatusSmsFetcher(Context context, PhoneAccountHandle phoneAccountHandle) {
-    mContext = context;
-    mPhoneAccountHandle = phoneAccountHandle;
+    this.context = context;
+    this.phoneAccountHandle = phoneAccountHandle;
     IntentFilter filter = new IntentFilter(ACTION_REQUEST_SENT_INTENT);
     filter.addAction(OmtpService.ACTION_SMS_RECEIVED);
     context.registerReceiver(this, filter);
@@ -73,7 +73,7 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
 
   @Override
   public void close() throws IOException {
-    mContext.unregisterReceiver(this);
+    context.unregisterReceiver(this);
   }
 
   @WorkerThread
@@ -81,16 +81,16 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
   public Bundle get()
       throws InterruptedException, ExecutionException, TimeoutException, CancellationException {
     Assert.isNotMainThread();
-    return mFuture.get(STATUS_SMS_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+    return future.get(STATUS_SMS_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
   }
 
   public PendingIntent getSentIntent() {
     Intent intent = new Intent(ACTION_REQUEST_SENT_INTENT);
-    intent.setPackage(mContext.getPackageName());
+    intent.setPackage(context.getPackageName());
     // Because the receiver is registered dynamically, implicit intent must be used.
     // There should only be a single status SMS request at a time.
     return PendingIntent.getBroadcast(
-        mContext, ACTION_REQUEST_SENT_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        context, ACTION_REQUEST_SENT_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
   }
 
   @Override
@@ -106,19 +106,19 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
       }
 
       VvmLog.e(TAG, "Request SMS send failed: " + sentSmsResultToString(resultCode));
-      mFuture.cancel(true);
+      future.cancel(true);
       return;
     }
 
     VisualVoicemailSms sms = intent.getExtras().getParcelable(OmtpService.EXTRA_VOICEMAIL_SMS);
 
-    if (!mPhoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
+    if (!phoneAccountHandle.equals(sms.getPhoneAccountHandle())) {
       return;
     }
     String eventType = sms.getPrefix();
 
     if (eventType.equals(OmtpConstants.STATUS_SMS_PREFIX)) {
-      mFuture.complete(sms.getFields());
+      future.complete(sms.getFields());
       return;
     }
 
@@ -129,8 +129,7 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
     VvmLog.i(
         TAG,
         "VVM SMS with event " + eventType + " received, attempting to translate to STATUS SMS");
-    OmtpVvmCarrierConfigHelper helper =
-        new OmtpVvmCarrierConfigHelper(context, mPhoneAccountHandle);
+    OmtpVvmCarrierConfigHelper helper = new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle);
     VisualVoicemailProtocol protocol = helper.getProtocol();
     if (protocol == null) {
       return;
@@ -139,7 +138,7 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
 
     if (translatedBundle != null) {
       VvmLog.i(TAG, "Translated to STATUS SMS");
-      mFuture.complete(translatedBundle);
+      future.complete(translatedBundle);
     }
   }
 

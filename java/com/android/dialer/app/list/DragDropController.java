@@ -28,12 +28,12 @@ import java.util.List;
  */
 public class DragDropController {
 
-  private final List<OnDragDropListener> mOnDragDropListeners = new ArrayList<OnDragDropListener>();
-  private final DragItemContainer mDragItemContainer;
-  private final int[] mLocationOnScreen = new int[2];
+  private final List<OnDragDropListener> onDragDropListeners = new ArrayList<OnDragDropListener>();
+  private final DragItemContainer dragItemContainer;
+  private final int[] locationOnScreen = new int[2];
 
   public DragDropController(DragItemContainer dragItemContainer) {
-    mDragItemContainer = dragItemContainer;
+    this.dragItemContainer = dragItemContainer;
   }
 
   /** @return True if the drag is started, false if the drag is cancelled for some reason. */
@@ -43,54 +43,53 @@ public class DragDropController {
     // The coordinates in dragEvent of DragEvent.ACTION_DRAG_STARTED before NYC is window-related.
     // This is fixed in NYC.
     if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      v.getLocationOnScreen(mLocationOnScreen);
-      screenX = x + mLocationOnScreen[0];
-      screenY = y + mLocationOnScreen[1];
+      v.getLocationOnScreen(locationOnScreen);
+      screenX = x + locationOnScreen[0];
+      screenY = y + locationOnScreen[1];
     }
     final PhoneFavoriteSquareTileView tileView =
-        mDragItemContainer.getViewForLocation(screenX, screenY);
+        dragItemContainer.getViewForLocation(screenX, screenY);
     if (tileView == null) {
       return false;
     }
-    for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-      mOnDragDropListeners.get(i).onDragStarted(screenX, screenY, tileView);
+    for (int i = 0; i < onDragDropListeners.size(); i++) {
+      onDragDropListeners.get(i).onDragStarted(screenX, screenY, tileView);
     }
 
     return true;
   }
 
   public void handleDragHovered(View v, int x, int y) {
-    v.getLocationOnScreen(mLocationOnScreen);
-    final int screenX = x + mLocationOnScreen[0];
-    final int screenY = y + mLocationOnScreen[1];
-    final PhoneFavoriteSquareTileView view =
-        mDragItemContainer.getViewForLocation(screenX, screenY);
-    for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-      mOnDragDropListeners.get(i).onDragHovered(screenX, screenY, view);
+    v.getLocationOnScreen(locationOnScreen);
+    final int screenX = x + locationOnScreen[0];
+    final int screenY = y + locationOnScreen[1];
+    final PhoneFavoriteSquareTileView view = dragItemContainer.getViewForLocation(screenX, screenY);
+    for (int i = 0; i < onDragDropListeners.size(); i++) {
+      onDragDropListeners.get(i).onDragHovered(screenX, screenY, view);
     }
   }
 
   public void handleDragFinished(int x, int y, boolean isRemoveView) {
     if (isRemoveView) {
-      for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-        mOnDragDropListeners.get(i).onDroppedOnRemove();
+      for (int i = 0; i < onDragDropListeners.size(); i++) {
+        onDragDropListeners.get(i).onDroppedOnRemove();
       }
     }
 
-    for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-      mOnDragDropListeners.get(i).onDragFinished(x, y);
+    for (int i = 0; i < onDragDropListeners.size(); i++) {
+      onDragDropListeners.get(i).onDragFinished(x, y);
     }
   }
 
   public void addOnDragDropListener(OnDragDropListener listener) {
-    if (!mOnDragDropListeners.contains(listener)) {
-      mOnDragDropListeners.add(listener);
+    if (!onDragDropListeners.contains(listener)) {
+      onDragDropListeners.add(listener);
     }
   }
 
   public void removeOnDragDropListener(OnDragDropListener listener) {
-    if (mOnDragDropListeners.contains(listener)) {
-      mOnDragDropListeners.remove(listener);
+    if (onDragDropListeners.contains(listener)) {
+      onDragDropListeners.remove(listener);
     }
   }
 

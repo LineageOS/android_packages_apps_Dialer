@@ -273,16 +273,16 @@ public class SwipeButtonHelper {
     }
     animator.addListener(
         new AnimatorListenerAdapter() {
-          private boolean mCancelled;
+          private boolean cancelled;
 
           @Override
           public void onAnimationCancel(Animator animation) {
-            mCancelled = true;
+            cancelled = true;
           }
 
           @Override
           public void onAnimationEnd(Animator animation) {
-            if (mCancelled) {
+            if (cancelled) {
               swipeAnimator = null;
               targetedView = null;
               if (onFinishedListener != null) {

@@ -16,9 +16,9 @@
 package com.android.voicemail.impl.mail;
 
 public abstract class BodyPart implements Part {
-  protected Multipart mParent;
+  protected Multipart parent;
 
   public Multipart getParent() {
-    return mParent;
+    return parent;
   }
 }

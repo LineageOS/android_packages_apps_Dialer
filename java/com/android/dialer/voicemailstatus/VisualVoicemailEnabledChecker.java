@@ -42,17 +42,17 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
 
   public static final String PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
       "has_active_voicemail_provider";
-  private SharedPreferences mPrefs;
-  private boolean mHasActiveVoicemailProvider;
-  private CallLogQueryHandler mCallLogQueryHandler;
-  private Context mContext;
-  private Callback mCallback;
+  private SharedPreferences prefs;
+  private boolean hasActiveVoicemailProvider;
+  private CallLogQueryHandler callLogQueryHandler;
+  private Context context;
+  private Callback callback;
 
   public VisualVoicemailEnabledChecker(Context context, @Nullable Callback callback) {
-    mContext = context;
-    mCallback = callback;
-    mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-    mHasActiveVoicemailProvider = mPrefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
+    this.context = context;
+    this.callback = callback;
+    prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+    hasActiveVoicemailProvider = prefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
   }
 
   /**
@@ -60,7 +60,7 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
    *     result.
    */
   public boolean isVisualVoicemailEnabled() {
-    return mHasActiveVoicemailProvider;
+    return hasActiveVoicemailProvider;
   }
 
   /**
@@ -68,22 +68,22 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
    * has changed, Callback.onVisualVoicemailEnabledStatusChanged() will be called.
    */
   public void asyncUpdate() {
-    mCallLogQueryHandler = new CallLogQueryHandler(mContext, mContext.getContentResolver(), this);
-    mCallLogQueryHandler.fetchVoicemailStatus();
+    callLogQueryHandler = new CallLogQueryHandler(context, context.getContentResolver(), this);
+    callLogQueryHandler.fetchVoicemailStatus();
   }
 
   @Override
   public void onVoicemailStatusFetched(Cursor statusCursor) {
     boolean hasActiveVoicemailProvider =
         VoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) > 0;
-    if (hasActiveVoicemailProvider != mHasActiveVoicemailProvider) {
-      mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
-      mPrefs
+    if (hasActiveVoicemailProvider != this.hasActiveVoicemailProvider) {
+      this.hasActiveVoicemailProvider = hasActiveVoicemailProvider;
+      prefs
           .edit()
-          .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, mHasActiveVoicemailProvider)
+          .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, this.hasActiveVoicemailProvider)
           .apply();
-      if (mCallback != null) {
-        mCallback.onVisualVoicemailEnabledStatusChanged(mHasActiveVoicemailProvider);
+      if (callback != null) {
+        callback.onVisualVoicemailEnabledStatusChanged(this.hasActiveVoicemailProvider);
       }
     }
   }

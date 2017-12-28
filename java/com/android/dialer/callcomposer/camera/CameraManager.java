@@ -93,28 +93,28 @@ public class CameraManager implements FocusOverlayManager.Listener {
         }
       };
 
-  private static CameraManager sInstance;
+  private static CameraManager instance;
 
   /** The CameraInfo for the currently selected camera */
-  private final CameraInfo mCameraInfo;
+  private final CameraInfo cameraInfo;
 
   /** The index of the selected camera or NO_CAMERA_SELECTED if a camera hasn't been selected yet */
-  private int mCameraIndex;
+  private int cameraIndex;
 
   /** True if the device has front and back cameras */
-  private final boolean mHasFrontAndBackCamera;
+  private final boolean hasFrontAndBackCamera;
 
   /** True if the camera should be open (may not yet be actually open) */
-  private boolean mOpenRequested;
+  private boolean openRequested;
 
   /** The preview view to show the preview on */
-  private CameraPreview mCameraPreview;
+  private CameraPreview cameraPreview;
 
   /** The helper classs to handle orientation changes */
-  private OrientationHandler mOrientationHandler;
+  private OrientationHandler orientationHandler;
 
   /** Tracks whether the preview has hardware acceleration */
-  private boolean mIsHardwareAccelerationSupported;
+  private boolean isHardwareAccelerationSupported;
 
   /**
    * The task for opening the camera, so it doesn't block the UI thread Using AsyncTask rather than
@@ -122,32 +122,32 @@ public class CameraManager implements FocusOverlayManager.Listener {
    * TODO(blemmon): If we have other AyncTasks (not SafeAsyncTasks) this may contend and we may need
    * to create a dedicated thread, or synchronize the threads in the thread pool
    */
-  private AsyncTask<Integer, Void, Camera> mOpenCameraTask;
+  private AsyncTask<Integer, Void, Camera> openCameraTask;
 
   /**
    * The camera index that is queued to be opened, but not completed yet, or NO_CAMERA_SELECTED if
    * no open task is pending
    */
-  private int mPendingOpenCameraIndex = NO_CAMERA_SELECTED;
+  private int pendingOpenCameraIndex = NO_CAMERA_SELECTED;
 
   /** The instance of the currently opened camera */
-  private Camera mCamera;
+  private Camera camera;
 
   /** The rotation of the screen relative to the camera's natural orientation */
-  private int mRotation;
+  private int rotation;
 
   /** The callback to notify when errors or other events occur */
-  private CameraManagerListener mListener;
+  private CameraManagerListener listener;
 
   /** True if the camera is currently in the process of taking an image */
-  private boolean mTakingPicture;
+  private boolean takingPicture;
 
   /** Manages auto focus visual and behavior */
-  private final FocusOverlayManager mFocusOverlayManager;
+  private final FocusOverlayManager focusOverlayManager;
 
   private CameraManager() {
-    mCameraInfo = new CameraInfo();
-    mCameraIndex = NO_CAMERA_SELECTED;
+    this.cameraInfo = new CameraInfo();
+    cameraIndex = NO_CAMERA_SELECTED;
 
     // Check to see if a front and back camera exist
     boolean hasFrontCamera = false;
@@ -169,19 +169,19 @@ public class CameraManager implements FocusOverlayManager.Listener {
     } catch (final RuntimeException e) {
       LogUtil.e("CameraManager.CameraManager", "Unable to load camera info", e);
     }
-    mHasFrontAndBackCamera = hasFrontCamera && hasBackCamera;
-    mFocusOverlayManager = new FocusOverlayManager(this, Looper.getMainLooper());
+    hasFrontAndBackCamera = hasFrontCamera && hasBackCamera;
+    focusOverlayManager = new FocusOverlayManager(this, Looper.getMainLooper());
 
     // Assume the best until we are proven otherwise
-    mIsHardwareAccelerationSupported = true;
+    isHardwareAccelerationSupported = true;
   }
 
   /** Gets the singleton instance */
   public static CameraManager get() {
-    if (sInstance == null) {
-      sInstance = new CameraManager();
+    if (instance == null) {
+      instance = new CameraManager();
     }
-    return sInstance;
+    return instance;
   }
 
   /**
@@ -191,7 +191,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
    * @param preview The preview surface view
    */
   void setSurface(final CameraPreview preview) {
-    if (preview == mCameraPreview) {
+    if (preview == cameraPreview) {
       return;
     }
 
@@ -203,8 +203,8 @@ public class CameraManager implements FocusOverlayManager.Listener {
             public boolean onTouch(final View view, final MotionEvent motionEvent) {
               if ((motionEvent.getActionMasked() & MotionEvent.ACTION_UP)
                   == MotionEvent.ACTION_UP) {
-                mFocusOverlayManager.setPreviewSize(view.getWidth(), view.getHeight());
-                mFocusOverlayManager.onSingleTapUp(
+                focusOverlayManager.setPreviewSize(view.getWidth(), view.getHeight());
+                focusOverlayManager.onSingleTapUp(
                     (int) motionEvent.getX() + view.getLeft(),
                     (int) motionEvent.getY() + view.getTop());
               }
@@ -213,20 +213,20 @@ public class CameraManager implements FocusOverlayManager.Listener {
             }
           });
     }
-    mCameraPreview = preview;
+    cameraPreview = preview;
     tryShowPreview();
   }
 
   public void setRenderOverlay(final RenderOverlay renderOverlay) {
-    mFocusOverlayManager.setFocusRenderer(
+    focusOverlayManager.setFocusRenderer(
         renderOverlay != null ? renderOverlay.getPieRenderer() : null);
   }
 
   /** Convenience function to swap between front and back facing cameras */
   public void swapCamera() {
-    Assert.checkState(mCameraIndex >= 0);
+    Assert.checkState(cameraIndex >= 0);
     selectCamera(
-        mCameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT
+        cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT
             ? CameraInfo.CAMERA_FACING_BACK
             : CameraInfo.CAMERA_FACING_FRONT);
   }
@@ -241,59 +241,59 @@ public class CameraManager implements FocusOverlayManager.Listener {
   public boolean selectCamera(final int desiredFacing) {
     try {
       // We already selected a camera facing that direction
-      if (mCameraIndex >= 0 && mCameraInfo.facing == desiredFacing) {
+      if (cameraIndex >= 0 && this.cameraInfo.facing == desiredFacing) {
         return true;
       }
 
       final int cameraCount = Camera.getNumberOfCameras();
       Assert.checkState(cameraCount > 0);
 
-      mCameraIndex = NO_CAMERA_SELECTED;
+      cameraIndex = NO_CAMERA_SELECTED;
       setCamera(null);
       final CameraInfo cameraInfo = new CameraInfo();
       for (int i = 0; i < cameraCount; i++) {
         Camera.getCameraInfo(i, cameraInfo);
         if (cameraInfo.facing == desiredFacing) {
-          mCameraIndex = i;
-          Camera.getCameraInfo(i, mCameraInfo);
+          cameraIndex = i;
+          Camera.getCameraInfo(i, this.cameraInfo);
           break;
         }
       }
 
       // There's no camera in the desired facing direction, just select the first camera
       // regardless of direction
-      if (mCameraIndex < 0) {
-        mCameraIndex = 0;
-        Camera.getCameraInfo(0, mCameraInfo);
+      if (cameraIndex < 0) {
+        cameraIndex = 0;
+        Camera.getCameraInfo(0, this.cameraInfo);
       }
 
-      if (mOpenRequested) {
+      if (openRequested) {
         // The camera is open, so reopen with the newly selected camera
         openCamera();
       }
       return true;
     } catch (final RuntimeException e) {
       LogUtil.e("CameraManager.selectCamera", "RuntimeException in CameraManager.selectCamera", e);
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_OPENING_CAMERA, e);
+      if (listener != null) {
+        listener.onCameraError(ERROR_OPENING_CAMERA, e);
       }
       return false;
     }
   }
 
   public int getCameraIndex() {
-    return mCameraIndex;
+    return cameraIndex;
   }
 
   public void selectCameraByIndex(final int cameraIndex) {
-    if (mCameraIndex == cameraIndex) {
+    if (this.cameraIndex == cameraIndex) {
       return;
     }
 
     try {
-      mCameraIndex = cameraIndex;
-      Camera.getCameraInfo(mCameraIndex, mCameraInfo);
-      if (mOpenRequested) {
+      this.cameraIndex = cameraIndex;
+      Camera.getCameraInfo(this.cameraIndex, cameraInfo);
+      if (openRequested) {
         openCamera();
       }
     } catch (final RuntimeException e) {
@@ -301,8 +301,8 @@ public class CameraManager implements FocusOverlayManager.Listener {
           "CameraManager.selectCameraByIndex",
           "RuntimeException in CameraManager.selectCameraByIndex",
           e);
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_OPENING_CAMERA, e);
+      if (listener != null) {
+        listener.onCameraError(ERROR_OPENING_CAMERA, e);
       }
     }
   }
@@ -310,27 +310,27 @@ public class CameraManager implements FocusOverlayManager.Listener {
   @Nullable
   @VisibleForTesting
   public CameraInfo getCameraInfo() {
-    if (mCameraIndex == NO_CAMERA_SELECTED) {
+    if (cameraIndex == NO_CAMERA_SELECTED) {
       return null;
     }
-    return mCameraInfo;
+    return cameraInfo;
   }
 
   /** @return True if the device has both a front and back camera */
   public boolean hasFrontAndBackCamera() {
-    return mHasFrontAndBackCamera;
+    return hasFrontAndBackCamera;
   }
 
   /** Opens the camera on a separate thread and initiates the preview if one is available */
   void openCamera() {
-    if (mCameraIndex == NO_CAMERA_SELECTED) {
+    if (this.cameraIndex == NO_CAMERA_SELECTED) {
       // Ensure a selected camera if none is currently selected. This may happen if the
       // camera chooser is not the default media chooser.
       selectCamera(CameraInfo.CAMERA_FACING_BACK);
     }
-    mOpenRequested = true;
+    openRequested = true;
     // We're already opening the camera or already have the camera handle, nothing more to do
-    if (mPendingOpenCameraIndex == mCameraIndex || mCamera != null) {
+    if (pendingOpenCameraIndex == this.cameraIndex || this.camera != null) {
       return;
     }
 
@@ -338,25 +338,27 @@ public class CameraManager implements FocusOverlayManager.Listener {
     boolean delayTask = false;
 
     // Cancel any previous open camera tasks
-    if (mOpenCameraTask != null) {
-      mPendingOpenCameraIndex = NO_CAMERA_SELECTED;
+    if (openCameraTask != null) {
+      pendingOpenCameraIndex = NO_CAMERA_SELECTED;
       delayTask = true;
     }
 
-    mPendingOpenCameraIndex = mCameraIndex;
-    mOpenCameraTask =
+    pendingOpenCameraIndex = this.cameraIndex;
+    openCameraTask =
         new AsyncTask<Integer, Void, Camera>() {
-          private Exception mException;
+          private Exception exception;
 
           @Override
           protected Camera doInBackground(final Integer... params) {
             try {
               final int cameraIndex = params[0];
-              LogUtil.v("CameraManager.doInBackground", "Opening camera " + mCameraIndex);
+              LogUtil.v(
+                  "CameraManager.doInBackground",
+                  "Opening camera " + CameraManager.this.cameraIndex);
               return Camera.open(cameraIndex);
             } catch (final Exception e) {
               LogUtil.e("CameraManager.doInBackground", "Exception while opening camera", e);
-              mException = e;
+              exception = e;
               return null;
             }
           }
@@ -364,7 +366,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
           @Override
           protected void onPostExecute(final Camera camera) {
             // If we completed, but no longer want this camera, then release the camera
-            if (mOpenCameraTask != this || !mOpenRequested) {
+            if (openCameraTask != this || !openRequested) {
               releaseCamera(camera);
               cleanup();
               return;
@@ -374,11 +376,11 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
             LogUtil.v(
                 "CameraManager.onPostExecute",
-                "Opened camera " + mCameraIndex + " " + (camera != null));
+                "Opened camera " + CameraManager.this.cameraIndex + " " + (camera != null));
             setCamera(camera);
             if (camera == null) {
-              if (mListener != null) {
-                mListener.onCameraError(ERROR_OPENING_CAMERA, mException);
+              if (listener != null) {
+                listener.onCameraError(ERROR_OPENING_CAMERA, exception);
               }
               LogUtil.e("CameraManager.onPostExecute", "Error opening camera");
             }
@@ -391,24 +393,24 @@ public class CameraManager implements FocusOverlayManager.Listener {
           }
 
           private void cleanup() {
-            mPendingOpenCameraIndex = NO_CAMERA_SELECTED;
-            if (mOpenCameraTask != null && mOpenCameraTask.getStatus() == Status.PENDING) {
+            pendingOpenCameraIndex = NO_CAMERA_SELECTED;
+            if (openCameraTask != null && openCameraTask.getStatus() == Status.PENDING) {
               // If there's another task waiting on this one to complete, start it now
-              mOpenCameraTask.execute(mCameraIndex);
+              openCameraTask.execute(CameraManager.this.cameraIndex);
             } else {
-              mOpenCameraTask = null;
+              openCameraTask = null;
             }
           }
         };
-    LogUtil.v("CameraManager.openCamera", "Start opening camera " + mCameraIndex);
+    LogUtil.v("CameraManager.openCamera", "Start opening camera " + this.cameraIndex);
     if (!delayTask) {
-      mOpenCameraTask.execute(mCameraIndex);
+      openCameraTask.execute(this.cameraIndex);
     }
   }
 
   /** Closes the camera releasing the resources it uses */
   void closeCamera() {
-    mOpenRequested = false;
+    openRequested = false;
     setCamera(null);
   }
 
@@ -419,18 +421,18 @@ public class CameraManager implements FocusOverlayManager.Listener {
    */
   public void setListener(final CameraManagerListener listener) {
     Assert.isMainThread();
-    mListener = listener;
-    if (!mIsHardwareAccelerationSupported && mListener != null) {
-      mListener.onCameraError(ERROR_HARDWARE_ACCELERATION_DISABLED, null);
+    this.listener = listener;
+    if (!isHardwareAccelerationSupported && this.listener != null) {
+      this.listener.onCameraError(ERROR_HARDWARE_ACCELERATION_DISABLED, null);
     }
   }
 
   public void takePicture(final float heightPercent, @NonNull final MediaCallback callback) {
-    Assert.checkState(!mTakingPicture);
+    Assert.checkState(!takingPicture);
     Assert.isNotNull(callback);
-    mCameraPreview.setFocusable(false);
-    mFocusOverlayManager.cancelAutoFocus();
-    if (mCamera == null) {
+    cameraPreview.setFocusable(false);
+    focusOverlayManager.cancelAutoFocus();
+    if (this.camera == null) {
       // The caller should have checked isCameraAvailable first, but just in case, protect
       // against a null camera by notifying the callback that taking the picture didn't work
       callback.onMediaFailed(null);
@@ -440,8 +442,8 @@ public class CameraManager implements FocusOverlayManager.Listener {
         new Camera.PictureCallback() {
           @Override
           public void onPictureTaken(final byte[] bytes, final Camera camera) {
-            mTakingPicture = false;
-            if (mCamera != camera) {
+            takingPicture = false;
+            if (CameraManager.this.camera != camera) {
               // This may happen if the camera was changed between front/back while the
               // picture is being taken.
               callback.onMediaInfo(MediaCallback.MEDIA_CAMERA_CHANGED);
@@ -456,7 +458,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
             final Camera.Size size = camera.getParameters().getPictureSize();
             int width;
             int height;
-            if (mRotation == 90 || mRotation == 270) {
+            if (rotation == 90 || rotation == 270) {
               // Is rotated, so swapping dimensions is desired
               // noinspection SuspiciousNameCombination
               width = size.height;
@@ -468,11 +470,11 @@ public class CameraManager implements FocusOverlayManager.Listener {
             }
             LogUtil.i(
                 "CameraManager.onPictureTaken", "taken picture size: " + bytes.length + " bytes");
-            DialerExecutorComponent.get(mCameraPreview.getContext())
+            DialerExecutorComponent.get(cameraPreview.getContext())
                 .dialerExecutorFactory()
                 .createNonUiTaskBuilder(
                     new ImagePersistWorker(
-                        width, height, heightPercent, bytes, mCameraPreview.getContext()))
+                        width, height, heightPercent, bytes, cameraPreview.getContext()))
                 .onSuccess(
                     (result) -> {
                       callback.onMediaReady(
@@ -487,16 +489,16 @@ public class CameraManager implements FocusOverlayManager.Listener {
           }
         };
 
-    mTakingPicture = true;
+    takingPicture = true;
     try {
-      mCamera.takePicture(
+      this.camera.takePicture(
           // A shutter callback is required to enable shutter sound
           DUMMY_SHUTTER_CALLBACK, null /* raw */, null /* postView */, jpegCallback);
     } catch (final RuntimeException e) {
       LogUtil.e("CameraManager.takePicture", "RuntimeException in CameraManager.takePicture", e);
-      mTakingPicture = false;
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_TAKING_PICTURE, e);
+      takingPicture = false;
+      if (listener != null) {
+        listener.onCameraError(ERROR_TAKING_PICTURE, e);
       }
     }
   }
@@ -511,12 +513,12 @@ public class CameraManager implements FocusOverlayManager.Listener {
       return;
     }
 
-    mFocusOverlayManager.onCameraReleased();
+    focusOverlayManager.onCameraReleased();
 
     new AsyncTask<Void, Void, Void>() {
       @Override
       protected Void doInBackground(final Void... params) {
-        LogUtil.v("CameraManager.doInBackground", "Releasing camera " + mCameraIndex);
+        LogUtil.v("CameraManager.doInBackground", "Releasing camera " + cameraIndex);
         camera.release();
         return null;
       }
@@ -583,47 +585,47 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
   /** Sets the current camera, releasing any previously opened camera */
   private void setCamera(final Camera camera) {
-    if (mCamera == camera) {
+    if (this.camera == camera) {
       return;
     }
 
-    releaseCamera(mCamera);
-    mCamera = camera;
+    releaseCamera(this.camera);
+    this.camera = camera;
     tryShowPreview();
-    if (mListener != null) {
-      mListener.onCameraChanged();
+    if (listener != null) {
+      listener.onCameraChanged();
     }
   }
 
   /** Shows the preview if the camera is open and the preview is loaded */
   private void tryShowPreview() {
-    if (mCameraPreview == null || mCamera == null) {
-      if (mOrientationHandler != null) {
-        mOrientationHandler.disable();
-        mOrientationHandler = null;
+    if (cameraPreview == null || this.camera == null) {
+      if (orientationHandler != null) {
+        orientationHandler.disable();
+        orientationHandler = null;
       }
-      mFocusOverlayManager.onPreviewStopped();
+      focusOverlayManager.onPreviewStopped();
       return;
     }
     try {
-      mCamera.stopPreview();
-      if (!mTakingPicture) {
-        mRotation =
+      this.camera.stopPreview();
+      if (!takingPicture) {
+        rotation =
             updateCameraRotation(
-                mCamera,
+                this.camera,
                 getScreenRotation(),
-                mCameraInfo.orientation,
-                mCameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
+                cameraInfo.orientation,
+                cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
       }
 
-      final Camera.Parameters params = mCamera.getParameters();
+      final Camera.Parameters params = this.camera.getParameters();
       final Camera.Size pictureSize = chooseBestPictureSize();
       final Camera.Size previewSize = chooseBestPreviewSize(pictureSize);
       params.setPreviewSize(previewSize.width, previewSize.height);
       params.setPictureSize(pictureSize.width, pictureSize.height);
       logCameraSize("Setting preview size: ", previewSize);
       logCameraSize("Setting picture size: ", pictureSize);
-      mCameraPreview.setSize(previewSize, mCameraInfo.orientation);
+      cameraPreview.setSize(previewSize, cameraInfo.orientation);
       for (final String focusMode : params.getSupportedFocusModes()) {
         if (TextUtils.equals(focusMode, Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
           // Use continuous focus if available
@@ -632,39 +634,39 @@ public class CameraManager implements FocusOverlayManager.Listener {
         }
       }
 
-      mCamera.setParameters(params);
-      mCameraPreview.startPreview(mCamera);
-      mCamera.startPreview();
-      mCamera.setAutoFocusMoveCallback(
+      this.camera.setParameters(params);
+      cameraPreview.startPreview(this.camera);
+      this.camera.startPreview();
+      this.camera.setAutoFocusMoveCallback(
           new Camera.AutoFocusMoveCallback() {
             @Override
             public void onAutoFocusMoving(final boolean start, final Camera camera) {
-              mFocusOverlayManager.onAutoFocusMoving(start);
+              focusOverlayManager.onAutoFocusMoving(start);
             }
           });
-      mFocusOverlayManager.setParameters(mCamera.getParameters());
-      mFocusOverlayManager.setMirror(mCameraInfo.facing == CameraInfo.CAMERA_FACING_BACK);
-      mFocusOverlayManager.onPreviewStarted();
-      if (mOrientationHandler == null) {
-        mOrientationHandler = new OrientationHandler(mCameraPreview.getContext());
-        mOrientationHandler.enable();
+      focusOverlayManager.setParameters(this.camera.getParameters());
+      focusOverlayManager.setMirror(cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK);
+      focusOverlayManager.onPreviewStarted();
+      if (orientationHandler == null) {
+        orientationHandler = new OrientationHandler(cameraPreview.getContext());
+        orientationHandler.enable();
       }
     } catch (final IOException e) {
       LogUtil.e("CameraManager.tryShowPreview", "IOException in CameraManager.tryShowPreview", e);
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_SHOWING_PREVIEW, e);
+      if (listener != null) {
+        listener.onCameraError(ERROR_SHOWING_PREVIEW, e);
       }
     } catch (final RuntimeException e) {
       LogUtil.e(
           "CameraManager.tryShowPreview", "RuntimeException in CameraManager.tryShowPreview", e);
-      if (mListener != null) {
-        mListener.onCameraError(ERROR_SHOWING_PREVIEW, e);
+      if (listener != null) {
+        listener.onCameraError(ERROR_SHOWING_PREVIEW, e);
       }
     }
   }
 
   private int getScreenRotation() {
-    return mCameraPreview
+    return cameraPreview
         .getContext()
         .getSystemService(WindowManager.class)
         .getDefaultDisplay()
@@ -672,7 +674,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
   }
 
   public boolean isCameraAvailable() {
-    return mCamera != null && !mTakingPicture && mIsHardwareAccelerationSupported;
+    return camera != null && !takingPicture && isHardwareAccelerationSupported;
   }
 
   /**
@@ -680,7 +682,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
    * is closest to the screen aspect ratio. In case of RCS conversation returns default size.
    */
   private Camera.Size chooseBestPictureSize() {
-    return mCamera.getParameters().getPictureSize();
+    return camera.getParameters().getPictureSize();
   }
 
   /**
@@ -689,7 +691,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
    */
   private Camera.Size chooseBestPreviewSize(final Camera.Size pictureSize) {
     final List<Camera.Size> sizes =
-        new ArrayList<Camera.Size>(mCamera.getParameters().getSupportedPreviewSizes());
+        new ArrayList<Camera.Size>(camera.getParameters().getSupportedPreviewSizes());
     final float aspectRatio = pictureSize.width / (float) pictureSize.height;
     final int capturePixels = pictureSize.width * pictureSize.height;
 
@@ -708,13 +710,13 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
     @Override
     public void onOrientationChanged(final int orientation) {
-      if (!mTakingPicture) {
-        mRotation =
+      if (!takingPicture) {
+        rotation =
             updateCameraRotation(
-                mCamera,
+                camera,
                 getScreenRotation(),
-                mCameraInfo.orientation,
-                mCameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
+                cameraInfo.orientation,
+                cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT);
       }
     }
   }
@@ -724,24 +726,24 @@ public class CameraManager implements FocusOverlayManager.Listener {
     private static final int PREFER_RIGHT = 1;
 
     // The max width/height for the preferred size. Integer.MAX_VALUE if no size limit
-    private final int mMaxWidth;
-    private final int mMaxHeight;
+    private final int maxWidth;
+    private final int maxHeight;
 
     // The desired aspect ratio
-    private final float mTargetAspectRatio;
+    private final float targetAspectRatio;
 
     // The desired size (width x height) to try to match
-    private final int mTargetPixels;
+    private final int targetPixels;
 
     public SizeComparator(
         final int maxWidth,
         final int maxHeight,
         final float targetAspectRatio,
         final int targetPixels) {
-      mMaxWidth = maxWidth;
-      mMaxHeight = maxHeight;
-      mTargetAspectRatio = targetAspectRatio;
-      mTargetPixels = targetPixels;
+      this.maxWidth = maxWidth;
+      this.maxHeight = maxHeight;
+      this.targetAspectRatio = targetAspectRatio;
+      this.targetPixels = targetPixels;
     }
 
     /**
@@ -751,16 +753,16 @@ public class CameraManager implements FocusOverlayManager.Listener {
     @Override
     public int compare(final Camera.Size left, final Camera.Size right) {
       // If one size is less than the max size prefer it over the other
-      if ((left.width <= mMaxWidth && left.height <= mMaxHeight)
-          != (right.width <= mMaxWidth && right.height <= mMaxHeight)) {
-        return left.width <= mMaxWidth ? PREFER_LEFT : PREFER_RIGHT;
+      if ((left.width <= maxWidth && left.height <= maxHeight)
+          != (right.width <= maxWidth && right.height <= maxHeight)) {
+        return left.width <= maxWidth ? PREFER_LEFT : PREFER_RIGHT;
       }
 
       // If one is closer to the target aspect ratio, prefer it.
       final float leftAspectRatio = left.width / (float) left.height;
       final float rightAspectRatio = right.width / (float) right.height;
-      final float leftAspectRatioDiff = Math.abs(leftAspectRatio - mTargetAspectRatio);
-      final float rightAspectRatioDiff = Math.abs(rightAspectRatio - mTargetAspectRatio);
+      final float leftAspectRatioDiff = Math.abs(leftAspectRatio - targetAspectRatio);
+      final float rightAspectRatioDiff = Math.abs(rightAspectRatio - targetAspectRatio);
       if (leftAspectRatioDiff != rightAspectRatioDiff) {
         return (leftAspectRatioDiff - rightAspectRatioDiff) < 0 ? PREFER_LEFT : PREFER_RIGHT;
       }
@@ -768,41 +770,41 @@ public class CameraManager implements FocusOverlayManager.Listener {
       // At this point they have the same aspect ratio diff and are either both bigger
       // than the max size or both smaller than the max size, so prefer the one closest
       // to target size
-      final int leftDiff = Math.abs((left.width * left.height) - mTargetPixels);
-      final int rightDiff = Math.abs((right.width * right.height) - mTargetPixels);
+      final int leftDiff = Math.abs((left.width * left.height) - targetPixels);
+      final int rightDiff = Math.abs((right.width * right.height) - targetPixels);
       return leftDiff - rightDiff;
     }
   }
 
   @Override // From FocusOverlayManager.Listener
   public void autoFocus() {
-    if (mCamera == null) {
+    if (this.camera == null) {
       return;
     }
 
     try {
-      mCamera.autoFocus(
+      this.camera.autoFocus(
           new Camera.AutoFocusCallback() {
             @Override
             public void onAutoFocus(final boolean success, final Camera camera) {
-              mFocusOverlayManager.onAutoFocus(success, false /* shutterDown */);
+              focusOverlayManager.onAutoFocus(success, false /* shutterDown */);
             }
           });
     } catch (final RuntimeException e) {
       LogUtil.e("CameraManager.autoFocus", "RuntimeException in CameraManager.autoFocus", e);
       // If autofocus fails, the camera should have called the callback with success=false,
       // but some throw an exception here
-      mFocusOverlayManager.onAutoFocus(false /*success*/, false /*shutterDown*/);
+      focusOverlayManager.onAutoFocus(false /*success*/, false /*shutterDown*/);
     }
   }
 
   @Override // From FocusOverlayManager.Listener
   public void cancelAutoFocus() {
-    if (mCamera == null) {
+    if (camera == null) {
       return;
     }
     try {
-      mCamera.cancelAutoFocus();
+      camera.cancelAutoFocus();
     } catch (final RuntimeException e) {
       // Ignore
       LogUtil.e(
@@ -817,19 +819,19 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
   @Override // From FocusOverlayManager.Listener
   public void setFocusParameters() {
-    if (mCamera == null) {
+    if (camera == null) {
       return;
     }
     try {
-      final Camera.Parameters parameters = mCamera.getParameters();
-      parameters.setFocusMode(mFocusOverlayManager.getFocusMode());
+      final Camera.Parameters parameters = camera.getParameters();
+      parameters.setFocusMode(focusOverlayManager.getFocusMode());
       if (parameters.getMaxNumFocusAreas() > 0) {
         // Don't set focus areas (even to null) if focus areas aren't supported, camera may
         // crash
-        parameters.setFocusAreas(mFocusOverlayManager.getFocusAreas());
+        parameters.setFocusAreas(focusOverlayManager.getFocusAreas());
       }
-      parameters.setMeteringAreas(mFocusOverlayManager.getMeteringAreas());
-      mCamera.setParameters(parameters);
+      parameters.setMeteringAreas(focusOverlayManager.getMeteringAreas());
+      camera.setParameters(parameters);
     } catch (final RuntimeException e) {
       // This occurs when the device is out of space or when the camera is locked
       LogUtil.e(
@@ -839,9 +841,9 @@ public class CameraManager implements FocusOverlayManager.Listener {
   }
 
   public void resetPreview() {
-    mCamera.startPreview();
-    if (mCameraPreview != null) {
-      mCameraPreview.setFocusable(true);
+    camera.startPreview();
+    if (cameraPreview != null) {
+      cameraPreview.setFocusable(true);
     }
   }
 
@@ -855,6 +857,6 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
   @VisibleForTesting
   public void resetCameraManager() {
-    sInstance = null;
+    instance = null;
   }
 }

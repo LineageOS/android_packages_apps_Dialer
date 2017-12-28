@@ -119,20 +119,20 @@ public class ExifParser {
 
   private static final int DEFAULT_IFD0_OFFSET = 8;
 
-  private final CountedDataInputStream mTiffStream;
-  private final int mOptions;
-  private int mIfdStartOffset = 0;
-  private int mNumOfTagInIfd = 0;
-  private int mIfdType;
-  private ExifTag mTag;
-  private ImageEvent mImageEvent;
-  private ExifTag mStripSizeTag;
-  private ExifTag mJpegSizeTag;
-  private boolean mNeedToParseOffsetsInCurrentIfd;
-  private boolean mContainExifData = false;
-  private int mApp1End;
-  private byte[] mDataAboveIfd0;
-  private int mIfd0Position;
+  private final CountedDataInputStream tiffStream;
+  private final int options;
+  private int ifdStartOffset = 0;
+  private int numOfTagInIfd = 0;
+  private int ifdType;
+  private ExifTag tag;
+  private ImageEvent imageEvent;
+  private ExifTag stripSizeTag;
+  private ExifTag jpegSizeTag;
+  private boolean needToParseOffsetsInCurrentIfd;
+  private boolean containExifData = false;
+  private int app1End;
+  private byte[] dataAboveIfd0;
+  private int ifd0Position;
   private final ExifInterface mInterface;
 
   private static final short TAG_EXIF_IFD = ExifInterface.getTrueTagKey(ExifInterface.TAG_EXIF_IFD);
@@ -148,26 +148,26 @@ public class ExifParser {
   private static final short TAG_STRIP_BYTE_COUNTS =
       ExifInterface.getTrueTagKey(ExifInterface.TAG_STRIP_BYTE_COUNTS);
 
-  private final TreeMap<Integer, Object> mCorrespondingEvent = new TreeMap<>();
+  private final TreeMap<Integer, Object> correspondingEvent = new TreeMap<>();
 
   private boolean isIfdRequested(int ifdType) {
     switch (ifdType) {
       case IfdId.TYPE_IFD_0:
-        return (mOptions & OPTION_IFD_0) != 0;
+        return (options & OPTION_IFD_0) != 0;
       case IfdId.TYPE_IFD_1:
-        return (mOptions & OPTION_IFD_1) != 0;
+        return (options & OPTION_IFD_1) != 0;
       case IfdId.TYPE_IFD_EXIF:
-        return (mOptions & OPTION_IFD_EXIF) != 0;
+        return (options & OPTION_IFD_EXIF) != 0;
       case IfdId.TYPE_IFD_GPS:
-        return (mOptions & OPTION_IFD_GPS) != 0;
+        return (options & OPTION_IFD_GPS) != 0;
       case IfdId.TYPE_IFD_INTEROPERABILITY:
-        return (mOptions & OPTION_IFD_INTEROPERABILITY) != 0;
+        return (options & OPTION_IFD_INTEROPERABILITY) != 0;
     }
     return false;
   }
 
   private boolean isThumbnailRequested() {
-    return (mOptions & OPTION_THUMBNAIL) != 0;
+    return (options & OPTION_THUMBNAIL) != 0;
   }
 
   private ExifParser(InputStream inputStream, int options, ExifInterface iRef)
@@ -179,25 +179,25 @@ public class ExifParser {
       LogUtil.v("ExifParser.ExifParser", "Reading exif...");
     }
     mInterface = iRef;
-    mContainExifData = seekTiffData(inputStream);
-    mTiffStream = new CountedDataInputStream(inputStream);
-    mOptions = options;
-    if (!mContainExifData) {
+    containExifData = seekTiffData(inputStream);
+    tiffStream = new CountedDataInputStream(inputStream);
+    this.options = options;
+    if (!containExifData) {
       return;
     }
 
     parseTiffHeader();
-    long offset = mTiffStream.readUnsignedInt();
+    long offset = tiffStream.readUnsignedInt();
     if (offset > Integer.MAX_VALUE) {
       throw new ExifInvalidFormatException("Invalid offset " + offset);
     }
-    mIfd0Position = (int) offset;
-    mIfdType = IfdId.TYPE_IFD_0;
+    ifd0Position = (int) offset;
+    ifdType = IfdId.TYPE_IFD_0;
     if (isIfdRequested(IfdId.TYPE_IFD_0) || needToParseOffsetsInCurrentIfd()) {
       registerIfd(IfdId.TYPE_IFD_0, offset);
       if (offset != DEFAULT_IFD0_OFFSET) {
-        mDataAboveIfd0 = new byte[(int) offset - DEFAULT_IFD0_OFFSET];
-        read(mDataAboveIfd0);
+        dataAboveIfd0 = new byte[(int) offset - DEFAULT_IFD0_OFFSET];
+        read(dataAboveIfd0);
       }
     }
   }
@@ -247,23 +247,23 @@ public class ExifParser {
    * @see #EVENT_END
    */
   protected int next() throws IOException, ExifInvalidFormatException {
-    if (!mContainExifData) {
+    if (!containExifData) {
       return EVENT_END;
     }
-    int offset = mTiffStream.getReadByteCount();
-    int endOfTags = mIfdStartOffset + OFFSET_SIZE + TAG_SIZE * mNumOfTagInIfd;
+    int offset = tiffStream.getReadByteCount();
+    int endOfTags = ifdStartOffset + OFFSET_SIZE + TAG_SIZE * numOfTagInIfd;
     if (offset < endOfTags) {
-      mTag = readTag();
-      if (mTag == null) {
+      tag = readTag();
+      if (tag == null) {
         return next();
       }
-      if (mNeedToParseOffsetsInCurrentIfd) {
-        checkOffsetOrImageTag(mTag);
+      if (needToParseOffsetsInCurrentIfd) {
+        checkOffsetOrImageTag(tag);
       }
       return EVENT_NEW_TAG;
     } else if (offset == endOfTags) {
       // There is a link to ifd1 at the end of ifd0
-      if (mIfdType == IfdId.TYPE_IFD_0) {
+      if (ifdType == IfdId.TYPE_IFD_0) {
         long ifdOffset = readUnsignedLong();
         if (isIfdRequested(IfdId.TYPE_IFD_1) || isThumbnailRequested()) {
           if (ifdOffset != 0) {
@@ -273,8 +273,8 @@ public class ExifParser {
       } else {
         int offsetSize = 4;
         // Some camera models use invalid length of the offset
-        if (mCorrespondingEvent.size() > 0) {
-          offsetSize = mCorrespondingEvent.firstEntry().getKey() - mTiffStream.getReadByteCount();
+        if (correspondingEvent.size() > 0) {
+          offsetSize = correspondingEvent.firstEntry().getKey() - tiffStream.getReadByteCount();
         }
         if (offsetSize < 4) {
           LogUtil.i("ExifParser.next", "Invalid size of link to next IFD: " + offsetSize);
@@ -286,8 +286,8 @@ public class ExifParser {
         }
       }
     }
-    while (mCorrespondingEvent.size() != 0) {
-      Entry<Integer, Object> entry = mCorrespondingEvent.pollFirstEntry();
+    while (correspondingEvent.size() != 0) {
+      Entry<Integer, Object> entry = correspondingEvent.pollFirstEntry();
       Object event = entry.getValue();
       try {
         skipTo(entry.getKey());
@@ -302,30 +302,30 @@ public class ExifParser {
         continue;
       }
       if (event instanceof IfdEvent) {
-        mIfdType = ((IfdEvent) event).ifd;
-        mNumOfTagInIfd = mTiffStream.readUnsignedShort();
-        mIfdStartOffset = entry.getKey();
+        ifdType = ((IfdEvent) event).ifd;
+        numOfTagInIfd = tiffStream.readUnsignedShort();
+        ifdStartOffset = entry.getKey();
 
-        if (mNumOfTagInIfd * TAG_SIZE + mIfdStartOffset + OFFSET_SIZE > mApp1End) {
-          LogUtil.i("ExifParser.next", "Invalid size of IFD " + mIfdType);
+        if (numOfTagInIfd * TAG_SIZE + ifdStartOffset + OFFSET_SIZE > app1End) {
+          LogUtil.i("ExifParser.next", "Invalid size of IFD " + ifdType);
           return EVENT_END;
         }
 
-        mNeedToParseOffsetsInCurrentIfd = needToParseOffsetsInCurrentIfd();
+        needToParseOffsetsInCurrentIfd = needToParseOffsetsInCurrentIfd();
         if (((IfdEvent) event).isRequested) {
           return EVENT_START_OF_IFD;
         } else {
           skipRemainingTagsInCurrentIfd();
         }
       } else if (event instanceof ImageEvent) {
-        mImageEvent = (ImageEvent) event;
-        return mImageEvent.type;
+        imageEvent = (ImageEvent) event;
+        return imageEvent.type;
       } else {
         ExifTagEvent tagEvent = (ExifTagEvent) event;
-        mTag = tagEvent.tag;
-        if (mTag.getDataType() != ExifTag.TYPE_UNDEFINED) {
-          readFullTagValue(mTag);
-          checkOffsetOrImageTag(mTag);
+        tag = tagEvent.tag;
+        if (tag.getDataType() != ExifTag.TYPE_UNDEFINED) {
+          readFullTagValue(tag);
+          checkOffsetOrImageTag(tag);
         }
         if (tagEvent.isRequested) {
           return EVENT_VALUE_OF_REGISTERED_TAG;
@@ -342,26 +342,26 @@ public class ExifParser {
    * @throws ExifInvalidFormatException
    */
   private void skipRemainingTagsInCurrentIfd() throws IOException, ExifInvalidFormatException {
-    int endOfTags = mIfdStartOffset + OFFSET_SIZE + TAG_SIZE * mNumOfTagInIfd;
-    int offset = mTiffStream.getReadByteCount();
+    int endOfTags = ifdStartOffset + OFFSET_SIZE + TAG_SIZE * numOfTagInIfd;
+    int offset = tiffStream.getReadByteCount();
     if (offset > endOfTags) {
       return;
     }
-    if (mNeedToParseOffsetsInCurrentIfd) {
+    if (needToParseOffsetsInCurrentIfd) {
       while (offset < endOfTags) {
-        mTag = readTag();
+        tag = readTag();
         offset += TAG_SIZE;
-        if (mTag == null) {
+        if (tag == null) {
           continue;
         }
-        checkOffsetOrImageTag(mTag);
+        checkOffsetOrImageTag(tag);
       }
     } else {
       skipTo(endOfTags);
     }
     long ifdOffset = readUnsignedLong();
     // For ifd0, there is a link to ifd1 in the end of all tags
-    if (mIfdType == IfdId.TYPE_IFD_0
+    if (ifdType == IfdId.TYPE_IFD_0
         && (isIfdRequested(IfdId.TYPE_IFD_1) || isThumbnailRequested())) {
       if (ifdOffset > 0) {
         registerIfd(IfdId.TYPE_IFD_1, ifdOffset);
@@ -370,7 +370,7 @@ public class ExifParser {
   }
 
   private boolean needToParseOffsetsInCurrentIfd() {
-    switch (mIfdType) {
+    switch (ifdType) {
       case IfdId.TYPE_IFD_0:
         return isIfdRequested(IfdId.TYPE_IFD_EXIF)
             || isIfdRequested(IfdId.TYPE_IFD_GPS)
@@ -408,7 +408,7 @@ public class ExifParser {
    * @see #readString(int, java.nio.charset.Charset)
    */
   protected ExifTag getTag() {
-    return mTag;
+    return tag;
   }
 
   /**
@@ -421,7 +421,7 @@ public class ExifParser {
    * @see IfdId#TYPE_IFD_EXIF
    */
   int getCurrentIfd() {
-    return mIfdType;
+    return ifdType;
   }
 
   /**
@@ -429,31 +429,31 @@ public class ExifParser {
    * strip.
    */
   int getStripIndex() {
-    return mImageEvent.stripIndex;
+    return imageEvent.stripIndex;
   }
 
   /** When receiving {@link #EVENT_UNCOMPRESSED_STRIP}, call this function to get the strip size. */
   int getStripSize() {
-    if (mStripSizeTag == null) {
+    if (stripSizeTag == null) {
       return 0;
     }
-    return (int) mStripSizeTag.getValueAt(0);
+    return (int) stripSizeTag.getValueAt(0);
   }
 
   /**
    * When receiving {@link #EVENT_COMPRESSED_IMAGE}, call this function to get the image data size.
    */
   int getCompressedImageSize() {
-    if (mJpegSizeTag == null) {
+    if (jpegSizeTag == null) {
       return 0;
     }
-    return (int) mJpegSizeTag.getValueAt(0);
+    return (int) jpegSizeTag.getValueAt(0);
   }
 
   private void skipTo(int offset) throws IOException {
-    mTiffStream.skipTo(offset);
-    while (!mCorrespondingEvent.isEmpty() && mCorrespondingEvent.firstKey() < offset) {
-      mCorrespondingEvent.pollFirstEntry();
+    tiffStream.skipTo(offset);
+    while (!correspondingEvent.isEmpty() && correspondingEvent.firstKey() < offset) {
+      correspondingEvent.pollFirstEntry();
     }
   }
 
@@ -466,37 +466,37 @@ public class ExifParser {
    * @see #EVENT_VALUE_OF_REGISTERED_TAG
    */
   void registerForTagValue(ExifTag tag) {
-    if (tag.getOffset() >= mTiffStream.getReadByteCount()) {
-      mCorrespondingEvent.put(tag.getOffset(), new ExifTagEvent(tag, true));
+    if (tag.getOffset() >= tiffStream.getReadByteCount()) {
+      correspondingEvent.put(tag.getOffset(), new ExifTagEvent(tag, true));
     }
   }
 
   private void registerIfd(int ifdType, long offset) {
     // Cast unsigned int to int since the offset is always smaller
     // than the size of APP1 (65536)
-    mCorrespondingEvent.put((int) offset, new IfdEvent(ifdType, isIfdRequested(ifdType)));
+    correspondingEvent.put((int) offset, new IfdEvent(ifdType, isIfdRequested(ifdType)));
   }
 
   private void registerCompressedImage(long offset) {
-    mCorrespondingEvent.put((int) offset, new ImageEvent(EVENT_COMPRESSED_IMAGE));
+    correspondingEvent.put((int) offset, new ImageEvent(EVENT_COMPRESSED_IMAGE));
   }
 
   private void registerUncompressedStrip(int stripIndex, long offset) {
-    mCorrespondingEvent.put((int) offset, new ImageEvent(EVENT_UNCOMPRESSED_STRIP, stripIndex));
+    correspondingEvent.put((int) offset, new ImageEvent(EVENT_UNCOMPRESSED_STRIP, stripIndex));
   }
 
   @SuppressLint("DefaultLocale")
   private ExifTag readTag() throws IOException, ExifInvalidFormatException {
-    short tagId = mTiffStream.readShort();
-    short dataFormat = mTiffStream.readShort();
-    long numOfComp = mTiffStream.readUnsignedInt();
+    short tagId = tiffStream.readShort();
+    short dataFormat = tiffStream.readShort();
+    long numOfComp = tiffStream.readUnsignedInt();
     if (numOfComp > Integer.MAX_VALUE) {
       throw new ExifInvalidFormatException("Number of component is larger then Integer.MAX_VALUE");
     }
     // Some invalid image file contains invalid data type. Ignore those tags
     if (!ExifTag.isValidType(dataFormat)) {
       LogUtil.i("ExifParser.readTag", "Tag %04x: Invalid data type %d", tagId, dataFormat);
-      mTiffStream.skip(4);
+      tiffStream.skip(4);
       return null;
     }
     // TODO(blemmon): handle numOfComp overflow
@@ -505,20 +505,20 @@ public class ExifParser {
             tagId,
             dataFormat,
             (int) numOfComp,
-            mIfdType,
+            ifdType,
             ((int) numOfComp) != ExifTag.SIZE_UNDEFINED);
     int dataSize = tag.getDataSize();
     if (dataSize > 4) {
-      long offset = mTiffStream.readUnsignedInt();
+      long offset = tiffStream.readUnsignedInt();
       if (offset > Integer.MAX_VALUE) {
         throw new ExifInvalidFormatException("offset is larger then Integer.MAX_VALUE");
       }
       // Some invalid images put some undefined data before IFD0.
       // Read the data here.
-      if ((offset < mIfd0Position) && (dataFormat == ExifTag.TYPE_UNDEFINED)) {
+      if ((offset < ifd0Position) && (dataFormat == ExifTag.TYPE_UNDEFINED)) {
         byte[] buf = new byte[(int) numOfComp];
         System.arraycopy(
-            mDataAboveIfd0, (int) offset - DEFAULT_IFD0_OFFSET, buf, 0, (int) numOfComp);
+            dataAboveIfd0, (int) offset - DEFAULT_IFD0_OFFSET, buf, 0, (int) numOfComp);
         tag.setValue(buf);
       } else {
         tag.setOffset((int) offset);
@@ -530,9 +530,9 @@ public class ExifParser {
       // Read value
       readFullTagValue(tag);
       tag.setHasDefinedCount(defCount);
-      mTiffStream.skip(4 - dataSize);
+      tiffStream.skip(4 - dataSize);
       // Set the offset to the position of value.
-      tag.setOffset(mTiffStream.getReadByteCount() - 4);
+      tag.setOffset(tiffStream.getReadByteCount() - 4);
     }
     return tag;
   }
@@ -569,7 +569,7 @@ public class ExifParser {
     } else if (tid == TAG_JPEG_INTERCHANGE_FORMAT_LENGTH
         && checkAllowed(ifd, ExifInterface.TAG_JPEG_INTERCHANGE_FORMAT_LENGTH)) {
       if (isThumbnailRequested()) {
-        mJpegSizeTag = tag;
+        jpegSizeTag = tag;
       }
     } else if (tid == TAG_STRIP_OFFSETS && checkAllowed(ifd, ExifInterface.TAG_STRIP_OFFSETS)) {
       if (isThumbnailRequested()) {
@@ -582,14 +582,14 @@ public class ExifParser {
             }
           }
         } else {
-          mCorrespondingEvent.put(tag.getOffset(), new ExifTagEvent(tag, false));
+          correspondingEvent.put(tag.getOffset(), new ExifTagEvent(tag, false));
         }
       }
     } else if (tid == TAG_STRIP_BYTE_COUNTS
         && checkAllowed(ifd, ExifInterface.TAG_STRIP_BYTE_COUNTS)
         && isThumbnailRequested()
         && tag.hasValue()) {
-      mStripSizeTag = tag;
+      stripSizeTag = tag;
     }
   }
 
@@ -605,15 +605,15 @@ public class ExifParser {
         || type == ExifTag.TYPE_UNDEFINED
         || type == ExifTag.TYPE_UNSIGNED_BYTE) {
       int size = tag.getComponentCount();
-      if (mCorrespondingEvent.size() > 0) {
-        if (mCorrespondingEvent.firstEntry().getKey() < mTiffStream.getReadByteCount() + size) {
-          Object event = mCorrespondingEvent.firstEntry().getValue();
+      if (correspondingEvent.size() > 0) {
+        if (correspondingEvent.firstEntry().getKey() < tiffStream.getReadByteCount() + size) {
+          Object event = correspondingEvent.firstEntry().getValue();
           if (event instanceof ImageEvent) {
             // Tag value overlaps thumbnail, ignore thumbnail.
             LogUtil.i(
                 "ExifParser.readFullTagValue",
                 "Thumbnail overlaps value for tag: \n" + tag.toString());
-            Entry<Integer, Object> entry = mCorrespondingEvent.pollFirstEntry();
+            Entry<Integer, Object> entry = correspondingEvent.pollFirstEntry();
             LogUtil.i("ExifParser.readFullTagValue", "Invalid thumbnail offset: " + entry.getKey());
           } else {
             // Tag value overlaps another shorten count
@@ -629,7 +629,7 @@ public class ExifParser {
                       + " overlaps value for tag: \n"
                       + tag.toString());
             }
-            size = mCorrespondingEvent.firstEntry().getKey() - mTiffStream.getReadByteCount();
+            size = correspondingEvent.firstEntry().getKey() - tiffStream.getReadByteCount();
             LogUtil.i(
                 "ExifParser.readFullTagValue",
                 "Invalid size of tag: \n" + tag.toString() + " setting count to: " + size);
@@ -702,16 +702,16 @@ public class ExifParser {
   }
 
   private void parseTiffHeader() throws IOException, ExifInvalidFormatException {
-    short byteOrder = mTiffStream.readShort();
+    short byteOrder = tiffStream.readShort();
     if (LITTLE_ENDIAN_TAG == byteOrder) {
-      mTiffStream.setByteOrder(ByteOrder.LITTLE_ENDIAN);
+      tiffStream.setByteOrder(ByteOrder.LITTLE_ENDIAN);
     } else if (BIG_ENDIAN_TAG == byteOrder) {
-      mTiffStream.setByteOrder(ByteOrder.BIG_ENDIAN);
+      tiffStream.setByteOrder(ByteOrder.BIG_ENDIAN);
     } else {
       throw new ExifInvalidFormatException("Invalid TIFF header");
     }
 
-    if (mTiffStream.readShort() != TIFF_HEADER_TAIL) {
+    if (tiffStream.readShort() != TIFF_HEADER_TAIL) {
       throw new ExifInvalidFormatException("Invalid TIFF header");
     }
   }
@@ -736,7 +736,7 @@ public class ExifParser {
           headerTail = dataStream.readShort();
           length -= 6;
           if (header == EXIF_HEADER && headerTail == EXIF_HEADER_TAIL) {
-            mApp1End = length;
+            app1End = length;
             return true;
           }
         }
@@ -752,12 +752,12 @@ public class ExifParser {
 
   /** Reads bytes from the InputStream. */
   protected int read(byte[] buffer, int offset, int length) throws IOException {
-    return mTiffStream.read(buffer, offset, length);
+    return tiffStream.read(buffer, offset, length);
   }
 
   /** Equivalent to read(buffer, 0, buffer.length). */
   protected int read(byte[] buffer) throws IOException {
-    return mTiffStream.read(buffer);
+    return tiffStream.read(buffer);
   }
 
   /**
@@ -774,7 +774,7 @@ public class ExifParser {
    */
   private String readString(int n, Charset charset) throws IOException {
     if (n > 0) {
-      return mTiffStream.readString(n, charset);
+      return tiffStream.readString(n, charset);
     } else {
       return "";
     }
@@ -782,7 +782,7 @@ public class ExifParser {
 
   /** Reads value of type {@link ExifTag#TYPE_UNSIGNED_SHORT} from the InputStream. */
   private int readUnsignedShort() throws IOException {
-    return mTiffStream.readShort() & 0xffff;
+    return tiffStream.readShort() & 0xffff;
   }
 
   /** Reads value of type {@link ExifTag#TYPE_UNSIGNED_LONG} from the InputStream. */
@@ -799,7 +799,7 @@ public class ExifParser {
 
   /** Reads value of type {@link ExifTag#TYPE_LONG} from the InputStream. */
   private int readLong() throws IOException {
-    return mTiffStream.readInt();
+    return tiffStream.readInt();
   }
 
   /** Reads value of type {@link ExifTag#TYPE_RATIONAL} from the InputStream. */

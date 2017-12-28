@@ -45,26 +45,26 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     implements DialpadUi, OnKeyListener, OnClickListener, OnPressedListener {
 
   /** Hash Map to map a view id to a character */
-  private static final Map<Integer, Character> mDisplayMap = new ArrayMap<>();
+  private static final Map<Integer, Character> displayMap = new ArrayMap<>();
 
   /** Set up the static maps */
   static {
     // Map the buttons to the display characters
-    mDisplayMap.put(R.id.one, '1');
-    mDisplayMap.put(R.id.two, '2');
-    mDisplayMap.put(R.id.three, '3');
-    mDisplayMap.put(R.id.four, '4');
-    mDisplayMap.put(R.id.five, '5');
-    mDisplayMap.put(R.id.six, '6');
-    mDisplayMap.put(R.id.seven, '7');
-    mDisplayMap.put(R.id.eight, '8');
-    mDisplayMap.put(R.id.nine, '9');
-    mDisplayMap.put(R.id.zero, '0');
-    mDisplayMap.put(R.id.pound, '#');
-    mDisplayMap.put(R.id.star, '*');
+    displayMap.put(R.id.one, '1');
+    displayMap.put(R.id.two, '2');
+    displayMap.put(R.id.three, '3');
+    displayMap.put(R.id.four, '4');
+    displayMap.put(R.id.five, '5');
+    displayMap.put(R.id.six, '6');
+    displayMap.put(R.id.seven, '7');
+    displayMap.put(R.id.eight, '8');
+    displayMap.put(R.id.nine, '9');
+    displayMap.put(R.id.zero, '0');
+    displayMap.put(R.id.pound, '#');
+    displayMap.put(R.id.star, '*');
   }
 
-  private final int[] mButtonIds =
+  private final int[] buttonIds =
       new int[] {
         R.id.zero,
         R.id.one,
@@ -79,11 +79,11 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
         R.id.star,
         R.id.pound
       };
-  private EditText mDtmfDialerField;
+  private EditText dtmfDialerField;
   // KeyListener used with the "dialpad digits" EditText widget.
-  private DtmfKeyListener mDtmfKeyListener;
-  private DialpadView mDialpadView;
-  private int mCurrentTextColor;
+  private DtmfKeyListener dtmfKeyListener;
+  private DialpadView dialpadView;
+  private int currentTextColor;
 
   @Override
   public void onClick(View v) {
@@ -100,11 +100,11 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
     if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
       int viewId = v.getId();
-      if (mDisplayMap.containsKey(viewId)) {
+      if (displayMap.containsKey(viewId)) {
         switch (event.getAction()) {
           case KeyEvent.ACTION_DOWN:
             if (event.getRepeatCount() == 0) {
-              getPresenter().processDtmf(mDisplayMap.get(viewId));
+              getPresenter().processDtmf(displayMap.get(viewId));
             }
             break;
           case KeyEvent.ACTION_UP:
@@ -135,21 +135,21 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     final View parent = inflater.inflate(R.layout.incall_dialpad_fragment, container, false);
-    mDialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
-    mDialpadView.setCanDigitsBeEdited(false);
-    mDialpadView.setBackgroundResource(R.color.incall_dialpad_background);
-    mDtmfDialerField = (EditText) parent.findViewById(R.id.digits);
-    if (mDtmfDialerField != null) {
+    dialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
+    dialpadView.setCanDigitsBeEdited(false);
+    dialpadView.setBackgroundResource(R.color.incall_dialpad_background);
+    dtmfDialerField = (EditText) parent.findViewById(R.id.digits);
+    if (dtmfDialerField != null) {
       LogUtil.i("DialpadFragment.onCreateView", "creating dtmfKeyListener");
-      mDtmfKeyListener = new DtmfKeyListener(getPresenter());
-      mDtmfDialerField.setKeyListener(mDtmfKeyListener);
+      dtmfKeyListener = new DtmfKeyListener(getPresenter());
+      dtmfDialerField.setKeyListener(dtmfKeyListener);
       // remove the long-press context menus that support
       // the edit (copy / paste / select) functions.
-      mDtmfDialerField.setLongClickable(false);
-      mDtmfDialerField.setElegantTextHeight(false);
+      dtmfDialerField.setLongClickable(false);
+      dtmfDialerField.setElegantTextHeight(false);
       configureKeypadListeners();
     }
-    View backButton = mDialpadView.findViewById(R.id.dialpad_back);
+    View backButton = dialpadView.findViewById(R.id.dialpad_back);
     backButton.setVisibility(View.VISIBLE);
     backButton.setOnClickListener(this);
 
@@ -165,22 +165,22 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   public void updateColors() {
     int textColor = InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor();
 
-    if (mCurrentTextColor == textColor) {
+    if (currentTextColor == textColor) {
       return;
     }
 
     DialpadKeyButton dialpadKey;
-    for (int i = 0; i < mButtonIds.length; i++) {
-      dialpadKey = (DialpadKeyButton) mDialpadView.findViewById(mButtonIds[i]);
+    for (int i = 0; i < buttonIds.length; i++) {
+      dialpadKey = (DialpadKeyButton) dialpadView.findViewById(buttonIds[i]);
       ((TextView) dialpadKey.findViewById(R.id.dialpad_key_number)).setTextColor(textColor);
     }
 
-    mCurrentTextColor = textColor;
+    currentTextColor = textColor;
   }
 
   @Override
   public void onDestroyView() {
-    mDtmfKeyListener = null;
+    dtmfKeyListener = null;
     super.onDestroyView();
   }
 
@@ -190,7 +190,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
    * @return String containing current Dialpad EditText text.
    */
   public String getDtmfText() {
-    return mDtmfDialerField.getText().toString();
+    return dtmfDialerField.getText().toString();
   }
 
   /**
@@ -199,7 +199,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
    * @param text Text to set Dialpad EditText to.
    */
   public void setDtmfText(String text) {
-    mDtmfDialerField.setText(PhoneNumberUtilsCompat.createTtsSpannable(text));
+    dtmfDialerField.setText(PhoneNumberUtilsCompat.createTtsSpannable(text));
   }
 
   /** Starts the slide up animation for the Dialpad keys when the Dialpad is revealed. */
@@ -210,7 +210,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
   @Override
   public void appendDigitsToField(char digit) {
-    if (mDtmfDialerField != null) {
+    if (dtmfDialerField != null) {
       // TODO: maybe *don't* manually append this digit if
       // mDialpadDigits is focused and this key came from the HW
       // keyboard, since in that case the EditText field will
@@ -220,15 +220,15 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
       // *not* handle HW key presses.  That seems to be more
       // complicated than just setting focusable="false" on it,
       // though.)
-      mDtmfDialerField.getText().append(digit);
+      dtmfDialerField.getText().append(digit);
     }
   }
 
   /** Called externally (from InCallScreen) to play a DTMF Tone. */
   /* package */ boolean onDialerKeyDown(KeyEvent event) {
     Log.d(this, "Notifying dtmf key down.");
-    if (mDtmfKeyListener != null) {
-      return mDtmfKeyListener.onKeyDown(event);
+    if (dtmfKeyListener != null) {
+      return dtmfKeyListener.onKeyDown(event);
     } else {
       return false;
     }
@@ -237,8 +237,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   /** Called externally (from InCallScreen) to cancel the last DTMF Tone played. */
   public boolean onDialerKeyUp(KeyEvent event) {
     Log.d(this, "Notifying dtmf key up.");
-    if (mDtmfKeyListener != null) {
-      return mDtmfKeyListener.onKeyUp(event);
+    if (dtmfKeyListener != null) {
+      return dtmfKeyListener.onKeyUp(event);
     } else {
       return false;
     }
@@ -246,8 +246,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
   private void configureKeypadListeners() {
     DialpadKeyButton dialpadKey;
-    for (int i = 0; i < mButtonIds.length; i++) {
-      dialpadKey = (DialpadKeyButton) mDialpadView.findViewById(mButtonIds[i]);
+    for (int i = 0; i < buttonIds.length; i++) {
+      dialpadKey = (DialpadKeyButton) dialpadView.findViewById(buttonIds[i]);
       dialpadKey.setOnKeyListener(this);
       dialpadKey.setOnClickListener(this);
       dialpadKey.setOnPressedListener(this);
@@ -256,11 +256,11 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
 
   @Override
   public void onPressed(View view, boolean pressed) {
-    if (pressed && mDisplayMap.containsKey(view.getId())) {
+    if (pressed && displayMap.containsKey(view.getId())) {
       Logger.get(getContext())
           .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_NUMBER_BUTTON_PRESSED);
-      Log.d(this, "onPressed: " + pressed + " " + mDisplayMap.get(view.getId()));
-      getPresenter().processDtmf(mDisplayMap.get(view.getId()));
+      Log.d(this, "onPressed: " + pressed + " " + displayMap.get(view.getId()));
+      getPresenter().processDtmf(displayMap.get(view.getId()));
     }
     if (!pressed) {
       Log.d(this, "onPressed: " + pressed);

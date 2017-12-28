@@ -20,50 +20,52 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.util.Log;
+import com.android.dialer.common.LogUtil;
 
 /** Listens for and caches headset state. */
 class WiredHeadsetManager {
 
   private static final String TAG = WiredHeadsetManager.class.getSimpleName();
-  private final WiredHeadsetBroadcastReceiver mReceiver;
-  private boolean mIsPluggedIn;
-  private Listener mListener;
-  private Context mContext;
+  private final WiredHeadsetBroadcastReceiver receiver;
+  private boolean isPluggedIn;
+  private Listener listener;
+  private Context context;
 
   WiredHeadsetManager(Context context) {
-    mContext = context;
-    mReceiver = new WiredHeadsetBroadcastReceiver();
+    this.context = context;
+    receiver = new WiredHeadsetBroadcastReceiver();
 
     AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-    mIsPluggedIn = audioManager.isWiredHeadsetOn();
+    isPluggedIn = audioManager.isWiredHeadsetOn();
   }
 
   void setListener(Listener listener) {
-    mListener = listener;
+    this.listener = listener;
   }
 
   boolean isPluggedIn() {
-    return mIsPluggedIn;
+    return isPluggedIn;
   }
 
   void registerReceiver() {
     // Register for misc other intent broadcasts.
     IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-    mContext.registerReceiver(mReceiver, intentFilter);
+    context.registerReceiver(receiver, intentFilter);
   }
 
   void unregisterReceiver() {
-    mContext.unregisterReceiver(mReceiver);
+    context.unregisterReceiver(receiver);
   }
 
   private void onHeadsetPluggedInChanged(boolean isPluggedIn) {
-    if (mIsPluggedIn != isPluggedIn) {
-      Log.v(TAG, "onHeadsetPluggedInChanged, mIsPluggedIn: " + mIsPluggedIn + " -> " + isPluggedIn);
-      boolean oldIsPluggedIn = mIsPluggedIn;
-      mIsPluggedIn = isPluggedIn;
-      if (mListener != null) {
-        mListener.onWiredHeadsetPluggedInChanged(oldIsPluggedIn, mIsPluggedIn);
+    if (this.isPluggedIn != isPluggedIn) {
+      LogUtil.v(
+          TAG,
+          "onHeadsetPluggedInChanged, mIsPluggedIn: " + this.isPluggedIn + " -> " + isPluggedIn);
+      boolean oldIsPluggedIn = this.isPluggedIn;
+      this.isPluggedIn = isPluggedIn;
+      if (listener != null) {
+        listener.onWiredHeadsetPluggedInChanged(oldIsPluggedIn, this.isPluggedIn);
       }
     }
   }
@@ -80,7 +82,7 @@ class WiredHeadsetManager {
     public void onReceive(Context context, Intent intent) {
       if (AudioManager.ACTION_HEADSET_PLUG.equals(intent.getAction())) {
         boolean isPluggedIn = intent.getIntExtra("state", 0) == 1;
-        Log.v(TAG, "ACTION_HEADSET_PLUG event, plugged in: " + isPluggedIn);
+        LogUtil.v(TAG, "ACTION_HEADSET_PLUG event, plugged in: " + isPluggedIn);
         onHeadsetPluggedInChanged(isPluggedIn);
       }
     }

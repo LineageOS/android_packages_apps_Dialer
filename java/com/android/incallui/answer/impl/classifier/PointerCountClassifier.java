@@ -20,10 +20,10 @@ import android.view.MotionEvent;
 
 /** A classifier which looks at the total number of traces in the whole gesture. */
 class PointerCountClassifier extends GestureClassifier {
-  private int mCount;
+  private int count;
 
   public PointerCountClassifier(ClassifierData classifierData) {
-    mCount = 0;
+    count = 0;
   }
 
   @Override
@@ -36,16 +36,16 @@ class PointerCountClassifier extends GestureClassifier {
     int action = event.getActionMasked();
 
     if (action == MotionEvent.ACTION_DOWN) {
-      mCount = 1;
+      count = 1;
     }
 
     if (action == MotionEvent.ACTION_POINTER_DOWN) {
-      ++mCount;
+      ++count;
     }
   }
 
   @Override
   public float getFalseTouchEvaluation() {
-    return PointerCountEvaluator.evaluate(mCount);
+    return PointerCountEvaluator.evaluate(count);
   }
 }

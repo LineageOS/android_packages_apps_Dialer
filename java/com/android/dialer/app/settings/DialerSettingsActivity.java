@@ -50,7 +50,7 @@ import java.util.List;
 @UsedByReflection(value = "AndroidManifest-app.xml")
 public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
-  protected SharedPreferences mPreferences;
+  protected SharedPreferences preferences;
   private boolean migrationStatusOnBuildHeaders;
   private List<Header> headers;
 
@@ -58,7 +58,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
   protected void onCreate(Bundle savedInstanceState) {
     LogUtil.enterBlock("DialerSettingsActivity.onCreate");
     super.onCreate(savedInstanceState);
-    mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+    preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 
     Intent intent = getIntent();
     Uri data = intent.getData();

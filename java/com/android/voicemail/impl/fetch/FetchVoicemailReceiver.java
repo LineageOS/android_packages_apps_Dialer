@@ -64,13 +64,13 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
   // Number of retries
   private static final int NETWORK_RETRY_COUNT = 3;
 
-  private ContentResolver mContentResolver;
-  private Uri mUri;
-  private VvmNetworkRequestCallback mNetworkCallback;
-  private Context mContext;
-  private String mUid;
-  private PhoneAccountHandle mPhoneAccount;
-  private int mRetryCount = NETWORK_RETRY_COUNT;
+  private ContentResolver contentResolver;
+  private Uri uri;
+  private VvmNetworkRequestCallback networkCallback;
+  private Context context;
+  private String uid;
+  private PhoneAccountHandle phoneAccount;
+  private int retryCount = NETWORK_RETRY_COUNT;
 
   @Override
   public void onReceive(final Context context, Intent intent) {
@@ -79,31 +79,31 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
     }
     if (VoicemailContract.ACTION_FETCH_VOICEMAIL.equals(intent.getAction())) {
       VvmLog.i(TAG, "ACTION_FETCH_VOICEMAIL received");
-      mContext = context;
-      mContentResolver = context.getContentResolver();
-      mUri = intent.getData();
+      this.context = context;
+      contentResolver = context.getContentResolver();
+      uri = intent.getData();
 
-      if (mUri == null) {
+      if (uri == null) {
         VvmLog.w(TAG, VoicemailContract.ACTION_FETCH_VOICEMAIL + " intent sent with no data");
         return;
       }
 
       if (!context
           .getPackageName()
-          .equals(mUri.getQueryParameter(VoicemailContract.PARAM_KEY_SOURCE_PACKAGE))) {
+          .equals(uri.getQueryParameter(VoicemailContract.PARAM_KEY_SOURCE_PACKAGE))) {
         // Ignore if the fetch request is for a voicemail not from this package.
         VvmLog.e(TAG, "ACTION_FETCH_VOICEMAIL from foreign pacakge " + context.getPackageName());
         return;
       }
 
-      Cursor cursor = mContentResolver.query(mUri, PROJECTION, null, null, null);
+      Cursor cursor = contentResolver.query(uri, PROJECTION, null, null, null);
       if (cursor == null) {
         VvmLog.i(TAG, "ACTION_FETCH_VOICEMAIL query returned null");
         return;
       }
       try {
         if (cursor.moveToFirst()) {
-          mUid = cursor.getString(SOURCE_DATA);
+          uid = cursor.getString(SOURCE_DATA);
           String accountId = cursor.getString(PHONE_ACCOUNT_ID);
           if (TextUtils.isEmpty(accountId)) {
             TelephonyManager telephonyManager =
@@ -116,31 +116,31 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
             }
           }
 
-          mPhoneAccount =
+          phoneAccount =
               new PhoneAccountHandle(
                   ComponentName.unflattenFromString(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME)),
                   cursor.getString(PHONE_ACCOUNT_ID));
           TelephonyManager telephonyManager =
               context
                   .getSystemService(TelephonyManager.class)
-                  .createForPhoneAccountHandle(mPhoneAccount);
+                  .createForPhoneAccountHandle(phoneAccount);
           if (telephonyManager == null) {
             // can happen when trying to fetch voicemails from a SIM that is no longer on the
             // device
             VvmLog.e(TAG, "account no longer valid, cannot retrieve message");
             return;
           }
-          if (!VvmAccountManager.isAccountActivated(context, mPhoneAccount)) {
-            mPhoneAccount = getAccountFromMarshmallowAccount(context, mPhoneAccount);
-            if (mPhoneAccount == null) {
+          if (!VvmAccountManager.isAccountActivated(context, phoneAccount)) {
+            phoneAccount = getAccountFromMarshmallowAccount(context, phoneAccount);
+            if (phoneAccount == null) {
               VvmLog.w(TAG, "Account not registered - cannot retrieve message.");
               return;
             }
             VvmLog.i(TAG, "Fetching voicemail with Marshmallow PhoneAccountHandle");
           }
           VvmLog.i(TAG, "Requesting network to fetch voicemail");
-          mNetworkCallback = new fetchVoicemailNetworkRequestCallback(context, mPhoneAccount);
-          mNetworkCallback.requestNetwork();
+          networkCallback = new fetchVoicemailNetworkRequestCallback(context, phoneAccount);
+          networkCallback.requestNetwork();
         }
       } finally {
         cursor.close();
@@ -203,16 +203,16 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
           @Override
           public void run() {
             try {
-              while (mRetryCount > 0) {
-                VvmLog.i(TAG, "fetching voicemail, retry count=" + mRetryCount);
+              while (retryCount > 0) {
+                VvmLog.i(TAG, "fetching voicemail, retry count=" + retryCount);
                 try (ImapHelper imapHelper =
-                    new ImapHelper(mContext, mPhoneAccount, network, status)) {
+                    new ImapHelper(context, phoneAccount, network, status)) {
                   boolean success =
                       imapHelper.fetchVoicemailPayload(
-                          new VoicemailFetchedCallback(mContext, mUri, mPhoneAccount), mUid);
-                  if (!success && mRetryCount > 0) {
+                          new VoicemailFetchedCallback(context, uri, phoneAccount), uid);
+                  if (!success && retryCount > 0) {
                     VvmLog.i(TAG, "fetch voicemail failed, retrying");
-                    mRetryCount--;
+                    retryCount--;
                   } else {
                     return;
                   }
@@ -222,8 +222,8 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
                 }
               }
             } finally {
-              if (mNetworkCallback != null) {
-                mNetworkCallback.releaseNetwork();
+              if (networkCallback != null) {
+                networkCallback.releaseNetwork();
               }
             }
           }

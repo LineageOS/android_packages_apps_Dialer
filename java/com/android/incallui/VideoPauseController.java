@@ -32,26 +32,26 @@ import java.util.Objects;
  * to the background and subsequently brought back to the foreground.
  */
 class VideoPauseController implements InCallStateListener, IncomingCallListener {
-  private static VideoPauseController sVideoPauseController;
-  private InCallPresenter mInCallPresenter;
+  private static VideoPauseController videoPauseController;
+  private InCallPresenter inCallPresenter;
 
   /** The current call, if applicable. */
-  private DialerCall mPrimaryCall = null;
+  private DialerCall primaryCall = null;
 
   /**
    * The cached state of primary call, updated after onStateChange has processed.
    *
    * <p>These values are stored to detect specific changes in state between onStateChange calls.
    */
-  private int mPrevCallState = State.INVALID;
+  private int prevCallState = State.INVALID;
 
-  private boolean mWasVideoCall = false;
+  private boolean wasVideoCall = false;
 
   /**
    * Tracks whether the application is in the background. {@code True} if the application is in the
    * background, {@code false} otherwise.
    */
-  private boolean mIsInBackground = false;
+  private boolean isInBackground = false;
 
   /**
    * Singleton accessor for the {@link VideoPauseController}.
@@ -60,10 +60,10 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    */
   /*package*/
   static synchronized VideoPauseController getInstance() {
-    if (sVideoPauseController == null) {
-      sVideoPauseController = new VideoPauseController();
+    if (videoPauseController == null) {
+      videoPauseController = new VideoPauseController();
     }
-    return sVideoPauseController;
+    return videoPauseController;
   }
 
   /**
@@ -84,7 +84,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    * @return {@code true} if the call is dialing, {@code false} otherwise.
    */
   private boolean wasDialing() {
-    return DialerCall.State.isDialing(mPrevCallState);
+    return DialerCall.State.isDialing(prevCallState);
   }
 
   /**
@@ -95,9 +95,9 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    */
   public void setUp(@NonNull InCallPresenter inCallPresenter) {
     LogUtil.enterBlock("VideoPauseController.setUp");
-    mInCallPresenter = Assert.isNotNull(inCallPresenter);
-    mInCallPresenter.addListener(this);
-    mInCallPresenter.addIncomingCallListener(this);
+    this.inCallPresenter = Assert.isNotNull(inCallPresenter);
+    this.inCallPresenter.addListener(this);
+    this.inCallPresenter.addIncomingCallListener(this);
   }
 
   /**
@@ -106,18 +106,18 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    */
   public void tearDown() {
     LogUtil.enterBlock("VideoPauseController.tearDown");
-    mInCallPresenter.removeListener(this);
-    mInCallPresenter.removeIncomingCallListener(this);
+    inCallPresenter.removeListener(this);
+    inCallPresenter.removeIncomingCallListener(this);
     clear();
   }
 
   /** Clears the internal state for the {@link VideoPauseController}. */
   private void clear() {
-    mInCallPresenter = null;
-    mPrimaryCall = null;
-    mPrevCallState = State.INVALID;
-    mWasVideoCall = false;
-    mIsInBackground = false;
+    inCallPresenter = null;
+    primaryCall = null;
+    prevCallState = State.INVALID;
+    wasVideoCall = false;
+    isInBackground = false;
   }
 
   /**
@@ -143,7 +143,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
       call = callList.getActiveCall();
     }
 
-    boolean hasPrimaryCallChanged = !Objects.equals(call, mPrimaryCall);
+    boolean hasPrimaryCallChanged = !Objects.equals(call, primaryCall);
     boolean canVideoPause = videoCanPause(call);
 
     LogUtil.i(
@@ -151,18 +151,18 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
         "hasPrimaryCallChanged: %b, videoCanPause: %b, isInBackground: %b",
         hasPrimaryCallChanged,
         canVideoPause,
-        mIsInBackground);
+        isInBackground);
 
     if (hasPrimaryCallChanged) {
       onPrimaryCallChanged(call);
       return;
     }
 
-    if (wasDialing() && canVideoPause && mIsInBackground) {
+    if (wasDialing() && canVideoPause && isInBackground) {
       // Bring UI to foreground if outgoing request becomes active while UI is in
       // background.
       bringToForeground();
-    } else if (!mWasVideoCall && canVideoPause && mIsInBackground) {
+    } else if (!wasVideoCall && canVideoPause && isInBackground) {
       // Bring UI to foreground if VoLTE call becomes active while UI is in
       // background.
       bringToForeground();
@@ -185,22 +185,22 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
         "VideoPauseController.onPrimaryCallChanged",
         "new call: %s, old call: %s, mIsInBackground: %b",
         call,
-        mPrimaryCall,
-        mIsInBackground);
+        primaryCall,
+        isInBackground);
 
-    if (Objects.equals(call, mPrimaryCall)) {
+    if (Objects.equals(call, primaryCall)) {
       throw new IllegalStateException();
     }
     final boolean canVideoPause = videoCanPause(call);
 
-    if (canVideoPause && !mIsInBackground) {
+    if (canVideoPause && !isInBackground) {
       // Send resume request for the active call, if user rejects incoming call, ends dialing
       // call, or the call was previously in a paused state and UI is in the foreground.
       sendRequest(call, true);
-    } else if (isIncomingCall(call) && videoCanPause(mPrimaryCall)) {
+    } else if (isIncomingCall(call) && videoCanPause(primaryCall)) {
       // Send pause request if there is an active video call, and we just received a new
       // incoming call.
-      sendRequest(mPrimaryCall, false);
+      sendRequest(primaryCall, false);
     }
 
     updatePrimaryCallContext(call);
@@ -222,7 +222,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
         newState,
         call);
 
-    if (Objects.equals(call, mPrimaryCall)) {
+    if (Objects.equals(call, primaryCall)) {
       return;
     }
 
@@ -236,13 +236,13 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    */
   private void updatePrimaryCallContext(DialerCall call) {
     if (call == null) {
-      mPrimaryCall = null;
-      mPrevCallState = State.INVALID;
-      mWasVideoCall = false;
+      primaryCall = null;
+      prevCallState = State.INVALID;
+      wasVideoCall = false;
     } else {
-      mPrimaryCall = call;
-      mPrevCallState = call.getState();
-      mWasVideoCall = call.isVideoCall();
+      primaryCall = call;
+      prevCallState = call.getState();
+      wasVideoCall = call.isVideoCall();
     }
   }
 
@@ -252,11 +252,11 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    * @param showing true if UI is in the foreground, false otherwise.
    */
   public void onUiShowing(boolean showing) {
-    if (mInCallPresenter == null) {
+    if (inCallPresenter == null) {
       return;
     }
 
-    final boolean isInCall = mInCallPresenter.getInCallState() == InCallState.INCALL;
+    final boolean isInCall = inCallPresenter.getInCallState() == InCallState.INCALL;
     if (showing) {
       onResume(isInCall);
     } else {
@@ -272,9 +272,9 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    *     video provider if we are in a call.
    */
   private void onResume(boolean isInCall) {
-    mIsInBackground = false;
+    isInBackground = false;
     if (isInCall) {
-      sendRequest(mPrimaryCall, true);
+      sendRequest(primaryCall, true);
     }
   }
 
@@ -286,16 +286,16 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    *     video provider if we are in a call.
    */
   private void onPause(boolean isInCall) {
-    mIsInBackground = true;
+    isInBackground = true;
     if (isInCall) {
-      sendRequest(mPrimaryCall, false);
+      sendRequest(primaryCall, false);
     }
   }
 
   private void bringToForeground() {
     LogUtil.enterBlock("VideoPauseController.bringToForeground");
-    if (mInCallPresenter != null) {
-      mInCallPresenter.bringToForeground(false);
+    if (inCallPresenter != null) {
+      inCallPresenter.bringToForeground(false);
     } else {
       LogUtil.e(
           "VideoPauseController.bringToForeground",

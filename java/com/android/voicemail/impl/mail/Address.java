@@ -39,19 +39,19 @@ import org.apache.james.mime4j.codec.EncoderUtil;
 public class Address implements Parcelable {
   public static final String ADDRESS_DELIMETER = ",";
   /** Address part, in the form local_part@domain_part. No surrounding angle brackets. */
-  private String mAddress;
+  private String address;
 
   /**
    * Name part. No surrounding double quote, and no MIME/base64 encoding. This must be null if
    * Address has no name part.
    */
-  private String mPersonal;
+  private String personal;
 
   /**
    * When personal is set, it will return the first token of the personal string. Otherwise, it will
    * return the e-mail address up to the '@' sign.
    */
-  private String mSimplifiedName;
+  private String simplifiedName;
 
   // Regex that matches address surrounded by '<>' optionally. '^<?([^>]+)>?$'
   private static final Pattern REMOVE_OPTIONAL_BRACKET = Pattern.compile("^<?([^>]+)>?$");
@@ -96,26 +96,26 @@ public class Address implements Parcelable {
    * first token of that name. Otherwise, it will return the e-mail address up to the '@' sign.
    */
   public String getSimplifiedName() {
-    if (mSimplifiedName == null) {
-      if (TextUtils.isEmpty(mPersonal) && !TextUtils.isEmpty(mAddress)) {
-        int atSign = mAddress.indexOf('@');
-        mSimplifiedName = (atSign != -1) ? mAddress.substring(0, atSign) : "";
-      } else if (!TextUtils.isEmpty(mPersonal)) {
+    if (simplifiedName == null) {
+      if (TextUtils.isEmpty(personal) && !TextUtils.isEmpty(address)) {
+        int atSign = address.indexOf('@');
+        simplifiedName = (atSign != -1) ? address.substring(0, atSign) : "";
+      } else if (!TextUtils.isEmpty(personal)) {
 
         // TODO: use Contacts' NameSplitter for more reliable first-name extraction
 
-        int end = mPersonal.indexOf(' ');
-        while (end > 0 && mPersonal.charAt(end - 1) == ',') {
+        int end = personal.indexOf(' ');
+        while (end > 0 && personal.charAt(end - 1) == ',') {
           end--;
         }
-        mSimplifiedName = (end < 1) ? mPersonal : mPersonal.substring(0, end);
+        simplifiedName = (end < 1) ? personal : personal.substring(0, end);
 
       } else {
         LogUtils.w(LOG_TAG, "Unable to get a simplified name");
-        mSimplifiedName = "";
+        simplifiedName = "";
       }
     }
-    return mSimplifiedName;
+    return simplifiedName;
   }
 
   public static synchronized Address getEmailAddress(String rawAddress) {
@@ -137,11 +137,11 @@ public class Address implements Parcelable {
   }
 
   public String getAddress() {
-    return mAddress;
+    return address;
   }
 
   public void setAddress(String address) {
-    mAddress = REMOVE_OPTIONAL_BRACKET.matcher(address).replaceAll("$1");
+    this.address = REMOVE_OPTIONAL_BRACKET.matcher(address).replaceAll("$1");
   }
 
   /**
@@ -150,7 +150,7 @@ public class Address implements Parcelable {
    * @return Name part of email address. Returns null if it is omitted.
    */
   public String getPersonal() {
-    return mPersonal;
+    return personal;
   }
 
   /**
@@ -160,7 +160,7 @@ public class Address implements Parcelable {
    * @param personal name part of email address as UTF-16 string. Null is acceptable.
    */
   public void setPersonal(String personal) {
-    mPersonal = decodeAddressPersonal(personal);
+    this.personal = decodeAddressPersonal(personal);
   }
 
   /**
@@ -265,14 +265,14 @@ public class Address implements Parcelable {
    */
   @Override
   public String toString() {
-    if (mPersonal != null && !mPersonal.equals(mAddress)) {
-      if (mPersonal.matches(".*[\\(\\)<>@,;:\\\\\".\\[\\]].*")) {
-        return ensureQuotedString(mPersonal) + " <" + mAddress + ">";
+    if (personal != null && !personal.equals(address)) {
+      if (personal.matches(".*[\\(\\)<>@,;:\\\\\".\\[\\]].*")) {
+        return ensureQuotedString(personal) + " <" + address + ">";
       } else {
-        return mPersonal + " <" + mAddress + ">";
+        return personal + " <" + address + ">";
       }
     } else {
-      return mAddress;
+      return address;
     }
   }
 
@@ -336,10 +336,10 @@ public class Address implements Parcelable {
    *     and MIME/base64 encoded if necessary.
    */
   public String toHeader() {
-    if (mPersonal != null) {
-      return EncoderUtil.encodeAddressDisplayName(mPersonal) + " <" + mAddress + ">";
+    if (personal != null) {
+      return EncoderUtil.encodeAddressDisplayName(personal) + " <" + address + ">";
     } else {
-      return mAddress;
+      return address;
     }
   }
 
@@ -374,10 +374,10 @@ public class Address implements Parcelable {
    */
   @VisibleForTesting
   public String toFriendly() {
-    if (mPersonal != null && mPersonal.length() > 0) {
-      return mPersonal;
+    if (personal != null && personal.length() > 0) {
+      return personal;
     } else {
-      return mAddress;
+      return address;
     }
   }
 
@@ -516,7 +516,7 @@ public class Address implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel out, int flags) {
-    out.writeString(mPersonal);
-    out.writeString(mAddress);
+    out.writeString(personal);
+    out.writeString(address);
   }
 }

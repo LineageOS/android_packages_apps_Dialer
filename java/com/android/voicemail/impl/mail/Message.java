@@ -33,18 +33,18 @@ public abstract class Message implements Part, Body {
     BCC,
   }
 
-  protected String mUid;
+  protected String uid;
 
-  private HashSet<String> mFlags = null;
+  private HashSet<String> flags = null;
 
-  protected Date mInternalDate;
+  protected Date internalDate;
 
   public String getUid() {
-    return mUid;
+    return uid;
   }
 
   public void setUid(String uid) {
-    this.mUid = uid;
+    this.uid = uid;
   }
 
   public abstract String getSubject() throws MessagingException;
@@ -52,11 +52,11 @@ public abstract class Message implements Part, Body {
   public abstract void setSubject(String subject) throws MessagingException;
 
   public Date getInternalDate() {
-    return mInternalDate;
+    return internalDate;
   }
 
   public void setInternalDate(Date internalDate) {
-    this.mInternalDate = internalDate;
+    this.internalDate = internalDate;
   }
 
   public abstract Date getReceivedDate() throws MessagingException;
@@ -95,10 +95,10 @@ public abstract class Message implements Part, Body {
   }
 
   private HashSet<String> getFlagSet() {
-    if (mFlags == null) {
-      mFlags = new HashSet<String>();
+    if (flags == null) {
+      flags = new HashSet<String>();
     }
-    return mFlags;
+    return flags;
   }
 
   /*
@@ -145,6 +145,6 @@ public abstract class Message implements Part, Body {
 
   @Override
   public String toString() {
-    return getClass().getSimpleName() + ':' + mUid;
+    return getClass().getSimpleName() + ':' + uid;
   }
 }

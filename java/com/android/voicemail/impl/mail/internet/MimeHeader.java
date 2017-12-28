@@ -45,10 +45,10 @@ public class MimeHeader {
     HEADER_ANDROID_ATTACHMENT_STORE_DATA
   };
 
-  protected final ArrayList<Field> mFields = new ArrayList<Field>();
+  protected final ArrayList<Field> fields = new ArrayList<Field>();
 
   public void clear() {
-    mFields.clear();
+    fields.clear();
   }
 
   public String getFirstHeader(String name) throws MessagingException {
@@ -60,7 +60,7 @@ public class MimeHeader {
   }
 
   public void addHeader(String name, String value) throws MessagingException {
-    mFields.add(new Field(name, value));
+    fields.add(new Field(name, value));
   }
 
   public void setHeader(String name, String value) throws MessagingException {
@@ -73,7 +73,7 @@ public class MimeHeader {
 
   public String[] getHeader(String name) throws MessagingException {
     ArrayList<String> values = new ArrayList<String>();
-    for (Field field : mFields) {
+    for (Field field : fields) {
       if (field.name.equalsIgnoreCase(name)) {
         values.add(field.value);
       }
@@ -86,12 +86,12 @@ public class MimeHeader {
 
   public void removeHeader(String name) throws MessagingException {
     ArrayList<Field> removeFields = new ArrayList<Field>();
-    for (Field field : mFields) {
+    for (Field field : fields) {
       if (field.name.equalsIgnoreCase(name)) {
         removeFields.add(field);
       }
     }
-    mFields.removeAll(removeFields);
+    fields.removeAll(removeFields);
   }
 
   /**
@@ -101,11 +101,11 @@ public class MimeHeader {
    *     empty
    */
   public String writeToString() {
-    if (mFields.size() == 0) {
+    if (fields.size() == 0) {
       return null;
     }
     StringBuilder builder = new StringBuilder();
-    for (Field field : mFields) {
+    for (Field field : fields) {
       if (!arrayContains(WRITE_OMIT_FIELDS, field.name)) {
         builder.append(field.name + ": " + field.value + "\r\n");
       }
@@ -115,7 +115,7 @@ public class MimeHeader {
 
   public void writeTo(OutputStream out) throws IOException, MessagingException {
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out), 1024);
-    for (Field field : mFields) {
+    for (Field field : fields) {
       if (!arrayContains(WRITE_OMIT_FIELDS, field.name)) {
         writer.write(field.name + ": " + field.value + "\r\n");
       }
@@ -140,7 +140,7 @@ public class MimeHeader {
 
   @Override
   public String toString() {
-    return (mFields == null) ? null : mFields.toString();
+    return (fields == null) ? null : fields.toString();
   }
 
   public static final boolean arrayContains(Object[] a, Object o) {

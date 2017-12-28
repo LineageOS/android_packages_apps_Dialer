@@ -57,15 +57,15 @@ public class CallLogGroupBuilder {
   /** Instance of the time object used for time calculations. */
   private static final Time TIME = new Time();
   /** The object on which the groups are created. */
-  private final GroupCreator mGroupCreator;
+  private final GroupCreator groupCreator;
 
   public CallLogGroupBuilder(GroupCreator groupCreator) {
-    mGroupCreator = groupCreator;
+    this.groupCreator = groupCreator;
   }
 
   /**
    * Finds all groups of adjacent entries in the call log which should be grouped together and calls
-   * {@link GroupCreator#addGroup(int, int)} on {@link #mGroupCreator} for each of them.
+   * {@link GroupCreator#addGroup(int, int)} on {@link #groupCreator} for each of them.
    *
    * <p>For entries that are not grouped with others, we do not need to create a group of size one.
    *
@@ -80,7 +80,7 @@ public class CallLogGroupBuilder {
     }
 
     // Clear any previous day grouping information.
-    mGroupCreator.clearDayGroups();
+    groupCreator.clearDayGroups();
 
     // Get current system time, used for calculating which day group calls belong to.
     long currentTime = System.currentTimeMillis();
@@ -90,7 +90,7 @@ public class CallLogGroupBuilder {
     final long firstDate = cursor.getLong(CallLogQuery.DATE);
     final long firstRowId = cursor.getLong(CallLogQuery.ID);
     int groupDayGroup = getDayGroup(firstDate, currentTime);
-    mGroupCreator.setDayGroup(firstRowId, groupDayGroup);
+    groupCreator.setDayGroup(firstRowId, groupDayGroup);
 
     // Determine the callback action for the first call in the cursor.
     String groupNumber = cursor.getString(CallLogQuery.NUMBER);
@@ -99,7 +99,7 @@ public class CallLogGroupBuilder {
     int groupCallbackAction =
         CallbackActionHelper.getCallbackAction(
             groupNumber, groupFeatures, groupAccountComponentName);
-    mGroupCreator.setCallbackAction(firstRowId, groupCallbackAction);
+    groupCreator.setCallbackAction(firstRowId, groupCallbackAction);
 
     // Instantiate other group values to those of the first call in the cursor.
     String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
@@ -164,7 +164,7 @@ public class CallLogGroupBuilder {
 
         // Create a group for the previous group of calls, which does not include the
         // current call.
-        mGroupCreator.addGroup(cursor.getPosition() - groupSize, groupSize);
+        groupCreator.addGroup(cursor.getPosition() - groupSize, groupSize);
 
         // Start a new group; it will include at least the current call.
         groupSize = 1;
@@ -181,12 +181,12 @@ public class CallLogGroupBuilder {
 
       // Save the callback action and the day group associated with the current call.
       final long currentCallId = cursor.getLong(CallLogQuery.ID);
-      mGroupCreator.setCallbackAction(currentCallId, groupCallbackAction);
-      mGroupCreator.setDayGroup(currentCallId, groupDayGroup);
+      groupCreator.setCallbackAction(currentCallId, groupCallbackAction);
+      groupCreator.setDayGroup(currentCallId, groupDayGroup);
     }
 
     // Create a group for the last set of calls.
-    mGroupCreator.addGroup(count - groupSize, groupSize);
+    groupCreator.addGroup(count - groupSize, groupSize);
   }
 
   /**

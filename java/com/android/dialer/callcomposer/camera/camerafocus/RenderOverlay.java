@@ -42,26 +42,26 @@ public class RenderOverlay extends FrameLayout {
     void draw(Canvas canvas);
   }
 
-  private RenderView mRenderView;
-  private List<Renderer> mClients;
+  private RenderView renderView;
+  private List<Renderer> clients;
 
   // reverse list of touch clients
-  private List<Renderer> mTouchClients;
-  private int[] mPosition = new int[2];
+  private List<Renderer> touchClients;
+  private int[] position = new int[2];
 
   public RenderOverlay(Context context, AttributeSet attrs) {
     super(context, attrs);
-    mRenderView = new RenderView(context);
-    addView(mRenderView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-    mClients = new ArrayList<>(10);
-    mTouchClients = new ArrayList<>(10);
+    renderView = new RenderView(context);
+    addView(renderView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+    clients = new ArrayList<>(10);
+    touchClients = new ArrayList<>(10);
     setWillNotDraw(false);
 
     addRenderer(new PieRenderer(context));
   }
 
   public PieRenderer getPieRenderer() {
-    for (Renderer renderer : mClients) {
+    for (Renderer renderer : clients) {
       if (renderer instanceof PieRenderer) {
         return (PieRenderer) renderer;
       }
@@ -70,22 +70,22 @@ public class RenderOverlay extends FrameLayout {
   }
 
   public void addRenderer(Renderer renderer) {
-    mClients.add(renderer);
+    clients.add(renderer);
     renderer.setOverlay(this);
     if (renderer.handlesTouch()) {
-      mTouchClients.add(0, renderer);
+      touchClients.add(0, renderer);
     }
     renderer.layout(getLeft(), getTop(), getRight(), getBottom());
   }
 
   public void addRenderer(int pos, Renderer renderer) {
-    mClients.add(pos, renderer);
+    clients.add(pos, renderer);
     renderer.setOverlay(this);
     renderer.layout(getLeft(), getTop(), getRight(), getBottom());
   }
 
   public void remove(Renderer renderer) {
-    mClients.remove(renderer);
+    clients.remove(renderer);
     renderer.setOverlay(null);
   }
 
@@ -95,11 +95,11 @@ public class RenderOverlay extends FrameLayout {
   }
 
   private void adjustPosition() {
-    getLocationInWindow(mPosition);
+    getLocationInWindow(position);
   }
 
   public void update() {
-    mRenderView.invalidate();
+    renderView.invalidate();
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -112,9 +112,9 @@ public class RenderOverlay extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent evt) {
-      if (mTouchClients != null) {
+      if (touchClients != null) {
         boolean res = false;
-        for (Renderer client : mTouchClients) {
+        for (Renderer client : touchClients) {
           res |= client.onTouchEvent(evt);
         }
         return res;
@@ -126,10 +126,10 @@ public class RenderOverlay extends FrameLayout {
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
       adjustPosition();
       super.onLayout(changed, left, top, right, bottom);
-      if (mClients == null) {
+      if (clients == null) {
         return;
       }
-      for (Renderer renderer : mClients) {
+      for (Renderer renderer : clients) {
         renderer.layout(left, top, right, bottom);
       }
     }
@@ -137,11 +137,11 @@ public class RenderOverlay extends FrameLayout {
     @Override
     public void draw(Canvas canvas) {
       super.draw(canvas);
-      if (mClients == null) {
+      if (clients == null) {
         return;
       }
       boolean redraw = false;
-      for (Renderer renderer : mClients) {
+      for (Renderer renderer : clients) {
         renderer.draw(canvas);
         redraw = redraw || ((OverlayRenderer) renderer).isVisible();
       }

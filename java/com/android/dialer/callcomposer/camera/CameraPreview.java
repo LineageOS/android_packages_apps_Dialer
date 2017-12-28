@@ -45,30 +45,30 @@ public class CameraPreview {
     void setShown();
   }
 
-  private int mCameraWidth = -1;
-  private int mCameraHeight = -1;
-  private boolean mTabHasBeenShown = false;
-  private OnTouchListener mListener;
+  private int cameraWidth = -1;
+  private int cameraHeight = -1;
+  private boolean tabHasBeenShown = false;
+  private OnTouchListener listener;
 
-  private final CameraPreviewHost mHost;
+  private final CameraPreviewHost host;
 
   public CameraPreview(final CameraPreviewHost host) {
     Assert.isNotNull(host);
     Assert.isNotNull(host.getView());
-    mHost = host;
+    this.host = host;
   }
 
   // This is set when the tab is actually selected.
   public void setShown() {
-    mTabHasBeenShown = true;
+    tabHasBeenShown = true;
     maybeOpenCamera();
   }
 
   // Opening camera is very expensive. Most of the ANR reports seem to be related to the camera.
   // So we delay until the camera is actually needed.  See a bug
   private void maybeOpenCamera() {
-    boolean visible = mHost.getView().getVisibility() == View.VISIBLE;
-    if (mTabHasBeenShown && visible && PermissionsUtil.hasCameraPermissions(getContext())) {
+    boolean visible = host.getView().getVisibility() == View.VISIBLE;
+    if (tabHasBeenShown && visible && PermissionsUtil.hasCameraPermissions(getContext())) {
       CameraManager.get().openCamera();
     }
   }
@@ -77,20 +77,20 @@ public class CameraPreview {
     switch (orientation) {
       case 0:
       case 180:
-        mCameraWidth = size.width;
-        mCameraHeight = size.height;
+        cameraWidth = size.width;
+        cameraHeight = size.height;
         break;
       case 90:
       case 270:
       default:
-        mCameraWidth = size.height;
-        mCameraHeight = size.width;
+        cameraWidth = size.height;
+        cameraHeight = size.width;
     }
-    mHost.getView().requestLayout();
+    host.getView().requestLayout();
   }
 
   public int getWidthMeasureSpec(final int widthMeasureSpec, final int heightMeasureSpec) {
-    if (mCameraHeight >= 0) {
+    if (cameraHeight >= 0) {
       final int width = View.MeasureSpec.getSize(widthMeasureSpec);
       return MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
     } else {
@@ -99,10 +99,10 @@ public class CameraPreview {
   }
 
   public int getHeightMeasureSpec(final int widthMeasureSpec, final int heightMeasureSpec) {
-    if (mCameraHeight >= 0) {
+    if (cameraHeight >= 0) {
       final int orientation = getContext().getResources().getConfiguration().orientation;
       final int width = View.MeasureSpec.getSize(widthMeasureSpec);
-      final float aspectRatio = (float) mCameraWidth / (float) mCameraHeight;
+      final float aspectRatio = (float) cameraWidth / (float) cameraHeight;
       int height;
       if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
         height = (int) (width * aspectRatio);
@@ -128,20 +128,20 @@ public class CameraPreview {
   }
 
   public Context getContext() {
-    return mHost.getView().getContext();
+    return host.getView().getContext();
   }
 
   public void setOnTouchListener(final View.OnTouchListener listener) {
-    mListener = listener;
-    mHost.getView().setOnTouchListener(listener);
+    this.listener = listener;
+    host.getView().setOnTouchListener(listener);
   }
 
   public void setFocusable(boolean focusable) {
-    mHost.getView().setOnTouchListener(focusable ? mListener : null);
+    host.getView().setOnTouchListener(focusable ? listener : null);
   }
 
   public int getHeight() {
-    return mHost.getView().getHeight();
+    return host.getView().getHeight();
   }
 
   public void onAttachedToWindow() {
@@ -162,7 +162,7 @@ public class CameraPreview {
 
   /** @return True if the view is valid and prepared for the camera to start showing the preview */
   public boolean isValid() {
-    return mHost.isValid();
+    return host.isValid();
   }
 
   /**
@@ -172,6 +172,6 @@ public class CameraPreview {
    * @throws IOException Which is caught by the CameraManager to display an error
    */
   public void startPreview(final Camera camera) throws IOException {
-    mHost.startPreview(camera);
+    host.startPreview(camera);
   }
 }

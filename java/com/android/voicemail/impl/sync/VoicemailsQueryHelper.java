@@ -52,14 +52,14 @@ public class VoicemailsQueryHelper {
   static final String DELETED_SELECTION = Voicemails.DELETED + "=1";
   static final String ARCHIVED_SELECTION = Voicemails.ARCHIVED + "=0";
 
-  private Context mContext;
-  private ContentResolver mContentResolver;
-  private Uri mSourceUri;
+  private Context context;
+  private ContentResolver contentResolver;
+  private Uri sourceUri;
 
   public VoicemailsQueryHelper(Context context) {
-    mContext = context;
-    mContentResolver = context.getContentResolver();
-    mSourceUri = VoicemailContract.Voicemails.buildSourceUri(mContext.getPackageName());
+    this.context = context;
+    contentResolver = context.getContentResolver();
+    sourceUri = VoicemailContract.Voicemails.buildSourceUri(this.context.getPackageName());
   }
 
   /**
@@ -90,7 +90,7 @@ public class VoicemailsQueryHelper {
    */
   private List<Voicemail> getLocalVoicemails(
       @NonNull PhoneAccountHandle unusedPhoneAccountHandle, String selection) {
-    Cursor cursor = mContentResolver.query(mSourceUri, PROJECTION, selection, null, null);
+    Cursor cursor = contentResolver.query(sourceUri, PROJECTION, selection, null, null);
     if (cursor == null) {
       return null;
     }
@@ -135,12 +135,12 @@ public class VoicemailsQueryHelper {
     }
 
     String selectionStatement = String.format(Voicemails._ID + " IN (%s)", sb.toString());
-    return mContentResolver.delete(Voicemails.CONTENT_URI, selectionStatement, null);
+    return contentResolver.delete(Voicemails.CONTENT_URI, selectionStatement, null);
   }
 
   /** Utility method to delete a single voicemail that is not archived. */
   public void deleteNonArchivedFromDatabase(Voicemail voicemail) {
-    mContentResolver.delete(
+    contentResolver.delete(
         Voicemails.CONTENT_URI,
         Voicemails._ID + "=? AND " + Voicemails.ARCHIVED + "= 0",
         new String[] {Long.toString(voicemail.getId())});
@@ -156,10 +156,10 @@ public class VoicemailsQueryHelper {
 
   /** Utility method to mark single message as read. */
   public void markReadInDatabase(Voicemail voicemail) {
-    Uri uri = ContentUris.withAppendedId(mSourceUri, voicemail.getId());
+    Uri uri = ContentUris.withAppendedId(sourceUri, voicemail.getId());
     ContentValues contentValues = new ContentValues();
     contentValues.put(Voicemails.IS_READ, "1");
-    mContentResolver.update(uri, contentValues, null, null);
+    contentResolver.update(uri, contentValues, null, null);
   }
 
   /**
@@ -181,17 +181,17 @@ public class VoicemailsQueryHelper {
 
   /** Utility method to mark single message as clean. */
   public void markCleanInDatabase(Voicemail voicemail) {
-    Uri uri = ContentUris.withAppendedId(mSourceUri, voicemail.getId());
+    Uri uri = ContentUris.withAppendedId(sourceUri, voicemail.getId());
     ContentValues contentValues = new ContentValues();
-    mContentResolver.update(uri, contentValues, null, null);
+    contentResolver.update(uri, contentValues, null, null);
   }
 
   /** Utility method to add a transcription to the voicemail. */
   public void updateWithTranscription(Voicemail voicemail, String transcription) {
-    Uri uri = ContentUris.withAppendedId(mSourceUri, voicemail.getId());
+    Uri uri = ContentUris.withAppendedId(sourceUri, voicemail.getId());
     ContentValues contentValues = new ContentValues();
     contentValues.put(Voicemails.TRANSCRIPTION, transcription);
-    mContentResolver.update(uri, contentValues, null, null);
+    contentResolver.update(uri, contentValues, null, null);
   }
 
   /**
@@ -221,7 +221,7 @@ public class VoicemailsQueryHelper {
                 + Voicemails.SOURCE_DATA
                 + "=?";
         String[] whereArgs = {phoneAccountComponentName, phoneAccountId, sourceData};
-        cursor = mContentResolver.query(mSourceUri, PROJECTION, whereClause, whereArgs, null);
+        cursor = contentResolver.query(sourceUri, PROJECTION, whereClause, whereArgs, null);
         if (cursor.getCount() == 0) {
           return true;
         } else {
@@ -249,10 +249,10 @@ public class VoicemailsQueryHelper {
 
   /** Utility method to mark single voicemail as archived. */
   public void markArchiveInDatabase(Voicemail voicemail) {
-    Uri uri = ContentUris.withAppendedId(mSourceUri, voicemail.getId());
+    Uri uri = ContentUris.withAppendedId(sourceUri, voicemail.getId());
     ContentValues contentValues = new ContentValues();
     contentValues.put(Voicemails.ARCHIVED, "1");
-    mContentResolver.update(uri, contentValues, null, null);
+    contentResolver.update(uri, contentValues, null, null);
   }
 
   /** Find the oldest voicemails that are on the device, and also on the server. */
@@ -265,7 +265,7 @@ public class VoicemailsQueryHelper {
     String sortAndLimit = "date ASC limit " + numVoicemails;
 
     try (Cursor cursor =
-        mContentResolver.query(mSourceUri, PROJECTION, ARCHIVED_SELECTION, null, sortAndLimit)) {
+        contentResolver.query(sourceUri, PROJECTION, ARCHIVED_SELECTION, null, sortAndLimit)) {
 
       Assert.isNotNull(cursor);
 

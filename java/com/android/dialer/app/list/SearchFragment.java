@@ -51,28 +51,28 @@ import com.android.dialer.widget.EmptyContentView;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
-  protected EmptyContentView mEmptyView;
-  private OnListFragmentScrolledListener mActivityScrollListener;
-  private View.OnTouchListener mActivityOnTouchListener;
+  protected EmptyContentView emptyView;
+  private OnListFragmentScrolledListener activityScrollListener;
+  private View.OnTouchListener activityOnTouchListener;
   /*
    * Stores the untouched user-entered string that is used to populate the add to contacts
    * intent.
    */
-  private String mAddToContactNumber;
-  private int mActionBarHeight;
-  private int mShadowHeight;
-  private int mPaddingTop;
-  private int mShowDialpadDuration;
-  private int mHideDialpadDuration;
+  private String addToContactNumber;
+  private int actionBarHeight;
+  private int shadowHeight;
+  private int paddingTop;
+  private int showDialpadDuration;
+  private int hideDialpadDuration;
   /**
    * Used to resize the list view containing search results so that it fits the available space
    * above the dialpad. Does not have a user-visible effect in regular touch usage (since the
    * dialpad hides that portion of the ListView anyway), but improves usability in accessibility
    * mode.
    */
-  private Space mSpacer;
+  private Space spacer;
 
-  private HostInterface mActivity;
+  private HostInterface activity;
 
   @Override
   public void onAttach(Activity activity) {
@@ -84,7 +84,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     setUseCallableUri(true);
 
     try {
-      mActivityScrollListener = (OnListFragmentScrolledListener) activity;
+      activityScrollListener = (OnListFragmentScrolledListener) activity;
     } catch (ClassCastException e) {
       LogUtil.v(
           "SearchFragment.onAttach",
@@ -99,25 +99,25 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     LogUtil.d("SearchFragment.onStart", "");
     super.onStart();
 
-    mActivity = (HostInterface) getActivity();
+    activity = (HostInterface) getActivity();
 
     final Resources res = getResources();
-    mActionBarHeight = mActivity.getActionBarHeight();
-    mShadowHeight = res.getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
-    mPaddingTop = res.getDimensionPixelSize(R.dimen.search_list_padding_top);
-    mShowDialpadDuration = res.getInteger(R.integer.dialpad_slide_in_duration);
-    mHideDialpadDuration = res.getInteger(R.integer.dialpad_slide_out_duration);
+    actionBarHeight = activity.getActionBarHeight();
+    shadowHeight = res.getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
+    paddingTop = res.getDimensionPixelSize(R.dimen.search_list_padding_top);
+    showDialpadDuration = res.getInteger(R.integer.dialpad_slide_in_duration);
+    hideDialpadDuration = res.getInteger(R.integer.dialpad_slide_out_duration);
 
     final ListView listView = getListView();
 
-    if (mEmptyView == null) {
+    if (emptyView == null) {
       if (this instanceof SmartDialSearchFragment) {
-        mEmptyView = new DialpadSearchEmptyContentView(getActivity());
+        emptyView = new DialpadSearchEmptyContentView(getActivity());
       } else {
-        mEmptyView = new EmptyContentView(getActivity());
+        emptyView = new EmptyContentView(getActivity());
       }
-      ((ViewGroup) getListView().getParent()).addView(mEmptyView);
-      getListView().setEmptyView(mEmptyView);
+      ((ViewGroup) getListView().getParent()).addView(emptyView);
+      getListView().setEmptyView(emptyView);
       setupEmptyView();
     }
 
@@ -133,8 +133,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         new OnScrollListener() {
           @Override
           public void onScrollStateChanged(AbsListView view, int scrollState) {
-            if (mActivityScrollListener != null) {
-              mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
+            if (activityScrollListener != null) {
+              activityScrollListener.onListFragmentScrollStateChange(scrollState);
             }
           }
 
@@ -142,8 +142,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
           public void onScroll(
               AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
         });
-    if (mActivityOnTouchListener != null) {
-      listView.setOnTouchListener(mActivityOnTouchListener);
+    if (activityOnTouchListener != null) {
+      listView.setOnTouchListener(activityOnTouchListener);
     }
 
     updatePosition(false /* animate */);
@@ -170,7 +170,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
   }
 
   public void setAddToContactNumber(String addToContactNumber) {
-    mAddToContactNumber = addToContactNumber;
+    this.addToContactNumber = addToContactNumber;
   }
 
   /**
@@ -241,9 +241,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
               .logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_DIALPAD);
         }
         number =
-            TextUtils.isEmpty(mAddToContactNumber)
+            TextUtils.isEmpty(addToContactNumber)
                 ? adapter.getFormattedQueryString()
-                : mAddToContactNumber;
+                : addToContactNumber;
         intent = IntentUtil.getNewContactIntent(number);
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
         break;
@@ -253,24 +253,24 @@ public class SearchFragment extends PhoneNumberPickerFragment {
               .logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_DIALPAD);
         }
         number =
-            TextUtils.isEmpty(mAddToContactNumber)
+            TextUtils.isEmpty(addToContactNumber)
                 ? adapter.getFormattedQueryString()
-                : mAddToContactNumber;
+                : addToContactNumber;
         intent = IntentUtil.getAddToExistingContactIntent(number);
         DialerUtils.startActivityWithErrorToast(
             getActivity(), intent, R.string.add_contact_not_available);
         break;
       case DialerPhoneNumberListAdapter.SHORTCUT_SEND_SMS_MESSAGE:
         number =
-            TextUtils.isEmpty(mAddToContactNumber)
+            TextUtils.isEmpty(addToContactNumber)
                 ? adapter.getFormattedQueryString()
-                : mAddToContactNumber;
+                : addToContactNumber;
         intent = IntentUtil.getSendSmsIntent(number);
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
         break;
       case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
         number =
-            TextUtils.isEmpty(mAddToContactNumber) ? adapter.getQueryString() : mAddToContactNumber;
+            TextUtils.isEmpty(addToContactNumber) ? adapter.getQueryString() : addToContactNumber;
         listener = getOnPhoneNumberPickerListener();
         if (listener != null && !checkForProhibitedPhoneNumber(number)) {
           CallSpecificAppData callSpecificAppData =
@@ -296,25 +296,25 @@ public class SearchFragment extends PhoneNumberPickerFragment {
    */
   public void updatePosition(boolean animate) {
     LogUtil.d("SearchFragment.updatePosition", "animate: %b", animate);
-    if (mActivity == null) {
+    if (activity == null) {
       // Activity will be set in onStart, and this method will be called again
       return;
     }
 
     // Use negative shadow height instead of 0 to account for the 9-patch's shadow.
     int startTranslationValue =
-        mActivity.isDialpadShown() ? mActionBarHeight - mShadowHeight : -mShadowHeight;
+        activity.isDialpadShown() ? actionBarHeight - shadowHeight : -shadowHeight;
     int endTranslationValue = 0;
     // Prevents ListView from being translated down after a rotation when the ActionBar is up.
-    if (animate || mActivity.isActionBarShowing()) {
-      endTranslationValue = mActivity.isDialpadShown() ? 0 : mActionBarHeight - mShadowHeight;
+    if (animate || activity.isActionBarShowing()) {
+      endTranslationValue = activity.isDialpadShown() ? 0 : actionBarHeight - shadowHeight;
     }
     if (animate) {
       // If the dialpad will be shown, then this animation involves sliding the list up.
-      final boolean slideUp = mActivity.isDialpadShown();
+      final boolean slideUp = activity.isDialpadShown();
 
       Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT;
-      int duration = slideUp ? mShowDialpadDuration : mHideDialpadDuration;
+      int duration = slideUp ? showDialpadDuration : hideDialpadDuration;
       getView().setTranslationY(startTranslationValue);
       getView()
           .animate()
@@ -344,7 +344,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     }
 
     // There is padding which should only be applied when the dialpad is not shown.
-    int paddingTop = mActivity.isDialpadShown() ? 0 : mPaddingTop;
+    int paddingTop = activity.isDialpadShown() ? 0 : this.paddingTop;
     final ListView listView = getListView();
     listView.setPaddingRelative(
         listView.getPaddingStart(),
@@ -354,21 +354,21 @@ public class SearchFragment extends PhoneNumberPickerFragment {
   }
 
   public void resizeListView() {
-    if (mSpacer == null) {
+    if (spacer == null) {
       return;
     }
-    int spacerHeight = mActivity.isDialpadShown() ? mActivity.getDialpadHeight() : 0;
+    int spacerHeight = activity.isDialpadShown() ? activity.getDialpadHeight() : 0;
     LogUtil.d(
         "SearchFragment.resizeListView",
         "spacerHeight: %d -> %d, isDialpadShown: %b, dialpad height: %d",
-        mSpacer.getHeight(),
+        spacer.getHeight(),
         spacerHeight,
-        mActivity.isDialpadShown(),
-        mActivity.getDialpadHeight());
-    if (spacerHeight != mSpacer.getHeight()) {
-      final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mSpacer.getLayoutParams();
+        activity.isDialpadShown(),
+        activity.getDialpadHeight());
+    if (spacerHeight != spacer.getHeight()) {
+      final LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) spacer.getLayoutParams();
       lp.height = spacerHeight;
-      mSpacer.setLayoutParams(lp);
+      spacer.setLayoutParams(lp);
     }
   }
 
@@ -395,7 +395,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
   }
 
   public void setOnTouchListener(View.OnTouchListener onTouchListener) {
-    mActivityOnTouchListener = onTouchListener;
+    activityOnTouchListener = onTouchListener;
   }
 
   @Override
@@ -403,9 +403,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     final LinearLayout parent = (LinearLayout) super.inflateView(inflater, container);
     final int orientation = getResources().getConfiguration().orientation;
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-      mSpacer = new Space(getActivity());
+      spacer = new Space(getActivity());
       parent.addView(
-          mSpacer, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
+          spacer, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
     }
     return parent;
   }

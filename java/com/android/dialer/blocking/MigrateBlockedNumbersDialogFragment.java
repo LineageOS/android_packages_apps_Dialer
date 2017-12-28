@@ -32,8 +32,8 @@ import java.util.Objects;
  */
 public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
 
-  private BlockedNumbersMigrator mBlockedNumbersMigrator;
-  private BlockedNumbersMigrator.Listener mMigrationListener;
+  private BlockedNumbersMigrator blockedNumbersMigrator;
+  private BlockedNumbersMigrator.Listener migrationListener;
 
   /**
    * Creates a new MigrateBlockedNumbersDialogFragment.
@@ -49,8 +49,8 @@ public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
       BlockedNumbersMigrator blockedNumbersMigrator,
       BlockedNumbersMigrator.Listener migrationListener) {
     MigrateBlockedNumbersDialogFragment fragment = new MigrateBlockedNumbersDialogFragment();
-    fragment.mBlockedNumbersMigrator = Objects.requireNonNull(blockedNumbersMigrator);
-    fragment.mMigrationListener = Objects.requireNonNull(migrationListener);
+    fragment.blockedNumbersMigrator = Objects.requireNonNull(blockedNumbersMigrator);
+    fragment.migrationListener = Objects.requireNonNull(migrationListener);
     return fragment;
   }
 
@@ -90,12 +90,12 @@ public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
       public void onClick(View v) {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
-        mBlockedNumbersMigrator.migrate(
+        blockedNumbersMigrator.migrate(
             new Listener() {
               @Override
               public void onComplete() {
                 alertDialog.dismiss();
-                mMigrationListener.onComplete();
+                migrationListener.onComplete();
               }
             });
       }
@@ -106,8 +106,8 @@ public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
   public void onPause() {
     // The dialog is dismissed and state is cleaned up onPause, i.e. rotation.
     dismiss();
-    mBlockedNumbersMigrator = null;
-    mMigrationListener = null;
+    blockedNumbersMigrator = null;
+    migrationListener = null;
     super.onPause();
   }
 }

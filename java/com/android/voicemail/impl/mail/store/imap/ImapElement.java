@@ -77,14 +77,14 @@ public abstract class ImapElement {
         }
       };
 
-  private boolean mDestroyed = false;
+  private boolean destroyed = false;
 
   public abstract boolean isList();
 
   public abstract boolean isString();
 
   protected boolean isDestroyed() {
-    return mDestroyed;
+    return destroyed;
   }
 
   /**
@@ -92,12 +92,12 @@ public abstract class ImapElement {
    * ImapTempFileLiteral}.
    */
   public void destroy() {
-    mDestroyed = true;
+    destroyed = true;
   }
 
   /** Throws {@link RuntimeException} if it's already destroyed. */
   protected final void checkNotDestroyed() {
-    if (mDestroyed) {
+    if (destroyed) {
       throw new RuntimeException("Already destroyed");
     }
   }

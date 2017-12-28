@@ -64,9 +64,9 @@ public abstract class ImapString extends ImapElement {
   private static final SimpleDateFormat DATE_TIME_FORMAT =
       new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss Z", Locale.US);
 
-  private boolean mIsInteger;
-  private int mParsedInteger;
-  private Date mParsedDate;
+  private boolean isInteger;
+  private int parsedInteger;
+  private Date parsedDate;
 
   @Override
   public final boolean isList() {
@@ -94,12 +94,12 @@ public abstract class ImapString extends ImapElement {
 
   /** @return whether it can be parsed as a number. */
   public final boolean isNumber() {
-    if (mIsInteger) {
+    if (isInteger) {
       return true;
     }
     try {
-      mParsedInteger = Integer.parseInt(getString());
-      mIsInteger = true;
+      parsedInteger = Integer.parseInt(getString());
+      isInteger = true;
       return true;
     } catch (NumberFormatException e) {
       return false;
@@ -116,19 +116,19 @@ public abstract class ImapString extends ImapElement {
     if (!isNumber()) {
       return defaultValue;
     }
-    return mParsedInteger;
+    return parsedInteger;
   }
 
   /** @return whether it can be parsed as a date using {@link #DATE_TIME_FORMAT}. */
   public final boolean isDate() {
-    if (mParsedDate != null) {
+    if (parsedDate != null) {
       return true;
     }
     if (isEmpty()) {
       return false;
     }
     try {
-      mParsedDate = DATE_TIME_FORMAT.parse(getString());
+      parsedDate = DATE_TIME_FORMAT.parse(getString());
       return true;
     } catch (ParseException e) {
       VvmLog.w("ImapString", getString() + " can't be parsed as a date.");
@@ -141,7 +141,7 @@ public abstract class ImapString extends ImapElement {
     if (!isDate()) {
       return null;
     }
-    return mParsedDate;
+    return parsedDate;
   }
 
   /** @return whether the value case-insensitively equals to {@code s}. */

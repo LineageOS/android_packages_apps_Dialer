@@ -30,7 +30,7 @@ public class VvmLog {
 
   private static final int MAX_OMTP_VVM_LOGS = 100;
 
-  private static final LocalLog sLocalLog = new LocalLog(MAX_OMTP_VVM_LOGS);
+  private static final LocalLog localLog = new LocalLog(MAX_OMTP_VVM_LOGS);
 
   public static void log(String tag, String log) {
     PersistentLogger.logText(tag, log);
@@ -39,7 +39,7 @@ public class VvmLog {
   public static void dump(FileDescriptor fd, PrintWriter printwriter, String[] args) {
     IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printwriter, "  ");
     indentingPrintWriter.increaseIndent();
-    sLocalLog.dump(fd, indentingPrintWriter, args);
+    localLog.dump(fd, indentingPrintWriter, args);
     indentingPrintWriter.decreaseIndent();
   }
 
@@ -116,16 +116,16 @@ public class VvmLog {
 
   public static class LocalLog {
 
-    private final Deque<String> mLog;
-    private final int mMaxLines;
+    private final Deque<String> log;
+    private final int maxLines;
 
     public LocalLog(int maxLines) {
-      mMaxLines = Math.max(0, maxLines);
-      mLog = new ArrayDeque<>(mMaxLines);
+      this.maxLines = Math.max(0, maxLines);
+      log = new ArrayDeque<>(this.maxLines);
     }
 
     public void log(String msg) {
-      if (mMaxLines <= 0) {
+      if (maxLines <= 0) {
         return;
       }
       Calendar c = Calendar.getInstance();
@@ -134,21 +134,21 @@ public class VvmLog {
     }
 
     private synchronized void append(String logLine) {
-      while (mLog.size() >= mMaxLines) {
-        mLog.remove();
+      while (log.size() >= maxLines) {
+        log.remove();
       }
-      mLog.add(logLine);
+      log.add(logLine);
     }
 
     public synchronized void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
-      Iterator<String> itr = mLog.iterator();
+      Iterator<String> itr = log.iterator();
       while (itr.hasNext()) {
         pw.println(itr.next());
       }
     }
 
     public synchronized void reverseDump(FileDescriptor fd, PrintWriter pw, String[] args) {
-      Iterator<String> itr = mLog.descendingIterator();
+      Iterator<String> itr = log.descendingIterator();
       while (itr.hasNext()) {
         pw.println(itr.next());
       }
@@ -156,18 +156,18 @@ public class VvmLog {
 
     public static class ReadOnlyLocalLog {
 
-      private final LocalLog mLog;
+      private final LocalLog log;
 
       ReadOnlyLocalLog(LocalLog log) {
-        mLog = log;
+        this.log = log;
       }
 
       public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
-        mLog.dump(fd, pw, args);
+        log.dump(fd, pw, args);
       }
 
       public void reverseDump(FileDescriptor fd, PrintWriter pw, String[] args) {
-        mLog.reverseDump(fd, pw, args);
+        log.reverseDump(fd, pw, args);
       }
     }
 

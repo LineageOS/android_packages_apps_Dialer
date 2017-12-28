@@ -35,10 +35,10 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
   public static final int NO_LABEL = 0;
   public static final int NO_IMAGE = 0;
 
-  private ImageView mImageView;
-  private TextView mDescriptionView;
-  private TextView mActionView;
-  private OnEmptyViewActionButtonClickedListener mOnActionButtonClickedListener;
+  private ImageView imageView;
+  private TextView descriptionView;
+  private TextView actionView;
+  private OnEmptyViewActionButtonClickedListener onActionButtonClickedListener;
 
   private @StringRes int actionLabel;
 
@@ -60,40 +60,40 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
 
     // Don't let touches fall through the empty view.
     setClickable(true);
-    mImageView = (ImageView) findViewById(R.id.empty_list_view_image);
-    mDescriptionView = (TextView) findViewById(R.id.empty_list_view_message);
-    mActionView = (TextView) findViewById(R.id.empty_list_view_action);
-    mActionView.setOnClickListener(this);
+    imageView = (ImageView) findViewById(R.id.empty_list_view_image);
+    descriptionView = (TextView) findViewById(R.id.empty_list_view_message);
+    actionView = (TextView) findViewById(R.id.empty_list_view_action);
+    actionView.setOnClickListener(this);
   }
 
   public void setDescription(int resourceId) {
     if (resourceId == NO_LABEL) {
-      mDescriptionView.setText(null);
-      mDescriptionView.setVisibility(View.GONE);
+      descriptionView.setText(null);
+      descriptionView.setVisibility(View.GONE);
     } else {
-      mDescriptionView.setText(resourceId);
-      mDescriptionView.setVisibility(View.VISIBLE);
+      descriptionView.setText(resourceId);
+      descriptionView.setVisibility(View.VISIBLE);
     }
   }
 
   public void setImage(int resourceId) {
     if (resourceId == NO_LABEL) {
-      mImageView.setImageDrawable(null);
-      mImageView.setVisibility(View.GONE);
+      imageView.setImageDrawable(null);
+      imageView.setVisibility(View.GONE);
     } else {
-      mImageView.setImageResource(resourceId);
-      mImageView.setVisibility(View.VISIBLE);
+      imageView.setImageResource(resourceId);
+      imageView.setVisibility(View.VISIBLE);
     }
   }
 
   public void setActionLabel(@StringRes int resourceId) {
     actionLabel = resourceId;
     if (resourceId == NO_LABEL) {
-      mActionView.setText(null);
-      mActionView.setVisibility(View.GONE);
+      actionView.setText(null);
+      actionView.setVisibility(View.GONE);
     } else {
-      mActionView.setText(resourceId);
-      mActionView.setVisibility(View.VISIBLE);
+      actionView.setText(resourceId);
+      actionView.setVisibility(View.VISIBLE);
     }
   }
 
@@ -102,19 +102,19 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
   }
 
   public boolean isShowingContent() {
-    return mImageView.getVisibility() == View.VISIBLE
-        || mDescriptionView.getVisibility() == View.VISIBLE
-        || mActionView.getVisibility() == View.VISIBLE;
+    return imageView.getVisibility() == View.VISIBLE
+        || descriptionView.getVisibility() == View.VISIBLE
+        || actionView.getVisibility() == View.VISIBLE;
   }
 
   public void setActionClickedListener(OnEmptyViewActionButtonClickedListener listener) {
-    mOnActionButtonClickedListener = listener;
+    onActionButtonClickedListener = listener;
   }
 
   @Override
   public void onClick(View v) {
-    if (mOnActionButtonClickedListener != null) {
-      mOnActionButtonClickedListener.onEmptyViewActionButtonClicked();
+    if (onActionButtonClickedListener != null) {
+      onActionButtonClickedListener.onEmptyViewActionButtonClicked();
     }
   }
 

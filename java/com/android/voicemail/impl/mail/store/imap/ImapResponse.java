@@ -18,12 +18,12 @@ package com.android.voicemail.impl.mail.store.imap;
 
 /** Class represents an IMAP response. */
 public class ImapResponse extends ImapList {
-  private final String mTag;
-  private final boolean mIsContinuationRequest;
+  private final String tag;
+  private final boolean isContinuationRequest;
 
   /* package */ ImapResponse(String tag, boolean isContinuationRequest) {
-    mTag = tag;
-    mIsContinuationRequest = isContinuationRequest;
+    this.tag = tag;
+    this.isContinuationRequest = isContinuationRequest;
   }
 
   /* package */ static boolean isStatusResponse(String symbol) {
@@ -36,12 +36,12 @@ public class ImapResponse extends ImapList {
 
   /** @return whether it's a tagged response. */
   public boolean isTagged() {
-    return mTag != null;
+    return tag != null;
   }
 
   /** @return whether it's a continuation request. */
   public boolean isContinuationRequest() {
-    return mIsContinuationRequest;
+    return isContinuationRequest;
   }
 
   public boolean isStatusResponse() {
@@ -112,7 +112,7 @@ public class ImapResponse extends ImapList {
 
   @Override
   public String toString() {
-    String tag = mTag;
+    String tag = this.tag;
     if (isContinuationRequest()) {
       tag = "+";
     }
@@ -125,16 +125,16 @@ public class ImapResponse extends ImapList {
       return false;
     }
     final ImapResponse thatResponse = (ImapResponse) that;
-    if (mTag == null) {
-      if (thatResponse.mTag != null) {
+    if (tag == null) {
+      if (thatResponse.tag != null) {
         return false;
       }
     } else {
-      if (!mTag.equals(thatResponse.mTag)) {
+      if (!tag.equals(thatResponse.tag)) {
         return false;
       }
     }
-    if (mIsContinuationRequest != thatResponse.mIsContinuationRequest) {
+    if (isContinuationRequest != thatResponse.isContinuationRequest) {
       return false;
     }
     return true;

@@ -33,17 +33,17 @@ import java.io.IOException;
  * implementations of the shared methods are delegated to CameraPreview
  */
 public class SoftwareCameraPreview extends SurfaceView implements CameraPreview.CameraPreviewHost {
-  private final CameraPreview mPreview;
+  private final CameraPreview preview;
 
   public SoftwareCameraPreview(final Context context) {
     super(context);
-    mPreview = new CameraPreview(this);
+    preview = new CameraPreview(this);
     getHolder()
         .addCallback(
             new SurfaceHolder.Callback() {
               @Override
               public void surfaceCreated(final SurfaceHolder surfaceHolder) {
-                CameraManager.get().setSurface(mPreview);
+                CameraManager.get().setSurface(preview);
               }
 
               @Override
@@ -52,7 +52,7 @@ public class SoftwareCameraPreview extends SurfaceView implements CameraPreview.
                   final int format,
                   final int width,
                   final int height) {
-                CameraManager.get().setSurface(mPreview);
+                CameraManager.get().setSurface(preview);
               }
 
               @Override
@@ -64,37 +64,37 @@ public class SoftwareCameraPreview extends SurfaceView implements CameraPreview.
 
   @Override
   public void setShown() {
-    mPreview.setShown();
+    preview.setShown();
   }
 
   @Override
   protected void onVisibilityChanged(final View changedView, final int visibility) {
     super.onVisibilityChanged(changedView, visibility);
-    mPreview.onVisibilityChanged(visibility);
+    preview.onVisibilityChanged(visibility);
   }
 
   @Override
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
-    mPreview.onDetachedFromWindow();
+    preview.onDetachedFromWindow();
   }
 
   @Override
   protected void onAttachedToWindow() {
     super.onAttachedToWindow();
-    mPreview.onAttachedToWindow();
+    preview.onAttachedToWindow();
   }
 
   @Override
   protected void onRestoreInstanceState(final Parcelable state) {
     super.onRestoreInstanceState(state);
-    mPreview.onRestoreInstanceState();
+    preview.onRestoreInstanceState();
   }
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    widthMeasureSpec = mPreview.getWidthMeasureSpec(widthMeasureSpec, heightMeasureSpec);
-    heightMeasureSpec = mPreview.getHeightMeasureSpec(widthMeasureSpec, heightMeasureSpec);
+    widthMeasureSpec = preview.getWidthMeasureSpec(widthMeasureSpec, heightMeasureSpec);
+    heightMeasureSpec = preview.getHeightMeasureSpec(widthMeasureSpec, heightMeasureSpec);
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
   }
 
@@ -115,6 +115,6 @@ public class SoftwareCameraPreview extends SurfaceView implements CameraPreview.
 
   @Override
   public void onCameraPermissionGranted() {
-    mPreview.onCameraPermissionGranted();
+    preview.onCameraPermissionGranted();
   }
 }

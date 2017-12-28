@@ -71,8 +71,8 @@ public class VoicemailChangePinActivity extends Activity
 
   private static final int MESSAGE_HANDLE_RESULT = 1;
 
-  private PhoneAccountHandle mPhoneAccountHandle;
-  private PinChanger mPinChanger;
+  private PhoneAccountHandle phoneAccountHandle;
+  private PinChanger pinChanger;
 
   private static class ChangePinParams {
     PinChanger pinChanger;
@@ -81,25 +81,25 @@ public class VoicemailChangePinActivity extends Activity
     String newPin;
   }
 
-  private DialerExecutor<ChangePinParams> mChangePinExecutor;
+  private DialerExecutor<ChangePinParams> changePinExecutor;
 
-  private int mPinMinLength;
-  private int mPinMaxLength;
+  private int pinMinLength;
+  private int pinMaxLength;
 
-  private State mUiState = State.Initial;
-  private String mOldPin;
-  private String mFirstPin;
+  private State uiState = State.Initial;
+  private String oldPin;
+  private String firstPin;
 
-  private ProgressDialog mProgressDialog;
+  private ProgressDialog progressDialog;
 
-  private TextView mHeaderText;
-  private TextView mHintText;
-  private TextView mErrorText;
-  private EditText mPinEntry;
-  private Button mCancelButton;
-  private Button mNextButton;
+  private TextView headerText;
+  private TextView hintText;
+  private TextView errorText;
+  private EditText pinEntry;
+  private Button cancelButton;
+  private Button nextButton;
 
-  private Handler mHandler = new ChangePinHandler(new WeakReference<>(this));
+  private Handler handler = new ChangePinHandler(new WeakReference<>(this));
 
   private enum State {
     /**
@@ -116,9 +116,9 @@ public class VoicemailChangePinActivity extends Activity
       @Override
       public void onEnter(VoicemailChangePinActivity activity) {
         activity.setHeader(R.string.change_pin_enter_old_pin_header);
-        activity.mHintText.setText(R.string.change_pin_enter_old_pin_hint);
-        activity.mNextButton.setText(R.string.change_pin_continue_label);
-        activity.mErrorText.setText(null);
+        activity.hintText.setText(R.string.change_pin_enter_old_pin_hint);
+        activity.nextButton.setText(R.string.change_pin_continue_label);
+        activity.errorText.setText(null);
       }
 
       @Override
@@ -128,7 +128,7 @@ public class VoicemailChangePinActivity extends Activity
 
       @Override
       public void handleNext(VoicemailChangePinActivity activity) {
-        activity.mOldPin = activity.getCurrentPasswordInput();
+        activity.oldPin = activity.getCurrentPasswordInput();
         activity.verifyOldPin();
       }
 
@@ -139,7 +139,7 @@ public class VoicemailChangePinActivity extends Activity
         } else {
           CharSequence message = activity.getChangePinResultMessage(result);
           activity.showError(message);
-          activity.mPinEntry.setText("");
+          activity.pinEntry.setText("");
         }
       }
     },
@@ -179,7 +179,7 @@ public class VoicemailChangePinActivity extends Activity
           // through other means, or the generated pin is invalid
           // Wipe the default old PIN so the old PIN input box will be shown to the user
           // on the next time.
-          activity.mPinChanger.setScrambledPin(null);
+          activity.pinChanger.setScrambledPin(null);
           activity.updateState(State.EnterOldPin);
         }
       }
@@ -196,13 +196,13 @@ public class VoicemailChangePinActivity extends Activity
     EnterNewPin {
       @Override
       public void onEnter(VoicemailChangePinActivity activity) {
-        activity.mHeaderText.setText(R.string.change_pin_enter_new_pin_header);
-        activity.mNextButton.setText(R.string.change_pin_continue_label);
-        activity.mHintText.setText(
+        activity.headerText.setText(R.string.change_pin_enter_new_pin_header);
+        activity.nextButton.setText(R.string.change_pin_continue_label);
+        activity.hintText.setText(
             activity.getString(
                 R.string.change_pin_enter_new_pin_hint,
-                activity.mPinMinLength,
-                activity.mPinMaxLength));
+                activity.pinMinLength,
+                activity.pinMaxLength));
       }
 
       @Override
@@ -214,10 +214,10 @@ public class VoicemailChangePinActivity extends Activity
         }
         CharSequence error = activity.validatePassword(password);
         if (error != null) {
-          activity.mErrorText.setText(error);
+          activity.errorText.setText(error);
           activity.setNextEnabled(false);
         } else {
-          activity.mErrorText.setText(null);
+          activity.errorText.setText(null);
           activity.setNextEnabled(true);
         }
       }
@@ -230,7 +230,7 @@ public class VoicemailChangePinActivity extends Activity
           activity.showError(errorMsg);
           return;
         }
-        activity.mFirstPin = activity.getCurrentPasswordInput();
+        activity.firstPin = activity.getCurrentPasswordInput();
         activity.updateState(State.ConfirmNewPin);
       }
     },
@@ -242,9 +242,9 @@ public class VoicemailChangePinActivity extends Activity
     ConfirmNewPin {
       @Override
       public void onEnter(VoicemailChangePinActivity activity) {
-        activity.mHeaderText.setText(R.string.change_pin_confirm_pin_header);
-        activity.mHintText.setText(null);
-        activity.mNextButton.setText(R.string.change_pin_ok_label);
+        activity.headerText.setText(R.string.change_pin_confirm_pin_header);
+        activity.hintText.setText(null);
+        activity.nextButton.setText(R.string.change_pin_ok_label);
       }
 
       @Override
@@ -253,12 +253,12 @@ public class VoicemailChangePinActivity extends Activity
           activity.setNextEnabled(false);
           return;
         }
-        if (activity.getCurrentPasswordInput().equals(activity.mFirstPin)) {
+        if (activity.getCurrentPasswordInput().equals(activity.firstPin)) {
           activity.setNextEnabled(true);
-          activity.mErrorText.setText(null);
+          activity.errorText.setText(null);
         } else {
           activity.setNextEnabled(false);
-          activity.mErrorText.setText(R.string.change_pin_confirm_pins_dont_match);
+          activity.errorText.setText(R.string.change_pin_confirm_pins_dont_match);
         }
       }
 
@@ -268,7 +268,7 @@ public class VoicemailChangePinActivity extends Activity
           // If the PIN change succeeded we no longer know what the old (current) PIN is.
           // Wipe the default old PIN so the old PIN input box will be shown to the user
           // on the next time.
-          activity.mPinChanger.setScrambledPin(null);
+          activity.pinChanger.setScrambledPin(null);
 
           activity.finish();
           Logger.get(activity).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_COMPLETED);
@@ -291,7 +291,7 @@ public class VoicemailChangePinActivity extends Activity
 
       @Override
       public void handleNext(VoicemailChangePinActivity activity) {
-        activity.processPinChange(activity.mOldPin, activity.mFirstPin);
+        activity.processPinChange(activity.oldPin, activity.firstPin);
       }
     };
 
@@ -328,12 +328,11 @@ public class VoicemailChangePinActivity extends Activity
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mPhoneAccountHandle =
-        getIntent().getParcelableExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE);
-    mPinChanger =
+    phoneAccountHandle = getIntent().getParcelableExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE);
+    pinChanger =
         VoicemailComponent.get(this)
             .getVoicemailClient()
-            .createPinChanger(getApplicationContext(), mPhoneAccountHandle);
+            .createPinChanger(getApplicationContext(), phoneAccountHandle);
     setContentView(R.layout.voicemail_change_pin);
     setTitle(R.string.change_pin_title);
 
@@ -341,23 +340,23 @@ public class VoicemailChangePinActivity extends Activity
 
     View view = findViewById(android.R.id.content);
 
-    mCancelButton = (Button) view.findViewById(R.id.cancel_button);
-    mCancelButton.setOnClickListener(this);
-    mNextButton = (Button) view.findViewById(R.id.next_button);
-    mNextButton.setOnClickListener(this);
+    cancelButton = (Button) view.findViewById(R.id.cancel_button);
+    cancelButton.setOnClickListener(this);
+    nextButton = (Button) view.findViewById(R.id.next_button);
+    nextButton.setOnClickListener(this);
 
-    mPinEntry = (EditText) view.findViewById(R.id.pin_entry);
-    mPinEntry.setOnEditorActionListener(this);
-    mPinEntry.addTextChangedListener(this);
-    if (mPinMaxLength != 0) {
-      mPinEntry.setFilters(new InputFilter[] {new LengthFilter(mPinMaxLength)});
+    pinEntry = (EditText) view.findViewById(R.id.pin_entry);
+    pinEntry.setOnEditorActionListener(this);
+    pinEntry.addTextChangedListener(this);
+    if (pinMaxLength != 0) {
+      pinEntry.setFilters(new InputFilter[] {new LengthFilter(pinMaxLength)});
     }
 
-    mHeaderText = (TextView) view.findViewById(R.id.headerText);
-    mHintText = (TextView) view.findViewById(R.id.hintText);
-    mErrorText = (TextView) view.findViewById(R.id.errorText);
+    headerText = (TextView) view.findViewById(R.id.headerText);
+    hintText = (TextView) view.findViewById(R.id.hintText);
+    errorText = (TextView) view.findViewById(R.id.errorText);
 
-    mChangePinExecutor =
+    changePinExecutor =
         DialerExecutorComponent.get(this)
             .dialerExecutorFactory()
             .createUiTaskBuilder(getFragmentManager(), "changePin", new ChangePinWorker())
@@ -365,8 +364,8 @@ public class VoicemailChangePinActivity extends Activity
             .onFailure((tr) -> sendResult(PinChanger.CHANGE_PIN_SYSTEM_ERROR))
             .build();
 
-    if (isPinScrambled(this, mPhoneAccountHandle)) {
-      mOldPin = mPinChanger.getScrambledPin();
+    if (isPinScrambled(this, phoneAccountHandle)) {
+      oldPin = pinChanger.getScrambledPin();
       updateState(State.VerifyOldPin);
     } else {
       updateState(State.EnterOldPin);
@@ -375,22 +374,22 @@ public class VoicemailChangePinActivity extends Activity
 
   /** Extracts the pin length requirement sent by the server with a STATUS SMS. */
   private void readPinLength() {
-    PinSpecification pinSpecification = mPinChanger.getPinSpecification();
-    mPinMinLength = pinSpecification.minLength;
-    mPinMaxLength = pinSpecification.maxLength;
+    PinSpecification pinSpecification = pinChanger.getPinSpecification();
+    pinMinLength = pinSpecification.minLength;
+    pinMaxLength = pinSpecification.maxLength;
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    updateState(mUiState);
+    updateState(uiState);
   }
 
   public void handleNext() {
-    if (mPinEntry.length() == 0) {
+    if (pinEntry.length() == 0) {
       return;
     }
-    mUiState.handleNext(this);
+    uiState.handleNext(this);
   }
 
   @Override
@@ -413,7 +412,7 @@ public class VoicemailChangePinActivity extends Activity
 
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-    if (!mNextButton.isEnabled()) {
+    if (!nextButton.isEnabled()) {
       return true;
     }
     // Check if this was the result of hitting the enter or "done" key
@@ -428,7 +427,7 @@ public class VoicemailChangePinActivity extends Activity
 
   @Override
   public void afterTextChanged(Editable s) {
-    mUiState.onInputChanged(this);
+    uiState.onInputChanged(this);
   }
 
   @Override
@@ -454,18 +453,18 @@ public class VoicemailChangePinActivity extends Activity
   }
 
   private String getCurrentPasswordInput() {
-    return mPinEntry.getText().toString();
+    return pinEntry.getText().toString();
   }
 
   private void updateState(State state) {
-    State previousState = mUiState;
-    mUiState = state;
+    State previousState = uiState;
+    uiState = state;
     if (previousState != state) {
       previousState.onLeave(this);
-      mPinEntry.setText("");
-      mUiState.onEnter(this);
+      pinEntry.setText("");
+      uiState.onEnter(this);
     }
-    mUiState.onInputChanged(this);
+    uiState.onInputChanged(this);
   }
 
   /**
@@ -475,21 +474,21 @@ public class VoicemailChangePinActivity extends Activity
    * @return error message to show to user or null if password is OK
    */
   private CharSequence validatePassword(String password) {
-    if (mPinMinLength == 0 && mPinMaxLength == 0) {
+    if (pinMinLength == 0 && pinMaxLength == 0) {
       // Invalid length requirement is sent by the server, just accept anything and let the
       // server decide.
       return null;
     }
 
-    if (password.length() < mPinMinLength) {
+    if (password.length() < pinMinLength) {
       return getString(R.string.vm_change_pin_error_too_short);
     }
     return null;
   }
 
   private void setHeader(int text) {
-    mHeaderText.setText(text);
-    mPinEntry.setContentDescription(mHeaderText.getText());
+    headerText.setText(text);
+    pinEntry.setContentDescription(headerText.getText());
   }
 
   /**
@@ -517,11 +516,11 @@ public class VoicemailChangePinActivity extends Activity
   }
 
   private void verifyOldPin() {
-    processPinChange(mOldPin, mOldPin);
+    processPinChange(oldPin, oldPin);
   }
 
   private void setNextEnabled(boolean enabled) {
-    mNextButton.setEnabled(enabled);
+    nextButton.setEnabled(enabled);
   }
 
   private void showError(CharSequence message) {
@@ -538,30 +537,30 @@ public class VoicemailChangePinActivity extends Activity
 
   /** Asynchronous call to change the PIN on the server. */
   private void processPinChange(String oldPin, String newPin) {
-    mProgressDialog = new ProgressDialog(this);
-    mProgressDialog.setCancelable(false);
-    mProgressDialog.setMessage(getString(R.string.vm_change_pin_progress_message));
-    mProgressDialog.show();
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setCancelable(false);
+    progressDialog.setMessage(getString(R.string.vm_change_pin_progress_message));
+    progressDialog.show();
 
     ChangePinParams params = new ChangePinParams();
-    params.pinChanger = mPinChanger;
-    params.phoneAccountHandle = mPhoneAccountHandle;
+    params.pinChanger = pinChanger;
+    params.phoneAccountHandle = phoneAccountHandle;
     params.oldPin = oldPin;
     params.newPin = newPin;
 
-    mChangePinExecutor.executeSerial(params);
+    changePinExecutor.executeSerial(params);
   }
 
   private void sendResult(@ChangePinResult int result) {
     LogUtil.i(TAG, "Change PIN result: " + result);
-    if (mProgressDialog.isShowing()
+    if (progressDialog.isShowing()
         && !VoicemailChangePinActivity.this.isDestroyed()
         && !VoicemailChangePinActivity.this.isFinishing()) {
-      mProgressDialog.dismiss();
+      progressDialog.dismiss();
     } else {
       LogUtil.i(TAG, "Dialog not visible, not dismissing");
     }
-    mHandler.obtainMessage(MESSAGE_HANDLE_RESULT, result, 0).sendToTarget();
+    handler.obtainMessage(MESSAGE_HANDLE_RESULT, result, 0).sendToTarget();
   }
 
   private static class ChangePinHandler extends Handler {
@@ -579,7 +578,7 @@ public class VoicemailChangePinActivity extends Activity
         return;
       }
       if (message.what == MESSAGE_HANDLE_RESULT) {
-        activity.mUiState.handleResult(activity, message.arg1);
+        activity.uiState.handleResult(activity, message.arg1);
       }
     }
   }

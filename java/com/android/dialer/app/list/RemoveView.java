@@ -29,12 +29,12 @@ import com.android.dialer.app.R;
 
 public class RemoveView extends FrameLayout {
 
-  DragDropController mDragDropController;
-  TextView mRemoveText;
-  ImageView mRemoveIcon;
-  int mUnhighlightedColor;
-  int mHighlightedColor;
-  Drawable mRemoveDrawable;
+  DragDropController dragDropController;
+  TextView removeText;
+  ImageView removeIcon;
+  int unhighlightedColor;
+  int highlightedColor;
+  Drawable removeDrawable;
 
   public RemoveView(Context context) {
     super(context);
@@ -50,16 +50,16 @@ public class RemoveView extends FrameLayout {
 
   @Override
   protected void onFinishInflate() {
-    mRemoveText = (TextView) findViewById(R.id.remove_view_text);
-    mRemoveIcon = (ImageView) findViewById(R.id.remove_view_icon);
+    removeText = (TextView) findViewById(R.id.remove_view_text);
+    removeIcon = (ImageView) findViewById(R.id.remove_view_icon);
     final Resources r = getResources();
-    mUnhighlightedColor = r.getColor(R.color.remove_text_color);
-    mHighlightedColor = r.getColor(R.color.remove_highlighted_text_color);
-    mRemoveDrawable = r.getDrawable(R.drawable.ic_remove);
+    unhighlightedColor = r.getColor(R.color.remove_text_color);
+    highlightedColor = r.getColor(R.color.remove_highlighted_text_color);
+    removeDrawable = r.getDrawable(R.drawable.ic_remove);
   }
 
   public void setDragDropController(DragDropController controller) {
-    mDragDropController = controller;
+    dragDropController = controller;
   }
 
   @Override
@@ -76,14 +76,14 @@ public class RemoveView extends FrameLayout {
         setAppearanceNormal();
         break;
       case DragEvent.ACTION_DRAG_LOCATION:
-        if (mDragDropController != null) {
-          mDragDropController.handleDragHovered(this, (int) event.getX(), (int) event.getY());
+        if (dragDropController != null) {
+          dragDropController.handleDragHovered(this, (int) event.getX(), (int) event.getY());
         }
         break;
       case DragEvent.ACTION_DROP:
         sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-        if (mDragDropController != null) {
-          mDragDropController.handleDragFinished((int) event.getX(), (int) event.getY(), true);
+        if (dragDropController != null) {
+          dragDropController.handleDragFinished((int) event.getX(), (int) event.getY(), true);
         }
         setAppearanceNormal();
         break;
@@ -92,14 +92,14 @@ public class RemoveView extends FrameLayout {
   }
 
   private void setAppearanceNormal() {
-    mRemoveText.setTextColor(mUnhighlightedColor);
-    mRemoveIcon.setColorFilter(mUnhighlightedColor);
+    removeText.setTextColor(unhighlightedColor);
+    removeIcon.setColorFilter(unhighlightedColor);
     invalidate();
   }
 
   private void setAppearanceHighlighted() {
-    mRemoveText.setTextColor(mHighlightedColor);
-    mRemoveIcon.setColorFilter(mHighlightedColor);
+    removeText.setTextColor(highlightedColor);
+    removeIcon.setColorFilter(highlightedColor);
     invalidate();
   }
 }

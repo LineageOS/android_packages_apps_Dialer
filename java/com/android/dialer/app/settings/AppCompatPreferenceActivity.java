@@ -30,16 +30,16 @@ import android.view.ViewGroup;
  */
 public class AppCompatPreferenceActivity extends PreferenceActivity {
 
-  private AppCompatDelegate mDelegate;
+  private AppCompatDelegate delegate;
 
-  private boolean mIsSafeToCommitTransactions;
+  private boolean isSafeToCommitTransactions;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     getDelegate().installViewFactory();
     getDelegate().onCreate(savedInstanceState);
     super.onCreate(savedInstanceState);
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
@@ -113,28 +113,28 @@ public class AppCompatPreferenceActivity extends PreferenceActivity {
   }
 
   private AppCompatDelegate getDelegate() {
-    if (mDelegate == null) {
-      mDelegate = AppCompatDelegate.create(this, null);
+    if (delegate == null) {
+      delegate = AppCompatDelegate.create(this, null);
     }
-    return mDelegate;
+    return delegate;
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    mIsSafeToCommitTransactions = true;
+    isSafeToCommitTransactions = true;
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mIsSafeToCommitTransactions = false;
+    isSafeToCommitTransactions = false;
   }
 
   /**
@@ -145,6 +145,6 @@ public class AppCompatPreferenceActivity extends PreferenceActivity {
    * outState)} (if that method is overridden), so the flag is properly set.
    */
   public boolean isSafeToCommitTransactions() {
-    return mIsSafeToCommitTransactions;
+    return isSafeToCommitTransactions;
   }
 }
