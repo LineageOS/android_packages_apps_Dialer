@@ -63,7 +63,7 @@
     <!-- Message indicating that camera is ready/available -->
     <string name="camera_ready">Camera is ready</string>
     <!-- Message indicating unknown call session event -->
-    <string name="unknown_call_session_event">Unkown call session event</string>
+    <string name="unknown_call_session_event">Unknown call session event</string>
 
     <!-- Message indicating data usage -->
     <string name="wlan_data_usage_label">Wi-Fi data usage: <xliff:g id="usage">%1$s</xliff:g></string>
@@ -154,7 +154,7 @@
     <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
     <string name="low_battery_hangup_msg">Do you want to hangup the call?</string>
     <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-    <string name="low_battery_msg">Your battery level is below 15%. Do you want to continue with the video call or convert it to voice call</string>
+    <string name="low_battery_msg">Your battery level is below 15%. Do you want to continue with the video call or convert it to a voice call?</string>
     <!-- No option of the low battery alert dialog for MO/MT Video calls -->
     <string name="low_battery_convert">Convert</string>
     <!-- International prefix source-->
