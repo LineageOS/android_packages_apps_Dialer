@@ -99,7 +99,7 @@ final class Modules {
     // TODO(zachh): Load canReportInaccurateNumber in CallDetailsActivity
     // (see also isPeopleApiSource(sourceType)).
     boolean canReportInaccurateNumber = false;
-    boolean canSupportAssistedDialing = false; // TODO(zachh): Properly set value.
+    boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.lookupUri());
 
     modules.add(
         new IntentModule(
