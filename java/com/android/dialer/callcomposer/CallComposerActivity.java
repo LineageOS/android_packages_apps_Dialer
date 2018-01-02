@@ -481,7 +481,10 @@ public class CallComposerActivity extends AppCompatActivity
 
   private void placeTelecomCall() {
     PreCall.start(
-        this, new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER));
+        this,
+        new CallIntentBuilder(contact.getNumber(), CallInitiationType.Type.CALL_COMPOSER)
+            // Call composer is only active if the number is associated with a known contact.
+            .setAllowAssistedDial(true));
     setResult(RESULT_OK);
     finish();
   }
