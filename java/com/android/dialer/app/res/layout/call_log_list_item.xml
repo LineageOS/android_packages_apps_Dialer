@@ -194,6 +194,7 @@
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:gravity="start"
+                  android:focusable="true"
                   android:text="@string/voicemail_transcription_rating"/>
 
               <TextView
@@ -202,6 +203,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="end"
+                  android:focusable="true"
                   android:text="@string/voicemail_transcription_rating_good"/>
 
               <TextView
@@ -210,6 +212,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="end"
+                  android:focusable="true"
                   android:text="@string/voicemail_transcription_rating_separator"/>
 
               <TextView
@@ -218,6 +221,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:gravity="end"
+                  android:focusable="true"
                   android:text="@string/voicemail_transcription_rating_bad"/>
 
             </LinearLayout>
