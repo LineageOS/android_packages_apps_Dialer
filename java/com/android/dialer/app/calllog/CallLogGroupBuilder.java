@@ -28,6 +28,7 @@ import com.android.contacts.common.util.DateUtils;
 import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.compat.AppCompatConstants;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import java.util.Objects;
@@ -114,7 +115,7 @@ public class CallLogGroupBuilder {
     String numberPostDialDigits;
     String numberViaNumbers;
     int callType;
-    int features;
+    int callFeatures;
     String accountComponentName;
     String accountId;
     int callbackAction;
@@ -129,11 +130,11 @@ public class CallLogGroupBuilder {
       numberViaNumbers =
           (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
       callType = cursor.getInt(CallLogQuery.CALL_TYPE);
-      features = cursor.getInt(CallLogQuery.FEATURES);
+      callFeatures = cursor.getInt(CallLogQuery.FEATURES);
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
       callbackAction =
-          CallbackActionHelper.getCallbackAction(number, features, accountComponentName);
+          CallbackActionHelper.getCallbackAction(number, callFeatures, accountComponentName);
 
       final boolean isSameNumber = equalNumbers(groupNumber, number);
       final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
@@ -146,14 +147,15 @@ public class CallLogGroupBuilder {
       // (1) Calls with the same number, account, and callback action should be in the same group;
       // (2) Never group voice mails; and
       // (3) Only group blocked calls with other blocked calls.
+      // (4) Only group calls that were assisted dialed with other calls that were assisted dialed.
       if (isSameNumber
           && isSameAccount
           && isSamePostDialDigits
           && isSameViaNumbers
           && isSameCallbackAction
           && areBothNotVoicemail(callType, groupCallType)
-          && (areBothNotBlocked(callType, groupCallType)
-              || areBothBlocked(callType, groupCallType))) {
+          && (areBothNotBlocked(callType, groupCallType) || areBothBlocked(callType, groupCallType))
+          && meetsAssistedDialingGroupingCriteria(groupFeatures, callFeatures)) {
         // Increment the size of the group to include the current call, but do not create
         // the group until finding a call that does not match.
         groupSize++;
@@ -177,6 +179,7 @@ public class CallLogGroupBuilder {
         groupAccountComponentName = accountComponentName;
         groupAccountId = accountId;
         groupCallbackAction = callbackAction;
+        groupFeatures = callFeatures;
       }
 
       // Save the callback action and the day group associated with the current call.
@@ -278,6 +281,13 @@ public class CallLogGroupBuilder {
   private boolean areBothBlocked(int callType, int groupCallType) {
     return callType == AppCompatConstants.CALLS_BLOCKED_TYPE
         && groupCallType == AppCompatConstants.CALLS_BLOCKED_TYPE;
+  }
+
+  private boolean meetsAssistedDialingGroupingCriteria(int groupFeatures, int callFeatures) {
+    int groupAssisted = (groupFeatures & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
+    int callAssisted = (callFeatures & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
+
+    return groupAssisted == callAssisted;
   }
 
   public interface GroupCreator {
