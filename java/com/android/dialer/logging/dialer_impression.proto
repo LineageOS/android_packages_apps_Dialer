@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1320
+  // Next Tag: 1322
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -644,5 +644,9 @@ message DialerImpression {
     BUBBLE_V2_BLUETOOTH = 1318;
     // User ended call from bubble call action menu
     BUBBLE_V2_END_CALL = 1319;
+    // Drag bubble to bottom and dismiss
+    BUBBLE_V2_BOTTOM_ACTION_DISMISS = 1320;
+    // Drag bubble to bottom and end call
+    BUBBLE_V2_BOTTOM_ACTION_END_CALL = 1321;
   }
 }
