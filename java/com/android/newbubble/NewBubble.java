@@ -60,6 +60,7 @@ import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
@@ -830,6 +831,12 @@ public class NewBubble {
    */
   void replaceViewHolder() {
     LogUtil.enterBlock("NewBubble.replaceViewHolder");
+    // Don't do it. If windowParams is null, either we haven't initialized it or we set it to null.
+    // There is no need to recreate bubble.
+    if (windowParams == null) {
+      return;
+    }
+
     ViewHolder oldViewHolder = viewHolder;
 
     // Create a new ViewHolder and copy needed info.
@@ -873,6 +880,27 @@ public class NewBubble {
     return viewHolder.getExpandedView().getVisibility();
   }
 
+  void bottomActionDismiss() {
+    logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_BOTTOM_ACTION_DISMISS);
+    // Create bubble at default location at next time
+    hideAndReset();
+    windowParams = null;
+  }
+
+  void bottomActionEndCall() {
+    logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_BOTTOM_ACTION_END_CALL);
+    // Hide without animation
+    hideHelper(
+        () -> {
+          defaultAfterHidingAnimation();
+          DialerCall call = getCall();
+          if (call != null) {
+            call.disconnect();
+            Toast.makeText(context, R.string.incall_call_ended, Toast.LENGTH_SHORT).show();
+          }
+        });
+  }
+
   private boolean isDrawingFromRight() {
     return (windowParams.gravity & Gravity.RIGHT) == Gravity.RIGHT;
   }
@@ -896,17 +924,22 @@ public class NewBubble {
   }
 
   private void logBasicOrCallImpression(DialerImpression.Type impressionType) {
-    // Bubble is shown for outgoing, active or background call
-    DialerCall call = CallList.getInstance().getOutgoingCall();
-    if (call == null) {
-      call = CallList.getInstance().getActiveOrBackgroundCall();
-    }
+    DialerCall call = getCall();
     if (call != null) {
       Logger.get(context)
           .logCallImpression(impressionType, call.getUniqueCallId(), call.getTimeAddedMs());
     } else {
       Logger.get(context).logImpression(impressionType);
     }
+  }
+
+  private DialerCall getCall() {
+    // Bubble is shown for outgoing, active or background call
+    DialerCall call = CallList.getInstance().getOutgoingCall();
+    if (call == null) {
+      call = CallList.getInstance().getActiveOrBackgroundCall();
+    }
+    return call;
   }
 
   private void setPrimaryButtonAccessibilityAction(String description) {
