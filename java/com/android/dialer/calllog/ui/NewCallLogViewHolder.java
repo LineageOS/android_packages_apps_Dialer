@@ -30,6 +30,7 @@ import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.CallTypeIconsView;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.oem.MotorolaUtils;
@@ -114,11 +115,13 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPrimaryCallTypes(CoalescedRow row) {
-    // Only HD and Wifi icons are shown following the primary text.
     primaryCallTypeIconsView.setShowHd(
         (row.features() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     primaryCallTypeIconsView.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features()));
+    primaryCallTypeIconsView.setShowAssistedDialed(
+        (row.features() & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+            == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
   }
 
   private void setSecondaryCallTypes(CoalescedRow row) {
