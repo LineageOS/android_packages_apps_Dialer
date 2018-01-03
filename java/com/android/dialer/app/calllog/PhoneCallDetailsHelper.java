@@ -37,6 +37,7 @@ import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -101,6 +102,9 @@ public class PhoneCallDetailsHelper
         (details.features & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     views.callTypeIcons.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, details.features));
+    views.callTypeIcons.setShowAssistedDialed(
+        (details.features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+            == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
     views.callTypeIcons.requestLayout();
     views.callTypeIcons.setVisibility(View.VISIBLE);
 
