@@ -51,6 +51,7 @@ class NewMoveHandler implements OnTouchListener {
   private final int bubbleShadowPaddingHorizontal;
   private final int bubbleExpandedViewWidth;
   private final float touchSlopSquared;
+  private final BottomActionViewController bottomActionViewController;
 
   private boolean clickable = true;
   private boolean isMoving;
@@ -156,6 +157,8 @@ class NewMoveHandler implements OnTouchListener {
     // efficient than needing to take a square root.
     touchSlopSquared = (float) Math.pow(ViewConfiguration.get(context).getScaledTouchSlop(), 2);
 
+    bottomActionViewController = new BottomActionViewController(context);
+
     targetView.setOnTouchListener(this);
   }
 
@@ -200,7 +203,9 @@ class NewMoveHandler implements OnTouchListener {
           if (!isMoving) {
             isMoving = true;
             bubble.onMoveStart();
+            bottomActionViewController.createAndShowBottomActionView();
           }
+          bottomActionViewController.highlightIfHover(eventX, eventY);
 
           ensureSprings();
 
@@ -229,11 +234,16 @@ class NewMoveHandler implements OnTouchListener {
 
             moveXAnimation.animateToFinalPosition(target.x);
             moveYAnimation.animateToFinalPosition(target.y);
+          } else if (bottomActionViewController.isDismissHighlighted()) {
+            bubble.bottomActionDismiss();
+          } else if (bottomActionViewController.isEndCallHighlighted()) {
+            bubble.bottomActionEndCall();
           } else {
             snapX();
           }
           isMoving = false;
           bubble.onMoveFinish();
+          bottomActionViewController.destroyBottomActionView();
         } else {
           v.performClick();
           if (clickable) {
