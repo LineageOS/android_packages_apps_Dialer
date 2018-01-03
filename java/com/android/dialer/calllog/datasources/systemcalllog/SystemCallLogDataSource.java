@@ -199,6 +199,9 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
         .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
         .useMostRecentLong(AnnotatedCallLog.CALL_TYPE)
+        // If any call in a group includes a feature (like Wifi/HD), consider the group to have the
+        // feature.
+        .bitwiseOr(AnnotatedCallLog.FEATURES)
         .combine();
   }
 
