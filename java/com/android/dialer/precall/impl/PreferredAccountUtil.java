@@ -30,7 +30,9 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Utilities for looking up and validating preferred {@link PhoneAccountHandle}. Contacts should
@@ -90,5 +92,25 @@ public class PreferredAccountUtil {
       }
     }
     return false;
+  }
+
+  /**
+   * Return a set of {@link android.accounts.Account#type} that is known to have writable contacts.
+   * This is a light weight implementation of {@link
+   * com.android.contacts.common.model.AccountTypeManager#getAccountTypes(boolean)}. External
+   * accounts are not supported.
+   */
+  public static ImmutableSet<String> getValidAccountTypes(Context context) {
+    return ImmutableSet.copyOf(
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getString(
+                "preferred_sim_valid_account_types",
+                "com.google;"
+                    + "com.osp.app.signin;"
+                    + "com.android.exchange;"
+                    + "com.google.android.exchange;"
+                    + "com.google.android.gm.exchange")
+            .split(";"));
   }
 }

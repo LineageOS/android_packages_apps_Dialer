@@ -18,6 +18,7 @@ package com.android.dialer.precall.impl;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -28,8 +29,10 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.QuickContact;
+import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -59,6 +62,7 @@ import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -296,7 +300,7 @@ public class CallingAccountSelector implements PreCallAction {
       if (!isPreferredSimEnabled(context)) {
         return result;
       }
-      result.dataId = getDataId(context.getContentResolver(), phoneNumber);
+      result.dataId = getDataId(context, phoneNumber);
       if (result.dataId.isPresent()) {
         result.phoneAccountHandle = getPreferredAccount(context, result.dataId.get());
       }
@@ -313,24 +317,33 @@ public class CallingAccountSelector implements PreCallAction {
   @WorkerThread
   @NonNull
   private static Optional<String> getDataId(
-      @NonNull ContentResolver contentResolver, @Nullable String phoneNumber) {
+      @NonNull Context context, @Nullable String phoneNumber) {
     Assert.isWorkerThread();
     if (VERSION.SDK_INT < VERSION_CODES.N) {
       return Optional.absent();
     }
     try (Cursor cursor =
-        contentResolver.query(
-            Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber)),
-            new String[] {PhoneLookup.DATA_ID},
-            null,
-            null,
-            null)) {
+        context
+            .getContentResolver()
+            .query(
+                Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber)),
+                new String[] {PhoneLookup.DATA_ID},
+                null,
+                null,
+                null)) {
       if (cursor == null) {
         return Optional.absent();
       }
+      ImmutableSet<String> validAccountTypes = PreferredAccountUtil.getValidAccountTypes(context);
       Set<String> result = new ArraySet<>();
       while (cursor.moveToNext()) {
-        result.add(cursor.getString(0));
+        Optional<String> accountType =
+            getAccountType(context.getContentResolver(), cursor.getLong(0));
+        if (accountType.isPresent() && validAccountTypes.contains(accountType.get())) {
+          result.add(cursor.getString(0));
+        } else {
+          LogUtil.i("CallingAccountSelector.getDataId", "ignoring non-writable " + accountType);
+        }
       }
       // TODO(twyen): if there are multiples attempt to grab from the contact that initiated the
       // call.
@@ -340,6 +353,44 @@ public class CallingAccountSelector implements PreCallAction {
         LogUtil.i("CallingAccountSelector.getDataId", "lookup result not unique, ignoring");
         return Optional.absent();
       }
+    }
+  }
+
+  @WorkerThread
+  private static Optional<String> getAccountType(ContentResolver contentResolver, long dataId) {
+    Assert.isWorkerThread();
+    Optional<Long> rawContactId = getRawContactId(contentResolver, dataId);
+    if (!rawContactId.isPresent()) {
+      return Optional.absent();
+    }
+    try (Cursor cursor =
+        contentResolver.query(
+            ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId.get()),
+            new String[] {RawContacts.ACCOUNT_TYPE},
+            null,
+            null,
+            null)) {
+      if (cursor == null || !cursor.moveToFirst()) {
+        return Optional.absent();
+      }
+      return Optional.of(cursor.getString(0));
+    }
+  }
+
+  @WorkerThread
+  private static Optional<Long> getRawContactId(ContentResolver contentResolver, long dataId) {
+    Assert.isWorkerThread();
+    try (Cursor cursor =
+        contentResolver.query(
+            ContentUris.withAppendedId(Data.CONTENT_URI, dataId),
+            new String[] {Data.RAW_CONTACT_ID},
+            null,
+            null,
+            null)) {
+      if (cursor == null || !cursor.moveToFirst()) {
+        return Optional.absent();
+      }
+      return Optional.of(cursor.getLong(0));
     }
   }
 
