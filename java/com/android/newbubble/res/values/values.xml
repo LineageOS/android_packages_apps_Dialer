@@ -41,4 +41,6 @@
   <dimen name="bubble_expanded_separator_height">8dp</dimen>
   <dimen name="bubble_small_icon_size">24dp</dimen>
   <dimen name="bubble_small_icon_padding">4dp</dimen>
+
+  <dimen name="bubble_bottom_action_view_height">180dp</dimen>
 </resources>
