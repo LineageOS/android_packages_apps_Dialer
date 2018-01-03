@@ -49,6 +49,7 @@ public class CallTypeIconsView extends View {
   private boolean showVideo;
   private boolean showHd;
   private boolean showWifi;
+  private boolean showAssistedDialed;
   private int width;
   private int height;
 
@@ -132,6 +133,19 @@ public class CallTypeIconsView extends View {
     }
   }
 
+  public boolean isAssistedDialedShown() {
+    return showAssistedDialed;
+  }
+
+  public void setShowAssistedDialed(boolean showAssistedDialed) {
+    this.showAssistedDialed = showAssistedDialed;
+    if (showAssistedDialed) {
+      width += resources.assistedDialedCall.getIntrinsicWidth() + resources.iconMargin;
+      height = Math.max(height, resources.assistedDialedCall.getIntrinsicHeight());
+      invalidate();
+    }
+  }
+
   public int getCount() {
     return callTypes.size();
   }
@@ -174,7 +188,8 @@ public class CallTypeIconsView extends View {
     int left = 0;
     // If we are using large icons, we should only show one icon (video, hd or call type) with
     // priority give to HD or Video. So we skip the call type icon if we plan to show them.
-    if (!useLargeIcons || !(showHd || showVideo || showWifi)) {
+
+    if (!useLargeIcons || !(showHd || showVideo || showWifi || showAssistedDialed)) {
       for (Integer callType : callTypes) {
         final Drawable drawable = getCallTypeDrawable(callType);
         final int right = left + drawable.getIntrinsicWidth();
@@ -195,6 +210,10 @@ public class CallTypeIconsView extends View {
     // If showing HD call icon, draw it scaled appropriately.
     if (showWifi) {
       left = addDrawable(canvas, resources.wifiCall, left) + resources.iconMargin;
+    }
+    // If showing assisted dial call icon, draw it scaled appropriately.
+    if (showAssistedDialed) {
+      left = addDrawable(canvas, resources.assistedDialedCall, left) + resources.iconMargin;
     }
   }
 
@@ -230,6 +249,9 @@ public class CallTypeIconsView extends View {
 
     // Drawable representing a WiFi call.
     final Drawable wifiCall;
+
+    // Drawable representing an assisted dialed call.
+    final Drawable assistedDialedCall;
 
     /** The margin to use for icons. */
     final int iconMargin;
@@ -289,6 +311,12 @@ public class CallTypeIconsView extends View {
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       wifiCall = drawable.mutate();
       wifiCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
+
+      iconId = R.drawable.quantum_ic_language_white_24;
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      assistedDialedCall = drawable.mutate();
+      assistedDialedCall.setColorFilter(
+          r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }
