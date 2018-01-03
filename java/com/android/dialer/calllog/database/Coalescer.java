@@ -29,6 +29,7 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.base.Preconditions;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -171,7 +172,28 @@ public class Coalescer {
       // An empty number should not be combined with any other number.
       return false;
     }
+
+    if (!meetsAssistedDialingCriteria(row1, row2)) {
+      return false;
+    }
     return dialerPhoneNumberUtil.isExactMatch(number1, number2);
+  }
+
+  /**
+   * Returns a boolean indicating whether or not FEATURES_ASSISTED_DIALING is mutually exclusive
+   * between two rows.
+   */
+  private static boolean meetsAssistedDialingCriteria(ContentValues row1, ContentValues row2) {
+    int row1Assisted =
+        row1.getAsInteger(AnnotatedCallLog.FEATURES)
+            & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING;
+    int row2Assisted =
+        row2.getAsInteger(AnnotatedCallLog.FEATURES)
+            & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING;
+
+    // FEATURES_ASSISTED_DIALING should not be combined with calls that are
+    // !FEATURES_ASSISTED_DIALING
+    return row1Assisted == row2Assisted;
   }
 
   /**

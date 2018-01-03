@@ -73,6 +73,16 @@ public class RowCombiner {
     return this;
   }
 
+  /** Performs a bitwise OR on the specified column and yields the result. */
+  public RowCombiner bitwiseOr(String columnName) {
+    int combinedValue = 0;
+    for (ContentValues val : individualRowsSortedByTimestampDesc) {
+      combinedValue |= val.getAsInteger(columnName);
+    }
+    combinedRow.put(columnName, combinedValue);
+    return this;
+  }
+
   public ContentValues combine() {
     return combinedRow;
   }

@@ -85,7 +85,7 @@ public class CallDetailsActivity extends AppCompatActivity {
   public static final String EXTRA_COALESCED_CALL_LOG_IDS = "coalesced_call_log_ids";
   public static final String EXTRA_CONTACT = "contact";
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
-  private static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
+  public static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
 
   private final CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener =
       new CallDetailsHeaderListener(this);
