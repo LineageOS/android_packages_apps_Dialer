@@ -178,6 +178,13 @@ public class AnnotatedCallLogContract {
      */
     String CALL_TYPE = "call_type";
 
+    /**
+     * True if the number can be reported as invalid.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     */
+    String CAN_REPORT_AS_INVALID_NUMBER = "can_report_as_invalid_number";
+
     String[] ALL_COMMON_COLUMNS =
         new String[] {
           _ID,
@@ -199,7 +206,8 @@ public class AnnotatedCallLogContract {
           FEATURES,
           IS_BUSINESS,
           IS_VOICEMAIL,
-          CALL_TYPE
+          CALL_TYPE,
+          CAN_REPORT_AS_INVALID_NUMBER
         };
   }
 

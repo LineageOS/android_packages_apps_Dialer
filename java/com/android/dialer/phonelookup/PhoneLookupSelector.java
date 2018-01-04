@@ -18,6 +18,8 @@ package com.android.dialer.phonelookup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
+import com.android.dialer.phonelookup.PhoneLookupInfo.PeopleApiInfo;
+import com.android.dialer.phonelookup.PhoneLookupInfo.PeopleApiInfo.InfoType;
 
 /**
  * Prioritizes information from a {@link PhoneLookupInfo}.
@@ -104,6 +106,27 @@ public final class PhoneLookupSelector {
       }
     }
     return "";
+  }
+
+  /**
+   * Returns true if the number associated with the given {@link PhoneLookupInfo} can be reported as
+   * invalid.
+   *
+   * <p>As we currently report invalid numbers via the People API, only numbers from the People API
+   * can be reported as invalid.
+   */
+  public static boolean canReportAsInvalidNumber(PhoneLookupInfo phoneLookupInfo) {
+    // The presence of Cp2ContactInfo means the number associated with the given PhoneLookupInfo
+    // matches that of a Cp2 (local) contact, and PeopleApiInfo will not be used to display
+    // information like name, photo, etc. We should not allow the user to report the number in this
+    // case as the info displayed is not from the People API.
+    if (phoneLookupInfo.getCp2Info().getCp2ContactInfoCount() > 0) {
+      return false;
+    }
+
+    PeopleApiInfo peopleApiInfo = phoneLookupInfo.getPeopleApiInfo();
+    return peopleApiInfo.getInfoType() != InfoType.UNKNOWN
+        && !peopleApiInfo.getPersonId().isEmpty();
   }
 
   /**
