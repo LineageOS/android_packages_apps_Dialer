@@ -64,11 +64,16 @@ class CallLogCacheLollipopMr1 extends CallLogCache {
 
   @Override
   public String getAccountLabel(PhoneAccountHandle accountHandle) {
+    if (accountHandle == null) {
+      return null;
+    }
     if (mPhoneAccountLabelCache.containsKey(accountHandle)) {
       return mPhoneAccountLabelCache.get(accountHandle);
     } else {
       String label = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
-      mPhoneAccountLabelCache.put(accountHandle, label);
+      if (label != null) {
+        mPhoneAccountLabelCache.put(accountHandle, label);
+      }
       return label;
     }
   }
