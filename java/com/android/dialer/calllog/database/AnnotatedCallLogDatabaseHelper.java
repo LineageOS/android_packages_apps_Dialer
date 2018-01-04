@@ -59,7 +59,8 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
           + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
-          + (AnnotatedCallLog.CALL_TYPE + " integer")
+          + (AnnotatedCallLog.CALL_TYPE + " integer, ")
+          + (AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER + " integer")
           + ");";
 
   /** Deletes all but the first maxRows rows (by timestamp) to keep the table a manageable size. */

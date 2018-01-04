@@ -32,6 +32,13 @@ public class RowCombiner {
   }
 
   /** Use the most recent value for the specified column. */
+  public RowCombiner useMostRecentInt(String columnName) {
+    combinedRow.put(
+        columnName, individualRowsSortedByTimestampDesc.get(0).getAsInteger(columnName));
+    return this;
+  }
+
+  /** Use the most recent value for the specified column. */
   public RowCombiner useMostRecentLong(String columnName) {
     combinedRow.put(columnName, individualRowsSortedByTimestampDesc.get(0).getAsLong(columnName));
     return this;
