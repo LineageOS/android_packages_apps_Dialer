@@ -96,9 +96,7 @@ final class Modules {
 
   private static void addModuleForAccessingCallDetails(
       Context context, List<ContactActionModule> modules, CoalescedRow row) {
-    // TODO(zachh): Load canReportInaccurateNumber in CallDetailsActivity
-    // (see also isPeopleApiSource(sourceType)).
-    boolean canReportInaccurateNumber = false;
+    boolean canReportAsInvalidNumber = row.canReportAsInvalidNumber();
     boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.lookupUri());
 
     modules.add(
@@ -108,7 +106,7 @@ final class Modules {
                 context,
                 row.coalescedIds(),
                 createDialerContactFromRow(row),
-                canReportInaccurateNumber,
+                canReportAsInvalidNumber,
                 canSupportAssistedDialing),
             R.string.call_details_menu_label,
             R.drawable.quantum_ic_info_outline_vd_theme_24));
