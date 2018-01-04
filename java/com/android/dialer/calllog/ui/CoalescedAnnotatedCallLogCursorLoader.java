@@ -49,7 +49,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int IS_BUSINESS = 17;
   private static final int IS_VOICEMAIL = 18;
   private static final int CALL_TYPE = 19;
-  private static final int COALESCED_IDS = 20;
+  private static final int CAN_REPORT_AS_INVALID_NUMBER = 20;
+  private static final int COALESCED_IDS = 21;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -100,6 +101,7 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         .setIsBusiness(cursor.getInt(IS_BUSINESS) == 1)
         .setIsVoicemail(cursor.getInt(IS_VOICEMAIL) == 1)
         .setCallType(cursor.getInt(CALL_TYPE))
+        .setCanReportAsInvalidNumber(cursor.getInt(CAN_REPORT_AS_INVALID_NUMBER) == 1)
         .setCoalescedIds(coalescedIds)
         .build();
   }
