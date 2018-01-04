@@ -268,6 +268,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
         .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
         .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
         .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
+        .useMostRecentInt(AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER)
         .combine();
   }
 
@@ -564,6 +565,9 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
         AnnotatedCallLog.LOOKUP_URI, PhoneLookupSelector.selectLookupUri(phoneLookupInfo));
     contentValues.put(
         AnnotatedCallLog.NUMBER_TYPE_LABEL, PhoneLookupSelector.selectNumberLabel(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
+        PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
   }
 
   private static Uri numberUri(String number) {
