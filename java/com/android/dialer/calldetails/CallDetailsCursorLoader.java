@@ -64,6 +64,19 @@ public final class CallDetailsCursorLoader extends CursorLoader {
         AnnotatedCallLog.TIMESTAMP + " DESC");
   }
 
+  @Override
+  public void onContentChanged() {
+    // Do nothing here.
+    // This is to prevent the loader to reload data when Loader.ForceLoadContentObserver detects a
+    // change.
+    // Without this, the app will crash when the user deletes call details as the deletion triggers
+    // the data loading but no data can be fetched and we want to ensure the data set is not empty
+    // when building CallDetailsEntries proto (see toCallDetailsEntries(Cursor)).
+    //
+    // CallDetailsActivity doesn't respond to underlying data changes when launched from the old
+    // call log and we decided to keep it that way when launched from the new call log.
+  }
+
   /**
    * Build a string of the form "COLUMN_NAME IN (?, ?, ..., ?)", where COLUMN_NAME is the name of
    * the ID column in {@link AnnotatedCallLog}.
