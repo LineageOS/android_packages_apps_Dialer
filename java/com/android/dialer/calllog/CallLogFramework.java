@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
@@ -38,7 +39,8 @@ import javax.inject.Singleton;
 @Singleton
 public final class CallLogFramework implements CallLogDataSource.ContentObserverCallbacks {
 
-  static final String PREF_FORCE_REBUILD = "callLogFrameworkForceRebuild";
+  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+  public static final String PREF_FORCE_REBUILD = "callLogFrameworkForceRebuild";
 
   private final DataSources dataSources;
   private final SharedPreferences sharedPreferences;

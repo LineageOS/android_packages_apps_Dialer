@@ -18,8 +18,11 @@ package com.android.dialer.common.database;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -106,7 +109,14 @@ public final class Selection {
    *     enclosed in a parenthesis.
    */
   @NonNull
+  @SuppressWarnings("rawtypes")
   public static Selection fromString(@Nullable String selection, @Nullable String... args) {
+    return new Builder(selection, args == null ? Collections.emptyList() : Arrays.asList(args))
+        .build();
+  }
+
+  @NonNull
+  public static Selection fromString(@Nullable String selection, Collection<String> args) {
     return new Builder(selection, args).build();
   }
 
@@ -149,6 +159,16 @@ public final class Selection {
     public Selection is(@NonNull String condition) {
       return fromString(column + " " + Assert.isNotNull(condition));
     }
+
+    public Selection in(String... values) {
+      return in(values == null ? Collections.emptyList() : Arrays.asList(values));
+    }
+
+    public Selection in(Collection<String> values) {
+      return fromString(
+          column + " IN (" + TextUtils.join(",", Collections.nCopies(values.size(), "?")) + ")",
+          values);
+    }
   }
 
   /** Builder for {@link Selection} */
@@ -159,14 +179,14 @@ public final class Selection {
 
     private Builder() {}
 
-    private Builder(@Nullable String selection, @Nullable String... args) {
+    private Builder(@Nullable String selection, Collection<String> args) {
       if (selection == null) {
         return;
       }
       checkArgsCount(selection, args);
       this.selection.append(parenthesized(selection));
       if (args != null) {
-        Collections.addAll(selectionArgs, args);
+        selectionArgs.addAll(args);
       }
     }
 
@@ -213,14 +233,14 @@ public final class Selection {
       return this;
     }
 
-    private static void checkArgsCount(@NonNull String selection, @Nullable String... args) {
+    private static void checkArgsCount(@NonNull String selection, Collection<String> args) {
       int argsInSelection = 0;
       for (int i = 0; i < selection.length(); i++) {
         if (selection.charAt(i) == '?') {
           argsInSelection++;
         }
       }
-      Assert.checkArgument(argsInSelection == (args == null ? 0 : args.length));
+      Assert.checkArgument(argsInSelection == (args == null ? 0 : args.size()));
     }
   }
 
