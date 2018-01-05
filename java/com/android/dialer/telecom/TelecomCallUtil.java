@@ -103,20 +103,27 @@ public class TelecomCallUtil {
   @WorkerThread
   public static Optional<String> getE164Number(Context appContext, Call call) {
     Assert.isWorkerThread();
-    PhoneAccountHandle phoneAccountHandle = call.getDetails().getAccountHandle();
-    Optional<SubscriptionInfo> subscriptionInfo =
-        TelecomUtil.getSubscriptionInfo(appContext, phoneAccountHandle);
     String rawNumber = getNumber(call);
     if (TextUtils.isEmpty(rawNumber)) {
       return Optional.absent();
     }
-    String countryCode =
-        subscriptionInfo.isPresent() ? subscriptionInfo.get().getCountryIso() : null;
-    if (countryCode == null) {
+    Optional<String> countryCode = getCountryCode(appContext, call);
+    if (!countryCode.isPresent()) {
       LogUtil.w("TelecomCallUtil.getE164Number", "couldn't find a country code for call");
       return Optional.absent();
     }
-    return Optional.fromNullable(
-        PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.toUpperCase(Locale.US)));
+    return Optional.fromNullable(PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.get()));
+  }
+
+  @WorkerThread
+  public static Optional<String> getCountryCode(Context appContext, Call call) {
+    Assert.isWorkerThread();
+    PhoneAccountHandle phoneAccountHandle = call.getDetails().getAccountHandle();
+    Optional<SubscriptionInfo> subscriptionInfo =
+        TelecomUtil.getSubscriptionInfo(appContext, phoneAccountHandle);
+    if (subscriptionInfo.isPresent() && subscriptionInfo.get().getCountryIso() != null) {
+      return Optional.of(subscriptionInfo.get().getCountryIso().toUpperCase(Locale.US));
+    }
+    return Optional.absent();
   }
 }

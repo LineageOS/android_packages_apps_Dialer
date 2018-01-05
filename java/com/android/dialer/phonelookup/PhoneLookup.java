@@ -16,6 +16,8 @@
 
 package com.android.dialer.phonelookup;
 
+import android.content.Context;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
@@ -82,4 +84,16 @@ public interface PhoneLookup<T> {
    * be efficiently implemented.
    */
   ListenableFuture<Void> onSuccessfulBulkUpdate();
+
+  @MainThread
+  void registerContentObservers(
+      Context appContext, ContentObserverCallbacks contentObserverCallbacks);
+
+  /**
+   * Methods which may optionally be called as a result of a phone lookup's content observer firing.
+   */
+  interface ContentObserverCallbacks {
+    @MainThread
+    void markDirtyAndNotify(Context appContext);
+  }
 }
