@@ -16,6 +16,7 @@
 
 package com.android.dialer.phonelookup;
 
+import com.android.dialer.phonelookup.blockednumber.DialerBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2PhoneLookup;
 import com.google.common.collect.ImmutableList;
@@ -27,8 +28,11 @@ import dagger.Provides;
 public abstract class PhoneLookupModule {
 
   @Provides
-  static ImmutableList<PhoneLookup> providePhoneLookupList(Cp2PhoneLookup cp2PhoneLookup) {
-    return ImmutableList.of(cp2PhoneLookup);
+  @SuppressWarnings({"unchecked", "rawtype"})
+  static ImmutableList<PhoneLookup> providePhoneLookupList(
+      Cp2PhoneLookup cp2PhoneLookup,
+      DialerBlockedNumberPhoneLookup dialerBlockedNumberPhoneLookup) {
+    return ImmutableList.of(cp2PhoneLookup, dialerBlockedNumberPhoneLookup);
   }
 
   @Provides

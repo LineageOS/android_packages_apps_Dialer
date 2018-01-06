@@ -37,7 +37,7 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.base.Optional;
@@ -45,7 +45,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -392,6 +391,12 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
         });
   }
 
+  @Override
+  public void registerContentObservers(
+      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+    // Do nothing since CP2 changes are too noisy.
+  }
+
   /**
    * 1. get all contact ids. if the id is unset, add the number to the list of contacts to look up.
    * 2. reduce our list of contact ids to those that were updated after lastModified. 3. Now we have
@@ -475,7 +480,8 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
     // Divide the numbers into those we can format to E164 and those we can't. Then run separate
     // queries against the contacts table using the NORMALIZED_NUMBER and NUMBER columns.
     // TODO(zachh): These queries are inefficient without a lastModified column to filter on.
-    PartitionedNumbers partitionedNumbers = new PartitionedNumbers(updatedNumbers);
+    PartitionedNumbers partitionedNumbers =
+        new PartitionedNumbers(ImmutableSet.copyOf(updatedNumbers));
     if (!partitionedNumbers.validE164Numbers().isEmpty()) {
       try (Cursor cursor =
           queryPhoneTableBasedOnE164(CP2_INFO_PROJECTION, partitionedNumbers.validE164Numbers())) {
@@ -700,57 +706,5 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
       where.append("?");
     }
     return where.toString();
-  }
-
-  /**
-   * Divides a set of {@link DialerPhoneNumber DialerPhoneNumbers} by those that can be formatted to
-   * E164 and those that cannot.
-   */
-  private static class PartitionedNumbers {
-    private Map<String, Set<DialerPhoneNumber>> e164NumbersToDialerPhoneNumbers = new ArrayMap<>();
-    private Map<String, Set<DialerPhoneNumber>> unformattableNumbersToDialerPhoneNumbers =
-        new ArrayMap<>();
-
-    PartitionedNumbers(Set<DialerPhoneNumber> dialerPhoneNumbers) {
-      DialerPhoneNumberUtil dialerPhoneNumberUtil =
-          new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
-      for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
-        Optional<String> e164 = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
-        if (e164.isPresent()) {
-          String validE164 = e164.get();
-          Set<DialerPhoneNumber> currentNumbers = e164NumbersToDialerPhoneNumbers.get(validE164);
-          if (currentNumbers == null) {
-            currentNumbers = new ArraySet<>();
-            e164NumbersToDialerPhoneNumbers.put(validE164, currentNumbers);
-          }
-          currentNumbers.add(dialerPhoneNumber);
-        } else {
-          String unformattableNumber = dialerPhoneNumber.getRawInput().getNumber();
-          Set<DialerPhoneNumber> currentNumbers =
-              unformattableNumbersToDialerPhoneNumbers.get(unformattableNumber);
-          if (currentNumbers == null) {
-            currentNumbers = new ArraySet<>();
-            unformattableNumbersToDialerPhoneNumbers.put(unformattableNumber, currentNumbers);
-          }
-          currentNumbers.add(dialerPhoneNumber);
-        }
-      }
-    }
-
-    Set<String> unformattableNumbers() {
-      return unformattableNumbersToDialerPhoneNumbers.keySet();
-    }
-
-    Set<String> validE164Numbers() {
-      return e164NumbersToDialerPhoneNumbers.keySet();
-    }
-
-    Set<DialerPhoneNumber> dialerPhoneNumbersForE164(String e164) {
-      return e164NumbersToDialerPhoneNumbers.get(e164);
-    }
-
-    Set<DialerPhoneNumber> dialerPhoneNumbersForUnformattable(String unformattableNumber) {
-      return unformattableNumbersToDialerPhoneNumbers.get(unformattableNumber);
-    }
   }
 }
