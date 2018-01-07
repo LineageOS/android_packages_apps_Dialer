@@ -39,6 +39,7 @@ public abstract class CoalescedRow {
         .setIsBusiness(false)
         .setIsVoicemail(false)
         .setCallType(0)
+        .setCanReportAsInvalidNumber(false)
         .setCoalescedIds(CoalescedIds.getDefaultInstance());
   }
 
@@ -92,6 +93,8 @@ public abstract class CoalescedRow {
 
   public abstract int callType();
 
+  public abstract boolean canReportAsInvalidNumber();
+
   public abstract CoalescedIds coalescedIds();
 
   /** Builder for {@link CoalescedRow}. */
@@ -138,6 +141,8 @@ public abstract class CoalescedRow {
     public abstract Builder setIsVoicemail(boolean isVoicemail);
 
     public abstract Builder setCallType(int callType);
+
+    public abstract Builder setCanReportAsInvalidNumber(boolean canReportAsInvalidNumber);
 
     public abstract Builder setCoalescedIds(CoalescedIds coalescedIds);
 
