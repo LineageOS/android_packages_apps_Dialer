@@ -43,6 +43,12 @@ message PhoneLookupInfo {
     //
     // Empty if there is no CP2 contact information for the number.
     repeated Cp2ContactInfo cp2_contact_info = 1;
+
+    // The information for this number is incomplete. This can happen when the
+    // call log is requested to be updated but there are many invalid numbers
+    // and the update cannot be performed efficiently. In this case, the call
+    // log needs to query for the CP2 information at render time.
+    optional bool is_incomplete = 2;
   }
   optional Cp2Info cp2_info = 1;
 
