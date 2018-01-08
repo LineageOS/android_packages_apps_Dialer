@@ -33,14 +33,15 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.android.dialer.phonelookup.PhoneLookupSelector;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonelookup.selector.PhoneLookupSelector;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -63,9 +64,11 @@ import javax.inject.Inject;
  * Responsible for maintaining the columns in the annotated call log which are derived from phone
  * numbers.
  */
-public final class PhoneLookupDataSource implements CallLogDataSource {
+public final class PhoneLookupDataSource
+    implements CallLogDataSource, PhoneLookup.ContentObserverCallbacks {
 
   private final PhoneLookup<PhoneLookupInfo> phoneLookup;
+  private final PhoneLookupSelector phoneLookupSelector;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
@@ -86,12 +89,16 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
+  private CallLogDataSource.ContentObserverCallbacks dataSourceContentObserverCallbacks;
+
   @Inject
   PhoneLookupDataSource(
       PhoneLookup<PhoneLookupInfo> phoneLookup,
+      PhoneLookupSelector phoneLookupSelector,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookup = phoneLookup;
+    this.phoneLookupSelector = phoneLookupSelector;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -275,8 +282,16 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   @MainThread
   @Override
   public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
-    // No content observers required for this data source.
+      Context appContext, CallLogDataSource.ContentObserverCallbacks contentObserverCallbacks) {
+    dataSourceContentObserverCallbacks = contentObserverCallbacks;
+    phoneLookup.registerContentObservers(appContext, this);
+  }
+
+  @MainThread
+  @Override
+  public void markDirtyAndNotify(Context appContext) {
+    Assert.isMainThread();
+    dataSourceContentObserverCallbacks.markDirtyAndNotify(appContext);
   }
 
   private static ImmutableSet<DialerPhoneNumber>
@@ -455,7 +470,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
             }));
   }
 
-  private static void populateInserts(
+  private void populateInserts(
       ImmutableMap<Long, PhoneLookupInfo> existingInfo, CallLogMutations mutations) {
     for (Entry<Long, ContentValues> entry : mutations.getInserts().entrySet()) {
       long id = entry.getKey();
@@ -468,7 +483,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     }
   }
 
-  private static void updateMutations(
+  private void updateMutations(
       ImmutableMap<Long, PhoneLookupInfo> updatesToApply, CallLogMutations mutations) {
     for (Entry<Long, PhoneLookupInfo> entry : updatesToApply.entrySet()) {
       long id = entry.getKey();
@@ -554,17 +569,16 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     return normalizedNumbersToDelete;
   }
 
-  private static void updateContentValues(
-      ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
-    contentValues.put(AnnotatedCallLog.NAME, PhoneLookupSelector.selectName(phoneLookupInfo));
+  private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
+    contentValues.put(AnnotatedCallLog.NAME, phoneLookupSelector.selectName(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.PHOTO_URI, PhoneLookupSelector.selectPhotoUri(phoneLookupInfo));
+        AnnotatedCallLog.PHOTO_URI, phoneLookupSelector.selectPhotoUri(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.PHOTO_ID, PhoneLookupSelector.selectPhotoId(phoneLookupInfo));
+        AnnotatedCallLog.PHOTO_ID, phoneLookupSelector.selectPhotoId(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.LOOKUP_URI, PhoneLookupSelector.selectLookupUri(phoneLookupInfo));
+        AnnotatedCallLog.LOOKUP_URI, phoneLookupSelector.selectLookupUri(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.NUMBER_TYPE_LABEL, PhoneLookupSelector.selectNumberLabel(phoneLookupInfo));
+        AnnotatedCallLog.NUMBER_TYPE_LABEL, phoneLookupSelector.selectNumberLabel(phoneLookupInfo));
     contentValues.put(
         AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
         PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
