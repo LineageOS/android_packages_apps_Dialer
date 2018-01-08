@@ -83,4 +83,26 @@ message PhoneLookupInfo {
     optional InfoType info_type = 6;
   }
   optional PeopleApiInfo people_api_info = 3;
+
+  // Whether a number is blocked or not. Used by both the system blacklist and
+  // dialer fallback
+  enum BlockedState {
+    UNKNOWN = 0;
+    BLOCKED = 1;
+    NOT_BLOCKED = 2;
+  }
+
+  // Message for the android system BlockedNumber lookup. Available starting in
+  // N.
+  message SystemBlockedNumberInfo {
+    optional BlockedState blocked_state = 1;
+  }
+  optional SystemBlockedNumberInfo system_blocked_number_info = 4;
+
+  // Message for the dialer fallback for blocked number. Used in M or when the
+  // migration to the system has not been completed.
+  message DialerBlockedNumberInfo {
+    optional BlockedState blocked_state = 1;
+  }
+  optional DialerBlockedNumberInfo dialer_blocked_number_info = 5;
 }
