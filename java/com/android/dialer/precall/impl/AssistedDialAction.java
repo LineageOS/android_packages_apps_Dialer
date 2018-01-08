@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
@@ -57,7 +58,7 @@ public class AssistedDialAction implements PreCallAction {
     AssistedDialingMediator assistedDialingMediator =
         ConcreteCreator.createNewAssistedDialingMediator(
             getAssistedDialingTelephonyManager(context, builder), context);
-    if (Build.VERSION.SDK_INT > ConcreteCreator.BUILD_CODE_CEILING) {
+    if (BuildCompat.isAtLeastP()) {
       builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, true);
     }
     // Checks the platform is N+ and meets other pre-flight checks.
