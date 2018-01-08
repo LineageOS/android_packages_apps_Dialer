@@ -31,6 +31,7 @@ import com.android.dialer.databasepopulator.VoicemailPopulator;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
+import com.android.incallui.rtt.impl.RttChatActivity;
 
 /** Implements the top level simulator menu. */
 final class SimulatorMainMenu {
@@ -40,6 +41,7 @@ final class SimulatorMainMenu {
         .addItem("Voice call", SimulatorVoiceCall.getActionProvider(activity))
         .addItem(
             "IMS video", SimulatorVideoCall.getActionProvider(activity.getApplicationContext()))
+        .addItem("Rtt call mock", () -> simulateRttCallMock(activity.getApplicationContext()))
         .addItem(
             "Notifications",
             SimulatorNotifications.getActionProvider(activity.getApplicationContext()))
@@ -59,6 +61,10 @@ final class SimulatorMainMenu {
             () ->
                 activity.startActivity(
                     EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())));
+  }
+
+  private static void simulateRttCallMock(@NonNull Context context) {
+    context.startActivity(new Intent(context, RttChatActivity.class));
   }
 
   private static void populateDatabase(@NonNull Context context) {
