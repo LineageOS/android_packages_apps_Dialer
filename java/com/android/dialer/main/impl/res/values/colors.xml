@@ -15,9 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="NuiMainActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
-    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-  </style>
+  <color name="bottom_nav_icon_selected">#FFFFFF</color>
+  <color name="bottom_nav_icon_deselected">#B2FFFFFF</color>
 </resources>

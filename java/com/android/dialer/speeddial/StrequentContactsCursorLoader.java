@@ -26,7 +26,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 
 /** Cursor Loader for strequent contacts. */
-final class StrequentContactsCursorLoader extends CursorLoader {
+public final class StrequentContactsCursorLoader extends CursorLoader {
 
   static final int PHONE_ID = 0;
   static final int PHONE_DISPLAY_NAME = 1;
@@ -41,7 +41,7 @@ final class StrequentContactsCursorLoader extends CursorLoader {
   static final int PHONE_PINNED = 10;
   static final int PHONE_CONTACT_ID = 11;
 
-  static final String[] PHONE_PROJECTION =
+  public static final String[] PHONE_PROJECTION =
       new String[] {
         Phone._ID, // 0
         Phone.DISPLAY_NAME, // 1
