@@ -351,12 +351,12 @@
   <!-- Button text for the "Set up" video calling option displayed underneath an entry in the call log.
        Tapping causes a the user to be taken to set up video calling.
        [CHAR LIMIT=30] -->
-  <string name="call_log_action_set_up_video">Set up</string>
+  <string name="call_log_action_set_up_video">Set up video calling</string>
 
   <!-- Button text for the "Invite" option displayed underneath an entry in the call log.
        Tapping causes a the user to be taken to the messaging app with a message ready to invite them to set up video calling.
        [CHAR LIMIT=30] -->
-  <string name="call_log_action_invite_video">Invite</string>
+  <string name="call_log_action_invite_video">Invite to video call</string>
 
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
        messaging app to send a SMS to the number represented by the call log entry.
