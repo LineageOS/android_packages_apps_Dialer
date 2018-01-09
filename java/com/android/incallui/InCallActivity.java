@@ -479,7 +479,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       dialpadFragment.onDialerKeyUp(null);
     }
 
-    InCallPresenter.getInstance().onUiShowing(false);
+    if (!isRecreating) {
+      InCallPresenter.getInstance().onUiShowing(false);
+    }
     if (isFinishing()) {
       InCallPresenter.getInstance().unsetActivity(this);
     }
@@ -590,7 +592,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
   }
 
-  private void onNewIntent(Intent intent, boolean isRecreating) {
+  @VisibleForTesting
+  void onNewIntent(Intent intent, boolean isRecreating) {
     this.isRecreating = isRecreating;
 
     // We're being re-launched with a new Intent.  Since it's possible for a single InCallActivity
