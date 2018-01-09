@@ -14,55 +14,44 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <TextView
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:minHeight="?attr/actionBarSize"
+      android:background="@color/dialer_theme_color"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+  <FrameLayout
+      android:id="@+id/fragment_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:textColor="@android:color/secondary_text_dark_nodisable"/>
+      android:layout_below="@+id/toolbar"
+      android:layout_above="@+id/bottom_nav_bar"/>
 
-  <android.support.design.widget.CoordinatorLayout
+  <include
+      android:id="@+id/bottom_nav_bar"
+      layout="@layout/bottom_nav_bar_layout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:layout_alignParentBottom="true"/>
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppBarTheme">
-
-      <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          android:background="?android:attr/colorPrimary"/>
-
-      <android.support.design.widget.TabLayout
-          android:id="@+id/tab_layout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="?android:attr/colorPrimary"
-          app:tabIndicatorColor="?android:attr/colorAccent"
-          app:layout_scrollFlags="enterAlwaysCollapsed"/>
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/quantum_ic_dialpad_white_24"
-        app:backgroundTint="?android:attr/colorAccent"/>
-  </android.support.design.widget.CoordinatorLayout>
-</FrameLayout>
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/bottom_nav_bar"
+      android:layout_alignParentEnd="true"
+      android:layout_margin="16dp"
+      android:src="@drawable/quantum_ic_dialpad_white_24"
+      app:backgroundTint="?android:attr/colorAccent"/>
+</RelativeLayout>
