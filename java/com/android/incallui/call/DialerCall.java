@@ -29,6 +29,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
@@ -140,6 +141,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   private String childNumber;
   private String lastForwardedNumber;
+  private boolean isCallForwarded;
   private String callSubject;
   private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
@@ -294,6 +296,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             case TelephonyManagerCompat.EVENT_MERGE_COMPLETE:
               LogUtil.i("DialerCall.onConnectionEvent", "merge complete");
               isMergeInProcess = false;
+              break;
+            case TelephonyManagerCompat.EVENT_CALL_FORWARDED:
+              // Only handle this event for P+ since it's unreliable pre-P.
+              if (BuildCompat.isAtLeastP()) {
+                isCallForwarded = true;
+                update();
+              }
               break;
             default:
               break;
@@ -798,6 +807,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /** @return The last forwarded number for the call, or {@code null} if none specified. */
   public String getLastForwardedNumber() {
     return lastForwardedNumber;
+  }
+
+  public boolean isCallForwarded() {
+    return isCallForwarded;
   }
 
   /** @return The call subject, or {@code null} if none specified. */
