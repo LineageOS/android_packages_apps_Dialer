@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,14 +14,16 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
 <resources>
+  <!-- Content description for submit chat input button. [CHAR LIMIT=NONE] -->
+  <string name="content_description_rtt_check_button">Go ahead</string>
 
-  <!-- Option shown in call log menu to navigate the user to the call details screen where the user
-       can view details for the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_details_menu_label">Call details</string>
+  <!-- Content description for button of closing RTT chat window. [CHAR LIMIT=NONE] -->
+  <string name="content_description_rtt_back_button">Close RTT chat</string>
 
-  <!-- Option displayed in call log to delete a call log item. [CHAR LIMIT=30] -->
-  <string name="delete">Delete</string>
+  <!-- Hint text for input box. [CHAR LIMIT=NONE] -->
+  <string name="rtt_input_hint">Type a message</string>
 
+  <!-- Content description for avatar of RTT chat message. [CHAR LIMIT=NONE] -->
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
 </resources>

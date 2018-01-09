@@ -55,12 +55,14 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({RowType.HEADER, RowType.VOICEMAIL_ENTRY})
+  @IntDef({RowType.HEADER, RowType.VOICEMAIL_ENTRY, RowType.VOICEMAIL_ALERT})
   @interface RowType {
+    /** A row representing a voicemail alert. */
+    int VOICEMAIL_ALERT = 1;
     /** Header that displays "Today" or "Older". */
-    int HEADER = 1;
+    int HEADER = 2;
     /** A row representing a voicemail entry. */
-    int VOICEMAIL_ENTRY = 2;
+    int VOICEMAIL_ENTRY = 3;
   }
 
   private Cursor cursor;
@@ -70,6 +72,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private int todayHeaderPosition = Integer.MAX_VALUE;
   /** {@link Integer#MAX_VALUE} when the "Older" header should not be displayed. */
   private int olderHeaderPosition = Integer.MAX_VALUE;
+  /** {@link Integer#MAX_VALUE} when the voicemail alert message should not be displayed. */
+  private int voicemailAlertPosition = Integer.MAX_VALUE;
 
   private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
@@ -113,16 +117,26 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private void updateHeaderPositions() {
     LogUtil.i(
         "NewVoicemailAdapter.updateHeaderPositions",
-        "before updating todayPos:%d, olderPos:%d",
+        "before updating todayPos:%d, olderPos:%d, alertPos:%d",
         todayHeaderPosition,
-        olderHeaderPosition);
+        olderHeaderPosition,
+        voicemailAlertPosition);
+
+    int alertOffSet = 0;
+    if (voicemailAlertPosition != Integer.MAX_VALUE) {
+      Assert.checkArgument(
+          voicemailAlertPosition == 0, "voicemail alert can only be 0, when showing");
+      alertOffSet = 1;
+    }
+
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
     if (cursor.moveToNext()) {
       long firstTimestamp = VoicemailCursorLoader.getTimestamp(cursor);
       if (CallLogDates.isSameDay(currentTimeMillis, firstTimestamp)) {
-        this.todayHeaderPosition = 0;
-        int adapterPosition = 2; // Accounted for "Today" header and first row.
+        this.todayHeaderPosition = 0 + alertOffSet;
+        int adapterPosition =
+            2 + alertOffSet; // Accounted for the "Alert", "Today" header and first row.
         while (cursor.moveToNext()) {
           long timestamp = VoicemailCursorLoader.getTimestamp(cursor);
 
@@ -144,9 +158,11 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     }
     LogUtil.i(
         "NewVoicemailAdapter.updateHeaderPositions",
-        "after updating todayPos:%d, olderPos:%d",
+        "after updating todayPos:%d, olderPos:%d, alertOffSet:%d, alertPos:%d",
         todayHeaderPosition,
-        olderHeaderPosition);
+        olderHeaderPosition,
+        alertOffSet,
+        voicemailAlertPosition);
   }
 
   private void initializeMediaPlayerListeners() {
@@ -169,6 +185,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
     View view;
     switch (viewType) {
+      case RowType.VOICEMAIL_ALERT:
+        view = inflater.inflate(R.layout.new_voicemail_entry_alert, viewGroup, false);
+        return new NewVoicemailAlertViewHolder(view);
       case RowType.HEADER:
         view = inflater.inflate(R.layout.new_voicemail_entry_header, viewGroup, false);
         return new NewVoicemailHeaderViewHolder(view);
@@ -223,14 +242,33 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       return;
     }
 
+    if (viewHolder instanceof NewVoicemailAlertViewHolder) {
+      LogUtil.i(
+          "NewVoicemailAdapter.onBindViewHolder", "view holder at pos:%d is a alert", position);
+      NewVoicemailAlertViewHolder alertViewHolder = (NewVoicemailAlertViewHolder) viewHolder;
+      @RowType int viewType = getItemViewType(position);
+      Assert.checkArgument(position == 0);
+      if (position == voicemailAlertPosition) {
+        // TODO(a bug): Update this with the alert messages
+        alertViewHolder.setHeader("Temporary placeholder, update this with the alert messages");
+      } else {
+        throw Assert.createIllegalStateFailException(
+            "Unexpected view type " + viewType + " at position: " + position);
+      }
+      return;
+    }
+
     LogUtil.i(
         "NewVoicemailAdapter.onBindViewHolder",
-        "view holder at pos:%d is a not a header",
+        "view holder at pos:%d is a not a header or an alert",
         position);
 
     NewVoicemailViewHolder newVoicemailViewHolder = (NewVoicemailViewHolder) viewHolder;
 
     int previousHeaders = 0;
+    if (voicemailAlertPosition != Integer.MAX_VALUE && position > voicemailAlertPosition) {
+      previousHeaders++;
+    }
     if (todayHeaderPosition != Integer.MAX_VALUE && position > todayHeaderPosition) {
       previousHeaders++;
     }
@@ -826,6 +864,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     // TODO(uabdullah): a bug Remove logging, temporarily here for debugging.
     LogUtil.enterBlock("NewVoicemailAdapter.getItemCount");
     int numberOfHeaders = 0;
+    if (voicemailAlertPosition != Integer.MAX_VALUE) {
+      numberOfHeaders++;
+    }
     if (todayHeaderPosition != Integer.MAX_VALUE) {
       numberOfHeaders++;
     }
@@ -846,6 +887,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   @Override
   public int getItemViewType(int position) {
     LogUtil.enterBlock("NewVoicemailAdapter.getItemViewType");
+    if (voicemailAlertPosition != Integer.MAX_VALUE && position == voicemailAlertPosition) {
+      return RowType.VOICEMAIL_ALERT;
+    }
     if (todayHeaderPosition != Integer.MAX_VALUE && position == todayHeaderPosition) {
       return RowType.HEADER;
     }

@@ -69,9 +69,7 @@ public class QueryFilteringUtil {
     }
 
     query = digitsOnly(query);
-    Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query));
-    if (pattern.matcher(getT9Representation(name, context)).find()) {
-      // query matches the start of a T9 name (i.e. 75 -> "Jessica [Jo]nes")
+    if (getIndexOfT9Substring(query, name, context) != -1) {
       return true;
     }
 
@@ -91,6 +89,44 @@ public class QueryFilteringUtil {
     }
 
     return queryIndex == query.length();
+  }
+
+  /**
+   * Returns the index where query is contained in the T9 representation of the name.
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>#getIndexOfT9Substring("76", "John Smith") returns 5, 76 -> 'Sm'
+   *   <li>#nameMatchesT9Query("2226", "AAA Mom") returns 0, 2226 -> 'AAAM'
+   *   <li>#nameMatchesT9Query("2", "Jessica Jones") returns -1, Neither 'Jessica' nor 'Jones' start
+   *       with A, B or C
+   * </ul>
+   */
+  public static int getIndexOfT9Substring(String query, String name, Context context) {
+    query = digitsOnly(query);
+    String t9Name = getT9Representation(name, context);
+    String t9NameDigitsOnly = digitsOnly(t9Name);
+    if (t9NameDigitsOnly.startsWith(query)) {
+      return 0;
+    }
+
+    int nonLetterCount = 0;
+    for (int i = 1; i < t9NameDigitsOnly.length(); i++) {
+      char cur = t9Name.charAt(i);
+      if (!Character.isDigit(cur)) {
+        nonLetterCount++;
+        continue;
+      }
+
+      // If the previous character isn't a digit and the current is, check for a match
+      char prev = t9Name.charAt(i - 1);
+      int offset = i - nonLetterCount;
+      if (!Character.isDigit(prev) && t9NameDigitsOnly.startsWith(query, offset)) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   /**
