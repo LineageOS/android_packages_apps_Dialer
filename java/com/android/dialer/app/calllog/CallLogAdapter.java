@@ -39,6 +39,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -802,7 +803,7 @@ public class CallLogAdapter extends GroupingListAdapter
     int groupSize = getGroupSize(position);
     CallDetailsEntries callDetailsEntries = createCallDetailsEntries(c, groupSize);
     PhoneCallDetails details = createPhoneCallDetails(c, groupSize, views);
-    if (hiddenRowIds.contains(c.getLong(CallLogQuery.ID))) {
+    if (isHiddenRow(views.number, c.getLong(CallLogQuery.ID))) {
       views.callLogEntryView.setVisibility(View.GONE);
       views.dayGroupHeader.setVisibility(View.GONE);
       return;
@@ -825,6 +826,16 @@ public class CallLogAdapter extends GroupingListAdapter
         uncheckMarkCallLogEntry(views, id);
       }
     }
+  }
+
+  private boolean isHiddenRow(@Nullable String number, long rowId) {
+    if (number != null && PhoneNumberUtils.isEmergencyNumber(number)) {
+      return true;
+    }
+    if (hiddenRowIds.contains(rowId)) {
+      return true;
+    }
+    return false;
   }
 
   private void loadAndRender(
