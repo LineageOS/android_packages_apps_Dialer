@@ -64,6 +64,8 @@ final class Modules {
     // it use a ContactPrimaryActionInfo instead?
     addModuleForAccessingCallDetails(context, modules, row);
 
+    modules.add(new DeleteCallLogItemModule(context, row.coalescedIds()));
+
     return modules;
   }
 

@@ -20,6 +20,7 @@ import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.telephony.PhoneNumberUtils;
 import com.android.dialer.DialerInternalPhoneNumber;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.DialerPhoneNumber.RawInput;
@@ -128,29 +129,38 @@ public class DialerPhoneNumberUtil {
   }
 
   /**
-   * Formats the provided number to e164 format or return raw number if number is unparseable.
+   * Formats the provided number to E164 format or return a normalized version of the raw number if
+   * the number is not valid according to {@link PhoneNumberUtil#isValidNumber(PhoneNumber)}.
    *
-   * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
+   * @see #formatToE164(DialerPhoneNumber)
+   * @see PhoneNumberUtils#normalizeNumber(String)
    */
   @WorkerThread
   public String normalizeNumber(DialerPhoneNumber number) {
     Assert.isWorkerThread();
-    return formatToE164(number).or(number.getRawInput().getNumber());
+    return formatToE164(number)
+        .or(PhoneNumberUtils.normalizeNumber(number.getRawInput().getNumber()));
   }
 
   /**
-   * Formats the provided number to e164 format if possible.
+   * If the provided number is "valid" (see {@link PhoneNumberUtil#isValidNumber(PhoneNumber)}),
+   * formats it to E.164. Otherwise, returns {@link Optional#absent()}.
    *
+   * <p>This method is analogous to {@link PhoneNumberUtils#formatNumberToE164(String, String)} (but
+   * works with an already parsed {@link DialerPhoneNumber} object).
+   *
+   * @see PhoneNumberUtil#isValidNumber(PhoneNumber)
    * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
+   * @see PhoneNumberUtils#formatNumberToE164(String, String)
    */
   @WorkerThread
   public Optional<String> formatToE164(DialerPhoneNumber number) {
     Assert.isWorkerThread();
     if (number.hasDialerInternalPhoneNumber()) {
-      return Optional.of(
-          phoneNumberUtil.format(
-              Converter.protoToPojo(number.getDialerInternalPhoneNumber()),
-              PhoneNumberFormat.E164));
+      PhoneNumber phoneNumber = Converter.protoToPojo(number.getDialerInternalPhoneNumber());
+      if (phoneNumberUtil.isValidNumber(phoneNumber)) {
+        return Optional.fromNullable(phoneNumberUtil.format(phoneNumber, PhoneNumberFormat.E164));
+      }
     }
     return Optional.absent();
   }
