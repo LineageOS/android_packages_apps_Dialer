@@ -484,7 +484,7 @@ public class CallCardPresenter
                   isWorkCall,
                   isAttemptingHdAudioCall,
                   isHdAudioCall,
-                  !TextUtils.isEmpty(primary.getLastForwardedNumber()),
+                  !TextUtils.isEmpty(primary.getLastForwardedNumber()) || primary.isCallForwarded(),
                   shouldShowContactPhoto,
                   primary.getConnectTimeMillis(),
                   primary.isVoiceMailNumber(),
