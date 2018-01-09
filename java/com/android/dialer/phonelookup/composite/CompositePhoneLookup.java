@@ -16,6 +16,8 @@
 
 package com.android.dialer.phonelookup.composite;
 
+import android.content.Context;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
@@ -60,7 +62,7 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
    * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
    * the dependent lookups does not complete, the returned future will also not complete.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtype"})
   @Override
   public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
     // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
@@ -163,5 +165,14 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
     }
     return Futures.transform(
         Futures.allAsList(futures), unused -> null, lightweightExecutorService);
+  }
+
+  @Override
+  @MainThread
+  public void registerContentObservers(
+      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      phoneLookup.registerContentObservers(appContext, contentObserverCallbacks);
+    }
   }
 }
