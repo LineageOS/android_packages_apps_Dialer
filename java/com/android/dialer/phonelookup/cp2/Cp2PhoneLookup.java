@@ -211,6 +211,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
               anyContactsDeletedFuture,
               anyContactsDeleted -> {
                 if (anyContactsDeleted) {
+                  LogUtil.v("Cp2PhoneLookup.isDirty", "returning true because contacts deleted");
                   return Futures.immediateFuture(true);
                 }
                 // Hopefully the most common case is there are no contacts updated; we can detect
@@ -221,6 +222,9 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                     noContactsModifiedSinceFuture,
                     noContactsModifiedSince -> {
                       if (noContactsModifiedSince) {
+                        LogUtil.v(
+                            "Cp2PhoneLookup.isDirty",
+                            "returning false because no contacts modified since last run");
                         return Futures.immediateFuture(false);
                       }
                       // This method is more expensive but is probably the most likely scenario; we
@@ -236,6 +240,9 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                           contactsUpdatedFuture,
                           contactsUpdated -> {
                             if (contactsUpdated) {
+                              LogUtil.v(
+                                  "Cp2PhoneLookup.isDirty",
+                                  "returning true because a previously called contact was updated");
                               return Futures.immediateFuture(true);
                             }
                             // This is the most expensive method so do it last; the scenario is that
@@ -357,13 +364,14 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
 
   private ListenableFuture<Set<Long>> queryPhoneLookupTableForContactIdsBasedOnRawNumber(
       String rawNumber) {
+    if (TextUtils.isEmpty(rawNumber)) {
+      return Futures.immediateFuture(new ArraySet<>());
+    }
     return backgroundExecutorService.submit(
         () -> {
           Set<Long> contactIds = new ArraySet<>();
           try (Cursor cursor =
-              queryPhoneLookup(
-                  new String[] {android.provider.ContactsContract.PhoneLookup.CONTACT_ID},
-                  rawNumber)) {
+              queryPhoneLookup(new String[] {ContactsContract.PhoneLookup.CONTACT_ID}, rawNumber)) {
             if (cursor == null) {
               LogUtil.w(
                   "Cp2PhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
