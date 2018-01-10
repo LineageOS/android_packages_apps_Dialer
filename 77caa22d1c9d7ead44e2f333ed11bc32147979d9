@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f60ac60a_b09269d2",
+        "filename": "java/com/android/incallui/answer/impl/answermethod/FlingUpDownTouchHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 13589
+      },
+      "writtenOn": "2018-01-10T19:17:23Z",
+      "side": 1,
+      "message": "This shouldn\u0027t bypass the \"old\" logic without the falsing manager, use \"return !touchAboveFalsingThreshold;\" instead to match the disabled behaviour.",
+      "revId": "77caa22d1c9d7ead44e2f333ed11bc32147979d9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
