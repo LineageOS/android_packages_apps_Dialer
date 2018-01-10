@@ -41,4 +41,7 @@ public class StubSuggestionProvider implements SuggestionProvider {
       @NonNull Context context,
       @NonNull String number,
       @NonNull PhoneAccountHandle phoneAccountHandle) {}
+
+  @Override
+  public void reportIncorrectSuggestion(@NonNull Context context, @NonNull String number) {}
 }
