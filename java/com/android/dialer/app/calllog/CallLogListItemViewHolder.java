@@ -694,6 +694,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               .getBoolean("enable_call_log_duo_invite_button", false)) {
             inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
             inviteVideoButtonView.setVisibility(View.VISIBLE);
+            Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_INVITE_SHOWN);
           }
         } else if (duo.isEnabled(context) && !identifiedSpamCall) {
           if (!duo.isInstalled(context)) {
@@ -701,12 +702,16 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 .getBoolean("enable_call_log_install_duo_button", false)) {
               setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
               setUpVideoButtonView.setVisibility(View.VISIBLE);
+              Logger.get(context)
+                  .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL_SHOWN);
             }
           } else {
             if (ConfigProviderBindings.get(context)
                 .getBoolean("enable_call_log_activate_duo_button", false)) {
               setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
               setUpVideoButtonView.setVisibility(View.VISIBLE);
+              Logger.get(context)
+                  .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_ACTIVATE_SHOWN);
             }
           }
         }
