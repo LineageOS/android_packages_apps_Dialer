@@ -32,17 +32,25 @@ public interface SuggestionProvider {
     // The SIM has the same carrier as the callee.
     INTRA_CARRIER,
     // The user has selected the SIM for the callee multiple times.
-    FREQUENT
+    FREQUENT,
+    // The user has select the SIM for this category of calls (contacts from certain accounts,
+    // etc.).
+    USER_SET,
   }
 
   /** The suggestion. */
   class Suggestion {
     @NonNull public final PhoneAccountHandle phoneAccountHandle;
     @NonNull public final Reason reason;
+    public final boolean shouldAutoSelect;
 
-    public Suggestion(@NonNull PhoneAccountHandle phoneAccountHandle, @NonNull Reason reason) {
+    public Suggestion(
+        @NonNull PhoneAccountHandle phoneAccountHandle,
+        @NonNull Reason reason,
+        boolean shouldAutoSelect) {
       this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
       this.reason = Assert.isNotNull(reason);
+      this.shouldAutoSelect = shouldAutoSelect;
     }
   }
 
@@ -55,4 +63,7 @@ public interface SuggestionProvider {
       @NonNull Context context,
       @NonNull String number,
       @NonNull PhoneAccountHandle phoneAccountHandle);
+
+  @WorkerThread
+  void reportIncorrectSuggestion(@NonNull Context context, @NonNull String number);
 }
