@@ -32,14 +32,16 @@ final class BottomActionViewController {
   // the bubble, to prevent the bottom action view from animating if the user just wants to fling
   // the bubble.
   private static final int SHOW_TARGET_DELAY = 100;
-  private static final int SHOW_TARGET_DURATION = 350;
-  private static final int HIDE_TARGET_DURATION = 225;
+  private static final int SHOW_HIDE_TARGET_DURATION = 175;
+  private static final int HIGHLIGHT_TARGET_DURATION = 150;
   private static final float HIGHLIGHT_TARGET_SCALE = 1.5f;
+  private static final float UNHIGHLIGHT_TARGET_ALPHA = 0.38f;
 
   private final Context context;
   private final WindowManager windowManager;
   private final int gradientHeight;
   private final int bottomActionViewTop;
+  private final int textOffsetSize;
 
   private View bottomActionView;
   private View dismissView;
@@ -54,6 +56,8 @@ final class BottomActionViewController {
     gradientHeight =
         context.getResources().getDimensionPixelSize(R.dimen.bubble_bottom_action_view_height);
     bottomActionViewTop = context.getResources().getDisplayMetrics().heightPixels - gradientHeight;
+    textOffsetSize =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_bottom_action_text_offset);
   }
 
   /** Creates and show the bottom action view. */
@@ -104,7 +108,7 @@ final class BottomActionViewController {
         .alpha(1f)
         .setInterpolator(new LinearInterpolator())
         .setStartDelay(SHOW_TARGET_DELAY)
-        .setDuration(SHOW_TARGET_DURATION)
+        .setDuration(SHOW_HIDE_TARGET_DURATION)
         .start();
   }
 
@@ -117,7 +121,7 @@ final class BottomActionViewController {
         .animate()
         .alpha(0f)
         .setInterpolator(new LinearInterpolator())
-        .setDuration(HIDE_TARGET_DURATION)
+        .setDuration(SHOW_HIDE_TARGET_DURATION)
         .withEndAction(
             () -> {
               // Use removeViewImmediate instead of removeView to avoid view flashing before removed
@@ -143,32 +147,56 @@ final class BottomActionViewController {
     boolean shouldHighlightDismiss = y > bottomActionViewTop && x < middle;
     boolean shouldHighlightEndCall = y > bottomActionViewTop && x >= middle;
 
+    // Set target alpha back to 1
+    if (!dismissHighlighted && endCallHighlighted && !shouldHighlightEndCall) {
+      dismissView.animate().alpha(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
+    }
+    if (!endCallHighlighted && dismissHighlighted && !shouldHighlightDismiss) {
+      endCallView.animate().alpha(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
+    }
+
+    // Scale unhighlight target back to 1x
     if (!shouldHighlightDismiss && dismissHighlighted) {
       // Unhighlight dismiss
-      dismissView.animate().scaleX(1f).scaleY(1f).setDuration(HIDE_TARGET_DURATION).start();
+      dismissView.animate().scaleX(1f).scaleY(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
       dismissHighlighted = false;
     } else if (!shouldHighlightEndCall && endCallHighlighted) {
       // Unhighlight end call
-      endCallView.animate().scaleX(1f).scaleY(1f).setDuration(HIDE_TARGET_DURATION).start();
+      endCallView.animate().scaleX(1f).scaleY(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
       endCallHighlighted = false;
     }
 
+    // Scale highlight target larger
     if (shouldHighlightDismiss && !dismissHighlighted) {
       // Highlight dismiss
+      dismissView.setPivotY(dismissView.getHeight() / 2 + textOffsetSize);
       dismissView
           .animate()
           .scaleX(HIGHLIGHT_TARGET_SCALE)
           .scaleY(HIGHLIGHT_TARGET_SCALE)
-          .setDuration(SHOW_TARGET_DURATION)
+          .setDuration(HIGHLIGHT_TARGET_DURATION)
+          .start();
+      // Fade the other target
+      endCallView
+          .animate()
+          .alpha(UNHIGHLIGHT_TARGET_ALPHA)
+          .setDuration(HIGHLIGHT_TARGET_DURATION)
           .start();
       dismissHighlighted = true;
     } else if (shouldHighlightEndCall && !endCallHighlighted) {
       // Highlight end call
+      endCallView.setPivotY(dismissView.getHeight() / 2 + textOffsetSize);
       endCallView
           .animate()
           .scaleX(HIGHLIGHT_TARGET_SCALE)
           .scaleY(HIGHLIGHT_TARGET_SCALE)
-          .setDuration(SHOW_TARGET_DURATION)
+          .setDuration(HIGHLIGHT_TARGET_DURATION)
+          .start();
+      // Fade the other target
+      dismissView
+          .animate()
+          .alpha(UNHIGHLIGHT_TARGET_ALPHA)
+          .setDuration(HIGHLIGHT_TARGET_DURATION)
           .start();
       endCallHighlighted = true;
     }
