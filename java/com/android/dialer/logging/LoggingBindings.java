@@ -28,6 +28,7 @@ public interface LoggingBindings {
       "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
   String ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
   String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
+  String INCALL_ACTIVITY_ON_STOP_MEMORY_EVENT_NAME = "IncallActivity.OnStop";
   /**
    * Logs an DialerImpression event that's not associated with a specific call.
    *
