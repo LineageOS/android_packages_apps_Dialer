@@ -15,21 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="Dialer.Incall.TextAppearance.RttTitle" parent="Dialer.Incall.TextAppearance">
-    <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textColor">#DD000000</item>
-    <item name="android:textSize">20sp</item>
-  </style>
-
   <style name="Dialer.Incall.TextAppearance.RttMessage" parent="Dialer.Incall.TextAppearance">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textColor">#DD000000</item>
     <item name="android:textSize">16sp</item>
-  </style>
-
-  <style name="Dialer.Incall.TextAppearance.RttTimer" parent="Dialer.Incall.TextAppearance">
-    <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textColor">#DD000000</item>
-    <item name="android:textSize">14sp</item>
   </style>
 </resources>
