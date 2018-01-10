@@ -31,6 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -99,6 +100,10 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
   @SuppressWarnings("MissingPermission")
   public Void doInBackground(Void unused) {
     try {
+      SimSuggestionComponent.get(context)
+          .getSuggestionProvider()
+          .reportIncorrectSuggestion(context, number);
+
       if (!PermissionsUtil.hasPhonePermissions(context)) {
         LogUtil.e("SwapSimWorker.doInBackground", "missing phone permission");
         return null;
