@@ -24,4 +24,9 @@
   <!-- A string to describe available action for accessibility user. It will be read as "Actions:
     double tap to collapse call action menu". -->
   <string name="a11y_bubble_primary_button_collapse_action">Collapse call action menu</string>
+
+  <!-- The label of drag-and-drop target for dismissing bubble. [CHAR LIMIT=10]-->
+  <string name="bubble_bottom_action_hide">Hide</string>
+  <!-- The label of drag-and-drop target for ending call. [CHAR LIMIT=10]-->
+  <string name="bubble_bottom_action_end_call">End call</string>
 </resources>
