@@ -23,12 +23,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract.QuickContact;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -62,32 +58,10 @@ public final class MainActivity extends AppCompatActivity
 
   private void initLayout() {
     findViewById(R.id.fab).setOnClickListener(this);
-
+    setSupportActionBar(findViewById(R.id.toolbar));
     BottomNavBar navBar = findViewById(R.id.bottom_nav_bar);
     navBar.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
     navBar.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
-
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    toolbar.setPopupTheme(android.R.style.Theme_Material_Light);
-    setSupportActionBar(toolbar);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.main_menu, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    Toast.makeText(this, "Not yet implemented", Toast.LENGTH_SHORT).show();
-    if (item.getItemId() == R.id.search) {
-      // open search
-      return true;
-    } else {
-      // TODO(calderwoodra) handle other menu items
-      return super.onOptionsItemSelected(item);
-    }
   }
 
   @Override
