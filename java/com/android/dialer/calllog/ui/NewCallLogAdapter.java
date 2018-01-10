@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
@@ -45,15 +46,17 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final Cursor cursor;
   private final Clock clock;
+  private final RealtimeRowProcessor realtimeRowProcessor;
 
   /** Null when the "Today" header should not be displayed. */
   @Nullable private final Integer todayHeaderPosition;
   /** Null when the "Older" header should not be displayed. */
   @Nullable private final Integer olderHeaderPosition;
 
-  NewCallLogAdapter(Cursor cursor, Clock clock) {
+  NewCallLogAdapter(Context context, Cursor cursor, Clock clock) {
     this.cursor = cursor;
     this.clock = clock;
+    this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
 
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
@@ -95,7 +98,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
         return new NewCallLogViewHolder(
             LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.new_call_log_entry, viewGroup, false),
-            clock);
+            clock,
+            realtimeRowProcessor);
       default:
         throw Assert.createUnsupportedOperationFailException("Unsupported view type: " + viewType);
     }

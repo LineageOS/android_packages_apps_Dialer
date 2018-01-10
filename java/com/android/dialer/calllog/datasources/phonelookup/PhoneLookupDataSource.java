@@ -276,6 +276,7 @@ public final class PhoneLookupDataSource
         .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
         .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
         .useMostRecentInt(AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER)
+        .useMostRecentInt(AnnotatedCallLog.CP2_INFO_INCOMPLETE)
         .combine();
   }
 
@@ -582,6 +583,8 @@ public final class PhoneLookupDataSource
     contentValues.put(
         AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
         PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2Info().getIsIncomplete());
   }
 
   private static Uri numberUri(String number) {

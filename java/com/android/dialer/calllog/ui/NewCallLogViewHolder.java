@@ -30,12 +30,18 @@ import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.CallTypeIconsView;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
 
 /** {@link RecyclerView.ViewHolder} for the new call log. */
 final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
@@ -50,8 +56,12 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final ImageView menuButton;
 
   private final Clock clock;
+  private final RealtimeRowProcessor realtimeRowProcessor;
+  private final ExecutorService uiExecutorService;
 
-  NewCallLogViewHolder(View view, Clock clock) {
+  private int currentRowId;
+
+  NewCallLogViewHolder(View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor) {
     super(view);
     this.context = view.getContext();
     primaryTextView = view.findViewById(R.id.primary_text);
@@ -63,12 +73,29 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     menuButton = view.findViewById(R.id.menu_button);
 
     this.clock = clock;
+    this.realtimeRowProcessor = realtimeRowProcessor;
+    uiExecutorService = DialerExecutorComponent.get(context).uiExecutorService();
   }
 
   /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
   void bind(Cursor cursor) {
     CoalescedRow row = CoalescedAnnotatedCallLogCursorLoader.toRow(cursor);
+    currentRowId = row.id(); // Used to make sure async updates are applied to the correct views
 
+    // Even if there is additional real time processing necessary, we still want to immediately show
+    // what information we have, rather than an empty card. For example, if CP2 information needs to
+    // be queried on the fly, we can still show the phone number until the contact name loads.
+    handleRow(row);
+
+    // Note: This leaks the view holder via the callback (which is an inner class), but this is OK
+    // because we only create ~10 of them (and they'll be collected assuming all jobs finish).
+    Futures.addCallback(
+        realtimeRowProcessor.applyRealtimeProcessing(row),
+        new RealtimeRowFutureCallback(row.id()),
+        uiExecutorService);
+  }
+
+  private void handleRow(CoalescedRow row) {
     // TODO(zachh): Handle RTL properly.
     primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
     secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
@@ -151,5 +178,31 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
     menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
+  }
+
+  private class RealtimeRowFutureCallback implements FutureCallback<Optional<CoalescedRow>> {
+    private final int id;
+
+    RealtimeRowFutureCallback(int id) {
+      this.id = id;
+    }
+
+    /**
+     * @param updatedRow the updated row if an update is required, or absent if no updates are
+     *     required
+     */
+    @Override
+    public void onSuccess(Optional<CoalescedRow> updatedRow) {
+      // If the user scrolled then this ViewHolder may not correspond to the completed task and
+      // there's nothing to do.
+      if (updatedRow.isPresent() && id == currentRowId) {
+        handleRow(updatedRow.get());
+      }
+    }
+
+    @Override
+    public void onFailure(Throwable throwable) {
+      LogUtil.e("RealtimeRowFutureCallback.onFailure", "realtime processing failed", throwable);
+    }
   }
 }

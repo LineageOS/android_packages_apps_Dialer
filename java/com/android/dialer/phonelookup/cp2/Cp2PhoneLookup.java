@@ -40,6 +40,7 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomCallUtil;
@@ -51,6 +52,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,6 +157,34 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
       }
     }
     return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
+  }
+
+  /**
+   * Queries ContactsContract.PhoneLookup for the {@link Cp2Info} associated with the provided
+   * {@link DialerPhoneNumber}. Returns {@link Cp2Info#getDefaultInstance()} if there is no
+   * information.
+   */
+  public ListenableFuture<Cp2Info> lookupByNumber(DialerPhoneNumber dialerPhoneNumber) {
+    return backgroundExecutorService.submit(
+        () -> {
+          DialerPhoneNumberUtil dialerPhoneNumberUtil =
+              new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+          String rawNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+          if (rawNumber.isEmpty()) {
+            return Cp2Info.getDefaultInstance();
+          }
+          Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
+          try (Cursor cursor = queryPhoneLookup(PHONE_LOOKUP_PROJECTION, rawNumber)) {
+            if (cursor == null) {
+              LogUtil.w("Cp2PhoneLookup.lookup", "null cursor");
+              return Cp2Info.getDefaultInstance();
+            }
+            while (cursor.moveToNext()) {
+              cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+            }
+          }
+          return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
+        });
   }
 
   @Override

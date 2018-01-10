@@ -18,6 +18,7 @@ package com.android.dialer.binary.basecomponent;
 
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
+import com.android.dialer.calllog.ui.CallLogUiComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
@@ -44,6 +45,7 @@ public interface BaseDialerRootComponent
     extends CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
+        CallLogUiComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
         DuoComponent.HasComponent,
