@@ -117,10 +117,13 @@ public class RefreshAnnotatedCallLogWorker {
     // After determining isDirty, conditionally call rebuild.
     return Futures.transformAsync(
         isDirtyFuture,
-        isDirty ->
-            Preconditions.checkNotNull(isDirty)
-                ? rebuild(appContext)
-                : Futures.immediateFuture(null),
+        isDirty -> {
+          LogUtil.v(
+              "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
+              "isDirty: %b",
+              Preconditions.checkNotNull(isDirty));
+          return isDirty ? rebuild(appContext) : Futures.immediateFuture(null);
+        },
         lightweightExecutorService);
   }
 
