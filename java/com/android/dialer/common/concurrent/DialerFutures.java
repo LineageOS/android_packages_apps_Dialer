@@ -35,7 +35,7 @@ public class DialerFutures {
    * predicate, cancelling all inputs upon completion. If none match, {@code defaultValue} is
    * returned.
    *
-   * <p>If an input fails, it is treated as if the predicate did not match.
+   * <p>If an input fails before a match is found, the returned future also fails.
    *
    * <p>Cancellation of the output future will cause cancellation of all input futures.
    *
@@ -53,7 +53,6 @@ public class DialerFutures {
       Predicate<T> predicate,
       T defaultValue) {
     AggregateFuture<T> output = new AnyOfFuture<>(futures);
-    // Use an atomic reference to ensure that late listeners don't pin the FirstOfFuture in memory.
     final AtomicReference<AggregateFuture<T>> ref = Atomics.newReference(output);
     final AtomicInteger pending = new AtomicInteger(output.futures.size());
     for (final ListenableFuture<? extends T> future : output.futures) {
@@ -65,14 +64,15 @@ public class DialerFutures {
               // cheaper than a CAS and atomicity is guaranteed by setFuture.
               AggregateFuture<T> output = ref.get();
               if (output != null) {
-                boolean threw = false;
                 T value = null;
                 try {
                   value = Futures.getDone(future);
                 } catch (ExecutionException e) {
-                  threw = true;
+                  ref.set(null); // unpin
+                  output.setException(e);
+                  return;
                 }
-                if (threw || !predicate.apply(value)) {
+                if (!predicate.apply(value)) {
                   if (pending.decrementAndGet() == 0) {
                     // we are the last future (and every other future hasn't matched or failed).
                     output.set(defaultValue);
@@ -105,6 +105,11 @@ public class DialerFutures {
     @Override
     protected boolean set(T t) {
       return super.set(t);
+    }
+
+    @Override
+    protected boolean setException(Throwable throwable) {
+      return super.setException(throwable);
     }
 
     @Override
