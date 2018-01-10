@@ -21,4 +21,7 @@
        can view details for the call log entry. [CHAR LIMIT=30] -->
   <string name="call_details_menu_label">Call details</string>
 
+  <!-- Option displayed in call log to delete a call log item. [CHAR LIMIT=30] -->
+  <string name="delete">Delete</string>
+
 </resources>

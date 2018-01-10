@@ -20,9 +20,4 @@
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="android:colorAccent">@color/dialer_secondary_color</item>
   </style>
-
-  <style name="AppBarTheme" parent="Theme.AppCompat">
-    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-  </style>
 </resources>

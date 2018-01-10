@@ -24,6 +24,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
+import com.android.dialer.common.LogUtil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,7 @@ public class QueryBoldingUtil {
    *   <li>"query" would bold "John [query] Smith"
    *   <li>"222" would bold "[AAA] Mom"
    *   <li>"222" would bold "[A]llen [A]lex [A]aron"
+   *   <li>"2226" would bold "[AAA M]om"
    * </ul>
    *
    * <p>Some examples of non-matches:
@@ -71,15 +73,18 @@ public class QueryBoldingUtil {
       }
     }
 
-    Pattern pattern = Pattern.compile("(^|\\s)" + Pattern.quote(query.toLowerCase()));
-    Matcher matcher = pattern.matcher(QueryFilteringUtil.getT9Representation(name, context));
-    if (matcher.find()) {
+    int indexOfT9Match = QueryFilteringUtil.getIndexOfT9Substring(query, name, context);
+    if (indexOfT9Match != -1) {
       // query matches the start of a T9 name (i.e. 75 -> "Jessica [Jo]nes")
-      int index = matcher.start();
-      // TODO(calderwoodra): investigate why this is consistently off by one.
-      index = index == 0 ? 0 : index + 1;
-      return getBoldedString(name, index, query.length());
+      int numBolded = query.length();
 
+      // Bold an extra character for each non-letter
+      for (int i = indexOfT9Match; i <= indexOfT9Match + numBolded && i < name.length(); i++) {
+        if (!Character.isLetter(name.charAt(i))) {
+          numBolded++;
+        }
+      }
+      return getBoldedString(name, indexOfT9Match, numBolded);
     } else {
       // query match the T9 initials (i.e. 222 -> "[A]l [B]ob [C]harlie")
       return getNameWithInitialsBolded(query, name, context);
@@ -148,6 +153,12 @@ public class QueryBoldingUtil {
   }
 
   private static SpannableString getBoldedString(String s, int index, int numBolded) {
+    if (numBolded + index > s.length()) {
+      LogUtil.e(
+          "QueryBoldingUtil#getBoldedString",
+          "number of bolded characters exceeded length of string.");
+      numBolded = s.length() - index;
+    }
     SpannableString span = new SpannableString(s);
     span.setSpan(
         new StyleSpan(Typeface.BOLD), index, index + numBolded, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);

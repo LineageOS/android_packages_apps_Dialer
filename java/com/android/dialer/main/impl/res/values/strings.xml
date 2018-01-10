@@ -41,6 +41,8 @@
   <string name="tab_title_speed_dial">Speed Dial</string>
   <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
   <string name="tab_title_voicemail">Voicemail</string>
+  <!-- Tab text to show users their contacts  [CHAR LIMIT=10] -->
+  <string name="tab_title_contacts">Contacts</string>
 
   <!-- Show users their settings [CHAR LIMIT=20] -->
   <string name="settings">Settings</string>

@@ -29,6 +29,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
@@ -140,6 +141,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   private String childNumber;
   private String lastForwardedNumber;
+  private boolean isCallForwarded;
   private String callSubject;
   private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
@@ -294,6 +296,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             case TelephonyManagerCompat.EVENT_MERGE_COMPLETE:
               LogUtil.i("DialerCall.onConnectionEvent", "merge complete");
               isMergeInProcess = false;
+              break;
+            case TelephonyManagerCompat.EVENT_CALL_FORWARDED:
+              // Only handle this event for P+ since it's unreliable pre-P.
+              if (BuildCompat.isAtLeastP()) {
+                isCallForwarded = true;
+                update();
+              }
               break;
             default:
               break;
@@ -798,6 +807,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /** @return The last forwarded number for the call, or {@code null} if none specified. */
   public String getLastForwardedNumber() {
     return lastForwardedNumber;
+  }
+
+  public boolean isCallForwarded() {
+    return isCallForwarded;
   }
 
   /** @return The call subject, or {@code null} if none specified. */
@@ -1622,13 +1635,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     }
   }
 
-  private static class VideoTechManager {
+  /** Coordinates the available VideoTech implementations for a call. */
+  @VisibleForTesting
+  public static class VideoTechManager {
     private final Context context;
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
+    private final VideoTech rcsVideoShare;
     private final List<VideoTech> videoTechs;
     private VideoTech savedTech;
 
-    VideoTechManager(DialerCall call) {
+    @VisibleForTesting
+    public VideoTechManager(DialerCall call) {
       this.context = call.context;
 
       String phoneNumber = call.getNumber();
@@ -1640,40 +1657,47 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
       videoTechs.add(new ImsVideoTech(Logger.get(call.context), call, call.telecomCall));
 
-      VideoTech rcsVideoTech =
+      rcsVideoShare =
           EnrichedCallComponent.get(call.context)
               .getRcsVideoShareFactory()
               .newRcsVideoShare(
                   EnrichedCallComponent.get(call.context).getEnrichedCallManager(),
                   call,
                   phoneNumber);
-      if (rcsVideoTech != null) {
-        videoTechs.add(rcsVideoTech);
+      if (rcsVideoShare != null) {
+        videoTechs.add(rcsVideoShare);
       }
 
       videoTechs.add(
           new DuoVideoTech(
               DuoComponent.get(call.context).getDuo(), call, call.telecomCall, phoneNumber));
+
+      savedTech = emptyVideoTech;
     }
 
-    VideoTech getVideoTech() {
-      if (savedTech != null) {
-        return savedTech;
-      }
-
-      for (VideoTech tech : videoTechs) {
-        if (tech.isAvailable(context)) {
-          // Remember the first VideoTech that becomes available and always use it
-          savedTech = tech;
-          savedTech.becomePrimary();
-          return savedTech;
+    @VisibleForTesting
+    public VideoTech getVideoTech() {
+      if (savedTech == emptyVideoTech) {
+        for (VideoTech tech : videoTechs) {
+          if (tech.isAvailable(context)) {
+            savedTech = tech;
+            savedTech.becomePrimary();
+            break;
+          }
         }
+      } else if (savedTech instanceof DuoVideoTech && rcsVideoShare.isAvailable(context)) {
+        // RCS Video Share will become available after the capability exchange which is slower than
+        // Duo reading local contacts for reachability. If Video Share becomes available and we are
+        // not in the middle of any session changes, let it take over.
+        savedTech = rcsVideoShare;
+        rcsVideoShare.becomePrimary();
       }
 
-      return emptyVideoTech;
+      return savedTech;
     }
 
-    void dispatchCallStateChanged(int newState) {
+    @VisibleForTesting
+    public void dispatchCallStateChanged(int newState) {
       for (VideoTech videoTech : videoTechs) {
         videoTech.onCallStateChanged(context, newState);
       }

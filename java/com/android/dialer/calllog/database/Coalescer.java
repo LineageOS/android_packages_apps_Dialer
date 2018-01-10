@@ -80,40 +80,45 @@ public class Coalescer {
             CoalescedAnnotatedCallLog.ALL_COLUMNS,
             Assert.isNotNull(allAnnotatedCallLogRowsSortedByTimestampDesc).getCount());
 
-    if (allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
-      int coalescedRowId = 0;
+    if (!allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
+      return allCoalescedRowsMatrixCursor;
+    }
 
-      List<ContentValues> currentRowGroup = new ArrayList<>();
+    int coalescedRowId = 0;
+    List<ContentValues> currentRowGroup = new ArrayList<>();
 
-      do {
-        ContentValues currentRow =
-            cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
+    ContentValues firstRow = cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
+    currentRowGroup.add(firstRow);
 
-        if (currentRowGroup.isEmpty()) {
-          currentRowGroup.add(currentRow);
-          continue;
+    while (!currentRowGroup.isEmpty()) {
+      // Group consecutive rows
+      ContentValues firstRowInGroup = currentRowGroup.get(0);
+      ContentValues currentRow = null;
+      while (allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext()) {
+        currentRow = cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
+
+        if (!rowsShouldBeCombined(dialerPhoneNumberUtil, firstRowInGroup, currentRow)) {
+          break;
         }
 
-        ContentValues previousRow = currentRowGroup.get(currentRowGroup.size() - 1);
-
-        if (!rowsShouldBeCombined(dialerPhoneNumberUtil, previousRow, currentRow)) {
-          ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
-          coalescedRow.put(
-              CoalescedAnnotatedCallLog.COALESCED_IDS,
-              getCoalescedIds(currentRowGroup).toByteArray());
-          addContentValuesToMatrixCursor(
-              coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId++);
-          currentRowGroup.clear();
-        }
         currentRowGroup.add(currentRow);
-      } while (allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext());
+      }
 
-      // Deal with leftover rows.
+      // Coalesce the group into a single row
       ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
       coalescedRow.put(
           CoalescedAnnotatedCallLog.COALESCED_IDS, getCoalescedIds(currentRowGroup).toByteArray());
-      addContentValuesToMatrixCursor(coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId);
+      addContentValuesToMatrixCursor(coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId++);
+
+      // Clear the current group after the rows are coalesced.
+      currentRowGroup.clear();
+
+      // Add the first of the remaining rows to the current group.
+      if (!allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast()) {
+        currentRowGroup.add(currentRow);
+      }
     }
+
     return allCoalescedRowsMatrixCursor;
   }
 

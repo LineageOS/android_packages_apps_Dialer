@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="#FAFAFA"
+    android:elevation="3dp">
+  <ImageButton
+      android:id="@+id/rtt_back"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_alignParentStart="true"
+      android:layout_centerVertical="true"
+      android:background="@android:color/transparent"
+      android:contentDescription="@string/content_description_rtt_back_button"
+      android:src="@drawable/quantum_ic_close_vd_theme_24"
+      android:tint="#DF000000"/>
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="32dp"
+      android:layout_toEndOf="@id/rtt_back"
+      android:orientation="vertical">
+    <TextView
+        android:id="@+id/rtt_name_or_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.RttTitle"
+        tools:text="Bruce Graham"/>
+    <Chronometer
+        android:id="@+id/rtt_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.RttTimer"
+        tools:text="00:09"/>
+  </LinearLayout>
+  <ImageButton
+      android:id="@+id/rtt_hang_up_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:background="@android:color/transparent"
+      android:contentDescription="@string/incall_content_description_end_call"
+      android:src="@drawable/quantum_ic_call_end_vd_theme_24"
+      android:tint="#FFDF0000"/>
+  <ImageButton
+      android:id="@+id/rtt_speaker_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="24dp"
+      android:layout_centerVertical="true"
+      android:layout_toStartOf="@id/rtt_hang_up_button"
+      android:background="@android:color/transparent"
+      android:contentDescription="@string/incall_content_description_speaker"
+      android:src="@drawable/quantum_ic_volume_up_vd_theme_24"
+      android:tint="#DD000000"/>
+  <ImageButton
+      android:id="@+id/rtt_mic_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="24dp"
+      android:layout_centerVertical="true"
+      android:layout_toStartOf="@id/rtt_speaker_button"
+      android:background="@android:color/transparent"
+      android:contentDescription="@string/incall_content_description_unmuted"
+      android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
+      android:tint="#DD000000"/>
+
+</RelativeLayout>
