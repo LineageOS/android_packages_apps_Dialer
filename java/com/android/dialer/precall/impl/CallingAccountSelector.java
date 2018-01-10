@@ -175,6 +175,16 @@ public class CallingAccountSelector implements PreCallAction {
                 LogUtil.i(
                     "CallingAccountSelector.processPreferredAccount",
                     "SIM suggested: " + result.suggestion.get().reason);
+                if (result.suggestion.get().shouldAutoSelect) {
+                  Logger.get(coordinator.getActivity())
+                      .logImpression(
+                          DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
+                  LogUtil.i(
+                      "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
+                  builder.setPhoneAccountHandle(result.suggestion.get().phoneAccountHandle);
+                  pendingAction.finish();
+                  return;
+                }
               }
               showDialog(
                   coordinator,
