@@ -584,7 +584,7 @@ public final class PhoneLookupDataSource
         AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
         PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2Info().getIsIncomplete());
+        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2LocalInfo().getIsIncomplete());
   }
 
   private static Uri numberUri(String number) {
