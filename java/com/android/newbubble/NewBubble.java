@@ -40,8 +40,6 @@ import android.support.v4.graphics.ColorUtils;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.text.TextUtils;
-import android.transition.TransitionManager;
-import android.transition.TransitionValues;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,7 +47,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -59,7 +56,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.LogUtil;
@@ -84,13 +80,12 @@ public class NewBubble {
   // This class has some odd behavior that is not immediately obvious in order to avoid jank when
   // resizing. See http://go/bubble-resize for details.
 
-  // How long text should show after showText(CharSequence) is called
-  private static final int SHOW_TEXT_DURATION_MILLIS = 3000;
   // How long the new window should show before destroying the old one during resize operations.
   // This ensures the new window has had time to draw first.
   private static final int WINDOW_REDRAW_DELAY_MILLIS = 50;
 
   private static final int EXPAND_AND_COLLAPSE_ANIMATION_DURATION = 200;
+  private static final int HIDE_BUBBLE_ANIMATION_DURATION = 250;
 
   private static Boolean canShowBubblesForTesting = null;
 
@@ -110,33 +105,17 @@ public class NewBubble {
 
   @Visibility private int visibility;
   private boolean expanded;
-  private boolean textShowing;
-  private boolean hideAfterText;
   private CharSequence textAfterShow;
   private int collapseEndAction;
 
   ViewHolder viewHolder;
-  private ViewPropertyAnimator collapseAnimation;
+  private AnimatorSet collapseAnimatorSet;
   private Integer overrideGravity;
   @VisibleForTesting AnimatorSet exitAnimatorSet;
 
   private final int primaryIconMoveDistance;
   private final int leftBoundary;
   private int savedYPosition = -1;
-
-  private final Runnable collapseRunnable =
-      new Runnable() {
-        @Override
-        public void run() {
-          textShowing = false;
-          if (hideAfterText) {
-            // Always reset here since text shouldn't keep showing.
-            hideAndReset();
-          } else {
-            viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_AVATAR_AND_ICON);
-          }
-        }
-      };
 
   /** Type of action after bubble collapse */
   @Retention(RetentionPolicy.SOURCE)
@@ -309,7 +288,7 @@ public class NewBubble {
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   public void startCollapse(@CollapseEnd int endAction, boolean shouldRecoverYPosition) {
     View expandedView = viewHolder.getExpandedView();
-    if (expandedView.getVisibility() != View.VISIBLE || collapseAnimation != null) {
+    if (expandedView.getVisibility() != View.VISIBLE || collapseAnimatorSet != null) {
       // Drawer is already collapsed or animation is running.
       return;
     }
@@ -353,31 +332,26 @@ public class NewBubble {
     fadeOut.setInterpolator(accelerateDecelerateInterpolator);
 
     // Play all animation together
-    AnimatorSet collapseAnimatorSet = new AnimatorSet();
+    collapseAnimatorSet = new AnimatorSet();
     collapseAnimatorSet.setDuration(EXPAND_AND_COLLAPSE_ANIMATION_DURATION);
     collapseAnimatorSet.playTogether(revealAnim, fadeOut, xValueAnimator);
     collapseAnimatorSet.addListener(
         new AnimatorListenerAdapter() {
           @Override
           public void onAnimationEnd(Animator animation) {
-            collapseAnimation = null;
+            collapseAnimatorSet = null;
             expanded = false;
-
-            if (textShowing) {
-              // Will do resize once the text is done.
-              return;
-            }
-
-            // If this collapse was to come before a hide, do it now.
-            if (collapseEndAction == CollapseEnd.HIDE) {
-              hide();
-            }
-            collapseEndAction = CollapseEnd.NOTHING;
 
             // If collapse on the right side, the primary button move left a bit after drawer
             // visibility becoming GONE. To avoid it, we create a new ViewHolder.
             // It also set primary button clickable back to true, so no need to reset manually.
             replaceViewHolder();
+
+            // If this collapse was to come before a hide, do it now.
+            if (collapseEndAction == CollapseEnd.HIDE) {
+              hide();
+              collapseEndAction = CollapseEnd.NOTHING;
+            }
 
             // Resume normal gravity after any resizing is done.
             handler.postDelayed(
@@ -406,8 +380,6 @@ public class NewBubble {
     if (visibility == Visibility.SHOWING || visibility == Visibility.ENTERING) {
       return;
     }
-
-    hideAfterText = false;
 
     boolean isRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
@@ -489,10 +461,6 @@ public class NewBubble {
 
   /** Hide the bubble. */
   public void hide() {
-    if (hideAfterText) {
-      // hideAndReset() will be called after showing text, do nothing here.
-      return;
-    }
     hideHelper(this::defaultAfterHidingAnimation);
   }
 
@@ -564,76 +532,16 @@ public class NewBubble {
   }
 
   /**
-   * Display text in the main bubble. The bubble's drawer is not expandable while text is showing,
-   * and the drawer will be closed if already open.
+   * Display text. The bubble's drawer is not expandable while text is showing, and the drawer will
+   * be closed if already open.
    *
    * @param text the text to display to the user
    */
   public void showText(@NonNull CharSequence text) {
-    textShowing = true;
     if (expanded) {
       startCollapse(CollapseEnd.NOTHING, false /* shouldRecoverYPosition */);
-      doShowText(text);
-    } else {
-      // Need to transition from old bounds to new bounds manually
-      NewChangeOnScreenBounds transition = new NewChangeOnScreenBounds();
-      // Prepare and capture start values
-      TransitionValues startValues = new TransitionValues();
-      startValues.view = viewHolder.getPrimaryButton();
-      transition.addTarget(startValues.view);
-      transition.captureStartValues(startValues);
-
-      // If our view is not laid out yet, postpone showing the text.
-      if (startValues.values.isEmpty()) {
-        textAfterShow = text;
-        return;
-      }
-
-      doShowText(text);
-      // Hide the text so we can animate it in
-      viewHolder.getPrimaryText().setAlpha(0);
-
-      ViewAnimator primaryButton = viewHolder.getPrimaryButton();
-      // Cancel the automatic transition scheduled in doShowText
-      TransitionManager.endTransitions((ViewGroup) primaryButton.getParent());
-      primaryButton
-          .getViewTreeObserver()
-          .addOnPreDrawListener(
-              new OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                  primaryButton.getViewTreeObserver().removeOnPreDrawListener(this);
-
-                  // Prepare and capture end values, always use the size of primaryText since
-                  // its invisibility makes primaryButton smaller than expected
-                  TransitionValues endValues = new TransitionValues();
-                  endValues.values.put(
-                      NewChangeOnScreenBounds.PROPNAME_WIDTH,
-                      viewHolder.getPrimaryText().getWidth());
-                  endValues.values.put(
-                      NewChangeOnScreenBounds.PROPNAME_HEIGHT,
-                      viewHolder.getPrimaryText().getHeight());
-                  endValues.view = primaryButton;
-                  transition.addTarget(endValues.view);
-                  transition.captureEndValues(endValues);
-
-                  // animate the primary button bounds change
-                  Animator bounds =
-                      transition.createAnimator(primaryButton, startValues, endValues);
-
-                  // Animate the text in
-                  Animator alpha =
-                      ObjectAnimator.ofFloat(viewHolder.getPrimaryText(), View.ALPHA, 1f);
-
-                  AnimatorSet set = new AnimatorSet();
-                  set.play(bounds).before(alpha);
-                  set.start();
-                  return false;
-                }
-              });
     }
-    handler.removeCallbacks(collapseRunnable);
-    handler.postDelayed(collapseRunnable, SHOW_TEXT_DURATION_MILLIS);
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
   }
 
   @Nullable
@@ -662,9 +570,6 @@ public class NewBubble {
   }
 
   void primaryButtonClick() {
-    if (textShowing || currentInfo.getActions().isEmpty()) {
-      return;
-    }
     if (expanded) {
       logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_CLICK_TO_COLLAPSE);
       startCollapse(CollapseEnd.NOTHING, true /* shouldRecoverYPosition */);
@@ -702,12 +607,7 @@ public class NewBubble {
     // Make bubble non clickable to prevent further buggy actions
     viewHolder.setChildClickable(false);
 
-    if (textShowing) {
-      hideAfterText = true;
-      return;
-    }
-
-    if (collapseAnimation != null) {
+    if (collapseAnimatorSet != null) {
       collapseEndAction = CollapseEnd.HIDE;
       return;
     }
@@ -732,6 +632,7 @@ public class NewBubble {
     exitAnimatorSet.playTogether(
         scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
     exitAnimatorSet.setInterpolator(new AnticipateInterpolator());
+    exitAnimatorSet.setDuration(HIDE_BUBBLE_ANIMATION_DURATION);
     exitAnimatorSet.addListener(
         new AnimatorListenerAdapter() {
           @Override
@@ -795,13 +696,6 @@ public class NewBubble {
     configureButton(currentInfo.getActions().get(3), viewHolder.getEndCallButton());
   }
 
-  @VisibleForTesting
-  void doShowText(@NonNull CharSequence text) {
-    TransitionManager.beginDelayedTransition((ViewGroup) viewHolder.getPrimaryButton().getParent());
-    viewHolder.getPrimaryText().setText(text);
-    viewHolder.getPrimaryButton().setDisplayedChild(ViewHolder.CHILD_INDEX_TEXT);
-  }
-
   private void configureButton(Action action, NewCheckableButton button) {
     boolean isRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
@@ -844,7 +738,6 @@ public class NewBubble {
     viewHolder
         .getPrimaryButton()
         .setDisplayedChild(oldViewHolder.getPrimaryButton().getDisplayedChild());
-    viewHolder.getPrimaryText().setText(oldViewHolder.getPrimaryText().getText());
     viewHolder.getPrimaryIcon().setX(isDrawingFromRight() ? 0 : primaryIconMoveDistance);
     viewHolder
         .getPrimaryIcon()
@@ -889,16 +782,10 @@ public class NewBubble {
 
   void bottomActionEndCall() {
     logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_BOTTOM_ACTION_END_CALL);
-    // Hide without animation
-    hideHelper(
-        () -> {
-          defaultAfterHidingAnimation();
-          DialerCall call = getCall();
-          if (call != null) {
-            call.disconnect();
-            Toast.makeText(context, R.string.incall_call_ended, Toast.LENGTH_SHORT).show();
-          }
-        });
+    DialerCall call = getCall();
+    if (call != null) {
+      call.disconnect();
+    }
   }
 
   private boolean isDrawingFromRight() {
@@ -987,15 +874,11 @@ public class NewBubble {
   @VisibleForTesting
   class ViewHolder {
 
-    public static final int CHILD_INDEX_AVATAR_AND_ICON = 0;
-    public static final int CHILD_INDEX_TEXT = 1;
-
     private NewMoveHandler moveHandler;
     private final NewWindowRoot root;
     private final ViewAnimator primaryButton;
     private final ImageView primaryIcon;
     private final ImageView primaryAvatar;
-    private final TextView primaryText;
     private final View arrow;
 
     private final NewCheckableButton fullScreenButton;
@@ -1013,7 +896,6 @@ public class NewBubble {
       primaryButton = contentView.findViewById(R.id.bubble_button_primary);
       primaryAvatar = contentView.findViewById(R.id.bubble_icon_avatar);
       primaryIcon = contentView.findViewById(R.id.bubble_icon_primary);
-      primaryText = contentView.findViewById(R.id.bubble_text);
       arrow = contentView.findViewById(R.id.bubble_triangle);
 
       fullScreenButton = contentView.findViewById(R.id.bubble_button_full_screen);
@@ -1032,6 +914,15 @@ public class NewBubble {
           });
       root.setOnConfigurationChangedListener(
           (configuration) -> {
+            if (expanded) {
+              // Collapse immediately without animation
+              if (collapseAnimatorSet != null) {
+                collapseAnimatorSet.removeAllListeners();
+                collapseAnimatorSet.cancel();
+              }
+              setDrawerVisibility(View.GONE);
+              expanded = false;
+            }
             // The values in the current MoveHandler may be stale, so replace it. Then ensure the
             // Window is in bounds
             moveHandler = new NewMoveHandler(primaryButton, NewBubble.this);
@@ -1085,10 +976,6 @@ public class NewBubble {
 
     public ImageView getPrimaryAvatar() {
       return primaryAvatar;
-    }
-
-    public TextView getPrimaryText() {
-      return primaryText;
     }
 
     public View getExpandedView() {
