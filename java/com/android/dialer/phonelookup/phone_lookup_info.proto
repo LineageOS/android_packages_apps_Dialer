@@ -9,12 +9,12 @@ package com.android.dialer.phonelookup;
 
 // Contains information about a phone number, possibly from many sources.
 //
-// This message is organized into sub-messages where each sub-message
-// corresponds to an implementation of PhoneLookup. For example, the Cp2Info
-// corresponds to Cp2PhoneLookup class, and the Cp2PhoneLookup class alone is
-// responsible for populating its fields.
+// This message is organized into sub-message fields where each one corresponds
+// to an implementation of PhoneLookup. For example, field "cp2_local_info"
+// corresponds to class Cp2LocalPhoneLookup, and class Cp2LocalPhoneLookup
+// alone is responsible for populating it.
 message PhoneLookupInfo {
-  // Information about a PhoneNumber retrieved from CP2. Cp2PhoneLookup is
+  // Information about a PhoneNumber retrieved from CP2. Cp2LocalPhoneLookup is
   // responsible for populating the data in this message.
   message Cp2Info {
     // Information about a single local contact.
@@ -50,7 +50,7 @@ message PhoneLookupInfo {
     // log needs to query for the CP2 information at render time.
     optional bool is_incomplete = 2;
   }
-  optional Cp2Info cp2_info = 1;
+  optional Cp2Info cp2_local_info = 1;
 
   // Message for APDL, a lookup for the proprietary Google dialer.
   message ApdlInfo {
