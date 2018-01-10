@@ -139,7 +139,7 @@ public final class PhoneLookupSelector {
     // matches that of a Cp2 (local) contact, and PeopleApiInfo will not be used to display
     // information like name, photo, etc. We should not allow the user to report the number in this
     // case as the info displayed is not from the People API.
-    if (phoneLookupInfo.getCp2Info().getCp2ContactInfoCount() > 0) {
+    if (phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfoCount() > 0) {
       return false;
     }
 
@@ -155,8 +155,8 @@ public final class PhoneLookupSelector {
    */
   @Nullable
   private Cp2ContactInfo firstLocalContact(PhoneLookupInfo phoneLookupInfo) {
-    if (phoneLookupInfo.getCp2Info().getCp2ContactInfoCount() > 0) {
-      return phoneLookupInfo.getCp2Info().getCp2ContactInfo(0);
+    if (phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfoCount() > 0) {
+      return phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfo(0);
     }
     return null;
   }
