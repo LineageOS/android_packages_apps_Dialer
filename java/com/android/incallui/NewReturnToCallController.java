@@ -318,8 +318,10 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
         newReturnToCallController.onPhotoAvatarReceived(entry.photo);
       } else {
         DialerCall dialerCall = CallList.getInstance().getCallById(callId);
-        newReturnToCallController.onLetterTileAvatarReceived(
-            newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+        if (dialerCall != null) {
+          newReturnToCallController.onLetterTileAvatarReceived(
+              newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+        }
       }
     }
 
@@ -334,8 +336,10 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
         newReturnToCallController.onPhotoAvatarReceived(entry.photo);
       } else {
         DialerCall dialerCall = CallList.getInstance().getCallById(callId);
-        newReturnToCallController.onLetterTileAvatarReceived(
-            newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+        if (dialerCall != null) {
+          newReturnToCallController.onLetterTileAvatarReceived(
+              newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+        }
       }
     }
   }
