@@ -381,6 +381,8 @@ public class NewBubble {
       return;
     }
 
+    logBasicOrCallImpression(DialerImpression.Type.BUBBLE_V2_SHOW);
+
     boolean isRtl =
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
     if (windowParams == null) {
