@@ -185,6 +185,13 @@ public class AnnotatedCallLogContract {
      */
     String CAN_REPORT_AS_INVALID_NUMBER = "can_report_as_invalid_number";
 
+    /**
+     * True if the CP2 information is incomplete and needs to be queried at display time.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     */
+    String CP2_INFO_INCOMPLETE = "cp2_info_incomplete";
+
     String[] ALL_COMMON_COLUMNS =
         new String[] {
           _ID,
@@ -207,7 +214,8 @@ public class AnnotatedCallLogContract {
           IS_BUSINESS,
           IS_VOICEMAIL,
           CALL_TYPE,
-          CAN_REPORT_AS_INVALID_NUMBER
+          CAN_REPORT_AS_INVALID_NUMBER,
+          CP2_INFO_INCOMPLETE
         };
   }
 

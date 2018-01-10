@@ -66,16 +66,6 @@
             tools:backgroundTint="#FF0000AA"
             tools:src="@android:drawable/ic_btn_speak_now"/>
       </FrameLayout>
-      <TextView
-          android:id="@+id/bubble_text"
-          android:layout_width="wrap_content"
-          android:layout_height="@dimen/bubble_size"
-          android:paddingStart="@dimen/bubble_icon_padding"
-          android:paddingEnd="@dimen/bubble_icon_padding"
-          android:gravity="center"
-          android:minWidth="@dimen/bubble_size"
-          android:textAppearance="@style/TextAppearance.AppCompat"
-          tools:text="Call ended"/>
     </ViewAnimator>
   </RelativeLayout>
   <!-- The RelativeLayout below serves as boundary for @id/bubble_expanded_layout during animation -->
