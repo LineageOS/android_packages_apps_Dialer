@@ -34,6 +34,7 @@ import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.impl.CallLocationModule;
 import com.android.incallui.maps.impl.MapsModule;
+import com.android.incallui.speakeasy.StubSpeakEasyModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -49,20 +50,21 @@ import javax.inject.Singleton;
     CallLogModule.class,
     ContextModule.class,
     DialerExecutorModule.class,
+    MapsModule.class,
     PhoneLookupModule.class, // TODO(zachh): Module which uses APDL?
     PhoneNumberGeoUtilModule.class,
     PreCallModule.class,
-    StubSimSuggestionModule.class,
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StorageModule.class,
-    SystemStrictModeModule.class,
-    StubEnrichedCallModule.class,
-    MapsModule.class,
-    VoicemailModule.class,
     StubDuoModule.class,
+    StubEnrichedCallModule.class,
     StubFeedbackModule.class,
+    StubSimSuggestionModule.class,
     StubSpamModule.class,
+    StubSpeakEasyModule.class,
+    SystemStrictModeModule.class,
+    VoicemailModule.class,
   }
 )
 public interface GoogleStubDialerRootComponent extends BaseDialerRootComponent {}
