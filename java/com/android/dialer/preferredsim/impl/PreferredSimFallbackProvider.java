@@ -91,6 +91,16 @@ public class PreferredSimFallbackProvider extends ContentProvider {
   @Override
   public int delete(
       @NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+    checkWriteContactsPermission();
+
+    if (PreferredSimFallbackContract.CONTENT_URI.equals(uri)
+        && selection == null
+        && selectionArgs == null) {
+      return databaseHelper
+          .getWritableDatabase()
+          .delete(PreferredSimDatabaseHelper.TABLE, null, null);
+    }
+
     if (!TextUtils.equals(getContext().getPackageName(), getCallingPackage())) {
       throw new IllegalArgumentException("Unsupported operation");
     }
