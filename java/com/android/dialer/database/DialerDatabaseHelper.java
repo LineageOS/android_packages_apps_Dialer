@@ -61,7 +61,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    *   0-98   KitKat
    * </pre>
    */
-  public static final int DATABASE_VERSION = 10;
+  public static final int DATABASE_VERSION = 70011;
 
   public static final String DATABASE_NAME = "dialer.db";
 
@@ -251,9 +251,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       oldVersion = 8;
     }
 
-    if (oldVersion < 10) {
+    if (oldVersion < 70011) {
       db.execSQL("DROP TABLE IF EXISTS " + Tables.VOICEMAIL_ARCHIVE_TABLE);
-      oldVersion = 10;
+      oldVersion = 70011;
     }
 
     if (oldVersion != DATABASE_VERSION) {
