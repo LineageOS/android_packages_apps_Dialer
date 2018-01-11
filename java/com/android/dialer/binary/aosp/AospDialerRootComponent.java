@@ -34,6 +34,7 @@ import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
 import com.android.incallui.maps.stub.StubMapsModule;
+import com.android.incallui.speakeasy.StubSpeakEasyModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -51,15 +52,16 @@ import javax.inject.Singleton;
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StorageModule.class,
-    SystemStrictModeModule.class,
     StubCallLocationModule.class,
     StubDuoModule.class,
     StubEnrichedCallModule.class,
-    StubMapsModule.class,
-    VoicemailModule.class,
-    StubSimSuggestionModule.class,
     StubFeedbackModule.class,
+    StubMapsModule.class,
+    StubSimSuggestionModule.class,
     StubSpamModule.class,
+    StubSpeakEasyModule.class,
+    SystemStrictModeModule.class,
+    VoicemailModule.class,
   }
 )
 public interface AospDialerRootComponent extends BaseDialerRootComponent {}
