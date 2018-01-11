@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <!-- Content description for the fake action menu up button as used
+ inside search. [CHAR LIMIT=NONE] -->
+  <string name="action_menu_back_from_search">stop searching</string>
+
+  <!--  String describing the icon used to clear the search field -->
+  <string name="description_clear_search">Clear search</string>
+
+  <!-- Content description for the fake action menu overflow button.
+       This should be same as the description for the real action menu
+       overflow button available in ActionBar.
+       [CHAR LIMIT=NONE] -->
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">More options</string>
+
+  <!-- String describing the icon used to start a voice search -->
+  <string name="description_start_voice_search">Start voice search</string>
+
+  <!-- Hint displayed in dialer search box when there is no query that is currently typed.
+       [CHAR LIMIT=30] -->
+  <string name="dialer_hint_find_contact">Search contacts</string>
+
+  <!-- Show users their settings [CHAR LIMIT=20] -->
+  <string name="settings">Settings</string>
+  <!-- Send feedback about the app [CHAR LIMIT=20] -->
+  <string name="main_send_feedback">Send feedback</string>
+</resources>
