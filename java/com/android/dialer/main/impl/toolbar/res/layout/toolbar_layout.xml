@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<com.android.dialer.main.impl.toolbar.MainToolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@color/dialer_theme_color"
+    app:contentInsetStart="0dp"
+    app:contentInsetEnd="0dp"
+    app:theme="@style/ThemeOverlay.AppCompat.Light">
+
+  <com.android.dialer.main.impl.toolbar.SearchBarView
+      android:id="@+id/search_view_container"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@drawable/rounded_corner"
+      android:elevation="4dp"
+      android:theme="@style/Theme.AppCompat.Light">
+
+    <RelativeLayout
+      android:id="@+id/search_box_collapsed"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="?android:selectableItemBackground"
+      android:gravity="center_vertical">
+
+      <ImageView
+          android:id="@+id/search_magnifying_glass"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:layout_marginStart="8dp"
+          android:layout_centerVertical="true"
+          android:importantForAccessibility="no"
+          android:scaleType="center"
+          android:src="@drawable/quantum_ic_search_vd_theme_24"
+          android:tint="@color/dialer_secondary_text_color"/>
+
+      <TextView
+          android:id="@+id/search_box_start_search"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_toEndOf="@+id/search_magnifying_glass"
+          android:layout_toStartOf="@+id/voice_search_button"
+          android:layout_marginStart="8dp"
+          android:fontFamily="sans-serif"
+          android:gravity="center_vertical"
+          android:hint="@string/dialer_hint_find_contact"
+          android:textColorHint="@color/dialer_secondary_text_color"
+          android:textSize="16dp"/>
+
+      <ImageView
+          android:id="@+id/voice_search_button"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:layout_toStartOf="@+id/main_options_menu_button"
+          android:background="?android:attr/selectableItemBackgroundBorderless"
+          android:contentDescription="@string/description_start_voice_search"
+          android:scaleType="center"
+          android:src="@drawable/quantum_ic_mic_vd_theme_24"
+          android:tint="@color/dialer_secondary_text_color"/>
+
+      <ImageButton
+          android:id="@+id/main_options_menu_button"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:layout_alignParentEnd="true"
+          android:background="?android:attr/selectableItemBackgroundBorderless"
+          android:contentDescription="@string/action_menu_overflow_description"
+          android:scaleType="center"
+          android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
+          android:tint="@color/dialer_secondary_text_color"/>
+    </RelativeLayout>
+
+    <include layout="@layout/expanded_search_bar"/>
+  </com.android.dialer.main.impl.toolbar.SearchBarView>
+</com.android.dialer.main.impl.toolbar.MainToolbar>

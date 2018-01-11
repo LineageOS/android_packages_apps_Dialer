@@ -36,6 +36,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.lettertile \
 	com.android.dialer.location \
 	com.android.dialer.main.impl \
+	com.android.dialer.main.impl.toolbar \
 	com.android.dialer.notification \
 	com.android.dialer.oem \
 	com.android.dialer.phonelookup.database \

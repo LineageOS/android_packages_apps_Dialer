@@ -142,7 +142,12 @@ public final class NewCallLogFragment extends Fragment
                   ? refreshAnnotatedCallLogWorker.refreshWithDirtyCheck()
                   : refreshAnnotatedCallLogWorker.refreshWithoutDirtyCheck();
           refreshAnnotatedCallLogListener.listen(
-              getContext(), future, unused -> {}, RuntimeException::new);
+              getContext(),
+              future,
+              unused -> {},
+              throwable -> {
+                throw new RuntimeException(throwable);
+              });
         };
     ThreadUtil.getUiThreadHandler().postDelayed(refreshAnnotatedCallLogRunnable, WAIT_MILLIS);
   }
@@ -171,7 +176,8 @@ public final class NewCallLogFragment extends Fragment
     }
     // TODO(zachh): Handle empty cursor by showing empty view.
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(new NewCallLogAdapter(newCursor, System::currentTimeMillis));
+    recyclerView.setAdapter(
+        new NewCallLogAdapter(getContext(), newCursor, System::currentTimeMillis));
   }
 
   @Override

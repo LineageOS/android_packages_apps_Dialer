@@ -40,6 +40,7 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomCallUtil;
@@ -51,6 +52,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +63,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for local contacts. */
-public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
+public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =
       "cp2PhoneLookupLastTimestampProcessed";
@@ -117,7 +119,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
   @Nullable private Long currentLastTimestampProcessed;
 
   @Inject
-  Cp2PhoneLookup(
+  Cp2LocalPhoneLookup(
       @ApplicationContext Context appContext,
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
@@ -147,7 +149,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
             ? queryPhoneTableBasedOnE164(PHONE_PROJECTION, ImmutableSet.of(e164.get()))
             : queryPhoneLookup(PHONE_LOOKUP_PROJECTION, rawNumber)) {
       if (cursor == null) {
-        LogUtil.w("Cp2PhoneLookup.lookupInternal", "null cursor");
+        LogUtil.w("Cp2LocalPhoneLookup.lookupInternal", "null cursor");
         return Cp2Info.getDefaultInstance();
       }
       while (cursor.moveToNext()) {
@@ -155,6 +157,34 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
       }
     }
     return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
+  }
+
+  /**
+   * Queries ContactsContract.PhoneLookup for the {@link Cp2Info} associated with the provided
+   * {@link DialerPhoneNumber}. Returns {@link Cp2Info#getDefaultInstance()} if there is no
+   * information.
+   */
+  public ListenableFuture<Cp2Info> lookupByNumber(DialerPhoneNumber dialerPhoneNumber) {
+    return backgroundExecutorService.submit(
+        () -> {
+          DialerPhoneNumberUtil dialerPhoneNumberUtil =
+              new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+          String rawNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+          if (rawNumber.isEmpty()) {
+            return Cp2Info.getDefaultInstance();
+          }
+          Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
+          try (Cursor cursor = queryPhoneLookup(PHONE_LOOKUP_PROJECTION, rawNumber)) {
+            if (cursor == null) {
+              LogUtil.w("Cp2LocalPhoneLookup.lookup", "null cursor");
+              return Cp2Info.getDefaultInstance();
+            }
+            while (cursor.moveToNext()) {
+              cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+            }
+          }
+          return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
+        });
   }
 
   @Override
@@ -181,6 +211,8 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
               anyContactsDeletedFuture,
               anyContactsDeleted -> {
                 if (anyContactsDeleted) {
+                  LogUtil.v(
+                      "Cp2LocalPhoneLookup.isDirty", "returning true because contacts deleted");
                   return Futures.immediateFuture(true);
                 }
                 // Hopefully the most common case is there are no contacts updated; we can detect
@@ -191,6 +223,9 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                     noContactsModifiedSinceFuture,
                     noContactsModifiedSince -> {
                       if (noContactsModifiedSince) {
+                        LogUtil.v(
+                            "Cp2LocalPhoneLookup.isDirty",
+                            "returning false because no contacts modified since last run");
                         return Futures.immediateFuture(false);
                       }
                       // This method is more expensive but is probably the most likely scenario; we
@@ -206,6 +241,9 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                           contactsUpdatedFuture,
                           contactsUpdated -> {
                             if (contactsUpdated) {
+                              LogUtil.v(
+                                  "Cp2LocalPhoneLookup.isDirty",
+                                  "returning true because a previously called contact was updated");
                               return Futures.immediateFuture(true);
                             }
                             // This is the most expensive method so do it last; the scenario is that
@@ -278,7 +316,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                       null)) {
 
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.queryPhoneLookupHistoryForContactIds", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.queryPhoneLookupHistoryForContactIds", "null cursor");
               return contactIds;
             }
 
@@ -293,7 +331,8 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                 } catch (InvalidProtocolBufferException e) {
                   throw new IllegalStateException(e);
                 }
-                for (Cp2ContactInfo info : phoneLookupInfo.getCp2Info().getCp2ContactInfoList()) {
+                for (Cp2ContactInfo info :
+                    phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfoList()) {
                   contactIds.add(info.getContactId());
                 }
               } while (cursor.moveToNext());
@@ -314,7 +353,8 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
           try (Cursor cursor =
               queryPhoneTableBasedOnE164(new String[] {Phone.CONTACT_ID}, validE164Numbers)) {
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.queryPhoneTableForContactIdsBasedOnE164", "null cursor");
+              LogUtil.w(
+                  "Cp2LocalPhoneLookup.queryPhoneTableForContactIdsBasedOnE164", "null cursor");
               return contactIds;
             }
             while (cursor.moveToNext()) {
@@ -327,16 +367,17 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
 
   private ListenableFuture<Set<Long>> queryPhoneLookupTableForContactIdsBasedOnRawNumber(
       String rawNumber) {
+    if (TextUtils.isEmpty(rawNumber)) {
+      return Futures.immediateFuture(new ArraySet<>());
+    }
     return backgroundExecutorService.submit(
         () -> {
           Set<Long> contactIds = new ArraySet<>();
           try (Cursor cursor =
-              queryPhoneLookup(
-                  new String[] {android.provider.ContactsContract.PhoneLookup.CONTACT_ID},
-                  rawNumber)) {
+              queryPhoneLookup(new String[] {ContactsContract.PhoneLookup.CONTACT_ID}, rawNumber)) {
             if (cursor == null) {
               LogUtil.w(
-                  "Cp2PhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
+                  "Cp2LocalPhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
                   "null cursor");
               return contactIds;
             }
@@ -399,7 +440,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                       new String[] {Long.toString(lastModified)},
                       Contacts._ID + " limit 1")) {
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.noContactsModifiedSince", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.noContactsModifiedSince", "null cursor");
               return false;
             }
             return cursor.getCount() == 0;
@@ -421,7 +462,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
                       new String[] {Long.toString(lastModified)},
                       DeletedContacts.CONTACT_DELETED_TIMESTAMP + " limit 1")) {
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.anyContactsDeletedSince", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.anyContactsDeletedSince", "null cursor");
               return false;
             }
             return cursor.getCount() > 0;
@@ -431,12 +472,12 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
 
   @Override
   public void setSubMessage(PhoneLookupInfo.Builder destination, Cp2Info subMessage) {
-    destination.setCp2Info(subMessage);
+    destination.setCp2LocalInfo(subMessage);
   }
 
   @Override
   public Cp2Info getSubMessage(PhoneLookupInfo phoneLookupInfo) {
-    return phoneLookupInfo.getCp2Info();
+    return phoneLookupInfo.getCp2LocalInfo();
   }
 
   @Override
@@ -728,7 +769,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
           }
           try (Cursor cursor = queryPhoneTableBasedOnE164(PHONE_PROJECTION, e164Numbers)) {
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.batchQueryForValidNumbers", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.batchQueryForValidNumbers", "null cursor");
             } else {
               while (cursor.moveToNext()) {
                 String e164Number = cursor.getString(CP2_INFO_NORMALIZED_NUMBER_INDEX);
@@ -755,7 +796,7 @@ public final class Cp2PhoneLookup implements PhoneLookup<Cp2Info> {
           }
           try (Cursor cursor = queryPhoneLookup(PHONE_LOOKUP_PROJECTION, invalidNumber)) {
             if (cursor == null) {
-              LogUtil.w("Cp2PhoneLookup.individualQueryForInvalidNumber", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.individualQueryForInvalidNumber", "null cursor");
             } else {
               while (cursor.moveToNext()) {
                 cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));

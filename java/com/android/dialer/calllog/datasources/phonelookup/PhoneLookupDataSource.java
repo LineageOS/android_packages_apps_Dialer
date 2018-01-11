@@ -276,6 +276,7 @@ public final class PhoneLookupDataSource
         .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
         .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
         .useMostRecentInt(AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER)
+        .useMostRecentInt(AnnotatedCallLog.CP2_INFO_INCOMPLETE)
         .combine();
   }
 
@@ -402,6 +403,7 @@ public final class PhoneLookupDataSource
     return idsByNumber;
   }
 
+  /** Returned map must have same keys as {@code uniqueDialerPhoneNumbers} */
   private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> queryPhoneLookupHistoryForNumbers(
       Context appContext, Set<DialerPhoneNumber> uniqueDialerPhoneNumbers) {
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
@@ -430,13 +432,9 @@ public final class PhoneLookupDataSource
                 selection,
                 normalizedNumbers,
                 null)) {
-
       if (cursor == null) {
         LogUtil.e("PhoneLookupDataSource.queryPhoneLookupHistoryForNumbers", "null cursor");
-        return ImmutableMap.of();
-      }
-
-      if (cursor.moveToFirst()) {
+      } else if (cursor.moveToFirst()) {
         int normalizedNumberColumn =
             cursor.getColumnIndexOrThrow(PhoneLookupHistory.NORMALIZED_NUMBER);
         int phoneLookupInfoColumn =
@@ -582,6 +580,8 @@ public final class PhoneLookupDataSource
     contentValues.put(
         AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
         PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
+    contentValues.put(
+        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2LocalInfo().getIsIncomplete());
   }
 
   private static Uri numberUri(String number) {

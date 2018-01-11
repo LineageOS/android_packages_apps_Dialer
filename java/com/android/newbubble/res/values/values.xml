@@ -26,8 +26,8 @@
   <dimen name="bubble_button_padding_horizontal">16dp</dimen>
 
   <dimen name="bubble_off_screen_size_horizontal">-4dp</dimen>
-  <!-- 64dp - 16dp(bubble_shadow_padding_size_vertical) -->
-  <dimen name="bubble_safe_margin_vertical">48dp</dimen>
+  <!-- 36dp - 16dp(bubble_shadow_padding_size_vertical) -->
+  <dimen name="bubble_safe_margin_vertical">20dp</dimen>
 
   <dimen name="bubble_shadow_padding_size_vertical">16dp</dimen>
   <dimen name="bubble_shadow_padding_size_vertical_minus">-16dp</dimen>
@@ -42,5 +42,6 @@
   <dimen name="bubble_small_icon_size">24dp</dimen>
   <dimen name="bubble_small_icon_padding">4dp</dimen>
 
-  <dimen name="bubble_bottom_action_view_height">180dp</dimen>
+  <dimen name="bubble_bottom_action_view_height">124dp</dimen>
+  <dimen name="bubble_bottom_action_text_offset">28dp</dimen>
 </resources>
