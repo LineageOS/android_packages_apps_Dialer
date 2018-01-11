@@ -38,4 +38,7 @@
   <dimen name="voicemail_media_player_width">0dp</dimen>
 
   <dimen name="voicemail_header_margin_start">16dp</dimen>
+
+  <dimen name="voicemail_tos_image_size">280dp</dimen>
+
 </resources>
