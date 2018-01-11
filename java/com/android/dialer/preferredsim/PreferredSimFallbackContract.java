@@ -24,9 +24,11 @@ import com.android.dialer.constants.Constants;
 
 /**
  * Extend fields for preferred SIM that is not available in {@link
- * android.provider.ContactsContract.Data} before P. Only query and update is supported for this
- * provider, and the update selection must be {@link PreferredSim#UPDATE_ID_SELECTION}. Caller must
- * have {@link android.Manifest.permission#READ_CONTACTS} to read or {@link
+ * android.provider.ContactsContract.Data} before P. Insert is not supported for this provider. The
+ * update selection must be "data_id = ?". Delete is only supported directly on {@link #CONTENT_URI}
+ * with {@code null} selection, which clears all preferences.
+ *
+ * <p>Caller must have {@link android.Manifest.permission#READ_CONTACTS} to read or {@link
  * android.Manifest.permission#WRITE_CONTACTS} to write.
  */
 public final class PreferredSimFallbackContract {
