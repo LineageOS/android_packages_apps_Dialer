@@ -15,12 +15,13 @@
  ~ limitations under the License
  -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="12dp"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="8dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
   <QuickContactBadge
       android:id="@+id/quick_contact_photo"
@@ -32,22 +33,22 @@
       android:focusable="true"/>
 
   <LinearLayout
-      android:orientation="vertical"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="center_vertical">
+      android:gravity="center_vertical"
+      android:orientation="vertical">
 
     <TextView
         android:id="@+id/primary_text"
+        style="@style/PrimaryText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/PrimaryText"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/secondary_text"
+        style="@style/SecondaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        style="@style/SecondaryText"/>
+        android:layout_marginTop="2dp"/>
   </LinearLayout>
 </LinearLayout>
