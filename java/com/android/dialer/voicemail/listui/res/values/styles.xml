@@ -22,4 +22,26 @@
     <item name="android:layout_height">@dimen/voicemail_media_player_height</item>
     <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
   </style>
+
+  <style name="TosTitleStyle">
+    <item name="android:textColor">@color/primary_text_color</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:fontFamily">"sans-serif-medium"</item>
+  </style>
+
+  <style name="TosTextStyle">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">@color/dialer_primary_text_color</item>
+    <item name="android:fontFamily">"sans-serif-regular"</item>
+    <item name="android:lineSpacingExtra">8sp</item>
+  </style>
+
+  <style name="TosButtonStyle" parent="Widget.AppCompat.Button.Borderless">
+    <item name="android:gravity">end|center_vertical</item>
+    <item name="android:layout_marginStart">8dp</item>
+    <item name="android:layout_marginEnd">8dp</item>
+    <item name="android:padding">8dp</item>
+    <item name="android:minHeight">48dp</item>
+  </style>
+
 </resources>
