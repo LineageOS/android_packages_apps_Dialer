@@ -34,6 +34,7 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +89,18 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     List<ListenableFuture<Boolean>> futures = new ArrayList<>();
     for (PhoneLookup<?> phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.isDirty(phoneNumbers));
+      futures.add(
+          Futures.transform(
+              phoneLookup.isDirty(phoneNumbers),
+              isDirty -> {
+                LogUtil.v(
+                    "CompositePhoneLookup.isDirty",
+                    "isDirty for %s: %b",
+                    phoneLookup.getClass().getSimpleName(),
+                    isDirty);
+                return isDirty;
+              },
+              MoreExecutors.directExecutor()));
     }
     // Executes all child lookups (possibly in parallel), completing when the first composite lookup
     // which returns "true" completes, and cancels the others.

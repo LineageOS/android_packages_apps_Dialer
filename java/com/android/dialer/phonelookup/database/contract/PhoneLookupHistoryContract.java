@@ -30,9 +30,19 @@ public class PhoneLookupHistoryContract {
 
     public static final String TABLE = "PhoneLookupHistory";
 
+    public static final String NUMBER_QUERY_PARAM = "number";
+
     /** The content URI for this table. */
     public static final Uri CONTENT_URI =
         Uri.withAppendedPath(PhoneLookupHistoryContract.CONTENT_URI, TABLE);
+
+    /** Returns a URI for a specific normalized number */
+    public static Uri contentUriForNumber(String normalizedNumber) {
+      return CONTENT_URI
+          .buildUpon()
+          .appendQueryParameter(NUMBER_QUERY_PARAM, Uri.encode(normalizedNumber))
+          .build();
+    }
 
     /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/phone_lookup_history";

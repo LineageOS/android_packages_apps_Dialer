@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
@@ -268,12 +267,16 @@ public final class PhoneLookupDataSource
       contentValues.put(PhoneLookupHistory.PHONE_LOOKUP_INFO, phoneLookupInfo.toByteArray());
       contentValues.put(PhoneLookupHistory.LAST_MODIFIED, currentTimestamp);
       operations.add(
-          ContentProviderOperation.newUpdate(numberUri(normalizedNumber))
+          ContentProviderOperation.newUpdate(
+                  PhoneLookupHistory.contentUriForNumber(normalizedNumber))
               .withValues(contentValues)
               .build());
     }
     for (String normalizedNumber : phoneLookupHistoryRowsToDelete) {
-      operations.add(ContentProviderOperation.newDelete(numberUri(normalizedNumber)).build());
+      operations.add(
+          ContentProviderOperation.newDelete(
+                  PhoneLookupHistory.contentUriForNumber(normalizedNumber))
+              .build());
     }
     appContext.getContentResolver().applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations);
     return null;
@@ -595,9 +598,5 @@ public final class PhoneLookupDataSource
         PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
     contentValues.put(
         AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2LocalInfo().getIsIncomplete());
-  }
-
-  private static Uri numberUri(String number) {
-    return PhoneLookupHistory.CONTENT_URI.buildUpon().appendEncodedPath(number).build();
   }
 }
