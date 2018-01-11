@@ -35,6 +35,7 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
+import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -58,7 +59,8 @@ public interface BaseDialerRootComponent
         PreCallComponent.HasComponent,
         SimSuggestionComponent.HasComponent,
         SimulatorComponent.HasComponent,
+        SpamComponent.HasComponent,
+        SpeakEasyComponent.HasComponent,
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
-        VoicemailComponent.HasComponent,
-        SpamComponent.HasComponent {}
+        VoicemailComponent.HasComponent {}
