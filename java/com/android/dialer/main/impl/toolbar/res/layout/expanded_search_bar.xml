@@ -17,14 +17,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_box_expanded"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="gone">
+    android:layout_height="wrap_content"
+    android:visibility="invisible">
 
   <ImageButton
       android:id="@+id/search_back_button"
       android:layout_width="48dp"
       android:layout_height="48dp"
-      android:layout_marginStart="16dp"
+      android:layout_marginStart="8dp"
       android:layout_centerVertical="true"
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/action_menu_back_from_search"
@@ -39,17 +39,19 @@
       android:layout_toStartOf="@+id/search_close_button"
       android:layout_centerVertical="true"
       android:layout_marginStart="8dp"
+      android:minHeight="48dp"
       android:background="@null"
       android:imeOptions="flagNoExtractUi"
       android:inputType="textFilter"
       android:maxLines="1"
+      android:hint="@string/dialer_hint_find_contact"
       android:textColor="@color/dialer_secondary_text_color"
       android:textColorHint="@color/dialer_edit_text_hint_color"
       android:textCursorDrawable="@drawable/custom_cursor"
       android:textSize="16sp"/>
 
   <ImageView
-      android:id="@+id/search_close_button"
+      android:id="@+id/search_clear_button"
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_alignParentEnd="true"
@@ -58,5 +60,6 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/description_clear_search"
       android:src="@drawable/quantum_ic_close_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="@color/dialer_secondary_text_color"
+      android:visibility="gone"/>
 </RelativeLayout>
