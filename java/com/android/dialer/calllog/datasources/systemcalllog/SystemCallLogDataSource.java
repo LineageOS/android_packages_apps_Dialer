@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
+import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
@@ -249,7 +250,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.PHONE_ACCOUNT_ID,
                   Calls.FEATURES
                 },
-                Calls.LAST_MODIFIED + " > ?",
+                Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
                 new String[] {String.valueOf(previousTimestampProcessed)},
                 Calls.LAST_MODIFIED + " DESC LIMIT 1000")) {
 
