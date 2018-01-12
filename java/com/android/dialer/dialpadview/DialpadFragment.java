@@ -26,6 +26,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -60,6 +61,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -74,6 +78,7 @@ import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
@@ -89,6 +94,7 @@ import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
 import com.google.common.base.Ascii;
 import com.google.common.base.Optional;
@@ -177,7 +183,11 @@ public class DialpadFragment extends Fragment
   private boolean firstLaunch = false;
   private boolean animate = false;
 
+  private boolean isLayoutRtl;
+  private boolean isLandscape;
+
   private DialerExecutor<String> initPhoneNumberFormattingTextWatcherExecutor;
+  private boolean isDialpadSlideUp;
 
   /**
    * Determines whether an add call operation is requested.
@@ -424,6 +434,14 @@ public class DialpadFragment extends Fragment
     Trace.endSection();
     Trace.endSection();
     return fragmentView;
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    isLayoutRtl = ViewUtil.isRtl();
+    isLandscape =
+        getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   }
 
   private String getCurrentCountryIso() {
@@ -1506,6 +1524,44 @@ public class DialpadFragment extends Fragment
         pseudoEmergencyAnimator.end();
       }
     }
+  }
+
+  /** Animate the dialpad down off the screen. */
+  public void slideDown(boolean animate, AnimationListener listener) {
+    Assert.checkArgument(isDialpadSlideUp);
+    isDialpadSlideUp = false;
+    int animation;
+    if (isLandscape) {
+      animation = isLayoutRtl ? R.anim.dialpad_slide_out_left : R.anim.dialpad_slide_out_right;
+    } else {
+      animation = R.anim.dialpad_slide_out_bottom;
+    }
+    Animation slideDown = AnimationUtils.loadAnimation(getContext(), animation);
+    slideDown.setInterpolator(AnimUtils.EASE_OUT);
+    slideDown.setAnimationListener(listener);
+    slideDown.setDuration(animate ? dialpadSlideInDuration : 0);
+    getView().startAnimation(slideDown);
+  }
+
+  /** Animate the dialpad up onto the screen. */
+  public void slideUp(boolean animate) {
+    Assert.checkArgument(!isDialpadSlideUp);
+    isDialpadSlideUp = true;
+    int animation;
+    if (isLandscape) {
+      animation = isLayoutRtl ? R.anim.dialpad_slide_in_left : R.anim.dialpad_slide_in_right;
+    } else {
+      animation = R.anim.dialpad_slide_in_bottom;
+    }
+    Animation slideUp = AnimationUtils.loadAnimation(getContext(), animation);
+    slideUp.setInterpolator(AnimUtils.EASE_IN);
+    slideUp.setDuration(animate ? dialpadSlideInDuration : 0);
+    getView().startAnimation(slideUp);
+  }
+
+  /** Returns the text in the dialpad */
+  public String getQuery() {
+    return digits.getText().toString();
   }
 
   public interface OnDialpadQueryChangedListener {
