@@ -38,12 +38,12 @@ final class PrimaryAction {
         .setNumber(voicemailEntry.number())
         .setPhotoInfo(
             PhotoInfo.builder()
-                .setPhotoId(voicemailEntry.photoId())
-                .setPhotoUri(voicemailEntry.photoUri())
+                .setPhotoId(voicemailEntry.numberAttributes().getPhotoId())
+                .setPhotoUri(voicemailEntry.numberAttributes().getPhotoUri())
                 .setIsVideo(false)
                 .setContactType(
                     LetterTileDrawable.TYPE_DEFAULT) // TODO(uabdullah): Use proper type.
-                .setDisplayName(voicemailEntry.name())
+                .setDisplayName(voicemailEntry.numberAttributes().getName())
                 .build())
         .setPrimaryText(buildPrimaryVoicemailText(context, voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))
@@ -56,8 +56,8 @@ final class PrimaryAction {
 
   public static String buildPrimaryVoicemailText(Context context, VoicemailEntry data) {
     StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(data.name())) {
-      primaryText.append(data.name());
+    if (!TextUtils.isEmpty(data.numberAttributes().getName())) {
+      primaryText.append(data.numberAttributes().getName());
     } else if (!TextUtils.isEmpty(data.formattedNumber())) {
       primaryText.append(data.formattedNumber());
     } else {

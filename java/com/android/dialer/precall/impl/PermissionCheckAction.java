@@ -21,14 +21,14 @@ import android.widget.Toast;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
-import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.telecom.TelecomUtil;
 
 /** Aborts call and show a toast if phone permissions are missing. */
 public class PermissionCheckAction implements PreCallAction {
 
   @Override
   public boolean requiresUi(Context context, CallIntentBuilder builder) {
-    return !PermissionsUtil.hasPhonePermissions(context);
+    return !TelecomUtil.hasCallPhonePermission(context);
   }
 
   @Override
