@@ -19,6 +19,7 @@ package com.android.dialer.voicemail.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.google.auto.value.AutoValue;
 
 /** Data class containing the contents of a voicemail entry from the AnnotatedCallLog. */
@@ -30,7 +31,7 @@ public abstract class VoicemailEntry {
         .setId(0)
         .setTimestamp(0)
         .setNumber(DialerPhoneNumber.getDefaultInstance())
-        .setPhotoId(0)
+        .setNumberAttributes(NumberAttributes.getDefaultInstance())
         .setDuration(0)
         .setCallType(0)
         .setIsRead(0);
@@ -43,19 +44,9 @@ public abstract class VoicemailEntry {
   @NonNull
   public abstract DialerPhoneNumber number();
 
-  @Nullable
-  public abstract String name();
 
   @Nullable
   public abstract String formattedNumber();
-
-  @Nullable
-  public abstract String photoUri();
-
-  public abstract long photoId();
-
-  @Nullable
-  public abstract String lookupUri();
 
   @Nullable
   public abstract String geocodedLocation();
@@ -72,6 +63,8 @@ public abstract class VoicemailEntry {
 
   public abstract int isRead();
 
+  public abstract NumberAttributes numberAttributes();
+
   /** Builder for {@link VoicemailEntry}. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -82,15 +75,7 @@ public abstract class VoicemailEntry {
 
     public abstract Builder setNumber(@NonNull DialerPhoneNumber number);
 
-    public abstract Builder setName(@Nullable String name);
-
     public abstract Builder setFormattedNumber(@Nullable String formattedNumber);
-
-    public abstract Builder setPhotoUri(@Nullable String photoUri);
-
-    public abstract Builder setPhotoId(long photoId);
-
-    public abstract Builder setLookupUri(@Nullable String lookupUri);
 
     public abstract Builder setDuration(long duration);
 
@@ -103,6 +88,8 @@ public abstract class VoicemailEntry {
     public abstract Builder setCallType(int callType);
 
     public abstract Builder setIsRead(int isRead);
+
+    public abstract Builder setNumberAttributes(NumberAttributes numberAttributes);
 
     public abstract VoicemailEntry build();
   }

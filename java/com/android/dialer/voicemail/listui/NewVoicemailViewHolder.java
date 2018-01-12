@@ -27,6 +27,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -205,11 +206,16 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             quickContactBadge,
-            voicemailEntry.lookupUri() == null ? null : Uri.parse(voicemailEntry.lookupUri()),
-            voicemailEntry.photoId(),
-            voicemailEntry.photoUri() == null ? null : Uri.parse(voicemailEntry.photoUri()),
-            voicemailEntry.name(),
+            parseUri(voicemailEntry.numberAttributes().getLookupUri()),
+            voicemailEntry.numberAttributes().getPhotoId(),
+            parseUri(voicemailEntry.numberAttributes().getPhotoUri()),
+            VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry),
             LetterTileDrawable.TYPE_DEFAULT);
+  }
+
+  @Nullable
+  private static Uri parseUri(@Nullable String string) {
+    return TextUtils.isEmpty(string) ? null : Uri.parse(string);
   }
 
   void collapseViewHolder() {
