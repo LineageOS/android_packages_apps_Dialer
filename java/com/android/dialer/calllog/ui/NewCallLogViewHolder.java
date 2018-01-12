@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -134,11 +135,16 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             quickContactBadge,
-            TextUtils.isEmpty(row.lookupUri()) ? null : Uri.parse(row.lookupUri()),
-            row.photoId(),
-            TextUtils.isEmpty(row.photoUri()) ? null : Uri.parse(row.photoUri()),
+            parseUri(row.numberAttributes().getLookupUri()),
+            row.numberAttributes().getPhotoId(),
+            parseUri(row.numberAttributes().getPhotoUri()),
             CallLogEntryText.buildPrimaryText(context, row).toString(),
             CallLogContactTypes.getContactType(row));
+  }
+
+  @Nullable
+  private static Uri parseUri(@Nullable String uri) {
+    return TextUtils.isEmpty(uri) ? null : Uri.parse(uri);
   }
 
   private void setPrimaryCallTypes(CoalescedRow row) {

@@ -40,8 +40,8 @@ final class Modules {
         context,
         modules,
         voicemailEntry.number(),
-        voicemailEntry.name(),
-        voicemailEntry.lookupUri());
+        voicemailEntry.numberAttributes().getName(),
+        voicemailEntry.numberAttributes().getLookupUri());
 
     String originalNumber = voicemailEntry.number().getRawInput().getNumber();
     SharedModules.maybeAddModuleForSendingTextMessage(context, modules, originalNumber);
