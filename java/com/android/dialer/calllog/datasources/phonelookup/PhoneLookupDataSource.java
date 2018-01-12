@@ -141,6 +141,13 @@ public final class PhoneLookupDataSource
    */
   @Override
   public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    LogUtil.v(
+        "PhoneLookupDataSource.fill",
+        "processing mutations (inserts: %d, updates: %d, deletes: %d)",
+        mutations.getInserts().size(),
+        mutations.getUpdates().size(),
+        mutations.getDeletes().size());
+
     // Clear state saved since the last call to fill. This is necessary in case fill is called but
     // onSuccessfulFill is not called during a previous flow.
     phoneLookupHistoryRowsToUpdate.clear();
@@ -224,6 +231,12 @@ public final class PhoneLookupDataSource
         rowsToUpdateFuture,
         rowsToUpdate -> {
           updateMutations(rowsToUpdate, mutations);
+          LogUtil.v(
+              "PhoneLookupDataSource.fill",
+              "updated mutations (inserts: %d, updates: %d, deletes: %d)",
+              mutations.getInserts().size(),
+              mutations.getUpdates().size(),
+              mutations.getDeletes().size());
           return null;
         },
         lightweightExecutorService);
