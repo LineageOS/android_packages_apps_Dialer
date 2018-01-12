@@ -19,6 +19,7 @@ package com.android.dialer.calllog.ui;
 import android.support.annotation.MainThread;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -68,7 +69,7 @@ public final class RealtimeRowProcessor {
   @MainThread
   ListenableFuture<Optional<CoalescedRow>> applyRealtimeProcessing(final CoalescedRow row) {
     // Cp2LocalPhoneLookup can not always efficiently process all rows.
-    if (!row.cp2InfoIncomplete()) {
+    if (!row.numberAttributes().getIsCp2InfoIncomplete()) {
       return Futures.immediateFuture(Optional.absent());
     }
 
@@ -97,11 +98,18 @@ public final class RealtimeRowProcessor {
     PhoneLookupInfo phoneLookupInfo = PhoneLookupInfo.newBuilder().setCp2LocalInfo(cp2Info).build();
     // It is safe to overwrite any existing data because CP2 always has highest priority.
     return row.toBuilder()
-        .setName(phoneLookupSelector.selectName(phoneLookupInfo))
-        .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
-        .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
-        .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
-        .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
+        .setNumberAttributes(
+            NumberAttributes.newBuilder()
+                .setName(phoneLookupSelector.selectName(phoneLookupInfo))
+                .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
+                .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
+                .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
+                .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
+                .setIsBusiness(phoneLookupSelector.selectIsBusiness(phoneLookupInfo))
+                .setIsVoicemail(phoneLookupSelector.selectIsVoicemail(phoneLookupInfo))
+                .setCanReportAsInvalidNumber(
+                    phoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo))
+                .build())
         .build();
   }
 }

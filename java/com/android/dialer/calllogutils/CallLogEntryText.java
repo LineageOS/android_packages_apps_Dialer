@@ -38,8 +38,8 @@ public final class CallLogEntryText {
    */
   public static CharSequence buildPrimaryText(Context context, CoalescedRow row) {
     StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(row.name())) {
-      primaryText.append(row.name());
+    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
+      primaryText.append(row.numberAttributes().getName());
     } else if (!TextUtils.isEmpty(row.formattedNumber())) {
       primaryText.append(row.formattedNumber());
     } else {
@@ -98,7 +98,7 @@ public final class CallLogEntryText {
      */
     StringBuilder secondaryText = secondaryTextPrefix(context, row);
 
-    if (TextUtils.isEmpty(row.name())) {
+    if (TextUtils.isEmpty(row.numberAttributes().getName())) {
       // If the name is empty the number is shown as the primary text and there's nothing to add.
       return secondaryText.toString();
     }
@@ -128,7 +128,7 @@ public final class CallLogEntryText {
       // TODO(zachh): Add "Duo" prefix?
       secondaryText.append(context.getText(R.string.new_call_log_video));
     }
-    String numberTypeLabel = row.numberTypeLabel();
+    String numberTypeLabel = row.numberAttributes().getNumberTypeLabel();
     if (!TextUtils.isEmpty(numberTypeLabel)) {
       if (secondaryText.length() > 0) {
         secondaryText.append(", ");

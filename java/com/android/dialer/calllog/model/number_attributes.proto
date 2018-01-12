@@ -1,0 +1,61 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License
+
+syntax = "proto2";
+
+option java_package = "com.android.dialer";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer;
+
+// Information related to the phone number of the call.
+message NumberAttributes {
+  // The name (which may be a person's name or business name, but not a number)
+  // formatted exactly as it should appear to the user. If the user's locale or
+  // name display preferences change, this field should be rewritten.
+  optional string name = 1;
+
+  // A photo URI for the contact to display in the call log list view.
+  optional string photo_uri = 2;
+
+  // A photo ID (from the contacts provider) for the contact to display in the
+  // call log list view.
+  optional int64 photo_id = 3;
+
+  // TODO(zachh): If we need to support photos other than local contacts', add a
+  // (blob?) column.
+
+  // The contacts provider lookup URI for the contact associated with the call.
+  optional string lookup_uri = 4;
+
+  // The number type as a string to be displayed to the user, for example "Home"
+  // or "Mobile". This column should be updated for the appropriate language
+  // when the locale changes.
+  optional string number_type_label = 5;
+
+  // The number is a call to a business from nearby places lookup.
+  optional bool is_business = 6;
+
+  // The number is a call to the voicemail inbox.
+  optional bool is_voicemail = 7;
+
+  // Can the number be reported as invalid through People API
+  optional bool can_report_as_invalid_number = 8;
+
+  // True if the CP2 information is incomplete and needs to be queried at
+  // display time.
+  optional bool is_cp2_info_incomplete = 9;
+}

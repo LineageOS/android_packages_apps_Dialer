@@ -34,9 +34,9 @@ final class PrimaryAction {
         .setNumber(row.number())
         .setPhotoInfo(
             PhotoInfo.builder()
-                .setPhotoId(row.photoId())
-                .setPhotoUri(row.photoUri())
-                .setLookupUri(row.lookupUri())
+                .setPhotoId(row.numberAttributes().getPhotoId())
+                .setPhotoUri(row.numberAttributes().getPhotoUri())
+                .setLookupUri(row.numberAttributes().getLookupUri())
                 .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
                 .setContactType(CallLogContactTypes.getContactType(row))
                 .setDisplayName(primaryText.toString())
