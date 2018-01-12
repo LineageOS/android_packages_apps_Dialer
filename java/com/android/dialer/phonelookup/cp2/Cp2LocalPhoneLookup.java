@@ -66,45 +66,7 @@ import javax.inject.Inject;
 public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =
-      "cp2PhoneLookupLastTimestampProcessed";
-
-  /** Projection for performing batch lookups based on E164 numbers using the PHONE table. */
-  private static final String[] PHONE_PROJECTION =
-      new String[] {
-        Phone.DISPLAY_NAME_PRIMARY, // 0
-        Phone.PHOTO_THUMBNAIL_URI, // 1
-        Phone.PHOTO_ID, // 2
-        Phone.TYPE, // 3
-        Phone.LABEL, // 4
-        Phone.NORMALIZED_NUMBER, // 5
-        Phone.CONTACT_ID, // 6
-        Phone.LOOKUP_KEY // 7
-      };
-
-  /**
-   * Projection for performing individual lookups of non-E164 numbers using the PHONE_LOOKUP table.
-   */
-  private static final String[] PHONE_LOOKUP_PROJECTION =
-      new String[] {
-        ContactsContract.PhoneLookup.DISPLAY_NAME_PRIMARY, // 0
-        ContactsContract.PhoneLookup.PHOTO_THUMBNAIL_URI, // 1
-        ContactsContract.PhoneLookup.PHOTO_ID, // 2
-        ContactsContract.PhoneLookup.TYPE, // 3
-        ContactsContract.PhoneLookup.LABEL, // 4
-        ContactsContract.PhoneLookup.NORMALIZED_NUMBER, // 5
-        ContactsContract.PhoneLookup.CONTACT_ID, // 6
-        ContactsContract.PhoneLookup.LOOKUP_KEY // 7
-      };
-
-  // The following indexes should match both PHONE_PROJECTION and PHONE_LOOKUP_PROJECTION above.
-  private static final int CP2_INFO_NAME_INDEX = 0;
-  private static final int CP2_INFO_PHOTO_URI_INDEX = 1;
-  private static final int CP2_INFO_PHOTO_ID_INDEX = 2;
-  private static final int CP2_INFO_TYPE_INDEX = 3;
-  private static final int CP2_INFO_LABEL_INDEX = 4;
-  private static final int CP2_INFO_NORMALIZED_NUMBER_INDEX = 5;
-  private static final int CP2_INFO_CONTACT_ID_INDEX = 6;
-  private static final int CP2_INFO_LOOKUP_KEY_INDEX = 7;
+      "cp2LocalPhoneLookupLastTimestampProcessed";
 
   // We cannot efficiently process invalid numbers because batch queries cannot be constructed which
   // accomplish the necessary loose matching. We'll attempt to process a limited number of them,
@@ -146,14 +108,15 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
     // ensure consistency when the batch methods are used to update data.
     try (Cursor cursor =
         e164.isPresent()
-            ? queryPhoneTableBasedOnE164(PHONE_PROJECTION, ImmutableSet.of(e164.get()))
-            : queryPhoneLookup(PHONE_LOOKUP_PROJECTION, rawNumber)) {
+            ? queryPhoneTableBasedOnE164(
+                Cp2Projections.getProjectionForPhoneTable(), ImmutableSet.of(e164.get()))
+            : queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), rawNumber)) {
       if (cursor == null) {
         LogUtil.w("Cp2LocalPhoneLookup.lookupInternal", "null cursor");
         return Cp2Info.getDefaultInstance();
       }
       while (cursor.moveToNext()) {
-        cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+        cp2ContactInfos.add(Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
       }
     }
     return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
@@ -174,13 +137,14 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
             return Cp2Info.getDefaultInstance();
           }
           Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
-          try (Cursor cursor = queryPhoneLookup(PHONE_LOOKUP_PROJECTION, rawNumber)) {
+          try (Cursor cursor =
+              queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), rawNumber)) {
             if (cursor == null) {
               LogUtil.w("Cp2LocalPhoneLookup.lookup", "null cursor");
               return Cp2Info.getDefaultInstance();
             }
             while (cursor.moveToNext()) {
-              cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+              cp2ContactInfos.add(Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
             }
           }
           return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
@@ -767,18 +731,21 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
           if (e164Numbers.isEmpty()) {
             return cp2ContactInfosByNumber;
           }
-          try (Cursor cursor = queryPhoneTableBasedOnE164(PHONE_PROJECTION, e164Numbers)) {
+          try (Cursor cursor =
+              queryPhoneTableBasedOnE164(
+                  Cp2Projections.getProjectionForPhoneTable(), e164Numbers)) {
             if (cursor == null) {
               LogUtil.w("Cp2LocalPhoneLookup.batchQueryForValidNumbers", "null cursor");
             } else {
               while (cursor.moveToNext()) {
-                String e164Number = cursor.getString(CP2_INFO_NORMALIZED_NUMBER_INDEX);
+                String e164Number = Cp2Projections.getNormalizedNumberFromCursor(cursor);
                 Set<Cp2ContactInfo> cp2ContactInfos = cp2ContactInfosByNumber.get(e164Number);
                 if (cp2ContactInfos == null) {
                   cp2ContactInfos = new ArraySet<>();
                   cp2ContactInfosByNumber.put(e164Number, cp2ContactInfos);
                 }
-                cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+                cp2ContactInfos.add(
+                    Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
               }
             }
           }
@@ -794,12 +761,14 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
           if (invalidNumber.isEmpty()) {
             return cp2ContactInfos;
           }
-          try (Cursor cursor = queryPhoneLookup(PHONE_LOOKUP_PROJECTION, invalidNumber)) {
+          try (Cursor cursor =
+              queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), invalidNumber)) {
             if (cursor == null) {
               LogUtil.w("Cp2LocalPhoneLookup.individualQueryForInvalidNumber", "null cursor");
             } else {
               while (cursor.moveToNext()) {
-                cp2ContactInfos.add(buildCp2ContactInfoFromPhoneCursor(appContext, cursor));
+                cp2ContactInfos.add(
+                    Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
               }
             }
           }
@@ -841,43 +810,6 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
         Uri.withAppendedPath(
             ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(rawNumber));
     return appContext.getContentResolver().query(uri, projection, null, null, null);
-  }
-
-  /**
-   * @param cursor with projection {@link #PHONE_PROJECTION}.
-   * @return new {@link Cp2ContactInfo} based on current row of {@code cursor}.
-   */
-  private static Cp2ContactInfo buildCp2ContactInfoFromPhoneCursor(
-      Context appContext, Cursor cursor) {
-    String displayName = cursor.getString(CP2_INFO_NAME_INDEX);
-    String photoUri = cursor.getString(CP2_INFO_PHOTO_URI_INDEX);
-    int photoId = cursor.getInt(CP2_INFO_PHOTO_ID_INDEX);
-    int type = cursor.getInt(CP2_INFO_TYPE_INDEX);
-    String label = cursor.getString(CP2_INFO_LABEL_INDEX);
-    int contactId = cursor.getInt(CP2_INFO_CONTACT_ID_INDEX);
-    String lookupKey = cursor.getString(CP2_INFO_LOOKUP_KEY_INDEX);
-
-    Cp2ContactInfo.Builder infoBuilder = Cp2ContactInfo.newBuilder();
-    if (!TextUtils.isEmpty(displayName)) {
-      infoBuilder.setName(displayName);
-    }
-    if (!TextUtils.isEmpty(photoUri)) {
-      infoBuilder.setPhotoUri(photoUri);
-    }
-    if (photoId > 0) {
-      infoBuilder.setPhotoId(photoId);
-    }
-
-    // Phone.getTypeLabel returns "Custom" if given (0, null) which is not of any use. Just
-    // omit setting the label if there's no information for it.
-    if (type != 0 || !TextUtils.isEmpty(label)) {
-      infoBuilder.setLabel(Phone.getTypeLabel(appContext.getResources(), type, label).toString());
-    }
-    infoBuilder.setContactId(contactId);
-    if (!TextUtils.isEmpty(lookupKey)) {
-      infoBuilder.setLookupUri(Contacts.getLookupUri(contactId, lookupKey).toString());
-    }
-    return infoBuilder.build();
   }
 
   /** Returns set of DialerPhoneNumbers that were associated with now deleted contacts. */
