@@ -22,6 +22,9 @@
        TODO(38502365): Remove this once we're ready to launch the new UI. -->
   <string name="nui_shortcut_name">Phone NUI</string>
 
+  <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
+  <string name="dialpad_activity_title">Phone Keypad</string>
+
   <!-- The description text for the call log tab. -->
   <string name="main_call_history_tab_description" tools:ignore="UnusedResources">Call history</string>
 

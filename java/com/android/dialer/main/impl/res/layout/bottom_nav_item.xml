@@ -37,5 +37,6 @@
       android:id="@+id/bottom_nav_item_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textSize="12sp"/>
+      android:textSize="12sp"
+      android:gravity="center_horizontal"/>
 </com.android.dialer.main.impl.BottomNavItem>

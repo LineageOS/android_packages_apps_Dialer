@@ -21,10 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <include
-      android:id="@+id/toolbar"
-      layout="@layout/toolbar_layout"/>
-
+  <!-- Holds SpeedDial, Call Log, Contacts and Voicemail fragments -->
   <FrameLayout
       android:id="@+id/fragment_container"
       android:layout_width="match_parent"
@@ -32,13 +29,25 @@
       android:layout_below="@+id/toolbar"
       android:layout_above="@+id/bottom_nav_bar"/>
 
+  <!-- BottomNavBar -->
   <include
       android:id="@+id/bottom_nav_bar"
       layout="@layout/bottom_nav_bar_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
       android:layout_alignParentBottom="true"/>
+
+  <!-- Holds search and dialpad fragments -->
+  <FrameLayout
+      android:id="@+id/search_fragment_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbar"/>
+
+  <!-- MainToolbar -->
+  <include
+      android:id="@+id/toolbar"
+      layout="@layout/toolbar_layout"/>
 
   <android.support.design.widget.FloatingActionButton
       android:id="@+id/fab"
