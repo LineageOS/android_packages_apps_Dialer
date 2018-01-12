@@ -102,14 +102,14 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
     if (TextUtils.isEmpty(rawNumber)) {
       return Cp2Info.getDefaultInstance();
     }
-    Optional<String> e164 = TelecomCallUtil.getE164Number(appContext, call);
+    Optional<String> validE164 = TelecomCallUtil.getValidE164Number(appContext, call);
     Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
     // Note: It would make sense to use PHONE_LOOKUP for E164 numbers as well, but we use PHONE to
     // ensure consistency when the batch methods are used to update data.
     try (Cursor cursor =
-        e164.isPresent()
+        validE164.isPresent()
             ? queryPhoneTableBasedOnE164(
-                Cp2Projections.getProjectionForPhoneTable(), ImmutableSet.of(e164.get()))
+                Cp2Projections.getProjectionForPhoneTable(), ImmutableSet.of(validE164.get()))
             : queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), rawNumber)) {
       if (cursor == null) {
         LogUtil.w("Cp2LocalPhoneLookup.lookupInternal", "null cursor");
@@ -154,7 +154,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(phoneNumbers);
-    if (partitionedNumbers.unformattableNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
+    if (partitionedNumbers.invalidNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
       // If there are N invalid numbers, we can't determine determine dirtiness without running N
       // queries; since running this many queries is not feasible for the (lightweight) isDirty
       // check, simply return true. The expectation is that this should rarely be the case as the
@@ -239,15 +239,14 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
 
     List<ListenableFuture<Set<Long>>> queryFutures = new ArrayList<>();
 
-    // First use the E164 numbers to query the NORMALIZED_NUMBER column.
+    // First use the valid E164 numbers to query the NORMALIZED_NUMBER column.
     queryFutures.add(
         queryPhoneTableForContactIdsBasedOnE164(partitionedNumbers.validE164Numbers()));
 
     // Then run a separate query for each invalid number. Separate queries are done to accomplish
     // loose matching which couldn't be accomplished with a batch query.
-    Assert.checkState(
-        partitionedNumbers.unformattableNumbers().size() <= MAX_SUPPORTED_INVALID_NUMBERS);
-    for (String invalidNumber : partitionedNumbers.unformattableNumbers()) {
+    Assert.checkState(partitionedNumbers.invalidNumbers().size() <= MAX_SUPPORTED_INVALID_NUMBERS);
+    for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
       queryFutures.add(queryPhoneLookupTableForContactIdsBasedOnRawNumber(invalidNumber));
     }
     return Futures.transform(
@@ -527,10 +526,9 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
       ImmutableMap<DialerPhoneNumber, Cp2Info> existingInfoMap) {
     ArraySet<DialerPhoneNumber> unprocessableNumbers = new ArraySet<>();
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(existingInfoMap.keySet());
-    if (partitionedNumbers.unformattableNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
-      for (String invalidNumber : partitionedNumbers.unformattableNumbers()) {
-        unprocessableNumbers.addAll(
-            partitionedNumbers.dialerPhoneNumbersForUnformattable(invalidNumber));
+    if (partitionedNumbers.invalidNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
+      for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
+        unprocessableNumbers.addAll(partitionedNumbers.dialerPhoneNumbersForInvalid(invalidNumber));
       }
     }
     return unprocessableNumbers;
@@ -652,39 +650,39 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
             return Futures.immediateFuture(new ArrayMap<>());
           }
 
-          // Divide the numbers into those we can format to E164 and those we can't. Issue a single
-          // batch query for the E164 numbers against the PHONE table, and in parallel issue
-          // individual queries against PHONE_LOOKUP for each non-E164 number.
+          // Divide the numbers into those that are valid and those that are not. Issue a single
+          // batch query for the valid numbers against the PHONE table, and in parallel issue
+          // individual queries against PHONE_LOOKUP for each invalid number.
           // TODO(zachh): These queries are inefficient without a lastModified column to filter on.
           PartitionedNumbers partitionedNumbers =
               new PartitionedNumbers(ImmutableSet.copyOf(updatedNumbers));
 
-          ListenableFuture<Map<String, Set<Cp2ContactInfo>>> e164Future =
+          ListenableFuture<Map<String, Set<Cp2ContactInfo>>> validNumbersFuture =
               batchQueryForValidNumbers(partitionedNumbers.validE164Numbers());
 
-          List<ListenableFuture<Set<Cp2ContactInfo>>> nonE164FuturesList = new ArrayList<>();
-          for (String invalidNumber : partitionedNumbers.unformattableNumbers()) {
-            nonE164FuturesList.add(individualQueryForInvalidNumber(invalidNumber));
+          List<ListenableFuture<Set<Cp2ContactInfo>>> invalidNumbersFuturesList = new ArrayList<>();
+          for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
+            invalidNumbersFuturesList.add(individualQueryForInvalidNumber(invalidNumber));
           }
 
-          ListenableFuture<List<Set<Cp2ContactInfo>>> nonE164Future =
-              Futures.allAsList(nonE164FuturesList);
+          ListenableFuture<List<Set<Cp2ContactInfo>>> invalidNumbersFuture =
+              Futures.allAsList(invalidNumbersFuturesList);
 
           Callable<Map<DialerPhoneNumber, Set<Cp2ContactInfo>>> computeMap =
               () -> {
                 // These get() calls are safe because we are using whenAllSucceed below.
-                Map<String, Set<Cp2ContactInfo>> e164Result = e164Future.get();
-                List<Set<Cp2ContactInfo>> non164Results = nonE164Future.get();
+                Map<String, Set<Cp2ContactInfo>> validNumbersResult = validNumbersFuture.get();
+                List<Set<Cp2ContactInfo>> invalidNumbersResult = invalidNumbersFuture.get();
 
                 Map<DialerPhoneNumber, Set<Cp2ContactInfo>> map = new ArrayMap<>();
 
-                // First update the map with the E164 results.
-                for (Entry<String, Set<Cp2ContactInfo>> entry : e164Result.entrySet()) {
-                  String e164Number = entry.getKey();
+                // First update the map with the valid number results.
+                for (Entry<String, Set<Cp2ContactInfo>> entry : validNumbersResult.entrySet()) {
+                  String validNumber = entry.getKey();
                   Set<Cp2ContactInfo> cp2ContactInfos = entry.getValue();
 
                   Set<DialerPhoneNumber> dialerPhoneNumbers =
-                      partitionedNumbers.dialerPhoneNumbersForE164(e164Number);
+                      partitionedNumbers.dialerPhoneNumbersForValidE164(validNumber);
 
                   addInfo(map, dialerPhoneNumbers, cp2ContactInfos);
 
@@ -694,12 +692,12 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                   updatedNumbers.removeAll(dialerPhoneNumbers);
                 }
 
-                // Next update the map with the non-E164 results.
+                // Next update the map with the invalid results.
                 int i = 0;
-                for (String unformattableNumber : partitionedNumbers.unformattableNumbers()) {
-                  Set<Cp2ContactInfo> cp2Infos = non164Results.get(i++);
+                for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
+                  Set<Cp2ContactInfo> cp2Infos = invalidNumbersResult.get(i++);
                   Set<DialerPhoneNumber> dialerPhoneNumbers =
-                      partitionedNumbers.dialerPhoneNumbersForUnformattable(unformattableNumber);
+                      partitionedNumbers.dialerPhoneNumbersForInvalid(invalidNumber);
 
                   addInfo(map, dialerPhoneNumbers, cp2Infos);
 
@@ -717,32 +715,32 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                 }
                 return map;
               };
-          return Futures.whenAllSucceed(e164Future, nonE164Future)
+          return Futures.whenAllSucceed(validNumbersFuture, invalidNumbersFuture)
               .call(computeMap, lightweightExecutorService);
         },
         lightweightExecutorService);
   }
 
   private ListenableFuture<Map<String, Set<Cp2ContactInfo>>> batchQueryForValidNumbers(
-      Set<String> e164Numbers) {
+      Set<String> validE164Numbers) {
     return backgroundExecutorService.submit(
         () -> {
           Map<String, Set<Cp2ContactInfo>> cp2ContactInfosByNumber = new ArrayMap<>();
-          if (e164Numbers.isEmpty()) {
+          if (validE164Numbers.isEmpty()) {
             return cp2ContactInfosByNumber;
           }
           try (Cursor cursor =
               queryPhoneTableBasedOnE164(
-                  Cp2Projections.getProjectionForPhoneTable(), e164Numbers)) {
+                  Cp2Projections.getProjectionForPhoneTable(), validE164Numbers)) {
             if (cursor == null) {
               LogUtil.w("Cp2LocalPhoneLookup.batchQueryForValidNumbers", "null cursor");
             } else {
               while (cursor.moveToNext()) {
-                String e164Number = Cp2Projections.getNormalizedNumberFromCursor(cursor);
-                Set<Cp2ContactInfo> cp2ContactInfos = cp2ContactInfosByNumber.get(e164Number);
+                String validE164Number = Cp2Projections.getNormalizedNumberFromCursor(cursor);
+                Set<Cp2ContactInfo> cp2ContactInfos = cp2ContactInfosByNumber.get(validE164Number);
                 if (cp2ContactInfos == null) {
                   cp2ContactInfos = new ArraySet<>();
-                  cp2ContactInfosByNumber.put(e164Number, cp2ContactInfos);
+                  cp2ContactInfosByNumber.put(validE164Number, cp2ContactInfos);
                 }
                 cp2ContactInfos.add(
                     Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));

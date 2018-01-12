@@ -82,9 +82,9 @@ public class TelecomCallUtil {
   public static Optional<String> getNormalizedNumber(Context appContext, Call call) {
     Assert.isWorkerThread();
 
-    Optional<String> e164 = getE164Number(appContext, call);
-    if (e164.isPresent()) {
-      return e164;
+    Optional<String> validE164 = getValidE164Number(appContext, call);
+    if (validE164.isPresent()) {
+      return validE164;
     }
     String rawNumber = getNumber(call);
     if (TextUtils.isEmpty(rawNumber)) {
@@ -94,14 +94,14 @@ public class TelecomCallUtil {
   }
 
   /**
-   * Formats the number of the {@code call} to E.164. The country of the SIM associated with the
-   * call is used to determine the country.
+   * Formats the number of the {@code call} to E.164 if it is valid. The country of the SIM
+   * associated with the call is used to determine the country.
    *
-   * <p>If the number cannot be formatted (because for example the country cannot be determined),
-   * returns {@link Optional#absent()}.
+   * <p>If the number cannot be formatted (because for example it is invalid or the country cannot
+   * be determined), returns {@link Optional#absent()}.
    */
   @WorkerThread
-  public static Optional<String> getE164Number(Context appContext, Call call) {
+  public static Optional<String> getValidE164Number(Context appContext, Call call) {
     Assert.isWorkerThread();
     String rawNumber = getNumber(call);
     if (TextUtils.isEmpty(rawNumber)) {
@@ -109,7 +109,7 @@ public class TelecomCallUtil {
     }
     Optional<String> countryCode = getCountryCode(appContext, call);
     if (!countryCode.isPresent()) {
-      LogUtil.w("TelecomCallUtil.getE164Number", "couldn't find a country code for call");
+      LogUtil.w("TelecomCallUtil.getValidE164Number", "couldn't find a country code for call");
       return Optional.absent();
     }
     return Optional.fromNullable(PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.get()));
