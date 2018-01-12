@@ -38,15 +38,10 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + " ("
           + (AnnotatedCallLog._ID + " integer primary key, ")
           + (AnnotatedCallLog.TIMESTAMP + " integer, ")
-          + (AnnotatedCallLog.NAME + " text, ")
           + (AnnotatedCallLog.NUMBER + " blob, ")
           + (AnnotatedCallLog.FORMATTED_NUMBER + " text, ")
-          + (AnnotatedCallLog.PHOTO_URI + " text, ")
-          + (AnnotatedCallLog.PHOTO_ID + " integer, ")
-          + (AnnotatedCallLog.LOOKUP_URI + " text, ")
           + (AnnotatedCallLog.DURATION + " integer, ")
           + (AnnotatedCallLog.DATA_USAGE + " integer, ")
-          + (AnnotatedCallLog.NUMBER_TYPE_LABEL + " text, ")
           + (AnnotatedCallLog.IS_READ + " integer, ")
           + (AnnotatedCallLog.NEW + " integer, ")
           + (AnnotatedCallLog.GEOCODED_LOCATION + " text, ")
@@ -55,13 +50,10 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.PHONE_ACCOUNT_LABEL + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_COLOR + " integer, ")
           + (AnnotatedCallLog.FEATURES + " integer, ")
-          + (AnnotatedCallLog.IS_BUSINESS + " integer, ")
-          + (AnnotatedCallLog.IS_VOICEMAIL + " integer, ")
           + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
           + (AnnotatedCallLog.CALL_TYPE + " integer, ")
-          + (AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER + " integer, ")
-          + (AnnotatedCallLog.CP2_INFO_INCOMPLETE + " integer")
+          + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob ")
           + ");";
 
   /** Deletes all but the first maxRows rows (by timestamp) to keep the table a manageable size. */

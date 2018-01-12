@@ -20,6 +20,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.google.auto.value.AutoValue;
 
 /** Data class containing the contents of a row from the CoalescedAnnotatedCallLog. */
@@ -31,16 +32,12 @@ public abstract class CoalescedRow {
         .setId(0)
         .setTimestamp(0)
         .setNumber(DialerPhoneNumber.getDefaultInstance())
-        .setPhotoId(0)
         .setIsRead(false)
         .setIsNew(false)
         .setPhoneAccountColor(0)
         .setFeatures(0)
-        .setIsBusiness(false)
-        .setIsVoicemail(false)
         .setCallType(0)
-        .setCanReportAsInvalidNumber(false)
-        .setCp2InfoIncomplete(false)
+        .setNumberAttributes(NumberAttributes.getDefaultInstance())
         .setCoalescedIds(CoalescedIds.getDefaultInstance());
   }
 
@@ -53,21 +50,7 @@ public abstract class CoalescedRow {
   public abstract DialerPhoneNumber number();
 
   @Nullable
-  public abstract String name();
-
-  @Nullable
   public abstract String formattedNumber();
-
-  @Nullable
-  public abstract String photoUri();
-
-  public abstract long photoId();
-
-  @Nullable
-  public abstract String lookupUri();
-
-  @Nullable
-  public abstract String numberTypeLabel();
 
   public abstract boolean isRead();
 
@@ -90,15 +73,9 @@ public abstract class CoalescedRow {
 
   public abstract int features();
 
-  public abstract boolean isBusiness();
-
-  public abstract boolean isVoicemail();
-
   public abstract int callType();
 
-  public abstract boolean canReportAsInvalidNumber();
-
-  public abstract boolean cp2InfoIncomplete();
+  public abstract NumberAttributes numberAttributes();
 
   public abstract CoalescedIds coalescedIds();
 
@@ -112,17 +89,7 @@ public abstract class CoalescedRow {
 
     public abstract Builder setNumber(DialerPhoneNumber number);
 
-    public abstract Builder setName(@Nullable String name);
-
     public abstract Builder setFormattedNumber(@Nullable String formattedNumber);
-
-    public abstract Builder setPhotoUri(@Nullable String photoUri);
-
-    public abstract Builder setPhotoId(long photoId);
-
-    public abstract Builder setLookupUri(@Nullable String lookupUri);
-
-    public abstract Builder setNumberTypeLabel(@Nullable String numberTypeLabel);
 
     public abstract Builder setIsRead(boolean isRead);
 
@@ -141,15 +108,9 @@ public abstract class CoalescedRow {
 
     public abstract Builder setFeatures(int features);
 
-    public abstract Builder setIsBusiness(boolean isBusiness);
-
-    public abstract Builder setIsVoicemail(boolean isVoicemail);
-
     public abstract Builder setCallType(int callType);
 
-    public abstract Builder setCanReportAsInvalidNumber(boolean canReportAsInvalidNumber);
-
-    public abstract Builder setCp2InfoIncomplete(boolean cp2InfoIncomplete);
+    public abstract Builder setNumberAttributes(NumberAttributes numberAttributes);
 
     public abstract Builder setCoalescedIds(CoalescedIds coalescedIds);
 

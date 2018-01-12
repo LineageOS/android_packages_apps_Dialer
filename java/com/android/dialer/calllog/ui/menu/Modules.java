@@ -45,7 +45,11 @@ final class Modules {
 
     maybeAddModuleForVideoOrAudioCall(context, modules, row);
     SharedModules.maybeAddModuleForAddingToContacts(
-        context, modules, row.number(), row.name(), row.lookupUri());
+        context,
+        modules,
+        row.number(),
+        row.numberAttributes().getName(),
+        row.numberAttributes().getLookupUri());
 
     String originalNumber = row.number().getRawInput().getNumber();
     SharedModules.maybeAddModuleForSendingTextMessage(context, modules, originalNumber);
@@ -98,8 +102,8 @@ final class Modules {
 
   private static void addModuleForAccessingCallDetails(
       Context context, List<ContactActionModule> modules, CoalescedRow row) {
-    boolean canReportAsInvalidNumber = row.canReportAsInvalidNumber();
-    boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.lookupUri());
+    boolean canReportAsInvalidNumber = row.numberAttributes().getCanReportAsInvalidNumber();
+    boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.numberAttributes().getLookupUri());
 
     modules.add(
         new IntentModule(
@@ -122,21 +126,21 @@ final class Modules {
         DialerContact.newBuilder()
             .setNumber(originalNumber)
             .setContactType(LetterTileDrawable.TYPE_DEFAULT) // TODO(zachh): Use proper type.
-            .setPhotoId(row.photoId());
+            .setPhotoId(row.numberAttributes().getPhotoId());
 
-    if (!TextUtils.isEmpty(row.name())) {
-      dialerContactBuilder.setNameOrNumber(row.name());
+    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
+      dialerContactBuilder.setNameOrNumber(row.numberAttributes().getName());
     } else if (!TextUtils.isEmpty(originalNumber)) {
       dialerContactBuilder.setNameOrNumber(originalNumber);
     }
-    if (row.numberTypeLabel() != null) {
-      dialerContactBuilder.setNumberLabel(row.numberTypeLabel());
+    if (row.numberAttributes().hasNumberTypeLabel()) {
+      dialerContactBuilder.setNumberLabel(row.numberAttributes().getNumberTypeLabel());
     }
-    if (row.photoUri() != null) {
-      dialerContactBuilder.setPhotoUri(row.photoUri());
+    if (row.numberAttributes().hasPhotoUri()) {
+      dialerContactBuilder.setPhotoUri(row.numberAttributes().getPhotoUri());
     }
-    if (row.lookupUri() != null) {
-      dialerContactBuilder.setContactUri(row.lookupUri());
+    if (row.numberAttributes().hasLookupUri()) {
+      dialerContactBuilder.setContactUri(row.numberAttributes().getLookupUri());
     }
     if (row.formattedNumber() != null) {
       dialerContactBuilder.setDisplayNumber(row.formattedNumber());

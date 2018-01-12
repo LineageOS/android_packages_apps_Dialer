@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.v4.content.CursorLoader;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -33,35 +34,29 @@ final class VoicemailCursorLoader extends CursorLoader {
       new String[] {
         AnnotatedCallLog._ID,
         AnnotatedCallLog.TIMESTAMP,
-        AnnotatedCallLog.NAME,
         AnnotatedCallLog.NUMBER,
         AnnotatedCallLog.FORMATTED_NUMBER,
-        AnnotatedCallLog.PHOTO_URI,
-        AnnotatedCallLog.PHOTO_ID,
-        AnnotatedCallLog.LOOKUP_URI,
         AnnotatedCallLog.DURATION,
         AnnotatedCallLog.GEOCODED_LOCATION,
         AnnotatedCallLog.CALL_TYPE,
         AnnotatedCallLog.TRANSCRIPTION,
         AnnotatedCallLog.VOICEMAIL_URI,
-        AnnotatedCallLog.IS_READ
+        AnnotatedCallLog.IS_READ,
+        AnnotatedCallLog.NUMBER_ATTRIBUTES,
       };
 
   // Indexes for VOICEMAIL_COLUMNS
   private static final int ID = 0;
   private static final int TIMESTAMP = 1;
-  private static final int NAME = 2;
-  private static final int NUMBER = 3;
-  private static final int FORMATTED_NUMBER = 4;
-  private static final int PHOTO_URI = 5;
-  private static final int PHOTO_ID = 6;
-  private static final int LOOKUP_URI = 7;
-  private static final int DURATION = 8;
-  private static final int GEOCODED_LOCATION = 9;
-  private static final int CALL_TYPE = 10;
-  private static final int TRANSCRIPTION = 11;
-  private static final int VOICEMAIL_URI = 12;
-  private static final int IS_READ = 13;
+  private static final int NUMBER = 2;
+  private static final int FORMATTED_NUMBER = 3;
+  private static final int DURATION = 4;
+  private static final int GEOCODED_LOCATION = 5;
+  private static final int CALL_TYPE = 6;
+  private static final int TRANSCRIPTION = 7;
+  private static final int VOICEMAIL_URI = 8;
+  private static final int IS_READ = 9;
+  private static final int NUMBER_ATTRIBUTES = 10;
 
   // TODO(zachh): Optimize indexes
   VoicemailCursorLoader(Context context) {
@@ -82,22 +77,25 @@ final class VoicemailCursorLoader extends CursorLoader {
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse DialerPhoneNumber bytes");
     }
+    NumberAttributes numberAttributes;
+    try {
+      numberAttributes = NumberAttributes.parseFrom(cursor.getBlob(NUMBER_ATTRIBUTES));
+    } catch (InvalidProtocolBufferException e) {
+      throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
+    }
 
     return VoicemailEntry.builder()
         .setId(cursor.getInt(ID))
         .setTimestamp(cursor.getLong(TIMESTAMP))
-        .setName(cursor.getString(NAME))
         .setNumber(number)
         .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
-        .setPhotoUri(cursor.getString(PHOTO_URI))
-        .setPhotoId(cursor.getLong(PHOTO_ID))
-        .setLookupUri(cursor.getString(LOOKUP_URI))
         .setDuration(cursor.getLong(DURATION))
         .setTranscription(cursor.getString(TRANSCRIPTION))
         .setVoicemailUri(cursor.getString(VOICEMAIL_URI))
         .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
         .setCallType(cursor.getInt(CALL_TYPE))
         .setIsRead(cursor.getInt(IS_READ))
+        .setNumberAttributes(numberAttributes)
         .build();
   }
 

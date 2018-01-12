@@ -28,6 +28,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
@@ -286,13 +287,7 @@ public final class PhoneLookupDataSource
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentString(AnnotatedCallLog.NAME)
-        .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
-        .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
-        .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
-        .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
-        .useMostRecentInt(AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER)
-        .useMostRecentInt(AnnotatedCallLog.CP2_INFO_INCOMPLETE)
+        .useMostRecentBlob(AnnotatedCallLog.NUMBER_ATTRIBUTES)
         .combine();
   }
 
@@ -584,19 +579,20 @@ public final class PhoneLookupDataSource
   }
 
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
-    contentValues.put(AnnotatedCallLog.NAME, phoneLookupSelector.selectName(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.PHOTO_URI, phoneLookupSelector.selectPhotoUri(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.PHOTO_ID, phoneLookupSelector.selectPhotoId(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.LOOKUP_URI, phoneLookupSelector.selectLookupUri(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.NUMBER_TYPE_LABEL, phoneLookupSelector.selectNumberLabel(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
-        PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2LocalInfo().getIsIncomplete());
+        AnnotatedCallLog.NUMBER_ATTRIBUTES,
+        NumberAttributes.newBuilder()
+            .setName(phoneLookupSelector.selectName(phoneLookupInfo))
+            .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
+            .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
+            .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
+            .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
+            .setIsBusiness(phoneLookupSelector.selectIsBusiness(phoneLookupInfo))
+            .setIsVoicemail(phoneLookupSelector.selectIsVoicemail(phoneLookupInfo))
+            .setCanReportAsInvalidNumber(
+                phoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo))
+            .setIsCp2InfoIncomplete(phoneLookupSelector.selectIsCp2InfoIncomplete(phoneLookupInfo))
+            .build()
+            .toByteArray());
   }
 }
