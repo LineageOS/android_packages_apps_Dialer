@@ -22,10 +22,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 /** Toolbar for {@link com.android.dialer.main.impl.MainActivity}. */
 public final class MainToolbar extends Toolbar implements OnMenuItemClickListener {
+
+  private SearchBarListener listener;
 
   public MainToolbar(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -40,23 +41,20 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
     overflowMenu.setOnMenuItemClickListener(this);
     optionsMenuButton.setOnClickListener(v -> overflowMenu.show());
     optionsMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
-
-    findViewById(R.id.voice_search_button).setOnClickListener(v -> onVoiceIconClicked());
-    findViewById(R.id.search_box_collapsed).setOnClickListener(v -> onSearchBarClicked());
   }
 
   @Override
   public boolean onMenuItemClick(MenuItem menuItem) {
-    Toast.makeText(getContext(), "Not yet implemented", Toast.LENGTH_SHORT).show();
-    // TODO(calderwoodra): implement menu item clicks
+    if (menuItem.getItemId() == R.id.settings) {
+      listener.openSettings();
+    } else if (menuItem.getItemId() == R.id.feedback) {
+      listener.sendFeedback();
+    }
     return false;
   }
 
-  private void onVoiceIconClicked() {
-    // TODO(calderwoodra): take voice input
-  }
-
-  private void onSearchBarClicked() {
-    // TODO(calderwoodra): open search UI
+  public void setSearchBarListener(SearchBarListener listener) {
+    this.listener = listener;
+    ((SearchBarView) findViewById(R.id.search_view_container)).setSearchBarListener(listener);
   }
 }
