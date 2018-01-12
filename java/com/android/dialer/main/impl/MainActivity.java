@@ -31,6 +31,8 @@ import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
+import com.android.dialer.main.impl.toolbar.MainToolbar;
+import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 
@@ -58,7 +60,9 @@ public final class MainActivity extends AppCompatActivity
 
   private void initLayout() {
     findViewById(R.id.fab).setOnClickListener(this);
-    setSupportActionBar(findViewById(R.id.toolbar));
+    MainToolbar toolbar = findViewById(R.id.toolbar);
+    toolbar.setSearchBarListener(new MainSearchBarListener());
+    setSupportActionBar(toolbar);
     BottomNavBar navBar = findViewById(R.id.bottom_nav_bar);
     navBar.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
     navBar.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
@@ -76,6 +80,28 @@ public final class MainActivity extends AppCompatActivity
     // TODO(calderwoodra): Add impression logging
     QuickContact.showQuickContact(
         this, photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
+  }
+
+  /**
+   * Implementation of {@link SearchBarListener} that holds the logic for how to handle search bar
+   * events.
+   */
+  private static final class MainSearchBarListener implements SearchBarListener {
+
+    @Override
+    public void onSearchQueryUpdated(String query) {}
+
+    @Override
+    public void onSearchBackButtonClicked() {}
+
+    @Override
+    public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {}
+
+    @Override
+    public void openSettings() {}
+
+    @Override
+    public void sendFeedback() {}
   }
 
   /**
