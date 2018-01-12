@@ -174,10 +174,15 @@ public final class NewCallLogFragment extends Fragment
       LogUtil.w("NewCallLogFragment.onLoadFinished", "null cursor");
       return;
     }
+
     // TODO(zachh): Handle empty cursor by showing empty view.
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(
-        new NewCallLogAdapter(getContext(), newCursor, System::currentTimeMillis));
+    if (recyclerView.getAdapter() == null) {
+      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+      recyclerView.setAdapter(
+          new NewCallLogAdapter(getContext(), newCursor, System::currentTimeMillis));
+    } else {
+      ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(newCursor);
+    }
   }
 
   @Override

@@ -21,12 +21,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
+import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.CallTypeIconsView;
@@ -34,7 +36,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
@@ -130,15 +131,14 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoto(CoalescedRow row) {
-    // TODO(zachh): Set the contact type.
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             quickContactBadge,
-            row.lookupUri() == null ? null : Uri.parse(row.lookupUri()),
+            TextUtils.isEmpty(row.lookupUri()) ? null : Uri.parse(row.lookupUri()),
             row.photoId(),
-            row.photoUri() == null ? null : Uri.parse(row.photoUri()),
-            row.name(),
-            LetterTileDrawable.TYPE_DEFAULT);
+            TextUtils.isEmpty(row.photoUri()) ? null : Uri.parse(row.photoUri()),
+            CallLogEntryText.buildPrimaryText(context, row).toString(),
+            CallLogContactTypes.getContactType(row));
   }
 
   private void setPrimaryCallTypes(CoalescedRow row) {

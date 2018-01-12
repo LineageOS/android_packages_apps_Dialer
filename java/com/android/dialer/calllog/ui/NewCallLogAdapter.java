@@ -44,23 +44,35 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     int CALL_LOG_ENTRY = 3;
   }
 
-  private final Cursor cursor;
   private final Clock clock;
   private final RealtimeRowProcessor realtimeRowProcessor;
 
+  private Cursor cursor;
+
   /** Null when the "Today" header should not be displayed. */
-  @Nullable private final Integer todayHeaderPosition;
+  @Nullable private Integer todayHeaderPosition;
   /** Null when the "Older" header should not be displayed. */
-  @Nullable private final Integer olderHeaderPosition;
+  @Nullable private Integer olderHeaderPosition;
 
   NewCallLogAdapter(Context context, Cursor cursor, Clock clock) {
     this.cursor = cursor;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
 
+    setHeaderPositions();
+  }
+
+  void updateCursor(Cursor updatedCursor) {
+    this.cursor = updatedCursor;
+
+    setHeaderPositions();
+    notifyDataSetChanged();
+  }
+
+  private void setHeaderPositions() {
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
-    if (cursor.moveToNext()) {
+    if (cursor.moveToFirst()) {
       long firstTimestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
       if (CallLogDates.isSameDay(currentTimeMillis, firstTimestamp)) {
         this.todayHeaderPosition = 0;
