@@ -134,7 +134,8 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
                 null)) {
       while (cursor != null && cursor.moveToNext()) {
         if (cursor.getInt(1) == FilteredNumberTypes.BLOCKED_NUMBER) {
-          blockedNumbers.addAll(partitionedNumbers.dialerPhoneNumbersForE164(cursor.getString(0)));
+          blockedNumbers.addAll(
+              partitionedNumbers.dialerPhoneNumbersForValidE164(cursor.getString(0)));
         }
       }
     }
@@ -143,8 +144,8 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
         Selection.column(FilteredNumberColumns.NUMBER)
             .in(
                 partitionedNumbers
-                    .unformattableNumbers()
-                    .toArray(new String[partitionedNumbers.unformattableNumbers().size()]));
+                    .invalidNumbers()
+                    .toArray(new String[partitionedNumbers.invalidNumbers().size()]));
     try (Cursor cursor =
         appContext
             .getContentResolver()
@@ -157,7 +158,7 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
       while (cursor != null && cursor.moveToNext()) {
         if (cursor.getInt(1) == FilteredNumberTypes.BLOCKED_NUMBER) {
           blockedNumbers.addAll(
-              partitionedNumbers.dialerPhoneNumbersForUnformattable(cursor.getString(0)));
+              partitionedNumbers.dialerPhoneNumbersForInvalid(cursor.getString(0)));
         }
       }
     }
