@@ -21,6 +21,7 @@ import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
@@ -92,6 +93,13 @@ public final class RealtimeRowProcessor {
           return Optional.absent();
         },
         uiExecutor /* ensures the cache is updated on a single thread */);
+  }
+
+  /** Clears the internal cache. */
+  @MainThread
+  public void clearCache() {
+    Assert.isMainThread();
+    cache.clear();
   }
 
   private CoalescedRow applyCp2LocalInfoToRow(Cp2Info cp2Info, CoalescedRow row) {

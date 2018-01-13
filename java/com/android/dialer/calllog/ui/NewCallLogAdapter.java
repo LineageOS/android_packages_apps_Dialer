@@ -64,6 +64,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   void updateCursor(Cursor updatedCursor) {
     this.cursor = updatedCursor;
+    this.realtimeRowProcessor.clearCache();
 
     setHeaderPositions();
     notifyDataSetChanged();
