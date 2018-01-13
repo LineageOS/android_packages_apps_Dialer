@@ -105,6 +105,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
       // TODO(zachh): Styling for call type icons when the call is new.
       secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
+    } else {
+      primaryTextView.setTextAppearance(R.style.primary_textview);
+      secondaryTextView.setTextAppearance(R.style.secondary_textview);
     }
 
     setNumberCalls(row);
@@ -158,6 +161,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setSecondaryCallTypes(CoalescedRow row) {
     // Only call type icon is shown before the secondary text.
+    secondaryCallTypeIconsView.clear();
     secondaryCallTypeIconsView.add(row.callType());
 
     // TODO(zachh): Per new mocks, may need to add method to CallTypeIconsView to disable coloring.
