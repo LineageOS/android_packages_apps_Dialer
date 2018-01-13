@@ -16,8 +16,19 @@
   -->
 <resources>
 
+  <style name="primary_textview">
+    <item name="android:textColor">@color/primary_text_color</item>
+    <item name="android:fontFamily">sans-serif</item>
+  </style>
+
   <style name="primary_textview_new_call">
+    <item name="android:textColor">@color/primary_text_color</item>
     <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="secondary_textview">
+    <item name="android:textColor">@color/secondary_text_color</item>
+    <item name="android:fontFamily">sans-serif</item>
   </style>
 
   <style name="secondary_textview_new_call">
