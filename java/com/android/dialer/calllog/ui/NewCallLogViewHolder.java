@@ -33,7 +33,6 @@ import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.CallTypeIconsView;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -208,7 +207,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     @Override
     public void onFailure(Throwable throwable) {
-      LogUtil.e("RealtimeRowFutureCallback.onFailure", "realtime processing failed", throwable);
+      throw new RuntimeException("realtime processing failed", throwable);
     }
   }
 }
