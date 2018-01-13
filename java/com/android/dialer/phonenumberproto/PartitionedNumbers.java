@@ -30,14 +30,14 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Divides a set of {@link DialerPhoneNumber DialerPhoneNumbers} by those that can be formatted to
- * E164 and those that cannot.
+ * Divides a set of {@link DialerPhoneNumber DialerPhoneNumbers} according to those that are valid
+ * according to libphonenumber, and those that are not.
  */
 public final class PartitionedNumbers {
   private final ImmutableMap<String, ImmutableSet<DialerPhoneNumber>>
       e164NumbersToDialerPhoneNumbers;
   private final ImmutableMap<String, ImmutableSet<DialerPhoneNumber>>
-      unformattableNumbersToDialerPhoneNumbers;
+      invalidNumbersToDialerPhoneNumbers;
 
   @WorkerThread
   public PartitionedNumbers(@NonNull ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers) {
@@ -45,12 +45,12 @@ public final class PartitionedNumbers {
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
         new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
     Map<String, Set<DialerPhoneNumber>> e164MapBuilder = new ArrayMap<>();
-    Map<String, Set<DialerPhoneNumber>> unformattableMapBuilder = new ArrayMap<>();
+    Map<String, Set<DialerPhoneNumber>> invalidMapBuilder = new ArrayMap<>();
 
     for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
-      Optional<String> e164 = dialerPhoneNumberUtil.formatToE164(dialerPhoneNumber);
-      if (e164.isPresent()) {
-        String validE164 = e164.get();
+      Optional<String> optValidE164 = dialerPhoneNumberUtil.formatToValidE164(dialerPhoneNumber);
+      if (optValidE164.isPresent()) {
+        String validE164 = optValidE164.get();
         Set<DialerPhoneNumber> currentNumbers = e164MapBuilder.get(validE164);
         if (currentNumbers == null) {
           currentNumbers = new ArraySet<>();
@@ -58,49 +58,52 @@ public final class PartitionedNumbers {
         }
         currentNumbers.add(dialerPhoneNumber);
       } else {
-        String unformattableNumber = dialerPhoneNumber.getRawInput().getNumber();
-        Set<DialerPhoneNumber> currentNumbers = unformattableMapBuilder.get(unformattableNumber);
+        String invalidNumber = dialerPhoneNumber.getRawInput().getNumber();
+        Set<DialerPhoneNumber> currentNumbers = invalidMapBuilder.get(invalidNumber);
         if (currentNumbers == null) {
           currentNumbers = new ArraySet<>();
-          unformattableMapBuilder.put(unformattableNumber, currentNumbers);
+          invalidMapBuilder.put(invalidNumber, currentNumbers);
         }
         currentNumbers.add(dialerPhoneNumber);
       }
     }
 
     e164NumbersToDialerPhoneNumbers = makeImmutable(e164MapBuilder);
-    unformattableNumbersToDialerPhoneNumbers = makeImmutable(unformattableMapBuilder);
+    invalidNumbersToDialerPhoneNumbers = makeImmutable(invalidMapBuilder);
   }
 
-  /** Returns the set of formatted number from the original DialerPhoneNumbers */
+  /** Returns the set of invalid numbers from the original DialerPhoneNumbers */
   @NonNull
-  public ImmutableSet<String> unformattableNumbers() {
-    return unformattableNumbersToDialerPhoneNumbers.keySet();
+  public ImmutableSet<String> invalidNumbers() {
+    return invalidNumbersToDialerPhoneNumbers.keySet();
   }
 
-  /** Returns the set of raw number that is unformattable from the original DialerPhoneNumbers */
+  /** Returns the set of valid, E164 formatted numbers from the original DialerPhoneNumbers */
   @NonNull
   public ImmutableSet<String> validE164Numbers() {
     return e164NumbersToDialerPhoneNumbers.keySet();
   }
 
   /**
-   * Returns the corresponding set of original DialerPhoneNumber that maps to the e.164 number, or
-   * an empty set if the number is not found.
+   * Returns the corresponding set of original DialerPhoneNumbers that map to the valid E164 number
+   * from {@link #validE164Numbers()}.
+   *
+   * @throws NullPointerException if there are no numbers found
    */
   @NonNull
-  public ImmutableSet<DialerPhoneNumber> dialerPhoneNumbersForE164(String e164) {
-    return Assert.isNotNull(e164NumbersToDialerPhoneNumbers.get(e164));
+  public ImmutableSet<DialerPhoneNumber> dialerPhoneNumbersForValidE164(String validE164) {
+    return Assert.isNotNull(e164NumbersToDialerPhoneNumbers.get(validE164));
   }
 
   /**
-   * Returns the corresponding set of original DialerPhoneNumber that maps to the unformattable
-   * number returned by {@link #unformattableNumbers()}, or an empty set if the number is not found.
+   * Returns the corresponding set of original DialerPhoneNumbers that map to the invalid number
+   * from {@link #invalidNumbers()}.
+   *
+   * @throws NullPointerException if there are no numbers found
    */
   @NonNull
-  public ImmutableSet<DialerPhoneNumber> dialerPhoneNumbersForUnformattable(
-      String unformattableNumber) {
-    return Assert.isNotNull(unformattableNumbersToDialerPhoneNumbers.get(unformattableNumber));
+  public ImmutableSet<DialerPhoneNumber> dialerPhoneNumbersForInvalid(String invalidNumber) {
+    return Assert.isNotNull(invalidNumbersToDialerPhoneNumbers.get(invalidNumber));
   }
 
   private static <K, V> ImmutableMap<K, ImmutableSet<V>> makeImmutable(

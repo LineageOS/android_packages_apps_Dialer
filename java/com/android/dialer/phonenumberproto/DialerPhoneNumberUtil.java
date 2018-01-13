@@ -132,13 +132,13 @@ public class DialerPhoneNumberUtil {
    * Formats the provided number to E164 format or return a normalized version of the raw number if
    * the number is not valid according to {@link PhoneNumberUtil#isValidNumber(PhoneNumber)}.
    *
-   * @see #formatToE164(DialerPhoneNumber)
+   * @see #formatToValidE164(DialerPhoneNumber)
    * @see PhoneNumberUtils#normalizeNumber(String)
    */
   @WorkerThread
   public String normalizeNumber(DialerPhoneNumber number) {
     Assert.isWorkerThread();
-    return formatToE164(number)
+    return formatToValidE164(number)
         .or(PhoneNumberUtils.normalizeNumber(number.getRawInput().getNumber()));
   }
 
@@ -154,7 +154,7 @@ public class DialerPhoneNumberUtil {
    * @see PhoneNumberUtils#formatNumberToE164(String, String)
    */
   @WorkerThread
-  public Optional<String> formatToE164(DialerPhoneNumber number) {
+  public Optional<String> formatToValidE164(DialerPhoneNumber number) {
     Assert.isWorkerThread();
     if (number.hasDialerInternalPhoneNumber()) {
       PhoneNumber phoneNumber = Converter.protoToPojo(number.getDialerInternalPhoneNumber());
