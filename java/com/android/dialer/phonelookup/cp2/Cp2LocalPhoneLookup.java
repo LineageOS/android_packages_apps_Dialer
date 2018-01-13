@@ -159,6 +159,10 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
       // queries; since running this many queries is not feasible for the (lightweight) isDirty
       // check, simply return true. The expectation is that this should rarely be the case as the
       // vast majority of numbers in call logs should be valid.
+      LogUtil.v(
+          "Cp2LocalPhoneLookup.isDirty",
+          "returning true because too many invalid numbers (%d)",
+          partitionedNumbers.invalidNumbers().size());
       return Futures.immediateFuture(true);
     }
 
@@ -713,6 +717,10 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                 for (DialerPhoneNumber dialerPhoneNumber : updatedNumbers) {
                   map.put(dialerPhoneNumber, ImmutableSet.of());
                 }
+                LogUtil.v(
+                    "Cp2LocalPhoneLookup.buildMapForUpdatedOrAddedContacts",
+                    "found %d numbers that may need updating",
+                    updatedNumbers.size());
                 return map;
               };
           return Futures.whenAllSucceed(validNumbersFuture, invalidNumbersFuture)
