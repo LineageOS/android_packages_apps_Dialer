@@ -31,64 +31,126 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Deiaren azpi-egoera:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">Berrekin da</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">Deia konektatuta dago, baina audioa esekita dago</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">Deia konektatuta dago, baina bideoa esekita dago</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">Bideo kalitatea antzematen\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Bideo kalitatea aldatu da, orain <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">altua</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">ertaina</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">baxua</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">ezezaguna</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">Erreproduzigailua hasi da</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">Erreproduzigailua gelditu da</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">Kamera ez dago prest</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">Kamera prest dago</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">Dei saio gertaera ezezaguna</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Wi-Fi datu-erabilera: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">LTE datu-erabilera: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">Hautatu dei mota</string>
+  <string name="modify_call_option_vt">Norabide biko bideo-deia</string>
+  <string name="modify_call_option_vt_tx">Bideo igorpena</string>
+  <string name="modify_call_option_vt_rx">Bideo harrera</string>
+  <string name="modify_call_option_voice">Ahotsa besterik ez</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">Huts egin du deia aldatzeak, bateria gutxiegi dagoelako.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">Ez da zenbakia ezarri. Eman zenbaki bat IMS ezarpenen bidez eta berriro saiatu.</string>
+  <string name="qti_ims_transfer_request_error">Diaren transferentzia eskaerak huts egin du.</string>
+  <string name="qti_ims_transfer_request_success">Deiaren transferentzia eskaera onartu da.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">Transferentzia itsua</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Transferentzia bermatua</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">Transferentzia kontsultatua</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">Ezgaitu TTY modua bideo-deiak baimentzeko.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">Desbideratu</string>
+  <string name="qti_description_deflect_error">Ez da zenbakia ezarri. Eman zenbaki bat IMS ezarpenen bidez eta berriro saiatu.</string>
+  <string name="qti_description_deflect_service_error">Ez dago euskarririk deiak desbideratzeko zerbitzuarentzat.</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">Deia eten da LTEtik 3G/2Gra aldatzea ez zelako posible.</string>
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">Gehitu parte hartzailea</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">Birmarkatze aukera</string>
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">Ezin izan da IMS bideo-dei bat egin, birmarkatu ez-IMS bideo-dei gisa?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">Deia mailaz igo da erabiltzaileak eskatuta</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">Deia mailaz igo da urruneko erabiltzaileak eskatuta</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">Deia mailaz jaitsi da erabiltzaileak eskatuta</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">Deia mailaz jaitsi da urruneko erabiltzaileak eskatuta</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">Deia mailaz jaitsi da RTP denbora muga gainditu delako</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">Deia mailaz jaitsi da zerbitzu kalitateagatik</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">Deia mailaz jaitsi da paketeen galeragatik</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">Deia mailaz jaitsi da abiadura baxuagatik</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">Deia mailaz jaitsi da tenperatura jaisteko</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">Deia mailaz jaitsi da ezpain sinkronizazioagatik</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">Deia mailaz jaitsi da errore orokor batengatik</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Konferentzia deia jasotzen</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Bideo-konferentzia deia jasotzen</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Konferentzia deia jasotzen</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Konferentzia deia jasotzen <xliff:g id="provider_name">%s</xliff:g> bidez</string>
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">Deiak huts egin du bateria gutxiegi dagoelako</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">Ahots kalitate ona</string>
+  <string name="vowifi_call_quality_fair">Ahots kalitate onargarria</string>
+  <string name="vowifi_call_quality_poor">Ahots kalitate txarra</string>
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
+  <string name="low_battery">Bateria baxuaren abisua</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Deia eten nahi duzu?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">Zure bateria %15 azpitik dago. Bideo-deiarekin jarraitu nahi duzu ala ahots-deia bihurtu nahi duzu?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">Bihurtu</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">Bideo-deia</string>
+  <string name="video_call_cannot_upgrade">Ezin dira bideo-deiak onartu orain</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">Hautatu irudi-modua</string>
+  <string name="video_call_picture_mode_preview_video">Kameraren aurrebista</string>
+  <string name="video_call_picture_mode_incoming_video">Bideoa jasotzen</string>
+  <string name="video_call_picture_mode_cancel_option">Utzi</string>
+  <string name="video_call_picture_mode_save_option">Gorde</string>
 </resources>

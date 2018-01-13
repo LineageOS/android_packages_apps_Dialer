@@ -31,25 +31,35 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
   <!-- Call substate label for call resumed -->
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">Connecté, mais l\'audio est suspendu</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">Connecté, mais la vidéo est suspendue</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">Détection de la qualité vidéo\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Qualité vidéo changée en <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">haute</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">moyenne</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">basse</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">inconnue</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">L\'appareil photo n\'est pas prêt</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">L\'appareil photo est prêt</string>
   <!-- Message indicating unknown call session event -->
   <!-- Message indicating data usage -->
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_voice">Voix uniquement</string>
   <!-- Modify call error cause -->
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <!-- Text for the onscreen "blind transfer" button -->
@@ -61,8 +71,6 @@
   <!-- Text for the onscreen "Add Participant" button -->
   <!-- Title of the IMS to CS redial dialog -->
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
   <!-- Session modify cause code upgrade remote request -->
@@ -83,8 +91,6 @@
   <!-- Message indicating call failed due to low battery -->
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->

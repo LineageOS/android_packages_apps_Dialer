@@ -31,64 +31,126 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Sub-estado da chamada:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">Retomada</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">Conectada, mas o áudio está suspenso</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">Conectada, mas o vídeo está suspenso</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">A detetar a qualidade do vídeo\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: A qualidade do vídeo mudou para <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">alta</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">média</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">baixa</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">desconhecida</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">O leitor de vídeo foi iniciado</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">O leitor de vídeo parou</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">A câmara não está pronta</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">A câmara está pronta</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">Evento de sessão de chamada desconhecido</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Utilização de dados Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">Utilização de dados LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">Selecionar o tipo de chamada</string>
+  <string name="modify_call_option_vt">Chamada de vídeo bidirecional</string>
+  <string name="modify_call_option_vt_tx">Transmissão de vídeo</string>
+  <string name="modify_call_option_vt_rx">Receção de vídeo</string>
+  <string name="modify_call_option_voice">Apenas voz</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">Não é possível modificar a chamada devido a bateria fraca.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">Número não definido. Indique o número através das definições de IMS e tente novamente.</string>
+  <string name="qti_ims_transfer_request_error">Pedido de transferência de chamada falhou.</string>
+  <string name="qti_ims_transfer_request_success">Pedido de transferência de chamada bem sucedido.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">Transferência direta</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Transferência garantida</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">Transferência consultiva</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">Por favor, desative o modo TTY para permitir chamadas de vídeo.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">Desviar</string>
+  <string name="qti_description_deflect_error">Número não definido. Indique o número através das definições de IMS e tente novamente.</string>
+  <string name="qti_description_deflect_service_error">O serviço de desvio de chamadas não é suportado.</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">A chamada foi terminada porque a passagem de LTE para 3G/2G não foi possível.</string>
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">Adicionar participante</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">Opção de remarcação</string>
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">Impossível fazer a chamada IMS. Remarcar como uma chamada de voz não IMS?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">Qualidade da chamada aprimorada a pedido do utilizador</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">Qualidade da chamada aprimorada por pedido do utilizador remoto</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">Qualidade da chamada diminuída por pedido do utilizador</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">Qualidade da chamada diminuída por pedido do utilizador remoto</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">Qualidade da chamada diminuída devido a tempo RTP esgotado</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">Qualidade da chamada diminuída devido à qualidade do serviço</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">Qualidade da chamada diminuída devido a perdas de pacotes</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">Qualidade da chamada diminuída devido à baixa taxa de transferência</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">Qualidade da chamada diminuída devido a alívio térmico</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">Qualidade da chamada diminuída para acompanhar a sincronização dos lábios</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">Qualidade da chamada diminuída devido a um erro genérico</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Chamada de conferência recebida</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Chamada de vídeo-conferência recebida</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Chamada de conferência recebida</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Conferência recebida através de <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">Chamada falhou devido a bateria fraca</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">Boa qualidade de voz</string>
+  <string name="vowifi_call_quality_fair">Qualidade de voz razoável</string>
+  <string name="vowifi_call_quality_poor">Má qualidade de voz</string>
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
+  <string name="low_battery">Aviso de bateria fraca</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Deseja desligar a chamada?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">O nível de bateria é inferior a 15%. Pretende continuar com a chamada de vídeo ou convertê-la para chamada de voz?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">Converter</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">Chamada de vídeo</string>
+  <string name="video_call_cannot_upgrade">Atualmente não é possível aceitar chamadas de vídeo</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">Escolha o modo de imagem</string>
+  <string name="video_call_picture_mode_preview_video">Pré-visualização da câmara</string>
+  <string name="video_call_picture_mode_incoming_video">Chamada de vídeo recebida</string>
+  <string name="video_call_picture_mode_cancel_option">Cancelar</string>
+  <string name="video_call_picture_mode_save_option">Guardar</string>
 </resources>

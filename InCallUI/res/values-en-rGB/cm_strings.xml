@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Party has barred all incoming calls.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Call unanswered and forwarded</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Forwarded call</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Dialling (waiting\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Calling via <xliff:g id="provider_name">%s</xliff:g> (Waiting\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (via <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Waiting call</string>
+  <string name="call_recording_failed_message">Failed to start call recording</string>
+  <string name="call_recording_file_location">Saved call recording to <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Record call</string>
+  <string name="onscreenStopCallRecordText">Stop recording</string>
+  <string name="recording_time_text">Recording</string>
+  <string name="recording_warning_title">Enable call recording?</string>
+  <string name="recording_warning_text">Notice: You are responsible for compliance with any laws, regulations and rules that apply to the use of call recording functionality and the use or distribution of those recordings.</string>
+  <string name="call_failed_due_to_validate_number">Unable to make video call, the number format is not correct</string>
+  <string name="call_state_dialing">Dialling</string>
+  <string name="call_state_holding">Holding</string>
+  <string name="call_state_active">Active</string>
+  <string name="call_state_unknown">Unknown</string>
+  <string name="call_state_disconnecting">Disconnecting</string>
+  <string name="call_state_disconnected">Disconnected</string>
+  <string name="too_many_recipients">No more than 6 people can participate in a 4G conference call.</string>
 </resources>

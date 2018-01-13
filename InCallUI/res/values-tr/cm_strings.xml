@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Grup bütün gelen aramaları engelledi.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Arama cevaplanmadı ve yönlendirildi</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Yönlendirilmiş arama</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Aranıyor (bekliyor\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template"><xliff:g id="provider_name">%s</xliff:g> ile aranıyor (Bekleniyor\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (<xliff:g id="provider_name">%2$s</xliff:g> aracılığıyla)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Arama bekleniyor</string>
+  <string name="call_recording_failed_message">Arama ses kaydı başlatılamadı</string>
+  <string name="call_recording_file_location">Arama kaydı <xliff:g id="filename">%s</xliff:g> konumuna kaydedildi</string>
+  <string name="onscreenCallRecordText">Aramayı kaydet</string>
+  <string name="onscreenStopCallRecordText">Kaydı durdur</string>
+  <string name="recording_time_text">Kaydediliyor</string>
+  <string name="recording_warning_title">Arama kaydı etkinleştirilsin mi?</string>
+  <string name="recording_warning_text">Dikkat: Arama kaydı işlevini kullanırken veya bu kayıtları dağıtırken ilgili yasa, düzenleme ve kurallara uyulmasından siz sorumlusunuz.</string>
+  <string name="call_failed_due_to_validate_number">Görüntülü arama yapılamıyor, numara formatı doğru değil</string>
+  <string name="call_state_dialing">Aranıyor</string>
+  <string name="call_state_holding">Bekletiliyor</string>
+  <string name="call_state_active">Etkin</string>
+  <string name="call_state_unknown">Bilinmiyor</string>
+  <string name="call_state_disconnecting">Bağlantı kesiliyor</string>
+  <string name="call_state_disconnected">Bağlantı kesildi</string>
+  <string name="too_many_recipients">4G konferans aramasına en fazla 6 kişi katılabilir.</string>
 </resources>

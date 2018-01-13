@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">La multi-conferència ha bloquejat totes les trucades entrants.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Trucada no contestada i desviada</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Trucada desviada</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Marcant (esperant\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">S\'està trucant a través de <xliff:g id="provider_name">%s</xliff:g> (Esperant\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (a través de <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Trucada en espera</string>
+  <string name="call_recording_failed_message">No s\'ha pogut començar la gravació de la trucada</string>
+  <string name="call_recording_file_location">La trucada gravada s\'ha desat a <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Grava la trucada</string>
+  <string name="onscreenStopCallRecordText">Atura la gravació</string>
+  <string name="recording_time_text">S\'està gravant</string>
+  <string name="recording_warning_title">Voleu habilitar la gravació de trucades?</string>
+  <string name="recording_warning_text">Avís: Sou el responsable del compliment de les lleis, reglaments i regles que s\'apliquen a l\'ús de la funcionalitat d\'enregistrament de trucades i l\'ús o distribució d\'aquests enregistraments.</string>
+  <string name="call_failed_due_to_validate_number">No es pot fer la trucada de vídeo, el format del número no és correcte</string>
+  <string name="call_state_dialing">S\'està marcant</string>
+  <string name="call_state_holding">En espera</string>
+  <string name="call_state_active">Activa</string>
+  <string name="call_state_unknown">Desconeguda</string>
+  <string name="call_state_disconnecting">S\'està desconnectant</string>
+  <string name="call_state_disconnected">Desconnectada</string>
+  <string name="too_many_recipients">No poden participar més de 6 persones en una trucada de conferència 4G.</string>
 </resources>

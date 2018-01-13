@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Phía bên kia đã chặn tất cả cuộc gọi đến.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Cuộc gọi không được trả lời và đã chuyển hướng</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Chuyển tiếp cuộc gọi</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Đang quay số (đang chờ\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Gọi thông qua <xliff:g id="provider_name">%s</xliff:g> (Đang chờ\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (qua <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Đang chờ cuộc gọi</string>
+  <string name="call_recording_failed_message">Không thể bắt đầu ghi âm cuộc gọi</string>
+  <string name="call_recording_file_location">Đã lưu ghi âm cuộc gọi vào <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Ghi âm cuộc gọi</string>
+  <string name="onscreenStopCallRecordText">Dừng ghi âm</string>
+  <string name="recording_time_text">Đang ghi</string>
+  <string name="recording_warning_title">Cho phép ghi âm cuộc gọi?</string>
+  <string name="recording_warning_text">Thông báo: Bạn có trách nhiệm tuân thủ bất kỳ luật pháp, quy định và quy tắc nào áp dụng cho việc sử dụng chức năng ghi âm cuộc gọi và sử dụng hay phân phối các bản ghi âm đó.</string>
+  <string name="call_failed_due_to_validate_number">Không thể tạo cuộc gọi hình ảnh, định dạng số điện thoại không đúng</string>
+  <string name="call_state_dialing">Đang quay số</string>
+  <string name="call_state_holding">Đang giữ máy</string>
+  <string name="call_state_active">Hoạt động</string>
+  <string name="call_state_unknown">Không rõ</string>
+  <string name="call_state_disconnecting">Đang ngắt kết nối</string>
+  <string name="call_state_disconnected">Đã ngắt kết nối</string>
+  <string name="too_many_recipients">Không nhiều hơn 6 người có thể tham gia vào cuộc gọi hội nghị 4G.</string>
 </resources>

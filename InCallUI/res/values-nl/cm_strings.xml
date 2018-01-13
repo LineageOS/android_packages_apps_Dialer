@@ -18,12 +18,32 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Andere partij blokkeert alle oproepen.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Gesprek onbeantwoord en doorgeschakeld</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Doorgeschakeld gesprek</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Bellen (wachten\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Bellen via <xliff:g id="provider_name">%s</xliff:g> (wachten\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Gesprek in de wacht">%1$s</xliff:g> (via <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Gesprek in de wacht</string>
+  <string name="call_recording_failed_message">Gespreksopname starten mislukt</string>
+  <string name="call_recording_file_location">Gespreksopname opgeslagen als <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Gesprek opnemen</string>
+  <string name="onscreenStopCallRecordText">Opnemen stoppen</string>
+  <string name="recording_time_text">Opnemen\u2026</string>
+  <string name="recording_warning_title">Gespreksopname inschakelen?</string>
+  <string name="recording_warning_text">Let op: u bent zelf verantwoordelijk om de wetten, verordeningen en regels na te leven die van toepassing zijn bij het opnemen van gesprekken en het gebruik of verspreiding van zulke opnamen.</string>
+  <string name="call_state_dialing">Kiezen</string>
+  <string name="call_state_holding">In de wacht</string>
+  <string name="call_state_active">Actief</string>
+  <string name="call_state_unknown">Onbekend</string>
+  <string name="call_state_disconnecting">Verbinding verbreken</string>
+  <string name="call_state_disconnected">Verbinding verbroken</string>
 </resources>

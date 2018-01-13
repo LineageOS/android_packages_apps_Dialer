@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">对方已阻止所有来电。</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">呼叫未应答并已被转移</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">已转移的呼叫</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">正在拨号 (等待中\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">正通过 <xliff:g id="provider_name">%s</xliff:g> 呼叫 (等待中\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g>（通过 <xliff:g id="provider_name">%2$s</xliff:g>）</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">来电等待</string>
+  <string name="call_recording_failed_message">启动通话录音失败</string>
+  <string name="call_recording_file_location">通话录音已保存到 <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">通话录音</string>
+  <string name="onscreenStopCallRecordText">停止录音</string>
+  <string name="recording_time_text">录音中</string>
+  <string name="recording_warning_title">启用通话录音吗？</string>
+  <string name="recording_warning_text">注意：您有责任遵守有关通话录音以及录音使用、分发相关的任何法律、法规和规定。</string>
+  <string name="call_failed_due_to_validate_number">无法进行视频通话，号码格式错误</string>
+  <string name="call_state_dialing">正在拨号</string>
+  <string name="call_state_holding">保持中</string>
+  <string name="call_state_active">使用</string>
+  <string name="call_state_unknown">未知</string>
+  <string name="call_state_disconnecting">正在断开连接</string>
+  <string name="call_state_disconnected">已断开连接</string>
+  <string name="too_many_recipients">不超过 6 人可以参加 4G 电话会议。</string>
 </resources>

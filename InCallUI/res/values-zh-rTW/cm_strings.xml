@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">對方已拒接所有來電。</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">來電未接聽並已轉接</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">已轉接通話</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">正在撥號 (等待中\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">經由 <xliff:g id="provider_name">%s</xliff:g> 撥打 (等待中\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (透過：<xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">等待來電</string>
+  <string name="call_recording_failed_message">無法啟動通話錄音</string>
+  <string name="call_recording_file_location">已將電話錄音儲存至「 <xliff:g id="filename">%s</xliff:g>」</string>
+  <string name="onscreenCallRecordText">錄製通話</string>
+  <string name="onscreenStopCallRecordText">停止錄製</string>
+  <string name="recording_time_text">錄製中</string>
+  <string name="recording_warning_title">啟用通話錄音？</string>
+  <string name="recording_warning_text">注意：您有責任遵守任何適用於規管通話錄音功能的使用和分發這些錄音的法律、法規或規章。</string>
+  <string name="call_failed_due_to_validate_number">無法建立視訊通話，該號碼格式是錯誤的</string>
+  <string name="call_state_dialing">撥號中</string>
+  <string name="call_state_holding">保留中</string>
+  <string name="call_state_active">啟動</string>
+  <string name="call_state_unknown">未知</string>
+  <string name="call_state_disconnecting">掛斷中</string>
+  <string name="call_state_disconnected">已斷線</string>
+  <string name="too_many_recipients">不能超過 6 人參加 4G 的多方通話。</string>
 </resources>

@@ -31,64 +31,126 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>：通話子狀態：\u000a<xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">已恢復通話</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">通話已連接，但語音被暫停</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">通話已連接，但視訊被暫停</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">正在偵測視訊品質\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>：視訊品質變更為 <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">高</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">中</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">低</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">未知</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">播放器已開始</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">播放器已停止</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">相機尚未就緒</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">相機已就緒</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">未知的通話事件</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Wi-Fi 數據用量：<xliff:g id="usage">%1$s </xliff:g></string>
+  <string name="lte_data_usage_label">LTE 數據用量：<xliff:g id="usage">%1$s </xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">選擇通話類型</string>
+  <string name="modify_call_option_vt">雙向視訊</string>
+  <string name="modify_call_option_vt_tx">視訊傳輸</string>
+  <string name="modify_call_option_vt_rx">視訊接收</string>
+  <string name="modify_call_option_voice">僅限語音</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">由於電量不足，無法變更通話。</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">號碼未設定。請至 IMS 設定中設定號碼，然後重試。</string>
+  <string name="qti_ims_transfer_request_error">來電轉接要求失敗。</string>
+  <string name="qti_ims_transfer_request_success">來電轉接要求成功。</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">盲轉接</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">有保證轉接</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">諮詢轉接</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">請停用 TTY 模式即可進行視訊通話。</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">轉接</string>
+  <string name="qti_description_deflect_error">號碼未設定。請至 IMS 設定中設定號碼，然後重試。</string>
+  <string name="qti_description_deflect_service_error">不支援來電轉接。</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">通話因無法從 LTE 切換至 3G/2G 而結束。</string>
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">新增參與者</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">重撥選項</string>
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">無法撥打 IMS 視訊電話，是否使用非 IMS 語音電話重撥？</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">通話因使用者要求而升級</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">通話因遠端使用者要求而升級</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">通話因使用者要求而降級</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">通話因遠端使用者要求而降級</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">由於 RTP 逾時，通話已降級</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">為保證服務品質，通話已降級</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">由於資料包遺失，通話已降級</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">由於低流量，通話已降級</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">為降低溫度，通話已降級</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">為保持同步，通話已降級</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">由於一般錯誤，通話已降級</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">多方通話來電</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">多方視訊來電</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">多方通話來電</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">透過 <xliff:g id="provider_name">%s</xliff:g> 多方通話來電</string>
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">電量不足，通話失敗。</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">良好的語音品質</string>
+  <string name="vowifi_call_quality_fair">一般的語音品質</string>
+  <string name="vowifi_call_quality_poor">較差的語音品質</string>
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
+  <string name="low_battery">電量不足警告</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">您想掛斷電話嗎？</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">您的電量低於 15%。是否想繼續視訊通話或將其轉換為語音通話？</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">轉換</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">視訊通話</string>
+  <string name="video_call_cannot_upgrade">此時無法接受視訊來電</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">選擇圖片模式</string>
+  <string name="video_call_picture_mode_preview_video">相機預覽</string>
+  <string name="video_call_picture_mode_incoming_video">視訊來電</string>
+  <string name="video_call_picture_mode_cancel_option">取消</string>
+  <string name="video_call_picture_mode_save_option">儲存</string>
 </resources>

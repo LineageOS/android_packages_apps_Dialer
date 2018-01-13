@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Strana blokuje všetky prichádzajúce hovory.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Hovor bol neprijatý a presmerovaný</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Presmerovaný hovor</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Vytáčanie (Čaká sa\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Volanie cez <xliff:g id="provider_name">%s</xliff:g> (Čaká sa\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Podržaný hovor">%1$s</xliff:g> (cez <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Čakajúci hovor</string>
+  <string name="call_recording_failed_message">Nepodarilo sa spustiť nahrávanie hovoru</string>
+  <string name="call_recording_file_location">Nahrávka hovoru bola uložená do <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Nahrať hovor</string>
+  <string name="onscreenStopCallRecordText">Zastaviť nahrávanie</string>
+  <string name="recording_time_text">Nahrávanie</string>
+  <string name="recording_warning_title">Povoliť nahrávanie hovorov?</string>
+  <string name="recording_warning_text">Upozornenie: Ste zodpovedný za dodržiavanie všetkých zákonov, predpisov a pravidiel, ktoré sa vzťahujú na nahrávanie hovorov a použitie alebo distribúciu týchto nahrávok.</string>
+  <string name="call_failed_due_to_validate_number">Videohovor nemožno uskutočniť, formát čísla nie je správny</string>
+  <string name="call_state_dialing">Vytáčanie</string>
+  <string name="call_state_holding">Podržanie</string>
+  <string name="call_state_active">Aktívny</string>
+  <string name="call_state_unknown">Neznáme číslo</string>
+  <string name="call_state_disconnecting">Odpájanie</string>
+  <string name="call_state_disconnected">Odpojené</string>
+  <string name="too_many_recipients">Konferenčného hovoru 4G sa nemôže zúčastniť viac ako 6 osôb.</string>
 </resources>

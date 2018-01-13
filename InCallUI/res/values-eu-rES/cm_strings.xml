@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Hartzaileak dei guztiak jasotzea trabatu du.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Deia ez da erantzun eta birbidali da</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Desbideratutako deia</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Markatzen (itxaroten\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template"><xliff:g id="provider_name">%s</xliff:g> bidez deitzen (Itxaroten\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (<xliff:g id="provider_name">%2$s</xliff:g> bidez)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Deia zain</string>
+  <string name="call_recording_failed_message">Huts egin du deia grabatzen hasteak</string>
+  <string name="call_recording_file_location">Deiaren grabaketa hemen gorde da: <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Grabatu deia</string>
+  <string name="onscreenStopCallRecordText">Gelditu grabaketa</string>
+  <string name="recording_time_text">Grabatzen</string>
+  <string name="recording_warning_title">Gaitu deien grabaketa?</string>
+  <string name="recording_warning_text">Oharra: Zu zara deien grabaketei eta hauek erabili edo banatzeari dagokien legeak edo bestelako arauak betetzearen erantzulea.</string>
+  <string name="call_failed_due_to_validate_number">Ezin izan da bideo-deia egin, zenbaki-formatua ez da zuzena</string>
+  <string name="call_state_dialing">Markatzen</string>
+  <string name="call_state_holding">Eusten</string>
+  <string name="call_state_active">Aktiboa</string>
+  <string name="call_state_unknown">Ezezaguna</string>
+  <string name="call_state_disconnecting">Deskonektatzen</string>
+  <string name="call_state_disconnected">Deskonektatuta</string>
+  <string name="too_many_recipients">Gehienez 6 pertsonek hartu dezakete parte 4G konferentzia batean.</string>
 </resources>

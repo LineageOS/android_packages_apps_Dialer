@@ -19,11 +19,25 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Połączenie nieodebrane i przekazane dalej</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Połączenie przekazane</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Połączenie wstrzymane">%1$s </xliff:g> (przez <xliff:g id="provider_name">%2$s </xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Połączenie oczekujące</string>
+  <string name="call_recording_file_location">Zapisano nagranie rozmowy do <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Nagraj rozmowę</string>
+  <string name="onscreenStopCallRecordText">Zatrzymaj nagrywanie</string>
+  <string name="recording_time_text">Nagrywanie</string>
+  <string name="recording_warning_title">Włączyć nagrywanie rozmów?</string>
+  <string name="call_state_active">Aktywne</string>
+  <string name="call_state_unknown">Nieznane</string>
+  <string name="call_state_disconnecting">Rozłączanie</string>
+  <string name="call_state_disconnected">Rozłączony</string>
+  <string name="too_many_recipients">Nie więcej niż 6 osób może uczestniczyć w konferencji 4G.</string>
 </resources>

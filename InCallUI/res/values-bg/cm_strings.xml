@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Участник забрани всички входящи повиквания.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Повикване без отговор и препратено</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Препратено повикване</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Набиране (изчакайте\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Повикване чрез <xliff:g id="provider_name">%s </xliff:g> (Изчакване\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="задържан разговор">%1$s</xliff:g> (чрез <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Изчакващо повикване</string>
+  <string name="call_recording_failed_message">Неуспешен опит за записване на разговора</string>
+  <string name="call_recording_file_location">Записания разговор е запазен в <xliff:g id="filename">%s </xliff:g></string>
+  <string name="onscreenCallRecordText">Запис на разговор</string>
+  <string name="onscreenStopCallRecordText">Спри записването</string>
+  <string name="recording_time_text">Записване</string>
+  <string name="recording_warning_title">Разреши записването на разговори?</string>
+  <string name="recording_warning_text">Забележка: Вие сте отговорни за спазването на всички закони, наредби и правила, които важат за използването на записани разговори или разпространение на тези записи.</string>
+  <string name="call_failed_due_to_validate_number">Не може да осъществите видео повикване, числовия формат не е правилен</string>
+  <string name="call_state_dialing">Набиране</string>
+  <string name="call_state_holding">Задържане</string>
+  <string name="call_state_active">Активен</string>
+  <string name="call_state_unknown">Неизвестно</string>
+  <string name="call_state_disconnecting">Прекъсване на връзката</string>
+  <string name="call_state_disconnected">Прекъснат</string>
+  <string name="too_many_recipients">Не повече от 6 души могат да участват в 4G конферентен разговор.</string>
 </resources>

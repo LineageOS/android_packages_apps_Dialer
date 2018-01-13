@@ -106,7 +106,7 @@
   <string name="clear">Temizle</string>
   <string name="description_clear_search">Aramayı temizle</string>
   <string name="video_call_welcome_title"><b>Yeni Görüntülü Aramaya hoş geldiniz</b></string>
-  <string name="video_call_welcome_message">Hattın karşısındaki yakınınızdan gelen sesi duymayı seviyoruz, ama yüz yüze konuşmak daha iyidir! İşte gerçek zamanlı (FaceTime) bağlantı yapmanın gereklilikleri:\n 4G LTE ya da Wi-Fi bağlantısı\n Kullandığınız cihaz video arama desteklemeli\n Video aramalar yüksek hızlı veri kullanır\n Sesli çağrıdan görüntülü çağrıya güncellemek için\n\n <a>https://support.t-mobile.com/docs/DOC-23574</a> adresini ziyaret edin.</string>
+  <string name="video_call_welcome_message">Hattın karşısındaki yakınınızdan gelen sesi duymayı seviyoruz, ama yüz yüze konuşmak herzaman daha iyidir! İşte gerçek zamanlı (veya FaceTime?) bağlantı kurabilmeniz için bilmeniz gerekenler:\n 4G LTE veya bir Wi-Fi bağlantısı üzerinde olmanız gerekir.\n Kullandığınız cihaz görüntülü arama ile uyumlu olmalı\n Görüntülü aramalar yüksek hızlı veri kullanır\n Ayrıca sesli aramadan görüntülü aramaya yükseltmek için\n\n <a>https://support.t-mobile.com/docs/DOC-23574</a> adresini ziyaret edin.</string>
   <string name="video_call_welcome_message_repeat">Bu iletiyi her zaman göster</string>
   <string name="toast_change_video_call_failed">Görüntülü aramaya geçiş yapılamıyor, yanlış numara formatı</string>
   <string name="toast_make_video_call_failed">Görüntülü arama yapılamıyor, yanlış numara formatı</string>
@@ -114,7 +114,7 @@
   <string name="overflowBothCallMenuItemText">Görüntülü arama, beni göster</string>
   <string name="overflowRXCallMenuItemText">Görüntülü arama, beni gizle</string>
   <string name="overflowVOCallMenuItemText">Sesli arama</string>
-  <string name="video_call">Görüntülü Arama</string>
+  <string name="video_call">Görüntülü arama</string>
   <string name="call_data_info_label">Arama/veri kullanım sayaçları</string>
   <string name="call_data_info_description">Sesli arama kullanım süresi ve veri kullanım süresi</string>
   <string name="alert_call_over_wifi">Aramalar Wi-Fi üzerinden yapılacaktır.</string>

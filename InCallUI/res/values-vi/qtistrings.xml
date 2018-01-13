@@ -31,64 +31,126 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Phân trạng thái cuộc gọi:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">Đã tiếp tục</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">Đã kết nối, nhưng âm thanh bị treo</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">Đã kết nối, nhưng video bị treo</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">Đang phát hiện chất lượng video\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Chất lượng video đổi thành <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">cao</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">trung bình</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">thấp</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">không rõ</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">Trình phát đã bắt đầu</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">Trình phát đã dừng</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">Máy ảnh chưa sẵn sàng</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">Máy ảnh đã sẵn sàng</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">Sự kiện phiên gọi chưa rõ</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Sử dụng dữ liệu Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">Sử dụng dữ liệu LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">Chọn kiểu cuộc gọi</string>
+  <string name="modify_call_option_vt">Video hai chiều</string>
+  <string name="modify_call_option_vt_tx">Truyền video</string>
+  <string name="modify_call_option_vt_rx">Nhận video</string>
+  <string name="modify_call_option_voice">Chỉ giọng nói</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">Không thể thay đổi cuộc gọi vì pin yếu.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">Chưa đặt số. Cung cấp số qua cài đặt IMS và thử lại.</string>
+  <string name="qti_ims_transfer_request_error">Yêu cầu chuyển tiếp cuộc gọi thất bại.</string>
+  <string name="qti_ims_transfer_request_success">Yêu cầu chuyển tiếp cuộc gọi thành công.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">Chuyển tiếp mù</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Chuyển tiếp đảm bảo</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">Chuyển tiếp tư vấn</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">Hãy vô hiệu chế độ TTY để nâng cấp lên gọi video.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">Chuyển hướng</string>
+  <string name="qti_description_deflect_error">Chưa đặt số. Cung cấp số qua cài đặt IMS và thử lại.</string>
+  <string name="qti_description_deflect_service_error">Không hỗ trợ dịch vụ chuyển hưởng cuộc gọi.</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">Cuộc gọi đã kết thúc vì chuyển LTE sang 3G/2G không khả thi.</string>
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">Thêm người tham gia</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">Tùy chọn quay số lại</string>
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">Không thể gọi Video IMS, gọi lại dưới dạng cuộc gọi thoại không IMS?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">Đã nâng cấp cuộc gọi theo yêu cầu người dùng</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">Đã nâng cấp cuộc gọi theo yêu cầu người dùng từ xa</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">Đã hạ cấp cuộc gọi theo yêu cầu người dùng</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">Đã hạ cấp cuộc gọi theo yêu cầu người dùng từ xa</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">Đã hạ cấp cuộc gọi vì hết thời gian chờ RTP</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">Đã hạ cấp cuộc gọi vì chất lượng dịch vụ</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">Đã hạ cấp cuộc gọi vì mất gói dữ liệu</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">Đã hạ cấp cuộc gọi vì thông lượng thấp</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">Đã hạ cấp cuộc gọi để giảm thiểu nhiệt độ</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">Đã hạ cấp cuộc gọi vì nhép môi</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">Đã hạ cấp cuộc gọi vì lỗi tổng quát</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Cuộc gọi hội nghị đến</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Cuộc gọi hội nghị video đến</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Cuộc gọi hội nghị đến</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Cuộc gọi hội nghị đến thông qua <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">Không thể gọi vì pin yếu</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">Chất lượng giọng nói tốt</string>
+  <string name="vowifi_call_quality_fair">Chất lượng giọng nói cân bằng</string>
+  <string name="vowifi_call_quality_poor">Chất lượng giọng nói kém</string>
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
+  <string name="low_battery">Cảnh Báo Pin Yếu</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Bạn có muốn gác máy cuộc gọi?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">Mức pin của bạn dưới 15%. Bạn có muốn tiếp tục với cuộc gọi video hoặc chuyển nó sang một cuộc gọi thoại?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">Chuyển đổi</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">Gọi Video</string>
+  <string name="video_call_cannot_upgrade">Không thể chấp nhận cuộc gọi video tại thời điểm này</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">Chọn chế độ hình ảnh</string>
+  <string name="video_call_picture_mode_preview_video">Xem trước máy ảnh</string>
+  <string name="video_call_picture_mode_incoming_video">Cuộc gọi video đến</string>
+  <string name="video_call_picture_mode_cancel_option">Hủy</string>
+  <string name="video_call_picture_mode_save_option">Lưu</string>
 </resources>

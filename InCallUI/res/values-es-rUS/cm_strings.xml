@@ -24,7 +24,7 @@
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
   <string name="incall_call_type_label_forwarded">Llamada desviada</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
-  <string name="card_title_dialing_waiting">Llamando (esperando\u2026)</string>
+  <string name="card_title_dialing_waiting">Marcando (esperando\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
   <string name="calling_via_waiting_template">Llamando vía <xliff:g id="provider_name">%s</xliff:g> (Esperando\u2026)</string>

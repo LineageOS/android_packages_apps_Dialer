@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Todas as chamadas recebidas foram bloqueadas por terceiros.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Chamada não atendida e encaminhada</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Chamada encaminhada</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Discando (aguardando\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Chamando via <xliff:g id="provider_name">%s</xliff:g> (aguardando\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (via <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Chamada em espera</string>
+  <string name="call_recording_failed_message">Falha ao iniciar a gravação de chamada</string>
+  <string name="call_recording_file_location">A gravação foi salva em <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Gravar chamada</string>
+  <string name="onscreenStopCallRecordText">Parar gravação</string>
+  <string name="recording_time_text">Gravando</string>
+  <string name="recording_warning_title">Ativar gravação de chamadas?</string>
+  <string name="recording_warning_text">Aviso: Você é responsável por cumprir leis, regulamentações e regras que se aplicam ao uso do recurso de gravação de chamadas e da utilização ou distribuição dessas gravações.</string>
+  <string name="call_failed_due_to_validate_number">Falha ao realizar chamada de vídeo, formato de número incorreto</string>
+  <string name="call_state_dialing">Discando</string>
+  <string name="call_state_holding">Em espera</string>
+  <string name="call_state_active">Ativa</string>
+  <string name="call_state_unknown">Desconhecido</string>
+  <string name="call_state_disconnecting">Desconectando</string>
+  <string name="call_state_disconnected">Desconectado</string>
+  <string name="too_many_recipients">Apenas 6 pessoas podem participar de uma chamada de conferência via 4G.</string>
 </resources>

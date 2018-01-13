@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Oseba ima zaporo vseh dohodnih klicev.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Klic neodgovorjen in posredovan</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Posredovan klic</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Klicanje (čakanje \u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Klicanje prek <xliff:g id="provider_name">%s</xliff:g> (čakanje \u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (prek <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Čakajoči klic</string>
+  <string name="call_recording_failed_message">Začetek snemanja klica je spodletel</string>
+  <string name="call_recording_file_location">Posnetek klica shranjen v <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Snemaj klic</string>
+  <string name="onscreenStopCallRecordText">Ustavi snemanje</string>
+  <string name="recording_time_text">Snemanje</string>
+  <string name="recording_warning_title">Omogoči snemanje klicev?</string>
+  <string name="recording_warning_text">Obvestilo: Odgovorni ste za skladnost z zakoni, predpisi in pravili, ki veljajo za uporabo funkcionalnosti snemanja klicev in uporabo ali distribucijo teh posnetkov.</string>
+  <string name="call_failed_due_to_validate_number">Video klica ni bilo mogoče vzpostaviti, oblika številke ni pravilna</string>
+  <string name="call_state_dialing">Klicanje</string>
+  <string name="call_state_holding">Na čakanju</string>
+  <string name="call_state_active">Aktiven</string>
+  <string name="call_state_unknown">Neznano</string>
+  <string name="call_state_disconnecting">Prekinjanje</string>
+  <string name="call_state_disconnected">Prekinjen</string>
+  <string name="too_many_recipients">Konferenčnega klica 4G se ne more udeležiti več kot 6 oseb.</string>
 </resources>

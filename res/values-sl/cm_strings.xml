@@ -92,7 +92,7 @@
   <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja, najprej izklopite način za letalo</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Hitrega klicanja ni možno nastaviti za ta ključ</string>
+  <string name="speed_dial_can_not_be_set">Hitrega klicanja ni mogoče nastaviti za ta ključ</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->

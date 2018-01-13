@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Apelatul a blocat toate apelurile primite.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Apel nerăspuns și redirecționat</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Apel redirecționat</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Apelare (aşteptare\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Apelare via <xliff:g id="provider_name">%s</xliff:g> (În așteptare\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (via <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Apel în așteptare</string>
+  <string name="call_recording_failed_message">Înregistrarea apelului a eșuat</string>
+  <string name="call_recording_file_location">S-a salvat înregistrarea apelului în <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Înregistrare apel</string>
+  <string name="onscreenStopCallRecordText">Oprire înregistrare</string>
+  <string name="recording_time_text">Înregistrare</string>
+  <string name="recording_warning_title">Activați înregistrarea apelurilor?</string>
+  <string name="recording_warning_text">Anunț: Sunteți responsabil pentru respectarea oricărei legi, regulament și normă care se aplică la utilizarea funcției de înregistrare și folosirea sau distribuirea acestor înregistrări.</string>
+  <string name="call_failed_due_to_validate_number">Nu se poate efectua apelul video, formatul numărului nu este corect</string>
+  <string name="call_state_dialing">Apelare</string>
+  <string name="call_state_holding">În aşteptare</string>
+  <string name="call_state_active">Activ</string>
+  <string name="call_state_unknown">Necunoscută</string>
+  <string name="call_state_disconnecting">Deconectare</string>
+  <string name="call_state_disconnected">Deconectat</string>
+  <string name="too_many_recipients">Nu pot participa mai mult de 6 persoane la un apel conferință 4G.</string>
 </resources>

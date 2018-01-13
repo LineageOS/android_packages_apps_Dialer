@@ -31,25 +31,37 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Panggilan substate:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">Dilanjutkan</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">Panggilan tersambung, tetapi audio dihentikan</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">Panggilan tersambung, tetapi video dihentikan</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">Mendeteksi kualitas video\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Kualitas video berubah menjadi <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
+  <string name="video_quality_high">tinggi</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">sedang</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">rendah</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">tidak diketahui</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">Kamera tidak siap</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">Kamera siap</string>
   <!-- Message indicating unknown call session event -->
   <!-- Message indicating data usage -->
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">Pilih jenis panggilan</string>
   <!-- Modify call error cause -->
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <!-- Text for the onscreen "blind transfer" button -->
@@ -61,8 +73,6 @@
   <!-- Text for the onscreen "Add Participant" button -->
   <!-- Title of the IMS to CS redial dialog -->
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
   <!-- Session modify cause code upgrade remote request -->
@@ -83,12 +93,14 @@
   <!-- Message indicating call failed due to low battery -->
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">Panggilan Video</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_preview_video">Pratinjau kamera</string>
+  <string name="video_call_picture_mode_cancel_option">Batal</string>
+  <string name="video_call_picture_mode_save_option">Simpan</string>
 </resources>

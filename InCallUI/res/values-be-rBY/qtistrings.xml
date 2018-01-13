@@ -31,7 +31,6 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Dtermine whether emergency calls should be marked. -->
   <!-- Call substate label -->
   <!-- Call substate label for call resumed -->
   <!-- Call substate label for call connected suspended (audio) -->
@@ -61,8 +60,6 @@
   <!-- Text for the onscreen "Add Participant" button -->
   <!-- Title of the IMS to CS redial dialog -->
   <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Yes option of the IMS to CS redial dialog -->
-  <!-- No option of the IMS to CS redial dialog -->
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
   <!-- Session modify cause code upgrade remote request -->
@@ -83,8 +80,6 @@
   <!-- Message indicating call failed due to low battery -->
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
-  <!-- Yes option of the low battery alert dialog -->
-  <!-- No option of the low battery alert dialog for active video calls -->
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
