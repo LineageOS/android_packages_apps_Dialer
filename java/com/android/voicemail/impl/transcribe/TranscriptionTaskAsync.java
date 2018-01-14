@@ -58,9 +58,24 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
   protected Pair<String, TranscriptionStatus> getTranscription() {
     VvmLog.i(TAG, "getTranscription");
 
+    if (GetTranscriptReceiver.hasPendingAlarm(context)) {
+      // Don't start a transcription while another is still active
+      VvmLog.i(
+          TAG,
+          "getTranscription, pending transcription, postponing transcription of: " + voicemailUri);
+      return new Pair<>(null, null);
+    }
+
+    TranscribeVoicemailAsyncRequest uploadRequest = getUploadRequest();
+    VvmLog.i(
+        TAG,
+        "getTranscription, uploading voicemail: "
+            + voicemailUri
+            + ", id: "
+            + uploadRequest.getTranscriptionId());
     TranscriptionResponseAsync uploadResponse =
         (TranscriptionResponseAsync)
-            sendRequest((client) -> client.sendUploadRequest(getUploadRequest()));
+            sendRequest((client) -> client.sendUploadRequest(uploadRequest));
 
     if (cancelled) {
       VvmLog.i(TAG, "getTranscription, cancelled.");
@@ -72,13 +87,14 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
       VvmLog.i(TAG, "getTranscription, upload error: " + uploadResponse.status);
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
     } else {
-      VvmLog.i(TAG, "getTranscription, begin polling for result.");
+      VvmLog.i(TAG, "getTranscription, begin polling for: " + uploadResponse.getTranscriptionId());
       GetTranscriptReceiver.beginPolling(
           context,
           voicemailUri,
           uploadResponse.getTranscriptionId(),
           uploadResponse.getEstimatedWaitMillis(),
-          configProvider);
+          configProvider,
+          phoneAccountHandle);
       // This indicates that the result is not available yet
       return new Pair<>(null, null);
     }

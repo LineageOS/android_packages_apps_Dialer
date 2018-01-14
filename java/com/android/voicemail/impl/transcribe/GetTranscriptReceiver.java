@@ -23,11 +23,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.backoff.ExponentialBaseCalculator;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.voicemail.impl.VvmLog;
@@ -36,6 +38,7 @@ import com.android.voicemail.impl.transcribe.grpc.TranscriptionClient;
 import com.android.voicemail.impl.transcribe.grpc.TranscriptionClientFactory;
 import com.google.internal.communications.voicemailtranscription.v1.GetTranscriptRequest;
 import com.google.internal.communications.voicemailtranscription.v1.TranscriptionStatus;
+import java.util.List;
 
 /**
  * This class uses the AlarmManager to poll for the result of a voicemail transcription request.
@@ -50,6 +53,9 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
   static final String EXTRA_DELAY_MILLIS = "extra_delay_millis";
   static final String EXTRA_BASE_MULTIPLIER = "extra_base_multiplier";
   static final String EXTRA_REMAINING_ATTEMPTS = "extra_remaining_attempts";
+  static final String EXTRA_PHONE_ACCOUNT = "extra_phone_account";
+  static final String POLL_ALARM_ACTION =
+      "com.android.voicemail.impl.transcribe.GetTranscriptReceiver.POLL_ALARM";
 
   // Schedule an initial alarm to begin checking for a voicemail transcription result.
   static void beginPolling(
@@ -57,7 +63,9 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
       Uri voicemailUri,
       String transcriptId,
       long estimatedTranscriptionTimeMillis,
-      TranscriptionConfigProvider configProvider) {
+      TranscriptionConfigProvider configProvider,
+      PhoneAccountHandle account) {
+    Assert.checkState(!hasPendingAlarm(context));
     long initialDelayMillis = configProvider.getInitialGetTranscriptPollDelayMillis();
     long maxBackoffMillis = configProvider.getMaxGetTranscriptPollTimeMillis();
     int maxAttempts = configProvider.getMaxGetTranscriptPolls();
@@ -65,7 +73,13 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
         ExponentialBaseCalculator.findBase(initialDelayMillis, maxBackoffMillis, maxAttempts);
     Intent intent =
         makeAlarmIntent(
-            context, voicemailUri, transcriptId, initialDelayMillis, baseMultiplier, maxAttempts);
+            context,
+            voicemailUri,
+            transcriptId,
+            initialDelayMillis,
+            baseMultiplier,
+            maxAttempts,
+            account);
     // Add an extra to distinguish this initial estimated transcription wait from subsequent backoff
     // waits
     intent.putExtra(EXTRA_IS_INITIAL_ESTIMATED_WAIT, true);
@@ -77,9 +91,17 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
     scheduleAlarm(context, estimatedTranscriptionTimeMillis, intent);
   }
 
+  static boolean hasPendingAlarm(Context context) {
+    Intent intent = makeBaseAlarmIntent(context);
+    return getPendingIntent(context, intent, PendingIntent.FLAG_NO_CREATE) != null;
+  }
+
   // Alarm fired, poll for transcription result on a background thread
   @Override
   public void onReceive(Context context, Intent intent) {
+    if (intent == null || !POLL_ALARM_ACTION.equals(intent.getAction())) {
+      return;
+    }
     String transcriptId = intent.getStringExtra(EXTRA_TRANSCRIPT_ID);
     VvmLog.i(TAG, "onReceive, for transcript id: " + transcriptId);
     DialerExecutorComponent.get(context)
@@ -101,12 +123,24 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
 
   private static void scheduleAlarm(Context context, long delayMillis, Intent intent) {
     PendingIntent alarmIntent =
-        PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        getPendingIntent(context, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     alarmMgr.set(
         AlarmManager.ELAPSED_REALTIME_WAKEUP,
         SystemClock.elapsedRealtime() + delayMillis,
         alarmIntent);
+  }
+
+  private static boolean cancelAlarm(Context context, Intent intent) {
+    PendingIntent alarmIntent = getPendingIntent(context, intent, PendingIntent.FLAG_NO_CREATE);
+    if (alarmIntent != null) {
+      AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+      alarmMgr.cancel(alarmIntent);
+      alarmIntent.cancel();
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private static Intent makeAlarmIntent(
@@ -115,14 +149,26 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
       String transcriptId,
       long delayMillis,
       double baseMultiplier,
-      int remainingAttempts) {
-    Intent intent = new Intent(context, GetTranscriptReceiver.class);
+      int remainingAttempts,
+      PhoneAccountHandle account) {
+    Intent intent = makeBaseAlarmIntent(context);
     intent.putExtra(EXTRA_VOICEMAIL_URI, voicemailUri);
     intent.putExtra(EXTRA_TRANSCRIPT_ID, transcriptId);
     intent.putExtra(EXTRA_DELAY_MILLIS, delayMillis);
     intent.putExtra(EXTRA_BASE_MULTIPLIER, baseMultiplier);
     intent.putExtra(EXTRA_REMAINING_ATTEMPTS, remainingAttempts);
+    intent.putExtra(EXTRA_PHONE_ACCOUNT, account);
     return intent;
+  }
+
+  private static Intent makeBaseAlarmIntent(Context context) {
+    Intent intent = new Intent(context.getApplicationContext(), GetTranscriptReceiver.class);
+    intent.setAction(POLL_ALARM_ACTION);
+    return intent;
+  }
+
+  private static PendingIntent getPendingIntent(Context context, Intent intent, int flags) {
+    return PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, flags);
   }
 
   private static class PollWorker implements Worker<Intent, Void> {
@@ -158,7 +204,31 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
       Uri voicemailUri = intent.getParcelableExtra(EXTRA_VOICEMAIL_URI);
       TranscriptionDbHelper dbHelper = new TranscriptionDbHelper(context, voicemailUri);
       TranscriptionTask.recordResult(context, result, dbHelper);
+
+      // Check if there are other pending transcriptions
+      PhoneAccountHandle account = intent.getParcelableExtra(EXTRA_PHONE_ACCOUNT);
+      processPendingTranscriptions(account);
       return null;
+    }
+
+    private void processPendingTranscriptions(PhoneAccountHandle account) {
+      TranscriptionDbHelper dbHelper = new TranscriptionDbHelper(context);
+      List<Uri> inProgress = dbHelper.getTranscribingVoicemails();
+      if (!inProgress.isEmpty()) {
+        Uri uri = inProgress.get(0);
+        VvmLog.i(TAG, "getPendingTranscription, found pending transcription " + uri);
+        if (hasPendingAlarm(context)) {
+          // Cancel the current alarm so that the next transcription task won't be postponed
+          cancelAlarm(context, makeBaseAlarmIntent(context));
+        }
+        ThreadUtil.postOnUiThread(
+            () -> {
+              TranscriptionService.scheduleNewVoicemailTranscriptionJob(
+                  context, uri, account, true);
+            });
+      } else {
+        VvmLog.i(TAG, "getPendingTranscription, no more pending transcriptions");
+      }
     }
 
     private Pair<String, TranscriptionStatus> pollForTranscription(String transcriptId) {
@@ -214,7 +284,8 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
           previous.getStringExtra(EXTRA_TRANSCRIPT_ID),
           nextDelay,
           baseMultiplier,
-          remainingAttempts);
+          remainingAttempts,
+          previous.getParcelableExtra(EXTRA_PHONE_ACCOUNT));
     }
   }
 
