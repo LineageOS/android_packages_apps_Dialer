@@ -63,8 +63,7 @@ public class TranscriptionService extends JobService {
   }
 
   // Schedule a task to transcribe the indicated voicemail, return true if transcription task was
-  // scheduled. If the PhoneAccountHandle is null then the voicemail will not be considered for
-  // donation.
+  // scheduled.
   @MainThread
   public static boolean scheduleNewVoicemailTranscriptionJob(
       Context context, Uri voicemailUri, PhoneAccountHandle account, boolean highPriority) {
