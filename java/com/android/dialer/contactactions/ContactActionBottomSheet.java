@@ -89,9 +89,9 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     ContactPhotoManager.getInstance(getContext())
         .loadDialerThumbnailOrPhoto(
             contactView.findViewById(R.id.quick_contact_photo),
-            photoInfo.lookupUri() != null ? Uri.parse(photoInfo.lookupUri()) : null,
+            !TextUtils.isEmpty(photoInfo.lookupUri()) ? Uri.parse(photoInfo.lookupUri()) : null,
             photoInfo.photoId(),
-            photoInfo.photoUri() != null ? Uri.parse(photoInfo.photoUri()) : null,
+            !TextUtils.isEmpty(photoInfo.photoUri()) ? Uri.parse(photoInfo.photoUri()) : null,
             photoInfo.displayName(),
             photoInfo.contactType());
 

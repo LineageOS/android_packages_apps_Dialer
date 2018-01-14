@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.support.v4.content.CursorLoader;
 import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -31,27 +32,19 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   // Indexes for CoalescedAnnotatedCallLog.ALL_COLUMNS
   private static final int ID = 0;
   private static final int TIMESTAMP = 1;
-  private static final int NAME = 2;
-  private static final int NUMBER = 3;
-  private static final int FORMATTED_NUMBER = 4;
-  private static final int PHOTO_URI = 5;
-  private static final int PHOTO_ID = 6;
-  private static final int LOOKUP_URI = 7;
-  private static final int NUMBER_TYPE_LABEL = 8;
-  private static final int IS_READ = 9;
-  private static final int NEW = 10;
-  private static final int GEOCODED_LOCATION = 11;
-  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 12;
-  private static final int PHONE_ACCOUNT_ID = 13;
-  private static final int PHONE_ACCOUNT_LABEL = 14;
-  private static final int PHONE_ACCOUNT_COLOR = 15;
-  private static final int FEATURES = 16;
-  private static final int IS_BUSINESS = 17;
-  private static final int IS_VOICEMAIL = 18;
-  private static final int CALL_TYPE = 19;
-  private static final int CAN_REPORT_AS_INVALID_NUMBER = 20;
-  private static final int CP2_INFO_INCOMPLETE = 21;
-  private static final int COALESCED_IDS = 22;
+  private static final int NUMBER = 2;
+  private static final int FORMATTED_NUMBER = 3;
+  private static final int IS_READ = 4;
+  private static final int NEW = 5;
+  private static final int GEOCODED_LOCATION = 6;
+  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 7;
+  private static final int PHONE_ACCOUNT_ID = 8;
+  private static final int PHONE_ACCOUNT_LABEL = 9;
+  private static final int PHONE_ACCOUNT_COLOR = 10;
+  private static final int FEATURES = 11;
+  private static final int NUMBER_ATTRIBUTES = 12;
+  private static final int CALL_TYPE = 13;
+  private static final int COALESCED_IDS = 14;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -81,16 +74,18 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       throw new IllegalStateException("Couldn't parse CoalescedIds bytes");
     }
 
+    NumberAttributes numberAttributes;
+    try {
+      numberAttributes = NumberAttributes.parseFrom(cursor.getBlob(NUMBER_ATTRIBUTES));
+    } catch (InvalidProtocolBufferException e) {
+      throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
+    }
+
     return CoalescedRow.builder()
         .setId(cursor.getInt(ID))
         .setTimestamp(cursor.getLong(TIMESTAMP))
-        .setName(cursor.getString(NAME))
         .setNumber(number)
         .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
-        .setPhotoUri(cursor.getString(PHOTO_URI))
-        .setPhotoId(cursor.getLong(PHOTO_ID))
-        .setLookupUri(cursor.getString(LOOKUP_URI))
-        .setNumberTypeLabel(cursor.getString(NUMBER_TYPE_LABEL))
         .setIsRead(cursor.getInt(IS_READ) == 1)
         .setIsNew(cursor.getInt(NEW) == 1)
         .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
@@ -99,11 +94,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         .setPhoneAccountLabel(cursor.getString(PHONE_ACCOUNT_LABEL))
         .setPhoneAccountColor(cursor.getInt(PHONE_ACCOUNT_COLOR))
         .setFeatures(cursor.getInt(FEATURES))
-        .setIsBusiness(cursor.getInt(IS_BUSINESS) == 1)
-        .setIsVoicemail(cursor.getInt(IS_VOICEMAIL) == 1)
         .setCallType(cursor.getInt(CALL_TYPE))
-        .setCanReportAsInvalidNumber(cursor.getInt(CAN_REPORT_AS_INVALID_NUMBER) == 1)
-        .setCp2InfoIncomplete(cursor.getInt(CP2_INFO_INCOMPLETE) == 1)
+        .setNumberAttributes(numberAttributes)
         .setCoalescedIds(coalescedIds)
         .build();
   }

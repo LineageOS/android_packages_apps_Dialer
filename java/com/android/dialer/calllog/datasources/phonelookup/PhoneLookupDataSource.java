@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
@@ -29,6 +28,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
@@ -141,6 +141,13 @@ public final class PhoneLookupDataSource
    */
   @Override
   public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+    LogUtil.v(
+        "PhoneLookupDataSource.fill",
+        "processing mutations (inserts: %d, updates: %d, deletes: %d)",
+        mutations.getInserts().size(),
+        mutations.getUpdates().size(),
+        mutations.getDeletes().size());
+
     // Clear state saved since the last call to fill. This is necessary in case fill is called but
     // onSuccessfulFill is not called during a previous flow.
     phoneLookupHistoryRowsToUpdate.clear();
@@ -224,6 +231,12 @@ public final class PhoneLookupDataSource
         rowsToUpdateFuture,
         rowsToUpdate -> {
           updateMutations(rowsToUpdate, mutations);
+          LogUtil.v(
+              "PhoneLookupDataSource.fill",
+              "updated mutations (inserts: %d, updates: %d, deletes: %d)",
+              mutations.getInserts().size(),
+              mutations.getUpdates().size(),
+              mutations.getDeletes().size());
           return null;
         },
         lightweightExecutorService);
@@ -255,12 +268,16 @@ public final class PhoneLookupDataSource
       contentValues.put(PhoneLookupHistory.PHONE_LOOKUP_INFO, phoneLookupInfo.toByteArray());
       contentValues.put(PhoneLookupHistory.LAST_MODIFIED, currentTimestamp);
       operations.add(
-          ContentProviderOperation.newUpdate(numberUri(normalizedNumber))
+          ContentProviderOperation.newUpdate(
+                  PhoneLookupHistory.contentUriForNumber(normalizedNumber))
               .withValues(contentValues)
               .build());
     }
     for (String normalizedNumber : phoneLookupHistoryRowsToDelete) {
-      operations.add(ContentProviderOperation.newDelete(numberUri(normalizedNumber)).build());
+      operations.add(
+          ContentProviderOperation.newDelete(
+                  PhoneLookupHistory.contentUriForNumber(normalizedNumber))
+              .build());
     }
     appContext.getContentResolver().applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations);
     return null;
@@ -270,13 +287,7 @@ public final class PhoneLookupDataSource
   @Override
   public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
     return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentString(AnnotatedCallLog.NAME)
-        .useMostRecentString(AnnotatedCallLog.NUMBER_TYPE_LABEL)
-        .useMostRecentString(AnnotatedCallLog.PHOTO_URI)
-        .useMostRecentLong(AnnotatedCallLog.PHOTO_ID)
-        .useMostRecentString(AnnotatedCallLog.LOOKUP_URI)
-        .useMostRecentInt(AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER)
-        .useMostRecentInt(AnnotatedCallLog.CP2_INFO_INCOMPLETE)
+        .useMostRecentBlob(AnnotatedCallLog.NUMBER_ATTRIBUTES)
         .combine();
   }
 
@@ -568,23 +579,20 @@ public final class PhoneLookupDataSource
   }
 
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
-    contentValues.put(AnnotatedCallLog.NAME, phoneLookupSelector.selectName(phoneLookupInfo));
     contentValues.put(
-        AnnotatedCallLog.PHOTO_URI, phoneLookupSelector.selectPhotoUri(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.PHOTO_ID, phoneLookupSelector.selectPhotoId(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.LOOKUP_URI, phoneLookupSelector.selectLookupUri(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.NUMBER_TYPE_LABEL, phoneLookupSelector.selectNumberLabel(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.CAN_REPORT_AS_INVALID_NUMBER,
-        PhoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo));
-    contentValues.put(
-        AnnotatedCallLog.CP2_INFO_INCOMPLETE, phoneLookupInfo.getCp2LocalInfo().getIsIncomplete());
-  }
-
-  private static Uri numberUri(String number) {
-    return PhoneLookupHistory.CONTENT_URI.buildUpon().appendEncodedPath(number).build();
+        AnnotatedCallLog.NUMBER_ATTRIBUTES,
+        NumberAttributes.newBuilder()
+            .setName(phoneLookupSelector.selectName(phoneLookupInfo))
+            .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
+            .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
+            .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
+            .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
+            .setIsBusiness(phoneLookupSelector.selectIsBusiness(phoneLookupInfo))
+            .setIsVoicemail(phoneLookupSelector.selectIsVoicemail(phoneLookupInfo))
+            .setCanReportAsInvalidNumber(
+                phoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo))
+            .setIsCp2InfoIncomplete(phoneLookupSelector.selectIsCp2InfoIncomplete(phoneLookupInfo))
+            .build()
+            .toByteArray());
   }
 }

@@ -33,8 +33,8 @@ public class VoicemailEntryText {
 
   public static String buildPrimaryVoicemailText(Context context, VoicemailEntry data) {
     StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(data.name())) {
-      primaryText.append(data.name());
+    if (!TextUtils.isEmpty(data.numberAttributes().getName())) {
+      primaryText.append(data.numberAttributes().getName());
     } else if (!TextUtils.isEmpty(data.formattedNumber())) {
       primaryText.append(data.formattedNumber());
     } else {

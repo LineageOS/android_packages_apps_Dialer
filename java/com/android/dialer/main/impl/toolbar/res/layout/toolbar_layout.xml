@@ -22,25 +22,21 @@
     android:minHeight="?attr/actionBarSize"
     android:background="@color/dialer_theme_color"
     app:contentInsetStart="0dp"
-    app:contentInsetEnd="0dp"
-    app:theme="@style/ThemeOverlay.AppCompat.Light">
+    app:contentInsetEnd="0dp">
 
   <com.android.dialer.main.impl.toolbar.SearchBarView
       android:id="@+id/search_view_container"
       android:layout_width="match_parent"
-      android:layout_height="48dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
-      android:layout_marginEnd="8dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/search_bar_margin"
       android:background="@drawable/rounded_corner"
-      android:elevation="4dp"
-      android:theme="@style/Theme.AppCompat.Light">
+      android:elevation="4dp">
 
     <RelativeLayout
       android:id="@+id/search_box_collapsed"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
       android:background="?android:selectableItemBackground"
       android:gravity="center_vertical">
 
@@ -58,12 +54,12 @@
       <TextView
           android:id="@+id/search_box_start_search"
           android:layout_width="wrap_content"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
           android:layout_toEndOf="@+id/search_magnifying_glass"
           android:layout_toStartOf="@+id/voice_search_button"
           android:layout_marginStart="8dp"
+          android:layout_centerVertical="true"
           android:fontFamily="sans-serif"
-          android:gravity="center_vertical"
           android:hint="@string/dialer_hint_find_contact"
           android:textColorHint="@color/dialer_secondary_text_color"
           android:textSize="16dp"/>

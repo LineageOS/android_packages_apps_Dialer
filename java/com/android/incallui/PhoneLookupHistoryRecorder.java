@@ -66,10 +66,7 @@ final class PhoneLookupHistoryRecorder {
             appContext
                 .getContentResolver()
                 .update(
-                    PhoneLookupHistory.CONTENT_URI
-                        .buildUpon()
-                        .appendEncodedPath(normalizedNumber.get())
-                        .build(),
+                    PhoneLookupHistory.contentUriForNumber(normalizedNumber.get()),
                     contentValues,
                     null,
                     null);

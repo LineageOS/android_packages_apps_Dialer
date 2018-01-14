@@ -42,15 +42,6 @@ public class AnnotatedCallLogContract {
     String TIMESTAMP = "timestamp";
 
     /**
-     * The name (which may be a person's name or business name, but not a number) formatted exactly
-     * as it should appear to the user. If the user's locale or name display preferences change,
-     * this column should be rewritten.
-     *
-     * <p>Type: TEXT
-     */
-    String NAME = "name";
-
-    /**
      * The phone number called or number the call came from, encoded as a {@link
      * com.android.dialer.DialerPhoneNumber} proto. The number may be empty if it was an incoming
      * call and the number was unknown.
@@ -66,38 +57,6 @@ public class AnnotatedCallLogContract {
      * <p>Type: TEXT
      */
     String FORMATTED_NUMBER = "formatted_number";
-
-    /**
-     * A photo URI for the contact to display in the call log list view.
-     *
-     * <p>TYPE: TEXT
-     */
-    String PHOTO_URI = "photo_uri";
-
-    /**
-     * A photo ID (from the contacts provider) for the contact to display in the call log list view.
-     *
-     * <p>Type: INTEGER (long)
-     */
-    String PHOTO_ID = "photo_id";
-
-    /**
-     * The contacts provider lookup URI for the contact associated with the call.
-     *
-     * <p>TYPE: TEXT
-     */
-    String LOOKUP_URI = "lookup_uri";
-
-    // TODO(zachh): If we need to support photos other than local contacts', add a (blob?) column.
-
-    /**
-     * The number type as a string to be displayed to the user, for example "Home" or "Mobile".
-     *
-     * <p>This column should be updated for the appropriate language when the locale changes.
-     *
-     * <p>TYPE: TEXT
-     */
-    String NUMBER_TYPE_LABEL = "number_type_label";
 
     /**
      * See {@link android.provider.CallLog.Calls#IS_READ}.
@@ -156,20 +115,13 @@ public class AnnotatedCallLogContract {
     String FEATURES = "features";
 
     /**
-     * True if a caller ID data source informed us that this is a business number. This is used to
-     * determine if a generic business avatar should be shown vs. a generic person avatar.
+     * Additional attributes about the number.
      *
-     * <p>TYPE: INTEGER (boolean)
-     */
-    String IS_BUSINESS = "is_business";
-
-    /**
-     * True if this was a call to voicemail. This is used to determine if the voicemail avatar
-     * should be displayed.
+     * <p>TYPE: BLOB
      *
-     * <p>TYPE: INTEGER (boolean)
+     * @see com.android.dialer.calllog.model.NumberAttributes
      */
-    String IS_VOICEMAIL = "is_voicemail";
+    String NUMBER_ATTRIBUTES = "number_attributes";
 
     /**
      * Copied from {@link android.provider.CallLog.Calls#TYPE}.
@@ -178,31 +130,12 @@ public class AnnotatedCallLogContract {
      */
     String CALL_TYPE = "call_type";
 
-    /**
-     * True if the number can be reported as invalid.
-     *
-     * <p>TYPE: INTEGER (boolean)
-     */
-    String CAN_REPORT_AS_INVALID_NUMBER = "can_report_as_invalid_number";
-
-    /**
-     * True if the CP2 information is incomplete and needs to be queried at display time.
-     *
-     * <p>TYPE: INTEGER (boolean)
-     */
-    String CP2_INFO_INCOMPLETE = "cp2_info_incomplete";
-
     String[] ALL_COMMON_COLUMNS =
         new String[] {
           _ID,
           TIMESTAMP,
-          NAME,
           NUMBER,
           FORMATTED_NUMBER,
-          PHOTO_URI,
-          PHOTO_ID,
-          LOOKUP_URI,
-          NUMBER_TYPE_LABEL,
           IS_READ,
           NEW,
           GEOCODED_LOCATION,
@@ -211,11 +144,8 @@ public class AnnotatedCallLogContract {
           PHONE_ACCOUNT_LABEL,
           PHONE_ACCOUNT_COLOR,
           FEATURES,
-          IS_BUSINESS,
-          IS_VOICEMAIL,
+          NUMBER_ATTRIBUTES,
           CALL_TYPE,
-          CAN_REPORT_AS_INVALID_NUMBER,
-          CP2_INFO_INCOMPLETE
         };
   }
 

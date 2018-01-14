@@ -19,28 +19,29 @@ package com.android.dialer.calllog.ui.menu;
 import android.content.Context;
 import android.provider.CallLog.Calls;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
-import com.android.dialer.lettertile.LetterTileDrawable;
 
 /** Configures the primary action row (top row) for the bottom sheet. */
 final class PrimaryAction {
 
   static ContactPrimaryActionInfo fromRow(Context context, CoalescedRow row) {
+    CharSequence primaryText = CallLogEntryText.buildPrimaryText(context, row);
     return ContactPrimaryActionInfo.builder()
         .setNumber(row.number())
         .setPhotoInfo(
             PhotoInfo.builder()
-                .setPhotoId(row.photoId())
-                .setPhotoUri(row.photoUri())
-                .setLookupUri(row.lookupUri())
+                .setPhotoId(row.numberAttributes().getPhotoId())
+                .setPhotoUri(row.numberAttributes().getPhotoUri())
+                .setLookupUri(row.numberAttributes().getLookupUri())
                 .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-                .setContactType(LetterTileDrawable.TYPE_DEFAULT) // TODO(zachh): Use proper type.
-                .setDisplayName(row.name())
+                .setContactType(CallLogContactTypes.getContactType(row))
+                .setDisplayName(primaryText.toString())
                 .build())
-        .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row))
+        .setPrimaryText(primaryText)
         .setSecondaryText(CallLogEntryText.buildSecondaryTextForBottomSheet(context, row))
         .setIntent(CallLogIntents.getCallBackIntent(context, row))
         .build();

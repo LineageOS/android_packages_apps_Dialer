@@ -127,6 +127,20 @@ public final class PhoneLookupSelector {
     return "";
   }
 
+  public boolean selectIsBusiness(PhoneLookupInfo phoneLookupInfo) {
+    return phoneLookupInfo.hasPeopleApiInfo()
+        && phoneLookupInfo.getPeopleApiInfo().getInfoType() == InfoType.NEARBY_BUSINESS;
+  }
+
+  public boolean selectIsVoicemail(PhoneLookupInfo unused) {
+    // TODO(twyen): implement
+    return false;
+  }
+
+  public boolean selectIsCp2InfoIncomplete(PhoneLookupInfo phoneLookupInfo) {
+    return phoneLookupInfo.getCp2LocalInfo().getIsIncomplete();
+  }
+
   /**
    * Returns true if the number associated with the given {@link PhoneLookupInfo} can be reported as
    * invalid.
@@ -134,7 +148,7 @@ public final class PhoneLookupSelector {
    * <p>As we currently report invalid numbers via the People API, only numbers from the People API
    * can be reported as invalid.
    */
-  public static boolean canReportAsInvalidNumber(PhoneLookupInfo phoneLookupInfo) {
+  public boolean canReportAsInvalidNumber(PhoneLookupInfo phoneLookupInfo) {
     // The presence of Cp2ContactInfo means the number associated with the given PhoneLookupInfo
     // matches that of a Cp2 (local) contact, and PeopleApiInfo will not be used to display
     // information like name, photo, etc. We should not allow the user to report the number in this

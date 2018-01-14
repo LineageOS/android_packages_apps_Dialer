@@ -17,15 +17,24 @@
 package com.android.dialer.main.impl.toolbar;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MenuItem;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import com.android.dialer.common.Assert;
 
 /** Toolbar for {@link com.android.dialer.main.impl.MainActivity}. */
 public final class MainToolbar extends Toolbar implements OnMenuItemClickListener {
+
+  private static final int SLIDE_DURATION = 300;
+  private static final AccelerateDecelerateInterpolator SLIDE_INTERPOLATOR =
+      new AccelerateDecelerateInterpolator();
+
+  private SearchBarListener listener;
+  private boolean isSlideUp;
 
   public MainToolbar(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -40,23 +49,51 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
     overflowMenu.setOnMenuItemClickListener(this);
     optionsMenuButton.setOnClickListener(v -> overflowMenu.show());
     optionsMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
-
-    findViewById(R.id.voice_search_button).setOnClickListener(v -> onVoiceIconClicked());
-    findViewById(R.id.search_box_collapsed).setOnClickListener(v -> onSearchBarClicked());
   }
 
   @Override
   public boolean onMenuItemClick(MenuItem menuItem) {
-    Toast.makeText(getContext(), "Not yet implemented", Toast.LENGTH_SHORT).show();
-    // TODO(calderwoodra): implement menu item clicks
+    if (menuItem.getItemId() == R.id.settings) {
+      listener.openSettings();
+    } else if (menuItem.getItemId() == R.id.feedback) {
+      listener.sendFeedback();
+    }
     return false;
   }
 
-  private void onVoiceIconClicked() {
-    // TODO(calderwoodra): take voice input
+  public void setSearchBarListener(SearchBarListener listener) {
+    this.listener = listener;
+    ((SearchBarView) findViewById(R.id.search_view_container)).setSearchBarListener(listener);
   }
 
-  private void onSearchBarClicked() {
-    // TODO(calderwoodra): open search UI
+  /** Slides the toolbar up and off the screen. */
+  public void slideUp(boolean animate) {
+    Assert.checkArgument(!isSlideUp);
+    isSlideUp = true;
+    animate()
+        .translationY(-getHeight())
+        .setDuration(animate ? SLIDE_DURATION : 0)
+        .setInterpolator(SLIDE_INTERPOLATOR)
+        .start();
+  }
+
+  /**
+   * Slides the toolbar down and back onto the screen.
+   *
+   * @param animate
+   */
+  public void slideDown(boolean animate) {
+    Assert.checkArgument(isSlideUp);
+    isSlideUp = false;
+    animate()
+        .translationY(0)
+        .setDuration(animate ? SLIDE_DURATION : 0)
+        .setInterpolator(SLIDE_INTERPOLATOR)
+        .start();
+  }
+
+  @VisibleForTesting
+  public boolean isSlideUp() {
+    return isSlideUp;
   }
 }

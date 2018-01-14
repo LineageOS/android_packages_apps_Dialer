@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,12 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="NuiMainActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
-    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-
-    <!-- Theme needed for DialpadFragment -->
-    <item name="dialpad_style">@style/Dialpad.Light</item>
-  </style>
+  <dimen name="search_bar_margin">8dp</dimen>
+  <dimen name="expanded_search_bar_height">60dp</dimen>
 </resources>

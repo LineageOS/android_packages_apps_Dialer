@@ -68,7 +68,7 @@ public class MutationApplier {
 
     if (!mutations.getInserts().isEmpty()) {
       LogUtil.i(
-          "CallLogMutations.applyToDatabase", "inserting %d rows", mutations.getInserts().size());
+          "MutationApplier.applyToDatabase", "inserting %d rows", mutations.getInserts().size());
       for (Entry<Long, ContentValues> entry : mutations.getInserts().entrySet()) {
         long id = entry.getKey();
         ContentValues contentValues = entry.getValue();
@@ -82,7 +82,7 @@ public class MutationApplier {
 
     if (!mutations.getUpdates().isEmpty()) {
       LogUtil.i(
-          "CallLogMutations.applyToDatabase", "updating %d rows", mutations.getUpdates().size());
+          "MutationApplier.applyToDatabase", "updating %d rows", mutations.getUpdates().size());
       for (Entry<Long, ContentValues> entry : mutations.getUpdates().entrySet()) {
         long id = entry.getKey();
         ContentValues contentValues = entry.getValue();
@@ -96,7 +96,7 @@ public class MutationApplier {
 
     if (!mutations.getDeletes().isEmpty()) {
       LogUtil.i(
-          "CallLogMutations.applyToDatabase", "deleting %d rows", mutations.getDeletes().size());
+          "MutationApplier.applyToDatabase", "deleting %d rows", mutations.getDeletes().size());
       String[] questionMarks = new String[mutations.getDeletes().size()];
       Arrays.fill(questionMarks, "?");
 

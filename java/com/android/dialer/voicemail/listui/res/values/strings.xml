@@ -34,4 +34,23 @@
   <!-- Header in voicemail tab to group calls from before the current day.  [CHAR LIMIT=30] -->
   <string name="new_voicemail_header_older">Older</string>
 
+  <string name="verizon_terms_and_conditions_title" translatable="false">Turn on visual voicemail</string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
+Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
+\n
+You may disable VVM in settings. This will revert you to basic voice mail. In some cases you may need to call customer care to cancel and if you cancel Visual Voice Mail you may lose all stored voice mails and information.\n
+\n
+For the Premium Visual Voice Mail service, some voice messages may not be completely transcribed; incomplete messages will end with [...]. Only the first 45 seconds of each voice message will be transcribed, so for longer messages, you will need to listen to the voice message itself. Any profane or offensive language also will not be transcribed and will appear as [...] in the transcription.\n
+\n
+Speech recordings may be collected and stored for a period of 30 days, solely for the purpose of testing and improving transcription technology and performance, subject to the Verizon Wireless Privacy Policy, which can be found at <xliff:g>%s</xliff:g>\n
+\n
+You understand that by selecting ACCEPT, your messages will be stored and anyone in possession of this device will have access to your voice mail. You further understand that your voice mail messages may be stored in electronic format on this device. To limit unauthorized access to your voice mail, you should consider locking your phone when not in use. Not available in all areas or over Wi\u2011Fi.\n
+\n
+If you do not accept all of these terms and conditions, do not use Visual Voice Mail.  </string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_decline_english">No Thanks</string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
+
 </resources>
