@@ -141,6 +141,10 @@
 
     <receiver android:name="com.android.voicemail.impl.transcribe.GetTranscriptReceiver"
         android:exported="false">
+      <intent-filter>
+        <action
+            android:name="com.android.voicemail.impl.transcribe.GetTranscriptReceiver.POLL_ALARM" />
+      </intent-filter>
     </receiver>
   </application>
 </manifest>

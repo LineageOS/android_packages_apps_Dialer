@@ -22,11 +22,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
+import android.os.Build;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
-import android.support.v4.os.BuildCompat;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Helper class for reading and writing transcription data in the database */
-@TargetApi(VERSION_CODES.O)
+@TargetApi(Build.VERSION_CODES.O)
 public class TranscriptionDbHelper {
   @VisibleForTesting
   static final String[] PROJECTION =
@@ -63,9 +62,8 @@ public class TranscriptionDbHelper {
   }
 
   @WorkerThread
-  @TargetApi(VERSION_CODES.M) // used for try with resources
   Pair<String, Integer> getTranscriptionAndState() {
-    Assert.checkState(BuildCompat.isAtLeastO());
+    Assert.checkState(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O);
     Assert.isWorkerThread();
     try (Cursor cursor = contentResolver.query(uri, PROJECTION, null, null, null)) {
       if (cursor == null) {
@@ -84,9 +82,8 @@ public class TranscriptionDbHelper {
   }
 
   @WorkerThread
-  @TargetApi(VERSION_CODES.M) // used for try with resources
   List<Uri> getUntranscribedVoicemails() {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
+    Assert.checkState(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O);
     Assert.isWorkerThread();
     List<Uri> untranscribed = new ArrayList<>();
     String whereClause =
@@ -102,6 +99,25 @@ public class TranscriptionDbHelper {
       }
     }
     return untranscribed;
+  }
+
+  @WorkerThread
+  List<Uri> getTranscribingVoicemails() {
+    Assert.checkState(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O);
+    Assert.isWorkerThread();
+    List<Uri> inProgress = new ArrayList<>();
+    String whereClause = VoicemailCompat.TRANSCRIPTION_STATE + "=?";
+    String[] whereArgs = {String.valueOf(VoicemailCompat.TRANSCRIPTION_IN_PROGRESS)};
+    try (Cursor cursor = contentResolver.query(uri, PROJECTION, whereClause, whereArgs, null)) {
+      if (cursor == null) {
+        LogUtil.e("TranscriptionDbHelper.getTranscribingVoicemails", "query failed.");
+      } else {
+        while (cursor.moveToNext()) {
+          inProgress.add(ContentUris.withAppendedId(uri, cursor.getLong(ID)));
+        }
+      }
+    }
+    return inProgress;
   }
 
   @WorkerThread
