@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bf30ff0_37ab0ffa",
+        "filename": "java/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2018-01-16T20:34:17Z",
+      "side": 1,
+      "message": "70008",
+      "range": {
+        "startLine": 221,
+        "startChar": 21,
+        "endLine": 221,
+        "endChar": 22
+      },
+      "revId": "eede21c729c862f840e427ee34063d85cd254e0d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeb0c4eb_215858ff",
+        "filename": "java/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2018-01-16T20:34:17Z",
+      "side": 1,
+      "message": "70008",
+      "range": {
+        "startLine": 246,
+        "startChar": 19,
+        "endLine": 246,
+        "endChar": 20
+      },
+      "revId": "eede21c729c862f840e427ee34063d85cd254e0d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a5887c3_bcd0e61d",
+        "filename": "java/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2018-01-16T20:34:17Z",
+      "side": 1,
+      "message": "70009",
+      "range": {
+        "startLine": 249,
+        "startChar": 21,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "eede21c729c862f840e427ee34063d85cd254e0d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e9c0677_549540d0",
+        "filename": "java/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2018-01-16T20:34:17Z",
+      "side": 1,
+      "message": "70009",
+      "range": {
+        "startLine": 251,
+        "startChar": 19,
+        "endLine": 251,
+        "endChar": 20
+      },
+      "revId": "eede21c729c862f840e427ee34063d85cd254e0d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
