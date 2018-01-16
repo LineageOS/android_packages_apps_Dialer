@@ -23,6 +23,7 @@ import com.android.incallui.videotech.VideoTech.VideoTechListener;
 /** Interface for creating new RCS video tech instances. */
 public interface RcsVideoShareFactory {
 
+  @NonNull
   VideoTech newRcsVideoShare(
       @NonNull EnrichedCallManager enrichedCallManager,
       @NonNull VideoTechListener videoTechListener,
