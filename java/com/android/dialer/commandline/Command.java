@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
  * limitations under the License
  */
 
-package com.android.dialer.enrichedcall;
+package com.android.dialer.commandline;
 
 import android.support.annotation.NonNull;
-import com.android.incallui.videotech.VideoTech;
-import com.android.incallui.videotech.VideoTech.VideoTechListener;
+import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.ListenableFuture;
 
-/** Interface for creating new RCS video tech instances. */
-public interface RcsVideoShareFactory {
+/** Handles a Command from {@link CommandLineReceiver}. */
+public interface Command {
 
+  ListenableFuture<String> run(ImmutableList<String> args);
+
+  /** Describe the command when "help" is listing available commands. */
   @NonNull
-  VideoTech newRcsVideoShare(
-      @NonNull EnrichedCallManager enrichedCallManager,
-      @NonNull VideoTechListener videoTechListener,
-      @NonNull String number);
+  String getShortDescription();
 }
