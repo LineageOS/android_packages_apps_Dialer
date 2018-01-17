@@ -59,7 +59,7 @@
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_useDtmfDialpad">Use touch tone keypad</string>
+  <string name="dialer_useDtmfDialpad">Use touch-tone keypad</string>
 
   <!-- Item label: jump to the in-call UI.
        (Part of a list of options shown in the dialer when another call
