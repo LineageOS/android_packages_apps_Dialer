@@ -37,11 +37,12 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonelookup.selector.PhoneLookupSelector;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -67,8 +68,8 @@ import javax.inject.Inject;
 public final class PhoneLookupDataSource
     implements CallLogDataSource, PhoneLookup.ContentObserverCallbacks {
 
+  private final Context appContext;
   private final PhoneLookup<PhoneLookupInfo> phoneLookup;
-  private final PhoneLookupSelector phoneLookupSelector;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
@@ -94,11 +95,11 @@ public final class PhoneLookupDataSource
   @Inject
   PhoneLookupDataSource(
       PhoneLookup<PhoneLookupInfo> phoneLookup,
-      PhoneLookupSelector phoneLookupSelector,
+      @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookup = phoneLookup;
-    this.phoneLookupSelector = phoneLookupSelector;
+    this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -579,19 +580,20 @@ public final class PhoneLookupDataSource
   }
 
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
+    PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
+        new PhoneLookupInfoConsolidator(appContext, phoneLookupInfo);
     contentValues.put(
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
         NumberAttributes.newBuilder()
-            .setName(phoneLookupSelector.selectName(phoneLookupInfo))
-            .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
-            .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
-            .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
-            .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
-            .setIsBusiness(phoneLookupSelector.selectIsBusiness(phoneLookupInfo))
-            .setIsVoicemail(phoneLookupSelector.selectIsVoicemail(phoneLookupInfo))
-            .setCanReportAsInvalidNumber(
-                phoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo))
-            .setIsCp2InfoIncomplete(phoneLookupSelector.selectIsCp2InfoIncomplete(phoneLookupInfo))
+            .setName(phoneLookupInfoConsolidator.getName())
+            .setPhotoUri(phoneLookupInfoConsolidator.getPhotoUri())
+            .setPhotoId(phoneLookupInfoConsolidator.getPhotoId())
+            .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
+            .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
+            .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
+            .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
+            .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
+            .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isCp2LocalInfoIncomplete())
             .build()
             .toByteArray());
   }
