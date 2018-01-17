@@ -19,6 +19,7 @@ package com.android.dialer.binary.basecomponent;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
+import com.android.dialer.commandline.CommandLineComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
@@ -48,6 +49,7 @@ public interface BaseDialerRootComponent
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
+        CommandLineComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
         DuoComponent.HasComponent,
         EnrichedCallComponent.HasComponent,

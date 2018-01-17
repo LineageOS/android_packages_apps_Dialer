@@ -18,6 +18,7 @@ package com.android.dialer.binary.google;
 
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
+import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.duo.stub.StubDuoModule;
@@ -48,6 +49,7 @@ import javax.inject.Singleton;
   modules = {
     CallLocationModule.class,
     CallLogModule.class,
+    CommandLineModule.class,
     ContextModule.class,
     DialerExecutorModule.class,
     MapsModule.class,
