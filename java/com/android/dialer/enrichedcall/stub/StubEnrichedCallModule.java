@@ -18,6 +18,7 @@ package com.android.dialer.enrichedcall.stub;
 
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.RcsVideoShareFactory;
+import com.android.incallui.videotech.empty.EmptyVideoTech;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
@@ -35,7 +36,7 @@ public class StubEnrichedCallModule {
   @Provides
   @Singleton
   static RcsVideoShareFactory providesRcsVideoShareFactory() {
-    return (enrichedCallManager, videoTechListener, number) -> null;
+    return (enrichedCallManager, videoTechListener, number) -> new EmptyVideoTech();
   }
 
   private StubEnrichedCallModule() {}
