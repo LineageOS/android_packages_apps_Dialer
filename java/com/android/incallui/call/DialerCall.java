@@ -1664,9 +1664,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
                   EnrichedCallComponent.get(call.context).getEnrichedCallManager(),
                   call,
                   phoneNumber);
-      if (rcsVideoShare != null) {
-        videoTechs.add(rcsVideoShare);
-      }
+      videoTechs.add(rcsVideoShare);
 
       videoTechs.add(
           new DuoVideoTech(

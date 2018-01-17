@@ -133,9 +133,12 @@ public class LogUtil {
    */
   public static void e(@NonNull String tag, @Nullable String msg, @NonNull Throwable throwable) {
     if (!TextUtils.isEmpty(msg)) {
-      println(android.util.Log.ERROR, TAG, tag, msg);
+      println(
+          android.util.Log.ERROR,
+          TAG,
+          tag,
+          msg + "\n" + android.util.Log.getStackTraceString(throwable));
     }
-    println(android.util.Log.ERROR, TAG, tag, android.util.Log.getStackTraceString(throwable));
   }
 
   /**
