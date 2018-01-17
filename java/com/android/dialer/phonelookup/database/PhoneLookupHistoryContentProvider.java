@@ -30,7 +30,6 @@ import android.net.Uri;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
@@ -190,7 +189,8 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
         Assert.checkArgument(
             selectionArgs == null, "Do not specify selection args when deleting by number");
         String number = Uri.decode(uri.getQueryParameter(PhoneLookupHistory.NUMBER_QUERY_PARAM));
-        Assert.checkArgument(!TextUtils.isEmpty(number), "error parsing number from uri: %s", uri);
+        Assert.checkArgument(
+            number != null, "error parsing number from uri: %s", LogUtil.sanitizePii(uri));
         selection = PhoneLookupHistory.NORMALIZED_NUMBER + "= ?";
         selectionArgs = new String[] {number};
         break;
