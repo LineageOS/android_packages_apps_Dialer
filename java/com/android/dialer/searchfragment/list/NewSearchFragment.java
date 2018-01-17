@@ -490,9 +490,9 @@ public final class NewSearchFragment extends Fragment
   public boolean onTouch(View v, MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_UP) {
       v.performClick();
+      FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onSearchListTouch();
     }
-    return FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class)
-        .onSearchListTouch(event);
+    return false;
   }
 
   @Override
@@ -540,12 +540,8 @@ public final class NewSearchFragment extends Fragment
   /** Callback to {@link NewSearchFragment}'s parent to be notified of important events. */
   public interface SearchFragmentListener {
 
-    /**
-     * Called when the list view in {@link NewSearchFragment} is touched.
-     *
-     * @see OnTouchListener#onTouch(View, MotionEvent)
-     */
-    boolean onSearchListTouch(MotionEvent event);
+    /** Called when the list view in {@link NewSearchFragment} is clicked. */
+    void onSearchListTouch();
 
     /** Called when a call is placed from the search fragment. */
     void onCallPlacedFromSearch();
