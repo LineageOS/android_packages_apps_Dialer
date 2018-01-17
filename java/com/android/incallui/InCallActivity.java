@@ -406,6 +406,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             == InCallOrientationEventListener.ACTIVITY_PREFERENCE_ALLOW_ROTATION);
     InCallPresenter.getInstance().onActivityStarted();
 
+    if (!isRecreating) {
+      InCallPresenter.getInstance().onUiShowing(true);
+    }
+
     if (ActivityCompat.isInMultiWindowMode(this)
         && !getResources().getBoolean(R.bool.incall_dialpad_allowed)) {
       // Hide the dialpad because there may not be enough room
@@ -422,7 +426,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     if (!InCallPresenter.getInstance().isReadyForTearDown()) {
       updateTaskDescription();
-      InCallPresenter.getInstance().onUiShowing(true);
+      InCallPresenter.getInstance().updateNotification();
     }
 
     // If there is a pending request to show or hide the dialpad, handle that now.
@@ -479,12 +483,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       dialpadFragment.onDialerKeyUp(null);
     }
 
-    if (!isRecreating) {
-      InCallPresenter.getInstance().onUiShowing(false);
-    }
-    if (isFinishing()) {
-      InCallPresenter.getInstance().unsetActivity(this);
-    }
+    InCallPresenter.getInstance().updateNotification();
 
     InCallPresenter.getInstance().getPseudoScreenState().removeListener(this);
     Trace.endSection();
@@ -513,9 +512,14 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     InCallPresenter.getInstance().updateIsChangingConfigurations();
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
+      InCallPresenter.getInstance().onUiShowing(false);
       if (errorDialog != null) {
         errorDialog.dismiss();
       }
+    }
+
+    if (isFinishing()) {
+      InCallPresenter.getInstance().unsetActivity(this);
     }
 
     Trace.endSection();
