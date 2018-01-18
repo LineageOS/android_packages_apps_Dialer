@@ -103,7 +103,7 @@ public class NewBubble {
   @NonNull
   private NewBubbleInfo currentInfo;
 
-  @Visibility private int visibility;
+  @VisibleForTesting @Visibility int visibility;
   private boolean expanded;
   private CharSequence textAfterShow;
   private int collapseEndAction;
@@ -112,6 +112,7 @@ public class NewBubble {
   private AnimatorSet collapseAnimatorSet;
   private Integer overrideGravity;
   @VisibleForTesting AnimatorSet exitAnimatorSet;
+  @VisibleForTesting AnimatorSet enterAnimatorSet;
 
   private final int primaryIconMoveDistance;
   private final int leftBoundary;
@@ -120,15 +121,15 @@ public class NewBubble {
   /** Type of action after bubble collapse */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({CollapseEnd.NOTHING, CollapseEnd.HIDE})
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  public @interface CollapseEnd {
+  private @interface CollapseEnd {
     int NOTHING = 0;
     int HIDE = 1;
   }
 
   @Retention(RetentionPolicy.SOURCE)
+  @VisibleForTesting
   @IntDef({Visibility.ENTERING, Visibility.SHOWING, Visibility.EXITING, Visibility.HIDDEN})
-  private @interface Visibility {
+  @interface Visibility {
     int HIDDEN = 0;
     int ENTERING = 1;
     int SHOWING = 2;
@@ -440,7 +441,7 @@ public class NewBubble {
         ObjectAnimator.ofFloat(viewHolder.getPrimaryAvatar(), "alpha", 1);
     ObjectAnimator iconAlphaAnimator =
         ObjectAnimator.ofFloat(viewHolder.getPrimaryIcon(), "alpha", 1);
-    AnimatorSet enterAnimatorSet = new AnimatorSet();
+    enterAnimatorSet = new AnimatorSet();
     enterAnimatorSet.playTogether(
         scaleXAnimator, scaleYAnimator, avatarAlphaAnimator, iconAlphaAnimator);
     enterAnimatorSet.setInterpolator(new OvershootInterpolator());
@@ -608,6 +609,14 @@ public class NewBubble {
 
     // Make bubble non clickable to prevent further buggy actions
     viewHolder.setChildClickable(false);
+
+    if (visibility == Visibility.ENTERING) {
+      enterAnimatorSet.removeAllListeners();
+      enterAnimatorSet.cancel();
+      enterAnimatorSet = null;
+      afterHiding.run();
+      return;
+    }
 
     if (collapseAnimatorSet != null) {
       collapseEndAction = CollapseEnd.HIDE;
