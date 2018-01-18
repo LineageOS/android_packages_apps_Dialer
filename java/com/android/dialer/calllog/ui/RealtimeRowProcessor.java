@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog.ui;
 
+import android.content.Context;
 import android.support.annotation.MainThread;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
@@ -23,10 +24,11 @@ import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.Ui;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
+import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
-import com.android.dialer.phonelookup.selector.PhoneLookupSelector;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -47,20 +49,20 @@ import javax.inject.Inject;
  */
 public final class RealtimeRowProcessor {
 
-  private final ListeningExecutorService uiExecutor;
+  private final Context appContext;
   private final Cp2LocalPhoneLookup cp2LocalPhoneLookup;
-  private final PhoneLookupSelector phoneLookupSelector;
+  private final ListeningExecutorService uiExecutor;
 
   private final Map<DialerPhoneNumber, Cp2Info> cache = new ArrayMap<>();
 
   @Inject
   RealtimeRowProcessor(
+      @ApplicationContext Context appContext,
       @Ui ListeningExecutorService uiExecutor,
-      Cp2LocalPhoneLookup cp2LocalPhoneLookup,
-      PhoneLookupSelector phoneLookupSelector) {
+      Cp2LocalPhoneLookup cp2LocalPhoneLookup) {
+    this.appContext = appContext;
     this.uiExecutor = uiExecutor;
     this.cp2LocalPhoneLookup = cp2LocalPhoneLookup;
-    this.phoneLookupSelector = phoneLookupSelector;
   }
 
   /**
@@ -104,19 +106,20 @@ public final class RealtimeRowProcessor {
 
   private CoalescedRow applyCp2LocalInfoToRow(Cp2Info cp2Info, CoalescedRow row) {
     PhoneLookupInfo phoneLookupInfo = PhoneLookupInfo.newBuilder().setCp2LocalInfo(cp2Info).build();
+    PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
+        new PhoneLookupInfoConsolidator(appContext, phoneLookupInfo);
     // It is safe to overwrite any existing data because CP2 always has highest priority.
     return row.toBuilder()
         .setNumberAttributes(
             NumberAttributes.newBuilder()
-                .setName(phoneLookupSelector.selectName(phoneLookupInfo))
-                .setPhotoUri(phoneLookupSelector.selectPhotoUri(phoneLookupInfo))
-                .setPhotoId(phoneLookupSelector.selectPhotoId(phoneLookupInfo))
-                .setLookupUri(phoneLookupSelector.selectLookupUri(phoneLookupInfo))
-                .setNumberTypeLabel(phoneLookupSelector.selectNumberLabel(phoneLookupInfo))
-                .setIsBusiness(phoneLookupSelector.selectIsBusiness(phoneLookupInfo))
-                .setIsVoicemail(phoneLookupSelector.selectIsVoicemail(phoneLookupInfo))
-                .setCanReportAsInvalidNumber(
-                    phoneLookupSelector.canReportAsInvalidNumber(phoneLookupInfo))
+                .setName(phoneLookupInfoConsolidator.getName())
+                .setPhotoUri(phoneLookupInfoConsolidator.getPhotoUri())
+                .setPhotoId(phoneLookupInfoConsolidator.getPhotoId())
+                .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
+                .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
+                .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
+                .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
+                .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
                 .build())
         .build();
   }
