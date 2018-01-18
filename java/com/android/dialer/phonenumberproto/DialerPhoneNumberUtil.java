@@ -70,6 +70,14 @@ public class DialerPhoneNumberUtil {
     }
     dialerPhoneNumber.setRawInput(rawInput.build());
 
+    // If the number is a service number, just store the raw input and don't bother trying to parse
+    // it. PhoneNumberUtil#parse ignores these characters which can lead to confusing behavior, such
+    // as the numbers "#123" and "123" being considered the same. The "#" can appear in the middle
+    // of a service number and the "*" can appear at the beginning (see a bug).
+    if (numberToParse != null && (numberToParse.contains("#") || numberToParse.startsWith("*"))) {
+      return dialerPhoneNumber.build();
+    }
+
     try {
       dialerPhoneNumber.setDialerInternalPhoneNumber(
           Converter.pojoToProto(phoneNumberUtil.parse(numberToParse, defaultRegion)));
@@ -95,21 +103,27 @@ public class DialerPhoneNumberUtil {
   }
 
   /**
-   * Returns true if the two numbers were parseable by libphonenumber and are an {@link
-   * MatchType#EXACT_MATCH} or if they have the same raw input.
+   * Returns true if the two numbers were parseable by libphonenumber and are a {@link
+   * MatchType#SHORT_NSN_MATCH} or {@link MatchType#NSN_MATCH} or {@link MatchType#EXACT_MATCH} or
+   * if they have the same raw input.
+   *
+   * @see PhoneNumberUtil#isNumberMatch(PhoneNumber, PhoneNumber)
    */
   @WorkerThread
-  public boolean isExactMatch(
+  public boolean isMatch(
       @NonNull DialerPhoneNumber firstNumberIn, @NonNull DialerPhoneNumber secondNumberIn) {
     Assert.isWorkerThread();
     if (!Assert.isNotNull(firstNumberIn).hasDialerInternalPhoneNumber()
         || !Assert.isNotNull(secondNumberIn).hasDialerInternalPhoneNumber()) {
       return firstNumberIn.getRawInput().equals(secondNumberIn.getRawInput());
     }
-    return isNumberMatch(
+    MatchType matchType =
+        isNumberMatch(
             firstNumberIn.getDialerInternalPhoneNumber(),
-            secondNumberIn.getDialerInternalPhoneNumber())
-        == MatchType.EXACT_MATCH;
+            secondNumberIn.getDialerInternalPhoneNumber());
+    return matchType == MatchType.SHORT_NSN_MATCH
+        || matchType == MatchType.NSN_MATCH
+        || matchType == MatchType.EXACT_MATCH;
   }
 
   /**

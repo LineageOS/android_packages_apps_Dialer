@@ -926,13 +926,7 @@ public class NewBubble {
       root.setOnConfigurationChangedListener(
           (configuration) -> {
             if (expanded) {
-              // Collapse immediately without animation
-              if (collapseAnimatorSet != null) {
-                collapseAnimatorSet.removeAllListeners();
-                collapseAnimatorSet.cancel();
-              }
-              setDrawerVisibility(View.GONE);
-              expanded = false;
+              startCollapse(CollapseEnd.NOTHING, false /* shouldRecoverYPosition */);
             }
             // The values in the current MoveHandler may be stale, so replace it. Then ensure the
             // Window is in bounds
