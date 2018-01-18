@@ -25,8 +25,8 @@
     double tap to collapse call action menu". -->
   <string name="a11y_bubble_primary_button_collapse_action">Collapse call action menu</string>
 
-  <!-- The label of drag-and-drop target for dismissing bubble. [CHAR LIMIT=10]-->
+  <!-- The label of drag-and-drop target for dismissing bubble. [CHAR LIMIT=20]-->
   <string name="bubble_bottom_action_hide">Hide</string>
-  <!-- The label of drag-and-drop target for ending call. [CHAR LIMIT=10]-->
+  <!-- The label of drag-and-drop target for ending call. [CHAR LIMIT=20]-->
   <string name="bubble_bottom_action_end_call">End call</string>
 </resources>
