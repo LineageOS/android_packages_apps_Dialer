@@ -136,9 +136,9 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             contactPhoto,
-            contact.hasContactUri() ? Uri.parse(contact.getContactUri()) : null,
+            contact.getContactUri().isEmpty() ? null : Uri.parse(contact.getContactUri()),
             contact.getPhotoId(),
-            contact.hasPhotoUri() ? Uri.parse(contact.getPhotoUri()) : null,
+            contact.getPhotoUri().isEmpty() ? null : Uri.parse(contact.getPhotoUri()),
             contact.getNameOrNumber(),
             contact.getContactType());
 

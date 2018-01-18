@@ -181,7 +181,7 @@ public class Coalescer {
     if (!meetsAssistedDialingCriteria(row1, row2)) {
       return false;
     }
-    return dialerPhoneNumberUtil.isExactMatch(number1, number2);
+    return dialerPhoneNumberUtil.isMatch(number1, number2);
   }
 
   /**

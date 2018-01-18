@@ -1450,18 +1450,16 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
-  public boolean onSearchListTouch(MotionEvent event) {
+  public void onSearchListTouch() {
     if (isDialpadShown) {
       PerformanceReport.recordClick(UiAction.Type.CLOSE_DIALPAD);
       hideDialpadFragment(true, false);
       if (TextUtils.isEmpty(dialpadQuery)) {
         exitSearchUi();
       }
-      return true;
     } else {
       UiUtil.hideKeyboardFrom(this, searchEditTextLayout);
     }
-    return false;
   }
 
   @Override

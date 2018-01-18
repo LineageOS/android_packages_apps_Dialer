@@ -23,13 +23,13 @@ import android.text.TextUtils;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.contactactions.ContactActionModule;
 import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.IntentModule;
 import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.lettertile.LetterTileDrawable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,23 +125,19 @@ final class Modules {
     DialerContact.Builder dialerContactBuilder =
         DialerContact.newBuilder()
             .setNumber(originalNumber)
-            .setContactType(LetterTileDrawable.TYPE_DEFAULT) // TODO(zachh): Use proper type.
+            .setContactType(CallLogContactTypes.getContactType(row))
             .setPhotoId(row.numberAttributes().getPhotoId());
 
-    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
+    if (!row.numberAttributes().getName().isEmpty()) {
       dialerContactBuilder.setNameOrNumber(row.numberAttributes().getName());
     } else if (!TextUtils.isEmpty(originalNumber)) {
       dialerContactBuilder.setNameOrNumber(originalNumber);
     }
-    if (row.numberAttributes().hasNumberTypeLabel()) {
-      dialerContactBuilder.setNumberLabel(row.numberAttributes().getNumberTypeLabel());
-    }
-    if (row.numberAttributes().hasPhotoUri()) {
-      dialerContactBuilder.setPhotoUri(row.numberAttributes().getPhotoUri());
-    }
-    if (row.numberAttributes().hasLookupUri()) {
-      dialerContactBuilder.setContactUri(row.numberAttributes().getLookupUri());
-    }
+
+    dialerContactBuilder.setNumberLabel(row.numberAttributes().getNumberTypeLabel());
+    dialerContactBuilder.setPhotoUri(row.numberAttributes().getPhotoUri());
+    dialerContactBuilder.setContactUri(row.numberAttributes().getLookupUri());
+
     if (row.formattedNumber() != null) {
       dialerContactBuilder.setDisplayNumber(row.formattedNumber());
     }
