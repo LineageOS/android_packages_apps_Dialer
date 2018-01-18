@@ -29,7 +29,6 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -67,21 +66,18 @@ public final class RealtimeRowProcessor {
 
   /**
    * Converts a {@link CoalescedRow} to a future which is the result of performing additional work
-   * on the row. Returns {@link Optional#absent()} if no modifications were necessary.
+   * on the row. May simply return the original row if no modifications were necessary.
    */
   @MainThread
-  ListenableFuture<Optional<CoalescedRow>> applyRealtimeProcessing(final CoalescedRow row) {
+  ListenableFuture<CoalescedRow> applyRealtimeProcessing(final CoalescedRow row) {
     // Cp2LocalPhoneLookup can not always efficiently process all rows.
     if (!row.numberAttributes().getIsCp2InfoIncomplete()) {
-      return Futures.immediateFuture(Optional.absent());
+      return Futures.immediateFuture(row);
     }
 
     Cp2Info cachedCp2Info = cache.get(row.number());
     if (cachedCp2Info != null) {
-      if (cachedCp2Info.equals(Cp2Info.getDefaultInstance())) {
-        return Futures.immediateFuture(Optional.absent());
-      }
-      return Futures.immediateFuture(Optional.of(applyCp2LocalInfoToRow(cachedCp2Info, row)));
+      return Futures.immediateFuture(applyCp2LocalInfoToRow(cachedCp2Info, row));
     }
 
     ListenableFuture<Cp2Info> cp2InfoFuture = cp2LocalPhoneLookup.lookupByNumber(row.number());
@@ -89,10 +85,7 @@ public final class RealtimeRowProcessor {
         cp2InfoFuture,
         cp2Info -> {
           cache.put(row.number(), cp2Info);
-          if (!cp2Info.equals(Cp2Info.getDefaultInstance())) {
-            return Optional.of(applyCp2LocalInfoToRow(cp2Info, row));
-          }
-          return Optional.absent();
+          return applyCp2LocalInfoToRow(cp2Info, row);
         },
         uiExecutor /* ensures the cache is updated on a single thread */);
   }

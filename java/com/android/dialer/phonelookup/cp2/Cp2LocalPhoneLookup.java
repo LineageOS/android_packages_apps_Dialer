@@ -140,7 +140,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
           try (Cursor cursor =
               queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), rawNumber)) {
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.lookup", "null cursor");
+              LogUtil.w("Cp2LocalPhoneLookup.lookupByNumber", "null cursor");
               return Cp2Info.getDefaultInstance();
             }
             while (cursor.moveToNext()) {
@@ -511,7 +511,10 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                         } else if (deletedPhoneNumbers.contains(dialerPhoneNumber)) {
                           infoBuilder.clear();
                         } else if (unprocessableNumbers.contains(dialerPhoneNumber)) {
-                          infoBuilder.clear().setIsIncomplete(true);
+                          // Don't clear the existing info when the number is unprocessable. It's
+                          // likely that the existing info is up-to-date so keep it in place so that
+                          // the UI doesn't pop when the query is completed at display time.
+                          infoBuilder.setIsIncomplete(true);
                         }
 
                         // If the DialerPhoneNumber didn't change, add the unchanged existing info.

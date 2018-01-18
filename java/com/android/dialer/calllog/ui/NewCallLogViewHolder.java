@@ -38,7 +38,6 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import java.util.Locale;
@@ -86,17 +85,17 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     // Even if there is additional real time processing necessary, we still want to immediately show
     // what information we have, rather than an empty card. For example, if CP2 information needs to
     // be queried on the fly, we can still show the phone number until the contact name loads.
-    handleRow(row);
+    displayRow(row);
 
     // Note: This leaks the view holder via the callback (which is an inner class), but this is OK
     // because we only create ~10 of them (and they'll be collected assuming all jobs finish).
     Futures.addCallback(
         realtimeRowProcessor.applyRealtimeProcessing(row),
-        new RealtimeRowFutureCallback(row.id()),
+        new RealtimeRowFutureCallback(row),
         uiExecutorService);
   }
 
-  private void handleRow(CoalescedRow row) {
+  private void displayRow(CoalescedRow row) {
     // TODO(zachh): Handle RTL properly.
     primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
     secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
@@ -189,23 +188,24 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
   }
 
-  private class RealtimeRowFutureCallback implements FutureCallback<Optional<CoalescedRow>> {
-    private final int id;
+  private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {
+    private final CoalescedRow originalRow;
 
-    RealtimeRowFutureCallback(int id) {
-      this.id = id;
+    RealtimeRowFutureCallback(CoalescedRow originalRow) {
+      this.originalRow = originalRow;
     }
 
-    /**
-     * @param updatedRow the updated row if an update is required, or absent if no updates are
-     *     required
-     */
     @Override
-    public void onSuccess(Optional<CoalescedRow> updatedRow) {
+    public void onSuccess(CoalescedRow updatedRow) {
       // If the user scrolled then this ViewHolder may not correspond to the completed task and
       // there's nothing to do.
-      if (updatedRow.isPresent() && id == currentRowId) {
-        handleRow(updatedRow.get());
+      if (originalRow.id() != currentRowId) {
+        return;
+      }
+      // Only update the UI if the updated row differs from the original row (which has already
+      // been displayed).
+      if (!updatedRow.equals(originalRow)) {
+        displayRow(updatedRow);
       }
     }
 
