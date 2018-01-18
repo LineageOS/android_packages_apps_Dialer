@@ -27,9 +27,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
+import com.android.dialer.database.Database;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
@@ -37,6 +39,7 @@ import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListe
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
+import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 
@@ -49,9 +52,13 @@ public final class MainActivity extends AppCompatActivity
         SearchFragmentListener {
 
   private static final String IS_FAB_HIDDEN_KEY = "is_fab_hidden";
+  private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
 
   private MainSearchController searchController;
   private FloatingActionButton fab;
+
+  /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
+  private String savedLanguageCode;
 
   /**
    * @param context Context of the application package implementing MainActivity class.
@@ -69,6 +76,7 @@ public final class MainActivity extends AppCompatActivity
     LogUtil.enterBlock("MainActivity.onCreate");
     setContentView(R.layout.main_activity);
     initLayout();
+    SmartDialPrefix.initializeNanpSettings(this);
   }
 
   private void initLayout() {
@@ -88,9 +96,19 @@ public final class MainActivity extends AppCompatActivity
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    // Start the thread that updates the smart dial database if the activity is recreated with a
+    // language change.
+    boolean forceUpdate = !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
+    Database.get(this).getDatabaseHelper(this).startSmartDialUpdateThread(forceUpdate);
+  }
+
+  @Override
   protected void onSaveInstanceState(Bundle bundle) {
     super.onSaveInstanceState(bundle);
     bundle.putBoolean(IS_FAB_HIDDEN_KEY, !fab.isShown());
+    bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
   }
 
   @Override
@@ -99,6 +117,7 @@ public final class MainActivity extends AppCompatActivity
     if (savedInstanceState.getBoolean(IS_FAB_HIDDEN_KEY, false)) {
       fab.hide();
     }
+    savedLanguageCode = savedInstanceState.getString(KEY_SAVED_LANGUAGE_CODE);
   }
 
   @Override
@@ -110,7 +129,7 @@ public final class MainActivity extends AppCompatActivity
 
   @Override // OnDialpadQueryChangedListener
   public void onDialpadQueryChanged(String query) {
-    // TODO(calderwoodra): update search fragment
+    searchController.onDialpadQueryChanged(query);
   }
 
   @Override // DialpadListener
