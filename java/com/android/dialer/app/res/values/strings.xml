@@ -532,7 +532,7 @@
   <string name="call_settings_label">Calls</string>
 
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
-  <string name="manage_blocked_numbers_label">Call blocking</string>
+  <string name="manage_blocked_numbers_label">Blocked numbers</string>
 
   <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
   <string name="voicemail_settings_label">Voicemail</string>
