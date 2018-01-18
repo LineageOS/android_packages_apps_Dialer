@@ -19,6 +19,9 @@ package com.android.dialer.main.impl.toolbar;
 /** Useful callback for {@link SearchBarView} listeners. */
 public interface SearchBarListener {
 
+  /** Called when the user clicks on the search bar. */
+  void onSearchBarClicked();
+
   /** Called when the search query updates. */
   void onSearchQueryUpdated(String query);
 
