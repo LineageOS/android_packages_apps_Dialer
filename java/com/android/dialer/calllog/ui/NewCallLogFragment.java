@@ -93,6 +93,16 @@ public final class NewCallLogFragment extends Fragment
 
     // TODO(zachh): Consider doing this when fragment becomes visible.
     refreshAnnotatedCallLog(true /* checkDirty */);
+
+    // There are some types of data that we show in the call log that are not represented in the
+    // AnnotatedCallLog. For example, CP2 information for invalid numbers can sometimes only be
+    // fetched at display time. Because of this, we need to clear the adapter's cache and update it
+    // whenever the user arrives at the call log (rather than relying on changes to the CursorLoader
+    // alone).
+    if (recyclerView.getAdapter() != null) {
+      ((NewCallLogAdapter) recyclerView.getAdapter()).clearCache();
+      recyclerView.getAdapter().notifyDataSetChanged();
+    }
   }
 
   @Override

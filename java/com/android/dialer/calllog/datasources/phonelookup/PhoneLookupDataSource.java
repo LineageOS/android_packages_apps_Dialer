@@ -280,7 +280,10 @@ public final class PhoneLookupDataSource
                   PhoneLookupHistory.contentUriForNumber(normalizedNumber))
               .build());
     }
-    appContext.getContentResolver().applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations);
+    Assert.isNotNull(
+        appContext
+            .getContentResolver()
+            .applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations));
     return null;
   }
 
