@@ -25,6 +25,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
@@ -42,14 +43,24 @@ import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
+import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.speeddial.SpeedDialFragment;
+import com.android.dialer.util.ViewUtil;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
+import com.google.common.base.Optional;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
 public final class MainActivity extends AppCompatActivity
-    implements OnContactSelectedListener, OnDialpadQueryChangedListener, DialpadListener {
+    implements OnContactSelectedListener,
+        OnDialpadQueryChangedListener,
+        DialpadListener,
+        DialpadFragment.HostInterface,
+        SearchFragmentListener {
+
+  private static final String IS_FAB_HIDDEN_KEY = "is_fab_hidden";
 
   private SearchController searchController;
+  private FloatingActionButton fab;
 
   /**
    * @param context Context of the application package implementing MainActivity class.
@@ -70,18 +81,33 @@ public final class MainActivity extends AppCompatActivity
   }
 
   private void initLayout() {
-    FloatingActionButton fab = findViewById(R.id.fab);
+    fab = findViewById(R.id.fab);
     fab.setOnClickListener(v -> searchController.showDialpad(true));
 
     MainToolbar toolbar = findViewById(R.id.toolbar);
-    toolbar.setSearchBarListener(new MainSearchBarListener());
-    searchController = new SearchController(fab, toolbar);
     setSupportActionBar(findViewById(R.id.toolbar));
 
     BottomNavBar navBar = findViewById(R.id.bottom_nav_bar);
     navBar.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
     // TODO(calderwoodra): Implement last tab
     navBar.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
+
+    searchController = new SearchController(navBar, fab, toolbar);
+    toolbar.setSearchBarListener(searchController);
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle bundle) {
+    super.onSaveInstanceState(bundle);
+    bundle.putBoolean(IS_FAB_HIDDEN_KEY, !fab.isShown());
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    if (savedInstanceState.getBoolean(IS_FAB_HIDDEN_KEY, false)) {
+      fab.hide();
+    }
   }
 
   @Override
@@ -119,31 +145,59 @@ public final class MainActivity extends AppCompatActivity
     super.onBackPressed();
   }
 
-  /** Search controller for handling all the logic related to hiding/showing search and dialpad. */
-  private final class SearchController {
+  @Override // DialpadFragment.HostInterface
+  public boolean onDialpadSpacerTouchWithEmptyQuery() {
+    searchController.onBackPressed();
+    return true;
+  }
+
+  @Override // SearchFragmentListener
+  public void onSearchListTouch() {
+    searchController.onBackPressed();
+  }
+
+  @Override // SearchFragmentListener
+  public void onCallPlacedFromSearch() {
+    // TODO(calderwoodra): logging
+  }
+
+  /**
+   * Search controller for handling all the logic related to entering and exiting the search UI.
+   *
+   * <p>Components modified are:
+   *
+   * <ul>
+   *   <li>Bottom Nav Bar, completely hidden when in search ui.
+   *   <li>FAB, visible in dialpad search when dialpad is hidden. Otherwise, FAB is hidden.
+   *   <li>Toolbar, expanded and visible when dialpad is hidden. Otherwise, hidden off screen.
+   *   <li>Dialpad, shown through fab clicks and hidden with Android back button.
+   * </ul>
+   *
+   * @see #onBackPressed()
+   */
+  private final class SearchController implements SearchBarListener {
 
     private static final String DIALPAD_FRAGMENT_TAG = "dialpad_fragment_tag";
     private static final String SEARCH_FRAGMENT_TAG = "search_fragment_tag";
 
+    private final BottomNavBar bottomNav;
     private final FloatingActionButton fab;
     private final MainToolbar toolbar;
 
-    private boolean isDialpadVisible;
-    private boolean isSearchVisible;
-
-    private SearchController(FloatingActionButton fab, MainToolbar toolbar) {
+    private SearchController(
+        BottomNavBar bottomNav, FloatingActionButton fab, MainToolbar toolbar) {
+      this.bottomNav = bottomNav;
       this.fab = fab;
       this.toolbar = toolbar;
     }
 
     /** Shows the dialpad, hides the FAB and slides the toolbar off screen. */
     public void showDialpad(boolean animate) {
-      Assert.checkArgument(!isDialpadVisible);
-      isDialpadVisible = true;
-      isSearchVisible = true;
+      Assert.checkArgument(!isDialpadVisible());
 
       fab.hide();
       toolbar.slideUp(animate);
+      toolbar.expand(animate, Optional.absent());
       setTitle(R.string.dialpad_activity_title);
 
       android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -152,14 +206,14 @@ public final class MainActivity extends AppCompatActivity
       if (getSearchFragment() == null) {
         NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
         transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
-      } else if (!isSearchVisible) {
+      } else if (!isSearchVisible()) {
         transaction.show(getSearchFragment());
       }
 
       // Show Dialpad
       if (getDialpadFragment() == null) {
         DialpadFragment dialpadFragment = new DialpadFragment();
-        transaction.add(R.id.search_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG);
+        transaction.add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG);
       } else {
         DialpadFragment dialpadFragment = getDialpadFragment();
         transaction.show(dialpadFragment);
@@ -168,9 +222,8 @@ public final class MainActivity extends AppCompatActivity
     }
 
     /** Hides the dialpad, reveals the FAB and slides the toolbar back onto the screen. */
-    public void hideDialpad(boolean animate) {
-      Assert.checkArgument(isDialpadVisible);
-      isDialpadVisible = false;
+    public void hideDialpad(boolean animate, boolean bottomNavVisible) {
+      Assert.checkArgument(isDialpadVisible());
 
       fab.show();
       toolbar.slideDown(animate);
@@ -182,7 +235,15 @@ public final class MainActivity extends AppCompatActivity
           animate,
           new AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) {
+              // Slide the bottom nav on animation start so it's (not) visible when the dialpad
+              // finishes animating down.
+              if (bottomNavVisible) {
+                showBottomNav();
+              } else {
+                hideBottomNav();
+              }
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -196,16 +257,30 @@ public final class MainActivity extends AppCompatActivity
           });
     }
 
+    private void hideBottomNav() {
+      bottomNav.setVisibility(View.INVISIBLE);
+      if (bottomNav.getHeight() == 0) {
+        ViewUtil.doOnGlobalLayout(bottomNav, v -> fab.setTranslationY(bottomNav.getHeight()));
+      } else {
+        fab.setTranslationY(bottomNav.getHeight());
+      }
+    }
+
+    private void showBottomNav() {
+      bottomNav.setVisibility(View.VISIBLE);
+      fab.setTranslationY(0);
+    }
+
     /**
      * Should be called when the user presses the back button.
      *
-     * @return true if {@link #onBackPressed()} handled to action.
+     * @return true if #onBackPressed() handled to action.
      */
     public boolean onBackPressed() {
-      if (isDialpadVisible && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
-        hideDialpad(true);
+      if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+        hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
         return true;
-      } else if (isSearchVisible) {
+      } else if (isSearchVisible()) {
         closeSearch(true);
         return true;
       } else {
@@ -213,14 +288,17 @@ public final class MainActivity extends AppCompatActivity
       }
     }
 
-    /** Calls {@link #hideDialpad(boolean)} and removes the search fragment. */
+    /** Calls {@link #hideDialpad(boolean, boolean)} and removes the search fragment. */
     private void closeSearch(boolean animate) {
-      Assert.checkArgument(isSearchVisible);
-      if (isDialpadVisible) {
-        hideDialpad(animate);
+      Assert.checkArgument(isSearchVisible());
+      if (isDialpadVisible()) {
+        hideDialpad(animate, /* bottomNavVisible=*/ true);
+      } else if (!fab.isShown()) {
+        fab.show();
       }
+      showBottomNav();
+      toolbar.collapse(animate);
       getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
-      isSearchVisible = false;
     }
 
     private DialpadFragment getDialpadFragment() {
@@ -230,19 +308,49 @@ public final class MainActivity extends AppCompatActivity
     private NewSearchFragment getSearchFragment() {
       return (NewSearchFragment) getFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
     }
-  }
 
-  /**
-   * Implementation of {@link SearchBarListener} that holds the logic for how to handle search bar
-   * events.
-   */
-  private static final class MainSearchBarListener implements SearchBarListener {
+    private boolean isDialpadVisible() {
+      DialpadFragment fragment = getDialpadFragment();
+      return fragment != null
+          && fragment.isAdded()
+          && !fragment.isHidden()
+          && fragment.isDialpadSlideUp();
+    }
+
+    private boolean isSearchVisible() {
+      NewSearchFragment fragment = getSearchFragment();
+      return fragment != null && fragment.isAdded() && !fragment.isHidden();
+    }
+
+    /**
+     * Opens search in regular/search bar search mode.
+     *
+     * <p>Hides fab, expands toolbar and starts the search fragment.
+     */
+    @Override
+    public void onSearchBarClicked() {
+      fab.hide();
+      toolbar.expand(/* animate=*/ true, Optional.absent());
+
+      android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+      // Show Search
+      if (getSearchFragment() == null) {
+        NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
+        transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      } else if (!isSearchVisible()) {
+        transaction.show(getSearchFragment());
+      }
+      transaction.commit();
+    }
+
+    @Override
+    public void onSearchBackButtonClicked() {
+      closeSearch(true);
+    }
 
     @Override
     public void onSearchQueryUpdated(String query) {}
-
-    @Override
-    public void onSearchBackButtonClicked() {}
 
     @Override
     public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {}

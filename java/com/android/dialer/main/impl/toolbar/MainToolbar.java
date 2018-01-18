@@ -25,6 +25,8 @@ import android.view.MenuItem;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import com.android.dialer.common.Assert;
+import com.android.dialer.util.ViewUtil;
+import com.google.common.base.Optional;
 
 /** Toolbar for {@link com.android.dialer.main.impl.MainActivity}. */
 public final class MainToolbar extends Toolbar implements OnMenuItemClickListener {
@@ -33,6 +35,7 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
   private static final AccelerateDecelerateInterpolator SLIDE_INTERPOLATOR =
       new AccelerateDecelerateInterpolator();
 
+  private SearchBarView searchBar;
   private SearchBarListener listener;
   private boolean isSlideUp;
 
@@ -49,6 +52,8 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
     overflowMenu.setOnMenuItemClickListener(this);
     optionsMenuButton.setOnClickListener(v -> overflowMenu.show());
     optionsMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
+
+    searchBar = findViewById(R.id.search_view_container);
   }
 
   @Override
@@ -69,6 +74,10 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
   /** Slides the toolbar up and off the screen. */
   public void slideUp(boolean animate) {
     Assert.checkArgument(!isSlideUp);
+    if (getHeight() == 0) {
+      ViewUtil.doOnGlobalLayout(this, view -> slideUp(animate));
+      return;
+    }
     isSlideUp = true;
     animate()
         .translationY(-getHeight())
@@ -77,11 +86,7 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
         .start();
   }
 
-  /**
-   * Slides the toolbar down and back onto the screen.
-   *
-   * @param animate
-   */
+  /** Slides the toolbar down and back onto the screen. */
   public void slideDown(boolean animate) {
     Assert.checkArgument(isSlideUp);
     isSlideUp = false;
@@ -90,6 +95,16 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
         .setDuration(animate ? SLIDE_DURATION : 0)
         .setInterpolator(SLIDE_INTERPOLATOR)
         .start();
+  }
+
+  /** @see SearchBarView#collapse(boolean) */
+  public void collapse(boolean animate) {
+    searchBar.collapse(animate);
+  }
+
+  /** @see SearchBarView#collapse(boolean) */
+  public void expand(boolean animate, Optional<String> text) {
+    searchBar.expand(animate, text);
   }
 
   @VisibleForTesting

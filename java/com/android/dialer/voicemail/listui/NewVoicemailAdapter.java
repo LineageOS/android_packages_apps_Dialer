@@ -150,7 +150,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
         this.olderHeaderPosition = Integer.MAX_VALUE; // Didn't find any "Older" rows.
       } else {
         this.todayHeaderPosition = Integer.MAX_VALUE; // Didn't find any "Today" rows.
-        this.olderHeaderPosition = 0;
+        this.olderHeaderPosition = 0 + alertOffSet;
       }
     } else { // There are no rows, just need to set these because they are final.
       this.todayHeaderPosition = Integer.MAX_VALUE;

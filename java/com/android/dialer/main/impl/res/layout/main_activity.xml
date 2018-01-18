@@ -37,12 +37,19 @@
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"/>
 
-  <!-- Holds search and dialpad fragments -->
+  <!-- Holds search fragment -->
   <FrameLayout
       android:id="@+id/search_fragment_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@+id/toolbar"/>
+
+  <!-- Holds Dialpad fragment -->
+  <FrameLayout
+      android:id="@+id/dialpad_fragment_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:elevation="10dp"/>
 
   <!-- MainToolbar -->
   <include
