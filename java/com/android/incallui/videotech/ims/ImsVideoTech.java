@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -59,7 +60,7 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public boolean isAvailable(Context context) {
+  public boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       return false;
     }
@@ -121,8 +122,9 @@ public class ImsVideoTech implements VideoTech {
   }
 
   @Override
-  public void onCallStateChanged(Context context, int newState) {
-    if (!isAvailable(context)) {
+  public void onCallStateChanged(
+      Context context, int newState, PhoneAccountHandle phoneAccountHandle) {
+    if (!isAvailable(context, phoneAccountHandle)) {
       return;
     }
 

@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.telecom.Call;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoListener;
@@ -60,7 +61,10 @@ public class DuoStub implements Duo {
 
   @MainThread
   @Override
-  public Optional<Boolean> supportsUpgrade(@NonNull Context context, @Nullable String number) {
+  public Optional<Boolean> supportsUpgrade(
+      @NonNull Context context,
+      @Nullable String number,
+      @Nullable PhoneAccountHandle phoneAccountHandle) {
     Assert.isMainThread();
     Assert.isNotNull(context);
     return Optional.of(false);
