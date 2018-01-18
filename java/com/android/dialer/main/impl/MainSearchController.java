@@ -16,14 +16,17 @@
 
 package com.android.dialer.main.impl;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
+import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
@@ -181,11 +184,13 @@ final class MainSearchController implements SearchBarListener {
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
   }
 
+  @Nullable
   private DialpadFragment getDialpadFragment() {
     return (DialpadFragment)
         mainActivity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
   }
 
+  @Nullable
   private NewSearchFragment getSearchFragment() {
     return (NewSearchFragment)
         mainActivity.getFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
@@ -233,7 +238,20 @@ final class MainSearchController implements SearchBarListener {
   }
 
   @Override
-  public void onSearchQueryUpdated(String query) {}
+  public void onSearchQueryUpdated(String query) {
+    NewSearchFragment fragment = getSearchFragment();
+    if (fragment != null) {
+      fragment.setQuery(query, CallInitiationType.Type.REGULAR_SEARCH);
+    }
+  }
+
+  /** @see OnDialpadQueryChangedListener#onDialpadQueryChanged(java.lang.String) */
+  public void onDialpadQueryChanged(String query) {
+    NewSearchFragment fragment = getSearchFragment();
+    if (fragment != null) {
+      fragment.setQuery(query, CallInitiationType.Type.DIALPAD);
+    }
+  }
 
   @Override
   public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {}
