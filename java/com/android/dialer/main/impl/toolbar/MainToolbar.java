@@ -111,4 +111,20 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
   public boolean isSlideUp() {
     return isSlideUp;
   }
+
+  public String getQuery() {
+    return searchBar.getQuery();
+  }
+
+  public void transferQueryFromDialpad(String query) {
+    searchBar.setQueryWithoutUpdate(query);
+  }
+
+  public void hideKeyboard() {
+    searchBar.hideKeyboard();
+  }
+
+  public void showKeyboard() {
+    searchBar.showKeyboard();
+  }
 }

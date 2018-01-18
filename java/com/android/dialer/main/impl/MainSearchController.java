@@ -16,6 +16,7 @@
 
 package com.android.dialer.main.impl;
 
+import android.app.FragmentTransaction;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
@@ -24,12 +25,14 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
+import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
 
@@ -77,8 +80,7 @@ final class MainSearchController implements SearchBarListener {
     toolbar.expand(animate, Optional.absent());
     mainActivity.setTitle(R.string.dialpad_activity_title);
 
-    android.app.FragmentTransaction transaction =
-        mainActivity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
 
     // Show Search
     if (getSearchFragment() == null) {
@@ -105,6 +107,7 @@ final class MainSearchController implements SearchBarListener {
 
     fab.show();
     toolbar.slideDown(animate);
+    toolbar.transferQueryFromDialpad(getDialpadFragment().getQuery());
     mainActivity.setTitle(R.string.main_activity_label);
 
     DialpadFragment dialpadFragment = getDialpadFragment();
@@ -155,15 +158,43 @@ final class MainSearchController implements SearchBarListener {
   }
 
   /**
+   * @see SearchFragmentListener#onSearchListTouch()
+   *     <p>There are 4 scenarios we support to provide a nice UX experience:
+   *     <ol>
+   *       <li>When the dialpad is visible with an empty query, close the search UI.
+   *       <li>When the dialpad is visible with a non-empty query, hide the dialpad.
+   *       <li>When the regular search UI is visible with an empty query, close the search UI.
+   *       <li>When the regular search UI is visible with a non-empty query, hide the keyboard.
+   *     </ol>
+   */
+  public void onSearchListTouch() {
+    if (isDialpadVisible()) {
+      if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+        closeSearch(true);
+      } else {
+        hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
+      }
+    } else if (isSearchVisible()) {
+      if (TextUtils.isEmpty(toolbar.getQuery())) {
+        closeSearch(true);
+      } else {
+        toolbar.hideKeyboard();
+      }
+    }
+  }
+
+  /**
    * Should be called when the user presses the back button.
    *
    * @return true if #onBackPressed() handled to action.
    */
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+      LogUtil.i("MainSearchController#onBackPressed", "Dialpad visible with query");
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
+      LogUtil.i("MainSearchController#onBackPressed", "Search is visible");
       closeSearch(true);
       return true;
     } else {
@@ -218,9 +249,10 @@ final class MainSearchController implements SearchBarListener {
   public void onSearchBarClicked() {
     fab.hide();
     toolbar.expand(/* animate=*/ true, Optional.absent());
+    toolbar.showKeyboard();
+    hideBottomNav();
 
-    android.app.FragmentTransaction transaction =
-        mainActivity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
 
     // Show Search
     if (getSearchFragment() == null) {

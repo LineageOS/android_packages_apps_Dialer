@@ -490,8 +490,8 @@ public final class NewSearchFragment extends Fragment
   public boolean onTouch(View v, MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_UP) {
       v.performClick();
-      FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onSearchListTouch();
     }
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onSearchListTouch();
     return false;
   }
 
