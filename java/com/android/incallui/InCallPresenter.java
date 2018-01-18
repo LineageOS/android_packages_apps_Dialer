@@ -1044,14 +1044,16 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         "updateIsChangingConfigurations = " + isChangingConfigurations);
   }
 
-  /** Called when the activity goes in/out of the foreground. */
-  public void onUiShowing(boolean showing) {
+  void updateNotification() {
     // We need to update the notification bar when we leave the UI because that
     // could trigger it to show again.
     if (statusBarNotifier != null) {
       statusBarNotifier.updateNotification();
     }
+  }
 
+  /** Called when the activity goes in/out of the foreground. */
+  public void onUiShowing(boolean showing) {
     if (proximitySensor != null) {
       proximitySensor.onInCallShowing(showing);
     }
