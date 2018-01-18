@@ -70,6 +70,10 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     notifyDataSetChanged();
   }
 
+  void clearCache() {
+    this.realtimeRowProcessor.clearCache();
+  }
+
   private void setHeaderPositions() {
     // Calculate header adapter positions by reading cursor.
     long currentTimeMillis = clock.currentTimeMillis();
