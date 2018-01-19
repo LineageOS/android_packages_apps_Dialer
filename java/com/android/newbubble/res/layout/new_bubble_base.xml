@@ -31,7 +31,7 @@
       android:animateLayoutChanges="true"
       android:clipChildren="false"
       android:clipToPadding="false">
-    <ViewAnimator
+    <FrameLayout
         android:id="@+id/bubble_button_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,31 +42,25 @@
         android:contentDescription="@string/a11y_bubble_description"
         android:background="@drawable/bubble_shape_circle"
         android:measureAllChildren="false"
-        android:elevation="@dimen/bubble_elevation"
-        tools:backgroundTint="#FF0000AA">
-      <FrameLayout
-          android:id="@+id/bubble_icon_container"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/bubble_icon_avatar"
-            android:layout_width="@dimen/bubble_size"
-            android:layout_height="@dimen/bubble_size"
-            tools:src="@android:drawable/ic_btn_speak_now"/>
-        <ImageView
-            android:id="@+id/bubble_icon_primary"
-            android:layout_width="@dimen/bubble_small_icon_size"
-            android:layout_height="@dimen/bubble_small_icon_size"
-            android:layout_gravity="bottom|right"
-            android:padding="@dimen/bubble_small_icon_padding"
-            android:tint="@android:color/white"
-            android:tintMode="src_in"
-            android:background="@drawable/bubble_shape_circle_small"
-            android:measureAllChildren="false"
-            tools:backgroundTint="#FF0000AA"
-            tools:src="@android:drawable/ic_btn_speak_now"/>
-      </FrameLayout>
-    </ViewAnimator>
+        android:elevation="@dimen/bubble_elevation">
+      <ImageView
+          android:id="@+id/bubble_icon_avatar"
+          android:layout_width="@dimen/bubble_size"
+          android:layout_height="@dimen/bubble_size"
+          tools:src="@android:drawable/ic_btn_speak_now"/>
+      <ImageView
+          android:id="@+id/bubble_icon_primary"
+          android:layout_width="@dimen/bubble_small_icon_size"
+          android:layout_height="@dimen/bubble_small_icon_size"
+          android:layout_gravity="bottom|right"
+          android:padding="@dimen/bubble_small_icon_padding"
+          android:tint="@android:color/white"
+          android:tintMode="src_in"
+          android:background="@drawable/bubble_shape_circle_small"
+          android:measureAllChildren="false"
+          tools:backgroundTint="#FF0000AA"
+          tools:src="@android:drawable/ic_btn_speak_now"/>
+    </FrameLayout>
   </RelativeLayout>
   <!-- The RelativeLayout below serves as boundary for @id/bubble_expanded_layout during animation -->
   <RelativeLayout

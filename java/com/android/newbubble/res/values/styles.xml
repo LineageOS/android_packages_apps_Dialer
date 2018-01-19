@@ -18,10 +18,11 @@
 <resources>
   <style name="CheckableButton">
     <item name="android:layout_width">@dimen/bubble_expanded_width</item>
-    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_height">44dp</item>
 
-    <item name="android:paddingTop">@dimen/bubble_button_padding_vertical</item>
-    <item name="android:paddingBottom">@dimen/bubble_button_padding_vertical</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:maxLines">2</item>
+    <item name="android:ellipsize">end</item>
     <item name="android:paddingStart">@dimen/bubble_button_padding_horizontal</item>
     <item name="android:paddingEnd">@dimen/bubble_button_padding_horizontal</item>
     <item name="android:drawablePadding">@dimen/bubble_icon_padding</item>
