@@ -34,7 +34,7 @@ final class BottomActionViewController {
   private static final int SHOW_TARGET_DELAY = 100;
   private static final int SHOW_HIDE_TARGET_DURATION = 175;
   private static final int HIGHLIGHT_TARGET_DURATION = 150;
-  private static final float HIGHLIGHT_TARGET_SCALE = 1.5f;
+  private static final float HIGHLIGHT_TARGET_SCALE = 1.3f;
   private static final float UNHIGHLIGHT_TARGET_ALPHA = 0.38f;
 
   private final Context context;

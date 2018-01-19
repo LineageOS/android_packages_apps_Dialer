@@ -17,7 +17,6 @@
 package com.android.dialer.main.impl.toolbar;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -107,9 +106,12 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
     searchBar.expand(animate, text);
   }
 
-  @VisibleForTesting
   public boolean isSlideUp() {
     return isSlideUp;
+  }
+
+  public boolean isExpanded() {
+    return searchBar.isExpanded();
   }
 
   public String getQuery() {
