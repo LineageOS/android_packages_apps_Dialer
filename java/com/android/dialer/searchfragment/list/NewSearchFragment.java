@@ -63,11 +63,11 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
+import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader;
+import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
 import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
-import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader;
-import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
@@ -196,13 +196,13 @@ public final class NewSearchFragment extends Fragment
       // Directories represent contact data sources on the device, but since nearby places aren't
       // stored on the device, they don't have a directory ID. We pass the list of all existing IDs
       // so that we can find one that doesn't collide.
-      List<Integer> directoryIds = new ArrayList<>();
+      List<Long> directoryIds = new ArrayList<>();
       for (Directory directory : directories) {
         directoryIds.add(directory.getId());
       }
       return new NearbyPlacesCursorLoader(getContext(), query, directoryIds);
     } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
-      return new RemoteDirectoriesCursorLoader(getContext());
+      return new DirectoriesCursorLoader(getContext());
     } else if (id == REMOTE_CONTACTS_LOADER_ID) {
       return new RemoteContactsCursorLoader(getContext(), query, directories);
     } else {
@@ -214,7 +214,7 @@ public final class NewSearchFragment extends Fragment
   public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
     LogUtil.i("NewSearchFragment.onLoadFinished", "Loader finished: " + loader);
     if (cursor != null
-        && !(loader instanceof RemoteDirectoriesCursorLoader)
+        && !(loader instanceof DirectoriesCursorLoader)
         && !(cursor instanceof SearchCursor)) {
       throw Assert.createIllegalStateFailException("Cursors must implement SearchCursor");
     }
@@ -228,12 +228,9 @@ public final class NewSearchFragment extends Fragment
     } else if (loader instanceof RemoteContactsCursorLoader) {
       adapter.setRemoteContactsCursor((SearchCursor) cursor);
 
-    } else if (loader instanceof RemoteDirectoriesCursorLoader) {
+    } else if (loader instanceof DirectoriesCursorLoader) {
       directories.clear();
-      cursor.moveToPosition(-1);
-      while (cursor.moveToNext()) {
-        directories.add(RemoteDirectoriesCursorLoader.readDirectory(cursor));
-      }
+      directories.addAll(DirectoriesCursorLoader.toDirectories(cursor));
       loadNearbyPlacesCursor();
       loadRemoteContactsCursors();
 

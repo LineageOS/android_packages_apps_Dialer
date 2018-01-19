@@ -24,7 +24,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
-import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader;
+import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.List;
  * {@link MergeCursor} used for combining remote directory cursors into one cursor.
  *
  * <p>Usually a device with multiple Google accounts will have multiple remote directories returned
- * by {@link RemoteDirectoriesCursorLoader}, each represented as a {@link Directory}.
+ * by {@link DirectoriesCursorLoader}, each represented as a {@link Directory}.
  *
  * <p>This cursor merges them together with a header at the start of each cursor/list using {@link
  * Directory#getDisplayName()} as the header text.
@@ -98,7 +99,7 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
     return cursorList.toArray(new Cursor[cursorList.size()]);
   }
 
-  private static MatrixCursor createHeaderCursor(Context context, String name, int id) {
+  private static MatrixCursor createHeaderCursor(Context context, String name, long id) {
     MatrixCursor headerCursor = new MatrixCursor(PROJECTION, 1);
     headerCursor.addRow(new Object[] {context.getString(R.string.directory, name), id});
     return headerCursor;
