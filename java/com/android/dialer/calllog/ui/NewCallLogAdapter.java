@@ -34,14 +34,21 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({RowType.HEADER_TODAY, RowType.HEADER_OLDER, RowType.CALL_LOG_ENTRY})
+  @IntDef({
+    RowType.HEADER_TODAY,
+    RowType.HEADER_YESTERDAY,
+    RowType.HEADER_OLDER,
+    RowType.CALL_LOG_ENTRY
+  })
   @interface RowType {
     /** Header that displays "Today". */
     int HEADER_TODAY = 1;
+    /** Header that displays "Yesterday". */
+    int HEADER_YESTERDAY = 2;
     /** Header that displays "Older". */
-    int HEADER_OLDER = 2;
+    int HEADER_OLDER = 3;
     /** A row representing a call log entry (which could represent one or more calls). */
-    int CALL_LOG_ENTRY = 3;
+    int CALL_LOG_ENTRY = 4;
   }
 
   private final Clock clock;
@@ -49,9 +56,13 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private Cursor cursor;
 
-  /** Null when the "Today" header should not be displayed. */
+  /** Position of the "Today" header. Null when it should not be displayed. */
   @Nullable private Integer todayHeaderPosition;
-  /** Null when the "Older" header should not be displayed. */
+
+  /** Position of the "Yesterday" header. Null when it should not be displayed. */
+  @Nullable private Integer yesterdayHeaderPosition;
+
+  /** Position of the "Older" header. Null when it should not be displayed. */
   @Nullable private Integer olderHeaderPosition;
 
   NewCallLogAdapter(Context context, Cursor cursor, Clock clock) {
@@ -75,38 +86,49 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private void setHeaderPositions() {
-    // Calculate header adapter positions by reading cursor.
-    long currentTimeMillis = clock.currentTimeMillis();
-    if (cursor.moveToFirst()) {
-      long firstTimestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
-      if (CallLogDates.isSameDay(currentTimeMillis, firstTimestamp)) {
-        this.todayHeaderPosition = 0;
-        int adapterPosition = 2; // Accounted for "Today" header and first row.
-        while (cursor.moveToNext()) {
-          long timestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
-
-          if (CallLogDates.isSameDay(currentTimeMillis, timestamp)) {
-            adapterPosition++;
-          } else {
-            this.olderHeaderPosition = adapterPosition;
-            return;
-          }
-        }
-        this.olderHeaderPosition = null; // Didn't find any "Older" rows.
-      } else {
-        this.todayHeaderPosition = null; // Didn't find any "Today" rows.
-        this.olderHeaderPosition = 0;
-      }
-    } else { // There are no rows, just need to set these because they are final.
-      this.todayHeaderPosition = null;
-      this.olderHeaderPosition = null;
+    // If there are no rows to display, set all header positions to null.
+    if (!cursor.moveToFirst()) {
+      todayHeaderPosition = null;
+      yesterdayHeaderPosition = null;
+      olderHeaderPosition = null;
+      return;
     }
+
+    long currentTimeMillis = clock.currentTimeMillis();
+
+    int numItemsInToday = 0;
+    int numItemsInYesterday = 0;
+    do {
+      long timestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
+      long dayDifference = CallLogDates.getDayDifference(currentTimeMillis, timestamp);
+      if (dayDifference == 0) {
+        numItemsInToday++;
+      } else if (dayDifference == 1) {
+        numItemsInYesterday++;
+      } else {
+        break;
+      }
+    } while (cursor.moveToNext());
+
+    if (numItemsInToday > 0) {
+      numItemsInToday++; // including the "Today" header;
+    }
+    if (numItemsInYesterday > 0) {
+      numItemsInYesterday++; // including the "Yesterday" header;
+    }
+
+    // Set all header positions.
+    // A header position will be null if there is no item to be displayed under that header.
+    todayHeaderPosition = numItemsInToday > 0 ? 0 : null;
+    yesterdayHeaderPosition = numItemsInYesterday > 0 ? numItemsInToday : null;
+    olderHeaderPosition = !cursor.isAfterLast() ? numItemsInToday + numItemsInYesterday : null;
   }
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup viewGroup, @RowType int viewType) {
     switch (viewType) {
       case RowType.HEADER_TODAY:
+      case RowType.HEADER_YESTERDAY:
       case RowType.HEADER_OLDER:
         return new HeaderViewHolder(
             LayoutInflater.from(viewGroup.getContext())
@@ -124,29 +146,36 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int position) {
-    if (viewHolder instanceof HeaderViewHolder) {
-      HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
-      @RowType int viewType = getItemViewType(position);
-      if (viewType == RowType.HEADER_OLDER) {
-        headerViewHolder.setHeader(R.string.new_call_log_header_older);
-      } else if (viewType == RowType.HEADER_TODAY) {
-        headerViewHolder.setHeader(R.string.new_call_log_header_today);
-      } else {
+    @RowType int viewType = getItemViewType(position);
+    switch (viewType) {
+      case RowType.HEADER_TODAY:
+        ((HeaderViewHolder) viewHolder).setHeader(R.string.new_call_log_header_today);
+        break;
+      case RowType.HEADER_YESTERDAY:
+        ((HeaderViewHolder) viewHolder).setHeader(R.string.new_call_log_header_yesterday);
+        break;
+      case RowType.HEADER_OLDER:
+        ((HeaderViewHolder) viewHolder).setHeader(R.string.new_call_log_header_older);
+        break;
+      case RowType.CALL_LOG_ENTRY:
+        NewCallLogViewHolder newCallLogViewHolder = (NewCallLogViewHolder) viewHolder;
+        int previousHeaders = 0;
+        if (todayHeaderPosition != null && position > todayHeaderPosition) {
+          previousHeaders++;
+        }
+        if (yesterdayHeaderPosition != null && position > yesterdayHeaderPosition) {
+          previousHeaders++;
+        }
+        if (olderHeaderPosition != null && position > olderHeaderPosition) {
+          previousHeaders++;
+        }
+        cursor.moveToPosition(position - previousHeaders);
+        newCallLogViewHolder.bind(cursor);
+        break;
+      default:
         throw Assert.createIllegalStateFailException(
             "Unexpected view type " + viewType + " at position: " + position);
-      }
-      return;
     }
-    NewCallLogViewHolder newCallLogViewHolder = (NewCallLogViewHolder) viewHolder;
-    int previousHeaders = 0;
-    if (todayHeaderPosition != null && position > todayHeaderPosition) {
-      previousHeaders++;
-    }
-    if (olderHeaderPosition != null && position > olderHeaderPosition) {
-      previousHeaders++;
-    }
-    cursor.moveToPosition(position - previousHeaders);
-    newCallLogViewHolder.bind(cursor);
   }
 
   @Override
@@ -154,6 +183,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   public int getItemViewType(int position) {
     if (todayHeaderPosition != null && position == todayHeaderPosition) {
       return RowType.HEADER_TODAY;
+    }
+    if (yesterdayHeaderPosition != null && position == yesterdayHeaderPosition) {
+      return RowType.HEADER_YESTERDAY;
     }
     if (olderHeaderPosition != null && position == olderHeaderPosition) {
       return RowType.HEADER_OLDER;
@@ -165,6 +197,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   public int getItemCount() {
     int numberOfHeaders = 0;
     if (todayHeaderPosition != null) {
+      numberOfHeaders++;
+    }
+    if (yesterdayHeaderPosition != null) {
       numberOfHeaders++;
     }
     if (olderHeaderPosition != null) {
