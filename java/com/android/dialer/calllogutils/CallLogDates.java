@@ -50,7 +50,7 @@ public final class CallLogDates {
       return DateUtils.formatDateTime(
           context, timestampMillis, DateUtils.FORMAT_SHOW_TIME); // e.g. 12:15 PM
     }
-    if (isWithin3Days(nowMillis, timestampMillis)) {
+    if (getDayDifference(nowMillis, timestampMillis) < 3) {
       return formatDayOfWeek(context, timestampMillis); // e.g. "Wednesday"
     }
     return formatAbbreviatedMonthAndDay(context, timestampMillis); // e.g. "Jan 15"
@@ -129,26 +129,53 @@ public final class CallLogDates {
         UCharacter.TITLECASE_NO_LOWERCASE);
   }
 
-  private static boolean isWithin3Days(long nowMillis, long timestampMillis) {
-    Calendar threeDaysAgoStartOfDay = Calendar.getInstance();
-    threeDaysAgoStartOfDay.setTimeInMillis(nowMillis);
+  /**
+   * Returns the absolute difference in days between two timestamps. It is the caller's
+   * responsibility to ensure both timestamps are in milliseconds. Failure to do so will result in
+   * undefined behavior.
+   *
+   * <p>Note that the difference is based on day boundaries, not 24-hour periods.
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>The difference between 01/19/2018 00:00 and 01/19/2018 23:59 is 0.
+   *   <li>The difference between 01/18/2018 23:59 and 01/19/2018 23:59 is 1.
+   *   <li>The difference between 01/18/2018 00:00 and 01/19/2018 23:59 is 1.
+   *   <li>The difference between 01/17/2018 23:59 and 01/19/2018 00:00 is 2.
+   * </ul>
+   */
+  public static int getDayDifference(long firstTimestamp, long secondTimestamp) {
+    // Ensure secondMillis is no less than firstMillis
+    if (secondTimestamp < firstTimestamp) {
+      long t = firstTimestamp;
+      firstTimestamp = secondTimestamp;
+      secondTimestamp = t;
+    }
 
-    // This is attempting to find the start of the current day, but it's not quite right due to
+    // Use secondTimestamp as reference
+    Calendar startOfReferenceDay = Calendar.getInstance();
+    startOfReferenceDay.setTimeInMillis(secondTimestamp);
+
+    // This is attempting to find the start of the reference day, but it's not quite right due to
     // daylight savings. Unfortunately there doesn't seem to be a way to get the correct start of
     // the day without using Joda or Java8, both of which are disallowed. This means that the wrong
     // formatting may be applied on days with time changes (though the displayed values will be
     // correct).
-    threeDaysAgoStartOfDay.add(
-        Calendar.HOUR_OF_DAY, -threeDaysAgoStartOfDay.get(Calendar.HOUR_OF_DAY));
-    threeDaysAgoStartOfDay.add(Calendar.MINUTE, -threeDaysAgoStartOfDay.get(Calendar.MINUTE));
-    threeDaysAgoStartOfDay.add(Calendar.SECOND, -threeDaysAgoStartOfDay.get(Calendar.SECOND));
+    startOfReferenceDay.add(Calendar.HOUR_OF_DAY, -startOfReferenceDay.get(Calendar.HOUR_OF_DAY));
+    startOfReferenceDay.add(Calendar.MINUTE, -startOfReferenceDay.get(Calendar.MINUTE));
+    startOfReferenceDay.add(Calendar.SECOND, -startOfReferenceDay.get(Calendar.SECOND));
 
-    threeDaysAgoStartOfDay.add(Calendar.DATE, -2);
+    Calendar other = Calendar.getInstance();
+    other.setTimeInMillis(firstTimestamp);
 
-    Calendar then = Calendar.getInstance();
-    then.setTimeInMillis(timestampMillis);
+    int dayDifference = 0;
+    while (other.before(startOfReferenceDay)) {
+      startOfReferenceDay.add(Calendar.DATE, -1);
+      dayDifference++;
+    }
 
-    return then.equals(threeDaysAgoStartOfDay) || then.after(threeDaysAgoStartOfDay);
+    return dayDifference;
   }
 
   /** Returns true if the provided timestamps are from the same day in the default time zone. */
