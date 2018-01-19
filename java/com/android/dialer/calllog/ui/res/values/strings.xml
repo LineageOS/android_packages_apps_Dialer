@@ -20,7 +20,10 @@
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_today">Today</string>
 
-  <!-- Header in call log to group calls from before the current day.  [CHAR LIMIT=30] -->
+  <!-- Header in call log to group calls from the previous day.  [CHAR LIMIT=30] -->
+  <string name="new_call_log_header_yesterday">Yesterday</string>
+
+  <!-- Header in call log to group calls from before yesterday.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_older">Older</string>
 
 </resources>
