@@ -27,9 +27,8 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 import com.android.dialer.searchfragment.common.Projections;
-import com.android.dialer.searchfragment.remote.RemoteDirectoriesCursorLoader.Directory;
+import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,15 +69,13 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
   public Cursor loadInBackground() {
     for (int i = 0; i < directories.size(); i++) {
       Directory directory = directories.get(i);
-      // Since the on device contacts could be queried as remote directories and we already query
-      // them in SearchContactsCursorLoader, avoid querying them again.
-      // TODO(calderwoodra): It's a happy coincidence that on device contacts don't have directory
-      // names set, leaving this todo to investigate a better way to isolate them from other remote
-      // directories.
-      if (TextUtils.isEmpty(directory.getDisplayName())) {
+
+      // Filter out local directories
+      if (!isRemoteDirectory(directory.getId())) {
         cursors[i] = null;
         continue;
       }
+
       Cursor cursor =
           getContext()
               .getContentResolver()
@@ -94,6 +91,17 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
       cursors[i] = createMatrixCursorFilteringNullNumbers(cursor);
     }
     return RemoteContactsCursor.newInstance(getContext(), cursors, directories);
+  }
+
+  private static boolean isRemoteDirectory(long directoryId) {
+    return VERSION.SDK_INT >= VERSION_CODES.N
+        ? ContactsContract.Directory.isRemoteDirectoryId(directoryId)
+        : (directoryId != ContactsContract.Directory.DEFAULT
+            && directoryId != ContactsContract.Directory.LOCAL_INVISIBLE
+            // Directory.ENTERPRISE_DEFAULT is the default work profile directory for locally stored
+            // contacts
+            && directoryId != ContactsContract.Directory.ENTERPRISE_DEFAULT
+            && directoryId != ContactsContract.Directory.ENTERPRISE_LOCAL_INVISIBLE);
   }
 
   private MatrixCursor createMatrixCursorFilteringNullNumbers(Cursor cursor) {
@@ -140,7 +148,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
   }
 
   @VisibleForTesting
-  static Uri getContentFilterUri(String query, int directoryId) {
+  static Uri getContentFilterUri(String query, long directoryId) {
     Uri baseUri =
         VERSION.SDK_INT >= VERSION_CODES.N
             ? ENTERPRISE_CONTENT_FILTER_URI
