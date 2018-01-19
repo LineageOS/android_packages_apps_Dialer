@@ -19,6 +19,7 @@ package com.android.incallui.videotech;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
@@ -27,7 +28,7 @@ import com.android.incallui.videotech.utils.SessionModificationState;
 /** Video calling interface. */
 public interface VideoTech {
 
-  boolean isAvailable(Context context);
+  boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle);
 
   boolean isTransmittingOrReceiving();
 
@@ -50,7 +51,7 @@ public interface VideoTech {
   VideoCallScreenDelegate createVideoCallScreenDelegate(
       Context context, VideoCallScreen videoCallScreen);
 
-  void onCallStateChanged(Context context, int newState);
+  void onCallStateChanged(Context context, int newState, PhoneAccountHandle phoneAccountHandle);
 
   void onRemovedFromCallList();
 
