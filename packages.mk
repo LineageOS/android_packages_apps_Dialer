@@ -49,6 +49,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.preferredsim.impl \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \
+	com.android.dialer.searchfragment.directories \
 	com.android.dialer.searchfragment.list \
 	com.android.dialer.searchfragment.nearbyplaces \
 	com.android.dialer.searchfragment.remote \
