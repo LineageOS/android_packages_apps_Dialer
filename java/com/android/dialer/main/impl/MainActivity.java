@@ -51,11 +51,9 @@ public final class MainActivity extends AppCompatActivity
         DialpadFragment.HostInterface,
         SearchFragmentListener {
 
-  private static final String IS_FAB_HIDDEN_KEY = "is_fab_hidden";
   private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
 
   private MainSearchController searchController;
-  private FloatingActionButton fab;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
@@ -75,24 +73,31 @@ public final class MainActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     LogUtil.enterBlock("MainActivity.onCreate");
     setContentView(R.layout.main_activity);
-    initLayout();
+    initLayout(savedInstanceState);
     SmartDialPrefix.initializeNanpSettings(this);
   }
 
-  private void initLayout() {
-    fab = findViewById(R.id.fab);
+  private void initLayout(Bundle savedInstanceState) {
+    FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(v -> searchController.showDialpad(true));
 
     MainToolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(findViewById(R.id.toolbar));
 
-    BottomNavBar navBar = findViewById(R.id.bottom_nav_bar);
-    navBar.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
-    // TODO(calderwoodra): Implement last tab
-    navBar.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
+    BottomNavBar bottomNav = findViewById(R.id.bottom_nav_bar);
+    bottomNav.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
 
-    searchController = new MainSearchController(this, navBar, fab, toolbar);
+    searchController = new MainSearchController(this, bottomNav, fab, toolbar);
     toolbar.setSearchBarListener(searchController);
+
+    // Restore our view state if needed, else initialize as if the app opened for the first time
+    if (savedInstanceState != null) {
+      savedLanguageCode = savedInstanceState.getString(KEY_SAVED_LANGUAGE_CODE);
+      searchController.onRestoreInstanceState(savedInstanceState);
+    } else {
+      // TODO(calderwoodra): Implement last tab
+      bottomNav.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
+    }
   }
 
   @Override
@@ -107,17 +112,8 @@ public final class MainActivity extends AppCompatActivity
   @Override
   protected void onSaveInstanceState(Bundle bundle) {
     super.onSaveInstanceState(bundle);
-    bundle.putBoolean(IS_FAB_HIDDEN_KEY, !fab.isShown());
     bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
-  }
-
-  @Override
-  protected void onRestoreInstanceState(Bundle savedInstanceState) {
-    super.onRestoreInstanceState(savedInstanceState);
-    if (savedInstanceState.getBoolean(IS_FAB_HIDDEN_KEY, false)) {
-      fab.hide();
-    }
-    savedLanguageCode = savedInstanceState.getString(KEY_SAVED_LANGUAGE_CODE);
+    searchController.onSaveInstanceState(bundle);
   }
 
   @Override
