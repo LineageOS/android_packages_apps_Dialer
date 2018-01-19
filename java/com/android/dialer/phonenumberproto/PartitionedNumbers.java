@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.ArraySet;
+import android.telephony.PhoneNumberUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.google.common.base.Optional;
@@ -49,7 +50,18 @@ public final class PartitionedNumbers {
 
     for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
       Optional<String> optValidE164 = dialerPhoneNumberUtil.formatToValidE164(dialerPhoneNumber);
-      if (optValidE164.isPresent()) {
+      /*
+       * Numbers with post-dial digits are considered valid and can be converted to E164, but their
+       * post dial digits are lost in the process. Similarly, if a contact's number has a post-dial
+       * digits, the normalized version of it stored in the contacts database does not include the
+       * post dial digits.
+       *
+       * A number with post-dial digits should not match a contact whose number does not have
+       * post-dial digits, which means that we cannot normalize such numbers for use in bulk lookup.
+       * Treat them as invalid which will cause them to be processed individually using
+       * ContactsContract.PHONE_LOOKUP.
+       */
+      if (optValidE164.isPresent() && !hasPostDialDigits(dialerPhoneNumber)) {
         String validE164 = optValidE164.get();
         Set<DialerPhoneNumber> currentNumbers = e164MapBuilder.get(validE164);
         if (currentNumbers == null) {
@@ -70,6 +82,11 @@ public final class PartitionedNumbers {
 
     e164NumbersToDialerPhoneNumbers = makeImmutable(e164MapBuilder);
     invalidNumbersToDialerPhoneNumbers = makeImmutable(invalidMapBuilder);
+  }
+
+  private boolean hasPostDialDigits(DialerPhoneNumber dialerPhoneNumber) {
+    return !PhoneNumberUtils.extractPostDialPortion(dialerPhoneNumber.getRawInput().getNumber())
+        .isEmpty();
   }
 
   /** Returns the set of invalid numbers from the original DialerPhoneNumbers */

@@ -156,6 +156,10 @@ public class Coalescer {
       return false;
     }
 
+    if (!meetsAssistedDialingCriteria(row1, row2)) {
+      return false;
+    }
+
     DialerPhoneNumber number1;
     DialerPhoneNumber number2;
     try {
@@ -171,15 +175,6 @@ public class Coalescer {
       number2 = DialerPhoneNumber.parseFrom(number2Bytes);
     } catch (InvalidProtocolBufferException e) {
       throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
-    }
-
-    if (!number1.hasDialerInternalPhoneNumber() || !number2.hasDialerInternalPhoneNumber()) {
-      // An empty number should not be combined with any other number.
-      return false;
-    }
-
-    if (!meetsAssistedDialingCriteria(row1, row2)) {
-      return false;
     }
     return dialerPhoneNumberUtil.isMatch(number1, number2);
   }
