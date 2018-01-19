@@ -36,7 +36,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.os.BuildCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.text.TextUtils;
@@ -57,7 +56,6 @@ import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewAnimator;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -665,16 +663,6 @@ public class NewBubble {
   }
 
   private void update() {
-    // Whole primary button background
-    Drawable backgroundCirle =
-        context.getResources().getDrawable(R.drawable.bubble_shape_circle, context.getTheme());
-    int primaryTint =
-        ColorUtils.compositeColors(
-            context.getColor(R.color.bubble_primary_background_darken),
-            currentInfo.getPrimaryColor());
-    backgroundCirle.mutate().setTint(primaryTint);
-    viewHolder.getPrimaryButton().setBackground(backgroundCirle);
-
     // Small icon
     Drawable smallIconBackgroundCircle =
         context
@@ -746,9 +734,6 @@ public class NewBubble {
 
     // Create a new ViewHolder and copy needed info.
     viewHolder = new ViewHolder(oldViewHolder.getRoot().getContext());
-    viewHolder
-        .getPrimaryButton()
-        .setDisplayedChild(oldViewHolder.getPrimaryButton().getDisplayedChild());
     viewHolder.getPrimaryIcon().setX(isDrawingFromRight() ? 0 : primaryIconMoveDistance);
     viewHolder
         .getPrimaryIcon()
@@ -887,7 +872,7 @@ public class NewBubble {
 
     private NewMoveHandler moveHandler;
     private final NewWindowRoot root;
-    private final ViewAnimator primaryButton;
+    private final View primaryButton;
     private final ImageView primaryIcon;
     private final ImageView primaryAvatar;
     private final View arrow;
@@ -971,7 +956,7 @@ public class NewBubble {
       return root;
     }
 
-    public ViewAnimator getPrimaryButton() {
+    public View getPrimaryButton() {
       return primaryButton;
     }
 
