@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.UiUtil;
 import com.android.dialer.util.DialerUtils;
 import com.google.common.base.Optional;
 
@@ -44,6 +45,9 @@ final class SearchBarView extends FrameLayout {
 
   private SearchBarListener listener;
   private EditText searchBox;
+  // This useful for when the query didn't actually change. We want to avoid making excessive calls
+  // where we can since IPCs can take a long time on slow networks.
+  private boolean skipLatestTextChange;
 
   private int initialHeight;
   private boolean isExpanded;
@@ -177,6 +181,24 @@ final class SearchBarView extends FrameLayout {
     this.listener = listener;
   }
 
+  public String getQuery() {
+    return searchBox.getText().toString();
+  }
+
+  public void setQueryWithoutUpdate(String query) {
+    skipLatestTextChange = true;
+    searchBox.setText(query);
+    searchBox.setSelection(searchBox.getText().length());
+  }
+
+  public void hideKeyboard() {
+    UiUtil.hideKeyboardFrom(getContext(), searchBox);
+  }
+
+  public void showKeyboard() {
+    UiUtil.openKeyboardFrom(getContext(), searchBox);
+  }
+
   /** Handles logic for text changes in the search box. */
   private class SearchBoxTextWatcher implements TextWatcher {
 
@@ -189,6 +211,11 @@ final class SearchBarView extends FrameLayout {
     @Override
     public void afterTextChanged(Editable s) {
       clearButton.setVisibility(TextUtils.isEmpty(s) ? GONE : VISIBLE);
+      if (skipLatestTextChange) {
+        skipLatestTextChange = false;
+        return;
+      }
+
       listener.onSearchQueryUpdated(s.toString());
     }
   }
