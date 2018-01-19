@@ -1,0 +1,90 @@
+/*
+
+* Copyright (C) 2017 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License
+*/
+
+package com.android.dialer.searchfragment.directories;
+
+import android.content.Context;
+import android.content.CursorLoader;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
+import com.google.auto.value.AutoValue;
+import java.util.ArrayList;
+import java.util.List;
+
+/** {@link CursorLoader} to load the list of all directories (local and remote). */
+public final class DirectoriesCursorLoader extends CursorLoader {
+
+  public static final String[] PROJECTION = {
+    ContactsContract.Directory._ID,
+    ContactsContract.Directory.DISPLAY_NAME,
+    ContactsContract.Directory.PHOTO_SUPPORT,
+  };
+
+  // Indices of columns in PROJECTION
+  private static final int ID = 0;
+  private static final int DISPLAY_NAME = 1;
+  private static final int PHOTO_SUPPORT = 2;
+
+  public DirectoriesCursorLoader(Context context) {
+    super(context, getContentUri(), PROJECTION, null, null, ContactsContract.Directory._ID);
+  }
+
+  /**
+   * Creates a complete list of directories from the data set loaded by this loader.
+   *
+   * @param cursor A cursor pointing to the data set loaded by this loader. The caller must ensure
+   *     the cursor is not null.
+   * @return A list of directories.
+   */
+  public static List<Directory> toDirectories(Cursor cursor) {
+    List<Directory> directories = new ArrayList<>();
+    cursor.moveToPosition(-1);
+    while (cursor.moveToNext()) {
+      directories.add(
+          Directory.create(
+              cursor.getInt(ID),
+              cursor.getString(DISPLAY_NAME),
+              /* supportsPhotos = */ cursor.getInt(PHOTO_SUPPORT) != 0));
+    }
+    return directories;
+  }
+
+  private static Uri getContentUri() {
+    return VERSION.SDK_INT >= VERSION_CODES.N
+        ? ContactsContract.Directory.ENTERPRISE_CONTENT_URI
+        : ContactsContract.Directory.CONTENT_URI;
+  }
+
+  /** POJO representing the results returned from {@link DirectoriesCursorLoader}. */
+  @AutoValue
+  public abstract static class Directory {
+    public static Directory create(long id, @Nullable String displayName, boolean supportsPhotos) {
+      return new AutoValue_DirectoriesCursorLoader_Directory(id, displayName, supportsPhotos);
+    }
+
+    public abstract long getId();
+
+    /** Returns a user facing display name of the directory. Null if none exists. */
+    public abstract @Nullable String getDisplayName();
+
+    public abstract boolean supportsPhotos();
+  }
+}
