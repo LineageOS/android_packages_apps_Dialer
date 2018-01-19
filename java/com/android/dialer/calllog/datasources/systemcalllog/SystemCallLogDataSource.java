@@ -235,7 +235,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                 new String[] {
                   Calls._ID,
                   Calls.DATE,
-                  Calls.LAST_MODIFIED,
+                  Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
                   Calls.NUMBER,
                   Calls.TYPE,
                   Calls.COUNTRY_ISO,
@@ -248,8 +248,10 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.GEOCODED_LOCATION,
                   Calls.PHONE_ACCOUNT_COMPONENT_NAME,
                   Calls.PHONE_ACCOUNT_ID,
-                  Calls.FEATURES
+                  Calls.FEATURES,
+                  Calls.POST_DIAL_DIGITS, // TODO(a bug): Not available in M
                 },
+                // TODO(a bug): LAST_MODIFIED not available on M
                 Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
                 new String[] {String.valueOf(previousTimestampProcessed)},
                 Calls.LAST_MODIFIED + " DESC LIMIT 1000")) {
@@ -282,6 +284,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_COMPONENT_NAME);
         int phoneAccountIdColumn = cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_ID);
         int featuresColumn = cursor.getColumnIndexOrThrow(Calls.FEATURES);
+        int postDialDigitsColumn = cursor.getColumnIndexOrThrow(Calls.POST_DIAL_DIGITS);
 
         // The cursor orders by LAST_MODIFIED DESC, so the first result is the most recent timestamp
         // processed.
@@ -302,19 +305,24 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           String phoneAccountComponentName = cursor.getString(phoneAccountComponentColumn);
           String phoneAccountId = cursor.getString(phoneAccountIdColumn);
           int features = cursor.getInt(featuresColumn);
+          String postDialDigits = cursor.getString(postDialDigitsColumn);
 
           ContentValues contentValues = new ContentValues();
           contentValues.put(AnnotatedCallLog.TIMESTAMP, date);
 
           if (!TextUtils.isEmpty(numberAsStr)) {
+            String numberWithPostDialDigits =
+                postDialDigits == null ? numberAsStr : numberAsStr + postDialDigits;
             DialerPhoneNumber dialerPhoneNumber =
-                dialerPhoneNumberUtil.parse(numberAsStr, countryIso);
+                dialerPhoneNumberUtil.parse(numberWithPostDialDigits, countryIso);
 
             contentValues.put(AnnotatedCallLog.NUMBER, dialerPhoneNumber.toByteArray());
-            contentValues.put(
-                AnnotatedCallLog.FORMATTED_NUMBER,
-                PhoneNumberUtils.formatNumber(numberAsStr, countryIso));
-            // TODO(zachh): Need to handle post-dial digits; different on N and M.
+            String formattedNumber =
+                PhoneNumberUtils.formatNumber(numberWithPostDialDigits, countryIso);
+            if (formattedNumber == null) {
+              formattedNumber = numberWithPostDialDigits;
+            }
+            contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
           } else {
             contentValues.put(
                 AnnotatedCallLog.NUMBER, DialerPhoneNumber.getDefaultInstance().toByteArray());

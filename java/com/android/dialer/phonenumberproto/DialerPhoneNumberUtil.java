@@ -103,9 +103,19 @@ public class DialerPhoneNumberUtil {
   }
 
   /**
-   * Returns true if the two numbers were parseable by libphonenumber and are a {@link
-   * MatchType#SHORT_NSN_MATCH} or {@link MatchType#NSN_MATCH} or {@link MatchType#EXACT_MATCH} or
-   * if they have the same raw input.
+   * Returns true if the two numbers:
+   *
+   * <ul>
+   *   <li>were parseable by libphonenumber (see {@link #parse(String, String)}),
+   *   <li>are a {@link MatchType#SHORT_NSN_MATCH}, {@link MatchType#NSN_MATCH}, or {@link
+   *       MatchType#EXACT_MATCH}, and
+   *   <li>have the same post-dial digits.
+   * </ul>
+   *
+   * <p>If either number is not parseable, returns true if their raw inputs have the same network
+   * and post-dial portions.
+   *
+   * <p>An empty number is never considered to match another number.
    *
    * @see PhoneNumberUtil#isNumberMatch(PhoneNumber, PhoneNumber)
    */
@@ -115,15 +125,34 @@ public class DialerPhoneNumberUtil {
     Assert.isWorkerThread();
     if (!Assert.isNotNull(firstNumberIn).hasDialerInternalPhoneNumber()
         || !Assert.isNotNull(secondNumberIn).hasDialerInternalPhoneNumber()) {
-      return firstNumberIn.getRawInput().equals(secondNumberIn.getRawInput());
+      // An empty number should not be combined with any other number.
+      if (firstNumberIn.getRawInput().getNumber().isEmpty()
+          || secondNumberIn.getRawInput().getNumber().isEmpty()) {
+        return false;
+      }
+      // Both the network and post-dial portions of the number should match.
+      return sameNetworkPortion(firstNumberIn, secondNumberIn)
+          && samePostDialPortion(firstNumberIn, secondNumberIn);
     }
     MatchType matchType =
         isNumberMatch(
             firstNumberIn.getDialerInternalPhoneNumber(),
             secondNumberIn.getDialerInternalPhoneNumber());
-    return matchType == MatchType.SHORT_NSN_MATCH
-        || matchType == MatchType.NSN_MATCH
-        || matchType == MatchType.EXACT_MATCH;
+
+    return (matchType == MatchType.SHORT_NSN_MATCH
+            || matchType == MatchType.NSN_MATCH
+            || matchType == MatchType.EXACT_MATCH)
+        && samePostDialPortion(firstNumberIn, secondNumberIn);
+  }
+
+  private static boolean sameNetworkPortion(DialerPhoneNumber number1, DialerPhoneNumber number2) {
+    return PhoneNumberUtils.extractNetworkPortion(number1.getRawInput().getNumber())
+        .equals(PhoneNumberUtils.extractNetworkPortion(number2.getRawInput().getNumber()));
+  }
+
+  private static boolean samePostDialPortion(DialerPhoneNumber number1, DialerPhoneNumber number2) {
+    return PhoneNumberUtils.extractPostDialPortion(number1.getRawInput().getNumber())
+        .equals(PhoneNumberUtils.extractPostDialPortion(number2.getRawInput().getNumber()));
   }
 
   /**
