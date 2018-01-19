@@ -185,6 +185,10 @@ final class SearchBarView extends FrameLayout {
     return searchBox.getText().toString();
   }
 
+  public boolean isExpanded() {
+    return isExpanded;
+  }
+
   public void setQueryWithoutUpdate(String query) {
     skipLatestTextChange = true;
     searchBox.setText(query);

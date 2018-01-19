@@ -48,6 +48,7 @@ final class BottomNavBar extends LinearLayout {
   private BottomNavItem contacts;
   private BottomNavItem voicemail;
   private OnBottomNavTabSelectedListener listener;
+  private @TabIndex int selectedTab;
 
   public BottomNavBar(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -68,21 +69,25 @@ final class BottomNavBar extends LinearLayout {
 
     speedDial.setOnClickListener(
         v -> {
+          selectedTab = TabIndex.SPEED_DIAL;
           setSelected(speedDial);
           listener.onSpeedDialSelected();
         });
     callLog.setOnClickListener(
         v -> {
+          selectedTab = TabIndex.HISTORY;
           setSelected(callLog);
           listener.onCallLogSelected();
         });
     contacts.setOnClickListener(
         v -> {
+          selectedTab = TabIndex.CONTACTS;
           setSelected(contacts);
           listener.onContactsSelected();
         });
     voicemail.setOnClickListener(
         v -> {
+          selectedTab = TabIndex.VOICEMAIL;
           setSelected(voicemail);
           listener.onVoicemailSelected();
         });
@@ -116,6 +121,10 @@ final class BottomNavBar extends LinearLayout {
 
   void setOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
     this.listener = listener;
+  }
+
+  public int getSelectedTab() {
+    return selectedTab;
   }
 
   /** Listener for bottom nav tab's on click events. */
