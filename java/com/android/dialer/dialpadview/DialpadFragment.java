@@ -59,7 +59,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -415,7 +414,7 @@ public class DialpadFragment extends Fragment
         .setOnTouchListener(
             (v, event) -> {
               if (isDigitsEmpty()) {
-                if (getActivity() != null && event.getAction() == MotionEvent.ACTION_UP) {
+                if (getActivity() != null) {
                   LogUtil.i("DialpadFragment.onCreateView", "dialpad spacer touched");
                   return ((HostInterface) getActivity()).onDialpadSpacerTouchWithEmptyQuery();
                 }

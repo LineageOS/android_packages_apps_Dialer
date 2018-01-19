@@ -157,13 +157,13 @@ public final class MainActivity extends AppCompatActivity
 
   @Override // DialpadFragment.HostInterface
   public boolean onDialpadSpacerTouchWithEmptyQuery() {
-    searchController.onBackPressed();
-    return true;
+    // No-op, just let the clicks fall through to the search list
+    return false;
   }
 
   @Override // SearchFragmentListener
   public void onSearchListTouch() {
-    searchController.onBackPressed();
+    searchController.onSearchListTouch();
   }
 
   @Override // SearchFragmentListener
