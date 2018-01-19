@@ -130,17 +130,17 @@ final class Modules {
 
     if (!row.numberAttributes().getName().isEmpty()) {
       dialerContactBuilder.setNameOrNumber(row.numberAttributes().getName());
-    } else if (!TextUtils.isEmpty(originalNumber)) {
-      dialerContactBuilder.setNameOrNumber(originalNumber);
+      if (row.formattedNumber() != null) {
+        dialerContactBuilder.setDisplayNumber(row.formattedNumber());
+      }
+    } else if (!TextUtils.isEmpty(row.formattedNumber())) {
+      dialerContactBuilder.setNameOrNumber(row.formattedNumber());
     }
 
     dialerContactBuilder.setNumberLabel(row.numberAttributes().getNumberTypeLabel());
     dialerContactBuilder.setPhotoUri(row.numberAttributes().getPhotoUri());
     dialerContactBuilder.setContactUri(row.numberAttributes().getLookupUri());
 
-    if (row.formattedNumber() != null) {
-      dialerContactBuilder.setDisplayNumber(row.formattedNumber());
-    }
     return dialerContactBuilder.build();
   }
 }
