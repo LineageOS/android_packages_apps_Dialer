@@ -16,9 +16,24 @@
 
 package com.android.incallui.speakeasy;
 
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+
 /** This interface provides a wrapper between callers and the Whisper client. */
 public interface SpeakEasy {
 
-  /** Signals to the user interface that the feature is abailable for use. */
+  /** Signals to the user interface that the feature is available for use. */
   boolean isEnabled();
+
+  /**
+   * Create a new instance of SpeakEasy fragment.
+   *
+   * @param callId call id of the call.
+   * @param nameOrNumber name or number of the caller to be displayed
+   * @param sessionStartTimeMillis start time of the session in terms of {@link
+   *     android.os.SystemClock#elapsedRealtime}.
+   * @return new SpeakEasy fragment. Null if the SpeakEasy feature is not available for use
+   */
+  @Nullable
+  Fragment getSpeakEasyFragment(String callId, String nameOrNumber, long sessionStartTimeMillis);
 }
