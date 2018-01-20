@@ -16,6 +16,8 @@
 
 package com.android.incallui.speakeasy;
 
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import javax.inject.Inject;
 
 /** Default implementation of SpeakEasy. */
@@ -27,5 +29,11 @@ public class SpeakEasyStub implements SpeakEasy {
   @Override
   public boolean isEnabled() {
     return false;
+  }
+
+  @Override
+  public @Nullable Fragment getSpeakEasyFragment(
+      String callId, String nameOrNumber, long sessionStartTimeMillis) {
+    return null;
   }
 }
