@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2016 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,15 +15,13 @@
   ~ limitations under the License
   -->
 
-<resources>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <FrameLayout
+      android:id="@+id/fragment_speakeasy"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
 
-  <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_today">Today</string>
-
-  <!-- Header in call log to group calls from the previous day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_yesterday">Yesterday</string>
-
-  <!-- Header in call log to group calls from before yesterday.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_older">Older</string>
-
-</resources>
+</LinearLayout>

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
+import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -55,7 +56,7 @@ public class DuoVideoTech implements VideoTech, DuoListener {
   }
 
   @Override
-  public boolean isAvailable(Context context) {
+  public boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle) {
     if (!ConfigProviderBindings.get(context)
         .getBoolean("enable_lightbringer_video_upgrade", true)) {
       LogUtil.v("DuoVideoTech.isAvailable", "upgrade disabled by flag");
@@ -66,7 +67,7 @@ public class DuoVideoTech implements VideoTech, DuoListener {
       LogUtil.v("DuoVideoTech.isAvailable", "upgrade unavailable, call must be active");
       return false;
     }
-    Optional<Boolean> localResult = duo.supportsUpgrade(context, callingNumber);
+    Optional<Boolean> localResult = duo.supportsUpgrade(context, callingNumber, phoneAccountHandle);
     if (localResult.isPresent()) {
       LogUtil.v(
           "DuoVideoTech.isAvailable", "upgrade supported in local cache: " + localResult.get());
@@ -109,7 +110,8 @@ public class DuoVideoTech implements VideoTech, DuoListener {
   }
 
   @Override
-  public void onCallStateChanged(Context context, int newState) {
+  public void onCallStateChanged(
+      Context context, int newState, PhoneAccountHandle phoneAccountHandle) {
     if (newState == Call.STATE_DISCONNECTING) {
       duo.unregisterListener(this);
     }

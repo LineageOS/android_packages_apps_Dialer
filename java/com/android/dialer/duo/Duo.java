@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.telecom.Call;
+import android.telecom.PhoneAccountHandle;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.util.List;
@@ -51,7 +52,10 @@ public interface Duo {
    *     null} if result is unknown.
    */
   @MainThread
-  Optional<Boolean> supportsUpgrade(@NonNull Context context, @Nullable String number);
+  Optional<Boolean> supportsUpgrade(
+      @NonNull Context context,
+      @Nullable String number,
+      @Nullable PhoneAccountHandle phoneAccountHandle);
 
   /** Starts a task to update the reachability of the parameter numbers asynchronously. */
   @MainThread

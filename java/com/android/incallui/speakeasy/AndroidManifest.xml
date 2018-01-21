@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,16 +13,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
-<resources>
-
-  <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_today">Today</string>
-
-  <!-- Header in call log to group calls from the previous day.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_yesterday">Yesterday</string>
-
-  <!-- Header in call log to group calls from before yesterday.  [CHAR LIMIT=30] -->
-  <string name="new_call_log_header_older">Older</string>
-
-</resources>
+<manifest
+    package="com.android.incallui.speakeasy"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+  <application android:theme="@style/Theme.AppCompat">
+  <activity
+      android:name=".SpeakEasyActivity"
+      android:exported="false"
+      android:theme="@style/DialerThemeBase.NoActionBar"
+      android:windowSoftInputMode="adjustResize"/>
+  </application>
+</manifest>

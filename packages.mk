@@ -49,6 +49,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.preferredsim.impl \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \
+	com.android.dialer.searchfragment.directories \
 	com.android.dialer.searchfragment.list \
 	com.android.dialer.searchfragment.nearbyplaces \
 	com.android.dialer.searchfragment.remote \
@@ -78,6 +79,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.incall.impl \
 	com.android.incallui.maps.impl \
 	com.android.incallui.rtt.impl \
+  com.android.incallui.speakeasy \
 	com.android.incallui.sessiondata \
 	com.android.incallui.spam \
 	com.android.incallui.speakerbuttonlogic \

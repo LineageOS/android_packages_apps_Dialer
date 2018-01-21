@@ -39,8 +39,7 @@ public final class NearbyPlacesCursorLoader extends CursorLoader {
    *     order to find a directory ID for the nearby places cursor that doesn't collide with
    *     existing directories.
    */
-  public NearbyPlacesCursorLoader(
-      Context context, String query, @NonNull List<Integer> directoryIds) {
+  public NearbyPlacesCursorLoader(Context context, String query, @NonNull List<Long> directoryIds) {
     super(context, getContentUri(context, query), Projections.DATA_PROJECTION, null, null, null);
     this.directoryId = getDirectoryId(directoryIds);
   }
@@ -63,7 +62,7 @@ public final class NearbyPlacesCursorLoader extends CursorLoader {
         .build();
   }
 
-  private static long getDirectoryId(List<Integer> directoryIds) {
+  private static long getDirectoryId(List<Long> directoryIds) {
     if (directoryIds.isEmpty()) {
       return INVALID_DIRECTORY_ID;
     }

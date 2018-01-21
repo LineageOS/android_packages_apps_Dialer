@@ -16,6 +16,8 @@
 
 package com.android.dialer.main.impl;
 
+import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
@@ -24,12 +26,14 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
+import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
 
@@ -48,6 +52,12 @@ import com.google.common.base.Optional;
  * @see #onBackPressed()
  */
 final class MainSearchController implements SearchBarListener {
+
+  private static final String KEY_IS_FAB_HIDDEN = "is_fab_hidden";
+  private static final String KEY_CURRENT_TAB = "current_tab";
+  private static final String KEY_BOTTOM_NAV_VISIBILITY = "bottom_nav_visibility";
+  private static final String KEY_IS_TOOLBAR_EXPANDED = "is_toolbar_expanded";
+  private static final String KEY_IS_TOOLBAR_SLIDE_UP = "is_toolbar_slide_up";
 
   private static final String DIALPAD_FRAGMENT_TAG = "dialpad_fragment_tag";
   private static final String SEARCH_FRAGMENT_TAG = "search_fragment_tag";
@@ -77,8 +87,7 @@ final class MainSearchController implements SearchBarListener {
     toolbar.expand(animate, Optional.absent());
     mainActivity.setTitle(R.string.dialpad_activity_title);
 
-    android.app.FragmentTransaction transaction =
-        mainActivity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
 
     // Show Search
     if (getSearchFragment() == null) {
@@ -105,6 +114,7 @@ final class MainSearchController implements SearchBarListener {
 
     fab.show();
     toolbar.slideDown(animate);
+    toolbar.transferQueryFromDialpad(getDialpadFragment().getQuery());
     mainActivity.setTitle(R.string.main_activity_label);
 
     DialpadFragment dialpadFragment = getDialpadFragment();
@@ -152,6 +162,33 @@ final class MainSearchController implements SearchBarListener {
   /** Should be called when {@link DialpadListener#onDialpadShown()} is called. */
   public void onDialpadShown() {
     getDialpadFragment().slideUp(true);
+    hideBottomNav();
+  }
+
+  /**
+   * @see SearchFragmentListener#onSearchListTouch()
+   *     <p>There are 4 scenarios we support to provide a nice UX experience:
+   *     <ol>
+   *       <li>When the dialpad is visible with an empty query, close the search UI.
+   *       <li>When the dialpad is visible with a non-empty query, hide the dialpad.
+   *       <li>When the regular search UI is visible with an empty query, close the search UI.
+   *       <li>When the regular search UI is visible with a non-empty query, hide the keyboard.
+   *     </ol>
+   */
+  public void onSearchListTouch() {
+    if (isDialpadVisible()) {
+      if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+        closeSearch(true);
+      } else {
+        hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
+      }
+    } else if (isSearchVisible()) {
+      if (TextUtils.isEmpty(toolbar.getQuery())) {
+        closeSearch(true);
+      } else {
+        toolbar.hideKeyboard();
+      }
+    }
   }
 
   /**
@@ -161,9 +198,11 @@ final class MainSearchController implements SearchBarListener {
    */
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+      LogUtil.i("MainSearchController#onBackPressed", "Dialpad visible with query");
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
+      LogUtil.i("MainSearchController#onBackPressed", "Search is visible");
       closeSearch(true);
       return true;
     } else {
@@ -218,9 +257,10 @@ final class MainSearchController implements SearchBarListener {
   public void onSearchBarClicked() {
     fab.hide();
     toolbar.expand(/* animate=*/ true, Optional.absent());
+    toolbar.showKeyboard();
+    hideBottomNav();
 
-    android.app.FragmentTransaction transaction =
-        mainActivity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
 
     // Show Search
     if (getSearchFragment() == null) {
@@ -261,4 +301,26 @@ final class MainSearchController implements SearchBarListener {
 
   @Override
   public void sendFeedback() {}
+
+  public void onSaveInstanceState(Bundle bundle) {
+    bundle.putBoolean(KEY_IS_FAB_HIDDEN, !fab.isShown());
+    bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
+    bundle.putInt(KEY_BOTTOM_NAV_VISIBILITY, bottomNav.getVisibility());
+    bundle.putBoolean(KEY_IS_TOOLBAR_EXPANDED, toolbar.isExpanded());
+    bundle.putBoolean(KEY_IS_TOOLBAR_SLIDE_UP, toolbar.isSlideUp());
+  }
+
+  public void onRestoreInstanceState(Bundle savedInstanceState) {
+    bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
+    bottomNav.setVisibility(savedInstanceState.getInt(KEY_BOTTOM_NAV_VISIBILITY));
+    if (savedInstanceState.getBoolean(KEY_IS_FAB_HIDDEN, false)) {
+      fab.hide();
+    }
+    if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_EXPANDED, false)) {
+      toolbar.expand(false, Optional.absent());
+    }
+    if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_SLIDE_UP, false)) {
+      toolbar.slideUp(false);
+    }
+  }
 }
