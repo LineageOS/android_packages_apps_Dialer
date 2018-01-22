@@ -25,10 +25,9 @@ import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
-import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -49,19 +48,19 @@ import javax.inject.Inject;
 public final class RealtimeRowProcessor {
 
   private final Context appContext;
-  private final Cp2LocalPhoneLookup cp2LocalPhoneLookup;
+  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
   private final ListeningExecutorService uiExecutor;
 
-  private final Map<DialerPhoneNumber, Cp2Info> cache = new ArrayMap<>();
+  private final Map<DialerPhoneNumber, PhoneLookupInfo> cache = new ArrayMap<>();
 
   @Inject
   RealtimeRowProcessor(
       @ApplicationContext Context appContext,
       @Ui ListeningExecutorService uiExecutor,
-      Cp2LocalPhoneLookup cp2LocalPhoneLookup) {
+      PhoneLookup<PhoneLookupInfo> phoneLookup) {
     this.appContext = appContext;
     this.uiExecutor = uiExecutor;
-    this.cp2LocalPhoneLookup = cp2LocalPhoneLookup;
+    this.phoneLookup = phoneLookup;
   }
 
   /**
@@ -75,17 +74,17 @@ public final class RealtimeRowProcessor {
       return Futures.immediateFuture(row);
     }
 
-    Cp2Info cachedCp2Info = cache.get(row.number());
-    if (cachedCp2Info != null) {
-      return Futures.immediateFuture(applyCp2LocalInfoToRow(cachedCp2Info, row));
+    PhoneLookupInfo cachedPhoneLookupInfo = cache.get(row.number());
+    if (cachedPhoneLookupInfo != null) {
+      return Futures.immediateFuture(applyPhoneLookupInfoToRow(cachedPhoneLookupInfo, row));
     }
 
-    ListenableFuture<Cp2Info> cp2InfoFuture = cp2LocalPhoneLookup.lookupByNumber(row.number());
+    ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture = phoneLookup.lookup(row.number());
     return Futures.transform(
-        cp2InfoFuture,
-        cp2Info -> {
-          cache.put(row.number(), cp2Info);
-          return applyCp2LocalInfoToRow(cp2Info, row);
+        phoneLookupInfoFuture,
+        phoneLookupInfo -> {
+          cache.put(row.number(), phoneLookupInfo);
+          return applyPhoneLookupInfoToRow(phoneLookupInfo, row);
         },
         uiExecutor /* ensures the cache is updated on a single thread */);
   }
@@ -97,13 +96,13 @@ public final class RealtimeRowProcessor {
     cache.clear();
   }
 
-  private CoalescedRow applyCp2LocalInfoToRow(Cp2Info cp2Info, CoalescedRow row) {
-    PhoneLookupInfo phoneLookupInfo = PhoneLookupInfo.newBuilder().setCp2LocalInfo(cp2Info).build();
+  private CoalescedRow applyPhoneLookupInfoToRow(
+      PhoneLookupInfo phoneLookupInfo, CoalescedRow row) {
     PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
         new PhoneLookupInfoConsolidator(appContext, phoneLookupInfo);
-    // It is safe to overwrite any existing data because CP2 always has highest priority.
     return row.toBuilder()
         .setNumberAttributes(
+            // TODO(zachh): Put this in a common location.
             NumberAttributes.newBuilder()
                 .setName(phoneLookupInfoConsolidator.getName())
                 .setPhotoUri(phoneLookupInfoConsolidator.getPhotoUri())

@@ -18,6 +18,8 @@ package com.android.dialer.common.concurrent;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.inject.HasRootComponent;
@@ -31,16 +33,22 @@ public abstract class DialerExecutorComponent {
 
   public abstract DialerExecutorFactory dialerExecutorFactory();
 
+  @NonUiParallel
+  public abstract ExecutorService lowPriorityThreadPool();
+
   @Ui
-  public abstract ListeningExecutorService uiExecutorService();
+  public abstract ListeningExecutorService uiExecutor();
+
+  @BackgroundExecutor
+  public abstract ListeningExecutorService backgroundExecutor();
+
+  @LightweightExecutor
+  public abstract ListeningExecutorService lightweightExecutor();
 
   public <OutputT> UiListener<OutputT> createUiListener(
       FragmentManager fragmentManager, String taskId) {
     return UiListener.create(fragmentManager, taskId);
   }
-
-  @NonUiParallel
-  public abstract ExecutorService lowPriorityThreadPool();
 
   public static DialerExecutorComponent get(Context context) {
     return ((DialerExecutorComponent.HasComponent)
