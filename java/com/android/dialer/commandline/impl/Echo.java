@@ -19,8 +19,8 @@ package com.android.dialer.commandline.impl;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
-import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import javax.inject.Inject;
@@ -28,18 +28,24 @@ import javax.inject.Inject;
 /** Print arguments. */
 public class Echo implements Command {
 
+  @NonNull
+  @Override
+  public String getShortDescription() {
+    return "@hide Print all arguments.";
+  }
+
+  @NonNull
+  @Override
+  public String getUsage() {
+    return "echo [arguments...]";
+  }
+
   @VisibleForTesting
   @Inject
   public Echo() {}
 
   @Override
-  public ListenableFuture<String> run(ImmutableList<String> args) {
-    return Futures.immediateFuture(TextUtils.join(" ", args));
-  }
-
-  @NonNull
-  @Override
-  public String getShortDescription() {
-    return "@hide Print all arguments.";
+  public ListenableFuture<String> run(Arguments args) throws IllegalCommandLineArgumentException {
+    return Futures.immediateFuture(TextUtils.join(" ", args.getPositionals()));
   }
 }

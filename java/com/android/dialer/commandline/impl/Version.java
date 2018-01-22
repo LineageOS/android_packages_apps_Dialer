@@ -20,9 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.support.annotation.NonNull;
+import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
 import com.android.dialer.inject.ApplicationContext;
-import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Locale;
@@ -30,6 +30,18 @@ import javax.inject.Inject;
 
 /** Print the version name and code. */
 public class Version implements Command {
+
+  @NonNull
+  @Override
+  public String getShortDescription() {
+    return "Print dialer version";
+  }
+
+  @NonNull
+  @Override
+  public String getUsage() {
+    return "version";
+  }
 
   private final Context appContext;
 
@@ -39,7 +51,7 @@ public class Version implements Command {
   }
 
   @Override
-  public ListenableFuture<String> run(ImmutableList<String> args) {
+  public ListenableFuture<String> run(Arguments args) throws IllegalCommandLineArgumentException {
     try {
       PackageInfo info =
           appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
@@ -48,11 +60,5 @@ public class Version implements Command {
     } catch (NameNotFoundException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  @NonNull
-  @Override
-  public String getShortDescription() {
-    return "Print dialer version";
   }
 }

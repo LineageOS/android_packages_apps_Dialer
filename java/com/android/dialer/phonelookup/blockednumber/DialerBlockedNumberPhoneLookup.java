@@ -29,6 +29,7 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
@@ -194,7 +195,7 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
     private final ContentObserverCallbacks contentObserverCallbacks;
 
     FilteredNumberObserver(Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
-      super(null);
+      super(ThreadUtil.getUiThreadHandler());
       this.appContext = appContext;
       this.contentObserverCallbacks = contentObserverCallbacks;
     }
