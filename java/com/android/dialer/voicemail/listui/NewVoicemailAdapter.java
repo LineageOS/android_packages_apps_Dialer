@@ -104,7 +104,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private final NewVoicemailMediaPlayer mediaPlayer =
       new NewVoicemailMediaPlayer(new MediaPlayer());
 
-  /** @param cursor whose projection is {@link VoicemailCursorLoader.VOICEMAIL_COLUMNS} */
+  /** @param cursor whose projection is {@link VoicemailCursorLoader#VOICEMAIL_COLUMNS} */
   NewVoicemailAdapter(Cursor cursor, Clock clock, FragmentManager fragmentManager) {
     LogUtil.enterBlock("NewVoicemailAdapter");
     this.cursor = cursor;
@@ -133,14 +133,14 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     long currentTimeMillis = clock.currentTimeMillis();
     if (cursor.moveToNext()) {
       long firstTimestamp = VoicemailCursorLoader.getTimestamp(cursor);
-      if (CallLogDates.isSameDay(currentTimeMillis, firstTimestamp)) {
+      if (CallLogDates.getDayDifference(currentTimeMillis, firstTimestamp) == 0) {
         this.todayHeaderPosition = 0 + alertOffSet;
         int adapterPosition =
             2 + alertOffSet; // Accounted for the "Alert", "Today" header and first row.
         while (cursor.moveToNext()) {
           long timestamp = VoicemailCursorLoader.getTimestamp(cursor);
 
-          if (CallLogDates.isSameDay(currentTimeMillis, timestamp)) {
+          if (CallLogDates.getDayDifference(currentTimeMillis, timestamp) == 0) {
             adapterPosition++;
           } else {
             this.olderHeaderPosition = adapterPosition;

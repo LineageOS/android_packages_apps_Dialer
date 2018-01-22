@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 /** The entry point for the simulator feature. */
 final class SimulatorImpl implements Simulator {
+  
   @Inject
   public SimulatorImpl() {}
 
