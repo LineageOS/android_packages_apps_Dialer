@@ -49,22 +49,25 @@ public final class CallLogEntryText {
     return primaryText.toString();
   }
 
-  /** The secondary text to show in the main call log entry list. */
+  /**
+   * The secondary text to show in the main call log entry list.
+   *
+   * <p>Rules: (Duo video, )?$Label|$Location • Date
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>Duo Video, Mobile • Now
+   *   <li>Duo Video • 10 min. ago
+   *   <li>Mobile • 11:45 PM
+   *   <li>Mobile • Sun
+   *   <li>Brooklyn, NJ • Jan 15
+   * </ul>
+   *
+   * <p>See {@link CallLogDates#newCallLogTimestampLabel(Context, long, long)} for date rules.
+   */
   public static CharSequence buildSecondaryTextForEntries(
       Context context, Clock clock, CoalescedRow row) {
-    /*
-     * Rules: (Duo video, )?$Label|$Location • Date
-     *
-     * Examples:
-     *   Duo Video, Mobile • Now
-     *   Duo Video • 11:45pm
-     *   Mobile • 11:45pm
-     *   Mobile • Sunday
-     *   Brooklyn, NJ • Jan 15
-     *
-     * Date rules:
-     *   if < 1 minute ago: "Now"; else if today: HH:MM(am|pm); else if < 3 days: day; else: MON D
-     */
     StringBuilder secondaryText = secondaryTextPrefix(context, row);
 
     if (secondaryText.length() > 0) {

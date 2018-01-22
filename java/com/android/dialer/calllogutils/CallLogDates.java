@@ -35,29 +35,52 @@ public final class CallLogDates {
    * <p>Rules:
    *
    * <pre>
-   *   if < 1 minute ago: "Now";
-   *   else if today: "12:15 PM"
-   *   else if < 3 days ago: "Wednesday";
-   *   else: "Jan 15"
+   *   if < 1 minute ago: "Just now";
+   *   else if < 1 hour ago: time relative to now (e.g., "8 min. ago");
+   *   else if today: time (e.g., "12:15 PM");
+   *   else if < 7 days: abbreviated day of week (e.g., "Wed");
+   *   else if < 1 year: date with abbreviated month, day, but no year (e.g., "Jan 15");
+   *   else: date with abbreviated month, day, and year (e.g., "Jan 15, 2018").
    * </pre>
    */
   public static CharSequence newCallLogTimestampLabel(
       Context context, long nowMillis, long timestampMillis) {
+    // For calls logged less than 1 minute ago, display "Just now".
     if (nowMillis - timestampMillis < TimeUnit.MINUTES.toMillis(1)) {
-      return context.getString(R.string.now);
+      return context.getString(R.string.just_now);
     }
-    if (isSameDay(nowMillis, timestampMillis)) {
-      return DateUtils.formatDateTime(
-          context, timestampMillis, DateUtils.FORMAT_SHOW_TIME); // e.g. 12:15 PM
+
+    // For calls logged less than 1 hour ago, display time relative to now (e.g., "8 min. ago").
+    if (nowMillis - timestampMillis < TimeUnit.HOURS.toMillis(1)) {
+      return DateUtils.getRelativeTimeSpanString(
+          timestampMillis, nowMillis, DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE);
     }
-    if (getDayDifference(nowMillis, timestampMillis) < 3) {
-      return formatDayOfWeek(context, timestampMillis); // e.g. "Wednesday"
+
+    int dayDifference = getDayDifference(nowMillis, timestampMillis);
+
+    // For calls logged today, display time (e.g., "12:15 PM").
+    if (dayDifference == 0) {
+      return DateUtils.formatDateTime(context, timestampMillis, DateUtils.FORMAT_SHOW_TIME);
     }
-    return formatAbbreviatedMonthAndDay(context, timestampMillis); // e.g. "Jan 15"
+
+    // For calls logged within a week, display the abbreviated day of week (e.g., "Wed").
+    if (dayDifference < 7) {
+      return formatDayOfWeek(context, timestampMillis);
+    }
+
+    // For calls logged within a year, display abbreviated month, day, but no year (e.g., "Jan 15").
+    if (isWithinOneYear(nowMillis, timestampMillis)) {
+      return formatAbbreviatedDate(context, timestampMillis, /* showYear = */ false);
+    }
+
+    // For calls logged no less than one year ago, display abbreviated month, day, and year
+    // (e.g., "Jan 15, 2018").
+    return formatAbbreviatedDate(context, timestampMillis, /* showYear = */ true);
   }
 
   /**
-   * Formats the provided date into a value suitable for display in the current locale.
+   * Formats the provided timestamp (in milliseconds) into date and time suitable for display in the
+   * current locale.
    *
    * <p>For example, returns a string like "Wednesday, May 25, 2016, 8:02PM" or "Chorshanba, 2016
    * may 25,20:02".
@@ -65,11 +88,11 @@ public final class CallLogDates {
    * <p>For pre-N devices, the returned value may not start with a capital if the local convention
    * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
    */
-  public static CharSequence formatDate(Context context, long callDateMillis) {
+  public static CharSequence formatDate(Context context, long timestamp) {
     return toTitleCase(
         DateUtils.formatDateTime(
             context,
-            callDateMillis,
+            timestamp,
             DateUtils.FORMAT_SHOW_TIME
                 | DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_SHOW_WEEKDAY
@@ -77,30 +100,36 @@ public final class CallLogDates {
   }
 
   /**
-   * Formats the provided date into the day of week.
+   * Formats the provided timestamp (in milliseconds) into abbreviated day of week.
    *
-   * <p>For example, returns a string like "Wednesday" or "Chorshanba".
+   * <p>For example, returns a string like "Wed" or "Chor".
    *
    * <p>For pre-N devices, the returned value may not start with a capital if the local convention
    * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
    */
-  private static CharSequence formatDayOfWeek(Context context, long callDateMillis) {
+  private static CharSequence formatDayOfWeek(Context context, long timestamp) {
     return toTitleCase(
-        DateUtils.formatDateTime(context, callDateMillis, DateUtils.FORMAT_SHOW_WEEKDAY));
+        DateUtils.formatDateTime(
+            context, timestamp, DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY));
   }
 
   /**
-   * Formats the provided date into the month abbreviation and day.
+   * Formats the provided timestamp (in milliseconds) into the month abbreviation, day, and
+   * optionally, year.
    *
-   * <p>For example, returns a string like "Jan 15".
+   * <p>For example, returns a string like "Jan 15" or "Jan 15, 2018".
    *
    * <p>For pre-N devices, the returned value may not start with a capital if the local convention
    * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
    */
-  private static CharSequence formatAbbreviatedMonthAndDay(Context context, long callDateMillis) {
-    return toTitleCase(
-        DateUtils.formatDateTime(
-            context, callDateMillis, DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_NO_YEAR));
+  private static CharSequence formatAbbreviatedDate(
+      Context context, long timestamp, boolean showYear) {
+    int flags = DateUtils.FORMAT_ABBREV_MONTH;
+    if (!showYear) {
+      flags |= DateUtils.FORMAT_NO_YEAR;
+    }
+
+    return toTitleCase(DateUtils.formatDateTime(context, timestamp, flags));
   }
 
   private static CharSequence toTitleCase(CharSequence value) {
@@ -146,7 +175,7 @@ public final class CallLogDates {
    * </ul>
    */
   public static int getDayDifference(long firstTimestamp, long secondTimestamp) {
-    // Ensure secondMillis is no less than firstMillis
+    // Ensure secondTimestamp is no less than firstTimestamp
     if (secondTimestamp < firstTimestamp) {
       long t = firstTimestamp;
       firstTimestamp = secondTimestamp;
@@ -178,16 +207,36 @@ public final class CallLogDates {
     return dayDifference;
   }
 
-  /** Returns true if the provided timestamps are from the same day in the default time zone. */
-  public static boolean isSameDay(long firstMillis, long secondMillis) {
-    Calendar first = Calendar.getInstance();
-    first.setTimeInMillis(firstMillis);
+  /**
+   * Returns true if the two timestamps are within one year. It is the caller's responsibility to
+   * ensure both timestamps are in milliseconds. Failure to do so will result in undefined behavior.
+   *
+   * <p>Note that the difference is based on 365/366-day periods.
+   *
+   * <p>Examples:
+   *
+   * <ul>
+   *   <li>01/01/2018 00:00 and 12/31/2018 23:59 is within one year.
+   *   <li>12/31/2017 23:59 and 12/31/2018 23:59 is not within one year.
+   *   <li>12/31/2017 23:59 and 01/01/2018 00:00 is within one year.
+   * </ul>
+   */
+  private static boolean isWithinOneYear(long firstTimestamp, long secondTimestamp) {
+    // Ensure secondTimestamp is no less than firstTimestamp
+    if (secondTimestamp < firstTimestamp) {
+      long t = firstTimestamp;
+      firstTimestamp = secondTimestamp;
+      secondTimestamp = t;
+    }
 
-    Calendar second = Calendar.getInstance();
-    second.setTimeInMillis(secondMillis);
+    // Use secondTimestamp as reference
+    Calendar reference = Calendar.getInstance();
+    reference.setTimeInMillis(secondTimestamp);
+    reference.add(Calendar.YEAR, -1);
 
-    return first.get(Calendar.YEAR) == second.get(Calendar.YEAR)
-        && first.get(Calendar.MONTH) == second.get(Calendar.MONTH)
-        && first.get(Calendar.DAY_OF_MONTH) == second.get(Calendar.DAY_OF_MONTH);
+    Calendar other = Calendar.getInstance();
+    other.setTimeInMillis(firstTimestamp);
+
+    return reference.before(other);
   }
 }
