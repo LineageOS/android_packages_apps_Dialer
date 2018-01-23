@@ -33,15 +33,15 @@ import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
-import com.android.dialer.app.voicemail.error.VoicemailErrorMessageCreator;
-import com.android.dialer.app.voicemail.error.VoicemailStatus;
-import com.android.dialer.app.voicemail.error.VoicemailStatusWorker;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.voicemail.listui.error.VoicemailErrorMessageCreator;
+import com.android.dialer.voicemail.listui.error.VoicemailStatus;
+import com.android.dialer.voicemail.listui.error.VoicemailStatusWorker;
 import java.util.List;
 
 public class VisualVoicemailCallLogFragment extends CallLogFragment {
