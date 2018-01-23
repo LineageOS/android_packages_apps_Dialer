@@ -25,6 +25,7 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent.CanceledException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Outline;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
@@ -46,6 +47,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -112,7 +114,7 @@ public class NewBubble {
   @VisibleForTesting AnimatorSet exitAnimatorSet;
   @VisibleForTesting AnimatorSet enterAnimatorSet;
 
-  private final int primaryIconMoveDistance;
+  private int primaryIconMoveDistance;
   private final int leftBoundary;
   private int savedYPosition = -1;
 
@@ -663,6 +665,22 @@ public class NewBubble {
   }
 
   private void update() {
+    // The value may change on display size changed.
+    primaryIconMoveDistance =
+        context.getResources().getDimensionPixelSize(R.dimen.bubble_size)
+            - context.getResources().getDimensionPixelSize(R.dimen.bubble_small_icon_size);
+    // Set boundary for primary button to show elevation (background is transparent)
+    viewHolder
+        .getPrimaryButton()
+        .setOutlineProvider(
+            new ViewOutlineProvider() {
+              @Override
+              public void getOutline(View view, Outline outline) {
+                ViewOutlineProvider.BACKGROUND.getOutline(view, outline);
+                outline.setAlpha(1);
+              }
+            });
+
     // Small icon
     Drawable smallIconBackgroundCircle =
         context
@@ -914,9 +932,10 @@ public class NewBubble {
               startCollapse(CollapseEnd.NOTHING, false /* shouldRecoverYPosition */);
             }
             // The values in the current MoveHandler may be stale, so replace it. Then ensure the
-            // Window is in bounds
+            // Window is in bounds, and redraw the changes
             moveHandler = new NewMoveHandler(primaryButton, NewBubble.this);
             moveHandler.snapToBounds();
+            replaceViewHolder();
           });
       root.setOnTouchListener(
           (v, event) -> {
