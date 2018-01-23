@@ -74,7 +74,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
-    uiExecutorService = DialerExecutorComponent.get(context).uiExecutorService();
+    uiExecutorService = DialerExecutorComponent.get(context).uiExecutor();
   }
 
   /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */

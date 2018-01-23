@@ -17,6 +17,7 @@
 package com.android.dialer.phonelookup;
 
 import com.android.dialer.phonelookup.blockednumber.DialerBlockedNumberPhoneLookup;
+import com.android.dialer.phonelookup.blockednumber.SystemBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2RemotePhoneLookup;
@@ -33,9 +34,13 @@ public abstract class PhoneLookupModule {
   static ImmutableList<PhoneLookup> providePhoneLookupList(
       Cp2LocalPhoneLookup cp2LocalPhoneLookup,
       Cp2RemotePhoneLookup cp2RemotePhoneLookup,
-      DialerBlockedNumberPhoneLookup dialerBlockedNumberPhoneLookup) {
+      DialerBlockedNumberPhoneLookup dialerBlockedNumberPhoneLookup,
+      SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup) {
     return ImmutableList.of(
-        cp2LocalPhoneLookup, cp2RemotePhoneLookup, dialerBlockedNumberPhoneLookup);
+        cp2LocalPhoneLookup,
+        cp2RemotePhoneLookup,
+        dialerBlockedNumberPhoneLookup,
+        systemBlockedNumberPhoneLookup);
   }
 
   @Provides

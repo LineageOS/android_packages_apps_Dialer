@@ -18,8 +18,6 @@ package com.android.dialer.phonelookup;
 
 import android.content.Context;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -35,13 +33,13 @@ import com.google.common.util.concurrent.ListenableFuture;
 public interface PhoneLookup<T> {
 
   /**
-   * Returns a future containing a new info for the provided call.
+   * Returns a future containing a new info for the provided number.
    *
    * <p>The returned message should contain populated data for the sub-message corresponding to this
    * {@link PhoneLookup}. For example, the CP2 implementation returns a {@link
    * PhoneLookupInfo.Cp2Info} sub-message.
    */
-  ListenableFuture<T> lookup(@NonNull Call call);
+  ListenableFuture<T> lookup(DialerPhoneNumber dialerPhoneNumber);
 
   /**
    * Returns a future which returns true if the information for any of the provided phone numbers

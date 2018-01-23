@@ -17,15 +17,31 @@
 package com.android.dialer.commandline;
 
 import android.support.annotation.NonNull;
-import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Handles a Command from {@link CommandLineReceiver}. */
 public interface Command {
 
-  ListenableFuture<String> run(ImmutableList<String> args);
+  /**
+   * Thrown when {@code args} in {@link #run(Arguments)} does not match the expected format. The
+   * commandline will print {@code message} and {@link #getUsage()}.
+   */
+  class IllegalCommandLineArgumentException extends Exception {
+    public IllegalCommandLineArgumentException(String message) {
+      super(message);
+    }
+  }
 
   /** Describe the command when "help" is listing available commands. */
   @NonNull
   String getShortDescription();
+
+  /**
+   * Call when 'command --help' is called or when {@link IllegalCommandLineArgumentException} is
+   * thrown to inform the user how should the command be used.
+   */
+  @NonNull
+  String getUsage();
+
+  ListenableFuture<String> run(Arguments args) throws IllegalCommandLineArgumentException;
 }
