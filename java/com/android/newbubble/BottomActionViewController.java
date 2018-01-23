@@ -40,8 +40,8 @@ final class BottomActionViewController {
   private final Context context;
   private final WindowManager windowManager;
   private final int gradientHeight;
-  private final int bottomActionViewTop;
   private final int textOffsetSize;
+  private int bottomActionViewTop;
 
   private View bottomActionView;
   private View dismissView;
@@ -55,7 +55,6 @@ final class BottomActionViewController {
     windowManager = context.getSystemService(WindowManager.class);
     gradientHeight =
         context.getResources().getDimensionPixelSize(R.dimen.bubble_bottom_action_view_height);
-    bottomActionViewTop = context.getResources().getDisplayMetrics().heightPixels - gradientHeight;
     textOffsetSize =
         context.getResources().getDimensionPixelSize(R.dimen.bubble_bottom_action_text_offset);
   }
@@ -76,6 +75,7 @@ final class BottomActionViewController {
 
     // Add the target to the window
     // TODO(yueg): use TYPE_NAVIGATION_BAR_PANEL to draw over navigation bar
+    bottomActionViewTop = context.getResources().getDisplayMetrics().heightPixels - gradientHeight;
     LayoutParams layoutParams =
         new LayoutParams(
             LayoutParams.MATCH_PARENT,
