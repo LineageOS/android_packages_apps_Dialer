@@ -14,18 +14,18 @@
  * limitations under the License
  */
 
-package com.android.dialer.app.voicemail.error;
+package com.android.dialer.voicemail.listui.error;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
-import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import java.util.ArrayList;
