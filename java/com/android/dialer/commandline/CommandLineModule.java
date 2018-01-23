@@ -16,6 +16,7 @@
 
 package com.android.dialer.commandline;
 
+import com.android.dialer.commandline.impl.Blocking;
 import com.android.dialer.commandline.impl.Echo;
 import com.android.dialer.commandline.impl.Help;
 import com.android.dialer.commandline.impl.Version;
@@ -41,18 +42,21 @@ public abstract class CommandLineModule {
     private final Help help;
     private final Version version;
     private final Echo echo;
+    private final Blocking blocking;
 
     @Inject
-    AospCommandInjector(Help help, Version version, Echo echo) {
+    AospCommandInjector(Help help, Version version, Echo echo, Blocking blocking) {
       this.help = help;
       this.version = version;
       this.echo = echo;
+      this.blocking = blocking;
     }
 
     public CommandSupplier.Builder inject(CommandSupplier.Builder builder) {
       builder.addCommand("help", help);
       builder.addCommand("version", version);
       builder.addCommand("echo", echo);
+      builder.addCommand("blocking", blocking);
       return builder;
     }
   }

@@ -129,7 +129,7 @@
   <string name="voicemail_string">Voicemail</string>
 
   <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
-  <string name="now">Now</string>
+  <string name="just_now">Just now</string>
 
   <!-- Text to show in call log for a video call. [CHAR LIMIT=16] -->
   <string name="new_call_log_video">Video</string>

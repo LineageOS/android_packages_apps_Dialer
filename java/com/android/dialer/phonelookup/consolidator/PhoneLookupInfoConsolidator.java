@@ -179,11 +179,7 @@ public final class PhoneLookupInfoConsolidator {
    * returned.
    */
   public String getNumberLabel() {
-    if (phoneLookupInfo.hasDialerBlockedNumberInfo()
-        && phoneLookupInfo
-            .getDialerBlockedNumberInfo()
-            .getBlockedState()
-            .equals(BlockedState.BLOCKED)) {
+    if (isBlocked()) {
       return appContext.getString(R.string.blocked_number_new_call_log_label);
     }
 
@@ -217,6 +213,21 @@ public final class PhoneLookupInfoConsolidator {
   public boolean isVoicemail() {
     // TODO(twyen): implement
     return false;
+  }
+
+  public boolean isBlocked() {
+    // If system blocking reported blocked state it always takes priority over the dialer blocking.
+    // It will be absent if dialer blocking should be used.
+    if (phoneLookupInfo.getSystemBlockedNumberInfo().hasBlockedState()) {
+      return phoneLookupInfo
+          .getSystemBlockedNumberInfo()
+          .getBlockedState()
+          .equals(BlockedState.BLOCKED);
+    }
+    return phoneLookupInfo
+        .getDialerBlockedNumberInfo()
+        .getBlockedState()
+        .equals(BlockedState.BLOCKED);
   }
 
   /**

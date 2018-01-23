@@ -22,4 +22,5 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:clipToPadding="false"
-    android:background="@color/background_dialer_light"/>
+    android:background="@color/background_dialer_light"
+    android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"/>
