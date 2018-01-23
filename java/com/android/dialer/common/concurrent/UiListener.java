@@ -96,7 +96,7 @@ public class UiListener<OutputT> extends Fragment {
     Futures.addCallback(
         Assert.isNotNull(future),
         callbackWrapper,
-        DialerExecutorComponent.get(context).uiExecutorService());
+        DialerExecutorComponent.get(context).uiExecutor());
   }
 
   private static class CallbackWrapper<OutputT> implements FutureCallback<OutputT> {

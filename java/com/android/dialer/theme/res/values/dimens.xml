@@ -50,4 +50,8 @@
 
   <!-- Minimum width for material compliant buttons. -->
   <dimen name="dialer_button_min_width">72dp</dimen>
+
+  <!-- Padding to be applied to the bottom of lists to make space for the floating action
+     button -->
+  <dimen name="floating_action_button_list_bottom_padding">88dp</dimen>
 </resources>

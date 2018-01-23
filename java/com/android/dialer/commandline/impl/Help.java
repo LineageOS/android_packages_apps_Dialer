@@ -18,19 +18,32 @@ package com.android.dialer.commandline.impl;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
 import com.android.dialer.commandline.CommandLineComponent;
 import com.android.dialer.inject.ApplicationContext;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
 /** List available commands */
 public class Help implements Command {
+
+  @NonNull
+  @Override
+  public String getShortDescription() {
+    return "Print this message";
+  }
+
+  @NonNull
+  @Override
+  public String getUsage() {
+    return "help";
+  }
 
   private final Context context;
 
@@ -40,8 +53,8 @@ public class Help implements Command {
   }
 
   @Override
-  public ListenableFuture<String> run(ImmutableList<String> args) {
-    boolean showHidden = args.contains("--showHidden");
+  public ListenableFuture<String> run(Arguments args) throws IllegalCommandLineArgumentException {
+    boolean showHidden = args.getFlags().containsKey("showHidden");
 
     StringBuilder stringBuilder = new StringBuilder();
     ImmutableMap<String, Command> commands =
@@ -59,31 +72,20 @@ public class Help implements Command {
       if (!showHidden && description.startsWith("@hide ")) {
         continue;
       }
-      stringBuilder
-          .append("\t")
-          .append(entry.getKey())
-          .append("\t")
-          .append(description)
-          .append("\n");
+      stringBuilder.append(String.format(Locale.US, "  %20s  %s\n", entry.getKey(), description));
     }
 
     return Futures.immediateFuture(stringBuilder.toString());
   }
 
-  private static String runOrThrow(Command command) {
+  private static String runOrThrow(Command command) throws IllegalCommandLineArgumentException {
     try {
-      return command.run(ImmutableList.of()).get();
+      return command.run(Arguments.EMPTY).get();
     } catch (InterruptedException e) {
       Thread.interrupted();
       throw new RuntimeException(e);
     } catch (ExecutionException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  @NonNull
-  @Override
-  public String getShortDescription() {
-    return "Print this message";
   }
 }

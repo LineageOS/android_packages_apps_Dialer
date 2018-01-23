@@ -36,7 +36,7 @@ public final class CallLogDates {
    *
    * <pre>
    *   if < 1 minute ago: "Just now";
-   *   else if < 1 hour ago: time relative to now (e.g., "8 min. ago");
+   *   else if < 1 hour ago: time relative to now (e.g., "8 min ago");
    *   else if today: time (e.g., "12:15 PM");
    *   else if < 7 days: abbreviated day of week (e.g., "Wed");
    *   else if < 1 year: date with abbreviated month, day, but no year (e.g., "Jan 15");
@@ -50,10 +50,18 @@ public final class CallLogDates {
       return context.getString(R.string.just_now);
     }
 
-    // For calls logged less than 1 hour ago, display time relative to now (e.g., "8 min. ago").
+    // For calls logged less than 1 hour ago, display time relative to now (e.g., "8 min ago").
     if (nowMillis - timestampMillis < TimeUnit.HOURS.toMillis(1)) {
       return DateUtils.getRelativeTimeSpanString(
-          timestampMillis, nowMillis, DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE);
+              timestampMillis,
+              nowMillis,
+              DateUtils.MINUTE_IN_MILLIS,
+              DateUtils.FORMAT_ABBREV_RELATIVE)
+          .toString()
+          // The platform method DateUtils#getRelativeTimeSpanString adds a dot ('.') after the
+          // abbreviated time unit for some languages (e.g., "8 min. ago") but we prefer not to have
+          // the dot.
+          .replace(".", "");
     }
 
     int dayDifference = getDayDifference(nowMillis, timestampMillis);
