@@ -251,6 +251,14 @@ class NewMoveHandler implements OnTouchListener {
           }
         }
         break;
+      case MotionEvent.ACTION_CANCEL:
+        if (isMoving) {
+          snapX();
+          isMoving = false;
+          bubble.onMoveFinish();
+          bottomActionViewController.destroyBottomActionView();
+        }
+        break;
       default: // fall out
     }
     return true;
