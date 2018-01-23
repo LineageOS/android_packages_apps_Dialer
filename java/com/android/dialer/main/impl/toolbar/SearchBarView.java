@@ -82,6 +82,10 @@ final class SearchBarView extends FrameLayout {
   }
 
   private void onSearchBackButtonClicked() {
+    if (!isExpanded) {
+      return;
+    }
+
     listener.onSearchBackButtonClicked();
     collapse(true);
   }
