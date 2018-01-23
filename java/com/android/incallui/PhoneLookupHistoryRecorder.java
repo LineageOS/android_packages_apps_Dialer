@@ -19,18 +19,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutors;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
 /**
  * Fetches the current {@link PhoneLookupInfo} for the provided call and writes it to the
@@ -46,10 +51,29 @@ final class PhoneLookupHistoryRecorder {
     if (!(BuildType.get() == BuildType.BUGFOOD || LogUtil.isDebugEnabled())) {
       return;
     }
-    ListenableFuture<PhoneLookupInfo> future =
-        PhoneLookupComponent.get(appContext).phoneLookup().lookup(call);
+
+    ListeningExecutorService backgroundExecutor =
+        DialerExecutorComponent.get(appContext).backgroundExecutor();
+
+    ListenableFuture<DialerPhoneNumber> numberFuture =
+        backgroundExecutor.submit(
+            () -> {
+              DialerPhoneNumberUtil dialerPhoneNumberUtil =
+                  new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+              return dialerPhoneNumberUtil.parse(
+                  TelecomCallUtil.getNumber(call),
+                  TelecomCallUtil.getCountryCode(appContext, call).orNull());
+            });
+
+    ListenableFuture<PhoneLookupInfo> infoFuture =
+        Futures.transformAsync(
+            numberFuture,
+            dialerPhoneNumber ->
+                PhoneLookupComponent.get(appContext).phoneLookup().lookup(dialerPhoneNumber),
+            MoreExecutors.directExecutor());
+
     Futures.addCallback(
-        future,
+        infoFuture,
         new FutureCallback<PhoneLookupInfo>() {
           @Override
           public void onSuccess(@Nullable PhoneLookupInfo result) {
@@ -79,6 +103,6 @@ final class PhoneLookupHistoryRecorder {
                 "PhoneLookupHistoryRecorder.onFailure", "could not write PhoneLookupHistory", t);
           }
         },
-        DialerExecutors.getLowPriorityThreadPool(appContext));
+        backgroundExecutor);
   }
 }

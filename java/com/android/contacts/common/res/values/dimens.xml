@@ -49,9 +49,6 @@
   <dimen name="floating_action_button_width">56dp</dimen>
   <!-- Z translation of the floating action button -->
   <dimen name="floating_action_button_translation_z">8dp</dimen>
-  <!-- Padding to be applied to the bottom of lists to make space for the floating action
-       button -->
-  <dimen name="floating_action_button_list_bottom_padding">88dp</dimen>
   <!-- Right margin of the floating action button -->
   <dimen name="floating_action_button_margin_right">16dp</dimen>
   <!-- Bottom margin of the floating action button -->

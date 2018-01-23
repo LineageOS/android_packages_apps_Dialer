@@ -119,7 +119,7 @@ public class AnnotatedCallLogContract {
      *
      * <p>TYPE: BLOB
      *
-     * @see com.android.dialer.calllog.model.NumberAttributes
+     * @see com.android.dialer.NumberAttributes
      */
     String NUMBER_ATTRIBUTES = "number_attributes";
 

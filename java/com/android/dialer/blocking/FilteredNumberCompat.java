@@ -34,6 +34,7 @@ import android.support.annotation.VisibleForTesting;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
@@ -117,7 +118,9 @@ public class FilteredNumberCompat {
    *     migration has been performed, {@code false} otherwise.
    */
   public static boolean useNewFiltering(Context context) {
-    return canUseNewFiltering() && hasMigratedToNewBlocking(context);
+    return !ConfigProviderBindings.get(context).getBoolean("debug_force_dialer_filtering", false)
+        && canUseNewFiltering()
+        && hasMigratedToNewBlocking(context);
   }
 
   /**

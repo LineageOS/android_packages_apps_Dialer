@@ -20,4 +20,6 @@
     android:id="@+id/new_call_log_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dialer_light"/>
+    android:background="@color/background_dialer_light"
+    android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
+    android:clipToPadding="false"/>

@@ -18,8 +18,6 @@ package com.android.dialer.phonelookup.composite;
 
 import android.content.Context;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
@@ -65,12 +63,12 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
    */
   @SuppressWarnings({"unchecked", "rawtype"})
   @Override
-  public ListenableFuture<PhoneLookupInfo> lookup(@NonNull Call call) {
+  public ListenableFuture<PhoneLookupInfo> lookup(DialerPhoneNumber dialerPhoneNumber) {
     // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
     // lookups finishing when a higher-priority one has already finished.
     List<ListenableFuture<?>> futures = new ArrayList<>();
     for (PhoneLookup<?> phoneLookup : phoneLookups) {
-      futures.add(phoneLookup.lookup(call));
+      futures.add(phoneLookup.lookup(dialerPhoneNumber));
     }
     return Futures.transform(
         Futures.allAsList(futures),
