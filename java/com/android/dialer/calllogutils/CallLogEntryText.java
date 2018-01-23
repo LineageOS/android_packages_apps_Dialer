@@ -58,7 +58,7 @@ public final class CallLogEntryText {
    *
    * <ul>
    *   <li>Duo Video, Mobile • Now
-   *   <li>Duo Video • 10 min. ago
+   *   <li>Duo Video • 10 min ago
    *   <li>Mobile • 11:45 PM
    *   <li>Mobile • Sun
    *   <li>Brooklyn, NJ • Jan 15
