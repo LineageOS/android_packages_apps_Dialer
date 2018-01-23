@@ -15,11 +15,10 @@
   ~ limitations under the License
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <corners
-      android:bottomRightRadius="@dimen/bubble_size"
-      android:topRightRadius="@dimen/bubble_size"
-      android:bottomLeftRadius="@dimen/bubble_size"
-      android:topLeftRadius="@dimen/bubble_size"/>
-  <solid android:color="@android:color/white"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+  <size
+      android:width="@dimen/bubble_size"
+      android:height="@dimen/bubble_size"/>
+  <solid android:color="@android:color/transparent"/>
 </shape>
