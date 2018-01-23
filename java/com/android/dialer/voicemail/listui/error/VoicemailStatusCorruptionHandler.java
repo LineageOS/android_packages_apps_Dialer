@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.app.voicemail.error;
+package com.android.dialer.voicemail.listui.error;
 
 import android.content.ComponentName;
 import android.content.Context;

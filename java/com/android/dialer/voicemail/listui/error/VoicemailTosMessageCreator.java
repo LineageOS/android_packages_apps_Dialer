@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.app.voicemail.error;
+package com.android.dialer.voicemail.listui.error;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -37,13 +37,13 @@ import android.text.style.TextAppearanceSpan;
 import android.text.style.URLSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.dialer.app.voicemail.error.VoicemailErrorMessage.Action;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
