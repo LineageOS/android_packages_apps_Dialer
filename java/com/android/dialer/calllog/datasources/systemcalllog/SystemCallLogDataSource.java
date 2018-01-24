@@ -53,6 +53,7 @@ import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -293,7 +294,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           long id = cursor.getLong(idColumn);
           long date = cursor.getLong(dateColumn);
           String numberAsStr = cursor.getString(numberColumn);
-          long type = cursor.getInt(typeColumn);
+          long type;
+          if (cursor.isNull(typeColumn) || (type = cursor.getInt(typeColumn)) == 0) {
+            // CallLog.Calls#TYPE lists the allowed values, which are non-null and non-zero.
+            throw new IllegalStateException("call type is missing");
+          }
           String countryIso = cursor.getString(countryIsoColumn);
           int duration = cursor.getInt(durationsColumn);
           int dataUsage = cursor.getInt(dataUsageColumn);
@@ -434,38 +439,43 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       Context appContext, Set<Long> matchingIds) {
     ArraySet<Long> ids = new ArraySet<>();
 
-    String[] questionMarks = new String[matchingIds.size()];
-    Arrays.fill(questionMarks, "?");
-    String whereClause = (Calls._ID + " in (") + TextUtils.join(",", questionMarks) + ")";
-    String[] whereArgs = new String[matchingIds.size()];
-    int i = 0;
-    for (long id : matchingIds) {
-      whereArgs[i++] = String.valueOf(id);
-    }
+    // Batch the select statements into chunks of 999, the maximum size for SQLite selection args.
+    Iterable<List<Long>> batches = Iterables.partition(matchingIds, 999);
+    for (List<Long> idsInBatch : batches) {
+      String[] questionMarks = new String[idsInBatch.size()];
+      Arrays.fill(questionMarks, "?");
 
-    try (Cursor cursor =
-        appContext
-            .getContentResolver()
-            .query(
-                Calls.CONTENT_URI_WITH_VOICEMAIL,
-                new String[] {Calls._ID},
-                whereClause,
-                whereArgs,
-                null)) {
-
-      if (cursor == null) {
-        LogUtil.e("SystemCallLogDataSource.getIdsFromSystemCallLog", "null cursor");
-        return ids;
+      String whereClause = (Calls._ID + " in (") + TextUtils.join(",", questionMarks) + ")";
+      String[] whereArgs = new String[idsInBatch.size()];
+      int i = 0;
+      for (long id : idsInBatch) {
+        whereArgs[i++] = String.valueOf(id);
       }
 
-      if (cursor.moveToFirst()) {
-        int idColumn = cursor.getColumnIndexOrThrow(Calls._ID);
-        do {
-          ids.add(cursor.getLong(idColumn));
-        } while (cursor.moveToNext());
+      try (Cursor cursor =
+          appContext
+              .getContentResolver()
+              .query(
+                  Calls.CONTENT_URI_WITH_VOICEMAIL,
+                  new String[] {Calls._ID},
+                  whereClause,
+                  whereArgs,
+                  null)) {
+
+        if (cursor == null) {
+          LogUtil.e("SystemCallLogDataSource.getIdsFromSystemCallLog", "null cursor");
+          return ids;
+        }
+
+        if (cursor.moveToFirst()) {
+          int idColumn = cursor.getColumnIndexOrThrow(Calls._ID);
+          do {
+            ids.add(cursor.getLong(idColumn));
+          } while (cursor.moveToNext());
+        }
       }
-      return ids;
     }
+    return ids;
   }
 
   private static class CallLogObserver extends ContentObserver {
