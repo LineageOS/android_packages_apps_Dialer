@@ -25,6 +25,8 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,15 @@ public final class DirectoriesCursorLoader extends CursorLoader {
 
   public DirectoriesCursorLoader(Context context) {
     super(context, getContentUri(), PROJECTION, null, null, ContactsContract.Directory._ID);
+  }
+
+  @Override
+  public Cursor loadInBackground() {
+    if (!PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      LogUtil.i("DirectoriesCursorLoader.loadInBackground", "Contacts permission denied.");
+      return null;
+    }
+    return super.loadInBackground();
   }
 
   /**
