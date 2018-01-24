@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ActionProvider;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.databasepopulator.BlockedBumberPopulator;
 import com.android.dialer.databasepopulator.CallLogPopulator;
 import com.android.dialer.databasepopulator.ContactsPopulator;
 import com.android.dialer.databasepopulator.VoicemailPopulator;
@@ -182,6 +183,7 @@ final class SimulatorMainMenu {
       ContactsPopulator.deleteAllContacts(context);
       CallLogPopulator.deleteAllCallLog(context);
       VoicemailPopulator.deleteAllVoicemail(context);
+      BlockedBumberPopulator.deleteBlockedNumbers(context);
       return null;
     }
   }
