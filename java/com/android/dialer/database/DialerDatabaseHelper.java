@@ -41,6 +41,7 @@ import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.database.Selection;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
@@ -351,23 +352,39 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * other apps since last update.
    *
    * @param db Database to operate on.
-   * @param deletedContactCursor Cursor containing rows of deleted contacts
+   * @param lastUpdatedTimeMillis the last time at which an update to the smart dial database was
+   *     run.
    */
-  @VisibleForTesting
-  void removeDeletedContacts(SQLiteDatabase db, Cursor deletedContactCursor) {
+  private void removeDeletedContacts(SQLiteDatabase db, String lastUpdatedTimeMillis) {
+    Cursor deletedContactCursor = getDeletedContactCursor(lastUpdatedTimeMillis);
+
     if (deletedContactCursor == null) {
       return;
     }
 
     db.beginTransaction();
     try {
-      while (deletedContactCursor.moveToNext()) {
-        final Long deleteContactId =
-            deletedContactCursor.getLong(DeleteContactQuery.DELETED_CONTACT_ID);
-        db.delete(
-            Tables.SMARTDIAL_TABLE, SmartDialDbColumns.CONTACT_ID + "=" + deleteContactId, null);
-        db.delete(Tables.PREFIX_TABLE, PrefixColumns.CONTACT_ID + "=" + deleteContactId, null);
+      if (!deletedContactCursor.moveToFirst()) {
+        return;
       }
+
+      do {
+        Long deleteContactId = deletedContactCursor.getLong(DeleteContactQuery.DELETED_CONTACT_ID);
+
+        Selection smartDialSelection =
+            Selection.column(SmartDialDbColumns.CONTACT_ID).is("=", deleteContactId);
+        db.delete(
+            Tables.SMARTDIAL_TABLE,
+            smartDialSelection.getSelection(),
+            smartDialSelection.getSelectionArgs());
+
+        Selection prefixSelection =
+            Selection.column(PrefixColumns.CONTACT_ID).is("=", deleteContactId);
+        db.delete(
+            Tables.PREFIX_TABLE,
+            prefixSelection.getSelection(),
+            prefixSelection.getSelectionArgs());
+      } while (deletedContactCursor.moveToNext());
 
       db.setTransactionSuccessful();
     } finally {
@@ -633,7 +650,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /** Removes contacts that have been deleted. */
-    removeDeletedContacts(db, getDeletedContactCursor(lastUpdateMillis));
+    removeDeletedContacts(db, lastUpdateMillis);
     removePotentiallyCorruptedContacts(db, lastUpdateMillis);
 
     if (DEBUG) {
