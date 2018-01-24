@@ -117,7 +117,9 @@ public class CallCardPresenter
   private final Handler handler = new Handler();
 
   private DialerCall primary;
+  private String primaryNumber;
   private DialerCall secondary;
+  private String secondaryNumber;
   private ContactCacheEntry primaryContactInfo;
   private ContactCacheEntry secondaryContactInfo;
   @Nullable private ContactsPreferences contactsPreferences;
@@ -284,17 +286,27 @@ public class CallCardPresenter
 
     LogUtil.v("CallCardPresenter.onStateChange", "primary call: " + primary);
     LogUtil.v("CallCardPresenter.onStateChange", "secondary call: " + secondary);
+    String primaryNumber = null;
+    String secondaryNumber = null;
+    if (primary != null) {
+      primaryNumber = primary.getNumber();
+    }
+    if (secondary != null) {
+      secondaryNumber = secondary.getNumber();
+    }
 
     final boolean primaryChanged =
         !(DialerCall.areSame(this.primary, primary)
-            && DialerCall.areSameNumber(this.primary, primary));
+            && TextUtils.equals(this.primaryNumber, primaryNumber));
     final boolean secondaryChanged =
         !(DialerCall.areSame(this.secondary, secondary)
-            && DialerCall.areSameNumber(this.secondary, secondary));
+            && TextUtils.equals(this.secondaryNumber, secondaryNumber));
 
     this.secondary = secondary;
+    this.secondaryNumber = secondaryNumber;
     DialerCall previousPrimary = this.primary;
     this.primary = primary;
+    this.primaryNumber = primaryNumber;
 
     if (this.primary != null) {
       InCallPresenter.getInstance().onForegroundCallChanged(this.primary);
