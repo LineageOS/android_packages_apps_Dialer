@@ -28,9 +28,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.smartdial.SmartDialCursorLoader;
+import com.android.dialer.util.PermissionsUtil;
 
 /** Cursor Loader for CP2 contacts. */
 public final class SearchContactsCursorLoader extends CursorLoader {
@@ -80,6 +82,10 @@ public final class SearchContactsCursorLoader extends CursorLoader {
 
   @Override
   public Cursor loadInBackground() {
+    if (!PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      LogUtil.i("SearchContactsCursorLoader.loadInBackground", "Contacts permission denied.");
+      return null;
+    }
     return isRegularSearch ? regularSearchLoadInBackground() : dialpadSearchLoadInBackground();
   }
 

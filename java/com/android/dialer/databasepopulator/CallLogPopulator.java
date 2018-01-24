@@ -75,13 +75,13 @@ public final class CallLogPopulator {
   };
 
   @WorkerThread
-  public static void populateCallLog(@NonNull Context context) {
-    populateCallLog(context, false);
+  public static void populateCallLog(@NonNull Context context, boolean isWithoutMissedCalls) {
+    populateCallLog(context, isWithoutMissedCalls, false);
   }
 
   @WorkerThread
-  public static void populateCallLogWithoutMissed(@NonNull Context context) {
-    populateCallLog(context, true);
+  public static void populateCallLog(@NonNull Context context) {
+    populateCallLog(context, false);
   }
 
   @WorkerThread
@@ -119,8 +119,8 @@ public final class CallLogPopulator {
   }
 
   @WorkerThread
-  public static void populateCallLog(@NonNull Context context, boolean isWithoutMissedCalls) {
-    populateCallLog(context, isWithoutMissedCalls, false);
+  public static void populateCallLogWithoutMissed(@NonNull Context context) {
+    populateCallLog(context, true);
   }
 
   @WorkerThread
@@ -137,6 +137,8 @@ public final class CallLogPopulator {
       Assert.fail("failed to delete call log: " + e);
     }
   }
+
+
 
   @AutoValue
   abstract static class CallEntry {
