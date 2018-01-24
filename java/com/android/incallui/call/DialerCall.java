@@ -394,17 +394,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return call1.getId().equals(call2.getId());
   }
 
-  public static boolean areSameNumber(DialerCall call1, DialerCall call2) {
-    if (call1 == null && call2 == null) {
-      return true;
-    } else if (call1 == null || call2 == null) {
-      return false;
-    }
-
-    // otherwise compare call Numbers
-    return TextUtils.equals(call1.getNumber(), call2.getNumber());
-  }
-
   public void addListener(DialerCallListener listener) {
     Assert.isMainThread();
     listeners.add(listener);
