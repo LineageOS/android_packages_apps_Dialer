@@ -20,7 +20,8 @@
     android:weightSum="2"
     android:orientation="horizontal"
     android:gravity="center"
-    android:background="@drawable/bottom_action_scrim">
+    android:background="@drawable/bottom_action_scrim"
+    android:contentDescription="@string/a11y_bubble_bottom_action_description">
 
   <!-- Add space to make sure text is not off screen when scaled. (1 - 1/1.3) / 2 ~= 0.11 -->
   <View
@@ -33,7 +34,8 @@
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="0.78"
-      android:gravity="center">
+      android:gravity="center"
+      android:contentDescription="@string/bubble_bottom_action_hide">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +62,8 @@
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="0.78"
-      android:gravity="center">
+      android:gravity="center"
+      android:contentDescription="@string/bubble_bottom_action_end_call">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

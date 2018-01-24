@@ -18,6 +18,8 @@
 <resources>
   <!-- A string for Talkback to read when accessibility user touch bubble. -->
   <string name="a11y_bubble_description">Dialer bubble</string>
+  <!-- A string to describe bubble bottom actions for accessibility user. -->
+  <string name="a11y_bubble_bottom_action_description">Bottom action buttons</string>
   <!-- A string to describe available action for accessibility user. It will be read as "Actions:
     double tap to expand call action menu". -->
   <string name="a11y_bubble_primary_button_expand_action">Expand call action menu</string>
