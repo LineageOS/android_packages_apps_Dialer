@@ -81,11 +81,11 @@ message PhoneLookupInfo {
   // Cp2RemotePhoneLookup is responsible for populating this field.
   optional Cp2Info cp2_remote_info = 6;
 
-  // Message for APDL, a lookup for the proprietary Google dialer.
-  message ApdlInfo {
+  // Message for spam info.
+  message SpamInfo {
     optional bool is_spam = 1;
   }
-  optional ApdlInfo apdl_info = 2;
+  optional SpamInfo spam_info = 2;
 
   // Message for PeopleApi, including G+ contacts and nearby places
   message PeopleApiInfo {
