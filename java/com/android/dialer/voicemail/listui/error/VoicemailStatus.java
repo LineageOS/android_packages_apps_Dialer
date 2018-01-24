@@ -14,8 +14,9 @@
  * limitations under the License
  */
 
-package com.android.dialer.app.voicemail.error;
+package com.android.dialer.voicemail.listui.error;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.database.Cursor;
@@ -118,6 +119,22 @@ public class VoicemailStatus {
     }
   }
 
+  private VoicemailStatus(Builder builder) {
+    sourcePackage = builder.sourcePackage;
+    phoneAccountComponentName = builder.phoneAccountComponentName;
+    phoneAccountId = builder.phoneAccountId;
+    type = builder.type;
+    settingsUri = builder.settingsUri;
+    voicemailAccessUri = builder.voicemailAccessUri;
+    configurationState = builder.configurationState;
+    dataChannelState = builder.dataChannelState;
+    notificationChannelState = builder.notificationChannelState;
+    quotaOccupied = builder.quotaOccupied;
+    quotaTotal = builder.quotaTotal;
+    isAirplaneMode = builder.isAirplaneMode;
+  }
+
+  @TargetApi(VERSION_CODES.O)
   private static int getNotificationChannelStateFormTelephony(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     TelephonyManager telephonyManager =
@@ -135,21 +152,6 @@ public class VoicemailStatus {
         return Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION;
       }
     }
-  }
-
-  private VoicemailStatus(Builder builder) {
-    sourcePackage = builder.sourcePackage;
-    phoneAccountComponentName = builder.phoneAccountComponentName;
-    phoneAccountId = builder.phoneAccountId;
-    type = builder.type;
-    settingsUri = builder.settingsUri;
-    voicemailAccessUri = builder.voicemailAccessUri;
-    configurationState = builder.configurationState;
-    dataChannelState = builder.dataChannelState;
-    notificationChannelState = builder.notificationChannelState;
-    quotaOccupied = builder.quotaOccupied;
-    quotaTotal = builder.quotaTotal;
-    isAirplaneMode = builder.isAirplaneMode;
   }
 
   static class Builder {

@@ -7,7 +7,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.about \
 	com.android.dialer.app \
 	com.android.dialer.app.manifests.activities \
-	com.android.dialer.app.voicemail.error \
 	com.android.dialer.assisteddialing \
 	com.android.dialer.assisteddialing.ui \
 	com.android.dialer.backup \
@@ -59,6 +58,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.theme \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
+	com.android.dialer.voicemail.listui.error \
 	com.android.dialer.voicemail.listui.menu \
 	com.android.dialer.voicemail.settings \
 	com.android.dialer.voicemailstatus \

@@ -394,17 +394,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return call1.getId().equals(call2.getId());
   }
 
-  public static boolean areSameNumber(DialerCall call1, DialerCall call2) {
-    if (call1 == null && call2 == null) {
-      return true;
-    } else if (call1 == null || call2 == null) {
-      return false;
-    }
-
-    // otherwise compare call Numbers
-    return TextUtils.equals(call1.getNumber(), call2.getNumber());
-  }
-
   public void addListener(DialerCallListener listener) {
     Assert.isMainThread();
     listeners.add(listener);
@@ -1114,7 +1103,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     // perform assisted dialing. PROPERTY_ASSISTED_DIALING_USED indicates assisted dialing took
     // place.
     if (hasProperty(TelephonyManagerCompat.PROPERTY_ASSISTED_DIALING_USED)
-        && Build.VERSION.SDK_INT > ConcreteCreator.BUILD_CODE_CEILING) {
+        && BuildCompat.isAtLeastP()) {
       return true;
     }
     return false;
@@ -1126,10 +1115,26 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       return null;
     }
 
+    if (BuildCompat.isAtLeastP()) {
+      if (getExtras() == null) {
+        return null;
+      }
+
+      if (getExtras()
+              .getParcelable(TelephonyManagerCompat.EXTRA_ASSISTED_DIALING_TRANSFORMATION_INFO)
+          == null) {
+        return null;
+      }
+
+      // TODO(erfanian): Use the framework transformation info when we can link against it
+      return null;
+    }
+
     if (getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS) == null) {
       return null;
     }
 
+    // Used in N-OMR1
     return TransformationInfo.newInstanceFromBundle(
         getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
   }

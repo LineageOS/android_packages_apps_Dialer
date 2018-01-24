@@ -16,22 +16,37 @@
 
 package com.android.dialer.calllog.ui;
 
+import android.content.ContentProviderOperation;
+import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.MainThread;
+import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.Ui;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
+import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 /**
@@ -44,22 +59,36 @@ import javax.inject.Inject;
  * <p>For example, when there are many invalid numbers in the call log, we cannot efficiently update
  * the CP2 information for all of them at once, and so information for those rows must be retrieved
  * at display time.
+ *
+ * <p>This class also updates {@link PhoneLookupHistory} with the results that it fetches.
  */
 public final class RealtimeRowProcessor {
+
+  /*
+   * The time to wait between writing batches of records to PhoneLookupHistory.
+   */
+  @VisibleForTesting static final long BATCH_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private final Context appContext;
   private final PhoneLookup<PhoneLookupInfo> phoneLookup;
   private final ListeningExecutorService uiExecutor;
+  private final ListeningExecutorService backgroundExecutor;
 
   private final Map<DialerPhoneNumber, PhoneLookupInfo> cache = new ArrayMap<>();
+
+  private final Map<DialerPhoneNumber, PhoneLookupInfo> queuedPhoneLookupHistoryWrites =
+      new ArrayMap<>();
+  private final Runnable writePhoneLookupHistoryRunnable = this::writePhoneLookupHistory;
 
   @Inject
   RealtimeRowProcessor(
       @ApplicationContext Context appContext,
       @Ui ListeningExecutorService uiExecutor,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
       PhoneLookup<PhoneLookupInfo> phoneLookup) {
     this.appContext = appContext;
     this.uiExecutor = uiExecutor;
+    this.backgroundExecutor = backgroundExecutor;
     this.phoneLookup = phoneLookup;
   }
 
@@ -83,6 +112,7 @@ public final class RealtimeRowProcessor {
     return Futures.transform(
         phoneLookupInfoFuture,
         phoneLookupInfo -> {
+          queuePhoneLookupHistoryWrite(row.number(), phoneLookupInfo);
           cache.put(row.number(), phoneLookupInfo);
           return applyPhoneLookupInfoToRow(phoneLookupInfo, row);
         },
@@ -94,6 +124,79 @@ public final class RealtimeRowProcessor {
   public void clearCache() {
     Assert.isMainThread();
     cache.clear();
+  }
+
+  @MainThread
+  private void queuePhoneLookupHistoryWrite(
+      DialerPhoneNumber dialerPhoneNumber, PhoneLookupInfo phoneLookupInfo) {
+    Assert.isMainThread();
+    queuedPhoneLookupHistoryWrites.put(dialerPhoneNumber, phoneLookupInfo);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(writePhoneLookupHistoryRunnable);
+    ThreadUtil.getUiThreadHandler().postDelayed(writePhoneLookupHistoryRunnable, BATCH_WAIT_MILLIS);
+  }
+
+  @MainThread
+  private void writePhoneLookupHistory() {
+    Assert.isMainThread();
+
+    // Copy the batch to a new collection that be safely processed on a background thread.
+    ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> currentBatch =
+        ImmutableMap.copyOf(queuedPhoneLookupHistoryWrites);
+
+    // Clear the queue, handing responsibility for its items to the background task.
+    queuedPhoneLookupHistoryWrites.clear();
+
+    // Returns the number of rows updated.
+    ListenableFuture<Integer> applyBatchFuture =
+        backgroundExecutor.submit(
+            () -> {
+              DialerPhoneNumberUtil dialerPhoneNumberUtil =
+                  new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+
+              ArrayList<ContentProviderOperation> operations = new ArrayList<>();
+              long currentTimestamp = System.currentTimeMillis();
+              for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : currentBatch.entrySet()) {
+                DialerPhoneNumber dialerPhoneNumber = entry.getKey();
+                PhoneLookupInfo phoneLookupInfo = entry.getValue();
+
+                // Note: Multiple DialerPhoneNumbers can map to the same normalized number but we
+                // just write them all and the value for the last one will arbitrarily win.
+                String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(
+                    PhoneLookupHistory.PHONE_LOOKUP_INFO, phoneLookupInfo.toByteArray());
+                contentValues.put(PhoneLookupHistory.LAST_MODIFIED, currentTimestamp);
+                operations.add(
+                    ContentProviderOperation.newUpdate(
+                            PhoneLookupHistory.contentUriForNumber(normalizedNumber))
+                        .withValues(contentValues)
+                        .build());
+              }
+              return Assert.isNotNull(
+                      appContext
+                          .getContentResolver()
+                          .applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations))
+                  .length;
+            });
+
+    Futures.addCallback(
+        applyBatchFuture,
+        new FutureCallback<Integer>() {
+          @Override
+          public void onSuccess(Integer rowsAffected) {
+            LogUtil.i(
+                "RealtimeRowProcessor.onSuccess",
+                "wrote %d rows to PhoneLookupHistory",
+                rowsAffected);
+          }
+
+          @Override
+          public void onFailure(Throwable throwable) {
+            throw new RuntimeException(throwable);
+          }
+        },
+        uiExecutor);
   }
 
   private CoalescedRow applyPhoneLookupInfoToRow(

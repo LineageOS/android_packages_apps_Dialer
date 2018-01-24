@@ -65,8 +65,11 @@ public class TelephonyManagerCompat {
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
 
+  public static final String EXTRA_ASSISTED_DIALING_TRANSFORMATION_INFO =
+      "android.telecom.extra.ASSISTED_DIALING_TRANSFORMATION_INFO";
+
   /** Indicates the Connection/Call used assisted dialing. */
-  public static final int PROPERTY_ASSISTED_DIALING_USED = 0x00000200;
+  public static final int PROPERTY_ASSISTED_DIALING_USED = 1 << 9;
 
   public static final String EXTRA_IS_REFRESH =
       BuildCompat.isAtLeastOMR1() ? "android.telephony.extra.IS_REFRESH" : "is_refresh";
@@ -75,7 +78,7 @@ public class TelephonyManagerCompat {
    * Indicates the call underwent Assisted Dialing; typically set as a feature available from the
    * CallLog.
    */
-  public static final Integer FEATURES_ASSISTED_DIALING = 0x10;
+  public static final Integer FEATURES_ASSISTED_DIALING = 1 << 4;
 
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
