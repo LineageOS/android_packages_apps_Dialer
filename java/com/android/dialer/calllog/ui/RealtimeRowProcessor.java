@@ -202,7 +202,7 @@ public final class RealtimeRowProcessor {
   private CoalescedRow applyPhoneLookupInfoToRow(
       PhoneLookupInfo phoneLookupInfo, CoalescedRow row) {
     PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
-        new PhoneLookupInfoConsolidator(appContext, phoneLookupInfo);
+        new PhoneLookupInfoConsolidator(phoneLookupInfo);
     return row.toBuilder()
         .setNumberAttributes(
             // TODO(zachh): Put this in a common location.
@@ -214,6 +214,7 @@ public final class RealtimeRowProcessor {
                 .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
                 .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
                 .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
+                .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
                 .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
                 .build())
         .build();

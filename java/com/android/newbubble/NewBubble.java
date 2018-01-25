@@ -722,7 +722,7 @@ public class NewBubble {
       button.setCompoundDrawablesWithIntrinsicBounds(action.getIconDrawable(), null, null, null);
     }
     button.setChecked(action.isChecked());
-    button.setEnabled(action.isEnabled());
+    button.setCheckable(action.isCheckable());
     button.setText(action.getName());
     button.setContentDescription(action.getName());
     button.setOnClickListener(v -> doAction(action));
