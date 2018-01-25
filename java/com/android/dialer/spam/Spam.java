@@ -18,9 +18,13 @@ package com.android.dialer.spam;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Allows the container application to mark calls as spam. */
 public interface Spam {
@@ -39,7 +43,17 @@ public interface Spam {
   int percentOfNonSpamNotificationsToShow();
 
   /**
-   * Checks if the given number is suspected of being a spamer.
+   * Checks if each of numbers in the given list is suspected of being a spam.
+   *
+   * @param dialerPhoneNumbers A list of {@link DialerPhoneNumber}.
+   * @return A {@link ListenableFuture} of a map that maps each number to its spam status
+   *     (true/false).
+   */
+  ListenableFuture<ImmutableMap<DialerPhoneNumber, Boolean>> batchCheckSpamStatus(
+      ImmutableList<DialerPhoneNumber> dialerPhoneNumbers);
+
+  /**
+   * Checks if the given number is suspected of being a spam.
    *
    * @param number The phone number of the call.
    * @param countryIso The country ISO of the call.
@@ -79,6 +93,15 @@ public interface Spam {
    * @return True if the number is spam.
    */
   boolean checkSpamStatusSynchronous(String number, String countryIso);
+
+  /**
+   * Returns a {@link ListenableFuture} indicating whether the spam data have been updated since
+   * {@code timestampMillis}.
+   *
+   * <p>It is the caller's responsibility to ensure the timestamp is in milliseconds. Failure to do
+   * so will result in undefined behavior.
+   */
+  ListenableFuture<Boolean> dataUpdatedSince(long timestampMillis);
 
   /**
    * Reports number as spam.
