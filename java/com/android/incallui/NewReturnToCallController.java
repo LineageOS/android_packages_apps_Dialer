@@ -238,6 +238,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
             .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_exit_to_app_vd_theme_24))
             .setIntent(fullScreen)
             .setName(context.getText(R.string.bubble_return_to_call))
+            .setCheckable(false)
             .build());
     // Mute/unmute
     actions.add(
@@ -252,6 +253,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
         Action.builder()
             .setIconDrawable(context.getDrawable(speakerButtonInfo.icon))
             .setName(context.getText(speakerButtonInfo.label))
+            .setCheckable(speakerButtonInfo.checkable)
             .setChecked(speakerButtonInfo.isChecked)
             .setIntent(speakerButtonInfo.checkable ? toggleSpeaker : showSpeakerSelect)
             .build());
@@ -261,6 +263,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
             .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_call_end_vd_theme_24))
             .setIntent(endCall)
             .setName(context.getText(R.string.incall_label_end_call))
+            .setCheckable(false)
             .build());
     return actions;
   }

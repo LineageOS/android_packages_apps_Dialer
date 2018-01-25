@@ -21,6 +21,7 @@ import com.android.dialer.phonelookup.blockednumber.SystemBlockedNumberPhoneLook
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2RemotePhoneLookup;
+import com.android.dialer.phonelookup.spam.SpamPhoneLookup;
 import com.google.common.collect.ImmutableList;
 import dagger.Module;
 import dagger.Provides;
@@ -35,12 +36,14 @@ public abstract class PhoneLookupModule {
       Cp2LocalPhoneLookup cp2LocalPhoneLookup,
       Cp2RemotePhoneLookup cp2RemotePhoneLookup,
       DialerBlockedNumberPhoneLookup dialerBlockedNumberPhoneLookup,
-      SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup) {
+      SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup,
+      SpamPhoneLookup spamPhoneLookup) {
     return ImmutableList.of(
         cp2LocalPhoneLookup,
         cp2RemotePhoneLookup,
         dialerBlockedNumberPhoneLookup,
-        systemBlockedNumberPhoneLookup);
+        systemBlockedNumberPhoneLookup,
+        spamPhoneLookup);
   }
 
   @Provides

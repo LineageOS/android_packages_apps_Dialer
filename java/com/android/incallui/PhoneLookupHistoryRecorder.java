@@ -20,10 +20,10 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
-import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
@@ -48,7 +48,7 @@ final class PhoneLookupHistoryRecorder {
    * writes it to the PhoneLookupHistory. Otherwise does nothing.
    */
   static void recordPhoneLookupInfo(Context appContext, Call call) {
-    if (!(BuildType.get() == BuildType.BUGFOOD || LogUtil.isDebugEnabled())) {
+    if (!(ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false))) {
       return;
     }
 

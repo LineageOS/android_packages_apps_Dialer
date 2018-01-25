@@ -86,19 +86,19 @@ public abstract class NewBubbleInfo {
     @NonNull
     public abstract PendingIntent getIntent();
 
-    public abstract boolean isEnabled();
+    public abstract boolean isCheckable();
 
     public abstract boolean isChecked();
 
     public static Builder builder() {
-      return new AutoValue_NewBubbleInfo_Action.Builder().setEnabled(true).setChecked(false);
+      return new AutoValue_NewBubbleInfo_Action.Builder().setCheckable(true).setChecked(false);
     }
 
     public static Builder from(@NonNull Action action) {
       return builder()
           .setIntent(action.getIntent())
           .setChecked(action.isChecked())
-          .setEnabled(action.isEnabled())
+          .setCheckable(action.isCheckable())
           .setName(action.getName())
           .setIconDrawable(action.getIconDrawable());
     }
@@ -113,7 +113,7 @@ public abstract class NewBubbleInfo {
 
       public abstract Builder setIntent(@NonNull PendingIntent intent);
 
-      public abstract Builder setEnabled(boolean enabled);
+      public abstract Builder setCheckable(boolean enabled);
 
       public abstract Builder setChecked(boolean checked);
 

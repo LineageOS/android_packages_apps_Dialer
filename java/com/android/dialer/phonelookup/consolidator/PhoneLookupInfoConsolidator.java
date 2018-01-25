@@ -15,7 +15,6 @@
  */
 package com.android.dialer.phonelookup.consolidator;
 
-import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
@@ -68,15 +67,13 @@ public final class PhoneLookupInfoConsolidator {
   private static final ImmutableList<Integer> NAME_SOURCES_IN_PRIORITY_ORDER =
       ImmutableList.of(NameSource.CP2_LOCAL, NameSource.CP2_REMOTE, NameSource.PEOPLE_API);
 
-  private final Context appContext;
   private final @NameSource int nameSource;
   private final PhoneLookupInfo phoneLookupInfo;
 
   @Nullable private final Cp2ContactInfo firstCp2LocalContact;
   @Nullable private final Cp2ContactInfo firstCp2RemoteContact;
 
-  public PhoneLookupInfoConsolidator(Context appContext, PhoneLookupInfo phoneLookupInfo) {
-    this.appContext = appContext;
+  public PhoneLookupInfoConsolidator(PhoneLookupInfo phoneLookupInfo) {
     this.phoneLookupInfo = phoneLookupInfo;
 
     this.firstCp2LocalContact = getFirstLocalContact();
@@ -179,10 +176,6 @@ public final class PhoneLookupInfoConsolidator {
    * returned.
    */
   public String getNumberLabel() {
-    if (isBlocked()) {
-      return appContext.getString(R.string.blocked_number_new_call_log_label);
-    }
-
     switch (nameSource) {
       case NameSource.CP2_LOCAL:
         return Assert.isNotNull(firstCp2LocalContact).getLabel();
@@ -215,6 +208,10 @@ public final class PhoneLookupInfoConsolidator {
     return false;
   }
 
+  /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns whether the number is blocked.
+   */
   public boolean isBlocked() {
     // If system blocking reported blocked state it always takes priority over the dialer blocking.
     // It will be absent if dialer blocking should be used.
