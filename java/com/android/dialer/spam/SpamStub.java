@@ -16,16 +16,27 @@
 
 package com.android.dialer.spam;
 
+import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import javax.inject.Inject;
 
 /** Default implementation of Spam. */
 public class SpamStub implements Spam {
 
+  private final ListeningExecutorService backgroundExecutorService;
+
   @Inject
-  public SpamStub() {}
+  public SpamStub(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+    this.backgroundExecutorService = backgroundExecutorService;
+  }
 
   @Override
   public boolean isSpamEnabled() {
@@ -58,6 +69,20 @@ public class SpamStub implements Spam {
   }
 
   @Override
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, Boolean>> batchCheckSpamStatus(
+      ImmutableList<DialerPhoneNumber> dialerPhoneNumbers) {
+    return backgroundExecutorService.submit(
+        () -> {
+          ImmutableMap.Builder<DialerPhoneNumber, Boolean> resultBuilder =
+              new ImmutableMap.Builder<>();
+          for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
+            resultBuilder.put(dialerPhoneNumber, false);
+          }
+          return resultBuilder.build();
+        });
+  }
+
+  @Override
   public void checkSpamStatus(String number, String countryIso, Listener listener) {
     listener.onComplete(false);
   }
@@ -80,6 +105,11 @@ public class SpamStub implements Spam {
   @Override
   public boolean checkSpamStatusSynchronous(String number, String countryIso) {
     return false;
+  }
+
+  @Override
+  public ListenableFuture<Boolean> dataUpdatedSince(long timestampMillis) {
+    return Futures.immediateFuture(false);
   }
 
   @Override

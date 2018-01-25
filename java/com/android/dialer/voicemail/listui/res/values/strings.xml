@@ -30,8 +30,9 @@
 
   <!-- Header in voicemail tab to group calls from the current day.  [CHAR LIMIT=30] -->
   <string name="new_voicemail_header_today">Today</string>
-
-  <!-- Header in voicemail tab to group calls from before the current day.  [CHAR LIMIT=30] -->
+  <!-- Header in voicemail tab to group calls from yesterday.  [CHAR LIMIT=30] -->
+  <string name="new_voicemail_header_yesterday">Yesterday</string>
+  <!-- Header in voicemail tab to group calls from before yesterday.  [CHAR LIMIT=30] -->
   <string name="new_voicemail_header_older">Older</string>
 
   <string name="verizon_terms_and_conditions_title" translatable="false">Turn on visual voicemail</string>
