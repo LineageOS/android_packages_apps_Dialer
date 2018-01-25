@@ -37,7 +37,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
-import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
@@ -68,7 +67,6 @@ import javax.inject.Inject;
 public final class PhoneLookupDataSource
     implements CallLogDataSource, PhoneLookup.ContentObserverCallbacks {
 
-  private final Context appContext;
   private final PhoneLookup<PhoneLookupInfo> phoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
@@ -95,11 +93,9 @@ public final class PhoneLookupDataSource
   @Inject
   PhoneLookupDataSource(
       PhoneLookup<PhoneLookupInfo> phoneLookup,
-      @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.phoneLookup = phoneLookup;
-    this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -584,7 +580,7 @@ public final class PhoneLookupDataSource
 
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
     PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
-        new PhoneLookupInfoConsolidator(appContext, phoneLookupInfo);
+        new PhoneLookupInfoConsolidator(phoneLookupInfo);
     contentValues.put(
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
         NumberAttributes.newBuilder()
@@ -595,6 +591,7 @@ public final class PhoneLookupDataSource
             .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
             .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
             .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
+            .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
             .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
             .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isCp2LocalInfoIncomplete())
             .build()

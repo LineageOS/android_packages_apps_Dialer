@@ -36,6 +36,7 @@ import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.contactphoto.NumberAttributeConverter;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
 import com.google.common.util.concurrent.FutureCallback;
@@ -138,7 +139,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
             quickContactBadge,
             parseUri(row.numberAttributes().getLookupUri()),
             row.numberAttributes().getPhotoId(),
-            parseUri(row.numberAttributes().getPhotoUri()),
+            NumberAttributeConverter.getPhotoUri(context, row.numberAttributes()),
             CallLogEntryText.buildPrimaryText(context, row).toString(),
             CallLogContactTypes.getContactType(row));
   }

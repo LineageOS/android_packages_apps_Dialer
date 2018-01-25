@@ -16,6 +16,7 @@
 package com.android.dialer.contactactions;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
@@ -40,7 +41,7 @@ public abstract class ContactPrimaryActionInfo {
     public abstract long photoId();
 
     @Nullable
-    public abstract String photoUri();
+    public abstract Uri photoUri();
 
     @Nullable
     public abstract String lookupUri();
@@ -60,7 +61,7 @@ public abstract class ContactPrimaryActionInfo {
     public abstract static class Builder {
       public abstract Builder setPhotoId(long photoId);
 
-      public abstract Builder setPhotoUri(@Nullable String photoUri);
+      public abstract Builder setPhotoUri(@Nullable Uri photoUri);
 
       public abstract Builder setLookupUri(@Nullable String lookupUri);
 
