@@ -59,7 +59,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   @interface RowType {
     /** A row representing a voicemail alert. */
     int VOICEMAIL_ALERT = 1;
-    /** Header that displays "Today" or "Older". */
+    /** Header that displays "Today", "Yesterday" or "Older". */
     int HEADER = 2;
     /** A row representing a voicemail entry. */
     int VOICEMAIL_ENTRY = 3;
@@ -70,6 +70,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
   /** {@link Integer#MAX_VALUE} when the "Today" header should not be displayed. */
   private int todayHeaderPosition = Integer.MAX_VALUE;
+  /** {@link Integer#MAX_VALUE} when the "Yesterday" header should not be displayed. */
+  private int yesterdayHeaderPosition = Integer.MAX_VALUE;
   /** {@link Integer#MAX_VALUE} when the "Older" header should not be displayed. */
   private int olderHeaderPosition = Integer.MAX_VALUE;
   /** {@link Integer#MAX_VALUE} when the voicemail alert message should not be displayed. */
@@ -117,10 +119,43 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private void updateHeaderPositions() {
     LogUtil.i(
         "NewVoicemailAdapter.updateHeaderPositions",
-        "before updating todayPos:%d, olderPos:%d, alertPos:%d",
+        "before updating todayPos:%d, yestPos:%d, olderPos:%d, alertPos:%d",
         todayHeaderPosition,
+        yesterdayHeaderPosition,
         olderHeaderPosition,
         voicemailAlertPosition);
+
+    // If there are no rows to display, set all header positions to MAX_VALUE.
+    if (!cursor.moveToFirst()) {
+      todayHeaderPosition = Integer.MAX_VALUE;
+      yesterdayHeaderPosition = Integer.MAX_VALUE;
+      olderHeaderPosition = Integer.MAX_VALUE;
+      return;
+    }
+
+    long currentTimeMillis = clock.currentTimeMillis();
+
+    int numItemsInToday = 0;
+    int numItemsInYesterday = 0;
+
+    do {
+      long timestamp = VoicemailCursorLoader.getTimestamp(cursor);
+      long dayDifference = CallLogDates.getDayDifference(currentTimeMillis, timestamp);
+      if (dayDifference == 0) {
+        numItemsInToday++;
+      } else if (dayDifference == 1) {
+        numItemsInYesterday++;
+      } else {
+        break;
+      }
+    } while (cursor.moveToNext());
+
+    if (numItemsInToday > 0) {
+      numItemsInToday++; // including the "Today" header;
+    }
+    if (numItemsInYesterday > 0) {
+      numItemsInYesterday++; // including the "Yesterday" header;
+    }
 
     int alertOffSet = 0;
     if (voicemailAlertPosition != Integer.MAX_VALUE) {
@@ -129,37 +164,21 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       alertOffSet = 1;
     }
 
-    // Calculate header adapter positions by reading cursor.
-    long currentTimeMillis = clock.currentTimeMillis();
-    if (cursor.moveToNext()) {
-      long firstTimestamp = VoicemailCursorLoader.getTimestamp(cursor);
-      if (CallLogDates.getDayDifference(currentTimeMillis, firstTimestamp) == 0) {
-        this.todayHeaderPosition = 0 + alertOffSet;
-        int adapterPosition =
-            2 + alertOffSet; // Accounted for the "Alert", "Today" header and first row.
-        while (cursor.moveToNext()) {
-          long timestamp = VoicemailCursorLoader.getTimestamp(cursor);
+    // Set all header positions.
+    // A header position will be MAX_VALUE if there is no item to be displayed under that header.
+    todayHeaderPosition = numItemsInToday > 0 ? alertOffSet : Integer.MAX_VALUE;
+    yesterdayHeaderPosition =
+        numItemsInYesterday > 0 ? numItemsInToday + alertOffSet : Integer.MAX_VALUE;
+    olderHeaderPosition =
+        !cursor.isAfterLast()
+            ? numItemsInToday + numItemsInYesterday + alertOffSet
+            : Integer.MAX_VALUE;
 
-          if (CallLogDates.getDayDifference(currentTimeMillis, timestamp) == 0) {
-            adapterPosition++;
-          } else {
-            this.olderHeaderPosition = adapterPosition;
-            return;
-          }
-        }
-        this.olderHeaderPosition = Integer.MAX_VALUE; // Didn't find any "Older" rows.
-      } else {
-        this.todayHeaderPosition = Integer.MAX_VALUE; // Didn't find any "Today" rows.
-        this.olderHeaderPosition = 0 + alertOffSet;
-      }
-    } else { // There are no rows, just need to set these because they are final.
-      this.todayHeaderPosition = Integer.MAX_VALUE;
-      this.olderHeaderPosition = Integer.MAX_VALUE;
-    }
     LogUtil.i(
         "NewVoicemailAdapter.updateHeaderPositions",
-        "after updating todayPos:%d, olderPos:%d, alertOffSet:%d, alertPos:%d",
+        "after updating todayPos:%d, yestPos:%d, olderPos:%d, alertOffSet:%d, alertPos:%d",
         todayHeaderPosition,
+        yesterdayHeaderPosition,
         olderHeaderPosition,
         alertOffSet,
         voicemailAlertPosition);
@@ -233,6 +252,8 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       @RowType int viewType = getItemViewType(position);
       if (position == todayHeaderPosition) {
         headerViewHolder.setHeader(R.string.new_voicemail_header_today);
+      } else if (position == yesterdayHeaderPosition) {
+        headerViewHolder.setHeader(R.string.new_voicemail_header_yesterday);
       } else if (position == olderHeaderPosition) {
         headerViewHolder.setHeader(R.string.new_voicemail_header_older);
       } else {
@@ -270,6 +291,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       previousHeaders++;
     }
     if (todayHeaderPosition != Integer.MAX_VALUE && position > todayHeaderPosition) {
+      previousHeaders++;
+    }
+    if (yesterdayHeaderPosition != Integer.MAX_VALUE && position > yesterdayHeaderPosition) {
       previousHeaders++;
     }
     if (olderHeaderPosition != Integer.MAX_VALUE && position > olderHeaderPosition) {
@@ -870,6 +894,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
     if (todayHeaderPosition != Integer.MAX_VALUE) {
       numberOfHeaders++;
     }
+    if (yesterdayHeaderPosition != Integer.MAX_VALUE) {
+      numberOfHeaders++;
+    }
     if (olderHeaderPosition != Integer.MAX_VALUE) {
       numberOfHeaders++;
     }
@@ -891,6 +918,9 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       return RowType.VOICEMAIL_ALERT;
     }
     if (todayHeaderPosition != Integer.MAX_VALUE && position == todayHeaderPosition) {
+      return RowType.HEADER;
+    }
+    if (yesterdayHeaderPosition != Integer.MAX_VALUE && position == yesterdayHeaderPosition) {
       return RowType.HEADER;
     }
     if (olderHeaderPosition != Integer.MAX_VALUE && position == olderHeaderPosition) {
